@@ -65,6 +65,7 @@ namespace SonarAnalyzer.Utilities
             var ruleDetail = new RuleDetail
             {
                 Key = rule.Key,
+                Type = resources.GetString($"{rule.Key}_Type"),
                 Title = resources.GetString($"{rule.Key}_Title"),
                 Severity = resources.GetString($"{rule.Key}_Severity"),
                 IsActivatedByDefault = bool.Parse(resources.GetString($"{rule.Key}_IsActivatedByDefault")),

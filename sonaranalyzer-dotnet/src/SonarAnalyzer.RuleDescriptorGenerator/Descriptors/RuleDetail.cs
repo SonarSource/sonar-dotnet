@@ -35,6 +35,7 @@ namespace SonarAnalyzer.RuleDescriptorGenerator
             return new RuleDetail
             {
                 Key = ruleDetail.Key,
+                Type = ruleDetail.Type,
                 Title = ruleDetail.Title,
                 Severity = ruleDetail.Severity.ToUpper(CultureInfo.InvariantCulture),
                 Description = ruleDetail.Description,
@@ -61,6 +62,8 @@ namespace SonarAnalyzer.RuleDescriptorGenerator
 
         [XmlElement("key")]
         public string Key { get; set; }
+        [XmlElement("type")]
+        public string Type { get; set; }
         [XmlElement("name")]
         public string Title { get; set; }
         [XmlElement("severity")]

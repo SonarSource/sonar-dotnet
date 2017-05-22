@@ -141,6 +141,9 @@
   <data name="S100_Title" xml:space="preserve">
     <value>Methods and properties should be named in camel case</value>
   </data>
+  <data name="S100_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S1006_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
@@ -164,6 +167,9 @@
   </data>
   <data name="S1006_Title" xml:space="preserve">
     <value>Method overrides should not change parameter defaults</value>
+  </data>
+  <data name="S1006_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
   </data>
   <data name="S101_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
@@ -189,6 +195,9 @@
   <data name="S101_Title" xml:space="preserve">
     <value>Types should be named in camel case</value>
   </data>
+  <data name="S101_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S103_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
@@ -212,6 +221,9 @@
   </data>
   <data name="S103_Title" xml:space="preserve">
     <value>Lines should not be too long</value>
+  </data>
+  <data name="S103_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
   </data>
   <data name="S104_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
@@ -237,6 +249,9 @@
   <data name="S104_Title" xml:space="preserve">
     <value>Files should not have too many lines of code</value>
   </data>
+  <data name="S104_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S105_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
@@ -260,6 +275,9 @@
   </data>
   <data name="S105_Title" xml:space="preserve">
     <value>Tabulation characters should not be used</value>
+  </data>
+  <data name="S105_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
   </data>
   <data name="S1066_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
@@ -285,6 +303,9 @@
   <data name="S1066_Title" xml:space="preserve">
     <value>Collapsible "if" statements should be merged</value>
   </data>
+  <data name="S1066_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S1067_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
@@ -308,6 +329,9 @@
   </data>
   <data name="S1067_Title" xml:space="preserve">
     <value>Expressions should not be too complex</value>
+  </data>
+  <data name="S1067_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
   </data>
   <data name="S107_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
@@ -333,6 +357,9 @@
   <data name="S107_Title" xml:space="preserve">
     <value>Methods should not have too many parameters</value>
   </data>
+  <data name="S107_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S108_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
@@ -356,6 +383,9 @@
   </data>
   <data name="S108_Title" xml:space="preserve">
     <value>Nested blocks of code should not be left empty</value>
+  </data>
+  <data name="S108_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
   </data>
   <data name="S110_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
@@ -381,6 +411,9 @@
   <data name="S110_Title" xml:space="preserve">
     <value>Inheritance tree of classes should not be too deep</value>
   </data>
+  <data name="S110_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S1104_Category" xml:space="preserve">
     <value>Sonar Vulnerability</value>
   </data>
@@ -404,6 +437,9 @@
   </data>
   <data name="S1104_Title" xml:space="preserve">
     <value>Fields should not have public accessibility</value>
+  </data>
+  <data name="S1104_Type" xml:space="preserve">
+    <value>VULNERABILITY</value>
   </data>
   <data name="S1109_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
@@ -429,6 +465,9 @@
   <data name="S1109_Title" xml:space="preserve">
     <value>A close curly brace should be located at the beginning of a line</value>
   </data>
+  <data name="S1109_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S1116_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
@@ -452,6 +491,9 @@
   </data>
   <data name="S1116_Title" xml:space="preserve">
     <value>Empty statements should be removed</value>
+  </data>
+  <data name="S1116_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
   </data>
   <data name="S1117_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
@@ -477,6 +519,9 @@
   <data name="S1117_Title" xml:space="preserve">
     <value>Local variables should not shadow class fields</value>
   </data>
+  <data name="S1117_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S1118_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
@@ -500,6 +545,9 @@
   </data>
   <data name="S1118_Title" xml:space="preserve">
     <value>Utility classes should not have public constructors</value>
+  </data>
+  <data name="S1118_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
   </data>
   <data name="S112_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
@@ -525,6 +573,9 @@
   <data name="S112_Title" xml:space="preserve">
     <value>General exceptions should never be thrown</value>
   </data>
+  <data name="S112_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S1121_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
@@ -548,6 +599,9 @@
   </data>
   <data name="S1121_Title" xml:space="preserve">
     <value>Assignments should not be made from within sub-expressions</value>
+  </data>
+  <data name="S1121_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
   </data>
   <data name="S1125_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
@@ -573,6 +627,9 @@
   <data name="S1125_Title" xml:space="preserve">
     <value>Boolean literals should not be redundant</value>
   </data>
+  <data name="S1125_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S1134_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
@@ -591,6 +648,9 @@
   <data name="S1134_Title" xml:space="preserve">
     <value>Track uses of "FIXME" tags</value>
   </data>
+  <data name="S1134_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S1135_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
@@ -608,6 +668,9 @@
   </data>
   <data name="S1135_Title" xml:space="preserve">
     <value>Track uses of "TODO" tags</value>
+  </data>
+  <data name="S1135_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
   </data>
   <data name="S1144_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
@@ -633,6 +696,9 @@
   <data name="S1144_Title" xml:space="preserve">
     <value>Unused private types or members should be removed</value>
   </data>
+  <data name="S1144_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S1145_Category" xml:space="preserve">
     <value>Sonar Bug</value>
   </data>
@@ -656,6 +722,9 @@
   </data>
   <data name="S1145_Title" xml:space="preserve">
     <value>Useless "if(true) {...}" and "if(false){...}" blocks should be removed</value>
+  </data>
+  <data name="S1145_Type" xml:space="preserve">
+    <value>BUG</value>
   </data>
   <data name="S1155_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
@@ -681,6 +750,9 @@
   <data name="S1155_Title" xml:space="preserve">
     <value>"Any()" should be used to test for emptiness</value>
   </data>
+  <data name="S1155_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S1163_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
@@ -704,6 +776,9 @@
   </data>
   <data name="S1163_Title" xml:space="preserve">
     <value>Exceptions should not be thrown in finally blocks</value>
+  </data>
+  <data name="S1163_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
   </data>
   <data name="S1172_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
@@ -729,6 +804,9 @@
   <data name="S1172_Title" xml:space="preserve">
     <value>Unused method parameters should be removed</value>
   </data>
+  <data name="S1172_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S1185_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
@@ -752,6 +830,9 @@
   </data>
   <data name="S1185_Title" xml:space="preserve">
     <value>Overriding members should do more than simply call the same member in the base class</value>
+  </data>
+  <data name="S1185_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
   </data>
   <data name="S1186_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
@@ -777,6 +858,9 @@
   <data name="S1186_Title" xml:space="preserve">
     <value>Methods should not be empty</value>
   </data>
+  <data name="S1186_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S1206_Category" xml:space="preserve">
     <value>Sonar Bug</value>
   </data>
@@ -800,6 +884,9 @@
   </data>
   <data name="S1206_Title" xml:space="preserve">
     <value>"Equals(Object)" and "GetHashCode()" should be overridden in pairs</value>
+  </data>
+  <data name="S1206_Type" xml:space="preserve">
+    <value>BUG</value>
   </data>
   <data name="S121_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
@@ -825,6 +912,9 @@
   <data name="S121_Title" xml:space="preserve">
     <value>Control structures should use curly braces</value>
   </data>
+  <data name="S121_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S1210_Category" xml:space="preserve">
     <value>Sonar Bug</value>
   </data>
@@ -848,6 +938,9 @@
   </data>
   <data name="S1210_Title" xml:space="preserve">
     <value>"Equals" and the comparison operators should be overridden when implementing "IComparable"</value>
+  </data>
+  <data name="S1210_Type" xml:space="preserve">
+    <value>BUG</value>
   </data>
   <data name="S1215_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
@@ -873,6 +966,9 @@
   <data name="S1215_Title" xml:space="preserve">
     <value>"GC.Collect" should not be called</value>
   </data>
+  <data name="S1215_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S122_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
@@ -896,6 +992,9 @@
   </data>
   <data name="S122_Title" xml:space="preserve">
     <value>Statements should be on separate lines</value>
+  </data>
+  <data name="S122_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
   </data>
   <data name="S1226_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
@@ -921,6 +1020,9 @@
   <data name="S1226_Title" xml:space="preserve">
     <value>Method parameters and caught exceptions should not be reassigned</value>
   </data>
+  <data name="S1226_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S1227_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
@@ -944,6 +1046,9 @@
   </data>
   <data name="S1227_Title" xml:space="preserve">
     <value>break statements should not be used except for switch cases</value>
+  </data>
+  <data name="S1227_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
   </data>
   <data name="S1244_Category" xml:space="preserve">
     <value>Sonar Bug</value>
@@ -969,6 +1074,9 @@
   <data name="S1244_Title" xml:space="preserve">
     <value>Floating point numbers should not be tested for equality</value>
   </data>
+  <data name="S1244_Type" xml:space="preserve">
+    <value>BUG</value>
+  </data>
   <data name="S125_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
@@ -992,6 +1100,9 @@
   </data>
   <data name="S125_Title" xml:space="preserve">
     <value>Sections of code should not be "commented out"</value>
+  </data>
+  <data name="S125_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
   </data>
   <data name="S126_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
@@ -1017,6 +1128,9 @@
   <data name="S126_Title" xml:space="preserve">
     <value>"if ... else if" constructs should end with "else" clauses</value>
   </data>
+  <data name="S126_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S127_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
@@ -1040,6 +1154,9 @@
   </data>
   <data name="S127_Title" xml:space="preserve">
     <value>"for" loop stop conditions should be invariant</value>
+  </data>
+  <data name="S127_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
   </data>
   <data name="S1301_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
@@ -1065,6 +1182,9 @@
   <data name="S1301_Title" xml:space="preserve">
     <value>"switch" statements should have at least 3 "case" clauses</value>
   </data>
+  <data name="S1301_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S1309_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
@@ -1088,6 +1208,9 @@
   </data>
   <data name="S1309_Title" xml:space="preserve">
     <value>Track uses of in-source issue suppressions</value>
+  </data>
+  <data name="S1309_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
   </data>
   <data name="S131_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
@@ -1113,6 +1236,9 @@
   <data name="S131_Title" xml:space="preserve">
     <value>"switch/Select" statements should end with "default/Case Else" clauses</value>
   </data>
+  <data name="S131_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S1313_Category" xml:space="preserve">
     <value>Sonar Vulnerability</value>
   </data>
@@ -1136,6 +1262,9 @@
   </data>
   <data name="S1313_Title" xml:space="preserve">
     <value>IP addresses should not be hardcoded</value>
+  </data>
+  <data name="S1313_Type" xml:space="preserve">
+    <value>VULNERABILITY</value>
   </data>
   <data name="S134_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
@@ -1161,6 +1290,9 @@
   <data name="S134_Title" xml:space="preserve">
     <value>Control flow statements "if", "switch", "for", "foreach", "while", "do"  and "try" should not be nested too deeply</value>
   </data>
+  <data name="S134_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S1449_Category" xml:space="preserve">
     <value>Sonar Bug</value>
   </data>
@@ -1184,6 +1316,9 @@
   </data>
   <data name="S1449_Title" xml:space="preserve">
     <value>Culture should be specified for "string" operations</value>
+  </data>
+  <data name="S1449_Type" xml:space="preserve">
+    <value>BUG</value>
   </data>
   <data name="S1450_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
@@ -1209,6 +1344,9 @@
   <data name="S1450_Title" xml:space="preserve">
     <value>Private fields only used as local variables in methods should become local variables</value>
   </data>
+  <data name="S1450_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S1451_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
@@ -1232,6 +1370,9 @@
   </data>
   <data name="S1451_Title" xml:space="preserve">
     <value>Track lack of copyright and license headers</value>
+  </data>
+  <data name="S1451_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
   </data>
   <data name="S1479_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
@@ -1257,6 +1398,9 @@
   <data name="S1479_Title" xml:space="preserve">
     <value>"switch" statements should not have too many "case" clauses</value>
   </data>
+  <data name="S1479_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S1481_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
@@ -1280,6 +1424,9 @@
   </data>
   <data name="S1481_Title" xml:space="preserve">
     <value>Unused local variables should be removed</value>
+  </data>
+  <data name="S1481_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
   </data>
   <data name="S1541_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
@@ -1305,6 +1452,9 @@
   <data name="S1541_Title" xml:space="preserve">
     <value>Methods and properties should not be too complex</value>
   </data>
+  <data name="S1541_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S1643_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
@@ -1328,6 +1478,9 @@
   </data>
   <data name="S1643_Title" xml:space="preserve">
     <value>Strings should not be concatenated using '+' in a loop</value>
+  </data>
+  <data name="S1643_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
   </data>
   <data name="S1656_Category" xml:space="preserve">
     <value>Sonar Bug</value>
@@ -1353,6 +1506,9 @@
   <data name="S1656_Title" xml:space="preserve">
     <value>Variables should not be self-assigned</value>
   </data>
+  <data name="S1656_Type" xml:space="preserve">
+    <value>BUG</value>
+  </data>
   <data name="S1659_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
@@ -1376,6 +1532,9 @@
   </data>
   <data name="S1659_Title" xml:space="preserve">
     <value>Multiple variables should not be declared on the same line</value>
+  </data>
+  <data name="S1659_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
   </data>
   <data name="S1694_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
@@ -1401,6 +1560,9 @@
   <data name="S1694_Title" xml:space="preserve">
     <value>An abstract class should have both abstract and concrete methods</value>
   </data>
+  <data name="S1694_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S1697_Category" xml:space="preserve">
     <value>Sonar Bug</value>
   </data>
@@ -1424,6 +1586,9 @@
   </data>
   <data name="S1697_Title" xml:space="preserve">
     <value>Short-circuit logic should be used to prevent null pointer dereferences in conditionals</value>
+  </data>
+  <data name="S1697_Type" xml:space="preserve">
+    <value>BUG</value>
   </data>
   <data name="S1698_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
@@ -1449,6 +1614,9 @@
   <data name="S1698_Title" xml:space="preserve">
     <value>"==" should not be used when "Equals" is overridden</value>
   </data>
+  <data name="S1698_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S1699_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
@@ -1472,6 +1640,9 @@
   </data>
   <data name="S1699_Title" xml:space="preserve">
     <value>Constructors should only call non-overridable methods</value>
+  </data>
+  <data name="S1699_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
   </data>
   <data name="S1751_Category" xml:space="preserve">
     <value>Sonar Bug</value>
@@ -1497,6 +1668,9 @@
   <data name="S1751_Title" xml:space="preserve">
     <value>Jump statements should not be used unconditionally</value>
   </data>
+  <data name="S1751_Type" xml:space="preserve">
+    <value>BUG</value>
+  </data>
   <data name="S1764_Category" xml:space="preserve">
     <value>Sonar Bug</value>
   </data>
@@ -1520,6 +1694,9 @@
   </data>
   <data name="S1764_Title" xml:space="preserve">
     <value>Identical expressions should not be used on both sides of a binary operator</value>
+  </data>
+  <data name="S1764_Type" xml:space="preserve">
+    <value>BUG</value>
   </data>
   <data name="S1848_Category" xml:space="preserve">
     <value>Sonar Bug</value>
@@ -1545,6 +1722,9 @@
   <data name="S1848_Title" xml:space="preserve">
     <value>Objects should not be created to be dropped immediately without being used</value>
   </data>
+  <data name="S1848_Type" xml:space="preserve">
+    <value>BUG</value>
+  </data>
   <data name="S1854_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
@@ -1568,6 +1748,9 @@
   </data>
   <data name="S1854_Title" xml:space="preserve">
     <value>Dead stores should be removed</value>
+  </data>
+  <data name="S1854_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
   </data>
   <data name="S1858_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
@@ -1593,6 +1776,9 @@
   <data name="S1858_Title" xml:space="preserve">
     <value>"ToString()" calls should not be redundant</value>
   </data>
+  <data name="S1858_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S1862_Category" xml:space="preserve">
     <value>Sonar Bug</value>
   </data>
@@ -1616,6 +1802,9 @@
   </data>
   <data name="S1862_Title" xml:space="preserve">
     <value>Related "if/else if" statements should not have the same condition</value>
+  </data>
+  <data name="S1862_Type" xml:space="preserve">
+    <value>BUG</value>
   </data>
   <data name="S1871_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
@@ -1641,6 +1830,9 @@
   <data name="S1871_Title" xml:space="preserve">
     <value>Two branches in a conditional structure should not have exactly the same implementation</value>
   </data>
+  <data name="S1871_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S1905_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
@@ -1664,6 +1856,9 @@
   </data>
   <data name="S1905_Title" xml:space="preserve">
     <value>Redundant casts should not be used</value>
+  </data>
+  <data name="S1905_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
   </data>
   <data name="S1939_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
@@ -1689,6 +1884,9 @@
   <data name="S1939_Title" xml:space="preserve">
     <value>Inheritance list should not be redundant</value>
   </data>
+  <data name="S1939_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S1940_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
@@ -1712,6 +1910,9 @@
   </data>
   <data name="S1940_Title" xml:space="preserve">
     <value>Boolean checks should not be inverted</value>
+  </data>
+  <data name="S1940_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
   </data>
   <data name="S1944_Category" xml:space="preserve">
     <value>Sonar Bug</value>
@@ -1737,6 +1938,9 @@
   <data name="S1944_Title" xml:space="preserve">
     <value>Inappropriate casts should not be made</value>
   </data>
+  <data name="S1944_Type" xml:space="preserve">
+    <value>BUG</value>
+  </data>
   <data name="S1994_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
@@ -1760,6 +1964,9 @@
   </data>
   <data name="S1994_Title" xml:space="preserve">
     <value>"for" loop increment clauses should modify the loops' counters</value>
+  </data>
+  <data name="S1994_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
   </data>
   <data name="S2070_Category" xml:space="preserve">
     <value>Sonar Vulnerability</value>
@@ -1785,6 +1992,9 @@
   <data name="S2070_Title" xml:space="preserve">
     <value>SHA-1 and Message-Digest hash algorithms should not be used</value>
   </data>
+  <data name="S2070_Type" xml:space="preserve">
+    <value>VULNERABILITY</value>
+  </data>
   <data name="S2123_Category" xml:space="preserve">
     <value>Sonar Bug</value>
   </data>
@@ -1808,6 +2018,9 @@
   </data>
   <data name="S2123_Title" xml:space="preserve">
     <value>Values should not be uselessly incremented</value>
+  </data>
+  <data name="S2123_Type" xml:space="preserve">
+    <value>BUG</value>
   </data>
   <data name="S2156_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
@@ -1833,6 +2046,9 @@
   <data name="S2156_Title" xml:space="preserve">
     <value>"sealed" classes should not have "protected" members</value>
   </data>
+  <data name="S2156_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S2178_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
@@ -1856,6 +2072,9 @@
   </data>
   <data name="S2178_Title" xml:space="preserve">
     <value>Short-circuit logic should be used in boolean contexts</value>
+  </data>
+  <data name="S2178_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
   </data>
   <data name="S2184_Category" xml:space="preserve">
     <value>Sonar Bug</value>
@@ -1881,6 +2100,9 @@
   <data name="S2184_Title" xml:space="preserve">
     <value>Results of integer division should not be assigned to floating point variables</value>
   </data>
+  <data name="S2184_Type" xml:space="preserve">
+    <value>BUG</value>
+  </data>
   <data name="S2190_Category" xml:space="preserve">
     <value>Sonar Bug</value>
   </data>
@@ -1904,6 +2126,9 @@
   </data>
   <data name="S2190_Title" xml:space="preserve">
     <value>Recursion should not be infinite</value>
+  </data>
+  <data name="S2190_Type" xml:space="preserve">
+    <value>BUG</value>
   </data>
   <data name="S2197_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
@@ -1929,6 +2154,9 @@
   <data name="S2197_Title" xml:space="preserve">
     <value>Modulus results should not be checked for direct equality</value>
   </data>
+  <data name="S2197_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S2201_Category" xml:space="preserve">
     <value>Sonar Bug</value>
   </data>
@@ -1952,6 +2180,9 @@
   </data>
   <data name="S2201_Title" xml:space="preserve">
     <value>Return values should not be ignored when function calls don't have any side effects</value>
+  </data>
+  <data name="S2201_Type" xml:space="preserve">
+    <value>BUG</value>
   </data>
   <data name="S2219_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
@@ -1977,6 +2208,9 @@
   <data name="S2219_Title" xml:space="preserve">
     <value>Runtime type checking should be simplified</value>
   </data>
+  <data name="S2219_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S2223_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
@@ -2000,6 +2234,9 @@
   </data>
   <data name="S2223_Title" xml:space="preserve">
     <value>Non-constant static fields should not be visible</value>
+  </data>
+  <data name="S2223_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
   </data>
   <data name="S2225_Category" xml:space="preserve">
     <value>Sonar Bug</value>
@@ -2025,6 +2262,9 @@
   <data name="S2225_Title" xml:space="preserve">
     <value>"ToString()" method should not return null</value>
   </data>
+  <data name="S2225_Type" xml:space="preserve">
+    <value>BUG</value>
+  </data>
   <data name="S2228_Category" xml:space="preserve">
     <value>Sonar Vulnerability</value>
   </data>
@@ -2048,6 +2288,9 @@
   </data>
   <data name="S2228_Title" xml:space="preserve">
     <value>Console logging should not be used</value>
+  </data>
+  <data name="S2228_Type" xml:space="preserve">
+    <value>VULNERABILITY</value>
   </data>
   <data name="S2234_Category" xml:space="preserve">
     <value>Sonar Bug</value>
@@ -2073,6 +2316,9 @@
   <data name="S2234_Title" xml:space="preserve">
     <value>Parameters should be passed in the correct order</value>
   </data>
+  <data name="S2234_Type" xml:space="preserve">
+    <value>BUG</value>
+  </data>
   <data name="S2259_Category" xml:space="preserve">
     <value>Sonar Bug</value>
   </data>
@@ -2096,6 +2342,9 @@
   </data>
   <data name="S2259_Title" xml:space="preserve">
     <value>Null pointers should not be dereferenced</value>
+  </data>
+  <data name="S2259_Type" xml:space="preserve">
+    <value>BUG</value>
   </data>
   <data name="S2275_Category" xml:space="preserve">
     <value>Sonar Bug</value>
@@ -2121,6 +2370,9 @@
   <data name="S2275_Title" xml:space="preserve">
     <value>Composite format strings should not lead to unexpected behavior at runtime</value>
   </data>
+  <data name="S2275_Type" xml:space="preserve">
+    <value>BUG</value>
+  </data>
   <data name="S2278_Category" xml:space="preserve">
     <value>Sonar Vulnerability</value>
   </data>
@@ -2144,6 +2396,9 @@
   </data>
   <data name="S2278_Title" xml:space="preserve">
     <value>Neither DES (Data Encryption Standard) nor DESede (3DES) should be used</value>
+  </data>
+  <data name="S2278_Type" xml:space="preserve">
+    <value>VULNERABILITY</value>
   </data>
   <data name="S2290_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
@@ -2169,6 +2424,9 @@
   <data name="S2290_Title" xml:space="preserve">
     <value>Field-like events should not be virtual</value>
   </data>
+  <data name="S2290_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S2291_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
@@ -2192,6 +2450,9 @@
   </data>
   <data name="S2291_Title" xml:space="preserve">
     <value>Overflow checking should not be disabled for "Enumerable.Sum"</value>
+  </data>
+  <data name="S2291_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
   </data>
   <data name="S2292_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
@@ -2217,6 +2478,9 @@
   <data name="S2292_Title" xml:space="preserve">
     <value>Trivial properties should be auto-implemented</value>
   </data>
+  <data name="S2292_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S2306_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
@@ -2240,6 +2504,9 @@
   </data>
   <data name="S2306_Title" xml:space="preserve">
     <value>"async" and "await" should not be used as identifiers</value>
+  </data>
+  <data name="S2306_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
   </data>
   <data name="S2325_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
@@ -2265,6 +2532,9 @@
   <data name="S2325_Title" xml:space="preserve">
     <value>Methods and properties that don't access instance data should be static</value>
   </data>
+  <data name="S2325_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S2326_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
@@ -2288,6 +2558,9 @@
   </data>
   <data name="S2326_Title" xml:space="preserve">
     <value>Unused type parameters should be removed</value>
+  </data>
+  <data name="S2326_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
   </data>
   <data name="S2328_Category" xml:space="preserve">
     <value>Sonar Bug</value>
@@ -2313,6 +2586,9 @@
   <data name="S2328_Title" xml:space="preserve">
     <value>"GetHashCode" should not reference mutable fields</value>
   </data>
+  <data name="S2328_Type" xml:space="preserve">
+    <value>BUG</value>
+  </data>
   <data name="S2330_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
@@ -2336,6 +2612,9 @@
   </data>
   <data name="S2330_Title" xml:space="preserve">
     <value>Array covariance should not be used</value>
+  </data>
+  <data name="S2330_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
   </data>
   <data name="S2333_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
@@ -2361,6 +2640,9 @@
   <data name="S2333_Title" xml:space="preserve">
     <value>Redundant modifiers should not be used</value>
   </data>
+  <data name="S2333_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S2339_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
@@ -2384,6 +2666,9 @@
   </data>
   <data name="S2339_Title" xml:space="preserve">
     <value>Public constant members should not be used</value>
+  </data>
+  <data name="S2339_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
   </data>
   <data name="S2342_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
@@ -2409,6 +2694,9 @@
   <data name="S2342_Title" xml:space="preserve">
     <value>Enumeration types should comply with a naming convention</value>
   </data>
+  <data name="S2342_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S2344_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
@@ -2432,6 +2720,9 @@
   </data>
   <data name="S2344_Title" xml:space="preserve">
     <value>Enumeration type names should not have "Flags" or "Enum" suffixes</value>
+  </data>
+  <data name="S2344_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
   </data>
   <data name="S2345_Category" xml:space="preserve">
     <value>Sonar Bug</value>
@@ -2457,6 +2748,9 @@
   <data name="S2345_Title" xml:space="preserve">
     <value>Flags enumerations should explicitly initialize all their members</value>
   </data>
+  <data name="S2345_Type" xml:space="preserve">
+    <value>BUG</value>
+  </data>
   <data name="S2346_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
@@ -2480,6 +2774,9 @@
   </data>
   <data name="S2346_Title" xml:space="preserve">
     <value>Flags enumerations zero-value members should be named "None"</value>
+  </data>
+  <data name="S2346_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
   </data>
   <data name="S2357_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
@@ -2505,6 +2802,9 @@
   <data name="S2357_Title" xml:space="preserve">
     <value>Fields should be private</value>
   </data>
+  <data name="S2357_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S2360_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
@@ -2528,6 +2828,9 @@
   </data>
   <data name="S2360_Title" xml:space="preserve">
     <value>Optional parameters should not be used</value>
+  </data>
+  <data name="S2360_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
   </data>
   <data name="S2365_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
@@ -2553,6 +2856,9 @@
   <data name="S2365_Title" xml:space="preserve">
     <value>Properties should not make collection or array copies</value>
   </data>
+  <data name="S2365_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S2368_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
@@ -2576,6 +2882,9 @@
   </data>
   <data name="S2368_Title" xml:space="preserve">
     <value>Public methods should not have multidimensional array parameters</value>
+  </data>
+  <data name="S2368_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
   </data>
   <data name="S2372_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
@@ -2601,6 +2910,9 @@
   <data name="S2372_Title" xml:space="preserve">
     <value>Exceptions should not be thrown from property getters</value>
   </data>
+  <data name="S2372_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S2376_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
@@ -2624,6 +2936,9 @@
   </data>
   <data name="S2376_Title" xml:space="preserve">
     <value>Write-only properties should not be used</value>
+  </data>
+  <data name="S2376_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
   </data>
   <data name="S2386_Category" xml:space="preserve">
     <value>Sonar Vulnerability</value>
@@ -2649,6 +2964,9 @@
   <data name="S2386_Title" xml:space="preserve">
     <value>Mutable fields should not be "public static"</value>
   </data>
+  <data name="S2386_Type" xml:space="preserve">
+    <value>VULNERABILITY</value>
+  </data>
   <data name="S2387_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
@@ -2672,6 +2990,9 @@
   </data>
   <data name="S2387_Title" xml:space="preserve">
     <value>Child class fields should not shadow parent class fields</value>
+  </data>
+  <data name="S2387_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
   </data>
   <data name="S2436_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
@@ -2697,6 +3018,9 @@
   <data name="S2436_Title" xml:space="preserve">
     <value>Classes and methods should not have too many generic parameters</value>
   </data>
+  <data name="S2436_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S2437_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
@@ -2720,6 +3044,9 @@
   </data>
   <data name="S2437_Title" xml:space="preserve">
     <value>Silly bit operations should not be performed</value>
+  </data>
+  <data name="S2437_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
   </data>
   <data name="S2486_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
@@ -2745,6 +3072,9 @@
   <data name="S2486_Title" xml:space="preserve">
     <value>Generic exceptions should not be ignored</value>
   </data>
+  <data name="S2486_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S2551_Category" xml:space="preserve">
     <value>Sonar Bug</value>
   </data>
@@ -2768,6 +3098,9 @@
   </data>
   <data name="S2551_Title" xml:space="preserve">
     <value>Types and "this" should not be used for locking</value>
+  </data>
+  <data name="S2551_Type" xml:space="preserve">
+    <value>BUG</value>
   </data>
   <data name="S2583_Category" xml:space="preserve">
     <value>Sonar Bug</value>
@@ -2793,6 +3126,9 @@
   <data name="S2583_Title" xml:space="preserve">
     <value>Conditionally executed blocks should be reachable</value>
   </data>
+  <data name="S2583_Type" xml:space="preserve">
+    <value>BUG</value>
+  </data>
   <data name="S2589_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
@@ -2816,6 +3152,9 @@
   </data>
   <data name="S2589_Title" xml:space="preserve">
     <value>Boolean expressions should not be gratuitous</value>
+  </data>
+  <data name="S2589_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
   </data>
   <data name="S2674_Category" xml:space="preserve">
     <value>Sonar Bug</value>
@@ -2841,6 +3180,9 @@
   <data name="S2674_Title" xml:space="preserve">
     <value>The length returned from a stream read should be checked</value>
   </data>
+  <data name="S2674_Type" xml:space="preserve">
+    <value>BUG</value>
+  </data>
   <data name="S2681_Category" xml:space="preserve">
     <value>Sonar Bug</value>
   </data>
@@ -2864,6 +3206,9 @@
   </data>
   <data name="S2681_Title" xml:space="preserve">
     <value>Multiline blocks should be enclosed in curly braces</value>
+  </data>
+  <data name="S2681_Type" xml:space="preserve">
+    <value>BUG</value>
   </data>
   <data name="S2688_Category" xml:space="preserve">
     <value>Sonar Bug</value>
@@ -2889,6 +3234,9 @@
   <data name="S2688_Title" xml:space="preserve">
     <value>"NaN" should not be used in comparisons</value>
   </data>
+  <data name="S2688_Type" xml:space="preserve">
+    <value>BUG</value>
+  </data>
   <data name="S2692_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
@@ -2912,6 +3260,9 @@
   </data>
   <data name="S2692_Title" xml:space="preserve">
     <value>"IndexOf" checks should not be for positive numbers</value>
+  </data>
+  <data name="S2692_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
   </data>
   <data name="S2696_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
@@ -2937,6 +3288,9 @@
   <data name="S2696_Title" xml:space="preserve">
     <value>Instance members should not write to "static" fields</value>
   </data>
+  <data name="S2696_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S2737_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
@@ -2960,6 +3314,9 @@
   </data>
   <data name="S2737_Title" xml:space="preserve">
     <value>"catch" clauses should do more than rethrow</value>
+  </data>
+  <data name="S2737_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
   </data>
   <data name="S2743_Category" xml:space="preserve">
     <value>Sonar Bug</value>
@@ -2985,6 +3342,9 @@
   <data name="S2743_Title" xml:space="preserve">
     <value>Static fields should not be used in generic types</value>
   </data>
+  <data name="S2743_Type" xml:space="preserve">
+    <value>BUG</value>
+  </data>
   <data name="S2757_Category" xml:space="preserve">
     <value>Sonar Bug</value>
   </data>
@@ -3008,6 +3368,9 @@
   </data>
   <data name="S2757_Title" xml:space="preserve">
     <value>"=+" should not be used instead of "+="</value>
+  </data>
+  <data name="S2757_Type" xml:space="preserve">
+    <value>BUG</value>
   </data>
   <data name="S2758_Category" xml:space="preserve">
     <value>Sonar Bug</value>
@@ -3033,6 +3396,9 @@
   <data name="S2758_Title" xml:space="preserve">
     <value>The ternary operator should not return the same value regardless of the condition</value>
   </data>
+  <data name="S2758_Type" xml:space="preserve">
+    <value>BUG</value>
+  </data>
   <data name="S2760_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
@@ -3056,6 +3422,9 @@
   </data>
   <data name="S2760_Title" xml:space="preserve">
     <value>Sequential tests should not check the same condition</value>
+  </data>
+  <data name="S2760_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
   </data>
   <data name="S2761_Category" xml:space="preserve">
     <value>Sonar Bug</value>
@@ -3081,6 +3450,9 @@
   <data name="S2761_Title" xml:space="preserve">
     <value>Doubled prefix operators "!!" and "~~" should not be used</value>
   </data>
+  <data name="S2761_Type" xml:space="preserve">
+    <value>BUG</value>
+  </data>
   <data name="S2930_Category" xml:space="preserve">
     <value>Sonar Bug</value>
   </data>
@@ -3104,6 +3476,9 @@
   </data>
   <data name="S2930_Title" xml:space="preserve">
     <value>"IDisposables" should be disposed</value>
+  </data>
+  <data name="S2930_Type" xml:space="preserve">
+    <value>BUG</value>
   </data>
   <data name="S2931_Category" xml:space="preserve">
     <value>Sonar Bug</value>
@@ -3129,6 +3504,9 @@
   <data name="S2931_Title" xml:space="preserve">
     <value>Classes with "IDisposable" members should implement "IDisposable"</value>
   </data>
+  <data name="S2931_Type" xml:space="preserve">
+    <value>BUG</value>
+  </data>
   <data name="S2933_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
@@ -3152,6 +3530,9 @@
   </data>
   <data name="S2933_Title" xml:space="preserve">
     <value>Fields that are only assigned in the constructor should be "readonly"</value>
+  </data>
+  <data name="S2933_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
   </data>
   <data name="S2934_Category" xml:space="preserve">
     <value>Sonar Bug</value>
@@ -3177,6 +3558,9 @@
   <data name="S2934_Title" xml:space="preserve">
     <value>Property assignments should not be made for "readonly" fields not constrained to reference types</value>
   </data>
+  <data name="S2934_Type" xml:space="preserve">
+    <value>BUG</value>
+  </data>
   <data name="S2952_Category" xml:space="preserve">
     <value>Sonar Bug</value>
   </data>
@@ -3200,6 +3584,9 @@
   </data>
   <data name="S2952_Title" xml:space="preserve">
     <value>Classes should "Dispose" of members from the classes' own "Dispose" methods</value>
+  </data>
+  <data name="S2952_Type" xml:space="preserve">
+    <value>BUG</value>
   </data>
   <data name="S2953_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
@@ -3225,6 +3612,9 @@
   <data name="S2953_Title" xml:space="preserve">
     <value>Methods named "Dispose" should implement "IDisposable.Dispose"</value>
   </data>
+  <data name="S2953_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S2955_Category" xml:space="preserve">
     <value>Sonar Bug</value>
   </data>
@@ -3248,6 +3638,9 @@
   </data>
   <data name="S2955_Title" xml:space="preserve">
     <value>Generic parameters not constrained to reference types should not be compared to "null"</value>
+  </data>
+  <data name="S2955_Type" xml:space="preserve">
+    <value>BUG</value>
   </data>
   <data name="S2971_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
@@ -3273,6 +3666,9 @@
   <data name="S2971_Title" xml:space="preserve">
     <value>"IEnumerable" LINQs should be simplified</value>
   </data>
+  <data name="S2971_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S2995_Category" xml:space="preserve">
     <value>Sonar Bug</value>
   </data>
@@ -3296,6 +3692,9 @@
   </data>
   <data name="S2995_Title" xml:space="preserve">
     <value>"Object.ReferenceEquals" should not be used for value types</value>
+  </data>
+  <data name="S2995_Type" xml:space="preserve">
+    <value>BUG</value>
   </data>
   <data name="S2996_Category" xml:space="preserve">
     <value>Sonar Bug</value>
@@ -3321,6 +3720,9 @@
   <data name="S2996_Title" xml:space="preserve">
     <value>"ThreadStatic" fields should not be initialized</value>
   </data>
+  <data name="S2996_Type" xml:space="preserve">
+    <value>BUG</value>
+  </data>
   <data name="S2997_Category" xml:space="preserve">
     <value>Sonar Bug</value>
   </data>
@@ -3344,6 +3746,9 @@
   </data>
   <data name="S2997_Title" xml:space="preserve">
     <value>"IDisposables" created in a "using" statement should not be returned</value>
+  </data>
+  <data name="S2997_Type" xml:space="preserve">
+    <value>BUG</value>
   </data>
   <data name="S3005_Category" xml:space="preserve">
     <value>Sonar Bug</value>
@@ -3369,6 +3774,9 @@
   <data name="S3005_Title" xml:space="preserve">
     <value>"ThreadStatic" should not be used on non-static fields</value>
   </data>
+  <data name="S3005_Type" xml:space="preserve">
+    <value>BUG</value>
+  </data>
   <data name="S3010_Category" xml:space="preserve">
     <value>Sonar Bug</value>
   </data>
@@ -3392,6 +3800,9 @@
   </data>
   <data name="S3010_Title" xml:space="preserve">
     <value>Static fields should not be updated in constructors</value>
+  </data>
+  <data name="S3010_Type" xml:space="preserve">
+    <value>BUG</value>
   </data>
   <data name="S3052_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
@@ -3417,6 +3828,9 @@
   <data name="S3052_Title" xml:space="preserve">
     <value>Members should not be initialized to default values</value>
   </data>
+  <data name="S3052_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S3168_Category" xml:space="preserve">
     <value>Sonar Bug</value>
   </data>
@@ -3440,6 +3854,9 @@
   </data>
   <data name="S3168_Title" xml:space="preserve">
     <value>"async" methods should not return "void"</value>
+  </data>
+  <data name="S3168_Type" xml:space="preserve">
+    <value>BUG</value>
   </data>
   <data name="S3169_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
@@ -3465,6 +3882,9 @@
   <data name="S3169_Title" xml:space="preserve">
     <value>Multiple "OrderBy" calls should not be used</value>
   </data>
+  <data name="S3169_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S3172_Category" xml:space="preserve">
     <value>Sonar Bug</value>
   </data>
@@ -3488,6 +3908,9 @@
   </data>
   <data name="S3172_Title" xml:space="preserve">
     <value>Delegates should not be subtracted</value>
+  </data>
+  <data name="S3172_Type" xml:space="preserve">
+    <value>BUG</value>
   </data>
   <data name="S3215_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
@@ -3513,6 +3936,9 @@
   <data name="S3215_Title" xml:space="preserve">
     <value>"interface" instances should not be cast to concrete types</value>
   </data>
+  <data name="S3215_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S3216_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
@@ -3536,6 +3962,9 @@
   </data>
   <data name="S3216_Title" xml:space="preserve">
     <value>"ConfigureAwait(false)" should be used</value>
+  </data>
+  <data name="S3216_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
   </data>
   <data name="S3217_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
@@ -3561,6 +3990,9 @@
   <data name="S3217_Title" xml:space="preserve">
     <value>"Explicit" conversions of "foreach" loops should not be used</value>
   </data>
+  <data name="S3217_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S3218_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
@@ -3584,6 +4016,9 @@
   </data>
   <data name="S3218_Title" xml:space="preserve">
     <value>Inner class members should not shadow outer class "static" or type members</value>
+  </data>
+  <data name="S3218_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
   </data>
   <data name="S3220_Category" xml:space="preserve">
     <value>Sonar Bug</value>
@@ -3609,6 +4044,9 @@
   <data name="S3220_Title" xml:space="preserve">
     <value>Method calls should not resolve ambiguously to overloads with "params"</value>
   </data>
+  <data name="S3220_Type" xml:space="preserve">
+    <value>BUG</value>
+  </data>
   <data name="S3234_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
@@ -3632,6 +4070,9 @@
   </data>
   <data name="S3234_Title" xml:space="preserve">
     <value>"GC.SuppressFinalize" should not be invoked for types without destructors</value>
+  </data>
+  <data name="S3234_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
   </data>
   <data name="S3235_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
@@ -3657,6 +4098,9 @@
   <data name="S3235_Title" xml:space="preserve">
     <value>Redundant parentheses should not be used</value>
   </data>
+  <data name="S3235_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S3236_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
@@ -3680,6 +4124,9 @@
   </data>
   <data name="S3236_Title" xml:space="preserve">
     <value>Caller information arguments should not be provided explicitly</value>
+  </data>
+  <data name="S3236_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
   </data>
   <data name="S3237_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
@@ -3705,6 +4152,9 @@
   <data name="S3237_Title" xml:space="preserve">
     <value>"value" parameters should be used</value>
   </data>
+  <data name="S3237_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S3240_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
@@ -3728,6 +4178,9 @@
   </data>
   <data name="S3240_Title" xml:space="preserve">
     <value>The simplest possible condition syntax should be used</value>
+  </data>
+  <data name="S3240_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
   </data>
   <data name="S3241_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
@@ -3753,6 +4206,9 @@
   <data name="S3241_Title" xml:space="preserve">
     <value>Methods should not return values that are never used</value>
   </data>
+  <data name="S3241_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S3244_Category" xml:space="preserve">
     <value>Sonar Bug</value>
   </data>
@@ -3776,6 +4232,9 @@
   </data>
   <data name="S3244_Title" xml:space="preserve">
     <value>Anonymous delegates should not be used to unsubscribe from Events</value>
+  </data>
+  <data name="S3244_Type" xml:space="preserve">
+    <value>BUG</value>
   </data>
   <data name="S3246_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
@@ -3801,6 +4260,9 @@
   <data name="S3246_Title" xml:space="preserve">
     <value>Generic type parameters should be co/contravariant when possible</value>
   </data>
+  <data name="S3246_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S3247_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
@@ -3824,6 +4286,9 @@
   </data>
   <data name="S3247_Title" xml:space="preserve">
     <value>Duplicate casts should not be made</value>
+  </data>
+  <data name="S3247_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
   </data>
   <data name="S3249_Category" xml:space="preserve">
     <value>Sonar Bug</value>
@@ -3849,6 +4314,9 @@
   <data name="S3249_Title" xml:space="preserve">
     <value>Classes directly extending "object" should not call "base" in "GetHashCode" or "Equals"</value>
   </data>
+  <data name="S3249_Type" xml:space="preserve">
+    <value>BUG</value>
+  </data>
   <data name="S3251_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
@@ -3872,6 +4340,9 @@
   </data>
   <data name="S3251_Title" xml:space="preserve">
     <value>Implementations should be provided for "partial" methods</value>
+  </data>
+  <data name="S3251_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
   </data>
   <data name="S3253_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
@@ -3897,6 +4368,9 @@
   <data name="S3253_Title" xml:space="preserve">
     <value>Constructor and destructor declarations should not be redundant</value>
   </data>
+  <data name="S3253_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S3254_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
@@ -3920,6 +4394,9 @@
   </data>
   <data name="S3254_Title" xml:space="preserve">
     <value>Default parameter values should not be passed as arguments</value>
+  </data>
+  <data name="S3254_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
   </data>
   <data name="S3256_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
@@ -3945,6 +4422,9 @@
   <data name="S3256_Title" xml:space="preserve">
     <value>"string.IsNullOrEmpty" should be used</value>
   </data>
+  <data name="S3256_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S3257_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
@@ -3968,6 +4448,9 @@
   </data>
   <data name="S3257_Title" xml:space="preserve">
     <value>Declarations and initializations should be as concise as possible</value>
+  </data>
+  <data name="S3257_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
   </data>
   <data name="S3261_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
@@ -3993,6 +4476,9 @@
   <data name="S3261_Title" xml:space="preserve">
     <value>Namespaces should not be empty</value>
   </data>
+  <data name="S3261_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S3262_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
@@ -4016,6 +4502,9 @@
   </data>
   <data name="S3262_Title" xml:space="preserve">
     <value>"params" should be used on overrides</value>
+  </data>
+  <data name="S3262_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
   </data>
   <data name="S3263_Category" xml:space="preserve">
     <value>Sonar Bug</value>
@@ -4041,6 +4530,9 @@
   <data name="S3263_Title" xml:space="preserve">
     <value>Static fields should appear in the order they must be initialized </value>
   </data>
+  <data name="S3263_Type" xml:space="preserve">
+    <value>BUG</value>
+  </data>
   <data name="S3264_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
@@ -4064,6 +4556,9 @@
   </data>
   <data name="S3264_Title" xml:space="preserve">
     <value>Events should be invoked</value>
+  </data>
+  <data name="S3264_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
   </data>
   <data name="S3265_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
@@ -4089,6 +4584,9 @@
   <data name="S3265_Title" xml:space="preserve">
     <value>Non-flags enums should not be used in bitwise operations</value>
   </data>
+  <data name="S3265_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S3376_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
@@ -4112,6 +4610,9 @@
   </data>
   <data name="S3376_Title" xml:space="preserve">
     <value>Attribute, EventArgs, and Exception type names should end with the type being extended</value>
+  </data>
+  <data name="S3376_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
   </data>
   <data name="S3397_Category" xml:space="preserve">
     <value>Sonar Bug</value>
@@ -4137,6 +4638,9 @@
   <data name="S3397_Title" xml:space="preserve">
     <value>"base.Equals" should not be used to check for reference equality in "Equals" if "base" is not "object"</value>
   </data>
+  <data name="S3397_Type" xml:space="preserve">
+    <value>BUG</value>
+  </data>
   <data name="S3427_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
@@ -4160,6 +4664,9 @@
   </data>
   <data name="S3427_Title" xml:space="preserve">
     <value>Method overloads with default parameter values should not overlap </value>
+  </data>
+  <data name="S3427_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
   </data>
   <data name="S3440_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
@@ -4185,6 +4692,9 @@
   <data name="S3440_Title" xml:space="preserve">
     <value>Variables should not be checked against the values they're about to be assigned</value>
   </data>
+  <data name="S3440_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S3441_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
@@ -4208,6 +4718,9 @@
   </data>
   <data name="S3441_Title" xml:space="preserve">
     <value>Redundant property names should be omitted in anonymous classes</value>
+  </data>
+  <data name="S3441_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
   </data>
   <data name="S3442_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
@@ -4233,6 +4746,9 @@
   <data name="S3442_Title" xml:space="preserve">
     <value>"abstract" classes should not have "public" constructors</value>
   </data>
+  <data name="S3442_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S3443_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
@@ -4256,6 +4772,9 @@
   </data>
   <data name="S3443_Title" xml:space="preserve">
     <value>Type should not be examined on "System.Type" instances</value>
+  </data>
+  <data name="S3443_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
   </data>
   <data name="S3444_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
@@ -4281,6 +4800,9 @@
   <data name="S3444_Title" xml:space="preserve">
     <value>Interfaces should not simply inherit from base interfaces with colliding members</value>
   </data>
+  <data name="S3444_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S3445_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
@@ -4304,6 +4826,9 @@
   </data>
   <data name="S3445_Title" xml:space="preserve">
     <value>Exceptions should not be explicitly rethrown</value>
+  </data>
+  <data name="S3445_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
   </data>
   <data name="S3447_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
@@ -4329,6 +4854,9 @@
   <data name="S3447_Title" xml:space="preserve">
     <value>"[Optional]" should not be used on "ref" or "out" parameters</value>
   </data>
+  <data name="S3447_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S3449_Category" xml:space="preserve">
     <value>Sonar Bug</value>
   </data>
@@ -4352,6 +4880,9 @@
   </data>
   <data name="S3449_Title" xml:space="preserve">
     <value>Right operands of shift operators should be integers</value>
+  </data>
+  <data name="S3449_Type" xml:space="preserve">
+    <value>BUG</value>
   </data>
   <data name="S3450_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
@@ -4377,6 +4908,9 @@
   <data name="S3450_Title" xml:space="preserve">
     <value>Parameters with "[DefaultParameterValue]" attributes should also be marked "[Optional]"</value>
   </data>
+  <data name="S3450_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S3451_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
@@ -4400,6 +4934,9 @@
   </data>
   <data name="S3451_Title" xml:space="preserve">
     <value>"[DefaultValue]" should not be used when "[DefaultParameterValue]" is meant</value>
+  </data>
+  <data name="S3451_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
   </data>
   <data name="S3453_Category" xml:space="preserve">
     <value>Sonar Bug</value>
@@ -4425,6 +4962,9 @@
   <data name="S3453_Title" xml:space="preserve">
     <value>Classes should not have only "private" constructors</value>
   </data>
+  <data name="S3453_Type" xml:space="preserve">
+    <value>BUG</value>
+  </data>
   <data name="S3456_Category" xml:space="preserve">
     <value>Sonar Bug</value>
   </data>
@@ -4448,6 +4988,9 @@
   </data>
   <data name="S3456_Title" xml:space="preserve">
     <value>"string.ToCharArray()" should not be called redundantly</value>
+  </data>
+  <data name="S3456_Type" xml:space="preserve">
+    <value>BUG</value>
   </data>
   <data name="S3457_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
@@ -4473,6 +5016,9 @@
   <data name="S3457_Title" xml:space="preserve">
     <value>Composite format strings should be used correctly</value>
   </data>
+  <data name="S3457_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S3458_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
@@ -4496,6 +5042,9 @@
   </data>
   <data name="S3458_Title" xml:space="preserve">
     <value>Empty "case" clauses that fall through to the "default" should be omitted</value>
+  </data>
+  <data name="S3458_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
   </data>
   <data name="S3459_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
@@ -4521,6 +5070,9 @@
   <data name="S3459_Title" xml:space="preserve">
     <value>Unassigned members should be removed</value>
   </data>
+  <data name="S3459_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S3466_Category" xml:space="preserve">
     <value>Sonar Bug</value>
   </data>
@@ -4544,6 +5096,9 @@
   </data>
   <data name="S3466_Title" xml:space="preserve">
     <value>Optional parameters should be passed to "base" calls</value>
+  </data>
+  <data name="S3466_Type" xml:space="preserve">
+    <value>BUG</value>
   </data>
   <data name="S3532_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
@@ -4569,6 +5124,9 @@
   <data name="S3532_Title" xml:space="preserve">
     <value>Empty "default" clauses should be removed</value>
   </data>
+  <data name="S3532_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S3597_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
@@ -4592,6 +5150,9 @@
   </data>
   <data name="S3597_Title" xml:space="preserve">
     <value>"ServiceContract" and "OperationContract" attributes should be used together</value>
+  </data>
+  <data name="S3597_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
   </data>
   <data name="S3598_Category" xml:space="preserve">
     <value>Sonar Bug</value>
@@ -4617,6 +5178,9 @@
   <data name="S3598_Title" xml:space="preserve">
     <value>One-way "OperationContract" methods should have "void" return type</value>
   </data>
+  <data name="S3598_Type" xml:space="preserve">
+    <value>BUG</value>
+  </data>
   <data name="S3600_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
@@ -4640,6 +5204,9 @@
   </data>
   <data name="S3600_Title" xml:space="preserve">
     <value>"params" should not be introduced on overrides</value>
+  </data>
+  <data name="S3600_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
   </data>
   <data name="S3603_Category" xml:space="preserve">
     <value>Sonar Bug</value>
@@ -4665,6 +5232,9 @@
   <data name="S3603_Title" xml:space="preserve">
     <value>Methods with "Pure" attribute should return a value </value>
   </data>
+  <data name="S3603_Type" xml:space="preserve">
+    <value>BUG</value>
+  </data>
   <data name="S3604_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
@@ -4688,6 +5258,9 @@
   </data>
   <data name="S3604_Title" xml:space="preserve">
     <value>Member initializer values should not be redundant</value>
+  </data>
+  <data name="S3604_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
   </data>
   <data name="S3610_Category" xml:space="preserve">
     <value>Sonar Bug</value>
@@ -4713,6 +5286,9 @@
   <data name="S3610_Title" xml:space="preserve">
     <value>Nullable type comparison should not be redundant</value>
   </data>
+  <data name="S3610_Type" xml:space="preserve">
+    <value>BUG</value>
+  </data>
   <data name="S3626_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
@@ -4736,6 +5312,9 @@
   </data>
   <data name="S3626_Title" xml:space="preserve">
     <value>Jump statements should not be redundant</value>
+  </data>
+  <data name="S3626_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
   </data>
   <data name="S3655_Category" xml:space="preserve">
     <value>Sonar Bug</value>
@@ -4761,6 +5340,9 @@
   <data name="S3655_Title" xml:space="preserve">
     <value>Empty nullable value should not be accessed</value>
   </data>
+  <data name="S3655_Type" xml:space="preserve">
+    <value>BUG</value>
+  </data>
   <data name="S3776_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
@@ -4784,6 +5366,9 @@
   </data>
   <data name="S3776_Title" xml:space="preserve">
     <value>Cognitive Complexity of methods should not be too high</value>
+  </data>
+  <data name="S3776_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
   </data>
   <data name="S3869_Category" xml:space="preserve">
     <value>Sonar Bug</value>
@@ -4809,6 +5394,9 @@
   <data name="S3869_Title" xml:space="preserve">
     <value>"SafeHandle.DangerousGetHandle" should not be called</value>
   </data>
+  <data name="S3869_Type" xml:space="preserve">
+    <value>BUG</value>
+  </data>
   <data name="S3871_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
@@ -4832,6 +5420,9 @@
   </data>
   <data name="S3871_Title" xml:space="preserve">
     <value>Exception types should be "public"</value>
+  </data>
+  <data name="S3871_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
   </data>
   <data name="S3872_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
@@ -4857,6 +5448,9 @@
   <data name="S3872_Title" xml:space="preserve">
     <value>Parameter names should not duplicate the names of their methods</value>
   </data>
+  <data name="S3872_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S3874_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
@@ -4880,6 +5474,9 @@
   </data>
   <data name="S3874_Title" xml:space="preserve">
     <value>"out" and "ref" parameters should not be used</value>
+  </data>
+  <data name="S3874_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
   </data>
   <data name="S3875_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
@@ -4905,6 +5502,9 @@
   <data name="S3875_Title" xml:space="preserve">
     <value>"operator==" should not be overloaded on reference types</value>
   </data>
+  <data name="S3875_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S3876_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
@@ -4928,6 +5528,9 @@
   </data>
   <data name="S3876_Title" xml:space="preserve">
     <value>Strings or integral types should be used for indexers</value>
+  </data>
+  <data name="S3876_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
   </data>
   <data name="S3877_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
@@ -4953,6 +5556,9 @@
   <data name="S3877_Title" xml:space="preserve">
     <value>Exceptions should not be thrown from unexpected methods</value>
   </data>
+  <data name="S3877_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S3880_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
@@ -4976,6 +5582,9 @@
   </data>
   <data name="S3880_Title" xml:space="preserve">
     <value>Finalizers should not be empty</value>
+  </data>
+  <data name="S3880_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
   </data>
   <data name="S3881_Category" xml:space="preserve">
     <value>Sonar Bug</value>
@@ -5001,6 +5610,9 @@
   <data name="S3881_Title" xml:space="preserve">
     <value>"IDisposable" should be implemented correctly</value>
   </data>
+  <data name="S3881_Type" xml:space="preserve">
+    <value>BUG</value>
+  </data>
   <data name="S3884_Category" xml:space="preserve">
     <value>Sonar Vulnerability</value>
   </data>
@@ -5024,6 +5636,9 @@
   </data>
   <data name="S3884_Title" xml:space="preserve">
     <value>"CoSetProxyBlanket" and "CoInitializeSecurity" should not be used</value>
+  </data>
+  <data name="S3884_Type" xml:space="preserve">
+    <value>VULNERABILITY</value>
   </data>
   <data name="S3885_Category" xml:space="preserve">
     <value>Sonar Bug</value>
@@ -5049,6 +5664,9 @@
   <data name="S3885_Title" xml:space="preserve">
     <value>"Assembly.Load" should be used</value>
   </data>
+  <data name="S3885_Type" xml:space="preserve">
+    <value>BUG</value>
+  </data>
   <data name="S3887_Category" xml:space="preserve">
     <value>Sonar Bug</value>
   </data>
@@ -5072,6 +5690,9 @@
   </data>
   <data name="S3887_Title" xml:space="preserve">
     <value>Mutable, non-private fields should not be "readonly"</value>
+  </data>
+  <data name="S3887_Type" xml:space="preserve">
+    <value>BUG</value>
   </data>
   <data name="S3889_Category" xml:space="preserve">
     <value>Sonar Bug</value>
@@ -5097,6 +5718,9 @@
   <data name="S3889_Title" xml:space="preserve">
     <value>Neither "Thread.Resume" nor "Thread.Suspend" should be used</value>
   </data>
+  <data name="S3889_Type" xml:space="preserve">
+    <value>BUG</value>
+  </data>
   <data name="S3897_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
@@ -5120,6 +5744,9 @@
   </data>
   <data name="S3897_Title" xml:space="preserve">
     <value>Classes that provide "Equals(&lt;T&gt;)" or override "Equals(Object)" should implement "IEquatable&lt;T&gt;"</value>
+  </data>
+  <data name="S3897_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
   </data>
   <data name="S3898_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
@@ -5145,6 +5772,9 @@
   <data name="S3898_Title" xml:space="preserve">
     <value>Value types should implement "IEquatable&lt;T&gt;"</value>
   </data>
+  <data name="S3898_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S3902_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
@@ -5168,6 +5798,9 @@
   </data>
   <data name="S3902_Title" xml:space="preserve">
     <value>"Assembly.GetExecutingAssembly" should not be called</value>
+  </data>
+  <data name="S3902_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
   </data>
   <data name="S3903_Category" xml:space="preserve">
     <value>Sonar Bug</value>
@@ -5193,6 +5826,9 @@
   <data name="S3903_Title" xml:space="preserve">
     <value>Types should be defined in named namespaces</value>
   </data>
+  <data name="S3903_Type" xml:space="preserve">
+    <value>BUG</value>
+  </data>
   <data name="S3904_Category" xml:space="preserve">
     <value>Sonar Bug</value>
   </data>
@@ -5216,6 +5852,9 @@
   </data>
   <data name="S3904_Title" xml:space="preserve">
     <value>Assemblies should have version information</value>
+  </data>
+  <data name="S3904_Type" xml:space="preserve">
+    <value>BUG</value>
   </data>
   <data name="S3925_Category" xml:space="preserve">
     <value>Sonar Bug</value>
@@ -5241,6 +5880,9 @@
   <data name="S3925_Title" xml:space="preserve">
     <value>"ISerializable" should be implemented correctly</value>
   </data>
+  <data name="S3925_Type" xml:space="preserve">
+    <value>BUG</value>
+  </data>
   <data name="S3926_Category" xml:space="preserve">
     <value>Sonar Bug</value>
   </data>
@@ -5264,6 +5906,9 @@
   </data>
   <data name="S3926_Title" xml:space="preserve">
     <value>Deserialization methods should be provided for "OptionalField" members</value>
+  </data>
+  <data name="S3926_Type" xml:space="preserve">
+    <value>BUG</value>
   </data>
   <data name="S3928_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
@@ -5289,6 +5934,9 @@
   <data name="S3928_Title" xml:space="preserve">
     <value>Parameter names used into ArgumentException constructors should match an existing one </value>
   </data>
+  <data name="S3928_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S3962_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
@@ -5312,6 +5960,9 @@
   </data>
   <data name="S3962_Title" xml:space="preserve">
     <value>"static readonly" constants should be "const" instead</value>
+  </data>
+  <data name="S3962_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
   </data>
   <data name="S3963_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
@@ -5337,6 +5988,9 @@
   <data name="S3963_Title" xml:space="preserve">
     <value>"static" fields should be initialized inline</value>
   </data>
+  <data name="S3963_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S3967_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
@@ -5360,6 +6014,9 @@
   </data>
   <data name="S3967_Title" xml:space="preserve">
     <value>Multidimensional arrays should not be used</value>
+  </data>
+  <data name="S3967_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
   </data>
   <data name="S3971_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
@@ -5385,6 +6042,9 @@
   <data name="S3971_Title" xml:space="preserve">
     <value>"GC.SuppressFinalize" should not be called</value>
   </data>
+  <data name="S3971_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S3981_Category" xml:space="preserve">
     <value>Sonar Bug</value>
   </data>
@@ -5408,6 +6068,9 @@
   </data>
   <data name="S3981_Title" xml:space="preserve">
     <value>Collection sizes and array length comparisons should make sense</value>
+  </data>
+  <data name="S3981_Type" xml:space="preserve">
+    <value>BUG</value>
   </data>
   <data name="S3984_Category" xml:space="preserve">
     <value>Sonar Bug</value>
@@ -5433,6 +6096,9 @@
   <data name="S3984_Title" xml:space="preserve">
     <value>Exception should not be created without being thrown </value>
   </data>
+  <data name="S3984_Type" xml:space="preserve">
+    <value>BUG</value>
+  </data>
   <data name="S3990_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
@@ -5456,6 +6122,9 @@
   </data>
   <data name="S3990_Title" xml:space="preserve">
     <value>Assemblies should be marked as CLS compliant</value>
+  </data>
+  <data name="S3990_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
   </data>
   <data name="S3992_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
@@ -5481,6 +6150,9 @@
   <data name="S3992_Title" xml:space="preserve">
     <value>Assemblies should explicitly specify COM visibility</value>
   </data>
+  <data name="S3992_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S3993_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
@@ -5504,6 +6176,9 @@
   </data>
   <data name="S3993_Title" xml:space="preserve">
     <value>Custom attributes should be marked with "System.AttributeUsageAttribute"</value>
+  </data>
+  <data name="S3993_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
   </data>
   <data name="S3994_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
@@ -5529,6 +6204,9 @@
   <data name="S3994_Title" xml:space="preserve">
     <value>URI Parameters should not be strings</value>
   </data>
+  <data name="S3994_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S3995_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
@@ -5552,6 +6230,9 @@
   </data>
   <data name="S3995_Title" xml:space="preserve">
     <value>URI return values should not be strings</value>
+  </data>
+  <data name="S3995_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
   </data>
   <data name="S3996_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
@@ -5577,6 +6258,9 @@
   <data name="S3996_Title" xml:space="preserve">
     <value>URI properties should not be strings</value>
   </data>
+  <data name="S3996_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S3997_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
@@ -5600,6 +6284,9 @@
   </data>
   <data name="S3997_Title" xml:space="preserve">
     <value>String URI overloads should call "System.Uri" overloads</value>
+  </data>
+  <data name="S3997_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
   </data>
   <data name="S3998_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
@@ -5625,6 +6312,9 @@
   <data name="S3998_Title" xml:space="preserve">
     <value>Threads should not lock on objects with weak identity</value>
   </data>
+  <data name="S3998_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S4000_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
@@ -5649,11 +6339,14 @@
   <data name="S4000_Title" xml:space="preserve">
     <value>Pointers to unmanaged memory should not be visible</value>
   </data>
+  <data name="S4000_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S4002_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
   <data name="S4002_Description" xml:space="preserve">
-    <value>This rule raises an issue when a disposable type contains fields of the following types and does not implement a proper finalizer:</value>
+    <value>This rule raises an issue when a disposable type contains fields of the following types and does not implement a finalizer:</value>
   </data>
   <data name="S4002_IsActivatedByDefault" xml:space="preserve">
     <value>False</value>
@@ -5666,6 +6359,9 @@
   </data>
   <data name="S4002_Title" xml:space="preserve">
     <value>Disposable types should declare finalizers</value>
+  </data>
+  <data name="S4002_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
   </data>
   <data name="S4004_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
@@ -5691,6 +6387,9 @@
   <data name="S4004_Title" xml:space="preserve">
     <value>Collection properties should be readonly</value>
   </data>
+  <data name="S4004_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S4005_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
@@ -5713,7 +6412,10 @@
     <value />
   </data>
   <data name="S4005_Title" xml:space="preserve">
-    <value>"System.Uri" argument should be passed instead of string</value>
+    <value>"System.Uri" arguments should be used instead of strings</value>
+  </data>
+  <data name="S4005_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
   </data>
   <data name="S818_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
@@ -5739,6 +6441,9 @@
   <data name="S818_Title" xml:space="preserve">
     <value>Literal suffixes should be upper case</value>
   </data>
+  <data name="S818_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S907_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
@@ -5763,6 +6468,9 @@
   <data name="S907_Title" xml:space="preserve">
     <value>"goto" statement should not be used</value>
   </data>
+  <data name="S907_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S927_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
@@ -5786,5 +6494,8 @@
   </data>
   <data name="S927_Title" xml:space="preserve">
     <value>"partial" method parameter names should match</value>
+  </data>
+  <data name="S927_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
   </data>
 </root>
