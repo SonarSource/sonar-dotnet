@@ -154,6 +154,7 @@ function CreateStringResources() {
         }
 
         [void]$resources.Add("${rule}_Description=${description}")
+        [void]$resources.Add("${rule}_Type=$(${json}.type)")
         [void]$resources.Add("${rule}_Title=$(${json}.title)")
         [void]$resources.Add("${rule}_Category=$($categoriesMap.Get_Item(${json}.type))")
         [void]$resources.Add("${rule}_IsActivatedByDefault=$(${sonarWayRules}.ruleKeys -Contains ${rule})")
