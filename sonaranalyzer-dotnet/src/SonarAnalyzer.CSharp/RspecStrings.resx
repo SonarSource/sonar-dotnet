@@ -1968,6 +1968,33 @@
   <data name="S1994_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
   </data>
+  <data name="S2068_Category" xml:space="preserve">
+    <value>Sonar Vulnerability</value>
+  </data>
+  <data name="S2068_Description" xml:space="preserve">
+    <value>Because it is easy to extract strings from a compiled application, credentials should never be hard-coded. Do so, and they're almost guaranteed to end up in the hands of an attacker. This is particularly true for applications that are distributed.</value>
+  </data>
+  <data name="S2068_IsActivatedByDefault" xml:space="preserve">
+    <value>True</value>
+  </data>
+  <data name="S2068_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S2068_RemediationCost" xml:space="preserve">
+    <value>30min</value>
+  </data>
+  <data name="S2068_Severity" xml:space="preserve">
+    <value>Blocker</value>
+  </data>
+  <data name="S2068_Tags" xml:space="preserve">
+    <value>cwe,cert,sans-top25-porous,owasp-a2</value>
+  </data>
+  <data name="S2068_Title" xml:space="preserve">
+    <value>Credentials should not be hard-coded</value>
+  </data>
+  <data name="S2068_Type" xml:space="preserve">
+    <value>VULNERABILITY</value>
+  </data>
   <data name="S2070_Category" xml:space="preserve">
     <value>Sonar Vulnerability</value>
   </data>
@@ -6346,7 +6373,7 @@
     <value>Sonar Code Smell</value>
   </data>
   <data name="S4002_Description" xml:space="preserve">
-    <value>This rule raises an issue when a disposable type contains fields of the following types and does not implement a finalizer:</value>
+    <value>This rule raises an issue when a disposable type contains fields of the following types and does not implement a proper finalizer:</value>
   </data>
   <data name="S4002_IsActivatedByDefault" xml:space="preserve">
     <value>False</value>
@@ -6412,7 +6439,7 @@
     <value />
   </data>
   <data name="S4005_Title" xml:space="preserve">
-    <value>"System.Uri" arguments should be used instead of strings</value>
+    <value>"System.Uri" argument should be passed instead of string</value>
   </data>
   <data name="S4005_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
