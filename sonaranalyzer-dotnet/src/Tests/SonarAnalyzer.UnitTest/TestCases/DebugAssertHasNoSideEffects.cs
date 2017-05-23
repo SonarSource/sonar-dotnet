@@ -14,7 +14,7 @@ namespace Tests.Diagnostics
             Debug.Assert(list.DoStuff());
             Debug.Assert(list.Destroy());
 
-            Debug.Assert(list.Remove("a")); // Noncompliant {{"Expressions used in 'Debug.Assert' should not produce side effects."}}
+            Debug.Assert(list.Remove("a")); // Noncompliant {{Expressions used in 'Debug.Assert' should not produce side effects.}}
 //                      ^^^^^^^^^^^^^^^^^^
             Debug.Assert(list?.Remove("a")); // Noncompliant
 //                      ^^^^^^^^^^^^^^^^^^^
