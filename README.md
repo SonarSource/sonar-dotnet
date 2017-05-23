@@ -8,7 +8,7 @@
 SonarC# is a [static code analyser](https://en.wikipedia.org/wiki/Static_program_analysis) for C# language used as an extension for the [SonarQube](http://www.sonarqube.org/) platform. It will allow you to produce stable and easily supported code by helping you to find and to correct bugs, vulnerabilities and smells in your code.
 
 ## Features
-* 190+ rules (including 80+ bug detection)
+* 240+ rules (including 80+ bug detection)
 * Metrics (complexity, number of lines etc.)
 * Import of [test coverage reports](https://docs.sonarqube.org/x/CoBh) from Visual Studio Code Coverage, dotCover, OpenCover and NCover 3.
 * Support for [custom rules](https://github.com/SonarSource-VisualStudio/sonarqube-roslyn-sdk)
