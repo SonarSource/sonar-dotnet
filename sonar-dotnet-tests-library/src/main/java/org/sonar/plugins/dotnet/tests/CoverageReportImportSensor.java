@@ -42,14 +42,12 @@ public class CoverageReportImportSensor implements Sensor {
   private final CoverageConfiguration coverageConf;
   private final CoverageAggregator coverageAggregator;
   private final boolean isIntegrationTest;
-  private final String languageKey;
   private final String languageName;
 
-  public CoverageReportImportSensor(CoverageConfiguration coverageConf, CoverageAggregator coverageAggregator, String languageKey, String languageName, boolean isIntegrationTest) {
+  public CoverageReportImportSensor(CoverageConfiguration coverageConf, CoverageAggregator coverageAggregator, String languageName, boolean isIntegrationTest) {
     this.coverageConf = coverageConf;
     this.coverageAggregator = coverageAggregator;
     this.isIntegrationTest = isIntegrationTest;
-    this.languageKey = languageKey;
     this.languageName = languageName;
   }
 
@@ -60,7 +58,6 @@ public class CoverageReportImportSensor implements Sensor {
     } else {
       descriptor.name(this.languageName + " Unit Tests Coverage Report Import");
     }
-    descriptor.onlyOnLanguage(this.languageKey);
   }
 
   @Override

@@ -135,7 +135,7 @@ public class CSharpCodeCoverageProvider {
   public static class CSharpCoverageReportImportSensor extends CoverageReportImportSensor {
 
     public CSharpCoverageReportImportSensor(CSharpCoverageAggregator coverageAggregator) {
-      super(COVERAGE_CONF, coverageAggregator, CSharpPlugin.LANGUAGE_KEY, CSharpPlugin.LANGUAGE_NAME, false);
+      super(COVERAGE_CONF, coverageAggregator, CSharpPlugin.LANGUAGE_NAME, false);
     }
 
   }
@@ -151,7 +151,7 @@ public class CSharpCodeCoverageProvider {
   public static class CSharpIntegrationCoverageReportImportSensor extends CoverageReportImportSensor {
 
     public CSharpIntegrationCoverageReportImportSensor(CSharpIntegrationCoverageAggregator coverageAggregator) {
-      super(IT_COVERAGE_CONF, coverageAggregator, CSharpPlugin.LANGUAGE_KEY, CSharpPlugin.LANGUAGE_NAME, true);
+      super(IT_COVERAGE_CONF, coverageAggregator, CSharpPlugin.LANGUAGE_NAME, true);
     }
 
   }
