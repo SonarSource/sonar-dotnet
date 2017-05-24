@@ -18,15 +18,15 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
-using SonarAnalyzer.Common;
-using SonarAnalyzer.Helpers;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using System.Collections.Generic;
-using System.Linq;
+using SonarAnalyzer.Common;
+using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -53,13 +53,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     var invokedMethodSyntax = c.Node as InvocationExpressionSyntax;
 
-                    if (GetMethodSymbol(c, invokedMethodSyntax).IsDebugAssert() &&
-                        invokedMethodSyntax
-                            .DescendantNodes()
-                            .OfType<InvocationExpressionSyntax>()
-                            .Select(GetIdentifierName)
-                            .Any(text => text != null &&
-                                    sideEffectWords.Overlaps(text.SplitCamelCaseToWords())))
+                    if (IsDebugAssert(invokedMethodSyntax, c) &&
+                        ContainsCallsWithSideEffects(invokedMethodSyntax))
                     {
                         c.ReportDiagnostic(Diagnostic.Create(rule, invokedMethodSyntax.ArgumentList.GetLocation()));
                     }
@@ -77,16 +72,23 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             var memberBinding = invocation.Expression as MemberBindingExpressionSyntax;
-            return memberBinding.Name?.Identifier.ValueText;
+            return memberBinding?.Name?.Identifier.ValueText;
         }
 
-        private IMethodSymbol GetMethodSymbol(SyntaxNodeAnalysisContext context,
-            InvocationExpressionSyntax invocation)
+        private bool IsDebugAssert(InvocationExpressionSyntax invocation, SyntaxNodeAnalysisContext context)
         {
-            var invokedMethodSymbolInfo = context.SemanticModel.GetSymbolInfo(invocation);
+            var invokedMethodSymbol = context.SemanticModel.GetSymbolInfo(invocation).Symbol as IMethodSymbol;
+            return invokedMethodSymbol.IsDebugAssert();
+        }
 
-            var symbol = invokedMethodSymbolInfo.Symbol ?? invokedMethodSymbolInfo.CandidateSymbols.FirstOrDefault();
-            return symbol as IMethodSymbol;
+        private bool ContainsCallsWithSideEffects(InvocationExpressionSyntax invocation)
+        {
+            return invocation
+                    .DescendantNodes()
+                    .OfType<InvocationExpressionSyntax>()
+                    .Select(GetIdentifierName)
+                    .Any(text => text != null &&
+                            sideEffectWords.Overlaps(text.SplitCamelCaseToWords()));
         }
     }
 }
