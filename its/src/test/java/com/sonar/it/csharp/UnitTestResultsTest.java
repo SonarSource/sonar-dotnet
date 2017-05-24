@@ -40,7 +40,7 @@ public class UnitTestResultsTest {
   public static void init() throws Exception {
     orchestrator.resetData();
   }
-/*
+
   @Test
   public void should_not_import_unit_test_results_without_report() {
     SonarRunner build = Tests.createSonarScannerBuild()
@@ -116,7 +116,7 @@ public class UnitTestResultsTest {
     orchestrator.executeBuild(build);
 
     assertThat(getMeasureAsInt("UnitTestResultsTest", "tests")).isEqualTo(32);
-  }*/
+  }
 
   @Test
   public void should_support_nunit_result_on_empty_module() {
@@ -125,16 +125,42 @@ public class UnitTestResultsTest {
         .setProjectKey("EmptyModuleWithTestResults")
         .setProjectName("EmptyModuleWithTestResults")
         .setProjectVersion("1.0")
-        .setSourceDirs(".")
+        .setProperty("mod1.sonar.sources", ".")
+        .setProperty("mod1.sonar.projectBaseDir", "mod1")
+        .setProperty("sonar.modules", "mod1")
         .setProperty("sonar.sourceEncoding", "UTF-8")
+        .setProperty("sonar.cs.file.suffixes", ".cs")
         .setProperty("sonar.cs.nunit.reportsPaths", "reports/nunit.xml")
         //.setProperty("sonar.verbose", "true") // Uncomment this to see the line saying the sensor is being skipped
         .setProfile("no_rule");
     orchestrator.executeBuild(build);
 
-    assertThat(getMeasureAsInt("UnitTestResultsTest", "tests")).isEqualTo(196);
-    assertThat(getMeasureAsInt("UnitTestResultsTest", "test_errors")).isEqualTo(30);
-    assertThat(getMeasureAsInt("UnitTestResultsTest", "test_failures")).isEqualTo(20);
-    assertThat(getMeasureAsInt("UnitTestResultsTest", "skipped_tests")).isEqualTo(7);
+    assertThat(getMeasureAsInt("EmptyModuleWithTestResults", "tests")).isEqualTo(196);
+    assertThat(getMeasureAsInt("EmptyModuleWithTestResults", "test_errors")).isEqualTo(30);
+    assertThat(getMeasureAsInt("EmptyModuleWithTestResults", "test_failures")).isEqualTo(20);
+    assertThat(getMeasureAsInt("EmptyModuleWithTestResults", "skipped_tests")).isEqualTo(7);
+  }
+
+  @Test
+  public void should_support_vstest_result_on_empty_module() {
+    SonarRunner build = Tests.createSonarScannerBuild()
+        .setProjectDir(new File("projects/EmptyModuleWithTestResults/"))
+        .setProjectKey("EmptyModuleWithTestResults")
+        .setProjectName("EmptyModuleWithTestResults")
+        .setProjectVersion("1.0")
+        .setProperty("mod1.sonar.sources", ".")
+        .setProperty("mod1.sonar.projectBaseDir", "mod1")
+        .setProperty("sonar.modules", "mod1")
+        .setProperty("sonar.sourceEncoding", "UTF-8")
+        .setProperty("sonar.cs.file.suffixes", ".cs")
+        .setProperty("sonar.cs.vstest.reportsPaths", "reports/vstest.trx")
+        //.setProperty("sonar.verbose", "true") // Uncomment this to see the line saying the sensor is being skipped
+        .setProfile("no_rule");
+    orchestrator.executeBuild(build);
+
+    assertThat(getMeasureAsInt("EmptyModuleWithTestResults", "tests")).isEqualTo(32);
+    assertThat(getMeasureAsInt("EmptyModuleWithTestResults", "test_errors")).isEqualTo(1);
+    assertThat(getMeasureAsInt("EmptyModuleWithTestResults", "test_failures")).isEqualTo(10);
+    assertThat(getMeasureAsInt("EmptyModuleWithTestResults", "skipped_tests")).isEqualTo(7);
   }
 }

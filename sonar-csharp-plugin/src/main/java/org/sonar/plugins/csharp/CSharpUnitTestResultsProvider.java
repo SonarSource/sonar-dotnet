@@ -75,7 +75,7 @@ public class CSharpUnitTestResultsProvider {
   public static class CSharpUnitTestResultsImportSensor extends UnitTestResultsImportSensor {
 
     public CSharpUnitTestResultsImportSensor(CSharpUnitTestResultsAggregator unitTestResultsAggregator, ProjectDefinition projectDef) {
-      super(unitTestResultsAggregator, projectDef, CSharpPlugin.LANGUAGE_KEY, CSharpPlugin.LANGUAGE_NAME);
+      super(unitTestResultsAggregator, projectDef, CSharpPlugin.LANGUAGE_NAME);
     }
 
   }
