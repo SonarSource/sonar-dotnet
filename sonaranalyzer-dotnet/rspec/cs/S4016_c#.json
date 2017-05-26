@@ -1,0 +1,13 @@
+{
+  "title": "Enumeration members should not be named \"Reserved\"",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "2min"
+  },
+  "tags": [
+    
+  ],
+  "defaultSeverity": "Major"
+}

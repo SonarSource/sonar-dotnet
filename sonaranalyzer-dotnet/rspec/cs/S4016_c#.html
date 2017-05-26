@@ -1,0 +1,21 @@
+<p>If an enum members name contains the word "reserved" it implies it is not currently used and will be change in the future. However changing an enum
+member is a breaking change and can create significant problems. There is no need to reserve an enum member since a new member can be added in the
+future, this, usually, will not be a breaking change.</p>
+<p>This rule raises an issue when the name of an enumeration member contains "reserved".</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+using System;
+
+namespace MyLibrary
+{
+  public enum Color
+  {
+        None,
+        Red,
+        Orange,
+        Yellow,
+        ReservedColor  // Noncompliant
+    }
+}
+</pre>
+
