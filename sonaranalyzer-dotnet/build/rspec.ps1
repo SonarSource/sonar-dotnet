@@ -126,6 +126,22 @@ function CopyResources() {
     }
 }
 
+function UpdateTestEntry()
+{
+    param ($rule)
+
+    $ruleType = $rule.type
+    if (!$ruleType)
+    {
+        return
+    }
+
+    $csharpRuleTypeTestCase = "${PSScriptRoot}\\..\\src\\Tests\\SonarAnalyzer.UnitTest\\PackagingTests\\RuleTypeTests.cs"
+    $ruleId = $ruleKey.Substring(1)
+    (Get-Content "${csharpRuleTypeTestCase}") -replace "//\[`"$ruleId`"\]", "[`"$ruleId`"] = `"$ruleType`"" |
+        Set-Content "${csharpRuleTypeTestCase}"
+}
+
 function CreateStringResources() {
     param ($lang, $rules)
 
@@ -134,8 +150,8 @@ function CreateStringResources() {
 
     $sonarWayRules = Get-Content -Raw "${rspecFolder}\\Sonar_way_profile.json" | ConvertFrom-Json
 
+    $newRuleData = @{}
     $resources = New-Object System.Collections.ArrayList
-
     foreach ($rule in $rules) {
         $json = Get-Content -Raw "${rspecFolder}\\${rule}_${suffix}.json" | ConvertFrom-Json
         $html = Get-Content -Raw "${rspecFolder}\\${rule}_${suffix}.html"
@@ -165,6 +181,11 @@ function CreateStringResources() {
             [void]$resources.Add("${rule}_Remediation=$($remediationsMap.Get_Item(${json}.remediation.func))")
             [void]$resources.Add("${rule}_RemediationCost=$(${json}.remediation.constantCost)") # TODO see if we have remediations other than constantConst and fix them
         }
+        
+        if ($rule -eq $ruleKey)
+        {
+            $newRuleData = $json
+    }
     }
 
     # improve readability of the generated file
@@ -177,6 +198,8 @@ function CreateStringResources() {
 
     # generate resx file
     Invoke-Expression "& `"${resgenPath}`" ${rawResourcesPath} ${resourcesPath}"
+
+    return $newRuleData
 }
 
 function GenerateRuleClasses() {
@@ -207,9 +230,14 @@ $vbRules = GetRules "vbnet"
 
 CopyResources "cs" $csRules $vbRules
 CopyResources "vbnet" $vbRules $csRules
-CreateStringResources "cs" $csRules
-CreateStringResources "vbnet" $vbRules
+$csRuleData = CreateStringResources "cs" $csRules
+$vbRuleData = CreateStringResources "vbnet" $vbRules
 
 if ($className -And $ruleKey) {
     GenerateRuleClasses
+
+    if ($language -eq "cs")
+    {
+       UpdateTestEntry $csRuleData
+    }
 }
