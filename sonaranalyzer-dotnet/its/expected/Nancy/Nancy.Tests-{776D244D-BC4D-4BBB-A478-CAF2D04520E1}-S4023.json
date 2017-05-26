@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S4023",
+"message":  "Remove this interface or add members to it.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Tests\Fakes\FakeNancyModuleWithDependency.cs",
+"region":  {
+"startLine":  3,
+"startColumn":  22,
+"endLine":  3,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S4023",
+"message":  "Remove this interface or add members to it.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Tests\Unit\Bootstrapper\BootstrapperLocatorFixture.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  26,
+"endLine":  15,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S4023",
+"message":  "Remove this interface or add members to it.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Tests\Unit\DefaultNancyBootstrapperFixture.cs",
+"region":  {
+"startLine":  158,
+"startColumn":  22,
+"endLine":  158,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S4023",
+"message":  "Remove this interface or add members to it.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultModelBinderLocatorFixture.cs",
+"region":  {
+"startLine":  126,
+"startColumn":  19,
+"endLine":  126,
+"endColumn":  33
+}
+}
+}
+]
+}

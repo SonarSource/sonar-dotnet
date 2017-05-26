@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4023",
+"message":  "Remove this interface or add members to it.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.TestKit\INoImplicitSender.cs",
+"region":  {
+"startLine":  42,
+"startColumn":  22,
+"endLine":  42,
+"endColumn":  39
+}
+}
+}
+]
+}

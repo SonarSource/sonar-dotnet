@@ -1,0 +1,134 @@
+{
+"issues":  [
+{
+"id":  "S4023",
+"message":  "Remove this interface or add members to it.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  169,
+"startColumn":  24,
+"endLine":  169,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S4023",
+"message":  "Remove this interface or add members to it.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Remote\RemoteActorRef.cs",
+"region":  {
+"startLine":  19,
+"startColumn":  24,
+"endLine":  19,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S4023",
+"message":  "Remove this interface or add members to it.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Remote\RemoteSystemDaemon.cs",
+"region":  {
+"startLine":  24,
+"startColumn":  24,
+"endLine":  24,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S4023",
+"message":  "Remove this interface or add members to it.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Remote\Remoting.cs",
+"region":  {
+"startLine":  90,
+"startColumn":  24,
+"endLine":  90,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S4023",
+"message":  "Remove this interface or add members to it.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Remote\Transport\AkkaPduCodec.cs",
+"region":  {
+"startLine":  32,
+"startColumn":  24,
+"endLine":  32,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S4023",
+"message":  "Remove this interface or add members to it.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Remote\Transport\FailureInjectorTransportAdapter.cs",
+"region":  {
+"startLine":  67,
+"startColumn":  26,
+"endLine":  67,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S4023",
+"message":  "Remove this interface or add members to it.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Remote\Transport\FailureInjectorTransportAdapter.cs",
+"region":  {
+"startLine":  92,
+"startColumn":  26,
+"endLine":  92,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S4023",
+"message":  "Remove this interface or add members to it.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"region":  {
+"startLine":  768,
+"startColumn":  28,
+"endLine":  768,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S4023",
+"message":  "Remove this interface or add members to it.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Remote\Transport\Transport.cs",
+"region":  {
+"startLine":  91,
+"startColumn":  22,
+"endLine":  91,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S4023",
+"message":  "Remove this interface or add members to it.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Remote\Transport\Transport.cs",
+"region":  {
+"startLine":  193,
+"startColumn":  22,
+"endLine":  193,
+"endColumn":  39
+}
+}
+}
+]
+}

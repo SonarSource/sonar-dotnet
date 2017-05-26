@@ -1,0 +1,95 @@
+{
+"issues":  [
+{
+"id":  "S4023",
+"message":  "Remove this interface or add members to it.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\AtLeastOnceDeliveryFailureSpec.cs",
+"region":  {
+"startLine":  106,
+"startColumn":  28,
+"endLine":  106,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S4023",
+"message":  "Remove this interface or add members to it.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\AtLeastOnceDeliveryReceiveActorSpec.cs",
+"region":  {
+"startLine":  111,
+"startColumn":  27,
+"endLine":  111,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S4023",
+"message":  "Remove this interface or add members to it.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\AtLeastOnceDeliverySpec.cs",
+"region":  {
+"startLine":  197,
+"startColumn":  19,
+"endLine":  197,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S4023",
+"message":  "Remove this interface or add members to it.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\Fsm\PersistentFSMSpec.cs",
+"region":  {
+"startLine":  603,
+"startColumn":  24,
+"endLine":  603,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S4023",
+"message":  "Remove this interface or add members to it.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\Fsm\PersistentFSMSpec.cs",
+"region":  {
+"startLine":  633,
+"startColumn":  24,
+"endLine":  633,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S4023",
+"message":  "Remove this interface or add members to it.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\Fsm\PersistentFSMSpec.cs",
+"region":  {
+"startLine":  659,
+"startColumn":  24,
+"endLine":  659,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S4023",
+"message":  "Remove this interface or add members to it.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\MemoryEventAdapterSpec.cs",
+"region":  {
+"startLine":  75,
+"startColumn":  26,
+"endLine":  75,
+"endColumn":  38
+}
+}
+}
+]
+}

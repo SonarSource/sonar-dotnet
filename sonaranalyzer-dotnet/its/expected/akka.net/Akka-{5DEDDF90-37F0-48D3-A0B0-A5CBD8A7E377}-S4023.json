@@ -1,0 +1,264 @@
+{
+"issues":  [
+{
+"id":  "S4023",
+"message":  "Remove this interface or add members to it.",
+"location":  {
+"uri":  "akka.net\src\core\Akka\Actor\ActorBase.cs",
+"region":  {
+"startLine":  56,
+"startColumn":  22,
+"endLine":  56,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S4023",
+"message":  "Remove this interface or add members to it.",
+"location":  {
+"uri":  "akka.net\src\core\Akka\Actor\ActorRef.cs",
+"region":  {
+"startLine":  39,
+"startColumn":  24,
+"endLine":  39,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S4023",
+"message":  "Remove this interface or add members to it.",
+"location":  {
+"uri":  "akka.net\src\core\Akka\Actor\ChildrenContainer\Internal\ChildStats.cs",
+"region":  {
+"startLine":  13,
+"startColumn":  22,
+"endLine":  13,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S4023",
+"message":  "Remove this interface or add members to it.",
+"location":  {
+"uri":  "akka.net\src\core\Akka\Actor\ChildrenContainer\Internal\SuspendReason.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  26,
+"endLine":  21,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S4023",
+"message":  "Remove this interface or add members to it.",
+"location":  {
+"uri":  "akka.net\src\core\Akka\Actor\Extensions.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  22,
+"endLine":  15,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S4023",
+"message":  "Remove this interface or add members to it.",
+"location":  {
+"uri":  "akka.net\src\core\Akka\Actor\FSM.cs",
+"region":  {
+"startLine":  978,
+"startColumn":  22,
+"endLine":  978,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S4023",
+"message":  "Remove this interface or add members to it.",
+"location":  {
+"uri":  "akka.net\src\core\Akka\Actor\IAutoReceivedMessage.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  22,
+"endLine":  12,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S4023",
+"message":  "Remove this interface or add members to it.",
+"location":  {
+"uri":  "akka.net\src\core\Akka\Actor\INoSerializationVerificationNeeded.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  22,
+"endLine":  15,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S4023",
+"message":  "Remove this interface or add members to it.",
+"location":  {
+"uri":  "akka.net\src\core\Akka\Actor\INoSerializationVerificationNeeded.cs",
+"region":  {
+"startLine":  24,
+"startColumn":  22,
+"endLine":  24,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S4023",
+"message":  "Remove this interface or add members to it.",
+"location":  {
+"uri":  "akka.net\src\core\Akka\Actor\Scheduler\IAdvancedScheduler.cs",
+"region":  {
+"startLine":  10,
+"startColumn":  22,
+"endLine":  10,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S4023",
+"message":  "Remove this interface or add members to it.",
+"location":  {
+"uri":  "akka.net\src\core\Akka\Actor\Scheduler\IDateTimeNowTimeProvider.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  22,
+"endLine":  16,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S4023",
+"message":  "Remove this interface or add members to it.",
+"location":  {
+"uri":  "akka.net\src\core\Akka\Actor\Stash\IWithBoundedStash.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  22,
+"endLine":  21,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S4023",
+"message":  "Remove this interface or add members to it.",
+"location":  {
+"uri":  "akka.net\src\core\Akka\Actor\Stash\IWithUnboundedStash.cs",
+"region":  {
+"startLine":  19,
+"startColumn":  22,
+"endLine":  19,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S4023",
+"message":  "Remove this interface or add members to it.",
+"location":  {
+"uri":  "akka.net\src\core\Akka\Dispatch\IRequiresMessageQueue.cs",
+"region":  {
+"startLine":  10,
+"startColumn":  22,
+"endLine":  10,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S4023",
+"message":  "Remove this interface or add members to it.",
+"location":  {
+"uri":  "akka.net\src\core\Akka\Dispatch\ISemantics.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  22,
+"endLine":  16,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S4023",
+"message":  "Remove this interface or add members to it.",
+"location":  {
+"uri":  "akka.net\src\core\Akka\Dispatch\ISemantics.cs",
+"region":  {
+"startLine":  23,
+"startColumn":  22,
+"endLine":  23,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S4023",
+"message":  "Remove this interface or add members to it.",
+"location":  {
+"uri":  "akka.net\src\core\Akka\Dispatch\ISemantics.cs",
+"region":  {
+"startLine":  30,
+"startColumn":  22,
+"endLine":  30,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S4023",
+"message":  "Remove this interface or add members to it.",
+"location":  {
+"uri":  "akka.net\src\core\Akka\Dispatch\ISemantics.cs",
+"region":  {
+"startLine":  67,
+"startColumn":  22,
+"endLine":  67,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S4023",
+"message":  "Remove this interface or add members to it.",
+"location":  {
+"uri":  "akka.net\src\core\Akka\Dispatch\ISemantics.cs",
+"region":  {
+"startLine":  75,
+"startColumn":  22,
+"endLine":  75,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S4023",
+"message":  "Remove this interface or add members to it.",
+"location":  {
+"uri":  "akka.net\src\core\Akka\Dispatch\SysMsg\ISystemMessage.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  22,
+"endLine":  22,
+"endColumn":  36
+}
+}
+}
+]
+}

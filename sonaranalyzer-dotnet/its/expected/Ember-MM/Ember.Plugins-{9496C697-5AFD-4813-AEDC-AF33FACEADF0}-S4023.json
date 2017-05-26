@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S4023",
+"message":  "Remove this interface or add members to it.",
+"location":  {
+"uri":  "Ember-MM\Ember.Plugins\Scraper\ITVImageScraper.cs",
+"region":  {
+"startLine":  6,
+"startColumn":  22,
+"endLine":  6,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S4023",
+"message":  "Remove this interface or add members to it.",
+"location":  {
+"uri":  "Ember-MM\Ember.Plugins\Scraper\ITVInfoScraper.cs",
+"region":  {
+"startLine":  6,
+"startColumn":  22,
+"endLine":  6,
+"endColumn":  36
+}
+}
+}
+]
+}

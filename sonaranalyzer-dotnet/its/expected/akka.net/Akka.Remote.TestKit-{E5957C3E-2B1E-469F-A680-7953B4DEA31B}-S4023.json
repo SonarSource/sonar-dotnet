@@ -1,0 +1,82 @@
+{
+"issues":  [
+{
+"id":  "S4023",
+"message":  "Remove this interface or add members to it.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Remote.TestKit\DataTypes.cs",
+"region":  {
+"startLine":  176,
+"startColumn":  15,
+"endLine":  176,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S4023",
+"message":  "Remove this interface or add members to it.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Remote.TestKit\DataTypes.cs",
+"region":  {
+"startLine":  177,
+"startColumn":  15,
+"endLine":  177,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S4023",
+"message":  "Remove this interface or add members to it.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Remote.TestKit\DataTypes.cs",
+"region":  {
+"startLine":  178,
+"startColumn":  15,
+"endLine":  178,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S4023",
+"message":  "Remove this interface or add members to it.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Remote.TestKit\DataTypes.cs",
+"region":  {
+"startLine":  179,
+"startColumn":  15,
+"endLine":  179,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S4023",
+"message":  "Remove this interface or add members to it.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Remote.TestKit\DataTypes.cs",
+"region":  {
+"startLine":  180,
+"startColumn":  15,
+"endLine":  180,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S4023",
+"message":  "Remove this interface or add members to it.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Remote.TestKit\DataTypes.cs",
+"region":  {
+"startLine":  181,
+"startColumn":  15,
+"endLine":  181,
+"endColumn":  33
+}
+}
+}
+]
+}

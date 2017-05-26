@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4023",
+"message":  "Remove this interface or add members to it.",
+"location":  {
+"uri":  "Nancy\src\Nancy.ViewEngines.Razor\INancyRazorView.cs",
+"region":  {
+"startLine":  3,
+"startColumn":  22,
+"endLine":  3,
+"endColumn":  37
+}
+}
+}
+]
+}

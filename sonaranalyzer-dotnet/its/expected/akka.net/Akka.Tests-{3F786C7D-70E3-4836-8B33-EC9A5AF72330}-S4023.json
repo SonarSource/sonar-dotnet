@@ -1,0 +1,69 @@
+{
+"issues":  [
+{
+"id":  "S4023",
+"message":  "Remove this interface or add members to it.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\Event\EventStreamSpec.cs",
+"region":  {
+"startLine":  49,
+"startColumn":  27,
+"endLine":  49,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S4023",
+"message":  "Remove this interface or add members to it.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\Event\EventStreamSpec.cs",
+"region":  {
+"startLine":  51,
+"startColumn":  27,
+"endLine":  51,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S4023",
+"message":  "Remove this interface or add members to it.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\Event\EventStreamSpec.cs",
+"region":  {
+"startLine":  53,
+"startColumn":  27,
+"endLine":  53,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S4023",
+"message":  "Remove this interface or add members to it.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\Event\EventStreamSpec.cs",
+"region":  {
+"startLine":  55,
+"startColumn":  27,
+"endLine":  55,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S4023",
+"message":  "Remove this interface or add members to it.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\Event\EventStreamSpec.cs",
+"region":  {
+"startLine":  57,
+"startColumn":  27,
+"endLine":  57,
+"endColumn":  30
+}
+}
+}
+]
+}

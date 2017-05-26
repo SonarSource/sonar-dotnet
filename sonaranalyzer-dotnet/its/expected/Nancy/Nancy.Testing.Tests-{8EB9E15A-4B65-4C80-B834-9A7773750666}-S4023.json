@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4023",
+"message":  "Remove this interface or add members to it.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing.Tests\ConfigurableBootstrapperDependenciesTests.cs",
+"region":  {
+"startLine":  96,
+"startColumn":  19,
+"endLine":  96,
+"endColumn":  30
+}
+}
+}
+]
+}
