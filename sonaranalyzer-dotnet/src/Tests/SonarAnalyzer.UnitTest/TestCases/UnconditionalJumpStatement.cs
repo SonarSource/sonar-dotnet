@@ -8,7 +8,8 @@ namespace Tests.Diagnostics
         {
             for (int i = 0; i < length; i++)
             {
-                break; // Noncompliant
+                break; // Noncompliant {{Remove this 'break' statement or make it conditional.}}
+//              ^^^^^^
             }
 
             for (int i = 0; i < length; i++)
@@ -142,16 +143,17 @@ namespace Tests.Diagnostics
 
                 while (true)
                 {
-                    return; // Noncompliant
+                    return; // Noncompliant {{Remove this 'return' statement or make it conditional.}}
+//                  ^^^^^^^
                 }
 
                 while (true)
                 {
-                    throw new Exception(); // Noncompliant
+                    throw new Exception(); // Noncompliant {{Remove this 'throw' statement or make it conditional.}}
+//                  ^^^^^^^^^^^^^^^^^^^^^^
                 }
             }
         }
-
 
         public void Test4(string[] strings, int padding)
         {
@@ -207,5 +209,153 @@ namespace Tests.Diagnostics
                 return 10;
             }
         };
+
+        public void Test7()
+        {
+            while (true)
+            {
+                if (foo())
+                {
+                    continue;
+                }
+
+                break;
+                GetHashCode();
+            }
+        }
+
+        public void Test8()
+        {
+            while (true)
+            {
+                if (true)
+                {
+                    break;
+                }
+
+                continue; // Noncompliant
+            }
+        }
+
+        public void Test9()
+        {
+            while (true)
+            {
+                if (true)
+                {
+                    continue;
+                }
+
+                return; // Compliant
+            }
+        }
+
+        public void Test10()
+        {
+            while (true)
+            {
+                if (true)
+                {
+                    throw new Exception();
+                }
+
+                continue; // Noncompliant
+            }
+        }
+
+        public void Test11()
+        {
+            while (true)
+            {
+                if (true)
+                {
+                    return;
+                }
+
+                break; // Noncompliant
+            }
+        }
+        public void Test12()
+        {
+            while (true)
+            {
+                foo();
+                bar();
+                continue; // Noncompliant
+            }
+        }
+        public void Test13()
+        {
+            while (true)
+            {
+                foo();
+                continue; // Noncompliant
+                bar();
+            }
+        }
+
+        public void Test14()
+        {
+            while (true)
+            {
+                foo();
+                continue; // Noncompliant
+                bar();
+            }
+        }
+
+        public void Test15()
+        {
+            while (true)
+            {
+                UtilFunc(lambda =>
+                {
+                    return; // Compliant
+                });
+
+                continue; // Noncompliant
+            }
+        }
+
+        public void Test16()
+        {
+            while (true)
+            {
+                if (true)
+                {
+                    ;
+                }
+                else
+                {
+                    continue;
+                }
+
+                break; // Compliant
+            }
+        }
+
+        public void Test17()
+        {
+            while (true)
+            {
+                while (true)
+                {
+                    if (true)
+                    {
+                        ;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+
+                break; // Noncompliant
+            }
+        }
+
+        void UtilFunc(Action a)
+        {
+        }
     }
 }
