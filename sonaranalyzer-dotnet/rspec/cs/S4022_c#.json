@@ -1,0 +1,13 @@
+{
+  "title": "Enums storage should be Int32",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "2min"
+  },
+  "tags": [
+    
+  ],
+  "defaultSeverity": "Minor"
+}

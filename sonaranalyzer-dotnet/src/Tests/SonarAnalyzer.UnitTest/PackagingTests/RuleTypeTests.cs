@@ -276,6 +276,7 @@ namespace SonarAnalyzer.UnitTest.PackagingTests
             ["4005"] = "CODE_SMELL",
             ["4016"] = "CODE_SMELL",
             ["4017"] = "CODE_SMELL",
+            ["4022"] = "CODE_SMELL",
             ["4023"] = "CODE_SMELL",
         }.ToImmutableDictionary();
         #endregion
