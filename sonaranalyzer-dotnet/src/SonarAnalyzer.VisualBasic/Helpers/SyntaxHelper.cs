@@ -20,6 +20,9 @@
 
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using System.Linq;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.VisualBasic;
+using System.Collections.Generic;
 
 namespace SonarAnalyzer.Helpers.VisualBasic
 {
@@ -66,5 +69,10 @@ namespace SonarAnalyzer.Helpers.VisualBasic
         }
 
         #endregion
+
+        public static bool IsAnyKind(this SyntaxNode syntaxNode, ICollection<SyntaxKind> collection)
+        {
+            return syntaxNode != null && collection.Contains((SyntaxKind)syntaxNode.RawKind);
+        }
     }
 }

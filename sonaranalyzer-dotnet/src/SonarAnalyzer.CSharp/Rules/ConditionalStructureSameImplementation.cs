@@ -18,8 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -28,7 +28,6 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Helpers.CSharp;
-using System.Collections.Immutable;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -40,6 +39,13 @@ namespace SonarAnalyzer.Rules.CSharp
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+
+        private static readonly ISet<SyntaxKind> ignoredStatementsInSwitch = new HashSet<SyntaxKind>
+        {
+            SyntaxKind.BreakStatement,
+            SyntaxKind.ReturnStatement,
+            SyntaxKind.ThrowStatement,
+        };
 
         protected sealed override void Initialize(SonarAnalysisContext context)
         {
@@ -67,7 +73,13 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
-                    var switchSection = (SwitchSectionSyntax) c.Node;
+                    var switchSection = (SwitchSectionSyntax)c.Node;
+
+                    if (GetStatements(switchSection).Count(IsApprovedStatement) < 2)
+                    {
+                        return;
+                    }
+
                     var precedingSection = switchSection
                         .GetPrecedingSections()
                         .FirstOrDefault(
@@ -75,32 +87,34 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     if (precedingSection != null)
                     {
-                        ReportSection(c, switchSection, precedingSection);
+                        ReportSyntaxNode(c, switchSection, precedingSection, "case");
                     }
                 },
                 SyntaxKind.SwitchSection);
         }
 
-        private static void CheckStatement(SyntaxNodeAnalysisContext context, StatementSyntax statementToCheck,
+        private static IEnumerable<StatementSyntax> GetStatements(SwitchSectionSyntax switchSection)
+        {
+            return Enumerable.Empty<StatementSyntax>()
+                .Union(switchSection.Statements.OfType<BlockSyntax>().SelectMany(block => block.Statements))
+                .Union(switchSection.Statements.Where(s => !s.IsKind(SyntaxKind.Block)));
+        }
+
+        private static void CheckStatement(SyntaxNodeAnalysisContext context, StatementSyntax statement,
             IEnumerable<StatementSyntax> precedingStatements)
         {
+            if (statement.ChildNodes().Count() < 2)
+            {
+                return;
+            }
+
             var precedingStatement = precedingStatements
-                .FirstOrDefault(preceding => EquivalenceChecker.AreEquivalent(statementToCheck, preceding));
+                .FirstOrDefault(preceding => EquivalenceChecker.AreEquivalent(statement, preceding));
 
             if (precedingStatement != null)
             {
-                ReportStatement(context, statementToCheck, precedingStatement);
+                ReportSyntaxNode(context, statement, precedingStatement, "branch");
             }
-        }
-
-        private static void ReportSection(SyntaxNodeAnalysisContext context, SwitchSectionSyntax switchSection, SwitchSectionSyntax precedingSection)
-        {
-            ReportSyntaxNode(context, switchSection, precedingSection, "case");
-        }
-
-        private static void ReportStatement(SyntaxNodeAnalysisContext context, StatementSyntax statement, StatementSyntax precedingStatement)
-        {
-            ReportSyntaxNode(context, statement, precedingStatement, "branch");
         }
 
         private static void ReportSyntaxNode(SyntaxNodeAnalysisContext context, SyntaxNode node, SyntaxNode precedingNode, string errorMessageDiscriminator)
@@ -110,6 +124,11 @@ namespace SonarAnalyzer.Rules.CSharp
                 node.GetLocation(),
                 additionalLocations: new[] { precedingNode.GetLocation() },
                 messageArgs: new object[] { precedingNode.GetLineNumberToReport(), errorMessageDiscriminator }));
+        }
+
+        private static bool IsApprovedStatement(StatementSyntax statement)
+        {
+            return !statement.IsAnyKind(ignoredStatementsInSwitch);
         }
     }
 }

@@ -40,6 +40,12 @@ namespace SonarAnalyzer.Rules.VisualBasic
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
+        private static readonly ISet<SyntaxKind> ignoredStatementsInSwitch = new HashSet<SyntaxKind>
+        {
+            SyntaxKind.ReturnStatement,
+            SyntaxKind.ThrowStatement,
+        };
+
         protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
@@ -89,11 +95,17 @@ namespace SonarAnalyzer.Rules.VisualBasic
         private static void CheckStatementsAt(int currentIndex, List<SyntaxList<StatementSyntax>> statements,
             SyntaxNodeAnalysisContext context, string constructType)
         {
+            var currentBlockStatements = statements[currentIndex];
+            if (currentBlockStatements.Count(IsApprovedStatement) < 2)
+            {
+                return;
+            }
+
             for (int j = 0; j < currentIndex; j++)
             {
-                if (EquivalenceChecker.AreEquivalent(statements[currentIndex], statements[j]))
+                if (EquivalenceChecker.AreEquivalent(currentBlockStatements, statements[j]))
                 {
-                    ReportIssue(statements[currentIndex], statements[j], context, constructType);
+                    ReportIssue(currentBlockStatements, statements[j], context, constructType);
                     return;
                 }
             }
@@ -115,6 +127,11 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
             context.ReportDiagnostic(Diagnostic.Create(rule,
                 location, locationProvider.First().GetLineNumberToReport(), constructType));
+        }
+
+        private static bool IsApprovedStatement(StatementSyntax statement)
+        {
+            return !statement.IsAnyKind(ignoredStatementsInSwitch);
         }
     }
 }
