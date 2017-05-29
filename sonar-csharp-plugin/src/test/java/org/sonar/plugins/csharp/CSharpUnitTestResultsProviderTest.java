@@ -21,7 +21,9 @@ package org.sonar.plugins.csharp;
 
 import com.google.common.collect.ImmutableSet;
 import org.junit.Test;
+import org.sonar.api.batch.bootstrap.ProjectDefinition;
 import org.sonar.api.config.PropertyDefinition;
+import org.sonar.api.config.Settings;
 import org.sonar.plugins.csharp.CSharpUnitTestResultsProvider.CSharpUnitTestResultsAggregator;
 import org.sonar.plugins.csharp.CSharpUnitTestResultsProvider.CSharpUnitTestResultsImportSensor;
 
@@ -40,6 +42,11 @@ public class CSharpUnitTestResultsProviderTest {
     assertThat(propertyKeys(CSharpUnitTestResultsProvider.extensions())).containsOnly(
       "sonar.cs.vstest.reportsPaths",
       "sonar.cs.nunit.reportsPaths");
+  }
+
+  @Test
+  public void createInstance_CSharpUnitTestResultsImportSensor() {
+    new CSharpUnitTestResultsImportSensor(new CSharpUnitTestResultsAggregator(new Settings()), ProjectDefinition.create());
   }
 
   private static Set<Object> nonProperties(List extensions) {
