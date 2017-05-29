@@ -16,8 +16,8 @@ Namespace Tests.TestCases
                 case 2
                     doSomethingDifferent()
                 case 3
-                    doSomething(prop) ' Noncompliant {{Either merge this case with the identical one on line 15 or change one of the implementations.}}
-                case 4
+                    doSomething(prop) ' Compliant, single line
+                Case 4
                         doSomething2()
                         doSomething2()
 
@@ -25,11 +25,11 @@ Namespace Tests.TestCases
                 case 5
 
                     'some comment here and there
-                        doSomething2() ' Noncompliant
-                        doSomething2()
+                    doSomething2() ' Noncompliant {{Either merge this case with the identical one on line 21 or change one of the implementations.}}
+                    doSomething2()
 
                 Case Else
-                    doSomething(prop) ' Noncompliant
+                    doSomething(prop) ' Compliant, single line
 
             End Select
         End Sub

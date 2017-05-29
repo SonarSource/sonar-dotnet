@@ -15,14 +15,28 @@ namespace Tests.TestCases
         public void DoSomething1() { }
         public void DoSomething2() { }
 
-        public void Test()
+        public void Test_SingleLineBlocks()
+        {
+            if (someCondition1)
+            {
+                DoSomething1(); // Compliant, ignore single line blocks
+            }
+            else
+            {
+                DoSomething1();
+            }
+        }
+
+        public void Test_MultilineBlocks()
         {
             if (someCondition1)
             { // Secondary
                 DoSomething1();
+                DoSomething1();
             }
             else
             { // Noncompliant
+                DoSomething1();
                 DoSomething1();
             }
 
@@ -30,9 +44,11 @@ namespace Tests.TestCases
             { // Secondary
                 // Secondary@-1
                 DoSomething1();
+                DoSomething1();
             }
             else if (someCondition2)
             { // Noncompliant
+                DoSomething1();
                 DoSomething1();
             }
             else if (someCondition3)
@@ -42,19 +58,23 @@ namespace Tests.TestCases
             else
             { // Noncompliant
                 DoSomething1();
+                DoSomething1();
             }
 
             if (someCondition1)
             { // Secondary
                 // Secondary@-1
                 DoSomething1();
+                DoSomething1();
             }
             else if (someCondition2)
             { // Noncompliant
                 DoSomething1();
+                DoSomething1();
             }
             else
             {// Noncompliant
+                DoSomething1();
                 DoSomething1();
             }
         }
