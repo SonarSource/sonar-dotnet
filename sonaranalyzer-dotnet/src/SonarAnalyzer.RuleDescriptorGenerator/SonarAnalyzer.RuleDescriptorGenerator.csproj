@@ -46,6 +46,10 @@
       <HintPath>..\..\packages\Microsoft.CodeAnalysis.VisualBasic.1.0.0\lib\net45\Microsoft.CodeAnalysis.VisualBasic.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.CodeAnalysis.Workspaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.CodeAnalysis.Workspaces.Common.1.0.0\lib\net45\Microsoft.CodeAnalysis.Workspaces.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Collections.Immutable, Version=1.1.36.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\..\packages\System.Collections.Immutable.1.1.36\lib\portable-net45+win8+wp8+wpa81\System.Collections.Immutable.dll</HintPath>
@@ -104,10 +108,6 @@
     <ProjectReference Include="..\SonarAnalyzer.Common\SonarAnalyzer.Common.csproj">
       <Project>{d1ae804f-ae78-4883-b3d6-9e3c4026def6}</Project>
       <Name>SonarAnalyzer.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SonarAnalyzer.Scanner\SonarAnalyzer.Scanner.csproj">
-      <Project>{79f0b359-8275-4f3b-b919-82c493b74665}</Project>
-      <Name>SonarAnalyzer.Scanner</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

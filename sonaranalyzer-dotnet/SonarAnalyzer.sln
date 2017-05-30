@@ -22,13 +22,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{B7233F78
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SonarAnalyzer.UnitTest", "src\Tests\SonarAnalyzer.UnitTest\SonarAnalyzer.UnitTest.csproj", "{4AC7D054-B645-46D7-9671-D666BCE0C745}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SonarAnalyzer.Platform.Integration.UnitTest", "src\Tests\SonarAnalyzer.Platform.Integration.UnitTest\SonarAnalyzer.Platform.Integration.UnitTest.csproj", "{980FF643-2605-46F3-8C63-2F76290F84A8}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SonarQube Integration", "SonarQube Integration", "{F51A8C2A-A0F5-4282-956F-549D05860396}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SonarAnalyzer.RuleDescriptorGenerator", "src\SonarAnalyzer.RuleDescriptorGenerator\SonarAnalyzer.RuleDescriptorGenerator.csproj", "{E4D5FF22-C1A4-4CAD-B068-E47817F25848}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SonarAnalyzer.Scanner", "src\SonarAnalyzer.Scanner\SonarAnalyzer.Scanner.csproj", "{79F0B359-8275-4F3B-B919-82C493B74665}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SonarAnalyzer.RuleDocGenerator.Web", "src\SonarAnalyzer.RuleDocGenerator.Web\SonarAnalyzer.RuleDocGenerator.Web.csproj", "{98EF48F7-28D7-44CA-8C7F-6042EA4898E1}"
 EndProject
@@ -60,18 +56,10 @@ Global
 		{4AC7D054-B645-46D7-9671-D666BCE0C745}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4AC7D054-B645-46D7-9671-D666BCE0C745}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4AC7D054-B645-46D7-9671-D666BCE0C745}.Release|Any CPU.Build.0 = Release|Any CPU
-		{980FF643-2605-46F3-8C63-2F76290F84A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{980FF643-2605-46F3-8C63-2F76290F84A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{980FF643-2605-46F3-8C63-2F76290F84A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{980FF643-2605-46F3-8C63-2F76290F84A8}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E4D5FF22-C1A4-4CAD-B068-E47817F25848}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E4D5FF22-C1A4-4CAD-B068-E47817F25848}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E4D5FF22-C1A4-4CAD-B068-E47817F25848}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E4D5FF22-C1A4-4CAD-B068-E47817F25848}.Release|Any CPU.Build.0 = Release|Any CPU
-		{79F0B359-8275-4F3B-B919-82C493B74665}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{79F0B359-8275-4F3B-B919-82C493B74665}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{79F0B359-8275-4F3B-B919-82C493B74665}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{79F0B359-8275-4F3B-B919-82C493B74665}.Release|Any CPU.Build.0 = Release|Any CPU
 		{98EF48F7-28D7-44CA-8C7F-6042EA4898E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{98EF48F7-28D7-44CA-8C7F-6042EA4898E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{98EF48F7-28D7-44CA-8C7F-6042EA4898E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -90,9 +78,7 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{4AC7D054-B645-46D7-9671-D666BCE0C745} = {B7233F78-E142-4882-B084-7C83BE472109}
-		{980FF643-2605-46F3-8C63-2F76290F84A8} = {CCEE2C5C-96D9-4427-B980-71DC0A49E23F}
 		{E4D5FF22-C1A4-4CAD-B068-E47817F25848} = {F51A8C2A-A0F5-4282-956F-549D05860396}
-		{79F0B359-8275-4F3B-B919-82C493B74665} = {F51A8C2A-A0F5-4282-956F-549D05860396}
 		{CCEE2C5C-96D9-4427-B980-71DC0A49E23F} = {F51A8C2A-A0F5-4282-956F-549D05860396}
 	EndGlobalSection
 EndGlobal
