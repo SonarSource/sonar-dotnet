@@ -20,15 +20,13 @@
 package org.sonar.plugins.csharp;
 
 import com.google.common.collect.ImmutableList;
+import java.util.List;
 import org.junit.Test;
 import org.sonar.api.Plugin;
 import org.sonar.api.config.PropertyDefinition;
 import org.sonar.api.utils.Version;
 import org.sonarsource.dotnet.shared.plugins.EncodingPerFile;
-import org.sonarsource.dotnet.shared.plugins.SonarAnalyzerScannerExtractor;
 import org.sonarsource.dotnet.shared.plugins.WrongEncodingFileFilter;
-
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
@@ -46,7 +44,6 @@ public class CSharpPluginTest {
       CSharp.class,
       CSharpSonarRulesDefinition.class,
       CSharpSonarWayProfile.class,
-      SonarAnalyzerScannerExtractor.class,
       CSharpSensor.class,
       CSharpConfiguration.class,
       WrongEncodingFileFilter.class,

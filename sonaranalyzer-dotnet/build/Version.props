@@ -2,8 +2,8 @@
   <PropertyGroup>
     <MainVersion>5.11.0</MainVersion>
     <BuildNumber>0</BuildNumber>
-    <Sha1>not-set</Sha1>
-    <BranchName>not-set</BranchName>
+    <Sha1>c4a5826afe906f9ead8e3a7759e647c2ff7fa496</Sha1>
+    <BranchName>master</BranchName>
     <FullVersion>$(MainVersion).$(BuildNumber)</FullVersion>
     <AssemblyVersion>$(MainVersion)</AssemblyVersion>
     <AssemblyFileVersion>$(FullVersion)</AssemblyFileVersion>
