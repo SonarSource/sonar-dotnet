@@ -56,12 +56,15 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
             SymbolicValue.This,
             SymbolicValue.Base);
 
+        public bool FailedAssertState { get; }
+
         internal ProgramState()
             : this(ImmutableDictionary<ISymbol, SymbolicValue>.Empty,
                   InitialConstraints,
                   ImmutableDictionary<ProgramPoint, int>.Empty,
                   ImmutableStack<SymbolicValue>.Empty,
-                  ImmutableHashSet<BinaryRelationship>.Empty)
+                  ImmutableHashSet<BinaryRelationship>.Empty,
+                  false)
         {
         }
 
@@ -85,7 +88,8 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
                 Constraints,
                 ProgramPointVisitCounts,
                 ExpressionStack,
-                relationships);
+                relationships,
+                FailedAssertState);
         }
 
         private ImmutableHashSet<BinaryRelationship> GetAllRelationshipsWith(BinaryRelationship relationship)
@@ -216,13 +220,15 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
             ImmutableDictionary<SymbolicValue, SymbolicValueConstraint> constraints,
             ImmutableDictionary<ProgramPoint, int> programPointVisitCounts,
             ImmutableStack<SymbolicValue> expressionStack,
-            ImmutableHashSet<BinaryRelationship> relationships)
+            ImmutableHashSet<BinaryRelationship> relationships,
+            bool failedAssertState)
         {
             Values = values;
             Constraints = constraints;
             ProgramPointVisitCounts = programPointVisitCounts;
             ExpressionStack = expressionStack;
             Relationships = relationships;
+            FailedAssertState = failedAssertState;
         }
 
         public ProgramState PushValue(SymbolicValue symbolicValue)
@@ -232,7 +238,8 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
                 Constraints,
                 ProgramPointVisitCounts,
                 ExpressionStack.Push(symbolicValue),
-                Relationships);
+                Relationships,
+                FailedAssertState);
         }
 
         public ProgramState PushValues(IEnumerable<SymbolicValue> values)
@@ -247,7 +254,8 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
                 Constraints,
                 ProgramPointVisitCounts,
                 ImmutableStack.Create(ExpressionStack.Concat(values).ToArray()),
-                Relationships);
+                Relationships,
+                FailedAssertState);
         }
 
         public ProgramState PopValue()
@@ -263,7 +271,8 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
                 Constraints,
                 ProgramPointVisitCounts,
                 ExpressionStack.Pop(out poppedValue),
-                Relationships);
+                Relationships,
+                FailedAssertState);
         }
 
         public ProgramState PopValues(int numberOfValuesToPop)
@@ -281,7 +290,8 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
                 Constraints,
                 ProgramPointVisitCounts,
                 newStack,
-                Relationships);
+                Relationships,
+                FailedAssertState);
         }
 
         public SymbolicValue PeekValue()
@@ -303,7 +313,8 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
                 Constraints,
                 ProgramPointVisitCounts,
                 ExpressionStack,
-                Relationships);
+                Relationships,
+                FailedAssertState);
         }
 
         public SymbolicValue GetSymbolValue(ISymbol symbol)
@@ -324,7 +335,19 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
                 Constraints,
                 ProgramPointVisitCounts.SetItem(visitedProgramPoint, visitCount + 1),
                 ExpressionStack,
-                Relationships);
+                Relationships,
+                FailedAssertState);
+        }
+
+        internal ProgramState SetFailedAssert()
+        {
+            return new ProgramState(
+                Values,
+                Constraints,
+                ProgramPointVisitCounts,
+                ExpressionStack,
+                Relationships,
+                failedAssertState: true);
         }
 
         internal int GetVisitedCount(ProgramPoint programPoint)
@@ -363,7 +386,13 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
                     usedSymbolicValues.Contains(r.RightOperand))
                 .ToImmutableHashSet();
 
-            return new ProgramState(cleanedValues, cleanedConstraints, ProgramPointVisitCounts, ExpressionStack, cleanedRelationships);
+            return new ProgramState(
+                cleanedValues, 
+                cleanedConstraints, 
+                ProgramPointVisitCounts, 
+                ExpressionStack, 
+                cleanedRelationships,
+                FailedAssertState);
         }
 
         public override bool Equals(object obj)

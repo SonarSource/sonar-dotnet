@@ -884,16 +884,17 @@ namespace Tests.Diagnostics
 
             Trace.Assert(condition); // Compliant
 
-            if (o1 != null)
+            Debug.Assert(o1 != null);
+            if (o1 != null) // Compliant
             {
-                Debug.Assert(o1 == null, "Some message", "More details", 1, 2, 3); // Compliant
+                Debug.Assert(o1 == null, "Some message", "More details", 1, 2, 3); // Noncompliant
             }
         }
 
         public void Assert(object o1)
         {
-            System.Diagnostics.Debug.Assert(o1 != null);
-            System.Diagnostics.Debug.Assert(o1 == null);
+            Debug.Assert(o1 != null);
+            Debug.Assert(o1 == null); // Compliant
         }
 
         void ComparisonTransitivity(int a, int b, int c)

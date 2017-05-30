@@ -72,9 +72,39 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
                 return HandleNameofExpression();
             }
 
+            if (methodSymbol.IsDebugAssert() ||
+                methodSymbol.IsTraceAssert())
+            {
+                return HandleAssertMethod();
+            }
+
             return programState
                 .PopValues((invocation.ArgumentList?.Arguments.Count ?? 0) + 1)
                 .PushValue(new SymbolicValue());
+        }
+
+        private ProgramState HandleAssertMethod()
+        {
+            IsAssertCall = true;
+
+            var argumentCount = invocation.ArgumentList?.Arguments.Count ?? 0;
+            if (argumentCount == 0)
+            {
+                return programState.PopValue()
+                    .PushValue(new SymbolicValue());
+            }
+
+            SymbolicValue arg1;
+
+            var newProgramState = programState
+                .PopValues(argumentCount - 1)
+                .PopValue(out arg1)
+                .PopValue()
+                .PushValue(new SymbolicValue());
+
+            AssertedValue = arg1;
+
+            return newProgramState;
         }
 
         private ProgramState HandleNameofExpression()
@@ -162,6 +192,10 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
         private static readonly ImmutableHashSet<string> IsNullMethodNames = ImmutableHashSet.Create(
             nameof(string.IsNullOrEmpty),
             nameof(string.IsNullOrWhiteSpace));
+
+        public SymbolicValue AssertedValue { get; private set; } = null;
+
+        public bool IsAssertCall { get; private set; } = false;
 
         private static bool IsStringNullCheckMethod(IMethodSymbol methodSymbol)
         {
