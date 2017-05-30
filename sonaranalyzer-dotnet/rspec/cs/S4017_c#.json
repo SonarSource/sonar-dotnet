@@ -1,0 +1,13 @@
+{
+  "title": "Method signatures should not contain nested generic types",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "30min"
+  },
+  "tags": [
+    "confusing"
+  ],
+  "defaultSeverity": "Major"
+}
