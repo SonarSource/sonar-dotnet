@@ -20,40 +20,46 @@
 package com.sonar.it.csharp;
 
 import com.sonar.orchestrator.Orchestrator;
-import com.sonar.orchestrator.build.SonarRunner;
-import org.junit.BeforeClass;
+import java.nio.file.Path;
+import org.junit.Before;
 import org.junit.ClassRule;
+import org.junit.Rule;
 import org.junit.Test;
-
-import java.io.File;
+import org.junit.rules.TemporaryFolder;
 
 import static com.sonar.it.csharp.Tests.getMeasureAsInt;
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class DoNotAnalyzeTestFilesTest {
+
+  @Rule
+  public TemporaryFolder temp = new TemporaryFolder();
 
   @ClassRule
   public static final Orchestrator orchestrator = Tests.ORCHESTRATOR;
 
-  @BeforeClass
-  public static void init() throws Exception {
+  @Before
+  public void init() throws Exception {
     orchestrator.resetData();
   }
 
   @Test
-  public void should_not_increment_test() {
-    SonarRunner build = Tests.createSonarScannerBuild()
-      .setProjectDir(new File("projects/DoNotAnalyzeTestFilesTest/"))
+  public void should_not_increment_test() throws Exception {
+    Path projectDir = Tests.projectDir(temp, "DoNotAnalyzeTestFilesTest");
+    orchestrator.executeBuild(Tests.newScanner(projectDir)
+      .addArgument("begin")
       .setProjectKey("DoNotAnalyzeTestFilesTest")
       .setProjectName("DoNotAnalyzeTestFilesTest")
       .setProjectVersion("1.0")
-      .setSourceDirs("main")
-      .setTestDirs("test")
-      .setProperty("sonar.sourceEncoding", "UTF-8")
-      .setProperty("sonar.cs.file.suffixes", ".cs")
-      .setProfile("no_rule");
-    orchestrator.executeBuild(build);
+      .setProfile("no_rule")
+      .setProperty("sonar.cs.vscoveragexml.reportsPaths", "reports/visualstudio.coveragexml"));
 
+    Tests.runMSBuild(orchestrator, projectDir, "/t:Rebuild");
+
+    orchestrator.executeBuild(Tests.newScanner(projectDir)
+      .addArgument("end"));
+
+    assertThat(Tests.getComponent("DoNotAnalyzeTestFilesTest:DoNotAnalyzeTestFilesTest:8A3B715A-6E95-4BC1-93C6-A59E9D3F5D5C:UnitTest1.cs")).isNotNull();
     assertThat(getMeasureAsInt("DoNotAnalyzeTestFilesTest", "files")).isNull();
     assertThat(getMeasureAsInt("DoNotAnalyzeTestFilesTest", "lines")).isNull();
     assertThat(getMeasureAsInt("DoNotAnalyzeTestFilesTest", "ncloc")).isNull();

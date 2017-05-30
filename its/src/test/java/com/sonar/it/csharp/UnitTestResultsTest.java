@@ -20,39 +20,34 @@
 package com.sonar.it.csharp;
 
 import com.sonar.orchestrator.Orchestrator;
-import com.sonar.orchestrator.build.SonarRunner;
-import org.junit.BeforeClass;
+import java.io.IOException;
+import java.nio.file.Path;
+import org.junit.Before;
 import org.junit.ClassRule;
+import org.junit.Rule;
 import org.junit.Test;
-
-import java.io.File;
+import org.junit.rules.TemporaryFolder;
 
 import static com.sonar.it.csharp.Tests.getMeasure;
 import static com.sonar.it.csharp.Tests.getMeasureAsInt;
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class UnitTestResultsTest {
 
   @ClassRule
   public static final Orchestrator orchestrator = Tests.ORCHESTRATOR;
 
-  @BeforeClass
-  public static void init() throws Exception {
+  @Rule
+  public TemporaryFolder temp = new TemporaryFolder();
+
+  @Before
+  public void init() throws Exception {
     orchestrator.resetData();
   }
 
   @Test
-  public void should_not_import_unit_test_results_without_report() {
-    SonarRunner build = Tests.createSonarScannerBuild()
-      .setProjectDir(new File("projects/UnitTestResultsTest/"))
-      .setProjectKey("UnitTestResultsTest")
-      .setProjectName("UnitTestResultsTest")
-      .setProjectVersion("1.0")
-      .setSourceDirs(".")
-      .setProperty("sonar.sourceEncoding", "UTF-8")
-      .setProperty("sonar.cs.file.suffixes", ".cs")
-      .setProfile("no_rule");
-    orchestrator.executeBuild(build);
+  public void should_not_import_unit_test_results_without_report() throws Exception {
+    analyzeTestProject();
 
     assertThat(getMeasure("UnitTestResultsTest", "tests")).isNull();
     assertThat(getMeasure("UnitTestResultsTest", "test_errors")).isNull();
@@ -61,18 +56,8 @@ public class UnitTestResultsTest {
   }
 
   @Test
-  public void vstest() {
-    SonarRunner build = Tests.createSonarScannerBuild()
-      .setProjectDir(new File("projects/UnitTestResultsTest/"))
-      .setProjectKey("UnitTestResultsTest")
-      .setProjectName("UnitTestResultsTest")
-      .setProjectVersion("1.0")
-      .setSourceDirs(".")
-      .setProperty("sonar.sourceEncoding", "UTF-8")
-      .setProperty("sonar.cs.file.suffixes", ".cs")
-      .setProperty("sonar.cs.vstest.reportsPaths", "reports/vstest.trx")
-      .setProfile("no_rule");
-    orchestrator.executeBuild(build);
+  public void vstest() throws Exception {
+    analyzeTestProject("sonar.cs.vstest.reportsPaths", "reports/vstest.trx");
 
     assertThat(getMeasureAsInt("UnitTestResultsTest", "tests")).isEqualTo(32);
     assertThat(getMeasureAsInt("UnitTestResultsTest", "test_errors")).isEqualTo(1);
@@ -81,18 +66,8 @@ public class UnitTestResultsTest {
   }
 
   @Test
-  public void nunit() {
-    SonarRunner build = Tests.createSonarScannerBuild()
-      .setProjectDir(new File("projects/UnitTestResultsTest/"))
-      .setProjectKey("UnitTestResultsTest")
-      .setProjectName("UnitTestResultsTest")
-      .setProjectVersion("1.0")
-      .setSourceDirs(".")
-      .setProperty("sonar.sourceEncoding", "UTF-8")
-      .setProperty("sonar.cs.file.suffixes", ".cs")
-      .setProperty("sonar.cs.nunit.reportsPaths", "reports/nunit.xml")
-      .setProfile("no_rule");
-    orchestrator.executeBuild(build);
+  public void nunit() throws Exception {
+    analyzeTestProject("sonar.cs.nunit.reportsPaths", "reports/nunit.xml");
 
     assertThat(getMeasureAsInt("UnitTestResultsTest", "tests")).isEqualTo(196);
     assertThat(getMeasureAsInt("UnitTestResultsTest", "test_errors")).isEqualTo(30);
@@ -101,66 +76,25 @@ public class UnitTestResultsTest {
   }
 
   @Test
-  public void should_support_wildcard_patterns() {
-    SonarRunner build = Tests.createSonarScannerBuild()
-      .setProjectDir(new File("projects/UnitTestResultsTest/"))
-      .setProjectKey("UnitTestResultsTest")
-      .setProjectName("UnitTestResultsTest")
-      .setProjectVersion("1.0")
-      .setSourceDirs("src")
-      .setTestDirs("tests")
-      .setProperty("sonar.sourceEncoding", "UTF-8")
-      .setProperty("sonar.cs.file.suffixes", ".cs")
-      .setProperty("sonar.cs.vstest.reportsPaths", "reports/*.trx")
-      .setProfile("no_rule");
-    orchestrator.executeBuild(build);
+  public void should_support_wildcard_patterns() throws Exception {
+    analyzeTestProject("sonar.cs.vstest.reportsPaths", "reports/*.trx");
 
     assertThat(getMeasureAsInt("UnitTestResultsTest", "tests")).isEqualTo(32);
   }
 
-  @Test
-  public void should_support_nunit_result_on_empty_module() {
-    SonarRunner build = Tests.createSonarScannerBuild()
-        .setProjectDir(new File("projects/EmptyModuleWithTestResults/"))
-        .setProjectKey("EmptyModuleWithTestResults")
-        .setProjectName("EmptyModuleWithTestResults")
-        .setProjectVersion("1.0")
-        .setProperty("mod1.sonar.sources", ".")
-        .setProperty("mod1.sonar.projectBaseDir", "mod1")
-        .setProperty("sonar.modules", "mod1")
-        .setProperty("sonar.sourceEncoding", "UTF-8")
-        .setProperty("sonar.cs.file.suffixes", ".cs")
-        .setProperty("sonar.cs.nunit.reportsPaths", "reports/nunit.xml")
-        //.setProperty("sonar.verbose", "true") // Uncomment this to see the line saying the sensor is being skipped
-        .setProfile("no_rule");
-    orchestrator.executeBuild(build);
+  private void analyzeTestProject(String... keyValues) throws IOException {
+    Path projectDir = Tests.projectDir(temp, "UnitTestResultsTest");
+    orchestrator.executeBuild(Tests.newScanner(projectDir)
+      .addArgument("begin")
+      .setProjectKey("UnitTestResultsTest")
+      .setProjectName("UnitTestResultsTest")
+      .setProjectVersion("1.0")
+      .setProfile("no_rule")
+      .setProperties(keyValues));
 
-    assertThat(getMeasureAsInt("EmptyModuleWithTestResults", "tests")).isEqualTo(196);
-    assertThat(getMeasureAsInt("EmptyModuleWithTestResults", "test_errors")).isEqualTo(30);
-    assertThat(getMeasureAsInt("EmptyModuleWithTestResults", "test_failures")).isEqualTo(20);
-    assertThat(getMeasureAsInt("EmptyModuleWithTestResults", "skipped_tests")).isEqualTo(7);
-  }
+    Tests.runMSBuild(orchestrator, projectDir, "/t:Rebuild");
 
-  @Test
-  public void should_support_vstest_result_on_empty_module() {
-    SonarRunner build = Tests.createSonarScannerBuild()
-        .setProjectDir(new File("projects/EmptyModuleWithTestResults/"))
-        .setProjectKey("EmptyModuleWithTestResults")
-        .setProjectName("EmptyModuleWithTestResults")
-        .setProjectVersion("1.0")
-        .setProperty("mod1.sonar.sources", ".")
-        .setProperty("mod1.sonar.projectBaseDir", "mod1")
-        .setProperty("sonar.modules", "mod1")
-        .setProperty("sonar.sourceEncoding", "UTF-8")
-        .setProperty("sonar.cs.file.suffixes", ".cs")
-        .setProperty("sonar.cs.vstest.reportsPaths", "reports/vstest.trx")
-        //.setProperty("sonar.verbose", "true") // Uncomment this to see the line saying the sensor is being skipped
-        .setProfile("no_rule");
-    orchestrator.executeBuild(build);
-
-    assertThat(getMeasureAsInt("EmptyModuleWithTestResults", "tests")).isEqualTo(32);
-    assertThat(getMeasureAsInt("EmptyModuleWithTestResults", "test_errors")).isEqualTo(1);
-    assertThat(getMeasureAsInt("EmptyModuleWithTestResults", "test_failures")).isEqualTo(10);
-    assertThat(getMeasureAsInt("EmptyModuleWithTestResults", "skipped_tests")).isEqualTo(7);
+    orchestrator.executeBuild(Tests.newScanner(projectDir)
+      .addArgument("end"));
   }
 }

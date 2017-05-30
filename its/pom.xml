@@ -22,6 +22,7 @@
   </organization>
 
   <properties>
+    <scannerMsbuild.version>2.3.2.573</scannerMsbuild.version>
     <surefire.argLine>-server</surefire.argLine>
   </properties>
 
@@ -32,6 +33,12 @@
       <version>3.13</version>
     </dependency>
     <dependency>
+      <groupId>org.sonarsource.scanner.msbuild</groupId>
+      <artifactId>sonar-scanner-msbuild</artifactId>
+      <version>${scannerMsbuild.version}</version>
+      <type>zip</type>
+    </dependency>
+    <dependency>
       <groupId>org.sonarsource.sonarqube</groupId>
       <artifactId>sonar-ws</artifactId>
       <version>5.6</version>
@@ -39,12 +46,13 @@
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>4.11</version>
+      <version>4.12</version>
     </dependency>
     <dependency>
-      <groupId>org.easytesting</groupId>
-      <artifactId>fest-assert</artifactId>
-      <version>1.4</version>
+      <groupId>org.assertj</groupId>
+      <artifactId>assertj-core</artifactId>
+      <version>3.6.1</version>
+      <scope>test</scope>
     </dependency>
   </dependencies>
 
@@ -58,6 +66,9 @@
             <includes>
               <include>com/sonar/it/csharp/Tests.java</include>
             </includes>
+            <systemProperties>
+              <scannerMsbuild.version>${scannerMsbuild.version}</scannerMsbuild.version>
+            </systemProperties>
           </configuration>
         </plugin>
       </plugins>
