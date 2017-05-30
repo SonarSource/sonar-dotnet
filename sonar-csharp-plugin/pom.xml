@@ -184,7 +184,6 @@
           <include>org/sonar/plugins/csharp/*.xml</include>
           <include>static/version.txt</include>
           <include>static/SonarAnalyzer-${project.version}.zip</include>
-          <include>SonarAnalyzer.Scanner.zip</include>
         </includes>
       </resource>
       <resource>
@@ -209,8 +208,8 @@
             <configuration>
               <rules>
                 <requireFilesSize>
-                  <maxsize>12000000</maxsize>
-                  <minsize>7000000</minsize>
+                  <maxsize>5000000</maxsize>
+                  <minsize>4000000</minsize>
                   <files>
                     <file>${project.build.directory}/${project.build.finalName}.jar</file>
                   </files>

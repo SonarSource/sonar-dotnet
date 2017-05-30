@@ -19,9 +19,10 @@
     <protobuf.compiler>${settings.localRepository}/com/google/protobuf/protoc/${protobuf.version}/protoc-${protobuf.version}-${os.detected.classifier}.exe</protobuf.compiler>
     <!-- used for deployment to SonarSource Artifactory -->
     <gitRepositoryName>sonar-dotnet-shared-library</gitRepositoryName>
-	<analyzer.build.conf>Release</analyzer.build.conf>
+    <analyzer.build.conf>Release</analyzer.build.conf>
+    <sonar.exclusions>target/generated-sources/protobuf/**</sonar.exclusions>
   </properties>
-
+  
   <dependencies>
     <dependency>
       <groupId>org.sonarsource.sonarqube</groupId>
@@ -91,107 +92,77 @@
         </plugin>
       </plugins>
     </pluginManagement>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>compile-protobuf-sources</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>run</goal>
+            </goals>
+            <configuration>
+              <target>
+                <property name="proto.path" location="${project.basedir}/../sonaranalyzer-dotnet/src/SonarAnalyzer.Common/Protobuf"/>
+                <fileset id="fileset" dir="${proto.path}">
+                  <include name="*.proto" />
+                </fileset>
+                <pathconvert refid="fileset" property="protos" pathsep=" " />
+                <mkdir dir="${project.build.directory}/generated-sources/protobuf" />
+                <chmod file="${protobuf.compiler}" perm="u+x" />
+                <exec failonerror="true" executable="${protobuf.compiler}">
+                  <arg value="--proto_path=${proto.path}" />
+                  <arg value="--java_out=${project.build.directory}/generated-sources/protobuf" />
+                  <arg line="${protos}" />
+                </exec>
+              </target>
+            </configuration>
+          </execution>
+        </executions>
+        <dependencies>
+          <dependency>
+            <groupId>com.google.protobuf</groupId>
+            <artifactId>protoc</artifactId>
+            <version>${protobuf.version}</version>
+            <classifier>${os.detected.classifier}</classifier>
+            <type>exe</type>
+          </dependency>
+        </dependencies>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>build-helper-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>add-protobuf-generated-sources</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>add-source</goal>
+            </goals>
+            <configuration>
+              <sources>
+                <source>${project.build.directory}/generated-sources/protobuf</source>
+              </sources>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
   </build>
 
   <profiles>
-	<profile>
-	  <id>debug</id>
-	  <activation>
+    <profile>
+      <id>debug</id>
+      <activation>
         <property>
           <name>debug</name>
         </property>
       </activation>
-	  <properties>
-	    <analyzer.build.conf>Debug</analyzer.build.conf>
-	  </properties>
-	</profile>
-    <profile>
-      <id>protobuf-compile</id>
-      <activation>
-        <file>
-          <exists>src/main/protobuf</exists>
-        </file>
-      </activation>
       <properties>
-        <sonar.exclusions>target/generated-sources/protobuf/**</sonar.exclusions>
-        <sonarAnalyzer.workDirectory>${project.build.directory}/analyzer</sonarAnalyzer.workDirectory>
+        <analyzer.build.conf>Debug</analyzer.build.conf>
       </properties>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-antrun-plugin</artifactId>
-            <executions>
-              <execution>
-                <id>copy-protobuf</id>
-                <phase>validate</phase>
-                <configuration>
-                  <exportAntProperties>true</exportAntProperties>
-                  <tasks>
-                    <copy todir="src/main/protobuf">
-                      <fileset dir="${project.build.directory}/../../sonaranalyzer-dotnet/src/SonarAnalyzer.Scanner/bin/${analyzer.build.conf}/protobuf">
-                        <include name="*.proto"/>
-                      </fileset>
-                    </copy>
-                  </tasks>
-                </configuration>
-                <goals>
-                  <goal>run</goal>
-                </goals>
-              </execution>
-              <execution>
-                <id>compile-protobuf-sources</id>
-                <phase>generate-sources</phase>
-                <goals>
-                  <goal>run</goal>
-                </goals>
-                <configuration>
-                  <target>
-                    <fileset id="fileset" dir="${project.basedir}/src/main/protobuf">
-                      <include name="*.proto" />
-                    </fileset>
-                    <pathconvert refid="fileset" property="protos" pathsep=" " />
-                    <mkdir dir="${project.build.directory}/generated-sources/protobuf" />
-                    <chmod file="${protobuf.compiler}" perm="u+x" />
-                    <exec failonerror="true" executable="${protobuf.compiler}">
-                      <arg value="--proto_path=${project.basedir}/src/main/protobuf" />
-                      <arg value="--java_out=${project.build.directory}/generated-sources/protobuf" />
-                      <arg line="${protos}" />
-                    </exec>
-                  </target>
-                </configuration>
-              </execution>
-            </executions>
-            <dependencies>
-              <dependency>
-                <groupId>com.google.protobuf</groupId>
-                <artifactId>protoc</artifactId>
-                <version>${protobuf.version}</version>
-                <classifier>${os.detected.classifier}</classifier>
-                <type>exe</type>
-              </dependency>
-            </dependencies>
-          </plugin>
-          <plugin>
-            <groupId>org.codehaus.mojo</groupId>
-            <artifactId>build-helper-maven-plugin</artifactId>
-            <executions>
-              <execution>
-                <id>add-protobuf-generated-sources</id>
-                <phase>generate-sources</phase>
-                <goals>
-                  <goal>add-source</goal>
-                </goals>
-                <configuration>
-                  <sources>
-                 <source>${project.build.directory}/generated-sources/protobuf</source>
-                  </sources>
-                </configuration>
-              </execution>
-            </executions>
-          </plugin>
-        </plugins>
-      </build>
     </profile>
   </profiles>
 
