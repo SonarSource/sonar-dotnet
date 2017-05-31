@@ -36,6 +36,7 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType System_Collections_Generic_IList_T = new KnownType(SpecialType.System_Collections_Generic_IList_T, "System.Collections.Generic.IList<T>");
         public static readonly KnownType System_Collections_Generic_ICollection_T = new KnownType(SpecialType.System_Collections_Generic_ICollection_T, "System.Collections.Generic.ICollection<T>");
         public static readonly KnownType System_Collections_ICollection = new KnownType("System.Collections.ICollection");
+        public static readonly KnownType System_Collections_CollectionBase = new KnownType("System.Collections.CollectionBase");
 
         public static readonly KnownType System_Object = new KnownType(SpecialType.System_Object, "object");
         public static readonly KnownType System_String = new KnownType(SpecialType.System_String, "string");
@@ -181,6 +182,7 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType System_Collections_Immutable_ImmutableStack_T = new KnownType("System.Collections.Immutable.ImmutableStack<T>");
         public static readonly KnownType System_Collections_Immutable_IImmutableStack_T = new KnownType("System.Collections.Immutable.IImmutableStack<T>");
 
+        public static readonly KnownType System_Collections_ObjectModel_Collection_T = new KnownType("System.Collections.ObjectModel.Collection<T>");
         public static readonly KnownType System_Collections_ObjectModel_ReadOnlyCollection_T = new KnownType("System.Collections.ObjectModel.ReadOnlyCollection<T>");
         public static readonly KnownType System_Collections_ObjectModel_ReadOnlyDictionary_TKey_TValue = new KnownType("System.Collections.ObjectModel.ReadOnlyDictionary<TKey, TValue>");
 
