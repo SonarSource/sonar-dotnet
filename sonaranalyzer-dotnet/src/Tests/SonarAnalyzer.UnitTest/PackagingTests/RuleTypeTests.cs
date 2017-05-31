@@ -277,6 +277,7 @@ namespace SonarAnalyzer.UnitTest.PackagingTests
             ["4005"] = "CODE_SMELL",
             ["4016"] = "CODE_SMELL",
             ["4017"] = "CODE_SMELL",
+            ["4018"] = "CODE_SMELL",
             ["4022"] = "CODE_SMELL",
             ["4023"] = "CODE_SMELL",
         }.ToImmutableDictionary();
@@ -386,7 +387,7 @@ namespace SonarAnalyzer.UnitTest.PackagingTests
             deletedRules.Should().BeEmpty($"YOU SHOULD NEVER DELETE RULES!");
 
             // IMPORTANT: If this test fails, you should update the types of the changed rules
-            // in the dictionaries above. Also add a GitHub issue specifying the change of type
+            // in the dictionaries above. Also add a GitHub issue specifying the change of type 
             // and update peach and next.
             var changedRules = items.Where(x => x.ActualType != null && x.ExpectedType != null);
             changedRules.Should().BeEmpty($"you need to change the rules in {expectedTypesName}.");

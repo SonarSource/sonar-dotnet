@@ -6552,6 +6552,33 @@
   <data name="S4017_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
   </data>
+  <data name="S4018_Category" xml:space="preserve">
+    <value>Sonar Code Smell</value>
+  </data>
+  <data name="S4018_Description" xml:space="preserve">
+    <value>The best way to determine the type of generic method is by inference based on the type of arguments that is passed to the method. This is not possible when a parameter type is missing from the argument list.</value>
+  </data>
+  <data name="S4018_IsActivatedByDefault" xml:space="preserve">
+    <value>False</value>
+  </data>
+  <data name="S4018_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S4018_RemediationCost" xml:space="preserve">
+    <value>15min</value>
+  </data>
+  <data name="S4018_Severity" xml:space="preserve">
+    <value>Major</value>
+  </data>
+  <data name="S4018_Tags" xml:space="preserve">
+    <value />
+  </data>
+  <data name="S4018_Title" xml:space="preserve">
+    <value>Generic methods should provide type parameters</value>
+  </data>
+  <data name="S4018_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S4022_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
