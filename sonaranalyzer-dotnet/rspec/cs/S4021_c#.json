@@ -1,0 +1,13 @@
+{
+  "title": "\"GC.KeepAlive\" should not be called in a \"SafeHandle\"",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "2min"
+  },
+  "tags": [
+    
+  ],
+  "defaultSeverity": "Major"
+}

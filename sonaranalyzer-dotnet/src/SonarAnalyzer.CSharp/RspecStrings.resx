@@ -6346,7 +6346,7 @@
     <value>Sonar Code Smell</value>
   </data>
   <data name="S4002_Description" xml:space="preserve">
-    <value>This rule raises an issue when a disposable type contains fields of the following types and does not implement a finalizer:</value>
+    <value>This rule raises an issue when a disposable type contains fields of the following types and does not implement a proper finalizer:</value>
   </data>
   <data name="S4002_IsActivatedByDefault" xml:space="preserve">
     <value>False</value>
@@ -6412,9 +6412,36 @@
     <value />
   </data>
   <data name="S4005_Title" xml:space="preserve">
-    <value>"System.Uri" arguments should be used instead of strings</value>
+    <value>"System.Uri" argument should be passed instead of string</value>
   </data>
   <data name="S4005_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
+  <data name="S4021_Category" xml:space="preserve">
+    <value>Sonar Code Smell</value>
+  </data>
+  <data name="S4021_Description" xml:space="preserve">
+    <value>The SafeHandle class provides a simpler and safer way to manage the life cycle of objects. When converting to SafeHandle all call to GC.KeepAlive should be removed as they become unnecessary and could confuse a maintainer if left in the code.</value>
+  </data>
+  <data name="S4021_IsActivatedByDefault" xml:space="preserve">
+    <value>False</value>
+  </data>
+  <data name="S4021_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S4021_RemediationCost" xml:space="preserve">
+    <value>2min</value>
+  </data>
+  <data name="S4021_Severity" xml:space="preserve">
+    <value>Major</value>
+  </data>
+  <data name="S4021_Tags" xml:space="preserve">
+    <value />
+  </data>
+  <data name="S4021_Title" xml:space="preserve">
+    <value>"GC.KeepAlive" should not be called in a "SafeHandle"</value>
+  </data>
+  <data name="S4021_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
   </data>
   <data name="S818_Category" xml:space="preserve">
