@@ -33,6 +33,18 @@ namespace Tests.Diagnostics
             SomeFunc(a < 10); // Fixed
         }
 
+        public void TestNullables()
+        {
+            int? a = 5;
+
+            bool b = !(a < 5); // Compliant
+            b = !(a <= 5); // Compliant
+            b = !(a > 5); // Compliant
+            b = !(a >= 5); // Compliant
+            b = a != 5; // Fixed
+            b = a == 5; // Fixed
+        }
+
         public static void SomeFunc(bool x) { }
 
         public static bool operator ==     (BooleanCheckInverted a, BooleanCheckInverted b)

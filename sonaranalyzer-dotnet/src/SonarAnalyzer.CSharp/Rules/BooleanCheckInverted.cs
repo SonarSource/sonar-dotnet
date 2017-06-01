@@ -46,10 +46,11 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
-                    var expression = (BinaryExpressionSyntax) c.Node;
+                    var expression = (BinaryExpressionSyntax)c.Node;
                     var enclosingSymbol = c.SemanticModel.GetEnclosingSymbol(expression.SpanStart) as IMethodSymbol;
 
-                    if (enclosingSymbol?.MethodKind == MethodKind.UserDefinedOperator)
+                    if (enclosingSymbol?.MethodKind == MethodKind.UserDefinedOperator ||
+                        IsIgnoredNullableOperation(expression, c.SemanticModel))
                     {
                         return;
                     }
@@ -74,6 +75,26 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.EqualsExpression,
                 SyntaxKind.NotEqualsExpression);
         }
+
+        private static bool IsIgnoredNullableOperation(BinaryExpressionSyntax expression, SemanticModel semanticModel)
+        {
+            return expression.OperatorToken.IsAnyKind(ignoredNullableOperators) &&
+                (IsNullable(expression.Left, semanticModel) || IsNullable(expression.Right, semanticModel));
+        }
+
+        private static bool IsNullable(ExpressionSyntax expression, SemanticModel semanticModel)
+        {
+            var symbolType = semanticModel.GetSymbolInfo(expression).Symbol.GetSymbolType() as INamedTypeSymbol;
+            return symbolType != null && symbolType.ConstructedFrom.Is(KnownType.System_Nullable_T);
+        }
+
+        private static readonly ISet<SyntaxKind> ignoredNullableOperators = new HashSet<SyntaxKind>
+        {
+            SyntaxKind.GreaterThanToken,
+            SyntaxKind.GreaterThanEqualsToken,
+            SyntaxKind.LessThanToken,
+            SyntaxKind.LessThanEqualsToken
+        };
 
         private static readonly Dictionary<SyntaxKind, string> OppositeTokens =
             new Dictionary<SyntaxKind, string>
