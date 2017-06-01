@@ -4614,6 +4614,33 @@
   <data name="S3265_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
   </data>
+  <data name="S3346_Category" xml:space="preserve">
+    <value>Sonar Bug</value>
+  </data>
+  <data name="S3346_Description" xml:space="preserve">
+    <value>An assertion is a piece of code that’s used during development when the compilation debug mode is activated. It allows a program to check itself as it runs. When an assertion is true, that means everything is operating as expected. </value>
+  </data>
+  <data name="S3346_IsActivatedByDefault" xml:space="preserve">
+    <value>True</value>
+  </data>
+  <data name="S3346_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S3346_RemediationCost" xml:space="preserve">
+    <value>5min</value>
+  </data>
+  <data name="S3346_Severity" xml:space="preserve">
+    <value>Major</value>
+  </data>
+  <data name="S3346_Tags" xml:space="preserve">
+    <value>cert</value>
+  </data>
+  <data name="S3346_Title" xml:space="preserve">
+    <value>Expressions used in "Debug.Assert" should not produce side effects</value>
+  </data>
+  <data name="S3346_Type" xml:space="preserve">
+    <value>BUG</value>
+  </data>
   <data name="S3376_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>

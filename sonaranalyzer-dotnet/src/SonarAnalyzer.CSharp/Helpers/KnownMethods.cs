@@ -19,6 +19,7 @@
  */
 
 using System;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.Serialization;
 using Microsoft.CodeAnalysis;
@@ -139,6 +140,13 @@ namespace SonarAnalyzer.Helpers
                 method.Parameters.Length == 1 &&
                 method.Name == nameof(GC.SuppressFinalize) &&
                 method.ContainingType.Is(KnownType.System_GC);
+        }
+
+        public static bool IsDebugAssert(this IMethodSymbol method)
+        {
+            return method != null &&
+                method.Name == nameof(Debug.Assert) &&
+                method.ContainingType.Is(KnownType.System_Diagnostics_Debug);
         }
     }
 }
