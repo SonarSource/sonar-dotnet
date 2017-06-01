@@ -7,14 +7,10 @@ namespace MyLibrary
         void Method();
     }
 
-    public interface MyInterface // Noncompliant {{Remove this interface or add members to it.}}
+    public interface MyInterface { } // Noncompliant {{Remove this interface or add members to it.}}
 //                   ^^^^^^^^^^^
-    {
-    }
 
-    public interface MyInterface2 : ISomeMethodsInterface // Noncompliant
-    {
-    }
+    public interface MyInterface2 : ISomeMethodsInterface { } // Noncompliant
 
     public interface MyInterface3
     {
@@ -24,5 +20,21 @@ namespace MyLibrary
     public interface MyInterface4
     {
         bool Bar { get; }
+    }
+
+    internal interface MyInterfaceInternal { }
+
+    interface MyInterfaceDefault { }
+
+    public class Container
+    {
+        public interface IPublic { } // Noncompliant
+        private interface IPrivate { }
+        internal interface IInternal { }
+    }
+
+
+    public interface
+    {
     }
 }

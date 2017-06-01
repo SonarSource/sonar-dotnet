@@ -38,19 +38,6 @@
 "endColumn":  36
 }
 }
-},
-{
-"id":  "S4023",
-"message":  "Remove this interface or add members to it.",
-"location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultModelBinderLocatorFixture.cs",
-"region":  {
-"startLine":  126,
-"startColumn":  19,
-"endLine":  126,
-"endColumn":  33
-}
-}
 }
 ]
 }

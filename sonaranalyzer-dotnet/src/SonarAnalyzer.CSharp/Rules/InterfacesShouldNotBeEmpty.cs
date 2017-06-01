@@ -44,8 +44,11 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
             {
                 var interfaceDeclaration = c.Node as InterfaceDeclarationSyntax;
+                var interfaceSymbol = c.SemanticModel.GetDeclaredSymbol(interfaceDeclaration);
 
-                if (interfaceDeclaration != null &&
+                if (interfaceSymbol != null &&
+                    interfaceSymbol.DeclaredAccessibility == Accessibility.Public &&
+                    !interfaceDeclaration.Identifier.IsMissing &&
                     interfaceDeclaration.Members.Count == 0)
                 {
                     c.ReportDiagnostic(Diagnostic.Create(rule, interfaceDeclaration.Identifier.GetLocation()));
