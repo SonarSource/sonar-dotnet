@@ -61,8 +61,6 @@
     <sonar.pluginName>C#</sonar.pluginName>
     <sonar.pluginClass>org.sonar.plugins.csharp.CSharpPlugin</sonar.pluginClass>
     <sonarAnalyzer.workDirectory>${project.build.directory}/analyzer</sonarAnalyzer.workDirectory>
-    <scanner.msbuild.version>2.2.0.24</scanner.msbuild.version>
-    <scanner.msbuild.workDirectory>${project.build.directory}/scanner</scanner.msbuild.workDirectory>
 	<analyzer.build.conf>Release</analyzer.build.conf>
   </properties>
 
@@ -186,12 +184,6 @@
           <include>static/SonarAnalyzer-${project.version}.zip</include>
         </includes>
       </resource>
-      <resource>
-        <directory>${scanner.msbuild.workDirectory}</directory>
-        <includes>
-          <include>static/SonarQube.MSBuild.Runner.Implementation.zip</include>
-        </includes>
-      </resource>
     </resources>
 
     <plugins>
@@ -215,36 +207,6 @@
                   </files>
                 </requireFilesSize>
               </rules>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-dependency-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>copy-plugin</id>
-            <phase>validate</phase>
-            <goals>
-              <goal>copy</goal>
-            </goals>
-            <configuration>
-              <artifactItems>
-                <artifactItem>
-                  <groupId>org.sonarsource.scanner.msbuild</groupId>
-                  <artifactId>sonar-scanner-msbuild</artifactId>
-                  <version>${scanner.msbuild.version}</version>
-                  <classifier>impl</classifier>
-                  <type>zip</type>
-                  <overWrite>true</overWrite>
-                  <outputDirectory>${scanner.msbuild.workDirectory}</outputDirectory>
-                </artifactItem>
-              </artifactItems>
-              <overWriteReleases>true</overWriteReleases>
-              <overWriteSnapshots>true</overWriteSnapshots>
-              <stripVersion>true</stripVersion>
             </configuration>
           </execution>
         </executions>
@@ -286,8 +248,6 @@
                 </copy>
 
                 <echo file="${sonarAnalyzer.workDirectory}/static/version.txt" message="${project.version}" encoding="utf-8" />
-
-                <move file="${scanner.msbuild.workDirectory}/sonar-scanner-msbuild-impl.zip" tofile="${scanner.msbuild.workDirectory}/static/SonarQube.MSBuild.Runner.Implementation.zip"/>
               </tasks>
 
             </configuration>
