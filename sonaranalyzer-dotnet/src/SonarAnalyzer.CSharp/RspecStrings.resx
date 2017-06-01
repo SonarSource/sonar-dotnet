@@ -6444,6 +6444,33 @@
   <data name="S4016_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
   </data>
+  <data name="S4017_Category" xml:space="preserve">
+    <value>Sonar Code Smell</value>
+  </data>
+  <data name="S4017_Description" xml:space="preserve">
+    <value>A nested type is a type argument that is also a generic type. Calling a method with such a nested type argument requires a complicated and confusing code. It should be avoided as much as possible.</value>
+  </data>
+  <data name="S4017_IsActivatedByDefault" xml:space="preserve">
+    <value>False</value>
+  </data>
+  <data name="S4017_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S4017_RemediationCost" xml:space="preserve">
+    <value>30min</value>
+  </data>
+  <data name="S4017_Severity" xml:space="preserve">
+    <value>Major</value>
+  </data>
+  <data name="S4017_Tags" xml:space="preserve">
+    <value>confusing</value>
+  </data>
+  <data name="S4017_Title" xml:space="preserve">
+    <value>Method signatures should not contain nested generic types</value>
+  </data>
+  <data name="S4017_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S818_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>

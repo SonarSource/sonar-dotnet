@@ -107,6 +107,7 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType System_MarshalByRefObject = new KnownType("System.MarshalByRefObject");
         public static readonly KnownType System_Uri = new KnownType("System.Uri");
 
+
         public static readonly KnownType System_Collections_Generic_IReadOnlyCollection_T = new KnownType("System.Collections.Generic.IReadOnlyCollection<T>");
         public static readonly KnownType System_Collections_Generic_IReadOnlyDictionary_TKey_TValue = new KnownType("System.Collections.Generic.IReadOnlyDictionary<TKey, TValue>");
 
@@ -201,10 +202,55 @@ namespace SonarAnalyzer.Helpers
             System_Runtime_CompilerServices_CallerLineNumberAttribute,
             System_Runtime_CompilerServices_CallerMemberNameAttribute);
 
+        public static readonly ISet<KnownType> SystemFuncVariants = ImmutableHashSet.Create(
+            new KnownType("System.Func<TResult>"),
+            new KnownType("System.Func<T, TResult>"),
+            new KnownType("System.Func<T1, T2, TResult>"),
+            new KnownType("System.Func<T1, T2, T3, TResult>"),
+            new KnownType("System.Func<T1, T2, T3, T4, TResult>"),
+            new KnownType("System.Func<T1, T2, T3, T4, T5, TResult>"),
+            new KnownType("System.Func<T1, T2, T3, T4, T5, T6, TResult>"),
+            new KnownType("System.Func<T1, T2, T3, T4, T5, T6, T7, TResult>"),
+            new KnownType("System.Func<T1, T2, T3, T4, T5, T6, T7, T8, TResult>"),
+            new KnownType("System.Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>"),
+            new KnownType("System.Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult>"),
+            new KnownType("System.Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult>"),
+            new KnownType("System.Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult>"),
+            new KnownType("System.Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>"),
+            new KnownType("System.Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>"),
+            new KnownType("System.Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>"),
+            new KnownType("System.Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult>")
+            );
+
+        public static readonly ISet<KnownType> SystemActionVariants = ImmutableHashSet.Create(
+            new KnownType("System.Action"),
+            new KnownType("System.Action<T>"),
+            new KnownType("System.Action<T1, T2>"),
+            new KnownType("System.Action<T1, T2, T3>"),
+            new KnownType("System.Action<T1, T2, T3, T4>"),
+            new KnownType("System.Action<T1, T2, T3, T4, T5>"),
+            new KnownType("System.Action<T1, T2, T3, T4, T5, T6>"),
+            new KnownType("System.Action<T1, T2, T3, T4, T5, T6, T7>"),
+            new KnownType("System.Action<T1, T2, T3, T4, T5, T6, T7, T8>"),
+            new KnownType("System.Action<T1, T2, T3, T4, T5, T6, T7, T8, T9>"),
+            new KnownType("System.Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>"),
+            new KnownType("System.Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>"),
+            new KnownType("System.Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>"),
+            new KnownType("System.Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>"),
+            new KnownType("System.Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>"),
+            new KnownType("System.Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>"),
+            new KnownType("System.Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>")
+            );
+
+        public static readonly KnownType System_Func_T = new KnownType("System.Func<T, TResult>");
+        public static readonly KnownType System_Action_T = new KnownType("System.Action<T>");
+
+
         public static readonly KnownType System_ServiceModel_ServiceContractAttribute = new KnownType("System.ServiceModel.ServiceContractAttribute");
         public static readonly KnownType System_ServiceModel_OperationContractAttribute = new KnownType("System.ServiceModel.OperationContractAttribute");
 
         public static readonly KnownType System_Linq_Enumerable = new KnownType("System.Linq.Enumerable");
+        public static readonly KnownType System_Linq_Expressions_Expression_T = new KnownType("System.Linq.Expressions.Expression<TDelegate>");
         public static readonly KnownType System_Linq_ImmutableArrayExtensions = new KnownType("System.Linq.ImmutableArrayExtensions");
 
         public static readonly KnownType System_Runtime_Serialization_ISerializable = new KnownType("System.Runtime.Serialization.ISerializable");
