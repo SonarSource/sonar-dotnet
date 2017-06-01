@@ -19,12 +19,9 @@
  */
 package org.sonar.plugins.dotnet.tests;
 
-import com.google.common.annotations.VisibleForTesting;
-import com.google.common.base.Splitter;
+import java.io.File;
 import org.sonar.api.batch.BatchSide;
 import org.sonar.api.config.Settings;
-
-import java.io.File;
 
 @BatchSide
 public class UnitTestResultsAggregator {
@@ -39,7 +36,6 @@ public class UnitTestResultsAggregator {
     this(unitTestConf, settings, new VisualStudioTestResultsFileParser(), new NUnitTestResultsFileParser(), new XUnitTestResultsFileParser());
   }
 
-  @VisibleForTesting
   UnitTestResultsAggregator(UnitTestConfiguration unitTestConf, Settings settings,
     VisualStudioTestResultsFileParser visualStudioTestResultsFileParser,
     NUnitTestResultsFileParser nunitTestResultsFileParser,
@@ -69,24 +65,26 @@ public class UnitTestResultsAggregator {
 
   UnitTestResults aggregate(WildcardPatternFileProvider wildcardPatternFileProvider, UnitTestResults unitTestResults) {
     if (hasVisualStudioTestResultsFile()) {
-      aggregate(wildcardPatternFileProvider, settings.getString(unitTestConf.visualStudioTestResultsFilePropertyKey()), visualStudioTestResultsFileParser, unitTestResults);
+      aggregate(wildcardPatternFileProvider, settings.getStringArray(unitTestConf.visualStudioTestResultsFilePropertyKey()), visualStudioTestResultsFileParser, unitTestResults);
     }
 
     if (hasNUnitTestResultsFile()) {
-      aggregate(wildcardPatternFileProvider, settings.getString(unitTestConf.nunitTestResultsFilePropertyKey()), nunitTestResultsFileParser, unitTestResults);
+      aggregate(wildcardPatternFileProvider, settings.getStringArray(unitTestConf.nunitTestResultsFilePropertyKey()), nunitTestResultsFileParser, unitTestResults);
     }
 
     if (hasXUnitTestResultsFile()) {
-      aggregate(wildcardPatternFileProvider, settings.getString(unitTestConf.xunitTestResultsFilePropertyKey()), xunitTestResultsFileParser, unitTestResults);
+      aggregate(wildcardPatternFileProvider, settings.getStringArray(unitTestConf.xunitTestResultsFilePropertyKey()), xunitTestResultsFileParser, unitTestResults);
     }
 
     return unitTestResults;
   }
 
-  private static void aggregate(WildcardPatternFileProvider wildcardPatternFileProvider, String reportPaths, UnitTestResultsParser parser, UnitTestResults unitTestResults) {
-    for (String reportPathPattern : Splitter.on(',').trimResults().omitEmptyStrings().split(reportPaths)) {
-      for (File reportFile : wildcardPatternFileProvider.listFiles(reportPathPattern)) {
-        parser.accept(reportFile, unitTestResults);
+  private static void aggregate(WildcardPatternFileProvider wildcardPatternFileProvider, String[] reportPaths, UnitTestResultsParser parser, UnitTestResults unitTestResults) {
+    for (String reportPathPattern : reportPaths) {
+      if (!reportPathPattern.isEmpty()) {
+        for (File reportFile : wildcardPatternFileProvider.listFiles(reportPathPattern)) {
+          parser.accept(reportFile, unitTestResults);
+        }
       }
     }
   }

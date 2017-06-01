@@ -19,7 +19,8 @@
  */
 package org.sonar.plugins.dotnet.tests;
 
-import com.google.common.collect.ImmutableSet;
+import java.io.File;
+import java.util.HashSet;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -29,10 +30,11 @@ import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 import org.sonar.api.config.Settings;
 
-import java.io.File;
-
+import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 public class CoverageAggregatorTest {
 
@@ -90,26 +92,21 @@ public class CoverageAggregatorTest {
       new Answer<Coverage>() {
         @Override
         public Coverage answer(InvocationOnMock invocation) throws Throwable {
-          CoverageParser parser = (CoverageParser)invocation.getArguments()[0];
-          File reportFile = (File)invocation.getArguments()[1];
+          CoverageParser parser = (CoverageParser) invocation.getArguments()[0];
+          File reportFile = (File) invocation.getArguments()[1];
           Coverage coverage = new Coverage();
           parser.accept(reportFile, coverage);
           return coverage;
         }
-      }
-    );
+      });
 
     WildcardPatternFileProvider wildcardPatternFileProvider = mock(WildcardPatternFileProvider.class);
 
     CoverageConfiguration coverageConf = new CoverageConfiguration("", "ncover", "opencover", "dotcover", "visualstudio");
-    Settings settings = mock(Settings.class);
+    Settings settings = new Settings();
 
-    when(settings.hasKey("ncover")).thenReturn(true);
-    when(settings.getString("ncover")).thenReturn("foo.nccov");
-    when(wildcardPatternFileProvider.listFiles("foo.nccov")).thenReturn(ImmutableSet.of(new File("foo.nccov")));
-    when(settings.hasKey("opencover")).thenReturn(false);
-    when(settings.hasKey("dotcover")).thenReturn(false);
-    when(settings.hasKey("visualstudio")).thenReturn(false);
+    settings.setProperty("ncover", "foo.nccov");
+    when(wildcardPatternFileProvider.listFiles("foo.nccov")).thenReturn(new HashSet<>(asList(new File("foo.nccov"))));
     NCover3ReportParser ncoverParser = mock(NCover3ReportParser.class);
     OpenCoverReportParser openCoverParser = mock(OpenCoverReportParser.class);
     DotCoverReportsAggregator dotCoverParser = mock(DotCoverReportsAggregator.class);
@@ -125,12 +122,10 @@ public class CoverageAggregatorTest {
     verify(dotCoverParser, Mockito.never()).accept(Mockito.any(File.class), Mockito.any(Coverage.class));
     verify(visualStudioCoverageXmlReportParser, Mockito.never()).accept(Mockito.any(File.class), Mockito.any(Coverage.class));
 
-    when(settings.hasKey("ncover")).thenReturn(false);
-    when(settings.hasKey("opencover")).thenReturn(true);
-    when(settings.getString("opencover")).thenReturn("bar.xml");
-    when(wildcardPatternFileProvider.listFiles("bar.xml")).thenReturn(ImmutableSet.of(new File("bar.xml")));
-    when(settings.hasKey("dotcover")).thenReturn(false);
-    when(settings.hasKey("visualstudio")).thenReturn(false);
+    settings.clear();
+
+    settings.setProperty("opencover", "bar.xml");
+    when(wildcardPatternFileProvider.listFiles("bar.xml")).thenReturn(new HashSet<>(asList(new File("bar.xml"))));
     ncoverParser = mock(NCover3ReportParser.class);
     openCoverParser = mock(OpenCoverReportParser.class);
     dotCoverParser = mock(DotCoverReportsAggregator.class);
@@ -146,12 +141,9 @@ public class CoverageAggregatorTest {
     verify(dotCoverParser, Mockito.never()).accept(Mockito.any(File.class), Mockito.any(Coverage.class));
     verify(visualStudioCoverageXmlReportParser, Mockito.never()).accept(Mockito.any(File.class), Mockito.any(Coverage.class));
 
-    when(settings.hasKey("ncover")).thenReturn(false);
-    when(settings.hasKey("opencover")).thenReturn(false);
-    when(settings.hasKey("dotcover")).thenReturn(true);
-    when(settings.getString("dotcover")).thenReturn("baz.html");
-    when(wildcardPatternFileProvider.listFiles("baz.html")).thenReturn(ImmutableSet.of(new File("baz.html")));
-    when(settings.hasKey("visualstudio")).thenReturn(false);
+    settings.clear();
+    settings.setProperty("dotcover", "baz.html");
+    when(wildcardPatternFileProvider.listFiles("baz.html")).thenReturn(new HashSet<>(asList(new File("baz.html"))));
     ncoverParser = mock(NCover3ReportParser.class);
     openCoverParser = mock(OpenCoverReportParser.class);
     dotCoverParser = mock(DotCoverReportsAggregator.class);
@@ -167,12 +159,9 @@ public class CoverageAggregatorTest {
     verify(coverage).mergeWith(captor.getValue());
     verify(visualStudioCoverageXmlReportParser, Mockito.never()).accept(Mockito.any(File.class), Mockito.any(Coverage.class));
 
-    when(settings.hasKey("ncover")).thenReturn(false);
-    when(settings.hasKey("opencover")).thenReturn(false);
-    when(settings.hasKey("dotcover")).thenReturn(false);
-    when(settings.hasKey("visualstudio")).thenReturn(true);
-    when(settings.getString("visualstudio")).thenReturn("qux.coveragexml");
-    when(wildcardPatternFileProvider.listFiles("qux.coveragexml")).thenReturn(ImmutableSet.of(new File("qux.coveragexml")));
+    settings.clear();
+    settings.setProperty("visualstudio", "qux.coveragexml");
+    when(wildcardPatternFileProvider.listFiles("qux.coveragexml")).thenReturn(new HashSet<>(asList(new File("qux.coveragexml"))));
     ncoverParser = mock(NCover3ReportParser.class);
     openCoverParser = mock(OpenCoverReportParser.class);
     dotCoverParser = mock(DotCoverReportsAggregator.class);
@@ -190,19 +179,16 @@ public class CoverageAggregatorTest {
 
     Mockito.reset(wildcardPatternFileProvider);
 
-    when(settings.hasKey("ncover")).thenReturn(true);
-    when(settings.getString("ncover")).thenReturn(",*.nccov  ,bar.nccov");
-    when(wildcardPatternFileProvider.listFiles("*.nccov")).thenReturn(ImmutableSet.of(new File("foo.nccov")));
-    when(wildcardPatternFileProvider.listFiles("bar.nccov")).thenReturn(ImmutableSet.of(new File("bar.nccov")));
-    when(settings.hasKey("opencover")).thenReturn(true);
-    when(settings.getString("opencover")).thenReturn("bar.xml");
-    when(wildcardPatternFileProvider.listFiles("bar.xml")).thenReturn(ImmutableSet.of(new File("bar.xml")));
-    when(settings.hasKey("dotcover")).thenReturn(true);
-    when(settings.getString("dotcover")).thenReturn("baz.html");
-    when(wildcardPatternFileProvider.listFiles("baz.html")).thenReturn(ImmutableSet.of(new File("baz.html")));
-    when(settings.hasKey("visualstudio")).thenReturn(true);
-    when(settings.getString("visualstudio")).thenReturn("qux.coveragexml");
-    when(wildcardPatternFileProvider.listFiles("qux.coveragexml")).thenReturn(ImmutableSet.of(new File("qux.coveragexml")));
+    settings.clear();
+    settings.setProperty("ncover", ",*.nccov  ,bar.nccov");
+    when(wildcardPatternFileProvider.listFiles("*.nccov")).thenReturn(new HashSet<>(asList(new File("foo.nccov"))));
+    when(wildcardPatternFileProvider.listFiles("bar.nccov")).thenReturn(new HashSet<>(asList(new File("bar.nccov"))));
+    settings.setProperty("opencover", "bar.xml");
+    when(wildcardPatternFileProvider.listFiles("bar.xml")).thenReturn(new HashSet<>(asList(new File("bar.xml"))));
+    settings.setProperty("dotcover", "baz.html");
+    when(wildcardPatternFileProvider.listFiles("baz.html")).thenReturn(new HashSet<>(asList(new File("baz.html"))));
+    settings.setProperty("visualstudio", "qux.coveragexml");
+    when(wildcardPatternFileProvider.listFiles("qux.coveragexml")).thenReturn(new HashSet<>(asList(new File("qux.coveragexml"))));
     ncoverParser = mock(NCover3ReportParser.class);
     openCoverParser = mock(OpenCoverReportParser.class);
     dotCoverParser = mock(DotCoverReportsAggregator.class);
@@ -225,7 +211,7 @@ public class CoverageAggregatorTest {
     verify(dotCoverParser).accept(Mockito.eq(new File("baz.html")), captor.capture());
     verify(visualStudioCoverageXmlReportParser).accept(Mockito.eq(new File("qux.coveragexml")), captor.capture());
 
-    for (Coverage capturedCoverage: captor.getAllValues()) {
+    for (Coverage capturedCoverage : captor.getAllValues()) {
       verify(coverage).mergeWith(capturedCoverage);
     }
   }

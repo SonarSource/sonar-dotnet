@@ -19,17 +19,15 @@
  */
 package org.sonar.plugins.dotnet.tests;
 
-import com.google.common.base.Preconditions;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
-
-import javax.annotation.Nullable;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.annotation.Nullable;
+import org.sonar.api.utils.log.Logger;
+import org.sonar.api.utils.log.Loggers;
 
 public class DotCoverReportParser implements CoverageParser {
 
@@ -101,7 +99,9 @@ public class DotCoverReportParser implements CoverageParser {
     }
 
     private static void checkMatches(Matcher matcher) {
-      Preconditions.checkArgument(matcher.matches(), "The report contents does not match the following regular expression: " + matcher.pattern().pattern());
+      if (!matcher.matches()) {
+        throw new IllegalArgumentException("The report contents does not match the following regular expression: " + matcher.pattern().pattern());
+      }
     }
 
   }

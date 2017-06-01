@@ -19,12 +19,9 @@
  */
 package org.sonar.plugins.dotnet.tests;
 
-import com.google.common.annotations.VisibleForTesting;
-import com.google.common.base.Splitter;
+import java.io.File;
 import org.sonar.api.batch.BatchSide;
 import org.sonar.api.config.Settings;
-
-import java.io.File;
 
 @BatchSide
 public class CoverageAggregator {
@@ -46,7 +43,6 @@ public class CoverageAggregator {
       new VisualStudioCoverageXmlReportParser());
   }
 
-  @VisibleForTesting
   public CoverageAggregator(CoverageConfiguration coverageConf, Settings settings,
     CoverageCache coverageCache,
     NCover3ReportParser ncover3ReportParser,
@@ -85,28 +81,30 @@ public class CoverageAggregator {
 
   Coverage aggregate(WildcardPatternFileProvider wildcardPatternFileProvider, Coverage coverage) {
     if (hasNCover3ReportPaths()) {
-      aggregate(wildcardPatternFileProvider, settings.getString(coverageConf.ncover3PropertyKey()), ncover3ReportParser, coverage);
+      aggregate(wildcardPatternFileProvider, settings.getStringArray(coverageConf.ncover3PropertyKey()), ncover3ReportParser, coverage);
     }
 
     if (hasOpenCoverReportPaths()) {
-      aggregate(wildcardPatternFileProvider, settings.getString(coverageConf.openCoverPropertyKey()), openCoverReportParser, coverage);
+      aggregate(wildcardPatternFileProvider, settings.getStringArray(coverageConf.openCoverPropertyKey()), openCoverReportParser, coverage);
     }
 
     if (hasDotCoverReportPaths()) {
-      aggregate(wildcardPatternFileProvider, settings.getString(coverageConf.dotCoverPropertyKey()), dotCoverReportsAggregator, coverage);
+      aggregate(wildcardPatternFileProvider, settings.getStringArray(coverageConf.dotCoverPropertyKey()), dotCoverReportsAggregator, coverage);
     }
 
     if (hasVisualStudioCoverageXmlReportPaths()) {
-      aggregate(wildcardPatternFileProvider, settings.getString(coverageConf.visualStudioCoverageXmlPropertyKey()), visualStudioCoverageXmlReportParser, coverage);
+      aggregate(wildcardPatternFileProvider, settings.getStringArray(coverageConf.visualStudioCoverageXmlPropertyKey()), visualStudioCoverageXmlReportParser, coverage);
     }
 
     return coverage;
   }
 
-  private void aggregate(WildcardPatternFileProvider wildcardPatternFileProvider, String reportPaths, CoverageParser parser, Coverage aggregatedCoverage) {
-    for (String reportPathPattern : Splitter.on(',').trimResults().omitEmptyStrings().split(reportPaths)) {
-      for (File reportFile : wildcardPatternFileProvider.listFiles(reportPathPattern)) {
-        aggregatedCoverage.mergeWith(coverageCache.readCoverageFromCacheOrParse(parser, reportFile));
+  private void aggregate(WildcardPatternFileProvider wildcardPatternFileProvider, String[] reportPaths, CoverageParser parser, Coverage aggregatedCoverage) {
+    for (String reportPathPattern : reportPaths) {
+      if (!reportPathPattern.isEmpty()) {
+        for (File reportFile : wildcardPatternFileProvider.listFiles(reportPathPattern)) {
+          aggregatedCoverage.mergeWith(coverageCache.readCoverageFromCacheOrParse(parser, reportFile));
+        }
       }
     }
   }

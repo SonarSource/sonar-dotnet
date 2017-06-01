@@ -19,19 +19,19 @@
  */
 package org.sonar.plugins.csharp;
 
-import com.google.common.collect.ImmutableSet;
-import org.sonar.api.BatchExtension;
-import org.sonar.api.server.rule.RulesDefinition;
-import org.sonar.api.server.rule.RulesDefinitionXmlLoader;
-import org.sonar.squidbridge.rules.SqaleXmlLoader;
-
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
+import java.util.LinkedHashSet;
 import java.util.Set;
+import org.sonar.api.batch.BatchSide;
+import org.sonar.api.server.rule.RulesDefinition;
+import org.sonar.api.server.rule.RulesDefinitionXmlLoader;
+import org.sonarsource.dotnet.shared.plugins.SqaleXmlLoader;
 
 import static java.util.Objects.requireNonNull;
 
-public class CSharpSonarRulesDefinition implements RulesDefinition, BatchExtension {
+@BatchSide
+public class CSharpSonarRulesDefinition implements RulesDefinition {
 
   static final String REPOSITORY_KEY = "csharpsquid";
   private static final String REPOSITORY_NAME = "SonarAnalyzer";
@@ -48,11 +48,10 @@ public class CSharpSonarRulesDefinition implements RulesDefinition, BatchExtensi
     loader.load(repository, new InputStreamReader(getClass().getResourceAsStream("/org/sonar/plugins/csharp/rules.xml"), StandardCharsets.UTF_8));
     SqaleXmlLoader.load(repository, "/org/sonar/plugins/csharp/sqale.xml");
 
-    ImmutableSet.Builder<String> builder = ImmutableSet.builder();
+    allRuleKeys = new LinkedHashSet<>();
     for (NewRule rule : repository.rules()) {
-      builder.add(rule.key());
+      allRuleKeys.add(rule.key());
     }
-    allRuleKeys = builder.build();
 
     repository.done();
   }
