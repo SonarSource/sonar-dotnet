@@ -169,6 +169,7 @@ namespace SonarAnalyzer.Rules.CSharp
             return baseList.Types
                 .Select(baseType => semanticModel.GetSymbolInfo(baseType.Type).Symbol as INamedTypeSymbol)
                 .Where(symbol => symbol != null)
+                .Distinct()
                 .Select(symbol => new Tuple<INamedTypeSymbol, ICollection<INamedTypeSymbol>>(symbol, symbol.AllInterfaces))
                 .ToMultiValueDictionary(kv => kv.Item1, kv => kv.Item2);
         }
