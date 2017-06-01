@@ -19,10 +19,10 @@
  */
 package org.sonar.plugins.csharp;
 
-import com.google.common.collect.Multimap;
 import java.io.File;
 import java.nio.file.Path;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import org.apache.commons.lang.SystemUtils;
 import org.sonar.api.batch.fs.FileSystem;
@@ -104,18 +104,20 @@ public class CSharpSensor extends AbstractSensor implements Sensor {
   }
 
   private static void importRoslynReport(String reportPath, final SensorContext context) {
-    Multimap<String, RuleKey> activeRoslynRulesByPartialRepoKey = RoslynProfileExporter.activeRoslynRulesByPartialRepoKey(context.activeRules()
+    Map<String, List<RuleKey>> activeRoslynRulesByPartialRepoKey = RoslynProfileExporter.activeRoslynRulesByPartialRepoKey(context.activeRules()
       .findAll()
       .stream()
       .map(ActiveRule::ruleKey)
       .collect(toList()));
     final Map<String, String> repositoryKeyByRoslynRuleKey = new HashMap<>();
-    for (RuleKey activeRoslynRuleKey : activeRoslynRulesByPartialRepoKey.values()) {
-      String previousRepositoryKey = repositoryKeyByRoslynRuleKey.put(activeRoslynRuleKey.rule(), activeRoslynRuleKey.repository());
-      if (previousRepositoryKey != null) {
-        throw new IllegalArgumentException("Rule keys must be unique, but \"" + activeRoslynRuleKey.rule() +
-          "\" is defined in both the \"" + previousRepositoryKey + "\" and \"" + activeRoslynRuleKey.repository() +
-          "\" rule repositories.");
+    for (List<RuleKey> rules : activeRoslynRulesByPartialRepoKey.values()) {
+      for (RuleKey activeRoslynRuleKey : rules) {
+        String previousRepositoryKey = repositoryKeyByRoslynRuleKey.put(activeRoslynRuleKey.rule(), activeRoslynRuleKey.repository());
+        if (previousRepositoryKey != null) {
+          throw new IllegalArgumentException("Rule keys must be unique, but \"" + activeRoslynRuleKey.rule() +
+            "\" is defined in both the \"" + previousRepositoryKey + "\" and \"" + activeRoslynRuleKey.repository() +
+            "\" rule repositories.");
+        }
       }
     }
 

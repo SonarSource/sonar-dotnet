@@ -19,15 +19,14 @@
  */
 package org.sonar.plugins.csharp;
 
+import java.io.IOException;
+import java.io.Writer;
+import java.util.LinkedHashSet;
+import java.util.Set;
 import org.sonar.api.profiles.ProfileExporter;
 import org.sonar.api.profiles.RulesProfile;
 import org.sonar.api.rules.ActiveRule;
 import org.sonar.api.rules.Rule;
-
-import java.io.IOException;
-import java.io.Writer;
-import java.util.HashSet;
-import java.util.Set;
 
 public class SonarLintProfileExporter extends ProfileExporter {
 
@@ -41,7 +40,7 @@ public class SonarLintProfileExporter extends ProfileExporter {
 
   @Override
   public void exportProfile(RulesProfile ruleProfile, Writer writer) {
-    Set<String> disabledRuleKeys = new HashSet<>();
+    Set<String> disabledRuleKeys = new LinkedHashSet<>();
     disabledRuleKeys.addAll(csharpRulesDefinition.allRuleKeys());
 
     appendLine(writer, "<?xml version=\"1.0\" encoding=\"utf-8\"?>");

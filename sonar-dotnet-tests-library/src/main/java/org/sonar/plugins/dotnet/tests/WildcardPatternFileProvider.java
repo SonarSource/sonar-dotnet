@@ -19,15 +19,16 @@
  */
 package org.sonar.plugins.dotnet.tests;
 
-import com.google.common.base.Joiner;
-import com.google.common.base.Splitter;
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableSet;
-import org.sonar.api.utils.WildcardPattern;
-
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+import org.sonar.api.utils.WildcardPattern;
 
 public class WildcardPatternFileProvider {
 
@@ -47,7 +48,7 @@ public class WildcardPatternFileProvider {
   }
 
   Set<File> listFiles(String pattern) {
-    List<String> elements = ImmutableList.copyOf(Splitter.on(directorySeparator).split(pattern));
+    List<String> elements = Arrays.asList(pattern.split(Pattern.quote(directorySeparator)));
 
     List<String> elementsTillFirstWildcard = elementsTillFirstWildcard(elements);
     String pathTillFirstWildcardElement = toPath(elementsTillFirstWildcard);
@@ -57,37 +58,37 @@ public class WildcardPatternFileProvider {
 
     List<String> wildcardElements = elements.subList(elementsTillFirstWildcard.size(), elements.size());
     if (wildcardElements.isEmpty()) {
-      return absoluteFileTillFirstWildcardElement.exists() ? ImmutableSet.of(absoluteFileTillFirstWildcardElement) : ImmutableSet.<File>of();
+      return absoluteFileTillFirstWildcardElement.exists() ? new HashSet<>(Arrays.asList(absoluteFileTillFirstWildcardElement)) : Collections.emptySet();
     }
     checkNoCurrentOrParentFolderAccess(wildcardElements);
 
     WildcardPattern wildcardPattern = WildcardPattern.create(toPath(wildcardElements), directorySeparator);
 
-    ImmutableSet.Builder<File> builder = ImmutableSet.builder();
+    Set<File> result = new HashSet<>();
     for (File file : listFiles(absoluteFileTillFirstWildcardElement)) {
       String relativePath = relativize(absoluteFileTillFirstWildcardElement, file);
 
       if (wildcardPattern.match(relativePath)) {
-        builder.add(file);
+        result.add(file);
       }
     }
 
-    return builder.build();
+    return result;
   }
 
   private String toPath(List<String> elements) {
-    return Joiner.on(directorySeparator).join(elements);
+    return elements.stream().collect(Collectors.joining(directorySeparator));
   }
 
   private static List<String> elementsTillFirstWildcard(List<String> elements) {
-    ImmutableList.Builder<String> builder = ImmutableList.builder();
+    List<String> result = new ArrayList<>();
     for (String element : elements) {
       if (containsWildcard(element)) {
         break;
       }
-      builder.add(element);
+      result.add(element);
     }
-    return builder.build();
+    return result;
   }
 
   private static void checkNoCurrentOrParentFolderAccess(List<String> elements) {
@@ -110,19 +111,19 @@ public class WildcardPatternFileProvider {
   }
 
   private static Set<File> listFiles(File dir) {
-    ImmutableSet.Builder<File> builder = ImmutableSet.builder();
-    listFiles(builder, dir);
-    return builder.build();
+    Set<File> result = new HashSet<>();
+    listFiles(result, dir);
+    return result;
   }
 
-  private static void listFiles(ImmutableSet.Builder<File> builder, File dir) {
+  private static void listFiles(Set<File> result, File dir) {
     File[] files = dir.listFiles();
     if (files != null) {
-      builder.add(files);
+      result.addAll(Arrays.asList(files));
 
       for (File file : files) {
         if (file.isDirectory()) {
-          listFiles(builder, file);
+          listFiles(result, file);
         }
       }
     }

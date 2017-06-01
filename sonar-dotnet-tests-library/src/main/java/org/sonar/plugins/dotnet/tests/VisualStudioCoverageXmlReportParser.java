@@ -19,13 +19,14 @@
  */
 package org.sonar.plugins.dotnet.tests;
 
-import com.google.common.collect.HashMultimap;
-import com.google.common.collect.Multimap;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
-
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import org.sonar.api.utils.log.Logger;
+import org.sonar.api.utils.log.Loggers;
 
 public class VisualStudioCoverageXmlReportParser implements CoverageParser {
 
@@ -40,8 +41,8 @@ public class VisualStudioCoverageXmlReportParser implements CoverageParser {
   private static class Parser {
 
     private final File file;
-    private final Multimap<Integer, Integer> coveredLines = HashMultimap.create();
-    private final Multimap<Integer, Integer> uncoveredLines = HashMultimap.create();
+    private final Map<Integer, List<Integer>> coveredLines = new HashMap<>();
+    private final Map<Integer, List<Integer>> uncoveredLines = new HashMap<>();
     private final Coverage coverage;
 
     Parser(File file, Coverage coverage) {
@@ -83,9 +84,11 @@ public class VisualStudioCoverageXmlReportParser implements CoverageParser {
       int line = xmlParserHelper.getRequiredIntAttribute("start_line");
 
       if ("yes".equals(covered) || "partial".equals(covered)) {
-        coveredLines.put(source, line);
+        coveredLines.putIfAbsent(source, new ArrayList<>());
+        coveredLines.get(source).add(line);
       } else if ("no".equals(covered)) {
-        uncoveredLines.put(source, line);
+        uncoveredLines.putIfAbsent(source, new ArrayList<>());
+        uncoveredLines.get(source).add(line);
       } else {
         throw xmlParserHelper.parseError("Unsupported \"covered\" value \"" + covered + "\", expected one of \"yes\", \"partial\" or \"no\"");
       }
@@ -104,12 +107,16 @@ public class VisualStudioCoverageXmlReportParser implements CoverageParser {
         return;
       }
 
-      for (Integer line : coveredLines.get(id)) {
-        coverage.addHits(canonicalPath, line, 1);
+      if (coveredLines.containsKey(id)) {
+        for (Integer line : coveredLines.get(id)) {
+          coverage.addHits(canonicalPath, line, 1);
+        }
       }
 
-      for (Integer line : uncoveredLines.get(id)) {
-        coverage.addHits(canonicalPath, line, 0);
+      if (uncoveredLines.containsKey(id)) {
+        for (Integer line : uncoveredLines.get(id)) {
+          coverage.addHits(canonicalPath, line, 0);
+        }
       }
     }
 

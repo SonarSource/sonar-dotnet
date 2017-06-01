@@ -19,8 +19,15 @@
  */
 package org.sonar.plugins.csharp;
 
-import com.google.common.collect.Multimap;
 import com.google.common.io.Files;
+import java.io.File;
+import java.io.IOException;
+import java.io.StringWriter;
+import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.sonar.api.config.Settings;
@@ -32,13 +39,6 @@ import org.sonar.api.rules.ActiveRuleParam;
 import org.sonar.api.rules.Rule;
 import org.sonar.api.rules.RuleParam;
 import org.sonar.api.server.rule.RulesDefinition;
-
-import java.io.File;
-import java.io.IOException;
-import java.io.StringWriter;
-import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
-import java.util.Collections;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
@@ -282,7 +282,7 @@ public class RoslynProfileExporterTest {
     RuleKey sonarLintActiveRuleKey = mock(RuleKey.class);
     when(sonarLintActiveRuleKey.rule()).thenReturn("2");
     when(sonarLintActiveRuleKey.repository()).thenReturn("csharpsquid");
-    Multimap<String, RuleKey> activeRulesByPartialRepoKey = RoslynProfileExporter.activeRoslynRulesByPartialRepoKey(Collections.singletonList(sonarLintActiveRuleKey));
+    Map<String, List<RuleKey>> activeRulesByPartialRepoKey = RoslynProfileExporter.activeRoslynRulesByPartialRepoKey(Collections.singletonList(sonarLintActiveRuleKey));
     assertThat(activeRulesByPartialRepoKey.size()).isEqualTo(1);
     assertThat(activeRulesByPartialRepoKey.get("sonaranalyzer-cs")).containsOnly(sonarLintActiveRuleKey);
 
@@ -294,7 +294,7 @@ public class RoslynProfileExporterTest {
     assertThat(activeRulesByPartialRepoKey.get("foo")).containsOnly(customRoslynActiveRuleKey);
 
     activeRulesByPartialRepoKey = RoslynProfileExporter.activeRoslynRulesByPartialRepoKey(
-        Arrays.asList(
+      Arrays.asList(
         randomActiveRuleKey,
         sonarLintActiveRuleKey,
         customRoslynActiveRuleKey));

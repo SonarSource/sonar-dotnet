@@ -20,7 +20,8 @@
 package org.sonar.plugins.dotnet.tests;
 
 import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.ImmutableSet;
+import java.io.File;
+import java.util.HashSet;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
@@ -30,10 +31,11 @@ import org.sonar.api.batch.sensor.coverage.CoverageType;
 import org.sonar.api.batch.sensor.internal.DefaultSensorDescriptor;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 
-import java.io.File;
-
+import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 public class CoverageReportImportSensorTest {
 
@@ -70,7 +72,7 @@ public class CoverageReportImportSensorTest {
     String fooPath = new File(baseDir, "Foo.cs").getAbsolutePath();
     String bazPath = new File(baseDir, "Baz.java").getAbsolutePath();
     String barPath = new File(baseDir, "Bar.cs").getAbsolutePath();
-    when(coverage.files()).thenReturn(ImmutableSet.of(fooPath, barPath, bazPath));
+    when(coverage.files()).thenReturn(new HashSet<>(asList(fooPath, barPath, bazPath)));
     when(coverage.hits(fooPath)).thenReturn(ImmutableMap.<Integer, Integer>builder()
       .put(2, 1)
       .put(4, 0)

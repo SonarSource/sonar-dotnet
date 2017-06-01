@@ -19,10 +19,6 @@
  */
 package org.sonar.plugins.dotnet.tests;
 
-import com.google.common.base.Preconditions;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -30,6 +26,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.stream.Stream;
+import org.sonar.api.utils.log.Logger;
+import org.sonar.api.utils.log.Loggers;
 
 import static java.util.stream.Collectors.toList;
 
@@ -50,7 +48,9 @@ public class DotCoverReportsAggregator implements CoverageParser {
 
     String folderName = extractFolderName(file);
     File folder = new File(file.getParentFile(), folderName + "/src");
-    Preconditions.checkArgument(folder.exists(), "The following report dotCover report HTML sources folder cannot be found: " + folder.getAbsolutePath());
+    if (!folder.exists()) {
+      throw new IllegalArgumentException("The following report dotCover report HTML sources folder cannot be found: " + folder.getAbsolutePath());
+    }
 
     List<File> reportFiles = listReportFiles(folder);
     for (File reportFile : reportFiles) {
@@ -58,7 +58,9 @@ public class DotCoverReportsAggregator implements CoverageParser {
         parser.accept(reportFile, coverage);
       }
     }
-    Preconditions.checkArgument(!reportFiles.isEmpty(), "No dotCover report HTML source file found under: " + folder.getAbsolutePath());
+    if (reportFiles.isEmpty()) {
+      throw new IllegalArgumentException("No dotCover report HTML source file found under: " + folder.getAbsolutePath());
+    }
   }
 
   private static List<File> listReportFiles(File folder) {
@@ -82,13 +84,17 @@ public class DotCoverReportsAggregator implements CoverageParser {
     } catch (IOException e) {
       throw new IllegalStateException(e);
     }
-    Preconditions.checkArgument(contents.startsWith("<!DOCTYPE html>"), "Only dotCover HTML reports which start with \"<!DOCTYPE html>\" are supported.");
+    if (!contents.startsWith("<!DOCTYPE html>")) {
+      throw new IllegalArgumentException("Only dotCover HTML reports which start with \"<!DOCTYPE html>\" are supported.");
+    }
   }
 
   private static String extractFolderName(File file) {
     String name = file.getName();
     int lastDot = name.lastIndexOf('.');
-    Preconditions.checkArgument(lastDot != -1, "The following dotCover report name should have an extension: " + name);
+    if (lastDot == -1) {
+      throw new IllegalArgumentException("The following dotCover report name should have an extension: " + name);
+    }
 
     return name.substring(0, lastDot);
   }

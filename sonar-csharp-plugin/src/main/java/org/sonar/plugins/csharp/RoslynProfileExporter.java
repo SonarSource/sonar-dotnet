@@ -19,10 +19,20 @@
  */
 package org.sonar.plugins.csharp;
 
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.ImmutableMultimap;
-import com.google.common.collect.Multimap;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.Writer;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import org.sonar.api.config.PropertyDefinition;
 import org.sonar.api.config.Settings;
 import org.sonar.api.profiles.ProfileExporter;
@@ -37,13 +47,6 @@ import org.sonar.api.server.rule.RulesDefinition.Repository;
 import org.sonar.api.server.rule.RulesDefinition.Rule;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.Writer;
-import java.nio.charset.StandardCharsets;
-import java.util.*;
 
 import static java.util.Objects.requireNonNull;
 import static java.util.stream.Collectors.toList;
@@ -109,7 +112,7 @@ public class RoslynProfileExporter extends ProfileExporter {
   @Override
   public void exportProfile(RulesProfile rulesProfile, Writer writer) {
     try {
-      Multimap<String, RuleKey> activeRoslynRulesByPartialRepoKey = activeRoslynRulesByPartialRepoKey(rulesProfile.getActiveRules()
+      Map<String, List<RuleKey>> activeRoslynRulesByPartialRepoKey = activeRoslynRulesByPartialRepoKey(rulesProfile.getActiveRules()
         .stream()
         .map(r -> RuleKey.of(r.getRepositoryKey(), r.getRuleKey()))
         .collect(toList()));
@@ -171,7 +174,7 @@ public class RoslynProfileExporter extends ProfileExporter {
 
     appendLine(writer, "      <Rules AnalyzerId=\"" + escapeXml(analyzerId) + "\" RuleNamespace=\"" + escapeXml(ruleNamespace) + "\">");
 
-    Set<String> activeRules = new HashSet<>();
+    Set<String> activeRules = new LinkedHashSet<>();
     String repositoryKey = null;
     for (RuleKey activeRuleKey : ruleKeys) {
       if (repositoryKey == null) {
@@ -241,53 +244,55 @@ public class RoslynProfileExporter extends ProfileExporter {
   }
 
   private static Map<String, String> effectiveParameters(ActiveRule activeRule) {
-    Map<String, String> builder = new HashMap<>();
+    Map<String, String> result = new HashMap<>();
 
     if (activeRule.getRule().getTemplate() != null) {
-      builder.put("RuleKey", activeRule.getRuleKey());
+      result.put("RuleKey", activeRule.getRuleKey());
     }
 
     for (ActiveRuleParam param : activeRule.getActiveRuleParams()) {
-      builder.put(param.getKey(), param.getValue() == null ? "" : param.getValue());
+      result.put(param.getKey(), param.getValue() == null ? "" : param.getValue());
     }
 
     for (RuleParam param : activeRule.getRule().getParams()) {
-      if (!builder.containsKey(param.getKey())) {
-        builder.put(param.getKey(), param.getDefaultValue() == null ? "" : param.getDefaultValue());
+      if (!result.containsKey(param.getKey())) {
+        result.put(param.getKey(), param.getDefaultValue() == null ? "" : param.getDefaultValue());
       }
     }
 
-    return ImmutableMap.copyOf(builder);
+    return result;
   }
 
-  static Multimap<String, RuleKey> activeRoslynRulesByPartialRepoKey(Iterable<RuleKey> activeRules) {
-    ImmutableMultimap.Builder<String, RuleKey> builder = ImmutableMultimap.builder();
+  static Map<String, List<RuleKey>> activeRoslynRulesByPartialRepoKey(Iterable<RuleKey> activeRules) {
+    Map<String, List<RuleKey>> result = new LinkedHashMap<>();
 
     for (RuleKey activeRule : activeRules) {
       if (activeRule.repository().startsWith(ROSLYN_REPOSITORY_PREFIX)) {
         String pluginKey = activeRule.repository().substring(ROSLYN_REPOSITORY_PREFIX.length());
-        builder.put(pluginKey, activeRule);
+        result.putIfAbsent(pluginKey, new ArrayList<>());
+        result.get(pluginKey).add(activeRule);
       } else if (CSharpSonarRulesDefinition.REPOSITORY_KEY.equals(activeRule.repository())) {
-        builder.put(SONARANALYZER_PARTIAL_REPO_KEY, activeRule);
+        result.putIfAbsent(SONARANALYZER_PARTIAL_REPO_KEY, new ArrayList<>());
+        result.get(SONARANALYZER_PARTIAL_REPO_KEY).add(activeRule);
       }
     }
 
-    return builder.build();
+    return result;
   }
 
   private List<String> allRuleKeysByRepositoryKey(String repositoryKey) {
-    ImmutableList.Builder<String> builder = ImmutableList.builder();
+    List<String> result = new ArrayList<>();
     for (RulesDefinition rulesDefinition : rulesDefinitions) {
       Context context = new Context();
       rulesDefinition.define(context);
       Repository repo = context.repository(repositoryKey);
       if (repo != null) {
         for (Rule rule : repo.rules()) {
-          builder.add(rule.key());
+          result.add(rule.key());
         }
       }
     }
-    return builder.build();
+    return result;
   }
 
   private String mandatoryPropertyValue(String propertyKey) {

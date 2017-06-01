@@ -19,10 +19,6 @@
  */
 package org.sonar.plugins.dotnet.tests;
 
-import com.google.common.base.Preconditions;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
-
 import java.io.File;
 import java.io.IOException;
 import java.text.DateFormat;
@@ -31,6 +27,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import org.sonar.api.utils.log.Logger;
+import org.sonar.api.utils.log.Loggers;
 
 public class VisualStudioTestResultsFileParser implements UnitTestResultsParser {
 
@@ -60,7 +58,9 @@ public class VisualStudioTestResultsFileParser implements UnitTestResultsParser 
       try (XmlParserHelper xmlParserHelper = new XmlParserHelper(file)) {
         checkRootTag(xmlParserHelper);
         dispatchTags(xmlParserHelper);
-        Preconditions.checkArgument(foundCounters, "The mandatory <Counters> tag is missing in " + file.getAbsolutePath());
+        if (!foundCounters) {
+          throw new IllegalArgumentException("The mandatory <Counters> tag is missing in " + file.getAbsolutePath());
+        }
       } catch (IOException e) {
         throw new IllegalStateException("Unable to close report", e);
       }
