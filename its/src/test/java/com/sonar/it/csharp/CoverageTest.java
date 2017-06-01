@@ -20,150 +20,114 @@
 package com.sonar.it.csharp;
 
 import com.sonar.orchestrator.Orchestrator;
-import com.sonar.orchestrator.build.SonarRunner;
-import org.junit.BeforeClass;
+import java.io.IOException;
+import java.nio.file.Path;
+import org.junit.Before;
 import org.junit.ClassRule;
+import org.junit.Rule;
 import org.junit.Test;
-
-import java.io.File;
+import org.junit.rules.TemporaryFolder;
 
 import static com.sonar.it.csharp.Tests.getMeasure;
 import static com.sonar.it.csharp.Tests.getMeasureAsInt;
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class CoverageTest {
 
   @ClassRule
   public static final Orchestrator orchestrator = Tests.ORCHESTRATOR;
 
-  @BeforeClass
-  public static void init() throws Exception {
+  @Rule
+  public TemporaryFolder temp = new TemporaryFolder();
+
+  @Before
+  public void init() throws Exception {
     orchestrator.resetData();
   }
 
   @Test
-  public void should_not_import_coverage_without_report() {
-    SonarRunner build = Tests.createSonarScannerBuild()
-      .setProjectDir(new File("projects/CoverageTest/"))
-      .setProjectKey("CoverageTest")
-      .setProjectName("CoverageTest")
-      .setProjectVersion("1.0")
-      .setSourceDirs(".")
-      .setProperty("sonar.sourceEncoding", "UTF-8")
-      .setProperty("sonar.cs.file.suffixes", ".cs")
-      .setProfile("no_rule");
-    orchestrator.executeBuild(build);
+  public void should_not_import_coverage_without_report() throws Exception {
+    analyzeCoverageTestProject();
 
     assertThat(getMeasure("CoverageTest", "lines_to_cover")).isNull();
     assertThat(getMeasure("CoverageTest", "uncovered_lines")).isNull();
   }
 
   @Test
-  public void ncover3() {
-    SonarRunner build = Tests.createSonarScannerBuild()
-      .setProjectDir(new File("projects/CoverageTest/"))
-      .setProjectKey("CoverageTest")
-      .setProjectName("CoverageTest")
-      .setProjectVersion("1.0")
-      .setSourceDirs(".")
-      .setProperty("sonar.sourceEncoding", "UTF-8")
-      .setProperty("sonar.cs.file.suffixes", ".cs")
-      .setProperty("sonar.cs.ncover3.reportsPaths", "reports/ncover3.nccov")
-      .setProfile("no_rule");
-    orchestrator.executeBuild(build);
+  public void ncover3() throws Exception {
+    analyzeCoverageTestProject("sonar.cs.ncover3.reportsPaths", "reports/ncover3.nccov");
 
     assertThat(getMeasureAsInt("CoverageTest", "lines_to_cover")).isEqualTo(2);
     assertThat(getMeasureAsInt("CoverageTest", "uncovered_lines")).isEqualTo(1);
   }
 
   @Test
-  public void open_cover() {
-    SonarRunner build = Tests.createSonarScannerBuild()
-      .setProjectDir(new File("projects/CoverageTest/"))
-      .setProjectKey("CoverageTest")
-      .setProjectName("CoverageTest")
-      .setProjectVersion("1.0")
-      .setSourceDirs(".")
-      .setProperty("sonar.sourceEncoding", "UTF-8")
-      .setProperty("sonar.cs.file.suffixes", ".cs")
-      .setProperty("sonar.cs.opencover.reportsPaths", "reports/opencover.xml")
-      .setProfile("no_rule");
-    orchestrator.executeBuild(build);
+  public void open_cover() throws Exception {
+    analyzeCoverageTestProject("sonar.cs.opencover.reportsPaths", "reports/opencover.xml");
 
     assertThat(getMeasureAsInt("CoverageTest", "lines_to_cover")).isEqualTo(2);
     assertThat(getMeasureAsInt("CoverageTest", "uncovered_lines")).isEqualTo(0);
   }
 
   @Test
-  public void dotcover() {
-    SonarRunner build = Tests.createSonarScannerBuild()
-      .setProjectDir(new File("projects/CoverageTest/"))
-      .setProjectKey("CoverageTest")
-      .setProjectName("CoverageTest")
-      .setProjectVersion("1.0")
-      .setSourceDirs(".")
-      .setProperty("sonar.sourceEncoding", "UTF-8")
-      .setProperty("sonar.cs.file.suffixes", ".cs")
-      .setProperty("sonar.cs.dotcover.reportsPaths", "reports/dotcover.html")
-      .setProfile("no_rule");
-    orchestrator.executeBuild(build);
+  public void dotcover() throws Exception {
+    analyzeCoverageTestProject("sonar.cs.dotcover.reportsPaths", "reports/dotcover.html");
 
     assertThat(getMeasureAsInt("CoverageTest", "lines_to_cover")).isEqualTo(2);
     assertThat(getMeasureAsInt("CoverageTest", "uncovered_lines")).isEqualTo(1);
   }
 
   @Test
-  public void visual_studio() {
-    SonarRunner build = Tests.createSonarScannerBuild()
-      .setProjectDir(new File("projects/CoverageTest/"))
-      .setProjectKey("CoverageTest")
-      .setProjectName("CoverageTest")
-      .setProjectVersion("1.0")
-      .setSourceDirs(".")
-      .setProperty("sonar.sourceEncoding", "UTF-8")
-      .setProperty("sonar.cs.file.suffixes", ".cs")
-      .setProperty("sonar.cs.vscoveragexml.reportsPaths", "reports/visualstudio.coveragexml")
-      .setProfile("no_rule");
-    orchestrator.executeBuild(build);
+  public void visual_studio() throws Exception {
+    analyzeCoverageTestProject("sonar.cs.vscoveragexml.reportsPaths", "reports/visualstudio.coveragexml");
 
     assertThat(getMeasureAsInt("CoverageTest", "lines_to_cover")).isEqualTo(2);
     assertThat(getMeasureAsInt("CoverageTest", "uncovered_lines")).isEqualTo(1);
   }
 
   @Test
-  public void no_coverage_on_tests() {
-    SonarRunner build = Tests.createSonarScannerBuild()
-      .setProjectDir(new File("projects/NoCoverageOnTests/"))
+  public void no_coverage_on_tests() throws Exception {
+    Path projectDir = Tests.projectDir(temp, "NoCoverageOnTests");
+    orchestrator.executeBuild(Tests.newScanner(projectDir)
+      .addArgument("begin")
       .setProjectKey("NoCoverageOnTests")
       .setProjectName("NoCoverageOnTests")
       .setProjectVersion("1.0")
-      .setSourceDirs("src")
-      .setTestDirs("tests")
-      .setProperty("sonar.sourceEncoding", "UTF-8")
-      .setProperty("sonar.cs.file.suffixes", ".cs")
-      .setProperty("sonar.cs.vscoveragexml.reportsPaths", "reports/visualstudio.coveragexml")
-      .setProfile("no_rule");
-    orchestrator.executeBuild(build);
+      .setProfile("no_rule")
+      .setProperty("sonar.cs.vscoveragexml.reportsPaths", "reports/visualstudio.coveragexml"));
 
+    Tests.runMSBuild(orchestrator, projectDir, "/t:Rebuild");
+
+    orchestrator.executeBuild(Tests.newScanner(projectDir)
+      .addArgument("end"));
+
+    assertThat(getMeasureAsInt("NoCoverageOnTests", "files")).isEqualTo(2); // Only main files are counted
+    assertThat(Tests.getComponent("NoCoverageOnTests:NoCoverageOnTests:8A3B715A-6E95-4BC1-93C6-A59E9D3F5D5C:UnitTest1.cs")).isNotNull();
     assertThat(getMeasureAsInt("NoCoverageOnTests", "lines_to_cover")).isNull();
     assertThat(getMeasureAsInt("NoCoverageOnTests", "uncovered_lines")).isNull();
   }
 
   @Test
-  public void should_support_wildcard_patterns() {
-    SonarRunner build = Tests.createSonarScannerBuild()
-      .setProjectDir(new File("projects/CoverageTest/"))
+  public void should_support_wildcard_patterns() throws Exception {
+    analyzeCoverageTestProject("sonar.cs.ncover3.reportsPaths", "reports/*.nccov");
+
+    assertThat(getMeasureAsInt("CoverageTest", "lines_to_cover")).isEqualTo(2);
+  }
+
+  private void analyzeCoverageTestProject(String... keyValues) throws IOException {
+    Path projectDir = Tests.projectDir(temp, "CoverageTest");
+    orchestrator.executeBuild(Tests.newScanner(projectDir)
+      .addArgument("begin")
       .setProjectKey("CoverageTest")
       .setProjectName("CoverageTest")
       .setProjectVersion("1.0")
-      .setSourceDirs(".")
-      .setProperty("sonar.sourceEncoding", "UTF-8")
-      .setProperty("sonar.cs.file.suffixes", ".cs")
-      .setProperty("sonar.cs.ncover3.reportsPaths", "reports/*.nccov")
-      .setProfile("no_rule");
-    orchestrator.executeBuild(build);
+      .setProfile("no_rule")
+      .setProperties(keyValues));
 
-    assertThat(getMeasureAsInt("CoverageTest", "lines_to_cover")).isEqualTo(2);
+    Tests.runMSBuild(orchestrator, projectDir, "/t:Rebuild");
+
+    orchestrator.executeBuild(Tests.newScanner(projectDir)
+      .addArgument("end"));
   }
 
 }

@@ -35,7 +35,7 @@ function Get-BuildArtifacts {
 
     $authHeaders = (Get-AuthHeaders)
 
-    $packageNames = "SonarAnalyzer.CSharp", "SonarAnalyzer.VisualBasic", "SonarAnalyzer.Scanner"
+    $packageNames = "SonarAnalyzer.CSharp", "SonarAnalyzer.VisualBasic"
 
     try {
         $tempFolder = (Resolve-RepoPath "temp") #TODO: make random

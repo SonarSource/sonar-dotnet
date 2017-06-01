@@ -89,11 +89,6 @@ function ReleaseAll(
      <file src=""xml\*.xml"" target=""xml\"" />
     </files>"
 
-    $scannerContent = "<files>
-     <file src=""assembly\*.*"" target=""assembly\"" />
-     <file src=""protobuf\*.proto"" target=""protobuf\"" />
-    </files>"
-
 
     # analyzers
     CreateRelease   -productName "SonarAnalyzer.VisualBasic" `
@@ -106,10 +101,6 @@ function ReleaseAll(
                     -version $buildVersion -expectedSha1 $sha1 -releaseVersion $releaseVersion -additionalNugetFileContent $descriptorContent -nugetPath $nugetPath
     CreateRelease   -productName "SonarAnalyzer.RuleDocGenerator.CSharp" `
                     -version $buildVersion -expectedSha1 $sha1 -releaseVersion $releaseVersion -additionalNugetFileContent $descriptorContent -nugetPath $nugetPath
-
-    # scanner
-    CreateRelease   -productName "SonarAnalyzer.Scanner" `
-                    -version $buildVersion -expectedSha1 $sha1  -releaseVersion $releaseVersion -additionalNugetFileContent $scannerContent -nugetPath $nugetPath
 }
 
 ReleaseAll -buildVersion $env:PROMOTED_VERSION -sha1 $env:SHA1 -releaseVersion $env:RELEASE_VERSION -nugetPath $env:NUGET_PATH
@@ -145,7 +136,6 @@ pushToRepox -productName "SonarAnalyzer.CSharp"                         -release
 pushToRepox -productName "SonarAnalyzer.VisualBasic"                    -releaseVersion $env:RELEASE_VERSION -nugetPath $env:NUGET_PATH
 pushToRepox -productName "SonarAnalyzer.RuleDocGenerator.CSharp"        -releaseVersion $env:RELEASE_VERSION -nugetPath $env:NUGET_PATH
 pushToRepox -productName "SonarAnalyzer.RuleDocGenerator.VisualBasic"   -releaseVersion $env:RELEASE_VERSION -nugetPath $env:NUGET_PATH
-pushToRepox -productName "SonarAnalyzer.Scanner"                        -releaseVersion $env:RELEASE_VERSION -nugetPath $env:NUGET_PATH
 
 
 #upload to maven repo

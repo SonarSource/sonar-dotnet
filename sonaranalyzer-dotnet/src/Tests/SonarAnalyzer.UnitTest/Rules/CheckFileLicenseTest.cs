@@ -190,7 +190,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 "Expected collection to be empty, but found {error AD0001: The Compiler Analyzer 'SonarAnalyzer.Rules.CSharp.CheckFileLicense' " +
                 "threw an exception of type 'System.ArgumentException' with message 'Invalid regular expression: " +
                 FailingSingleLineRegexHeader +
-                "\r\nParameter name: headerFormat'.}.";
+                "\r\n*: headerFormat'.}.";
 
             Action action =
                 () => Verifier.VerifyAnalyzer(@"TestCases\CheckFileLicense_NoLicenseStartWithUsing.cs",

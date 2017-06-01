@@ -184,7 +184,6 @@
           <include>org/sonar/plugins/csharp/*.xml</include>
           <include>static/version.txt</include>
           <include>static/SonarAnalyzer-${project.version}.zip</include>
-          <include>SonarAnalyzer.Scanner.zip</include>
         </includes>
       </resource>
       <resource>
@@ -209,8 +208,8 @@
             <configuration>
               <rules>
                 <requireFilesSize>
-                  <maxsize>12000000</maxsize>
-                  <minsize>7000000</minsize>
+                  <maxsize>5000000</maxsize>
+                  <minsize>4000000</minsize>
                   <files>
                     <file>${project.build.directory}/${project.build.finalName}.jar</file>
                   </files>
@@ -271,16 +270,6 @@
                 </copy>
                 <zip destfile="${sonarAnalyzer.workDirectory}/static/SonarAnalyzer-${project.version}.zip"
                             basedir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.CSharp"/>
-
-                <copy todir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.Scanner">
-                  <fileset dir="${project.build.directory}/../../sonaranalyzer-dotnet/src/SonarAnalyzer.Scanner/bin/${analyzer.build.conf}">
-                    <include name="*.dll"/>
-                    <include name="*.exe"/>
-                    <include name="*.exe.config"/>
-                  </fileset>
-                </copy>
-                <zip destfile="${sonarAnalyzer.workDirectory}/SonarAnalyzer.Scanner.zip"
-                  basedir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.Scanner"/>
 
                 <copy todir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.RuleDocGenerator.CSharp">
                   <fileset dir="${project.build.directory}/../../sonaranalyzer-dotnet/src/SonarAnalyzer.RuleDescriptorGenerator/bin/${analyzer.build.conf}/cs">

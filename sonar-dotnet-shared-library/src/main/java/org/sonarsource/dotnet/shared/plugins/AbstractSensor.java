@@ -19,7 +19,10 @@
  */
 package org.sonarsource.dotnet.shared.plugins;
 
-import org.sonar.api.batch.fs.FileSystem;
+import java.nio.file.Path;
+import java.util.Collection;
+import java.util.Map;
+import java.util.function.Predicate;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.issue.NewIssue;
@@ -35,12 +38,11 @@ import org.sonarsource.dotnet.shared.plugins.protobuf.RawProtobufImporter;
 import org.sonarsource.dotnet.shared.sarif.Location;
 import org.sonarsource.dotnet.shared.sarif.SarifParserCallback;
 
-import java.nio.file.Path;
-import java.util.Collection;
-import java.util.Map;
-import java.util.function.Predicate;
-
-import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.*;
+import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.CPDTOKENS_OUTPUT_PROTOBUF_NAME;
+import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.HIGHLIGHT_OUTPUT_PROTOBUF_NAME;
+import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.ISSUES_OUTPUT_PROTOBUF_NAME;
+import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.METRICS_OUTPUT_PROTOBUF_NAME;
+import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.SYMBOLREFS_OUTPUT_PROTOBUF_NAME;
 
 public abstract class AbstractSensor {
   private static final Logger LOG = Loggers.get(AbstractSensor.class);
@@ -51,16 +53,12 @@ public abstract class AbstractSensor {
   private final String repositoryKey;
 
   protected AbstractSensor(FileLinesContextFactory fileLinesContextFactory, NoSonarFilter noSonarFilter, AbstractConfiguration config, EncodingPerFile encodingPerFile,
-                           String repositoryKey) {
+    String repositoryKey) {
     this.fileLinesContextFactory = fileLinesContextFactory;
     this.noSonarFilter = noSonarFilter;
     this.config = config;
     this.encodingPerFile = encodingPerFile;
     this.repositoryKey = repositoryKey;
-  }
-
-  protected static Path toolInput(FileSystem fs) {
-    return fs.workDir().toPath().resolve("SonarLint.xml");
   }
 
   public void importResults(SensorContext context, Path protobufReportsDirectory, boolean importIssues) {
@@ -110,11 +108,11 @@ public abstract class AbstractSensor {
       }
       NewIssue newIssue = context.newIssue();
       newIssue
-          .forRule(RuleKey.of(repositoryKey, ruleId))
-          .at(newIssue.newLocation()
-              .on(context.module())
-              .message(message))
-          .save();
+        .forRule(RuleKey.of(repositoryKey, ruleId))
+        .at(newIssue.newLocation()
+          .on(context.module())
+          .message(message))
+        .save();
     }
 
     @Override
@@ -125,18 +123,18 @@ public abstract class AbstractSensor {
       }
 
       InputFile inputFile = context.fileSystem().inputFile(context.fileSystem().predicates()
-          .hasAbsolutePath(absolutePath));
+        .hasAbsolutePath(absolutePath));
       if (inputFile == null) {
         return;
       }
 
       NewIssue newIssue = context.newIssue();
       newIssue
-          .forRule(RuleKey.of(repositoryKey, ruleId))
-          .at(newIssue.newLocation()
-              .on(inputFile)
-              .message(message))
-          .save();
+        .forRule(RuleKey.of(repositoryKey, ruleId))
+        .at(newIssue.newLocation()
+          .on(inputFile)
+          .message(message))
+        .save();
     }
 
     @Override
@@ -147,33 +145,33 @@ public abstract class AbstractSensor {
       }
 
       InputFile inputFile = context.fileSystem().inputFile(context.fileSystem().predicates()
-          .hasAbsolutePath(primaryLocation.getAbsolutePath()));
+        .hasAbsolutePath(primaryLocation.getAbsolutePath()));
       if (inputFile == null) {
         return;
       }
 
       NewIssue newIssue = context.newIssue();
       newIssue
-          .forRule(RuleKey.of(repositoryKey, ruleId))
-          .at(newIssue.newLocation()
-              .on(inputFile)
-              .at(inputFile.newRange(primaryLocation.getStartLine(), primaryLocation.getStartColumn(),
-                  primaryLocation.getEndLine(), primaryLocation.getEndColumn()))
-              .message(primaryLocation.getMessage()));
+        .forRule(RuleKey.of(repositoryKey, ruleId))
+        .at(newIssue.newLocation()
+          .on(inputFile)
+          .at(inputFile.newRange(primaryLocation.getStartLine(), primaryLocation.getStartColumn(),
+            primaryLocation.getEndLine(), primaryLocation.getEndColumn()))
+          .message(primaryLocation.getMessage()));
 
       for (Location secondaryLocation : secondaryLocations) {
         if (!inputFile.absolutePath().equalsIgnoreCase(secondaryLocation.getAbsolutePath())) {
           inputFile = context.fileSystem().inputFile(context.fileSystem().predicates()
-              .hasAbsolutePath(secondaryLocation.getAbsolutePath()));
+            .hasAbsolutePath(secondaryLocation.getAbsolutePath()));
           if (inputFile == null) {
             return;
           }
         }
 
         NewIssueLocation newIssueLocation = newIssue.newLocation()
-            .on(inputFile)
-            .at(inputFile.newRange(secondaryLocation.getStartLine(), secondaryLocation.getStartColumn(),
-                secondaryLocation.getEndLine(), secondaryLocation.getEndColumn()));
+          .on(inputFile)
+          .at(inputFile.newRange(secondaryLocation.getStartLine(), secondaryLocation.getStartColumn(),
+            secondaryLocation.getEndLine(), secondaryLocation.getEndColumn()));
 
         String secondaryLocationMessage = secondaryLocation.getMessage();
         if (secondaryLocationMessage != null) {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 // This is a comment!
 
-namespace CSLib.foo
+namespace CSLib.bar
 {
     // Commented public API
     public class MyClazz

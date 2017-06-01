@@ -20,9 +20,21 @@
 package com.sonar.it.csharp;
 
 import com.sonar.orchestrator.Orchestrator;
-import com.sonar.orchestrator.build.SonarScanner;
+import com.sonar.orchestrator.build.Build;
+import com.sonar.orchestrator.build.ScannerForMSBuild;
 import com.sonar.orchestrator.locator.FileLocation;
+import com.sonar.orchestrator.util.Command;
+import com.sonar.orchestrator.util.CommandExecutor;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List;
+import javax.annotation.CheckForNull;
+import org.apache.commons.io.FileUtils;
 import org.junit.ClassRule;
+import org.junit.rules.TemporaryFolder;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
@@ -35,22 +47,20 @@ import org.sonarqube.ws.client.WsClientFactories;
 import org.sonarqube.ws.client.component.ShowWsRequest;
 import org.sonarqube.ws.client.measure.ComponentWsRequest;
 
-import javax.annotation.CheckForNull;
-import java.io.File;
-import java.util.List;
-
 import static java.util.Collections.singletonList;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(Suite.class)
 @SuiteClasses({
   CoverageTest.class,
   DoNotAnalyzeTestFilesTest.class,
-  FileSuffixesTest.class,
   MetricsTest.class,
   NoSonarTest.class,
   UnitTestResultsTest.class
 })
 public class Tests {
+
+  private static final String MSBUILD_PATH = "msbuild.path";
 
   @ClassRule
   public static final Orchestrator ORCHESTRATOR = Orchestrator.builderEnv()
@@ -60,8 +70,35 @@ public class Tests {
     .restoreProfileAtStartup(FileLocation.of("profiles/template_rule.xml"))
     .build();
 
-  public static SonarScanner createSonarScannerBuild() {
-    return SonarScanner.create();
+  public static Path projectDir(TemporaryFolder temp, String projectName) throws IOException {
+    Path projectDir = Paths.get("projects").resolve(projectName);
+    FileUtils.deleteDirectory(new File(temp.getRoot(), projectName));
+    Path tmpProjectDir = temp.newFolder(projectName).toPath();
+    FileUtils.copyDirectory(projectDir.toFile(), tmpProjectDir.toFile());
+    return tmpProjectDir;
+  }
+
+  public static Build<ScannerForMSBuild> newScanner(Path projectDir) {
+    return ScannerForMSBuild.create(projectDir.toFile())
+      .setScannerVersion(System.getProperty("scannerMsbuild.version"));
+  }
+
+  public static void runMSBuild(Orchestrator orch, Path projectDir, String... arguments) {
+    Path msBuildPath = getMsBuildPath(orch);
+
+    int r = CommandExecutor.create().execute(Command.create(msBuildPath.toString())
+      .addArguments(arguments)
+      .setDirectory(projectDir.toFile()), 60 * 1000);
+    assertThat(r).isEqualTo(0);
+  }
+
+  private static Path getMsBuildPath(Orchestrator orch) {
+    String msBuildPathStr = orch.getConfiguration().getString(MSBUILD_PATH, "C:\\Program Files (x86)\\MSBuild\\14.0\\bin\\MSBuild.exe");
+    Path msBuildPath = Paths.get(msBuildPathStr).toAbsolutePath();
+    if (!Files.exists(msBuildPath)) {
+      throw new IllegalStateException("Unable to find MSBuild at " + msBuildPath.toString() + ". Please configure property '" + MSBUILD_PATH + "'");
+    }
+    return msBuildPath;
   }
 
   @CheckForNull

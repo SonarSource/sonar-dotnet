@@ -19,43 +19,54 @@
  */
 package com.sonar.it.csharp;
 
-import com.sonar.orchestrator.Orchestrator;
-import com.sonar.orchestrator.build.SonarScanner;
-import org.junit.BeforeClass;
+import java.nio.file.Path;
 import org.junit.ClassRule;
 import org.junit.Test;
+import org.junit.rules.ExternalResource;
+import org.junit.rules.RuleChain;
+import org.junit.rules.TemporaryFolder;
 import org.sonarqube.ws.WsMeasures.Measure;
 
-import java.io.File;
-
-import static com.sonar.it.csharp.Tests.*;
+import static com.sonar.it.csharp.Tests.ORCHESTRATOR;
+import static com.sonar.it.csharp.Tests.getComponent;
+import static com.sonar.it.csharp.Tests.getMeasure;
+import static com.sonar.it.csharp.Tests.getMeasureAsInt;
 import static org.apache.commons.lang.StringUtils.countMatches;
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class MetricsTest {
 
+  public static TemporaryFolder temp = new TemporaryFolder();
+
   private static final String PROJECT = "MetricsTest";
-  private static final String DIRECTORY = "MetricsTest:foo";
-  private static final String FILE = "MetricsTest:foo/Class1.cs";
+  private static final String DIRECTORY = "MetricsTest:MetricsTest:1F026ECA-900A-488D-9D07-AD23216FA32B:foo";
+  private static final String FILE = "MetricsTest:MetricsTest:1F026ECA-900A-488D-9D07-AD23216FA32B:foo/Class1.cs";
 
   @ClassRule
-  public static final Orchestrator orchestrator = Tests.ORCHESTRATOR;
+  public static RuleChain chain = RuleChain
+    .outerRule(ORCHESTRATOR)
+    .around(temp)
+    .around(new ExternalResource() {
+      @Override
+      protected void before() throws Throwable {
+        ORCHESTRATOR.resetData();
 
-  @BeforeClass
-  public static void init() {
-    orchestrator.resetData();
+        Path projectDir = Tests.projectDir(temp, "MetricsTest");
+        ORCHESTRATOR.executeBuild(Tests.newScanner(projectDir)
+          .addArgument("begin")
+          .setProjectKey("MetricsTest")
+          .setProjectName("MetricsTest")
+          .setProjectVersion("1.0")
+          .setProfile("no_rule")
+          // Without that, the MetricsTest project is considered as a Test project :)
+          .setProperty("sonar.msbuild.testProjectPattern", "noTests"));
 
-    SonarScanner build = Tests.createSonarScannerBuild()
-      .setProjectDir(new File("projects/MetricsTest/"))
-      .setProjectKey("MetricsTest")
-      .setProjectName("MetricsTest")
-      .setProjectVersion("1.0")
-      .setSourceDirs(".")
-      .setProperty("sonar.sourceEncoding", "UTF-8")
-      .setProperty("sonar.verbose", "true")
-      .setProfile("no_rule");
-    orchestrator.executeBuild(build);
-  }
+        Tests.runMSBuild(ORCHESTRATOR, projectDir, "/t:Rebuild");
+
+        ORCHESTRATOR.executeBuild(Tests.newScanner(projectDir)
+          .addArgument("end"));
+      }
+    });
 
   @Test
   public void projectIsAnalyzed() {

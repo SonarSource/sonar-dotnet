@@ -20,35 +20,43 @@
 package com.sonar.it.csharp;
 
 import com.sonar.orchestrator.Orchestrator;
-import com.sonar.orchestrator.build.SonarRunner;
+import java.nio.file.Path;
 import org.junit.BeforeClass;
 import org.junit.ClassRule;
 import org.junit.Test;
+import org.junit.rules.TemporaryFolder;
 
-import java.io.File;
-
+import static com.sonar.it.csharp.Tests.ORCHESTRATOR;
 import static com.sonar.it.csharp.Tests.getMeasureAsInt;
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class NoSonarTest {
+
+  @ClassRule
+  public static TemporaryFolder temp = new TemporaryFolder();
 
   private static final String PROJECT = "NoSonarTest";
   @ClassRule
   public static final Orchestrator orchestrator = Tests.ORCHESTRATOR;
 
   @BeforeClass
-  public static void init() {
+  public static void init() throws Exception {
     orchestrator.resetData();
 
-    SonarRunner build = Tests.createSonarScannerBuild()
-      .setProjectDir(new File("projects/NoSonarTest/"))
+    Path projectDir = Tests.projectDir(temp, "NoSonarTest");
+    ORCHESTRATOR.executeBuild(Tests.newScanner(projectDir)
+      .addArgument("begin")
       .setProjectKey("NoSonarTest")
       .setProjectName("NoSonarTest")
       .setProjectVersion("1.0")
-      .setSourceDirs(".")
-      .setProperty("sonar.sourceEncoding", "UTF-8")
-      .setProfile("class_name");
-    orchestrator.executeBuild(build);
+      .setProfile("class_name")
+      // Without that, the NoSonarTest project is considered as a Test project :)
+      .setProperty("sonar.msbuild.testProjectPattern", "noTests"));
+
+    Tests.runMSBuild(ORCHESTRATOR, projectDir, "/t:Rebuild");
+
+    ORCHESTRATOR.executeBuild(Tests.newScanner(projectDir)
+      .addArgument("end"));
   }
 
   @Test

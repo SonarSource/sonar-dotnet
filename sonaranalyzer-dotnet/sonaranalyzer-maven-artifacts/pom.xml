@@ -28,7 +28,6 @@
   <modules>
     <module>SonarAnalyzer.RuleDocGenerator.CSharp</module>
     <module>SonarAnalyzer.RuleDocGenerator.VisualBasic</module>
-    <module>SonarAnalyzer.Scanner</module>
     <module>SonarAnalyzer.CSharp</module>
     <module>SonarAnalyzer.VisualBasic</module>
   </modules>

@@ -20,6 +20,10 @@
 package org.sonar.plugins.csharp;
 
 import com.google.common.collect.Multimap;
+import java.io.File;
+import java.nio.file.Path;
+import java.util.HashMap;
+import java.util.Map;
 import org.apache.commons.lang.SystemUtils;
 import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.batch.fs.InputFile.Type;
@@ -31,24 +35,12 @@ import org.sonar.api.config.Settings;
 import org.sonar.api.issue.NoSonarFilter;
 import org.sonar.api.measures.FileLinesContextFactory;
 import org.sonar.api.rule.RuleKey;
-import org.sonar.api.utils.command.Command;
-import org.sonar.api.utils.command.CommandExecutor;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 import org.sonarsource.dotnet.shared.plugins.AbstractSensor;
-import org.sonarsource.dotnet.shared.plugins.AnalysisInputXml;
 import org.sonarsource.dotnet.shared.plugins.EncodingPerFile;
-import org.sonarsource.dotnet.shared.plugins.SonarAnalyzerScannerExtractor;
 import org.sonarsource.dotnet.shared.sarif.SarifParserCallback;
 import org.sonarsource.dotnet.shared.sarif.SarifParserFactory;
-
-import java.io.File;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.HashMap;
-import java.util.Map;
 
 import static java.util.stream.Collectors.toList;
 
@@ -57,14 +49,12 @@ public class CSharpSensor extends AbstractSensor implements Sensor {
   private static final Logger LOG = Loggers.get(CSharpSensor.class);
 
   private final Settings settings;
-  private final SonarAnalyzerScannerExtractor extractor;
   private final CSharpConfiguration config;
 
-  public CSharpSensor(Settings settings, SonarAnalyzerScannerExtractor extractor, FileLinesContextFactory fileLinesContextFactory,
+  public CSharpSensor(Settings settings, FileLinesContextFactory fileLinesContextFactory,
     NoSonarFilter noSonarFilter, CSharpConfiguration config, EncodingPerFile encodingPerFile) {
     super(fileLinesContextFactory, noSonarFilter, config, encodingPerFile, CSharpSonarRulesDefinition.REPOSITORY_KEY);
     this.settings = settings;
-    this.extractor = extractor;
     this.config = config;
   }
 
@@ -99,21 +89,10 @@ public class CSharpSensor extends AbstractSensor implements Sensor {
   }
 
   void executeInternal(SensorContext context) {
-    boolean requiresAnalyzerScannerExecution = !config.isReportsComingFromMSBuild();
-
-    LOG.info("SonarAnalyzer.Scanner needs to be executed: " + requiresAnalyzerScannerExecution);
-
     String roslynReportPath = settings.getString(config.getRoslynJsonReportPathProperty());
     boolean hasRoslynReportPath = roslynReportPath != null;
 
-    Path protobufReportsDirectory;
-    if (requiresAnalyzerScannerExecution) {
-      // MSBuild 12 or MSBuild 14 with old scanner
-      analyze(!hasRoslynReportPath, context);
-      protobufReportsDirectory = protobufReportPathForMSBuild12(context);
-    } else {
-      protobufReportsDirectory = config.protobufReportPathFromScanner();
-    }
+    Path protobufReportsDirectory = config.protobufReportPathFromScanner();
 
     LOG.info("Importing analysis results from " + protobufReportsDirectory.toAbsolutePath().toString());
     importResults(context, protobufReportsDirectory, !hasRoslynReportPath);
@@ -121,50 +100,6 @@ public class CSharpSensor extends AbstractSensor implements Sensor {
     if (hasRoslynReportPath) {
       LOG.info("Importing Roslyn report");
       importRoslynReport(roslynReportPath, context);
-    }
-  }
-
-  void analyze(boolean includeRules, SensorContext context) {
-    if (includeRules) {
-      LOG.warn("***********************************************************************************");
-      LOG.warn("*                 Use MSBuild 14 to get the best analysis results                 *");
-      LOG.warn("* The use of MSBuild 12 or the sonar-scanner to analyze C# projects is DEPRECATED *");
-      LOG.warn("***********************************************************************************");
-
-      Multimap<String, RuleKey> activeRoslynRulesByPartialRepoKey = RoslynProfileExporter.activeRoslynRulesByPartialRepoKey(context.activeRules()
-        .findAll()
-        .stream()
-        .map(ActiveRule::ruleKey)
-        .collect(toList()));
-
-      if (activeRoslynRulesByPartialRepoKey.keySet().size() > 1) {
-        throw new IllegalArgumentException(
-          "Custom and 3rd party Roslyn analyzers are only by MSBuild 14. Either use MSBuild 14, or disable the custom/3rd party Roslyn analyzers in your quality profile.");
-      }
-    }
-
-    String analysisSettings = AnalysisInputXml.generate(true, settings.getBoolean("sonar.cs.ignoreHeaderComments"), includeRules, context,
-      CSharpSonarRulesDefinition.REPOSITORY_KEY, CSharpPlugin.LANGUAGE_KEY, context.fileSystem().encoding().name());
-
-    Path analysisInput = toolInput(context.fileSystem());
-    Path analysisOutput = protobufReportPathForMSBuild12(context);
-
-    try {
-      Files.write(analysisInput, analysisSettings.getBytes(StandardCharsets.UTF_8));
-    } catch (IOException e) {
-      throw new IllegalStateException(e);
-    }
-
-    File executableFile = extractor.executableFile(CSharpPlugin.LANGUAGE_KEY);
-
-    Command command = Command.create(executableFile.getAbsolutePath())
-      .addArgument(analysisInput.toAbsolutePath().toString())
-      .addArgument(analysisOutput.toAbsolutePath().toString())
-      .addArgument(CSharpPlugin.LANGUAGE_KEY);
-
-    int exitCode = CommandExecutor.create().execute(command, new LogInfoStreamConsumer(), new LogErrorStreamConsumer(), Integer.MAX_VALUE);
-    if (exitCode != 0) {
-      throw new IllegalStateException("The .NET analyzer failed with exit code: " + exitCode + " - Verify that the .NET Framework version 4.5.2 at least is installed.");
     }
   }
 
@@ -186,12 +121,6 @@ public class CSharpSensor extends AbstractSensor implements Sensor {
 
     SarifParserCallback callback = new SarifParserCallbackImplementation(context, repositoryKeyByRoslynRuleKey);
     SarifParserFactory.create(new File(reportPath)).accept(callback);
-  }
-
-  private Path protobufReportPathForMSBuild12(SensorContext context) {
-    // With MSBuild 12 or old version of the scanner, protobuf reports are not generated
-    // so return a new directory in the SQ working dir and the sensor will be responsible to execute analyzer.
-    return context.fileSystem().workDir().toPath().resolve(config.getAnalyzerReportDir());
   }
 
 }
