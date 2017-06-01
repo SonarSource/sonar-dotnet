@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text
@@ -7,6 +8,8 @@ using System.Threading.Tasks;
 namespace SonarAnalyzer.UnitTest.TestCasesForRuleFailure
 {
     public void Method2(int i, int j) { }
+
+    class DuplicatedInterfaces: IList, IList {}
 
     class InvalidSyntax
     {
