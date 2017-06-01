@@ -107,6 +107,7 @@ namespace SonarAnalyzer.UnitTest.PackagingTests
             ["1940"] = "CODE_SMELL",
             ["1944"] = "BUG",
             ["1994"] = "CODE_SMELL",
+            ["2068"] = "VULNERABILITY",
             ["2070"] = "VULNERABILITY",
             ["2123"] = "BUG",
             ["2156"] = "CODE_SMELL",
@@ -381,7 +382,7 @@ namespace SonarAnalyzer.UnitTest.PackagingTests
             deletedRules.Should().BeEmpty($"YOU SHOULD NEVER DELETE RULES!");
 
             // IMPORTANT: If this test fails, you should update the types of the changed rules
-            // in the dictionaries above. Also add a GitHub issue specifying the change of type 
+            // in the dictionaries above. Also add a GitHub issue specifying the change of type
             // and update peach and next.
             var changedRules = items.Where(x => x.ActualType != null && x.ExpectedType != null);
             changedRules.Should().BeEmpty($"you need to change the rules in {expectedTypesName}.");
