@@ -19,10 +19,10 @@
  */
 
 using System;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.Serialization;
 using Microsoft.CodeAnalysis;
-using System.Diagnostics;
 
 namespace SonarAnalyzer.Helpers
 {
