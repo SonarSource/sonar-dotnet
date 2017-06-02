@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4018",
+"message":  "Refactor this method to have parameters matching all the type parameters.",
+"location":  {
+"uri":  "Nancy\src\Nancy.ViewEngines.Nustache\NustacheViewEngine.cs",
+"region":  {
+"startLine":  49,
+"startColumn":  32,
+"endLine":  49,
+"endColumn":  51
+}
+}
+}
+]
+}
