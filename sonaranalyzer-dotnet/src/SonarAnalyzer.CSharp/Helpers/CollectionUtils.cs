@@ -34,7 +34,12 @@ namespace SonarAnalyzer.Helpers
             return new HashSet<T>(enumerable);
         }
 
-        public static TValue GetValueOrDefault<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key, TValue defaultValue = default(TValue))
+        public static TValue GetValueOrDefault<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key)
+        {
+            return dictionary.GetValueOrDefault(key, default(TValue));
+        }
+
+        public static TValue GetValueOrDefault<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key, TValue defaultValue)
         {
             TValue result;
             if (dictionary.TryGetValue(key, out result))
