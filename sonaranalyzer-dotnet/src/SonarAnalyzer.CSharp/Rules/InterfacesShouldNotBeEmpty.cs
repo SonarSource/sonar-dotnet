@@ -43,6 +43,11 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
             {
+                if (c.SemanticModel.Compilation.IsTest())
+                {
+                    return;
+                }
+
                 var interfaceDeclaration = c.Node as InterfaceDeclarationSyntax;
                 var interfaceSymbol = c.SemanticModel.GetDeclaredSymbol(interfaceDeclaration);
 
