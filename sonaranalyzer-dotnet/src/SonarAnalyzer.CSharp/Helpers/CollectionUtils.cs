@@ -19,7 +19,6 @@
  */
 
 using System.Collections.Generic;
-using System.Linq;
 
 namespace SonarAnalyzer.Helpers
 {
@@ -33,6 +32,17 @@ namespace SonarAnalyzer.Helpers
             }
 
             return new HashSet<T>(enumerable);
+        }
+
+        public static TValue GetValueOrDefault<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key, TValue defaultValue = default(TValue))
+        {
+            TValue result;
+            if (dictionary.TryGetValue(key, out result))
+            {
+                return result;
+            }
+
+            return defaultValue;
         }
     }
 }

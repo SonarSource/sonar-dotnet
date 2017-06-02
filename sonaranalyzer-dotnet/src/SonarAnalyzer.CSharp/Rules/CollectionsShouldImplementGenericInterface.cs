@@ -20,7 +20,6 @@
 
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -94,13 +93,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static string SuggestGenericCollectionType(ITypeSymbol typeSymbol)
         {
-            KnownType suggestedGenericType;
-            if (nongenericToGenericMapping.TryGetValue(typeSymbol.ToDisplayString(), out suggestedGenericType))
-            {
-                return suggestedGenericType.TypeName;
-            }
-
-            return null;
+            return nongenericToGenericMapping.GetValueOrDefault(typeSymbol.ToDisplayString())?.TypeName;
         }
     }
 }
