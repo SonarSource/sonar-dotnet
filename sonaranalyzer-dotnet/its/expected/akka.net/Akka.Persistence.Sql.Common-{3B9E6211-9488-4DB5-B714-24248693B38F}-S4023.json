@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S4023",
+"message":  "Remove this interface or add members to it.",
+"location":  {
+"uri":  "akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Queries\Hints.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  22,
+"endLine":  14,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S4023",
+"message":  "Remove this interface or add members to it.",
+"location":  {
+"uri":  "akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Queries\Query.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  22,
+"endLine":  14,
+"endColumn":  33
+}
+}
+}
+]
+}

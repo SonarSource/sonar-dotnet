@@ -6525,6 +6525,33 @@
   <data name="S4017_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
   </data>
+  <data name="S4023_Category" xml:space="preserve">
+    <value>Sonar Code Smell</value>
+  </data>
+  <data name="S4023_Description" xml:space="preserve">
+    <value>Empty interfaces are usually used as a marker or a way to identify groups of types. The preferred way to achieve this is to use custom attributes.</value>
+  </data>
+  <data name="S4023_IsActivatedByDefault" xml:space="preserve">
+    <value>False</value>
+  </data>
+  <data name="S4023_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S4023_RemediationCost" xml:space="preserve">
+    <value>2min</value>
+  </data>
+  <data name="S4023_Severity" xml:space="preserve">
+    <value>Minor</value>
+  </data>
+  <data name="S4023_Tags" xml:space="preserve">
+    <value />
+  </data>
+  <data name="S4023_Title" xml:space="preserve">
+    <value>Interfaces should not be empty</value>
+  </data>
+  <data name="S4023_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S818_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>

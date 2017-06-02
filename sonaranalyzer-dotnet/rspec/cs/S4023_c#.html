@@ -1,0 +1,26 @@
+<p>Empty interfaces are usually used as a marker or a way to identify groups of types. The preferred way to achieve this is to use custom
+attributes.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+using System;
+
+namespace MyLibrary
+{
+   public MyInterface // Noncompliant
+   {
+   }
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+using System;
+
+namespace MyLibrary
+{
+   public MyInterface
+   {
+      public void Foo();
+   }
+}
+</pre>
+

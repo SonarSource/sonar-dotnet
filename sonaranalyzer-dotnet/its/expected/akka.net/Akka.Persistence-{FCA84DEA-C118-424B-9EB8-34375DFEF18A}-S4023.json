@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S4023",
+"message":  "Remove this interface or add members to it.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence\Journal\EventSequences.cs",
+"region":  {
+"startLine":  19,
+"startColumn":  22,
+"endLine":  19,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S4023",
+"message":  "Remove this interface or add members to it.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence\Serialization\MessageSerializer.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  22,
+"endLine":  15,
+"endColumn":  30
+}
+}
+}
+]
+}
