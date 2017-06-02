@@ -1,0 +1,14 @@
+{
+  "title": "\"Obsolete\" attributes should include explanations",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    "obsolete",
+    "bad-practice"
+  ],
+  "defaultSeverity": "Major"
+}

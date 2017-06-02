@@ -603,6 +603,33 @@
   <data name="S1121_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
   </data>
+  <data name="S1123_Category" xml:space="preserve">
+    <value>Sonar Code Smell</value>
+  </data>
+  <data name="S1123_Description" xml:space="preserve">
+    <value>The Obsolete attribute can be applied with or without arguments, but marking something Obsolete without including advice as to why it's obsolete or on what to use instead will lead maintainers to waste time trying to figure those things out - every single time the warning is encountered.</value>
+  </data>
+  <data name="S1123_IsActivatedByDefault" xml:space="preserve">
+    <value>True</value>
+  </data>
+  <data name="S1123_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S1123_RemediationCost" xml:space="preserve">
+    <value>5min</value>
+  </data>
+  <data name="S1123_Severity" xml:space="preserve">
+    <value>Major</value>
+  </data>
+  <data name="S1123_Tags" xml:space="preserve">
+    <value>obsolete,bad-practice</value>
+  </data>
+  <data name="S1123_Title" xml:space="preserve">
+    <value>"Obsolete" attributes should include explanations</value>
+  </data>
+  <data name="S1123_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S1125_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>

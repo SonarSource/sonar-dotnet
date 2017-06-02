@@ -1,0 +1,24 @@
+<p>The <code>Obsolete</code> attribute can be applied with or without arguments, but marking something <code>Obsolete</code> without including advice
+as to why it's obsolete or on what to use instead will lead maintainers to waste time trying to figure those things out - every single time the
+warning is encountered.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+public class Car
+{
+
+  [Obsolete]  // Noncompliant
+  public void CrankEngine(int turnsOfCrank)
+  { ... }
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+public class Car
+{
+
+  [Obsolete("Replaced by the automatic starter")]
+  public void CrankEngine(int turnsOfCrank)
+  { ... }
+}
+</pre>
+

@@ -106,6 +106,7 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType System_CLSCompliantAttribute = new KnownType("System.CLSCompliantAttribute");
         public static readonly KnownType System_MarshalByRefObject = new KnownType("System.MarshalByRefObject");
         public static readonly KnownType System_Uri = new KnownType("System.Uri");
+        public static readonly KnownType System_ObsoleteAttribute = new KnownType("System.ObsoleteAttribute");
 
 
         public static readonly KnownType System_Collections_Generic_IReadOnlyCollection_T = new KnownType("System.Collections.Generic.IReadOnlyCollection<T>");
