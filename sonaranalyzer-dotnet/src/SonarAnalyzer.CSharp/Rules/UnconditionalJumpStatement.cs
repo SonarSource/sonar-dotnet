@@ -42,21 +42,6 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        private static readonly ISet<SyntaxKind> methodOrPropertyDeclarations = new HashSet<SyntaxKind>
-        {
-            SyntaxKind.MethodDeclaration,
-            SyntaxKind.PropertyDeclaration,
-            SyntaxKind.ParenthesizedLambdaExpression,
-            SyntaxKind.SimpleLambdaExpression
-        };
-
-        private static readonly ISet<SyntaxKind> conditionalStatements = new HashSet<SyntaxKind>
-        {
-            SyntaxKind.IfStatement,
-            SyntaxKind.SwitchStatement,
-            SyntaxKind.CatchClause
-        };
-
         private static readonly ISet<SyntaxKind> loopStatements = new HashSet<SyntaxKind>
         {
             SyntaxKind.ForEachStatement,
@@ -69,22 +54,14 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
             {
-                var jumpStatement = (StatementSyntax)c.Node;
-
-                var conditionalOrLoopStatement = jumpStatement
-                    .Ancestors()
-                    .TakeWhile(IsWithinMethodPropertyOrLambda)
-                    .FirstOrDefault(IsConditionalOrLoopStatement);
-
-                if (IsLoopStatement(conditionalOrLoopStatement))
+                var walker = new LoopWalker(c);
+                walker.Visit(c.Node);
+                foreach (var node in walker.GetRuleViolations())
                 {
-                    c.ReportDiagnostic(Diagnostic.Create(rule, jumpStatement.GetLocation(), GetKeywordText(jumpStatement)));
+                    c.ReportDiagnostic(Diagnostic.Create(rule, node.GetLocation(), GetKeywordText(node)));
                 }
             },
-            SyntaxKind.BreakStatement,
-            SyntaxKind.ContinueStatement,
-            SyntaxKind.ReturnStatement,
-            SyntaxKind.ThrowStatement);
+            loopStatements.ToArray());
         }
 
         private static string GetKeywordText(StatementSyntax statement) =>
@@ -93,13 +70,94 @@ namespace SonarAnalyzer.Rules.CSharp
             (statement as ReturnStatementSyntax)?.ReturnKeyword.ToString() ??
             (statement as ThrowStatementSyntax)?.ThrowKeyword.ToString();
 
-        private static bool IsWithinMethodPropertyOrLambda(SyntaxNode node) =>
-            !node.IsAnyKind(methodOrPropertyDeclarations);
+        private class LoopWalker : CSharpSyntaxWalker
+        {
+            private readonly SyntaxNode rootExpression;
 
-        private static bool IsConditionalOrLoopStatement(SyntaxNode node) =>
-            node.IsAnyKind(conditionalStatements) || IsLoopStatement(node);
+            private readonly List<StatementSyntax> conditionalContinues = new List<StatementSyntax>();
+            private readonly List<StatementSyntax> conditionalTerminates = new List<StatementSyntax>();
 
-        private static bool IsLoopStatement(SyntaxNode node) =>
-            node.IsAnyKind(loopStatements);
+            private readonly List<StatementSyntax> unconditionalContinues = new List<StatementSyntax>();
+            private readonly List<StatementSyntax> unconditionalTerminates = new List<StatementSyntax>();
+
+            public LoopWalker(SyntaxNodeAnalysisContext context)
+            {
+                rootExpression = context.Node;
+            }
+
+            public List<StatementSyntax> GetRuleViolations()
+            {
+                var ruleViolations = new List<StatementSyntax>();
+
+                ruleViolations.AddRange(unconditionalContinues);
+
+                if (!conditionalContinues.Any())
+                {
+                    ruleViolations.AddRange(unconditionalTerminates);
+                }
+
+                return ruleViolations;
+            }
+
+            public override void VisitContinueStatement(ContinueStatementSyntax node)
+            {
+                base.VisitContinueStatement(node);
+                StoreVisitData(node, conditionalContinues, unconditionalContinues);
+            }
+
+            public override void VisitBreakStatement(BreakStatementSyntax node)
+            {
+                base.VisitBreakStatement(node);
+                StoreVisitData(node, conditionalTerminates, unconditionalTerminates);
+            }
+
+            public override void VisitReturnStatement(ReturnStatementSyntax node)
+            {
+                base.VisitReturnStatement(node);
+                StoreVisitData(node, conditionalTerminates, unconditionalTerminates);
+            }
+
+            public override void VisitThrowStatement(ThrowStatementSyntax node)
+            {
+                base.VisitThrowStatement(node);
+                StoreVisitData(node, conditionalTerminates, unconditionalTerminates);
+            }
+
+            private void StoreVisitData(StatementSyntax node, List<StatementSyntax> conditionalCollection,
+                List<StatementSyntax> unconditionalCollection)
+            {
+                var ancestors = node
+                    .Ancestors()
+                    .TakeWhile(n => !rootExpression.Equals(n))
+                    .ToList();
+
+                if (ancestors.Any(n => n.IsAnyKind(lambdaOrLoop)))
+                {
+                    return;
+                }
+
+                if (ancestors.Any(n => n.IsAnyKind(conditionalStatements)))
+                {
+                    conditionalCollection.Add(node);
+                }
+                else
+                {
+                    unconditionalCollection.Add(node);
+                }
+            }
+
+            private static readonly ISet<SyntaxKind> lambdaOrLoop
+                = new HashSet<SyntaxKind>(
+                    loopStatements.Union(
+                        new[] { SyntaxKind.ParenthesizedLambdaExpression,
+                                SyntaxKind.SimpleLambdaExpression}));
+
+            private static readonly ISet<SyntaxKind> conditionalStatements = new HashSet<SyntaxKind>
+            {
+                SyntaxKind.IfStatement,
+                SyntaxKind.SwitchStatement,
+                SyntaxKind.CatchClause
+            };
+        };
     }
 }
