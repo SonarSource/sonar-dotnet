@@ -54,7 +54,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
             {
-                var walker = new FooWalker(c);
+                var walker = new LoopWalker(c);
                 walker.Visit(c.Node);
                 foreach (var node in walker.GetRuleViolations())
                 {
@@ -70,7 +70,7 @@ namespace SonarAnalyzer.Rules.CSharp
             (statement as ReturnStatementSyntax)?.ReturnKeyword.ToString() ??
             (statement as ThrowStatementSyntax)?.ThrowKeyword.ToString();
 
-        private class FooWalker : CSharpSyntaxWalker
+        private class LoopWalker : CSharpSyntaxWalker
         {
             private readonly SyntaxNode rootExpression;
 
@@ -80,7 +80,7 @@ namespace SonarAnalyzer.Rules.CSharp
             private readonly List<StatementSyntax> unconditionalContinues = new List<StatementSyntax>();
             private readonly List<StatementSyntax> unconditionalTerminates = new List<StatementSyntax>();
 
-            public FooWalker(SyntaxNodeAnalysisContext context)
+            public LoopWalker(SyntaxNodeAnalysisContext context)
             {
                 rootExpression = context.Node;
             }
@@ -91,8 +91,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 ruleViolations.AddRange(unconditionalContinues);
 
-                if (unconditionalTerminates.Any() &&
-                    !conditionalContinues.Any())
+                if (!conditionalContinues.Any())
                 {
                     ruleViolations.AddRange(unconditionalTerminates);
                 }
