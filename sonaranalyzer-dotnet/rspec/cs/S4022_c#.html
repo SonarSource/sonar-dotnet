@@ -1,0 +1,41 @@
+<p>By default the storage type of an <code>enum</code> is <code>Int32</code>, in most cases it is not necessary to change this. In particular you will
+not achieve any performance gain by using a smaller data type (e.g. <code>Byte</code>) and may limit future uses.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+using System;
+
+namespace MyLibrary
+{
+   [Flags]
+   public enum Days : sbyte // Noncompliant
+   {
+     None             = 0,
+     Monday         = 1,
+     Tuesday        = 2,
+     Wednesday   = 4,
+     Thursday       = 8,
+     Friday            = 16,
+     All         = Monday| Tuesday | Wednesday | Thursday | Friday
+   }
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+using System;
+
+namespace MyLibrary
+{
+   [Flags]
+   public enum Days : int
+   {
+     None             = 0,
+     Monday         = 1,
+     Tuesday        = 2,
+     Wednesday   = 4,
+     Thursday       = 8,
+     Friday            = 16,
+     All         = Monday| Tuesday | Wednesday | Thursday | Friday
+   }
+}
+</pre>
+

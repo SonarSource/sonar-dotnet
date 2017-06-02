@@ -6552,6 +6552,33 @@
   <data name="S4017_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
   </data>
+  <data name="S4022_Category" xml:space="preserve">
+    <value>Sonar Code Smell</value>
+  </data>
+  <data name="S4022_Description" xml:space="preserve">
+    <value>By default the storage type of an enum is Int32, in most cases it is not necessary to change this. In particular you will not achieve any performance gain by using a smaller data type (e.g. Byte) and may limit future uses.</value>
+  </data>
+  <data name="S4022_IsActivatedByDefault" xml:space="preserve">
+    <value>False</value>
+  </data>
+  <data name="S4022_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S4022_RemediationCost" xml:space="preserve">
+    <value>2min</value>
+  </data>
+  <data name="S4022_Severity" xml:space="preserve">
+    <value>Minor</value>
+  </data>
+  <data name="S4022_Tags" xml:space="preserve">
+    <value />
+  </data>
+  <data name="S4022_Title" xml:space="preserve">
+    <value>Enums storage should be Int32</value>
+  </data>
+  <data name="S4022_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S4023_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
