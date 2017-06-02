@@ -31,4 +31,6 @@ namespace Tests.Diagnostics
     class TestClass_14 : Exception { }
 
     class TestClass_15 : IEqualityComparer { }
+
+    class TestClass_16 : IList, InvalidType { } // Noncompliant
 }

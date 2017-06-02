@@ -41,60 +41,66 @@ namespace SonarAnalyzer.Rules.CSharp
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        private static readonly Dictionary<KnownType, KnownType> nongenericToGenericMapping =
-            new Dictionary<KnownType, KnownType>
+        private static readonly Dictionary<string, KnownType> nongenericToGenericMapping =
+            new Dictionary<string, KnownType>
             {
-                [KnownType.System_Collections_ICollection] = KnownType.System_Collections_Generic_ICollection_T,
-                [KnownType.System_Collections_IList] = KnownType.System_Collections_Generic_IList_T,
-                [KnownType.System_Collections_IEnumerable] = KnownType.System_Collections_Generic_IEnumerable_T,
-                [KnownType.System_Collections_CollectionBase] = KnownType.System_Collections_ObjectModel_Collection_T,
+                [KnownType.System_Collections_ICollection.TypeName] = KnownType.System_Collections_Generic_ICollection_T,
+                [KnownType.System_Collections_IList.TypeName] = KnownType.System_Collections_Generic_IList_T,
+                [KnownType.System_Collections_IEnumerable.TypeName] = KnownType.System_Collections_Generic_IEnumerable_T,
+                [KnownType.System_Collections_CollectionBase.TypeName] = KnownType.System_Collections_ObjectModel_Collection_T,
             };
 
-        private static readonly ISet<KnownType> nongenericTypes = nongenericToGenericMapping.Keys.ToHashSet();
         private static readonly ISet<KnownType> genericTypes = nongenericToGenericMapping.Values.ToHashSet();
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(
-            c =>
-            {
-                var classDeclaration = c.Node as ClassDeclarationSyntax;
-
-                var issues = new List<Diagnostic>();
-
-                var implementedTypes = classDeclaration?.BaseList?.Types;
-                if (implementedTypes == null)
+            context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {
-                    return;
-                }
+                    var classDeclaration = c.Node as ClassDeclarationSyntax;
 
-                foreach (var typeSyntax in implementedTypes)
-                {
-                    var typeSymbol = c.SemanticModel.GetSymbolInfo(typeSyntax.Type).Symbol?.GetSymbolType();
-
-                    var originalDefinition = typeSymbol?.OriginalDefinition;
-                    if (originalDefinition.IsAny(genericTypes))
+                    var implementedTypes = classDeclaration?.BaseList?.Types;
+                    if (implementedTypes == null)
                     {
                         return;
                     }
 
-                    var nongenericType = ToKnownType(typeSymbol, nongenericTypes);
-                    if (nongenericType != null)
+                    var issues = new List<Diagnostic>();
+                    foreach (var typeSyntax in implementedTypes)
                     {
-                        issues.Add(Diagnostic.Create(rule,
-                                    classDeclaration.Identifier.GetLocation(),
-                                    nongenericToGenericMapping[nongenericType].TypeName));
-                    }
-                }
+                        var typeSymbol = c.SemanticModel.GetSymbolInfo(typeSyntax.Type).Symbol?.GetSymbolType();
+                        if (typeSymbol == null)
+                        {
+                            continue;
+                        }
 
-                issues.ForEach(i => c.ReportDiagnostic(i));
-            },
-            SyntaxKind.ClassDeclaration);
+                        if (typeSymbol.OriginalDefinition.IsAny(genericTypes))
+                        {
+                            return;
+                        }
+
+                        var suggestedGenericType = SuggestGenericCollectionType(typeSymbol);
+                        if (suggestedGenericType != null)
+                        {
+                            issues.Add(Diagnostic.Create(rule,
+                                        classDeclaration.Identifier.GetLocation(),
+                                        suggestedGenericType));
+                        }
+                    }
+
+                    issues.ForEach(c.ReportDiagnostic);
+                },
+                SyntaxKind.ClassDeclaration);
         }
 
-        private static KnownType ToKnownType(ITypeSymbol typeSymbol, IEnumerable<KnownType> knownTypes)
+        private static string SuggestGenericCollectionType(ITypeSymbol typeSymbol)
         {
-            return knownTypes.FirstOrDefault(t => typeSymbol.Is(t));
+            KnownType suggestedGenericType;
+            if (nongenericToGenericMapping.TryGetValue(typeSymbol.ToDisplayString(), out suggestedGenericType))
+            {
+                return suggestedGenericType.TypeName;
+            }
+
+            return null;
         }
     }
 }
