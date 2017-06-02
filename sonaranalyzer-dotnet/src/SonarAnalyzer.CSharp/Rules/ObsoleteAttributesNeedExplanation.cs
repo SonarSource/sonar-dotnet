@@ -46,10 +46,10 @@ namespace SonarAnalyzer.Rules.CSharp
                 c =>
                 {
                     var attributeSyntax = c.Node as AttributeSyntax;
-                    var attributeSymbol = c.SemanticModel.GetSymbolInfo(attributeSyntax).Symbol;
+                    var attributeConstructorSymbol = c.SemanticModel.GetSymbolInfo(attributeSyntax).Symbol;
 
-                    if (attributeSymbol.IsInType(KnownType.System_ObsoleteAttribute) &&
-                        !attributeSymbol.GetParameters().Any())
+                    if (attributeConstructorSymbol.IsInType(KnownType.System_ObsoleteAttribute) &&
+                        !attributeConstructorSymbol.GetParameters().Any())
                     {
                         c.ReportDiagnostic(Diagnostic.Create(rule, attributeSyntax.GetLocation()));
                     }
