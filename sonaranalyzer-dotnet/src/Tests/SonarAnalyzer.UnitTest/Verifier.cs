@@ -65,8 +65,9 @@ namespace SonarAnalyzer.UnitTest
         {
             using (var workspace = new AdhocWorkspace())
             {
-                var document = GetDocument(path, GeneratedAssemblyName, workspace);
-                var compilation = document.Project.GetCompilationAsync().Result;
+                var file = new FileInfo(path);
+                var project = CreateProject(file, GeneratedAssemblyName, workspace).AddDocument(file);
+                var compilation = project.GetCompilationAsync().Result;
                 var diagnostics = GetAllDiagnostics(compilation, diagnosticAnalyzers);
                 VerifyNoExceptionThrown(diagnostics);
             }
@@ -75,15 +76,31 @@ namespace SonarAnalyzer.UnitTest
         public static void VerifyAnalyzer(string path, SonarDiagnosticAnalyzer diagnosticAnalyzer, ParseOptions options = null,
             params MetadataReference[] additionalReferences)
         {
-            var file = new FileInfo(path);
-            var parseOptions = GetParseOptionsAlternatives(options, file.Extension);
+            VerifyAnalyzer(new[] { path }, diagnosticAnalyzer, options, additionalReferences);
+        }
+
+        public static void VerifyAnalyzer(IEnumerable<string> paths, SonarDiagnosticAnalyzer diagnosticAnalyzer, ParseOptions options = null,
+            params MetadataReference[] additionalReferences)
+        {
+            if (paths == null || !paths.Any())
+            {
+                throw new ArgumentException("Please specify at least one file path to analyze.", nameof(paths));
+            }
+
+            var files = paths.Select(path => new FileInfo(path)).ToList();
+            if (files.Select(file => file.Extension).Distinct().Count() != 1)
+            {
+                throw new ArgumentException("Please use a collection of paths with the same extension", nameof(paths));
+            }
+
+            var parseOptions = files.SelectMany(file => GetParseOptionsAlternatives(options, file.Extension)).Distinct();
 
             var issueLocationCollector = new IssueLocationCollector();
 
             using (var workspace = new AdhocWorkspace())
             {
-                var document = GetDocument(file, GeneratedAssemblyName, workspace, additionalReferences: additionalReferences);
-                var project = document.Project;
+                var project = CreateProject(files[0], GeneratedAssemblyName, workspace, additionalReferences);
+                files.ForEach(file => project = project.AddDocument(file)); // side effect on purpose (project is immutable)
 
                 foreach (var parseOption in parseOptions)
                 {
@@ -97,7 +114,7 @@ namespace SonarAnalyzer.UnitTest
                     var diagnostics = GetDiagnostics(compilation, diagnosticAnalyzer);
 
                     var expectedIssues = issueLocationCollector
-                        .GetExpectedIssueLocations(compilation.SyntaxTrees.First().GetText().Lines)
+                        .GetExpectedIssueLocations(compilation.SyntaxTrees.Skip(1).First().GetText().Lines)
                         .ToList();
 
                     foreach (var diagnostic in diagnostics)
@@ -110,7 +127,7 @@ namespace SonarAnalyzer.UnitTest
                             .OrderBy(x => x.Location.GetLineNumberToReport())
                             .ThenBy(x => x.Location.GetLineSpan().StartLinePosition.Character)
                             .ToList()
-                            .ForEach(secondaryLocation => 
+                            .ForEach(secondaryLocation =>
                             {
                                 VerifyIssue(expectedIssues, issue => issue.IssueId == issueId && !issue.IsPrimary,
                                     secondaryLocation.Location, secondaryLocation.Message, out issueId);
@@ -200,7 +217,10 @@ namespace SonarAnalyzer.UnitTest
 
                 foreach (var parseOption in parseOptions)
                 {
-                    var document = GetDocument(file, GeneratedAssemblyName, workspace, removeAnalysisComments: true);
+                    var document = CreateProject(file, GeneratedAssemblyName, workspace)
+                        .AddDocument(file, true)
+                        .Documents
+                        .Single(d => d.Name == file.Name);
                     RunCodeFixWhileDocumentChanges(diagnosticAnalyzer, codeFixProvider, codeFixTitle, document, parseOption, pathToExpected);
                 }
             }
@@ -217,8 +237,9 @@ namespace SonarAnalyzer.UnitTest
         {
             using (var workspace = new AdhocWorkspace())
             {
-                var document = GetDocument(path, assemblyName, workspace);
-                var compilation = document.Project.GetCompilationAsync().Result;
+                var file = new FileInfo(path);
+                var project = CreateProject(file, assemblyName, workspace).AddDocument(file);
+                var compilation = project.GetCompilationAsync().Result;
                 var diagnostics = GetDiagnostics(compilation, diagnosticAnalyzer);
 
                 diagnostics.Should().BeEmpty();
@@ -241,26 +262,39 @@ namespace SonarAnalyzer.UnitTest
 
                 foreach (var parseOption in parseOptions)
                 {
-                    var document = GetDocument(file, GeneratedAssemblyName, workspace, removeAnalysisComments: true);
+                    var document = CreateProject(file, GeneratedAssemblyName, workspace)
+                        .AddDocument(file, true)
+                        .Documents
+                        .Single(d => d.Name == file.Name);
                     RunFixAllProvider(diagnosticAnalyzer, codeFixProvider, codeFixTitle, fixAllProvider, document, parseOption, pathToExpected);
                 }
             }
         }
 
-        private static Document GetDocument(string filePath, string assemblyName,
-            AdhocWorkspace workspace, bool removeAnalysisComments = false, params MetadataReference[] additionalReferences)
-        {
-            var file = new FileInfo(filePath);
-            return GetDocument(file, assemblyName, workspace, removeAnalysisComments, additionalReferences);
-        }
-
-        private static Document GetDocument(FileInfo file, string assemblyName,
-            AdhocWorkspace workspace, bool removeAnalysisComments = false, params MetadataReference[] additionalReferences)
+        private static Project CreateProject(FileInfo file, string assemblyName,
+            AdhocWorkspace workspace, params MetadataReference[] additionalReferences)
         {
             var language = file.Extension == CSharpFileExtension
                 ? LanguageNames.CSharp
                 : LanguageNames.VisualBasic;
 
+            var project = workspace.CurrentSolution.AddProject(assemblyName, $"{assemblyName}.dll", language)
+                .AddMetadataReference(systemAssembly)
+                .AddMetadataReference(systemLinqAssembly)
+                .AddMetadataReference(systemNetAssembly)
+                .AddMetadataReferences(additionalReferences);
+
+            // adding an extra file to the project
+            // this won't trigger any issues, but it keeps a reference to the original ParseOption, so
+            // if an analyzer/codefix changes the language version, Roslyn throws an ArgumentException
+            project = project.AddDocument("ExtraEmptyFile.g" + file.Extension, string.Empty).Project;
+
+            return project;
+        }
+
+        private static Project AddDocument(this Project project, FileInfo file,
+            bool removeAnalysisComments = false)
+        {
             var lines = File.ReadAllText(file.FullName, Encoding.UTF8)
                 .Split(new[] { Environment.NewLine }, StringSplitOptions.None);
 
@@ -276,20 +310,7 @@ namespace SonarAnalyzer.UnitTest
 
             var text = string.Join(Environment.NewLine, lines);
 
-            var document = workspace.CurrentSolution.AddProject(assemblyName,
-                    $"{assemblyName}.dll", language)
-                .AddMetadataReference(systemAssembly)
-                .AddMetadataReference(systemLinqAssembly)
-                .AddMetadataReference(systemNetAssembly)
-                .AddMetadataReferences(additionalReferences)
-                .AddDocument(file.Name, text);
-
-            // adding an extra file to the project
-            // this won't trigger any issues, but it keeps a reference to the original ParseOption, so
-            // if an analyzer/codefix changes the language version, Roslyn throws an ArgumentException
-            document = document.Project.AddDocument("ExtraEmptyFile.g" + file.Extension, string.Empty);
-
-            return document.Project.Documents.Single(d => d.Name == file.Name);
+            return project.AddDocument(file.Name, text).Project;
         }
 
         #endregion
