@@ -1891,13 +1891,18 @@ b = x | 2;  b = x & 2;   b = x ^ 2;  c = ""c"" + 'c';  c = a - b;   c = a * b;  
 
         [TestMethod]
         [TestCategory("CFG")]
+        public void Cfg_RemovedCalls()
+        {
+            var cfg = Build(@"System.Diagnostics.Debug.Assert(false);");
+            VerifyCfg(cfg, 1);
+            cfg.EntryBlock.Instructions.Should().BeEmpty();
+        }
+
+        [TestMethod]
+        [TestCategory("CFG")]
         public void Cfg_NonRemovedCalls()
         {
             var cfg = Build(@"System.Diagnostics.Debug.Fail("""");");
-            VerifyCfg(cfg, 2);
-            cfg.EntryBlock.Instructions.Should().NotBeEmpty();
-
-            cfg = Build(@"System.Diagnostics.Debug.Assert(false);");
             VerifyCfg(cfg, 2);
             cfg.EntryBlock.Instructions.Should().NotBeEmpty();
         }

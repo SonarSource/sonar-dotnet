@@ -265,11 +265,11 @@ namespace Tests.Diagnostics
             public string MyProperty { get; set; }
         }
 
-        public void Assert1(object o1)
+        public void Assert1(object o1, bool other)
         {
-            System.Diagnostics.Debug.Assert(o1 != null);
+            System.Diagnostics.Debug.Assert(o1 != null || other);
             o1.ToString(); // Compliant
-            System.Diagnostics.Debug.Assert(o1 == null);
+            System.Diagnostics.Debug.Assert(o1 == null || other);
             o1.ToString(); // Compliant
         }
 
