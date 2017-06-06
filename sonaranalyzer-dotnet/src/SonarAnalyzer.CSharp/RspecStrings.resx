@@ -6687,6 +6687,33 @@
   <data name="S4026_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
   </data>
+  <data name="S4027_Category" xml:space="preserve">
+    <value>Sonar Code Smell</value>
+  </data>
+  <data name="S4027_Description" xml:space="preserve">
+    <value>Exceptions types should provide the following constructors:</value>
+  </data>
+  <data name="S4027_IsActivatedByDefault" xml:space="preserve">
+    <value>False</value>
+  </data>
+  <data name="S4027_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S4027_RemediationCost" xml:space="preserve">
+    <value>10min</value>
+  </data>
+  <data name="S4027_Severity" xml:space="preserve">
+    <value>Minor</value>
+  </data>
+  <data name="S4027_Tags" xml:space="preserve">
+    <value>convention</value>
+  </data>
+  <data name="S4027_Title" xml:space="preserve">
+    <value>Exceptions should provide standard constructors</value>
+  </data>
+  <data name="S4027_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S818_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
