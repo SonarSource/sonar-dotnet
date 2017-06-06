@@ -18,29 +18,31 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Rules.CSharp;
-using System;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
     [TestClass]
-    public class RequireComVisibleAttributeTest
+    public class MarkAssemblyWithClsCompliantAttributeTest
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void RequireComVisibleAttribute()
+        public void MarkAssemblyWithClsCompliantAttribute()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\RequireComVisibleAttribute.cs",
-                new RequireComVisibleAttribute());
+            Verifier.VerifyAnalyzer(@"TestCases\MarkAssemblyWithClsCompliantAttribute.cs",
+                new MarkAssemblyWithClsCompliantAttribute());
         }
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void RequireComVisibleAttributeNoncompliant()
+        public void MarkAssemblyWithClsCompliantAttributeNoncompliant()
         {
-            Action action = () => Verifier.VerifyAnalyzer(@"TestCases\RequireComVisibleAttributeNoncompliant.cs", new RequireComVisibleAttribute());
+            Action action = () => Verifier.VerifyAnalyzer(
+                @"TestCases\MarkAssemblyWithClsCompliantAttributeNoncompliant.cs",
+                new MarkAssemblyWithAssemblyVersionAttribute());
             action.ShouldThrow<AssertFailedException>();
         }
     }

@@ -19,8 +19,6 @@
  */
 
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
@@ -29,7 +27,7 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class RequireComVisibleAttribute : RequireAssemblyAttributeBase
+    public sealed class MarkAssemblyWithComVisibleAttribute : MarkAssemblyWithAttributeBase
     {
         internal const string DiagnosticId = "S3992";
         private const string MessageFormat = "Mark this assembly with 'System.Runtime.InteropServices.ComVisibleAttribute'";
@@ -37,13 +35,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         protected override DiagnosticDescriptor Rule => rule;
-        protected override bool ReportsOnTestSource => false;
-        protected override bool IsRequiredAttribute(AttributeSyntax attribute, SemanticModel semanticModel)
-        {
-            var attributeConstructor = semanticModel.GetSymbolInfo(attribute).Symbol as IMethodSymbol;
 
-            return attributeConstructor != null &&
-                attributeConstructor.ContainingType.Is(KnownType.System_Runtime_InteropServices_ComVisibleAttribute);
-        }
+        internal override KnownType AttributeToFind => KnownType.System_Runtime_InteropServices_ComVisibleAttribute;
     }
 }
