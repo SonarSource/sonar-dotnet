@@ -1,0 +1,43 @@
+<p>The NET Framework 2.0 introduced the generic interface <code>System.Collections.Generic.IEnumerable&lt;T&gt;</code> and it should be preferred over
+the older, non generic, interfaces.</p>
+<p>This rule raises an issue when a public type implements <code>System.Collections.IEnumerable</code>.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+using System;
+using System.Collections;
+
+public class MyData
+{
+  public MyData()
+  {
+  }
+}
+
+public class MyList : CollectionBase // Noncompliant
+{
+  public void Add(MyData data)
+  {
+    InnerList.Add(data);
+  }
+
+  // ...
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+using System;
+using System.Collections.ObjectModel;
+
+public class MyData
+{
+  public MyData()
+  {
+  }
+}
+
+public class MyList : Collection&lt;MyData&gt;
+{
+  // Implementation...
+}
+</pre>
+
