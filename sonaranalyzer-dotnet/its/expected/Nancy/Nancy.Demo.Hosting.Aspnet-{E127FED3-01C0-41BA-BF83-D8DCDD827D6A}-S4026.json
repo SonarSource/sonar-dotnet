@@ -1,0 +1,9 @@
+{
+"issues":  [
+{
+"id":  "S4026",
+"message":  "Mark this assembly with 'System.Resources.NeutralResourcesLanguageAttribute'.",
+"location":  null
+}
+]
+}

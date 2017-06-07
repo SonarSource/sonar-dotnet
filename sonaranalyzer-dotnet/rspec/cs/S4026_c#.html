@@ -1,0 +1,52 @@
+<p>It is important to inform the <code>ResourceManager</code> of the language used to display the resources of the neutral culture for an assembly.
+This improves lookup performance for the first resource loaded. </p>
+<p>This rule raises an issue when an assembly contains a <code>ResX</code>-based resource but does not have the
+<code>System.Resources.NeutralResourcesLanguageAttribute</code> applied to it.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+using System;
+
+public class MyClass // Noncompliant
+{
+   public static void Main()
+   {
+      string[] cultures = { "de-DE", "en-us", "fr-FR" };
+      Random rnd = new Random();
+      int index = rnd.Next(0, cultures.Length);
+      Thread.CurrentThread.CurrentUICulture = CultureInfo.CreateSpecificCulture(cultures[index]);
+
+      ResourceManager rm = new ResourceManager("MyResources" ,
+                                               typeof(MyClass).Assembly);
+      string greeting = rm.GetString("Greeting");
+
+      Console.Write("Enter your name: ");
+      string name = Console.ReadLine();
+      Console.WriteLine("{0} {1}!", greeting, name);
+   }
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+using System;
+
+[assembly:NeutralResourcesLanguageAttribute("en")]
+public class MyClass
+{
+   public static void Main()
+   {
+      string[] cultures = { "de-DE", "en-us", "fr-FR" };
+      Random rnd = new Random();
+      int index = rnd.Next(0, cultures.Length);
+      Thread.CurrentThread.CurrentUICulture = CultureInfo.CreateSpecificCulture(cultures[index]);
+
+      ResourceManager rm = new ResourceManager("MyResources" ,
+                                               typeof(MyClass).Assembly);
+      string greeting = rm.GetString("Greeting");
+
+      Console.Write("Enter your name: ");
+      string name = Console.ReadLine();
+      Console.WriteLine("{0} {1}!", greeting, name);
+   }
+}
+</pre>
+

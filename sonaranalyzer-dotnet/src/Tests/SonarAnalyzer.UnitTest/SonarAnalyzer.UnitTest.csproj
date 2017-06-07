@@ -151,6 +151,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="FixAllDiagnosticProvider.cs" />
     <Compile Include="ResourceTests\GeneratedResourcesTest.cs" />
+    <Compile Include="ResourceTests\SomeResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SomeResources.resx</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
     <Compile Include="TestFramework\IIssueLocation.cs" />
     <Compile Include="TestFramework\IssueLocationCollector.cs" />
     <Compile Include="TestFramework\IssueLocationCollectorTests\IssueLocationCollector_GetExpectedIssueLocations.cs" />
@@ -212,6 +218,12 @@
     <AdditionalFiles Include="..\..\SonarLint.xml">
       <Link>Properties\SonarLint.xml</Link>
     </AdditionalFiles>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ResourceTests\SomeResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>SomeResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
