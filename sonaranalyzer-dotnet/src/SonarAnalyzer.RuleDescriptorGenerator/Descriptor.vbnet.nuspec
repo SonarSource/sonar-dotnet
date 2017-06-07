@@ -19,6 +19,5 @@
     <!-- If these are changed than the build\release.ps1 should also be changed -->
     <file src="bin\Release\vbnet\rules.xml"  target="xml\" />
     <file src="bin\Release\vbnet\profile.xml"  target="xml\" />
-    <file src="bin\Release\vbnet\sqale.xml"  target="xml\" />
   </files>
 </package>

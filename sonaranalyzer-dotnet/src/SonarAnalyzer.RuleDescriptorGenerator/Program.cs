@@ -42,7 +42,7 @@ namespace SonarAnalyzer.RuleDescriptorGenerator
                 return;
             }
 
-            WriteXmlDescriptorFiles("rules.xml", "profile.xml", "sqale.xml", args[0]);
+            WriteXmlDescriptorFiles("rules.xml", "profile.xml", args[0]);
         }
 
         private static void Write(string text)
@@ -50,27 +50,17 @@ namespace SonarAnalyzer.RuleDescriptorGenerator
             Console.WriteLine(text);
         }
 
-        private static void WriteXmlDescriptorFiles(string rulePath, string profilePath, string sqalePath, string lang)
+        private static void WriteXmlDescriptorFiles(string rulePath, string profilePath, string lang)
         {
             var language = AnalyzerLanguage.Parse(lang);
 
             var genericRuleDetails = RuleDetailBuilder.GetAllRuleDetails(language).ToList();
             var ruleDetails = genericRuleDetails.Select(RuleDetail.Convert).ToList();
-            var sqaleDetails = genericRuleDetails.Select(SqaleDescriptor.Convert).ToList();
 
             Directory.CreateDirectory(lang);
 
             WriteRuleDescriptorFile(Path.Combine(lang, rulePath), ruleDetails);
             WriteQualityProfileFile(Path.Combine(lang, profilePath), ruleDetails, language);
-            WriteSqaleDescriptorFile(Path.Combine(lang, sqalePath), sqaleDetails);
-        }
-
-        private static void WriteSqaleDescriptorFile(string filePath, IEnumerable<SqaleDescriptor> sqaleDescriptions)
-        {
-            var root = new SqaleRoot();
-            root.Sqale.AddRange(sqaleDescriptions
-                .Where(descriptor => descriptor != null));
-            SerializeObjectToFile(filePath, root);
         }
 
         private static void WriteQualityProfileFile(string filePath, IEnumerable<RuleDetail> ruleDetails, AnalyzerLanguage language)

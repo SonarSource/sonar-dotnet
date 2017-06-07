@@ -69,15 +69,12 @@ namespace SonarAnalyzer.Utilities
                 Title = resources.GetString($"{rule.Key}_Title"),
                 Severity = resources.GetString($"{rule.Key}_Severity"),
                 IsActivatedByDefault = bool.Parse(resources.GetString($"{rule.Key}_IsActivatedByDefault")),
-                Description = GetResourceHtml(rule, language)
+                Description = GetResourceHtml(rule, language),
+                Remediation = ToSonarQubeRemediationFunction(resources.GetString($"{rule.Key}_Remediation")),
+                RemediationCost = resources.GetString($"{rule.Key}_RemediationCost")
             };
 
             ruleDetail.Tags.AddRange(resources.GetString($"{rule.Key}_Tags").Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries));
-
-            var remediation = resources.GetString($"{rule.Key}_Remediation");
-            var remediationCost = resources.GetString($"{rule.Key}_RemediationCost");
-
-            ruleDetail.SqaleDescriptor = GetSqaleDescriptor(remediation, remediationCost);
 
             GetParameters(analyzerType, ruleDetail);
             GetCodeFixNames(analyzerType, ruleDetail);
@@ -91,34 +88,19 @@ namespace SonarAnalyzer.Utilities
             return analyzerType.Assembly.GetType(typeName);
         }
 
-        private static SqaleDescriptor GetSqaleDescriptor(string remediation, string remediationCost)
+        private static string ToSonarQubeRemediationFunction(string remediation)
         {
             if (remediation == null)
             {
                 return null;
             }
 
-            var sqaleDescriptor = new SqaleDescriptor();
-
             if (remediation == "Constant/Issue")
             {
-                sqaleDescriptor.Remediation.Properties.AddRange(new[]
-                {
-                    new SqaleRemediationProperty
-                    {
-                        Key = SqaleRemediationProperty.RemediationFunctionKey,
-                        Text = SqaleRemediationProperty.ConstantRemediationFunctionValue
-                    },
-                    new SqaleRemediationProperty
-                    {
-                        Key = SqaleRemediationProperty.OffsetKey,
-                        Value = remediationCost,
-                        Text = string.Empty
-                    }
-                });
+                return "CONSTANT_ISSUE";
             }
 
-            return sqaleDescriptor;
+            return null;
         }
 
         private static void GetCodeFixNames(Type analyzerType, RuleDetail ruleDetail)

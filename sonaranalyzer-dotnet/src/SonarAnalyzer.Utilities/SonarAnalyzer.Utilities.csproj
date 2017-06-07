@@ -95,9 +95,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RuleDescriptors\RuleDetail.cs" />
     <Compile Include="RuleDescriptors\RuleParameter.cs" />
-    <Compile Include="RuleDescriptors\SqaleDescriptor.cs" />
-    <Compile Include="RuleDescriptors\SqaleRemediation.cs" />
-    <Compile Include="RuleDescriptors\SqaleRemediationProperty.cs" />
     <Compile Include="RuleDetailBuilder.cs" />
     <Compile Include="RuleFinder.cs" />
   </ItemGroup>

@@ -50,7 +50,9 @@ namespace SonarAnalyzer.RuleDescriptorGenerator
                             Description = parameter.Description,
                             DefaultValue = parameter.DefaultValue
                         }).ToList(),
-                Cardinality = CardinalitySingle
+                Cardinality = CardinalitySingle,
+                RemediationFunction = ruleDetail.Remediation,
+                RemediationFunctionBaseEffort = ruleDetail.RemediationCost
             };
         }
 
@@ -94,5 +96,11 @@ namespace SonarAnalyzer.RuleDescriptorGenerator
 
         [XmlIgnore]
         public bool IsActivatedByDefault { get; set; }
+
+        [XmlElement("remediationFunction")]
+        public string RemediationFunction { get; set; }
+
+        [XmlElement("remediationFunctionBaseEffort")]
+        public string RemediationFunctionBaseEffort { get; set; }
     }
 }
