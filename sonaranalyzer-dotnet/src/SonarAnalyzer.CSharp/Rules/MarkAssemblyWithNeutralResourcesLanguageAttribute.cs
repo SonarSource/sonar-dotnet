@@ -32,7 +32,7 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class RequireNeutralResourcesLanguageAttribute : SonarDiagnosticAnalyzer
+    public sealed class MarkAssemblyWithNeutralResourcesLanguageAttribute : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S4026";
         private const string MessageFormat = "Mark this assembly with 'System.Resources.NeutralResourcesLanguageAttribute'.";
