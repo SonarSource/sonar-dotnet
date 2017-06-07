@@ -39,7 +39,8 @@ namespace SonarAnalyzer.RuleDescriptors
         public List<string> Tags { get; private set; }
         public List<RuleParameter> Parameters { get; private set; }
         public bool IsActivatedByDefault { get; set; }
-        public SqaleDescriptor SqaleDescriptor { get; set; }
         public List<string> CodeFixTitles { get; private set; }
+        public string Remediation { get; set; }
+        public string RemediationCost { get; set; }
     }
 }

@@ -87,16 +87,11 @@
     <Compile Include="..\AssemblyInfo.Shared.cs">
       <Link>Properties\AssemblyInfo.Shared.cs</Link>
     </Compile>
-    <Compile Include="Descriptors\FullRuleDescriptor.cs" />
     <Compile Include="Descriptors\QualityProfileRoot.cs" />
     <Compile Include="Descriptors\QualityProfileRuleDescriptor.cs" />
     <Compile Include="Descriptors\RuleDetail.cs" />
     <Compile Include="Descriptors\RuleDescriptorRoot.cs" />
     <Compile Include="Descriptors\RuleParameter.cs" />
-    <Compile Include="Descriptors\SqaleDescriptor.cs" />
-    <Compile Include="Descriptors\SqaleRemediation.cs" />
-    <Compile Include="Descriptors\SqaleRemediationProperty.cs" />
-    <Compile Include="Descriptors\SqaleRoot.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

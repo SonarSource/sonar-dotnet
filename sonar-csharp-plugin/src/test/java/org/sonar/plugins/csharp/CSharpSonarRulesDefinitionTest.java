@@ -19,10 +19,11 @@
  */
 package org.sonar.plugins.csharp;
 
-import org.junit.Test;
-import org.sonar.api.server.rule.RulesDefinition.Context;
-
 import java.util.Set;
+import org.junit.Test;
+import org.sonar.api.server.debt.DebtRemediationFunction;
+import org.sonar.api.server.rule.RulesDefinition.Context;
+import org.sonar.api.server.rule.RulesDefinition.Rule;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -43,6 +44,10 @@ public class CSharpSonarRulesDefinitionTest {
     assertThat(sonarLintRules.contains("S100")).isTrue();
     assertThat(sonarLintRules.size()).isGreaterThan(50);
     assertThat(sonarLintRules.size()).isLessThanOrEqualTo(context.repository("csharpsquid").rules().size());
+
+    Rule s100 = context.repository("csharpsquid").rule("S100");
+    assertThat(s100.debtRemediationFunction().type()).isEqualTo(DebtRemediationFunction.Type.CONSTANT_ISSUE);
+    assertThat(s100.debtRemediationFunction().baseEffort()).isEqualTo("5min");
   }
 
 }
