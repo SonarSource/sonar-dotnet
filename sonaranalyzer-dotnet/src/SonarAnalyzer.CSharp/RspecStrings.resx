@@ -6687,6 +6687,33 @@
   <data name="S4018_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
   </data>
+  <data name="S4019_Category" xml:space="preserve">
+    <value>Sonar Code Smell</value>
+  </data>
+  <data name="S4019_Description" xml:space="preserve">
+    <value>When a method in a derived class has the same name as a method in the base class but with a signature that only differs by types that are weakly derived (e.g. object vs string), the result is that the base method becomes hidden.</value>
+  </data>
+  <data name="S4019_IsActivatedByDefault" xml:space="preserve">
+    <value>True</value>
+  </data>
+  <data name="S4019_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S4019_RemediationCost" xml:space="preserve">
+    <value>5min</value>
+  </data>
+  <data name="S4019_Severity" xml:space="preserve">
+    <value>Critical</value>
+  </data>
+  <data name="S4019_Tags" xml:space="preserve">
+    <value>pitfall</value>
+  </data>
+  <data name="S4019_Title" xml:space="preserve">
+    <value>Base class methods should not be hidden</value>
+  </data>
+  <data name="S4019_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S4022_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
