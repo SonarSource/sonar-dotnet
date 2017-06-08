@@ -26,16 +26,15 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 import org.mockito.Mockito;
+import org.sonar.api.SonarQubeVersion;
 import org.sonar.api.batch.fs.internal.DefaultInputFile;
-import org.sonar.api.batch.sensor.coverage.CoverageType;
+import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 import org.sonar.api.batch.sensor.internal.DefaultSensorDescriptor;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class CoverageReportImportSensorTest {
 
@@ -48,30 +47,32 @@ public class CoverageReportImportSensorTest {
 
     CoverageAggregator coverageAggregator = mock(CoverageAggregator.class);
 
-    new CoverageReportImportSensor(coverageConf, coverageAggregator, "C#", false).describe(new DefaultSensorDescriptor());
+    SonarQubeVersion sonarQubeVersion = new SonarQubeVersion(SonarQubeVersion.V5_6);
+    new CoverageReportImportSensor(coverageConf, coverageAggregator, "cs", "C#", sonarQubeVersion, false)
+        .describe(new DefaultSensorDescriptor());
   }
 
   @Test
   public void analyze() throws Exception {
     SensorContextTester context = computeCoverageMeasures(false);
-    assertThat(context.lineHits("foo:Foo.cs", CoverageType.UNIT, 2)).isEqualTo(1);
-    assertThat(context.lineHits("foo:Foo.cs", CoverageType.UNIT, 4)).isEqualTo(0);
+    assertThat(context.lineHits("foo:Foo.cs", 2)).isEqualTo(1);
+    assertThat(context.lineHits("foo:Foo.cs", 4)).isEqualTo(0);
   }
 
   @Test
   public void analyzeIntegrationTests() throws Exception {
     SensorContextTester context = computeCoverageMeasures(true);
-    assertThat(context.lineHits("foo:Foo.cs", CoverageType.IT, 2)).isEqualTo(1);
-    assertThat(context.lineHits("foo:Foo.cs", CoverageType.IT, 4)).isEqualTo(0);
+    assertThat(context.lineHits("foo:Foo.cs", 2)).isEqualTo(1);
+    assertThat(context.lineHits("foo:Foo.cs", 4)).isEqualTo(0);
   }
 
   private SensorContextTester computeCoverageMeasures(boolean isIntegrationTest) throws Exception {
     File baseDir = temp.newFolder();
 
     Coverage coverage = mock(Coverage.class);
-    String fooPath = new File(baseDir, "Foo.cs").getAbsolutePath();
-    String bazPath = new File(baseDir, "Baz.java").getAbsolutePath();
-    String barPath = new File(baseDir, "Bar.cs").getAbsolutePath();
+    String fooPath = new File(baseDir, "Foo.cs").getCanonicalPath();
+    String bazPath = new File(baseDir, "Baz.java").getCanonicalPath();
+    String barPath = new File(baseDir, "Bar.cs").getCanonicalPath();
     when(coverage.files()).thenReturn(new HashSet<>(asList(fooPath, barPath, bazPath)));
     when(coverage.hits(fooPath)).thenReturn(ImmutableMap.<Integer, Integer>builder()
       .put(2, 1)
@@ -88,15 +89,18 @@ public class CoverageReportImportSensorTest {
 
     SensorContextTester context = SensorContextTester.create(baseDir);
 
-    DefaultInputFile inputFile = new DefaultInputFile("foo", "Foo.cs")
+    DefaultInputFile inputFile = new TestInputFileBuilder("foo", baseDir, new File(baseDir, "Foo.cs"))
       .setLanguage("cs")
-      .initMetadata("a\na\na\na\na\na\na\na\na\na\n");
+      .initMetadata("a\na\na\na\na\na\na\na\na\na\n")
+      .build();
     context.fileSystem().add(inputFile);
-    context.fileSystem().add(new DefaultInputFile("foo", "Baz.java").setLanguage("java"));
+    context.fileSystem().add(new TestInputFileBuilder("foo", "Baz.java").setLanguage("java").build());
 
     CoverageConfiguration coverageConf = new CoverageConfiguration("cs", "", "", "", "");
 
-    new CoverageReportImportSensor(coverageConf, coverageAggregator, "C#", isIntegrationTest).analyze(context, coverage);
+    SonarQubeVersion sonarQubeVersion = new SonarQubeVersion(SonarQubeVersion.V5_6);
+    new CoverageReportImportSensor(coverageConf, coverageAggregator,"cs", "C#", sonarQubeVersion, isIntegrationTest)
+        .analyze(context, coverage);
 
     verify(coverageAggregator).aggregate(Mockito.any(WildcardPatternFileProvider.class), Mockito.eq(coverage));
 

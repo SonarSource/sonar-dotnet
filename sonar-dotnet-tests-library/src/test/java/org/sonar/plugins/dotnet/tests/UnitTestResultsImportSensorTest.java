@@ -23,6 +23,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 import org.mockito.Mockito;
+import org.sonar.api.SonarQubeVersion;
 import org.sonar.api.batch.bootstrap.ProjectDefinition;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.internal.DefaultSensorDescriptor;
@@ -41,14 +42,18 @@ public class UnitTestResultsImportSensorTest {
   @Test
   public void coverage() {
     UnitTestResultsAggregator unitTestResultsAggregator = mock(UnitTestResultsAggregator.class);
-    new UnitTestResultsImportSensor(unitTestResultsAggregator, ProjectDefinition.create(), "C#").describe(new DefaultSensorDescriptor());
+    SonarQubeVersion sonarQubeVersion = new SonarQubeVersion(SonarQubeVersion.V5_6);
+    new UnitTestResultsImportSensor(unitTestResultsAggregator, ProjectDefinition.create(), "cs", "C#", sonarQubeVersion)
+        .describe(new DefaultSensorDescriptor());
     SensorContext sensorContext = mock(SensorContext.class);
-    new UnitTestResultsImportSensor(unitTestResultsAggregator, ProjectDefinition.create(), "C#").execute(sensorContext);
+    new UnitTestResultsImportSensor(unitTestResultsAggregator, ProjectDefinition.create(), "cs", "C#", sonarQubeVersion)
+        .execute(sensorContext);
     verifyZeroInteractions(sensorContext);
     when(unitTestResultsAggregator.hasUnitTestResultsProperty()).thenReturn(true);
     ProjectDefinition sub = ProjectDefinition.create();
     ProjectDefinition.create().addSubProject(sub);
-    new UnitTestResultsImportSensor(unitTestResultsAggregator, sub, "C#").execute(sensorContext);
+    new UnitTestResultsImportSensor(unitTestResultsAggregator, sub, "cs", "C#", sonarQubeVersion)
+        .execute(sensorContext);
     verifyZeroInteractions(sensorContext);
   }
 
@@ -65,9 +70,12 @@ public class UnitTestResultsImportSensorTest {
     UnitTestResultsAggregator unitTestResultsAggregator = mock(UnitTestResultsAggregator.class);
     SensorContextTester context = SensorContextTester.create(temp.newFolder());
 
-    when(unitTestResultsAggregator.aggregate(Mockito.any(WildcardPatternFileProvider.class), Mockito.any(UnitTestResults.class))).thenReturn(results);
+    SonarQubeVersion sonarQubeVersion = new SonarQubeVersion(SonarQubeVersion.V5_6);
+    when(unitTestResultsAggregator.aggregate(Mockito.any(WildcardPatternFileProvider.class), Mockito.any(UnitTestResults.class)))
+        .thenReturn(results);
 
-    new UnitTestResultsImportSensor(unitTestResultsAggregator, ProjectDefinition.create(), "C#").analyze(context, results);
+    new UnitTestResultsImportSensor(unitTestResultsAggregator, ProjectDefinition.create(), "cs", "C#", sonarQubeVersion)
+        .analyze(context, results);
 
     verify(unitTestResultsAggregator).aggregate(Mockito.any(WildcardPatternFileProvider.class), Mockito.eq(results));
 
@@ -95,7 +103,9 @@ public class UnitTestResultsImportSensorTest {
     when(results.executionTime()).thenReturn(null);
     when(unitTestResultsAggregator.aggregate(Mockito.any(WildcardPatternFileProvider.class), Mockito.any(UnitTestResults.class))).thenReturn(results);
 
-    new UnitTestResultsImportSensor(unitTestResultsAggregator, ProjectDefinition.create(), "C#").analyze(context, results);
+    SonarQubeVersion sonarQubeVersion = new SonarQubeVersion(SonarQubeVersion.V5_6);
+    new UnitTestResultsImportSensor(unitTestResultsAggregator, ProjectDefinition.create(), "cs", "C#", sonarQubeVersion)
+        .analyze(context, results);
 
     verify(unitTestResultsAggregator).aggregate(Mockito.any(WildcardPatternFileProvider.class), Mockito.eq(results));
 

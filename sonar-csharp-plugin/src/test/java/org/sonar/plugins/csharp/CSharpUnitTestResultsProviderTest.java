@@ -21,6 +21,7 @@ package org.sonar.plugins.csharp;
 
 import com.google.common.collect.ImmutableSet;
 import org.junit.Test;
+import org.sonar.api.SonarQubeVersion;
 import org.sonar.api.batch.bootstrap.ProjectDefinition;
 import org.sonar.api.config.PropertyDefinition;
 import org.sonar.api.config.Settings;
@@ -46,7 +47,8 @@ public class CSharpUnitTestResultsProviderTest {
 
   @Test
   public void createInstance_CSharpUnitTestResultsImportSensor() {
-    new CSharpUnitTestResultsImportSensor(new CSharpUnitTestResultsAggregator(new Settings()), ProjectDefinition.create());
+    new CSharpUnitTestResultsImportSensor(new CSharpUnitTestResultsAggregator(new Settings()), ProjectDefinition.create(),
+        new SonarQubeVersion(SonarQubeVersion.V5_6));
   }
 
   private static Set<Object> nonProperties(List extensions) {

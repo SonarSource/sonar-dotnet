@@ -20,6 +20,7 @@
 package org.sonar.plugins.dotnet.tests;
 
 import java.io.File;
+import java.util.Collections;
 import java.util.HashSet;
 import org.junit.Rule;
 import org.junit.Test;
@@ -28,6 +29,7 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
+import org.sonar.api.config.MapSettings;
 import org.sonar.api.config.Settings;
 
 import static java.util.Arrays.asList;
@@ -89,24 +91,21 @@ public class CoverageAggregatorTest {
   public void aggregate() {
     CoverageCache cache = mock(CoverageCache.class);
     when(cache.readCoverageFromCacheOrParse(Mockito.any(CoverageParser.class), Mockito.any(File.class))).thenAnswer(
-      new Answer<Coverage>() {
-        @Override
-        public Coverage answer(InvocationOnMock invocation) throws Throwable {
+        invocation -> {
           CoverageParser parser = (CoverageParser) invocation.getArguments()[0];
           File reportFile = (File) invocation.getArguments()[1];
           Coverage coverage = new Coverage();
           parser.accept(reportFile, coverage);
           return coverage;
-        }
-      });
+        });
 
     WildcardPatternFileProvider wildcardPatternFileProvider = mock(WildcardPatternFileProvider.class);
 
     CoverageConfiguration coverageConf = new CoverageConfiguration("", "ncover", "opencover", "dotcover", "visualstudio");
-    Settings settings = new Settings();
+    MapSettings settings = new MapSettings();
 
     settings.setProperty("ncover", "foo.nccov");
-    when(wildcardPatternFileProvider.listFiles("foo.nccov")).thenReturn(new HashSet<>(asList(new File("foo.nccov"))));
+    when(wildcardPatternFileProvider.listFiles("foo.nccov")).thenReturn(new HashSet<>(Collections.singletonList(new File("foo.nccov"))));
     NCover3ReportParser ncoverParser = mock(NCover3ReportParser.class);
     OpenCoverReportParser openCoverParser = mock(OpenCoverReportParser.class);
     DotCoverReportsAggregator dotCoverParser = mock(DotCoverReportsAggregator.class);
@@ -125,7 +124,7 @@ public class CoverageAggregatorTest {
     settings.clear();
 
     settings.setProperty("opencover", "bar.xml");
-    when(wildcardPatternFileProvider.listFiles("bar.xml")).thenReturn(new HashSet<>(asList(new File("bar.xml"))));
+    when(wildcardPatternFileProvider.listFiles("bar.xml")).thenReturn(new HashSet<>(Collections.singletonList(new File("bar.xml"))));
     ncoverParser = mock(NCover3ReportParser.class);
     openCoverParser = mock(OpenCoverReportParser.class);
     dotCoverParser = mock(DotCoverReportsAggregator.class);
@@ -143,7 +142,7 @@ public class CoverageAggregatorTest {
 
     settings.clear();
     settings.setProperty("dotcover", "baz.html");
-    when(wildcardPatternFileProvider.listFiles("baz.html")).thenReturn(new HashSet<>(asList(new File("baz.html"))));
+    when(wildcardPatternFileProvider.listFiles("baz.html")).thenReturn(new HashSet<>(Collections.singletonList(new File("baz.html"))));
     ncoverParser = mock(NCover3ReportParser.class);
     openCoverParser = mock(OpenCoverReportParser.class);
     dotCoverParser = mock(DotCoverReportsAggregator.class);
@@ -161,7 +160,7 @@ public class CoverageAggregatorTest {
 
     settings.clear();
     settings.setProperty("visualstudio", "qux.coveragexml");
-    when(wildcardPatternFileProvider.listFiles("qux.coveragexml")).thenReturn(new HashSet<>(asList(new File("qux.coveragexml"))));
+    when(wildcardPatternFileProvider.listFiles("qux.coveragexml")).thenReturn(new HashSet<>(Collections.singletonList(new File("qux.coveragexml"))));
     ncoverParser = mock(NCover3ReportParser.class);
     openCoverParser = mock(OpenCoverReportParser.class);
     dotCoverParser = mock(DotCoverReportsAggregator.class);
@@ -181,10 +180,10 @@ public class CoverageAggregatorTest {
 
     settings.clear();
     settings.setProperty("ncover", ",*.nccov  ,bar.nccov");
-    when(wildcardPatternFileProvider.listFiles("*.nccov")).thenReturn(new HashSet<>(asList(new File("foo.nccov"))));
-    when(wildcardPatternFileProvider.listFiles("bar.nccov")).thenReturn(new HashSet<>(asList(new File("bar.nccov"))));
+    when(wildcardPatternFileProvider.listFiles("*.nccov")).thenReturn(new HashSet<>(Collections.singletonList(new File("foo.nccov"))));
+    when(wildcardPatternFileProvider.listFiles("bar.nccov")).thenReturn(new HashSet<>(Collections.singletonList(new File("bar.nccov"))));
     settings.setProperty("opencover", "bar.xml");
-    when(wildcardPatternFileProvider.listFiles("bar.xml")).thenReturn(new HashSet<>(asList(new File("bar.xml"))));
+    when(wildcardPatternFileProvider.listFiles("bar.xml")).thenReturn(new HashSet<>(Collections.singletonList(new File("bar.xml"))));
     settings.setProperty("dotcover", "baz.html");
     when(wildcardPatternFileProvider.listFiles("baz.html")).thenReturn(new HashSet<>(asList(new File("baz.html"))));
     settings.setProperty("visualstudio", "qux.coveragexml");
