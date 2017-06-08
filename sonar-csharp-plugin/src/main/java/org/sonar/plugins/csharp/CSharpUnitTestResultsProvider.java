@@ -19,6 +19,7 @@
  */
 package org.sonar.plugins.csharp;
 
+import org.sonar.api.SonarQubeVersion;
 import org.sonar.api.batch.bootstrap.ProjectDefinition;
 import org.sonar.api.config.PropertyDefinition;
 import org.sonar.api.config.Settings;
@@ -74,8 +75,9 @@ public class CSharpUnitTestResultsProvider {
 
   public static class CSharpUnitTestResultsImportSensor extends UnitTestResultsImportSensor {
 
-    public CSharpUnitTestResultsImportSensor(CSharpUnitTestResultsAggregator unitTestResultsAggregator, ProjectDefinition projectDef) {
-      super(unitTestResultsAggregator, projectDef, CSharpPlugin.LANGUAGE_NAME);
+    public CSharpUnitTestResultsImportSensor(CSharpUnitTestResultsAggregator unitTestResultsAggregator, ProjectDefinition projectDef,
+                                             SonarQubeVersion sonarQubeVersion) {
+      super(unitTestResultsAggregator, projectDef, CSharpPlugin.LANGUAGE_KEY, CSharpPlugin.LANGUAGE_NAME, sonarQubeVersion);
     }
 
   }

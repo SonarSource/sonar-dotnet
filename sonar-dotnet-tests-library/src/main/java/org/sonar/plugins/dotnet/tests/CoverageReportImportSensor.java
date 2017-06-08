@@ -21,6 +21,8 @@ package org.sonar.plugins.dotnet.tests;
 
 import java.io.File;
 import java.util.Map;
+
+import org.sonar.api.SonarQubeVersion;
 import org.sonar.api.batch.fs.FilePredicates;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.InputFile.Type;
@@ -29,6 +31,8 @@ import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
 import org.sonar.api.batch.sensor.coverage.CoverageType;
 import org.sonar.api.batch.sensor.coverage.NewCoverage;
+import org.sonar.api.resources.Language;
+import org.sonar.api.utils.Version;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 
@@ -40,13 +44,19 @@ public class CoverageReportImportSensor implements Sensor {
   private final CoverageConfiguration coverageConf;
   private final CoverageAggregator coverageAggregator;
   private final boolean isIntegrationTest;
+  private final String languageKey;
   private final String languageName;
+  private final SonarQubeVersion sonarQubeVersion;
 
-  public CoverageReportImportSensor(CoverageConfiguration coverageConf, CoverageAggregator coverageAggregator, String languageName, boolean isIntegrationTest) {
+  public CoverageReportImportSensor(CoverageConfiguration coverageConf, CoverageAggregator coverageAggregator,
+                                    String languageKey, String languageName, SonarQubeVersion sonarQubeVersion,
+                                    boolean isIntegrationTest) {
     this.coverageConf = coverageConf;
     this.coverageAggregator = coverageAggregator;
     this.isIntegrationTest = isIntegrationTest;
+    this.languageKey = languageKey;
     this.languageName = languageName;
+    this.sonarQubeVersion = sonarQubeVersion;
   }
 
   @Override
@@ -55,6 +65,11 @@ public class CoverageReportImportSensor implements Sensor {
       descriptor.name(this.languageName + " Integration Tests Coverage Report Import");
     } else {
       descriptor.name(this.languageName + " Unit Tests Coverage Report Import");
+    }
+    descriptor.onlyOnLanguage(this.languageKey);
+
+    if (sonarQubeVersion.isGreaterThanOrEqual(Version.create(6,4))) {
+      descriptor.global();
     }
   }
 

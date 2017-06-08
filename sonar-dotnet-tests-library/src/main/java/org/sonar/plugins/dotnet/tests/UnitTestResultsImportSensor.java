@@ -20,11 +20,15 @@
 package org.sonar.plugins.dotnet.tests;
 
 import java.io.File;
+
+import org.sonar.api.SonarQubeVersion;
 import org.sonar.api.batch.bootstrap.ProjectDefinition;
 import org.sonar.api.batch.sensor.Sensor;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
 import org.sonar.api.measures.CoreMetrics;
+import org.sonar.api.resources.Language;
+import org.sonar.api.utils.Version;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 
@@ -35,18 +39,28 @@ public class UnitTestResultsImportSensor implements Sensor {
   private final WildcardPatternFileProvider wildcardPatternFileProvider = new WildcardPatternFileProvider(new File("."), File.separator);
   private final UnitTestResultsAggregator unitTestResultsAggregator;
   private final ProjectDefinition projectDef;
+  private final String languageKey;
   private final String languageName;
+  private final SonarQubeVersion sonarQubeVersion;
 
-  public UnitTestResultsImportSensor(UnitTestResultsAggregator unitTestResultsAggregator, ProjectDefinition projectDef, String languageName) {
+  public UnitTestResultsImportSensor(UnitTestResultsAggregator unitTestResultsAggregator, ProjectDefinition projectDef,
+                                     String languageKey, String languageName, SonarQubeVersion sonarQubeVersion) {
     this.unitTestResultsAggregator = unitTestResultsAggregator;
     this.projectDef = projectDef;
+    this.languageKey = languageKey;
     this.languageName = languageName;
+    this.sonarQubeVersion = sonarQubeVersion;
   }
 
   @Override
   public void describe(SensorDescriptor descriptor) {
     String name = String.format("%s Unit Test Results Import", this.languageName);
     descriptor.name(name);
+
+    if (sonarQubeVersion.isGreaterThanOrEqual(Version.create(6,4))) {
+      descriptor.global();
+      descriptor.onlyOnLanguage(this.languageKey);
+    }
   }
 
   @Override

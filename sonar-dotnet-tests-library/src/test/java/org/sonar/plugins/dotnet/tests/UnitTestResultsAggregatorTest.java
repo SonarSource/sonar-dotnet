@@ -20,11 +20,13 @@
 package org.sonar.plugins.dotnet.tests;
 
 import java.io.File;
+import java.util.Collections;
 import java.util.HashSet;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.mockito.Mockito;
+import org.sonar.api.config.MapSettings;
 import org.sonar.api.config.Settings;
 
 import static java.util.Arrays.asList;
@@ -81,11 +83,11 @@ public class UnitTestResultsAggregatorTest {
     WildcardPatternFileProvider wildcardPatternFileProvider = mock(WildcardPatternFileProvider.class);
 
     UnitTestConfiguration unitTestConf = new UnitTestConfiguration("visualStudioTestResultsFile", "nunitTestResultsFile", "xunitTestResultsFile");
-    Settings settings = new Settings();
+    MapSettings settings = new MapSettings();
 
     // Visual Studio test results only
     settings.setProperty("visualStudioTestResultsFile", "foo.trx");
-    when(wildcardPatternFileProvider.listFiles("foo.trx")).thenReturn(new HashSet<>(asList(new File("foo.trx"))));
+    when(wildcardPatternFileProvider.listFiles("foo.trx")).thenReturn(new HashSet<>(Collections.singletonList(new File("foo.trx"))));
     VisualStudioTestResultsFileParser visualStudioTestResultsFileParser = mock(VisualStudioTestResultsFileParser.class);
     NUnitTestResultsFileParser nunitTestResultsFileParser = mock(NUnitTestResultsFileParser.class);
     XUnitTestResultsFileParser xunitTestResultsFileParser = mock(XUnitTestResultsFileParser.class);
@@ -98,7 +100,7 @@ public class UnitTestResultsAggregatorTest {
     // NUnit test results only
     settings.clear();
     settings.setProperty("nunitTestResultsFile", "foo.xml");
-    when(wildcardPatternFileProvider.listFiles("foo.xml")).thenReturn(new HashSet<>(asList(new File("foo.xml"))));
+    when(wildcardPatternFileProvider.listFiles("foo.xml")).thenReturn(new HashSet<>(Collections.singletonList(new File("foo.xml"))));
     visualStudioTestResultsFileParser = mock(VisualStudioTestResultsFileParser.class);
     nunitTestResultsFileParser = mock(NUnitTestResultsFileParser.class);
     xunitTestResultsFileParser = mock(XUnitTestResultsFileParser.class);
@@ -111,7 +113,7 @@ public class UnitTestResultsAggregatorTest {
     // XUnit test results only
     settings.clear();
     settings.setProperty("xunitTestResultsFile", "foo.xml");
-    when(wildcardPatternFileProvider.listFiles("foo.xml")).thenReturn(new HashSet<>(asList(new File("foo.xml"))));
+    when(wildcardPatternFileProvider.listFiles("foo.xml")).thenReturn(new HashSet<>(Collections.singletonList(new File("foo.xml"))));
     visualStudioTestResultsFileParser = mock(VisualStudioTestResultsFileParser.class);
     nunitTestResultsFileParser = mock(NUnitTestResultsFileParser.class);
     xunitTestResultsFileParser = mock(XUnitTestResultsFileParser.class);
@@ -154,14 +156,14 @@ public class UnitTestResultsAggregatorTest {
     Mockito.reset(wildcardPatternFileProvider);
     settings.clear();
     settings.setProperty("visualStudioTestResultsFile", ",*.trx  ,bar.trx");
-    when(wildcardPatternFileProvider.listFiles("*.trx")).thenReturn(new HashSet<>(asList(new File("foo.trx"))));
-    when(wildcardPatternFileProvider.listFiles("bar.trx")).thenReturn(new HashSet<>(asList(new File("bar.trx"))));
+    when(wildcardPatternFileProvider.listFiles("*.trx")).thenReturn(new HashSet<>(Collections.singletonList(new File("foo.trx"))));
+    when(wildcardPatternFileProvider.listFiles("bar.trx")).thenReturn(new HashSet<>(Collections.singletonList(new File("bar.trx"))));
     settings.setProperty("nunitTestResultsFile", ",foo.xml  ,bar.xml");
-    when(wildcardPatternFileProvider.listFiles("foo.xml")).thenReturn(new HashSet<>(asList(new File("foo.xml"))));
-    when(wildcardPatternFileProvider.listFiles("bar.xml")).thenReturn(new HashSet<>(asList(new File("bar.xml"))));
+    when(wildcardPatternFileProvider.listFiles("foo.xml")).thenReturn(new HashSet<>(Collections.singletonList(new File("foo.xml"))));
+    when(wildcardPatternFileProvider.listFiles("bar.xml")).thenReturn(new HashSet<>(Collections.singletonList(new File("bar.xml"))));
     settings.setProperty("xunitTestResultsFile", ",foo2.xml  ,bar2.xml");
-    when(wildcardPatternFileProvider.listFiles("foo2.xml")).thenReturn(new HashSet<>(asList(new File("foo2.xml"))));
-    when(wildcardPatternFileProvider.listFiles("bar2.xml")).thenReturn(new HashSet<>(asList(new File("bar2.xml"))));
+    when(wildcardPatternFileProvider.listFiles("foo2.xml")).thenReturn(new HashSet<>(Collections.singletonList(new File("foo2.xml"))));
+    when(wildcardPatternFileProvider.listFiles("bar2.xml")).thenReturn(new HashSet<>(Collections.singletonList(new File("bar2.xml"))));
     visualStudioTestResultsFileParser = mock(VisualStudioTestResultsFileParser.class);
     nunitTestResultsFileParser = mock(NUnitTestResultsFileParser.class);
     xunitTestResultsFileParser = mock(XUnitTestResultsFileParser.class);

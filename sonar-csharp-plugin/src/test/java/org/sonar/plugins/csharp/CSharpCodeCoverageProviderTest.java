@@ -21,6 +21,7 @@ package org.sonar.plugins.csharp;
 
 import com.google.common.collect.ImmutableSet;
 import org.junit.Test;
+import org.sonar.api.SonarQubeVersion;
 import org.sonar.api.config.PropertyDefinition;
 import org.sonar.api.config.Settings;
 import org.sonar.plugins.csharp.CSharpCodeCoverageProvider.CSharpCoverageAggregator;
@@ -60,12 +61,13 @@ public class CSharpCodeCoverageProviderTest {
 
   @Test
   public void createInstance_CoverageReport() {
-    new CSharpCoverageReportImportSensor(new CSharpCoverageAggregator(new Settings()));
+    new CSharpCoverageReportImportSensor(new CSharpCoverageAggregator(new Settings()), new SonarQubeVersion(SonarQubeVersion.V5_6));
   }
 
   @Test
   public void createInstance_IntegrationCoverageReport() {
-    new CSharpIntegrationCoverageReportImportSensor(new CSharpIntegrationCoverageAggregator(new Settings()));
+    new CSharpIntegrationCoverageReportImportSensor(new CSharpIntegrationCoverageAggregator(new Settings()),
+        new SonarQubeVersion(SonarQubeVersion.V5_6));
   }
 
   private static Set<Object> nonProperties(List extensions) {
