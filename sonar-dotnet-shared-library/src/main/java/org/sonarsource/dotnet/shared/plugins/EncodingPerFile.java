@@ -19,6 +19,10 @@
  */
 package org.sonarsource.dotnet.shared.plugins;
 
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Path;
+import java.util.Map;
 import org.sonar.api.CoreProperties;
 import org.sonar.api.SonarQubeVersion;
 import org.sonar.api.batch.BatchSide;
@@ -30,10 +34,6 @@ import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 import org.sonarsource.dotnet.shared.plugins.protobuf.EncodingImporter;
 import org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters;
-
-import java.nio.charset.Charset;
-import java.nio.file.Path;
-import java.util.Map;
 
 import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.ENCODING_OUTPUT_PROTOBUF_NAME;
 
@@ -55,7 +55,7 @@ public class EncodingPerFile {
   }
 
   void init(Path reportDir) {
-    EncodingImporter encodingImporter = ProtobufImporters.encodingImporter();
+    EncodingImporter encodingImporter = getEncodingImporter();
 
     Path encodingReportProtobuf = reportDir.resolve(ENCODING_OUTPUT_PROTOBUF_NAME);
     if (encodingReportProtobuf.toFile().exists()) {
@@ -65,6 +65,10 @@ public class EncodingPerFile {
     }
 
     this.roslynEncodingPerPath = encodingImporter.getEncodingPerPath();
+  }
+
+  EncodingImporter getEncodingImporter() {
+    return ProtobufImporters.encodingImporter();
   }
 
   boolean encodingMatch(InputFile inputFile) {
@@ -93,11 +97,14 @@ public class EncodingPerFile {
 
     boolean sameEncoding = sqEncoding.equals(roslynEncoding);
     if (!sameEncoding) {
-      LOG.warn("Encoding detected by Roslyn and encoding used by SonarQube do not match for file {}. "
-        + "SonarQube encoding is '{}', Roslyn encoding is '{}'. File will be skipped.",
-        inputFilePath, sqEncoding, roslynEncoding);
+      if (sqEncoding.equals(StandardCharsets.UTF_16LE) && roslynEncoding.equals(StandardCharsets.UTF_16)) {
+        sameEncoding = true;
+      } else {
+        LOG.warn("Encoding detected by Roslyn and encoding used by SonarQube do not match for file {}. "
+          + "SonarQube encoding is '{}', Roslyn encoding is '{}'. File will be skipped.",
+          inputFilePath, sqEncoding, roslynEncoding);
+      }
     }
     return sameEncoding;
   }
-
 }
