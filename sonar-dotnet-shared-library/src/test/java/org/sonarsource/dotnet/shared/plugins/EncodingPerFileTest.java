@@ -49,41 +49,33 @@ public class EncodingPerFileTest {
 
   @Test
   public void should_treat_as_mismatch_when_roslyn_encoding_missing() {
-    Path path = Paths.get("dummy").toAbsolutePath();
-
-    EncodingPerFile encodingPerFile = new FakeEncodingPerFile(path, null);
-    encodingPerFile.init(path);
-
-    InputFile inputFile = newInputFile(path);
-    assertThat(encodingPerFile.encodingMatch(inputFile)).isFalse();
+    assertEncodingMatch(null, null, false);
   }
 
   @Test
   public void should_treat_as_mismatch_when_roslyn_utf8_and_sq_utf16() {
-    Path path = Paths.get("dummy").toAbsolutePath();
-
     Charset roslynCharset = StandardCharsets.UTF_8;
     Charset sqCharset = StandardCharsets.UTF_16;
 
-    EncodingPerFile encodingPerFile = new FakeEncodingPerFile(path, roslynCharset);
-    encodingPerFile.init(path);
-
-    InputFile inputFile = newInputFile(path, sqCharset);
-    assertThat(encodingPerFile.encodingMatch(inputFile)).isFalse();
+    assertEncodingMatch(roslynCharset, sqCharset, false);
   }
 
   @Test
   public void should_treat_as_match_when_roslyn_utf16_and_sq_utf16le() {
-    Path path = Paths.get("dummy").toAbsolutePath();
-
     Charset roslynCharset = StandardCharsets.UTF_16;
     Charset sqCharset = StandardCharsets.UTF_16LE;
+
+    assertEncodingMatch(roslynCharset, sqCharset, true);
+  }
+
+  private void assertEncodingMatch(Charset roslynCharset, Charset sqCharset, boolean result) {
+    Path path = Paths.get("dummy").toAbsolutePath();
 
     EncodingPerFile encodingPerFile = new FakeEncodingPerFile(path, roslynCharset);
     encodingPerFile.init(path);
 
     InputFile inputFile = newInputFile(path, sqCharset);
-    assertThat(encodingPerFile.encodingMatch(inputFile)).isTrue();
+    assertThat(encodingPerFile.encodingMatch(inputFile)).isEqualTo(result);
   }
 
   private InputFile newInputFile(Path path) {
