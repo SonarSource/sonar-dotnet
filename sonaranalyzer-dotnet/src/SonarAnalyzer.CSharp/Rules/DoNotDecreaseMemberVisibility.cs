@@ -66,11 +66,13 @@ namespace SonarAnalyzer.Rules.CSharp
                 return false;
             }
 
-            if (classType.BaseType
+            bool baseClassHasMatchingPublicMethod = classType.BaseType
                 .GetMembers(methodSymbol.Name)
                 .OfType<IMethodSymbol>()
                 .Where(m => m.DeclaredAccessibility == Accessibility.Public)
-                .Any(m => HasSameParameters(m, methodSymbol)))
+                .Any(m => HasSameParameters(m, methodSymbol));
+
+            if (baseClassHasMatchingPublicMethod)
             {
                 return true;
             }
@@ -80,15 +82,15 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private bool HasSameParameters(IMethodSymbol methodCandidate, IMethodSymbol methodSymbol)
         {
-            var methodCandidateParams = methodCandidate.Parameters.ToList();
-            var methodParams = methodSymbol.Parameters.ToList();
+            var methodCandidateParams = methodCandidate.Parameters;
+            var methodParams = methodSymbol.Parameters;
 
-            if (methodCandidateParams.Count != methodParams.Count)
+            if (methodCandidateParams.Length != methodParams.Length)
             {
                 return false;
             }
 
-            for (int i = 0; i < methodParams.Count; i++)
+            for (int i = 0; i < methodParams.Length; i++)
             {
                 if (!Equals(methodCandidateParams[i].Type, methodParams[i].Type))
                 {
