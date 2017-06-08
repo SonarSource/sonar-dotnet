@@ -122,8 +122,8 @@ public class RoslynProfileExporter extends ProfileExporter {
 
       appendLine(writer, "  <Configuration>");
       appendLine(writer, "    <RuleSet Name=\"Rules for SonarQube\" Description=\"This rule set was automatically generated from SonarQube.\" ToolsVersion=\"14.0\">");
-      for (String partialRepoKey : activeRoslynRulesByPartialRepoKey.keySet()) {
-        writeRepoRuleSet(partialRepoKey, activeRoslynRulesByPartialRepoKey.get(partialRepoKey), writer);
+      for (Map.Entry<String, List<RuleKey>> partialRepoEntry : activeRoslynRulesByPartialRepoKey.entrySet()) {
+        writeRepoRuleSet(partialRepoEntry.getKey(), partialRepoEntry.getValue(), writer);
       }
       appendLine(writer, "    </RuleSet>");
 

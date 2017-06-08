@@ -27,7 +27,6 @@ import org.sonar.api.batch.sensor.Sensor;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
 import org.sonar.api.measures.CoreMetrics;
-import org.sonar.api.resources.Language;
 import org.sonar.api.utils.Version;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;

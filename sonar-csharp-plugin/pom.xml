@@ -61,7 +61,7 @@
     <sonar.pluginName>C#</sonar.pluginName>
     <sonar.pluginClass>org.sonar.plugins.csharp.CSharpPlugin</sonar.pluginClass>
     <sonarAnalyzer.workDirectory>${project.build.directory}/analyzer</sonarAnalyzer.workDirectory>
-	<analyzer.build.conf>Release</analyzer.build.conf>
+    <analyzer.build.conf>Release</analyzer.build.conf>
   </properties>
 
   <dependencies>
@@ -127,20 +127,6 @@
     </dependency>
   </dependencies>
 
-  <profiles>
-    <profile>
-      <id>debug</id>
-      <activation>
-        <property>
-          <name>debug</name>
-        </property>
-      </activation>
-      <properties>
-        <analyzer.build.conf>Debug</analyzer.build.conf>
-      </properties>
-    </profile>
-  </profiles>
-
   <build>
     <resources>
       <resource>
@@ -198,7 +184,7 @@
                   </fileset>
                 </copy>
                 <zip destfile="${sonarAnalyzer.workDirectory}/static/SonarAnalyzer-${project.version}.zip"
-                            basedir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.CSharp"/>
+                     basedir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.CSharp"/>
 
                 <copy todir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.RuleDocGenerator.CSharp">
                   <fileset dir="${project.build.directory}/../../sonaranalyzer-dotnet/src/SonarAnalyzer.RuleDescriptorGenerator/bin/${analyzer.build.conf}/cs">
@@ -226,5 +212,19 @@
       </plugin>
     </plugins>
   </build>
+
+  <profiles>
+    <profile>
+      <id>debug</id>
+      <activation>
+        <property>
+          <name>debug</name>
+        </property>
+      </activation>
+      <properties>
+        <analyzer.build.conf>Debug</analyzer.build.conf>
+      </properties>
+    </profile>
+  </profiles>
 
 </project>
