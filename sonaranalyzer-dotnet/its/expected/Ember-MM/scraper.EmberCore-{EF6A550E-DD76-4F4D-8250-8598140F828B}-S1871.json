@@ -2,19 +2,6 @@
 "issues":  [
 {
 "id":  "S1871",
-"message":  "Either merge this branch with the identical one on line 649 or change one of the implementations.",
-"location":  {
-"uri":  "Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeIMDB.vb",
-"region":  {
-"startLine":  653,
-"startColumn":  29,
-"endLine":  653,
-"endColumn":  163
-}
-}
-},
-{
-"id":  "S1871",
 "message":  "Either merge this branch with the identical one on line 92 or change one of the implementations.",
 "location":  {
 "uri":  "Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeTMDB.vb",
@@ -23,19 +10,6 @@
 "startColumn":  29,
 "endLine":  110,
 "endColumn":  35
-}
-}
-},
-{
-"id":  "S1871",
-"message":  "Either merge this case with the identical one on line 155 or change one of the implementations.",
-"location":  {
-"uri":  "Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeTrailers.vb",
-"region":  {
-"startLine":  157,
-"startColumn":  37,
-"endLine":  157,
-"endColumn":  57
 }
 }
 },
