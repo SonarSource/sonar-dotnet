@@ -10,6 +10,78 @@ namespace Tests.Diagnostics
         private const bool t = true;
         private const bool f = false;
 
+        public void LoopsWithBreak(object o1, object o2, object o3)
+        {
+            bool c1, c2, c3;
+            c1 = c2 = c3 = true;
+
+            while (c1)
+            {
+                if (o1 != null)
+                    break;
+            }
+
+            do
+            {
+                if (o2 != null)
+                    break;
+            } while (c2);
+
+            for (int i = 0; c3; i++)
+            {
+                if (o3 != null)
+                    break;
+            }
+        }
+
+        public void NotExecutedLoops(object o1, object o2, object o3)
+        {
+            bool c1, c2, c3;
+            c1 = c2 = c3 = false;
+
+            while (c1) // Noncompliant
+            { // Secondary
+                if (o1 != null)
+                    break;
+            }
+
+            do
+            { // Secondary
+                if (o2 != null)
+                    break;
+            } while (c2); // Noncompliant
+
+            for (int i = 0; c3; i++) // Noncompliant
+            {
+                if (o3 != null)
+                    break;
+            }
+        }
+
+        public void BreaksInLoop(object o1, object o2, object o3)
+        {
+            bool c1, c2, c3;
+            c1 = c2 = c3 = true;
+
+            while (c1)
+            {
+                if (o1 != null)
+                    break;
+            }
+
+            while (c2)
+            {
+                if (o2 != null)
+                    return;
+            }
+
+            while (c3)
+            {
+                if (o3 != null)
+                    throw new Exception();
+            }
+        }
+
         public void Foo1(bool a, bool b)
         {
             var x = t || a || b;
@@ -136,17 +208,6 @@ namespace Tests.Diagnostics
         }
 
         private void TryGet(out bool b) { b = false; }
-
-        public void Method4()
-        {
-            var b = true;
-            while (b) // Noncompliant
-            {
-                Console.WriteLine();
-            }
-
-            Console.WriteLine();
-        }
 
         public void Method5(bool cond)
         {

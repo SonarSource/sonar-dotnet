@@ -44,6 +44,16 @@ namespace SonarAnalyzer.Rules.CSharp
             SyntaxKind.LogicalAndExpression,
             SyntaxKind.LogicalOrExpression);
 
+        private static readonly ISet<SyntaxKind> LoopBreakingStatements = ImmutableHashSet.Create(
+            SyntaxKind.BreakStatement,
+            SyntaxKind.ThrowStatement,
+            SyntaxKind.ReturnStatement);
+
+        private static readonly ISet<SyntaxKind> LoopStatements = ImmutableHashSet.Create(
+            SyntaxKind.WhileStatement,
+            SyntaxKind.DoStatement,
+            SyntaxKind.ForStatement);
+
         private const string S2583DiagnosticId = "S2583"; // Bug
         private const string S2583MessageFormat = "Change this condition so that it does not always evaluate to '{0}'; some subsequent code is never executed.";
 
@@ -75,6 +85,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 (sender, args) => Enumerable.Empty<Diagnostic>()
                     .Union(conditionTrue
                         .Except(conditionFalse)
+                        .Where(c => !IsConditionOfLoopWithBreak((ExpressionSyntax)c))
                         .Select(node => GetDiagnostics(node, true)))
                     .Union(conditionFalse
                         .Except(conditionTrue)
@@ -95,6 +106,33 @@ namespace SonarAnalyzer.Rules.CSharp
                 explodedGraph.ConditionEvaluated -= collectConditions;
             }
         }
+
+        private static bool IsConditionOfLoopWithBreak(ExpressionSyntax constantExpression)
+        {
+            var loop = constantExpression.RemoveParentheses().Parent;
+
+            var loopBody = (loop as WhileStatementSyntax)?.Statement ??
+                (loop as DoStatementSyntax)?.Statement ??
+                (loop as ForStatementSyntax)?.Statement;
+
+            if (loopBody == null)
+            {
+                return false;
+            }
+
+            var breakStatements = loopBody.DescendantNodes()
+                .Where(IsLoopBreakingStatement);
+
+            return breakStatements
+                .Select(GetParentLoop)
+                .Any(parentLoop => loop.Equals(parentLoop));
+        }
+
+        private static SyntaxNode GetParentLoop(SyntaxNode syntaxNode) =>
+            syntaxNode.Ancestors().First(a => a.IsAnyKind(LoopStatements));
+
+        private static bool IsLoopBreakingStatement(SyntaxNode syntaxNode) =>
+            syntaxNode.IsAnyKind(LoopBreakingStatements);
 
         private static Diagnostic GetDiagnostics(SyntaxNode constantNode, bool constantValue)
         {
