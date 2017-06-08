@@ -50,15 +50,8 @@ public class EncodingPerFileTest {
   @Test
   public void should_treat_as_mismatch_when_roslyn_encoding_missing() {
     Path path = Paths.get("dummy").toAbsolutePath();
-    Map<Path, Charset> charsetMap = Collections.singletonMap(path, null);
-    EncodingPerFile encodingPerFile = new EncodingPerFile(null, null) {
-      @Override
-      EncodingImporter getEncodingImporter() {
-        EncodingImporter encodingImporter = mock(EncodingImporter.class);
-        when(encodingImporter.getEncodingPerPath()).thenReturn(charsetMap);
-        return encodingImporter;
-      }
-    };
+
+    EncodingPerFile encodingPerFile = new FakeEncodingPerFile(path, null);
     encodingPerFile.init(path);
 
     InputFile inputFile = newInputFile(path);
@@ -72,17 +65,7 @@ public class EncodingPerFileTest {
     Charset roslynCharset = StandardCharsets.UTF_8;
     Charset sqCharset = StandardCharsets.UTF_16;
 
-    Map<Path, Charset> charsetMap = Collections.singletonMap(path, roslynCharset);
-
-    SonarQubeVersion sqVersion = new SonarQubeVersion(Version.create(6, 1));
-    EncodingPerFile encodingPerFile = new EncodingPerFile(null, sqVersion) {
-      @Override
-      EncodingImporter getEncodingImporter() {
-        EncodingImporter encodingImporter = mock(EncodingImporter.class);
-        when(encodingImporter.getEncodingPerPath()).thenReturn(charsetMap);
-        return encodingImporter;
-      }
-    };
+    EncodingPerFile encodingPerFile = new FakeEncodingPerFile(path, roslynCharset);
     encodingPerFile.init(path);
 
     InputFile inputFile = newInputFile(path, sqCharset);
@@ -96,17 +79,7 @@ public class EncodingPerFileTest {
     Charset roslynCharset = StandardCharsets.UTF_16;
     Charset sqCharset = StandardCharsets.UTF_16LE;
 
-    Map<Path, Charset> charsetMap = Collections.singletonMap(path, roslynCharset);
-
-    SonarQubeVersion sqVersion = new SonarQubeVersion(Version.create(6, 1));
-    EncodingPerFile encodingPerFile = new EncodingPerFile(null, sqVersion) {
-      @Override
-      EncodingImporter getEncodingImporter() {
-        EncodingImporter encodingImporter = mock(EncodingImporter.class);
-        when(encodingImporter.getEncodingPerPath()).thenReturn(charsetMap);
-        return encodingImporter;
-      }
-    };
+    EncodingPerFile encodingPerFile = new FakeEncodingPerFile(path, roslynCharset);
     encodingPerFile.init(path);
 
     InputFile inputFile = newInputFile(path, sqCharset);
@@ -122,5 +95,22 @@ public class EncodingPerFileTest {
     when(inputFile.path()).thenReturn(path);
     when(inputFile.charset()).thenReturn(charset);
     return inputFile;
+  }
+
+  static class FakeEncodingPerFile extends EncodingPerFile {
+    private final Map<Path, Charset> charsetMap;
+
+    public FakeEncodingPerFile(Path path, Charset roslynCharset) {
+      super(null, new SonarQubeVersion(Version.create(6, 1)));
+
+      charsetMap = Collections.singletonMap(path, roslynCharset);
+    }
+
+    @Override
+    EncodingImporter getEncodingImporter() {
+      EncodingImporter encodingImporter = mock(EncodingImporter.class);
+      when(encodingImporter.getEncodingPerPath()).thenReturn(charsetMap);
+      return encodingImporter;
+    }
   }
 }
