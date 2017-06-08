@@ -1,0 +1,28 @@
+{
+"issues":  [
+{
+"id":  "S1871",
+"message":  "Either merge this branch with the identical one on line 438 or change one of the implementations.",
+"location":  [
+{
+"uri":  "akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"region":  {
+"startLine":  444,
+"startColumn":  29,
+"endLine":  445,
+"endColumn":  118
+}
+},
+{
+"uri":  "akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"region":  {
+"startLine":  438,
+"startColumn":  29,
+"endLine":  439,
+"endColumn":  118
+}
+}
+]
+}
+]
+}
