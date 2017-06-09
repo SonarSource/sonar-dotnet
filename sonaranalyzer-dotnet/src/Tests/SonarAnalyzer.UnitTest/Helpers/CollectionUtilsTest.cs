@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Helpers;
 using System.Collections.Generic;
@@ -33,7 +34,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             var c1 = new List<int> { 1, 2, 3 };
             var c2 = new List<string> { "1", "2", "3" };
 
-            Assert.IsTrue(CollectionUtils.AreEqual(c1, c2, (e1, e2) => e1.ToString() == e2));
+            CollectionUtils.AreEqual(c1, c2, (e1, e2) => e1.ToString() == e2).Should().BeTrue();
         }
 
         [TestMethod]
@@ -42,7 +43,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             var c1 = new List<int> { 1, 2 };
             var c2 = new List<string> { "1", "2", "3" };
 
-            Assert.IsFalse(CollectionUtils.AreEqual(c1, c2, (e1, e2) => e1.ToString() == e2));
+            CollectionUtils.AreEqual(c1, c2, (e1, e2) => e1.ToString() == e2).Should().BeFalse();
         }
 
         [TestMethod]
@@ -51,7 +52,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             var c1 = new List<int> { 1, 2, 3 };
             var c2 = new List<string> { "1", "2" };
 
-            Assert.IsFalse(CollectionUtils.AreEqual(c1, c2, (e1, e2) => e1.ToString() == e2));
+            CollectionUtils.AreEqual(c1, c2, (e1, e2) => e1.ToString() == e2).Should().BeFalse();
         }
 
         [TestMethod]
@@ -60,7 +61,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             var c1 = new List<int>();
             var c2 = new List<string> { "1", "2" };
 
-            Assert.IsFalse(CollectionUtils.AreEqual(c1, c2, (e1, e2) => e1.ToString() == e2));
+            CollectionUtils.AreEqual(c1, c2, (e1, e2) => e1.ToString() == e2).Should().BeFalse();
         }
 
         [TestMethod]
@@ -69,7 +70,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             var c1 = new List<int> { 1 };
             var c2 = new List<string>();
 
-            Assert.IsFalse(CollectionUtils.AreEqual(c1, c2, (e1, e2) => e1.ToString() == e2));
+            CollectionUtils.AreEqual(c1, c2, (e1, e2) => e1.ToString() == e2).Should().BeFalse();
         }
 
         [TestMethod]
@@ -78,7 +79,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             var c1 = new List<int>();
             var c2 = new List<string>();
 
-            Assert.IsTrue(CollectionUtils.AreEqual(c1, c2, (e1, e2) => e1.ToString() == e2));
+            CollectionUtils.AreEqual(c1, c2, (e1, e2) => e1.ToString() == e2).Should().BeTrue();
         }
     }
 }

@@ -47,9 +47,9 @@ namespace SonarAnalyzer.Rules.CSharp
                 var classDeclaration = c.Node as ClassDeclarationSyntax;
                 var classSymbol = c.SemanticModel.GetDeclaredSymbol(classDeclaration);
 
-                if (classSymbol.DerivesFrom(KnownType.System_Exception) &&
-                    !HasStandardConstructors(classSymbol) &&
-                    !classDeclaration.Identifier.IsMissing)
+                if (!classDeclaration.Identifier.IsMissing &&
+                    classSymbol.DerivesFrom(KnownType.System_Exception) &&
+                    !HasStandardConstructors(classSymbol))
                 {
                     c.ReportDiagnostic(Diagnostic.Create(rule, classDeclaration.Identifier.GetLocation()));
                 }
