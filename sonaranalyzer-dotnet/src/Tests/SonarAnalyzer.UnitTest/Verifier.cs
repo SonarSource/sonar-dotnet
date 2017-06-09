@@ -300,17 +300,31 @@ namespace SonarAnalyzer.UnitTest
 
             if (removeAnalysisComments)
             {
-                lines = lines.Where(IssueLocationCollector.IsNotIssueLocationLine).ToArray();
-                lines = lines.Select(l =>
-                {
-                    var match = Regex.Match(l, NONCOMPLIANT_PATTERN);
-                    return match.Success ? l.Replace(match.Groups[0].Value, FIXED_MESSAGE) : l;
-                }).ToArray();
+                lines = lines.Where(IssueLocationCollector.IsNotIssueLocationLine)
+                    .Select(ReplaceNonCompliantComment)
+                    .ToArray();
             }
 
             var text = string.Join(Environment.NewLine, lines);
 
             return project.AddDocument(file.Name, text).Project;
+        }
+
+        private static string ReplaceNonCompliantComment(string line)
+        {
+            var match = Regex.Match(line, IssueLocationCollector.ISSUE_LOCATION_PATTERN);
+            if (!match.Success)
+            {
+                return line;
+            }
+
+            if (match.Groups["issueType"].Value == "Noncompliant")
+            {
+                var startIndex = line.IndexOf(match.Groups["issueType"].Value);
+                return string.Concat(line.Remove(startIndex), FIXED_MESSAGE);
+            }
+
+            return line.Replace(match.Value, string.Empty).TrimEnd();
         }
 
         #endregion

@@ -21,15 +21,15 @@ namespace Tests.Diagnostics
         {
         }
 
-        public override int GetHashCode()
+        public override int GetHashCode() // Fixed
         {
             int hash = Zero;
-            hash += foo.GetHashCode(); // Fixed
-            hash += age.GetHashCode(); // Fixed
-            hash += this.name.GetHashCode(); // Fixed
+            hash += foo.GetHashCode();
+            hash += age.GetHashCode();
+            hash += this.name.GetHashCode();
             hash += name.GetHashCode(); // Compliant, we already reported on this symbol
             hash += this.birthday.GetHashCode();
-            hash += SomeMethod(Field); // Fixed
+            hash += SomeMethod(Field);
             return hash;
         }
         public int SomeMethod(int value)

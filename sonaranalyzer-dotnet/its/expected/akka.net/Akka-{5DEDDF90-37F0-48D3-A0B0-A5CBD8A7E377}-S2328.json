@@ -2,8 +2,18 @@
 "issues":  [
 {
 "id":  "S2328",
-"message":  "Remove this use of 'inputType' from the 'GetHashCode' declaration, or make it 'readonly'.",
-"location":  {
+"message":  " Refactor 'GetHashCode' to not reference mutable fields.",
+"location":  [
+{
+"uri":  "akka.net\src\core\Akka\Actor\Props.cs",
+"region":  {
+"startLine":  111,
+"startColumn":  29,
+"endLine":  111,
+"endColumn":  40
+}
+},
+{
 "uri":  "akka.net\src\core\Akka\Actor\Props.cs",
 "region":  {
 "startLine":  118,
@@ -12,6 +22,7 @@
 "endColumn":  55
 }
 }
+]
 }
 ]
 }
