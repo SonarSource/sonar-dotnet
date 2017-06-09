@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
@@ -26,7 +27,6 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
-using System.Collections.Generic;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -35,10 +35,11 @@ namespace SonarAnalyzer.Rules.CSharp
     public class GetHashCodeMutable : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S2328";
-        private const string MessageFormat = "Remove this use of '{0}' from the 'GetHashCode' declaration, or make it 'readonly'.";
+        private const string IssueMessage = " Refactor 'GetHashCode' to not reference mutable fields.";
+        private const string SecondaryMessageFormat = "Remove this use of '{0}' or make it 'readonly'.";
 
         private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, IssueMessage, RspecStrings.ResourceManager);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
@@ -50,9 +51,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var methodSyntax = (MethodDeclarationSyntax)c.Node;
                     var methodSymbol = c.SemanticModel.GetDeclaredSymbol(methodSyntax);
 
-                    if (methodSymbol == null ||
-                        methodSyntax.Identifier.Text != "GetHashCode" ||
-                        !methodSyntax.Modifiers.Any(SyntaxKind.OverrideKeyword))
+                    if (!methodSymbol.IsObjectGetHashCode())
                     {
                         return;
                     }
@@ -74,15 +73,25 @@ namespace SonarAnalyzer.Rules.CSharp
                         .Where(symbol => symbol != null)
                         .ToImmutableHashSet();
 
-                    var identifiers = methodSyntax.DescendantNodes()
-                        .OfType<IdentifierNameSyntax>();
+                    var identifiers = methodSyntax.DescendantNodes().OfType<IdentifierNameSyntax>();
 
-                    ReportOnFirstReferences(c, fieldsOfClass, identifiers);
+                    var secondaryLocations = GetAllFirstMutableFieldsUsed(c, fieldsOfClass, identifiers)
+                        .Select(identifierSyntax => new SecondaryLocation(identifierSyntax.GetLocation(),
+                            string.Format(SecondaryMessageFormat, identifierSyntax.Identifier.Text)))
+                        .ToList();
+                    if (secondaryLocations.Count == 0)
+                    {
+                        return;
+                    }
+
+                    c.ReportDiagnostic(Diagnostic.Create(rule, methodSyntax.Identifier.GetLocation(),
+                        additionalLocations: secondaryLocations.ToAdditionalLocations(),
+                        properties: secondaryLocations.ToProperties()));
                 },
                 SyntaxKind.MethodDeclaration);
         }
 
-        private static void ReportOnFirstReferences(SyntaxNodeAnalysisContext context,
+        private static IEnumerable<IdentifierNameSyntax> GetAllFirstMutableFieldsUsed(SyntaxNodeAnalysisContext context,
             ImmutableHashSet<IFieldSymbol> fieldsOfClass, IEnumerable<IdentifierNameSyntax> identifiers)
         {
             var syntaxNodes = new Dictionary<IFieldSymbol, List<IdentifierNameSyntax>>();
@@ -108,12 +117,9 @@ namespace SonarAnalyzer.Rules.CSharp
                 syntaxNodes[identifierSymbol].Add(identifier);
             }
 
-            foreach (var identifierReferences in syntaxNodes.Values)
-            {
-                var firstPosition = identifierReferences.Select(id => id.SpanStart).Min();
-                var identifier = identifierReferences.First(id => id.SpanStart == firstPosition);
-                context.ReportDiagnostic(Diagnostic.Create(rule, identifier.GetLocation(), identifier.Identifier.Text));
-            }
+            return syntaxNodes.Values
+                .Select(identifierReferences => identifierReferences.OrderBy(id => id.SpanStart).FirstOrDefault())
+                .Where(identifierSyntax => identifierSyntax != null);
         }
 
         private static bool IsFieldRelevant(IFieldSymbol fieldSymbol, ImmutableHashSet<IFieldSymbol> fieldsOfClass)

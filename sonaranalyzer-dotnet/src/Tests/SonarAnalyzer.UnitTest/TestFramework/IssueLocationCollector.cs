@@ -18,14 +18,14 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using FluentAssertions.Execution;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.Text;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text.RegularExpressions;
+using FluentAssertions.Execution;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.Text;
 
 namespace SonarAnalyzer.UnitTest.TestFramework
 {
@@ -39,7 +39,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         private const string NO_PRECISE_LOCATION_PATTERN = @"\s*(?<!\^+\s{1})";
         private const string COMMENT_PATTERN = @"(?<comment>\/\/|\')";
 
-        private const string ISSUE_LOCATION_PATTERN =
+        internal const string ISSUE_LOCATION_PATTERN =
             COMMENT_PATTERN + "*" + NO_PRECISE_LOCATION_PATTERN + TYPE_PATTERN + OFFSET_PATTERN + ISSUE_IDS_PATTERN + MESSAGE_PATTERN;
         private const string PRECISE_ISSUE_LOCATION_PATTERN =
             @"^" + COMMENT_PATTERN + PRECISE_LOCATION_PATTERN + TYPE_PATTERN + "*" + OFFSET_PATTERN + ISSUE_IDS_PATTERN + MESSAGE_PATTERN + "$";

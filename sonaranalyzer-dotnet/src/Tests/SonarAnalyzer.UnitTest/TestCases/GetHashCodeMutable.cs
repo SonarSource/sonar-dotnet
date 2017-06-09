@@ -21,16 +21,16 @@ namespace Tests.Diagnostics
         {
         }
 
-        public override int GetHashCode()
+        public override int GetHashCode() // Noncompliant {{ Refactor 'GetHashCode' to not reference mutable fields.}}
         {
             int hash = Zero;
-            hash += foo.GetHashCode(); // Noncompliant {{Remove this use of 'foo' from the 'GetHashCode' declaration, or make it 'readonly'.}}
+            hash += foo.GetHashCode(); // Secondary {{Remove this use of 'foo' or make it 'readonly'.}}
 //                  ^^^
-            hash += age.GetHashCode(); // Noncompliant
-            hash += this.name.GetHashCode(); // Noncompliant
+            hash += age.GetHashCode(); // Secondary {{Remove this use of 'age' or make it 'readonly'.}}
+            hash += this.name.GetHashCode(); // Secondary {{Remove this use of 'name' or make it 'readonly'.}}
             hash += name.GetHashCode(); // Compliant, we already reported on this symbol
             hash += this.birthday.GetHashCode();
-            hash += SomeMethod(Field); // Noncompliant
+            hash += SomeMethod(Field); // Secondary {{Remove this use of 'Field' or make it 'readonly'.}}
             return hash;
         }
         public int SomeMethod(int value)

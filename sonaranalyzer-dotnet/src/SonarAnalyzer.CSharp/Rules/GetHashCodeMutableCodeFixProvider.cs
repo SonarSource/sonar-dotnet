@@ -18,14 +18,17 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
 using System.Collections.Immutable;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CodeFixes;
-using System.Threading.Tasks;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CodeActions;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.CodeAnalysis.Editing;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules.CSharp
@@ -49,41 +52,65 @@ namespace SonarAnalyzer.Rules.CSharp
         protected sealed override async Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
         {
             var diagnostic = context.Diagnostics.First();
-            var diagnosticSpan = diagnostic.Location.SourceSpan;
-            var identifierName = root.FindNode(diagnosticSpan, getInnermostNodeForTie: true) as IdentifierNameSyntax;
-            if (identifierName == null)
+
+            var identifiersToFix = diagnostic.AdditionalLocations
+                .Select(location => location.SourceSpan)
+                .Select(diagnosticSpan => root.FindNode(diagnosticSpan, getInnermostNodeForTie: true) as IdentifierNameSyntax)
+                .Where(idenfitierName => idenfitierName != null)
+                .ToList();
+
+            if (identifiersToFix.Count == 0)
             {
                 return;
             }
 
             var semanticModel = await context.Document.GetSemanticModelAsync(context.CancellationToken).ConfigureAwait(false);
+            var allFieldDeclarationTasks = identifiersToFix.Select(identifier => GetFieldDeclarationSyntax(semanticModel, identifier, context.CancellationToken));
+            var allFieldDeclarations = await Task.WhenAll(allFieldDeclarationTasks).ConfigureAwait(false);
+            allFieldDeclarations = allFieldDeclarations.Where(fieldDeclaration => fieldDeclaration != null).ToArray();
+
+            context.RegisterCodeFix(
+                CodeAction.Create(
+                    Title,
+                    token => AddReadonlyToFieldDeclarations(context.Document, token, allFieldDeclarations)),
+                context.Diagnostics);
+        }
+
+        private async Task<FieldDeclarationSyntax> GetFieldDeclarationSyntax(SemanticModel semanticModel,
+            IdentifierNameSyntax identifierName, CancellationToken cancellationToken)
+        {
             var fieldSymbol = semanticModel.GetSymbolInfo(identifierName).Symbol as IFieldSymbol;
 
             if (fieldSymbol == null ||
                 !fieldSymbol.DeclaringSyntaxReferences.Any())
             {
-                return;
+                return null;
             }
 
-            var reference = await fieldSymbol.DeclaringSyntaxReferences.First().GetSyntaxAsync(context.CancellationToken).ConfigureAwait(false);
+            var reference = await fieldSymbol.DeclaringSyntaxReferences.First().GetSyntaxAsync(cancellationToken).ConfigureAwait(false);
             var fieldDeclaration = (FieldDeclarationSyntax)reference.Parent.Parent;
 
             if (fieldDeclaration.Declaration.Variables.Count != 1)
             {
-                return;
+                return null;
             }
 
-            context.RegisterCodeFix(
-                CodeAction.Create(
-                    Title,
-                    c =>
-                    {
-                        var newFieldDeclaration = fieldDeclaration.AddModifiers(
-                            SyntaxFactory.Token(SyntaxKind.ReadOnlyKeyword));
-                        var newRoot = root.ReplaceNode(fieldDeclaration, newFieldDeclaration);
-                        return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
-                    }),
-                context.Diagnostics);
+            return fieldDeclaration;
+        }
+
+        private async Task<Document> AddReadonlyToFieldDeclarations(Document document, CancellationToken cancellationToken,
+            IEnumerable<FieldDeclarationSyntax> fieldDeclarations)
+        {
+            var editor = await DocumentEditor.CreateAsync(document, cancellationToken);
+
+            foreach (var fieldDeclaration in fieldDeclarations)
+            {
+                var readonlyToken = SyntaxFactory.Token(SyntaxKind.ReadOnlyKeyword).WithTrailingTrivia(SyntaxFactory.Space);
+                var newFieldDeclaration = fieldDeclaration.AddModifiers(readonlyToken);
+                editor.ReplaceNode(fieldDeclaration, newFieldDeclaration);
+            }
+
+            return editor.GetChangedDocument();
         }
     }
 }

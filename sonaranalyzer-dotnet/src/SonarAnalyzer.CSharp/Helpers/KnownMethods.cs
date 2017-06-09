@@ -50,7 +50,8 @@ namespace SonarAnalyzer.Helpers
 
         public static bool IsObjectGetHashCode(this IMethodSymbol methodSymbol)
         {
-            return methodSymbol.IsOverride &&
+            return methodSymbol != null &&
+                methodSymbol.IsOverride &&
                 methodSymbol.MethodKind == MethodKind.Ordinary &&
                 methodSymbol.Name == nameof(object.GetHashCode) &&
                 methodSymbol.Parameters.Length == 0 &&
