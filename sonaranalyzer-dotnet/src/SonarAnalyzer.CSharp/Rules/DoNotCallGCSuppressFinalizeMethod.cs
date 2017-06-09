@@ -18,13 +18,13 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
-using System.Collections.Generic;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -56,8 +56,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             var methodSymbol = semanticModel.GetDeclaredSymbol(methodDeclaration);
-            if (methodSymbol == null ||
-                !methodSymbol.IsIDisposableDispose())
+            if (!methodSymbol.IsIDisposableDispose())
             {
                 return true;
             }

@@ -31,7 +31,8 @@ namespace SonarAnalyzer.Helpers
         public static bool IsMainMethod(this IMethodSymbol methodSymbol)
         {
             // Based on Microsoft definition: https://msdn.microsoft.com/en-us/library/1y814bzs.aspx
-            return methodSymbol.IsStatic &&
+            return methodSymbol != null &&
+                methodSymbol.IsStatic &&
                 (methodSymbol.ReturnsVoid || methodSymbol.ReturnType.Is(KnownType.System_Int32)) &&
                 methodSymbol.Name.Equals("Main", StringComparison.Ordinal) &&
                 (methodSymbol.Parameters.Length == 0 ||
@@ -40,7 +41,8 @@ namespace SonarAnalyzer.Helpers
 
         public static bool IsObjectEquals(this IMethodSymbol methodSymbol)
         {
-            return methodSymbol.IsOverride &&
+            return methodSymbol != null &&
+                methodSymbol.IsOverride &&
                 methodSymbol.MethodKind == MethodKind.Ordinary &&
                 methodSymbol.Name == nameof(object.Equals) &&
                 methodSymbol.Parameters.Length == 1 &&
@@ -50,7 +52,8 @@ namespace SonarAnalyzer.Helpers
 
         public static bool IsObjectGetHashCode(this IMethodSymbol methodSymbol)
         {
-            return methodSymbol.IsOverride &&
+            return methodSymbol != null &&
+                methodSymbol.IsOverride &&
                 methodSymbol.MethodKind == MethodKind.Ordinary &&
                 methodSymbol.Name == nameof(object.GetHashCode) &&
                 methodSymbol.Parameters.Length == 0 &&
@@ -59,7 +62,8 @@ namespace SonarAnalyzer.Helpers
 
         public static bool IsObjectToString(this IMethodSymbol methodSymbol)
         {
-            return methodSymbol.IsOverride &&
+            return methodSymbol != null &&
+                methodSymbol.IsOverride &&
                 methodSymbol.MethodKind == MethodKind.Ordinary &&
                 methodSymbol.Name == nameof(object.ToString) &&
                 methodSymbol.Parameters.Length == 0 &&
@@ -69,7 +73,8 @@ namespace SonarAnalyzer.Helpers
         public static bool IsIDisposableDispose(this IMethodSymbol methodSymbol)
         {
             const string explicitName = "System.IDisposable.Dispose";
-            return methodSymbol.ReturnsVoid &&
+            return methodSymbol != null &&
+                methodSymbol.ReturnsVoid &&
                 methodSymbol.Parameters.Length == 0 &&
                 (methodSymbol.Name == nameof(IDisposable.Dispose) ||
                  methodSymbol.Name == explicitName);
@@ -78,7 +83,8 @@ namespace SonarAnalyzer.Helpers
         public static bool IsIEquatableEquals(this IMethodSymbol methodSymbol)
         {
             const string explicitName = "System.IEquatable.Equals";
-            return  methodSymbol.Parameters.Length == 1 &&
+            return methodSymbol != null &&
+                methodSymbol.Parameters.Length == 1 &&
                 methodSymbol.ReturnType.Is(KnownType.System_Boolean) &&
                 (methodSymbol.Name == nameof(object.Equals) ||
                 methodSymbol.Name == explicitName);
@@ -87,7 +93,8 @@ namespace SonarAnalyzer.Helpers
         public static bool IsGetObjectData(this IMethodSymbol methodSymbol)
         {
             const string explicitName = "System.Runtime.Serialization.ISerializable.GetObjectData";
-            return methodSymbol.Parameters.Length == 2 &&
+            return methodSymbol != null &&
+                methodSymbol.Parameters.Length == 2 &&
                 methodSymbol.Parameters[0].Type.Is(KnownType.System_Runtime_Serialization_SerializationInfo) &&
                 methodSymbol.Parameters[1].Type.Is(KnownType.System_Runtime_Serialization_StreamingContext) &&
                 methodSymbol.ReturnsVoid &&
@@ -97,7 +104,8 @@ namespace SonarAnalyzer.Helpers
 
         public static bool IsSerializationConstructor(this IMethodSymbol methodSymbol)
         {
-            return methodSymbol.MethodKind == MethodKind.Constructor &&
+            return methodSymbol != null &&
+                methodSymbol.MethodKind == MethodKind.Constructor &&
                 methodSymbol.Parameters.Length == 2 &&
                 methodSymbol.Parameters[0].Type.Is(KnownType.System_Runtime_Serialization_SerializationInfo) &&
                 methodSymbol.Parameters[1].Type.Is(KnownType.System_Runtime_Serialization_StreamingContext);
@@ -105,7 +113,8 @@ namespace SonarAnalyzer.Helpers
 
         public static bool IsArrayClone(this IMethodSymbol methodSymbol)
         {
-            return methodSymbol.MethodKind == MethodKind.Ordinary &&
+            return methodSymbol != null &&
+                methodSymbol.MethodKind == MethodKind.Ordinary &&
                 methodSymbol.Parameters.Length == 0 &&
                 methodSymbol.Name == nameof(Array.Clone) &&
                 methodSymbol.ContainingType.Is(KnownType.System_Array);
@@ -113,7 +122,8 @@ namespace SonarAnalyzer.Helpers
 
         public static bool IsEnumerableToList(this IMethodSymbol methodSymbol)
         {
-            return methodSymbol.MethodKind == MethodKind.ReducedExtension &&
+            return methodSymbol != null &&
+                methodSymbol.MethodKind == MethodKind.ReducedExtension &&
                 methodSymbol.Parameters.Length == 0 &&
                 methodSymbol.Name == nameof(Enumerable.ToList) &&
                 methodSymbol.ContainingType.Is(KnownType.System_Linq_Enumerable);
@@ -121,32 +131,34 @@ namespace SonarAnalyzer.Helpers
 
         public static bool IsEnumerableCount(this IMethodSymbol methodSymbol)
         {
-            return methodSymbol.MethodKind == MethodKind.ReducedExtension &&
+            return methodSymbol != null &&
+                methodSymbol.MethodKind == MethodKind.ReducedExtension &&
                 methodSymbol.Name == nameof(Enumerable.Count) &&
                 methodSymbol.ContainingType.Is(KnownType.System_Linq_Enumerable);
         }
 
         public static bool IsEnumerableToArray(this IMethodSymbol methodSymbol)
         {
-            return methodSymbol.MethodKind == MethodKind.ReducedExtension &&
+            return methodSymbol != null &&
+                methodSymbol.MethodKind == MethodKind.ReducedExtension &&
                 methodSymbol.Parameters.Length == 0 &&
                 methodSymbol.Name == nameof(Enumerable.ToArray) &&
                 methodSymbol.ContainingType.Is(KnownType.System_Linq_Enumerable);
         }
 
-        public static bool IsGcSuppressFinalize(this IMethodSymbol method)
+        public static bool IsGcSuppressFinalize(this IMethodSymbol methodSymbol)
         {
-            return method != null &&
-                method.Parameters.Length == 1 &&
-                method.Name == nameof(GC.SuppressFinalize) &&
-                method.ContainingType.Is(KnownType.System_GC);
+            return methodSymbol != null &&
+                methodSymbol.Parameters.Length == 1 &&
+                methodSymbol.Name == nameof(GC.SuppressFinalize) &&
+                methodSymbol.ContainingType.Is(KnownType.System_GC);
         }
 
-        public static bool IsDebugAssert(this IMethodSymbol method)
+        public static bool IsDebugAssert(this IMethodSymbol methodSymbol)
         {
-            return method != null &&
-                method.Name == nameof(Debug.Assert) &&
-                method.ContainingType.Is(KnownType.System_Diagnostics_Debug);
+            return methodSymbol != null &&
+                methodSymbol.Name == nameof(Debug.Assert) &&
+                methodSymbol.ContainingType.Is(KnownType.System_Diagnostics_Debug);
         }
     }
 }

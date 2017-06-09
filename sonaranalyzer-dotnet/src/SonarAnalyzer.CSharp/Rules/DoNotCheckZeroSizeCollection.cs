@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -25,7 +26,6 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
-using System;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -117,7 +117,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool IsConstantZero(SyntaxNodeAnalysisContext context, ExpressionSyntax expression)
         {
             var constantExpressionNode = expression.RemoveParentheses();
-            Optional<object> constant = context.SemanticModel.GetConstantValue(constantExpressionNode);
+            var constant = context.SemanticModel.GetConstantValue(constantExpressionNode);
             if (!constant.HasValue)
             {
                 return false;
@@ -128,8 +128,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool IsEnumerableCountMethod(ISymbol symbol)
         {
-            IMethodSymbol methodSymbol = symbol as IMethodSymbol;
-            return methodSymbol != null && methodSymbol.IsEnumerableCount();
+            var methodSymbol = symbol as IMethodSymbol;
+            return methodSymbol.IsEnumerableCount();
         }
 
         private static bool IsArrayLengthProperty(ISymbol symbol)
