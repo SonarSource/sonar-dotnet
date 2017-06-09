@@ -318,7 +318,7 @@ namespace SonarAnalyzer.UnitTest
                 return line;
             }
 
-            if (match.Groups["issueType"].Value.Equals("Noncompliant"))
+            if (match.Groups["issueType"].Value == "Noncompliant")
             {
                 var startIndex = line.IndexOf(match.Groups["issueType"].Value);
                 return string.Concat(line.Remove(startIndex), FIXED_MESSAGE);

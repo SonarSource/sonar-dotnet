@@ -64,8 +64,11 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            var semanticModel = await context.Document.GetSemanticModelAsync(context.CancellationToken).ConfigureAwait(false);
-            var allFieldDeclarationTasks = identifiersToFix.Select(identifier => GetFieldDeclarationSyntax(semanticModel, identifier, context.CancellationToken));
+            var semanticModel = await context.Document
+                .GetSemanticModelAsync(context.CancellationToken)
+                .ConfigureAwait(false);
+            var allFieldDeclarationTasks = identifiersToFix.Select(identifier =>
+                GetFieldDeclarationSyntax(semanticModel, identifier, context.CancellationToken));
             var allFieldDeclarations = await Task.WhenAll(allFieldDeclarationTasks).ConfigureAwait(false);
             allFieldDeclarations = allFieldDeclarations.Where(fieldDeclaration => fieldDeclaration != null).ToArray();
 
@@ -87,7 +90,9 @@ namespace SonarAnalyzer.Rules.CSharp
                 return null;
             }
 
-            var reference = await fieldSymbol.DeclaringSyntaxReferences.First().GetSyntaxAsync(cancellationToken).ConfigureAwait(false);
+            var reference = await fieldSymbol.DeclaringSyntaxReferences.First()
+                .GetSyntaxAsync(cancellationToken)
+                .ConfigureAwait(false);
             var fieldDeclaration = (FieldDeclarationSyntax)reference.Parent.Parent;
 
             if (fieldDeclaration.Declaration.Variables.Count != 1)
