@@ -2,8 +2,18 @@
 "issues":  [
 {
 "id":  "S2328",
-"message":  "Remove this use of 'Data' from the 'GetHashCode' declaration, or make it 'readonly'.",
-"location":  {
+"message":  " Refactor 'GetHashCode' to not reference mutable fields.",
+"location":  [
+{
+"uri":  "Nancy\src\Nancy.Tests\Unit\Json\TestConverterType.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  23,
+"endLine":  22,
+"endColumn":  34
+}
+},
+{
 "uri":  "Nancy\src\Nancy.Tests\Unit\Json\TestConverterType.cs",
 "region":  {
 "startLine":  24,
@@ -12,11 +22,22 @@
 "endColumn":  20
 }
 }
+]
 },
 {
 "id":  "S2328",
-"message":  "Remove this use of 'ConverterData' from the 'GetHashCode' declaration, or make it 'readonly'.",
-"location":  {
+"message":  " Refactor 'GetHashCode' to not reference mutable fields.",
+"location":  [
+{
+"uri":  "Nancy\src\Nancy.Tests\Unit\Json\TestData.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  23,
+"endLine":  31,
+"endColumn":  34
+}
+},
+{
 "uri":  "Nancy\src\Nancy.Tests\Unit\Json\TestData.cs",
 "region":  {
 "startLine":  33,
@@ -24,12 +45,8 @@
 "endLine":  33,
 "endColumn":  24
 }
-}
 },
 {
-"id":  "S2328",
-"message":  "Remove this use of 'PrimitiveConverterData' from the 'GetHashCode' declaration, or make it 'readonly'.",
-"location":  {
 "uri":  "Nancy\src\Nancy.Tests\Unit\Json\TestData.cs",
 "region":  {
 "startLine":  33,
@@ -38,11 +55,22 @@
 "endColumn":  63
 }
 }
+]
 },
 {
 "id":  "S2328",
-"message":  "Remove this use of 'Data' from the 'GetHashCode' declaration, or make it 'readonly'.",
-"location":  {
+"message":  " Refactor 'GetHashCode' to not reference mutable fields.",
+"location":  [
+{
+"uri":  "Nancy\src\Nancy.Tests\Unit\Json\TestPrimitiveConverterType.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  23,
+"endLine":  22,
+"endColumn":  34
+}
+},
+{
 "uri":  "Nancy\src\Nancy.Tests\Unit\Json\TestPrimitiveConverterType.cs",
 "region":  {
 "startLine":  24,
@@ -51,6 +79,7 @@
 "endColumn":  20
 }
 }
+]
 }
 ]
 }

@@ -2,8 +2,18 @@
 "issues":  [
 {
 "id":  "S2328",
-"message":  "Remove this use of '_hashCode' from the 'GetHashCode' declaration, or make it 'readonly'.",
-"location":  {
+"message":  " Refactor 'GetHashCode' to not reference mutable fields.",
+"location":  [
+{
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3055,
+"startColumn":  33,
+"endLine":  3055,
+"endColumn":  44
+}
+},
+{
 "uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
 "startLine":  3057,
@@ -12,6 +22,7 @@
 "endColumn":  33
 }
 }
+]
 }
 ]
 }
