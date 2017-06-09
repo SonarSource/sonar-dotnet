@@ -1,0 +1,212 @@
+{
+"issues":  [
+{
+"id":  "S4027",
+"message":  "Implement the missing constructors for this exception.",
+"location":  {
+"uri":  "Nancy\src\Nancy\Bootstrapper\BootstrapperException.cs",
+"region":  {
+"startLine":  10,
+"startColumn":  18,
+"endLine":  10,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S4027",
+"message":  "Implement the missing constructors for this exception.",
+"location":  {
+"uri":  "Nancy\src\Nancy\ErrorHandling\RouteExecutionEarlyExitException.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  18,
+"endLine":  11,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S4027",
+"message":  "Implement the missing constructors for this exception.",
+"location":  {
+"uri":  "Nancy\src\Nancy\ModelBinding\ModelBindingException.cs",
+"region":  {
+"startLine":  10,
+"startColumn":  18,
+"endLine":  10,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S4027",
+"message":  "Implement the missing constructors for this exception.",
+"location":  {
+"uri":  "Nancy\src\Nancy\ModelBinding\PropertyBindingException.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  18,
+"endLine":  5,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S4027",
+"message":  "Implement the missing constructors for this exception.",
+"location":  {
+"uri":  "Nancy\src\Nancy\RequestExecutionException.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  18,
+"endLine":  9,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S4027",
+"message":  "Implement the missing constructors for this exception.",
+"location":  {
+"uri":  "Nancy\src\Nancy\Security\CsrfValidationException.cs",
+"region":  {
+"startLine":  5,
+"startColumn":  18,
+"endLine":  5,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S4027",
+"message":  "Implement the missing constructors for this exception.",
+"location":  {
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  528,
+"startColumn":  18,
+"endLine":  528,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S4027",
+"message":  "Implement the missing constructors for this exception.",
+"location":  {
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  543,
+"startColumn":  18,
+"endLine":  543,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S4027",
+"message":  "Implement the missing constructors for this exception.",
+"location":  {
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  558,
+"startColumn":  18,
+"endLine":  558,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S4027",
+"message":  "Implement the missing constructors for this exception.",
+"location":  {
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  584,
+"startColumn":  18,
+"endLine":  584,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S4027",
+"message":  "Implement the missing constructors for this exception.",
+"location":  {
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  599,
+"startColumn":  18,
+"endLine":  599,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S4027",
+"message":  "Implement the missing constructors for this exception.",
+"location":  {
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  624,
+"startColumn":  18,
+"endLine":  624,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S4027",
+"message":  "Implement the missing constructors for this exception.",
+"location":  {
+"uri":  "Nancy\src\Nancy\Validation\ModelValidationException.cs",
+"region":  {
+"startLine":  8,
+"startColumn":  18,
+"endLine":  8,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S4027",
+"message":  "Implement the missing constructors for this exception.",
+"location":  {
+"uri":  "Nancy\src\Nancy\ViewEngines\AmbiguousViewsException.cs",
+"region":  {
+"startLine":  8,
+"startColumn":  18,
+"endLine":  8,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S4027",
+"message":  "Implement the missing constructors for this exception.",
+"location":  {
+"uri":  "Nancy\src\Nancy\ViewEngines\ViewNotFoundException.cs",
+"region":  {
+"startLine":  8,
+"startColumn":  18,
+"endLine":  8,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S4027",
+"message":  "Implement the missing constructors for this exception.",
+"location":  {
+"uri":  "Nancy\src\Nancy\ViewEngines\ViewRenderException.cs",
+"region":  {
+"startLine":  8,
+"startColumn":  18,
+"endLine":  8,
+"endColumn":  37
+}
+}
+}
+]
+}
