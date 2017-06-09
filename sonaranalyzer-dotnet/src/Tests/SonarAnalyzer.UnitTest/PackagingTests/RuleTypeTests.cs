@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2017 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -3903,7 +3903,7 @@ namespace SonarAnalyzer.UnitTest.PackagingTests
             ["3903"] = "BUG",
             ["3904"] = "BUG",
             //["3905"],
-            //["3906"],
+            ["3906"] = "CODE_SMELL",
             //["3907"],
             //["3908"],
             ["3909"] = "CODE_SMELL",

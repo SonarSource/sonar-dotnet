@@ -5937,6 +5937,33 @@
   <data name="S3904_Type" xml:space="preserve">
     <value>BUG</value>
   </data>
+  <data name="S3906_Category" xml:space="preserve">
+    <value>Sonar Code Smell</value>
+  </data>
+  <data name="S3906_Description" xml:space="preserve">
+    <value>Delegate event handlers should have a very specific signature:</value>
+  </data>
+  <data name="S3906_IsActivatedByDefault" xml:space="preserve">
+    <value>False</value>
+  </data>
+  <data name="S3906_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S3906_RemediationCost" xml:space="preserve">
+    <value>5min</value>
+  </data>
+  <data name="S3906_Severity" xml:space="preserve">
+    <value>Major</value>
+  </data>
+  <data name="S3906_Tags" xml:space="preserve">
+    <value>convention</value>
+  </data>
+  <data name="S3906_Title" xml:space="preserve">
+    <value>Event Handlers should have the correct signature</value>
+  </data>
+  <data name="S3906_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S3909_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
