@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Generic;
 
 namespace SonarAnalyzer.Helpers
@@ -48,6 +49,32 @@ namespace SonarAnalyzer.Helpers
             }
 
             return defaultValue;
+        }
+
+        /// <summary>
+        /// Compares each element between two collections. The elements needs in the same order to be considered equal.
+        /// </summary>
+        public static bool AreEqual<T, V>(IEnumerable<T> collection1, IEnumerable<V> collection2,
+            Func<T, V, bool> comparator)
+        {
+            var enum1 = collection1.GetEnumerator();
+            var enum2 = collection2.GetEnumerator();
+
+            bool enum1HasNext = enum1.MoveNext();
+            bool enum2HasNext = enum2.MoveNext();
+
+            while (enum1HasNext && enum2HasNext)
+            {
+                if (!comparator(enum1.Current, enum2.Current))
+                {
+                    return false;
+                }
+
+                enum1HasNext = enum1.MoveNext();
+                enum2HasNext = enum2.MoveNext();
+            }
+
+            return enum1HasNext == enum2HasNext;
         }
     }
 }

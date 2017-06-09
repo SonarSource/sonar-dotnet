@@ -136,6 +136,7 @@
     <Compile Include="Helpers\FlowAnalysis\ExplodedGraphTest.cs" />
     <Compile Include="Helpers\FlowAnalysis\ControlFlowGraphTest.cs" />
     <Compile Include="Helpers\SonarAnalysisContextTest.cs" />
+    <Compile Include="Helpers\CollectionUtilsTest.cs" />
     <Compile Include="Helpers\StringUtilsTest.cs" />
     <Compile Include="Helpers\SymbolHelperTest.IsExtensionOn.cs" />
     <Compile Include="Helpers\FluentTestHelper.cs" />

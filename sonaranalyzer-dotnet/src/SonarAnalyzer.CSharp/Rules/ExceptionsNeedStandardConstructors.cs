@@ -73,26 +73,15 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool HasConstructor(ImmutableArray<IMethodSymbol> constructors,
             Accessibility accessibility, params KnownType[] expectedParameterTypes)
         {
-            return constructors.Any(c => AreParamTypesMatch(c, accessibility, expectedParameterTypes));
+            return constructors.Any(c => IsMatchingConstructor(c, accessibility, expectedParameterTypes));
         }
 
-        private static bool AreParamTypesMatch(IMethodSymbol constructor, Accessibility accessibility,
+        private static bool IsMatchingConstructor(IMethodSymbol constructor, Accessibility accessibility,
             KnownType[] expectedParameterTypes)
         {
-            if (constructor.Parameters.Length != expectedParameterTypes.Length)
-            {
-                return false;
-            }
-
-            for (int i = 0; i < expectedParameterTypes.Length; i++)
-            {
-                if (!constructor.Parameters[i].Type.Is(expectedParameterTypes[i]))
-                {
-                    return false;
-                }
-            }
-
-            return constructor.DeclaredAccessibility == accessibility;
+            return constructor.DeclaredAccessibility == accessibility &&
+                   CollectionUtils.AreEqual(constructor.Parameters, expectedParameterTypes,
+                       (p1, p2) => p1.Type.Is(p2));
         }
     }
 }

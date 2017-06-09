@@ -1,0 +1,84 @@
+﻿/*
+ * SonarAnalyzer for .NET
+ * Copyright (C) 2015-2017 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ */
+
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Helpers;
+using System.Collections.Generic;
+
+namespace SonarAnalyzer.UnitTest.Helpers
+{
+    [TestClass]
+    public class CollectionUtilsTest
+    {
+        [TestMethod]
+        public void TestAreEqual_01()
+        {
+            var c1 = new List<int> { 1, 2, 3 };
+            var c2 = new List<string> { "1", "2", "3" };
+
+            Assert.IsTrue(CollectionUtils.AreEqual(c1, c2, (e1, e2) => e1.ToString() == e2));
+        }
+
+        [TestMethod]
+        public void TestAreEqual_02()
+        {
+            var c1 = new List<int> { 1, 2 };
+            var c2 = new List<string> { "1", "2", "3" };
+
+            Assert.IsFalse(CollectionUtils.AreEqual(c1, c2, (e1, e2) => e1.ToString() == e2));
+        }
+
+        [TestMethod]
+        public void TestAreEqual_03()
+        {
+            var c1 = new List<int> { 1, 2, 3 };
+            var c2 = new List<string> { "1", "2" };
+
+            Assert.IsFalse(CollectionUtils.AreEqual(c1, c2, (e1, e2) => e1.ToString() == e2));
+        }
+
+        [TestMethod]
+        public void TestAreEqual_04()
+        {
+            var c1 = new List<int>();
+            var c2 = new List<string> { "1", "2" };
+
+            Assert.IsFalse(CollectionUtils.AreEqual(c1, c2, (e1, e2) => e1.ToString() == e2));
+        }
+
+        [TestMethod]
+        public void TestAreEqual_05()
+        {
+            var c1 = new List<int> { 1 };
+            var c2 = new List<string>();
+
+            Assert.IsFalse(CollectionUtils.AreEqual(c1, c2, (e1, e2) => e1.ToString() == e2));
+        }
+
+        [TestMethod]
+        public void TestAreEqual_06()
+        {
+            var c1 = new List<int>();
+            var c2 = new List<string>();
+
+            Assert.IsTrue(CollectionUtils.AreEqual(c1, c2, (e1, e2) => e1.ToString() == e2));
+        }
+    }
+}
