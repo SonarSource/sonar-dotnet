@@ -128,6 +128,8 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             var nextStatement = context.Node.GetLastToken().GetNextToken().Parent;
+            // This algorithm to get the next statement can sometimes return a parent statement (for example a BlockSyntax)
+            // so we need to filter this case by returning if the nextStatement happens to be one ancestor of statement.
             if (nextStatement == null ||
                 statement.Ancestors().Contains(nextStatement))
             {
