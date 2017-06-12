@@ -30,10 +30,10 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class DeclareEventHandlersCorrectly : SonarDiagnosticAnalyzer
+    public sealed class UseGenericEventHandlerInstances : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S3906";
-        private const string MessageFormat = "Change the signature of that event handler to match the specified signature.";
+        internal const string DiagnosticId = "S3908";
+        private const string MessageFormat = "Refactor this delegate to use 'System.EventHandler<TEventArgs>'.";
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
@@ -54,26 +54,15 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             var eventHandlerType = analysisContext.SemanticModel.GetSymbolInfo(typeSyntax).Symbol
                         as INamedTypeSymbol;
-            var methodSymbol = eventHandlerType?.DelegateInvokeMethod;
-            if (methodSymbol == null)
+            if (eventHandlerType == null)
             {
                 return;
             }
 
-            if (!IsCorrectEventHandlerSignature(methodSymbol))
+            if (!eventHandlerType.ConstructedFrom.Is(KnownType.System_EventHandler_TEventArgs))
             {
                 analysisContext.ReportDiagnostic(Diagnostic.Create(rule, typeSyntax.GetLocation()));
             }
-        }
-
-        private bool IsCorrectEventHandlerSignature(IMethodSymbol methodSymbol)
-        {
-            return methodSymbol.ReturnsVoid &&
-                methodSymbol.Parameters.Length == 2 &&
-                methodSymbol.Parameters[0].Name == "sender" &&
-                methodSymbol.Parameters[0].Type.Is(KnownType.System_Object) &&
-                methodSymbol.Parameters[1].Name == "e" &&
-                methodSymbol.Parameters[1].Type.DerivesFrom(KnownType.System_EventArgs);
         }
     }
 }

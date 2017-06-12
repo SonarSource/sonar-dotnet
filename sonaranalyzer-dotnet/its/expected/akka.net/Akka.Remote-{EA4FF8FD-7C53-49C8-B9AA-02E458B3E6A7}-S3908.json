@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S3908",
+"message":  "Refactor this delegate to use 'System.EventHandler<TEventArgs>'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Remote\Transport\Helios\HeliosHelpers.cs",
+"region":  {
+"startLine":  166,
+"startColumn":  22,
+"endLine":  166,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S3908",
+"message":  "Refactor this delegate to use 'System.EventHandler<TEventArgs>'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Remote\Transport\Helios\HeliosHelpers.cs",
+"region":  {
+"startLine":  167,
+"startColumn":  22,
+"endLine":  167,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S3908",
+"message":  "Refactor this delegate to use 'System.EventHandler<TEventArgs>'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Remote\Transport\Helios\HeliosHelpers.cs",
+"region":  {
+"startLine":  168,
+"startColumn":  22,
+"endLine":  168,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S3908",
+"message":  "Refactor this delegate to use 'System.EventHandler<TEventArgs>'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Remote\Transport\Helios\HeliosHelpers.cs",
+"region":  {
+"startLine":  169,
+"startColumn":  22,
+"endLine":  169,
+"endColumn":  39
+}
+}
+}
+]
+}
