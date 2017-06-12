@@ -1,0 +1,45 @@
+<p>Having a field in a child class with a name that differs from a parent class' field only by capitalization is sure to cause confusion. Such child
+class fields should be renamed.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+public class Fruit
+{
+  protected string plantingSeason;
+  //...
+}
+
+public class Raspberry : Fruit
+{
+  protected string plantingseason;  // Noncompliant
+  // ...
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+public class Fruit
+{
+  protected string plantingSeason;
+  //...
+}
+
+public class Raspberry : Fruit
+{
+  protected string whenToPlant;
+  // ...
+}
+</pre>
+<p>Or</p>
+<pre>
+public class Fruit
+{
+  protected string plantingSeason;
+  //...
+}
+
+public class Raspberry : Fruit
+{
+  // field removed; parent field will be used instead
+  // ...
+}
+</pre>
+
