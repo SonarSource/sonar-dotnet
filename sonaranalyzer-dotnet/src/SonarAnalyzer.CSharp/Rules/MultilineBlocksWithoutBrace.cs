@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -26,7 +27,6 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Text;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
-using System.Collections.Immutable;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -128,7 +128,10 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             var nextStatement = context.Node.GetLastToken().GetNextToken().Parent;
-            if (nextStatement == null)
+            // This algorithm to get the next statement can sometimes return a parent statement (for example a BlockSyntax)
+            // so we need to filter this case by returning if the nextStatement happens to be one ancestor of statement.
+            if (nextStatement == null ||
+                statement.Ancestors().Contains(nextStatement))
             {
                 return;
             }
