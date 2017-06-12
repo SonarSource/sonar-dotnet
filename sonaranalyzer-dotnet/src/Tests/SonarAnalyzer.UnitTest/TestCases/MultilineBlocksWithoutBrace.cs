@@ -160,5 +160,13 @@ Tests(); // Noncompliant
 
             Console.WriteLine();
         }
+
+        void TestWeirdAlignment()
+        {
+            try {
+              if (a)
+                Console.WriteLine(); // This statement is aligned with the '{' of the try on purpose to fix https://github.com/SonarSource/sonar-csharp/issues/264
+            } finally { }
+        }
     }
 }
