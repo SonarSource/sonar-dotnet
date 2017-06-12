@@ -1,0 +1,71 @@
+<p>Since .Net Framework version 2.0 it is not necessary to declare a delegate that specifies a class derived from <code>System.EventArgs</code>. The
+<code>System.EventHandler&lt;TEventArgs&gt;</code> delegate mechanism should be used instead as it allows any class derived from
+<code>EventArgs</code> to be used with that handler.</p>
+<p>This rule raises an issue when an old style delegate is used as an event handler.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+public class MyEventArgs : EventArgs
+{
+}
+
+public delegate void MyEventHandler(object sender, MyEventArgs e); // Noncompliant
+
+public class EventProducer
+{
+  public event MyEventHandler MyEvent;
+
+  protected virtual void OnMyEvent(MyEventArgs e)
+  {
+    if (MyEvent != null)
+    {
+      MyEvent(e);
+    }
+  }
+}
+
+public class EventConsumer
+{
+  public EventConsumer(EventProducer producer)
+  {
+      producer.MyEvent += HandleEvent;
+  }
+
+  private void HandleEvent(object sender, MyEventArgs e)
+  {
+    // Do something...
+  }
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+public class MyEventArgs : EventArgs
+{
+}
+
+public class EventProducer
+{
+  public event EventHandler&lt;MyEventArgs&gt; MyEvent;
+
+  protected virtual void OnMyEvent(MyEventArgs e)
+  {
+    if (MyEvent != null)
+    {
+      MyEvent(e);
+    }
+  }
+}
+
+public class EventConsumer
+{
+  public EventConsumer(EventProducer producer)
+  {
+      producer.MyEvent += HandleEvent;
+  }
+
+  private void HandleEvent(object sender, MyEventArgs e)
+  {
+    // Do something...
+  }
+}
+</pre>
+

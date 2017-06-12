@@ -1,0 +1,13 @@
+{
+  "title": "Generic event handlers should be used",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "15min"
+  },
+  "tags": [
+    
+  ],
+  "defaultSeverity": "Major"
+}

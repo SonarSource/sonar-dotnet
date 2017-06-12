@@ -99,6 +99,7 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType System_Collections_IList = new KnownType("System.Collections.IList");
         public static readonly KnownType System_Collections_Generic_List_T = new KnownType("System.Collections.Generic.List<T>");
         public static readonly KnownType System_EventArgs = new KnownType("System.EventArgs");
+        public static readonly KnownType System_EventHandler_TEventArgs = new KnownType("System.EventHandler<TEventArgs>");
         public static readonly KnownType System_Delegate = new KnownType("System.Delegate");
         public static readonly KnownType System_SerializableAttribute = new KnownType("System.SerializableAttribute");
         public static readonly KnownType System_NonSerializedAttribute = new KnownType("System.NonSerializedAttribute");
