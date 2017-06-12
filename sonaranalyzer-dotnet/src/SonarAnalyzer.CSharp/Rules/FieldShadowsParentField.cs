@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -25,44 +27,49 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
-using System.Collections.Immutable;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    [Rule(DiagnosticId)]
+    [Rule(S2387DiagnosticId)]
+    [Rule(S4025DiagnosticId)]
     public class FieldShadowsParentField : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S2387";
-        private const string MessageFormat = "{0}";
-        internal const string MessageMatch = "'{0}' is the name of a field in '{1}'.";
-        internal const string MessageSimilar = "'{0}' differs only by case from '{2}' in '{1}'.";
+        internal const string S2387DiagnosticId = "S2387";
+        private const string S2387MessageFormat = "'{0}' is the name of a field in '{1}'.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        internal const string S4025DiagnosticId = "S4025";
+        private const string S4025MessageFormat = "Rename this field; it may be confused with '{0}' in '{1}'.";
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+        private static readonly DiagnosticDescriptor s2387 =
+            DiagnosticDescriptorBuilder.GetDescriptor(S2387DiagnosticId, S2387MessageFormat, RspecStrings.ResourceManager);
+
+        private static readonly DiagnosticDescriptor s4025 =
+            DiagnosticDescriptorBuilder.GetDescriptor(S4025DiagnosticId, S4025MessageFormat, RspecStrings.ResourceManager);
+
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(s2387, s4025);
 
         protected sealed override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
-                    var fieldDeclaration = (FieldDeclarationSyntax) c.Node;
-                    foreach (var variableDeclarator in fieldDeclaration.Declaration.Variables)
-                    {
-                        CheckField(c, variableDeclarator);
-                    }
+                    var fieldDeclaration = (FieldDeclarationSyntax)c.Node;
+
+                    fieldDeclaration.Declaration.Variables
+                        .SelectMany(v => CheckFields(c.SemanticModel, v))
+                        .ToList()
+                        .ForEach(c.ReportDiagnostic);
                 },
                 SyntaxKind.FieldDeclaration);
         }
 
-        private static void CheckField(SyntaxNodeAnalysisContext context, VariableDeclaratorSyntax variableDeclarator)
+        private static IEnumerable<Diagnostic> CheckFields(SemanticModel semanticModel, VariableDeclaratorSyntax variableDeclarator)
         {
-            var fieldSymbol = context.SemanticModel.GetDeclaredSymbol(variableDeclarator) as IFieldSymbol;
+            var fieldSymbol = semanticModel.GetDeclaredSymbol(variableDeclarator) as IFieldSymbol;
             if (fieldSymbol == null)
             {
-                return;
+                yield break;
             }
 
             var fieldName = fieldSymbol.Name;
@@ -75,21 +82,19 @@ namespace SonarAnalyzer.Rules.CSharp
                 var similarFields = baseType.GetMembers()
                     .OfType<IFieldSymbol>()
                     .Where(field => field.DeclaredAccessibility != Accessibility.Private)
+                    .Where(field => !field.IsStatic)
                     .Where(field => field.Name.ToUpperInvariant() == fieldNameLower)
                     .ToList();
 
                 if (similarFields.Any(field => field.Name == fieldName))
                 {
-                    context.ReportDiagnostic(Diagnostic.Create(rule, variableDeclarator.Identifier.GetLocation(),
-                        string.Format(MessageMatch, fieldName, baseType.Name)));
-                    return;
+                    yield return Diagnostic.Create(s2387, variableDeclarator.Identifier.GetLocation(),
+                        fieldName, baseType.Name);
                 }
-
-                if (similarFields.Any())
+                else if (similarFields.Any())
                 {
-                    context.ReportDiagnostic(Diagnostic.Create(rule, variableDeclarator.Identifier.GetLocation(),
-                        string.Format(MessageSimilar, fieldName, baseType.Name, similarFields.First().Name)));
-                    return;
+                    yield return Diagnostic.Create(s4025, variableDeclarator.Identifier.GetLocation(),
+                        similarFields.First().Name, baseType.Name);
                 }
             }
         }
