@@ -1,0 +1,13 @@
+{
+  "title": "Event Handlers should have the correct signature",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    "convention"
+  ],
+  "defaultSeverity": "Major"
+}
