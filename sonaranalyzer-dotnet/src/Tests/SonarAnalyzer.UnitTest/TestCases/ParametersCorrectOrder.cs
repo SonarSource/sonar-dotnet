@@ -106,4 +106,37 @@ namespace Tests.Diagnostics
             "aaaaa".Ex(v2, v1); // Noncompliant [6]
         }
     }
+
+    public class A
+    {
+        public class B
+        {
+            public class C
+            {
+                public C(string left, string right) { } // Secondary [C]
+            }
+        }
+    }
+
+    public class Foo
+    {
+        public Foo(string left, string right) { } // Secondary [B]
+
+        public void Method(string left, string right) { } // Secondary [A]
+
+        public void Bar()
+        {
+            var left = "valueLeft";
+            var right = "valueRight";
+
+            var call1 = Method(left, right);
+            var call2 = Method(right, left); // Noncompliant [A]
+
+            var foo1 = new Foo(left, right);
+            var foo2 = new Foo(right, left); // Noncompliant [B]
+
+            var c1 = new A.B.C(left, right);
+            var c2 = new A.B.C(right, left); // Noncompliant [C]
+        }
+    }
 }
