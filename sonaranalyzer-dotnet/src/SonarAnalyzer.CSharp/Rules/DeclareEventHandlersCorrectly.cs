@@ -52,9 +52,9 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private void AnalyzeEventType(SyntaxNodeAnalysisContext analysisContext, TypeSyntax typeSyntax)
         {
-            var namedTypeSymbol = analysisContext.SemanticModel.GetSymbolInfo(typeSyntax).Symbol
+            var eventHandlerType = analysisContext.SemanticModel.GetSymbolInfo(typeSyntax).Symbol
                         as INamedTypeSymbol;
-            var methodSymbol = namedTypeSymbol?.DelegateInvokeMethod;
+            var methodSymbol = eventHandlerType?.DelegateInvokeMethod;
             if (methodSymbol == null)
             {
                 return;

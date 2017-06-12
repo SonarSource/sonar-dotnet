@@ -52,14 +52,14 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private void AnalyzeEventType(SyntaxNodeAnalysisContext analysisContext, TypeSyntax typeSyntax)
         {
-            var namedTypeSymbol = analysisContext.SemanticModel.GetSymbolInfo(typeSyntax).Symbol
+            var eventHandlerType = analysisContext.SemanticModel.GetSymbolInfo(typeSyntax).Symbol
                         as INamedTypeSymbol;
-            if (namedTypeSymbol == null)
+            if (eventHandlerType == null)
             {
                 return;
             }
 
-            if (!namedTypeSymbol.ConstructedFrom.Is(KnownType.System_EventHandler_TEventArgs))
+            if (!eventHandlerType.ConstructedFrom.Is(KnownType.System_EventHandler_TEventArgs))
             {
                 analysisContext.ReportDiagnostic(Diagnostic.Create(rule, typeSyntax.GetLocation()));
             }
