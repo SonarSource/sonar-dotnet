@@ -42,21 +42,28 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
-                {
-                    var delegateDeclaration = (DelegateDeclarationSyntax)c.Node;
-                    var methodSymbol = c.SemanticModel.GetDeclaredSymbol(delegateDeclaration)?.DelegateInvokeMethod;
-                    if (methodSymbol == null)
-                    {
-                        return;
-                    }
+               c => AnalyzeEventType(c, ((EventFieldDeclarationSyntax)c.Node).Declaration.Type),
+               SyntaxKind.EventFieldDeclaration);
 
-                    if (!IsCorrectEventHandlerSignature(methodSymbol))
-                    {
-                        c.ReportDiagnostic(Diagnostic.Create(rule, delegateDeclaration.GetLocation()));
-                    }
+            context.RegisterSyntaxNodeActionInNonGenerated(
+               c => AnalyzeEventType(c, ((EventDeclarationSyntax)c.Node).Type),
+               SyntaxKind.EventDeclaration);
+        }
 
-                }, SyntaxKind.DelegateDeclaration);
+        private void AnalyzeEventType(SyntaxNodeAnalysisContext analysisContext, TypeSyntax typeSyntax)
+        {
+            var namedTypeSymbol = analysisContext.SemanticModel.GetSymbolInfo(typeSyntax).Symbol
+                        as INamedTypeSymbol;
+            var methodSymbol = namedTypeSymbol?.DelegateInvokeMethod;
+            if (methodSymbol == null)
+            {
+                return;
+            }
+
+            if (!IsCorrectEventHandlerSignature(methodSymbol))
+            {
+                analysisContext.ReportDiagnostic(Diagnostic.Create(rule, typeSyntax.GetLocation()));
+            }
         }
 
         private bool IsCorrectEventHandlerSignature(IMethodSymbol methodSymbol)
@@ -66,7 +73,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 methodSymbol.Parameters[0].Name == "sender" &&
                 methodSymbol.Parameters[0].Type.Is(KnownType.System_Object) &&
                 methodSymbol.Parameters[1].Name == "e" &&
-                methodSymbol.Parameters[1].Type.Is(KnownType.System_EventArgs);
+                methodSymbol.Parameters[1].Type.DerivesFrom(KnownType.System_EventArgs);
         }
     }
 }

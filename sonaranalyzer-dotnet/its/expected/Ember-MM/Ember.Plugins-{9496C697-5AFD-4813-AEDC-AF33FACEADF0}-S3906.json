@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S3906",
+"message":  "Change the signature of that event handler to match the specified signature.",
+"location":  {
+"uri":  "Ember-MM\Ember.Plugins\Scraper\MovieScraperManager.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  22,
+"endLine":  20,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S3906",
+"message":  "Change the signature of that event handler to match the specified signature.",
+"location":  {
+"uri":  "Ember-MM\Ember.Plugins\Scraper\MovieScraperManager.cs",
+"region":  {
+"startLine":  25,
+"startColumn":  22,
+"endLine":  25,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S3906",
+"message":  "Change the signature of that event handler to match the specified signature.",
+"location":  {
+"uri":  "Ember-MM\Ember.Plugins\Scraper\MovieScraperManager.cs",
+"region":  {
+"startLine":  30,
+"startColumn":  22,
+"endLine":  30,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S3906",
+"message":  "Change the signature of that event handler to match the specified signature.",
+"location":  {
+"uri":  "Ember-MM\Ember.Plugins\Scraper\MovieScraperManager.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  22,
+"endLine":  35,
+"endColumn":  63
+}
+}
+}
+]
+}
