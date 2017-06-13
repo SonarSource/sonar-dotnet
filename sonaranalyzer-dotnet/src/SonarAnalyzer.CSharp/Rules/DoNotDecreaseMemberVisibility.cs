@@ -69,16 +69,16 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private class IssueFinder
         {
-            private readonly IEnumerable<IMethodSymbol> allBaseClassMethods;
-            private readonly IEnumerable<IPropertySymbol> allBaseClassProperties;
+            private readonly IList<IMethodSymbol> allBaseClassMethods;
+            private readonly IList<IPropertySymbol> allBaseClassProperties;
             private readonly SemanticModel semanticModel;
 
             public IssueFinder(INamedTypeSymbol classSymbol, SemanticModel semanticModel)
             {
                 this.semanticModel = semanticModel;
                 var allBaseClassMembers = GetAllBaseMembers(classSymbol, m => m.DeclaredAccessibility != Accessibility.Private);
-                allBaseClassMethods = allBaseClassMembers.OfType<IMethodSymbol>();
-                allBaseClassProperties = allBaseClassMembers.OfType<IPropertySymbol>();
+                allBaseClassMethods = allBaseClassMembers.OfType<IMethodSymbol>().ToList();
+                allBaseClassProperties = allBaseClassMembers.OfType<IPropertySymbol>().ToList();
             }
 
             private static IEnumerable<ISymbol> GetAllBaseMembers(INamedTypeSymbol classType, Func<ISymbol, bool> filter)
