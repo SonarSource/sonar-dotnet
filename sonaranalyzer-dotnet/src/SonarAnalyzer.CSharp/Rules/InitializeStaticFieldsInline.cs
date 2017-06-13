@@ -51,12 +51,18 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
+                    var currentType = c.SemanticModel.GetDeclaredSymbol(constructorDeclaration).ContainingType;
+                    if (currentType == null)
+                    {
+                        return;
+                    }
+
                     var hasFieldAssignment = constructorDeclaration.Body
                         .DescendantNodes()
                         .OfType<AssignmentExpressionSyntax>()
                         .Select(x => c.SemanticModel.GetSymbolInfo(x.Left).Symbol)
                         .OfType<IFieldSymbol>()
-                        .Any();
+                        .Any(fs => fs.ContainingType.Equals(currentType));
                     if (hasFieldAssignment)
                     {
                         c.ReportDiagnostic(Diagnostic.Create(rule, constructorDeclaration.GetLocation()));

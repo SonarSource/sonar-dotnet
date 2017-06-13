@@ -5,7 +5,7 @@ namespace Tests.Diagnostics
 {
     class Program
     {
-        static int i;
+        public static int i;
         static string s;
 
         static Program() // Noncompliant
@@ -22,6 +22,14 @@ namespace Tests.Diagnostics
         static Foo()
         {
             System.Console.WriteLine("test");
+        }
+    }
+
+    class Bar
+    {
+        static Bar()
+        {
+            Program.i = 42;
         }
     }
 }
