@@ -26,6 +26,8 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using System.Collections.Generic;
+using System;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -34,7 +36,7 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class DoNotDecreaseMemberVisibility : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S4015";
-        private const string MessageFormat = "Make this member non-private or the class sealed.";
+        private const string MessageFormat = "This member hides '{0}'. Make it non-private or seal the class.";
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
@@ -44,61 +46,153 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {
-                    var methodDeclaration = c.Node as MethodDeclarationSyntax;
-                    var methodSymbol = c.SemanticModel.GetDeclaredSymbol(methodDeclaration);
-                    var classType = methodSymbol?.ContainingType;
+                    var classDeclaration = c.Node as ClassDeclarationSyntax;
+                    var classSymbol = c.SemanticModel.GetDeclaredSymbol(classDeclaration);
 
-                    if (classType != null &&
-                        !classType.IsSealed &&
-                        methodSymbol.DeclaredAccessibility == Accessibility.Private &&
-                        HasInheritedMatchingMethods(classType, methodSymbol))
+                    if (classSymbol == null ||
+                        classDeclaration.Identifier.IsMissing ||
+                        classSymbol.IsSealed)
                     {
-                        c.ReportDiagnostic(Diagnostic.Create(rule, methodDeclaration.Identifier.GetLocation()));
+                        return;
                     }
+
+                    var issueFinder = new IssueFinder(classSymbol, c.SemanticModel);
+
+                    classDeclaration
+                        .Members
+                        .Select(issueFinder.FindIssue)
+                        .WhereNotNull()
+                        .ForEach(c.ReportDiagnostic);
                 },
-                SyntaxKind.MethodDeclaration);
+                SyntaxKind.ClassDeclaration);
         }
 
-        private bool HasInheritedMatchingMethods(INamedTypeSymbol classType, IMethodSymbol methodSymbol)
+        private class IssueFinder
         {
-            if (classType?.BaseType == null)
+            private readonly IEnumerable<IMethodSymbol> allBaseClassMethods;
+            private readonly IEnumerable<IPropertySymbol> allBaseClassProperties;
+            private readonly SemanticModel semanticModel;
+
+            public IssueFinder(INamedTypeSymbol classSymbol, SemanticModel semanticModel)
             {
-                return false;
+                this.semanticModel = semanticModel;
+                var allBaseClassMembers = GetAllBaseMembers(classSymbol, m => m.DeclaredAccessibility != Accessibility.Private);
+                allBaseClassMethods = allBaseClassMembers.OfType<IMethodSymbol>();
+                allBaseClassProperties = allBaseClassMembers.OfType<IPropertySymbol>();
             }
 
-            bool baseClassHasMatchingPublicMethod = classType.BaseType
-                .GetMembers(methodSymbol.Name)
-                .OfType<IMethodSymbol>()
-                .Where(m => m.DeclaredAccessibility == Accessibility.Public)
-                .Any(m => HasSameParameters(m, methodSymbol));
-
-            if (baseClassHasMatchingPublicMethod)
+            private static IEnumerable<ISymbol> GetAllBaseMembers(INamedTypeSymbol classType, Func<ISymbol, bool> filter)
             {
-                return true;
-            }
-
-            return HasInheritedMatchingMethods(classType.BaseType, methodSymbol);
-        }
-
-        private bool HasSameParameters(IMethodSymbol methodCandidate, IMethodSymbol methodSymbol)
-        {
-            var methodCandidateParams = methodCandidate.Parameters;
-            var methodParams = methodSymbol.Parameters;
-
-            if (methodCandidateParams.Length != methodParams.Length)
-            {
-                return false;
-            }
-
-            for (int i = 0; i < methodParams.Length; i++)
-            {
-                if (!Equals(methodCandidateParams[i].Type, methodParams[i].Type))
+                while (classType?.BaseType != null)
                 {
-                    return false;
+                    foreach (var member in classType.BaseType.GetMembers().Where(filter))
+                    {
+                        yield return member;
+                    }
+
+                    classType = classType.BaseType;
                 }
             }
 
-            return true;
+            public Diagnostic FindIssue(MemberDeclarationSyntax memberDeclaration)
+            {
+                var memberSymbol = semanticModel.GetDeclaredSymbol(memberDeclaration);
+
+                var methodSymbol = memberSymbol as IMethodSymbol;
+                if (methodSymbol != null)
+                {
+                    var hidingMethod = allBaseClassMethods.FirstOrDefault(
+                        m => DecrasesAccess(m.DeclaredAccessibility, methodSymbol.DeclaredAccessibility) &&
+                             IsMatchingSignature(m, methodSymbol));
+
+                    if (hidingMethod != null)
+                    {
+                        var location = (memberDeclaration as MethodDeclarationSyntax)?.Identifier.GetLocation();
+                        if (location != null)
+                        {
+                            return Diagnostic.Create(rule, location, hidingMethod);
+                        }
+                    }
+
+                    return null;
+                }
+
+                var propertySymbol = memberSymbol as IPropertySymbol;
+                if (propertySymbol != null)
+                {
+                    var hidingProperty = allBaseClassProperties.FirstOrDefault(p => DecreasesPropertyAccess(p, propertySymbol));
+                    if (hidingProperty != null)
+                    {
+                        var location = (memberDeclaration as PropertyDeclarationSyntax).Identifier.GetLocation();
+                        return Diagnostic.Create(rule, location, hidingProperty);
+                    }
+                }
+                return null;
+            }
+
+            private static bool DecreasesPropertyAccess(IPropertySymbol baseProperty, IPropertySymbol propertySymbol)
+            {
+                if (baseProperty.Name != propertySymbol.Name ||
+                    !Equals(baseProperty.Type, propertySymbol.Type))
+                {
+                    return false;
+                }
+
+                var baseGetAccess = GetEffectiveDeclaredAccess(baseProperty.GetMethod, baseProperty.DeclaredAccessibility);
+                var baseSetAccess = GetEffectiveDeclaredAccess(baseProperty.SetMethod, baseProperty.DeclaredAccessibility);
+
+                var propertyGetAccess = GetEffectiveDeclaredAccess(propertySymbol.GetMethod, baseProperty.DeclaredAccessibility);
+                var propertySetAccess = GetEffectiveDeclaredAccess(propertySymbol.SetMethod, baseProperty.DeclaredAccessibility);
+
+                return DecrasesAccess(baseGetAccess, propertyGetAccess) ||
+                       DecrasesAccess(baseSetAccess, propertySetAccess);
+            }
+
+            private static Accessibility GetEffectiveDeclaredAccess(IMethodSymbol method, Accessibility propertyDefaultAccess)
+            {
+                if (method == null)
+                {
+                    return Accessibility.NotApplicable;
+                }
+
+                return method.DeclaredAccessibility != Accessibility.NotApplicable ? method.DeclaredAccessibility : propertyDefaultAccess;
+            }
+
+            private static bool IsMatchingSignature(IMethodSymbol baseMethod, IMethodSymbol methodSymbol)
+            {
+                if (baseMethod.Name != methodSymbol.Name ||
+                    baseMethod.TypeParameters.Length != methodSymbol.TypeParameters.Length)
+                {
+                    return false;
+                }
+
+                bool hasMatchingParameterTypes = CollectionUtils.AreEqual(baseMethod.Parameters, methodSymbol.Parameters,
+                    AreParameterTypesEqual);
+
+                return hasMatchingParameterTypes;
+            }
+
+            private static bool AreParameterTypesEqual(IParameterSymbol p1, IParameterSymbol p2)
+            {
+                if (p1.Type.TypeKind == TypeKind.TypeParameter)
+                {
+                    return p2.Type.TypeKind == TypeKind.TypeParameter;
+                }
+
+                return Equals(p1.Type.OriginalDefinition, p2.Type.OriginalDefinition);
+            }
+
+            private static bool DecrasesAccess(Accessibility baseAccess, Accessibility memberAccess)
+            {
+                if (baseAccess == Accessibility.NotApplicable || memberAccess == Accessibility.NotApplicable)
+                {
+                    return false;
+                }
+
+                return memberAccess == Accessibility.Private ||
+                       (baseAccess == Accessibility.Public && memberAccess != Accessibility.Public);
+            }
+
         }
     }
 }
