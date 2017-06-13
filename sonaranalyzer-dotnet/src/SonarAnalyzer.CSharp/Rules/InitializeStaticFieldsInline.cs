@@ -46,7 +46,18 @@ namespace SonarAnalyzer.Rules.CSharp
                 c =>
                 {
                     var constructorDeclaration = (ConstructorDeclarationSyntax)c.Node;
-                    if (constructorDeclaration.Modifiers.Any(m => m.IsKind(SyntaxKind.StaticKeyword)))
+                    if (!constructorDeclaration.Modifiers.Any(m => m.IsKind(SyntaxKind.StaticKeyword)))
+                    {
+                        return;
+                    }
+
+                    var hasFieldAssignment = constructorDeclaration.Body
+                        .DescendantNodes()
+                        .OfType<AssignmentExpressionSyntax>()
+                        .Select(x => c.SemanticModel.GetSymbolInfo(x.Left).Symbol)
+                        .OfType<IFieldSymbol>()
+                        .Any();
+                    if (hasFieldAssignment)
                     {
                         c.ReportDiagnostic(Diagnostic.Create(rule, constructorDeclaration.GetLocation()));
                     }

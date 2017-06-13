@@ -13,6 +13,15 @@ namespace Tests.Diagnostics
             i = 3;
             ResourceManager sm = new ResourceManager("strings", Assembly.GetExecutingAssembly());
             s = sm.GetString("mystring");
+            sm = null;
+        }
+    }
+
+    class Foo
+    {
+        static Foo()
+        {
+            System.Console.WriteLine("test");
         }
     }
 }
