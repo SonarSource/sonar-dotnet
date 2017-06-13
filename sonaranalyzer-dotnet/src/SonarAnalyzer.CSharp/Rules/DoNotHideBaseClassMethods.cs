@@ -57,7 +57,6 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     classDeclaration
                         .Members
-                        .OfType<MemberDeclarationSyntax>()
                         .Select(issueFinder.FindIssue)
                         .WhereNotNull()
                         .ToList()
