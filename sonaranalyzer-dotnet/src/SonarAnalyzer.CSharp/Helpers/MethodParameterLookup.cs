@@ -31,16 +31,9 @@ namespace SonarAnalyzer.Helpers
         private readonly ArgumentListSyntax argumentList;
         public IMethodSymbol MethodSymbol { get; }
 
-        public MethodParameterLookup(InvocationExpressionSyntax invocation, SemanticModel semanticModel)
+        public MethodParameterLookup(InvocationExpressionSyntax invocation, SemanticModel semanticModel) :
+            this(invocation.ArgumentList, semanticModel)
         {
-            this.argumentList = invocation.ArgumentList;
-            MethodSymbol = semanticModel.GetSymbolInfo(invocation).Symbol as IMethodSymbol;
-        }
-
-        public MethodParameterLookup(ObjectCreationExpressionSyntax objectCreation, SemanticModel semanticModel)
-        {
-            this.argumentList = objectCreation.ArgumentList;
-            MethodSymbol = semanticModel.GetSymbolInfo(objectCreation).Symbol as IMethodSymbol;
         }
 
         public MethodParameterLookup(ArgumentListSyntax argumentList, SemanticModel semanticModel)

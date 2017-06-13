@@ -137,6 +137,9 @@ namespace Tests.Diagnostics
 
             var c1 = new A.B.C(left, right);
             var c2 = new A.B.C(right, left); // Noncompliant [C]
+
+            new ()
+            new System. ()
         }
     }
 }

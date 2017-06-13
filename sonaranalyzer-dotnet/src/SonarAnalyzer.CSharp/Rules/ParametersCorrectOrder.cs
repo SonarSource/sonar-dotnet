@@ -145,8 +145,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 var secondaryLocations = methodSymbol.DeclaringSyntaxReferences
                     .Select(s => GetIdentifierLocation(s.GetSyntax()))
-                    .Where(location => location != null)
-                    .ToList();
+                    .WhereNotNull();
 
                 analysisContext.ReportDiagnostic(Diagnostic.Create(rule, getLocation(),
                     additionalLocations: secondaryLocations,
