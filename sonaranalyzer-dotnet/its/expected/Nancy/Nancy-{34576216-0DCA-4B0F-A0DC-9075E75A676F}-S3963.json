@@ -4,32 +4,6 @@
 "id":  "S3963",
 "message":  "Initialize all 'static fields' inline and remove the 'static constructor'.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Bootstrapper\AppDomainAssemblyTypeScanner.cs",
-"region":  {
-"startLine":  16,
-"startColumn":  9,
-"endLine":  19,
-"endColumn":  10
-}
-}
-},
-{
-"id":  "S3963",
-"message":  "Initialize all 'static fields' inline and remove the 'static constructor'.",
-"location":  {
-"uri":  "Nancy\src\Nancy\Conventions\BuiltInCultureConventions.cs",
-"region":  {
-"startLine":  22,
-"startColumn":  9,
-"endLine":  27,
-"endColumn":  10
-}
-}
-},
-{
-"id":  "S3963",
-"message":  "Initialize all 'static fields' inline and remove the 'static constructor'.",
-"location":  {
 "uri":  "Nancy\src\Nancy\Conventions\StaticContentConventionBuilder.cs",
 "region":  {
 "startLine":  22,
@@ -95,19 +69,6 @@
 "id":  "S3963",
 "message":  "Initialize all 'static fields' inline and remove the 'static constructor'.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Responses\GenericFileResponse.cs",
-"region":  {
-"startLine":  28,
-"startColumn":  9,
-"endLine":  31,
-"endColumn":  10
-}
-}
-},
-{
-"id":  "S3963",
-"message":  "Initialize all 'static fields' inline and remove the 'static constructor'.",
-"location":  {
 "uri":  "Nancy\src\Nancy\StaticConfiguration.cs",
 "region":  {
 "startLine":  17,
@@ -126,19 +87,6 @@
 "startLine":  317,
 "startColumn":  9,
 "endLine":  320,
-"endColumn":  10
-}
-}
-},
-{
-"id":  "S3963",
-"message":  "Initialize all 'static fields' inline and remove the 'static constructor'.",
-"location":  {
-"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
-"region":  {
-"startLine":  3002,
-"startColumn":  9,
-"endLine":  3004,
 "endColumn":  10
 }
 }
