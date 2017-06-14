@@ -160,5 +160,12 @@ namespace SonarAnalyzer.Helpers
                 methodSymbol.Name == nameof(Debug.Assert) &&
                 methodSymbol.ContainingType.Is(KnownType.System_Diagnostics_Debug);
         }
+
+        public static bool IsTraceAssert(this IMethodSymbol method)
+        {
+            return method != null &&
+                method.Name == nameof(Trace.Assert) &&
+                method.ContainingType.Is(KnownType.System_Diagnostics_Trace);
+        }
     }
 }

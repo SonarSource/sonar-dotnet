@@ -121,7 +121,8 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
                 newConstraints,
                 programState.ProgramPointVisitCounts,
                 programState.ExpressionStack,
-                programState.Relationships);
+                programState.Relationships,
+                programState.FailedAssertState);
         }
 
         private ImmutableDictionary<SymbolicValue, SymbolicValueConstraint> AddConstraintTo<TRelationship>(SymbolicValueConstraint constraint,

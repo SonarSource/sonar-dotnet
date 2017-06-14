@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 using X = global::Tests.Diagnostics.NullPointerDereferenceWithFields;
 
@@ -7,6 +8,12 @@ namespace Tests.Diagnostics
 {
     class NullPointerDereference
     {
+        private string ExpressionInAssert(string o)
+        {
+            Debug.Assert(o != null && true);
+            return o.ToString();
+        }
+
         void Test_0()
         {
             int i = 0, j = 0;
@@ -267,16 +274,14 @@ namespace Tests.Diagnostics
 
         public void Assert1(object o1)
         {
-            System.Diagnostics.Debug.Assert(o1 != null);
-            o1.ToString(); // Compliant
-            System.Diagnostics.Debug.Assert(o1 == null);
+            Debug.Assert(o1 != null);
             o1.ToString(); // Compliant
         }
 
         public void Assert2(object o1)
         {
-            System.Diagnostics.Debug.Assert(o1 == null);
-            o1.ToString(); // Compliant, we don't learn on Assert
+            Debug.Assert(o1 == null);
+            o1.ToString(); // Noncompliant
         }
     }
 

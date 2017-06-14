@@ -406,6 +406,42 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.CSharp
                         var invocationVisitor = new InvocationVisitor(invocation, SemanticModel, newProgramState);
                         newProgramState = invocationVisitor.ProcessInvocation();
 
+                        if (invocationVisitor.IsAssertCall)
+                        {
+                            ExpressionSyntax condition = invocation.ArgumentList?.Arguments.FirstOrDefault()?.Expression;
+                            SymbolicValue sv = invocationVisitor.AssertedValue;
+
+                            if (sv == null || condition == null)
+                            {
+                                break;
+                            }
+
+                            OnInstructionProcessed(instruction, node.ProgramPoint, newProgramState);
+
+                            foreach (var trueSuccessorState in sv.TrySetConstraint(BoolConstraint.True, newProgramState))
+                            {
+                                OnConditionEvaluated(condition, evaluationValue: true);
+
+                                var ps = EnsureStackState(parenthesizedExpression, trueSuccessorState);
+                                EnqueueNewNode(newProgramPoint, ps);
+                            }
+
+                            foreach (var falseSuccessorState in sv.TrySetConstraint(BoolConstraint.False, newProgramState))
+                            {
+                                OnConditionEvaluated(condition, evaluationValue: false);
+
+                                var ps = EnsureStackState(parenthesizedExpression, falseSuccessorState);
+                                // We will not report NullReferenceExceptions in this branch because
+                                // it will not be executed at runtime. We are processing to prevent
+                                // always true/false issues from raising.
+                                ps = ps.SetFailedAssert();
+
+                                EnqueueNewNode(newProgramPoint, ps);
+                            }
+
+                            return;
+                        }
+
                         if (invocation.Expression.IsOnThis() && !invocation.IsNameof(SemanticModel))
                         {
                             newProgramState = newProgramState.RemoveSymbols(IsFieldSymbol);

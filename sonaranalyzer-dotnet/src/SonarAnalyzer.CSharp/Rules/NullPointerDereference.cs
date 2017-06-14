@@ -235,7 +235,8 @@ namespace SonarAnalyzer.Rules.CSharp
             private ProgramState ProcessIdentifier(ProgramState programState, IdentifierNameSyntax identifier, ISymbol symbol)
             {
                 if (explodedGraph.IsSymbolTracked(symbol) &&
-                    symbol.HasConstraint(ObjectConstraint.Null, programState))
+                    symbol.HasConstraint(ObjectConstraint.Null, programState) &&
+                    !programState.FailedAssertState)
                 {
                     OnMemberAccessed(identifier);
                     return null;
