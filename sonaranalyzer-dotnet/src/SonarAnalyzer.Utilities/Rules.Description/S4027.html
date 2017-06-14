@@ -11,13 +11,43 @@
 <pre>
 using System;
 
-namespace MyLibrary {
-
+namespace MyLibrary
+{
   public class MyException // Noncompliant: several constructors are missing
   {
     public MyException()
     {
     }
+  }
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+using System;
+using System.Runtime.Serialization;
+
+namespace MyLibrary
+{
+  public class MyException : Exception
+  {
+      public MyException()
+      {
+      }
+
+      public MyException(string message)
+          :base(message)
+      {
+      }
+
+      public MyException(string message, Exception innerException)
+          : base(message, innerException)
+      {
+      }
+
+      protected MyException(SerializationInfo info, StreamingContext context)
+          : base(info, context)
+      {
+      }
   }
 }
 </pre>

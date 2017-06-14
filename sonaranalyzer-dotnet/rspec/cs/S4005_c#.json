@@ -1,5 +1,5 @@
 {
-  "title": "\"System.Uri\" argument should be passed instead of string",
+  "title": "\"System.Uri\" arguments should be used instead of strings",
   "type": "CODE_SMELL",
   "status": "ready",
   "remediation": {

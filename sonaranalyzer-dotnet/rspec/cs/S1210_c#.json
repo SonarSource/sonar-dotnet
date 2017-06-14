@@ -1,6 +1,6 @@
 {
   "title": "\"Equals\" and the comparison operators should be overridden when implementing \"IComparable\"",
-  "type": "BUG",
+  "type": "CODE_SMELL",
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",
