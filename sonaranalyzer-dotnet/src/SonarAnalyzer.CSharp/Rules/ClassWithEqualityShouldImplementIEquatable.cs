@@ -66,18 +66,33 @@ namespace SonarAnalyzer.Rules.CSharp
                         .Where(node => IsValidEqualsMethodSymbol(node.Symbol))
                         .ToList();
 
-                    var objectEqualsMethod = equalsMethodSymbols.FirstOrDefault(ms => ms.Symbol.Parameters[0].Type.Is(KnownType.System_Object))?.Syntax;
-                    var equatableInterface = classSymbol.AllInterfaces.FirstOrDefault(nts => nts.ConstructedFrom.Is(KnownType.System_IEquatable_T));
-                    var typeSpecificEqualsMethod = FindTypeSpecificEqualsMethod(equalsMethodSymbols, equatableInterface, classSymbol);
-
-                    if (HasNoTriggeringEqualsMethod(objectEqualsMethod, typeSpecificEqualsMethod) ||
-                        IsEquatableInterfaceCorrectlyImplemented(objectEqualsMethod, typeSpecificEqualsMethod, equatableInterface))
+                    // Find all .Equals(T) defined in base classes
+                    var baseType = classSymbol.BaseType;
+                    while(baseType != null)
                     {
-                        return;
+                        equalsMethodSymbols.AddRange(
+                            baseType.DeclaringSyntaxReferences.Select(s => s.GetSyntax())
+                                .OfType<ClassDeclarationSyntax>()
+                                .SelectMany(cs => cs.Members
+                                    .OfType<MethodDeclarationSyntax>()
+                                    .Select(mds => c.SemanticModel.GetDeclaredSymbol(mds).ToSymbolWithSyntax(mds))
+                                    .Where(node => IsValidNonObjectEqualsMethodSymbol(node.Symbol))
+                                    .ToList()));
+                        baseType = baseType.BaseType;
                     }
 
-                    c.ReportDiagnostic(CreateReportDiagnostic(equatableInterface != null, objectEqualsMethod,
-                        typeSpecificEqualsMethod, classDeclaration.Identifier));
+                    var objectEqualsMethod = equalsMethodSymbols.FirstOrDefault(ms => ms.Symbol.Parameters[0].Type.Is(KnownType.System_Object))?.Syntax;
+                    foreach(var equatableInterface in classSymbol.AllInterfaces.Where(nts => nts.ConstructedFrom.Is(KnownType.System_IEquatable_T)))
+                    {
+                        var typeSpecificEqualsMethod = FindTypeSpecificEqualsMethod(equalsMethodSymbols, equatableInterface, classSymbol);
+
+                        if(!(HasNoTriggeringEqualsMethod(objectEqualsMethod, typeSpecificEqualsMethod) ||
+                             IsEquatableInterfaceCorrectlyImplemented(objectEqualsMethod, typeSpecificEqualsMethod, equatableInterface)))
+                        {
+                            c.ReportDiagnostic(CreateReportDiagnostic(equatableInterface != null, objectEqualsMethod,
+                                typeSpecificEqualsMethod, classDeclaration.Identifier));
+                        }
+                    }
                 }, SyntaxKind.ClassDeclaration);
         }
 
@@ -87,6 +102,15 @@ namespace SonarAnalyzer.Rules.CSharp
                 methodSymbol.Name == EqualsMethodName &&
                 methodSymbol.Parameters.Length == 1 &&
                 methodSymbol.ReturnType.Is(KnownType.System_Boolean);
+        }
+
+        private static bool IsValidNonObjectEqualsMethodSymbol(IMethodSymbol methodSymbol)
+        {
+            return methodSymbol.MethodKind == MethodKind.Ordinary &&
+                   methodSymbol.Name == EqualsMethodName &&
+                   methodSymbol.Parameters.Length == 1 &&
+                   !methodSymbol.Parameters[0].Type.Is(KnownType.System_Object) &&
+                   methodSymbol.ReturnType.Is(KnownType.System_Boolean);
         }
 
         private static MethodDeclarationSyntax FindTypeSpecificEqualsMethod(
