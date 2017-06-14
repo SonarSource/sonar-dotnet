@@ -339,11 +339,7 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.CSharp
                     break;
 
                 case SyntaxKind.DefaultExpression:
-                    {
-                        var sv = new SymbolicValue();
-                        newProgramState = SetNonNullConstraintIfValueType(instruction, sv, newProgramState);
-                        newProgramState = newProgramState.PushValue(sv);
-                    }
+                    newProgramState = VisitDefaultExpression((DefaultExpressionSyntax)instruction, newProgramState);
                     break;
 
                 case SyntaxKind.AnonymousObjectCreationExpression:
@@ -582,6 +578,18 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.CSharp
             }
 
             return newProgramState.PushValue(resultValue);
+        }
+
+        private ProgramState VisitDefaultExpression(DefaultExpressionSyntax instruction, ProgramState programState)
+        {
+            var sv = new SymbolicValue();
+
+            var typeSymbol = SemanticModel.GetTypeInfo(instruction).Type;
+            var newProgramState = typeSymbol.IsReferenceType
+                ? sv.SetConstraint(ObjectConstraint.Null, programState)
+                : SetNonNullConstraintIfValueType(typeSymbol, sv, programState);
+
+            return newProgramState.PushValue(sv);
         }
 
         private bool IsOperatorOnObject(SyntaxNode instruction)

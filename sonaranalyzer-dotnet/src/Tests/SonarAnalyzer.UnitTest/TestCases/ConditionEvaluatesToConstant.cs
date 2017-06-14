@@ -542,7 +542,7 @@ namespace Tests.Diagnostics
             a ^= true;
             if (a) { } // Noncompliant {{Change this condition so that it does not always evaluate to 'true'.}}
         }
-        
+
         public void IsAsExpression()
         {
             object o = new object();
@@ -828,7 +828,8 @@ namespace Tests.Diagnostics
 
         void DefaultExpression(object o)
         {
-            if (default(o) == null) { } // Compliant
+            if (default(o) == null) { } // Noncompliant {{Change this condition so that it does not always evaluate to 'true'.}}
+            if (default(int?) == null) { } // Noncompliant
         }
 
         void ConditionalAccessNullPropagation(object o)
