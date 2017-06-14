@@ -18,14 +18,14 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
+using System.Collections.Immutable;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Helpers;
-using System.Collections.Generic;
-using System.Collections.Immutable;
-using System.Linq;
 
 namespace SonarAnalyzer.Rules
 {
@@ -74,7 +74,7 @@ namespace SonarAnalyzer.Rules
             }
         }
 
-        private SyntaxToken? GetMethodCallIdentifier(InvocationExpressionSyntax invocation)
+        protected SyntaxToken? GetMethodCallIdentifier(InvocationExpressionSyntax invocation)
         {
             var directMethodCall = invocation.Expression as IdentifierNameSyntax;
             if (directMethodCall != null)

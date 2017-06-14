@@ -20,6 +20,7 @@
 
 using System.Collections.Generic;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
@@ -37,11 +38,27 @@ namespace SonarAnalyzer.Rules.CSharp
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         protected override DiagnosticDescriptor Rule => rule;
 
-        private static readonly IEnumerable<MethodSignature> checkedMethods = new List<MethodSignature>
+        private static readonly List<MethodSignature> checkedMethods = new List<MethodSignature>
         {
             new MethodSignature(KnownType.System_String, "ToLower"),
             new MethodSignature(KnownType.System_String, "ToLowerInvariant"),
         };
         internal sealed override IEnumerable<MethodSignature> CheckedMethods => checkedMethods;
+
+        protected override bool ShouldReportOnMethodCall(InvocationExpressionSyntax invocation, SemanticModel semanticModel)
+        {
+            var identifier = GetMethodCallIdentifier(invocation).Value.ValueText; // never null when we get here
+            if (identifier == "ToLowerInvariant")
+            {
+                return true;
+            }
+
+            if ((invocation.ArgumentList?.Arguments.Count ?? 0) != 1)
+            {
+                return false;
+            }
+
+            return invocation.ArgumentList.Arguments[0].Expression.ToString() == "CultureInfo.InvariantCulture";
+        }
     }
 }

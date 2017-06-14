@@ -6,9 +6,12 @@ namespace Tests.Diagnostics
     {
         void Foo()
         {
-            var s1 = "".ToLower(); // Noncompliant {{Change this normalization to 'String.ToUpper()'.}}
-//                      ^^^^^^^
-            s1 = "".ToLower(CultureInfo.InvariantCulture); // Noncompliant
+            var s1 = "".ToLower(); // Compliant
+            s1 = "".ToLower(CultureInfo.CurrentCulture);
+
+
+            s1 = "".ToLower(CultureInfo.InvariantCulture); // Noncompliant  {{Change this normalization to 'String.ToUpper()'.}}
+//                  ^^^^^^^
             s1 = "".ToLowerInvariant(); // Noncompliant
 
             s1 = Ext.ToLower("", 42);
