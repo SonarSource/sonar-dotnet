@@ -1,0 +1,13 @@
+{
+  "title": "Inherited member visibility should not be decreased",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "2min"
+  },
+  "tags": [
+    "pitfall"
+  ],
+  "defaultSeverity": "Critical"
+}
