@@ -583,9 +583,12 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.CSharp
         private ProgramState VisitDefaultExpression(DefaultExpressionSyntax instruction, ProgramState programState)
         {
             var sv = new SymbolicValue();
-
             var typeSymbol = SemanticModel.GetTypeInfo(instruction).Type;
-            var newProgramState = typeSymbol.IsReferenceType
+
+            var isReferenceOrNullable = typeSymbol.IsReferenceType ||
+                typeSymbol.OriginalDefinition.Is(KnownType.System_Nullable_T);
+
+            var newProgramState = isReferenceOrNullable
                 ? sv.SetConstraint(ObjectConstraint.Null, programState)
                 : SetNonNullConstraintIfValueType(typeSymbol, sv, programState);
 

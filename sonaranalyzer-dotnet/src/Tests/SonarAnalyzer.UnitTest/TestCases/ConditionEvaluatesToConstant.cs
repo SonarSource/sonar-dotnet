@@ -829,7 +829,12 @@ namespace Tests.Diagnostics
         void DefaultExpression(object o)
         {
             if (default(o) == null) { } // Noncompliant {{Change this condition so that it does not always evaluate to 'true'.}}
+            int? amo = null;
+            if (amo == null) { } // Noncompliant
             if (default(int?) == null) { } // Noncompliant
+
+            if (default(System.IO.FileAccess) != null) { } // Noncompliant
+            if (default(float) != null) { } // Noncompliant
         }
 
         void ConditionalAccessNullPropagation(object o)
