@@ -10,7 +10,7 @@ namespace Tests.Diagnostics
             s1 = "".ToLower(CultureInfo.CurrentCulture);
 
 
-            s1 = "".ToLower(CultureInfo.InvariantCulture); // Noncompliant  {{Change this normalization to 'String.ToUpper()'.}}
+            s1 = "".ToLower(CultureInfo.InvariantCulture); // Noncompliant  {{Change this normalization to 'String.ToUpperInvariant()'.}}
 //                  ^^^^^^^
             s1 = "".ToLowerInvariant(); // Noncompliant
 
