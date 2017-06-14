@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4040",
+"message":  "Change this normalization to 'String.ToUpper()'.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Demo.MarkdownViewEngine\Model\BlogModel.cs",
+"region":  {
+"startLine":  111,
+"startColumn":  46,
+"endLine":  111,
+"endColumn":  53
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4040",
+"message":  "Change this normalization to 'String.ToUpper()'.",
+"location":  {
+"uri":  "akka.net\src\examples\Chat\ChatClient\Program.cs",
+"region":  {
+"startLine":  52,
+"startColumn":  44,
+"endLine":  52,
+"endColumn":  60
+}
+}
+}
+]
+}

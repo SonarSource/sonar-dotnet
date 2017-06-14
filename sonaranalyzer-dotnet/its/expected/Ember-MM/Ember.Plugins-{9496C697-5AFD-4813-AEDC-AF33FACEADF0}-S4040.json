@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4040",
+"message":  "Change this normalization to 'String.ToUpper()'.",
+"location":  {
+"uri":  "Ember-MM\Ember.Plugins\Ember\EmberWorkAroundPlugin.cs",
+"region":  {
+"startLine":  62,
+"startColumn":  35,
+"endLine":  62,
+"endColumn":  42
+}
+}
+}
+]
+}
