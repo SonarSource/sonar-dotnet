@@ -46,6 +46,7 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
             var symbol = semanticModel.GetSymbolInfo(invocation).Symbol;
 
             var methodSymbol = symbol as IMethodSymbol;
+            var invocationArgsCount = invocation.ArgumentList?.Arguments.Count ?? 0;
 
             if (IsInstanceEqualsCall(methodSymbol))
             {
@@ -69,24 +70,21 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
 
             if (invocation.IsNameof(semanticModel))
             {
-                return HandleNameofExpression();
+                return HandleNameofExpression(invocationArgsCount);
             }
 
             return programState
-                .PopValues((invocation.ArgumentList?.Arguments.Count ?? 0) + 1)
+                .PopValues(invocationArgsCount + 1)
                 .PushValue(new SymbolicValue());
         }
 
-        private ProgramState HandleNameofExpression()
+        private ProgramState HandleNameofExpression(int argumentsCount)
         {
-            // First pop should handle nameof argument but if nameof is empty (invalid) there is only one item in the
-            // ExpressionStack (the nameof itself) so we don't want to pop the second time.
-            // NB: We decided not to stop the execution of the DataFlow Analysis.
-            var newProgramState = programState.PopValue();
-            if (!newProgramState.ExpressionStack.IsEmpty)
-            {
-                newProgramState = newProgramState.PopValue();
-            }
+            // We want to handle the correct nameof(a) but also malformed ones likes nameof(), nameof(a, b)...
+            // So we pop number of arguments + the nameof itself
+            var newProgramState = programState
+                .PopValues(argumentsCount)
+                .PopValue();
 
             var nameof = new SymbolicValue();
             newProgramState = newProgramState.PushValue(nameof);

@@ -528,7 +528,8 @@ namespace Tests.Diagnostics
 
         void TestNameOf()
         {
-            var x = $"{nameof()}";
+            var x = nameof();
+            var y = nameof(a, b);
             x.ToString();
         }
     }
