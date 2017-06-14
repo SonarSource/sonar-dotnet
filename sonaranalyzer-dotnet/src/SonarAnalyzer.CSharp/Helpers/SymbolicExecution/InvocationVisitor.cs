@@ -79,11 +79,14 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
 
         private ProgramState HandleNameofExpression()
         {
-            SymbolicValue arg1;
-
-            var newProgramState = programState
-                .PopValue(out arg1)
-                .PopValue();
+            // First pop should handle nameof argument but if nameof is empty (invalid) there is only one item in the
+            // ExpressionStack (the nameof itself) so we don't want to pop the second time.
+            // NB: We decided not to stop the execution of the DataFlow Analysis.
+            var newProgramState = programState.PopValue();
+            if (!newProgramState.ExpressionStack.IsEmpty)
+            {
+                newProgramState = newProgramState.PopValue();
+            }
 
             var nameof = new SymbolicValue();
             newProgramState = newProgramState.PushValue(nameof);

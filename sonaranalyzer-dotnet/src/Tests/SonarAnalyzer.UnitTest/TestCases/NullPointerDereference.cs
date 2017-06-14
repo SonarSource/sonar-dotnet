@@ -525,6 +525,12 @@ namespace Tests.Diagnostics
         }
 
         void DoSomething() { }
+
+        void TestNameOf()
+        {
+            var x = $"{nameof()}";
+            x.ToString();
+        }
     }
 
     static class Extensions
