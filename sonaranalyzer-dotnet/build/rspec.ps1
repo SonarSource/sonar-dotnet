@@ -164,6 +164,7 @@ function CreateStringResources() {
             $description = $description -replace '&amp;', '&'
             $description = $description -replace '&lt;', '<'
             $description = $description -replace '&gt;', '>'
+            $description = $description -replace '\\!', '!'
         }
         else {
             throw "The downloaded HTML for rule '${rule}' does not contain any paragraphs."

@@ -1,6 +1,6 @@
 {
   "title": "Method calls should not resolve ambiguously to overloads with \"params\"",
-  "type": "BUG",
+  "type": "CODE_SMELL",
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",

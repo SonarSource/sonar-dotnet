@@ -1,13 +1,13 @@
 {
   "title": "\"ISerializable\" should be implemented correctly",
-  "type": "BUG",
+  "type": "CODE_SMELL",
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",
     "constantCost": "20min"
   },
   "tags": [
-    
+    "pitfall"
   ],
-  "defaultSeverity": "Critical"
+  "defaultSeverity": "Major"
 }

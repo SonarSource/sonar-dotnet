@@ -6,7 +6,7 @@ using System;
 
 namespace MyLibrary
 {
-   public MyInterface // Noncompliant
+   public interface MyInterface // Noncompliant
    {
    }
 }
@@ -17,9 +17,9 @@ using System;
 
 namespace MyLibrary
 {
-   public MyInterface
+   public interface MyInterface
    {
-      public void Foo();
+      void Foo();
    }
 }
 </pre>

@@ -1,5 +1,5 @@
 {
-  "title": "Enums storage should be Int32",
+  "title": "Enumerations should have \"Int32\" storage",
   "type": "CODE_SMELL",
   "status": "ready",
   "remediation": {
