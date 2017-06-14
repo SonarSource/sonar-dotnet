@@ -4016,7 +4016,7 @@ namespace SonarAnalyzer.UnitTest.PackagingTests
             ["4016"] = "CODE_SMELL",
             ["4017"] = "CODE_SMELL",
             ["4018"] = "CODE_SMELL",
-            //["4019"],
+            ["4019"] = "CODE_SMELL",
             //["4020"],
             //["4021"],
             ["4022"] = "CODE_SMELL",
