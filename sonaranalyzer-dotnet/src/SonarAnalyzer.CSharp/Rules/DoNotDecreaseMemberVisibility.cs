@@ -90,7 +90,7 @@ namespace SonarAnalyzer.Rules.CSharp
             private static bool IsSymbolVisibleFromNamespace(ISymbol symbol, INamespaceSymbol ns)
             {
                 return symbol.DeclaredAccessibility != Accessibility.Private &&
-                       (symbol.DeclaredAccessibility != Accessibility.Internal || symbol.ContainingNamespace == ns);
+                       (symbol.DeclaredAccessibility != Accessibility.Internal || ns.Equals(symbol.ContainingNamespace));
             }
 
             public Diagnostic FindIssue(MemberDeclarationSyntax memberDeclaration)
