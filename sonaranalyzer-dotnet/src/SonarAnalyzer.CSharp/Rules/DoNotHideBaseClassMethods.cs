@@ -45,7 +45,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {
-                    var classDeclaration = c.Node as ClassDeclarationSyntax;
+                    var classDeclaration = (ClassDeclarationSyntax)c.Node;
                     var classSymbol = c.SemanticModel.GetDeclaredSymbol(classDeclaration);
 
                     if (classSymbol == null || classDeclaration.Identifier.IsMissing)
@@ -67,33 +67,33 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private class IssueFinder
         {
+            private enum Match { Different, Identical, WeaklyDerived }
+
             private readonly IList<IMethodSymbol> allBaseClassMethods;
             private readonly SemanticModel semanticModel;
 
-            public IssueFinder(INamedTypeSymbol classTypeSymbol, SemanticModel semanticModel)
+            public IssueFinder(INamedTypeSymbol classSymbol, SemanticModel semanticModel)
             {
                 this.semanticModel = semanticModel;
-                allBaseClassMethods = GetAllBaseMethods(classTypeSymbol).ToList();
+                allBaseClassMethods = GetAllBaseMethods(classSymbol);
             }
 
-            private static IEnumerable<IMethodSymbol> GetAllBaseMethods(INamedTypeSymbol classTypeSymbol)
+            private static List<IMethodSymbol> GetAllBaseMethods(INamedTypeSymbol classSymbol)
             {
-                while (classTypeSymbol?.BaseType != null)
-                {
-                    var members = classTypeSymbol.BaseType
-                            .GetMembers()
-                            .OfType<IMethodSymbol>()
-                            .Where(m => m.DeclaredAccessibility != Accessibility.Private)
-                            .Where(m => m.Parameters.Length > 0)
-                            .Where(m => !string.IsNullOrEmpty(m.Name));
+                return classSymbol.BaseType
+                         .GetSelfAndBaseTypes()
+                         .SelectMany(t => t.GetMembers())
+                         .OfType<IMethodSymbol>()
+                         .Where(m => IsSymbolVisibleFromNamespace(m, classSymbol.ContainingNamespace))
+                         .Where(m => m.Parameters.Length > 0)
+                         .Where(m => !string.IsNullOrEmpty(m.Name))
+                         .ToList();
+            }
 
-                    foreach (var m in members)
-                    {
-                        yield return m;
-                    }
-
-                    classTypeSymbol = classTypeSymbol.BaseType;
-                }
+            private static bool IsSymbolVisibleFromNamespace(ISymbol symbol, INamespaceSymbol ns)
+            {
+                return symbol.DeclaredAccessibility != Accessibility.Private &&
+                       (symbol.DeclaredAccessibility != Accessibility.Internal || ns.Equals(symbol.ContainingNamespace));
             }
 
             public Diagnostic FindIssue(MemberDeclarationSyntax memberDeclaration)
@@ -115,23 +115,22 @@ namespace SonarAnalyzer.Rules.CSharp
                 var baseMemberCandidates = allBaseClassMethods.Where(m => m.Name == methodSymbol.Name);
 
                 IMethodSymbol hiddenBaseMethodCandidate = null;
-                var hasBaseMethodWithSameSignature = baseMemberCandidates.Any(baseMember =>
-                {
-                    var result = ComputSignatureMatch(baseMember, methodSymbol);
-                    if (result == Match.WeaklyDerived)
-                    {
-                        hiddenBaseMethodCandidate = hiddenBaseMethodCandidate ?? baseMember;
-                    }
 
-                    return result == Match.Identical;
-                });
+                var hasBaseMethodWithSameSignature = baseMemberCandidates.Any(baseMember =>
+                    {
+                        var result = ComputeSignatureMatch(baseMember, methodSymbol);
+                        if (result == Match.WeaklyDerived)
+                        {
+                            hiddenBaseMethodCandidate = hiddenBaseMethodCandidate ?? baseMember;
+                        }
+
+                        return result == Match.Identical;
+                    });
 
                 return hasBaseMethodWithSameSignature ? null : hiddenBaseMethodCandidate;
             }
 
-            private enum Match { Different, Identical, WeaklyDerived }
-
-            private Match ComputSignatureMatch(IMethodSymbol baseMethodSymbol, IMethodSymbol methodSymbol)
+            private Match ComputeSignatureMatch(IMethodSymbol baseMethodSymbol, IMethodSymbol methodSymbol)
             {
                 var baseMethodParams = baseMethodSymbol.Parameters;
                 var methodParams = methodSymbol.Parameters;
@@ -141,7 +140,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     return Match.Different;
                 }
 
-                bool hasWeaklyDerivedParams = false;
+                Match signatureMatch = Match.Identical;
                 for (int i = 0; i < methodParams.Length; i++)
                 {
                     var match = ComputeParameterMatch(baseMethodParams[i], methodParams[i]);
@@ -153,16 +152,16 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     if (match == Match.WeaklyDerived)
                     {
-                        hasWeaklyDerivedParams = true;
+                        signatureMatch = Match.WeaklyDerived;
                     }
                 }
 
-                return hasWeaklyDerivedParams ? Match.WeaklyDerived : Match.Identical;
+                return signatureMatch;
             }
 
             private Match ComputeParameterMatch(IParameterSymbol baseParam, IParameterSymbol methodParam)
             {
-                if (baseParam.Type.TypeKind == TypeKind.TypeParameter)
+                if (baseParam.Type.Is(TypeKind.TypeParameter))
                 {
                     return methodParam.Type.TypeKind == TypeKind.TypeParameter ? Match.Identical : Match.Different;
                 }

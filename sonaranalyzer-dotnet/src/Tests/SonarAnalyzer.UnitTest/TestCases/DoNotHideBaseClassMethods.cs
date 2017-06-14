@@ -53,3 +53,24 @@ namespace MyLibrary
         public bool Method1(object obj) => true;
     }
 }
+
+namespace OtherNamespace
+{
+    class Class1
+    {
+        internal void SomeMethod(string s) { }
+    }
+
+    class Class2 : Class1
+    {
+        void SomeMethod(object s) { } // Noncompliant
+    }
+}
+
+namespace MyNamespace
+{
+    class Class3 : OtherNamespace.Class1
+    {
+        void SomeMethod(object s) { }
+    }
+}
