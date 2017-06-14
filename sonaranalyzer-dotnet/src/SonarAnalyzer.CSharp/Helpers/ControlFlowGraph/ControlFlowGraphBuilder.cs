@@ -989,6 +989,12 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.CSharp
 
         private void BuildInvocationExpression(InvocationExpressionSyntax expression)
         {
+            var symbol = semanticModel.GetSymbolInfo(expression).Symbol as IMethodSymbol;
+            if (symbol.IsDebugAssert())
+            {
+                return;
+            }
+
             BuildInvocationLikeExpression(expression, expression.Expression, expression.ArgumentList?.Arguments);
         }
 
