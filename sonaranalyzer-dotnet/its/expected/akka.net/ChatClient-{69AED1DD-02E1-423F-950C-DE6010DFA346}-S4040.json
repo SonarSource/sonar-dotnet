@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S4040",
-"message":  "Change this normalization to 'String.ToUpper()'.",
+"message":  "Change this normalization to 'String.ToUpperInvariant()'.",
 "location":  {
 "uri":  "akka.net\src\examples\Chat\ChatClient\Program.cs",
 "region":  {

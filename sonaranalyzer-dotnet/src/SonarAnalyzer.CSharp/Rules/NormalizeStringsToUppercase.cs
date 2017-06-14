@@ -32,7 +32,7 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class NormalizeStringsToUppercase : DoNotCallMethodsBase
     {
         internal const string DiagnosticId = "S4040";
-        private const string MessageFormat = "Change this normalization to 'String.ToUpper()'.";
+        private const string MessageFormat = "Change this normalization to 'String.ToUpperInvariant()'.";
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
@@ -45,7 +45,8 @@ namespace SonarAnalyzer.Rules.CSharp
         };
         internal sealed override IEnumerable<MethodSignature> CheckedMethods => checkedMethods;
 
-        protected override bool ShouldReportOnMethodCall(InvocationExpressionSyntax invocation, SemanticModel semanticModel)
+        protected override bool ShouldReportOnMethodCall(InvocationExpressionSyntax invocation,
+            SemanticModel semanticModel)
         {
             var identifier = GetMethodCallIdentifier(invocation).Value.ValueText; // never null when we get here
             if (identifier == "ToLowerInvariant")
@@ -53,12 +54,9 @@ namespace SonarAnalyzer.Rules.CSharp
                 return true;
             }
 
-            if ((invocation.ArgumentList?.Arguments.Count ?? 0) != 1)
-            {
-                return false;
-            }
-
-            return invocation.ArgumentList.Arguments[0].Expression.ToString() == "CultureInfo.InvariantCulture";
+            return invocation.ArgumentList != null &&
+                invocation.ArgumentList.Arguments.Count == 1 &&
+                invocation.ArgumentList.Arguments[0].Expression.ToString() == "CultureInfo.InvariantCulture";
         }
     }
 }
