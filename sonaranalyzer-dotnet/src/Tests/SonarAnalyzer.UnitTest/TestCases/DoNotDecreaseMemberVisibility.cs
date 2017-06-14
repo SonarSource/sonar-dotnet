@@ -41,6 +41,8 @@ namespace MyLibrary
         public int Property_04 { get; }
 
         public int Property_05 { get; set; }
+
+        public int Property_06 { get; set; }
     }
 
     class B : A
@@ -85,7 +87,9 @@ namespace MyLibrary
 
         public int Property_04 { get; private set; }
 
-        public int Property_05 { get; }
+        public int Property_05 { get; } // Noncompliant
+
+        private int Property_06 { } // Noncompliant
     }
 
     class Foo
@@ -96,5 +100,26 @@ namespace MyLibrary
     sealed class Bar : Foo
     {
         private void Method_01(int count) { }
+    }
+}
+
+namespace OtherNamespace
+{
+    public class Class1
+    {
+        internal void SomeMethod(string s) { }
+    }
+
+    public class Class2 : Class1
+    {
+        private void SomeMethod(string s) { } // Noncompliant
+    }
+}
+
+namespace SomeNamespace
+{
+    public class Class3 : OtherNamespace.Class1
+    {
+        private void SomeMethod(string s) { }
     }
 }

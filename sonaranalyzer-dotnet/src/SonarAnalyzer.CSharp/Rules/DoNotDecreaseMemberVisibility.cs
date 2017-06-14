@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
@@ -26,8 +28,6 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
-using System.Collections.Generic;
-using System;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -46,7 +46,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {
-                    var classDeclaration = c.Node as ClassDeclarationSyntax;
+                    var classDeclaration = (ClassDeclarationSyntax)c.Node;
                     var classSymbol = c.SemanticModel.GetDeclaredSymbol(classDeclaration);
 
                     if (classSymbol == null ||
@@ -62,6 +62,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         .Members
                         .Select(issueFinder.FindIssue)
                         .WhereNotNull()
+                        .ToList()
                         .ForEach(c.ReportDiagnostic);
                 },
                 SyntaxKind.ClassDeclaration);
@@ -76,22 +77,20 @@ namespace SonarAnalyzer.Rules.CSharp
             public IssueFinder(INamedTypeSymbol classSymbol, SemanticModel semanticModel)
             {
                 this.semanticModel = semanticModel;
-                var allBaseClassMembers = GetAllBaseMembers(classSymbol, m => m.DeclaredAccessibility != Accessibility.Private);
+                var allBaseClassMembers = classSymbol.BaseType
+                        .GetSelfAndBaseTypes()
+                        .SelectMany(t => t.GetMembers())
+                        .Where(m => IsSymbolVisibleFromNamespace(m, classSymbol.ContainingNamespace))
+                        .ToList();
+
                 allBaseClassMethods = allBaseClassMembers.OfType<IMethodSymbol>().ToList();
                 allBaseClassProperties = allBaseClassMembers.OfType<IPropertySymbol>().ToList();
             }
 
-            private static IEnumerable<ISymbol> GetAllBaseMembers(INamedTypeSymbol classType, Func<ISymbol, bool> filter)
+            private static bool IsSymbolVisibleFromNamespace(ISymbol symbol, INamespaceSymbol ns)
             {
-                while (classType?.BaseType != null)
-                {
-                    foreach (var member in classType.BaseType.GetMembers().Where(filter))
-                    {
-                        yield return member;
-                    }
-
-                    classType = classType.BaseType;
-                }
+                return symbol.DeclaredAccessibility != Accessibility.Private &&
+                       (symbol.DeclaredAccessibility != Accessibility.Internal || symbol.ContainingNamespace == ns);
             }
 
             public Diagnostic FindIssue(MemberDeclarationSyntax memberDeclaration)
@@ -102,7 +101,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 if (methodSymbol != null)
                 {
                     var hidingMethod = allBaseClassMethods.FirstOrDefault(
-                        m => DecrasesAccess(m.DeclaredAccessibility, methodSymbol.DeclaredAccessibility) &&
+                        m => IsDecreasingAccess(m.DeclaredAccessibility, methodSymbol.DeclaredAccessibility) &&
                              IsMatchingSignature(m, methodSymbol));
 
                     if (hidingMethod != null)
@@ -120,17 +119,17 @@ namespace SonarAnalyzer.Rules.CSharp
                 var propertySymbol = memberSymbol as IPropertySymbol;
                 if (propertySymbol != null)
                 {
-                    var hidingProperty = allBaseClassProperties.FirstOrDefault(p => DecreasesPropertyAccess(p, propertySymbol));
+                    var hidingProperty = allBaseClassProperties.FirstOrDefault(p => IsDecreasingPropertyAccess(p, propertySymbol));
                     if (hidingProperty != null)
                     {
-                        var location = (memberDeclaration as PropertyDeclarationSyntax).Identifier.GetLocation();
+                        var location = (memberDeclaration as PropertyDeclarationSyntax)?.Identifier.GetLocation();
                         return Diagnostic.Create(rule, location, hidingProperty);
                     }
                 }
                 return null;
             }
 
-            private static bool DecreasesPropertyAccess(IPropertySymbol baseProperty, IPropertySymbol propertySymbol)
+            private static bool IsDecreasingPropertyAccess(IPropertySymbol baseProperty, IPropertySymbol propertySymbol)
             {
                 if (baseProperty.Name != propertySymbol.Name ||
                     !Equals(baseProperty.Type, propertySymbol.Type))
@@ -144,8 +143,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 var propertyGetAccess = GetEffectiveDeclaredAccess(propertySymbol.GetMethod, baseProperty.DeclaredAccessibility);
                 var propertySetAccess = GetEffectiveDeclaredAccess(propertySymbol.SetMethod, baseProperty.DeclaredAccessibility);
 
-                return DecrasesAccess(baseGetAccess, propertyGetAccess) ||
-                       DecrasesAccess(baseSetAccess, propertySetAccess);
+                return IsDecreasingAccess(baseGetAccess, propertyGetAccess) ||
+                       IsDecreasingAccess(baseSetAccess, propertySetAccess);
             }
 
             private static Accessibility GetEffectiveDeclaredAccess(IMethodSymbol method, Accessibility propertyDefaultAccess)
@@ -160,39 +159,23 @@ namespace SonarAnalyzer.Rules.CSharp
 
             private static bool IsMatchingSignature(IMethodSymbol baseMethod, IMethodSymbol methodSymbol)
             {
-                if (baseMethod.Name != methodSymbol.Name ||
-                    baseMethod.TypeParameters.Length != methodSymbol.TypeParameters.Length)
-                {
-                    return false;
-                }
-
-                bool hasMatchingParameterTypes = CollectionUtils.AreEqual(baseMethod.Parameters, methodSymbol.Parameters,
-                    AreParameterTypesEqual);
-
-                return hasMatchingParameterTypes;
+                return baseMethod.Name == methodSymbol.Name &&
+                    baseMethod.TypeParameters.Length == methodSymbol.TypeParameters.Length &&
+                    CollectionUtils.AreEqual(baseMethod.Parameters, methodSymbol.Parameters, AreParameterTypesEqual);
             }
 
             private static bool AreParameterTypesEqual(IParameterSymbol p1, IParameterSymbol p2)
             {
-                if (p1.Type.TypeKind == TypeKind.TypeParameter)
-                {
-                    return p2.Type.TypeKind == TypeKind.TypeParameter;
-                }
-
-                return Equals(p1.Type.OriginalDefinition, p2.Type.OriginalDefinition);
+                return p1.Type.TypeKind == TypeKind.TypeParameter ?
+                         p2.Type.TypeKind == TypeKind.TypeParameter
+                         : Equals(p1.Type.OriginalDefinition, p2.Type.OriginalDefinition);
             }
 
-            private static bool DecrasesAccess(Accessibility baseAccess, Accessibility memberAccess)
+            private static bool IsDecreasingAccess(Accessibility baseAccess, Accessibility memberAccess)
             {
-                if (baseAccess == Accessibility.NotApplicable || memberAccess == Accessibility.NotApplicable)
-                {
-                    return false;
-                }
-
-                return memberAccess == Accessibility.Private ||
+                return (baseAccess != Accessibility.NotApplicable && memberAccess == Accessibility.Private) ||
                        (baseAccess == Accessibility.Public && memberAccess != Accessibility.Public);
             }
-
         }
     }
 }
