@@ -18,15 +18,16 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
+using System.Collections.Generic;
+using System.Collections.Immutable;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
-using System.Collections.Generic;
-using System.Collections.Immutable;
-using System.Linq;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -47,90 +48,114 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
-                    var methodCall = (InvocationExpressionSyntax) c.Node;
-                    var methodParameterLookup = new MethodParameterLookup(methodCall, c.SemanticModel);
-                    var argumentParameterMappings = methodParameterLookup.GetAllArgumentParameterMappings()
-                        .ToDictionary(pair => pair.Argument, pair => pair.Parameter);
+                    var methodCall = (InvocationExpressionSyntax)c.Node;
 
-                    var methodSymbol = methodParameterLookup.MethodSymbol;
-                    if (methodSymbol == null)
-                    {
-                        return;
-                    }
+                    var memberAccess = methodCall.Expression as MemberAccessExpressionSyntax;
+                    Func<Location> getLocation = () =>
+                        memberAccess == null
+                        ? methodCall.Expression.GetLocation()
+                        : memberAccess.Name.GetLocation();
 
-                    var parameterNames = argumentParameterMappings.Values
-                        .Select(symbol => symbol.Name)
-                        .Distinct()
-                        .ToList();
+                    AnalyzeArguments(c, methodCall.ArgumentList, getLocation);
+                }, SyntaxKind.InvocationExpression);
 
-                    var identifierArguments = GetIdentifierArguments(methodCall);
-                    var identifierNames = identifierArguments
-                        .Select(p => p.IdentifierName)
-                        .ToList();
+            context.RegisterSyntaxNodeActionInNonGenerated(
+                c =>
+                {
+                    var objectCreationCall = (ObjectCreationExpressionSyntax)c.Node;
 
-                    if (!parameterNames.Intersect(identifierNames).Any())
-                    {
-                        return;
-                    }
+                    var qualifiedAccess = objectCreationCall.Type as QualifiedNameSyntax;
+                    Func<Location> getLocation = () =>
+                        qualifiedAccess == null
+                        ? objectCreationCall.Type.GetLocation()
+                        : qualifiedAccess.Right.GetLocation();
 
-                    var methodCallHasIssue = false;
-
-                    for (var i = 0; !methodCallHasIssue && i < identifierArguments.Count; i++)
-                    {
-                        var identifierArgument = identifierArguments[i];
-                        var identifierName = identifierArgument.IdentifierName;
-                        var parameter = argumentParameterMappings[identifierArgument.ArgumentSyntax];
-                        var parameterName = parameter.Name;
-
-                        if (string.IsNullOrEmpty(identifierName) ||
-                            !parameterNames.Contains(identifierName))
-                        {
-                            continue;
-                        }
-
-                        var positional = identifierArgument as PositionalIdentifierArgument;
-                        if (positional != null &&
-                            (parameter.IsParams ||
-                             !identifierNames.Contains(parameterName) ||
-                             identifierName == parameterName))
-                        {
-                            continue;
-                        }
-
-                        var named = identifierArgument as NamedIdentifierArgument;
-                        if (named != null &&
-                            (!identifierNames.Contains(named.DeclaredName) || named.DeclaredName == named.IdentifierName))
-                        {
-                            continue;
-                        }
-
-                        methodCallHasIssue = true;
-                    }
-
-                    if (methodCallHasIssue)
-                    {
-                        var memberAccess = methodCall.Expression as MemberAccessExpressionSyntax;
-                        var reportLocation = memberAccess == null
-                            ? methodCall.Expression.GetLocation()
-                            : memberAccess.Name.GetLocation();
-
-                        var secondaryLocations = methodSymbol.DeclaringSyntaxReferences
-                            .Select(s => s.GetSyntax())
-                            .OfType<MethodDeclarationSyntax>()
-                            .Select(s => s.Identifier.GetLocation())
-                            .ToList();
-
-                        c.ReportDiagnostic(Diagnostic.Create(rule, reportLocation,
-                            additionalLocations: secondaryLocations,
-                            messageArgs: methodSymbol.Name));
-                    }
-                },
-                SyntaxKind.InvocationExpression);
+                    AnalyzeArguments(c, objectCreationCall.ArgumentList, getLocation);
+                }, SyntaxKind.ObjectCreationExpression);
         }
 
-        private static List<IdentifierArgument> GetIdentifierArguments(InvocationExpressionSyntax methodCall)
+        private static void AnalyzeArguments(SyntaxNodeAnalysisContext analysisContext, ArgumentListSyntax argumentList,
+            Func<Location> getLocation)
         {
-            return methodCall.ArgumentList.Arguments
+            if (argumentList == null)
+            {
+                return;
+            }
+
+            var methodParameterLookup = new MethodParameterLookup(argumentList, analysisContext.SemanticModel);
+            var argumentParameterMappings = methodParameterLookup.GetAllArgumentParameterMappings()
+                .ToDictionary(pair => pair.Argument, pair => pair.Parameter);
+
+            var methodSymbol = methodParameterLookup.MethodSymbol;
+            if (methodSymbol == null)
+            {
+                return;
+            }
+
+            var parameterNames = argumentParameterMappings.Values
+                .Select(symbol => symbol.Name)
+                .Distinct()
+                .ToList();
+
+            var identifierArguments = GetIdentifierArguments(argumentList);
+            var identifierNames = identifierArguments
+                .Select(p => p.IdentifierName)
+                .ToList();
+
+            if (!parameterNames.Intersect(identifierNames).Any())
+            {
+                return;
+            }
+
+            var methodCallHasIssue = false;
+
+            for (var i = 0; !methodCallHasIssue && i < identifierArguments.Count; i++)
+            {
+                var identifierArgument = identifierArguments[i];
+                var identifierName = identifierArgument.IdentifierName;
+                var parameter = argumentParameterMappings[identifierArgument.ArgumentSyntax];
+                var parameterName = parameter.Name;
+
+                if (string.IsNullOrEmpty(identifierName) ||
+                    !parameterNames.Contains(identifierName))
+                {
+                    continue;
+                }
+
+                var positional = identifierArgument as PositionalIdentifierArgument;
+                if (positional != null &&
+                    (parameter.IsParams ||
+                     !identifierNames.Contains(parameterName) ||
+                     identifierName == parameterName))
+                {
+                    continue;
+                }
+
+                var named = identifierArgument as NamedIdentifierArgument;
+                if (named != null &&
+                    (!identifierNames.Contains(named.DeclaredName) || named.DeclaredName == named.IdentifierName))
+                {
+                    continue;
+                }
+
+                methodCallHasIssue = true;
+            }
+
+            if (methodCallHasIssue)
+            {
+                var secondaryLocations = methodSymbol.DeclaringSyntaxReferences
+                    .Select(s => GetIdentifierLocation(s.GetSyntax()))
+                    .WhereNotNull();
+
+                analysisContext.ReportDiagnostic(Diagnostic.Create(rule, getLocation(),
+                    additionalLocations: secondaryLocations,
+                    messageArgs: methodSymbol.Name));
+            }
+        }
+
+        private static List<IdentifierArgument> GetIdentifierArguments(ArgumentListSyntax argumentList)
+        {
+            return argumentList.Arguments
                 .Select((argument, index) =>
                 {
                     var identifier = argument.Expression as IdentifierNameSyntax;
@@ -158,6 +183,23 @@ namespace SonarAnalyzer.Rules.CSharp
                     return identifierArgument;
                 })
                 .ToList();
+        }
+
+        private static Location GetIdentifierLocation(SyntaxNode syntax)
+        {
+            var methodDeclaration = syntax as MethodDeclarationSyntax;
+            if (methodDeclaration != null)
+            {
+                return methodDeclaration.Identifier.GetLocation();
+            }
+
+            var constructorDeclaration = syntax as ConstructorDeclarationSyntax;
+            if (constructorDeclaration != null)
+            {
+                return constructorDeclaration.Identifier.GetLocation();
+            }
+
+            return null;
         }
 
         internal class IdentifierArgument

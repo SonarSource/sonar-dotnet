@@ -20,6 +20,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace SonarAnalyzer.Helpers
 {
@@ -75,6 +76,12 @@ namespace SonarAnalyzer.Helpers
             }
 
             return enum1HasNext == enum2HasNext;
+        }
+
+        public static IEnumerable<T> WhereNotNull<T>(this IEnumerable<T> enumerable)
+            where T : class
+        {
+            return enumerable.Where(e => e != null);
         }
     }
 }

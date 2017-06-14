@@ -28,13 +28,18 @@ namespace SonarAnalyzer.Helpers
     // todo: this should come from the Roslyn API (https://github.com/dotnet/roslyn/issues/9)
     internal class MethodParameterLookup
     {
-        private readonly InvocationExpressionSyntax invocation;
+        private readonly ArgumentListSyntax argumentList;
         public IMethodSymbol MethodSymbol { get; }
 
-        public MethodParameterLookup(InvocationExpressionSyntax invocation, SemanticModel semanticModel)
+        public MethodParameterLookup(InvocationExpressionSyntax invocation, SemanticModel semanticModel) :
+            this(invocation.ArgumentList, semanticModel)
         {
-            this.invocation = invocation;
-            MethodSymbol = semanticModel.GetSymbolInfo(invocation).Symbol as IMethodSymbol;
+        }
+
+        public MethodParameterLookup(ArgumentListSyntax argumentList, SemanticModel semanticModel)
+        {
+            this.argumentList = argumentList;
+            MethodSymbol = semanticModel.GetSymbolInfo(argumentList.Parent).Symbol as IMethodSymbol;
         }
 
         public static bool TryGetParameterSymbol(ArgumentSyntax argument, ArgumentListSyntax argumentList,
@@ -70,12 +75,12 @@ namespace SonarAnalyzer.Helpers
 
         public bool TryGetParameterSymbol(ArgumentSyntax argument, out IParameterSymbol parameter)
         {
-            return TryGetParameterSymbol(argument, invocation.ArgumentList, MethodSymbol, out parameter);
+            return TryGetParameterSymbol(argument, argumentList, MethodSymbol, out parameter);
         }
 
         internal IEnumerable<ArgumentParameterMapping> GetAllArgumentParameterMappings()
         {
-            foreach (var argument in invocation.ArgumentList.Arguments)
+            foreach (var argument in argumentList.Arguments)
             {
                 IParameterSymbol parameter;
                 if (TryGetParameterSymbol(argument, out parameter))
