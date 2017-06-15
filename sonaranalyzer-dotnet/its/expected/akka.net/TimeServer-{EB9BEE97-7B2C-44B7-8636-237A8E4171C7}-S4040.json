@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4040",
+"message":  "Change this normalization to 'String.ToUpperInvariant()'.",
+"location":  {
+"uri":  "akka.net\src\examples\TimeServer\TimeServer\Program.cs",
+"region":  {
+"startLine":  34,
+"startColumn":  29,
+"endLine":  34,
+"endColumn":  45
+}
+}
+}
+]
+}

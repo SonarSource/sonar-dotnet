@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S4040",
+"message":  "Change this normalization to 'String.ToUpperInvariant()'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Remote\RemoteSettings.cs",
+"region":  {
+"startLine":  25,
+"startColumn":  52,
+"endLine":  25,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S4040",
+"message":  "Change this normalization to 'String.ToUpperInvariant()'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Remote\RemoteSettings.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  52,
+"endLine":  26,
+"endColumn":  68
+}
+}
+}
+]
+}

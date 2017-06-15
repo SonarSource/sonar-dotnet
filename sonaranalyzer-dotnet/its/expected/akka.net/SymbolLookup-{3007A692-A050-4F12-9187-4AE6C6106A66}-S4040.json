@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S4040",
+"message":  "Change this normalization to 'String.ToUpperInvariant()'.",
+"location":  {
+"uri":  "akka.net\src\examples\Stocks\SymbolLookup\YahooFinance\StockUriHelper.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  85,
+"endLine":  21,
+"endColumn":  101
+}
+}
+},
+{
+"id":  "S4040",
+"message":  "Change this normalization to 'String.ToUpperInvariant()'.",
+"location":  {
+"uri":  "akka.net\src\examples\Stocks\SymbolLookup\YahooFinance\StockUriHelper.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  83,
+"endLine":  26,
+"endColumn":  99
+}
+}
+}
+]
+}
