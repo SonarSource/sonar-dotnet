@@ -34,4 +34,25 @@ namespace Tests.Diagnostics
             string b = "a" // Noncompliant {{This method signature overlaps the one defined on line 31, the default parameter value can't be used.}}
             ) {}
     }
+
+    public interface MyType { }
+
+    public interface Generics
+    {
+        void Foo<T>(string[] messages);
+        void Foo<T>(string[] messages, string delimiter = "\n"); // Noncompliant
+
+        void Foo2(string[] messages);
+        void Foo2<T>(string[] messages, string delimiter = "\n");
+
+        void Foo3<T>(T messages);
+        void Foo3<V>(V messages, string delimiter = "\n"); // Noncompliant
+
+        void Foo4<T>(IEnumerable<T> messages);
+        void Foo4<V>(IEnumerable<V> messages, string delimiter = "\n"); // Noncompliant
+
+        void Foo5<T>(IEnumerable<T> messages);
+        void Foo5<MyType>(MyType messages);
+        void Foo5(MyType messages, string delimiter = "\n");
+    }
 }

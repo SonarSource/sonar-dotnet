@@ -63,7 +63,8 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
 
                     var methods = methodSymbol.ContainingType.GetMembers(methodSymbol.Name)
-                        .OfType<IMethodSymbol>();
+                        .OfType<IMethodSymbol>()
+                        .Where(m => m.TypeParameters.Length == methodSymbol.TypeParameters.Length);
 
                     var hidingInfos = new List<ParameterHidingMethodInfo>();
 
@@ -147,18 +148,28 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             for (int i = 0; i < candidateHidingMethod.Parameters.Length; i++)
             {
-                if (!candidateHidingMethod.Parameters[i].Type.Equals(method.Parameters[i].Type))
+                var candidateParam = candidateHidingMethod.Parameters[i];
+                var methodParam = method.Parameters[i];
+
+                if (!Equals(candidateParam.Type, methodParam.Type) &&
+                    !AreTypeParameters(candidateParam, methodParam) &&
+                    !Equals(candidateParam.Type.OriginalDefinition, methodParam.Type.OriginalDefinition))
                 {
                     return false;
                 }
 
-                if (candidateHidingMethod.Parameters[i].IsOptional != method.Parameters[i].IsOptional)
+                if (candidateParam.IsOptional != methodParam.IsOptional)
                 {
                     return false;
                 }
             }
 
             return true;
+        }
+
+        private static bool AreTypeParameters(IParameterSymbol p1, IParameterSymbol p2)
+        {
+            return p1.Type.Is(TypeKind.TypeParameter) && p2.Type.Is(TypeKind.TypeParameter);
         }
     }
 }
