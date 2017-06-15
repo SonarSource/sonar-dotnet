@@ -55,6 +55,13 @@
     </developer>
   </developers>
 
+  <scm>
+    <connection>scm:git:git@github.com:SonarSource/sonar-csharp.git</connection>
+    <developerConnection>scm:git:git@github.com:SonarSource/sonar-csharp.git</developerConnection>
+    <url>https://github.com/SonarSource/sonar-csharp</url>
+    <tag>HEAD</tag>
+  </scm>
+
   <properties>
     <sonar.version>5.6</sonar.version>
     <maven.test.redirectTestOutputToFile>true</maven.test.redirectTestOutputToFile>
