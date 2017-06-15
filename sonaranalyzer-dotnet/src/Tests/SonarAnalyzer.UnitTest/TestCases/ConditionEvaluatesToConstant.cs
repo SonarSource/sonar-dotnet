@@ -1146,6 +1146,59 @@ namespace Tests.Diagnostics
             }
         }
 
+        void NullableHandling()
+        {
+            bool? x = null;
+            if (x == true)
+            {
+            }
+            else if (x == false)
+            {
+            }
+            else
+            {
+            }
+        }
+
+        void NullableHandling2(bool? x = null)
+        {
+            if (x == true)
+            {
+            }
+            else if (x == false)
+            {
+            }
+            else
+            {
+            }
+        }
+
+        void NullableHandling3(bool? x)
+        {
+            if (x == true)
+            {
+            }
+            else if (x == false)
+            {
+            }
+            else
+            {
+            }
+        }
+
+        void NullableHandling4(bool? x)
+        {
+            if (x == null)
+            {
+            }
+            else if (x == true)
+            {
+            }
+            else
+            {
+            }
+        }
+
         unsafe void Pointers(int* a, int* b)
         {
             if (a < b)
