@@ -542,7 +542,7 @@ namespace Tests.Diagnostics
             a ^= true;
             if (a) { } // Noncompliant {{Change this condition so that it does not always evaluate to 'true'.}}
         }
-        
+
         public void IsAsExpression()
         {
             object o = new object();
@@ -828,7 +828,30 @@ namespace Tests.Diagnostics
 
         void DefaultExpression(object o)
         {
-            if (default(o) == null) { } // Compliant
+            if (default(o) == null) { } // Noncompliant {{Change this condition so that it does not always evaluate to 'true'.}}
+            int? nullableInt = null;
+            if (nullableInt == null) { } // Noncompliant
+            if (default(int?) == null) { } // Noncompliant
+
+            if (default(System.IO.FileAccess) != null) { } // Noncompliant
+            if (default(float) != null) { } // Noncompliant
+        }
+
+        void DefaultGenericClassExpression<TClass>(TClass arg)
+            where TClass : class
+        {
+            if (default(TClass) == null) { } // Noncompliant {{Change this condition so that it does not always evaluate to 'true'.}}
+        }
+
+        void DefaultGenericStructExpression<TStruct>(TStruct arg)
+            where TStruct : struct
+        {
+            if (default(TStruct) != null) { } // Noncompliant {{Change this condition so that it does not always evaluate to 'true'.}}
+        }
+
+        void DefaultUnconstrainedGenericExpression<T>(T arg)
+        {
+            if (default(T) == null) { } // We know nothing about T
         }
 
         void ConditionalAccessNullPropagation(object o)
