@@ -45,8 +45,11 @@ $env:DEPLOY_PULL_REQUEST = "true"
 Set-Location sonaranalyzer-dotnet
 & .\build\Build.ps1 `
   -analyze `
+  -build `
   -test `
   -package `
+  -publish `
+  -configuration Release `
   -githubRepo $env:GITHUB_REPO `
   -githubToken $env:GITHUB_TOKEN `
   -githubPullRequest $env:PULL_REQUEST `
