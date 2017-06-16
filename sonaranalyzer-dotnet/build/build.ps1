@@ -5,7 +5,7 @@ param (
     [switch]$package = $false,
     [switch]$build = $false,
 	[switch]$publish = $false,
-    [ValidateSet("Release", "Debug")][string]$configuration = "Release",
+    [ValidateSet("Release", "Debug")][string]$configuration,
 
     [string]$githubRepo,
     [string]$githubToken,
