@@ -82,6 +82,25 @@ namespace SonarAnalyzer.Helpers
                 return overriddenSymbol != null;
             }
 
+            return TryGetInterfaceMember(symbol, out overriddenSymbol);
+        }
+
+        public static bool TryGetInterfaceMember<T>(this T symbol, out T overriddenSymbol)
+            where T : class, ISymbol
+        {
+            if (symbol == null ||
+                !CanSymbolBeInterfaceMemberOrOverride(symbol))
+            {
+                overriddenSymbol = null;
+                return false;
+            }
+
+            if (symbol.IsOverride)
+            {
+                overriddenSymbol = null;
+                return false;
+            }
+
             overriddenSymbol = symbol.ContainingType
                 .AllInterfaces
                 .SelectMany(@interface => @interface.GetMembers())

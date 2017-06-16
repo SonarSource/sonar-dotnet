@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace Tests.Diagnostics
 {
@@ -65,6 +64,34 @@ namespace Tests.Diagnostics
                     PreDrawEvent -= value;
                 }
             }
+        }
+    }
+
+    interface IFoo
+    {
+        int Foo { get; set; }
+
+        event EventHandler Bar;
+    }
+
+    public class Foo : IFoo
+    {
+        public int Foo
+        {
+            get { return 42; }
+            set { } // Compliant because EMPTY + interface implementation
+        }
+
+        public float Bar
+        {
+            get { return 42; }
+            set { } // Noncompliant
+        }
+
+        public event EventHandler Bar
+        {
+            add { } // Compliant because EMPTY + interface implementation
+            remove { } // Compliant because EMPTY + interface implementation
         }
     }
 }
