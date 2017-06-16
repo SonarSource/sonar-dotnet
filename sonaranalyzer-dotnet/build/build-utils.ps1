@@ -1,6 +1,7 @@
 Add-Type -AssemblyName "System.IO.Compression.FileSystem"
 
-$sonarqube_runner_version = "2.0"
+$sonarqube_runner_version = "3.0.0.629"
+
 $repo_path = (Resolve-Path (Join-Path $PSScriptRoot ".."))
 
 # Resolves the given relative to the repository path to absolute.
@@ -146,8 +147,7 @@ function Get-SonarQubeRunnerPath {
         return $sonarqube_runner_exe
     }
 
-    $downloadLink = "https://github.com/SonarSource-VisualStudio/sonar-msbuild-runner/releases/download/${sonarqube_runner_version}/MSBuild.SonarQube.Runner-${sonarqube_runner_version}.zip"
-
+    $downloadLink = "https://github.com/SonarSource/sonar-msbuild-runner/releases/download/${sonarqube_runner_version}/sonar-scanner-msbuild-${sonarqube_runner_version}.zip"
     $sonarqube_runner_zip = (Resolve-RepoPath "MSBuild.SonarQube.Runner.zip")
 
     (New-Object System.Net.WebClient).DownloadFile($downloadLink, $sonarqube_runner_zip)
