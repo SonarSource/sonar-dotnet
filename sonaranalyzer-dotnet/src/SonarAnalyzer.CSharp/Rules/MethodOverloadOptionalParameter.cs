@@ -146,30 +146,17 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool IsMethodHidingOriginal(IMethodSymbol candidateHidingMethod, IMethodSymbol method)
         {
-            for (int i = 0; i < candidateHidingMethod.Parameters.Length; i++)
-            {
-                var candidateParam = candidateHidingMethod.Parameters[i];
-                var methodParam = method.Parameters[i];
-
-                if (!Equals(candidateParam.Type, methodParam.Type) &&
-                    !AreTypeParameters(candidateParam, methodParam) &&
-                    !Equals(candidateParam.Type.OriginalDefinition, methodParam.Type.OriginalDefinition))
-                {
-                    return false;
-                }
-
-                if (candidateParam.IsOptional != methodParam.IsOptional)
-                {
-                    return false;
-                }
-            }
-
-            return true;
+            return candidateHidingMethod.Parameters
+                    .Zip(method.Parameters, (param1, param2) => new { param1, param2 })
+                    .All(p => AreParameterTypesEqual(p.param1, p.param2) &&
+                              p.param1.IsOptional == p.param2.IsOptional);
         }
 
-        private static bool AreTypeParameters(IParameterSymbol p1, IParameterSymbol p2)
+        private static bool AreParameterTypesEqual(IParameterSymbol p1, IParameterSymbol p2)
         {
-            return p1.Type.Is(TypeKind.TypeParameter) && p2.Type.Is(TypeKind.TypeParameter);
+            return Equals(p1.Type, p2.Type) ||
+                   p1.Type.Is(TypeKind.TypeParameter) && p2.Type.Is(TypeKind.TypeParameter) ||
+                   Equals(p1.Type.OriginalDefinition, p2.Type.OriginalDefinition);
         }
     }
 }

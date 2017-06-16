@@ -35,7 +35,12 @@ namespace Tests.Diagnostics
             ) {}
     }
 
-    public interface MyType { }
+    public interface MyType
+    {
+        void Print(string messages, int num, object something);
+
+        void Print(string messages, int num = 0, object something = null);
+    }
 
     public interface Generics
     {
