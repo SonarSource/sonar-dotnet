@@ -126,7 +126,8 @@ namespace SonarAnalyzer.Helpers
                 !symbol.IsVirtual &&
                 !symbol.GetAttributes().Any() &&
                 !symbol.ContainingType.IsInterface() &&
-                !symbol.IsInterfaceImplementationOrMemberOverride();
+                symbol.GetInterfaceMember() == null &&
+                symbol.GetOverriddenMember() == null;
         }
 
         private static SyntaxNodeSymbolSemanticModelTuple SelectNodeTuple(SyntaxNode node, SemanticModel semanticModel)
@@ -149,7 +150,8 @@ namespace SonarAnalyzer.Helpers
         {
             return IsRemovable(symbol, maxAccessibility) &&
                 !symbol.ContainingType.IsInterface() &&
-                !symbol.IsInterfaceImplementationOrMemberOverride();
+                symbol.GetInterfaceMember() == null &&
+                symbol.GetOverriddenMember() == null;
         }
     }
 }

@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -25,7 +26,6 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
-using System.Collections.Immutable;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -60,6 +60,15 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     if (accessorDeclaration.Body.Statements.Count == 1 &&
                         accessorDeclaration.Body.Statements.Single() is ThrowStatementSyntax)
+                    {
+                        return;
+                    }
+
+                    var interfaceMember = cbc.SemanticModel
+                        .GetDeclaredSymbol(accessorDeclaration)
+                        .GetInterfaceMember();
+                    if (interfaceMember != null &&
+                        accessorDeclaration.Body.Statements.Count == 0)
                     {
                         return;
                     }

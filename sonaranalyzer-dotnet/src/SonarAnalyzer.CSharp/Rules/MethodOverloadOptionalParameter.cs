@@ -19,13 +19,13 @@
  */
 
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.IO;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
-using System.Collections.Immutable;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -56,7 +56,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     var methodSymbol = c.Symbol as IMethodSymbol;
                     if (methodSymbol == null ||
-                        methodSymbol.IsInterfaceImplementationOrMemberOverride() ||
+                        methodSymbol.GetInterfaceMember() != null ||
+                        methodSymbol.GetOverriddenMember() != null ||
                         !methodSymbol.Parameters.Any(p => p.IsOptional))
                     {
                         return;
