@@ -96,19 +96,6 @@ namespace SonarAnalyzer.Rules.CSharp
                                 cast.Type.GetLocation(), c);
                         },
                         SyntaxKind.CastExpression);
-
-                    compilationStartContext.RegisterSyntaxNodeAction(
-                        c =>
-                        {
-                            var cast = (BinaryExpressionSyntax)c.Node;
-                            var interfaceType = c.SemanticModel.GetTypeInfo(cast.Right).Type as INamedTypeSymbol;
-                            var expressionType = c.SemanticModel.GetTypeInfo(cast.Left).Type as INamedTypeSymbol;
-
-                            CheckTypesForInvalidCast(interfaceType, expressionType, interfaceImplementerMappings,
-                                cast.Right.GetLocation(), c);
-                        },
-                        SyntaxKind.AsExpression,
-                        SyntaxKind.IsExpression);
                 });
 
             context.RegisterExplodedGraphBasedAnalysis((e, c) => CheckEmptyNullableCast(e, c));
