@@ -64,6 +64,11 @@ public class XUnitTestResultsFileParser implements UnitTestResultsParser {
     }
 
     private void handleAssemblyTag(XmlParserHelper xmlParserHelper) {
+      if (xmlParserHelper.stream().getAttributeCount() == 0) {
+        LOG.warn("One of the assemblies contains no test result, please make sure this is expected.");
+        return;
+      }
+
       int total = xmlParserHelper.getRequiredIntAttribute("total");
       int passed = xmlParserHelper.getRequiredIntAttribute("passed");
       int failed = xmlParserHelper.getRequiredIntAttribute("failed");
