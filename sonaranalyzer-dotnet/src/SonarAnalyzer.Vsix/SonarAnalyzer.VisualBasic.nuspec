@@ -23,9 +23,9 @@
   </metadata>
   <files>
     <!-- If these are changed than the build\release.ps1 should also be changed -->
-    <file src="bin\Release\SonarAnalyzer.dll" target="analyzers" />
-    <file src="bin\Release\SonarAnalyzer.VisualBasic.dll" target="analyzers" />
-    <file src="bin\Release\Google.Protobuf.dll" target="analyzers" />
+    <file src="bin\$configuration$\SonarAnalyzer.dll" target="analyzers" />
+    <file src="bin\$configuration$\SonarAnalyzer.VisualBasic.dll" target="analyzers" />
+    <file src="bin\$configuration$\Google.Protobuf.dll" target="analyzers" />
     <file src="tools-vbnet\*.ps1" target="tools\" />
   </files>
 </package>
