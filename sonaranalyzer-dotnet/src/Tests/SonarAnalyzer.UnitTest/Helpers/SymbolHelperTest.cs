@@ -18,12 +18,12 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Linq;
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Helpers;
-using System.Linq;
 
 namespace SonarAnalyzer.UnitTest.Helpers
 {
@@ -139,26 +139,26 @@ namespace NS
             var method = baseClassDeclaration.DescendantNodes().OfType<MethodDeclarationSyntax>()
                 .First(m => m.Identifier.ValueText == "Method1");
             var symbol = semanticModel.GetDeclaredSymbol(method);
-
-            symbol.IsInterfaceImplementationOrMemberOverride().Should().BeFalse();
+            symbol.GetInterfaceMember().Should().BeNull();
+            symbol.GetOverriddenMember().Should().BeNull();
 
             var property = derivedClassDeclaration2.DescendantNodes().OfType<PropertyDeclarationSyntax>()
                 .First(m => m.Identifier.ValueText == "Property");
             symbol = semanticModel.GetDeclaredSymbol(property);
 
-            symbol.IsInterfaceImplementationOrMemberOverride().Should().BeTrue();
+            symbol.GetOverriddenMember().Should().NotBeNull();
 
             property = derivedClassDeclaration2.DescendantNodes().OfType<PropertyDeclarationSyntax>()
                 .First(m => m.Identifier.ValueText == "Property2");
             symbol = semanticModel.GetDeclaredSymbol(property);
 
-            symbol.IsInterfaceImplementationOrMemberOverride().Should().BeTrue();
+            symbol.GetInterfaceMember().Should().NotBeNull();
 
             method = derivedClassDeclaration2.DescendantNodes().OfType<MethodDeclarationSyntax>()
                 .First(m => m.Identifier.ValueText == "Method3");
             symbol = semanticModel.GetDeclaredSymbol(method);
 
-            symbol.IsInterfaceImplementationOrMemberOverride().Should().BeTrue();
+            symbol.GetInterfaceMember().Should().NotBeNull();
         }
 
         [TestMethod]
@@ -167,17 +167,15 @@ namespace NS
             var method = baseClassDeclaration.DescendantNodes().OfType<MethodDeclarationSyntax>()
                 .First(m => m.Identifier.ValueText == "Method1");
             var methodSymbol = (IMethodSymbol)semanticModel.GetDeclaredSymbol(method);
-            IMethodSymbol overriddenMethod;
-            methodSymbol.TryGetOverriddenOrInterfaceMember(out overriddenMethod)
-                .Should().BeFalse();
+            var overriddenMethod = methodSymbol.GetOverriddenMember();
+            overriddenMethod.Should().BeNull();
 
             var property = derivedClassDeclaration2.DescendantNodes().OfType<PropertyDeclarationSyntax>()
                 .First(p => p.Identifier.ValueText == "Property");
             var propertySymbol = (IPropertySymbol)semanticModel.GetDeclaredSymbol(property);
 
-            IPropertySymbol overriddenProperty;
-            propertySymbol.TryGetOverriddenOrInterfaceMember(out overriddenProperty)
-                .Should().BeTrue();
+            var overriddenProperty = propertySymbol.GetOverriddenMember();
+            overriddenProperty.Should().NotBeNull();
 
             property = baseClassDeclaration.DescendantNodes().OfType<PropertyDeclarationSyntax>()
                 .First(p => p.Identifier.ValueText == "Property");
@@ -187,8 +185,8 @@ namespace NS
                 .First(m => m.Identifier.ValueText == "Method3");
             methodSymbol = (IMethodSymbol)semanticModel.GetDeclaredSymbol(method);
 
-            methodSymbol.TryGetOverriddenOrInterfaceMember(out overriddenMethod)
-                .Should().BeTrue();
+            overriddenMethod = methodSymbol.GetInterfaceMember();
+            overriddenMethod.Should().NotBeNull();
 
             method = interfaceDeclaration.DescendantNodes().OfType<MethodDeclarationSyntax>()
                 .First(m => m.Identifier.ValueText == "Method3");

@@ -50,7 +50,8 @@ namespace SonarAnalyzer.Rules.Common
 
                     if (symbol == null ||
                         !symbol.IsPublicApi() ||
-                        symbol.IsInterfaceImplementationOrMemberOverride())
+                        symbol.GetInterfaceMember() != null ||
+                        symbol.GetOverriddenMember() != null)
                     {
                         return;
                     }

@@ -19,13 +19,13 @@
  */
 
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
-using System.Collections.Immutable;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -85,7 +85,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 return true;
             }
 
-            return !declaredSymbol.IsInterfaceImplementationOrMemberOverride();
+            return declaredSymbol.GetOverriddenMember() == null &&
+                   declaredSymbol.GetInterfaceMember() == null;
         }
 
         private static readonly Dictionary<SyntaxKind, string> Mapping = new Dictionary<SyntaxKind, string>

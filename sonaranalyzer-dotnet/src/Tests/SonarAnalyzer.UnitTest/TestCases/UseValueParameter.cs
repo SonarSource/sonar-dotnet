@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace Tests.Diagnostics
 {
@@ -65,6 +64,55 @@ namespace Tests.Diagnostics
                     PreDrawEvent -= value;
                 }
             }
+        }
+    }
+
+    interface IFoo
+    {
+        int Foo { get; set; }
+
+        event EventHandler Bar;
+    }
+
+    public class Foo : IFoo
+    {
+        public virtual int Foo
+        {
+            get { return 42; }
+            set { } // Compliant because interface implementation
+        }
+
+        public virtual float Bar
+        {
+            get { return 42; }
+            set { } // Noncompliant
+        }
+
+        public virtual event EventHandler Bar
+        {
+            add { } // Compliant because interface implementation
+            remove { } // Compliant because interface implementation
+        }
+    }
+
+    public class Bar : Foo
+    {
+        public override int Foo
+        {
+            get { return 42; }
+            set { } // Noncompliant
+        }
+
+        public override float Bar
+        {
+            get { return 42; }
+            set { } // Noncompliant
+        }
+
+        public override event EventHandler Bar
+        {
+            add { } // Noncompliant
+            remove { } // Noncompliant
         }
     }
 }
