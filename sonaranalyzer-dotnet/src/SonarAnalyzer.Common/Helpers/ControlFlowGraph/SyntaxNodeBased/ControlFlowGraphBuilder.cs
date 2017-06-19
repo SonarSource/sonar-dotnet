@@ -67,7 +67,7 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
 
         internal IControlFlowGraph Build()
         {
-            currentBlock = CreateBlock(ExitBlock);
+            currentBlock = CreateBlock(successor: ExitBlock);
 
             Build(node);
 

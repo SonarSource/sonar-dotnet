@@ -152,7 +152,7 @@ namespace Tests.Diagnostics
 
     class Person9
     {
-        int year = 1980; // Compliant, try statements are not handled
+        int year; // Fixed
         public Person9()
         {
             try
@@ -161,7 +161,6 @@ namespace Tests.Diagnostics
             }
             catch (Exception)
             {
-
                 throw;
             }
         }

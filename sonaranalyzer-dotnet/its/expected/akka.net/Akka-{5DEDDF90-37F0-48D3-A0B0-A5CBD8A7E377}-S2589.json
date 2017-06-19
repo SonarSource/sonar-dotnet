@@ -4,6 +4,19 @@
 "id":  "S2589",
 "message":  "Change this condition so that it does not always evaluate to 'true'.",
 "location":  {
+"uri":  "akka.net\src\core\Akka\Actor\ActorCell.FaultHandling.cs",
+"region":  {
+"startLine":  60,
+"startColumn":  21,
+"endLine":  60,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S2589",
+"message":  "Change this condition so that it does not always evaluate to 'true'.",
+"location":  {
 "uri":  "akka.net\src\core\Akka\Util\MonoConcurrentQueue.cs",
 "region":  {
 "startLine":  157,

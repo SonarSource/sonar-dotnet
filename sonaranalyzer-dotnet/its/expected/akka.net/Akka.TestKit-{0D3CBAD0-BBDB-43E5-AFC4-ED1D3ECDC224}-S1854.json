@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 'stop'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.TestKit\TestKitBase_AwaitAssert.cs",
+"region":  {
+"startLine":  36,
+"startColumn":  22,
+"endLine":  36,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 't'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.TestKit\TestKitBase_AwaitAssert.cs",
+"region":  {
+"startLine":  37,
+"startColumn":  19,
+"endLine":  37,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 't'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.TestKit\TestKitBase_AwaitAssert.cs",
+"region":  {
+"startLine":  51,
+"startColumn":  19,
+"endLine":  51,
+"endColumn":  52
+}
+}
+}
+]
+}
