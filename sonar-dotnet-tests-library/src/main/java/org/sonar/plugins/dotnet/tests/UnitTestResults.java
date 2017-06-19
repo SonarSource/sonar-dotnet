@@ -51,7 +51,7 @@ public class UnitTestResults {
   }
 
   double passedPercentage() {
-    return passed * 100.0 / tests();
+    return tests != 0 ? (passed * 100.0 / tests) : 0;
   }
 
   public int skipped() {

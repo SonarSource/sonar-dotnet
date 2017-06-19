@@ -22,6 +22,8 @@ package org.sonar.plugins.dotnet.tests;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+import org.sonar.api.utils.log.LogTester;
+import org.sonar.api.utils.log.LoggerLevel;
 
 import java.io.File;
 
@@ -32,6 +34,9 @@ public class XUnitTestResultsFileParserTest {
 
   @Rule
   public ExpectedException thrown = ExpectedException.none();
+
+  @Rule
+  public LogTester logTester = new LogTester();
 
   @Test
   public void no_counters() {
@@ -95,4 +100,17 @@ public class XUnitTestResultsFileParserTest {
     assertThat(results.executionTime()).isNull();
   }
 
+  @Test
+  public void empty() {
+    UnitTestResults results = new UnitTestResults();
+    new XUnitTestResultsFileParser().accept(new File("src/test/resources/xunit/empty.xml"), results);
+
+    assertThat(logTester.logs(LoggerLevel.WARN)).contains("One of the assemblies contains no test result, please make sure this is expected.");
+    assertThat(results.tests()).isEqualTo(0);
+    assertThat(results.passedPercentage()).isEqualTo(0);
+    assertThat(results.skipped()).isEqualTo(0);
+    assertThat(results.failures()).isEqualTo(0);
+    assertThat(results.errors()).isEqualTo(0);
+    assertThat(results.executionTime()).isNull();
+  }
 }
