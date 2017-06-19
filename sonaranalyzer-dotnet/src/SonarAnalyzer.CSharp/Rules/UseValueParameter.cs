@@ -64,11 +64,11 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    ISymbol symbol2;
-                    var isImplementingInterface = cbc.SemanticModel
+                    var interfaceMember = cbc.SemanticModel
                         .GetDeclaredSymbol(accessorDeclaration)
-                        .TryGetInterfaceMember(out symbol2);
-                    if (isImplementingInterface && accessorDeclaration.Body.Statements.Count == 0)
+                        .GetInterfaceMember();
+                    if (interfaceMember != null &&
+                        accessorDeclaration.Body.Statements.Count == 0)
                     {
                         return;
                     }

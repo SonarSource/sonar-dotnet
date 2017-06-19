@@ -75,7 +75,8 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             if (ClassName.IsTypeComRelated(symbol.ContainingType) ||
-                symbol.IsInterfaceImplementationOrMemberOverride() ||
+                symbol.GetInterfaceMember() != null ||
+                symbol.GetOverriddenMember() != null ||
                 symbol.IsExtern)
             {
                 return;

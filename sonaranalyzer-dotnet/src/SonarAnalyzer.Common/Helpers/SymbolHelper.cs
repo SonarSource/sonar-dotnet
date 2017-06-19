@@ -60,58 +60,39 @@ namespace SonarAnalyzer.Helpers
             }
         }
 
-        public static bool IsInterfaceImplementationOrMemberOverride(this ISymbol symbol)
-        {
-            ISymbol overriddenSymbol;
-            return TryGetOverriddenOrInterfaceMember(symbol, out overriddenSymbol);
-        }
-
-        public static bool TryGetOverriddenOrInterfaceMember<T>(this T symbol, out T overriddenSymbol)
+        public static T GetInterfaceMember<T>(this T symbol)
             where T : class, ISymbol
         {
-            if (symbol == null ||
-                !CanSymbolBeInterfaceMemberOrOverride(symbol))
+            if (!CanSymbolBeInterfaceMemberOrOverride(symbol))
             {
-                overriddenSymbol = null;
-                return false;
+                return null;
             }
 
             if (symbol.IsOverride)
             {
-                overriddenSymbol = GetOverriddenMember(symbol);
-                return overriddenSymbol != null;
+                return null;
             }
 
-            return TryGetInterfaceMember(symbol, out overriddenSymbol);
-        }
-
-        public static bool TryGetInterfaceMember<T>(this T symbol, out T overriddenSymbol)
-            where T : class, ISymbol
-        {
-            if (symbol == null ||
-                !CanSymbolBeInterfaceMemberOrOverride(symbol))
-            {
-                overriddenSymbol = null;
-                return false;
-            }
-
-            if (symbol.IsOverride)
-            {
-                overriddenSymbol = null;
-                return false;
-            }
-
-            overriddenSymbol = symbol.ContainingType
+            return symbol.ContainingType
                 .AllInterfaces
                 .SelectMany(@interface => @interface.GetMembers())
                 .OfType<T>()
                 .FirstOrDefault(member => symbol.Equals(symbol.ContainingType.FindImplementationForInterfaceMember(member)));
-            return overriddenSymbol != null;
         }
 
-        private static T GetOverriddenMember<T>(this T symbol)
+        public static T GetOverriddenMember<T>(this T symbol)
             where T : class, ISymbol
         {
+            if (!CanSymbolBeInterfaceMemberOrOverride(symbol))
+            {
+                return null;
+            }
+
+            if (!symbol.IsOverride)
+            {
+                return null;
+            }
+
             switch (symbol.Kind)
             {
                 case SymbolKind.Method:
@@ -127,7 +108,7 @@ namespace SonarAnalyzer.Helpers
             }
         }
 
-        private static bool CanSymbolBeInterfaceMemberOrOverride(ISymbol symbol)
+        public static bool CanSymbolBeInterfaceMemberOrOverride(ISymbol symbol)
         {
             return symbol is IMethodSymbol ||
                 symbol is IPropertySymbol ||
@@ -166,7 +147,8 @@ namespace SonarAnalyzer.Helpers
         {
             return !symbol.IsAbstract &&
                 !symbol.IsVirtual &&
-                !symbol.IsInterfaceImplementationOrMemberOverride();
+                symbol.GetInterfaceMember() == null &&
+                symbol.GetOverriddenMember() == null;
         }
 
         public static bool IsProbablyEventHandler(this IMethodSymbol methodSymbol)
