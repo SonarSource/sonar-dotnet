@@ -69,6 +69,7 @@
     <url>https://github.com/SonarSource/sonar-csharp</url>
     <tag>HEAD</tag>
   </scm>
+
   <issueManagement>
     <system>GitHub Issues</system>
     <url>https://github.com/SonarSource/sonar-csharp/issues</url>

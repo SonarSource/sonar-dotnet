@@ -40,8 +40,8 @@
   </scm>
 
   <issueManagement>
-    <system>JIRA</system>
-    <url>https://jira.sonarsource.com/browse/SLVS</url>
+    <system>GitHub Issues</system>
+    <url>https://github.com/SonarSource/sonar-csharp/issues</url>
   </issueManagement>
 
   <properties>

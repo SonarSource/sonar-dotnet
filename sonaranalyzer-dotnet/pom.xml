@@ -30,15 +30,15 @@
   </modules>
 
   <scm> 
-    <connection>scm:git:git@github.com:SonarSource-VisualStudio/sonaranalyzer-dotnet.git</connection>
-    <developerConnection>scm:git:git@github.com:SonarSource-VisualStudio/sonaranalyzer-dotnet.git</developerConnection>
-    <url>https://github.com/SonarSource-VisualStudio/sonaranalyzer-dotnet</url>
+    <connection>scm:git:git@github.com:SonarSource/sonar-csharp.git</connection>
+    <developerConnection>scm:git:git@github.com:SonarSource/sonar-csharp.git</developerConnection>
+    <url>https://github.com/SonarSource/sonar-csharp</url>
     <tag>HEAD</tag>
   </scm>
 
   <issueManagement>
-    <system>JIRA</system>
-    <url>https://jira.sonarsource.com/browse/SLVS</url>
+    <system>GitHub Issues</system>
+    <url>https://github.com/SonarSource/sonar-csharp/issues</url>
   </issueManagement>
 
   <properties>
