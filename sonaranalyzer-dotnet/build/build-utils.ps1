@@ -192,18 +192,18 @@ function Get-Version {
     return $versionProps.Project.PropertyGroup.MainVersion + "." + $versionProps.Project.PropertyGroup.BuildNumber
 }
 
-function Pack-Nugets {
+function Pack-Nugets([ValidateSet("Release", "Debug")][string]$configuration) {
     Write-Header "Packing nugets..."
 
     $nuget_exe = Get-NuGetPath
 
     Get-ChildItem (Resolve-RepoPath "src") -Recurse *.nuspec `
         | ForEach-Object {
-        $output = (Join-Path $_.DirectoryName "bin\Release")
+        $output = (Join-Path $_.DirectoryName "bin\${configuration}")
 
         Write-Host "Creating NuGet package: " + $_.FullName
 
-        & $nuget_exe pack $_.FullName -NoPackageAnalysis -OutputDirectory $output
+        & $nuget_exe pack $_.FullName -NoPackageAnalysis -OutputDirectory $output -Prop Configuration=$configuration
         Test-ExitCode "ERROR: NuGet package creation FAILED."
     }
 }

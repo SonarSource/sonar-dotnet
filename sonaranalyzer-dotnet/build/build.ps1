@@ -3,7 +3,9 @@ param (
     [switch]$analyze = $false,
     [switch]$test = $false,
     [switch]$package = $false,
-    [switch]$debugBuild = $false,
+    [switch]$build = $false,
+	[switch]$publish = $false,
+    [ValidateSet("Release", "Debug")][string]$configuration,
 
     [string]$githubRepo,
     [string]$githubToken,
@@ -17,7 +19,7 @@ param (
     [string]$sonarQubeToken = $null,
 
     [string]$solutionName = "SonarAnalyzer.sln",
-    [string]$certificatePath,
+    [string]$certificatePath = $null,
 
     [string]$artifactoryUrl = "https://repox.sonarsource.com/api/nuget",
     [string]$artifactoryUser = $env:ARTIFACTORY_DEPLOY_USERNAME,
@@ -48,15 +50,11 @@ function Queue-QaBuild() {
     Write-Host "version.properties content is '{$content}'"
 }
 
-function Generate-Metadata {
+function Generate-Metadata([ValidateSet("Release", "Debug")][string]$configuration) {
     Write-Header "Generating rules metadata..."
 
     #Generate the XML descriptor files for the C# plugin
-    $generatorPath = (Resolve-RepoPath "src\SonarAnalyzer.RuleDescriptorGenerator\bin\Release")
-    if (-Not (Test-Path $generatorPath)) {
-        Write-Warning "Using debug build of SonarAnalyzer.RuleDescriptorGenerator.exe"
-        $generatorPath = (Resolve-RepoPath "src\SonarAnalyzer.RuleDescriptorGenerator\bin\Debug")
-    }
+    $generatorPath = (Resolve-RepoPath "src\SonarAnalyzer.RuleDescriptorGenerator\bin\${configuration}")
 
     Write-Host "Executing generator ${generatorPath}"
 
@@ -118,11 +116,12 @@ else {
     $skippedAnalysis = $true
 }
 
-if ($debugBuild) {
-    Build-Solution (Resolve-RepoPath $solutionName)
-}
-else {
-    Build-ReleaseSolution (Resolve-RepoPath $solutionName) $certificatePath
+if ($build) {
+    if ($configuration -Eq "Debug") {
+        Build-Solution (Resolve-RepoPath $solutionName)
+    } else {
+        Build-ReleaseSolution (Resolve-RepoPath $solutionName) $certificatePath
+    }
 }
 
 if ($test) {
@@ -134,8 +133,11 @@ if (-Not $skippedAnalysis) {
 }
 
 if ($package) {
-    Generate-Metadata
-    Pack-Nugets
+    Generate-Metadata($configuration)
+    Pack-Nugets($configuration)
+}
+
+if ($publish) {
     Publish-Packages
     Update-MavenArtifacts (Get-Version)
 }
