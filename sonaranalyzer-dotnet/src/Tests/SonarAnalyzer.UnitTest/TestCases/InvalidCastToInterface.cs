@@ -136,13 +136,13 @@ namespace Tests.Diagnostics
     interface IBar { }
 
     class Foo : IFoo { }
-    class Bar : IBar { }
+    class Bar : IBar { public Bar(string foo) { } }
     class FooBar : IFoo, IBar { }
     sealed class FinalBar : IBar { }
 
     class Other
     {
-        public void Method()
+        public void Method<T>(T generic) where T : new()
         {
             IFoo ifoo;
             IBar ibar;
@@ -154,21 +154,30 @@ namespace Tests.Diagnostics
 
             o = (IFoo)bar;  // Noncompliant
             o = (IFoo)ibar;
-            o = (Foo)bar;
+            o = (Foo)bar; // Compliant; causes compiler error
             o = (Foo)ibar;
-            o = (IFoo)finalbar;  // Noncompliant
+            o = (IFoo)finalbar; // Compliant; causes compiler error
+            o = (IFoo)T;
+            o = (T)IFoo;
+            o = (Bar)generic; // Compliant; causes compiler error
 
             o = bar  as IFoo;
             o = ibar as IFoo;
             o = bar  as Foo;
             o = ibar as Foo;
             o = finalbar as IFoo;
+            o = T as IFoo;
+            o = IFoo as T;
+            o = generic as Bar;
 
             o = bar  is IFoo;
             o = ibar is IFoo;
             o = bar  is Foo;
             o = ibar is Foo;
             o = finalbar is IFoo;
+            o = T is IFoo;
+            o = IFoo is T;
+            o = generic is Bar;
         }
     }
 }

@@ -183,7 +183,8 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             if (interfaceImplementerMappings.ContainsKey(interfaceType.OriginalDefinition) &&
-                !interfaceImplementerMappings[interfaceType.OriginalDefinition].Any(t => t.DerivesOrImplements(expressionType.OriginalDefinition)))
+                !interfaceImplementerMappings[interfaceType.OriginalDefinition].Any(t => t.DerivesOrImplements(expressionType.OriginalDefinition)) &&
+                !expressionType.IsSealed)
             {
                 ReportIssue(interfaceType, expressionType, issueLocation, context);
             }
