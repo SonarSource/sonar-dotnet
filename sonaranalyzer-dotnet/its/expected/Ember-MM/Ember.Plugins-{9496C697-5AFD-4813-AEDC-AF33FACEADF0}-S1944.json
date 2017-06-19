@@ -6,49 +6,10 @@
 "location":  {
 "uri":  "Ember-MM\Ember.Plugins\PluginManager.cs",
 "region":  {
-"startLine":  196,
-"startColumn":  42,
-"endLine":  196,
-"endColumn":  53
-}
-}
-},
-{
-"id":  "S1944",
-"message":  "Review this cast; in this project there's no type that implements both 'IPlugin' and 'IDisposable'.",
-"location":  {
-"uri":  "Ember-MM\Ember.Plugins\PluginManager.cs",
-"region":  {
 "startLine":  198,
 "startColumn":  51,
 "endLine":  198,
 "endColumn":  62
-}
-}
-},
-{
-"id":  "S1944",
-"message":  "Review this cast; in this project there's no type that implements both 'IPlugin' and 'IMovieInfoScraper'.",
-"location":  {
-"uri":  "Ember-MM\Ember.Plugins\Scraper\MovieScraperManager.cs",
-"region":  {
-"startLine":  80,
-"startColumn":  54,
-"endLine":  80,
-"endColumn":  71
-}
-}
-},
-{
-"id":  "S1944",
-"message":  "Review this cast; in this project there's no type that implements both 'IPlugin' and 'IMovieImageScraper'.",
-"location":  {
-"uri":  "Ember-MM\Ember.Plugins\Scraper\MovieScraperManager.cs",
-"region":  {
-"startLine":  120,
-"startColumn":  54,
-"endLine":  120,
-"endColumn":  72
 }
 }
 }

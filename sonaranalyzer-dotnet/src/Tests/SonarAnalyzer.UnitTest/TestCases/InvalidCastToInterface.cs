@@ -39,9 +39,8 @@ namespace Tests.Diagnostics
             var myclass1 = new MyClass1();
             var x = (IMyInterface)myclass1; // Noncompliant
 //                   ^^^^^^^^^^^^
-            x = myclass1 as IMyInterface; // Noncompliant
-//                          ^^^^^^^^^^^^
-            bool b = myclass1 is IMyInterface; // Noncompliant {{Review this cast; in this project there's no type that extends 'MyClass1' and implements 'IMyInterface'.}}
+            x = myclass1 as IMyInterface;
+            bool b = myclass1 is IMyInterface;
 
             var arr = new MyClass1[10];
             var arr2 = (IMyInterface[])arr;
@@ -130,6 +129,55 @@ namespace Tests.Diagnostics
         public static explicit operator NullableTest(int? i)
         {
             return null;
+        }
+    }
+
+    interface IFoo { }
+    interface IBar { }
+
+    class Foo : IFoo { }
+    class Bar : IBar { public Bar(string foo) { } }
+    class FooBar : IFoo, IBar { }
+    sealed class FinalBar : IBar { }
+
+    class Other
+    {
+        public void Method<T>(T generic) where T : new()
+        {
+            IFoo ifoo;
+            IBar ibar;
+            Foo foo;
+            Bar bar;
+            FooBar foobar;
+            FinalBar finalbar;
+            object o;
+
+            o = (IFoo)bar;  // Noncompliant
+            o = (IFoo)ibar;
+            o = (Foo)bar; // Compliant; causes compiler error
+            o = (Foo)ibar;
+            o = (IFoo)finalbar; // Compliant; causes compiler error
+            o = (IFoo)T;
+            o = (T)IFoo;
+            o = (Bar)generic; // Compliant; causes compiler error
+
+            o = bar  as IFoo;
+            o = ibar as IFoo;
+            o = bar  as Foo;
+            o = ibar as Foo;
+            o = finalbar as IFoo;
+            o = T as IFoo;
+            o = IFoo as T;
+            o = generic as Bar;
+
+            o = bar  is IFoo;
+            o = ibar is IFoo;
+            o = bar  is Foo;
+            o = ibar is Foo;
+            o = finalbar is IFoo;
+            o = T is IFoo;
+            o = IFoo is T;
+            o = generic is Bar;
         }
     }
 }
