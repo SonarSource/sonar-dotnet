@@ -68,7 +68,6 @@
     <sonar.pluginName>C#</sonar.pluginName>
     <sonar.pluginClass>org.sonar.plugins.csharp.CSharpPlugin</sonar.pluginClass>
     <sonarAnalyzer.workDirectory>${project.build.directory}/analyzer</sonarAnalyzer.workDirectory>
-    <analyzer.build.conf>Release</analyzer.build.conf>
   </properties>
 
   <dependencies>
@@ -171,57 +170,136 @@
           </execution>
         </executions>
       </plugin>
-
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-antrun-plugin</artifactId>
-        <version>1.7</version>
-        <executions>
-          <execution>
-            <id>copy-analyzer-xml</id>
-            <phase>validate</phase>
-            <configuration>
-              <exportAntProperties>true</exportAntProperties>
-              <tasks>
-                <!-- ITs requires the SonarAnalyzer-VERSION.zip to be present so don't remove these lines -->
-                <copy todir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.CSharp">
-                  <fileset dir="${project.build.directory}/../../sonaranalyzer-dotnet/src/SonarAnalyzer.Vsix/bin/${analyzer.build.conf}/">
-                    <include name="SonarAnalyzer.dll"/>
-                    <include name="SonarAnalyzer.CSharp.dll"/>
-                    <include name="Google.Protobuf.dll"/>
-                  </fileset>
-                </copy>
-                <zip destfile="${sonarAnalyzer.workDirectory}/static/SonarAnalyzer-${project.version}.zip"
-                     basedir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.CSharp"/>
-
-                <!-- SQALE XML in sslr requires a resource to read from -->
-                <copy todir="${sonarAnalyzer.workDirectory}/org/sonar/plugins/csharp">
-                  <fileset dir="${project.build.directory}/../../sonaranalyzer-dotnet/src/SonarAnalyzer.RuleDescriptorGenerator/bin/${analyzer.build.conf}/cs">
-                    <include name="rules.xml"/>
-                    <include name="profile.xml"/>
-                    <include name="sqale.xml"/>
-                  </fileset>
-                </copy>
-
-                <echo file="${sonarAnalyzer.workDirectory}/static/version.txt" message="${project.version}" encoding="utf-8" />
-              </tasks>
-
-            </configuration>
-            <goals>
-              <goal>run</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
     </plugins>
   </build>
 
   <profiles>
     <profile>
-      <id>debug</id>
+      <id>local-analyzer</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
       <properties>
-        <analyzer.build.conf>Debug</analyzer.build.conf>
+        <analyzer.configuration>Release</analyzer.configuration>
       </properties>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-antrun-plugin</artifactId>
+            <version>1.7</version>
+            <executions>
+              <execution>
+                <id>copy-analyzer-xml</id>
+                <phase>validate</phase>
+                <configuration>
+                  <exportAntProperties>true</exportAntProperties>
+                  <tasks>
+                    <copy todir="${sonarAnalyzer.workDirectory}/org/sonar/plugins/csharp">
+                      <fileset dir="${project.build.directory}/../../sonaranalyzer-dotnet/src/SonarAnalyzer.RuleDescriptorGenerator/bin/${analyzer.configuration}/cs">
+                        <include name="rules.xml"/>
+                        <include name="profile.xml"/>
+                        <include name="sqale.xml"/>
+                      </fileset>
+                    </copy>
+
+                    <echo file="${sonarAnalyzer.workDirectory}/static/version.txt" message="${project.version}" encoding="utf-8" />
+                  </tasks>
+                </configuration>
+                <goals>
+                  <goal>run</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
+    <profile>
+      <id>download-analyzer</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-enforcer-plugin</artifactId>
+            <version>1.4.1</version>
+            <executions>
+              <execution>
+                <id>enforce-property</id>
+                <goals>
+                  <goal>enforce</goal>
+                </goals>
+                <configuration>
+                  <rules>
+                    <requireProperty>
+                      <property>analyzer.version</property>
+                      <message>You must set the property analyzer.version to specify the version of the NuGet artifacts to download.</message>
+                      <regex>^(\d+)\.(\d+)\.(\d+)\.(\d+)$</regex>
+                      <regex>.+</regex>
+                      <regexMessage>The analyzer.version property must have 4 digits.</regexMessage>
+                    </requireProperty>
+                  </rules>
+                  <fail>true</fail>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <artifactId>maven-dependency-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>download-artifacts</id>
+                <phase>validate</phase>
+                <goals>
+                  <goal>copy</goal>
+                </goals>
+                <configuration>
+                  <artifactItems>
+                    <artifactItem>
+                      <groupId>${project.groupId}</groupId>
+                      <artifactId>SonarAnalyzer.RuleDocGenerator.CSharp</artifactId>
+                      <version>${analyzer.version}</version>
+                      <type>nupkg</type>
+                      <overWrite>true</overWrite>
+                    </artifactItem>
+                  </artifactItems>
+                  <outputDirectory>${sonarAnalyzer.workDirectory}</outputDirectory>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-antrun-plugin</artifactId>
+            <version>1.7</version>
+            <executions>
+              <execution>
+                <id>unzip-copy-analyzer-xml</id>
+                <phase>validate</phase>
+                <configuration>
+                  <exportAntProperties>true</exportAntProperties>
+                  <tasks>
+                    <unzip src="${sonarAnalyzer.workDirectory}/SonarAnalyzer.RuleDocGenerator.CSharp-${analyzer.version}.nupkg"
+                           dest="${sonarAnalyzer.workDirectory}/SonarAnalyzer.RuleDocGenerator.CSharp/" />
+                    <copy todir="${sonarAnalyzer.workDirectory}/org/sonar/plugins/csharp">
+                        <fileset dir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.RuleDocGenerator.CSharp/xml">
+                        <include name="*.xml"/>
+                      </fileset>
+                    </copy>
+
+                    <echo file="${sonarAnalyzer.workDirectory}/static/version.txt" message="${project.version}" encoding="utf-8" />
+                  </tasks>
+                </configuration>
+                <goals>
+                  <goal>run</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
     </profile>
   </profiles>
 
