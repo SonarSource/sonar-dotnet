@@ -189,6 +189,9 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.CSharp
                     break;
 
                 case SyntaxKind.TryStatement:
+                    BuildTryStatement((TryStatementSyntax)statement);
+                    break;
+
                 case SyntaxKind.GlobalStatement:
                     throw new NotSupportedException($"{statement.Kind()}");
 
@@ -470,6 +473,20 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.CSharp
             currentBlock = jumpBlock;
 
             LabeledStatements[labeledStatement.Identifier.ValueText] = jumpBlock;
+
+            currentBlock = CreateBlock(currentBlock);
+        }
+
+        private void BuildTryStatement(TryStatementSyntax tryStatement)
+        {
+            if (tryStatement.Finally?.Block != null)
+            {
+                currentBlock = CreateBlock(currentBlock);
+                BuildBlock(tryStatement.Finally.Block);
+            }
+
+            currentBlock = CreateBlock(currentBlock);
+            BuildBlock(tryStatement.Block);
 
             currentBlock = CreateBlock(currentBlock);
         }

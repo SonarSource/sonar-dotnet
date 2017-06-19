@@ -78,16 +78,16 @@ namespace Tests.Diagnostics
         }
         void X(out int i) { i = 10; }
 
-        void calculateRate(int a, int b) // We don't report on methods with try-catch
+        void calculateRate(int a, int b)
         {
             var x = 0;
-            x = 1;
+            x = 1; // Noncompliant
             try
             {
-                x = 11;
+                x = 11; // Noncompliant
                 x = 12;
                 Console.Write(x);
-                x = 13;
+                x = 13; // Noncompliant
             }
             catch (Exception)
             {
@@ -96,7 +96,7 @@ namespace Tests.Diagnostics
                 Console.Write(x);
                 x = 23;
             }
-            x = 31;
+            x = 31; // Noncompliant
         }
 
         void calculateRate2(int a, int b)

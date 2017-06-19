@@ -2,6 +2,32 @@
 "issues":  [
 {
 "id":  "S1854",
+"message":  "Remove this useless assignment to local variable 'type'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka\Actor\Props.cs",
+"region":  {
+"startLine":  509,
+"startColumn":  22,
+"endLine":  509,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 'arguments'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka\Actor\Props.cs",
+"region":  {
+"startLine":  510,
+"startColumn":  27,
+"endLine":  510,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S1854",
 "message":  "Remove this useless assignment to local variable 'actor'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka\Actor\Props.cs",
@@ -36,6 +62,32 @@
 "startColumn":  23,
 "endLine":  610,
 "endColumn":  29
+}
+}
+},
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 'actor'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka\Actor\Props.cs",
+"region":  {
+"startLine":  638,
+"startColumn":  23,
+"endLine":  638,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 'result'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka\Util\Internal\AtomicState.cs",
+"region":  {
+"startLine":  83,
+"startColumn":  22,
+"endLine":  83,
+"endColumn":  34
 }
 }
 },

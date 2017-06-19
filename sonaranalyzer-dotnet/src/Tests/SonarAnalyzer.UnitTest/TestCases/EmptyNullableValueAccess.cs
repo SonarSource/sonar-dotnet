@@ -5,6 +5,15 @@ namespace Tests.Diagnostics
 {
     public class EmptyNullableValueAccess
     {
+        protected override void LogFailure(Exception e)
+        {
+            try
+            {
+                var message = e == null ? null : e;
+            }
+            finally { }
+        }
+
         private IEnumerable<TestClass> numbers = new[]
         {
             new TestClass { Number = 42 },

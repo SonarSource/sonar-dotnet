@@ -1461,6 +1461,160 @@ namespace NS
 
         #endregion
 
+        #region Try/Finally
+        [TestMethod]
+        [TestCategory("CFG")]
+        public void Cfg_TryFinally()
+        {
+            var cfg = Build(@"
+            cw0();
+            try
+            {
+                cw1();
+            }
+            finally
+            {
+                cw2();
+            }
+            cw3();");
+
+            VerifyCfg(cfg, 5);
+
+            var blocks = cfg.Blocks.ToList();
+
+            var tryStartBlock = blocks[0];
+            tryStartBlock.Should().BeOfType<SimpleBlock>();
+            tryStartBlock.Instructions.Should().HaveCount(2);
+
+            var tryBodyBlock = blocks[1];
+            tryBodyBlock.Should().BeOfType<SimpleBlock>();
+            tryBodyBlock.Instructions.Should().HaveCount(2);
+
+            var finallyBlock = blocks[2];
+            finallyBlock.Should().BeOfType<SimpleBlock>();
+            finallyBlock.Instructions.Should().HaveCount(2);
+
+            var afterFinallyBlock = blocks[3];
+            afterFinallyBlock.Should().BeOfType<SimpleBlock>();
+            afterFinallyBlock.Instructions.Should().HaveCount(2);
+
+            var exit = blocks.Last();
+            exit.Should().BeOfType<ExitBlock>();
+        }
+
+        [TestMethod]
+        [TestCategory("CFG")]
+        public void Cfg_TryFinally_Nested()
+        {
+            var cfg = Build(@"
+            cw0();
+            try
+            {
+                cw1();
+                try
+                {
+                    cw2();
+                }
+                finally
+                {
+                    cw3();
+                }
+            }
+            finally
+            {
+                cw4();
+            }
+            cw5();");
+
+            VerifyCfg(cfg, 7);
+
+            var blocks = cfg.Blocks.ToList();
+
+            VerifyAllInstructions(blocks[0], "cw0", "cw0()");
+            VerifyAllInstructions(blocks[1], "cw1", "cw1()");
+            VerifyAllInstructions(blocks[2], "cw2", "cw2()");
+            VerifyAllInstructions(blocks[3], "cw3", "cw3()");
+            VerifyAllInstructions(blocks[4], "cw4", "cw4()");
+            VerifyAllInstructions(blocks[5], "cw5", "cw5()");
+            VerifyAllInstructions(blocks[6]);
+        }
+
+        [TestMethod]
+        [TestCategory("CFG")]
+        public void Cfg_TryFinally_BranchInside()
+        {
+            var cfg = Build(@"
+            bar();
+            try
+            {
+                var message = e == null ? null : e;
+            }
+            finally 
+            {
+                foo();
+            }
+            ");
+
+            VerifyCfg(cfg, 7);
+
+            var blocks = cfg.Blocks.ToList();
+
+            var tryBlock = blocks[0];
+            var binaryBlock = blocks[1];
+            var whenNullBlock = blocks[2];
+            var whenNotNullBlock = blocks[3];
+            var assignmentBlock = blocks[4];
+            var finallyBlock = blocks[5];
+            var exitBlock = blocks[6];
+
+            tryBlock.SuccessorBlocks.Should().BeEquivalentTo(new[] { binaryBlock });
+            binaryBlock.SuccessorBlocks.Should().BeEquivalentTo(new[] { whenNullBlock, whenNotNullBlock });
+            whenNullBlock.SuccessorBlocks.Should().BeEquivalentTo(new[] { assignmentBlock });
+            whenNotNullBlock.SuccessorBlocks.Should().BeEquivalentTo(new[] { assignmentBlock });
+            assignmentBlock.SuccessorBlocks.Should().BeEquivalentTo(new[] { finallyBlock });
+            finallyBlock.SuccessorBlocks.Should().BeEquivalentTo(new[] { exitBlock });
+
+            exitBlock.Should().BeOfType<ExitBlock>();
+        }
+
+        [TestMethod]
+        [TestCategory("CFG")]
+        public void Cfg_TryCatch()
+        {
+            var cfg = Build(@"
+            cw0();
+            try
+            {
+                cw1();
+            }
+            catch
+            {
+                cw2();
+            }
+            cw3();");
+
+            VerifyCfg(cfg, 4);
+
+            var blocks = cfg.Blocks.ToList();
+
+            var tryStartBlock = blocks[0];
+            tryStartBlock.Should().BeOfType<SimpleBlock>();
+            tryStartBlock.Instructions.Should().HaveCount(2);
+
+            var tryBodyBlock = blocks[1];
+            tryBodyBlock.Should().BeOfType<SimpleBlock>();
+            tryBodyBlock.Instructions.Should().HaveCount(2);
+
+            var afterFinallyBlock = blocks[2];
+            afterFinallyBlock.Should().BeOfType<SimpleBlock>();
+            afterFinallyBlock.Instructions.Should().HaveCount(2);
+
+            var exit = blocks.Last();
+            exit.Should().BeOfType<ExitBlock>();
+        }
+
+        #endregion
+
         #region Switch
 
         [TestMethod]

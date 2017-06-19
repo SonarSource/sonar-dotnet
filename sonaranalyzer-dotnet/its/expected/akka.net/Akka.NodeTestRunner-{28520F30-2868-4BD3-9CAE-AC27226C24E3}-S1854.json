@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1854",
+"message":  "Remove this useless assignment to local variable 'displayName'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.NodeTestRunner\Program.cs",
+"region":  {
+"startLine":  24,
+"startColumn":  29,
+"endLine":  24,
+"endColumn":  39
+}
+}
+}
+]
+}
