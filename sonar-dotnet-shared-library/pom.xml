@@ -19,10 +19,9 @@
     <protobuf.compiler>${settings.localRepository}/com/google/protobuf/protoc/${protobuf.version}/protoc-${protobuf.version}-${os.detected.classifier}.exe</protobuf.compiler>
     <!-- used for deployment to SonarSource Artifactory -->
     <gitRepositoryName>sonar-dotnet-shared-library</gitRepositoryName>
-    <analyzer.build.conf>Release</analyzer.build.conf>
     <sonar.exclusions>target/generated-sources/protobuf/**</sonar.exclusions>
   </properties>
-  
+
   <dependencies>
     <dependency>
       <groupId>org.sonarsource.sonarqube</groupId>
@@ -151,19 +150,5 @@
       </plugin>
     </plugins>
   </build>
-
-  <profiles>
-    <profile>
-      <id>debug</id>
-      <activation>
-        <property>
-          <name>debug</name>
-        </property>
-      </activation>
-      <properties>
-        <analyzer.build.conf>Debug</analyzer.build.conf>
-      </properties>
-    </profile>
-  </profiles>
 
 </project>
