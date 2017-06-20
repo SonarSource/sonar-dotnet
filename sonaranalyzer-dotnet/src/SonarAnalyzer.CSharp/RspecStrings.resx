@@ -2233,7 +2233,7 @@
     <value>misra,cert</value>
   </data>
   <data name="S2201_Title" xml:space="preserve">
-    <value>Return values from functions without side effects should not be ignored</value>
+    <value>Return values should not be ignored when function calls don't have any side effects</value>
   </data>
   <data name="S2201_Type" xml:space="preserve">
     <value>BUG</value>
@@ -2263,6 +2263,33 @@
     <value>Runtime type checking should be simplified</value>
   </data>
   <data name="S2219_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
+  <data name="S2221_Category" xml:space="preserve">
+    <value>Sonar Code Smell</value>
+  </data>
+  <data name="S2221_Description" xml:space="preserve">
+    <value>Catching System.Exception seems like an efficient way to handle multiple possible exceptions. Unfortunately, it traps all exception types, including the ones that were not inteded to be caught. To prevent any misunderstandings, the exception filters should be used. Alternatively each exception type should be in a separate catch block.</value>
+  </data>
+  <data name="S2221_IsActivatedByDefault" xml:space="preserve">
+    <value>False</value>
+  </data>
+  <data name="S2221_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S2221_RemediationCost" xml:space="preserve">
+    <value>15min</value>
+  </data>
+  <data name="S2221_Severity" xml:space="preserve">
+    <value>Minor</value>
+  </data>
+  <data name="S2221_Tags" xml:space="preserve">
+    <value>cwe,error-handling</value>
+  </data>
+  <data name="S2221_Title" xml:space="preserve">
+    <value>"Exception" should not be caught when not required by called methods</value>
+  </data>
+  <data name="S2221_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
   </data>
   <data name="S2223_Category" xml:space="preserve">
