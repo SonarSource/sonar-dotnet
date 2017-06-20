@@ -193,6 +193,16 @@
                 <zip destfile="${sonarAnalyzer.workDirectory}/static/SonarAnalyzer-${project.version}.zip"
                      basedir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.CSharp"/>
 
+                <copy todir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.Scanner">
+                  <fileset dir="${project.build.directory}/../../sonaranalyzer-dotnet/src/SonarAnalyzer.Scanner/bin/${analyzer.build.conf}">
+                    <include name="*.dll"/>
+                    <include name="*.exe"/>
+                    <include name="*.exe.config"/>
+                  </fileset>
+                </copy>
+                <zip destfile="${sonarAnalyzer.workDirectory}/SonarAnalyzer.Scanner.zip"
+                     basedir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.Scanner"/>
+
                 <copy todir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.RuleDocGenerator.CSharp">
                   <fileset dir="${project.build.directory}/../../sonaranalyzer-dotnet/src/SonarAnalyzer.RuleDescriptorGenerator/bin/${analyzer.build.conf}/cs">
                     <include name="rules.xml"/>
