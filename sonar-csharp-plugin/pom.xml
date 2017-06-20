@@ -190,11 +190,23 @@
             <version>1.7</version>
             <executions>
               <execution>
-                <id>copy-analyzer-xml</id>
+                <id>copy-analyzer-data</id>
                 <phase>validate</phase>
                 <configuration>
                   <exportAntProperties>true</exportAntProperties>
                   <tasks>
+                    <!-- ITs requires the SonarAnalyzer-VERSION.zip to be present so don't remove these lines -->
+                    <copy todir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.CSharp">
+                      <fileset dir="${project.build.directory}/../../sonaranalyzer-dotnet/src/SonarAnalyzer.Vsix/bin/${analyzer.build.conf}/">
+                        <include name="SonarAnalyzer.dll"/>
+                        <include name="SonarAnalyzer.CSharp.dll"/>
+                        <include name="Google.Protobuf.dll"/>
+                      </fileset>
+                    </copy>
+                    <zip destfile="${sonarAnalyzer.workDirectory}/static/SonarAnalyzer-${project.version}.zip"
+                         basedir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.CSharp"/>
+
+                    <!-- SQALE XML in sslr requires a resource to read from -->
                     <copy todir="${sonarAnalyzer.workDirectory}/org/sonar/plugins/csharp">
                       <fileset dir="${project.build.directory}/../../sonaranalyzer-dotnet/src/SonarAnalyzer.RuleDescriptorGenerator/bin/${analyzer.configuration}/cs">
                         <include name="rules.xml"/>
@@ -263,24 +275,37 @@
                       <type>nupkg</type>
                       <overWrite>true</overWrite>
                     </artifactItem>
+                    <artifactItem>
+                      <groupId>${project.groupId}</groupId>
+                      <artifactId>SonarAnalyzer.CSharp</artifactId>
+                      <version>${analyzer.version}</version>
+                      <type>nupkg</type>
+                      <overWrite>true</overWrite>
+                    </artifactItem>
                   </artifactItems>
                   <outputDirectory>${sonarAnalyzer.workDirectory}</outputDirectory>
                 </configuration>
               </execution>
             </executions>
           </plugin>
-
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-antrun-plugin</artifactId>
             <version>1.7</version>
             <executions>
               <execution>
-                <id>unzip-copy-analyzer-xml</id>
+                <id>unzip-copy-analyzer-data</id>
                 <phase>validate</phase>
                 <configuration>
                   <exportAntProperties>true</exportAntProperties>
                   <tasks>
+                    <!-- ITs requires the SonarAnalyzer-VERSION.zip to be present so don't remove these lines -->
+                    <unzip src="${sonarAnalyzer.workDirectory}/SonarAnalyzer.CSharp-${analyzer.version}.nupkg"
+                           dest="${sonarAnalyzer.workDirectory}/SonarAnalyzer.CSharp/" />
+                    <zip destfile="${sonarAnalyzer.workDirectory}/static/SonarAnalyzer-${project.version}.zip"
+                         basedir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.CSharp"/>
+
+                    <!-- SQALE XML in sslr requires a resource to read from -->
                     <unzip src="${sonarAnalyzer.workDirectory}/SonarAnalyzer.RuleDocGenerator.CSharp-${analyzer.version}.nupkg"
                            dest="${sonarAnalyzer.workDirectory}/SonarAnalyzer.RuleDocGenerator.CSharp/" />
                     <copy todir="${sonarAnalyzer.workDirectory}/org/sonar/plugins/csharp">
