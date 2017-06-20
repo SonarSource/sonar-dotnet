@@ -178,42 +178,17 @@
         <version>1.7</version>
         <executions>
           <execution>
-            <id>unzip-nuget</id>
+            <id>copy-analyzer-xml</id>
             <phase>validate</phase>
             <configuration>
               <exportAntProperties>true</exportAntProperties>
               <tasks>
-                <copy todir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.CSharp">
-                  <fileset dir="${project.build.directory}/../../sonaranalyzer-dotnet/src/SonarAnalyzer.Vsix/bin/${analyzer.build.conf}/">
-                    <include name="SonarAnalyzer.dll"/>
-                    <include name="SonarAnalyzer.CSharp.dll"/>
-                    <include name="Google.Protobuf.dll"/>
-                  </fileset>
-                </copy>
-                <zip destfile="${sonarAnalyzer.workDirectory}/static/SonarAnalyzer-${project.version}.zip"
-                     basedir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.CSharp"/>
-
-                <copy todir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.Scanner">
-                  <fileset dir="${project.build.directory}/../../sonaranalyzer-dotnet/src/SonarAnalyzer.Scanner/bin/${analyzer.build.conf}">
-                    <include name="*.dll"/>
-                    <include name="*.exe"/>
-                    <include name="*.exe.config"/>
-                  </fileset>
-                </copy>
-                <zip destfile="${sonarAnalyzer.workDirectory}/SonarAnalyzer.Scanner.zip"
-                     basedir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.Scanner"/>
-
-                <copy todir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.RuleDocGenerator.CSharp">
+                <!-- SQALE XML in sslr requires a resource to read from -->
+                <copy todir="${sonarAnalyzer.workDirectory}/org/sonar/plugins/csharp">
                   <fileset dir="${project.build.directory}/../../sonaranalyzer-dotnet/src/SonarAnalyzer.RuleDescriptorGenerator/bin/${analyzer.build.conf}/cs">
                     <include name="rules.xml"/>
                     <include name="profile.xml"/>
                     <include name="sqale.xml"/>
-                  </fileset>
-                </copy>
-                <!-- SQALE XML in sslr requires a resource to read from -->
-                <copy todir="${sonarAnalyzer.workDirectory}/org/sonar/plugins/csharp">
-                  <fileset dir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.RuleDocGenerator.CSharp">
-                    <include name="*.xml"/>
                   </fileset>
                 </copy>
 
@@ -233,11 +208,6 @@
   <profiles>
     <profile>
       <id>debug</id>
-      <activation>
-        <property>
-          <name>debug</name>
-        </property>
-      </activation>
       <properties>
         <analyzer.build.conf>Debug</analyzer.build.conf>
       </properties>
