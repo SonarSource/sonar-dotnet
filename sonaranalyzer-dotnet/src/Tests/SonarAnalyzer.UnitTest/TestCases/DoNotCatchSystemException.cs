@@ -55,7 +55,13 @@ namespace Tests.Diagnostics
             }
 
             try { }
-            catch (Exception e) // Noncompliant
+            catch (Exception) // Noncompliant
+            {
+                new Exception();
+            }
+
+            try { }
+            catch (IOException)
             {
                 new Exception();
             }
@@ -70,6 +76,12 @@ namespace Tests.Diagnostics
             catch // Noncompliant
 //          ^^^^^
             {
+            }
+
+            try { }
+            catch (DummyType)
+            {
+                throw;
             }
         }
     }
