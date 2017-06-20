@@ -28,19 +28,6 @@
 },
 {
 "id":  "S1172",
-"message":  "Remove this parameter 'onError', whose value is ignored in the method.",
-"location":  {
-"uri":  "Nancy\src\Nancy\Routing\DefaultRequestDispatcher.cs",
-"region":  {
-"startLine":  87,
-"startColumn":  123,
-"endLine":  87,
-"endColumn":  169
-}
-}
-},
-{
-"id":  "S1172",
 "message":  "Remove this unused method parameter 'model'.",
 "location":  {
 "uri":  "Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\SuperSimpleViewEngine.cs",

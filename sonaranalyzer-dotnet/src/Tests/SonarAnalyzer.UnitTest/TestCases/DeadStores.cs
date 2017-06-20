@@ -91,10 +91,10 @@ namespace Tests.Diagnostics
             }
             catch (Exception)
             {
-                x = 21;
+                x = 21; // Noncompliant
                 x = 22;
                 Console.Write(x);
-                x = 23;
+                x = 23; // Noncompliant
             }
             x = 31; // Noncompliant
         }
@@ -341,6 +341,22 @@ namespace Tests.Diagnostics
             private static string nameof(int i)
             {
                 return "some text";
+            }
+        }
+
+        private class ActorBase
+        {
+            public virtual int Create()
+            {
+                var number = 5;
+                try
+                {
+                    return 0;
+                }
+                catch
+                {
+                    return number;
+                }
             }
         }
     }

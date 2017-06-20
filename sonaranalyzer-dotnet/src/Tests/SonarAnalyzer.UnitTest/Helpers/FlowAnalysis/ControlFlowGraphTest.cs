@@ -1483,42 +1483,158 @@ namespace NS
             var blocks = cfg.Blocks.ToList();
 
             var tryStartBlock = blocks[0];
-            tryStartBlock.Should().BeOfType<SimpleBlock>();
-            tryStartBlock.Instructions.Should().HaveCount(2);
-
-            var tryBodyBlock = blocks[1];
-            tryBodyBlock.Should().BeOfType<SimpleBlock>();
-            tryBodyBlock.Instructions.Should().HaveCount(2);
-
+            var tryEndBlock = blocks[1];
             var finallyBlock = blocks[2];
-            finallyBlock.Should().BeOfType<SimpleBlock>();
-            finallyBlock.Instructions.Should().HaveCount(2);
-
             var afterFinallyBlock = blocks[3];
-            afterFinallyBlock.Should().BeOfType<SimpleBlock>();
-            afterFinallyBlock.Instructions.Should().HaveCount(2);
 
-            var exit = blocks.Last();
-            exit.Should().BeOfType<ExitBlock>();
+            tryStartBlock.Should().BeOfType<BranchBlock>();
+            VerifyAllInstructions(tryStartBlock, "cw0", "cw0()");
+
+            tryEndBlock.Should().BeOfType<BranchBlock>();
+            VerifyAllInstructions(tryEndBlock, "cw1", "cw1()");
+
+            finallyBlock.Should().BeOfType<BranchBlock>();
+            VerifyAllInstructions(finallyBlock, "cw2", "cw2()");
+
+            afterFinallyBlock.Should().BeOfType<SimpleBlock>();
+            VerifyAllInstructions(afterFinallyBlock, "cw3", "cw3()");
+
+            blocks.Last().Should().BeOfType<ExitBlock>();
         }
 
         [TestMethod]
         [TestCategory("CFG")]
-        public void Cfg_TryFinally_Nested()
+        public void Cfg_TryCatchFinally_Return()
         {
             var cfg = Build(@"
             cw0();
             try
             {
                 cw1();
-                try
-                {
-                    cw2();
-                }
-                finally
-                {
-                    cw3();
-                }
+                return;
+            }
+            catch
+            {
+                cw2();
+                return;
+            }
+            finally
+            {
+                cw3(); // C# cannot return from finally
+            }
+            cw4();");
+
+            VerifyCfg(cfg, 7);
+
+            var blocks = cfg.Blocks.ToList();
+
+            var tryStartBlock = blocks[0];
+            var tryReturnBlock = blocks[1];
+            var tryEndBlock = blocks[2];
+            var catchBlock = blocks[3];
+            var finallyBlock = blocks[4];
+            var afterFinallyBlock = blocks[5];
+            var exit = blocks.Last();
+
+            tryStartBlock.Should().BeOfType<BranchBlock>();
+            VerifyAllInstructions(tryStartBlock, "cw0", "cw0()");
+            tryStartBlock.SuccessorBlocks.Should().BeEquivalentTo(new[] { tryReturnBlock, catchBlock });
+
+            tryReturnBlock.Should().BeOfType<JumpBlock>();
+            VerifyAllInstructions(tryReturnBlock, "cw1", "cw1()");
+            tryReturnBlock.SuccessorBlocks.Should().BeEquivalentTo(new[] { finallyBlock });
+
+            tryEndBlock.Should().BeOfType<BranchBlock>();
+            VerifyAllInstructions(tryEndBlock);
+            tryEndBlock.SuccessorBlocks.Should().BeEquivalentTo(new[] { catchBlock, finallyBlock });
+
+            catchBlock.Should().BeOfType<JumpBlock>();
+            VerifyAllInstructions(catchBlock, "cw2", "cw2()");
+            catchBlock.SuccessorBlocks.Should().BeEquivalentTo(new[] { finallyBlock });
+
+            finallyBlock.Should().BeOfType<BranchBlock>();
+            VerifyAllInstructions(finallyBlock, "cw3", "cw3()");
+            finallyBlock.SuccessorBlocks.Should().BeEquivalentTo(new[] { afterFinallyBlock, exit });
+
+            afterFinallyBlock.Should().BeOfType<SimpleBlock>();
+            VerifyAllInstructions(afterFinallyBlock, "cw4", "cw4()");
+            afterFinallyBlock.SuccessorBlocks.Should().BeEquivalentTo(new[] { exit });
+
+            exit.Should().BeOfType<ExitBlock>();
+        }
+
+        [TestMethod]
+        [TestCategory("CFG")]
+        public void Cfg_TryFinally_BranchInside()
+        {
+            var cfg = Build(@"
+            cw0();
+            try
+            {
+                var message = e == null ? null : e;
+                baz();
+            }
+            finally 
+            {
+                cw1();
+            }
+            cw2();
+            ");
+
+            VerifyCfg(cfg, 8);
+
+            var blocks = cfg.Blocks.ToList();
+
+            var tryStartBlock = blocks[0];
+            var binaryBlock = blocks[1];
+            var whenNullBlock = blocks[2];
+            var whenNotNullBlock = blocks[3];
+            var assignmentBlock = blocks[4];
+            var finallyBlock = blocks[5];
+            var afterFinallyBlock = blocks[6];
+            var exit = blocks.Last();
+
+            tryStartBlock.SuccessorBlocks.Should().BeEquivalentTo(new[] { binaryBlock });
+            VerifyAllInstructions(tryStartBlock, "cw0", "cw0()");
+
+            binaryBlock.SuccessorBlocks.Should().BeEquivalentTo(new[] { whenNullBlock, whenNotNullBlock });
+            VerifyAllInstructions(binaryBlock, "e", "null", "e == null");
+
+            whenNullBlock.SuccessorBlocks.Should().BeEquivalentTo(new[] { assignmentBlock });
+            VerifyAllInstructions(whenNullBlock, "null");
+
+            whenNotNullBlock.SuccessorBlocks.Should().BeEquivalentTo(new[] { assignmentBlock });
+            VerifyAllInstructions(whenNotNullBlock, "e");
+
+            assignmentBlock.SuccessorBlocks.Should().BeEquivalentTo(new[] { finallyBlock });
+            VerifyAllInstructions(assignmentBlock, "message = e == null ? null : e", "baz", "baz()");
+
+            finallyBlock.SuccessorBlocks.Should().BeEquivalentTo(new[] { afterFinallyBlock, exit });
+            VerifyAllInstructions(finallyBlock, "cw1", "cw1()");
+
+            afterFinallyBlock.SuccessorBlocks.Should().BeEquivalentTo(new[] { blocks.Last() });
+            VerifyAllInstructions(afterFinallyBlock, "cw2", "cw2()");
+
+            blocks.Last().Should().BeOfType<ExitBlock>();
+        }
+
+        [TestMethod]
+        [TestCategory("CFG")]
+        public void Cfg_TryCatchFinally()
+        {
+            var cfg = Build(@"
+            cw0();
+            try
+            {
+                cw1();
+            }
+            catch(Exception1 e)
+            {
+                cw2();
+            }
+            catch(Exception2 e)
+            {
+                cw3();
             }
             finally
             {
@@ -1530,86 +1646,37 @@ namespace NS
 
             var blocks = cfg.Blocks.ToList();
 
-            VerifyAllInstructions(blocks[0], "cw0", "cw0()");
-            VerifyAllInstructions(blocks[1], "cw1", "cw1()");
-            VerifyAllInstructions(blocks[2], "cw2", "cw2()");
-            VerifyAllInstructions(blocks[3], "cw3", "cw3()");
-            VerifyAllInstructions(blocks[4], "cw4", "cw4()");
-            VerifyAllInstructions(blocks[5], "cw5", "cw5()");
-            VerifyAllInstructions(blocks[6]);
-        }
-
-        [TestMethod]
-        [TestCategory("CFG")]
-        public void Cfg_TryFinally_BranchInside()
-        {
-            var cfg = Build(@"
-            bar();
-            try
-            {
-                var message = e == null ? null : e;
-            }
-            finally 
-            {
-                foo();
-            }
-            ");
-
-            VerifyCfg(cfg, 7);
-
-            var blocks = cfg.Blocks.ToList();
-
-            var tryBlock = blocks[0];
-            var binaryBlock = blocks[1];
-            var whenNullBlock = blocks[2];
-            var whenNotNullBlock = blocks[3];
-            var assignmentBlock = blocks[4];
-            var finallyBlock = blocks[5];
-            var exitBlock = blocks[6];
-
-            tryBlock.SuccessorBlocks.Should().BeEquivalentTo(new[] { binaryBlock });
-            binaryBlock.SuccessorBlocks.Should().BeEquivalentTo(new[] { whenNullBlock, whenNotNullBlock });
-            whenNullBlock.SuccessorBlocks.Should().BeEquivalentTo(new[] { assignmentBlock });
-            whenNotNullBlock.SuccessorBlocks.Should().BeEquivalentTo(new[] { assignmentBlock });
-            assignmentBlock.SuccessorBlocks.Should().BeEquivalentTo(new[] { finallyBlock });
-            finallyBlock.SuccessorBlocks.Should().BeEquivalentTo(new[] { exitBlock });
-
-            exitBlock.Should().BeOfType<ExitBlock>();
-        }
-
-        [TestMethod]
-        [TestCategory("CFG")]
-        public void Cfg_TryCatch()
-        {
-            var cfg = Build(@"
-            cw0();
-            try
-            {
-                cw1();
-            }
-            catch
-            {
-                cw2();
-            }
-            cw3();");
-
-            VerifyCfg(cfg, 4);
-
-            var blocks = cfg.Blocks.ToList();
-
             var tryStartBlock = blocks[0];
-            tryStartBlock.Should().BeOfType<SimpleBlock>();
-            tryStartBlock.Instructions.Should().HaveCount(2);
-
-            var tryBodyBlock = blocks[1];
-            tryBodyBlock.Should().BeOfType<SimpleBlock>();
-            tryBodyBlock.Instructions.Should().HaveCount(2);
-
-            var afterFinallyBlock = blocks[2];
-            afterFinallyBlock.Should().BeOfType<SimpleBlock>();
-            afterFinallyBlock.Instructions.Should().HaveCount(2);
-
+            var tryEndBlock = blocks[1];
+            var catchBlock1 = blocks[2];
+            var catchBlock2 = blocks[3];
+            var finallyBlock = blocks[4];
+            var afterFinallyBlock = blocks[5];
             var exit = blocks.Last();
+
+            tryStartBlock.Should().BeOfType<BranchBlock>();
+            VerifyAllInstructions(tryStartBlock, "cw0", "cw0()");
+            tryStartBlock.SuccessorBlocks.Should().BeEquivalentTo(new[] { tryEndBlock, catchBlock1, catchBlock2 });
+
+            tryEndBlock.Should().BeOfType<BranchBlock>();
+            VerifyAllInstructions(tryEndBlock, "cw1", "cw1()");
+            tryEndBlock.SuccessorBlocks.Should().BeEquivalentTo(new[] { catchBlock1, catchBlock2, finallyBlock });
+
+            catchBlock1.Should().BeOfType<SimpleBlock>();
+            VerifyAllInstructions(catchBlock1, "cw2", "cw2()");
+            catchBlock1.SuccessorBlocks.Should().BeEquivalentTo(new[] { finallyBlock });
+
+            catchBlock2.Should().BeOfType<SimpleBlock>();
+            VerifyAllInstructions(catchBlock2, "cw3", "cw3()");
+            catchBlock2.SuccessorBlocks.Should().BeEquivalentTo(new[] { finallyBlock });
+
+            finallyBlock.Should().BeOfType<BranchBlock>();
+            VerifyAllInstructions(finallyBlock, "cw4", "cw4()");
+            finallyBlock.SuccessorBlocks.Should().BeEquivalentTo(new[] { afterFinallyBlock, exit });
+
+            afterFinallyBlock.Should().BeOfType<SimpleBlock>();
+            VerifyAllInstructions(afterFinallyBlock, "cw5", "cw5()");
+
             exit.Should().BeOfType<ExitBlock>();
         }
 

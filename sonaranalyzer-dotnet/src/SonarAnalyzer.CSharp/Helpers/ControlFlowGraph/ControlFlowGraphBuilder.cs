@@ -481,14 +481,35 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.CSharp
         {
             if (tryStatement.Finally?.Block != null)
             {
-                currentBlock = CreateBlock(currentBlock);
+                // Wire exit in case we have a return inside the try/catch block
+                currentBlock = CreateBranchBlock(tryStatement.Finally, new[] { currentBlock, ExitTarget.Peek() });
                 BuildBlock(tryStatement.Finally.Block);
+                ExitTarget.Push(currentBlock);
             }
 
-            currentBlock = CreateBlock(currentBlock);
+            var finallyBlock = currentBlock;
+
+            var catchBlocks = new List<Block>();
+            foreach (var catchClause in tryStatement.Catches.Reverse())
+            {
+                currentBlock = CreateBlock(finallyBlock);
+
+                BuildBlock(catchClause.Block);
+
+                catchBlocks.Add(currentBlock);
+            }
+
+            // try end
+            currentBlock = CreateBranchBlock(tryStatement, catchBlocks.Union(new[] { finallyBlock }).ToList());
+
             BuildBlock(tryStatement.Block);
 
-            currentBlock = CreateBlock(currentBlock);
+            // try start
+            currentBlock = CreateBranchBlock(tryStatement, catchBlocks.Union(new[] { currentBlock }).ToList());
+            if (tryStatement.Finally?.Block != null)
+            {
+                ExitTarget.Pop();
+            }
         }
 
         private void BuildGotoDefaultStatement(GotoStatementSyntax statement)
@@ -680,8 +701,7 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.CSharp
 
         private void BuildJumpToExitStatement(StatementSyntax statement, ExpressionSyntax expression = null)
         {
-            // todo change the ExitBlock to the real jump location (handle try-catch-finally)
-            currentBlock = CreateJumpBlock(statement, ExitBlock, currentBlock);
+            currentBlock = CreateJumpBlock(statement, ExitTarget.Peek(), currentBlock);
 
             BuildExpression(expression);
         }
