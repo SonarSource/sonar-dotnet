@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2259",
+"message":  "'className' is null on at least one execution path.",
+"location":  {
+"uri":  "Ember-MM\Ember.Plugins\PluginSectionHandler.cs",
+"region":  {
+"startLine":  91,
+"startColumn":  47,
+"endLine":  91,
+"endColumn":  56
+}
+}
+}
+]
+}

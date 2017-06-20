@@ -154,17 +154,18 @@ namespace Tests.Diagnostics
 
     class Person9
     {
-        int year = 1980; // Noncompliant
+        int year = 1980;
         public Person9()
         {
             try
             {
-                year = 1980;
+                year = 400; // FN - the CFG connects the beginning of the try block with the catch, hence we have a path where "year" is not rewritten
             }
             catch (Exception)
             {
                 throw;
             }
+            Console.WriteLine(this.year);
         }
     }
 

@@ -123,10 +123,11 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
                         continue;
                     }
 
-                    if (programPoint.Block is BranchBlock)
+                    var branchBlock = programPoint.Block as BranchBlock;
+                    if (branchBlock != null)
                     {
                         // switch:
-                        VisitBranchBlock(node, programPoint);
+                        VisitBranchBlock(branchBlock, node);
                     }
                 }
                 catch (TooManyInternalStatesException)
@@ -218,6 +219,17 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
             var newProgramState = node.ProgramState.PopValue();
             newProgramState = CleanStateAfterBlock(newProgramState, node.ProgramPoint.Block);
             EnqueueAllSuccessors(programPoint.Block, newProgramState);
+        }
+
+        protected virtual void VisitBranchBlock(BranchBlock branchBlock, ExplodedGraphNode node)
+        {
+            var newProgramState = node.ProgramState;
+            if (IsValueConsumingStatement(branchBlock.BranchingNode))
+            {
+                newProgramState = newProgramState.PopValue();
+            }
+            newProgramState = CleanStateAfterBlock(newProgramState, branchBlock);
+            EnqueueAllSuccessors(branchBlock, newProgramState);
         }
 
         protected virtual void VisitSingleSuccessorBinaryBranch(BinaryBranchingSimpleBlock block, ExplodedGraphNode node)

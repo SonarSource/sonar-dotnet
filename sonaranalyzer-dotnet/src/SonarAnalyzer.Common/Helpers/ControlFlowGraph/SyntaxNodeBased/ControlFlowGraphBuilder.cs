@@ -40,12 +40,13 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
         protected readonly SyntaxNode node;
         protected readonly SemanticModel semanticModel;
 
+        protected readonly Stack<Block> ExitTarget = new Stack<Block>();
+
         protected Block currentBlock;
         protected readonly List<Block> reversedBlocks = new List<Block>();
 
         public IEnumerable<Block> Blocks => reversedBlocks.Reverse<Block>().ToImmutableArray();
         public Block EntryBlock { get; private set; }
-        public ExitBlock ExitBlock { get; }
 
         protected ControlFlowGraphBuilder(SyntaxNode node, SemanticModel semanticModel)
         {
@@ -62,12 +63,12 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
             this.node = node;
             this.semanticModel = semanticModel;
 
-            ExitBlock = CreateExitBlock();
+            ExitTarget.Push(CreateExitBlock());
         }
 
         internal IControlFlowGraph Build()
         {
-            currentBlock = CreateBlock(successor: ExitBlock);
+            currentBlock = CreateBlock(successor: ExitTarget.Peek());
 
             Build(node);
 
@@ -80,11 +81,16 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
                 throw new InvalidOperationException("Could not construct valid control flow graph" );
             }
 
+            if (ExitTarget.Count != 1)
+            {
+                throw new InvalidOperationException("Expecting only one ExitBlock. The control flow graph was not constructed correctly.");
+            }
+
             return new ControlFlowGraph
             {
                 Blocks = Blocks,
                 EntryBlock = EntryBlock,
-                ExitBlock = ExitBlock
+                ExitBlock = (ExitBlock)ExitTarget.Pop()
             };
         }
 

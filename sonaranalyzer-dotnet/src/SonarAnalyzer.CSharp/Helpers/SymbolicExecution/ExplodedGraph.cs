@@ -851,6 +851,12 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.CSharp
                 return returnStatement.Expression != null;
             }
 
+            var switchStatement = jumpNode as SwitchStatementSyntax;
+            if (switchStatement != null)
+            {
+                return switchStatement.Expression != null;
+            }
+
             // goto is not putting the expression to the CFG
 
             return false;
