@@ -183,6 +183,17 @@
             <configuration>
               <exportAntProperties>true</exportAntProperties>
               <tasks>
+                <!-- ITs requires the SonarAnalyzer-VERSION.zip to be present so don't remove these lines -->
+                <copy todir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.CSharp">
+                  <fileset dir="${project.build.directory}/../../sonaranalyzer-dotnet/src/SonarAnalyzer.Vsix/bin/${analyzer.build.conf}/">
+                    <include name="SonarAnalyzer.dll"/>
+                    <include name="SonarAnalyzer.CSharp.dll"/>
+                    <include name="Google.Protobuf.dll"/>
+                  </fileset>
+                </copy>
+                <zip destfile="${sonarAnalyzer.workDirectory}/static/SonarAnalyzer-${project.version}.zip"
+                     basedir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.CSharp"/>
+
                 <!-- SQALE XML in sslr requires a resource to read from -->
                 <copy todir="${sonarAnalyzer.workDirectory}/org/sonar/plugins/csharp">
                   <fileset dir="${project.build.directory}/../../sonaranalyzer-dotnet/src/SonarAnalyzer.RuleDescriptorGenerator/bin/${analyzer.build.conf}/cs">
