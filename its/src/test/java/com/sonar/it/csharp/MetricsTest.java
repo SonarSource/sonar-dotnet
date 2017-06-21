@@ -20,6 +20,10 @@
 package com.sonar.it.csharp;
 
 import java.nio.file.Path;
+
+import org.apache.commons.lang.SystemUtils;
+import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.ClassRule;
 import org.junit.Test;
 import org.junit.rules.ExternalResource;
@@ -33,6 +37,9 @@ import static com.sonar.it.csharp.Tests.getMeasure;
 import static com.sonar.it.csharp.Tests.getMeasureAsInt;
 import static org.apache.commons.lang.StringUtils.countMatches;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.fail;
+import static org.junit.Assume.assumeFalse;
+import static org.junit.Assume.assumeTrue;
 
 public class MetricsTest {
 
@@ -43,30 +50,36 @@ public class MetricsTest {
   private static final String FILE = "MetricsTest:MetricsTest:1F026ECA-900A-488D-9D07-AD23216FA32B:foo/Class1.cs";
 
   @ClassRule
-  public static RuleChain chain = RuleChain
-    .outerRule(ORCHESTRATOR)
-    .around(temp)
-    .around(new ExternalResource() {
-      @Override
-      protected void before() throws Throwable {
-        ORCHESTRATOR.resetData();
+  public static RuleChain chain = getRuleChain();
 
-        Path projectDir = Tests.projectDir(temp, "MetricsTest");
-        ORCHESTRATOR.executeBuild(Tests.newScanner(projectDir)
-          .addArgument("begin")
-          .setProjectKey("MetricsTest")
-          .setProjectName("MetricsTest")
-          .setProjectVersion("1.0")
-          .setProfile("no_rule")
-          // Without that, the MetricsTest project is considered as a Test project :)
-          .setProperty("sonar.msbuild.testProjectPattern", "noTests"));
+  private static RuleChain getRuleChain() {
+    assertThat(SystemUtils.IS_OS_WINDOWS).withFailMessage("OS should be Windows.").isTrue();
 
-        Tests.runMSBuild(ORCHESTRATOR, projectDir, "/t:Rebuild");
+    return RuleChain
+      .outerRule(ORCHESTRATOR)
+      .around(temp)
+      .around(new ExternalResource() {
+        @Override
+        protected void before() throws Throwable {
+          ORCHESTRATOR.resetData();
 
-        ORCHESTRATOR.executeBuild(Tests.newScanner(projectDir)
-          .addArgument("end"));
-      }
-    });
+          Path projectDir = Tests.projectDir(temp, "MetricsTest");
+          ORCHESTRATOR.executeBuild(Tests.newScanner(projectDir)
+            .addArgument("begin")
+            .setProjectKey("MetricsTest")
+            .setProjectName("MetricsTest")
+            .setProjectVersion("1.0")
+            .setProfile("no_rule")
+            // Without that, the MetricsTest project is considered as a Test project :)
+            .setProperty("sonar.msbuild.testProjectPattern", "noTests"));
+
+          Tests.runMSBuild(ORCHESTRATOR, projectDir, "/t:Rebuild");
+
+          ORCHESTRATOR.executeBuild(Tests.newScanner(projectDir)
+            .addArgument("end"));
+        }
+      });
+  }
 
   @Test
   public void projectIsAnalyzed() {
