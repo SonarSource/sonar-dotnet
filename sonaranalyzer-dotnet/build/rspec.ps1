@@ -55,19 +55,19 @@ $remediationsMap =
     "Constant/Issue" = "Constant/Issue";
 }
 
-$projectsMap = 
+$projectsMap =
 @{
     "cs" = "SonarAnalyzer.CSharp";
     "vbnet" = "SonarAnalyzer.VisualBasic";
 }
 
-$ruleapiLanguageMap = 
+$ruleapiLanguageMap =
 @{
     "cs" = "c#";
     "vbnet" = "vb.net";
 }
 
-$resourceLanguageMap = 
+$resourceLanguageMap =
 @{
     "cs" = "cs";
     "vbnet" = "vb";
@@ -182,7 +182,7 @@ function CreateStringResources() {
             [void]$resources.Add("${rule}_Remediation=$($remediationsMap.Get_Item(${json}.remediation.func))")
             [void]$resources.Add("${rule}_RemediationCost=$(${json}.remediation.constantCost)") # TODO see if we have remediations other than constantConst and fix them
         }
-        
+
         if ($rule -eq $ruleKey)
         {
             $newRuleData = $json
@@ -241,4 +241,6 @@ if ($className -And $ruleKey) {
     {
        UpdateTestEntry $csRuleData
     }
+
+    Remove-Item -Recurse -Force "${PSScriptRoot}\\..\\.vs"
 }
