@@ -49,9 +49,7 @@ namespace SonarAnalyzer.UnitTest
         private static readonly MetadataReference systemNetAssembly = MetadataReference.CreateFromFile(typeof(WebClient).Assembly.Location);
         internal static readonly MetadataReference SystemImmutableAssembly = MetadataReference.CreateFromFile(typeof(ImmutableArray).Assembly.Location);
 
-        private const string NONCOMPLIANT_START = "Noncompliant";
         private const string FIXED_MESSAGE = "Fixed";
-        private const string NONCOMPLIANT_PATTERN = NONCOMPLIANT_START + @".*";
 
         private const string GeneratedAssemblyName = "foo";
         private const string TestAssemblyName = "fooTest";
@@ -66,11 +64,17 @@ namespace SonarAnalyzer.UnitTest
             using (var workspace = new AdhocWorkspace())
             {
                 var file = new FileInfo(path);
-                var project = CreateProject(file, GeneratedAssemblyName, workspace).AddDocument(file);
+                var project = CreateProject(file.Extension, GeneratedAssemblyName, workspace).AddDocument(file);
                 var compilation = project.GetCompilationAsync().Result;
                 var diagnostics = GetAllDiagnostics(compilation, diagnosticAnalyzers);
                 VerifyNoExceptionThrown(diagnostics);
             }
+        }
+
+        public static void VerifyCSharpAnalyzer(string snippet, SonarDiagnosticAnalyzer diagnosticAnalyzer, ParseOptions options = null,
+            params MetadataReference[] additionalReferences)
+        {
+            VerifyAnalyzer(new[] { new DocumentInfo($"file1{CSharpFileExtension}", snippet) }, CSharpFileExtension, diagnosticAnalyzer, options, additionalReferences);
         }
 
         public static void VerifyAnalyzer(string path, SonarDiagnosticAnalyzer diagnosticAnalyzer, ParseOptions options = null,
@@ -93,14 +97,24 @@ namespace SonarAnalyzer.UnitTest
                 throw new ArgumentException("Please use a collection of paths with the same extension", nameof(paths));
             }
 
-            var parseOptions = files.SelectMany(file => GetParseOptionsAlternatives(options, file.Extension)).Distinct();
+            var fileExtension = files[0].Extension;
 
-            var issueLocationCollector = new IssueLocationCollector();
+            var fileContents = files.Select(file => new DocumentInfo(file));
+
+            VerifyAnalyzer(fileContents, fileExtension, diagnosticAnalyzer, options, additionalReferences);
+        }
+
+        private static void VerifyAnalyzer(IEnumerable<DocumentInfo> documents, string fileExtension, SonarDiagnosticAnalyzer diagnosticAnalyzer, ParseOptions options = null,
+            params MetadataReference[] additionalReferences)
+        {
+            var parseOptions = GetParseOptionsAlternatives(options, fileExtension);
 
             using (var workspace = new AdhocWorkspace())
             {
-                var project = CreateProject(files[0], GeneratedAssemblyName, workspace, additionalReferences);
-                files.ForEach(file => project = project.AddDocument(file)); // side effect on purpose (project is immutable)
+                var project = CreateProject(fileExtension, GeneratedAssemblyName, workspace, additionalReferences);
+                documents.ToList().ForEach(document => project = project.AddDocument(document.Name, document.Content).Project); // side effect on purpose (project is immutable)
+
+                var issueLocationCollector = new IssueLocationCollector();
 
                 foreach (var parseOption in parseOptions)
                 {
@@ -217,7 +231,7 @@ namespace SonarAnalyzer.UnitTest
 
                 foreach (var parseOption in parseOptions)
                 {
-                    var document = CreateProject(file, GeneratedAssemblyName, workspace)
+                    var document = CreateProject(file.Extension, GeneratedAssemblyName, workspace)
                         .AddDocument(file, true)
                         .Documents
                         .Single(d => d.Name == file.Name);
@@ -228,7 +242,6 @@ namespace SonarAnalyzer.UnitTest
             VerifyFixAllCodeFix(path, pathToBatchExpected, diagnosticAnalyzer, codeFixProvider, codeFixTitle);
         }
 
-
         #endregion
 
         #region Generic helper
@@ -238,7 +251,8 @@ namespace SonarAnalyzer.UnitTest
             using (var workspace = new AdhocWorkspace())
             {
                 var file = new FileInfo(path);
-                var project = CreateProject(file, assemblyName, workspace).AddDocument(file);
+                var project = CreateProject(file.Extension, assemblyName, workspace)
+                    .AddDocument(file);
                 var compilation = project.GetCompilationAsync().Result;
                 var diagnostics = GetDiagnostics(compilation, diagnosticAnalyzer);
 
@@ -262,7 +276,7 @@ namespace SonarAnalyzer.UnitTest
 
                 foreach (var parseOption in parseOptions)
                 {
-                    var document = CreateProject(file, GeneratedAssemblyName, workspace)
+                    var document = CreateProject(file.Extension, GeneratedAssemblyName, workspace)
                         .AddDocument(file, true)
                         .Documents
                         .Single(d => d.Name == file.Name);
@@ -271,10 +285,10 @@ namespace SonarAnalyzer.UnitTest
             }
         }
 
-        private static Project CreateProject(FileInfo file, string assemblyName,
+        private static Project CreateProject(string fileExtension, string assemblyName,
             AdhocWorkspace workspace, params MetadataReference[] additionalReferences)
         {
-            var language = file.Extension == CSharpFileExtension
+            var language = fileExtension == CSharpFileExtension
                 ? LanguageNames.CSharp
                 : LanguageNames.VisualBasic;
 
@@ -287,7 +301,7 @@ namespace SonarAnalyzer.UnitTest
             // adding an extra file to the project
             // this won't trigger any issues, but it keeps a reference to the original ParseOption, so
             // if an analyzer/codefix changes the language version, Roslyn throws an ArgumentException
-            project = project.AddDocument("ExtraEmptyFile.g" + file.Extension, string.Empty).Project;
+            project = project.AddDocument("ExtraEmptyFile.g" + fileExtension, string.Empty).Project;
 
             return project;
         }
@@ -295,7 +309,14 @@ namespace SonarAnalyzer.UnitTest
         private static Project AddDocument(this Project project, FileInfo file,
             bool removeAnalysisComments = false)
         {
-            var lines = File.ReadAllText(file.FullName, Encoding.UTF8)
+            string text = ReadDocument(file.FullName, removeAnalysisComments);
+
+            return project.AddDocument(file.Name, text).Project;
+        }
+
+        private static string ReadDocument(string filePath, bool removeAnalysisComments)
+        {
+            var lines = File.ReadAllText(filePath, Encoding.UTF8)
                 .Split(new[] { Environment.NewLine }, StringSplitOptions.None);
 
             if (removeAnalysisComments)
@@ -305,9 +326,7 @@ namespace SonarAnalyzer.UnitTest
                     .ToArray();
             }
 
-            var text = string.Join(Environment.NewLine, lines);
-
-            return project.AddDocument(file.Name, text).Project;
+            return string.Join(Environment.NewLine, lines);
         }
 
         private static string ReplaceNonCompliantComment(string line)
@@ -515,5 +534,22 @@ namespace SonarAnalyzer.UnitTest
         }
 
         #endregion
+
+        private class DocumentInfo
+        {
+            public DocumentInfo(FileInfo file) :
+                this(file.Name, File.ReadAllText(file.FullName))
+            {
+            }
+
+            public DocumentInfo(string name, string content)
+            {
+                this.Name = name;
+                this.Content = content;
+            }
+
+            public string Name { get; }
+            public string Content { get; }
+        }
     }
 }
