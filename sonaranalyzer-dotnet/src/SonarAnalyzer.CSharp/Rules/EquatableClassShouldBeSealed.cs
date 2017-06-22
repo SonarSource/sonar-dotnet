@@ -34,7 +34,7 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class EquatableClassShouldBeSealed : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S4035";
-        private const string MessageFormat = "Make this class 'sealed' or implement 'IEqualityComparer<T>' instead.";
+        private const string MessageFormat = "Seal class '{0}' or implement 'IEqualityComparer<T>' instead.";
         private const string EqualsMethodName = nameof(object.Equals);
 
         private static readonly DiagnosticDescriptor rule =
@@ -51,6 +51,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (classSymbol == null ||
                         classSymbol.IsSealed ||
                         classSymbol.IsStatic ||
+                        !classSymbol.IsPublicApi() ||
                         classDeclaration.Identifier.IsMissing)
                     {
                         return;
@@ -58,7 +59,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     if (HasInvalidCombination(classSymbol))
                     {
-                        c.ReportDiagnostic(Diagnostic.Create(rule, classDeclaration.Identifier.GetLocation()));
+                        c.ReportDiagnostic(Diagnostic.Create(rule, classDeclaration.Identifier.GetLocation(),
+                            classDeclaration.Identifier));
                     }
 
                 }, SyntaxKind.ClassDeclaration);
@@ -81,9 +83,10 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool HasInvalidCombination(INamedTypeSymbol classSymbol)
         {
-            var equatableInterfacesByTypeName = classSymbol.AllInterfaces
+            var equatableInterfacesByTypeName = classSymbol.Interfaces
                 .Where(IsValidEquatableInterfaceSymbol)
                 .ToDictionary(nts => nts.TypeArguments[0].Name, nts => nts);
+
             var equalsMethodsByTypeName = classSymbol.GetMembers(EqualsMethodName)
                 .OfType<IMethodSymbol>()
                 .Where(IsValidEqualsMethodSymbol)

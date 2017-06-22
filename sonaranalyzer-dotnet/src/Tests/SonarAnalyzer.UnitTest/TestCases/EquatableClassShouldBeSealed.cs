@@ -17,7 +17,7 @@ namespace Tests.Diagnostics
         public bool Equals(StaticClassImplementsIEquatable other) => true;
     }
 
-    public class ClassImplementsIEquatable : IEquatable<ClassImplementsIEquatable> // Noncompliant {{Make this class 'sealed' or implement 'IEqualityComparer<T>' instead.}}
+    public class ClassImplementsIEquatable : IEquatable<ClassImplementsIEquatable> // Noncompliant {{Seal class 'ClassImplementsIEquatable' or implement 'IEqualityComparer<T>' instead.}}
 //               ^^^^^^^^^^^^^^^^^^^^^^^^^
     {
     }
@@ -36,5 +36,30 @@ namespace Tests.Diagnostics
     {
         public virtual bool Equals(ComplexClass other) => true;
         public bool Equals(ClassHasEqualsMethod other) => true;
+    }
+
+    public abstract class BaseClass : IEquatable<BaseClass> // Noncompliant
+    {
+        public bool Equals(BaseClass other) => false;
+    }
+
+    public class SubClass : BaseClass { }
+    public class SubSubClass : SubClass { }
+
+    public class Foo { }
+
+    public class Bar : Foo, IEquatable<Bar> // Noncompliant
+    {
+        public bool Equals(Bar other) => false;
+    }
+
+    internal class InternalClass : IEquatable<InternalClass> // Compliant because internal
+    {
+        public bool Equals(InternalClass other) => false;
+
+        private class PrivateClass : IEquatable<PrivateClass> // Compliant because private
+        {
+            public bool Equals(InternalClass other) => false;
+        }
     }
 }
