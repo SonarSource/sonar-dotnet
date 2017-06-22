@@ -2,27 +2,16 @@
 "issues":  [
 {
 "id":  "S3897",
-"message":  "Implement 'IEquatable<TestActorRef>'.",
-"location":  [
-{
-"uri":  "akka.net\src\core\Akka.TestKit\TestActorRef.cs",
+"message":  "Implement 'IEquatable<IActorRef>'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.TestKit\TestActorRefBase.cs",
 "region":  {
-"startLine":  20,
-"startColumn":  18,
-"endLine":  20,
-"endColumn":  30
-}
-},
-{
-"uri":  "akka.net\src\core\Akka.TestKit\TestActorRef.cs",
-"region":  {
-"startLine":  58,
-"startColumn":  30,
-"endLine":  58,
-"endColumn":  36
+"startLine":  22,
+"startColumn":  27,
+"endLine":  22,
+"endColumn":  43
 }
 }
-]
 }
 ]
 }
