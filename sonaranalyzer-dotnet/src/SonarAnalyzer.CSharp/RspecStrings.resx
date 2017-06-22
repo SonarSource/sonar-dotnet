@@ -2233,7 +2233,7 @@
     <value>misra,cert</value>
   </data>
   <data name="S2201_Title" xml:space="preserve">
-    <value>Return values from functions without side effects should not be ignored</value>
+    <value>Return values should not be ignored when function calls don't have any side effects</value>
   </data>
   <data name="S2201_Type" xml:space="preserve">
     <value>BUG</value>
