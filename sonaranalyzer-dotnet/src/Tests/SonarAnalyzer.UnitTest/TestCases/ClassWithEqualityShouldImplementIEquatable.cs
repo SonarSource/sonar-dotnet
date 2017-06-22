@@ -16,6 +16,19 @@ namespace Tests.Diagnostics
         }
     }
 
+    class MyCompliantInheritedClass : MyCompliantClass, IEquatable<MyCompliantInheritedClass> // Compliant
+    {
+        public override bool Equals(object obj)
+        {
+            return Equals(obj as MyCompliantInheritedClass);
+        }
+
+        public bool Equals(MyCompliantInheritedClass other)
+        {
+            return false;
+        }
+    }
+
     class ClassWithEqualsObj // Noncompliant {{Implement 'IEquatable<ClassWithEqualsObj>'.}}
 //        ^^^^^^^^^^^^^^^^^^
     {
