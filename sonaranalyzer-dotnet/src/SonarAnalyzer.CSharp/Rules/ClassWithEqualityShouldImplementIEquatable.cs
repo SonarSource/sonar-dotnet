@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
@@ -32,16 +31,10 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public class ClassWithEqualityShouldImplementIEquatable : SonarDiagnosticAnalyzer
+    public class ClassWithEqualityShouldImplementIEquatable : EquatableRuleBase
     {
         internal const string DiagnosticId = "S3897";
-        private const string MessageFormat = "{0}";
-        private const string ImplementAndOverrideMessage = "Implement 'IEquatable<{0}>' and override 'Equals(object)'.";
-        private const string ImplementIEquatableMessage = "Implement 'IEquatable<{0}>'.";
-        private const string OverrideEqualsMessage = "Override 'Equals(object)'.";
-        private const string EqualsTSecondaryMessage = "Call this method from 'Equals(object)'.";
-        private const string EqualsObjectSecondaryMessage = "Call 'Equals(T)' from this method.";
-        private const string EqualsMethodName = nameof(object.Equals);
+        private const string MessageFormat = "Implement 'IEquatable<{0}>'.";
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
@@ -55,94 +48,21 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     var classDeclaration = (ClassDeclarationSyntax)c.Node;
                     var classSymbol = c.SemanticModel.GetDeclaredSymbol(classDeclaration);
-                    if (classSymbol == null)
+                    if (classSymbol == null ||
+                        classDeclaration.Identifier.IsMissing)
                     {
                         return;
                     }
 
-                    var equalsMethodSymbols = classDeclaration.Members
-                        .OfType<MethodDeclarationSyntax>()
-                        .Select(mds => c.SemanticModel.GetDeclaredSymbol(mds).ToSymbolWithSyntax(mds))
-                        .Where(node => IsValidEqualsMethodSymbol(node.Symbol))
-                        .ToList();
-
-                    var objectEqualsMethod = equalsMethodSymbols.FirstOrDefault(ms => ms.Symbol.Parameters[0].Type.Is(KnownType.System_Object))?.Syntax;
-                    var equatableInterface = classSymbol.AllInterfaces.FirstOrDefault(nts => nts.ConstructedFrom.Is(KnownType.System_IEquatable_T));
-                    var typeSpecificEqualsMethod = FindTypeSpecificEqualsMethod(equalsMethodSymbols, equatableInterface, classSymbol);
-
-                    if (HasNoTriggeringEqualsMethod(objectEqualsMethod, typeSpecificEqualsMethod) ||
-                        IsEquatableInterfaceCorrectlyImplemented(objectEqualsMethod, typeSpecificEqualsMethod, equatableInterface))
-                    {
-                        return;
-                    }
-
-                    c.ReportDiagnostic(CreateReportDiagnostic(equatableInterface != null, objectEqualsMethod,
-                        typeSpecificEqualsMethod, classDeclaration.Identifier));
+                    classSymbol.GetMembers(EqualsMethodName)
+                        .OfType<IMethodSymbol>()
+                        .Where(IsValidEqualsMethodSymbol)
+                        .Where(ms => ms.GetInterfaceMember() == null)
+                        .ToList()
+                        .ForEach(ms => c.ReportDiagnostic(Diagnostic.Create(rule,
+                            classDeclaration.Identifier.GetLocation(),
+                            ms.Parameters[0].Type.Name)));
                 }, SyntaxKind.ClassDeclaration);
-        }
-
-        private static bool IsValidEqualsMethodSymbol(IMethodSymbol methodSymbol)
-        {
-            return methodSymbol.MethodKind == MethodKind.Ordinary &&
-                methodSymbol.Name == EqualsMethodName &&
-                methodSymbol.Parameters.Length == 1 &&
-                methodSymbol.ReturnType.Is(KnownType.System_Boolean);
-        }
-
-        private static MethodDeclarationSyntax FindTypeSpecificEqualsMethod(
-            IList<SyntaxNodeWithSymbol<MethodDeclarationSyntax, IMethodSymbol>> equalsMethodSymbols,
-            INamedTypeSymbol equatableInterface, INamedTypeSymbol classSymbol)
-        {
-            var equalsParameterType = equatableInterface == null ?
-                classSymbol :
-                equatableInterface.TypeArguments[0];
-
-            return equalsMethodSymbols.FirstOrDefault(
-                    ms => !ms.Symbol.IsOverride && ms.Symbol.Parameters[0].Type.Equals(equalsParameterType))
-                ?.Syntax;
-        }
-
-        private static bool HasNoTriggeringEqualsMethod(MethodDeclarationSyntax objectEqualsMethod,
-            MethodDeclarationSyntax typeSpecificEqualsMethod)
-        {
-            return objectEqualsMethod == null && typeSpecificEqualsMethod == null;
-        }
-
-        private static bool IsEquatableInterfaceCorrectlyImplemented(MethodDeclarationSyntax objectEqualsMethod,
-            MethodDeclarationSyntax typeSpecificEqualsMethod, INamedTypeSymbol equatableInterface)
-        {
-            return objectEqualsMethod != null && typeSpecificEqualsMethod != null && equatableInterface != null;
-        }
-
-        private Diagnostic CreateReportDiagnostic(bool implementsIEquatable, MethodDeclarationSyntax objectEqualsMethod,
-            MethodDeclarationSyntax typeSpecificEqualsMethod, SyntaxToken classIdentifier)
-        {
-            if (objectEqualsMethod != null && typeSpecificEqualsMethod != null)
-            {
-                return Diagnostic.Create(rule, classIdentifier.GetLocation(),
-                    string.Format(ImplementIEquatableMessage, classIdentifier.ValueText));
-            }
-
-            if (objectEqualsMethod != null)
-            {
-                return Diagnostic.Create(rule, classIdentifier.GetLocation(),
-                    additionalLocations: new[] { objectEqualsMethod.Identifier.GetLocation() },
-                    properties: new Dictionary<string, string> { ["0"] = EqualsObjectSecondaryMessage }.ToImmutableDictionary(),
-                    messageArgs: string.Format(ImplementIEquatableMessage, classIdentifier.ValueText));
-            }
-
-            if (!implementsIEquatable)
-            {
-                return Diagnostic.Create(rule, classIdentifier.GetLocation(),
-                    additionalLocations: new[] { typeSpecificEqualsMethod.Identifier.GetLocation() },
-                    properties: new Dictionary<string, string> { ["0"] = EqualsTSecondaryMessage }.ToImmutableDictionary(),
-                    messageArgs: string.Format(ImplementAndOverrideMessage, classIdentifier.ValueText));
-            }
-
-            return Diagnostic.Create(rule, classIdentifier.GetLocation(),
-                additionalLocations: new[] { typeSpecificEqualsMethod.Identifier.GetLocation() },
-                properties: new Dictionary<string, string> { ["0"] = EqualsTSecondaryMessage }.ToImmutableDictionary(),
-                messageArgs: OverrideEqualsMessage);
         }
     }
 }

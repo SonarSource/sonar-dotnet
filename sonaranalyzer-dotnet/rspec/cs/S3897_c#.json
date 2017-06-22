@@ -1,5 +1,5 @@
 {
-  "title": "Classes that provide \"Equals(<T>)\" or override \"Equals(Object)\" should implement \"IEquatable<T>\"",
+  "title": "Classes that provide \"Equals(<T>)\" should implement \"IEquatable<T>\"",
   "type": "CODE_SMELL",
   "status": "ready",
   "remediation": {
@@ -9,5 +9,5 @@
   "tags": [
     "api-design"
   ],
-  "defaultSeverity": "Major"
+  "defaultSeverity": "Minor"
 }

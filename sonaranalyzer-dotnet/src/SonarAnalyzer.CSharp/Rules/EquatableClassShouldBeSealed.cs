@@ -31,11 +31,10 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class EquatableClassShouldBeSealed : SonarDiagnosticAnalyzer
+    public sealed class EquatableClassShouldBeSealed : EquatableRuleBase
     {
         internal const string DiagnosticId = "S4035";
         private const string MessageFormat = "Seal class '{0}' or implement 'IEqualityComparer<T>' instead.";
-        private const string EqualsMethodName = nameof(object.Equals);
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
