@@ -2233,7 +2233,7 @@
     <value>misra,cert</value>
   </data>
   <data name="S2201_Title" xml:space="preserve">
-    <value>Return values from functions without side effects should not be ignored</value>
+    <value>Return values should not be ignored when function calls don't have any side effects</value>
   </data>
   <data name="S2201_Type" xml:space="preserve">
     <value>BUG</value>
@@ -6847,6 +6847,33 @@
     <value>Exceptions should provide standard constructors</value>
   </data>
   <data name="S4027_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
+  <data name="S4035_Category" xml:space="preserve">
+    <value>Sonar Code Smell</value>
+  </data>
+  <data name="S4035_Description" xml:space="preserve">
+    <value>When a class implements the IEquatable&lt;T&gt; interface, it enters a contract that, in effect, states "I know how to compare two instances of type T or any type derived from T for equality.". However if that class is derived, it is very unlikely that the base class will know how to make a meaningful comparison. Therefore that implicit contract is now broken.</value>
+  </data>
+  <data name="S4035_IsActivatedByDefault" xml:space="preserve">
+    <value>True</value>
+  </data>
+  <data name="S4035_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S4035_RemediationCost" xml:space="preserve">
+    <value>2min</value>
+  </data>
+  <data name="S4035_Severity" xml:space="preserve">
+    <value>Major</value>
+  </data>
+  <data name="S4035_Tags" xml:space="preserve">
+    <value>pitfall</value>
+  </data>
+  <data name="S4035_Title" xml:space="preserve">
+    <value>Classes implementing "IEquatable&lt;T&gt;" should be sealed</value>
+  </data>
+  <data name="S4035_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
   </data>
   <data name="S4040_Category" xml:space="preserve">
