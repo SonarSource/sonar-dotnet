@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S4035",
-"message":  "Make this class 'sealed' or implement 'IEqualityComparer<T>' instead.",
+"message":  "Seal class 'Payload' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
 "uri":  "Nancy\src\Nancy.Demo.Hosting.Aspnet\Models\Payload.cs",
 "region":  {

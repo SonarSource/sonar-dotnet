@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S4035",
-"message":  "Make this class 'sealed' or implement 'IEqualityComparer<T>' instead.",
+"message":  "Seal class 'TestActorRefBase' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.TestKit\TestActorRefBase.cs",
 "region":  {

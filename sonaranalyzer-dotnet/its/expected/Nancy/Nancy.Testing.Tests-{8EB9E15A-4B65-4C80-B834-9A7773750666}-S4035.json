@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S4035",
-"message":  "Make this class 'sealed' or implement 'IEqualityComparer<T>' instead.",
+"message":  "Seal class 'EquatableModel' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
 "uri":  "Nancy\src\Nancy.Testing.Tests\AssertEqualityComparerFixture.cs",
 "region":  {

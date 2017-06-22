@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S4035",
-"message":  "Make this class 'sealed' or implement 'IEqualityComparer<T>' instead.",
+"message":  "Seal class 'TestConverterType' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
 "uri":  "Nancy\src\Nancy.Tests\Unit\Json\TestConverterType.cs",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S4035",
-"message":  "Make this class 'sealed' or implement 'IEqualityComparer<T>' instead.",
+"message":  "Seal class 'TestData' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
 "uri":  "Nancy\src\Nancy.Tests\Unit\Json\TestData.cs",
 "region":  {
@@ -28,7 +28,7 @@
 },
 {
 "id":  "S4035",
-"message":  "Make this class 'sealed' or implement 'IEqualityComparer<T>' instead.",
+"message":  "Seal class 'TestPrimitiveConverterType' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
 "uri":  "Nancy\src\Nancy.Tests\Unit\Json\TestPrimitiveConverterType.cs",
 "region":  {
@@ -41,7 +41,7 @@
 },
 {
 "id":  "S4035",
-"message":  "Make this class 'sealed' or implement 'IEqualityComparer<T>' instead.",
+"message":  "Seal class 'TestModel' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
 "uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBodyDeserializers\JsonBodyDeserializerFixture.cs",
 "region":  {
@@ -54,7 +54,7 @@
 },
 {
 "id":  "S4035",
-"message":  "Make this class 'sealed' or implement 'IEqualityComparer<T>' instead.",
+"message":  "Seal class 'TestModel' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
 "uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBodyDeserializers\XmlBodyDeserializerfixture.cs",
 "region":  {
@@ -67,7 +67,7 @@
 },
 {
 "id":  "S4035",
-"message":  "Make this class 'sealed' or implement 'IEqualityComparer<T>' instead.",
+"message":  "Seal class 'Payload' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
 "uri":  "Nancy\src\Nancy.Tests\Unit\Sessions\DefaultSessionObjectFormatterFixture.cs",
 "region":  {

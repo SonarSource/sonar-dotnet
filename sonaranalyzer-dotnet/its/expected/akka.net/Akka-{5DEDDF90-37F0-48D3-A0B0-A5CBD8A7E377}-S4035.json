@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S4035",
-"message":  "Make this class 'sealed' or implement 'IEqualityComparer<T>' instead.",
+"message":  "Seal class 'ActorPath' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
 "uri":  "akka.net\src\core\Akka\Actor\ActorPath.cs",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S4035",
-"message":  "Make this class 'sealed' or implement 'IEqualityComparer<T>' instead.",
+"message":  "Seal class 'Surrogate' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
 "uri":  "akka.net\src\core\Akka\Actor\ActorPath.cs",
 "region":  {
@@ -28,7 +28,7 @@
 },
 {
 "id":  "S4035",
-"message":  "Make this class 'sealed' or implement 'IEqualityComparer<T>' instead.",
+"message":  "Seal class 'ActorRefBase' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
 "uri":  "akka.net\src\core\Akka\Actor\ActorRef.cs",
 "region":  {
@@ -41,7 +41,7 @@
 },
 {
 "id":  "S4035",
-"message":  "Make this class 'sealed' or implement 'IEqualityComparer<T>' instead.",
+"message":  "Seal class 'ActorSelection' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
 "uri":  "akka.net\src\core\Akka\Actor\ActorSelection.cs",
 "region":  {
@@ -54,7 +54,7 @@
 },
 {
 "id":  "S4035",
-"message":  "Make this class 'sealed' or implement 'IEqualityComparer<T>' instead.",
+"message":  "Seal class 'Deploy' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
 "uri":  "akka.net\src\core\Akka\Actor\Deploy.cs",
 "region":  {
@@ -67,7 +67,7 @@
 },
 {
 "id":  "S4035",
-"message":  "Make this class 'sealed' or implement 'IEqualityComparer<T>' instead.",
+"message":  "Seal class 'State' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
 "uri":  "akka.net\src\core\Akka\Actor\FSM.cs",
 "region":  {
@@ -80,7 +80,7 @@
 },
 {
 "id":  "S4035",
-"message":  "Make this class 'sealed' or implement 'IEqualityComparer<T>' instead.",
+"message":  "Seal class 'Props' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
 "uri":  "akka.net\src\core\Akka\Actor\Props.cs",
 "region":  {
@@ -93,7 +93,7 @@
 },
 {
 "id":  "S4035",
-"message":  "Make this class 'sealed' or implement 'IEqualityComparer<T>' instead.",
+"message":  "Seal class 'RemoteScope' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
 "uri":  "akka.net\src\core\Akka\Actor\RemoteScope.cs",
 "region":  {
@@ -106,7 +106,7 @@
 },
 {
 "id":  "S4035",
-"message":  "Make this class 'sealed' or implement 'IEqualityComparer<T>' instead.",
+"message":  "Seal class 'DefaultResizer' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
 "uri":  "akka.net\src\core\Akka\Routing\Resizer.cs",
 "region":  {
@@ -119,7 +119,7 @@
 },
 {
 "id":  "S4035",
-"message":  "Make this class 'sealed' or implement 'IEqualityComparer<T>' instead.",
+"message":  "Seal class 'ActorRefRoutee' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
 "uri":  "akka.net\src\core\Akka\Routing\Router.cs",
 "region":  {
@@ -132,7 +132,7 @@
 },
 {
 "id":  "S4035",
-"message":  "Make this class 'sealed' or implement 'IEqualityComparer<T>' instead.",
+"message":  "Seal class 'ActorSelectionRoutee' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
 "uri":  "akka.net\src\core\Akka\Routing\Router.cs",
 "region":  {
@@ -145,7 +145,7 @@
 },
 {
 "id":  "S4035",
-"message":  "Make this class 'sealed' or implement 'IEqualityComparer<T>' instead.",
+"message":  "Seal class 'Group' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
 "uri":  "akka.net\src\core\Akka\Routing\RouterConfig.cs",
 "region":  {
@@ -158,7 +158,7 @@
 },
 {
 "id":  "S4035",
-"message":  "Make this class 'sealed' or implement 'IEqualityComparer<T>' instead.",
+"message":  "Seal class 'Pool' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
 "uri":  "akka.net\src\core\Akka\Routing\RouterConfig.cs",
 "region":  {
@@ -171,7 +171,7 @@
 },
 {
 "id":  "S4035",
-"message":  "Make this class 'sealed' or implement 'IEqualityComparer<T>' instead.",
+"message":  "Seal class 'MatchBuilderSignature' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
 "uri":  "akka.net\src\core\Akka\Util\MatchHandler\MatchBuilderSignature.cs",
 "region":  {

@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S4035",
-"message":  "Make this class 'sealed' or implement 'IEqualityComparer<T>' instead.",
+"message":  "Seal class 'DynamicDictionary' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
 "uri":  "Nancy\src\Nancy\DynamicDictionary.cs",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S4035",
-"message":  "Make this class 'sealed' or implement 'IEqualityComparer<T>' instead.",
+"message":  "Seal class 'DynamicDictionaryValue' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
 "uri":  "Nancy\src\Nancy\DynamicDictionaryValue.cs",
 "region":  {
@@ -28,7 +28,7 @@
 },
 {
 "id":  "S4035",
-"message":  "Make this class 'sealed' or implement 'IEqualityComparer<T>' instead.",
+"message":  "Seal class 'BindingMemberInfo' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
 "uri":  "Nancy\src\Nancy\ModelBinding\BindingMemberInfo.cs",
 "region":  {
@@ -41,7 +41,7 @@
 },
 {
 "id":  "S4035",
-"message":  "Make this class 'sealed' or implement 'IEqualityComparer<T>' instead.",
+"message":  "Seal class 'ViewLocationResult' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
 "uri":  "Nancy\src\Nancy\ViewEngines\ViewLocationResult.cs",
 "region":  {

@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S4035",
-"message":  "Make this class 'sealed' or implement 'IEqualityComparer<T>' instead.",
+"message":  "Seal class 'EmberPlugin' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
 "uri":  "Ember-MM\Ember.Plugins\PluginManager.cs",
 "region":  {

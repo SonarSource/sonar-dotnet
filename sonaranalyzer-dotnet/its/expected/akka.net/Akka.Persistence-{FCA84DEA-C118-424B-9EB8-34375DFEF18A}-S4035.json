@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S4035",
-"message":  "Make this class 'sealed' or implement 'IEqualityComparer<T>' instead.",
+"message":  "Seal class 'EventSequence' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Persistence\Journal\EventSequences.cs",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S4035",
-"message":  "Make this class 'sealed' or implement 'IEqualityComparer<T>' instead.",
+"message":  "Seal class 'WriteMessagesSuccessful' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
 "region":  {
@@ -28,7 +28,7 @@
 },
 {
 "id":  "S4035",
-"message":  "Make this class 'sealed' or implement 'IEqualityComparer<T>' instead.",
+"message":  "Seal class 'ReplayMessagesSuccess' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
 "region":  {
@@ -41,7 +41,7 @@
 },
 {
 "id":  "S4035",
-"message":  "Make this class 'sealed' or implement 'IEqualityComparer<T>' instead.",
+"message":  "Seal class 'Persistent' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Persistence\Persistent.cs",
 "region":  {

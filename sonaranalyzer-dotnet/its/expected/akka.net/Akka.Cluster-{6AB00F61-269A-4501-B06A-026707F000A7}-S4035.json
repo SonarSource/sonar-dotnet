@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S4035",
-"message":  "Make this class 'sealed' or implement 'IEqualityComparer<T>' instead.",
+"message":  "Seal class 'NodeMetrics' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Cluster\ClusterMetricsCollector.cs",
 "region":  {

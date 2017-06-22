@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S4035",
-"message":  "Make this class 'sealed' or implement 'IEqualityComparer<T>' instead.",
+"message":  "Seal class 'CustomMessageOverrideEquals' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Tests\Actor\Stash\ActorWithStashSpec.cs",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S4035",
-"message":  "Make this class 'sealed' or implement 'IEqualityComparer<T>' instead.",
+"message":  "Seal class 'UntypedContainerMessage' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Tests\Serialization\SerializationSpec.cs",
 "region":  {
@@ -28,7 +28,7 @@
 },
 {
 "id":  "S4035",
-"message":  "Make this class 'sealed' or implement 'IEqualityComparer<T>' instead.",
+"message":  "Seal class 'ImmutableMessageWithPrivateCtor' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Tests\Serialization\SerializationSpec.cs",
 "region":  {
@@ -41,7 +41,7 @@
 },
 {
 "id":  "S4035",
-"message":  "Make this class 'sealed' or implement 'IEqualityComparer<T>' instead.",
+"message":  "Seal class 'ImmutableMessage' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Tests\Serialization\SerializationSpec.cs",
 "region":  {

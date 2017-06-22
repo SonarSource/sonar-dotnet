@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S4035",
-"message":  "Make this class 'sealed' or implement 'IEqualityComparer<T>' instead.",
+"message":  "Seal class 'ImmutableMessage' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
 "uri":  "akka.net\src\contrib\serializers\Akka.Serialization.TestKit\ImmutableMessage.cs",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S4035",
-"message":  "Make this class 'sealed' or implement 'IEqualityComparer<T>' instead.",
+"message":  "Seal class 'ImmutableMessageWithPrivateCtor' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
 "uri":  "akka.net\src\contrib\serializers\Akka.Serialization.TestKit\ImmutableMessageWithPrivateCtor.cs",
 "region":  {
@@ -28,7 +28,7 @@
 },
 {
 "id":  "S4035",
-"message":  "Make this class 'sealed' or implement 'IEqualityComparer<T>' instead.",
+"message":  "Seal class 'UntypedContainerMessage' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
 "uri":  "akka.net\src\contrib\serializers\Akka.Serialization.TestKit\UntypedContainerMessage.cs",
 "region":  {
