@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S4041",
+"message":  "Change the name of that type to be different from an existing namespace.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"region":  {
+"startLine":  51,
+"startColumn":  29,
+"endLine":  51,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S4041",
+"message":  "Change the name of that type to be different from an existing namespace.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"region":  {
+"startLine":  178,
+"startColumn":  24,
+"endLine":  178,
+"endColumn":  28
+}
+}
+}
+]
+}

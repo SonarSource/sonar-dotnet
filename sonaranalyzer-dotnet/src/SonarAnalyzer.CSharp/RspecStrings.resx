@@ -6930,6 +6930,33 @@
   <data name="S4040_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
   </data>
+  <data name="S4041_Category" xml:space="preserve">
+    <value>Sonar Code Smell</value>
+  </data>
+  <data name="S4041_Description" xml:space="preserve">
+    <value>When a type name matches the name of a publicly defined namespace, for instance one in the .NET framework class library, it leads to confusion and makes the library that much harder to use.</value>
+  </data>
+  <data name="S4041_IsActivatedByDefault" xml:space="preserve">
+    <value>False</value>
+  </data>
+  <data name="S4041_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S4041_RemediationCost" xml:space="preserve">
+    <value>2min</value>
+  </data>
+  <data name="S4041_Severity" xml:space="preserve">
+    <value>Minor</value>
+  </data>
+  <data name="S4041_Tags" xml:space="preserve">
+    <value>convention</value>
+  </data>
+  <data name="S4041_Title" xml:space="preserve">
+    <value>Type names should not match namespaces</value>
+  </data>
+  <data name="S4041_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S818_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
