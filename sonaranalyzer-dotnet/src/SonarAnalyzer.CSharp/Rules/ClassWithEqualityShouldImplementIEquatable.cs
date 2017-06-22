@@ -31,10 +31,11 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public class ClassWithEqualityShouldImplementIEquatable : EquatableRuleBase
+    public class ClassWithEqualityShouldImplementIEquatable : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S3897";
         private const string MessageFormat = "Implement 'IEquatable<{0}>'.";
+        private const string EqualsMethodName = nameof(object.Equals);
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
@@ -63,6 +64,15 @@ namespace SonarAnalyzer.Rules.CSharp
                             classDeclaration.Identifier.GetLocation(),
                             ms.Parameters[0].Type.Name)));
                 }, SyntaxKind.ClassDeclaration);
+        }
+
+        private static bool IsIEquatableEqualsMethodCandidate(IMethodSymbol methodSymbol)
+        {
+            return methodSymbol.MethodKind == MethodKind.Ordinary &&
+                methodSymbol.Name == EqualsMethodName &&
+                !methodSymbol.IsOverride &&
+                methodSymbol.ReturnType.Is(KnownType.System_Boolean) &&
+                methodSymbol.Parameters.Length == 1;
         }
     }
 }

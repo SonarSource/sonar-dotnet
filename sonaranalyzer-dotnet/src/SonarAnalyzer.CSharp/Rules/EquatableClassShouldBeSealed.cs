@@ -31,10 +31,11 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class EquatableClassShouldBeSealed : EquatableRuleBase
+    public sealed class EquatableClassShouldBeSealed : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S4035";
         private const string MessageFormat = "Seal class '{0}' or implement 'IEqualityComparer<T>' instead.";
+        private const string EqualsMethodName = nameof(object.Equals);
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
@@ -87,6 +88,20 @@ namespace SonarAnalyzer.Rules.CSharp
             // For all Equals(T) not a IEquatable<T> implementation checks if any is non-virtual
             var unprocessedTypeNames = equalsMethodsByTypeName.Keys.Except(equatableInterfacesByTypeName.Keys);
             return unprocessedTypeNames.Any(typeName => !equalsMethodsByTypeName[typeName].IsVirtual);
+        }
+        private static bool IsCompilableIEquatableTSymbol(INamedTypeSymbol namedTypeSymbol)
+        {
+            return namedTypeSymbol.ConstructedFrom.Is(KnownType.System_IEquatable_T) &&
+                namedTypeSymbol.TypeArguments.Length == 1;
+        }
+
+        private static bool IsIEquatableEqualsMethodCandidate(IMethodSymbol methodSymbol)
+        {
+            return methodSymbol.MethodKind == MethodKind.Ordinary &&
+                methodSymbol.Name == EqualsMethodName &&
+                !methodSymbol.IsOverride &&
+                methodSymbol.ReturnType.Is(KnownType.System_Boolean) &&
+                methodSymbol.Parameters.Length == 1;
         }
     }
 }
