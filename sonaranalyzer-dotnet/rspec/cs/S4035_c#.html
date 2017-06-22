@@ -3,7 +3,8 @@ instances of type T or any type derived from T for equality.". However if that c
 to make a meaningful comparison. Therefore that implicit contract is now broken.</p>
 <p>Alternatively <code>IEqualityComparer&lt;T&gt;</code> provides a safer interface and is used by collections or <code>Equals</code> could be made
 <code>virtual</code>.</p>
-<p>This rule raises an issue when a class implements <code>IEquitable&lt;T&gt;</code> and is not sealed and <code>Equals</code> is not virtual.</p>
+<p>This rule raises an issue when a unsealed, <code>public</code> or <code>protected</code> class implements <code>IEquitable&lt;T&gt;</code> and the
+<code>Equals</code> is not <code>virtual</code>.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
 using System;
