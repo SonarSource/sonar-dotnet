@@ -56,7 +56,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     classSymbol.GetMembers(EqualsMethodName)
                         .OfType<IMethodSymbol>()
-                        .Where(IsValidEqualsMethodSymbol)
+                        .Where(IsIEquatableEqualsMethodCandidate)
                         .Where(ms => ms.GetInterfaceMember() == null)
                         .ToList()
                         .ForEach(ms => c.ReportDiagnostic(Diagnostic.Create(rule,

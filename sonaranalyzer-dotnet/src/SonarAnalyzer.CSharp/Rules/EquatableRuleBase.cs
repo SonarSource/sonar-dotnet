@@ -28,13 +28,13 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         protected const string EqualsMethodName = nameof(object.Equals);
 
-        protected static bool IsValidEquatableInterfaceSymbol(INamedTypeSymbol namedTypeSymbol)
+        protected static bool IsCompilableIEquatableTSymbol(INamedTypeSymbol namedTypeSymbol)
         {
             return namedTypeSymbol.ConstructedFrom.Is(KnownType.System_IEquatable_T) &&
                 namedTypeSymbol.TypeArguments.Length == 1;
         }
 
-        protected static bool IsValidEqualsMethodSymbol(IMethodSymbol methodSymbol)
+        protected static bool IsIEquatableEqualsMethodCandidate(IMethodSymbol methodSymbol)
         {
             return methodSymbol.MethodKind == MethodKind.Ordinary &&
                 methodSymbol.Name == EqualsMethodName &&

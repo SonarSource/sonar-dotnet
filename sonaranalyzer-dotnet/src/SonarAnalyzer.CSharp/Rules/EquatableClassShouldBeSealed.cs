@@ -64,21 +64,6 @@ namespace SonarAnalyzer.Rules.CSharp
                 }, SyntaxKind.ClassDeclaration);
         }
 
-        private static bool IsCompilableIEquatableTSymbol(INamedTypeSymbol namedTypeSymbol)
-        {
-            return namedTypeSymbol.ConstructedFrom.Is(KnownType.System_IEquatable_T) &&
-                namedTypeSymbol.TypeArguments.Length == 1;
-        }
-
-        private static bool IsIEquatableEqualsMethodCandidate(IMethodSymbol methodSymbol)
-        {
-            return methodSymbol.MethodKind == MethodKind.Ordinary &&
-                methodSymbol.Name == EqualsMethodName &&
-                !methodSymbol.IsOverride &&
-                methodSymbol.ReturnType.Is(KnownType.System_Boolean) &&
-                methodSymbol.Parameters.Length == 1;
-        }
-
         private static bool HasAnyInvalidIEquatableEqualsMethod(INamedTypeSymbol classSymbol)
         {
             var equatableInterfacesByTypeName = classSymbol.Interfaces
