@@ -1,0 +1,79 @@
+<p>When a class implements the <code>IEquatable&lt;T&gt;</code> interface, it enters a contract that, in effect, states "I know how to compare two
+instances of type T or any type derived from T for equality.". However if that class is derived, it is very unlikely that the base class will know how
+to make a meaningful comparison. Therefore that implicit contract is now broken.</p>
+<p>Alternatively <code>IEqualityComparer&lt;T&gt;</code> provides a safer interface and is used by collections or <code>Equals</code> could be made
+<code>virtual</code>.</p>
+<p>This rule raises an issue when a unsealed, <code>public</code> or <code>protected</code> class implements <code>IEquitable&lt;T&gt;</code> and the
+<code>Equals</code> is not <code>virtual</code>.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+using System;
+
+namespace MyLibrary
+{
+  class Base : IEquatable&lt;Base&gt; // Noncompliant
+  {
+    bool Equals(Base other)
+    {
+      if (other == null) { return false };
+      // do comparison of base properties
+    }
+
+    override bool Equals(object other)  =&gt; Equals(other as Base);
+  }
+
+  class A : Base
+  {
+    bool Equals(A other)
+    {
+      if (other == null) { return false };
+      // do comparison of A properties
+      return base.Equals(other);
+    }
+
+    override bool Equals(object other)  =&gt; Equals(other as A);
+  }
+
+  class B : Base
+  {
+    bool Equals(B other)
+    {
+      if (other == null) { return false };
+      // do comparison of B properties
+     return base.Equals(other);
+    }
+
+    override bool Equals(object other)  =&gt; Equals(other as B);
+  }
+
+  static void Main() {
+    A a = new A();
+    B b = new B();
+
+    Console.WriteLine(a.Equals(b)); // This calls the WRONG equals. This causes Base::Equals(Base)
+    //  to be called which only compares the properties in Base and ignores the fact that
+    // a and b are different types. In the working example A::Equals(Object) would have been
+    // called and Equals would return false because it correctly recognizes that a and b are
+    // different types. If a and b have the same base properties they will  be returned as equal.
+  }
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+using System;
+
+namespace MyLibrary
+{
+    public sealed class Foo : IEquatable&lt;Foo&gt;
+    {
+        public bool Equals(Foo other)
+        {
+            // Your code here
+        }
+    }
+}
+</pre>
+<h2>See</h2>
+<p><a href="http://blog.mischel.com/2013/01/05/inheritance-and-iequatable-do-not-mix/">Inheritance and IEquatable do not mix</a></p>
+<p><a href="https://msdn.microsoft.com/en-us/library/ms132151(v=vs.110).aspx">IEqualityComparer&lt;T&gt; Interface</a></p>
+

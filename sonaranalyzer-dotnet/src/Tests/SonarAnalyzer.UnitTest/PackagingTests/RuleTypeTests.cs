@@ -4032,7 +4032,7 @@ namespace SonarAnalyzer.UnitTest.PackagingTests
             //["4032"],
             //["4033"],
             //["4034"],
-            //["4035"],
+            ["4035"] = "CODE_SMELL",
             //["4036"],
             //["4037"],
             //["4038"],
