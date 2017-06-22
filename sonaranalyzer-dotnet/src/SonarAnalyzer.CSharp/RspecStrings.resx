@@ -6099,6 +6099,33 @@
   <data name="S3926_Type" xml:space="preserve">
     <value>BUG</value>
   </data>
+  <data name="S3927_Category" xml:space="preserve">
+    <value>Sonar Bug</value>
+  </data>
+  <data name="S3927_Description" xml:space="preserve">
+    <value>Serialization event handlers that don't have the correct signature will simply not be called, thus bypassing any attempts to augment the automated de/serialization.</value>
+  </data>
+  <data name="S3927_IsActivatedByDefault" xml:space="preserve">
+    <value>True</value>
+  </data>
+  <data name="S3927_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S3927_RemediationCost" xml:space="preserve">
+    <value>15min</value>
+  </data>
+  <data name="S3927_Severity" xml:space="preserve">
+    <value>Major</value>
+  </data>
+  <data name="S3927_Tags" xml:space="preserve">
+    <value />
+  </data>
+  <data name="S3927_Title" xml:space="preserve">
+    <value>Serialization event handlers should be implemented correctly</value>
+  </data>
+  <data name="S3927_Type" xml:space="preserve">
+    <value>BUG</value>
+  </data>
   <data name="S3928_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
