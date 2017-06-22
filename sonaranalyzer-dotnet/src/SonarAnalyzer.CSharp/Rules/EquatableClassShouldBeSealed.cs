@@ -57,22 +57,21 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    if (HasInvalidCombination(classSymbol))
+                    if (HasAnyInvalidIEquatableEqualsMethod(classSymbol))
                     {
                         c.ReportDiagnostic(Diagnostic.Create(rule, classDeclaration.Identifier.GetLocation(),
                             classDeclaration.Identifier));
                     }
-
                 }, SyntaxKind.ClassDeclaration);
         }
 
-        private static bool IsValidEquatableInterfaceSymbol(INamedTypeSymbol namedTypeSymbol)
+        private static bool IsCompilableIEquatableTSymbol(INamedTypeSymbol namedTypeSymbol)
         {
             return namedTypeSymbol.ConstructedFrom.Is(KnownType.System_IEquatable_T) &&
                 namedTypeSymbol.TypeArguments.Length == 1;
         }
 
-        private static bool IsValidEqualsMethodSymbol(IMethodSymbol methodSymbol)
+        private static bool IsIEquatableEqualsMethodCandidate(IMethodSymbol methodSymbol)
         {
             return methodSymbol.MethodKind == MethodKind.Ordinary &&
                 methodSymbol.Name == EqualsMethodName &&
@@ -81,39 +80,29 @@ namespace SonarAnalyzer.Rules.CSharp
                 methodSymbol.Parameters.Length == 1;
         }
 
-        private static bool HasInvalidCombination(INamedTypeSymbol classSymbol)
+        private static bool HasAnyInvalidIEquatableEqualsMethod(INamedTypeSymbol classSymbol)
         {
             var equatableInterfacesByTypeName = classSymbol.Interfaces
-                .Where(IsValidEquatableInterfaceSymbol)
+                .Where(IsCompilableIEquatableTSymbol)
                 .ToDictionary(nts => nts.TypeArguments[0].Name, nts => nts);
 
             var equalsMethodsByTypeName = classSymbol.GetMembers(EqualsMethodName)
                 .OfType<IMethodSymbol>()
-                .Where(IsValidEqualsMethodSymbol)
+                .Where(IsIEquatableEqualsMethodCandidate)
                 .ToDictionary(ms => ms.Parameters[0].Type.Name, ms => ms);
 
             // Checks whether any IEquatable<T> has no implementation OR a non-virtual implementation
-            foreach (var iequatable in equatableInterfacesByTypeName)
+            var hasAnyNonVirtualImplementation = equatableInterfacesByTypeName
+                .Select(iequatable => equalsMethodsByTypeName.GetValueOrDefault(iequatable.Key))
+                .Any(associatedMethod => associatedMethod == null || !associatedMethod.IsVirtual);
+            if (hasAnyNonVirtualImplementation)
             {
-                var associatedMethod = equalsMethodsByTypeName.GetValueOrDefault(iequatable.Key);
-                if (associatedMethod == null ||
-                    !associatedMethod.IsVirtual)
-                {
-                    return true;
-                }
+                return true;
             }
 
             // For all Equals(T) not a IEquatable<T> implementation checks if any is non-virtual
             var unprocessedTypeNames = equalsMethodsByTypeName.Keys.Except(equatableInterfacesByTypeName.Keys);
-            foreach (var typeName in unprocessedTypeNames)
-            {
-                if (!equalsMethodsByTypeName[typeName].IsVirtual)
-                {
-                    return true;
-                }
-            }
-
-            return false;
+            return unprocessedTypeNames.Any(typeName => !equalsMethodsByTypeName[typeName].IsVirtual);
         }
     }
 }
