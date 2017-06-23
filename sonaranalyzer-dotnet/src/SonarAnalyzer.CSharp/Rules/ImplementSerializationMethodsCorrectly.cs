@@ -68,11 +68,11 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
 
                 var issues = FindIssues(methodSymbol).ToList();
-                if (issues.Any())
+                if (issues.Count > 0)
                 {
                     c.ReportDiagnostic(Diagnostic.Create(rule,
-                            methodDeclaration.Identifier.GetLocation(),
-                            BuildErrorMessage(issues)));
+                        methodDeclaration.Identifier.GetLocation(),
+                        BuildErrorMessage(issues)));
                 }
             },
             SyntaxKind.MethodDeclaration);
@@ -108,22 +108,17 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static string BuildErrorMessage(IEnumerable<string> issues)
+        private static string BuildErrorMessage(List<string> issues)
         {
-            const string separator = ", ";
-            const string lastSeparator = " and ";
-
-            string errorMessage = string.Join(separator, issues);
-
-            int lastCommaIdx = errorMessage.LastIndexOf(separator);
-            if (lastCommaIdx != -1)
+            if (issues.Count == 1)
             {
-                errorMessage = errorMessage
-                    .Remove(lastCommaIdx, separator.Length)
-                    .Insert(lastCommaIdx, lastSeparator);
+                return issues.First();
             }
 
-            return errorMessage;
+            const string separator = ", ";
+            return string.Format("{0} and {1}",
+                string.Join(separator, issues.Take(issues.Count - 1)),
+                issues.Last());
         }
     }
 }
