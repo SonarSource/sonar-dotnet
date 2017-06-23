@@ -67,6 +67,11 @@ namespace SonarAnalyzer.Rules.CSharp
             Func<TMemberSyntax, TMemberSyntax, bool> areMembersEquivalent)
             where TMemberSyntax : MemberDeclarationSyntax
         {
+            if (analysisContext.IsTest())
+            {
+                return;
+            }
+
             var memberDeclaration = (TMemberSyntax)analysisContext.Node;
 
             var explicitInterfaceSpecifier = getExplicitInterfaceSpecifier(memberDeclaration);

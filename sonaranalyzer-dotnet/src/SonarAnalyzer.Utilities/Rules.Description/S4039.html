@@ -65,4 +65,7 @@ namespace MyLibrary
   }
 }
 </pre>
+<h2>Exceptions</h2>
+<p>This rule does not report a violation for an explicit implementation of <code>IDisposable.Dispose</code> when an externally visible
+<code>Close()</code> or <code>System.IDisposable.Dispose(Boolean)</code> method is provided.</p>
 
