@@ -1,0 +1,68 @@
+<p>When a base type explicitly implements a public interface method, that method is only accessible in derived types through a reference to the
+current instance (namely <code>this</code>). If the derived type explicitly overrides that interface method, the base implementation becomes
+inaccessible.</p>
+<p>This rule raises an issue when an unsealed, externally visible type provides an explicit method implementation of a <code>public interface</code>
+and does not provide an alternate, externally visible method with the same name.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+using System;
+
+namespace MyLibrary
+{
+  public interface IMyInterface
+  {
+    void MyMethod();
+  }
+
+  public class Foo : IMyInterface
+  {
+    void IMyInterface.MyMethod()  // Noncompliant
+    {
+      // Do something ...
+    }
+  }
+
+  public class Bar : Foo, IMyInterface
+  {
+    public void MyMethod()
+   {
+     // Can't access base.MyMethod()
+    // ((IMyInterface)this).MyMethod() would be a recursive call
+   }
+  }
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+using System;
+
+namespace MyLibrary
+{
+  public interface IMyInterface
+  {
+    void MyMethod();
+  }
+
+  public class Foo : IMyInterface
+  {
+    void IMyInterface.MyMethod()
+    {
+      MyMethod();
+    }
+    void MyMethod()
+    {
+      // Do something ...
+    }
+  }
+
+  public class Bar : Foo, IMyInterface
+  {
+    public void MyMethod()
+   {
+      // Do something
+      base.MyMethod();
+   }
+  }
+}
+</pre>
+
