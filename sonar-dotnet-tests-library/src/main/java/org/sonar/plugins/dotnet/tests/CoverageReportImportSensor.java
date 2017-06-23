@@ -19,9 +19,6 @@
  */
 package org.sonar.plugins.dotnet.tests;
 
-import java.io.File;
-import java.util.Map;
-
 import org.sonar.api.SonarQubeVersion;
 import org.sonar.api.batch.fs.FilePredicates;
 import org.sonar.api.batch.fs.InputFile;
@@ -34,6 +31,9 @@ import org.sonar.api.batch.sensor.coverage.NewCoverage;
 import org.sonar.api.utils.Version;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
+
+import java.io.File;
+import java.util.Map;
 
 public class CoverageReportImportSensor implements Sensor {
 
@@ -60,10 +60,18 @@ public class CoverageReportImportSensor implements Sensor {
 
   @Override
   public void describe(SensorDescriptor descriptor) {
-    if (this.isIntegrationTest) {
-      descriptor.name(this.languageName + " Integration Tests Coverage Report Import");
+    if (this.sonarQubeVersion.isGreaterThanOrEqual(Version.create(6, 2))) {
+      if (this.isIntegrationTest) {
+        descriptor.name("[Deprecated] " + this.languageName + " Integration Tests Coverage Report Import");
+      } else {
+        descriptor.name(this.languageName + " Tests Coverage Report Import");
+      }
     } else {
-      descriptor.name(this.languageName + " Unit Tests Coverage Report Import");
+      if (this.isIntegrationTest) {
+        descriptor.name(this.languageName + " Integration Tests Coverage Report Import");
+      } else {
+        descriptor.name(this.languageName + " Unit Tests Coverage Report Import");
+      }
     }
     descriptor.onlyOnLanguage(this.languageKey);
 
@@ -78,6 +86,12 @@ public class CoverageReportImportSensor implements Sensor {
       LOG.debug("No coverage property. Skip Sensor");
       return;
     }
+
+    if (this.isIntegrationTest && this.sonarQubeVersion.isGreaterThanOrEqual(Version.create(6,2))) {
+      LOG.warn("Starting with SonarQube 6.2 separation between Unit Tests and Integration Tests Coverage" +
+        " reports is deprecated. Please move all reports specified from *.it.reportPaths into *.reportPaths.");
+    }
+
     analyze(context, new Coverage());
   }
 
