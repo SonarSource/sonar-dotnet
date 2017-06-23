@@ -12,8 +12,10 @@ namespace Tests.Diagnostics
     public interface Linq { } // Noncompliant
 //                   ^^^^
 
-    interface System { } // Noncompliant
-//            ^^^^^^
+    interface System { } // Compliant
+
+    private interface Data { } // Compliant
+
 
     interface { }
 }

@@ -20,7 +20,6 @@
 
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -62,7 +61,9 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
             {
                 var declaration = (BaseTypeDeclarationSyntax)c.Node;
-                ReportIfNameClashesWithFrameworkNamespace(declaration?.Identifier, c);
+                var symbolDeclaredccess = c.SemanticModel.GetDeclaredSymbol(declaration)?.DeclaredAccessibility;
+
+                ReportIfNameClashesWithFrameworkNamespace(declaration?.Identifier, symbolDeclaredccess, c);
             },
             SyntaxKind.ClassDeclaration,
             SyntaxKind.InterfaceDeclaration,
@@ -71,21 +72,25 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
             {
                 var declaration = (DelegateDeclarationSyntax)c.Node;
-                ReportIfNameClashesWithFrameworkNamespace(declaration?.Identifier, c);
+                var symbolDeclaredccess = c.SemanticModel.GetDeclaredSymbol(declaration)?.DeclaredAccessibility;
+
+                ReportIfNameClashesWithFrameworkNamespace(declaration?.Identifier, symbolDeclaredccess, c);
             },
             SyntaxKind.DelegateDeclaration);
         }
 
-        private static void ReportIfNameClashesWithFrameworkNamespace(SyntaxToken? identifier, SyntaxNodeAnalysisContext context)
+        private static void ReportIfNameClashesWithFrameworkNamespace(SyntaxToken? identifier,
+            Accessibility? declaredAccessibility, SyntaxNodeAnalysisContext context)
         {
             string typeName = identifier?.ValueText;
             var typeNameLocation = identifier?.GetLocation();
 
-            bool isNameClash = typeName != null &&
+            bool isPublicNameClash = typeName != null &&
                  typeNameLocation != null &&
+                 declaredAccessibility == Accessibility.Public &&
                  frameworkNamespaces.Contains(typeName.ToLowerInvariant());
 
-            if (isNameClash)
+            if (isPublicNameClash)
             {
                 context.ReportDiagnostic(Diagnostic.Create(rule, typeNameLocation));
             }
