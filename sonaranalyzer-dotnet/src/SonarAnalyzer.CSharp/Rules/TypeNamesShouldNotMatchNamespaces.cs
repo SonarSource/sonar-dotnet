@@ -34,7 +34,7 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class TypeNamesShouldNotMatchNamespaces : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S4041";
-        private const string MessageFormat = "Change the name of that type to be different from an existing namespace.";
+        private const string MessageFormat = "Change the name of type '{0}' to be different from an existing framework namespace.";
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
@@ -60,40 +60,54 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
             {
-                var declaration = (BaseTypeDeclarationSyntax)c.Node;
-                var symbolDeclaredccess = c.SemanticModel.GetDeclaredSymbol(declaration)?.DeclaredAccessibility;
-
-                ReportIfNameClashesWithFrameworkNamespace(declaration?.Identifier, symbolDeclaredccess, c);
+                if (IsDeclaredPublic(c.Node, c.SemanticModel))
+                {
+                    ReportIfNameClashesWithFrameworkNamespace(GetIdentifier(c.Node), c);
+                }
             },
             SyntaxKind.ClassDeclaration,
+            SyntaxKind.StructDeclaration,
             SyntaxKind.InterfaceDeclaration,
-            SyntaxKind.EnumDeclaration);
-
-            context.RegisterSyntaxNodeActionInNonGenerated(c =>
-            {
-                var declaration = (DelegateDeclarationSyntax)c.Node;
-                var symbolDeclaredccess = c.SemanticModel.GetDeclaredSymbol(declaration)?.DeclaredAccessibility;
-
-                ReportIfNameClashesWithFrameworkNamespace(declaration?.Identifier, symbolDeclaredccess, c);
-            },
+            SyntaxKind.EnumDeclaration,
             SyntaxKind.DelegateDeclaration);
         }
 
+        private static SyntaxToken? GetIdentifier(SyntaxNode declaration)
+        {
+            var baseTypeDeclaration = declaration as BaseTypeDeclarationSyntax;
+            if (baseTypeDeclaration != null)
+            {
+                return baseTypeDeclaration.Identifier;
+            }
+
+            var delegateDeclaration = declaration as DelegateDeclarationSyntax;
+            if (delegateDeclaration != null)
+            {
+                return delegateDeclaration.Identifier;
+            }
+
+            return null;
+        }
+
         private static void ReportIfNameClashesWithFrameworkNamespace(SyntaxToken? identifier,
-            Accessibility? declaredAccessibility, SyntaxNodeAnalysisContext context)
+            SyntaxNodeAnalysisContext context)
         {
             string typeName = identifier?.ValueText;
             var typeNameLocation = identifier?.GetLocation();
 
-            bool isPublicNameClash = typeName != null &&
+            bool isNameClash = typeName != null &&
                  typeNameLocation != null &&
-                 declaredAccessibility == Accessibility.Public &&
                  frameworkNamespaces.Contains(typeName.ToLowerInvariant());
 
-            if (isPublicNameClash)
+            if (isNameClash)
             {
-                context.ReportDiagnostic(Diagnostic.Create(rule, typeNameLocation));
+                context.ReportDiagnostic(Diagnostic.Create(rule, typeNameLocation, typeName));
             }
+        }
+
+        private static bool IsDeclaredPublic(SyntaxNode declaration, SemanticModel semanticModel)
+        {
+            return semanticModel.GetDeclaredSymbol(declaration)?.DeclaredAccessibility == Accessibility.Public;
         }
     }
 }
