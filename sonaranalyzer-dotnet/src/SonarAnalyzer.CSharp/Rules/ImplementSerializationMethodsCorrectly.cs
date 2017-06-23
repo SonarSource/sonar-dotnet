@@ -61,12 +61,18 @@ namespace SonarAnalyzer.Rules.CSharp
                 var methodDeclaration = (MethodDeclarationSyntax)c.Node;
                 var methodSymbol = c.SemanticModel.GetDeclaredSymbol(methodDeclaration);
 
-                string errorMessage;
-                if (!methodDeclaration.Identifier.IsMissing &&
-                    HasSerializationAttribute(methodSymbol) &&
-                    HasIssues(methodSymbol, out errorMessage))
+                if (methodDeclaration.Identifier.IsMissing ||
+                    !HasSerializationAttribute(methodSymbol))
                 {
-                    c.ReportDiagnostic(Diagnostic.Create(rule, methodDeclaration.Identifier.GetLocation(), errorMessage));
+                    return;
+                }
+
+                var issues = FindIssues(methodSymbol).ToList();
+                if (issues.Any())
+                {
+                    c.ReportDiagnostic(Diagnostic.Create(rule,
+                            methodDeclaration.Identifier.GetLocation(),
+                            BuildErrorMessage(issues)));
                 }
             },
             SyntaxKind.MethodDeclaration);
@@ -78,51 +84,46 @@ namespace SonarAnalyzer.Rules.CSharp
                 methodSymbol.GetAttributes().Any(attr => attr.AttributeClass.IsAny(serializationAttributes));
         }
 
-        private static bool HasIssues(IMethodSymbol methodSymbol, out string errorMessage)
+        private static IEnumerable<string> FindIssues(IMethodSymbol methodSymbol)
         {
-            errorMessage = null;
-            var errors = new List<string>();
-
             if (methodSymbol.DeclaredAccessibility != Accessibility.Private)
             {
-                errors.Add(problemMakePrivateText);
+                yield return problemMakePrivateText;
             }
 
             if (!methodSymbol.ReturnsVoid)
             {
-                errors.Add(problemReturnVoidText);
+                yield return problemReturnVoidText;
             }
 
             if (!methodSymbol.TypeParameters.IsEmpty)
             {
-                errors.Add(problemGenericParameterText);
+                yield return problemGenericParameterText;
             }
 
             if (methodSymbol.Parameters.Length != 1 ||
                 !methodSymbol.Parameters.First().IsType(KnownType.System_Runtime_Serialization_StreamingContext))
             {
-                errors.Add(problemParameterText);
+                yield return problemParameterText;
             }
+        }
 
-            if (errors.Count > 0)
+        private static string BuildErrorMessage(IEnumerable<string> issues)
+        {
+            const string separator = ", ";
+            const string lastSeparator = " and ";
+
+            string errorMessage = string.Join(separator, issues);
+
+            int lastCommaIdx = errorMessage.LastIndexOf(separator);
+            if (lastCommaIdx != -1)
             {
-                const string separator = ", ";
-                const string lastSeparator = " and ";
-
-                errorMessage = string.Join(separator, errors);
-
-                int lastCommaIdx = errorMessage.LastIndexOf(separator);
-                if (lastCommaIdx != -1)
-                {
-                    errorMessage = errorMessage
-                        .Remove(lastCommaIdx, separator.Length)
-                        .Insert(lastCommaIdx, lastSeparator);
-                }
-
-                return true;
+                errorMessage = errorMessage
+                    .Remove(lastCommaIdx, separator.Length)
+                    .Insert(lastCommaIdx, lastSeparator);
             }
 
-            return false;
+            return errorMessage;
         }
     }
 }
