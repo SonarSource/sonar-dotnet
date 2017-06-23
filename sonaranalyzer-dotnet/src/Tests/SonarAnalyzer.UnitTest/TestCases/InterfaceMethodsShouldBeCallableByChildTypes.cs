@@ -4,81 +4,130 @@ namespace Tests.Diagnostics
 {
     public interface IFoo
     {
-        void Bar();
+        void Method();
+        int Property { get; set; }
+
+        event EventHandler Event;
     }
 
     public class Foo : IFoo
     {
-        void IFoo.Bar() // Noncompliant
-//           ^^^^^^^^
+        void IFoo.Method() // Noncompliant {{Make 'Foo' sealed, change to a non explicit declaration or provide a new method exposing the functionality of 'IFoo.Method'.}}
+//                ^^^^^^
         {
         }
+
+        void Method() { }
+
+        int IFoo.Property // Noncompliant {{Make 'Foo' sealed, change to a non explicit declaration or provide a new method exposing the functionality of 'IFoo.Property'.}}
+//               ^^^^^^^^
+        { get; set; }
+
+        int Property { get; set; }
+
+        event EventHandler IFoo.Event // Noncompliant {{Make 'Foo' sealed, change to a non explicit declaration or provide a new method exposing the functionality of 'IFoo.Event'.}}
+//                              ^^^^^
+        { add { } remove { } }
+
+        event EventHandler Event {  add { } remove { } }
     }
 
     public sealed class Foo2 : IFoo
     {
-        void IFoo.Bar()// Compliant - Foo2 is sealed
+        void IFoo.Method() // Compliant - Foo2 is sealed
         {
         }
+        int IFoo.Property
+        { get; set; }
+        event EventHandler IFoo.Event
+        { add { } remove { } }
     }
 
     public class Foo3 : IFoo
     {
-        void Bar() // Compliant - IFoo is not explicitly implemented
+        void Method() // Compliant - IFoo is not explicitly implemented
         {
         }
+
+        int Property { get; set; }
+        event EventHandler Event { add { } remove { } }
     }
 
     public class Foo4 : IFoo
     {
-        void IFoo.Bar() // Compliant - public method with same name
+        void IFoo.Method() // Compliant - public method with same name, params and return type
         {
         }
 
-        public void Bar() { }
+        public void Method() { }
+
+        int IFoo.Property
+        { get; set; }
+
+        public int Property { get; set; }
+
+        event EventHandler IFoo.Event
+        { add { } remove { } }
+
+        public event EventHandler Event { add { } remove { } }
     }
 
     public class Foo5 : IFoo
     {
-        void IFoo.Bar() // Compliant - public method with same name
+        void IFoo.Method() // Compliant - public method with same name, params BUT different return type
         {
         }
 
-        public int Bar() => 42;
+        public int Method() => 42;
+
+        int IFoo.Property
+        { get; set; }
+
+        public float Property { get; set; }
+
+        event EventHandler IFoo.Event
+        { add { } remove { } }
+
+        public event EventHandler<ResolveEventArgs> Event
+        { add { } remove { } }
     }
 
     public class Foo6 : IFoo
     {
-        void IFoo.Bar() // Compliant - public method with same name
+        void IFoo.Method() // Compliant - public method with same name, return type BUT different param
         {
         }
 
-        public void Bar(int i) { }
+        public void Method(int i) { }
+
+        int IFoo.Property
+        { get; set; }
+
+        public int Property { get; }
+
+        event EventHandler IFoo.Event
+        { add { } remove { } }
+
+        public event EventHandler Event { add { } }
     }
 
     public class Foo7 : IFoo
     {
-        void IFoo.Bar() // Noncompliant
+        void IFoo.Method() // Noncompliant
         {
         }
 
-        private void Bar() { }
-    }
+        private void Method() { }
 
-    public class MyClass : IDisposable
-    {
-        void IDisposable.Dispose()  // Noncompliant
-        {
-        }
-    }
+        int IFoo.Property // Noncompliant
+        { get; set; }
 
-    public class MyClass2 : IDisposable
-    {
-        void IDisposable.Dispose() // Compliant
-        {
-        }
+        private int Property { get; set; }
 
-        void Dispose() { }
+        event EventHandler IFoo.Event // Noncompliant
+        { add { } remove { } }
+
+        private event EventHandler Event { add { } remove { } }
     }
 
     public class MyClass3 : IDisposable
@@ -87,6 +136,6 @@ namespace Tests.Diagnostics
         {
         }
 
-        void Close() { }
+        public void Close() { }
     }
 }

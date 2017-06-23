@@ -18,7 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
+
+using System;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
@@ -45,97 +46,90 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
-                {
-                    var classDeclaration = (ClassDeclarationSyntax)c.Node;
-                    var classSymbol = c.SemanticModel.GetDeclaredSymbol(classDeclaration);
+                c => ReportOnIssue<MethodDeclarationSyntax>(c, m => m.ExplicitInterfaceSpecifier, m => m.Identifier,
+                    AreMethodsEquivalent),
+                SyntaxKind.MethodDeclaration);
 
-                    if (classSymbol == null ||
-                        classSymbol.IsSealed ||
-                        classSymbol.IsStatic ||
-                        !classSymbol.IsPublicApi() ||
-                        classDeclaration.Identifier.IsMissing)
-                    {
-                        return;
-                    }
+            context.RegisterSyntaxNodeActionInNonGenerated(
+                c => ReportOnIssue<PropertyDeclarationSyntax>(c, m => m.ExplicitInterfaceSpecifier, m => m.Identifier,
+                    ArePropertiesEquivalent),
+                SyntaxKind.PropertyDeclaration);
 
-                    var allTrackedClassMembers = classSymbol.GetMembers().Where(IsTrackedMember);
-                    var explicitMembers = allTrackedClassMembers.Where(IsExplicit);
-                    var nonExplicitMembers = allTrackedClassMembers.Except(explicitMembers);
-
-                    explicitMembers.Where(member => !HasPublicEquivalentMember(member, nonExplicitMembers))
-                        .Select(faultyMember => CreateDiagnostic(classDeclaration, faultyMember))
-                        .WhereNotNull()
-                        .ToList()
-                        .ForEach(diagnostic => c.ReportDiagnostic(diagnostic));
-                }, SyntaxKind.ClassDeclaration);
+            context.RegisterSyntaxNodeActionInNonGenerated(
+                c => ReportOnIssue<EventDeclarationSyntax>(c, m => m.ExplicitInterfaceSpecifier, m => m.Identifier,
+                    AreEventsEquivalent),
+                SyntaxKind.EventDeclaration);
         }
 
-        private static bool IsTrackedMember(ISymbol symbol)
+        private static void ReportOnIssue<TMemberSyntax>(SyntaxNodeAnalysisContext analysisContext,
+            Func<TMemberSyntax, ExplicitInterfaceSpecifierSyntax> getExplicitInterfaceSpecifier,
+            Func<TMemberSyntax, SyntaxToken> getIdentifierName,
+            Func<TMemberSyntax, TMemberSyntax, bool> areMembersEquivalent)
+            where TMemberSyntax : MemberDeclarationSyntax
         {
-            return symbol.Kind == SymbolKind.Event ||
-                symbol.Kind == SymbolKind.Property ||
-                (symbol.Kind == SymbolKind.Method && symbol.Name != ".ctor");
+            var memberDeclaration = (TMemberSyntax)analysisContext.Node;
+
+            var explicitInterfaceSpecifier = getExplicitInterfaceSpecifier(memberDeclaration);
+            if (explicitInterfaceSpecifier == null)
+            {
+                return;
+            }
+
+            var classDeclaration = memberDeclaration.FirstAncestorOrSelf<ClassDeclarationSyntax>();
+            if (classDeclaration == null ||
+                classDeclaration.Identifier.IsMissing ||
+                !IsClassTracked(classDeclaration, analysisContext.SemanticModel))
+            {
+                return;
+            }
+
+            var hasPublicEquivalentMethod = classDeclaration.Members
+                .OfType<TMemberSyntax>()
+                .Any(member => areMembersEquivalent(member, memberDeclaration));
+            if (!hasPublicEquivalentMethod)
+            {
+                var identifierName = getIdentifierName(memberDeclaration);
+
+                analysisContext.ReportDiagnostic(Diagnostic.Create(rule, identifierName.GetLocation(),
+                    classDeclaration.Identifier.ValueText,
+                    string.Concat(explicitInterfaceSpecifier.Name, ".", identifierName.ValueText)));
+            }
         }
 
-        private static bool IsExplicit(ISymbol symbol)
+        private static bool IsClassTracked(ClassDeclarationSyntax classDeclaration, SemanticModel semanticModel)
         {
-            var methodSymbol = symbol as IMethodSymbol;
-            if (methodSymbol != null)
-            {
-                return methodSymbol.ExplicitInterfaceImplementations.Length > 0;
-            }
+            var classSymbol = semanticModel.GetDeclaredSymbol(classDeclaration);
 
-            var propertySymbol = symbol as IPropertySymbol;
-            if (propertySymbol != null)
-            {
-                return propertySymbol.ExplicitInterfaceImplementations.Length > 0;
-            }
-
-            var eventSymbol = symbol as IEventSymbol;
-            if (eventSymbol != null)
-            {
-                return eventSymbol.ExplicitInterfaceImplementations.Length > 0;
-            }
-
-            return false;
+            return classSymbol != null &&
+                !classSymbol.IsSealed &&
+                !classSymbol.IsStatic &&
+                classSymbol.IsPublicApi();
         }
 
-        private static bool HasPublicEquivalentMember(ISymbol memberSymbolToMatch, IEnumerable<ISymbol> allMembers)
+        private static bool AreMethodsEquivalent(MethodDeclarationSyntax currentMethod,
+            MethodDeclarationSyntax targetedMethod)
         {
-            return allMembers.Any(
-                symbol =>
-                    symbol.Name == memberSymbolToMatch.Name &&
-                    symbol.Kind.Equals(memberSymbolToMatch.Kind) &&
-                    symbol.IsPublicApi());
+            return currentMethod != targetedMethod &&
+                currentMethod.Modifiers.Any(modifier => modifier.IsKind(SyntaxKind.PublicKeyword)) &&
+                (currentMethod.Identifier.ValueText == targetedMethod.Identifier.ValueText ||
+                    (targetedMethod.Identifier.ValueText == nameof(IDisposable.Dispose) &&
+                    currentMethod.Identifier.ValueText == "Close")); // Allows to replace IDisposable.Dispose() with Close()
         }
 
-        private static Diagnostic CreateDiagnostic(ClassDeclarationSyntax classDeclaration, ISymbol faultyMember)
+        private static bool ArePropertiesEquivalent(PropertyDeclarationSyntax currentProperty,
+            PropertyDeclarationSyntax targetedProperty)
         {
-            var syntaxNode = faultyMember.DeclaringSyntaxReferences.First().GetSyntax();
+            return currentProperty != targetedProperty &&
+                currentProperty.Identifier.ValueText == targetedProperty.Identifier.ValueText &&
+                currentProperty.Modifiers.Any(modifier => modifier.IsKind(SyntaxKind.PublicKeyword));
+        }
 
-            Location location;
-            switch (syntaxNode.Kind())
-            {
-                case SyntaxKind.MethodDeclaration:
-                    location = ((MethodDeclarationSyntax)syntaxNode).Identifier.GetLocation();
-                    break;
-                case SyntaxKind.PropertyDeclaration:
-                    location = ((PropertyDeclarationSyntax)syntaxNode).Identifier.GetLocation();
-                    break;
-                case SyntaxKind.EventDeclaration:
-                    location = ((EventDeclarationSyntax)syntaxNode).Identifier.GetLocation();
-                    break;
-                default:
-                    location = null; // Should not happen but let's play defensive
-                    break;
-            }
-            if (location == null)
-            {
-                return null;
-            }
-
-            return Diagnostic.Create(rule, location, classDeclaration.Identifier.ValueText, faultyMember.Name);
+        private static bool AreEventsEquivalent(EventDeclarationSyntax currentEvent,
+            EventDeclarationSyntax targetedEvent)
+        {
+            return currentEvent != targetedEvent &&
+                currentEvent.Identifier.ValueText == targetedEvent.Identifier.ValueText &&
+                currentEvent.Modifiers.Any(modifier => modifier.IsKind(SyntaxKind.PublicKeyword));
         }
     }
 }
