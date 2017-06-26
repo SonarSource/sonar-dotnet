@@ -505,7 +505,7 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.CSharp
             BuildBlock(tryStatement.Block);
 
             // try start
-            currentBlock = CreateBranchBlock(tryStatement, catchBlocks.Union(new[] { currentBlock }).ToList());
+            currentBlock = CreateBranchBlock(tryStatement, catchBlocks.Union(new[] { currentBlock, finallyBlock }).ToList());
             if (tryStatement.Finally?.Block != null)
             {
                 ExitTarget.Pop();
