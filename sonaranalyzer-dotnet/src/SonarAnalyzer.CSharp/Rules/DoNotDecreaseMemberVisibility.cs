@@ -101,14 +101,15 @@ namespace SonarAnalyzer.Rules.CSharp
                 if (methodSymbol != null)
                 {
                     var methodDeclaration = memberDeclaration as MethodDeclarationSyntax;
-                    if (methodDeclaration?.Modifiers.Any(m => m.ToString() == "new") == true)
+                    if (methodDeclaration == null ||
+                        methodDeclaration.Modifiers.Any(m => m.IsKind(SyntaxKind.NewKeyword)))
                     {
                         return null;
                     }
 
                     var hidingMethod = allBaseClassMethods.FirstOrDefault(
                     m => IsDecreasingAccess(m.DeclaredAccessibility, methodSymbol.DeclaredAccessibility, false) &&
-                            IsMatchingSignature(m, methodSymbol));
+                         IsMatchingSignature(m, methodSymbol));
 
                     if (hidingMethod != null)
                     {

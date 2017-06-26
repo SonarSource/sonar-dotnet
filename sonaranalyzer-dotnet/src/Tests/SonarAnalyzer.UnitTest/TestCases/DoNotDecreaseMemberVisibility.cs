@@ -37,6 +37,8 @@ namespace MyLibrary
 
         public void Method_16(ref int count) { }
 
+        public virtual void Method_17(int count) { }
+
 
         public int Property_01 { get; set; }
 
@@ -53,6 +55,8 @@ namespace MyLibrary
         public virtual int Property_07 { get; set; }
 
         public virtual int Property_08 { get; set; }
+
+        public virtual int Property_09 { get; set; }
     }
 
     class B : A
@@ -94,6 +98,8 @@ namespace MyLibrary
 
         private void Method_16(out int count) { }
 
+        private override void Method_17(int count) { } // Noncompliant. Note: this generates compiler error C0621 (or CS0507 when protected)
+
 
         private int Property_01 { get; set; } // Noncompliant
 
@@ -112,7 +118,9 @@ namespace MyLibrary
         // Note this cannot be auto-property, as it is a compiler error.
         public override int Property_07 { get { return i; } }
 
-        public override int Property_08 { get; } // Compliant. Note: this code will fail to compile with CS8080.
+        public override int Property_08 { get { return i; } private set { i = value; } } // Noncompliant. Note: this generates compiler error CS0507
+
+        public override int Property_09 { get; } // Compliant. Note: this generates compiler error CS8080.
     }
 
     class Foo
