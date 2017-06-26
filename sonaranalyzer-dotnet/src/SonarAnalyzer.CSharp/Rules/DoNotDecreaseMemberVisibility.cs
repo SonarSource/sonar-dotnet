@@ -100,9 +100,15 @@ namespace SonarAnalyzer.Rules.CSharp
                 var methodSymbol = memberSymbol as IMethodSymbol;
                 if (methodSymbol != null)
                 {
+                    var methodDeclaration = memberDeclaration as MethodDeclarationSyntax;
+                    if (methodDeclaration?.Modifiers.Any(m => m.ToString() == "new") == true)
+                    {
+                        return null;
+                    }
+
                     var hidingMethod = allBaseClassMethods.FirstOrDefault(
-                        m => IsDecreasingAccess(m.DeclaredAccessibility, methodSymbol.DeclaredAccessibility) &&
-                             IsMatchingSignature(m, methodSymbol));
+                    m => IsDecreasingAccess(m.DeclaredAccessibility, methodSymbol.DeclaredAccessibility, false) &&
+                            IsMatchingSignature(m, methodSymbol));
 
                     if (hidingMethod != null)
                     {
@@ -119,7 +125,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 var propertySymbol = memberSymbol as IPropertySymbol;
                 if (propertySymbol != null)
                 {
-                    var hidingProperty = allBaseClassProperties.FirstOrDefault(p => IsDecreasingPropertyAccess(p, propertySymbol));
+                    var hidingProperty = allBaseClassProperties.FirstOrDefault(
+                        p => IsDecreasingPropertyAccess(p, propertySymbol, propertySymbol.IsOverride));
                     if (hidingProperty != null)
                     {
                         var location = (memberDeclaration as PropertyDeclarationSyntax)?.Identifier.GetLocation();
@@ -129,7 +136,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 return null;
             }
 
-            private static bool IsDecreasingPropertyAccess(IPropertySymbol baseProperty, IPropertySymbol propertySymbol)
+            private static bool IsDecreasingPropertyAccess(IPropertySymbol baseProperty, IPropertySymbol propertySymbol,
+                bool isOverride)
             {
                 if (baseProperty.Name != propertySymbol.Name ||
                     !Equals(baseProperty.Type, propertySymbol.Type))
@@ -143,8 +151,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 var propertyGetAccess = GetEffectiveDeclaredAccess(propertySymbol.GetMethod, baseProperty.DeclaredAccessibility);
                 var propertySetAccess = GetEffectiveDeclaredAccess(propertySymbol.SetMethod, baseProperty.DeclaredAccessibility);
 
-                return IsDecreasingAccess(baseGetAccess, propertyGetAccess) ||
-                       IsDecreasingAccess(baseSetAccess, propertySetAccess);
+                return IsDecreasingAccess(baseGetAccess, propertyGetAccess, isOverride) ||
+                       IsDecreasingAccess(baseSetAccess, propertySetAccess, isOverride);
             }
 
             private static Accessibility GetEffectiveDeclaredAccess(IMethodSymbol method, Accessibility propertyDefaultAccess)
@@ -166,13 +174,23 @@ namespace SonarAnalyzer.Rules.CSharp
 
             private static bool AreParameterTypesEqual(IParameterSymbol p1, IParameterSymbol p2)
             {
+                if (p1.RefKind != p2.RefKind)
+                {
+                    return false;
+                }
+
                 return p1.Type.TypeKind == TypeKind.TypeParameter ?
                          p2.Type.TypeKind == TypeKind.TypeParameter
                          : Equals(p1.Type.OriginalDefinition, p2.Type.OriginalDefinition);
             }
 
-            private static bool IsDecreasingAccess(Accessibility baseAccess, Accessibility memberAccess)
+            private static bool IsDecreasingAccess(Accessibility baseAccess, Accessibility memberAccess, bool isOverride)
             {
+                if (memberAccess == Accessibility.NotApplicable && isOverride)
+                {
+                    return false;
+                }
+
                 return (baseAccess != Accessibility.NotApplicable && memberAccess == Accessibility.Private) ||
                        (baseAccess == Accessibility.Public && memberAccess != Accessibility.Public);
             }
