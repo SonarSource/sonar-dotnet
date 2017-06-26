@@ -31,6 +31,14 @@ namespace MyLibrary
 
         public void Method_13<T, V>(T obj, IEnumerable<V> obj2) { }
 
+        public void Method_14(int count) { }
+
+        public void Method_15(out int count) { }
+
+        public void Method_16(ref int count) { }
+
+        public virtual void Method_17(int count) { }
+
 
         public int Property_01 { get; set; }
 
@@ -43,6 +51,12 @@ namespace MyLibrary
         public int Property_05 { get; set; }
 
         public int Property_06 { get; set; }
+
+        public virtual int Property_07 { get; set; }
+
+        public virtual int Property_08 { get; set; }
+
+        public virtual int Property_09 { get; set; }
     }
 
     class B : A
@@ -68,7 +82,7 @@ namespace MyLibrary
 
         private override void Method_08(int count) { } // Noncompliant
 
-        private new void Method_09(int count) { } // Noncompliant
+        private new void Method_09(int count) { }
 
         private void Method_10(int count) { }
 
@@ -77,6 +91,14 @@ namespace MyLibrary
         private void Method_12<V, T>(T obj, V obj2) { } // Noncompliant
 
         private void Method_13<V, T>(T obj, IEnumerable<T> obj2) { } // Noncompliant
+
+        private void Method_14(int count) { } // Noncompliant
+
+        private void Method_15(int count) { }
+
+        private void Method_16(out int count) { }
+
+        private override void Method_17(int count) { } // Noncompliant. Note: this generates compiler error C0621 (or CS0507 when protected)
 
 
         private int Property_01 { get; set; } // Noncompliant
@@ -90,6 +112,15 @@ namespace MyLibrary
         public int Property_05 { get; } // Noncompliant
 
         private int Property_06 { } // Noncompliant
+
+        int i;
+
+        // Note this cannot be auto-property, as it is a compiler error.
+        public override int Property_07 { get { return i; } }
+
+        public override int Property_08 { get { return i; } private set { i = value; } } // Noncompliant. Note: this generates compiler error CS0507
+
+        public override int Property_09 { get; } // Compliant. Note: this generates compiler error CS8080.
     }
 
     class Foo
