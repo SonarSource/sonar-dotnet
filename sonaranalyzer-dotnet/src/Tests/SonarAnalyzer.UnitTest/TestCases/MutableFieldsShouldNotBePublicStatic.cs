@@ -28,6 +28,11 @@ namespace Tests.Diagnostics
         public static ImmutableArray<string> immutableArray; // Compliant
         public static ImmutableSortedSet<string> immutableSortedSet; // Compliant
         public static readonly ImmutableSortedSet<string> staticReadonlyImmutableSortedSet; // Compliant
+
+        public static readonly ISet<string> iSetInitializaedWithImmutableSet = ImmutableHashSet.Create("a", "b");
+        public static readonly IList<string> iListInitializaedWithImmutableArray = ImmutableArray.Create("a", "b");
+        public static readonly IList<string> iListInitializaedWithImmutableList = ImmutableList.Create("a", "b");
+        public static readonly IDictionary<string, string> iDictionaryInitializaedWithImmutableDictionary = ImmutableDictionary.Create<string, string>();
     }
 
     class GenericCompliantCases<T>
@@ -47,5 +52,14 @@ namespace Tests.Diagnostics
         public static SortedList<string, string> sortedListString; // Noncompliant
         public static ObservableCollection<string> observableCollectionString; // Noncompliant
         public static Foo foo; // Noncompliant
+
+        public static readonly ISet<string> isetInitializaedWithHashSet = new HashSet<string> { "a", "b" }; // Noncompliant
+        public static readonly IList<string> iListInitializaedWithList = new List<string> { "a", "b" }; // Noncompliant
+        public static readonly IDictionary<string, string> iDictionaryInitializaedWithDictionary = new Dictionary<string, string>(); // Noncompliant
+
+        public static ISet<string> iSetInitializaedWithImmutableSet = ImmutableHashSet.Create("a", "b"); // Noncompliant
+        public static IList<string> iListInitializaedWithImmutableArray = ImmutableArray.Create("a", "b"); // Noncompliant
+        public static IList<string> iListInitializaedWithImmutableList = ImmutableList.Create("a", "b"); // Noncompliant
+        public static IDictionary<string, string> iDictionaryInitializaedWithImmutableDictionary = ImmutableDictionary.Create<string, string>(); // Noncompliant
     }
 }

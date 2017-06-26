@@ -28,6 +28,11 @@ namespace Tests.Diagnostics
         public readonly ImmutableArray<string> immutableArray; // Compliant
         public readonly ImmutableSortedSet<string> immutableSortedSet; // Compliant
         public static readonly ImmutableSortedSet<string> staticReadonlyImmutableSortedSet; // Compliant
+
+        public readonly ISet<string> iSetInitializaedWithImmutableSet = ImmutableHashSet.Create("a", "b");
+        public readonly IList<string> iListInitializaedWithImmutableArray = ImmutableArray.Create("a", "b");
+        public readonly IList<string> iListInitializaedWithImmutableList = ImmutableList.Create("a", "b");
+        public readonly IDictionary<string, string> iDictionaryInitializaedWithImmutableDictionary = ImmutableDictionary.Create<string, string>();
     }
 
     class GenericCompliantCases<T>
@@ -47,5 +52,9 @@ namespace Tests.Diagnostics
         public readonly SortedList<string, string> sortedListString; // Noncompliant
         public readonly ObservableCollection<string> observableCollectionString; // Noncompliant
         public readonly Foo foo; // Noncompliant
+
+        public readonly ISet<string> isetInitializaedWithHashSet = new HashSet<string> { "a", "b" }; // Noncompliant
+        public readonly IList<string> iListInitializaedWithList = new List<string> { "a", "b" }; // Noncompliant
+        public readonly IDictionary<string, string> iDictionaryInitializaedWithDictionary = new Dictionary<string, string>(); // Noncompliant
     }
 }

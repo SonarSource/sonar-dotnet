@@ -19,13 +19,13 @@
  */
 
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Helpers;
-using System.Collections.Immutable;
 
 namespace SonarAnalyzer.Rules
 {
@@ -70,7 +70,18 @@ namespace SonarAnalyzer.Rules
             }
 
             var symbolInfo = analysisContext.SemanticModel.GetSymbolInfo(fieldDeclaration.Declaration.Type);
-            if (IsInvalidMutableType(symbolInfo.Symbol))
+            if (!IsInvalidMutableType(symbolInfo.Symbol))
+            {
+                return;
+            }
+
+            var fieldInitializer = fieldDeclaration.Declaration.Variables[0].Initializer;
+            var fieldInitializerSymbol = fieldInitializer != null
+                ? analysisContext.SemanticModel.GetSymbolInfo(fieldInitializer.Value).Symbol
+                : null;
+
+            if (!fieldDeclaration.Modifiers.Any(modifier => modifier.IsKind(SyntaxKind.ReadOnlyKeyword)) ||
+                !IsValidReadOnlyInitializer(fieldInitializerSymbol))
             {
                 analysisContext.ReportDiagnostic(Diagnostic.Create(Rule,
                     fieldDeclaration.Declaration.Variables[0].GetLocation()));
@@ -96,6 +107,22 @@ namespace SonarAnalyzer.Rules
             {
                 return IsOrDerivesOrImplementsAny(typeSymbol, InvalidMutableTypes) &&
                     !IsOrDerivesOrImplementsAny(typeSymbol, AllowedTypes);
+            }
+
+            return false;
+        }
+
+        private static bool IsValidReadOnlyInitializer(ISymbol symbol)
+        {
+            if (symbol == null)
+            {
+                return false;
+            }
+
+            var methodSymbol = symbol as IMethodSymbol;
+            if (methodSymbol != null)
+            {
+                return IsOrDerivesOrImplementsAny(methodSymbol.ReturnType, AllowedTypes);
             }
 
             return false;
