@@ -12,20 +12,20 @@ namespace Tests.Diagnostics
 
     public class Foo : IFoo
     {
-        void IFoo.Method() // Noncompliant {{Make 'Foo' sealed, change to a non explicit declaration or provide a new method exposing the functionality of 'IFoo.Method'.}}
+        void IFoo.Method() // Noncompliant {{Make 'Foo' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IFoo.Method'.}}
 //                ^^^^^^
         {
         }
 
         void Method() { }
 
-        int IFoo.Property // Noncompliant {{Make 'Foo' sealed, change to a non explicit declaration or provide a new method exposing the functionality of 'IFoo.Property'.}}
+        int IFoo.Property // Noncompliant {{Make 'Foo' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IFoo.Property'.}}
 //               ^^^^^^^^
         { get; set; }
 
         int Property { get; set; }
 
-        event EventHandler IFoo.Event // Noncompliant {{Make 'Foo' sealed, change to a non explicit declaration or provide a new method exposing the functionality of 'IFoo.Event'.}}
+        event EventHandler IFoo.Event // Noncompliant {{Make 'Foo' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IFoo.Event'.}}
 //                              ^^^^^
         { add { } remove { } }
 

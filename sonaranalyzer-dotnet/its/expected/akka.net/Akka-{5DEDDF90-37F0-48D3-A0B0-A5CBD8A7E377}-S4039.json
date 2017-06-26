@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S4039",
-"message":  "Make 'ActorBase' sealed, change to a non explicit declaration or provide a new method exposing the functionality of 'IInternalActor.ActorContext'.",
+"message":  "Make 'ActorBase' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IInternalActor.ActorContext'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka\Actor\ActorBase.cs",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S4039",
-"message":  "Make 'ActorCell' sealed, change to a non explicit declaration or provide a new method exposing the functionality of 'IActorContext.Child'.",
+"message":  "Make 'ActorCell' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IActorContext.Child'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka\Actor\ActorCell.cs",
 "region":  {
@@ -28,7 +28,7 @@
 },
 {
 "id":  "S4039",
-"message":  "Make 'ActorCell' sealed, change to a non explicit declaration or provide a new method exposing the functionality of 'IActorContext.Unbecome'.",
+"message":  "Make 'ActorCell' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IActorContext.Unbecome'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka\Actor\ActorCell.cs",
 "region":  {
@@ -41,7 +41,7 @@
 },
 {
 "id":  "S4039",
-"message":  "Make 'AlreadyCanceledCancelable' sealed, change to a non explicit declaration or provide a new method exposing the functionality of 'ICancelable.CancelAfter'.",
+"message":  "Make 'AlreadyCanceledCancelable' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'ICancelable.CancelAfter'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka\Actor\Cancellation\AlreadyCanceledCancelable.cs",
 "region":  {
@@ -54,7 +54,7 @@
 },
 {
 "id":  "S4039",
-"message":  "Make 'AlreadyCanceledCancelable' sealed, change to a non explicit declaration or provide a new method exposing the functionality of 'ICancelable.CancelAfter'.",
+"message":  "Make 'AlreadyCanceledCancelable' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'ICancelable.CancelAfter'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka\Actor\Cancellation\AlreadyCanceledCancelable.cs",
 "region":  {
@@ -67,7 +67,7 @@
 },
 {
 "id":  "S4039",
-"message":  "Make 'FSM' sealed, change to a non explicit declaration or provide a new method exposing the functionality of 'IInternalSupportsTestFSMRef<TState, TData>.IsStateTimerActive'.",
+"message":  "Make 'FSM' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IInternalSupportsTestFSMRef<TState, TData>.IsStateTimerActive'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka\Actor\FSM.cs",
 "region":  {
@@ -80,7 +80,7 @@
 },
 {
 "id":  "S4039",
-"message":  "Make 'FSM' sealed, change to a non explicit declaration or provide a new method exposing the functionality of 'IInternalSupportsTestFSMRef<TState, TData>.ApplyState'.",
+"message":  "Make 'FSM' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IInternalSupportsTestFSMRef<TState, TData>.ApplyState'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka\Actor\FSM.cs",
 "region":  {
@@ -93,7 +93,7 @@
 },
 {
 "id":  "S4039",
-"message":  "Make 'ReceiveActor' sealed, change to a non explicit declaration or provide a new method exposing the functionality of 'IInitializableActor.Init'.",
+"message":  "Make 'ReceiveActor' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IInitializableActor.Init'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka\Actor\ReceiveActor.cs",
 "region":  {
@@ -106,7 +106,7 @@
 },
 {
 "id":  "S4039",
-"message":  "Make 'SchedulerBase' sealed, change to a non explicit declaration or provide a new method exposing the functionality of 'ITellScheduler.ScheduleTellOnce'.",
+"message":  "Make 'SchedulerBase' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'ITellScheduler.ScheduleTellOnce'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka\Actor\Scheduler\SchedulerBase.cs",
 "region":  {
@@ -119,7 +119,7 @@
 },
 {
 "id":  "S4039",
-"message":  "Make 'SchedulerBase' sealed, change to a non explicit declaration or provide a new method exposing the functionality of 'ITellScheduler.ScheduleTellOnce'.",
+"message":  "Make 'SchedulerBase' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'ITellScheduler.ScheduleTellOnce'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka\Actor\Scheduler\SchedulerBase.cs",
 "region":  {
@@ -132,7 +132,7 @@
 },
 {
 "id":  "S4039",
-"message":  "Make 'SchedulerBase' sealed, change to a non explicit declaration or provide a new method exposing the functionality of 'ITellScheduler.ScheduleTellRepeatedly'.",
+"message":  "Make 'SchedulerBase' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'ITellScheduler.ScheduleTellRepeatedly'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka\Actor\Scheduler\SchedulerBase.cs",
 "region":  {
@@ -145,7 +145,7 @@
 },
 {
 "id":  "S4039",
-"message":  "Make 'SchedulerBase' sealed, change to a non explicit declaration or provide a new method exposing the functionality of 'ITellScheduler.ScheduleTellRepeatedly'.",
+"message":  "Make 'SchedulerBase' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'ITellScheduler.ScheduleTellRepeatedly'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka\Actor\Scheduler\SchedulerBase.cs",
 "region":  {
@@ -158,7 +158,7 @@
 },
 {
 "id":  "S4039",
-"message":  "Make 'SchedulerBase' sealed, change to a non explicit declaration or provide a new method exposing the functionality of 'IActionScheduler.ScheduleOnce'.",
+"message":  "Make 'SchedulerBase' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IActionScheduler.ScheduleOnce'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka\Actor\Scheduler\SchedulerBase.cs",
 "region":  {
@@ -171,7 +171,7 @@
 },
 {
 "id":  "S4039",
-"message":  "Make 'SchedulerBase' sealed, change to a non explicit declaration or provide a new method exposing the functionality of 'IActionScheduler.ScheduleOnce'.",
+"message":  "Make 'SchedulerBase' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IActionScheduler.ScheduleOnce'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka\Actor\Scheduler\SchedulerBase.cs",
 "region":  {
@@ -184,7 +184,7 @@
 },
 {
 "id":  "S4039",
-"message":  "Make 'SchedulerBase' sealed, change to a non explicit declaration or provide a new method exposing the functionality of 'IActionScheduler.ScheduleRepeatedly'.",
+"message":  "Make 'SchedulerBase' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IActionScheduler.ScheduleRepeatedly'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka\Actor\Scheduler\SchedulerBase.cs",
 "region":  {
@@ -197,7 +197,7 @@
 },
 {
 "id":  "S4039",
-"message":  "Make 'SchedulerBase' sealed, change to a non explicit declaration or provide a new method exposing the functionality of 'IActionScheduler.ScheduleRepeatedly'.",
+"message":  "Make 'SchedulerBase' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IActionScheduler.ScheduleRepeatedly'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka\Actor\Scheduler\SchedulerBase.cs",
 "region":  {
@@ -210,7 +210,7 @@
 },
 {
 "id":  "S4039",
-"message":  "Make 'SchedulerBase' sealed, change to a non explicit declaration or provide a new method exposing the functionality of 'IScheduler.Advanced'.",
+"message":  "Make 'SchedulerBase' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IScheduler.Advanced'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka\Actor\Scheduler\SchedulerBase.cs",
 "region":  {
@@ -223,7 +223,7 @@
 },
 {
 "id":  "S4039",
-"message":  "Make 'SchedulerBase' sealed, change to a non explicit declaration or provide a new method exposing the functionality of 'ITimeProvider.Now'.",
+"message":  "Make 'SchedulerBase' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'ITimeProvider.Now'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka\Actor\Scheduler\SchedulerBase.cs",
 "region":  {
@@ -236,7 +236,7 @@
 },
 {
 "id":  "S4039",
-"message":  "Make 'UntypedActorWithBoundedStash' sealed, change to a non explicit declaration or provide a new method exposing the functionality of 'IActorStash.Stash'.",
+"message":  "Make 'UntypedActorWithBoundedStash' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IActorStash.Stash'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka\Actor\Stash\UntypedActorWithBoundedStash.cs",
 "region":  {
@@ -249,7 +249,7 @@
 },
 {
 "id":  "S4039",
-"message":  "Make 'UntypedActorWithUnboundedStash' sealed, change to a non explicit declaration or provide a new method exposing the functionality of 'IActorStash.Stash'.",
+"message":  "Make 'UntypedActorWithUnboundedStash' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IActorStash.Stash'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka\Actor\Stash\UntypedActorWithUnboundedStash.cs",
 "region":  {
@@ -262,7 +262,7 @@
 },
 {
 "id":  "S4039",
-"message":  "Make 'ConcurrentSet' sealed, change to a non explicit declaration or provide a new method exposing the functionality of 'ICollection<T>.Add'.",
+"message":  "Make 'ConcurrentSet' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'ICollection<T>.Add'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka\Util\ConcurrentSet.cs",
 "region":  {
@@ -275,7 +275,7 @@
 },
 {
 "id":  "S4039",
-"message":  "Make 'ConcurrentSet' sealed, change to a non explicit declaration or provide a new method exposing the functionality of 'ICollection<T>.CopyTo'.",
+"message":  "Make 'ConcurrentSet' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'ICollection<T>.CopyTo'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka\Util\ConcurrentSet.cs",
 "region":  {
@@ -288,7 +288,7 @@
 },
 {
 "id":  "S4039",
-"message":  "Make 'ConcurrentSet' sealed, change to a non explicit declaration or provide a new method exposing the functionality of 'ICollection<T>.IsReadOnly'.",
+"message":  "Make 'ConcurrentSet' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'ICollection<T>.IsReadOnly'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka\Util\ConcurrentSet.cs",
 "region":  {
@@ -301,7 +301,7 @@
 },
 {
 "id":  "S4039",
-"message":  "Make 'ConcurrentSet' sealed, change to a non explicit declaration or provide a new method exposing the functionality of 'ICollection<T>.Remove'.",
+"message":  "Make 'ConcurrentSet' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'ICollection<T>.Remove'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka\Util\ConcurrentSet.cs",
 "region":  {
@@ -314,7 +314,7 @@
 },
 {
 "id":  "S4039",
-"message":  "Make 'ConcurrentSet' sealed, change to a non explicit declaration or provide a new method exposing the functionality of 'IEnumerable<T>.GetEnumerator'.",
+"message":  "Make 'ConcurrentSet' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IEnumerable<T>.GetEnumerator'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka\Util\ConcurrentSet.cs",
 "region":  {
@@ -327,7 +327,7 @@
 },
 {
 "id":  "S4039",
-"message":  "Make 'ConcurrentSet' sealed, change to a non explicit declaration or provide a new method exposing the functionality of 'IEnumerable.GetEnumerator'.",
+"message":  "Make 'ConcurrentSet' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IEnumerable.GetEnumerator'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka\Util\ConcurrentSet.cs",
 "region":  {
@@ -340,7 +340,7 @@
 },
 {
 "id":  "S4039",
-"message":  "Make 'ImmutableTreeSet' sealed, change to a non explicit declaration or provide a new method exposing the functionality of 'IEnumerable<TValue>.GetEnumerator'.",
+"message":  "Make 'ImmutableTreeSet' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IEnumerable<TValue>.GetEnumerator'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka\Util\Internal\Collections\ImmutableTreeSet.cs",
 "region":  {
@@ -353,7 +353,7 @@
 },
 {
 "id":  "S4039",
-"message":  "Make 'ImmutableTreeSet' sealed, change to a non explicit declaration or provide a new method exposing the functionality of 'IImmutableSet<TValue>.AllMinToMax'.",
+"message":  "Make 'ImmutableTreeSet' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IImmutableSet<TValue>.AllMinToMax'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka\Util\Internal\Collections\ImmutableTreeSet.cs",
 "region":  {
@@ -366,7 +366,7 @@
 },
 {
 "id":  "S4039",
-"message":  "Make 'ImmutableTreeSet' sealed, change to a non explicit declaration or provide a new method exposing the functionality of 'IImmutableSet<TValue>.AllMaxToMin'.",
+"message":  "Make 'ImmutableTreeSet' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IImmutableSet<TValue>.AllMaxToMin'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka\Util\Internal\Collections\ImmutableTreeSet.cs",
 "region":  {
@@ -379,7 +379,7 @@
 },
 {
 "id":  "S4039",
-"message":  "Make 'MonoConcurrentQueue' sealed, change to a non explicit declaration or provide a new method exposing the functionality of 'IProducerConsumerCollection<T>.TryAdd'.",
+"message":  "Make 'MonoConcurrentQueue' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IProducerConsumerCollection<T>.TryAdd'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka\Util\MonoConcurrentQueue.cs",
 "region":  {
@@ -392,7 +392,7 @@
 },
 {
 "id":  "S4039",
-"message":  "Make 'MonoConcurrentQueue' sealed, change to a non explicit declaration or provide a new method exposing the functionality of 'ICollection.IsSynchronized'.",
+"message":  "Make 'MonoConcurrentQueue' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'ICollection.IsSynchronized'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka\Util\MonoConcurrentQueue.cs",
 "region":  {
@@ -405,7 +405,7 @@
 },
 {
 "id":  "S4039",
-"message":  "Make 'MonoConcurrentQueue' sealed, change to a non explicit declaration or provide a new method exposing the functionality of 'IProducerConsumerCollection<T>.TryTake'.",
+"message":  "Make 'MonoConcurrentQueue' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IProducerConsumerCollection<T>.TryTake'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka\Util\MonoConcurrentQueue.cs",
 "region":  {
@@ -418,7 +418,7 @@
 },
 {
 "id":  "S4039",
-"message":  "Make 'MonoConcurrentQueue' sealed, change to a non explicit declaration or provide a new method exposing the functionality of 'ICollection.SyncRoot'.",
+"message":  "Make 'MonoConcurrentQueue' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'ICollection.SyncRoot'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka\Util\MonoConcurrentQueue.cs",
 "region":  {
