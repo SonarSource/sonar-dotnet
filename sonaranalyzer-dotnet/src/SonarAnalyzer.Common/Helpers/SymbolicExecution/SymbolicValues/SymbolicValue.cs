@@ -22,6 +22,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
+using Microsoft.CodeAnalysis;
 
 namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
 {
@@ -77,11 +78,11 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
             }
         }
 
-        private readonly object identifier;
+        protected readonly object identifier;
 
         private static int SymbolicValueCounter = 0;
 
-        internal SymbolicValue()
+        protected SymbolicValue()
             : this(SymbolicValueCounter++)
         {
         }
@@ -89,6 +90,16 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
         private SymbolicValue(object identifier)
         {
             this.identifier = identifier;
+        }
+
+        internal static SymbolicValue Create(ITypeSymbol type)
+        {
+            if (type.OriginalDefinition.Is(KnownType.System_Nullable_T))
+            {
+                return NullableSymbolicValue.Unknown;
+            }
+
+            return new SymbolicValue();
         }
 
         public override string ToString()
