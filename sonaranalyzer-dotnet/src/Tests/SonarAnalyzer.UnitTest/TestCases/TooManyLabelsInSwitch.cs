@@ -20,8 +20,7 @@
                     break;
             }
 
-            switch (n) // Noncompliant {{Consider reworking this 'switch' to reduce the number of 'case' from 3 to at most 2.}}
-//          ^^^^^^
+            switch (n)
             {
                 case 0:
                 case 1:
@@ -39,6 +38,18 @@
                 case MyEnum.C:
                     break;
                 case MyEnum.D:
+                    break;
+                default:
+                    break;
+            }
+
+            switch (n) // Noncompliant {{Consider reworking this 'switch' to reduce the number of 'case' from 3 to at most 2.}}
+//          ^^^^^^
+            {
+                case 0:
+                case 1:
+                    break;
+                case 2:
                     break;
                 default:
                     break;

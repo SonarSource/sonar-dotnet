@@ -61,19 +61,13 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    var labels = NumberOfLabels(switchNode);
-
-                    if (labels > Maximum)
+                    var numberOfSections = switchNode.Sections.Count;
+                    if (numberOfSections > Maximum)
                     {
-                        c.ReportDiagnostic(Diagnostic.Create(rule, switchNode.SwitchKeyword.GetLocation(), Maximum, labels));
+                        c.ReportDiagnostic(Diagnostic.Create(rule, switchNode.SwitchKeyword.GetLocation(), Maximum, numberOfSections));
                     }
                 },
                 SyntaxKind.SwitchStatement);
-        }
-
-        private static int NumberOfLabels(SwitchStatementSyntax node)
-        {
-            return node.Sections.Sum(e => e.Labels.Count);
         }
     }
 }
