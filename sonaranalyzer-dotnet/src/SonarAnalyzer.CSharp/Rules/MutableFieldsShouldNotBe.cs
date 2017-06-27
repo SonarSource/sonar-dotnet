@@ -19,13 +19,13 @@
  */
 
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Helpers;
-using System.Collections.Immutable;
 
 namespace SonarAnalyzer.Rules
 {
@@ -70,11 +70,24 @@ namespace SonarAnalyzer.Rules
             }
 
             var symbolInfo = analysisContext.SemanticModel.GetSymbolInfo(fieldDeclaration.Declaration.Type);
-            if (IsInvalidMutableType(symbolInfo.Symbol))
+            if (IsImmutableOrValidMutableType(symbolInfo.Symbol))
             {
-                analysisContext.ReportDiagnostic(Diagnostic.Create(Rule,
-                    fieldDeclaration.Declaration.Variables[0].GetLocation()));
+                return;
             }
+
+            var fieldFirstVariable = fieldDeclaration.Declaration.Variables[0];
+            var fieldInitializer = fieldFirstVariable.Initializer;
+            var fieldInitializerSymbol = fieldInitializer != null
+                ? analysisContext.SemanticModel.GetSymbolInfo(fieldInitializer.Value).Symbol
+                : null;
+
+            if (fieldDeclaration.Modifiers.Any(modifier => modifier.IsKind(SyntaxKind.ReadOnlyKeyword)) &&
+                IsValidReadOnlyInitializer(fieldInitializerSymbol))
+            {
+                return;
+            }
+
+            analysisContext.ReportDiagnostic(Diagnostic.Create(Rule,fieldFirstVariable.GetLocation()));
         }
 
         private bool IsFieldToAnalyze(FieldDeclarationSyntax fieldDeclaration)
@@ -82,29 +95,29 @@ namespace SonarAnalyzer.Rules
             return fieldDeclaration.Modifiers.Count(m => InvalidModifiers.Contains(m.Kind())) == InvalidModifiers.Count;
         }
 
-        private bool IsInvalidMutableType(ISymbol symbol)
+        private bool IsImmutableOrValidMutableType(ISymbol symbol)
         {
             var namedTypeSymbol = symbol as INamedTypeSymbol;
             if (namedTypeSymbol != null)
             {
-                return IsOrDerivesOrImplementsAny(namedTypeSymbol.ConstructedFrom, InvalidMutableTypes) &&
-                    !IsOrDerivesOrImplementsAny(namedTypeSymbol.ConstructedFrom, AllowedTypes);
+                return !namedTypeSymbol.ConstructedFrom.DerivesOrImplementsAny(InvalidMutableTypes) ||
+                    namedTypeSymbol.ConstructedFrom.DerivesOrImplementsAny(AllowedTypes);
             }
 
             var typeSymbol = symbol as ITypeSymbol;
             if (typeSymbol != null)
             {
-                return IsOrDerivesOrImplementsAny(typeSymbol, InvalidMutableTypes) &&
-                    !IsOrDerivesOrImplementsAny(typeSymbol, AllowedTypes);
+                return !typeSymbol.DerivesOrImplementsAny(InvalidMutableTypes) ||
+                    typeSymbol.DerivesOrImplementsAny(AllowedTypes);
             }
 
-            return false;
+            return true;
         }
 
-        private static bool IsOrDerivesOrImplementsAny(ITypeSymbol typeSymbol, ISet<KnownType> knownTypes)
+        private static bool IsValidReadOnlyInitializer(ISymbol symbol)
         {
-            return typeSymbol.IsAny(knownTypes) ||
-                typeSymbol.DerivesOrImplementsAny(knownTypes);
+            var methodSymbol = symbol as IMethodSymbol;
+            return methodSymbol != null && methodSymbol.ReturnType.DerivesOrImplementsAny(AllowedTypes);
         }
     }
 }
