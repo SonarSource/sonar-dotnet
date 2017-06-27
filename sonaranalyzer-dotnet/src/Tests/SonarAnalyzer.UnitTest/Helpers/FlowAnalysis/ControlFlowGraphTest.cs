@@ -316,6 +316,52 @@ namespace NS
             exitBlock.PredecessorBlocks.Should().OnlyContain(trueBranchBlock);
         }
 
+        [TestMethod]
+        [TestCategory("CFG")]
+        public void Cfg_DoWhile_Continue()
+        {
+            var cfg = Build(@"void fun(){
+                                int p;
+                                do
+                                {
+                                    p = unknown();
+                                    if (unknown())
+                                    {
+                                        p = 0;
+                                        continue;
+                                    }
+                                } while (!p);
+                              }");
+
+            VerifyCfg(cfg, 5);
+
+            var blocks = cfg.Blocks.ToArray();
+
+            var defBlock = blocks[0];
+            var ifBlock = blocks[1] as BinaryBranchBlock;
+            var continueJump = blocks[2] as JumpBlock;
+            var doCondition = blocks[3] as BinaryBranchBlock;
+            var exitBlock = blocks[4];
+
+            defBlock.Should().Be(cfg.EntryBlock);
+            defBlock.SuccessorBlocks.Should().OnlyContainInOrder(ifBlock);
+            VerifyAllInstructions(defBlock, "fun()", "p");
+
+            ifBlock.SuccessorBlocks.Should().OnlyContainInOrder(continueJump, doCondition);
+            ifBlock.BranchingNode.Kind().Should().Be(SyntaxKind.IfStatement);
+            VerifyAllInstructions(ifBlock, "unknown", "unknown()", "p = unknown()", "unknown", "unknown()");
+
+            continueJump.SuccessorBlocks.Should().OnlyContainInOrder(doCondition);
+            continueJump.JumpNode.Kind().Should().Be(SyntaxKind.ContinueStatement);
+            VerifyAllInstructions(continueJump, "0", "p = 0");
+
+            doCondition.SuccessorBlocks.Should().OnlyContainInOrder(ifBlock, exitBlock);
+            doCondition.BranchingNode.Kind().Should().Be(SyntaxKind.DoStatement);
+            VerifyAllInstructions(doCondition, "p", "!p");
+
+            exitBlock.Should().Be(cfg.ExitBlock);
+        }
+
         #endregion
 
         #region Foreach statement
