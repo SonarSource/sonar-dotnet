@@ -198,5 +198,9 @@ namespace SonarAnalyzer.Helpers
             return identifierSyntax?.GetLocation();
         }
 
+        public static int GetLineNumber(this SyntaxToken token)
+        {
+            return token.GetLocation().GetLineSpan().StartLinePosition.Line;
+        }
     }
 }

@@ -6261,6 +6261,33 @@
   <data name="S3971_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
   </data>
+  <data name="S3972_Category" xml:space="preserve">
+    <value>Sonar Code Smell</value>
+  </data>
+  <data name="S3972_Description" xml:space="preserve">
+    <value>Code is clearest when each statement has its own line. Nonetheless, it is not uncommon to combine on the same line an if and it's resulting then statement. However, when an if is appended to the line with a previous if's closing } it is either an error - else is missing - or the prelude to a future error as maintainers fail to understand that the two statements are unconnected.</value>
+  </data>
+  <data name="S3972_IsActivatedByDefault" xml:space="preserve">
+    <value>True</value>
+  </data>
+  <data name="S3972_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S3972_RemediationCost" xml:space="preserve">
+    <value>10min</value>
+  </data>
+  <data name="S3972_Severity" xml:space="preserve">
+    <value>Critical</value>
+  </data>
+  <data name="S3972_Tags" xml:space="preserve">
+    <value>suspicious</value>
+  </data>
+  <data name="S3972_Title" xml:space="preserve">
+    <value>Conditionals should start on new lines</value>
+  </data>
+  <data name="S3972_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S3981_Category" xml:space="preserve">
     <value>Sonar Bug</value>
   </data>
