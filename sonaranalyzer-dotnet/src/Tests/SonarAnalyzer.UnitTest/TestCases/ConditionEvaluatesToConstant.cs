@@ -1191,6 +1191,19 @@ namespace Tests.Diagnostics
             }
         }
 
+        //void HandleNullableCase5(bool? b)
+        //{
+        //    if (b == true)
+        //    {
+        //    }
+        //    else if (b == false)
+        //    {
+        //    }
+        //    else
+        //    {
+        //    }
+        //}
+
         unsafe void Pointers(int* a, int* b)
         {
             if (a < b)

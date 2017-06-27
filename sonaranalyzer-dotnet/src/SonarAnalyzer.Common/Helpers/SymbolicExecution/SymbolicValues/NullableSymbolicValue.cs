@@ -102,14 +102,14 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
             {
                 if (oldConstraint == null)
                 {
-                    var newProgramState = SetConstraint(OptionalConstraint.Some, currentProgramState);
+                    //var newProgramState = SetConstraint(OptionalConstraint.Some, currentProgramState);
                     //return this.wrappedValue.TrySetConstraint(constraint, newProgramState);
-                    return new[] { SetConstraint(constraint, newProgramState) };
-                    //return new[]
-                    //    {
-                    //        SetConstraint(constraint, SetConstraint(OptionalConstraint.Some, currentProgramState)),
-                    //        SetConstraint(OptionalConstraint.None, currentProgramState)
-                    //    };
+                    //return new[] { SetConstraint(constraint, newProgramState) };
+                    return new[]
+                        {
+                            SetConstraint(constraint, SetConstraint(OptionalConstraint.Some, currentProgramState)),
+                            SetConstraint(OptionalConstraint.None, currentProgramState)
+                        };
                 }
                 else if (oldConstraint == OptionalConstraint.None)
                 {
