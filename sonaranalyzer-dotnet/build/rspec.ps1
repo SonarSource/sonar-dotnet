@@ -165,6 +165,7 @@ function CreateStringResources() {
             $description = $description -replace '&lt;', '<'
             $description = $description -replace '&gt;', '>'
             $description = $description -replace '\\!', '!'
+            $description = $description -replace '\\}', '}'
         }
         else {
             throw "The downloaded HTML for rule '${rule}' does not contain any paragraphs."
@@ -186,7 +187,7 @@ function CreateStringResources() {
         if ($rule -eq $ruleKey)
         {
             $newRuleData = $json
-    }
+        }
     }
 
     # improve readability of the generated file
@@ -242,5 +243,9 @@ if ($className -And $ruleKey) {
        UpdateTestEntry $csRuleData
     }
 
-    Remove-Item -Recurse -Force "${PSScriptRoot}\\..\\.vs"
+    $vsTempFolder = "${PSScriptRoot}\\..\\.vs"
+    if (Test-Path $vsTempFolder) 
+    {
+        Remove-Item -Recurse -Force $vsTempFolder
+    }
 }
