@@ -92,11 +92,12 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
             this.identifier = identifier;
         }
 
-        internal static SymbolicValue Create(ITypeSymbol type)
+        internal static SymbolicValue Create(ITypeSymbol type = null)
         {
-            if (type.OriginalDefinition.Is(KnownType.System_Nullable_T))
+            if (type != null &&
+                type.OriginalDefinition.Is(KnownType.System_Nullable_T))
             {
-                return NullableSymbolicValue.Unknown;
+                return new NullableSymbolicValue(new SymbolicValue());
             }
 
             return new SymbolicValue();
@@ -137,7 +138,7 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
 
         private ImmutableDictionary<SymbolicValue, SymbolicValueConstraint> AddConstraintTo<TRelationship>(SymbolicValueConstraint constraint,
             ProgramState programState, ImmutableDictionary<SymbolicValue, SymbolicValueConstraint> constraints)
-            where TRelationship: BinaryRelationship
+            where TRelationship : BinaryRelationship
         {
             var newConstraints = constraints;
             var equalSymbols = programState.Relationships
@@ -221,7 +222,13 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
                 return TrySetConstraint(objectConstraint, oldConstraint, currentProgramState);
             }
 
-            throw new NotSupportedException($"Neither {nameof(BoolConstraint)}, nor {nameof(ObjectConstraint)}");
+            var optionalConstraint = constraint as OptionalConstraint;
+            if (optionalConstraint != null)
+            {
+                return TrySetConstraint(optionalConstraint, oldConstraint, currentProgramState);
+            }
+
+            throw new NotSupportedException($"Neither {nameof(BoolConstraint)}, nor {nameof(ObjectConstraint)}, nor {nameof(OptionalConstraint)}.");
         }
 
         private IEnumerable<ProgramState> TrySetConstraint(BoolConstraint boolConstraint, SymbolicValueConstraint oldConstraint,
@@ -270,6 +277,33 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
             }
 
             throw new NotSupportedException($"Neither {nameof(BoolConstraint)}, nor {nameof(ObjectConstraint)}");
+        }
+
+        private IEnumerable<ProgramState> TrySetConstraint(OptionalConstraint optionalConstraint,
+            SymbolicValueConstraint oldConstraint, ProgramState currentProgramState)
+        {
+            return new[] { currentProgramState };
+            //var oldBoolConstraint = oldConstraint as BoolConstraint;
+            //if (oldBoolConstraint != null)
+            //{
+            //    if (optionalConstraint == OptionalConstraint.Some)
+            //    {
+
+            //    }
+            //}
+
+            //var oldObjectConstraint = oldConstraint as ObjectConstraint;
+            //if (oldObjectConstraint != null)
+            //{
+            //    if (oldObjectConstraint != objectConstraint)
+            //    {
+            //        return Enumerable.Empty<ProgramState>();
+            //    }
+
+            //    return new[] { SetConstraint(objectConstraint, currentProgramState) };
+            //}
+
+            //throw new NotSupportedException($"Neither {nameof(BoolConstraint)}, nor {nameof(ObjectConstraint)}");
         }
     }
 }

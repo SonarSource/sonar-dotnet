@@ -62,7 +62,7 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.CSharp
                 newProgramState = newProgramState.PushValues(
                     Enumerable
                         .Range(0, forInitializerBlock.ForNode.Incrementors.Count)
-                        .Select(i => new SymbolicValue()));
+                        .Select(i => SymbolicValue.Create(SemanticModel.GetTypeInfo(forInitializerBlock.ForNode.Incrementors[i]).Type)));
 
                 EnqueueAllSuccessors(forInitializerBlock, newProgramState);
                 return;
@@ -219,9 +219,8 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.CSharp
 
                 case SyntaxKind.LeftShiftExpression:
                 case SyntaxKind.RightShiftExpression:
-
-                    newProgramState = newProgramState.PopValues(2);
-                    newProgramState = newProgramState.PushValue(new SymbolicValue());
+                    newProgramState = newProgramState.PopValues(2)
+                        .PushValue(SymbolicValue.Create(SemanticModel.GetTypeInfo(instruction).Type));
                     break;
 
                 case SyntaxKind.EqualsExpression:
@@ -251,8 +250,8 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.CSharp
                 case SyntaxKind.MemberBindingExpression:
 
                 case SyntaxKind.AwaitExpression:
-                    newProgramState = newProgramState.PopValue();
-                    newProgramState = newProgramState.PushValue(new SymbolicValue());
+                    newProgramState = newProgramState.PopValue()
+                        .PushValue(SymbolicValue.Create(SemanticModel.GetTypeInfo(instruction).Type));
                     break;
 
                 case SyntaxKind.AsExpression:
@@ -261,22 +260,18 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.CSharp
                     break;
 
                 case SyntaxKind.SimpleMemberAccessExpression:
+                    var memberAccess = (MemberAccessExpressionSyntax)instruction;
+                    var check = explodedGraphChecks.OfType<EmptyNullableValueAccess.NullValueAccessedCheck>().FirstOrDefault();
+                    if (check == null ||
+                        !check.TryProcessInstruction(memberAccess, newProgramState, out newProgramState))
                     {
-                        var memberAccess = (MemberAccessExpressionSyntax)instruction;
-                        var check = explodedGraphChecks.OfType<EmptyNullableValueAccess.NullValueAccessedCheck>().FirstOrDefault();
-                        if (check == null ||
-                            !check.TryProcessInstruction(memberAccess, newProgramState, out newProgramState))
-                        {
-                            // Default behavior
-                            newProgramState = VisitMemberAccess(memberAccess, newProgramState);
-                        }
+                        // Default behavior
+                        newProgramState = VisitMemberAccess(memberAccess, newProgramState);
                     }
                     break;
 
                 case SyntaxKind.PointerMemberAccessExpression:
-                    {
-                        newProgramState = VisitMemberAccess((MemberAccessExpressionSyntax)instruction, newProgramState);
-                    }
+                    newProgramState = VisitMemberAccess((MemberAccessExpressionSyntax)instruction, newProgramState);
                     break;
 
                 case SyntaxKind.GenericName:
@@ -294,14 +289,12 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.CSharp
                 case SyntaxKind.QueryExpression:
 
                 case SyntaxKind.ArgListExpression:
-                    newProgramState = newProgramState.PushValue(new SymbolicValue());
+                    newProgramState = newProgramState.PushValue(SymbolicValue.Create());
                     break;
                 case SyntaxKind.LogicalNotExpression:
-                    {
-                        SymbolicValue sv;
-                        newProgramState = newProgramState.PopValue(out sv);
-                        newProgramState = newProgramState.PushValue(new LogicalNotSymbolicValue(sv));
-                    }
+                    SymbolicValue sv;
+                    newProgramState = newProgramState.PopValue(out sv);
+                    newProgramState = newProgramState.PushValue(new LogicalNotSymbolicValue(sv));
                     break;
 
                 case SyntaxKind.TrueLiteralExpression:
@@ -331,11 +324,9 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.CSharp
                 case SyntaxKind.ArrayCreationExpression:
                 case SyntaxKind.ImplicitArrayCreationExpression:
                 case SyntaxKind.StackAllocArrayCreationExpression:
-                    {
-                        var sv = new SymbolicValue();
-                        newProgramState = sv.SetConstraint(ObjectConstraint.NotNull, newProgramState);
-                        newProgramState = newProgramState.PushValue(sv);
-                    }
+                    var stackAllocSymbolicValue = SymbolicValue.Create();
+                    newProgramState = stackAllocSymbolicValue.SetConstraint(ObjectConstraint.NotNull, newProgramState)
+                        .PushValue(stackAllocSymbolicValue);
                     break;
 
                 case SyntaxKind.DefaultExpression:
@@ -343,14 +334,12 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.CSharp
                     break;
 
                 case SyntaxKind.AnonymousObjectCreationExpression:
-                    {
-                        var creation = (AnonymousObjectCreationExpressionSyntax)instruction;
-                        newProgramState = newProgramState.PopValues(creation.Initializers.Count);
+                    var creation = (AnonymousObjectCreationExpressionSyntax)instruction;
+                    newProgramState = newProgramState.PopValues(creation.Initializers.Count);
 
-                        var sv = new SymbolicValue();
-                        newProgramState = sv.SetConstraint(ObjectConstraint.NotNull, newProgramState);
-                        newProgramState = newProgramState.PushValue(sv);
-                    }
+                    var anonymousObjectSymbolicValue = SymbolicValue.Create();
+                    newProgramState = anonymousObjectSymbolicValue.SetConstraint(ObjectConstraint.NotNull, newProgramState)
+                        .PushValue(anonymousObjectSymbolicValue);
                     break;
 
                 case SyntaxKind.CastExpression:
@@ -361,8 +350,11 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.CSharp
                     break;
 
                 case SyntaxKind.InterpolatedStringExpression:
-                    newProgramState = newProgramState.PopValues(((InterpolatedStringExpressionSyntax)instruction).Contents.OfType<InterpolationSyntax>().Count());
-                    newProgramState = newProgramState.PushValue(new SymbolicValue());
+                    newProgramState = newProgramState
+                        .PopValues(((InterpolatedStringExpressionSyntax)instruction).Contents
+                            .OfType<InterpolationSyntax>()
+                            .Count())
+                        .PushValue(SymbolicValue.Create());
                     break;
 
                 case SyntaxKind.ObjectCreationExpression:
@@ -370,14 +362,15 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.CSharp
                     break;
 
                 case SyntaxKind.ElementAccessExpression:
-                    newProgramState = newProgramState.PopValues((((ElementAccessExpressionSyntax)instruction).ArgumentList?.Arguments.Count ?? 0) + 1);
-                    newProgramState = newProgramState.PushValue(new SymbolicValue());
+                    newProgramState = newProgramState
+                        .PopValues((((ElementAccessExpressionSyntax)instruction).ArgumentList?.Arguments.Count ?? 0) + 1)
+                        .PushValue(SymbolicValue.Create(SemanticModel.GetTypeInfo(instruction).Type));
                     break;
 
                 case SyntaxKind.ImplicitElementAccess:
                     newProgramState = newProgramState
                         .PopValues(((ImplicitElementAccessSyntax)instruction).ArgumentList?.Arguments.Count ?? 0)
-                        .PushValue(new SymbolicValue());
+                        .PushValue(SymbolicValue.Create(SemanticModel.GetTypeInfo(instruction).Type));
                     break;
 
                 case SyntaxKind.ObjectInitializerExpression:
@@ -392,20 +385,19 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.CSharp
                     break;
 
                 case SyntaxKind.ElementBindingExpression:
-                    newProgramState = newProgramState.PopValues(((ElementBindingExpressionSyntax)instruction).ArgumentList?.Arguments.Count ?? 0);
-                    newProgramState = newProgramState.PushValue(new SymbolicValue());
+                    newProgramState = newProgramState
+                        .PopValues(((ElementBindingExpressionSyntax)instruction).ArgumentList?.Arguments.Count ?? 0)
+                        .PushValue(SymbolicValue.Create(SemanticModel.GetTypeInfo(instruction).Type));
                     break;
 
                 case SyntaxKind.InvocationExpression:
-                    {
-                        var invocation = (InvocationExpressionSyntax)instruction;
-                        var invocationVisitor = new InvocationVisitor(invocation, SemanticModel, newProgramState);
-                        newProgramState = invocationVisitor.ProcessInvocation();
+                    var invocation = (InvocationExpressionSyntax)instruction;
+                    var invocationVisitor = new InvocationVisitor(invocation, SemanticModel, newProgramState);
+                    newProgramState = invocationVisitor.ProcessInvocation();
 
-                        if (invocation.Expression.IsOnThis() && !invocation.IsNameof(SemanticModel))
-                        {
-                            newProgramState = newProgramState.RemoveSymbols(IsFieldSymbol);
-                        }
+                    if (invocation.Expression.IsOnThis() && !invocation.IsNameof(SemanticModel))
+                    {
+                        newProgramState = newProgramState.RemoveSymbols(IsFieldSymbol);
                     }
                     break;
 
@@ -437,7 +429,8 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.CSharp
         {
             // foreach variable is not a VariableDeclarator, so we need to assign a value to it
             var foreachVariableSymbol = SemanticModel.GetDeclaredSymbol(binaryBranchBlock.BranchingNode);
-            var sv = new SymbolicValue();
+            var typeSymbol = SemanticModel.GetTypeInfo(binaryBranchBlock.BranchingNode).Type;
+            var sv = SymbolicValue.Create(typeSymbol);
             var newProgramState = SetNonNullConstraintIfValueType(foreachVariableSymbol, sv, programState);
             newProgramState = SetNewSymbolicValueIfTracked(foreachVariableSymbol, sv, newProgramState);
 
@@ -564,11 +557,12 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.CSharp
             return newProgramState.PushValue(sv);
         }
 
-        private static ProgramState VisitSafeCastExpression(BinaryExpressionSyntax instruction, ProgramState programState)
+        private ProgramState VisitSafeCastExpression(BinaryExpressionSyntax instruction, ProgramState programState)
         {
             SymbolicValue sv;
             var newProgramState = programState.PopValue(out sv);
-            var resultValue = new SymbolicValue();
+            var typeSymbol = SemanticModel.GetTypeInfo(instruction).Type;
+            var resultValue = SymbolicValue.Create(typeSymbol);
             if (sv.HasConstraint(ObjectConstraint.Null, newProgramState))
             {
                 var constraint = instruction.IsKind(SyntaxKind.IsExpression)
@@ -582,8 +576,8 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.CSharp
 
         private ProgramState VisitDefaultExpression(DefaultExpressionSyntax instruction, ProgramState programState)
         {
-            var sv = new SymbolicValue();
             var typeSymbol = SemanticModel.GetTypeInfo(instruction).Type;
+            var sv = SymbolicValue.Create();
 
             var isReferenceOrNullable = typeSymbol.IsReferenceType ||
                 typeSymbol.OriginalDefinition.Is(KnownType.System_Nullable_T);
@@ -604,49 +598,49 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.CSharp
 
         private static ProgramState VisitValueEquals(ProgramState programState)
         {
-            SymbolicValue leftSymbol;
-            SymbolicValue rightSymbol;
+            SymbolicValue leftSymbolicValue;
+            SymbolicValue rightSymbolicValue;
 
             var newProgramState = programState
-                .PopValue(out rightSymbol)
-                .PopValue(out leftSymbol);
+                .PopValue(out rightSymbolicValue)
+                .PopValue(out leftSymbolicValue);
 
-            var equals = new ValueEqualsSymbolicValue(leftSymbol, rightSymbol);
+            var equals = new ValueEqualsSymbolicValue(leftSymbolicValue, rightSymbolicValue);
             newProgramState = newProgramState.PushValue(equals);
             return InvocationVisitor.SetConstraintOnValueEquals(equals, newProgramState);
         }
 
         private ProgramState VisitReferenceEquals(BinaryExpressionSyntax equals, ProgramState programState)
         {
-            SymbolicValue leftSymbol;
-            SymbolicValue rightSymbol;
+            SymbolicValue leftSymbolicValue;
+            SymbolicValue rightSymbolicValue;
 
             var newProgramState = programState
-                .PopValue(out rightSymbol)
-                .PopValue(out leftSymbol);
+                .PopValue(out rightSymbolicValue)
+                .PopValue(out leftSymbolicValue);
 
-            return new InvocationVisitor.ReferenceEqualsConstraintHandler(leftSymbol, rightSymbol,
+            return new InvocationVisitor.ReferenceEqualsConstraintHandler(leftSymbolicValue, rightSymbolicValue,
                 equals.Left, equals.Right, newProgramState, SemanticModel).PushWithConstraint();
         }
 
         private ProgramState VisitComparisonBinaryOperator(ProgramState programState, BinaryExpressionSyntax comparison,
             Func<SymbolicValue, SymbolicValue, SymbolicValue> svFactory)
         {
-            SymbolicValue leftSymbol;
-            SymbolicValue rightSymbol;
+            SymbolicValue leftSymbolicValue;
+            SymbolicValue rightSymbolicValue;
 
             var newProgramState = programState
-                .PopValue(out rightSymbol)
-                .PopValue(out leftSymbol);
+                .PopValue(out rightSymbolicValue)
+                .PopValue(out leftSymbolicValue);
 
             var op = SemanticModel.GetSymbolInfo(comparison).Symbol as IMethodSymbol;
 
             var isValueTypeOperator = op?.ContainingType?.IsValueType ?? false;
 
             var isLiftedOperator = isValueTypeOperator &&
-                (leftSymbol.IsNull(programState) || rightSymbol.IsNull(programState));
+                (leftSymbolicValue.IsNull(programState) || rightSymbolicValue.IsNull(programState));
 
-            var comparisonValue = isLiftedOperator ? SymbolicValue.False : svFactory(leftSymbol, rightSymbol);
+            var comparisonValue = isLiftedOperator ? SymbolicValue.False : svFactory(leftSymbolicValue, rightSymbolicValue);
 
             return newProgramState.PushValue(comparisonValue);
         }
@@ -654,13 +648,13 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.CSharp
         private static ProgramState VisitBinaryOperator(ProgramState programState,
             Func<SymbolicValue, SymbolicValue, SymbolicValue> svFactory)
         {
-            SymbolicValue leftSymbol;
-            SymbolicValue rightSymbol;
+            SymbolicValue leftSymbolicValue;
+            SymbolicValue rightSymbolicValue;
 
             return programState
-                .PopValue(out rightSymbol)
-                .PopValue(out leftSymbol)
-                .PushValue(svFactory(leftSymbol, rightSymbol));
+                .PopValue(out rightSymbolicValue)
+                .PopValue(out leftSymbolicValue)
+                .PushValue(svFactory(leftSymbolicValue, rightSymbolicValue));
         }
 
         private ProgramState VisitBooleanBinaryOpAssignment(ProgramState programState, AssignmentExpressionSyntax assignment,
@@ -668,14 +662,14 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.CSharp
         {
             var symbol = SemanticModel.GetSymbolInfo(assignment.Left).Symbol;
 
-            SymbolicValue leftSymbol;
-            SymbolicValue rightSymbol;
+            SymbolicValue leftSymbolicValue;
+            SymbolicValue rightSymbolicValue;
 
             var newProgramState = programState
-                .PopValue(out rightSymbol)
-                .PopValue(out leftSymbol);
+                .PopValue(out rightSymbolicValue)
+                .PopValue(out leftSymbolicValue);
 
-            var sv = symbolicValueFactory(leftSymbol, rightSymbol);
+            var sv = symbolicValueFactory(leftSymbolicValue, rightSymbolicValue);
             newProgramState = newProgramState.PushValue(sv);
             newProgramState = SetNonNullConstraintIfValueType(symbol, sv, newProgramState);
             return SetNewSymbolicValueIfTracked(symbol, sv, newProgramState);
@@ -684,7 +678,8 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.CSharp
         private ProgramState VisitObjectCreation(ObjectCreationExpressionSyntax ctor, ProgramState programState)
         {
             var newProgramState = programState.PopValues(ctor.ArgumentList?.Arguments.Count ?? 0);
-            var sv = new SymbolicValue();
+            var typeSymbol = SemanticModel.GetTypeInfo(ctor).Type;
+            var sv = SymbolicValue.Create(typeSymbol);
 
             var ctorSymbol = SemanticModel.GetSymbolInfo(ctor).Symbol as IMethodSymbol;
             if (ctorSymbol == null)
@@ -713,7 +708,7 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.CSharp
                 !(parenthesizedExpression.Parent is AnonymousObjectCreationExpressionSyntax) &&
                 !(parenthesizedExpression.Parent is ImplicitArrayCreationExpressionSyntax))
             {
-                newProgramState = newProgramState.PushValue(new SymbolicValue());
+                newProgramState = newProgramState.PushValue(SymbolicValue.Create());
             }
 
             return newProgramState;
@@ -723,6 +718,7 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.CSharp
         {
             var newProgramState = programState;
             var symbol = SemanticModel.GetSymbolInfo(identifier).Symbol;
+            var typeSymbol = SemanticModel.GetTypeInfo(identifier).Type;
             var sv = newProgramState.GetSymbolValue(symbol);
             if (sv == null)
             {
@@ -734,7 +730,7 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.CSharp
                 }
                 else
                 {
-                    sv = new SymbolicValue();
+                    sv = SymbolicValue.Create(typeSymbol);
                 }
             }
             newProgramState = newProgramState.PushValue(sv);
@@ -748,7 +744,7 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.CSharp
             }
 
             newProgramState = newProgramState.PopValue();
-            sv = new SymbolicValue();
+            sv = SymbolicValue.Create(typeSymbol);
             newProgramState = newProgramState.PushValue(sv);
             newProgramState = SetNonNullConstraintIfValueType(symbol, sv, newProgramState);
             return SetNewSymbolicValueIfTracked(symbol, sv, newProgramState);
@@ -759,7 +755,8 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.CSharp
             var symbol = SemanticModel.GetSymbolInfo(unary.Operand).Symbol;
 
             // Do not change the stacked value
-            var sv = new SymbolicValue();
+            var typeSymbol = SemanticModel.GetTypeInfo(unary).Type;
+            var sv = SymbolicValue.Create(typeSymbol);
             var newProgramState = SetNonNullConstraintIfValueType(symbol, sv, programState);
             return SetNewSymbolicValueIfTracked(symbol, sv, newProgramState);
         }
@@ -770,7 +767,8 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.CSharp
             var symbol = SemanticModel.GetSymbolInfo(unary.Operand).Symbol;
             newProgramState = newProgramState.PopValue();
 
-            var sv = new SymbolicValue();
+            var typeSymbol = SemanticModel.GetTypeInfo(unary).Type;
+            var sv = SymbolicValue.Create(typeSymbol);
             newProgramState = newProgramState.PushValue(sv);
             newProgramState = SetNonNullConstraintIfValueType(symbol, sv, newProgramState);
             return SetNewSymbolicValueIfTracked(symbol, sv, newProgramState);
@@ -782,7 +780,8 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.CSharp
             var leftSymbol = SemanticModel.GetSymbolInfo(assignment.Left).Symbol;
             newProgramState = newProgramState.PopValues(2);
 
-            var sv = new SymbolicValue();
+            var typeSymbol = SemanticModel.GetTypeInfo(assignment).Type;
+            var sv = SymbolicValue.Create(typeSymbol);
             newProgramState = newProgramState.PushValue(sv);
             newProgramState = SetNonNullConstraintIfValueType(leftSymbol, sv, newProgramState);
             return SetNewSymbolicValueIfTracked(leftSymbol, sv, newProgramState);
@@ -808,13 +807,13 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.CSharp
         {
             var newProgramState = programState;
 
-            var sv = new SymbolicValue();
+            var leftSymbol = SemanticModel.GetDeclaredSymbol(declarator) as ILocalSymbol;
+            var sv = SymbolicValue.Create(leftSymbol?.Type);
             if (declarator.Initializer?.Value != null)
             {
                 newProgramState = newProgramState.PopValue(out sv);
             }
 
-            var leftSymbol = SemanticModel.GetDeclaredSymbol(declarator);
             if (leftSymbol != null &&
                 IsSymbolTracked(leftSymbol))
             {

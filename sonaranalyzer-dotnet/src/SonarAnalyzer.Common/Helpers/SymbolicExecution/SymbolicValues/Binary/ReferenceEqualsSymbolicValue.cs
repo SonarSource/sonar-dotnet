@@ -31,7 +31,7 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
         {
             return new ReferenceEqualsRelationship(left, right);
         }
-        
+
         public override string ToString()
         {
             return $"RefEq({LeftOperand}, {RightOperand})";

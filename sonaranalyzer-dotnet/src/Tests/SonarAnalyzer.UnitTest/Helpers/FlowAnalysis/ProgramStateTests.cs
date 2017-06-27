@@ -49,7 +49,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             var ps1 = new ProgramState();
             var ps2 = new ProgramState();
 
-            var sv = new SymbolicValue();
+            var sv = SymbolicValue.Create();
             var constraint = new FakeConstraint();
             var symbol = GetSymbol();
             ps1 = ps1.StoreSymbolicValue(symbol, sv);
@@ -69,8 +69,8 @@ namespace SonarAnalyzer.UnitTest.Helpers
             var ps2 = new ProgramState();
 
             var symbol = GetSymbol();
-            ps1 = ps1.StoreSymbolicValue(symbol, new SymbolicValue());
-            ps2 = ps2.StoreSymbolicValue(symbol, new SymbolicValue());
+            ps1 = ps1.StoreSymbolicValue(symbol, SymbolicValue.Create());
+            ps2 = ps2.StoreSymbolicValue(symbol, SymbolicValue.Create());
 
             ps2.Should().NotBe(ps1);
             ps2.GetHashCode().Should().NotBe(ps1.GetHashCode());
@@ -84,7 +84,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             var ps2 = new ProgramState();
 
             var symbol = GetSymbol();
-            var sv = new SymbolicValue();
+            var sv = SymbolicValue.Create();
             ps1 = ps1.StoreSymbolicValue(symbol, sv);
             ps1 = sv.SetConstraint(new FakeConstraint(), ps1);
             ps2 = ps2.StoreSymbolicValue(symbol, sv);
@@ -101,7 +101,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             var ps1 = new ProgramState();
             var ps2 = new ProgramState();
 
-            var sv = new SymbolicValue();
+            var sv = SymbolicValue.Create();
             ps1 = ps1.StoreSymbolicValue(GetSymbol(), sv);
             ps2 = ps2.StoreSymbolicValue(GetSymbol(), sv);
 
@@ -114,7 +114,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         public void ProgramState_Constraint()
         {
             var ps = new ProgramState();
-            var sv = new SymbolicValue();
+            var sv = SymbolicValue.Create();
             var symbol = GetSymbol();
             var constraint = new FakeConstraint();
 
@@ -129,7 +129,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         public void ProgramState_NotNull_Bool_Constraint()
         {
             var ps = new ProgramState();
-            var sv = new SymbolicValue();
+            var sv = SymbolicValue.Create();
             var symbol = GetSymbol();
 
             ps = ps.StoreSymbolicValue(symbol, sv);
