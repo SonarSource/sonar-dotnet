@@ -10,6 +10,8 @@ namespace Tests.Diagnostics
 
     class CompliantCases<T>
     {
+        public int;
+
         protected static bool[] bools; // Compliant
         private static int[] ints; // Compliant
         internal static float[] floats; // Compliant
@@ -28,6 +30,8 @@ namespace Tests.Diagnostics
         public static ImmutableArray<string> immutableArray; // Compliant
         public static ImmutableSortedSet<string> immutableSortedSet; // Compliant
         public static readonly ImmutableSortedSet<string> staticReadonlyImmutableSortedSet; // Compliant
+
+        public static IImmutableList<string> iImmutableListWithInitialization = ImmutableList.Create("a", "b");
 
         public static readonly ISet<string> iSetInitializaedWithImmutableSet = ImmutableHashSet.Create("a", "b");
         public static readonly IList<string> iListInitializaedWithImmutableArray = ImmutableArray.Create("a", "b");

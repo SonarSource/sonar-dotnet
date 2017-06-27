@@ -12,16 +12,21 @@ public class A
 }
 </pre>
 <h2>Exceptions</h2>
-<p>The issue won't raise if the type of the field inherits/implements one (at least) of the following types:</p>
+<p>No issue is reported:</p>
 <ul>
-  <li> <code>System.Collections.ObjectModel.ReadOnlyCollection&lt;T&gt;</code> </li>
-  <li> <code>System.Collections.ObjectModel.ReadOnlyDictionary&lt;TKey, TValue&gt;</code> </li>
-  <li> <code>System.Collections.Immutable.IImmutableArray&lt;T&gt;</code> </li>
-  <li> <code>System.Collections.Immutable.IImmutableDictionary&lt;TKey, TValue&gt;</code> </li>
-  <li> <code>System.Collections.Immutable.IImmutableList&lt;T&gt;</code> </li>
-  <li> <code>System.Collections.Immutable.IImmutableSet&lt;T&gt;</code> </li>
-  <li> <code>System.Collections.Immutable.IImmutableStack&lt;T&gt;</code> </li>
-  <li> <code>System.Collections.Immutable.IImmutableQueue&lt;T&gt;</code> </li>
+  <li> If the type of the field inherits/implements one (at least) of the following types:
+    <ul>
+      <li> <code>System.Collections.ObjectModel.ReadOnlyCollection&lt;T&gt;</code> </li>
+      <li> <code>System.Collections.ObjectModel.ReadOnlyDictionary&lt;TKey, TValue&gt;</code> </li>
+      <li> <code>System.Collections.Immutable.IImmutableArray&lt;T&gt;</code> </li>
+      <li> <code>System.Collections.Immutable.IImmutableDictionary&lt;TKey, TValue&gt;</code> </li>
+      <li> <code>System.Collections.Immutable.IImmutableList&lt;T&gt;</code> </li>
+      <li> <code>System.Collections.Immutable.IImmutableSet&lt;T&gt;</code> </li>
+      <li> <code>System.Collections.Immutable.IImmutableStack&lt;T&gt;</code> </li>
+      <li> <code>System.Collections.Immutable.IImmutableQueue&lt;T&gt;</code> </li>
+    </ul> </li>
+  <li> If the field is <code>readonly</code> and is initialized inline with an immutable type (i.e. inherits/implements one of the types in the
+  previous list). </li>
 </ul>
 <h2>See</h2>
 <ul>

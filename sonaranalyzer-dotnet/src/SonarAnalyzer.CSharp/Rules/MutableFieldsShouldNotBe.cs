@@ -98,15 +98,15 @@ namespace SonarAnalyzer.Rules
             var namedTypeSymbol = symbol as INamedTypeSymbol;
             if (namedTypeSymbol != null)
             {
-                return IsOrDerivesOrImplementsAny(namedTypeSymbol.ConstructedFrom, InvalidMutableTypes) &&
-                    !IsOrDerivesOrImplementsAny(namedTypeSymbol.ConstructedFrom, AllowedTypes);
+                return namedTypeSymbol.ConstructedFrom.DerivesOrImplementsAny(InvalidMutableTypes) &&
+                    !namedTypeSymbol.ConstructedFrom.DerivesOrImplementsAny(AllowedTypes);
             }
 
             var typeSymbol = symbol as ITypeSymbol;
             if (typeSymbol != null)
             {
-                return IsOrDerivesOrImplementsAny(typeSymbol, InvalidMutableTypes) &&
-                    !IsOrDerivesOrImplementsAny(typeSymbol, AllowedTypes);
+                return typeSymbol.DerivesOrImplementsAny(InvalidMutableTypes) &&
+                    !typeSymbol.DerivesOrImplementsAny(AllowedTypes);
             }
 
             return false;
@@ -114,24 +114,8 @@ namespace SonarAnalyzer.Rules
 
         private static bool IsValidReadOnlyInitializer(ISymbol symbol)
         {
-            if (symbol == null)
-            {
-                return false;
-            }
-
             var methodSymbol = symbol as IMethodSymbol;
-            if (methodSymbol != null)
-            {
-                return IsOrDerivesOrImplementsAny(methodSymbol.ReturnType, AllowedTypes);
-            }
-
-            return false;
-        }
-
-        private static bool IsOrDerivesOrImplementsAny(ITypeSymbol typeSymbol, ISet<KnownType> knownTypes)
-        {
-            return typeSymbol.IsAny(knownTypes) ||
-                typeSymbol.DerivesOrImplementsAny(knownTypes);
+            return methodSymbol != null && methodSymbol.ReturnType.DerivesOrImplementsAny(AllowedTypes);
         }
     }
 }
