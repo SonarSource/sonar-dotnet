@@ -138,7 +138,7 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
 
         private ImmutableDictionary<SymbolicValue, SymbolicValueConstraint> AddConstraintTo<TRelationship>(SymbolicValueConstraint constraint,
             ProgramState programState, ImmutableDictionary<SymbolicValue, SymbolicValueConstraint> constraints)
-            where TRelationship: BinaryRelationship
+            where TRelationship : BinaryRelationship
         {
             var newConstraints = constraints;
             var equalSymbols = programState.Relationships
@@ -222,7 +222,14 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
                 return TrySetConstraint(objectConstraint, oldConstraint, currentProgramState);
             }
 
-            throw new NotSupportedException($"Neither {nameof(BoolConstraint)}, nor {nameof(ObjectConstraint)}");
+            var optionalConstraint = constraint as OptionalConstraint;
+            if (optionalConstraint != null)
+            {
+                return TrySetConstraint(optionalConstraint, oldConstraint, currentProgramState);
+            }
+
+            throw new NotSupportedException($"Neither {nameof(BoolConstraint)}, nor {nameof(ObjectConstraint)}, " +
+                $"nor {nameof(OptionalConstraint)}.");
         }
 
         public virtual IEnumerable<ProgramState> TrySetOppositeConstraint(SymbolicValueConstraint constraint, ProgramState programState)
@@ -276,6 +283,34 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
             }
 
             throw new NotSupportedException($"Neither {nameof(BoolConstraint)}, nor {nameof(ObjectConstraint)}");
+        }
+
+        private IEnumerable<ProgramState> TrySetConstraint(OptionalConstraint optionalConstraint,
+             SymbolicValueConstraint oldConstraint, ProgramState currentProgramState)
+        {
+            if (oldConstraint is BoolConstraint)
+            {
+                if (optionalConstraint == OptionalConstraint.None)
+                {
+                    return Enumerable.Empty<ProgramState>();
+                }
+
+                return new[] { currentProgramState };
+            }
+
+            if (oldConstraint == ObjectConstraint.Null)
+            {
+                return new[] { currentProgramState };
+            }
+
+            if (oldConstraint == ObjectConstraint.NotNull)
+            {
+                return new[] { SetConstraint(optionalConstraint, currentProgramState) };
+            }
+
+            return oldConstraint == optionalConstraint
+                ? new[] { currentProgramState }
+                : new[] { SetConstraint(optionalConstraint.OppositeForLogicalNot, currentProgramState) };
         }
     }
 }

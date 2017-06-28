@@ -34,7 +34,19 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
         public override IEnumerable<ProgramState> TrySetConstraint(SymbolicValueConstraint constraint,
             ProgramState currentProgramState)
         {
-            return base.TrySetConstraint(constraint, currentProgramState);
+            if (constraint == ObjectConstraint.Null)
+            {
+                return new[] { SetConstraint(OptionalConstraint.None, currentProgramState) };
+            }
+            else if (constraint == ObjectConstraint.NotNull ||
+                     constraint is OptionalConstraint)
+            {
+                return new[] { SetConstraint(constraint, currentProgramState) };
+            }
+            else
+            {
+                return new[] { this.WrappedValue.SetConstraint(constraint, currentProgramState) };
+            }
         }
 
         public override string ToString()
