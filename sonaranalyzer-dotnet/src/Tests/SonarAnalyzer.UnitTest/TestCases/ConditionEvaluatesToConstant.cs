@@ -1269,7 +1269,7 @@ namespace Tests.Diagnostics
                 if (b == true)
                 {
                 }
-                else if (b == false) // TODO: SHOULD BE COMPLIANT
+                else if (b == false)
                 {
                 }
                 else
@@ -1316,7 +1316,7 @@ namespace Tests.Diagnostics
                 if (b == true)
                 {
                     var x = b.Value;
-                    if (x == true) // Noncompliant {{Change this condition so that it does not always evaluate to 'true'.}}
+                    if (x == true) // TODO: Should be NC {{Change this condition so that it does not always evaluate to 'true'.}}
                     {
                     }
                 }

@@ -38,11 +38,9 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
         {
             if (constraint is ObjectConstraint)
             {
-                var optionalConstraint = OptionalConstraint.None;
-                if (constraint == ObjectConstraint.NotNull)
-                {
-                    optionalConstraint = OptionalConstraint.Some;
-                }
+                var optionalConstraint = constraint == ObjectConstraint.Null
+                    ? OptionalConstraint.None
+                    : OptionalConstraint.Some;
 
                 return TrySetConstraint(optionalConstraint, currentProgramState);
             }
@@ -63,7 +61,21 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
                 return new[] { currentProgramState };
             }
 
-            return WrappedValue.TrySetConstraint(constraint, SetConstraint(OptionalConstraint.Some, currentProgramState));
+            return TrySetConstraint(OptionalConstraint.Some, currentProgramState)
+                .SelectMany(ps => WrappedValue.TrySetConstraint(constraint, ps));
+        }
+
+        public override IEnumerable<ProgramState> TrySetOppositeConstraint(SymbolicValueConstraint constraint, ProgramState programState)
+        {
+            var negateConstraint = constraint?.OppositeForLogicalNot;
+
+            if (constraint is BoolConstraint)
+            {
+                return TrySetConstraint(negateConstraint, programState)
+                  .Union(TrySetConstraint(OptionalConstraint.None, programState));
+            }
+
+            return TrySetConstraint(negateConstraint, programState);
         }
 
         public override string ToString()
