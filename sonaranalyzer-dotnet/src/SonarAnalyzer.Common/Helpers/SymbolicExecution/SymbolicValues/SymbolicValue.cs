@@ -225,6 +225,11 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
             throw new NotSupportedException($"Neither {nameof(BoolConstraint)}, nor {nameof(ObjectConstraint)}");
         }
 
+        public virtual IEnumerable<ProgramState> TrySetOppositeConstraint(SymbolicValueConstraint constraint, ProgramState programState)
+        {
+            return TrySetConstraint(constraint?.OppositeForLogicalNot, programState);
+        }
+
         private IEnumerable<ProgramState> TrySetConstraint(BoolConstraint boolConstraint, SymbolicValueConstraint oldConstraint,
             ProgramState currentProgramState)
         {
