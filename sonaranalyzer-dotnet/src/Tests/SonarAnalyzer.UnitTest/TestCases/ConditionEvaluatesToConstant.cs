@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Threading.Tasks;
 
 namespace Tests.Diagnostics
@@ -1212,6 +1212,123 @@ namespace Tests.Diagnostics
             {
                 if (a == null) // Compliant
                 {
+                }
+            }
+        }
+
+        public class NullableCases
+        {
+            void Case1()
+            {
+                bool? b = true;
+                if (b == true) // Noncompliant {{Change this condition so that it does not always evaluate to 'true'.}}
+                {
+
+                }
+            }
+
+            void Case2()
+            {
+                bool? b = true;
+                if (b == false) // Noncompliant {{Change this condition so that it does not always evaluate to 'false'; some subsequent code is never executed.}}
+                { // Secondary
+                }
+            }
+
+            void Case3(bool? b)
+            {
+                if (b == null)
+                {
+                    if (null == b) // Noncompliant {{Change this condition so that it does not always evaluate to 'true'.}}
+                    {
+                        b.ToString();
+                    }
+                }
+                else
+                {
+                    if (b != null) // Noncompliant {{Change this condition so that it does not always evaluate to 'true'.}}
+                    {
+                        b.ToString();
+                    }
+                }
+            }
+
+            void Case4(bool? b)
+            {
+                if (b == true)
+                {
+                    if (true == b) // Noncompliant {{Change this condition so that it does not always evaluate to 'true'.}}
+                    {
+                        b.ToString();
+                    }
+                }
+            }
+
+            void Case5(bool? b)
+            {
+                if (b == true)
+                {
+                }
+                else if (b == false)
+                {
+                }
+                else // Compliant
+                {
+                }
+            }
+
+            void Case6(bool? b)
+            {
+                if (b == null)
+                {
+                }
+                else if (b == true)
+                {
+                }
+                else
+                {
+                }
+            }
+
+            void Case7(bool? b)
+            {
+                if (b == null)
+                {
+                    if (b ?? false) // Noncompliant {{Change this condition so that it does not always evaluate to 'false'; some subsequent code is never executed.}}
+                    { // Secondary
+
+                    }
+                }
+            }
+
+            void Case8(bool? b)
+            {
+                if (b != null)
+                {
+                    if (b.HasValue) // Noncompliant {{Change this condition so that it does not always evaluate to 'true'.}}
+                    {
+                    }
+                }
+            }
+
+            void Case9(bool? b)
+            {
+                if (b == true)
+                {
+                    var x = b.Value;
+                    if (x == true) // Noncompliant {{Change this condition so that it does not always evaluate to 'true'.}}
+                    {
+                    }
+                }
+            }
+
+            void Case10(int? i)
+            {
+                if (i == null)
+                {
+                    if (i.HasValue) // Noncompliant {{Change this condition so that it does not always evaluate to 'false'; some subsequent code is never executed.}}
+                    { // Secondary
+                    }
                 }
             }
         }
