@@ -40,8 +40,33 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
                     .SelectMany(ps => LeftOperand.TrySetConstraint(rightConstraint, ps));
             }
 
-            return RightOperand.TrySetConstraint(leftConstraint?.OppositeForLogicalNot, programState)
-                .SelectMany(ps => LeftOperand.TrySetConstraint(rightConstraint?.OppositeForLogicalNot, ps));
+            return NegateConstraint(RightOperand, leftConstraint)
+                .SelectMany(constraint => RightOperand.TrySetConstraint(constraint, programState))
+                .SelectMany(ps => NegateConstraint(LeftOperand, rightConstraint)
+                    .SelectMany(constraint => LeftOperand.TrySetConstraint(constraint, ps)));
+        }
+
+        private static IEnumerable<SymbolicValueConstraint> NegateConstraint(SymbolicValue value, SymbolicValueConstraint constraint)
+        {
+            if (value is NullableSymbolicValue)
+            {
+                if (constraint is BoolConstraint)
+                {
+                    return new[] { constraint?.OppositeForLogicalNot, OptionalConstraint.None };
+                }
+
+                if (constraint == ObjectConstraint.Null)
+                {
+                    return new[] { BoolConstraint.True, BoolConstraint.False };
+                }
+
+                if (constraint == ObjectConstraint.NotNull)
+                {
+                    return new[] { OptionalConstraint.None };
+                }
+            }
+
+            return new[] { constraint?.OppositeForLogicalNot };
         }
     }
 }

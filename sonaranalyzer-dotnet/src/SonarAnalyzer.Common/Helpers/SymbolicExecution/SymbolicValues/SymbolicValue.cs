@@ -228,11 +228,12 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
                 return TrySetConstraint(optionalConstraint, oldConstraint, currentProgramState);
             }
 
-            throw new NotSupportedException($"Neither {nameof(BoolConstraint)}, nor {nameof(ObjectConstraint)}, nor {nameof(OptionalConstraint)}.");
+            throw new NotSupportedException($"Neither {nameof(BoolConstraint)}, nor {nameof(ObjectConstraint)}, " +
+                $"nor {nameof(OptionalConstraint)}.");
         }
 
-        private IEnumerable<ProgramState> TrySetConstraint(BoolConstraint boolConstraint, SymbolicValueConstraint oldConstraint,
-            ProgramState currentProgramState)
+        private IEnumerable<ProgramState> TrySetConstraint(BoolConstraint boolConstraint,
+            SymbolicValueConstraint oldConstraint, ProgramState currentProgramState)
         {
             if (oldConstraint == ObjectConstraint.Null)
             {
@@ -240,9 +241,8 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
                 return Enumerable.Empty<ProgramState>();
             }
 
-            var oldBoolConstraint = oldConstraint as BoolConstraint;
-            if (oldBoolConstraint != null &&
-                oldBoolConstraint != boolConstraint)
+            if (oldConstraint is BoolConstraint &&
+                oldConstraint != boolConstraint)
             {
                 return Enumerable.Empty<ProgramState>();
             }
@@ -251,11 +251,10 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
             return new[] { SetConstraint(boolConstraint, currentProgramState) };
         }
 
-        private IEnumerable<ProgramState> TrySetConstraint(ObjectConstraint objectConstraint, SymbolicValueConstraint oldConstraint,
-            ProgramState currentProgramState)
+        private IEnumerable<ProgramState> TrySetConstraint(ObjectConstraint objectConstraint,
+            SymbolicValueConstraint oldConstraint, ProgramState currentProgramState)
         {
-            var oldBoolConstraint = oldConstraint as BoolConstraint;
-            if (oldBoolConstraint != null)
+            if (oldConstraint is BoolConstraint)
             {
                 if (objectConstraint == ObjectConstraint.Null)
                 {
@@ -265,10 +264,9 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
                 return new[] { currentProgramState };
             }
 
-            var oldObjectConstraint = oldConstraint as ObjectConstraint;
-            if (oldObjectConstraint != null)
+            if (oldConstraint is ObjectConstraint)
             {
-                if (oldObjectConstraint != objectConstraint)
+                if (oldConstraint != objectConstraint)
                 {
                     return Enumerable.Empty<ProgramState>();
                 }
@@ -282,28 +280,29 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
         private IEnumerable<ProgramState> TrySetConstraint(OptionalConstraint optionalConstraint,
             SymbolicValueConstraint oldConstraint, ProgramState currentProgramState)
         {
-            return new[] { currentProgramState };
-            //var oldBoolConstraint = oldConstraint as BoolConstraint;
-            //if (oldBoolConstraint != null)
-            //{
-            //    if (optionalConstraint == OptionalConstraint.Some)
-            //    {
+            if (oldConstraint is BoolConstraint)
+            {
+                if (optionalConstraint == OptionalConstraint.None)
+                {
+                    return Enumerable.Empty<ProgramState>();
+                }
 
-            //    }
-            //}
+                return new[] { currentProgramState };
+            }
 
-            //var oldObjectConstraint = oldConstraint as ObjectConstraint;
-            //if (oldObjectConstraint != null)
-            //{
-            //    if (oldObjectConstraint != objectConstraint)
-            //    {
-            //        return Enumerable.Empty<ProgramState>();
-            //    }
+            if (oldConstraint == ObjectConstraint.Null)
+            {
+                return new[] { currentProgramState };
+            }
 
-            //    return new[] { SetConstraint(objectConstraint, currentProgramState) };
-            //}
+            if (oldConstraint == ObjectConstraint.NotNull)
+            {
+                return new[] { SetConstraint(optionalConstraint, currentProgramState) };
+            }
 
-            //throw new NotSupportedException($"Neither {nameof(BoolConstraint)}, nor {nameof(ObjectConstraint)}");
+            return oldConstraint == optionalConstraint
+                ? new[] { currentProgramState }
+                : new[] { SetConstraint(optionalConstraint.OppositeForLogicalNot, currentProgramState) };
         }
     }
 }

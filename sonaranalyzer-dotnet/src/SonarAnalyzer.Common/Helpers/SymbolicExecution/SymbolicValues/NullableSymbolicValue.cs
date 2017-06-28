@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
@@ -26,14 +27,15 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
 {
     public class NullableSymbolicValue : SymbolicValue
     {
-        private SymbolicValue wrappedValue { get; }
+        public SymbolicValue WrappedValue { get; }
 
         public NullableSymbolicValue(SymbolicValue wrappedValue)
         {
-            this.wrappedValue = wrappedValue;
+            this.WrappedValue = wrappedValue;
         }
 
-        public override IEnumerable<ProgramState> TrySetConstraint(SymbolicValueConstraint constraint, ProgramState currentProgramState)
+        public override IEnumerable<ProgramState> TrySetConstraint(SymbolicValueConstraint constraint,
+            ProgramState currentProgramState)
         {
             var oldConstraint = currentProgramState.Constraints.GetValueOrDefault(this);
 
@@ -53,7 +55,8 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
                 }
                 else
                 {
-                    // TODO: What shall we do?
+                    throw new InvalidOperationException($"Not expecting to set a {ObjectConstraint.Null} " +
+                        $"constraint on a Symbolic Value with the {constraint} constraint.");
                 }
             }
             else if (constraint == ObjectConstraint.NotNull)
@@ -72,62 +75,35 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
                 }
                 else
                 {
-                    // TODO: What shall we do?
+                    throw new InvalidOperationException($"Not expecting to set a {ObjectConstraint.NotNull} " +
+                        $"constraint on a Symbolic Value with the {constraint} constraint.");
                 }
             }
-            else if (constraint == BoolConstraint.True)
+            else
             {
                 if (oldConstraint == null)
                 {
-                    var newProgramState = SetConstraint(OptionalConstraint.Some, currentProgramState);
-                    //return this.wrappedValue.TrySetConstraint(constraint, newProgramState);
-                    return new[] { SetConstraint(constraint, newProgramState) };
-                }
-                else if (oldConstraint == OptionalConstraint.None)
-                {
-                    return Enumerable.Empty<ProgramState>();
-                }
-                else if (oldConstraint == OptionalConstraint.Some)
-                {
-                    //return this.wrappedValue.TrySetConstraint(constraint, currentProgramState);
-                    return new[] { SetConstraint(constraint, currentProgramState) };
-                }
-                else
-                {
-                    //return this.wrappedValue.TrySetConstraint(constraint, currentProgramState);
-                    return new[] { SetConstraint(constraint, currentProgramState) };
-                }
-            }
-            else if (constraint == BoolConstraint.False)
-            {
-                if (oldConstraint == null)
-                {
-                    //var newProgramState = SetConstraint(OptionalConstraint.Some, currentProgramState);
-                    //return this.wrappedValue.TrySetConstraint(constraint, newProgramState);
-                    //return new[] { SetConstraint(constraint, newProgramState) };
-                    return new[]
-                        {
-                            SetConstraint(constraint, SetConstraint(OptionalConstraint.Some, currentProgramState)),
-                            SetConstraint(OptionalConstraint.None, currentProgramState)
-                        };
-                }
-                else if (oldConstraint == OptionalConstraint.None)
-                {
-                    return Enumerable.Empty<ProgramState>();
-                }
-                else if (oldConstraint == OptionalConstraint.Some)
-                {
-                    //return this.wrappedValue.TrySetConstraint(constraint, currentProgramState);
-                    return new[] { SetConstraint(constraint, currentProgramState) };
-                }
-                else
-                {
-                    //return this.wrappedValue.TrySetConstraint(constraint, currentProgramState);
-                    return new[] { SetConstraint(constraint, currentProgramState) };
-                }
-            }
+                    if (constraint is OptionalConstraint)
+                    {
+                        return new[] { SetConstraint(constraint, currentProgramState) };
+                    }
 
-            return Enumerable.Empty<ProgramState>();
+                    return new[] { this.WrappedValue.SetConstraint(constraint,
+                        SetConstraint(OptionalConstraint.Some, currentProgramState)) };
+                }
+                else if (oldConstraint == OptionalConstraint.None)
+                {
+                    return Enumerable.Empty<ProgramState>();
+                }
+                else if (oldConstraint == OptionalConstraint.Some)
+                {
+                    return new[] { this.WrappedValue.SetConstraint(constraint, currentProgramState) };
+                }
+                else
+                {
+                    return new[] { this.WrappedValue.SetConstraint(constraint, currentProgramState) };
+                }
+            }
         }
 
         public override string ToString()
@@ -137,7 +113,7 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
                 return $"NULLABLE_SV_{base.identifier}";
             }
 
-            return this.wrappedValue?.ToString() ?? base.ToString();
+            return this.WrappedValue?.ToString() ?? base.ToString();
         }
     }
 }
