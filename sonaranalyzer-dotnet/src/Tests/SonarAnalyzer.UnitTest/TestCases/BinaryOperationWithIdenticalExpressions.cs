@@ -44,17 +44,17 @@ namespace Tests.TestCases
             i = 2 << 2; // Compliant
 
             object.Equals(i, i);
-//                        ^ {{Correct one of the identical expressions on both sides of Object.Equals.}}
+//                        ^ {{Correct one of the identical expressions on both sides of 'Object.Equals'.}}
 //                           ^ Secondary@-1
 
             var o = new object();
 
             o.Equals(o);
-//          ^ {{Correct one of the identical expressions on both sides of Object.Equals.}}
+//          ^ {{Correct one of the identical expressions on both sides of 'Object.Equals'.}}
 //                   ^ Secondary@-1
 
             (new object()).Equals(new object());
-//          ^^^^^^^^^^^^^^ {{Correct one of the identical expressions on both sides of Object.Equals.}}
+//          ^^^^^^^^^^^^^^ {{Correct one of the identical expressions on both sides of 'Object.Equals'.}}
 //                                ^^^^^^^^^^^^ Secondary@-1
 
             Foo f;

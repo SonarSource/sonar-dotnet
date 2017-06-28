@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S1764",
-"message":  "Correct one of the identical expressions on both sides of Object.Equals.",
+"message":  "Correct one of the identical expressions on both sides of 'Object.Equals'.",
 "location":  [
 {
 "uri":  "akka.net\src\core\Akka.Persistence\AtLeastOnceDeliverySemantic.cs",

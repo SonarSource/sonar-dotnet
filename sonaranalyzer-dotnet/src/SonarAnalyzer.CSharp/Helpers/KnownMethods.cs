@@ -42,6 +42,7 @@ namespace SonarAnalyzer.Helpers
         public static bool IsObjectEquals(this IMethodSymbol methodSymbol)
         {
             return methodSymbol != null &&
+                (methodSymbol.IsOverride || methodSymbol.IsInType(KnownType.System_Object)) &&
                 methodSymbol.MethodKind == MethodKind.Ordinary &&
                 methodSymbol.Name == nameof(object.Equals) &&
                 methodSymbol.Parameters.Length == 1 &&
