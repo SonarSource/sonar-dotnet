@@ -44,6 +44,7 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
         internal ProgramState ProcessInvocation()
         {
             var symbol = semanticModel.GetSymbolInfo(invocation).Symbol;
+            var typeSymbol = semanticModel.GetTypeInfo(invocation).Type;
 
             var methodSymbol = symbol as IMethodSymbol;
             var invocationArgsCount = invocation.ArgumentList?.Arguments.Count ?? 0;
@@ -75,7 +76,7 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
 
             return programState
                 .PopValues(invocationArgsCount + 1)
-                .PushValue(new SymbolicValue());
+                .PushValue(SymbolicValue.Create(typeSymbol));
         }
 
         private ProgramState HandleNameofExpression(int argumentsCount)
@@ -86,7 +87,7 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
                 .PopValues(argumentsCount)
                 .PopValue();
 
-            var nameof = new SymbolicValue();
+            var nameof = SymbolicValue.Create();
             newProgramState = newProgramState.PushValue(nameof);
             return nameof.SetConstraint(ObjectConstraint.NotNull, newProgramState);
         }
@@ -105,7 +106,7 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
                 return newProgramState.PushValue(SymbolicValue.True);
             }
 
-            return newProgramState.PushValue(new SymbolicValue());
+            return newProgramState.PushValue(SymbolicValue.Create()); // never returns a nullable<T>
         }
 
         private ProgramState HandleStaticEqualsCall()
@@ -236,13 +237,15 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
 
             private ProgramState SetConstraint(ReferenceEqualsSymbolicValue refEquals, ProgramState programState)
             {
-                if (AreBothArgumentsNull())
+                if (AreBothArgumentsNull() ||
+                    IsComparingNullToOptionalNone())
                 {
                     return refEquals.SetConstraint(BoolConstraint.True, programState);
                 }
 
                 if (IsAnyArgumentNonNullValueType() ||
-                    ArgumentsHaveDifferentNullability())
+                    ArgumentsHaveDifferentNullability() ||
+                    IsComparingNullToOptionalSome())
                 {
                     return refEquals.SetConstraint(BoolConstraint.False, programState);
                 }
@@ -286,6 +289,18 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
             {
                 return valueLeft.HasConstraint(ObjectConstraint.Null, programState) &&
                     valueRight.HasConstraint(ObjectConstraint.Null, programState);
+            }
+
+            private bool IsComparingNullToOptionalNone()
+            {
+                return valueLeft.HasConstraint(OptionalConstraint.None, programState) && valueRight.HasConstraint(ObjectConstraint.Null, programState) ||
+                    valueLeft.HasConstraint(ObjectConstraint.Null, programState) && valueRight.HasConstraint(OptionalConstraint.None, programState);
+            }
+
+            private bool IsComparingNullToOptionalSome()
+            {
+                return valueLeft.HasConstraint(OptionalConstraint.Some, programState) && valueRight.HasConstraint(ObjectConstraint.Null, programState) ||
+                    valueLeft.HasConstraint(ObjectConstraint.Null, programState) && valueRight.HasConstraint(OptionalConstraint.Some, programState);
             }
         }
     }

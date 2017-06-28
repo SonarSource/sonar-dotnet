@@ -22,6 +22,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
+using Microsoft.CodeAnalysis;
 
 namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
 {
@@ -77,11 +78,11 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
             }
         }
 
-        private readonly object identifier;
+        protected readonly object identifier;
 
         private static int SymbolicValueCounter = 0;
 
-        internal SymbolicValue()
+        protected SymbolicValue()
             : this(SymbolicValueCounter++)
         {
         }
@@ -89,6 +90,17 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
         private SymbolicValue(object identifier)
         {
             this.identifier = identifier;
+        }
+
+        internal static SymbolicValue Create(ITypeSymbol type = null)
+        {
+            if (type != null &&
+                type.OriginalDefinition.Is(KnownType.System_Nullable_T))
+            {
+                return new NullableSymbolicValue(new SymbolicValue());
+            }
+
+            return new SymbolicValue();
         }
 
         public override string ToString()
@@ -126,7 +138,7 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
 
         private ImmutableDictionary<SymbolicValue, SymbolicValueConstraint> AddConstraintTo<TRelationship>(SymbolicValueConstraint constraint,
             ProgramState programState, ImmutableDictionary<SymbolicValue, SymbolicValueConstraint> constraints)
-            where TRelationship: BinaryRelationship
+            where TRelationship : BinaryRelationship
         {
             var newConstraints = constraints;
             var equalSymbols = programState.Relationships
@@ -210,11 +222,18 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
                 return TrySetConstraint(objectConstraint, oldConstraint, currentProgramState);
             }
 
-            throw new NotSupportedException($"Neither {nameof(BoolConstraint)}, nor {nameof(ObjectConstraint)}");
+            var optionalConstraint = constraint as OptionalConstraint;
+            if (optionalConstraint != null)
+            {
+                return TrySetConstraint(optionalConstraint, oldConstraint, currentProgramState);
+            }
+
+            throw new NotSupportedException($"Neither {nameof(BoolConstraint)}, nor {nameof(ObjectConstraint)}, " +
+                $"nor {nameof(OptionalConstraint)}.");
         }
 
-        private IEnumerable<ProgramState> TrySetConstraint(BoolConstraint boolConstraint, SymbolicValueConstraint oldConstraint,
-            ProgramState currentProgramState)
+        private IEnumerable<ProgramState> TrySetConstraint(BoolConstraint boolConstraint,
+            SymbolicValueConstraint oldConstraint, ProgramState currentProgramState)
         {
             if (oldConstraint == ObjectConstraint.Null)
             {
@@ -222,9 +241,8 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
                 return Enumerable.Empty<ProgramState>();
             }
 
-            var oldBoolConstraint = oldConstraint as BoolConstraint;
-            if (oldBoolConstraint != null &&
-                oldBoolConstraint != boolConstraint)
+            if (oldConstraint is BoolConstraint &&
+                oldConstraint != boolConstraint)
             {
                 return Enumerable.Empty<ProgramState>();
             }
@@ -233,11 +251,10 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
             return new[] { SetConstraint(boolConstraint, currentProgramState) };
         }
 
-        private IEnumerable<ProgramState> TrySetConstraint(ObjectConstraint objectConstraint, SymbolicValueConstraint oldConstraint,
-            ProgramState currentProgramState)
+        private IEnumerable<ProgramState> TrySetConstraint(ObjectConstraint objectConstraint,
+            SymbolicValueConstraint oldConstraint, ProgramState currentProgramState)
         {
-            var oldBoolConstraint = oldConstraint as BoolConstraint;
-            if (oldBoolConstraint != null)
+            if (oldConstraint is BoolConstraint)
             {
                 if (objectConstraint == ObjectConstraint.Null)
                 {
@@ -247,10 +264,9 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
                 return new[] { currentProgramState };
             }
 
-            var oldObjectConstraint = oldConstraint as ObjectConstraint;
-            if (oldObjectConstraint != null)
+            if (oldConstraint is ObjectConstraint)
             {
-                if (oldObjectConstraint != objectConstraint)
+                if (oldConstraint != objectConstraint)
                 {
                     return Enumerable.Empty<ProgramState>();
                 }
@@ -259,6 +275,34 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
             }
 
             throw new NotSupportedException($"Neither {nameof(BoolConstraint)}, nor {nameof(ObjectConstraint)}");
+        }
+
+        private IEnumerable<ProgramState> TrySetConstraint(OptionalConstraint optionalConstraint,
+            SymbolicValueConstraint oldConstraint, ProgramState currentProgramState)
+        {
+            if (oldConstraint is BoolConstraint)
+            {
+                if (optionalConstraint == OptionalConstraint.None)
+                {
+                    return Enumerable.Empty<ProgramState>();
+                }
+
+                return new[] { currentProgramState };
+            }
+
+            if (oldConstraint == ObjectConstraint.Null)
+            {
+                return new[] { currentProgramState };
+            }
+
+            if (oldConstraint == ObjectConstraint.NotNull)
+            {
+                return new[] { SetConstraint(optionalConstraint, currentProgramState) };
+            }
+
+            return oldConstraint == optionalConstraint
+                ? new[] { currentProgramState }
+                : new[] { SetConstraint(optionalConstraint.OppositeForLogicalNot, currentProgramState) };
         }
     }
 }

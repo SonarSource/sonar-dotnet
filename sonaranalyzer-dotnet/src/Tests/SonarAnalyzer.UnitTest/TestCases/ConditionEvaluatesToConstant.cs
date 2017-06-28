@@ -447,7 +447,7 @@ namespace Tests.Diagnostics
             }
 
             i = new Nullable<int>();
-            if (i == null) // Noncompliant
+            if (i == null)
             { }
 
             int ii = 4;
@@ -1145,6 +1145,64 @@ namespace Tests.Diagnostics
             { // Secondary
             }
         }
+
+        void HandleNullableCase1()
+        {
+            bool? b = true;
+            if (b == true) // Noncompliant {{Change this condition so that it does not always evaluate to 'true'.}}
+            {
+            }
+        }
+
+        void HandleNullableCase2()
+        {
+            bool? b = true;
+            if (b == false) // Noncompliant {{Change this condition so that it does not always evaluate to 'false'; some subsequent code is never executed.}}
+            { // Secondary
+            }
+        }
+
+        void HandleNullableCase3(bool? b)
+        {
+            if (b == null)
+            {
+                if (b == null) // Noncompliant {{Change this condition so that it does not always evaluate to 'true'.}}
+                {
+                    b.ToString();
+                }
+            }
+            else
+            {
+                if (b != null) // Noncompliant {{Change this condition so that it does not always evaluate to 'true'.}}
+                {
+                    b.ToString();
+                }
+            }
+        }
+
+        void HandleNullableCase4(bool? b)
+        {
+            if (b == true)
+            {
+                if (b == true) // Noncompliant {{Change this condition so that it does not always evaluate to 'true'.}}
+                {
+                    b.ToString();
+                }
+            }
+        }
+
+        //void HandleNullableCase5(bool? b)
+        //{
+        //    if (b == true)
+        //    {
+        //    }
+        //    else if (b == false)
+        //    {
+        //    }
+        //    else
+        //    {
+        //    }
+        //}
 
         unsafe void Pointers(int* a, int* b)
         {
