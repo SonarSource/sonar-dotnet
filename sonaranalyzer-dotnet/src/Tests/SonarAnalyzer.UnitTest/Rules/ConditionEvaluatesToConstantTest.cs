@@ -34,5 +34,27 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzer(@"TestCases\ConditionEvaluatesToConstant.cs", new ConditionEvaluatesToConstant(),
                 new CSharpParseOptions(LanguageVersion.CSharp6));
         }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void WrongCase()
+        {
+            Verifier.VerifyCSharpAnalyzer(@"class Foo
+{
+    void Case6(bool? b)
+    {
+        if (b == null)
+        {
+        }
+        else if (b == true)
+        {
+        }
+        else
+        {
+        }
+    }
+}", new ConditionEvaluatesToConstant(),
+                new CSharpParseOptions(LanguageVersion.CSharp6));
+        }
     }
 }

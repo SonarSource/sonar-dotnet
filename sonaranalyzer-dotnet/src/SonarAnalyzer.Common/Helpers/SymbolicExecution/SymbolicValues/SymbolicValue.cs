@@ -113,7 +113,7 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
             return base.ToString();
         }
 
-        internal ProgramState SetConstraint(SymbolicValueConstraint constraint, ProgramState programState)
+        internal virtual ProgramState SetConstraint(SymbolicValueConstraint constraint, ProgramState programState)
         {
             if (constraint == null)
             {
