@@ -347,6 +347,7 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
             // SVs for live symbols
             var usedSymbolicValues = cleanedValues.Values
                 .Concat(DistinguishedReferences)
+                .Concat(cleanedValues.Values.OfType<NullableSymbolicValue>().Select(x => x.WrappedValue)) // Do not lose constraints on wrapped SV
                 .ToImmutableHashSet();
 
             var cleanedConstraints = Constraints

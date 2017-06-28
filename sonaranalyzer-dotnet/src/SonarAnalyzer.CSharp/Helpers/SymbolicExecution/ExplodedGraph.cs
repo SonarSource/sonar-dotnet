@@ -723,7 +723,9 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.CSharp
         {
             var newProgramState = programState;
             var symbol = SemanticModel.GetSymbolInfo(identifier).Symbol;
+            var typeSymbol = SemanticModel.GetTypeInfo(identifier).Type;
             var sv = newProgramState.GetSymbolValue(symbol);
+
             if (sv == null)
             {
                 var fieldSymbol = symbol as IFieldSymbol;
@@ -734,7 +736,7 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.CSharp
                 }
                 else
                 {
-                    sv = new SymbolicValue();
+                    sv = SymbolicValue.Create(typeSymbol);
                 }
             }
             newProgramState = newProgramState.PushValue(sv);
@@ -748,7 +750,7 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.CSharp
             }
 
             newProgramState = newProgramState.PopValue();
-            sv = new SymbolicValue();
+            sv = SymbolicValue.Create(typeSymbol);
             newProgramState = newProgramState.PushValue(sv);
             newProgramState = SetNonNullConstraintIfValueType(symbol, sv, newProgramState);
             return SetNewSymbolicValueIfTracked(symbol, sv, newProgramState);
