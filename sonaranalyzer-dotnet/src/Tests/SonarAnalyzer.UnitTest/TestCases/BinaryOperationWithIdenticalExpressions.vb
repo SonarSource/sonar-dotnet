@@ -12,12 +12,12 @@ Namespace Tests.TestCases
         End Sub
         Public Sub Test(a As Boolean, b As Boolean)
 
-            If (a = a) Then ' Noncompliant {{Identical sub-expressions on both sides of operator '='.}}
+            If (a = a) Then ' Noncompliant {{Correct one of the identical expressions on both sides of operator '='.}}
 '               ^^^^^
                 doZ()
             End If
 
-            If a = b OrElse a = b Then ' Noncompliant {{Identical sub-expressions on both sides of operator 'OrElse'.}}
+            If a = b OrElse a = b Then ' Noncompliant {{Correct one of the identical expressions on both sides of operator 'OrElse'.}}
                 doW()
             End If
 

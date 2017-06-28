@@ -42,11 +42,25 @@ namespace SonarAnalyzer.Helpers
         public static bool IsObjectEquals(this IMethodSymbol methodSymbol)
         {
             return methodSymbol != null &&
-                methodSymbol.IsOverride &&
+                (methodSymbol.IsOverride || methodSymbol.IsInType(KnownType.System_Object)) &&
                 methodSymbol.MethodKind == MethodKind.Ordinary &&
                 methodSymbol.Name == nameof(object.Equals) &&
                 methodSymbol.Parameters.Length == 1 &&
                 methodSymbol.Parameters[0].Type.Is(KnownType.System_Object) &&
+                methodSymbol.ReturnType.Is(KnownType.System_Boolean);
+        }
+
+        public static bool IsStaticObjectEquals(this IMethodSymbol methodSymbol)
+        {
+            return methodSymbol != null &&
+                !methodSymbol.IsOverride &&
+                methodSymbol.IsStatic &&
+                methodSymbol.MethodKind == MethodKind.Ordinary &&
+                methodSymbol.Name == nameof(object.Equals) &&
+                methodSymbol.IsInType(KnownType.System_Object) &&
+                methodSymbol.Parameters.Length == 2 &&
+                methodSymbol.Parameters[0].Type.Is(KnownType.System_Object) &&
+                methodSymbol.Parameters[1].Type.Is(KnownType.System_Object) &&
                 methodSymbol.ReturnType.Is(KnownType.System_Boolean);
         }
 

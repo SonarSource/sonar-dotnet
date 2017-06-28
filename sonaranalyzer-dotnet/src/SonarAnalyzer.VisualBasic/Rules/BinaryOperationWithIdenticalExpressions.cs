@@ -34,7 +34,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
     public sealed class BinaryOperationWithIdenticalExpressions : BinaryOperationWithIdenticalExpressionsBase
     {
         private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, "{0}", RspecStrings.ResourceManager);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         private static readonly SyntaxKind[] SyntaxKindsToCheckBinary =
@@ -79,7 +79,8 @@ namespace SonarAnalyzer.Rules.VisualBasic
         {
             if (EquivalenceChecker.AreEquivalent(left.RemoveParentheses(), right.RemoveParentheses()))
             {
-                context.ReportDiagnostic(Diagnostic.Create(rule, context.Node.GetLocation(), operatorToken));
+                string message = string.Format(OperatorMessageFormat, operatorToken);
+                context.ReportDiagnostic(Diagnostic.Create(rule, context.Node.GetLocation(), message));
             }
         }
     }

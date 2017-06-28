@@ -26,6 +26,7 @@ using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Helpers.CSharp;
 using System.Collections.Immutable;
+using System;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -34,7 +35,7 @@ namespace SonarAnalyzer.Rules.CSharp
     public class BinaryOperationWithIdenticalExpressions : BinaryOperationWithIdenticalExpressionsBase
     {
         internal static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, "{0}", RspecStrings.ResourceManager);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
@@ -62,7 +63,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 c =>
                 {
                     var expression = (BinaryExpressionSyntax)c.Node;
-                    ReportIfExpressionsMatch(c, expression.Left, expression.Right, expression.OperatorToken);
+                    ReportIfOperatorExpressionsMatch(c, expression.Left, expression.Right, expression.OperatorToken);
                 },
                 SyntaxKindsToCheckBinary);
 
@@ -70,19 +71,72 @@ namespace SonarAnalyzer.Rules.CSharp
                 c =>
                 {
                     var expression = (AssignmentExpressionSyntax)c.Node;
-                    ReportIfExpressionsMatch(c, expression.Left, expression.Right, expression.OperatorToken);
+                    ReportIfOperatorExpressionsMatch(c, expression.Left, expression.Right, expression.OperatorToken);
                 },
                 SyntaxKindsToCheckAssignment);
+
+            context.RegisterSyntaxNodeActionInNonGenerated(
+                c => ReportOnObjectEqualsMatches((InvocationExpressionSyntax)c.Node, c),
+                SyntaxKind.InvocationExpression);
         }
 
-        private static void ReportIfExpressionsMatch(SyntaxNodeAnalysisContext context, ExpressionSyntax left, ExpressionSyntax right,
+        private static void ReportOnObjectEqualsMatches(InvocationExpressionSyntax invocation,
+            SyntaxNodeAnalysisContext context)
+        {
+            var methodSymbol = context.SemanticModel.GetSymbolInfo(invocation).Symbol as IMethodSymbol;
+
+            var operands = GetOperands(invocation, methodSymbol);
+            if (operands != null &&
+                EquivalenceChecker.AreEquivalent(RemoveParantheses(operands.Item1), RemoveParantheses(operands.Item2)))
+            {
+                string message = string.Format(EqualsMessage, operands.Item2);
+
+                context.ReportDiagnostic(Diagnostic.Create(rule, operands.Item1.GetLocation(),
+                    additionalLocations: new[] { operands.Item2.GetLocation() },
+                    messageArgs: message));
+            }
+        }
+
+        private static Tuple<SyntaxNode, SyntaxNode> GetOperands(InvocationExpressionSyntax invocation,
+            IMethodSymbol methodSymbol)
+        {
+            if (methodSymbol.IsStaticObjectEquals())
+            {
+                return new Tuple<SyntaxNode, SyntaxNode>(
+                    invocation.ArgumentList.Arguments[0],
+                    invocation.ArgumentList.Arguments[1]);
+            }
+
+            if (methodSymbol.IsObjectEquals())
+            {
+                var invokingExpression = (invocation.Expression as MemberAccessExpressionSyntax)?.Expression;
+                if (invokingExpression != null)
+                {
+                    return new Tuple<SyntaxNode, SyntaxNode>(
+                        invokingExpression,
+                        invocation.ArgumentList.Arguments[0].Expression);
+                }
+            }
+
+            return null;
+        }
+
+        private static SyntaxNode RemoveParantheses(SyntaxNode node)
+        {
+            var expression = node as ExpressionSyntax;
+            return expression == null ? node : expression.RemoveParentheses();
+        }
+
+        private static void ReportIfOperatorExpressionsMatch(SyntaxNodeAnalysisContext context, ExpressionSyntax left, ExpressionSyntax right,
             SyntaxToken operatorToken)
         {
             if (EquivalenceChecker.AreEquivalent(left.RemoveParentheses(), right.RemoveParentheses()))
             {
+                string message = string.Format(OperatorMessageFormat, operatorToken);
+
                 context.ReportDiagnostic(Diagnostic.Create(rule, right.GetLocation(),
                     additionalLocations: new[] { left.GetLocation() },
-                    messageArgs: operatorToken));
+                    messageArgs: message));
             }
         }
     }
