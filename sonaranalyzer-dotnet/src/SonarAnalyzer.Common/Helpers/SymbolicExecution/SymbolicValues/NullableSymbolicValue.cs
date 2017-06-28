@@ -19,6 +19,8 @@
  */
 
 using System.Collections.Generic;
+using System.Collections.Immutable;
+using System.Linq;
 
 namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
 {
@@ -34,19 +36,30 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
         public override IEnumerable<ProgramState> TrySetConstraint(SymbolicValueConstraint constraint,
             ProgramState currentProgramState)
         {
-            if (constraint == ObjectConstraint.Null)
+            var oldConstraint = currentProgramState.Constraints.GetValueOrDefault(this);
+
+            if (constraint is ObjectConstraint)
             {
-                return new[] { SetConstraint(OptionalConstraint.None, currentProgramState) };
+                if (oldConstraint == constraint.OppositeForLogicalNot)
+                {
+                    return Enumerable.Empty<ProgramState>();
+                }
+                if (constraint == ObjectConstraint.Null)
+                {
+                    return TrySetConstraint(OptionalConstraint.None, currentProgramState);
+                }
+                if (constraint == ObjectConstraint.NotNull)
+                {
+                    return TrySetConstraint(OptionalConstraint.Some, currentProgramState);
+                }
             }
-            else if (constraint == ObjectConstraint.NotNull ||
-                     constraint is OptionalConstraint)
+
+            if (constraint is OptionalConstraint)
             {
                 return new[] { SetConstraint(constraint, currentProgramState) };
             }
-            else
-            {
-                return new[] { this.WrappedValue.SetConstraint(constraint, currentProgramState) };
-            }
+
+            return WrappedValue.TrySetConstraint(constraint, SetConstraint(OptionalConstraint.Some, currentProgramState));
         }
 
         public override string ToString()
