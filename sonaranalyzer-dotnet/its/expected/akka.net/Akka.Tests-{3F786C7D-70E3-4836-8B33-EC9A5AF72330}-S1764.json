@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S1764",
-"message":  "Identical sub-expressions on both sides of operator '=='.",
+"message":  "Correct one of the identical expressions on both sides of operator '=='.",
 "location":  [
 {
 "uri":  "akka.net\src\core\Akka.Tests\Actor\ActorRefSpec.cs",
@@ -26,7 +26,7 @@
 },
 {
 "id":  "S1764",
-"message":  "Identical sub-expressions on both sides of operator '!='.",
+"message":  "Correct one of the identical expressions on both sides of operator '!='.",
 "location":  [
 {
 "uri":  "akka.net\src\core\Akka.Tests\Actor\ActorRefSpec.cs",

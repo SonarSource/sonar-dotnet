@@ -1,0 +1,28 @@
+{
+"issues":  [
+{
+"id":  "S1764",
+"message":  "Correct one of the identical expressions on both sides of Object.Equals.",
+"location":  [
+{
+"uri":  "akka.net\src\core\Akka.Persistence\AtLeastOnceDeliverySemantic.cs",
+"region":  {
+"startLine":  49,
+"startColumn":  30,
+"endLine":  49,
+"endColumn":  51
+}
+},
+{
+"uri":  "akka.net\src\core\Akka.Persistence\AtLeastOnceDeliverySemantic.cs",
+"region":  {
+"startLine":  49,
+"startColumn":  53,
+"endLine":  49,
+"endColumn":  74
+}
+}
+]
+}
+]
+}

@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 namespace Tests.TestCases
 {
+    class Foo { }
+
     class BinaryOperationWithIdenticalExpressions
     {
         public void doZ() { throw new Exception();}
@@ -13,14 +15,14 @@ namespace Tests.TestCases
         public void Test(bool a, bool b)
         {
             if (a == a)
-//                   ^ {{Identical sub-expressions on both sides of operator '=='.}}
+//                   ^ {{Correct one of the identical expressions on both sides of operator '=='.}}
 //              ^ Secondary@-1
             {
                 doZ();
             }
 
             if (a == b || (a == /*comment*/ b))
-//                        ^^^^^^^^^^^^^^^^^^^^ {{Identical sub-expressions on both sides of operator '||'.}}
+//                        ^^^^^^^^^^^^^^^^^^^^ {{Correct one of the identical expressions on both sides of operator '||'.}}
 //              ^^^^^^ Secondary@-1
             {
                 doW();
@@ -40,6 +42,25 @@ namespace Tests.TestCases
             int i = 1 << 1;
             i = 1 << 0x1;
             i = 2 << 2; // Compliant
+
+            object.Equals(i, i);
+//                        ^ {{Correct one of the identical expressions on both sides of Object.Equals.}}
+//                           ^ Secondary@-1
+
+            var o = new object();
+
+            o.Equals(o);
+//          ^ {{Correct one of the identical expressions on both sides of Object.Equals.}}
+//                   ^ Secondary@-1
+
+            (new object()).Equals(new object());
+//          ^^^^^^^^^^^^^^ {{Correct one of the identical expressions on both sides of Object.Equals.}}
+//                                ^^^^^^^^^^^^ Secondary@-1
+
+            Foo f;
+            f.Equals(f); // Noncompliant
+            // Secondary@-1
+
         }
     }
 }
