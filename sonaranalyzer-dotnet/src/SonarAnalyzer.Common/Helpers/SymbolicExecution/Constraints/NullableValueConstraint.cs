@@ -20,19 +20,19 @@
 
 namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
 {
-    internal sealed class OptionalConstraint : SymbolicValueConstraint
+    internal sealed class NullableValueConstraint : SymbolicValueConstraint
     {
-        public static readonly OptionalConstraint None = new OptionalConstraint();
-        public static readonly OptionalConstraint Some = new OptionalConstraint();
+        public static readonly NullableValueConstraint NoValue = new NullableValueConstraint();
+        public static readonly NullableValueConstraint HasValue = new NullableValueConstraint();
 
         public override SymbolicValueConstraint OppositeForLogicalNot =>
-            this == None ? Some : None;
+            this == NoValue ? HasValue : NoValue;
 
         public override string ToString()
         {
-            return this == None
-                ? "None"
-                : "Some";
+            return this == NoValue
+                ? "NoValue"
+                : "HasValue";
         }
     }
 }

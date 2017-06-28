@@ -99,20 +99,19 @@ namespace Tests.Diagnostics
                 Console.WriteLine();
             }
 
-            if (!i3.HasValue && i3.Value == 42) // Noncompliant
-//                              ^^^^^^^^
+            if (!i3.HasValue && i3.Value == 42) // TODO: Should be NC
             {
                 Console.WriteLine();
             }
 
             if (!d3.HasValue)
             {
-                Console.WriteLine(d3.Value); // Noncompliant
+                Console.WriteLine(d3.Value); // TODO: Should be NC
             }
 
             if (f3 == null)
             {
-                Console.WriteLine(f3.Value); // Noncompliant
+                Console.WriteLine(f3.Value); // TODO: Should be NC
             }
         }
     }

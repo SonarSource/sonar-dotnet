@@ -222,14 +222,14 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
                 return TrySetConstraint(objectConstraint, oldConstraint, currentProgramState);
             }
 
-            var optionalConstraint = constraint as OptionalConstraint;
+            var optionalConstraint = constraint as NullableValueConstraint;
             if (optionalConstraint != null)
             {
                 return new[] { currentProgramState };
             }
 
             throw new NotSupportedException($"Neither {nameof(BoolConstraint)}, nor {nameof(ObjectConstraint)}, " +
-                $"nor {nameof(OptionalConstraint)}.");
+                $"nor {nameof(NullableValueConstraint)}.");
         }
 
         public virtual IEnumerable<ProgramState> TrySetOppositeConstraint(SymbolicValueConstraint constraint, ProgramState programState)

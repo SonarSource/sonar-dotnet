@@ -39,14 +39,14 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
             if (constraint is ObjectConstraint)
             {
                 var optionalConstraint = constraint == ObjectConstraint.Null
-                    ? OptionalConstraint.None
-                    : OptionalConstraint.Some;
+                    ? NullableValueConstraint.NoValue
+                    : NullableValueConstraint.HasValue;
 
                 return TrySetConstraint(optionalConstraint, currentProgramState);
             }
 
-            var oldConstraint = currentProgramState.Constraints.GetValueOrDefault(this) as OptionalConstraint;
-            if (constraint is OptionalConstraint)
+            var oldConstraint = currentProgramState.Constraints.GetValueOrDefault(this) as NullableValueConstraint;
+            if (constraint is NullableValueConstraint)
             {
                 if (oldConstraint == null)
                 {
@@ -61,7 +61,7 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
                 return new[] { currentProgramState };
             }
 
-            return TrySetConstraint(OptionalConstraint.Some, currentProgramState)
+            return TrySetConstraint(NullableValueConstraint.HasValue, currentProgramState)
                 .SelectMany(ps => WrappedValue.TrySetConstraint(constraint, ps));
         }
 
@@ -72,7 +72,7 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
             if (constraint is BoolConstraint)
             {
                 return TrySetConstraint(negateConstraint, programState)
-                  .Union(TrySetConstraint(OptionalConstraint.None, programState));
+                  .Union(TrySetConstraint(NullableValueConstraint.NoValue, programState));
             }
 
             return TrySetConstraint(negateConstraint, programState);

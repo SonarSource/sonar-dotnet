@@ -554,11 +554,6 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.CSharp
                         newProgramState = newProgramState.StoreSymbolicValue(symbol, sv);
                     }
                 }
-
-                if (memberExpression is NullableSymbolicValue)
-                {
-                    sv = memberExpression;
-                }
             }
             if (sv == null)
             {
