@@ -89,9 +89,11 @@ namespace SonarAnalyzer.Rules.CSharp
             if (operands != null &&
                 EquivalenceChecker.AreEquivalent(RemoveParantheses(operands.Item1), RemoveParantheses(operands.Item2)))
             {
+                string message = string.Format(EqualsMessage, operands.Item2);
+
                 context.ReportDiagnostic(Diagnostic.Create(rule, operands.Item1.GetLocation(),
                     additionalLocations: new[] { operands.Item2.GetLocation() },
-                    messageArgs: EqualsMessage));
+                    messageArgs: message));
             }
         }
 

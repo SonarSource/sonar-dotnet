@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S1764",
-"message":  "Correct one of the identical expressions on both sides of 'Object.Equals'.",
+"message":  "Change one instance of 'UnconfirmedDeliveries' to a different value; comparing 'UnconfirmedDeliveries' to itself always returns true.",
 "location":  [
 {
 "uri":  "akka.net\src\core\Akka.Persistence\AtLeastOnceDeliverySemantic.cs",
