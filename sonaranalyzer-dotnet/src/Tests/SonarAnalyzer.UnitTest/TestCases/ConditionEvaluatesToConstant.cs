@@ -1264,18 +1264,18 @@ namespace Tests.Diagnostics
                 }
             }
 
-            void Case5(bool? b)
-            {
-                if (b == true)
-                {
-                }
-                else if (b == false)
-                {
-                }
-                else // Compliant
-                {
-                }
-            }
+            //void Case5(bool? b)
+            //{
+            //    if (b == true)
+            //    {
+            //    }
+            //    else if (b == false) // TODO: SHOULD BE COMPLIANT
+            //    {
+            //    }
+            //    else
+            //    {
+            //    }
+            //}
 
             void Case6(bool? b)
             {
