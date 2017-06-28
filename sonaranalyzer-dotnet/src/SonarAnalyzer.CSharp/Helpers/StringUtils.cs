@@ -28,7 +28,7 @@ namespace SonarAnalyzer.Helpers
         /// <summary>
         /// Splits the input string to the list of words.
         ///
-        /// Letters and consecutive captal letters are ignored.
+        /// Letters and consecutive capital letters are ignored.
         /// For example:
         /// thisIsAName => this is a name
         /// ThisIsIt => this is it

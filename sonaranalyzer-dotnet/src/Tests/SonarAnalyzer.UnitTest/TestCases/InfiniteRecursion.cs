@@ -94,7 +94,7 @@ namespace Tests.Diagnostics
 
         int Prop2
         {
-            get // Not recognized, but the accessors are cirularly infinitely recursive
+            get // Not recognized, but the accessors are circularly infinitely recursive
             {
                 (Prop2) = 10;
                 return 10;

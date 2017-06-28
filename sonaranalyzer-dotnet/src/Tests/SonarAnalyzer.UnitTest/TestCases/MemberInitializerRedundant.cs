@@ -143,7 +143,7 @@ namespace Tests.Diagnostics
 
     class Person8
     {
-        int year = 1980; // Compliant, lambda uses it in contructor
+        int year = 1980; // Compliant, lambda uses it in constructor
         public Person8()
         {
             Action a = () => Console.WriteLine(this?.year);

@@ -32,7 +32,7 @@ using System.Collections.Immutable;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
-    [Obsolete("This rule is superceded by S2259.")]
+    [Obsolete("This rule is superseded by S2259.")]
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
     public class ShortCircuitNullPointerDereference : SonarDiagnosticAnalyzer

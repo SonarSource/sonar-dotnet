@@ -93,7 +93,7 @@ namespace SonarAnalyzer.Rules.Common
                 firstInitializedIndex >= AllowedEmptyMemberCount)
             {
                 // Have first uninitialized member after the first initialized member, or
-                // Have too many uninitalized in the beginning
+                // Have too many uninitialized in the beginning
                 return false;
             }
 
