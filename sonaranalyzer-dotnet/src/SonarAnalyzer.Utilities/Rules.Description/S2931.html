@@ -5,7 +5,7 @@ practice here is for the owning class to itself implement <code>IDisposable</cod
 <pre>
 public class ResourceHolder   // Noncompliant; doesn't implement IDisposable
 {
-  private FileStream fs;  // This member is never Dispose'd
+  private FileStream fs;  // This member is never Disposed
   public void OpenResource(string path)
   {
     this.fs = new FileStream(path, FileMode.Open);

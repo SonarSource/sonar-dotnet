@@ -37,7 +37,7 @@ namespace SonarAnalyzer.Rules.CSharp
     public class RedundantModifierCodeFixProvider : SonarCodeFixProvider
     {
         internal const string TitleUnsafe = "Remove redundant 'unsafe' modifier";
-        internal const string TitleChecked = "Remove redundant 'checked' and 'unchecked'modifier";
+        internal const string TitleChecked = "Remove redundant 'checked' and 'unchecked' modifier";
         internal const string TitlePartial = "Remove redundant 'partial' modifier";
         internal const string TitleSealed = "Remove redundant 'sealed' modifier";
 

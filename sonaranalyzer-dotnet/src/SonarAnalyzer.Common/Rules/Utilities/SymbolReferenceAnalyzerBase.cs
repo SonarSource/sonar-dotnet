@@ -142,7 +142,7 @@ namespace SonarAnalyzer.Rules
         {
             if (!isIdentifier(token))
             {
-                // For the time being, we only handle identifer tokens.
+                // For the time being, we only handle identifier tokens.
                 // We could also handle keywords, such as this, base
                 return null;
             }

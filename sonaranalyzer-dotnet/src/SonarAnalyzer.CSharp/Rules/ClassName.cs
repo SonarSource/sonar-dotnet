@@ -303,7 +303,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     suggestion = ChangeToLowerBetween(suggestion, currentIndex, currentIndex);
                 }
 
-                // preceeding characters
+                // preceding characters
                 var toLowerTill = GetStartingIndexForLowerCasing(suggestion, currentIndex - 1);
                 if (toLowerTill <= 0)
                 {

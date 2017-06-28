@@ -18,7 +18,7 @@ namespace Tests.Diagnostics
 
     }
 
-    public abstract class Animal //Noncompliantt {{Convert this 'abstract' class to an interface.}}
+    public abstract class Animal //Noncompliant {{Convert this 'abstract' class to an interface.}}
     {
         abstract void move();
         abstract void feed();

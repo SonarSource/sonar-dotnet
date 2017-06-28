@@ -118,7 +118,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool IsNotEventRemoveAccessor(IMethodSymbol methodSymbol2)
         {
             /// we only want to report on events once, so we are not collecting the "remove" accessors,
-            /// and handle the the "add" accessor reporting separately in <see cref="GetMemberDisplayName"/>
+            /// and handle the "add" accessor reporting separately in <see cref="GetMemberDisplayName"/>
             return methodSymbol2.MethodKind != MethodKind.EventRemove;
         }
 

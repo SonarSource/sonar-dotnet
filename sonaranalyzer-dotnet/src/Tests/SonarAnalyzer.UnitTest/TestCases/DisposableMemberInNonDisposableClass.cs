@@ -7,7 +7,7 @@ namespace Tests.Diagnostics
     public class ResourceHolder   // Noncompliant {{Implement 'IDisposable' in this class and use the 'Dispose' method to call 'Dispose' on 'fs'.}}
 //               ^^^^^^^^^^^^^^
     {
-        private FileStream fs;  // This member is never Dispose'd
+        private FileStream fs;  // This member is never Disposed
         public void OpenResource(string path)
         {
             this.fs = new FileStream(path, FileMode.Open);
