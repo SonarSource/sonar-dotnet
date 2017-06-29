@@ -73,6 +73,28 @@
         </plugin>
       </plugins>
     </pluginManagement>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <version>3.0.1</version>
+        <executions>
+          <execution>
+            <id>get-scanner-2.1</id>
+            <phase>initialize</phase>
+            <goals>
+              <goal>get</goal>
+            </goals>
+            <configuration>
+              <artifactId>sonar-scanner-msbuild</artifactId>
+              <groupId>org.sonarsource.scanner.msbuild</groupId>
+              <packaging>zip</packaging>
+              <version>2.1.0.0</version>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
   </build>
 
 </project>
