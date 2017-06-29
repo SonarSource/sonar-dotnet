@@ -141,6 +141,7 @@
           <include>org/sonar/plugins/csharp/*.xml</include>
           <include>static/version.txt</include>
           <include>static/SonarAnalyzer-${project.version}.zip</include>
+          <include>static/SonarQube.MSBuild.Runner.Implementation.zip</include>
         </includes>
       </resource>
     </resources>
@@ -215,6 +216,16 @@
                       </fileset>
                     </copy>
 
+                    <!-- These files are only used are only used by old scanners. Their only function is to produce a good error message and faild the build. -->
+                    <copy file="${project.build.directory}/../../sonaranalyzer-dotnet/src/SonarAnalyzer.DummyScanner/bin/${analyzer.configuration}/DummyScanner.exe"
+                          tofile="${sonarAnalyzer.workDirectory}/MSBuild.Runner/SonarQube.MSBuild.PreProcessor.exe" />
+
+                    <copy file="${project.build.directory}/../../sonaranalyzer-dotnet/src/SonarAnalyzer.DummyScanner/bin/${analyzer.configuration}/DummyScanner.exe"
+                          tofile="${sonarAnalyzer.workDirectory}/MSBuild.Runner/MSBuild.SonarQube.Internal.PreProcess.exe" />
+
+                    <zip destfile="${sonarAnalyzer.workDirectory}/static/SonarQube.MSBuild.Runner.Implementation.zip"
+                         basedir="${sonarAnalyzer.workDirectory}/MSBuild.Runner"/>
+
                     <echo file="${sonarAnalyzer.workDirectory}/static/version.txt" message="${project.version}" encoding="utf-8" />
                   </tasks>
                 </configuration>
@@ -280,6 +291,13 @@
                       <artifactId>SonarAnalyzer.CSharp</artifactId>
                       <version>${analyzer.version}</version>
                       <type>nupkg</type>
+                      <overWrite>true</overWrite>
+                    </artifactItem>
+                    <artifactItem>
+                      <groupId>${project.groupId}</groupId>
+                      <artifactId>SonarQube.MSBuild.Runner.Implementation</artifactId>
+                      <version>${analyzer.version}</version>
+                      <type>zip</type>
                       <overWrite>true</overWrite>
                     </artifactItem>
                   </artifactItems>
