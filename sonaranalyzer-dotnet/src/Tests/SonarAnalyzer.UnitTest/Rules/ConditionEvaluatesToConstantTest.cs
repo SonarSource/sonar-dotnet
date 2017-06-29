@@ -28,6 +28,42 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class ConditionEvaluatesToConstantTest
     {
         [TestMethod]
+        public void MyTestMethod()
+        {
+            bool? x = null;
+            object o = new object();
+            if ((object)x == o)
+            {
+            }
+            else
+            {
+                if (x == null) // this can be true here if x is null, but is recognized as always false in the SE
+                {
+                }
+            }
+
+            Verifier.VerifyCSharpAnalyzer(@"
+class Foo
+{
+    public void Bar(bool? x)
+    {
+        object o = new object();
+        if ((object)x == o)
+        {
+        }
+        else
+        {
+            if (x == null) // SE says this is always false
+            {
+            }
+        }
+    }
+}
+", new ConditionEvaluatesToConstant(),
+                new CSharpParseOptions(LanguageVersion.CSharp6));
+        }
+
+        [TestMethod]
         [TestCategory("Rule")]
         public void ConditionEvaluatesToConstant()
         {
