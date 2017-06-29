@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Threading.Tasks;
 
 namespace Tests.Diagnostics
@@ -1212,6 +1212,138 @@ namespace Tests.Diagnostics
             {
                 if (a == null) // Compliant
                 {
+                }
+            }
+        }
+
+        public class NullableCases
+        {
+            void Case1()
+            {
+                bool? b1 = true;
+                if (b1 == true) // Noncompliant {{Change this condition so that it does not always evaluate to 'true'.}}
+                {
+
+                }
+            }
+
+            void Case2()
+            {
+                bool? b2 = true;
+                if (b2 == false) // Noncompliant {{Change this condition so that it does not always evaluate to 'false'; some subsequent code is never executed.}}
+                { // Secondary
+                }
+
+                bool? b3 = true;
+                if (b3 == null) // Should be NC
+                {
+                }
+
+                bool? b4 = null;
+                if (b4 == true) // Should be NC
+                {
+                }
+
+                bool? b5 = null;
+                if (b5 == false) // Should be NC
+                {
+                }
+            }
+
+            void Case3(bool? b)
+            {
+                if (b == null)
+                {
+                    if (null == b) // Noncompliant {{Change this condition so that it does not always evaluate to 'true'.}}
+                    {
+                        b.ToString();
+                    }
+                }
+                else
+                {
+                    if (b != null) // Noncompliant {{Change this condition so that it does not always evaluate to 'true'.}}
+                    {
+                        b.ToString();
+                    }
+                }
+            }
+
+            void Case4(bool? b)
+            {
+                if (b == true)
+                {
+                    if (true == b) // Noncompliant {{Change this condition so that it does not always evaluate to 'true'.}}
+                    {
+                        b.ToString();
+                    }
+                }
+            }
+
+            void Case5(bool? b)
+            {
+                if (b == true)
+                {
+                }
+                else if (b == false)
+                {
+                }
+                else
+                {
+                }
+            }
+
+            void Case6(bool? b)
+            {
+                if (b == null)
+                {
+                }
+                else if (b == true)
+                {
+                }
+                else
+                {
+                }
+            }
+
+            void Case7(bool? b)
+            {
+                if (b == null)
+                {
+                    if (b ?? false) // Noncompliant {{Change this condition so that it does not always evaluate to 'false'; some subsequent code is never executed.}}
+                    { // Secondary
+
+                    }
+                }
+            }
+
+            void Case8(bool? b)
+            {
+                if (b != null)
+                {
+                    if (b.HasValue) // Noncompliant {{Change this condition so that it does not always evaluate to 'true'.}}
+                    {
+                    }
+                }
+            }
+
+            void Case9(bool? b)
+            {
+                if (b == true)
+                {
+                    var x = b.Value;
+                    if (x == true) // TODO: Should be NC {{Change this condition so that it does not always evaluate to 'true'.}}
+                    {
+                    }
+                }
+            }
+
+            void Case10(int? i)
+            {
+                if (i == null)
+                {
+                    if (i.HasValue) // Noncompliant {{Change this condition so that it does not always evaluate to 'false'; some subsequent code is never executed.}}
+                    { // Secondary
+                    }
                 }
             }
         }

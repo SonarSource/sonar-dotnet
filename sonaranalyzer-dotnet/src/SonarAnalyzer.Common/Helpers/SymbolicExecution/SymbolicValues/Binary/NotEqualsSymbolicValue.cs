@@ -40,8 +40,8 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
                     .SelectMany(ps => LeftOperand.TrySetConstraint(rightConstraint, ps));
             }
 
-            return RightOperand.TrySetConstraint(leftConstraint?.OppositeForLogicalNot, programState)
-                .SelectMany(ps => LeftOperand.TrySetConstraint(rightConstraint?.OppositeForLogicalNot, ps));
+            return RightOperand.TrySetOppositeConstraint(leftConstraint, programState)
+                .SelectMany(ps => LeftOperand.TrySetOppositeConstraint(rightConstraint, ps));
         }
     }
 }

@@ -22,6 +22,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
+using Microsoft.CodeAnalysis;
 
 namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
 {
@@ -77,7 +78,7 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
             }
         }
 
-        private readonly object identifier;
+        protected readonly object identifier;
 
         private static int SymbolicValueCounter = 0;
 
@@ -91,6 +92,17 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
             this.identifier = identifier;
         }
 
+        internal static SymbolicValue Create(ITypeSymbol type = null)
+        {
+            if (type != null &&
+                type.OriginalDefinition.Is(KnownType.System_Nullable_T))
+            {
+                return new NullableSymbolicValue(new SymbolicValue());
+            }
+
+            return new SymbolicValue();
+        }
+
         public override string ToString()
         {
             if (identifier != null)
@@ -101,7 +113,7 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
             return base.ToString();
         }
 
-        internal ProgramState SetConstraint(SymbolicValueConstraint constraint, ProgramState programState)
+        internal virtual ProgramState SetConstraint(SymbolicValueConstraint constraint, ProgramState programState)
         {
             if (constraint == null)
             {
@@ -126,7 +138,7 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
 
         private ImmutableDictionary<SymbolicValue, SymbolicValueConstraint> AddConstraintTo<TRelationship>(SymbolicValueConstraint constraint,
             ProgramState programState, ImmutableDictionary<SymbolicValue, SymbolicValueConstraint> constraints)
-            where TRelationship: BinaryRelationship
+            where TRelationship : BinaryRelationship
         {
             var newConstraints = constraints;
             var equalSymbols = programState.Relationships
@@ -210,7 +222,19 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
                 return TrySetConstraint(objectConstraint, oldConstraint, currentProgramState);
             }
 
-            throw new NotSupportedException($"Neither {nameof(BoolConstraint)}, nor {nameof(ObjectConstraint)}");
+            var optionalConstraint = constraint as NullableValueConstraint;
+            if (optionalConstraint != null)
+            {
+                return new[] { currentProgramState };
+            }
+
+            throw new NotSupportedException($"Neither {nameof(BoolConstraint)}, nor {nameof(ObjectConstraint)}, " +
+                $"nor {nameof(NullableValueConstraint)}.");
+        }
+
+        public virtual IEnumerable<ProgramState> TrySetOppositeConstraint(SymbolicValueConstraint constraint, ProgramState programState)
+        {
+            return TrySetConstraint(constraint?.OppositeForLogicalNot, programState);
         }
 
         private IEnumerable<ProgramState> TrySetConstraint(BoolConstraint boolConstraint, SymbolicValueConstraint oldConstraint,
