@@ -1220,8 +1220,8 @@ namespace Tests.Diagnostics
         {
             void Case1()
             {
-                bool? b = true;
-                if (b == true) // Noncompliant {{Change this condition so that it does not always evaluate to 'true'.}}
+                bool? b1 = true;
+                if (b1 == true) // Noncompliant {{Change this condition so that it does not always evaluate to 'true'.}}
                 {
 
                 }
@@ -1229,9 +1229,24 @@ namespace Tests.Diagnostics
 
             void Case2()
             {
-                bool? b = true;
-                if (b == false) // Noncompliant {{Change this condition so that it does not always evaluate to 'false'; some subsequent code is never executed.}}
+                bool? b2 = true;
+                if (b2 == false) // Noncompliant {{Change this condition so that it does not always evaluate to 'false'; some subsequent code is never executed.}}
                 { // Secondary
+                }
+
+                bool? b3 = true;
+                if (b3 == null) // Should be NC
+                {
+                }
+
+                bool? b4 = null;
+                if (b4 == true) // Should be NC
+                {
+                }
+
+                bool? b5 = null;
+                if (b5 == false) // Should be NC
+                {
                 }
             }
 
