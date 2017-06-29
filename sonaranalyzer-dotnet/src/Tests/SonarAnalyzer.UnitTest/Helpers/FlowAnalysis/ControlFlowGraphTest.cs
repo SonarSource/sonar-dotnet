@@ -1589,7 +1589,7 @@ namespace NS
 
             tryStartBlock.Should().BeOfType<BranchBlock>();
             VerifyAllInstructions(tryStartBlock, "cw0", "cw0()");
-            tryStartBlock.SuccessorBlocks.Should().BeEquivalentTo(tryReturnBlock, catchBlock, finallyBlock);
+            tryStartBlock.SuccessorBlocks.Should().BeEquivalentTo(tryReturnBlock, catchBlock);
 
             tryReturnBlock.Should().BeOfType<JumpBlock>();
             VerifyAllInstructions(tryReturnBlock, "cw1", "cw1()");
@@ -1733,6 +1733,96 @@ namespace NS
 
         [TestMethod]
         [TestCategory("CFG")]
+        public void Cfg_TryCatch()
+        {
+            var cfg = Build(@"
+            cw0();
+            try
+            {
+                cw1();
+            }
+            catch
+            {
+                cw2();
+            }
+            cw5();");
+
+            VerifyCfg(cfg, 5);
+
+            var blocks = cfg.Blocks.ToList();
+
+            var tryStartBlock = blocks[0];
+            var tryBodyBlock = blocks[1];
+            var catchBlock = blocks[2];
+            var afterTryBlock = blocks[3];
+            var exit = blocks.Last();
+
+            tryStartBlock.Should().BeOfType<BranchBlock>();
+            VerifyAllInstructions(tryStartBlock, "cw0", "cw0()");
+            tryStartBlock.SuccessorBlocks.Should().BeEquivalentTo(tryBodyBlock, catchBlock); // We catch all exceptions, hence no connection to exit
+
+            tryBodyBlock.Should().BeOfType<BranchBlock>();
+            VerifyAllInstructions(tryBodyBlock, "cw1", "cw1()");
+            tryBodyBlock.SuccessorBlocks.Should().BeEquivalentTo(catchBlock, afterTryBlock); // We catch all exceptions, hence no connection to exit
+
+            catchBlock.Should().BeOfType<SimpleBlock>();
+            VerifyAllInstructions(catchBlock, "cw2", "cw2()");
+            catchBlock.SuccessorBlocks.Should().BeEquivalentTo(afterTryBlock);
+
+            afterTryBlock.Should().BeOfType<SimpleBlock>();
+            VerifyAllInstructions(afterTryBlock, "cw5", "cw5()");
+            afterTryBlock.SuccessorBlocks.Should().BeEquivalentTo(exit);
+
+            exit.Should().BeOfType<ExitBlock>();
+        }
+
+        [TestMethod]
+        [TestCategory("CFG")]
+        public void Cfg_TryCatch_SomeException()
+        {
+            var cfg = Build(@"
+            cw0();
+            try
+            {
+                cw1();
+            }
+            catch(MyException)
+            {
+                cw2();
+            }
+            cw5();");
+
+            VerifyCfg(cfg, 5);
+
+            var blocks = cfg.Blocks.ToList();
+
+            var tryStartBlock = blocks[0];
+            var tryBodyBlock = blocks[1];
+            var catchBlock = blocks[2];
+            var afterTryBlock = blocks[3];
+            var exit = blocks.Last();
+
+            tryStartBlock.Should().BeOfType<BranchBlock>();
+            VerifyAllInstructions(tryStartBlock, "cw0", "cw0()");
+            tryStartBlock.SuccessorBlocks.Should().BeEquivalentTo(tryBodyBlock, catchBlock, exit);
+
+            tryBodyBlock.Should().BeOfType<BranchBlock>();
+            VerifyAllInstructions(tryBodyBlock, "cw1", "cw1()");
+            tryBodyBlock.SuccessorBlocks.Should().BeEquivalentTo(catchBlock, afterTryBlock, exit);
+
+            catchBlock.Should().BeOfType<SimpleBlock>();
+            VerifyAllInstructions(catchBlock, "cw2", "cw2()");
+            catchBlock.SuccessorBlocks.Should().BeEquivalentTo(afterTryBlock);
+
+            afterTryBlock.Should().BeOfType<SimpleBlock>();
+            VerifyAllInstructions(afterTryBlock, "cw5", "cw5()");
+            afterTryBlock.SuccessorBlocks.Should().BeEquivalentTo(exit);
+
+            exit.Should().BeOfType<ExitBlock>();
+        }
+
+        [TestMethod]
+        [TestCategory("CFG")]
         public void Cfg_TryCatchFinally_Return_Nested()
         {
             var cfg = Build(@"
@@ -1776,10 +1866,10 @@ namespace NS
             exit.Should().BeOfType<ExitBlock>();
 
             tryStartBlock.Should().BeOfType<BranchBlock>();
-            tryStartBlock.SuccessorBlocks.Should().BeEquivalentTo(innerTryStartBlock, catchBlock, finallyBlock);
+            tryStartBlock.SuccessorBlocks.Should().BeEquivalentTo(innerTryStartBlock, catchBlock);
 
             innerTryStartBlock.Should().BeOfType<BranchBlock>();
-            innerTryStartBlock.SuccessorBlocks.Should().BeEquivalentTo(innerReturnBlock, innerCatchBlock, innerFinallyBlock);
+            innerTryStartBlock.SuccessorBlocks.Should().BeEquivalentTo(innerReturnBlock, innerCatchBlock);
 
             innerReturnBlock.Should().BeOfType<JumpBlock>();
             innerReturnBlock.SuccessorBlocks.Should().BeEquivalentTo(innerFinallyBlock);

@@ -532,6 +532,48 @@ namespace Tests.Diagnostics
             var y = nameof(a, b);
             x.ToString();
         }
+
+        string TryCatch1()
+        {
+            object o = null;
+            try
+            {
+                o = new object();
+            }
+            catch
+            {
+                o = new object();
+            }
+            return o.ToString();
+        }
+
+        string TryCatch2()
+        {
+            object o = null;
+            try
+            {
+                o = new object();
+            }
+            catch (Exception)
+            {
+                o = new object();
+            }
+            return o.ToString();
+        }
+
+        string TryCatch3()
+        {
+            object o = null;
+            try
+            {
+                o = new object();
+            }
+            catch (ApplicationException)
+            {
+                o = new object();
+            }
+            return o.ToString();
+        }
     }
 
     static class Extensions

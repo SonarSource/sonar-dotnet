@@ -202,5 +202,18 @@ namespace SonarAnalyzer.Helpers
         {
             return token.GetLocation().GetLineSpan().StartLinePosition.Line;
         }
+
+        public static bool IsCatchingAllExceptions(this CatchClauseSyntax catchClause)
+        {
+            if (catchClause.Declaration == null)
+            {
+                return true;
+            }
+
+            var exceptionTypeName = catchClause.Declaration.Type.GetText().ToString();
+
+            return catchClause.Filter == null && 
+                (exceptionTypeName == "Exception" || exceptionTypeName == "System.Exception");
+        }
     }
 }

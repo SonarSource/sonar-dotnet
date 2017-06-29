@@ -479,7 +479,8 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.CSharp
 
         private void BuildTryStatement(TryStatementSyntax tryStatement)
         {
-            if (tryStatement.Finally?.Block != null)
+            var hasFinally = tryStatement.Finally?.Block != null;
+            if (hasFinally)
             {
                 // Wire exit in case we have a return inside the try/catch block
                 currentBlock = CreateBranchBlock(tryStatement.Finally, new[] { currentBlock, ExitTarget.Peek() });
@@ -487,10 +488,49 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.CSharp
                 ExitTarget.Push(currentBlock);
             }
 
-            var finallyBlock = currentBlock;
+            var catchSuccessor = currentBlock; // Either finally or the block after try statement
 
+            var catchBlocks = BuildCatchClauses(tryStatement.Catches.Reverse(), catchSuccessor);
+
+            // If there is a catch with no Exception filter or equivalent we don't want to
+            // join the tryStatement start/end blocks with the exit block because all
+            // exceptions will be caught before going to finally
+            var allExceptionsAreCaught = tryStatement.Catches.Any(SyntaxHelper.IsCatchingAllExceptions);
+
+            // current is the top catch
+
+            // try end
+            var tryEndStatementConnections = catchBlocks.ToList();
+            tryEndStatementConnections.Add(catchSuccessor); // happy path, no exceptions thrown
+            if (!allExceptionsAreCaught) // unexpected exception thrown, go to exit (through finally if present)
+            {
+                tryEndStatementConnections.Add(ExitTarget.Peek());
+            }
+
+            currentBlock = CreateBranchBlock(tryStatement, tryEndStatementConnections.Distinct());
+
+            BuildBlock(tryStatement.Block);
+
+            var tryStartStatementConnections = catchBlocks.ToList();
+            tryStartStatementConnections.Add(currentBlock); // try body
+            if (!allExceptionsAreCaught) // unexpected exception thrown, go to exit (through finally if present)
+            {
+                tryStartStatementConnections.Add(ExitTarget.Peek());
+            }
+
+            // try start
+            currentBlock = CreateBranchBlock(tryStatement, tryStartStatementConnections.Distinct());
+
+            if (hasFinally)
+            {
+                ExitTarget.Pop();
+            }
+        }
+
+        private IEnumerable<Block> BuildCatchClauses(IEnumerable<CatchClauseSyntax> catches, Block finallyBlock)
+        {
             var catchBlocks = new List<Block>();
-            foreach (var catchClause in tryStatement.Catches.Reverse())
+            foreach (var catchClause in catches)
             {
                 currentBlock = CreateBlock(finallyBlock);
 
@@ -499,17 +539,7 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.CSharp
                 catchBlocks.Add(currentBlock);
             }
 
-            // try end
-            currentBlock = CreateBranchBlock(tryStatement, catchBlocks.Union(new[] { finallyBlock }).ToList());
-
-            BuildBlock(tryStatement.Block);
-
-            // try start
-            currentBlock = CreateBranchBlock(tryStatement, catchBlocks.Union(new[] { currentBlock, finallyBlock }).ToList());
-            if (tryStatement.Finally?.Block != null)
-            {
-                ExitTarget.Pop();
-            }
+            return catchBlocks;
         }
 
         private void BuildGotoDefaultStatement(GotoStatementSyntax statement)
