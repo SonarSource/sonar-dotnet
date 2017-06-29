@@ -36,6 +36,11 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
         public override IEnumerable<ProgramState> TrySetConstraint(SymbolicValueConstraint constraint,
             ProgramState currentProgramState)
         {
+            if (constraint == null)
+            {
+                return new[] { currentProgramState };
+            }
+
             if (constraint is ObjectConstraint)
             {
                 var optionalConstraint = constraint == ObjectConstraint.Null
