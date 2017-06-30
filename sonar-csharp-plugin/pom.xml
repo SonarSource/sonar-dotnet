@@ -141,6 +141,7 @@
           <include>org/sonar/plugins/csharp/*.xml</include>
           <include>static/version.txt</include>
           <include>static/SonarAnalyzer-${project.version}.zip</include>
+          <include>static/SonarQube.MSBuild.Runner.Implementation.zip</include>
         </includes>
       </resource>
     </resources>
@@ -215,6 +216,11 @@
                       </fileset>
                     </copy>
 
+                    <!-- This zip is required by old versions of the Scanner for MSBuild. Leaving it empty allows to have the
+                         scanner failing with a nice message -->
+                    <zip destfile="${sonarAnalyzer.workDirectory}/static/SonarQube.MSBuild.Runner.Implementation.zip"
+                         basedir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.CSharp" excludes="*.dll" whenempty="create" />
+
                     <echo file="${sonarAnalyzer.workDirectory}/static/version.txt" message="${project.version}" encoding="utf-8" />
                   </tasks>
                 </configuration>
@@ -280,6 +286,13 @@
                       <artifactId>SonarAnalyzer.CSharp</artifactId>
                       <version>${analyzer.version}</version>
                       <type>nupkg</type>
+                      <overWrite>true</overWrite>
+                    </artifactItem>
+                    <artifactItem>
+                      <groupId>${project.groupId}</groupId>
+                      <artifactId>SonarQube.MSBuild.Runner.Implementation</artifactId>
+                      <version>${analyzer.version}</version>
+                      <type>zip</type>
                       <overWrite>true</overWrite>
                     </artifactItem>
                   </artifactItems>
