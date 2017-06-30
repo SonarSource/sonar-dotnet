@@ -82,7 +82,7 @@ namespace SonarAnalyzer.Rules
                 : null;
 
             if (fieldDeclaration.Modifiers.Any(modifier => modifier.IsKind(SyntaxKind.ReadOnlyKeyword)) &&
-                IsValidReadOnlyInitializer(fieldInitializerSymbol))
+                IsValidReadOnlyInitializer(fieldInitializerSymbol, fieldInitializer?.Value))
             {
                 return;
             }
@@ -114,10 +114,13 @@ namespace SonarAnalyzer.Rules
             return true;
         }
 
-        private static bool IsValidReadOnlyInitializer(ISymbol symbol)
+        private static bool IsValidReadOnlyInitializer(ISymbol symbol, ExpressionSyntax equalsValue)
         {
             var methodSymbol = symbol as IMethodSymbol;
-            return methodSymbol != null && methodSymbol.ReturnType.DerivesOrImplementsAny(AllowedTypes);
+            var equalsLiteral = equalsValue as LiteralExpressionSyntax;
+
+            return (methodSymbol != null && methodSymbol.ReturnType.DerivesOrImplementsAny(AllowedTypes)) ||
+                (equalsLiteral != null && equalsValue.IsKind(SyntaxKind.NullLiteralExpression));
         }
     }
 }
