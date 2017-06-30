@@ -34,10 +34,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SonarAnalyzer.CSharp", "src
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SonarAnalyzer.VisualBasic", "src\SonarAnalyzer.VisualBasic\SonarAnalyzer.VisualBasic.csproj", "{01DF3CB0-2213-42F3-BB8E-0C3BC330DE7A}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DummyScanner", "DummyScanner", "{1F52513F-F0DD-4F22-AE4F-EB5F9BD9E0F4}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DummyScanner", "src\SonarAnalyzer.DummyScanner\DummyScanner.csproj", "{E7E1497E-1D5D-4ED1-AB61-257FD5E54A66}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -76,10 +72,6 @@ Global
 		{01DF3CB0-2213-42F3-BB8E-0C3BC330DE7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{01DF3CB0-2213-42F3-BB8E-0C3BC330DE7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{01DF3CB0-2213-42F3-BB8E-0C3BC330DE7A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E7E1497E-1D5D-4ED1-AB61-257FD5E54A66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E7E1497E-1D5D-4ED1-AB61-257FD5E54A66}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E7E1497E-1D5D-4ED1-AB61-257FD5E54A66}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E7E1497E-1D5D-4ED1-AB61-257FD5E54A66}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -88,6 +80,5 @@ Global
 		{4AC7D054-B645-46D7-9671-D666BCE0C745} = {B7233F78-E142-4882-B084-7C83BE472109}
 		{E4D5FF22-C1A4-4CAD-B068-E47817F25848} = {F51A8C2A-A0F5-4282-956F-549D05860396}
 		{CCEE2C5C-96D9-4427-B980-71DC0A49E23F} = {F51A8C2A-A0F5-4282-956F-549D05860396}
-		{E7E1497E-1D5D-4ED1-AB61-257FD5E54A66} = {1F52513F-F0DD-4F22-AE4F-EB5F9BD9E0F4}
 	EndGlobalSection
 EndGlobal
