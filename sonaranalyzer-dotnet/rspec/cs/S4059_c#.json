@@ -1,0 +1,13 @@
+{
+  "title": "Property names should not match get methods",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "2min"
+  },
+  "tags": [
+    "confusing"
+  ],
+  "defaultSeverity": "Major"
+}
