@@ -1,0 +1,13 @@
+{
+  "title": "Non-abstract attributes should be sealed",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "2min"
+  },
+  "tags": [
+    "performance"
+  ],
+  "defaultSeverity": "Minor"
+}
