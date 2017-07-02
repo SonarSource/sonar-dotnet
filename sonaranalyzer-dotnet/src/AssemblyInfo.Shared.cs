@@ -21,9 +21,9 @@
 using System.Reflection;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyVersion("6.1.0")]
-[assembly: AssemblyFileVersion("6.1.0.0")]
-[assembly: AssemblyInformationalVersion("Version:6.1.0.0 Branch:improve-build-script Sha1:f3bccbf5bee16073c7ba18bc8dee5d3358bd21d8")]
+[assembly: AssemblyVersion("6.2")]
+[assembly: AssemblyFileVersion("6.2.0")]
+[assembly: AssemblyInformationalVersion("Version:6.2.0 Branch:improve-build-script Sha1:f3bccbf5bee16073c7ba18bc8dee5d3358bd21d8")]
 
 [assembly: AssemblyConfiguration("")]
 
