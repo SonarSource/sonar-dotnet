@@ -47,42 +47,39 @@ namespace SonarAnalyzer.Rules.CSharp
                 c =>
                 {
                     var enumDeclaration = (EnumDeclarationSyntax)c.Node;
-                    if (!enumDeclaration.HasFlagsAttribute(c.SemanticModel) ||
-                        enumDeclaration.Identifier.IsMissing)
-                    {
-                        return;
-                    }
-
                     var enumSymbol = c.SemanticModel.GetDeclaredSymbol(enumDeclaration);
-                    if (enumSymbol == null)
+
+                    if (!enumDeclaration.HasFlagsAttribute(c.SemanticModel) ||
+                        enumDeclaration.Identifier.IsMissing ||
+                        enumSymbol == null)
                     {
                         return;
                     }
 
                     var membersWithValues = enumSymbol.GetMembers()
                         .OfType<IFieldSymbol>()
-                        .Select(member => new { Member = member, Value = GetValueOrDefault(member) })
+                        .Select(member => new { Member = member, Value = GetEnumValueOrDefault(member) })
                         .OrderByDescending(tuple => tuple.Value)
                         .ToList();
 
-                    var allValues = membersWithValues.Select(x => x.Value).OfType<ulong>().ToList();
+                    var allValues = membersWithValues.Select(x => x.Value)
+                        .OfType<ulong>()
+                        .ToList();
 
                     var invalidMembers = membersWithValues.Where(tuple => IsInvalidFlagValue(tuple.Value, allValues))
                         .Select(tuple => tuple.Member.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax().GetLocation())
                         .WhereNotNull()
                         .ToList();
 
-                    if (invalidMembers.Count == 0)
+                    if (invalidMembers.Count > 0)
                     {
-                        return;
+                        c.ReportDiagnostic(Diagnostic.Create(rule, enumDeclaration.Identifier.GetLocation(),
+                            additionalLocations: invalidMembers));
                     }
-
-                    c.ReportDiagnostic(Diagnostic.Create(rule, enumDeclaration.Identifier.GetLocation(),
-                        additionalLocations: invalidMembers));
                 }, SyntaxKind.EnumDeclaration);
         }
 
-        private static ulong? GetValueOrDefault(IFieldSymbol enumMember)
+        private static ulong? GetEnumValueOrDefault(IFieldSymbol enumMember)
         {
             ulong longValue;
             if (!enumMember.HasConstantValue ||
