@@ -6268,7 +6268,7 @@
     <value>Code is clearest when each statement has its own line. Nonetheless, it is not uncommon to combine on the same line an if and it's resulting then statement. However, when an if is appended to the line with a previous if's closing } it is either an error - else is missing - or the prelude to a future error as maintainers fail to understand that the two statements are unconnected.</value>
   </data>
   <data name="S3972_IsActivatedByDefault" xml:space="preserve">
-    <value>True</value>
+    <value>False</value>
   </data>
   <data name="S3972_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -7117,6 +7117,33 @@
     <value>"params" should be use instead of "varargs"</value>
   </data>
   <data name="S4061_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
+  <data name="S4070_Category" xml:space="preserve">
+    <value>Sonar Code Smell</value>
+  </data>
+  <data name="S4070_Description" xml:space="preserve">
+    <value>This rule raises an issue when an externally visible enumeration is marked with FlagsAttribute and one, or more, of its values is not a power of 2 or a combination of the other defined values.</value>
+  </data>
+  <data name="S4070_IsActivatedByDefault" xml:space="preserve">
+    <value>False</value>
+  </data>
+  <data name="S4070_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S4070_RemediationCost" xml:space="preserve">
+    <value>2min</value>
+  </data>
+  <data name="S4070_Severity" xml:space="preserve">
+    <value>Major</value>
+  </data>
+  <data name="S4070_Tags" xml:space="preserve">
+    <value />
+  </data>
+  <data name="S4070_Title" xml:space="preserve">
+    <value>Non-flags enums should not be marked with "FlagsAttribute"</value>
+  </data>
+  <data name="S4070_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
   </data>
   <data name="S818_Category" xml:space="preserve">

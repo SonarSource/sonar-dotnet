@@ -1,0 +1,46 @@
+<p>This rule raises an issue when an externally visible enumeration is marked with <code>FlagsAttribute</code> and one, or more, of its values is not
+a power of 2 or a combination of the other defined values.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+using System;
+
+namespace MyLibrary
+{
+    [FlagsAttribute]
+    public enum Color // Noncompliant, Orange is neither a power of two, nor a combination of any of the defined values
+    {
+        None    = 0,
+        Red     = 1,
+        Orange  = 3,
+        Yellow  = 4
+    }
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+using System;
+
+namespace MyLibrary
+{
+    public enum Color // Compliant - no FlagsAttribute attribute
+    {
+        None = 0,
+        Red = 1,
+        Orange = 3,
+        Yellow = 4
+    }
+
+    [FlagsAttribute]
+    public enum Days
+    {
+        None = 0,
+        Monday = 1,
+        Tuesday = 2,
+        Wednesday = 4,
+        Thursday = 8,
+        Friday = 16,
+        All = Monday| Tuesday | Wednesday | Thursday | Friday    // Compliant - combination of other values
+    }
+}
+</pre>
+
