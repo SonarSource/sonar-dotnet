@@ -1,0 +1,28 @@
+{
+"issues":  [
+{
+"id":  "S4059",
+"message":  "Change either the name of the property 'NrOfInstances' or the name of the method 'GetNrOfInstances' to make them distinguishable.",
+"location":  [
+{
+"uri":  "akka.net\src\core\Akka\Routing\RouterConfig.cs",
+"region":  {
+"startLine":  519,
+"startColumn":  28,
+"endLine":  519,
+"endColumn":  41
+}
+},
+{
+"uri":  "akka.net\src\core\Akka\Routing\RouterConfig.cs",
+"region":  {
+"startLine":  533,
+"startColumn":  28,
+"endLine":  533,
+"endColumn":  44
+}
+}
+]
+}
+]
+}

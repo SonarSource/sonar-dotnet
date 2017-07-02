@@ -2,7 +2,12 @@ using System;
 
 namespace Tests.Diagnostics
 {
-    public class Program
+    public class Base
+    {
+        public virtual int MyProperty { get; set; }
+    }
+
+    public class Program : Base
     {
         public int Foo // Noncompliant {{Change either the name of the property 'Foo' or the name of the method 'GetFoo' to make them distinguishable.}}
 //                 ^^^
@@ -47,6 +52,9 @@ namespace Tests.Diagnostics
         {
             return "";
         }
+
+        public override int MyProperty { get; set; } // Compliant - override
+        public int GetMyProperty() => 42;
 
         public int { get; } // Missing identifier on purpose
         public int () { return 42; } // Missing identifier on purpose

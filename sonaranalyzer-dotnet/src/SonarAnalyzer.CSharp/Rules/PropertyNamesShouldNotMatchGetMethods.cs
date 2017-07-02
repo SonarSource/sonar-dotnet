@@ -55,15 +55,13 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
 
                     var classMembers = classSymbol.GetMembers().Where(IsPublicOrProtectedMember);
-                    var properties = classMembers.OfType<IPropertySymbol>();
+                    var properties = classMembers.OfType<IPropertySymbol>().Where(property => !property.IsOverride);
                     var methods = classMembers.OfType<IMethodSymbol>().ToList();
-
-                    properties.Select(p => methods.FirstOrDefault(m => AreCollidingNames(p.Name, m.Name)))
 
                     foreach (var collidingMembers in GetCollidingMembers(properties, methods))
                     {
-                        var propertyIdentifier = collidingMembers.Item1.Identifier;
-                        var methodIdentifier = collidingMembers.Item2.Identifier;
+                        var propertyIdentifier = collidingMembers.Item1;
+                        var methodIdentifier = collidingMembers.Item2;
 
                         c.ReportDiagnostic(Diagnostic.Create(
                             rule,
@@ -81,19 +79,28 @@ namespace SonarAnalyzer.Rules.CSharp
             return accessibility == Accessibility.Public || accessibility == Accessibility.Protected;
         }
 
-        private static IEnumerable<Tuple<PropertyDeclarationSyntax, MethodDeclarationSyntax>> GetCollidingMembers(
+        private static IEnumerable<Tuple<SyntaxToken, SyntaxToken>> GetCollidingMembers(
             IEnumerable<IPropertySymbol> properties, IEnumerable<IMethodSymbol> methods)
         {
-
             foreach (var property in properties)
             {
                 var collidingMethod = methods.FirstOrDefault(method => AreCollidingNames(property.Name, method.Name));
-                if (collidingMethod != null)
+                if (collidingMethod == null)
                 {
-                    yield return new Tuple<PropertyDeclarationSyntax, MethodDeclarationSyntax>(
-                        property.DeclaringSyntaxReferences.First().GetSyntax() as PropertyDeclarationSyntax,
-                        collidingMethod.DeclaringSyntaxReferences.First().GetSyntax() as MethodDeclarationSyntax);
+                    continue;
                 }
+
+                var propertySyntax = property.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax()
+                    as PropertyDeclarationSyntax;
+                var methodSyntax = collidingMethod.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax()
+                    as MethodDeclarationSyntax;
+
+                if (propertySyntax == null || methodSyntax == null)
+                {
+                    continue;
+                }
+
+                yield return new Tuple<SyntaxToken, SyntaxToken>(propertySyntax.Identifier, methodSyntax.Identifier);
             }
         }
 
