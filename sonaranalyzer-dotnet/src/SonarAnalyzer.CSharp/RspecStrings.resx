@@ -7065,6 +7065,33 @@
   <data name="S4047_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
   </data>
+  <data name="S4049_Category" xml:space="preserve">
+    <value>Sonar Code Smell</value>
+  </data>
+  <data name="S4049_Description" xml:space="preserve">
+    <value>Properties are accessed like fields which makes them easier to use.</value>
+  </data>
+  <data name="S4049_IsActivatedByDefault" xml:space="preserve">
+    <value>False</value>
+  </data>
+  <data name="S4049_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S4049_RemediationCost" xml:space="preserve">
+    <value>5min</value>
+  </data>
+  <data name="S4049_Severity" xml:space="preserve">
+    <value>Minor</value>
+  </data>
+  <data name="S4049_Tags" xml:space="preserve">
+    <value>convention</value>
+  </data>
+  <data name="S4049_Title" xml:space="preserve">
+    <value>Properties should be preferred</value>
+  </data>
+  <data name="S4049_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S4058_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
