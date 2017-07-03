@@ -7092,6 +7092,33 @@
   <data name="S4049_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
   </data>
+  <data name="S4050_Category" xml:space="preserve">
+    <value>Sonar Code Smell</value>
+  </data>
+  <data name="S4050_Description" xml:space="preserve">
+    <value>When implementing operator overloads, it is very important to make sure that all related operators and methods are consistent in their implementation.</value>
+  </data>
+  <data name="S4050_IsActivatedByDefault" xml:space="preserve">
+    <value>False</value>
+  </data>
+  <data name="S4050_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S4050_RemediationCost" xml:space="preserve">
+    <value>10min</value>
+  </data>
+  <data name="S4050_Severity" xml:space="preserve">
+    <value>Major</value>
+  </data>
+  <data name="S4050_Tags" xml:space="preserve">
+    <value>pitfall</value>
+  </data>
+  <data name="S4050_Title" xml:space="preserve">
+    <value>Operators should be overloaded consistently</value>
+  </data>
+  <data name="S4050_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S4052_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>

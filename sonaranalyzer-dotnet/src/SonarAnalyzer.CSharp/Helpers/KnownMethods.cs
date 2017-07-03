@@ -67,7 +67,7 @@ namespace SonarAnalyzer.Helpers
         public static bool IsObjectGetHashCode(this IMethodSymbol methodSymbol)
         {
             return methodSymbol != null &&
-                methodSymbol.IsOverride &&
+                (methodSymbol.IsOverride || methodSymbol.IsInType(KnownType.System_Object)) &&
                 methodSymbol.MethodKind == MethodKind.Ordinary &&
                 methodSymbol.Name == nameof(object.GetHashCode) &&
                 methodSymbol.Parameters.Length == 0 &&
@@ -77,7 +77,7 @@ namespace SonarAnalyzer.Helpers
         public static bool IsObjectToString(this IMethodSymbol methodSymbol)
         {
             return methodSymbol != null &&
-                methodSymbol.IsOverride &&
+                (methodSymbol.IsOverride || methodSymbol.IsInType(KnownType.System_Object)) &&
                 methodSymbol.MethodKind == MethodKind.Ordinary &&
                 methodSymbol.Name == nameof(object.ToString) &&
                 methodSymbol.Parameters.Length == 0 &&
@@ -174,5 +174,38 @@ namespace SonarAnalyzer.Helpers
                 methodSymbol.Name == nameof(Debug.Assert) &&
                 methodSymbol.ContainingType.Is(KnownType.System_Diagnostics_Debug);
         }
+
+        public static bool IsOperatorBinaryPlus(this IMethodSymbol methodSymbol)
+        {
+            return methodSymbol != null &&
+                methodSymbol.MethodKind == MethodKind.UserDefinedOperator &&
+                methodSymbol.Parameters.Length == 2 &&
+                methodSymbol.Name == "op_Addition";
+        }
+
+        public static bool IsOperatorBinaryMinus(this IMethodSymbol methodSymbol)
+        {
+            return methodSymbol != null &&
+                methodSymbol.MethodKind == MethodKind.UserDefinedOperator &&
+                methodSymbol.Parameters.Length == 2 &&
+                methodSymbol.Name == "op_Subtraction";
+        }
+
+        public static bool IsOperatorEquals(this IMethodSymbol methodSymbol)
+        {
+            return methodSymbol != null &&
+                methodSymbol.MethodKind == MethodKind.UserDefinedOperator &&
+                methodSymbol.Parameters.Length == 2 &&
+                methodSymbol.Name == "op_Equality";
+        }
+
+        public static bool IsOperatorNotEquals(this IMethodSymbol methodSymbol)
+        {
+            return methodSymbol != null &&
+                methodSymbol.MethodKind == MethodKind.UserDefinedOperator &&
+                methodSymbol.Parameters.Length == 2 &&
+                methodSymbol.Name == "op_Inequality";
+        }
+
     }
 }
