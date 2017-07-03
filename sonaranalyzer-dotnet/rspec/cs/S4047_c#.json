@@ -1,0 +1,13 @@
+{
+  "title": "Generics should be used when appropriate",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "10min"
+  },
+  "tags": [
+    
+  ],
+  "defaultSeverity": "Minor"
+}
