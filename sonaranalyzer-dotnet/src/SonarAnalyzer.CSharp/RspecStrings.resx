@@ -7038,6 +7038,33 @@
   <data name="S4041_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
   </data>
+  <data name="S4059_Category" xml:space="preserve">
+    <value>Sonar Code Smell</value>
+  </data>
+  <data name="S4059_Description" xml:space="preserve">
+    <value>Properties and Get method should have names that makes them clearly distinguishable.</value>
+  </data>
+  <data name="S4059_IsActivatedByDefault" xml:space="preserve">
+    <value>False</value>
+  </data>
+  <data name="S4059_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S4059_RemediationCost" xml:space="preserve">
+    <value>2min</value>
+  </data>
+  <data name="S4059_Severity" xml:space="preserve">
+    <value>Major</value>
+  </data>
+  <data name="S4059_Tags" xml:space="preserve">
+    <value>confusing</value>
+  </data>
+  <data name="S4059_Title" xml:space="preserve">
+    <value>Property names should not match get methods</value>
+  </data>
+  <data name="S4059_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S4060_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
