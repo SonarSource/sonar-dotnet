@@ -44,6 +44,11 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
+                    if (c.IsTest())
+                    {
+                        return;
+                    }
+
                     var typeSymbol = c.SemanticModel.GetDeclaredSymbol(c.Node) as INamedTypeSymbol;
                     if (typeSymbol == null)
                     {
@@ -52,7 +57,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     var propertyCandidates = typeSymbol
                         .GetMembers()
-                        .Where(IsPubliclyVisible)
+                        .Where(IsPubliclyAccessible)
                         .OfType<IMethodSymbol>()
                         .Where(IsPropertyCanditate);
 
@@ -68,7 +73,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.InterfaceDeclaration);
         }
 
-        private static bool IsPubliclyVisible(ISymbol symbol)
+        private static bool IsPubliclyAccessible(ISymbol symbol)
         {
             var accessibility = symbol.GetEffectiveAccessibility();
             return accessibility == Accessibility.Public ||
@@ -81,7 +86,7 @@ namespace SonarAnalyzer.Rules.CSharp
             if (method.IsConstructor() ||
                 method.MethodKind == MethodKind.PropertyGet ||
                 method.IsOverride ||
-                method.IsInherited())
+                IsInherited(method))
             {
                 return false;
             }
@@ -94,10 +99,12 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private bool NameStartsWithGet(IMethodSymbol method)
         {
-            var nameParts = method.Name.SplitCamelCaseToWords();
+            var nameParts = method.Name.SplitCamelCaseToWords().ToList();
 
-            return nameParts.Count() > 1 &&
-                   nameParts.FirstOrDefault() == "get";
+            return nameParts.Count > 1 &&
+                   nameParts[0] == "get";
         }
+
+        private static bool IsInherited(IMethodSymbol symbol) => SymbolHelper.GetInterfaceMember(symbol) != null;
     }
 }

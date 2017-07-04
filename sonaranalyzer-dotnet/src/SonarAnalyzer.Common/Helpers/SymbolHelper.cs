@@ -60,10 +60,6 @@ namespace SonarAnalyzer.Helpers
             }
         }
 
-        public static bool IsInherited(this IMethodSymbol symbol) => GetInterfaceMember(symbol) != null;
-        public static bool IsInherited(this IPropertySymbol symbol) => GetInterfaceMember(symbol) != null;
-        public static bool IsInherited(this IEventSymbol symbol) => GetInterfaceMember(symbol) != null;
-
         public static T GetInterfaceMember<T>(this T symbol)
             where T : class, ISymbol
         {
