@@ -72,6 +72,18 @@ namespace Tests.Diagnostics
     }
 
     [Flags]
+    enum EnumFoo { }
+
+    [Flags]
+    enum EnumFoo2 // Noncompliant
+    {
+        a = 2,
+        b = 4,
+        c = 4,
+        d = 10 // Secondary
+    }
+
+    [Flags]
     public enum InvalidStringEnum : string // Noncompliant
     {
         MyValue = "toto" // Secondary

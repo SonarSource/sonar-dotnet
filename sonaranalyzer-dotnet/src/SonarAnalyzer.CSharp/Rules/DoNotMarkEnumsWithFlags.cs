@@ -64,6 +64,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     var allValues = membersWithValues.Select(x => x.Value)
                         .OfType<ulong>()
+                        .Distinct()
                         .ToList();
 
                     var invalidMembers = membersWithValues.Where(tuple => IsInvalidFlagValue(tuple.Value, allValues))
