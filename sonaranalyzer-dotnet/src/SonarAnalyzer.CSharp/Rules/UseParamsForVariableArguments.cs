@@ -48,26 +48,29 @@ namespace SonarAnalyzer.Rules.CSharp
                     var methodDeclaration = (MethodDeclarationSyntax)c.Node;
                     var methodSymbol = c.SemanticModel.GetDeclaredSymbol(methodDeclaration);
 
-                    if (methodDeclaration.Identifier.IsMissing ||
-                        methodSymbol == null)
-                    {
-                        return;
-                    }
-
-                    var effectiveAccessiblity = methodSymbol.GetEffectiveAccessibility();
-                    if (effectiveAccessiblity != Accessibility.Public &&
-                        effectiveAccessiblity != Accessibility.Protected)
-                    {
-                        return;
-                    }
-
-                    var hasArgListParameter = methodDeclaration.ParameterList.Parameters
-                        .Any(p => p.Identifier.IsKind(SyntaxKind.ArgListKeyword));
-                    if (hasArgListParameter)
+                    if (!methodDeclaration.Identifier.IsMissing &&
+                        methodSymbol != null &&
+                        IsPubliclyAccessible(methodSymbol) &&
+                        HasAnyArgListParameter(methodDeclaration))
                     {
                         c.ReportDiagnostic(Diagnostic.Create(rule, methodDeclaration.Identifier.GetLocation()));
                     }
                 }, SyntaxKind.MethodDeclaration);
+        }
+
+        private static bool IsPubliclyAccessible(ISymbol symbol)
+        {
+            var effectiveAccessibility = symbol.GetEffectiveAccessibility();
+
+            return effectiveAccessibility == Accessibility.Public ||
+                effectiveAccessibility == Accessibility.Protected ||
+                effectiveAccessibility == Accessibility.ProtectedOrInternal;
+        }
+
+        private static bool HasAnyArgListParameter(MethodDeclarationSyntax methodDeclaration)
+        {
+            return methodDeclaration.ParameterList.Parameters
+                .Any(p => p.Identifier.IsKind(SyntaxKind.ArgListKeyword));
         }
     }
 }

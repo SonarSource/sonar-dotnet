@@ -6,7 +6,7 @@ namespace Tests.Diagnostics
     {
         public Program() { }
 
-        public void Bar(__arglist) // Noncompliant
+        public void Bar(__arglist) // Noncompliant {{Use the 'params' keyword instead of '__arglist'.}}
 //                  ^^^
         {
             ArgIterator argumentIterator = new ArgIterator(__arglist);
