@@ -60,73 +60,87 @@ namespace SonarAnalyzer.Rules.CSharp
                 var classDeclaration = (ClassDeclarationSyntax)c.Node;
                 var classSymbol = c.SemanticModel.GetDeclaredSymbol(classDeclaration);
 
-                if (classSymbol == null || classDeclaration.Identifier.IsMissing)
+                if (classSymbol == null ||
+                    classDeclaration.Identifier.IsMissing ||
+                    !IsPubliclyAccessible(classSymbol))
                 {
                     return;
                 }
 
-                var classMethods = classSymbol
-                    .GetMembers()
-                    .OfType<IMethodSymbol>()
-                    .Where(m => !m.IsConstructor())
-                    .ToList();
-
-                var implementedMethods = new HashSet<string>();
-                implementedMethods.Add(GetNameOrDefault(MethodName.OperatorPlus, classMethods, KnownMethods.IsOperatorBinaryPlus));
-                implementedMethods.Add(GetNameOrDefault(MethodName.OperatorMinus, classMethods, KnownMethods.IsOperatorBinaryMinus));
-                implementedMethods.Add(GetNameOrDefault(MethodName.OperatorEquals, classMethods, KnownMethods.IsOperatorEquals));
-                implementedMethods.Add(GetNameOrDefault(MethodName.OperatorNotEquals, classMethods, KnownMethods.IsOperatorNotEquals));
-                implementedMethods.Add(GetNameOrDefault(MethodName.ObjectEquals, classMethods, KnownMethods.IsObjectEquals));
-                implementedMethods.Add(GetNameOrDefault(MethodName.ObjectGetHashCode, classMethods, KnownMethods.IsObjectGetHashCode));
-                implementedMethods.Remove(null);
-
-                var requiredMethods = new HashSet<string>();
-
-                if (implementedMethods.Contains(MethodName.OperatorPlus))
-                {
-                    requiredMethods.Add(MethodName.OperatorMinus);
-                    requiredMethods.Add(MethodName.OperatorEquals);
-                    requiredMethods.Add(MethodName.OperatorNotEquals);
-                    requiredMethods.Add(MethodName.ObjectEquals);
-                    requiredMethods.Add(MethodName.ObjectGetHashCode);
-                }
-
-                if (implementedMethods.Contains(MethodName.OperatorMinus))
-                {
-                    requiredMethods.Add(MethodName.OperatorPlus);
-                    requiredMethods.Add(MethodName.OperatorEquals);
-                    requiredMethods.Add(MethodName.OperatorNotEquals);
-                    requiredMethods.Add(MethodName.ObjectEquals);
-                    requiredMethods.Add(MethodName.ObjectGetHashCode);
-                }
-
-                if (implementedMethods.Contains(MethodName.OperatorEquals))
-                {
-                    requiredMethods.Add(MethodName.OperatorNotEquals);
-                    requiredMethods.Add(MethodName.ObjectEquals);
-                    requiredMethods.Add(MethodName.ObjectGetHashCode);
-                }
-
-                if (implementedMethods.Contains(MethodName.OperatorNotEquals))
-                {
-                    requiredMethods.Add(MethodName.OperatorEquals);
-                    requiredMethods.Add(MethodName.ObjectEquals);
-                    requiredMethods.Add(MethodName.ObjectGetHashCode);
-                }
-
-                var missingMethods = requiredMethods.Except(implementedMethods);
+                var missingMethods = FindMissingMethods(classSymbol);
                 if (missingMethods.Any())
                 {
-                    string missingMethodsMessage = string.Join(", ", missingMethods.Select(s => $"'{s}'"));
+                    string missingMethodsMessage = DiagnosticReportHelper.CreateStringFromArgs(missingMethods);
                     c.ReportDiagnostic(Diagnostic.Create(rule, classDeclaration.Identifier.GetLocation(), missingMethodsMessage));
                 }
             },
             SyntaxKind.ClassDeclaration);
         }
 
-        private string GetNameOrDefault(string item, IList<IMethodSymbol> methods, Func<IMethodSymbol, bool> predicate)
+        private static bool IsPubliclyAccessible(ISymbol symbol)
         {
-            return methods.FirstOrDefault(predicate) != null ? item : null;
+            var effectiveAccessibility = symbol.GetEffectiveAccessibility();
+
+            return effectiveAccessibility == Accessibility.Public ||
+                effectiveAccessibility == Accessibility.Protected ||
+                effectiveAccessibility == Accessibility.ProtectedOrInternal;
+        }
+
+        private static IEnumerable<string> FindMissingMethods(INamedTypeSymbol classSymbol)
+        {
+            var implementedMethods = GetImplementedMethods(classSymbol).ToHashSet();
+            var requiredMethods = new HashSet<string>();
+
+            if (implementedMethods.Contains(MethodName.OperatorPlus))
+            {
+                requiredMethods.Add(MethodName.OperatorMinus);
+                requiredMethods.Add(MethodName.OperatorEquals);
+                requiredMethods.Add(MethodName.OperatorNotEquals);
+                requiredMethods.Add(MethodName.ObjectEquals);
+                requiredMethods.Add(MethodName.ObjectGetHashCode);
+            }
+
+            if (implementedMethods.Contains(MethodName.OperatorMinus))
+            {
+                requiredMethods.Add(MethodName.OperatorPlus);
+                requiredMethods.Add(MethodName.OperatorEquals);
+                requiredMethods.Add(MethodName.OperatorNotEquals);
+                requiredMethods.Add(MethodName.ObjectEquals);
+                requiredMethods.Add(MethodName.ObjectGetHashCode);
+            }
+
+            if (implementedMethods.Contains(MethodName.OperatorEquals))
+            {
+                requiredMethods.Add(MethodName.OperatorNotEquals);
+                requiredMethods.Add(MethodName.ObjectEquals);
+                requiredMethods.Add(MethodName.ObjectGetHashCode);
+            }
+
+            if (implementedMethods.Contains(MethodName.OperatorNotEquals))
+            {
+                requiredMethods.Add(MethodName.OperatorEquals);
+                requiredMethods.Add(MethodName.ObjectEquals);
+                requiredMethods.Add(MethodName.ObjectGetHashCode);
+            }
+
+            return requiredMethods.Except(implementedMethods);
+        }
+
+        private static IEnumerable<string> GetImplementedMethods(INamedTypeSymbol classSymbol)
+        {
+            var classMethods = classSymbol
+                .GetMembers()
+                .OfType<IMethodSymbol>()
+                .Where(m => !m.IsConstructor())
+                .ToList();
+
+            if (classMethods.Any(KnownMethods.IsOperatorBinaryPlus)) yield return MethodName.OperatorPlus;
+            if (classMethods.Any(KnownMethods.IsOperatorBinaryMinus)) yield return MethodName.OperatorMinus;
+            if (classMethods.Any(KnownMethods.IsOperatorEquals)) yield return MethodName.OperatorEquals;
+            if (classMethods.Any(KnownMethods.IsOperatorNotEquals)) yield return MethodName.OperatorNotEquals;
+
+            if (classMethods.Any(KnownMethods.IsObjectEquals)) yield return MethodName.ObjectEquals;
+            if (classMethods.Any(KnownMethods.IsObjectGetHashCode)) yield return MethodName.ObjectGetHashCode;
         }
     }
 }
