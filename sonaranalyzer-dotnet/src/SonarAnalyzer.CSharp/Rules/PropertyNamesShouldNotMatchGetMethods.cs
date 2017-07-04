@@ -36,8 +36,8 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class PropertyNamesShouldNotMatchGetMethods : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S4059";
-        private const string MessageFormat = "Change either the name of the property '{0}' or the name of " +
-            "the method '{1}' to make them distinguishable.";
+        private const string MessageFormat = "Change either the name of property '{0}' or the name of " +
+            "method '{1}' to make them distinguishable.";
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
@@ -54,7 +54,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    var classMembers = classSymbol.GetMembers().Where(IsPublicOrProtectedMember);
+                    var classMembers = classSymbol.GetMembers().Where(IsPubliclyAccessible);
                     var properties = classMembers.OfType<IPropertySymbol>().Where(property => !property.IsOverride);
                     var methods = classMembers.OfType<IMethodSymbol>().ToList();
 
@@ -72,11 +72,13 @@ namespace SonarAnalyzer.Rules.CSharp
                 }, SyntaxKind.ClassDeclaration);
         }
 
-        private static bool IsPublicOrProtectedMember(ISymbol symbol)
+        private static bool IsPubliclyAccessible(ISymbol symbol)
         {
             var accessibility = symbol.GetEffectiveAccessibility();
 
-            return accessibility == Accessibility.Public || accessibility == Accessibility.Protected;
+            return accessibility == Accessibility.Public ||
+                accessibility == Accessibility.Protected ||
+                accessibility == Accessibility.ProtectedOrInternal;
         }
 
         private static IEnumerable<Tuple<SyntaxToken, SyntaxToken>> GetCollidingMembers(

@@ -9,7 +9,7 @@ namespace Tests.Diagnostics
 
     public class Program : Base
     {
-        public int Foo // Noncompliant {{Change either the name of the property 'Foo' or the name of the method 'GetFoo' to make them distinguishable.}}
+        public int Foo // Noncompliant {{Change either the name of property 'Foo' or the name of method 'GetFoo' to make them distinguishable.}}
 //                 ^^^
         { get; set; }
         public int GetFoo()
@@ -22,7 +22,7 @@ namespace Tests.Diagnostics
             return Date.ToString();
         }
 
-        public string Bar // Noncompliant {{Change either the name of the property 'Bar' or the name of the method 'Bar' to make them distinguishable.}}
+        public string Bar // Noncompliant {{Change either the name of property 'Bar' or the name of method 'Bar' to make them distinguishable.}}
 //                    ^^^
         { get; }
         public int Bar()
