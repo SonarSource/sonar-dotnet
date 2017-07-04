@@ -2,45 +2,6 @@
 "issues":  [
 {
 "id":  "S4050",
-"message":  "Provide an implementation for: 'operator==', 'operator!=', 'Object.Equals', 'Object.GetHashCode'.",
-"location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
-"region":  {
-"startLine":  1922,
-"startColumn":  27,
-"endLine":  1922,
-"endColumn":  38
-}
-}
-},
-{
-"id":  "S4050",
-"message":  "Provide an implementation for: 'operator==', 'operator!=', 'Object.Equals', 'Object.GetHashCode'.",
-"location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
-"region":  {
-"startLine":  346,
-"startColumn":  27,
-"endLine":  346,
-"endColumn":  44
-}
-}
-},
-{
-"id":  "S4050",
-"message":  "Provide an implementation for: 'operator-', 'operator==', 'operator!='.",
-"location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterMetricsCollector.cs",
-"region":  {
-"startLine":  203,
-"startColumn":  27,
-"endLine":  203,
-"endColumn":  40
-}
-}
-},
-{
-"id":  "S4050",
 "message":  "Provide an implementation for: 'operator-', 'operator==', 'operator!='.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Cluster\ClusterMetricsCollector.cs",
