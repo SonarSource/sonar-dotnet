@@ -7038,6 +7038,33 @@
   <data name="S4041_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
   </data>
+  <data name="S4060_Category" xml:space="preserve">
+    <value>Sonar Code Smell</value>
+  </data>
+  <data name="S4060_Description" xml:space="preserve">
+    <value>The .NET framework class library provides methods for retrieving custom attributes. Sealing the attribute eliminates the search through the inheritance hierarchy, and can improve performance.</value>
+  </data>
+  <data name="S4060_IsActivatedByDefault" xml:space="preserve">
+    <value>False</value>
+  </data>
+  <data name="S4060_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S4060_RemediationCost" xml:space="preserve">
+    <value>2min</value>
+  </data>
+  <data name="S4060_Severity" xml:space="preserve">
+    <value>Minor</value>
+  </data>
+  <data name="S4060_Tags" xml:space="preserve">
+    <value>performance</value>
+  </data>
+  <data name="S4060_Title" xml:space="preserve">
+    <value>Non-abstract attributes should be sealed</value>
+  </data>
+  <data name="S4060_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S4061_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
