@@ -3,18 +3,7 @@ using System;
 namespace Tests.Diagnostics
 {
     [FlagsAttribute]
-    public enum Color // Noncompliant {{Remove the 'FlagsAttribute' from this enum.}}
-//              ^^^^^
-    {
-        None = 0,
-        Red = 1,
-        Orange = 3,
-//      ^^^^^^^^^^ Secondary
-        Yellow = 4
-    }
-
-    [FlagsAttribute]
-    public enum Color2
+    public enum Color // Compliant - only power of 2 values
     {
         None = 0,
         Red = 1,
@@ -32,6 +21,35 @@ namespace Tests.Diagnostics
         Thursday = 8,
         Friday = 16,
         All = Monday | Tuesday | Wednesday | Thursday | Friday    // Compliant - combination of other values
+    }
+
+    [FlagsAttribute]
+    public enum Color2 // Noncompliant {{Remove the 'FlagsAttribute' from this enum.}}
+//              ^^^^^^
+    {
+        None = 0,
+        Red = 1,
+        Orange = 3,
+//      ^^^^^^^^^^ Secondary
+        Yellow = 4
+    }
+
+    [FlagsAttribute]
+    public enum Color3 // Compliant - values are automatically set with power of 2 values
+    {
+        None,
+        Red,
+        Orange,
+        Yellow = 4
+    }
+
+    [FlagsAttribute]
+    public enum Color4
+    {
+        None = 4,
+        Red = 8,
+        Orange = 16,
+        Yellow = 12
     }
 
     [Flags]

@@ -6268,7 +6268,7 @@
     <value>Code is clearest when each statement has its own line. Nonetheless, it is not uncommon to combine on the same line an if and it's resulting then statement. However, when an if is appended to the line with a previous if's closing } it is either an error - else is missing - or the prelude to a future error as maintainers fail to understand that the two statements are unconnected.</value>
   </data>
   <data name="S3972_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S3972_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>

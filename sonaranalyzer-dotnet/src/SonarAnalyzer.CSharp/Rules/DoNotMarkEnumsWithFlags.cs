@@ -99,6 +99,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool IsZeroOrPowerOfTwo(ulong value)
         {
+            // See https://stackoverflow.com/questions/600293/how-to-check-if-a-number-is-a-power-of-2
             return (value & (value - 1)) == 0;
         }
 
