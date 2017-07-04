@@ -1,0 +1,69 @@
+{
+"issues":  [
+{
+"id":  "S4058",
+"message":  "Change this call to 'requestedPath.StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Embedded\Conventions\EmbeddedStaticContentConventionBuilder.cs",
+"region":  {
+"startLine":  32,
+"startColumn":  18,
+"endLine":  32,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'contentPath.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Embedded\Conventions\EmbeddedStaticContentConventionBuilder.cs",
+"region":  {
+"startLine":  127,
+"startColumn":  18,
+"endLine":  127,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'requestedPath.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Embedded\Conventions\EmbeddedStaticContentConventionBuilder.cs",
+"region":  {
+"startLine":  129,
+"startColumn":  17,
+"endLine":  129,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'contentPath.StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Embedded\Conventions\EmbeddedStaticContentConventionBuilder.cs",
+"region":  {
+"startLine":  145,
+"startColumn":  18,
+"endLine":  145,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'pathWithoutFileName.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Embedded\Conventions\EmbeddedStaticContentConventionBuilder.cs",
+"region":  {
+"startLine":  158,
+"startColumn":  21,
+"endLine":  158,
+"endColumn":  52
+}
+}
+}
+]
+}
