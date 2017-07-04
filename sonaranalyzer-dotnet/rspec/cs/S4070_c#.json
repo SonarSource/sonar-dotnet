@@ -1,0 +1,13 @@
+{
+  "title": "Non-flags enums should not be marked with \"FlagsAttribute\"",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "2min"
+  },
+  "tags": [
+    
+  ],
+  "defaultSeverity": "Major"
+}
