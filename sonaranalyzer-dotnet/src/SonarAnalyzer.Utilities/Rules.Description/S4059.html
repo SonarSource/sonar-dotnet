@@ -1,0 +1,44 @@
+<p>Properties and Get method should have names that makes them clearly distinguishable.</p>
+<p>This rule raises an issue when the name of a public or protected member starts with 'Get' and otherwise matches the name of a public or protected
+property.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+using System;
+
+namespace MyLibrary
+{
+    public class Foo
+    {
+        public DateTime Date
+        {
+            get { return DateTime.Today; }
+        }
+
+        public string GetDate() // Noncompliant
+        {
+            return this.Date.ToString();
+        }
+    }
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+using System;
+
+namespace MyLibrary
+{
+    public class Foo
+    {
+        public DateTime Date
+        {
+            get { return DateTime.Today; }
+        }
+
+        public string GetDateAsString()
+        {
+            return this.Date.ToString();
+        }
+    }
+}
+</pre>
+

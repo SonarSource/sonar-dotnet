@@ -1,0 +1,76 @@
+{
+"issues":  [
+{
+"id":  "S4059",
+"message":  "Change either the name of property 'ApplicationStartupTasks' or the name of method 'GetApplicationStartupTasks' to make them distinguishable.",
+"location":  [
+{
+"uri":  "Nancy\src\Nancy\Bootstrapper\NancyBootstrapperBase.cs",
+"region":  {
+"startLine":  167,
+"startColumn":  45,
+"endLine":  167,
+"endColumn":  68
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Bootstrapper\NancyBootstrapperBase.cs",
+"region":  {
+"startLine":  338,
+"startColumn":  61,
+"endLine":  338,
+"endColumn":  87
+}
+}
+]
+},
+{
+"id":  "S4059",
+"message":  "Change either the name of property 'RegistrationTasks' or the name of method 'GetRegistrationTasks' to make them distinguishable.",
+"location":  [
+{
+"uri":  "Nancy\src\Nancy\Bootstrapper\NancyBootstrapperBase.cs",
+"region":  {
+"startLine":  183,
+"startColumn":  45,
+"endLine":  183,
+"endColumn":  62
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Bootstrapper\NancyBootstrapperBase.cs",
+"region":  {
+"startLine":  352,
+"startColumn":  56,
+"endLine":  352,
+"endColumn":  76
+}
+}
+]
+},
+{
+"id":  "S4059",
+"message":  "Change either the name of property 'ApplicationContainer' or the name of method 'GetApplicationContainer' to make them distinguishable.",
+"location":  [
+{
+"uri":  "Nancy\src\Nancy\Bootstrapper\NancyBootstrapperBase.cs",
+"region":  {
+"startLine":  80,
+"startColumn":  30,
+"endLine":  80,
+"endColumn":  50
+}
+},
+{
+"uri":  "Nancy\src\Nancy\Bootstrapper\NancyBootstrapperBase.cs",
+"region":  {
+"startLine":  540,
+"startColumn":  39,
+"endLine":  540,
+"endColumn":  62
+}
+}
+]
+}
+]
+}
