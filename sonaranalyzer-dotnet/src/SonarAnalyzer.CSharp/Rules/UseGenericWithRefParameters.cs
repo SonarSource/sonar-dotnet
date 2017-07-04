@@ -46,7 +46,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 var methodDeclaration = (MethodDeclarationSyntax)c.Node;
                 var methodSymbol = c.SemanticModel.GetDeclaredSymbol(methodDeclaration);
-                var methodIdentifierLocation = methodDeclaration.FindIdentifierLocation();
+                var methodIdentifierLocation = methodDeclaration.Identifier.GetLocation();
 
                 if (methodSymbol == null ||
                     methodIdentifierLocation == null)
