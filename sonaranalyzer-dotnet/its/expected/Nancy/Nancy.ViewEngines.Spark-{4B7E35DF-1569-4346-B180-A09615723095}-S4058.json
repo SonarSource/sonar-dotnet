@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S4058",
+"message":  "Change this call to 'string.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "Nancy\src\Nancy.ViewEngines.Spark\Descriptors\BuildDescriptorParams.cs",
+"region":  {
+"startLine":  82,
+"startColumn":  18,
+"endLine":  82,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'string.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "Nancy\src\Nancy.ViewEngines.Spark\Descriptors\BuildDescriptorParams.cs",
+"region":  {
+"startLine":  83,
+"startColumn":  18,
+"endLine":  83,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'string.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "Nancy\src\Nancy.ViewEngines.Spark\Descriptors\BuildDescriptorParams.cs",
+"region":  {
+"startLine":  84,
+"startColumn":  18,
+"endLine":  84,
+"endColumn":  60
+}
+}
+}
+]
+}

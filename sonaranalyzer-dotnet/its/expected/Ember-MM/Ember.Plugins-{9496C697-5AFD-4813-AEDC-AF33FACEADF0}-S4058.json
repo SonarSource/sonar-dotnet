@@ -1,0 +1,69 @@
+{
+"issues":  [
+{
+"id":  "S4058",
+"message":  "Change this call to 'lTitle.EndsWith' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "Ember-MM\Ember.Plugins\Ember\EmberWorkAroundPlugin.cs",
+"region":  {
+"startLine":  63,
+"startColumn":  17,
+"endLine":  63,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'lTitle.EndsWith' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "Ember-MM\Ember.Plugins\Ember\EmberWorkAroundPlugin.cs",
+"region":  {
+"startLine":  65,
+"startColumn":  22,
+"endLine":  65,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'lTitle.EndsWith' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "Ember-MM\Ember.Plugins\Ember\EmberWorkAroundPlugin.cs",
+"region":  {
+"startLine":  67,
+"startColumn":  22,
+"endLine":  67,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to '"tt".Equals' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "Ember-MM\Ember.Plugins\Utility.cs",
+"region":  {
+"startLine":  40,
+"startColumn":  17,
+"endLine":  40,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S4058",
+"message":  "Change this call to 'imdbId.StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
+"location":  {
+"uri":  "Ember-MM\Ember.Plugins\Utility.cs",
+"region":  {
+"startLine":  44,
+"startColumn":  22,
+"endLine":  44,
+"endColumn":  45
+}
+}
+}
+]
+}
