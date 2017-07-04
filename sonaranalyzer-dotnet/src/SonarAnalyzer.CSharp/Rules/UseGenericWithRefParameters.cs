@@ -46,10 +46,9 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 var methodDeclaration = (MethodDeclarationSyntax)c.Node;
                 var methodSymbol = c.SemanticModel.GetDeclaredSymbol(methodDeclaration);
-                var methodIdentifierLocation = methodDeclaration.Identifier.GetLocation();
 
                 if (methodSymbol == null ||
-                    methodIdentifierLocation == null)
+                    methodDeclaration.Identifier.IsMissing)
                 {
                     return;
                 }
@@ -62,7 +61,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 if (refObjectParameters.Count > 0)
                 {
                     var parameterLocations = refObjectParameters.Select(p => p.Locations.FirstOrDefault()).WhereNotNull();
-                    c.ReportDiagnostic(Diagnostic.Create(rule, methodIdentifierLocation,
+                    c.ReportDiagnostic(Diagnostic.Create(rule, methodDeclaration.Identifier.GetLocation(),
                         additionalLocations: parameterLocations));
                 }
 
