@@ -7038,6 +7038,33 @@
   <data name="S4041_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
   </data>
+  <data name="S4061_Category" xml:space="preserve">
+    <value>Sonar Code Smell</value>
+  </data>
+  <data name="S4061_Description" xml:space="preserve">
+    <value>A method using the VarArgs calling convention is not Common Language Specification (CLS) compliant and might not be accessible across programming languages, while the params keyword works the same way and is CLS compliant.</value>
+  </data>
+  <data name="S4061_IsActivatedByDefault" xml:space="preserve">
+    <value>False</value>
+  </data>
+  <data name="S4061_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S4061_RemediationCost" xml:space="preserve">
+    <value>5min</value>
+  </data>
+  <data name="S4061_Severity" xml:space="preserve">
+    <value>Minor</value>
+  </data>
+  <data name="S4061_Tags" xml:space="preserve">
+    <value />
+  </data>
+  <data name="S4061_Title" xml:space="preserve">
+    <value>"params" should be use instead of "varargs"</value>
+  </data>
+  <data name="S4061_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S818_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
