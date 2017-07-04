@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S4060",
+"message":  "Seal this attribute or make it abstract.",
+"location":  {
+"uri":  "Nancy\src\Nancy\Diagnostics\DescriptionAttribute.cs",
+"region":  {
+"startLine":  6,
+"startColumn":  18,
+"endLine":  6,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S4060",
+"message":  "Seal this attribute or make it abstract.",
+"location":  {
+"uri":  "Nancy\src\Nancy\Diagnostics\TemplateAttribute.cs",
+"region":  {
+"startLine":  6,
+"startColumn":  18,
+"endLine":  6,
+"endColumn":  35
+}
+}
+}
+]
+}

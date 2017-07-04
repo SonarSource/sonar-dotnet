@@ -254,6 +254,15 @@ namespace SonarAnalyzer.Helpers
             return result;
         }
 
+        public static bool IsPubliclyAccessible(this ISymbol symbol)
+        {
+            var effectiveAccessibility = GetEffectiveAccessibility(symbol);
+
+            return effectiveAccessibility == Accessibility.Public ||
+                effectiveAccessibility == Accessibility.Protected ||
+                effectiveAccessibility == Accessibility.ProtectedOrInternal;
+        }
+
         public static bool IsConstructor(this ISymbol symbol)
         {
             return symbol.Kind == SymbolKind.Method && symbol.Name == ".ctor";
