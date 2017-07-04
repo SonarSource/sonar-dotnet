@@ -7038,6 +7038,33 @@
   <data name="S4041_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
   </data>
+  <data name="S4058_Category" xml:space="preserve">
+    <value>Sonar Code Smell</value>
+  </data>
+  <data name="S4058_Description" xml:space="preserve">
+    <value>Many string operations, the Compare and Equals methods in particular, provide an overload that accepts a StringComparison enumeration value as a parameter. Calling these overloads and explicitly providing this parameter makes your code clearer and easier to maintain.</value>
+  </data>
+  <data name="S4058_IsActivatedByDefault" xml:space="preserve">
+    <value>False</value>
+  </data>
+  <data name="S4058_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S4058_RemediationCost" xml:space="preserve">
+    <value>2min</value>
+  </data>
+  <data name="S4058_Severity" xml:space="preserve">
+    <value>Minor</value>
+  </data>
+  <data name="S4058_Tags" xml:space="preserve">
+    <value />
+  </data>
+  <data name="S4058_Title" xml:space="preserve">
+    <value>Overloads with a "StringComparison" parameter should be used</value>
+  </data>
+  <data name="S4058_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S4059_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
