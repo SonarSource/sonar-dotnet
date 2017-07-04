@@ -18493,6 +18493,87 @@ namespace SonarAnalyzer {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sonar Code Smell.
+        /// </summary>
+        internal static string S3972_Category {
+            get {
+                return ResourceManager.GetString("S3972_Category", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Code is clearest when each statement has its own line. Nonetheless, it is not uncommon to combine on the same line an if and it&apos;s resulting then statement. However, when an if is appended to the line with a previous if&apos;s closing } it is either an error - else is missing - or the prelude to a future error as maintainers fail to understand that the two statements are unconnected..
+        /// </summary>
+        internal static string S3972_Description {
+            get {
+                return ResourceManager.GetString("S3972_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to True.
+        /// </summary>
+        internal static string S3972_IsActivatedByDefault {
+            get {
+                return ResourceManager.GetString("S3972_IsActivatedByDefault", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Constant/Issue.
+        /// </summary>
+        internal static string S3972_Remediation {
+            get {
+                return ResourceManager.GetString("S3972_Remediation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 10min.
+        /// </summary>
+        internal static string S3972_RemediationCost {
+            get {
+                return ResourceManager.GetString("S3972_RemediationCost", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Critical.
+        /// </summary>
+        internal static string S3972_Severity {
+            get {
+                return ResourceManager.GetString("S3972_Severity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to suspicious.
+        /// </summary>
+        internal static string S3972_Tags {
+            get {
+                return ResourceManager.GetString("S3972_Tags", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Conditionals should start on new lines.
+        /// </summary>
+        internal static string S3972_Title {
+            get {
+                return ResourceManager.GetString("S3972_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CODE_SMELL.
+        /// </summary>
+        internal static string S3972_Type {
+            get {
+                return ResourceManager.GetString("S3972_Type", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sonar Bug.
         /// </summary>
         internal static string S3981_Category {
@@ -20739,6 +20820,87 @@ namespace SonarAnalyzer {
         internal static string S4041_Type {
             get {
                 return ResourceManager.GetString("S4041_Type", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sonar Code Smell.
+        /// </summary>
+        internal static string S4060_Category {
+            get {
+                return ResourceManager.GetString("S4060_Category", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The .NET framework class library provides methods for retrieving custom attributes. Sealing the attribute eliminates the search through the inheritance hierarchy, and can improve performance..
+        /// </summary>
+        internal static string S4060_Description {
+            get {
+                return ResourceManager.GetString("S4060_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to False.
+        /// </summary>
+        internal static string S4060_IsActivatedByDefault {
+            get {
+                return ResourceManager.GetString("S4060_IsActivatedByDefault", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Constant/Issue.
+        /// </summary>
+        internal static string S4060_Remediation {
+            get {
+                return ResourceManager.GetString("S4060_Remediation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 2min.
+        /// </summary>
+        internal static string S4060_RemediationCost {
+            get {
+                return ResourceManager.GetString("S4060_RemediationCost", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Minor.
+        /// </summary>
+        internal static string S4060_Severity {
+            get {
+                return ResourceManager.GetString("S4060_Severity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to performance.
+        /// </summary>
+        internal static string S4060_Tags {
+            get {
+                return ResourceManager.GetString("S4060_Tags", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Non-abstract attributes should be sealed.
+        /// </summary>
+        internal static string S4060_Title {
+            get {
+                return ResourceManager.GetString("S4060_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CODE_SMELL.
+        /// </summary>
+        internal static string S4060_Type {
+            get {
+                return ResourceManager.GetString("S4060_Type", resourceCulture);
             }
         }
         

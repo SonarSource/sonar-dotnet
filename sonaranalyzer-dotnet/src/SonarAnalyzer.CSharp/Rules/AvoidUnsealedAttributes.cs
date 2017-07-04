@@ -52,17 +52,15 @@ namespace SonarAnalyzer.Rules.CSharp
                     var classDeclaration = (ClassDeclarationSyntax)c.Node;
                     var classSymbol = c.SemanticModel.GetDeclaredSymbol(classDeclaration);
 
-                    if (classDeclaration.Identifier.IsMissing ||
-                        classSymbol == null ||
-                        !classSymbol.DerivesFrom(KnownType.System_Attribute) ||
-                        classSymbol.GetEffectiveAccessibility() != Accessibility.Public ||
-                        classSymbol.IsAbstract||
-                        classSymbol.IsSealed)
+                    if (!classDeclaration.Identifier.IsMissing &&
+                        classSymbol != null &&
+                        classSymbol.DerivesFrom(KnownType.System_Attribute) &&
+                        classSymbol.IsPubliclyAccessible() &&
+                        !classSymbol.IsAbstract &&
+                        !classSymbol.IsSealed)
                     {
-                        return;
+                        c.ReportDiagnostic(Diagnostic.Create(rule, classDeclaration.Identifier.GetLocation()));
                     }
-
-                    c.ReportDiagnostic(Diagnostic.Create(rule, classDeclaration.Identifier.GetLocation()));
                 }, SyntaxKind.ClassDeclaration);
         }
     }

@@ -7,13 +7,28 @@ namespace Tests.Diagnostics
     {
     }
 
-    private class Foo : Attribute // Compliant - private
-    { }
+    protected class MyOtherAttribute : Attribute // Noncompliant
+    {
+    }
+
+    protected internal class MyOtherAttribute2 : Attribute // Noncompliant
+    {
+    }
 
     public sealed class Bar : Attribute // Compliant - sealed
     { }
 
     public abstract class FooBar : Attribute // Compliant - abstract
     {
+    }
+
+    public sealed class Attr : Attribute
+    {
+        private class InnerAttr : Attribute // Compliant - private
+        {
+            public class InnerInnerAttr : Attribute // Compliant - effective accessibility is private
+            {
+            }
+        }
     }
 }
