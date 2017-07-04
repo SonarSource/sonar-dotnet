@@ -1,0 +1,54 @@
+<p>The .NET framework class library provides methods for retrieving custom attributes. Sealing the attribute eliminates the search through the
+inheritance hierarchy, and can improve performance.</p>
+<p>This rule raises an issue when a public type inherits from <code>System.Attribute</code>, is not abstract, and is not sealed.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+using System;
+
+namespace MyLibrary
+{
+    [AttributeUsage(AttributeTargets.Class|AttributeTargets.Struct)]
+    public class MyAttribute: Attribute // Noncompliant
+    {
+        private string nameValue;
+        public MyAttribute(string name)
+        {
+            nameValue = name;
+        }
+
+        public string Name
+        {
+            get
+            {
+                return nameValue;
+            }
+        }
+    }
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+using System;
+
+namespace MyLibrary
+{
+    [AttributeUsage(AttributeTargets.Class|AttributeTargets.Struct)]
+    public sealed class MyAttribute: Attribute
+    {
+        private string nameValue;
+        public MyAttribute(string name)
+        {
+            nameValue = name;
+        }
+
+        public string Name
+        {
+            get
+            {
+                return nameValue;
+            }
+        }
+    }
+}
+</pre>
+
