@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetNodes' a property.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Remote.TestKit\Conductor.cs",
+"region":  {
+"startLine":  225,
+"startColumn":  44,
+"endLine":  225,
+"endColumn":  52
+}
+}
+}
+]
+}

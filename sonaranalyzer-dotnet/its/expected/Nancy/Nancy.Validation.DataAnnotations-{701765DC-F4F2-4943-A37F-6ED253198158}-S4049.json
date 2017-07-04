@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetRules' a property.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Validation.DataAnnotations\IPropertyValidator.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  42,
+"endLine":  27,
+"endColumn":  50
+}
+}
+}
+]
+}

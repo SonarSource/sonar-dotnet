@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetData' a property.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing.Tests\ConfigurableBootstrapperDependenciesTests.cs",
+"region":  {
+"startLine":  190,
+"startColumn":  20,
+"endLine":  190,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetData' a property.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing.Tests\ConfigurableBootstrapperDependenciesTests.cs",
+"region":  {
+"startLine":  203,
+"startColumn":  20,
+"endLine":  203,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetModule_should_get_empty_string_for_module_with_no_module_path_set' a property.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing.Tests\TestingViewExtensions\GetModulePathExtensionMethodTests.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  27,
+"endLine":  26,
+"endColumn":  95
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetStuff' a property.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Tests\NoAppStartupsFixture.cs",
+"region":  {
+"startLine":  100,
+"startColumn":  20,
+"endLine":  100,
+"endColumn":  28
+}
+}
+}
+]
+}

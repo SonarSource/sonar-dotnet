@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetOtherRemoteSysConfig' a property.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Remote.Tests\RemotingSpec.cs",
+"region":  {
+"startLine":  89,
+"startColumn":  26,
+"endLine":  89,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetCollaborators' a property.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Remote.Tests\Transport\AkkaProtocolSpec.cs",
+"region":  {
+"startLine":  75,
+"startColumn":  30,
+"endLine":  75,
+"endColumn":  46
+}
+}
+}
+]
+}
