@@ -37,6 +37,8 @@ namespace Tests.Diagnostics
         public static readonly IList<string> iListInitializaedWithImmutableArray = ImmutableArray.Create("a", "b");
         public static readonly IList<string> iListInitializaedWithImmutableList = ImmutableList.Create("a", "b");
         public static readonly IDictionary<string, string> iDictionaryInitializaedWithImmutableDictionary = ImmutableDictionary.Create<string, string>();
+
+        public static readonly string[] foo = null;
     }
 
     class GenericCompliantCases<T>
