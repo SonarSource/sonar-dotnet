@@ -81,6 +81,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static ulong? GetEnumValueOrDefault(IFieldSymbol enumMember)
         {
+            // The idea of this method is to get rid of invalid values for flags such as negative values and decimals
             ulong longValue;
             if (!enumMember.HasConstantValue ||
                 !ulong.TryParse(enumMember.ConstantValue.ToString(), out longValue))
@@ -112,17 +113,17 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             var newValue = value;
-            int currentIndex = 0;
-            while (newValue > 0 && currentIndex < otherValues.Count)
+            foreach (var otherValue in otherValues)
             {
-                if (otherValues[currentIndex] >= value)
+                if (newValue <= 0)
                 {
-                    currentIndex++;
-                    continue;
+                    return true;
                 }
 
-                newValue -= otherValues[currentIndex];
-                currentIndex++;
+                if (otherValue < value)
+                {
+                    newValue -= otherValue;
+                }
             }
 
             return newValue == 0;

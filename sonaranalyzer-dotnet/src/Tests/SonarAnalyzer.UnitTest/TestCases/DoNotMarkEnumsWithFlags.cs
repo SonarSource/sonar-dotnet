@@ -53,6 +53,19 @@ namespace Tests.Diagnostics
     }
 
     [Flags]
+    public enum Color5 : int // Noncompliant
+    {
+        Value = -3, // Secondary
+        Other = -4 // Secondary
+    }
+
+    [Flags]
+    public enum Color6 : float // Noncompliant
+    {
+        Val = 2.4 // Secondary
+    }
+
+    [Flags]
     public enum HugeValues: ulong // Noncompliant
     {
         Max = ulong.MaxValue // Secondary
