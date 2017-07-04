@@ -1,17 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-  <!-- 
-    Microsoft ResX Schema 
-    
+  <!--
+    Microsoft ResX Schema
+
     Version 2.0
-    
-    The primary goals of this format is to allow a simple XML format 
-    that is mostly human readable. The generation and parsing of the 
-    various data types are done through the TypeConverter classes 
+
+    The primary goals of this format is to allow a simple XML format
+    that is mostly human readable. The generation and parsing of the
+    various data types are done through the TypeConverter classes
     associated with the data types.
-    
+
     Example:
-    
+
     ... ado.net/XML headers & schema ...
     <resheader name="resmimetype">text/microsoft-resx</resheader>
     <resheader name="version">2.0</resheader>
@@ -26,36 +26,36 @@
         <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
         <comment>This is a comment</comment>
     </data>
-                
-    There are any number of "resheader" rows that contain simple 
+
+    There are any number of "resheader" rows that contain simple
     name/value pairs.
-    
-    Each data row contains a name, and value. The row also contains a 
-    type or mimetype. Type corresponds to a .NET class that support 
-    text/value conversion through the TypeConverter architecture. 
-    Classes that don't support this are serialized and stored with the 
+
+    Each data row contains a name, and value. The row also contains a
+    type or mimetype. Type corresponds to a .NET class that support
+    text/value conversion through the TypeConverter architecture.
+    Classes that don't support this are serialized and stored with the
     mimetype set.
-    
-    The mimetype is used for serialized objects, and tells the 
-    ResXResourceReader how to depersist the object. This is currently not 
+
+    The mimetype is used for serialized objects, and tells the
+    ResXResourceReader how to depersist the object. This is currently not
     extensible. For a given mimetype the value must be set accordingly:
-    
-    Note - application/x-microsoft.net.object.binary.base64 is the format 
-    that the ResXResourceWriter will generate, however the reader can 
+
+    Note - application/x-microsoft.net.object.binary.base64 is the format
+    that the ResXResourceWriter will generate, however the reader can
     read any of the formats listed below.
-    
+
     mimetype: application/x-microsoft.net.object.binary.base64
-    value   : The object must be serialized with 
+    value   : The object must be serialized with
             : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
             : and then encoded with base64 encoding.
-    
+
     mimetype: application/x-microsoft.net.object.soap.base64
-    value   : The object must be serialized with 
+    value   : The object must be serialized with
             : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
             : and then encoded with base64 encoding.
 
     mimetype: application/x-microsoft.net.object.bytearray.base64
-    value   : The object must be serialized into a byte array 
+    value   : The object must be serialized into a byte array
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
@@ -151,7 +151,7 @@
     <value>Default arguments are determined by the static type of the object. If a default argument is different for a parameter in an overriding method, the value used in the call will be different when calls are made via the base or derived object, which may be contrary to developer expectations. </value>
   </data>
   <data name="S1006_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S1006_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -178,7 +178,7 @@
     <value>Shared naming conventions allow teams to collaborate efficiently. This rule checks whether or not type names are camel cased. To reduce noise, two consecutive upper case characters are allowed unless they form the whole type name. So, MyXClass is compliant, but XC on its own is not.</value>
   </data>
   <data name="S101_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S101_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -286,7 +286,7 @@
     <value>Merging collapsible if statements increases the code's readability.</value>
   </data>
   <data name="S1066_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S1066_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -340,7 +340,7 @@
     <value>A long parameter list can indicate that a new structure should be created to wrap the numerous parameters or that the function is doing too many things.</value>
   </data>
   <data name="S107_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S107_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -367,7 +367,7 @@
     <value>Most of the time a block of code is empty when a piece of code is really missing. So such empty block must be either filled or removed.</value>
   </data>
   <data name="S108_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S108_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -394,7 +394,7 @@
     <value>Inheritance is certainly one of the most valuable concepts in object-oriented programming. It's a way to compartmentalize and reuse code by creating collections of attributes and behaviors called classes which can be based on previously created classes. But abusing this concept by creating a deep inheritance tree can lead to very complex and unmaintainable source code. Most of the time a too deep inheritance tree is due to bad object oriented design which has led to systematically use 'inheritance' when for instance 'composition' would suit better.</value>
   </data>
   <data name="S110_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S110_Remediation" xml:space="preserve">
     <value />
@@ -421,7 +421,7 @@
     <value>Public fields in public classes do not respect the encapsulation principle and has three main disadvantages:</value>
   </data>
   <data name="S1104_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S1104_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -475,7 +475,7 @@
     <value>Empty statements, i.e. ;, are usually introduced by mistake, for example because:</value>
   </data>
   <data name="S1116_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S1116_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -502,7 +502,7 @@
     <value>Shadowing fields with a local variable is a bad practice that reduces code readability: it makes it confusing to know whether the field or the variable is being used.</value>
   </data>
   <data name="S1117_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S1117_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -529,7 +529,7 @@
     <value>Utility classes, which are collections of static members, are not meant to be instantiated. Even abstract utility classes, which can be extended, should not have public constructors.</value>
   </data>
   <data name="S1118_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S1118_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -556,7 +556,7 @@
     <value>Throwing such general exceptions as Exception, SystemException, ApplicationException, IndexOutOfRangeException, NullReferenceException, OutOfMemoryException and ExecutionEngineException prevents calling methods from handling true, system-generated exceptions differently than application-generated errors. </value>
   </data>
   <data name="S112_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S112_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -583,7 +583,7 @@
     <value>Assignments within sub-expressions are hard to spot and therefore make the code less readable. Ideally, sub-expressions should not have side-effects.</value>
   </data>
   <data name="S1121_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S1121_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -610,7 +610,7 @@
     <value>The Obsolete attribute can be applied with or without arguments, but marking something Obsolete without including advice as to why it's obsolete or on what to use instead will lead maintainers to waste time trying to figure those things out - every single time the warning is encountered.</value>
   </data>
   <data name="S1123_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S1123_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -637,7 +637,7 @@
     <value>Redundant Boolean literals should be removed from expressions to improve readability.</value>
   </data>
   <data name="S1125_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S1125_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -664,7 +664,7 @@
     <value>FIXME tags are commonly used to mark places where a bug is suspected, but which the developer wants to deal with later.</value>
   </data>
   <data name="S1134_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S1134_Severity" xml:space="preserve">
     <value>Major</value>
@@ -685,7 +685,7 @@
     <value>TODO tags are commonly used to mark places where some more code is required, but which the developer wants to implement later.</value>
   </data>
   <data name="S1135_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S1135_Severity" xml:space="preserve">
     <value>Info</value>
@@ -706,7 +706,7 @@
     <value>private or internal types or private members that are never executed or referenced are dead code: unnecessary, inoperative code that should be removed. Cleaning out dead code decreases the size of the maintained codebase, making it easier to understand the program and preventing bugs from being introduced.</value>
   </data>
   <data name="S1144_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S1144_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -760,7 +760,7 @@
     <value>Using .Count() to test for emptiness works, but using .Any() makes the intent clearer, and the code more readable. However, there are some cases where special attention should be paid:</value>
   </data>
   <data name="S1155_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S1155_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -787,7 +787,7 @@
     <value>Throwing an exception from within a finally block will mask any exception which was previously thrown in the try or catch block, and the masked's exception message and stack trace will be lost.</value>
   </data>
   <data name="S1163_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S1163_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -814,7 +814,7 @@
     <value>Unused parameters are misleading. Whatever the values passed to such parameters, the behavior will be the same.</value>
   </data>
   <data name="S1172_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S1172_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -841,7 +841,7 @@
     <value>Overriding a method just to call the same method from the base class without performing any other actions is useless and misleading. The only time this is justified is in sealed overriding methods, where the effect is to lock in the parent class behavior. This rule ignores overrides of Equals and GetHashCode.</value>
   </data>
   <data name="S1185_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S1185_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -868,7 +868,7 @@
     <value>There are several reasons for a method not to have a method body:</value>
   </data>
   <data name="S1186_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S1186_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -895,7 +895,7 @@
     <value>There is a contract between Equals(object) and GetHashCode(): If two objects are equal according to the Equals(object) method, then calling GetHashCode() on each of them must yield the same result. If this is not the case, many collections won't handle class instances correctly.</value>
   </data>
   <data name="S1206_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S1206_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -949,7 +949,7 @@
     <value>When you implement IComparable or IComparable&lt;T&gt; on a class you should also override Equals(object) and overload the comparison operators (==, !=, &lt;, &lt;=, &gt;, &gt;=). That's because the CLR cannot automatically call your CompareTo implementation from Equals(object) or from the base comparison operator implementations. Additionally, it is best practice to override GetHashCode along with Equals.</value>
   </data>
   <data name="S1210_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S1210_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -976,7 +976,7 @@
     <value>Calling GC.Collect is rarely necessary, and can significantly affect application performance. That's because it triggers a blocking operation that examines every object in memory for cleanup. Further, you don't have control over when this blocking cleanup will actually run.</value>
   </data>
   <data name="S1215_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S1215_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -1111,7 +1111,7 @@
     <value>Programmers should not comment out code as it bloats programs and reduces readability.</value>
   </data>
   <data name="S125_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S125_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -1354,7 +1354,7 @@
     <value>When the value of a private field is always assigned to in a class' methods before being read, then it is not being used to store class information. Therefore, it should become a local variable in the relevant methods to prevent any misunderstanding.</value>
   </data>
   <data name="S1450_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S1450_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -1408,7 +1408,7 @@
     <value>When switch statements have large sets of case clauses, it is usually an attempt to map two sets of data. A real map structure would be more readable and maintainable, and should be used instead.</value>
   </data>
   <data name="S1479_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S1479_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -1435,7 +1435,7 @@
     <value>If a local variable is declared but not used, it is dead code and should be removed. Doing so will improve maintainability because developers will not wonder what the variable is used for.</value>
   </data>
   <data name="S1481_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S1481_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -1489,7 +1489,7 @@
     <value>StringBuilder is more efficient than string concatenation, especially when the operator is repeated over and over as in loops.</value>
   </data>
   <data name="S1643_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S1643_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -1516,7 +1516,7 @@
     <value>There is no reason to re-assign a variable to itself. Either this statement is redundant and should be removed, or the re-assignment is a mistake and some other value or variable was intended for the assignment instead.</value>
   </data>
   <data name="S1656_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S1656_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -1651,7 +1651,7 @@
     <value>Calling an overridable method from a constructor could result in failures or strange behaviors when instantiating a subclass which overrides the method.</value>
   </data>
   <data name="S1699_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S1699_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -1678,7 +1678,7 @@
     <value>Having an unconditional break, return, (@)throw or goto in a loop renders it useless; the loop will only execute once and the loop structure itself is simply wasted keystrokes.</value>
   </data>
   <data name="S1751_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S1751_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -1705,7 +1705,7 @@
     <value>Using the same value on either side of a binary operator is almost always a mistake. In the case of logical operators, it is either a copy/paste error and therefore a bug, or it is simply wasted code, and should be simplified. In the case of bitwise operators and most binary mathematical operators, having the same value on both sides of an operator yields predictable results, and should be simplified.</value>
   </data>
   <data name="S1764_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S1764_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -1732,7 +1732,7 @@
     <value>There is no good reason to create a new object to not do anything with it. Most of the time, this is due to a missing piece of code and so could lead to an unexpected behavior in production.</value>
   </data>
   <data name="S1848_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S1848_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -1759,7 +1759,7 @@
     <value>A dead store happens when a local variable is assigned a value that is not read by any subsequent instruction. Calculating or retrieving a value only to then overwrite it or throw it away, could indicate a serious error in the code. Even if it's not an error, it is at best a waste of resources. Therefore all calculated values should be used.</value>
   </data>
   <data name="S1854_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S1854_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -1813,7 +1813,7 @@
     <value>A chain of if/else if statements is evaluated from top to bottom. At most, only one branch will be executed: the first one with a condition that evaluates to true. </value>
   </data>
   <data name="S1862_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S1862_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -1840,7 +1840,7 @@
     <value>Having two cases in the same switch statement or branches in the same if structure with the same implementation is at best duplicate code, and at worst a coding error. If the same logic is truly needed for both instances, then in an if structure they should be combined, or for a switch, one should fall through to the other.</value>
   </data>
   <data name="S1871_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S1871_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -1867,7 +1867,7 @@
     <value>Unnecessary casting expressions make the code harder to read and understand.</value>
   </data>
   <data name="S1905_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S1905_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -1894,7 +1894,7 @@
     <value>An inheritance list entry is redundant if:</value>
   </data>
   <data name="S1939_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S1939_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -1921,7 +1921,7 @@
     <value>It is needlessly complex to invert the result of a boolean comparison. The opposite comparison should be made instead.</value>
   </data>
   <data name="S1940_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S1940_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -1948,7 +1948,7 @@
     <value>Inappropriate casts are issues that will lead to unexpected behavior or runtime errors, such as InvalidCastExceptions. The compiler will catch bad casts from one class to another, but not bad casts to interfaces. Nor will it catch nullable values that are known to be null but that are cast to their underlying value types anyway.</value>
   </data>
   <data name="S1944_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S1944_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -2002,7 +2002,7 @@
     <value>Because it is easy to extract strings from a compiled application, credentials should never be hard-coded. Do so, and they're almost guaranteed to end up in the hands of an attacker. This is particularly true for applications that are distributed.</value>
   </data>
   <data name="S2068_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S2068_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -2056,7 +2056,7 @@
     <value>A value that is incremented or decremented and then not stored is at best wasted code and at worst a bug.</value>
   </data>
   <data name="S2123_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S2123_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -2110,7 +2110,7 @@
     <value>The use of non-short-circuit logic in a boolean context is likely a mistake - one that could cause serious program errors as conditions are evaluated under the wrong circumstances.</value>
   </data>
   <data name="S2178_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S2178_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -2137,7 +2137,7 @@
     <value>When division is performed on ints, the result will always be an int. You can assign that result to a double, float or decimal with automatic type conversion, but having started as an int, the result will likely not be what you expect. If the result of int division is assigned to a floating-point variable, precision will have been lost before the assignment. Instead, at least one operand should be cast or promoted to the final type before the operation takes place.</value>
   </data>
   <data name="S2184_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S2184_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -2164,7 +2164,7 @@
     <value>Recursion happens when control enters a loop that has no exit. This can happen a method invokes itself, when a pair of methods invoke each other, or when gotos are used to move between two segments of code. It can be a useful tool, but unless the method includes a provision to break out of the recursion and return, the recursion will continue until the stack overflows and the program crashes.</value>
   </data>
   <data name="S2190_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S2190_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -2218,7 +2218,7 @@
     <value>When the call to a function doesn't have any side effects, what is the point of making the call if the results are ignored? In such case, either the function call is useless and should be dropped or the source code doesn't behave as expected.</value>
   </data>
   <data name="S2201_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S2201_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -2245,7 +2245,7 @@
     <value>To check the type of an object there are several options:</value>
   </data>
   <data name="S2219_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S2219_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -2299,7 +2299,7 @@
     <value>A static field that is neither constant nor read-only is not thread-safe. Correctly accessing these fields from different threads needs synchronization with locks. Improper synchronization may lead to unexpected results, thus publicly visible static fields are best suited for storing non-changing data shared by many consumers. To enforce this intent, these fields should be marked readonly or converted to constants.</value>
   </data>
   <data name="S2223_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S2223_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -2326,7 +2326,7 @@
     <value>Calling ToString() on an object should always return a string. Returning null instead contravenes the method's implicit contract.</value>
   </data>
   <data name="S2225_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S2225_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -2380,7 +2380,7 @@
     <value>When the names of parameters in a method call match the names of the method arguments, it contributes to clearer, more readable code. However, when the names match, but are passed in a different order than the method arguments, it indicates a mistake in the parameter order which will likely lead to unexpected results.</value>
   </data>
   <data name="S2234_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S2234_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -2407,7 +2407,7 @@
     <value>A reference to null should never be dereferenced/accessed. Doing so will cause a NullReferenceException to be thrown. At best, such an exception will cause abrupt program termination. At worst, it could expose debugging information that would be useful to an attacker, or it could allow an attacker to bypass security measures.</value>
   </data>
   <data name="S2259_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S2259_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -2434,7 +2434,7 @@
     <value>Because composite format strings are interpreted at runtime, rather than validated by the compiler, they can contain errors that lead to unexpected behaviors or runtime errors. This rule statically validates the good behavior of composite formats when calling the methods of String.Format, StringBuilder.AppendFormat, Console.Write, Console.WriteLine, TextWriter.Write, TextWriter.WriteLine, Debug.WriteLine(String, Object[]), Trace.TraceError(String, Object[]), Trace.TraceInformation(String, Object[]), Trace.TraceWarning(String, Object[]) and TraceSource.TraceInformation(String, Object[]). </value>
   </data>
   <data name="S2275_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S2275_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -2461,7 +2461,7 @@
     <value>According to the US National Institute of Standards and Technology (NIST), the Data Encryption Standard (DES) is no longer considered secure:</value>
   </data>
   <data name="S2278_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S2278_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -2488,7 +2488,7 @@
     <value>Field-like events are events that do not have explicit add and remove methods. The compiler generates a private delegate field to back the event, as well as generating the implicit add and remove methods.</value>
   </data>
   <data name="S2290_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S2290_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -2515,7 +2515,7 @@
     <value>Enumerable.Sum() always executes addition in a checked context, so an OverflowException will be thrown if the value exceeds MaxValue even if an unchecked context was specified. Using an unchecked context anyway represents a misunderstanding of how Sum works.</value>
   </data>
   <data name="S2291_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S2291_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -2542,7 +2542,7 @@
     <value>Trivial properties, which include no logic but setting and getting a backing field should be converted to auto-implemented properties, yielding cleaner and more readable code.</value>
   </data>
   <data name="S2292_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S2292_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -2569,7 +2569,7 @@
     <value>Since C# 5.0, async and await are contextual keywords. Contextual keywords do have a particular meaning in some contexts, but can still be used as variable names. Keywords, on the other hand, are always reserved, and therefore are not valid variable names. To avoid any confusion though, it is best to not use async and await as identifiers.</value>
   </data>
   <data name="S2306_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S2306_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -2623,7 +2623,7 @@
     <value>Type parameters that aren't used are dead code, which can only distract and possibly confuse developers during maintenance. Therefore, unused type parameters should be removed.</value>
   </data>
   <data name="S2326_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S2326_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -2650,7 +2650,7 @@
     <value>GetHashCode is used to file an object in a Dictionary or Hashtable. If GetHashCode uses non-readonly fields and those fields change after the object is stored, the object immediately becomes mis-filed in the Hashtable. Any subsequent test to see if the object is in the Hashtable will return a false negative.</value>
   </data>
   <data name="S2328_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S2328_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -2758,7 +2758,7 @@
     <value>Shared naming conventions allow teams to collaborate efficiently. This rule checks that all enum names match a provided regular expression.</value>
   </data>
   <data name="S2342_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S2342_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -2785,7 +2785,7 @@
     <value>The information that an enumeration type is actually an enumeration or a set of flags should not be duplicated in its name.</value>
   </data>
   <data name="S2344_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S2344_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -2812,7 +2812,7 @@
     <value>Flags enumerations should not rely on the language to initialize the values of their members. Implicit initialization will set the first member to 0, and increment the value by one for each subsequent member. This implicit behavior does not allow members to be combined using the bitwise or operator in a useful way.</value>
   </data>
   <data name="S2345_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S2345_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -2839,7 +2839,7 @@
     <value>Consistent use of "None" in flags enumerations indicates that all flag values are cleared. The value 0 should not be used to indicate any other state, since there is no way to check that the bit 0 is set.</value>
   </data>
   <data name="S2346_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S2346_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -2920,7 +2920,7 @@
     <value>Most developers expect property access to be as efficient as field access. However, if a property returns a copy of an array or collection, it will be much slower than a simple field access, contrary to the caller's likely expectations. Therefore, such properties should be refactored into methods so that callers are not surprised by unexpectedly poor performance.</value>
   </data>
   <data name="S2365_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S2365_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -2947,7 +2947,7 @@
     <value>Exposing methods with multidimensional array parameters requires developers to have advanced knowledge about the language in order to be able to use them. Moreover, what exactly to pass to such parameters is not intuitive. Therefore, such methods should not be exposed, but can be used internally.</value>
   </data>
   <data name="S2368_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S2368_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -2974,7 +2974,7 @@
     <value>Property getters should be simple operations that are always safe to call. If exceptions need to be thrown, it is best to convert the property to a method. </value>
   </data>
   <data name="S2372_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S2372_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -3001,7 +3001,7 @@
     <value>Properties with only setters are confusing and counterintuitive. Instead, a property getter should be added if possible, or the property should be replaced with a setter method.</value>
   </data>
   <data name="S2376_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S2376_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -3082,7 +3082,7 @@
     <value>A method or class with too many type parameters has likely aggregated too many responsibilities and should be split.</value>
   </data>
   <data name="S2436_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S2436_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -3109,7 +3109,7 @@
     <value>Certain bit operations are just silly and should not be performed because their results are predictable.</value>
   </data>
   <data name="S2437_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S2437_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -3136,7 +3136,7 @@
     <value>When exceptions occur, it is usually a bad idea to simply ignore them. Instead, it is better to handle them properly, or at least to log them.</value>
   </data>
   <data name="S2486_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S2486_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -3190,7 +3190,7 @@
     <value>Conditional expressions which are always true or false can lead to dead code. Such code is always buggy and should never be used in production.</value>
   </data>
   <data name="S2583_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S2583_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -3217,7 +3217,7 @@
     <value>If a boolean expression doesn't change the evaluation of the condition, then it is entirely unnecessary, and can be removed. If it is gratuitous because it does not match the programmer's intent, then it's a bug and the expression should be fixed.</value>
   </data>
   <data name="S2589_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S2589_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -3271,7 +3271,7 @@
     <value>Curly braces can be omitted from a one-line block, such as with an if statement or for loop, but doing so can be misleading and induce bugs. </value>
   </data>
   <data name="S2681_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S2681_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -3298,7 +3298,7 @@
     <value>NaN is not equal to anything, even itself. Testing for equality or inequality against NaN will yield predictable results, but probably not the ones you want. </value>
   </data>
   <data name="S2688_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S2688_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -3325,7 +3325,7 @@
     <value>Most checks against an IndexOf value compare it with -1 because 0 is a valid index. Any checks which look for values &gt;0 ignore the first element, which is likely a bug. If the intent is merely to check inclusion of a value in a string, List, or an array, consider using the Contains method instead.</value>
   </data>
   <data name="S2692_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S2692_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -3352,7 +3352,7 @@
     <value>Correctly updating a static field from a non-static method is tricky to get right and could easily lead to bugs if there are multiple class instances and/or multiple threads in play. </value>
   </data>
   <data name="S2696_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S2696_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -3379,7 +3379,7 @@
     <value>A catch clause that only rethrows the caught exception has the same effect as omitting the catch altogether and letting it bubble up automatically, but with more code and the additional detrement of leaving maintainers scratching their heads. </value>
   </data>
   <data name="S2737_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S2737_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -3406,7 +3406,7 @@
     <value>A static field in a generic type is not shared among instances of different closed constructed types, thus LengthLimitedSingletonCollection&lt;int&gt;.instances and LengthLimitedSingletonCollection&lt;string&gt;.instances will point to different objects, even though instances is seemingly shared among all LengthLimitedSingletonCollection&lt;&gt; generic classes.</value>
   </data>
   <data name="S2743_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S2743_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -3433,7 +3433,7 @@
     <value>The use of operators pairs ( =+, =- or =! ) where the reversed, single operator was meant (+=, -= or !=) will compile and run, but not produce the expected results.</value>
   </data>
   <data name="S2757_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S2757_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -3460,7 +3460,7 @@
     <value>When the second and third operands of a ternary operator are the same, the operator will always return the same value regardless of the condition. Either the operator itself is pointless, or a mistake was made in coding it. </value>
   </data>
   <data name="S2758_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S2758_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -3514,7 +3514,7 @@
     <value>Calling the ! or ~ prefix operator twice does nothing: the second invocation undoes the first. Such mistakes are typically caused by accidentally double-tapping the key in question without noticing.</value>
   </data>
   <data name="S2761_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S2761_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -3541,7 +3541,7 @@
     <value>When writing managed code, you don't need to worry about allocating or freeing memory: The garbage collector takes care of it. For efficiency reasons, some objects such as Bitmap use unmanaged memory, enabling for example the use of pointer arithmetic. Such objects have potentially huge unmanaged memory footprints, but will have tiny managed ones. Unfortunately, the garbage collector only sees the tiny managed footprint, and fails to reclaim the unmanaged memory (by calling Bitmap's finalizer method) in a timely fashion. </value>
   </data>
   <data name="S2930_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S2930_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -3595,7 +3595,7 @@
     <value>readonly fields can only be assigned in a class constructor. If a class has a field that's not marked readonly but is only set in the constructor, it could cause confusion about the field's intended use. To avoid confusion, such fields should be marked readonly to make their intended use explicit, and to prevent future maintainers from inadvertently changing their use.</value>
   </data>
   <data name="S2933_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S2933_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -3622,7 +3622,7 @@
     <value>While the properties of a readonly reference type field can still be changed after initialization, those of a readonly value field, such as a struct, cannot. </value>
   </data>
   <data name="S2934_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S2934_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -3676,7 +3676,7 @@
     <value>Dispose as a method name should be used exclusively to implement IDisposable.Dispose to prevent any confusion.</value>
   </data>
   <data name="S2953_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S2953_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -3730,7 +3730,7 @@
     <value>In the interests of readability, code that can be simplified should be simplified. To that end, there are several ways IEnumerable LINQs can be simplified</value>
   </data>
   <data name="S2971_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S2971_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -3757,7 +3757,7 @@
     <value>Using Object.ReferenceEquals to compare the references of two value types simply won't return the expected results most of the time because such types are passed by value, not by reference.</value>
   </data>
   <data name="S2995_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S2995_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -3784,7 +3784,7 @@
     <value>When an object has a field annotated with ThreadStatic, that field is shared within a given thread, but unique across threads. Since a class' static initializer is only invoked for the first thread created, it also means that only the first thread will have the expected initial values.</value>
   </data>
   <data name="S2996_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S2996_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -3811,7 +3811,7 @@
     <value>Typically you want to use using to create a local IDisposable variable; it will trigger disposal of the object when control passes out of the block's scope. The exception to this rule is when your method returns that IDisposable. In that case using disposes of the object before the caller can make use of it, likely causing exceptions at runtime. So you should either remove using or avoid returning the IDisposable.</value>
   </data>
   <data name="S2997_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S2997_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -3838,7 +3838,7 @@
     <value>When a non-static class field is annotated with ThreadStatic, the code seems to show that the field can have different values for different calling threads, but that's not the case, since the ThreadStatic attribute is simply ignored on non-static fields. </value>
   </data>
   <data name="S3005_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S3005_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -3865,7 +3865,7 @@
     <value>Assigning a value to a static field in a constructor could cause unreliable behavior at runtime since it will change the value for all instances of the class.</value>
   </data>
   <data name="S3010_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S3010_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -3919,7 +3919,7 @@
     <value>An async method with a void return type is a "fire and forget" method best reserved for event handlers because there's no way to wait for the method's execution to complete and respond accordingly. There's also no way to catch exceptions thrown from the method.</value>
   </data>
   <data name="S3168_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S3168_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -3946,7 +3946,7 @@
     <value>There's no point in chaining multiple OrderBy calls in a LINQ; only the last one will be reflected in the result because each subsequent call completely reorders the list. Thus, calling OrderBy multiple times is a performance issue as well, because all of the sorting will be executed, but only the result of the last sort will be kept.</value>
   </data>
   <data name="S3169_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S3169_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -3973,7 +3973,7 @@
     <value>In C#, delegates can be added together to chain their execution, and subtracted to remove their execution from the chain.</value>
   </data>
   <data name="S3172_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S3172_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -4054,7 +4054,7 @@
     <value>The foreach statement was introduced in the C# language prior to generics to make it easier to work with the non-generic collections available at that time such as ArrayList. The foreach statements allows you to downcast elements of a collection of Objects to any other type. The problem is that to achieve the cast, the foreach statements silently performs explicit type conversion, which at runtime can result in an InvalidCastException.</value>
   </data>
   <data name="S3217_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S3217_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -4081,7 +4081,7 @@
     <value>It's possible to name the members of an inner class the same as the static members of its enclosing class - possible, but a bad idea. That's because maintainers may be confused about which members are being used where. Instead the inner class' members should be renamed and all the references updated.</value>
   </data>
   <data name="S3218_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S3218_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -4108,7 +4108,7 @@
     <value>The rules for method resolution are complex and perhaps not properly understood by all coders. The params keyword can make method declarations overlap in non-obvious ways, so that slight changes in the argument types of an invocation can resolve to different methods.</value>
   </data>
   <data name="S3220_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S3220_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -4189,7 +4189,7 @@
     <value>Caller information attributes: CallerFilePathAttribute and CallerLineNumberAttribute provide a way to get information about the caller of a method through optional parameters. But the arguments for these optional parameters are only generated if they are not explicitly defined in the call. Thus, specifying the argument values defeats the purpose of the attributes.</value>
   </data>
   <data name="S3236_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S3236_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -4216,7 +4216,7 @@
     <value>In property and indexer set methods, and in event add and remove methods, the implicit value parameter holds the value the accessor was called with. Not using the value means that the accessor ignores the caller's intent which could cause unexpected results at runtime.</value>
   </data>
   <data name="S3237_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S3237_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -4270,7 +4270,7 @@
     <value>Private methods are clearly intended for use only within their own scope. When such methods return values that are never used by any of their callers, then clearly there is no need to actually make the return, and it should be removed in the interests of efficiency and clarity. </value>
   </data>
   <data name="S3241_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S3241_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -4297,7 +4297,7 @@
     <value>It is possible to subscribe to events with anonymous delegates, but having done so, it is impossible to unsubscribe from them. That's because the process of subscribing adds the delegate to a list. The process of unsubscribing essentially says: remove this item from the subscription list. But because an anonymous delegate was used in both cases, the unsubscribe attempt tries to remove a different item from the list than was added. The result: NOOP.</value>
   </data>
   <data name="S3244_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S3244_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -4324,7 +4324,7 @@
     <value>In the interests of making code as usable as possible, interfaces and delegates with generic parameters should use the out and in modifiers when possible to make the interfaces and delegates covariant and contravariant, respectively.</value>
   </data>
   <data name="S3246_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S3246_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -4351,7 +4351,7 @@
     <value>Because the is operator performs a cast if the object is not null, using is to check type and then casting the same argument to that type, necessarily performs two casts. The same result can be achieved more efficiently with a single cast using as, followed by a null-check.</value>
   </data>
   <data name="S3247_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S3247_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -4378,7 +4378,7 @@
     <value>Making a base call in an overriding method is generally a good idea, but not in GetHashCode and Equals for classes that directly extend object because those methods are based on the object reference. Meaning that no two objects that use those base methods will ever be equal or have the same hash.</value>
   </data>
   <data name="S3249_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S3249_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -4405,7 +4405,7 @@
     <value>partial methods allow an increased degree of flexibility in programming a system. Hooks can be added to generated code by invoking methods that define their signature, but might not have an implementation yet. But if the implementation is still missing when the code makes it to production, the compiler silently removes the call. In the best case scenario, such calls simply represent cruft, but in they worst case they are critical, missing functionality, the loss of which will lead to unexpected results at runtime.</value>
   </data>
   <data name="S3251_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S3251_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -4486,7 +4486,7 @@
     <value>Using string.Equals to determine if a string is empty is significantly slower than using string.IsNullOrEmpty() or checking for string.Length == 0. string.IsNullOrEmpty() is both clear and concise, and therefore preferred to laborious, error-prone, manual null- and emptiness-checking.</value>
   </data>
   <data name="S3256_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S3256_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -4540,7 +4540,7 @@
     <value>Namespaces with no lines of code clutter a project and should be removed. </value>
   </data>
   <data name="S3261_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S3261_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -4567,7 +4567,7 @@
     <value>Overriding methods automatically inherit the params behavior. To ease readability, this modifier should be explicitly used in the overriding method as well.</value>
   </data>
   <data name="S3262_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S3262_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -4594,7 +4594,7 @@
     <value>Static field initializers are executed in the order in which they appear in the class from top to bottom. Thus, placing a static field in a class above the field or fields required for its initialization will yield unexpected results.</value>
   </data>
   <data name="S3263_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S3263_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -4621,7 +4621,7 @@
     <value>Events that are not invoked anywhere are dead code, and there's no good reason to keep them in the source.</value>
   </data>
   <data name="S3264_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S3264_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -4648,7 +4648,7 @@
     <value>enums are usually used to identify distinct elements in a set of values. However enums can be treated as bit fields and bitwise operations can be used on them to combine the values. This is a good way of specifying multiple elements of set with a single value. When enums are used this way, it is a best practice to mark the enum with the FlagsAttribute.</value>
   </data>
   <data name="S3265_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S3265_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -4675,7 +4675,7 @@
     <value>An assertion is a piece of code that's used during development when the compilation debug mode is activated. It allows a program to check itself as it runs. When an assertion is true, that means everything is operating as expected. </value>
   </data>
   <data name="S3346_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S3346_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -4702,7 +4702,7 @@
     <value>Adherence to the standard naming conventions makes your code not only more readable, but more usable. For instance, class FirstAttribute : Attribute can be used simply with First, but you must use the full name for class AttributeOne : Attribute.</value>
   </data>
   <data name="S3376_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S3376_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -4729,7 +4729,7 @@
     <value>object.Equals() overrides can be optimized by checking first for reference equality between this and the parameter. This check can be implemented by calling object.ReferenceEquals() or base.Equals(), where base is object. However, using base.Equals() is a maintenance hazard because while it works if you extend Object directly, if you introduce a new base class that overrides Equals, it suddenly stops working.</value>
   </data>
   <data name="S3397_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S3397_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -4756,7 +4756,7 @@
     <value>The rules for method resolution are complex and perhaps not properly understood by all coders. Having overloads with optional parameter values makes the matter even harder to understand. </value>
   </data>
   <data name="S3427_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S3427_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -4783,7 +4783,7 @@
     <value>There's no point in checking a variable against the value you're about to assign it. Save the cycles and lines of code, and simply perform the assignment.</value>
   </data>
   <data name="S3440_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S3440_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -4837,7 +4837,7 @@
     <value>Since abstract classes can't be instantiated, there's no point in their having public or internal constructors. If there is basic initialization logic that should run when an extending class instance is created, you can by all means put it in a constructor, but make that constructor private or protected.</value>
   </data>
   <data name="S3442_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S3442_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -4864,7 +4864,7 @@
     <value>If you call GetType() on a Type variable, the return value will always be typeof(System.Type). So there's no real point in making that call. The same applies to passing a type argument to IsInstanceOfType. In both cases the results are entirely predictable.</value>
   </data>
   <data name="S3443_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S3443_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -4891,7 +4891,7 @@
     <value>When an interface inherits from two interfaces that both define a member with the same name, trying to access that member through the derived interface will result in the compiler error CS0229 Ambiguity between 'IBase1.SomeProperty' and 'IBase2.SomeProperty'.</value>
   </data>
   <data name="S3444_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S3444_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -4918,7 +4918,7 @@
     <value>When rethrowing an exception, you should do it by simply calling throw; and not throw exc;, because the stack trace is reset with the second syntax, making debugging a lot harder.</value>
   </data>
   <data name="S3445_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S3445_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -4945,7 +4945,7 @@
     <value>The use of ref or out in combination with [Optional] is both confusing and contradictory. [Optional] indicates that the parameter doesn't have to be provided, while out and ref mean that the parameter will be used to return data to the caller (ref additionally indicates that the parameter may also be used to pass data into the method).</value>
   </data>
   <data name="S3447_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S3447_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -4972,7 +4972,7 @@
     <value>Numbers can be shifted with the &lt;&lt; and &gt;&gt; operators, but the right operand of the operation needs to be an int or a type that has an implicit conversion to int. However, with dynamic, the compiler's type checking is turned off, so you can pass anything to a shift operator and have it compile. And if the argument can't be converted to int at runtime, then a RuntimeBinderException will be raised.</value>
   </data>
   <data name="S3449_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S3449_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -4999,7 +4999,7 @@
     <value>There is no point in providing a default value for a parameter if callers are required to provide a value for it anyway. Thus, [DefaultParameterValue] should always be used in conjunction with [Optional].</value>
   </data>
   <data name="S3450_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S3450_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -5026,7 +5026,7 @@
     <value>The use of [DefaultValue] with [Optional] has no more effect than [Optional] alone. That's because [DefaultValue] doesn't actually do anything; it merely indicates the intent for the value. More than likely, [DefaultValue] was used in confusion instead of [DefaultParameterValue].</value>
   </data>
   <data name="S3451_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S3451_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -5053,7 +5053,7 @@
     <value>A class with only private constructors can't be instantiated, thus, it seems to be pointless code.</value>
   </data>
   <data name="S3453_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S3453_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -5080,7 +5080,7 @@
     <value>ToCharArray can be omitted when the operation on the array could have been done directly on the string, such as when iterating over the characters in a string, and when accessing a character in a string via an array index. In those cases, explicit ToCharArray calls should be omitted.</value>
   </data>
   <data name="S3456_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S3456_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -5107,7 +5107,7 @@
     <value>Because composite format strings are interpreted at runtime, rather than validated by the compiler, they can contain errors that lead to unexpected behaviors or runtime errors. This rule statically validates the good behavior of composite formats when calling the methods of String.Format, StringBuilder.AppendFormat, Console.Write, Console.WriteLine, TextWriter.Write, TextWriter.WriteLine, Debug.WriteLine(String, Object[]), Trace.TraceError(String, Object[]), Trace.TraceInformation(String, Object[]), Trace.TraceWarning(String, Object[]) and TraceSource.TraceInformation(String, Object[]). </value>
   </data>
   <data name="S3457_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S3457_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -5134,7 +5134,7 @@
     <value>Empty case clauses that fall through to the default are useless. Whether or not such a case is present, the default clause will be invoked. Such cases simply clutter the code, and should be removed.</value>
   </data>
   <data name="S3458_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S3458_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -5161,7 +5161,7 @@
     <value>Fields and auto-properties that are never assigned to hold the default values for their types. They are either pointless code or, more likely, mistakes. </value>
   </data>
   <data name="S3459_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S3459_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -5188,7 +5188,7 @@
     <value>Generally, writing the least code that will readably do the job is a good thing, so omitting default parameter values seems to make sense. Unfortunately, when you omit them from the base call in an override, you're not actually getting the job done thoroughly, because you're ignoring the value the caller passed in. The result will likely not be what the caller expected.</value>
   </data>
   <data name="S3466_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S3466_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -5242,7 +5242,7 @@
     <value>The ServiceContract attribute specifies that a class or interface defines the communication contract of a Windows Communication Foundation (WCF) service. The service operations of this class or interface are defined by OperationContract attributes added to methods. It doesn't make sense to define a contract without any service operations; thus, in a ServiceContract class or interface at least one method should be annotated with OperationContract. Similarly, WCF only serves OperationContract methods that are defined inside ServiceContract classes or interfaces; thus, this rule also checks that ServiceContract is added to the containing type of OperationContract methods.</value>
   </data>
   <data name="S3597_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S3597_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -5269,7 +5269,7 @@
     <value>When declaring a Windows Communication Foundation (WCF) OperationContract method one-way, that service method won't return any result, not even an underlying empty confirmation message. These are fire-and-forget methods that are useful in event-like communication. Specifying a return type therefore does not make sense.</value>
   </data>
   <data name="S3598_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S3598_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -5296,7 +5296,7 @@
     <value>Adding params to a method override has no effect. The compiler accepts it, but the callers won't be able to benefit from the added modifier.</value>
   </data>
   <data name="S3600_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S3600_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -5323,7 +5323,7 @@
     <value>Marking a method with the [Pure] attribute specifies that the method doesn't make any visible changes; thus, the method should return a result, otherwise the call to the method should be equal to no-operation. So [Pure] on a void method is either a mistake, or the method doesn't do any meaningful task.</value>
   </data>
   <data name="S3603_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S3603_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -5350,7 +5350,7 @@
     <value>Fields, properties and events can be initialized either inline or in the constructor. Initializing them inline and in the constructor at the same time is redundant; the inline initialization will be overridden.</value>
   </data>
   <data name="S3604_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S3604_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -5377,7 +5377,7 @@
     <value>Calling GetType() on a nullable object returns the underlying value type. Thus, comparing the returned Type object to typeof(Nullable&lt;SomeType&gt;) doesn't make sense. The comparison either throws an exception or the result can be known at compile time.</value>
   </data>
   <data name="S3610_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S3610_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -5404,7 +5404,7 @@
     <value>Jump statements, such as return, yield break, goto, and continue let you change the default flow of program execution, but jump statements that direct the control flow to the original direction are just a waste of keystrokes.</value>
   </data>
   <data name="S3626_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S3626_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -5431,7 +5431,7 @@
     <value>Nullable value types can hold either a value or null. The value held in the nullable type can be accessed with the Value property, but .Value throws an InvalidOperationException when the value is null. To avoid the exception, a nullable type should always be tested before .Value is accessed.</value>
   </data>
   <data name="S3655_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S3655_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -5458,7 +5458,7 @@
     <value>Cognitive Complexity is a measure of how hard the control flow of a method is to understand. Methods with high Cognitive Complexity will be difficult to maintain.</value>
   </data>
   <data name="S3776_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S3776_Remediation" xml:space="preserve">
     <value />
@@ -5485,7 +5485,7 @@
     <value>Not surprisingly, the SafeHandle.DangerousGetHandle method is dangerous. That's because it may not return a valid handle. Using it can lead to leaks and vulnerabilities. While it is possible to use the method successfully, it's extremely difficult to do correctly, so the method should simply be avoided altogether.</value>
   </data>
   <data name="S3869_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S3869_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -5512,7 +5512,7 @@
     <value>The point of having custom exception types is to convey more information than is available in standard types. But custom exception types must be public for that to work. </value>
   </data>
   <data name="S3871_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S3871_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -5593,7 +5593,7 @@
     <value>The use of == to compare to objects is expected to do a reference comparison. That is, it is expected to return true if and only if they are the same object instance. Overloading the operator to do anything else will inevitably lead to the introduction of bugs by callers. On the other hand, overloading it to do exactly that is pointless; that's what == does by default.</value>
   </data>
   <data name="S3875_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S3875_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -5647,7 +5647,7 @@
     <value>It is expected that some methods should be called with caution, but others, such as ToString, are expected to "just work". Throwing an exception from such a method is likely to break callers' code unexpectedly.</value>
   </data>
   <data name="S3877_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S3877_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -5701,7 +5701,7 @@
     <value>The IDisposable interface is a mechanism to release unmanaged resources, if not implemented correctly this could result in resource leaks or more severe bugs.</value>
   </data>
   <data name="S3881_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S3881_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -5728,7 +5728,7 @@
     <value>CoSetProxyBlanket and CoInitializeSecurity both work to set the permissions context in which the process invoked immediately after is executed. Calling them from within that process is useless because it's to late at that point; the permissions context has already been set.</value>
   </data>
   <data name="S3884_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S3884_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -5755,7 +5755,7 @@
     <value>The parameter to Assembly.Load includes the full specification of the dll to be loaded. Use another method, and you might end up with a dll other than the one you expected. </value>
   </data>
   <data name="S3885_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S3885_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -5782,7 +5782,7 @@
     <value>Using the readonly keyword on a field means that it can't be changed after initialization. However, when applied to collections or arrays, that's only partly true. readonly enforces that another instance can't be assigned to the field, but it cannot keep the contents from being updated. That means that in practice, the field value really can be changed, and the use of readonly on such a field is misleading, and you're likely to not be getting the behavior you expect.</value>
   </data>
   <data name="S3887_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S3887_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -5809,7 +5809,7 @@
     <value>Thread.Suspend and Thread.Resume can give unpredictable results, and both methods have been deprecated. Indeed, if Thread.Suspend is not used very carefully, a thread can be suspended while holding a lock, thus leading to a deadlock. Other safer synchronization mechanisms should be used, such as Monitor, Mutex, and Semaphore.</value>
   </data>
   <data name="S3889_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S3889_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -5836,7 +5836,7 @@
     <value>The IEquatable&lt;T&gt; interface has only one method in it: Equals(&lt;T&gt;). If you've already written Equals(T), there's no reason not to explicitly implement IEquatable&lt;T&gt;. Doing so expands the utility of your class by allowing it to be used where an IEquatable is called for.</value>
   </data>
   <data name="S3897_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S3897_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -5917,7 +5917,7 @@
     <value>Types are declared in namespaces in order to prevent name collisions and as a way to organize them into the object hierarchy. Types that are defined outside any named namespace are in a global namespace that cannot be referenced in code.</value>
   </data>
   <data name="S3903_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S3903_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -5944,7 +5944,7 @@
     <value>If no AssemblyVersionAttribute is provided, the same default version will be used for every build. Since the version number is used by The .NET Framework to uniquely identify an assembly this can lead to broken dependencies.</value>
   </data>
   <data name="S3904_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S3904_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -6052,7 +6052,7 @@
     <value>The ISerializable interface is the mechanism to control the type serialization process. If not implemented correctly this could result in an invalid serialization and hard to detect bugs.</value>
   </data>
   <data name="S3925_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S3925_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -6079,7 +6079,7 @@
     <value>Fields marked with System.Runtime.Serialization.OptionalFieldAttribute are serialized just like any other field. But such fields are ignored on deserialization, and retain the default values associated with their types. Therefore, deserialization event handlers should be declared to set such fields during the deserialization process.</value>
   </data>
   <data name="S3926_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S3926_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -6106,7 +6106,7 @@
     <value>Serialization event handlers that don't have the correct signature will simply not be called, thus bypassing any attempts to augment the automated de/serialization.</value>
   </data>
   <data name="S3927_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S3927_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -6133,7 +6133,7 @@
     <value>Some constructors of the ArgumentException, ArgumentNullException, ArgumentOutOfRangeException and DuplicateWaitObjectException classes must be fed with a valid parameter name. This rule raises an issue in two cases:</value>
   </data>
   <data name="S3928_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S3928_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -6241,7 +6241,7 @@
     <value>GC.SuppressFinalize requests that the system not call the finalizer for the specified object. This should only be done when implementing Dispose as part of the Dispose Pattern.</value>
   </data>
   <data name="S3971_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S3971_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -6268,7 +6268,7 @@
     <value>Code is clearest when each statement has its own line. Nonetheless, it is not uncommon to combine on the same line an if and it's resulting then statement. However, when an if is appended to the line with a previous if's closing } it is either an error - else is missing - or the prelude to a future error as maintainers fail to understand that the two statements are unconnected.</value>
   </data>
   <data name="S3972_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S3972_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -6295,7 +6295,7 @@
     <value>The size of a collection and the length of an array are always greater than or equal to zero. So testing that a size or length is greater than or equal to zero doesn't make sense, since the result is always true. Similarly testing that it is less than zero will always return false. Perhaps the intent was to check the non-emptiness of the collection or array instead. </value>
   </data>
   <data name="S3981_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S3981_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -6322,7 +6322,7 @@
     <value>Creating a new Exception without actually throwing it is useless and is probably due to a mistake.</value>
   </data>
   <data name="S3984_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S3984_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -6538,7 +6538,7 @@
     <value>A thread acquiring a lock on an object that can be accessed across application domain boundaries runs the risk of being blocked by another thread in a different application domain. Objects that can be accessed across application domain boundaries are said to have weak identity. Types with weak identity are:</value>
   </data>
   <data name="S3998_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S3998_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -6667,7 +6667,7 @@
     <value>Changing an inherited member to private will not prevent access to the base class implementation.</value>
   </data>
   <data name="S4015_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S4015_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -6694,7 +6694,7 @@
     <value>If an enum member's name contains the word "reserved" it implies it is not currently used and will be change in the future. However changing an enum member is a breaking change and can create significant problems. There is no need to reserve an enum member since a new member can be added in the future, and such an addition will usually not be a breaking change.</value>
   </data>
   <data name="S4016_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S4016_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -6775,7 +6775,7 @@
     <value>When a method in a derived class has the same name as a method in the base class but with a signature that only differs by types that are weakly derived (e.g. object vs string), the result is that the base method becomes hidden.</value>
   </data>
   <data name="S4019_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S4019_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -6937,7 +6937,7 @@
     <value>When a class implements the IEquatable&lt;T&gt; interface, it enters a contract that, in effect, states "I know how to compare two instances of type T or any type derived from T for equality.". However if that class is derived, it is very unlikely that the base class will know how to make a meaningful comparison. Therefore that implicit contract is now broken.</value>
   </data>
   <data name="S4035_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S4035_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -7038,33 +7038,6 @@
   <data name="S4041_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
   </data>
-  <data name="S4061_Category" xml:space="preserve">
-    <value>Sonar Code Smell</value>
-  </data>
-  <data name="S4061_Description" xml:space="preserve">
-    <value>A method using the VarArgs calling convention is not Common Language Specification (CLS) compliant and might not be accessible across programming languages, while the params keyword works the same way and is CLS compliant.</value>
-  </data>
-  <data name="S4061_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
-  </data>
-  <data name="S4061_Remediation" xml:space="preserve">
-    <value>Constant/Issue</value>
-  </data>
-  <data name="S4061_RemediationCost" xml:space="preserve">
-    <value>5min</value>
-  </data>
-  <data name="S4061_Severity" xml:space="preserve">
-    <value>Minor</value>
-  </data>
-  <data name="S4061_Tags" xml:space="preserve">
-    <value />
-  </data>
-  <data name="S4061_Title" xml:space="preserve">
-    <value>"params" should be use instead of "varargs"</value>
-  </data>
-  <data name="S4061_Type" xml:space="preserve">
-    <value>CODE_SMELL</value>
-  </data>
   <data name="S818_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
@@ -7072,7 +7045,7 @@
     <value>Using upper case literal suffixes removes the potential ambiguity between "1" (digit 1) and "l" (letter el) for declaring literals.</value>
   </data>
   <data name="S818_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S818_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -7099,7 +7072,7 @@
     <value>goto is an unstructured control flow statement. It makes code less readable and maintainable. Structured control flow statements such as if, for, while, continue or break should be used instead.</value>
   </data>
   <data name="S907_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S907_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -7126,7 +7099,7 @@
     <value>When the parameters to the implementation of a partial method don't match those in the signature declaration, then confusion is almost guaranteed. Either the implementer was confused when he renamed, swapped or mangled the parameter names in the implementation, or callers will be confused.</value>
   </data>
   <data name="S927_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S927_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>

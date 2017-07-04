@@ -120,7 +120,7 @@ namespace SonarAnalyzer.Rules
             var equalsLiteral = equalsValue as LiteralExpressionSyntax;
 
             return (methodSymbol != null && methodSymbol.ReturnType.DerivesOrImplementsAny(AllowedTypes)) ||
-                (equalsLiteral != null && equalsValue.IsKind(SyntaxKind.NullLiteralExpression));
+                   (equalsLiteral != null && equalsValue.IsKind(SyntaxKind.NullLiteralExpression));
         }
     }
 }
