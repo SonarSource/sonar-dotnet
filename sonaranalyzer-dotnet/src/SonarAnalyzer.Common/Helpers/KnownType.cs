@@ -198,6 +198,9 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType System_Collections_ObjectModel_ReadOnlyCollection_T = new KnownType("System.Collections.ObjectModel.ReadOnlyCollection<T>");
         public static readonly KnownType System_Collections_ObjectModel_ReadOnlyDictionary_TKey_TValue = new KnownType("System.Collections.ObjectModel.ReadOnlyDictionary<TKey, TValue>");
 
+        public static readonly KnownType System_Data_DataTable = new KnownType("System.Data.DataTable");
+        public static readonly KnownType System_Data_DataSet = new KnownType("System.Data.DataSet");
+
         public static readonly KnownType System_Diagnostics_Contracts_PureAttribute = new KnownType("System.Diagnostics.Contracts.PureAttribute");
 
         public static readonly KnownType System_Runtime_InteropServices_ComImportAttribute = new KnownType("System.Runtime.InteropServices.ComImportAttribute");

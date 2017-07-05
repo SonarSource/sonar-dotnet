@@ -1,0 +1,13 @@
+{
+  "title": "Locales should be set for data types",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    "localisation"
+  ],
+  "defaultSeverity": "Major"
+}
