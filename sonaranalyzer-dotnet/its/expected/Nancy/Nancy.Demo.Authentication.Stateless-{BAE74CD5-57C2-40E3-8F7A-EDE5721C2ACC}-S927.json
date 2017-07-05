@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S927",
+"message":  "Rename parameter 'requestContainer' to 'container'.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Demo.Authentication.Stateless\StatelessAuthBootstrapper.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  65,
+"endLine":  9,
+"endColumn":  81
+}
+}
+}
+]
+}

@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S927",
+"message":  "Rename parameter 'container' to 'existingContainer'.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"region":  {
+"startLine":  370,
+"startColumn":  80,
+"endLine":  370,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'collectionTypeRegistrations' to 'collectionTypeRegistrationsn'.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"region":  {
+"startLine":  523,
+"startColumn":  125,
+"endLine":  523,
+"endColumn":  152
+}
+}
+}
+]
+}

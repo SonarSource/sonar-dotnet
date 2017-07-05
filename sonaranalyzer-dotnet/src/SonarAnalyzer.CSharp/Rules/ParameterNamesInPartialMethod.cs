@@ -18,13 +18,14 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
+using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
-using System.Collections.Immutable;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -48,29 +49,40 @@ namespace SonarAnalyzer.Rules.CSharp
                     var methodSyntax = (MethodDeclarationSyntax)c.Node;
                     var methodSymbol = c.SemanticModel.GetDeclaredSymbol(methodSyntax);
 
-                    if (methodSymbol?.PartialDefinitionPart == null)
+                    if (methodSymbol?.PartialDefinitionPart != null)
                     {
-                        return;
+                        VerifyParameters(c, methodSyntax, expectedParameters: methodSymbol.PartialDefinitionPart.Parameters);
                     }
-
-                    var implementationParameters = methodSyntax.ParameterList.Parameters;
-                    var definitionParameters = methodSymbol.PartialDefinitionPart.Parameters;
-
-                    for (var i = 0; i < implementationParameters.Count && i < definitionParameters.Length; i++)
+                    else if (methodSymbol?.OverriddenMethod != null)
                     {
-                        var implementationParameter = implementationParameters[i];
-
-                        var definitionParameter = definitionParameters[i];
-                        var implementationParameterName = implementationParameter.Identifier.ValueText;
-                        if (implementationParameterName != definitionParameter.Name)
-                        {
-                            c.ReportDiagnostic(Diagnostic.Create(rule,
-                                implementationParameter.Identifier.GetLocation(),
-                                implementationParameterName, definitionParameter.Name));
-                        }
+                        VerifyParameters(c, methodSyntax, expectedParameters: methodSymbol.OverriddenMethod.Parameters);
+                    }
+                    else
+                    {
+                        // do nothing
                     }
                 },
                 SyntaxKind.MethodDeclaration);
+        }
+
+        private static void VerifyParameters(SyntaxNodeAnalysisContext context,
+            MethodDeclarationSyntax methodSyntax, IList<IParameterSymbol> expectedParameters)
+        {
+            var implementationParameters = methodSyntax.ParameterList.Parameters;
+
+            for (var i = 0; i < implementationParameters.Count && i < expectedParameters.Count; i++)
+            {
+                var implementationParameter = implementationParameters[i];
+
+                var definitionParameter = expectedParameters[i];
+                var implementationParameterName = implementationParameter.Identifier.ValueText;
+                if (implementationParameterName != definitionParameter.Name)
+                {
+                    context.ReportDiagnostic(Diagnostic.Create(rule,
+                        implementationParameter.Identifier.GetLocation(),
+                        implementationParameterName, definitionParameter.Name));
+                }
+            }
         }
     }
 }
