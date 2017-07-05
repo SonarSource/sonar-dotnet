@@ -27,4 +27,7 @@ public int Count
   set { throw new InvalidOperationException(); }
 }
 </pre>
+<h2>Exceptions</h2>
+<p>This rule doesn't raise an issue when the setter is empty and part of the implementation of an <code>interface</code> . The assumption is that this
+part of the interface is not meaningful to that particular implementation. A good example of that would be a "sink" logger that discards any logs.</p>
 

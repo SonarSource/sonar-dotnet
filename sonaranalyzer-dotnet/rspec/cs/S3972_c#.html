@@ -1,7 +1,7 @@
-<p>Code is clearest when each statement has its own line. Nonetheless, it is not uncommon to combine on the same line an <code>if</code> and it's
-resulting <em>then</em> statement. However, when an <code>if</code> is appended to the line with a previous <code>if</code>'s closing <code>\</code>}
-it is either an error - <code>else</code> is missing - or the prelude to a future error as maintainers fail to understand that the two statements are
-unconnected.</p>
+<p>Code is clearest when each statement has its own line. Nonetheless, it is a common pattern to combine on the same line an <code>if</code> and it's
+resulting <em>then</em> statement. However, when an <code>if</code> is placed on the same line as the closing <code>\</code>} from a preceding
+<code>else</code> or <code>else if</code>, it is either an error - <code>else</code> is missing - or the invitation to a future error as maintainers
+fail to understand that the two statements are unconnected.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
 if (condition1) {
