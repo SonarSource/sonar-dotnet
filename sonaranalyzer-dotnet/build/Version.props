@@ -1,6 +1,6 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <MainVersion>6.1</MainVersion>
+    <MainVersion>6.1.0</MainVersion>
     <BuildNumber>0</BuildNumber>
     <Sha1>f3bccbf5bee16073c7ba18bc8dee5d3358bd21d8</Sha1>
     <BranchName>improve-build-script</BranchName>
