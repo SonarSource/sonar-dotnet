@@ -7038,6 +7038,33 @@
   <data name="S4041_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
   </data>
+  <data name="S4047_Category" xml:space="preserve">
+    <value>Sonar Code Smell</value>
+  </data>
+  <data name="S4047_Description" xml:space="preserve">
+    <value>When a reference parameter (keyword ref) is used, the passed argument type must exactly match the reference parameter type. This means that to be able to pass a derived type, it must be cast and assigned to a variable of the proper type. Use of generic methods eliminates that cumbersome down casting and should therefore be preferred.</value>
+  </data>
+  <data name="S4047_IsActivatedByDefault" xml:space="preserve">
+    <value>False</value>
+  </data>
+  <data name="S4047_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S4047_RemediationCost" xml:space="preserve">
+    <value>10min</value>
+  </data>
+  <data name="S4047_Severity" xml:space="preserve">
+    <value>Minor</value>
+  </data>
+  <data name="S4047_Tags" xml:space="preserve">
+    <value />
+  </data>
+  <data name="S4047_Title" xml:space="preserve">
+    <value>Generics should be used when appropriate</value>
+  </data>
+  <data name="S4047_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S4058_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
