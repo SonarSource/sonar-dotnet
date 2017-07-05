@@ -7254,6 +7254,33 @@
   <data name="S4061_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
   </data>
+  <data name="S4069_Category" xml:space="preserve">
+    <value>Sonar Code Smell</value>
+  </data>
+  <data name="S4069_Description" xml:space="preserve">
+    <value>Operator overloading is convenient but unfortunately not portable across languages. To be able to access the same functionality from another language you need to provide an alternate named method following the convention:</value>
+  </data>
+  <data name="S4069_IsActivatedByDefault" xml:space="preserve">
+    <value>False</value>
+  </data>
+  <data name="S4069_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S4069_RemediationCost" xml:space="preserve">
+    <value>5min</value>
+  </data>
+  <data name="S4069_Severity" xml:space="preserve">
+    <value>Minor</value>
+  </data>
+  <data name="S4069_Tags" xml:space="preserve">
+    <value>convention</value>
+  </data>
+  <data name="S4069_Title" xml:space="preserve">
+    <value>Operator overloads should have named alternatives</value>
+  </data>
+  <data name="S4069_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S4070_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
