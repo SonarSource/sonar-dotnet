@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S927",
+"message":  "Rename parameter 'existingContainer' to 'container'.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Demo.Hosting.Aspnet\DemoBootstrapper.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  80,
+"endLine":  21,
+"endColumn":  97
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'existingContainer' to 'container'.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Demo.Hosting.Aspnet\DemoBootstrapper.cs",
+"region":  {
+"startLine":  50,
+"startColumn":  76,
+"endLine":  50,
+"endColumn":  93
+}
+}
+}
+]
+}

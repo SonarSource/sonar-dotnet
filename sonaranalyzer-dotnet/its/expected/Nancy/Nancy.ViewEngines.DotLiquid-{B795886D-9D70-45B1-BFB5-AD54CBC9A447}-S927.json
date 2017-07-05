@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S927",
+"message":  "Rename parameter 'propertyName' to 'method'.",
+"location":  {
+"uri":  "Nancy\src\Nancy.ViewEngines.DotLiquid\DynamicDrop.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  52,
+"endLine":  22,
+"endColumn":  64
+}
+}
+}
+]
+}

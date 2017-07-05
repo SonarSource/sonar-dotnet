@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S927",
+"message":  "Rename parameter 'logMessage' to 'logMessageFragment'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\TestCoordinatorEnabledMessageSink.cs",
+"region":  {
+"startLine":  71,
+"startColumn":  85,
+"endLine":  71,
+"endColumn":  95
+}
+}
+}
+]
+}

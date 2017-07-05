@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -28,6 +29,41 @@ namespace Tests.Diagnostics
 //                                    ^^^^^^^^^
         {
 
+        }
+    }
+
+    public abstract class BaseClass
+    {
+        public virtual void DoSomethingVirtual(int x, int y)
+        {
+        }
+
+        public abstract void DoSomethingAbstract(int x, int y);
+    }
+
+    public class ChildClass : BaseClass
+    {
+        public override void DoSomethingAbstract(int x, int someParam) //Noncompliant {{Rename parameter 'someParam' to 'y'.}}
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void DoSomethingVirtual(int x, int someParam) //Noncompliant {{Rename parameter 'someParam' to 'y'.}}
+        {
+            base.DoSomethingVirtual(x, y);
+        }
+    }
+
+    public abstract class ChildClassLevel2 : ChildClass
+    {
+        public override void DoSomethingAbstract(int x, int y) //Noncompliant {{Rename parameter 'y' to 'someParam'.}}
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void DoSomethingVirtual(int x, int y) //Noncompliant {{Rename parameter 'y' to 'someParam'.}}
+        {
+            base.DoSomethingVirtual(x, y);
         }
     }
 }
