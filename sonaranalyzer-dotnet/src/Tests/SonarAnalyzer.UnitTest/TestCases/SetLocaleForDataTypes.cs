@@ -7,6 +7,8 @@ namespace Tests.Diagnostics
     class Program
     {
         private DataTable myTable = new DataTable { Locale = CultureInfo.InvariantCulture };
+        private DataTable myWrongTable = new DataTable(); // Noncompliant {{Set the locale for this 'DataTable'.}}
+//                                       ^^^^^^^^^^^^^^^
 
         void Foo()
         {

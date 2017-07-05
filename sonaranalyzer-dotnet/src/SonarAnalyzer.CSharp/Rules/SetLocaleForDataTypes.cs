@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
@@ -49,35 +50,182 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
+            context.RegisterCompilationStartAction(
+                compilationStartContext =>
                 {
-                    var objectCreation = (ObjectCreationExpressionSyntax)c.Node;
-                    var objectType = c.SemanticModel.GetSymbolInfo(objectCreation.Type).Symbol as ITypeSymbol;
+                    var symbolsWhereTypeIsCreated =
+                        new ConcurrentBag<SyntaxNodeWithSymbol<ObjectCreationExpressionSyntax, ISymbol>>();
+                    var symbolsWhereLocaleIsSet = new ConcurrentBag<ISymbol>();
 
-                    if (objectType == null ||
-                        !objectType.IsAny(invalidTypes))
-                    {
-                        return;
-                    }
+                    compilationStartContext.RegisterSyntaxNodeActionInNonGenerated(
+                        c =>
+                        {
+                            var objectCreation = (ObjectCreationExpressionSyntax)c.Node;
+                            var objectType = c.SemanticModel.GetSymbolInfo(objectCreation.Type).Symbol as ITypeSymbol;
 
-                    var variableDeclarator = objectCreation.FirstAncestorOrSelf<VariableDeclaratorSyntax>();
-                    if (variableDeclarator != null)
-                    {
-                        
-                    }                   
+                            if (objectType == null ||
+                                !objectType.IsAny(invalidTypes))
+                            {
+                                return;
+                            }
 
-                    c.ReportDiagnostic(Diagnostic.Create(rule, objectCreation.GetLocation()));
-                }, SyntaxKind.ObjectCreationExpression);
+                            var variableSyntax = GetAssignedToSyntax(objectCreation);
+                            if (variableSyntax == null)
+                            {
+                                return;
+                            }
+
+                            var variableSymbol = variableSyntax is IdentifierNameSyntax
+                                ? c.SemanticModel.GetSymbolInfo(variableSyntax).Symbol
+                                : c.SemanticModel.GetDeclaredSymbol(variableSyntax);
+                            if (variableSymbol != null)
+                            {
+                                symbolsWhereTypeIsCreated.Add(variableSymbol.ToSymbolWithSyntax(objectCreation));
+                            }
+                        }, SyntaxKind.ObjectCreationExpression);
+
+                    compilationStartContext.RegisterSyntaxNodeActionInNonGenerated(
+                        c =>
+                        {
+                            var assignmentExpression = (AssignmentExpressionSyntax)c.Node;
+                            var propertySymbol = GetPropertySymbol(assignmentExpression, c.SemanticModel);
+
+                            if (propertySymbol == null ||
+                                !propertySymbol.ContainingType.IsAny(invalidTypes) ||
+                                propertySymbol.Name != "Locale")
+                            {
+                                return;
+                            }
+
+                            var variableSymbol = GetAccessedVariable(assignmentExpression, c.SemanticModel);
+                            if (variableSymbol != null)
+                            {
+                                symbolsWhereLocaleIsSet.Add(variableSymbol);
+                            }
+                        }, SyntaxKind.SimpleAssignmentExpression);
+
+                    compilationStartContext.RegisterCompilationEndAction(
+                        c =>
+                        {
+                            var invalidDataTypeCreation = symbolsWhereTypeIsCreated
+                                .Where(x => !symbolsWhereLocaleIsSet.Contains(x.Symbol));
+
+                            foreach (var invalidCreation in invalidDataTypeCreation)
+                            {
+                                var typeName = GetConstructedTypeName(invalidCreation.Symbol);
+                                if (typeName == null)
+                                {
+                                    continue;
+                                }
+
+                                c.ReportDiagnosticIfNonGenerated(Diagnostic.Create(rule,
+                                    invalidCreation.Syntax.GetLocation(), typeName), c.Compilation);
+                            }
+                        });
+                });
         }
 
-        private static string Get(ExpressionSyntax expression)
+        private static SyntaxNode GetAssignedToSyntax(ObjectCreationExpressionSyntax objectCreation)
         {
-            var identifier = expression as IdentifierNameSyntax;
+            var parent = objectCreation.GetSelfOrTopParenthesizedExpression().Parent;
+
+            var assignment = parent as AssignmentExpressionSyntax;
+            if (assignment != null)
+            {
+                return assignment.Left;
+            }
+
+            var equalsClause = parent as EqualsValueClauseSyntax;
+            if (equalsClause != null)
+            {
+                var variableDeclaration = equalsClause.Parent.Parent as VariableDeclarationSyntax;
+                if (variableDeclaration != null)
+                {
+                    return variableDeclaration.Variables.Last();
+                }
+            }
+
+            return null;
+        }
+
+        private static IPropertySymbol GetPropertySymbol(AssignmentExpressionSyntax assignment, SemanticModel model)
+        {
+            var syntax = assignment.Left;
+
+            var conditionalAccess = assignment.Left as ConditionalAccessExpressionSyntax;
+            if (conditionalAccess != null)
+            {
+                syntax = conditionalAccess.WhenNotNull;
+            }
+
+            return model.GetSymbolInfo(syntax).Symbol as IPropertySymbol;
+        }
+
+        private static ISymbol GetAccessedVariable(AssignmentExpressionSyntax assignment, SemanticModel model)
+        {
+            var variable = assignment.Left.RemoveParentheses();
+
+            var identifier = variable as IdentifierNameSyntax;
             if (identifier != null)
             {
-                return identifier.Identifier.ValueText;
+                var leftSideOfParentAssignment = identifier
+                    .FirstAncestorOrSelf<ObjectCreationExpressionSyntax>()
+                    ?.FirstAncestorOrSelf<AssignmentExpressionSyntax>()
+                    ?.Left;
+                if (leftSideOfParentAssignment != null)
+                {
+                    return model.GetSymbolInfo(leftSideOfParentAssignment).Symbol;
+                }
+
+                var lastVariable = identifier.FirstAncestorOrSelf<VariableDeclarationSyntax>()?.Variables.LastOrDefault();
+                if (lastVariable == null)
+                {
+                    return null;
+                }
+
+                return model.GetDeclaredSymbol(lastVariable);
             }
+
+            var memberAccess = variable as MemberAccessExpressionSyntax;
+            if (memberAccess != null)
+            {
+                if (memberAccess.Expression == null)
+                {
+                    return null;
+                }
+
+                return model.GetSymbolInfo(memberAccess.Expression).Symbol;
+            }
+
+            var conditionalAccess = variable as ConditionalAccessExpressionSyntax;
+            if (conditionalAccess != null)
+            {
+                if (conditionalAccess.Expression == null)
+                {
+                    return null;
+                }
+
+                return model.GetSymbolInfo(conditionalAccess.Expression).Symbol;
+            }
+
+            return null;
+        }
+
+        private static string GetConstructedTypeName(ISymbol symbol)
+        {
+            var localSymbol = symbol as ILocalSymbol;
+            if (localSymbol != null)
+            {
+                return localSymbol.Type.Name;
+            }
+
+            var fieldSymbol = symbol as IFieldSymbol;
+            if (fieldSymbol != null)
+            {
+                return fieldSymbol.Type.Name;
+            }
+
+            return null;
         }
     }
 }
