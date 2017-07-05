@@ -134,13 +134,35 @@ namespace SonarAnalyzer.Rules.CSharp
                 .Where(m => !m.IsConstructor())
                 .ToList();
 
-            if (classMethods.Any(KnownMethods.IsOperatorBinaryPlus)) yield return MethodName.OperatorPlus;
-            if (classMethods.Any(KnownMethods.IsOperatorBinaryMinus)) yield return MethodName.OperatorMinus;
-            if (classMethods.Any(KnownMethods.IsOperatorEquals)) yield return MethodName.OperatorEquals;
-            if (classMethods.Any(KnownMethods.IsOperatorNotEquals)) yield return MethodName.OperatorNotEquals;
+            if (classMethods.Any(KnownMethods.IsOperatorBinaryPlus))
+            {
+                yield return MethodName.OperatorPlus;
+            }
 
-            if (classMethods.Any(KnownMethods.IsObjectEquals)) yield return MethodName.ObjectEquals;
-            if (classMethods.Any(KnownMethods.IsObjectGetHashCode)) yield return MethodName.ObjectGetHashCode;
+            if (classMethods.Any(KnownMethods.IsOperatorBinaryMinus))
+            {
+                yield return MethodName.OperatorMinus;
+            }
+
+            if (classMethods.Any(KnownMethods.IsOperatorEquals))
+            {
+                yield return MethodName.OperatorEquals;
+            }
+
+            if (classMethods.Any(KnownMethods.IsOperatorNotEquals))
+            {
+                yield return MethodName.OperatorNotEquals;
+            }
+
+            if (classMethods.Any(KnownMethods.IsObjectEquals))
+            {
+                yield return MethodName.ObjectEquals;
+            }
+
+            if (classMethods.Any(KnownMethods.IsObjectGetHashCode))
+            {
+                yield return MethodName.ObjectGetHashCode;
+            }
         }
     }
 }
