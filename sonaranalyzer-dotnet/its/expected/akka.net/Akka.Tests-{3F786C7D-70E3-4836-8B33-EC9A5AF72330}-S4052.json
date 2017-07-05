@@ -1,7 +1,7 @@
 {
 "issues":  [
 {
-"id":  "S4050",
+"id":  "S4052",
 "message":  "Refactor this type not to derive from outdated types.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Tests\Pattern\CircuitBreakerSpec.cs",

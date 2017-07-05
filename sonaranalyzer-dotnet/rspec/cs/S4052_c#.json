@@ -1,5 +1,5 @@
 {
-  "title": "Operators should be overloaded consistently",
+  "title": "Types should not extend outdated base types",
   "type": "CODE_SMELL",
   "status": "ready",
   "remediation": {
@@ -7,7 +7,7 @@
     "constantCost": "10min"
   },
   "tags": [
-    "pitfall"
+    
   ],
-  "defaultSeverity": "Major"
+  "defaultSeverity": "Minor"
 }

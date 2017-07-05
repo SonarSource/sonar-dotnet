@@ -1,0 +1,40 @@
+<p>With the advent of .NET framework version 2, certain practices have become obsolete.</p>
+<p>In particular, exceptions should now extend <code>System.Exception</code> instead of <code>System.ApplicationException</code>. Similarly, generic
+collections should be used instead of the older, non-generic, ones. Finally when creating an XML view, you should not extend
+<code>System.Xml.XmlDocument</code>.</p>
+<p>This rule raises an issue when an externally visible type extends one of these types:</p>
+<ul>
+  <li> <code>System.ApplicationException</code> </li>
+  <li> <code>System.Xml.XmlDocument</code> </li>
+  <li> <code>System.Collections.CollectionBase</code> </li>
+  <li> <code>System.Collections.DictionaryBase</code> </li>
+  <li> <code>System.Collections.Queue</code> </li>
+  <li> <code>System.Collections.ReadOnlyCollectionBase</code> </li>
+  <li> <code>System.Collections.SortedList</code> </li>
+  <li> <code>System.Collections.Stack</code> </li>
+</ul>
+<h2>Noncompliant Code Example</h2>
+<pre>
+using System;
+using System.Collections;
+
+namespace MyLibrary
+{
+  public class MyCollection : CollectionBase  // Noncompliant
+  {
+  }
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+using System;
+using System.Collections;
+
+namespace MyLibrary
+{
+  public class MyCollection : Collection&lt;T&gt;
+  {
+  }
+}
+</pre>
+
