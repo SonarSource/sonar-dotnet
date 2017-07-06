@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S927",
-"message":  "Rename parameter 'cause' to 'reason'.",
+"message":  "Rename parameter 'cause' to 'reason' to match the base class declaration.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Tests\Actor\ActorLifeCycleSpec.cs",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S927",
-"message":  "Rename parameter 'cause' to 'reason'.",
+"message":  "Rename parameter 'cause' to 'reason' to match the base class declaration.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Tests\Actor\ActorLifeCycleSpec.cs",
 "region":  {
@@ -28,7 +28,7 @@
 },
 {
 "id":  "S927",
-"message":  "Rename parameter 'cause' to 'reason'.",
+"message":  "Rename parameter 'cause' to 'reason' to match the base class declaration.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Tests\Actor\ActorLifeCycleSpec.cs",
 "region":  {
@@ -41,7 +41,7 @@
 },
 {
 "id":  "S927",
-"message":  "Rename parameter 'cause' to 'reason'.",
+"message":  "Rename parameter 'cause' to 'reason' to match the base class declaration.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Tests\Actor\ActorLifeCycleSpec.cs",
 "region":  {
@@ -54,7 +54,7 @@
 },
 {
 "id":  "S927",
-"message":  "Rename parameter 'evt' to 'event'.",
+"message":  "Rename parameter 'evt' to 'event' to match the base class declaration.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Tests\Event\EventBusSpec.cs",
 "region":  {
@@ -67,7 +67,7 @@
 },
 {
 "id":  "S927",
-"message":  "Rename parameter 'evt' to 'event'.",
+"message":  "Rename parameter 'evt' to 'event' to match the base class declaration.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Tests\Event\EventBusSpec.cs",
 "region":  {
@@ -80,7 +80,7 @@
 },
 {
 "id":  "S927",
-"message":  "Rename parameter 'cause' to 'reason'.",
+"message":  "Rename parameter 'cause' to 'reason' to match the base class declaration.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Tests\TestUtils\Supervisor.cs",
 "region":  {

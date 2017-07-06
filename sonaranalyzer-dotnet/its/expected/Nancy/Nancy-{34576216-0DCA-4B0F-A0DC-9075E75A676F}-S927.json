@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S927",
-"message":  "Rename parameter 'pipelineItem' to 'syncDelegate'.",
+"message":  "Rename parameter 'pipelineItem' to 'syncDelegate' to match the base class declaration.",
 "location":  {
 "uri":  "Nancy\src\Nancy\AfterPipeline.cs",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S927",
-"message":  "Rename parameter 'pipelineItem' to 'syncDelegate'.",
+"message":  "Rename parameter 'pipelineItem' to 'syncDelegate' to match the base class declaration.",
 "location":  {
 "uri":  "Nancy\src\Nancy\BeforePipeline.cs",
 "region":  {
@@ -28,7 +28,7 @@
 },
 {
 "id":  "S927",
-"message":  "Rename parameter 'container' to 'existingContainer'.",
+"message":  "Rename parameter 'container' to 'existingContainer' to match the base class declaration.",
 "location":  {
 "uri":  "Nancy\src\Nancy\DefaultNancyBootstrapper.cs",
 "region":  {
@@ -41,7 +41,7 @@
 },
 {
 "id":  "S927",
-"message":  "Rename parameter 'collectionTypeRegistrations' to 'collectionTypeRegistrationsn'.",
+"message":  "Rename parameter 'collectionTypeRegistrations' to 'collectionTypeRegistrationsn' to match the base class declaration.",
 "location":  {
 "uri":  "Nancy\src\Nancy\DefaultNancyBootstrapper.cs",
 "region":  {
@@ -54,7 +54,20 @@
 },
 {
 "id":  "S927",
-"message":  "Rename parameter 'compareValue' to 'obj'.",
+"message":  "Rename parameter 'compareValue' to 'other' to match the interface declaration.",
+"location":  {
+"uri":  "Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"region":  {
+"startLine":  155,
+"startColumn":  51,
+"endLine":  155,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S927",
+"message":  "Rename parameter 'compareValue' to 'obj' to match the base class declaration.",
 "location":  {
 "uri":  "Nancy\src\Nancy\DynamicDictionaryValue.cs",
 "region":  {

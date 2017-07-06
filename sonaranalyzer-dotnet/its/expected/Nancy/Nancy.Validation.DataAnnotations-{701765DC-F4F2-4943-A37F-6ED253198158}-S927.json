@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S927",
+"message":  "Rename parameter 'context1' to 'context' to match the interface declaration.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Validation.DataAnnotations\DefaultValidatableObjectAdapter.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  89,
+"endLine":  18,
+"endColumn":  97
+}
+}
+}
+]
+}

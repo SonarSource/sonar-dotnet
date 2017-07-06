@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S927",
-"message":  "Rename parameter 'o' to 'obj'.",
+"message":  "Rename parameter 'o' to 'obj' to match the base class declaration.",
 "location":  {
 "uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\Serialization\ClusterClientMessageSerializer.cs",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S927",
-"message":  "Rename parameter 'bytes' to 'binary'.",
+"message":  "Rename parameter 'bytes' to 'binary' to match the base class declaration.",
 "location":  {
 "uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Serialization\DistributedPubSubMessageSerializer.cs",
 "region":  {
@@ -28,7 +28,7 @@
 },
 {
 "id":  "S927",
-"message":  "Rename parameter 'manifestString' to 'manifest'.",
+"message":  "Rename parameter 'manifestString' to 'manifest' to match the base class declaration.",
 "location":  {
 "uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Serialization\DistributedPubSubMessageSerializer.cs",
 "region":  {
@@ -41,7 +41,7 @@
 },
 {
 "id":  "S927",
-"message":  "Rename parameter 'o' to 'obj'.",
+"message":  "Rename parameter 'o' to 'obj' to match the base class declaration.",
 "location":  {
 "uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\Serialization\ClusterSingletonMessageSerializer.cs",
 "region":  {
