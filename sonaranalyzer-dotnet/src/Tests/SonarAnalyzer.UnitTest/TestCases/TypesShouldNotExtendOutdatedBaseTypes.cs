@@ -5,10 +5,10 @@ using System.Xml;
 
 namespace Tests.Diagnostics
 {
-    class Foo1 : System.ApplicationException { } // Noncompliant {{Refactor this type not to derive from outdated types.}}
+    class Foo1 : System.ApplicationException { } // Noncompliant {{Refactor this type not to derive from an outdated type 'System.ApplicationException'.}}
 //        ^^^^
 
-    class Foo2 : XmlDocument { } // Noncompliant
+    class Foo2 : XmlDocument { } // Noncompliant {{Refactor this type not to derive from an outdated type 'System.Xml.XmlDocument'.}}
 
     class Foo2_Explicit : System.Xml.XmlDocument { } // Noncompliant
 
@@ -43,7 +43,14 @@ namespace Tests.Diagnostics
 
     class Foo12 { }
 
-    class Foo11 : InvalidType{ }
+    class FooBase : XmlDocument { } // Noncompliant
+
+    class FooDerived : FooBase { } // Compliant - doesn't directly implement type
+
+    class Foo13 : InvalidType{ }
 
     class : System.Collections.Stack { }
 }
+
+
+

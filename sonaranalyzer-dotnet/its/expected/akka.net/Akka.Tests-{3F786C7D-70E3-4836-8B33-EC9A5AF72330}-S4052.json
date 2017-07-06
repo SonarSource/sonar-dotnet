@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S4052",
-"message":  "Refactor this type not to derive from outdated types.",
+"message":  "Refactor this type not to derive from an outdated type 'System.ApplicationException'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Tests\Pattern\CircuitBreakerSpec.cs",
 "region":  {

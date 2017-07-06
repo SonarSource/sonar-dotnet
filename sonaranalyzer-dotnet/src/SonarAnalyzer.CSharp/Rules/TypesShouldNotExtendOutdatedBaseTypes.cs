@@ -34,7 +34,7 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class TypesShouldNotExtendOutdatedBaseTypes : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S4052";
-        private const string MessageFormat = "Refactor this type not to derive from outdated types.";
+        private const string MessageFormat = "Refactor this type not to derive from an outdated type '{0}'.";
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
@@ -63,7 +63,8 @@ namespace SonarAnalyzer.Rules.CSharp
                     !classDeclaration.Identifier.IsMissing &&
                     classSymbol.BaseType.IsAny(outdatedTypes))
                 {
-                    c.ReportDiagnostic(Diagnostic.Create(rule, classDeclaration.Identifier.GetLocation()));
+                    c.ReportDiagnostic(Diagnostic.Create(rule, classDeclaration.Identifier.GetLocation(),
+                        messageArgs: classSymbol.BaseType.ToDisplayString()));
                 }
             },
             SyntaxKind.ClassDeclaration);
