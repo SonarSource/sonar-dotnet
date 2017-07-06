@@ -18171,6 +18171,87 @@ namespace SonarAnalyzer {
         /// <summary>
         ///   Looks up a localized string similar to Sonar Code Smell.
         /// </summary>
+        internal static string S3956_Category {
+            get {
+                return ResourceManager.GetString("S3956_Category", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to System.Collections.Generic.List&lt;T&gt; is a generic collection that is designed for performance and not inheritance. For example, it does not contain virtual members that make it easier to change the behavior of an inherited class. That means that future attempts to expand the behavior will be spoiled because the extension points simply aren&apos;t there. Instead, one of the following generic collections should be used:.
+        /// </summary>
+        internal static string S3956_Description {
+            get {
+                return ResourceManager.GetString("S3956_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to False.
+        /// </summary>
+        internal static string S3956_IsActivatedByDefault {
+            get {
+                return ResourceManager.GetString("S3956_IsActivatedByDefault", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Constant/Issue.
+        /// </summary>
+        internal static string S3956_Remediation {
+            get {
+                return ResourceManager.GetString("S3956_Remediation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 10min.
+        /// </summary>
+        internal static string S3956_RemediationCost {
+            get {
+                return ResourceManager.GetString("S3956_RemediationCost", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Major.
+        /// </summary>
+        internal static string S3956_Severity {
+            get {
+                return ResourceManager.GetString("S3956_Severity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to api-design.
+        /// </summary>
+        internal static string S3956_Tags {
+            get {
+                return ResourceManager.GetString("S3956_Tags", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &quot;Generic.List&quot; instances should not be part of public APIs.
+        /// </summary>
+        internal static string S3956_Title {
+            get {
+                return ResourceManager.GetString("S3956_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CODE_SMELL.
+        /// </summary>
+        internal static string S3956_Type {
+            get {
+                return ResourceManager.GetString("S3956_Type", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sonar Code Smell.
+        /// </summary>
         internal static string S3962_Category {
             get {
                 return ResourceManager.GetString("S3962_Category", resourceCulture);
@@ -21231,6 +21312,168 @@ namespace SonarAnalyzer {
         /// <summary>
         ///   Looks up a localized string similar to Sonar Code Smell.
         /// </summary>
+        internal static string S4058_Category {
+            get {
+                return ResourceManager.GetString("S4058_Category", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Many string operations, the Compare and Equals methods in particular, provide an overload that accepts a StringComparison enumeration value as a parameter. Calling these overloads and explicitly providing this parameter makes your code clearer and easier to maintain..
+        /// </summary>
+        internal static string S4058_Description {
+            get {
+                return ResourceManager.GetString("S4058_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to False.
+        /// </summary>
+        internal static string S4058_IsActivatedByDefault {
+            get {
+                return ResourceManager.GetString("S4058_IsActivatedByDefault", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Constant/Issue.
+        /// </summary>
+        internal static string S4058_Remediation {
+            get {
+                return ResourceManager.GetString("S4058_Remediation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 2min.
+        /// </summary>
+        internal static string S4058_RemediationCost {
+            get {
+                return ResourceManager.GetString("S4058_RemediationCost", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Minor.
+        /// </summary>
+        internal static string S4058_Severity {
+            get {
+                return ResourceManager.GetString("S4058_Severity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string S4058_Tags {
+            get {
+                return ResourceManager.GetString("S4058_Tags", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Overloads with a &quot;StringComparison&quot; parameter should be used.
+        /// </summary>
+        internal static string S4058_Title {
+            get {
+                return ResourceManager.GetString("S4058_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CODE_SMELL.
+        /// </summary>
+        internal static string S4058_Type {
+            get {
+                return ResourceManager.GetString("S4058_Type", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sonar Code Smell.
+        /// </summary>
+        internal static string S4059_Category {
+            get {
+                return ResourceManager.GetString("S4059_Category", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Properties and Get method should have names that makes them clearly distinguishable..
+        /// </summary>
+        internal static string S4059_Description {
+            get {
+                return ResourceManager.GetString("S4059_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to False.
+        /// </summary>
+        internal static string S4059_IsActivatedByDefault {
+            get {
+                return ResourceManager.GetString("S4059_IsActivatedByDefault", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Constant/Issue.
+        /// </summary>
+        internal static string S4059_Remediation {
+            get {
+                return ResourceManager.GetString("S4059_Remediation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 2min.
+        /// </summary>
+        internal static string S4059_RemediationCost {
+            get {
+                return ResourceManager.GetString("S4059_RemediationCost", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Major.
+        /// </summary>
+        internal static string S4059_Severity {
+            get {
+                return ResourceManager.GetString("S4059_Severity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to confusing.
+        /// </summary>
+        internal static string S4059_Tags {
+            get {
+                return ResourceManager.GetString("S4059_Tags", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Property names should not match get methods.
+        /// </summary>
+        internal static string S4059_Title {
+            get {
+                return ResourceManager.GetString("S4059_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CODE_SMELL.
+        /// </summary>
+        internal static string S4059_Type {
+            get {
+                return ResourceManager.GetString("S4059_Type", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sonar Code Smell.
+        /// </summary>
         internal static string S4060_Category {
             get {
                 return ResourceManager.GetString("S4060_Category", resourceCulture);
@@ -21306,6 +21549,168 @@ namespace SonarAnalyzer {
         internal static string S4060_Type {
             get {
                 return ResourceManager.GetString("S4060_Type", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sonar Code Smell.
+        /// </summary>
+        internal static string S4061_Category {
+            get {
+                return ResourceManager.GetString("S4061_Category", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A method using the VarArgs calling convention is not Common Language Specification (CLS) compliant and might not be accessible across programming languages, while the params keyword works the same way and is CLS compliant..
+        /// </summary>
+        internal static string S4061_Description {
+            get {
+                return ResourceManager.GetString("S4061_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to False.
+        /// </summary>
+        internal static string S4061_IsActivatedByDefault {
+            get {
+                return ResourceManager.GetString("S4061_IsActivatedByDefault", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Constant/Issue.
+        /// </summary>
+        internal static string S4061_Remediation {
+            get {
+                return ResourceManager.GetString("S4061_Remediation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 5min.
+        /// </summary>
+        internal static string S4061_RemediationCost {
+            get {
+                return ResourceManager.GetString("S4061_RemediationCost", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Minor.
+        /// </summary>
+        internal static string S4061_Severity {
+            get {
+                return ResourceManager.GetString("S4061_Severity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string S4061_Tags {
+            get {
+                return ResourceManager.GetString("S4061_Tags", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &quot;params&quot; should be use instead of &quot;varargs&quot;.
+        /// </summary>
+        internal static string S4061_Title {
+            get {
+                return ResourceManager.GetString("S4061_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CODE_SMELL.
+        /// </summary>
+        internal static string S4061_Type {
+            get {
+                return ResourceManager.GetString("S4061_Type", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sonar Code Smell.
+        /// </summary>
+        internal static string S4070_Category {
+            get {
+                return ResourceManager.GetString("S4070_Category", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This rule raises an issue when an externally visible enumeration is marked with FlagsAttribute and one, or more, of its values is not a power of 2 or a combination of the other defined values..
+        /// </summary>
+        internal static string S4070_Description {
+            get {
+                return ResourceManager.GetString("S4070_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to False.
+        /// </summary>
+        internal static string S4070_IsActivatedByDefault {
+            get {
+                return ResourceManager.GetString("S4070_IsActivatedByDefault", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Constant/Issue.
+        /// </summary>
+        internal static string S4070_Remediation {
+            get {
+                return ResourceManager.GetString("S4070_Remediation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 2min.
+        /// </summary>
+        internal static string S4070_RemediationCost {
+            get {
+                return ResourceManager.GetString("S4070_RemediationCost", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Major.
+        /// </summary>
+        internal static string S4070_Severity {
+            get {
+                return ResourceManager.GetString("S4070_Severity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string S4070_Tags {
+            get {
+                return ResourceManager.GetString("S4070_Tags", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Non-flags enums should not be marked with &quot;FlagsAttribute&quot;.
+        /// </summary>
+        internal static string S4070_Title {
+            get {
+                return ResourceManager.GetString("S4070_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CODE_SMELL.
+        /// </summary>
+        internal static string S4070_Type {
+            get {
+                return ResourceManager.GetString("S4070_Type", resourceCulture);
             }
         }
         

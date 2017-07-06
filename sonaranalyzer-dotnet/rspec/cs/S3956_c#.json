@@ -1,0 +1,13 @@
+{
+  "title": "\"Generic.List\" instances should not be part of public APIs",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "10min"
+  },
+  "tags": [
+    "api-design"
+  ],
+  "defaultSeverity": "Major"
+}
