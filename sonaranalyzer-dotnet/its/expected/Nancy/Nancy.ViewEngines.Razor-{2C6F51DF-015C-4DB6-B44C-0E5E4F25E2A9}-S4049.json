@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetAssemblyNames' a property.",
+"location":  {
+"uri":  "Nancy\src\Nancy.ViewEngines.Razor\IRazorConfiguration.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  29,
+"endLine":  21,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S4049",
+"message":  "Consider making method 'GetDefaultNamespaces' a property.",
+"location":  {
+"uri":  "Nancy\src\Nancy.ViewEngines.Razor\IRazorConfiguration.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  29,
+"endLine":  26,
+"endColumn":  49
+}
+}
+}
+]
+}

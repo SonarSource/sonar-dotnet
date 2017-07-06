@@ -1,0 +1,41 @@
+<p>Properties are accessed like fields which makes them easier to use.</p>
+<p>This rule raises an issue when the name of a <code>public</code> or <code>protected</code> method starts with <code>Get</code>, takes no parameter,
+and returns a value that is not an array.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+using System;
+
+namespace MyLibrary
+{
+  public class Foo
+  {
+    private string name;
+
+    public string GetName()  // Noncompliant
+    {
+      return name;
+    }
+  }
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+using System;
+
+namespace MyLibrary
+{
+  public class Foo
+  {
+    private string name;
+
+    public string Name
+    {
+      get
+      {
+        return name;
+      }
+    }
+  }
+}
+</pre>
+
