@@ -37,6 +37,12 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType System_Collections_Generic_ICollection_T = new KnownType(SpecialType.System_Collections_Generic_ICollection_T, "System.Collections.Generic.ICollection<T>");
         public static readonly KnownType System_Collections_ICollection = new KnownType("System.Collections.ICollection");
         public static readonly KnownType System_Collections_CollectionBase = new KnownType("System.Collections.CollectionBase");
+        public static readonly KnownType System_Collections_DictionaryBase = new KnownType("System.Collections.DictionaryBase");
+        public static readonly KnownType System_Collections_Queue = new KnownType("System.Collections.Queue");
+        public static readonly KnownType System_Collections_ReadOnlyCollectionBase = new KnownType("System.Collections.ReadOnlyCollectionBase");
+        public static readonly KnownType System_Collections_SortedList = new KnownType("System.Collections.SortedList");
+        public static readonly KnownType System_Collections_Stack = new KnownType("System.Collections.Stack");
+
 
         public static readonly KnownType System_Object = new KnownType(SpecialType.System_Object, "object");
         public static readonly KnownType System_String = new KnownType(SpecialType.System_String, "string");
@@ -297,6 +303,8 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType System_Diagnostics_TraceSource = new KnownType("System.Diagnostics.TraceSource");
 
         public static readonly KnownType System_Runtime_CompilerServices_InternalsVisibleToAttribute = new KnownType("System.Runtime.CompilerServices.InternalsVisibleToAttribute");
+
+        public static readonly KnownType System_Xml_XmlDocument = new KnownType("System.Xml.XmlDocument");
 
         #endregion
 

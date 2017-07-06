@@ -7092,6 +7092,33 @@
   <data name="S4049_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
   </data>
+  <data name="S4052_Category" xml:space="preserve">
+    <value>Sonar Code Smell</value>
+  </data>
+  <data name="S4052_Description" xml:space="preserve">
+    <value>With the advent of .NET framework version 2, certain practices have become obsolete.</value>
+  </data>
+  <data name="S4052_IsActivatedByDefault" xml:space="preserve">
+    <value>False</value>
+  </data>
+  <data name="S4052_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S4052_RemediationCost" xml:space="preserve">
+    <value>10min</value>
+  </data>
+  <data name="S4052_Severity" xml:space="preserve">
+    <value>Minor</value>
+  </data>
+  <data name="S4052_Tags" xml:space="preserve">
+    <value />
+  </data>
+  <data name="S4052_Title" xml:space="preserve">
+    <value>Types should not extend outdated base types</value>
+  </data>
+  <data name="S4052_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S4058_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>

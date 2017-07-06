@@ -20907,6 +20907,168 @@ namespace SonarAnalyzer {
         /// <summary>
         ///   Looks up a localized string similar to Sonar Code Smell.
         /// </summary>
+        internal static string S4050_Category {
+            get {
+                return ResourceManager.GetString("S4050_Category", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to When implementing operator overloads, it is very important to make sure that all related operators and methods are consistent in their implementation..
+        /// </summary>
+        internal static string S4050_Description {
+            get {
+                return ResourceManager.GetString("S4050_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to False.
+        /// </summary>
+        internal static string S4050_IsActivatedByDefault {
+            get {
+                return ResourceManager.GetString("S4050_IsActivatedByDefault", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Constant/Issue.
+        /// </summary>
+        internal static string S4050_Remediation {
+            get {
+                return ResourceManager.GetString("S4050_Remediation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 10min.
+        /// </summary>
+        internal static string S4050_RemediationCost {
+            get {
+                return ResourceManager.GetString("S4050_RemediationCost", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Major.
+        /// </summary>
+        internal static string S4050_Severity {
+            get {
+                return ResourceManager.GetString("S4050_Severity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to pitfall.
+        /// </summary>
+        internal static string S4050_Tags {
+            get {
+                return ResourceManager.GetString("S4050_Tags", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Operators should be overloaded consistently.
+        /// </summary>
+        internal static string S4050_Title {
+            get {
+                return ResourceManager.GetString("S4050_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CODE_SMELL.
+        /// </summary>
+        internal static string S4050_Type {
+            get {
+                return ResourceManager.GetString("S4050_Type", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sonar Code Smell.
+        /// </summary>
+        internal static string S4052_Category {
+            get {
+                return ResourceManager.GetString("S4052_Category", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to With the advent of .NET framework version 2, certain practices have become obsolete..
+        /// </summary>
+        internal static string S4052_Description {
+            get {
+                return ResourceManager.GetString("S4052_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to False.
+        /// </summary>
+        internal static string S4052_IsActivatedByDefault {
+            get {
+                return ResourceManager.GetString("S4052_IsActivatedByDefault", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Constant/Issue.
+        /// </summary>
+        internal static string S4052_Remediation {
+            get {
+                return ResourceManager.GetString("S4052_Remediation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 10min.
+        /// </summary>
+        internal static string S4052_RemediationCost {
+            get {
+                return ResourceManager.GetString("S4052_RemediationCost", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Minor.
+        /// </summary>
+        internal static string S4052_Severity {
+            get {
+                return ResourceManager.GetString("S4052_Severity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string S4052_Tags {
+            get {
+                return ResourceManager.GetString("S4052_Tags", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Types should not extend outdated base types.
+        /// </summary>
+        internal static string S4052_Title {
+            get {
+                return ResourceManager.GetString("S4052_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CODE_SMELL.
+        /// </summary>
+        internal static string S4052_Type {
+            get {
+                return ResourceManager.GetString("S4052_Type", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sonar Code Smell.
+        /// </summary>
         internal static string S4058_Category {
             get {
                 return ResourceManager.GetString("S4058_Category", resourceCulture);
