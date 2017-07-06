@@ -20,6 +20,7 @@
 
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -34,7 +35,7 @@ namespace SonarAnalyzer.Rules.CSharp
     public class ParameterNamesInPartialMethod : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S927";
-        private const string MessageFormat = "Rename parameter '{0}' to '{1}'.";
+        private const string MessageFormat = "Rename parameter '{0}' to '{1}' to match the {2} declaration.";
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
@@ -51,38 +52,37 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     if (methodSymbol?.PartialDefinitionPart != null)
                     {
-                        VerifyParameters(c, methodSyntax, expectedParameters: methodSymbol.PartialDefinitionPart.Parameters);
+                        VerifyParameters(c, methodSyntax, methodSymbol.PartialDefinitionPart.Parameters, "partial class");
                     }
                     else if (methodSymbol?.OverriddenMethod != null)
                     {
-                        VerifyParameters(c, methodSyntax, expectedParameters: methodSymbol.OverriddenMethod.Parameters);
+                        VerifyParameters(c, methodSyntax, methodSymbol.OverriddenMethod.Parameters, "base class");
                     }
                     else
                     {
-                        // do nothing
+                        var interfaceMember = methodSymbol.GetInterfaceMember();
+                        if (interfaceMember != null)
+                        {
+                            VerifyParameters(c, methodSyntax, interfaceMember.Parameters, "interface");
+                        }
                     }
                 },
                 SyntaxKind.MethodDeclaration);
         }
 
         private static void VerifyParameters(SyntaxNodeAnalysisContext context,
-            MethodDeclarationSyntax methodSyntax, IList<IParameterSymbol> expectedParameters)
+            MethodDeclarationSyntax methodSyntax, IList<IParameterSymbol> expectedParameters, string expectedLocation)
         {
-            var implementationParameters = methodSyntax.ParameterList.Parameters;
-
-            for (var i = 0; i < implementationParameters.Count && i < expectedParameters.Count; i++)
-            {
-                var implementationParameter = implementationParameters[i];
-
-                var definitionParameter = expectedParameters[i];
-                var implementationParameterName = implementationParameter.Identifier.ValueText;
-                if (implementationParameterName != definitionParameter.Name)
+            methodSyntax.ParameterList.Parameters
+                .Zip(expectedParameters, (actual, expected) => new { actual, expected })
+                .Where(x => x.actual.Identifier.ValueText != x.expected.Name)
+                .ToList()
+                .ForEach(x => 
                 {
                     context.ReportDiagnostic(Diagnostic.Create(rule,
-                        implementationParameter.Identifier.GetLocation(),
-                        implementationParameterName, definitionParameter.Name));
-                }
-            }
+                        x.actual.Identifier.GetLocation(),
+                        x.actual.Identifier.ValueText, x.expected.Name, expectedLocation));
+                });
         }
     }
 }

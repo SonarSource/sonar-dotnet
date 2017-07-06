@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S927",
-"message":  "Rename parameter 'propertyName' to 'method'.",
+"message":  "Rename parameter 'propertyName' to 'method' to match the base class declaration.",
 "location":  {
 "uri":  "Nancy\src\Nancy.ViewEngines.DotLiquid\DynamicDrop.cs",
 "region":  {

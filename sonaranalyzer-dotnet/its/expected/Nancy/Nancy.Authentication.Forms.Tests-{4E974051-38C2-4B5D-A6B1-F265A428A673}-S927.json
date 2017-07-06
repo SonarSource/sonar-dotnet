@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S927",
-"message":  "Rename parameter 'existingContainer' to 'container'.",
+"message":  "Rename parameter 'existingContainer' to 'container' to match the base class declaration.",
 "location":  {
 "uri":  "Nancy\src\Nancy.Tests\Fakes\FakeDefaultNancyBootstrapper.cs",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S927",
-"message":  "Rename parameter 'existingContainer' to 'container'.",
+"message":  "Rename parameter 'existingContainer' to 'container' to match the base class declaration.",
 "location":  {
 "uri":  "Nancy\src\Nancy.Tests\Fakes\FakeDefaultNancyBootstrapper.cs",
 "region":  {

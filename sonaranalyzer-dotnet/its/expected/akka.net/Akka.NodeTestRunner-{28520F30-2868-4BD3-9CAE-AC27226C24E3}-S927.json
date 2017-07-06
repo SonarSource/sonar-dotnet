@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S927",
-"message":  "Rename parameter 'discovery' to 'testCaseDiscovered'.",
+"message":  "Rename parameter 'discovery' to 'testCaseDiscovered' to match the base class declaration.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.NodeTestRunner\Discovery.cs",
 "region":  {
