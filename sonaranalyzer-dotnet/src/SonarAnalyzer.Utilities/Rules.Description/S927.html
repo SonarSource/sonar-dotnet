@@ -1,6 +1,5 @@
-<p>When the parameters to the implementation of a <code>partial</code> method don't match those in the signature declaration, then confusion is almost
-guaranteed. Either the implementer was confused when he renamed, swapped or mangled the parameter names in the implementation, or callers will be
-confused.</p>
+<p>The name of a parameter in an externally visible method override does not match the name of the parameter in the base declaration of the method, or
+the name of the parameter in the interface declaration of the method or the name of any other <code>partial</code> definition.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
 partial class Point
@@ -17,6 +16,18 @@ partial class Point
   partial void MoveVertically(int y)  // Noncompliant
   {
     this.y = y;
+  }
+}
+
+interface IFoo
+{
+  void Bar(int i);
+}
+
+class Foo : IFoo
+{
+  void Bar(int z) // Noncompliant, parameter name should be i
+  {
   }
 }
 </pre>
@@ -36,6 +47,18 @@ partial class Point
   partial void MoveVertically(int z)
   {
     this.z = z;
+  }
+}
+
+interface IFoo
+{
+  void Bar(int i);
+}
+
+class Foo : IFoo
+{
+  void Bar(int i)
+  {
   }
 }
 </pre>

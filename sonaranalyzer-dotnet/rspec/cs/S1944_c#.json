@@ -1,6 +1,6 @@
 {
   "title": "Inappropriate casts should not be made",
-  "type": "BUG",
+  "type": "CODE_SMELL",
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",
@@ -10,7 +10,7 @@
     "cwe",
     "misra",
     "cert",
-    "pitfall"
+    "suspicious"
   ],
   "standards": [
     "CWE"

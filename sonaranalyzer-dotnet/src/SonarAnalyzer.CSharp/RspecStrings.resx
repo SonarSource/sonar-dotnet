@@ -1321,7 +1321,7 @@
     <value>CODE_SMELL</value>
   </data>
   <data name="S1449_Category" xml:space="preserve">
-    <value>Sonar Bug</value>
+    <value>Sonar Code Smell</value>
   </data>
   <data name="S1449_Description" xml:space="preserve">
     <value>string.ToLower(), ToUpper, IndexOf, LastIndexOf, and Compare are all culture-dependent, as are some (floating point number and DateTime-related) calls to ToString. Fortunately, all have variants which accept an argument specifying the culture or formatter to use. Leave that argument off and the call will use the system default culture, possibly creating problems with international characters.</value>
@@ -1345,7 +1345,7 @@
     <value>Culture should be specified for "string" operations</value>
   </data>
   <data name="S1449_Type" xml:space="preserve">
-    <value>BUG</value>
+    <value>CODE_SMELL</value>
   </data>
   <data name="S1450_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
@@ -1942,7 +1942,7 @@
     <value>CODE_SMELL</value>
   </data>
   <data name="S1944_Category" xml:space="preserve">
-    <value>Sonar Bug</value>
+    <value>Sonar Code Smell</value>
   </data>
   <data name="S1944_Description" xml:space="preserve">
     <value>Inappropriate casts are issues that will lead to unexpected behavior or runtime errors, such as InvalidCastExceptions. The compiler will catch bad casts from one class to another, but not bad casts to interfaces. Nor will it catch nullable values that are known to be null but that are cast to their underlying value types anyway.</value>
@@ -1960,13 +1960,13 @@
     <value>Critical</value>
   </data>
   <data name="S1944_Tags" xml:space="preserve">
-    <value>cwe,misra,cert,pitfall</value>
+    <value>cwe,misra,cert,suspicious</value>
   </data>
   <data name="S1944_Title" xml:space="preserve">
     <value>Inappropriate casts should not be made</value>
   </data>
   <data name="S1944_Type" xml:space="preserve">
-    <value>BUG</value>
+    <value>CODE_SMELL</value>
   </data>
   <data name="S1994_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
@@ -2233,7 +2233,7 @@
     <value>misra,cert</value>
   </data>
   <data name="S2201_Title" xml:space="preserve">
-    <value>Return values should not be ignored when function calls don't have any side effects</value>
+    <value>Return values from functions without side effects should not be ignored</value>
   </data>
   <data name="S2201_Type" xml:space="preserve">
     <value>BUG</value>
@@ -6265,7 +6265,7 @@
     <value>Sonar Code Smell</value>
   </data>
   <data name="S3972_Description" xml:space="preserve">
-    <value>Code is clearest when each statement has its own line. Nonetheless, it is not uncommon to combine on the same line an if and it's resulting then statement. However, when an if is appended to the line with a previous if's closing } it is either an error - else is missing - or the prelude to a future error as maintainers fail to understand that the two statements are unconnected.</value>
+    <value>Code is clearest when each statement has its own line. Nonetheless, it is a common pattern to combine on the same line an if and it's resulting then statement. However, when an if is placed on the same line as the closing } from a preceding else or else if, it is either an error - else is missing - or the invitation to a future error as maintainers fail to understand that the two statements are unconnected.</value>
   </data>
   <data name="S3972_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -6988,7 +6988,7 @@
     <value>Sonar Code Smell</value>
   </data>
   <data name="S4040_Description" xml:space="preserve">
-    <value>Certain characters, once normalized to lowercase, cannot make a round trip, meaning that they can not be converted from one locale to another and then accurately restored to their original characters.</value>
+    <value>Certain characters, once normalized to lowercase, cannot make a round trip. That is, they can not be converted from one locale to another and then accurately restored to their original characters.</value>
   </data>
   <data name="S4040_IsActivatedByDefault" xml:space="preserve">
     <value>False</value>
@@ -7339,7 +7339,7 @@
     <value>Sonar Code Smell</value>
   </data>
   <data name="S927_Description" xml:space="preserve">
-    <value>When the parameters to the implementation of a partial method don't match those in the signature declaration, then confusion is almost guaranteed. Either the implementer was confused when he renamed, swapped or mangled the parameter names in the implementation, or callers will be confused.</value>
+    <value>The name of a parameter in an externally visible method override does not match the name of the parameter in the base declaration of the method, or the name of the parameter in the interface declaration of the method or the name of any other partial definition.</value>
   </data>
   <data name="S927_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -7357,7 +7357,7 @@
     <value>misra,cert,suspicious</value>
   </data>
   <data name="S927_Title" xml:space="preserve">
-    <value>"partial" method parameter names should match</value>
+    <value>parameter names should match base declaration and other partial definitions</value>
   </data>
   <data name="S927_Type" xml:space="preserve">
     <value>CODE_SMELL</value>

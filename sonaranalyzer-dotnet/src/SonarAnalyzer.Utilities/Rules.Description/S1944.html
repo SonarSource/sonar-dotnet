@@ -1,6 +1,7 @@
 <p>Inappropriate casts are issues that will lead to unexpected behavior or runtime errors, such as <code>InvalidCastException</code>s. The compiler
 will catch bad casts from one class to another, but not bad casts to interfaces. Nor will it catch nullable values that are known to be null but that
 are cast to their underlying value types anyway.</p>
+<p>It is much better to use the <code>as</code> operator because it will return <code>null</code> instead of throwing an exception.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
 public interface IMyInterface
