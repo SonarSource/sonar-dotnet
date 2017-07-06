@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "akka.net\src\examples\Cluster\ClusterSharding\ClusterSharding.Node\Printer.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  38,
+"endLine":  16,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "akka.net\src\examples\Cluster\ClusterSharding\ClusterSharding.Node\Printer.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  38,
+"endLine":  28,
+"endColumn":  60
+}
+}
+}
+]
+}
