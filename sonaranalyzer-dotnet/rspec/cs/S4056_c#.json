@@ -1,0 +1,14 @@
+{
+  "title": "Overloads with a \"CultureInfo\" or an \"IFormatProvider\" parameter should be used",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    "localisation",
+    "pitfall"
+  ],
+  "defaultSeverity": "Minor"
+}

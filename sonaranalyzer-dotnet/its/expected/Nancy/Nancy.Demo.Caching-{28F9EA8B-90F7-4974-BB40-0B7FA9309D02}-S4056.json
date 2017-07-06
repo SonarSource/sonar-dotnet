@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Demo.Caching\CachingBootstrapper.cs",
+"region":  {
+"startLine":  66,
+"startColumn":  18,
+"endLine":  66,
+"endColumn":  79
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Demo.Caching\MainModule.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  45,
+"endLine":  12,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Demo.Caching\MainModule.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  47,
+"endLine":  17,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Demo.Caching\MainModule.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  47,
+"endLine":  22,
+"endColumn":  70
+}
+}
+}
+]
+}

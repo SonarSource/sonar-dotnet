@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4056",
+"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Encryption.MachineKey\MachineKeyHmacProvider.cs",
+"region":  {
+"startLine":  98,
+"startColumn":  29,
+"endLine":  98,
+"endColumn":  77
+}
+}
+}
+]
+}

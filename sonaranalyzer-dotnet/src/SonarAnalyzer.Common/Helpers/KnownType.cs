@@ -95,6 +95,8 @@ namespace SonarAnalyzer.Helpers
             System_Byte,
             System_SByte);
 
+        public static readonly KnownType System_Activator = new KnownType("System.Activator");
+
         public static readonly KnownType System_Exception = new KnownType("System.Exception");
         public static readonly KnownType System_Type = new KnownType("System.Type");
         public static readonly KnownType System_GC = new KnownType("System.GC");
@@ -135,6 +137,7 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType System_Drawing_Image = new KnownType("System.Drawing.Image");
         public static readonly KnownType System_Drawing_Bitmap = new KnownType("System.Drawing.Bitmap");
 
+        public static readonly KnownType Sytem_Resources_ResourceManager = new KnownType("System.Resources.ResourceManager");
         public static readonly KnownType System_Runtime_InteropServices_DefaultParameterValueAttribute = new KnownType("System.Runtime.InteropServices.DefaultParameterValueAttribute");
         public static readonly KnownType System_Runtime_InteropServices_OptionalAttribute = new KnownType("System.Runtime.InteropServices.OptionalAttribute");
         public static readonly KnownType System_Runtime_InteropServices_ComVisibleAttribute = new KnownType("System.Runtime.InteropServices.ComVisibleAttribute");
