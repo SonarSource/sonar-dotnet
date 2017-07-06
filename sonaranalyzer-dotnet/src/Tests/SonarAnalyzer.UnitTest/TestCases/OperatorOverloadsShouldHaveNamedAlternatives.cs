@@ -84,6 +84,7 @@ namespace Tests.Diagnostics
     {
         public static FooCompliant_OtherArguments operator +(FooCompliant_OtherArguments x, FooCompliant_OtherArguments y) => null;
 
+        // We don't care about return type, argument count and types, just as FxCop
         public FooCompliant_OtherArguments Add() => null;
     }
 }
