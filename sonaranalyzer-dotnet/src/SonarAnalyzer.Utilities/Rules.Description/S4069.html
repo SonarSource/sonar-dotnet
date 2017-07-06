@@ -1,0 +1,156 @@
+<p>Operator overloading is convenient but unfortunately not portable across languages. To be able to access the same functionality from another
+language you need to provide an alternate named method following the convention:</p>
+<table>
+  <tbody>
+    <tr>
+      <th>Operator</th>
+      <th>Method Name</th>
+    </tr>
+    <tr>
+      <th><code>+</code> (binary)</th>
+      <th>Add</th>
+    </tr>
+    <tr>
+      <th><code>+=</code></th>
+      <th>Add</th>
+    </tr>
+    <tr>
+      <th><code>&amp;</code></th>
+      <th>BitwiseAnd</th>
+    </tr>
+    <tr>
+      <th><code>&amp;=</code></th>
+      <th>BitwiseAnd</th>
+    </tr>
+    <tr>
+      <th><code>|</code></th>
+      <th>BitwiseOr</th>
+    </tr>
+    <tr>
+      <th><code>=</code></th>
+      <th>BitwiseOr</th>
+    </tr>
+    <tr>
+      <th><code>--</code></th>
+      <th>Decrement</th>
+    </tr>
+    <tr>
+      <th><code>/</code></th>
+      <th>Divide</th>
+    </tr>
+    <tr>
+      <th><code>/=</code></th>
+      <th>Divide</th>
+    </tr>
+    <tr>
+      <th><code>==</code></th>
+      <th>Equals</th>
+    </tr>
+    <tr>
+      <th><code>^</code></th>
+      <th>Xor</th>
+    </tr>
+    <tr>
+      <th><code>^=</code></th>
+      <th>Xor</th>
+    </tr>
+    <tr>
+      <th><code>&gt;</code></th>
+      <th>Compare</th>
+    </tr>
+    <tr>
+      <th><code>&gt;=</code></th>
+      <th>Compare</th>
+    </tr>
+    <tr>
+      <th><code>++</code></th>
+      <th>Increment</th>
+    </tr>
+    <tr>
+      <th><code>&lt;&gt;</code></th>
+      <th>Equals</th>
+    </tr>
+    <tr>
+      <th><code>&lt;&lt;</code></th>
+      <th>LeftShift</th>
+    </tr>
+    <tr>
+      <th><code>&lt;&lt;=</code></th>
+      <th>LeftShift</th>
+    </tr>
+    <tr>
+      <th><code>&lt;</code></th>
+      <th>Compare</th>
+    </tr>
+    <tr>
+      <th><code>&lt;=</code></th>
+      <th>Compare</th>
+    </tr>
+    <tr>
+      <th><code>&amp;&amp;</code></th>
+      <th>LogicalAnd</th>
+    </tr>
+    <tr>
+      <th><code>||</code></th>
+      <th>LogicalOr</th>
+    </tr>
+    <tr>
+      <th><code>!</code></th>
+      <th>LogicalNot</th>
+    </tr>
+    <tr>
+      <th><code>%</code></th>
+      <th>Mod or Remainder</th>
+    </tr>
+    <tr>
+      <th><code>%=</code></th>
+      <th>Mod</th>
+    </tr>
+    <tr>
+      <th><code>*</code> (binary)</th>
+      <th>Multiply</th>
+    </tr>
+    <tr>
+      <th><code>*=</code></th>
+      <th>Multiply</th>
+    </tr>
+    <tr>
+      <th><code>~</code></th>
+      <th>OnesComplement</th>
+    </tr>
+    <tr>
+      <th><code>&gt;&gt;</code></th>
+      <th>RightShift</th>
+    </tr>
+    <tr>
+      <th><code>=</code></th>
+      <th>RightShift</th>
+    </tr>
+    <tr>
+      <th><code>-</code> (binary)</th>
+      <th>Subtract</th>
+    </tr>
+    <tr>
+      <th><code>-=</code></th>
+      <th>Subtract</th>
+    </tr>
+    <tr>
+      <th><code>true</code></th>
+      <th>IsTrue (Property)</th>
+    </tr>
+    <tr>
+      <th><code>-</code> (unary)</th>
+      <th>Negate</th>
+    </tr>
+    <tr>
+      <th><code>+</code> (unary)</th>
+      <th>Plus</th>
+    </tr>
+    <tr>
+      <th><code>false</code></th>
+      <th>IsTrue (Property)</th>
+    </tr>
+  </tbody>
+</table>
+<p>This rule raises an exception when there is an operator overload without the expected named alternative method.</p>
+
