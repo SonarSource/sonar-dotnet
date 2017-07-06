@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4050",
+"message":  "Provide an implementation for: 'operator-', 'operator==', 'operator!='.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Remote\Deadline.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  18,
+"endLine":  15,
+"endColumn":  26
+}
+}
+}
+]
+}
