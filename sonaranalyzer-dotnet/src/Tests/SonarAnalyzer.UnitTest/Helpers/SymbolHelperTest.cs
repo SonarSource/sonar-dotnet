@@ -33,6 +33,8 @@ namespace SonarAnalyzer.UnitTest.Helpers
         internal const string TestInput = @"
 namespace NS
 {
+  using System.Collections.Generic;
+
   public class Base
   {
     public class Nested
@@ -64,6 +66,7 @@ namespace NS
   {
     int Property2 { get; set; }
     void Method3();
+    void Method4<T, V>(List<T> param1, List<int> param2, List<V> param3, IList<int> param4);
   }
 }
 ";
@@ -269,6 +272,39 @@ namespace NS
             var typeSymbol = semanticModel.GetDeclaredSymbol(baseClassDeclaration) as INamedTypeSymbol;
             var typeSymbols = typeSymbol.GetAllNamedTypes();
             typeSymbols.Should().HaveCount(3);
+        }
+
+        [TestMethod]
+        public void Symbol_IsKnownType()
+        {
+            var method4 = interfaceDeclaration
+                .DescendantNodes()
+                .OfType<MethodDeclarationSyntax>()
+                .First(m => m.Identifier.ValueText == "Method4");
+
+            method4.ParameterList
+                .Parameters[0]
+                .Type
+                .IsKnownType(KnownType.System_Collections_Generic_List_T, semanticModel)
+                .Should().BeTrue();
+
+            method4.ParameterList
+                .Parameters[1]
+                .Type
+                .IsKnownType(KnownType.System_Collections_Generic_List_T, semanticModel)
+                .Should().BeTrue();
+
+            method4.ParameterList
+                .Parameters[2]
+                .Type
+                .IsKnownType(KnownType.System_Collections_Generic_List_T, semanticModel)
+                .Should().BeTrue();
+
+            method4.ParameterList
+                .Parameters[3]
+                .Type
+                .IsKnownType(KnownType.System_Collections_Generic_List_T, semanticModel)
+                .Should().BeFalse();
         }
     }
 }
