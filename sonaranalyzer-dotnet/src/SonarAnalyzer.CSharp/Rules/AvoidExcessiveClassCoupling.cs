@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
@@ -46,34 +47,79 @@ namespace SonarAnalyzer.Rules.CSharp
             "Maximum number of classes a single class is allowed to depend upon", ThresholdDefaultValue)]
         public int Threshold { get; set; } = ThresholdDefaultValue;
 
+        private static ISet<KnownType> typesExcludedFromCoupling = new HashSet<KnownType>
+        {
+            KnownType.System_Boolean,
+            KnownType.System_Byte,
+            KnownType.System_SByte,
+            KnownType.System_Int16,
+            KnownType.System_UInt16,
+            KnownType.System_Int32,
+            KnownType.System_UInt32,
+            KnownType.System_Int64,
+            KnownType.System_UInt64,
+            KnownType.System_IntPtr,
+            KnownType.System_UIntPtr,
+            KnownType.System_Char,
+            KnownType.System_Single,
+            KnownType.System_Double,
+            KnownType.System_String,
+            KnownType.System_Object
+        };
+
         protected override void Initialize(ParameterLoadingAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
                     var classDeclaration = (ClassDeclarationSyntax)c.Node;
-                    classDeclaration.Members.OfType<FieldDeclarationSyntax>().Select(x => x.ChildNodes());
-                    classDeclaration.Members.OfType<PropertyDeclarationSyntax>().Select(x => x.ChildNodes());
-                    classDeclaration.Members.OfType<EventDeclarationSyntax>().Select(x => x.ChildNodes());
-                    classDeclaration.Members.OfType<BaseMethodDeclarationSyntax>().Select(x => x.ChildNodes());
 
+                    if (classDeclaration.Identifier.IsMissing)
+                    {
+                        return;
+                    }
 
+                    var summedFieldsCoupling = classDeclaration.Members
+                        .OfType<FieldDeclarationSyntax>()
+                        .SelectMany(field => CollectCoupledClasses(field, c.SemanticModel));
 
+                    //var summedPropertiesCoupling = classDeclaration.Members
+                    //    .OfType<PropertyDeclarationSyntax>()
+                    //    .Select(property => property.AccessorList.Accessors.Select(ac => ac.))
+
+                    var summedMethodsCoupling = classDeclaration.Members
+                        .OfType<BaseMethodDeclarationSyntax>()
+                        .Sum(baseMethod => CalculateBaseMethodClassCoupling(baseMethod, c.SemanticModel));
+
+                    var totalClassCoupling = summedFieldsCoupling + summedPropertiesCoupling + summedMethodsCoupling;
+                    if (totalClassCoupling > Threshold)
+                    {
+                        c.ReportDiagnostic(Diagnostic.Create(rule, classDeclaration.Identifier.GetLocation(),
+                            totalClassCoupling, Threshold));
+                    }
                 }, SyntaxKind.ClassDeclaration);
         }
 
-        //private static int CalculateClassCoupling<TSyntax>(ClassDeclarationSyntax classDeclaration)
-        //    where TSyntax : SyntaxNode
-        //{
-        //    classDeclaration.Members
-        //        .OfType<TSyntax>()
-        //        .Select(x => x.ChildNodes());
+        private static IEnumerable<ITypeSymbol> CollectCoupledClasses(FieldDeclarationSyntax field,
+            SemanticModel model)
+        {
+            return field.Declaration.Variables
+                .Select(variable => model.GetTypeInfo(variable.Initializer.Value))
+                .SelectMany(x => new[] { x.Type, x.ConvertedType })
+        }
 
-        //    // parameters
-        //    // return type
-        //    // method call parameters
-        //    // object creation
-        //    // member access
-        //}
+        private static IEnumerable<ITypeSymbol> CollectCoupledClasses(BaseMethodDeclarationSyntax method,
+            SemanticModel model)
+        {
+            return 0;
+        }
+
+        private static int CountDistinctClassCoupling(this IEnumerable<ITypeSymbol> types)
+        {
+            return types.Distinct()
+                .WhereNotNull()
+                .Where(type => !type.IsAny(typesExcludedFromCoupling))
+                .Count();
+        }
     }
 }
