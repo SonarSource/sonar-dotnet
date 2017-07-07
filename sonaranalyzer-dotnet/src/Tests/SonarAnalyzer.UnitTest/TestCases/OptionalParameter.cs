@@ -35,10 +35,10 @@
         internal void InternalFoo(int i = 42) // Compliant, internal
         { }
 
-        protected void ProtectedFoo(int i = 42) // Compliant
+        protected void ProtectedFoo(int i = 42) // Noncompliant
         { }
 
-        internal protected void InternalProtectedFoo(int i = 42) // Compliant
+        internal protected void InternalProtectedFoo(int i = 42) // Noncompliant
         {
         }
 

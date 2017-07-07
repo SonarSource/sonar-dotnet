@@ -2,6 +2,19 @@
 "issues":  [
 {
 "id":  "S3874",
+"message":  "Consider refactoring this method in order to remove the need for this 'out' modifier.",
+"location":  {
+"uri":  "akka.net\src\core\Akka\Dispatch\MessageQueues\BlockingMessageQueue.cs",
+"region":  {
+"startLine":  78,
+"startColumn":  50,
+"endLine":  78,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S3874",
 "message":  "Consider refactoring this method in order to remove the need for this 'ref' modifier.",
 "location":  {
 "uri":  "akka.net\src\core\Akka\Util\Internal\InterlockedSpin.cs",

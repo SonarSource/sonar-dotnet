@@ -54,7 +54,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    var classMembers = classSymbol.GetMembers().Where(IsPubliclyAccessible);
+                    var classMembers = classSymbol.GetMembers().Where(SymbolHelper.IsPubliclyAccessible);
                     var properties = classMembers.OfType<IPropertySymbol>().Where(property => !property.IsOverride);
                     var methods = classMembers.OfType<IMethodSymbol>().ToList();
 
@@ -70,15 +70,6 @@ namespace SonarAnalyzer.Rules.CSharp
                             messageArgs: new[] { propertyIdentifier.ValueText, methodIdentifier.ValueText }));
                     }
                 }, SyntaxKind.ClassDeclaration);
-        }
-
-        private static bool IsPubliclyAccessible(ISymbol symbol)
-        {
-            var accessibility = symbol.GetEffectiveAccessibility();
-
-            return accessibility == Accessibility.Public ||
-                accessibility == Accessibility.Protected ||
-                accessibility == Accessibility.ProtectedOrInternal;
         }
 
         private static IEnumerable<Tuple<SyntaxToken, SyntaxToken>> GetCollidingMembers(

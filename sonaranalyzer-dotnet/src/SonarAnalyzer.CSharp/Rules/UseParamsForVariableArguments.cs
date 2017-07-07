@@ -50,21 +50,12 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     if (!methodDeclaration.Identifier.IsMissing &&
                         methodSymbol != null &&
-                        IsPubliclyAccessible(methodSymbol) &&
+                        methodSymbol.IsPubliclyAccessible() &&
                         HasAnyArgListParameter(methodDeclaration))
                     {
                         c.ReportDiagnostic(Diagnostic.Create(rule, methodDeclaration.Identifier.GetLocation()));
                     }
                 }, SyntaxKind.MethodDeclaration);
-        }
-
-        private static bool IsPubliclyAccessible(ISymbol symbol)
-        {
-            var effectiveAccessibility = symbol.GetEffectiveAccessibility();
-
-            return effectiveAccessibility == Accessibility.Public ||
-                effectiveAccessibility == Accessibility.Protected ||
-                effectiveAccessibility == Accessibility.ProtectedOrInternal;
         }
 
         private static bool HasAnyArgListParameter(MethodDeclarationSyntax methodDeclaration)

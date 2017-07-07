@@ -19,10 +19,10 @@
  */
 
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Helpers;
-using System.Collections.Immutable;
 
 namespace SonarAnalyzer.Rules.Common
 {
@@ -58,7 +58,7 @@ namespace SonarAnalyzer.Rules.Common
                     var symbol = c.SemanticModel.GetDeclaredSymbol(anyVariable) as IFieldSymbol;
                     if (symbol == null ||
                         !symbol.IsConst ||
-                        !symbol.IsPublicApi())
+                        symbol.GetEffectiveAccessibility() != Accessibility.Public)
                     {
                         return;
                     }

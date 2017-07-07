@@ -19,6 +19,7 @@
  */
 
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -26,7 +27,6 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
-using System.Collections.Immutable;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -63,12 +63,11 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     var firstVariable = fieldDeclaration.Declaration.Variables[0];
                     var symbol = c.SemanticModel.GetDeclaredSymbol(firstVariable);
-                    if (symbol == null || !symbol.IsPublicApi())
-                    {
-                        return;
-                    }
 
-                    c.ReportDiagnostic(Diagnostic.Create(rule, firstVariable.GetLocation()));
+                    if (symbol.GetEffectiveAccessibility() == Accessibility.Public)
+                    {
+                        c.ReportDiagnostic(Diagnostic.Create(rule, firstVariable.GetLocation()));
+                    }
                 }, SyntaxKind.FieldDeclaration);
         }
     }

@@ -49,7 +49,7 @@ namespace SonarAnalyzer.Rules.Common
                     var symbol = c.SemanticModel.GetDeclaredSymbol(method);
 
                     if (symbol == null ||
-                        !symbol.IsPublicApi() ||
+                        !symbol.IsPubliclyAccessible() ||
                         symbol.GetInterfaceMember() != null ||
                         symbol.GetOverriddenMember() != null)
                     {

@@ -6,6 +6,19 @@
 "location":  {
 "uri":  "akka.net\src\core\Akka.Remote.Tests\AccrualFailureDetectorSpec.cs",
 "region":  {
+"startLine":  252,
+"startColumn":  80,
+"endLine":  252,
+"endColumn":  88
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Remote.Tests\AccrualFailureDetectorSpec.cs",
+"region":  {
 "startLine":  285,
 "startColumn":  83,
 "endLine":  285,

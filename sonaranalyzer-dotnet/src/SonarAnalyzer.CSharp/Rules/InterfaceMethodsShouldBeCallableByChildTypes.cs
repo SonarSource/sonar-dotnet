@@ -108,7 +108,7 @@ namespace SonarAnalyzer.Rules.CSharp
             return classSymbol != null &&
                 !classSymbol.IsSealed &&
                 !classSymbol.IsStatic &&
-                classSymbol.IsPublicApi();
+                classSymbol.IsPubliclyAccessible();
         }
 
         private static bool AreMethodsEquivalent(MethodDeclarationSyntax currentMethod,

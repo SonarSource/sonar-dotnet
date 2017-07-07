@@ -106,31 +106,31 @@ namespace NS
                 .First(m => m.Identifier.ValueText == "Method1");
             var symbol = semanticModel.GetDeclaredSymbol(method);
 
-            symbol.IsPublicApi().Should().BeTrue();
+            SymbolHelper.IsPubliclyAccessible(symbol).Should().BeTrue();
 
             method = baseClassDeclaration.DescendantNodes().OfType<MethodDeclarationSyntax>()
                 .First(m => m.Identifier.ValueText == "Method2");
             symbol = semanticModel.GetDeclaredSymbol(method);
 
-            symbol.IsPublicApi().Should().BeFalse();
+            symbol.IsPubliclyAccessible().Should().BeTrue();
 
             var property = baseClassDeclaration.DescendantNodes().OfType<PropertyDeclarationSyntax>()
                 .First(m => m.Identifier.ValueText == "Property");
             symbol = semanticModel.GetDeclaredSymbol(property);
 
-            symbol.IsPublicApi().Should().BeTrue();
+            symbol.IsPubliclyAccessible().Should().BeTrue();
 
             property = interfaceDeclaration.DescendantNodes().OfType<PropertyDeclarationSyntax>()
                 .First(m => m.Identifier.ValueText == "Property2");
             symbol = semanticModel.GetDeclaredSymbol(property);
 
-            symbol.IsPublicApi().Should().BeTrue();
+            symbol.IsPubliclyAccessible().Should().BeTrue();
 
             property = derivedClassDeclaration1.DescendantNodes().OfType<PropertyDeclarationSyntax>()
                 .First(m => m.Identifier.ValueText == "Property");
             symbol = semanticModel.GetDeclaredSymbol(property);
 
-            symbol.IsPublicApi().Should().BeFalse();
+            symbol.IsPubliclyAccessible().Should().BeFalse();
         }
 
         [TestMethod]

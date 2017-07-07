@@ -29,7 +29,7 @@
 
         protected class MyProtectedSubClass
         {
-            public double Pi4 = 3.14;
+            public double Pi4 = 3.14;  // Noncompliant
             private double Pi5 = 3.14;
             protected double Pi6 = 3.14;
             internal double Pi7 = 3.14;

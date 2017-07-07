@@ -57,7 +57,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     var propertyCandidates = typeSymbol
                         .GetMembers()
-                        .Where(IsPubliclyAccessible)
+                        .Where(SymbolHelper.IsPubliclyAccessible)
                         .OfType<IMethodSymbol>()
                         .Where(IsPropertyCanditate);
 
@@ -71,14 +71,6 @@ namespace SonarAnalyzer.Rules.CSharp
                 },
                 SyntaxKind.ClassDeclaration,
                 SyntaxKind.InterfaceDeclaration);
-        }
-
-        private static bool IsPubliclyAccessible(ISymbol symbol)
-        {
-            var accessibility = symbol.GetEffectiveAccessibility();
-            return accessibility == Accessibility.Public ||
-                   accessibility == Accessibility.Protected ||
-                   accessibility == Accessibility.ProtectedOrInternal;
         }
 
         private bool IsPropertyCanditate(IMethodSymbol method)

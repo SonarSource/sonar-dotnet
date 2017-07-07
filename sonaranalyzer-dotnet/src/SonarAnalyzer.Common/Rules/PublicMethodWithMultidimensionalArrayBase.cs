@@ -49,7 +49,7 @@ namespace SonarAnalyzer.Rules.Common
                     if (methodSymbol == null ||
                         methodSymbol.GetInterfaceMember() != null ||
                         methodSymbol.GetOverriddenMember() != null ||
-                        !methodSymbol.IsPublicApi() ||
+                        !methodSymbol.IsPubliclyAccessible() ||
                         !MethodHasMultidimensionalArrayParameters(methodSymbol))
                     {
                         return;

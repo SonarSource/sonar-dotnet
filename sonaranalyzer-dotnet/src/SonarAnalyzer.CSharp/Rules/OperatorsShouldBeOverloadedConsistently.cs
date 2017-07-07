@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
@@ -62,7 +61,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 if (classSymbol == null ||
                     classDeclaration.Identifier.IsMissing ||
-                    !IsPubliclyAccessible(classSymbol))
+                    !classSymbol.IsPubliclyAccessible())
                 {
                     return;
                 }
@@ -75,15 +74,6 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
             },
             SyntaxKind.ClassDeclaration);
-        }
-
-        private static bool IsPubliclyAccessible(ISymbol symbol)
-        {
-            var effectiveAccessibility = symbol.GetEffectiveAccessibility();
-
-            return effectiveAccessibility == Accessibility.Public ||
-                effectiveAccessibility == Accessibility.Protected ||
-                effectiveAccessibility == Accessibility.ProtectedOrInternal;
         }
 
         private static IEnumerable<string> FindMissingMethods(INamedTypeSymbol classSymbol)
