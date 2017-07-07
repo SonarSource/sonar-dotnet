@@ -179,22 +179,5 @@ namespace SonarAnalyzer.Rules.CSharp
                 ? model.GetSymbolInfo(memberAccess.Expression).Symbol
                 : null;
         }
-
-        private static string GetConstructedTypeName(ISymbol symbol)
-        {
-            var localSymbol = symbol as ILocalSymbol;
-            if (localSymbol != null)
-            {
-                return localSymbol.Type.Name;
-            }
-
-            var fieldSymbol = symbol as IFieldSymbol;
-            if (fieldSymbol != null)
-            {
-                return fieldSymbol.Type.Name;
-            }
-
-            return null;
-        }
     }
 }
