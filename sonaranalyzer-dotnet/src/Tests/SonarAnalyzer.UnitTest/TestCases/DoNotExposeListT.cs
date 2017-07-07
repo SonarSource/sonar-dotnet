@@ -25,6 +25,12 @@ namespace Tests.Diagnostics
 //             ^^^^^^^^^ Noncompliant {{Refactor this property to use a generic collection designed for inheritance.}}
 
         public Bar(List<Bar> bars) { } // Noncompliant  {{Refactor this constructor to use a generic collection designed for inheritance.}}
+
+        protected List<int> ProtectedMethod() => null; // Noncompliant
+
+        protected internal List<int> ProtectedInternalMethod() => null; // Noncompliant
+
+        internal List<int> InternalMethod() => null;
     }
 
     public class InvalidCode

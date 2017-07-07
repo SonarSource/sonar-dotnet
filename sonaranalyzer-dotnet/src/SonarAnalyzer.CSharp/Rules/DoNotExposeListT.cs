@@ -53,9 +53,9 @@ namespace SonarAnalyzer.Rules.CSharp
                 var methodSymbol = c.SemanticModel.GetDeclaredSymbol(baseMethodDeclaration);
 
                 if (methodSymbol == null ||
-                    !IsPubliclyAccessible(methodSymbol) ||
+                    !methodSymbol.IsPubliclyAccessible() ||
                     methodSymbol.IsOverride ||
-                    IsPropertyGetOrSet(methodSymbol))
+                    !IsOrdinaryMethodOrConstructor(methodSymbol))
                 {
                     return;
                 }
@@ -88,7 +88,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 var propertySymbol = c.SemanticModel.GetDeclaredSymbol(propertyDeclaration);
 
                 if (propertySymbol != null &&
-                    IsPubliclyAccessible(propertySymbol) &&
+                    propertySymbol.IsPubliclyAccessible() &&
                     !propertySymbol.IsOverride)
                 {
                     ReportIfListT(propertyDeclaration.Type, c, "property");
@@ -114,7 +114,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 var fieldSymbol = c.SemanticModel.GetDeclaredSymbol(variableDeclaration);
 
                 if (fieldSymbol != null &&
-                    IsPubliclyAccessible(fieldSymbol) &&
+                    fieldSymbol.IsPubliclyAccessible() &&
                     !fieldSymbol.IsOverride)
                 {
                     ReportIfListT(fieldDeclaration.Declaration.Type, c, "field");
@@ -125,26 +125,18 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static void ReportIfListT(TypeSyntax typeSyntax, SyntaxNodeAnalysisContext context, string memberType)
         {
-            if (typeSyntax != null && typeSyntax.IsKnownType(KnownType.System_Collections_Generic_List_T, context.SemanticModel))
+            if (typeSyntax != null
+                && typeSyntax.IsKnownType(KnownType.System_Collections_Generic_List_T, context.SemanticModel))
             {
                 context.ReportDiagnostic(Diagnostic.Create(rule, typeSyntax.GetLocation(),
                     messageArgs: memberType));
             }
         }
 
-        private static bool IsPropertyGetOrSet(IMethodSymbol method)
+        private static bool IsOrdinaryMethodOrConstructor(IMethodSymbol method)
         {
-            return method.MethodKind == MethodKind.PropertyGet ||
-                   method.MethodKind == MethodKind.PropertySet;
-        }
-
-        private static bool IsPubliclyAccessible(ISymbol symbol)
-        {
-            var access = symbol.GetEffectiveAccessibility();
-
-            return access == Accessibility.Public ||
-                   access == Accessibility.Protected ||
-                   access == Accessibility.ProtectedOrInternal;
+            return method.MethodKind == MethodKind.Ordinary ||
+                   method.MethodKind == MethodKind.Constructor;
         }
     }
 }
