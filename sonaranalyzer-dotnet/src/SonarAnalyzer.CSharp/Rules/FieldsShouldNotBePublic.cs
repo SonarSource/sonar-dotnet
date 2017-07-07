@@ -64,8 +64,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var firstVariable = fieldDeclaration.Declaration.Variables[0];
                     var symbol = c.SemanticModel.GetDeclaredSymbol(firstVariable);
 
-                    if (symbol != null &&
-                        symbol.GetEffectiveAccessibility() == Accessibility.Public)
+                    if (symbol.GetEffectiveAccessibility() == Accessibility.Public)
                     {
                         c.ReportDiagnostic(Diagnostic.Create(rule, firstVariable.GetLocation()));
                     }

@@ -58,7 +58,7 @@ namespace SonarAnalyzer.Rules.Common
                     var symbol = c.SemanticModel.GetDeclaredSymbol(anyVariable) as IFieldSymbol;
                     if (symbol == null ||
                         !symbol.IsConst ||
-                        symbol.GetEffectiveAccessibility()!= Accessibility.Public)
+                        symbol.GetEffectiveAccessibility() != Accessibility.Public)
                     {
                         return;
                     }

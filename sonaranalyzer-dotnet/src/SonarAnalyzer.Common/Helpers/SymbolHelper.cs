@@ -252,11 +252,6 @@ namespace SonarAnalyzer.Helpers
 
         public static bool IsPubliclyAccessible(this ISymbol symbol)
         {
-            if (symbol == null)
-            {
-                return false;
-            }
-
             var effectiveAccessibility = GetEffectiveAccessibility(symbol);
 
             return effectiveAccessibility == Accessibility.Public ||
