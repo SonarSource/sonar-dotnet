@@ -57,7 +57,9 @@ namespace SonarAnalyzer.Rules.CSharp
         [RuleParameter(
             key: "filteredClasses",
             type: PropertyType.String,
-            description: "Classes to be filtered out of the count of inheritance. Depth counting will stop when a filtered class is reached. (String)",
+            description: "Comma separated list of classes to be filtered out of the count of inheritance. Depth " +
+            "counting will stop when a filtered class is reached. Ex value: System.Windows.Controls.UserControl, " +
+            "System.Windows.*. (String)",
             defaultValue: FilteredClassesDefaultValue)]
         public string FilteredClasses
         {
