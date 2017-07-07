@@ -5883,6 +5883,33 @@
   <data name="S3898_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
   </data>
+  <data name="S3900_Category" xml:space="preserve">
+    <value>Sonar Code Smell</value>
+  </data>
+  <data name="S3900_Description" xml:space="preserve">
+    <value>A public method can be called from anywhere, which means you should validate parameters to be within the expected constraints. In general, checking against null is recommended defensive programming.</value>
+  </data>
+  <data name="S3900_IsActivatedByDefault" xml:space="preserve">
+    <value>False</value>
+  </data>
+  <data name="S3900_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S3900_RemediationCost" xml:space="preserve">
+    <value>5min</value>
+  </data>
+  <data name="S3900_Severity" xml:space="preserve">
+    <value>Major</value>
+  </data>
+  <data name="S3900_Tags" xml:space="preserve">
+    <value>convention</value>
+  </data>
+  <data name="S3900_Title" xml:space="preserve">
+    <value>Arguments of public methods should be validated against null</value>
+  </data>
+  <data name="S3900_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S3902_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>

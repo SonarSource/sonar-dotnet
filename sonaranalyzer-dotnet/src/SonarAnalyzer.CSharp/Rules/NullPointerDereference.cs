@@ -90,6 +90,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
         internal sealed class NullPointerCheck : ExplodedGraphCheck
         {
+            public event EventHandler<MemberAccessingEventArgs> MemberAccessing;
+
             public event EventHandler<MemberAccessedEventArgs> MemberAccessed;
 
             public NullPointerCheck(ExplodedGraph explodedGraph)
@@ -98,12 +100,14 @@ namespace SonarAnalyzer.Rules.CSharp
 
             }
 
+            private void OnMemberAccessing(IdentifierNameSyntax identifier, ISymbol symbol, ProgramState programState)
+            {
+                MemberAccessing?.Invoke(this, new MemberAccessingEventArgs(identifier, symbol, programState));
+            }
+
             private void OnMemberAccessed(IdentifierNameSyntax identifier)
             {
-                MemberAccessed?.Invoke(this, new MemberAccessedEventArgs
-                {
-                    Identifier = identifier
-                });
+                MemberAccessed?.Invoke(this, new MemberAccessedEventArgs(identifier));
             }
 
             public override ProgramState PreProcessInstruction(ProgramPoint programPoint, ProgramState programState)
@@ -234,11 +238,15 @@ namespace SonarAnalyzer.Rules.CSharp
 
             private ProgramState ProcessIdentifier(ProgramState programState, IdentifierNameSyntax identifier, ISymbol symbol)
             {
-                if (explodedGraph.IsSymbolTracked(symbol) &&
-                    symbol.HasConstraint(ObjectConstraint.Null, programState))
+                if (explodedGraph.IsSymbolTracked(symbol))
                 {
-                    OnMemberAccessed(identifier);
-                    return null;
+                    OnMemberAccessing(identifier, symbol, programState);
+
+                    if (symbol.HasConstraint(ObjectConstraint.Null, programState))
+                    {
+                        OnMemberAccessed(identifier);
+                        return null;
+                    }
                 }
 
                 return SetNotNullConstraintOnSymbol(symbol, programState);

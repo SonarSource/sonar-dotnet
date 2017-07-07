@@ -107,6 +107,7 @@
     <Compile Include="Helpers\StringUtils.cs" />
     <Compile Include="Helpers\SymbolicExecution\ExplodedGraph.cs" />
     <Compile Include="Helpers\SymbolicExecution\InvocationVisitor.cs" />
+    <Compile Include="Helpers\SymbolicExecution\MemberAccesingEventArgs.cs" />
     <Compile Include="Helpers\SymbolicExecution\MemberAccessedEventArgs.cs" />
     <Compile Include="Helpers\SymbolicExecution\SymbolicValueHelper.cs" />
     <Compile Include="Helpers\SyntaxHelper.cs" />
