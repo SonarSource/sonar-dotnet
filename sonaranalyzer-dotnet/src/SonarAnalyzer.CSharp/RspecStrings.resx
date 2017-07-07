@@ -7173,6 +7173,33 @@
   <data name="S4056_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
   </data>
+  <data name="S4057_Category" xml:space="preserve">
+    <value>Sonar Code Smell</value>
+  </data>
+  <data name="S4057_Description" xml:space="preserve">
+    <value>When you create a DataTable or DataSet, you should set the locale explicitly. By default, the locale for these types is the current culture. For data that is stored in a database or file and is shared globally, the locale should ordinarily be set to the invariant culture (CultureInfo.InvariantCulture).</value>
+  </data>
+  <data name="S4057_IsActivatedByDefault" xml:space="preserve">
+    <value>False</value>
+  </data>
+  <data name="S4057_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S4057_RemediationCost" xml:space="preserve">
+    <value>5min</value>
+  </data>
+  <data name="S4057_Severity" xml:space="preserve">
+    <value>Major</value>
+  </data>
+  <data name="S4057_Tags" xml:space="preserve">
+    <value>localisation</value>
+  </data>
+  <data name="S4057_Title" xml:space="preserve">
+    <value>Locales should be set for data types</value>
+  </data>
+  <data name="S4057_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S4058_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>

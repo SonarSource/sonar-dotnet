@@ -1,0 +1,54 @@
+<p>When you create a <code>DataTable</code> or <code>DataSet</code>, you should set the locale explicitly. By default, the locale for these types is
+the current culture. For data that is stored in a database or file and is shared globally, the locale should ordinarily be set to the invariant
+culture (<code>CultureInfo.InvariantCulture</code>).</p>
+<p>This rule raises an issue when <code>System.Data.DataTable</code> or <code>System.Data.DataSet</code> instances are created without explicitly
+setting the locale property (<code>DataTable.Locale</code> or <code>DataSet.Locale</code>).</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+using System;
+using System.Data;
+
+namespace MyLibrary
+{
+    public class Foo
+    {
+        public DataTable CreateTable()
+        {
+            DataTable table = new DataTable("Customers"); // Noncompliant table.Locale not set
+            DataColumn key = table.Columns.Add("ID", typeof(Int32));
+
+            key.AllowDBNull = false;
+            key.Unique = true;
+            table.Columns.Add("LastName", typeof(String));
+            table.Columns.Add("FirstName", typeof(String));
+            return table;
+        }
+    }
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+using System;
+using System.Data;
+using System.Globalization;
+
+namespace MyLibrary
+{
+    public class Foo
+    {
+        public DataTable CreateTable()
+        {
+            DataTable table = new DataTable("Customers");
+            table.Locale = CultureInfo.InvariantCulture;
+            DataColumn key = table.Columns.Add("ID", typeof(Int32));
+
+            key.AllowDBNull = false;
+            key.Unique = true;
+            table.Columns.Add("LastName", typeof(String));
+            table.Columns.Add("FirstName", typeof(String));
+            return table;
+        }
+    }
+}
+</pre>
+

@@ -21,6 +21,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Data;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -48,6 +49,7 @@ namespace SonarAnalyzer.UnitTest
         private static readonly MetadataReference systemLinqAssembly = MetadataReference.CreateFromFile(typeof(Enumerable).Assembly.Location);
         private static readonly MetadataReference systemNetAssembly = MetadataReference.CreateFromFile(typeof(WebClient).Assembly.Location);
         internal static readonly MetadataReference SystemImmutableAssembly = MetadataReference.CreateFromFile(typeof(ImmutableArray).Assembly.Location);
+        internal static readonly MetadataReference SystemDataAssembly = MetadataReference.CreateFromFile(typeof(DataTable).Assembly.Location);
         internal static readonly MetadataReference SystemXmlAssembly = MetadataReference.CreateFromFile(typeof(System.Xml.XmlDocument).Assembly.Location);
 
         private const string FIXED_MESSAGE = "Fixed";
