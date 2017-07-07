@@ -148,13 +148,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static IPropertySymbol GetPropertySymbol(AssignmentExpressionSyntax assignment, SemanticModel model)
         {
-            var conditionalAccess = assignment.Left as ConditionalAccessExpressionSyntax;
-
-            var syntax = conditionalAccess != null
-                ? conditionalAccess.WhenNotNull
-                : assignment.Left;
-
-            return model.GetSymbolInfo(syntax).Symbol as IPropertySymbol;
+            return model.GetSymbolInfo(assignment.Left).Symbol as IPropertySymbol;
         }
 
         private static ISymbol GetAccessedVariable(AssignmentExpressionSyntax assignment, SemanticModel model)
@@ -180,16 +174,9 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             var memberAccess = variable as MemberAccessExpressionSyntax;
-            if (memberAccess != null)
-            {
-                return memberAccess.Expression != null
-                    ? model.GetSymbolInfo(memberAccess.Expression).Symbol
-                    : null;
-            }
 
-            var conditionalAccess = variable as ConditionalAccessExpressionSyntax;
-            return conditionalAccess?.Expression == null
-                ? model.GetSymbolInfo(conditionalAccess.Expression).Symbol
+            return memberAccess?.Expression != null
+                ? model.GetSymbolInfo(memberAccess.Expression).Symbol
                 : null;
         }
 
