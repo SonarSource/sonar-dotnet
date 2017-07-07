@@ -20,9 +20,6 @@ namespace Tests.Diagnostics
 
             DataTable dataTable2;
             dataTable2 = new DataTable { Locale = CultureInfo.InvariantCulture };
-
-            var dataTable3 = new System.Data.DataTable();
-            dataTable3?.Locale = System.Globalization.CultureInfo.InvariantCulture;
         }
 
         void Bar(DataTable table)
