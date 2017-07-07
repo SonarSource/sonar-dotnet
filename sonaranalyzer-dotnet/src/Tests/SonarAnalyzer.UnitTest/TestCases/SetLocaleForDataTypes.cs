@@ -53,5 +53,12 @@ namespace Tests.Diagnostics
             dataTable = new System.Data.DataTable(); // Noncompliant {{Set the locale for this 'DataTable'.}}
             return dataTable;
         }
+
+        void MoreTest()
+        {
+            var dataTable1 = new DataTable(); // Noncompliant {{Set the locale for this 'DataTable'.}}
+            var dataTable2 = new DataTable();
+            dataTable2.Locale = System.Globalization.CultureInfo.InvariantCulture;
+        }
     }
 }
