@@ -29,9 +29,15 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void FieldShouldNotBePublic()
+        public void FieldShouldNotBePublic_CSharp()
         {
             Verifier.VerifyAnalyzer(@"TestCases\FieldShouldNotBePublic.cs", new CS.FieldShouldNotBePublic());
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void FieldShouldNotBePublic_VB()
+        {
             Verifier.VerifyAnalyzer(@"TestCases\FieldShouldNotBePublic.vb", new VB.FieldShouldNotBePublic());
         }
     }

@@ -48,16 +48,13 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     var classDeclaration = (ClassDeclarationSyntax)c.Node;
                     var classSymbol = c.SemanticModel.GetDeclaredSymbol(classDeclaration);
-                    if (classSymbol == null ||
-                        classSymbol.IsSealed ||
-                        classSymbol.IsStatic ||
-                        !classSymbol.IsPublicApi() ||
-                        classDeclaration.Identifier.IsMissing)
-                    {
-                        return;
-                    }
 
-                    if (HasAnyInvalidIEquatableEqualsMethod(classSymbol))
+                    if (classSymbol != null &&
+                        !classSymbol.IsSealed &&
+                        !classSymbol.IsStatic &&
+                        classSymbol.IsPubliclyAccessible() &&
+                        !classDeclaration.Identifier.IsMissing &&
+                        HasAnyInvalidIEquatableEqualsMethod(classSymbol))
                     {
                         c.ReportDiagnostic(Diagnostic.Create(rule, classDeclaration.Identifier.GetLocation(),
                             classDeclaration.Identifier));

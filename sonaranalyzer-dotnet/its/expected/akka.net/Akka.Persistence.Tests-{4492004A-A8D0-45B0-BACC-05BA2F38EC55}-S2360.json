@@ -30,6 +30,45 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\PersistenceSpec.cs",
+"region":  {
+"startLine":  44,
+"startColumn":  75,
+"endLine":  44,
+"endColumn":  81
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\PersistenceSpec.cs",
+"region":  {
+"startLine":  52,
+"startColumn":  49,
+"endLine":  52,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence.Tests\PersistenceSpec.cs",
+"region":  {
+"startLine":  52,
+"startColumn":  82,
+"endLine":  52,
+"endColumn":  88
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
 "uri":  "akka.net\src\core\Akka.Persistence.Tests\ReceivePersistentActorTests.cs",
 "region":  {
 "startLine":  23,

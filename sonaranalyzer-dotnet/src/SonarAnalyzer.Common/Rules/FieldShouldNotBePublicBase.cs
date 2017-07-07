@@ -36,7 +36,7 @@ namespace SonarAnalyzer.Rules
             return fieldSymbol != null &&
                    !fieldSymbol.IsStatic &&
                    !fieldSymbol.IsConst &&
-                   fieldSymbol.IsPublicApi() &&
+                   fieldSymbol.GetEffectiveAccessibility() == Accessibility.Public &&
                    fieldSymbol.ContainingType.IsClass();
         }
 

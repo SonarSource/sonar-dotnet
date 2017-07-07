@@ -226,7 +226,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool ImplementsISerializable(ITypeSymbol typeSymbol)
         {
             return typeSymbol != null &&
-                typeSymbol.IsPublicApi() &&
+                typeSymbol.IsPubliclyAccessible() &&
                 typeSymbol.AllInterfaces.Any(IsOrImplementsISerializable);
         }
 

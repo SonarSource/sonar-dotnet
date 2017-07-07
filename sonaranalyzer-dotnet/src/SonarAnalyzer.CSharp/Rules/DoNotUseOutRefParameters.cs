@@ -18,15 +18,15 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
+using System.Collections.Immutable;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
-using System.Linq;
-using System;
-using System.Collections.Immutable;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -61,7 +61,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     if (containingMethod == null ||
                         containingMethod.IsOverride ||
-                        !containingMethod.IsPublicApi() ||
+                        !containingMethod.IsPubliclyAccessible() ||
                         IsTryPattern(containingMethod, modifier))
                     {
                         return;
@@ -75,7 +75,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private bool IsTryPattern(IMethodSymbol method, SyntaxToken modifier)
         {
             return method.Name.StartsWith("Try", StringComparison.Ordinal) &&
-                method.ReturnType.Is(KnownType.System_Boolean) && 
+                method.ReturnType.Is(KnownType.System_Boolean) &&
                 modifier.IsKind(SyntaxKind.OutKeyword);
         }
 

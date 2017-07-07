@@ -6,6 +6,32 @@
 "location":  {
 "uri":  "akka.net\src\core\Akka.Cluster.Tests.MultiNode\MultiNodeClusterSpec.cs",
 "region":  {
+"startLine":  203,
+"startColumn":  68,
+"endLine":  203,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Cluster.Tests.MultiNode\MultiNodeClusterSpec.cs",
+"region":  {
+"startLine":  210,
+"startColumn":  66,
+"endLine":  210,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S2360",
+"message":  "Use the overloading mechanism instead of the optional parameters.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Cluster.Tests.MultiNode\MultiNodeClusterSpec.cs",
+"region":  {
 "startLine":  268,
 "startColumn":  65,
 "endLine":  268,

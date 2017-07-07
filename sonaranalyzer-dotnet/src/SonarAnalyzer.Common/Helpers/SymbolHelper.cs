@@ -115,18 +115,6 @@ namespace SonarAnalyzer.Helpers
                 symbol is IEventSymbol;
         }
 
-        public static bool IsPublicApi(this ISymbol symbol)
-        {
-            var currentSymbol = symbol;
-            while (currentSymbol != null &&
-                currentSymbol.DeclaredAccessibility == Accessibility.Public)
-            {
-                currentSymbol = currentSymbol.ContainingSymbol;
-            }
-
-            return currentSymbol == null || currentSymbol.DeclaredAccessibility == Accessibility.NotApplicable;
-        }
-
         public static IEnumerable<INamedTypeSymbol> GetSelfAndBaseTypes(this INamedTypeSymbol type)
         {
             if (type == null)
@@ -236,26 +224,39 @@ namespace SonarAnalyzer.Helpers
 
         public static Accessibility GetEffectiveAccessibility(this ISymbol symbol)
         {
-            var result = symbol.DeclaredAccessibility;
-            var currentSymbol = symbol;
-
-            while (currentSymbol != null)
+            if (symbol == null)
             {
-                if (currentSymbol.DeclaredAccessibility == Accessibility.Private)
-                {
-                    return Accessibility.Private;
-                }
-                if (currentSymbol.DeclaredAccessibility == Accessibility.Internal)
-                {
-                    result = currentSymbol.DeclaredAccessibility;
-                }
-                currentSymbol = currentSymbol.ContainingType;
+                return Accessibility.NotApplicable;
             }
+
+            var result = symbol.DeclaredAccessibility;
+            if (result == Accessibility.Private)
+            {
+                return Accessibility.Private;
+            }
+
+            for (var container = symbol.ContainingType; container != null; container = container.ContainingType)
+            {
+                switch (container.DeclaredAccessibility)
+                {
+                    case Accessibility.Private:
+                        return Accessibility.Private;
+                    case Accessibility.Internal:
+                        result = Accessibility.Internal;
+                        continue;
+                }
+            }
+
             return result;
         }
 
         public static bool IsPubliclyAccessible(this ISymbol symbol)
         {
+            if (symbol == null)
+            {
+                return false;
+            }
+
             var effectiveAccessibility = GetEffectiveAccessibility(symbol);
 
             return effectiveAccessibility == Accessibility.Public ||

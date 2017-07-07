@@ -27,7 +27,7 @@
 
         Protected Class MyProtectedSubClass
 
-            Public Pi4 As Double = 3.14
+            Public Pi4 As Double = 3.14 ' Noncompliant
             Private Pi5 As Double = 3.14
             Protected Pi6 As Double = 3.14
             Friend Pi7 As Double = 3.14
