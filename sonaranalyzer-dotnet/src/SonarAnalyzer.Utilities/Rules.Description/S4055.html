@@ -1,0 +1,63 @@
+<p>String literals embedded in the source code will not be localized properly.</p>
+<p>This rule raises an issue when a literal string is passed as a parameter or property and one or more of the following cases is true:</p>
+<ul>
+  <li> The <code>LocalizableAttribute</code> attribute of the parameter or property is set to true. </li>
+  <li> The parameter or property name contains "Text", "Message", or "Caption". </li>
+  <li> The name of the string parameter that is passed to a <code>Console.Write</code> or <code>Console.WriteLine</code> method is either "value" or
+  "format". </li>
+</ul>
+<h2>Noncompliant Code Example</h2>
+<pre>
+using System;
+using System.Globalization;
+using System.Reflection;
+using System.Windows.Forms;
+
+[assembly: NeutralResourcesLanguageAttribute("en-US")]
+namespace MyLibrary
+{
+    public class Foo
+    {
+        public void SetHour(int hour)
+        {
+            if (hour &lt; 0 || hour &gt; 23)
+            {
+                MessageBox.Show("The valid range is 0 - 23."); // Noncompliant
+            }
+        }
+    }
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+using System;
+using System.Globalization;
+using System.Reflection;
+using System.Resources;
+using System.Windows.Forms;
+
+
+
+[assembly: NeutralResourcesLanguageAttribute("en-US")]
+namespace MyLibrary
+{
+    public class Foo
+    {
+        ResourceManager rm;
+        public Foo()
+        {
+            rm = new ResourceManager("en-US", Assembly.GetExecutingAssembly());
+        }
+
+        public void SetHour(int hour)
+        {
+            if (hour &lt; 0 || hour &gt; 23)
+            {
+                MessageBox.Show(
+                rm.GetString("OutOfRangeMessage", CultureInfo.CurrentUICulture));
+            }
+        }
+    }
+}
+</pre>
+
