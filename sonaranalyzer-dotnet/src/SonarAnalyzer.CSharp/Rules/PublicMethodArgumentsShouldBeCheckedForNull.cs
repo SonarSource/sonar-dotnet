@@ -41,19 +41,12 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string DiagnosticId = "S3900";
         private const string MessageFormat = "Refactor this method to add validation of parameter '{0}' before using it.";
 
-        private static ISet<Accessibility> allowedMethodAccessibility = new HashSet<Accessibility>
-        {
-            Accessibility.Public,
-            Accessibility.Protected,
-            Accessibility.ProtectedAndInternal
-        };
-
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        protected sealed override void Initialize(SonarAnalysisContext context)
+        protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterExplodedGraphBasedAnalysis((e, c) => CheckForNullDereference(e, c));
         }
@@ -68,7 +61,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var methodSymbol = context.SemanticModel.GetSymbolInfo(context.Node).Symbol
                 ?? context.SemanticModel.GetDeclaredSymbol(context.Node);
 
-            if (!allowedMethodAccessibility.Contains(methodSymbol.GetEffectiveAccessibility()))
+            if (!methodSymbol.IsPubliclyAccessible())
             {
                 return;
             }
@@ -76,10 +69,10 @@ namespace SonarAnalyzer.Rules.CSharp
             var nullPointerCheck = new NullPointerDereference.NullPointerCheck(explodedGraph);
             explodedGraph.AddExplodedGraphCheck(nullPointerCheck);
 
-            var nullIdentifiers = new HashSet<IdentifierNameSyntax>();
+            var identifiers = new HashSet<IdentifierNameSyntax>();
 
             EventHandler<MemberAccessingEventArgs> memberAccessingHandler =
-                (sender, args) => CollectMemberAccesses(args, nullIdentifiers, context.SemanticModel);
+                (sender, args) => CollectMemberAccesses(args, identifiers, context.SemanticModel);
 
             nullPointerCheck.MemberAccessing += memberAccessingHandler;
 
@@ -92,20 +85,20 @@ namespace SonarAnalyzer.Rules.CSharp
                 nullPointerCheck.MemberAccessing -= memberAccessingHandler;
             }
 
-            foreach (var nullIdentifier in nullIdentifiers)
+            foreach (var identifier in identifiers)
             {
-                context.ReportDiagnostic(Diagnostic.Create(rule, nullIdentifier.GetLocation(), nullIdentifier.Identifier.ValueText));
+                context.ReportDiagnostic(Diagnostic.Create(rule, identifier.GetLocation(), identifier.Identifier.ValueText));
             }
         }
 
-        private static void CollectMemberAccesses(MemberAccessingEventArgs args, HashSet<IdentifierNameSyntax> nullIdentifiers,
+        private static void CollectMemberAccesses(MemberAccessingEventArgs args, HashSet<IdentifierNameSyntax> identifiers,
             SemanticModel semanticModel)
         {
             if (args.Symbol is IParameterSymbol &&
                 !NullPointerDereference.NullPointerCheck.IsExtensionMethod(args.Identifier.Parent, semanticModel) &&
                 !args.Symbol.HasConstraint(ObjectConstraint.NotNull, args.ProgramState))
             {
-                nullIdentifiers.Add(args.Identifier);
+                identifiers.Add(args.Identifier);
             }
         }
     }
