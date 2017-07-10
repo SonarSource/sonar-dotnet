@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3956",
+"message":  "Refactor this constructor to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "Nancy\src\Nancy.ViewEngines.Spark\SparkViewEngineResult.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  38,
+"endLine":  14,
+"endColumn":  50
+}
+}
+}
+]
+}

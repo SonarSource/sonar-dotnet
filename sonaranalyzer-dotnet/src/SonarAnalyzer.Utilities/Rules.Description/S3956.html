@@ -1,0 +1,46 @@
+<p><code>System.Collections.Generic.List&lt;T&gt;</code> is a generic collection that is designed for performance and not inheritance. For example, it
+does not contain virtual members that make it easier to change the behavior of an inherited class. That means that future attempts to expand the
+behavior will be spoiled because the extension points simply aren't there. Instead, one of the following generic collections should be used:</p>
+<ul>
+  <li> <code>System.Collections.Generic.IEnumerable&lt;T&gt;</code> </li>
+  <li> <code>System.Collections.Generic.IReadOnlyCollection&lt;T&gt;</code> </li>
+  <li> <code>System.Collections.Generic.ICollection&lt;TKey&gt;</code> </li>
+  <li> <code>System.Collections.Generic.IReadOnlyList&lt;T&gt;</code> </li>
+  <li> <code>System.Collections.Generic.IList&lt;TKey&gt;</code> </li>
+  <li> <code>System.Collections.ObjectModel.Collection&lt;T&gt;</code> </li>
+  <li> <code>System.Collections.ObjectModel.ReadOnlyCollection&lt;T&gt;</code> </li>
+  <li> <code>System.Collections.ObjectModel.KeyedCollection&lt;TKey, Titem&gt;</code> </li>
+</ul>
+<p>This rule raises an issue every time a <code>System.Collections.Generic.List&lt;T&gt;</code> is exposed:</p>
+<ul>
+  <li> As an externally visible member. </li>
+  <li> As the return type of an externally visible method. </li>
+  <li> As a parameter type of an an externally visible method. </li>
+</ul>
+<h2>Noncompliant Code Example</h2>
+<pre>
+namespace Foo
+{
+   public class Bar
+   {
+      public List&lt;T&gt; Method1(T arg) // Noncompliant
+      {
+           //...
+      }
+   }
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+namespace Foo
+{
+   public class Bar
+   {
+      public Collection&lt;T&gt; Method1(T arg)
+      {
+           //...
+      }
+   }
+}
+</pre>
+

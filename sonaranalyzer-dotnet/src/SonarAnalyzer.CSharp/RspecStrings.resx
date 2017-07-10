@@ -6180,6 +6180,33 @@
   <data name="S3928_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
   </data>
+  <data name="S3956_Category" xml:space="preserve">
+    <value>Sonar Code Smell</value>
+  </data>
+  <data name="S3956_Description" xml:space="preserve">
+    <value>System.Collections.Generic.List&lt;T&gt; is a generic collection that is designed for performance and not inheritance. For example, it does not contain virtual members that make it easier to change the behavior of an inherited class. That means that future attempts to expand the behavior will be spoiled because the extension points simply aren't there. Instead, one of the following generic collections should be used:</value>
+  </data>
+  <data name="S3956_IsActivatedByDefault" xml:space="preserve">
+    <value>False</value>
+  </data>
+  <data name="S3956_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S3956_RemediationCost" xml:space="preserve">
+    <value>10min</value>
+  </data>
+  <data name="S3956_Severity" xml:space="preserve">
+    <value>Major</value>
+  </data>
+  <data name="S3956_Tags" xml:space="preserve">
+    <value>api-design</value>
+  </data>
+  <data name="S3956_Title" xml:space="preserve">
+    <value>"Generic.List" instances should not be part of public APIs</value>
+  </data>
+  <data name="S3956_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S3962_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>

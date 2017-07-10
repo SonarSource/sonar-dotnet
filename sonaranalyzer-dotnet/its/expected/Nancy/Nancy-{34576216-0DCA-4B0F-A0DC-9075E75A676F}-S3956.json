@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3956",
+"message":  "Refactor this field to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "Nancy\src\Nancy\AsyncNamedPipelineBase.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  28,
+"endLine":  12,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S3956",
+"message":  "Refactor this field to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "Nancy\src\Nancy\NamedPipelineBase.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  28,
+"endLine":  12,
+"endColumn":  57
+}
+}
+}
+]
+}

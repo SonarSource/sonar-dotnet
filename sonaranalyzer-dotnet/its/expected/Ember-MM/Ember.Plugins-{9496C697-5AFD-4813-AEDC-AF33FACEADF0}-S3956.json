@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3956",
+"message":  "Refactor this property to use a generic collection designed for inheritance.",
+"location":  {
+"uri":  "Ember-MM\Ember.Plugins\PluginManager.cs",
+"region":  {
+"startLine":  41,
+"startColumn":  16,
+"endLine":  41,
+"endColumn":  47
+}
+}
+}
+]
+}
