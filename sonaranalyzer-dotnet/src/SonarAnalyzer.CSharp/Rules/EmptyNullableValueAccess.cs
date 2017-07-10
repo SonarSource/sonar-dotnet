@@ -92,10 +92,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             private void OnValuePropertyAccessed(IdentifierNameSyntax identifier)
             {
-                ValuePropertyAccessed?.Invoke(this, new MemberAccessedEventArgs
-                {
-                    Identifier = identifier
-                });
+                ValuePropertyAccessed?.Invoke(this, new MemberAccessedEventArgs(identifier));
             }
 
             public override ProgramState PreProcessInstruction(ProgramPoint programPoint, ProgramState programState)

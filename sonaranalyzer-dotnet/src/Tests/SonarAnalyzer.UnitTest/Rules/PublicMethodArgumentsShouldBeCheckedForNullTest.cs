@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2017 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -18,18 +18,20 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 
-namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
+namespace SonarAnalyzer.UnitTest.Rules
 {
-    internal class MemberAccessedEventArgs : EventArgs
+    [TestClass]
+    public class PublicMethodArgumentsShouldBeCheckedForNullTest
     {
-        public MemberAccessedEventArgs(IdentifierNameSyntax identifier)
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void PublicMethodArgumentsShouldBeCheckedForNull()
         {
-            Identifier = identifier;
+            Verifier.VerifyAnalyzer(@"TestCases\PublicMethodArgumentsShouldBeCheckedForNull.cs",
+                new PublicMethodArgumentsShouldBeCheckedForNull());
         }
-
-        public IdentifierNameSyntax Identifier { get; }
     }
 }

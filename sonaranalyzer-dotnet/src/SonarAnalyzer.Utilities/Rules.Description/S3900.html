@@ -1,0 +1,41 @@
+<p>A public method can be called from anywhere, which means you should validate parameters to be within the expected constraints. In general, checking
+against <code>null</code> is recommended defensive programming.</p>
+<p>This rule raises an issue when a parameter of public method is not validated against <code>null</code> before being dereferenced.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+public class MyClass
+{
+    private MyOtherClass other;
+
+    public void Foo(MyOtherClass other)
+    {
+        this.other = other; // Compliant: other not being dereferenced
+    }
+
+    public void Bar(MyOtherClass other)
+    {
+        this.other = other.Clone(); // Noncompliant
+    }
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+public class MyClass
+{
+    private MyOtherClass other;
+
+    public void Foo(MyOtherClass other)
+    {
+        this.other = other; // Compliant: other not being dereferenced
+    }
+
+    public void Bar(MyOtherClass other)
+    {
+        if (other != null)
+        {
+            this.other = other.Clone();
+        }
+    }
+}
+</pre>
+

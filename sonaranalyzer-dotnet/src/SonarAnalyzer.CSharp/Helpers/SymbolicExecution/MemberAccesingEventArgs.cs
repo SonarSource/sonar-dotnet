@@ -19,17 +19,22 @@
  */
 
 using System;
+using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
 {
-    internal class MemberAccessedEventArgs : EventArgs
+    internal class MemberAccessingEventArgs : EventArgs
     {
-        public MemberAccessedEventArgs(IdentifierNameSyntax identifier)
+        public MemberAccessingEventArgs(IdentifierNameSyntax identifier, ISymbol symbol, ProgramState programState)
         {
             Identifier = identifier;
+            Symbol = symbol;
+            ProgramState = programState;
         }
 
         public IdentifierNameSyntax Identifier { get; }
+        public ISymbol Symbol { get; }
+        public ProgramState ProgramState { get; }
     }
 }
