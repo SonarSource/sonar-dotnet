@@ -18,15 +18,15 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
-using System.Collections.Immutable;
-using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using System.Collections.Generic;
+using System.Collections.Immutable;
+using System.Linq;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -74,28 +74,34 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     var classDeclaration = (ClassDeclarationSyntax)c.Node;
 
-                    if (classDeclaration.Identifier.IsMissing)
+                    if (c.IsTest() ||
+                        classDeclaration.Identifier.IsMissing)
                     {
                         return;
                     }
 
-                    var summedFieldsCoupling = classDeclaration.Members
+                    var allFieldsCoupling = classDeclaration.Members
                         .OfType<FieldDeclarationSyntax>()
                         .SelectMany(field => CollectCoupledClasses(field, c.SemanticModel));
 
-                    //var summedPropertiesCoupling = classDeclaration.Members
-                    //    .OfType<PropertyDeclarationSyntax>()
-                    //    .Select(property => property.AccessorList.Accessors.Select(ac => ac.))
+                    var allPropertiesCoupling = classDeclaration.Members
+                        .OfType<BasePropertyDeclarationSyntax>()
+                        .SelectMany(property => CollectCoupledClasses(property, c.SemanticModel));
 
-                    var summedMethodsCoupling = classDeclaration.Members
+                    var allMethodsCoupling = classDeclaration.Members
                         .OfType<BaseMethodDeclarationSyntax>()
-                        .Sum(baseMethod => CalculateBaseMethodClassCoupling(baseMethod, c.SemanticModel));
+                        .SelectMany(baseMethod => CollectCoupledClasses(baseMethod, c.SemanticModel));
 
-                    var totalClassCoupling = summedFieldsCoupling + summedPropertiesCoupling + summedMethodsCoupling;
-                    if (totalClassCoupling > Threshold)
+                    var totalClassCoupling = Enumerable.Empty<ITypeSymbol>()
+                        .Union(allFieldsCoupling)
+                        .Union(allPropertiesCoupling)
+                        .Union(allMethodsCoupling);
+                    var classCouplingCount = FilterAndCountCoupling(totalClassCoupling);
+
+                    if (classCouplingCount > Threshold)
                     {
                         c.ReportDiagnostic(Diagnostic.Create(rule, classDeclaration.Identifier.GetLocation(),
-                            totalClassCoupling, Threshold));
+                            classCouplingCount, Threshold));
                     }
                 }, SyntaxKind.ClassDeclaration);
         }
@@ -104,21 +110,86 @@ namespace SonarAnalyzer.Rules.CSharp
             SemanticModel model)
         {
             return field.Declaration.Variables
-                .Select(variable => model.GetTypeInfo(variable.Initializer.Value))
-                .SelectMany(x => new[] { x.Type, x.ConvertedType })
+                .Select(variable => variable.Initializer != null
+                    ? model.GetTypeInfo(variable.Initializer.Value)
+                    : default(TypeInfo))
+                .SelectMany(x => new[] { x.Type, x.ConvertedType });
+        }
+
+        private static IEnumerable<ITypeSymbol> CollectCoupledClasses(BasePropertyDeclarationSyntax property,
+            SemanticModel model)
+        {
+            var propertyReturnType = new[] { model.GetSymbolInfo(property.Type).Symbol as ITypeSymbol };
+
+            var indexerProperty = property as IndexerDeclarationSyntax;
+            if (indexerProperty?.ExpressionBody != null)
+            {
+                // Arrowed property
+                return propertyReturnType
+                    .Union(indexerProperty.ExpressionBody
+                        .DescendantNodes()
+                        .SelectMany(node => ExtractTypeSymbolsFromSyntaxNode(node, model)));
+            }
+
+            var basicProperty = property as PropertyDeclarationSyntax;
+            if (basicProperty?.ExpressionBody != null)
+            {
+                // Arrowed property
+                return propertyReturnType
+                    .Union(basicProperty.ExpressionBody
+                        .DescendantNodes()
+                        .SelectMany(node => ExtractTypeSymbolsFromSyntaxNode(node, model)));
+            }
+
+            // Classic property OR event
+            return propertyReturnType
+                .Union(property.AccessorList.Accessors
+                    .SelectMany(accessor => accessor.DescendantNodes()
+                        .SelectMany(node => ExtractTypeSymbolsFromSyntaxNode(node, model))));
         }
 
         private static IEnumerable<ITypeSymbol> CollectCoupledClasses(BaseMethodDeclarationSyntax method,
             SemanticModel model)
         {
-            return 0;
+            return method.DescendantNodes()
+                .SelectMany(node => ExtractTypeSymbolsFromSyntaxNode(node, model));
         }
 
-        private static int CountDistinctClassCoupling(this IEnumerable<ITypeSymbol> types)
+        private static IEnumerable<ITypeSymbol> ExtractTypeSymbolsFromSyntaxNode(SyntaxNode node, SemanticModel model)
+        {
+            var parameter = node as ParameterSyntax;
+            if (parameter != null)
+            {
+                return parameter.Type != null
+                        ? new[] { model.GetSymbolInfo(parameter.Type).Symbol as ITypeSymbol }
+                        : new[] { (ITypeSymbol)null };
+            }
+
+            var variableDeclaration = node as VariableDeclarationSyntax;
+            if (variableDeclaration != null)
+            {
+                return new[] { model.GetSymbolInfo(variableDeclaration.Type).Symbol as ITypeSymbol };
+            }
+
+            var objectCreation = node as ObjectCreationExpressionSyntax;
+            if (objectCreation != null)
+            {
+                var objectCreationTypeInfo = model.GetTypeInfo(objectCreation);
+                return new[] { objectCreationTypeInfo.Type, objectCreationTypeInfo.ConvertedType };
+            }
+
+            var identifierName = node as IdentifierNameSyntax;
+            return identifierName != null
+                ? new[] { model.GetSymbolInfo(identifierName).Symbol as ITypeSymbol }
+                : new[] { (ITypeSymbol)null };
+        }
+
+        private static int FilterAndCountCoupling(IEnumerable<ITypeSymbol> types)
         {
             return types.Distinct()
                 .WhereNotNull()
-                .Where(type => !type.IsAny(typesExcludedFromCoupling))
+                .Where(type => type.TypeKind != TypeKind.Enum &&
+                    !type.IsAny(typesExcludedFromCoupling))
                 .Count();
         }
     }

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1200",
+"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 22 to the maximum authorized 20 or less.",
+"location":  {
+"uri":  "Nancy\src\Nancy.ViewEngines.DotLiquid\DotLiquidViewEngine.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  18,
+"endLine":  17,
+"endColumn":  37
+}
+}
+}
+]
+}

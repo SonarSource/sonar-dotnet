@@ -1,28 +1,35 @@
 using System;
+using System.IO;
 
 namespace Tests.Diagnostics
 {
     interface IFoo { }
     class FooBase : IFoo { }
     class Foo1 : FooBase { }
+    public struct MyStruct { }
 
-    class FieldClass // Noncompliant {{Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 3 to the maximum authorized 1 or less.}}
+    public abstract class TestCases // Noncompliant {{Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 7 to the maximum authorized 1 or less.}}
+//                        ^^^^^^^^^
     {
-        private IFoo foo = new FooBase();
-        private FooBase foo2 = GetFoo();
-        private IFoo foo3 = Foo;
-        private int i; // Primitives don't count
+        // ================================================================================
+        // ==== FIELDS
+        // ================================================================================
+        private IFoo field1 = new FooBase();
+        private FooBase field2 = Method3();
+        private static IFoo field3 = Property1;
+        private int field4; // Primitives don't count
+        private MyStruct str;
 
-        private static FooBase GetFoo() => null;
 
-        private static Foo1 Foo { get; }
-    }
 
-    class BasePropertyClass
-    {
-        public IFoo Foo { get; set; }
+        // ================================================================================
+        // ==== PROPERTIES
+        // ================================================================================
+        private static Foo1 Property1 { get; }
 
-        public IFoo Foo2
+        public IFoo Property2 { get; set; }
+
+        public IFoo Property3
         {
             get
             {
@@ -30,6 +37,79 @@ namespace Tests.Diagnostics
             }
         }
 
-        private static Foo1 GetFoo() => null;
+        public IFoo Property4
+        {
+            set
+            {
+                var x = value.ToString();
+            }
+        }
+
+        public IFoo Property5 => Method3();
+
+
+
+        // ================================================================================
+        // ==== EVENTS
+        // ================================================================================
+        public event EventHandler Event1
+        {
+            add
+            {
+                var x = Method3();
+            }
+            remove
+            {
+                IFoo xx = Method3();
+            }
+        }
+
+
+
+        // ================================================================================
+        // ==== CTORS
+        // ================================================================================
+        public TestCases()
+        {
+            var x = new object();
+            Stream y = new System.IO.FileStream("", System.IO.FileMode.Open);
+        }
+
+
+
+        // ================================================================================
+        // ==== DTORS
+        // ================================================================================
+        ~TestCases()
+        {
+            Stream y;
+            y = new FileStream("", FileMode.Open);
+        }
+
+
+
+        // ================================================================================
+        // ==== METHODS
+        // ================================================================================
+        IDisposable Method1(object o)
+        {
+            Stream y = new FileStream("", FileMode.Open);
+            return y;
+        }
+
+        Stream Method2() => new FileStream("", FileMode.Open);
+        private static FooBase Method3() => null;
+
+        protected abstract IFoo Method4();
+    }
+
+    public class OutterClass
+    {
+        InnerClass whatever = new InnerClass();
+
+        public class InnerClass // Noncompliant
+        {
+            public Stream stream = new FileStream("", FileMode.Open);
+        }
     }
 }

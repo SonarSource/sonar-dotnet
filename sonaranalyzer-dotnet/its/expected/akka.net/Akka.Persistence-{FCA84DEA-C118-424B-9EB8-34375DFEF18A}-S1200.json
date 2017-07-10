@@ -1,0 +1,134 @@
+{
+"issues":  [
+{
+"id":  "S1200",
+"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 21 to the maximum authorized 20 or less.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence\AtLeastOnceDeliverySemantic.cs",
+"region":  {
+"startLine":  225,
+"startColumn":  20,
+"endLine":  225,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S1200",
+"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 43 to the maximum authorized 20 or less.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence\Eventsourced.cs",
+"region":  {
+"startLine":  55,
+"startColumn":  35,
+"endLine":  55,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S1200",
+"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 29 to the maximum authorized 20 or less.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence\Eventsourced.Recovery.cs",
+"region":  {
+"startLine":  37,
+"startColumn":  35,
+"endLine":  37,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S1200",
+"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 43 to the maximum authorized 20 or less.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence\Fsm\PersistentFSMBase.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  27,
+"endLine":  22,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S1200",
+"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 26 to the maximum authorized 20 or less.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence\Journal\AsyncWriteJournal.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  27,
+"endLine":  16,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S1200",
+"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 29 to the maximum authorized 20 or less.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence\Journal\EventAdapters.cs",
+"region":  {
+"startLine":  134,
+"startColumn":  18,
+"endLine":  134,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S1200",
+"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 22 to the maximum authorized 20 or less.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence\Journal\SyncWriteJournal.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  27,
+"endLine":  15,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S1200",
+"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 26 to the maximum authorized 20 or less.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence\PersistentActor.cs",
+"region":  {
+"startLine":  189,
+"startColumn":  27,
+"endLine":  189,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S1200",
+"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 25 to the maximum authorized 20 or less.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence\Serialization\MessageSerializer.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  18,
+"endLine":  17,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S1200",
+"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 30 to the maximum authorized 20 or less.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Persistence\Snapshot\LocalSnapshotStore.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  18,
+"endLine":  20,
+"endColumn":  36
+}
+}
+}
+]
+}
