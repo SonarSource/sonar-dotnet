@@ -1,0 +1,290 @@
+{
+"issues":  [
+{
+"id":  "S1200",
+"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 50 to the maximum authorized 20 or less.",
+"location":  {
+"uri":  "Nancy\src\Nancy\Bootstrapper\NancyBootstrapperBase.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  27,
+"endLine":  21,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S1200",
+"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 99 to the maximum authorized 20 or less.",
+"location":  {
+"uri":  "Nancy\src\Nancy\Bootstrapper\NancyInternalConfiguration.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  25,
+"endLine":  27,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S1200",
+"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 26 to the maximum authorized 20 or less.",
+"location":  {
+"uri":  "Nancy\src\Nancy\Bootstrapper\Registrations.cs",
+"region":  {
+"startLine":  10,
+"startColumn":  27,
+"endLine":  10,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S1200",
+"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 29 to the maximum authorized 20 or less.",
+"location":  {
+"uri":  "Nancy\src\Nancy\DefaultNancyBootstrapper.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  18,
+"endLine":  16,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S1200",
+"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 57 to the maximum authorized 20 or less.",
+"location":  {
+"uri":  "Nancy\src\Nancy\Diagnostics\DiagnosticsHook.cs",
+"region":  {
+"startLine":  25,
+"startColumn":  25,
+"endLine":  25,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S1200",
+"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 23 to the maximum authorized 20 or less.",
+"location":  {
+"uri":  "Nancy\src\Nancy\Diagnostics\DiagnosticsModuleCatalog.cs",
+"region":  {
+"startLine":  13,
+"startColumn":  20,
+"endLine":  13,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S1200",
+"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 24 to the maximum authorized 20 or less.",
+"location":  {
+"uri":  "Nancy\src\Nancy\Diagnostics\InteractiveDiagnostics.cs",
+"region":  {
+"startLine":  10,
+"startColumn":  18,
+"endLine":  10,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S1200",
+"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 39 to the maximum authorized 20 or less.",
+"location":  {
+"uri":  "Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"region":  {
+"startLine":  42,
+"startColumn":  18,
+"endLine":  42,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S1200",
+"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 21 to the maximum authorized 20 or less.",
+"location":  {
+"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  69,
+"startColumn":  27,
+"endLine":  69,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S1200",
+"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 40 to the maximum authorized 20 or less.",
+"location":  {
+"uri":  "Nancy\src\Nancy\Json\JsonSerializer.cs",
+"region":  {
+"startLine":  42,
+"startColumn":  27,
+"endLine":  42,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S1200",
+"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 32 to the maximum authorized 20 or less.",
+"location":  {
+"uri":  "Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  18,
+"endLine":  16,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S1200",
+"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 41 to the maximum authorized 20 or less.",
+"location":  {
+"uri":  "Nancy\src\Nancy\ModelBinding\ModuleExtensions.cs",
+"region":  {
+"startLine":  10,
+"startColumn":  25,
+"endLine":  10,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S1200",
+"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 31 to the maximum authorized 20 or less.",
+"location":  {
+"uri":  "Nancy\src\Nancy\NancyEngine.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  18,
+"endLine":  21,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S1200",
+"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 28 to the maximum authorized 20 or less.",
+"location":  {
+"uri":  "Nancy\src\Nancy\Owin\NancyMiddleware.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  25,
+"endLine":  27,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S1200",
+"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 34 to the maximum authorized 20 or less.",
+"location":  {
+"uri":  "Nancy\src\Nancy\Request.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  18,
+"endLine":  20,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S1200",
+"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 26 to the maximum authorized 20 or less.",
+"location":  {
+"uri":  "Nancy\src\Nancy\RequestHeaders.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  18,
+"endLine":  15,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S1200",
+"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 35 to the maximum authorized 20 or less.",
+"location":  {
+"uri":  "Nancy\src\Nancy\Responses\Negotiation\DefaultResponseNegotiator.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  18,
+"endLine":  15,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S1200",
+"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 22 to the maximum authorized 20 or less.",
+"location":  {
+"uri":  "Nancy\src\Nancy\Routing\DefaultRequestDispatcher.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  18,
+"endLine":  15,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S1200",
+"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 26 to the maximum authorized 20 or less.",
+"location":  {
+"uri":  "Nancy\src\Nancy\Session\CookieBasedSessions.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  18,
+"endLine":  16,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S1200",
+"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 96 to the maximum authorized 20 or less.",
+"location":  {
+"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  785,
+"startColumn":  33,
+"endLine":  785,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S1200",
+"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 24 to the maximum authorized 20 or less.",
+"location":  {
+"uri":  "Nancy\src\Nancy\ViewEngines\DefaultViewFactory.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  18,
+"endLine":  15,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S1200",
+"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 35 to the maximum authorized 20 or less.",
+"location":  {
+"uri":  "Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\SuperSimpleViewEngine.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  18,
+"endLine":  18,
+"endColumn":  39
+}
+}
+}
+]
+}

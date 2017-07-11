@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S1200",
+"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 28 to the maximum authorized 20 or less.",
+"location":  {
+"uri":  "Nancy\src\Nancy.ViewEngines.Razor\NancyRazorViewBase.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  27,
+"endLine":  22,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S1200",
+"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 50 to the maximum authorized 20 or less.",
+"location":  {
+"uri":  "Nancy\src\Nancy.ViewEngines.Razor\RazorViewEngine.cs",
+"region":  {
+"startLine":  25,
+"startColumn":  18,
+"endLine":  25,
+"endColumn":  33
+}
+}
+}
+]
+}

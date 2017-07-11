@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1200",
+"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 32 to the maximum authorized 20 or less.",
+"location":  {
+"uri":  "akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\JournalDbEngine.cs",
+"region":  {
+"startLine":  48,
+"startColumn":  27,
+"endLine":  48,
+"endColumn":  42
+}
+}
+}
+]
+}

@@ -888,6 +888,33 @@
   <data name="S1186_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
   </data>
+  <data name="S1200_Category" xml:space="preserve">
+    <value>Sonar Code Smell</value>
+  </data>
+  <data name="S1200_Description" xml:space="preserve">
+    <value>According to the Single Responsibility Principle, introduced by Robert C. Martin in his book "Principles of Object Oriented Design", a class should have only one responsibility:</value>
+  </data>
+  <data name="S1200_IsActivatedByDefault" xml:space="preserve">
+    <value>False</value>
+  </data>
+  <data name="S1200_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S1200_RemediationCost" xml:space="preserve">
+    <value>2h</value>
+  </data>
+  <data name="S1200_Severity" xml:space="preserve">
+    <value>Major</value>
+  </data>
+  <data name="S1200_Tags" xml:space="preserve">
+    <value>brain-overload</value>
+  </data>
+  <data name="S1200_Title" xml:space="preserve">
+    <value>Classes should not be coupled to too many other classes (Single Responsibility Principle)</value>
+  </data>
+  <data name="S1200_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S1206_Category" xml:space="preserve">
     <value>Sonar Bug</value>
   </data>
