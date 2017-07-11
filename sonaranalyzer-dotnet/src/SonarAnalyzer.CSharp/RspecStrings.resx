@@ -5424,6 +5424,33 @@
   <data name="S3626_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
   </data>
+  <data name="S3649_Category" xml:space="preserve">
+    <value>Sonar Vulnerability</value>
+  </data>
+  <data name="S3649_Description" xml:space="preserve">
+    <value>Applications that execute SQL commands should neutralize any externally-provided values used in those commands. Failure to do so could allow an attacker to include input that changes the query so that unintended commands are executed, or sensitive data is exposed.</value>
+  </data>
+  <data name="S3649_IsActivatedByDefault" xml:space="preserve">
+    <value>True</value>
+  </data>
+  <data name="S3649_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S3649_RemediationCost" xml:space="preserve">
+    <value>20min</value>
+  </data>
+  <data name="S3649_Severity" xml:space="preserve">
+    <value>Blocker</value>
+  </data>
+  <data name="S3649_Tags" xml:space="preserve">
+    <value>cwe,owasp-a1,sans-top25-insecure,cert,sql</value>
+  </data>
+  <data name="S3649_Title" xml:space="preserve">
+    <value>User-provided values should be sanitized before use in SQL statements</value>
+  </data>
+  <data name="S3649_Type" xml:space="preserve">
+    <value>VULNERABILITY</value>
+  </data>
   <data name="S3655_Category" xml:space="preserve">
     <value>Sonar Bug</value>
   </data>
