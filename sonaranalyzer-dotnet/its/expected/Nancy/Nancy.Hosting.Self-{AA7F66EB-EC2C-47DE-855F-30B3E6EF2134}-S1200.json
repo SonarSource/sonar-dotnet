@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S1200",
-"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 35 to the maximum authorized 20 or less.",
+"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 37 to the maximum authorized 20 or less.",
 "location":  {
 "uri":  "Nancy\src\Nancy.Hosting.Self\NancyHost.cs",
 "region":  {

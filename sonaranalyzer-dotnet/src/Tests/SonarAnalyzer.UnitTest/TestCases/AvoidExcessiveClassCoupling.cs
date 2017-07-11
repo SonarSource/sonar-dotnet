@@ -8,7 +8,7 @@ namespace Tests.Diagnostics
     class Foo1 : FooBase { }
     public struct MyStruct { }
 
-    public abstract class TestCases // Noncompliant {{Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 7 to the maximum authorized 1 or less.}}
+    public abstract class TestCases // Noncompliant {{Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 11 to the maximum authorized 1 or less.}}
 //                        ^^^^^^^^^
     {
         // ================================================================================
@@ -19,7 +19,10 @@ namespace Tests.Diagnostics
         private static IFoo field3 = Property1;
         private int field4; // Primitives don't count
         private MyStruct str;
-
+        private System.Threading.Tasks.Task myTask;
+        Action myAction;
+        Func<int> myFunct;
+        unsafe int* myPointer;
 
 
         // ================================================================================

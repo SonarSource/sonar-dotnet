@@ -54,7 +54,7 @@
 },
 {
 "id":  "S1200",
-"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 43 to the maximum authorized 20 or less.",
+"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 44 to the maximum authorized 20 or less.",
 "location":  {
 "uri":  "akka.net\src\core\Akka\Actor\ActorRefProvider.cs",
 "region":  {
@@ -106,7 +106,7 @@
 },
 {
 "id":  "S1200",
-"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 42 to the maximum authorized 20 or less.",
+"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 43 to the maximum authorized 20 or less.",
 "location":  {
 "uri":  "akka.net\src\core\Akka\Actor\FSM.cs",
 "region":  {
@@ -127,6 +127,19 @@
 "startColumn":  27,
 "endLine":  96,
 "endColumn":  42
+}
+}
+},
+{
+"id":  "S1200",
+"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 22 to the maximum authorized 20 or less.",
+"location":  {
+"uri":  "akka.net\src\core\Akka\Actor\Inbox.Actor.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  20,
+"endLine":  15,
+"endColumn":  30
 }
 }
 },
@@ -197,7 +210,7 @@
 },
 {
 "id":  "S1200",
-"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 23 to the maximum authorized 20 or less.",
+"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 24 to the maximum authorized 20 or less.",
 "location":  {
 "uri":  "akka.net\src\core\Akka\Actor\RepointableActorRef.cs",
 "region":  {
@@ -275,7 +288,7 @@
 },
 {
 "id":  "S1200",
-"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 34 to the maximum authorized 20 or less.",
+"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 35 to the maximum authorized 20 or less.",
 "location":  {
 "uri":  "akka.net\src\core\Akka\IO\UdpConnection.cs",
 "region":  {
@@ -301,7 +314,7 @@
 },
 {
 "id":  "S1200",
-"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 22 to the maximum authorized 20 or less.",
+"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 23 to the maximum authorized 20 or less.",
 "location":  {
 "uri":  "akka.net\src\core\Akka\Routing\ConsistentHashRouter.cs",
 "region":  {

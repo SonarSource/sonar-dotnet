@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S1200",
-"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 42 to the maximum authorized 20 or less.",
+"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 43 to the maximum authorized 20 or less.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Remote\Endpoint.cs",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S1200",
-"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 71 to the maximum authorized 20 or less.",
+"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 74 to the maximum authorized 20 or less.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Remote\Endpoint.cs",
 "region":  {
@@ -28,7 +28,7 @@
 },
 {
 "id":  "S1200",
-"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 30 to the maximum authorized 20 or less.",
+"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 31 to the maximum authorized 20 or less.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Remote\Endpoint.cs",
 "region":  {
@@ -54,7 +54,7 @@
 },
 {
 "id":  "S1200",
-"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 52 to the maximum authorized 20 or less.",
+"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 53 to the maximum authorized 20 or less.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Remote\RemoteActorRefProvider.cs",
 "region":  {
@@ -80,7 +80,7 @@
 },
 {
 "id":  "S1200",
-"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 37 to the maximum authorized 20 or less.",
+"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 38 to the maximum authorized 20 or less.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Remote\RemoteWatcher.cs",
 "region":  {
@@ -93,7 +93,7 @@
 },
 {
 "id":  "S1200",
-"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 44 to the maximum authorized 20 or less.",
+"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 45 to the maximum authorized 20 or less.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Remote\Remoting.cs",
 "region":  {
@@ -106,7 +106,7 @@
 },
 {
 "id":  "S1200",
-"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 23 to the maximum authorized 20 or less.",
+"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 25 to the maximum authorized 20 or less.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Remote\Routing\RemoteRouterConfig.cs",
 "region":  {
@@ -171,7 +171,7 @@
 },
 {
 "id":  "S1200",
-"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 23 to the maximum authorized 20 or less.",
+"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 24 to the maximum authorized 20 or less.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Remote\Transport\FailureInjectorTransportAdapter.cs",
 "region":  {
@@ -184,7 +184,7 @@
 },
 {
 "id":  "S1200",
-"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 33 to the maximum authorized 20 or less.",
+"message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 34 to the maximum authorized 20 or less.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Remote\Transport\Helios\HeliosTransport.cs",
 "region":  {

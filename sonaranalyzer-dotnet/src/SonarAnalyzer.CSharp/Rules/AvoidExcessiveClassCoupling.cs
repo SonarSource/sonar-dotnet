@@ -18,15 +18,15 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
+using System.Collections.Immutable;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
-using System.Collections.Generic;
-using System.Collections.Immutable;
-using System.Linq;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -110,10 +110,7 @@ namespace SonarAnalyzer.Rules.CSharp
             SemanticModel model)
         {
             return field.Declaration.Variables
-                .Select(variable => variable.Initializer != null
-                    ? model.GetTypeInfo(variable.Initializer.Value)
-                    : default(TypeInfo))
-                .SelectMany(x => new[] { x.Type, x.ConvertedType });
+                .SelectMany(variable => ExtractTypesFromVariableDeclarator(variable, model));
         }
 
         private static IEnumerable<ITypeSymbol> CollectCoupledClasses(BasePropertyDeclarationSyntax property,
@@ -155,33 +152,52 @@ namespace SonarAnalyzer.Rules.CSharp
                 .SelectMany(node => ExtractTypeSymbolsFromSyntaxNode(node, model));
         }
 
+        private static IEnumerable<ITypeSymbol> ExtractTypesFromVariableDeclarator(VariableDeclaratorSyntax variable,
+            SemanticModel model)
+        {
+            if (variable.Initializer != null)
+            {
+                var typeInfo = model.GetTypeInfo(variable.Initializer.Value);
+                yield return typeInfo.Type;
+                yield return typeInfo.ConvertedType;
+            }
+            else
+            {
+                var variableReturnType = variable.FirstAncestorOrSelf<VariableDeclarationSyntax>()?.Type;
+                if (variableReturnType != null)
+                {
+                    yield return model.GetSymbolInfo(variableReturnType).Symbol as ITypeSymbol;
+                }
+            }
+        }
+
         private static IEnumerable<ITypeSymbol> ExtractTypeSymbolsFromSyntaxNode(SyntaxNode node, SemanticModel model)
         {
             var parameter = node as ParameterSyntax;
-            if (parameter != null)
+            if (parameter?.Type != null)
             {
-                return parameter.Type != null
-                        ? new[] { model.GetSymbolInfo(parameter.Type).Symbol as ITypeSymbol }
-                        : new[] { (ITypeSymbol)null };
+                yield return model.GetSymbolInfo(parameter.Type).Symbol as ITypeSymbol;
             }
 
             var variableDeclaration = node as VariableDeclarationSyntax;
             if (variableDeclaration != null)
             {
-                return new[] { model.GetSymbolInfo(variableDeclaration.Type).Symbol as ITypeSymbol };
+                yield return model.GetSymbolInfo(variableDeclaration.Type).Symbol as ITypeSymbol;
             }
 
             var objectCreation = node as ObjectCreationExpressionSyntax;
             if (objectCreation != null)
             {
                 var objectCreationTypeInfo = model.GetTypeInfo(objectCreation);
-                return new[] { objectCreationTypeInfo.Type, objectCreationTypeInfo.ConvertedType };
+                yield return objectCreationTypeInfo.Type;
+                yield return objectCreationTypeInfo.ConvertedType;
             }
 
             var identifierName = node as IdentifierNameSyntax;
-            return identifierName != null
-                ? new[] { model.GetSymbolInfo(identifierName).Symbol as ITypeSymbol }
-                : new[] { (ITypeSymbol)null };
+            if (identifierName != null)
+            {
+                yield return model.GetSymbolInfo(identifierName).Symbol as ITypeSymbol;
+            }
         }
 
         private static int FilterAndCountCoupling(IEnumerable<ITypeSymbol> types)
@@ -189,6 +205,7 @@ namespace SonarAnalyzer.Rules.CSharp
             return types.Distinct()
                 .WhereNotNull()
                 .Where(type => type.TypeKind != TypeKind.Enum &&
+                    type.TypeKind != TypeKind.Pointer &&
                     !type.IsAny(typesExcludedFromCoupling))
                 .Count();
         }
