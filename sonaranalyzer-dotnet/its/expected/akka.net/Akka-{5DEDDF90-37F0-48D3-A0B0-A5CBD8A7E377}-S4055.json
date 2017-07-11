@@ -30,6 +30,32 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
+"uri":  "akka.net\src\core\Akka\Actor\ActorProducerPipeline.cs",
+"region":  {
+"startLine":  223,
+"startColumn":  48,
+"endLine":  223,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
+"uri":  "akka.net\src\core\Akka\Actor\ActorProducerPipeline.cs",
+"region":  {
+"startLine":  243,
+"startColumn":  48,
+"endLine":  243,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S4055",
+"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
+"location":  {
 "uri":  "akka.net\src\core\Akka\Actor\Deployer.cs",
 "region":  {
 "startLine":  104,

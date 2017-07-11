@@ -19,6 +19,7 @@
  */
 
 using System;
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
@@ -39,7 +40,15 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+
+        private static readonly ISet<string> localizableSymbolNames = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+        {
+            "text",
+            "caption",
+            "message"
+        };
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -111,9 +120,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return false;
             }
 
-            return symbol.Name.Equals("text", StringComparison.OrdinalIgnoreCase) ||
-                symbol.Name.Equals("message", StringComparison.OrdinalIgnoreCase) ||
-                symbol.Name.Equals("caption", StringComparison.OrdinalIgnoreCase) ||
+            return symbol.Name.SplitCamelCaseToWords().Any(localizableSymbolNames.Contains) ||
                 symbol.GetAttributes().Any(IsLocalizableAttribute);
         }
 
