@@ -201,6 +201,16 @@ namespace SonarAnalyzer.Helpers
 
         public static readonly KnownType System_Data_DataTable = new KnownType("System.Data.DataTable");
         public static readonly KnownType System_Data_DataSet = new KnownType("System.Data.DataSet");
+        public static readonly KnownType System_Data_Odbc_OdbcCommand = new KnownType("System.Data.Odbc.OdbcCommand");
+        public static readonly KnownType System_Data_Odbc_OdbcDataAdapter = new KnownType("System.Data.Odbc.OdbcDataAdapter");
+        public static readonly KnownType System_Data_OleDb_OleDbCommand = new KnownType("System.Data.OleDb.OleDbCommand");
+        public static readonly KnownType System_Data_OleDb_OleDbDataAdapter = new KnownType("System.Data.OleDb.OleDbDataAdapter");
+        public static readonly KnownType Oracle_ManagedDataAccess_Client_OracleCommand = new KnownType("Oracle.ManagedDataAccess.Client.OracleCommand");
+        public static readonly KnownType Oracle_ManagedDataAccess_Client_OracleDataAdapter = new KnownType("Oracle.ManagedDataAccess.Client.OracleDataAdapter");
+        public static readonly KnownType System_Data_SqlServerCe_SqlCeCommand = new KnownType("System.Data.SqlServerCe.SqlCeCommand");
+        public static readonly KnownType System_Data_SqlServerCe_SqlCeDataAdapter = new KnownType("System.Data.SqlServerCe.SqlCeDataAdapter");
+        public static readonly KnownType System_Data_SqlClient_SqlCommand = new KnownType("System.Data.SqlClient.SqlCommand");
+        public static readonly KnownType System_Data_SqlClient_SqlDataAdapter = new KnownType("System.Data.SqlClient.SqlDataAdapter");
 
         public static readonly KnownType System_Diagnostics_Contracts_PureAttribute = new KnownType("System.Diagnostics.Contracts.PureAttribute");
 
