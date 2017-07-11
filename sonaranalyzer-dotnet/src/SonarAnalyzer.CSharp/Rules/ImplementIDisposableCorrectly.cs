@@ -178,17 +178,27 @@ namespace SonarAnalyzer.Rules.CSharp
                     return;
                 }
 
-                var expectedStatementsCount = hasDestructor
-                    ? 2  //// Dispose(true); GC.SuppressFinalize(this);
-                    : 1; //// Dispose(true);
-
-                if (!HasStatementsCount(disposeMethod.Body, expectedStatementsCount) ||
-                    !CallsVirtualDispose(disposeMethod, argumentValue: "true") ||
-                    (!CallsSuppressFinalize(disposeMethod) && hasDestructor))
+                if (hasDestructor)
                 {
-                    AddSecondaryLocation(disposeMethod.Identifier.GetLocation(),
-                        $"'{classSymbol.Name}.Dispose()' should contain only a call to 'Dispose(true)'"
-                            + " and if the class contains a finalizer, call to 'GC.SuppressFinalize(this)'.");
+                    if (!HasStatementsCount(disposeMethod.Body, 2) ||
+                        !CallsVirtualDispose(disposeMethod, argumentValue: "true") ||
+                        !CallsSuppressFinalize(disposeMethod))
+                    {
+                        AddSecondaryLocation(disposeMethod.Identifier.GetLocation(),
+                            $"'{classSymbol.Name}.Dispose()' should contain only calls to 'Dispose(true)'"
+                                + " and 'GC.SuppressFinalize(this)'.");
+                    }
+                }
+                else
+                {
+                    var statementsCount = disposeMethod.Body.ChildNodes().Count();
+                    if (statementsCount > 2 ||
+                        statementsCount == 2 && !CallsSuppressFinalize(disposeMethod) ||
+                        !CallsVirtualDispose(disposeMethod, argumentValue: "true"))
+                    {
+                        AddSecondaryLocation(disposeMethod.Identifier.GetLocation(),
+                            $"'{classSymbol.Name}.Dispose()' should contain only a call to 'Dispose(true)'.");
+                    }
                 }
 
                 var disposeMethodSymbol = semanticModel.GetDeclaredSymbol(disposeMethod);
