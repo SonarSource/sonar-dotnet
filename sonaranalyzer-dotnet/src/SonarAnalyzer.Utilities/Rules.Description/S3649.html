@@ -1,0 +1,97 @@
+<p>Applications that execute SQL commands should neutralize any externally-provided values used in those commands. Failure to do so could allow an
+attacker to include input that changes the query so that unintended commands are executed, or sensitive data is exposed.</p>
+<p>This rule raises an issue when user-provided values are concatenated into SQL statements.</p>
+<p>If user input must be part of the query, use one of the following mitigations, listed in order of effectiveness:</p>
+<ul>
+  <li> Use a stored procedure. </li>
+  <li> Use a parameterized command string. </li>
+  <li> Validate the user input for both type and content before you build the command string. </li>
+</ul>
+<p>The following .NET Framework types implement the <code>CommandText</code> property or provide constructors that set the property by using a string
+argument.</p>
+<ul>
+  <li> <code>System.Data.Odbc.OdbcCommand</code> </li>
+  <li> <code>System.Data.Odbc.OdbcDataAdapter</code> </li>
+  <li> <code>System.Data.OleDb.OleDbCommand</code> </li>
+  <li> <code>System.Data.OleDb.OleDbDataAdapter</code> </li>
+  <li> <code>System.Data.OracleClient.OracleCommand</code> </li>
+  <li> <code>System.Data.OracleClient.OracleDataAdapter</code> </li>
+  <li> <code>System.Data.SqlServerCe.SqlCeCommand</code> </li>
+  <li> <code>System.Data.SqlServerCe.SqlCeDataAdapter</code> </li>
+  <li> <code>System.Data.SqlClient.SqlCommand</code> </li>
+  <li> <code>System.Data.SqlClient.SqlDataAdapter</code> </li>
+</ul>
+<h2>Noncompliant Code Example</h2>
+<pre>
+using System;
+using System.Data;
+using System.Data.SqlClient;
+
+namespace MyLibrary
+{
+   public class Foo
+   {
+      public object Bar(string connection, string name, string password)
+      {
+         SqlConnection someConnection = new SqlConnection(connection);
+         SqlCommand someCommand = new SqlCommand();
+         someCommand.Connection = someConnection;
+
+         someCommand.CommandText = "SELECT AccountNumber FROM Users " +
+            "WHERE Username='" + name +
+            "' AND Password='" + password + "'"; // Noncompliant
+
+         someConnection.Open();
+         object accountNumber = someCommand.ExecuteScalar();
+         someConnection.Close();
+         return accountNumber;
+      }
+   }
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+using System;
+using System.Data;
+using System.Data.SqlClient;
+
+namespace MyLibrary
+{
+   public class Foo
+   {
+      public object Bar(string connection, string name, string password)
+      {
+         SqlConnection someConnection = new SqlConnection(connection);
+         SqlCommand someCommand = new SqlCommand();
+         someCommand.Connection = someConnection;
+
+         someCommand.Parameters.Add(
+            "@username", SqlDbType.NChar).Value = name;
+         someCommand.Parameters.Add(
+            "@password", SqlDbType.NChar).Value = password;
+         someCommand.CommandText = "SELECT AccountNumber FROM Users " +
+            "WHERE Username=@username AND Password=@password";
+
+         someConnection.Open();
+         object accountNumber = someCommand.ExecuteScalar();
+         someConnection.Close();
+         return accountNumber;
+      }
+   }
+}
+</pre>
+<h2>See</h2>
+<ul>
+  <li> <a href="http://cwe.mitre.org/data/definitions/89">MITRE, CWE-89</a> - Improper Neutralization of Special Elements used in an SQL Command </li>
+  <li> <a href="http://cwe.mitre.org/data/definitions/564.html">MITRE, CWE-564</a> - SQL Injection: Hibernate </li>
+  <li> <a href="http://cwe.mitre.org/data/definitions/20.html">MITRE, CWE-20</a> - Improper Input Validation </li>
+  <li> <a href="http://cwe.mitre.org/data/definitions/943.html">MITRE, CWE-943</a> - Improper Neutralization of Special Elements in Data Query Logic
+  </li>
+  <li> <a href="https://www.securecoding.cert.org/confluence/x/PgIRAg">CERT, IDS00-J.</a> - Prevent SQL injection </li>
+  <li> <a href="https://www.owasp.org/index.php/Top_10_2013-A1-Injection">OWASP Top Ten 2013 Category A1</a> - Injection </li>
+  <li> <a href="http://www.sans.org/top25-software-errors/">SANS Top 25</a> - Insecure Interaction Between Components </li>
+  <li> Derived from FindSecBugs rules <a href="http://h3xstream.github.io/find-sec-bugs/bugs.htm#SQL_INJECTION_JPA">Potential SQL/JPQL Injection
+  (JPA)</a>, <a href="http://h3xstream.github.io/find-sec-bugs/bugs.htm#SQL_INJECTION_JDO">Potential SQL/JDOQL Injection (JDO)</a>, <a
+  href="http://h3xstream.github.io/find-sec-bugs/bugs.htm#SQL_INJECTION_HIBERNATE">Potential SQL/HQL Injection (Hibernate)</a> </li>
+</ul>
+

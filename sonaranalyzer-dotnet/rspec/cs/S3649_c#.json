@@ -1,0 +1,22 @@
+{
+  "title": "User-provided values should be sanitized before use in SQL statements",
+  "type": "VULNERABILITY",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "20min"
+  },
+  "tags": [
+    "cwe",
+    "owasp-a1",
+    "sans-top25-insecure",
+    "cert",
+    "sql"
+  ],
+  "standards": [
+    "CWE",
+    "OWASP Top Ten",
+    "SANS Top 25"
+  ],
+  "defaultSeverity": "Blocker"
+}
