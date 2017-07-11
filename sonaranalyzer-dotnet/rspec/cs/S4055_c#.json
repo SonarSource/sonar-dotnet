@@ -1,0 +1,14 @@
+{
+  "title": "Literals should not be passed as localized parameters",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "10min"
+  },
+  "tags": [
+    "localisation",
+    "pitfall"
+  ],
+  "defaultSeverity": "Major"
+}

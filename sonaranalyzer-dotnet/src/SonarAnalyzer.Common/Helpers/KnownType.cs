@@ -145,6 +145,7 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType System_Runtime_InteropServices_HandleRef = new KnownType("System.Runtime.InteropServices.HandleRef");
         public static readonly KnownType System_Runtime_InteropServices_DllImportAttribute = new KnownType("System.Runtime.InteropServices.DllImportAttribute");
         public static readonly KnownType System_ComponentModel_DefaultValueAttribute = new KnownType("System.ComponentModel.DefaultValueAttribute");
+        public static readonly KnownType System_ComponentModel_LocalizableAttribute = new KnownType("System.ComponentModel.LocalizableAttribute");
 
         public static readonly KnownType System_Globalization_CultureInfo = new KnownType("System.Globalization.CultureInfo");
         public static readonly KnownType System_Globalization_CompareOptions = new KnownType("System.Globalization.CompareOptions");

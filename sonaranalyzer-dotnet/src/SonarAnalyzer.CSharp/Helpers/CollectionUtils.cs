@@ -83,5 +83,38 @@ namespace SonarAnalyzer.Helpers
         {
             return enumerable.Where(e => e != null);
         }
+
+        /// <summary>
+        /// Applies a specified function to the corresponding elements of two sequences,
+        /// producing a sequence of the results. If the collections have different length
+        /// default(T) will be passed in the operation function for the corresponding items that 
+        /// do not exist.
+        /// </summary>
+        /// <typeparam name="TFirst">The type of the elements of the first input sequence.</typeparam>
+        /// <typeparam name="TSecond">The type of the elements of the second input sequence.</typeparam>
+        /// <typeparam name="TResult">The type of the elements of the result sequence.</typeparam>
+        /// <param name="first">The first sequence to merge.</param>
+        /// <param name="second">The second sequence to merge.</param>
+        /// <param name="operation">A function that specifies how to merge the elements from the two sequences.</param>
+        /// <returns>An System.Collections.Generic.IEnumerable`1 that contains merged elements of
+        /// two input sequences.</returns>
+        public static IEnumerable<TResult> Merge<TFirst, TSecond, TResult>(this IEnumerable<TFirst> first,
+            IEnumerable<TSecond> second, Func<TFirst, TSecond, TResult> operation)
+        {
+            using (var iter1 = first.GetEnumerator())
+            using (var iter2 = second.GetEnumerator())
+            {
+                while (iter1.MoveNext())
+                {
+                    yield return operation(iter1.Current,
+                         iter2.MoveNext() ? iter2.Current : default(TSecond));
+                }
+
+                while (iter2.MoveNext())
+                {
+                    yield return operation(default(TFirst), iter2.Current);
+                }
+            }
+        }
     }
 }

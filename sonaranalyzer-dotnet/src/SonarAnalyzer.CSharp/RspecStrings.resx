@@ -7200,6 +7200,33 @@
   <data name="S4052_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
   </data>
+  <data name="S4055_Category" xml:space="preserve">
+    <value>Sonar Code Smell</value>
+  </data>
+  <data name="S4055_Description" xml:space="preserve">
+    <value>String literals embedded in the source code will not be localized properly.</value>
+  </data>
+  <data name="S4055_IsActivatedByDefault" xml:space="preserve">
+    <value>False</value>
+  </data>
+  <data name="S4055_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S4055_RemediationCost" xml:space="preserve">
+    <value>10min</value>
+  </data>
+  <data name="S4055_Severity" xml:space="preserve">
+    <value>Major</value>
+  </data>
+  <data name="S4055_Tags" xml:space="preserve">
+    <value>localisation,pitfall</value>
+  </data>
+  <data name="S4055_Title" xml:space="preserve">
+    <value>Literals should not be passed as localized parameters</value>
+  </data>
+  <data name="S4055_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S4056_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>

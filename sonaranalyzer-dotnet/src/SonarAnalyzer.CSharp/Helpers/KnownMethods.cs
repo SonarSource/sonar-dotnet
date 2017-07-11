@@ -207,5 +207,18 @@ namespace SonarAnalyzer.Helpers
                 methodSymbol.Name == "op_Inequality";
         }
 
+        public static bool IsConsoleWriteLine(this IMethodSymbol methodSymbol)
+        {
+            return methodSymbol != null &&
+                methodSymbol.IsInType(KnownType.System_Console) &&
+                methodSymbol.Name == nameof(Console.WriteLine);
+        }
+
+        public static bool IsConsoleWrite(this IMethodSymbol methodSymbol)
+        {
+            return methodSymbol != null &&
+                methodSymbol.IsInType(KnownType.System_Console) &&
+                methodSymbol.Name == nameof(Console.Write);
+        }
     }
 }
