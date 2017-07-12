@@ -4324,7 +4324,7 @@
     <value>When a derived type is used as a parameter instead of the base type, it limits the uses of the method. If the additional functionality that is provided in the derived type is not requires then that limitation isn't required, and should be removed.</value>
   </data>
   <data name="S3242_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S3242_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
