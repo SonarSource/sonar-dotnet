@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1075",
+"message":  "Refactor your code to get this URI from a customizable parameter.",
+"location":  {
+"uri":  "akka.net\src\examples\Cluster\Roles\Samples.Cluster.Transformation\TransformationBackend.cs",
+"region":  {
+"startLine":  65,
+"startColumn":  57,
+"endLine":  65,
+"endColumn":  73
+}
+}
+}
+]
+}

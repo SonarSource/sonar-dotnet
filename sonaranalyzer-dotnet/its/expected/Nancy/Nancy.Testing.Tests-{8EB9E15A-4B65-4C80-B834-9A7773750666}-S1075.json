@@ -1,0 +1,576 @@
+{
+"issues":  [
+{
+"id":  "S1075",
+"message":  "Refactor your code to get this URI from a customizable parameter.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing.Tests\BrowserFixture.cs",
+"region":  {
+"startLine":  61,
+"startColumn":  44,
+"endLine":  61,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S1075",
+"message":  "Refactor your code to get this URI from a customizable parameter.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing.Tests\BrowserFixture.cs",
+"region":  {
+"startLine":  78,
+"startColumn":  44,
+"endLine":  78,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S1075",
+"message":  "Refactor your code to get this URI from a customizable parameter.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing.Tests\BrowserFixture.cs",
+"region":  {
+"startLine":  96,
+"startColumn":  44,
+"endLine":  96,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S1075",
+"message":  "Refactor your code to get this URI from a customizable parameter.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing.Tests\BrowserFixture.cs",
+"region":  {
+"startLine":  114,
+"startColumn":  44,
+"endLine":  114,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S1075",
+"message":  "Refactor your code to get this URI from a customizable parameter.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing.Tests\BrowserFixture.cs",
+"region":  {
+"startLine":  272,
+"startColumn":  44,
+"endLine":  272,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S1075",
+"message":  "Refactor your code to get this URI from a customizable parameter.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing.Tests\BrowserFixture.cs",
+"region":  {
+"startLine":  286,
+"startColumn":  44,
+"endLine":  286,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S1075",
+"message":  "Refactor your code to get this URI from a customizable parameter.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing.Tests\BrowserFixture.cs",
+"region":  {
+"startLine":  329,
+"startColumn":  31,
+"endLine":  329,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S1075",
+"message":  "Refactor your code to get this URI from a customizable parameter.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing.Tests\BrowserFixture.cs",
+"region":  {
+"startLine":  332,
+"startColumn":  30,
+"endLine":  332,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S1075",
+"message":  "Refactor your code to get this URI from a customizable parameter.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing.Tests\BrowserFixture.cs",
+"region":  {
+"startLine":  344,
+"startColumn":  31,
+"endLine":  344,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S1075",
+"message":  "Refactor your code to get this URI from a customizable parameter.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing.Tests\BrowserFixture.cs",
+"region":  {
+"startLine":  346,
+"startColumn":  31,
+"endLine":  346,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S1075",
+"message":  "Refactor your code to get this URI from a customizable parameter.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing.Tests\BrowserFixture.cs",
+"region":  {
+"startLine":  348,
+"startColumn":  44,
+"endLine":  348,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S1075",
+"message":  "Refactor your code to get this URI from a customizable parameter.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing.Tests\BrowserFixture.cs",
+"region":  {
+"startLine":  358,
+"startColumn":  44,
+"endLine":  358,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S1075",
+"message":  "Refactor your code to get this URI from a customizable parameter.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing.Tests\BrowserFixture.cs",
+"region":  {
+"startLine":  368,
+"startColumn":  44,
+"endLine":  368,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S1075",
+"message":  "Refactor your code to get this URI from a customizable parameter.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing.Tests\BrowserFixture.cs",
+"region":  {
+"startLine":  380,
+"startColumn":  40,
+"endLine":  380,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S1075",
+"message":  "Refactor your code to get this URI from a customizable parameter.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing.Tests\BrowserFixture.cs",
+"region":  {
+"startLine":  396,
+"startColumn":  44,
+"endLine":  396,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S1075",
+"message":  "Refactor your code to get this URI from a customizable parameter.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing.Tests\BrowserFixture.cs",
+"region":  {
+"startLine":  430,
+"startColumn":  46,
+"endLine":  430,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S1075",
+"message":  "Refactor your code to get this URI from a customizable parameter.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing.Tests\BrowserFixture.cs",
+"region":  {
+"startLine":  447,
+"startColumn":  47,
+"endLine":  447,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S1075",
+"message":  "Refactor your code to get this URI from a customizable parameter.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing.Tests\BrowserFixture.cs",
+"region":  {
+"startLine":  469,
+"startColumn":  46,
+"endLine":  469,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S1075",
+"message":  "Refactor your code to get this URI from a customizable parameter.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing.Tests\BrowserFixture.cs",
+"region":  {
+"startLine":  491,
+"startColumn":  45,
+"endLine":  491,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S1075",
+"message":  "Refactor your code to get this URI from a customizable parameter.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing.Tests\BrowserFixture.cs",
+"region":  {
+"startLine":  505,
+"startColumn":  45,
+"endLine":  505,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S1075",
+"message":  "Refactor your code to get this URI from a customizable parameter.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing.Tests\BrowserFixture.cs",
+"region":  {
+"startLine":  522,
+"startColumn":  45,
+"endLine":  522,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S1075",
+"message":  "Refactor your code to get this URI from a customizable parameter.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing.Tests\BrowserFixture.cs",
+"region":  {
+"startLine":  535,
+"startColumn":  44,
+"endLine":  535,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S1075",
+"message":  "Refactor your code to get this URI from a customizable parameter.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing.Tests\BrowserFixture.cs",
+"region":  {
+"startLine":  554,
+"startColumn":  48,
+"endLine":  554,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S1075",
+"message":  "Refactor your code to get this URI from a customizable parameter.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing.Tests\BrowserFixture.cs",
+"region":  {
+"startLine":  569,
+"startColumn":  48,
+"endLine":  569,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S1075",
+"message":  "Refactor your code to get this URI from a customizable parameter.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing.Tests\CaseSensitivityFixture.cs",
+"region":  {
+"startLine":  70,
+"startColumn":  50,
+"endLine":  70,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S1075",
+"message":  "Refactor your code to get this URI from a customizable parameter.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing.Tests\CaseSensitivityFixture.cs",
+"region":  {
+"startLine":  86,
+"startColumn":  50,
+"endLine":  86,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S1075",
+"message":  "Refactor your code to get this URI from a customizable parameter.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing.Tests\CaseSensitivityFixture.cs",
+"region":  {
+"startLine":  102,
+"startColumn":  50,
+"endLine":  102,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S1075",
+"message":  "Refactor your code to get this URI from a customizable parameter.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing.Tests\CaseSensitivityFixture.cs",
+"region":  {
+"startLine":  121,
+"startColumn":  50,
+"endLine":  121,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S1075",
+"message":  "Refactor your code to get this URI from a customizable parameter.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing.Tests\ConfigurableBootstrapperDependenciesTests.cs",
+"region":  {
+"startLine":  39,
+"startColumn":  46,
+"endLine":  39,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S1075",
+"message":  "Refactor your code to get this URI from a customizable parameter.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing.Tests\ConfigurableBootstrapperDependenciesTests.cs",
+"region":  {
+"startLine":  56,
+"startColumn":  46,
+"endLine":  56,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S1075",
+"message":  "Refactor your code to get this URI from a customizable parameter.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing.Tests\ConfigurableBootstrapperDependenciesTests.cs",
+"region":  {
+"startLine":  73,
+"startColumn":  46,
+"endLine":  73,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S1075",
+"message":  "Refactor your code to get this URI from a customizable parameter.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing.Tests\ConfigurableBootstrapperDependenciesTests.cs",
+"region":  {
+"startLine":  90,
+"startColumn":  46,
+"endLine":  90,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S1075",
+"message":  "Refactor your code to get this URI from a customizable parameter.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing.Tests\ConfigurableBootstrapperDependenciesTests.cs",
+"region":  {
+"startLine":  134,
+"startColumn":  46,
+"endLine":  134,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S1075",
+"message":  "Refactor your code to get this URI from a customizable parameter.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing.Tests\ConfigurableBootstrapperDependenciesTests.cs",
+"region":  {
+"startLine":  156,
+"startColumn":  46,
+"endLine":  156,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S1075",
+"message":  "Refactor your code to get this URI from a customizable parameter.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing.Tests\TestingViewExtensions\GetModelExtententionsTests.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  52,
+"endLine":  22,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S1075",
+"message":  "Refactor your code to get this URI from a customizable parameter.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing.Tests\TestingViewExtensions\GetModelExtententionsTests.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  52,
+"endLine":  29,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S1075",
+"message":  "Refactor your code to get this URI from a customizable parameter.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing.Tests\TestingViewExtensions\GetModelExtententionsTests.cs",
+"region":  {
+"startLine":  36,
+"startColumn":  52,
+"endLine":  36,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S1075",
+"message":  "Refactor your code to get this URI from a customizable parameter.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing.Tests\TestingViewExtensions\GetModelExtententionsTests.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  52,
+"endLine":  43,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S1075",
+"message":  "Refactor your code to get this URI from a customizable parameter.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing.Tests\TestingViewExtensions\GetModelExtententionsTests.cs",
+"region":  {
+"startLine":  51,
+"startColumn":  52,
+"endLine":  51,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S1075",
+"message":  "Refactor your code to get this URI from a customizable parameter.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing.Tests\TestingViewExtensions\GetModuleNameExtensionTests.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  51,
+"endLine":  22,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S1075",
+"message":  "Refactor your code to get this URI from a customizable parameter.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing.Tests\TestingViewExtensions\GetModulePathExtensionMethodTests.cs",
+"region":  {
+"startLine":  19,
+"startColumn":  46,
+"endLine":  19,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S1075",
+"message":  "Refactor your code to get this URI from a customizable parameter.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing.Tests\TestingViewExtensions\GetModulePathExtensionMethodTests.cs",
+"region":  {
+"startLine":  36,
+"startColumn":  46,
+"endLine":  36,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S1075",
+"message":  "Refactor your code to get this URI from a customizable parameter.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing.Tests\TestingViewExtensions\GetViewNameExtensionTests.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  51,
+"endLine":  22,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S1075",
+"message":  "Refactor your code to get this URI from a customizable parameter.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing.Tests\TestingViewExtensions\GetViewNameExtensionTests.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  51,
+"endLine":  29,
+"endColumn":  82
+}
+}
+}
+]
+}

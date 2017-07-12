@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1075",
+"message":  "Refactor your code to get this URI from a customizable parameter.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Cluster.Tests.MultiNode\ClusterDeathWatchSpec.cs",
+"region":  {
+"startLine":  91,
+"startColumn":  40,
+"endLine":  91,
+"endColumn":  64
+}
+}
+}
+]
+}

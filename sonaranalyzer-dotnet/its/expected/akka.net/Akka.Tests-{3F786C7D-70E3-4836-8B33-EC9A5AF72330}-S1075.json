@@ -1,0 +1,160 @@
+{
+"issues":  [
+{
+"id":  "S1075",
+"message":  "Refactor your code to get this URI from a customizable parameter.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorPathSpec.cs",
+"region":  {
+"startLine":  38,
+"startColumn":  38,
+"endLine":  38,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S1075",
+"message":  "Refactor your code to get this URI from a customizable parameter.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorPathSpec.cs",
+"region":  {
+"startLine":  60,
+"startColumn":  38,
+"endLine":  60,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S1075",
+"message":  "Refactor your code to get this URI from a customizable parameter.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorPathSpec.cs",
+"region":  {
+"startLine":  97,
+"startColumn":  32,
+"endLine":  97,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S1075",
+"message":  "Refactor your code to get this URI from a customizable parameter.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorPathSpec.cs",
+"region":  {
+"startLine":  98,
+"startColumn":  32,
+"endLine":  98,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S1075",
+"message":  "Refactor your code to get this URI from a customizable parameter.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorPathSpec.cs",
+"region":  {
+"startLine":  99,
+"startColumn":  32,
+"endLine":  99,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S1075",
+"message":  "Refactor your code to get this URI from a customizable parameter.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorPathSpec.cs",
+"region":  {
+"startLine":  175,
+"startColumn":  32,
+"endLine":  175,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S1075",
+"message":  "Refactor your code to get this URI from a customizable parameter.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorPathSpec.cs",
+"region":  {
+"startLine":  176,
+"startColumn":  32,
+"endLine":  176,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S1075",
+"message":  "Refactor your code to get this URI from a customizable parameter.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorPathSpec.cs",
+"region":  {
+"startLine":  186,
+"startColumn":  32,
+"endLine":  186,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S1075",
+"message":  "Refactor your code to get this URI from a customizable parameter.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorPathSpec.cs",
+"region":  {
+"startLine":  187,
+"startColumn":  32,
+"endLine":  187,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S1075",
+"message":  "Refactor your code to get this URI from a customizable parameter.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\Actor\RelativeActorPathSpec.cs",
+"region":  {
+"startLine":  33,
+"startColumn":  22,
+"endLine":  33,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S1075",
+"message":  "Refactor your code to get this URI from a customizable parameter.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\Serialization\SerializationSpec.cs",
+"region":  {
+"startLine":  434,
+"startColumn":  23,
+"endLine":  434,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S1075",
+"message":  "Refactor your code to get this URI from a customizable parameter.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\Serialization\SerializationSpec.cs",
+"region":  {
+"startLine":  443,
+"startColumn":  23,
+"endLine":  443,
+"endColumn":  65
+}
+}
+}
+]
+}

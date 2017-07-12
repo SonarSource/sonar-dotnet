@@ -1,0 +1,95 @@
+{
+"issues":  [
+{
+"id":  "S1075",
+"message":  "Refactor your code to get this URI from a customizable parameter.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Remote.Tests\RemoteConsistentHashingRouterSpec.cs",
+"region":  {
+"startLine":  34,
+"startColumn":  66,
+"endLine":  34,
+"endColumn":  104
+}
+}
+},
+{
+"id":  "S1075",
+"message":  "Refactor your code to get this URI from a customizable parameter.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Remote.Tests\RemoteConsistentHashingRouterSpec.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  66,
+"endLine":  35,
+"endColumn":  104
+}
+}
+},
+{
+"id":  "S1075",
+"message":  "Refactor your code to get this URI from a customizable parameter.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Remote.Tests\RemoteConsistentHashingRouterSpec.cs",
+"region":  {
+"startLine":  36,
+"startColumn":  66,
+"endLine":  36,
+"endColumn":  104
+}
+}
+},
+{
+"id":  "S1075",
+"message":  "Refactor your code to get this URI from a customizable parameter.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Remote.Tests\RemoteDaemonSpec.cs",
+"region":  {
+"startLine":  72,
+"startColumn":  72,
+"endLine":  72,
+"endColumn":  90
+}
+}
+},
+{
+"id":  "S1075",
+"message":  "Refactor your code to get this URI from a customizable parameter.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Remote.Tests\RemotingSpec.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  36,
+"endLine":  35,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S1075",
+"message":  "Refactor your code to get this URI from a customizable parameter.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Remote.Tests\RemotingSpec.cs",
+"region":  {
+"startLine":  36,
+"startColumn":  36,
+"endLine":  36,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S1075",
+"message":  "Refactor your code to get this URI from a customizable parameter.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Remote.Tests\RemotingSpec.cs",
+"region":  {
+"startLine":  39,
+"startColumn":  39,
+"endLine":  39,
+"endColumn":  89
+}
+}
+}
+]
+}
