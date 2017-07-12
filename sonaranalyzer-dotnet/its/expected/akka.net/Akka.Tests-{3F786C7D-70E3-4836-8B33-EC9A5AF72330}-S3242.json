@@ -1,0 +1,121 @@
+{
+"issues":  [
+{
+"id":  "S3242",
+"message":  "Use 'Akka.Event.EventBus<object, System.Type, Akka.Actor.IActorRef>' here; it is a more general type than 'Akka.Event.LoggingBus'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\Event\EventStreamSpec.cs",
+"region":  {
+"startLine":  309,
+"startColumn":  45,
+"endLine":  309,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Use 'System.Net.EndPoint' here; it is a more general type than 'System.Net.IPEndPoint'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
+"region":  {
+"startLine":  789,
+"startColumn":  85,
+"endLine":  789,
+"endColumn":  98
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Use 'System.Net.EndPoint' here; it is a more general type than 'System.Net.IPEndPoint'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\IO\UdpConnectedIntegrationSpec.cs",
+"region":  {
+"startLine":  36,
+"startColumn":  46,
+"endLine":  36,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Use 'System.Net.EndPoint' here; it is a more general type than 'System.Net.IPEndPoint'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\IO\UdpConnectedIntegrationSpec.cs",
+"region":  {
+"startLine":  44,
+"startColumn":  49,
+"endLine":  44,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Use 'System.Net.EndPoint' here; it is a more general type than 'System.Net.IPEndPoint'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\IO\UdpConnectedIntegrationSpec.cs",
+"region":  {
+"startLine":  44,
+"startColumn":  74,
+"endLine":  44,
+"endColumn":  87
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Use 'System.Net.EndPoint' here; it is a more general type than 'System.Net.IPEndPoint'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\IO\UdpIntegrationSpec.cs",
+"region":  {
+"startLine":  36,
+"startColumn":  46,
+"endLine":  36,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Use 'System.Collections.Generic.IReadOnlyCollection<T>' here; it is a more general type than 'System.Collections.Generic.IReadOnlyList<T>'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\MatchHandler\CachedMatchCompilerTests.cs",
+"region":  {
+"startLine":  114,
+"startColumn":  55,
+"endLine":  114,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Use 'System.Collections.Generic.IReadOnlyCollection<T>' here; it is a more general type than 'System.Collections.Generic.IReadOnlyList<T>'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\MatchHandler\CachedMatchCompilerTests.cs",
+"region":  {
+"startLine":  119,
+"startColumn":  56,
+"endLine":  119,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Use 'System.Collections.Generic.IReadOnlyCollection<T>' here; it is a more general type than 'System.Collections.Generic.IReadOnlyList<T>'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Tests\MatchHandler\CachedMatchCompilerTests.cs",
+"region":  {
+"startLine":  125,
+"startColumn":  56,
+"endLine":  125,
+"endColumn":  58
+}
+}
+}
+]
+}

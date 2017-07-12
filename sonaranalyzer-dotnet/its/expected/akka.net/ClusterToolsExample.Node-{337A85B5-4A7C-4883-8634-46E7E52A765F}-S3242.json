@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3242",
+"message":  "Use 'Akka.Actor.IActorRefFactory' here; it is a more general type than 'Akka.Actor.ActorSystem'.",
+"location":  {
+"uri":  "akka.net\src\examples\Cluster\ClusterTools\ClusterToolsExample.Node\Program.cs",
+"region":  {
+"startLine":  39,
+"startColumn":  60,
+"endLine":  39,
+"endColumn":  66
+}
+}
+}
+]
+}

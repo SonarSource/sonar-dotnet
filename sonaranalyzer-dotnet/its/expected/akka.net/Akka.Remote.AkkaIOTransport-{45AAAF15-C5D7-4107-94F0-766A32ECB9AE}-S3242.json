@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3242",
+"message":  "Use 'Akka.Actor.ICanTell' here; it is a more general type than 'Akka.Actor.IActorRef'.",
+"location":  {
+"uri":  "akka.net\src\contrib\transports\Akka.Remote.AkkaIOTransport\TransportManager.cs",
+"region":  {
+"startLine":  63,
+"startColumn":  70,
+"endLine":  63,
+"endColumn":  77
+}
+}
+}
+]
+}

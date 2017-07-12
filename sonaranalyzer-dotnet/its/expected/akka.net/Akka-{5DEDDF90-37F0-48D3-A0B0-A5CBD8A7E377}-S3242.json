@@ -1,0 +1,446 @@
+{
+"issues":  [
+{
+"id":  "S3242",
+"message":  "Use 'System.Collections.Generic.ICollection<Akka.Actor.IActorRef>' here; it is a more general type than 'System.Collections.Generic.List<Akka.Actor.IActorRef>'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka\Actor\ActorCell.Children.cs",
+"region":  {
+"startLine":  205,
+"startColumn":  54,
+"endLine":  205,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Use 'Akka.Dispatch.Mailbox' here; it is a more general type than 'Akka.Actor.DeadLetterMailbox'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka\Actor\ActorCell.DefaultMessages.cs",
+"region":  {
+"startLine":  224,
+"startColumn":  51,
+"endLine":  224,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Use 'Akka.Util.ISurrogated' here; it is a more general type than 'Akka.Actor.ActorPath'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka\Actor\ActorPath.cs",
+"region":  {
+"startLine":  78,
+"startColumn":  42,
+"endLine":  78,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Use 'Akka.Actor.ICanTell' here; it is a more general type than 'Akka.Actor.IActorRef'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka\Actor\ActorRef.cs",
+"region":  {
+"startLine":  122,
+"startColumn":  48,
+"endLine":  122,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Use 'Akka.Actor.ICanTell' here; it is a more general type than 'Akka.Actor.IActorRef'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka\Actor\ActorRef.cs",
+"region":  {
+"startLine":  134,
+"startColumn":  51,
+"endLine":  134,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Use 'Akka.Actor.IActorRef' here; it is a more general type than 'Akka.Actor.LocalActorRef'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka\Actor\ActorRefProvider.cs",
+"region":  {
+"startLine":  237,
+"startColumn":  107,
+"endLine":  237,
+"endColumn":  119
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Use 'Akka.Actor.Internal.IChildStats' here; it is a more general type than 'Akka.Actor.Internal.ChildRestartStats'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka\Actor\ChildrenContainer\Internal\EmptyChildrenContainer.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  78,
+"endLine":  28,
+"endColumn":  83
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Use 'Akka.Actor.ICanTell' here; it is a more general type than 'Akka.Actor.IActorRef'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka\Actor\Inbox.cs",
+"region":  {
+"startLine":  284,
+"startColumn":  36,
+"endLine":  284,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Use 'Akka.Tools.MatchHandler.MatchBuilder<object>' here; it is a more general type than 'Akka.Tools.MatchHandler.MatchBuilder'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka\Actor\ReceiveActor.cs",
+"region":  {
+"startLine":  41,
+"startColumn":  75,
+"endLine":  41,
+"endColumn":  87
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Use 'Akka.Actor.ICanTell' here; it is a more general type than 'Akka.Actor.IActorRef'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka\Actor\Scheduler\DeprecatedSchedulerExtensions.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  101,
+"endLine":  17,
+"endColumn":  109
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Use 'Akka.Actor.ICanTell' here; it is a more general type than 'Akka.Actor.IActorRef'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka\Actor\Scheduler\DeprecatedSchedulerExtensions.cs",
+"region":  {
+"startLine":  24,
+"startColumn":  101,
+"endLine":  24,
+"endColumn":  109
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Use 'Akka.Actor.ICanTell' here; it is a more general type than 'Akka.Actor.IActorRef'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka\Actor\Scheduler\DeprecatedSchedulerExtensions.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  116,
+"endLine":  31,
+"endColumn":  124
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Use 'Akka.Actor.ICanTell' here; it is a more general type than 'Akka.Actor.IActorRef'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka\Actor\Scheduler\DeprecatedSchedulerExtensions.cs",
+"region":  {
+"startLine":  39,
+"startColumn":  116,
+"endLine":  39,
+"endColumn":  124
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Use 'Akka.Actor.IActorContext' here; it is a more general type than 'Akka.Actor.ActorCell'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka\Actor\SupervisorStrategy.cs",
+"region":  {
+"startLine":  48,
+"startColumn":  45,
+"endLine":  48,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Use 'Akka.Actor.ExtendedActorSystem' here; it is a more general type than 'Akka.Actor.Internal.ActorSystemImpl'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka\Event\EventBusUnsubscriber.cs",
+"region":  {
+"startLine":  126,
+"startColumn":  43,
+"endLine":  126,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Use 'Akka.Event.EventBus<object, System.Type, Akka.Actor.IActorRef>' here; it is a more general type than 'Akka.Event.EventStream'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka\Event\EventStreamExtensions.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  65,
+"endLine":  31,
+"endColumn":  76
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Use 'Akka.Event.EventBus<object, System.Type, Akka.Actor.IActorRef>' here; it is a more general type than 'Akka.Event.EventStream'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka\Event\EventStreamExtensions.cs",
+"region":  {
+"startLine":  44,
+"startColumn":  67,
+"endLine":  44,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Use 'Akka.Actor.ExtendedActorSystem' here; it is a more general type than 'Akka.Actor.Internal.ActorSystemImpl'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka\Event\LoggingBus.cs",
+"region":  {
+"startLine":  136,
+"startColumn":  48,
+"endLine":  136,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Use 'Akka.IO.Tcp.Event' here; it is a more general type than 'Akka.IO.Tcp.ConnectionClosed'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka\IO\TcpConnection.cs",
+"region":  {
+"startLine":  494,
+"startColumn":  106,
+"endLine":  494,
+"endColumn":  117
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Use 'System.Exception' here; it is a more general type than 'System.Net.Sockets.SocketException'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka\IO\TcpConnection.cs",
+"region":  {
+"startLine":  501,
+"startColumn":  69,
+"endLine":  501,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Use 'System.Collections.Generic.IEnumerable<Akka.Routing.Routee>' here; it is a more general type than 'System.Collections.Generic.IList<Akka.Routing.Routee>'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka\Routing\RoutedActorCell.cs",
+"region":  {
+"startLine":  52,
+"startColumn":  48,
+"endLine":  52,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Use 'System.Collections.Generic.ICollection<Akka.Routing.Routee>' here; it is a more general type than 'System.Collections.Generic.IList<Akka.Routing.Routee>'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka\Routing\RoutedActorCell.cs",
+"region":  {
+"startLine":  73,
+"startColumn":  51,
+"endLine":  73,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Use 'Akka.Actor.IActorRefFactory' here; it is a more general type than 'Akka.Actor.IActorContext'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka\Routing\RouterConfig.cs",
+"region":  {
+"startLine":  335,
+"startColumn":  62,
+"endLine":  335,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Use 'Akka.Actor.ActorSystem' here; it is a more general type than 'Akka.Actor.ExtendedActorSystem'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka\Serialization\Serializer.cs",
+"region":  {
+"startLine":  120,
+"startColumn":  92,
+"endLine":  120,
+"endColumn":  98
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Use 'System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<TKey, TValue>>' here; it is a more general type than 'System.Collections.Generic.SortedDictionary<TKey, TValue>'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka\Util\Internal\ImmutabilityUtils.cs",
+"region":  {
+"startLine":  50,
+"startColumn":  115,
+"endLine":  50,
+"endColumn":  119
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Use 'System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<TKey, TValue>>' here; it is a more general type than 'System.Collections.Generic.SortedDictionary<TKey, TValue>'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka\Util\Internal\ImmutabilityUtils.cs",
+"region":  {
+"startLine":  59,
+"startColumn":  118,
+"endLine":  59,
+"endColumn":  122
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Use 'System.Collections.Generic.IReadOnlyCollection<object>' here; it is a more general type than 'System.Collections.Generic.IReadOnlyList<object>'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka\Util\MatchHandler\MatchBuilderSignature.cs",
+"region":  {
+"startLine":  46,
+"startColumn":  55,
+"endLine":  46,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Use 'System.Collections.Generic.IReadOnlyCollection<object>' here; it is a more general type than 'System.Collections.Generic.IReadOnlyList<object>'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka\Util\MatchHandler\MatchBuilderSignature.cs",
+"region":  {
+"startLine":  46,
+"startColumn":  80,
+"endLine":  46,
+"endColumn":  81
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Use 'System.Collections.Generic.IReadOnlyCollection<Akka.Tools.MatchHandler.Argument>' here; it is a more general type than 'System.Collections.Generic.IReadOnlyList<Akka.Tools.MatchHandler.Argument>'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka\Util\MatchHandler\MatchExpressionBuilder.cs",
+"region":  {
+"startLine":  135,
+"startColumn":  126,
+"endLine":  135,
+"endColumn":  135
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Use 'System.Collections.Generic.IReadOnlyCollection<Akka.Tools.MatchHandler.Argument>' here; it is a more general type than 'System.Collections.Generic.IReadOnlyList<Akka.Tools.MatchHandler.Argument>'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka\Util\MatchHandler\MatchExpressionBuilder.cs",
+"region":  {
+"startLine":  198,
+"startColumn":  75,
+"endLine":  198,
+"endColumn":  84
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Use 'System.Collections.Generic.ICollection<System.Linq.Expressions.Expression>' here; it is a more general type than 'System.Collections.Generic.List<System.Linq.Expressions.Expression>'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka\Util\MatchHandler\MatchExpressionBuilder.cs",
+"region":  {
+"startLine":  264,
+"startColumn":  103,
+"endLine":  264,
+"endColumn":  107
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Use 'System.Collections.Generic.ICollection<System.Linq.Expressions.Expression>' here; it is a more general type than 'System.Collections.Generic.List<System.Linq.Expressions.Expression>'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka\Util\MatchHandler\MatchExpressionBuilder.cs",
+"region":  {
+"startLine":  275,
+"startColumn":  116,
+"endLine":  275,
+"endColumn":  120
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Use 'System.Collections.Generic.ICollection<System.Linq.Expressions.Expression>' here; it is a more general type than 'System.Collections.Generic.List<System.Linq.Expressions.Expression>'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka\Util\MatchHandler\MatchExpressionBuilder.cs",
+"region":  {
+"startLine":  293,
+"startColumn":  101,
+"endLine":  293,
+"endColumn":  105
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Use 'System.Collections.Generic.ICollection<object>' here; it is a more general type than 'System.Collections.Generic.IList<object>'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka\Util\StringFormat.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  61,
+"endLine":  26,
+"endColumn":  65
+}
+}
+}
+]
+}

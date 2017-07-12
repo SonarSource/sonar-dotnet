@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3242",
+"message":  "Use 'System.Collections.Generic.IEnumerable<long>' here; it is a more general type than 'System.Collections.Generic.IList<long>'.",
+"location":  {
+"uri":  "akka.net\src\core\Akka.Remote.Tests\AccrualFailureDetectorSpec.cs",
+"region":  {
+"startLine":  265,
+"startColumn":  59,
+"endLine":  265,
+"endColumn":  72
+}
+}
+}
+]
+}
