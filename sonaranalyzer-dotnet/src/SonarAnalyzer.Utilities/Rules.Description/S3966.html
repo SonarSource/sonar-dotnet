@@ -1,0 +1,33 @@
+<p>A proper implementation of <code>IDisposable.Dispose</code> should allow for it to be called multiple times on the same object, however this is not
+guaranteed and could result in an exception being thrown.</p>
+<p>It is best not to rely on this behaviour and therefore make sure an object is disposed only once on all execution paths. This is particularly true
+when dealing with nested <code>using</code> statements.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+using (Stream stream = new FileStream("file.txt", FileMode.OpenOrCreate))
+{
+    using (StreamWriter writer = new StreamWriter(stream))  // Noncompliant: 'stream' will be disposed twice
+    {
+        // Use the writer object...
+    }
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+Stream stream = null;
+try
+{
+    stream = new FileStream("file.txt", FileMode.OpenOrCreate);
+    using (StreamWriter writer = new StreamWriter(stream))
+    {
+        stream = null;
+        // Use the writer object...
+    }
+}
+finally
+{
+    if(stream != null)
+        stream.Dispose();
+}
+</pre>
+
