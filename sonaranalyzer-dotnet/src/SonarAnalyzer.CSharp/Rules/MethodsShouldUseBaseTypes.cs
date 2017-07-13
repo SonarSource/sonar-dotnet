@@ -160,7 +160,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
             else if (identifierParent is MemberAccessExpressionSyntax)
             {
-                var invocationExpression = identifierParent.Parent as InvocationExpressionSyntax;
+                var invocationExpression = GetNextUnparenthesizedParent(identifierParent) as InvocationExpressionSyntax;
                 if (invocationExpression != null)
                 {
                     var invocationSymbol = semanticModel.GetSymbolInfo(invocationExpression).Symbol;
