@@ -187,12 +187,12 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 // We should not replace Null constraint because having Disposed constraint
                 // implies having NotNull constraint, which is incorrect.
-                if (!disposableSymbol.HasConstraint(ObjectConstraint.Null, programState))
+                if (disposableSymbol.HasConstraint(ObjectConstraint.Null, programState))
                 {
-                    return disposableSymbol.SetConstraint(DisposableConstraint.Disposed, programState);
+                    return programState;
                 }
 
-                return programState;
+                return disposableSymbol.SetConstraint(DisposableConstraint.Disposed, programState);
             }
 
             private static ArgumentSyntax FirstArgumentOrDefault(ObjectCreationExpressionSyntax objectCreation) =>
