@@ -518,3 +518,27 @@ namespace Test_18
 
     public class B : A { }
 }
+
+// Test parentheses
+namespace Test_19
+{
+    public class A
+    {
+        public void Method() { }
+
+        public int Property { get; set; }
+    }
+
+    public class B : A
+    {
+        public void Test_19_Method(B foo) // Noncompliant
+        {
+            (foo).Method();
+        }
+
+        public void Test_19_Property(B foo) // Noncompliant
+        {
+            (foo).Property = 1;
+        }
+    }
+}
