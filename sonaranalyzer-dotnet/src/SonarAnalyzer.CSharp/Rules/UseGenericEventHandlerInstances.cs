@@ -75,7 +75,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var eventSymbol = analysisContext.SemanticModel.GetDeclaredSymbol(eventNode) as IEventSymbol;
 
             if (eventSymbol != null &&
-                eventSymbol.GetOverriddenMember() == null &&
+                !eventSymbol.IsOverride &&
                 eventSymbol.GetInterfaceMember() == null &&
                 (eventSymbol.Type as INamedTypeSymbol)?.ConstructedFrom.IsAny(allowedTypes) == false)
             {
