@@ -78,7 +78,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             foreach (var identifierReference in parameterUsesInMethod)
             {
-                var key = identifierReference?.Identifier.ValueText ?? "";
+                var key = identifierReference.Identifier.ValueText ?? "";
 
                 ParameterData paramData;
                 if (!parametersToCheck.TryGetValue(key, out paramData) ||
@@ -247,7 +247,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             public bool ShouldReportOn { get; set; } = true;
 
-            private IParameterSymbol parameterSymbol;
+            private readonly IParameterSymbol parameterSymbol;
             private readonly HashSet<ITypeSymbol> usedAs = new HashSet<ITypeSymbol>();
 
             public ParameterData(IParameterSymbol parameterSymbol)
