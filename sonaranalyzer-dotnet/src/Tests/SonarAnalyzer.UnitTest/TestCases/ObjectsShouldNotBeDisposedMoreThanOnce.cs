@@ -20,7 +20,8 @@ namespace Tests.Diagnostics
             {
                 d.Dispose();
             }
-            d.Dispose(); // Noncompliant
+            d.Dispose(); // Noncompliant {{Refactor this code to make sure 'd' is disposed only once.}}
+//          ^
         }
 
         public void DisposedTwise_Try()
@@ -34,7 +35,7 @@ namespace Tests.Diagnostics
             }
             finally
             {
-                d.Dispose(); // Noncompliant
+                d.Dispose(); // Noncompliant {{Refactor this code to make sure 'd' is disposed only once.}}
             }
         }
 
@@ -65,8 +66,18 @@ namespace Tests.Diagnostics
         public void Disposed_Using3(Stream str)
         {
             using (var s = new FileStream("path", FileAccess.Read)) // Noncompliant
+//                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
             {
                 using (var sr = new StreamReader(s))
+                {
+                }
+            }
+
+            Stream stream;
+            using (stream = new FileStream("path", FileAccess.Read)) // Noncompliant
+//                 ^^^^^^
+            {
+                using (var sr = new StreamReader(stream))
                 {
                 }
             }
@@ -74,7 +85,7 @@ namespace Tests.Diagnostics
             using (str)
             {
                 var sr = new StreamReader(str);
-                using (sr) // Compliant, but we cannot detect 'str' yet
+                using (sr) // Compliant, we cannot detect if 'str' was argument of the 'sr' constructor or not
                 {
                 }
             }

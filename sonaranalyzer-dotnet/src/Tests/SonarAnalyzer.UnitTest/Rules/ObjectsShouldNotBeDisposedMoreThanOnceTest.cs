@@ -18,9 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Rules.CSharp;
 
@@ -29,30 +26,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class ObjectsShouldNotBeDisposedMoreThanOnceTest
     {
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void ObjectsShouldNotBeDisposedMoreThanOnce1()
-        {
-            Verifier.VerifyCSharpAnalyzer(@"
-using System;
-using System.IO;
-public class Program
-{
-    public void Main(Stream str)
-    {
-            using (var s = new FileStream(""path"", FileAccess.Read)) // Noncompliant
-            {
-                using (var sr = new StreamReader(s))
-                {
-                }
-            }
-        }
-
-
-    }",
-                new ObjectsShouldNotBeDisposedMoreThanOnce(), new CSharpParseOptions(LanguageVersion.CSharp6));
-        }
-
         [TestMethod]
         [TestCategory("Rule")]
         public void ObjectsShouldNotBeDisposedMoreThanOnce()

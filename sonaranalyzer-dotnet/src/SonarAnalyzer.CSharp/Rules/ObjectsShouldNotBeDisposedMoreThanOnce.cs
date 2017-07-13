@@ -39,10 +39,17 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class ObjectsShouldNotBeDisposedMoreThanOnce : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S3966";
-        private const string MessageFormat = "Refactor this code to make sure Dispose is only called once on '{0}'.";
+        private const string MessageFormat = "Refactor this code to make sure '{0}' is disposed only once.";
+
+        private static readonly ISet<KnownType> typesDisposingUnderlyingStream = new HashSet<KnownType>
+        {
+            KnownType.System_IO_StreamReader,
+            KnownType.System_IO_StreamWriter
+        };
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         protected sealed override void Initialize(SonarAnalysisContext context)
@@ -55,12 +62,11 @@ namespace SonarAnalyzer.Rules.CSharp
             var objectDisposedCheck = new ObjectDisposedPointerCheck(explodedGraph);
             explodedGraph.AddExplodedGraphCheck(objectDisposedCheck);
 
-            var nullIdentifiers = new HashSet<IdentifierNameSyntax>();
-
             EventHandler<ObjectDisposedEventArgs> memberAccessedHandler =
                 (sender, args) =>
                 {
-                    context.ReportDiagnostic(Diagnostic.Create(rule, args.DisposableIdentifier.GetLocation(), args.DisposableIdentifier.GetText()));
+                    context.ReportDiagnostic(
+                        Diagnostic.Create(rule, args.Location, args.Name));
                 };
 
             objectDisposedCheck.ObjectDisposed += memberAccessedHandler;
@@ -77,11 +83,13 @@ namespace SonarAnalyzer.Rules.CSharp
 
         internal class ObjectDisposedEventArgs : EventArgs
         {
-            public SyntaxNode DisposableIdentifier { get; }
+            public string Name { get; }
+            public Location Location { get; }
 
-            public ObjectDisposedEventArgs(SyntaxNode disposableIdentifier)
+            public ObjectDisposedEventArgs(string name, Location location)
             {
-                DisposableIdentifier = disposableIdentifier;
+                Name = name;
+                Location = location;
             }
         }
 
@@ -96,15 +104,11 @@ namespace SonarAnalyzer.Rules.CSharp
 
             public override ProgramState PreProcessInstruction(ProgramPoint programPoint, ProgramState programState)
             {
-                var instruction = programPoint.Block.Instructions[programPoint.Offset];
-                switch (instruction.Kind())
-                {
-                    case SyntaxKind.InvocationExpression:
-                        return VisitInvocationExpression((InvocationExpressionSyntax)instruction, programState);
+                var instruction = programPoint.Block.Instructions[programPoint.Offset] as InvocationExpressionSyntax;
 
-                    default:
-                        return programState;
-                }
+                return instruction == null
+                    ? programState
+                    : VisitInvocationExpression(instruction, programState);
             }
 
             public override ProgramState PreProcessUsingStatement(ProgramPoint programPoint, ProgramState programState)
@@ -127,26 +131,22 @@ namespace SonarAnalyzer.Rules.CSharp
                     newProgramState = ProcessDisposableSymbol(newProgramState, nodeWithSymbol.Disposable, nodeWithSymbol.Symbol);
                 }
 
-                newProgramState = ProcessKnownTypes(newProgramState, (SyntaxNode)usingFinalizer.UsingStatement.Expression ?? usingFinalizer.UsingStatement.Declaration);
+                newProgramState = ProcessStreamDisposingTypes(newProgramState, (SyntaxNode)usingFinalizer.UsingStatement.Expression ?? usingFinalizer.UsingStatement.Declaration);
 
                 return newProgramState;
             }
 
-            private ProgramState ProcessKnownTypes(ProgramState programState, SyntaxNode usingExpression)
+            private ProgramState ProcessStreamDisposingTypes(ProgramState programState, SyntaxNode usingExpression)
             {
-                ISet<KnownType> types = new HashSet<KnownType>
-                {
-                    KnownType.System_IO_StreamReader,
-                    KnownType.System_IO_StreamWriter
-                };
                 var newProgramState = programState;
 
-                var objectCreations = usingExpression.DescendantNodes().OfType<ObjectCreationExpressionSyntax>()
-                    .Where(objectCreation => semanticModel.GetSymbolInfo(objectCreation.Type).Symbol.GetSymbolType().DerivesOrImplementsAny(types))
-                    .Select(objectCreation => objectCreation.ArgumentList?.Arguments.FirstOrDefault())
+                var arguments = usingExpression.DescendantNodes()
+                    .OfType<ObjectCreationExpressionSyntax>()
+                    .Where(this.IsStreamDisposingType)
+                    .Select(FirstArgumentOrDefault)
                     .WhereNotNull();
 
-                foreach (var argument in objectCreations)
+                foreach (var argument in arguments)
                 {
                     var streamSymbol = semanticModel.GetSymbolInfo(argument.Expression).Symbol;
                     newProgramState = ProcessDisposableSymbol(newProgramState, argument.Expression, streamSymbol);
@@ -154,6 +154,15 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 return newProgramState;
             }
+
+            private static ArgumentSyntax FirstArgumentOrDefault(ObjectCreationExpressionSyntax objectCreation) =>
+                objectCreation.ArgumentList?.Arguments.FirstOrDefault();
+
+            private bool IsStreamDisposingType(ObjectCreationExpressionSyntax objectCreation) =>
+                semanticModel.GetSymbolInfo(objectCreation.Type)
+                    .Symbol
+                    .GetSymbolType()
+                    .DerivesOrImplementsAny(typesDisposingUnderlyingStream);
 
             private ProgramState VisitInvocationExpression(InvocationExpressionSyntax instruction, ProgramState programState)
             {
@@ -174,23 +183,25 @@ namespace SonarAnalyzer.Rules.CSharp
 
             private ProgramState ProcessDisposableSymbol(ProgramState programState, SyntaxNode instruction, ISymbol disposableSymbol)
             {
-                if (disposableSymbol == null) // Temporary fix, disposableSymbol is null when we invoke array element
+                if (disposableSymbol == null) // DisposableSymbol is null when we invoke an array element
                 {
                     return programState;
                 }
 
                 if (disposableSymbol.HasConstraint(DisposableConstraint.Disposed, programState))
                 {
-                    ObjectDisposed?.Invoke(this, new ObjectDisposedEventArgs(instruction));
+                    ObjectDisposed?.Invoke(this, new ObjectDisposedEventArgs(disposableSymbol.Name, instruction.GetLocation()));
                     return programState;
                 }
 
-                if (disposableSymbol.HasConstraint(ObjectConstraint.Null, programState))
+                // We should not replace Null constraint because having Disposed constraint
+                // implies having NotNull constraint, which is incorrect.
+                if (!disposableSymbol.HasConstraint(ObjectConstraint.Null, programState))
                 {
-                    return programState;
+                    return disposableSymbol.SetConstraint(DisposableConstraint.Disposed, programState);
                 }
 
-                return disposableSymbol.SetConstraint(DisposableConstraint.Disposed, programState);
+                return programState;
             }
         }
     }
