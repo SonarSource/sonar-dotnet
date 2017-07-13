@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -39,29 +41,45 @@ namespace SonarAnalyzer.Rules.CSharp
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
+        private static readonly ISet<KnownType> allowedTypes = new HashSet<KnownType>
+        {
+            KnownType.System_EventHandler,
+            KnownType.System_EventHandler_TEventArgs
+        };
+
         protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
-               c => AnalyzeEventType(c, ((EventFieldDeclarationSyntax)c.Node).Declaration.Type),
-               SyntaxKind.EventFieldDeclaration);
+               c =>
+               {
+                   var eventField = (EventFieldDeclarationSyntax)c.Node;
+                   var eventFirstVariable = eventField.Declaration.Variables.FirstOrDefault();
+
+                   if (eventFirstVariable != null)
+                   {
+                       AnalyzeEventType(c, eventFirstVariable, eventField.Declaration.Type.GetLocation);
+                   }
+               }, SyntaxKind.EventFieldDeclaration);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
-               c => AnalyzeEventType(c, ((EventDeclarationSyntax)c.Node).Type),
-               SyntaxKind.EventDeclaration);
+               c =>
+               {
+                   var eventDeclaration = (EventDeclarationSyntax)c.Node;
+                   AnalyzeEventType(c, eventDeclaration, eventDeclaration.Type.GetLocation);
+               }, SyntaxKind.EventDeclaration);
         }
 
-        private void AnalyzeEventType(SyntaxNodeAnalysisContext analysisContext, TypeSyntax typeSyntax)
+        private static void AnalyzeEventType(SyntaxNodeAnalysisContext analysisContext, SyntaxNode eventNode,
+            Func<Location> getLocationToReportOn)
         {
-            var eventHandlerType = analysisContext.SemanticModel.GetSymbolInfo(typeSyntax).Symbol
-                        as INamedTypeSymbol;
-            if (eventHandlerType == null)
-            {
-                return;
-            }
+            var eventSymbol = analysisContext.SemanticModel.GetDeclaredSymbol(eventNode) as IEventSymbol;
 
-            if (!eventHandlerType.ConstructedFrom.Is(KnownType.System_EventHandler_TEventArgs))
+            if (eventSymbol != null &&
+                !eventSymbol.IsOverride &&
+                eventSymbol.GetInterfaceMember() == null &&
+                (eventSymbol.Type as INamedTypeSymbol)?.ConstructedFrom.IsAny(allowedTypes) == false)
             {
-                analysisContext.ReportDiagnostic(Diagnostic.Create(rule, typeSyntax.GetLocation()));
+                analysisContext.ReportDiagnostic(Diagnostic.Create(rule, getLocationToReportOn()));
             }
         }
     }
