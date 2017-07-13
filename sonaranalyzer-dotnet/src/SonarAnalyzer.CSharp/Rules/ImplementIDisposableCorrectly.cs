@@ -115,8 +115,8 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (!FindMethodDeclarations(classSymbol, IsVirtualDisposeBool).Any())
                     {
                         AddSecondaryLocation(classDeclaration.Identifier.GetLocation(),
-                            $"Provide 'protected' overridable implementation of 'Dispose(bool)' on '{classSymbol.Name}'"
-                                + " or mark the type as 'sealed'.");
+                            $"Provide 'protected' overridable implementation of 'Dispose(bool)' on "
+                                + $"'{classSymbol.Name}' or mark the type as 'sealed'.");
                     }
 
                     var destructor = FindMethodDeclarations(classSymbol, SymbolHelper.IsDestructor)
@@ -129,7 +129,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         .OfType<MethodDeclarationSyntax>()
                         .FirstOrDefault();
 
-                    VerifyDispose(disposeMethod, hasDestructor: destructor != null);
+                    VerifyDispose(disposeMethod, classSymbol.IsSealed);
                 }
 
                 return secondaryLocations;
@@ -151,7 +151,8 @@ namespace SonarAnalyzer.Rules.CSharp
                     !CallsVirtualDispose(destructorSyntax, argumentValue: "false"))
                 {
                     AddSecondaryLocation(destructorSyntax.Identifier.GetLocation(),
-                        $"Modify '{classSymbol.Name}.~{classSymbol.Name}()' so that it calls 'Dispose(false)' and then returns.");
+                        $"Modify '{classSymbol.Name}.~{classSymbol.Name}()' so that it calls 'Dispose(false)' and " +
+                        "then returns.");
                 }
             }
 
@@ -171,34 +172,23 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
             }
 
-            private void VerifyDispose(MethodDeclarationSyntax disposeMethod, bool hasDestructor)
+            private void VerifyDispose(MethodDeclarationSyntax disposeMethod, bool isSealedClass)
             {
                 if (disposeMethod?.Body == null)
                 {
                     return;
                 }
 
-                if (hasDestructor)
-                {
-                    if (!HasStatementsCount(disposeMethod.Body, 2) ||
+                var statementsCount = disposeMethod.Body.ChildNodes().Count();
+                if (!isSealedClass &&
+                        (!HasStatementsCount(disposeMethod.Body, 2) ||
                         !CallsVirtualDispose(disposeMethod, argumentValue: "true") ||
-                        !CallsSuppressFinalize(disposeMethod))
-                    {
-                        AddSecondaryLocation(disposeMethod.Identifier.GetLocation(),
-                            $"'{classSymbol.Name}.Dispose()' should contain only calls to 'Dispose(true)'"
-                                + " and 'GC.SuppressFinalize(this)'.");
-                    }
-                }
-                else
+                        !CallsSuppressFinalize(disposeMethod)
+                        ))
                 {
-                    var statementsCount = disposeMethod.Body.ChildNodes().Count();
-                    if (statementsCount > 2 ||
-                        statementsCount == 2 && !CallsSuppressFinalize(disposeMethod) ||
-                        !CallsVirtualDispose(disposeMethod, argumentValue: "true"))
-                    {
-                        AddSecondaryLocation(disposeMethod.Identifier.GetLocation(),
-                            $"'{classSymbol.Name}.Dispose()' should contain only a call to 'Dispose(true)'.");
-                    }
+                    AddSecondaryLocation(disposeMethod.Identifier.GetLocation(),
+                        $"'{classSymbol.Name}.Dispose()' should only invoke 'Dispose(true)' and " +
+                        "'GC.SuppressFinalize(this)'.");
                 }
 
                 var disposeMethodSymbol = semanticModel.GetDeclaredSymbol(disposeMethod);
@@ -213,12 +203,14 @@ namespace SonarAnalyzer.Rules.CSharp
                     var modifier = disposeMethod.Modifiers
                         .FirstOrDefault(m => m.IsAnyKind(notAllowedDisposeModifiers));
 
-                    AddSecondaryLocation(modifier.GetLocation(), $"'{classSymbol.Name}.Dispose()' should not be 'virtual' or 'abstract'.");
+                    AddSecondaryLocation(modifier.GetLocation(),
+                        $"'{classSymbol.Name}.Dispose()' should not be 'virtual' or 'abstract'.");
                 }
 
                 if (disposeMethodSymbol.ExplicitInterfaceImplementations.Any())
                 {
-                    AddSecondaryLocation(disposeMethod.Identifier.GetLocation(), $"'{classSymbol.Name}.Dispose()' should be 'public'.");
+                    AddSecondaryLocation(disposeMethod.Identifier.GetLocation(),
+                        $"'{classSymbol.Name}.Dispose()' should be 'public'.");
                 }
             }
 
@@ -267,7 +259,8 @@ namespace SonarAnalyzer.Rules.CSharp
                     IsVirtualDisposeBool);
             }
 
-            private static IEnumerable<SyntaxNode> FindMethodDeclarations(INamedTypeSymbol typeSymbol, Func<IMethodSymbol, bool> predicate)
+            private static IEnumerable<SyntaxNode> FindMethodDeclarations(INamedTypeSymbol typeSymbol,
+                Func<IMethodSymbol, bool> predicate)
             {
                 return typeSymbol.GetMembers()
                     .OfType<IMethodSymbol>()
@@ -276,7 +269,8 @@ namespace SonarAnalyzer.Rules.CSharp
                     .Select(r => r.GetSyntax());
             }
 
-            private static IEnumerable<SyntaxNode> FindMethodDeclarationsRecursive(INamedTypeSymbol typeSymbol, Func<IMethodSymbol, bool> predicate)
+            private static IEnumerable<SyntaxNode> FindMethodDeclarationsRecursive(INamedTypeSymbol typeSymbol,
+                Func<IMethodSymbol, bool> predicate)
             {
                 return typeSymbol.GetSelfAndBaseTypes()
                     .SelectMany(t => t.GetMembers())
