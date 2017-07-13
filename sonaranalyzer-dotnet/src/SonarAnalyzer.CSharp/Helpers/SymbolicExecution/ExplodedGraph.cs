@@ -46,7 +46,7 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.CSharp
         {
             var newProgramState = node.ProgramState;
 
-            var usingFinalizerBlock = block as UsingFinalizerBlock;
+            var usingFinalizerBlock = block as UsingEndBlock;
             if (usingFinalizerBlock != null)
             {
                 foreach (var explodedGraphCheck in explodedGraphChecks)

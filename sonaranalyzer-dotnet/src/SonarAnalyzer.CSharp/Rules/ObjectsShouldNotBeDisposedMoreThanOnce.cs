@@ -54,10 +54,10 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected sealed override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterExplodedGraphBasedAnalysis((e, c) => CheckForNullDereference(e, c));
+            context.RegisterExplodedGraphBasedAnalysis(CheckForMultipleDispose);
         }
 
-        private static void CheckForNullDereference(ExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context)
+        private static void CheckForMultipleDispose(ExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context)
         {
             var objectDisposedCheck = new ObjectDisposedPointerCheck(explodedGraph);
             explodedGraph.AddExplodedGraphCheck(objectDisposedCheck);
@@ -102,6 +102,32 @@ namespace SonarAnalyzer.Rules.CSharp
             {
             }
 
+            public override ProgramState PreProcessUsingStatement(ProgramPoint programPoint, ProgramState programState)
+            {
+                var newProgramState = programState;
+
+                var usingFinalizer = (UsingEndBlock)programPoint.Block;
+
+                var disposables = usingFinalizer.Identifiers
+                    .Select(i =>
+                    new
+                    {
+                        SyntaxNode = i.Parent,
+                        Symbol = semanticModel.GetDeclaredSymbol(i.Parent)
+                            ?? semanticModel.GetSymbolInfo(i.Parent).Symbol
+                    });
+
+                foreach (var disposable in disposables)
+                {
+                    newProgramState = ProcessDisposableSymbol(newProgramState, disposable.SyntaxNode, disposable.Symbol);
+                }
+
+                newProgramState = ProcessStreamDisposingTypes(newProgramState, 
+                    (SyntaxNode)usingFinalizer.UsingStatement.Expression ?? usingFinalizer.UsingStatement.Declaration);
+
+                return newProgramState;
+            }
+
             public override ProgramState PreProcessInstruction(ProgramPoint programPoint, ProgramState programState)
             {
                 var instruction = programPoint.Block.Instructions[programPoint.Offset] as InvocationExpressionSyntax;
@@ -111,27 +137,18 @@ namespace SonarAnalyzer.Rules.CSharp
                     : VisitInvocationExpression(instruction, programState);
             }
 
-            public override ProgramState PreProcessUsingStatement(ProgramPoint programPoint, ProgramState programState)
+            private ProgramState VisitInvocationExpression(InvocationExpressionSyntax instruction, ProgramState programState)
             {
                 var newProgramState = programState;
 
-                var usingFinalizer = (UsingFinalizerBlock)programPoint.Block;
-
-                var disposables = usingFinalizer.Disposables
-                    .Select(disposable =>
-                    new
-                    {
-                        Disposable = disposable,
-                        Symbol = semanticModel.GetDeclaredSymbol(disposable)
-                            ?? semanticModel.GetSymbolInfo(disposable).Symbol
-                    });
-
-                foreach (var nodeWithSymbol in disposables)
+                var disposeMethodSymbol = semanticModel.GetSymbolInfo(instruction).Symbol as IMethodSymbol;
+                if (disposeMethodSymbol.IsIDisposableDispose())
                 {
-                    newProgramState = ProcessDisposableSymbol(newProgramState, nodeWithSymbol.Disposable, nodeWithSymbol.Symbol);
-                }
+                    var disposable = ((MemberAccessExpressionSyntax)instruction.Expression).Expression;
+                    var disposableSymbol = semanticModel.GetSymbolInfo(disposable).Symbol;
 
-                newProgramState = ProcessStreamDisposingTypes(newProgramState, (SyntaxNode)usingFinalizer.UsingStatement.Expression ?? usingFinalizer.UsingStatement.Declaration);
+                    newProgramState = ProcessDisposableSymbol(newProgramState, disposable, disposableSymbol);
+                }
 
                 return newProgramState;
             }
@@ -150,32 +167,6 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     var streamSymbol = semanticModel.GetSymbolInfo(argument.Expression).Symbol;
                     newProgramState = ProcessDisposableSymbol(newProgramState, argument.Expression, streamSymbol);
-                }
-
-                return newProgramState;
-            }
-
-            private static ArgumentSyntax FirstArgumentOrDefault(ObjectCreationExpressionSyntax objectCreation) =>
-                objectCreation.ArgumentList?.Arguments.FirstOrDefault();
-
-            private bool IsStreamDisposingType(ObjectCreationExpressionSyntax objectCreation) =>
-                semanticModel.GetSymbolInfo(objectCreation.Type)
-                    .Symbol
-                    .GetSymbolType()
-                    .DerivesOrImplementsAny(typesDisposingUnderlyingStream);
-
-            private ProgramState VisitInvocationExpression(InvocationExpressionSyntax instruction, ProgramState programState)
-            {
-                var newProgramState = programState;
-
-                var disposeMethodSymbol = semanticModel.GetSymbolInfo(instruction).Symbol as IMethodSymbol;
-                if (disposeMethodSymbol.IsIDisposableDispose())
-                {
-                    var disposable = ((MemberAccessExpressionSyntax)instruction.Expression).Expression;
-
-                    var disposableSymbol = semanticModel.GetSymbolInfo(disposable).Symbol;
-
-                    newProgramState = ProcessDisposableSymbol(newProgramState, disposable, disposableSymbol);
                 }
 
                 return newProgramState;
@@ -203,6 +194,15 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 return programState;
             }
+
+            private static ArgumentSyntax FirstArgumentOrDefault(ObjectCreationExpressionSyntax objectCreation) =>
+                objectCreation.ArgumentList?.Arguments.FirstOrDefault();
+
+            private bool IsStreamDisposingType(ObjectCreationExpressionSyntax objectCreation) =>
+                semanticModel.GetSymbolInfo(objectCreation.Type)
+                    .Symbol
+                    .GetSymbolType()
+                    .DerivesOrImplementsAny(typesDisposingUnderlyingStream);
         }
     }
 }

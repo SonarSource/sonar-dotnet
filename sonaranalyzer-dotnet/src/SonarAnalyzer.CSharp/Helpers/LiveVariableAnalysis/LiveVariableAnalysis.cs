@@ -96,11 +96,14 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.CSharp
                 ProcessVariableInForeach(foreachNode, assignedInBlock, usedBeforeAssigned);
             }
 
-            var usingFinalizerBlock = block as UsingFinalizerBlock;
+            // Keep alive the variables declared and used in the using statement until the UsingFinalizerBlock
+            var usingFinalizerBlock = block as UsingEndBlock;
             if (usingFinalizerBlock != null)
             {
-                var disposableSymbols = usingFinalizerBlock.Disposables
-                    .Select(disposable => semanticModel.GetDeclaredSymbol(disposable) ?? semanticModel.GetSymbolInfo(disposable).Symbol);
+                var disposableSymbols = usingFinalizerBlock.Identifiers
+                    .Select(i => semanticModel.GetDeclaredSymbol(i.Parent) 
+                                ?? semanticModel.GetSymbolInfo(i.Parent).Symbol)
+                    .WhereNotNull();
                 foreach (var disposableSymbol in disposableSymbols)
                 {
                     usedBeforeAssigned.Add(disposableSymbol);

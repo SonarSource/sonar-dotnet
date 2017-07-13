@@ -1161,8 +1161,8 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.CSharp
         internal LockBlock CreateLockBlock(LockStatementSyntax lockStatement, Block successor) =>
             AddBlock(new LockBlock(lockStatement, successor));
 
-        internal UsingFinalizerBlock CreateUsingFinalizerBlock(UsingStatementSyntax usingStatement, Block successor) =>
-            AddBlock(new UsingFinalizerBlock(usingStatement, successor));
+        internal UsingEndBlock CreateUsingFinalizerBlock(UsingStatementSyntax usingStatement, Block successor) =>
+            AddBlock(new UsingEndBlock(usingStatement, successor));
 
         #endregion
 
