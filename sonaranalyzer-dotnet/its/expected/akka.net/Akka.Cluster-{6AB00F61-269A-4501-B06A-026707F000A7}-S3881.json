@@ -32,30 +32,6 @@
 }
 }
 ]
-},
-{
-"id":  "S3881",
-"message":  "Fix this implementation of 'IDisposable' to conform to the dispose pattern.",
-"location":  [
-{
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterReadView.cs",
-"region":  {
-"startLine":  23,
-"startColumn":  18,
-"endLine":  23,
-"endColumn":  33
-}
-},
-{
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterReadView.cs",
-"region":  {
-"startLine":  268,
-"startColumn":  21,
-"endLine":  268,
-"endColumn":  28
-}
-}
-]
 }
 ]
 }
