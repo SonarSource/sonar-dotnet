@@ -18,29 +18,27 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis;
-
 namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
 {
-    internal class ExplodedGraphCheck
+    public class DisposableConstraint : SymbolicValueConstraint
     {
-        protected readonly ExplodedGraph explodedGraph;
-        protected readonly SemanticModel semanticModel;
+        public static readonly DisposableConstraint Disposed = new DisposableConstraint();
+        public static readonly DisposableConstraint NotDisposed = new DisposableConstraint();
 
-        protected ExplodedGraphCheck(ExplodedGraph explodedGraph)
+        internal override bool Implies(SymbolicValueConstraint constraint)
         {
-            this.explodedGraph = explodedGraph;
-            this.semanticModel = explodedGraph.SemanticModel;
+            return base.Implies(constraint) ||
+                constraint == ObjectConstraint.NotNull;
         }
 
-        public virtual ProgramState PreProcessInstruction(ProgramPoint programPoint, ProgramState programState)
-        {
-            return programState;
-        }
+        public override SymbolicValueConstraint OppositeForLogicalNot =>
+            this == Disposed ? NotDisposed : Disposed;
 
-        public virtual ProgramState PreProcessUsingStatement(ProgramPoint programPoint, ProgramState programState)
+        public override string ToString()
         {
-            return programState;
+            return this == Disposed
+                ? "Disposed"
+                : "NotDisposed";
         }
     }
 }

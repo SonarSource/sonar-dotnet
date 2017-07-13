@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2017 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -18,29 +18,20 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 
-namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
+namespace SonarAnalyzer.UnitTest.Rules
 {
-    internal class ExplodedGraphCheck
+    [TestClass]
+    public class ObjectsShouldNotBeDisposedMoreThanOnceTest
     {
-        protected readonly ExplodedGraph explodedGraph;
-        protected readonly SemanticModel semanticModel;
-
-        protected ExplodedGraphCheck(ExplodedGraph explodedGraph)
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void ObjectsShouldNotBeDisposedMoreThanOnce()
         {
-            this.explodedGraph = explodedGraph;
-            this.semanticModel = explodedGraph.SemanticModel;
-        }
-
-        public virtual ProgramState PreProcessInstruction(ProgramPoint programPoint, ProgramState programState)
-        {
-            return programState;
-        }
-
-        public virtual ProgramState PreProcessUsingStatement(ProgramPoint programPoint, ProgramState programState)
-        {
-            return programState;
+            Verifier.VerifyAnalyzer(@"TestCases\ObjectsShouldNotBeDisposedMoreThanOnce.cs",
+                new ObjectsShouldNotBeDisposedMoreThanOnce());
         }
     }
 }

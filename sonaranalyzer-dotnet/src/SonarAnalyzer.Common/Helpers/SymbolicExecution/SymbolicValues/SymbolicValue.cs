@@ -228,8 +228,14 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
                 return new[] { currentProgramState };
             }
 
-            throw new NotSupportedException($"Neither {nameof(BoolConstraint)}, nor {nameof(ObjectConstraint)}, " +
-                $"nor {nameof(NullableValueConstraint)}.");
+            var disposableConstraint = constraint as DisposableConstraint;
+            if (disposableConstraint != null)
+            {
+                return new[] { currentProgramState };
+            }
+
+            throw new NotSupportedException($"Neither one of {nameof(BoolConstraint)}, {nameof(ObjectConstraint)}, " +
+                $"{nameof(ObjectConstraint)}, {nameof(DisposableConstraint)}.");
         }
 
         public virtual IEnumerable<ProgramState> TrySetOppositeConstraint(SymbolicValueConstraint constraint, ProgramState programState)

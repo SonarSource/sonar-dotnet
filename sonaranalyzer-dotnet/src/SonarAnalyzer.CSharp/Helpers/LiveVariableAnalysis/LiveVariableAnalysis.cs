@@ -67,7 +67,7 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.CSharp
                         break;
 
                     case SyntaxKind.VariableDeclarator:
-                        ProcessVariableDeclarator(instruction, assignedInBlock, usedBeforeAssigned);
+                        ProcessVariableDeclarator((VariableDeclaratorSyntax)instruction, assignedInBlock, usedBeforeAssigned);
                         break;
 
                     case SyntaxKind.AnonymousMethodExpression:
@@ -95,6 +95,20 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.CSharp
                 var foreachNode = (ForEachStatementSyntax)foreachBlock.BranchingNode;
                 ProcessVariableInForeach(foreachNode, assignedInBlock, usedBeforeAssigned);
             }
+
+            // Keep alive the variables declared and used in the using statement until the UsingFinalizerBlock
+            var usingFinalizerBlock = block as UsingEndBlock;
+            if (usingFinalizerBlock != null)
+            {
+                var disposableSymbols = usingFinalizerBlock.Identifiers
+                    .Select(i => semanticModel.GetDeclaredSymbol(i.Parent) 
+                                ?? semanticModel.GetSymbolInfo(i.Parent).Symbol)
+                    .WhereNotNull();
+                foreach (var disposableSymbol in disposableSymbols)
+                {
+                    usedBeforeAssigned.Add(disposableSymbol);
+                }
+            }
         }
 
         private void ProcessVariableInForeach(ForEachStatementSyntax foreachNode, HashSet<ISymbol> assignedInBlock, HashSet<ISymbol> usedBeforeAssigned)
@@ -109,7 +123,7 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.CSharp
             usedBeforeAssigned.Remove(symbol);
         }
 
-        private void ProcessVariableDeclarator(SyntaxNode instruction, HashSet<ISymbol> assignedInBlock,
+        private void ProcessVariableDeclarator(VariableDeclaratorSyntax instruction, HashSet<ISymbol> assignedInBlock,
             HashSet<ISymbol> usedBeforeAssigned)
         {
             var symbol = semanticModel.GetDeclaredSymbol(instruction);

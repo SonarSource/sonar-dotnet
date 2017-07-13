@@ -767,6 +767,26 @@ namespace NS
             VerifySimpleJumpBlock(cfg, SyntaxKind.UsingStatement);
 
             VerifyAllInstructions(cfg.EntryBlock, "new MemoryStream()", "stream = new MemoryStream()");
+
+            var usingBlock = cfg.Blocks.Skip(1).First() as UsingEndBlock;
+            usingBlock.Should().NotBeNull();
+            usingBlock.Identifiers.Select(n => n.ValueText).Should().Equal(new[] { "stream" });
+            usingBlock.Should().BeOfType<UsingEndBlock>();
+        }
+
+        [TestMethod]
+        [TestCategory("CFG")]
+        public void Cfg_UsingAssignment()
+        {
+            var cfg = Build("Stream stream; using(stream = new MemoryStream()) { var x = 10; }");
+            VerifySimpleJumpBlock(cfg, SyntaxKind.UsingStatement);
+
+            VerifyAllInstructions(cfg.EntryBlock, "stream", "new MemoryStream()", "stream = new MemoryStream()");
+
+            var usingBlock = cfg.Blocks.Skip(1).First() as UsingEndBlock;
+            usingBlock.Should().NotBeNull();
+            usingBlock.Identifiers.Select(n => n.ValueText).Should().Equal(new[] { "stream" });
+            usingBlock.Should().BeOfType<UsingEndBlock>();
         }
 
         [TestMethod]
@@ -2408,6 +2428,7 @@ namespace NS
                 block.Instructions[fromIndex + i].ToString().Should().BeEquivalentTo(instructions[i]);
             }
         }
+
         private void VerifyAllInstructions(Block block, params string[] instructions)
         {
             block.Instructions.Should().HaveSameCount(instructions);

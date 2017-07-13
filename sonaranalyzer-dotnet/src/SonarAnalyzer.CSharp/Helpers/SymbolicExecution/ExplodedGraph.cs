@@ -44,7 +44,21 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.CSharp
 
         protected override void VisitSimpleBlock(SimpleBlock block, ExplodedGraphNode node)
         {
-            var newProgramState = CleanStateAfterBlock(node.ProgramState, block);
+            var newProgramState = node.ProgramState;
+
+            var usingFinalizerBlock = block as UsingEndBlock;
+            if (usingFinalizerBlock != null)
+            {
+                foreach (var explodedGraphCheck in explodedGraphChecks)
+                {
+                    newProgramState = explodedGraphCheck.PreProcessUsingStatement(node.ProgramPoint, newProgramState);
+                }
+                newProgramState = CleanStateAfterBlock(newProgramState, block);
+                EnqueueAllSuccessors(block, newProgramState);
+                return;
+            }
+
+            newProgramState = CleanStateAfterBlock(newProgramState, block);
 
             if (block is ForeachCollectionProducerBlock)
             {
