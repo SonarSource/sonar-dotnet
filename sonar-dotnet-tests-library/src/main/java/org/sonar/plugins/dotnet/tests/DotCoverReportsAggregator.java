@@ -65,21 +65,13 @@ public class DotCoverReportsAggregator implements CoverageParser {
   }
 
   private static List<File> listReportFiles(File folder) {
-    Stream<Path> pathStream = null;
-    try {
-      pathStream = Files.list(folder.toPath());
-
+    try (Stream<Path> pathStream = Files.list(folder.toPath())) {
       return pathStream
         .map(Path::toFile)
         .filter(f -> f.isFile() && f.getName().endsWith(".html"))
         .collect(toList());
     } catch (IOException e) {
       throw new IllegalStateException(e);
-    }
-    finally {
-      if (pathStream != null) {
-        pathStream.close();
-      }
     }
   }
 
