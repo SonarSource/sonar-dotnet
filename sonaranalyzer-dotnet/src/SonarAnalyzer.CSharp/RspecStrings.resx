@@ -4344,6 +4344,33 @@
   <data name="S3241_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
   </data>
+  <data name="S3242_Category" xml:space="preserve">
+    <value>Sonar Code Smell</value>
+  </data>
+  <data name="S3242_Description" xml:space="preserve">
+    <value>When a derived type is used as a parameter instead of the base type, it limits the uses of the method. If the additional functionality that is provided in the derived type is not requires then that limitation isn't required, and should be removed.</value>
+  </data>
+  <data name="S3242_IsActivatedByDefault" xml:space="preserve">
+    <value>True</value>
+  </data>
+  <data name="S3242_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S3242_RemediationCost" xml:space="preserve">
+    <value>5min</value>
+  </data>
+  <data name="S3242_Severity" xml:space="preserve">
+    <value>Minor</value>
+  </data>
+  <data name="S3242_Tags" xml:space="preserve">
+    <value>api-design</value>
+  </data>
+  <data name="S3242_Title" xml:space="preserve">
+    <value>Method parameters should be declared with base types</value>
+  </data>
+  <data name="S3242_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S3244_Category" xml:space="preserve">
     <value>Sonar Bug</value>
   </data>

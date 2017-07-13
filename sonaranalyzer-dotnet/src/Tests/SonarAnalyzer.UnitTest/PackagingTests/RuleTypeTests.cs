@@ -3239,7 +3239,7 @@ namespace SonarAnalyzer.UnitTest.PackagingTests
             //["3239"],
             ["3240"] = "CODE_SMELL",
             ["3241"] = "CODE_SMELL",
-            //["3242"],
+            ["3242"] = "CODE_SMELL",
             //["3243"],
             ["3244"] = "BUG",
             //["3245"],

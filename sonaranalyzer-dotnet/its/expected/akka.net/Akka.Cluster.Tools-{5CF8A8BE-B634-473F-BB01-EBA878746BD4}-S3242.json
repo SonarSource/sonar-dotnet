@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Actor.ICanTell' instead of 'Akka.Actor.IActorRef'.",
+"location":  {
+"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterClient.cs",
+"region":  {
+"startLine":  304,
+"startColumn":  45,
+"endLine":  304,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<Akka.Actor.Address, long>>' instead of 'System.Collections.Generic.IDictionary<Akka.Actor.Address, long>'.",
+"location":  {
+"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\DistributedPubSubMediator.cs",
+"region":  {
+"startLine":  335,
+"startColumn":  71,
+"endLine":  335,
+"endColumn":  79
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.ICollection<Akka.Actor.Address>' instead of 'System.Collections.Generic.IList<Akka.Actor.Address>'.",
+"location":  {
+"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\DistributedPubSubMediator.cs",
+"region":  {
+"startLine":  509,
+"startColumn":  57,
+"endLine":  509,
+"endColumn":  66
+}
+}
+}
+]
+}

@@ -1,0 +1,44 @@
+<p>When a derived type is used as a parameter instead of the base type, it limits the uses of the method. If the additional functionality that is
+provided in the derived type is not requires then that limitation isn't required, and should be removed.</p>
+<p>This rule raises an issue when a method declaration includes a parameter that is a derived type and accesses only members of the base type.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+using System;
+using System.IO;
+
+namespace MyLibrary
+{
+  public class Foo
+  {
+    public void ReadStream(FileStream stream) // Noncompliant: Uses only System.IO.Stream methods
+    {
+      int a;
+      while ((a = stream.ReadByte()) != -1)
+      {
+            // Do something.
+      }
+    }
+  }
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+using System;
+using System.IO;
+
+namespace MyLibrary
+{
+  public class Foo
+  {
+    public void ReadStream(Stream stream)
+    {
+      int a;
+      while ((a = stream.ReadByte()) != -1)
+      {
+            // Do something.
+      }
+    }
+  }
+}
+</pre>
+

@@ -64,6 +64,9 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType System_IntPtr = new KnownType(SpecialType.System_IntPtr, "IntPtr");
         public static readonly KnownType System_UIntPtr = new KnownType(SpecialType.System_UIntPtr, "UIntPtr");
 
+        public static readonly KnownType System_Enum = new KnownType(SpecialType.System_Enum, "Enum");
+        public static readonly KnownType System_ValueType = new KnownType(SpecialType.System_ValueType, "ValueType");
+
         public static readonly KnownType System_String_Array = new KnownType("string[]");
 
         public static readonly ISet<KnownType> PointerTypes = ImmutableHashSet.Create(

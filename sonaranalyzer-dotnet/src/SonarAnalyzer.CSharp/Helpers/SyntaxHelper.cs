@@ -212,7 +212,7 @@ namespace SonarAnalyzer.Helpers
 
             var exceptionTypeName = catchClause.Declaration.Type.GetText().ToString();
 
-            return catchClause.Filter == null && 
+            return catchClause.Filter == null &&
                 (exceptionTypeName == "Exception" || exceptionTypeName == "System.Exception");
         }
     }
