@@ -751,7 +751,8 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.CSharp
 
         private void BuildUsingStatement(UsingStatementSyntax usingStatement)
         {
-            currentBlock = CreateBlock(currentBlock);
+            currentBlock = CreateUsingFinalizerBlock(usingStatement, currentBlock);
+
             BuildStatement(usingStatement.Statement);
 
             currentBlock = CreateJumpBlock(usingStatement, currentBlock);
@@ -1159,6 +1160,9 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.CSharp
 
         internal LockBlock CreateLockBlock(LockStatementSyntax lockStatement, Block successor) =>
             AddBlock(new LockBlock(lockStatement, successor));
+
+        internal UsingFinalizerBlock CreateUsingFinalizerBlock(UsingStatementSyntax usingStatement, Block successor) =>
+            AddBlock(new UsingFinalizerBlock(usingStatement, successor));
 
         #endregion
 

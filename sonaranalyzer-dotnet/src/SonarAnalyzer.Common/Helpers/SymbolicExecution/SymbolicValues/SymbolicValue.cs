@@ -231,7 +231,7 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
             var disposableConstraint = constraint as DisposableConstraint;
             if (disposableConstraint != null)
             {
-                return TrySetConstraint(objectConstraint, oldConstraint, currentProgramState);
+                return new[] { currentProgramState };
             }
 
             throw new NotSupportedException($"Neither {nameof(BoolConstraint)}, nor {nameof(ObjectConstraint)}, " +

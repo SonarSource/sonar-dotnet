@@ -91,6 +91,7 @@
     <Compile Include="Helpers\ControlFlowGraph\Blocks\ForeachCollectionProducerBlock.cs" />
     <Compile Include="Helpers\ControlFlowGraph\Blocks\ForInitializerBlock.cs" />
     <Compile Include="Helpers\ControlFlowGraph\Blocks\LockBlock.cs" />
+    <Compile Include="Helpers\ControlFlowGraph\Blocks\UsingFinalizerBlock.cs" />
     <Compile Include="Helpers\CyclomaticComplexityWalker.cs" />
     <Compile Include="Helpers\LiveVariableAnalysis\LiveVariableAnalysis.cs" />
     <Compile Include="Helpers\ControlFlowGraph\ControlFlowGraph.cs" />

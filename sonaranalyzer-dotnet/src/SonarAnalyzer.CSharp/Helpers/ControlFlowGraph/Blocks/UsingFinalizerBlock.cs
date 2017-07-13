@@ -1,0 +1,64 @@
+﻿/*
+ * SonarAnalyzer for .NET
+ * Copyright (C) 2015-2017 SonarSource SA
+ * mailto: contact AT sonarsource DOT com
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ */
+
+using System.Collections.Generic;
+using System.Collections.Immutable;
+using System.Linq;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+
+namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
+{
+    public class UsingFinalizerBlock : SimpleBlock
+    {
+        public UsingFinalizerBlock(UsingStatementSyntax usingStatement, Block successor)
+            : base(successor)
+        {
+            UsingStatement = usingStatement;
+
+            if (usingStatement.Declaration != null)
+            {
+                Disposables = usingStatement.Declaration
+                    .Variables
+                    .ToImmutableArray();
+            }
+            else
+            {
+                var identifier = usingStatement.Expression.RemoveParentheses() as IdentifierNameSyntax;
+                if (identifier != null)
+                {
+                    Disposables = ImmutableArray.Create(identifier);
+                }
+                else
+                {
+                    Disposables = usingStatement.Expression
+                        .DescendantNodesAndSelf()
+                        .OfType<AssignmentExpressionSyntax>()
+                        .Select(a => a.Left as IdentifierNameSyntax)
+                        .WhereNotNull()
+                        .ToImmutableArray();
+                }
+            }
+        }
+
+        public UsingStatementSyntax UsingStatement { get; }
+        public IEnumerable<SyntaxNode> Disposables { get; }
+    }
+}

@@ -37,5 +37,10 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
         {
             return programState;
         }
+
+        public virtual ProgramState PreProcessUsingStatement(ProgramPoint programPoint, ProgramState programState)
+        {
+            return programState;
+        }
     }
 }

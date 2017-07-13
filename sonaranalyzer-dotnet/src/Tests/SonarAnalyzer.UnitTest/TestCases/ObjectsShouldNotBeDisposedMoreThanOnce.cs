@@ -1,17 +1,18 @@
 using System;
+using System.IO;
 
 namespace Tests.Diagnostics
 {
     class Program
     {
-        public void DisposedTwise1()
+        public void DisposedTwise()
         {
             var d = new Disposable();
             d.Dispose();
             d.Dispose(); // Noncompliant
         }
 
-        public void DisposedTwise2()
+        public void DisposedTwise_Conditional()
         {
             IDisposable d = null;
             d = new Disposable();
@@ -22,7 +23,7 @@ namespace Tests.Diagnostics
             d.Dispose(); // Noncompliant
         }
 
-        public void DisposedTwise3()
+        public void DisposedTwise_Try()
         {
             IDisposable d = null;
             try
@@ -37,13 +38,66 @@ namespace Tests.Diagnostics
             }
         }
 
-        public void DisposedTwise4()
+        public void DisposedTwise_Array()
         {
             var a = new[] { new Disposable() };
             a[0].Dispose();
             a[0].Dispose(); // Compliant, we don't handle arrays
         }
 
+        public void Disposed_Using_WithDeclaration()
+        {
+            using (var d = new Disposable()) // Noncompliant
+            {
+                d.Dispose();
+            }
+        }
+
+        public void Disposed_Using_WithExpressions()
+        {
+            var d = new Disposable();
+            using (d) // Noncompliant
+            {
+                d.Dispose();
+            }
+        }
+
+        public void Disposed_Using3(Stream str)
+        {
+            using (var s = new FileStream("path", FileAccess.Read)) // Noncompliant
+            {
+                using (var sr = new StreamReader(s))
+                {
+                }
+            }
+
+            using (str)
+            {
+                var sr = new StreamReader(str);
+                using (sr) // Compliant, but we cannot detect 'str' yet
+                {
+                }
+            }
+        }
+
+        public void Disposed_Using4()
+        {
+            Stream s = new FileStream("path", FileAccess.Read);
+            try
+            {
+                using (var sr = new StreamReader(s))
+                {
+                    s = null;
+                }
+            }
+            finally
+            {
+                if (s != null)
+                {
+                    s.Dispose();
+                }
+            }
+        }
     }
 
     public class Disposable : IDisposable

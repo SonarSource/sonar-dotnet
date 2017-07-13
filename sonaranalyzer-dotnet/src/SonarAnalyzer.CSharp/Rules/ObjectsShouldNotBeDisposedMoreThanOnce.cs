@@ -21,6 +21,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -38,7 +39,7 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class ObjectsShouldNotBeDisposedMoreThanOnce : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S3966";
-        private const string MessageFormat = "";
+        private const string MessageFormat = "Refactor this code to make sure Dispose is only called once on '{0}'.";
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
@@ -59,7 +60,7 @@ namespace SonarAnalyzer.Rules.CSharp
             EventHandler<ObjectDisposedEventArgs> memberAccessedHandler =
                 (sender, args) =>
                 {
-                    context.ReportDiagnostic(Diagnostic.Create(rule, args.DisposableIdentifier.GetLocation()));
+                    context.ReportDiagnostic(Diagnostic.Create(rule, args.DisposableIdentifier.GetLocation(), args.DisposableIdentifier.GetText()));
                 };
 
             objectDisposedCheck.ObjectDisposed += memberAccessedHandler;
@@ -99,23 +100,62 @@ namespace SonarAnalyzer.Rules.CSharp
                 switch (instruction.Kind())
                 {
                     case SyntaxKind.InvocationExpression:
-                        return ProcessMemberAccess(programState, (InvocationExpressionSyntax)instruction);
-
-                    case SyntaxKind.UsingStatement:
-                        return ProcessUsingStatement(programState, (UsingStatementSyntax)instruction);
+                        return VisitInvocationExpression((InvocationExpressionSyntax)instruction, programState);
 
                     default:
                         return programState;
                 }
             }
 
-            private ProgramState ProcessUsingStatement(ProgramState programState, UsingStatementSyntax instruction)
+            public override ProgramState PreProcessUsingStatement(ProgramPoint programPoint, ProgramState programState)
             {
                 var newProgramState = programState;
+
+                var usingFinalizer = (UsingFinalizerBlock)programPoint.Block;
+
+                var disposables = usingFinalizer.Disposables
+                    .Select(disposable =>
+                    new
+                    {
+                        Disposable = disposable,
+                        Symbol = semanticModel.GetDeclaredSymbol(disposable)
+                            ?? semanticModel.GetSymbolInfo(disposable).Symbol
+                    });
+
+                foreach (var nodeWithSymbol in disposables)
+                {
+                    newProgramState = ProcessDisposableSymbol(newProgramState, nodeWithSymbol.Disposable, nodeWithSymbol.Symbol);
+                }
+
+                newProgramState = ProcessKnownTypes(newProgramState, (SyntaxNode)usingFinalizer.UsingStatement.Expression ?? usingFinalizer.UsingStatement.Declaration);
+
                 return newProgramState;
             }
 
-            private ProgramState ProcessMemberAccess(ProgramState programState, InvocationExpressionSyntax instruction)
+            private ProgramState ProcessKnownTypes(ProgramState programState, SyntaxNode usingExpression)
+            {
+                ISet<KnownType> types = new HashSet<KnownType>
+                {
+                    KnownType.System_IO_StreamReader,
+                    KnownType.System_IO_StreamWriter
+                };
+                var newProgramState = programState;
+
+                var objectCreations = usingExpression.DescendantNodes().OfType<ObjectCreationExpressionSyntax>()
+                    .Where(objectCreation => semanticModel.GetSymbolInfo(objectCreation.Type).Symbol.GetSymbolType().DerivesOrImplementsAny(types))
+                    .Select(objectCreation => objectCreation.ArgumentList?.Arguments.FirstOrDefault())
+                    .WhereNotNull();
+
+                foreach (var argument in objectCreations)
+                {
+                    var streamSymbol = semanticModel.GetSymbolInfo(argument.Expression).Symbol;
+                    newProgramState = ProcessDisposableSymbol(newProgramState, argument.Expression, streamSymbol);
+                }
+
+                return newProgramState;
+            }
+
+            private ProgramState VisitInvocationExpression(InvocationExpressionSyntax instruction, ProgramState programState)
             {
                 var newProgramState = programState;
 
@@ -123,31 +163,34 @@ namespace SonarAnalyzer.Rules.CSharp
                 if (disposeMethodSymbol.IsIDisposableDispose())
                 {
                     var disposable = ((MemberAccessExpressionSyntax)instruction.Expression).Expression;
+
                     var disposableSymbol = semanticModel.GetSymbolInfo(disposable).Symbol;
 
-                    if (disposableSymbol == null) // Temporary fix, disposableSymbol is null when we invoke array element
-                    {
-                        return newProgramState;
-                    }
-
-                    newProgramState = ProcessDisposableSymbol(newProgramState, disposableSymbol, instruction);
+                    newProgramState = ProcessDisposableSymbol(newProgramState, disposable, disposableSymbol);
                 }
 
                 return newProgramState;
             }
 
-            private ProgramState ProcessDisposableSymbol(ProgramState programState, ISymbol disposableSymbol, 
-                InvocationExpressionSyntax instruction)
+            private ProgramState ProcessDisposableSymbol(ProgramState programState, SyntaxNode instruction, ISymbol disposableSymbol)
             {
+                if (disposableSymbol == null) // Temporary fix, disposableSymbol is null when we invoke array element
+                {
+                    return programState;
+                }
+
                 if (disposableSymbol.HasConstraint(DisposableConstraint.Disposed, programState))
                 {
                     ObjectDisposed?.Invoke(this, new ObjectDisposedEventArgs(instruction));
                     return programState;
                 }
-                else
+
+                if (disposableSymbol.HasConstraint(ObjectConstraint.Null, programState))
                 {
-                    return disposableSymbol.SetConstraint(DisposableConstraint.Disposed, programState);
+                    return programState;
                 }
+
+                return disposableSymbol.SetConstraint(DisposableConstraint.Disposed, programState);
             }
         }
     }

@@ -18,6 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Rules.CSharp;
 
@@ -32,22 +35,22 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             Verifier.VerifyCSharpAnalyzer(@"
 using System;
+using System.IO;
 public class Program
 {
-    public void Main()
+    public void Main(Stream str)
     {
-        var a = new Foo();
-        a.Dispose();
-        a.Dispose(); // Noncompliant
-    }
-}
+            using (var s = new FileStream(""path"", FileAccess.Read)) // Noncompliant
+            {
+                using (var sr = new StreamReader(s))
+                {
+                }
+            }
+        }
 
-public class Foo : IDisposable
-{
-    public void Dispose() {}
-}
-",
-                new ObjectsShouldNotBeDisposedMoreThanOnce());
+
+    }",
+                new ObjectsShouldNotBeDisposedMoreThanOnce(), new CSharpParseOptions(LanguageVersion.CSharp6));
         }
 
         [TestMethod]
