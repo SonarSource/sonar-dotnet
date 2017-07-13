@@ -37,8 +37,8 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         internal const string DiagnosticId = "S1075";
         private const string MessageFormat = "{0}";
-        private const string AbsoluteUriMessage = "Refactor your code to get this URI from a customizable parameter.";
-        private const string PathDelimiterMessage = "Remove this hard-coded path-delimiter.";
+        private const string AbsoluteUriMessage = "Refactor your code not to use hardcoded absolute paths or URIs.";
+        private const string PathDelimiterMessage = "Remove this hardcoded path-delimiter.";
 
         // Simplified implementation of specification listed on
         // https://en.wikipedia.org/wiki/Uniform_Resource_Identifier
@@ -72,6 +72,11 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
+                    if (c.IsTest())
+                    {
+                        return;
+                    }
+
                     var stringLiteral = (LiteralExpressionSyntax)c.Node;
                     if (IsInCheckedContext(stringLiteral, c.SemanticModel) &&
                         UriRegex.IsMatch(stringLiteral.Token.ValueText))
@@ -83,6 +88,11 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
+                    if (c.IsTest())
+                    {
+                        return;
+                    }
+
                     var addExpression = (BinaryExpressionSyntax)c.Node;
                     if (!IsInCheckedContext(addExpression, c.SemanticModel))
                     {

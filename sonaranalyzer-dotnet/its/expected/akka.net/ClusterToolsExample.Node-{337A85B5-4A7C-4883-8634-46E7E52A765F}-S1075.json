@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S1075",
-"message":  "Refactor your code to get this URI from a customizable parameter.",
+"message":  "Refactor your code not to use hardcoded absolute paths or URIs.",
 "location":  {
 "uri":  "akka.net\src\examples\Cluster\ClusterTools\ClusterToolsExample.Node\Program.cs",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S1075",
-"message":  "Refactor your code to get this URI from a customizable parameter.",
+"message":  "Refactor your code not to use hardcoded absolute paths or URIs.",
 "location":  {
 "uri":  "akka.net\src\examples\Cluster\ClusterTools\ClusterToolsExample.Node\Program.cs",
 "region":  {

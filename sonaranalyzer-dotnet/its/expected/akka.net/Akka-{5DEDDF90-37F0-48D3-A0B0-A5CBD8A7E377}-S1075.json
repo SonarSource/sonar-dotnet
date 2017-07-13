@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S1075",
-"message":  "Remove this hard-coded path-delimiter.",
+"message":  "Remove this hardcoded path-delimiter.",
 "location":  {
 "uri":  "akka.net\src\core\Akka\Routing\RouterConfig.cs",
 "region":  {

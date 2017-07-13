@@ -7,7 +7,7 @@ namespace Tests.Diagnostics
     {
         void InvalidCases(string s1, string s2)
         {
-            var fileLiteral = "file://blah.txt"; // Noncompliant {{Refactor your code to get this URI from a customizable parameter.}}
+            var fileLiteral = "file://blah.txt"; // Noncompliant {{Refactor your code not to use hardcoded absolute paths or URIs.}}
 //                            ^^^^^^^^^^^^^^^^^
 
             var webUri1 = "http://www.mywebsite.com"; // Noncompliant
@@ -30,7 +30,7 @@ namespace Tests.Diagnostics
             var unixPath2 = "~/blah/blah/blah.txt"; // Noncompliant
             var unixPath3 = "~\\blah\\blah\\blah.txt"; // Noncompliant
 
-            var concatWithDelimiterPath1 = s1 + "\\" + s2; // Noncompliant {{Remove this hard-coded path-delimiter.}}
+            var concatWithDelimiterPath1 = s1 + "\\" + s2; // Noncompliant {{Remove this hardcoded path-delimiter.}}
 //                                              ^^^^
             var concatWithDelimiterUri2 = s1 + @"\" + s2; // Noncompliant
             var concatWithDelimiterUri3 = s1 + "/" + s2; // Noncompliant
