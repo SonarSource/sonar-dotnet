@@ -124,9 +124,6 @@ namespace SonarAnalyzer.Rules.CSharp
 
             var topmostParent = SyntaxHelper.GetSelfOrTopParenthesizedExpression(expression);
             return topmostParent.Parent;
-            //return (topmostParent is ParenthesizedExpressionSyntax)
-            //    ? topmostParent.Parent
-            //    : node;
         }
 
         private ITypeSymbol FindParameterUseAsType(IdentifierNameSyntax identifier, SemanticModel semanticModel)
