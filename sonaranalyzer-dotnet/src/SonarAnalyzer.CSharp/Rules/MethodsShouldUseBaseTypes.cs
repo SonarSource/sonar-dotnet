@@ -36,7 +36,7 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class MethodsShouldUseBaseTypes : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S3242";
-        private const string MessageFormat = "Use '{0}' here; it is a more general type than '{1}'.";
+        private const string MessageFormat = "Consider using more general type '{0}' instead of '{1}'.";
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
@@ -64,11 +64,9 @@ namespace SonarAnalyzer.Rules.CSharp
                 return Enumerable.Empty<Diagnostic>();
             }
 
-            var parametersToCheck = new Dictionary<string, ParameterData>();
-            foreach (var parameter in methodSymbol.Parameters.Where(IsTrackedParameter))
-            {
-                parametersToCheck[parameter.Name] = new ParameterData(parameter);
-            }
+            var parametersToCheck = methodSymbol.Parameters
+                .Where(IsTrackedParameter)
+                .ToDictionary(p => p.Name, p => new ParameterData(p));
 
             var parameterUsesInMethod = context
                 .Node
@@ -116,7 +114,7 @@ namespace SonarAnalyzer.Rules.CSharp
                    !type.Is(KnownType.System_String);
         }
 
-        private SyntaxNode GetNextUnparethesizedParent(SyntaxNode node)
+        private SyntaxNode GetNextUnparenthesizedParent(SyntaxNode node)
         {
             var expression = node as ExpressionSyntax;
             if (expression == null)
@@ -125,19 +123,19 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             var topmostParent = SyntaxHelper.GetSelfOrTopParenthesizedExpression(expression);
-
-            return (topmostParent is ParenthesizedExpressionSyntax)
-                ? topmostParent.Parent
-                : topmostParent;
+            return topmostParent.Parent;
+            //return (topmostParent is ParenthesizedExpressionSyntax)
+            //    ? topmostParent.Parent
+            //    : node;
         }
 
-        private ITypeSymbol FindParameterUseAsType(IdentifierNameSyntax idRef, SemanticModel semanticModel)
+        private ITypeSymbol FindParameterUseAsType(IdentifierNameSyntax identifier, SemanticModel semanticModel)
         {
-            var idRefParent = GetNextUnparethesizedParent(idRef.Parent);
+            var identifierParent = GetNextUnparenthesizedParent(identifier);
 
-            var conditionalAccess = idRefParent as ConditionalAccessExpressionSyntax;
-            if (conditionalAccess != null)
+            if (identifierParent is ConditionalAccessExpressionSyntax)
             {
+                var conditionalAccess = (ConditionalAccessExpressionSyntax)identifierParent;
                 var binding = conditionalAccess.WhenNotNull as MemberBindingExpressionSyntax;
 
                 if (binding != null)
@@ -149,7 +147,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
 
                     var accessedMember = semanticModel.GetSymbolInfo(name).Symbol;
-                    return HandlePropertyOrField(idRef, accessedMember);
+                    return HandlePropertyOrField(identifier, accessedMember);
                 }
 
                 var invocationExpression = conditionalAccess.WhenNotNull as InvocationExpressionSyntax;
@@ -159,31 +157,31 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (memberBinding != null)
                     {
                         var invocationSymbol = semanticModel.GetSymbolInfo(memberBinding).Symbol;
-                        return HandleInvocation(idRef, invocationSymbol, semanticModel);
+                        return HandleInvocation(identifier, invocationSymbol, semanticModel);
                     }
                 }
             }
-            else if (idRefParent is MemberAccessExpressionSyntax)
+            else if (identifierParent is MemberAccessExpressionSyntax)
             {
-                var invocationExpression = idRefParent.Parent as InvocationExpressionSyntax;
+                var invocationExpression = identifierParent.Parent as InvocationExpressionSyntax;
                 if (invocationExpression != null)
                 {
                     var invocationSymbol = semanticModel.GetSymbolInfo(invocationExpression).Symbol;
-                    return HandleInvocation(idRef, invocationSymbol, semanticModel);
+                    return HandleInvocation(identifier, invocationSymbol, semanticModel);
                 }
 
-                var accessedMember = semanticModel.GetSymbolInfo(idRefParent).Symbol;
-                return HandlePropertyOrField(idRef, accessedMember);
+                var accessedMember = semanticModel.GetSymbolInfo(identifierParent).Symbol;
+                return HandlePropertyOrField(identifier, accessedMember);
             }
-            else if (idRefParent is ArgumentSyntax)
+            else if (identifierParent is ArgumentSyntax)
             {
-                return semanticModel.GetTypeInfo(idRef).ConvertedType;
+                return semanticModel.GetTypeInfo(identifier).ConvertedType;
             }
 
             return null;
         }
 
-        private ITypeSymbol HandlePropertyOrField(IdentifierNameSyntax idRef, ISymbol symbol)
+        private ITypeSymbol HandlePropertyOrField(IdentifierNameSyntax identifier, ISymbol symbol)
         {
             var propertySymbol = symbol as IPropertySymbol;
 
@@ -192,7 +190,10 @@ namespace SonarAnalyzer.Rules.CSharp
                 return FindOriginatingSymbol(symbol);
             }
 
-            return FindOriginatingSymbol(idRef.Parent.Parent is AssignmentExpressionSyntax
+            var parent = GetNextUnparenthesizedParent(identifier);
+            var grandParent = GetNextUnparenthesizedParent(parent);
+
+            return FindOriginatingSymbol(grandParent is AssignmentExpressionSyntax
                     ? propertySymbol.SetMethod
                     : propertySymbol.GetMethod);
         }
@@ -218,11 +219,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return null;
             }
 
-            var originatingInterface = accessedMember.ContainingType
-                   .AllInterfaces
-                   .Where(i => HasImplementationForMember(i, accessedMember))
-                   .FirstOrDefault();
-
+            var originatingInterface = accessedMember.GetInterfaceMember()?.ContainingType;
             if (originatingInterface != null)
             {
                 return originatingInterface;
@@ -232,15 +229,6 @@ namespace SonarAnalyzer.Rules.CSharp
             return overridenSymbol != null
                 ? overridenSymbol.ContainingType
                 : accessedMember.ContainingType;
-        }
-
-        private static bool HasImplementationForMember(INamedTypeSymbol namedSymbol, ISymbol accessedMember)
-        {
-            return namedSymbol
-                .GetMembers()
-                .Any(member =>
-                    accessedMember.Equals(
-                        accessedMember.ContainingType.FindImplementationForInterfaceMember(member)));
         }
 
         private class ParameterData
@@ -268,17 +256,19 @@ namespace SonarAnalyzer.Rules.CSharp
 
             public Diagnostic GetRuleViolation()
             {
-                if (ShouldReportOn)
+                if (!ShouldReportOn)
                 {
-                    var mostGeneralType = FindMostGeneralType();
+                    return null;
+                }
 
-                    if (!Equals(mostGeneralType, parameterSymbol.Type) &&
-                        ShouldReportOnType(mostGeneralType.GetSymbolType()))
-                    {
-                        return Diagnostic.Create(rule,
-                            parameterSymbol.Locations.First(),
-                            mostGeneralType.ToDisplayString(), parameterSymbol.Type.ToDisplayString());
-                    }
+                var mostGeneralType = FindMostGeneralType();
+
+                if (!Equals(mostGeneralType, parameterSymbol.Type) &&
+                    ShouldReportOnType(mostGeneralType.GetSymbolType()))
+                {
+                    return Diagnostic.Create(rule,
+                        parameterSymbol.Locations.First(),
+                        mostGeneralType.ToDisplayString(), parameterSymbol.Type.ToDisplayString());
                 }
 
                 return null;
@@ -302,12 +292,12 @@ namespace SonarAnalyzer.Rules.CSharp
                     return mostGeneralType;
                 }
 
-                mostGeneralType = FindMostGeneralClass(mostGeneralType);
-                mostGeneralType = FindMostGeneralInterface(mostGeneralType);
+                mostGeneralType = FindMostGeneralClassOrSelf(mostGeneralType);
+                mostGeneralType = FindMostGeneralInterfaceOrSelf(mostGeneralType);
                 return mostGeneralType;
             }
 
-            private ITypeSymbol FindMostGeneralClass(ITypeSymbol mostGeneralType)
+            private ITypeSymbol FindMostGeneralClassOrSelf(ITypeSymbol mostGeneralType)
             {
                 ITypeSymbol currentSymbol = mostGeneralType.BaseType;
 
@@ -324,13 +314,13 @@ namespace SonarAnalyzer.Rules.CSharp
                 return mostGeneralType;
             }
 
-            private ITypeSymbol FindMostGeneralInterface(ITypeSymbol mostGeneralType)
+            private ITypeSymbol FindMostGeneralInterfaceOrSelf(ITypeSymbol mostGeneralType)
             {
                 foreach (var @interface in mostGeneralType.Interfaces)
                 {
                     if (DerivesOrImplementsAll(@interface))
                     {
-                        return FindMostGeneralInterface(@interface);
+                        return FindMostGeneralInterfaceOrSelf(@interface);
                     }
                 }
 
@@ -339,8 +329,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             private bool DerivesOrImplementsAll(ITypeSymbol type)
             {
-                return type != null &&
-                    usedAs.All(u => type.DerivesOrImplements(u));
+                return type != null && usedAs.All(type.DerivesOrImplements);
             }
         }
     }

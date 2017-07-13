@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S3242",
-"message":  "Use 'System.Collections.Generic.IReadOnlyCollection<string>' here; it is a more general type than 'System.Collections.Generic.IReadOnlyList<string>'.",
+"message":  "Consider using more general type 'System.Collections.Generic.IReadOnlyCollection<string>' instead of 'System.Collections.Generic.IReadOnlyList<string>'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Persistence\VisualizerRuntimeTemplate.Tree.cs",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S3242",
-"message":  "Use 'Akka.Actor.IActorRefFactory' here; it is a more general type than 'Akka.Actor.ActorSystem'.",
+"message":  "Consider using more general type 'Akka.Actor.IActorRefFactory' instead of 'Akka.Actor.ActorSystem'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\MessageSink.cs",
 "region":  {

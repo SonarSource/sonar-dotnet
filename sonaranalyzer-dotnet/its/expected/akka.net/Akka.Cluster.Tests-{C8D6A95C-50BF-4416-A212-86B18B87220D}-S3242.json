@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S3242",
-"message":  "Use 'System.Collections.Generic.IEnumerable<T>' here; it is a more general type than 'System.Collections.Generic.List<T>'.",
+"message":  "Consider using more general type 'System.Collections.Generic.IEnumerable<T>' instead of 'System.Collections.Generic.List<T>'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Cluster.Tests\MemberOrderingSpec.cs",
 "region":  {

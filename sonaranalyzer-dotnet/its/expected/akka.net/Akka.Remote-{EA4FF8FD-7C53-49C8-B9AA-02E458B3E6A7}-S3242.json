@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S3242",
-"message":  "Use 'Akka.Actor.ExtendedActorSystem' here; it is a more general type than 'Akka.Actor.Internal.ActorSystemImpl'.",
+"message":  "Consider using more general type 'Akka.Actor.ExtendedActorSystem' instead of 'Akka.Actor.Internal.ActorSystemImpl'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Remote\RemoteActorRefProvider.cs",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S3242",
-"message":  "Use 'Akka.Actor.ExtendedActorSystem' here; it is a more general type than 'Akka.Actor.Internal.ActorSystemImpl'.",
+"message":  "Consider using more general type 'Akka.Actor.ExtendedActorSystem' instead of 'Akka.Actor.Internal.ActorSystemImpl'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Remote\RemoteActorRefProvider.cs",
 "region":  {
@@ -28,7 +28,7 @@
 },
 {
 "id":  "S3242",
-"message":  "Use 'Akka.Actor.ActorRefBase' here; it is a more general type than 'Akka.Remote.RemoteActorRef'.",
+"message":  "Consider using more general type 'Akka.Actor.ActorRefBase' instead of 'Akka.Remote.RemoteActorRef'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Remote\RemoteActorRefProvider.cs",
 "region":  {
@@ -41,7 +41,7 @@
 },
 {
 "id":  "S3242",
-"message":  "Use 'Akka.Actor.ActorSystem' here; it is a more general type than 'Akka.Actor.ExtendedActorSystem'.",
+"message":  "Consider using more general type 'Akka.Actor.ActorSystem' instead of 'Akka.Actor.ExtendedActorSystem'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
 "region":  {

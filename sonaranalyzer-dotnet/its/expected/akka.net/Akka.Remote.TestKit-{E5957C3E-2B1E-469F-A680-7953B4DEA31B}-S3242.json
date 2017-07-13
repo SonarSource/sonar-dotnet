@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S3242",
-"message":  "Use 'System.Collections.Generic.IEnumerable<string>' here; it is a more general type than 'System.Collections.Immutable.ImmutableList<string>'.",
+"message":  "Consider using more general type 'System.Collections.Generic.IEnumerable<string>' instead of 'System.Collections.Immutable.ImmutableList<string>'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Remote.TestKit\Player.cs",
 "region":  {

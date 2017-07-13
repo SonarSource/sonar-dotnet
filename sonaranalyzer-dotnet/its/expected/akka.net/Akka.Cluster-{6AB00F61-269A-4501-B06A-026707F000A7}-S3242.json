@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S3242",
-"message":  "Use 'System.Collections.Immutable.IImmutableSet<Akka.Actor.Address>' here; it is a more general type than 'System.Collections.Immutable.ImmutableHashSet<Akka.Actor.Address>'.",
+"message":  "Consider using more general type 'System.Collections.Immutable.IImmutableSet<Akka.Actor.Address>' instead of 'System.Collections.Immutable.ImmutableHashSet<Akka.Actor.Address>'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Cluster\ClusterMetricsCollector.cs",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S3242",
-"message":  "Use 'Akka.Actor.ActorSystem' here; it is a more general type than 'Akka.Actor.ExtendedActorSystem'.",
+"message":  "Consider using more general type 'Akka.Actor.ActorSystem' instead of 'Akka.Actor.ExtendedActorSystem'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Cluster\ClusterMetricsCollector.cs",
 "region":  {
@@ -28,7 +28,7 @@
 },
 {
 "id":  "S3242",
-"message":  "Use 'System.Collections.Generic.IEnumerable<Akka.Cluster.Member>' here; it is a more general type than 'System.Collections.Immutable.ImmutableSortedSet<Akka.Cluster.Member>'.",
+"message":  "Consider using more general type 'System.Collections.Generic.IEnumerable<Akka.Cluster.Member>' instead of 'System.Collections.Immutable.ImmutableSortedSet<Akka.Cluster.Member>'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Cluster\Gossip.cs",
 "region":  {
@@ -41,7 +41,7 @@
 },
 {
 "id":  "S3242",
-"message":  "Use 'System.Collections.Generic.IDictionary<T, int>' here; it is a more general type than 'System.Collections.Generic.Dictionary<T, int>'.",
+"message":  "Consider using more general type 'System.Collections.Generic.IDictionary<T, int>' instead of 'System.Collections.Generic.Dictionary<T, int>'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Cluster\Proto\ClusterMessageSerializer.cs",
 "region":  {
@@ -54,7 +54,7 @@
 },
 {
 "id":  "S3242",
-"message":  "Use 'System.Collections.Generic.IEnumerable<string>' here; it is a more general type than 'System.Collections.Immutable.ImmutableHashSet<string>'.",
+"message":  "Consider using more general type 'System.Collections.Generic.IEnumerable<string>' instead of 'System.Collections.Immutable.ImmutableHashSet<string>'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Cluster\Proto\ClusterMessageSerializer.cs",
 "region":  {
@@ -67,7 +67,7 @@
 },
 {
 "id":  "S3242",
-"message":  "Use 'System.Collections.Immutable.IImmutableSet<string>' here; it is a more general type than 'System.Collections.Immutable.ImmutableHashSet<string>'.",
+"message":  "Consider using more general type 'System.Collections.Immutable.IImmutableSet<string>' instead of 'System.Collections.Immutable.ImmutableHashSet<string>'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
 "region":  {

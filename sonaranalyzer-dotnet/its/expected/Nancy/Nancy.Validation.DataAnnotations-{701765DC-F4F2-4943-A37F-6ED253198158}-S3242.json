@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S3242",
-"message":  "Use 'System.ComponentModel.MemberDescriptor' here; it is a more general type than 'System.ComponentModel.PropertyDescriptor'.",
+"message":  "Consider using more general type 'System.ComponentModel.MemberDescriptor' instead of 'System.ComponentModel.PropertyDescriptor'.",
 "location":  {
 "uri":  "Nancy\src\Nancy.Validation.DataAnnotations\DataAnnotationsValidatorAdapter.cs",
 "region":  {

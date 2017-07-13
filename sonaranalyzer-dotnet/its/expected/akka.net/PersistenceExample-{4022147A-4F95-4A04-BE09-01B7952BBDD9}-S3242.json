@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S3242",
-"message":  "Use 'Akka.Actor.IActorRefFactory' here; it is a more general type than 'Akka.Actor.ActorSystem'.",
+"message":  "Consider using more general type 'Akka.Actor.IActorRefFactory' instead of 'Akka.Actor.ActorSystem'.",
 "location":  {
 "uri":  "akka.net\src\examples\PersistenceExample\Program.cs",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S3242",
-"message":  "Use 'Akka.Actor.IActorRefFactory' here; it is a more general type than 'Akka.Actor.ActorSystem'.",
+"message":  "Consider using more general type 'Akka.Actor.IActorRefFactory' instead of 'Akka.Actor.ActorSystem'.",
 "location":  {
 "uri":  "akka.net\src\examples\PersistenceExample\Program.cs",
 "region":  {
@@ -28,7 +28,7 @@
 },
 {
 "id":  "S3242",
-"message":  "Use 'Akka.Actor.IActorRefFactory' here; it is a more general type than 'Akka.Actor.ActorSystem'.",
+"message":  "Consider using more general type 'Akka.Actor.IActorRefFactory' instead of 'Akka.Actor.ActorSystem'.",
 "location":  {
 "uri":  "akka.net\src\examples\PersistenceExample\Program.cs",
 "region":  {
@@ -41,7 +41,7 @@
 },
 {
 "id":  "S3242",
-"message":  "Use 'Akka.Actor.IActorRefFactory' here; it is a more general type than 'Akka.Actor.ActorSystem'.",
+"message":  "Consider using more general type 'Akka.Actor.IActorRefFactory' instead of 'Akka.Actor.ActorSystem'.",
 "location":  {
 "uri":  "akka.net\src\examples\PersistenceExample\Program.cs",
 "region":  {

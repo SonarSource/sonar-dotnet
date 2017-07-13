@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S3242",
-"message":  "Use 'System.Collections.Generic.IEnumerable<System.Type>' here; it is a more general type than 'System.Collections.Generic.List<System.Type>'.",
+"message":  "Consider using more general type 'System.Collections.Generic.IEnumerable<System.Type>' instead of 'System.Collections.Generic.List<System.Type>'.",
 "location":  {
 "uri":  "Nancy\src\Nancy\Bootstrapper\NancyBootstrapperLocator.cs",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S3242",
-"message":  "Use 'System.Collections.Generic.ICollection<System.Func<Nancy.NancyContext, string, Nancy.Response>>' here; it is a more general type than 'System.Collections.Generic.IList<System.Func<Nancy.NancyContext, string, Nancy.Response>>'.",
+"message":  "Consider using more general type 'System.Collections.Generic.ICollection<System.Func<Nancy.NancyContext, string, Nancy.Response>>' instead of 'System.Collections.Generic.IList<System.Func<Nancy.NancyContext, string, Nancy.Response>>'.",
 "location":  {
 "uri":  "Nancy\src\Nancy\Conventions\StaticContentsConventionsExtensions.cs",
 "region":  {
@@ -28,7 +28,7 @@
 },
 {
 "id":  "S3242",
-"message":  "Use 'System.Collections.Generic.ICollection<System.Func<Nancy.NancyContext, string, Nancy.Response>>' here; it is a more general type than 'System.Collections.Generic.IList<System.Func<Nancy.NancyContext, string, Nancy.Response>>'.",
+"message":  "Consider using more general type 'System.Collections.Generic.ICollection<System.Func<Nancy.NancyContext, string, Nancy.Response>>' instead of 'System.Collections.Generic.IList<System.Func<Nancy.NancyContext, string, Nancy.Response>>'.",
 "location":  {
 "uri":  "Nancy\src\Nancy\Conventions\StaticContentsConventionsExtensions.cs",
 "region":  {
@@ -41,7 +41,7 @@
 },
 {
 "id":  "S3242",
-"message":  "Use 'Nancy.IObjectSerializer' here; it is a more general type than 'Nancy.DefaultObjectSerializer'.",
+"message":  "Consider using more general type 'Nancy.IObjectSerializer' instead of 'Nancy.DefaultObjectSerializer'.",
 "location":  {
 "uri":  "Nancy\src\Nancy\Diagnostics\DiagnosticsHook.cs",
 "region":  {
@@ -54,7 +54,7 @@
 },
 {
 "id":  "S3242",
-"message":  "Use 'System.Reflection.MemberInfo' here; it is a more general type than 'System.Reflection.MethodInfo'.",
+"message":  "Consider using more general type 'System.Reflection.MemberInfo' instead of 'System.Reflection.MethodInfo'.",
 "location":  {
 "uri":  "Nancy\src\Nancy\Diagnostics\InteractiveDiagnostics.cs",
 "region":  {
@@ -67,7 +67,7 @@
 },
 {
 "id":  "S3242",
-"message":  "Use 'System.Reflection.ICustomAttributeProvider' here; it is a more general type than 'System.Reflection.PropertyInfo'.",
+"message":  "Consider using more general type 'System.Reflection.ICustomAttributeProvider' instead of 'System.Reflection.PropertyInfo'.",
 "location":  {
 "uri":  "Nancy\src\Nancy\Diagnostics\Modules\SettingsModule.cs",
 "region":  {
@@ -80,7 +80,7 @@
 },
 {
 "id":  "S3242",
-"message":  "Use 'System.IO.Stream' here; it is a more general type than 'Nancy.IO.RequestStream'.",
+"message":  "Consider using more general type 'System.IO.Stream' instead of 'Nancy.IO.RequestStream'.",
 "location":  {
 "uri":  "Nancy\src\Nancy\Extensions\RequestStreamExtensions.cs",
 "region":  {
@@ -93,7 +93,7 @@
 },
 {
 "id":  "S3242",
-"message":  "Use 'System.Reflection.ICustomAttributeProvider' here; it is a more general type than 'System.Reflection.MemberInfo'.",
+"message":  "Consider using more general type 'System.Reflection.ICustomAttributeProvider' instead of 'System.Reflection.MemberInfo'.",
 "location":  {
 "uri":  "Nancy\src\Nancy\Json\JsonSerializer.cs",
 "region":  {
@@ -106,7 +106,7 @@
 },
 {
 "id":  "S3242",
-"message":  "Use 'System.Dynamic.DynamicObject' here; it is a more general type than 'Nancy.DynamicDictionary'.",
+"message":  "Consider using more general type 'System.Dynamic.DynamicObject' instead of 'Nancy.DynamicDictionary'.",
 "location":  {
 "uri":  "Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
 "region":  {
@@ -119,7 +119,7 @@
 },
 {
 "id":  "S3242",
-"message":  "Use 'System.Collections.Generic.IEnumerable<Nancy.Responses.Negotiation.DefaultResponseNegotiator.CompatibleHeader>' here; it is a more general type than 'System.Collections.Generic.IList<Nancy.Responses.Negotiation.DefaultResponseNegotiator.CompatibleHeader>'.",
+"message":  "Consider using more general type 'System.Collections.Generic.IEnumerable<Nancy.Responses.Negotiation.DefaultResponseNegotiator.CompatibleHeader>' instead of 'System.Collections.Generic.IList<Nancy.Responses.Negotiation.DefaultResponseNegotiator.CompatibleHeader>'.",
 "location":  {
 "uri":  "Nancy\src\Nancy\Responses\Negotiation\DefaultResponseNegotiator.cs",
 "region":  {
@@ -132,7 +132,7 @@
 },
 {
 "id":  "S3242",
-"message":  "Use 'System.Collections.Generic.IEnumerable<string>' here; it is a more general type than 'System.Collections.Generic.IList<string>'.",
+"message":  "Consider using more general type 'System.Collections.Generic.IEnumerable<string>' instead of 'System.Collections.Generic.IList<string>'.",
 "location":  {
 "uri":  "Nancy\src\Nancy\Routing\DefaultRoutePatternMatcher.cs",
 "region":  {
@@ -145,7 +145,7 @@
 },
 {
 "id":  "S3242",
-"message":  "Use 'System.Collections.Generic.IEnumerable<System.Text.RegularExpressions.Group>' here; it is a more general type than 'System.Collections.Generic.IList<System.Text.RegularExpressions.Group>'.",
+"message":  "Consider using more general type 'System.Collections.Generic.IEnumerable<System.Text.RegularExpressions.Group>' instead of 'System.Collections.Generic.IList<System.Text.RegularExpressions.Group>'.",
 "location":  {
 "uri":  "Nancy\src\Nancy\Routing\DefaultRoutePatternMatcher.cs",
 "region":  {
@@ -158,7 +158,7 @@
 },
 {
 "id":  "S3242",
-"message":  "Use 'Nancy.Routing.Trie.NodeData' here; it is a more general type than 'Nancy.Routing.Trie.MatchResult'.",
+"message":  "Consider using more general type 'Nancy.Routing.Trie.NodeData' instead of 'Nancy.Routing.Trie.MatchResult'.",
 "location":  {
 "uri":  "Nancy\src\Nancy\Routing\DefaultRouteResolver.cs",
 "region":  {
@@ -171,7 +171,7 @@
 },
 {
 "id":  "S3242",
-"message":  "Use 'Nancy.Routing.Trie.NodeData' here; it is a more general type than 'Nancy.Routing.Trie.MatchResult'.",
+"message":  "Consider using more general type 'Nancy.Routing.Trie.NodeData' instead of 'Nancy.Routing.Trie.MatchResult'.",
 "location":  {
 "uri":  "Nancy\src\Nancy\Routing\Trie\MatchResult.cs",
 "region":  {
@@ -184,7 +184,7 @@
 },
 {
 "id":  "S3242",
-"message":  "Use 'System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<string, object>>' here; it is a more general type than 'System.Collections.Generic.IDictionary<string, object>'.",
+"message":  "Consider using more general type 'System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<string, object>>' instead of 'System.Collections.Generic.IDictionary<string, object>'.",
 "location":  {
 "uri":  "Nancy\src\Nancy\Routing\Trie\Nodes\TrieNode.cs",
 "region":  {
@@ -197,7 +197,7 @@
 },
 {
 "id":  "S3242",
-"message":  "Use 'System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<string, object>>' here; it is a more general type than 'System.Collections.Generic.IDictionary<string, object>'.",
+"message":  "Consider using more general type 'System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<string, object>>' instead of 'System.Collections.Generic.IDictionary<string, object>'.",
 "location":  {
 "uri":  "Nancy\src\Nancy\Routing\Trie\Nodes\TrieNode.cs",
 "region":  {
@@ -210,7 +210,7 @@
 },
 {
 "id":  "S3242",
-"message":  "Use 'System.Security.Principal.IPrincipal' here; it is a more general type than 'System.Security.Claims.ClaimsPrincipal'.",
+"message":  "Consider using more general type 'System.Security.Principal.IPrincipal' instead of 'System.Security.Claims.ClaimsPrincipal'.",
 "location":  {
 "uri":  "Nancy\src\Nancy\Security\ClaimsPrincipalExtensions.cs",
 "region":  {

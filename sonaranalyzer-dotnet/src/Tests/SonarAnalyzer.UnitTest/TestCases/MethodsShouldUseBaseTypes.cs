@@ -12,7 +12,7 @@ namespace Test_01
     {
         public void Method() { }
 
-        public void Test_01(B foo) // Noncompliant {{Use 'Test_01.A' here; it is a more general type than 'Test_01.B'.}}
+        public void Test_01(B foo) // Noncompliant {{Consider using more general type 'Test_01.A' instead of 'Test_01.B'.}}
 //                            ^^^
         {
             foo.Method();
@@ -36,7 +36,7 @@ namespace Test_02
     {
         public void Method() { }
 
-        public void Test_02(C foo) // Noncompliant {{Use 'Test_02.A' here; it is a more general type than 'Test_02.C'.}}
+        public void Test_02(C foo) // Noncompliant {{Consider using more general type 'Test_02.A' instead of 'Test_02.C'.}}
         {
             foo.Method();
         }
@@ -69,7 +69,7 @@ namespace Test_03
         public void Method() { }
         public void OtherMethod() { }
 
-        public void Test_03(C foo) // Noncompliant {{Use 'Test_03.A_Base' here; it is a more general type than 'Test_03.C'.}}
+        public void Test_03(C foo) // Noncompliant {{Consider using more general type 'Test_03.A_Base' instead of 'Test_03.C'.}}
         {
             foo.Method();
         }
@@ -126,7 +126,7 @@ namespace Test_06
     {
         public override void Method() { }
 
-        public void Test_06(B foo) // Noncompliant {{Use 'Test_06.A' here; it is a more general type than 'Test_06.B'.}}
+        public void Test_06(B foo) // Noncompliant {{Consider using more general type 'Test_06.A' instead of 'Test_06.B'.}}
         {
             foo.Method();
         }
@@ -143,7 +143,7 @@ namespace Test_07
 
     public class B : A
     {
-        public void Test_07(B foo) // Noncompliant {{Use 'Test_07.A' here; it is a more general type than 'Test_07.B'.}}
+        public void Test_07(B foo) // Noncompliant {{Consider using more general type 'Test_07.A' instead of 'Test_07.B'.}}
         {
             int x = foo.Property;
         }
@@ -422,8 +422,8 @@ namespace Test_16
         public void OtherMethod() { }
 
         public void Test_16(B foo1, B foo2, B foo3)
-//                            ^^^^ Noncompliant {{Use 'Test_16.A' here; it is a more general type than 'Test_16.B'.}}
-//                                    ^^^^ Noncompliant@-1 {{Use 'Test_16.A' here; it is a more general type than 'Test_16.B'.}}
+//                            ^^^^ Noncompliant {{Consider using more general type 'Test_16.A' instead of 'Test_16.B'.}}
+//                                    ^^^^ Noncompliant@-1 {{Consider using more general type 'Test_16.A' instead of 'Test_16.B'.}}
         {
             foo1.Method();
             var x = foo2.Property;
@@ -533,12 +533,36 @@ namespace Test_19
     {
         public void Test_19_Method(B foo) // Noncompliant
         {
-            (foo).Method();
+            (((foo))).Method();
+        }
+
+        public void Test_19_Method2(B foo) // Noncompliant
+        {
+            Foo( (((foo))) );
         }
 
         public void Test_19_Property(B foo) // Noncompliant
         {
             (foo).Property = 1;
+        }
+
+        private void Foo(A thing) { }
+    }
+}
+
+// Test unsupported
+namespace Test_20
+{
+    public class A
+    {
+        public void Method() { }
+    }
+
+    public class B : A
+    {
+        public void Test_19_Method(B foo) // False negative
+        {
+            (foo ?? null).Method();
         }
     }
 }
