@@ -19,6 +19,9 @@
  */
 package org.sonar.plugins.dotnet.tests;
 
+import org.sonar.api.utils.log.Logger;
+import org.sonar.api.utils.log.Loggers;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -26,8 +29,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.stream.Stream;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
 
 import static java.util.stream.Collectors.toList;
 
@@ -64,17 +65,22 @@ public class DotCoverReportsAggregator implements CoverageParser {
   }
 
   private static List<File> listReportFiles(File folder) {
-    Stream<Path> pathStream;
+    Stream<Path> pathStream = null;
     try {
       pathStream = Files.list(folder.toPath());
+
+      return pathStream
+        .map(Path::toFile)
+        .filter(f -> f.isFile() && f.getName().endsWith(".html"))
+        .collect(toList());
     } catch (IOException e) {
       throw new IllegalStateException(e);
     }
-
-    return pathStream
-      .map(Path::toFile)
-      .filter(f -> f.isFile() && f.getName().endsWith(".html"))
-      .collect(toList());
+    finally {
+      if (pathStream != null) {
+        pathStream.close();
+      }
+    }
   }
 
   private static void checkIsHtml(File file) {
