@@ -160,7 +160,6 @@ namespace SonarAnalyzer.Rules.CSharp
                 IsInArgumentAndCanBeChanged(objectCreation, context.SemanticModel))
             {
                 ReportIssueOnRedundantObjectCreation(context, objectCreation, "explicit nullable type creation", RedundancyType.ExplicitNullable);
-                return;
             }
         }
 
@@ -311,7 +310,6 @@ namespace SonarAnalyzer.Rules.CSharp
                     invocation => invocation.ArgumentList.Arguments.Any(a => IsDynamic(a, context.SemanticModel))))
             {
                 ReportIssueOnRedundantObjectCreation(context, objectCreation, "explicit delegate creation", RedundancyType.ExplicitDelegate);
-                return;
             }
         }
 

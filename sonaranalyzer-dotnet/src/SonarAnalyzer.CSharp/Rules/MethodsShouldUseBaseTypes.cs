@@ -174,6 +174,10 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 return semanticModel.GetTypeInfo(identifier).ConvertedType;
             }
+            else
+            {
+                // nothing to do
+            }
 
             return null;
         }

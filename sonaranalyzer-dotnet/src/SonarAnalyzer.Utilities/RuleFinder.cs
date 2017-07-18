@@ -22,9 +22,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
-using Microsoft.CodeAnalysis;
 
 namespace SonarAnalyzer.Utilities
 {
@@ -34,16 +34,16 @@ namespace SonarAnalyzer.Utilities
 
         public static IEnumerable<Assembly> PackagedRuleAssemblies => new[]
             {
-                Assembly.LoadFrom(typeof(Rules.CSharp.FlagsEnumZeroMember).Assembly.Location),
-                Assembly.LoadFrom(typeof(Rules.VisualBasic.FlagsEnumZeroMember).Assembly.Location),
-                Assembly.LoadFrom(typeof(Rules.Common.FlagsEnumZeroMemberBase).Assembly.Location)
+                Assembly.Load(typeof(Rules.CSharp.FlagsEnumZeroMember).Assembly.GetName()),
+                Assembly.Load(typeof(Rules.VisualBasic.FlagsEnumZeroMember).Assembly.GetName()),
+                Assembly.Load(typeof(Rules.Common.FlagsEnumZeroMemberBase).Assembly.GetName())
             };
 
         public RuleFinder()
         {
             diagnosticAnalyzers = PackagedRuleAssemblies
                 .SelectMany(assembly => assembly.GetTypes())
-                .Where(t => t.IsSubclassOf(typeof (DiagnosticAnalyzer)))
+                .Where(t => t.IsSubclassOf(typeof(DiagnosticAnalyzer)))
                 .Where(t => t.GetCustomAttributes<RuleAttribute>().Any())
                 .ToList();
         }

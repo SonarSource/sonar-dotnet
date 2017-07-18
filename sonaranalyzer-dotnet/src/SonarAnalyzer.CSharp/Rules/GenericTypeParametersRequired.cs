@@ -78,18 +78,20 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private void AddTypeParameters(ITypeSymbol argumentSymbol, ISet<ITypeParameterSymbol> set)
         {
-            var arrayTypeSymbol = argumentSymbol as IArrayTypeSymbol;
+            var localArgumentSymbol = argumentSymbol;
+
+            var arrayTypeSymbol = localArgumentSymbol as IArrayTypeSymbol;
             if (arrayTypeSymbol != null)
             {
-                argumentSymbol = arrayTypeSymbol.ElementType;
+                localArgumentSymbol = arrayTypeSymbol.ElementType;
             }
 
-            if (argumentSymbol.Is(TypeKind.TypeParameter))
+            if (localArgumentSymbol.Is(TypeKind.TypeParameter))
             {
-                set.Add(argumentSymbol as ITypeParameterSymbol);
+                set.Add(localArgumentSymbol as ITypeParameterSymbol);
             }
 
-            var namedSymbol = argumentSymbol as INamedTypeSymbol;
+            var namedSymbol = localArgumentSymbol as INamedTypeSymbol;
             if (namedSymbol != null)
             {
                 foreach (var typeParam in namedSymbol.TypeArguments)

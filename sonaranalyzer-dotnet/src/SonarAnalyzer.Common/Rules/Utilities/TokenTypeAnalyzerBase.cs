@@ -18,12 +18,12 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
-using Microsoft.CodeAnalysis;
-using SonarAnalyzer.Protobuf;
 using System.Collections.Generic;
-using Microsoft.CodeAnalysis.Text;
+using System.Collections.Immutable;
 using System.Linq;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.Text;
+using SonarAnalyzer.Protobuf;
 
 namespace SonarAnalyzer.Rules
 {
@@ -122,7 +122,6 @@ namespace SonarAnalyzer.Rules
                 if (IsIdentifier(token))
                 {
                     ClassifyIdentifier(token, semanticModel);
-                    return;
                 }
             }
 
@@ -219,10 +218,9 @@ namespace SonarAnalyzer.Rules
                 if (IsDocComment(trivia))
                 {
                     ClassifyDocComment(trivia);
-                    return;
                 }
 
-                // todo preprocessor directives
+                // Handle preprocessor directives here
             }
 
             protected abstract bool IsDocComment(SyntaxTrivia trivia);

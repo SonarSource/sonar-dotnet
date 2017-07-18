@@ -64,7 +64,7 @@ namespace SonarAnalyzer.Common
 
         #region Comments
 
-        public static readonly string[] LineTerminators = { "\r\n", "\n", "\r" };
+        internal static readonly string[] LineTerminators = { "\r\n", "\n", "\r" };
 
         public FileComments GetComments(bool ignoreHeaderComments)
         {

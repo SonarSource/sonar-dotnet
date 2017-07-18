@@ -96,6 +96,10 @@ namespace SonarAnalyzer.Rules.CSharp
                     yield return Diagnostic.Create(s4025, variableDeclarator.Identifier.GetLocation(),
                         similarFields.First().Name, baseType.Name);
                 }
+                else
+                {
+                    // nothing to do
+                }
             }
         }
     }

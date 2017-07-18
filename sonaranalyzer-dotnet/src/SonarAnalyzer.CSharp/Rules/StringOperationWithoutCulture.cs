@@ -50,11 +50,6 @@ namespace SonarAnalyzer.Rules.CSharp
                 c =>
                 {
                     var invocation = (InvocationExpressionSyntax)c.Node;
-                    var calledMethod = c.SemanticModel.GetSymbolInfo(invocation).Symbol as IMethodSymbol;
-                    if (calledMethod == null)
-                    {
-                        return;
-                    }
 
                     var memberAccess = invocation.Expression as MemberAccessExpressionSyntax;
                     if(memberAccess == null)
@@ -62,10 +57,15 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    if (calledMethod.IsInType(KnownType.System_String)  &&
+                    var calledMethod = c.SemanticModel.GetSymbolInfo(invocation).Symbol as IMethodSymbol;
+                    if (calledMethod == null)
+                    {
+                        return;
+                    }
+
+                    if (calledMethod.IsInType(KnownType.System_String) &&
                         CommonCultureSpecificMethodNames.Contains(calledMethod.Name) &&
-                        !calledMethod.Parameters
-                            .Any(param => param.Type.IsAny(StringCultureSpecifierNames)))
+                        !calledMethod.Parameters.Any(param => param.Type.IsAny(StringCultureSpecifierNames)))
                     {
                         c.ReportDiagnostic(Diagnostic.Create(rule, memberAccess.Name.GetLocation(), MessageDefineLocale));
                         return;
@@ -82,7 +82,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     if (IsMethodOnNonIntegralOrDateTime(calledMethod) &&
                         calledMethod.Name == ToStringMethodName &&
-                        !calledMethod.Parameters.Any())
+                        calledMethod.Parameters.Length == 0)
                     {
                         c.ReportDiagnostic(Diagnostic.Create(rule, memberAccess.Name.GetLocation(), MessageDefineLocale));
                         return;
@@ -92,7 +92,6 @@ namespace SonarAnalyzer.Rules.CSharp
                         calledMethod.Name == CompareToMethodName)
                     {
                         c.ReportDiagnostic(Diagnostic.Create(rule, memberAccess.Name.GetLocation(), MessageChangeCompareTo));
-                        return;
                     }
                 },
                 SyntaxKind.InvocationExpression);

@@ -22,7 +22,7 @@ using System;
 
 namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
 {
-    public class ProgramPoint : IEquatable<ProgramPoint>
+    public sealed class ProgramPoint : IEquatable<ProgramPoint>
     {
         public Block Block { get; }
         public int Offset { get; }

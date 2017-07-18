@@ -65,7 +65,6 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (AbstractClassShouldBeConcreteClass(symbol))
                     {
                         ReportClass(symbol, MessageToConcreteClass, c);
-                        return;
                     }
                 },
                 SymbolKind.NamedType);

@@ -27,7 +27,7 @@ using SonarAnalyzer.Common;
 
 namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
 {
-    public class ProgramState : IEquatable<ProgramState>
+    public sealed class ProgramState : IEquatable<ProgramState>
     {
         internal ImmutableDictionary<ISymbol, SymbolicValue> Values { get; }
         internal ImmutableDictionary<SymbolicValue, SymbolicValueConstraint> Constraints { get; }

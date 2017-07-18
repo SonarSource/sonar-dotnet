@@ -237,13 +237,15 @@ namespace SonarAnalyzer.Helpers
 
             for (var container = symbol.ContainingType; container != null; container = container.ContainingType)
             {
-                switch (container.DeclaredAccessibility)
+                if (container.DeclaredAccessibility == Accessibility.Private)
                 {
-                    case Accessibility.Private:
-                        return Accessibility.Private;
-                    case Accessibility.Internal:
-                        result = Accessibility.Internal;
-                        continue;
+                    return Accessibility.Private;
+                }
+
+                if (container.DeclaredAccessibility == Accessibility.Internal)
+                {
+                    result = Accessibility.Internal;
+                    continue;
                 }
             }
 

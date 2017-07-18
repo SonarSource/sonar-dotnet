@@ -64,8 +64,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    var interfaceMember = cbc.SemanticModel
-                        .GetDeclaredSymbol(accessorDeclaration)
+                    var interfaceMember = cbc.SemanticModel.GetDeclaredSymbol(accessorDeclaration)
                         .GetInterfaceMember();
                     if (interfaceMember != null &&
                         accessorDeclaration.Body.Statements.Count == 0)
@@ -103,36 +102,31 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static string GetAccessorType(AccessorDeclarationSyntax accessorDeclaration)
         {
-            string accessorType;
-
             if (accessorDeclaration.IsKind(SyntaxKind.AddAccessorDeclaration) ||
                 accessorDeclaration.IsKind(SyntaxKind.RemoveAccessorDeclaration))
             {
-                accessorType = "event";
+                return "event";
+            }
+
+            var accessorList = accessorDeclaration.Parent;
+            if (accessorList == null)
+            {
+                return null;
+            }
+
+            var indexerOrProperty = accessorList.Parent;
+            if (indexerOrProperty is IndexerDeclarationSyntax)
+            {
+                return "indexer set";
+            }
+            else if (indexerOrProperty is PropertyDeclarationSyntax)
+            {
+                return "property set";
             }
             else
             {
-                var accessorList = accessorDeclaration.Parent;
-                if (accessorList == null)
-                {
-                    return null;
-                }
-                var indexerOrProperty = accessorList.Parent;
-                if (indexerOrProperty is IndexerDeclarationSyntax)
-                {
-                    accessorType = "indexer set";
-                }
-                else if (indexerOrProperty is PropertyDeclarationSyntax)
-                {
-                    accessorType = "property set";
-                }
-                else
-                {
-                    return null;
-                }
+                return null;
             }
-
-            return accessorType;
         }
     }
 }

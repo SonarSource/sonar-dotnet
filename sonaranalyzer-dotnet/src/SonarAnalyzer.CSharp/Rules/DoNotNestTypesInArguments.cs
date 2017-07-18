@@ -73,13 +73,14 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static int GetNestingDepth(ITypeSymbol argumentSymbol, int depth, bool ignoreExpressions)
         {
-            var arrayTypeSymbol = argumentSymbol as IArrayTypeSymbol;
+            var currentOrNestedArgument = argumentSymbol;
+            var arrayTypeSymbol = currentOrNestedArgument as IArrayTypeSymbol;
             if (arrayTypeSymbol != null)
             {
-                argumentSymbol = arrayTypeSymbol.ElementType;
+                currentOrNestedArgument = arrayTypeSymbol.ElementType;
             }
 
-            var namedTypeSymbol = argumentSymbol as INamedTypeSymbol;
+            var namedTypeSymbol = currentOrNestedArgument as INamedTypeSymbol;
             if (namedTypeSymbol == null)
             {
                 return depth;

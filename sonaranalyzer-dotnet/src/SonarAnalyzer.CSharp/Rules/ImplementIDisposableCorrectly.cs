@@ -179,11 +179,11 @@ namespace SonarAnalyzer.Rules.CSharp
                     return;
                 }
 
-                var statementsCount = disposeMethod.Body.ChildNodes().Count();
                 if (!isSealedClass &&
-                        (!HasStatementsCount(disposeMethod.Body, 2) ||
-                        !CallsVirtualDispose(disposeMethod, argumentValue: "true") ||
-                        !CallsSuppressFinalize(disposeMethod)
+                        (
+                            !HasStatementsCount(disposeMethod.Body, 2) ||
+                            !CallsVirtualDispose(disposeMethod, argumentValue: "true") ||
+                            !CallsSuppressFinalize(disposeMethod)
                         ))
                 {
                     AddSecondaryLocation(disposeMethod.Identifier.GetLocation(),

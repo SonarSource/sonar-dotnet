@@ -124,7 +124,6 @@ namespace SonarAnalyzer.Rules.CSharp
                     new TextSpan(conditional.WhenTrue.SpanStart, conditional.WhenFalse.Span.End - conditional.WhenTrue.SpanStart));
 
                 context.ReportDiagnostic(Diagnostic.Create(rule, location));
-                return;
             }
         }
 

@@ -202,12 +202,15 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static int FilterAndCountCoupling(IEnumerable<ITypeSymbol> types)
         {
-            return types.Distinct()
-                .WhereNotNull()
-                .Where(type => type.TypeKind != TypeKind.Enum &&
-                    type.TypeKind != TypeKind.Pointer &&
-                    !type.IsAny(typesExcludedFromCoupling))
-                .Count();
+            return types.Distinct().Count(IsCountedType);
+        }
+
+        private static bool IsCountedType(ITypeSymbol type)
+        {
+            return type != null &&
+                type.TypeKind != TypeKind.Enum &&
+                type.TypeKind != TypeKind.Pointer &&
+                !type.IsAny(typesExcludedFromCoupling);
         }
     }
 }
