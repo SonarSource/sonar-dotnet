@@ -159,43 +159,44 @@ namespace SonarAnalyzer.Rules
                         IsDeclaration = true
                     };
                 }
+
+                return null;
             }
-            else
+
+            var node = getBindableParent(token);
+            if (node != null)
             {
-                var node = getBindableParent(token);
-                if (node != null)
+                var symbol = semanticModel.GetSymbolInfo(node).Symbol;
+                if (symbol == null)
                 {
-                    var symbol = semanticModel.GetSymbolInfo(node).Symbol;
-                    if (symbol == null)
-                    {
-                        return null;
-                    }
+                    return null;
+                }
 
-                    if (symbol.DeclaringSyntaxReferences.Any() ||
-                        IsValuePropertyParameter(symbol))
+                if (symbol.DeclaringSyntaxReferences.Any() ||
+                    IsValuePropertyParameter(symbol))
+                {
+                    return new SymRefInfo
                     {
-                        return new SymRefInfo
-                        {
-                            IdentifierToken = token,
-                            Symbol = symbol,
-                            IsDeclaration = false
-                        };
-                    }
+                        IdentifierToken = token,
+                        Symbol = symbol,
+                        IsDeclaration = false
+                    };
+                }
 
-                    var ctorSymbol = symbol as IMethodSymbol;
-                    if (ctorSymbol != null &&
-                        ctorSymbol.MethodKind == MethodKind.Constructor &&
-                        ctorSymbol.IsImplicitlyDeclared)
+                var ctorSymbol = symbol as IMethodSymbol;
+                if (ctorSymbol != null &&
+                    ctorSymbol.MethodKind == MethodKind.Constructor &&
+                    ctorSymbol.IsImplicitlyDeclared)
+                {
+                    return new SymRefInfo
                     {
-                        return new SymRefInfo
-                        {
-                            IdentifierToken = token,
-                            Symbol = ctorSymbol.ContainingType,
-                            IsDeclaration = false
-                        };
-                    }
+                        IdentifierToken = token,
+                        Symbol = ctorSymbol.ContainingType,
+                        IsDeclaration = false
+                    };
                 }
             }
+
             return null;
         }
 

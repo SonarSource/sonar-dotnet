@@ -90,7 +90,6 @@ namespace SonarAnalyzer.Rules.CSharp
                         if (namedType != null)
                         {
                             CheckNamedType(c, containerClassSymbol, namedType);
-                            continue;
                         }
                     }
                 },
@@ -113,17 +112,18 @@ namespace SonarAnalyzer.Rules.CSharp
             foreach (var reference in namedType.DeclaringSyntaxReferences)
             {
                 var syntax = reference.GetSyntax();
+
                 var delegateSyntax = syntax as DelegateDeclarationSyntax;
                 if (delegateSyntax != null)
                 {
                     context.ReportDiagnosticIfNonGenerated(Diagnostic.Create(rule, delegateSyntax.Identifier.GetLocation(), "delegate"));
                     continue;
                 }
+
                 var classSyntax = syntax as ClassDeclarationSyntax;
                 if (classSyntax != null)
                 {
                     context.ReportDiagnosticIfNonGenerated(Diagnostic.Create(rule, classSyntax.Identifier.GetLocation(), "class"));
-                    continue;
                 }
             }
         }

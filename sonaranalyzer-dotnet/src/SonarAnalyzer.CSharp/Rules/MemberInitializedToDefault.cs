@@ -75,7 +75,6 @@ namespace SonarAnalyzer.Rules.CSharp
                 IsDefaultValueInitializer(propertyDeclaration.Initializer, propertySymbol.Type))
             {
                 context.ReportDiagnostic(Diagnostic.Create(rule, propertyDeclaration.Initializer.GetLocation(), propertySymbol.Name));
-                return;
             }
         }
 

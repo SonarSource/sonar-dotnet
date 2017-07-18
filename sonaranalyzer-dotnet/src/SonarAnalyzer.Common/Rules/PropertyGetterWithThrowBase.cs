@@ -50,7 +50,7 @@ namespace SonarAnalyzer.Rules.Common
                 GeneratedCodeRecognizer,
                 cbc =>
                 {
-                    if(cbc.SemanticModel.Compilation.IsTest())
+                    if (cbc.SemanticModel.Compilation.IsTest())
                     {
                         return;
                     }

@@ -206,7 +206,6 @@ namespace SonarAnalyzer.Rules.CSharp
             if (variance == VarianceKind.Out)
             {
                 context.ReportDiagnostic(Diagnostic.Create(rule, location, "out", typeParameter.Name, "covariant"));
-                return;
             }
         }
 

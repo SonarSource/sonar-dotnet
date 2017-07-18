@@ -116,7 +116,7 @@ namespace SonarAnalyzer.Rules.CSharp
             return catches
                 .Select(clause =>
                     clause.Declaration?.Type != null
-                        ? semanticModel.GetTypeInfo(clause.Declaration?.Type).Type as INamedTypeSymbol
+                        ? semanticModel.GetTypeInfo(clause.Declaration.Type).Type as INamedTypeSymbol
                         : null)
                 .ToList();
         }

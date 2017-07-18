@@ -45,7 +45,7 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
-                    if (c.SemanticModel.Compilation.IsTest())
+                    if (c.IsTest())
                     {
                         return;
                     }

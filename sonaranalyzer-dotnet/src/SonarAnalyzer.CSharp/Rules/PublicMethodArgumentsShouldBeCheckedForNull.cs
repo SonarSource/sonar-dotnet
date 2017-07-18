@@ -52,7 +52,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static void CheckForNullDereference(ExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context)
         {
-            if (context.SemanticModel.Compilation.IsTest())
+            if (context.IsTest())
             {
                 return;
             }

@@ -86,16 +86,17 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool IsMultiDimensionalArray(ITypeSymbol type)
         {
-            while (type.TypeKind == TypeKind.Array)
+            var currentType = type;
+            while (currentType.TypeKind == TypeKind.Array)
             {
-                var arrayType = (IArrayTypeSymbol)type;
+                var arrayType = (IArrayTypeSymbol)currentType;
 
                 if (arrayType.Rank > 1)
                 {
                     return true;
                 }
 
-                type = arrayType.ElementType;
+                currentType = arrayType.ElementType;
             }
 
             return false;
