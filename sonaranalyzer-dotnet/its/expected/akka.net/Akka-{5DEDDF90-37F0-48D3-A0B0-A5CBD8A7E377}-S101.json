@@ -51,45 +51,6 @@
 "endColumn":  49
 }
 }
-},
-{
-"id":  "S101",
-"message":  "Rename class 'SO' to match camel case naming rules, consider using 'So'.",
-"location":  {
-"uri":  "akka.net\src\core\Akka\IO\Inet.cs",
-"region":  {
-"startLine":  46,
-"startColumn":  29,
-"endLine":  46,
-"endColumn":  31
-}
-}
-},
-{
-"id":  "S101",
-"message":  "Rename class 'IOExtension' to match camel case naming rules, consider using 'IoExtension'.",
-"location":  {
-"uri":  "akka.net\src\core\Akka\IO\IO.cs",
-"region":  {
-"startLine":  12,
-"startColumn":  27,
-"endLine":  12,
-"endColumn":  38
-}
-}
-},
-{
-"id":  "S101",
-"message":  "Rename class 'SO' to match camel case naming rules, consider using 'So'.",
-"location":  {
-"uri":  "akka.net\src\core\Akka\IO\Udp.cs",
-"region":  {
-"startLine":  264,
-"startColumn":  22,
-"endLine":  264,
-"endColumn":  24
-}
-}
 }
 ]
 }

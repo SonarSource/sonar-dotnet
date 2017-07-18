@@ -43,7 +43,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             new TestSetup { Path = @"TestCases\GetHashCodeEqualsOverride.cs", Analyzer = new GetHashCodeEqualsOverride() },
             new TestSetup { Path = @"TestCases\DisposeNotImplementingDispose.cs", Analyzer = new DisposeNotImplementingDispose() },
             new TestSetup { Path = @"TestCases\ClassShouldNotBeAbstract.cs", Analyzer = new ClassShouldNotBeAbstract() },
-            new TestSetup { Path = @"TestCases\ClassName.cs", Analyzer = new ClassName() }
+            new TestSetup { Path = @"TestCases\ClassName.cs", Analyzer = new ClassAndMethodName() }
         });
 
         [TestMethod]

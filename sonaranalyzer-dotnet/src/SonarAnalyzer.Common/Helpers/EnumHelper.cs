@@ -19,18 +19,12 @@
  */
 
 using System.Linq;
-using System.Text.RegularExpressions;
 using Microsoft.CodeAnalysis;
 
 namespace SonarAnalyzer.Helpers
 {
     public static class EnumHelper
     {
-        public static string[] SplitCamelCase(this string source)
-        {
-            return Regex.Split(source, @"(?<!^)(?=[A-Z])");
-        }
-
         internal static bool HasFlagsAttribute(this SyntaxNode node, SemanticModel semanticModel)
         {
             var symbol = semanticModel.GetDeclaredSymbol(node);

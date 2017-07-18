@@ -2,19 +2,6 @@
 "issues":  [
 {
 "id":  "S101",
-"message":  "Rename struct 'FF' to match camel case naming rules, consider using 'Ff'.",
-"location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\DeathWatchSpec.cs",
-"region":  {
-"startLine":  430,
-"startColumn":  25,
-"endLine":  430,
-"endColumn":  27
-}
-}
-},
-{
-"id":  "S101",
 "message":  "Rename class 'FSMTimingSpec' to match camel case naming rules, consider using 'FsmTimingSpec'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Tests\Actor\FSMTimingSpec.cs",
@@ -80,19 +67,6 @@
 },
 {
 "id":  "S101",
-"message":  "Rename interface 'T' to match camel case naming rules, consider using 'IT'.",
-"location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Event\EventStreamSpec.cs",
-"region":  {
-"startLine":  49,
-"startColumn":  27,
-"endLine":  49,
-"endColumn":  28
-}
-}
-},
-{
-"id":  "S101",
 "message":  "Rename interface 'AT' to match camel case naming rules, consider using 'IAt'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Tests\Event\EventStreamSpec.cs",
@@ -140,19 +114,6 @@
 "startColumn":  27,
 "endLine":  57,
 "endColumn":  30
-}
-}
-},
-{
-"id":  "S101",
-"message":  "Rename class 'CC' to match camel case naming rules, consider using 'Cc'.",
-"location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Event\EventStreamSpec.cs",
-"region":  {
-"startLine":  59,
-"startColumn":  23,
-"endLine":  59,
-"endColumn":  25
 }
 }
 },
