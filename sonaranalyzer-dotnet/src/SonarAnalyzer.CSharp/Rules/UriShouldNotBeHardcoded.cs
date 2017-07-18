@@ -133,9 +133,9 @@ namespace SonarAnalyzer.Rules.CSharp
                     : null;
 
                 return (methodSymbol != null && argumentIndex.Value < methodSymbol.Parameters.Length)
-                    ? methodSymbol.Parameters[argumentIndex.Value].Name.SplitCamelCaseToWords()
-                        .Any(name => checkedVariableNames.Contains(name))
-                    : false;
+                     ? methodSymbol.Parameters[argumentIndex.Value].Name.SplitCamelCaseToWords()
+                         .Any(name => checkedVariableNames.Contains(name))
+                     : false;
             }
 
             var variableDeclarator = expression.FirstAncestorOrSelf<VariableDeclaratorSyntax>();

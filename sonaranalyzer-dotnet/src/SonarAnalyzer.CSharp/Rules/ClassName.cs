@@ -20,6 +20,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -27,7 +28,6 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
-using System.Collections.Immutable;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -68,7 +68,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
 
                     string suggestion;
-                    if (TryGetChangedName(identifier.ValueText, typeDeclaration, c.SemanticModel.Compilation.IsTest(), out suggestion))
+                    if (TryGetChangedName(identifier.ValueText, typeDeclaration, c.IsTest(), out suggestion))
                     {
                         var messageEnding = string.Format(MessageFormatNonUnderscore, suggestion);
                         c.ReportDiagnostic(Diagnostic.Create(rule, identifier.GetLocation(),

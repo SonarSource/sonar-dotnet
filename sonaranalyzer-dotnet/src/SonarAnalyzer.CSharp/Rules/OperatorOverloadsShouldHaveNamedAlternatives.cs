@@ -108,7 +108,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 var operatorAlternativeMethodName = operatorAlternatives.GetValueOrDefault(operatorSymbol.Name);
                 var operatorName = operatorNames.GetValueOrDefault(operatorSymbol.Name);
-                if (operatorName != null && 
+                if (operatorName != null &&
                     !HasAlternativeMethod(operatorSymbol, operatorAlternativeMethodName))
                 {
                     c.ReportDiagnostic(Diagnostic.Create(rule, operatorDeclaration.OperatorToken.GetLocation(),

@@ -18,15 +18,15 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
+using System.Collections.Immutable;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
-using System.Collections.Generic;
-using System.Collections.Immutable;
-using System.Linq;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -204,7 +204,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 .OfType<InvocationExpressionSyntax>()
                 .Select(i => semanticModel.GetSymbolInfo(i).Symbol)
                 .OfType<IMethodSymbol>()
-                .Any(m => m.ContainingType.Equals(methodSymbol.ContainingType.BaseType) && 
+                .Any(m => m.ContainingType.Equals(methodSymbol.ContainingType.BaseType) &&
                           m.IsGetObjectData());
         }
 
@@ -238,7 +238,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool IsOrImplementsISerializable(ITypeSymbol typeSymbol)
         {
-            return typeSymbol.Is(KnownType.System_Runtime_Serialization_ISerializable) || 
+            return typeSymbol.Is(KnownType.System_Runtime_Serialization_ISerializable) ||
                 typeSymbol.Implements(KnownType.System_Runtime_Serialization_ISerializable);
         }
     }

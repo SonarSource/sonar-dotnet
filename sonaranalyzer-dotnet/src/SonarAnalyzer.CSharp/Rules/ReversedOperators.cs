@@ -57,7 +57,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var previousSpan = previousToken.GetLocation().GetLineSpan();
                     var nextSpan = nextToken.GetLocation().GetLineSpan();
 
-                    if (previousToken.IsKind(SyntaxKind.EqualsToken) && 
+                    if (previousToken.IsKind(SyntaxKind.EqualsToken) &&
                         TiedTogether(previousSpan, operatorSpan) &&
                         !(operatorToken.IsKind(SyntaxKind.MinusToken) && TiedTogether(operatorSpan, nextSpan)))
                     {
