@@ -205,7 +205,7 @@ namespace SonarAnalyzer.Rules.CSharp
             return methodSymbol.ContainingType
                 .GetMembers(methodSymbol.Name)
                 .OfType<IMethodSymbol>()
-                .Where(m => m.Parameters.Count() == methodSymbol.Parameters.Count())
+                .Where(m => m.Parameters.Length == methodSymbol.Parameters.Length)
                 .Where(m => !Equals(m, methodSymbol));
         }
 

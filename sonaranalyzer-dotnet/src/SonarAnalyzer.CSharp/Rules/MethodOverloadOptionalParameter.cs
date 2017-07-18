@@ -142,7 +142,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool IsMoreParameterAvailableInConflicting(ParameterHidingMethodInfo hidingInfo)
         {
             return hidingInfo.HiddenMethod.Parameters.IndexOf(hidingInfo.ParameterToReportOn) <
-                hidingInfo.HiddenMethod.Parameters.Count() - 1;
+                hidingInfo.HiddenMethod.Parameters.Length - 1;
         }
 
         private static bool IsMethodHidingOriginal(IMethodSymbol candidateHidingMethod, IMethodSymbol method)
