@@ -77,7 +77,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 .Zip(expectedParameters, (actual, expected) => new { actual, expected })
                 .Where(x => x.actual.Identifier.ValueText != x.expected.Name)
                 .ToList()
-                .ForEach(x => 
+                .ForEach(x =>
                 {
                     context.ReportDiagnostic(Diagnostic.Create(rule,
                         x.actual.Identifier.GetLocation(),

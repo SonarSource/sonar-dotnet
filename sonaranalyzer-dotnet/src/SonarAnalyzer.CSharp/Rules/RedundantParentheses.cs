@@ -19,6 +19,7 @@
  */
 
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -27,7 +28,6 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Text;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
-using System.Collections.Immutable;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -84,10 +84,10 @@ namespace SonarAnalyzer.Rules.CSharp
                             .Skip(1)
                             .First(); // There are always at least two parenthesized expressions
 
-                        var location = Location.Create(expression.SyntaxTree, 
+                        var location = Location.Create(expression.SyntaxTree,
                             GetSpan(expression.OpenParenToken, innermostExpression.OpenParenToken));
 
-                        var secondaryLocation = Location.Create(expression.SyntaxTree, 
+                        var secondaryLocation = Location.Create(expression.SyntaxTree,
                             GetSpan(innermostExpression.CloseParenToken, expression.CloseParenToken));
 
                         c.ReportDiagnostic(

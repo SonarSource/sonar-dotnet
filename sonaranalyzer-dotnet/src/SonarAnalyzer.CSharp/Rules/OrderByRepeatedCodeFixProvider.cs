@@ -19,12 +19,12 @@
  */
 
 using System.Collections.Immutable;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CodeFixes;
-using System.Threading.Tasks;
 using System.Linq;
-using Microsoft.CodeAnalysis.CodeActions;
 using System.Threading;
+using System.Threading.Tasks;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CodeActions;
+using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.CSharp;
 using SonarAnalyzer.Helpers;
 

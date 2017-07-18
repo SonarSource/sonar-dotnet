@@ -19,13 +19,13 @@
  */
 
 using System.Collections.Immutable;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CodeFixes;
-using System.Threading.Tasks;
 using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CodeActions;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Formatting;
 using SonarAnalyzer.Helpers;
 
@@ -68,7 +68,8 @@ namespace SonarAnalyzer.Rules.CSharp
             return TaskHelper.CompletedTask;
         }
 
-        private static bool TryGetNewRoot(SyntaxNode root, Diagnostic diagnostic, InvocationExpressionSyntax invocation, BinaryExpressionSyntax binary, out SyntaxNode newRoot)
+        private static bool TryGetNewRoot(SyntaxNode root, Diagnostic diagnostic, InvocationExpressionSyntax invocation,
+            BinaryExpressionSyntax binary, out SyntaxNode newRoot)
         {
             newRoot = null;
             if (invocation != null)
@@ -104,7 +105,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxHelper.NullLiteralExpression);
         }
 
-        private static SyntaxNode ChangeInvocation(SyntaxNode root, Diagnostic diagnostic, InvocationExpressionSyntax invocation)
+        private static SyntaxNode ChangeInvocation(SyntaxNode root, Diagnostic diagnostic,
+            InvocationExpressionSyntax invocation)
         {
             var useIsOperator = bool.Parse(diagnostic.Properties[GetTypeWithIsAssignableFrom.UseIsOperatorKey]);
             var shouldRemoveGetType = bool.Parse(diagnostic.Properties[GetTypeWithIsAssignableFrom.ShouldRemoveGetType]);
@@ -154,7 +156,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 .WithAdditionalAnnotations(Formatter.Annotation);
         }
 
-        private static bool TryGetAsOperatorComparisonToNull(BinaryExpressionSyntax binary, out BinaryExpressionSyntax asExpression)
+        private static bool TryGetAsOperatorComparisonToNull(BinaryExpressionSyntax binary,
+            out BinaryExpressionSyntax asExpression)
         {
             var left = binary.Left.RemoveParentheses();
 
@@ -165,7 +168,8 @@ namespace SonarAnalyzer.Rules.CSharp
             return asExpression != null;
         }
 
-        private static bool TryGetTypeOfComparison(BinaryExpressionSyntax binary, out TypeOfExpressionSyntax typeofExpression, out ExpressionSyntax getTypeSide)
+        private static bool TryGetTypeOfComparison(BinaryExpressionSyntax binary,
+            out TypeOfExpressionSyntax typeofExpression, out ExpressionSyntax getTypeSide)
         {
             typeofExpression = binary.Left as TypeOfExpressionSyntax;
             getTypeSide = binary.Right;

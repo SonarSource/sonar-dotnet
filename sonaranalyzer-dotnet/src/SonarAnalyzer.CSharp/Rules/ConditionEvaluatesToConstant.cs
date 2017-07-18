@@ -194,20 +194,15 @@ namespace SonarAnalyzer.Rules.CSharp
                     : node.Parent) // Constant node is the only expression in an if statement condition
                 .FirstOrDefault();
 
-            if (constantValue)
-            {
-                return (SyntaxNode)
+            return constantValue
+                ? (SyntaxNode)
                     (parent as ConditionalExpressionSyntax)?.WhenFalse ??
-                    (parent as IfStatementSyntax)?.Else?.Statement;
-            }
-            else
-            {
-                return (SyntaxNode)
+                    (parent as IfStatementSyntax)?.Else?.Statement
+                : (SyntaxNode)
                     (parent as ConditionalExpressionSyntax)?.WhenTrue ??
                     (parent as IfStatementSyntax)?.Statement ??
                     (parent as WhileStatementSyntax)?.Statement ??
                     (parent as DoStatementSyntax)?.Statement;
-            }
         }
 
         private static IEnumerable<ExpressionSyntax> GetUnreachableExpressions(SyntaxNode constantExpression, bool constantValue)

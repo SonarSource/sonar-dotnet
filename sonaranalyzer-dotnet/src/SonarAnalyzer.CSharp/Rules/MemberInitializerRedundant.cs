@@ -33,9 +33,9 @@ using SonarAnalyzer.Helpers.FlowAnalysis.CSharp;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
-    using SymbolWithInitializer = KeyValuePair<ISymbol, EqualsValueClauseSyntax>;
-    using CtorDeclarationTuple = SyntaxNodeSymbolSemanticModelTuple<ConstructorDeclarationSyntax, IMethodSymbol>;
     using System.Collections.Immutable;
+    using CtorDeclarationTuple = SyntaxNodeSymbolSemanticModelTuple<ConstructorDeclarationSyntax, IMethodSymbol>;
+    using SymbolWithInitializer = KeyValuePair<ISymbol, EqualsValueClauseSyntax>;
 
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]

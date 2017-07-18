@@ -18,13 +18,13 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
-using System.Collections.Immutable;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -60,8 +60,8 @@ namespace SonarAnalyzer.Rules.CSharp
                         var additionalLocations = new[] { parentIfStatment.IfKeyword.GetLocation() };
 
                         c.ReportDiagnostic(Diagnostic.Create(
-                            rule, 
-                            ifStatement.IfKeyword.GetLocation(), 
+                            rule,
+                            ifStatement.IfKeyword.GetLocation(),
                             additionalLocations: additionalLocations));
                     }
                 },

@@ -122,7 +122,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     newProgramState = ProcessDisposableSymbol(newProgramState, disposable.SyntaxNode, disposable.Symbol);
                 }
 
-                newProgramState = ProcessStreamDisposingTypes(newProgramState, 
+                newProgramState = ProcessStreamDisposingTypes(newProgramState,
                     (SyntaxNode)usingFinalizer.UsingStatement.Expression ?? usingFinalizer.UsingStatement.Declaration);
 
                 return newProgramState;

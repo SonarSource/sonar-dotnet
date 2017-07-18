@@ -20,9 +20,8 @@
 
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
-using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Common;
-using System.Collections.Immutable;
+using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
