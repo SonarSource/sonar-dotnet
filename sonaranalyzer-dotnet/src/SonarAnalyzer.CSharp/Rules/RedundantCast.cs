@@ -167,7 +167,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             var collectionType = semanticModel.GetTypeInfo(collection).Type as INamedTypeSymbol;
             if (collectionType != null &&
-                collectionType.TypeArguments.Count() == 1)
+                collectionType.TypeArguments.Length == 1)
             {
                 return collectionType.TypeArguments.First();
             }

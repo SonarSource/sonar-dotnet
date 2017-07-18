@@ -452,7 +452,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     {
                         return false;
                     }
-                    return namedType.TypeArguments.Count() == 2;
+                    return namedType.TypeArguments.Length == 2;
                 }))
             {
                 context.ReportDiagnostic(Diagnostic.Create(rule, GetReportLocation(innerInvocation),

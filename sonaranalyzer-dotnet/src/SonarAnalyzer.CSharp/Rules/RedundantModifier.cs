@@ -265,7 +265,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             if (classSymbol == null ||
                 !classDeclaration.Modifiers.Any(m => m.IsKind(SyntaxKind.PartialKeyword)) ||
-                classSymbol.DeclaringSyntaxReferences.Count() > 1)
+                classSymbol.DeclaringSyntaxReferences.Length > 1)
             {
                 return;
             }

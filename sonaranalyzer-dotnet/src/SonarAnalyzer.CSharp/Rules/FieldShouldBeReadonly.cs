@@ -77,7 +77,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    if (declaredSymbol.DeclaringSyntaxReferences.Count() > 1)
+                    if (declaredSymbol.DeclaringSyntaxReferences.Length > 1)
                     {
                         // Partial classes are not processed.
                         // See https://github.com/dotnet/roslyn/issues/3748
