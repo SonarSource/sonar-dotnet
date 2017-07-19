@@ -792,6 +792,87 @@ namespace SonarAnalyzer {
         /// <summary>
         ///   Looks up a localized string similar to Sonar Code Smell.
         /// </summary>
+        internal static string S1075_Category {
+            get {
+                return ResourceManager.GetString("S1075_Category", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hardcoding a URI makes it difficult to test a program: path literals are not always portable across operating systems, a given absolute path may not exist on a specific test environment, a specified Internet URL may not be available when executing the tests, production environment filesystems usually differ from the development environment, ...etc. For all those reasons, a URI should never be hardcoded. Instead, it should be replaced by customizable parameter..
+        /// </summary>
+        internal static string S1075_Description {
+            get {
+                return ResourceManager.GetString("S1075_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to True.
+        /// </summary>
+        internal static string S1075_IsActivatedByDefault {
+            get {
+                return ResourceManager.GetString("S1075_IsActivatedByDefault", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Constant/Issue.
+        /// </summary>
+        internal static string S1075_Remediation {
+            get {
+                return ResourceManager.GetString("S1075_Remediation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 20min.
+        /// </summary>
+        internal static string S1075_RemediationCost {
+            get {
+                return ResourceManager.GetString("S1075_RemediationCost", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Minor.
+        /// </summary>
+        internal static string S1075_Severity {
+            get {
+                return ResourceManager.GetString("S1075_Severity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to cert.
+        /// </summary>
+        internal static string S1075_Tags {
+            get {
+                return ResourceManager.GetString("S1075_Tags", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to URIs should not be hardcoded.
+        /// </summary>
+        internal static string S1075_Title {
+            get {
+                return ResourceManager.GetString("S1075_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CODE_SMELL.
+        /// </summary>
+        internal static string S1075_Type {
+            get {
+                return ResourceManager.GetString("S1075_Type", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sonar Code Smell.
+        /// </summary>
         internal static string S108_Category {
             get {
                 return ResourceManager.GetString("S108_Category", resourceCulture);
@@ -2370,6 +2451,87 @@ namespace SonarAnalyzer {
         internal static string S1186_Type {
             get {
                 return ResourceManager.GetString("S1186_Type", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sonar Code Smell.
+        /// </summary>
+        internal static string S1200_Category {
+            get {
+                return ResourceManager.GetString("S1200_Category", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to According to the Single Responsibility Principle, introduced by Robert C. Martin in his book &quot;Principles of Object Oriented Design&quot;, a class should have only one responsibility:.
+        /// </summary>
+        internal static string S1200_Description {
+            get {
+                return ResourceManager.GetString("S1200_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to False.
+        /// </summary>
+        internal static string S1200_IsActivatedByDefault {
+            get {
+                return ResourceManager.GetString("S1200_IsActivatedByDefault", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Constant/Issue.
+        /// </summary>
+        internal static string S1200_Remediation {
+            get {
+                return ResourceManager.GetString("S1200_Remediation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 2h.
+        /// </summary>
+        internal static string S1200_RemediationCost {
+            get {
+                return ResourceManager.GetString("S1200_RemediationCost", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Major.
+        /// </summary>
+        internal static string S1200_Severity {
+            get {
+                return ResourceManager.GetString("S1200_Severity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to brain-overload.
+        /// </summary>
+        internal static string S1200_Tags {
+            get {
+                return ResourceManager.GetString("S1200_Tags", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Classes should not be coupled to too many other classes (Single Responsibility Principle).
+        /// </summary>
+        internal static string S1200_Title {
+            get {
+                return ResourceManager.GetString("S1200_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CODE_SMELL.
+        /// </summary>
+        internal static string S1200_Type {
+            get {
+                return ResourceManager.GetString("S1200_Type", resourceCulture);
             }
         }
         
@@ -6721,7 +6883,7 @@ namespace SonarAnalyzer {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to cwe.
+        ///   Looks up a localized string similar to cwe,cert.
         /// </summary>
         internal static string S2225_Tags {
             get {
@@ -12580,6 +12742,87 @@ namespace SonarAnalyzer {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sonar Code Smell.
+        /// </summary>
+        internal static string S3242_Category {
+            get {
+                return ResourceManager.GetString("S3242_Category", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to When a derived type is used as a parameter instead of the base type, it limits the uses of the method. If the additional functionality that is provided in the derived type is not requires then that limitation isn&apos;t required, and should be removed..
+        /// </summary>
+        internal static string S3242_Description {
+            get {
+                return ResourceManager.GetString("S3242_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to True.
+        /// </summary>
+        internal static string S3242_IsActivatedByDefault {
+            get {
+                return ResourceManager.GetString("S3242_IsActivatedByDefault", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Constant/Issue.
+        /// </summary>
+        internal static string S3242_Remediation {
+            get {
+                return ResourceManager.GetString("S3242_Remediation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 5min.
+        /// </summary>
+        internal static string S3242_RemediationCost {
+            get {
+                return ResourceManager.GetString("S3242_RemediationCost", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Minor.
+        /// </summary>
+        internal static string S3242_Severity {
+            get {
+                return ResourceManager.GetString("S3242_Severity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to api-design.
+        /// </summary>
+        internal static string S3242_Tags {
+            get {
+                return ResourceManager.GetString("S3242_Tags", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Method parameters should be declared with base types.
+        /// </summary>
+        internal static string S3242_Title {
+            get {
+                return ResourceManager.GetString("S3242_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CODE_SMELL.
+        /// </summary>
+        internal static string S3242_Type {
+            get {
+                return ResourceManager.GetString("S3242_Type", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sonar Bug.
         /// </summary>
         internal static string S3244_Category {
@@ -15982,6 +16225,87 @@ namespace SonarAnalyzer {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sonar Vulnerability.
+        /// </summary>
+        internal static string S3649_Category {
+            get {
+                return ResourceManager.GetString("S3649_Category", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Applications that execute SQL commands should neutralize any externally-provided values used in those commands. Failure to do so could allow an attacker to include input that changes the query so that unintended commands are executed, or sensitive data is exposed..
+        /// </summary>
+        internal static string S3649_Description {
+            get {
+                return ResourceManager.GetString("S3649_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to True.
+        /// </summary>
+        internal static string S3649_IsActivatedByDefault {
+            get {
+                return ResourceManager.GetString("S3649_IsActivatedByDefault", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Constant/Issue.
+        /// </summary>
+        internal static string S3649_Remediation {
+            get {
+                return ResourceManager.GetString("S3649_Remediation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 20min.
+        /// </summary>
+        internal static string S3649_RemediationCost {
+            get {
+                return ResourceManager.GetString("S3649_RemediationCost", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Blocker.
+        /// </summary>
+        internal static string S3649_Severity {
+            get {
+                return ResourceManager.GetString("S3649_Severity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to cwe,owasp-a1,sans-top25-insecure,cert,sql.
+        /// </summary>
+        internal static string S3649_Tags {
+            get {
+                return ResourceManager.GetString("S3649_Tags", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User-provided values should be sanitized before use in SQL statements.
+        /// </summary>
+        internal static string S3649_Title {
+            get {
+                return ResourceManager.GetString("S3649_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to VULNERABILITY.
+        /// </summary>
+        internal static string S3649_Type {
+            get {
+                return ResourceManager.GetString("S3649_Type", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sonar Bug.
         /// </summary>
         internal static string S3655_Category {
@@ -17361,6 +17685,87 @@ namespace SonarAnalyzer {
         /// <summary>
         ///   Looks up a localized string similar to Sonar Code Smell.
         /// </summary>
+        internal static string S3900_Category {
+            get {
+                return ResourceManager.GetString("S3900_Category", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A public method can be called from anywhere, which means you should validate parameters to be within the expected constraints. In general, checking against null is recommended defensive programming..
+        /// </summary>
+        internal static string S3900_Description {
+            get {
+                return ResourceManager.GetString("S3900_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to False.
+        /// </summary>
+        internal static string S3900_IsActivatedByDefault {
+            get {
+                return ResourceManager.GetString("S3900_IsActivatedByDefault", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Constant/Issue.
+        /// </summary>
+        internal static string S3900_Remediation {
+            get {
+                return ResourceManager.GetString("S3900_Remediation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 5min.
+        /// </summary>
+        internal static string S3900_RemediationCost {
+            get {
+                return ResourceManager.GetString("S3900_RemediationCost", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Major.
+        /// </summary>
+        internal static string S3900_Severity {
+            get {
+                return ResourceManager.GetString("S3900_Severity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to convention.
+        /// </summary>
+        internal static string S3900_Tags {
+            get {
+                return ResourceManager.GetString("S3900_Tags", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Arguments of public methods should be validated against null.
+        /// </summary>
+        internal static string S3900_Title {
+            get {
+                return ResourceManager.GetString("S3900_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CODE_SMELL.
+        /// </summary>
+        internal static string S3900_Type {
+            get {
+                return ResourceManager.GetString("S3900_Type", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sonar Code Smell.
+        /// </summary>
         internal static string S3902_Category {
             get {
                 return ResourceManager.GetString("S3902_Category", resourceCulture);
@@ -18408,6 +18813,87 @@ namespace SonarAnalyzer {
         internal static string S3963_Type {
             get {
                 return ResourceManager.GetString("S3963_Type", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sonar Code Smell.
+        /// </summary>
+        internal static string S3966_Category {
+            get {
+                return ResourceManager.GetString("S3966_Category", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A proper implementation of IDisposable.Dispose should allow for it to be called multiple times on the same object, however this is not guaranteed and could result in an exception being thrown..
+        /// </summary>
+        internal static string S3966_Description {
+            get {
+                return ResourceManager.GetString("S3966_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to True.
+        /// </summary>
+        internal static string S3966_IsActivatedByDefault {
+            get {
+                return ResourceManager.GetString("S3966_IsActivatedByDefault", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Constant/Issue.
+        /// </summary>
+        internal static string S3966_Remediation {
+            get {
+                return ResourceManager.GetString("S3966_Remediation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 10min.
+        /// </summary>
+        internal static string S3966_RemediationCost {
+            get {
+                return ResourceManager.GetString("S3966_RemediationCost", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Critical.
+        /// </summary>
+        internal static string S3966_Severity {
+            get {
+                return ResourceManager.GetString("S3966_Severity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to pitfall.
+        /// </summary>
+        internal static string S3966_Tags {
+            get {
+                return ResourceManager.GetString("S3966_Tags", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Objects should not be disposed more than once.
+        /// </summary>
+        internal static string S3966_Title {
+            get {
+                return ResourceManager.GetString("S3966_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CODE_SMELL.
+        /// </summary>
+        internal static string S3966_Type {
+            get {
+                return ResourceManager.GetString("S3966_Type", resourceCulture);
             }
         }
         
@@ -21231,6 +21717,87 @@ namespace SonarAnalyzer {
         /// <summary>
         ///   Looks up a localized string similar to Sonar Code Smell.
         /// </summary>
+        internal static string S4055_Category {
+            get {
+                return ResourceManager.GetString("S4055_Category", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to String literals embedded in the source code will not be localized properly..
+        /// </summary>
+        internal static string S4055_Description {
+            get {
+                return ResourceManager.GetString("S4055_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to False.
+        /// </summary>
+        internal static string S4055_IsActivatedByDefault {
+            get {
+                return ResourceManager.GetString("S4055_IsActivatedByDefault", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Constant/Issue.
+        /// </summary>
+        internal static string S4055_Remediation {
+            get {
+                return ResourceManager.GetString("S4055_Remediation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 10min.
+        /// </summary>
+        internal static string S4055_RemediationCost {
+            get {
+                return ResourceManager.GetString("S4055_RemediationCost", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Major.
+        /// </summary>
+        internal static string S4055_Severity {
+            get {
+                return ResourceManager.GetString("S4055_Severity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to localisation,pitfall.
+        /// </summary>
+        internal static string S4055_Tags {
+            get {
+                return ResourceManager.GetString("S4055_Tags", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Literals should not be passed as localized parameters.
+        /// </summary>
+        internal static string S4055_Title {
+            get {
+                return ResourceManager.GetString("S4055_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CODE_SMELL.
+        /// </summary>
+        internal static string S4055_Type {
+            get {
+                return ResourceManager.GetString("S4055_Type", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sonar Code Smell.
+        /// </summary>
         internal static string S4056_Category {
             get {
                 return ResourceManager.GetString("S4056_Category", resourceCulture);
@@ -21306,6 +21873,87 @@ namespace SonarAnalyzer {
         internal static string S4056_Type {
             get {
                 return ResourceManager.GetString("S4056_Type", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sonar Code Smell.
+        /// </summary>
+        internal static string S4057_Category {
+            get {
+                return ResourceManager.GetString("S4057_Category", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to When you create a DataTable or DataSet, you should set the locale explicitly. By default, the locale for these types is the current culture. For data that is stored in a database or file and is shared globally, the locale should ordinarily be set to the invariant culture (CultureInfo.InvariantCulture)..
+        /// </summary>
+        internal static string S4057_Description {
+            get {
+                return ResourceManager.GetString("S4057_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to False.
+        /// </summary>
+        internal static string S4057_IsActivatedByDefault {
+            get {
+                return ResourceManager.GetString("S4057_IsActivatedByDefault", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Constant/Issue.
+        /// </summary>
+        internal static string S4057_Remediation {
+            get {
+                return ResourceManager.GetString("S4057_Remediation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 5min.
+        /// </summary>
+        internal static string S4057_RemediationCost {
+            get {
+                return ResourceManager.GetString("S4057_RemediationCost", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Major.
+        /// </summary>
+        internal static string S4057_Severity {
+            get {
+                return ResourceManager.GetString("S4057_Severity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to localisation.
+        /// </summary>
+        internal static string S4057_Tags {
+            get {
+                return ResourceManager.GetString("S4057_Tags", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Locales should be set for data types.
+        /// </summary>
+        internal static string S4057_Title {
+            get {
+                return ResourceManager.GetString("S4057_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CODE_SMELL.
+        /// </summary>
+        internal static string S4057_Type {
+            get {
+                return ResourceManager.GetString("S4057_Type", resourceCulture);
             }
         }
         
