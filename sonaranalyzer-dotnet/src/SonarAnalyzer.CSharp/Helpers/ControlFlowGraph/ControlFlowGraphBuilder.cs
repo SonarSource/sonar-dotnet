@@ -48,8 +48,6 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.CSharp
         protected override void PostProcessGraph()
         {
             FixJumps(GotoJumpBlocks, LabeledStatements.ToDictionary(e => e.Key, e => (Block)e.Value));
-
-            base.PostProcessGraph();
         }
 
         private void FixJumps<TLabel>(Dictionary<TLabel, List<JumpBlock>> jumpsToFix,
@@ -74,123 +72,106 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.CSharp
 
         #region Top level Build*
 
-        protected override void Build(SyntaxNode node)
+        protected override Block Build(SyntaxNode node, Block currentBlock)
         {
             var statement = node as StatementSyntax;
             if (statement != null)
             {
-                BuildStatement(statement);
-                return;
+                return BuildStatement(statement, currentBlock);
             }
             var expression = node as ExpressionSyntax;
             if (expression != null)
             {
-                BuildExpression(expression);
-                return;
+                return BuildExpression(expression, currentBlock);
             }
 
             throw new ArgumentException("Neither a statement, nor an expression", nameof(node));
         }
 
-        private void BuildStatement(StatementSyntax statement)
+        private Block BuildStatement(StatementSyntax statement, Block currentBlock)
         {
             switch (statement.Kind())
             {
                 case SyntaxKind.Block:
-                    BuildBlock((BlockSyntax)statement);
-                    break;
+                    return BuildBlock((BlockSyntax)statement, currentBlock);
+
                 case SyntaxKind.ExpressionStatement:
-                    BuildExpression(((ExpressionStatementSyntax)statement).Expression);
-                    break;
+                    return BuildExpression(((ExpressionStatementSyntax)statement).Expression, currentBlock);
+
                 case SyntaxKind.LocalDeclarationStatement:
-                    BuildVariableDeclaration(((LocalDeclarationStatementSyntax)statement).Declaration);
-                    break;
+                    return BuildVariableDeclaration(((LocalDeclarationStatementSyntax)statement).Declaration, currentBlock);
 
                 case SyntaxKind.IfStatement:
-                    BuildIfStatement((IfStatementSyntax)statement);
-                    break;
+                    return BuildIfStatement((IfStatementSyntax)statement, currentBlock);
+
                 case SyntaxKind.WhileStatement:
-                    BuildWhileStatement((WhileStatementSyntax)statement);
-                    break;
+                    return BuildWhileStatement((WhileStatementSyntax)statement, currentBlock);
+
                 case SyntaxKind.DoStatement:
-                    BuildDoStatement((DoStatementSyntax)statement);
-                    break;
+                    return BuildDoStatement((DoStatementSyntax)statement, currentBlock);
+
                 case SyntaxKind.ForStatement:
-                    BuildForStatement((ForStatementSyntax)statement);
-                    break;
+                    return BuildForStatement((ForStatementSyntax)statement, currentBlock);
+
                 case SyntaxKind.ForEachStatement:
-                    BuildForEachStatement((ForEachStatementSyntax)statement);
-                    break;
+                    return BuildForEachStatement((ForEachStatementSyntax)statement, currentBlock);
 
                 case SyntaxKind.LockStatement:
-                    BuildLockStatement((LockStatementSyntax)statement);
-                    break;
+                    return BuildLockStatement((LockStatementSyntax)statement, currentBlock);
+
                 case SyntaxKind.UsingStatement:
-                    BuildUsingStatement((UsingStatementSyntax)statement);
-                    break;
+                    return BuildUsingStatement((UsingStatementSyntax)statement, currentBlock);
+
                 case SyntaxKind.FixedStatement:
-                    BuildFixedStatement((FixedStatementSyntax)statement);
-                    break;
+                    return BuildFixedStatement((FixedStatementSyntax)statement, currentBlock);
+
                 case SyntaxKind.UncheckedStatement:
                 case SyntaxKind.CheckedStatement:
-                    BuildCheckedStatement(statement);
-                    break;
+                    return BuildCheckedStatement((CheckedStatementSyntax)statement, currentBlock);
+
                 case SyntaxKind.UnsafeStatement:
-                    BuildUnsafeStatement(statement);
-                    break;
+                    return BuildUnsafeStatement((UnsafeStatementSyntax)statement, currentBlock);
 
                 case SyntaxKind.ReturnStatement:
-                    BuildReturnStatement((ReturnStatementSyntax)statement);
-                    break;
+                    return BuildReturnStatement((ReturnStatementSyntax)statement, currentBlock);
+
                 case SyntaxKind.YieldBreakStatement:
-                    BuildYieldBreakStatement((YieldStatementSyntax)statement);
-                    break;
+                    return BuildYieldBreakStatement((YieldStatementSyntax)statement, currentBlock);
+
                 case SyntaxKind.ThrowStatement:
-                    BuildThrowStatement((ThrowStatementSyntax)statement);
-                    break;
+                    return BuildThrowStatement((ThrowStatementSyntax)statement, currentBlock);
 
                 case SyntaxKind.YieldReturnStatement:
-                    {
                         // A JumpBlock could be used, just to mark that something special is happening here.
                         // But for the time being we wouldn't do anything with that information.
-                        var yieldReturn = (YieldStatementSyntax)statement;
-                        BuildExpression(yieldReturn.Expression);
-                    }
-                    break;
+                    return BuildExpression(((YieldStatementSyntax)statement).Expression, currentBlock);
 
                 case SyntaxKind.EmptyStatement:
-                    break;
+                    return currentBlock;
 
                 case SyntaxKind.BreakStatement:
-                    BuildBreakStatement((BreakStatementSyntax)statement);
-                    break;
+                    return BuildBreakStatement((BreakStatementSyntax)statement, currentBlock);
+
                 case SyntaxKind.ContinueStatement:
-                    BuildContinueStatement((ContinueStatementSyntax)statement);
-                    break;
+                    return BuildContinueStatement((ContinueStatementSyntax)statement, currentBlock);
 
                 case SyntaxKind.SwitchStatement:
-                    BuildSwitchStatement((SwitchStatementSyntax)statement);
-                    break;
+                    return BuildSwitchStatement((SwitchStatementSyntax)statement, currentBlock);
 
                 case SyntaxKind.GotoCaseStatement:
-                    BuildGotoCaseStatement((GotoStatementSyntax)statement);
-                    break;
-                case SyntaxKind.GotoDefaultStatement:
-                    BuildGotoDefaultStatement((GotoStatementSyntax)statement);
-                    break;
+                    return BuildGotoCaseStatement((GotoStatementSyntax)statement, currentBlock);
 
+                case SyntaxKind.GotoDefaultStatement:
+                    return BuildGotoDefaultStatement((GotoStatementSyntax)statement, currentBlock);
 
                 case SyntaxKind.GotoStatement:
-                    BuildGotoStatement((GotoStatementSyntax)statement);
-                    break;
+                    return BuildGotoStatement((GotoStatementSyntax)statement, currentBlock);
 
                 case SyntaxKind.LabeledStatement:
-                    BuildLabeledStatement((LabeledStatementSyntax)statement);
-                    break;
+                    return BuildLabeledStatement((LabeledStatementSyntax)statement, currentBlock);
 
                 case SyntaxKind.TryStatement:
-                    BuildTryStatement((TryStatementSyntax)statement);
-                    break;
+                    return BuildTryStatement((TryStatementSyntax)statement, currentBlock);
 
                 case SyntaxKind.GlobalStatement:
                     throw new NotSupportedException($"{statement.Kind()}");
@@ -200,18 +181,17 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.CSharp
             }
         }
 
-        private void BuildExpression(ExpressionSyntax expression)
+        private Block BuildExpression(ExpressionSyntax expression, Block currentBlock)
         {
             if (expression == null)
             {
-                return;
+                return currentBlock;
             }
 
             switch (expression.Kind())
             {
                 case SyntaxKind.SimpleAssignmentExpression:
-                    BuildSimpleAssignmentExpression((AssignmentExpressionSyntax)expression);
-                    break;
+                    return BuildSimpleAssignmentExpression((AssignmentExpressionSyntax)expression, currentBlock);
 
                 case SyntaxKind.OrAssignmentExpression:
                 case SyntaxKind.AndAssignmentExpression:
@@ -225,8 +205,7 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.CSharp
 
                 case SyntaxKind.LeftShiftAssignmentExpression:
                 case SyntaxKind.RightShiftAssignmentExpression:
-                    BuildAssignmentExpression((AssignmentExpressionSyntax)expression);
-                    break;
+                    return BuildAssignmentExpression((AssignmentExpressionSyntax)expression, currentBlock);
 
                 case SyntaxKind.LessThanExpression:
                 case SyntaxKind.LessThanOrEqualExpression:
@@ -247,8 +226,7 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.CSharp
 
                 case SyntaxKind.LeftShiftExpression:
                 case SyntaxKind.RightShiftExpression:
-                    BuildBinaryExpression((BinaryExpressionSyntax)expression);
-                    break;
+                    return BuildBinaryExpression((BinaryExpressionSyntax)expression, currentBlock);
 
                 case SyntaxKind.LogicalNotExpression:
                 case SyntaxKind.BitwiseNotExpression:
@@ -260,17 +238,15 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.CSharp
                 case SyntaxKind.PointerIndirectionExpression:
                     {
                         var parent = (PrefixUnaryExpressionSyntax)expression;
-                        BuildSimpleNestedExpression(parent, parent.Operand);
+                        return BuildSimpleNestedExpression(parent, currentBlock, parent.Operand);
                     }
-                    break;
 
                 case SyntaxKind.PostIncrementExpression:
                 case SyntaxKind.PostDecrementExpression:
                     {
                         var parent = (PostfixUnaryExpressionSyntax)expression;
-                        BuildSimpleNestedExpression(parent, parent.Operand);
+                        return BuildSimpleNestedExpression(parent, currentBlock, parent.Operand);
                     }
-                    break;
 
                 case SyntaxKind.IdentifierName:
                 case SyntaxKind.GenericName:
@@ -301,157 +277,141 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.CSharp
 
                 case SyntaxKind.ArgListExpression:
                     currentBlock.ReversedInstructions.Add(expression);
-                    break;
+                    return currentBlock;
 
                 case SyntaxKind.PointerType:
-                    BuildExpression(((PointerTypeSyntax)expression).ElementType);
-                    break;
+                    return BuildExpression(((PointerTypeSyntax)expression).ElementType, currentBlock);
 
                 case SyntaxKind.ParenthesizedExpression:
-                    BuildExpression(((ParenthesizedExpressionSyntax)expression).Expression);
-                    break;
+                    return BuildExpression(((ParenthesizedExpressionSyntax)expression).Expression, currentBlock);
 
                 case SyntaxKind.AwaitExpression:
                     {
                         var parent = (AwaitExpressionSyntax)expression;
-                        BuildSimpleNestedExpression(parent, parent.Expression);
+                        return BuildSimpleNestedExpression(parent, currentBlock, parent.Expression);
                     }
-                    break;
 
                 case SyntaxKind.CheckedExpression:
                 case SyntaxKind.UncheckedExpression:
                     {
                         var parent = (CheckedExpressionSyntax)expression;
-                        BuildSimpleNestedExpression(parent, parent.Expression);
+                        return BuildSimpleNestedExpression(parent, currentBlock, parent.Expression);
                     }
-                    break;
 
                 case SyntaxKind.AsExpression:
                 case SyntaxKind.IsExpression:
                     {
                         var parent = (BinaryExpressionSyntax)expression;
-                        BuildSimpleNestedExpression(parent, parent.Left);
+                        return BuildSimpleNestedExpression(parent, currentBlock, parent.Left);
                     }
-                    break;
+
                 case SyntaxKind.CastExpression:
                     {
                         var parent = (CastExpressionSyntax)expression;
-                        BuildSimpleNestedExpression(parent, parent.Expression);
+                        return BuildSimpleNestedExpression(parent, currentBlock, parent.Expression);
                     }
-                    break;
 
                 case SyntaxKind.InterpolatedStringExpression:
-                    BuildInterpolatedStringExpression((InterpolatedStringExpressionSyntax)expression);
-                    break;
+                    return BuildInterpolatedStringExpression((InterpolatedStringExpressionSyntax)expression, currentBlock);
+
 
                 case SyntaxKind.InvocationExpression:
-                    BuildInvocationExpression((InvocationExpressionSyntax)expression);
-                    break;
+                    return BuildInvocationExpression((InvocationExpressionSyntax)expression, currentBlock);
 
                 case SyntaxKind.AnonymousObjectCreationExpression:
-                    BuildAnonymousObjectCreationExpression((AnonymousObjectCreationExpressionSyntax)expression);
-                    break;
+                    return BuildAnonymousObjectCreationExpression((AnonymousObjectCreationExpressionSyntax)expression, currentBlock);
 
                 case SyntaxKind.ObjectCreationExpression:
-                    BuildObjectCreationExpression((ObjectCreationExpressionSyntax)expression);
-                    break;
+                    return BuildObjectCreationExpression((ObjectCreationExpressionSyntax)expression, currentBlock);
 
                 case SyntaxKind.ElementAccessExpression:
-                    BuildElementAccessExpression((ElementAccessExpressionSyntax)expression);
-                    break;
+                    return BuildElementAccessExpression((ElementAccessExpressionSyntax)expression, currentBlock);
+
                 case SyntaxKind.ImplicitElementAccess:
-                    BuildImplicitElementAccessExpression((ImplicitElementAccessSyntax)expression);
-                    break;
+                    return BuildImplicitElementAccessExpression((ImplicitElementAccessSyntax)expression, currentBlock);
 
                 case SyntaxKind.LogicalAndExpression:
-                    BuildLogicalAndExpression((BinaryExpressionSyntax)expression);
-                    break;
+                    return BuildLogicalAndExpression((BinaryExpressionSyntax)expression, currentBlock);
 
                 case SyntaxKind.LogicalOrExpression:
-                    BuildLogicalOrExpression((BinaryExpressionSyntax)expression);
-                    break;
+                    return BuildLogicalOrExpression((BinaryExpressionSyntax)expression, currentBlock);
 
                 case SyntaxKind.ArrayCreationExpression:
-                    BuildArrayCreationExpression((ArrayCreationExpressionSyntax)expression);
-                    break;
+                    return BuildArrayCreationExpression((ArrayCreationExpressionSyntax)expression, currentBlock);
+
                 case SyntaxKind.ImplicitArrayCreationExpression:
                     {
                         var parent = (ImplicitArrayCreationExpressionSyntax)expression;
-                        BuildExpression(parent.Initializer);
-                        currentBlock.ReversedInstructions.Add(parent);
+
+                        var initializerBlock = BuildExpression(parent.Initializer, currentBlock);
+                        initializerBlock.ReversedInstructions.Add(parent);
+                        return initializerBlock;
                     }
-                    break;
+
                 case SyntaxKind.StackAllocArrayCreationExpression:
                     {
                         var parent = (StackAllocArrayCreationExpressionSyntax)expression;
-                        BuildSimpleNestedExpression(parent, parent.Type);
+                        return BuildSimpleNestedExpression(parent, currentBlock, parent.Type);
                     }
-                    break;
 
                 case SyntaxKind.SimpleMemberAccessExpression:
                 case SyntaxKind.PointerMemberAccessExpression:
                     {
                         var parent = (MemberAccessExpressionSyntax)expression;
-                        BuildSimpleNestedExpression(parent, parent.Expression);
+                        return BuildSimpleNestedExpression(parent, currentBlock, parent.Expression);
                     }
-                    break;
+
                 case SyntaxKind.ObjectInitializerExpression:
                 case SyntaxKind.ArrayInitializerExpression:
                 case SyntaxKind.CollectionInitializerExpression:
                 case SyntaxKind.ComplexElementInitializerExpression:
                     {
                         var parent = (InitializerExpressionSyntax)expression;
-                        BuildSimpleNestedExpression(parent, parent.Expressions);
+                        return BuildSimpleNestedExpression(parent, currentBlock, parent.Expressions);
                     }
-                    break;
 
                 case SyntaxKind.MakeRefExpression:
                     {
                         var parent = (MakeRefExpressionSyntax)expression;
-                        BuildSimpleNestedExpression(parent, parent.Expression);
+                        return BuildSimpleNestedExpression(parent, currentBlock, parent.Expression);
                     }
-                    break;
+
                 case SyntaxKind.RefTypeExpression:
                     {
                         var parent = (RefTypeExpressionSyntax)expression;
-                        BuildSimpleNestedExpression(parent, parent.Expression);
+                        return BuildSimpleNestedExpression(parent, currentBlock, parent.Expression);
                     }
-                    break;
+
                 case SyntaxKind.RefValueExpression:
                     {
                         var parent = (RefValueExpressionSyntax)expression;
-                        BuildSimpleNestedExpression(parent, parent.Expression);
+                        return BuildSimpleNestedExpression(parent, currentBlock, parent.Expression);
                     }
-                    break;
 
                 case SyntaxKind.ArrayType:
-                    BuildArrayType((ArrayTypeSyntax)expression);
-                    break;
+                    return BuildArrayType((ArrayTypeSyntax)expression, currentBlock);
 
                 case SyntaxKind.CoalesceExpression:
-                    BuildCoalesceExpression((BinaryExpressionSyntax)expression);
-                    break;
+                    return BuildCoalesceExpression((BinaryExpressionSyntax)expression, currentBlock);
 
                 case SyntaxKind.ConditionalExpression:
-                    BuildConditionalExpression((ConditionalExpressionSyntax)expression);
-                    break;
+                    return BuildConditionalExpression((ConditionalExpressionSyntax)expression, currentBlock);
 
                 // these look strange in the CFG:
                 case SyntaxKind.ConditionalAccessExpression:
-                    BuildConditionalAccessExpression((ConditionalAccessExpressionSyntax)expression);
-                    break;
+                    return BuildConditionalAccessExpression((ConditionalAccessExpressionSyntax)expression, currentBlock);
+
                 case SyntaxKind.MemberBindingExpression:
                     {
                         var parent = (MemberBindingExpressionSyntax)expression;
-                        BuildSimpleNestedExpression(parent, parent.Name);
+                        return BuildSimpleNestedExpression(parent, currentBlock, parent.Name);
                     }
-                    break;
+
                 case SyntaxKind.ElementBindingExpression:
                     {
                         var parent = (ElementBindingExpressionSyntax)expression;
-                        BuildSimpleNestedExpression(parent, parent.ArgumentList?.Arguments.Select(a => a.Expression));
+                        return BuildSimpleNestedExpression(parent, currentBlock, parent.ArgumentList?.Arguments.Select(a => a.Expression));
                     }
-                    break;
 
                 default:
                     throw new NotImplementedException($"{expression.Kind()}");
@@ -464,85 +424,93 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.CSharp
 
         #region Build statements
 
+        private Block BuildStatements(IEnumerable<StatementSyntax> statements, Block currentBlock)
+        {
+            foreach (var statement in statements.Reverse())
+            {
+                currentBlock = BuildStatement(statement, currentBlock);
+            }
+
+            return currentBlock;
+        }
+
+        private Block BuildExpressions(IEnumerable<ExpressionSyntax> expressions, Block currentBlock)
+        {
+            foreach (var expression in expressions.Reverse())
+            {
+                currentBlock = BuildExpression(expression, currentBlock);
+            }
+
+            return currentBlock;
+        }
+
         #region Build label, goto, goto case, goto default
 
-        private void BuildLabeledStatement(LabeledStatementSyntax labeledStatement)
+        private Block BuildLabeledStatement(LabeledStatementSyntax labeledStatement, Block currentBlock)
         {
-            BuildStatement(labeledStatement.Statement);
-            var jumpBlock = CreateJumpBlock(labeledStatement, currentBlock);
-            currentBlock = jumpBlock;
+            var statementBlock = BuildStatement(labeledStatement.Statement, currentBlock);
+            var jumpBlock = CreateJumpBlock(labeledStatement, statementBlock);
 
             LabeledStatements[labeledStatement.Identifier.ValueText] = jumpBlock;
 
-            currentBlock = CreateBlock(currentBlock);
+            return CreateBlock(jumpBlock);
         }
 
-        private void BuildTryStatement(TryStatementSyntax tryStatement)
+        private Block BuildTryStatement(TryStatementSyntax tryStatement, Block currentBlock)
         {
+            // successor - either finally of next block after try statement
+            var catchSuccessor = currentBlock;
+
             var hasFinally = tryStatement.Finally?.Block != null;
             if (hasFinally)
             {
                 // Wire exit in case we have a return inside the try/catch block
-                currentBlock = CreateBranchBlock(tryStatement.Finally, new[] { currentBlock, ExitTarget.Peek() });
-                BuildBlock(tryStatement.Finally.Block);
-                ExitTarget.Push(currentBlock);
+                catchSuccessor = BuildBlock(tryStatement.Finally.Block,
+                    CreateBranchBlock(tryStatement.Finally, new[] { catchSuccessor, ExitTarget.Peek() }));
+
+                ExitTarget.Push(catchSuccessor);
             }
 
-            var catchSuccessor = currentBlock; // Either finally or the block after try statement
-
-            var catchBlocks = BuildCatchClauses(tryStatement.Catches.Reverse(), catchSuccessor);
+            var catchBlocks = tryStatement.Catches
+                .Reverse()
+                .Select(catchClause => BuildBlock(catchClause.Block, CreateBlock(catchSuccessor)))
+                .ToList();
 
             // If there is a catch with no Exception filter or equivalent we don't want to
             // join the tryStatement start/end blocks with the exit block because all
             // exceptions will be caught before going to finally
-            var allExceptionsAreCaught = tryStatement.Catches.Any(SyntaxHelper.IsCatchingAllExceptions);
-
-            // current is the top catch
+            var areAllExceptionsCaught = tryStatement.Catches.Any(SyntaxHelper.IsCatchingAllExceptions);
 
             // try end
             var tryEndStatementConnections = catchBlocks.ToList();
             tryEndStatementConnections.Add(catchSuccessor); // happy path, no exceptions thrown
-            if (!allExceptionsAreCaught) // unexpected exception thrown, go to exit (through finally if present)
+            if (!areAllExceptionsCaught) // unexpected exception thrown, go to exit (through finally if present)
             {
                 tryEndStatementConnections.Add(ExitTarget.Peek());
             }
 
-            currentBlock = CreateBranchBlock(tryStatement, tryEndStatementConnections.Distinct());
-
-            BuildBlock(tryStatement.Block);
+            var tryBody = BuildBlock(tryStatement.Block,
+                CreateBranchBlock(tryStatement, tryEndStatementConnections.Distinct()));
 
             var tryStartStatementConnections = catchBlocks.ToList();
-            tryStartStatementConnections.Add(currentBlock); // try body
-            if (!allExceptionsAreCaught) // unexpected exception thrown, go to exit (through finally if present)
+            tryStartStatementConnections.Add(tryBody); // try body
+
+            if (!areAllExceptionsCaught) // unexpected exception thrown, go to exit (through finally if present)
             {
                 tryStartStatementConnections.Add(ExitTarget.Peek());
             }
 
-            // try start
-            currentBlock = CreateBranchBlock(tryStatement, tryStartStatementConnections.Distinct());
+            var tryStartBlock = CreateBranchBlock(tryStatement, tryStartStatementConnections.Distinct());
 
             if (hasFinally)
             {
                 ExitTarget.Pop();
             }
+
+            return tryStartBlock;
         }
 
-        private IEnumerable<Block> BuildCatchClauses(IEnumerable<CatchClauseSyntax> catches, Block finallyBlock)
-        {
-            var catchBlocks = new List<Block>();
-            foreach (var catchClause in catches)
-            {
-                currentBlock = CreateBlock(finallyBlock);
-
-                BuildBlock(catchClause.Block);
-
-                catchBlocks.Add(currentBlock);
-            }
-
-            return catchBlocks;
-        }
-
-        private void BuildGotoDefaultStatement(GotoStatementSyntax statement)
+        private Block BuildGotoDefaultStatement(GotoStatementSyntax statement, Block currentBlock)
         {
             if (SwitchGotoJumpBlocks.Count == 0)
             {
@@ -550,7 +518,6 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.CSharp
             }
 
             var jumpBlock = CreateJumpBlock(statement, CreateTemporaryBlock(), currentBlock);
-            currentBlock = jumpBlock;
 
             var currentJumpBlocks = SwitchGotoJumpBlocks.Peek();
             if (!currentJumpBlocks.ContainsKey(GotoDefaultEntry))
@@ -559,9 +526,11 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.CSharp
             }
 
             currentJumpBlocks[GotoDefaultEntry].Add(jumpBlock);
+
+            return jumpBlock;
         }
 
-        private void BuildGotoCaseStatement(GotoStatementSyntax statement)
+        private Block BuildGotoCaseStatement(GotoStatementSyntax statement, Block currentBlock)
         {
             if (SwitchGotoJumpBlocks.Count == 0)
             {
@@ -569,8 +538,6 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.CSharp
             }
 
             var jumpBlock = CreateJumpBlock(statement, CreateTemporaryBlock(), currentBlock);
-            currentBlock = jumpBlock;
-
             var currentJumpBlocks = SwitchGotoJumpBlocks.Peek();
             var indexer = GetCaseIndexer(statement.Expression);
 
@@ -580,12 +547,13 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.CSharp
             }
 
             currentJumpBlocks[indexer].Add(jumpBlock);
+
+            return jumpBlock;
         }
 
-        private void BuildGotoStatement(GotoStatementSyntax statement)
+        private Block BuildGotoStatement(GotoStatementSyntax statement, Block currentBlock)
         {
             var jumpBlock = CreateJumpBlock(statement, CreateTemporaryBlock(), currentBlock);
-            currentBlock = jumpBlock;
 
             var identifier = statement.Expression as IdentifierNameSyntax;
             if (identifier == null)
@@ -599,20 +567,20 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.CSharp
             }
 
             GotoJumpBlocks[identifier.Identifier.ValueText].Add(jumpBlock);
+
+            return jumpBlock;
         }
 
         #endregion
 
         #region Build switch
 
-        private void BuildSwitchStatement(SwitchStatementSyntax switchStatement)
+        private Block BuildSwitchStatement(SwitchStatementSyntax switchStatement, Block currentBlock)
         {
-            var successorBlock = currentBlock;
             var caseBlocks = new List<Block>();
-
             var caseBlocksByValue = new Dictionary<object, Block>();
 
-            BreakTarget.Push(successorBlock);
+            BreakTarget.Push(currentBlock);
             SwitchGotoJumpBlocks.Push(new Dictionary<object, List<JumpBlock>>());
 
             foreach (var section in switchStatement.Sections)
@@ -621,37 +589,21 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.CSharp
                 Block fallThroughBlock = null;
                 foreach (var label in section.Labels.Reverse())
                 {
-                    if (fallThroughBlock == null)
-                    {
-                        currentBlock = CreateBlock(successorBlock);
-                        foreach (var st in section.Statements.Reverse())
-                        {
-                            BuildStatement(st);
-                        }
-                        fallThroughBlock = currentBlock;
-                    }
-                    else
-                    {
-                        fallThroughBlock = CreateJumpBlock(label, fallThroughBlock);
-                    }
+                    fallThroughBlock = fallThroughBlock == null
+                        ? BuildStatements(section.Statements, CreateBlock(currentBlock))
+                        : CreateJumpBlock(label, fallThroughBlock);
+
                     blocks.Add(fallThroughBlock);
 
-                    var defaultLabel = label as DefaultSwitchLabelSyntax;
-                    if (defaultLabel != null)
-                    {
-                        caseBlocksByValue[GotoDefaultEntry] = fallThroughBlock;
-                    }
-                    else
-                    {
                         var caseLabel = label as CaseSwitchLabelSyntax;
-                        if (caseLabel == null)
+                    bool isDefaultLabel = label is DefaultSwitchLabelSyntax;
+                    if (caseLabel == null && !isDefaultLabel)
                         {
                             throw new NotSupportedException("C# 7 features are not supported yet.");
                         }
 
-                        var indexer = GetCaseIndexer(caseLabel.Value);
-                        caseBlocksByValue[indexer] = fallThroughBlock;
-                    }
+                    var key = isDefaultLabel ? GotoDefaultEntry : GetCaseIndexer(caseLabel.Value);
+                    caseBlocksByValue[key] = fallThroughBlock;
                 }
 
                 caseBlocks.AddRange(blocks.Reverse<Block>());
@@ -663,12 +615,11 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.CSharp
 
             if (!caseBlocksByValue.ContainsKey(GotoDefaultEntry))
             {
-                caseBlocks.Add(successorBlock);
+                caseBlocks.Add(currentBlock);
             }
 
-            currentBlock = CreateBranchBlock(switchStatement, caseBlocks);
-
-            BuildExpression(switchStatement.Expression);
+            var switchBlock = CreateBranchBlock(switchStatement, caseBlocks);
+            return BuildExpression(switchStatement.Expression, switchBlock);
         }
 
         private object GetCaseIndexer(ExpressionSyntax expression)
@@ -692,7 +643,7 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.CSharp
 
         #region Build jumps: break, continue, return, throw, yield break
 
-        private void BuildBreakStatement(BreakStatementSyntax breakStatement)
+        private Block BuildBreakStatement(BreakStatementSyntax breakStatement, Block currentBlock)
         {
             if (BreakTarget.Count == 0)
             {
@@ -700,10 +651,10 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.CSharp
             }
 
             var target = BreakTarget.Peek();
-            currentBlock = CreateJumpBlock(breakStatement, target, currentBlock);
+            return CreateJumpBlock(breakStatement, target, currentBlock);
         }
 
-        private void BuildContinueStatement(ContinueStatementSyntax continueStatement)
+        private Block BuildContinueStatement(ContinueStatementSyntax continueStatement, Block currentBlock)
         {
             if (ContinueTargets.Count == 0)
             {
@@ -711,236 +662,186 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.CSharp
             }
 
             var target = ContinueTargets.Peek();
-            currentBlock = CreateJumpBlock(continueStatement, target, currentBlock);
+            return CreateJumpBlock(continueStatement, target, currentBlock);
         }
 
-        private void BuildReturnStatement(ReturnStatementSyntax returnStatement)
+        private Block BuildReturnStatement(ReturnStatementSyntax returnStatement, Block currentBlock)
         {
-            BuildJumpToExitStatement(returnStatement, returnStatement.Expression);
+            return BuildJumpToExitStatement(returnStatement, currentBlock, returnStatement.Expression);
         }
 
-        private void BuildThrowStatement(ThrowStatementSyntax throwStatement)
+        private Block BuildThrowStatement(ThrowStatementSyntax throwStatement, Block currentBlock)
         {
-            BuildJumpToExitStatement(throwStatement, throwStatement.Expression);
+            return BuildJumpToExitStatement(throwStatement, currentBlock, throwStatement.Expression);
         }
 
-        private void BuildYieldBreakStatement(YieldStatementSyntax yieldBreakStatement)
+        private Block BuildYieldBreakStatement(YieldStatementSyntax yieldBreakStatement, Block currentBlock)
         {
-            BuildJumpToExitStatement(yieldBreakStatement);
+            return BuildJumpToExitStatement(yieldBreakStatement, currentBlock);
         }
 
-        private void BuildJumpToExitStatement(StatementSyntax statement, ExpressionSyntax expression = null)
+        private Block BuildJumpToExitStatement(StatementSyntax statement, Block currentBlock, ExpressionSyntax expression = null)
         {
-            currentBlock = CreateJumpBlock(statement, ExitTarget.Peek(), currentBlock);
-
-            BuildExpression(expression);
+            return BuildExpression(expression, CreateJumpBlock(statement, ExitTarget.Peek(), currentBlock));
         }
 
         #endregion
 
         #region Build lock, using, fixed, unsafe checked statements
 
-        private void BuildLockStatement(LockStatementSyntax lockStatement)
+        private Block BuildLockStatement(LockStatementSyntax lockStatement, Block currentBlock)
         {
-            currentBlock = CreateBlock(currentBlock);
-            BuildStatement(lockStatement.Statement);
+            var lockStatementBlock = BuildStatement(lockStatement.Statement, CreateBlock(currentBlock));
 
-            currentBlock = CreateLockBlock(lockStatement, currentBlock);
-            BuildExpression(lockStatement.Expression);
+            return BuildExpression(lockStatement.Expression, CreateLockBlock(lockStatement, lockStatementBlock));
         }
 
-        private void BuildUsingStatement(UsingStatementSyntax usingStatement)
+        private Block BuildUsingStatement(UsingStatementSyntax usingStatement, Block currentBlock)
         {
-            currentBlock = CreateUsingFinalizerBlock(usingStatement, currentBlock);
+            var usingStatementBlock = BuildStatement(usingStatement.Statement, CreateUsingFinalizerBlock(usingStatement, currentBlock));
+            var usingBlock = CreateJumpBlock(usingStatement, usingStatementBlock);
 
-            BuildStatement(usingStatement.Statement);
-
-            currentBlock = CreateJumpBlock(usingStatement, currentBlock);
-            if (usingStatement.Expression != null)
-            {
-                BuildExpression(usingStatement.Expression);
+            return usingStatement.Expression != null
+                ? BuildExpression(usingStatement.Expression, usingBlock)
+                : BuildVariableDeclaration(usingStatement.Declaration, usingBlock);
             }
-            else
-            {
-                BuildVariableDeclaration(usingStatement.Declaration);
-            }
+
+        private Block BuildFixedStatement(FixedStatementSyntax fixedStatement, Block currentBlock)
+        {
+            var fixedStatementBlock = BuildStatement(fixedStatement.Statement, CreateBlock(currentBlock));
+            return BuildVariableDeclaration(fixedStatement.Declaration, CreateJumpBlock(fixedStatement, fixedStatementBlock));
         }
 
-        private void BuildFixedStatement(FixedStatementSyntax fixedStatement)
+        private Block BuildUnsafeStatement(UnsafeStatementSyntax statement, Block currentBlock)
         {
-            currentBlock = CreateBlock(currentBlock);
-            BuildStatement(fixedStatement.Statement);
-
-            currentBlock = CreateJumpBlock(fixedStatement, currentBlock);
-            BuildVariableDeclaration(fixedStatement.Declaration);
+            var unsafeStatement = BuildStatement(statement.Block, CreateBlock(currentBlock));
+            return CreateJumpBlock(statement, unsafeStatement);
         }
 
-        private void BuildUnsafeStatement(StatementSyntax statement)
+        private Block BuildCheckedStatement(CheckedStatementSyntax statement, Block currentBlock)
         {
-            var checkedStatement = (UnsafeStatementSyntax)statement;
-            currentBlock = CreateBlock(currentBlock);
-            BuildStatement(checkedStatement.Block);
-
-            currentBlock = CreateJumpBlock(checkedStatement, currentBlock);
-        }
-
-        private void BuildCheckedStatement(StatementSyntax statement)
-        {
-            var checkedStatement = (CheckedStatementSyntax)statement;
-            currentBlock = CreateBlock(currentBlock);
-            BuildStatement(checkedStatement.Block);
-
-            currentBlock = CreateJumpBlock(checkedStatement, currentBlock);
+            var statementBlock = BuildStatement(statement.Block, CreateBlock(currentBlock));
+            return CreateJumpBlock(statement, statementBlock);
         }
 
         #endregion
 
         #region Build loops - do, for, foreach, while
 
-        private void BuildDoStatement(DoStatementSyntax doStatement)
+        private Block BuildDoStatement(DoStatementSyntax doStatement, Block currentBlock)
         {
-            var afterBlock = currentBlock;
-            var loopTempBlock = CreateTemporaryBlock();
+            //// while (A) { B; }
+            var conditionBlockTemp = CreateTemporaryBlock();
 
-            var doBlock = CreateBinaryBranchBlock(doStatement, loopTempBlock, afterBlock);
+            var conditionBlock = BuildExpression(doStatement.Condition,
+                CreateBinaryBranchBlock(doStatement, conditionBlockTemp, currentBlock)); // A
 
-            currentBlock = doBlock;
-            BuildExpression(doStatement.Condition);
+            BreakTarget.Push(currentBlock);
+            ContinueTargets.Push(conditionBlock);
 
-            BreakTarget.Push(afterBlock);
-            ContinueTargets.Push(currentBlock);
-
-            currentBlock = CreateBlock(currentBlock);
-            BuildStatement(doStatement.Statement);
-            loopTempBlock.SuccessorBlock = currentBlock;
+            var loopBody = BuildStatement(doStatement.Statement, CreateBlock(conditionBlock)); // B
+            conditionBlockTemp.SuccessorBlock = loopBody;
 
             BreakTarget.Pop();
             ContinueTargets.Pop();
 
-            currentBlock = CreateBlock(currentBlock);
+            return CreateBlock(loopBody);
         }
 
-        private void BuildForStatement(ForStatementSyntax forStatement)
+        private Block BuildForStatement(ForStatementSyntax forStatement, Block currentBlock)
         {
-            var afterBlock = currentBlock;
+            //// for (A; B; C) { D; }
+
             var tempLoopBlock = CreateTemporaryBlock();
 
-            currentBlock = CreateBlock(tempLoopBlock);
-            foreach (var incrementor in forStatement.Incrementors.Reverse())
-            {
-                BuildExpression(incrementor);
-            }
+            Block incrementorBlock = BuildExpressions(forStatement.Incrementors, CreateBlock(tempLoopBlock)); // C
 
-            var incrementorBlock = currentBlock;
-
-            BreakTarget.Push(afterBlock);
+            BreakTarget.Push(currentBlock);
             ContinueTargets.Push(incrementorBlock);
 
-            currentBlock = CreateBlock(incrementorBlock);
-            BuildStatement(forStatement.Statement);
+            var forBlock = BuildStatement(forStatement.Statement, CreateBlock(incrementorBlock)); // D
 
             BreakTarget.Pop();
             ContinueTargets.Pop();
 
-            var forBlock = CreateBinaryBranchBlock(forStatement, currentBlock, afterBlock);
+            var conditionBlock = BuildExpression(forStatement.Condition,
+                CreateBinaryBranchBlock(forStatement, forBlock, currentBlock)); // B
+            tempLoopBlock.SuccessorBlock = conditionBlock;
 
-            currentBlock = forBlock;
-            BuildExpression(forStatement.Condition);
-            tempLoopBlock.SuccessorBlock = currentBlock;
-
-            currentBlock = AddBlock(new ForInitializerBlock(forStatement, currentBlock));
+            Block forInitializer = AddBlock(new ForInitializerBlock(forStatement, conditionBlock)); // A
             if (forStatement.Declaration != null)
             {
-                BuildVariableDeclaration(forStatement.Declaration);
+                forInitializer = BuildVariableDeclaration(forStatement.Declaration, forInitializer);
             }
-            else
-            {
-                foreach (var initializer in forStatement.Initializers.Reverse())
-                {
-                    BuildExpression(initializer);
-                }
-            }
-        }
 
-        private void BuildForEachStatement(ForEachStatementSyntax foreachStatement)
+            forInitializer = BuildExpressions(forStatement.Initializers, forInitializer);
+
+            return forInitializer;
+                }
+
+        private Block BuildForEachStatement(ForEachStatementSyntax foreachStatement, Block currentBlock)
         {
-            var afterBlock = currentBlock;
             var temp = CreateTemporaryBlock();
 
-            BreakTarget.Push(afterBlock);
+            BreakTarget.Push(currentBlock);
             ContinueTargets.Push(temp);
 
-            currentBlock = CreateBlock(temp);
-            BuildStatement(foreachStatement.Statement);
+            var foreachBlock = BuildStatement(foreachStatement.Statement, CreateBlock(temp));
 
             BreakTarget.Pop();
             ContinueTargets.Pop();
 
-            currentBlock = CreateBinaryBranchBlock(foreachStatement, currentBlock, afterBlock);
             // Variable declaration in a foreach statement is not a VariableDeclarator, otherwise it would be added here.
+            temp.SuccessorBlock = CreateBinaryBranchBlock(foreachStatement, foreachBlock, currentBlock);
 
-            temp.SuccessorBlock = currentBlock;
-
-            currentBlock = AddBlock(new ForeachCollectionProducerBlock(foreachStatement, temp));
-            BuildExpression(foreachStatement.Expression);
+            return BuildExpression(foreachStatement.Expression,
+                    AddBlock(new ForeachCollectionProducerBlock(foreachStatement, temp)));
         }
 
-        private void BuildWhileStatement(WhileStatementSyntax whileStatement)
+        private Block BuildWhileStatement(WhileStatementSyntax whileStatement, Block currentBlock)
         {
-            var afterBlock = currentBlock;
             var loopTempBlock = CreateTemporaryBlock();
 
-            BreakTarget.Push(afterBlock);
+            BreakTarget.Push(currentBlock);
             ContinueTargets.Push(loopTempBlock);
 
-            var bodyBlock = CreateBlock(loopTempBlock);
-            currentBlock = bodyBlock;
-            BuildStatement(whileStatement.Statement);
+            var bodyBlock = BuildStatement(whileStatement.Statement, CreateBlock(loopTempBlock));
 
             BreakTarget.Pop();
             ContinueTargets.Pop();
 
-            currentBlock = CreateBinaryBranchBlock(whileStatement, currentBlock, afterBlock);
-            BuildExpression(whileStatement.Condition);
-            loopTempBlock.SuccessorBlock = currentBlock;
+            var loopCondition = BuildExpression(whileStatement.Condition,
+                CreateBinaryBranchBlock(whileStatement, bodyBlock, currentBlock));
 
-            currentBlock = CreateBlock(currentBlock);
+            loopTempBlock.SuccessorBlock = loopCondition;
+
+            return CreateBlock(loopCondition);
         }
 
         #endregion
 
         #region Build if statement
 
-        private void BuildIfStatement(IfStatementSyntax ifStatement)
+        private Block BuildIfStatement(IfStatementSyntax ifStatement, Block currentBlock)
         {
-            var successor = currentBlock;
-            var elseBlock = currentBlock;
+            Block elseBlock = ifStatement.Else?.Statement != null
+                ? BuildStatement(ifStatement.Else.Statement, CreateBlock(currentBlock))
+                : currentBlock;
+            Block trueBlock = BuildStatement(ifStatement.Statement, CreateBlock(currentBlock));
 
-            if (ifStatement.Else?.Statement != null)
-            {
-                currentBlock = CreateBlock(successor);
-                BuildStatement(ifStatement.Else.Statement);
-                elseBlock = currentBlock;
-            }
+            Block ifConditionBlock = BuildExpression(ifStatement.Condition,
+                AddBlock(new BinaryBranchBlock(ifStatement, trueBlock, elseBlock)));
 
-            currentBlock = CreateBlock(successor);
-            BuildStatement(ifStatement.Statement);
-            var trueBlock = currentBlock;
-
-            currentBlock = CreateBinaryBranchBlock(ifStatement, trueBlock, elseBlock);
-            BuildExpression(ifStatement.Condition);
+            return ifConditionBlock;
         }
 
         #endregion
 
         #region Build block
 
-        private void BuildBlock(BlockSyntax block)
+        private Block BuildBlock(BlockSyntax block, Block currentBlock)
         {
-            foreach (var node in block.Statements.Reverse())
-            {
-                BuildStatement(node);
-            }
+            return BuildStatements(block.Statements, currentBlock);
         }
 
         #endregion
@@ -949,164 +850,137 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.CSharp
 
         #region Build expressions
 
-        private void BuildConditionalAccessExpression(ConditionalAccessExpressionSyntax conditionalAccess)
+        private Block BuildConditionalAccessExpression(ConditionalAccessExpressionSyntax conditionalAccess, Block currentBlock)
         {
-            var successorBlock = currentBlock;
+            var whenNotNull = BuildExpression(conditionalAccess.WhenNotNull, CreateBlock(currentBlock));
 
-            currentBlock = CreateBlock(currentBlock);
-            BuildExpression(conditionalAccess.WhenNotNull);
-
-            currentBlock = CreateBinaryBranchBlock(conditionalAccess, successorBlock, currentBlock);
-            BuildExpression(conditionalAccess.Expression);
+            return BuildExpression(conditionalAccess.Expression,
+                CreateBinaryBranchBlock(conditionalAccess, currentBlock, whenNotNull));
         }
 
-        private void BuildConditionalExpression(ConditionalExpressionSyntax conditional)
+        private Block BuildConditionalExpression(ConditionalExpressionSyntax conditional, Block currentBlock)
         {
-            var successor = currentBlock;
+            var falseBlock = BuildExpression(conditional.WhenFalse, CreateBlock(currentBlock));
+            var trueBlock = BuildExpression(conditional.WhenTrue, CreateBlock(currentBlock));
 
-            currentBlock = CreateBlock(successor);
-            BuildExpression(conditional.WhenFalse);
-            var falseBlock = currentBlock;
-
-            currentBlock = CreateBlock(successor);
-            BuildExpression(conditional.WhenTrue);
-            var trueBlock = currentBlock;
-
-            currentBlock = CreateBinaryBranchBlock(conditional, trueBlock, falseBlock);
-            BuildExpression(conditional.Condition);
+            return BuildExpression(conditional.Condition, CreateBinaryBranchBlock(conditional, trueBlock, falseBlock));
         }
 
-        private void BuildCoalesceExpression(BinaryExpressionSyntax expression)
+        private Block BuildCoalesceExpression(BinaryExpressionSyntax expression, Block currentBlock)
         {
-            var successor = currentBlock;
-            currentBlock = CreateBlock(currentBlock);
-            BuildExpression(expression.Right);
+            var rightBlock = BuildExpression(expression.Right, CreateBlock(currentBlock));
 
-            currentBlock = CreateBinaryBranchBlock(expression, currentBlock, successor);
-            BuildExpression(expression.Left);
+            return BuildExpression(expression.Left, CreateBinaryBranchBlock(expression, rightBlock, currentBlock));
         }
 
-        private void BuildLogicalAndExpression(BinaryExpressionSyntax expression)
+        private Block BuildLogicalAndExpression(BinaryExpressionSyntax expression, Block currentBlock)
         {
-            var successor = currentBlock;
-            currentBlock = AddBlock(new BinaryBranchingSimpleBlock(expression.Right, successor));
-            BuildExpression(expression.Right);
+            var rightBlock = BuildExpression(expression.Right,
+                AddBlock(new BinaryBranchingSimpleBlock(expression.Right, currentBlock)));
 
-            currentBlock = CreateBinaryBranchBlock(expression, currentBlock, successor);
-            BuildExpression(expression.Left);
+            return BuildExpression(expression.Left, CreateBinaryBranchBlock(expression, rightBlock, currentBlock));
         }
 
-        private void BuildLogicalOrExpression(BinaryExpressionSyntax expression)
+        private Block BuildLogicalOrExpression(BinaryExpressionSyntax expression, Block currentBlock)
         {
-            var successor = currentBlock;
-            currentBlock = AddBlock(new BinaryBranchingSimpleBlock(expression.Right, successor));
-            BuildExpression(expression.Right);
+            var rightBlock = BuildExpression(expression.Right,
+                AddBlock(new BinaryBranchingSimpleBlock(expression.Right, currentBlock)));
 
-            currentBlock = CreateBinaryBranchBlock(expression, successor, currentBlock);
-            BuildExpression(expression.Left);
+            return BuildExpression(expression.Left, CreateBinaryBranchBlock(expression, currentBlock, rightBlock));
         }
 
-        private void BuildArrayCreationExpression(ArrayCreationExpressionSyntax expression)
+        private Block BuildArrayCreationExpression(ArrayCreationExpressionSyntax expression, Block currentBlock)
         {
-            BuildExpression(expression.Initializer);
+            var arrayInitializerBlock = BuildExpression(expression.Initializer, currentBlock);
+            arrayInitializerBlock.ReversedInstructions.Add(expression);
 
-            currentBlock.ReversedInstructions.Add(expression);
-
-            BuildExpression(expression.Type);
+            return BuildExpression(expression.Type, arrayInitializerBlock);
         }
 
-        private void BuildElementAccessExpression(ElementAccessExpressionSyntax expression)
+        private Block BuildElementAccessExpression(ElementAccessExpressionSyntax expression, Block currentBlock)
         {
-            BuildInvocationLikeExpression(expression, expression.Expression, expression.ArgumentList?.Arguments);
+            return BuildInvocationLikeExpression(expression, currentBlock, expression.Expression, expression.ArgumentList?.Arguments);
         }
 
-        private void BuildImplicitElementAccessExpression(ImplicitElementAccessSyntax expression)
+        private Block BuildImplicitElementAccessExpression(ImplicitElementAccessSyntax expression, Block currentBlock)
         {
-            BuildInvocationLikeExpression(expression, null, expression.ArgumentList?.Arguments);
+            return BuildInvocationLikeExpression(expression, currentBlock, null, expression.ArgumentList?.Arguments);
         }
 
-        private void BuildInvocationLikeExpression(ExpressionSyntax parent, ExpressionSyntax child, IEnumerable<ArgumentSyntax> arguments)
+        private Block BuildInvocationLikeExpression(ExpressionSyntax parent, Block currentBlock, ExpressionSyntax child, IEnumerable<ArgumentSyntax> arguments)
         {
             var args = arguments == null
                 ? Enumerable.Empty<ExpressionSyntax>()
                 : arguments.Select(a => a.Expression);
 
-            BuildSimpleNestedExpression(parent, new[] { child }.Concat(args));
+            return BuildSimpleNestedExpression(parent, currentBlock, new[] { child }.Concat(args));
         }
 
-        private void BuildObjectCreationExpression(ObjectCreationExpressionSyntax expression)
+        private Block BuildObjectCreationExpression(ObjectCreationExpressionSyntax expression, Block currentBlock)
         {
-            BuildExpression(expression.Initializer);
-
-            currentBlock.ReversedInstructions.Add(expression);
+            var objectInitializerBlock = BuildExpression(expression.Initializer, currentBlock);
+            objectInitializerBlock.ReversedInstructions.Add(expression);
 
             var arguments = expression.ArgumentList == null
                 ? Enumerable.Empty<ExpressionSyntax>()
                 : expression.ArgumentList.Arguments.Select(a => a.Expression);
 
-            foreach (var argument in arguments.Reverse())
-            {
-                BuildExpression(argument);
+            return BuildExpressions(arguments, objectInitializerBlock);
             }
-        }
 
-        private void BuildAnonymousObjectCreationExpression(AnonymousObjectCreationExpressionSyntax expression)
+        private Block BuildAnonymousObjectCreationExpression(AnonymousObjectCreationExpressionSyntax expression, Block currentBlock)
         {
-            BuildSimpleNestedExpression(expression, expression.Initializers.Select(i => i.Expression));
+            return BuildSimpleNestedExpression(expression, currentBlock, expression.Initializers.Select(i => i.Expression));
         }
 
-        private void BuildInvocationExpression(InvocationExpressionSyntax expression)
+        private Block BuildInvocationExpression(InvocationExpressionSyntax expression, Block currentBlock)
         {
-            BuildInvocationLikeExpression(expression, expression.Expression, expression.ArgumentList?.Arguments);
+            return BuildInvocationLikeExpression(expression, currentBlock, expression.Expression, expression.ArgumentList?.Arguments);
         }
 
-        private void BuildInterpolatedStringExpression(InterpolatedStringExpressionSyntax expression)
+        private Block BuildInterpolatedStringExpression(InterpolatedStringExpressionSyntax expression, Block currentBlock)
         {
-            BuildSimpleNestedExpression(expression, expression.Contents.OfType<InterpolationSyntax>().Select(i => i.Expression));
+            return BuildSimpleNestedExpression(expression, currentBlock, expression.Contents.OfType<InterpolationSyntax>().Select(i => i.Expression));
         }
 
-        private void BuildSimpleNestedExpression(ExpressionSyntax parent, params ExpressionSyntax[] children)
+        private Block BuildSimpleNestedExpression(ExpressionSyntax parent, Block currentBlock, params ExpressionSyntax[] children)
         {
-            BuildSimpleNestedExpression(parent, (IEnumerable<ExpressionSyntax>)children);
+            return BuildSimpleNestedExpression(parent, currentBlock, (IEnumerable<ExpressionSyntax>)children);
         }
 
-        private void BuildSimpleNestedExpression(ExpressionSyntax parent, IEnumerable<ExpressionSyntax> children)
+        private Block BuildSimpleNestedExpression(ExpressionSyntax parent, Block currentBlock, IEnumerable<ExpressionSyntax> children)
         {
             currentBlock.ReversedInstructions.Add(parent);
 
-            if (children == null)
-            {
-                return;
+            return children == null
+                ? currentBlock
+                : BuildExpressions(children, currentBlock);
             }
 
-            foreach (var child in children.Reverse())
+        private Block BuildBinaryExpression(BinaryExpressionSyntax expression, Block currentBlock)
             {
-                BuildExpression(child);
+            currentBlock.ReversedInstructions.Add(expression);
+            var binaryExpressionBlock = BuildExpression(expression.Right, currentBlock);
+            return BuildExpression(expression.Left, binaryExpressionBlock);
             }
-        }
 
-        private void BuildBinaryExpression(BinaryExpressionSyntax expression)
+        private Block BuildAssignmentExpression(AssignmentExpressionSyntax expression, Block currentBlock)
         {
             currentBlock.ReversedInstructions.Add(expression);
-            BuildExpression(expression.Right);
-            BuildExpression(expression.Left);
+            var binaryExpressionBlock = BuildExpression(expression.Right, currentBlock);
+            return BuildExpression(expression.Left, binaryExpressionBlock);
         }
 
-        private void BuildAssignmentExpression(AssignmentExpressionSyntax expression)
+        private Block BuildSimpleAssignmentExpression(AssignmentExpressionSyntax expression, Block currentBlock)
         {
             currentBlock.ReversedInstructions.Add(expression);
-            BuildExpression(expression.Right);
-            BuildExpression(expression.Left);
-        }
 
-        private void BuildSimpleAssignmentExpression(AssignmentExpressionSyntax expression)
-        {
-            currentBlock.ReversedInstructions.Add(expression);
-            BuildExpression(expression.Right);
+            var assignmentBlock = BuildExpression(expression.Right, currentBlock);
             if (!IsAssignmentWithSimpleLeftSide(expression))
             {
-                BuildExpression(expression.Left);
+                assignmentBlock = BuildExpression(expression.Left, assignmentBlock);
             }
+            return assignmentBlock;
         }
 
         internal static bool IsAssignmentWithSimpleLeftSide(AssignmentExpressionSyntax assignment)
@@ -1114,44 +988,44 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.CSharp
             return assignment.Left.RemoveParentheses() is IdentifierNameSyntax;
         }
 
-        private void BuildArrayType(ArrayTypeSyntax arrayType)
+        private Block BuildArrayType(ArrayTypeSyntax arrayType, Block currentBlock)
         {
             currentBlock.ReversedInstructions.Add(arrayType);
 
             var arraySizes = arrayType.RankSpecifiers.SelectMany(rs => rs.Sizes);
-            foreach (var arraySize in arraySizes.Reverse())
-            {
-                BuildExpression(arraySize);
-            }
+            return BuildExpressions(arraySizes, currentBlock);
         }
 
         #endregion
 
         #region Build variable declaration
 
-        private void BuildVariableDeclaration(VariableDeclarationSyntax declaration)
+        private Block BuildVariableDeclaration(VariableDeclarationSyntax declaration, Block currentBlock)
         {
             if (declaration == null)
             {
-                return;
+                return currentBlock;
             }
 
+            Block variableDeclaratorBlock = currentBlock;
             foreach (var variable in declaration.Variables.Reverse())
             {
-                BuildVariableDeclarator(variable);
+                variableDeclaratorBlock = BuildVariableDeclarator(variable, variableDeclaratorBlock);
             }
+
+            return variableDeclaratorBlock;
         }
 
-        private void BuildVariableDeclarator(VariableDeclaratorSyntax variableDeclarator)
+        private Block BuildVariableDeclarator(VariableDeclaratorSyntax variableDeclarator, Block currentBlock)
         {
             // There are variable declarations which implicitly get a value, such as foreach (var x in xs)
             currentBlock.ReversedInstructions.Add(variableDeclarator);
 
             var initializer = variableDeclarator.Initializer?.Value;
-            if (initializer != null)
-            {
-                BuildExpression(initializer);
-            }
+
+            return initializer == null
+                ? currentBlock
+                : BuildExpression(initializer, currentBlock);
         }
 
         #endregion

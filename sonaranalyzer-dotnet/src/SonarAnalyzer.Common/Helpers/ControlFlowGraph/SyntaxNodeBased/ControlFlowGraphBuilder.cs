@@ -30,23 +30,84 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
     {
         private class ControlFlowGraph : IControlFlowGraph
         {
-            public IEnumerable<Block> Blocks { get; set; }
+            private static readonly ISet<Type> RemovableBlockTypes = ImmutableHashSet.Create(
+                   typeof(SimpleBlock),
+                   typeof(TemporaryBlock));
 
-            public Block EntryBlock { get; set; }
+            public ControlFlowGraph(List<Block> reversedBlocks, Block entryBlock, ExitBlock exitBlock)
+            {
+                ExitBlock = exitBlock;
+                EntryBlock = RemoveEmptyBlocks(reversedBlocks, entryBlock);
 
-            public ExitBlock ExitBlock { get; set; }
+                Blocks = reversedBlocks.Reverse<Block>().ToImmutableArray();
+
+                if (Blocks.OfType<TemporaryBlock>().Any())
+                {
+                    throw new InvalidOperationException("Could not construct valid control flow graph");
+                }
+
+                ComputePredecessors();
+            }
+
+            public IEnumerable<Block> Blocks { get; private set; }
+
+            public Block EntryBlock { get; private set; }
+
+            public ExitBlock ExitBlock { get; private set; }
+
+            private static Block RemoveEmptyBlocks(List<Block> reversedBlocks, Block entryBlock)
+            {
+                var emptyBlockReplacements = new Dictionary<Block, Block>();
+                var emptyBlocks = reversedBlocks.Where(b =>
+                    RemovableBlockTypes.Contains(b.GetType()) &&
+                    !b.ReversedInstructions.Any());
+
+                foreach (var block in emptyBlocks)
+                {
+                    var replacementBlock = block.GetPossibleNonEmptySuccessorBlock();
+                    if (replacementBlock != block)
+                    {
+                        emptyBlockReplacements.Add(block, replacementBlock);
+                    }
+                }
+
+                // Remove empty blocks
+                reversedBlocks.RemoveAll(b => emptyBlockReplacements.Keys.Contains(b));
+
+                // Replace successors
+                foreach (var block in reversedBlocks)
+                {
+                    block.ReplaceSuccessors(emptyBlockReplacements);
+                }
+
+                // Fix entry block
+                var newEntryBlock = entryBlock;
+                if (emptyBlockReplacements.ContainsKey(entryBlock))
+                {
+                    newEntryBlock = emptyBlockReplacements[entryBlock];
+                }
+
+                return newEntryBlock;
+            }
+
+            private void ComputePredecessors()
+            {
+                foreach (var block in Blocks)
+                {
+                    foreach (var successor in block.SuccessorBlocks)
+                    {
+                        successor.EditablePredecessorBlocks.Add(block);
+                    }
+                }
+            }
         }
 
-        protected readonly SyntaxNode node;
+        protected readonly SyntaxNode rootNode;
         protected readonly SemanticModel semanticModel;
 
-        protected readonly Stack<Block> ExitTarget = new Stack<Block>();
-
-        protected Block currentBlock;
         protected readonly List<Block> reversedBlocks = new List<Block>();
 
-        public IEnumerable<Block> Blocks => reversedBlocks.Reverse<Block>().ToImmutableArray();
-        public Block EntryBlock { get; private set; }
+        protected readonly Stack<Block> ExitTarget = new Stack<Block>();
 
         protected ControlFlowGraphBuilder(SyntaxNode node, SemanticModel semanticModel)
         {
@@ -60,94 +121,22 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
                 throw new ArgumentNullException(nameof(semanticModel));
             }
 
-            this.node = node;
+            this.rootNode = node;
             this.semanticModel = semanticModel;
 
             ExitTarget.Push(CreateExitBlock());
         }
+        protected abstract void PostProcessGraph();
 
         internal IControlFlowGraph Build()
         {
-            currentBlock = CreateBlock(successor: ExitTarget.Peek());
-
-            Build(node);
-
-            EntryBlock = currentBlock;
-
+            var entryBlock = Build(rootNode, CreateBlock(ExitTarget.Peek()));
             PostProcessGraph();
 
-            if (reversedBlocks.OfType<TemporaryBlock>().Any())
-            {
-                throw new InvalidOperationException("Could not construct valid control flow graph" );
-            }
-
-            if (ExitTarget.Count != 1)
-            {
-                throw new InvalidOperationException("Expecting only one ExitBlock. The control flow graph was not constructed correctly.");
-            }
-
-            return new ControlFlowGraph
-            {
-                Blocks = Blocks,
-                EntryBlock = EntryBlock,
-                ExitBlock = (ExitBlock)ExitTarget.Pop()
-            };
+            return new ControlFlowGraph(reversedBlocks, entryBlock, (ExitBlock)ExitTarget.Pop());
         }
 
-        protected virtual void PostProcessGraph()
-        {
-            RemoveEmptyBlocks();
-            ComputePredecessors();
-        }
-
-        protected abstract void Build(SyntaxNode node);
-
-        private static readonly ISet<Type> RemovableBlockTypes = ImmutableHashSet.Create(
-           typeof(SimpleBlock),
-           typeof(TemporaryBlock));
-
-        private void RemoveEmptyBlocks()
-        {
-            var emptyBlockReplacements = new Dictionary<Block, Block>();
-            var emptyBlocks = reversedBlocks.Where(b =>
-                RemovableBlockTypes.Contains(b.GetType()) &&
-                !b.ReversedInstructions.Any());
-
-            foreach (var block in emptyBlocks)
-            {
-                var replacementBlock = block.GetPossibleNonEmptySuccessorBlock();
-                if (replacementBlock != block)
-                {
-                    emptyBlockReplacements.Add(block, replacementBlock);
-                }
-            }
-
-            // Remove empty blocks
-            reversedBlocks.RemoveAll(b => emptyBlockReplacements.Keys.Contains(b));
-
-            // Replace successors
-            foreach (var block in reversedBlocks)
-            {
-                block.ReplaceSuccessors(emptyBlockReplacements);
-            }
-
-            // Fix entry block
-            if (emptyBlockReplacements.ContainsKey(EntryBlock))
-            {
-                EntryBlock = emptyBlockReplacements[EntryBlock];
-            }
-        }
-
-        private void ComputePredecessors()
-        {
-            foreach (var block in reversedBlocks)
-            {
-                foreach (var successor in block.SuccessorBlocks)
-                {
-                    successor.EditablePredecessorBlocks.Add(block);
-                }
-            }
-        }
+        protected abstract Block Build(SyntaxNode node, Block currentBlock);
 
         #region CreateBlock*
 
