@@ -1,0 +1,29 @@
+<p>Passing a collection as an argument to the collection's own method is either an error - some other argument was intended - or simply nonsensical
+code. </p>
+<p>Further, because some methods require that the argument remain unmodified during the execution, passing a collection to itself can result in an
+unexpected behavior. </p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+var list = new List&lt;int&gt;();
+
+list.AddRange(list); // Noncompliant
+list.Concat(list); // Noncompliant
+
+list.Union(list); // Noncompliant; always returns list
+list.Except(list); // Noncompliant; always empty
+list.Intersect(list); // Noncompliant; always list
+list.SequenceEqual(list); // Noncompliant; always true
+
+var set = new HashSet&lt;int&gt;();
+set.UnionWith(set); // Noncompliant; no changes
+set.ExceptWith(set); // Noncompliant; always empty
+set.IntersectWith(set); // Noncompliant; no changes
+set.IsProperSubsetOf(set); // Noncompliant; always false
+set.IsProperSupersetOf(set); // Noncompliant; always false
+set.IsSubsetOf(set); // Noncompliant; always true
+set.IsSupersetOf(set); // Noncompliant; always true
+set.Overlaps(set); // Noncompliant; always true
+set.SetEquals(set); // Noncompliant; always true
+set.SymmetricExceptWith(set); // Noncompliant; always empty
+</pre>
+

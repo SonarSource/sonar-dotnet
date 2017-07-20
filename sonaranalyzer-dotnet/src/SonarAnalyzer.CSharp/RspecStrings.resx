@@ -2103,6 +2103,33 @@
   <data name="S2070_Type" xml:space="preserve">
     <value>VULNERABILITY</value>
   </data>
+  <data name="S2114_Category" xml:space="preserve">
+    <value>Sonar Bug</value>
+  </data>
+  <data name="S2114_Description" xml:space="preserve">
+    <value>Passing a collection as an argument to the collection's own method is either an error - some other argument was intended - or simply nonsensical code. </value>
+  </data>
+  <data name="S2114_IsActivatedByDefault" xml:space="preserve">
+    <value>True</value>
+  </data>
+  <data name="S2114_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S2114_RemediationCost" xml:space="preserve">
+    <value>15min</value>
+  </data>
+  <data name="S2114_Severity" xml:space="preserve">
+    <value>Major</value>
+  </data>
+  <data name="S2114_Tags" xml:space="preserve">
+    <value />
+  </data>
+  <data name="S2114_Title" xml:space="preserve">
+    <value>Collections should not be passed as arguments to their own methods</value>
+  </data>
+  <data name="S2114_Type" xml:space="preserve">
+    <value>BUG</value>
+  </data>
   <data name="S2123_Category" xml:space="preserve">
     <value>Sonar Bug</value>
   </data>

@@ -1,0 +1,13 @@
+{
+  "title": "Collections should not be passed as arguments to their own methods",
+  "type": "BUG",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "15min"
+  },
+  "tags": [
+    
+  ],
+  "defaultSeverity": "Major"
+}
