@@ -4,18 +4,26 @@ code. </p>
 unexpected behavior. </p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-var myList = new List&lt;int&gt;();
+var list = new List&lt;int&gt;();
 
-myList.AddRange(myList); // Noncompliant
-myList.Concat(myList); // Noncompliant
+list.AddRange(list); // Noncompliant
+list.Concat(list); // Noncompliant
 
-myList.Union(myList); // Noncompliant; always returns myList
-myList.Except(myList); // Noncompliant; always empty
-myList.Intersect(myList); // Noncompliant; always myList
-myList.SequenceEqual(myList); // Noncompliant; always true
+list.Union(list); // Noncompliant; always returns list
+list.Except(list); // Noncompliant; always empty
+list.Intersect(list); // Noncompliant; always list
+list.SequenceEqual(list); // Noncompliant; always true
 
 var set = new HashSet&lt;int&gt;();
 set.UnionWith(set); // Noncompliant; no changes
-set.ExceptWith(set); // Noncompliant; use Clear instead
+set.ExceptWith(set); // Noncompliant; always empty
+set.IntersectWith(set); // Noncompliant; no changes
+set.IsProperSubsetOf(set); // Noncompliant; always false
+set.IsProperSupersetOf(set); // Noncompliant; always false
+set.IsSubsetOf(set); // Noncompliant; always true
+set.IsSupersetOf(set); // Noncompliant; always true
+set.Overlaps(set); // Noncompliant; always true
+set.SetEquals(set); // Noncompliant; always true
+set.SymmetricExceptWith(set); // Noncompliant; always empty
 </pre>
 
