@@ -39,7 +39,6 @@ namespace SonarAnalyzer.Helpers
                     (methodSymbol.Parameters.Length == 1 && methodSymbol.Parameters[0].IsType(KnownType.System_String_Array)));
         }
 
-        #region --- Object Methods ---
         public static bool IsObjectEquals(this IMethodSymbol methodSymbol)
         {
             return methodSymbol != null &&
@@ -84,7 +83,6 @@ namespace SonarAnalyzer.Helpers
                 methodSymbol.Parameters.Length == 0 &&
                 methodSymbol.ReturnType.Is(KnownType.System_String);
         }
-        #endregion // Object Methods
 
         public static bool IsIDisposableDispose(this IMethodSymbol methodSymbol)
         {
@@ -197,7 +195,6 @@ namespace SonarAnalyzer.Helpers
                 methodSymbol.Name == nameof(Console.Write);
         }
 
-        #region --- Enumerable Methods ---
         private static bool IsEnumerableMethod(this IMethodSymbol methodSymbol, string methodName,
             params int[] parametersCount)
         {
@@ -230,7 +227,6 @@ namespace SonarAnalyzer.Helpers
 
         public static bool IsEnumerableUnion(this IMethodSymbol methodSymbol) =>
             methodSymbol.IsEnumerableMethod(nameof(Enumerable.Union), 2, 3);
-        #endregion
 
         public static bool IsListAddRange(this IMethodSymbol methodSymbol)
         {

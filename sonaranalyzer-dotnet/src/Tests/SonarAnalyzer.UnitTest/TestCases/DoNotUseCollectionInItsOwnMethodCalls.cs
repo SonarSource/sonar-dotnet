@@ -8,7 +8,7 @@ namespace Tests.Diagnostics
     {
         public bool Equals(int left, int right) => left == right;
 
-        void InvalidCases()
+        void UnexpectedBehavior()
         {
             var list = new List<int>();
             var set = new HashSet<int>();
@@ -20,6 +20,12 @@ namespace Tests.Diagnostics
             // Secondary@-1
             Enumerable.Concat(list, list); // Noncompliant
             // Secondary@-1
+        }
+
+        void AlwaysSameCollection()
+        {
+            var list = new List<int>();
+            var set = new HashSet<int>();
 
             list.Union(list); // Noncompliant {{Change one instance of 'list' to a different value; This operation always produces the same collection.}}
             // Secondary@-1
@@ -33,17 +39,51 @@ namespace Tests.Diagnostics
             // Secondary@-1
             set.UnionWith(set); // Noncompliant
             // Secondary@-1
+            set.IntersectWith(set); // Noncompliant
+            // Secondary@-1
+        }
 
-            list.SequenceEqual(list); // Noncompliant {{Change one instance of 'list' to a different value; Comparing to itself always returns true.}}
-            // Secondary@-1
-            Enumerable.SequenceEqual(list, list); // Noncompliant
-            // Secondary@-1
+        void AlwaysEmptyCollection()
+        {
+            var list = new List<int>();
+            var set = new HashSet<int>();
 
             list.Except(list); // Noncompliant {{Change one instance of 'list' to a different value; This operation always produces an empty collection.}}
             // Secondary@-1
             Enumerable.Except(list, list); // Noncompliant
             // Secondary@-1
             set.ExceptWith(set); // Noncompliant
+            // Secondary@-1
+            set.SymmetricExceptWith(set); // Noncompliant
+            // Secondary@-1
+        }
+
+        void AlwaysTrue()
+        {
+            var list = new List<int>();
+            var set = new HashSet<int>();
+
+            list.SequenceEqual(list); // Noncompliant {{Change one instance of 'list' to a different value; Comparing to itself always returns true.}}
+            // Secondary@-1
+            Enumerable.SequenceEqual(list, list); // Noncompliant
+            // Secondary@-1
+            set.IsSubsetOf(set); // Noncompliant
+            // Secondary@-1
+            set.IsSupersetOf(set); // Noncompliant
+            // Secondary@-1
+            set.Overlaps(set); // Noncompliant
+            // Secondary@-1
+            set.SetEquals(set); // Noncompliant
+            // Secondary@-1
+        }
+
+        void AlwaysFalse()
+        {
+            var set = new HashSet<int>();
+
+            set.IsProperSubsetOf(set); // Noncompliant {{Change one instance of 'set' to a different value; Comparing to itself always returns false.}}
+            // Secondary@-1
+            set.IsProperSupersetOf(set); // Noncompliant
             // Secondary@-1
         }
 

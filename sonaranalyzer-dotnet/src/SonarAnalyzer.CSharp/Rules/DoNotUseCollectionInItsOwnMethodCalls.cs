@@ -41,6 +41,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string AlwaysEmptyCollectionMessage = "This operation always produces an empty collection.";
         private const string AlwaysSameCollectionMessage = "This operation always produces the same collection.";
         private const string AlwaysTrueMessage = "Comparing to itself always returns true.";
+        private const string AlwaysFalseMessage = "Comparing to itself always returns false.";
         private const string UnexpectedBehaviorMessage = "This operation will probably result in an unexpected behavior.";
 
         private static readonly DiagnosticDescriptor rule =
@@ -48,7 +49,8 @@ namespace SonarAnalyzer.Rules.CSharp
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         private static readonly ISet<string> trackedMethodNames = ImmutableHashSet.Create("AddRange", "Concat",
-            "Union", "Except", "Intersect", "SequenceEqual", "UnionWith", "ExceptWith");
+            "Except", "ExceptWith", "Intersect", "IntersectWith", "IsSubsetOf", "IsSupersetOf", "IsProperSubsetOf",
+            "IsProperSupersetOf", "Overlaps", "SequenceEqual", "SetEquals", "SymmetricExceptWith", "Union", "UnionWith");
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -58,8 +60,8 @@ namespace SonarAnalyzer.Rules.CSharp
                     var invocation = (InvocationExpressionSyntax)c.Node;
                     var invocationExpressionString = invocation.Expression.ToString();
 
-                    if (!trackedMethodNames.Any(method => invocationExpressionString.EndsWith(method,
-                        StringComparison.Ordinal)))
+                    if (!trackedMethodNames.Any(method =>
+                            invocationExpressionString.EndsWith(method, StringComparison.Ordinal)))
                     {
                         return;
                     }
@@ -134,32 +136,60 @@ namespace SonarAnalyzer.Rules.CSharp
                 return UnexpectedBehaviorMessage;
             }
 
-            if (IsISetUnionWith(methodSymbol))
+            if (IsISetUnionWithImplementation(methodSymbol) ||
+                IsISetIntersectWithImplementation(methodSymbol))
             {
                 return AlwaysSameCollectionMessage;
             }
 
-            if (IsISetExceptWith(methodSymbol))
+            if (IsISetExceptWithImplementation(methodSymbol) ||
+                IsISetSymmetricExceptWithImplementation(methodSymbol))
             {
                 return AlwaysEmptyCollectionMessage;
+            }
+
+            if (IsISetIsSubsetOfImplementation(methodSymbol) ||
+                IsISetIsSupersetOfImplementation(methodSymbol) ||
+                IsISetOverlapsImplementation(methodSymbol) ||
+                IsISetSetEqualsImplementation(methodSymbol))
+            {
+                return AlwaysTrueMessage;
+            }
+
+            if (IsISetIsProperSubsetOfImplementation(methodSymbol) ||
+                IsISetIsProperSupersetOfImplementation(methodSymbol))
+            {
+                return AlwaysFalseMessage;
             }
 
             return null;
         }
 
-        private static bool IsISetUnionWith(IMethodSymbol methodSymbol)
-        {
-            return methodSymbol != null &&
-                methodSymbol.Name == "UnionWith" &&
-                methodSymbol.MethodKind == MethodKind.Ordinary &&
-                methodSymbol.Parameters.Length == 1 &&
-                methodSymbol.ContainingType.Implements(KnownType.System_Collections_Generic_ISet_T);
-        }
+        private static bool IsISetUnionWithImplementation(IMethodSymbol methodSymbol) =>
+            IsISetMethodImplementation(methodSymbol, "UnionWith");
+        private static bool IsISetExceptWithImplementation(IMethodSymbol methodSymbol) =>
+            IsISetMethodImplementation(methodSymbol, "ExceptWith");
+        private static bool IsISetIntersectWithImplementation(IMethodSymbol methodSymbol) =>
+            IsISetMethodImplementation(methodSymbol, "IntersectWith");
+        private static bool IsISetIsProperSubsetOfImplementation(IMethodSymbol methodSymbol) =>
+            IsISetMethodImplementation(methodSymbol, "IsProperSubsetOf");
+        private static bool IsISetIsProperSupersetOfImplementation(IMethodSymbol methodSymbol) =>
+            IsISetMethodImplementation(methodSymbol, "IsProperSupersetOf");
+        private static bool IsISetIsSubsetOfImplementation(IMethodSymbol methodSymbol) =>
+            IsISetMethodImplementation(methodSymbol, "IsSubsetOf");
+        private static bool IsISetIsSupersetOfImplementation(IMethodSymbol methodSymbol) =>
+            IsISetMethodImplementation(methodSymbol, "IsSupersetOf");
+        private static bool IsISetOverlapsImplementation(IMethodSymbol methodSymbol) =>
+            IsISetMethodImplementation(methodSymbol, "Overlaps");
+        private static bool IsISetSetEqualsImplementation(IMethodSymbol methodSymbol) =>
+            IsISetMethodImplementation(methodSymbol, "SetEquals");
+        private static bool IsISetSymmetricExceptWithImplementation(IMethodSymbol methodSymbol) =>
+            IsISetMethodImplementation(methodSymbol, "SymmetricExceptWith");
 
-        private static bool IsISetExceptWith(IMethodSymbol methodSymbol)
+        private static bool IsISetMethodImplementation(IMethodSymbol methodSymbol, string methodName)
         {
             return methodSymbol != null &&
-                methodSymbol.Name == "ExceptWith" &&
+                methodSymbol.Name == methodName &&
                 methodSymbol.MethodKind == MethodKind.Ordinary &&
                 methodSymbol.Parameters.Length == 1 &&
                 methodSymbol.ContainingType.Implements(KnownType.System_Collections_Generic_ISet_T);
