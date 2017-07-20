@@ -37,7 +37,7 @@
     {
     }
 
-    interface IIIFoo // Noncompliant {{Rename interface 'IIIFoo' to match camel case naming rules, consider using 'IiiFoo'.}}
+    interface IIIFoo // Compliant
     {
     }
 
@@ -79,6 +79,12 @@
     internal interface SVsLog  // Compliant
     {
     }
+
+    class IILMarker { } // Noncompliant {{Rename class 'IILMarker' to match camel case naming rules, consider using 'IilMarker'.}}
+
+    interface IILMarker { } // Compliant
+
+    interface ITVImageScraper { }
 
     class A4 { }
     class AA4 { }

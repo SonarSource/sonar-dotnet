@@ -55,11 +55,11 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static readonly Dictionary<SyntaxKind, string> TypeKindNameMapping = new Dictionary<SyntaxKind, string>
         {
-            {SyntaxKind.StructDeclaration, "struct" },
-            {SyntaxKind.ClassDeclaration, "class" },
-            {SyntaxKind.InterfaceDeclaration, "interface" },
-            {SyntaxKind.MethodDeclaration, "method" },
-            {SyntaxKind.PropertyDeclaration, "property" }
+            { SyntaxKind.StructDeclaration, "struct" },
+            { SyntaxKind.ClassDeclaration, "class" },
+            { SyntaxKind.InterfaceDeclaration, "interface" },
+            { SyntaxKind.MethodDeclaration, "method" },
+            { SyntaxKind.PropertyDeclaration, "property" }
         };
 
         protected sealed override void Initialize(SonarAnalysisContext context)
@@ -108,10 +108,10 @@ namespace SonarAnalyzer.Rules.CSharp
 
             string suggestion;
             bool isNameValid = IsTypeNameValid(identifier.ValueText,
-                typeDeclaration is InterfaceDeclarationSyntax,
-                typeDeclaration.Modifiers.Any(m => m.IsKind(SyntaxKind.StaticKeyword)),
-                context.SemanticModel.Compilation.IsTest(),
-                out suggestion);
+                requireInitialI: typeDeclaration is InterfaceDeclarationSyntax,
+                allowInitialI: typeDeclaration.Modifiers.Any(m => m.IsKind(SyntaxKind.StaticKeyword)),
+                areUnderscoresAllowed: context.IsTest(),
+                suggestion: out suggestion);
 
             if (!isNameValid)
             {
@@ -170,9 +170,9 @@ namespace SonarAnalyzer.Rules.CSharp
 
             var suggestionBuilder = new StringBuilder(identifierName.Length);
 
-            foreach (var part in SplitToCamelCase(identifierName))
+            foreach (var part in SplitToParts(identifierName))
             {
-                suggestionBuilder.Append(SuggestLessUppercase(part, 1));
+                suggestionBuilder.Append(SuggestFixedCaseName(part, 1));
             }
 
             suggestionBuilder[0] = char.ToUpperInvariant(suggestionBuilder[0]);
@@ -193,7 +193,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var idealNameVariant = new StringBuilder(identifierName.Length);
             var acceptableNameVariant = new StringBuilder(identifierName.Length);
 
-            var parts = SplitToCamelCase(identifierName).ToList();
+            var parts = SplitToParts(identifierName).ToList();
             for (int i = 0; i < parts.Count; i++)
             {
                 string part = parts[i];
@@ -202,11 +202,13 @@ namespace SonarAnalyzer.Rules.CSharp
                     continue;
                 }
 
-                var ideal = i == 0 ? HandleFirstTypePart(part, requireInitialI, allowInitialI, 1)
-                                    : SuggestLessUppercase(part, 1);
+                var ideal = i == 0
+                    ? HandleFirstPartOfTypeName(part, requireInitialI, allowInitialI, 1)
+                    : SuggestFixedCaseName(part, 1);
 
-                var acceptable = i == 0 ? HandleFirstTypePart(part, requireInitialI, allowInitialI, 2)
-                                         : SuggestLessUppercase(part, 2);
+                var acceptable = i == 0
+                    ? HandleFirstPartOfTypeName(part, requireInitialI, allowInitialI, 2)
+                    : SuggestFixedCaseName(part, 2);
 
                 idealNameVariant.Append(ideal);
                 acceptableNameVariant.Append(acceptable);
@@ -219,7 +221,7 @@ namespace SonarAnalyzer.Rules.CSharp
                    suggestion == identifierName;
         }
 
-        private static string HandleFirstTypePart(string input,
+        private static string HandleFirstPartOfTypeName(string input,
             bool requireInitialI, bool allowInitialI, int maxUppercase)
         {
             bool startsWithI = input[0] == 'I';
@@ -227,7 +229,7 @@ namespace SonarAnalyzer.Rules.CSharp
             if (requireInitialI)
             {
                 string prefix = startsWithI ? string.Empty : "I";
-                return prefix + SuggestLessUppercase(ToInitCap(input), maxUppercase);
+                return prefix + SuggestFixedCaseName(FirstCharToUpper(input), maxUppercase + 1);
             }
 
             string suggestionToProcess;
@@ -237,14 +239,14 @@ namespace SonarAnalyzer.Rules.CSharp
                 IsCharUpper(input, 0) &&
                 !IsCharUpper(input, 1))
             {
-                suggestionToProcess = ToInitCap(input.Substring(1));
+                suggestionToProcess = FirstCharToUpper(input.Substring(1));
             }
             else
             {
-                suggestionToProcess = ToInitCap(input);
+                suggestionToProcess = FirstCharToUpper(input);
             }
 
-            return SuggestLessUppercase(suggestionToProcess, maxUppercase);
+            return SuggestFixedCaseName(suggestionToProcess, maxUppercase);
         }
 
         private static string SuggestCapitalLetterAfterNonLetter(StringBuilder suggestion)
@@ -260,7 +262,7 @@ namespace SonarAnalyzer.Rules.CSharp
             return suggestion.ToString();
         }
 
-        private static string SuggestLessUppercase(string input, int maxUppercaseCount)
+        private static string SuggestFixedCaseName(string input, int maxUppercaseCount)
         {
             var upper = input.Take(maxUppercaseCount);
             var lower = input.Skip(maxUppercaseCount).Select(char.ToLowerInvariant);
@@ -268,7 +270,7 @@ namespace SonarAnalyzer.Rules.CSharp
             return new string(upper.Concat(lower).ToArray());
         }
 
-        private static IEnumerable<string> SplitToCamelCase(string name)
+        private static IEnumerable<string> SplitToParts(string name)
         {
             var currentWord = new StringBuilder();
             foreach (var c in name)
@@ -322,7 +324,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     a.AttributeClass.Is(KnownType.System_Runtime_InteropServices_InterfaceTypeAttribute));
         }
 
-        private static string ToInitCap(string input)
+        private static string FirstCharToUpper(string input)
         {
             return input.Length > 0
                 ? char.ToUpperInvariant(input[0]) + input.Substring(1)

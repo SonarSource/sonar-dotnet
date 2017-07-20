@@ -67,7 +67,7 @@
 },
 {
 "id":  "S101",
-"message":  "Rename interface 'AT' to match camel case naming rules, consider using 'IAt'.",
+"message":  "Rename interface 'AT' to match camel case naming rules, consider using 'IAT'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Tests\Event\EventStreamSpec.cs",
 "region":  {
@@ -80,7 +80,7 @@
 },
 {
 "id":  "S101",
-"message":  "Rename interface 'ATT' to match camel case naming rules, consider using 'IAtt'.",
+"message":  "Rename interface 'ATT' to match camel case naming rules, consider using 'IATt'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Tests\Event\EventStreamSpec.cs",
 "region":  {
@@ -93,7 +93,7 @@
 },
 {
 "id":  "S101",
-"message":  "Rename interface 'BT' to match camel case naming rules, consider using 'IBt'.",
+"message":  "Rename interface 'BT' to match camel case naming rules, consider using 'IBT'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Tests\Event\EventStreamSpec.cs",
 "region":  {
@@ -106,7 +106,7 @@
 },
 {
 "id":  "S101",
-"message":  "Rename interface 'BTT' to match camel case naming rules, consider using 'IBtt'.",
+"message":  "Rename interface 'BTT' to match camel case naming rules, consider using 'IBTt'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Tests\Event\EventStreamSpec.cs",
 "region":  {
