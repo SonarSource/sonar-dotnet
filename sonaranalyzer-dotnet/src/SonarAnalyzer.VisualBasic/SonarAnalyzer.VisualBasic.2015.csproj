@@ -4,11 +4,11 @@
     <TargetFramework>netstandard1.4</TargetFramework>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <RootNamespace>SonarAnalyzer</RootNamespace>
-    <AssemblyName>SonarAnalyzer.CSharp</AssemblyName>
+    <AssemblyName>SonarAnalyzer.VisualBasic</AssemblyName>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <OutDir>bin\Debug\2017\netstandard1.4\</OutDir>
+    <OutDir>bin\Debug\2015</OutDir>
   </PropertyGroup>
 
   <ItemGroup>
@@ -17,20 +17,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Google.Protobuf" Version="3.1.0" />
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="2.3.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.VisualBasic.Workspaces" Version="2.3.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SonarAnalyzer.Common\SonarAnalyzer.Common.2017.csproj" />
+    <ProjectReference Include="..\SonarAnalyzer.Common\SonarAnalyzer.Common.2015.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Resource1.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resource1.resx</DependentUpon>
-    </Compile>
     <Compile Update="RspecStrings.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -39,10 +33,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Resource1.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resource1.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
     <EmbeddedResource Update="RspecStrings.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>RspecStrings.Designer.cs</LastGenOutput>

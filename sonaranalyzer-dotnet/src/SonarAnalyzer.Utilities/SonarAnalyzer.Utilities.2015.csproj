@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <OutDir>bin\Debug\2017\netstandard1.4\</OutDir>
+    <OutDir>bin\Debug\2015</OutDir>
   </PropertyGroup>
 
   <ItemGroup>
@@ -25,9 +25,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SonarAnalyzer.Common\SonarAnalyzer.Common.2017.csproj" />
-    <ProjectReference Include="..\SonarAnalyzer.CSharp\SonarAnalyzer.CSharp.2017.csproj" />
-    <ProjectReference Include="..\SonarAnalyzer.VisualBasic\SonarAnalyzer.VisualBasic.2017.csproj" />
+    <ProjectReference Include="..\SonarAnalyzer.Common\SonarAnalyzer.Common.2015.csproj" />
+    <ProjectReference Include="..\SonarAnalyzer.CSharp\SonarAnalyzer.CSharp.2015.csproj" />
+    <ProjectReference Include="..\SonarAnalyzer.VisualBasic\SonarAnalyzer.VisualBasic.2015.csproj" />
   </ItemGroup>
 
 </Project>
