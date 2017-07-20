@@ -39,6 +39,7 @@ namespace SonarAnalyzer.Helpers
                     (methodSymbol.Parameters.Length == 1 && methodSymbol.Parameters[0].IsType(KnownType.System_String_Array)));
         }
 
+        #region --- Object Methods ---
         public static bool IsObjectEquals(this IMethodSymbol methodSymbol)
         {
             return methodSymbol != null &&
@@ -83,6 +84,7 @@ namespace SonarAnalyzer.Helpers
                 methodSymbol.Parameters.Length == 0 &&
                 methodSymbol.ReturnType.Is(KnownType.System_String);
         }
+        #endregion // Object Methods
 
         public static bool IsIDisposableDispose(this IMethodSymbol methodSymbol)
         {
@@ -132,32 +134,6 @@ namespace SonarAnalyzer.Helpers
                 methodSymbol.Parameters.Length == 0 &&
                 methodSymbol.Name == nameof(Array.Clone) &&
                 methodSymbol.ContainingType.Is(KnownType.System_Array);
-        }
-
-        public static bool IsEnumerableToList(this IMethodSymbol methodSymbol)
-        {
-            return methodSymbol != null &&
-                methodSymbol.MethodKind == MethodKind.ReducedExtension &&
-                methodSymbol.Parameters.Length == 0 &&
-                methodSymbol.Name == nameof(Enumerable.ToList) &&
-                methodSymbol.ContainingType.Is(KnownType.System_Linq_Enumerable);
-        }
-
-        public static bool IsEnumerableCount(this IMethodSymbol methodSymbol)
-        {
-            return methodSymbol != null &&
-                methodSymbol.MethodKind == MethodKind.ReducedExtension &&
-                methodSymbol.Name == nameof(Enumerable.Count) &&
-                methodSymbol.ContainingType.Is(KnownType.System_Linq_Enumerable);
-        }
-
-        public static bool IsEnumerableToArray(this IMethodSymbol methodSymbol)
-        {
-            return methodSymbol != null &&
-                methodSymbol.MethodKind == MethodKind.ReducedExtension &&
-                methodSymbol.Parameters.Length == 0 &&
-                methodSymbol.Name == nameof(Enumerable.ToArray) &&
-                methodSymbol.ContainingType.Is(KnownType.System_Linq_Enumerable);
         }
 
         public static bool IsGcSuppressFinalize(this IMethodSymbol methodSymbol)
@@ -219,6 +195,65 @@ namespace SonarAnalyzer.Helpers
             return methodSymbol != null &&
                 methodSymbol.IsInType(KnownType.System_Console) &&
                 methodSymbol.Name == nameof(Console.Write);
+        }
+
+        #region --- Enumerable Methods ---
+        private static bool IsEnumerableMethod(this IMethodSymbol methodSymbol, string methodName,
+            params int[] parametersCount)
+        {
+            return methodSymbol != null &&
+                methodSymbol.Name == methodName &&
+                parametersCount.Any(count => methodSymbol.HasExactlyNParameters(count)) &&
+                methodSymbol.ContainingType.Is(KnownType.System_Linq_Enumerable);
+        }
+
+        public static bool IsEnumerableConcat(this IMethodSymbol methodSymbol) =>
+            methodSymbol.IsEnumerableMethod(nameof(Enumerable.Concat), 2);
+
+        public static bool IsEnumerableCount(this IMethodSymbol methodSymbol) =>
+            methodSymbol.IsEnumerableMethod(nameof(Enumerable.Count), 1, 2);
+
+        public static bool IsEnumerableExcept(this IMethodSymbol methodSymbol) =>
+            methodSymbol.IsEnumerableMethod(nameof(Enumerable.Except), 2, 3);
+
+        public static bool IsEnumerableIntersect(this IMethodSymbol methodSymbol) =>
+            methodSymbol.IsEnumerableMethod(nameof(Enumerable.Intersect), 2, 3);
+
+        public static bool IsEnumerableSequenceEqual(this IMethodSymbol methodSymbol) =>
+            methodSymbol.IsEnumerableMethod(nameof(Enumerable.SequenceEqual), 2, 3);
+
+        public static bool IsEnumerableToList(this IMethodSymbol methodSymbol) =>
+            methodSymbol.IsEnumerableMethod(nameof(Enumerable.ToList), 1);
+
+        public static bool IsEnumerableToArray(this IMethodSymbol methodSymbol) =>
+            methodSymbol.IsEnumerableMethod(nameof(Enumerable.ToArray), 1);
+
+        public static bool IsEnumerableUnion(this IMethodSymbol methodSymbol) =>
+            methodSymbol.IsEnumerableMethod(nameof(Enumerable.Union), 2, 3);
+        #endregion
+
+        public static bool IsListAddRange(this IMethodSymbol methodSymbol)
+        {
+            return methodSymbol != null &&
+                methodSymbol.Name == "AddRange" &&
+                methodSymbol.MethodKind == MethodKind.Ordinary &&
+                methodSymbol.Parameters.Length == 1 &&
+                methodSymbol.ContainingType.ConstructedFrom.Is(KnownType.System_Collections_Generic_List_T);
+        }
+
+        private static bool HasExactlyNParameters(this IMethodSymbol methodSymbol, int parametersCount)
+        {
+            if (methodSymbol.MethodKind == MethodKind.Ordinary)
+            {
+                return methodSymbol.Parameters.Length == parametersCount;
+            }
+
+            if (methodSymbol.MethodKind == MethodKind.ReducedExtension)
+            {
+                return methodSymbol.Parameters.Length == (parametersCount - 1);
+            }
+
+            return false;
         }
     }
 }
