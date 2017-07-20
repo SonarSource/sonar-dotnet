@@ -26,4 +26,7 @@
     <Asset Type="Microsoft.VisualStudio.MefComponent" d:Source="Project" d:ProjectName="SonarAnalyzer.VisualBasic" Path="|SonarAnalyzer.VisualBasic|" />
     <Asset Type="Microsoft.VisualStudio.Analyzer" d:Source="File" Path="Google.Protobuf.dll" />
   </Assets>
+  <Prerequisites>
+    <Prerequisite Id="Microsoft.VisualStudio.Component.Roslyn.Compiler" Version="[15.0.26208.0,16.0)" DisplayName="C# and Visual Basic Roslyn compilers" />
+  </Prerequisites>
 </PackageManifest>
