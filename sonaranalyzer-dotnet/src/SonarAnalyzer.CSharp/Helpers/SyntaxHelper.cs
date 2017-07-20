@@ -181,9 +181,16 @@ namespace SonarAnalyzer.Helpers
         private static bool ContainsMethodInvocation(IEnumerable<SyntaxNode> syntaxNodes, SemanticModel semanticModel,
             Func<InvocationExpressionSyntax, bool> syntaxPredicate, Func<IMethodSymbol, bool> symbolPredicate)
         {
+            // See issue: https://github.com/SonarSource/sonar-csharp/issues/416
+            // Where clause excludes nodes that are not defined on the same SyntaxTree as the
+            // SemanticModel (because of partial definition).
+
+            // Another approach would be to get the SemanticModel linked to the node we explore.
+            // More details: https://github.com/dotnet/roslyn/issues/18730
             return syntaxNodes
                 .OfType<InvocationExpressionSyntax>()
                 .Where(syntaxPredicate)
+                .Where(invocation => invocation.SyntaxTree.Equals(semanticModel.SyntaxTree))
                 .Select(e => semanticModel.GetSymbolInfo(e.Expression).Symbol)
                 .OfType<IMethodSymbol>()
                 .Any(symbolPredicate);
