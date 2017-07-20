@@ -20,15 +20,15 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
+using System.Text;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
-using System.Collections.Immutable;
-using System.Text;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -65,7 +65,7 @@ namespace SonarAnalyzer.Rules.CSharp
         protected sealed override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
-                c => CheckTypeName((BaseTypeDeclarationSyntax)c.Node, c),
+                CheckTypeName,
                 SyntaxKind.ClassDeclaration,
                 SyntaxKind.InterfaceDeclaration,
                 SyntaxKind.StructDeclaration);
@@ -87,8 +87,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.PropertyDeclaration);
         }
 
-        private static void CheckTypeName(BaseTypeDeclarationSyntax type,
-            SyntaxNodeAnalysisContext context)
+        private static void CheckTypeName(SyntaxNodeAnalysisContext context)
         {
             var typeDeclaration = (BaseTypeDeclarationSyntax)context.Node;
             var identifier = typeDeclaration.Identifier;
@@ -306,7 +305,6 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
 
                     yield return c.ToString();
-                    continue;
                 }
             }
 
