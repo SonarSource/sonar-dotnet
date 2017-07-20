@@ -320,18 +320,18 @@ namespace NS
         [TestCategory("CFG")]
         public void Cfg_DoWhile_Continue()
         {
-            var cfg = Build(@"void fun(){
-                                int p;
-                                do
-                                {
-                                    p = unknown();
-                                    if (unknown())
-                                    {
-                                        p = 0;
-                                        continue;
-                                    }
-                                } while (!p);
-                              }");
+            var cfg = Build(@"
+            int p;
+            do
+            {
+                p = unknown();
+                if (unknown())
+                {
+                    p = 0;
+                    continue;
+                }
+            } while (!p);
+            ");
 
             VerifyCfg(cfg, 5);
 
@@ -345,7 +345,7 @@ namespace NS
 
             defBlock.Should().Be(cfg.EntryBlock);
             defBlock.SuccessorBlocks.Should().OnlyContainInOrder(ifBlock);
-            VerifyAllInstructions(defBlock, "fun()", "p");
+            VerifyAllInstructions(defBlock, "p");
 
             ifBlock.SuccessorBlocks.Should().OnlyContainInOrder(continueJump, doCondition);
             ifBlock.BranchingNode.Kind().Should().Be(SyntaxKind.IfStatement);

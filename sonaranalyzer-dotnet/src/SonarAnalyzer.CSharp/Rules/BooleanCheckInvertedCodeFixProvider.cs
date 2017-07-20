@@ -69,7 +69,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         var newBinary = ChangeOperator((BinaryExpressionSyntax)expression);
 
                         if (syntaxNode.Parent is ExpressionSyntax &&
-                            !ExpressionTypesWithNoParens.Any(type => type.IsInstanceOfType(syntaxNode.Parent)))
+                            !(syntaxNode.Parent is AssignmentExpressionSyntax))
                         {
                             newBinary = SyntaxFactory.ParenthesizedExpression(newBinary);
                         }
@@ -84,8 +84,6 @@ namespace SonarAnalyzer.Rules.CSharp
 
             return TaskHelper.CompletedTask;
         }
-
-        private static readonly Type[] ExpressionTypesWithNoParens = { typeof(AssignmentExpressionSyntax) };
 
         private static ExpressionSyntax ChangeOperator(BinaryExpressionSyntax binary)
         {

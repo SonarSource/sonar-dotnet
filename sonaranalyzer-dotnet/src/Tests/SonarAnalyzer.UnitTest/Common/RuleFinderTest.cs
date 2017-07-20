@@ -24,6 +24,7 @@ using SonarAnalyzer.Common;
 using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.Utilities;
 using System.Linq;
+using System.Reflection;
 
 namespace SonarAnalyzer.UnitTest.Common
 {
@@ -50,7 +51,7 @@ namespace SonarAnalyzer.UnitTest.Common
         public void GetAnalyzerTypes()
         {
             var analyzers = new RuleFinder().GetAnalyzerTypes(AnalyzerLanguage.CSharp);
-            analyzers.Should().Contain(typeof(EmptyStatement));
+            analyzers.Should().Contain(typeof(EmptyStatement).GetTypeInfo());
         }
 
         [TestMethod]

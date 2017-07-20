@@ -1,38 +1,36 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.16
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SonarAnalyzer.Vsix", "src\SonarAnalyzer.Vsix\SonarAnalyzer.Vsix.csproj", "{9D2DF65B-8BB4-4F85-8B71-C4B636513EF3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SonarAnalyzer.CSharp.2017", "src\SonarAnalyzer.CSharp\SonarAnalyzer.CSharp.2017.csproj", "{C7B537A2-62A7-4878-91B8-F766E76C2CA0}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common Solution Items", "Common Solution Items", "{0C3E0519-DB5C-47C0-ABB3-9D1FB23DFBAF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SonarAnalyzer.UnitTest.2017", "src\Tests\SonarAnalyzer.UnitTest\SonarAnalyzer.UnitTest.2017.csproj", "{76E6CC17-FC68-4C8E-941D-8173CDCB855E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SonarAnalyzer.VisualBasic.2017", "src\SonarAnalyzer.VisualBasic\SonarAnalyzer.VisualBasic.2017.csproj", "{C6E0927F-7299-48C4-8946-36E03FD2696B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SonarAnalyzer.Utilities.2017", "src\SonarAnalyzer.Utilities\SonarAnalyzer.Utilities.2017.csproj", "{5595D032-CDA1-4106-93AF-78BE357E9995}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{0DCDDFB1-C4C6-41BA-9613-53F2FBB4C1DA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SonarAnalyzer.RuleDocGenerator.Web.2017", "src\SonarAnalyzer.RuleDocGenerator.Web\SonarAnalyzer.RuleDocGenerator.Web.2017.csproj", "{E77C89FB-0316-4E26-95CC-F6156FDF1646}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SonarAnalyzer.RuleDescriptorGenerator.2017", "src\SonarAnalyzer.RuleDescriptorGenerator\SonarAnalyzer.RuleDescriptorGenerator.2017.csproj", "{45D2F72F-6771-4E58-9BF6-AC3FBAE831E7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SonarQube Integration", "SonarQube Integration", "{E10BC84F-F6D3-461D-BA82-55C5335FC02C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common Solution Items", "Common Solution Items", "{3DF935D3-3D2D-49C2-9B7F-9A65FCB8F00D}"
 	ProjectSection(SolutionItems) = preProject
 		src\AssemblyInfo.Shared.cs = src\AssemblyInfo.Shared.cs
+		src\Signing.cs = src\Signing.cs
 		src\SonarAnalyzer.ruleset = src\SonarAnalyzer.ruleset
 		src\SonarAnalyzer.Test.ruleset = src\SonarAnalyzer.Test.ruleset
 		src\SonarLint.xml = src\SonarLint.xml
-		build\Version.props = build\Version.props
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SonarAnalyzer.Common", "src\SonarAnalyzer.Common\SonarAnalyzer.Common.csproj", "{D1AE804F-AE78-4883-B3D6-9E3C4026DEF6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SonarAnalyzer.Common.2017", "src\SonarAnalyzer.Common\SonarAnalyzer.Common.2017.csproj", "{A8D0F263-B78C-4AAA-BC4A-4972AFC7971F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SonarAnalyzer.Utilities", "src\SonarAnalyzer.Utilities\SonarAnalyzer.Utilities.csproj", "{4C1BB6CE-645F-400B-B491-AF7BB40E5C01}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{B7233F78-E142-4882-B084-7C83BE472109}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SonarAnalyzer.UnitTest", "src\Tests\SonarAnalyzer.UnitTest\SonarAnalyzer.UnitTest.csproj", "{4AC7D054-B645-46D7-9671-D666BCE0C745}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SonarQube Integration", "SonarQube Integration", "{F51A8C2A-A0F5-4282-956F-549D05860396}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SonarAnalyzer.RuleDescriptorGenerator", "src\SonarAnalyzer.RuleDescriptorGenerator\SonarAnalyzer.RuleDescriptorGenerator.csproj", "{E4D5FF22-C1A4-4CAD-B068-E47817F25848}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SonarAnalyzer.RuleDocGenerator.Web", "src\SonarAnalyzer.RuleDocGenerator.Web\SonarAnalyzer.RuleDocGenerator.Web.csproj", "{98EF48F7-28D7-44CA-8C7F-6042EA4898E1}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{CCEE2C5C-96D9-4427-B980-71DC0A49E23F}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SonarAnalyzer.CSharp", "src\SonarAnalyzer.CSharp\SonarAnalyzer.CSharp.csproj", "{39CCD086-A7F8-42A0-B402-3C9BD9EB4825}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SonarAnalyzer.VisualBasic", "src\SonarAnalyzer.VisualBasic\SonarAnalyzer.VisualBasic.csproj", "{01DF3CB0-2213-42F3-BB8E-0C3BC330DE7A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SonarAnalyzer.Vsix.2017", "src\SonarAnalyzer.Vsix\SonarAnalyzer.Vsix.2017.csproj", "{D3770006-B071-4C8B-84D4-625BA0E2C07A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -40,45 +38,44 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{9D2DF65B-8BB4-4F85-8B71-C4B636513EF3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9D2DF65B-8BB4-4F85-8B71-C4B636513EF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9D2DF65B-8BB4-4F85-8B71-C4B636513EF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9D2DF65B-8BB4-4F85-8B71-C4B636513EF3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D1AE804F-AE78-4883-B3D6-9E3C4026DEF6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D1AE804F-AE78-4883-B3D6-9E3C4026DEF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D1AE804F-AE78-4883-B3D6-9E3C4026DEF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D1AE804F-AE78-4883-B3D6-9E3C4026DEF6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4C1BB6CE-645F-400B-B491-AF7BB40E5C01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4C1BB6CE-645F-400B-B491-AF7BB40E5C01}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4C1BB6CE-645F-400B-B491-AF7BB40E5C01}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4C1BB6CE-645F-400B-B491-AF7BB40E5C01}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4AC7D054-B645-46D7-9671-D666BCE0C745}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4AC7D054-B645-46D7-9671-D666BCE0C745}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4AC7D054-B645-46D7-9671-D666BCE0C745}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4AC7D054-B645-46D7-9671-D666BCE0C745}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E4D5FF22-C1A4-4CAD-B068-E47817F25848}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E4D5FF22-C1A4-4CAD-B068-E47817F25848}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E4D5FF22-C1A4-4CAD-B068-E47817F25848}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E4D5FF22-C1A4-4CAD-B068-E47817F25848}.Release|Any CPU.Build.0 = Release|Any CPU
-		{98EF48F7-28D7-44CA-8C7F-6042EA4898E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{98EF48F7-28D7-44CA-8C7F-6042EA4898E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{98EF48F7-28D7-44CA-8C7F-6042EA4898E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{98EF48F7-28D7-44CA-8C7F-6042EA4898E1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{39CCD086-A7F8-42A0-B402-3C9BD9EB4825}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{39CCD086-A7F8-42A0-B402-3C9BD9EB4825}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{39CCD086-A7F8-42A0-B402-3C9BD9EB4825}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{39CCD086-A7F8-42A0-B402-3C9BD9EB4825}.Release|Any CPU.Build.0 = Release|Any CPU
-		{01DF3CB0-2213-42F3-BB8E-0C3BC330DE7A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{01DF3CB0-2213-42F3-BB8E-0C3BC330DE7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{01DF3CB0-2213-42F3-BB8E-0C3BC330DE7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{01DF3CB0-2213-42F3-BB8E-0C3BC330DE7A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7B537A2-62A7-4878-91B8-F766E76C2CA0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7B537A2-62A7-4878-91B8-F766E76C2CA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7B537A2-62A7-4878-91B8-F766E76C2CA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7B537A2-62A7-4878-91B8-F766E76C2CA0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{76E6CC17-FC68-4C8E-941D-8173CDCB855E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76E6CC17-FC68-4C8E-941D-8173CDCB855E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76E6CC17-FC68-4C8E-941D-8173CDCB855E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76E6CC17-FC68-4C8E-941D-8173CDCB855E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6E0927F-7299-48C4-8946-36E03FD2696B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6E0927F-7299-48C4-8946-36E03FD2696B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6E0927F-7299-48C4-8946-36E03FD2696B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6E0927F-7299-48C4-8946-36E03FD2696B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5595D032-CDA1-4106-93AF-78BE357E9995}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5595D032-CDA1-4106-93AF-78BE357E9995}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5595D032-CDA1-4106-93AF-78BE357E9995}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5595D032-CDA1-4106-93AF-78BE357E9995}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E77C89FB-0316-4E26-95CC-F6156FDF1646}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E77C89FB-0316-4E26-95CC-F6156FDF1646}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E77C89FB-0316-4E26-95CC-F6156FDF1646}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E77C89FB-0316-4E26-95CC-F6156FDF1646}.Release|Any CPU.Build.0 = Release|Any CPU
+		{45D2F72F-6771-4E58-9BF6-AC3FBAE831E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45D2F72F-6771-4E58-9BF6-AC3FBAE831E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45D2F72F-6771-4E58-9BF6-AC3FBAE831E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45D2F72F-6771-4E58-9BF6-AC3FBAE831E7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A8D0F263-B78C-4AAA-BC4A-4972AFC7971F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8D0F263-B78C-4AAA-BC4A-4972AFC7971F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8D0F263-B78C-4AAA-BC4A-4972AFC7971F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8D0F263-B78C-4AAA-BC4A-4972AFC7971F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3770006-B071-4C8B-84D4-625BA0E2C07A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3770006-B071-4C8B-84D4-625BA0E2C07A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3770006-B071-4C8B-84D4-625BA0E2C07A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3770006-B071-4C8B-84D4-625BA0E2C07A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{4AC7D054-B645-46D7-9671-D666BCE0C745} = {B7233F78-E142-4882-B084-7C83BE472109}
-		{E4D5FF22-C1A4-4CAD-B068-E47817F25848} = {F51A8C2A-A0F5-4282-956F-549D05860396}
-		{CCEE2C5C-96D9-4427-B980-71DC0A49E23F} = {F51A8C2A-A0F5-4282-956F-549D05860396}
+		{76E6CC17-FC68-4C8E-941D-8173CDCB855E} = {0DCDDFB1-C4C6-41BA-9613-53F2FBB4C1DA}
+		{45D2F72F-6771-4E58-9BF6-AC3FBAE831E7} = {E10BC84F-F6D3-461D-BA82-55C5335FC02C}
 	EndGlobalSection
 EndGlobal

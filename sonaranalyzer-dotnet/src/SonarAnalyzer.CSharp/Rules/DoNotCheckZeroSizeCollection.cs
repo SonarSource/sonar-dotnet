@@ -137,7 +137,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var propertySymbol = symbol as IPropertySymbol;
             return propertySymbol != null &&
                    propertySymbol.ContainingType.Is(KnownType.System_Array) &&
-                   (propertySymbol.Name == nameof(Array.Length) || propertySymbol.Name == nameof(Array.LongLength));
+                   (propertySymbol.Name == nameof(Array.Length) || propertySymbol.Name == "LongLength");
         }
 
         private static bool IsCollectionProperty(ISymbol symbol)

@@ -21,7 +21,6 @@
 using System;
 using System.Diagnostics;
 using System.Linq;
-using System.Runtime.Serialization;
 using Microsoft.CodeAnalysis;
 
 namespace SonarAnalyzer.Helpers
@@ -112,7 +111,7 @@ namespace SonarAnalyzer.Helpers
                 methodSymbol.Parameters[0].Type.Is(KnownType.System_Runtime_Serialization_SerializationInfo) &&
                 methodSymbol.Parameters[1].Type.Is(KnownType.System_Runtime_Serialization_StreamingContext) &&
                 methodSymbol.ReturnsVoid &&
-                (methodSymbol.Name == nameof(ISerializable.GetObjectData) ||
+                (methodSymbol.Name == "GetObjectData" ||
                 methodSymbol.Name == explicitName);
         }
 

@@ -28,6 +28,7 @@ using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.RuleDescriptors;
 using System.Resources;
+using TypeInfo = System.Reflection.TypeInfo;
 
 namespace SonarAnalyzer.Utilities
 {
@@ -36,7 +37,7 @@ namespace SonarAnalyzer.Utilities
         private const string RuleDescriptionPathPattern = "SonarAnalyzer.Rules.Description.{0}.html";
         internal const string CodeFixProviderSuffix = "CodeFixProvider";
 
-        private static readonly Assembly SonarAnalyzerUtilitiesAssembly = typeof(RuleDetailBuilder).Assembly;
+        private static readonly Assembly SonarAnalyzerUtilitiesAssembly = typeof(RuleDetailBuilder).GetTypeInfo().Assembly;
 
         public static IEnumerable<RuleDetail> GetAllRuleDetails(AnalyzerLanguage language)
         {
@@ -52,13 +53,13 @@ namespace SonarAnalyzer.Utilities
                 .SelectMany(t => GetRuleDetailFromRuleAttributes(t, language));
         }
 
-        private static IEnumerable<RuleDetail> GetRuleDetailFromRuleAttributes(Type analyzerType, AnalyzerLanguage language)
+        private static IEnumerable<RuleDetail> GetRuleDetailFromRuleAttributes(TypeInfo analyzerType, AnalyzerLanguage language)
         {
             return analyzerType.GetCustomAttributes<RuleAttribute>()
                 .Select(ruleAttribute => GetRuleDetail(ruleAttribute, analyzerType, language));
         }
 
-        private static RuleDetail GetRuleDetail(RuleAttribute rule, Type analyzerType, AnalyzerLanguage language)
+        private static RuleDetail GetRuleDetail(RuleAttribute rule, TypeInfo analyzerType, AnalyzerLanguage language)
         {
             var resources = new ResourceManager("SonarAnalyzer.RspecStrings", analyzerType.Assembly);
 
@@ -82,10 +83,10 @@ namespace SonarAnalyzer.Utilities
             return ruleDetail;
         }
 
-        private static Type GetCodeFixProviderType(Type analyzerType)
+        private static TypeInfo GetCodeFixProviderType(TypeInfo analyzerType)
         {
             var typeName = analyzerType.FullName + CodeFixProviderSuffix;
-            return analyzerType.Assembly.GetType(typeName);
+            return analyzerType.Assembly.GetType(typeName)?.GetTypeInfo();
         }
 
         private static string ToSonarQubeRemediationFunction(string remediation)
@@ -103,7 +104,7 @@ namespace SonarAnalyzer.Utilities
             return null;
         }
 
-        private static void GetCodeFixNames(Type analyzerType, RuleDetail ruleDetail)
+        private static void GetCodeFixNames(TypeInfo analyzerType, RuleDetail ruleDetail)
         {
             var codeFixProvider = GetCodeFixProviderType(analyzerType);
             if (codeFixProvider == null)
@@ -116,31 +117,31 @@ namespace SonarAnalyzer.Utilities
             ruleDetail.CodeFixTitles.AddRange(titles);
         }
 
-        public static IEnumerable<string> GetCodeFixTitles(Type codeFixProvider)
+        public static IEnumerable<string> GetCodeFixTitles(TypeInfo codeFixProvider)
         {
             return GetCodeFixProvidersWithBase(codeFixProvider)
-                .SelectMany(t => t.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static))
+                .SelectMany(t => t.DeclaredFields.Where(f => f.IsStatic))
                 .Where(field =>
                     field.Name.StartsWith("Title", StringComparison.Ordinal) &&
                     field.FieldType == typeof(string))
-                .Select(field => (string)field.GetRawConstantValue());
+                .Select(field => (string)field.GetValue(null)); // ORIGINAL (string)field.GetRawConstantValue());
         }
 
-        private static IEnumerable<Type> GetCodeFixProvidersWithBase(Type codeFixProvider)
+        private static IEnumerable<TypeInfo> GetCodeFixProvidersWithBase(TypeInfo codeFixProvider)
         {
             yield return codeFixProvider;
 
-            var baseClass = codeFixProvider.BaseType;
-            while (baseClass != null && baseClass != typeof(SonarCodeFixProvider))
+            var baseClass = codeFixProvider.BaseType.GetTypeInfo();
+            while (baseClass != null && baseClass != typeof(SonarCodeFixProvider).GetTypeInfo())
             {
                 yield return baseClass;
-                baseClass = baseClass.BaseType;
+                baseClass = baseClass.BaseType.GetTypeInfo();
             }
         }
 
-        private static void GetParameters(Type analyzerType, RuleDetail ruleDetail)
+        private static void GetParameters(TypeInfo analyzerType, RuleDetail ruleDetail)
         {
-            var parameters = analyzerType.GetProperties()
+            var parameters = analyzerType.DeclaredProperties
                 .Select(p => p.GetCustomAttributes<RuleParameterAttribute>().SingleOrDefault());
 
             foreach (var ruleParameter in parameters

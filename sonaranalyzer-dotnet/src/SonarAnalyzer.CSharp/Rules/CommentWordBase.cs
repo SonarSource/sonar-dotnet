@@ -25,6 +25,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Text;
 using SonarAnalyzer.Helpers;
+using System;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -71,7 +72,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static IEnumerable<int> AllCaseInsensitiveIndexesOf(string str, string value)
         {
             var index = 0;
-            while ((index = str.IndexOf(value, index, str.Length - index, System.StringComparison.InvariantCultureIgnoreCase)) != -1)
+            while ((index = str.IndexOf(value, index, str.Length - index, StringComparison.OrdinalIgnoreCase)) != -1)
             {
                 yield return index;
                 index += value.Length;

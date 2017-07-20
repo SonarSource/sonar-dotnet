@@ -33,7 +33,7 @@ namespace SonarAnalyzer.Helpers
 
         internal static bool IsRegexMatch(string name, string pattern)
         {
-            return Regex.IsMatch(name, pattern, RegexOptions.CultureInvariant | RegexOptions.Compiled);
+            return Regex.IsMatch(name, pattern, RegexOptions.CultureInvariant); // | RegexOptions.Compiled);
         }
     }
 }

@@ -25,64 +25,65 @@ using System.Reflection;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
+using TypeInfo = System.Reflection.TypeInfo;
 
 namespace SonarAnalyzer.Utilities
 {
     public class RuleFinder
     {
-        private readonly List<Type> diagnosticAnalyzers;
+        private readonly List<TypeInfo> diagnosticAnalyzers;
 
         public static IEnumerable<Assembly> PackagedRuleAssemblies => new[]
             {
-                Assembly.Load(typeof(Rules.CSharp.FlagsEnumZeroMember).Assembly.GetName()),
-                Assembly.Load(typeof(Rules.VisualBasic.FlagsEnumZeroMember).Assembly.GetName()),
-                Assembly.Load(typeof(Rules.Common.FlagsEnumZeroMemberBase).Assembly.GetName())
+                Assembly.Load(typeof(Rules.CSharp.FlagsEnumZeroMember).GetTypeInfo().Assembly.GetName()),
+                Assembly.Load(typeof(Rules.VisualBasic.FlagsEnumZeroMember).GetTypeInfo().Assembly.GetName()),
+                Assembly.Load(typeof(Rules.Common.FlagsEnumZeroMemberBase).GetTypeInfo().Assembly.GetName())
             };
 
         public RuleFinder()
         {
             diagnosticAnalyzers = PackagedRuleAssemblies
-                .SelectMany(assembly => assembly.GetTypes())
+                .SelectMany(assembly => assembly.DefinedTypes)
                 .Where(t => t.IsSubclassOf(typeof(DiagnosticAnalyzer)))
                 .Where(t => t.GetCustomAttributes<RuleAttribute>().Any())
                 .ToList();
         }
 
-        public IEnumerable<Type> GetParameterlessAnalyzerTypes(AnalyzerLanguage language)
+        public IEnumerable<TypeInfo> GetParameterlessAnalyzerTypes(AnalyzerLanguage language)
         {
             return diagnosticAnalyzers
                 .Where(analyzerType =>
-                    !analyzerType.GetProperties()
+                    !analyzerType.DeclaredProperties
                         .Any(p => p.GetCustomAttributes<RuleParameterAttribute>().Any()))
                 .Where(type => GetTargetLanguages(type).IsAlso(language));
         }
 
-        public static bool IsParameterized(Type analyzerType)
+        public static bool IsParameterized(TypeInfo analyzerType)
         {
-            return analyzerType.GetProperties()
+            return analyzerType.DeclaredProperties
                 .Any(p => p.GetCustomAttributes<RuleParameterAttribute>().Any());
         }
 
-        public IEnumerable<Type> GetAllAnalyzerTypes()
+        public IEnumerable<TypeInfo> GetAllAnalyzerTypes()
         {
             return diagnosticAnalyzers;
         }
 
-        public IEnumerable<Type> GetAnalyzerTypes(AnalyzerLanguage language)
+        public IEnumerable<TypeInfo> GetAnalyzerTypes(AnalyzerLanguage language)
         {
             return diagnosticAnalyzers
                 .Where(type => GetTargetLanguages(type).IsAlso(language));
         }
 
-        public static IEnumerable<Type> GetUtilityAnalyzerTypes(AnalyzerLanguage language)
+        public static IEnumerable<TypeInfo> GetUtilityAnalyzerTypes(AnalyzerLanguage language)
         {
             return PackagedRuleAssemblies
-                .SelectMany(assembly => assembly.GetTypes())
+                .SelectMany(assembly => assembly.DefinedTypes)
                 .Where(t => !t.IsAbstract && t.IsSubclassOf(typeof(Rules.UtilityAnalyzerBase)))
                 .Where(type => GetTargetLanguages(type).IsAlso(language));
         }
 
-        public static AnalyzerLanguage GetTargetLanguages(Type analyzerType)
+        public static AnalyzerLanguage GetTargetLanguages(TypeInfo analyzerType)
         {
             var attribute = analyzerType.GetCustomAttributes<DiagnosticAnalyzerAttribute>().FirstOrDefault();
             if (attribute == null)

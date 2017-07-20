@@ -28,7 +28,7 @@ namespace SonarAnalyzer.Helpers
         public static string ToSonarQubeString(this PropertyType propertyType)
         {
             var parts = propertyType.ToString().SplitCamelCase();
-            return string.Join("_", parts).ToUpper(CultureInfo.InvariantCulture);
+            return string.Join("_", parts).ToUpperInvariant();
         }
     }
 }

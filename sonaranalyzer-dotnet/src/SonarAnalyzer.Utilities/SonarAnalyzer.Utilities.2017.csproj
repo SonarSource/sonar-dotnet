@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard1.4</TargetFramework>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <RootNamespace>SonarAnalyzer</RootNamespace>
+    <AssemblyName>SonarAnalyzer.Utilities</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Rules.Description\*.html" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Rules.Description\*.html" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="..\AssemblyInfo.Shared.cs" Link="Properties\AssemblyInfo.Shared.cs" />
+    <Compile Include="..\Signing.cs" Link="Properties\Signing.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SonarAnalyzer.Common\SonarAnalyzer.Common.2017.csproj" />
+    <ProjectReference Include="..\SonarAnalyzer.CSharp\SonarAnalyzer.CSharp.2017.csproj" />
+    <ProjectReference Include="..\SonarAnalyzer.VisualBasic\SonarAnalyzer.VisualBasic.2017.csproj" />
+  </ItemGroup>
+
+</Project>
