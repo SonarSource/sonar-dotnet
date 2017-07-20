@@ -7,10 +7,6 @@
     <AssemblyName>SonarAnalyzer.CSharp</AssemblyName>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <OutDir>bin\Debug\2015\</OutDir>
-  </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="..\AssemblyInfo.Shared.cs" Link="Properties\AssemblyInfo.Shared.cs" />
     <Compile Include="..\Signing.cs" Link="Properties\Signing.cs" />

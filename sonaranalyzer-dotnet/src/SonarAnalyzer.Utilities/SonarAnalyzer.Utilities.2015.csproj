@@ -7,10 +7,6 @@
     <AssemblyName>SonarAnalyzer.Utilities</AssemblyName>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <OutDir>bin\Debug\2015</OutDir>
-  </PropertyGroup>
-
   <ItemGroup>
     <None Remove="Rules.Description\*.html" />
   </ItemGroup>
