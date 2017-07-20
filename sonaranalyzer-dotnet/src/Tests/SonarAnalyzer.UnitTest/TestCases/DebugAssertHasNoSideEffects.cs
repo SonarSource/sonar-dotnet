@@ -27,6 +27,8 @@ namespace Tests.Diagnostics
         public bool Dequeue() => true;
         public bool Enqueue() => true;
         public bool Dispose() => true;
+        public bool CanAddItem() => true;
+        public bool SetEquals() => true;
     }
 
     class Program
@@ -40,6 +42,8 @@ namespace Tests.Diagnostics
             Debug.Assert(foo.Contains("a"));
             Debug.Assert(foo.DoStuff());
             Debug.Assert(foo.Destroy());
+            Debug.Assert(foo.CanAddItem());
+            Debug.Assert(foo.SetEquals());
 
             Debug.Assert(foo.Remove("a")); // Noncompliant {{Expressions used in 'Debug.Assert' should not produce side effects.}}
 //                      ^^^^^^^^^^^^^^^^^

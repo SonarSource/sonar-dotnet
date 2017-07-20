@@ -84,11 +84,12 @@ namespace SonarAnalyzer.Rules.CSharp
         private bool ContainsCallsWithSideEffects(InvocationExpressionSyntax invocation)
         {
             return invocation
-                    .DescendantNodes()
-                    .OfType<InvocationExpressionSyntax>()
-                    .Select(GetIdentifierName)
-                    .Any(text => text != null &&
-                            sideEffectWords.Overlaps(text.SplitCamelCaseToWords()));
+                .DescendantNodes()
+                .OfType<InvocationExpressionSyntax>()
+                .Select(GetIdentifierName)
+                .Any(name => !string.IsNullOrEmpty(name) &&
+                        name != "SetEquals" &&
+                        sideEffectWords.Contains(name.SplitCamelCaseToWords().First()));
         }
     }
 }
