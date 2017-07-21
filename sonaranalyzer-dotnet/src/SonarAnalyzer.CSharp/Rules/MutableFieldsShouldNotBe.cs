@@ -77,9 +77,7 @@ namespace SonarAnalyzer.Rules
 
             var fieldFirstVariable = fieldDeclaration.Declaration.Variables[0];
             var fieldInitializer = fieldFirstVariable.Initializer;
-            var fieldInitializerSymbol = fieldInitializer != null
-                ? analysisContext.SemanticModel.GetSymbolInfo(fieldInitializer.Value).Symbol
-                : null;
+            var fieldInitializerSymbol = GetFieldInitializerSymbol(fieldInitializer?.Value, analysisContext.SemanticModel);
 
             if (fieldDeclaration.Modifiers.Any(modifier => modifier.IsKind(SyntaxKind.ReadOnlyKeyword)) &&
                 IsValidReadOnlyInitializer(fieldInitializerSymbol, fieldInitializer?.Value))
@@ -112,6 +110,18 @@ namespace SonarAnalyzer.Rules
             }
 
             return true;
+        }
+
+        private static ISymbol GetFieldInitializerSymbol(ExpressionSyntax initializer, SemanticModel model)
+        {
+            if (initializer == null)
+            {
+                return null;
+            }
+
+            var symbolInfo = model.GetSymbolInfo(initializer);
+
+            return symbolInfo.Symbol ?? symbolInfo.CandidateSymbols.FirstOrDefault();
         }
 
         private static bool IsValidReadOnlyInitializer(ISymbol symbol, ExpressionSyntax equalsValue)

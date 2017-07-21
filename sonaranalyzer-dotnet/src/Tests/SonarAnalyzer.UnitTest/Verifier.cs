@@ -465,7 +465,7 @@ namespace SonarAnalyzer.UnitTest
             actualCode.Should().Be(File.ReadAllText(pathToExpected));
         }
 
-        private static void RunFixAllProvider(DiagnosticAnalyzer diagnosticAnalyzer, CodeFixProvider codeFixProvider,
+        private static async Task RunFixAllProvider(DiagnosticAnalyzer diagnosticAnalyzer, CodeFixProvider codeFixProvider,
             string codeFixTitle, FixAllProvider fixAllProvider, Document document, ParseOptions parseOption, string pathToExpected)
         {
             var currentDocument = document;
@@ -485,7 +485,7 @@ namespace SonarAnalyzer.UnitTest
                 codeFixProvider.FixableDiagnosticIds,
                 fixAllDiagnosticProvider,
                 CancellationToken.None);
-            var codeActionToExecute = fixAllProvider.GetFixAsync(fixAllContext).Result;
+            var codeActionToExecute = await fixAllProvider.GetFixAsync(fixAllContext);
 
             codeActionToExecute.Should().NotBeNull();
 

@@ -50,9 +50,14 @@ namespace SonarAnalyzer.Rules.CSharp
                     var methodSyntax = (MethodDeclarationSyntax)c.Node;
                     var methodSymbol = c.SemanticModel.GetDeclaredSymbol(methodSyntax);
 
-                    if (methodSymbol?.PartialDefinitionPart != null)
+                    if (methodSymbol?.PartialImplementationPart != null)
                     {
-                        VerifyParameters(c, methodSyntax, methodSymbol.PartialDefinitionPart.Parameters, "partial class");
+                        var methodImplementationSyntax = methodSymbol.PartialImplementationPart.DeclaringSyntaxReferences
+                            .FirstOrDefault()?.GetSyntax() as MethodDeclarationSyntax;
+                        if (methodImplementationSyntax != null)
+                        {
+                            VerifyParameters(c, methodImplementationSyntax, methodSymbol.Parameters, "partial class");
+                        }
                     }
                     else if (methodSymbol?.OverriddenMethod != null)
                     {
