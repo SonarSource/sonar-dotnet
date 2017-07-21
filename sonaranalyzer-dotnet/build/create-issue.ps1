@@ -72,9 +72,9 @@ function Get-RspecMetadata() {
 
 function Get-Labels() {
     switch ($action) {
-        "new" { return @("Area: Rules", "Type: New Feature") }
-        "fix" { return @("Area: Rules", "Type: Bug") }
-        "update" { return @("Area: Rules", "Type: Improvement") }
+        "new" { return @("rules", "new feature") }
+        "fix" { return @("rules", "bug", "false-positive") }
+        "update" { return @("rules", "improvement") }
         Default {
             throw "Not supported action: ${action}"
         }
