@@ -187,7 +187,11 @@
     <Compile Include="Helpers\FlowAnalysis\*.cs" />
     <Compile Include="Helpers\*.cs" />
     <Compile Include="PackagingTests\*.cs" />
-    <Compile Include="ResourceTests\*.cs" />
+    <Compile Include="ResourceTests\GeneratedResourcesTest.cs" />
+    <None Include="ResourceTests\SomeResources.Designer.cs">
+      <DependentUpon>ResourceTests\SomeResources.resx</DependentUpon>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <Compile Include="Rules\*.cs" />
     <Compile Include="TestFramework\IIssueLocation.cs" />
     <Compile Include="TestFramework\IssueLocationCollector.cs" />
@@ -308,7 +312,9 @@
     <None Include="TestCases\UseWithStatement.vb" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="ResourceTests\SomeResources.resx" />
+    <None Include="ResourceTests\SomeResources.resx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
