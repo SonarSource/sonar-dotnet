@@ -204,7 +204,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="packages.config" />
+    <None Include="packages.SonarAnalyzer.UnitTest.2015.config" />
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\..\..\packages\Microsoft.CodeAnalysis.Analyzers.1.1.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.Analyzers.dll" />
