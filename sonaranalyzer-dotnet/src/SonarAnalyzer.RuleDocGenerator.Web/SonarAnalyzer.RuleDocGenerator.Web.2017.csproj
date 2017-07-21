@@ -8,7 +8,7 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>SonarAnalyzer.RuleDocGenerator.Web</RootNamespace>
     <AssemblyName>SonarAnalyzer.RuleDocGenerator.Web</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <TargetFrameworkProfile />
@@ -59,6 +59,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Microsoft.Composition">
+      <Version>1.0.31</Version>
+    </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
       <Version>10.0.3</Version>
     </PackageReference>
