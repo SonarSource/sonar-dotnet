@@ -1,0 +1,31 @@
+﻿<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>SonarAnalyzer.CSharp</id>
+    <version>6.3.0.0</version>
+    <title>SonarAnalyzer for C#</title>
+    <authors>SonarSource</authors>
+    <owners>SonarSource</owners>
+    <licenseUrl>https://raw.githubusercontent.com/SonarSource-VisualStudio/sonaranalyzer-dotnet/master/LICENSE</licenseUrl>
+    <projectUrl>http://vs.sonarlint.org</projectUrl>
+    <iconUrl>http://dist.sonarsource.com/csharp/download/ico-sonarlint-64.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <summary>Analyzers which spot bugs and code smells in your code. This package is best used together with SonarLint for Visual Studio and/or the SonarQube platform.</summary>
+    <description>Analyzers which spot bugs and code smells in your code. This package is best used together with SonarLint for Visual Studio (http://vs.sonarlint.org) and/or the SonarQube platform (http://www.sonarqube.org).</description>
+    <releaseNotes>http://www.sonarlint.org/visualstudio/rules/index.html#version=6.3.0.0</releaseNotes>
+    <language>en-US</language>
+    <copyright>Copyright © 2015-2017 SonarSource SA</copyright>
+    <tags>Roslyn Analyzers Refactoring CodeAnalysis</tags>
+    <developmentDependency>true</developmentDependency>
+    <frameworkAssemblies>
+      <frameworkAssembly assemblyName="System" targetFramework="" />
+    </frameworkAssemblies>
+  </metadata>
+  <files>
+    <!-- If these are changed than the build\release.ps1 should also be changed -->
+    <file src="bin\$configuration$\SonarAnalyzer.dll" target="analyzers" />
+    <file src="bin\$configuration$\SonarAnalyzer.CSharp.dll" target="analyzers" />
+    <file src="bin\$configuration$\Google.Protobuf.dll" target="analyzers" />
+    <file src="tools-cs\*.ps1" target="tools\" />
+  </files>
+</package>

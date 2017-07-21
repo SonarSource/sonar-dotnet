@@ -79,14 +79,20 @@
     <ProjectReference Include="..\SonarAnalyzer.Common\SonarAnalyzer.Common.2015.csproj">
       <Project>{03471b61-dcfc-4770-bfc3-8aa4b6f641cc}</Project>
       <Name>SonarAnalyzer.Common.2015</Name>
+      <IncludeOutputGroupsInVSIX>BuiltProjectOutputGroup%3bBuiltProjectOutputGroupDependencies%3bGetCopyToOutputDirectoryItems%3bSatelliteDllsProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
+      <IncludeOutputGroupsInVSIXLocalOnly>DebugSymbolsProjectOutputGroup%3b</IncludeOutputGroupsInVSIXLocalOnly>
     </ProjectReference>
     <ProjectReference Include="..\SonarAnalyzer.CSharp\SonarAnalyzer.CSharp.2015.csproj">
       <Project>{90958068-c5a2-4a7d-a1ff-dd22b324d455}</Project>
       <Name>SonarAnalyzer.CSharp.2015</Name>
+      <IncludeOutputGroupsInVSIX>BuiltProjectOutputGroup%3bBuiltProjectOutputGroupDependencies%3bGetCopyToOutputDirectoryItems%3bSatelliteDllsProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
+      <IncludeOutputGroupsInVSIXLocalOnly>DebugSymbolsProjectOutputGroup%3b</IncludeOutputGroupsInVSIXLocalOnly>
     </ProjectReference>
     <ProjectReference Include="..\SonarAnalyzer.VisualBasic\SonarAnalyzer.VisualBasic.2015.csproj">
       <Project>{d095ba7a-a8d3-468c-b66f-8dedca6883c9}</Project>
       <Name>SonarAnalyzer.VisualBasic.2015</Name>
+      <IncludeOutputGroupsInVSIX>BuiltProjectOutputGroup%3bBuiltProjectOutputGroupDependencies%3bGetCopyToOutputDirectoryItems%3bSatelliteDllsProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
+      <IncludeOutputGroupsInVSIXLocalOnly>DebugSymbolsProjectOutputGroup%3b</IncludeOutputGroupsInVSIXLocalOnly>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

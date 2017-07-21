@@ -30,9 +30,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common Solution Items", "Co
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SonarAnalyzer.Common.2017", "src\SonarAnalyzer.Common\SonarAnalyzer.Common.2017.csproj", "{A8D0F263-B78C-4AAA-BC4A-4972AFC7971F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SonarAnalyzer.Vsix.2017", "src\SonarAnalyzer.Vsix\SonarAnalyzer.Vsix.2017.csproj", "{D3770006-B071-4C8B-84D4-625BA0E2C07A}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "VS2017", "VS2017", "{9FC2CD29-FC7A-4BAB-BA0D-1ADF0299054B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SonarAnalyzer.Vsix.2017", "src\SonarAnalyzer.Vsix.2017\SonarAnalyzer.Vsix.2017.csproj", "{D3770006-B071-4C8B-84D4-625BA0E2C07A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

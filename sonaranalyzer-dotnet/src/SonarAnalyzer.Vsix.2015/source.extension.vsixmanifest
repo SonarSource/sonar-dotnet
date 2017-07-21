@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
+  <Metadata>
+    <Identity Id="99d84a73-1512-4999-adcc-29d37452719a" Version="6.3.0.0" Language="en-US" Publisher="SonarSource" />
+    <DisplayName>SonarAnalyzer for CSharp and VB.NET</DisplayName>
+    <Description xml:space="preserve">This extension provides on-the-fly feedback to developers on new bugs and quality issues injected into C# and VB.Net code.</Description>
+    <MoreInfo>http://vs.sonarlint.org</MoreInfo>
+    <License>License.txt</License>
+    <ReleaseNotes>http://www.sonarlint.org/visualstudio/rules/index.html#version=6.3.0.0</ReleaseNotes>
+    <Icon>logos\sonarlint_32.png</Icon>
+  </Metadata>
+  <Installation>
+    <InstallationTarget Id="Microsoft.VisualStudio.Community" Version="[15.0]" />
+  </Installation>
+  <Dependencies>
+    <Dependency Id="Microsoft.Framework.NDP" DisplayName="Microsoft .NET Framework" d:Source="Manual" Version="[4.5,)" />
+  </Dependencies>
+  <Prerequisites>
+    <Prerequisite Id="Microsoft.VisualStudio.Component.CoreEditor" Version="[15.0,16.0)" DisplayName="Visual Studio core editor" />
+  </Prerequisites>
+  <Assets>
+    <Asset Type="Microsoft.VisualStudio.Analyzer" d:Source="Project" d:ProjectName="SonarAnalyzer.Common.2015" Path="|SonarAnalyzer.Common.2015|" />
+    <Asset Type="Microsoft.VisualStudio.MefComponent" d:Source="Project" d:ProjectName="SonarAnalyzer.Common.2015" Path="|SonarAnalyzer.Common.2015|" />
+    <Asset Type="Microsoft.VisualStudio.Analyzer" d:Source="Project" d:ProjectName="SonarAnalyzer.CSharp.2015" Path="|SonarAnalyzer.CSharp.2015|" />
+    <Asset Type="Microsoft.VisualStudio.MefComponent" d:Source="Project" d:ProjectName="SonarAnalyzer.CSharp.2015" Path="|SonarAnalyzer.CSharp.2015|" />
+    <Asset Type="Microsoft.VisualStudio.Analyzer" d:Source="Project" d:ProjectName="SonarAnalyzer.VisualBasic.2015" Path="|SonarAnalyzer.VisualBasic.2015|" />
+    <Asset Type="Microsoft.VisualStudio.MefComponent" d:Source="Project" d:ProjectName="SonarAnalyzer.VisualBasic.2015" Path="|SonarAnalyzer.VisualBasic.2015|" />
+    <Asset Type="Microsoft.VisualStudio.Analyzer" d:Source="File" Path="Google.Protobuf.dll" />
+  </Assets>
+</PackageManifest>
