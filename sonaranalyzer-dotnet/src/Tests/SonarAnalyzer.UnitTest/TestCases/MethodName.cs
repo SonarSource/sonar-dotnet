@@ -1,18 +1,18 @@
 ﻿namespace Tests.Diagnostics
 {
-    public interface MyInterface
+    public interface IMyInterface
     {
         void foo(); // Noncompliant {{Rename method 'foo' to match camel case naming rules, consider using 'Foo'.}}
 //           ^^^
         void Foo();
     }
 
-    public class FooClass : MyInterface
+    public class FooClass : IMyInterface
     {
         void foo() { } // Noncompliant
-        void MyInterface.foo() { } // Compliant, we can't change it
+        void IMyInterface.foo() { } // Compliant, we can't change it
         void Foo() { }
-        void MyInterface.Foo() { }
+        void IMyInterface.Foo() { }
 
         void
         bar() // Noncompliant
@@ -30,6 +30,18 @@
         public static extern int ____MessageBox(int h, string m, string c, int type); // Compliant
 
         public int MyPPProperty { get; set; } // Noncompliant {{Rename property 'MyPPProperty' to match camel case naming rules, consider using 'MyPpProperty'.}}
+
+        public void Should_define_convention_that_returns_metadata_module_type() { } // Compliant
+
+        public void Should_Define_Convention_That_Returns_Metadata_Module_Type() { } // Compliant
+
+        public void Should_return_JSON_serialized_querystring { } // Compliant
+
+        public void IsLocal_should_return_true_if_userHostAddr_is_localhost_IPV4 { } // Compliant
+
+        public void 你好 { }
+
+        public void Łódź() { }
     }
 
     [System.Runtime.InteropServices.ComImport()]

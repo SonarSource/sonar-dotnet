@@ -15,7 +15,7 @@
 },
 {
 "id":  "S100",
-"message":  "Rename method 'expectMsgPF' to match camel case naming rules, consider using 'ExpectMsgPF'.",
+"message":  "Rename method 'expectMsgPF' to match camel case naming rules, consider using 'ExpectMsgPf'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Tests.Shared.Internals\AkkaSpec.cs",
 "region":  {
@@ -28,7 +28,7 @@
 },
 {
 "id":  "S100",
-"message":  "Rename method 'expectMsgPF' to match camel case naming rules, consider using 'ExpectMsgPF'.",
+"message":  "Rename method 'expectMsgPF' to match camel case naming rules, consider using 'ExpectMsgPf'.",
 "location":  {
 "uri":  "akka.net\src\core\Akka.Tests.Shared.Internals\AkkaSpec.cs",
 "region":  {

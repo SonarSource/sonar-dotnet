@@ -37,7 +37,7 @@
     {
     }
 
-    interface IIIFoo // Noncompliant {{Rename interface 'IIIFoo' to match camel case naming rules, consider using 'IIiFoo'.}}
+    interface IIIFoo // Compliant
     {
     }
 
@@ -70,7 +70,7 @@
     {
     }
 
-    struct ILMarker // Noncompliant {{Rename struct 'ILMarker' to match camel case naming rules, consider using 'IlMarker'.}}
+    struct ILMarker // Compliant
     {
 
     }
@@ -80,11 +80,18 @@
     {
     }
 
+    class IILMarker { } // Noncompliant {{Rename class 'IILMarker' to match camel case naming rules, consider using 'IilMarker'.}}
+
+    interface IILMarker { } // Compliant
+
+    interface ITVImageScraper { }
+
     class A4 { }
     class AA4 { }
 
-    class AbcDEFgh { } // Noncompliant {{Rename class 'AbcDEFgh' to match camel case naming rules, consider using 'AbcDeFgh'.}}
-    class Ab4DEFgh { } // Noncompliant
+    class AbcDEFgh { } // Compliant
+    class Ab4DEFgh { } // Compliant
+    class Ab4DEFGh { } // Noncompliant {{Rename class 'Ab4DEFGh' to match camel case naming rules, consider using 'Ab4DefGh'.}}
 
     class TTTestClassTTT { }// Noncompliant {{Rename class 'TTTestClassTTT' to match camel case naming rules, consider using 'TtTestClassTtt'.}}
     class TTT44 { }// Noncompliant
@@ -93,7 +100,9 @@
 
     class A_B_C { } // Noncompliant;
 
-    class AB { } // Noncompliant, special case
-    class AbABaa { }
+    class AB { } // Compliant
+    class AbABaa { } // Compliant
     class _AbABaa { } // Noncompliant {{Rename class '_AbABaa' to match camel case naming rules, trim underscores from the name.}}
+
+    class 你好 { } // Compliant
 }

@@ -2,19 +2,6 @@
 "issues":  [
 {
 "id":  "S101",
-"message":  "Rename class 'HttpQSCollection' to match camel case naming rules, consider using 'HttpQsCollection'.",
-"location":  {
-"uri":  "Nancy\src\Nancy\Helpers\HttpUtility.cs",
-"region":  {
-"startLine":  43,
-"startColumn":  22,
-"endLine":  43,
-"endColumn":  38
-}
-}
-},
-{
-"id":  "S101",
 "message":  "Rename class 'SSLProxy' to match camel case naming rules, consider using 'SslProxy'.",
 "location":  {
 "uri":  "Nancy\src\Nancy\Security\SSLProxy.cs",

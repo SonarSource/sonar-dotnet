@@ -19,6 +19,7 @@
  */
 
 using System.Globalization;
+using System.Text.RegularExpressions;
 using SonarAnalyzer.Common;
 
 namespace SonarAnalyzer.Helpers
@@ -27,7 +28,7 @@ namespace SonarAnalyzer.Helpers
     {
         public static string ToSonarQubeString(this PropertyType propertyType)
         {
-            var parts = propertyType.ToString().SplitCamelCase();
+            var parts = Regex.Split(propertyType.ToString(), @"(?<!^)(?=[A-Z])");
             return string.Join("_", parts).ToUpper(CultureInfo.InvariantCulture);
         }
     }
