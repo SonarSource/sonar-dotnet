@@ -77,6 +77,22 @@ function Get-Sha1 {
     return Exec { & git rev-parse HEAD }
 }
 
+function Set-MsBuild15Location {
+    # Sets the path to MSBuild 15 into an the MSBUILD_PATH environment variable
+    # All subsequent builds after this command will use MSBuild 15!
+    
+    # Test if vswhere.exe is in your path. Download from: https://github.com/Microsoft/vswhere/releases
+    Get-VsWherePath
+
+    $path = vswhere -latest -products * -requires Microsoft.Component.MSBuild -property installationPath
+    if ($path) {
+        $path = join-path $path 'MSBuild\15.0\Bin\MSBuild.exe'
+        if (test-path $path) {
+            [environment]::SetEnvironmentVariable("MSBUILD_PATH", $path)
+        }
+    }
+}
+
 function Get-ExecutablePath([string]$name, [string]$directory, [string]$envVar) {
     $path = [environment]::GetEnvironmentVariable($envVar, "Process")
 
@@ -99,6 +115,10 @@ function Get-ExecutablePath([string]$name, [string]$directory, [string]$envVar) 
 
     Write-Error "Cannot find $name"
     exit 1
+}
+
+function Get-VsWherePath {
+    return Get-ExecutablePath -name "vswhere.exe" -envVar "VSWHERE_PATH"
 }
 
 function Get-NuGetPath {
@@ -174,9 +194,9 @@ function Set-Version {
     $versionPropsPath = (Resolve-RepoPath "build\Version.props")
 
     (Get-Content $versionPropsPath) `
- -Replace '<Sha1>.*</Sha1>', "<Sha1>$sha1</Sha1>" `
- -Replace '<BuildNumber>\d+</BuildNumber>', "<BuildNumber>$buildNumber</BuildNumber>" `
- -Replace '<BranchName>.*</BranchName>', "<BranchName>$branchName</BranchName>" `
+        -Replace '<Sha1>.*</Sha1>', "<Sha1>$sha1</Sha1>" `
+        -Replace '<BuildNumber>\d+</BuildNumber>', "<BuildNumber>$buildNumber</BuildNumber>" `
+        -Replace '<BranchName>.*</BranchName>', "<BranchName>$branchName</BranchName>" `
         | Set-Content $versionPropsPath
 
     $msbuild_exe = Get-MsBuildPath

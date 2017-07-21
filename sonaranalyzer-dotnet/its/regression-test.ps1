@@ -1,4 +1,9 @@
+[CmdletBinding(PositionalBinding = $false)]
+param (
+    [switch]$msbuild15 = $false)
+
 $importBeforePath = "$env:USERPROFILE\AppData\Local\Microsoft\MSBuild\14.0\Microsoft.Common.targets\ImportBefore"
+$importBeforePath15 = "$env:USERPROFILE\AppData\Local\Microsoft\MSBuild\15.0\Microsoft.Common.targets\ImportBefore"
 
 . (Join-Path $PSScriptRoot "..\build\build-utils.ps1")
 
@@ -48,12 +53,17 @@ function Initialize-OutputFolder {
 try {
     Push-Location -Path $PSScriptRoot
 
+    if ($msbuild15) {
+        Set-MsBuild15Location
+        $importBeforePath = $importBeforePath15
+    }
+
     Test-SonarAnalyzerDll
 
     Initialize-ActualFolder
     Initialize-OutputFolder
 
-    Write-Host "Installing the imports before targets file"
+    Write-Host "Installing the imports before targets file into '${importBeforePath}'"
     Copy-Item .\SonarAnalyzer.Testing.ImportBefore.targets -Destination $importBeforePath -Recurse -Container
 
     Build-Project "akka.net" "src\Akka.sln"
