@@ -30,7 +30,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void ImplementISerializableCorrectly()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\ImplementISerializableCorrectly.cs", new ImplementISerializableCorrectly());
+            Verifier.VerifyAnalyzer(@"TestCases\ImplementISerializableCorrectly.cs",
+                new ImplementISerializableCorrectly());
         }
     }
 }

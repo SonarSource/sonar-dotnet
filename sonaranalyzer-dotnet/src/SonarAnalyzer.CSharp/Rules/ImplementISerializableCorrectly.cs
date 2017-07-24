@@ -35,11 +35,11 @@ namespace SonarAnalyzer.Rules.CSharp
     public class ImplementISerializableCorrectly : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S3925";
-        internal const string MessageFormat = "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.";
+        internal const string MessageFormat = "Update this implementation of 'ISerializable' to conform to the " +
+            "recommended serialization pattern.";
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         protected override void Initialize(SonarAnalysisContext context)
@@ -68,7 +68,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 implementationErrors.AddRange(CheckSerializableAttribute(classDeclaration, typeSymbol));
                 implementationErrors.AddRange(CheckConstructor(classDeclaration, typeSymbol));
                 implementationErrors.AddRange(CheckGetObjectDataAccessibility(typeSymbol, getObjectData));
-                implementationErrors.AddRange(CheckGetObjectData(typeSymbol, getObjectData, c.SemanticModel, classDeclaration));
+                implementationErrors.AddRange(CheckGetObjectData(typeSymbol, getObjectData, classDeclaration));
 
                 if (implementationErrors.Count > 0)
                 {
@@ -80,13 +80,15 @@ namespace SonarAnalyzer.Rules.CSharp
             SyntaxKind.ClassDeclaration);
         }
 
-        private static IEnumerable<SecondaryLocation> CheckSerializableAttribute(ClassDeclarationSyntax classDeclaration, INamedTypeSymbol typeSymbol)
+        private static IEnumerable<SecondaryLocation> CheckSerializableAttribute(
+            ClassDeclarationSyntax classDeclaration, INamedTypeSymbol typeSymbol)
         {
             if (!HasSerializableAttribute(typeSymbol) &&
                 !typeSymbol.IsAbstract)
             {
                 yield return new SecondaryLocation(classDeclaration.Keyword.GetLocation(),
-                    $"Add 'System.SerializableAttribute' attribute on '{typeSymbol.Name}' because it implements 'ISerializable'.");
+                    $"Add 'System.SerializableAttribute' attribute on '{typeSymbol.Name}' because it " +
+                    "implements 'ISerializable'.");
             }
         }
 
@@ -100,7 +102,8 @@ namespace SonarAnalyzer.Rules.CSharp
             return symbol.DeclaringSyntaxReferences.Select(r => r.GetSyntax()).Cast<TSyntax>();
         }
 
-        private static IEnumerable<SecondaryLocation> CheckGetObjectData(INamedTypeSymbol typeSymbol, IMethodSymbol getObjectData, SemanticModel semanticModel, ClassDeclarationSyntax classDeclaration)
+        private static IEnumerable<SecondaryLocation> CheckGetObjectData(INamedTypeSymbol typeSymbol,
+            IMethodSymbol getObjectData, ClassDeclarationSyntax classDeclaration)
         {
             if (!ImplementsISerializable(typeSymbol.BaseType))
             {
@@ -113,10 +116,11 @@ namespace SonarAnalyzer.Rules.CSharp
                 if (serializableFields.Count > 0)
                 {
                     yield return new SecondaryLocation(classDeclaration.Keyword.GetLocation(),
-                        $"Override 'GetObjectData(SerializationInfo, StreamingContext)' and serialize '{string.Join(", ", serializableFields)}'.");
+                        "Override 'GetObjectData(SerializationInfo, StreamingContext)' and serialize " +
+                        $"'{string.Join(", ", serializableFields)}'.");
                 }
             }
-            else if (getObjectData.IsOverride && !IsCallingBase(getObjectData, semanticModel))
+            else if (getObjectData.IsOverride && !IsCallingBase(getObjectData))
             {
                 foreach (var declaration in GetDeclarations<MethodDeclarationSyntax>(getObjectData))
                 {
@@ -130,14 +134,16 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static IEnumerable<SecondaryLocation> CheckGetObjectDataAccessibility(INamedTypeSymbol typeSymbol, IMethodSymbol getObjectData)
+        private static IEnumerable<SecondaryLocation> CheckGetObjectDataAccessibility(INamedTypeSymbol typeSymbol,
+            IMethodSymbol getObjectData)
         {
             if (getObjectData == null)
             {
                 yield break;
             }
 
-            var isPublicVirtual = getObjectData.DeclaredAccessibility == Accessibility.Public && (getObjectData.IsVirtual || getObjectData.IsOverride);
+            var isPublicVirtual = getObjectData.DeclaredAccessibility == Accessibility.Public &&
+                (getObjectData.IsVirtual || getObjectData.IsOverride);
             if (typeSymbol.IsSealed || isPublicVirtual)
             {
                 yield break;
@@ -159,7 +165,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 .Select(f => f.Name);
         }
 
-        private static IEnumerable<SecondaryLocation> CheckConstructor(ClassDeclarationSyntax classDeclaration, INamedTypeSymbol typeSymbol)
+        private static IEnumerable<SecondaryLocation> CheckConstructor(ClassDeclarationSyntax classDeclaration,
+            INamedTypeSymbol typeSymbol)
         {
             var serializationConstructor = typeSymbol.Constructors.FirstOrDefault(KnownMethods.IsSerializationConstructor);
 
@@ -189,7 +196,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static bool IsCallingBase(IMethodSymbol methodSymbol, SemanticModel semanticModel)
+        private static bool IsCallingBase(IMethodSymbol methodSymbol)
         {
             var methodDeclaration = (MethodDeclarationSyntax)methodSymbol
                 .DeclaringSyntaxReferences
@@ -202,10 +209,11 @@ namespace SonarAnalyzer.Rules.CSharp
 
             return methodDeclaration.DescendantNodes()
                 .OfType<InvocationExpressionSyntax>()
-                .Select(i => semanticModel.GetSymbolInfo(i).Symbol)
-                .OfType<IMethodSymbol>()
-                .Any(m => m.ContainingType.Equals(methodSymbol.ContainingType.BaseType) &&
-                          m.IsGetObjectData());
+                .Select(ies => ies.Expression)
+                .OfType<MemberAccessExpressionSyntax>()
+                .Any(memberAccess => memberAccess.IsKind(SyntaxKind.SimpleMemberAccessExpression) &&
+                                     memberAccess.Expression.IsKind(SyntaxKind.BaseExpression) &&
+                                     memberAccess.Name.Identifier.ValueText == "GetObjectData");
         }
 
         private static bool IsCallingBaseConstructor(IMethodSymbol constructorSymbol)
