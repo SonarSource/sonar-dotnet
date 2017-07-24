@@ -155,7 +155,6 @@ namespace SonarAnalyzer.Rules.CSharp
                         if (disposableSymbol is IMethodSymbol ||
                             disposableSymbol is IParameterSymbol)
                         {
-                            // When Dispose() or this.Dispose() we take the class symbol
                             disposableSymbol = disposableSymbol.ContainingType;
                         }
                         newProgramState = ProcessDisposableSymbol(newProgramState, disposedObject, disposableSymbol);
