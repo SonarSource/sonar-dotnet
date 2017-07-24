@@ -196,4 +196,53 @@ namespace Tests.Diagnostics
             : base(info, context)
         { /*do something*/ }
     }
+
+    [Serializable]
+    public class OptionException : Exception
+    {
+        public OptionException() { }
+        public OptionException(string message) : base(message) { }
+        public OptionException(string message, Exception innerException) : base(message, innerException) { }
+        protected OptionException(SerializationInfo info, StreamingContext context) : base(info, context) { }
+    }
+
+    [Serializable]
+    public class OptionUnknownException : OptionException
+    {
+        private string option;
+
+        public OptionUnknownException() { }
+
+        public OptionUnknownException(string option)
+            : base("Unknown option '" + option + "'")
+        {
+            this.option = option;
+        }
+        public OptionUnknownException(string option, Exception innerException)
+            : base("Unknown option '" + option + "'", innerException)
+        {
+            this.option = option;
+        }
+
+        public OptionUnknownException(string option, string message) : base(message)
+        {
+            this.option = option;
+        }
+
+        protected OptionUnknownException(SerializationInfo info, StreamingContext context) : base(info, context)
+        {
+            this.option = info.GetString("option");
+        }
+
+        public override void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            info.AddValue("option", this.option);
+            base.GetObjectData(info, context);
+        }
+
+        public virtual String Option
+        {
+            get { return this.option; }
+        }
+    }
 }
