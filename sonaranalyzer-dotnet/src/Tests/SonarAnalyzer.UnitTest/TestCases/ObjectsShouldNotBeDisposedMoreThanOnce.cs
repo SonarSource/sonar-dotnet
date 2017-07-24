@@ -115,4 +115,21 @@ namespace Tests.Diagnostics
     {
         public void Dispose() { }
     }
+
+    public class MyClass : IDisposable
+    {
+        public void Dispose() { }
+
+        public void DisposeMultipleTimes()
+        {
+            Dispose();
+            this.Dispose(); // Noncompliant
+            Dispose(); // Noncompliant
+        }
+
+        public void DoSomething()
+        {
+            Dispose();
+        }
+    }
 }

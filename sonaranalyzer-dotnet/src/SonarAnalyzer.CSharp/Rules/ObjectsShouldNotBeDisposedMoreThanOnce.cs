@@ -144,10 +144,21 @@ namespace SonarAnalyzer.Rules.CSharp
                 var disposeMethodSymbol = semanticModel.GetSymbolInfo(instruction).Symbol as IMethodSymbol;
                 if (disposeMethodSymbol.IsIDisposableDispose())
                 {
-                    var disposable = ((MemberAccessExpressionSyntax)instruction.Expression).Expression;
-                    var disposableSymbol = semanticModel.GetSymbolInfo(disposable).Symbol;
-
-                    newProgramState = ProcessDisposableSymbol(newProgramState, disposable, disposableSymbol);
+                    var disposedObject =
+                        // Direct call to Dispose()
+                        instruction.Expression as IdentifierNameSyntax
+                        // Call to Dispose on local variable, field or this
+                        ?? (instruction.Expression as MemberAccessExpressionSyntax)?.Expression;
+                    if (disposedObject != null)
+                    {
+                        var disposableSymbol = semanticModel.GetSymbolInfo(disposedObject).Symbol;
+                        if (disposableSymbol is IMethodSymbol ||
+                            disposableSymbol is IParameterSymbol)
+                        {
+                            disposableSymbol = disposableSymbol.ContainingType;
+                        }
+                        newProgramState = ProcessDisposableSymbol(newProgramState, disposedObject, disposableSymbol);
+                    }
                 }
 
                 return newProgramState;
@@ -172,7 +183,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 return newProgramState;
             }
 
-            private ProgramState ProcessDisposableSymbol(ProgramState programState, SyntaxNode instruction, ISymbol disposableSymbol)
+            private ProgramState ProcessDisposableSymbol(ProgramState programState, SyntaxNode disposeInstruction,
+                ISymbol disposableSymbol)
             {
                 if (disposableSymbol == null) // DisposableSymbol is null when we invoke an array element
                 {
@@ -181,7 +193,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 if (disposableSymbol.HasConstraint(DisposableConstraint.Disposed, programState))
                 {
-                    ObjectDisposed?.Invoke(this, new ObjectDisposedEventArgs(disposableSymbol.Name, instruction.GetLocation()));
+                    ObjectDisposed?.Invoke(this, new ObjectDisposedEventArgs(disposableSymbol.Name,
+                        disposeInstruction.GetLocation()));
                     return programState;
                 }
 
@@ -192,7 +205,15 @@ namespace SonarAnalyzer.Rules.CSharp
                     return programState;
                 }
 
-                return disposableSymbol.SetConstraint(DisposableConstraint.Disposed, programState);
+                var newProgramState = programState;
+                if (disposableSymbol is INamedTypeSymbol &&
+                    newProgramState.GetSymbolValue(disposableSymbol) == null)
+                {
+                    // Dispose is called on current instance but we don't usually store a symbol for this
+                    // so we store it and then associate the Disposed constraint.
+                    newProgramState = newProgramState.StoreSymbolicValue(disposableSymbol, SymbolicValue.This);
+                }
+                return disposableSymbol.SetConstraint(DisposableConstraint.Disposed, newProgramState);
             }
 
             private static ArgumentSyntax FirstArgumentOrDefault(ObjectCreationExpressionSyntax objectCreation) =>
