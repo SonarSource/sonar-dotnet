@@ -86,7 +86,7 @@ namespace SonarAnalyzer.Rules.CSharp
             };
 
         private static readonly Regex StringFormatItemRegex = // pattern is: index[,alignment][:formatString]
-            new Regex(@"^(?<Index>\d+)(,(?<Alignment>-?\d+))?(:(?<Format>.+))?$", RegexOptions.Compiled);
+            new Regex(@"^(?<Index>\d+)(\s*,\s*(?<Alignment>-?\d+)\s*)?(:(?<Format>.+))?$", RegexOptions.Compiled);
 
         protected sealed override void Initialize(SonarAnalysisContext context)
         {
@@ -152,7 +152,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return false;
             }
 
-            // All methods in HandledFormatMethods that do not end on Format have an overload 
+            // All methods in HandledFormatMethods that do not end on Format have an overload
             // with only one argument and the rule should not raise an issue
             return argumentsCount == 1;
         }
