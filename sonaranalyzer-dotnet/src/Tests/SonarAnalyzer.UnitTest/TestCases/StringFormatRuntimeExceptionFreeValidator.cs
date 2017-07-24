@@ -22,6 +22,9 @@ namespace Tests.Diagnostics
             s = string.Format("{2}-{0}-{1}", 1, 2, 3); // Compliant
             s = string.Format("{{{0}}}", 42); // Compliant, displays {42}
             s = string.Format("{{\r\n{0}}}", 42); // Compliant, displays {\r\n42}
+            s = string.Format("{0, -12}", 42);
+            s = string.Format("{0    ,    -12}", 42);
+            s = string.Format("{0   ,   -20    :N1}", 1.234);
 
             s = string.Format("[0}", arg0); // Noncompliant {{Invalid string format, unbalanced curly brace count.}}
 //              ^^^^^^^^^^^^^
