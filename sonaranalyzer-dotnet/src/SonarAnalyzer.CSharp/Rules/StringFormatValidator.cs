@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
@@ -285,25 +284,10 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
             }
 
-            return IsFormatValidSafetyNet(formatStringText) ??
-                IsSimpleString(formatStringItems.Count, realArgumentsCount) ??
+            return IsSimpleString(formatStringItems.Count, realArgumentsCount) ??
                 HasFormatItemIndexTooBig(maxFormatItemIndex, realArgumentsCount) ??
                 HasMissingFormatItemIndex(formatStringItems, maxFormatItemIndex) ??
                 HasUnusedArguments(formatArguments, maxFormatItemIndex);
-        }
-
-
-        private static ValidationFailure IsFormatValidSafetyNet(string formatString)
-        {
-            try
-            {
-                string.Format(formatString, new object[1000000]);
-                return null;
-            }
-            catch (FormatException)
-            {
-                return ValidationFailure.UnknownError;
-            }
         }
 
         private static ValidationFailure HasFormatItemIndexTooBig(int? maxFormatItemIndex, int argumentsCount)
