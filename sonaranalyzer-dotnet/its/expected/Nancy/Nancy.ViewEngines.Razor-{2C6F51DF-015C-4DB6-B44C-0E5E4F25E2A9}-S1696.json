@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S1696",
+"message":  "Do not catch NullReferenceException; test for null instead.",
+"location":  {
+"uri":  "Nancy\src\Nancy.ViewEngines.Razor\NancyRazorViewBase.cs",
+"region":  {
+"startLine":  404,
+"startColumn":  20,
+"endLine":  404,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S1696",
+"message":  "Do not catch NullReferenceException; test for null instead.",
+"location":  {
+"uri":  "Nancy\src\Nancy.ViewEngines.Razor\NancyRazorViewBase.cs",
+"region":  {
+"startLine":  419,
+"startColumn":  24,
+"endLine":  419,
+"endColumn":  46
+}
+}
+}
+]
+}

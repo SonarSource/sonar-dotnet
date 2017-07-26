@@ -1644,6 +1644,33 @@
   <data name="S1694_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
   </data>
+  <data name="S1696_Category" xml:space="preserve">
+    <value>Sonar Code Smell</value>
+  </data>
+  <data name="S1696_Description" xml:space="preserve">
+    <value>NullReferenceException should be avoided, not caught. Any situation in which NullReferenceException is explicitly caught can easily be converted to a null test, and any behavior being carried out in the catch block can easily be moved to the "is null" branch of the conditional.</value>
+  </data>
+  <data name="S1696_IsActivatedByDefault" xml:space="preserve">
+    <value>False</value>
+  </data>
+  <data name="S1696_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S1696_RemediationCost" xml:space="preserve">
+    <value>5min</value>
+  </data>
+  <data name="S1696_Severity" xml:space="preserve">
+    <value>Major</value>
+  </data>
+  <data name="S1696_Tags" xml:space="preserve">
+    <value>cwe,error-handling,cert</value>
+  </data>
+  <data name="S1696_Title" xml:space="preserve">
+    <value>NullReferenceException should not be caught</value>
+  </data>
+  <data name="S1696_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S1697_Category" xml:space="preserve">
     <value>Sonar Bug</value>
   </data>
