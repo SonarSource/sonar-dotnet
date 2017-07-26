@@ -50,15 +50,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    var typeInfo = c.SemanticModel.GetTypeInfo(throwStatement.Expression);
-
-                    if (typeInfo.Type == null ||
-                        typeInfo.Type is IErrorTypeSymbol)
-                    {
-                        return;
-                    }
-
-                    if (typeInfo.Type.Is(KnownType.System_NotImplementedException))
+                    if (c.SemanticModel.GetTypeInfo(throwStatement.Expression).Type.Is(KnownType.System_NotImplementedException))
                     {
                         c.ReportDiagnostic(Diagnostic.Create(rule, throwStatement.GetLocation()));
                     }
