@@ -30,19 +30,19 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
     public sealed class ProgramState : IEquatable<ProgramState>
     {
         internal ImmutableDictionary<ISymbol, SymbolicValue> Values { get; }
-        internal ImmutableDictionary<SymbolicValue, SymbolicValueConstraint> Constraints { get; }
+        internal ImmutableDictionary<SymbolicValue, SymbolicValueConstraints> Constraints { get; }
         internal ImmutableDictionary<ProgramPoint, int> ProgramPointVisitCounts { get; }
         internal ImmutableStack<SymbolicValue> ExpressionStack { get; }
         internal ImmutableHashSet<BinaryRelationship> Relationships { get; }
 
-        private static ImmutableDictionary<SymbolicValue, SymbolicValueConstraint> InitialConstraints =>
-            new Dictionary<SymbolicValue, SymbolicValueConstraint>
+        private static ImmutableDictionary<SymbolicValue, SymbolicValueConstraints> InitialConstraints =>
+            new Dictionary<SymbolicValue, SymbolicValueConstraints>
             {
-                { SymbolicValue.True, BoolConstraint.True },
-                { SymbolicValue.False, BoolConstraint.False },
-                { SymbolicValue.Null, ObjectConstraint.Null },
-                { SymbolicValue.This, ObjectConstraint.NotNull },
-                { SymbolicValue.Base, ObjectConstraint.NotNull }
+                { SymbolicValue.True,  new SymbolicValueConstraints(BoolConstraint.True) },
+                { SymbolicValue.False, new SymbolicValueConstraints(BoolConstraint.False) },
+                { SymbolicValue.Null,  new SymbolicValueConstraints(ObjectConstraint.Null) },
+                { SymbolicValue.This,  new SymbolicValueConstraints(ObjectConstraint.NotNull) },
+                { SymbolicValue.Base,  new SymbolicValueConstraints(ObjectConstraint.NotNull) }
             }.ToImmutableDictionary();
 
         private static readonly ISet<SymbolicValue> ProtectedSymbolicValues = ImmutableHashSet.Create(
@@ -55,6 +55,19 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
         private static readonly ISet<SymbolicValue> DistinguishedReferences = ImmutableHashSet.Create(
             SymbolicValue.This,
             SymbolicValue.Base);
+
+        internal ProgramState(ImmutableDictionary<ISymbol, SymbolicValue> values,
+            ImmutableDictionary<SymbolicValue, SymbolicValueConstraints> constraints,
+            ImmutableDictionary<ProgramPoint, int> programPointVisitCounts,
+            ImmutableStack<SymbolicValue> expressionStack,
+            ImmutableHashSet<BinaryRelationship> relationships)
+        {
+            Values = values;
+            Constraints = constraints;
+            ProgramPointVisitCounts = programPointVisitCounts;
+            ExpressionStack = expressionStack;
+            Relationships = relationships;
+        }
 
         internal ProgramState()
             : this(ImmutableDictionary<ISymbol, SymbolicValue>.Empty,
@@ -210,19 +223,6 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
 
             return localValues.Contains(relationship.LeftOperand) &&
                 localValues.Contains(relationship.RightOperand);
-        }
-
-        internal ProgramState(ImmutableDictionary<ISymbol, SymbolicValue> values,
-            ImmutableDictionary<SymbolicValue, SymbolicValueConstraint> constraints,
-            ImmutableDictionary<ProgramPoint, int> programPointVisitCounts,
-            ImmutableStack<SymbolicValue> expressionStack,
-            ImmutableHashSet<BinaryRelationship> relationships)
-        {
-            Values = values;
-            Constraints = constraints;
-            ProgramPointVisitCounts = programPointVisitCounts;
-            ExpressionStack = expressionStack;
-            Relationships = relationships;
         }
 
         public ProgramState PushValue(SymbolicValue symbolicValue)

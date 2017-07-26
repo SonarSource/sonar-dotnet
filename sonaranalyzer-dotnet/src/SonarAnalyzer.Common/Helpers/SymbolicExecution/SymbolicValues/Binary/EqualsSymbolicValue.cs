@@ -31,17 +31,17 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
         }
 
         internal override IEnumerable<ProgramState> SetConstraint(BoolConstraint boolConstraint,
-            SymbolicValueConstraint leftConstraint, SymbolicValueConstraint rightConstraint,
+            SymbolicValueConstraints leftConstraints, SymbolicValueConstraints rightConstraints,
             ProgramState programState)
         {
             if (boolConstraint == BoolConstraint.True)
             {
-                return RightOperand.TrySetConstraint(leftConstraint, programState)
-                    .SelectMany(ps => LeftOperand.TrySetConstraint(rightConstraint, ps));
+                return RightOperand.TrySetConstraints(leftConstraints, programState)
+                    .SelectMany(ps => LeftOperand.TrySetConstraints(rightConstraints, ps));
             }
 
-            return RightOperand.TrySetOppositeConstraint(leftConstraint, programState)
-                .SelectMany(ps => LeftOperand.TrySetOppositeConstraint(rightConstraint, ps));
+            return RightOperand.TrySetOppositeConstraints(leftConstraints, programState)
+                .SelectMany(ps => LeftOperand.TrySetOppositeConstraints(rightConstraints, ps));
         }
     }
 }

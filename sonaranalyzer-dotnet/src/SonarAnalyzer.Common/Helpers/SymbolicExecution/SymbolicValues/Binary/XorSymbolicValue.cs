@@ -38,7 +38,7 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
                 return new[] { currentProgramState };
             }
 
-            if (boolConstraint == BoolConstraint.False)
+            if (constraint == BoolConstraint.False)
             {
                 return ThrowIfTooMany(
                     LeftOperand.TrySetConstraint(BoolConstraint.True, currentProgramState)

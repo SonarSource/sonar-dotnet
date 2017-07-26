@@ -25,12 +25,6 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
         public static readonly BoolConstraint True = new BoolConstraint();
         public static readonly BoolConstraint False = new BoolConstraint();
 
-        internal override bool Implies(SymbolicValueConstraint constraint)
-        {
-            return base.Implies(constraint) ||
-                constraint == ObjectConstraint.NotNull;
-        }
-
         public override SymbolicValueConstraint OppositeForLogicalNot =>
             this == True ? False : True;
 

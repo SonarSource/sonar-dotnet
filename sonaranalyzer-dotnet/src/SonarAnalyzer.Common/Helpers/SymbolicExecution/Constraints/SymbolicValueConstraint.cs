@@ -24,11 +24,6 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
     {
         protected SymbolicValueConstraint() { }
 
-        internal virtual bool Implies(SymbolicValueConstraint constraint)
-        {
-            return this == constraint;
-        }
-
         public abstract SymbolicValueConstraint OppositeForLogicalNot { get; }
     }
 }

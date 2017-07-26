@@ -144,7 +144,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
 
             ps = ps.StoreSymbolicValue(symbol, sv);
             ps = sv.SetConstraint(ObjectConstraint.NotNull, ps);
-            symbol.HasConstraint(BoolConstraint.False, ps).Should().BeFalse();
+            symbol.HasConstraint(BoolConstraint.False, ps).Should().BeTrue();
             symbol.HasConstraint(ObjectConstraint.NotNull, ps).Should().BeTrue();
         }
     }

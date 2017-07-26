@@ -25,12 +25,6 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
         public static readonly DisposableConstraint Disposed = new DisposableConstraint();
         public static readonly DisposableConstraint NotDisposed = new DisposableConstraint();
 
-        internal override bool Implies(SymbolicValueConstraint constraint)
-        {
-            return base.Implies(constraint) ||
-                constraint == ObjectConstraint.NotNull;
-        }
-
         public override SymbolicValueConstraint OppositeForLogicalNot =>
             this == Disposed ? NotDisposed : Disposed;
 
