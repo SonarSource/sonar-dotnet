@@ -33,7 +33,7 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class DoNotCatchNullReferenceException : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S1696";
-        private const string MessageFormat = "Make the dereference conditional on its not being null.";
+        private const string MessageFormat = "Do not catch NullReferenceException; test for null instead.";
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
@@ -44,13 +44,48 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
-                    var catchDeclaration = (CatchDeclarationSyntax)c.Node;
-                    if (c.SemanticModel.GetTypeInfo(catchDeclaration.Type).Type.Is(KnownType.System_NullReferenceException))
+                    var catchClause = (CatchClauseSyntax)c.Node;
+                    if (IsCatchingNullReferenceException(catchClause.Declaration, c.SemanticModel))
                     {
-                        c.ReportDiagnostic(Diagnostic.Create(rule, catchDeclaration.Type.GetLocation()));
+                        c.ReportDiagnostic(Diagnostic.Create(rule, catchClause.Declaration.Type.GetLocation()));
+                        return;
+                    }
+
+                    Location locationToReportOn;
+                    if (HasIsNullReferenceExceptionFilter(catchClause.Filter, c.SemanticModel, out locationToReportOn))
+                    {
+                        c.ReportDiagnostic(Diagnostic.Create(rule, locationToReportOn));
                     }
                 },
-                SyntaxKind.CatchDeclaration);
+                SyntaxKind.CatchClause);
+        }
+
+        private static bool IsCatchingNullReferenceException(CatchDeclarationSyntax catchDeclaration,
+            SemanticModel semanticModel)
+        {
+            var caughtTypeSyntax = catchDeclaration?.Type;
+            return caughtTypeSyntax != null &&
+                   semanticModel.GetTypeInfo(caughtTypeSyntax).Type.Is(KnownType.System_NullReferenceException);
+        }
+
+        private static bool HasIsNullReferenceExceptionFilter(CatchFilterClauseSyntax catchFilterClause,
+            SemanticModel semanticModel, out Location location)
+        {
+            var whenExpression = catchFilterClause?.FilterExpression.RemoveParentheses();
+
+            var rightSideOfIsExpression = whenExpression != null && whenExpression.IsKind(SyntaxKind.IsExpression)
+                ? ((BinaryExpressionSyntax)whenExpression).Right
+                : null;
+
+            if (rightSideOfIsExpression != null &&
+                semanticModel.GetTypeInfo(rightSideOfIsExpression).Type.Is(KnownType.System_NullReferenceException))
+            {
+                location = rightSideOfIsExpression.GetLocation();
+                return true;
+            }
+
+            location = null;
+            return false;
         }
     }
 }
