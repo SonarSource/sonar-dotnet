@@ -6021,6 +6021,87 @@ namespace SonarAnalyzer {
         /// <summary>
         ///   Looks up a localized string similar to Sonar Bug.
         /// </summary>
+        internal static string S2114_Category {
+            get {
+                return ResourceManager.GetString("S2114_Category", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Passing a collection as an argument to the collection&apos;s own method is either an error - some other argument was intended - or simply nonsensical code. .
+        /// </summary>
+        internal static string S2114_Description {
+            get {
+                return ResourceManager.GetString("S2114_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to True.
+        /// </summary>
+        internal static string S2114_IsActivatedByDefault {
+            get {
+                return ResourceManager.GetString("S2114_IsActivatedByDefault", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Constant/Issue.
+        /// </summary>
+        internal static string S2114_Remediation {
+            get {
+                return ResourceManager.GetString("S2114_Remediation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 15min.
+        /// </summary>
+        internal static string S2114_RemediationCost {
+            get {
+                return ResourceManager.GetString("S2114_RemediationCost", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Major.
+        /// </summary>
+        internal static string S2114_Severity {
+            get {
+                return ResourceManager.GetString("S2114_Severity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string S2114_Tags {
+            get {
+                return ResourceManager.GetString("S2114_Tags", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Collections should not be passed as arguments to their own methods.
+        /// </summary>
+        internal static string S2114_Title {
+            get {
+                return ResourceManager.GetString("S2114_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to BUG.
+        /// </summary>
+        internal static string S2114_Type {
+            get {
+                return ResourceManager.GetString("S2114_Type", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sonar Bug.
+        /// </summary>
         internal static string S2123_Category {
             get {
                 return ResourceManager.GetString("S2123_Category", resourceCulture);
@@ -16383,6 +16464,87 @@ namespace SonarAnalyzer {
         internal static string S3655_Type {
             get {
                 return ResourceManager.GetString("S3655_Type", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sonar Code Smell.
+        /// </summary>
+        internal static string S3717_Category {
+            get {
+                return ResourceManager.GetString("S3717_Category", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to NotImplementedException is often used to mark methods which must be implemented for the overall functionality to be complete, but which the developer wants to implement later. That&apos;s as opposed to the NotSupportedException which is thrown by methods which are required by base classes or interfaces, but which are not appropriate to the current class..
+        /// </summary>
+        internal static string S3717_Description {
+            get {
+                return ResourceManager.GetString("S3717_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to False.
+        /// </summary>
+        internal static string S3717_IsActivatedByDefault {
+            get {
+                return ResourceManager.GetString("S3717_IsActivatedByDefault", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Constant/Issue.
+        /// </summary>
+        internal static string S3717_Remediation {
+            get {
+                return ResourceManager.GetString("S3717_Remediation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string S3717_RemediationCost {
+            get {
+                return ResourceManager.GetString("S3717_RemediationCost", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Minor.
+        /// </summary>
+        internal static string S3717_Severity {
+            get {
+                return ResourceManager.GetString("S3717_Severity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string S3717_Tags {
+            get {
+                return ResourceManager.GetString("S3717_Tags", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Track use of &quot;NotImplementedException&quot;.
+        /// </summary>
+        internal static string S3717_Title {
+            get {
+                return ResourceManager.GetString("S3717_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CODE_SMELL.
+        /// </summary>
+        internal static string S3717_Type {
+            get {
+                return ResourceManager.GetString("S3717_Type", resourceCulture);
             }
         }
         

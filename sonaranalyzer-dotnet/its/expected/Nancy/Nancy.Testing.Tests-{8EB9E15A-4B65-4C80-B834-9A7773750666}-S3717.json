@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3717",
+"message":  "Implement this method or throw 'NotSupportedException' instead.",
+"location":  {
+"uri":  "Nancy\src\Nancy.Testing.Tests\ConfigurableBootstrapperFixture.cs",
+"region":  {
+"startLine":  207,
+"startColumn":  17,
+"endLine":  207,
+"endColumn":  53
+}
+}
+}
+]
+}
