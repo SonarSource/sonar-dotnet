@@ -39,7 +39,6 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         private static readonly ISet<SyntaxKind> loopStatements = new HashSet<SyntaxKind>
@@ -136,7 +135,8 @@ namespace SonarAnalyzer.Rules.CSharp
                     return;
                 }
 
-                if (ancestors.Any(n => n.IsAnyKind(conditionalStatements)))
+                if (ancestors.Any(n => n.IsAnyKind(conditionalStatements)) ||
+                    IsInTryCatchWithMethodInvocation(node, ancestors))
                 {
                     conditionalCollection.Add(node);
                 }
@@ -144,6 +144,28 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     unconditionalCollection.Add(node);
                 }
+            }
+
+            private static bool IsInTryCatchWithMethodInvocation(StatementSyntax node, List<SyntaxNode> ancestors)
+            {
+                var tryAncestor = (TryStatementSyntax)ancestors.FirstOrDefault(n => n.IsKind(SyntaxKind.TryStatement));
+
+                if (tryAncestor == null ||
+                    tryAncestor.Catches.Count == 0)
+                {
+                    return false;
+                }
+
+                if (node.IsKind(SyntaxKind.ReturnStatement) &&
+                    node.DescendantNodes().Any(n => n.IsKind(SyntaxKind.InvocationExpression)))
+                {
+                    return true;
+                }
+
+                return tryAncestor.Block.Statements
+                    .TakeWhile(statement => !statement.Equals(node))
+                    .SelectMany(statement => statement.DescendantNodes())
+                    .Any(statement => statement.IsKind(SyntaxKind.InvocationExpression));
             }
 
             private static readonly ISet<SyntaxKind> lambdaOrLoop

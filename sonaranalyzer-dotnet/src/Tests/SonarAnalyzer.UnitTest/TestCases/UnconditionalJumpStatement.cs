@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 
 namespace Tests.Diagnostics
 {
@@ -356,6 +357,98 @@ namespace Tests.Diagnostics
 
         void UtilFunc(Action a)
         {
+        }
+
+        public bool TestWithRetry(Action doSomething)
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                try
+                {
+                    doSomething();
+                    return true; // Compliant
+                }
+                catch (Exception e)
+                {
+                    if (i == 2)
+                    {
+                        return false; // Compliant
+                    }
+                }
+            }
+        }
+
+        public bool TestWithRetry2()
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                try
+                {
+                    return true; // Noncompliant
+                }
+                catch (Exception e)
+                {
+                    if (i == 2)
+                    {
+                        return false; // Compliant
+                    }
+                }
+            }
+        }
+
+        public bool TestWithRetry3(Func<bool> doSomething)
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                try
+                {
+                    return (((doSomething()))); // Compliant
+                }
+                catch (Exception e)
+                {
+                    if (i == 2)
+                    {
+                        return false; // Compliant
+                    }
+                }
+            }
+        }
+
+        public bool TestWithRetry4(Action doSomething, Action<Exception> logError)
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                try
+                {
+                    doSomething();
+                }
+                catch (Exception e)
+                {
+                    logError(e);
+                }
+                finally
+                {
+                    return true;
+                }
+            }
+        }
+
+        public async Task<bool> TestWithRetry5(Func<Task<bool>> doSomething)
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                try
+                {
+                    return (((await doSomething()))); // Compliant
+                }
+                catch (Exception e)
+                {
+                    if (i == 2)
+                    {
+                        return false; // Compliant
+                    }
+                }
+            }
         }
     }
 }
