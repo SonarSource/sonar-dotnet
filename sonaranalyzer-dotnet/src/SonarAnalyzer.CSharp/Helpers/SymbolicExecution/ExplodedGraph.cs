@@ -29,7 +29,7 @@ using SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.Helpers.FlowAnalysis.CSharp
 {
-    internal class ExplodedGraph : Common.ExplodedGraph
+    internal class ExplodedGraph : Common.BaseExplodedGraph
     {
         public ExplodedGraph(IControlFlowGraph cfg, ISymbol declaration, SemanticModel semanticModel, Common.LiveVariableAnalysis lva)
             : base(cfg, declaration, semanticModel, lva)
