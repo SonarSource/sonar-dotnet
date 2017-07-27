@@ -41,6 +41,7 @@
     <AppConfig>app.VS2015.config</AppConfig>
   </PropertyGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="app.VS2015.config" />
   </ItemGroup>
   <ItemGroup>
