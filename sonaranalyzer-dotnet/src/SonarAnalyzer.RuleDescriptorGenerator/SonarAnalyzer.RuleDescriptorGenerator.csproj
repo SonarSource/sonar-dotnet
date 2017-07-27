@@ -20,7 +20,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Classic\Debug\</OutputPath>
-	<IntermediateOutputPath>obj\Classic</IntermediateOutputPath>
+    <IntermediateOutputPath>obj\Classic</IntermediateOutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -31,7 +31,7 @@
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Classic\Release\</OutputPath>
-	<IntermediateOutputPath>obj\Classic</IntermediateOutputPath>
+    <IntermediateOutputPath>obj\Classic</IntermediateOutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>

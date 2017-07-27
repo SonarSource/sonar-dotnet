@@ -24,8 +24,8 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Classic\Debug\</OutputPath>
-	<IntermediateOutputPath>obj\Classic</IntermediateOutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <IntermediateOutputPath>obj\Classic</IntermediateOutputPath>
+    <DefineConstants>TRACE;DEBUG;ROSLYN_10</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AppConfig>app.config</AppConfig>
@@ -34,15 +34,15 @@
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Classic\Release\</OutputPath>
-	<IntermediateOutputPath>obj\Classic</IntermediateOutputPath>
-    <DefineConstants>TRACE</DefineConstants>
+    <IntermediateOutputPath>obj\Classic</IntermediateOutputPath>
+    <DefineConstants>TRACE;ROSLYN_10</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AppConfig>app.config</AppConfig>
   </PropertyGroup>
   <ItemGroup>
     <None Include="app.config" />
-  </ItemGroup>  
+  </ItemGroup>
   <ItemGroup>
     <Reference Include="FluentAssertions, Version=3.4.1.0, Culture=neutral, PublicKeyToken=33f2691a05b67b6a, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\FluentAssertions.3.4.1\lib\net45\FluentAssertions.dll</HintPath>
