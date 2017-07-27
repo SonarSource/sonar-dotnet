@@ -35,24 +35,30 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>bin\Classic\Debug\</OutputPath>
+    <IntermediateOutputPath>obj\Classic</IntermediateOutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CreateVsixContainer>True</CreateVsixContainer>
     <DeployExtension>True</DeployExtension>
+    <AppConfig>app.classic.config</AppConfig>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>bin\Classic\Release\</OutputPath>
+    <IntermediateOutputPath>obj\Classic</IntermediateOutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AppConfig>app.classic.config</AppConfig>
   </PropertyGroup>
   <ItemGroup>
-    <None Include="app.config" />
-    <None Include="packages.config" />
+    <None Include="app.classic.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.SonarAnalyzer.Vsix.config" />
     <None Include="SonarAnalyzer.CSharp.nuspec">
       <SubType>Designer</SubType>
     </None>
@@ -69,7 +75,8 @@
     <None Include="tools-vbnet\uninstall.ps1" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="source.extension.vsixmanifest">
+    <None Include="..\VsixManifests\Classic\source.extension.vsixmanifest">
+      <Link>source.extension.vsixmanifest</Link>
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
