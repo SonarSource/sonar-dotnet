@@ -97,6 +97,7 @@ namespace SonarAnalyzer.Rules.CSharp
             return fieldSymbol != null &&
                    fieldSymbol.IsStatic &&
                    fieldSymbol.IsReadOnly &&
+                   !fieldSymbol.IsPubliclyAccessible() &&
                    fieldSymbol.Type.IsAny(RelevantTypes);
         }
     }
