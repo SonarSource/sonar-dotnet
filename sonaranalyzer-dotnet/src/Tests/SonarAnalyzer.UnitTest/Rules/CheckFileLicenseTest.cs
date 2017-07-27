@@ -18,10 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Rules.CSharp;
-using System;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -187,10 +187,10 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void CheckFileLicense_WhenProvidingAnInvalidRegex_ShouldThrowException()
         {
             const string expectedErrorMessage =
-                "Expected collection to be empty, but found {error AD0001: The Compiler Analyzer 'SonarAnalyzer.Rules.CSharp.CheckFileLicense' " +
+                "Expected collection to be empty, but found {error AD0001: Analyzer 'SonarAnalyzer.Rules.CSharp.CheckFileLicense' " +
                 "threw an exception of type 'System.ArgumentException' with message 'Invalid regular expression: " +
                 FailingSingleLineRegexHeader +
-                "\r\n*: headerFormat'.}.";
+                "\r\nParameter name: headerFormat'.}.";
 
             Action action =
                 () => Verifier.VerifyAnalyzer(@"TestCases\CheckFileLicense_NoLicenseStartWithUsing.cs",
