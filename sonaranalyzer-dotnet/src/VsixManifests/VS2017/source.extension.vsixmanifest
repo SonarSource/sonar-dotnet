@@ -10,8 +10,8 @@
     <Icon>logos\sonarlint_32.png</Icon>
   </Metadata>
   <Installation>
-    <InstallationTarget Version="[15.0]" Id="Microsoft.VisualStudio.Pro" />
     <InstallationTarget Version="[15.0]" Id="Microsoft.VisualStudio.Community" />
+    <InstallationTarget Version="[15.0]" Id="Microsoft.VisualStudio.Pro" />
     <InstallationTarget Version="[15.0]" Id="Microsoft.VisualStudio.Enterprise" />
   </Installation>
   <Dependencies>
@@ -26,4 +26,8 @@
     <Asset Type="Microsoft.VisualStudio.MefComponent" d:Source="Project" d:ProjectName="SonarAnalyzer.VisualBasic.VS2017" Path="|SonarAnalyzer.VisualBasic.VS2017|" />
     <Asset Type="Microsoft.VisualStudio.Analyzer" d:Source="File" Path="Google.Protobuf.dll" />
   </Assets>
+  <Prerequisites>
+    <Prerequisite Id="Microsoft.VisualStudio.Component.CodeClone" Version="[15.0,16.0)" DisplayName="Microsoft.VisualStudio.Component.CoreEditor" />
+    <Prerequisite Id="Microsoft.VisualStudio.Component.Roslyn.LanguageServices" Version="[15.0,16.0)" DisplayName="Roslyn Language Services" />
+  </Prerequisites>
 </PackageManifest>
