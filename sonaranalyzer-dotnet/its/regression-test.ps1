@@ -1,3 +1,6 @@
+[CmdletBinding(PositionalBinding = $false)]
+param ([ValidateSet("14.0", "15.0")][string]$msbuildVersion = "14.0")
+
 Set-StrictMode -version 2.0
 $ErrorActionPreference = "Stop"
 
@@ -16,12 +19,13 @@ function Build-Project([string]$ProjectName, [string]$SolutionRelativePath) {
     $Env:PROJECT = $ProjectName
 
     Restore-Packages $solutionPath
-    (Invoke-MSBuild $solutionPath /v:detailed /m /t:rebuild /p:Configuration=Debug) `
-        > .\output\$ProjectName.log
+    Invoke-MSBuild $msbuildVersion $solutionPath /m /t:rebuild /p:Configuration=Debug `
+        /clp:"Summary;ErrorsOnly" `
+        /fl /flp:"logFile=output\$ProjectName.log;verbosity=d"
 }
 
 function Initialize-ActualFolder {
-    Write-Host "Initializing the actual issues Git repo with the expected ones..."
+    Write-Host "Initializing the actual issues Git repo with the expected ones"
     if (Test-Path .\actual) {
         Remove-Item -Recurse -Force actual
     }
@@ -38,6 +42,7 @@ function Initialize-ActualFolder {
 }
 
 function Initialize-OutputFolder {
+    Write-Host "Initializing the output folder"
     if (Test-Path .\output) {
         Remove-Item -Recurse -Force output
     }
@@ -47,20 +52,22 @@ function Initialize-OutputFolder {
 
 try {
     . (Join-Path $PSScriptRoot "..\..\scripts\build\build-utils.ps1")
-    # Push-Location -Path $PSScriptRoot
+    $msBuildImportBefore = Get-MSBuildImportBeforePath $msbuildVersion
 
     Test-SonarAnalyzerDll
 
+    Write-Header "Initializing the environment"
     Initialize-ActualFolder
     Initialize-OutputFolder
 
-    Write-Host "Installing the imports before targets file"
-    Copy-Item .\SonarAnalyzer.Testing.ImportBefore.targets -Destination (Get-MSBuildImportBeforePath) `
-        -Recurse -Container
+    Write-Host "Installing the import before target file in '${msBuildImportBefore}'"
+    Copy-Item .\SonarAnalyzer.Testing.ImportBefore.targets -Destination $msBuildImportBefore -Recurse -Container
 
     Build-Project "akka.net" "src\Akka.sln"
     Build-Project "Nancy" "src\Nancy.sln"
     Build-Project "Ember-MM" "Ember Media Manager.sln"
+
+    Write-Header "Processing analyzer results"
 
     Write-Host "Normalizing the SARIF reports"
     Exec { & .\create-issue-reports.ps1 }
@@ -80,12 +87,10 @@ try {
 }
 catch {
     Write-Host -ForegroundColor Red $_
-    Write-Host $_.Exception
-    Write-Host $_.ScriptStackTrace
     exit 1
 }
 finally {
-    Pop-Location
-    Remove-Item -Force (Join-Path (Get-MSBuildImportBeforePath) "\SonarAnalyzer.Testing.ImportBefore.targets") `
+    Write-Host "Removing the import before target file from '${msBuildImportBefore}'"
+    Remove-Item -Force (Join-Path $msBuildImportBefore "\SonarAnalyzer.Testing.ImportBefore.targets") `
         -ErrorAction Ignore
 }

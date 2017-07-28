@@ -151,12 +151,9 @@
     <Compile Include="..\Signing.cs">
       <Link>Properties\Signing.cs</Link>
     </Compile>
-    <Compile Include="EnumHelper.cs" />
+    <Compile Include="*.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RuleDescriptors\RuleDetail.cs" />
-    <Compile Include="RuleDescriptors\RuleParameter.cs" />
-    <Compile Include="RuleDetailBuilder.cs" />
-    <Compile Include="RuleFinder.cs" />
+    <Compile Include="RuleDescriptors\*.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.SonarAnalyzer.Utilities.VS2017.config" />

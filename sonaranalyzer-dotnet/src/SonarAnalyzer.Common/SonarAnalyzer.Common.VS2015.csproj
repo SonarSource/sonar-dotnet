@@ -91,11 +91,10 @@
     <Compile Include="..\Signing.cs">
       <Link>Properties\Signing.cs</Link>
     </Compile>
-    <Compile Include="Helpers\ControlFlowGraph\Block.cs" />
-    <Compile Include="Helpers\ControlFlowGraph\IControlFlowGraph.cs" />
+    <Compile Include="Helpers\ControlFlowGraph\*.cs" />
     <Compile Include="Helpers\ControlFlowGraph\SyntaxNodeBased\Blocks\*.cs" />
-    <Compile Include="Helpers\ControlFlowGraph\SyntaxNodeBased\ControlFlowGraphBuilder.cs" />
-    <Compile Include="Helpers\LiveVariableAnalysis\LiveVariableAnalysis.cs" />
+    <Compile Include="Helpers\ControlFlowGraph\SyntaxNodeBased\*.cs" />
+    <Compile Include="Helpers\LiveVariableAnalysis\*.cs" />
     <Compile Include="Helpers\SymbolicExecution\Constraints\*.cs" />
     <Compile Include="Helpers\SymbolicExecution\Relationships\*.cs" />
     <Compile Include="Helpers\SymbolicExecution\SymbolicValues\Binary\*.cs" />

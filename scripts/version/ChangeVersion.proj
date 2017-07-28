@@ -23,16 +23,36 @@
       <ExpectedMatchCount>1</ExpectedMatchCount>
     </AssemblyInformationalVersion>
 
-    <VsixVersion Include="$(SolutionRoot)\src\VsixManifests\Classic\source.extension.vsixmanifest">
+    <VsixClassicVersion Include="$(SolutionRoot)\src\VsixManifests\Classic\source.extension.vsixmanifest">
       <Find>(?&lt;=Identity.*Version=")([^"]*)</Find>
       <ReplaceWith>$(VsixVersion)</ReplaceWith>
       <ExpectedMatchCount>1</ExpectedMatchCount>
-    </VsixVersion>
-    <VsixReleaseNotes Include="$(SolutionRoot)\src\VsixManifests\Classic\source.extension.vsixmanifest">
+    </VsixClassicVersion>
+    <VsixVS2015Version Include="$(SolutionRoot)\src\VsixManifests\VS2015\source.extension.vsixmanifest">
+      <Find>(?&lt;=Identity.*Version=")([^"]*)</Find>
+      <ReplaceWith>$(VsixVersion)</ReplaceWith>
+      <ExpectedMatchCount>1</ExpectedMatchCount>
+    </VsixVS2015Version>
+    <VsixVS2017Version Include="$(SolutionRoot)\src\VsixManifests\VS2017\source.extension.vsixmanifest">
+      <Find>(?&lt;=Identity.*Version=")([^"]*)</Find>
+      <ReplaceWith>$(VsixVersion)</ReplaceWith>
+      <ExpectedMatchCount>1</ExpectedMatchCount>
+    </VsixVS2017Version>
+    <VsixClassicReleaseNotes Include="$(SolutionRoot)\src\VsixManifests\Classic\source.extension.vsixmanifest">
       <Find>(?&lt;=&lt;ReleaseNotes&gt;http:\/\/www\.sonarlint\.org\/visualstudio\/rules\/index.html#version=)([^&lt;]*)</Find>
       <ReplaceWith>$(AssemblyFileVersion)</ReplaceWith>
       <ExpectedMatchCount>1</ExpectedMatchCount>
-    </VsixReleaseNotes>
+    </VsixClassicReleaseNotes>
+    <VsixVS2015ReleaseNotes Include="$(SolutionRoot)\src\VsixManifests\VS2015\source.extension.vsixmanifest">
+      <Find>(?&lt;=&lt;ReleaseNotes&gt;http:\/\/www\.sonarlint\.org\/visualstudio\/rules\/index.html#version=)([^&lt;]*)</Find>
+      <ReplaceWith>$(AssemblyFileVersion)</ReplaceWith>
+      <ExpectedMatchCount>1</ExpectedMatchCount>
+    </VsixVS2015ReleaseNotes>
+    <VsixVS2017ReleaseNotes Include="$(SolutionRoot)\src\VsixManifests\VS2017\source.extension.vsixmanifest">
+      <Find>(?&lt;=&lt;ReleaseNotes&gt;http:\/\/www\.sonarlint\.org\/visualstudio\/rules\/index.html#version=)([^&lt;]*)</Find>
+      <ReplaceWith>$(AssemblyFileVersion)</ReplaceWith>
+      <ExpectedMatchCount>1</ExpectedMatchCount>
+    </VsixVS2017ReleaseNotes>
 
     <NugetAnalyzer Include="$(SolutionRoot)\src\SonarAnalyzer.Vsix\SonarAnalyzer.CSharp.nuspec">
       <Find>(?&lt;=&lt;version&gt;)([^&lt;]*)</Find>
@@ -71,8 +91,12 @@
     <RegexTransform Items="@(AssemblyVersion)" />
     <RegexTransform Items="@(AssemblyFileVersion)" />
     <RegexTransform Items="@(AssemblyInformationalVersion)" />
-    <RegexTransform Items="@(VsixVersion)" />
-    <RegexTransform Items="@(VsixReleaseNotes)" />
+    <RegexTransform Items="@(VsixClassicVersion)" />
+    <RegexTransform Items="@(VsixVS2015Version)" />
+    <RegexTransform Items="@(VsixVS2017Version)" />
+    <RegexTransform Items="@(VsixClassicReleaseNotes)" />
+    <RegexTransform Items="@(VsixVS2015ReleaseNotes)" />
+    <RegexTransform Items="@(VsixVS2017ReleaseNotes)" />
     <RegexTransform Items="@(NugetAnalyzer)" />
     <RegexTransform Items="@(NugetReleaseNotes)" />
     <RegexTransform Items="@(NugetDescriptorCs)" />

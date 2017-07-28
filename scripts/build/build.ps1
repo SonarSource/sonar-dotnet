@@ -42,7 +42,8 @@ function Get-BranchName() {
 }
 
 function Clear-MSBuildImportBefore() {
-    Get-ChildItem (Get-MSBuildImportBeforePath) -Recurse -Include "Sonar*.targets" `
+    $importBeforePath = Get-MSBuildImportBeforePath "14.0"
+    Get-ChildItem $importBeforePath -Recurse -Include "Sonar*.targets" `
         | ForEach-Object { Remove-Item -Force $_ }
 }
 
@@ -52,7 +53,7 @@ function Get-DotNetVersion() {
 }
 
 function Set-DotNetVersion() {
-    Write-Header "Updating version in .Net files..."
+    Write-Header "Updating version in .Net files"
 
     $branchName = Get-BranchName
 
@@ -66,7 +67,7 @@ function Set-DotNetVersion() {
             -Replace '<BranchName>.*</BranchName>', "<BranchName>$branchName</BranchName>" `
         | Set-Content $versionPropsPath
 
-    Invoke-MSBuild "${PSScriptRoot}\..\version\ChangeVersion.proj"
+    Invoke-MSBuild "14.0" "${PSScriptRoot}\..\version\ChangeVersion.proj"
 
     $version = Get-DotNetVersion
     Write-Host "Version successfully set to '${version}'"
@@ -94,7 +95,7 @@ function Get-ScannerMsBuildPath() {
 }
 
 function Invoke-SonarBeginAnalysis([array][parameter(ValueFromRemainingArguments = $true)]$remainingArgs) {
-    Write-Header "Running SonarQube Analysis begin step..."
+    Write-Header "Running SonarQube Analysis begin step"
 
     $scannerMsbuildExe = Get-ScannerMsBuildPath
     & $scannerMsbuildExe begin `
@@ -107,7 +108,7 @@ function Invoke-SonarBeginAnalysis([array][parameter(ValueFromRemainingArguments
 }
 
 function Invoke-SonarEndAnalysis() {
-    Write-Header "Running SonarQube Analysis end step..."
+    Write-Header "Running SonarQube Analysis end step"
 
     $scannerMsbuildExe = Get-ScannerMsBuildPath
     & $scannerMsbuildExe end /d:sonar.login=$sonarQubeToken
@@ -115,7 +116,7 @@ function Invoke-SonarEndAnalysis() {
 }
 
 function Initialize-NuGetConfig() {
-    Write-Header "Setting up nuget.config..."
+    Write-Header "Setting up nuget.config"
 
     Remove-Item $appDataPath\NuGet\NuGet.Config
 
@@ -125,7 +126,7 @@ function Initialize-NuGetConfig() {
 }
 
 function Publish-NuGetPackages {
-    Write-Header "Publishing NuGet packages..."
+    Write-Header "Publishing NuGet packages"
 
     $nuget_exe = Get-NuGetPath
     foreach ($file in (Get-ChildItem "src" -Recurse "*.nupkg")) {
@@ -135,7 +136,7 @@ function Publish-NuGetPackages {
 
 function Update-AnalyzerMavenArtifacts() {
     $version = Get-DotNetVersion
-    Write-Header "Updating analyzer maven sub-modules..."
+    Write-Header "Updating analyzer maven sub-modules"
 
     Get-ChildItem "src" -Recurse "*.nupkg" | ForEach-Object {
         $packageId = ($_.Name -Replace $_.Extension, "") -Replace ".$version", ""
@@ -147,7 +148,7 @@ function Update-AnalyzerMavenArtifacts() {
 }
 
 function Initialize-QaStep() {
-    Write-Header "Queueing QA job..."
+    Write-Header "Queueing QA job"
 
     $versionPropertiesPath = ".\version.properties"
     $version = Get-DotNetVersion
@@ -183,7 +184,7 @@ function Invoke-DotNetBuild() {
     }
 
     Restore-Packages $solutionName
-    Invoke-MSBuild $solutionName `
+    Invoke-MSBuild "14.0" $solutionName `
         /v:q `
         /consoleloggerparameters:Summary `
         /m `
@@ -248,7 +249,7 @@ function Invoke-JavaBuild() {
     }
 
     if ($isMaster -And -Not $isPullRequest) {
-        Write-Header "Building, deploying and analyzing SonarC#..."
+        Write-Header "Building, deploying and analyzing SonarC#"
 
         $currentVersion = Get-MavenExpression "project.version"
         Set-MavenBuildVersion
@@ -265,7 +266,7 @@ function Invoke-JavaBuild() {
         Test-ExitCode "ERROR: Maven build deploy sonar FAILED."
     }
     elseif ($env:IS_PULLREQUEST -eq "true" -and $githubToken -ne $null) {
-        Write-Header "Building and analyzing SonarC#..."
+        Write-Header "Building and analyzing SonarC#"
 
         # Do not deploy a SNAPSHOT version but the release version related to this build and PR
         Set-MavenBuildVersion
@@ -289,7 +290,7 @@ function Invoke-JavaBuild() {
         Test-ExitCode "ERROR: Maven build deploy sonar FAILED."
     }
     else {
-        Write-Header "Building SonarC#..."
+        Write-Header "Building SonarC#"
 
         Set-MavenBuildVersion
 
@@ -304,7 +305,7 @@ try {
     . (Join-Path $PSScriptRoot "build-utils.ps1")
 
     $buildConfiguration = "Release"
-    $binPath = "bin\${buildConfiguration}"
+    $binPath = "bin\Classic\${buildConfiguration}"
     $solutionName = "SonarAnalyzer.sln"
     $branchName = Get-BranchName
     $isMaster = $branchName -Eq "master"

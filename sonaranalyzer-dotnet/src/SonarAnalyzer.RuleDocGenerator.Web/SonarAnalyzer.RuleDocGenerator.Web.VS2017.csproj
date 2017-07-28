@@ -162,11 +162,8 @@
     <Compile Include="..\Signing.cs">
       <Link>Properties\Signing.cs</Link>
     </Compile>
-    <Compile Include="Program.cs" />
+    <Compile Include="*.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RuleMeta.cs" />
-    <Compile Include="SonarAnalyzerDescriptor.cs" />
-    <Compile Include="RuleImplementationMeta.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.SonarAnalyzer.RuleDocGenerator.Web.VS2017.config" />

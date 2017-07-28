@@ -1,7 +1,7 @@
 Add-Type -AssemblyName "System.IO.Compression.FileSystem"
 
 # Original: http://jameskovacs.com/2010/02/25/the-exec-problem
-function Exec ([scriptblock]$command, [string]$errorMessage = "Error executing command: " + $command) {
+function Exec ([scriptblock]$command, [string]$errorMessage = "ERROR: Command '${command}' FAILED.") {
     $output = & $command
     if ((-not $?) -or ($lastexitcode -ne 0)) {
         Write-Host $output
@@ -10,7 +10,7 @@ function Exec ([scriptblock]$command, [string]$errorMessage = "Error executing c
     return $output
 }
 
-function Test-ExitCode([string]$errorMessage = "Error executing command.") {
+function Test-ExitCode([string]$errorMessage = "ERROR: Command FAILED.") {
     if ((-not $?) -or ($lastexitcode -ne 0)) {
         throw $errorMessage
     }
@@ -58,17 +58,17 @@ function Get-ExecutablePath([string]$name, [string]$directory, [string]$envVar) 
     }
 
     if (Test-Path $path) {
-        Write-Debug "Found ${name} at ${path}"
+        Write-Host "Found '${name}' at '${path}'"
         [environment]::SetEnvironmentVariable($envVar, $path)
         return $path
     }
 
-    Write-Error "Cannot find $name"
+    Write-Host "Cannot find '${name}'"
     exit 1
 }
 
 function Expand-ZIPFile($source, $destination) {
-    Write-Host "Expanding ZIP file ${source} into ${destination}"
+    Write-Host "Unzipping '${source}' into '${destination}'"
 
     if (Get-Command "Expand-Archive" -errorAction SilentlyContinue) {
         # PS v5.0+
@@ -76,8 +76,8 @@ function Expand-ZIPFile($source, $destination) {
     }
     else {
         if (-Not (Test-Path $destination)) {
-            Write-Host "Creating ${destination}"
             New-Item $destination -ItemType Directory
+            Write-Host "Succesfully created folder '${destination}'"
         }
 
         $application = New-Object -Com Shell.Application
