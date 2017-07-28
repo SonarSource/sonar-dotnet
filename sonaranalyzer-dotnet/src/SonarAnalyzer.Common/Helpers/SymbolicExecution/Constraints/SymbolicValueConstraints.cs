@@ -31,7 +31,12 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
 
         private readonly int hashCode;
 
-        public SymbolicValueConstraints(SymbolicValueConstraint constraint)
+        public static SymbolicValueConstraints Create(SymbolicValueConstraint constraint)
+        {
+            return new SymbolicValueConstraints(constraint);
+        }
+
+        private SymbolicValueConstraints(SymbolicValueConstraint constraint)
         {
             SetConstraint(constraint, this.constraints);
             hashCode = ComputeHashcode();
@@ -45,7 +50,7 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
 
         internal IEnumerable<SymbolicValueConstraint> GetConstraints() => constraints.Values;
 
-        internal virtual SymbolicValueConstraints SetConstraint(SymbolicValueConstraint constraint)
+        internal virtual SymbolicValueConstraints WithConstraint(SymbolicValueConstraint constraint)
         {
             var constraintsCopy = new Dictionary<Type, SymbolicValueConstraint>(constraints);
             SetConstraint(constraint, constraintsCopy);
@@ -62,6 +67,10 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
                 constraint is DisposableConstraint)
             {
                 constraints[typeof(ObjectConstraint)] = ObjectConstraint.NotNull;
+                if (constraints.ContainsKey(typeof(NullableValueConstraint)))
+                {
+                    constraints[typeof(NullableValueConstraint)] = NullableValueConstraint.HasValue;
+                }
             }
         }
 

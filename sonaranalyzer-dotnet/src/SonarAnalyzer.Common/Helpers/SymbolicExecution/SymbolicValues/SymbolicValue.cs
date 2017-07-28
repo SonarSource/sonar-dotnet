@@ -120,7 +120,7 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
                 return programState;
             }
 
-            var updatedConstraintsMap = AddConstraintForSymbol(this, constraint, programState.Constraints);
+            var updatedConstraintsMap = AddConstraintForSymbolicValue(this, constraint, programState.Constraints);
             updatedConstraintsMap = AddConstraintTo<EqualsRelationship>(constraint, programState, updatedConstraintsMap);
 
             if (constraint is BoolConstraint)
@@ -136,14 +136,14 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
                 programState.Relationships);
         }
 
-        private ImmutableDictionary<SymbolicValue, SymbolicValueConstraints> AddConstraintForSymbol(SymbolicValue symbolicValue,
+        private ImmutableDictionary<SymbolicValue, SymbolicValueConstraints> AddConstraintForSymbolicValue(SymbolicValue symbolicValue,
             SymbolicValueConstraint constraint, ImmutableDictionary<SymbolicValue, SymbolicValueConstraints> constraintMap)
         {
             var constraints = constraintMap.GetValueOrDefault(symbolicValue);
 
             var updatedConstraints = constraints != null
-                ? constraints.SetConstraint(constraint)
-                : new SymbolicValueConstraints(constraint);
+                ? constraints.WithConstraint(constraint)
+                : SymbolicValueConstraints.Create(constraint);
 
             return constraintMap.SetItem(symbolicValue, updatedConstraints);
         }
@@ -161,7 +161,7 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
 
             foreach (var equalSymbol in equalSymbols.Where(e => !e.HasConstraint(constraint, programState)))
             {
-                newConstraintsMap = AddConstraintForSymbol(equalSymbol, constraint, newConstraintsMap);
+                newConstraintsMap = AddConstraintForSymbolicValue(equalSymbol, constraint, newConstraintsMap);
             }
 
             return newConstraintsMap;
@@ -280,7 +280,7 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
                 programStates = programStates.SelectMany(ps =>
                     isOppositeConstraints
                     ? TrySetOppositeConstraint(constraint, ps)
-                    : TrySetConstraint(constraint, ps)).ToArray();
+                    : TrySetConstraint(constraint, ps));
             }
 
             return programStates;
