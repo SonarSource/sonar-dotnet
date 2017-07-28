@@ -15,7 +15,7 @@
     <InstallationTarget Version="[15.0]" Id="Microsoft.VisualStudio.Enterprise" />
   </Installation>
   <Dependencies>
-    <Dependency Id="Microsoft.Framework.NDP" DisplayName="Microsoft .NET Framework" d:Source="Manual" Version="[4.5.2,)" />
+    <Dependency Id="Microsoft.Framework.NDP" DisplayName="Microsoft .NET Framework" d:Source="Manual" Version="[4.6,)" />
   </Dependencies>
   <Assets>
     <Asset Type="Microsoft.VisualStudio.Analyzer" d:Source="Project" d:ProjectName="SonarAnalyzer.Common.VS2017" Path="|SonarAnalyzer.Common.VS2017|" />
