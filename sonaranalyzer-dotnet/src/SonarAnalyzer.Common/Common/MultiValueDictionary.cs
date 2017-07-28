@@ -24,15 +24,9 @@ using System.Runtime.Serialization;
 
 namespace SonarAnalyzer.Common
 {
-    [Serializable]
     public class MultiValueDictionary<TKey, TValue> : Dictionary<TKey, ICollection<TValue>>
     {
         public MultiValueDictionary()
-        {
-        }
-
-        protected MultiValueDictionary(SerializationInfo info, StreamingContext context)
-            : base(info, context)
         {
         }
 

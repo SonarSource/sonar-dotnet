@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2017 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -281,7 +281,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return
                        !typeSymbol.Is(KnownType.System_Object) &&
                        !typeSymbol.Is(KnownType.System_ValueType) &&
-                       !typeSymbol.Name.StartsWith("_", StringComparison.InvariantCulture) &&
+                       !typeSymbol.Name.StartsWith("_", StringComparison.Ordinal) &&
                        !typeSymbol.Is(KnownType.System_Enum);
             }
 

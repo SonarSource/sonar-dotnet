@@ -18,15 +18,13 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
-using SonarAnalyzer.Common;
-using SonarAnalyzer.Rules.Common;
-using System.Linq;
-using System;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
+using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
-using System.Collections.Immutable;
+using SonarAnalyzer.Rules.Common;
 
 namespace SonarAnalyzer.Rules.VisualBasic
 {
@@ -64,29 +62,23 @@ namespace SonarAnalyzer.Rules.VisualBasic
         }
 
         private static bool StatementIsBlock(StatementSyntax st) =>
-            ExcludedTypes.Any(bType => bType.IsInstanceOfType(st));
-
-        private static readonly Type[] ExcludedTypes =
-        {
-            typeof(NamespaceBlockSyntax),
-            typeof(TypeBlockSyntax),
-            typeof(EnumBlockSyntax),
-            typeof(MethodBlockBaseSyntax),
-            typeof(PropertyBlockSyntax),
-            typeof(EventBlockSyntax),
-            typeof(DoLoopBlockSyntax),
-            typeof(WhileBlockSyntax),
-            typeof(ForOrForEachBlockSyntax),
-            typeof(MultiLineIfBlockSyntax),
-            typeof(ElseStatementSyntax),
-            typeof(SyncLockBlockSyntax),
-            typeof(TryBlockSyntax),
-            typeof(UsingBlockSyntax),
-            typeof(WithBlockSyntax),
-            typeof(MultiLineLambdaExpressionSyntax),
-            typeof(MethodBaseSyntax),
-            typeof(InheritsOrImplementsStatementSyntax)
-        };
+            st is NamespaceBlockSyntax ||
+            st is TypeBlockSyntax ||
+            st is EnumBlockSyntax ||
+            st is MethodBlockBaseSyntax ||
+            st is PropertyBlockSyntax ||
+            st is EventBlockSyntax ||
+            st is DoLoopBlockSyntax ||
+            st is WhileBlockSyntax ||
+            st is ForOrForEachBlockSyntax ||
+            st is MultiLineIfBlockSyntax ||
+            st is ElseStatementSyntax ||
+            st is SyncLockBlockSyntax ||
+            st is TryBlockSyntax ||
+            st is UsingBlockSyntax ||
+            st is WithBlockSyntax ||
+            st is MethodBaseSyntax ||
+            st is InheritsOrImplementsStatementSyntax;
 
         protected sealed override GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.VisualBasic.GeneratedCodeRecognizer.Instance;
     }
