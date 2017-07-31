@@ -7,9 +7,9 @@
 "uri":  "sources\akka.net\src\contrib\dependencyInjection\Akka.DI.TestKit\DiResolverSpec.cs",
 "region":  {
 "startLine":  91,
-"startColumn":  27,
+"startColumn":  23,
 "endLine":  91,
-"endColumn":  36
+"endColumn":  51
 }
 }
 }

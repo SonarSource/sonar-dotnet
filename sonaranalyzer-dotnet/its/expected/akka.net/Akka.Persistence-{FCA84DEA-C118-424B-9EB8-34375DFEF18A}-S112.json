@@ -7,9 +7,9 @@
 "uri":  "sources\akka.net\src\core\Akka.Persistence\Persistence.cs",
 "region":  {
 "startLine":  54,
-"startColumn":  65,
+"startColumn":  61,
 "endLine":  54,
-"endColumn":  87
+"endColumn":  131
 }
 }
 },
@@ -20,9 +20,9 @@
 "uri":  "sources\akka.net\src\core\Akka.Persistence\Persistence.cs",
 "region":  {
 "startLine":  61,
-"startColumn":  65,
+"startColumn":  61,
 "endLine":  61,
-"endColumn":  87
+"endColumn":  138
 }
 }
 }

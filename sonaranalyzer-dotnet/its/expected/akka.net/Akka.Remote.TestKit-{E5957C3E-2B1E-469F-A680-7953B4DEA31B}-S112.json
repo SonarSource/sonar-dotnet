@@ -7,7 +7,7 @@
 "uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MultiNodeSpec.cs",
 "region":  {
 "startLine":  562,
-"startColumn":  27,
+"startColumn":  23,
 "endLine":  562,
 "endColumn":  36
 }
@@ -17,7 +17,7 @@
 "id":  "S112",
 "message":  "'System.Exception' should not be thrown by user code.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "akka.net\src\core\Akka.Remote.TestKit\Player.cs",
 "region":  {
 "startLine":  88,
 "startColumn":  39,
@@ -30,7 +30,7 @@
 "id":  "S112",
 "message":  "'System.Exception' should not be thrown by user code.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "akka.net\src\core\Akka.Remote.TestKit\Player.cs",
 "region":  {
 "startLine":  407,
 "startColumn":  45,
@@ -43,7 +43,7 @@
 "id":  "S112",
 "message":  "'System.Exception' should not be thrown by user code.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "akka.net\src\core\Akka.Remote.TestKit\Player.cs",
 "region":  {
 "startLine":  414,
 "startColumn":  45,
@@ -56,7 +56,7 @@
 "id":  "S112",
 "message":  "'System.Exception' should not be thrown by user code.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "akka.net\src\core\Akka.Remote.TestKit\Player.cs",
 "region":  {
 "startLine":  493,
 "startColumn":  67,

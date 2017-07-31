@@ -7,9 +7,9 @@
 "uri":  "sources\Nancy\src\Nancy.Testing\PassThroughStatusHandler.cs",
 "region":  {
 "startLine":  23,
-"startColumn":  23,
+"startColumn":  19,
 "endLine":  23,
-"endColumn":  32
+"endColumn":  94
 }
 }
 }

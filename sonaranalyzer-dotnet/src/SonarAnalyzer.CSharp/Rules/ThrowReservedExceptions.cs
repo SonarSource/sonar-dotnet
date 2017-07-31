@@ -37,12 +37,12 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected sealed override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(ReportReservedExceptionCreation, SyntaxKind.ObjectCreationExpression);
+            context.RegisterSyntaxNodeActionInNonGenerated(
+                c => ReportReservedExceptionCreation(c, ((ThrowStatementSyntax)c.Node).Expression),
+                SyntaxKind.ThrowStatement);
         }
 
-        protected override Location GetLocation(SyntaxNode node)
-        {
-            return ((ObjectCreationExpressionSyntax)node).Type.GetLocation();
-        }
+        protected override bool IsObjectCreation(SyntaxNode throwStatementExpression) =>
+            throwStatementExpression.IsKind(SyntaxKind.ObjectCreationExpression);
     }
 }

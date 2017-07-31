@@ -7,28 +7,27 @@ namespace SonarAnalyzer.UnitTest.TestCases
         public void Method1()
         {
             throw new Exception(); // Noncompliant {{'System.Exception' should not be thrown by user code.}}
-//                    ^^^^^^^^^
+//                ^^^^^^^^^^^^^^^
 
             throw new ApplicationException(); // Noncompliant {{'System.ApplicationException' should not be thrown by user code.}}
-//                    ^^^^^^^^^^^^^^^^^^^^
+//                ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
             throw new SystemException(); // Noncompliant {{'System.SystemException' should not be thrown by user code.}}
-//                    ^^^^^^^^^^^^^^^
+//                ^^^^^^^^^^^^^^^^^^^^^
 
             throw new ExecutionEngineException(); // Noncompliant {{'System.ExecutionEngineException' should not be thrown by user code.}}
-//                    ^^^^^^^^^^^^^^^^^^^^^^^^
+//                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
             throw new IndexOutOfRangeException(); // Noncompliant {{'System.IndexOutOfRangeException' should not be thrown by user code.}}
-//                    ^^^^^^^^^^^^^^^^^^^^^^^^
+//                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
             throw new NullReferenceException(); // Noncompliant {{'System.NullReferenceException' should not be thrown by user code.}}
-//                    ^^^^^^^^^^^^^^^^^^^^^^
+//                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
             throw new OutOfMemoryException(); // Noncompliant {{'System.OutOfMemoryException' should not be thrown by user code.}}
-//                    ^^^^^^^^^^^^^^^^^^^^
+//                ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-            var e = new OutOfMemoryException(); // Noncompliant {{'System.OutOfMemoryException' should not be thrown by user code.}}
-//                      ^^^^^^^^^^^^^^^^^^^^
+            var e = new OutOfMemoryException(); // Compliant
 
             throw new ArgumentNullException(); // Compliant
 

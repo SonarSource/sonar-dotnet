@@ -7,9 +7,9 @@
 "uri":  "sources\akka.net\src\examples\PersistenceExample\AtLeastOnceDeliveryExampleActor.cs",
 "region":  {
 "startLine":  133,
-"startColumn":  27,
+"startColumn":  23,
 "endLine":  133,
-"endColumn":  36
+"endColumn":  62
 }
 }
 },
@@ -20,9 +20,9 @@
 "uri":  "sources\akka.net\src\examples\PersistenceExample\ExamplePersistentFailingActor.cs",
 "region":  {
 "startLine":  38,
-"startColumn":  27,
+"startColumn":  23,
 "endLine":  38,
-"endColumn":  36
+"endColumn":  61
 }
 }
 }

@@ -7,9 +7,9 @@
 "uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\AtLeastOnceDeliveryReceiveActorSpec.cs",
 "region":  {
 "startLine":  190,
-"startColumn":  31,
+"startColumn":  27,
 "endLine":  190,
-"endColumn":  40
+"endColumn":  48
 }
 }
 },
@@ -20,9 +20,9 @@
 "uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\AtLeastOnceDeliverySpec.cs",
 "region":  {
 "startLine":  90,
-"startColumn":  35,
+"startColumn":  31,
 "endLine":  90,
-"endColumn":  44
+"endColumn":  52
 }
 }
 },
@@ -33,9 +33,9 @@
 "uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\ReceivePersistentActorTests_LifeCycle.cs",
 "region":  {
 "startLine":  73,
-"startColumn":  69,
+"startColumn":  65,
 "endLine":  73,
-"endColumn":  78
+"endColumn":  88
 }
 }
 },
@@ -46,9 +46,9 @@
 "uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\ReceivePersistentActorTests_LifeCycle.cs",
 "region":  {
 "startLine":  81,
-"startColumn":  69,
+"startColumn":  65,
 "endLine":  81,
-"endColumn":  78
+"endColumn":  88
 }
 }
 }
