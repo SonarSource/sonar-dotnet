@@ -4,7 +4,7 @@
 "id":  "S3693",
 "message":  "Avoid throwing exceptions in this constructor.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ModelBinding\ModelBindingException.cs",
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\ModelBindingException.cs",
 "region":  {
 "startLine":  36,
 "startColumn":  17,

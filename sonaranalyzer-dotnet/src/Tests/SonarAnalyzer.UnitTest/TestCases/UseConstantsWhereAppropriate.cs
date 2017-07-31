@@ -2,7 +2,7 @@ using System;
 
 namespace Tests.Diagnostics
 {
-    class Program
+    public class Program
     {
         static readonly bool x1 = false;   // Noncompliant {{Replace this 'static readonly' declaration with 'const'.}}
         static readonly byte x2 = 1;       // Noncompliant
@@ -20,6 +20,9 @@ namespace Tests.Diagnostics
         static readonly string x14 = "";   // Noncompliant
 
         static readonly int maxVal = int.MaxValue; // Noncompliant
+
+        public static readonly int publicMaxVal = int.MaxValue; // Compliant- public
+        protected static readonly int protectedMaxVal = int.MaxValue; // Compliant - protected
 
         static readonly object x15 = null; // Compliant
 
