@@ -23,6 +23,10 @@ External users can rely only on public versions hosted in maven
 When working with Eclipse or IntelliJ please follow the guidelines from this page:
 https://github.com/SonarSource/sonar-developer-toolset
 
+## Running Tests
+Commands described in working with the code section will automatically run the unit tests.
+To run the ITs, from your command prompt, go to `its` folder and run `mvn clean install`.
+
 ## Contributing
 Please see [Contributing Code](https://github.com/SonarSource/sonar-csharp/blob/master/CONTRIBUTING.md) for details on
 contributing changes back to the code.
