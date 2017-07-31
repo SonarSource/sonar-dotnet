@@ -11,7 +11,7 @@ function Test-SonarAnalyzerDll {
 function Build-Project([string]$ProjectName, [string]$SolutionRelativePath) {
     New-Item -ItemType directory -Path .\output\$ProjectName | out-null
 
-    $solutionPath = (Resolve-Path ".\${ProjectName}\${SolutionRelativePath}")
+    $solutionPath = (Resolve-Path ".\sources\${ProjectName}\${SolutionRelativePath}")
 
     # The PROJECT env variable is used by 'SonarAnalyzer.Testing.ImportBefore.targets'
     $Env:PROJECT = $ProjectName

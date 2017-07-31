@@ -1,9 +1,3 @@
-[submodule "sonaranalyzer-dotnet/its/Nancy"]
-	path = sonaranalyzer-dotnet/its/Nancy
-	url = https://github.com/dbolkensteyn/Nancy.git
-[submodule "sonaranalyzer-dotnet/its/akka.net"]
-	path = sonaranalyzer-dotnet/its/akka.net
-	url = https://github.com/dbolkensteyn/akka.net.git
-[submodule "sonaranalyzer-dotnet/its/Ember-MM"]
-	path = sonaranalyzer-dotnet/its/Ember-MM
-	url = https://github.com/tvsonar/Ember-MM.git
+[submodule "sonaranalyzer-dotnet/its/sources"]
+	path = sonaranalyzer-dotnet/its/sources
+	url = https://github.com/SonarSource/dotnet-test-sources
