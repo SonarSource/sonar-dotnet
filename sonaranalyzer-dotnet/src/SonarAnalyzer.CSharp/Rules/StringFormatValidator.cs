@@ -41,6 +41,9 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string CodeSmellDiagnosticId = "S3457";
         private const string MessageFormat = "{0}";
 
+        // This is the value as defined in .Net Framework
+        private const int MaxValueForArgumentIndexAndAlignment = 1000000;
+
         private static readonly DiagnosticDescriptor bugRule =
           DiagnosticDescriptorBuilder.GetDescriptor(BugDiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
@@ -73,7 +76,9 @@ namespace SonarAnalyzer.Rules.CSharp
                 ValidationFailure.InvalidCharacterAfterOpenCurlyBrace,
                 ValidationFailure.UnbalancedCurlyBraceCount,
                 ValidationFailure.FormatItemMalformed,
-                ValidationFailure.FormatItemIndexTooHigh
+                ValidationFailure.FormatItemIndexBiggerThanArgsCount,
+                ValidationFailure.FormatItemIndexBiggerThanMaxValue,
+                ValidationFailure.FormatItemAlignmentBiggerThanMaxValue
             };
 
         private static readonly ISet<ValidationFailure> codeSmellRelatedFailures =
@@ -146,7 +151,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             if (methodName.EndsWith("Format") ||
                 failure == ValidationFailure.UnusedFormatArguments ||
-                failure == ValidationFailure.FormatItemIndexTooHigh)
+                failure == ValidationFailure.FormatItemIndexBiggerThanArgsCount)
             {
                 return false;
             }
@@ -266,6 +271,15 @@ namespace SonarAnalyzer.Rules.CSharp
             ICollection<FormatStringItem> formatStringItems, ArgumentListSyntax argumentList, int formatArgumentIndex,
             SemanticModel semanticModel)
         {
+            if (formatStringItems.Any(x => x.Index > MaxValueForArgumentIndexAndAlignment))
+            {
+                return ValidationFailure.FormatItemIndexBiggerThanMaxValue;
+            }
+            if (formatStringItems.Any(x => x.Alignment > MaxValueForArgumentIndexAndAlignment))
+            {
+                return ValidationFailure.FormatItemAlignmentBiggerThanMaxValue;
+            }
+
             var formatArguments = argumentList.Arguments
                 .Skip(formatArgumentIndex + 1)
                 .Select(arg => FormatStringArgument.Create(arg.Expression, semanticModel))
@@ -295,7 +309,7 @@ namespace SonarAnalyzer.Rules.CSharp
             if (maxFormatItemIndex.HasValue &&
                 maxFormatItemIndex.Value + 1 > argumentsCount)
             {
-                return ValidationFailure.FormatItemIndexTooHigh;
+                return ValidationFailure.FormatItemIndexBiggerThanArgsCount;
             }
 
             return null;
@@ -356,17 +370,27 @@ namespace SonarAnalyzer.Rules.CSharp
             public static readonly ValidationFailure NullFormatString =
                 new ValidationFailure("Invalid string format, the format string cannot be null.");
             public static readonly ValidationFailure InvalidCharacterAfterOpenCurlyBrace =
-                new ValidationFailure("Invalid string format, opening curly brace can only be followed by a digit or an opening curly brace.");
+                new ValidationFailure("Invalid string format, opening curly brace can only be followed by a digit " +
+                    "or an opening curly brace.");
             public static readonly ValidationFailure UnbalancedCurlyBraceCount =
                 new ValidationFailure("Invalid string format, unbalanced curly brace count.");
             public static readonly ValidationFailure FormatItemMalformed =
-                new ValidationFailure("Invalid string format, all format items should comply with the following pattern '{index[,alignment][:formatString]}'.");
-            public static readonly ValidationFailure FormatItemIndexTooHigh =
-                new ValidationFailure("Invalid string format, the highest string format item index should not be greater than the arguments count.");
+                new ValidationFailure("Invalid string format, all format items should comply with the following " +
+                    "pattern '{index[,alignment][:formatString]}'.");
+            public static readonly ValidationFailure FormatItemIndexBiggerThanArgsCount =
+                new ValidationFailure("Invalid string format, the highest string format item index should not be " +
+                    "greater than the arguments count.");
+            public static readonly ValidationFailure FormatItemIndexBiggerThanMaxValue =
+                new ValidationFailure("Invalid string format, the string format item index should not be " +
+                    $"greater than {MaxValueForArgumentIndexAndAlignment}.");
+            public static readonly ValidationFailure FormatItemAlignmentBiggerThanMaxValue =
+                new ValidationFailure("Invalid string format, the string format item alignment should not be " +
+                    $"greater than {MaxValueForArgumentIndexAndAlignment}.");
             public static readonly ValidationFailure SimpleString =
                 new ValidationFailure("Remove this formatting call and simply use the input string.");
             public static readonly ValidationFailure UnknownError =
-                new ValidationFailure("Invalid string format, the format string is invalid and is likely to throw at runtime.");
+                new ValidationFailure("Invalid string format, the format string is invalid and is likely to throw at " +
+                    "runtime.");
             public static readonly ValidationFailure MissingFormatItemIndex =
                 new ValidationFailure("The format string might be wrong, the following item indexes are missing: ");
             public static readonly ValidationFailure UnusedFormatArguments =

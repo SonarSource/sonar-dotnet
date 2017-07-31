@@ -63,6 +63,9 @@ namespace Tests.Diagnostics
             s = string.Format("{0:(###) ###-####}", 8005551212);
             s = string.Format("{0:0,.}", 1500.42);
             s = string.Format("{0:0,0}", 1500.42);
+
+            s = string.Format("{1000001}"); // Noncompliant {{Invalid string format, the string format item index should not be greater than 1000000.}}
+            s = string.Format("{0,1000001}"); // Noncompliant {{Invalid string format, the string format item alignment should not be greater than 1000000.}}
         }
 
         void System_Console_Write(string[] args)
