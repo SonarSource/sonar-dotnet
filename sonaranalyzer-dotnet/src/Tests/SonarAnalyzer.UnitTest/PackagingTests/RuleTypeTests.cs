@@ -2180,7 +2180,7 @@ namespace SonarAnalyzer.UnitTest.PackagingTests
             //["2180"],
             //["2181"],
             //["2182"],
-            //["2183"],
+            ["2183"] = "BUG",
             ["2184"] = "BUG",
             //["2185"],
             //["2186"],
