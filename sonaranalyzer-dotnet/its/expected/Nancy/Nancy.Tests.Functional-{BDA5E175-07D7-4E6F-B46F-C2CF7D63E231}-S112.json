@@ -7,9 +7,9 @@
 "uri":  "sources\Nancy\src\Nancy.Tests.Functional\Tests\AsyncExceptionTests.cs",
 "region":  {
 "startLine":  46,
-"startColumn":  50,
+"startColumn":  46,
 "endLine":  46,
-"endColumn":  59
+"endColumn":  67
 }
 }
 },
@@ -20,9 +20,9 @@
 "uri":  "sources\Nancy\src\Nancy.Tests.Functional\Tests\AsyncExceptionTests.cs",
 "region":  {
 "startLine":  50,
-"startColumn":  61,
+"startColumn":  57,
 "endLine":  50,
-"endColumn":  70
+"endColumn":  78
 }
 }
 }

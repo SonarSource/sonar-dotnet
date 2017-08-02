@@ -7,9 +7,9 @@
 "uri":  "sources\akka.net\src\core\Akka.Cluster\Gossip.cs",
 "region":  {
 "startLine":  292,
-"startColumn":  48,
+"startColumn":  44,
 "endLine":  292,
-"endColumn":  57
+"endColumn":  88
 }
 }
 }

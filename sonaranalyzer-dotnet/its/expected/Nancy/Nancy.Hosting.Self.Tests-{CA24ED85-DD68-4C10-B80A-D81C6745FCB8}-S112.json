@@ -7,9 +7,9 @@
 "uri":  "sources\Nancy\src\Nancy.Hosting.Self.Tests\TestModule.cs",
 "region":  {
 "startLine":  29,
-"startColumn":  31,
+"startColumn":  27,
 "endLine":  29,
-"endColumn":  40
+"endColumn":  85
 }
 }
 }

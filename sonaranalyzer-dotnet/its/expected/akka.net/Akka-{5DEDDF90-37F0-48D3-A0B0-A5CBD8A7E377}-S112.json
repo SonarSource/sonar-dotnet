@@ -7,9 +7,9 @@
 "uri":  "sources\akka.net\src\core\Akka\Actor\ActorRefProvider.cs",
 "region":  {
 "startLine":  261,
-"startColumn":  27,
+"startColumn":  23,
 "endLine":  261,
-"endColumn":  36
+"endColumn":  109
 }
 }
 },
@@ -20,9 +20,9 @@
 "uri":  "sources\akka.net\src\core\Akka\Actor\ActorRefProvider.cs",
 "region":  {
 "startLine":  268,
-"startColumn":  27,
+"startColumn":  23,
 "endLine":  268,
-"endColumn":  36
+"endColumn":  111
 }
 }
 },
@@ -33,9 +33,9 @@
 "uri":  "sources\akka.net\src\core\Akka\Actor\Internal\ActorSystemImpl.cs",
 "region":  {
 "startLine":  396,
-"startColumn":  27,
+"startColumn":  23,
 "endLine":  396,
-"endColumn":  36
+"endColumn":  71
 }
 }
 },
@@ -46,9 +46,9 @@
 "uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconParser.cs",
 "region":  {
 "startLine":  144,
-"startColumn":  27,
+"startColumn":  23,
 "endLine":  144,
-"endColumn":  36
+"endColumn":  88
 }
 }
 },
@@ -59,9 +59,9 @@
 "uri":  "sources\akka.net\src\core\Akka\IO\ByteBuffer.cs",
 "region":  {
 "startLine":  99,
-"startColumn":  27,
+"startColumn":  23,
 "endLine":  99,
-"endColumn":  51
+"endColumn":  53
 }
 }
 },
@@ -72,9 +72,9 @@
 "uri":  "sources\akka.net\src\core\Akka\IO\Dns.cs",
 "region":  {
 "startLine":  75,
-"startColumn":  50,
+"startColumn":  46,
 "endLine":  75,
-"endColumn":  59
+"endColumn":  75
 }
 }
 },
@@ -85,9 +85,9 @@
 "uri":  "sources\akka.net\src\core\Akka\IO\SocketAsyncEventArgsPool.cs",
 "region":  {
 "startLine":  47,
-"startColumn":  23,
+"startColumn":  19,
 "endLine":  47,
-"endColumn":  32
+"endColumn":  34
 }
 }
 },
@@ -98,9 +98,9 @@
 "uri":  "sources\akka.net\src\core\Akka\Serialization\Serialization.cs",
 "region":  {
 "startLine":  135,
-"startColumn":  23,
+"startColumn":  19,
 "endLine":  135,
-"endColumn":  32
+"endColumn":  84
 }
 }
 },
@@ -111,9 +111,9 @@
 "uri":  "sources\akka.net\src\core\Akka\Util\ByteIterator.cs",
 "region":  {
 "startLine":  48,
-"startColumn":  41,
+"startColumn":  37,
 "endLine":  48,
-"endColumn":  65
+"endColumn":  67
 }
 }
 },
@@ -124,9 +124,9 @@
 "uri":  "sources\akka.net\src\core\Akka\Util\ByteIterator.cs",
 "region":  {
 "startLine":  125,
-"startColumn":  40,
+"startColumn":  36,
 "endLine":  125,
-"endColumn":  64
+"endColumn":  66
 }
 }
 },
@@ -137,9 +137,9 @@
 "uri":  "sources\akka.net\src\core\Akka\Util\ByteString.cs",
 "region":  {
 "startLine":  178,
-"startColumn":  27,
+"startColumn":  23,
 "endLine":  178,
-"endColumn":  51
+"endColumn":  69
 }
 }
 },
@@ -150,9 +150,9 @@
 "uri":  "sources\akka.net\src\core\Akka\Util\ByteString.cs",
 "region":  {
 "startLine":  266,
-"startColumn":  31,
+"startColumn":  27,
 "endLine":  266,
-"endColumn":  55
+"endColumn":  57
 }
 }
 }

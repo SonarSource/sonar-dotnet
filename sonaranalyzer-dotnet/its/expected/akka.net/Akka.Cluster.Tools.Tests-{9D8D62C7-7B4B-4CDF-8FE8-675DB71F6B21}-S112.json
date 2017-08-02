@@ -7,9 +7,9 @@
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools.Tests\ClusterClient\ClusterClientSpec.cs",
 "region":  {
 "startLine":  261,
-"startColumn":  65,
+"startColumn":  61,
 "endLine":  261,
-"endColumn":  74
+"endColumn":  128
 }
 }
 },
@@ -20,9 +20,9 @@
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools.Tests\ClusterClient\ClusterClientSpec.cs",
 "region":  {
 "startLine":  281,
-"startColumn":  36,
+"startColumn":  32,
 "endLine":  281,
-"endColumn":  45
+"endColumn":  75
 }
 }
 },
@@ -33,9 +33,9 @@
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools.Tests\ClusterClient\ClusterClientSpec.cs",
 "region":  {
 "startLine":  302,
-"startColumn":  65,
+"startColumn":  61,
 "endLine":  302,
-"endColumn":  74
+"endColumn":  128
 }
 }
 }

@@ -7,9 +7,9 @@
 "uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
 "region":  {
 "startLine":  89,
-"startColumn":  27,
+"startColumn":  23,
 "endLine":  89,
-"endColumn":  49
+"endColumn":  67
 }
 }
 },
@@ -20,9 +20,9 @@
 "uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
 "region":  {
 "startLine":  538,
-"startColumn":  27,
+"startColumn":  23,
 "endLine":  538,
-"endColumn":  49
+"endColumn":  67
 }
 }
 },
@@ -33,9 +33,9 @@
 "uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
 "region":  {
 "startLine":  579,
-"startColumn":  27,
+"startColumn":  23,
 "endLine":  579,
-"endColumn":  49
+"endColumn":  67
 }
 }
 },
@@ -46,9 +46,9 @@
 "uri":  "sources\Nancy\src\Nancy\Helpers\ReflectionUtils.cs",
 "region":  {
 "startLine":  109,
-"startColumn":  27,
+"startColumn":  23,
 "endLine":  109,
-"endColumn":  36
+"endColumn":  48
 }
 }
 },
@@ -59,9 +59,9 @@
 "uri":  "sources\Nancy\src\Nancy\Helpers\ReflectionUtils.cs",
 "region":  {
 "startLine":  124,
-"startColumn":  27,
+"startColumn":  23,
 "endLine":  124,
-"endColumn":  36
+"endColumn":  48
 }
 }
 }

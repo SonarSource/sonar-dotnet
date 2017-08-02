@@ -29,14 +29,16 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void ThrowReservedExceptions_CSharp()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\ThrowReservedExceptions.cs", new SonarAnalyzer.Rules.CSharp.ThrowReservedExceptions());
+            Verifier.VerifyAnalyzer(@"TestCases\ThrowReservedExceptions.cs",
+                new SonarAnalyzer.Rules.CSharp.ThrowReservedExceptions());
         }
 
         [TestMethod]
         [TestCategory("Rule")]
         public void ThrowReservedExceptions_VisualBasic()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\ThrowReservedExceptions.vb", new SonarAnalyzer.Rules.VisualBasic.ThrowReservedExceptions());
+            Verifier.VerifyAnalyzer(@"TestCases\ThrowReservedExceptions.vb",
+                new SonarAnalyzer.Rules.VisualBasic.ThrowReservedExceptions());
         }
     }
 }
