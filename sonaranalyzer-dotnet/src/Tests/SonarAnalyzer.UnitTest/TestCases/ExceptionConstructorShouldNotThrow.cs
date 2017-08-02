@@ -50,6 +50,23 @@ namespace Tests.Diagnostics
         }
     }
 
+    class MyException4 : Exception
+    {
+        public MyException4()
+        {
+            throw; // Noncompliant
+        }
+    }
+
+    class MyException5 : Exception
+    {
+        public MyException5()
+        {
+            var ex = new Exception();
+            throw ex; // Noncompliant
+        }
+    }
+
     class Something
     {
         public Something()

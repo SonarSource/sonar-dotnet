@@ -54,14 +54,17 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    classDeclaration.Members
+                    var throwStatementsPerCtor = classDeclaration.Members
                         .OfType<ConstructorDeclarationSyntax>()
-                        .Select(ctor => ctor.DescendantNodes().OfType<ThrowStatementSyntax>())
-                        .Where(throwStatementsPerCtor => throwStatementsPerCtor.Any())
-                        .ToList()
-                        .ForEach(throwStatementsPerCtor =>
-                            c.ReportDiagnostic(Diagnostic.Create(rule, throwStatementsPerCtor.First().GetLocation(),
-                                throwStatementsPerCtor.Skip(1).Select(@throw => @throw.GetLocation()))));
+                        .Select(ctor => ctor.DescendantNodes().OfType<ThrowStatementSyntax>().ToList())
+                        .Where(@throw => @throw.Count > 0)
+                        .ToList();
+
+                    foreach (var throwStatement in throwStatementsPerCtor)
+                    {
+                        c.ReportDiagnostic(Diagnostic.Create(rule, throwStatement.First().GetLocation(),
+                            throwStatement.Skip(1).Select(@throw => @throw.GetLocation())));
+                    }
                 },
                 SyntaxKind.ClassDeclaration);
         }
