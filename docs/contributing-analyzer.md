@@ -28,7 +28,7 @@ You can run the Unit Tests via Test Explorer of Visual Studio.
 
 If this is the first time you are running the ITs you will need to run the following command:
 
-git submodule update --init --recursive
+`git submodule update --init --recursive`
 
 To run the ITs you will need to follow this pattern:
 
