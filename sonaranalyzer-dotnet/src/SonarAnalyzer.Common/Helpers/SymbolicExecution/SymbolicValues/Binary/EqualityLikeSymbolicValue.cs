@@ -83,18 +83,23 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
                 return new[] { currentProgramState };
             }
 
-            SymbolicValueConstraint oldConstraint;
-            if (TryGetConstraint(currentProgramState, out oldConstraint) &&
-                oldConstraint is BoolConstraint /* could also be ObjectConstraint.NotNull, which can be overridden */ &&
-                oldConstraint != constraint)
+            SymbolicValueConstraints oldConstraints;
+            BoolConstraint oldBoolConstraint = null;
+            if (TryGetConstraints(currentProgramState, out oldConstraints))
+            {
+                oldBoolConstraint = oldConstraints.GetConstraintOrDefault<BoolConstraint>();
+            }
+
+            if (oldBoolConstraint != null /* could also be ObjectConstraint.NotNull, which can be overridden */ &&
+                oldBoolConstraint != boolConstraint)
             {
                 return Enumerable.Empty<ProgramState>();
             }
 
-            SymbolicValueConstraint leftConstraint;
-            var leftHasConstraint = LeftOperand.TryGetConstraint(currentProgramState, out leftConstraint);
-            SymbolicValueConstraint rightConstraint;
-            var rightHasConstraint = RightOperand.TryGetConstraint(currentProgramState, out rightConstraint);
+            SymbolicValueConstraints leftConstraints;
+            var leftHasConstraint = LeftOperand.TryGetConstraints(currentProgramState, out leftConstraints);
+            SymbolicValueConstraints rightConstraints;
+            var rightHasConstraint = RightOperand.TryGetConstraints(currentProgramState, out rightConstraints);
 
             var relationship = GetRelationship(boolConstraint);
 
@@ -109,11 +114,11 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
                 return new[] { newProgramState };
             }
 
-            return SetConstraint(boolConstraint, leftConstraint, rightConstraint, newProgramState);
+            return SetConstraint(boolConstraint, leftConstraints, rightConstraints, newProgramState);
         }
 
         internal abstract IEnumerable<ProgramState> SetConstraint(BoolConstraint boolConstraint,
-            SymbolicValueConstraint leftConstraint, SymbolicValueConstraint rightConstraint,
+            SymbolicValueConstraints leftConstraints, SymbolicValueConstraints rightConstraints,
             ProgramState programState);
     }
 }

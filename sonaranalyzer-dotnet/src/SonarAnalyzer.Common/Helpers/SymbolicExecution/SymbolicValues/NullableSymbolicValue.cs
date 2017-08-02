@@ -50,7 +50,7 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
                 return TrySetConstraint(optionalConstraint, currentProgramState);
             }
 
-            var oldConstraint = currentProgramState.Constraints.GetValueOrDefault(this) as NullableValueConstraint;
+            var oldConstraint = currentProgramState.Constraints.GetValueOrDefault(this)?.GetConstraintOrDefault<NullableValueConstraint>();
             if (constraint is NullableValueConstraint)
             {
                 if (oldConstraint == null)

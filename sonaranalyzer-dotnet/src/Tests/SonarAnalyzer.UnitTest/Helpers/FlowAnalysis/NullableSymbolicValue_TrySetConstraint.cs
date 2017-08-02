@@ -546,9 +546,9 @@ namespace SonarAnalyzer.UnitTest.Helpers.FlowAnalysis
 
         private void ShouldHaveConstraint(ProgramState ps, SymbolicValue sv, SymbolicValueConstraint constraint)
         {
-            SymbolicValueConstraint existing;
-            sv.TryGetConstraint(ps, out existing).Should().BeTrue();
-            constraint.Should().Be(existing);
+            SymbolicValueConstraints existing;
+            sv.TryGetConstraints(ps, out existing).Should().BeTrue();
+            existing.HasConstraint(constraint).Should().BeTrue();
         }
     }
 }

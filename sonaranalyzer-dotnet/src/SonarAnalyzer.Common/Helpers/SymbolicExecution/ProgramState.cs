@@ -30,19 +30,19 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
     public sealed class ProgramState : IEquatable<ProgramState>
     {
         internal ImmutableDictionary<ISymbol, SymbolicValue> Values { get; }
-        internal ImmutableDictionary<SymbolicValue, SymbolicValueConstraint> Constraints { get; }
+        internal ImmutableDictionary<SymbolicValue, SymbolicValueConstraints> Constraints { get; }
         internal ImmutableDictionary<ProgramPoint, int> ProgramPointVisitCounts { get; }
         internal ImmutableStack<SymbolicValue> ExpressionStack { get; }
         internal ImmutableHashSet<BinaryRelationship> Relationships { get; }
 
-        private static ImmutableDictionary<SymbolicValue, SymbolicValueConstraint> InitialConstraints =>
-            new Dictionary<SymbolicValue, SymbolicValueConstraint>
+        private static ImmutableDictionary<SymbolicValue, SymbolicValueConstraints> InitialConstraints =>
+            new Dictionary<SymbolicValue, SymbolicValueConstraints>
             {
-                { SymbolicValue.True, BoolConstraint.True },
-                { SymbolicValue.False, BoolConstraint.False },
-                { SymbolicValue.Null, ObjectConstraint.Null },
-                { SymbolicValue.This, ObjectConstraint.NotNull },
-                { SymbolicValue.Base, ObjectConstraint.NotNull }
+                { SymbolicValue.True,  SymbolicValueConstraints.Create(BoolConstraint.True) },
+                { SymbolicValue.False, SymbolicValueConstraints.Create(BoolConstraint.False) },
+                { SymbolicValue.Null,  SymbolicValueConstraints.Create(ObjectConstraint.Null) },
+                { SymbolicValue.This,  SymbolicValueConstraints.Create(ObjectConstraint.NotNull) },
+                { SymbolicValue.Base,  SymbolicValueConstraints.Create(ObjectConstraint.NotNull) }
             }.ToImmutableDictionary();
 
         private static readonly ISet<SymbolicValue> ProtectedSymbolicValues = ImmutableHashSet.Create(
@@ -213,7 +213,7 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
         }
 
         internal ProgramState(ImmutableDictionary<ISymbol, SymbolicValue> values,
-            ImmutableDictionary<SymbolicValue, SymbolicValueConstraint> constraints,
+            ImmutableDictionary<SymbolicValue, SymbolicValueConstraints> constraints,
             ImmutableDictionary<ProgramPoint, int> programPointVisitCounts,
             ImmutableStack<SymbolicValue> expressionStack,
             ImmutableHashSet<BinaryRelationship> relationships)
