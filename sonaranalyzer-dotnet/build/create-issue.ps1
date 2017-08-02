@@ -100,7 +100,8 @@ function New-Issue() {
         -Uri $projectUri `
         -Method "POST" `
         -Headers $headers `
-        -Body ($payload | ConvertTo-Json)
+        -Body ($payload | ConvertTo-Json) `
+        -UseBasicParsing
 
     # we don't add issues to the project because the api is still experimental
 }
