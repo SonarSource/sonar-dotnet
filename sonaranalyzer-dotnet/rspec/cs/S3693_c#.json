@@ -1,0 +1,13 @@
+{
+  "title": "Exception constructors should not throw exceptions",
+  "type": "BUG",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "15min"
+  },
+  "tags": [
+    
+  ],
+  "defaultSeverity": "Blocker"
+}
