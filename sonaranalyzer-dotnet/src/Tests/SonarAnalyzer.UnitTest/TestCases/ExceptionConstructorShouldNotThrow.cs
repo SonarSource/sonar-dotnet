@@ -6,7 +6,7 @@ namespace Tests.Diagnostics
     {
         public MyException()
         {
-            throw new Exception(); // Noncompliant {{Avoid throwing exception in this constructor.}}
+            throw new Exception(); // Noncompliant {{Avoid throwing exceptions in this constructor.}}
 //          ^^^^^^^^^^^^^^^^^^^^^^
         }
     }

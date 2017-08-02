@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S3693",
-"message":  "Avoid throwing exception in this constructor.",
+"message":  "Avoid throwing exceptions in this constructor.",
 "location":  {
 "uri":  "Nancy\src\Nancy\ModelBinding\ModelBindingException.cs",
 "region":  {

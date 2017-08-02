@@ -34,7 +34,7 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class ExceptionConstructorShouldNotThrow : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S3693";
-        private const string MessageFormat = "Avoid throwing exception in this constructor.";
+        private const string MessageFormat = "Avoid throwing exceptions in this constructor.";
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
