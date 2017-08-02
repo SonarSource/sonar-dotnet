@@ -59,7 +59,7 @@ From Visual Studio, make sure SonarAnalyzer.Vsix.csproj is selected as startup p
 3. Open one of the following solutions from the experimental instance:
   * [Akka.NET](akka.net/src/Akka.sln)
   * [Nancy](Nancy/src/Nancy.sln)
-  * [Ember-MM](Ember-MM/Ember Media Manager.sln)
+  * [Ember-MM](Ember-MM/Ember%20Media%20Manager.sln)
 4. Turn on your new rule in [Validation Ruleset](ValidationRuleset.ruleset), review the results, improve, and setup the
 regression test once you are satisfied.
 Note: the solutions have been pre-configured to use this ruleset on all their projects.
