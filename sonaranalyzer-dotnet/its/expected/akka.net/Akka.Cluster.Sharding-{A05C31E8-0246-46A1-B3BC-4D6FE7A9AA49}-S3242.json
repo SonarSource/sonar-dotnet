@@ -28,32 +28,6 @@
 },
 {
 "id":  "S3242",
-"message":  "Consider using more general type 'System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<Akka.Actor.IActorRef, System.Collections.Immutable.IImmutableList<string>>>' instead of 'System.Collections.Immutable.IImmutableDictionary<Akka.Actor.IActorRef, System.Collections.Immutable.IImmutableList<string>>'.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardAllocationStrategy.cs",
-"region":  {
-"startLine":  74,
-"startColumn":  140,
-"endLine":  74,
-"endColumn":  163
-}
-}
-},
-{
-"id":  "S3242",
-"message":  "Consider using more general type 'System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<Akka.Actor.IActorRef, System.Collections.Immutable.IImmutableList<string>>>' instead of 'System.Collections.Immutable.IImmutableDictionary<Akka.Actor.IActorRef, System.Collections.Immutable.IImmutableList<string>>'.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardAllocationStrategy.cs",
-"region":  {
-"startLine":  80,
-"startColumn":  112,
-"endLine":  80,
-"endColumn":  135
-}
-}
-},
-{
-"id":  "S3242",
 "message":  "Consider using more general type 'Akka.Actor.ICanTell' instead of 'Akka.Actor.IActorRef'.",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
