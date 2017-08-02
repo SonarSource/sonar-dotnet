@@ -4,7 +4,7 @@
 "id":  "S2325",
 "message":  "Make 'GetModel' a static method.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests.Functional\Tests\ContentNegotiationFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests.Functional\Tests\ContentNegotiationFixture.cs",
 "region":  {
 "startLine":  852,
 "startColumn":  38,

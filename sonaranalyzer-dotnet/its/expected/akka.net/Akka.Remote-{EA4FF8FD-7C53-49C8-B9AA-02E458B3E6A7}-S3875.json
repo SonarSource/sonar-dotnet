@@ -4,7 +4,7 @@
 "id":  "S3875",
 "message":  "Remove this overload of 'operator =='.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
 "region":  {
 "startLine":  596,
 "startColumn":  37,
@@ -17,7 +17,7 @@
 "id":  "S3875",
 "message":  "Remove this overload of 'operator =='.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
 "region":  {
 "startLine":  646,
 "startColumn":  37,

@@ -4,7 +4,7 @@
 "id":  "S4049",
 "message":  "Consider making method 'GetClusterMembers' a property.",
 "location":  {
-"uri":  "akka.net\src\examples\Cluster\ClusterSharding\ClusterSharding.Node\AutomaticJoin\DBHelper.cs",
+"uri":  "sources\akka.net\src\examples\Cluster\ClusterSharding\ClusterSharding.Node\AutomaticJoin\DBHelper.cs",
 "region":  {
 "startLine":  31,
 "startColumn":  37,

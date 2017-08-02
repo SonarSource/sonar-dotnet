@@ -4,7 +4,7 @@
 "id":  "S1116",
 "message":  "Remove this empty statement.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\NancyContextFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\NancyContextFixture.cs",
 "region":  {
 "startLine":  33,
 "startColumn":  52,
@@ -17,7 +17,7 @@
 "id":  "S1116",
 "message":  "Remove this empty statement.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\RequestHeadersFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\RequestHeadersFixture.cs",
 "region":  {
 "startLine":  747,
 "startColumn":  41,

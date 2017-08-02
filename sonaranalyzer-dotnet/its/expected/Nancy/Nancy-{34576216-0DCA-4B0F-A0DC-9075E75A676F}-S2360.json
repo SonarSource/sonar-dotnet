@@ -4,7 +4,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy\AsyncNamedPipelineBase.cs",
+"uri":  "sources\Nancy\src\Nancy\AsyncNamedPipelineBase.cs",
 "region":  {
 "startLine":  66,
 "startColumn":  109,
@@ -17,7 +17,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy\AsyncNamedPipelineBase.cs",
+"uri":  "sources\Nancy\src\Nancy\AsyncNamedPipelineBase.cs",
 "region":  {
 "startLine":  79,
 "startColumn":  108,
@@ -30,7 +30,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy\AsyncNamedPipelineBase.cs",
+"uri":  "sources\Nancy\src\Nancy\AsyncNamedPipelineBase.cs",
 "region":  {
 "startLine":  110,
 "startColumn":  107,
@@ -43,7 +43,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy\AsyncNamedPipelineBase.cs",
+"uri":  "sources\Nancy\src\Nancy\AsyncNamedPipelineBase.cs",
 "region":  {
 "startLine":  132,
 "startColumn":  106,
@@ -56,7 +56,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy\AsyncNamedPipelineBase.cs",
+"uri":  "sources\Nancy\src\Nancy\AsyncNamedPipelineBase.cs",
 "region":  {
 "startLine":  166,
 "startColumn":  121,
@@ -69,7 +69,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy\AsyncNamedPipelineBase.cs",
+"uri":  "sources\Nancy\src\Nancy\AsyncNamedPipelineBase.cs",
 "region":  {
 "startLine":  184,
 "startColumn":  120,
@@ -82,7 +82,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Bootstrapper\CollectionTypeRegistration.cs",
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\CollectionTypeRegistration.cs",
 "region":  {
 "startLine":  22,
 "startColumn":  123,
@@ -95,7 +95,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Bootstrapper\Registrations.cs",
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\Registrations.cs",
 "region":  {
 "startLine":  45,
 "startColumn":  63,
@@ -108,7 +108,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Bootstrapper\Registrations.cs",
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\Registrations.cs",
 "region":  {
 "startLine":  59,
 "startColumn":  66,
@@ -121,7 +121,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Bootstrapper\Registrations.cs",
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\Registrations.cs",
 "region":  {
 "startLine":  77,
 "startColumn":  105,
@@ -134,7 +134,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Bootstrapper\Registrations.cs",
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\Registrations.cs",
 "region":  {
 "startLine":  89,
 "startColumn":  84,
@@ -147,7 +147,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Bootstrapper\Registrations.cs",
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\Registrations.cs",
 "region":  {
 "startLine":  115,
 "startColumn":  102,
@@ -160,7 +160,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Bootstrapper\Registrations.cs",
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\Registrations.cs",
 "region":  {
 "startLine":  160,
 "startColumn":  116,
@@ -173,7 +173,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Bootstrapper\Registrations.cs",
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\Registrations.cs",
 "region":  {
 "startLine":  187,
 "startColumn":  124,
@@ -186,7 +186,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Bootstrapper\TypeRegistration.cs",
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\TypeRegistration.cs",
 "region":  {
 "startLine":  16,
 "startColumn":  99,
@@ -199,7 +199,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Conventions\StaticContentConventionBuilder.cs",
+"uri":  "sources\Nancy\src\Nancy\Conventions\StaticContentConventionBuilder.cs",
 "region":  {
 "startLine":  34,
 "startColumn":  114,
@@ -212,7 +212,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Conventions\StaticContentsConventionsExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy\Conventions\StaticContentsConventionsExtensions.cs",
 "region":  {
 "startLine":  18,
 "startColumn":  144,
@@ -225,7 +225,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Cryptography\PassphraseKeyGenerator.cs",
+"uri":  "sources\Nancy\src\Nancy\Cryptography\PassphraseKeyGenerator.cs",
 "region":  {
 "startLine":  24,
 "startColumn":  86,
@@ -238,7 +238,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Diagnostics\DiagnosticsConfigurationExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\DiagnosticsConfigurationExtensions.cs",
 "region":  {
 "startLine":  20,
 "startColumn":  105,
@@ -251,7 +251,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Diagnostics\DiagnosticsConfigurationExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\DiagnosticsConfigurationExtensions.cs",
 "region":  {
 "startLine":  20,
 "startColumn":  131,
@@ -264,7 +264,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Diagnostics\DiagnosticsConfigurationExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\DiagnosticsConfigurationExtensions.cs",
 "region":  {
 "startLine":  20,
 "startColumn":  158,
@@ -277,7 +277,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Diagnostics\DiagnosticsConfigurationExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\DiagnosticsConfigurationExtensions.cs",
 "region":  {
 "startLine":  20,
 "startColumn":  216,
@@ -290,7 +290,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
 "region":  {
 "startLine":  49,
 "startColumn":  44,
@@ -303,7 +303,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
 "region":  {
 "startLine":  76,
 "startColumn":  45,
@@ -316,7 +316,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ErrorHandling\RouteExecutionEarlyExitException.cs",
+"uri":  "sources\Nancy\src\Nancy\ErrorHandling\RouteExecutionEarlyExitException.cs",
 "region":  {
 "startLine":  22,
 "startColumn":  82,
@@ -329,7 +329,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Extensions\ModuleExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy\Extensions\ModuleExtensions.cs",
 "region":  {
 "startLine":  61,
 "startColumn":  145,
@@ -342,7 +342,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Extensions\RequestStreamExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy\Extensions\RequestStreamExtensions.cs",
 "region":  {
 "startLine":  18,
 "startColumn":  84,
@@ -355,7 +355,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy\FormatterExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy\FormatterExtensions.cs",
 "region":  {
 "startLine":  99,
 "startColumn":  122,
@@ -368,7 +368,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy\FormatterExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy\FormatterExtensions.cs",
 "region":  {
 "startLine":  115,
 "startColumn":  130,
@@ -381,7 +381,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy\FormatterExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy\FormatterExtensions.cs",
 "region":  {
 "startLine":  128,
 "startColumn":  121,
@@ -394,7 +394,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Json\JsonConfigurationExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy\Json\JsonConfigurationExtensions.cs",
 "region":  {
 "startLine":  25,
 "startColumn":  96,
@@ -407,7 +407,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Json\JsonConfigurationExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy\Json\JsonConfigurationExtensions.cs",
 "region":  {
 "startLine":  25,
 "startColumn":  123,
@@ -420,7 +420,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Json\JsonConfigurationExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy\Json\JsonConfigurationExtensions.cs",
 "region":  {
 "startLine":  25,
 "startColumn":  150,
@@ -433,7 +433,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Json\JsonConfigurationExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy\Json\JsonConfigurationExtensions.cs",
 "region":  {
 "startLine":  25,
 "startColumn":  183,
@@ -446,7 +446,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Json\JsonConfigurationExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy\Json\JsonConfigurationExtensions.cs",
 "region":  {
 "startLine":  25,
 "startColumn":  229,
@@ -459,7 +459,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Json\JsonConfigurationExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy\Json\JsonConfigurationExtensions.cs",
 "region":  {
 "startLine":  25,
 "startColumn":  293,
@@ -472,7 +472,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Json\JsonConfigurationExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy\Json\JsonConfigurationExtensions.cs",
 "region":  {
 "startLine":  25,
 "startColumn":  320,
@@ -485,7 +485,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ModelBinding\ModelBindingException.cs",
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\ModelBindingException.cs",
 "region":  {
 "startLine":  31,
 "startColumn":  118,
@@ -498,7 +498,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ModelBinding\ModelBindingException.cs",
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\ModelBindingException.cs",
 "region":  {
 "startLine":  31,
 "startColumn":  151,
@@ -511,7 +511,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ModelBinding\PropertyBindingException.cs",
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\PropertyBindingException.cs",
 "region":  {
 "startLine":  25,
 "startColumn":  110,
@@ -524,7 +524,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy\NamedPipelineBase.cs",
+"uri":  "sources\Nancy\src\Nancy\NamedPipelineBase.cs",
 "region":  {
 "startLine":  57,
 "startColumn":  104,
@@ -537,7 +537,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy\NamedPipelineBase.cs",
+"uri":  "sources\Nancy\src\Nancy\NamedPipelineBase.cs",
 "region":  {
 "startLine":  79,
 "startColumn":  102,
@@ -550,7 +550,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy\NamedPipelineBase.cs",
+"uri":  "sources\Nancy\src\Nancy\NamedPipelineBase.cs",
 "region":  {
 "startLine":  112,
 "startColumn":  116,
@@ -563,7 +563,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Owin\DelegateExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy\Owin\DelegateExtensions.cs",
 "region":  {
 "startLine":  38,
 "startColumn":  99,
@@ -576,7 +576,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Owin\NancyMiddleware.cs",
+"uri":  "sources\Nancy\src\Nancy\Owin\NancyMiddleware.cs",
 "region":  {
 "startLine":  51,
 "startColumn":  61,
@@ -589,7 +589,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Request.cs",
+"uri":  "sources\Nancy\src\Nancy\Request.cs",
 "region":  {
 "startLine":  50,
 "startColumn":  32,
@@ -602,7 +602,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Request.cs",
+"uri":  "sources\Nancy\src\Nancy\Request.cs",
 "region":  {
 "startLine":  51,
 "startColumn":  62,
@@ -615,7 +615,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Request.cs",
+"uri":  "sources\Nancy\src\Nancy\Request.cs",
 "region":  {
 "startLine":  52,
 "startColumn":  23,
@@ -628,7 +628,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Request.cs",
+"uri":  "sources\Nancy\src\Nancy\Request.cs",
 "region":  {
 "startLine":  53,
 "startColumn":  32,
@@ -641,7 +641,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Request.cs",
+"uri":  "sources\Nancy\src\Nancy\Request.cs",
 "region":  {
 "startLine":  54,
 "startColumn":  36,
@@ -654,7 +654,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ResponseExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy\ResponseExtensions.cs",
 "region":  {
 "startLine":  22,
 "startColumn":  85,
@@ -667,7 +667,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ResponseExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy\ResponseExtensions.cs",
 "region":  {
 "startLine":  22,
 "startColumn":  112,
@@ -680,7 +680,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Responses\GenericFileResponse.cs",
+"uri":  "sources\Nancy\src\Nancy\Responses\GenericFileResponse.cs",
 "region":  {
 "startLine":  63,
 "startColumn":  94,
@@ -693,7 +693,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Responses\HtmlResponse.cs",
+"uri":  "sources\Nancy\src\Nancy\Responses\HtmlResponse.cs",
 "region":  {
 "startLine":  21,
 "startColumn":  55,
@@ -706,7 +706,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Responses\HtmlResponse.cs",
+"uri":  "sources\Nancy\src\Nancy\Responses\HtmlResponse.cs",
 "region":  {
 "startLine":  21,
 "startColumn":  100,
@@ -719,7 +719,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Responses\HtmlResponse.cs",
+"uri":  "sources\Nancy\src\Nancy\Responses\HtmlResponse.cs",
 "region":  {
 "startLine":  21,
 "startColumn":  144,
@@ -732,7 +732,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Responses\HtmlResponse.cs",
+"uri":  "sources\Nancy\src\Nancy\Responses\HtmlResponse.cs",
 "region":  {
 "startLine":  21,
 "startColumn":  186,
@@ -745,7 +745,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Responses\RedirectResponse.cs",
+"uri":  "sources\Nancy\src\Nancy\Responses\RedirectResponse.cs",
 "region":  {
 "startLine":  15,
 "startColumn":  68,
@@ -758,7 +758,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Responses\TextResponse.cs",
+"uri":  "sources\Nancy\src\Nancy\Responses\TextResponse.cs",
 "region":  {
 "startLine":  21,
 "startColumn":  65,
@@ -771,7 +771,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Responses\TextResponse.cs",
+"uri":  "sources\Nancy\src\Nancy\Responses\TextResponse.cs",
 "region":  {
 "startLine":  21,
 "startColumn":  91,
@@ -784,7 +784,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Responses\TextResponse.cs",
+"uri":  "sources\Nancy\src\Nancy\Responses\TextResponse.cs",
 "region":  {
 "startLine":  54,
 "startColumn":  55,
@@ -797,7 +797,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Responses\TextResponse.cs",
+"uri":  "sources\Nancy\src\Nancy\Responses\TextResponse.cs",
 "region":  {
 "startLine":  54,
 "startColumn":  92,
@@ -810,7 +810,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Responses\TextResponse.cs",
+"uri":  "sources\Nancy\src\Nancy\Responses\TextResponse.cs",
 "region":  {
 "startLine":  54,
 "startColumn":  118,
@@ -823,7 +823,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Responses\TextResponse.cs",
+"uri":  "sources\Nancy\src\Nancy\Responses\TextResponse.cs",
 "region":  {
 "startLine":  54,
 "startColumn":  162,
@@ -836,7 +836,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Responses\TextResponse.cs",
+"uri":  "sources\Nancy\src\Nancy\Responses\TextResponse.cs",
 "region":  {
 "startLine":  54,
 "startColumn":  204,
@@ -849,7 +849,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Security\Csrf.cs",
+"uri":  "sources\Nancy\src\Nancy\Security\Csrf.cs",
 "region":  {
 "startLine":  23,
 "startColumn":  109,
@@ -862,7 +862,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Security\Csrf.cs",
+"uri":  "sources\Nancy\src\Nancy\Security\Csrf.cs",
 "region":  {
 "startLine":  80,
 "startColumn":  125,
@@ -875,7 +875,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Security\Csrf.cs",
+"uri":  "sources\Nancy\src\Nancy\Security\Csrf.cs",
 "region":  {
 "startLine":  111,
 "startColumn":  97,
@@ -888,7 +888,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Security\ICsrfTokenValidator.cs",
+"uri":  "sources\Nancy\src\Nancy\Security\ICsrfTokenValidator.cs",
 "region":  {
 "startLine":  17,
 "startColumn":  109,
@@ -901,7 +901,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Security\SecurityHooks.cs",
+"uri":  "sources\Nancy\src\Nancy\Security\SecurityHooks.cs",
 "region":  {
 "startLine":  118,
 "startColumn":  96,
@@ -914,7 +914,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ViewEngines\IViewRenderer.cs",
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\IViewRenderer.cs",
 "region":  {
 "startLine":  16,
 "startColumn":  81,
@@ -927,7 +927,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Xml\XmlConfigurationExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy\Xml\XmlConfigurationExtensions.cs",
 "region":  {
 "startLine":  17,
 "startColumn":  114,

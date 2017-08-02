@@ -4,7 +4,7 @@
 "id":  "S3887",
 "message":  "Use an immutable collection or reduce the accessibility of this field.",
 "location":  {
-"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Shard.cs",
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Shard.cs",
 "region":  {
 "startLine":  117,
 "startColumn":  38,
@@ -17,7 +17,7 @@
 "id":  "S3887",
 "message":  "Use an immutable collection or reduce the accessibility of this field.",
 "location":  {
-"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
 "region":  {
 "startLine":  119,
 "startColumn":  39,
@@ -30,7 +30,7 @@
 "id":  "S3887",
 "message":  "Use an immutable collection or reduce the accessibility of this field.",
 "location":  {
-"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
 "region":  {
 "startLine":  152,
 "startColumn":  68,
@@ -43,7 +43,7 @@
 "id":  "S3887",
 "message":  "Use an immutable collection or reduce the accessibility of this field.",
 "location":  {
-"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
 "region":  {
 "startLine":  182,
 "startColumn":  55,
@@ -56,7 +56,7 @@
 "id":  "S3887",
 "message":  "Use an immutable collection or reduce the accessibility of this field.",
 "location":  {
-"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
 "region":  {
 "startLine":  212,
 "startColumn":  46,
@@ -69,7 +69,7 @@
 "id":  "S3887",
 "message":  "Use an immutable collection or reduce the accessibility of this field.",
 "location":  {
-"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
 "region":  {
 "startLine":  224,
 "startColumn":  38,

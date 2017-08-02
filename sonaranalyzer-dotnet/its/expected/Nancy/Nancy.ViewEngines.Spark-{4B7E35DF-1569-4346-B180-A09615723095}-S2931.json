@@ -4,7 +4,7 @@
 "id":  "S2931",
 "message":  "Implement 'IDisposable' in this class and use the 'Dispose' method to call 'Dispose' on 'padlock'.",
 "location":  {
-"uri":  "Nancy\src\Nancy.ViewEngines.Spark\NancyViewFolder.cs",
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark\NancyViewFolder.cs",
 "region":  {
 "startLine":  18,
 "startColumn":  18,

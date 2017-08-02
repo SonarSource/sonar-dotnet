@@ -4,7 +4,7 @@
 "id":  "S3052",
 "message":  "Remove this initialization to '_isWriteInProgress', the compiler will do that for you.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Eventsourced.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Eventsourced.cs",
 "region":  {
 "startLine":  65,
 "startColumn":  41,
@@ -17,7 +17,7 @@
 "id":  "S3052",
 "message":  "Remove this initialization to '_sequenceNr', the compiler will do that for you.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Eventsourced.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Eventsourced.cs",
 "region":  {
 "startLine":  66,
 "startColumn":  34,
@@ -30,7 +30,7 @@
 "id":  "S3052",
 "message":  "Remove this initialization to '_pendingStashingPersistInvocations', the compiler will do that for you.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Eventsourced.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Eventsourced.cs",
 "region":  {
 "startLine":  71,
 "startColumn":  57,
@@ -43,7 +43,7 @@
 "id":  "S3052",
 "message":  "Remove this initialization to '_delivered', the compiler will do that for you.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Journal\AsyncWriteJournal.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\AsyncWriteJournal.cs",
 "region":  {
 "startLine":  173,
 "startColumn":  37,
@@ -56,7 +56,7 @@
 "id":  "S3052",
 "message":  "Remove this initialization to '_isInitialized', the compiler will do that for you.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Journal\AsyncWriteProxy.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\AsyncWriteProxy.cs",
 "region":  {
 "startLine":  184,
 "startColumn":  37,

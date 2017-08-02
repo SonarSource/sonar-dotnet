@@ -4,7 +4,7 @@
 "id":  "S1659",
 "message":  "Declare 'streamsize' in a separate statement.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIHashing.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIHashing.vb",
 "region":  {
 "startLine":  41,
 "startColumn":  36,

@@ -5,7 +5,7 @@
 "message":  "Rename the parameter 'body' so that it does not duplicate the method name.",
 "location":  [
 {
-"uri":  "Nancy\src\Nancy.Testing\BrowserContext.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContext.cs",
 "region":  {
 "startLine":  100,
 "startColumn":  33,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy.Testing\BrowserContext.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContext.cs",
 "region":  {
 "startLine":  100,
 "startColumn":  21,
@@ -29,7 +29,7 @@
 "message":  "Rename the parameter 'body' so that it does not duplicate the method name.",
 "location":  [
 {
-"uri":  "Nancy\src\Nancy.Testing\BrowserContext.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContext.cs",
 "region":  {
 "startLine":  111,
 "startColumn":  33,
@@ -38,7 +38,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy.Testing\BrowserContext.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContext.cs",
 "region":  {
 "startLine":  111,
 "startColumn":  21,
@@ -53,7 +53,7 @@
 "message":  "Rename the parameter 'userHostAddress' so that it does not duplicate the method name.",
 "location":  [
 {
-"uri":  "Nancy\src\Nancy.Testing\BrowserContext.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContext.cs",
 "region":  {
 "startLine":  185,
 "startColumn":  44,
@@ -62,7 +62,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy.Testing\BrowserContext.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContext.cs",
 "region":  {
 "startLine":  185,
 "startColumn":  21,
@@ -77,7 +77,7 @@
 "message":  "Rename the parameter 'hostName' so that it does not duplicate the method name.",
 "location":  [
 {
-"uri":  "Nancy\src\Nancy.Testing\BrowserContext.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContext.cs",
 "region":  {
 "startLine":  194,
 "startColumn":  37,
@@ -86,7 +86,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy.Testing\BrowserContext.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContext.cs",
 "region":  {
 "startLine":  194,
 "startColumn":  21,
@@ -101,7 +101,7 @@
 "message":  "Rename the parameter 'certificate' so that it does not duplicate the method name.",
 "location":  [
 {
-"uri":  "Nancy\src\Nancy.Testing\BrowserContext.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContext.cs",
 "region":  {
 "startLine":  226,
 "startColumn":  40,
@@ -110,7 +110,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy.Testing\BrowserContext.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContext.cs",
 "region":  {
 "startLine":  226,
 "startColumn":  21,
@@ -125,7 +125,7 @@
 "message":  "Rename the parameter 'certificate' so that it does not duplicate the method name.",
 "location":  [
 {
-"uri":  "Nancy\src\Nancy.Testing\BrowserContext.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContext.cs",
 "region":  {
 "startLine":  235,
 "startColumn":  50,
@@ -134,7 +134,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy.Testing\BrowserContext.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContext.cs",
 "region":  {
 "startLine":  235,
 "startColumn":  21,
@@ -149,7 +149,7 @@
 "message":  "Rename the parameter 'body' so that it does not duplicate the method name.",
 "location":  [
 {
-"uri":  "Nancy\src\Nancy.Testing\BrowserContext.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContext.cs",
 "region":  {
 "startLine":  90,
 "startColumn":  33,
@@ -158,7 +158,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy.Testing\BrowserContext.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContext.cs",
 "region":  {
 "startLine":  90,
 "startColumn":  21,
@@ -173,7 +173,7 @@
 "message":  "Rename the parameter 'multipartFormData' so that it does not duplicate the method name.",
 "location":  [
 {
-"uri":  "Nancy\src\Nancy.Testing\BrowserContextExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContextExtensions.cs",
 "region":  {
 "startLine":  28,
 "startColumn":  114,
@@ -182,7 +182,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy.Testing\BrowserContextExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContextExtensions.cs",
 "region":  {
 "startLine":  28,
 "startColumn":  28,
@@ -197,7 +197,7 @@
 "message":  "Rename the parameter 'multipartFormData' so that it does not duplicate the method name.",
 "location":  [
 {
-"uri":  "Nancy\src\Nancy.Testing\BrowserContextExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContextExtensions.cs",
 "region":  {
 "startLine":  39,
 "startColumn":  114,
@@ -206,7 +206,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy.Testing\BrowserContextExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContextExtensions.cs",
 "region":  {
 "startLine":  39,
 "startColumn":  28,
@@ -221,7 +221,7 @@
 "message":  "Rename the parameter 'modelBinderLocator' so that it does not duplicate the method name.",
 "location":  [
 {
-"uri":  "Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
 "region":  {
 "startLine":  1004,
 "startColumn":  96,
@@ -230,7 +230,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
 "region":  {
 "startLine":  1004,
 "startColumn":  57,
@@ -245,7 +245,7 @@
 "message":  "Rename the parameter 'module' so that it does not duplicate the method name.",
 "location":  [
 {
-"uri":  "Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
 "region":  {
 "startLine":  1038,
 "startColumn":  77,
@@ -254,7 +254,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
 "region":  {
 "startLine":  1038,
 "startColumn":  57,
@@ -269,7 +269,7 @@
 "message":  "Rename the parameter 'modules' so that it does not duplicate the method name.",
 "location":  [
 {
-"uri":  "Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
 "region":  {
 "startLine":  1049,
 "startColumn":  79,
@@ -278,7 +278,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
 "region":  {
 "startLine":  1049,
 "startColumn":  57,
@@ -293,7 +293,7 @@
 "message":  "Rename the parameter 'nancyModuleBuilder' so that it does not duplicate the method name.",
 "location":  [
 {
-"uri":  "Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
 "region":  {
 "startLine":  1089,
 "startColumn":  96,
@@ -302,7 +302,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
 "region":  {
 "startLine":  1089,
 "startColumn":  57,
@@ -317,7 +317,7 @@
 "message":  "Rename the parameter 'renderContextFactory' so that it does not duplicate the method name.",
 "location":  [
 {
-"uri":  "Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
 "region":  {
 "startLine":  1113,
 "startColumn":  100,
@@ -326,7 +326,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
 "region":  {
 "startLine":  1113,
 "startColumn":  57,
@@ -341,7 +341,7 @@
 "message":  "Rename the parameter 'requestTraceFactory' so that it does not duplicate the method name.",
 "location":  [
 {
-"uri":  "Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
 "region":  {
 "startLine":  1137,
 "startColumn":  98,
@@ -350,7 +350,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
 "region":  {
 "startLine":  1137,
 "startColumn":  57,
@@ -365,7 +365,7 @@
 "message":  "Rename the parameter 'responseFormatterFactory' so that it does not duplicate the method name.",
 "location":  [
 {
-"uri":  "Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
 "region":  {
 "startLine":  1161,
 "startColumn":  108,
@@ -374,7 +374,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
 "region":  {
 "startLine":  1161,
 "startColumn":  57,
@@ -389,7 +389,7 @@
 "message":  "Rename the parameter 'routeCache' so that it does not duplicate the method name.",
 "location":  [
 {
-"uri":  "Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
 "region":  {
 "startLine":  1185,
 "startColumn":  80,
@@ -398,7 +398,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
 "region":  {
 "startLine":  1185,
 "startColumn":  57,
@@ -413,7 +413,7 @@
 "message":  "Rename the parameter 'routeCacheProvider' so that it does not duplicate the method name.",
 "location":  [
 {
-"uri":  "Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
 "region":  {
 "startLine":  1209,
 "startColumn":  96,
@@ -422,7 +422,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
 "region":  {
 "startLine":  1209,
 "startColumn":  57,
@@ -437,7 +437,7 @@
 "message":  "Rename the parameter 'rootPathProvider' so that it does not duplicate the method name.",
 "location":  [
 {
-"uri":  "Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
 "region":  {
 "startLine":  1233,
 "startColumn":  92,
@@ -446,7 +446,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
 "region":  {
 "startLine":  1233,
 "startColumn":  57,
@@ -461,7 +461,7 @@
 "message":  "Rename the parameter 'routePatternMatcher' so that it does not duplicate the method name.",
 "location":  [
 {
-"uri":  "Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
 "region":  {
 "startLine":  1259,
 "startColumn":  98,
@@ -470,7 +470,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
 "region":  {
 "startLine":  1259,
 "startColumn":  57,
@@ -485,7 +485,7 @@
 "message":  "Rename the parameter 'routeInvoker' so that it does not duplicate the method name.",
 "location":  [
 {
-"uri":  "Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
 "region":  {
 "startLine":  1283,
 "startColumn":  84,
@@ -494,7 +494,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
 "region":  {
 "startLine":  1283,
 "startColumn":  57,
@@ -509,7 +509,7 @@
 "message":  "Rename the parameter 'routeResolver' so that it does not duplicate the method name.",
 "location":  [
 {
-"uri":  "Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
 "region":  {
 "startLine":  1307,
 "startColumn":  86,
@@ -518,7 +518,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
 "region":  {
 "startLine":  1307,
 "startColumn":  57,
@@ -533,7 +533,7 @@
 "message":  "Rename the parameter 'modelValidatorLocator' so that it does not duplicate the method name.",
 "location":  [
 {
-"uri":  "Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
 "region":  {
 "startLine":  1331,
 "startColumn":  102,
@@ -542,7 +542,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
 "region":  {
 "startLine":  1331,
 "startColumn":  57,
@@ -557,7 +557,7 @@
 "message":  "Rename the parameter 'requestDispatcher' so that it does not duplicate the method name.",
 "location":  [
 {
-"uri":  "Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
 "region":  {
 "startLine":  1355,
 "startColumn":  94,
@@ -566,7 +566,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
 "region":  {
 "startLine":  1355,
 "startColumn":  57,
@@ -581,7 +581,7 @@
 "message":  "Rename the parameter 'resourceAssemblyProvider' so that it does not duplicate the method name.",
 "location":  [
 {
-"uri":  "Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
 "region":  {
 "startLine":  1381,
 "startColumn":  108,
@@ -590,7 +590,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
 "region":  {
 "startLine":  1381,
 "startColumn":  57,
@@ -605,7 +605,7 @@
 "message":  "Rename the parameter 'resourceReader' so that it does not duplicate the method name.",
 "location":  [
 {
-"uri":  "Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
 "region":  {
 "startLine":  1405,
 "startColumn":  88,
@@ -614,7 +614,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
 "region":  {
 "startLine":  1405,
 "startColumn":  57,
@@ -629,7 +629,7 @@
 "message":  "Rename the parameter 'routeDescriptionProvider' so that it does not duplicate the method name.",
 "location":  [
 {
-"uri":  "Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
 "region":  {
 "startLine":  1442,
 "startColumn":  108,
@@ -638,7 +638,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
 "region":  {
 "startLine":  1442,
 "startColumn":  57,
@@ -653,7 +653,7 @@
 "message":  "Rename the parameter 'routeMetadataProviders' so that it does not duplicate the method name.",
 "location":  [
 {
-"uri":  "Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
 "region":  {
 "startLine":  1481,
 "startColumn":  94,
@@ -662,7 +662,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
 "region":  {
 "startLine":  1481,
 "startColumn":  57,
@@ -677,7 +677,7 @@
 "message":  "Rename the parameter 'routeMetadataProviders' so that it does not duplicate the method name.",
 "location":  [
 {
-"uri":  "Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
 "region":  {
 "startLine":  1494,
 "startColumn":  112,
@@ -686,7 +686,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
 "region":  {
 "startLine":  1494,
 "startColumn":  57,
@@ -701,7 +701,7 @@
 "message":  "Rename the parameter 'routeSegmentExtractor' so that it does not duplicate the method name.",
 "location":  [
 {
-"uri":  "Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
 "region":  {
 "startLine":  1523,
 "startColumn":  102,
@@ -710,7 +710,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
 "region":  {
 "startLine":  1523,
 "startColumn":  57,
@@ -725,7 +725,7 @@
 "message":  "Rename the parameter 'responseProcessors' so that it does not duplicate the method name.",
 "location":  [
 {
-"uri":  "Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
 "region":  {
 "startLine":  1549,
 "startColumn":  90,
@@ -734,7 +734,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
 "region":  {
 "startLine":  1549,
 "startColumn":  57,
@@ -749,7 +749,7 @@
 "message":  "Rename the parameter 'runtimeEnvironmentInformation' so that it does not duplicate the method name.",
 "location":  [
 {
-"uri":  "Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
 "region":  {
 "startLine":  1562,
 "startColumn":  118,
@@ -758,7 +758,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
 "region":  {
 "startLine":  1562,
 "startColumn":  57,
@@ -773,7 +773,7 @@
 "message":  "Rename the parameter 'textResource' so that it does not duplicate the method name.",
 "location":  [
 {
-"uri":  "Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
 "region":  {
 "startLine":  1586,
 "startColumn":  84,
@@ -782,7 +782,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
 "region":  {
 "startLine":  1586,
 "startColumn":  57,
@@ -797,7 +797,7 @@
 "message":  "Rename the parameter 'viewCache' so that it does not duplicate the method name.",
 "location":  [
 {
-"uri":  "Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
 "region":  {
 "startLine":  1610,
 "startColumn":  78,
@@ -806,7 +806,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
 "region":  {
 "startLine":  1610,
 "startColumn":  57,
@@ -821,7 +821,7 @@
 "message":  "Rename the parameter 'viewEngine' so that it does not duplicate the method name.",
 "location":  [
 {
-"uri":  "Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
 "region":  {
 "startLine":  1634,
 "startColumn":  80,
@@ -830,7 +830,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
 "region":  {
 "startLine":  1634,
 "startColumn":  57,
@@ -845,7 +845,7 @@
 "message":  "Rename the parameter 'viewEngines' so that it does not duplicate the method name.",
 "location":  [
 {
-"uri":  "Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
 "region":  {
 "startLine":  1660,
 "startColumn":  83,
@@ -854,7 +854,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
 "region":  {
 "startLine":  1660,
 "startColumn":  57,
@@ -869,7 +869,7 @@
 "message":  "Rename the parameter 'viewFactory' so that it does not duplicate the method name.",
 "location":  [
 {
-"uri":  "Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
 "region":  {
 "startLine":  1673,
 "startColumn":  82,
@@ -878,7 +878,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
 "region":  {
 "startLine":  1673,
 "startColumn":  57,
@@ -893,7 +893,7 @@
 "message":  "Rename the parameter 'viewLocationProvider' so that it does not duplicate the method name.",
 "location":  [
 {
-"uri":  "Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
 "region":  {
 "startLine":  1697,
 "startColumn":  100,
@@ -902,7 +902,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
 "region":  {
 "startLine":  1697,
 "startColumn":  57,
@@ -917,7 +917,7 @@
 "message":  "Rename the parameter 'viewLocator' so that it does not duplicate the method name.",
 "location":  [
 {
-"uri":  "Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
 "region":  {
 "startLine":  1721,
 "startColumn":  82,
@@ -926,7 +926,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
 "region":  {
 "startLine":  1721,
 "startColumn":  57,
@@ -941,7 +941,7 @@
 "message":  "Rename the parameter 'viewResolver' so that it does not duplicate the method name.",
 "location":  [
 {
-"uri":  "Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
 "region":  {
 "startLine":  1745,
 "startColumn":  84,
@@ -950,7 +950,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
 "region":  {
 "startLine":  1745,
 "startColumn":  57,
@@ -965,7 +965,7 @@
 "message":  "Rename the parameter 'objectSerializer' so that it does not duplicate the method name.",
 "location":  [
 {
-"uri":  "Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
 "region":  {
 "startLine":  1793,
 "startColumn":  92,
@@ -974,7 +974,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
 "region":  {
 "startLine":  1793,
 "startColumn":  57,
@@ -989,7 +989,7 @@
 "message":  "Rename the parameter 'serializers' so that it does not duplicate the method name.",
 "location":  [
 {
-"uri":  "Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
 "region":  {
 "startLine":  1829,
 "startColumn":  83,
@@ -998,7 +998,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
 "region":  {
 "startLine":  1829,
 "startColumn":  57,
@@ -1013,7 +1013,7 @@
 "message":  "Rename the parameter 'diagnostics' so that it does not duplicate the method name.",
 "location":  [
 {
-"uri":  "Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
 "region":  {
 "startLine":  1840,
 "startColumn":  82,
@@ -1022,7 +1022,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
 "region":  {
 "startLine":  1840,
 "startColumn":  57,
@@ -1037,7 +1037,7 @@
 "message":  "Rename the parameter 'cultureService' so that it does not duplicate the method name.",
 "location":  [
 {
-"uri":  "Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
 "region":  {
 "startLine":  1864,
 "startColumn":  88,
@@ -1046,7 +1046,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
 "region":  {
 "startLine":  1864,
 "startColumn":  57,
@@ -1061,7 +1061,7 @@
 "message":  "Rename the parameter 'staticContentProvider' so that it does not duplicate the method name.",
 "location":  [
 {
-"uri":  "Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
 "region":  {
 "startLine":  1888,
 "startColumn":  102,
@@ -1070,7 +1070,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
 "region":  {
 "startLine":  1888,
 "startColumn":  57,
@@ -1085,7 +1085,7 @@
 "message":  "Rename the parameter 'routeResolverTrie' so that it does not duplicate the method name.",
 "location":  [
 {
-"uri":  "Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
 "region":  {
 "startLine":  1912,
 "startColumn":  94,
@@ -1094,7 +1094,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
 "region":  {
 "startLine":  1912,
 "startColumn":  57,
@@ -1109,7 +1109,7 @@
 "message":  "Rename the parameter 'binder' so that it does not duplicate the method name.",
 "location":  [
 {
-"uri":  "Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
 "region":  {
 "startLine":  676,
 "startColumn":  72,
@@ -1118,7 +1118,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
 "region":  {
 "startLine":  676,
 "startColumn":  57,
@@ -1133,7 +1133,7 @@
 "message":  "Rename the parameter 'contextFactory' so that it does not duplicate the method name.",
 "location":  [
 {
-"uri":  "Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
 "region":  {
 "startLine":  718,
 "startColumn":  93,
@@ -1142,7 +1142,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
 "region":  {
 "startLine":  718,
 "startColumn":  57,
@@ -1157,7 +1157,7 @@
 "message":  "Rename the parameter 'defaultConfigurationProviders' so that it does not duplicate the method name.",
 "location":  [
 {
-"uri":  "Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
 "region":  {
 "startLine":  753,
 "startColumn":  101,
@@ -1166,7 +1166,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
 "region":  {
 "startLine":  753,
 "startColumn":  57,
@@ -1181,7 +1181,7 @@
 "message":  "Rename the parameter 'defaultConfigurationProviders' so that it does not duplicate the method name.",
 "location":  [
 {
-"uri":  "Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
 "region":  {
 "startLine":  777,
 "startColumn":  131,
@@ -1190,7 +1190,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
 "region":  {
 "startLine":  777,
 "startColumn":  57,
@@ -1205,7 +1205,7 @@
 "message":  "Rename the parameter 'dependencies' so that it does not duplicate the method name.",
 "location":  [
 {
-"uri":  "Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
 "region":  {
 "startLine":  866,
 "startColumn":  84,
@@ -1214,7 +1214,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
 "region":  {
 "startLine":  866,
 "startColumn":  57,
@@ -1229,7 +1229,7 @@
 "message":  "Rename the parameter 'dependencies' so that it does not duplicate the method name.",
 "location":  [
 {
-"uri":  "Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
 "region":  {
 "startLine":  882,
 "startColumn":  87,
@@ -1238,7 +1238,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
 "region":  {
 "startLine":  882,
 "startColumn":  57,
@@ -1253,7 +1253,7 @@
 "message":  "Rename the parameter 'statusCodeHandlers' so that it does not duplicate the method name.",
 "location":  [
 {
-"uri":  "Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
 "region":  {
 "startLine":  907,
 "startColumn":  90,
@@ -1262,7 +1262,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
 "region":  {
 "startLine":  907,
 "startColumn":  57,
@@ -1277,7 +1277,7 @@
 "message":  "Rename the parameter 'environmentConfigurator' so that it does not duplicate the method name.",
 "location":  [
 {
-"uri":  "Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
 "region":  {
 "startLine":  942,
 "startColumn":  111,
@@ -1286,7 +1286,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
 "region":  {
 "startLine":  942,
 "startColumn":  57,
@@ -1301,7 +1301,7 @@
 "message":  "Rename the parameter 'environmentFactory' so that it does not duplicate the method name.",
 "location":  [
 {
-"uri":  "Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
 "region":  {
 "startLine":  955,
 "startColumn":  101,
@@ -1310,7 +1310,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
 "region":  {
 "startLine":  955,
 "startColumn":  57,
@@ -1325,7 +1325,7 @@
 "message":  "Rename the parameter 'fieldNameConverter' so that it does not duplicate the method name.",
 "location":  [
 {
-"uri":  "Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
 "region":  {
 "startLine":  980,
 "startColumn":  96,
@@ -1334,7 +1334,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
 "region":  {
 "startLine":  980,
 "startColumn":  57,
@@ -1349,7 +1349,7 @@
 "message":  "Rename the parameter 'after' so that it does not duplicate the method name.",
 "location":  [
 {
-"uri":  "Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
 "region":  {
 "startLine":  61,
 "startColumn":  76,
@@ -1358,7 +1358,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
 "region":  {
 "startLine":  61,
 "startColumn":  56,
@@ -1373,7 +1373,7 @@
 "message":  "Rename the parameter 'before' so that it does not duplicate the method name.",
 "location":  [
 {
-"uri":  "Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
 "region":  {
 "startLine":  73,
 "startColumn":  78,
@@ -1382,7 +1382,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
 "region":  {
 "startLine":  73,
 "startColumn":  56,

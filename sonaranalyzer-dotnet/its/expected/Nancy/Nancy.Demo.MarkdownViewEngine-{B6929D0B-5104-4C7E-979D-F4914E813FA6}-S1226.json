@@ -4,7 +4,7 @@
 "id":  "S1226",
 "message":  "Introduce a new variable instead of reusing the parameter 'content'.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Demo.MarkdownViewEngine\Model\BlogModel.cs",
+"uri":  "sources\Nancy\src\Nancy.Demo.MarkdownViewEngine\Model\BlogModel.cs",
 "region":  {
 "startLine":  99,
 "startColumn":  17,

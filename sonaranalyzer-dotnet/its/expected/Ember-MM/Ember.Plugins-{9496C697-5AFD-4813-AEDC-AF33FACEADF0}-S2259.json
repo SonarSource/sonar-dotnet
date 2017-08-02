@@ -4,7 +4,7 @@
 "id":  "S2259",
 "message":  "'className' is null on at least one execution path.",
 "location":  {
-"uri":  "Ember-MM\Ember.Plugins\PluginSectionHandler.cs",
+"uri":  "sources\Ember-MM\Ember.Plugins\PluginSectionHandler.cs",
 "region":  {
 "startLine":  91,
 "startColumn":  47,

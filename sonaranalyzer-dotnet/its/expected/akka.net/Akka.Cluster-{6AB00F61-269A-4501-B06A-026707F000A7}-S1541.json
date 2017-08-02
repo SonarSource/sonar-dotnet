@@ -5,7 +5,7 @@
 "message":  "The Cyclomatic Complexity of this method is 13 which is greater than 10 authorized.",
 "location":  [
 {
-"uri":  "akka.net\src\core\Akka.Cluster\AutoDown.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\AutoDown.cs",
 "region":  {
 "startLine":  111,
 "startColumn":  33,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\AutoDown.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\AutoDown.cs",
 "region":  {
 "startLine":  111,
 "startColumn":  33,
@@ -23,7 +23,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\AutoDown.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\AutoDown.cs",
 "region":  {
 "startLine":  114,
 "startColumn":  13,
@@ -32,7 +32,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\AutoDown.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\AutoDown.cs",
 "region":  {
 "startLine":  116,
 "startColumn":  48,
@@ -41,7 +41,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\AutoDown.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\AutoDown.cs",
 "region":  {
 "startLine":  117,
 "startColumn":  17,
@@ -50,7 +50,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\AutoDown.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\AutoDown.cs",
 "region":  {
 "startLine":  122,
 "startColumn":  13,
@@ -59,7 +59,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\AutoDown.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\AutoDown.cs",
 "region":  {
 "startLine":  129,
 "startColumn":  13,
@@ -68,7 +68,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\AutoDown.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\AutoDown.cs",
 "region":  {
 "startLine":  135,
 "startColumn":  13,
@@ -77,7 +77,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\AutoDown.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\AutoDown.cs",
 "region":  {
 "startLine":  142,
 "startColumn":  13,
@@ -86,7 +86,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\AutoDown.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\AutoDown.cs",
 "region":  {
 "startLine":  144,
 "startColumn":  56,
@@ -95,7 +95,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\AutoDown.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\AutoDown.cs",
 "region":  {
 "startLine":  145,
 "startColumn":  17,
@@ -104,7 +104,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\AutoDown.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\AutoDown.cs",
 "region":  {
 "startLine":  147,
 "startColumn":  21,
@@ -113,7 +113,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\AutoDown.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\AutoDown.cs",
 "region":  {
 "startLine":  154,
 "startColumn":  13,
@@ -122,7 +122,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\AutoDown.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\AutoDown.cs",
 "region":  {
 "startLine":  156,
 "startColumn":  17,
@@ -137,7 +137,7 @@
 "message":  "The Cyclomatic Complexity of this method is 11 which is greater than 10 authorized.",
 "location":  [
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  1029,
 "startColumn":  21,
@@ -146,7 +146,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  1029,
 "startColumn":  21,
@@ -155,7 +155,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  1031,
 "startColumn":  13,
@@ -164,7 +164,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  1036,
 "startColumn":  18,
@@ -173,7 +173,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  1046,
 "startColumn":  17,
@@ -182,7 +182,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  1046,
 "startColumn":  41,
@@ -191,7 +191,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  1049,
 "startColumn":  21,
@@ -200,7 +200,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  1054,
 "startColumn":  22,
@@ -209,7 +209,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  1058,
 "startColumn":  21,
@@ -218,7 +218,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  1058,
 "startColumn":  111,
@@ -227,7 +227,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  1058,
 "startColumn":  65,
@@ -236,7 +236,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  1078,
 "startColumn":  21,
@@ -251,7 +251,7 @@
 "message":  "The Cyclomatic Complexity of this method is 11 which is greater than 10 authorized.",
 "location":  [
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  781,
 "startColumn":  22,
@@ -260,7 +260,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  781,
 "startColumn":  22,
@@ -269,7 +269,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  783,
 "startColumn":  13,
@@ -278,7 +278,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  783,
 "startColumn":  26,
@@ -287,7 +287,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  788,
 "startColumn":  13,
@@ -296,7 +296,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  793,
 "startColumn":  18,
@@ -305,7 +305,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  797,
 "startColumn":  18,
@@ -314,7 +314,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  803,
 "startColumn":  18,
@@ -323,7 +323,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  808,
 "startColumn":  18,
@@ -332,7 +332,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  810,
 "startColumn":  17,
@@ -341,7 +341,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  810,
 "startColumn":  38,
@@ -350,7 +350,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  813,
 "startColumn":  21,
@@ -365,7 +365,7 @@
 "message":  "The Cyclomatic Complexity of this method is 12 which is greater than 10 authorized.",
 "location":  [
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  1599,
 "startColumn":  21,
@@ -374,7 +374,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  1599,
 "startColumn":  21,
@@ -383,7 +383,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  1601,
 "startColumn":  13,
@@ -392,7 +392,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  1616,
 "startColumn":  95,
@@ -401,7 +401,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  1613,
 "startColumn":  96,
@@ -410,7 +410,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  1610,
 "startColumn":  99,
@@ -419,7 +419,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  1624,
 "startColumn":  65,
@@ -428,7 +428,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  1627,
 "startColumn":  17,
@@ -437,7 +437,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  1627,
 "startColumn":  59,
@@ -446,7 +446,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  1637,
 "startColumn":  21,
@@ -455,7 +455,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  1649,
 "startColumn":  25,
@@ -464,7 +464,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  1653,
 "startColumn":  25,
@@ -473,7 +473,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  1657,
 "startColumn":  25,
@@ -488,7 +488,7 @@
 "message":  "The Cyclomatic Complexity of this method is 14 which is greater than 10 authorized.",
 "location":  [
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  1496,
 "startColumn":  21,
@@ -497,7 +497,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  1496,
 "startColumn":  21,
@@ -506,7 +506,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  1506,
 "startColumn":  101,
@@ -515,7 +515,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  1510,
 "startColumn":  84,
@@ -524,7 +524,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  1521,
 "startColumn":  17,
@@ -533,7 +533,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  1525,
 "startColumn":  21,
@@ -542,7 +542,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  1530,
 "startColumn":  75,
@@ -551,7 +551,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  1539,
 "startColumn":  17,
@@ -560,7 +560,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  1549,
 "startColumn":  13,
@@ -569,7 +569,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  1549,
 "startColumn":  42,
@@ -578,7 +578,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  1569,
 "startColumn":  17,
@@ -587,7 +587,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  1573,
 "startColumn":  17,
@@ -596,7 +596,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  1575,
 "startColumn":  67,
@@ -605,7 +605,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  1581,
 "startColumn":  17,
@@ -614,7 +614,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  1593,
 "startColumn":  21,
@@ -629,7 +629,7 @@
 "message":  "The Cyclomatic Complexity of this method is 18 which is greater than 10 authorized.",
 "location":  [
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  841,
 "startColumn":  22,
@@ -638,7 +638,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  841,
 "startColumn":  22,
@@ -647,7 +647,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  843,
 "startColumn":  13,
@@ -656,7 +656,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  843,
 "startColumn":  26,
@@ -665,7 +665,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  848,
 "startColumn":  13,
@@ -674,7 +674,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  853,
 "startColumn":  18,
@@ -683,7 +683,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  858,
 "startColumn":  18,
@@ -692,7 +692,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  862,
 "startColumn":  18,
@@ -701,7 +701,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  866,
 "startColumn":  18,
@@ -710,7 +710,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  870,
 "startColumn":  18,
@@ -719,7 +719,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  874,
 "startColumn":  18,
@@ -728,7 +728,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  878,
 "startColumn":  18,
@@ -737,7 +737,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  882,
 "startColumn":  18,
@@ -746,7 +746,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  887,
 "startColumn":  18,
@@ -755,7 +755,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  892,
 "startColumn":  18,
@@ -764,7 +764,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  897,
 "startColumn":  18,
@@ -773,7 +773,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  901,
 "startColumn":  18,
@@ -782,7 +782,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  906,
 "startColumn":  18,
@@ -791,7 +791,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  911,
 "startColumn":  18,
@@ -806,7 +806,7 @@
 "message":  "The Cyclomatic Complexity of this method is 21 which is greater than 10 authorized.",
 "location":  [
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  1236,
 "startColumn":  34,
@@ -815,7 +815,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  1236,
 "startColumn":  34,
@@ -824,7 +824,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  1242,
 "startColumn":  13,
@@ -833,7 +833,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  1248,
 "startColumn":  13,
@@ -842,7 +842,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  1254,
 "startColumn":  13,
@@ -851,7 +851,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  1259,
 "startColumn":  13,
@@ -860,7 +860,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  1264,
 "startColumn":  13,
@@ -869,7 +869,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  1278,
 "startColumn":  17,
@@ -878,7 +878,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  1284,
 "startColumn":  17,
@@ -887,7 +887,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  1290,
 "startColumn":  17,
@@ -896,7 +896,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  1307,
 "startColumn":  13,
@@ -905,7 +905,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  1309,
 "startColumn":  17,
@@ -914,7 +914,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  1309,
 "startColumn":  57,
@@ -923,7 +923,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  1315,
 "startColumn":  13,
@@ -932,7 +932,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  1321,
 "startColumn":  13,
@@ -941,7 +941,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  1325,
 "startColumn":  21,
@@ -950,7 +950,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  1328,
 "startColumn":  21,
@@ -959,7 +959,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  1331,
 "startColumn":  21,
@@ -968,7 +968,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  1334,
 "startColumn":  21,
@@ -977,7 +977,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  1343,
 "startColumn":  13,
@@ -986,7 +986,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  1343,
 "startColumn":  52,
@@ -995,7 +995,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  1345,
 "startColumn":  18,
@@ -1010,7 +1010,7 @@
 "message":  "The Cyclomatic Complexity of this method is 11 which is greater than 10 authorized.",
 "location":  [
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterRemoteWatcher.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterRemoteWatcher.cs",
 "region":  {
 "startLine":  69,
 "startColumn":  33,
@@ -1019,7 +1019,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterRemoteWatcher.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterRemoteWatcher.cs",
 "region":  {
 "startLine":  69,
 "startColumn":  33,
@@ -1028,7 +1028,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterRemoteWatcher.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterRemoteWatcher.cs",
 "region":  {
 "startLine":  72,
 "startColumn":  13,
@@ -1037,7 +1037,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterRemoteWatcher.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterRemoteWatcher.cs",
 "region":  {
 "startLine":  72,
 "startColumn":  37,
@@ -1046,7 +1046,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterRemoteWatcher.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterRemoteWatcher.cs",
 "region":  {
 "startLine":  75,
 "startColumn":  13,
@@ -1055,7 +1055,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterRemoteWatcher.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterRemoteWatcher.cs",
 "region":  {
 "startLine":  79,
 "startColumn":  17,
@@ -1064,7 +1064,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterRemoteWatcher.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterRemoteWatcher.cs",
 "region":  {
 "startLine":  84,
 "startColumn":  13,
@@ -1073,7 +1073,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterRemoteWatcher.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterRemoteWatcher.cs",
 "region":  {
 "startLine":  86,
 "startColumn":  17,
@@ -1082,7 +1082,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterRemoteWatcher.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterRemoteWatcher.cs",
 "region":  {
 "startLine":  95,
 "startColumn":  13,
@@ -1091,7 +1091,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterRemoteWatcher.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterRemoteWatcher.cs",
 "region":  {
 "startLine":  97,
 "startColumn":  17,
@@ -1100,7 +1100,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterRemoteWatcher.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterRemoteWatcher.cs",
 "region":  {
 "startLine":  100,
 "startColumn":  21,
@@ -1109,7 +1109,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterRemoteWatcher.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterRemoteWatcher.cs",
 "region":  {
 "startLine":  108,
 "startColumn":  13,
@@ -1124,7 +1124,7 @@
 "message":  "The Cyclomatic Complexity of this method is 11 which is greater than 10 authorized.",
 "location":  [
 {
-"uri":  "akka.net\src\core\Akka.Cluster\Member.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
 "region":  {
 "startLine":  196,
 "startColumn":  30,
@@ -1133,7 +1133,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\Member.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
 "region":  {
 "startLine":  196,
 "startColumn":  30,
@@ -1142,7 +1142,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\Member.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
 "region":  {
 "startLine":  200,
 "startColumn":  13,
@@ -1151,7 +1151,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\Member.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
 "region":  {
 "startLine":  201,
 "startColumn":  13,
@@ -1160,7 +1160,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\Member.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
 "region":  {
 "startLine":  202,
 "startColumn":  13,
@@ -1169,7 +1169,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\Member.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
 "region":  {
 "startLine":  203,
 "startColumn":  13,
@@ -1178,7 +1178,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\Member.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
 "region":  {
 "startLine":  204,
 "startColumn":  13,
@@ -1187,7 +1187,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\Member.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
 "region":  {
 "startLine":  205,
 "startColumn":  13,
@@ -1196,7 +1196,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\Member.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
 "region":  {
 "startLine":  206,
 "startColumn":  13,
@@ -1205,7 +1205,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\Member.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
 "region":  {
 "startLine":  207,
 "startColumn":  13,
@@ -1214,7 +1214,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\Member.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
 "region":  {
 "startLine":  208,
 "startColumn":  13,
@@ -1223,7 +1223,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\Member.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
 "region":  {
 "startLine":  209,
 "startColumn":  13,
@@ -1238,7 +1238,7 @@
 "message":  "The Cyclomatic Complexity of this method is 13 which is greater than 10 authorized.",
 "location":  [
 {
-"uri":  "akka.net\src\core\Akka.Cluster\Proto\ClusterMessageSerializer.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Proto\ClusterMessageSerializer.cs",
 "region":  {
 "startLine":  47,
 "startColumn":  32,
@@ -1247,7 +1247,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\Proto\ClusterMessageSerializer.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Proto\ClusterMessageSerializer.cs",
 "region":  {
 "startLine":  47,
 "startColumn":  32,
@@ -1256,7 +1256,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\Proto\ClusterMessageSerializer.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Proto\ClusterMessageSerializer.cs",
 "region":  {
 "startLine":  49,
 "startColumn":  13,
@@ -1265,7 +1265,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\Proto\ClusterMessageSerializer.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Proto\ClusterMessageSerializer.cs",
 "region":  {
 "startLine":  50,
 "startColumn":  13,
@@ -1274,7 +1274,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\Proto\ClusterMessageSerializer.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Proto\ClusterMessageSerializer.cs",
 "region":  {
 "startLine":  51,
 "startColumn":  13,
@@ -1283,7 +1283,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\Proto\ClusterMessageSerializer.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Proto\ClusterMessageSerializer.cs",
 "region":  {
 "startLine":  52,
 "startColumn":  13,
@@ -1292,7 +1292,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\Proto\ClusterMessageSerializer.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Proto\ClusterMessageSerializer.cs",
 "region":  {
 "startLine":  53,
 "startColumn":  13,
@@ -1301,7 +1301,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\Proto\ClusterMessageSerializer.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Proto\ClusterMessageSerializer.cs",
 "region":  {
 "startLine":  54,
 "startColumn":  13,
@@ -1310,7 +1310,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\Proto\ClusterMessageSerializer.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Proto\ClusterMessageSerializer.cs",
 "region":  {
 "startLine":  59,
 "startColumn":  13,
@@ -1319,7 +1319,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\Proto\ClusterMessageSerializer.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Proto\ClusterMessageSerializer.cs",
 "region":  {
 "startLine":  64,
 "startColumn":  13,
@@ -1328,7 +1328,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\Proto\ClusterMessageSerializer.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Proto\ClusterMessageSerializer.cs",
 "region":  {
 "startLine":  65,
 "startColumn":  13,
@@ -1337,7 +1337,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\Proto\ClusterMessageSerializer.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Proto\ClusterMessageSerializer.cs",
 "region":  {
 "startLine":  66,
 "startColumn":  13,
@@ -1346,7 +1346,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\Proto\ClusterMessageSerializer.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Proto\ClusterMessageSerializer.cs",
 "region":  {
 "startLine":  67,
 "startColumn":  13,
@@ -1355,7 +1355,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\Proto\ClusterMessageSerializer.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Proto\ClusterMessageSerializer.cs",
 "region":  {
 "startLine":  68,
 "startColumn":  13,
@@ -1370,7 +1370,7 @@
 "message":  "The Cyclomatic Complexity of this method is 13 which is greater than 10 authorized.",
 "location":  [
 {
-"uri":  "akka.net\src\core\Akka.Cluster\Proto\ClusterMessageSerializer.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Proto\ClusterMessageSerializer.cs",
 "region":  {
 "startLine":  72,
 "startColumn":  32,
@@ -1379,7 +1379,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\Proto\ClusterMessageSerializer.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Proto\ClusterMessageSerializer.cs",
 "region":  {
 "startLine":  72,
 "startColumn":  32,
@@ -1388,7 +1388,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\Proto\ClusterMessageSerializer.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Proto\ClusterMessageSerializer.cs",
 "region":  {
 "startLine":  74,
 "startColumn":  13,
@@ -1397,7 +1397,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\Proto\ClusterMessageSerializer.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Proto\ClusterMessageSerializer.cs",
 "region":  {
 "startLine":  81,
 "startColumn":  13,
@@ -1406,7 +1406,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\Proto\ClusterMessageSerializer.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Proto\ClusterMessageSerializer.cs",
 "region":  {
 "startLine":  87,
 "startColumn":  13,
@@ -1415,7 +1415,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\Proto\ClusterMessageSerializer.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Proto\ClusterMessageSerializer.cs",
 "region":  {
 "startLine":  88,
 "startColumn":  13,
@@ -1424,7 +1424,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\Proto\ClusterMessageSerializer.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Proto\ClusterMessageSerializer.cs",
 "region":  {
 "startLine":  89,
 "startColumn":  13,
@@ -1433,7 +1433,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\Proto\ClusterMessageSerializer.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Proto\ClusterMessageSerializer.cs",
 "region":  {
 "startLine":  90,
 "startColumn":  13,
@@ -1442,7 +1442,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\Proto\ClusterMessageSerializer.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Proto\ClusterMessageSerializer.cs",
 "region":  {
 "startLine":  91,
 "startColumn":  13,
@@ -1451,7 +1451,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\Proto\ClusterMessageSerializer.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Proto\ClusterMessageSerializer.cs",
 "region":  {
 "startLine":  92,
 "startColumn":  13,
@@ -1460,7 +1460,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\Proto\ClusterMessageSerializer.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Proto\ClusterMessageSerializer.cs",
 "region":  {
 "startLine":  93,
 "startColumn":  13,
@@ -1469,7 +1469,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\Proto\ClusterMessageSerializer.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Proto\ClusterMessageSerializer.cs",
 "region":  {
 "startLine":  94,
 "startColumn":  13,
@@ -1478,7 +1478,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\Proto\ClusterMessageSerializer.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Proto\ClusterMessageSerializer.cs",
 "region":  {
 "startLine":  95,
 "startColumn":  13,
@@ -1487,7 +1487,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\Proto\ClusterMessageSerializer.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Proto\ClusterMessageSerializer.cs",
 "region":  {
 "startLine":  96,
 "startColumn":  13,
@@ -1502,7 +1502,7 @@
 "message":  "The Cyclomatic Complexity of this method is 12 which is greater than 10 authorized.",
 "location":  [
 {
-"uri":  "akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
 "region":  {
 "startLine":  197,
 "startColumn":  30,
@@ -1511,7 +1511,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
 "region":  {
 "startLine":  197,
 "startColumn":  30,
@@ -1520,7 +1520,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
 "region":  {
 "startLine":  203,
 "startColumn":  13,
@@ -1529,7 +1529,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
 "region":  {
 "startLine":  203,
 "startColumn":  41,
@@ -1538,7 +1538,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
 "region":  {
 "startLine":  204,
 "startColumn":  13,
@@ -1547,7 +1547,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
 "region":  {
 "startLine":  208,
 "startColumn":  13,
@@ -1556,7 +1556,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
 "region":  {
 "startLine":  210,
 "startColumn":  17,
@@ -1565,7 +1565,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
 "region":  {
 "startLine":  210,
 "startColumn":  60,
@@ -1574,7 +1574,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
 "region":  {
 "startLine":  217,
 "startColumn":  13,
@@ -1583,7 +1583,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
 "region":  {
 "startLine":  217,
 "startColumn":  67,
@@ -1592,7 +1592,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
 "region":  {
 "startLine":  220,
 "startColumn":  13,
@@ -1601,7 +1601,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
 "region":  {
 "startLine":  220,
 "startColumn":  55,
@@ -1610,7 +1610,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
 "region":  {
 "startLine":  221,
 "startColumn":  90,
@@ -1625,7 +1625,7 @@
 "message":  "The Cyclomatic Complexity of this method is 15 which is greater than 10 authorized.",
 "location":  [
 {
-"uri":  "akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
 "region":  {
 "startLine":  228,
 "startColumn":  29,
@@ -1634,7 +1634,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
 "region":  {
 "startLine":  228,
 "startColumn":  29,
@@ -1643,7 +1643,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
 "region":  {
 "startLine":  233,
 "startColumn":  13,
@@ -1652,7 +1652,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
 "region":  {
 "startLine":  241,
 "startColumn":  17,
@@ -1661,7 +1661,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
 "region":  {
 "startLine":  241,
 "startColumn":  35,
@@ -1670,7 +1670,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
 "region":  {
 "startLine":  243,
 "startColumn":  68,
@@ -1679,7 +1679,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
 "region":  {
 "startLine":  244,
 "startColumn":  21,
@@ -1688,7 +1688,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
 "region":  {
 "startLine":  247,
 "startColumn":  17,
@@ -1697,7 +1697,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
 "region":  {
 "startLine":  247,
 "startColumn":  35,
@@ -1706,7 +1706,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
 "region":  {
 "startLine":  249,
 "startColumn":  21,
@@ -1715,7 +1715,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
 "region":  {
 "startLine":  250,
 "startColumn":  25,
@@ -1724,7 +1724,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
 "region":  {
 "startLine":  253,
 "startColumn":  17,
@@ -1733,7 +1733,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
 "region":  {
 "startLine":  253,
 "startColumn":  35,
@@ -1742,7 +1742,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
 "region":  {
 "startLine":  255,
 "startColumn":  21,
@@ -1751,7 +1751,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
 "region":  {
 "startLine":  256,
 "startColumn":  25,
@@ -1760,7 +1760,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
 "region":  {
 "startLine":  260,
 "startColumn":  17,
@@ -1775,7 +1775,7 @@
 "message":  "The Cyclomatic Complexity of this method is 18 which is greater than 10 authorized.",
 "location":  [
 {
-"uri":  "akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
 "region":  {
 "startLine":  195,
 "startColumn":  33,
@@ -1784,7 +1784,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
 "region":  {
 "startLine":  195,
 "startColumn":  33,
@@ -1793,7 +1793,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
 "region":  {
 "startLine":  202,
 "startColumn":  21,
@@ -1802,7 +1802,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
 "region":  {
 "startLine":  202,
 "startColumn":  95,
@@ -1811,7 +1811,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
 "region":  {
 "startLine":  202,
 "startColumn":  62,
@@ -1820,7 +1820,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
 "region":  {
 "startLine":  205,
 "startColumn":  21,
@@ -1829,7 +1829,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
 "region":  {
 "startLine":  205,
 "startColumn":  50,
@@ -1838,7 +1838,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
 "region":  {
 "startLine":  207,
 "startColumn":  21,
@@ -1847,7 +1847,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
 "region":  {
 "startLine":  208,
 "startColumn":  63,
@@ -1856,7 +1856,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
 "region":  {
 "startLine":  210,
 "startColumn":  21,
@@ -1865,7 +1865,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
 "region":  {
 "startLine":  211,
 "startColumn":  64,
@@ -1874,7 +1874,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
 "region":  {
 "startLine":  214,
 "startColumn":  21,
@@ -1883,7 +1883,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
 "region":  {
 "startLine":  218,
 "startColumn":  25,
@@ -1892,7 +1892,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
 "region":  {
 "startLine":  220,
 "startColumn":  25,
@@ -1901,7 +1901,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
 "region":  {
 "startLine":  223,
 "startColumn":  29,
@@ -1910,7 +1910,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
 "region":  {
 "startLine":  227,
 "startColumn":  25,
@@ -1919,7 +1919,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
 "region":  {
 "startLine":  230,
 "startColumn":  21,
@@ -1928,7 +1928,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
 "region":  {
 "startLine":  233,
 "startColumn":  25,
@@ -1937,7 +1937,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
 "region":  {
 "startLine":  237,
 "startColumn":  21,

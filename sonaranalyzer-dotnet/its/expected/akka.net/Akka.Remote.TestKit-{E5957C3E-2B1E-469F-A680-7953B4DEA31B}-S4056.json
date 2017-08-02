@@ -4,7 +4,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
 "region":  {
 "startLine":  127,
 "startColumn":  24,
@@ -17,7 +17,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
 "region":  {
 "startLine":  165,
 "startColumn":  24,
@@ -30,7 +30,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
 "region":  {
 "startLine":  203,
 "startColumn":  24,
@@ -43,7 +43,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
 "region":  {
 "startLine":  247,
 "startColumn":  24,
@@ -56,7 +56,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
 "region":  {
 "startLine":  335,
 "startColumn":  24,
@@ -69,7 +69,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
 "region":  {
 "startLine":  459,
 "startColumn":  33,
@@ -82,7 +82,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\CommandLine.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\CommandLine.cs",
 "region":  {
 "startLine":  34,
 "startColumn":  22,
@@ -95,7 +95,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\CommandLine.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\CommandLine.cs",
 "region":  {
 "startLine":  48,
 "startColumn":  20,
@@ -108,7 +108,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\Conductor.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Conductor.cs",
 "region":  {
 "startLine":  196,
 "startColumn":  53,
@@ -121,7 +121,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\Conductor.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Conductor.cs",
 "region":  {
 "startLine":  218,
 "startColumn":  53,
@@ -134,7 +134,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
 "region":  {
 "startLine":  70,
 "startColumn":  24,
@@ -147,7 +147,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
 "region":  {
 "startLine":  250,
 "startColumn":  53,
@@ -160,7 +160,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\DataTypes.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\DataTypes.cs",
 "region":  {
 "startLine":  60,
 "startColumn":  20,
@@ -173,7 +173,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\MsgDecoder.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MsgDecoder.cs",
 "region":  {
 "startLine":  93,
 "startColumn":  49,
@@ -186,7 +186,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\MsgDecoder.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MsgDecoder.cs",
 "region":  {
 "startLine":  97,
 "startColumn":  41,
@@ -199,7 +199,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\MsgEncoder.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MsgEncoder.cs",
 "region":  {
 "startLine":  126,
 "startColumn":  45,
@@ -212,7 +212,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\MultiNodeSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MultiNodeSpec.cs",
 "region":  {
 "startLine":  241,
 "startColumn":  73,
@@ -225,7 +225,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\MultiNodeSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MultiNodeSpec.cs",
 "region":  {
 "startLine":  293,
 "startColumn":  93,
@@ -238,7 +238,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\MultiNodeSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MultiNodeSpec.cs",
 "region":  {
 "startLine":  336,
 "startColumn":  57,
@@ -251,7 +251,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\MultiNodeSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MultiNodeSpec.cs",
 "region":  {
 "startLine":  621,
 "startColumn":  53,
@@ -264,7 +264,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\MultiNodeSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MultiNodeSpec.cs",
 "region":  {
 "startLine":  632,
 "startColumn":  30,

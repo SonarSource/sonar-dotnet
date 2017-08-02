@@ -4,7 +4,7 @@
 "id":  "S1450",
 "message":  "Remove the 'settings' field and declare it as a local variable in the relevant methods.",
 "location":  {
-"uri":  "Nancy\src\Nancy.ViewEngines.Spark\SparkViewEngine.cs",
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark\SparkViewEngine.cs",
 "region":  {
 "startLine":  21,
 "startColumn":  41,

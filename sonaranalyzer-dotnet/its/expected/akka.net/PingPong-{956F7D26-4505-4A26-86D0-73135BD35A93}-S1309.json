@@ -4,7 +4,7 @@
 "id":  "S1309",
 "message":  "Do not suppress issues.",
 "location":  {
-"uri":  "akka.net\src\benchmark\PingPong\ClientAsyncActor.cs",
+"uri":  "sources\akka.net\src\benchmark\PingPong\ClientAsyncActor.cs",
 "region":  {
 "startLine":  12,
 "startColumn":  1,

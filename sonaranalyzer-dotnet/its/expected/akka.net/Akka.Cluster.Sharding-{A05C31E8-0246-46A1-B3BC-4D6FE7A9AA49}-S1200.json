@@ -4,7 +4,7 @@
 "id":  "S1200",
 "message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 27 to the maximum authorized 20 or less.",
 "location":  {
-"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterSharding.cs",
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterSharding.cs",
 "region":  {
 "startLine":  187,
 "startColumn":  18,
@@ -17,7 +17,7 @@
 "id":  "S1200",
 "message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 66 to the maximum authorized 20 or less.",
 "location":  {
-"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
 "region":  {
 "startLine":  24,
 "startColumn":  26,
@@ -30,7 +30,7 @@
 "id":  "S1200",
 "message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 42 to the maximum authorized 20 or less.",
 "location":  {
-"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Shard.cs",
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Shard.cs",
 "region":  {
 "startLine":  22,
 "startColumn":  27,
@@ -43,7 +43,7 @@
 "id":  "S1200",
 "message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 88 to the maximum authorized 20 or less.",
 "location":  {
-"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
 "region":  {
 "startLine":  29,
 "startColumn":  18,

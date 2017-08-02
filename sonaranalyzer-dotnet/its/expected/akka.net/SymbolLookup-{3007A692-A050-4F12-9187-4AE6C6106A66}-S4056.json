@@ -4,7 +4,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "akka.net\src\examples\Stocks\SymbolLookup\Actors\DispatcherActor.cs",
+"uri":  "sources\akka.net\src\examples\Stocks\SymbolLookup\Actors\DispatcherActor.cs",
 "region":  {
 "startLine":  36,
 "startColumn":  34,
@@ -17,7 +17,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "akka.net\src\examples\Stocks\SymbolLookup\Actors\DispatcherActor.cs",
+"uri":  "sources\akka.net\src\examples\Stocks\SymbolLookup\Actors\DispatcherActor.cs",
 "region":  {
 "startLine":  47,
 "startColumn":  34,
@@ -30,7 +30,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "akka.net\src\examples\Stocks\SymbolLookup\Actors\DispatcherActor.cs",
+"uri":  "sources\akka.net\src\examples\Stocks\SymbolLookup\Actors\DispatcherActor.cs",
 "region":  {
 "startLine":  62,
 "startColumn":  34,
@@ -43,7 +43,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "akka.net\src\examples\Stocks\SymbolLookup\MainForm.cs",
+"uri":  "sources\akka.net\src\examples\Stocks\SymbolLookup\MainForm.cs",
 "region":  {
 "startLine":  64,
 "startColumn":  17,
@@ -56,7 +56,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "akka.net\src\examples\Stocks\SymbolLookup\MainForm.cs",
+"uri":  "sources\akka.net\src\examples\Stocks\SymbolLookup\MainForm.cs",
 "region":  {
 "startLine":  64,
 "startColumn":  31,
@@ -69,7 +69,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "akka.net\src\examples\Stocks\SymbolLookup\MainForm.cs",
+"uri":  "sources\akka.net\src\examples\Stocks\SymbolLookup\MainForm.cs",
 "region":  {
 "startLine":  67,
 "startColumn":  82,
@@ -82,7 +82,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "akka.net\src\examples\Stocks\SymbolLookup\YahooFinance\StockUriHelper.cs",
+"uri":  "sources\akka.net\src\examples\Stocks\SymbolLookup\YahooFinance\StockUriHelper.cs",
 "region":  {
 "startLine":  21,
 "startColumn":  28,
@@ -95,7 +95,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "akka.net\src\examples\Stocks\SymbolLookup\YahooFinance\StockUriHelper.cs",
+"uri":  "sources\akka.net\src\examples\Stocks\SymbolLookup\YahooFinance\StockUriHelper.cs",
 "region":  {
 "startLine":  26,
 "startColumn":  28,

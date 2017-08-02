@@ -4,7 +4,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'existingContainer' to 'container' to match the base class declaration.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Fakes\FakeDefaultNancyBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Fakes\FakeDefaultNancyBootstrapper.cs",
 "region":  {
 "startLine":  74,
 "startColumn":  76,
@@ -17,7 +17,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'existingContainer' to 'container' to match the base class declaration.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Fakes\FakeDefaultNancyBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Fakes\FakeDefaultNancyBootstrapper.cs",
 "region":  {
 "startLine":  97,
 "startColumn":  80,
@@ -30,7 +30,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'collectionTypeRegistrations' to 'collectionTypeRegistrationsn' to match the base class declaration.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\Bootstrapper\NancyBootstrapperBaseFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Bootstrapper\NancyBootstrapperBaseFixture.cs",
 "region":  {
 "startLine":  433,
 "startColumn":  122,
@@ -43,7 +43,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'collectionTypeRegistrations' to 'collectionTypeRegistrationsn' to match the base class declaration.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\Bootstrapper\NancyBootstrapperWithRequestContainerBaseFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Bootstrapper\NancyBootstrapperWithRequestContainerBaseFixture.cs",
 "region":  {
 "startLine":  345,
 "startColumn":  57,

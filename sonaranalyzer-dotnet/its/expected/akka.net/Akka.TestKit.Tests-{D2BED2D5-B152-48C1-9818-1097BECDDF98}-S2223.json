@@ -4,7 +4,7 @@
 "id":  "S2223",
 "message":  "Change the visibility of 'Counter' or make it 'const' or 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.TestKit.Tests\TestActorRefTests\TestActorRefSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.TestKit.Tests\TestActorRefTests\TestActorRefSpec.cs",
 "region":  {
 "startLine":  20,
 "startColumn":  27,
@@ -17,7 +17,7 @@
 "id":  "S2223",
 "message":  "Change the visibility of 'OtherThread' or make it 'const' or 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.TestKit.Tests\TestActorRefTests\TestActorRefSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.TestKit.Tests\TestActorRefTests\TestActorRefSpec.cs",
 "region":  {
 "startLine":  22,
 "startColumn":  30,

@@ -4,7 +4,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\RemoteWatcher.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteWatcher.cs",
 "region":  {
 "startLine":  248,
 "startColumn":  71,
@@ -17,7 +17,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\Remoting.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Remoting.cs",
 "region":  {
 "startLine":  295,
 "startColumn":  13,

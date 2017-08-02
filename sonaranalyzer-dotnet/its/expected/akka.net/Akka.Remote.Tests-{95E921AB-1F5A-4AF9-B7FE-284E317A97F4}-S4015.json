@@ -4,7 +4,7 @@
 "id":  "S4015",
 "message":  "This member hides 'Akka.TestKit.AkkaSpec.AtStartup()'. Make it non-private or seal the class.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.Tests\RemotingSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests\RemotingSpec.cs",
 "region":  {
 "startLine":  328,
 "startColumn":  22,

@@ -4,7 +4,7 @@
 "id":  "S2292",
 "message":  "Make this an auto-implemented property and remove its backing field.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"uri":  "sources\Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
 "region":  {
 "startLine":  95,
 "startColumn":  20,
@@ -17,7 +17,7 @@
 "id":  "S2292",
 "message":  "Make this an auto-implemented property and remove its backing field.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"uri":  "sources\Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
 "region":  {
 "startLine":  107,
 "startColumn":  20,
@@ -30,7 +30,7 @@
 "id":  "S2292",
 "message":  "Make this an auto-implemented property and remove its backing field.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"uri":  "sources\Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
 "region":  {
 "startLine":  119,
 "startColumn":  21,
@@ -43,7 +43,7 @@
 "id":  "S2292",
 "message":  "Make this an auto-implemented property and remove its backing field.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"uri":  "sources\Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
 "region":  {
 "startLine":  130,
 "startColumn":  21,
@@ -56,7 +56,7 @@
 "id":  "S2292",
 "message":  "Make this an auto-implemented property and remove its backing field.",
 "location":  {
-"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
 "startLine":  726,
 "startColumn":  46,
@@ -69,7 +69,7 @@
 "id":  "S2292",
 "message":  "Make this an auto-implemented property and remove its backing field.",
 "location":  {
-"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
 "startLine":  733,
 "startColumn":  46,

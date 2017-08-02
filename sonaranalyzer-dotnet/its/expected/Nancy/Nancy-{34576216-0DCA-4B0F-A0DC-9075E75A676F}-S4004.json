@@ -4,7 +4,7 @@
 "id":  "S4004",
 "message":  "Make the 'DefaultConfigurationProviders' property read-only by removing the property setter or making it private.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Bootstrapper\NancyInternalConfiguration.cs",
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\NancyInternalConfiguration.cs",
 "region":  {
 "startLine":  93,
 "startColumn":  28,
@@ -17,7 +17,7 @@
 "id":  "S4004",
 "message":  "Make the 'RouteMetadataProviders' property read-only by removing the property setter or making it private.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Bootstrapper\NancyInternalConfiguration.cs",
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\NancyInternalConfiguration.cs",
 "region":  {
 "startLine":  99,
 "startColumn":  28,
@@ -30,7 +30,7 @@
 "id":  "S4004",
 "message":  "Make the 'StatusCodeHandlers' property read-only by removing the property setter or making it private.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Bootstrapper\NancyInternalConfiguration.cs",
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\NancyInternalConfiguration.cs",
 "region":  {
 "startLine":  139,
 "startColumn":  28,
@@ -43,7 +43,7 @@
 "id":  "S4004",
 "message":  "Make the 'Serializers' property read-only by removing the property setter or making it private.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Bootstrapper\NancyInternalConfiguration.cs",
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\NancyInternalConfiguration.cs",
 "region":  {
 "startLine":  145,
 "startColumn":  28,
@@ -56,7 +56,7 @@
 "id":  "S4004",
 "message":  "Make the 'InteractiveDiagnosticProviders' property read-only by removing the property setter or making it private.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Bootstrapper\NancyInternalConfiguration.cs",
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\NancyInternalConfiguration.cs",
 "region":  {
 "startLine":  147,
 "startColumn":  28,
@@ -69,7 +69,7 @@
 "id":  "S4004",
 "message":  "Make the 'ResponseProcessors' property read-only by removing the property setter or making it private.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Bootstrapper\NancyInternalConfiguration.cs",
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\NancyInternalConfiguration.cs",
 "region":  {
 "startLine":  153,
 "startColumn":  28,
@@ -82,7 +82,7 @@
 "id":  "S4004",
 "message":  "Make the 'RouteSegmentConstraints' property read-only by removing the property setter or making it private.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Bootstrapper\NancyInternalConfiguration.cs",
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\NancyInternalConfiguration.cs",
 "region":  {
 "startLine":  177,
 "startColumn":  28,
@@ -95,7 +95,7 @@
 "id":  "S4004",
 "message":  "Make the 'ViewLocationConventions' property read-only by removing the property setter or making it private.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Conventions\NancyConventions.cs",
+"uri":  "sources\Nancy\src\Nancy\Conventions\NancyConventions.cs",
 "region":  {
 "startLine":  33,
 "startColumn":  74,
@@ -108,7 +108,7 @@
 "id":  "S4004",
 "message":  "Make the 'StaticContentsConventions' property read-only by removing the property setter or making it private.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Conventions\NancyConventions.cs",
+"uri":  "sources\Nancy\src\Nancy\Conventions\NancyConventions.cs",
 "region":  {
 "startLine":  38,
 "startColumn":  60,
@@ -121,7 +121,7 @@
 "id":  "S4004",
 "message":  "Make the 'AcceptHeaderCoercionConventions' property read-only by removing the property setter or making it private.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Conventions\NancyConventions.cs",
+"uri":  "sources\Nancy\src\Nancy\Conventions\NancyConventions.cs",
 "region":  {
 "startLine":  45,
 "startColumn":  116,
@@ -134,7 +134,7 @@
 "id":  "S4004",
 "message":  "Make the 'CultureConventions' property read-only by removing the property setter or making it private.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Conventions\NancyConventions.cs",
+"uri":  "sources\Nancy\src\Nancy\Conventions\NancyConventions.cs",
 "region":  {
 "startLine":  50,
 "startColumn":  55,
@@ -147,7 +147,7 @@
 "id":  "S4004",
 "message":  "Make the 'Items' property read-only by removing the property setter or making it private.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Diagnostics\DefaultRequestTrace.cs",
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\DefaultRequestTrace.cs",
 "region":  {
 "startLine":  14,
 "startColumn":  44,
@@ -160,7 +160,7 @@
 "id":  "S4004",
 "message":  "Make the 'Items' property read-only by removing the property setter or making it private.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Diagnostics\IRequestTrace.cs",
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\IRequestTrace.cs",
 "region":  {
 "startLine":  14,
 "startColumn":  37,
@@ -173,7 +173,7 @@
 "id":  "S4004",
 "message":  "Make the 'Headers' property read-only by removing the property setter or making it private.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Diagnostics\ResponseData.cs",
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\ResponseData.cs",
 "region":  {
 "startLine":  21,
 "startColumn":  44,
@@ -186,7 +186,7 @@
 "id":  "S4004",
 "message":  "Make the 'RequestData' property read-only by removing the property setter or making it private.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ModelBinding\BindingContext.cs",
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\BindingContext.cs",
 "region":  {
 "startLine":  44,
 "startColumn":  44,
@@ -199,7 +199,7 @@
 "id":  "S4004",
 "message":  "Make the 'Headers' property read-only by removing the property setter or making it private.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Response.cs",
+"uri":  "sources\Nancy\src\Nancy\Response.cs",
 "region":  {
 "startLine":  61,
 "startColumn":  44,
@@ -212,7 +212,7 @@
 "id":  "S4004",
 "message":  "Make the 'SafePaths' property read-only by removing the property setter or making it private.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Responses\GenericFileResponse.cs",
+"uri":  "sources\Nancy\src\Nancy\Responses\GenericFileResponse.cs",
 "region":  {
 "startLine":  21,
 "startColumn":  37,
@@ -225,7 +225,7 @@
 "id":  "S4004",
 "message":  "Make the 'Cookies' property read-only by removing the property setter or making it private.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Responses\Negotiation\NegotiationContext.cs",
+"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\NegotiationContext.cs",
 "region":  {
 "startLine":  31,
 "startColumn":  36,
@@ -238,7 +238,7 @@
 "id":  "S4004",
 "message":  "Make the 'Headers' property read-only by removing the property setter or making it private.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Responses\Negotiation\NegotiationContext.cs",
+"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\NegotiationContext.cs",
 "region":  {
 "startLine":  43,
 "startColumn":  44,
@@ -251,7 +251,7 @@
 "id":  "S4004",
 "message":  "Make the 'MediaRangeModelMappings' property read-only by removing the property setter or making it private.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Responses\Negotiation\NegotiationContext.cs",
+"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\NegotiationContext.cs",
 "region":  {
 "startLine":  49,
 "startColumn":  55,
@@ -264,7 +264,7 @@
 "id":  "S4004",
 "message":  "Make the 'PermissableMediaRanges' property read-only by removing the property setter or making it private.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Responses\Negotiation\NegotiationContext.cs",
+"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\NegotiationContext.cs",
 "region":  {
 "startLine":  67,
 "startColumn":  34,
@@ -277,7 +277,7 @@
 "id":  "S4004",
 "message":  "Make the 'Parameters' property read-only by removing the property setter or making it private.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Routing\ResolveResult.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\ResolveResult.cs",
 "region":  {
 "startLine":  18,
 "startColumn":  34,
@@ -290,7 +290,7 @@
 "id":  "S4004",
 "message":  "Make the 'Parameters' property read-only by removing the property setter or making it private.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Routing\Trie\MatchResult.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\Trie\MatchResult.cs",
 "region":  {
 "startLine":  18,
 "startColumn":  44,
@@ -303,7 +303,7 @@
 "id":  "S4004",
 "message":  "Make the 'Children' property read-only by removing the property setter or making it private.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Routing\Trie\Nodes\TrieNode.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\Trie\Nodes\TrieNode.cs",
 "region":  {
 "startLine":  27,
 "startColumn":  46,
@@ -316,7 +316,7 @@
 "id":  "S4004",
 "message":  "Make the 'NodeData' property read-only by removing the property setter or making it private.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Routing\Trie\Nodes\TrieNode.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\Trie\Nodes\TrieNode.cs",
 "region":  {
 "startLine":  33,
 "startColumn":  32,
@@ -329,7 +329,7 @@
 "id":  "S4004",
 "message":  "Make the 'AdditionalParameters' property read-only by removing the property setter or making it private.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Routing\Trie\Nodes\TrieNode.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\Trie\Nodes\TrieNode.cs",
 "region":  {
 "startLine":  38,
 "startColumn":  44,
@@ -342,7 +342,7 @@
 "id":  "S4004",
 "message":  "Make the 'Errors' property read-only by removing the property setter or making it private.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Validation\ModelValidationResult.cs",
+"uri":  "sources\Nancy\src\Nancy\Validation\ModelValidationResult.cs",
 "region":  {
 "startLine":  44,
 "startColumn":  65,

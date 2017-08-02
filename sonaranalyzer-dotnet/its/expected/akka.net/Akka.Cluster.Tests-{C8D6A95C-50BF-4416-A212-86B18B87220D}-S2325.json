@@ -4,7 +4,7 @@
 "id":  "S2325",
 "message":  "Make 'Fd' a static method.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster.Tests\ClusterHeartBeatSenderStateSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests\ClusterHeartBeatSenderStateSpec.cs",
 "region":  {
 "startLine":  86,
 "startColumn":  37,

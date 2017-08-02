@@ -4,7 +4,7 @@
 "id":  "S4035",
 "message":  "Seal class 'TestConverterType' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\Json\TestConverterType.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Json\TestConverterType.cs",
 "region":  {
 "startLine":  5,
 "startColumn":  18,
@@ -17,7 +17,7 @@
 "id":  "S4035",
 "message":  "Seal class 'TestData' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\Json\TestData.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Json\TestData.cs",
 "region":  {
 "startLine":  5,
 "startColumn":  18,
@@ -30,7 +30,7 @@
 "id":  "S4035",
 "message":  "Seal class 'TestPrimitiveConverterType' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\Json\TestPrimitiveConverterType.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Json\TestPrimitiveConverterType.cs",
 "region":  {
 "startLine":  5,
 "startColumn":  18,
@@ -43,7 +43,7 @@
 "id":  "S4035",
 "message":  "Seal class 'TestModel' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBodyDeserializers\JsonBodyDeserializerFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBodyDeserializers\JsonBodyDeserializerFixture.cs",
 "region":  {
 "startLine":  344,
 "startColumn":  22,
@@ -56,7 +56,7 @@
 "id":  "S4035",
 "message":  "Seal class 'TestModel' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBodyDeserializers\XmlBodyDeserializerfixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBodyDeserializers\XmlBodyDeserializerfixture.cs",
 "region":  {
 "startLine":  141,
 "startColumn":  22,
@@ -69,7 +69,7 @@
 "id":  "S4035",
 "message":  "Seal class 'Payload' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\Sessions\DefaultSessionObjectFormatterFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Sessions\DefaultSessionObjectFormatterFixture.cs",
 "region":  {
 "startLine":  69,
 "startColumn":  22,

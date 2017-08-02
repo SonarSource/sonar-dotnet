@@ -4,7 +4,7 @@
 "id":  "S2357",
 "message":  "Make 'ActionWasInvoked' private.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Fakes\FakeRoute.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Fakes\FakeRoute.cs",
 "region":  {
 "startLine":  13,
 "startColumn":  21,
@@ -17,7 +17,7 @@
 "id":  "S2357",
 "message":  "Make 'ParametersUsedToInvokeAction' private.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Fakes\FakeRoute.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Fakes\FakeRoute.cs",
 "region":  {
 "startLine":  14,
 "startColumn":  34,
@@ -30,7 +30,7 @@
 "id":  "S2357",
 "message":  "Make 'Age' private.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Fakes\PersonWithAgeField.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Fakes\PersonWithAgeField.cs",
 "region":  {
 "startLine":  5,
 "startColumn":  20,
@@ -43,7 +43,7 @@
 "id":  "S2357",
 "message":  "Make 'Data' private.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\Json\TestConverterType.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Json\TestConverterType.cs",
 "region":  {
 "startLine":  7,
 "startColumn":  14,
@@ -56,7 +56,7 @@
 "id":  "S2357",
 "message":  "Make 'ConverterData' private.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\Json\TestData.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Json\TestData.cs",
 "region":  {
 "startLine":  7,
 "startColumn":  28,
@@ -69,7 +69,7 @@
 "id":  "S2357",
 "message":  "Make 'PrimitiveConverterData' private.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\Json\TestData.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Json\TestData.cs",
 "region":  {
 "startLine":  8,
 "startColumn":  37,
@@ -82,7 +82,7 @@
 "id":  "S2357",
 "message":  "Make 'Data' private.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\Json\TestPrimitiveConverterType.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Json\TestPrimitiveConverterType.cs",
 "region":  {
 "startLine":  7,
 "startColumn":  14,
@@ -95,7 +95,7 @@
 "id":  "S2357",
 "message":  "Make 'IntField' private.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\BindingMemberInfoFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\BindingMemberInfoFixture.cs",
 "region":  {
 "startLine":  189,
 "startColumn":  24,
@@ -108,7 +108,7 @@
 "id":  "S2357",
 "message":  "Make 'StringField' private.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\BindingMemberInfoFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\BindingMemberInfoFixture.cs",
 "region":  {
 "startLine":  190,
 "startColumn":  27,
@@ -121,7 +121,7 @@
 "id":  "S2357",
 "message":  "Make 'BindableIntField' private.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\BindingMemberInfoFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\BindingMemberInfoFixture.cs",
 "region":  {
 "startLine":  198,
 "startColumn":  24,
@@ -134,7 +134,7 @@
 "id":  "S2357",
 "message":  "Make 'BindableStringField' private.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\BindingMemberInfoFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\BindingMemberInfoFixture.cs",
 "region":  {
 "startLine":  200,
 "startColumn":  27,
@@ -147,7 +147,7 @@
 "id":  "S2357",
 "message":  "Make 'BindableTestModelField' private.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\BindingMemberInfoFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\BindingMemberInfoFixture.cs",
 "region":  {
 "startLine":  202,
 "startColumn":  30,
@@ -160,7 +160,7 @@
 "id":  "S2357",
 "message":  "Make 'BindableBiggerTestModelField' private.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\BindingMemberInfoFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\BindingMemberInfoFixture.cs",
 "region":  {
 "startLine":  204,
 "startColumn":  36,
@@ -173,7 +173,7 @@
 "id":  "S2357",
 "message":  "Make 'BindableEnumerableField' private.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\BindingMemberInfoFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\BindingMemberInfoFixture.cs",
 "region":  {
 "startLine":  207,
 "startColumn":  37,
@@ -186,7 +186,7 @@
 "id":  "S2357",
 "message":  "Make 'BindableListField' private.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\BindingMemberInfoFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\BindingMemberInfoFixture.cs",
 "region":  {
 "startLine":  210,
 "startColumn":  33,
@@ -199,7 +199,7 @@
 "id":  "S2357",
 "message":  "Make 'BindableArrayField' private.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\BindingMemberInfoFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\BindingMemberInfoFixture.cs",
 "region":  {
 "startLine":  212,
 "startColumn":  29,
@@ -212,7 +212,7 @@
 "id":  "S2357",
 "message":  "Make 'BindableArrayOfObjectsField' private.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\BindingMemberInfoFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\BindingMemberInfoFixture.cs",
 "region":  {
 "startLine":  214,
 "startColumn":  32,
@@ -225,7 +225,7 @@
 "id":  "S2357",
 "message":  "Make 'UnbindableReadOnlyField' private.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\BindingMemberInfoFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\BindingMemberInfoFixture.cs",
 "region":  {
 "startLine":  229,
 "startColumn":  33,
@@ -238,7 +238,7 @@
 "id":  "S2357",
 "message":  "Make 'StringField' private.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBinderFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBinderFixture.cs",
 "region":  {
 "startLine":  1580,
 "startColumn":  27,
@@ -251,7 +251,7 @@
 "id":  "S2357",
 "message":  "Make 'AnotherStringField' private.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBinderFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBinderFixture.cs",
 "region":  {
 "startLine":  1582,
 "startColumn":  27,
@@ -264,7 +264,7 @@
 "id":  "S2357",
 "message":  "Make 'IntField' private.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBinderFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBinderFixture.cs",
 "region":  {
 "startLine":  1588,
 "startColumn":  24,
@@ -277,7 +277,7 @@
 "id":  "S2357",
 "message":  "Make 'AnotherIntField' private.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBinderFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBinderFixture.cs",
 "region":  {
 "startLine":  1590,
 "startColumn":  24,
@@ -290,7 +290,7 @@
 "id":  "S2357",
 "message":  "Make 'lowercaseintfield' private.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBinderFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBinderFixture.cs",
 "region":  {
 "startLine":  1594,
 "startColumn":  24,
@@ -303,7 +303,7 @@
 "id":  "S2357",
 "message":  "Make 'DateField' private.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBinderFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBinderFixture.cs",
 "region":  {
 "startLine":  1598,
 "startColumn":  29,
@@ -316,7 +316,7 @@
 "id":  "S2357",
 "message":  "Make 'StringFieldWithDefaultValue' private.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBinderFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBinderFixture.cs",
 "region":  {
 "startLine":  1602,
 "startColumn":  27,
@@ -329,7 +329,7 @@
 "id":  "S2357",
 "message":  "Make 'DoubleField' private.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBinderFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBinderFixture.cs",
 "region":  {
 "startLine":  1606,
 "startColumn":  27,
@@ -342,7 +342,7 @@
 "id":  "S2357",
 "message":  "Make 'IntValuesField' private.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBinderFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBinderFixture.cs",
 "region":  {
 "startLine":  1612,
 "startColumn":  37,
@@ -355,7 +355,7 @@
 "id":  "S2357",
 "message":  "Make 'SomeStringsField' private.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBinderFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBinderFixture.cs",
 "region":  {
 "startLine":  1616,
 "startColumn":  29,
@@ -368,7 +368,7 @@
 "id":  "S2357",
 "message":  "Make 'ModelsField' private.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBinderFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBinderFixture.cs",
 "region":  {
 "startLine":  1626,
 "startColumn":  43,
@@ -381,7 +381,7 @@
 "id":  "S2357",
 "message":  "Make 'NestedStringField' private.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBinderFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBinderFixture.cs",
 "region":  {
 "startLine":  1640,
 "startColumn":  27,
@@ -394,7 +394,7 @@
 "id":  "S2357",
 "message":  "Make 'NestedIntField' private.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBinderFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBinderFixture.cs",
 "region":  {
 "startLine":  1641,
 "startColumn":  24,
@@ -407,7 +407,7 @@
 "id":  "S2357",
 "message":  "Make 'NestedDoubleField' private.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBinderFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBinderFixture.cs",
 "region":  {
 "startLine":  1642,
 "startColumn":  27,
@@ -420,7 +420,7 @@
 "id":  "S2357",
 "message":  "Make 'ListOfPrimitivesField' private.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBodyDeserializers\JsonBodyDeserializerFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBodyDeserializers\JsonBodyDeserializerFixture.cs",
 "region":  {
 "startLine":  358,
 "startColumn":  30,
@@ -433,7 +433,7 @@
 "id":  "S2357",
 "message":  "Make 'Value2' private.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBodyDeserializers\JsonBodyDeserializerFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBodyDeserializers\JsonBodyDeserializerFixture.cs",
 "region":  {
 "startLine":  436,
 "startColumn":  23,
@@ -446,7 +446,7 @@
 "id":  "S2357",
 "message":  "Make 'Longitude' private.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBodyDeserializers\JsonBodyDeserializerFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBodyDeserializers\JsonBodyDeserializerFixture.cs",
 "region":  {
 "startLine":  443,
 "startColumn":  23,
@@ -459,7 +459,7 @@
 "id":  "S2357",
 "message":  "Make 'F1' private.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBodyDeserializers\JsonBodyDeserializerFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBodyDeserializers\JsonBodyDeserializerFixture.cs",
 "region":  {
 "startLine":  452,
 "startColumn":  21,
@@ -472,7 +472,7 @@
 "id":  "S2357",
 "message":  "Make 'F2' private.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBodyDeserializers\JsonBodyDeserializerFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBodyDeserializers\JsonBodyDeserializerFixture.cs",
 "region":  {
 "startLine":  453,
 "startColumn":  21,
@@ -485,7 +485,7 @@
 "id":  "S2357",
 "message":  "Make 'F3' private.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBodyDeserializers\JsonBodyDeserializerFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBodyDeserializers\JsonBodyDeserializerFixture.cs",
 "region":  {
 "startLine":  454,
 "startColumn":  22,
@@ -498,7 +498,7 @@
 "id":  "S2357",
 "message":  "Make 'FirstName' private.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\Responses\DefaultJsonSerializerFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Responses\DefaultJsonSerializerFixture.cs",
 "region":  {
 "startLine":  104,
 "startColumn":  27,
@@ -511,7 +511,7 @@
 "id":  "S2357",
 "message":  "Make 'LastName' private.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\Responses\DefaultJsonSerializerFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Responses\DefaultJsonSerializerFixture.cs",
 "region":  {
 "startLine":  105,
 "startColumn":  27,

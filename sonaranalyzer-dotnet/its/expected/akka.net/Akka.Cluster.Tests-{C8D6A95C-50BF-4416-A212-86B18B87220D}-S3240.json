@@ -4,7 +4,7 @@
 "id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster.Tests\ClusterHeartBeatSenderStateSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests\ClusterHeartBeatSenderStateSpec.cs",
 "region":  {
 "startLine":  229,
 "startColumn":  33,

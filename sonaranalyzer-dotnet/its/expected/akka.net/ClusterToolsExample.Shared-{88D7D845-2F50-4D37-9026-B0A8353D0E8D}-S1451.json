@@ -4,7 +4,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\examples\Cluster\ClusterTools\ClusterToolsExample.Shared\Echo.cs",
+"uri":  "sources\akka.net\src\examples\Cluster\ClusterTools\ClusterToolsExample.Shared\Echo.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -17,7 +17,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\examples\Cluster\ClusterTools\ClusterToolsExample.Shared\Messages.cs",
+"uri":  "sources\akka.net\src\examples\Cluster\ClusterTools\ClusterToolsExample.Shared\Messages.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -30,7 +30,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\examples\Cluster\ClusterTools\ClusterToolsExample.Shared\Properties\AssemblyInfo.cs",
+"uri":  "sources\akka.net\src\examples\Cluster\ClusterTools\ClusterToolsExample.Shared\Properties\AssemblyInfo.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -43,7 +43,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\examples\Cluster\ClusterTools\ClusterToolsExample.Shared\Worker.cs",
+"uri":  "sources\akka.net\src\examples\Cluster\ClusterTools\ClusterToolsExample.Shared\Worker.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -56,7 +56,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\examples\Cluster\ClusterTools\ClusterToolsExample.Shared\WorkerManager.cs",
+"uri":  "sources\akka.net\src\examples\Cluster\ClusterTools\ClusterToolsExample.Shared\WorkerManager.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -69,7 +69,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\examples\Cluster\ClusterTools\ClusterToolsExample.Shared\WorkLoadCounter.cs",
+"uri":  "sources\akka.net\src\examples\Cluster\ClusterTools\ClusterToolsExample.Shared\WorkLoadCounter.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,

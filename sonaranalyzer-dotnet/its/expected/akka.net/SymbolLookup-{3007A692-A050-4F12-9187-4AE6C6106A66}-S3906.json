@@ -4,7 +4,7 @@
 "id":  "S3906",
 "message":  "Change the signature of that event handler to match the specified signature.",
 "location":  {
-"uri":  "akka.net\src\examples\Stocks\SymbolLookup\MainForm.cs",
+"uri":  "sources\akka.net\src\examples\Stocks\SymbolLookup\MainForm.cs",
 "region":  {
 "startLine":  27,
 "startColumn":  22,
@@ -17,7 +17,7 @@
 "id":  "S3906",
 "message":  "Change the signature of that event handler to match the specified signature.",
 "location":  {
-"uri":  "akka.net\src\examples\Stocks\SymbolLookup\MainForm.cs",
+"uri":  "sources\akka.net\src\examples\Stocks\SymbolLookup\MainForm.cs",
 "region":  {
 "startLine":  28,
 "startColumn":  22,

@@ -4,7 +4,7 @@
 "id":  "S103",
 "message":  "Split this 221 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Fakes\FakeModuleCatalog.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Fakes\FakeModuleCatalog.cs",
 "region":  {
 "startLine":  16,
 "startColumn":  1,
@@ -17,7 +17,7 @@
 "id":  "S103",
 "message":  "Split this 253 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\Bootstrapper\NancyBootstrapperBaseFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Bootstrapper\NancyBootstrapperBaseFixture.cs",
 "region":  {
 "startLine":  53,
 "startColumn":  1,
@@ -30,7 +30,7 @@
 "id":  "S103",
 "message":  "Split this 398 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\Helpers\HttpUtilityFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Helpers\HttpUtilityFixture.cs",
 "region":  {
 "startLine":  142,
 "startColumn":  1,
@@ -43,7 +43,7 @@
 "id":  "S103",
 "message":  "Split this 321 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\HttpMultipartFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\HttpMultipartFixture.cs",
 "region":  {
 "startLine":  171,
 "startColumn":  1,
@@ -56,7 +56,7 @@
 "id":  "S103",
 "message":  "Split this 223 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBinderFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBinderFixture.cs",
 "region":  {
 "startLine":  1517,
 "startColumn":  1,
@@ -69,7 +69,7 @@
 "id":  "S103",
 "message":  "Split this 209 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\NancyEngineFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\NancyEngineFixture.cs",
 "region":  {
 "startLine":  77,
 "startColumn":  1,
@@ -82,7 +82,7 @@
 "id":  "S103",
 "message":  "Split this 201 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\NancyEngineFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\NancyEngineFixture.cs",
 "region":  {
 "startLine":  88,
 "startColumn":  1,
@@ -95,7 +95,7 @@
 "id":  "S103",
 "message":  "Split this 572 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\RequestFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\RequestFixture.cs",
 "region":  {
 "startLine":  543,
 "startColumn":  1,
@@ -108,7 +108,7 @@
 "id":  "S103",
 "message":  "Split this 213 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\Responses\DefaultJsonSerializerFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Responses\DefaultJsonSerializerFixture.cs",
 "region":  {
 "startLine":  126,
 "startColumn":  1,
@@ -121,7 +121,7 @@
 "id":  "S103",
 "message":  "Split this 556 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\Sessions\CookieBasedSessionsFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Sessions\CookieBasedSessionsFixture.cs",
 "region":  {
 "startLine":  21,
 "startColumn":  1,
@@ -134,7 +134,7 @@
 "id":  "S103",
 "message":  "Split this 203 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ViewEngines\DefaultViewFactoryFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ViewEngines\DefaultViewFactoryFixture.cs",
 "region":  {
 "startLine":  358,
 "startColumn":  1,
@@ -147,7 +147,7 @@
 "id":  "S103",
 "message":  "Split this 225 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ViewEngines\SuperSimpleViewEngineTests.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ViewEngines\SuperSimpleViewEngineTests.cs",
 "region":  {
 "startLine":  241,
 "startColumn":  1,
@@ -160,7 +160,7 @@
 "id":  "S103",
 "message":  "Split this 234 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ViewEngines\SuperSimpleViewEngineTests.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ViewEngines\SuperSimpleViewEngineTests.cs",
 "region":  {
 "startLine":  256,
 "startColumn":  1,
@@ -173,7 +173,7 @@
 "id":  "S103",
 "message":  "Split this 201 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ViewEngines\SuperSimpleViewEngineTests.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ViewEngines\SuperSimpleViewEngineTests.cs",
 "region":  {
 "startLine":  514,
 "startColumn":  1,
@@ -186,7 +186,7 @@
 "id":  "S103",
 "message":  "Split this 201 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ViewEngines\SuperSimpleViewEngineTests.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ViewEngines\SuperSimpleViewEngineTests.cs",
 "region":  {
 "startLine":  525,
 "startColumn":  1,
@@ -199,7 +199,7 @@
 "id":  "S103",
 "message":  "Split this 221 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ViewEngines\SuperSimpleViewEngineTests.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ViewEngines\SuperSimpleViewEngineTests.cs",
 "region":  {
 "startLine":  536,
 "startColumn":  1,

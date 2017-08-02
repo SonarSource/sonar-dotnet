@@ -4,7 +4,7 @@
 "id":  "S2355",
 "message":  "Use an array literal here instead.",
 "location":  {
-"uri":  "Ember-MM\Addons\generic.EmberCore.Extractor\Module.Extractor.vb",
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Extractor\Module.Extractor.vb",
 "region":  {
 "startLine":  78,
 "startColumn":  55,

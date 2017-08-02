@@ -5,7 +5,7 @@
 "message":  "Merge this if statement with the enclosing one.",
 "location":  [
 {
-"uri":  "akka.net\src\contrib\testkits\Akka.TestKit.Xunit\TestKit.cs",
+"uri":  "sources\akka.net\src\contrib\testkits\Akka.TestKit.Xunit\TestKit.cs",
 "region":  {
 "startLine":  111,
 "startColumn":  21,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "akka.net\src\contrib\testkits\Akka.TestKit.Xunit\TestKit.cs",
+"uri":  "sources\akka.net\src\contrib\testkits\Akka.TestKit.Xunit\TestKit.cs",
 "region":  {
 "startLine":  109,
 "startColumn":  17,

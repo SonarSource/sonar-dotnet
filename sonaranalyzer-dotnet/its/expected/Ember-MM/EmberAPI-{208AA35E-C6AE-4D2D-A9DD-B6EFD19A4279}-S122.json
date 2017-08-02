@@ -4,7 +4,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAdvancedSettings.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAdvancedSettings.vb",
 "region":  {
 "startLine":  143,
 "startColumn":  13,
@@ -17,7 +17,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAdvancedSettings.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAdvancedSettings.vb",
 "region":  {
 "startLine":  157,
 "startColumn":  13,
@@ -30,7 +30,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAdvancedSettings.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAdvancedSettings.vb",
 "region":  {
 "startLine":  195,
 "startColumn":  13,
@@ -43,7 +43,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAdvancedSettings.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAdvancedSettings.vb",
 "region":  {
 "startLine":  285,
 "startColumn":  13,
@@ -56,7 +56,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAdvancedSettings.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAdvancedSettings.vb",
 "region":  {
 "startLine":  307,
 "startColumn":  13,
@@ -69,7 +69,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAdvancedSettings.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAdvancedSettings.vb",
 "region":  {
 "startLine":  330,
 "startColumn":  13,
@@ -82,7 +82,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPICommon.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
 "region":  {
 "startLine":  54,
 "startColumn":  13,
@@ -95,7 +95,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPICommon.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
 "region":  {
 "startLine":  912,
 "startColumn":  13,
@@ -108,7 +108,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPICommon.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
 "region":  {
 "startLine":  920,
 "startColumn":  13,
@@ -121,7 +121,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPICommon.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
 "region":  {
 "startLine":  933,
 "startColumn":  9,
@@ -134,7 +134,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPICommon.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
 "region":  {
 "startLine":  934,
 "startColumn":  9,
@@ -147,7 +147,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPICommon.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
 "region":  {
 "startLine":  962,
 "startColumn":  17,
@@ -160,7 +160,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPICommon.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
 "region":  {
 "startLine":  1023,
 "startColumn":  13,
@@ -173,7 +173,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  177,
 "startColumn":  9,
@@ -186,7 +186,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  182,
 "startColumn":  9,
@@ -199,7 +199,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  301,
 "startColumn":  13,
@@ -212,7 +212,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  320,
 "startColumn":  13,
@@ -225,7 +225,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  336,
 "startColumn":  13,
@@ -238,7 +238,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  356,
 "startColumn":  33,
@@ -251,7 +251,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  381,
 "startColumn":  13,
@@ -264,7 +264,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  427,
 "startColumn":  13,
@@ -277,7 +277,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  444,
 "startColumn":  13,
@@ -290,7 +290,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  458,
 "startColumn":  13,
@@ -303,7 +303,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  475,
 "startColumn":  13,
@@ -316,7 +316,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  493,
 "startColumn":  13,
@@ -329,7 +329,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  584,
 "startColumn":  21,
@@ -342,7 +342,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  585,
 "startColumn":  21,
@@ -355,7 +355,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  586,
 "startColumn":  21,
@@ -368,7 +368,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  588,
 "startColumn":  21,
@@ -381,7 +381,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  589,
 "startColumn":  21,
@@ -394,7 +394,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  590,
 "startColumn":  21,
@@ -407,7 +407,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  591,
 "startColumn":  21,
@@ -420,7 +420,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  592,
 "startColumn":  21,
@@ -433,7 +433,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  593,
 "startColumn":  21,
@@ -446,7 +446,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  594,
 "startColumn":  21,
@@ -459,7 +459,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  600,
 "startColumn":  21,
@@ -472,7 +472,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  603,
 "startColumn":  25,
@@ -485,7 +485,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  604,
 "startColumn":  25,
@@ -498,7 +498,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  605,
 "startColumn":  25,
@@ -511,7 +511,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  606,
 "startColumn":  25,
@@ -524,7 +524,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  607,
 "startColumn":  25,
@@ -537,7 +537,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  608,
 "startColumn":  25,
@@ -550,7 +550,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  609,
 "startColumn":  25,
@@ -563,7 +563,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  610,
 "startColumn":  25,
@@ -576,7 +576,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  611,
 "startColumn":  25,
@@ -589,7 +589,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  612,
 "startColumn":  25,
@@ -602,7 +602,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  613,
 "startColumn":  25,
@@ -615,7 +615,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  614,
 "startColumn":  25,
@@ -628,7 +628,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  615,
 "startColumn":  25,
@@ -641,7 +641,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  616,
 "startColumn":  25,
@@ -654,7 +654,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  617,
 "startColumn":  25,
@@ -667,7 +667,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  618,
 "startColumn":  25,
@@ -680,7 +680,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  619,
 "startColumn":  25,
@@ -693,7 +693,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  620,
 "startColumn":  25,
@@ -706,7 +706,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  621,
 "startColumn":  25,
@@ -719,7 +719,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  622,
 "startColumn":  25,
@@ -732,7 +732,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  623,
 "startColumn":  25,
@@ -745,7 +745,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  624,
 "startColumn":  25,
@@ -758,7 +758,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  625,
 "startColumn":  25,
@@ -771,7 +771,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  626,
 "startColumn":  25,
@@ -784,7 +784,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  653,
 "startColumn":  25,
@@ -797,7 +797,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  654,
 "startColumn":  25,
@@ -810,7 +810,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  655,
 "startColumn":  25,
@@ -823,7 +823,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  656,
 "startColumn":  25,
@@ -836,7 +836,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  657,
 "startColumn":  25,
@@ -849,7 +849,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  658,
 "startColumn":  25,
@@ -862,7 +862,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  659,
 "startColumn":  25,
@@ -875,7 +875,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  660,
 "startColumn":  25,
@@ -888,7 +888,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  672,
 "startColumn":  25,
@@ -901,7 +901,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  673,
 "startColumn":  25,
@@ -914,7 +914,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  674,
 "startColumn":  25,
@@ -927,7 +927,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  675,
 "startColumn":  25,
@@ -940,7 +940,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  686,
 "startColumn":  25,
@@ -953,7 +953,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  687,
 "startColumn":  25,
@@ -966,7 +966,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  688,
 "startColumn":  25,
@@ -979,7 +979,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  689,
 "startColumn":  25,
@@ -992,7 +992,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  700,
 "startColumn":  25,
@@ -1005,7 +1005,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  701,
 "startColumn":  25,
@@ -1018,7 +1018,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  713,
 "startColumn":  29,
@@ -1031,7 +1031,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  714,
 "startColumn":  29,
@@ -1044,7 +1044,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  723,
 "startColumn":  29,
@@ -1057,7 +1057,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  774,
 "startColumn":  25,
@@ -1070,7 +1070,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  779,
 "startColumn":  13,
@@ -1083,7 +1083,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  801,
 "startColumn":  25,
@@ -1096,7 +1096,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  802,
 "startColumn":  25,
@@ -1109,7 +1109,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  803,
 "startColumn":  25,
@@ -1122,7 +1122,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  804,
 "startColumn":  25,
@@ -1135,7 +1135,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  805,
 "startColumn":  25,
@@ -1148,7 +1148,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  812,
 "startColumn":  29,
@@ -1161,7 +1161,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  813,
 "startColumn":  29,
@@ -1174,7 +1174,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  814,
 "startColumn":  29,
@@ -1187,7 +1187,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  815,
 "startColumn":  29,
@@ -1200,7 +1200,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  816,
 "startColumn":  29,
@@ -1213,7 +1213,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  817,
 "startColumn":  29,
@@ -1226,7 +1226,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  818,
 "startColumn":  29,
@@ -1239,7 +1239,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  819,
 "startColumn":  29,
@@ -1252,7 +1252,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  829,
 "startColumn":  25,
@@ -1265,7 +1265,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  855,
 "startColumn":  25,
@@ -1278,7 +1278,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  856,
 "startColumn":  25,
@@ -1291,7 +1291,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  857,
 "startColumn":  25,
@@ -1304,7 +1304,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  858,
 "startColumn":  25,
@@ -1317,7 +1317,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  859,
 "startColumn":  25,
@@ -1330,7 +1330,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  860,
 "startColumn":  25,
@@ -1343,7 +1343,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  861,
 "startColumn":  25,
@@ -1356,7 +1356,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  862,
 "startColumn":  25,
@@ -1369,7 +1369,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  874,
 "startColumn":  25,
@@ -1382,7 +1382,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  875,
 "startColumn":  25,
@@ -1395,7 +1395,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  876,
 "startColumn":  25,
@@ -1408,7 +1408,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  877,
 "startColumn":  25,
@@ -1421,7 +1421,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  888,
 "startColumn":  25,
@@ -1434,7 +1434,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  889,
 "startColumn":  25,
@@ -1447,7 +1447,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  949,
 "startColumn":  13,
@@ -1460,7 +1460,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  957,
 "startColumn":  25,
@@ -1473,7 +1473,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  958,
 "startColumn":  25,
@@ -1486,7 +1486,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  984,
 "startColumn":  25,
@@ -1499,7 +1499,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  985,
 "startColumn":  25,
@@ -1512,7 +1512,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  986,
 "startColumn":  25,
@@ -1525,7 +1525,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  987,
 "startColumn":  25,
@@ -1538,7 +1538,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  988,
 "startColumn":  25,
@@ -1551,7 +1551,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  989,
 "startColumn":  25,
@@ -1564,7 +1564,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  996,
 "startColumn":  29,
@@ -1577,7 +1577,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  997,
 "startColumn":  29,
@@ -1590,7 +1590,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  998,
 "startColumn":  29,
@@ -1603,7 +1603,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  999,
 "startColumn":  29,
@@ -1616,7 +1616,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  1000,
 "startColumn":  29,
@@ -1629,7 +1629,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  1001,
 "startColumn":  29,
@@ -1642,7 +1642,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  1002,
 "startColumn":  29,
@@ -1655,7 +1655,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  1003,
 "startColumn":  29,
@@ -1668,7 +1668,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  1004,
 "startColumn":  29,
@@ -1681,7 +1681,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  1090,
 "startColumn":  13,
@@ -1694,7 +1694,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  1163,
 "startColumn":  17,
@@ -1707,7 +1707,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  1411,
 "startColumn":  13,
@@ -1720,7 +1720,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  1430,
 "startColumn":  13,
@@ -1733,7 +1733,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  1507,
 "startColumn":  17,
@@ -1746,7 +1746,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  1653,
 "startColumn":  21,
@@ -1759,7 +1759,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  1656,
 "startColumn":  13,
@@ -1772,7 +1772,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  1665,
 "startColumn":  9,
@@ -1785,7 +1785,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  1694,
 "startColumn":  9,
@@ -1798,7 +1798,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  1708,
 "startColumn":  13,
@@ -1811,7 +1811,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  1761,
 "startColumn":  17,
@@ -1824,7 +1824,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  1826,
 "startColumn":  13,
@@ -1837,7 +1837,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  1947,
 "startColumn":  21,
@@ -1850,7 +1850,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDVD.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
 "region":  {
 "startLine":  261,
 "startColumn":  13,
@@ -1863,7 +1863,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDVD.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
 "region":  {
 "startLine":  262,
 "startColumn":  13,
@@ -1876,7 +1876,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDVD.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
 "region":  {
 "startLine":  263,
 "startColumn":  13,
@@ -1889,7 +1889,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDVD.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
 "region":  {
 "startLine":  266,
 "startColumn":  13,
@@ -1902,7 +1902,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDVD.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
 "region":  {
 "startLine":  267,
 "startColumn":  13,
@@ -1915,7 +1915,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDVD.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
 "region":  {
 "startLine":  268,
 "startColumn":  13,
@@ -1928,7 +1928,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDVD.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
 "region":  {
 "startLine":  424,
 "startColumn":  13,
@@ -1941,7 +1941,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDVD.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
 "region":  {
 "startLine":  425,
 "startColumn":  13,
@@ -1954,7 +1954,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDVD.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
 "region":  {
 "startLine":  429,
 "startColumn":  13,
@@ -1967,7 +1967,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDVD.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
 "region":  {
 "startLine":  430,
 "startColumn":  13,
@@ -1980,7 +1980,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDVD.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
 "region":  {
 "startLine":  436,
 "startColumn":  13,
@@ -1993,7 +1993,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDVD.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
 "region":  {
 "startLine":  437,
 "startColumn":  13,
@@ -2006,7 +2006,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDVD.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
 "region":  {
 "startLine":  491,
 "startColumn":  13,
@@ -2019,7 +2019,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDVD.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
 "region":  {
 "startLine":  492,
 "startColumn":  13,
@@ -2032,7 +2032,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDVD.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
 "region":  {
 "startLine":  496,
 "startColumn":  13,
@@ -2045,7 +2045,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDVD.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
 "region":  {
 "startLine":  497,
 "startColumn":  13,
@@ -2058,7 +2058,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDVD.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
 "region":  {
 "startLine":  501,
 "startColumn":  13,
@@ -2071,7 +2071,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDVD.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
 "region":  {
 "startLine":  502,
 "startColumn":  13,
@@ -2084,7 +2084,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDVD.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
 "region":  {
 "startLine":  508,
 "startColumn":  13,
@@ -2097,7 +2097,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDVD.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
 "region":  {
 "startLine":  509,
 "startColumn":  13,
@@ -2110,7 +2110,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIErrorLog.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIErrorLog.vb",
 "region":  {
 "startLine":  65,
 "startColumn":  17,
@@ -2123,7 +2123,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
 "region":  {
 "startLine":  32,
 "startColumn":  17,
@@ -2136,7 +2136,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
 "region":  {
 "startLine":  33,
 "startColumn":  17,
@@ -2149,7 +2149,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
 "region":  {
 "startLine":  34,
 "startColumn":  17,
@@ -2162,7 +2162,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
 "region":  {
 "startLine":  35,
 "startColumn":  17,
@@ -2175,7 +2175,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
 "region":  {
 "startLine":  37,
 "startColumn":  17,
@@ -2188,7 +2188,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
 "region":  {
 "startLine":  38,
 "startColumn":  17,
@@ -2201,7 +2201,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
 "region":  {
 "startLine":  47,
 "startColumn":  13,
@@ -2214,7 +2214,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
 "region":  {
 "startLine":  58,
 "startColumn":  13,
@@ -2227,7 +2227,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
 "region":  {
 "startLine":  67,
 "startColumn":  13,
@@ -2240,7 +2240,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
 "region":  {
 "startLine":  135,
 "startColumn":  17,
@@ -2253,7 +2253,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
 "region":  {
 "startLine":  353,
 "startColumn":  33,
@@ -2266,7 +2266,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIHTTP.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIHTTP.vb",
 "region":  {
 "startLine":  80,
 "startColumn":  9,
@@ -2279,7 +2279,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIHTTP.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIHTTP.vb",
 "region":  {
 "startLine":  111,
 "startColumn":  17,
@@ -2292,7 +2292,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIHTTP.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIHTTP.vb",
 "region":  {
 "startLine":  151,
 "startColumn":  17,
@@ -2305,7 +2305,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIHTTP.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIHTTP.vb",
 "region":  {
 "startLine":  153,
 "startColumn":  21,
@@ -2318,7 +2318,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIHTTP.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIHTTP.vb",
 "region":  {
 "startLine":  190,
 "startColumn":  17,
@@ -2331,7 +2331,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIHTTP.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIHTTP.vb",
 "region":  {
 "startLine":  240,
 "startColumn":  17,
@@ -2344,7 +2344,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIHTTP.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIHTTP.vb",
 "region":  {
 "startLine":  257,
 "startColumn":  21,
@@ -2357,7 +2357,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIHTTP.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIHTTP.vb",
 "region":  {
 "startLine":  294,
 "startColumn":  17,
@@ -2370,7 +2370,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIHTTP.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIHTTP.vb",
 "region":  {
 "startLine":  308,
 "startColumn":  17,
@@ -2383,7 +2383,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIHTTP.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIHTTP.vb",
 "region":  {
 "startLine":  311,
 "startColumn":  21,
@@ -2396,7 +2396,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIHTTP.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIHTTP.vb",
 "region":  {
 "startLine":  314,
 "startColumn":  25,
@@ -2409,7 +2409,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIImages.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
 "region":  {
 "startLine":  396,
 "startColumn":  13,
@@ -2422,7 +2422,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIImages.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
 "region":  {
 "startLine":  403,
 "startColumn":  13,
@@ -2435,7 +2435,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIImages.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
 "region":  {
 "startLine":  440,
 "startColumn":  4,
@@ -2448,7 +2448,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIImages.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
 "region":  {
 "startLine":  507,
 "startColumn":  5,
@@ -2461,7 +2461,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIImages.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
 "region":  {
 "startLine":  530,
 "startColumn":  25,
@@ -2474,7 +2474,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIImages.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
 "region":  {
 "startLine":  533,
 "startColumn":  17,
@@ -2487,7 +2487,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIImages.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
 "region":  {
 "startLine":  585,
 "startColumn":  25,
@@ -2500,7 +2500,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIImages.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
 "region":  {
 "startLine":  588,
 "startColumn":  17,
@@ -2513,7 +2513,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIImages.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
 "region":  {
 "startLine":  632,
 "startColumn":  25,
@@ -2526,7 +2526,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIImages.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
 "region":  {
 "startLine":  635,
 "startColumn":  17,
@@ -2539,7 +2539,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIImages.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
 "region":  {
 "startLine":  963,
 "startColumn":  9,
@@ -2552,7 +2552,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIImages.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
 "region":  {
 "startLine":  986,
 "startColumn":  29,
@@ -2565,7 +2565,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIImages.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
 "region":  {
 "startLine":  989,
 "startColumn":  21,
@@ -2578,7 +2578,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIImages.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
 "region":  {
 "startLine":  1078,
 "startColumn":  25,
@@ -2591,7 +2591,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIImages.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
 "region":  {
 "startLine":  1081,
 "startColumn":  17,
@@ -2604,7 +2604,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIImages.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
 "region":  {
 "startLine":  1199,
 "startColumn":  25,
@@ -2617,7 +2617,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIImages.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
 "region":  {
 "startLine":  1202,
 "startColumn":  17,
@@ -2630,7 +2630,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIImages.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
 "region":  {
 "startLine":  1255,
 "startColumn":  25,
@@ -2643,7 +2643,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIImages.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
 "region":  {
 "startLine":  1258,
 "startColumn":  17,
@@ -2656,7 +2656,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIImageUtils.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIImageUtils.vb",
 "region":  {
 "startLine":  228,
 "startColumn":  13,
@@ -2669,7 +2669,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPILocalization.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPILocalization.vb",
 "region":  {
 "startLine":  222,
 "startColumn":  17,
@@ -2682,7 +2682,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPILog.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPILog.vb",
 "region":  {
 "startLine":  63,
 "startColumn":  9,
@@ -2695,7 +2695,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
 "region":  {
 "startLine":  1127,
 "startColumn":  13,
@@ -2708,7 +2708,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
 "region":  {
 "startLine":  1145,
 "startColumn":  13,
@@ -2721,7 +2721,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
 "region":  {
 "startLine":  1164,
 "startColumn":  13,
@@ -2734,7 +2734,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
 "region":  {
 "startLine":  1183,
 "startColumn":  13,
@@ -2747,7 +2747,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
 "region":  {
 "startLine":  1467,
 "startColumn":  17,
@@ -2760,7 +2760,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
 "region":  {
 "startLine":  1484,
 "startColumn":  17,
@@ -2773,7 +2773,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
 "region":  {
 "startLine":  1674,
 "startColumn":  13,
@@ -2786,7 +2786,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
 "region":  {
 "startLine":  102,
 "startColumn":  17,
@@ -2799,7 +2799,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
 "region":  {
 "startLine":  124,
 "startColumn":  17,
@@ -2812,7 +2812,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
 "region":  {
 "startLine":  260,
 "startColumn":  29,
@@ -2825,7 +2825,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
 "region":  {
 "startLine":  339,
 "startColumn":  13,
@@ -2838,7 +2838,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
 "region":  {
 "startLine":  95,
 "startColumn":  17,
@@ -2851,7 +2851,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
 "region":  {
 "startLine":  344,
 "startColumn":  13,
@@ -2864,7 +2864,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
 "region":  {
 "startLine":  358,
 "startColumn":  13,
@@ -2877,7 +2877,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
 "region":  {
 "startLine":  371,
 "startColumn":  17,
@@ -2890,7 +2890,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
 "region":  {
 "startLine":  478,
 "startColumn":  13,
@@ -2903,7 +2903,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
 "region":  {
 "startLine":  490,
 "startColumn":  13,
@@ -2916,7 +2916,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
 "region":  {
 "startLine":  502,
 "startColumn":  13,
@@ -2929,7 +2929,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
 "region":  {
 "startLine":  514,
 "startColumn":  13,
@@ -2942,7 +2942,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
 "region":  {
 "startLine":  527,
 "startColumn":  13,
@@ -2955,7 +2955,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
 "region":  {
 "startLine":  561,
 "startColumn":  13,
@@ -2968,7 +2968,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
 "region":  {
 "startLine":  578,
 "startColumn":  13,
@@ -2981,7 +2981,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
 "region":  {
 "startLine":  591,
 "startColumn":  13,
@@ -2994,7 +2994,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
 "region":  {
 "startLine":  604,
 "startColumn":  13,
@@ -3007,7 +3007,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
 "region":  {
 "startLine":  616,
 "startColumn":  13,
@@ -3020,7 +3020,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
 "region":  {
 "startLine":  628,
 "startColumn":  13,
@@ -3033,7 +3033,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPINFO.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
 "region":  {
 "startLine":  62,
 "startColumn":  25,
@@ -3046,7 +3046,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPINFO.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
 "region":  {
 "startLine":  63,
 "startColumn":  25,
@@ -3059,7 +3059,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPINFO.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
 "region":  {
 "startLine":  64,
 "startColumn":  25,
@@ -3072,7 +3072,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPINFO.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
 "region":  {
 "startLine":  65,
 "startColumn":  25,
@@ -3085,7 +3085,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPINFO.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
 "region":  {
 "startLine":  66,
 "startColumn":  25,
@@ -3098,7 +3098,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPINFO.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
 "region":  {
 "startLine":  75,
 "startColumn":  25,
@@ -3111,7 +3111,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPINFO.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
 "region":  {
 "startLine":  76,
 "startColumn":  25,
@@ -3124,7 +3124,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPINFO.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
 "region":  {
 "startLine":  77,
 "startColumn":  25,
@@ -3137,7 +3137,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPINFO.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
 "region":  {
 "startLine":  86,
 "startColumn":  25,
@@ -3150,7 +3150,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPINFO.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
 "region":  {
 "startLine":  132,
 "startColumn":  21,
@@ -3163,7 +3163,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPINFO.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
 "region":  {
 "startLine":  134,
 "startColumn":  21,
@@ -3176,7 +3176,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPINFO.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
 "region":  {
 "startLine":  364,
 "startColumn":  17,
@@ -3189,7 +3189,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPINFO.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
 "region":  {
 "startLine":  706,
 "startColumn":  17,
@@ -3202,7 +3202,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPINFO.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
 "region":  {
 "startLine":  749,
 "startColumn":  25,
@@ -3215,7 +3215,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPINFO.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
 "region":  {
 "startLine":  781,
 "startColumn":  25,
@@ -3228,7 +3228,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPINFO.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
 "region":  {
 "startLine":  817,
 "startColumn":  29,
@@ -3241,7 +3241,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPINFO.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
 "region":  {
 "startLine":  844,
 "startColumn":  29,
@@ -3254,7 +3254,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPINFO.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
 "region":  {
 "startLine":  960,
 "startColumn":  21,
@@ -3267,7 +3267,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPINFO.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
 "region":  {
 "startLine":  978,
 "startColumn":  13,
@@ -3280,7 +3280,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPINFO.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
 "region":  {
 "startLine":  1014,
 "startColumn":  21,
@@ -3293,7 +3293,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPINumUtils.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPINumUtils.vb",
 "region":  {
 "startLine":  34,
 "startColumn":  13,
@@ -3306,7 +3306,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
 "region":  {
 "startLine":  91,
 "startColumn":  25,
@@ -3319,7 +3319,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
 "region":  {
 "startLine":  94,
 "startColumn":  37,
@@ -3332,7 +3332,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
 "region":  {
 "startLine":  98,
 "startColumn":  37,
@@ -3345,7 +3345,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
 "region":  {
 "startLine":  103,
 "startColumn":  41,
@@ -3358,7 +3358,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
 "region":  {
 "startLine":  128,
 "startColumn":  29,
@@ -3371,7 +3371,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
 "region":  {
 "startLine":  133,
 "startColumn":  21,
@@ -3384,7 +3384,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
 "region":  {
 "startLine":  151,
 "startColumn":  9,
@@ -3397,7 +3397,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
 "region":  {
 "startLine":  155,
 "startColumn":  9,
@@ -3410,7 +3410,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
 "region":  {
 "startLine":  341,
 "startColumn":  25,
@@ -3423,7 +3423,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
 "region":  {
 "startLine":  645,
 "startColumn":  17,
@@ -3436,7 +3436,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
 "region":  {
 "startLine":  648,
 "startColumn":  17,
@@ -3449,7 +3449,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
 "region":  {
 "startLine":  712,
 "startColumn":  17,
@@ -3462,7 +3462,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
 "region":  {
 "startLine":  716,
 "startColumn":  17,
@@ -3475,7 +3475,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
 "region":  {
 "startLine":  794,
 "startColumn":  25,
@@ -3488,7 +3488,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
 "region":  {
 "startLine":  803,
 "startColumn":  25,
@@ -3501,7 +3501,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
 "region":  {
 "startLine":  804,
 "startColumn":  25,
@@ -3514,7 +3514,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
 "region":  {
 "startLine":  805,
 "startColumn":  25,
@@ -3527,7 +3527,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
 "region":  {
 "startLine":  814,
 "startColumn":  25,
@@ -3540,7 +3540,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
 "region":  {
 "startLine":  815,
 "startColumn":  25,
@@ -3553,7 +3553,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
 "region":  {
 "startLine":  854,
 "startColumn":  29,
@@ -3566,7 +3566,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
 "region":  {
 "startLine":  855,
 "startColumn":  29,
@@ -3579,7 +3579,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
 "region":  {
 "startLine":  912,
 "startColumn":  17,
@@ -3592,7 +3592,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
 "region":  {
 "startLine":  928,
 "startColumn":  21,
@@ -3605,7 +3605,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
 "region":  {
 "startLine":  1057,
 "startColumn":  25,
@@ -3618,7 +3618,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
 "region":  {
 "startLine":  1196,
 "startColumn":  9,
@@ -3631,7 +3631,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
 "region":  {
 "startLine":  1233,
 "startColumn":  25,
@@ -3644,7 +3644,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
 "region":  {
 "startLine":  1328,
 "startColumn":  41,
@@ -3657,7 +3657,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
 "region":  {
 "startLine":  1331,
 "startColumn":  37,
@@ -3670,7 +3670,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
 "region":  {
 "startLine":  1332,
 "startColumn":  37,
@@ -3683,7 +3683,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
 "region":  {
 "startLine":  41,
 "startColumn":  9,
@@ -3696,7 +3696,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
 "region":  {
 "startLine":  42,
 "startColumn":  9,
@@ -3709,7 +3709,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
 "region":  {
 "startLine":  55,
 "startColumn":  13,
@@ -3722,7 +3722,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
 "region":  {
 "startLine":  57,
 "startColumn":  13,
@@ -3735,7 +3735,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
 "region":  {
 "startLine":  129,
 "startColumn":  13,
@@ -3748,7 +3748,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
 "region":  {
 "startLine":  139,
 "startColumn":  25,
@@ -3761,7 +3761,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
 "region":  {
 "startLine":  161,
 "startColumn":  13,
@@ -3774,7 +3774,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
 "region":  {
 "startLine":  162,
 "startColumn":  13,
@@ -3787,7 +3787,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
 "region":  {
 "startLine":  192,
 "startColumn":  13,
@@ -3800,7 +3800,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
 "region":  {
 "startLine":  201,
 "startColumn":  21,
@@ -3813,7 +3813,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
 "region":  {
 "startLine":  214,
 "startColumn":  13,
@@ -3826,7 +3826,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
 "region":  {
 "startLine":  221,
 "startColumn":  13,
@@ -3839,7 +3839,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
 "region":  {
 "startLine":  237,
 "startColumn":  13,
@@ -3852,7 +3852,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
 "region":  {
 "startLine":  246,
 "startColumn":  21,
@@ -3865,7 +3865,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
 "region":  {
 "startLine":  262,
 "startColumn":  13,
@@ -3878,7 +3878,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
 "region":  {
 "startLine":  304,
 "startColumn":  9,
@@ -3891,7 +3891,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
 "region":  {
 "startLine":  305,
 "startColumn":  9,
@@ -3904,7 +3904,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
 "region":  {
 "startLine":  330,
 "startColumn":  9,
@@ -3917,7 +3917,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
 "region":  {
 "startLine":  343,
 "startColumn":  9,
@@ -3930,7 +3930,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
 "region":  {
 "startLine":  386,
 "startColumn":  9,
@@ -3943,7 +3943,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIXML.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIXML.vb",
 "region":  {
 "startLine":  391,
 "startColumn":  9,
@@ -3956,7 +3956,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIXML.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIXML.vb",
 "region":  {
 "startLine":  461,
 "startColumn":  9,

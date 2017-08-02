@@ -4,7 +4,7 @@
 "id":  "S3897",
 "message":  "Implement 'IEquatable<IActorRef>'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.TestKit\TestActorRefBase.cs",
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestActorRefBase.cs",
 "region":  {
 "startLine":  22,
 "startColumn":  27,

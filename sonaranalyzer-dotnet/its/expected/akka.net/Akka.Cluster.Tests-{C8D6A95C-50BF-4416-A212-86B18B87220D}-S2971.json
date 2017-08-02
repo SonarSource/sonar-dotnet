@@ -4,7 +4,7 @@
 "id":  "S2971",
 "message":  "Use 'Count' property here instead.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster.Tests\GossipSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests\GossipSpec.cs",
 "region":  {
 "startLine":  116,
 "startColumn":  38,

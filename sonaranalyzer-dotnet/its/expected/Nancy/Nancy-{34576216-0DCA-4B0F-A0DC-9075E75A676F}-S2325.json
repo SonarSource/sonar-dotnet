@@ -4,7 +4,7 @@
 "id":  "S2325",
 "message":  "Make 'GetAdditionalTypes' a static method.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Bootstrapper\NancyBootstrapperBase.cs",
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\NancyBootstrapperBase.cs",
 "region":  {
 "startLine":  591,
 "startColumn":  47,
@@ -17,7 +17,7 @@
 "id":  "S2325",
 "message":  "Make 'ConfigureDefaultConventions' a static method.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Conventions\DefaultAcceptHeaderCoercionConventions.cs",
+"uri":  "sources\Nancy\src\Nancy\Conventions\DefaultAcceptHeaderCoercionConventions.cs",
 "region":  {
 "startLine":  26,
 "startColumn":  22,
@@ -30,7 +30,7 @@
 "id":  "S2325",
 "message":  "Make 'GetDescription' a static method.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Diagnostics\InteractiveDiagnostics.cs",
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\InteractiveDiagnostics.cs",
 "region":  {
 "startLine":  121,
 "startColumn":  24,
@@ -43,7 +43,7 @@
 "id":  "S2325",
 "message":  "Make 'GetArguments' a static method.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Diagnostics\InteractiveDiagnostics.cs",
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\InteractiveDiagnostics.cs",
 "region":  {
 "startLine":  127,
 "startColumn":  50,
@@ -56,7 +56,7 @@
 "id":  "S2325",
 "message":  "Make 'StringReturnValue' a static method.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Diagnostics\TestingDiagnosticProvider.cs",
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\TestingDiagnosticProvider.cs",
 "region":  {
 "startLine":  46,
 "startColumn":  27,
@@ -69,7 +69,7 @@
 "id":  "S2325",
 "message":  "Make 'SayHello' a static method.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Diagnostics\TestingDiagnosticProvider.cs",
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\TestingDiagnosticProvider.cs",
 "region":  {
 "startLine":  51,
 "startColumn":  27,
@@ -82,7 +82,7 @@
 "id":  "S2325",
 "message":  "Make 'SayHelloWithAgeTemplate' a static property.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Diagnostics\TestingDiagnosticProvider.cs",
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\TestingDiagnosticProvider.cs",
 "region":  {
 "startLine":  56,
 "startColumn":  27,
@@ -95,7 +95,7 @@
 "id":  "S2325",
 "message":  "Make 'SayHelloWithAgeDescription' a static property.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Diagnostics\TestingDiagnosticProvider.cs",
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\TestingDiagnosticProvider.cs",
 "region":  {
 "startLine":  64,
 "startColumn":  27,
@@ -108,7 +108,7 @@
 "id":  "S2325",
 "message":  "Make 'SayHelloWithAge' a static method.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Diagnostics\TestingDiagnosticProvider.cs",
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\TestingDiagnosticProvider.cs",
 "region":  {
 "startLine":  72,
 "startColumn":  27,
@@ -121,7 +121,7 @@
 "id":  "S2325",
 "message":  "Make 'GetValue' a static method.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Json\Converters\TimeSpanConverter.cs",
+"uri":  "sources\Nancy\src\Nancy\Json\Converters\TimeSpanConverter.cs",
 "region":  {
 "startLine":  42,
 "startColumn":  21,
@@ -134,7 +134,7 @@
 "id":  "S2325",
 "message":  "Make 'ConvertToEnum' a static method.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"uri":  "sources\Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
 "region":  {
 "startLine":  415,
 "startColumn":  16,
@@ -147,7 +147,7 @@
 "id":  "S2325",
 "message":  "Make 'ResolveGenericInterfaceToType' a static method.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"uri":  "sources\Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
 "region":  {
 "startLine":  423,
 "startColumn":  14,
@@ -160,7 +160,7 @@
 "id":  "S2325",
 "message":  "Make 'ResolveInterfaceToType' a static method.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"uri":  "sources\Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
 "region":  {
 "startLine":  445,
 "startColumn":  14,
@@ -173,7 +173,7 @@
 "id":  "S2325",
 "message":  "Make 'GetClosedIDictionaryBase' a static method.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Json\JsonSerializer.cs",
+"uri":  "sources\Nancy\src\Nancy\Json\JsonSerializer.cs",
 "region":  {
 "startLine":  272,
 "startColumn":  8,
@@ -186,7 +186,7 @@
 "id":  "S2325",
 "message":  "Make 'ShouldIgnoreMember' a static method.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Json\JsonSerializer.cs",
+"uri":  "sources\Nancy\src\Nancy\Json\JsonSerializer.cs",
 "region":  {
 "startLine":  284,
 "startColumn":  8,
@@ -199,7 +199,7 @@
 "id":  "S2325",
 "message":  "Make 'GetMemberValue' a static method.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Json\JsonSerializer.cs",
+"uri":  "sources\Nancy\src\Nancy\Json\JsonSerializer.cs",
 "region":  {
 "startLine":  310,
 "startColumn":  10,
@@ -212,7 +212,7 @@
 "id":  "S2325",
 "message":  "Make 'BindingValueIsValid' a static method.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
 "region":  {
 "startLine":  189,
 "startColumn":  22,
@@ -225,7 +225,7 @@
 "id":  "S2325",
 "message":  "Make 'GetBindingListInstanceCount' a static method.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
 "region":  {
 "startLine":  209,
 "startColumn":  21,
@@ -238,7 +238,7 @@
 "id":  "S2325",
 "message":  "Make 'ConvertCollection' a static method.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ModelBinding\DefaultConverters\CollectionConverter.cs",
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultConverters\CollectionConverter.cs",
 "region":  {
 "startLine":  64,
 "startColumn":  24,
@@ -251,7 +251,7 @@
 "id":  "S2325",
 "message":  "Make 'EnableTracing' a static method.",
 "location":  {
-"uri":  "Nancy\src\Nancy\NancyEngine.cs",
+"uri":  "sources\Nancy\src\Nancy\NancyEngine.cs",
 "region":  {
 "startLine":  171,
 "startColumn":  22,
@@ -264,7 +264,7 @@
 "id":  "S2325",
 "message":  "Make 'InvokePostRequestHook' a static method.",
 "location":  {
-"uri":  "Nancy\src\Nancy\NancyEngine.cs",
+"uri":  "sources\Nancy\src\Nancy\NancyEngine.cs",
 "region":  {
 "startLine":  261,
 "startColumn":  22,
@@ -277,7 +277,7 @@
 "id":  "S2325",
 "message":  "Make 'GetResourceContent' a static method.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Responses\EmbeddedFileResponse.cs",
+"uri":  "sources\Nancy\src\Nancy\Responses\EmbeddedFileResponse.cs",
 "region":  {
 "startLine":  47,
 "startColumn":  24,
@@ -290,7 +290,7 @@
 "id":  "S2325",
 "message":  "Make 'TryParseInt' a static method.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Routing\Constraints\ParameterizedRouteSegmentConstraintBase.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\Constraints\ParameterizedRouteSegmentConstraintBase.cs",
 "region":  {
 "startLine":  30,
 "startColumn":  24,
@@ -303,7 +303,7 @@
 "id":  "S2325",
 "message":  "Make 'NoMoreSegments' a static method.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Routing\Trie\Nodes\TrieNode.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\Trie\Nodes\TrieNode.cs",
 "region":  {
 "startLine":  190,
 "startColumn":  24,
@@ -316,7 +316,7 @@
 "id":  "S2325",
 "message":  "Make 'IsIgnoredAssembly' a static method.",
 "location":  {
-"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
 "startLine":  3145,
 "startColumn":  22,
@@ -329,7 +329,7 @@
 "id":  "S2325",
 "message":  "Make 'IsIgnoredType' a static method.",
 "location":  {
-"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
 "startLine":  3168,
 "startColumn":  22,
@@ -342,7 +342,7 @@
 "id":  "S2325",
 "message":  "Make 'GetDefaultObjectFactory' a static method.",
 "location":  {
-"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
 "startLine":  3235,
 "startColumn":  35,
@@ -355,7 +355,7 @@
 "id":  "S2325",
 "message":  "Make 'IsIEnumerableRequest' a static method.",
 "location":  {
-"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
 "startLine":  3304,
 "startColumn":  22,
@@ -368,7 +368,7 @@
 "id":  "S2325",
 "message":  "Make 'IsAutomaticLazyFactoryRequest' a static method.",
 "location":  {
-"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
 "startLine":  3317,
 "startColumn":  22,
@@ -381,7 +381,7 @@
 "id":  "S2325",
 "message":  "Make 'GetTypeConstructors' a static method.",
 "location":  {
-"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
 "startLine":  3611,
 "startColumn":  46,

@@ -4,7 +4,7 @@
 "id":  "S1694",
 "message":  "Convert this 'abstract' class to a concrete class with a private constructor.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Metadata.Modules\MetadataModule.cs",
+"uri":  "sources\Nancy\src\Nancy.Metadata.Modules\MetadataModule.cs",
 "region":  {
 "startLine":  11,
 "startColumn":  27,

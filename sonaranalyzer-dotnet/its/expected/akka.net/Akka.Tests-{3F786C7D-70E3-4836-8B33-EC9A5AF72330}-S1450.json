@@ -4,7 +4,7 @@
 "id":  "S1450",
 "message":  "Remove the 'generationProvider' field and declare it as a local variable in the relevant methods.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorLifeCycleSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ActorLifeCycleSpec.cs",
 "region":  {
 "startLine":  25,
 "startColumn":  35,
@@ -17,7 +17,7 @@
 "id":  "S1450",
 "message":  "Remove the 'generationProvider' field and declare it as a local variable in the relevant methods.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorLifeCycleSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ActorLifeCycleSpec.cs",
 "region":  {
 "startLine":  73,
 "startColumn":  35,
@@ -30,7 +30,7 @@
 "id":  "S1450",
 "message":  "Remove the '_child' field and declare it as a local variable in the relevant methods.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorRefSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ActorRefSpec.cs",
 "region":  {
 "startLine":  551,
 "startColumn":  40,
@@ -43,7 +43,7 @@
 "id":  "S1450",
 "message":  "Remove the '_echoActor' field and declare it as a local variable in the relevant methods.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorSelectionSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ActorSelectionSpec.cs",
 "region":  {
 "startLine":  21,
 "startColumn":  27,
@@ -56,7 +56,7 @@
 "id":  "S1450",
 "message":  "Remove the '_selectionTestActor' field and declare it as a local variable in the relevant methods.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorSelectionSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ActorSelectionSpec.cs",
 "region":  {
 "startLine":  22,
 "startColumn":  27,
@@ -69,7 +69,7 @@
 "id":  "S1450",
 "message":  "Remove the '_connectionResetByPeerMessage' field and declare it as a local variable in the relevant methods.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
 "region":  {
 "startLine":  49,
 "startColumn":  31,
@@ -82,7 +82,7 @@
 "id":  "S1450",
 "message":  "Remove the '_kit' field and declare it as a local variable in the relevant methods.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\IO\TcpListenerSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\IO\TcpListenerSpec.cs",
 "region":  {
 "startLine":  172,
 "startColumn":  42,
@@ -95,7 +95,7 @@
 "id":  "S1450",
 "message":  "Remove the '_handlerRef' field and declare it as a local variable in the relevant methods.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\IO\TcpListenerSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\IO\TcpListenerSpec.cs",
 "region":  {
 "startLine":  176,
 "startColumn":  40,
@@ -108,7 +108,7 @@
 "id":  "S1450",
 "message":  "Remove the '_pullMode' field and declare it as a local variable in the relevant methods.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\IO\TcpListenerSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\IO\TcpListenerSpec.cs",
 "region":  {
 "startLine":  250,
 "startColumn":  39,
@@ -121,7 +121,7 @@
 "id":  "S1450",
 "message":  "Remove the 'a' field and declare it as a local variable in the relevant methods.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Routing\ConsistentHashingRouterSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Routing\ConsistentHashingRouterSpec.cs",
 "region":  {
 "startLine":  79,
 "startColumn":  27,
@@ -134,7 +134,7 @@
 "id":  "S1450",
 "message":  "Remove the 'b' field and declare it as a local variable in the relevant methods.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Routing\ConsistentHashingRouterSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Routing\ConsistentHashingRouterSpec.cs",
 "region":  {
 "startLine":  79,
 "startColumn":  30,
@@ -147,7 +147,7 @@
 "id":  "S1450",
 "message":  "Remove the 'TestActor' field and declare it as a local variable in the relevant methods.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Routing\RoutingSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Routing\RoutingSpec.cs",
 "region":  {
 "startLine":  299,
 "startColumn":  44,

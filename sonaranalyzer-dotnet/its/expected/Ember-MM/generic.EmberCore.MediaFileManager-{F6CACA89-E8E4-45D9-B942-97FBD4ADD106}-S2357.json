@@ -4,7 +4,7 @@
 "id":  "S2357",
 "message":  "Make 'FolderPath' private.",
 "location":  {
-"uri":  "Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
 "region":  {
 "startLine":  394,
 "startColumn":  16,
@@ -17,7 +17,7 @@
 "id":  "S2357",
 "message":  "Make 'Name' private.",
 "location":  {
-"uri":  "Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
 "region":  {
 "startLine":  395,
 "startColumn":  16,

@@ -4,7 +4,7 @@
 "id":  "S2178",
 "message":  "Correct this 'And' to 'AndAlso'.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIImages.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
 "region":  {
 "startLine":  507,
 "startColumn":  18,
@@ -17,7 +17,7 @@
 "id":  "S2178",
 "message":  "Correct this 'And' to 'AndAlso'.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIImages.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
 "region":  {
 "startLine":  836,
 "startColumn":  45,
@@ -30,7 +30,7 @@
 "id":  "S2178",
 "message":  "Correct this 'And' to 'AndAlso'.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIImages.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
 "region":  {
 "startLine":  863,
 "startColumn":  45,
@@ -43,7 +43,7 @@
 "id":  "S2178",
 "message":  "Correct this 'And' to 'AndAlso'.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
 "region":  {
 "startLine":  1151,
 "startColumn":  58,
@@ -56,7 +56,7 @@
 "id":  "S2178",
 "message":  "Correct this 'And' to 'AndAlso'.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
 "region":  {
 "startLine":  1157,
 "startColumn":  51,
@@ -69,7 +69,7 @@
 "id":  "S2178",
 "message":  "Correct this 'And' to 'AndAlso'.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
 "region":  {
 "startLine":  1170,
 "startColumn":  54,
@@ -82,7 +82,7 @@
 "id":  "S2178",
 "message":  "Correct this 'And' to 'AndAlso'.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
 "region":  {
 "startLine":  1176,
 "startColumn":  49,
@@ -95,7 +95,7 @@
 "id":  "S2178",
 "message":  "Correct this 'And' to 'AndAlso'.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPINFO.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
 "region":  {
 "startLine":  749,
 "startColumn":  38,
@@ -108,7 +108,7 @@
 "id":  "S2178",
 "message":  "Correct this 'And' to 'AndAlso'.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPINFO.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
 "region":  {
 "startLine":  781,
 "startColumn":  38,
@@ -121,7 +121,7 @@
 "id":  "S2178",
 "message":  "Correct this 'And' to 'AndAlso'.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPINFO.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
 "region":  {
 "startLine":  817,
 "startColumn":  42,
@@ -134,7 +134,7 @@
 "id":  "S2178",
 "message":  "Correct this 'And' to 'AndAlso'.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPINFO.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
 "region":  {
 "startLine":  844,
 "startColumn":  42,
@@ -147,7 +147,7 @@
 "id":  "S2178",
 "message":  "Correct this 'And' to 'AndAlso'.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPINFO.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
 "region":  {
 "startLine":  960,
 "startColumn":  34,
@@ -160,7 +160,7 @@
 "id":  "S2178",
 "message":  "Correct this 'And' to 'AndAlso'.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPINFO.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
 "region":  {
 "startLine":  1014,
 "startColumn":  34,

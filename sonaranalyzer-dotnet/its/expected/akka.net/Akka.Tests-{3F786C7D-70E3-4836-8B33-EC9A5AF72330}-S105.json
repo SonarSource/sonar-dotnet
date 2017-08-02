@@ -4,7 +4,7 @@
 "id":  "S105",
 "message":  "Replace all tab characters in this file by sequences of white-spaces.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Dispatch\XUnitAsyncTestsSanityCheck.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Dispatch\XUnitAsyncTestsSanityCheck.cs",
 "region":  {
 "startLine":  20,
 "startColumn":  1,
@@ -17,7 +17,7 @@
 "id":  "S105",
 "message":  "Replace all tab characters in this file by sequences of white-spaces.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Util\Internal\InterlockedSpinTests.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Util\Internal\InterlockedSpinTests.cs",
 "region":  {
 "startLine":  44,
 "startColumn":  51,

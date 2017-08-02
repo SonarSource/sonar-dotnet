@@ -4,7 +4,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private method 'ViewExample'.",
 "location":  {
-"uri":  "akka.net\src\examples\PersistenceExample\Program.cs",
+"uri":  "sources\akka.net\src\examples\PersistenceExample\Program.cs",
 "region":  {
 "startLine":  66,
 "startColumn":  9,
@@ -17,7 +17,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private method 'SnapshotedActor'.",
 "location":  {
-"uri":  "akka.net\src\examples\PersistenceExample\Program.cs",
+"uri":  "sources\akka.net\src\examples\PersistenceExample\Program.cs",
 "region":  {
 "startLine":  76,
 "startColumn":  9,
@@ -30,7 +30,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private method 'FailingActorExample'.",
 "location":  {
-"uri":  "akka.net\src\examples\PersistenceExample\Program.cs",
+"uri":  "sources\akka.net\src\examples\PersistenceExample\Program.cs",
 "region":  {
 "startLine":  112,
 "startColumn":  9,

@@ -4,7 +4,7 @@
 "id":  "S3875",
 "message":  "Remove this overload of 'operator =='.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.Tests\RemoteWatcherSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests\RemoteWatcherSpec.cs",
 "region":  {
 "startLine":  123,
 "startColumn":  45,

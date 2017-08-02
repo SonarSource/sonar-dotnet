@@ -4,7 +4,7 @@
 "id":  "S4049",
 "message":  "Consider making method 'GetRules' a property.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Validation.DataAnnotations\IPropertyValidator.cs",
+"uri":  "sources\Nancy\src\Nancy.Validation.DataAnnotations\IPropertyValidator.cs",
 "region":  {
 "startLine":  27,
 "startColumn":  42,

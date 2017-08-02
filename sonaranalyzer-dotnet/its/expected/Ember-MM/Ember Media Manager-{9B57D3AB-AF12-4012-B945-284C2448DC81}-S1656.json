@@ -4,7 +4,7 @@
 "id":  "S1656",
 "message":  "Remove or correct this useless self-assignment.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
 "region":  {
 "startLine":  3905,
 "startColumn":  9,
@@ -17,7 +17,7 @@
 "id":  "S1656",
 "message":  "Remove or correct this useless self-assignment.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  8236,
 "startColumn":  17,

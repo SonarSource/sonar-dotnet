@@ -4,7 +4,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to have parameters matching all the type parameters.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence.TestKit\PluginSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\PluginSpec.cs",
 "region":  {
 "startLine":  41,
 "startColumn":  21,

@@ -4,7 +4,7 @@
 "id":  "S3253",
 "message":  "Remove this redundant 'base()' call.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\AtLeastOnceDeliveryReceiveActor.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\AtLeastOnceDeliveryReceiveActor.cs",
 "region":  {
 "startLine":  26,
 "startColumn":  13,
@@ -17,7 +17,7 @@
 "id":  "S3253",
 "message":  "Remove this redundant 'base()' call.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\AtLeastOnceDeliveryReceiveActor.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\AtLeastOnceDeliveryReceiveActor.cs",
 "region":  {
 "startLine":  33,
 "startColumn":  13,

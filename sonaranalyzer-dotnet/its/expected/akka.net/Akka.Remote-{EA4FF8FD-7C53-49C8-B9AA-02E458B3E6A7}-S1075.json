@@ -4,7 +4,7 @@
 "id":  "S1075",
 "message":  "Refactor your code not to use hardcoded absolute paths or URIs.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\Transport\TransportAdapters.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\TransportAdapters.cs",
 "region":  {
 "startLine":  315,
 "startColumn":  42,

@@ -4,7 +4,7 @@
 "id":  "S2325",
 "message":  "Make 'H' a static method.",
 "location":  {
-"uri":  "Nancy\src\Nancy.ViewEngines.Spark\NancySparkView.cs",
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark\NancySparkView.cs",
 "region":  {
 "startLine":  28,
 "startColumn":  23,
@@ -17,7 +17,7 @@
 "id":  "S2325",
 "message":  "Make 'HTML' a static method.",
 "location":  {
-"uri":  "Nancy\src\Nancy.ViewEngines.Spark\NancySparkView.cs",
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark\NancySparkView.cs",
 "region":  {
 "startLine":  33,
 "startColumn":  23,

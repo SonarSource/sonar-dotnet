@@ -4,7 +4,7 @@
 "id":  "S1226",
 "message":  "Introduce a new variable instead of reusing the parameter 'bytAudioIndex'.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDVD.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
 "region":  {
 "startLine":  67,
 "startColumn":  21,
@@ -17,7 +17,7 @@
 "id":  "S1226",
 "message":  "Introduce a new variable instead of reusing the parameter 'bytSubPicIndex'.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDVD.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
 "region":  {
 "startLine":  94,
 "startColumn":  21,
@@ -30,7 +30,7 @@
 "id":  "S1226",
 "message":  "Introduce a new variable instead of reusing the parameter 'bytProChainIndex'.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDVD.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
 "region":  {
 "startLine":  153,
 "startColumn":  21,
@@ -43,7 +43,7 @@
 "id":  "S1226",
 "message":  "Introduce a new variable instead of reusing the parameter 'sPath'.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
 "region":  {
 "startLine":  33,
 "startColumn":  69,
@@ -56,7 +56,7 @@
 "id":  "S1226",
 "message":  "Introduce a new variable instead of reusing the parameter 'sPath'.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
 "region":  {
 "startLine":  34,
 "startColumn":  135,
@@ -69,7 +69,7 @@
 "id":  "S1226",
 "message":  "Introduce a new variable instead of reusing the parameter 'sPath'.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
 "region":  {
 "startLine":  35,
 "startColumn":  71,
@@ -82,7 +82,7 @@
 "id":  "S1226",
 "message":  "Introduce a new variable instead of reusing the parameter 'sPath'.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
 "region":  {
 "startLine":  37,
 "startColumn":  69,
@@ -95,7 +95,7 @@
 "id":  "S1226",
 "message":  "Introduce a new variable instead of reusing the parameter 'sPath'.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
 "region":  {
 "startLine":  38,
 "startColumn":  45,
@@ -108,7 +108,7 @@
 "id":  "S1226",
 "message":  "Introduce a new variable instead of reusing the parameter 'filename'.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
 "region":  {
 "startLine":  112,
 "startColumn":  13,
@@ -121,7 +121,7 @@
 "id":  "S1226",
 "message":  "Introduce a new variable instead of reusing the parameter 'filename'.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
 "region":  {
 "startLine":  113,
 "startColumn":  13,
@@ -134,7 +134,7 @@
 "id":  "S1226",
 "message":  "Introduce a new variable instead of reusing the parameter 'filename'.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
 "region":  {
 "startLine":  115,
 "startColumn":  13,
@@ -147,7 +147,7 @@
 "id":  "S1226",
 "message":  "Introduce a new variable instead of reusing the parameter 'filename'.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
 "region":  {
 "startLine":  116,
 "startColumn":  13,
@@ -160,7 +160,7 @@
 "id":  "S1226",
 "message":  "Introduce a new variable instead of reusing the parameter 'filename'.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
 "region":  {
 "startLine":  117,
 "startColumn":  13,
@@ -173,7 +173,7 @@
 "id":  "S1226",
 "message":  "Introduce a new variable instead of reusing the parameter 'filename'.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
 "region":  {
 "startLine":  118,
 "startColumn":  13,
@@ -186,7 +186,7 @@
 "id":  "S1226",
 "message":  "Introduce a new variable instead of reusing the parameter 'filename'.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
 "region":  {
 "startLine":  119,
 "startColumn":  13,
@@ -199,7 +199,7 @@
 "id":  "S1226",
 "message":  "Introduce a new variable instead of reusing the parameter 'filename'.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
 "region":  {
 "startLine":  120,
 "startColumn":  13,
@@ -212,7 +212,7 @@
 "id":  "S1226",
 "message":  "Introduce a new variable instead of reusing the parameter 'value'.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
 "region":  {
 "startLine":  1156,
 "startColumn":  17,
@@ -225,7 +225,7 @@
 "id":  "S1226",
 "message":  "Introduce a new variable instead of reusing the parameter 'value'.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
 "region":  {
 "startLine":  1175,
 "startColumn":  17,
@@ -238,7 +238,7 @@
 "id":  "S1226",
 "message":  "Introduce a new variable instead of reusing the parameter 'value'.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
 "region":  {
 "startLine":  1194,
 "startColumn":  17,
@@ -251,7 +251,7 @@
 "id":  "S1226",
 "message":  "Introduce a new variable instead of reusing the parameter 'sFormat'.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
 "region":  {
 "startLine":  342,
 "startColumn":  25,
@@ -264,7 +264,7 @@
 "id":  "S1226",
 "message":  "Introduce a new variable instead of reusing the parameter 'sFormat'.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
 "region":  {
 "startLine":  344,
 "startColumn":  25,
@@ -277,7 +277,7 @@
 "id":  "S1226",
 "message":  "Introduce a new variable instead of reusing the parameter 'sFormat'.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
 "region":  {
 "startLine":  354,
 "startColumn":  17,
@@ -290,7 +290,7 @@
 "id":  "S1226",
 "message":  "Introduce a new variable instead of reusing the parameter 'MinEp'.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
 "region":  {
 "startLine":  111,
 "startColumn":  29,
@@ -303,7 +303,7 @@
 "id":  "S1226",
 "message":  "Introduce a new variable instead of reusing the parameter 'bSingle'.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
 "region":  {
 "startLine":  774,
 "startColumn":  17,
@@ -316,7 +316,7 @@
 "id":  "S1226",
 "message":  "Introduce a new variable instead of reusing the parameter 'bSingle'.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
 "region":  {
 "startLine":  777,
 "startColumn":  17,
@@ -329,7 +329,7 @@
 "id":  "S1226",
 "message":  "Introduce a new variable instead of reusing the parameter 'sURL'.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
 "region":  {
 "startLine":  61,
 "startColumn":  13,
@@ -342,7 +342,7 @@
 "id":  "S1226",
 "message":  "Introduce a new variable instead of reusing the parameter 'sURL'.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
 "region":  {
 "startLine":  63,
 "startColumn":  13,
@@ -355,7 +355,7 @@
 "id":  "S1226",
 "message":  "Introduce a new variable instead of reusing the parameter 'movieName'.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
 "region":  {
 "startLine":  143,
 "startColumn":  29,
@@ -368,7 +368,7 @@
 "id":  "S1226",
 "message":  "Introduce a new variable instead of reusing the parameter 'movieName'.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
 "region":  {
 "startLine":  145,
 "startColumn":  29,
@@ -381,7 +381,7 @@
 "id":  "S1226",
 "message":  "Introduce a new variable instead of reusing the parameter 'movieName'.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
 "region":  {
 "startLine":  150,
 "startColumn":  17,
@@ -394,7 +394,7 @@
 "id":  "S1226",
 "message":  "Introduce a new variable instead of reusing the parameter 'movieName'.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
 "region":  {
 "startLine":  154,
 "startColumn":  21,
@@ -407,7 +407,7 @@
 "id":  "S1226",
 "message":  "Introduce a new variable instead of reusing the parameter 'movieName'.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
 "region":  {
 "startLine":  161,
 "startColumn":  30,
@@ -420,7 +420,7 @@
 "id":  "S1226",
 "message":  "Introduce a new variable instead of reusing the parameter 'movieName'.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
 "region":  {
 "startLine":  162,
 "startColumn":  30,
@@ -433,7 +433,7 @@
 "id":  "S1226",
 "message":  "Introduce a new variable instead of reusing the parameter 'TVEpName'.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
 "region":  {
 "startLine":  205,
 "startColumn":  25,
@@ -446,7 +446,7 @@
 "id":  "S1226",
 "message":  "Introduce a new variable instead of reusing the parameter 'TVEpName'.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
 "region":  {
 "startLine":  207,
 "startColumn":  25,
@@ -459,7 +459,7 @@
 "id":  "S1226",
 "message":  "Introduce a new variable instead of reusing the parameter 'TVEpName'.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
 "region":  {
 "startLine":  214,
 "startColumn":  58,
@@ -472,7 +472,7 @@
 "id":  "S1226",
 "message":  "Introduce a new variable instead of reusing the parameter 'TVEpName'.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
 "region":  {
 "startLine":  218,
 "startColumn":  17,
@@ -485,7 +485,7 @@
 "id":  "S1226",
 "message":  "Introduce a new variable instead of reusing the parameter 'TVEpName'.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
 "region":  {
 "startLine":  221,
 "startColumn":  30,
@@ -498,7 +498,7 @@
 "id":  "S1226",
 "message":  "Introduce a new variable instead of reusing the parameter 'TVShowName'.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
 "region":  {
 "startLine":  250,
 "startColumn":  25,
@@ -511,7 +511,7 @@
 "id":  "S1226",
 "message":  "Introduce a new variable instead of reusing the parameter 'TVShowName'.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
 "region":  {
 "startLine":  252,
 "startColumn":  25,
@@ -524,7 +524,7 @@
 "id":  "S1226",
 "message":  "Introduce a new variable instead of reusing the parameter 'TVShowName'.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
 "region":  {
 "startLine":  259,
 "startColumn":  17,
@@ -537,7 +537,7 @@
 "id":  "S1226",
 "message":  "Introduce a new variable instead of reusing the parameter 'TVShowName'.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
 "region":  {
 "startLine":  262,
 "startColumn":  30,
@@ -550,7 +550,7 @@
 "id":  "S1226",
 "message":  "Introduce a new variable instead of reusing the parameter 'sXML'.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIXML.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIXML.vb",
 "region":  {
 "startLine":  455,
 "startColumn":  13,

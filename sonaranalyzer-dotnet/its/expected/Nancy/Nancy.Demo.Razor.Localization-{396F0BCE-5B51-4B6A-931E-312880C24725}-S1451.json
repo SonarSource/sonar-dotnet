@@ -4,7 +4,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Demo.Razor.Localization\CustomResourceAssemblyProvider.cs",
+"uri":  "sources\Nancy\src\Nancy.Demo.Razor.Localization\CustomResourceAssemblyProvider.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -17,7 +17,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Demo.Razor.Localization\DemoBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Demo.Razor.Localization\DemoBootstrapper.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -30,7 +30,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Demo.Razor.Localization\Modules\HomeModule.cs",
+"uri":  "sources\Nancy\src\Nancy.Demo.Razor.Localization\Modules\HomeModule.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,

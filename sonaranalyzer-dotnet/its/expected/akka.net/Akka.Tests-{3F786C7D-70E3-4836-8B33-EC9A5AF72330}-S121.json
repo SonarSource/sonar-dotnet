@@ -4,7 +4,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorDslSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ActorDslSpec.cs",
 "region":  {
 "startLine":  34,
 "startColumn":  17,
@@ -17,7 +17,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorDslSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ActorDslSpec.cs",
 "region":  {
 "startLine":  36,
 "startColumn":  17,
@@ -30,7 +30,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorDslSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ActorDslSpec.cs",
 "region":  {
 "startLine":  38,
 "startColumn":  22,
@@ -43,7 +43,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorDslSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ActorDslSpec.cs",
 "region":  {
 "startLine":  42,
 "startColumn":  25,
@@ -56,7 +56,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorDslSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ActorDslSpec.cs",
 "region":  {
 "startLine":  44,
 "startColumn":  25,
@@ -69,7 +69,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorDslSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ActorDslSpec.cs",
 "region":  {
 "startLine":  46,
 "startColumn":  30,
@@ -82,7 +82,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorDslSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ActorDslSpec.cs",
 "region":  {
 "startLine":  49,
 "startColumn":  22,
@@ -95,7 +95,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorPathSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ActorPathSpec.cs",
 "region":  {
 "startLine":  30,
 "startColumn":  13,
@@ -108,7 +108,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorRefSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ActorRefSpec.cs",
 "region":  {
 "startLine":  538,
 "startColumn":  21,
@@ -121,7 +121,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorRefSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ActorRefSpec.cs",
 "region":  {
 "startLine":  539,
 "startColumn":  26,
@@ -134,7 +134,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\Cancellation\CancelableTests.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\Cancellation\CancelableTests.cs",
 "region":  {
 "startLine":  64,
 "startColumn":  17,
@@ -147,7 +147,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\Cancellation\CancelableTests.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\Cancellation\CancelableTests.cs",
 "region":  {
 "startLine":  91,
 "startColumn":  21,
@@ -160,7 +160,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\DeathWatchSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\DeathWatchSpec.cs",
 "region":  {
 "startLine":  173,
 "startColumn":  29,
@@ -173,7 +173,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\DeathWatchSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\DeathWatchSpec.cs",
 "region":  {
 "startLine":  174,
 "startColumn":  29,
@@ -186,7 +186,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\DeathWatchSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\DeathWatchSpec.cs",
 "region":  {
 "startLine":  380,
 "startColumn":  17,
@@ -199,7 +199,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'else' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\DeathWatchSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\DeathWatchSpec.cs",
 "region":  {
 "startLine":  382,
 "startColumn":  17,
@@ -212,7 +212,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\FSMTimingSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\FSMTimingSpec.cs",
 "region":  {
 "startLine":  204,
 "startColumn":  17,
@@ -225,7 +225,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\FSMTimingSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\FSMTimingSpec.cs",
 "region":  {
 "startLine":  335,
 "startColumn":  21,
@@ -238,7 +238,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\FSMTransitionSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\FSMTransitionSpec.cs",
 "region":  {
 "startLine":  106,
 "startColumn":  21,
@@ -251,7 +251,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\FSMTransitionSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\FSMTransitionSpec.cs",
 "region":  {
 "startLine":  112,
 "startColumn":  21,
@@ -264,7 +264,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\FSMTransitionSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\FSMTransitionSpec.cs",
 "region":  {
 "startLine":  118,
 "startColumn":  21,
@@ -277,7 +277,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\FSMTransitionSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\FSMTransitionSpec.cs",
 "region":  {
 "startLine":  152,
 "startColumn":  21,
@@ -290,7 +290,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'foreach' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\InboxSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\InboxSpec.cs",
 "region":  {
 "startLine":  90,
 "startColumn":  17,
@@ -303,7 +303,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\Stash\ActorWithStashSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\Stash\ActorWithStashSpec.cs",
 "region":  {
 "startLine":  260,
 "startColumn":  17,
@@ -316,7 +316,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\Stash\ActorWithStashSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\Stash\ActorWithStashSpec.cs",
 "region":  {
 "startLine":  284,
 "startColumn":  17,
@@ -329,7 +329,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\SupervisorHierarchySpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\SupervisorHierarchySpec.cs",
 "region":  {
 "startLine":  265,
 "startColumn":  29,
@@ -342,7 +342,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\SupervisorHierarchySpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\SupervisorHierarchySpec.cs",
 "region":  {
 "startLine":  267,
 "startColumn":  29,
@@ -355,7 +355,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Dispatch\MailboxesSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Dispatch\MailboxesSpec.cs",
 "region":  {
 "startLine":  23,
 "startColumn":  13,
@@ -368,7 +368,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Dispatch\MailboxesSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Dispatch\MailboxesSpec.cs",
 "region":  {
 "startLine":  25,
 "startColumn":  13,
@@ -381,7 +381,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Dispatch\MailboxesSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Dispatch\MailboxesSpec.cs",
 "region":  {
 "startLine":  27,
 "startColumn":  13,
@@ -394,7 +394,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Dispatch\MailboxesSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Dispatch\MailboxesSpec.cs",
 "region":  {
 "startLine":  29,
 "startColumn":  13,
@@ -407,7 +407,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'for' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Dispatch\MailboxesSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Dispatch\MailboxesSpec.cs",
 "region":  {
 "startLine":  112,
 "startColumn":  13,
@@ -420,7 +420,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'for' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Dispatch\XUnitAsyncTestsSanityCheck.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Dispatch\XUnitAsyncTestsSanityCheck.cs",
 "region":  {
 "startLine":  31,
 "startColumn":  6,
@@ -433,7 +433,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
 "region":  {
 "startLine":  44,
 "startColumn":  17,
@@ -446,7 +446,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
 "region":  {
 "startLine":  171,
 "startColumn":  17,
@@ -459,7 +459,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
 "region":  {
 "startLine":  581,
 "startColumn":  21,
@@ -472,7 +472,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'while' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
 "region":  {
 "startLine":  595,
 "startColumn":  17,
@@ -485,7 +485,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
 "region":  {
 "startLine":  620,
 "startColumn":  21,
@@ -498,7 +498,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
 "region":  {
 "startLine":  656,
 "startColumn":  21,
@@ -511,7 +511,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
 "region":  {
 "startLine":  690,
 "startColumn":  21,
@@ -524,7 +524,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
 "region":  {
 "startLine":  903,
 "startColumn":  17,
@@ -537,7 +537,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
 "region":  {
 "startLine":  926,
 "startColumn":  21,
@@ -550,7 +550,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
 "region":  {
 "startLine":  933,
 "startColumn":  21,
@@ -563,7 +563,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
 "region":  {
 "startLine":  955,
 "startColumn":  13,
@@ -576,7 +576,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'else' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
 "region":  {
 "startLine":  956,
 "startColumn":  13,
@@ -589,7 +589,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
 "region":  {
 "startLine":  972,
 "startColumn":  13,
@@ -602,7 +602,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
 "region":  {
 "startLine":  985,
 "startColumn":  17,
@@ -615,7 +615,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
 "region":  {
 "startLine":  986,
 "startColumn":  17,
@@ -628,7 +628,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
 "region":  {
 "startLine":  999,
 "startColumn":  13,
@@ -641,7 +641,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\IO\TcpIntegrationSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\IO\TcpIntegrationSpec.cs",
 "region":  {
 "startLine":  319,
 "startColumn":  17,
@@ -654,7 +654,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\IO\UdpIntegrationSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\IO\UdpIntegrationSpec.cs",
 "region":  {
 "startLine":  95,
 "startColumn":  17,
@@ -667,7 +667,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'else' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\IO\UdpIntegrationSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\IO\UdpIntegrationSpec.cs",
 "region":  {
 "startLine":  96,
 "startColumn":  17,
@@ -680,7 +680,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\MatchHandler\MatchHandlerBuilderTests.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\MatchHandler\MatchHandlerBuilderTests.cs",
 "region":  {
 "startLine":  229,
 "startColumn":  13,
@@ -693,7 +693,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'else' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\MatchHandler\MatchHandlerBuilderTests.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\MatchHandler\MatchHandlerBuilderTests.cs",
 "region":  {
 "startLine":  231,
 "startColumn":  13,
@@ -706,7 +706,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\MatchHandler\PartialActionBuilderTests.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\MatchHandler\PartialActionBuilderTests.cs",
 "region":  {
 "startLine":  450,
 "startColumn":  17,
@@ -719,7 +719,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'else' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\MatchHandler\PartialActionBuilderTests.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\MatchHandler\PartialActionBuilderTests.cs",
 "region":  {
 "startLine":  452,
 "startColumn":  17,
@@ -732,7 +732,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Routing\ListenerSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Routing\ListenerSpec.cs",
 "region":  {
 "startLine":  70,
 "startColumn":  25,
@@ -745,7 +745,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Routing\ResizerSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Routing\ResizerSpec.cs",
 "region":  {
 "startLine":  143,
 "startColumn":  25,
@@ -758,7 +758,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Routing\ResizerSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Routing\ResizerSpec.cs",
 "region":  {
 "startLine":  194,
 "startColumn":  21,
@@ -771,7 +771,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Routing\ResizerSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Routing\ResizerSpec.cs",
 "region":  {
 "startLine":  214,
 "startColumn":  21,
@@ -784,7 +784,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Serialization\SerializationSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Serialization\SerializationSpec.cs",
 "region":  {
 "startLine":  27,
 "startColumn":  17,
@@ -797,7 +797,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Serialization\SerializationSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Serialization\SerializationSpec.cs",
 "region":  {
 "startLine":  28,
 "startColumn":  17,
@@ -810,7 +810,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Serialization\SerializationSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Serialization\SerializationSpec.cs",
 "region":  {
 "startLine":  34,
 "startColumn":  17,
@@ -823,7 +823,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Serialization\SerializationSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Serialization\SerializationSpec.cs",
 "region":  {
 "startLine":  35,
 "startColumn":  17,
@@ -836,7 +836,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Serialization\SerializationSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Serialization\SerializationSpec.cs",
 "region":  {
 "startLine":  36,
 "startColumn":  17,
@@ -849,7 +849,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Serialization\SerializationSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Serialization\SerializationSpec.cs",
 "region":  {
 "startLine":  86,
 "startColumn":  17,
@@ -862,7 +862,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Serialization\SerializationSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Serialization\SerializationSpec.cs",
 "region":  {
 "startLine":  87,
 "startColumn":  17,
@@ -875,7 +875,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Serialization\SerializationSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Serialization\SerializationSpec.cs",
 "region":  {
 "startLine":  88,
 "startColumn":  17,
@@ -888,7 +888,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Serialization\SerializationSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Serialization\SerializationSpec.cs",
 "region":  {
 "startLine":  124,
 "startColumn":  17,
@@ -901,7 +901,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Serialization\SerializationSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Serialization\SerializationSpec.cs",
 "region":  {
 "startLine":  125,
 "startColumn":  17,
@@ -914,7 +914,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Serialization\SerializationSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Serialization\SerializationSpec.cs",
 "region":  {
 "startLine":  126,
 "startColumn":  17,
@@ -927,7 +927,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\TestUtils\Comparable.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\TestUtils\Comparable.cs",
 "region":  {
 "startLine":  14,
 "startColumn":  13,

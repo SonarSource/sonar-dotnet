@@ -4,7 +4,7 @@
 "id":  "S3442",
 "message":  "Change the visibility of this constructor to 'protected'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Serialization\Serializer.cs",
+"uri":  "sources\akka.net\src\core\Akka\Serialization\Serializer.cs",
 "region":  {
 "startLine":  44,
 "startColumn":  9,

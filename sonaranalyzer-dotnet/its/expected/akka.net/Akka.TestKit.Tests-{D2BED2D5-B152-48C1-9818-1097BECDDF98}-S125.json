@@ -4,7 +4,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.TestKit.Tests\TestActorRefTests\TestActorRefSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.TestKit.Tests\TestActorRefTests\TestActorRefSpec.cs",
 "region":  {
 "startLine":  35,
 "startColumn":  13,
@@ -17,7 +17,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.TestKit.Tests\TestActorRefTests\TestActorRefSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.TestKit.Tests\TestActorRefTests\TestActorRefSpec.cs",
 "region":  {
 "startLine":  48,
 "startColumn":  13,
@@ -30,7 +30,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.TestKit.Tests\TestActorRefTests\TestActorRefSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.TestKit.Tests\TestActorRefTests\TestActorRefSpec.cs",
 "region":  {
 "startLine":  105,
 "startColumn":  13,
@@ -43,7 +43,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.TestKit.Tests\TestActorRefTests\TestActorRefSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.TestKit.Tests\TestActorRefTests\TestActorRefSpec.cs",
 "region":  {
 "startLine":  118,
 "startColumn":  13,
@@ -56,7 +56,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.TestKit.Tests\TestEventListenerTests\ExceptionEventFilterTests.cs",
+"uri":  "sources\akka.net\src\core\Akka.TestKit.Tests\TestEventListenerTests\ExceptionEventFilterTests.cs",
 "region":  {
 "startLine":  17,
 "startColumn":  5,

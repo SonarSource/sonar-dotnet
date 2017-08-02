@@ -5,7 +5,7 @@
 "message":  "Change this condition so that it does not always evaluate to 'true'; some subsequent code is never executed.",
 "location":  [
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\DataTypes.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\DataTypes.cs",
 "region":  {
 "startLine":  437,
 "startColumn":  48,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\DataTypes.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\DataTypes.cs",
 "region":  {
 "startLine":  437,
 "startColumn":  96,
@@ -29,7 +29,7 @@
 "message":  "Change this condition so that it does not always evaluate to 'true'; some subsequent code is never executed.",
 "location":  [
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\DataTypes.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\DataTypes.cs",
 "region":  {
 "startLine":  499,
 "startColumn":  48,
@@ -38,7 +38,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\DataTypes.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\DataTypes.cs",
 "region":  {
 "startLine":  499,
 "startColumn":  96,

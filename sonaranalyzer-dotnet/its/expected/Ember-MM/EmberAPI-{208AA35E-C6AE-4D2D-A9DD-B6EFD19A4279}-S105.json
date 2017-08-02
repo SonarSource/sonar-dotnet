@@ -4,7 +4,7 @@
 "id":  "S105",
 "message":  "Replace all tab characters in this file by sequences of white-spaces.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIImages.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
 "region":  {
 "startLine":  438,
 "startColumn":  1,
@@ -17,7 +17,7 @@
 "id":  "S105",
 "message":  "Replace all tab characters in this file by sequences of white-spaces.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIInterfaces.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIInterfaces.vb",
 "region":  {
 "startLine":  54,
 "startColumn":  1,
@@ -30,7 +30,7 @@
 "id":  "S105",
 "message":  "Replace all tab characters in this file by sequences of white-spaces.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPILocalization.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPILocalization.vb",
 "region":  {
 "startLine":  165,
 "startColumn":  1,
@@ -43,7 +43,7 @@
 "id":  "S105",
 "message":  "Replace all tab characters in this file by sequences of white-spaces.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
 "region":  {
 "startLine":  124,
 "startColumn":  1,

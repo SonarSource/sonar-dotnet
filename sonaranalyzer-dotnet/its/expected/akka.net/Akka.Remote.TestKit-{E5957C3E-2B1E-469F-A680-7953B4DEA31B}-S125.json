@@ -4,7 +4,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\Conductor.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Conductor.cs",
 "region":  {
 "startLine":  133,
 "startColumn":  1,
@@ -17,7 +17,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
 "region":  {
 "startLine":  474,
 "startColumn":  29,

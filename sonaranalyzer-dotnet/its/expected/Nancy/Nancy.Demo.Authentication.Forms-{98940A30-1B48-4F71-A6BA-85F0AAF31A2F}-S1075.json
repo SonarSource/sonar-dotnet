@@ -4,7 +4,7 @@
 "id":  "S1075",
 "message":  "Refactor your code not to use hardcoded absolute paths or URIs.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Demo.Authentication.Forms\MainModule.cs",
+"uri":  "sources\Nancy\src\Nancy.Demo.Authentication.Forms\MainModule.cs",
 "region":  {
 "startLine":  30,
 "startColumn":  53,

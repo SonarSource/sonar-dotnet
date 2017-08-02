@@ -4,7 +4,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.Tests\AccrualFailureDetectorSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests\AccrualFailureDetectorSpec.cs",
 "region":  {
 "startLine":  252,
 "startColumn":  80,
@@ -17,7 +17,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.Tests\AccrualFailureDetectorSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests\AccrualFailureDetectorSpec.cs",
 "region":  {
 "startLine":  285,
 "startColumn":  83,
@@ -30,7 +30,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.Tests\AccrualFailureDetectorSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests\AccrualFailureDetectorSpec.cs",
 "region":  {
 "startLine":  303,
 "startColumn":  104,
@@ -43,7 +43,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.Tests\AckedDeliverySpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests\AckedDeliverySpec.cs",
 "region":  {
 "startLine":  302,
 "startColumn":  45,
@@ -56,7 +56,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.Tests\AckedDeliverySpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests\AckedDeliverySpec.cs",
 "region":  {
 "startLine":  302,
 "startColumn":  58,
@@ -69,7 +69,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.Tests\Transport\GenericTransportSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests\Transport\GenericTransportSpec.cs",
 "region":  {
 "startLine":  29,
 "startColumn":  59,

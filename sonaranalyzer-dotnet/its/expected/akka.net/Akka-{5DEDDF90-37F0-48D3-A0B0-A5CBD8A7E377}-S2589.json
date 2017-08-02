@@ -4,7 +4,7 @@
 "id":  "S2589",
 "message":  "Change this condition so that it does not always evaluate to 'true'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Util\MonoConcurrentQueue.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\MonoConcurrentQueue.cs",
 "region":  {
 "startLine":  157,
 "startColumn":  21,
@@ -17,7 +17,7 @@
 "id":  "S2589",
 "message":  "Change this condition so that it does not always evaluate to 'true'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Util\MonoConcurrentQueue.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\MonoConcurrentQueue.cs",
 "region":  {
 "startLine":  188,
 "startColumn":  21,

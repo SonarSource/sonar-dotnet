@@ -4,7 +4,7 @@
 "id":  "S2325",
 "message":  "Make 'WithSerilog' a static method.",
 "location":  {
-"uri":  "akka.net\src\contrib\loggers\Akka.Logger.Serilog\SerilogLogger.cs",
+"uri":  "sources\akka.net\src\contrib\loggers\Akka.Logger.Serilog\SerilogLogger.cs",
 "region":  {
 "startLine":  25,
 "startColumn":  22,
@@ -17,7 +17,7 @@
 "id":  "S2325",
 "message":  "Make 'SetContextFromLogEvent' a static method.",
 "location":  {
-"uri":  "akka.net\src\contrib\loggers\Akka.Logger.Serilog\SerilogLogger.cs",
+"uri":  "sources\akka.net\src\contrib\loggers\Akka.Logger.Serilog\SerilogLogger.cs",
 "region":  {
 "startLine":  31,
 "startColumn":  25,

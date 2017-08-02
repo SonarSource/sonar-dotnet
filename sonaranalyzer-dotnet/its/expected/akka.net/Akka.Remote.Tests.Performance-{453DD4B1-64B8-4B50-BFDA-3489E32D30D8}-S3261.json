@@ -4,7 +4,7 @@
 "id":  "S3261",
 "message":  "Remove this empty namespace.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.Tests.Performance\Transports\HeliosRemoteMessagingThroughputSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests.Performance\Transports\HeliosRemoteMessagingThroughputSpec.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,

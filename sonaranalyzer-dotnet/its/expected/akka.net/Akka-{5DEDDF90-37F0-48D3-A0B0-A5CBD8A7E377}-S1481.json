@@ -4,7 +4,7 @@
 "id":  "S1481",
 "message":  "Remove this unused 'defaultDispatcher' local variable.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\ActorRefProvider.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorRefProvider.cs",
 "region":  {
 "startLine":  276,
 "startColumn":  17,
@@ -17,7 +17,7 @@
 "id":  "S1481",
 "message":  "Remove this unused 'mailboxType' local variable.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\ActorRefProvider.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorRefProvider.cs",
 "region":  {
 "startLine":  384,
 "startColumn":  25,
@@ -30,7 +30,7 @@
 "id":  "S1481",
 "message":  "Remove this unused 'original' local variable.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\Props.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\Props.cs",
 "region":  {
 "startLine":  462,
 "startColumn":  17,
@@ -43,7 +43,7 @@
 "id":  "S1481",
 "message":  "Remove this unused 'newWorker' local variable.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Helios.Concurrency.DedicatedThreadPool.cs",
+"uri":  "sources\akka.net\src\core\Akka\Helios.Concurrency.DedicatedThreadPool.cs",
 "region":  {
 "startLine":  250,
 "startColumn":  33,
@@ -56,7 +56,7 @@
 "id":  "S1481",
 "message":  "Remove this unused 'localAddress' local variable.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\IO\TcpListener.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpListener.cs",
 "region":  {
 "startLine":  71,
 "startColumn":  17,
@@ -69,7 +69,7 @@
 "id":  "S1481",
 "message":  "Remove this unused 'localAddress' local variable.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\IO\UdpListener.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\UdpListener.cs",
 "region":  {
 "startLine":  47,
 "startColumn":  17,

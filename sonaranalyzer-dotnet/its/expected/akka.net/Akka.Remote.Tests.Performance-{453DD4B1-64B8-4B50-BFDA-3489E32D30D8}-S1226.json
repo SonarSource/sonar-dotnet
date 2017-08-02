@@ -4,7 +4,7 @@
 "id":  "S1226",
 "message":  "Introduce a new variable instead of reusing the parameter 'port'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.Tests.Performance\Transports\TestTransportAssociationStressSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests.Performance\Transports\TestTransportAssociationStressSpec.cs",
 "region":  {
 "startLine":  36,
 "startColumn":  13,
@@ -17,7 +17,7 @@
 "id":  "S1226",
 "message":  "Introduce a new variable instead of reusing the parameter 'port'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.Tests.Performance\Transports\TestTransportRemoteMessagingThroughputSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests.Performance\Transports\TestTransportRemoteMessagingThroughputSpec.cs",
 "region":  {
 "startLine":  33,
 "startColumn":  13,

@@ -5,7 +5,7 @@
 "message":  "Change either the name of property 'ApplicationStartupTasks' or the name of method 'GetApplicationStartupTasks' to make them distinguishable.",
 "location":  [
 {
-"uri":  "Nancy\src\Nancy\Bootstrapper\NancyBootstrapperBase.cs",
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\NancyBootstrapperBase.cs",
 "region":  {
 "startLine":  167,
 "startColumn":  45,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy\Bootstrapper\NancyBootstrapperBase.cs",
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\NancyBootstrapperBase.cs",
 "region":  {
 "startLine":  338,
 "startColumn":  61,
@@ -29,7 +29,7 @@
 "message":  "Change either the name of property 'RegistrationTasks' or the name of method 'GetRegistrationTasks' to make them distinguishable.",
 "location":  [
 {
-"uri":  "Nancy\src\Nancy\Bootstrapper\NancyBootstrapperBase.cs",
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\NancyBootstrapperBase.cs",
 "region":  {
 "startLine":  183,
 "startColumn":  45,
@@ -38,7 +38,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy\Bootstrapper\NancyBootstrapperBase.cs",
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\NancyBootstrapperBase.cs",
 "region":  {
 "startLine":  352,
 "startColumn":  56,
@@ -53,7 +53,7 @@
 "message":  "Change either the name of property 'ApplicationContainer' or the name of method 'GetApplicationContainer' to make them distinguishable.",
 "location":  [
 {
-"uri":  "Nancy\src\Nancy\Bootstrapper\NancyBootstrapperBase.cs",
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\NancyBootstrapperBase.cs",
 "region":  {
 "startLine":  80,
 "startColumn":  30,
@@ -62,7 +62,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy\Bootstrapper\NancyBootstrapperBase.cs",
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\NancyBootstrapperBase.cs",
 "region":  {
 "startLine":  540,
 "startColumn":  39,

@@ -4,7 +4,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "akka.net\src\examples\Chat\ChatServer\Program.cs",
+"uri":  "sources\akka.net\src\examples\Chat\ChatServer\Program.cs",
 "region":  {
 "startLine":  74,
 "startColumn":  17,

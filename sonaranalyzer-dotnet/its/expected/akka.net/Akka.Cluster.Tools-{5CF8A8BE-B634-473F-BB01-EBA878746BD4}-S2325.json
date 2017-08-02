@@ -4,7 +4,7 @@
 "id":  "S2325",
 "message":  "Make 'GetNodes' a static method.",
 "location":  {
-"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterReceptionist.cs",
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterReceptionist.cs",
 "region":  {
 "startLine":  246,
 "startColumn":  48,
@@ -17,7 +17,7 @@
 "id":  "S2325",
 "message":  "Make 'ContactsToProto' a static method.",
 "location":  {
-"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\Serialization\ClusterClientMessageSerializer.cs",
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\Serialization\ClusterClientMessageSerializer.cs",
 "region":  {
 "startLine":  64,
 "startColumn":  26,
@@ -30,7 +30,7 @@
 "id":  "S2325",
 "message":  "Make 'SelectRandomNode' a static method.",
 "location":  {
-"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\DistributedPubSubMediator.cs",
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\DistributedPubSubMediator.cs",
 "region":  {
 "startLine":  509,
 "startColumn":  25,
@@ -43,7 +43,7 @@
 "id":  "S2325",
 "message":  "Make 'Compress' a static method.",
 "location":  {
-"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Serialization\DistributedPubSubMessageSerializer.cs",
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Serialization\DistributedPubSubMessageSerializer.cs",
 "region":  {
 "startLine":  89,
 "startColumn":  24,
@@ -56,7 +56,7 @@
 "id":  "S2325",
 "message":  "Make 'Decompress' a static method.",
 "location":  {
-"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Serialization\DistributedPubSubMessageSerializer.cs",
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Serialization\DistributedPubSubMessageSerializer.cs",
 "region":  {
 "startLine":  101,
 "startColumn":  24,
@@ -69,7 +69,7 @@
 "id":  "S2325",
 "message":  "Make 'AddressToProto' a static method.",
 "location":  {
-"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Serialization\DistributedPubSubMessageSerializer.cs",
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Serialization\DistributedPubSubMessageSerializer.cs",
 "region":  {
 "startLine":  112,
 "startColumn":  33,
@@ -82,7 +82,7 @@
 "id":  "S2325",
 "message":  "Make 'AddressFromProto' a static method.",
 "location":  {
-"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Serialization\DistributedPubSubMessageSerializer.cs",
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Serialization\DistributedPubSubMessageSerializer.cs",
 "region":  {
 "startLine":  124,
 "startColumn":  31,
@@ -95,7 +95,7 @@
 "id":  "S2325",
 "message":  "Make 'MemberAddressOrDefault' a static method.",
 "location":  {
-"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\OldestChangedBuffer.cs",
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\OldestChangedBuffer.cs",
 "region":  {
 "startLine":  88,
 "startColumn":  25,

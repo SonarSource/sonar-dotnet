@@ -4,7 +4,7 @@
 "id":  "S1172",
 "message":  "Remove this unused method parameter 'rebalanceEntities'.",
 "location":  {
-"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Sharding.Tests\ClusterShardingSpec.cs",
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding.Tests\ClusterShardingSpec.cs",
 "region":  {
 "startLine":  316,
 "startColumn":  57,

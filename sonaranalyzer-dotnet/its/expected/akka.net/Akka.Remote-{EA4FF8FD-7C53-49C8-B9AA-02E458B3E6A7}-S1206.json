@@ -4,7 +4,7 @@
 "id":  "S1206",
 "message":  "This class overrides 'GetHashCode' and should therefore also override 'Equals'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
 "region":  {
 "startLine":  223,
 "startColumn":  29,

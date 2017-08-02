@@ -4,7 +4,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'System.IO.Stream' instead of 'System.IO.MemoryStream'.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\ShouldExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\ShouldExtensions.cs",
 "region":  {
 "startLine":  189,
 "startColumn":  58,

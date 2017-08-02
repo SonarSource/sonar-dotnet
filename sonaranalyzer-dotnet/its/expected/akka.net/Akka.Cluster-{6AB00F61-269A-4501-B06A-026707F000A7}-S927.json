@@ -4,7 +4,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'a' to 'x' to match the interface declaration.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\Member.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
 "region":  {
 "startLine":  147,
 "startColumn":  39,
@@ -17,7 +17,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'b' to 'y' to match the interface declaration.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\Member.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
 "region":  {
 "startLine":  147,
 "startColumn":  49,
@@ -30,7 +30,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'that' to 'other' to match the interface declaration.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\Member.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
 "region":  {
 "startLine":  271,
 "startColumn":  44,

@@ -4,7 +4,7 @@
 "id":  "S3457",
 "message":  "Remove this formatting call and simply use the input string.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
 "region":  {
 "startLine":  247,
 "startColumn":  24,

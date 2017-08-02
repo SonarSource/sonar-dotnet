@@ -4,7 +4,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy.ViewEngines.Nustache\NustacheViewEngine.cs",
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Nustache\NustacheViewEngine.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -17,7 +17,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\SharedAssemblyInfo.cs",
+"uri":  "sources\Nancy\src\SharedAssemblyInfo.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,

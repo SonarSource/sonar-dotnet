@@ -4,7 +4,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\ActorCell.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.cs",
 "region":  {
 "startLine":  310,
 "startColumn":  28,
@@ -17,7 +17,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\ActorCell.DefaultMessages.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.DefaultMessages.cs",
 "region":  {
 "startLine":  64,
 "startColumn":  20,
@@ -30,7 +30,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\ActorCell.DefaultMessages.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.DefaultMessages.cs",
 "region":  {
 "startLine":  207,
 "startColumn":  20,
@@ -43,7 +43,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\ActorCell.DefaultMessages.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.DefaultMessages.cs",
 "region":  {
 "startLine":  240,
 "startColumn":  13,
@@ -56,7 +56,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\ActorCell.DefaultMessages.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.DefaultMessages.cs",
 "region":  {
 "startLine":  378,
 "startColumn":  20,
@@ -69,7 +69,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\ActorCell.FaultHandling.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.FaultHandling.cs",
 "region":  {
 "startLine":  73,
 "startColumn":  28,
@@ -82,7 +82,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\ActorCell.FaultHandling.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.FaultHandling.cs",
 "region":  {
 "startLine":  177,
 "startColumn":  20,
@@ -95,7 +95,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\ActorCell.FaultHandling.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.FaultHandling.cs",
 "region":  {
 "startLine":  245,
 "startColumn":  24,
@@ -108,7 +108,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\ActorCell.FaultHandling.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.FaultHandling.cs",
 "region":  {
 "startLine":  291,
 "startColumn":  20,
@@ -121,7 +121,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\ActorCell.FaultHandling.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.FaultHandling.cs",
 "region":  {
 "startLine":  364,
 "startColumn":  28,
@@ -134,7 +134,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\ActorCell.FaultHandling.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.FaultHandling.cs",
 "region":  {
 "startLine":  371,
 "startColumn":  20,
@@ -147,7 +147,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\ActorCell.FaultHandling.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.FaultHandling.cs",
 "region":  {
 "startLine":  424,
 "startColumn":  24,
@@ -160,7 +160,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\ActorCell.FaultHandling.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.FaultHandling.cs",
 "region":  {
 "startLine":  462,
 "startColumn":  13,
@@ -173,7 +173,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\ActorProducerPipeline.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorProducerPipeline.cs",
 "region":  {
 "startLine":  220,
 "startColumn":  24,
@@ -186,7 +186,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\ActorProducerPipeline.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorProducerPipeline.cs",
 "region":  {
 "startLine":  240,
 "startColumn":  24,
@@ -199,7 +199,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\Internal\ActorSystemImpl.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\Internal\ActorSystemImpl.cs",
 "region":  {
 "startLine":  159,
 "startColumn":  23,
@@ -212,7 +212,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\RepointableActorRef.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\RepointableActorRef.cs",
 "region":  {
 "startLine":  371,
 "startColumn":  28,
@@ -225,7 +225,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\Scheduler\DedicatedThreadScheduler.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\DedicatedThreadScheduler.cs",
 "region":  {
 "startLine":  118,
 "startColumn":  24,
@@ -238,7 +238,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\Scheduler\DedicatedThreadScheduler.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\DedicatedThreadScheduler.cs",
 "region":  {
 "startLine":  145,
 "startColumn":  24,
@@ -251,7 +251,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\SupervisorStrategy.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\SupervisorStrategy.cs",
 "region":  {
 "startLine":  165,
 "startColumn":  20,
@@ -264,7 +264,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Dispatch\CachingConfig.cs",
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\CachingConfig.cs",
 "region":  {
 "startLine":  123,
 "startColumn":  32,
@@ -277,7 +277,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Dispatch\CachingConfig.cs",
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\CachingConfig.cs",
 "region":  {
 "startLine":  133,
 "startColumn":  24,
@@ -290,7 +290,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Dispatch\Dispatchers.cs",
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\Dispatchers.cs",
 "region":  {
 "startLine":  34,
 "startColumn":  24,
@@ -303,7 +303,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Helios.Concurrency.DedicatedThreadPool.cs",
+"uri":  "sources\akka.net\src\core\Akka\Helios.Concurrency.DedicatedThreadPool.cs",
 "region":  {
 "startLine":  425,
 "startColumn":  32,
@@ -316,7 +316,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\IO\SelectionHandler.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\SelectionHandler.cs",
 "region":  {
 "startLine":  181,
 "startColumn":  28,
@@ -329,7 +329,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\IO\SelectionHandler.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\SelectionHandler.cs",
 "region":  {
 "startLine":  363,
 "startColumn":  23,
@@ -342,7 +342,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\IO\SelectionHandler.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\SelectionHandler.cs",
 "region":  {
 "startLine":  422,
 "startColumn":  13,
@@ -355,7 +355,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\IO\TcpConnection.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpConnection.cs",
 "region":  {
 "startLine":  538,
 "startColumn":  20,
@@ -368,7 +368,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\IO\TcpListener.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpListener.cs",
 "region":  {
 "startLine":  128,
 "startColumn":  28,
@@ -381,7 +381,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\IO\TcpListener.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpListener.cs",
 "region":  {
 "startLine":  156,
 "startColumn":  24,
@@ -394,7 +394,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\IO\TcpOutgoingConnection.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpOutgoingConnection.cs",
 "region":  {
 "startLine":  51,
 "startColumn":  20,
@@ -407,7 +407,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\IO\UdpConnection.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\UdpConnection.cs",
 "region":  {
 "startLine":  226,
 "startColumn":  24,
@@ -420,7 +420,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\IO\UdpConnection.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\UdpConnection.cs",
 "region":  {
 "startLine":  239,
 "startColumn":  20,
@@ -433,7 +433,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\IO\UdpListener.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\UdpListener.cs",
 "region":  {
 "startLine":  62,
 "startColumn":  24,
@@ -446,7 +446,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\IO\UdpListener.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\UdpListener.cs",
 "region":  {
 "startLine":  170,
 "startColumn":  24,
@@ -459,7 +459,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\IO\UdpSender.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\UdpSender.cs",
 "region":  {
 "startLine":  81,
 "startColumn":  24,
@@ -472,7 +472,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\IO\WithUdpSend.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\WithUdpSend.cs",
 "region":  {
 "startLine":  65,
 "startColumn":  36,
@@ -485,7 +485,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Routing\ConsistentHashRouter.cs",
+"uri":  "sources\akka.net\src\core\Akka\Routing\ConsistentHashRouter.cs",
 "region":  {
 "startLine":  206,
 "startColumn":  24,
@@ -498,7 +498,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Util\Internal\AtomicState.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\Internal\AtomicState.cs",
 "region":  {
 "startLine":  88,
 "startColumn":  21,
@@ -511,7 +511,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Util\Internal\AtomicState.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\Internal\AtomicState.cs",
 "region":  {
 "startLine":  127,
 "startColumn":  21,
@@ -524,7 +524,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Util\Internal\TaskExtensions.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\Internal\TaskExtensions.cs",
 "region":  {
 "startLine":  34,
 "startColumn":  32,

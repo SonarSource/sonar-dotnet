@@ -4,7 +4,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster.Tests\EWMASpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests\EWMASpec.cs",
 "region":  {
 "startLine":  108,
 "startColumn":  57,
@@ -17,7 +17,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster.Tests\MetricsCollectorSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests\MetricsCollectorSpec.cs",
 "region":  {
 "startLine":  97,
 "startColumn":  76,
@@ -30,7 +30,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster.Tests\MetricsCollectorSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests\MetricsCollectorSpec.cs",
 "region":  {
 "startLine":  98,
 "startColumn":  86,
@@ -43,7 +43,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster.Tests\MetricsCollectorSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests\MetricsCollectorSpec.cs",
 "region":  {
 "startLine":  99,
 "startColumn":  87,
@@ -56,7 +56,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster.Tests\MetricsCollectorSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests\MetricsCollectorSpec.cs",
 "region":  {
 "startLine":  102,
 "startColumn":  33,
@@ -69,7 +69,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster.Tests\MetricValuesSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests\MetricValuesSpec.cs",
 "region":  {
 "startLine":  49,
 "startColumn":  27,
@@ -82,7 +82,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster.Tests\MetricValuesSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests\MetricValuesSpec.cs",
 "region":  {
 "startLine":  50,
 "startColumn":  27,

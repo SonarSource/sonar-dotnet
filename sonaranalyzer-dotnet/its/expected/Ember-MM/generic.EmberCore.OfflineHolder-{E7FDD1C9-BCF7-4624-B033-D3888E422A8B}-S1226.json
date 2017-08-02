@@ -4,7 +4,7 @@
 "id":  "S1226",
 "message":  "Introduce a new variable instead of reusing the parameter 'path'.",
 "location":  {
-"uri":  "Ember-MM\Addons\generic.EmberCore.OfflineHolder\dlgOfflineHolder.vb",
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.OfflineHolder\dlgOfflineHolder.vb",
 "region":  {
 "startLine":  592,
 "startColumn":  17,

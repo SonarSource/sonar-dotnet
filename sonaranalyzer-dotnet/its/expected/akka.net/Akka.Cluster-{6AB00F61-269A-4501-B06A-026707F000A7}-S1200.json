@@ -4,7 +4,7 @@
 "id":  "S1200",
 "message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 42 to the maximum authorized 20 or less.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\Cluster.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Cluster.cs",
 "region":  {
 "startLine":  38,
 "startColumn":  18,
@@ -17,7 +17,7 @@
 "id":  "S1200",
 "message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 62 to the maximum authorized 20 or less.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  637,
 "startColumn":  11,
@@ -30,7 +30,7 @@
 "id":  "S1200",
 "message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 26 to the maximum authorized 20 or less.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
 "region":  {
 "startLine":  657,
 "startColumn":  18,
@@ -43,7 +43,7 @@
 "id":  "S1200",
 "message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 23 to the maximum authorized 20 or less.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
 "region":  {
 "startLine":  39,
 "startColumn":  27,
@@ -56,7 +56,7 @@
 "id":  "S1200",
 "message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 30 to the maximum authorized 20 or less.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterMetricsCollector.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterMetricsCollector.cs",
 "region":  {
 "startLine":  33,
 "startColumn":  20,
@@ -69,7 +69,7 @@
 "id":  "S1200",
 "message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 21 to the maximum authorized 20 or less.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterReadView.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterReadView.cs",
 "region":  {
 "startLine":  23,
 "startColumn":  18,
@@ -82,7 +82,7 @@
 "id":  "S1200",
 "message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 119 to the maximum authorized 20 or less.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\Proto\ClusterMessageSerializer.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Proto\ClusterMessageSerializer.cs",
 "region":  {
 "startLine":  24,
 "startColumn":  20,
@@ -95,7 +95,7 @@
 "id":  "S1200",
 "message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 23 to the maximum authorized 20 or less.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
 "region":  {
 "startLine":  172,
 "startColumn":  25,
@@ -108,7 +108,7 @@
 "id":  "S1200",
 "message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 21 to the maximum authorized 20 or less.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
 "region":  {
 "startLine":  319,
 "startColumn":  29,
@@ -121,7 +121,7 @@
 "id":  "S1200",
 "message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 23 to the maximum authorized 20 or less.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\Util.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Util.cs",
 "region":  {
 "startLine":  15,
 "startColumn":  18,

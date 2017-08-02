@@ -4,7 +4,7 @@
 "id":  "S2971",
 "message":  "Drop 'ToArray' from the middle of the call chain.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\AckedDelivery.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\AckedDelivery.cs",
 "region":  {
 "startLine":  325,
 "startColumn":  99,
@@ -17,7 +17,7 @@
 "id":  "S2971",
 "message":  "Drop 'ToArray' from the middle of the call chain.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\AckedDelivery.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\AckedDelivery.cs",
 "region":  {
 "startLine":  325,
 "startColumn":  151,
@@ -30,7 +30,7 @@
 "id":  "S2971",
 "message":  "Use 'Count' property here instead.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\RemoteWatcher.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteWatcher.cs",
 "region":  {
 "startLine":  334,
 "startColumn":  73,

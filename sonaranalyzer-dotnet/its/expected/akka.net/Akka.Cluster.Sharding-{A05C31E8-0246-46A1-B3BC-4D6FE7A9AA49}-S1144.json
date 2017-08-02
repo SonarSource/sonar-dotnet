@@ -4,7 +4,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private field '_cluster'.",
 "location":  {
-"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingGuardian.cs",
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingGuardian.cs",
 "region":  {
 "startLine":  81,
 "startColumn":  9,
@@ -17,7 +17,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private field '_sharding'.",
 "location":  {
-"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingGuardian.cs",
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingGuardian.cs",
 "region":  {
 "startLine":  82,
 "startColumn":  9,

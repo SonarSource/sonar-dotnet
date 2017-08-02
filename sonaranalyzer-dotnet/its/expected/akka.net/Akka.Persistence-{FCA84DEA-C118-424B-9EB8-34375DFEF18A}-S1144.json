@@ -4,7 +4,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private field '_timeout'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Journal\MemoryJournal.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\MemoryJournal.cs",
 "region":  {
 "startLine":  32,
 "startColumn":  9,

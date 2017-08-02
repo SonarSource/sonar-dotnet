@@ -4,7 +4,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\JsonSerializerFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\JsonSerializerFixture.cs",
 "region":  {
 "startLine":  51,
 "startColumn":  13,

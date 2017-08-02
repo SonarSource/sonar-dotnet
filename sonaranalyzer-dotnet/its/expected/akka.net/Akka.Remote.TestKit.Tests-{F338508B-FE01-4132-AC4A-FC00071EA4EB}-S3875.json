@@ -4,7 +4,7 @@
 "id":  "S3875",
 "message":  "Remove this overload of 'operator =='.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit.Tests\BarrierSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit.Tests\BarrierSpec.cs",
 "region":  {
 "startLine":  60,
 "startColumn":  41,

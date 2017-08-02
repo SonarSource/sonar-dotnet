@@ -4,7 +4,7 @@
 "id":  "S3871",
 "message":  "Make this exception 'public'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorLifeCycleSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ActorLifeCycleSpec.cs",
 "region":  {
 "startLine":  379,
 "startColumn":  15,
@@ -17,7 +17,7 @@
 "id":  "S3871",
 "message":  "Make this exception 'public'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorProducerPipelineTests.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ActorProducerPipelineTests.cs",
 "region":  {
 "startLine":  20,
 "startColumn":  24,
@@ -30,7 +30,7 @@
 "id":  "S3871",
 "message":  "Make this exception 'public'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\SupervisorHierarchySpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\SupervisorHierarchySpec.cs",
 "region":  {
 "startLine":  68,
 "startColumn":  23,
@@ -43,7 +43,7 @@
 "id":  "S3871",
 "message":  "Make this exception 'public'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Pattern\CircuitBreakerSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Pattern\CircuitBreakerSpec.cs",
 "region":  {
 "startLine":  329,
 "startColumn":  20,

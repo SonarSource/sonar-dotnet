@@ -4,7 +4,7 @@
 "id":  "S2955",
 "message":  "Use a comparison to 'default(TModel)' instead or add a constraint to 'TModel' so that it can't be a value type.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Responses\JsonResponse.cs",
+"uri":  "sources\Nancy\src\Nancy\Responses\JsonResponse.cs",
 "region":  {
 "startLine":  32,
 "startColumn":  38,

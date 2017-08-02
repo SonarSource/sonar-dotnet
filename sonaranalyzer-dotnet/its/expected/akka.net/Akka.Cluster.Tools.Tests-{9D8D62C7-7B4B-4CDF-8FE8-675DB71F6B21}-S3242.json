@@ -4,7 +4,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'Akka.TestKit.TestKitBase' instead of 'Akka.TestKit.TestProbe'.",
 "location":  {
-"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Tools.Tests\Singleton\ClusterSingletonManagerChaosSpec.cs",
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools.Tests\Singleton\ClusterSingletonManagerChaosSpec.cs",
 "region":  {
 "startLine":  218,
 "startColumn":  46,
@@ -17,7 +17,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'Akka.TestKit.TestKitBase' instead of 'Akka.TestKit.TestProbe'.",
 "location":  {
-"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Tools.Tests\Singleton\ClusterSingletonManagerSpec.cs",
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools.Tests\Singleton\ClusterSingletonManagerSpec.cs",
 "region":  {
 "startLine":  345,
 "startColumn":  46,

@@ -4,7 +4,7 @@
 "id":  "S2933",
 "message":  "Make 'rootPath' 'readonly'.",
 "location":  {
-"uri":  "Nancy\src\Nancy\DefaultStaticContentProvider.cs",
+"uri":  "sources\Nancy\src\Nancy\DefaultStaticContentProvider.cs",
 "region":  {
 "startLine":  13,
 "startColumn":  24,
@@ -17,7 +17,7 @@
 "id":  "S2933",
 "message":  "Make '_typeResolver' 'readonly'.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"uri":  "sources\Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
 "region":  {
 "startLine":  52,
 "startColumn":  32,
@@ -30,7 +30,7 @@
 "id":  "S2933",
 "message":  "Make 'serializer' 'readonly'.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
 "region":  {
 "startLine":  293,
 "startColumn":  24,
@@ -43,7 +43,7 @@
 "id":  "S2933",
 "message":  "Make 'typeResolver' 'readonly'.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
 "region":  {
 "startLine":  294,
 "startColumn":  26,
@@ -56,7 +56,7 @@
 "id":  "S2933",
 "message":  "Make 'retainCasing' 'readonly'.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
 "region":  {
 "startLine":  295,
 "startColumn":  8,
@@ -69,7 +69,7 @@
 "id":  "S2933",
 "message":  "Make 'maxJsonLength' 'readonly'.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
 "region":  {
 "startLine":  296,
 "startColumn":  7,
@@ -82,7 +82,7 @@
 "id":  "S2933",
 "message":  "Make 'recursionLimit' 'readonly'.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
 "region":  {
 "startLine":  298,
 "startColumn":  7,
@@ -95,7 +95,7 @@
 "id":  "S2933",
 "message":  "Make 'modes' 'readonly'.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
 "region":  {
 "startLine":  301,
 "startColumn":  20,
@@ -108,7 +108,7 @@
 "id":  "S2933",
 "message":  "Make 'returnValue' 'readonly'.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
 "region":  {
 "startLine":  302,
 "startColumn":  18,
@@ -121,7 +121,7 @@
 "id":  "S2933",
 "message":  "Make 'currentKey' 'readonly'.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
 "region":  {
 "startLine":  307,
 "startColumn":  18,
@@ -134,7 +134,7 @@
 "id":  "S2933",
 "message":  "Make 'serializer' 'readonly'.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Json\JsonSerializer.cs",
+"uri":  "sources\Nancy\src\Nancy\Json\JsonSerializer.cs",
 "region":  {
 "startLine":  49,
 "startColumn":  24,
@@ -147,7 +147,7 @@
 "id":  "S2933",
 "message":  "Make 'typeResolver' 'readonly'.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Json\JsonSerializer.cs",
+"uri":  "sources\Nancy\src\Nancy\Json\JsonSerializer.cs",
 "region":  {
 "startLine":  50,
 "startColumn":  26,
@@ -160,7 +160,7 @@
 "id":  "S2933",
 "message":  "Make 'recursionLimit' 'readonly'.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Json\JsonSerializer.cs",
+"uri":  "sources\Nancy\src\Nancy\Json\JsonSerializer.cs",
 "region":  {
 "startLine":  51,
 "startColumn":  7,
@@ -173,7 +173,7 @@
 "id":  "S2933",
 "message":  "Make 'maxJsonLength' 'readonly'.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Json\JsonSerializer.cs",
+"uri":  "sources\Nancy\src\Nancy\Json\JsonSerializer.cs",
 "region":  {
 "startLine":  52,
 "startColumn":  7,
@@ -186,7 +186,7 @@
 "id":  "S2933",
 "message":  "Make 'retainCasing' 'readonly'.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Json\JsonSerializer.cs",
+"uri":  "sources\Nancy\src\Nancy\Json\JsonSerializer.cs",
 "region":  {
 "startLine":  54,
 "startColumn":  8,
@@ -199,7 +199,7 @@
 "id":  "S2933",
 "message":  "Make 'iso8601DateFormat' 'readonly'.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Json\JsonSerializer.cs",
+"uri":  "sources\Nancy\src\Nancy\Json\JsonSerializer.cs",
 "region":  {
 "startLine":  55,
 "startColumn":  8,
@@ -212,7 +212,7 @@
 "id":  "S2933",
 "message":  "Make 'propertyInfo' 'readonly'.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ModelBinding\BindingMemberInfo.cs",
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\BindingMemberInfo.cs",
 "region":  {
 "startLine":  13,
 "startColumn":  22,
@@ -225,7 +225,7 @@
 "id":  "S2933",
 "message":  "Make 'fieldInfo' 'readonly'.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ModelBinding\BindingMemberInfo.cs",
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\BindingMemberInfo.cs",
 "region":  {
 "startLine":  14,
 "startColumn":  19,
@@ -238,7 +238,7 @@
 "id":  "S2933",
 "message":  "Make 'routeSegmentConstraints' 'readonly'.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Routing\Trie\Nodes\CaptureNodeWithMultipleParameters.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\Trie\Nodes\CaptureNodeWithMultipleParameters.cs",
 "region":  {
 "startLine":  21,
 "startColumn":  54,
@@ -251,7 +251,7 @@
 "id":  "S2933",
 "message":  "Make 'segmentMatch' 'readonly'.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Routing\Trie\Nodes\RootNode.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\Trie\Nodes\RootNode.cs",
 "region":  {
 "startLine":  10,
 "startColumn":  30,
@@ -264,7 +264,7 @@
 "id":  "S2933",
 "message":  "Make '_Container' 'readonly'.",
 "location":  {
-"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
 "startLine":  840,
 "startColumn":  38,
@@ -277,7 +277,7 @@
 "id":  "S2933",
 "message":  "Make '_Registration' 'readonly'.",
 "location":  {
-"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
 "startLine":  841,
 "startColumn":  38,
@@ -290,7 +290,7 @@
 "id":  "S2933",
 "message":  "Make '_factory' 'readonly'.",
 "location":  {
-"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
 "startLine":  2559,
 "startColumn":  77,
@@ -303,7 +303,7 @@
 "id":  "S2933",
 "message":  "Make '_factory' 'readonly'.",
 "location":  {
-"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
 "startLine":  2617,
 "startColumn":  35,
@@ -316,7 +316,7 @@
 "id":  "S2933",
 "message":  "Make '_instance' 'readonly'.",
 "location":  {
-"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
 "startLine":  2684,
 "startColumn":  28,
@@ -329,7 +329,7 @@
 "id":  "S2933",
 "message":  "Make '_hashCode' 'readonly'.",
 "location":  {
-"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
 "startLine":  3021,
 "startColumn":  25,
@@ -342,7 +342,7 @@
 "id":  "S2933",
 "message":  "Make '_Parent' 'readonly'.",
 "location":  {
-"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
 "startLine":  3075,
 "startColumn":  26,
@@ -355,7 +355,7 @@
 "id":  "S2933",
 "message":  "Make 'textResourceFinder' 'readonly'.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ViewEngines\DefaultRenderContext.cs",
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\DefaultRenderContext.cs",
 "region":  {
 "startLine":  23,
 "startColumn":  36,
@@ -368,7 +368,7 @@
 "id":  "S2933",
 "message":  "Make 'renderContext' 'readonly'.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\NancyViewEngineHost.cs",
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\NancyViewEngineHost.cs",
 "region":  {
 "startLine":  7,
 "startColumn":  32,
@@ -381,7 +381,7 @@
 "id":  "S2933",
 "message":  "Make 'message' 'readonly'.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ViewEngines\ViewNotFoundException.cs",
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\ViewNotFoundException.cs",
 "region":  {
 "startLine":  16,
 "startColumn":  24,

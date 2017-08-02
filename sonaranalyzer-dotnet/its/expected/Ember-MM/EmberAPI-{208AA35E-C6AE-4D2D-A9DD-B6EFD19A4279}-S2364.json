@@ -4,7 +4,7 @@
 "id":  "S2364",
 "message":  "Rename '_AdvancedSettings' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAdvancedSettings.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAdvancedSettings.vb",
 "region":  {
 "startLine":  37,
 "startColumn":  20,
@@ -17,7 +17,7 @@
 "id":  "S2364",
 "message":  "Rename '_ComplexAdvancedSettings' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAdvancedSettings.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAdvancedSettings.vb",
 "region":  {
 "startLine":  38,
 "startColumn":  20,
@@ -30,7 +30,7 @@
 "id":  "S2364",
 "message":  "Rename '_DoNotSave' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAdvancedSettings.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAdvancedSettings.vb",
 "region":  {
 "startLine":  39,
 "startColumn":  20,
@@ -43,7 +43,7 @@
 "id":  "S2364",
 "message":  "Rename 'ParsedIFOFile' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDVD.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
 "region":  {
 "startLine":  36,
 "startColumn":  13,
@@ -56,7 +56,7 @@
 "id":  "S2364",
 "message":  "Rename '_URL' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIHTTP.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIHTTP.vb",
 "region":  {
 "startLine":  36,
 "startColumn":  13,
@@ -69,7 +69,7 @@
 "id":  "S2364",
 "message":  "Rename 'Ret' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIImages.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
 "region":  {
 "startLine":  33,
 "startColumn":  13,
@@ -82,7 +82,7 @@
 "id":  "S2364",
 "message":  "Rename 'sHTTP' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIImages.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
 "region":  {
 "startLine":  35,
 "startColumn":  13,
@@ -95,7 +95,7 @@
 "id":  "S2364",
 "message":  "Rename '_ISOLanguages' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPILocalization.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPILocalization.vb",
 "region":  {
 "startLine":  35,
 "startColumn":  20,
@@ -108,7 +108,7 @@
 "id":  "S2364",
 "message":  "Rename 'Handle' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
 "region":  {
 "startLine":  31,
 "startColumn":  13,
@@ -121,7 +121,7 @@
 "id":  "S2364",
 "message":  "Rename 'UseAnsi' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
 "region":  {
 "startLine":  32,
 "startColumn":  13,
@@ -134,7 +134,7 @@
 "id":  "S2364",
 "message":  "Rename '_subs_path' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
 "region":  {
 "startLine":  766,
 "startColumn":  17,
@@ -147,7 +147,7 @@
 "id":  "S2364",
 "message":  "Rename '_subs_type' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
 "region":  {
 "startLine":  767,
 "startColumn":  17,
@@ -160,7 +160,7 @@
 "id":  "S2364",
 "message":  "Rename 'Singleton' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
 "region":  {
 "startLine":  41,
 "startColumn":  20,
@@ -173,7 +173,7 @@
 "id":  "S2364",
 "message":  "Rename '_LoadMedia' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
 "region":  {
 "startLine":  663,
 "startColumn":  17,
@@ -186,7 +186,7 @@
 "id":  "S2364",
 "message":  "Rename '_MainTool' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
 "region":  {
 "startLine":  664,
 "startColumn":  17,
@@ -199,7 +199,7 @@
 "id":  "S2364",
 "message":  "Rename '_MediaList' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
 "region":  {
 "startLine":  665,
 "startColumn":  17,
@@ -212,7 +212,7 @@
 "id":  "S2364",
 "message":  "Rename '_MenuMediaList' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
 "region":  {
 "startLine":  666,
 "startColumn":  17,
@@ -225,7 +225,7 @@
 "id":  "S2364",
 "message":  "Rename '_MenuTVShowList' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
 "region":  {
 "startLine":  667,
 "startColumn":  17,
@@ -238,7 +238,7 @@
 "id":  "S2364",
 "message":  "Rename '_OpenImageViewer' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
 "region":  {
 "startLine":  668,
 "startColumn":  17,
@@ -251,7 +251,7 @@
 "id":  "S2364",
 "message":  "Rename '_TopMenu' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
 "region":  {
 "startLine":  669,
 "startColumn":  17,
@@ -264,7 +264,7 @@
 "id":  "S2364",
 "message":  "Rename '_TrayMenu' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
 "region":  {
 "startLine":  670,
 "startColumn":  17,
@@ -277,7 +277,7 @@
 "id":  "S2364",
 "message":  "Rename '_MediaTabSelected' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
 "region":  {
 "startLine":  671,
 "startColumn":  17,
@@ -290,7 +290,7 @@
 "id":  "S2364",
 "message":  "Rename '_cleanmovieNfoB' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPISettings.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPISettings.vb",
 "region":  {
 "startLine":  62,
 "startColumn":  13,
@@ -303,7 +303,7 @@
 "id":  "S2364",
 "message":  "Rename '_cleanmovieTbnB' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPISettings.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPISettings.vb",
 "region":  {
 "startLine":  64,
 "startColumn":  13,
@@ -316,7 +316,7 @@
 "id":  "S2364",
 "message":  "Rename '_PosterPrefSizeOnly' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPISettings.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPISettings.vb",
 "region":  {
 "startLine":  208,
 "startColumn":  13,
@@ -329,7 +329,7 @@
 "id":  "S2364",
 "message":  "Rename 'ByText' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPISorter.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPISorter.vb",
 "region":  {
 "startLine":  28,
 "startColumn":  13,
@@ -342,7 +342,7 @@
 "id":  "S2364",
 "message":  "Rename 'ColumnToSort' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPISorter.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPISorter.vb",
 "region":  {
 "startLine":  29,
 "startColumn":  13,
@@ -355,7 +355,7 @@
 "id":  "S2364",
 "message":  "Rename 'IsNumeric' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPISorter.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPISorter.vb",
 "region":  {
 "startLine":  30,
 "startColumn":  13,
@@ -368,7 +368,7 @@
 "id":  "S2364",
 "message":  "Rename 'ObjectCompare' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPISorter.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPISorter.vb",
 "region":  {
 "startLine":  31,
 "startColumn":  13,
@@ -381,7 +381,7 @@
 "id":  "S2364",
 "message":  "Rename 'OrderOfSort' to match the regular expression: '^(s_|_)?[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPISorter.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPISorter.vb",
 "region":  {
 "startLine":  32,
 "startColumn":  13,

@@ -4,7 +4,7 @@
 "id":  "S1854",
 "message":  "Remove this useless assignment to local variable 'bytes'.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
 "region":  {
 "startLine":  187,
 "startColumn":  19,
@@ -17,7 +17,7 @@
 "id":  "S1854",
 "message":  "Remove this useless assignment to local variable 'acc'.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
 "region":  {
 "startLine":  318,
 "startColumn":  17,
@@ -30,7 +30,7 @@
 "id":  "S1854",
 "message":  "Remove this useless assignment to local variable 'js'.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Json\Json.cs",
+"uri":  "sources\Nancy\src\Nancy\Json\Json.cs",
 "region":  {
 "startLine":  48,
 "startColumn":  16,
@@ -43,7 +43,7 @@
 "id":  "S1854",
 "message":  "Remove this useless assignment to local variable 'js'.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Json\Json.cs",
+"uri":  "sources\Nancy\src\Nancy\Json\Json.cs",
 "region":  {
 "startLine":  60,
 "startColumn":  16,

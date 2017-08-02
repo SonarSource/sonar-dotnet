@@ -4,7 +4,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\examples\Cluster\Routing\Samples.Cluster.ConsistentHashRouting\BackendActor.cs",
+"uri":  "sources\akka.net\src\examples\Cluster\Routing\Samples.Cluster.ConsistentHashRouting\BackendActor.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -17,7 +17,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\examples\Cluster\Routing\Samples.Cluster.ConsistentHashRouting\FrontendActor.cs",
+"uri":  "sources\akka.net\src\examples\Cluster\Routing\Samples.Cluster.ConsistentHashRouting\FrontendActor.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -30,7 +30,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\examples\Cluster\Routing\Samples.Cluster.ConsistentHashRouting\Messages.cs",
+"uri":  "sources\akka.net\src\examples\Cluster\Routing\Samples.Cluster.ConsistentHashRouting\Messages.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -43,7 +43,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\examples\Cluster\Routing\Samples.Cluster.ConsistentHashRouting\Program.cs",
+"uri":  "sources\akka.net\src\examples\Cluster\Routing\Samples.Cluster.ConsistentHashRouting\Program.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -56,7 +56,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\examples\Cluster\Routing\Samples.Cluster.ConsistentHashRouting\Properties\AssemblyInfo.cs",
+"uri":  "sources\akka.net\src\examples\Cluster\Routing\Samples.Cluster.ConsistentHashRouting\Properties\AssemblyInfo.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,

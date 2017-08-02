@@ -4,7 +4,7 @@
 "id":  "S1197",
 "message":  "Move the array designator from the variable to the type.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\ApplicationEvents.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\ApplicationEvents.vb",
 "region":  {
 "startLine":  44,
 "startColumn":  17,
@@ -17,7 +17,7 @@
 "id":  "S1197",
 "message":  "Move the array designator from the variable to the type.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
 "region":  {
 "startLine":  671,
 "startColumn":  29,
@@ -30,7 +30,7 @@
 "id":  "S1197",
 "message":  "Move the array designator from the variable to the type.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
 "region":  {
 "startLine":  704,
 "startColumn":  25,
@@ -43,7 +43,7 @@
 "id":  "S1197",
 "message":  "Move the array designator from the variable to the type.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
 "region":  {
 "startLine":  1226,
 "startColumn":  29,
@@ -56,7 +56,7 @@
 "id":  "S1197",
 "message":  "Move the array designator from the variable to the type.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
 "region":  {
 "startLine":  1312,
 "startColumn":  13,
@@ -69,7 +69,7 @@
 "id":  "S1197",
 "message":  "Move the array designator from the variable to the type.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgEditShow.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditShow.vb",
 "region":  {
 "startLine":  408,
 "startColumn":  21,
@@ -82,7 +82,7 @@
 "id":  "S1197",
 "message":  "Move the array designator from the variable to the type.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgManualEdit.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgManualEdit.vb",
 "region":  {
 "startLine":  58,
 "startColumn":  17,
@@ -95,7 +95,7 @@
 "id":  "S1197",
 "message":  "Move the array designator from the variable to the type.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
 "region":  {
 "startLine":  2132,
 "startColumn":  17,
@@ -108,7 +108,7 @@
 "id":  "S1197",
 "message":  "Move the array designator from the variable to the type.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  70,
 "startColumn":  13,
@@ -121,7 +121,7 @@
 "id":  "S1197",
 "message":  "Move the array designator from the variable to the type.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  71,
 "startColumn":  13,
@@ -134,7 +134,7 @@
 "id":  "S1197",
 "message":  "Move the array designator from the variable to the type.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  186,
 "startColumn":  29,
@@ -147,7 +147,7 @@
 "id":  "S1197",
 "message":  "Move the array designator from the variable to the type.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  2802,
 "startColumn":  13,
@@ -160,7 +160,7 @@
 "id":  "S1197",
 "message":  "Move the array designator from the variable to the type.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  5296,
 "startColumn":  17,
@@ -173,7 +173,7 @@
 "id":  "S1197",
 "message":  "Move the array designator from the variable to the type.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  7848,
 "startColumn":  21,

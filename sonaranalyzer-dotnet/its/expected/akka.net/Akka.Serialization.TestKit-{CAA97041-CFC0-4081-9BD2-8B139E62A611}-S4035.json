@@ -4,7 +4,7 @@
 "id":  "S4035",
 "message":  "Seal class 'ImmutableMessage' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
-"uri":  "akka.net\src\contrib\serializers\Akka.Serialization.TestKit\ImmutableMessage.cs",
+"uri":  "sources\akka.net\src\contrib\serializers\Akka.Serialization.TestKit\ImmutableMessage.cs",
 "region":  {
 "startLine":  5,
 "startColumn":  18,
@@ -17,7 +17,7 @@
 "id":  "S4035",
 "message":  "Seal class 'ImmutableMessageWithPrivateCtor' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
-"uri":  "akka.net\src\contrib\serializers\Akka.Serialization.TestKit\ImmutableMessageWithPrivateCtor.cs",
+"uri":  "sources\akka.net\src\contrib\serializers\Akka.Serialization.TestKit\ImmutableMessageWithPrivateCtor.cs",
 "region":  {
 "startLine":  5,
 "startColumn":  18,
@@ -30,7 +30,7 @@
 "id":  "S4035",
 "message":  "Seal class 'UntypedContainerMessage' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
-"uri":  "akka.net\src\contrib\serializers\Akka.Serialization.TestKit\UntypedContainerMessage.cs",
+"uri":  "sources\akka.net\src\contrib\serializers\Akka.Serialization.TestKit\UntypedContainerMessage.cs",
 "region":  {
 "startLine":  5,
 "startColumn":  18,

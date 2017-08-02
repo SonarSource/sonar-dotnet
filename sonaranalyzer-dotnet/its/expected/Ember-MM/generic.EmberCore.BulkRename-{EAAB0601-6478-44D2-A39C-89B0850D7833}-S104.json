@@ -4,7 +4,7 @@
 "id":  "S104",
 "message":  "This file has 1120 lines, which is greater than 1000 authorized. Split it into smaller files.",
 "location":  {
-"uri":  "Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
 "region":  {
 "startLine":  1,
 "startColumn":  1,

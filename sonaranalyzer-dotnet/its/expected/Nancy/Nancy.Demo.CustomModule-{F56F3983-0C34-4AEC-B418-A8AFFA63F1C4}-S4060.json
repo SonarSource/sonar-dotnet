@@ -4,7 +4,7 @@
 "id":  "S4060",
 "message":  "Seal this attribute or make it abstract.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Demo.CustomModule\NancyRouteAttribute.cs",
+"uri":  "sources\Nancy\src\Nancy.Demo.CustomModule\NancyRouteAttribute.cs",
 "region":  {
 "startLine":  5,
 "startColumn":  18,

@@ -4,7 +4,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'expected' to 'other' to match the interface declaration.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Testing.Tests\AssertEqualityComparerFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing.Tests\AssertEqualityComparerFixture.cs",
 "region":  {
 "startLine":  152,
 "startColumn":  47,
@@ -17,7 +17,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'comparable' to 'other' to match the interface declaration.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Testing.Tests\AssertEqualityComparerFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing.Tests\AssertEqualityComparerFixture.cs",
 "region":  {
 "startLine":  175,
 "startColumn":  58,
@@ -30,7 +30,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'comparable' to 'obj' to match the interface declaration.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Testing.Tests\AssertEqualityComparerFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing.Tests\AssertEqualityComparerFixture.cs",
 "region":  {
 "startLine":  198,
 "startColumn":  41,

@@ -4,7 +4,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.TestKit.Tests\TestActorRefTests\TestActorRefSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.TestKit.Tests\TestActorRefTests\TestActorRefSpec.cs",
 "region":  {
 "startLine":  133,
 "startColumn":  13,

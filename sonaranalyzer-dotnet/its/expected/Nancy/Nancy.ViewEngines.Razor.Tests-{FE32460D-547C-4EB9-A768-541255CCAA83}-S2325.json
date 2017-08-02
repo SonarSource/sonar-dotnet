@@ -4,7 +4,7 @@
 "id":  "S2325",
 "message":  "Make 'Greet' a static method.",
 "location":  {
-"uri":  "Nancy\src\Nancy.ViewEngines.Razor.Tests\GreetingViewBase.cs",
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor.Tests\GreetingViewBase.cs",
 "region":  {
 "startLine":  5,
 "startColumn":  23,
@@ -17,7 +17,7 @@
 "id":  "S2325",
 "message":  "Make 'CreateViewLocationWithModel' a static method.",
 "location":  {
-"uri":  "Nancy\src\Nancy.ViewEngines.Razor.Tests\RazorViewEngineFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor.Tests\RazorViewEngineFixture.cs",
 "region":  {
 "startLine":  751,
 "startColumn":  36,

@@ -4,7 +4,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Demo.Validation\ValidationBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Demo.Validation\ValidationBootstrapper.cs",
 "region":  {
 "startLine":  14,
 "startColumn":  13,

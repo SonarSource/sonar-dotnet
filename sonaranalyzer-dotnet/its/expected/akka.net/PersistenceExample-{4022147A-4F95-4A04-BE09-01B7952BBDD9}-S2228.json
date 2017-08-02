@@ -4,7 +4,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "akka.net\src\examples\PersistenceExample\AtLeastOnceDeliveryExampleActor.cs",
+"uri":  "sources\akka.net\src\examples\PersistenceExample\AtLeastOnceDeliveryExampleActor.cs",
 "region":  {
 "startLine":  76,
 "startColumn":  21,
@@ -17,7 +17,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "akka.net\src\examples\PersistenceExample\AtLeastOnceDeliveryExampleActor.cs",
+"uri":  "sources\akka.net\src\examples\PersistenceExample\AtLeastOnceDeliveryExampleActor.cs",
 "region":  {
 "startLine":  81,
 "startColumn":  21,
@@ -30,7 +30,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "akka.net\src\examples\PersistenceExample\AtLeastOnceDeliveryExampleActor.cs",
+"uri":  "sources\akka.net\src\examples\PersistenceExample\AtLeastOnceDeliveryExampleActor.cs",
 "region":  {
 "startLine":  110,
 "startColumn":  17,
@@ -43,7 +43,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "akka.net\src\examples\PersistenceExample\AtLeastOnceDeliveryExampleActor.cs",
+"uri":  "sources\akka.net\src\examples\PersistenceExample\AtLeastOnceDeliveryExampleActor.cs",
 "region":  {
 "startLine":  114,
 "startColumn":  29,
@@ -56,7 +56,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "akka.net\src\examples\PersistenceExample\AtLeastOnceDeliveryExampleActor.cs",
+"uri":  "sources\akka.net\src\examples\PersistenceExample\AtLeastOnceDeliveryExampleActor.cs",
 "region":  {
 "startLine":  122,
 "startColumn":  17,
@@ -69,7 +69,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "akka.net\src\examples\PersistenceExample\AtLeastOnceDeliveryExampleActor.cs",
+"uri":  "sources\akka.net\src\examples\PersistenceExample\AtLeastOnceDeliveryExampleActor.cs",
 "region":  {
 "startLine":  141,
 "startColumn":  29,
@@ -82,7 +82,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "akka.net\src\examples\PersistenceExample\ExamplePersistentActor.cs",
+"uri":  "sources\akka.net\src\examples\PersistenceExample\ExamplePersistentActor.cs",
 "region":  {
 "startLine":  105,
 "startColumn":  17,
@@ -95,7 +95,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "akka.net\src\examples\PersistenceExample\ExamplePersistentFailingActor.cs",
+"uri":  "sources\akka.net\src\examples\PersistenceExample\ExamplePersistentFailingActor.cs",
 "region":  {
 "startLine":  36,
 "startColumn":  17,
@@ -108,7 +108,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "akka.net\src\examples\PersistenceExample\ExampleView.cs",
+"uri":  "sources\akka.net\src\examples\PersistenceExample\ExampleView.cs",
 "region":  {
 "startLine":  24,
 "startColumn":  17,
@@ -121,7 +121,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "akka.net\src\examples\PersistenceExample\ExampleView.cs",
+"uri":  "sources\akka.net\src\examples\PersistenceExample\ExampleView.cs",
 "region":  {
 "startLine":  31,
 "startColumn":  17,
@@ -134,7 +134,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "akka.net\src\examples\PersistenceExample\ExampleView.cs",
+"uri":  "sources\akka.net\src\examples\PersistenceExample\ExampleView.cs",
 "region":  {
 "startLine":  36,
 "startColumn":  17,
@@ -147,7 +147,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "akka.net\src\examples\PersistenceExample\ExampleView.cs",
+"uri":  "sources\akka.net\src\examples\PersistenceExample\ExampleView.cs",
 "region":  {
 "startLine":  41,
 "startColumn":  17,
@@ -160,7 +160,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "akka.net\src\examples\PersistenceExample\ExampleView.cs",
+"uri":  "sources\akka.net\src\examples\PersistenceExample\ExampleView.cs",
 "region":  {
 "startLine":  46,
 "startColumn":  17,
@@ -173,7 +173,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "akka.net\src\examples\PersistenceExample\ExampleView.cs",
+"uri":  "sources\akka.net\src\examples\PersistenceExample\ExampleView.cs",
 "region":  {
 "startLine":  50,
 "startColumn":  17,
@@ -186,7 +186,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "akka.net\src\examples\PersistenceExample\Program.cs",
+"uri":  "sources\akka.net\src\examples\PersistenceExample\Program.cs",
 "region":  {
 "startLine":  40,
 "startColumn":  13,
@@ -199,7 +199,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "akka.net\src\examples\PersistenceExample\Program.cs",
+"uri":  "sources\akka.net\src\examples\PersistenceExample\Program.cs",
 "region":  {
 "startLine":  53,
 "startColumn":  13,
@@ -212,7 +212,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "akka.net\src\examples\PersistenceExample\Program.cs",
+"uri":  "sources\akka.net\src\examples\PersistenceExample\Program.cs",
 "region":  {
 "startLine":  58,
 "startColumn":  13,
@@ -225,7 +225,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "akka.net\src\examples\PersistenceExample\Program.cs",
+"uri":  "sources\akka.net\src\examples\PersistenceExample\Program.cs",
 "region":  {
 "startLine":  61,
 "startColumn":  13,
@@ -238,7 +238,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "akka.net\src\examples\PersistenceExample\Program.cs",
+"uri":  "sources\akka.net\src\examples\PersistenceExample\Program.cs",
 "region":  {
 "startLine":  68,
 "startColumn":  13,
@@ -251,7 +251,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "akka.net\src\examples\PersistenceExample\Program.cs",
+"uri":  "sources\akka.net\src\examples\PersistenceExample\Program.cs",
 "region":  {
 "startLine":  78,
 "startColumn":  13,
@@ -264,7 +264,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "akka.net\src\examples\PersistenceExample\Program.cs",
+"uri":  "sources\akka.net\src\examples\PersistenceExample\Program.cs",
 "region":  {
 "startLine":  114,
 "startColumn":  13,
@@ -277,7 +277,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "akka.net\src\examples\PersistenceExample\Program.cs",
+"uri":  "sources\akka.net\src\examples\PersistenceExample\Program.cs",
 "region":  {
 "startLine":  136,
 "startColumn":  13,
@@ -290,7 +290,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "akka.net\src\examples\PersistenceExample\SnapshotedExampleActor.cs",
+"uri":  "sources\akka.net\src\examples\PersistenceExample\SnapshotedExampleActor.cs",
 "region":  {
 "startLine":  29,
 "startColumn":  17,
@@ -303,7 +303,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "akka.net\src\examples\PersistenceExample\SnapshotedExampleActor.cs",
+"uri":  "sources\akka.net\src\examples\PersistenceExample\SnapshotedExampleActor.cs",
 "region":  {
 "startLine":  41,
 "startColumn":  17,
@@ -316,7 +316,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "akka.net\src\examples\PersistenceExample\ViewExampleActor.cs",
+"uri":  "sources\akka.net\src\examples\PersistenceExample\ViewExampleActor.cs",
 "region":  {
 "startLine":  33,
 "startColumn":  17,

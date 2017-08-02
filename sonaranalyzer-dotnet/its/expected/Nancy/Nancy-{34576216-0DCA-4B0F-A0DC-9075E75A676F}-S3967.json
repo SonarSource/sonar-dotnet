@@ -4,7 +4,7 @@
 "id":  "S3967",
 "message":  "Change this multidimensional array to a jagged array.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
 "region":  {
 "startLine":  239,
 "startColumn":  26,

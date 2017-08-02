@@ -4,7 +4,7 @@
 "id":  "S2292",
 "message":  "Make this an auto-implemented property and remove its backing field.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Testing\Fakes\FakeRootPathProvider.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\Fakes\FakeRootPathProvider.cs",
 "region":  {
 "startLine":  13,
 "startColumn":  30,

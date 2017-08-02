@@ -4,7 +4,7 @@
 "id":  "S103",
 "message":  "Split this 256 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\ActorCell.Children.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.Children.cs",
 "region":  {
 "startLine":  332,
 "startColumn":  1,
@@ -17,7 +17,7 @@
 "id":  "S103",
 "message":  "Split this 233 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\ActorRef.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorRef.cs",
 "region":  {
 "startLine":  269,
 "startColumn":  1,
@@ -30,7 +30,7 @@
 "id":  "S103",
 "message":  "Split this 262 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\Deployer.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\Deployer.cs",
 "region":  {
 "startLine":  75,
 "startColumn":  1,
@@ -43,7 +43,7 @@
 "id":  "S103",
 "message":  "Split this 261 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\FSM.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\FSM.cs",
 "region":  {
 "startLine":  310,
 "startColumn":  1,
@@ -56,7 +56,7 @@
 "id":  "S103",
 "message":  "Split this 252 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\LocalActorRef.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\LocalActorRef.cs",
 "region":  {
 "startLine":  43,
 "startColumn":  1,
@@ -69,7 +69,7 @@
 "id":  "S103",
 "message":  "Split this 309 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\LocalActorRef.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\LocalActorRef.cs",
 "region":  {
 "startLine":  58,
 "startColumn":  1,
@@ -82,7 +82,7 @@
 "id":  "S103",
 "message":  "Split this 207 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\RootGuardianActorRef.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\RootGuardianActorRef.cs",
 "region":  {
 "startLine":  21,
 "startColumn":  1,
@@ -95,7 +95,7 @@
 "id":  "S103",
 "message":  "Split this 237 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\Scheduler\DeprecatedSchedulerExtensions.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\DeprecatedSchedulerExtensions.cs",
 "region":  {
 "startLine":  48,
 "startColumn":  1,
@@ -108,7 +108,7 @@
 "id":  "S103",
 "message":  "Split this 237 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\Scheduler\DeprecatedSchedulerExtensions.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\DeprecatedSchedulerExtensions.cs",
 "region":  {
 "startLine":  54,
 "startColumn":  1,
@@ -121,7 +121,7 @@
 "id":  "S103",
 "message":  "Split this 225 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\Scheduler\DeprecatedSchedulerExtensions.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\DeprecatedSchedulerExtensions.cs",
 "region":  {
 "startLine":  63,
 "startColumn":  1,
@@ -134,7 +134,7 @@
 "id":  "S103",
 "message":  "Split this 225 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\Scheduler\DeprecatedSchedulerExtensions.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\DeprecatedSchedulerExtensions.cs",
 "region":  {
 "startLine":  69,
 "startColumn":  1,
@@ -147,7 +147,7 @@
 "id":  "S103",
 "message":  "Split this 220 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\Scheduler\SchedulerExtensions.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\SchedulerExtensions.cs",
 "region":  {
 "startLine":  35,
 "startColumn":  1,
@@ -160,7 +160,7 @@
 "id":  "S103",
 "message":  "Split this 202 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\Scheduler\SchedulerExtensions.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\SchedulerExtensions.cs",
 "region":  {
 "startLine":  122,
 "startColumn":  1,
@@ -173,7 +173,7 @@
 "id":  "S103",
 "message":  "Split this 213 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Event\LogEvent.cs",
+"uri":  "sources\akka.net\src\core\Akka\Event\LogEvent.cs",
 "region":  {
 "startLine":  70,
 "startColumn":  1,
@@ -186,7 +186,7 @@
 "id":  "S103",
 "message":  "Split this 254 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Event\Logging.cs",
+"uri":  "sources\akka.net\src\core\Akka\Event\Logging.cs",
 "region":  {
 "startLine":  178,
 "startColumn":  1,
@@ -199,7 +199,7 @@
 "id":  "S103",
 "message":  "Split this 204 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Routing\ConsistentHash.cs",
+"uri":  "sources\akka.net\src\core\Akka\Routing\ConsistentHash.cs",
 "region":  {
 "startLine":  160,
 "startColumn":  1,
@@ -212,7 +212,7 @@
 "id":  "S103",
 "message":  "Split this 207 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Routing\ConsistentHash.cs",
+"uri":  "sources\akka.net\src\core\Akka\Routing\ConsistentHash.cs",
 "region":  {
 "startLine":  173,
 "startColumn":  1,
@@ -225,7 +225,7 @@
 "id":  "S103",
 "message":  "Split this 311 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Routing\Resizer.cs",
+"uri":  "sources\akka.net\src\core\Akka\Routing\Resizer.cs",
 "region":  {
 "startLine":  61,
 "startColumn":  1,
@@ -238,7 +238,7 @@
 "id":  "S103",
 "message":  "Split this 209 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Util\ListPriorityQueue.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\ListPriorityQueue.cs",
 "region":  {
 "startLine":  64,
 "startColumn":  1,
@@ -251,7 +251,7 @@
 "id":  "S103",
 "message":  "Split this 279 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Util\MatchHandler\CachedMatchCompiler.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\CachedMatchCompiler.cs",
 "region":  {
 "startLine":  55,
 "startColumn":  1,
@@ -264,7 +264,7 @@
 "id":  "S103",
 "message":  "Split this 273 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Util\MatchHandler\IMatchCompiler.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\IMatchCompiler.cs",
 "region":  {
 "startLine":  17,
 "startColumn":  1,
@@ -277,7 +277,7 @@
 "id":  "S103",
 "message":  "Split this 221 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Util\MatchHandler\MatchExpressionBuilder.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\MatchExpressionBuilder.cs",
 "region":  {
 "startLine":  240,
 "startColumn":  1,
@@ -290,7 +290,7 @@
 "id":  "S103",
 "message":  "Split this 249 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Util\MatchHandler\MatchExpressionBuilder.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\MatchExpressionBuilder.cs",
 "region":  {
 "startLine":  257,
 "startColumn":  1,

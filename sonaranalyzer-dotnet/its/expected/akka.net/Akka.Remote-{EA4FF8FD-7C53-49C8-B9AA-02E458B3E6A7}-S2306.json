@@ -4,7 +4,7 @@
 "id":  "S2306",
 "message":  "Rename 'async' to not use a contextual keyword as an identifier.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\RemoteActorRefProvider.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteActorRefProvider.cs",
 "region":  {
 "startLine":  142,
 "startColumn":  184,
@@ -17,7 +17,7 @@
 "id":  "S2306",
 "message":  "Rename 'async' to not use a contextual keyword as an identifier.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\RemoteActorRefProvider.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteActorRefProvider.cs",
 "region":  {
 "startLine":  271,
 "startColumn":  88,

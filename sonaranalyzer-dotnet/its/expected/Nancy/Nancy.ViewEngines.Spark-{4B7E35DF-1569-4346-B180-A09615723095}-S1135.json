@@ -4,7 +4,7 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "Nancy\src\Nancy.ViewEngines.Spark\Descriptors\DefaultDescriptorBuilder.cs",
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark\Descriptors\DefaultDescriptorBuilder.cs",
 "region":  {
 "startLine":  206,
 "startColumn":  13,
@@ -17,7 +17,7 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "Nancy\src\Nancy.ViewEngines.Spark\Descriptors\IDescriptorBuilder.cs",
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark\Descriptors\IDescriptorBuilder.cs",
 "region":  {
 "startLine":  16,
 "startColumn":  11,

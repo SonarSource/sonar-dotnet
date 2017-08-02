@@ -5,7 +5,7 @@
 "message":  "The Cyclomatic Complexity of this method is 13 which is greater than 10 authorized.",
 "location":  [
 {
-"uri":  "akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
 "region":  {
 "startLine":  1027,
 "startColumn":  33,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
 "region":  {
 "startLine":  1027,
 "startColumn":  33,
@@ -23,7 +23,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
 "region":  {
 "startLine":  1029,
 "startColumn":  13,
@@ -32,7 +32,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
 "region":  {
 "startLine":  1032,
 "startColumn":  17,
@@ -41,7 +41,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
 "region":  {
 "startLine":  1032,
 "startColumn":  37,
@@ -50,7 +50,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
 "region":  {
 "startLine":  1037,
 "startColumn":  18,
@@ -59,7 +59,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
 "region":  {
 "startLine":  1040,
 "startColumn":  17,
@@ -68,7 +68,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
 "region":  {
 "startLine":  1050,
 "startColumn":  18,
@@ -77,7 +77,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
 "region":  {
 "startLine":  1060,
 "startColumn":  18,
@@ -86,7 +86,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
 "region":  {
 "startLine":  1065,
 "startColumn":  18,
@@ -95,7 +95,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
 "region":  {
 "startLine":  1069,
 "startColumn":  17,
@@ -104,7 +104,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
 "region":  {
 "startLine":  1072,
 "startColumn":  18,
@@ -113,7 +113,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
 "region":  {
 "startLine":  1072,
 "startColumn":  85,
@@ -122,7 +122,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
 "region":  {
 "startLine":  1072,
 "startColumn":  51,
@@ -137,7 +137,7 @@
 "message":  "The Cyclomatic Complexity of this method is 17 which is greater than 10 authorized.",
 "location":  [
 {
-"uri":  "akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
 "region":  {
 "startLine":  1293,
 "startColumn":  22,
@@ -146,7 +146,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
 "region":  {
 "startLine":  1293,
 "startColumn":  22,
@@ -155,7 +155,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
 "region":  {
 "startLine":  1297,
 "startColumn":  17,
@@ -164,7 +164,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
 "region":  {
 "startLine":  1301,
 "startColumn":  22,
@@ -173,7 +173,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
 "region":  {
 "startLine":  1306,
 "startColumn":  22,
@@ -182,7 +182,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
 "region":  {
 "startLine":  1309,
 "startColumn":  21,
@@ -191,7 +191,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
 "region":  {
 "startLine":  1317,
 "startColumn":  17,
@@ -200,7 +200,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
 "region":  {
 "startLine":  1317,
 "startColumn":  31,
@@ -209,7 +209,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
 "region":  {
 "startLine":  1319,
 "startColumn":  21,
@@ -218,7 +218,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
 "region":  {
 "startLine":  1334,
 "startColumn":  17,
@@ -227,7 +227,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
 "region":  {
 "startLine":  1335,
 "startColumn":  17,
@@ -236,7 +236,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
 "region":  {
 "startLine":  1345,
 "startColumn":  38,
@@ -245,7 +245,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
 "region":  {
 "startLine":  1346,
 "startColumn":  13,
@@ -254,7 +254,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
 "region":  {
 "startLine":  1346,
 "startColumn":  32,
@@ -263,7 +263,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
 "region":  {
 "startLine":  1349,
 "startColumn":  17,
@@ -272,7 +272,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
 "region":  {
 "startLine":  1362,
 "startColumn":  18,
@@ -281,7 +281,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
 "region":  {
 "startLine":  1369,
 "startColumn":  17,
@@ -290,7 +290,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
 "region":  {
 "startLine":  1372,
 "startColumn":  21,
@@ -305,7 +305,7 @@
 "message":  "The Cyclomatic Complexity of this method is 21 which is greater than 10 authorized.",
 "location":  [
 {
-"uri":  "akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
 "region":  {
 "startLine":  56,
 "startColumn":  21,
@@ -314,7 +314,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
 "region":  {
 "startLine":  56,
 "startColumn":  21,
@@ -323,7 +323,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
 "region":  {
 "startLine":  60,
 "startColumn":  49,
@@ -332,7 +332,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
 "region":  {
 "startLine":  61,
 "startColumn":  39,
@@ -341,7 +341,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
 "region":  {
 "startLine":  66,
 "startColumn":  13,
@@ -350,7 +350,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
 "region":  {
 "startLine":  68,
 "startColumn":  17,
@@ -359,7 +359,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
 "region":  {
 "startLine":  71,
 "startColumn":  21,
@@ -368,7 +368,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
 "region":  {
 "startLine":  81,
 "startColumn":  18,
@@ -377,7 +377,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
 "region":  {
 "startLine":  81,
 "startColumn":  83,
@@ -386,7 +386,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
 "region":  {
 "startLine":  81,
 "startColumn":  46,
@@ -395,7 +395,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
 "region":  {
 "startLine":  83,
 "startColumn":  17,
@@ -404,7 +404,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
 "region":  {
 "startLine":  92,
 "startColumn":  25,
@@ -413,7 +413,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
 "region":  {
 "startLine":  93,
 "startColumn":  29,
@@ -422,7 +422,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
 "region":  {
 "startLine":  95,
 "startColumn":  29,
@@ -431,7 +431,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
 "region":  {
 "startLine":  94,
 "startColumn":  29,
@@ -440,7 +440,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
 "region":  {
 "startLine":  110,
 "startColumn":  25,
@@ -449,7 +449,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
 "region":  {
 "startLine":  123,
 "startColumn":  18,
@@ -458,7 +458,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
 "region":  {
 "startLine":  123,
 "startColumn":  106,
@@ -467,7 +467,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
 "region":  {
 "startLine":  123,
 "startColumn":  84,
@@ -476,7 +476,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
 "region":  {
 "startLine":  123,
 "startColumn":  47,
@@ -485,7 +485,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
 "region":  {
 "startLine":  125,
 "startColumn":  17,
@@ -494,7 +494,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
 "region":  {
 "startLine":  130,
 "startColumn":  17,
@@ -509,7 +509,7 @@
 "message":  "The Cyclomatic Complexity of this method is 14 which is greater than 10 authorized.",
 "location":  [
 {
-"uri":  "akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
 "region":  {
 "startLine":  479,
 "startColumn":  24,
@@ -518,7 +518,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
 "region":  {
 "startLine":  479,
 "startColumn":  24,
@@ -527,7 +527,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
 "region":  {
 "startLine":  502,
 "startColumn":  21,
@@ -536,7 +536,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
 "region":  {
 "startLine":  506,
 "startColumn":  25,
@@ -545,7 +545,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
 "region":  {
 "startLine":  516,
 "startColumn":  21,
@@ -554,7 +554,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
 "region":  {
 "startLine":  521,
 "startColumn":  21,
@@ -563,7 +563,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
 "region":  {
 "startLine":  543,
 "startColumn":  29,
@@ -572,7 +572,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
 "region":  {
 "startLine":  580,
 "startColumn":  37,
@@ -581,7 +581,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
 "region":  {
 "startLine":  580,
 "startColumn":  58,
@@ -590,7 +590,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
 "region":  {
 "startLine":  582,
 "startColumn":  41,
@@ -599,7 +599,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
 "region":  {
 "startLine":  592,
 "startColumn":  35,
@@ -608,7 +608,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
 "region":  {
 "startLine":  592,
 "startColumn":  56,
@@ -617,7 +617,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
 "region":  {
 "startLine":  594,
 "startColumn":  39,
@@ -626,7 +626,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
 "region":  {
 "startLine":  598,
 "startColumn":  68,
@@ -635,7 +635,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
 "region":  {
 "startLine":  602,
 "startColumn":  21,
@@ -650,7 +650,7 @@
 "message":  "The Cyclomatic Complexity of this method is 15 which is greater than 10 authorized.",
 "location":  [
 {
-"uri":  "akka.net\src\core\Akka.Remote\RemoteSystemDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSystemDaemon.cs",
 "region":  {
 "startLine":  107,
 "startColumn":  24,
@@ -659,7 +659,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\RemoteSystemDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSystemDaemon.cs",
 "region":  {
 "startLine":  107,
 "startColumn":  24,
@@ -668,7 +668,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\RemoteSystemDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSystemDaemon.cs",
 "region":  {
 "startLine":  110,
 "startColumn":  13,
@@ -677,7 +677,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\RemoteSystemDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSystemDaemon.cs",
 "region":  {
 "startLine":  113,
 "startColumn":  17,
@@ -686,7 +686,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\RemoteSystemDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSystemDaemon.cs",
 "region":  {
 "startLine":  118,
 "startColumn":  18,
@@ -695,7 +695,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\RemoteSystemDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSystemDaemon.cs",
 "region":  {
 "startLine":  124,
 "startColumn":  21,
@@ -704,7 +704,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\RemoteSystemDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSystemDaemon.cs",
 "region":  {
 "startLine":  127,
 "startColumn":  18,
@@ -713,7 +713,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\RemoteSystemDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSystemDaemon.cs",
 "region":  {
 "startLine":  132,
 "startColumn":  18,
@@ -722,7 +722,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\RemoteSystemDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSystemDaemon.cs",
 "region":  {
 "startLine":  140,
 "startColumn":  18,
@@ -731,7 +731,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\RemoteSystemDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSystemDaemon.cs",
 "region":  {
 "startLine":  144,
 "startColumn":  17,
@@ -740,7 +740,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\RemoteSystemDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSystemDaemon.cs",
 "region":  {
 "startLine":  146,
 "startColumn":  21,
@@ -749,7 +749,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\RemoteSystemDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSystemDaemon.cs",
 "region":  {
 "startLine":  158,
 "startColumn":  29,
@@ -758,7 +758,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\RemoteSystemDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSystemDaemon.cs",
 "region":  {
 "startLine":  183,
 "startColumn":  21,
@@ -767,7 +767,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\RemoteSystemDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSystemDaemon.cs",
 "region":  {
 "startLine":  183,
 "startColumn":  49,
@@ -776,7 +776,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\RemoteSystemDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSystemDaemon.cs",
 "region":  {
 "startLine":  188,
 "startColumn":  29,
@@ -785,7 +785,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\RemoteSystemDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSystemDaemon.cs",
 "region":  {
 "startLine":  190,
 "startColumn":  33,
@@ -800,7 +800,7 @@
 "message":  "The Cyclomatic Complexity of this method is 11 which is greater than 10 authorized.",
 "location":  [
 {
-"uri":  "akka.net\src\core\Akka.Remote\RemoteWatcher.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteWatcher.cs",
 "region":  {
 "startLine":  305,
 "startColumn":  33,
@@ -809,7 +809,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\RemoteWatcher.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteWatcher.cs",
 "region":  {
 "startLine":  305,
 "startColumn":  33,
@@ -818,7 +818,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\RemoteWatcher.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteWatcher.cs",
 "region":  {
 "startLine":  307,
 "startColumn":  13,
@@ -827,7 +827,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\RemoteWatcher.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteWatcher.cs",
 "region":  {
 "startLine":  308,
 "startColumn":  18,
@@ -836,7 +836,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\RemoteWatcher.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteWatcher.cs",
 "region":  {
 "startLine":  309,
 "startColumn":  18,
@@ -845,7 +845,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\RemoteWatcher.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteWatcher.cs",
 "region":  {
 "startLine":  310,
 "startColumn":  18,
@@ -854,7 +854,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\RemoteWatcher.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteWatcher.cs",
 "region":  {
 "startLine":  311,
 "startColumn":  18,
@@ -863,7 +863,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\RemoteWatcher.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteWatcher.cs",
 "region":  {
 "startLine":  312,
 "startColumn":  18,
@@ -872,7 +872,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\RemoteWatcher.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteWatcher.cs",
 "region":  {
 "startLine":  317,
 "startColumn":  18,
@@ -881,7 +881,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\RemoteWatcher.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteWatcher.cs",
 "region":  {
 "startLine":  322,
 "startColumn":  18,
@@ -890,7 +890,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\RemoteWatcher.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteWatcher.cs",
 "region":  {
 "startLine":  327,
 "startColumn":  18,
@@ -899,7 +899,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\RemoteWatcher.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteWatcher.cs",
 "region":  {
 "startLine":  334,
 "startColumn":  18,
@@ -914,7 +914,7 @@
 "message":  "The Cyclomatic Complexity of this method is 16 which is greater than 10 authorized.",
 "location":  [
 {
-"uri":  "akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
 "region":  {
 "startLine":  225,
 "startColumn":  33,
@@ -923,7 +923,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
 "region":  {
 "startLine":  225,
 "startColumn":  33,
@@ -932,7 +932,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
 "region":  {
 "startLine":  227,
 "startColumn":  13,
@@ -941,7 +941,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
 "region":  {
 "startLine":  233,
 "startColumn":  18,
@@ -950,7 +950,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
 "region":  {
 "startLine":  242,
 "startColumn":  21,
@@ -959,7 +959,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
 "region":  {
 "startLine":  244,
 "startColumn":  68,
@@ -968,7 +968,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
 "region":  {
 "startLine":  254,
 "startColumn":  18,
@@ -977,7 +977,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
 "region":  {
 "startLine":  266,
 "startColumn":  18,
@@ -986,7 +986,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
 "region":  {
 "startLine":  273,
 "startColumn":  17,
@@ -995,7 +995,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
 "region":  {
 "startLine":  275,
 "startColumn":  21,
@@ -1004,7 +1004,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
 "region":  {
 "startLine":  286,
 "startColumn":  18,
@@ -1013,7 +1013,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
 "region":  {
 "startLine":  290,
 "startColumn":  17,
@@ -1022,7 +1022,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
 "region":  {
 "startLine":  292,
 "startColumn":  21,
@@ -1031,7 +1031,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
 "region":  {
 "startLine":  315,
 "startColumn":  18,
@@ -1040,7 +1040,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
 "region":  {
 "startLine":  319,
 "startColumn":  17,
@@ -1049,7 +1049,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
 "region":  {
 "startLine":  321,
 "startColumn":  21,
@@ -1058,7 +1058,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
 "region":  {
 "startLine":  344,
 "startColumn":  18,
@@ -1073,7 +1073,7 @@
 "message":  "The Cyclomatic Complexity of this method is 26 which is greater than 10 authorized.",
 "location":  [
 {
-"uri":  "akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
 "region":  {
 "startLine":  823,
 "startColumn":  22,
@@ -1082,7 +1082,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
 "region":  {
 "startLine":  823,
 "startColumn":  22,
@@ -1091,7 +1091,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
 "region":  {
 "startLine":  827,
 "startColumn":  17,
@@ -1100,7 +1100,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
 "region":  {
 "startLine":  827,
 "startColumn":  64,
@@ -1109,7 +1109,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
 "region":  {
 "startLine":  842,
 "startColumn":  17,
@@ -1118,7 +1118,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
 "region":  {
 "startLine":  842,
 "startColumn":  55,
@@ -1127,7 +1127,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
 "region":  {
 "startLine":  847,
 "startColumn":  21,
@@ -1136,7 +1136,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
 "region":  {
 "startLine":  859,
 "startColumn":  17,
@@ -1145,7 +1145,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
 "region":  {
 "startLine":  866,
 "startColumn":  17,
@@ -1154,7 +1154,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
 "region":  {
 "startLine":  866,
 "startColumn":  53,
@@ -1163,7 +1163,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
 "region":  {
 "startLine":  873,
 "startColumn":  25,
@@ -1172,7 +1172,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
 "region":  {
 "startLine":  901,
 "startColumn":  17,
@@ -1181,7 +1181,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
 "region":  {
 "startLine":  908,
 "startColumn":  17,
@@ -1190,7 +1190,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
 "region":  {
 "startLine":  920,
 "startColumn":  17,
@@ -1199,7 +1199,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
 "region":  {
 "startLine":  929,
 "startColumn":  17,
@@ -1208,7 +1208,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
 "region":  {
 "startLine":  941,
 "startColumn":  17,
@@ -1217,7 +1217,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
 "region":  {
 "startLine":  945,
 "startColumn":  21,
@@ -1226,7 +1226,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
 "region":  {
 "startLine":  947,
 "startColumn":  21,
@@ -1235,7 +1235,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
 "region":  {
 "startLine":  953,
 "startColumn":  17,
@@ -1244,7 +1244,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
 "region":  {
 "startLine":  959,
 "startColumn":  17,
@@ -1253,7 +1253,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
 "region":  {
 "startLine":  961,
 "startColumn":  21,
@@ -1262,7 +1262,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
 "region":  {
 "startLine":  967,
 "startColumn":  25,
@@ -1271,7 +1271,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
 "region":  {
 "startLine":  979,
 "startColumn":  17,
@@ -1280,7 +1280,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
 "region":  {
 "startLine":  986,
 "startColumn":  17,
@@ -1289,7 +1289,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
 "region":  {
 "startLine":  991,
 "startColumn":  17,
@@ -1298,7 +1298,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
 "region":  {
 "startLine":  994,
 "startColumn":  21,
@@ -1307,7 +1307,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
 "region":  {
 "startLine":  1001,
 "startColumn":  13,

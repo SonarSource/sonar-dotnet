@@ -5,7 +5,7 @@
 "message":  "Fix this implementation of 'IDisposable' to conform to the dispose pattern.",
 "location":  [
 {
-"uri":  "Nancy\src\Nancy.Hosting.Self.Tests\NancySelfHostFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Hosting.Self.Tests\NancySelfHostFixture.cs",
 "region":  {
 "startLine":  251,
 "startColumn":  23,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy.Hosting.Self.Tests\NancySelfHostFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Hosting.Self.Tests\NancySelfHostFixture.cs",
 "region":  {
 "startLine":  251,
 "startColumn":  23,
@@ -23,7 +23,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy.Hosting.Self.Tests\NancySelfHostFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Hosting.Self.Tests\NancySelfHostFixture.cs",
 "region":  {
 "startLine":  260,
 "startColumn":  25,

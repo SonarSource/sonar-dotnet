@@ -4,7 +4,7 @@
 "id":  "S1698",
 "message":  "Consider using 'Equals' if value comparison was intended.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\BuiltInActors.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\BuiltInActors.cs",
 "region":  {
 "startLine":  182,
 "startColumn":  30,
@@ -17,7 +17,7 @@
 "id":  "S1698",
 "message":  "Consider using 'Equals' if value comparison was intended.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\BuiltInActors.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\BuiltInActors.cs",
 "region":  {
 "startLine":  182,
 "startColumn":  51,
@@ -30,7 +30,7 @@
 "id":  "S1698",
 "message":  "Consider using 'Equals' if value comparison was intended.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\EmptyLocalActorRef.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\EmptyLocalActorRef.cs",
 "region":  {
 "startLine":  75,
 "startColumn":  30,
@@ -43,7 +43,7 @@
 "id":  "S1698",
 "message":  "Consider using 'Equals' if value comparison was intended.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\EmptyLocalActorRef.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\EmptyLocalActorRef.cs",
 "region":  {
 "startLine":  75,
 "startColumn":  51,
@@ -56,7 +56,7 @@
 "id":  "S1698",
 "message":  "Consider using 'Equals' if value comparison was intended.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\Futures.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\Futures.cs",
 "region":  {
 "startLine":  362,
 "startColumn":  35,
@@ -69,7 +69,7 @@
 "id":  "S1698",
 "message":  "Consider using 'Equals' if value comparison was intended.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\Futures.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\Futures.cs",
 "region":  {
 "startLine":  380,
 "startColumn":  36,
@@ -82,7 +82,7 @@
 "id":  "S1698",
 "message":  "Consider using 'Equals' if value comparison was intended.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\Futures.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\Futures.cs",
 "region":  {
 "startLine":  380,
 "startColumn":  63,
@@ -95,7 +95,7 @@
 "id":  "S1698",
 "message":  "Consider using 'Equals' if value comparison was intended.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\Message.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\Message.cs",
 "region":  {
 "startLine":  31,
 "startColumn":  68,
@@ -108,7 +108,7 @@
 "id":  "S1698",
 "message":  "Consider using 'Equals' if value comparison was intended.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Event\DeadLetterListener.cs",
+"uri":  "sources\akka.net\src\core\Akka\Event\DeadLetterListener.cs",
 "region":  {
 "startLine":  49,
 "startColumn":  35,
@@ -121,7 +121,7 @@
 "id":  "S1698",
 "message":  "Consider using 'Equals' if value comparison was intended.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Event\DeadLetterListener.cs",
+"uri":  "sources\akka.net\src\core\Akka\Event\DeadLetterListener.cs",
 "region":  {
 "startLine":  50,
 "startColumn":  35,
@@ -134,7 +134,7 @@
 "id":  "S1698",
 "message":  "Consider using 'Equals' if value comparison was intended.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\IO\TcpConnection.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpConnection.cs",
 "region":  {
 "startLine":  79,
 "startColumn":  42,

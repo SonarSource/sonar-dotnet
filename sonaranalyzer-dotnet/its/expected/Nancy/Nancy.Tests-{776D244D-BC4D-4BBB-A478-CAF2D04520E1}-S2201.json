@@ -4,7 +4,7 @@
 "id":  "S2201",
 "message":  "Use the return value of method 'ToList', which has no side effect.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ViewEngines\ResourceViewLocationProviderFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ViewEngines\ResourceViewLocationProviderFixture.cs",
 "region":  {
 "startLine":  191,
 "startColumn":  13,
@@ -17,7 +17,7 @@
 "id":  "S2201",
 "message":  "Use the return value of method 'ToList', which has no side effect.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ViewEngines\ResourceViewLocationProviderFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ViewEngines\ResourceViewLocationProviderFixture.cs",
 "region":  {
 "startLine":  213,
 "startColumn":  13,

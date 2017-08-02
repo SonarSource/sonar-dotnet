@@ -4,7 +4,7 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorDslSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ActorDslSpec.cs",
 "region":  {
 "startLine":  85,
 "startColumn":  15,
@@ -17,7 +17,7 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorDslSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ActorDslSpec.cs",
 "region":  {
 "startLine":  91,
 "startColumn":  15,
@@ -30,7 +30,7 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorDslSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ActorDslSpec.cs",
 "region":  {
 "startLine":  113,
 "startColumn":  15,
@@ -43,7 +43,7 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorPathSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ActorPathSpec.cs",
 "region":  {
 "startLine":  106,
 "startColumn":  15,
@@ -56,7 +56,7 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorPathSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ActorPathSpec.cs",
 "region":  {
 "startLine":  117,
 "startColumn":  15,
@@ -69,7 +69,7 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ReceiveTimeoutSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ReceiveTimeoutSpec.cs",
 "region":  {
 "startLine":  83,
 "startColumn":  11,
@@ -82,7 +82,7 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Dispatch\DispatchersSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Dispatch\DispatchersSpec.cs",
 "region":  {
 "startLine":  94,
 "startColumn":  58,
@@ -95,7 +95,7 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
 "region":  {
 "startLine":  55,
 "startColumn":  19,
@@ -108,7 +108,7 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
 "region":  {
 "startLine":  174,
 "startColumn":  61,
@@ -121,7 +121,7 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
 "region":  {
 "startLine":  198,
 "startColumn":  19,
@@ -134,7 +134,7 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
 "region":  {
 "startLine":  232,
 "startColumn":  19,
@@ -147,7 +147,7 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
 "region":  {
 "startLine":  282,
 "startColumn":  19,
@@ -160,7 +160,7 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
 "region":  {
 "startLine":  353,
 "startColumn":  15,
@@ -173,7 +173,7 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
 "region":  {
 "startLine":  382,
 "startColumn":  20,
@@ -186,7 +186,7 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
 "region":  {
 "startLine":  714,
 "startColumn":  47,
@@ -199,7 +199,7 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
 "region":  {
 "startLine":  929,
 "startColumn":  144,
@@ -212,7 +212,7 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
 "region":  {
 "startLine":  1005,
 "startColumn":  15,
@@ -225,7 +225,7 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
 "region":  {
 "startLine":  1010,
 "startColumn":  16,
@@ -238,7 +238,7 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\IO\TcpIntegrationSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\IO\TcpIntegrationSpec.cs",
 "region":  {
 "startLine":  271,
 "startColumn":  57,
@@ -251,7 +251,7 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Routing\RoutingSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Routing\RoutingSpec.cs",
 "region":  {
 "startLine":  121,
 "startColumn":  57,
@@ -264,7 +264,7 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Serialization\SerializationSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Serialization\SerializationSpec.cs",
 "region":  {
 "startLine":  512,
 "startColumn":  11,
@@ -277,7 +277,7 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Util\ByteStringSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Util\ByteStringSpec.cs",
 "region":  {
 "startLine":  18,
 "startColumn":  9,
@@ -290,7 +290,7 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Util\ByteStringSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Util\ByteStringSpec.cs",
 "region":  {
 "startLine":  25,
 "startColumn":  16,
@@ -303,7 +303,7 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Util\ByteStringSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Util\ByteStringSpec.cs",
 "region":  {
 "startLine":  87,
 "startColumn":  124,

@@ -4,7 +4,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "akka.net\src\contrib\testkits\Akka.TestKit.NUnit\NUnitAssertions.cs",
+"uri":  "sources\akka.net\src\contrib\testkits\Akka.TestKit.NUnit\NUnitAssertions.cs",
 "region":  {
 "startLine":  42,
 "startColumn":  46,
@@ -17,7 +17,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "akka.net\src\contrib\testkits\Akka.TestKit.NUnit\NUnitAssertions.cs",
+"uri":  "sources\akka.net\src\contrib\testkits\Akka.TestKit.NUnit\NUnitAssertions.cs",
 "region":  {
 "startLine":  42,
 "startColumn":  165,

@@ -4,7 +4,7 @@
 "id":  "S1481",
 "message":  "Remove this unused 'result' local variable.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Authentication.Forms.Tests\FormsAuthenticationFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Authentication.Forms.Tests\FormsAuthenticationFixture.cs",
 "region":  {
 "startLine":  411,
 "startColumn":  17,
@@ -17,7 +17,7 @@
 "id":  "S1481",
 "message":  "Remove this unused 'result' local variable.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Authentication.Forms.Tests\FormsAuthenticationFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Authentication.Forms.Tests\FormsAuthenticationFixture.cs",
 "region":  {
 "startLine":  427,
 "startColumn":  17,
@@ -30,7 +30,7 @@
 "id":  "S1481",
 "message":  "Remove this unused 'result' local variable.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Authentication.Forms.Tests\FormsAuthenticationFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Authentication.Forms.Tests\FormsAuthenticationFixture.cs",
 "region":  {
 "startLine":  443,
 "startColumn":  17,
@@ -43,7 +43,7 @@
 "id":  "S1481",
 "message":  "Remove this unused 'result' local variable.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Authentication.Forms.Tests\FormsAuthenticationFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Authentication.Forms.Tests\FormsAuthenticationFixture.cs",
 "region":  {
 "startLine":  459,
 "startColumn":  17,
@@ -56,7 +56,7 @@
 "id":  "S1481",
 "message":  "Remove this unused 'result' local variable.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Authentication.Forms.Tests\FormsAuthenticationFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Authentication.Forms.Tests\FormsAuthenticationFixture.cs",
 "region":  {
 "startLine":  475,
 "startColumn":  17,
@@ -69,7 +69,7 @@
 "id":  "S1481",
 "message":  "Remove this unused 'result' local variable.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Authentication.Forms.Tests\FormsAuthenticationFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Authentication.Forms.Tests\FormsAuthenticationFixture.cs",
 "region":  {
 "startLine":  491,
 "startColumn":  17,

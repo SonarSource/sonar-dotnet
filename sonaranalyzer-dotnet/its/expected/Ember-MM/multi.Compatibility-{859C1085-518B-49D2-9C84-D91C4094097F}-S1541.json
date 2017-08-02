@@ -4,7 +4,7 @@
 "id":  "S1541",
 "message":  "The Cyclomatic Complexity of this function is 29 which is greater than 10 authorized.",
 "location":  {
-"uri":  "Ember-MM\Addons\multi.Compatibility\genericYAMJ.vb",
+"uri":  "sources\Ember-MM\Addons\multi.Compatibility\genericYAMJ.vb",
 "region":  {
 "startLine":  118,
 "startColumn":  2,

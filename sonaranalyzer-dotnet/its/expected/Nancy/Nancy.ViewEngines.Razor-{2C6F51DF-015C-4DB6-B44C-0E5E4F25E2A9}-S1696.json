@@ -4,7 +4,7 @@
 "id":  "S1696",
 "message":  "Do not catch NullReferenceException; test for null instead.",
 "location":  {
-"uri":  "Nancy\src\Nancy.ViewEngines.Razor\NancyRazorViewBase.cs",
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\NancyRazorViewBase.cs",
 "region":  {
 "startLine":  404,
 "startColumn":  20,
@@ -17,7 +17,7 @@
 "id":  "S1696",
 "message":  "Do not catch NullReferenceException; test for null instead.",
 "location":  {
-"uri":  "Nancy\src\Nancy.ViewEngines.Razor\NancyRazorViewBase.cs",
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\NancyRazorViewBase.cs",
 "region":  {
 "startLine":  419,
 "startColumn":  24,

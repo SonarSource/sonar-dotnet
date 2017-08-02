@@ -4,7 +4,7 @@
 "id":  "S1940",
 "message":  "Use the opposite operator ('!=') instead.",
 "location":  {
-"uri":  "Nancy\src\Nancy\IO\RequestStream.cs",
+"uri":  "sources\Nancy\src\Nancy\IO\RequestStream.cs",
 "region":  {
 "startLine":  149,
 "startColumn":  26,
@@ -17,7 +17,7 @@
 "id":  "S1940",
 "message":  "Use the opposite operator ('!=') instead.",
 "location":  {
-"uri":  "Nancy\src\Nancy\RequestHeaders.cs",
+"uri":  "sources\Nancy\src\Nancy\RequestHeaders.cs",
 "region":  {
 "startLine":  395,
 "startColumn":  20,

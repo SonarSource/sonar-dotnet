@@ -4,7 +4,7 @@
 "id":  "S1643",
 "message":  "Use a StringBuilder instead.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDVD.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
 "region":  {
 "startLine":  178,
 "startColumn":  17,
@@ -17,7 +17,7 @@
 "id":  "S1643",
 "message":  "Use a StringBuilder instead.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPINFO.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
 "region":  {
 "startLine":  1084,
 "startColumn":  21,

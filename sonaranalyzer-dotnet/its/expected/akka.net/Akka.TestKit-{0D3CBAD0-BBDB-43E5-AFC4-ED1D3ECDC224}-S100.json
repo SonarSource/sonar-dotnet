@@ -4,7 +4,7 @@
 "id":  "S100",
 "message":  "Rename method 'ActorOfAsTestFSMRef' to match camel case naming rules, consider using 'ActorOfAsTestFsmRef'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
 "region":  {
 "startLine":  231,
 "startColumn":  53,
@@ -17,7 +17,7 @@
 "id":  "S100",
 "message":  "Rename method 'ActorOfAsTestFSMRef' to match camel case naming rules, consider using 'ActorOfAsTestFsmRef'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
 "region":  {
 "startLine":  247,
 "startColumn":  53,
@@ -30,7 +30,7 @@
 "id":  "S100",
 "message":  "Rename method 'ActorOfAsTestFSMRef' to match camel case naming rules, consider using 'ActorOfAsTestFsmRef'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
 "region":  {
 "startLine":  265,
 "startColumn":  53,
@@ -43,7 +43,7 @@
 "id":  "S100",
 "message":  "Rename method 'ActorOfAsTestFSMRef' to match camel case naming rules, consider using 'ActorOfAsTestFsmRef'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
 "region":  {
 "startLine":  281,
 "startColumn":  53,
@@ -56,7 +56,7 @@
 "id":  "S100",
 "message":  "Rename method 'ActorOfAsTestFSMRef' to match camel case naming rules, consider using 'ActorOfAsTestFsmRef'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
 "region":  {
 "startLine":  299,
 "startColumn":  53,
@@ -69,7 +69,7 @@
 "id":  "S100",
 "message":  "Rename method 'ActorOfAsTestFSMRef' to match camel case naming rules, consider using 'ActorOfAsTestFsmRef'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
 "region":  {
 "startLine":  316,
 "startColumn":  53,

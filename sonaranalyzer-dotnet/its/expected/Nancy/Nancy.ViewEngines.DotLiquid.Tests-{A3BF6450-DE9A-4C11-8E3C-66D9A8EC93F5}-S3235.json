@@ -4,7 +4,7 @@
 "id":  "S3235",
 "message":  "Remove these redundant parentheses.",
 "location":  {
-"uri":  "Nancy\src\Nancy.ViewEngines.DotLiquid.Tests\DotLiquidViewEngineFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.DotLiquid.Tests\DotLiquidViewEngineFixture.cs",
 "region":  {
 "startLine":  345,
 "startColumn":  42,
@@ -17,7 +17,7 @@
 "id":  "S3235",
 "message":  "Remove these redundant parentheses.",
 "location":  {
-"uri":  "Nancy\src\Nancy.ViewEngines.DotLiquid.Tests\DotLiquidViewEngineFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.DotLiquid.Tests\DotLiquidViewEngineFixture.cs",
 "region":  {
 "startLine":  371,
 "startColumn":  56,
@@ -30,7 +30,7 @@
 "id":  "S3235",
 "message":  "Remove these redundant parentheses.",
 "location":  {
-"uri":  "Nancy\src\Nancy.ViewEngines.DotLiquid.Tests\DotLiquidViewEngineFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.DotLiquid.Tests\DotLiquidViewEngineFixture.cs",
 "region":  {
 "startLine":  372,
 "startColumn":  28,
@@ -43,7 +43,7 @@
 "id":  "S3235",
 "message":  "Remove these redundant parentheses.",
 "location":  {
-"uri":  "Nancy\src\Nancy.ViewEngines.DotLiquid.Tests\DotLiquidViewEngineFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.DotLiquid.Tests\DotLiquidViewEngineFixture.cs",
 "region":  {
 "startLine":  373,
 "startColumn":  28,
@@ -56,7 +56,7 @@
 "id":  "S3235",
 "message":  "Remove these redundant parentheses.",
 "location":  {
-"uri":  "Nancy\src\Nancy.ViewEngines.DotLiquid.Tests\DotLiquidViewEngineFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.DotLiquid.Tests\DotLiquidViewEngineFixture.cs",
 "region":  {
 "startLine":  374,
 "startColumn":  28,
@@ -69,7 +69,7 @@
 "id":  "S3235",
 "message":  "Remove these redundant parentheses.",
 "location":  {
-"uri":  "Nancy\src\Nancy.ViewEngines.DotLiquid.Tests\DotLiquidViewEngineFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.DotLiquid.Tests\DotLiquidViewEngineFixture.cs",
 "region":  {
 "startLine":  377,
 "startColumn":  41,

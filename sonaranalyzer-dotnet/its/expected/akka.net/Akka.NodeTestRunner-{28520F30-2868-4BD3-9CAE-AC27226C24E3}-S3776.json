@@ -5,7 +5,7 @@
 "message":  "Refactor this method to reduce its Cognitive Complexity from 17 to the 15 allowed.",
 "location":  [
 {
-"uri":  "akka.net\src\core\Akka.NodeTestRunner\Sink.cs",
+"uri":  "sources\akka.net\src\core\Akka.NodeTestRunner\Sink.cs",
 "region":  {
 "startLine":  29,
 "startColumn":  21,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.NodeTestRunner\Sink.cs",
+"uri":  "sources\akka.net\src\core\Akka.NodeTestRunner\Sink.cs",
 "region":  {
 "startLine":  32,
 "startColumn":  13,
@@ -23,7 +23,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.NodeTestRunner\Sink.cs",
+"uri":  "sources\akka.net\src\core\Akka.NodeTestRunner\Sink.cs",
 "region":  {
 "startLine":  37,
 "startColumn":  13,
@@ -32,7 +32,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.NodeTestRunner\Sink.cs",
+"uri":  "sources\akka.net\src\core\Akka.NodeTestRunner\Sink.cs",
 "region":  {
 "startLine":  46,
 "startColumn":  13,
@@ -41,7 +41,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.NodeTestRunner\Sink.cs",
+"uri":  "sources\akka.net\src\core\Akka.NodeTestRunner\Sink.cs",
 "region":  {
 "startLine":  50,
 "startColumn":  17,
@@ -50,7 +50,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.NodeTestRunner\Sink.cs",
+"uri":  "sources\akka.net\src\core\Akka.NodeTestRunner\Sink.cs",
 "region":  {
 "startLine":  51,
 "startColumn":  17,
@@ -59,7 +59,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.NodeTestRunner\Sink.cs",
+"uri":  "sources\akka.net\src\core\Akka.NodeTestRunner\Sink.cs",
 "region":  {
 "startLine":  52,
 "startColumn":  17,
@@ -68,7 +68,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.NodeTestRunner\Sink.cs",
+"uri":  "sources\akka.net\src\core\Akka.NodeTestRunner\Sink.cs",
 "region":  {
 "startLine":  57,
 "startColumn":  13,
@@ -77,7 +77,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.NodeTestRunner\Sink.cs",
+"uri":  "sources\akka.net\src\core\Akka.NodeTestRunner\Sink.cs",
 "region":  {
 "startLine":  60,
 "startColumn":  17,
@@ -86,7 +86,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.NodeTestRunner\Sink.cs",
+"uri":  "sources\akka.net\src\core\Akka.NodeTestRunner\Sink.cs",
 "region":  {
 "startLine":  61,
 "startColumn":  17,
@@ -95,7 +95,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.NodeTestRunner\Sink.cs",
+"uri":  "sources\akka.net\src\core\Akka.NodeTestRunner\Sink.cs",
 "region":  {
 "startLine":  62,
 "startColumn":  17,
@@ -104,7 +104,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.NodeTestRunner\Sink.cs",
+"uri":  "sources\akka.net\src\core\Akka.NodeTestRunner\Sink.cs",
 "region":  {
 "startLine":  65,
 "startColumn":  13,

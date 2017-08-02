@@ -4,7 +4,7 @@
 "id":  "S1450",
 "message":  "Remove the 'bootstrapper' field and declare it as a local variable in the relevant methods.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests.Functional\Tests\AbsoluteUrlTests.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests.Functional\Tests\AbsoluteUrlTests.cs",
 "region":  {
 "startLine":  12,
 "startColumn":  51,
@@ -17,7 +17,7 @@
 "id":  "S1450",
 "message":  "Remove the 'bootstrapper' field and declare it as a local variable in the relevant methods.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests.Functional\Tests\JsonpTests.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests.Functional\Tests\JsonpTests.cs",
 "region":  {
 "startLine":  13,
 "startColumn":  45,
@@ -30,7 +30,7 @@
 "id":  "S1450",
 "message":  "Remove the 'bootstrapper' field and declare it as a local variable in the relevant methods.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests.Functional\Tests\ManualStaticContentTests.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests.Functional\Tests\ManualStaticContentTests.cs",
 "region":  {
 "startLine":  12,
 "startColumn":  45,
@@ -43,7 +43,7 @@
 "id":  "S1450",
 "message":  "Remove the 'bootstrapper' field and declare it as a local variable in the relevant methods.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests.Functional\Tests\ModelBindingTests.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests.Functional\Tests\ModelBindingTests.cs",
 "region":  {
 "startLine":  13,
 "startColumn":  45,
@@ -56,7 +56,7 @@
 "id":  "S1450",
 "message":  "Remove the 'bootstrapper' field and declare it as a local variable in the relevant methods.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests.Functional\Tests\PartialViewTests.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests.Functional\Tests\PartialViewTests.cs",
 "region":  {
 "startLine":  14,
 "startColumn":  45,
@@ -69,7 +69,7 @@
 "id":  "S1450",
 "message":  "Remove the 'bootstrapper' field and declare it as a local variable in the relevant methods.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests.Functional\Tests\RouteConstraintTests.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests.Functional\Tests\RouteConstraintTests.cs",
 "region":  {
 "startLine":  13,
 "startColumn":  45,
@@ -82,7 +82,7 @@
 "id":  "S1450",
 "message":  "Remove the 'bootstrapper' field and declare it as a local variable in the relevant methods.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests.Functional\Tests\SerializerTests.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests.Functional\Tests\SerializerTests.cs",
 "region":  {
 "startLine":  12,
 "startColumn":  42,
@@ -95,7 +95,7 @@
 "id":  "S1450",
 "message":  "Remove the 'bootstrapper' field and declare it as a local variable in the relevant methods.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests.Functional\Tests\SerializeTests.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests.Functional\Tests\SerializeTests.cs",
 "region":  {
 "startLine":  13,
 "startColumn":  45,
@@ -108,7 +108,7 @@
 "id":  "S1450",
 "message":  "Remove the 'bootstrapper' field and declare it as a local variable in the relevant methods.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests.Functional\Tests\TracingSmokeTests.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests.Functional\Tests\TracingSmokeTests.cs",
 "region":  {
 "startLine":  13,
 "startColumn":  45,
@@ -121,7 +121,7 @@
 "id":  "S1450",
 "message":  "Remove the 'bootstrapper' field and declare it as a local variable in the relevant methods.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests.Functional\Tests\ViewBagTests.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests.Functional\Tests\ViewBagTests.cs",
 "region":  {
 "startLine":  13,
 "startColumn":  45,

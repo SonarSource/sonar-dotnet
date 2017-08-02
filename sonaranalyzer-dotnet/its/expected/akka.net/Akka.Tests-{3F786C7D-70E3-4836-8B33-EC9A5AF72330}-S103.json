@@ -4,7 +4,7 @@
 "id":  "S103",
 "message":  "Split this 234 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\FSMTimingSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\FSMTimingSpec.cs",
 "region":  {
 "startLine":  184,
 "startColumn":  1,
@@ -17,7 +17,7 @@
 "id":  "S103",
 "message":  "Split this 220 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\RootGuardianActorRef_Tests.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\RootGuardianActorRef_Tests.cs",
 "region":  {
 "startLine":  35,
 "startColumn":  1,
@@ -30,7 +30,7 @@
 "id":  "S103",
 "message":  "Split this 220 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\RootGuardianActorRef_Tests.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\RootGuardianActorRef_Tests.cs",
 "region":  {
 "startLine":  43,
 "startColumn":  1,
@@ -43,7 +43,7 @@
 "id":  "S103",
 "message":  "Split this 220 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\RootGuardianActorRef_Tests.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\RootGuardianActorRef_Tests.cs",
 "region":  {
 "startLine":  53,
 "startColumn":  1,
@@ -56,7 +56,7 @@
 "id":  "S103",
 "message":  "Split this 220 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\RootGuardianActorRef_Tests.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\RootGuardianActorRef_Tests.cs",
 "region":  {
 "startLine":  64,
 "startColumn":  1,
@@ -69,7 +69,7 @@
 "id":  "S103",
 "message":  "Split this 214 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\RootGuardianActorRef_Tests.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\RootGuardianActorRef_Tests.cs",
 "region":  {
 "startLine":  76,
 "startColumn":  1,
@@ -82,7 +82,7 @@
 "id":  "S103",
 "message":  "Split this 220 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\RootGuardianActorRef_Tests.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\RootGuardianActorRef_Tests.cs",
 "region":  {
 "startLine":  85,
 "startColumn":  1,
@@ -95,7 +95,7 @@
 "id":  "S103",
 "message":  "Split this 263 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\Scheduler\TaskBasedScheduler_ActionScheduler_Schedule_Tests.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\Scheduler\TaskBasedScheduler_ActionScheduler_Schedule_Tests.cs",
 "region":  {
 "startLine":  57,
 "startColumn":  1,
@@ -108,7 +108,7 @@
 "id":  "S103",
 "message":  "Split this 213 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\Scheduler\TaskBasedScheduler_TellScheduler_Schedule_Tests.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\Scheduler\TaskBasedScheduler_TellScheduler_Schedule_Tests.cs",
 "region":  {
 "startLine":  20,
 "startColumn":  1,
@@ -121,7 +121,7 @@
 "id":  "S103",
 "message":  "Split this 263 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\Scheduler\TaskBasedScheduler_TellScheduler_Schedule_Tests.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\Scheduler\TaskBasedScheduler_TellScheduler_Schedule_Tests.cs",
 "region":  {
 "startLine":  56,
 "startColumn":  1,
@@ -134,7 +134,7 @@
 "id":  "S103",
 "message":  "Split this 205 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\SupervisorHierarchySpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\SupervisorHierarchySpec.cs",
 "region":  {
 "startLine":  261,
 "startColumn":  1,
@@ -147,7 +147,7 @@
 "id":  "S103",
 "message":  "Split this 211 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
 "region":  {
 "startLine":  815,
 "startColumn":  1,
@@ -160,7 +160,7 @@
 "id":  "S103",
 "message":  "Split this 303 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\MatchHandler\MatchExpressionBuilder_BuildLambdaExpression_Tests.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\MatchHandler\MatchExpressionBuilder_BuildLambdaExpression_Tests.cs",
 "region":  {
 "startLine":  354,
 "startColumn":  1,
@@ -173,7 +173,7 @@
 "id":  "S103",
 "message":  "Split this 261 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\MatchHandler\MatchExpressionBuilder_BuildLambdaExpression_Tests.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\MatchHandler\MatchExpressionBuilder_BuildLambdaExpression_Tests.cs",
 "region":  {
 "startLine":  357,
 "startColumn":  1,
@@ -186,7 +186,7 @@
 "id":  "S103",
 "message":  "Split this 253 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\MatchHandler\MatchExpressionBuilder_BuildLambdaExpression_Tests.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\MatchHandler\MatchExpressionBuilder_BuildLambdaExpression_Tests.cs",
 "region":  {
 "startLine":  359,
 "startColumn":  1,
@@ -199,7 +199,7 @@
 "id":  "S103",
 "message":  "Split this 300 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\MatchHandler\MatchExpressionBuilder_BuildLambdaExpression_Tests.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\MatchHandler\MatchExpressionBuilder_BuildLambdaExpression_Tests.cs",
 "region":  {
 "startLine":  406,
 "startColumn":  1,
@@ -212,7 +212,7 @@
 "id":  "S103",
 "message":  "Split this 268 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\MatchHandler\MatchExpressionBuilder_BuildLambdaExpression_Tests.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\MatchHandler\MatchExpressionBuilder_BuildLambdaExpression_Tests.cs",
 "region":  {
 "startLine":  409,
 "startColumn":  1,
@@ -225,7 +225,7 @@
 "id":  "S103",
 "message":  "Split this 260 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\MatchHandler\MatchExpressionBuilder_BuildLambdaExpression_Tests.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\MatchHandler\MatchExpressionBuilder_BuildLambdaExpression_Tests.cs",
 "region":  {
 "startLine":  411,
 "startColumn":  1,
@@ -238,7 +238,7 @@
 "id":  "S103",
 "message":  "Split this 258 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\MatchHandler\MatchExpressionBuilder_BuildLambdaExpression_Tests.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\MatchHandler\MatchExpressionBuilder_BuildLambdaExpression_Tests.cs",
 "region":  {
 "startLine":  413,
 "startColumn":  1,
@@ -251,7 +251,7 @@
 "id":  "S103",
 "message":  "Split this 283 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\MatchHandler\MatchHandlerBuilderTests.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\MatchHandler\MatchHandlerBuilderTests.cs",
 "region":  {
 "startLine":  249,
 "startColumn":  1,
@@ -264,7 +264,7 @@
 "id":  "S103",
 "message":  "Split this 203 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\MatchHandler\PartialActionBuilderTests.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\MatchHandler\PartialActionBuilderTests.cs",
 "region":  {
 "startLine":  376,
 "startColumn":  1,
@@ -277,7 +277,7 @@
 "id":  "S103",
 "message":  "Split this 214 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\MatchHandler\PartialActionBuilderTests.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\MatchHandler\PartialActionBuilderTests.cs",
 "region":  {
 "startLine":  410,
 "startColumn":  1,

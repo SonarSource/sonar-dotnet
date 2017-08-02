@@ -4,7 +4,7 @@
 "id":  "S1226",
 "message":  "Introduce a new variable instead of reusing the parameter 'tpath'.",
 "location":  {
-"uri":  "Ember-MM\Addons\multi.Compatibility\genericMediaBrowser.vb",
+"uri":  "sources\Ember-MM\Addons\multi.Compatibility\genericMediaBrowser.vb",
 "region":  {
 "startLine":  638,
 "startColumn":  5,

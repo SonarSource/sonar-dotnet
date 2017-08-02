@@ -4,7 +4,7 @@
 "id":  "S104",
 "message":  "This file has 1090 lines, which is greater than 1000 authorized. Split it into smaller files.",
 "location":  {
-"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Sharding.Tests\ClusterShardingSpec.cs",
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding.Tests\ClusterShardingSpec.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,

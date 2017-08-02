@@ -4,7 +4,7 @@
 "id":  "S1227",
 "message":  "Refactor the code in order to remove this break statement.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Culture\DefaultCultureService.cs",
+"uri":  "sources\Nancy\src\Nancy\Culture\DefaultCultureService.cs",
 "region":  {
 "startLine":  37,
 "startColumn":  21,
@@ -17,7 +17,7 @@
 "id":  "S1227",
 "message":  "Refactor the code in order to remove this break statement.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Extensions\StringExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy\Extensions\StringExtensions.cs",
 "region":  {
 "startLine":  76,
 "startColumn":  21,
@@ -30,7 +30,7 @@
 "id":  "S1227",
 "message":  "Refactor the code in order to remove this break statement.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
 "region":  {
 "startLine":  275,
 "startColumn":  21,
@@ -43,7 +43,7 @@
 "id":  "S1227",
 "message":  "Refactor the code in order to remove this break statement.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
 "region":  {
 "startLine":  355,
 "startColumn":  21,
@@ -56,7 +56,7 @@
 "id":  "S1227",
 "message":  "Refactor the code in order to remove this break statement.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
 "region":  {
 "startLine":  408,
 "startColumn":  21,
@@ -69,7 +69,7 @@
 "id":  "S1227",
 "message":  "Refactor the code in order to remove this break statement.",
 "location":  {
-"uri":  "Nancy\src\Nancy\HttpMultipartBoundary.cs",
+"uri":  "sources\Nancy\src\Nancy\HttpMultipartBoundary.cs",
 "region":  {
 "startLine":  61,
 "startColumn":  21,
@@ -82,7 +82,7 @@
 "id":  "S1227",
 "message":  "Refactor the code in order to remove this break statement.",
 "location":  {
-"uri":  "Nancy\src\Nancy\HttpMultipartBoundary.cs",
+"uri":  "sources\Nancy\src\Nancy\HttpMultipartBoundary.cs",
 "region":  {
 "startLine":  94,
 "startColumn":  21,
@@ -95,7 +95,7 @@
 "id":  "S1227",
 "message":  "Refactor the code in order to remove this break statement.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
 "region":  {
 "startLine":  345,
 "startColumn":  6,

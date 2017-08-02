@@ -4,7 +4,7 @@
 "id":  "S100",
 "message":  "Rename property 'lowercaseintproperty' to match camel case naming rules, consider using 'Lowercaseintproperty'.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBinderFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBinderFixture.cs",
 "region":  {
 "startLine":  1592,
 "startColumn":  24,

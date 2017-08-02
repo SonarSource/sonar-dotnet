@@ -5,7 +5,7 @@
 "message":  "Merge this if statement with the enclosing one.",
 "location":  [
 {
-"uri":  "akka.net\src\core\Akka.TestKit\EventFilter\DeadLettersFilter.cs",
+"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\DeadLettersFilter.cs",
 "region":  {
 "startLine":  35,
 "startColumn":  21,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.TestKit\EventFilter\DeadLettersFilter.cs",
+"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\DeadLettersFilter.cs",
 "region":  {
 "startLine":  34,
 "startColumn":  17,
@@ -29,7 +29,7 @@
 "message":  "Merge this if statement with the enclosing one.",
 "location":  [
 {
-"uri":  "akka.net\src\core\Akka.TestKit\EventFilter\Internal\EventFilterApplier.cs",
+"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\EventFilterApplier.cs",
 "region":  {
 "startLine":  235,
 "startColumn":  25,
@@ -38,7 +38,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.TestKit\EventFilter\Internal\EventFilterApplier.cs",
+"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\EventFilterApplier.cs",
 "region":  {
 "startLine":  233,
 "startColumn":  21,

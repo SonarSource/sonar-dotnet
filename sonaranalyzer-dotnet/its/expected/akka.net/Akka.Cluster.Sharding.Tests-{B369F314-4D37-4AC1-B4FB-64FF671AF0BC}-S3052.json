@@ -4,7 +4,7 @@
 "id":  "S3052",
 "message":  "Remove this initialization to '_n', the compiler will do that for you.",
 "location":  {
-"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Sharding.Tests\ClusterShardingFailureSpec.cs",
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding.Tests\ClusterShardingFailureSpec.cs",
 "region":  {
 "startLine":  98,
 "startColumn":  28,
@@ -17,7 +17,7 @@
 "id":  "S3052",
 "message":  "Remove this initialization to '_locations', the compiler will do that for you.",
 "location":  {
-"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Sharding.Tests\ClusterShardingLeavingSpec.cs",
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding.Tests\ClusterShardingLeavingSpec.cs",
 "region":  {
 "startLine":  100,
 "startColumn":  42,
@@ -30,7 +30,7 @@
 "id":  "S3052",
 "message":  "Remove this initialization to '_count', the compiler will do that for you.",
 "location":  {
-"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Sharding.Tests\ClusterShardingSpec.cs",
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding.Tests\ClusterShardingSpec.cs",
 "region":  {
 "startLine":  164,
 "startColumn":  28,

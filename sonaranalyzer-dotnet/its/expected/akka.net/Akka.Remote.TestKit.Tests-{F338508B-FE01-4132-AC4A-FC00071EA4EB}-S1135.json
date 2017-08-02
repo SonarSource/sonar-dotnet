@@ -4,7 +4,7 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit.Tests\BarrierSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit.Tests\BarrierSpec.cs",
 "region":  {
 "startLine":  208,
 "startColumn":  15,
@@ -17,7 +17,7 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit.Tests\BarrierSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit.Tests\BarrierSpec.cs",
 "region":  {
 "startLine":  234,
 "startColumn":  15,
@@ -30,7 +30,7 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit.Tests\BarrierSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit.Tests\BarrierSpec.cs",
 "region":  {
 "startLine":  258,
 "startColumn":  15,
@@ -43,7 +43,7 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit.Tests\BarrierSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit.Tests\BarrierSpec.cs",
 "region":  {
 "startLine":  277,
 "startColumn":  15,
@@ -56,7 +56,7 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit.Tests\BarrierSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit.Tests\BarrierSpec.cs",
 "region":  {
 "startLine":  325,
 "startColumn":  15,
@@ -69,7 +69,7 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit.Tests\BarrierSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit.Tests\BarrierSpec.cs",
 "region":  {
 "startLine":  337,
 "startColumn":  11,

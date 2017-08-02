@@ -4,7 +4,7 @@
 "id":  "S3215",
 "message":  "Remove this cast and edit the interface to add the missing functionality.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence.Tests\Fsm\PersistentFSMSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\Fsm\PersistentFSMSpec.cs",
 "region":  {
 "startLine":  440,
 "startColumn":  37,

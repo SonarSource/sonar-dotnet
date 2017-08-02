@@ -4,7 +4,7 @@
 "id":  "S100",
 "message":  "Rename method 'XMLBody' to match camel case naming rules, consider using 'XmlBody'.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Testing\BrowserContextExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContextExtensions.cs",
 "region":  {
 "startLine":  76,
 "startColumn":  28,

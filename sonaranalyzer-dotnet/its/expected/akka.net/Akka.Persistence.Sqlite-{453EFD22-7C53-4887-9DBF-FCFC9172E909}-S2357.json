@@ -4,7 +4,7 @@
 "id":  "S2357",
 "message":  "Make 'JournalSettings' private.",
 "location":  {
-"uri":  "akka.net\src\contrib\persistence\Akka.Persistence.Sqlite\Extension.cs",
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sqlite\Extension.cs",
 "region":  {
 "startLine":  63,
 "startColumn":  47,
@@ -17,7 +17,7 @@
 "id":  "S2357",
 "message":  "Make 'SnapshotSettings' private.",
 "location":  {
-"uri":  "akka.net\src\contrib\persistence\Akka.Persistence.Sqlite\Extension.cs",
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sqlite\Extension.cs",
 "region":  {
 "startLine":  68,
 "startColumn":  48,
@@ -30,7 +30,7 @@
 "id":  "S2357",
 "message":  "Make 'Extension' private.",
 "location":  {
-"uri":  "akka.net\src\contrib\persistence\Akka.Persistence.Sqlite\Journal\SqliteJournal.cs",
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sqlite\Journal\SqliteJournal.cs",
 "region":  {
 "startLine":  43,
 "startColumn":  43,

@@ -4,7 +4,7 @@
 "id":  "S1121",
 "message":  "Extract the assignment of 'm' from this expression.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence.Tests\MemoryEventAdapterSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\MemoryEventAdapterSpec.cs",
 "region":  {
 "startLine":  143,
 "startColumn":  48,

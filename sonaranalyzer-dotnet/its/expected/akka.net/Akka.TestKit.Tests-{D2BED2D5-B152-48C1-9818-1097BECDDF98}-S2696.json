@@ -5,7 +5,7 @@
 "message":  "Remove this set, which updates a 'static' field from an instance method.",
 "location":  [
 {
-"uri":  "akka.net\src\core\Akka.TestKit.Tests\TestActorRefTests\BossActor.cs",
+"uri":  "sources\akka.net\src\core\Akka.TestKit.Tests\TestActorRefTests\BossActor.cs",
 "region":  {
 "startLine":  41,
 "startColumn":  17,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.TestKit.Tests\TestActorRefTests\TestActorRefSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.TestKit.Tests\TestActorRefTests\TestActorRefSpec.cs",
 "region":  {
 "startLine":  20,
 "startColumn":  27,
@@ -29,7 +29,7 @@
 "message":  "Remove this set, which updates a 'static' field from an instance method.",
 "location":  [
 {
-"uri":  "akka.net\src\core\Akka.TestKit.Tests\TestActorRefTests\BossActor.cs",
+"uri":  "sources\akka.net\src\core\Akka.TestKit.Tests\TestActorRefTests\BossActor.cs",
 "region":  {
 "startLine":  46,
 "startColumn":  17,
@@ -38,7 +38,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.TestKit.Tests\TestActorRefTests\TestActorRefSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.TestKit.Tests\TestActorRefTests\TestActorRefSpec.cs",
 "region":  {
 "startLine":  20,
 "startColumn":  27,
@@ -53,7 +53,7 @@
 "message":  "Remove this set, which updates a 'static' field from an instance method.",
 "location":  [
 {
-"uri":  "akka.net\src\core\Akka.TestKit.Tests\TestActorRefTests\SenderActor.cs",
+"uri":  "sources\akka.net\src\core\Akka.TestKit.Tests\TestActorRefTests\SenderActor.cs",
 "region":  {
 "startLine":  36,
 "startColumn":  21,
@@ -62,7 +62,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.TestKit.Tests\TestActorRefTests\TestActorRefSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.TestKit.Tests\TestActorRefTests\TestActorRefSpec.cs",
 "region":  {
 "startLine":  20,
 "startColumn":  27,
@@ -77,7 +77,7 @@
 "message":  "Remove this set, which updates a 'static' field from an instance method.",
 "location":  [
 {
-"uri":  "akka.net\src\core\Akka.TestKit.Tests\TestActorRefTests\TActorBase.cs",
+"uri":  "sources\akka.net\src\core\Akka.TestKit.Tests\TestActorRefTests\TActorBase.cs",
 "region":  {
 "startLine":  20,
 "startColumn":  17,
@@ -86,7 +86,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.TestKit.Tests\TestActorRefTests\TestActorRefSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.TestKit.Tests\TestActorRefTests\TestActorRefSpec.cs",
 "region":  {
 "startLine":  22,
 "startColumn":  30,
@@ -101,7 +101,7 @@
 "message":  "Make the enclosing instance method 'static' or remove this set on the 'static' field.",
 "location":  [
 {
-"uri":  "akka.net\src\core\Akka.TestKit.Tests\TestActorRefTests\TestActorRefSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.TestKit.Tests\TestActorRefTests\TestActorRefSpec.cs",
 "region":  {
 "startLine":  119,
 "startColumn":  13,
@@ -110,7 +110,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.TestKit.Tests\TestActorRefTests\TestActorRefSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.TestKit.Tests\TestActorRefTests\TestActorRefSpec.cs",
 "region":  {
 "startLine":  20,
 "startColumn":  27,
@@ -125,7 +125,7 @@
 "message":  "Make the enclosing instance method 'static' or remove this set on the 'static' field.",
 "location":  [
 {
-"uri":  "akka.net\src\core\Akka.TestKit.Tests\TestActorRefTests\TestActorRefSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.TestKit.Tests\TestActorRefTests\TestActorRefSpec.cs",
 "region":  {
 "startLine":  85,
 "startColumn":  13,
@@ -134,7 +134,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.TestKit.Tests\TestActorRefTests\TestActorRefSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.TestKit.Tests\TestActorRefTests\TestActorRefSpec.cs",
 "region":  {
 "startLine":  20,
 "startColumn":  27,

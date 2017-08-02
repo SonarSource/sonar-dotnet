@@ -4,7 +4,7 @@
 "id":  "S3897",
 "message":  "Implement 'IEquatable<ImmutableMessage>'.",
 "location":  {
-"uri":  "akka.net\src\contrib\serializers\Akka.Serialization.TestKit\ImmutableMessage.cs",
+"uri":  "sources\akka.net\src\contrib\serializers\Akka.Serialization.TestKit\ImmutableMessage.cs",
 "region":  {
 "startLine":  5,
 "startColumn":  18,
@@ -17,7 +17,7 @@
 "id":  "S3897",
 "message":  "Implement 'IEquatable<ImmutableMessageWithPrivateCtor>'.",
 "location":  {
-"uri":  "akka.net\src\contrib\serializers\Akka.Serialization.TestKit\ImmutableMessageWithPrivateCtor.cs",
+"uri":  "sources\akka.net\src\contrib\serializers\Akka.Serialization.TestKit\ImmutableMessageWithPrivateCtor.cs",
 "region":  {
 "startLine":  5,
 "startColumn":  18,

@@ -4,7 +4,7 @@
 "id":  "S1121",
 "message":  "Extract the assignment of 'this.ErrorMessage' from this expression.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Demo.Validation\Models\OddLengthStringAttribute.cs",
+"uri":  "sources\Nancy\src\Nancy.Demo.Validation\Models\OddLengthStringAttribute.cs",
 "region":  {
 "startLine":  15,
 "startColumn":  35,

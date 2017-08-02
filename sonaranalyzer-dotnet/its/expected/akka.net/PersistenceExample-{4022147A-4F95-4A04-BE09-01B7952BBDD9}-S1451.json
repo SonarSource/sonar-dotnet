@@ -4,7 +4,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\examples\PersistenceExample\AtLeastOnceDeliveryExampleActor.cs",
+"uri":  "sources\akka.net\src\examples\PersistenceExample\AtLeastOnceDeliveryExampleActor.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -17,7 +17,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\examples\PersistenceExample\ExamplePersistentActor.cs",
+"uri":  "sources\akka.net\src\examples\PersistenceExample\ExamplePersistentActor.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -30,7 +30,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\examples\PersistenceExample\ExamplePersistentFailingActor.cs",
+"uri":  "sources\akka.net\src\examples\PersistenceExample\ExamplePersistentFailingActor.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -43,7 +43,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\examples\PersistenceExample\ExampleView.cs",
+"uri":  "sources\akka.net\src\examples\PersistenceExample\ExampleView.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -56,7 +56,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\examples\PersistenceExample\Program.cs",
+"uri":  "sources\akka.net\src\examples\PersistenceExample\Program.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -69,7 +69,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\examples\PersistenceExample\Properties\AssemblyInfo.cs",
+"uri":  "sources\akka.net\src\examples\PersistenceExample\Properties\AssemblyInfo.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -82,7 +82,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\examples\PersistenceExample\SnapshotedExampleActor.cs",
+"uri":  "sources\akka.net\src\examples\PersistenceExample\SnapshotedExampleActor.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -95,7 +95,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\examples\PersistenceExample\ViewExampleActor.cs",
+"uri":  "sources\akka.net\src\examples\PersistenceExample\ViewExampleActor.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,

@@ -4,7 +4,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'buildDescriptorParams' before using it.",
 "location":  {
-"uri":  "Nancy\src\Nancy.ViewEngines.Spark\Descriptors\DefaultDescriptorBuilder.cs",
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark\Descriptors\DefaultDescriptorBuilder.cs",
 "region":  {
 "startLine":  56,
 "startColumn":  88,
@@ -17,7 +17,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'container' before using it.",
 "location":  {
-"uri":  "Nancy\src\Nancy.ViewEngines.Spark\Descriptors\DefaultDescriptorBuilder.cs",
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark\Descriptors\DefaultDescriptorBuilder.cs",
 "region":  {
 "startLine":  108,
 "startColumn":  22,
@@ -30,7 +30,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'descriptor' before using it.",
 "location":  {
-"uri":  "Nancy\src\Nancy.ViewEngines.Spark\Descriptors\DefaultDescriptorBuilder.cs",
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark\Descriptors\DefaultDescriptorBuilder.cs",
 "region":  {
 "startLine":  114,
 "startColumn":  32,
@@ -43,7 +43,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'viewEngineStartupContext' before using it.",
 "location":  {
-"uri":  "Nancy\src\Nancy.ViewEngines.Spark\NancyViewFolder.cs",
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark\NancyViewFolder.cs",
 "region":  {
 "startLine":  39,
 "startColumn":  46,
@@ -56,7 +56,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'searchedLocations' before using it.",
 "location":  {
-"uri":  "Nancy\src\Nancy.ViewEngines.Spark\SparkViewEngineResult.cs",
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark\SparkViewEngineResult.cs",
 "region":  {
 "startLine":  17,
 "startColumn":  13,

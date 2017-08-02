@@ -4,7 +4,7 @@
 "id":  "S104",
 "message":  "This file has 1298 lines, which is greater than 1000 authorized. Split it into smaller files.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPICommon.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -17,7 +17,7 @@
 "id":  "S104",
 "message":  "This file has 2070 lines, which is greater than 1000 authorized. Split it into smaller files.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDatabase.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -30,7 +30,7 @@
 "id":  "S104",
 "message":  "This file has 1347 lines, which is greater than 1000 authorized. Split it into smaller files.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIImages.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -43,7 +43,7 @@
 "id":  "S104",
 "message":  "This file has 1818 lines, which is greater than 1000 authorized. Split it into smaller files.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -56,7 +56,7 @@
 "id":  "S104",
 "message":  "This file has 1149 lines, which is greater than 1000 authorized. Split it into smaller files.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPINFO.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -69,7 +69,7 @@
 "id":  "S104",
 "message":  "This file has 1762 lines, which is greater than 1000 authorized. Split it into smaller files.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -82,7 +82,7 @@
 "id":  "S104",
 "message":  "This file has 3831 lines, which is greater than 1000 authorized. Split it into smaller files.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPISettings.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPISettings.vb",
 "region":  {
 "startLine":  1,
 "startColumn":  1,

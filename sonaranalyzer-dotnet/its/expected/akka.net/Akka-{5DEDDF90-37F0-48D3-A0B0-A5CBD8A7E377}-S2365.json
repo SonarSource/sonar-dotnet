@@ -4,7 +4,7 @@
 "id":  "S2365",
 "message":  "Refactor 'Children' into a method, properties should not copy collections.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\ChildrenContainer\Internal\ChildrenContainerBase.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ChildrenContainer\Internal\ChildrenContainerBase.cs",
 "region":  {
 "startLine":  36,
 "startColumn":  24,
@@ -17,7 +17,7 @@
 "id":  "S2365",
 "message":  "Refactor 'Stats' into a method, properties should not copy collections.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\ChildrenContainer\Internal\ChildrenContainerBase.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ChildrenContainer\Internal\ChildrenContainerBase.cs",
 "region":  {
 "startLine":  47,
 "startColumn":  24,

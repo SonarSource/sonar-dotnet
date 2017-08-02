@@ -4,7 +4,7 @@
 "id":  "S107",
 "message":  "Constructor has 11 parameters, which is greater than the 7 authorized.",
 "location":  {
-"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingSettings.cs",
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingSettings.cs",
 "region":  {
 "startLine":  30,
 "startColumn":  33,

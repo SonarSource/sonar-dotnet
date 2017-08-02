@@ -4,7 +4,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'Akka.Actor.ICanTell' instead of 'Akka.Actor.IActorRef'.",
 "location":  {
-"uri":  "akka.net\src\contrib\transports\Akka.Remote.AkkaIOTransport\TransportManager.cs",
+"uri":  "sources\akka.net\src\contrib\transports\Akka.Remote.AkkaIOTransport\TransportManager.cs",
 "region":  {
 "startLine":  63,
 "startColumn":  70,

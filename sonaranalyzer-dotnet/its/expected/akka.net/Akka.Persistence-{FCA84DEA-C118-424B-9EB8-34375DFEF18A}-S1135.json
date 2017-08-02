@@ -4,7 +4,7 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\PersistentView.Recovery.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\PersistentView.Recovery.cs",
 "region":  {
 "startLine":  14,
 "startColumn":  7,

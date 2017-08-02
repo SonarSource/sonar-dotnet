@@ -4,7 +4,7 @@
 "id":  "S131",
 "message":  "Add a 'default' clause to this 'switch' statement.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.TestKit.Tests\TestActorRefTests\ReplyActor.cs",
+"uri":  "sources\akka.net\src\core\Akka.TestKit.Tests\TestActorRefTests\ReplyActor.cs",
 "region":  {
 "startLine":  19,
 "startColumn":  13,
@@ -17,7 +17,7 @@
 "id":  "S131",
 "message":  "Add a 'default' clause to this 'switch' statement.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.TestKit.Tests\TestActorRefTests\SenderActor.cs",
+"uri":  "sources\akka.net\src\core\Akka.TestKit.Tests\TestActorRefTests\SenderActor.cs",
 "region":  {
 "startLine":  24,
 "startColumn":  13,

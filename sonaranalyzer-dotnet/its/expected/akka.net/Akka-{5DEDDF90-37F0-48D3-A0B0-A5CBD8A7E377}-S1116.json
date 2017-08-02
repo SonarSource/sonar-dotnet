@@ -4,7 +4,7 @@
 "id":  "S1116",
 "message":  "Remove this empty statement.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Util\Internal\Collections\ImmutableAvlTreeBase.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\Internal\Collections\ImmutableAvlTreeBase.cs",
 "region":  {
 "startLine":  256,
 "startColumn":  109,
@@ -17,7 +17,7 @@
 "id":  "S1116",
 "message":  "Remove this empty statement.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Util\Internal\Collections\ImmutableAvlTreeBase.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\Internal\Collections\ImmutableAvlTreeBase.cs",
 "region":  {
 "startLine":  259,
 "startColumn":  103,

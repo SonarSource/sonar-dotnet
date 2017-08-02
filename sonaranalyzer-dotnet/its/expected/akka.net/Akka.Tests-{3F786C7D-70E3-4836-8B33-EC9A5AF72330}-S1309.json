@@ -4,7 +4,7 @@
 "id":  "S1309",
 "message":  "Do not suppress issues.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Pattern\CircuitBreakerSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Pattern\CircuitBreakerSpec.cs",
 "region":  {
 "startLine":  268,
 "startColumn":  10,

@@ -4,7 +4,7 @@
 "id":  "S2357",
 "message":  "Make 'parentRunning' private.",
 "location":  {
-"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\frmXMLMediaSettingsHolder.vb",
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\frmXMLMediaSettingsHolder.vb",
 "region":  {
 "startLine":  27,
 "startColumn":  12,
@@ -17,7 +17,7 @@
 "id":  "S2357",
 "message":  "Make 'parentRunning' private.",
 "location":  {
-"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\frmXMLSettingsHolder.vb",
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\frmXMLSettingsHolder.vb",
 "region":  {
 "startLine":  27,
 "startColumn":  12,
@@ -30,7 +30,7 @@
 "id":  "S2357",
 "message":  "Make 'pContent' private.",
 "location":  {
-"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
 "region":  {
 "startLine":  45,
 "startColumn":  20,

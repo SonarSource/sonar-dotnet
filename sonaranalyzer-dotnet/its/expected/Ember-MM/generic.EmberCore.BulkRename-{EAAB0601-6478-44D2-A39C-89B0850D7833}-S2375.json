@@ -4,7 +4,7 @@
 "id":  "S2375",
 "message":  "Wrap this and the following 9 statements that use 'dtMovies.Columns' in a 'With' statement.",
 "location":  {
-"uri":  "Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
 "region":  {
 "startLine":  554,
 "startColumn":  9,
@@ -17,7 +17,7 @@
 "id":  "S2375",
 "message":  "Wrap this and the following 11 statements that use 'Master.eLang' in a 'With' statement.",
 "location":  {
-"uri":  "Ember-MM\Addons\generic.EmberCore.BulkRename\dlgBulkRename.vb",
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgBulkRename.vb",
 "region":  {
 "startLine":  463,
 "startColumn":  9,
@@ -30,7 +30,7 @@
 "id":  "S2375",
 "message":  "Wrap this and the following 10 statements that use 'Master.eLang' in a 'With' statement.",
 "location":  {
-"uri":  "Ember-MM\Addons\generic.EmberCore.BulkRename\dlgTVBulkRename.vb",
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgTVBulkRename.vb",
 "region":  {
 "startLine":  24,
 "startColumn":  9,
@@ -43,7 +43,7 @@
 "id":  "S2375",
 "message":  "Wrap this and the following 8 statements that use 'Master.eLang' in a 'With' statement.",
 "location":  {
-"uri":  "Ember-MM\Addons\generic.EmberCore.BulkRename\frmSettingsHolder.vb",
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\frmSettingsHolder.vb",
 "region":  {
 "startLine":  60,
 "startColumn":  9,

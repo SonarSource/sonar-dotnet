@@ -4,7 +4,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "akka.net\src\benchmark\PingPong\Program.cs",
+"uri":  "sources\akka.net\src\benchmark\PingPong\Program.cs",
 "region":  {
 "startLine":  44,
 "startColumn":  38,

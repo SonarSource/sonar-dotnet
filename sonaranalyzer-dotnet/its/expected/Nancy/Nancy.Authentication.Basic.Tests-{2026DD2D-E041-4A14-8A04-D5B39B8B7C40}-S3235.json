@@ -4,7 +4,7 @@
 "id":  "S3235",
 "message":  "Remove these redundant parentheses.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Authentication.Basic.Tests\BasicAuthenticationFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Authentication.Basic.Tests\BasicAuthenticationFixture.cs",
 "region":  {
 "startLine":  105,
 "startColumn":  43,
@@ -17,7 +17,7 @@
 "id":  "S3235",
 "message":  "Remove these redundant parentheses.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Authentication.Basic.Tests\BasicAuthenticationFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Authentication.Basic.Tests\BasicAuthenticationFixture.cs",
 "region":  {
 "startLine":  122,
 "startColumn":  43,
@@ -30,7 +30,7 @@
 "id":  "S3235",
 "message":  "Remove these redundant parentheses.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Authentication.Basic.Tests\BasicAuthenticationFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Authentication.Basic.Tests\BasicAuthenticationFixture.cs",
 "region":  {
 "startLine":  149,
 "startColumn":  43,
@@ -43,7 +43,7 @@
 "id":  "S3235",
 "message":  "Remove these redundant parentheses.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Authentication.Basic.Tests\BasicAuthenticationFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Authentication.Basic.Tests\BasicAuthenticationFixture.cs",
 "region":  {
 "startLine":  173,
 "startColumn":  43,
@@ -56,7 +56,7 @@
 "id":  "S3235",
 "message":  "Remove these redundant parentheses.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Authentication.Basic.Tests\BasicAuthenticationFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Authentication.Basic.Tests\BasicAuthenticationFixture.cs",
 "region":  {
 "startLine":  195,
 "startColumn":  43,
@@ -69,7 +69,7 @@
 "id":  "S3235",
 "message":  "Remove these redundant parentheses.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Authentication.Basic.Tests\BasicAuthenticationFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Authentication.Basic.Tests\BasicAuthenticationFixture.cs",
 "region":  {
 "startLine":  299,
 "startColumn":  36,

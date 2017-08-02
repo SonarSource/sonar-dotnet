@@ -4,7 +4,7 @@
 "id":  "S1226",
 "message":  "Introduce a new variable instead of reusing the parameter 'sys'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster.Tests.MultiNode\MultiNodeClusterSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests.MultiNode\MultiNodeClusterSpec.cs",
 "region":  {
 "startLine":  171,
 "startColumn":  30,
@@ -17,7 +17,7 @@
 "id":  "S1226",
 "message":  "Introduce a new variable instead of reusing the parameter 'max'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster.Tests.MultiNode\MultiNodeClusterSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests.MultiNode\MultiNodeClusterSpec.cs",
 "region":  {
 "startLine":  270,
 "startColumn":  30,
@@ -30,7 +30,7 @@
 "id":  "S1226",
 "message":  "Introduce a new variable instead of reusing the parameter 'interval'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster.Tests.MultiNode\MultiNodeClusterSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests.MultiNode\MultiNodeClusterSpec.cs",
 "region":  {
 "startLine":  271,
 "startColumn":  35,
@@ -43,7 +43,7 @@
 "id":  "S1226",
 "message":  "Introduce a new variable instead of reusing the parameter 'canNotBePartOfMemberRing'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster.Tests.MultiNode\MultiNodeClusterSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests.MultiNode\MultiNodeClusterSpec.cs",
 "region":  {
 "startLine":  351,
 "startColumn":  17,
@@ -56,7 +56,7 @@
 "id":  "S1226",
 "message":  "Introduce a new variable instead of reusing the parameter 'timeout'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster.Tests.MultiNode\MultiNodeClusterSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests.MultiNode\MultiNodeClusterSpec.cs",
 "region":  {
 "startLine":  352,
 "startColumn":  34,
@@ -69,7 +69,7 @@
 "id":  "S1226",
 "message":  "Introduce a new variable instead of reusing the parameter 'nodesInCluster'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster.Tests.MultiNode\MultiNodeClusterSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests.MultiNode\MultiNodeClusterSpec.cs",
 "region":  {
 "startLine":  390,
 "startColumn":  41,

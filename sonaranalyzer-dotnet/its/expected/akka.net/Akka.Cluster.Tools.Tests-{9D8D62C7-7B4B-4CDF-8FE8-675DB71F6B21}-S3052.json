@@ -4,7 +4,7 @@
 "id":  "S3052",
 "message":  "Remove this initialization to 'current', the compiler will do that for you.",
 "location":  {
-"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Tools.Tests\Singleton\ClusterSingletonManagerSpec.cs",
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools.Tests\Singleton\ClusterSingletonManagerSpec.cs",
 "region":  {
 "startLine":  259,
 "startColumn":  29,
@@ -17,7 +17,7 @@
 "id":  "S3052",
 "message":  "Remove this initialization to '_msg', the compiler will do that for you.",
 "location":  {
-"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Tools.Tests\Singleton\ClusterSingletonManagerSpec.cs",
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools.Tests\Singleton\ClusterSingletonManagerSpec.cs",
 "region":  {
 "startLine":  290,
 "startColumn":  26,

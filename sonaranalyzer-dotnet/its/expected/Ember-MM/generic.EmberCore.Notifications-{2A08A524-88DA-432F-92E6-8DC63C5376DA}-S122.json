@@ -4,7 +4,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Addons\generic.EmberCore.Notifications\frmNotify.vb",
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\frmNotify.vb",
 "region":  {
 "startLine":  75,
 "startColumn":  13,
@@ -17,7 +17,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Addons\generic.EmberCore.Notifications\frmNotify.vb",
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\frmNotify.vb",
 "region":  {
 "startLine":  95,
 "startColumn":  9,
@@ -30,7 +30,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Addons\generic.EmberCore.Notifications\Module.Notifications.vb",
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\Module.Notifications.vb",
 "region":  {
 "startLine":  111,
 "startColumn":  17,

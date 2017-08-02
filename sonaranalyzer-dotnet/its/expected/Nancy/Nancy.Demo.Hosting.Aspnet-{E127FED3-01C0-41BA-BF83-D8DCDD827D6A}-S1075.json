@@ -4,7 +4,7 @@
 "id":  "S1075",
 "message":  "Refactor your code not to use hardcoded absolute paths or URIs.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Demo.Hosting.Aspnet\DemoBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Demo.Hosting.Aspnet\DemoBootstrapper.cs",
 "region":  {
 "startLine":  34,
 "startColumn":  23,

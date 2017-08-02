@@ -4,7 +4,7 @@
 "id":  "S1227",
 "message":  "Refactor the code in order to remove this break statement.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Configuration\Hocon\HoconTokenizer.cs",
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconTokenizer.cs",
 "region":  {
 "startLine":  190,
 "startColumn":  21,
@@ -17,7 +17,7 @@
 "id":  "S1227",
 "message":  "Refactor the code in order to remove this break statement.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Dispatch\ConcurrentQueueMailbox.cs",
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\ConcurrentQueueMailbox.cs",
 "region":  {
 "startLine":  86,
 "startColumn":  25,
@@ -30,7 +30,7 @@
 "id":  "S1227",
 "message":  "Refactor the code in order to remove this break statement.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Dispatch\ConcurrentQueueMailbox.cs",
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\ConcurrentQueueMailbox.cs",
 "region":  {
 "startLine":  97,
 "startColumn":  25,
@@ -43,7 +43,7 @@
 "id":  "S1227",
 "message":  "Refactor the code in order to remove this break statement.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Dispatch\ConcurrentQueueMailbox.cs",
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\ConcurrentQueueMailbox.cs",
 "region":  {
 "startLine":  103,
 "startColumn":  25,
@@ -56,7 +56,7 @@
 "id":  "S1227",
 "message":  "Refactor the code in order to remove this break statement.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Dispatch\GenericMailbox.cs",
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\GenericMailbox.cs",
 "region":  {
 "startLine":  107,
 "startColumn":  25,
@@ -69,7 +69,7 @@
 "id":  "S1227",
 "message":  "Refactor the code in order to remove this break statement.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Dispatch\GenericMailbox.cs",
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\GenericMailbox.cs",
 "region":  {
 "startLine":  118,
 "startColumn":  25,
@@ -82,7 +82,7 @@
 "id":  "S1227",
 "message":  "Refactor the code in order to remove this break statement.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Dispatch\GenericMailbox.cs",
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\GenericMailbox.cs",
 "region":  {
 "startLine":  124,
 "startColumn":  25,
@@ -95,7 +95,7 @@
 "id":  "S1227",
 "message":  "Refactor the code in order to remove this break statement.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Event\AddressTerminatedTopic.cs",
+"uri":  "sources\akka.net\src\core\Akka\Event\AddressTerminatedTopic.cs",
 "region":  {
 "startLine":  45,
 "startColumn":  17,
@@ -108,7 +108,7 @@
 "id":  "S1227",
 "message":  "Refactor the code in order to remove this break statement.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Event\AddressTerminatedTopic.cs",
+"uri":  "sources\akka.net\src\core\Akka\Event\AddressTerminatedTopic.cs",
 "region":  {
 "startLine":  58,
 "startColumn":  17,
@@ -121,7 +121,7 @@
 "id":  "S1227",
 "message":  "Refactor the code in order to remove this break statement.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Helios.Concurrency.DedicatedThreadPool.cs",
+"uri":  "sources\akka.net\src\core\Akka\Helios.Concurrency.DedicatedThreadPool.cs",
 "region":  {
 "startLine":  163,
 "startColumn":  21,
@@ -134,7 +134,7 @@
 "id":  "S1227",
 "message":  "Refactor the code in order to remove this break statement.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Helios.Concurrency.DedicatedThreadPool.cs",
+"uri":  "sources\akka.net\src\core\Akka\Helios.Concurrency.DedicatedThreadPool.cs",
 "region":  {
 "startLine":  177,
 "startColumn":  21,
@@ -147,7 +147,7 @@
 "id":  "S1227",
 "message":  "Refactor the code in order to remove this break statement.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Helios.Concurrency.DedicatedThreadPool.cs",
+"uri":  "sources\akka.net\src\core\Akka\Helios.Concurrency.DedicatedThreadPool.cs",
 "region":  {
 "startLine":  201,
 "startColumn":  33,
@@ -160,7 +160,7 @@
 "id":  "S1227",
 "message":  "Refactor the code in order to remove this break statement.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Util\ListPriorityQueue.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\ListPriorityQueue.cs",
 "region":  {
 "startLine":  43,
 "startColumn":  116,
@@ -173,7 +173,7 @@
 "id":  "S1227",
 "message":  "Refactor the code in order to remove this break statement.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Util\ListPriorityQueue.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\ListPriorityQueue.cs",
 "region":  {
 "startLine":  62,
 "startColumn":  30,
@@ -186,7 +186,7 @@
 "id":  "S1227",
 "message":  "Refactor the code in order to remove this break statement.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Util\ListPriorityQueue.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\ListPriorityQueue.cs",
 "region":  {
 "startLine":  66,
 "startColumn":  116,

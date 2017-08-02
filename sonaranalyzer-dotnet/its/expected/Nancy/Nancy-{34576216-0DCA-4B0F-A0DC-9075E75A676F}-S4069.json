@@ -4,7 +4,7 @@
 "id":  "S4069",
 "message":  "Implement alternative method 'Add' for the operator '+'.",
 "location":  {
-"uri":  "Nancy\src\Nancy\AfterPipeline.cs",
+"uri":  "sources\Nancy\src\Nancy\AfterPipeline.cs",
 "region":  {
 "startLine":  33,
 "startColumn":  46,
@@ -17,7 +17,7 @@
 "id":  "S4069",
 "message":  "Implement alternative method 'Add' for the operator '+'.",
 "location":  {
-"uri":  "Nancy\src\Nancy\AfterPipeline.cs",
+"uri":  "sources\Nancy\src\Nancy\AfterPipeline.cs",
 "region":  {
 "startLine":  39,
 "startColumn":  46,
@@ -30,7 +30,7 @@
 "id":  "S4069",
 "message":  "Implement alternative method 'Add' for the operator '+'.",
 "location":  {
-"uri":  "Nancy\src\Nancy\AfterPipeline.cs",
+"uri":  "sources\Nancy\src\Nancy\AfterPipeline.cs",
 "region":  {
 "startLine":  45,
 "startColumn":  46,
@@ -43,7 +43,7 @@
 "id":  "S4069",
 "message":  "Implement alternative method 'Add' for the operator '+'.",
 "location":  {
-"uri":  "Nancy\src\Nancy\BeforePipeline.cs",
+"uri":  "sources\Nancy\src\Nancy\BeforePipeline.cs",
 "region":  {
 "startLine":  30,
 "startColumn":  47,
@@ -56,7 +56,7 @@
 "id":  "S4069",
 "message":  "Implement alternative method 'Add' for the operator '+'.",
 "location":  {
-"uri":  "Nancy\src\Nancy\BeforePipeline.cs",
+"uri":  "sources\Nancy\src\Nancy\BeforePipeline.cs",
 "region":  {
 "startLine":  36,
 "startColumn":  47,
@@ -69,7 +69,7 @@
 "id":  "S4069",
 "message":  "Implement alternative method 'Add' for the operator '+'.",
 "location":  {
-"uri":  "Nancy\src\Nancy\BeforePipeline.cs",
+"uri":  "sources\Nancy\src\Nancy\BeforePipeline.cs",
 "region":  {
 "startLine":  42,
 "startColumn":  47,
@@ -82,7 +82,7 @@
 "id":  "S4069",
 "message":  "Implement alternative method 'Add' for the operator '+'.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ErrorPipeline.cs",
+"uri":  "sources\Nancy\src\Nancy\ErrorPipeline.cs",
 "region":  {
 "startLine":  39,
 "startColumn":  46,
@@ -95,7 +95,7 @@
 "id":  "S4069",
 "message":  "Implement alternative method 'Add' for the operator '+'.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ErrorPipeline.cs",
+"uri":  "sources\Nancy\src\Nancy\ErrorPipeline.cs",
 "region":  {
 "startLine":  45,
 "startColumn":  46,

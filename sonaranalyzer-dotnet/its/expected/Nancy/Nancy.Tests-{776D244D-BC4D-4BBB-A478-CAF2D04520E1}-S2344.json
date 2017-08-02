@@ -4,7 +4,7 @@
 "id":  "S2344",
 "message":  "Rename this enumeration to remove the 'Enum' suffix.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\DynamicDictionaryValueFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\DynamicDictionaryValueFixture.cs",
 "region":  {
 "startLine":  1646,
 "startColumn":  22,
@@ -17,7 +17,7 @@
 "id":  "S2344",
 "message":  "Rename this enumeration to remove the 'Enum' suffix.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\DynamicDictionaryValueFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\DynamicDictionaryValueFixture.cs",
 "region":  {
 "startLine":  1652,
 "startColumn":  22,
@@ -30,7 +30,7 @@
 "id":  "S2344",
 "message":  "Rename this enumeration to remove the 'Enum' suffix.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBodyDeserializers\JsonBodyDeserializerFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBodyDeserializers\JsonBodyDeserializerFixture.cs",
 "region":  {
 "startLine":  425,
 "startColumn":  21,

@@ -4,7 +4,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private field '_random'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence.Tests\Fsm\PersistentFSMSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\Fsm\PersistentFSMSpec.cs",
 "region":  {
 "startLine":  19,
 "startColumn":  9,
@@ -17,7 +17,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private field '_timeout'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence.Tests\PersistentActorFailureSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\PersistentActorFailureSpec.cs",
 "region":  {
 "startLine":  20,
 "startColumn":  9,
@@ -30,7 +30,7 @@
 "id":  "S1144",
 "message":  "Remove the unused internal type 'FailingMemoryStore'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence.Tests\PersistentActorFailureSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\PersistentActorFailureSpec.cs",
 "region":  {
 "startLine":  33,
 "startColumn":  9,
@@ -43,7 +43,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private field '_counter'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence.Tests\PersistentActorSpec.Actors.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\PersistentActorSpec.Actors.cs",
 "region":  {
 "startLine":  630,
 "startColumn":  13,

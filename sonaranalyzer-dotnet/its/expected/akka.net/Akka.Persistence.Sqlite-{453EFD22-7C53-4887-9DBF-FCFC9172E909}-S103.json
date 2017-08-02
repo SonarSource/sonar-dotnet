@@ -4,7 +4,7 @@
 "id":  "S103",
 "message":  "Split this 201 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "akka.net\src\contrib\persistence\Akka.Persistence.Sqlite\Journal\SqliteQueryBuilder.cs",
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sqlite\Journal\SqliteQueryBuilder.cs",
 "region":  {
 "startLine":  31,
 "startColumn":  1,
@@ -17,7 +17,7 @@
 "id":  "S103",
 "message":  "Split this 212 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "akka.net\src\contrib\persistence\Akka.Persistence.Sqlite\Snapshot\QueryBuilder.cs",
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sqlite\Snapshot\QueryBuilder.cs",
 "region":  {
 "startLine":  26,
 "startColumn":  1,

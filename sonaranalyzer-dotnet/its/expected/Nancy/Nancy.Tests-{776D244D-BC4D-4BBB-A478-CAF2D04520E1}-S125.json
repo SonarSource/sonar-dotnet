@@ -4,7 +4,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ViewEngines\DefaultViewLocatorFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ViewEngines\DefaultViewLocatorFixture.cs",
 "region":  {
 "startLine":  285,
 "startColumn":  12,

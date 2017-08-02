@@ -5,7 +5,7 @@
 "message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
 "location":  [
 {
-"uri":  "akka.net\src\core\Akka.TestKit\EventFilter\TestEventListener.cs",
+"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\TestEventListener.cs",
 "region":  {
 "startLine":  29,
 "startColumn":  16,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.TestKit\EventFilter\TestEventListener.cs",
+"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\TestEventListener.cs",
 "region":  {
 "startLine":  31,
 "startColumn":  34,
@@ -29,7 +29,7 @@
 "message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
 "location":  [
 {
-"uri":  "akka.net\src\core\Akka.TestKit\EventFilter\TestEventListener.cs",
+"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\TestEventListener.cs",
 "region":  {
 "startLine":  40,
 "startColumn":  21,
@@ -38,7 +38,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.TestKit\EventFilter\TestEventListener.cs",
+"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\TestEventListener.cs",
 "region":  {
 "startLine":  42,
 "startColumn":  28,
@@ -53,7 +53,7 @@
 "message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
 "location":  [
 {
-"uri":  "akka.net\src\core\Akka.TestKit\EventFilter\TestEventListener.cs",
+"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\TestEventListener.cs",
 "region":  {
 "startLine":  48,
 "startColumn":  21,
@@ -62,7 +62,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.TestKit\EventFilter\TestEventListener.cs",
+"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\TestEventListener.cs",
 "region":  {
 "startLine":  50,
 "startColumn":  30,
@@ -77,7 +77,7 @@
 "message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
 "location":  [
 {
-"uri":  "akka.net\src\core\Akka.TestKit\EventFilter\TestEventListener.cs",
+"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\TestEventListener.cs",
 "region":  {
 "startLine":  56,
 "startColumn":  21,
@@ -86,7 +86,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.TestKit\EventFilter\TestEventListener.cs",
+"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\TestEventListener.cs",
 "region":  {
 "startLine":  58,
 "startColumn":  32,
@@ -101,7 +101,7 @@
 "message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
 "location":  [
 {
-"uri":  "akka.net\src\core\Akka.TestKit\EventFilter\TestEventListener.cs",
+"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\TestEventListener.cs",
 "region":  {
 "startLine":  64,
 "startColumn":  21,
@@ -110,7 +110,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.TestKit\EventFilter\TestEventListener.cs",
+"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\TestEventListener.cs",
 "region":  {
 "startLine":  66,
 "startColumn":  34,
@@ -125,7 +125,7 @@
 "message":  "Replace this type-check-and-cast sequence with an 'as' and a null check.",
 "location":  [
 {
-"uri":  "akka.net\src\core\Akka.TestKit\EventFilter\TestEventListener.cs",
+"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\TestEventListener.cs",
 "region":  {
 "startLine":  68,
 "startColumn":  21,
@@ -134,7 +134,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.TestKit\EventFilter\TestEventListener.cs",
+"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\TestEventListener.cs",
 "region":  {
 "startLine":  70,
 "startColumn":  26,

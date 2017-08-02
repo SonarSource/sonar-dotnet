@@ -4,7 +4,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Authentication.Forms\FormsAuthentication.cs",
+"uri":  "sources\Nancy\src\Nancy.Authentication.Forms\FormsAuthentication.cs",
 "region":  {
 "startLine":  229,
 "startColumn":  29,
@@ -17,7 +17,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Authentication.Forms\FormsAuthentication.cs",
+"uri":  "sources\Nancy\src\Nancy.Authentication.Forms\FormsAuthentication.cs",
 "region":  {
 "startLine":  278,
 "startColumn":  55,
@@ -30,7 +30,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Authentication.Forms\FormsAuthentication.cs",
+"uri":  "sources\Nancy\src\Nancy.Authentication.Forms\FormsAuthentication.cs",
 "region":  {
 "startLine":  329,
 "startColumn":  20,

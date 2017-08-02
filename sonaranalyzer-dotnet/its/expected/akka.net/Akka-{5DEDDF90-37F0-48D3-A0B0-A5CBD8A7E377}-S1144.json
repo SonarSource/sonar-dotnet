@@ -4,7 +4,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private property 'Children'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\ActorCell.Children.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.Children.cs",
 "region":  {
 "startLine":  33,
 "startColumn":  9,
@@ -17,7 +17,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private method 'TryGetChild'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\ActorCell.Children.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.Children.cs",
 "region":  {
 "startLine":  38,
 "startColumn":  9,
@@ -30,7 +30,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private property 'IsWaitingForChildren'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\ActorCell.Children.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.Children.cs",
 "region":  {
 "startLine":  193,
 "startColumn":  9,
@@ -43,7 +43,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private type 'FactoryConsumer'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\Props.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\Props.cs",
 "region":  {
 "startLine":  588,
 "startColumn":  9,
@@ -56,7 +56,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private constructor 'FactoryConsumer'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\Props.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\Props.cs",
 "region":  {
 "startLine":  592,
 "startColumn":  13,
@@ -69,7 +69,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private method 'CloseReason'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\IO\TcpConnection.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpConnection.cs",
 "region":  {
 "startLine":  447,
 "startColumn":  9,
@@ -82,7 +82,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private constructor 'UpdatePendingWriteAndThen'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\IO\TcpConnection.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpConnection.cs",
 "region":  {
 "startLine":  761,
 "startColumn":  13,
@@ -95,7 +95,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private constructor 'WriteFileFailed'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\IO\TcpConnection.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpConnection.cs",
 "region":  {
 "startLine":  772,
 "startColumn":  13,
@@ -108,7 +108,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private field '_objectArrayType'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Util\MatchHandler\PartialActionBuilder.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialActionBuilder.cs",
 "region":  {
 "startLine":  20,
 "startColumn":  9,
@@ -121,7 +121,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private method 'RotateLeft64'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Util\MurmurHash.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\MurmurHash.cs",
 "region":  {
 "startLine":  144,
 "startColumn":  9,

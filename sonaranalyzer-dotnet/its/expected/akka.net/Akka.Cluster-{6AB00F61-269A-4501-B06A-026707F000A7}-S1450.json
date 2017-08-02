@@ -4,7 +4,7 @@
 "id":  "S1450",
 "message":  "Remove the '_cluster' field and declare it as a local variable in the relevant methods.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  1850,
 "startColumn":  26,
@@ -17,7 +17,7 @@
 "id":  "S1450",
 "message":  "Remove the '_gossipTimeToLive' field and declare it as a local variable in the relevant methods.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\Proto\ClusterMessageSerializer.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Proto\ClusterMessageSerializer.cs",
 "region":  {
 "startLine":  45,
 "startColumn":  32,

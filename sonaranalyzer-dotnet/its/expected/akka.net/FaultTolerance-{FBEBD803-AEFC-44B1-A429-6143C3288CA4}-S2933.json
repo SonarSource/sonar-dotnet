@@ -4,7 +4,7 @@
 "id":  "S2933",
 "message":  "Make 'log' 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\examples\FaultTolerance\Program.cs",
+"uri":  "sources\akka.net\src\examples\FaultTolerance\Program.cs",
 "region":  {
 "startLine":  42,
 "startColumn":  25,
@@ -17,7 +17,7 @@
 "id":  "S2933",
 "message":  "Make 'log' 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\examples\FaultTolerance\Program.cs",
+"uri":  "sources\akka.net\src\examples\FaultTolerance\Program.cs",
 "region":  {
 "startLine":  107,
 "startColumn":  25,
@@ -30,7 +30,7 @@
 "id":  "S2933",
 "message":  "Make 'counterService' 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\examples\FaultTolerance\Program.cs",
+"uri":  "sources\akka.net\src\examples\FaultTolerance\Program.cs",
 "region":  {
 "startLine":  111,
 "startColumn":  19,
@@ -43,7 +43,7 @@
 "id":  "S2933",
 "message":  "Make 'totalCount' 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\examples\FaultTolerance\Program.cs",
+"uri":  "sources\akka.net\src\examples\FaultTolerance\Program.cs",
 "region":  {
 "startLine":  112,
 "startColumn":  13,
@@ -56,7 +56,7 @@
 "id":  "S2933",
 "message":  "Make 'log' 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\examples\FaultTolerance\Program.cs",
+"uri":  "sources\akka.net\src\examples\FaultTolerance\Program.cs",
 "region":  {
 "startLine":  205,
 "startColumn":  25,
@@ -69,7 +69,7 @@
 "id":  "S2933",
 "message":  "Make 'key' 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\examples\FaultTolerance\Program.cs",
+"uri":  "sources\akka.net\src\examples\FaultTolerance\Program.cs",
 "region":  {
 "startLine":  207,
 "startColumn":  16,
@@ -82,7 +82,7 @@
 "id":  "S2933",
 "message":  "Make 'backlog' 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\examples\FaultTolerance\Program.cs",
+"uri":  "sources\akka.net\src\examples\FaultTolerance\Program.cs",
 "region":  {
 "startLine":  210,
 "startColumn":  33,
@@ -95,7 +95,7 @@
 "id":  "S2933",
 "message":  "Make 'MAX_BACKLOG' 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\examples\FaultTolerance\Program.cs",
+"uri":  "sources\akka.net\src\examples\FaultTolerance\Program.cs",
 "region":  {
 "startLine":  211,
 "startColumn":  13,
@@ -108,7 +108,7 @@
 "id":  "S2933",
 "message":  "Make 'log' 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\examples\FaultTolerance\Program.cs",
+"uri":  "sources\akka.net\src\examples\FaultTolerance\Program.cs",
 "region":  {
 "startLine":  357,
 "startColumn":  25,
@@ -121,7 +121,7 @@
 "id":  "S2933",
 "message":  "Make 'key' 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\examples\FaultTolerance\Program.cs",
+"uri":  "sources\akka.net\src\examples\FaultTolerance\Program.cs",
 "region":  {
 "startLine":  358,
 "startColumn":  16,

@@ -4,7 +4,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence.Tests\AtLeastOnceDeliveryCrashSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\AtLeastOnceDeliveryCrashSpec.cs",
 "region":  {
 "startLine":  40,
 "startColumn":  21,
@@ -17,7 +17,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence.Tests\AtLeastOnceDeliveryCrashSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\AtLeastOnceDeliveryCrashSpec.cs",
 "region":  {
 "startLine":  89,
 "startColumn":  17,
@@ -30,7 +30,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence.Tests\AtLeastOnceDeliveryCrashSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\AtLeastOnceDeliveryCrashSpec.cs",
 "region":  {
 "startLine":  105,
 "startColumn":  17,
@@ -43,7 +43,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence.Tests\AtLeastOnceDeliveryCrashSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\AtLeastOnceDeliveryCrashSpec.cs",
 "region":  {
 "startLine":  106,
 "startColumn":  22,
@@ -56,7 +56,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence.Tests\AtLeastOnceDeliveryFailureSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\AtLeastOnceDeliveryFailureSpec.cs",
 "region":  {
 "startLine":  235,
 "startColumn":  17,
@@ -69,7 +69,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence.Tests\AtLeastOnceDeliveryReceiveActorSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\AtLeastOnceDeliveryReceiveActorSpec.cs",
 "region":  {
 "startLine":  56,
 "startColumn":  17,
@@ -82,7 +82,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence.Tests\AtLeastOnceDeliveryReceiveActorSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\AtLeastOnceDeliveryReceiveActorSpec.cs",
 "region":  {
 "startLine":  152,
 "startColumn":  21,
@@ -95,7 +95,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence.Tests\AtLeastOnceDeliverySpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\AtLeastOnceDeliverySpec.cs",
 "region":  {
 "startLine":  61,
 "startColumn":  25,
@@ -108,7 +108,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence.Tests\AtLeastOnceDeliverySpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\AtLeastOnceDeliverySpec.cs",
 "region":  {
 "startLine":  66,
 "startColumn":  29,
@@ -121,7 +121,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence.Tests\AtLeastOnceDeliverySpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\AtLeastOnceDeliverySpec.cs",
 "region":  {
 "startLine":  83,
 "startColumn":  29,
@@ -134,7 +134,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence.Tests\AtLeastOnceDeliverySpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\AtLeastOnceDeliverySpec.cs",
 "region":  {
 "startLine":  244,
 "startColumn":  17,
@@ -147,7 +147,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence.Tests\EndToEndEventAdapterSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\EndToEndEventAdapterSpec.cs",
 "region":  {
 "startLine":  115,
 "startColumn":  17,
@@ -160,7 +160,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence.Tests\EndToEndEventAdapterSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\EndToEndEventAdapterSpec.cs",
 "region":  {
 "startLine":  142,
 "startColumn":  17,
@@ -173,7 +173,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence.Tests\EndToEndEventAdapterSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\EndToEndEventAdapterSpec.cs",
 "region":  {
 "startLine":  169,
 "startColumn":  17,
@@ -186,7 +186,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence.Tests\EndToEndEventAdapterSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\EndToEndEventAdapterSpec.cs",
 "region":  {
 "startLine":  196,
 "startColumn":  17,
@@ -199,7 +199,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence.Tests\EndToEndEventAdapterSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\EndToEndEventAdapterSpec.cs",
 "region":  {
 "startLine":  244,
 "startColumn":  17,
@@ -212,7 +212,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence.Tests\Journal\ChaosJournal.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\Journal\ChaosJournal.cs",
 "region":  {
 "startLine":  82,
 "startColumn":  17,
@@ -225,7 +225,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence.Tests\MemoryEventAdapterSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\MemoryEventAdapterSpec.cs",
 "region":  {
 "startLine":  136,
 "startColumn":  17,
@@ -238,7 +238,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence.Tests\MemoryEventAdapterSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\MemoryEventAdapterSpec.cs",
 "region":  {
 "startLine":  212,
 "startColumn":  17,
@@ -251,7 +251,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence.Tests\PersistenceSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\PersistenceSpec.cs",
 "region":  {
 "startLine":  106,
 "startColumn":  25,
@@ -264,7 +264,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence.Tests\PersistentActorFailureSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\PersistentActorFailureSpec.cs",
 "region":  {
 "startLine":  42,
 "startColumn":  21,
@@ -277,7 +277,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence.Tests\PersistentActorSpec.Actors.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\PersistentActorSpec.Actors.cs",
 "region":  {
 "startLine":  114,
 "startColumn":  17,
@@ -290,7 +290,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence.Tests\PersistentActorSpec.Actors.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\PersistentActorSpec.Actors.cs",
 "region":  {
 "startLine":  115,
 "startColumn":  22,
@@ -303,7 +303,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence.Tests\PersistentActorSpec.Actors.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\PersistentActorSpec.Actors.cs",
 "region":  {
 "startLine":  171,
 "startColumn":  17,
@@ -316,7 +316,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence.Tests\PersistentActorSpec.Actors.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\PersistentActorSpec.Actors.cs",
 "region":  {
 "startLine":  210,
 "startColumn":  17,
@@ -329,7 +329,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence.Tests\PersistentActorSpec.Actors.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\PersistentActorSpec.Actors.cs",
 "region":  {
 "startLine":  248,
 "startColumn":  17,
@@ -342,7 +342,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence.Tests\PersistentActorSpec.Actors.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\PersistentActorSpec.Actors.cs",
 "region":  {
 "startLine":  280,
 "startColumn":  17,
@@ -355,7 +355,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence.Tests\PersistentActorSpec.Actors.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\PersistentActorSpec.Actors.cs",
 "region":  {
 "startLine":  331,
 "startColumn":  17,
@@ -368,7 +368,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence.Tests\PersistentActorSpec.Actors.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\PersistentActorSpec.Actors.cs",
 "region":  {
 "startLine":  332,
 "startColumn":  17,
@@ -381,7 +381,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence.Tests\PersistentActorSpec.Actors.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\PersistentActorSpec.Actors.cs",
 "region":  {
 "startLine":  333,
 "startColumn":  22,
@@ -394,7 +394,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence.Tests\PersistentActorSpec.Actors.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\PersistentActorSpec.Actors.cs",
 "region":  {
 "startLine":  334,
 "startColumn":  22,
@@ -407,7 +407,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence.Tests\PersistentActorSpec.Actors.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\PersistentActorSpec.Actors.cs",
 "region":  {
 "startLine":  371,
 "startColumn":  17,
@@ -420,7 +420,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence.Tests\PersistentActorSpec.Actors.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\PersistentActorSpec.Actors.cs",
 "region":  {
 "startLine":  372,
 "startColumn":  17,
@@ -433,7 +433,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence.Tests\PersistentActorSpec.Actors.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\PersistentActorSpec.Actors.cs",
 "region":  {
 "startLine":  384,
 "startColumn":  17,
@@ -446,7 +446,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence.Tests\PersistentActorSpec.Actors.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\PersistentActorSpec.Actors.cs",
 "region":  {
 "startLine":  410,
 "startColumn":  26,
@@ -459,7 +459,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence.Tests\PersistentActorSpec.Actors.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\PersistentActorSpec.Actors.cs",
 "region":  {
 "startLine":  645,
 "startColumn":  29,
@@ -472,7 +472,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence.Tests\PersistentActorSpec.Actors.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\PersistentActorSpec.Actors.cs",
 "region":  {
 "startLine":  646,
 "startColumn":  29,
@@ -485,7 +485,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence.Tests\PersistentActorSpec.Actors.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\PersistentActorSpec.Actors.cs",
 "region":  {
 "startLine":  671,
 "startColumn":  25,
@@ -498,7 +498,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence.Tests\PersistentActorSpec.Actors.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\PersistentActorSpec.Actors.cs",
 "region":  {
 "startLine":  676,
 "startColumn":  29,
@@ -511,7 +511,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence.Tests\PersistentActorSpec.Actors.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\PersistentActorSpec.Actors.cs",
 "region":  {
 "startLine":  736,
 "startColumn":  17,
@@ -524,7 +524,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence.Tests\PersistentViewSpec.Actors.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\PersistentViewSpec.Actors.cs",
 "region":  {
 "startLine":  68,
 "startColumn":  17,
@@ -537,7 +537,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence.Tests\PersistentViewSpec.Actors.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\PersistentViewSpec.Actors.cs",
 "region":  {
 "startLine":  69,
 "startColumn":  22,
@@ -550,7 +550,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence.Tests\PersistentViewSpec.Actors.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\PersistentViewSpec.Actors.cs",
 "region":  {
 "startLine":  75,
 "startColumn":  22,
@@ -563,7 +563,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence.Tests\PersistentViewSpec.Actors.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\PersistentViewSpec.Actors.cs",
 "region":  {
 "startLine":  115,
 "startColumn":  17,
@@ -576,7 +576,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence.Tests\PersistentViewSpec.Actors.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\PersistentViewSpec.Actors.cs",
 "region":  {
 "startLine":  116,
 "startColumn":  22,

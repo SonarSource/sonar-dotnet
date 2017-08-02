@@ -4,7 +4,7 @@
 "id":  "S2357",
 "message":  "Make 'Status' private.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\ActorBase.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorBase.cs",
 "region":  {
 "startLine":  25,
 "startColumn":  36,
@@ -17,7 +17,7 @@
 "id":  "S2357",
 "message":  "Make 'Cause' private.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\ActorBase.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorBase.cs",
 "region":  {
 "startLine":  39,
 "startColumn":  39,
@@ -30,7 +30,7 @@
 "id":  "S2357",
 "message":  "Make 'Ref' private.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Pattern\BackoffSupervisor.cs",
+"uri":  "sources\akka.net\src\core\Akka\Pattern\BackoffSupervisor.cs",
 "region":  {
 "startLine":  36,
 "startColumn":  39,
@@ -43,7 +43,7 @@
 "id":  "S2357",
 "message":  "Make 'Current' private.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Pattern\BackoffSupervisor.cs",
+"uri":  "sources\akka.net\src\core\Akka\Pattern\BackoffSupervisor.cs",
 "region":  {
 "startLine":  54,
 "startColumn":  33,

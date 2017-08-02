@@ -4,7 +4,7 @@
 "id":  "S4040",
 "message":  "Change this normalization to 'String.ToUpperInvariant()'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\Address.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\Address.cs",
 "region":  {
 "startLine":  42,
 "startColumn":  41,

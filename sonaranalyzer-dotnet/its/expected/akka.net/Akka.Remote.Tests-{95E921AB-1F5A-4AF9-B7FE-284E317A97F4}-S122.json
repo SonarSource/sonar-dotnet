@@ -4,7 +4,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.Tests\AccrualFailureDetectorSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests\AccrualFailureDetectorSpec.cs",
 "region":  {
 "startLine":  147,
 "startColumn":  13,
@@ -17,7 +17,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.Tests\AckedDeliverySpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests\AckedDeliverySpec.cs",
 "region":  {
 "startLine":  306,
 "startColumn":  17,
@@ -30,7 +30,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.Tests\AckedDeliverySpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests\AckedDeliverySpec.cs",
 "region":  {
 "startLine":  307,
 "startColumn":  17,
@@ -43,7 +43,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.Tests\AckedDeliverySpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests\AckedDeliverySpec.cs",
 "region":  {
 "startLine":  341,
 "startColumn":  21,
@@ -56,7 +56,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.Tests\DeadlineFailureDetectorSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests\DeadlineFailureDetectorSpec.cs",
 "region":  {
 "startLine":  60,
 "startColumn":  13,
@@ -69,7 +69,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.Tests\RemoteWatcherSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests\RemoteWatcherSpec.cs",
 "region":  {
 "startLine":  71,
 "startColumn":  21,
@@ -82,7 +82,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.Tests\RemoteWatcherSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests\RemoteWatcherSpec.cs",
 "region":  {
 "startLine":  109,
 "startColumn":  21,
@@ -95,7 +95,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.Tests\RemoteWatcherSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests\RemoteWatcherSpec.cs",
 "region":  {
 "startLine":  110,
 "startColumn":  21,
@@ -108,7 +108,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.Tests\RemoteWatcherSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests\RemoteWatcherSpec.cs",
 "region":  {
 "startLine":  111,
 "startColumn":  21,
@@ -121,7 +121,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.Tests\RemotingSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests\RemotingSpec.cs",
 "region":  {
 "startLine":  447,
 "startColumn":  25,
@@ -134,7 +134,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.Tests\RemotingSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests\RemotingSpec.cs",
 "region":  {
 "startLine":  476,
 "startColumn":  17,
@@ -147,7 +147,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.Tests\RemotingSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests\RemotingSpec.cs",
 "region":  {
 "startLine":  477,
 "startColumn":  17,
@@ -160,7 +160,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.Tests\Transport\AkkaProtocolSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests\Transport\AkkaProtocolSpec.cs",
 "region":  {
 "startLine":  160,
 "startColumn":  17,
@@ -173,7 +173,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.Tests\Transport\AkkaProtocolSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests\Transport\AkkaProtocolSpec.cs",
 "region":  {
 "startLine":  411,
 "startColumn":  13,
@@ -186,7 +186,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.Tests\Transport\AkkaProtocolSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests\Transport\AkkaProtocolSpec.cs",
 "region":  {
 "startLine":  430,
 "startColumn":  13,
@@ -199,7 +199,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.Tests\Transport\AkkaProtocolSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests\Transport\AkkaProtocolSpec.cs",
 "region":  {
 "startLine":  449,
 "startColumn":  13,
@@ -212,7 +212,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.Tests\Transport\TestTransportSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests\Transport\TestTransportSpec.cs",
 "region":  {
 "startLine":  134,
 "startColumn":  17,
@@ -225,7 +225,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.Tests\Transport\TestTransportSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests\Transport\TestTransportSpec.cs",
 "region":  {
 "startLine":  156,
 "startColumn":  17,
@@ -238,7 +238,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.Tests\Transport\TestTransportSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests\Transport\TestTransportSpec.cs",
 "region":  {
 "startLine":  191,
 "startColumn":  17,
@@ -251,7 +251,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.Tests\Transport\ThrottlerTransportAdapterSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests\Transport\ThrottlerTransportAdapterSpec.cs",
 "region":  {
 "startLine":  97,
 "startColumn":  21,
@@ -264,7 +264,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.Tests\Transport\ThrottlerTransportAdapterSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests\Transport\ThrottlerTransportAdapterSpec.cs",
 "region":  {
 "startLine":  98,
 "startColumn":  21,
@@ -277,7 +277,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.Tests\Transport\ThrottlerTransportAdapterSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests\Transport\ThrottlerTransportAdapterSpec.cs",
 "region":  {
 "startLine":  104,
 "startColumn":  21,
@@ -290,7 +290,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.Tests\Transport\ThrottlerTransportAdapterSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests\Transport\ThrottlerTransportAdapterSpec.cs",
 "region":  {
 "startLine":  105,
 "startColumn":  21,

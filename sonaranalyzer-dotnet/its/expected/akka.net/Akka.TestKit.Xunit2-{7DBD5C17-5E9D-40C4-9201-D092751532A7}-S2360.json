@@ -4,7 +4,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "akka.net\src\contrib\testkits\Akka.TestKit.Xunit2\Internals\AkkaAssertEqualityComparer.cs",
+"uri":  "sources\akka.net\src\contrib\testkits\Akka.TestKit.Xunit2\Internals\AkkaAssertEqualityComparer.cs",
 "region":  {
 "startLine":  35,
 "startColumn":  62,
@@ -17,7 +17,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "akka.net\src\contrib\testkits\Akka.TestKit.Xunit2\Internals\AkkaAssertEqualityComparer.cs",
+"uri":  "sources\akka.net\src\contrib\testkits\Akka.TestKit.Xunit2\Internals\AkkaAssertEqualityComparer.cs",
 "region":  {
 "startLine":  35,
 "startColumn":  103,
@@ -30,7 +30,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "akka.net\src\contrib\testkits\Akka.TestKit.Xunit2\Internals\AkkaEqualException.cs",
+"uri":  "sources\akka.net\src\contrib\testkits\Akka.TestKit.Xunit2\Internals\AkkaEqualException.cs",
 "region":  {
 "startLine":  19,
 "startColumn":  81,
@@ -43,7 +43,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "akka.net\src\contrib\testkits\Akka.TestKit.Xunit2\TestKit.cs",
+"uri":  "sources\akka.net\src\contrib\testkits\Akka.TestKit.Xunit2\TestKit.cs",
 "region":  {
 "startLine":  32,
 "startColumn":  43,
@@ -56,7 +56,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "akka.net\src\contrib\testkits\Akka.TestKit.Xunit2\TestKit.cs",
+"uri":  "sources\akka.net\src\contrib\testkits\Akka.TestKit.Xunit2\TestKit.cs",
 "region":  {
 "startLine":  32,
 "startColumn":  76,
@@ -69,7 +69,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "akka.net\src\contrib\testkits\Akka.TestKit.Xunit2\TestKit.cs",
+"uri":  "sources\akka.net\src\contrib\testkits\Akka.TestKit.Xunit2\TestKit.cs",
 "region":  {
 "startLine":  44,
 "startColumn":  62,
@@ -82,7 +82,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "akka.net\src\contrib\testkits\Akka.TestKit.Xunit2\TestKit.cs",
+"uri":  "sources\akka.net\src\contrib\testkits\Akka.TestKit.Xunit2\TestKit.cs",
 "region":  {
 "startLine":  44,
 "startColumn":  95,
@@ -95,7 +95,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "akka.net\src\contrib\testkits\Akka.TestKit.Xunit2\TestKit.cs",
+"uri":  "sources\akka.net\src\contrib\testkits\Akka.TestKit.Xunit2\TestKit.cs",
 "region":  {
 "startLine":  56,
 "startColumn":  64,

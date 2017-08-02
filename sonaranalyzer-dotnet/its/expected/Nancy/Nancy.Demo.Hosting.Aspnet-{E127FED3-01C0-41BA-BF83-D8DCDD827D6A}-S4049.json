@@ -4,7 +4,7 @@
 "id":  "S4049",
 "message":  "Consider making method 'GetContent' a property.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Demo.Hosting.Aspnet\IApplicationDependency.cs",
+"uri":  "sources\Nancy\src\Nancy.Demo.Hosting.Aspnet\IApplicationDependency.cs",
 "region":  {
 "startLine":  5,
 "startColumn":  16,
@@ -17,7 +17,7 @@
 "id":  "S4049",
 "message":  "Consider making method 'GetContent' a property.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Demo.Hosting.Aspnet\IRequestDependency.cs",
+"uri":  "sources\Nancy\src\Nancy.Demo.Hosting.Aspnet\IRequestDependency.cs",
 "region":  {
 "startLine":  5,
 "startColumn":  16,

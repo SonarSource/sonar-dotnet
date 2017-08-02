@@ -4,7 +4,7 @@
 "id":  "S131",
 "message":  "Add a 'Case Else' clause to this 'Select' statement.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPICommon.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
 "region":  {
 "startLine":  1023,
 "startColumn":  13,
@@ -17,7 +17,7 @@
 "id":  "S131",
 "message":  "Add a 'Case Else' clause to this 'Select' statement.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIFileUtils.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIFileUtils.vb",
 "region":  {
 "startLine":  47,
 "startColumn":  13,
@@ -30,7 +30,7 @@
 "id":  "S131",
 "message":  "Add a 'Case Else' clause to this 'Select' statement.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIHTTP.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIHTTP.vb",
 "region":  {
 "startLine":  153,
 "startColumn":  21,
@@ -43,7 +43,7 @@
 "id":  "S131",
 "message":  "Add a 'Case Else' clause to this 'Select' statement.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIHTTP.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIHTTP.vb",
 "region":  {
 "startLine":  240,
 "startColumn":  17,
@@ -56,7 +56,7 @@
 "id":  "S131",
 "message":  "Add a 'Case Else' clause to this 'Select' statement.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPILog.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPILog.vb",
 "region":  {
 "startLine":  63,
 "startColumn":  9,
@@ -69,7 +69,7 @@
 "id":  "S131",
 "message":  "Add a 'Case Else' clause to this 'Select' statement.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
 "region":  {
 "startLine":  339,
 "startColumn":  13,
@@ -82,7 +82,7 @@
 "id":  "S131",
 "message":  "Add a 'Case Else' clause to this 'Select' statement.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
 "region":  {
 "startLine":  91,
 "startColumn":  25,
@@ -95,7 +95,7 @@
 "id":  "S131",
 "message":  "Add a 'Case Else' clause to this 'Select' statement.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
 "region":  {
 "startLine":  341,
 "startColumn":  25,
@@ -108,7 +108,7 @@
 "id":  "S131",
 "message":  "Add a 'Case Else' clause to this 'Select' statement.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
 "region":  {
 "startLine":  1196,
 "startColumn":  9,
@@ -121,7 +121,7 @@
 "id":  "S131",
 "message":  "Add a 'Case Else' clause to this 'Select' statement.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIStringUtils.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIStringUtils.vb",
 "region":  {
 "startLine":  386,
 "startColumn":  9,

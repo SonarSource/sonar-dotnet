@@ -4,7 +4,7 @@
 "id":  "S3235",
 "message":  "Remove these redundant parentheses.",
 "location":  {
-"uri":  "akka.net\src\examples\Stocks\SymbolLookup\Actors\TickerActors.cs",
+"uri":  "sources\akka.net\src\examples\Stocks\SymbolLookup\Actors\TickerActors.cs",
 "region":  {
 "startLine":  39,
 "startColumn":  38,
@@ -17,7 +17,7 @@
 "id":  "S3235",
 "message":  "Remove these redundant parentheses.",
 "location":  {
-"uri":  "akka.net\src\examples\Stocks\SymbolLookup\Actors\TickerActors.cs",
+"uri":  "sources\akka.net\src\examples\Stocks\SymbolLookup\Actors\TickerActors.cs",
 "region":  {
 "startLine":  49,
 "startColumn":  38,
@@ -30,7 +30,7 @@
 "id":  "S3235",
 "message":  "Remove these redundant parentheses.",
 "location":  {
-"uri":  "akka.net\src\examples\Stocks\SymbolLookup\Actors\TickerActors.cs",
+"uri":  "sources\akka.net\src\examples\Stocks\SymbolLookup\Actors\TickerActors.cs",
 "region":  {
 "startLine":  81,
 "startColumn":  59,
@@ -43,7 +43,7 @@
 "id":  "S3235",
 "message":  "Remove these redundant parentheses.",
 "location":  {
-"uri":  "akka.net\src\examples\Stocks\SymbolLookup\Actors\TickerActors.cs",
+"uri":  "sources\akka.net\src\examples\Stocks\SymbolLookup\Actors\TickerActors.cs",
 "region":  {
 "startLine":  118,
 "startColumn":  60,

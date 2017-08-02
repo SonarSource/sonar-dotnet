@@ -4,7 +4,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\Json\JavaScriptSerializerFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Json\JavaScriptSerializerFixture.cs",
 "region":  {
 "startLine":  126,
 "startColumn":  19,
@@ -17,7 +17,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\BindingMemberInfoFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\BindingMemberInfoFixture.cs",
 "region":  {
 "startLine":  220,
 "startColumn":  21,
@@ -30,7 +30,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\BindingMemberInfoFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\BindingMemberInfoFixture.cs",
 "region":  {
 "startLine":  226,
 "startColumn":  21,
@@ -43,7 +43,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\BindingMemberInfoFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\BindingMemberInfoFixture.cs",
 "region":  {
 "startLine":  238,
 "startColumn":  21,
@@ -56,7 +56,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\BindingMemberInfoFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\BindingMemberInfoFixture.cs",
 "region":  {
 "startLine":  251,
 "startColumn":  21,
@@ -69,7 +69,7 @@
 "id":  "S108",
 "message":  "Either remove or fill this block of code.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBinderFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBinderFixture.cs",
 "region":  {
 "startLine":  1621,
 "startColumn":  21,

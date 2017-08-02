@@ -4,7 +4,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Testing\AssertExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\AssertExtensions.cs",
 "region":  {
 "startLine":  94,
 "startColumn":  135,
@@ -17,7 +17,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Testing\AssertExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\AssertExtensions.cs",
 "region":  {
 "startLine":  104,
 "startColumn":  141,
@@ -30,7 +30,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Testing\AssertExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\AssertExtensions.cs",
 "region":  {
 "startLine":  116,
 "startColumn":  141,
@@ -43,7 +43,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Testing\AssertExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\AssertExtensions.cs",
 "region":  {
 "startLine":  138,
 "startColumn":  154,
@@ -56,7 +56,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Testing\AssertExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\AssertExtensions.cs",
 "region":  {
 "startLine":  163,
 "startColumn":  157,
@@ -69,7 +69,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Testing\Asserts.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\Asserts.cs",
 "region":  {
 "startLine":  12,
 "startColumn":  105,
@@ -82,7 +82,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Testing\Asserts.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\Asserts.cs",
 "region":  {
 "startLine":  45,
 "startColumn":  101,
@@ -95,7 +95,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Testing\Asserts.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\Asserts.cs",
 "region":  {
 "startLine":  64,
 "startColumn":  98,
@@ -108,7 +108,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Testing\Browser.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\Browser.cs",
 "region":  {
 "startLine":  31,
 "startColumn":  134,
@@ -121,7 +121,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Testing\Browser.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\Browser.cs",
 "region":  {
 "startLine":  41,
 "startColumn":  89,
@@ -134,7 +134,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Testing\Browser.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\Browser.cs",
 "region":  {
 "startLine":  55,
 "startColumn":  96,
@@ -147,7 +147,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Testing\Browser.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\Browser.cs",
 "region":  {
 "startLine":  66,
 "startColumn":  92,
@@ -160,7 +160,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Testing\Browser.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\Browser.cs",
 "region":  {
 "startLine":  77,
 "startColumn":  93,
@@ -173,7 +173,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Testing\Browser.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\Browser.cs",
 "region":  {
 "startLine":  88,
 "startColumn":  89,
@@ -186,7 +186,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Testing\Browser.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\Browser.cs",
 "region":  {
 "startLine":  99,
 "startColumn":  94,
@@ -199,7 +199,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Testing\Browser.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\Browser.cs",
 "region":  {
 "startLine":  110,
 "startColumn":  90,
@@ -212,7 +212,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Testing\Browser.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\Browser.cs",
 "region":  {
 "startLine":  121,
 "startColumn":  97,
@@ -225,7 +225,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Testing\Browser.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\Browser.cs",
 "region":  {
 "startLine":  132,
 "startColumn":  93,
@@ -238,7 +238,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Testing\Browser.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\Browser.cs",
 "region":  {
 "startLine":  143,
 "startColumn":  95,
@@ -251,7 +251,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Testing\Browser.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\Browser.cs",
 "region":  {
 "startLine":  154,
 "startColumn":  91,
@@ -264,7 +264,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Testing\Browser.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\Browser.cs",
 "region":  {
 "startLine":  165,
 "startColumn":  94,
@@ -277,7 +277,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Testing\Browser.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\Browser.cs",
 "region":  {
 "startLine":  176,
 "startColumn":  90,
@@ -290,7 +290,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Testing\Browser.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\Browser.cs",
 "region":  {
 "startLine":  187,
 "startColumn":  93,
@@ -303,7 +303,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Testing\Browser.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\Browser.cs",
 "region":  {
 "startLine":  198,
 "startColumn":  89,
@@ -316,7 +316,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Testing\BrowserContext.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContext.cs",
 "region":  {
 "startLine":  111,
 "startColumn":  58,
@@ -329,7 +329,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Testing\BrowserContextExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContextExtensions.cs",
 "region":  {
 "startLine":  54,
 "startColumn":  118,
@@ -342,7 +342,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Testing\BrowserContextExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContextExtensions.cs",
 "region":  {
 "startLine":  76,
 "startColumn":  117,
@@ -355,7 +355,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Testing\BrowserResponseExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\BrowserResponseExtensions.cs",
 "region":  {
 "startLine":  20,
 "startColumn":  131,
@@ -368,7 +368,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Testing\LegacyBrowser.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\LegacyBrowser.cs",
 "region":  {
 "startLine":  21,
 "startColumn":  140,
@@ -381,7 +381,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Testing\LegacyBrowser.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\LegacyBrowser.cs",
 "region":  {
 "startLine":  32,
 "startColumn":  95,
@@ -394,7 +394,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Testing\LegacyBrowser.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\LegacyBrowser.cs",
 "region":  {
 "startLine":  44,
 "startColumn":  90,
@@ -407,7 +407,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Testing\LegacyBrowser.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\LegacyBrowser.cs",
 "region":  {
 "startLine":  56,
 "startColumn":  86,
@@ -420,7 +420,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Testing\LegacyBrowser.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\LegacyBrowser.cs",
 "region":  {
 "startLine":  68,
 "startColumn":  87,
@@ -433,7 +433,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Testing\LegacyBrowser.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\LegacyBrowser.cs",
 "region":  {
 "startLine":  80,
 "startColumn":  83,
@@ -446,7 +446,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Testing\LegacyBrowser.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\LegacyBrowser.cs",
 "region":  {
 "startLine":  92,
 "startColumn":  88,
@@ -459,7 +459,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Testing\LegacyBrowser.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\LegacyBrowser.cs",
 "region":  {
 "startLine":  104,
 "startColumn":  84,
@@ -472,7 +472,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Testing\LegacyBrowser.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\LegacyBrowser.cs",
 "region":  {
 "startLine":  116,
 "startColumn":  91,
@@ -485,7 +485,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Testing\LegacyBrowser.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\LegacyBrowser.cs",
 "region":  {
 "startLine":  128,
 "startColumn":  87,
@@ -498,7 +498,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Testing\LegacyBrowser.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\LegacyBrowser.cs",
 "region":  {
 "startLine":  140,
 "startColumn":  89,
@@ -511,7 +511,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Testing\LegacyBrowser.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\LegacyBrowser.cs",
 "region":  {
 "startLine":  152,
 "startColumn":  85,
@@ -524,7 +524,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Testing\LegacyBrowser.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\LegacyBrowser.cs",
 "region":  {
 "startLine":  164,
 "startColumn":  88,
@@ -537,7 +537,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Testing\LegacyBrowser.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\LegacyBrowser.cs",
 "region":  {
 "startLine":  176,
 "startColumn":  84,
@@ -550,7 +550,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Testing\LegacyBrowser.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\LegacyBrowser.cs",
 "region":  {
 "startLine":  188,
 "startColumn":  87,
@@ -563,7 +563,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Testing\LegacyBrowser.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\LegacyBrowser.cs",
 "region":  {
 "startLine":  200,
 "startColumn":  83,

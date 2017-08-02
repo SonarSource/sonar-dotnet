@@ -5,7 +5,7 @@
 "message":  " Refactor 'GetHashCode' to not reference mutable fields.",
 "location":  [
 {
-"uri":  "Nancy\src\Nancy.Tests\Unit\Json\TestConverterType.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Json\TestConverterType.cs",
 "region":  {
 "startLine":  22,
 "startColumn":  23,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy.Tests\Unit\Json\TestConverterType.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Json\TestConverterType.cs",
 "region":  {
 "startLine":  24,
 "startColumn":  16,
@@ -29,7 +29,7 @@
 "message":  " Refactor 'GetHashCode' to not reference mutable fields.",
 "location":  [
 {
-"uri":  "Nancy\src\Nancy.Tests\Unit\Json\TestData.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Json\TestData.cs",
 "region":  {
 "startLine":  31,
 "startColumn":  23,
@@ -38,7 +38,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy.Tests\Unit\Json\TestData.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Json\TestData.cs",
 "region":  {
 "startLine":  33,
 "startColumn":  11,
@@ -47,7 +47,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy.Tests\Unit\Json\TestData.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Json\TestData.cs",
 "region":  {
 "startLine":  33,
 "startColumn":  41,
@@ -62,7 +62,7 @@
 "message":  " Refactor 'GetHashCode' to not reference mutable fields.",
 "location":  [
 {
-"uri":  "Nancy\src\Nancy.Tests\Unit\Json\TestPrimitiveConverterType.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Json\TestPrimitiveConverterType.cs",
 "region":  {
 "startLine":  22,
 "startColumn":  23,
@@ -71,7 +71,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy.Tests\Unit\Json\TestPrimitiveConverterType.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Json\TestPrimitiveConverterType.cs",
 "region":  {
 "startLine":  24,
 "startColumn":  16,

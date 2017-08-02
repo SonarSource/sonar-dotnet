@@ -4,7 +4,7 @@
 "id":  "S131",
 "message":  "Add a 'default' clause to this 'switch' statement.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\Transport\AkkaPduCodec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaPduCodec.cs",
 "region":  {
 "startLine":  277,
 "startColumn":  13,

@@ -4,7 +4,7 @@
 "id":  "S103",
 "message":  "Split this 263 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "Nancy\src\Nancy.Testing.Tests\AssertExtensionsTests.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing.Tests\AssertExtensionsTests.cs",
 "region":  {
 "startLine":  20,
 "startColumn":  1,

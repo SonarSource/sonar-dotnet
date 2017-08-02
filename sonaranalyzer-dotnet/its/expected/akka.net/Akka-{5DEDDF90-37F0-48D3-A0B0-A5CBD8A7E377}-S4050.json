@@ -4,7 +4,7 @@
 "id":  "S4050",
 "message":  "Provide an implementation for: 'operator-', 'operator==', 'operator!=', 'Object.Equals', 'Object.GetHashCode'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Configuration\Config.cs",
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Config.cs",
 "region":  {
 "startLine":  20,
 "startColumn":  18,
@@ -17,7 +17,7 @@
 "id":  "S4050",
 "message":  "Provide an implementation for: 'operator==', 'operator!=', 'Object.Equals', 'Object.GetHashCode'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Routing\ConsistentHash.cs",
+"uri":  "sources\akka.net\src\core\Akka\Routing\ConsistentHash.cs",
 "region":  {
 "startLine":  27,
 "startColumn":  18,
@@ -30,7 +30,7 @@
 "id":  "S4050",
 "message":  "Provide an implementation for: 'operator-', 'operator==', 'operator!=', 'Object.Equals', 'Object.GetHashCode'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Util\ByteString.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\ByteString.cs",
 "region":  {
 "startLine":  20,
 "startColumn":  30,
@@ -43,7 +43,7 @@
 "id":  "S4050",
 "message":  "Provide an implementation for: 'operator-', 'operator==', 'operator!=', 'Object.Equals', 'Object.GetHashCode'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Util\ByteString.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\ByteString.cs",
 "region":  {
 "startLine":  359,
 "startColumn":  35,
@@ -56,7 +56,7 @@
 "id":  "S4050",
 "message":  "Provide an implementation for: 'operator-', 'operator==', 'operator!=', 'Object.Equals', 'Object.GetHashCode'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Util\ByteString.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\ByteString.cs",
 "region":  {
 "startLine":  546,
 "startColumn":  18,

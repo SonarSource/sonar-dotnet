@@ -4,7 +4,7 @@
 "id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\Extensions.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\Extensions.cs",
 "region":  {
 "startLine":  84,
 "startColumn":  13,
@@ -17,7 +17,7 @@
 "id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\Extensions.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\Extensions.cs",
 "region":  {
 "startLine":  98,
 "startColumn":  13,
@@ -30,7 +30,7 @@
 "id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\FSM.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\FSM.cs",
 "region":  {
 "startLine":  184,
 "startColumn":  17,
@@ -43,7 +43,7 @@
 "id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\Futures.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\Futures.cs",
 "region":  {
 "startLine":  259,
 "startColumn":  13,
@@ -56,7 +56,7 @@
 "id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\SupervisorStrategy.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\SupervisorStrategy.cs",
 "region":  {
 "startLine":  136,
 "startColumn":  17,
@@ -69,7 +69,7 @@
 "id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Dispatch\CachingConfig.cs",
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\CachingConfig.cs",
 "region":  {
 "startLine":  138,
 "startColumn":  17,
@@ -82,7 +82,7 @@
 "id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Dispatch\CachingConfig.cs",
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\CachingConfig.cs",
 "region":  {
 "startLine":  165,
 "startColumn":  13,
@@ -95,7 +95,7 @@
 "id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Dispatch\CachingConfig.cs",
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\CachingConfig.cs",
 "region":  {
 "startLine":  204,
 "startColumn":  13,
@@ -108,7 +108,7 @@
 "id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Dispatch\SingleThreadDispatcher.cs",
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\SingleThreadDispatcher.cs",
 "region":  {
 "startLine":  31,
 "startColumn":  13,
@@ -121,7 +121,7 @@
 "id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Event\Logging.cs",
+"uri":  "sources\akka.net\src\core\Akka\Event\Logging.cs",
 "region":  {
 "startLine":  130,
 "startColumn":  17,
@@ -134,7 +134,7 @@
 "id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Helios.Concurrency.DedicatedThreadPool.cs",
+"uri":  "sources\akka.net\src\core\Akka\Helios.Concurrency.DedicatedThreadPool.cs",
 "region":  {
 "startLine":  116,
 "startColumn":  17,
@@ -147,7 +147,7 @@
 "id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Pattern\BackoffSupervisor.cs",
+"uri":  "sources\akka.net\src\core\Akka\Pattern\BackoffSupervisor.cs",
 "region":  {
 "startLine":  107,
 "startColumn":  25,
@@ -160,7 +160,7 @@
 "id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Routing\ConsistentHash.cs",
+"uri":  "sources\akka.net\src\core\Akka\Routing\ConsistentHash.cs",
 "region":  {
 "startLine":  100,
 "startColumn":  17,
@@ -173,7 +173,7 @@
 "id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Routing\RouterConfig.cs",
+"uri":  "sources\akka.net\src\core\Akka\Routing\RouterConfig.cs",
 "region":  {
 "startLine":  641,
 "startColumn":  17,
@@ -186,7 +186,7 @@
 "id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Util\Internal\Collections\ImmutableAvlTreeBase.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\Internal\Collections\ImmutableAvlTreeBase.cs",
 "region":  {
 "startLine":  88,
 "startColumn":  5,

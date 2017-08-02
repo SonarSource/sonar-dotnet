@@ -4,7 +4,7 @@
 "id":  "S1301",
 "message":  "Replace this 'switch' statement with 'if' statements to increase readability.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorBecomeTests.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ActorBecomeTests.cs",
 "region":  {
 "startLine":  107,
 "startColumn":  17,
@@ -17,7 +17,7 @@
 "id":  "S1301",
 "message":  "Replace this 'switch' statement with 'if' statements to increase readability.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorBecomeTests.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ActorBecomeTests.cs",
 "region":  {
 "startLine":  161,
 "startColumn":  17,

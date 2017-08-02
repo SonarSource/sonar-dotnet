@@ -4,7 +4,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "akka.net\src\contrib\testkits\Akka.TestKit.Xunit\Internals\AkkaEqualException.cs",
+"uri":  "sources\akka.net\src\contrib\testkits\Akka.TestKit.Xunit\Internals\AkkaEqualException.cs",
 "region":  {
 "startLine":  48,
 "startColumn":  31,
@@ -17,7 +17,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "akka.net\src\contrib\testkits\Akka.TestKit.Xunit\XunitAssertions.cs",
+"uri":  "sources\akka.net\src\contrib\testkits\Akka.TestKit.Xunit\XunitAssertions.cs",
 "region":  {
 "startLine":  21,
 "startColumn":  32,
@@ -30,7 +30,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "akka.net\src\contrib\testkits\Akka.TestKit.Xunit\XunitAssertions.cs",
+"uri":  "sources\akka.net\src\contrib\testkits\Akka.TestKit.Xunit\XunitAssertions.cs",
 "region":  {
 "startLine":  26,
 "startColumn":  36,
@@ -43,7 +43,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "akka.net\src\contrib\testkits\Akka.TestKit.Xunit\XunitAssertions.cs",
+"uri":  "sources\akka.net\src\contrib\testkits\Akka.TestKit.Xunit\XunitAssertions.cs",
 "region":  {
 "startLine":  32,
 "startColumn":  37,

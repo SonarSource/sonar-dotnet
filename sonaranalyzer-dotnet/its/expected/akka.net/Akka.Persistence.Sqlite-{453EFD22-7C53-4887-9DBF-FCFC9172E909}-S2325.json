@@ -4,7 +4,7 @@
 "id":  "S2325",
 "message":  "Make 'HintToSql' a static method.",
 "location":  {
-"uri":  "akka.net\src\contrib\persistence\Akka.Persistence.Sqlite\Journal\SqliteQueryBuilder.cs",
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sqlite\Journal\SqliteQueryBuilder.cs",
 "region":  {
 "startLine":  54,
 "startColumn":  24,

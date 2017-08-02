@@ -4,7 +4,7 @@
 "id":  "S1450",
 "message":  "Remove the 'system' field and declare it as a local variable in the relevant methods.",
 "location":  {
-"uri":  "akka.net\src\contrib\dependencyInjection\Akka.DI.Core\DIActorSystemAdapter.cs",
+"uri":  "sources\akka.net\src\contrib\dependencyInjection\Akka.DI.Core\DIActorSystemAdapter.cs",
 "region":  {
 "startLine":  16,
 "startColumn":  30,

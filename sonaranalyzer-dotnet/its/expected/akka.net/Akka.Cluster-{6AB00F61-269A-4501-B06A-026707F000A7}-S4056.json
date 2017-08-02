@@ -4,7 +4,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\Cluster.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Cluster.cs",
 "region":  {
 "startLine":  66,
 "startColumn":  21,
@@ -17,7 +17,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterActorRefProvider.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterActorRefProvider.cs",
 "region":  {
 "startLine":  102,
 "startColumn":  54,
@@ -30,7 +30,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterActorRefProvider.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterActorRefProvider.cs",
 "region":  {
 "startLine":  104,
 "startColumn":  54,
@@ -43,7 +43,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterActorRefProvider.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterActorRefProvider.cs",
 "region":  {
 "startLine":  122,
 "startColumn":  49,
@@ -56,7 +56,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  137,
 "startColumn":  24,
@@ -69,7 +69,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  1476,
 "startColumn":  46,
@@ -82,7 +82,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
 "region":  {
 "startLine":  180,
 "startColumn":  49,
@@ -95,7 +95,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
 "region":  {
 "startLine":  249,
 "startColumn":  87,
@@ -108,7 +108,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterMetricsCollector.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterMetricsCollector.cs",
 "region":  {
 "startLine":  388,
 "startColumn":  69,
@@ -121,7 +121,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterMetricsCollector.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterMetricsCollector.cs",
 "region":  {
 "startLine":  411,
 "startColumn":  85,
@@ -134,7 +134,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterMetricsCollector.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterMetricsCollector.cs",
 "region":  {
 "startLine":  523,
 "startColumn":  39,
@@ -147,7 +147,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterMetricsCollector.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterMetricsCollector.cs",
 "region":  {
 "startLine":  524,
 "startColumn":  37,
@@ -160,7 +160,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterMetricsCollector.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterMetricsCollector.cs",
 "region":  {
 "startLine":  525,
 "startColumn":  38,
@@ -173,7 +173,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterMetricsCollector.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterMetricsCollector.cs",
 "region":  {
 "startLine":  526,
 "startColumn":  38,
@@ -186,7 +186,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterMetricsCollector.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterMetricsCollector.cs",
 "region":  {
 "startLine":  527,
 "startColumn":  39,
@@ -199,7 +199,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterMetricsCollector.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterMetricsCollector.cs",
 "region":  {
 "startLine":  528,
 "startColumn":  41,
@@ -212,7 +212,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterMetricsCollector.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterMetricsCollector.cs",
 "region":  {
 "startLine":  656,
 "startColumn":  86,
@@ -225,7 +225,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterMetricsCollector.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterMetricsCollector.cs",
 "region":  {
 "startLine":  658,
 "startColumn":  21,
@@ -238,7 +238,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterMetricsCollector.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterMetricsCollector.cs",
 "region":  {
 "startLine":  658,
 "startColumn":  56,
@@ -251,7 +251,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterMetricsCollector.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterMetricsCollector.cs",
 "region":  {
 "startLine":  706,
 "startColumn":  76,
@@ -264,7 +264,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterMetricsCollector.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterMetricsCollector.cs",
 "region":  {
 "startLine":  863,
 "startColumn":  50,
@@ -277,7 +277,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterMetricsCollector.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterMetricsCollector.cs",
 "region":  {
 "startLine":  873,
 "startColumn":  50,
@@ -290,7 +290,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\Gossip.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Gossip.cs",
 "region":  {
 "startLine":  114,
 "startColumn":  45,
@@ -303,7 +303,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\Gossip.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Gossip.cs",
 "region":  {
 "startLine":  299,
 "startColumn":  20,
@@ -316,7 +316,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\Member.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
 "region":  {
 "startLine":  89,
 "startColumn":  20,
@@ -329,7 +329,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\Member.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
 "region":  {
 "startLine":  115,
 "startColumn":  53,
@@ -342,7 +342,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\Member.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
 "region":  {
 "startLine":  134,
 "startColumn":  52,
@@ -355,7 +355,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\Member.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
 "region":  {
 "startLine":  283,
 "startColumn":  20,
@@ -368,7 +368,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\Proto\ClusterMessageSerializer.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Proto\ClusterMessageSerializer.cs",
 "region":  {
 "startLine":  69,
 "startColumn":  41,
@@ -381,7 +381,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\Proto\ClusterMessageSerializer.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Proto\ClusterMessageSerializer.cs",
 "region":  {
 "startLine":  158,
 "startColumn":  45,
@@ -394,7 +394,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\Proto\ClusterMessageSerializer.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Proto\ClusterMessageSerializer.cs",
 "region":  {
 "startLine":  263,
 "startColumn":  41,
@@ -407,7 +407,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
 "region":  {
 "startLine":  393,
 "startColumn":  36,
@@ -420,7 +420,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
 "region":  {
 "startLine":  37,
 "startColumn":  49,
@@ -433,7 +433,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
 "region":  {
 "startLine":  331,
 "startColumn":  49,
@@ -446,7 +446,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
 "region":  {
 "startLine":  471,
 "startColumn":  56,
@@ -459,7 +459,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\Util.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Util.cs",
 "region":  {
 "startLine":  86,
 "startColumn":  17,
@@ -472,7 +472,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
 "region":  {
 "startLine":  72,
 "startColumn":  31,
@@ -485,7 +485,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
 "region":  {
 "startLine":  283,
 "startColumn":  20,

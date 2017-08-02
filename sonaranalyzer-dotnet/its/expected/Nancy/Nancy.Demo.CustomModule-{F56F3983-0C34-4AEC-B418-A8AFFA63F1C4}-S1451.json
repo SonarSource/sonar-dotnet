@@ -4,7 +4,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Demo.CustomModule\DemoBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Demo.CustomModule\DemoBootstrapper.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -17,7 +17,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Demo.CustomModule\MainModule.cs",
+"uri":  "sources\Nancy\src\Nancy.Demo.CustomModule\MainModule.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -30,7 +30,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Demo.CustomModule\NancyRouteAttribute.cs",
+"uri":  "sources\Nancy\src\Nancy.Demo.CustomModule\NancyRouteAttribute.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -43,7 +43,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Demo.CustomModule\UglifiedNancyModule.cs",
+"uri":  "sources\Nancy\src\Nancy.Demo.CustomModule\UglifiedNancyModule.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -56,7 +56,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\SharedAssemblyInfo.cs",
+"uri":  "sources\Nancy\src\SharedAssemblyInfo.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,

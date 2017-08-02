@@ -4,7 +4,7 @@
 "id":  "S2292",
 "message":  "Make this an auto-implemented property and remove its backing field.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\Stash\UntypedActorWithBoundedStash.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\Stash\UntypedActorWithBoundedStash.cs",
 "region":  {
 "startLine":  25,
 "startColumn":  23,
@@ -17,7 +17,7 @@
 "id":  "S2292",
 "message":  "Make this an auto-implemented property and remove its backing field.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\Stash\UntypedActorWithBoundedStash.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\Stash\UntypedActorWithBoundedStash.cs",
 "region":  {
 "startLine":  26,
 "startColumn":  28,
@@ -30,7 +30,7 @@
 "id":  "S2292",
 "message":  "Make this an auto-implemented property and remove its backing field.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\Stash\UntypedActorWithUnboundedStash.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\Stash\UntypedActorWithUnboundedStash.cs",
 "region":  {
 "startLine":  24,
 "startColumn":  23,
@@ -43,7 +43,7 @@
 "id":  "S2292",
 "message":  "Make this an auto-implemented property and remove its backing field.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\Stash\UntypedActorWithUnboundedStash.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\Stash\UntypedActorWithUnboundedStash.cs",
 "region":  {
 "startLine":  25,
 "startColumn":  28,
@@ -56,7 +56,7 @@
 "id":  "S2292",
 "message":  "Make this an auto-implemented property and remove its backing field.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Dispatch\MessageQueues\BlockingMessageQueue.cs",
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\MessageQueues\BlockingMessageQueue.cs",
 "region":  {
 "startLine":  23,
 "startColumn":  25,

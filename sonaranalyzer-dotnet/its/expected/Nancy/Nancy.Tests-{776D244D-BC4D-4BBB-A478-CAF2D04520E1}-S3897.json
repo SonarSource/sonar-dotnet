@@ -4,7 +4,7 @@
 "id":  "S3897",
 "message":  "Implement 'IEquatable<TestModel>'.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBodyDeserializers\XmlBodyDeserializerfixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBodyDeserializers\XmlBodyDeserializerfixture.cs",
 "region":  {
 "startLine":  141,
 "startColumn":  22,

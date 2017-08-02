@@ -4,7 +4,7 @@
 "id":  "S100",
 "message":  "Rename property 'fsm' to match camel case naming rules, consider using 'Fsm'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\FSMTimingSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\FSMTimingSpec.cs",
 "region":  {
 "startLine":  24,
 "startColumn":  26,
@@ -17,7 +17,7 @@
 "id":  "S100",
 "message":  "Rename method 'verifyLevel' to match camel case naming rules, consider using 'VerifyLevel'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Event\EventStreamSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Event\EventStreamSpec.cs",
 "region":  {
 "startLine":  309,
 "startColumn":  22,
@@ -30,7 +30,7 @@
 "id":  "S100",
 "message":  "Rename method 'LLCase' to match camel case naming rules, consider using 'LlCase'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Util\Internal\Collections\ImmutableAvlTreeTests.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Util\Internal\Collections\ImmutableAvlTreeTests.cs",
 "region":  {
 "startLine":  32,
 "startColumn":  21,
@@ -43,7 +43,7 @@
 "id":  "S100",
 "message":  "Rename method 'LRCase' to match camel case naming rules, consider using 'LrCase'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Util\Internal\Collections\ImmutableAvlTreeTests.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Util\Internal\Collections\ImmutableAvlTreeTests.cs",
 "region":  {
 "startLine":  62,
 "startColumn":  21,
@@ -56,7 +56,7 @@
 "id":  "S100",
 "message":  "Rename method 'RRCase' to match camel case naming rules, consider using 'RrCase'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Util\Internal\Collections\ImmutableAvlTreeTests.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Util\Internal\Collections\ImmutableAvlTreeTests.cs",
 "region":  {
 "startLine":  75,
 "startColumn":  21,
@@ -69,7 +69,7 @@
 "id":  "S100",
 "message":  "Rename method 'RLCase' to match camel case naming rules, consider using 'RlCase'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Util\Internal\Collections\ImmutableAvlTreeTests.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Util\Internal\Collections\ImmutableAvlTreeTests.cs",
 "region":  {
 "startLine":  88,
 "startColumn":  21,

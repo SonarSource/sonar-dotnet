@@ -4,7 +4,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
 "region":  {
 "startLine":  70,
 "startColumn":  9,
@@ -17,7 +17,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
 "region":  {
 "startLine":  111,
 "startColumn":  13,
@@ -30,7 +30,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
 "region":  {
 "startLine":  122,
 "startColumn":  13,
@@ -43,7 +43,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
 "region":  {
 "startLine":  124,
 "startColumn":  17,
@@ -56,7 +56,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
 "region":  {
 "startLine":  125,
 "startColumn":  17,
@@ -69,7 +69,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
 "region":  {
 "startLine":  126,
 "startColumn":  17,
@@ -82,7 +82,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
 "region":  {
 "startLine":  127,
 "startColumn":  17,
@@ -95,7 +95,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
 "region":  {
 "startLine":  128,
 "startColumn":  17,
@@ -108,7 +108,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
 "region":  {
 "startLine":  131,
 "startColumn":  17,
@@ -121,7 +121,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
 "region":  {
 "startLine":  154,
 "startColumn":  9,
@@ -134,7 +134,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
 "region":  {
 "startLine":  176,
 "startColumn":  29,
@@ -147,7 +147,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
 "region":  {
 "startLine":  180,
 "startColumn":  29,
@@ -160,7 +160,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
 "region":  {
 "startLine":  190,
 "startColumn":  29,
@@ -173,7 +173,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
 "region":  {
 "startLine":  217,
 "startColumn":  13,
@@ -186,7 +186,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
 "region":  {
 "startLine":  231,
 "startColumn":  17,
@@ -199,7 +199,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
 "region":  {
 "startLine":  232,
 "startColumn":  17,
@@ -212,7 +212,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
 "region":  {
 "startLine":  242,
 "startColumn":  17,
@@ -225,7 +225,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
 "region":  {
 "startLine":  243,
 "startColumn":  17,
@@ -238,7 +238,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
 "region":  {
 "startLine":  244,
 "startColumn":  17,
@@ -251,7 +251,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
 "region":  {
 "startLine":  245,
 "startColumn":  17,
@@ -264,7 +264,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
 "region":  {
 "startLine":  246,
 "startColumn":  17,
@@ -277,7 +277,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
 "region":  {
 "startLine":  247,
 "startColumn":  17,
@@ -290,7 +290,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
 "region":  {
 "startLine":  257,
 "startColumn":  17,
@@ -303,7 +303,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
 "region":  {
 "startLine":  258,
 "startColumn":  17,
@@ -316,7 +316,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
 "region":  {
 "startLine":  259,
 "startColumn":  17,
@@ -329,7 +329,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
 "region":  {
 "startLine":  270,
 "startColumn":  25,
@@ -342,7 +342,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
 "region":  {
 "startLine":  271,
 "startColumn":  25,
@@ -355,7 +355,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
 "region":  {
 "startLine":  272,
 "startColumn":  25,
@@ -368,7 +368,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
 "region":  {
 "startLine":  273,
 "startColumn":  25,
@@ -381,7 +381,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
 "region":  {
 "startLine":  274,
 "startColumn":  25,
@@ -394,7 +394,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
 "region":  {
 "startLine":  275,
 "startColumn":  25,
@@ -407,7 +407,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
 "region":  {
 "startLine":  276,
 "startColumn":  25,
@@ -420,7 +420,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
 "region":  {
 "startLine":  277,
 "startColumn":  25,
@@ -433,7 +433,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
 "region":  {
 "startLine":  283,
 "startColumn":  25,
@@ -446,7 +446,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
 "region":  {
 "startLine":  284,
 "startColumn":  25,
@@ -459,7 +459,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
 "region":  {
 "startLine":  285,
 "startColumn":  25,
@@ -472,7 +472,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
 "region":  {
 "startLine":  308,
 "startColumn":  21,
@@ -485,7 +485,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\clsTheming.vb",
 "region":  {
 "startLine":  319,
 "startColumn":  21,
@@ -498,7 +498,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgAbout.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgAbout.vb",
 "region":  {
 "startLine":  288,
 "startColumn":  13,
@@ -511,7 +511,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
 "region":  {
 "startLine":  91,
 "startColumn":  17,
@@ -524,7 +524,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
 "region":  {
 "startLine":  95,
 "startColumn":  25,
@@ -537,7 +537,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
 "region":  {
 "startLine":  109,
 "startColumn":  37,
@@ -550,7 +550,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
 "region":  {
 "startLine":  114,
 "startColumn":  49,
@@ -563,7 +563,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
 "region":  {
 "startLine":  122,
 "startColumn":  49,
@@ -576,7 +576,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
 "region":  {
 "startLine":  132,
 "startColumn":  21,
@@ -589,7 +589,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
 "region":  {
 "startLine":  165,
 "startColumn":  17,
@@ -602,7 +602,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
 "region":  {
 "startLine":  201,
 "startColumn":  29,
@@ -615,7 +615,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
 "region":  {
 "startLine":  246,
 "startColumn":  61,
@@ -628,7 +628,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
 "region":  {
 "startLine":  248,
 "startColumn":  61,
@@ -641,7 +641,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
 "region":  {
 "startLine":  250,
 "startColumn":  61,
@@ -654,7 +654,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
 "region":  {
 "startLine":  252,
 "startColumn":  61,
@@ -667,7 +667,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
 "region":  {
 "startLine":  261,
 "startColumn":  61,
@@ -680,7 +680,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
 "region":  {
 "startLine":  262,
 "startColumn":  61,
@@ -693,7 +693,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
 "region":  {
 "startLine":  263,
 "startColumn":  61,
@@ -706,7 +706,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
 "region":  {
 "startLine":  264,
 "startColumn":  61,
@@ -719,7 +719,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
 "region":  {
 "startLine":  265,
 "startColumn":  61,
@@ -732,7 +732,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
 "region":  {
 "startLine":  267,
 "startColumn":  61,
@@ -745,7 +745,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
 "region":  {
 "startLine":  269,
 "startColumn":  61,
@@ -758,7 +758,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
 "region":  {
 "startLine":  271,
 "startColumn":  61,
@@ -771,7 +771,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
 "region":  {
 "startLine":  273,
 "startColumn":  61,
@@ -784,7 +784,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
 "region":  {
 "startLine":  305,
 "startColumn":  45,
@@ -797,7 +797,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
 "region":  {
 "startLine":  306,
 "startColumn":  45,
@@ -810,7 +810,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
 "region":  {
 "startLine":  307,
 "startColumn":  45,
@@ -823,7 +823,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
 "region":  {
 "startLine":  308,
 "startColumn":  45,
@@ -836,7 +836,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
 "region":  {
 "startLine":  309,
 "startColumn":  45,
@@ -849,7 +849,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
 "region":  {
 "startLine":  344,
 "startColumn":  17,
@@ -862,7 +862,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
 "region":  {
 "startLine":  362,
 "startColumn":  17,
@@ -875,7 +875,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
 "region":  {
 "startLine":  383,
 "startColumn":  25,
@@ -888,7 +888,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgDeleteConfirm.vb",
 "region":  {
 "startLine":  411,
 "startColumn":  13,
@@ -901,7 +901,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgEditEpisode.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditEpisode.vb",
 "region":  {
 "startLine":  145,
 "startColumn":  21,
@@ -914,7 +914,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgEditEpisode.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditEpisode.vb",
 "region":  {
 "startLine":  286,
 "startColumn":  13,
@@ -927,7 +927,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgEditEpisode.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditEpisode.vb",
 "region":  {
 "startLine":  287,
 "startColumn":  13,
@@ -940,7 +940,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgEditEpisode.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditEpisode.vb",
 "region":  {
 "startLine":  288,
 "startColumn":  13,
@@ -953,7 +953,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgEditEpisode.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditEpisode.vb",
 "region":  {
 "startLine":  289,
 "startColumn":  13,
@@ -966,7 +966,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgEditEpisode.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditEpisode.vb",
 "region":  {
 "startLine":  290,
 "startColumn":  13,
@@ -979,7 +979,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgEditEpisode.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditEpisode.vb",
 "region":  {
 "startLine":  291,
 "startColumn":  13,
@@ -992,7 +992,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgEditEpisode.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditEpisode.vb",
 "region":  {
 "startLine":  292,
 "startColumn":  13,
@@ -1005,7 +1005,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgEditEpisode.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditEpisode.vb",
 "region":  {
 "startLine":  309,
 "startColumn":  13,
@@ -1018,7 +1018,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
 "region":  {
 "startLine":  381,
 "startColumn":  21,
@@ -1031,7 +1031,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
 "region":  {
 "startLine":  431,
 "startColumn":  9,
@@ -1044,7 +1044,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
 "region":  {
 "startLine":  522,
 "startColumn":  9,
@@ -1057,7 +1057,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
 "region":  {
 "startLine":  734,
 "startColumn":  17,
@@ -1070,7 +1070,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
 "region":  {
 "startLine":  836,
 "startColumn":  25,
@@ -1083,7 +1083,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
 "region":  {
 "startLine":  839,
 "startColumn":  33,
@@ -1096,7 +1096,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
 "region":  {
 "startLine":  840,
 "startColumn":  33,
@@ -1109,7 +1109,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
 "region":  {
 "startLine":  885,
 "startColumn":  9,
@@ -1122,7 +1122,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
 "region":  {
 "startLine":  889,
 "startColumn":  9,
@@ -1135,7 +1135,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
 "region":  {
 "startLine":  1062,
 "startColumn":  13,
@@ -1148,7 +1148,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
 "region":  {
 "startLine":  1166,
 "startColumn":  25,
@@ -1161,7 +1161,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
 "region":  {
 "startLine":  1167,
 "startColumn":  25,
@@ -1174,7 +1174,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
 "region":  {
 "startLine":  1168,
 "startColumn":  25,
@@ -1187,7 +1187,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
 "region":  {
 "startLine":  1169,
 "startColumn":  25,
@@ -1200,7 +1200,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
 "region":  {
 "startLine":  1297,
 "startColumn":  17,
@@ -1213,7 +1213,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
 "region":  {
 "startLine":  1298,
 "startColumn":  17,
@@ -1226,7 +1226,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgEditSeason.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditSeason.vb",
 "region":  {
 "startLine":  162,
 "startColumn":  9,
@@ -1239,7 +1239,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgEditShow.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditShow.vb",
 "region":  {
 "startLine":  268,
 "startColumn":  21,
@@ -1252,7 +1252,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgEditShow.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditShow.vb",
 "region":  {
 "startLine":  354,
 "startColumn":  9,
@@ -1265,7 +1265,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgEditShow.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditShow.vb",
 "region":  {
 "startLine":  399,
 "startColumn":  13,
@@ -1278,7 +1278,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgEditShow.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditShow.vb",
 "region":  {
 "startLine":  400,
 "startColumn":  13,
@@ -1291,7 +1291,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgEditShow.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditShow.vb",
 "region":  {
 "startLine":  401,
 "startColumn":  13,
@@ -1304,7 +1304,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgEditShow.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditShow.vb",
 "region":  {
 "startLine":  402,
 "startColumn":  13,
@@ -1317,7 +1317,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgEditShow.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditShow.vb",
 "region":  {
 "startLine":  438,
 "startColumn":  13,
@@ -1330,7 +1330,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgEditShow.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditShow.vb",
 "region":  {
 "startLine":  516,
 "startColumn":  13,
@@ -1343,7 +1343,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgErrorViewer.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgErrorViewer.vb",
 "region":  {
 "startLine":  51,
 "startColumn":  9,
@@ -1356,7 +1356,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgFileInfo.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgFileInfo.vb",
 "region":  {
 "startLine":  329,
 "startColumn":  9,
@@ -1369,7 +1369,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgFIStreamEditor.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgFIStreamEditor.vb",
 "region":  {
 "startLine":  97,
 "startColumn":  21,
@@ -1382,7 +1382,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgFIStreamEditor.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgFIStreamEditor.vb",
 "region":  {
 "startLine":  98,
 "startColumn":  21,
@@ -1395,7 +1395,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgFIStreamEditor.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgFIStreamEditor.vb",
 "region":  {
 "startLine":  103,
 "startColumn":  21,
@@ -1408,7 +1408,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgFIStreamEditor.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgFIStreamEditor.vb",
 "region":  {
 "startLine":  104,
 "startColumn":  21,
@@ -1421,7 +1421,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgFIStreamEditor.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgFIStreamEditor.vb",
 "region":  {
 "startLine":  105,
 "startColumn":  21,
@@ -1434,7 +1434,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgFIStreamEditor.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgFIStreamEditor.vb",
 "region":  {
 "startLine":  109,
 "startColumn":  21,
@@ -1447,7 +1447,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgFIStreamEditor.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgFIStreamEditor.vb",
 "region":  {
 "startLine":  110,
 "startColumn":  21,
@@ -1460,7 +1460,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgManualEdit.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgManualEdit.vb",
 "region":  {
 "startLine":  105,
 "startColumn":  13,
@@ -1473,7 +1473,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgMovieSource.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgMovieSource.vb",
 "region":  {
 "startLine":  101,
 "startColumn":  9,
@@ -1486,7 +1486,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgSetsManager.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSetsManager.vb",
 "region":  {
 "startLine":  135,
 "startColumn":  17,
@@ -1499,7 +1499,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgSetsManager.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSetsManager.vb",
 "region":  {
 "startLine":  149,
 "startColumn":  29,
@@ -1512,7 +1512,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgSetsManager.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSetsManager.vb",
 "region":  {
 "startLine":  312,
 "startColumn":  17,
@@ -1525,7 +1525,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgSetsManager.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSetsManager.vb",
 "region":  {
 "startLine":  322,
 "startColumn":  9,
@@ -1538,7 +1538,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgSetsManager.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSetsManager.vb",
 "region":  {
 "startLine":  326,
 "startColumn":  9,
@@ -1551,7 +1551,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgSetsManager.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSetsManager.vb",
 "region":  {
 "startLine":  334,
 "startColumn":  9,
@@ -1564,7 +1564,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgSetsManager.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSetsManager.vb",
 "region":  {
 "startLine":  341,
 "startColumn":  13,
@@ -1577,7 +1577,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgSetsManager.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSetsManager.vb",
 "region":  {
 "startLine":  421,
 "startColumn":  9,
@@ -1590,7 +1590,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgSetsManager.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSetsManager.vb",
 "region":  {
 "startLine":  431,
 "startColumn":  13,
@@ -1603,7 +1603,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
 "region":  {
 "startLine":  121,
 "startColumn":  17,
@@ -1616,7 +1616,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
 "region":  {
 "startLine":  342,
 "startColumn":  13,
@@ -1629,7 +1629,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
 "region":  {
 "startLine":  355,
 "startColumn":  13,
@@ -1642,7 +1642,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
 "region":  {
 "startLine":  420,
 "startColumn":  13,
@@ -1655,7 +1655,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
 "region":  {
 "startLine":  434,
 "startColumn":  13,
@@ -1668,7 +1668,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
 "region":  {
 "startLine":  451,
 "startColumn":  9,
@@ -1681,7 +1681,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
 "region":  {
 "startLine":  499,
 "startColumn":  9,
@@ -1694,7 +1694,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
 "region":  {
 "startLine":  596,
 "startColumn":  9,
@@ -1707,7 +1707,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
 "region":  {
 "startLine":  615,
 "startColumn":  9,
@@ -1720,7 +1720,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
 "region":  {
 "startLine":  1070,
 "startColumn":  9,
@@ -1733,7 +1733,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
 "region":  {
 "startLine":  1303,
 "startColumn":  9,
@@ -1746,7 +1746,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
 "region":  {
 "startLine":  1525,
 "startColumn":  9,
@@ -1759,7 +1759,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
 "region":  {
 "startLine":  1540,
 "startColumn":  9,
@@ -1772,7 +1772,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
 "region":  {
 "startLine":  2036,
 "startColumn":  9,
@@ -1785,7 +1785,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
 "region":  {
 "startLine":  2111,
 "startColumn":  9,
@@ -1798,7 +1798,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
 "region":  {
 "startLine":  2120,
 "startColumn":  9,
@@ -1811,7 +1811,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
 "region":  {
 "startLine":  2135,
 "startColumn":  17,
@@ -1824,7 +1824,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
 "region":  {
 "startLine":  2631,
 "startColumn":  29,
@@ -1837,7 +1837,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
 "region":  {
 "startLine":  2635,
 "startColumn":  29,
@@ -1850,7 +1850,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
 "region":  {
 "startLine":  2724,
 "startColumn":  13,
@@ -1863,7 +1863,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
 "region":  {
 "startLine":  2786,
 "startColumn":  9,
@@ -1876,7 +1876,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
 "region":  {
 "startLine":  2790,
 "startColumn":  9,
@@ -1889,7 +1889,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
 "region":  {
 "startLine":  2818,
 "startColumn":  9,
@@ -1902,7 +1902,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
 "region":  {
 "startLine":  2833,
 "startColumn":  9,
@@ -1915,7 +1915,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
 "region":  {
 "startLine":  2837,
 "startColumn":  9,
@@ -1928,7 +1928,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
 "region":  {
 "startLine":  2841,
 "startColumn":  9,
@@ -1941,7 +1941,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
 "region":  {
 "startLine":  2845,
 "startColumn":  9,
@@ -1954,7 +1954,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
 "region":  {
 "startLine":  2873,
 "startColumn":  9,
@@ -1967,7 +1967,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
 "region":  {
 "startLine":  2904,
 "startColumn":  9,
@@ -1980,7 +1980,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
 "region":  {
 "startLine":  2908,
 "startColumn":  9,
@@ -1993,7 +1993,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
 "region":  {
 "startLine":  2912,
 "startColumn":  9,
@@ -2006,7 +2006,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
 "region":  {
 "startLine":  2916,
 "startColumn":  9,
@@ -2019,7 +2019,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
 "region":  {
 "startLine":  2936,
 "startColumn":  9,
@@ -2032,7 +2032,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
 "region":  {
 "startLine":  3240,
 "startColumn":  13,
@@ -2045,7 +2045,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
 "region":  {
 "startLine":  3245,
 "startColumn":  13,
@@ -2058,7 +2058,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
 "region":  {
 "startLine":  3250,
 "startColumn":  13,
@@ -2071,7 +2071,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
 "region":  {
 "startLine":  3486,
 "startColumn":  13,
@@ -2084,7 +2084,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
 "region":  {
 "startLine":  3670,
 "startColumn":  21,
@@ -2097,7 +2097,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
 "region":  {
 "startLine":  3671,
 "startColumn":  21,
@@ -2110,7 +2110,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
 "region":  {
 "startLine":  3678,
 "startColumn":  21,
@@ -2123,7 +2123,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
 "region":  {
 "startLine":  3679,
 "startColumn":  21,
@@ -2136,7 +2136,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
 "region":  {
 "startLine":  3699,
 "startColumn":  9,
@@ -2149,7 +2149,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
 "region":  {
 "startLine":  4107,
 "startColumn":  13,
@@ -2162,7 +2162,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
 "region":  {
 "startLine":  4129,
 "startColumn":  13,
@@ -2175,7 +2175,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
 "region":  {
 "startLine":  4151,
 "startColumn":  13,
@@ -2188,7 +2188,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
 "region":  {
 "startLine":  4173,
 "startColumn":  13,
@@ -2201,7 +2201,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
 "region":  {
 "startLine":  4195,
 "startColumn":  13,
@@ -2214,7 +2214,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
 "region":  {
 "startLine":  4217,
 "startColumn":  13,
@@ -2227,7 +2227,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
 "region":  {
 "startLine":  4239,
 "startColumn":  13,
@@ -2240,7 +2240,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
 "region":  {
 "startLine":  4261,
 "startColumn":  13,
@@ -2253,7 +2253,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
 "region":  {
 "startLine":  4283,
 "startColumn":  13,
@@ -2266,7 +2266,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgStudioSelect.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgStudioSelect.vb",
 "region":  {
 "startLine":  59,
 "startColumn":  9,
@@ -2279,7 +2279,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgUpdateMedia.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgUpdateMedia.vb",
 "region":  {
 "startLine":  58,
 "startColumn":  13,
@@ -2292,7 +2292,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgUpdateMedia.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgUpdateMedia.vb",
 "region":  {
 "startLine":  339,
 "startColumn":  9,
@@ -2305,7 +2305,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgUpdateMedia.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgUpdateMedia.vb",
 "region":  {
 "startLine":  352,
 "startColumn":  9,
@@ -2318,7 +2318,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgWizard.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgWizard.vb",
 "region":  {
 "startLine":  34,
 "startColumn":  3,
@@ -2331,7 +2331,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgWizard.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgWizard.vb",
 "region":  {
 "startLine":  58,
 "startColumn":  4,
@@ -2344,7 +2344,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgWizard.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgWizard.vb",
 "region":  {
 "startLine":  67,
 "startColumn":  3,
@@ -2357,7 +2357,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgWizard.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgWizard.vb",
 "region":  {
 "startLine":  203,
 "startColumn":  3,
@@ -2370,7 +2370,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgWizard.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgWizard.vb",
 "region":  {
 "startLine":  217,
 "startColumn":  3,
@@ -2383,7 +2383,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  184,
 "startColumn":  17,
@@ -2396,7 +2396,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  188,
 "startColumn":  29,
@@ -2409,7 +2409,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  195,
 "startColumn":  25,
@@ -2422,7 +2422,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  212,
 "startColumn":  17,
@@ -2435,7 +2435,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  213,
 "startColumn":  17,
@@ -2448,7 +2448,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  214,
 "startColumn":  17,
@@ -2461,7 +2461,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  215,
 "startColumn":  17,
@@ -2474,7 +2474,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  216,
 "startColumn":  17,
@@ -2487,7 +2487,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  362,
 "startColumn":  21,
@@ -2500,7 +2500,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  435,
 "startColumn":  9,
@@ -2513,7 +2513,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  517,
 "startColumn":  9,
@@ -2526,7 +2526,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  518,
 "startColumn":  9,
@@ -2539,7 +2539,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  519,
 "startColumn":  9,
@@ -2552,7 +2552,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  630,
 "startColumn":  13,
@@ -2565,7 +2565,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  730,
 "startColumn":  21,
@@ -2578,7 +2578,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  852,
 "startColumn":  13,
@@ -2591,7 +2591,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  927,
 "startColumn":  13,
@@ -2604,7 +2604,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  934,
 "startColumn":  13,
@@ -2617,7 +2617,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  986,
 "startColumn":  13,
@@ -2630,7 +2630,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  998,
 "startColumn":  21,
@@ -2643,7 +2643,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  1045,
 "startColumn":  13,
@@ -2656,7 +2656,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  1052,
 "startColumn":  13,
@@ -2669,7 +2669,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  1200,
 "startColumn":  17,
@@ -2682,7 +2682,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  1211,
 "startColumn":  21,
@@ -2695,7 +2695,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  1226,
 "startColumn":  25,
@@ -2708,7 +2708,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  1302,
 "startColumn":  21,
@@ -2721,7 +2721,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  1309,
 "startColumn":  37,
@@ -2734,7 +2734,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  1311,
 "startColumn":  37,
@@ -2747,7 +2747,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  1331,
 "startColumn":  37,
@@ -2760,7 +2760,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  1410,
 "startColumn":  21,
@@ -2773,7 +2773,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  1546,
 "startColumn":  21,
@@ -2786,7 +2786,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  1547,
 "startColumn":  21,
@@ -2799,7 +2799,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  1548,
 "startColumn":  21,
@@ -2812,7 +2812,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  1549,
 "startColumn":  21,
@@ -2825,7 +2825,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  1550,
 "startColumn":  21,
@@ -2838,7 +2838,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  1551,
 "startColumn":  21,
@@ -2851,7 +2851,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  1683,
 "startColumn":  21,
@@ -2864,7 +2864,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  1684,
 "startColumn":  21,
@@ -2877,7 +2877,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  1685,
 "startColumn":  21,
@@ -2890,7 +2890,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  1686,
 "startColumn":  21,
@@ -2903,7 +2903,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  1687,
 "startColumn":  21,
@@ -2916,7 +2916,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  1688,
 "startColumn":  21,
@@ -2929,7 +2929,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  1689,
 "startColumn":  21,
@@ -2942,7 +2942,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  1690,
 "startColumn":  21,
@@ -2955,7 +2955,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  1691,
 "startColumn":  21,
@@ -2968,7 +2968,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  1692,
 "startColumn":  21,
@@ -2981,7 +2981,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  1693,
 "startColumn":  21,
@@ -2994,7 +2994,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  1694,
 "startColumn":  21,
@@ -3007,7 +3007,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  1695,
 "startColumn":  21,
@@ -3020,7 +3020,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  1780,
 "startColumn":  13,
@@ -3033,7 +3033,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  1790,
 "startColumn":  17,
@@ -3046,7 +3046,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  1927,
 "startColumn":  17,
@@ -3059,7 +3059,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  1944,
 "startColumn":  9,
@@ -3072,7 +3072,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  1953,
 "startColumn":  17,
@@ -3085,7 +3085,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  1996,
 "startColumn":  17,
@@ -3098,7 +3098,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  2021,
 "startColumn":  17,
@@ -3111,7 +3111,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  2264,
 "startColumn":  17,
@@ -3124,7 +3124,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  2498,
 "startColumn":  17,
@@ -3137,7 +3137,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  2509,
 "startColumn":  9,
@@ -3150,7 +3150,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  2513,
 "startColumn":  13,
@@ -3163,7 +3163,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  2540,
 "startColumn":  21,
@@ -3176,7 +3176,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  2553,
 "startColumn":  13,
@@ -3189,7 +3189,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  2579,
 "startColumn":  33,
@@ -3202,7 +3202,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  2596,
 "startColumn":  9,
@@ -3215,7 +3215,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  2613,
 "startColumn":  25,
@@ -3228,7 +3228,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  2620,
 "startColumn":  17,
@@ -3241,7 +3241,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  2628,
 "startColumn":  13,
@@ -3254,7 +3254,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  2722,
 "startColumn":  9,
@@ -3267,7 +3267,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  2746,
 "startColumn":  17,
@@ -3280,7 +3280,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  2912,
 "startColumn":  17,
@@ -3293,7 +3293,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  2942,
 "startColumn":  13,
@@ -3306,7 +3306,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  2944,
 "startColumn":  13,
@@ -3319,7 +3319,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  2952,
 "startColumn":  17,
@@ -3332,7 +3332,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  2968,
 "startColumn":  25,
@@ -3345,7 +3345,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  2979,
 "startColumn":  13,
@@ -3358,7 +3358,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  3007,
 "startColumn":  13,
@@ -3371,7 +3371,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  3035,
 "startColumn":  9,
@@ -3384,7 +3384,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  3112,
 "startColumn":  9,
@@ -3397,7 +3397,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  3140,
 "startColumn":  21,
@@ -3410,7 +3410,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  3156,
 "startColumn":  29,
@@ -3423,7 +3423,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  3199,
 "startColumn":  33,
@@ -3436,7 +3436,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  3205,
 "startColumn":  33,
@@ -3449,7 +3449,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  3294,
 "startColumn":  13,
@@ -3462,7 +3462,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  3296,
 "startColumn":  13,
@@ -3475,7 +3475,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  3304,
 "startColumn":  17,
@@ -3488,7 +3488,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  3319,
 "startColumn":  13,
@@ -3501,7 +3501,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  3429,
 "startColumn":  17,
@@ -3514,7 +3514,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  3437,
 "startColumn":  21,
@@ -3527,7 +3527,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  3532,
 "startColumn":  37,
@@ -3540,7 +3540,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  3538,
 "startColumn":  37,
@@ -3553,7 +3553,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  3559,
 "startColumn":  25,
@@ -3566,7 +3566,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  3625,
 "startColumn":  13,
@@ -3579,7 +3579,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  3627,
 "startColumn":  13,
@@ -3592,7 +3592,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  3651,
 "startColumn":  13,
@@ -3605,7 +3605,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  3753,
 "startColumn":  17,
@@ -3618,7 +3618,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  3801,
 "startColumn":  33,
@@ -3631,7 +3631,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  3807,
 "startColumn":  33,
@@ -3644,7 +3644,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  3888,
 "startColumn":  13,
@@ -3657,7 +3657,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  3890,
 "startColumn":  13,
@@ -3670,7 +3670,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  3899,
 "startColumn":  17,
@@ -3683,7 +3683,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  3915,
 "startColumn":  13,
@@ -3696,7 +3696,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  4017,
 "startColumn":  17,
@@ -3709,7 +3709,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  4026,
 "startColumn":  21,
@@ -3722,7 +3722,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  4074,
 "startColumn":  33,
@@ -3735,7 +3735,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  4080,
 "startColumn":  33,
@@ -3748,7 +3748,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  4220,
 "startColumn":  9,
@@ -3761,7 +3761,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  4231,
 "startColumn":  13,
@@ -3774,7 +3774,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  4232,
 "startColumn":  13,
@@ -3787,7 +3787,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  4298,
 "startColumn":  17,
@@ -3800,7 +3800,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  4397,
 "startColumn":  25,
@@ -3813,7 +3813,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  4448,
 "startColumn":  25,
@@ -3826,7 +3826,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  4571,
 "startColumn":  17,
@@ -3839,7 +3839,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  4633,
 "startColumn":  13,
@@ -3852,7 +3852,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  4634,
 "startColumn":  13,
@@ -3865,7 +3865,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  4635,
 "startColumn":  13,
@@ -3878,7 +3878,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  4762,
 "startColumn":  17,
@@ -3891,7 +3891,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  4828,
 "startColumn":  13,
@@ -3904,7 +3904,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  4829,
 "startColumn":  13,
@@ -3917,7 +3917,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  4908,
 "startColumn":  17,
@@ -3930,7 +3930,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  4970,
 "startColumn":  13,
@@ -3943,7 +3943,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  4971,
 "startColumn":  13,
@@ -3956,7 +3956,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  4972,
 "startColumn":  13,
@@ -3969,7 +3969,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  5051,
 "startColumn":  17,
@@ -3982,7 +3982,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  5101,
 "startColumn":  17,
@@ -3995,7 +3995,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  5138,
 "startColumn":  13,
@@ -4008,7 +4008,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  5139,
 "startColumn":  13,
@@ -4021,7 +4021,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  5140,
 "startColumn":  13,
@@ -4034,7 +4034,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  5195,
 "startColumn":  17,
@@ -4047,7 +4047,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  5223,
 "startColumn":  13,
@@ -4060,7 +4060,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  5224,
 "startColumn":  13,
@@ -4073,7 +4073,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  5225,
 "startColumn":  13,
@@ -4086,7 +4086,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  5226,
 "startColumn":  13,
@@ -4099,7 +4099,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  5227,
 "startColumn":  13,
@@ -4112,7 +4112,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  5228,
 "startColumn":  13,
@@ -4125,7 +4125,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  5229,
 "startColumn":  13,
@@ -4138,7 +4138,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  5230,
 "startColumn":  13,
@@ -4151,7 +4151,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  5231,
 "startColumn":  13,
@@ -4164,7 +4164,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  5232,
 "startColumn":  13,
@@ -4177,7 +4177,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  5233,
 "startColumn":  13,
@@ -4190,7 +4190,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  5250,
 "startColumn":  13,
@@ -4203,7 +4203,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  5271,
 "startColumn":  13,
@@ -4216,7 +4216,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  5330,
 "startColumn":  17,
@@ -4229,7 +4229,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  5393,
 "startColumn":  13,
@@ -4242,7 +4242,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  5410,
 "startColumn":  25,
@@ -4255,7 +4255,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  5508,
 "startColumn":  21,
@@ -4268,7 +4268,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  5590,
 "startColumn":  45,
@@ -4281,7 +4281,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  5593,
 "startColumn":  45,
@@ -4294,7 +4294,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  5668,
 "startColumn":  25,
@@ -4307,7 +4307,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  5742,
 "startColumn":  25,
@@ -4320,7 +4320,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  5780,
 "startColumn":  13,
@@ -4333,7 +4333,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  5785,
 "startColumn":  9,
@@ -4346,7 +4346,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  5787,
 "startColumn":  17,
@@ -4359,7 +4359,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  5792,
 "startColumn":  17,
@@ -4372,7 +4372,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  5852,
 "startColumn":  13,
@@ -4385,7 +4385,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  5873,
 "startColumn":  17,
@@ -4398,7 +4398,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  5926,
 "startColumn":  13,
@@ -4411,7 +4411,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  6377,
 "startColumn":  29,
@@ -4424,7 +4424,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  6389,
 "startColumn":  29,
@@ -4437,7 +4437,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  6442,
 "startColumn":  21,
@@ -4450,7 +4450,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  6460,
 "startColumn":  29,
@@ -4463,7 +4463,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  6502,
 "startColumn":  17,
@@ -4476,7 +4476,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  6504,
 "startColumn":  17,
@@ -4489,7 +4489,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  6506,
 "startColumn":  25,
@@ -4502,7 +4502,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  6508,
 "startColumn":  25,
@@ -4515,7 +4515,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  6511,
 "startColumn":  25,
@@ -4528,7 +4528,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  6537,
 "startColumn":  9,
@@ -4541,7 +4541,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  6585,
 "startColumn":  13,
@@ -4554,7 +4554,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  6618,
 "startColumn":  9,
@@ -4567,7 +4567,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  6649,
 "startColumn":  17,
@@ -4580,7 +4580,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  6698,
 "startColumn":  13,
@@ -4593,7 +4593,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  6724,
 "startColumn":  13,
@@ -4606,7 +4606,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  6975,
 "startColumn":  21,
@@ -4619,7 +4619,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  6978,
 "startColumn":  21,
@@ -4632,7 +4632,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  7057,
 "startColumn":  17,
@@ -4645,7 +4645,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  7062,
 "startColumn":  17,
@@ -4658,7 +4658,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  7089,
 "startColumn":  13,
@@ -4671,7 +4671,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  7158,
 "startColumn":  13,
@@ -4684,7 +4684,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  7267,
 "startColumn":  21,
@@ -4697,7 +4697,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  7275,
 "startColumn":  13,
@@ -4710,7 +4710,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  7410,
 "startColumn":  9,
@@ -4723,7 +4723,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  7448,
 "startColumn":  17,
@@ -4736,7 +4736,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  7567,
 "startColumn":  17,
@@ -4749,7 +4749,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  8387,
 "startColumn":  13,
@@ -4762,7 +4762,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  8390,
 "startColumn":  21,
@@ -4775,7 +4775,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  8393,
 "startColumn":  21,
@@ -4788,7 +4788,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  8396,
 "startColumn":  21,
@@ -4801,7 +4801,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  8418,
 "startColumn":  9,
@@ -4814,7 +4814,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  8428,
 "startColumn":  17,
@@ -4827,7 +4827,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  8429,
 "startColumn":  17,
@@ -4840,7 +4840,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  8430,
 "startColumn":  17,
@@ -4853,7 +4853,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  8431,
 "startColumn":  17,
@@ -4866,7 +4866,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  8453,
 "startColumn":  17,
@@ -4879,7 +4879,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  8454,
 "startColumn":  17,
@@ -4892,7 +4892,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  8483,
 "startColumn":  17,
@@ -4905,7 +4905,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  8500,
 "startColumn":  13,
@@ -4918,7 +4918,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  8660,
 "startColumn":  17,
@@ -4931,7 +4931,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  8753,
 "startColumn":  9,
@@ -4944,7 +4944,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  8790,
 "startColumn":  17,
@@ -4957,7 +4957,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  8799,
 "startColumn":  17,
@@ -4970,7 +4970,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  8834,
 "startColumn":  17,
@@ -4983,7 +4983,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  8972,
 "startColumn":  9,

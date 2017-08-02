@@ -4,7 +4,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "akka.net\src\contrib\dependencyInjection\Akka.DI.TestKit\DiResolverSpec.cs",
+"uri":  "sources\akka.net\src\contrib\dependencyInjection\Akka.DI.TestKit\DiResolverSpec.cs",
 "region":  {
 "startLine":  200,
 "startColumn":  48,
@@ -17,7 +17,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "akka.net\src\contrib\dependencyInjection\Akka.DI.TestKit\DiResolverSpec.cs",
+"uri":  "sources\akka.net\src\contrib\dependencyInjection\Akka.DI.TestKit\DiResolverSpec.cs",
 "region":  {
 "startLine":  200,
 "startColumn":  79,
@@ -30,7 +30,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "akka.net\src\contrib\dependencyInjection\Akka.DI.TestKit\DiResolverSpec.cs",
+"uri":  "sources\akka.net\src\contrib\dependencyInjection\Akka.DI.TestKit\DiResolverSpec.cs",
 "region":  {
 "startLine":  200,
 "startColumn":  108,

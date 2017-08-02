@@ -4,7 +4,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Encryption.MachineKey.Tests\MachineConfigEncryptionProviderFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Encryption.MachineKey.Tests\MachineConfigEncryptionProviderFixture.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -17,7 +17,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Encryption.MachineKey.Tests\MachineKeyHmacProviderFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Encryption.MachineKey.Tests\MachineKeyHmacProviderFixture.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -30,7 +30,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\ShouldExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\ShouldExtensions.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,

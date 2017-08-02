@@ -4,7 +4,7 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster.Tests.MultiNode\ConvergenceSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests.MultiNode\ConvergenceSpec.cs",
 "region":  {
 "startLine":  123,
 "startColumn":  15,
@@ -17,7 +17,7 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster.Tests.MultiNode\ConvergenceSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests.MultiNode\ConvergenceSpec.cs",
 "region":  {
 "startLine":  180,
 "startColumn":  23,
@@ -30,7 +30,7 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster.Tests.MultiNode\InitialHeartbeatSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests.MultiNode\InitialHeartbeatSpec.cs",
 "region":  {
 "startLine":  118,
 "startColumn":  19,
@@ -43,7 +43,7 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster.Tests.MultiNode\MultiNodeClusterSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests.MultiNode\MultiNodeClusterSpec.cs",
 "region":  {
 "startLine":  26,
 "startColumn":  7,
@@ -56,7 +56,7 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster.Tests.MultiNode\MultiNodeClusterSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests.MultiNode\MultiNodeClusterSpec.cs",
 "region":  {
 "startLine":  167,
 "startColumn":  11,

@@ -4,7 +4,7 @@
 "id":  "S2743",
 "message":  "A static field in a generic type is not shared among instances of different close constructed types.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Util\MatchHandler\MatchExpressionBuilder.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\MatchExpressionBuilder.cs",
 "region":  {
 "startLine":  22,
 "startColumn":  53,

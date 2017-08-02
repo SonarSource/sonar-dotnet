@@ -4,7 +4,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\BeforePipelineFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\BeforePipelineFixture.cs",
 "region":  {
 "startLine":  34,
 "startColumn":  13,
@@ -17,7 +17,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\BeforePipelineFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\BeforePipelineFixture.cs",
 "region":  {
 "startLine":  36,
 "startColumn":  13,
@@ -30,7 +30,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\BeforePipelineFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\BeforePipelineFixture.cs",
 "region":  {
 "startLine":  38,
 "startColumn":  13,
@@ -43,7 +43,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\BeforePipelineFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\BeforePipelineFixture.cs",
 "region":  {
 "startLine":  126,
 "startColumn":  13,
@@ -56,7 +56,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\BeforePipelineFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\BeforePipelineFixture.cs",
 "region":  {
 "startLine":  128,
 "startColumn":  13,
@@ -69,7 +69,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\BeforePipelineFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\BeforePipelineFixture.cs",
 "region":  {
 "startLine":  130,
 "startColumn":  13,
@@ -82,7 +82,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\BeforePipelineFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\BeforePipelineFixture.cs",
 "region":  {
 "startLine":  182,
 "startColumn":  13,
@@ -95,7 +95,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\BeforePipelineFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\BeforePipelineFixture.cs",
 "region":  {
 "startLine":  184,
 "startColumn":  13,
@@ -108,7 +108,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\BeforePipelineFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\BeforePipelineFixture.cs",
 "region":  {
 "startLine":  186,
 "startColumn":  13,
@@ -121,7 +121,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\BeforePipelineFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\BeforePipelineFixture.cs",
 "region":  {
 "startLine":  188,
 "startColumn":  13,
@@ -134,7 +134,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ErrorPipelineFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ErrorPipelineFixture.cs",
 "region":  {
 "startLine":  57,
 "startColumn":  13,
@@ -147,7 +147,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ErrorPipelineFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ErrorPipelineFixture.cs",
 "region":  {
 "startLine":  59,
 "startColumn":  13,
@@ -160,7 +160,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ErrorPipelineFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ErrorPipelineFixture.cs",
 "region":  {
 "startLine":  61,
 "startColumn":  13,
@@ -173,7 +173,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ErrorPipelineFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ErrorPipelineFixture.cs",
 "region":  {
 "startLine":  93,
 "startColumn":  13,
@@ -186,7 +186,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ErrorPipelineFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ErrorPipelineFixture.cs",
 "region":  {
 "startLine":  95,
 "startColumn":  13,
@@ -199,7 +199,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ErrorPipelineFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ErrorPipelineFixture.cs",
 "region":  {
 "startLine":  97,
 "startColumn":  13,
@@ -212,7 +212,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ErrorPipelineFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ErrorPipelineFixture.cs",
 "region":  {
 "startLine":  99,
 "startColumn":  13,
@@ -225,7 +225,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBodyDeserializers\XmlBodyDeserializerfixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBodyDeserializers\XmlBodyDeserializerfixture.cs",
 "region":  {
 "startLine":  150,
 "startColumn":  17,
@@ -238,7 +238,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBodyDeserializers\XmlBodyDeserializerfixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBodyDeserializers\XmlBodyDeserializerfixture.cs",
 "region":  {
 "startLine":  151,
 "startColumn":  17,
@@ -251,7 +251,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBodyDeserializers\XmlBodyDeserializerfixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBodyDeserializers\XmlBodyDeserializerfixture.cs",
 "region":  {
 "startLine":  157,
 "startColumn":  17,
@@ -264,7 +264,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBodyDeserializers\XmlBodyDeserializerfixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBodyDeserializers\XmlBodyDeserializerfixture.cs",
 "region":  {
 "startLine":  158,
 "startColumn":  17,
@@ -277,7 +277,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBodyDeserializers\XmlBodyDeserializerfixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBodyDeserializers\XmlBodyDeserializerfixture.cs",
 "region":  {
 "startLine":  159,
 "startColumn":  17,
@@ -290,7 +290,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\NancyContextFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\NancyContextFixture.cs",
 "region":  {
 "startLine":  33,
 "startColumn":  17,
@@ -303,7 +303,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\RequestHeadersFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\RequestHeadersFixture.cs",
 "region":  {
 "startLine":  747,
 "startColumn":  13,
@@ -316,7 +316,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\Routing\DefaultRequestDispatcherFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Routing\DefaultRequestDispatcherFixture.cs",
 "region":  {
 "startLine":  767,
 "startColumn":  32,
@@ -329,7 +329,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\Routing\DefaultRequestDispatcherFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Routing\DefaultRequestDispatcherFixture.cs",
 "region":  {
 "startLine":  809,
 "startColumn":  32,
@@ -342,7 +342,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\Routing\DefaultRequestDispatcherFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Routing\DefaultRequestDispatcherFixture.cs",
 "region":  {
 "startLine":  851,
 "startColumn":  32,

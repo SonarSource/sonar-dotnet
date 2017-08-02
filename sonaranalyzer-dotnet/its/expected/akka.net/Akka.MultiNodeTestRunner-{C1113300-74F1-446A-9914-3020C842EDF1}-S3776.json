@@ -5,7 +5,7 @@
 "message":  "Refactor this method to reduce its Cognitive Complexity from 20 to the 15 allowed.",
 "location":  [
 {
-"uri":  "akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
 "region":  {
 "startLine":  69,
 "startColumn":  21,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
 "region":  {
 "startLine":  85,
 "startColumn":  21,
@@ -23,7 +23,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
 "region":  {
 "startLine":  87,
 "startColumn":  25,
@@ -32,7 +32,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
 "region":  {
 "startLine":  99,
 "startColumn":  25,
@@ -41,7 +41,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
 "region":  {
 "startLine":  114,
 "startColumn":  37,
@@ -50,7 +50,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
 "region":  {
 "startLine":  114,
 "startColumn":  73,
@@ -59,7 +59,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
 "region":  {
 "startLine":  116,
 "startColumn":  37,
@@ -68,7 +68,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
 "region":  {
 "startLine":  126,
 "startColumn":  33,
@@ -77,7 +77,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
 "region":  {
 "startLine":  137,
 "startColumn":  25,

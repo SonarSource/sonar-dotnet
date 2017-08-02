@@ -4,7 +4,7 @@
 "id":  "S1450",
 "message":  "Remove the '_mailboxThroughput' field and declare it as a local variable in the relevant methods.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests.Performance\Actor\ActorThroughputSpecBase.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorThroughputSpecBase.cs",
 "region":  {
 "startLine":  16,
 "startColumn":  25,

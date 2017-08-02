@@ -4,7 +4,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\contrib\testkits\Akka.TestKit.NUnit.Tests\AssertionsTests.cs",
+"uri":  "sources\akka.net\src\contrib\testkits\Akka.TestKit.NUnit.Tests\AssertionsTests.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -17,7 +17,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\contrib\testkits\Akka.TestKit.NUnit.Tests\Properties\AssemblyInfo.cs",
+"uri":  "sources\akka.net\src\contrib\testkits\Akka.TestKit.NUnit.Tests\Properties\AssemblyInfo.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -30,7 +30,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\contrib\testkits\Akka.TestKit.NUnit.Tests\TestKitTestFixtureTest.cs",
+"uri":  "sources\akka.net\src\contrib\testkits\Akka.TestKit.NUnit.Tests\TestKitTestFixtureTest.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -43,7 +43,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\contrib\testkits\Akka.TestKit.NUnit.Tests\TestKitTests.cs",
+"uri":  "sources\akka.net\src\contrib\testkits\Akka.TestKit.NUnit.Tests\TestKitTests.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,

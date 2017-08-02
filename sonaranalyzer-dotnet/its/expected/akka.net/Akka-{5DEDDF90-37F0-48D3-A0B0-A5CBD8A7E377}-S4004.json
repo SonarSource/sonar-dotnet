@@ -4,7 +4,7 @@
 "id":  "S4004",
 "message":  "Make the 'Replies' property read-only by removing the property setter or making it private.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\FSM.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\FSM.cs",
 "region":  {
 "startLine":  253,
 "startColumn":  33,

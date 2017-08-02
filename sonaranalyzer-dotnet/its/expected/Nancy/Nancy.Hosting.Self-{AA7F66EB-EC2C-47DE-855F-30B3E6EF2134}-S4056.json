@@ -4,7 +4,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Hosting.Self\AutomaticUrlReservationCreationFailureException.cs",
+"uri":  "sources\Nancy\src\Nancy.Hosting.Self\AutomaticUrlReservationCreationFailureException.cs",
 "region":  {
 "startLine":  45,
 "startColumn":  46,
@@ -17,7 +17,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Hosting.Self\HostConfiguration.cs",
+"uri":  "sources\Nancy\src\Nancy.Hosting.Self\HostConfiguration.cs",
 "region":  {
 "startLine":  64,
 "startColumn":  35,
@@ -30,7 +30,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Hosting.Self\NancyHost.cs",
+"uri":  "sources\Nancy\src\Nancy.Hosting.Self\NancyHost.cs",
 "region":  {
 "startLine":  249,
 "startColumn":  53,
@@ -43,7 +43,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Hosting.Self\NancyHost.cs",
+"uri":  "sources\Nancy\src\Nancy.Hosting.Self\NancyHost.cs",
 "region":  {
 "startLine":  283,
 "startColumn":  35,
@@ -56,7 +56,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Hosting.Self\NancyHost.cs",
+"uri":  "sources\Nancy\src\Nancy.Hosting.Self\NancyHost.cs",
 "region":  {
 "startLine":  367,
 "startColumn":  17,
@@ -69,7 +69,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Hosting.Self\NetSh.cs",
+"uri":  "sources\Nancy\src\Nancy.Hosting.Self\NetSh.cs",
 "region":  {
 "startLine":  34,
 "startColumn":  20,
@@ -82,7 +82,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Hosting.Self\UriExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy.Hosting.Self\UriExtensions.cs",
 "region":  {
 "startLine":  33,
 "startColumn":  18,

@@ -4,7 +4,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'actual.StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\ShouldExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\ShouldExtensions.cs",
 "region":  {
 "startLine":  15,
 "startColumn":  25,
@@ -17,7 +17,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'actual.EndsWith' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\ShouldExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\ShouldExtensions.cs",
 "region":  {
 "startLine":  20,
 "startColumn":  25,
@@ -30,7 +30,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'actual.IndexOf' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\ShouldExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\ShouldExtensions.cs",
 "region":  {
 "startLine":  71,
 "startColumn":  33,
@@ -43,7 +43,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'x.GetName().Name.StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.ViewEngines.Razor.Tests\RazorViewEngineFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor.Tests\RazorViewEngineFixture.cs",
 "region":  {
 "startLine":  236,
 "startColumn":  84,

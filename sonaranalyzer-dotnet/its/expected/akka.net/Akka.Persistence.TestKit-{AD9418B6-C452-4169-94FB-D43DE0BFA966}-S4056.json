@@ -4,7 +4,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence.TestKit\Journal\JournalSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\Journal\JournalSpec.cs",
 "region":  {
 "startLine":  64,
 "startColumn":  26,
@@ -17,7 +17,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence.TestKit\Snapshot\SnapshotStoreSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\Snapshot\SnapshotStoreSpec.cs",
 "region":  {
 "startLine":  64,
 "startColumn":  53,

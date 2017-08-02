@@ -4,7 +4,7 @@
 "id":  "S2325",
 "message":  "Make 'ToSnapshotEntry' a static method.",
 "location":  {
-"uri":  "akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Snapshot\SqlSnapshotStore.cs",
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Snapshot\SqlSnapshotStore.cs",
 "region":  {
 "startLine":  150,
 "startColumn":  31,

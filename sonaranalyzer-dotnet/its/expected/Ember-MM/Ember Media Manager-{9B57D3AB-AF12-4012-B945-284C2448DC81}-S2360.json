@@ -4,7 +4,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgAddEditActor.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgAddEditActor.vb",
 "region":  {
 "startLine":  44,
 "startColumn":  65,
@@ -17,7 +17,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgNewSet.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgNewSet.vb",
 "region":  {
 "startLine":  27,
 "startColumn":  42,
@@ -30,7 +30,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  206,
 "startColumn":  26,
@@ -43,7 +43,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
 "region":  {
 "startLine":  315,
 "startColumn":  58,

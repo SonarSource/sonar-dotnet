@@ -4,7 +4,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private field '_log'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  592,
 "startColumn":  9,
@@ -17,7 +17,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private field '_log'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  1771,
 "startColumn":  9,
@@ -30,7 +30,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private field '_log'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  1846,
 "startColumn":  9,
@@ -43,7 +43,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private field '_retryTask'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  1852,
 "startColumn":  9,
@@ -56,7 +56,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private method 'ClearState'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
 "region":  {
 "startLine":  801,
 "startColumn":  9,
@@ -69,7 +69,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private field '_log'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterMetricsCollector.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterMetricsCollector.cs",
 "region":  {
 "startLine":  35,
 "startColumn":  9,

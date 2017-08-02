@@ -4,7 +4,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "akka.net\src\benchmark\PingPong\Program.cs",
+"uri":  "sources\akka.net\src\benchmark\PingPong\Program.cs",
 "region":  {
 "startLine":  64,
 "startColumn":  17,
@@ -17,7 +17,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "akka.net\src\benchmark\PingPong\Program.cs",
+"uri":  "sources\akka.net\src\benchmark\PingPong\Program.cs",
 "region":  {
 "startLine":  72,
 "startColumn":  13,
@@ -30,7 +30,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "akka.net\src\benchmark\PingPong\Program.cs",
+"uri":  "sources\akka.net\src\benchmark\PingPong\Program.cs",
 "region":  {
 "startLine":  73,
 "startColumn":  13,
@@ -43,7 +43,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "akka.net\src\benchmark\PingPong\Program.cs",
+"uri":  "sources\akka.net\src\benchmark\PingPong\Program.cs",
 "region":  {
 "startLine":  74,
 "startColumn":  13,
@@ -56,7 +56,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "akka.net\src\benchmark\PingPong\Program.cs",
+"uri":  "sources\akka.net\src\benchmark\PingPong\Program.cs",
 "region":  {
 "startLine":  75,
 "startColumn":  13,
@@ -69,7 +69,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "akka.net\src\benchmark\PingPong\Program.cs",
+"uri":  "sources\akka.net\src\benchmark\PingPong\Program.cs",
 "region":  {
 "startLine":  76,
 "startColumn":  13,
@@ -82,7 +82,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "akka.net\src\benchmark\PingPong\Program.cs",
+"uri":  "sources\akka.net\src\benchmark\PingPong\Program.cs",
 "region":  {
 "startLine":  77,
 "startColumn":  13,
@@ -95,7 +95,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "akka.net\src\benchmark\PingPong\Program.cs",
+"uri":  "sources\akka.net\src\benchmark\PingPong\Program.cs",
 "region":  {
 "startLine":  78,
 "startColumn":  13,
@@ -108,7 +108,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "akka.net\src\benchmark\PingPong\Program.cs",
+"uri":  "sources\akka.net\src\benchmark\PingPong\Program.cs",
 "region":  {
 "startLine":  82,
 "startColumn":  13,
@@ -121,7 +121,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "akka.net\src\benchmark\PingPong\Program.cs",
+"uri":  "sources\akka.net\src\benchmark\PingPong\Program.cs",
 "region":  {
 "startLine":  84,
 "startColumn":  13,
@@ -134,7 +134,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "akka.net\src\benchmark\PingPong\Program.cs",
+"uri":  "sources\akka.net\src\benchmark\PingPong\Program.cs",
 "region":  {
 "startLine":  85,
 "startColumn":  13,
@@ -147,7 +147,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "akka.net\src\benchmark\PingPong\Program.cs",
+"uri":  "sources\akka.net\src\benchmark\PingPong\Program.cs",
 "region":  {
 "startLine":  87,
 "startColumn":  13,
@@ -160,7 +160,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "akka.net\src\benchmark\PingPong\Program.cs",
+"uri":  "sources\akka.net\src\benchmark\PingPong\Program.cs",
 "region":  {
 "startLine":  91,
 "startColumn":  17,
@@ -173,7 +173,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "akka.net\src\benchmark\PingPong\Program.cs",
+"uri":  "sources\akka.net\src\benchmark\PingPong\Program.cs",
 "region":  {
 "startLine":  93,
 "startColumn":  17,
@@ -186,7 +186,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "akka.net\src\benchmark\PingPong\Program.cs",
+"uri":  "sources\akka.net\src\benchmark\PingPong\Program.cs",
 "region":  {
 "startLine":  96,
 "startColumn":  13,
@@ -199,7 +199,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "akka.net\src\benchmark\PingPong\Program.cs",
+"uri":  "sources\akka.net\src\benchmark\PingPong\Program.cs",
 "region":  {
 "startLine":  98,
 "startColumn":  13,
@@ -212,7 +212,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "akka.net\src\benchmark\PingPong\Program.cs",
+"uri":  "sources\akka.net\src\benchmark\PingPong\Program.cs",
 "region":  {
 "startLine":  101,
 "startColumn":  17,
@@ -225,7 +225,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "akka.net\src\benchmark\PingPong\Program.cs",
+"uri":  "sources\akka.net\src\benchmark\PingPong\Program.cs",
 "region":  {
 "startLine":  103,
 "startColumn":  13,
@@ -238,7 +238,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "akka.net\src\benchmark\PingPong\Program.cs",
+"uri":  "sources\akka.net\src\benchmark\PingPong\Program.cs",
 "region":  {
 "startLine":  105,
 "startColumn":  13,
@@ -251,7 +251,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "akka.net\src\benchmark\PingPong\Program.cs",
+"uri":  "sources\akka.net\src\benchmark\PingPong\Program.cs",
 "region":  {
 "startLine":  108,
 "startColumn":  17,
@@ -264,7 +264,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "akka.net\src\benchmark\PingPong\Program.cs",
+"uri":  "sources\akka.net\src\benchmark\PingPong\Program.cs",
 "region":  {
 "startLine":  110,
 "startColumn":  13,
@@ -277,7 +277,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "akka.net\src\benchmark\PingPong\Program.cs",
+"uri":  "sources\akka.net\src\benchmark\PingPong\Program.cs",
 "region":  {
 "startLine":  125,
 "startColumn":  21,
@@ -290,7 +290,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "akka.net\src\benchmark\PingPong\Program.cs",
+"uri":  "sources\akka.net\src\benchmark\PingPong\Program.cs",
 "region":  {
 "startLine":  132,
 "startColumn":  25,
@@ -303,7 +303,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "akka.net\src\benchmark\PingPong\Program.cs",
+"uri":  "sources\akka.net\src\benchmark\PingPong\Program.cs",
 "region":  {
 "startLine":  138,
 "startColumn":  21,
@@ -316,7 +316,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "akka.net\src\benchmark\PingPong\Program.cs",
+"uri":  "sources\akka.net\src\benchmark\PingPong\Program.cs",
 "region":  {
 "startLine":  143,
 "startColumn":  13,
@@ -329,7 +329,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "akka.net\src\benchmark\PingPong\Program.cs",
+"uri":  "sources\akka.net\src\benchmark\PingPong\Program.cs",
 "region":  {
 "startLine":  192,
 "startColumn":  17,
@@ -342,7 +342,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "akka.net\src\benchmark\PingPong\Program.cs",
+"uri":  "sources\akka.net\src\benchmark\PingPong\Program.cs",
 "region":  {
 "startLine":  222,
 "startColumn":  17,
@@ -355,7 +355,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "akka.net\src\benchmark\PingPong\Program.cs",
+"uri":  "sources\akka.net\src\benchmark\PingPong\Program.cs",
 "region":  {
 "startLine":  227,
 "startColumn":  21,
@@ -368,7 +368,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "akka.net\src\benchmark\PingPong\Program.cs",
+"uri":  "sources\akka.net\src\benchmark\PingPong\Program.cs",
 "region":  {
 "startLine":  229,
 "startColumn":  21,

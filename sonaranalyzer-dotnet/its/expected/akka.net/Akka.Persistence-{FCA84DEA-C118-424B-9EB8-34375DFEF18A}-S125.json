@@ -4,7 +4,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Fsm\PersistentFSM.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Fsm\PersistentFSM.cs",
 "region":  {
 "startLine":  58,
 "startColumn":  43,
@@ -17,7 +17,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Journal\WriteJournal.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\WriteJournal.cs",
 "region":  {
 "startLine":  26,
 "startColumn":  9,

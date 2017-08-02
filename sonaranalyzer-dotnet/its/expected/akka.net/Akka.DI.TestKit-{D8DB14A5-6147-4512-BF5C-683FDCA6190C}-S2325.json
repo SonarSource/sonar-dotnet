@@ -4,7 +4,7 @@
 "id":  "S2325",
 "message":  "Make 'ForceRestart' a static method.",
 "location":  {
-"uri":  "akka.net\src\contrib\dependencyInjection\Akka.DI.TestKit\DiResolverSpec.cs",
+"uri":  "sources\akka.net\src\contrib\dependencyInjection\Akka.DI.TestKit\DiResolverSpec.cs",
 "region":  {
 "startLine":  89,
 "startColumn":  26,

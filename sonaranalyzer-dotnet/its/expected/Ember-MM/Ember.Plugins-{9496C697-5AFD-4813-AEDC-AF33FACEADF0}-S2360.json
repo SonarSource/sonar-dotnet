@@ -4,7 +4,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Ember-MM\Ember.Plugins\PluginActionResult.cs",
+"uri":  "sources\Ember-MM\Ember.Plugins\PluginActionResult.cs",
 "region":  {
 "startLine":  74,
 "startColumn":  28,
@@ -17,7 +17,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Ember-MM\Ember.Plugins\PluginActionResult.cs",
+"uri":  "sources\Ember-MM\Ember.Plugins\PluginActionResult.cs",
 "region":  {
 "startLine":  75,
 "startColumn":  29,
@@ -30,7 +30,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Ember-MM\Ember.Plugins\PluginActionResult.cs",
+"uri":  "sources\Ember-MM\Ember.Plugins\PluginActionResult.cs",
 "region":  {
 "startLine":  76,
 "startColumn":  27,
@@ -43,7 +43,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "Ember-MM\Ember.Plugins\PluginActionResult.cs",
+"uri":  "sources\Ember-MM\Ember.Plugins\PluginActionResult.cs",
 "region":  {
 "startLine":  77,
 "startColumn":  29,

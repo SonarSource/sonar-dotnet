@@ -4,7 +4,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "akka.net\src\contrib\testkits\Akka.TestKit.VsTest\VsTestAssertions.cs",
+"uri":  "sources\akka.net\src\contrib\testkits\Akka.TestKit.VsTest\VsTestAssertions.cs",
 "region":  {
 "startLine":  36,
 "startColumn":  13,
@@ -17,7 +17,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "akka.net\src\contrib\testkits\Akka.TestKit.VsTest\VsTestAssertions.cs",
+"uri":  "sources\akka.net\src\contrib\testkits\Akka.TestKit.VsTest\VsTestAssertions.cs",
 "region":  {
 "startLine":  42,
 "startColumn":  49,
@@ -30,7 +30,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "akka.net\src\contrib\testkits\Akka.TestKit.VsTest\VsTestAssertions.cs",
+"uri":  "sources\akka.net\src\contrib\testkits\Akka.TestKit.VsTest\VsTestAssertions.cs",
 "region":  {
 "startLine":  42,
 "startColumn":  168,

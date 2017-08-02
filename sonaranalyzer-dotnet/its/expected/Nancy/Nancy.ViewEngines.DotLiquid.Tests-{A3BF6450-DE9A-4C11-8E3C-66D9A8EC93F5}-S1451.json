@@ -4,7 +4,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\ShouldExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\ShouldExtensions.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -17,7 +17,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy.ViewEngines.DotLiquid.Tests\DotLiquidViewEngineFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.DotLiquid.Tests\DotLiquidViewEngineFixture.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -30,7 +30,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy.ViewEngines.DotLiquid.Tests\DynamicDropFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.DotLiquid.Tests\DynamicDropFixture.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -43,7 +43,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy.ViewEngines.DotLiquid.Tests\FakeModel.cs",
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.DotLiquid.Tests\FakeModel.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -56,7 +56,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy.ViewEngines.DotLiquid.Tests\Functional\PartialRenderingFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.DotLiquid.Tests\Functional\PartialRenderingFixture.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -69,7 +69,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy.ViewEngines.DotLiquid.Tests\Functional\RootPathProvider.cs",
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.DotLiquid.Tests\Functional\RootPathProvider.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -82,7 +82,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy.ViewEngines.DotLiquid.Tests\LiquidNancyFileSystemFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.DotLiquid.Tests\LiquidNancyFileSystemFixture.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -95,7 +95,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\SharedAssemblyInfo.cs",
+"uri":  "sources\Nancy\src\SharedAssemblyInfo.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,

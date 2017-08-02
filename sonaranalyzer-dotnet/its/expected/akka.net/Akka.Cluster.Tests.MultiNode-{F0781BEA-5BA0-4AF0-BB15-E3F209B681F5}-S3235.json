@@ -4,7 +4,7 @@
 "id":  "S3235",
 "message":  "Remove these redundant parentheses.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster.Tests.MultiNode\Routing\ClusterConsistentHashingRouterSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests.MultiNode\Routing\ClusterConsistentHashingRouterSpec.cs",
 "region":  {
 "startLine":  161,
 "startColumn":  57,
@@ -17,7 +17,7 @@
 "id":  "S3235",
 "message":  "Remove these redundant parentheses.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster.Tests.MultiNode\Routing\ClusterConsistentHashingRouterSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests.MultiNode\Routing\ClusterConsistentHashingRouterSpec.cs",
 "region":  {
 "startLine":  286,
 "startColumn":  57,

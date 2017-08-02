@@ -4,7 +4,7 @@
 "id":  "S3994",
 "message":  "Either change this parameter type to 'System.Uri' or provide an overload which takes a 'System.Uri' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\Extensions\ContextExtensionsFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Extensions\ContextExtensionsFixture.cs",
 "region":  {
 "startLine":  197,
 "startColumn":  61,

@@ -4,7 +4,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'System.Collections.Generic.IEnumerable<System.Type>' instead of 'System.Collections.Generic.List<System.Type>'.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Bootstrapper\NancyBootstrapperLocator.cs",
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\NancyBootstrapperLocator.cs",
 "region":  {
 "startLine":  68,
 "startColumn":  64,
@@ -17,7 +17,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'System.Collections.Generic.ICollection<System.Func<Nancy.NancyContext, string, Nancy.Response>>' instead of 'System.Collections.Generic.IList<System.Func<Nancy.NancyContext, string, Nancy.Response>>'.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Conventions\StaticContentsConventionsExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy\Conventions\StaticContentsConventionsExtensions.cs",
 "region":  {
 "startLine":  18,
 "startColumn":  90,
@@ -30,7 +30,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'System.Collections.Generic.ICollection<System.Func<Nancy.NancyContext, string, Nancy.Response>>' instead of 'System.Collections.Generic.IList<System.Func<Nancy.NancyContext, string, Nancy.Response>>'.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Conventions\StaticContentsConventionsExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy\Conventions\StaticContentsConventionsExtensions.cs",
 "region":  {
 "startLine":  29,
 "startColumn":  85,
@@ -43,7 +43,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'Nancy.IObjectSerializer' instead of 'Nancy.DefaultObjectSerializer'.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Diagnostics\DiagnosticsHook.cs",
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\DiagnosticsHook.cs",
 "region":  {
 "startLine":  191,
 "startColumn":  177,
@@ -56,7 +56,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'System.Reflection.MemberInfo' instead of 'System.Reflection.MethodInfo'.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Diagnostics\InteractiveDiagnostics.cs",
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\InteractiveDiagnostics.cs",
 "region":  {
 "startLine":  176,
 "startColumn":  112,
@@ -69,7 +69,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'System.Reflection.ICustomAttributeProvider' instead of 'System.Reflection.PropertyInfo'.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Diagnostics\Modules\SettingsModule.cs",
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\Modules\SettingsModule.cs",
 "region":  {
 "startLine":  62,
 "startColumn":  59,
@@ -82,7 +82,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'System.IO.Stream' instead of 'Nancy.IO.RequestStream'.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Extensions\RequestStreamExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy\Extensions\RequestStreamExtensions.cs",
 "region":  {
 "startLine":  18,
 "startColumn":  58,
@@ -95,7 +95,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'System.Reflection.ICustomAttributeProvider' instead of 'System.Reflection.MemberInfo'.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Json\JsonSerializer.cs",
+"uri":  "sources\Nancy\src\Nancy\Json\JsonSerializer.cs",
 "region":  {
 "startLine":  284,
 "startColumn":  39,
@@ -108,7 +108,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'System.Dynamic.DynamicObject' instead of 'Nancy.DynamicDictionary'.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
 "region":  {
 "startLine":  362,
 "startColumn":  88,
@@ -121,7 +121,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'System.Collections.Generic.IEnumerable<Nancy.Responses.Negotiation.DefaultResponseNegotiator.CompatibleHeader>' instead of 'System.Collections.Generic.IList<Nancy.Responses.Negotiation.DefaultResponseNegotiator.CompatibleHeader>'.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Responses\Negotiation\DefaultResponseNegotiator.cs",
+"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\DefaultResponseNegotiator.cs",
 "region":  {
 "startLine":  213,
 "startColumn":  37,
@@ -134,7 +134,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'System.Collections.Generic.IEnumerable<string>' instead of 'System.Collections.Generic.IList<string>'.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Routing\DefaultRoutePatternMatcher.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\DefaultRoutePatternMatcher.cs",
 "region":  {
 "startLine":  59,
 "startColumn":  111,
@@ -147,7 +147,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'System.Collections.Generic.IEnumerable<System.Text.RegularExpressions.Group>' instead of 'System.Collections.Generic.IList<System.Text.RegularExpressions.Group>'.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Routing\DefaultRoutePatternMatcher.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\DefaultRoutePatternMatcher.cs",
 "region":  {
 "startLine":  76,
 "startColumn":  132,
@@ -160,7 +160,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'Nancy.Routing.Trie.NodeData' instead of 'Nancy.Routing.Trie.MatchResult'.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Routing\DefaultRouteResolver.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\DefaultRouteResolver.cs",
 "region":  {
 "startLine":  138,
 "startColumn":  89,
@@ -173,7 +173,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'Nancy.Routing.Trie.NodeData' instead of 'Nancy.Routing.Trie.MatchResult'.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Routing\Trie\MatchResult.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\Trie\MatchResult.cs",
 "region":  {
 "startLine":  59,
 "startColumn":  42,
@@ -186,7 +186,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<string, object>>' instead of 'System.Collections.Generic.IDictionary<string, object>'.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Routing\Trie\Nodes\TrieNode.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\Trie\Nodes\TrieNode.cs",
 "region":  {
 "startLine":  202,
 "startColumn":  133,
@@ -199,7 +199,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<string, object>>' instead of 'System.Collections.Generic.IDictionary<string, object>'.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Routing\Trie\Nodes\TrieNode.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\Trie\Nodes\TrieNode.cs",
 "region":  {
 "startLine":  242,
 "startColumn":  177,
@@ -212,7 +212,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'System.Security.Principal.IPrincipal' instead of 'System.Security.Claims.ClaimsPrincipal'.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Security\ClaimsPrincipalExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy\Security\ClaimsPrincipalExtensions.cs",
 "region":  {
 "startLine":  18,
 "startColumn":  65,

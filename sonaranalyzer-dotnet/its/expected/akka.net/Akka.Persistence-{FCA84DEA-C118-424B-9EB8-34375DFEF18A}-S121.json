@@ -4,7 +4,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\AtLeastOnceDeliverySemantic.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\AtLeastOnceDeliverySemantic.cs",
 "region":  {
 "startLine":  35,
 "startColumn":  13,
@@ -17,7 +17,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\AtLeastOnceDeliverySemantic.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\AtLeastOnceDeliverySemantic.cs",
 "region":  {
 "startLine":  45,
 "startColumn":  13,
@@ -30,7 +30,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\AtLeastOnceDeliverySemantic.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\AtLeastOnceDeliverySemantic.cs",
 "region":  {
 "startLine":  46,
 "startColumn":  13,
@@ -43,7 +43,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\AtLeastOnceDeliverySemantic.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\AtLeastOnceDeliverySemantic.cs",
 "region":  {
 "startLine":  93,
 "startColumn":  13,
@@ -56,7 +56,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\AtLeastOnceDeliverySemantic.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\AtLeastOnceDeliverySemantic.cs",
 "region":  {
 "startLine":  94,
 "startColumn":  13,
@@ -69,7 +69,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\AtLeastOnceDeliverySemantic.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\AtLeastOnceDeliverySemantic.cs",
 "region":  {
 "startLine":  135,
 "startColumn":  13,
@@ -82,7 +82,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\AtLeastOnceDeliverySemantic.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\AtLeastOnceDeliverySemantic.cs",
 "region":  {
 "startLine":  144,
 "startColumn":  13,
@@ -95,7 +95,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\AtLeastOnceDeliverySemantic.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\AtLeastOnceDeliverySemantic.cs",
 "region":  {
 "startLine":  145,
 "startColumn":  13,
@@ -108,7 +108,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\AtLeastOnceDeliverySemantic.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\AtLeastOnceDeliverySemantic.cs",
 "region":  {
 "startLine":  185,
 "startColumn":  13,
@@ -121,7 +121,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\AtLeastOnceDeliverySemantic.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\AtLeastOnceDeliverySemantic.cs",
 "region":  {
 "startLine":  186,
 "startColumn":  13,
@@ -134,7 +134,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Eventsourced.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Eventsourced.cs",
 "region":  {
 "startLine":  334,
 "startColumn":  13,
@@ -147,7 +147,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Eventsourced.Lifecycle.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Eventsourced.Lifecycle.cs",
 "region":  {
 "startLine":  48,
 "startColumn":  17,
@@ -160,7 +160,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Eventsourced.Lifecycle.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Eventsourced.Lifecycle.cs",
 "region":  {
 "startLine":  49,
 "startColumn":  22,
@@ -173,7 +173,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Eventsourced.Lifecycle.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Eventsourced.Lifecycle.cs",
 "region":  {
 "startLine":  50,
 "startColumn":  22,
@@ -186,7 +186,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'else' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Eventsourced.Lifecycle.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Eventsourced.Lifecycle.cs",
 "region":  {
 "startLine":  51,
 "startColumn":  17,
@@ -199,7 +199,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Eventsourced.Lifecycle.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Eventsourced.Lifecycle.cs",
 "region":  {
 "startLine":  73,
 "startColumn":  13,
@@ -212,7 +212,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'else' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Eventsourced.Recovery.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Eventsourced.Recovery.cs",
 "region":  {
 "startLine":  54,
 "startColumn":  17,
@@ -225,7 +225,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Eventsourced.Recovery.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Eventsourced.Recovery.cs",
 "region":  {
 "startLine":  70,
 "startColumn":  17,
@@ -238,7 +238,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Eventsourced.Recovery.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Eventsourced.Recovery.cs",
 "region":  {
 "startLine":  72,
 "startColumn":  22,
@@ -251,7 +251,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Eventsourced.Recovery.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Eventsourced.Recovery.cs",
 "region":  {
 "startLine":  74,
 "startColumn":  22,
@@ -264,7 +264,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Eventsourced.Recovery.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Eventsourced.Recovery.cs",
 "region":  {
 "startLine":  76,
 "startColumn":  22,
@@ -277,7 +277,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'else' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Eventsourced.Recovery.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Eventsourced.Recovery.cs",
 "region":  {
 "startLine":  78,
 "startColumn":  17,
@@ -290,7 +290,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Eventsourced.Recovery.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Eventsourced.Recovery.cs",
 "region":  {
 "startLine":  83,
 "startColumn":  17,
@@ -303,7 +303,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'else' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Eventsourced.Recovery.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Eventsourced.Recovery.cs",
 "region":  {
 "startLine":  97,
 "startColumn":  17,
@@ -316,7 +316,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Eventsourced.Recovery.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Eventsourced.Recovery.cs",
 "region":  {
 "startLine":  117,
 "startColumn":  17,
@@ -329,7 +329,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'else' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Eventsourced.Recovery.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Eventsourced.Recovery.cs",
 "region":  {
 "startLine":  151,
 "startColumn":  17,
@@ -342,7 +342,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'else' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Eventsourced.Recovery.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Eventsourced.Recovery.cs",
 "region":  {
 "startLine":  176,
 "startColumn":  17,
@@ -355,7 +355,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Eventsourced.Recovery.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Eventsourced.Recovery.cs",
 "region":  {
 "startLine":  192,
 "startColumn":  21,
@@ -368,7 +368,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Eventsourced.Recovery.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Eventsourced.Recovery.cs",
 "region":  {
 "startLine":  194,
 "startColumn":  21,
@@ -381,7 +381,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'else' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Eventsourced.Recovery.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Eventsourced.Recovery.cs",
 "region":  {
 "startLine":  195,
 "startColumn":  21,
@@ -394,7 +394,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Eventsourced.Recovery.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Eventsourced.Recovery.cs",
 "region":  {
 "startLine":  206,
 "startColumn":  13,
@@ -407,7 +407,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'else' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Eventsourced.Recovery.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Eventsourced.Recovery.cs",
 "region":  {
 "startLine":  220,
 "startColumn":  17,
@@ -420,7 +420,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Eventsourced.Recovery.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Eventsourced.Recovery.cs",
 "region":  {
 "startLine":  223,
 "startColumn":  17,
@@ -433,7 +433,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Eventsourced.Recovery.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Eventsourced.Recovery.cs",
 "region":  {
 "startLine":  245,
 "startColumn":  21,
@@ -446,7 +446,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Eventsourced.Recovery.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Eventsourced.Recovery.cs",
 "region":  {
 "startLine":  255,
 "startColumn":  17,
@@ -459,7 +459,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Eventsourced.Recovery.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Eventsourced.Recovery.cs",
 "region":  {
 "startLine":  292,
 "startColumn":  17,
@@ -472,7 +472,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'else' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Eventsourced.Recovery.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Eventsourced.Recovery.cs",
 "region":  {
 "startLine":  293,
 "startColumn":  17,
@@ -485,7 +485,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'else' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Eventsourced.Recovery.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Eventsourced.Recovery.cs",
 "region":  {
 "startLine":  295,
 "startColumn":  13,
@@ -498,7 +498,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Fsm\PersistentFSMBase.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Fsm\PersistentFSMBase.cs",
 "region":  {
 "startLine":  75,
 "startColumn":  13,
@@ -511,7 +511,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Fsm\PersistentFSMBase.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Fsm\PersistentFSMBase.cs",
 "region":  {
 "startLine":  102,
 "startColumn":  17,
@@ -524,7 +524,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Fsm\PersistentFSMBase.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Fsm\PersistentFSMBase.cs",
 "region":  {
 "startLine":  229,
 "startColumn":  13,
@@ -537,7 +537,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Fsm\PersistentFSMBase.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Fsm\PersistentFSMBase.cs",
 "region":  {
 "startLine":  231,
 "startColumn":  13,
@@ -550,7 +550,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Fsm\PersistentFSMBase.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Fsm\PersistentFSMBase.cs",
 "region":  {
 "startLine":  236,
 "startColumn":  13,
@@ -563,7 +563,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'else' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Fsm\PersistentFSMBase.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Fsm\PersistentFSMBase.cs",
 "region":  {
 "startLine":  238,
 "startColumn":  13,
@@ -576,7 +576,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Fsm\PersistentFSMBase.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Fsm\PersistentFSMBase.cs",
 "region":  {
 "startLine":  277,
 "startColumn":  13,
@@ -589,7 +589,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'else' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Fsm\PersistentFSMBase.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Fsm\PersistentFSMBase.cs",
 "region":  {
 "startLine":  279,
 "startColumn":  13,
@@ -602,7 +602,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Fsm\PersistentFSMBase.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Fsm\PersistentFSMBase.cs",
 "region":  {
 "startLine":  363,
 "startColumn":  17,
@@ -615,7 +615,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Fsm\PersistentFSMBase.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Fsm\PersistentFSMBase.cs",
 "region":  {
 "startLine":  407,
 "startColumn":  13,
@@ -628,7 +628,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Fsm\PersistentFSMBase.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Fsm\PersistentFSMBase.cs",
 "region":  {
 "startLine":  409,
 "startColumn":  13,
@@ -641,7 +641,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Fsm\PersistentFSMBase.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Fsm\PersistentFSMBase.cs",
 "region":  {
 "startLine":  411,
 "startColumn":  13,
@@ -654,7 +654,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Fsm\PersistentFSMBase.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Fsm\PersistentFSMBase.cs",
 "region":  {
 "startLine":  681,
 "startColumn":  17,
@@ -667,7 +667,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'else' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Fsm\PersistentFSMBase.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Fsm\PersistentFSMBase.cs",
 "region":  {
 "startLine":  688,
 "startColumn":  17,
@@ -680,7 +680,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Fsm\PersistentFSMBase.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Fsm\PersistentFSMBase.cs",
 "region":  {
 "startLine":  691,
 "startColumn":  17,
@@ -693,7 +693,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'else' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Fsm\PersistentFSMBase.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Fsm\PersistentFSMBase.cs",
 "region":  {
 "startLine":  692,
 "startColumn":  17,
@@ -706,7 +706,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Fsm\PersistentFSMBase.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Fsm\PersistentFSMBase.cs",
 "region":  {
 "startLine":  794,
 "startColumn":  17,
@@ -719,7 +719,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Fsm\PersistentFSMBase.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Fsm\PersistentFSMBase.cs",
 "region":  {
 "startLine":  802,
 "startColumn":  17,
@@ -732,7 +732,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Journal\AsyncWriteJournal.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\AsyncWriteJournal.cs",
 "region":  {
 "startLine":  56,
 "startColumn":  13,
@@ -745,7 +745,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Journal\AsyncWriteJournal.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\AsyncWriteJournal.cs",
 "region":  {
 "startLine":  57,
 "startColumn":  18,
@@ -758,7 +758,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Journal\AsyncWriteJournal.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\AsyncWriteJournal.cs",
 "region":  {
 "startLine":  58,
 "startColumn":  18,
@@ -771,7 +771,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Journal\AsyncWriteJournal.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\AsyncWriteJournal.cs",
 "region":  {
 "startLine":  59,
 "startColumn":  18,
@@ -784,7 +784,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'else' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Journal\AsyncWriteJournal.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\AsyncWriteJournal.cs",
 "region":  {
 "startLine":  60,
 "startColumn":  13,
@@ -797,7 +797,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Journal\AsyncWriteJournal.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\AsyncWriteJournal.cs",
 "region":  {
 "startLine":  70,
 "startColumn":  21,
@@ -810,7 +810,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Journal\AsyncWriteJournal.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\AsyncWriteJournal.cs",
 "region":  {
 "startLine":  103,
 "startColumn":  17,
@@ -823,7 +823,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Journal\AsyncWriteProxy.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\AsyncWriteProxy.cs",
 "region":  {
 "startLine":  55,
 "startColumn":  13,
@@ -836,7 +836,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Journal\AsyncWriteProxy.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\AsyncWriteProxy.cs",
 "region":  {
 "startLine":  74,
 "startColumn":  17,
@@ -849,7 +849,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Journal\AsyncWriteProxy.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\AsyncWriteProxy.cs",
 "region":  {
 "startLine":  124,
 "startColumn":  17,
@@ -862,7 +862,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Journal\AsyncWriteProxy.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\AsyncWriteProxy.cs",
 "region":  {
 "startLine":  125,
 "startColumn":  17,
@@ -875,7 +875,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Journal\AsyncWriteProxy.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\AsyncWriteProxy.cs",
 "region":  {
 "startLine":  147,
 "startColumn":  17,
@@ -888,7 +888,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Journal\AsyncWriteProxy.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\AsyncWriteProxy.cs",
 "region":  {
 "startLine":  148,
 "startColumn":  17,
@@ -901,7 +901,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Journal\AsyncWriteProxy.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\AsyncWriteProxy.cs",
 "region":  {
 "startLine":  170,
 "startColumn":  17,
@@ -914,7 +914,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Journal\AsyncWriteProxy.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\AsyncWriteProxy.cs",
 "region":  {
 "startLine":  171,
 "startColumn":  17,
@@ -927,7 +927,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Journal\AsyncWriteProxy.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\AsyncWriteProxy.cs",
 "region":  {
 "startLine":  196,
 "startColumn":  13,
@@ -940,7 +940,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'else' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Journal\AsyncWriteProxy.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\AsyncWriteProxy.cs",
 "region":  {
 "startLine":  203,
 "startColumn":  13,
@@ -953,7 +953,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Journal\AsyncWriteProxy.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\AsyncWriteProxy.cs",
 "region":  {
 "startLine":  252,
 "startColumn":  13,
@@ -966,7 +966,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'else' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Journal\AsyncWriteProxy.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\AsyncWriteProxy.cs",
 "region":  {
 "startLine":  270,
 "startColumn":  13,
@@ -979,7 +979,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Journal\EventAdapters.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\EventAdapters.cs",
 "region":  {
 "startLine":  155,
 "startColumn":  21,
@@ -992,7 +992,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Journal\EventAdapters.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\EventAdapters.cs",
 "region":  {
 "startLine":  193,
 "startColumn":  17,
@@ -1005,7 +1005,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'else' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Journal\EventAdapters.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\EventAdapters.cs",
 "region":  {
 "startLine":  195,
 "startColumn":  17,
@@ -1018,7 +1018,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'for' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Journal\EventAdapters.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\EventAdapters.cs",
 "region":  {
 "startLine":  204,
 "startColumn":  13,
@@ -1031,7 +1031,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Journal\EventAdapters.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\EventAdapters.cs",
 "region":  {
 "startLine":  205,
 "startColumn":  17,
@@ -1044,7 +1044,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Journal\EventAdapters.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\EventAdapters.cs",
 "region":  {
 "startLine":  225,
 "startColumn":  13,
@@ -1057,7 +1057,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Journal\EventAdapters.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\EventAdapters.cs",
 "region":  {
 "startLine":  239,
 "startColumn":  13,
@@ -1070,7 +1070,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'else' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Journal\EventAdapters.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\EventAdapters.cs",
 "region":  {
 "startLine":  260,
 "startColumn":  13,
@@ -1083,7 +1083,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'else' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Journal\EventAdapters.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\EventAdapters.cs",
 "region":  {
 "startLine":  276,
 "startColumn":  21,
@@ -1096,7 +1096,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'else' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Journal\EventAdapters.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\EventAdapters.cs",
 "region":  {
 "startLine":  279,
 "startColumn":  13,
@@ -1109,7 +1109,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Journal\EventSequences.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\EventSequences.cs",
 "region":  {
 "startLine":  76,
 "startColumn":  13,
@@ -1122,7 +1122,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Journal\MemoryJournal.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\MemoryJournal.cs",
 "region":  {
 "startLine":  61,
 "startColumn":  13,
@@ -1135,7 +1135,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Journal\MemoryJournal.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\MemoryJournal.cs",
 "region":  {
 "startLine":  62,
 "startColumn":  18,
@@ -1148,7 +1148,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Journal\MemoryJournal.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\MemoryJournal.cs",
 "region":  {
 "startLine":  63,
 "startColumn":  18,
@@ -1161,7 +1161,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Journal\MemoryJournal.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\MemoryJournal.cs",
 "region":  {
 "startLine":  64,
 "startColumn":  18,
@@ -1174,7 +1174,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'else' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Journal\MemoryJournal.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\MemoryJournal.cs",
 "region":  {
 "startLine":  65,
 "startColumn":  13,
@@ -1187,7 +1187,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'else' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Journal\MemoryJournal.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\MemoryJournal.cs",
 "region":  {
 "startLine":  142,
 "startColumn":  17,
@@ -1200,7 +1200,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Journal\MemoryJournal.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\MemoryJournal.cs",
 "region":  {
 "startLine":  175,
 "startColumn":  21,
@@ -1213,7 +1213,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Journal\MemoryJournal.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\MemoryJournal.cs",
 "region":  {
 "startLine":  193,
 "startColumn":  21,
@@ -1226,7 +1226,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Journal\SyncWriteJournal.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\SyncWriteJournal.cs",
 "region":  {
 "startLine":  50,
 "startColumn":  13,
@@ -1239,7 +1239,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Journal\SyncWriteJournal.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\SyncWriteJournal.cs",
 "region":  {
 "startLine":  51,
 "startColumn":  18,
@@ -1252,7 +1252,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Journal\SyncWriteJournal.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\SyncWriteJournal.cs",
 "region":  {
 "startLine":  52,
 "startColumn":  18,
@@ -1265,7 +1265,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Journal\SyncWriteJournal.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\SyncWriteJournal.cs",
 "region":  {
 "startLine":  53,
 "startColumn":  18,
@@ -1278,7 +1278,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'else' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Journal\SyncWriteJournal.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\SyncWriteJournal.cs",
 "region":  {
 "startLine":  54,
 "startColumn":  13,
@@ -1291,7 +1291,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Journal\SyncWriteJournal.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\SyncWriteJournal.cs",
 "region":  {
 "startLine":  64,
 "startColumn":  17,
@@ -1304,7 +1304,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Journal\SyncWriteJournal.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\SyncWriteJournal.cs",
 "region":  {
 "startLine":  95,
 "startColumn":  17,
@@ -1317,7 +1317,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
 "region":  {
 "startLine":  30,
 "startColumn":  13,
@@ -1330,7 +1330,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
 "region":  {
 "startLine":  31,
 "startColumn":  13,
@@ -1343,7 +1343,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
 "region":  {
 "startLine":  72,
 "startColumn":  13,
@@ -1356,7 +1356,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
 "region":  {
 "startLine":  73,
 "startColumn":  13,
@@ -1369,7 +1369,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
 "region":  {
 "startLine":  102,
 "startColumn":  13,
@@ -1382,7 +1382,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
 "region":  {
 "startLine":  112,
 "startColumn":  13,
@@ -1395,7 +1395,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
 "region":  {
 "startLine":  113,
 "startColumn":  13,
@@ -1408,7 +1408,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
 "region":  {
 "startLine":  142,
 "startColumn":  13,
@@ -1421,7 +1421,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
 "region":  {
 "startLine":  160,
 "startColumn":  13,
@@ -1434,7 +1434,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
 "region":  {
 "startLine":  161,
 "startColumn":  13,
@@ -1447,7 +1447,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
 "region":  {
 "startLine":  195,
 "startColumn":  13,
@@ -1460,7 +1460,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
 "region":  {
 "startLine":  205,
 "startColumn":  13,
@@ -1473,7 +1473,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
 "region":  {
 "startLine":  206,
 "startColumn":  13,
@@ -1486,7 +1486,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
 "region":  {
 "startLine":  244,
 "startColumn":  13,
@@ -1499,7 +1499,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
 "region":  {
 "startLine":  245,
 "startColumn":  13,
@@ -1512,7 +1512,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
 "region":  {
 "startLine":  287,
 "startColumn":  13,
@@ -1525,7 +1525,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
 "region":  {
 "startLine":  312,
 "startColumn":  13,
@@ -1538,7 +1538,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
 "region":  {
 "startLine":  322,
 "startColumn":  13,
@@ -1551,7 +1551,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
 "region":  {
 "startLine":  323,
 "startColumn":  13,
@@ -1564,7 +1564,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
 "region":  {
 "startLine":  365,
 "startColumn":  13,
@@ -1577,7 +1577,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
 "region":  {
 "startLine":  366,
 "startColumn":  13,
@@ -1590,7 +1590,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
 "region":  {
 "startLine":  400,
 "startColumn":  13,
@@ -1603,7 +1603,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
 "region":  {
 "startLine":  422,
 "startColumn":  13,
@@ -1616,7 +1616,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
 "region":  {
 "startLine":  423,
 "startColumn":  13,
@@ -1629,7 +1629,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
 "region":  {
 "startLine":  468,
 "startColumn":  13,
@@ -1642,7 +1642,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
 "region":  {
 "startLine":  469,
 "startColumn":  13,
@@ -1655,7 +1655,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
 "region":  {
 "startLine":  518,
 "startColumn":  13,
@@ -1668,7 +1668,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
 "region":  {
 "startLine":  519,
 "startColumn":  13,
@@ -1681,7 +1681,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
 "region":  {
 "startLine":  593,
 "startColumn":  13,
@@ -1694,7 +1694,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
 "region":  {
 "startLine":  594,
 "startColumn":  13,
@@ -1707,7 +1707,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
 "region":  {
 "startLine":  639,
 "startColumn":  13,
@@ -1720,7 +1720,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
 "region":  {
 "startLine":  640,
 "startColumn":  13,
@@ -1733,7 +1733,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
 "region":  {
 "startLine":  674,
 "startColumn":  13,
@@ -1746,7 +1746,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
 "region":  {
 "startLine":  694,
 "startColumn":  13,
@@ -1759,7 +1759,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
 "region":  {
 "startLine":  704,
 "startColumn":  13,
@@ -1772,7 +1772,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
 "region":  {
 "startLine":  705,
 "startColumn":  13,
@@ -1785,7 +1785,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
 "region":  {
 "startLine":  744,
 "startColumn":  13,
@@ -1798,7 +1798,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
 "region":  {
 "startLine":  745,
 "startColumn":  13,
@@ -1811,7 +1811,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
 "region":  {
 "startLine":  787,
 "startColumn":  13,
@@ -1824,7 +1824,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
 "region":  {
 "startLine":  788,
 "startColumn":  13,
@@ -1837,7 +1837,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
 "region":  {
 "startLine":  795,
 "startColumn":  13,
@@ -1850,7 +1850,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
 "region":  {
 "startLine":  820,
 "startColumn":  13,
@@ -1863,7 +1863,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
 "region":  {
 "startLine":  830,
 "startColumn":  13,
@@ -1876,7 +1876,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
 "region":  {
 "startLine":  831,
 "startColumn":  13,
@@ -1889,7 +1889,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Persistence.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistence.cs",
 "region":  {
 "startLine":  54,
 "startColumn":  17,
@@ -1902,7 +1902,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Persistence.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistence.cs",
 "region":  {
 "startLine":  61,
 "startColumn":  17,
@@ -1915,7 +1915,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Persistent.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistent.cs",
 "region":  {
 "startLine":  166,
 "startColumn":  13,
@@ -1928,7 +1928,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Persistent.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistent.cs",
 "region":  {
 "startLine":  167,
 "startColumn":  13,
@@ -1941,7 +1941,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\PersistentActor.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\PersistentActor.cs",
 "region":  {
 "startLine":  157,
 "startColumn":  13,
@@ -1954,7 +1954,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'else' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\PersistentActor.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\PersistentActor.cs",
 "region":  {
 "startLine":  159,
 "startColumn":  13,
@@ -1967,7 +1967,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\PersistentActor.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\PersistentActor.cs",
 "region":  {
 "startLine":  266,
 "startColumn":  13,
@@ -1980,7 +1980,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\PersistentActor.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\PersistentActor.cs",
 "region":  {
 "startLine":  274,
 "startColumn":  13,
@@ -1993,7 +1993,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\PersistentActor.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\PersistentActor.cs",
 "region":  {
 "startLine":  324,
 "startColumn":  13,
@@ -2006,7 +2006,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\PersistentView.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\PersistentView.cs",
 "region":  {
 "startLine":  181,
 "startColumn":  13,
@@ -2019,7 +2019,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\PersistentView.Lifecycle.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\PersistentView.Lifecycle.cs",
 "region":  {
 "startLine":  57,
 "startColumn":  13,
@@ -2032,7 +2032,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'else' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\PersistentView.Recovery.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\PersistentView.Recovery.cs",
 "region":  {
 "startLine":  53,
 "startColumn":  17,
@@ -2045,7 +2045,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\PersistentView.Recovery.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\PersistentView.Recovery.cs",
 "region":  {
 "startLine":  68,
 "startColumn":  17,
@@ -2058,7 +2058,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'else' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\PersistentView.Recovery.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\PersistentView.Recovery.cs",
 "region":  {
 "startLine":  82,
 "startColumn":  17,
@@ -2071,7 +2071,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\PersistentView.Recovery.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\PersistentView.Recovery.cs",
 "region":  {
 "startLine":  113,
 "startColumn":  22,
@@ -2084,7 +2084,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'else' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\PersistentView.Recovery.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\PersistentView.Recovery.cs",
 "region":  {
 "startLine":  140,
 "startColumn":  17,
@@ -2097,7 +2097,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\PersistentView.Recovery.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\PersistentView.Recovery.cs",
 "region":  {
 "startLine":  173,
 "startColumn":  22,
@@ -2110,7 +2110,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\PersistentView.Recovery.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\PersistentView.Recovery.cs",
 "region":  {
 "startLine":  174,
 "startColumn":  22,
@@ -2123,7 +2123,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\PersistentView.Recovery.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\PersistentView.Recovery.cs",
 "region":  {
 "startLine":  175,
 "startColumn":  22,
@@ -2136,7 +2136,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'else' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\PersistentView.Recovery.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\PersistentView.Recovery.cs",
 "region":  {
 "startLine":  176,
 "startColumn":  17,
@@ -2149,7 +2149,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\PersistentView.Recovery.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\PersistentView.Recovery.cs",
 "region":  {
 "startLine":  207,
 "startColumn":  22,
@@ -2162,7 +2162,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'else' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\PersistentView.Recovery.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\PersistentView.Recovery.cs",
 "region":  {
 "startLine":  208,
 "startColumn":  17,
@@ -2175,7 +2175,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Serialization\MessageSerializer.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Serialization\MessageSerializer.cs",
 "region":  {
 "startLine":  46,
 "startColumn":  13,
@@ -2188,7 +2188,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Serialization\MessageSerializer.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Serialization\MessageSerializer.cs",
 "region":  {
 "startLine":  47,
 "startColumn":  13,
@@ -2201,7 +2201,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Serialization\MessageSerializer.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Serialization\MessageSerializer.cs",
 "region":  {
 "startLine":  54,
 "startColumn":  13,
@@ -2214,7 +2214,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Serialization\MessageSerializer.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Serialization\MessageSerializer.cs",
 "region":  {
 "startLine":  55,
 "startColumn":  13,
@@ -2227,7 +2227,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Serialization\MessageSerializer.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Serialization\MessageSerializer.cs",
 "region":  {
 "startLine":  121,
 "startColumn":  13,
@@ -2240,7 +2240,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Serialization\MessageSerializer.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Serialization\MessageSerializer.cs",
 "region":  {
 "startLine":  122,
 "startColumn":  13,
@@ -2253,7 +2253,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Serialization\MessageSerializer.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Serialization\MessageSerializer.cs",
 "region":  {
 "startLine":  137,
 "startColumn":  13,
@@ -2266,7 +2266,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Serialization\SnapshotSerializer.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Serialization\SnapshotSerializer.cs",
 "region":  {
 "startLine":  69,
 "startColumn":  13,
@@ -2279,7 +2279,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Serialization\SnapshotSerializer.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Serialization\SnapshotSerializer.cs",
 "region":  {
 "startLine":  162,
 "startColumn":  13,
@@ -2292,7 +2292,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Serialization\SnapshotSerializer.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Serialization\SnapshotSerializer.cs",
 "region":  {
 "startLine":  163,
 "startColumn":  13,
@@ -2305,7 +2305,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Serialization\SnapshotSerializer.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Serialization\SnapshotSerializer.cs",
 "region":  {
 "startLine":  164,
 "startColumn":  13,
@@ -2318,7 +2318,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Serialization\SnapshotSerializer.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Serialization\SnapshotSerializer.cs",
 "region":  {
 "startLine":  165,
 "startColumn":  13,
@@ -2331,7 +2331,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Snapshot.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot.cs",
 "region":  {
 "startLine":  62,
 "startColumn":  13,
@@ -2344,7 +2344,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Snapshot.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot.cs",
 "region":  {
 "startLine":  63,
 "startColumn":  13,
@@ -2357,7 +2357,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Snapshot.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot.cs",
 "region":  {
 "startLine":  100,
 "startColumn":  13,
@@ -2370,7 +2370,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Snapshot.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot.cs",
 "region":  {
 "startLine":  101,
 "startColumn":  13,
@@ -2383,7 +2383,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Snapshot.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot.cs",
 "region":  {
 "startLine":  146,
 "startColumn":  13,
@@ -2396,7 +2396,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Snapshot.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot.cs",
 "region":  {
 "startLine":  147,
 "startColumn":  13,
@@ -2409,7 +2409,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Snapshot.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot.cs",
 "region":  {
 "startLine":  189,
 "startColumn":  13,
@@ -2422,7 +2422,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Snapshot.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot.cs",
 "region":  {
 "startLine":  190,
 "startColumn":  13,
@@ -2435,7 +2435,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Snapshot.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot.cs",
 "region":  {
 "startLine":  258,
 "startColumn":  13,
@@ -2448,7 +2448,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Snapshot.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot.cs",
 "region":  {
 "startLine":  259,
 "startColumn":  13,
@@ -2461,7 +2461,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Snapshot.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot.cs",
 "region":  {
 "startLine":  300,
 "startColumn":  13,
@@ -2474,7 +2474,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Snapshot.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot.cs",
 "region":  {
 "startLine":  301,
 "startColumn":  13,
@@ -2487,7 +2487,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Snapshot.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot.cs",
 "region":  {
 "startLine":  358,
 "startColumn":  13,
@@ -2500,7 +2500,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Snapshot.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot.cs",
 "region":  {
 "startLine":  359,
 "startColumn":  13,
@@ -2513,7 +2513,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Snapshot.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot.cs",
 "region":  {
 "startLine":  408,
 "startColumn":  13,
@@ -2526,7 +2526,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Snapshot.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot.cs",
 "region":  {
 "startLine":  409,
 "startColumn":  13,
@@ -2539,7 +2539,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Snapshot.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot.cs",
 "region":  {
 "startLine":  442,
 "startColumn":  13,
@@ -2552,7 +2552,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Snapshot.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot.cs",
 "region":  {
 "startLine":  454,
 "startColumn":  13,
@@ -2565,7 +2565,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Snapshot.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot.cs",
 "region":  {
 "startLine":  455,
 "startColumn":  13,
@@ -2578,7 +2578,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Snapshot.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot.cs",
 "region":  {
 "startLine":  487,
 "startColumn":  13,
@@ -2591,7 +2591,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Snapshot.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot.cs",
 "region":  {
 "startLine":  497,
 "startColumn":  13,
@@ -2604,7 +2604,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Snapshot.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot.cs",
 "region":  {
 "startLine":  498,
 "startColumn":  13,
@@ -2617,7 +2617,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Snapshot.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot.cs",
 "region":  {
 "startLine":  536,
 "startColumn":  13,
@@ -2630,7 +2630,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Snapshot.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot.cs",
 "region":  {
 "startLine":  537,
 "startColumn":  13,
@@ -2643,7 +2643,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Snapshot\SnapshotStore.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot\SnapshotStore.cs",
 "region":  {
 "startLine":  72,
 "startColumn":  21,
@@ -2656,7 +2656,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Snapshot\SnapshotStore.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot\SnapshotStore.cs",
 "region":  {
 "startLine":  83,
 "startColumn":  21,
@@ -2669,7 +2669,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'else' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Snapshot\SnapshotStore.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot\SnapshotStore.cs",
 "region":  {
 "startLine":  88,
 "startColumn":  13,

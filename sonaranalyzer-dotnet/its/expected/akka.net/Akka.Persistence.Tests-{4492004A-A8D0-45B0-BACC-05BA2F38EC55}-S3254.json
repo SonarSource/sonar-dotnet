@@ -4,7 +4,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'count'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence.Tests\PersistentActorSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\PersistentActorSpec.cs",
 "region":  {
 "startLine":  209,
 "startColumn":  41,
@@ -17,7 +17,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'shouldHandle'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence.Tests\ReceivePersistentActorTests.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\ReceivePersistentActorTests.cs",
 "region":  {
 "startLine":  222,
 "startColumn":  66,
@@ -30,7 +30,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'shouldHandle'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence.Tests\ReceivePersistentActorTests.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\ReceivePersistentActorTests.cs",
 "region":  {
 "startLine":  244,
 "startColumn":  74,

@@ -4,7 +4,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'queryWrapper.ShouldContainAttribute' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Testing.Tests\AssertExtensionsTests.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing.Tests\AssertExtensionsTests.cs",
 "region":  {
 "startLine":  305,
 "startColumn":  49,
@@ -17,7 +17,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'htmlNode.ShouldContainAttribute' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Testing.Tests\AssertExtensionsTests.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing.Tests\AssertExtensionsTests.cs",
 "region":  {
 "startLine":  331,
 "startColumn":  49,
@@ -30,7 +30,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'htmlNode.ShouldContainAttribute' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Testing.Tests\AssertExtensionsTests.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing.Tests\AssertExtensionsTests.cs",
 "region":  {
 "startLine":  383,
 "startColumn":  49,
@@ -43,7 +43,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'htmlNode.ShouldContainAttribute' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Testing.Tests\AssertExtensionsTests.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing.Tests\AssertExtensionsTests.cs",
 "region":  {
 "startLine":  396,
 "startColumn":  49,
@@ -56,7 +56,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'htmlNode.ShouldContainAttribute' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Testing.Tests\AssertExtensionsTests.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing.Tests\AssertExtensionsTests.cs",
 "region":  {
 "startLine":  422,
 "startColumn":  49,
@@ -69,7 +69,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'htmlNode.ShouldContainAttribute' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Testing.Tests\AssertExtensionsTests.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing.Tests\AssertExtensionsTests.cs",
 "region":  {
 "startLine":  448,
 "startColumn":  49,
@@ -82,7 +82,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'Assert.Contains' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Testing.Tests\ConfigurableBootstrapperDependenciesTests.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing.Tests\ConfigurableBootstrapperDependenciesTests.cs",
 "region":  {
 "startLine":  42,
 "startColumn":  13,
@@ -95,7 +95,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'Assert.Contains' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Testing.Tests\ConfigurableBootstrapperDependenciesTests.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing.Tests\ConfigurableBootstrapperDependenciesTests.cs",
 "region":  {
 "startLine":  59,
 "startColumn":  13,
@@ -108,7 +108,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'Assert.Contains' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Testing.Tests\ConfigurableBootstrapperDependenciesTests.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing.Tests\ConfigurableBootstrapperDependenciesTests.cs",
 "region":  {
 "startLine":  76,
 "startColumn":  13,
@@ -121,7 +121,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'Assert.Contains' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Testing.Tests\ConfigurableBootstrapperDependenciesTests.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing.Tests\ConfigurableBootstrapperDependenciesTests.cs",
 "region":  {
 "startLine":  93,
 "startColumn":  13,
@@ -134,7 +134,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'Assert.Contains' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Testing.Tests\ConfigurableBootstrapperDependenciesTests.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing.Tests\ConfigurableBootstrapperDependenciesTests.cs",
 "region":  {
 "startLine":  138,
 "startColumn":  13,
@@ -147,7 +147,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'Assert.Contains' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Testing.Tests\ConfigurableBootstrapperDependenciesTests.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing.Tests\ConfigurableBootstrapperDependenciesTests.cs",
 "region":  {
 "startLine":  139,
 "startColumn":  13,
@@ -160,7 +160,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'Assert.Contains' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Testing.Tests\ConfigurableBootstrapperDependenciesTests.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing.Tests\ConfigurableBootstrapperDependenciesTests.cs",
 "region":  {
 "startLine":  160,
 "startColumn":  13,
@@ -173,7 +173,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'Assert.Contains' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Testing.Tests\ConfigurableBootstrapperDependenciesTests.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing.Tests\ConfigurableBootstrapperDependenciesTests.cs",
 "region":  {
 "startLine":  161,
 "startColumn":  13,
@@ -186,7 +186,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'actual.StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\ShouldExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\ShouldExtensions.cs",
 "region":  {
 "startLine":  15,
 "startColumn":  25,
@@ -199,7 +199,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'actual.EndsWith' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\ShouldExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\ShouldExtensions.cs",
 "region":  {
 "startLine":  20,
 "startColumn":  25,
@@ -212,7 +212,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'actual.IndexOf' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\ShouldExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\ShouldExtensions.cs",
 "region":  {
 "startLine":  71,
 "startColumn":  33,

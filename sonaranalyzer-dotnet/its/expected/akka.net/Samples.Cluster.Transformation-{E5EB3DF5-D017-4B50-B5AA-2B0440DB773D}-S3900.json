@@ -4,7 +4,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'member' before using it.",
 "location":  {
-"uri":  "akka.net\src\examples\Cluster\Roles\Samples.Cluster.Transformation\TransformationBackend.cs",
+"uri":  "sources\akka.net\src\examples\Cluster\Roles\Samples.Cluster.Transformation\TransformationBackend.cs",
 "region":  {
 "startLine":  64,
 "startColumn":  16,
@@ -17,7 +17,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'message' before using it.",
 "location":  {
-"uri":  "akka.net\src\examples\Cluster\Roles\Samples.Cluster.Transformation\TransformationFrontend.cs",
+"uri":  "sources\akka.net\src\examples\Cluster\Roles\Samples.Cluster.Transformation\TransformationFrontend.cs",
 "region":  {
 "startLine":  31,
 "startColumn":  22,

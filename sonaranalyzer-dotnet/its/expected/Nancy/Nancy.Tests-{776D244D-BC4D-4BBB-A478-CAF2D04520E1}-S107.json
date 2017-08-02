@@ -4,7 +4,7 @@
 "id":  "S107",
 "message":  "Constructor has 11 parameters, which is greater than the 7 authorized.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\Diagnostics\CustomInteractiveDiagnosticsFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Diagnostics\CustomInteractiveDiagnosticsFixture.cs",
 "region":  {
 "startLine":  52,
 "startColumn":  35,

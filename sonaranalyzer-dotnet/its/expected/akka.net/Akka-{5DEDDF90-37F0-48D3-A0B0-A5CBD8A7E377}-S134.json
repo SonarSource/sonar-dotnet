@@ -4,7 +4,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\ActorCell.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.cs",
 "region":  {
 "startLine":  312,
 "startColumn":  25,
@@ -17,7 +17,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\ActorCell.FaultHandling.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.FaultHandling.cs",
 "region":  {
 "startLine":  317,
 "startColumn":  25,
@@ -30,7 +30,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\Cancellation\Cancelable.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\Cancellation\Cancelable.cs",
 "region":  {
 "startLine":  223,
 "startColumn":  25,
@@ -43,7 +43,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\Futures.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\Futures.cs",
 "region":  {
 "startLine":  299,
 "startColumn":  25,
@@ -56,7 +56,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\RepointableActorRef.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\RepointableActorRef.cs",
 "region":  {
 "startLine":  202,
 "startColumn":  29,
@@ -69,7 +69,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\Scheduler\DedicatedThreadScheduler.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\DedicatedThreadScheduler.cs",
 "region":  {
 "startLine":  62,
 "startColumn":  29,
@@ -82,7 +82,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Configuration\Hocon\HoconTokenizer.cs",
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconTokenizer.cs",
 "region":  {
 "startLine":  648,
 "startColumn":  25,
@@ -95,7 +95,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Dispatch\CachingConfig.cs",
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\CachingConfig.cs",
 "region":  {
 "startLine":  107,
 "startColumn":  25,
@@ -108,7 +108,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\IO\InetAddressDnsResolver.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\InetAddressDnsResolver.cs",
 "region":  {
 "startLine":  45,
 "startColumn":  25,
@@ -121,7 +121,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\IO\TcpConnection.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpConnection.cs",
 "region":  {
 "startLine":  411,
 "startColumn":  25,
@@ -134,7 +134,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\IO\TcpConnection.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpConnection.cs",
 "region":  {
 "startLine":  416,
 "startColumn":  25,
@@ -147,7 +147,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\IO\TcpConnection.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpConnection.cs",
 "region":  {
 "startLine":  427,
 "startColumn":  25,
@@ -160,7 +160,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\IO\WithUdpSend.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\WithUdpSend.cs",
 "region":  {
 "startLine":  60,
 "startColumn":  29,
@@ -173,7 +173,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Pattern\BackoffSupervisor.cs",
+"uri":  "sources\akka.net\src\core\Akka\Pattern\BackoffSupervisor.cs",
 "region":  {
 "startLine":  107,
 "startColumn":  25,
@@ -186,7 +186,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Routing\ResizablePoolCell.cs",
+"uri":  "sources\akka.net\src\core\Akka\Routing\ResizablePoolCell.cs",
 "region":  {
 "startLine":  78,
 "startColumn":  25,
@@ -199,7 +199,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Routing\Resizer.cs",
+"uri":  "sources\akka.net\src\core\Akka\Routing\Resizer.cs",
 "region":  {
 "startLine":  245,
 "startColumn":  33,
@@ -212,7 +212,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Routing\Resizer.cs",
+"uri":  "sources\akka.net\src\core\Akka\Routing\Resizer.cs",
 "region":  {
 "startLine":  248,
 "startColumn":  33,
@@ -225,7 +225,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Routing\Resizer.cs",
+"uri":  "sources\akka.net\src\core\Akka\Routing\Resizer.cs",
 "region":  {
 "startLine":  255,
 "startColumn":  33,
@@ -238,7 +238,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Routing\Resizer.cs",
+"uri":  "sources\akka.net\src\core\Akka\Routing\Resizer.cs",
 "region":  {
 "startLine":  256,
 "startColumn":  33,
@@ -251,7 +251,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Util\MatchHandler\MatchExpressionBuilder.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\MatchExpressionBuilder.cs",
 "region":  {
 "startLine":  97,
 "startColumn":  25,
@@ -264,7 +264,7 @@
 "id":  "S134",
 "message":  "Refactor this code to not nest more than 3 control flow statements.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Util\MonoConcurrentQueue.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\MonoConcurrentQueue.cs",
 "region":  {
 "startLine":  194,
 "startColumn":  25,

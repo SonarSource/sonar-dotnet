@@ -4,7 +4,7 @@
 "id":  "S3928",
 "message":  "Use a constructor overloads that allows a more meaningful exception message to be provided.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Hosting.Aspnet\DefaultNancyAspNetBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Hosting.Aspnet\DefaultNancyAspNetBootstrapper.cs",
 "region":  {
 "startLine":  192,
 "startColumn":  31,
@@ -17,7 +17,7 @@
 "id":  "S3928",
 "message":  "Use a constructor overloads that allows a more meaningful exception message to be provided.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Hosting.Aspnet\DefaultNancyAspNetBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Hosting.Aspnet\DefaultNancyAspNetBootstrapper.cs",
 "region":  {
 "startLine":  219,
 "startColumn":  31,

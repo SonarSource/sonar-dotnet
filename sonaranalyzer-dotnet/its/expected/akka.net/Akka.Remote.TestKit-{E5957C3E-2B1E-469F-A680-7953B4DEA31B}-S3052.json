@@ -4,7 +4,7 @@
 "id":  "S3052",
 "message":  "Remove this initialization to '_failed', the compiler will do that for you.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
 "region":  {
 "startLine":  385,
 "startColumn":  30,
@@ -17,7 +17,7 @@
 "id":  "S3052",
 "message":  "Remove this initialization to '_commonConf', the compiler will do that for you.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\MultiNodeSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MultiNodeSpec.cs",
 "region":  {
 "startLine":  31,
 "startColumn":  28,
@@ -30,7 +30,7 @@
 "id":  "S3052",
 "message":  "Remove this initialization to '_testTransport', the compiler will do that for you.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\MultiNodeSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MultiNodeSpec.cs",
 "region":  {
 "startLine":  36,
 "startColumn":  29,
@@ -43,7 +43,7 @@
 "id":  "S3052",
 "message":  "Remove this initialization to '_loggedDisconnect', the compiler will do that for you.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
 "region":  {
 "startLine":  526,
 "startColumn":  40,

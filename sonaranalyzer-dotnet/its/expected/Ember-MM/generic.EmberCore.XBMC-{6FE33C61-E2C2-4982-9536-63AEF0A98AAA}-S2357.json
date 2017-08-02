@@ -4,7 +4,7 @@
 "id":  "S2357",
 "message":  "Make 'XComs' private.",
 "location":  {
-"uri":  "Ember-MM\Addons\generic.EmberCore.XBMC\dlgXBMCHost.vb",
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\dlgXBMCHost.vb",
 "region":  {
 "startLine":  6,
 "startColumn":  12,
@@ -17,7 +17,7 @@
 "id":  "S2357",
 "message":  "Make 'hostid' private.",
 "location":  {
-"uri":  "Ember-MM\Addons\generic.EmberCore.XBMC\dlgXBMCHost.vb",
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\dlgXBMCHost.vb",
 "region":  {
 "startLine":  7,
 "startColumn":  12,
@@ -30,7 +30,7 @@
 "id":  "S2357",
 "message":  "Make 'XComs' private.",
 "location":  {
-"uri":  "Ember-MM\Addons\generic.EmberCore.XBMC\frmSettingsHolder.vb",
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\frmSettingsHolder.vb",
 "region":  {
 "startLine":  27,
 "startColumn":  12,
@@ -43,7 +43,7 @@
 "id":  "S2357",
 "message":  "Make 'XComs' private.",
 "location":  {
-"uri":  "Ember-MM\Addons\generic.EmberCore.XBMC\Module.XBMCxCom.vb",
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\Module.XBMCxCom.vb",
 "region":  {
 "startLine":  575,
 "startColumn":  16,

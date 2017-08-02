@@ -4,7 +4,7 @@
 "id":  "S1449",
 "message":  "Define the locale to be used in this string operation.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\ShouldExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\ShouldExtensions.cs",
 "region":  {
 "startLine":  71,
 "startColumn":  40,

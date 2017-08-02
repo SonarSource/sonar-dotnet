@@ -4,7 +4,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
 "region":  {
 "startLine":  195,
 "startColumn":  41,
@@ -17,7 +17,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
 "region":  {
 "startLine":  195,
 "startColumn":  83,

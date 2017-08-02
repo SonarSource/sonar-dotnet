@@ -4,7 +4,7 @@
 "id":  "S126",
 "message":  "Add the missing 'else' clause.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
 "region":  {
 "startLine":  493,
 "startColumn":  17,
@@ -17,7 +17,7 @@
 "id":  "S126",
 "message":  "Add the missing 'else' clause.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
 "region":  {
 "startLine":  559,
 "startColumn":  13,
@@ -30,7 +30,7 @@
 "id":  "S126",
 "message":  "Add the missing 'else' clause.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
 "region":  {
 "startLine":  289,
 "startColumn":  21,
@@ -43,7 +43,7 @@
 "id":  "S126",
 "message":  "Add the missing 'else' clause.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
 "region":  {
 "startLine":  369,
 "startColumn":  17,
@@ -56,7 +56,7 @@
 "id":  "S126",
 "message":  "Add the missing 'else' clause.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"uri":  "sources\Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
 "region":  {
 "startLine":  236,
 "startColumn":  13,
@@ -69,7 +69,7 @@
 "id":  "S126",
 "message":  "Add the missing 'else' clause.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"uri":  "sources\Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
 "region":  {
 "startLine":  355,
 "startColumn":  13,
@@ -82,7 +82,7 @@
 "id":  "S126",
 "message":  "Add the missing 'else' clause.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
 "region":  {
 "startLine":  620,
 "startColumn":  6,
@@ -95,7 +95,7 @@
 "id":  "S126",
 "message":  "Add the missing 'else' clause.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
 "region":  {
 "startLine":  397,
 "startColumn":  13,
@@ -108,7 +108,7 @@
 "id":  "S126",
 "message":  "Add the missing 'else' clause.",
 "location":  {
-"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
 "startLine":  3821,
 "startColumn":  17,

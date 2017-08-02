@@ -4,7 +4,7 @@
 "id":  "S1006",
 "message":  "Remove the default parameter value from this explicit interface implementation.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\ActorCell.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.cs",
 "region":  {
 "startLine":  173,
 "startColumn":  68,
@@ -17,7 +17,7 @@
 "id":  "S1006",
 "message":  "Remove the default parameter value to match the signature of overridden method.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\ActorCell.ReceiveTimeout.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.ReceiveTimeout.cs",
 "region":  {
 "startLine":  17,
 "startColumn":  50,
@@ -30,7 +30,7 @@
 "id":  "S1006",
 "message":  "Remove the default parameter value to match the signature of overridden method.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\ActorSelection.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorSelection.cs",
 "region":  {
 "startLine":  94,
 "startColumn":  59,

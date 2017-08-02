@@ -4,7 +4,7 @@
 "id":  "S3257",
 "message":  "Remove the array type; it is redundant.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\Scheduler\TaskBasedScheduler_ActionScheduler_Schedule_Tests.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\Scheduler\TaskBasedScheduler_ActionScheduler_Schedule_Tests.cs",
 "region":  {
 "startLine":  115,
 "startColumn":  25,
@@ -17,7 +17,7 @@
 "id":  "S3257",
 "message":  "Remove the array type; it is redundant.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\Scheduler\TaskBasedScheduler_TellScheduler_Schedule_Tests.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\Scheduler\TaskBasedScheduler_TellScheduler_Schedule_Tests.cs",
 "region":  {
 "startLine":  82,
 "startColumn":  25,
@@ -30,7 +30,7 @@
 "id":  "S3257",
 "message":  "Remove the array type; it is redundant.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\Scheduler\TaskBasedScheduler_TellScheduler_Schedule_Tests.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\Scheduler\TaskBasedScheduler_TellScheduler_Schedule_Tests.cs",
 "region":  {
 "startLine":  102,
 "startColumn":  25,

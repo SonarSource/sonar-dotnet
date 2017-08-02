@@ -4,7 +4,7 @@
 "id":  "S1481",
 "message":  "Remove this unused 'echo' local variable.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.Tests.Performance\Transports\AssociationStressSpecBase.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests.Performance\Transports\AssociationStressSpecBase.cs",
 "region":  {
 "startLine":  75,
 "startColumn":  21,
@@ -17,7 +17,7 @@
 "id":  "S1481",
 "message":  "Remove this unused 'remoteActor' local variable.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.Tests.Performance\Transports\AssociationStressSpecBase.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests.Performance\Transports\AssociationStressSpecBase.cs",
 "region":  {
 "startLine":  79,
 "startColumn":  20,

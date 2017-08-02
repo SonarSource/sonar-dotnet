@@ -4,7 +4,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private property 'Foo'.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Validation.DataAnnotatioins.Tests\PropertyValidatorFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Validation.DataAnnotatioins.Tests\PropertyValidatorFixture.cs",
 "region":  {
 "startLine":  138,
 "startColumn":  13,
@@ -17,7 +17,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private property 'Bar'.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Validation.DataAnnotatioins.Tests\PropertyValidatorFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Validation.DataAnnotatioins.Tests\PropertyValidatorFixture.cs",
 "region":  {
 "startLine":  139,
 "startColumn":  13,

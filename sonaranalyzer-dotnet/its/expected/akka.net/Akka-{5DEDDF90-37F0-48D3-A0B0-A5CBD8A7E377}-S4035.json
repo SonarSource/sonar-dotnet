@@ -4,7 +4,7 @@
 "id":  "S4035",
 "message":  "Seal class 'ActorPath' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\ActorPath.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorPath.cs",
 "region":  {
 "startLine":  31,
 "startColumn":  27,
@@ -17,7 +17,7 @@
 "id":  "S4035",
 "message":  "Seal class 'Surrogate' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\ActorPath.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorPath.cs",
 "region":  {
 "startLine":  33,
 "startColumn":  22,
@@ -30,7 +30,7 @@
 "id":  "S4035",
 "message":  "Seal class 'ActorRefBase' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\ActorRef.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorRef.cs",
 "region":  {
 "startLine":  151,
 "startColumn":  27,
@@ -43,7 +43,7 @@
 "id":  "S4035",
 "message":  "Seal class 'ActorSelection' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\ActorSelection.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorSelection.cs",
 "region":  {
 "startLine":  22,
 "startColumn":  18,
@@ -56,7 +56,7 @@
 "id":  "S4035",
 "message":  "Seal class 'Deploy' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\Deploy.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\Deploy.cs",
 "region":  {
 "startLine":  15,
 "startColumn":  18,
@@ -69,7 +69,7 @@
 "id":  "S4035",
 "message":  "Seal class 'State' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\FSM.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\FSM.cs",
 "region":  {
 "startLine":  234,
 "startColumn":  22,
@@ -82,7 +82,7 @@
 "id":  "S4035",
 "message":  "Seal class 'Props' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\Props.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\Props.cs",
 "region":  {
 "startLine":  34,
 "startColumn":  18,
@@ -95,7 +95,7 @@
 "id":  "S4035",
 "message":  "Seal class 'RemoteScope' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\RemoteScope.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\RemoteScope.cs",
 "region":  {
 "startLine":  15,
 "startColumn":  18,
@@ -108,7 +108,7 @@
 "id":  "S4035",
 "message":  "Seal class 'DefaultResizer' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Routing\Resizer.cs",
+"uri":  "sources\akka.net\src\core\Akka\Routing\Resizer.cs",
 "region":  {
 "startLine":  55,
 "startColumn":  18,
@@ -121,7 +121,7 @@
 "id":  "S4035",
 "message":  "Seal class 'ActorRefRoutee' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Routing\Router.cs",
+"uri":  "sources\akka.net\src\core\Akka\Routing\Router.cs",
 "region":  {
 "startLine":  48,
 "startColumn":  18,
@@ -134,7 +134,7 @@
 "id":  "S4035",
 "message":  "Seal class 'ActorSelectionRoutee' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Routing\Router.cs",
+"uri":  "sources\akka.net\src\core\Akka\Routing\Router.cs",
 "region":  {
 "startLine":  86,
 "startColumn":  18,
@@ -147,7 +147,7 @@
 "id":  "S4035",
 "message":  "Seal class 'Group' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Routing\RouterConfig.cs",
+"uri":  "sources\akka.net\src\core\Akka\Routing\RouterConfig.cs",
 "region":  {
 "startLine":  242,
 "startColumn":  27,
@@ -160,7 +160,7 @@
 "id":  "S4035",
 "message":  "Seal class 'Pool' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Routing\RouterConfig.cs",
+"uri":  "sources\akka.net\src\core\Akka\Routing\RouterConfig.cs",
 "region":  {
 "startLine":  419,
 "startColumn":  27,
@@ -173,7 +173,7 @@
 "id":  "S4035",
 "message":  "Seal class 'MatchBuilderSignature' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Util\MatchHandler\MatchBuilderSignature.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\MatchBuilderSignature.cs",
 "region":  {
 "startLine":  20,
 "startColumn":  18,

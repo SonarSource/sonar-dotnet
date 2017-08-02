@@ -4,7 +4,7 @@
 "id":  "S3241",
 "message":  "Change return type to 'void'; not a single caller uses the returned value.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Dispatch\DispatchersSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Dispatch\DispatchersSpec.cs",
 "region":  {
 "startLine":  195,
 "startColumn":  9,

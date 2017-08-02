@@ -4,7 +4,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Hosting.Aspnet\NancyHttpRequestHandler.cs",
+"uri":  "sources\Nancy\src\Nancy.Hosting.Aspnet\NancyHttpRequestHandler.cs",
 "region":  {
 "startLine":  46,
 "startColumn":  49,
@@ -17,7 +17,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Hosting.Aspnet\NancyHttpRequestHandler.cs",
+"uri":  "sources\Nancy\src\Nancy.Hosting.Aspnet\NancyHttpRequestHandler.cs",
 "region":  {
 "startLine":  55,
 "startColumn":  36,
@@ -30,7 +30,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Hosting.Aspnet\TinyIoCAspNetExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy.Hosting.Aspnet\TinyIoCAspNetExtensions.cs",
 "region":  {
 "startLine":  10,
 "startColumn":  44,

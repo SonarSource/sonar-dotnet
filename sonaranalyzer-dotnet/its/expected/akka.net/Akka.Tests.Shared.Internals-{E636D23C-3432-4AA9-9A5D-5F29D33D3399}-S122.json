@@ -4,7 +4,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests.Shared.Internals\Helpers\XAssert.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\Helpers\XAssert.cs",
 "region":  {
 "startLine":  51,
 "startColumn":  17,

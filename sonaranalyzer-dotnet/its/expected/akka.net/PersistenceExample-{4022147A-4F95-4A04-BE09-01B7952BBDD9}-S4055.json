@@ -4,7 +4,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "akka.net\src\examples\PersistenceExample\AtLeastOnceDeliveryExampleActor.cs",
+"uri":  "sources\akka.net\src\examples\PersistenceExample\AtLeastOnceDeliveryExampleActor.cs",
 "region":  {
 "startLine":  76,
 "startColumn":  39,
@@ -17,7 +17,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "akka.net\src\examples\PersistenceExample\AtLeastOnceDeliveryExampleActor.cs",
+"uri":  "sources\akka.net\src\examples\PersistenceExample\AtLeastOnceDeliveryExampleActor.cs",
 "region":  {
 "startLine":  81,
 "startColumn":  39,
@@ -30,7 +30,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "akka.net\src\examples\PersistenceExample\AtLeastOnceDeliveryExampleActor.cs",
+"uri":  "sources\akka.net\src\examples\PersistenceExample\AtLeastOnceDeliveryExampleActor.cs",
 "region":  {
 "startLine":  110,
 "startColumn":  35,
@@ -43,7 +43,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "akka.net\src\examples\PersistenceExample\AtLeastOnceDeliveryExampleActor.cs",
+"uri":  "sources\akka.net\src\examples\PersistenceExample\AtLeastOnceDeliveryExampleActor.cs",
 "region":  {
 "startLine":  114,
 "startColumn":  47,
@@ -56,7 +56,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "akka.net\src\examples\PersistenceExample\AtLeastOnceDeliveryExampleActor.cs",
+"uri":  "sources\akka.net\src\examples\PersistenceExample\AtLeastOnceDeliveryExampleActor.cs",
 "region":  {
 "startLine":  122,
 "startColumn":  35,
@@ -69,7 +69,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "akka.net\src\examples\PersistenceExample\AtLeastOnceDeliveryExampleActor.cs",
+"uri":  "sources\akka.net\src\examples\PersistenceExample\AtLeastOnceDeliveryExampleActor.cs",
 "region":  {
 "startLine":  141,
 "startColumn":  47,
@@ -82,7 +82,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "akka.net\src\examples\PersistenceExample\ExampleView.cs",
+"uri":  "sources\akka.net\src\examples\PersistenceExample\ExampleView.cs",
 "region":  {
 "startLine":  24,
 "startColumn":  35,
@@ -95,7 +95,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "akka.net\src\examples\PersistenceExample\ExampleView.cs",
+"uri":  "sources\akka.net\src\examples\PersistenceExample\ExampleView.cs",
 "region":  {
 "startLine":  31,
 "startColumn":  35,
@@ -108,7 +108,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "akka.net\src\examples\PersistenceExample\ExampleView.cs",
+"uri":  "sources\akka.net\src\examples\PersistenceExample\ExampleView.cs",
 "region":  {
 "startLine":  36,
 "startColumn":  35,
@@ -121,7 +121,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "akka.net\src\examples\PersistenceExample\ExampleView.cs",
+"uri":  "sources\akka.net\src\examples\PersistenceExample\ExampleView.cs",
 "region":  {
 "startLine":  41,
 "startColumn":  35,
@@ -134,7 +134,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "akka.net\src\examples\PersistenceExample\ExampleView.cs",
+"uri":  "sources\akka.net\src\examples\PersistenceExample\ExampleView.cs",
 "region":  {
 "startLine":  46,
 "startColumn":  35,
@@ -147,7 +147,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "akka.net\src\examples\PersistenceExample\Program.cs",
+"uri":  "sources\akka.net\src\examples\PersistenceExample\Program.cs",
 "region":  {
 "startLine":  40,
 "startColumn":  31,
@@ -160,7 +160,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "akka.net\src\examples\PersistenceExample\Program.cs",
+"uri":  "sources\akka.net\src\examples\PersistenceExample\Program.cs",
 "region":  {
 "startLine":  44,
 "startColumn":  27,
@@ -173,7 +173,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "akka.net\src\examples\PersistenceExample\Program.cs",
+"uri":  "sources\akka.net\src\examples\PersistenceExample\Program.cs",
 "region":  {
 "startLine":  49,
 "startColumn":  27,
@@ -186,7 +186,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "akka.net\src\examples\PersistenceExample\Program.cs",
+"uri":  "sources\akka.net\src\examples\PersistenceExample\Program.cs",
 "region":  {
 "startLine":  53,
 "startColumn":  31,
@@ -199,7 +199,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "akka.net\src\examples\PersistenceExample\Program.cs",
+"uri":  "sources\akka.net\src\examples\PersistenceExample\Program.cs",
 "region":  {
 "startLine":  54,
 "startColumn":  28,
@@ -212,7 +212,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "akka.net\src\examples\PersistenceExample\Program.cs",
+"uri":  "sources\akka.net\src\examples\PersistenceExample\Program.cs",
 "region":  {
 "startLine":  58,
 "startColumn":  31,
@@ -225,7 +225,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "akka.net\src\examples\PersistenceExample\Program.cs",
+"uri":  "sources\akka.net\src\examples\PersistenceExample\Program.cs",
 "region":  {
 "startLine":  61,
 "startColumn":  31,
@@ -238,7 +238,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "akka.net\src\examples\PersistenceExample\Program.cs",
+"uri":  "sources\akka.net\src\examples\PersistenceExample\Program.cs",
 "region":  {
 "startLine":  62,
 "startColumn":  27,
@@ -251,7 +251,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "akka.net\src\examples\PersistenceExample\Program.cs",
+"uri":  "sources\akka.net\src\examples\PersistenceExample\Program.cs",
 "region":  {
 "startLine":  68,
 "startColumn":  31,
@@ -264,7 +264,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "akka.net\src\examples\PersistenceExample\Program.cs",
+"uri":  "sources\akka.net\src\examples\PersistenceExample\Program.cs",
 "region":  {
 "startLine":  72,
 "startColumn":  99,
@@ -277,7 +277,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "akka.net\src\examples\PersistenceExample\Program.cs",
+"uri":  "sources\akka.net\src\examples\PersistenceExample\Program.cs",
 "region":  {
 "startLine":  73,
 "startColumn":  99,
@@ -290,7 +290,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "akka.net\src\examples\PersistenceExample\Program.cs",
+"uri":  "sources\akka.net\src\examples\PersistenceExample\Program.cs",
 "region":  {
 "startLine":  78,
 "startColumn":  31,
@@ -303,7 +303,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "akka.net\src\examples\PersistenceExample\Program.cs",
+"uri":  "sources\akka.net\src\examples\PersistenceExample\Program.cs",
 "region":  {
 "startLine":  82,
 "startColumn":  23,
@@ -316,7 +316,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "akka.net\src\examples\PersistenceExample\Program.cs",
+"uri":  "sources\akka.net\src\examples\PersistenceExample\Program.cs",
 "region":  {
 "startLine":  83,
 "startColumn":  23,
@@ -329,7 +329,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "akka.net\src\examples\PersistenceExample\Program.cs",
+"uri":  "sources\akka.net\src\examples\PersistenceExample\Program.cs",
 "region":  {
 "startLine":  86,
 "startColumn":  23,
@@ -342,7 +342,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "akka.net\src\examples\PersistenceExample\Program.cs",
+"uri":  "sources\akka.net\src\examples\PersistenceExample\Program.cs",
 "region":  {
 "startLine":  89,
 "startColumn":  23,
@@ -355,7 +355,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "akka.net\src\examples\PersistenceExample\Program.cs",
+"uri":  "sources\akka.net\src\examples\PersistenceExample\Program.cs",
 "region":  {
 "startLine":  90,
 "startColumn":  23,
@@ -368,7 +368,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "akka.net\src\examples\PersistenceExample\Program.cs",
+"uri":  "sources\akka.net\src\examples\PersistenceExample\Program.cs",
 "region":  {
 "startLine":  93,
 "startColumn":  23,
@@ -381,7 +381,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "akka.net\src\examples\PersistenceExample\Program.cs",
+"uri":  "sources\akka.net\src\examples\PersistenceExample\Program.cs",
 "region":  {
 "startLine":  114,
 "startColumn":  31,
@@ -394,7 +394,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "akka.net\src\examples\PersistenceExample\Program.cs",
+"uri":  "sources\akka.net\src\examples\PersistenceExample\Program.cs",
 "region":  {
 "startLine":  117,
 "startColumn":  23,
@@ -407,7 +407,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "akka.net\src\examples\PersistenceExample\Program.cs",
+"uri":  "sources\akka.net\src\examples\PersistenceExample\Program.cs",
 "region":  {
 "startLine":  118,
 "startColumn":  23,
@@ -420,7 +420,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "akka.net\src\examples\PersistenceExample\Program.cs",
+"uri":  "sources\akka.net\src\examples\PersistenceExample\Program.cs",
 "region":  {
 "startLine":  120,
 "startColumn":  23,
@@ -433,7 +433,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "akka.net\src\examples\PersistenceExample\Program.cs",
+"uri":  "sources\akka.net\src\examples\PersistenceExample\Program.cs",
 "region":  {
 "startLine":  121,
 "startColumn":  23,
@@ -446,7 +446,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "akka.net\src\examples\PersistenceExample\Program.cs",
+"uri":  "sources\akka.net\src\examples\PersistenceExample\Program.cs",
 "region":  {
 "startLine":  122,
 "startColumn":  23,
@@ -459,7 +459,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "akka.net\src\examples\PersistenceExample\Program.cs",
+"uri":  "sources\akka.net\src\examples\PersistenceExample\Program.cs",
 "region":  {
 "startLine":  123,
 "startColumn":  23,
@@ -472,7 +472,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "akka.net\src\examples\PersistenceExample\Program.cs",
+"uri":  "sources\akka.net\src\examples\PersistenceExample\Program.cs",
 "region":  {
 "startLine":  124,
 "startColumn":  23,
@@ -485,7 +485,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "akka.net\src\examples\PersistenceExample\Program.cs",
+"uri":  "sources\akka.net\src\examples\PersistenceExample\Program.cs",
 "region":  {
 "startLine":  125,
 "startColumn":  23,
@@ -498,7 +498,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "akka.net\src\examples\PersistenceExample\Program.cs",
+"uri":  "sources\akka.net\src\examples\PersistenceExample\Program.cs",
 "region":  {
 "startLine":  136,
 "startColumn":  31,
@@ -511,7 +511,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "akka.net\src\examples\PersistenceExample\Program.cs",
+"uri":  "sources\akka.net\src\examples\PersistenceExample\Program.cs",
 "region":  {
 "startLine":  147,
 "startColumn":  23,
@@ -524,7 +524,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "akka.net\src\examples\PersistenceExample\Program.cs",
+"uri":  "sources\akka.net\src\examples\PersistenceExample\Program.cs",
 "region":  {
 "startLine":  153,
 "startColumn":  23,
@@ -537,7 +537,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "akka.net\src\examples\PersistenceExample\ViewExampleActor.cs",
+"uri":  "sources\akka.net\src\examples\PersistenceExample\ViewExampleActor.cs",
 "region":  {
 "startLine":  33,
 "startColumn":  35,

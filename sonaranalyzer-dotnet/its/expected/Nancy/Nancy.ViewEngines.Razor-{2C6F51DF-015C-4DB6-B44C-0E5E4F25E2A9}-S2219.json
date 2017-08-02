@@ -4,7 +4,7 @@
 "id":  "S2219",
 "message":  "Use the 'is' operator instead.",
 "location":  {
-"uri":  "Nancy\src\Nancy.ViewEngines.Razor\RazorViewEngine.cs",
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\RazorViewEngine.cs",
 "region":  {
 "startLine":  299,
 "startColumn":  17,

@@ -5,7 +5,7 @@
 "message":  "Fix this implementation of 'IDisposable' to conform to the dispose pattern.",
 "location":  [
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterMetricsCollector.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterMetricsCollector.cs",
 "region":  {
 "startLine":  729,
 "startColumn":  20,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterMetricsCollector.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterMetricsCollector.cs",
 "region":  {
 "startLine":  729,
 "startColumn":  20,
@@ -23,7 +23,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterMetricsCollector.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterMetricsCollector.cs",
 "region":  {
 "startLine":  840,
 "startColumn":  21,

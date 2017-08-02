@@ -4,7 +4,7 @@
 "id":  "S1227",
 "message":  "Refactor the code in order to remove this break statement.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Routing\ResizerSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Routing\ResizerSpec.cs",
 "region":  {
 "startLine":  215,
 "startColumn":  25,

@@ -4,7 +4,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'Akka.Actor.IActorRefFactory' instead of 'Akka.Actor.ActorSystem'.",
 "location":  {
-"uri":  "akka.net\src\benchmark\PersistenceBenchmark\Program.cs",
+"uri":  "sources\akka.net\src\benchmark\PersistenceBenchmark\Program.cs",
 "region":  {
 "startLine":  35,
 "startColumn":  67,
@@ -17,7 +17,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'Akka.Actor.IActorRefFactory' instead of 'Akka.Actor.ActorSystem'.",
 "location":  {
-"uri":  "akka.net\src\benchmark\PersistenceBenchmark\Program.cs",
+"uri":  "sources\akka.net\src\benchmark\PersistenceBenchmark\Program.cs",
 "region":  {
 "startLine":  41,
 "startColumn":  65,
@@ -30,7 +30,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'Akka.Actor.IActorRefFactory' instead of 'Akka.Actor.ActorSystem'.",
 "location":  {
-"uri":  "akka.net\src\benchmark\PersistenceBenchmark\Program.cs",
+"uri":  "sources\akka.net\src\benchmark\PersistenceBenchmark\Program.cs",
 "region":  {
 "startLine":  47,
 "startColumn":  58,
@@ -43,7 +43,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'Akka.Actor.IActorRefFactory' instead of 'Akka.Actor.ActorSystem'.",
 "location":  {
-"uri":  "akka.net\src\benchmark\PersistenceBenchmark\Program.cs",
+"uri":  "sources\akka.net\src\benchmark\PersistenceBenchmark\Program.cs",
 "region":  {
 "startLine":  53,
 "startColumn":  71,

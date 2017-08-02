@@ -4,7 +4,7 @@
 "id":  "S1751",
 "message":  "Remove this 'throw' statement or make it conditional.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Pattern\CircuitBreakerSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Pattern\CircuitBreakerSpec.cs",
 "region":  {
 "startLine":  285,
 "startColumn":  25,

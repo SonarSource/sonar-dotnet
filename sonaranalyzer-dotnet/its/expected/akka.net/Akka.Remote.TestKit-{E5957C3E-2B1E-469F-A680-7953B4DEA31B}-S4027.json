@@ -4,7 +4,7 @@
 "id":  "S4027",
 "message":  "Implement the missing constructors for this exception.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
 "region":  {
 "startLine":  124,
 "startColumn":  29,
@@ -17,7 +17,7 @@
 "id":  "S4027",
 "message":  "Implement the missing constructors for this exception.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
 "region":  {
 "startLine":  162,
 "startColumn":  29,
@@ -30,7 +30,7 @@
 "id":  "S4027",
 "message":  "Implement the missing constructors for this exception.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
 "region":  {
 "startLine":  200,
 "startColumn":  29,
@@ -43,7 +43,7 @@
 "id":  "S4027",
 "message":  "Implement the missing constructors for this exception.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
 "region":  {
 "startLine":  244,
 "startColumn":  29,
@@ -56,7 +56,7 @@
 "id":  "S4027",
 "message":  "Implement the missing constructors for this exception.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
 "region":  {
 "startLine":  294,
 "startColumn":  29,
@@ -69,7 +69,7 @@
 "id":  "S4027",
 "message":  "Implement the missing constructors for this exception.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
 "region":  {
 "startLine":  332,
 "startColumn":  29,
@@ -82,7 +82,7 @@
 "id":  "S4027",
 "message":  "Implement the missing constructors for this exception.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
 "region":  {
 "startLine":  77,
 "startColumn":  22,
@@ -95,7 +95,7 @@
 "id":  "S4027",
 "message":  "Implement the missing constructors for this exception.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
 "region":  {
 "startLine":  268,
 "startColumn":  24,

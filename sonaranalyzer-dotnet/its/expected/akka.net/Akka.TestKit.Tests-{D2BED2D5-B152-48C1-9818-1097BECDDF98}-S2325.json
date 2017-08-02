@@ -4,7 +4,7 @@
 "id":  "S2325",
 "message":  "Make 'AssertThread' a static method.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.TestKit.Tests\TestActorRefTests\TestActorRefSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.TestKit.Tests\TestActorRefTests\TestActorRefSpec.cs",
 "region":  {
 "startLine":  38,
 "startColumn":  22,

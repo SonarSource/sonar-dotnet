@@ -4,7 +4,7 @@
 "id":  "S2325",
 "message":  "Make 'ShouldBe' a static method.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.Tests\AccrualFailureDetectorSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests\AccrualFailureDetectorSpec.cs",
 "region":  {
 "startLine":  252,
 "startColumn":  24,
@@ -17,7 +17,7 @@
 "id":  "S2325",
 "message":  "Make 'Msg' a static method.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.Tests\AckedDeliverySpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests\AckedDeliverySpec.cs",
 "region":  {
 "startLine":  39,
 "startColumn":  27,
@@ -30,7 +30,7 @@
 "id":  "S2325",
 "message":  "Make 'Happened' a static method.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.Tests\AckedDeliverySpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests\AckedDeliverySpec.cs",
 "region":  {
 "startLine":  300,
 "startColumn":  21,
@@ -43,7 +43,7 @@
 "id":  "S2325",
 "message":  "Make 'CreateFailureDetector' a static method.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.Tests\DeadlineFailureDetectorSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests\DeadlineFailureDetectorSpec.cs",
 "region":  {
 "startLine":  106,
 "startColumn":  41,
@@ -56,7 +56,7 @@
 "id":  "S2325",
 "message":  "Make 'GetOtherRemoteSysConfig' a static method.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.Tests\RemotingSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests\RemotingSpec.cs",
 "region":  {
 "startLine":  89,
 "startColumn":  26,
@@ -69,7 +69,7 @@
 "id":  "S2325",
 "message":  "Make 'Addr' a static method.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.Tests\RemotingSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests\RemotingSpec.cs",
 "region":  {
 "startLine":  335,
 "startColumn":  25,
@@ -82,7 +82,7 @@
 "id":  "S2325",
 "message":  "Make 'Deploy' a static method.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.Tests\RemotingSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests\RemotingSpec.cs",
 "region":  {
 "startLine":  345,
 "startColumn":  22,
@@ -95,7 +95,7 @@
 "id":  "S2325",
 "message":  "Make 'AssertDaemonMsgCreate' a static method.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.Tests\Serialization\DaemonMsgCreateSerializerSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests\Serialization\DaemonMsgCreateSerializerSpec.cs",
 "region":  {
 "startLine":  95,
 "startColumn":  22,

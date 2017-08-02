@@ -4,7 +4,7 @@
 "id":  "S4058",
 "message":  "Change this call to 't.Name.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "akka.net\src\contrib\dependencyInjection\Akka.DI.Core\Extensions.cs",
+"uri":  "sources\akka.net\src\contrib\dependencyInjection\Akka.DI.Core\Extensions.cs",
 "region":  {
 "startLine":  49,
 "startColumn":  42,

@@ -5,7 +5,7 @@
 "message":  "Fix this implementation of 'IDisposable' to conform to the dispose pattern.",
 "location":  [
 {
-"uri":  "akka.net\src\core\Akka\Actor\ActorSystem.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorSystem.cs",
 "region":  {
 "startLine":  36,
 "startColumn":  27,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Actor\ActorSystem.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorSystem.cs",
 "region":  {
 "startLine":  36,
 "startColumn":  27,
@@ -23,7 +23,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Actor\ActorSystem.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorSystem.cs",
 "region":  {
 "startLine":  206,
 "startColumn":  21,
@@ -38,7 +38,7 @@
 "message":  "Fix this implementation of 'IDisposable' to conform to the dispose pattern.",
 "location":  [
 {
-"uri":  "akka.net\src\core\Akka\Dispatch\ConcurrentQueueMailbox.cs",
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\ConcurrentQueueMailbox.cs",
 "region":  {
 "startLine":  25,
 "startColumn":  18,
@@ -47,7 +47,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Dispatch\ConcurrentQueueMailbox.cs",
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\ConcurrentQueueMailbox.cs",
 "region":  {
 "startLine":  179,
 "startColumn":  33,
@@ -62,7 +62,7 @@
 "message":  "Fix this implementation of 'IDisposable' to conform to the dispose pattern.",
 "location":  [
 {
-"uri":  "akka.net\src\core\Akka\Dispatch\GenericMailbox.cs",
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\GenericMailbox.cs",
 "region":  {
 "startLine":  19,
 "startColumn":  27,
@@ -71,7 +71,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Dispatch\GenericMailbox.cs",
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\GenericMailbox.cs",
 "region":  {
 "startLine":  200,
 "startColumn":  33,
@@ -86,7 +86,7 @@
 "message":  "Fix this implementation of 'IDisposable' to conform to the dispose pattern.",
 "location":  [
 {
-"uri":  "akka.net\src\core\Akka\Helios.Concurrency.DedicatedThreadPool.cs",
+"uri":  "sources\akka.net\src\core\Akka\Helios.Concurrency.DedicatedThreadPool.cs",
 "region":  {
 "startLine":  224,
 "startColumn":  20,
@@ -95,7 +95,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Helios.Concurrency.DedicatedThreadPool.cs",
+"uri":  "sources\akka.net\src\core\Akka\Helios.Concurrency.DedicatedThreadPool.cs",
 "region":  {
 "startLine":  224,
 "startColumn":  20,
@@ -104,7 +104,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Helios.Concurrency.DedicatedThreadPool.cs",
+"uri":  "sources\akka.net\src\core\Akka\Helios.Concurrency.DedicatedThreadPool.cs",
 "region":  {
 "startLine":  350,
 "startColumn":  21,
@@ -119,7 +119,7 @@
 "message":  "Fix this implementation of 'IDisposable' to conform to the dispose pattern.",
 "location":  [
 {
-"uri":  "akka.net\src\core\Akka\Helios.Concurrency.DedicatedThreadPool.cs",
+"uri":  "sources\akka.net\src\core\Akka\Helios.Concurrency.DedicatedThreadPool.cs",
 "region":  {
 "startLine":  226,
 "startColumn":  24,
@@ -128,7 +128,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Helios.Concurrency.DedicatedThreadPool.cs",
+"uri":  "sources\akka.net\src\core\Akka\Helios.Concurrency.DedicatedThreadPool.cs",
 "region":  {
 "startLine":  226,
 "startColumn":  24,
@@ -137,7 +137,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Helios.Concurrency.DedicatedThreadPool.cs",
+"uri":  "sources\akka.net\src\core\Akka\Helios.Concurrency.DedicatedThreadPool.cs",
 "region":  {
 "startLine":  260,
 "startColumn":  25,
@@ -152,7 +152,7 @@
 "message":  "Fix this implementation of 'IDisposable' to conform to the dispose pattern.",
 "location":  [
 {
-"uri":  "akka.net\src\core\Akka\Util\ByteIterator.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\ByteIterator.cs",
 "region":  {
 "startLine":  522,
 "startColumn":  23,
@@ -161,7 +161,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Util\ByteIterator.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\ByteIterator.cs",
 "region":  {
 "startLine":  522,
 "startColumn":  23,
@@ -170,7 +170,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Util\ByteIterator.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\ByteIterator.cs",
 "region":  {
 "startLine":  534,
 "startColumn":  25,

@@ -4,7 +4,7 @@
 "id":  "S3052",
 "message":  "Remove this initialization to 'ExitCode', the compiler will do that for you.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.MultiNodeTestRunner.Shared\ExitCodeContainer.cs",
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\ExitCodeContainer.cs",
 "region":  {
 "startLine":  19,
 "startColumn":  36,
@@ -17,7 +17,7 @@
 "id":  "S3052",
 "message":  "Remove this initialization to 'TotalReceiveClosedConfirmations', the compiler will do that for you.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\SinkCoordinator.cs",
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\SinkCoordinator.cs",
 "region":  {
 "startLine":  85,
 "startColumn":  55,
@@ -30,7 +30,7 @@
 "id":  "S3052",
 "message":  "Remove this initialization to 'ReceivedSinkCloseConfirmations', the compiler will do that for you.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\SinkCoordinator.cs",
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\SinkCoordinator.cs",
 "region":  {
 "startLine":  86,
 "startColumn":  54,

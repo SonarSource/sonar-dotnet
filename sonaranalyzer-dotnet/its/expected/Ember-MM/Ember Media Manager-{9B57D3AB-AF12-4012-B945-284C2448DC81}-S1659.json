@@ -4,7 +4,7 @@
 "id":  "S1659",
 "message":  "Declare 'CurrentY' in a separate statement.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgAbout.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgAbout.vb",
 "region":  {
 "startLine":  279,
 "startColumn":  33,
@@ -17,7 +17,7 @@
 "id":  "S1659",
 "message":  "Declare 'FontMod' in a separate statement.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgAbout.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgAbout.vb",
 "region":  {
 "startLine":  279,
 "startColumn":  53,
@@ -30,7 +30,7 @@
 "id":  "S1659",
 "message":  "Declare 'i' in a separate statement.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgManualEdit.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgManualEdit.vb",
 "region":  {
 "startLine":  138,
 "startColumn":  33,
@@ -43,7 +43,7 @@
 "id":  "S1659",
 "message":  "Declare 'j' in a separate statement.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgManualEdit.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgManualEdit.vb",
 "region":  {
 "startLine":  169,
 "startColumn":  25,
@@ -56,7 +56,7 @@
 "id":  "S1659",
 "message":  "Declare 'TabC' in a separate statement.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgManualEdit.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgManualEdit.vb",
 "region":  {
 "startLine":  169,
 "startColumn":  39,
@@ -69,7 +69,7 @@
 "id":  "S1659",
 "message":  "Declare 'colN' in a separate statement.",
 "location":  {
-"uri":  "Ember-MM\Ember%20Media%20Manager\dlgManualEdit.vb",
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgManualEdit.vb",
 "region":  {
 "startLine":  272,
 "startColumn":  19,

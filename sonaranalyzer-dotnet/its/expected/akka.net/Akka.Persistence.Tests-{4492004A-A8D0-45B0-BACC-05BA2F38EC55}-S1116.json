@@ -4,7 +4,7 @@
 "id":  "S1116",
 "message":  "Remove this empty statement.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence.Tests\EndToEndEventAdapterSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\EndToEndEventAdapterSpec.cs",
 "region":  {
 "startLine":  244,
 "startColumn":  51,
@@ -17,7 +17,7 @@
 "id":  "S1116",
 "message":  "Remove this empty statement.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence.Tests\MemoryEventAdapterSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\MemoryEventAdapterSpec.cs",
 "region":  {
 "startLine":  212,
 "startColumn":  51,

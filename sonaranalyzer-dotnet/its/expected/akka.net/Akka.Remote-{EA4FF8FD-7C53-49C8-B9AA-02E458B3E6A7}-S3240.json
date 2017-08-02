@@ -4,7 +4,7 @@
 "id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\AckedDelivery.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\AckedDelivery.cs",
 "region":  {
 "startLine":  147,
 "startColumn":  17,
@@ -17,7 +17,7 @@
 "id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\Deadline.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Deadline.cs",
 "region":  {
 "startLine":  86,
 "startColumn":  13,
@@ -30,7 +30,7 @@
 "id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
 "region":  {
 "startLine":  806,
 "startColumn":  13,
@@ -43,7 +43,7 @@
 "id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
 "region":  {
 "startLine":  309,
 "startColumn":  17,
@@ -56,7 +56,7 @@
 "id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
 "region":  {
 "startLine":  822,
 "startColumn":  13,
@@ -69,7 +69,7 @@
 "id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\PhiAccrualFailureDetector.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\PhiAccrualFailureDetector.cs",
 "region":  {
 "startLine":  160,
 "startColumn":  17,
@@ -82,7 +82,7 @@
 "id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\PhiAccrualFailureDetector.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\PhiAccrualFailureDetector.cs",
 "region":  {
 "startLine":  211,
 "startColumn":  13,
@@ -95,7 +95,7 @@
 "id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\PhiAccrualFailureDetector.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\PhiAccrualFailureDetector.cs",
 "region":  {
 "startLine":  281,
 "startColumn":  13,
@@ -108,7 +108,7 @@
 "id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\RemoteSettings.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSettings.cs",
 "region":  {
 "startLine":  25,
 "startColumn":  13,
@@ -121,7 +121,7 @@
 "id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\RemoteWatcher.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteWatcher.cs",
 "region":  {
 "startLine":  346,
 "startColumn":  13,
@@ -134,7 +134,7 @@
 "id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\Serialization\DaemonMsgCreateSerializer.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\DaemonMsgCreateSerializer.cs",
 "region":  {
 "startLine":  177,
 "startColumn":  13,
@@ -147,7 +147,7 @@
 "id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\Serialization\DaemonMsgCreateSerializer.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\DaemonMsgCreateSerializer.cs",
 "region":  {
 "startLine":  183,
 "startColumn":  13,
@@ -160,7 +160,7 @@
 "id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\Serialization\DaemonMsgCreateSerializer.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\DaemonMsgCreateSerializer.cs",
 "region":  {
 "startLine":  189,
 "startColumn":  13,
@@ -173,7 +173,7 @@
 "id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\Serialization\DaemonMsgCreateSerializer.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Serialization\DaemonMsgCreateSerializer.cs",
 "region":  {
 "startLine":  195,
 "startColumn":  13,
@@ -186,7 +186,7 @@
 "id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
 "region":  {
 "startLine":  782,
 "startColumn":  21,
@@ -199,7 +199,7 @@
 "id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
 "region":  {
 "startLine":  797,
 "startColumn":  21,
@@ -212,7 +212,7 @@
 "id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
 "region":  {
 "startLine":  402,
 "startColumn":  13,
@@ -225,7 +225,7 @@
 "id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
 "region":  {
 "startLine":  411,
 "startColumn":  13,

@@ -4,7 +4,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'string.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence.Tests\AtLeastOnceDeliveryReceiveActorSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\AtLeastOnceDeliveryReceiveActorSpec.cs",
 "region":  {
 "startLine":  51,
 "startColumn":  42,
@@ -17,7 +17,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'string.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence.Tests\AtLeastOnceDeliverySpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\AtLeastOnceDeliverySpec.cs",
 "region":  {
 "startLine":  249,
 "startColumn":  42,
@@ -30,7 +30,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'm.Payload.ToString().StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence.Tests\EndToEndEventAdapterSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\EndToEndEventAdapterSpec.cs",
 "region":  {
 "startLine":  122,
 "startColumn":  50,
@@ -43,7 +43,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'm.Payload.ToString().StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence.Tests\EndToEndEventAdapterSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\EndToEndEventAdapterSpec.cs",
 "region":  {
 "startLine":  149,
 "startColumn":  50,
@@ -56,7 +56,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'm.Payload.ToString().StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence.Tests\EndToEndEventAdapterSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\EndToEndEventAdapterSpec.cs",
 "region":  {
 "startLine":  176,
 "startColumn":  50,
@@ -69,7 +69,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'm.Payload.ToString().StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence.Tests\EndToEndEventAdapterSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\EndToEndEventAdapterSpec.cs",
 "region":  {
 "startLine":  203,
 "startColumn":  50,
@@ -82,7 +82,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'CountryCode.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence.Tests\MemoryEventAdapterSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\MemoryEventAdapterSpec.cs",
 "region":  {
 "startLine":  114,
 "startColumn":  61,
@@ -95,7 +95,7 @@
 "id":  "S4058",
 "message":  "Change this call to '_failAt.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence.Tests\PersistentViewSpec.Actors.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\PersistentViewSpec.Actors.cs",
 "region":  {
 "startLine":  145,
 "startColumn":  43,

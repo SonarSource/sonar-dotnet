@@ -4,7 +4,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests.Shared.Internals\AkkaSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\AkkaSpec.cs",
 "region":  {
 "startLine":  43,
 "startColumn":  65,
@@ -17,7 +17,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests.Shared.Internals\AkkaSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\AkkaSpec.cs",
 "region":  {
 "startLine":  48,
 "startColumn":  39,
@@ -30,7 +30,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests.Shared.Internals\AkkaSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\AkkaSpec.cs",
 "region":  {
 "startLine":  48,
 "startColumn":  72,
@@ -43,7 +43,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests.Shared.Internals\AkkaSpecExtensions.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\AkkaSpecExtensions.cs",
 "region":  {
 "startLine":  35,
 "startColumn":  80,
@@ -56,7 +56,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests.Shared.Internals\AkkaSpecExtensions.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\AkkaSpecExtensions.cs",
 "region":  {
 "startLine":  40,
 "startColumn":  83,
@@ -69,7 +69,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests.Shared.Internals\AkkaSpecExtensions.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\AkkaSpecExtensions.cs",
 "region":  {
 "startLine":  45,
 "startColumn":  84,
@@ -82,7 +82,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests.Shared.Internals\AkkaSpecExtensions.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\AkkaSpecExtensions.cs",
 "region":  {
 "startLine":  50,
 "startColumn":  87,
@@ -95,7 +95,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests.Shared.Internals\AkkaSpecExtensions.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\AkkaSpecExtensions.cs",
 "region":  {
 "startLine":  55,
 "startColumn":  69,
@@ -108,7 +108,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests.Shared.Internals\AkkaSpecExtensions.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\AkkaSpecExtensions.cs",
 "region":  {
 "startLine":  60,
 "startColumn":  70,
@@ -121,7 +121,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests.Shared.Internals\AkkaSpecExtensions.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\AkkaSpecExtensions.cs",
 "region":  {
 "startLine":  65,
 "startColumn":  87,
@@ -134,7 +134,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests.Shared.Internals\AkkaSpecExtensions.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\AkkaSpecExtensions.cs",
 "region":  {
 "startLine":  71,
 "startColumn":  92,
@@ -147,7 +147,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests.Shared.Internals\AkkaSpecExtensions.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\AkkaSpecExtensions.cs",
 "region":  {
 "startLine":  77,
 "startColumn":  90,
@@ -160,7 +160,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests.Shared.Internals\AkkaSpecExtensions.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\AkkaSpecExtensions.cs",
 "region":  {
 "startLine":  83,
 "startColumn":  93,
@@ -173,7 +173,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests.Shared.Internals\AkkaSpecExtensions.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\AkkaSpecExtensions.cs",
 "region":  {
 "startLine":  89,
 "startColumn":  88,

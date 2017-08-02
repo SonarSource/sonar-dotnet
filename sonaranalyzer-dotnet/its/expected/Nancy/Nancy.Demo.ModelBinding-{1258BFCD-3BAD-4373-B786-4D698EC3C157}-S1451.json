@@ -4,7 +4,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Demo.ModelBinding\CustomersModule.cs",
+"uri":  "sources\Nancy\src\Nancy.Demo.ModelBinding\CustomersModule.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -17,7 +17,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Demo.ModelBinding\Database\DB.cs",
+"uri":  "sources\Nancy\src\Nancy.Demo.ModelBinding\Database\DB.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -30,7 +30,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Demo.ModelBinding\EventsModule.cs",
+"uri":  "sources\Nancy\src\Nancy.Demo.ModelBinding\EventsModule.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -43,7 +43,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Demo.ModelBinding\JsonModule.cs",
+"uri":  "sources\Nancy\src\Nancy.Demo.ModelBinding\JsonModule.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -56,7 +56,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Demo.ModelBinding\MainModule.cs",
+"uri":  "sources\Nancy\src\Nancy.Demo.ModelBinding\MainModule.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -69,7 +69,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Demo.ModelBinding\ModelBinders\CustomerModelBinder.cs",
+"uri":  "sources\Nancy\src\Nancy.Demo.ModelBinding\ModelBinders\CustomerModelBinder.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -82,7 +82,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Demo.ModelBinding\ModelBindingBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Demo.ModelBinding\ModelBindingBootstrapper.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -95,7 +95,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Demo.ModelBinding\Models\Customer.cs",
+"uri":  "sources\Nancy\src\Nancy.Demo.ModelBinding\Models\Customer.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -108,7 +108,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Demo.ModelBinding\Models\Event.cs",
+"uri":  "sources\Nancy\src\Nancy.Demo.ModelBinding\Models\Event.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -121,7 +121,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Demo.ModelBinding\Models\User.cs",
+"uri":  "sources\Nancy\src\Nancy.Demo.ModelBinding\Models\User.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -134,7 +134,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Demo.ModelBinding\XmlModule.cs",
+"uri":  "sources\Nancy\src\Nancy.Demo.ModelBinding\XmlModule.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -147,7 +147,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\SharedAssemblyInfo.cs",
+"uri":  "sources\Nancy\src\SharedAssemblyInfo.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,

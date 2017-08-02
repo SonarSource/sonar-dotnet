@@ -4,7 +4,7 @@
 "id":  "S2933",
 "message":  "Make 'clrTypeResolver' 'readonly'.",
 "location":  {
-"uri":  "Nancy\src\Nancy.ViewEngines.Razor\VisualBasic\NancyVisualBasicRazorCodeParser.cs",
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\VisualBasic\NancyVisualBasicRazorCodeParser.cs",
 "region":  {
 "startLine":  20,
 "startColumn":  44,

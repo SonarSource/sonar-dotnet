@@ -4,7 +4,7 @@
 "id":  "S1144",
 "message":  "Remove the unused internal type 'IllustrateGracefulShutdown'.",
 "location":  {
-"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Sharding.Tests\ClusterShardingGracefulShutdownSpec.cs",
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding.Tests\ClusterShardingGracefulShutdownSpec.cs",
 "region":  {
 "startLine":  71,
 "startColumn":  9,
@@ -17,7 +17,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private method 'CreateCoordinator'.",
 "location":  {
-"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Sharding.Tests\ClusterShardingSpec.cs",
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding.Tests\ClusterShardingSpec.cs",
 "region":  {
 "startLine":  290,
 "startColumn":  9,

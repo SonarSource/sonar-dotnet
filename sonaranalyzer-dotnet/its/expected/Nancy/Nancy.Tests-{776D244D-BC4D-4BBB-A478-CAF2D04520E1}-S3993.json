@@ -4,7 +4,7 @@
 "id":  "S3993",
 "message":  "Specify AttributeUsage on 'SkippableFactAttribute' to improve readability, even though it inherits it from its base type.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\xUnitExtensions\SkippableFactAttribute.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\xUnitExtensions\SkippableFactAttribute.cs",
 "region":  {
 "startLine":  8,
 "startColumn":  18,

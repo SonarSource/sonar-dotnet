@@ -4,7 +4,7 @@
 "id":  "S2325",
 "message":  "Make 'GoTo' a static method.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Fsm\PersistentFSMBase.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Fsm\PersistentFSMBase.cs",
 "region":  {
 "startLine":  182,
 "startColumn":  45,
@@ -17,7 +17,7 @@
 "id":  "S2325",
 "message":  "Make 'Transform' a static method.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Fsm\PersistentFSMBase.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Fsm\PersistentFSMBase.cs",
 "region":  {
 "startLine":  321,
 "startColumn":  32,
@@ -30,7 +30,7 @@
 "id":  "S2325",
 "message":  "Make 'GetSourceString' a static method.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Fsm\PersistentFSMBase.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Fsm\PersistentFSMBase.cs",
 "region":  {
 "startLine":  404,
 "startColumn":  24,
@@ -43,7 +43,7 @@
 "id":  "S2325",
 "message":  "Make 'PersistenceId' a static method.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Persistence.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistence.cs",
 "region":  {
 "startLine":  70,
 "startColumn":  23,
@@ -56,7 +56,7 @@
 "id":  "S2325",
 "message":  "Make 'Become' a static method.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\PersistentActor.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\PersistentActor.cs",
 "region":  {
 "startLine":  168,
 "startColumn":  24,
@@ -69,7 +69,7 @@
 "id":  "S2325",
 "message":  "Make 'BecomeStacked' a static method.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\PersistentActor.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\PersistentActor.cs",
 "region":  {
 "startLine":  180,
 "startColumn":  24,
@@ -82,7 +82,7 @@
 "id":  "S2325",
 "message":  "Make 'BuildNewReceiveHandler' a static method.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\PersistentActor.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\PersistentActor.cs",
 "region":  {
 "startLine":  216,
 "startColumn":  39,
@@ -95,7 +95,7 @@
 "id":  "S2325",
 "message":  "Make 'WriteInt' a static method.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Serialization\SnapshotSerializer.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Serialization\SnapshotSerializer.cs",
 "region":  {
 "startLine":  150,
 "startColumn":  22,
@@ -108,7 +108,7 @@
 "id":  "S2325",
 "message":  "Make 'ReadInt' a static method.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Serialization\SnapshotSerializer.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Serialization\SnapshotSerializer.cs",
 "region":  {
 "startLine":  158,
 "startColumn":  21,
@@ -121,7 +121,7 @@
 "id":  "S2325",
 "message":  "Make 'ExtractSnapshotMetadata' a static method.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Snapshot\LocalSnapshotStore.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot\LocalSnapshotStore.cs",
 "region":  {
 "startLine":  195,
 "startColumn":  34,

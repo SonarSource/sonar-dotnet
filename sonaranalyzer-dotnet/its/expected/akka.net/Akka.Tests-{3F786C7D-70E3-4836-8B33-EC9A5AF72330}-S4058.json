@@ -4,7 +4,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'e.Message.StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\Cancellation\CancelableTests.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\Cancellation\CancelableTests.cs",
 "region":  {
 "startLine":  64,
 "startColumn":  22,
@@ -17,7 +17,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'e.Message.StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\Cancellation\CancelableTests.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\Cancellation\CancelableTests.cs",
 "region":  {
 "startLine":  64,
 "startColumn":  55,
@@ -30,7 +30,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'e.Message.StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\Cancellation\CancelableTests.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\Cancellation\CancelableTests.cs",
 "region":  {
 "startLine":  91,
 "startColumn":  26,
@@ -43,7 +43,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'e.Message.StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\Cancellation\CancelableTests.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\Cancellation\CancelableTests.cs",
 "region":  {
 "startLine":  91,
 "startColumn":  59,
@@ -56,7 +56,7 @@
 "id":  "S4058",
 "message":  "Change this call to 's.StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\SupervisorHierarchySpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\SupervisorHierarchySpec.cs",
 "region":  {
 "startLine":  56,
 "startColumn":  38,
@@ -69,7 +69,7 @@
 "id":  "S4058",
 "message":  "Change this call to 's.StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\SupervisorHierarchySpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\SupervisorHierarchySpec.cs",
 "region":  {
 "startLine":  198,
 "startColumn":  40,
@@ -82,7 +82,7 @@
 "id":  "S4058",
 "message":  "Change this call to '"hello".Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Dispatch\AsyncAwaitSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Dispatch\AsyncAwaitSpec.cs",
 "region":  {
 "startLine":  489,
 "startColumn":  36,
@@ -95,7 +95,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'debugMsg.Message.ToString().StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Event\EventStreamSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Event\EventStreamSpec.cs",
 "region":  {
 "startLine":  115,
 "startColumn":  17,
@@ -108,7 +108,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'debugMsg.Message.ToString().EndsWith' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Event\EventStreamSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Event\EventStreamSpec.cs",
 "region":  {
 "startLine":  116,
 "startColumn":  17,
@@ -121,7 +121,7 @@
 "id":  "S4058",
 "message":  "Change this call to 's.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Routing\ListenerSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Routing\ListenerSpec.cs",
 "region":  {
 "startLine":  70,
 "startColumn":  29,
@@ -134,7 +134,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'str.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Routing\ListenerSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Routing\ListenerSpec.cs",
 "region":  {
 "startLine":  97,
 "startColumn":  29,
@@ -147,7 +147,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'str.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Routing\ListenerSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Routing\ListenerSpec.cs",
 "region":  {
 "startLine":  103,
 "startColumn":  29,
@@ -160,7 +160,7 @@
 "id":  "S4058",
 "message":  "Change this call to 's.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Routing\ResizerSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Routing\ResizerSpec.cs",
 "region":  {
 "startLine":  143,
 "startColumn":  29,
@@ -173,7 +173,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'string.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Serialization\SerializationSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Serialization\SerializationSpec.cs",
 "region":  {
 "startLine":  81,
 "startColumn":  24,
@@ -186,7 +186,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'string.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Serialization\SerializationSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Serialization\SerializationSpec.cs",
 "region":  {
 "startLine":  81,
 "startColumn":  57,
@@ -199,7 +199,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'string.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Serialization\SerializationSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Serialization\SerializationSpec.cs",
 "region":  {
 "startLine":  119,
 "startColumn":  24,
@@ -212,7 +212,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'string.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Serialization\SerializationSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Serialization\SerializationSpec.cs",
 "region":  {
 "startLine":  119,
 "startColumn":  57,

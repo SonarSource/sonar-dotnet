@@ -5,7 +5,7 @@
 "message":  "Change one instance of 'UnconfirmedDeliveries' to a different value; comparing 'UnconfirmedDeliveries' to itself always returns true.",
 "location":  [
 {
-"uri":  "akka.net\src\core\Akka.Persistence\AtLeastOnceDeliverySemantic.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\AtLeastOnceDeliverySemantic.cs",
 "region":  {
 "startLine":  49,
 "startColumn":  30,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Persistence\AtLeastOnceDeliverySemantic.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\AtLeastOnceDeliverySemantic.cs",
 "region":  {
 "startLine":  49,
 "startColumn":  53,

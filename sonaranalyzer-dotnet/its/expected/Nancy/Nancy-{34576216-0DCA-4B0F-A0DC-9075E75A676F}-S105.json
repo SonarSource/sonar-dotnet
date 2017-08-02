@@ -4,7 +4,7 @@
 "id":  "S105",
 "message":  "Replace all tab characters in this file by sequences of white-spaces.",
 "location":  {
-"uri":  "Nancy\src\Nancy\DefaultObjectSerializer.cs",
+"uri":  "sources\Nancy\src\Nancy\DefaultObjectSerializer.cs",
 "region":  {
 "startLine":  65,
 "startColumn":  1,
@@ -17,7 +17,7 @@
 "id":  "S105",
 "message":  "Replace all tab characters in this file by sequences of white-spaces.",
 "location":  {
-"uri":  "Nancy\src\Nancy\HeadResponse.cs",
+"uri":  "sources\Nancy\src\Nancy\HeadResponse.cs",
 "region":  {
 "startLine":  8,
 "startColumn":  2,
@@ -30,7 +30,7 @@
 "id":  "S105",
 "message":  "Replace all tab characters in this file by sequences of white-spaces.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
 "region":  {
 "startLine":  43,
 "startColumn":  1,
@@ -43,7 +43,7 @@
 "id":  "S105",
 "message":  "Replace all tab characters in this file by sequences of white-spaces.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
 "region":  {
 "startLine":  87,
 "startColumn":  1,
@@ -56,7 +56,7 @@
 "id":  "S105",
 "message":  "Replace all tab characters in this file by sequences of white-spaces.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Helpers\ReflectionUtils.cs",
+"uri":  "sources\Nancy\src\Nancy\Helpers\ReflectionUtils.cs",
 "region":  {
 "startLine":  165,
 "startColumn":  13,
@@ -69,7 +69,7 @@
 "id":  "S105",
 "message":  "Replace all tab characters in this file by sequences of white-spaces.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Json\JavaScriptConverter.cs",
+"uri":  "sources\Nancy\src\Nancy\Json\JavaScriptConverter.cs",
 "region":  {
 "startLine":  35,
 "startColumn":  1,
@@ -82,7 +82,7 @@
 "id":  "S105",
 "message":  "Replace all tab characters in this file by sequences of white-spaces.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Json\JavaScriptTypeResolver.cs",
+"uri":  "sources\Nancy\src\Nancy\Json\JavaScriptTypeResolver.cs",
 "region":  {
 "startLine":  34,
 "startColumn":  1,
@@ -95,7 +95,7 @@
 "id":  "S105",
 "message":  "Replace all tab characters in this file by sequences of white-spaces.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
 "region":  {
 "startLine":  70,
 "startColumn":  1,
@@ -108,7 +108,7 @@
 "id":  "S105",
 "message":  "Replace all tab characters in this file by sequences of white-spaces.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Json\JsonSerializer.cs",
+"uri":  "sources\Nancy\src\Nancy\Json\JsonSerializer.cs",
 "region":  {
 "startLine":  43,
 "startColumn":  1,
@@ -121,7 +121,7 @@
 "id":  "S105",
 "message":  "Replace all tab characters in this file by sequences of white-spaces.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Json\ScriptIgnoreAttribute.cs",
+"uri":  "sources\Nancy\src\Nancy\Json\ScriptIgnoreAttribute.cs",
 "region":  {
 "startLine":  35,
 "startColumn":  1,
@@ -134,7 +134,7 @@
 "id":  "S105",
 "message":  "Replace all tab characters in this file by sequences of white-spaces.",
 "location":  {
-"uri":  "Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
 "region":  {
 "startLine":  5,
 "startColumn":  3,
@@ -147,7 +147,7 @@
 "id":  "S105",
 "message":  "Replace all tab characters in this file by sequences of white-spaces.",
 "location":  {
-"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
 "startLine":  82,
 "startColumn":  1,

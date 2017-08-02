@@ -4,7 +4,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'description' before using it.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Metadata.Modules\MetadataModule.cs",
+"uri":  "sources\Nancy\src\Nancy.Metadata.Modules\MetadataModule.cs",
 "region":  {
 "startLine":  47,
 "startColumn":  43,

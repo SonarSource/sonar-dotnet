@@ -4,7 +4,7 @@
 "id":  "S2259",
 "message":  "'modelType' is null on at least one execution path.",
 "location":  {
-"uri":  "Nancy\src\Nancy.ViewEngines.Razor\CSharp\NancyCSharpRazorCodeParser.cs",
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\CSharp\NancyCSharpRazorCodeParser.cs",
 "region":  {
 "startLine":  49,
 "startColumn":  58,
@@ -17,7 +17,7 @@
 "id":  "S2259",
 "message":  "'modelType' is null on at least one execution path.",
 "location":  {
-"uri":  "Nancy\src\Nancy.ViewEngines.Razor\VisualBasic\NancyVisualBasicRazorCodeParser.cs",
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\VisualBasic\NancyVisualBasicRazorCodeParser.cs",
 "region":  {
 "startLine":  76,
 "startColumn":  73,

@@ -4,7 +4,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.MultiNodeTestRunner\Discovery.cs",
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Discovery.cs",
 "region":  {
 "startLine":  53,
 "startColumn":  13,
@@ -17,7 +17,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
 "region":  {
 "startLine":  114,
 "startColumn":  37,
@@ -30,7 +30,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\CommandLine.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\CommandLine.cs",
 "region":  {
 "startLine":  34,
 "startColumn":  17,

@@ -4,7 +4,7 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Bootstrapper\NancyBootstrapperBase.cs",
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\NancyBootstrapperBase.cs",
 "region":  {
 "startLine":  252,
 "startColumn":  16,
@@ -17,7 +17,7 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Diagnostics\DefaultRequestTracing.cs",
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\DefaultRequestTracing.cs",
 "region":  {
 "startLine":  54,
 "startColumn":  12,
@@ -30,7 +30,7 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
 "region":  {
 "startLine":  405,
 "startColumn":  16,
@@ -43,7 +43,7 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "Nancy\src\Nancy\NancyContext.cs",
+"uri":  "sources\Nancy\src\Nancy\NancyContext.cs",
 "region":  {
 "startLine":  34,
 "startColumn":  16,
@@ -56,7 +56,7 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Responses\GenericFileResponse.cs",
+"uri":  "sources\Nancy\src\Nancy\Responses\GenericFileResponse.cs",
 "region":  {
 "startLine":  135,
 "startColumn":  16,
@@ -69,7 +69,7 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Responses\Negotiation\Negotiator.cs",
+"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\Negotiator.cs",
 "region":  {
 "startLine":  7,
 "startColumn":  12,
@@ -82,7 +82,7 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Routing\DefaultRequestDispatcher.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\DefaultRequestDispatcher.cs",
 "region":  {
 "startLine":  48,
 "startColumn":  16,
@@ -95,7 +95,7 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Routing\Trie\RouteResolverTrie.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\Trie\RouteResolverTrie.cs",
 "region":  {
 "startLine":  70,
 "startColumn":  16,
@@ -108,7 +108,7 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
 "startLine":  3147,
 "startColumn":  16,
@@ -121,7 +121,7 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
 "startLine":  3170,
 "startColumn":  16,

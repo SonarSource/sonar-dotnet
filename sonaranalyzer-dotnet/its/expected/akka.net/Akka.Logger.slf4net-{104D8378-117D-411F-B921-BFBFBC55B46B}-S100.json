@@ -4,7 +4,7 @@
 "id":  "S100",
 "message":  "Rename method 'WithMDC' to match camel case naming rules, consider using 'WithMdc'.",
 "location":  {
-"uri":  "akka.net\src\contrib\loggers\Akka.Logger.slf4net\Slf4NetLogger.cs",
+"uri":  "sources\akka.net\src\contrib\loggers\Akka.Logger.slf4net\Slf4NetLogger.cs",
 "region":  {
 "startLine":  25,
 "startColumn":  22,

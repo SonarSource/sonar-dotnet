@@ -4,7 +4,7 @@
 "id":  "S3254",
 "message":  "Remove this default value assigned to parameter 'shouldIgnoreOtherMessageTypes'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.TestKit.Tests\TestKitBaseTests\ReceiveTests.cs",
+"uri":  "sources\akka.net\src\core\Akka.TestKit.Tests\TestKitBaseTests\ReceiveTests.cs",
 "region":  {
 "startLine":  128,
 "startColumn":  54,

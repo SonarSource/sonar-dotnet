@@ -4,7 +4,7 @@
 "id":  "S2933",
 "message":  "Make 'container' 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\contrib\dependencyInjection\Akka.DI.StructureMap\StructureMapDependencyResolver.cs",
+"uri":  "sources\akka.net\src\contrib\dependencyInjection\Akka.DI.StructureMap\StructureMapDependencyResolver.cs",
 "region":  {
 "startLine":  24,
 "startColumn":  28,
@@ -17,7 +17,7 @@
 "id":  "S2933",
 "message":  "Make 'typeCache' 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\contrib\dependencyInjection\Akka.DI.StructureMap\StructureMapDependencyResolver.cs",
+"uri":  "sources\akka.net\src\contrib\dependencyInjection\Akka.DI.StructureMap\StructureMapDependencyResolver.cs",
 "region":  {
 "startLine":  25,
 "startColumn":  52,
@@ -30,7 +30,7 @@
 "id":  "S2933",
 "message":  "Make 'system' 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\contrib\dependencyInjection\Akka.DI.StructureMap\StructureMapDependencyResolver.cs",
+"uri":  "sources\akka.net\src\contrib\dependencyInjection\Akka.DI.StructureMap\StructureMapDependencyResolver.cs",
 "region":  {
 "startLine":  26,
 "startColumn":  29,
@@ -43,7 +43,7 @@
 "id":  "S2933",
 "message":  "Make 'references' 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\contrib\dependencyInjection\Akka.DI.StructureMap\StructureMapDependencyResolver.cs",
+"uri":  "sources\akka.net\src\contrib\dependencyInjection\Akka.DI.StructureMap\StructureMapDependencyResolver.cs",
 "region":  {
 "startLine":  27,
 "startColumn":  61,

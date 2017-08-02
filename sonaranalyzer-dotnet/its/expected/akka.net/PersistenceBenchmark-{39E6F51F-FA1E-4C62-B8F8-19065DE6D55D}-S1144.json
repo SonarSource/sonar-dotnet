@@ -4,7 +4,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private method 'StressMixedActor'.",
 "location":  {
-"uri":  "akka.net\src\benchmark\PersistenceBenchmark\Program.cs",
+"uri":  "sources\akka.net\src\benchmark\PersistenceBenchmark\Program.cs",
 "region":  {
 "startLine":  47,
 "startColumn":  9,
@@ -17,7 +17,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private method 'StressStashingPersistentActor'.",
 "location":  {
-"uri":  "akka.net\src\benchmark\PersistenceBenchmark\Program.cs",
+"uri":  "sources\akka.net\src\benchmark\PersistenceBenchmark\Program.cs",
 "region":  {
 "startLine":  53,
 "startColumn":  9,

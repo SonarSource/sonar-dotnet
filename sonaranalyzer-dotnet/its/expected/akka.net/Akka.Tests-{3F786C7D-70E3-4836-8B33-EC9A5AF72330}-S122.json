@@ -4,7 +4,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorDslSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ActorDslSpec.cs",
 "region":  {
 "startLine":  34,
 "startColumn":  17,
@@ -17,7 +17,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorDslSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ActorDslSpec.cs",
 "region":  {
 "startLine":  42,
 "startColumn":  25,
@@ -30,7 +30,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorRefSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ActorRefSpec.cs",
 "region":  {
 "startLine":  416,
 "startColumn":  37,
@@ -43,7 +43,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorRefSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ActorRefSpec.cs",
 "region":  {
 "startLine":  417,
 "startColumn":  38,
@@ -56,7 +56,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorRefSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ActorRefSpec.cs",
 "region":  {
 "startLine":  418,
 "startColumn":  36,
@@ -69,7 +69,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorRefSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ActorRefSpec.cs",
 "region":  {
 "startLine":  419,
 "startColumn":  42,
@@ -82,7 +82,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorRefSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ActorRefSpec.cs",
 "region":  {
 "startLine":  420,
 "startColumn":  41,
@@ -95,7 +95,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorRefSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ActorRefSpec.cs",
 "region":  {
 "startLine":  538,
 "startColumn":  21,
@@ -108,7 +108,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorRefSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ActorRefSpec.cs",
 "region":  {
 "startLine":  539,
 "startColumn":  26,
@@ -121,7 +121,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\DeathWatchSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\DeathWatchSpec.cs",
 "region":  {
 "startLine":  173,
 "startColumn":  29,
@@ -134,7 +134,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\DeathWatchSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\DeathWatchSpec.cs",
 "region":  {
 "startLine":  174,
 "startColumn":  29,
@@ -147,7 +147,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\FSMTimingSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\FSMTimingSpec.cs",
 "region":  {
 "startLine":  204,
 "startColumn":  17,
@@ -160,7 +160,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\FSMTransitionSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\FSMTransitionSpec.cs",
 "region":  {
 "startLine":  106,
 "startColumn":  21,
@@ -173,7 +173,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\FSMTransitionSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\FSMTransitionSpec.cs",
 "region":  {
 "startLine":  112,
 "startColumn":  21,
@@ -186,7 +186,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\FSMTransitionSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\FSMTransitionSpec.cs",
 "region":  {
 "startLine":  118,
 "startColumn":  21,
@@ -199,7 +199,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\FSMTransitionSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\FSMTransitionSpec.cs",
 "region":  {
 "startLine":  152,
 "startColumn":  21,
@@ -212,7 +212,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\Scheduler\TaskBasedScheduler_ActionScheduler_Schedule_Tests.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\Scheduler\TaskBasedScheduler_ActionScheduler_Schedule_Tests.cs",
 "region":  {
 "startLine":  203,
 "startColumn":  13,
@@ -225,7 +225,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\Stash\ActorWithStashSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\Stash\ActorWithStashSpec.cs",
 "region":  {
 "startLine":  260,
 "startColumn":  17,
@@ -238,7 +238,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\Stash\ActorWithStashSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\Stash\ActorWithStashSpec.cs",
 "region":  {
 "startLine":  284,
 "startColumn":  17,
@@ -251,7 +251,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\SupervisorHierarchySpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\SupervisorHierarchySpec.cs",
 "region":  {
 "startLine":  197,
 "startColumn":  17,
@@ -264,7 +264,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
 "region":  {
 "startLine":  44,
 "startColumn":  17,
@@ -277,7 +277,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
 "region":  {
 "startLine":  955,
 "startColumn":  13,
@@ -290,7 +290,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
 "region":  {
 "startLine":  985,
 "startColumn":  17,
@@ -303,7 +303,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
 "region":  {
 "startLine":  986,
 "startColumn":  17,
@@ -316,7 +316,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\IO\TcpIntegrationSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\IO\TcpIntegrationSpec.cs",
 "region":  {
 "startLine":  319,
 "startColumn":  17,
@@ -329,7 +329,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\IO\UdpIntegrationSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\IO\UdpIntegrationSpec.cs",
 "region":  {
 "startLine":  95,
 "startColumn":  17,
@@ -342,7 +342,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\MatchHandler\PartialActionBuilderTests.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\MatchHandler\PartialActionBuilderTests.cs",
 "region":  {
 "startLine":  22,
 "startColumn":  13,
@@ -355,7 +355,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Routing\ResizerSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Routing\ResizerSpec.cs",
 "region":  {
 "startLine":  194,
 "startColumn":  21,
@@ -368,7 +368,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Routing\SmallestMailboxSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Routing\SmallestMailboxSpec.cs",
 "region":  {
 "startLine":  41,
 "startColumn":  25,
@@ -381,7 +381,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Serialization\SerializationSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Serialization\SerializationSpec.cs",
 "region":  {
 "startLine":  27,
 "startColumn":  17,
@@ -394,7 +394,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Serialization\SerializationSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Serialization\SerializationSpec.cs",
 "region":  {
 "startLine":  28,
 "startColumn":  17,
@@ -407,7 +407,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Serialization\SerializationSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Serialization\SerializationSpec.cs",
 "region":  {
 "startLine":  34,
 "startColumn":  17,
@@ -420,7 +420,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Serialization\SerializationSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Serialization\SerializationSpec.cs",
 "region":  {
 "startLine":  35,
 "startColumn":  17,
@@ -433,7 +433,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Serialization\SerializationSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Serialization\SerializationSpec.cs",
 "region":  {
 "startLine":  36,
 "startColumn":  17,
@@ -446,7 +446,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Serialization\SerializationSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Serialization\SerializationSpec.cs",
 "region":  {
 "startLine":  86,
 "startColumn":  17,
@@ -459,7 +459,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Serialization\SerializationSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Serialization\SerializationSpec.cs",
 "region":  {
 "startLine":  87,
 "startColumn":  17,
@@ -472,7 +472,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Serialization\SerializationSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Serialization\SerializationSpec.cs",
 "region":  {
 "startLine":  88,
 "startColumn":  17,
@@ -485,7 +485,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Serialization\SerializationSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Serialization\SerializationSpec.cs",
 "region":  {
 "startLine":  124,
 "startColumn":  17,
@@ -498,7 +498,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Serialization\SerializationSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Serialization\SerializationSpec.cs",
 "region":  {
 "startLine":  125,
 "startColumn":  17,
@@ -511,7 +511,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Serialization\SerializationSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Serialization\SerializationSpec.cs",
 "region":  {
 "startLine":  126,
 "startColumn":  17,

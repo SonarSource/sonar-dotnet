@@ -4,7 +4,7 @@
 "id":  "S1450",
 "message":  "Remove the '_ignored' field and declare it as a local variable in the relevant methods.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.Tests.MultiNode\NewRemoteActorSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests.MultiNode\NewRemoteActorSpec.cs",
 "region":  {
 "startLine":  32,
 "startColumn":  28,

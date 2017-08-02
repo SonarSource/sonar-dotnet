@@ -4,7 +4,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "akka.net\src\examples\Routing\Program.cs",
+"uri":  "sources\akka.net\src\examples\Routing\Program.cs",
 "region":  {
 "startLine":  28,
 "startColumn":  20,
@@ -17,7 +17,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "akka.net\src\examples\Routing\Program.cs",
+"uri":  "sources\akka.net\src\examples\Routing\Program.cs",
 "region":  {
 "startLine":  74,
 "startColumn":  36,

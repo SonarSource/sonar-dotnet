@@ -4,7 +4,7 @@
 "id":  "S1481",
 "message":  "Remove this unused 'foo' local variable.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.Tests.MultiNode\NewRemoteActorSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests.MultiNode\NewRemoteActorSpec.cs",
 "region":  {
 "startLine":  114,
 "startColumn":  21,
@@ -17,7 +17,7 @@
 "id":  "S1481",
 "message":  "Remove this unused 'foo' local variable.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.Tests.MultiNode\NewRemoteActorSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests.MultiNode\NewRemoteActorSpec.cs",
 "region":  {
 "startLine":  131,
 "startColumn":  21,
@@ -30,7 +30,7 @@
 "id":  "S1481",
 "message":  "Remove this unused 'foo' local variable.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.Tests.MultiNode\NewRemoteActorSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests.MultiNode\NewRemoteActorSpec.cs",
 "region":  {
 "startLine":  150,
 "startColumn":  25,

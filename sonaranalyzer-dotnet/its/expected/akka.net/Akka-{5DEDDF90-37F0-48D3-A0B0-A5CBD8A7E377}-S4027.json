@@ -4,7 +4,7 @@
 "id":  "S4027",
 "message":  "Implement the missing constructors for this exception.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\Exceptions.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\Exceptions.cs",
 "region":  {
 "startLine":  16,
 "startColumn":  27,
@@ -17,7 +17,7 @@
 "id":  "S4027",
 "message":  "Implement the missing constructors for this exception.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\Exceptions.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\Exceptions.cs",
 "region":  {
 "startLine":  54,
 "startColumn":  18,
@@ -30,7 +30,7 @@
 "id":  "S4027",
 "message":  "Implement the missing constructors for this exception.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\Exceptions.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\Exceptions.cs",
 "region":  {
 "startLine":  89,
 "startColumn":  18,
@@ -43,7 +43,7 @@
 "id":  "S4027",
 "message":  "Implement the missing constructors for this exception.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\Exceptions.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\Exceptions.cs",
 "region":  {
 "startLine":  114,
 "startColumn":  18,
@@ -56,7 +56,7 @@
 "id":  "S4027",
 "message":  "Implement the missing constructors for this exception.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\Exceptions.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\Exceptions.cs",
 "region":  {
 "startLine":  232,
 "startColumn":  18,
@@ -69,7 +69,7 @@
 "id":  "S4027",
 "message":  "Implement the missing constructors for this exception.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\Exceptions.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\Exceptions.cs",
 "region":  {
 "startLine":  258,
 "startColumn":  18,
@@ -82,7 +82,7 @@
 "id":  "S4027",
 "message":  "Implement the missing constructors for this exception.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\Exceptions.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\Exceptions.cs",
 "region":  {
 "startLine":  283,
 "startColumn":  18,
@@ -95,7 +95,7 @@
 "id":  "S4027",
 "message":  "Implement the missing constructors for this exception.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\Exceptions.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\Exceptions.cs",
 "region":  {
 "startLine":  309,
 "startColumn":  18,
@@ -108,7 +108,7 @@
 "id":  "S4027",
 "message":  "Implement the missing constructors for this exception.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\Exceptions.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\Exceptions.cs",
 "region":  {
 "startLine":  350,
 "startColumn":  18,
@@ -121,7 +121,7 @@
 "id":  "S4027",
 "message":  "Implement the missing constructors for this exception.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\Exceptions.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\Exceptions.cs",
 "region":  {
 "startLine":  387,
 "startColumn":  18,
@@ -134,7 +134,7 @@
 "id":  "S4027",
 "message":  "Implement the missing constructors for this exception.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\Exceptions.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\Exceptions.cs",
 "region":  {
 "startLine":  422,
 "startColumn":  18,
@@ -147,7 +147,7 @@
 "id":  "S4027",
 "message":  "Implement the missing constructors for this exception.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\Exceptions.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\Exceptions.cs",
 "region":  {
 "startLine":  450,
 "startColumn":  18,
@@ -160,7 +160,7 @@
 "id":  "S4027",
 "message":  "Implement the missing constructors for this exception.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\Stash\StashOverflowException.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\Stash\StashOverflowException.cs",
 "region":  {
 "startLine":  16,
 "startColumn":  18,
@@ -173,7 +173,7 @@
 "id":  "S4027",
 "message":  "Implement the missing constructors for this exception.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Configuration\ConfigurationException.cs",
+"uri":  "sources\akka.net\src\core\Akka\Configuration\ConfigurationException.cs",
 "region":  {
 "startLine":  17,
 "startColumn":  18,
@@ -186,7 +186,7 @@
 "id":  "S4027",
 "message":  "Implement the missing constructors for this exception.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Pattern\IllegalStateException.cs",
+"uri":  "sources\akka.net\src\core\Akka\Pattern\IllegalStateException.cs",
 "region":  {
 "startLine":  16,
 "startColumn":  18,

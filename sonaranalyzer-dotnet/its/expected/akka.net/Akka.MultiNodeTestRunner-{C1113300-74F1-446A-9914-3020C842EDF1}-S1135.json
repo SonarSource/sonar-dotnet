@@ -4,7 +4,7 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.MultiNodeTestRunner\Discovery.cs",
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Discovery.cs",
 "region":  {
 "startLine":  36,
 "startColumn":  19,
@@ -17,7 +17,7 @@
 "id":  "S1135",
 "message":  "Complete the task associated to this 'TODO' comment.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\CommandLine.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\CommandLine.cs",
 "region":  {
 "startLine":  13,
 "startColumn":  7,

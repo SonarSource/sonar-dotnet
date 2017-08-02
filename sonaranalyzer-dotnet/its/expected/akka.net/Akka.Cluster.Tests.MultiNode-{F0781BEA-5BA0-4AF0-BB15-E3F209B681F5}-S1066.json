@@ -5,7 +5,7 @@
 "message":  "Merge this if statement with the enclosing one.",
 "location":  [
 {
-"uri":  "akka.net\src\core\Akka.Cluster.Tests.MultiNode\LeaderLeavingSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests.MultiNode\LeaderLeavingSpec.cs",
 "region":  {
 "startLine":  149,
 "startColumn":  21,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Cluster.Tests.MultiNode\LeaderLeavingSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests.MultiNode\LeaderLeavingSpec.cs",
 "region":  {
 "startLine":  147,
 "startColumn":  17,

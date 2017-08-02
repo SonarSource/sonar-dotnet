@@ -4,7 +4,7 @@
 "id":  "S1450",
 "message":  "Remove the '_echo' field and declare it as a local variable in the relevant methods.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.Tests.Performance\Transports\RemoteMessagingThroughputSpecBase.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests.Performance\Transports\RemoteMessagingThroughputSpecBase.cs",
 "region":  {
 "startLine":  21,
 "startColumn":  27,

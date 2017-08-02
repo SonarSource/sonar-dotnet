@@ -4,7 +4,7 @@
 "id":  "S1699",
 "message":  "Remove this call from a constructor to the overridable 'SendRawLogEventMessage' method.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.TestKit.Tests\Xunit2\TestEventListenerTests\EventFilterTestBase.cs",
+"uri":  "sources\akka.net\src\core\Akka.TestKit.Tests\Xunit2\TestEventListenerTests\EventFilterTestBase.cs",
 "region":  {
 "startLine":  26,
 "startColumn":  13,

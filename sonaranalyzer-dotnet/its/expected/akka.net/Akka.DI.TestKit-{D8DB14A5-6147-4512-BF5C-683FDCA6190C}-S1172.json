@@ -4,7 +4,7 @@
 "id":  "S1172",
 "message":  "Remove this unused method parameter 'isDisposing'.",
 "location":  {
-"uri":  "akka.net\src\contrib\dependencyInjection\Akka.DI.TestKit\DiResolverSpec.cs",
+"uri":  "sources\akka.net\src\contrib\dependencyInjection\Akka.DI.TestKit\DiResolverSpec.cs",
 "region":  {
 "startLine":  150,
 "startColumn":  34,

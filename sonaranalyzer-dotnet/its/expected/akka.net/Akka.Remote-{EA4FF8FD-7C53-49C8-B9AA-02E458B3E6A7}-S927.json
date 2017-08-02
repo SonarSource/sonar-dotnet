@@ -4,7 +4,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'payload' to 'data' to match the interface declaration.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\Transport\Helios\HeliosHelpers.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\Helios\HeliosHelpers.cs",
 "region":  {
 "startLine":  139,
 "startColumn":  38,

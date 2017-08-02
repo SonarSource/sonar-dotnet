@@ -4,7 +4,7 @@
 "id":  "S1313",
 "message":  "Make this IP '::1' address configurable.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\Extensions\RequestExtensionsFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Extensions\RequestExtensionsFixture.cs",
 "region":  {
 "startLine":  43,
 "startColumn":  69,
@@ -17,7 +17,7 @@
 "id":  "S1313",
 "message":  "Make this IP '127.0.0.1' address configurable.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\Extensions\RequestExtensionsFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Extensions\RequestExtensionsFixture.cs",
 "region":  {
 "startLine":  74,
 "startColumn":  70,
@@ -30,7 +30,7 @@
 "id":  "S1313",
 "message":  "Make this IP '86.13.73.12' address configurable.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\Extensions\RequestExtensionsFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Extensions\RequestExtensionsFixture.cs",
 "region":  {
 "startLine":  85,
 "startColumn":  69,
@@ -43,7 +43,7 @@
 "id":  "S1313",
 "message":  "Make this IP '::1' address configurable.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\UrlFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\UrlFixture.cs",
 "region":  {
 "startLine":  49,
 "startColumn":  33,
@@ -56,7 +56,7 @@
 "id":  "S1313",
 "message":  "Make this IP '127.0.0.1' address configurable.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\UrlFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\UrlFixture.cs",
 "region":  {
 "startLine":  64,
 "startColumn":  33,

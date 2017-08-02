@@ -5,7 +5,7 @@
 "message":  "Refactor this constructor to reduce its Cognitive Complexity from 26 to the 15 allowed.",
 "location":  [
 {
-"uri":  "akka.net\src\core\Akka.Persistence.Tests\Fsm\PersistentFSMSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\Fsm\PersistentFSMSpec.cs",
 "region":  {
 "startLine":  329,
 "startColumn":  20,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Persistence.Tests\Fsm\PersistentFSMSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\Fsm\PersistentFSMSpec.cs",
 "region":  {
 "startLine":  337,
 "startColumn":  21,
@@ -23,7 +23,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Persistence.Tests\Fsm\PersistentFSMSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\Fsm\PersistentFSMSpec.cs",
 "region":  {
 "startLine":  344,
 "startColumn":  21,
@@ -32,7 +32,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Persistence.Tests\Fsm\PersistentFSMSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\Fsm\PersistentFSMSpec.cs",
 "region":  {
 "startLine":  354,
 "startColumn":  21,
@@ -41,7 +41,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Persistence.Tests\Fsm\PersistentFSMSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\Fsm\PersistentFSMSpec.cs",
 "region":  {
 "startLine":  359,
 "startColumn":  21,
@@ -50,7 +50,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Persistence.Tests\Fsm\PersistentFSMSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\Fsm\PersistentFSMSpec.cs",
 "region":  {
 "startLine":  366,
 "startColumn":  37,
@@ -59,7 +59,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Persistence.Tests\Fsm\PersistentFSMSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\Fsm\PersistentFSMSpec.cs",
 "region":  {
 "startLine":  372,
 "startColumn":  21,
@@ -68,7 +68,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Persistence.Tests\Fsm\PersistentFSMSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\Fsm\PersistentFSMSpec.cs",
 "region":  {
 "startLine":  379,
 "startColumn":  21,
@@ -77,7 +77,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Persistence.Tests\Fsm\PersistentFSMSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\Fsm\PersistentFSMSpec.cs",
 "region":  {
 "startLine":  383,
 "startColumn":  21,
@@ -86,7 +86,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Persistence.Tests\Fsm\PersistentFSMSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\Fsm\PersistentFSMSpec.cs",
 "region":  {
 "startLine":  393,
 "startColumn":  21,
@@ -95,7 +95,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Persistence.Tests\Fsm\PersistentFSMSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\Fsm\PersistentFSMSpec.cs",
 "region":  {
 "startLine":  401,
 "startColumn":  21,
@@ -104,7 +104,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Persistence.Tests\Fsm\PersistentFSMSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\Fsm\PersistentFSMSpec.cs",
 "region":  {
 "startLine":  414,
 "startColumn":  21,
@@ -113,7 +113,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Persistence.Tests\Fsm\PersistentFSMSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\Fsm\PersistentFSMSpec.cs",
 "region":  {
 "startLine":  418,
 "startColumn":  21,

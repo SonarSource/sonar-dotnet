@@ -4,7 +4,7 @@
 "id":  "S112",
 "message":  "'System.Exception' should not be thrown by user code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence.Tests\AtLeastOnceDeliveryReceiveActorSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\AtLeastOnceDeliveryReceiveActorSpec.cs",
 "region":  {
 "startLine":  190,
 "startColumn":  31,
@@ -17,7 +17,7 @@
 "id":  "S112",
 "message":  "'System.Exception' should not be thrown by user code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence.Tests\AtLeastOnceDeliverySpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\AtLeastOnceDeliverySpec.cs",
 "region":  {
 "startLine":  90,
 "startColumn":  35,
@@ -30,7 +30,7 @@
 "id":  "S112",
 "message":  "'System.Exception' should not be thrown by user code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence.Tests\ReceivePersistentActorTests_LifeCycle.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\ReceivePersistentActorTests_LifeCycle.cs",
 "region":  {
 "startLine":  73,
 "startColumn":  69,
@@ -43,7 +43,7 @@
 "id":  "S112",
 "message":  "'System.Exception' should not be thrown by user code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence.Tests\ReceivePersistentActorTests_LifeCycle.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\ReceivePersistentActorTests_LifeCycle.cs",
 "region":  {
 "startLine":  81,
 "startColumn":  69,

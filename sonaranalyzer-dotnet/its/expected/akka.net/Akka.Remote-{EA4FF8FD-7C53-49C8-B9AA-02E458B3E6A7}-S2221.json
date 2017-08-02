@@ -4,7 +4,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
 "region":  {
 "startLine":  708,
 "startColumn":  20,
@@ -17,7 +17,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
 "region":  {
 "startLine":  767,
 "startColumn":  20,
@@ -30,7 +30,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
 "region":  {
 "startLine":  1284,
 "startColumn":  20,
@@ -43,7 +43,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
 "region":  {
 "startLine":  728,
 "startColumn":  32,
@@ -56,7 +56,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\RemoteActorRefProvider.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteActorRefProvider.cs",
 "region":  {
 "startLine":  356,
 "startColumn":  17,
@@ -69,7 +69,7 @@
 "id":  "S2221",
 "message":  "Catch a list of specific exception subtype or use exception filters instead.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
 "region":  {
 "startLine":  1026,
 "startColumn":  13,

@@ -4,7 +4,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common.TestKit\Properties\AssemblyInfo.cs",
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common.TestKit\Properties\AssemblyInfo.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -17,7 +17,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common.TestKit\SqlJournalQuerySpec.cs",
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common.TestKit\SqlJournalQuerySpec.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,

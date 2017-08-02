@@ -4,7 +4,7 @@
 "id":  "S1186",
 "message":  "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\ActorCell.Children.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.Children.cs",
 "region":  {
 "startLine":  99,
 "startColumn":  22,
@@ -17,7 +17,7 @@
 "id":  "S1186",
 "message":  "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Event\DeadLetterListener.cs",
+"uri":  "sources\akka.net\src\core\Akka\Event\DeadLetterListener.cs",
 "region":  {
 "startLine":  22,
 "startColumn":  33,
@@ -30,7 +30,7 @@
 "id":  "S1186",
 "message":  "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Util\ByteIterator.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\ByteIterator.cs",
 "region":  {
 "startLine":  534,
 "startColumn":  25,

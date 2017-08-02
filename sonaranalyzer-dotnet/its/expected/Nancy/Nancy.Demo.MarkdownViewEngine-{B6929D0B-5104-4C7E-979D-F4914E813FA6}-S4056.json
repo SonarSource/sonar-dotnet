@@ -4,7 +4,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Demo.MarkdownViewEngine\Model\BlogModel.cs",
+"uri":  "sources\Nancy\src\Nancy.Demo.MarkdownViewEngine\Model\BlogModel.cs",
 "region":  {
 "startLine":  31,
 "startColumn":  26,
@@ -17,7 +17,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Demo.MarkdownViewEngine\Model\BlogModel.cs",
+"uri":  "sources\Nancy\src\Nancy.Demo.MarkdownViewEngine\Model\BlogModel.cs",
 "region":  {
 "startLine":  111,
 "startColumn":  26,

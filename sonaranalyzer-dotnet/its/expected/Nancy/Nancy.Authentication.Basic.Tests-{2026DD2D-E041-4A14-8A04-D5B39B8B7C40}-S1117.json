@@ -4,7 +4,7 @@
 "id":  "S1117",
 "message":  "Rename 'config' which hides the field with the same name.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Authentication.Basic.Tests\BasicAuthenticationFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Authentication.Basic.Tests\BasicAuthenticationFixture.cs",
 "region":  {
 "startLine":  145,
 "startColumn":  17,
@@ -17,7 +17,7 @@
 "id":  "S1117",
 "message":  "Rename 'hooks' which hides the field with the same name.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Authentication.Basic.Tests\BasicAuthenticationFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Authentication.Basic.Tests\BasicAuthenticationFixture.cs",
 "region":  {
 "startLine":  146,
 "startColumn":  17,
@@ -30,7 +30,7 @@
 "id":  "S1117",
 "message":  "Rename 'config' which hides the field with the same name.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Authentication.Basic.Tests\BasicAuthenticationFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Authentication.Basic.Tests\BasicAuthenticationFixture.cs",
 "region":  {
 "startLine":  167,
 "startColumn":  17,
@@ -43,7 +43,7 @@
 "id":  "S1117",
 "message":  "Rename 'hooks' which hides the field with the same name.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Authentication.Basic.Tests\BasicAuthenticationFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Authentication.Basic.Tests\BasicAuthenticationFixture.cs",
 "region":  {
 "startLine":  168,
 "startColumn":  17,
@@ -56,7 +56,7 @@
 "id":  "S1117",
 "message":  "Rename 'config' which hides the field with the same name.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Authentication.Basic.Tests\BasicAuthenticationFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Authentication.Basic.Tests\BasicAuthenticationFixture.cs",
 "region":  {
 "startLine":  191,
 "startColumn":  17,
@@ -69,7 +69,7 @@
 "id":  "S1117",
 "message":  "Rename 'hooks' which hides the field with the same name.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Authentication.Basic.Tests\BasicAuthenticationFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Authentication.Basic.Tests\BasicAuthenticationFixture.cs",
 "region":  {
 "startLine":  192,
 "startColumn":  17,

@@ -4,7 +4,7 @@
 "id":  "S2339",
 "message":  "Change this constant to a 'static' read-only property.",
 "location":  {
-"uri":  "Nancy\src\Nancy\NancyEngine.cs",
+"uri":  "sources\Nancy\src\Nancy\NancyEngine.cs",
 "region":  {
 "startLine":  23,
 "startColumn":  29,
@@ -17,7 +17,7 @@
 "id":  "S2339",
 "message":  "Change this constant to a 'static' read-only property.",
 "location":  {
-"uri":  "Nancy\src\Nancy\NancyEngine.cs",
+"uri":  "sources\Nancy\src\Nancy\NancyEngine.cs",
 "region":  {
 "startLine":  24,
 "startColumn":  29,
@@ -30,7 +30,7 @@
 "id":  "S2339",
 "message":  "Change this constant to a 'static' read-only property.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Owin\NancyMiddleware.cs",
+"uri":  "sources\Nancy\src\Nancy\Owin\NancyMiddleware.cs",
 "region":  {
 "startLine":  32,
 "startColumn":  29,
@@ -43,7 +43,7 @@
 "id":  "S2339",
 "message":  "Change this constant to a 'static' read-only property.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Security\CsrfToken.cs",
+"uri":  "sources\Nancy\src\Nancy\Security\CsrfToken.cs",
 "region":  {
 "startLine":  15,
 "startColumn":  29,

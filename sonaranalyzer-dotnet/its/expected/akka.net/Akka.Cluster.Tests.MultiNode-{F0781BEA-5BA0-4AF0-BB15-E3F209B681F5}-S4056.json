@@ -4,7 +4,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster.Tests.MultiNode\ClusterDeathWatchSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests.MultiNode\ClusterDeathWatchSpec.cs",
 "region":  {
 "startLine":  296,
 "startColumn":  44,
@@ -17,7 +17,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster.Tests.MultiNode\MultiNodeClusterSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests.MultiNode\MultiNodeClusterSpec.cs",
 "region":  {
 "startLine":  34,
 "startColumn":  17,

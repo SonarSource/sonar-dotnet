@@ -4,7 +4,7 @@
 "id":  "S2346",
 "message":  "Rename 'No' to 'None'.",
 "location":  {
-"uri":  "akka.net\src\benchmark\PingPong\Program.cs",
+"uri":  "sources\akka.net\src\benchmark\PingPong\Program.cs",
 "region":  {
 "startLine":  270,
 "startColumn":  13,

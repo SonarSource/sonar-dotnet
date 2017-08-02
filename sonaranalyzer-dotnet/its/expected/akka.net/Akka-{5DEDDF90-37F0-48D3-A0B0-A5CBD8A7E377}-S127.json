@@ -4,7 +4,7 @@
 "id":  "S127",
 "message":  "Do not update the loop counter 'current' within the loop body.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Util\Internal\Collections\ImmutableAvlTreeBase.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\Internal\Collections\ImmutableAvlTreeBase.cs",
 "region":  {
 "startLine":  281,
 "startColumn":  6,
@@ -17,7 +17,7 @@
 "id":  "S127",
 "message":  "Do not update the loop counter 'current' within the loop body.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Util\Internal\Collections\ImmutableAvlTreeBase.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\Internal\Collections\ImmutableAvlTreeBase.cs",
 "region":  {
 "startLine":  283,
 "startColumn":  5,
@@ -30,7 +30,7 @@
 "id":  "S127",
 "message":  "Do not update the loop counter 'current' within the loop body.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Util\Internal\Collections\ImmutableAvlTreeBase.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\Internal\Collections\ImmutableAvlTreeBase.cs",
 "region":  {
 "startLine":  295,
 "startColumn":  6,
@@ -43,7 +43,7 @@
 "id":  "S127",
 "message":  "Do not update the loop counter 'current' within the loop body.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Util\Internal\Collections\ImmutableAvlTreeBase.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\Internal\Collections\ImmutableAvlTreeBase.cs",
 "region":  {
 "startLine":  297,
 "startColumn":  5,
@@ -56,7 +56,7 @@
 "id":  "S127",
 "message":  "Do not update the loop counter 'i' within the loop body.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Util\MatchHandler\PartialActionBuilder.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialActionBuilder.cs",
 "region":  {
 "startLine":  54,
 "startColumn":  17,

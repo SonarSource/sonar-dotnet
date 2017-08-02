@@ -4,7 +4,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster.Tests\ClusterConfigSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests\ClusterConfigSpec.cs",
 "region":  {
 "startLine":  47,
 "startColumn":  13,
@@ -17,7 +17,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster.Tests\ClusterConfigSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests\ClusterConfigSpec.cs",
 "region":  {
 "startLine":  56,
 "startColumn":  13,

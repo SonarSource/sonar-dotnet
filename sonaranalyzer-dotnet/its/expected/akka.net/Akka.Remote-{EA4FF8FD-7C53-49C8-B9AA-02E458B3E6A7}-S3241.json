@@ -4,7 +4,7 @@
 "id":  "S3241",
 "message":  "Change return type to 'void'; not a single caller uses the returned value.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
 "region":  {
 "startLine":  963,
 "startColumn":  17,
@@ -17,7 +17,7 @@
 "id":  "S3241",
 "message":  "Change return type to 'void'; not a single caller uses the returned value.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
 "region":  {
 "startLine":  386,
 "startColumn":  17,

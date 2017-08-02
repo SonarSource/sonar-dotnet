@@ -4,7 +4,7 @@
 "id":  "S2325",
 "message":  "Make 'GetCleanTemplateName' a static method.",
 "location":  {
-"uri":  "Nancy\src\Nancy.ViewEngines.DotLiquid\LiquidNancyFileSystem.cs",
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.DotLiquid\LiquidNancyFileSystem.cs",
 "region":  {
 "startLine":  79,
 "startColumn":  24,

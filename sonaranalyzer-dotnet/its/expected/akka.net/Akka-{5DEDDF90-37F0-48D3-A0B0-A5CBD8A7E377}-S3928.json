@@ -4,7 +4,7 @@
 "id":  "S3928",
 "message":  "Use a constructor overloads that allows a more meaningful exception message to be provided.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Util\ByteString.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\ByteString.cs",
 "region":  {
 "startLine":  36,
 "startColumn":  19,

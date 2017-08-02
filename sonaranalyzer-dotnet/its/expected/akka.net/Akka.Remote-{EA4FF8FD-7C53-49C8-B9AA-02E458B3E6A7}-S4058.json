@@ -4,7 +4,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'elements.Head().Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\RemoteActorRefProvider.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteActorRefProvider.cs",
 "region":  {
 "startLine":  175,
 "startColumn":  21,
@@ -17,7 +17,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'elements.Head().Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\RemoteActorRefProvider.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteActorRefProvider.cs",
 "region":  {
 "startLine":  176,
 "startColumn":  26,
@@ -30,7 +30,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'p.Head().Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\RemoteActorRefProvider.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteActorRefProvider.cs",
 "region":  {
 "startLine":  245,
 "startColumn":  17,
@@ -43,7 +43,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'p.Head().Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\RemoteActorRefProvider.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteActorRefProvider.cs",
 "region":  {
 "startLine":  246,
 "startColumn":  17,
@@ -56,7 +56,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'config.GetString(bufferSizeLogKey).ToLowerInvariant().Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\RemoteSettings.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSettings.cs",
 "region":  {
 "startLine":  25,
 "startColumn":  17,
@@ -69,7 +69,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'config.GetString(bufferSizeLogKey).ToLowerInvariant().Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\RemoteSettings.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSettings.cs",
 "region":  {
 "startLine":  26,
 "startColumn":  17,
@@ -82,7 +82,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'RemoteLifecycleEventsLogLevel.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\RemoteSettings.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSettings.cs",
 "region":  {
 "startLine":  39,
 "startColumn":  17,
@@ -95,7 +95,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'RemoteLifecycleEventsLogLevel.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\RemoteSettings.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSettings.cs",
 "region":  {
 "startLine":  40,
 "startColumn":  17,
@@ -108,7 +108,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'protocolString.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\Transport\Helios\HeliosTransport.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\Helios\HeliosTransport.cs",
 "region":  {
 "startLine":  67,
 "startColumn":  17,
@@ -121,7 +121,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'protocolString.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\Transport\Helios\HeliosTransport.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\Helios\HeliosTransport.cs",
 "region":  {
 "startLine":  68,
 "startColumn":  22,
@@ -134,7 +134,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'scheme.StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\Transport\TransportAdapters.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\TransportAdapters.cs",
 "region":  {
 "startLine":  116,
 "startColumn":  17,

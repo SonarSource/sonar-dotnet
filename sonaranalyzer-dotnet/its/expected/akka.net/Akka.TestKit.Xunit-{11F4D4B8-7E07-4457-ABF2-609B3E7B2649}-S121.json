@@ -4,7 +4,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\contrib\testkits\Akka.TestKit.Xunit\Internals\AkkaAssertEqualityComparer.cs",
+"uri":  "sources\akka.net\src\contrib\testkits\Akka.TestKit.Xunit\Internals\AkkaAssertEqualityComparer.cs",
 "region":  {
 "startLine":  51,
 "startColumn":  17,
@@ -17,7 +17,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\contrib\testkits\Akka.TestKit.Xunit\Internals\AkkaAssertEqualityComparer.cs",
+"uri":  "sources\akka.net\src\contrib\testkits\Akka.TestKit.Xunit\Internals\AkkaAssertEqualityComparer.cs",
 "region":  {
 "startLine":  54,
 "startColumn":  17,
@@ -30,7 +30,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\contrib\testkits\Akka.TestKit.Xunit\Internals\AkkaAssertEqualityComparer.cs",
+"uri":  "sources\akka.net\src\contrib\testkits\Akka.TestKit.Xunit\Internals\AkkaAssertEqualityComparer.cs",
 "region":  {
 "startLine":  59,
 "startColumn":  13,
@@ -43,7 +43,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\contrib\testkits\Akka.TestKit.Xunit\Internals\AkkaAssertEqualityComparer.cs",
+"uri":  "sources\akka.net\src\contrib\testkits\Akka.TestKit.Xunit\Internals\AkkaAssertEqualityComparer.cs",
 "region":  {
 "startLine":  64,
 "startColumn":  13,
@@ -56,7 +56,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\contrib\testkits\Akka.TestKit.Xunit\Internals\AkkaAssertEqualityComparer.cs",
+"uri":  "sources\akka.net\src\contrib\testkits\Akka.TestKit.Xunit\Internals\AkkaAssertEqualityComparer.cs",
 "region":  {
 "startLine":  69,
 "startColumn":  13,
@@ -69,7 +69,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\contrib\testkits\Akka.TestKit.Xunit\Internals\AkkaAssertEqualityComparer.cs",
+"uri":  "sources\akka.net\src\contrib\testkits\Akka.TestKit.Xunit\Internals\AkkaAssertEqualityComparer.cs",
 "region":  {
 "startLine":  74,
 "startColumn":  13,
@@ -82,7 +82,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\contrib\testkits\Akka.TestKit.Xunit\Internals\AkkaAssertEqualityComparer.cs",
+"uri":  "sources\akka.net\src\contrib\testkits\Akka.TestKit.Xunit\Internals\AkkaAssertEqualityComparer.cs",
 "region":  {
 "startLine":  92,
 "startColumn":  21,
@@ -95,7 +95,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\contrib\testkits\Akka.TestKit.Xunit\Internals\AkkaAssertEqualityComparer.cs",
+"uri":  "sources\akka.net\src\contrib\testkits\Akka.TestKit.Xunit\Internals\AkkaAssertEqualityComparer.cs",
 "region":  {
 "startLine":  95,
 "startColumn":  21,
@@ -108,7 +108,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\contrib\testkits\Akka.TestKit.Xunit\Internals\AkkaEqualException.cs",
+"uri":  "sources\akka.net\src\contrib\testkits\Akka.TestKit.Xunit\Internals\AkkaEqualException.cs",
 "region":  {
 "startLine":  43,
 "startColumn":  17,
@@ -121,7 +121,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\contrib\testkits\Akka.TestKit.Xunit\XunitAssertions.cs",
+"uri":  "sources\akka.net\src\contrib\testkits\Akka.TestKit.Xunit\XunitAssertions.cs",
 "region":  {
 "startLine":  38,
 "startColumn":  13,
@@ -134,7 +134,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\contrib\testkits\Akka.TestKit.Xunit\XunitAssertions.cs",
+"uri":  "sources\akka.net\src\contrib\testkits\Akka.TestKit.Xunit\XunitAssertions.cs",
 "region":  {
 "startLine":  44,
 "startColumn":  13,

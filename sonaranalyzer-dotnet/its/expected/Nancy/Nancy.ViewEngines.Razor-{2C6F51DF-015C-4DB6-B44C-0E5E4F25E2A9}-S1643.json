@@ -4,7 +4,7 @@
 "id":  "S1643",
 "message":  "Use a StringBuilder instead.",
 "location":  {
-"uri":  "Nancy\src\Nancy.ViewEngines.Razor\ClrTypeResolver.cs",
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\ClrTypeResolver.cs",
 "region":  {
 "startLine":  167,
 "startColumn":  17,
@@ -17,7 +17,7 @@
 "id":  "S1643",
 "message":  "Use a StringBuilder instead.",
 "location":  {
-"uri":  "Nancy\src\Nancy.ViewEngines.Razor\ClrTypeResolver.cs",
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\ClrTypeResolver.cs",
 "region":  {
 "startLine":  171,
 "startColumn":  21,
@@ -30,7 +30,7 @@
 "id":  "S1643",
 "message":  "Use a StringBuilder instead.",
 "location":  {
-"uri":  "Nancy\src\Nancy.ViewEngines.Razor\ClrTypeResolver.cs",
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\ClrTypeResolver.cs",
 "region":  {
 "startLine":  174,
 "startColumn":  17,

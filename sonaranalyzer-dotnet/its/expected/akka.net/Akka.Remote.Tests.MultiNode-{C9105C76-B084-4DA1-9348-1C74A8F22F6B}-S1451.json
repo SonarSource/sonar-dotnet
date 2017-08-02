@@ -4,7 +4,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.Tests.MultiNode\LookupRemoteActorMultiNetSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests.MultiNode\LookupRemoteActorMultiNetSpec.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -17,7 +17,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.Tests.MultiNode\NewRemoteActorSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests.MultiNode\NewRemoteActorSpec.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -30,7 +30,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.Tests.MultiNode\PiercingShouldKeepQuarantineSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests.MultiNode\PiercingShouldKeepQuarantineSpec.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -43,7 +43,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.Tests.MultiNode\Properties\AssemblyInfo.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests.MultiNode\Properties\AssemblyInfo.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -56,7 +56,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.Tests.MultiNode\RemoteDeliverySpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests.MultiNode\RemoteDeliverySpec.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -69,7 +69,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.Tests.MultiNode\RemoteDeploymentDeathWatchSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests.MultiNode\RemoteDeploymentDeathWatchSpec.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -82,7 +82,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.Tests.MultiNode\RemoteRandomSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests.MultiNode\RemoteRandomSpec.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -95,7 +95,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.Tests.MultiNode\RemoteRoundRobinSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests.MultiNode\RemoteRoundRobinSpec.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,

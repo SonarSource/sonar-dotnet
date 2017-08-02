@@ -4,7 +4,7 @@
 "id":  "S1309",
 "message":  "Do not suppress issues.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\BindingMemberInfoFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\BindingMemberInfoFixture.cs",
 "region":  {
 "startLine":  241,
 "startColumn":  1,

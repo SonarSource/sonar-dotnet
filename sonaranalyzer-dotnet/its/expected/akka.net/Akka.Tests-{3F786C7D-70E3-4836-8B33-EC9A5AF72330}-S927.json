@@ -4,7 +4,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'cause' to 'reason' to match the base class declaration.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorLifeCycleSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ActorLifeCycleSpec.cs",
 "region":  {
 "startLine":  60,
 "startColumn":  58,
@@ -17,7 +17,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'cause' to 'reason' to match the base class declaration.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorLifeCycleSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ActorLifeCycleSpec.cs",
 "region":  {
 "startLine":  65,
 "startColumn":  59,
@@ -30,7 +30,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'cause' to 'reason' to match the base class declaration.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorLifeCycleSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ActorLifeCycleSpec.cs",
 "region":  {
 "startLine":  222,
 "startColumn":  58,
@@ -43,7 +43,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'cause' to 'reason' to match the base class declaration.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorLifeCycleSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ActorLifeCycleSpec.cs",
 "region":  {
 "startLine":  227,
 "startColumn":  59,
@@ -56,7 +56,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'evt' to 'event' to match the base class declaration.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Event\EventBusSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Event\EventBusSpec.cs",
 "region":  {
 "startLine":  29,
 "startColumn":  48,
@@ -69,7 +69,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'evt' to 'event' to match the base class declaration.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Event\EventBusSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Event\EventBusSpec.cs",
 "region":  {
 "startLine":  34,
 "startColumn":  49,
@@ -82,7 +82,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'cause' to 'reason' to match the base class declaration.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\TestUtils\Supervisor.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\TestUtils\Supervisor.cs",
 "region":  {
 "startLine":  47,
 "startColumn":  54,

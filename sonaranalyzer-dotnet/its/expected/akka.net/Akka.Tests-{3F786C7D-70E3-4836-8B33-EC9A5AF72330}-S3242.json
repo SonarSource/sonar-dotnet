@@ -4,7 +4,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'Akka.Event.EventBus<object, System.Type, Akka.Actor.IActorRef>' instead of 'Akka.Event.LoggingBus'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Event\EventStreamSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Event\EventStreamSpec.cs",
 "region":  {
 "startLine":  309,
 "startColumn":  45,
@@ -17,7 +17,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'System.Net.EndPoint' instead of 'System.Net.IPEndPoint'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
 "region":  {
 "startLine":  789,
 "startColumn":  85,
@@ -30,7 +30,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'System.Net.EndPoint' instead of 'System.Net.IPEndPoint'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\IO\UdpConnectedIntegrationSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\IO\UdpConnectedIntegrationSpec.cs",
 "region":  {
 "startLine":  36,
 "startColumn":  46,
@@ -43,7 +43,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'System.Net.EndPoint' instead of 'System.Net.IPEndPoint'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\IO\UdpConnectedIntegrationSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\IO\UdpConnectedIntegrationSpec.cs",
 "region":  {
 "startLine":  44,
 "startColumn":  49,
@@ -56,7 +56,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'System.Net.EndPoint' instead of 'System.Net.IPEndPoint'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\IO\UdpConnectedIntegrationSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\IO\UdpConnectedIntegrationSpec.cs",
 "region":  {
 "startLine":  44,
 "startColumn":  74,
@@ -69,7 +69,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'System.Net.EndPoint' instead of 'System.Net.IPEndPoint'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\IO\UdpIntegrationSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\IO\UdpIntegrationSpec.cs",
 "region":  {
 "startLine":  36,
 "startColumn":  46,
@@ -82,7 +82,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'System.Collections.Generic.IReadOnlyCollection<T>' instead of 'System.Collections.Generic.IReadOnlyList<T>'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\MatchHandler\CachedMatchCompilerTests.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\MatchHandler\CachedMatchCompilerTests.cs",
 "region":  {
 "startLine":  114,
 "startColumn":  55,
@@ -95,7 +95,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'System.Collections.Generic.IReadOnlyCollection<T>' instead of 'System.Collections.Generic.IReadOnlyList<T>'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\MatchHandler\CachedMatchCompilerTests.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\MatchHandler\CachedMatchCompilerTests.cs",
 "region":  {
 "startLine":  119,
 "startColumn":  56,
@@ -108,7 +108,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'System.Collections.Generic.IReadOnlyCollection<T>' instead of 'System.Collections.Generic.IReadOnlyList<T>'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\MatchHandler\CachedMatchCompilerTests.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\MatchHandler\CachedMatchCompilerTests.cs",
 "region":  {
 "startLine":  125,
 "startColumn":  56,

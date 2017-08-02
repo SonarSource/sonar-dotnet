@@ -4,7 +4,7 @@
 "id":  "S3626",
 "message":  "Remove this redundant jump.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
 "region":  {
 "startLine":  381,
 "startColumn":  17,
@@ -17,7 +17,7 @@
 "id":  "S3626",
 "message":  "Remove this redundant jump.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
 "region":  {
 "startLine":  98,
 "startColumn":  25,

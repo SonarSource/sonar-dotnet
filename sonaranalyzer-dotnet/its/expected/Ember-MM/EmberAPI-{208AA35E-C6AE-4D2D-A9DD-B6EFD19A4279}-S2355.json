@@ -4,7 +4,7 @@
 "id":  "S2355",
 "message":  "Use an array literal here instead.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDVD.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
 "region":  {
 "startLine":  34,
 "startColumn":  43,
@@ -17,7 +17,7 @@
 "id":  "S2355",
 "message":  "Use an array literal here instead.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIDVD.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIDVD.vb",
 "region":  {
 "startLine":  34,
 "startColumn":  102,
@@ -30,7 +30,7 @@
 "id":  "S2355",
 "message":  "Use an array literal here instead.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIImageUtils.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIImageUtils.vb",
 "region":  {
 "startLine":  46,
 "startColumn":  65,
@@ -43,7 +43,7 @@
 "id":  "S2355",
 "message":  "Use an array literal here instead.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIImageUtils.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIImageUtils.vb",
 "region":  {
 "startLine":  73,
 "startColumn":  38,
@@ -56,7 +56,7 @@
 "id":  "S2355",
 "message":  "Use an array literal here instead.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
 "region":  {
 "startLine":  1130,
 "startColumn":  54,
@@ -69,7 +69,7 @@
 "id":  "S2355",
 "message":  "Use an array literal here instead.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
 "region":  {
 "startLine":  1148,
 "startColumn":  54,
@@ -82,7 +82,7 @@
 "id":  "S2355",
 "message":  "Use an array literal here instead.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
 "region":  {
 "startLine":  1167,
 "startColumn":  54,
@@ -95,7 +95,7 @@
 "id":  "S2355",
 "message":  "Use an array literal here instead.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
 "region":  {
 "startLine":  1186,
 "startColumn":  54,
@@ -108,7 +108,7 @@
 "id":  "S2355",
 "message":  "Use an array literal here instead.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
 "region":  {
 "startLine":  1677,
 "startColumn":  54,
@@ -121,7 +121,7 @@
 "id":  "S2355",
 "message":  "Use an array literal here instead.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
 "region":  {
 "startLine":  644,
 "startColumn":  159,
@@ -134,7 +134,7 @@
 "id":  "S2355",
 "message":  "Use an array literal here instead.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIScanner.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
 "region":  {
 "startLine":  647,
 "startColumn":  197,
@@ -147,7 +147,7 @@
 "id":  "S2355",
 "message":  "Use an array literal here instead.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIXML.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIXML.vb",
 "region":  {
 "startLine":  39,
 "startColumn":  53,

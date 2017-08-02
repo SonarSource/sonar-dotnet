@@ -4,7 +4,7 @@
 "id":  "S1694",
 "message":  "Convert this 'abstract' class to a concrete class with a private constructor.",
 "location":  {
-"uri":  "Nancy\src\Nancy.ViewEngines.Razor\HtmlHelpers.cs",
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\HtmlHelpers.cs",
 "region":  {
 "startLine":  35,
 "startColumn":  27,

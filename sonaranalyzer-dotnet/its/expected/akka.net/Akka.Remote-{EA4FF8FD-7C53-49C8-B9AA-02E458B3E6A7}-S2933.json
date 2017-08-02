@@ -4,7 +4,7 @@
 "id":  "S2933",
 "message":  "Make '_acceptableHeartbeatPause' 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\DeadlineFailureDetector.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\DeadlineFailureDetector.cs",
 "region":  {
 "startLine":  21,
 "startColumn":  26,
@@ -17,7 +17,7 @@
 "id":  "S2933",
 "message":  "Make '_clock' 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\DeadlineFailureDetector.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\DeadlineFailureDetector.cs",
 "region":  {
 "startLine":  22,
 "startColumn":  23,
@@ -30,7 +30,7 @@
 "id":  "S2933",
 "message":  "Make 'system' 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
 "region":  {
 "startLine":  41,
 "startColumn":  29,
@@ -43,7 +43,7 @@
 "id":  "S2933",
 "message":  "Make 'provider' 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
 "region":  {
 "startLine":  42,
 "startColumn":  40,
@@ -56,7 +56,7 @@
 "id":  "S2933",
 "message":  "Make 'log' 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
 "region":  {
 "startLine":  43,
 "startColumn":  33,
@@ -69,7 +69,7 @@
 "id":  "S2933",
 "message":  "Make 'remoteDaemon' 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
 "region":  {
 "startLine":  44,
 "startColumn":  35,
@@ -82,7 +82,7 @@
 "id":  "S2933",
 "message":  "Make 'settings' 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
 "region":  {
 "startLine":  45,
 "startColumn":  32,
@@ -95,7 +95,7 @@
 "id":  "S2933",
 "message":  "Make 'handleOrActive' 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
 "region":  {
 "startLine":  276,
 "startColumn":  36,
@@ -108,7 +108,7 @@
 "id":  "S2933",
 "message":  "Make 'codec' 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
 "region":  {
 "startLine":  282,
 "startColumn":  30,
@@ -121,7 +121,7 @@
 "id":  "S2933",
 "message":  "Make '_endpoints' 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
 "region":  {
 "startLine":  285,
 "startColumn":  34,
@@ -134,7 +134,7 @@
 "id":  "S2933",
 "message":  "Make '_handleOrActive' 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
 "region":  {
 "startLine":  817,
 "startColumn":  36,
@@ -147,7 +147,7 @@
 "id":  "S2933",
 "message":  "Make 'endpointId' 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
 "region":  {
 "startLine":  282,
 "startColumn":  35,
@@ -160,7 +160,7 @@
 "id":  "S2933",
 "message":  "Make 'log' 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
 "region":  {
 "startLine":  283,
 "startColumn":  33,
@@ -173,7 +173,7 @@
 "id":  "S2933",
 "message":  "Make 'eventPublisher' 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
 "region":  {
 "startLine":  284,
 "startColumn":  32,
@@ -186,7 +186,7 @@
 "id":  "S2933",
 "message":  "Make '_receiveBuffers' 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
 "region":  {
 "startLine":  297,
 "startColumn":  57,
@@ -199,7 +199,7 @@
 "id":  "S2933",
 "message":  "Make 'pendingReadHandoffs' 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
 "region":  {
 "startLine":  331,
 "startColumn":  59,
@@ -212,7 +212,7 @@
 "id":  "S2933",
 "message":  "Make 'stashedInbound' 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
 "region":  {
 "startLine":  332,
 "startColumn":  65,
@@ -225,7 +225,7 @@
 "id":  "S2933",
 "message":  "Make '_threshold' 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\PhiAccrualFailureDetector.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\PhiAccrualFailureDetector.cs",
 "region":  {
 "startLine":  37,
 "startColumn":  24,
@@ -238,7 +238,7 @@
 "id":  "S2933",
 "message":  "Make '_maxSampleSize' 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\PhiAccrualFailureDetector.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\PhiAccrualFailureDetector.cs",
 "region":  {
 "startLine":  38,
 "startColumn":  21,
@@ -251,7 +251,7 @@
 "id":  "S2933",
 "message":  "Make '_minStdDeviation' 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\PhiAccrualFailureDetector.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\PhiAccrualFailureDetector.cs",
 "region":  {
 "startLine":  39,
 "startColumn":  26,
@@ -264,7 +264,7 @@
 "id":  "S2933",
 "message":  "Make '_acceptableHeartbeatPause' 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\PhiAccrualFailureDetector.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\PhiAccrualFailureDetector.cs",
 "region":  {
 "startLine":  40,
 "startColumn":  26,
@@ -277,7 +277,7 @@
 "id":  "S2933",
 "message":  "Make '_firstHeartbeatEstimate' 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\PhiAccrualFailureDetector.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\PhiAccrualFailureDetector.cs",
 "region":  {
 "startLine":  41,
 "startColumn":  26,
@@ -290,7 +290,7 @@
 "id":  "S2933",
 "message":  "Make '_clock' 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\PhiAccrualFailureDetector.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\PhiAccrualFailureDetector.cs",
 "region":  {
 "startLine":  42,
 "startColumn":  23,
@@ -303,7 +303,7 @@
 "id":  "S2933",
 "message":  "Make '_maxSampleSize' 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\PhiAccrualFailureDetector.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\PhiAccrualFailureDetector.cs",
 "region":  {
 "startLine":  244,
 "startColumn":  21,
@@ -316,7 +316,7 @@
 "id":  "S2933",
 "message":  "Make '_intervals' 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\PhiAccrualFailureDetector.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\PhiAccrualFailureDetector.cs",
 "region":  {
 "startLine":  245,
 "startColumn":  28,
@@ -329,7 +329,7 @@
 "id":  "S2933",
 "message":  "Make '_intervalSum' 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\PhiAccrualFailureDetector.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\PhiAccrualFailureDetector.cs",
 "region":  {
 "startLine":  246,
 "startColumn":  22,
@@ -342,7 +342,7 @@
 "id":  "S2933",
 "message":  "Make '_squaredIntervalSum' 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\PhiAccrualFailureDetector.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\PhiAccrualFailureDetector.cs",
 "region":  {
 "startLine":  247,
 "startColumn":  22,
@@ -355,7 +355,7 @@
 "id":  "S2933",
 "message":  "Make '_transportSupervisor' 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\Remoting.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Remoting.cs",
 "region":  {
 "startLine":  109,
 "startColumn":  27,
@@ -368,7 +368,7 @@
 "id":  "S2933",
 "message":  "Make '_eventPublisher' 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\Remoting.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Remoting.cs",
 "region":  {
 "startLine":  110,
 "startColumn":  32,
@@ -381,7 +381,7 @@
 "id":  "S2933",
 "message":  "Make '_wrappedTransport' 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
 "region":  {
 "startLine":  144,
 "startColumn":  27,
@@ -394,7 +394,7 @@
 "id":  "S2933",
 "message":  "Make '_settings' 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
 "region":  {
 "startLine":  146,
 "startColumn":  38,
@@ -407,7 +407,7 @@
 "id":  "S2933",
 "message":  "Make '_initialData' 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
 "region":  {
 "startLine":  466,
 "startColumn":  42,
@@ -420,7 +420,7 @@
 "id":  "S2933",
 "message":  "Make '_localHandshakeInfo' 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
 "region":  {
 "startLine":  467,
 "startColumn":  31,
@@ -433,7 +433,7 @@
 "id":  "S2933",
 "message":  "Make '_refuseUid' 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
 "region":  {
 "startLine":  468,
 "startColumn":  22,
@@ -446,7 +446,7 @@
 "id":  "S2933",
 "message":  "Make '_settings' 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
 "region":  {
 "startLine":  469,
 "startColumn":  38,
@@ -459,7 +459,7 @@
 "id":  "S2933",
 "message":  "Make '_localAddress' 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
 "region":  {
 "startLine":  470,
 "startColumn":  25,
@@ -472,7 +472,7 @@
 "id":  "S2933",
 "message":  "Make '_codec' 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
 "region":  {
 "startLine":  471,
 "startColumn":  30,
@@ -485,7 +485,7 @@
 "id":  "S2933",
 "message":  "Make '_failureDetector' 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
 "region":  {
 "startLine":  472,
 "startColumn":  33,
@@ -498,7 +498,7 @@
 "id":  "S2933",
 "message":  "Make '_log' 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\Transport\FailureInjectorTransportAdapter.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\FailureInjectorTransportAdapter.cs",
 "region":  {
 "startLine":  130,
 "startColumn":  33,
@@ -511,7 +511,7 @@
 "id":  "S2933",
 "message":  "Make '_shouldDebugLog' 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\Transport\FailureInjectorTransportAdapter.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\FailureInjectorTransportAdapter.cs",
 "region":  {
 "startLine":  136,
 "startColumn":  22,
@@ -524,7 +524,7 @@
 "id":  "S2933",
 "message":  "Make '_associationListenerTask' 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\Transport\Helios\HeliosTcpTransport.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\Helios\HeliosTcpTransport.cs",
 "region":  {
 "startLine":  131,
 "startColumn":  49,
@@ -537,7 +537,7 @@
 "id":  "S2933",
 "message":  "Make '_channel' 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\Transport\Helios\HeliosTcpTransport.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\Helios\HeliosTcpTransport.cs",
 "region":  {
 "startLine":  198,
 "startColumn":  29,
@@ -550,7 +550,7 @@
 "id":  "S2933",
 "message":  "Make '_transport' 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\Transport\Helios\HeliosTcpTransport.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\Helios\HeliosTcpTransport.cs",
 "region":  {
 "startLine":  199,
 "startColumn":  33,
@@ -563,7 +563,7 @@
 "id":  "S2933",
 "message":  "Make '_throttlingModes' 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
 "region":  {
 "startLine":  215,
 "startColumn":  94,
@@ -576,7 +576,7 @@
 "id":  "S2933",
 "message":  "Make '_handleTable' 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
 "region":  {
 "startLine":  218,
 "startColumn":  55,

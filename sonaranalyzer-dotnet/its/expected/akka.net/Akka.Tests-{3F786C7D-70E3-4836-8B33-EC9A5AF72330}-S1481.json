@@ -4,7 +4,7 @@
 "id":  "S1481",
 "message":  "Remove this unused 'b' local variable.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorDslSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ActorDslSpec.cs",
 "region":  {
 "startLine":  99,
 "startColumn":  21,
@@ -17,7 +17,7 @@
 "id":  "S1481",
 "message":  "Remove this unused 'bref' local variable.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorRefSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ActorRefSpec.cs",
 "region":  {
 "startLine":  105,
 "startColumn":  21,
@@ -30,7 +30,7 @@
 "id":  "S1481",
 "message":  "Remove this unused 'asyncShutdownTask' local variable.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorSystemSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ActorSystemSpec.cs",
 "region":  {
 "startLine":  59,
 "startColumn":  17,
@@ -43,7 +43,7 @@
 "id":  "S1481",
 "message":  "Remove this unused 'monitor' local variable.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\DeathWatchSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\DeathWatchSpec.cs",
 "region":  {
 "startLine":  135,
 "startColumn":  21,
@@ -56,7 +56,7 @@
 "id":  "S1481",
 "message":  "Remove this unused 'numberOfMessages' local variable.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\FSMTimingSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\FSMTimingSpec.cs",
 "region":  {
 "startLine":  366,
 "startColumn":  33,
@@ -69,7 +69,7 @@
 "id":  "S1481",
 "message":  "Remove this unused 'a' local variable.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\LocalActorRefProviderSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\LocalActorRefProviderSpec.cs",
 "region":  {
 "startLine":  101,
 "startColumn":  25,
@@ -82,7 +82,7 @@
 "id":  "S1481",
 "message":  "Remove this unused 'b' local variable.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\LocalActorRefProviderSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\LocalActorRefProviderSpec.cs",
 "region":  {
 "startLine":  102,
 "startColumn":  25,
@@ -95,7 +95,7 @@
 "id":  "S1481",
 "message":  "Remove this unused 'result' local variable.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\PatternSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\PatternSpec.cs",
 "region":  {
 "startLine":  63,
 "startColumn":  21,
@@ -108,7 +108,7 @@
 "id":  "S1481",
 "message":  "Remove this unused 'actor' local variable.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\PropsSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\PropsSpec.cs",
 "region":  {
 "startLine":  40,
 "startColumn":  23,
@@ -121,7 +121,7 @@
 "id":  "S1481",
 "message":  "Remove this unused 'worker2' local variable.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\SupervisorHierarchySpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\SupervisorHierarchySpec.cs",
 "region":  {
 "startLine":  111,
 "startColumn":  17,
@@ -134,7 +134,7 @@
 "id":  "S1481",
 "message":  "Remove this unused 'worker3' local variable.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\SupervisorHierarchySpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\SupervisorHierarchySpec.cs",
 "region":  {
 "startLine":  112,
 "startColumn":  17,
@@ -147,7 +147,7 @@
 "id":  "S1481",
 "message":  "Remove this unused 'server' local variable.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\IO\UdpIntegrationSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\IO\UdpIntegrationSpec.cs",
 "region":  {
 "startLine":  56,
 "startColumn":  17,
@@ -160,7 +160,7 @@
 "id":  "S1481",
 "message":  "Remove this unused 'x' local variable.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\MatchHandler\MatchHandlerBuilderTests.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\MatchHandler\MatchHandlerBuilderTests.cs",
 "region":  {
 "startLine":  105,
 "startColumn":  49,
@@ -173,7 +173,7 @@
 "id":  "S1481",
 "message":  "Remove this unused 'x' local variable.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\MatchHandler\MatchHandlerBuilderTests.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\MatchHandler\MatchHandlerBuilderTests.cs",
 "region":  {
 "startLine":  126,
 "startColumn":  49,

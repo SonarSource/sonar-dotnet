@@ -4,7 +4,7 @@
 "id":  "S100",
 "message":  "Rename method 'HTML' to match camel case naming rules, consider using 'Html'.",
 "location":  {
-"uri":  "Nancy\src\Nancy.ViewEngines.Spark\NancySparkView.cs",
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark\NancySparkView.cs",
 "region":  {
 "startLine":  33,
 "startColumn":  23,

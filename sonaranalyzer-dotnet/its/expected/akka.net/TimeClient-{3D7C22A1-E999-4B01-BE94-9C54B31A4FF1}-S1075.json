@@ -4,7 +4,7 @@
 "id":  "S1075",
 "message":  "Refactor your code not to use hardcoded absolute paths or URIs.",
 "location":  {
-"uri":  "akka.net\src\examples\TimeServer\TimeClient\Program.cs",
+"uri":  "sources\akka.net\src\examples\TimeServer\TimeClient\Program.cs",
 "region":  {
 "startLine":  24,
 "startColumn":  49,

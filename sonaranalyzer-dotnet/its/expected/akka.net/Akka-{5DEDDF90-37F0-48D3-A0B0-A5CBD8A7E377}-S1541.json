@@ -5,7 +5,7 @@
 "message":  "The Cyclomatic Complexity of this method is 12 which is greater than 10 authorized.",
 "location":  [
 {
-"uri":  "akka.net\src\core\Akka\Actor\ActorCell.DefaultMessages.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.DefaultMessages.cs",
 "region":  {
 "startLine":  168,
 "startColumn":  21,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Actor\ActorCell.DefaultMessages.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.DefaultMessages.cs",
 "region":  {
 "startLine":  168,
 "startColumn":  21,
@@ -23,7 +23,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Actor\ActorCell.DefaultMessages.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.DefaultMessages.cs",
 "region":  {
 "startLine":  175,
 "startColumn":  17,
@@ -32,7 +32,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Actor\ActorCell.DefaultMessages.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.DefaultMessages.cs",
 "region":  {
 "startLine":  176,
 "startColumn":  22,
@@ -41,7 +41,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Actor\ActorCell.DefaultMessages.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.DefaultMessages.cs",
 "region":  {
 "startLine":  177,
 "startColumn":  22,
@@ -50,7 +50,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Actor\ActorCell.DefaultMessages.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.DefaultMessages.cs",
 "region":  {
 "startLine":  182,
 "startColumn":  22,
@@ -59,7 +59,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Actor\ActorCell.DefaultMessages.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.DefaultMessages.cs",
 "region":  {
 "startLine":  183,
 "startColumn":  22,
@@ -68,7 +68,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Actor\ActorCell.DefaultMessages.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.DefaultMessages.cs",
 "region":  {
 "startLine":  188,
 "startColumn":  22,
@@ -77,7 +77,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Actor\ActorCell.DefaultMessages.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.DefaultMessages.cs",
 "region":  {
 "startLine":  193,
 "startColumn":  22,
@@ -86,7 +86,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Actor\ActorCell.DefaultMessages.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.DefaultMessages.cs",
 "region":  {
 "startLine":  194,
 "startColumn":  22,
@@ -95,7 +95,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Actor\ActorCell.DefaultMessages.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.DefaultMessages.cs",
 "region":  {
 "startLine":  195,
 "startColumn":  22,
@@ -104,7 +104,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Actor\ActorCell.DefaultMessages.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.DefaultMessages.cs",
 "region":  {
 "startLine":  196,
 "startColumn":  22,
@@ -113,7 +113,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Actor\ActorCell.DefaultMessages.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.DefaultMessages.cs",
 "region":  {
 "startLine":  197,
 "startColumn":  22,
@@ -128,7 +128,7 @@
 "message":  "The Cyclomatic Complexity of this method is 18 which is greater than 10 authorized.",
 "location":  [
 {
-"uri":  "akka.net\src\core\Akka\Actor\ActorPath.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorPath.cs",
 "region":  {
 "startLine":  118,
 "startColumn":  29,
@@ -137,7 +137,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Actor\ActorPath.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorPath.cs",
 "region":  {
 "startLine":  118,
 "startColumn":  29,
@@ -146,7 +146,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Actor\ActorPath.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorPath.cs",
 "region":  {
 "startLine":  120,
 "startColumn":  124,
@@ -155,7 +155,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Actor\ActorPath.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorPath.cs",
 "region":  {
 "startLine":  120,
 "startColumn":  98,
@@ -164,7 +164,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Actor\ActorPath.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorPath.cs",
 "region":  {
 "startLine":  120,
 "startColumn":  72,
@@ -173,7 +173,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Actor\ActorPath.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorPath.cs",
 "region":  {
 "startLine":  120,
 "startColumn":  59,
@@ -182,7 +182,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Actor\ActorPath.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorPath.cs",
 "region":  {
 "startLine":  120,
 "startColumn":  85,
@@ -191,7 +191,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Actor\ActorPath.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorPath.cs",
 "region":  {
 "startLine":  120,
 "startColumn":  111,
@@ -200,7 +200,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Actor\ActorPath.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorPath.cs",
 "region":  {
 "startLine":  121,
 "startColumn":  96,
@@ -209,7 +209,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Actor\ActorPath.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorPath.cs",
 "region":  {
 "startLine":  121,
 "startColumn":  70,
@@ -218,7 +218,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Actor\ActorPath.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorPath.cs",
 "region":  {
 "startLine":  121,
 "startColumn":  57,
@@ -227,7 +227,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Actor\ActorPath.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorPath.cs",
 "region":  {
 "startLine":  121,
 "startColumn":  83,
@@ -236,7 +236,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Actor\ActorPath.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorPath.cs",
 "region":  {
 "startLine":  121,
 "startColumn":  109,
@@ -245,7 +245,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Actor\ActorPath.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorPath.cs",
 "region":  {
 "startLine":  124,
 "startColumn":  13,
@@ -254,7 +254,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Actor\ActorPath.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorPath.cs",
 "region":  {
 "startLine":  126,
 "startColumn":  17,
@@ -263,7 +263,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Actor\ActorPath.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorPath.cs",
 "region":  {
 "startLine":  130,
 "startColumn":  22,
@@ -272,7 +272,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Actor\ActorPath.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorPath.cs",
 "region":  {
 "startLine":  130,
 "startColumn":  90,
@@ -281,7 +281,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Actor\ActorPath.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorPath.cs",
 "region":  {
 "startLine":  130,
 "startColumn":  61,
@@ -290,7 +290,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Actor\ActorPath.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorPath.cs",
 "region":  {
 "startLine":  130,
 "startColumn":  44,
@@ -305,7 +305,7 @@
 "message":  "The Cyclomatic Complexity of this method is 15 which is greater than 10 authorized.",
 "location":  [
 {
-"uri":  "akka.net\src\core\Akka\Actor\ActorRefProvider.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorRefProvider.cs",
 "region":  {
 "startLine":  351,
 "startColumn":  34,
@@ -314,7 +314,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Actor\ActorRefProvider.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorRefProvider.cs",
 "region":  {
 "startLine":  351,
 "startColumn":  34,
@@ -323,7 +323,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Actor\ActorRefProvider.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorRefProvider.cs",
 "region":  {
 "startLine":  353,
 "startColumn":  13,
@@ -332,7 +332,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Actor\ActorRefProvider.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorRefProvider.cs",
 "region":  {
 "startLine":  355,
 "startColumn":  17,
@@ -341,7 +341,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Actor\ActorRefProvider.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorRefProvider.cs",
 "region":  {
 "startLine":  358,
 "startColumn":  21,
@@ -350,7 +350,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Actor\ActorRefProvider.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorRefProvider.cs",
 "region":  {
 "startLine":  358,
 "startColumn":  35,
@@ -359,7 +359,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Actor\ActorRefProvider.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorRefProvider.cs",
 "region":  {
 "startLine":  366,
 "startColumn":  48,
@@ -368,7 +368,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Actor\ActorRefProvider.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorRefProvider.cs",
 "region":  {
 "startLine":  367,
 "startColumn":  17,
@@ -377,7 +377,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Actor\ActorRefProvider.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorRefProvider.cs",
 "region":  {
 "startLine":  369,
 "startColumn":  21,
@@ -386,7 +386,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Actor\ActorRefProvider.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorRefProvider.cs",
 "region":  {
 "startLine":  371,
 "startColumn":  21,
@@ -395,7 +395,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Actor\ActorRefProvider.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorRefProvider.cs",
 "region":  {
 "startLine":  375,
 "startColumn":  17,
@@ -404,7 +404,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Actor\ActorRefProvider.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorRefProvider.cs",
 "region":  {
 "startLine":  386,
 "startColumn":  21,
@@ -413,7 +413,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Actor\ActorRefProvider.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorRefProvider.cs",
 "region":  {
 "startLine":  404,
 "startColumn":  76,
@@ -422,7 +422,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Actor\ActorRefProvider.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorRefProvider.cs",
 "region":  {
 "startLine":  404,
 "startColumn":  44,
@@ -431,7 +431,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Actor\ActorRefProvider.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorRefProvider.cs",
 "region":  {
 "startLine":  410,
 "startColumn":  17,
@@ -440,7 +440,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Actor\ActorRefProvider.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorRefProvider.cs",
 "region":  {
 "startLine":  412,
 "startColumn":  17,
@@ -455,7 +455,7 @@
 "message":  "The Cyclomatic Complexity of this method is 12 which is greater than 10 authorized.",
 "location":  [
 {
-"uri":  "akka.net\src\core\Akka\Actor\ActorSelection.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorSelection.cs",
 "region":  {
 "startLine":  129,
 "startColumn":  30,
@@ -464,7 +464,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Actor\ActorSelection.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorSelection.cs",
 "region":  {
 "startLine":  129,
 "startColumn":  30,
@@ -473,7 +473,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Actor\ActorSelection.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorSelection.cs",
 "region":  {
 "startLine":  131,
 "startColumn":  13,
@@ -482,7 +482,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Actor\ActorSelection.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorSelection.cs",
 "region":  {
 "startLine":  150,
 "startColumn":  33,
@@ -491,7 +491,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Actor\ActorSelection.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorSelection.cs",
 "region":  {
 "startLine":  158,
 "startColumn":  33,
@@ -500,7 +500,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Actor\ActorSelection.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorSelection.cs",
 "region":  {
 "startLine":  160,
 "startColumn":  37,
@@ -509,7 +509,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Actor\ActorSelection.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorSelection.cs",
 "region":  {
 "startLine":  163,
 "startColumn":  38,
@@ -518,7 +518,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Actor\ActorSelection.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorSelection.cs",
 "region":  {
 "startLine":  180,
 "startColumn":  33,
@@ -527,7 +527,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Actor\ActorSelection.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorSelection.cs",
 "region":  {
 "startLine":  182,
 "startColumn":  37,
@@ -536,7 +536,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Actor\ActorSelection.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorSelection.cs",
 "region":  {
 "startLine":  182,
 "startColumn":  67,
@@ -545,7 +545,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Actor\ActorSelection.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorSelection.cs",
 "region":  {
 "startLine":  189,
 "startColumn":  37,
@@ -554,7 +554,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Actor\ActorSelection.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorSelection.cs",
 "region":  {
 "startLine":  189,
 "startColumn":  69,
@@ -563,7 +563,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Actor\ActorSelection.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorSelection.cs",
 "region":  {
 "startLine":  194,
 "startColumn":  64,
@@ -578,7 +578,7 @@
 "message":  "The Cyclomatic Complexity of this method is 14 which is greater than 10 authorized.",
 "location":  [
 {
-"uri":  "akka.net\src\core\Akka\Actor\Deploy.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\Deploy.cs",
 "region":  {
 "startLine":  115,
 "startColumn":  21,
@@ -587,7 +587,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Actor\Deploy.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\Deploy.cs",
 "region":  {
 "startLine":  115,
 "startColumn":  21,
@@ -596,7 +596,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Actor\Deploy.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\Deploy.cs",
 "region":  {
 "startLine":  117,
 "startColumn":  13,
@@ -605,7 +605,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Actor\Deploy.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\Deploy.cs",
 "region":  {
 "startLine":  124,
 "startColumn":  74,
@@ -614,7 +614,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Actor\Deploy.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\Deploy.cs",
 "region":  {
 "startLine":  122,
 "startColumn":  62,
@@ -623,7 +623,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Actor\Deploy.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\Deploy.cs",
 "region":  {
 "startLine":  121,
 "startColumn":  54,
@@ -632,7 +632,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Actor\Deploy.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\Deploy.cs",
 "region":  {
 "startLine":  120,
 "startColumn":  66,
@@ -641,7 +641,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Actor\Deploy.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\Deploy.cs",
 "region":  {
 "startLine":  119,
 "startColumn":  62,
@@ -650,7 +650,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Actor\Deploy.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\Deploy.cs",
 "region":  {
 "startLine":  118,
 "startColumn":  94,
@@ -659,7 +659,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Actor\Deploy.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\Deploy.cs",
 "region":  {
 "startLine":  118,
 "startColumn":  53,
@@ -668,7 +668,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Actor\Deploy.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\Deploy.cs",
 "region":  {
 "startLine":  123,
 "startColumn":  80,
@@ -677,7 +677,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Actor\Deploy.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\Deploy.cs",
 "region":  {
 "startLine":  123,
 "startColumn":  46,
@@ -686,7 +686,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Actor\Deploy.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\Deploy.cs",
 "region":  {
 "startLine":  125,
 "startColumn":  60,
@@ -695,7 +695,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Actor\Deploy.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\Deploy.cs",
 "region":  {
 "startLine":  125,
 "startColumn":  36,
@@ -704,7 +704,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Actor\Deploy.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\Deploy.cs",
 "region":  {
 "startLine":  125,
 "startColumn":  79,
@@ -719,7 +719,7 @@
 "message":  "The Cyclomatic Complexity of this method is 11 which is greater than 10 authorized.",
 "location":  [
 {
-"uri":  "akka.net\src\core\Akka\Actor\Inbox.Actor.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\Inbox.Actor.cs",
 "region":  {
 "startLine":  84,
 "startColumn":  33,
@@ -728,7 +728,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Actor\Inbox.Actor.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\Inbox.Actor.cs",
 "region":  {
 "startLine":  84,
 "startColumn":  33,
@@ -737,7 +737,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Actor\Inbox.Actor.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\Inbox.Actor.cs",
 "region":  {
 "startLine":  89,
 "startColumn":  21,
@@ -746,7 +746,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Actor\Inbox.Actor.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\Inbox.Actor.cs",
 "region":  {
 "startLine":  100,
 "startColumn":  21,
@@ -755,7 +755,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Actor\Inbox.Actor.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\Inbox.Actor.cs",
 "region":  {
 "startLine":  108,
 "startColumn":  25,
@@ -764,7 +764,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Actor\Inbox.Actor.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\Inbox.Actor.cs",
 "region":  {
 "startLine":  125,
 "startColumn":  21,
@@ -773,7 +773,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Actor\Inbox.Actor.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\Inbox.Actor.cs",
 "region":  {
 "startLine":  134,
 "startColumn":  21,
@@ -782,7 +782,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Actor\Inbox.Actor.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\Inbox.Actor.cs",
 "region":  {
 "startLine":  142,
 "startColumn":  25,
@@ -791,7 +791,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Actor\Inbox.Actor.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\Inbox.Actor.cs",
 "region":  {
 "startLine":  155,
 "startColumn":  13,
@@ -800,7 +800,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Actor\Inbox.Actor.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\Inbox.Actor.cs",
 "region":  {
 "startLine":  157,
 "startColumn":  17,
@@ -809,7 +809,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Actor\Inbox.Actor.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\Inbox.Actor.cs",
 "region":  {
 "startLine":  166,
 "startColumn":  17,
@@ -818,7 +818,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Actor\Inbox.Actor.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\Inbox.Actor.cs",
 "region":  {
 "startLine":  168,
 "startColumn":  21,
@@ -833,7 +833,7 @@
 "message":  "The Cyclomatic Complexity of this method is 11 which is greater than 10 authorized.",
 "location":  [
 {
-"uri":  "akka.net\src\core\Akka\Configuration\Hocon\HoconTokenizer.cs",
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconTokenizer.cs",
 "region":  {
 "startLine":  208,
 "startColumn":  22,
@@ -842,7 +842,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Configuration\Hocon\HoconTokenizer.cs",
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconTokenizer.cs",
 "region":  {
 "startLine":  208,
 "startColumn":  22,
@@ -851,7 +851,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Configuration\Hocon\HoconTokenizer.cs",
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconTokenizer.cs",
 "region":  {
 "startLine":  211,
 "startColumn":  13,
@@ -860,7 +860,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Configuration\Hocon\HoconTokenizer.cs",
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconTokenizer.cs",
 "region":  {
 "startLine":  215,
 "startColumn":  13,
@@ -869,7 +869,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Configuration\Hocon\HoconTokenizer.cs",
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconTokenizer.cs",
 "region":  {
 "startLine":  219,
 "startColumn":  13,
@@ -878,7 +878,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Configuration\Hocon\HoconTokenizer.cs",
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconTokenizer.cs",
 "region":  {
 "startLine":  223,
 "startColumn":  13,
@@ -887,7 +887,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Configuration\Hocon\HoconTokenizer.cs",
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconTokenizer.cs",
 "region":  {
 "startLine":  227,
 "startColumn":  13,
@@ -896,7 +896,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Configuration\Hocon\HoconTokenizer.cs",
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconTokenizer.cs",
 "region":  {
 "startLine":  231,
 "startColumn":  13,
@@ -905,7 +905,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Configuration\Hocon\HoconTokenizer.cs",
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconTokenizer.cs",
 "region":  {
 "startLine":  235,
 "startColumn":  13,
@@ -914,7 +914,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Configuration\Hocon\HoconTokenizer.cs",
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconTokenizer.cs",
 "region":  {
 "startLine":  239,
 "startColumn":  13,
@@ -923,7 +923,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Configuration\Hocon\HoconTokenizer.cs",
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconTokenizer.cs",
 "region":  {
 "startLine":  243,
 "startColumn":  13,
@@ -932,7 +932,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Configuration\Hocon\HoconTokenizer.cs",
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconTokenizer.cs",
 "region":  {
 "startLine":  247,
 "startColumn":  13,
@@ -947,7 +947,7 @@
 "message":  "The Cyclomatic Complexity of this method is 18 which is greater than 10 authorized.",
 "location":  [
 {
-"uri":  "akka.net\src\core\Akka\Dispatch\ConcurrentQueueMailbox.cs",
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\ConcurrentQueueMailbox.cs",
 "region":  {
 "startLine":  33,
 "startColumn":  22,
@@ -956,7 +956,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Dispatch\ConcurrentQueueMailbox.cs",
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\ConcurrentQueueMailbox.cs",
 "region":  {
 "startLine":  33,
 "startColumn":  22,
@@ -965,7 +965,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Dispatch\ConcurrentQueueMailbox.cs",
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\ConcurrentQueueMailbox.cs",
 "region":  {
 "startLine":  35,
 "startColumn":  13,
@@ -974,7 +974,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Dispatch\ConcurrentQueueMailbox.cs",
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\ConcurrentQueueMailbox.cs",
 "region":  {
 "startLine":  44,
 "startColumn":  17,
@@ -983,7 +983,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Dispatch\ConcurrentQueueMailbox.cs",
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\ConcurrentQueueMailbox.cs",
 "region":  {
 "startLine":  44,
 "startColumn":  53,
@@ -992,7 +992,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Dispatch\ConcurrentQueueMailbox.cs",
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\ConcurrentQueueMailbox.cs",
 "region":  {
 "startLine":  46,
 "startColumn":  21,
@@ -1001,7 +1001,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Dispatch\ConcurrentQueueMailbox.cs",
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\ConcurrentQueueMailbox.cs",
 "region":  {
 "startLine":  61,
 "startColumn":  17,
@@ -1010,7 +1010,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Dispatch\ConcurrentQueueMailbox.cs",
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\ConcurrentQueueMailbox.cs",
 "region":  {
 "startLine":  72,
 "startColumn":  17,
@@ -1019,7 +1019,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Dispatch\ConcurrentQueueMailbox.cs",
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\ConcurrentQueueMailbox.cs",
 "region":  {
 "startLine":  72,
 "startColumn":  51,
@@ -1028,7 +1028,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Dispatch\ConcurrentQueueMailbox.cs",
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\ConcurrentQueueMailbox.cs",
 "region":  {
 "startLine":  72,
 "startColumn":  37,
@@ -1037,7 +1037,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Dispatch\ConcurrentQueueMailbox.cs",
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\ConcurrentQueueMailbox.cs",
 "region":  {
 "startLine":  80,
 "startColumn":  21,
@@ -1046,7 +1046,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Dispatch\ConcurrentQueueMailbox.cs",
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\ConcurrentQueueMailbox.cs",
 "region":  {
 "startLine":  89,
 "startColumn":  21,
@@ -1055,7 +1055,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Dispatch\ConcurrentQueueMailbox.cs",
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\ConcurrentQueueMailbox.cs",
 "region":  {
 "startLine":  93,
 "startColumn":  21,
@@ -1064,7 +1064,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Dispatch\ConcurrentQueueMailbox.cs",
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\ConcurrentQueueMailbox.cs",
 "region":  {
 "startLine":  93,
 "startColumn":  93,
@@ -1073,7 +1073,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Dispatch\ConcurrentQueueMailbox.cs",
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\ConcurrentQueueMailbox.cs",
 "region":  {
 "startLine":  93,
 "startColumn":  57,
@@ -1082,7 +1082,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Dispatch\ConcurrentQueueMailbox.cs",
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\ConcurrentQueueMailbox.cs",
 "region":  {
 "startLine":  101,
 "startColumn":  21,
@@ -1091,7 +1091,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Dispatch\ConcurrentQueueMailbox.cs",
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\ConcurrentQueueMailbox.cs",
 "region":  {
 "startLine":  110,
 "startColumn":  17,
@@ -1100,7 +1100,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Dispatch\ConcurrentQueueMailbox.cs",
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\ConcurrentQueueMailbox.cs",
 "region":  {
 "startLine":  110,
 "startColumn":  47,
@@ -1109,7 +1109,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Dispatch\ConcurrentQueueMailbox.cs",
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\ConcurrentQueueMailbox.cs",
 "region":  {
 "startLine":  110,
 "startColumn":  64,
@@ -1124,7 +1124,7 @@
 "message":  "The Cyclomatic Complexity of this method is 18 which is greater than 10 authorized.",
 "location":  [
 {
-"uri":  "akka.net\src\core\Akka\Dispatch\GenericMailbox.cs",
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\GenericMailbox.cs",
 "region":  {
 "startLine":  54,
 "startColumn":  22,
@@ -1133,7 +1133,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Dispatch\GenericMailbox.cs",
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\GenericMailbox.cs",
 "region":  {
 "startLine":  54,
 "startColumn":  22,
@@ -1142,7 +1142,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Dispatch\GenericMailbox.cs",
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\GenericMailbox.cs",
 "region":  {
 "startLine":  56,
 "startColumn":  13,
@@ -1151,7 +1151,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Dispatch\GenericMailbox.cs",
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\GenericMailbox.cs",
 "region":  {
 "startLine":  65,
 "startColumn":  17,
@@ -1160,7 +1160,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Dispatch\GenericMailbox.cs",
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\GenericMailbox.cs",
 "region":  {
 "startLine":  65,
 "startColumn":  53,
@@ -1169,7 +1169,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Dispatch\GenericMailbox.cs",
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\GenericMailbox.cs",
 "region":  {
 "startLine":  67,
 "startColumn":  21,
@@ -1178,7 +1178,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Dispatch\GenericMailbox.cs",
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\GenericMailbox.cs",
 "region":  {
 "startLine":  82,
 "startColumn":  17,
@@ -1187,7 +1187,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Dispatch\GenericMailbox.cs",
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\GenericMailbox.cs",
 "region":  {
 "startLine":  93,
 "startColumn":  17,
@@ -1196,7 +1196,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Dispatch\GenericMailbox.cs",
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\GenericMailbox.cs",
 "region":  {
 "startLine":  93,
 "startColumn":  51,
@@ -1205,7 +1205,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Dispatch\GenericMailbox.cs",
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\GenericMailbox.cs",
 "region":  {
 "startLine":  93,
 "startColumn":  37,
@@ -1214,7 +1214,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Dispatch\GenericMailbox.cs",
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\GenericMailbox.cs",
 "region":  {
 "startLine":  101,
 "startColumn":  21,
@@ -1223,7 +1223,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Dispatch\GenericMailbox.cs",
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\GenericMailbox.cs",
 "region":  {
 "startLine":  110,
 "startColumn":  21,
@@ -1232,7 +1232,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Dispatch\GenericMailbox.cs",
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\GenericMailbox.cs",
 "region":  {
 "startLine":  114,
 "startColumn":  21,
@@ -1241,7 +1241,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Dispatch\GenericMailbox.cs",
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\GenericMailbox.cs",
 "region":  {
 "startLine":  114,
 "startColumn":  93,
@@ -1250,7 +1250,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Dispatch\GenericMailbox.cs",
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\GenericMailbox.cs",
 "region":  {
 "startLine":  114,
 "startColumn":  57,
@@ -1259,7 +1259,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Dispatch\GenericMailbox.cs",
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\GenericMailbox.cs",
 "region":  {
 "startLine":  122,
 "startColumn":  21,
@@ -1268,7 +1268,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Dispatch\GenericMailbox.cs",
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\GenericMailbox.cs",
 "region":  {
 "startLine":  131,
 "startColumn":  17,
@@ -1277,7 +1277,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Dispatch\GenericMailbox.cs",
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\GenericMailbox.cs",
 "region":  {
 "startLine":  131,
 "startColumn":  47,
@@ -1286,7 +1286,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Dispatch\GenericMailbox.cs",
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\GenericMailbox.cs",
 "region":  {
 "startLine":  131,
 "startColumn":  64,
@@ -1301,7 +1301,7 @@
 "message":  "The Cyclomatic Complexity of this method is 12 which is greater than 10 authorized.",
 "location":  [
 {
-"uri":  "akka.net\src\core\Akka\IO\TcpConnection.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpConnection.cs",
 "region":  {
 "startLine":  454,
 "startColumn":  22,
@@ -1310,7 +1310,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\IO\TcpConnection.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpConnection.cs",
 "region":  {
 "startLine":  454,
 "startColumn":  22,
@@ -1319,7 +1319,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\IO\TcpConnection.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpConnection.cs",
 "region":  {
 "startLine":  456,
 "startColumn":  13,
@@ -1328,7 +1328,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\IO\TcpConnection.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpConnection.cs",
 "region":  {
 "startLine":  458,
 "startColumn":  17,
@@ -1337,7 +1337,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\IO\TcpConnection.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpConnection.cs",
 "region":  {
 "startLine":  462,
 "startColumn":  13,
@@ -1346,7 +1346,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\IO\TcpConnection.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpConnection.cs",
 "region":  {
 "startLine":  462,
 "startColumn":  47,
@@ -1355,7 +1355,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\IO\TcpConnection.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpConnection.cs",
 "region":  {
 "startLine":  471,
 "startColumn":  13,
@@ -1364,7 +1364,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\IO\TcpConnection.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpConnection.cs",
 "region":  {
 "startLine":  473,
 "startColumn":  17,
@@ -1373,7 +1373,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\IO\TcpConnection.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpConnection.cs",
 "region":  {
 "startLine":  477,
 "startColumn":  13,
@@ -1382,7 +1382,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\IO\TcpConnection.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpConnection.cs",
 "region":  {
 "startLine":  479,
 "startColumn":  17,
@@ -1391,7 +1391,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\IO\TcpConnection.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpConnection.cs",
 "region":  {
 "startLine":  484,
 "startColumn":  17,
@@ -1400,7 +1400,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\IO\TcpConnection.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpConnection.cs",
 "region":  {
 "startLine":  484,
 "startColumn":  33,
@@ -1409,7 +1409,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\IO\TcpConnection.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpConnection.cs",
 "region":  {
 "startLine":  490,
 "startColumn":  13,
@@ -1424,7 +1424,7 @@
 "message":  "The Cyclomatic Complexity of this method is 15 which is greater than 10 authorized.",
 "location":  [
 {
-"uri":  "akka.net\src\core\Akka\IO\TcpConnection.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpConnection.cs",
 "region":  {
 "startLine":  371,
 "startColumn":  22,
@@ -1433,7 +1433,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\IO\TcpConnection.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpConnection.cs",
 "region":  {
 "startLine":  371,
 "startColumn":  22,
@@ -1442,7 +1442,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\IO\TcpConnection.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpConnection.cs",
 "region":  {
 "startLine":  373,
 "startColumn":  13,
@@ -1451,7 +1451,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\IO\TcpConnection.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpConnection.cs",
 "region":  {
 "startLine":  378,
 "startColumn":  21,
@@ -1460,7 +1460,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\IO\TcpConnection.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpConnection.cs",
 "region":  {
 "startLine":  386,
 "startColumn":  25,
@@ -1469,7 +1469,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\IO\TcpConnection.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpConnection.cs",
 "region":  {
 "startLine":  387,
 "startColumn":  25,
@@ -1478,7 +1478,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\IO\TcpConnection.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpConnection.cs",
 "region":  {
 "startLine":  390,
 "startColumn":  25,
@@ -1487,7 +1487,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\IO\TcpConnection.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpConnection.cs",
 "region":  {
 "startLine":  393,
 "startColumn":  33,
@@ -1496,7 +1496,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\IO\TcpConnection.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpConnection.cs",
 "region":  {
 "startLine":  396,
 "startColumn":  25,
@@ -1505,7 +1505,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\IO\TcpConnection.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpConnection.cs",
 "region":  {
 "startLine":  398,
 "startColumn":  25,
@@ -1514,7 +1514,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\IO\TcpConnection.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpConnection.cs",
 "region":  {
 "startLine":  409,
 "startColumn":  21,
@@ -1523,7 +1523,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\IO\TcpConnection.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpConnection.cs",
 "region":  {
 "startLine":  411,
 "startColumn":  25,
@@ -1532,7 +1532,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\IO\TcpConnection.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpConnection.cs",
 "region":  {
 "startLine":  414,
 "startColumn":  21,
@@ -1541,7 +1541,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\IO\TcpConnection.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpConnection.cs",
 "region":  {
 "startLine":  416,
 "startColumn":  25,
@@ -1550,7 +1550,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\IO\TcpConnection.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpConnection.cs",
 "region":  {
 "startLine":  425,
 "startColumn":  21,
@@ -1559,7 +1559,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\IO\TcpConnection.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpConnection.cs",
 "region":  {
 "startLine":  427,
 "startColumn":  25,
@@ -1574,7 +1574,7 @@
 "message":  "The Cyclomatic Complexity of this method is 17 which is greater than 10 authorized.",
 "location":  [
 {
-"uri":  "akka.net\src\core\Akka\IO\TcpConnection.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpConnection.cs",
 "region":  {
 "startLine":  255,
 "startColumn":  25,
@@ -1583,7 +1583,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\IO\TcpConnection.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpConnection.cs",
 "region":  {
 "startLine":  255,
 "startColumn":  25,
@@ -1592,7 +1592,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\IO\TcpConnection.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpConnection.cs",
 "region":  {
 "startLine":  259,
 "startColumn":  17,
@@ -1601,7 +1601,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\IO\TcpConnection.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpConnection.cs",
 "region":  {
 "startLine":  261,
 "startColumn":  21,
@@ -1610,7 +1610,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\IO\TcpConnection.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpConnection.cs",
 "region":  {
 "startLine":  264,
 "startColumn":  25,
@@ -1619,7 +1619,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\IO\TcpConnection.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpConnection.cs",
 "region":  {
 "startLine":  264,
 "startColumn":  45,
@@ -1628,7 +1628,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\IO\TcpConnection.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpConnection.cs",
 "region":  {
 "startLine":  273,
 "startColumn":  17,
@@ -1637,7 +1637,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\IO\TcpConnection.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpConnection.cs",
 "region":  {
 "startLine":  275,
 "startColumn":  21,
@@ -1646,7 +1646,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\IO\TcpConnection.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpConnection.cs",
 "region":  {
 "startLine":  277,
 "startColumn":  25,
@@ -1655,7 +1655,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\IO\TcpConnection.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpConnection.cs",
 "region":  {
 "startLine":  280,
 "startColumn":  26,
@@ -1664,7 +1664,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\IO\TcpConnection.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpConnection.cs",
 "region":  {
 "startLine":  282,
 "startColumn":  25,
@@ -1673,7 +1673,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\IO\TcpConnection.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpConnection.cs",
 "region":  {
 "startLine":  284,
 "startColumn":  25,
@@ -1682,7 +1682,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\IO\TcpConnection.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpConnection.cs",
 "region":  {
 "startLine":  289,
 "startColumn":  25,
@@ -1691,7 +1691,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\IO\TcpConnection.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpConnection.cs",
 "region":  {
 "startLine":  294,
 "startColumn":  17,
@@ -1700,7 +1700,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\IO\TcpConnection.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpConnection.cs",
 "region":  {
 "startLine":  307,
 "startColumn":  21,
@@ -1709,7 +1709,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\IO\TcpConnection.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpConnection.cs",
 "region":  {
 "startLine":  309,
 "startColumn":  25,
@@ -1718,7 +1718,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\IO\TcpConnection.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpConnection.cs",
 "region":  {
 "startLine":  316,
 "startColumn":  17,
@@ -1727,7 +1727,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\IO\TcpConnection.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpConnection.cs",
 "region":  {
 "startLine":  320,
 "startColumn":  21,
@@ -1742,7 +1742,7 @@
 "message":  "The Cyclomatic Complexity of this method is 13 which is greater than 10 authorized.",
 "location":  [
 {
-"uri":  "akka.net\src\core\Akka\IO\UdpConnection.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\UdpConnection.cs",
 "region":  {
 "startLine":  107,
 "startColumn":  25,
@@ -1751,7 +1751,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\IO\UdpConnection.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\UdpConnection.cs",
 "region":  {
 "startLine":  107,
 "startColumn":  25,
@@ -1760,7 +1760,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\IO\UdpConnection.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\UdpConnection.cs",
 "region":  {
 "startLine":  111,
 "startColumn":  17,
@@ -1769,7 +1769,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\IO\UdpConnection.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\UdpConnection.cs",
 "region":  {
 "startLine":  116,
 "startColumn":  17,
@@ -1778,7 +1778,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\IO\UdpConnection.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\UdpConnection.cs",
 "region":  {
 "startLine":  121,
 "startColumn":  17,
@@ -1787,7 +1787,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\IO\UdpConnection.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\UdpConnection.cs",
 "region":  {
 "startLine":  127,
 "startColumn":  17,
@@ -1796,7 +1796,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\IO\UdpConnection.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\UdpConnection.cs",
 "region":  {
 "startLine":  138,
 "startColumn":  17,
@@ -1805,7 +1805,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\IO\UdpConnection.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\UdpConnection.cs",
 "region":  {
 "startLine":  138,
 "startColumn":  34,
@@ -1814,7 +1814,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\IO\UdpConnection.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\UdpConnection.cs",
 "region":  {
 "startLine":  140,
 "startColumn":  21,
@@ -1823,7 +1823,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\IO\UdpConnection.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\UdpConnection.cs",
 "region":  {
 "startLine":  144,
 "startColumn":  17,
@@ -1832,7 +1832,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\IO\UdpConnection.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\UdpConnection.cs",
 "region":  {
 "startLine":  144,
 "startColumn":  34,
@@ -1841,7 +1841,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\IO\UdpConnection.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\UdpConnection.cs",
 "region":  {
 "startLine":  146,
 "startColumn":  21,
@@ -1850,7 +1850,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\IO\UdpConnection.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\UdpConnection.cs",
 "region":  {
 "startLine":  150,
 "startColumn":  17,
@@ -1859,7 +1859,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\IO\UdpConnection.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\UdpConnection.cs",
 "region":  {
 "startLine":  156,
 "startColumn":  17,
@@ -1874,7 +1874,7 @@
 "message":  "The Cyclomatic Complexity of this method is 12 which is greater than 10 authorized.",
 "location":  [
 {
-"uri":  "akka.net\src\core\Akka\IO\WithUdpSend.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\WithUdpSend.cs",
 "region":  {
 "startLine":  32,
 "startColumn":  24,
@@ -1883,7 +1883,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\IO\WithUdpSend.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\WithUdpSend.cs",
 "region":  {
 "startLine":  32,
 "startColumn":  24,
@@ -1892,7 +1892,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\IO\WithUdpSend.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\WithUdpSend.cs",
 "region":  {
 "startLine":  37,
 "startColumn":  17,
@@ -1901,7 +1901,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\IO\WithUdpSend.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\WithUdpSend.cs",
 "region":  {
 "startLine":  37,
 "startColumn":  34,
@@ -1910,7 +1910,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\IO\WithUdpSend.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\WithUdpSend.cs",
 "region":  {
 "startLine":  39,
 "startColumn":  21,
@@ -1919,7 +1919,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\IO\WithUdpSend.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\WithUdpSend.cs",
 "region":  {
 "startLine":  43,
 "startColumn":  17,
@@ -1928,7 +1928,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\IO\WithUdpSend.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\WithUdpSend.cs",
 "region":  {
 "startLine":  43,
 "startColumn":  34,
@@ -1937,7 +1937,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\IO\WithUdpSend.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\WithUdpSend.cs",
 "region":  {
 "startLine":  45,
 "startColumn":  21,
@@ -1946,7 +1946,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\IO\WithUdpSend.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\WithUdpSend.cs",
 "region":  {
 "startLine":  49,
 "startColumn":  17,
@@ -1955,7 +1955,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\IO\WithUdpSend.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\WithUdpSend.cs",
 "region":  {
 "startLine":  55,
 "startColumn":  21,
@@ -1964,7 +1964,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\IO\WithUdpSend.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\WithUdpSend.cs",
 "region":  {
 "startLine":  58,
 "startColumn":  25,
@@ -1973,7 +1973,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\IO\WithUdpSend.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\WithUdpSend.cs",
 "region":  {
 "startLine":  81,
 "startColumn":  17,
@@ -1982,7 +1982,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\IO\WithUdpSend.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\WithUdpSend.cs",
 "region":  {
 "startLine":  81,
 "startColumn":  65,
@@ -1997,7 +1997,7 @@
 "message":  "The Cyclomatic Complexity of this method is 11 which is greater than 10 authorized.",
 "location":  [
 {
-"uri":  "akka.net\src\core\Akka\Pattern\BackoffSupervisor.cs",
+"uri":  "sources\akka.net\src\core\Akka\Pattern\BackoffSupervisor.cs",
 "region":  {
 "startLine":  92,
 "startColumn":  33,
@@ -2006,7 +2006,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Pattern\BackoffSupervisor.cs",
+"uri":  "sources\akka.net\src\core\Akka\Pattern\BackoffSupervisor.cs",
 "region":  {
 "startLine":  92,
 "startColumn":  33,
@@ -2015,7 +2015,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Pattern\BackoffSupervisor.cs",
+"uri":  "sources\akka.net\src\core\Akka\Pattern\BackoffSupervisor.cs",
 "region":  {
 "startLine":  94,
 "startColumn":  13,
@@ -2024,7 +2024,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Pattern\BackoffSupervisor.cs",
+"uri":  "sources\akka.net\src\core\Akka\Pattern\BackoffSupervisor.cs",
 "region":  {
 "startLine":  97,
 "startColumn":  17,
@@ -2033,7 +2033,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Pattern\BackoffSupervisor.cs",
+"uri":  "sources\akka.net\src\core\Akka\Pattern\BackoffSupervisor.cs",
 "region":  {
 "startLine":  97,
 "startColumn":  36,
@@ -2042,7 +2042,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Pattern\BackoffSupervisor.cs",
+"uri":  "sources\akka.net\src\core\Akka\Pattern\BackoffSupervisor.cs",
 "region":  {
 "startLine":  102,
 "startColumn":  21,
@@ -2051,7 +2051,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Pattern\BackoffSupervisor.cs",
+"uri":  "sources\akka.net\src\core\Akka\Pattern\BackoffSupervisor.cs",
 "region":  {
 "startLine":  107,
 "startColumn":  25,
@@ -2060,7 +2060,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Pattern\BackoffSupervisor.cs",
+"uri":  "sources\akka.net\src\core\Akka\Pattern\BackoffSupervisor.cs",
 "region":  {
 "startLine":  116,
 "startColumn":  18,
@@ -2069,7 +2069,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Pattern\BackoffSupervisor.cs",
+"uri":  "sources\akka.net\src\core\Akka\Pattern\BackoffSupervisor.cs",
 "region":  {
 "startLine":  121,
 "startColumn":  18,
@@ -2078,7 +2078,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Pattern\BackoffSupervisor.cs",
+"uri":  "sources\akka.net\src\core\Akka\Pattern\BackoffSupervisor.cs",
 "region":  {
 "startLine":  124,
 "startColumn":  17,
@@ -2087,7 +2087,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Pattern\BackoffSupervisor.cs",
+"uri":  "sources\akka.net\src\core\Akka\Pattern\BackoffSupervisor.cs",
 "region":  {
 "startLine":  126,
 "startColumn":  18,
@@ -2096,7 +2096,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Pattern\BackoffSupervisor.cs",
+"uri":  "sources\akka.net\src\core\Akka\Pattern\BackoffSupervisor.cs",
 "region":  {
 "startLine":  132,
 "startColumn":  17,
@@ -2111,7 +2111,7 @@
 "message":  "The Cyclomatic Complexity of this method is 15 which is greater than 10 authorized.",
 "location":  [
 {
-"uri":  "akka.net\src\core\Akka\Routing\ConsistentHash.cs",
+"uri":  "sources\akka.net\src\core\Akka\Routing\ConsistentHash.cs",
 "region":  {
 "startLine":  235,
 "startColumn":  32,
@@ -2120,7 +2120,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Routing\ConsistentHash.cs",
+"uri":  "sources\akka.net\src\core\Akka\Routing\ConsistentHash.cs",
 "region":  {
 "startLine":  235,
 "startColumn":  32,
@@ -2129,7 +2129,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Routing\ConsistentHash.cs",
+"uri":  "sources\akka.net\src\core\Akka\Routing\ConsistentHash.cs",
 "region":  {
 "startLine":  237,
 "startColumn":  17,
@@ -2138,7 +2138,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Routing\ConsistentHash.cs",
+"uri":  "sources\akka.net\src\core\Akka\Routing\ConsistentHash.cs",
 "region":  {
 "startLine":  239,
 "startColumn":  17,
@@ -2147,7 +2147,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Routing\ConsistentHash.cs",
+"uri":  "sources\akka.net\src\core\Akka\Routing\ConsistentHash.cs",
 "region":  {
 "startLine":  241,
 "startColumn":  17,
@@ -2156,7 +2156,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Routing\ConsistentHash.cs",
+"uri":  "sources\akka.net\src\core\Akka\Routing\ConsistentHash.cs",
 "region":  {
 "startLine":  243,
 "startColumn":  17,
@@ -2165,7 +2165,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Routing\ConsistentHash.cs",
+"uri":  "sources\akka.net\src\core\Akka\Routing\ConsistentHash.cs",
 "region":  {
 "startLine":  245,
 "startColumn":  17,
@@ -2174,7 +2174,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Routing\ConsistentHash.cs",
+"uri":  "sources\akka.net\src\core\Akka\Routing\ConsistentHash.cs",
 "region":  {
 "startLine":  247,
 "startColumn":  17,
@@ -2183,7 +2183,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Routing\ConsistentHash.cs",
+"uri":  "sources\akka.net\src\core\Akka\Routing\ConsistentHash.cs",
 "region":  {
 "startLine":  249,
 "startColumn":  17,
@@ -2192,7 +2192,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Routing\ConsistentHash.cs",
+"uri":  "sources\akka.net\src\core\Akka\Routing\ConsistentHash.cs",
 "region":  {
 "startLine":  251,
 "startColumn":  17,
@@ -2201,7 +2201,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Routing\ConsistentHash.cs",
+"uri":  "sources\akka.net\src\core\Akka\Routing\ConsistentHash.cs",
 "region":  {
 "startLine":  253,
 "startColumn":  17,
@@ -2210,7 +2210,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Routing\ConsistentHash.cs",
+"uri":  "sources\akka.net\src\core\Akka\Routing\ConsistentHash.cs",
 "region":  {
 "startLine":  255,
 "startColumn":  17,
@@ -2219,7 +2219,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Routing\ConsistentHash.cs",
+"uri":  "sources\akka.net\src\core\Akka\Routing\ConsistentHash.cs",
 "region":  {
 "startLine":  257,
 "startColumn":  17,
@@ -2228,7 +2228,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Routing\ConsistentHash.cs",
+"uri":  "sources\akka.net\src\core\Akka\Routing\ConsistentHash.cs",
 "region":  {
 "startLine":  259,
 "startColumn":  17,
@@ -2237,7 +2237,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Routing\ConsistentHash.cs",
+"uri":  "sources\akka.net\src\core\Akka\Routing\ConsistentHash.cs",
 "region":  {
 "startLine":  261,
 "startColumn":  17,
@@ -2246,7 +2246,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Routing\ConsistentHash.cs",
+"uri":  "sources\akka.net\src\core\Akka\Routing\ConsistentHash.cs",
 "region":  {
 "startLine":  263,
 "startColumn":  17,
@@ -2261,7 +2261,7 @@
 "message":  "The Cyclomatic Complexity of this method is 12 which is greater than 10 authorized.",
 "location":  [
 {
-"uri":  "akka.net\src\core\Akka\Routing\ConsistentHashRouter.cs",
+"uri":  "sources\akka.net\src\core\Akka\Routing\ConsistentHashRouter.cs",
 "region":  {
 "startLine":  163,
 "startColumn":  32,
@@ -2270,7 +2270,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Routing\ConsistentHashRouter.cs",
+"uri":  "sources\akka.net\src\core\Akka\Routing\ConsistentHashRouter.cs",
 "region":  {
 "startLine":  163,
 "startColumn":  32,
@@ -2279,7 +2279,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Routing\ConsistentHashRouter.cs",
+"uri":  "sources\akka.net\src\core\Akka\Routing\ConsistentHashRouter.cs",
 "region":  {
 "startLine":  165,
 "startColumn":  13,
@@ -2288,7 +2288,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Routing\ConsistentHashRouter.cs",
+"uri":  "sources\akka.net\src\core\Akka\Routing\ConsistentHashRouter.cs",
 "region":  {
 "startLine":  165,
 "startColumn":  52,
@@ -2297,7 +2297,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Routing\ConsistentHashRouter.cs",
+"uri":  "sources\akka.net\src\core\Akka\Routing\ConsistentHashRouter.cs",
 "region":  {
 "startLine":  165,
 "startColumn":  33,
@@ -2306,7 +2306,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Routing\ConsistentHashRouter.cs",
+"uri":  "sources\akka.net\src\core\Akka\Routing\ConsistentHashRouter.cs",
 "region":  {
 "startLine":  176,
 "startColumn":  17,
@@ -2315,7 +2315,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Routing\ConsistentHashRouter.cs",
+"uri":  "sources\akka.net\src\core\Akka\Routing\ConsistentHashRouter.cs",
 "region":  {
 "startLine":  176,
 "startColumn":  40,
@@ -2324,7 +2324,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Routing\ConsistentHashRouter.cs",
+"uri":  "sources\akka.net\src\core\Akka\Routing\ConsistentHashRouter.cs",
 "region":  {
 "startLine":  180,
 "startColumn":  25,
@@ -2333,7 +2333,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Routing\ConsistentHashRouter.cs",
+"uri":  "sources\akka.net\src\core\Akka\Routing\ConsistentHashRouter.cs",
 "region":  {
 "startLine":  194,
 "startColumn":  21,
@@ -2342,7 +2342,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Routing\ConsistentHashRouter.cs",
+"uri":  "sources\akka.net\src\core\Akka\Routing\ConsistentHashRouter.cs",
 "region":  {
 "startLine":  197,
 "startColumn":  25,
@@ -2351,7 +2351,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Routing\ConsistentHashRouter.cs",
+"uri":  "sources\akka.net\src\core\Akka\Routing\ConsistentHashRouter.cs",
 "region":  {
 "startLine":  199,
 "startColumn":  25,
@@ -2360,7 +2360,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Routing\ConsistentHashRouter.cs",
+"uri":  "sources\akka.net\src\core\Akka\Routing\ConsistentHashRouter.cs",
 "region":  {
 "startLine":  215,
 "startColumn":  13,
@@ -2369,7 +2369,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Routing\ConsistentHashRouter.cs",
+"uri":  "sources\akka.net\src\core\Akka\Routing\ConsistentHashRouter.cs",
 "region":  {
 "startLine":  219,
 "startColumn":  18,
@@ -2384,7 +2384,7 @@
 "message":  "The Cyclomatic Complexity of this method is 18 which is greater than 10 authorized.",
 "location":  [
 {
-"uri":  "akka.net\src\core\Akka\Util\Internal\Collections\ImmutableAvlTreeBase.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\Internal\Collections\ImmutableAvlTreeBase.cs",
 "region":  {
 "startLine":  103,
 "startColumn":  25,
@@ -2393,7 +2393,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Util\Internal\Collections\ImmutableAvlTreeBase.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\Internal\Collections\ImmutableAvlTreeBase.cs",
 "region":  {
 "startLine":  103,
 "startColumn":  25,
@@ -2402,7 +2402,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Util\Internal\Collections\ImmutableAvlTreeBase.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\Internal\Collections\ImmutableAvlTreeBase.cs",
 "region":  {
 "startLine":  105,
 "startColumn":  4,
@@ -2411,7 +2411,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Util\Internal\Collections\ImmutableAvlTreeBase.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\Internal\Collections\ImmutableAvlTreeBase.cs",
 "region":  {
 "startLine":  113,
 "startColumn":  4,
@@ -2420,7 +2420,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Util\Internal\Collections\ImmutableAvlTreeBase.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\Internal\Collections\ImmutableAvlTreeBase.cs",
 "region":  {
 "startLine":  118,
 "startColumn":  6,
@@ -2429,7 +2429,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Util\Internal\Collections\ImmutableAvlTreeBase.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\Internal\Collections\ImmutableAvlTreeBase.cs",
 "region":  {
 "startLine":  121,
 "startColumn":  6,
@@ -2438,7 +2438,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Util\Internal\Collections\ImmutableAvlTreeBase.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\Internal\Collections\ImmutableAvlTreeBase.cs",
 "region":  {
 "startLine":  134,
 "startColumn":  4,
@@ -2447,7 +2447,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Util\Internal\Collections\ImmutableAvlTreeBase.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\Internal\Collections\ImmutableAvlTreeBase.cs",
 "region":  {
 "startLine":  138,
 "startColumn":  5,
@@ -2456,7 +2456,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Util\Internal\Collections\ImmutableAvlTreeBase.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\Internal\Collections\ImmutableAvlTreeBase.cs",
 "region":  {
 "startLine":  149,
 "startColumn":  5,
@@ -2465,7 +2465,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Util\Internal\Collections\ImmutableAvlTreeBase.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\Internal\Collections\ImmutableAvlTreeBase.cs",
 "region":  {
 "startLine":  158,
 "startColumn":  28,
@@ -2474,7 +2474,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Util\Internal\Collections\ImmutableAvlTreeBase.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\Internal\Collections\ImmutableAvlTreeBase.cs",
 "region":  {
 "startLine":  159,
 "startColumn":  29,
@@ -2483,7 +2483,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Util\Internal\Collections\ImmutableAvlTreeBase.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\Internal\Collections\ImmutableAvlTreeBase.cs",
 "region":  {
 "startLine":  162,
 "startColumn":  4,
@@ -2492,7 +2492,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Util\Internal\Collections\ImmutableAvlTreeBase.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\Internal\Collections\ImmutableAvlTreeBase.cs",
 "region":  {
 "startLine":  164,
 "startColumn":  5,
@@ -2501,7 +2501,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Util\Internal\Collections\ImmutableAvlTreeBase.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\Internal\Collections\ImmutableAvlTreeBase.cs",
 "region":  {
 "startLine":  166,
 "startColumn":  36,
@@ -2510,7 +2510,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Util\Internal\Collections\ImmutableAvlTreeBase.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\Internal\Collections\ImmutableAvlTreeBase.cs",
 "region":  {
 "startLine":  167,
 "startColumn":  37,
@@ -2519,7 +2519,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Util\Internal\Collections\ImmutableAvlTreeBase.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\Internal\Collections\ImmutableAvlTreeBase.cs",
 "region":  {
 "startLine":  169,
 "startColumn":  6,
@@ -2528,7 +2528,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Util\Internal\Collections\ImmutableAvlTreeBase.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\Internal\Collections\ImmutableAvlTreeBase.cs",
 "region":  {
 "startLine":  185,
 "startColumn":  37,
@@ -2537,7 +2537,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Util\Internal\Collections\ImmutableAvlTreeBase.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\Internal\Collections\ImmutableAvlTreeBase.cs",
 "region":  {
 "startLine":  186,
 "startColumn":  38,
@@ -2546,7 +2546,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Util\Internal\Collections\ImmutableAvlTreeBase.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\Internal\Collections\ImmutableAvlTreeBase.cs",
 "region":  {
 "startLine":  188,
 "startColumn":  6,

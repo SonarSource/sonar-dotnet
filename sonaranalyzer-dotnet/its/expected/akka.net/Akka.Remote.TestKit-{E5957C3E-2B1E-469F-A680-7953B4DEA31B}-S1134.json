@@ -4,7 +4,7 @@
 "id":  "S1134",
 "message":  "Take the required action to fix the issue indicated by this 'FIXME' comment.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
 "region":  {
 "startLine":  340,
 "startColumn":  48,
@@ -17,7 +17,7 @@
 "id":  "S1134",
 "message":  "Take the required action to fix the issue indicated by this 'FIXME' comment.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
 "region":  {
 "startLine":  461,
 "startColumn":  42,
@@ -30,7 +30,7 @@
 "id":  "S1134",
 "message":  "Take the required action to fix the issue indicated by this 'FIXME' comment.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
 "region":  {
 "startLine":  462,
 "startColumn":  24,
@@ -43,7 +43,7 @@
 "id":  "S1134",
 "message":  "Take the required action to fix the issue indicated by this 'FIXME' comment.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
 "region":  {
 "startLine":  484,
 "startColumn":  67,

@@ -4,7 +4,7 @@
 "id":  "S2292",
 "message":  "Make this an auto-implemented property and remove its backing field.",
 "location":  {
-"uri":  "Ember-MM\Ember.Plugins\PluginManager.cs",
+"uri":  "sources\Ember-MM\Ember.Plugins\PluginManager.cs",
 "region":  {
 "startLine":  259,
 "startColumn":  25,
@@ -17,7 +17,7 @@
 "id":  "S2292",
 "message":  "Make this an auto-implemented property and remove its backing field.",
 "location":  {
-"uri":  "Ember-MM\Ember.Plugins\PluginManager.cs",
+"uri":  "sources\Ember-MM\Ember.Plugins\PluginManager.cs",
 "region":  {
 "startLine":  271,
 "startColumn":  24,

@@ -4,7 +4,7 @@
 "id":  "S1854",
 "message":  "Remove this useless assignment to local variable 'set'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\Proto\ClusterMessageSerializer.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Proto\ClusterMessageSerializer.cs",
 "region":  {
 "startLine":  334,
 "startColumn":  39,

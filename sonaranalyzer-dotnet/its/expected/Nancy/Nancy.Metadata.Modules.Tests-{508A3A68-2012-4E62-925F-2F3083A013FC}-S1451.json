@@ -4,7 +4,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Metadata.Modules.Tests\DefaultMetadataModuleConventionsFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Metadata.Modules.Tests\DefaultMetadataModuleConventionsFixture.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -17,7 +17,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Metadata.Modules.Tests\FakeNancyMetadataModule.cs",
+"uri":  "sources\Nancy\src\Nancy.Metadata.Modules.Tests\FakeNancyMetadataModule.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -30,7 +30,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Metadata.Modules.Tests\FakeNancyModule.cs",
+"uri":  "sources\Nancy\src\Nancy.Metadata.Modules.Tests\FakeNancyModule.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -43,7 +43,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Metadata.Modules.Tests\Metadata\FakeNancyMetadataModule.cs",
+"uri":  "sources\Nancy\src\Nancy.Metadata.Modules.Tests\Metadata\FakeNancyMetadataModule.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -56,7 +56,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Metadata.Modules.Tests\MetadataModuleFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Metadata.Modules.Tests\MetadataModuleFixture.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -69,7 +69,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Metadata.Modules.Tests\MetadataModuleRouteMetadataProviderFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Metadata.Modules.Tests\MetadataModuleRouteMetadataProviderFixture.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -82,7 +82,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Metadata.Modules.Tests\Modules\FakeNancyModule.cs",
+"uri":  "sources\Nancy\src\Nancy.Metadata.Modules.Tests\Modules\FakeNancyModule.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -95,7 +95,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\ShouldExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\ShouldExtensions.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -108,7 +108,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\SharedAssemblyInfo.cs",
+"uri":  "sources\Nancy\src\SharedAssemblyInfo.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,

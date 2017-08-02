@@ -4,7 +4,7 @@
 "id":  "S1117",
 "message":  "Rename 'response' which hides the field with the same name.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\JsonFormatterExtensionsFixtures.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\JsonFormatterExtensionsFixtures.cs",
 "region":  {
 "startLine":  70,
 "startColumn":  17,
@@ -17,7 +17,7 @@
 "id":  "S1117",
 "message":  "Rename 'response' which hides the field with the same name.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\JsonFormatterExtensionsFixtures.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\JsonFormatterExtensionsFixtures.cs",
 "region":  {
 "startLine":  81,
 "startColumn":  17,
@@ -30,7 +30,7 @@
 "id":  "S1117",
 "message":  "Rename 'engine' which hides the field with the same name.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\NancyEngineFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\NancyEngineFixture.cs",
 "region":  {
 "startLine":  585,
 "startColumn":  17,
@@ -43,7 +43,7 @@
 "id":  "S1117",
 "message":  "Rename 'response' which hides the field with the same name.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\TextFormatterFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\TextFormatterFixture.cs",
 "region":  {
 "startLine":  47,
 "startColumn":  17,
@@ -56,7 +56,7 @@
 "id":  "S1117",
 "message":  "Rename 'url' which hides the field with the same name.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\UrlFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\UrlFixture.cs",
 "region":  {
 "startLine":  291,
 "startColumn":  17,
@@ -69,7 +69,7 @@
 "id":  "S1117",
 "message":  "Rename 'conventions' which hides the field with the same name.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ViewEngines\DefaultViewFactoryFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ViewEngines\DefaultViewFactoryFixture.cs",
 "region":  {
 "startLine":  448,
 "startColumn":  17,
@@ -82,7 +82,7 @@
 "id":  "S1117",
 "message":  "Rename 'viewLocator' which hides the field with the same name.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ViewEngines\DefaultViewLocatorFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ViewEngines\DefaultViewLocatorFixture.cs",
 "region":  {
 "startLine":  328,
 "startColumn":  17,

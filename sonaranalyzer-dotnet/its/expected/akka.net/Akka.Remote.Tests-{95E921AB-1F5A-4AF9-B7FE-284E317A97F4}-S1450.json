@@ -4,7 +4,7 @@
 "id":  "S1450",
 "message":  "Remove the 'conf' field and declare it as a local variable in the relevant methods.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.Tests\RemoteRouterSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests\RemoteRouterSpec.cs",
 "region":  {
 "startLine":  39,
 "startColumn":  24,
@@ -17,7 +17,7 @@
 "id":  "S1450",
 "message":  "Remove the 'remote' field and declare it as a local variable in the relevant methods.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.Tests\RemotingSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests\RemotingSpec.cs",
 "region":  {
 "startLine":  136,
 "startColumn":  26,
@@ -30,7 +30,7 @@
 "id":  "S1450",
 "message":  "Remove the 'testMsgPdu' field and declare it as a local variable in the relevant methods.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.Tests\Transport\AkkaProtocolSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests\Transport\AkkaProtocolSpec.cs",
 "region":  {
 "startLine":  38,
 "startColumn":  28,
@@ -43,7 +43,7 @@
 "id":  "S1450",
 "message":  "Remove the 'remote' field and declare it as a local variable in the relevant methods.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.Tests\Transport\AkkaProtocolStressTest.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests\Transport\AkkaProtocolStressTest.cs",
 "region":  {
 "startLine":  149,
 "startColumn":  27,
@@ -56,7 +56,7 @@
 "id":  "S1450",
 "message":  "Remove the 'remote' field and declare it as a local variable in the relevant methods.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.Tests\Transport\ThrottlerTransportAdapterSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests\Transport\ThrottlerTransportAdapterSpec.cs",
 "region":  {
 "startLine":  129,
 "startColumn":  27,

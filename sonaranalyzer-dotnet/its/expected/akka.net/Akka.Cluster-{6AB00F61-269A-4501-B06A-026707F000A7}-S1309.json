@@ -4,7 +4,7 @@
 "id":  "S1309",
 "message":  "Do not suppress issues.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
 "region":  {
 "startLine":  190,
 "startColumn":  1,
@@ -17,7 +17,7 @@
 "id":  "S1309",
 "message":  "Do not suppress issues.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
 "region":  {
 "startLine":  217,
 "startColumn":  1,

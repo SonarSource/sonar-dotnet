@@ -4,7 +4,7 @@
 "id":  "S2070",
 "message":  "Use a stronger hashing/asymmetric algorithm.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Responses\EmbeddedFileResponse.cs",
+"uri":  "sources\Nancy\src\Nancy\Responses\EmbeddedFileResponse.cs",
 "region":  {
 "startLine":  66,
 "startColumn":  35,

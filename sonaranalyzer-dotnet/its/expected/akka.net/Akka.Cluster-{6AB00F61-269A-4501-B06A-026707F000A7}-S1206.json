@@ -4,7 +4,7 @@
 "id":  "S1206",
 "message":  "This class overrides 'Equals' and should therefore also override 'GetHashCode'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  218,
 "startColumn":  24,
@@ -17,7 +17,7 @@
 "id":  "S1206",
 "message":  "This class overrides 'Equals' and should therefore also override 'GetHashCode'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
 "region":  {
 "startLine":  452,
 "startColumn":  31,
@@ -30,7 +30,7 @@
 "id":  "S1206",
 "message":  "This class overrides 'Equals' and should therefore also override 'GetHashCode'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
 "region":  {
 "startLine":  181,
 "startColumn":  31,
@@ -43,7 +43,7 @@
 "id":  "S1206",
 "message":  "This class overrides 'Equals' and should therefore also override 'GetHashCode'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
 "region":  {
 "startLine":  208,
 "startColumn":  31,

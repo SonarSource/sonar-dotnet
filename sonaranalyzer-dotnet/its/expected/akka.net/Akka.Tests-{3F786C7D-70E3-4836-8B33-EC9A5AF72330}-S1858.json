@@ -4,7 +4,7 @@
 "id":  "S1858",
 "message":  "There's no need to call 'ToString()', the compiler will do it for you.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\MatchHandler\MatchExpressionBuilder_BuildLambdaExpression_Tests.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\MatchHandler\MatchExpressionBuilder_BuildLambdaExpression_Tests.cs",
 "region":  {
 "startLine":  426,
 "startColumn":  118,

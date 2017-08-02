@@ -4,7 +4,7 @@
 "id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Diagnostics\InteractiveDiagnostics.cs",
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\InteractiveDiagnostics.cs",
 "region":  {
 "startLine":  28,
 "startColumn":  13,
@@ -17,7 +17,7 @@
 "id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Extensions\RequestExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy\Extensions\RequestExtensions.cs",
 "region":  {
 "startLine":  36,
 "startColumn":  13,
@@ -30,7 +30,7 @@
 "id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
 "region":  {
 "startLine":  124,
 "startColumn":  13,
@@ -43,7 +43,7 @@
 "id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
 "region":  {
 "startLine":  129,
 "startColumn":  13,
@@ -56,7 +56,7 @@
 "id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
 "region":  {
 "startLine":  462,
 "startColumn":  25,
@@ -69,7 +69,7 @@
 "id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
 "region":  {
 "startLine":  180,
 "startColumn":  17,
@@ -82,7 +82,7 @@
 "id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
 "region":  {
 "startLine":  303,
 "startColumn":  17,
@@ -95,7 +95,7 @@
 "id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Helpers\ReflectionUtils.cs",
+"uri":  "sources\Nancy\src\Nancy\Helpers\ReflectionUtils.cs",
 "region":  {
 "startLine":  174,
 "startColumn":  13,
@@ -108,7 +108,7 @@
 "id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"uri":  "sources\Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
 "region":  {
 "startLine":  400,
 "startColumn":  21,
@@ -121,7 +121,7 @@
 "id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"uri":  "sources\Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
 "region":  {
 "startLine":  417,
 "startColumn":  13,
@@ -134,7 +134,7 @@
 "id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
 "region":  {
 "startLine":  919,
 "startColumn":  4,
@@ -147,7 +147,7 @@
 "id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ModelBinding\BindingMemberInfo.cs",
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\BindingMemberInfo.cs",
 "region":  {
 "startLine":  39,
 "startColumn":  17,
@@ -160,7 +160,7 @@
 "id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ModelBinding\BindingMemberInfo.cs",
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\BindingMemberInfo.cs",
 "region":  {
 "startLine":  85,
 "startColumn":  13,
@@ -173,7 +173,7 @@
 "id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Request.cs",
+"uri":  "sources\Nancy\src\Nancy\Request.cs",
 "region":  {
 "startLine":  188,
 "startColumn":  17,
@@ -186,7 +186,7 @@
 "id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Responses\GenericFileResponse.cs",
+"uri":  "sources\Nancy\src\Nancy\Responses\GenericFileResponse.cs",
 "region":  {
 "startLine":  111,
 "startColumn":  17,
@@ -199,7 +199,7 @@
 "id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
-"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
 "startLine":  3261,
 "startColumn":  17,

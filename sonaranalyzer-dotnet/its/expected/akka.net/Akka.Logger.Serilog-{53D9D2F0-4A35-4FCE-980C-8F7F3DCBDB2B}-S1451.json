@@ -4,7 +4,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\contrib\loggers\Akka.Logger.Serilog\Event\Serilog\SerilogLogMessageFormatter.cs",
+"uri":  "sources\akka.net\src\contrib\loggers\Akka.Logger.Serilog\Event\Serilog\SerilogLogMessageFormatter.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -17,7 +17,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\contrib\loggers\Akka.Logger.Serilog\MessageTemplateCache.cs",
+"uri":  "sources\akka.net\src\contrib\loggers\Akka.Logger.Serilog\MessageTemplateCache.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -30,7 +30,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\contrib\loggers\Akka.Logger.Serilog\Properties\AssemblyInfo.cs",
+"uri":  "sources\akka.net\src\contrib\loggers\Akka.Logger.Serilog\Properties\AssemblyInfo.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -43,7 +43,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\contrib\loggers\Akka.Logger.Serilog\SerilogLogger.cs",
+"uri":  "sources\akka.net\src\contrib\loggers\Akka.Logger.Serilog\SerilogLogger.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -56,7 +56,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\contrib\loggers\Akka.Logger.Serilog\SerilogLogMessageFormatter.cs",
+"uri":  "sources\akka.net\src\contrib\loggers\Akka.Logger.Serilog\SerilogLogMessageFormatter.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,

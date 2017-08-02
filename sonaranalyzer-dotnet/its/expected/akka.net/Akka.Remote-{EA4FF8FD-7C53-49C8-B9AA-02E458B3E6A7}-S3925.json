@@ -5,7 +5,7 @@
 "message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
 "location":  [
 {
-"uri":  "akka.net\src\core\Akka.Remote\RemoteTransport.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteTransport.cs",
 "region":  {
 "startLine":  103,
 "startColumn":  18,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\RemoteTransport.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteTransport.cs",
 "region":  {
 "startLine":  103,
 "startColumn":  12,
@@ -29,7 +29,7 @@
 "message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
 "location":  [
 {
-"uri":  "akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
 "region":  {
 "startLine":  42,
 "startColumn":  18,
@@ -38,7 +38,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
 "region":  {
 "startLine":  42,
 "startColumn":  12,
@@ -53,7 +53,7 @@
 "message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
 "location":  [
 {
-"uri":  "akka.net\src\core\Akka.Remote\Transport\FailureInjectorTransportAdapter.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\FailureInjectorTransportAdapter.cs",
 "region":  {
 "startLine":  34,
 "startColumn":  25,
@@ -62,7 +62,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\Transport\FailureInjectorTransportAdapter.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\FailureInjectorTransportAdapter.cs",
 "region":  {
 "startLine":  34,
 "startColumn":  19,
@@ -77,7 +77,7 @@
 "message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
 "location":  [
 {
-"uri":  "akka.net\src\core\Akka.Remote\Transport\Transport.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\Transport.cs",
 "region":  {
 "startLine":  65,
 "startColumn":  18,
@@ -86,7 +86,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\Transport\Transport.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\Transport.cs",
 "region":  {
 "startLine":  65,
 "startColumn":  12,

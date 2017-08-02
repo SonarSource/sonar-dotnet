@@ -4,7 +4,7 @@
 "id":  "S2743",
 "message":  "A static field in a generic type is not shared among instances of different close constructed types.",
 "location":  {
-"uri":  "akka.net\src\contrib\testkits\Akka.TestKit.Xunit2\Internals\AkkaAssertEqualityComparer.cs",
+"uri":  "sources\akka.net\src\contrib\testkits\Akka.TestKit.Xunit2\Internals\AkkaAssertEqualityComparer.cs",
 "region":  {
 "startLine":  24,
 "startColumn":  43,
@@ -17,7 +17,7 @@
 "id":  "S2743",
 "message":  "A static field in a generic type is not shared among instances of different close constructed types.",
 "location":  {
-"uri":  "akka.net\src\contrib\testkits\Akka.TestKit.Xunit2\Internals\AkkaAssertEqualityComparer.cs",
+"uri":  "sources\akka.net\src\contrib\testkits\Akka.TestKit.Xunit2\Internals\AkkaAssertEqualityComparer.cs",
 "region":  {
 "startLine":  25,
 "startColumn":  34,

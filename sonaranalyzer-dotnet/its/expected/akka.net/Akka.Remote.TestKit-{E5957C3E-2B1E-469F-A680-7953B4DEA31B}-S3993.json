@@ -4,7 +4,7 @@
 "id":  "S3993",
 "message":  "Specify AttributeUsage on 'MultiNodeFactAttribute' to improve readability, even though it inherits it from its base type.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\MultiNodeFact.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MultiNodeFact.cs",
 "region":  {
 "startLine":  13,
 "startColumn":  18,

@@ -4,7 +4,7 @@
 "id":  "S3962",
 "message":  "Replace this 'static readonly' declaration with 'const'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\RemoteSettings.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSettings.cs",
 "region":  {
 "startLine":  69,
 "startColumn":  39,

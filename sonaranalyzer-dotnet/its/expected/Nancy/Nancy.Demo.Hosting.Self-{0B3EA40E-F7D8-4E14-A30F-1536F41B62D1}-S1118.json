@@ -4,7 +4,7 @@
 "id":  "S1118",
 "message":  "Add a 'protected' constructor or the 'static' keyword to the class declaration.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Demo.Hosting.Self\Program.cs",
+"uri":  "sources\Nancy\src\Nancy.Demo.Hosting.Self\Program.cs",
 "region":  {
 "startLine":  8,
 "startColumn":  11,

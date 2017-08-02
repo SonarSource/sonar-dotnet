@@ -4,7 +4,7 @@
 "id":  "S3897",
 "message":  "Implement 'IEquatable<HandshakeInfo>'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
 "region":  {
 "startLine":  234,
 "startColumn":  27,
@@ -17,7 +17,7 @@
 "id":  "S3897",
 "message":  "Implement 'IEquatable<AkkaProtocolHandle>'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
 "region":  {
 "startLine":  267,
 "startColumn":  20,
@@ -30,7 +30,7 @@
 "id":  "S3897",
 "message":  "Implement 'IEquatable<TokenBucket>'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
 "region":  {
 "startLine":  513,
 "startColumn":  18,
@@ -43,7 +43,7 @@
 "id":  "S3897",
 "message":  "Implement 'IEquatable<SetThrottle>'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
 "region":  {
 "startLine":  607,
 "startColumn":  27,
@@ -56,7 +56,7 @@
 "id":  "S3897",
 "message":  "Implement 'IEquatable<AssociationHandle>'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\Transport\Transport.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\Transport.cs",
 "region":  {
 "startLine":  261,
 "startColumn":  27,
@@ -69,7 +69,7 @@
 "id":  "S3897",
 "message":  "Implement 'IEquatable<AbstractTransportAdapterHandle>'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\Transport\TransportAdapters.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\TransportAdapters.cs",
 "region":  {
 "startLine":  196,
 "startColumn":  29,

@@ -4,7 +4,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\contrib\testkits\Akka.TestKit.Xunit\TestKit.cs",
+"uri":  "sources\akka.net\src\contrib\testkits\Akka.TestKit.Xunit\TestKit.cs",
 "region":  {
 "startLine":  20,
 "startColumn":  35,
@@ -17,7 +17,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\contrib\testkits\Akka.TestKit.Xunit\TestKit.cs",
+"uri":  "sources\akka.net\src\contrib\testkits\Akka.TestKit.Xunit\TestKit.cs",
 "region":  {
 "startLine":  80,
 "startColumn":  9,
@@ -30,7 +30,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\contrib\testkits\Akka.TestKit.Xunit\TestKit.cs",
+"uri":  "sources\akka.net\src\contrib\testkits\Akka.TestKit.Xunit\TestKit.cs",
 "region":  {
 "startLine":  120,
 "startColumn":  17,

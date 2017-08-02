@@ -4,7 +4,7 @@
 "id":  "S3261",
 "message":  "Remove this empty namespace.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Dispatch\DispatcherConfigurator.cs",
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\DispatcherConfigurator.cs",
 "region":  {
 "startLine":  8,
 "startColumn":  1,
@@ -17,7 +17,7 @@
 "id":  "S3261",
 "message":  "Remove this empty namespace.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Dispatch\IDispatcherPrerequisites.cs",
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\IDispatcherPrerequisites.cs",
 "region":  {
 "startLine":  11,
 "startColumn":  1,

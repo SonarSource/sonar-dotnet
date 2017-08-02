@@ -4,7 +4,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common.TestKit\SqlJournalQuerySpec.cs",
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common.TestKit\SqlJournalQuerySpec.cs",
 "region":  {
 "startLine":  59,
 "startColumn":  53,
@@ -17,7 +17,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common.TestKit\SqlJournalQuerySpec.cs",
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common.TestKit\SqlJournalQuerySpec.cs",
 "region":  {
 "startLine":  59,
 "startColumn":  84,
@@ -30,7 +30,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common.TestKit\SqlJournalQuerySpec.cs",
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common.TestKit\SqlJournalQuerySpec.cs",
 "region":  {
 "startLine":  59,
 "startColumn":  117,

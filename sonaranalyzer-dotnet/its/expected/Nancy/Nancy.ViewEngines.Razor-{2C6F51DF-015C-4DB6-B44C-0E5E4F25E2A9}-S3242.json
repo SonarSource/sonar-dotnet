@@ -4,7 +4,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'System.Collections.Generic.IEnumerable<TSymbol>' instead of 'System.Collections.Generic.List<TSymbol>'.",
 "location":  {
-"uri":  "Nancy\src\Nancy.ViewEngines.Razor\ClrTypeResolver.cs",
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\ClrTypeResolver.cs",
 "region":  {
 "startLine":  57,
 "startColumn":  43,
@@ -17,7 +17,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'System.Collections.Generic.ICollection<string>' instead of 'System.Collections.Generic.IList<string>'.",
 "location":  {
-"uri":  "Nancy\src\Nancy.ViewEngines.Razor\RazorViewEngine.cs",
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\RazorViewEngine.cs",
 "region":  {
 "startLine":  331,
 "startColumn":  93,

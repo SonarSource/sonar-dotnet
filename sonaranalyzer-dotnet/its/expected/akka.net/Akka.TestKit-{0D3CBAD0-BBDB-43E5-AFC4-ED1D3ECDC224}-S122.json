@@ -4,7 +4,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.TestKit\EventFilter\EventFilterFactory.cs",
+"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\EventFilterFactory.cs",
 "region":  {
 "startLine":  265,
 "startColumn":  13,
@@ -17,7 +17,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.TestKit\EventFilter\EventFilterFactory.cs",
+"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\EventFilterFactory.cs",
 "region":  {
 "startLine":  266,
 "startColumn":  13,
@@ -30,7 +30,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.TestKit\EventFilter\EventFilterFactory.cs",
+"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\EventFilterFactory.cs",
 "region":  {
 "startLine":  267,
 "startColumn":  13,
@@ -43,7 +43,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.TestKit\EventFilter\Internal\ErrorFilter.cs",
+"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\ErrorFilter.cs",
 "region":  {
 "startLine":  31,
 "startColumn":  13,
@@ -56,7 +56,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.TestKit\EventFilter\Internal\EventFilterApplier.cs",
+"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\EventFilterApplier.cs",
 "region":  {
 "startLine":  54,
 "startColumn":  13,
@@ -69,7 +69,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.TestKit\EventFilter\Internal\EventFilterApplier.cs",
+"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\EventFilterApplier.cs",
 "region":  {
 "startLine":  87,
 "startColumn":  13,
@@ -82,7 +82,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.TestKit\EventFilter\Internal\EventFilterApplier.cs",
+"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\EventFilterApplier.cs",
 "region":  {
 "startLine":  175,
 "startColumn":  17,
@@ -95,7 +95,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.TestKit\EventFilter\Internal\EventFilterBase.cs",
+"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\EventFilterBase.cs",
 "region":  {
 "startLine":  55,
 "startColumn":  13,
@@ -108,7 +108,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.TestKit\EventFilter\Internal\StringMatcher\EqualsStringAndPathMatcher.cs",
+"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\StringMatcher\EqualsStringAndPathMatcher.cs",
 "region":  {
 "startLine":  29,
 "startColumn":  13,
@@ -121,7 +121,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.TestKit\EventFilter\Internal\StringMatcher\EqualsStringAndPathMatcher.cs",
+"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\StringMatcher\EqualsStringAndPathMatcher.cs",
 "region":  {
 "startLine":  30,
 "startColumn":  13,
@@ -134,7 +134,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.TestKit\EventFilter\Internal\StringMatcher\EqualsStringAndPathMatcher.cs",
+"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\StringMatcher\EqualsStringAndPathMatcher.cs",
 "region":  {
 "startLine":  33,
 "startColumn":  13,
@@ -147,7 +147,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.TestKit\Internal\TimeSpanExtensions.cs",
+"uri":  "sources\akka.net\src\core\Akka.TestKit\Internal\TimeSpanExtensions.cs",
 "region":  {
 "startLine":  128,
 "startColumn":  13,
@@ -160,7 +160,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.TestKit\Internal\TimeSpanExtensions.cs",
+"uri":  "sources\akka.net\src\core\Akka.TestKit\Internal\TimeSpanExtensions.cs",
 "region":  {
 "startLine":  129,
 "startColumn":  13,
@@ -173,7 +173,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.TestKit\Internal\TimeSpanExtensions.cs",
+"uri":  "sources\akka.net\src\core\Akka.TestKit\Internal\TimeSpanExtensions.cs",
 "region":  {
 "startLine":  140,
 "startColumn":  13,
@@ -186,7 +186,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.TestKit\Internal\TimeSpanExtensions.cs",
+"uri":  "sources\akka.net\src\core\Akka.TestKit\Internal\TimeSpanExtensions.cs",
 "region":  {
 "startLine":  142,
 "startColumn":  13,
@@ -199,7 +199,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.TestKit\TestActorRef.cs",
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestActorRef.cs",
 "region":  {
 "startLine":  35,
 "startColumn":  13,
@@ -212,7 +212,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.TestKit\TestActorRef.cs",
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestActorRef.cs",
 "region":  {
 "startLine":  41,
 "startColumn":  13,
@@ -225,7 +225,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.TestKit\TestActorRef.cs",
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestActorRef.cs",
 "region":  {
 "startLine":  47,
 "startColumn":  13,
@@ -238,7 +238,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.TestKit\TestActorRef.cs",
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestActorRef.cs",
 "region":  {
 "startLine":  53,
 "startColumn":  13,
@@ -251,7 +251,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.TestKit\TestActorRefBase.cs",
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestActorRefBase.cs",
 "region":  {
 "startLine":  155,
 "startColumn":  13,
@@ -264,7 +264,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.TestKit\TestActorRefBase.cs",
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestActorRefBase.cs",
 "region":  {
 "startLine":  161,
 "startColumn":  13,
@@ -277,7 +277,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.TestKit\TestActorRefBase.cs",
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestActorRefBase.cs",
 "region":  {
 "startLine":  167,
 "startColumn":  13,
@@ -290,7 +290,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.TestKit\TestActorRefBase.cs",
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestActorRefBase.cs",
 "region":  {
 "startLine":  173,
 "startColumn":  13,
@@ -303,7 +303,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.TestKit\TestBreaker.cs",
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestBreaker.cs",
 "region":  {
 "startLine":  30,
 "startColumn":  13,
@@ -316,7 +316,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.TestKit\TestBreaker.cs",
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestBreaker.cs",
 "region":  {
 "startLine":  31,
 "startColumn":  43,
@@ -329,7 +329,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.TestKit\TestBreaker.cs",
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestBreaker.cs",
 "region":  {
 "startLine":  32,
 "startColumn":  39,
@@ -342,7 +342,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.TestKit\TestKitBase.cs",
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase.cs",
 "region":  {
 "startLine":  88,
 "startColumn":  13,
@@ -355,7 +355,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.TestKit\TestKitBase.cs",
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase.cs",
 "region":  {
 "startLine":  263,
 "startColumn":  17,
@@ -368,7 +368,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.TestKit\TestKitBase.cs",
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase.cs",
 "region":  {
 "startLine":  274,
 "startColumn":  13,
@@ -381,7 +381,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.TestKit\TestKitBase.cs",
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase.cs",
 "region":  {
 "startLine":  293,
 "startColumn":  13,
@@ -394,7 +394,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.TestKit\TestKitBase.cs",
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase.cs",
 "region":  {
 "startLine":  294,
 "startColumn":  13,
@@ -407,7 +407,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.TestKit\TestKitBase.cs",
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase.cs",
 "region":  {
 "startLine":  343,
 "startColumn":  13,
@@ -420,7 +420,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.TestKit\TestKitBase_AwaitAssert.cs",
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_AwaitAssert.cs",
 "region":  {
 "startLine":  33,
 "startColumn":  13,
@@ -433,7 +433,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.TestKit\TestKitBase_Within.cs",
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Within.cs",
 "region":  {
 "startLine":  38,
 "startColumn":  13,
@@ -446,7 +446,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.TestKit\TestLatch.cs",
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestLatch.cs",
 "region":  {
 "startLine":  116,
 "startColumn":  13,
@@ -459,7 +459,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.TestKit\TestLatch.cs",
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestLatch.cs",
 "region":  {
 "startLine":  139,
 "startColumn":  13,
@@ -472,7 +472,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.TestKit\TestLatch.cs",
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestLatch.cs",
 "region":  {
 "startLine":  143,
 "startColumn":  13,

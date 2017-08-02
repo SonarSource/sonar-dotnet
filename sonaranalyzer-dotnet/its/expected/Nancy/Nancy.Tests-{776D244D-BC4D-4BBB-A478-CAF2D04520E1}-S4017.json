@@ -4,7 +4,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\Culture\BuiltInCultureConventionFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Culture\BuiltInCultureConventionFixture.cs",
 "region":  {
 "startLine":  365,
 "startColumn":  64,
@@ -17,7 +17,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\HttpMultipartFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\HttpMultipartFixture.cs",
 "region":  {
 "startLine":  264,
 "startColumn":  56,
@@ -30,7 +30,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\HttpMultipartFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\HttpMultipartFixture.cs",
 "region":  {
 "startLine":  316,
 "startColumn":  56,
@@ -43,7 +43,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\RequestFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\RequestFixture.cs",
 "region":  {
 "startLine":  865,
 "startColumn":  56,
@@ -56,7 +56,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\StaticContentConventionBuilderFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\StaticContentConventionBuilderFixture.cs",
 "region":  {
 "startLine":  251,
 "startColumn":  112,
@@ -69,7 +69,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\StaticContentConventionBuilderFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\StaticContentConventionBuilderFixture.cs",
 "region":  {
 "startLine":  269,
 "startColumn":  122,
@@ -82,7 +82,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\StaticContentConventionBuilderFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\StaticContentConventionBuilderFixture.cs",
 "region":  {
 "startLine":  283,
 "startColumn":  99,

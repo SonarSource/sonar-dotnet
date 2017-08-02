@@ -4,7 +4,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Bootstrapper\AppDomainAssemblyTypeScanner.cs",
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\AppDomainAssemblyTypeScanner.cs",
 "region":  {
 "startLine":  52,
 "startColumn":  25,
@@ -17,7 +17,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Bootstrapper\AppDomainAssemblyTypeScanner.cs",
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\AppDomainAssemblyTypeScanner.cs",
 "region":  {
 "startLine":  53,
 "startColumn":  58,
@@ -30,7 +30,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Bootstrapper\AppDomainAssemblyTypeScanner.cs",
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\AppDomainAssemblyTypeScanner.cs",
 "region":  {
 "startLine":  249,
 "startColumn":  107,
@@ -43,7 +43,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Bootstrapper\AppDomainAssemblyTypeScanner.cs",
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\AppDomainAssemblyTypeScanner.cs",
 "region":  {
 "startLine":  296,
 "startColumn":  51,
@@ -56,7 +56,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Bootstrapper\AppDomainAssemblyTypeScanner.cs",
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\AppDomainAssemblyTypeScanner.cs",
 "region":  {
 "startLine":  298,
 "startColumn":  52,
@@ -69,7 +69,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Bootstrapper\AppDomainAssemblyTypeScanner.cs",
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\AppDomainAssemblyTypeScanner.cs",
 "region":  {
 "startLine":  354,
 "startColumn":  21,
@@ -82,7 +82,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Bootstrapper\AppDomainAssemblyTypeScanner.cs",
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\AppDomainAssemblyTypeScanner.cs",
 "region":  {
 "startLine":  354,
 "startColumn":  54,
@@ -95,7 +95,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Bootstrapper\ContainerRegistration.cs",
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\ContainerRegistration.cs",
 "region":  {
 "startLine":  45,
 "startColumn":  21,
@@ -108,7 +108,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Bootstrapper\MultipleRootPathProvidersLocatedException.cs",
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\MultipleRootPathProvidersLocatedException.cs",
 "region":  {
 "startLine":  116,
 "startColumn":  17,
@@ -121,7 +121,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Bootstrapper\MultipleRootPathProvidersLocatedException.cs",
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\MultipleRootPathProvidersLocatedException.cs",
 "region":  {
 "startLine":  119,
 "startColumn":  13,
@@ -134,7 +134,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Bootstrapper\NancyBootstrapperBase.cs",
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\NancyBootstrapperBase.cs",
 "region":  {
 "startLine":  257,
 "startColumn":  53,
@@ -147,7 +147,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Bootstrapper\NancyBootstrapperLocator.cs",
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\NancyBootstrapperLocator.cs",
 "region":  {
 "startLine":  36,
 "startColumn":  36,
@@ -160,7 +160,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Conventions\StaticContentConventionBuilder.cs",
+"uri":  "sources\Nancy\src\Nancy\Conventions\StaticContentConventionBuilder.cs",
 "region":  {
 "startLine":  36,
 "startColumn":  18,
@@ -173,7 +173,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Conventions\StaticContentConventionBuilder.cs",
+"uri":  "sources\Nancy\src\Nancy\Conventions\StaticContentConventionBuilder.cs",
 "region":  {
 "startLine":  56,
 "startColumn":  22,
@@ -186,7 +186,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Conventions\StaticContentConventionBuilder.cs",
+"uri":  "sources\Nancy\src\Nancy\Conventions\StaticContentConventionBuilder.cs",
 "region":  {
 "startLine":  121,
 "startColumn":  18,
@@ -199,7 +199,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Conventions\StaticContentConventionBuilder.cs",
+"uri":  "sources\Nancy\src\Nancy\Conventions\StaticContentConventionBuilder.cs",
 "region":  {
 "startLine":  180,
 "startColumn":  76,
@@ -212,7 +212,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Conventions\StaticContentConventionBuilder.cs",
+"uri":  "sources\Nancy\src\Nancy\Conventions\StaticContentConventionBuilder.cs",
 "region":  {
 "startLine":  217,
 "startColumn":  20,
@@ -225,7 +225,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Cookies\NancyCookie.cs",
+"uri":  "sources\Nancy\src\Nancy\Cookies\NancyCookie.cs",
 "region":  {
 "startLine":  136,
 "startColumn":  13,
@@ -238,7 +238,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\DefaultNancyBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy\DefaultNancyBootstrapper.cs",
 "region":  {
 "startLine":  23,
 "startColumn":  24,
@@ -251,7 +251,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\DefaultNancyBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy\DefaultNancyBootstrapper.cs",
 "region":  {
 "startLine":  24,
 "startColumn":  24,
@@ -264,7 +264,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\DefaultNancyBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy\DefaultNancyBootstrapper.cs",
 "region":  {
 "startLine":  25,
 "startColumn":  24,
@@ -277,7 +277,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\DefaultNancyBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy\DefaultNancyBootstrapper.cs",
 "region":  {
 "startLine":  26,
 "startColumn":  24,
@@ -290,7 +290,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\DefaultNancyBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy\DefaultNancyBootstrapper.cs",
 "region":  {
 "startLine":  27,
 "startColumn":  24,
@@ -303,7 +303,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\DefaultNancyBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy\DefaultNancyBootstrapper.cs",
 "region":  {
 "startLine":  28,
 "startColumn":  24,
@@ -316,7 +316,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\DefaultNancyBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy\DefaultNancyBootstrapper.cs",
 "region":  {
 "startLine":  29,
 "startColumn":  24,
@@ -329,7 +329,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\DefaultNancyBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy\DefaultNancyBootstrapper.cs",
 "region":  {
 "startLine":  30,
 "startColumn":  24,
@@ -342,7 +342,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\DefaultNancyBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy\DefaultNancyBootstrapper.cs",
 "region":  {
 "startLine":  31,
 "startColumn":  24,
@@ -355,7 +355,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\DefaultNancyBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy\DefaultNancyBootstrapper.cs",
 "region":  {
 "startLine":  32,
 "startColumn":  24,
@@ -368,7 +368,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\DefaultNancyBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy\DefaultNancyBootstrapper.cs",
 "region":  {
 "startLine":  33,
 "startColumn":  24,
@@ -381,7 +381,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\DefaultNancyBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy\DefaultNancyBootstrapper.cs",
 "region":  {
 "startLine":  34,
 "startColumn":  24,
@@ -394,7 +394,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\DefaultNancyBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy\DefaultNancyBootstrapper.cs",
 "region":  {
 "startLine":  35,
 "startColumn":  24,
@@ -407,7 +407,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\DefaultNancyBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy\DefaultNancyBootstrapper.cs",
 "region":  {
 "startLine":  36,
 "startColumn":  24,
@@ -420,7 +420,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\DefaultNancyBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy\DefaultNancyBootstrapper.cs",
 "region":  {
 "startLine":  37,
 "startColumn":  24,
@@ -433,7 +433,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\DefaultSerializerFactory.cs",
+"uri":  "sources\Nancy\src\Nancy\DefaultSerializerFactory.cs",
 "region":  {
 "startLine":  70,
 "startColumn":  20,
@@ -446,7 +446,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Diagnostics\DiagnosticsConfiguration.cs",
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\DiagnosticsConfiguration.cs",
 "region":  {
 "startLine":  75,
 "startColumn":  22,
@@ -459,7 +459,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Diagnostics\DiagnosticsHook.cs",
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\DiagnosticsHook.cs",
 "region":  {
 "startLine":  73,
 "startColumn":  30,
@@ -472,7 +472,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Diagnostics\DiagnosticsHook.cs",
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\DiagnosticsHook.cs",
 "region":  {
 "startLine":  83,
 "startColumn":  29,
@@ -485,7 +485,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Diagnostics\DiagnosticsHook.cs",
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\DiagnosticsHook.cs",
 "region":  {
 "startLine":  90,
 "startColumn":  54,
@@ -498,7 +498,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Diagnostics\DiagnosticsHook.cs",
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\DiagnosticsHook.cs",
 "region":  {
 "startLine":  205,
 "startColumn":  79,
@@ -511,7 +511,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Diagnostics\DiagnosticsHook.cs",
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\DiagnosticsHook.cs",
 "region":  {
 "startLine":  283,
 "startColumn":  17,
@@ -524,7 +524,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Diagnostics\InteractiveDiagnostics.cs",
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\InteractiveDiagnostics.cs",
 "region":  {
 "startLine":  47,
 "startColumn":  45,
@@ -537,7 +537,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Diagnostics\InteractiveDiagnostics.cs",
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\InteractiveDiagnostics.cs",
 "region":  {
 "startLine":  50,
 "startColumn":  20,
@@ -550,7 +550,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Diagnostics\InteractiveDiagnostics.cs",
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\InteractiveDiagnostics.cs",
 "region":  {
 "startLine":  143,
 "startColumn":  32,
@@ -563,7 +563,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Diagnostics\InteractiveDiagnostics.cs",
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\InteractiveDiagnostics.cs",
 "region":  {
 "startLine":  151,
 "startColumn":  28,
@@ -576,7 +576,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Diagnostics\InteractiveDiagnostics.cs",
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\InteractiveDiagnostics.cs",
 "region":  {
 "startLine":  165,
 "startColumn":  32,
@@ -589,7 +589,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Diagnostics\InteractiveDiagnostics.cs",
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\InteractiveDiagnostics.cs",
 "region":  {
 "startLine":  173,
 "startColumn":  28,
@@ -602,7 +602,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Diagnostics\Modules\InfoModule.cs",
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\Modules\InfoModule.cs",
 "region":  {
 "startLine":  28,
 "startColumn":  38,
@@ -615,7 +615,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Diagnostics\Modules\InfoModule.cs",
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\Modules\InfoModule.cs",
 "region":  {
 "startLine":  41,
 "startColumn":  25,
@@ -628,7 +628,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Diagnostics\Modules\InfoModule.cs",
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\Modules\InfoModule.cs",
 "region":  {
 "startLine":  67,
 "startColumn":  68,
@@ -641,7 +641,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Diagnostics\Modules\InfoModule.cs",
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\Modules\InfoModule.cs",
 "region":  {
 "startLine":  71,
 "startColumn":  17,
@@ -654,7 +654,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Diagnostics\Modules\InfoModule.cs",
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\Modules\InfoModule.cs",
 "region":  {
 "startLine":  79,
 "startColumn":  68,
@@ -667,7 +667,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Diagnostics\Modules\InfoModule.cs",
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\Modules\InfoModule.cs",
 "region":  {
 "startLine":  83,
 "startColumn":  17,
@@ -680,7 +680,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Diagnostics\Modules\InteractiveModule.cs",
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\Modules\InteractiveModule.cs",
 "region":  {
 "startLine":  145,
 "startColumn":  24,
@@ -693,7 +693,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Diagnostics\Modules\SettingsModule.cs",
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\Modules\SettingsModule.cs",
 "region":  {
 "startLine":  26,
 "startColumn":  44,
@@ -706,7 +706,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Diagnostics\Modules\SettingsModule.cs",
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\Modules\SettingsModule.cs",
 "region":  {
 "startLine":  49,
 "startColumn":  21,
@@ -719,7 +719,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Diagnostics\TestingDiagnosticProvider.cs",
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\TestingDiagnosticProvider.cs",
 "region":  {
 "startLine":  53,
 "startColumn":  24,
@@ -732,7 +732,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Diagnostics\TestingDiagnosticProvider.cs",
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\TestingDiagnosticProvider.cs",
 "region":  {
 "startLine":  74,
 "startColumn":  24,
@@ -745,7 +745,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Diagnostics\TestingDiagnosticProvider.cs",
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\TestingDiagnosticProvider.cs",
 "region":  {
 "startLine":  81,
 "startColumn":  24,
@@ -758,7 +758,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
 "region":  {
 "startLine":  60,
 "startColumn":  35,
@@ -771,7 +771,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
 "region":  {
 "startLine":  241,
 "startColumn":  26,
@@ -784,7 +784,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
 "region":  {
 "startLine":  248,
 "startColumn":  35,
@@ -797,7 +797,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
 "region":  {
 "startLine":  257,
 "startColumn":  21,
@@ -810,7 +810,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
 "region":  {
 "startLine":  257,
 "startColumn":  39,
@@ -823,7 +823,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
 "region":  {
 "startLine":  308,
 "startColumn":  26,
@@ -836,7 +836,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
 "region":  {
 "startLine":  317,
 "startColumn":  59,
@@ -849,7 +849,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
 "region":  {
 "startLine":  339,
 "startColumn":  25,
@@ -862,7 +862,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
 "region":  {
 "startLine":  343,
 "startColumn":  31,
@@ -875,7 +875,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
 "region":  {
 "startLine":  354,
 "startColumn":  26,
@@ -888,7 +888,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
 "region":  {
 "startLine":  377,
 "startColumn":  24,
@@ -901,7 +901,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
 "region":  {
 "startLine":  380,
 "startColumn":  20,
@@ -914,7 +914,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
 "region":  {
 "startLine":  380,
 "startColumn":  30,
@@ -927,7 +927,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
 "region":  {
 "startLine":  405,
 "startColumn":  31,
@@ -940,7 +940,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
 "region":  {
 "startLine":  430,
 "startColumn":  20,
@@ -953,7 +953,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
 "region":  {
 "startLine":  430,
 "startColumn":  35,
@@ -966,7 +966,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
 "region":  {
 "startLine":  455,
 "startColumn":  20,
@@ -979,7 +979,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
 "region":  {
 "startLine":  455,
 "startColumn":  35,
@@ -992,7 +992,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
 "region":  {
 "startLine":  477,
 "startColumn":  24,
@@ -1005,7 +1005,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
 "region":  {
 "startLine":  480,
 "startColumn":  20,
@@ -1018,7 +1018,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
 "region":  {
 "startLine":  480,
 "startColumn":  31,
@@ -1031,7 +1031,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
 "region":  {
 "startLine":  502,
 "startColumn":  24,
@@ -1044,7 +1044,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
 "region":  {
 "startLine":  505,
 "startColumn":  20,
@@ -1057,7 +1057,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
 "region":  {
 "startLine":  505,
 "startColumn":  32,
@@ -1070,7 +1070,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
 "region":  {
 "startLine":  527,
 "startColumn":  24,
@@ -1083,7 +1083,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
 "region":  {
 "startLine":  530,
 "startColumn":  20,
@@ -1096,7 +1096,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
 "region":  {
 "startLine":  530,
 "startColumn":  34,
@@ -1109,7 +1109,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
 "region":  {
 "startLine":  552,
 "startColumn":  24,
@@ -1122,7 +1122,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
 "region":  {
 "startLine":  555,
 "startColumn":  20,
@@ -1135,7 +1135,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
 "region":  {
 "startLine":  555,
 "startColumn":  33,
@@ -1148,7 +1148,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ErrorHandling\DefaultStatusCodeHandler.cs",
+"uri":  "sources\Nancy\src\Nancy\ErrorHandling\DefaultStatusCodeHandler.cs",
 "region":  {
 "startLine":  132,
 "startColumn":  90,
@@ -1161,7 +1161,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Extensions\ContextExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy\Extensions\ContextExtensions.cs",
 "region":  {
 "startLine":  46,
 "startColumn":  18,
@@ -1174,7 +1174,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Extensions\ContextExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy\Extensions\ContextExtensions.cs",
 "region":  {
 "startLine":  51,
 "startColumn":  20,
@@ -1187,7 +1187,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Extensions\ContextExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy\Extensions\ContextExtensions.cs",
 "region":  {
 "startLine":  169,
 "startColumn":  39,
@@ -1200,7 +1200,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Extensions\ContextExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy\Extensions\ContextExtensions.cs",
 "region":  {
 "startLine":  170,
 "startColumn":  29,
@@ -1213,7 +1213,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Extensions\ContextExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy\Extensions\ContextExtensions.cs",
 "region":  {
 "startLine":  170,
 "startColumn":  53,
@@ -1226,7 +1226,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
 "region":  {
 "startLine":  153,
 "startColumn":  41,
@@ -1239,7 +1239,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
 "region":  {
 "startLine":  483,
 "startColumn":  35,
@@ -1252,7 +1252,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
 "region":  {
 "startLine":  636,
 "startColumn":  53,
@@ -1265,7 +1265,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
 "region":  {
 "startLine":  64,
 "startColumn":  21,
@@ -1278,7 +1278,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Helpers\ReflectionUtils.cs",
+"uri":  "sources\Nancy\src\Nancy\Helpers\ReflectionUtils.cs",
 "region":  {
 "startLine":  210,
 "startColumn":  32,
@@ -1291,7 +1291,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Helpers\ReflectionUtils.cs",
+"uri":  "sources\Nancy\src\Nancy\Helpers\ReflectionUtils.cs",
 "region":  {
 "startLine":  232,
 "startColumn":  21,
@@ -1304,7 +1304,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Helpers\ReflectionUtils.cs",
+"uri":  "sources\Nancy\src\Nancy\Helpers\ReflectionUtils.cs",
 "region":  {
 "startLine":  235,
 "startColumn":  21,
@@ -1317,7 +1317,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\HttpMultipartBoundary.cs",
+"uri":  "sources\Nancy\src\Nancy\HttpMultipartBoundary.cs",
 "region":  {
 "startLine":  64,
 "startColumn":  21,
@@ -1330,7 +1330,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\HttpMultipartBoundary.cs",
+"uri":  "sources\Nancy\src\Nancy\HttpMultipartBoundary.cs",
 "region":  {
 "startLine":  70,
 "startColumn":  21,
@@ -1343,7 +1343,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\IO\RequestStream.cs",
+"uri":  "sources\Nancy\src\Nancy\IO\RequestStream.cs",
 "region":  {
 "startLine":  353,
 "startColumn":  61,
@@ -1356,7 +1356,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Json\Converters\TimeSpanConverter.cs",
+"uri":  "sources\Nancy\src\Nancy\Json\Converters\TimeSpanConverter.cs",
 "region":  {
 "startLine":  64,
 "startColumn":  21,
@@ -1369,7 +1369,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Json\Converters\TupleConverter.cs",
+"uri":  "sources\Nancy\src\Nancy\Json\Converters\TupleConverter.cs",
 "region":  {
 "startLine":  28,
 "startColumn":  31,
@@ -1382,7 +1382,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"uri":  "sources\Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
 "region":  {
 "startLine":  188,
 "startColumn":  24,
@@ -1395,7 +1395,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"uri":  "sources\Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
 "region":  {
 "startLine":  194,
 "startColumn":  24,
@@ -1408,7 +1408,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"uri":  "sources\Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
 "region":  {
 "startLine":  216,
 "startColumn":  24,
@@ -1421,7 +1421,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"uri":  "sources\Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
 "region":  {
 "startLine":  219,
 "startColumn":  20,
@@ -1434,7 +1434,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"uri":  "sources\Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
 "region":  {
 "startLine":  300,
 "startColumn":  53,
@@ -1447,7 +1447,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Json\Json.cs",
+"uri":  "sources\Nancy\src\Nancy\Json\Json.cs",
 "region":  {
 "startLine":  121,
 "startColumn":  13,
@@ -1460,7 +1460,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Json\Json.cs",
+"uri":  "sources\Nancy\src\Nancy\Json\Json.cs",
 "region":  {
 "startLine":  123,
 "startColumn":  13,
@@ -1473,7 +1473,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
 "region":  {
 "startLine":  402,
 "startColumn":  15,
@@ -1486,7 +1486,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
 "region":  {
 "startLine":  509,
 "startColumn":  10,
@@ -1499,7 +1499,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
 "region":  {
 "startLine":  511,
 "startColumn":  15,
@@ -1512,7 +1512,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
 "region":  {
 "startLine":  513,
 "startColumn":  15,
@@ -1525,7 +1525,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
 "region":  {
 "startLine":  515,
 "startColumn":  15,
@@ -1538,7 +1538,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
 "region":  {
 "startLine":  531,
 "startColumn":  10,
@@ -1551,7 +1551,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
 "region":  {
 "startLine":  538,
 "startColumn":  10,
@@ -1564,7 +1564,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
 "region":  {
 "startLine":  545,
 "startColumn":  10,
@@ -1577,7 +1577,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
 "region":  {
 "startLine":  550,
 "startColumn":  10,
@@ -1590,7 +1590,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
 "region":  {
 "startLine":  550,
 "startColumn":  62,
@@ -1603,7 +1603,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
 "region":  {
 "startLine":  553,
 "startColumn":  30,
@@ -1616,7 +1616,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
 "region":  {
 "startLine":  566,
 "startColumn":  43,
@@ -1629,7 +1629,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Json\JsonSerializer.cs",
+"uri":  "sources\Nancy\src\Nancy\Json\JsonSerializer.cs",
 "region":  {
 "startLine":  250,
 "startColumn":  6,
@@ -1642,7 +1642,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Json\JsonSerializer.cs",
+"uri":  "sources\Nancy\src\Nancy\Json\JsonSerializer.cs",
 "region":  {
 "startLine":  324,
 "startColumn":  11,
@@ -1655,7 +1655,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Json\JsonSerializer.cs",
+"uri":  "sources\Nancy\src\Nancy\Json\JsonSerializer.cs",
 "region":  {
 "startLine":  475,
 "startColumn":  43,
@@ -1668,7 +1668,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Json\JsonSerializer.cs",
+"uri":  "sources\Nancy\src\Nancy\Json\JsonSerializer.cs",
 "region":  {
 "startLine":  492,
 "startColumn":  24,
@@ -1681,7 +1681,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Json\JsonSerializer.cs",
+"uri":  "sources\Nancy\src\Nancy\Json\JsonSerializer.cs",
 "region":  {
 "startLine":  529,
 "startColumn":  25,
@@ -1694,7 +1694,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Json\JsonSerializer.cs",
+"uri":  "sources\Nancy\src\Nancy\Json\JsonSerializer.cs",
 "region":  {
 "startLine":  562,
 "startColumn":  24,
@@ -1707,7 +1707,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Localization\ResourceBasedTextResource.cs",
+"uri":  "sources\Nancy\src\Nancy\Localization\ResourceBasedTextResource.cs",
 "region":  {
 "startLine":  28,
 "startColumn":  23,
@@ -1720,7 +1720,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Localization\ResourceBasedTextResource.cs",
+"uri":  "sources\Nancy\src\Nancy\Localization\ResourceBasedTextResource.cs",
 "region":  {
 "startLine":  47,
 "startColumn":  49,
@@ -1733,7 +1733,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Localization\ResourceBasedTextResource.cs",
+"uri":  "sources\Nancy\src\Nancy\Localization\ResourceBasedTextResource.cs",
 "region":  {
 "startLine":  67,
 "startColumn":  30,
@@ -1746,7 +1746,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ModelBinding\BindingMemberInfo.cs",
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\BindingMemberInfo.cs",
 "region":  {
 "startLine":  87,
 "startColumn":  24,
@@ -1759,7 +1759,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ModelBinding\BindingMemberInfo.cs",
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\BindingMemberInfo.cs",
 "region":  {
 "startLine":  104,
 "startColumn":  17,
@@ -1772,7 +1772,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ModelBinding\BindingMemberInfo.cs",
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\BindingMemberInfo.cs",
 "region":  {
 "startLine":  108,
 "startColumn":  17,
@@ -1785,7 +1785,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
 "region":  {
 "startLine":  184,
 "startColumn":  24,
@@ -1798,7 +1798,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
 "region":  {
 "startLine":  226,
 "startColumn":  24,
@@ -1811,7 +1811,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
 "region":  {
 "startLine":  233,
 "startColumn":  24,
@@ -1824,7 +1824,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
 "region":  {
 "startLine":  430,
 "startColumn":  28,
@@ -1837,7 +1837,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
 "region":  {
 "startLine":  466,
 "startColumn":  36,
@@ -1850,7 +1850,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ModelBinding\DefaultBodyDeserializers\JsonBodyDeserializer.cs",
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBodyDeserializers\JsonBodyDeserializer.cs",
 "region":  {
 "startLine":  68,
 "startColumn":  38,
@@ -1863,7 +1863,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ModelBinding\DefaultBodyDeserializers\XmlBodyDeserializer.cs",
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBodyDeserializers\XmlBodyDeserializer.cs",
 "region":  {
 "startLine":  30,
 "startColumn":  20,
@@ -1876,7 +1876,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ModelBinding\DefaultBodyDeserializers\XmlBodyDeserializer.cs",
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBodyDeserializers\XmlBodyDeserializer.cs",
 "region":  {
 "startLine":  31,
 "startColumn":  20,
@@ -1889,7 +1889,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ModelBinding\DefaultConverters\CollectionConverter.cs",
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultConverters\CollectionConverter.cs",
 "region":  {
 "startLine":  79,
 "startColumn":  17,
@@ -1902,7 +1902,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ModelBinding\DefaultConverters\CollectionConverter.cs",
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultConverters\CollectionConverter.cs",
 "region":  {
 "startLine":  106,
 "startColumn":  29,
@@ -1915,7 +1915,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ModelBinding\DefaultConverters\CollectionConverter.cs",
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultConverters\CollectionConverter.cs",
 "region":  {
 "startLine":  108,
 "startColumn":  20,
@@ -1928,7 +1928,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ModelBinding\DefaultConverters\CollectionConverter.cs",
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultConverters\CollectionConverter.cs",
 "region":  {
 "startLine":  129,
 "startColumn":  29,
@@ -1941,7 +1941,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ModelBinding\DefaultConverters\CollectionConverter.cs",
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultConverters\CollectionConverter.cs",
 "region":  {
 "startLine":  131,
 "startColumn":  20,
@@ -1954,7 +1954,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ModelBinding\DefaultConverters\FallbackConverter.cs",
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultConverters\FallbackConverter.cs",
 "region":  {
 "startLine":  41,
 "startColumn":  24,
@@ -1967,7 +1967,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ModelBinding\DefaultFieldNameConverter.cs",
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultFieldNameConverter.cs",
 "region":  {
 "startLine":  29,
 "startColumn":  20,
@@ -1980,7 +1980,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ModelBinding\ModelBindingException.cs",
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\ModelBindingException.cs",
 "region":  {
 "startLine":  32,
 "startColumn":  20,
@@ -1993,7 +1993,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ModelBinding\PropertyBindingException.cs",
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\PropertyBindingException.cs",
 "region":  {
 "startLine":  26,
 "startColumn":  20,
@@ -2006,7 +2006,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\NancyEngine.cs",
+"uri":  "sources\Nancy\src\Nancy\NancyEngine.cs",
 "region":  {
 "startLine":  201,
 "startColumn":  55,
@@ -2019,7 +2019,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\NegotiatorExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy\NegotiatorExtensions.cs",
 "region":  {
 "startLine":  269,
 "startColumn":  25,
@@ -2032,7 +2032,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\NegotiatorExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy\NegotiatorExtensions.cs",
 "region":  {
 "startLine":  270,
 "startColumn":  25,
@@ -2045,7 +2045,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Owin\NancyMiddleware.cs",
+"uri":  "sources\Nancy\src\Nancy\Owin\NancyMiddleware.cs",
 "region":  {
 "startLine":  230,
 "startColumn":  21,
@@ -2058,7 +2058,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Request.cs",
+"uri":  "sources\Nancy\src\Nancy\Request.cs",
 "region":  {
 "startLine":  315,
 "startColumn":  21,
@@ -2071,7 +2071,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Request.cs",
+"uri":  "sources\Nancy\src\Nancy\Request.cs",
 "region":  {
 "startLine":  325,
 "startColumn":  26,
@@ -2084,7 +2084,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\RequestHeaders.cs",
+"uri":  "sources\Nancy\src\Nancy\RequestHeaders.cs",
 "region":  {
 "startLine":  115,
 "startColumn":  63,
@@ -2097,7 +2097,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\RequestHeaders.cs",
+"uri":  "sources\Nancy\src\Nancy\RequestHeaders.cs",
 "region":  {
 "startLine":  215,
 "startColumn":  61,
@@ -2110,7 +2110,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\RequestHeaders.cs",
+"uri":  "sources\Nancy\src\Nancy\RequestHeaders.cs",
 "region":  {
 "startLine":  311,
 "startColumn":  29,
@@ -2123,7 +2123,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ResourceAssemblyProvider.cs",
+"uri":  "sources\Nancy\src\Nancy\ResourceAssemblyProvider.cs",
 "region":  {
 "startLine":  32,
 "startColumn":  30,
@@ -2136,7 +2136,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Response.cs",
+"uri":  "sources\Nancy\src\Nancy\Response.cs",
 "region":  {
 "startLine":  171,
 "startColumn":  58,
@@ -2149,7 +2149,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ResponseExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy\ResponseExtensions.cs",
 "region":  {
 "startLine":  203,
 "startColumn":  25,
@@ -2162,7 +2162,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ResponseExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy\ResponseExtensions.cs",
 "region":  {
 "startLine":  204,
 "startColumn":  25,
@@ -2175,7 +2175,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Responses\DefaultJsonSerializer.cs",
+"uri":  "sources\Nancy\src\Nancy\Responses\DefaultJsonSerializer.cs",
 "region":  {
 "startLine":  128,
 "startColumn":  13,
@@ -2188,7 +2188,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Responses\DefaultJsonSerializer.cs",
+"uri":  "sources\Nancy\src\Nancy\Responses\DefaultJsonSerializer.cs",
 "region":  {
 "startLine":  130,
 "startColumn":  14,
@@ -2201,7 +2201,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Responses\DefaultJsonSerializer.cs",
+"uri":  "sources\Nancy\src\Nancy\Responses\DefaultJsonSerializer.cs",
 "region":  {
 "startLine":  131,
 "startColumn":  13,
@@ -2214,7 +2214,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Responses\DefaultXmlSerializer.cs",
+"uri":  "sources\Nancy\src\Nancy\Responses\DefaultXmlSerializer.cs",
 "region":  {
 "startLine":  91,
 "startColumn":  21,
@@ -2227,7 +2227,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Responses\DefaultXmlSerializer.cs",
+"uri":  "sources\Nancy\src\Nancy\Responses\DefaultXmlSerializer.cs",
 "region":  {
 "startLine":  92,
 "startColumn":  20,
@@ -2240,7 +2240,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Responses\EmbeddedFileResponse.cs",
+"uri":  "sources\Nancy\src\Nancy\Responses\EmbeddedFileResponse.cs",
 "region":  {
 "startLine":  78,
 "startColumn":  31,
@@ -2253,7 +2253,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Responses\GenericFileResponse.cs",
+"uri":  "sources\Nancy\src\Nancy\Responses\GenericFileResponse.cs",
 "region":  {
 "startLine":  94,
 "startColumn":  20,
@@ -2266,7 +2266,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Responses\GenericFileResponse.cs",
+"uri":  "sources\Nancy\src\Nancy\Responses\GenericFileResponse.cs",
 "region":  {
 "startLine":  139,
 "startColumn":  44,
@@ -2279,7 +2279,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Responses\GenericFileResponse.cs",
+"uri":  "sources\Nancy\src\Nancy\Responses\GenericFileResponse.cs",
 "region":  {
 "startLine":  140,
 "startColumn":  32,
@@ -2292,7 +2292,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Responses\GenericFileResponse.cs",
+"uri":  "sources\Nancy\src\Nancy\Responses\GenericFileResponse.cs",
 "region":  {
 "startLine":  154,
 "startColumn":  46,
@@ -2305,7 +2305,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Responses\Negotiation\DefaultResponseNegotiator.cs",
+"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\DefaultResponseNegotiator.cs",
 "region":  {
 "startLine":  105,
 "startColumn":  21,
@@ -2318,7 +2318,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Responses\Negotiation\DefaultResponseNegotiator.cs",
+"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\DefaultResponseNegotiator.cs",
 "region":  {
 "startLine":  141,
 "startColumn":  13,
@@ -2331,7 +2331,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Responses\Negotiation\DefaultResponseNegotiator.cs",
+"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\DefaultResponseNegotiator.cs",
 "region":  {
 "startLine":  142,
 "startColumn":  13,
@@ -2344,7 +2344,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Responses\Negotiation\DefaultResponseNegotiator.cs",
+"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\DefaultResponseNegotiator.cs",
 "region":  {
 "startLine":  143,
 "startColumn":  13,
@@ -2357,7 +2357,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Responses\Negotiation\DefaultResponseNegotiator.cs",
+"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\DefaultResponseNegotiator.cs",
 "region":  {
 "startLine":  268,
 "startColumn":  25,
@@ -2370,7 +2370,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Responses\Negotiation\DefaultResponseNegotiator.cs",
+"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\DefaultResponseNegotiator.cs",
 "region":  {
 "startLine":  338,
 "startColumn":  31,
@@ -2383,7 +2383,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Responses\Negotiation\JsonProcessor.cs",
+"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\JsonProcessor.cs",
 "region":  {
 "startLine":  110,
 "startColumn":  21,
@@ -2396,7 +2396,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Responses\Negotiation\JsonProcessor.cs",
+"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\JsonProcessor.cs",
 "region":  {
 "startLine":  111,
 "startColumn":  21,
@@ -2409,7 +2409,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Responses\Negotiation\MediaRange.cs",
+"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\MediaRange.cs",
 "region":  {
 "startLine":  109,
 "startColumn":  24,
@@ -2422,7 +2422,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Responses\Negotiation\MediaRange.cs",
+"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\MediaRange.cs",
 "region":  {
 "startLine":  112,
 "startColumn":  20,
@@ -2435,7 +2435,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Responses\Negotiation\XmlProcessor.cs",
+"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\XmlProcessor.cs",
 "region":  {
 "startLine":  122,
 "startColumn":  21,
@@ -2448,7 +2448,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Responses\Negotiation\XmlProcessor.cs",
+"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\XmlProcessor.cs",
 "region":  {
 "startLine":  123,
 "startColumn":  21,
@@ -2461,7 +2461,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Routing\Constraints\DateTimeRouteSegmentConstraint.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\Constraints\DateTimeRouteSegmentConstraint.cs",
 "region":  {
 "startLine":  17,
 "startColumn":  20,
@@ -2474,7 +2474,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Routing\DefaultRouteInvoker.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\DefaultRouteInvoker.cs",
 "region":  {
 "startLine":  47,
 "startColumn":  27,
@@ -2487,7 +2487,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Routing\DefaultRoutePatternMatcher.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\DefaultRoutePatternMatcher.cs",
 "region":  {
 "startLine":  126,
 "startColumn":  20,
@@ -2500,7 +2500,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Routing\DefaultRoutePatternMatcher.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\DefaultRoutePatternMatcher.cs",
 "region":  {
 "startLine":  156,
 "startColumn":  51,
@@ -2513,7 +2513,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Routing\DefaultRoutePatternMatcher.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\DefaultRoutePatternMatcher.cs",
 "region":  {
 "startLine":  156,
 "startColumn":  82,
@@ -2526,7 +2526,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Routing\DefaultRoutePatternMatcher.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\DefaultRoutePatternMatcher.cs",
 "region":  {
 "startLine":  156,
 "startColumn":  107,
@@ -2539,7 +2539,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Routing\RouteDescription.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\RouteDescription.cs",
 "region":  {
 "startLine":  89,
 "startColumn":  21,
@@ -2552,7 +2552,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Routing\RouteDescription.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\RouteDescription.cs",
 "region":  {
 "startLine":  92,
 "startColumn":  17,
@@ -2565,7 +2565,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Routing\Trie\Nodes\CaptureNodeWithDefaultValue.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\Trie\Nodes\CaptureNodeWithDefaultValue.cs",
 "region":  {
 "startLine":  69,
 "startColumn":  53,
@@ -2578,7 +2578,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Routing\Trie\Nodes\CaptureNodeWithMultipleParameters.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\Trie\Nodes\CaptureNodeWithMultipleParameters.cs",
 "region":  {
 "startLine":  57,
 "startColumn":  20,
@@ -2591,7 +2591,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Routing\Trie\Nodes\CaptureNodeWithMultipleParameters.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\Trie\Nodes\CaptureNodeWithMultipleParameters.cs",
 "region":  {
 "startLine":  57,
 "startColumn":  51,
@@ -2604,7 +2604,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Routing\Trie\Nodes\GreedyCaptureNode.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\Trie\Nodes\GreedyCaptureNode.cs",
 "region":  {
 "startLine":  65,
 "startColumn":  17,
@@ -2617,7 +2617,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Routing\Trie\Nodes\TrieNode.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\Trie\Nodes\TrieNode.cs",
 "region":  {
 "startLine":  154,
 "startColumn":  34,
@@ -2630,7 +2630,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Routing\Trie\TrieNodeFactory.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\Trie\TrieNodeFactory.cs",
 "region":  {
 "startLine":  48,
 "startColumn":  17,
@@ -2643,7 +2643,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Routing\Trie\TrieNodeFactory.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\Trie\TrieNodeFactory.cs",
 "region":  {
 "startLine":  48,
 "startColumn":  46,
@@ -2656,7 +2656,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Routing\Trie\TrieNodeFactory.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\Trie\TrieNodeFactory.cs",
 "region":  {
 "startLine":  48,
 "startColumn":  71,
@@ -2669,7 +2669,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Routing\Trie\TrieNodeFactory.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\Trie\TrieNodeFactory.cs",
 "region":  {
 "startLine":  68,
 "startColumn":  17,
@@ -2682,7 +2682,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Routing\Trie\TrieNodeFactory.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\Trie\TrieNodeFactory.cs",
 "region":  {
 "startLine":  73,
 "startColumn":  17,
@@ -2695,7 +2695,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Security\CsrfValidationException.cs",
+"uri":  "sources\Nancy\src\Nancy\Security\CsrfValidationException.cs",
 "region":  {
 "startLine":  10,
 "startColumn":  20,
@@ -2708,7 +2708,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Security\SSLProxy.cs",
+"uri":  "sources\Nancy\src\Nancy\Security\SSLProxy.cs",
 "region":  {
 "startLine":  34,
 "startColumn":  74,
@@ -2721,7 +2721,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Session\CookieBasedSessions.cs",
+"uri":  "sources\Nancy\src\Nancy\Session\CookieBasedSessions.cs",
 "region":  {
 "startLine":  152,
 "startColumn":  52,
@@ -2734,7 +2734,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
 "startLine":  533,
 "startColumn":  20,
@@ -2747,7 +2747,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
 "startLine":  538,
 "startColumn":  20,
@@ -2760,7 +2760,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
 "startLine":  548,
 "startColumn":  20,
@@ -2773,7 +2773,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
 "startLine":  553,
 "startColumn":  20,
@@ -2786,7 +2786,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
 "startLine":  564,
 "startColumn":  20,
@@ -2799,7 +2799,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
 "startLine":  569,
 "startColumn":  20,
@@ -2812,7 +2812,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
 "startLine":  574,
 "startColumn":  20,
@@ -2825,7 +2825,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
 "startLine":  579,
 "startColumn":  20,
@@ -2838,7 +2838,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
 "startLine":  589,
 "startColumn":  20,
@@ -2851,7 +2851,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
 "startLine":  594,
 "startColumn":  20,
@@ -2864,7 +2864,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
 "startLine":  604,
 "startColumn":  20,
@@ -2877,7 +2877,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
 "startLine":  609,
 "startColumn":  20,
@@ -2890,7 +2890,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
 "startLine":  629,
 "startColumn":  20,
@@ -2903,7 +2903,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
 "startLine":  634,
 "startColumn":  20,
@@ -2916,7 +2916,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
 "startLine":  1450,
 "startColumn":  34,
@@ -2929,7 +2929,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
 "startLine":  1461,
 "startColumn":  42,
@@ -2942,7 +2942,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
 "startLine":  3049,
 "startColumn":  21,
@@ -2955,7 +2955,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
 "startLine":  3150,
 "startColumn":  24,
@@ -2968,7 +2968,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
 "startLine":  3151,
 "startColumn":  24,
@@ -2981,7 +2981,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
 "startLine":  3152,
 "startColumn":  24,
@@ -2994,7 +2994,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
 "startLine":  3153,
 "startColumn":  24,
@@ -3007,7 +3007,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
 "startLine":  3154,
 "startColumn":  24,
@@ -3020,7 +3020,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
 "startLine":  3155,
 "startColumn":  24,
@@ -3033,7 +3033,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
 "startLine":  3156,
 "startColumn":  24,
@@ -3046,7 +3046,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
 "startLine":  3173,
 "startColumn":  22,
@@ -3059,7 +3059,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
 "startLine":  3174,
 "startColumn":  22,
@@ -3072,7 +3072,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
 "startLine":  3557,
 "startColumn":  20,
@@ -3085,7 +3085,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
 "startLine":  3751,
 "startColumn":  21,
@@ -3098,7 +3098,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
 "startLine":  3755,
 "startColumn":  25,
@@ -3111,7 +3111,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Url.cs",
+"uri":  "sources\Nancy\src\Nancy\Url.cs",
 "region":  {
 "startLine":  227,
 "startColumn":  23,
@@ -3124,7 +3124,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ViewEngines\DefaultViewFactory.cs",
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\DefaultViewFactory.cs",
 "region":  {
 "startLine":  136,
 "startColumn":  46,
@@ -3137,7 +3137,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ViewEngines\DefaultViewLocator.cs",
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\DefaultViewLocator.cs",
 "region":  {
 "startLine":  192,
 "startColumn":  20,
@@ -3150,7 +3150,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ViewEngines\Extensions.cs",
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\Extensions.cs",
 "region":  {
 "startLine":  31,
 "startColumn":  24,
@@ -3163,7 +3163,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ViewEngines\Extensions.cs",
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\Extensions.cs",
 "region":  {
 "startLine":  31,
 "startColumn":  90,
@@ -3176,7 +3176,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ViewEngines\ResourceViewLocationProvider.cs",
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\ResourceViewLocationProvider.cs",
 "region":  {
 "startLine":  94,
 "startColumn":  21,
@@ -3189,7 +3189,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\NancyViewEngineHost.cs",
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\NancyViewEngineHost.cs",
 "region":  {
 "startLine":  85,
 "startColumn":  20,
@@ -3202,7 +3202,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\SuperSimpleViewEngine.cs",
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\SuperSimpleViewEngine.cs",
 "region":  {
 "startLine":  53,
 "startColumn":  13,
@@ -3215,7 +3215,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\SuperSimpleViewEngine.cs",
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\SuperSimpleViewEngine.cs",
 "region":  {
 "startLine":  226,
 "startColumn":  54,
@@ -3228,7 +3228,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\SuperSimpleViewEngine.cs",
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\SuperSimpleViewEngine.cs",
 "region":  {
 "startLine":  306,
 "startColumn":  54,
@@ -3241,7 +3241,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\SuperSimpleViewEngine.cs",
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\SuperSimpleViewEngine.cs",
 "region":  {
 "startLine":  620,
 "startColumn":  28,
@@ -3254,7 +3254,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ViewEngines\ViewNotFoundException.cs",
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\ViewNotFoundException.cs",
 "region":  {
 "startLine":  32,
 "startColumn":  28,
@@ -3267,7 +3267,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ViewEngines\ViewNotFoundException.cs",
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\ViewNotFoundException.cs",
 "region":  {
 "startLine":  52,
 "startColumn":  28,

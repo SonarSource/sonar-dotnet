@@ -4,7 +4,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorPathSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ActorPathSpec.cs",
 "region":  {
 "startLine":  159,
 "startColumn":  1,
@@ -17,7 +17,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorSelectionSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ActorSelectionSpec.cs",
 "region":  {
 "startLine":  99,
 "startColumn":  13,
@@ -30,7 +30,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\DeathWatchSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\DeathWatchSpec.cs",
 "region":  {
 "startLine":  43,
 "startColumn":  9,
@@ -43,7 +43,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Configuration\HoconTests.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Configuration\HoconTests.cs",
 "region":  {
 "startLine":  317,
 "startColumn":  13,
@@ -56,7 +56,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
 "region":  {
 "startLine":  170,
 "startColumn":  17,
@@ -69,7 +69,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
 "region":  {
 "startLine":  199,
 "startColumn":  17,
@@ -82,7 +82,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
 "region":  {
 "startLine":  233,
 "startColumn":  17,
@@ -95,7 +95,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
 "region":  {
 "startLine":  297,
 "startColumn":  17,
@@ -108,7 +108,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
 "region":  {
 "startLine":  729,
 "startColumn":  9,
@@ -121,7 +121,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
 "region":  {
 "startLine":  925,
 "startColumn":  21,
@@ -134,7 +134,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Routing\RoutingSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Routing\RoutingSpec.cs",
 "region":  {
 "startLine":  162,
 "startColumn":  13,
@@ -147,7 +147,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Routing\RoutingSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Routing\RoutingSpec.cs",
 "region":  {
 "startLine":  203,
 "startColumn":  1,
@@ -160,7 +160,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Routing\RoutingSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Routing\RoutingSpec.cs",
 "region":  {
 "startLine":  223,
 "startColumn":  1,
@@ -173,7 +173,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Serialization\SerializationSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Serialization\SerializationSpec.cs",
 "region":  {
 "startLine":  396,
 "startColumn":  8,

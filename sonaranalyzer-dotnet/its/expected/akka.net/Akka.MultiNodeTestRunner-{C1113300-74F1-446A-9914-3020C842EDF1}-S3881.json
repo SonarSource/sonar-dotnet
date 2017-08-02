@@ -5,7 +5,7 @@
 "message":  "Fix this implementation of 'IDisposable' to conform to the dispose pattern.",
 "location":  [
 {
-"uri":  "akka.net\src\core\Akka.MultiNodeTestRunner\Discovery.cs",
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Discovery.cs",
 "region":  {
 "startLine":  17,
 "startColumn":  20,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.MultiNodeTestRunner\Discovery.cs",
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Discovery.cs",
 "region":  {
 "startLine":  17,
 "startColumn":  20,
@@ -23,7 +23,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.MultiNodeTestRunner\Discovery.cs",
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Discovery.cs",
 "region":  {
 "startLine":  73,
 "startColumn":  21,

@@ -4,7 +4,7 @@
 "id":  "S4017",
 "message":  "Refactor this method to remove the nested type argument.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Hosting.Self\NancyHost.cs",
+"uri":  "sources\Nancy\src\Nancy.Hosting.Self\NancyHost.cs",
 "region":  {
 "startLine":  383,
 "startColumn":  54,

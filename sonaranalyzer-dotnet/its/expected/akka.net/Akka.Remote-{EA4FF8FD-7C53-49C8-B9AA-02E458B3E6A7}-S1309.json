@@ -4,7 +4,7 @@
 "id":  "S1309",
 "message":  "Do not suppress issues.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\Transport\TestTransport.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\TestTransport.cs",
 "region":  {
 "startLine":  134,
 "startColumn":  1,
@@ -17,7 +17,7 @@
 "id":  "S1309",
 "message":  "Do not suppress issues.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\Transport\TestTransport.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\TestTransport.cs",
 "region":  {
 "startLine":  217,
 "startColumn":  1,
@@ -30,7 +30,7 @@
 "id":  "S1309",
 "message":  "Do not suppress issues.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\Transport\TestTransport.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\TestTransport.cs",
 "region":  {
 "startLine":  355,
 "startColumn":  1,

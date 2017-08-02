@@ -4,7 +4,7 @@
 "id":  "S3962",
 "message":  "Replace this 'static readonly' declaration with 'const'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence.TestKit\Journal\JournalSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\Journal\JournalSpec.cs",
 "region":  {
 "startLine":  24,
 "startColumn":  40,
@@ -17,7 +17,7 @@
 "id":  "S3962",
 "message":  "Replace this 'static readonly' declaration with 'const'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence.TestKit\Snapshot\SnapshotStoreSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\Snapshot\SnapshotStoreSpec.cs",
 "region":  {
 "startLine":  25,
 "startColumn":  40,

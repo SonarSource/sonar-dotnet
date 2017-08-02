@@ -4,7 +4,7 @@
 "id":  "S1854",
 "message":  "Remove this useless assignment to local variable 'actor'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\PropsSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\PropsSpec.cs",
 "region":  {
 "startLine":  104,
 "startColumn":  23,

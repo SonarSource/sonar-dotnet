@@ -4,7 +4,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private property 'PreRequestHook'.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Testing.Tests\ConfigurableBootstrapperFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing.Tests\ConfigurableBootstrapperFixture.cs",
 "region":  {
 "startLine":  197,
 "startColumn":  13,
@@ -17,7 +17,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private property 'PostRequestHook'.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Testing.Tests\ConfigurableBootstrapperFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing.Tests\ConfigurableBootstrapperFixture.cs",
 "region":  {
 "startLine":  199,
 "startColumn":  13,
@@ -30,7 +30,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private property 'OnErrorHook'.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Testing.Tests\ConfigurableBootstrapperFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing.Tests\ConfigurableBootstrapperFixture.cs",
 "region":  {
 "startLine":  201,
 "startColumn":  13,
@@ -43,7 +43,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private constructor 'BlowUpModule'.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Testing.Tests\ConfigurableBootstrapperFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing.Tests\ConfigurableBootstrapperFixture.cs",
 "region":  {
 "startLine":  217,
 "startColumn":  13,

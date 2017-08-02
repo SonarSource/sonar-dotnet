@@ -5,7 +5,7 @@
 "message":  " Refactor 'GetHashCode' to not reference mutable fields.",
 "location":  [
 {
-"uri":  "akka.net\src\core\Akka\Actor\Props.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\Props.cs",
 "region":  {
 "startLine":  111,
 "startColumn":  29,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Actor\Props.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\Props.cs",
 "region":  {
 "startLine":  118,
 "startColumn":  46,

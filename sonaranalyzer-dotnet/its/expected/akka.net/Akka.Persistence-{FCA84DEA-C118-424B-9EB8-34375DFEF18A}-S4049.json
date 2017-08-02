@@ -4,7 +4,7 @@
 "id":  "S4049",
 "message":  "Consider making method 'GetDeliverySnapshot' a property.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\AtLeastOnceDelivery.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\AtLeastOnceDelivery.cs",
 "region":  {
 "startLine":  152,
 "startColumn":  44,
@@ -17,7 +17,7 @@
 "id":  "S4049",
 "message":  "Consider making method 'GetDeliverySnapshot' a property.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\AtLeastOnceDeliveryReceiveActor.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\AtLeastOnceDeliveryReceiveActor.cs",
 "region":  {
 "startLine":  139,
 "startColumn":  44,

@@ -4,7 +4,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private field 'DefaultAction'.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Fakes\FakeRoute.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Fakes\FakeRoute.cs",
 "region":  {
 "startLine":  11,
 "startColumn":  9,

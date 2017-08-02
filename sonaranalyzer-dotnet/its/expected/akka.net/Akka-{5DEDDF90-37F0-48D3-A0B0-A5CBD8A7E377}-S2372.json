@@ -4,7 +4,7 @@
 "id":  "S2372",
 "message":  "Remove the exception throwing from this property getter, or refactor the property into a method.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\FSM.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\FSM.cs",
 "region":  {
 "startLine":  630,
 "startColumn":  40,
@@ -17,7 +17,7 @@
 "id":  "S2372",
 "message":  "Remove the exception throwing from this property getter, or refactor the property into a method.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\RepointableActorRef.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\RepointableActorRef.cs",
 "region":  {
 "startLine":  170,
 "startColumn":  21,
@@ -30,7 +30,7 @@
 "id":  "S2372",
 "message":  "Remove the exception throwing from this property getter, or refactor the property into a method.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\IO\Dns.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\Dns.cs",
 "region":  {
 "startLine":  75,
 "startColumn":  40,
@@ -43,7 +43,7 @@
 "id":  "S2372",
 "message":  "Remove the exception throwing from this property getter, or refactor the property into a method.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\IO\TcpConnection.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpConnection.cs",
 "region":  {
 "startLine":  794,
 "startColumn":  23,
@@ -56,7 +56,7 @@
 "id":  "S2372",
 "message":  "Remove the exception throwing from this property getter, or refactor the property into a method.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Routing\RouterPoolActor.cs",
+"uri":  "sources\akka.net\src\core\Akka\Routing\RouterPoolActor.cs",
 "region":  {
 "startLine":  33,
 "startColumn":  21,

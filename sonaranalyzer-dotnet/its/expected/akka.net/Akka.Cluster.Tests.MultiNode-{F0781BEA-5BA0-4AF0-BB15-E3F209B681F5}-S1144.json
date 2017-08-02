@@ -4,7 +4,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private type 'DumbObserver'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster.Tests.MultiNode\ClusterDeathWatchSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests.MultiNode\ClusterDeathWatchSpec.cs",
 "region":  {
 "startLine":  372,
 "startColumn":  9,
@@ -17,7 +17,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private constructor 'DumbObserver'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster.Tests.MultiNode\ClusterDeathWatchSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests.MultiNode\ClusterDeathWatchSpec.cs",
 "region":  {
 "startLine":  376,
 "startColumn":  13,

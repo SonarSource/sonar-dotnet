@@ -4,7 +4,7 @@
 "id":  "S3995",
 "message":  "Change this return type to 'System.Uri'.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
 "region":  {
 "startLine":  220,
 "startColumn":  2,
@@ -17,7 +17,7 @@
 "id":  "S3995",
 "message":  "Change this return type to 'System.Uri'.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
 "region":  {
 "startLine":  114,
 "startColumn":  23,
@@ -30,7 +30,7 @@
 "id":  "S3995",
 "message":  "Change this return type to 'System.Uri'.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
 "region":  {
 "startLine":  135,
 "startColumn":  23,
@@ -43,7 +43,7 @@
 "id":  "S3995",
 "message":  "Change this return type to 'System.Uri'.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
 "region":  {
 "startLine":  192,
 "startColumn":  23,
@@ -56,7 +56,7 @@
 "id":  "S3995",
 "message":  "Change this return type to 'System.Uri'.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
 "region":  {
 "startLine":  249,
 "startColumn":  23,
@@ -69,7 +69,7 @@
 "id":  "S3995",
 "message":  "Change this return type to 'System.Uri'.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
 "region":  {
 "startLine":  384,
 "startColumn":  23,
@@ -82,7 +82,7 @@
 "id":  "S3995",
 "message":  "Change this return type to 'System.Uri'.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
 "region":  {
 "startLine":  389,
 "startColumn":  23,
@@ -95,7 +95,7 @@
 "id":  "S3995",
 "message":  "Change this return type to 'System.Uri'.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
 "region":  {
 "startLine":  421,
 "startColumn":  23,
@@ -108,7 +108,7 @@
 "id":  "S3995",
 "message":  "Change this return type to 'System.Uri'.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
 "region":  {
 "startLine":  432,
 "startColumn":  23,
@@ -121,7 +121,7 @@
 "id":  "S3995",
 "message":  "Change this return type to 'System.Uri'.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
 "region":  {
 "startLine":  482,
 "startColumn":  23,
@@ -134,7 +134,7 @@
 "id":  "S3995",
 "message":  "Change this return type to 'System.Uri'.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
 "region":  {
 "startLine":  679,
 "startColumn":  23,
@@ -147,7 +147,7 @@
 "id":  "S3995",
 "message":  "Change this return type to 'System.Uri'.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\IViewEngineHost.cs",
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\IViewEngineHost.cs",
 "region":  {
 "startLine":  36,
 "startColumn":  9,
@@ -160,7 +160,7 @@
 "id":  "S3995",
 "message":  "Change this return type to 'System.Uri'.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\NancyViewEngineHost.cs",
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\NancyViewEngineHost.cs",
 "region":  {
 "startLine":  62,
 "startColumn":  16,

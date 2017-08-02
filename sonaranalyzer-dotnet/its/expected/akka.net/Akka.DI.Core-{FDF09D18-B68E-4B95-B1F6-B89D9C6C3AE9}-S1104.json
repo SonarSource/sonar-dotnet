@@ -4,7 +4,7 @@
 "id":  "S1104",
 "message":  "Make this field 'private' and encapsulate it in a 'public' property.",
 "location":  {
-"uri":  "akka.net\src\contrib\dependencyInjection\Akka.DI.Core\DIExtension.cs",
+"uri":  "sources\akka.net\src\contrib\dependencyInjection\Akka.DI.Core\DIExtension.cs",
 "region":  {
 "startLine":  17,
 "startColumn":  35,

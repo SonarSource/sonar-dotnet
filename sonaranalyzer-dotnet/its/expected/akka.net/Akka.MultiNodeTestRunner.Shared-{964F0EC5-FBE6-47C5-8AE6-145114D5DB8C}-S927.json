@@ -4,7 +4,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'logMessage' to 'logMessageFragment' to match the base class declaration.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\TestCoordinatorEnabledMessageSink.cs",
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\TestCoordinatorEnabledMessageSink.cs",
 "region":  {
 "startLine":  71,
 "startColumn":  85,

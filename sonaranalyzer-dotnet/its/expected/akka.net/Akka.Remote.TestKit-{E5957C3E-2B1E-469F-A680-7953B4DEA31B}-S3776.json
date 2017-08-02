@@ -5,7 +5,7 @@
 "message":  "Refactor this method to reduce its Cognitive Complexity from 44 to the 15 allowed.",
 "location":  [
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
 "region":  {
 "startLine":  394,
 "startColumn":  24,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
 "region":  {
 "startLine":  406,
 "startColumn":  25,
@@ -23,7 +23,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
 "region":  {
 "startLine":  411,
 "startColumn":  25,
@@ -32,7 +32,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
 "region":  {
 "startLine":  411,
 "startColumn":  45,
@@ -41,7 +41,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
 "region":  {
 "startLine":  416,
 "startColumn":  25,
@@ -50,7 +50,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
 "region":  {
 "startLine":  419,
 "startColumn":  29,
@@ -59,7 +59,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
 "region":  {
 "startLine":  420,
 "startColumn":  29,
@@ -68,7 +68,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
 "region":  {
 "startLine":  437,
 "startColumn":  25,
@@ -77,7 +77,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
 "region":  {
 "startLine":  440,
 "startColumn":  25,
@@ -86,7 +86,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
 "region":  {
 "startLine":  443,
 "startColumn":  25,
@@ -95,7 +95,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
 "region":  {
 "startLine":  446,
 "startColumn":  25,
@@ -104,7 +104,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
 "region":  {
 "startLine":  457,
 "startColumn":  25,
@@ -113,7 +113,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
 "region":  {
 "startLine":  476,
 "startColumn":  25,
@@ -122,7 +122,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
 "region":  {
 "startLine":  479,
 "startColumn":  29,
@@ -131,7 +131,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
 "region":  {
 "startLine":  483,
 "startColumn":  25,
@@ -140,7 +140,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
 "region":  {
 "startLine":  488,
 "startColumn":  25,
@@ -149,7 +149,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
 "region":  {
 "startLine":  496,
 "startColumn":  25,
@@ -158,7 +158,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
 "region":  {
 "startLine":  497,
 "startColumn":  25,
@@ -167,7 +167,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
 "region":  {
 "startLine":  506,
 "startColumn":  25,
@@ -176,7 +176,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
 "region":  {
 "startLine":  519,
 "startColumn":  17,
@@ -185,7 +185,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
 "region":  {
 "startLine":  519,
 "startColumn":  41,
@@ -194,7 +194,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
 "region":  {
 "startLine":  520,
 "startColumn":  17,
@@ -203,7 +203,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\BarrierCoordinator.cs",
 "region":  {
 "startLine":  520,
 "startColumn":  48,
@@ -218,7 +218,7 @@
 "message":  "Refactor this method to reduce its Cognitive Complexity from 28 to the 15 allowed.",
 "location":  [
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\Conductor.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Conductor.cs",
 "region":  {
 "startLine":  342,
 "startColumn":  24,
@@ -227,7 +227,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\Conductor.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Conductor.cs",
 "region":  {
 "startLine":  349,
 "startColumn":  17,
@@ -236,7 +236,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\Conductor.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Conductor.cs",
 "region":  {
 "startLine":  351,
 "startColumn":  21,
@@ -245,7 +245,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\Conductor.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Conductor.cs",
 "region":  {
 "startLine":  367,
 "startColumn":  17,
@@ -254,7 +254,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\Conductor.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Conductor.cs",
 "region":  {
 "startLine":  373,
 "startColumn":  17,
@@ -263,7 +263,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\Conductor.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Conductor.cs",
 "region":  {
 "startLine":  379,
 "startColumn":  17,
@@ -272,7 +272,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\Conductor.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Conductor.cs",
 "region":  {
 "startLine":  384,
 "startColumn":  17,
@@ -281,7 +281,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\Conductor.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Conductor.cs",
 "region":  {
 "startLine":  395,
 "startColumn":  17,
@@ -290,7 +290,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\Conductor.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Conductor.cs",
 "region":  {
 "startLine":  395,
 "startColumn":  45,
@@ -299,7 +299,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\Conductor.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Conductor.cs",
 "region":  {
 "startLine":  400,
 "startColumn":  17,
@@ -308,7 +308,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\Conductor.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Conductor.cs",
 "region":  {
 "startLine":  405,
 "startColumn":  17,
@@ -317,7 +317,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\Conductor.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Conductor.cs",
 "region":  {
 "startLine":  411,
 "startColumn":  17,
@@ -326,7 +326,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\Conductor.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Conductor.cs",
 "region":  {
 "startLine":  413,
 "startColumn":  21,
@@ -335,7 +335,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\Conductor.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Conductor.cs",
 "region":  {
 "startLine":  418,
 "startColumn":  21,
@@ -350,7 +350,7 @@
 "message":  "Refactor this method to reduce its Cognitive Complexity from 57 to the 15 allowed.",
 "location":  [
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
 "region":  {
 "startLine":  261,
 "startColumn":  33,
@@ -359,7 +359,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
 "region":  {
 "startLine":  264,
 "startColumn":  13,
@@ -368,7 +368,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
 "region":  {
 "startLine":  275,
 "startColumn":  13,
@@ -377,7 +377,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
 "region":  {
 "startLine":  278,
 "startColumn":  17,
@@ -386,7 +386,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
 "region":  {
 "startLine":  280,
 "startColumn":  21,
@@ -395,7 +395,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
 "region":  {
 "startLine":  282,
 "startColumn":  25,
@@ -404,7 +404,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
 "region":  {
 "startLine":  288,
 "startColumn":  17,
@@ -413,7 +413,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
 "region":  {
 "startLine":  291,
 "startColumn":  21,
@@ -422,7 +422,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
 "region":  {
 "startLine":  292,
 "startColumn":  21,
@@ -431,7 +431,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
 "region":  {
 "startLine":  294,
 "startColumn":  25,
@@ -440,7 +440,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
 "region":  {
 "startLine":  297,
 "startColumn":  21,
@@ -449,7 +449,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
 "region":  {
 "startLine":  299,
 "startColumn":  25,
@@ -458,7 +458,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
 "region":  {
 "startLine":  305,
 "startColumn":  13,
@@ -467,7 +467,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
 "region":  {
 "startLine":  305,
 "startColumn":  44,
@@ -476,7 +476,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
 "region":  {
 "startLine":  311,
 "startColumn":  13,
@@ -485,7 +485,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
 "region":  {
 "startLine":  313,
 "startColumn":  17,
@@ -494,7 +494,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
 "region":  {
 "startLine":  318,
 "startColumn":  17,
@@ -503,7 +503,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
 "region":  {
 "startLine":  324,
 "startColumn":  17,
@@ -512,7 +512,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
 "region":  {
 "startLine":  327,
 "startColumn":  21,
@@ -521,7 +521,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
 "region":  {
 "startLine":  329,
 "startColumn":  21,
@@ -530,7 +530,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
 "region":  {
 "startLine":  334,
 "startColumn":  33,
@@ -539,7 +539,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
 "region":  {
 "startLine":  340,
 "startColumn":  17,
@@ -548,7 +548,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
 "region":  {
 "startLine":  342,
 "startColumn":  13,
@@ -557,7 +557,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
 "region":  {
 "startLine":  345,
 "startColumn":  17,
@@ -566,7 +566,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
 "region":  {
 "startLine":  352,
 "startColumn":  17,
@@ -575,7 +575,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
 "region":  {
 "startLine":  359,
 "startColumn":  17,
@@ -584,7 +584,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
 "region":  {
 "startLine":  367,
 "startColumn":  17,
@@ -593,7 +593,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
 "region":  {
 "startLine":  373,
 "startColumn":  13,
@@ -602,7 +602,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
 "region":  {
 "startLine":  378,
 "startColumn":  13,
@@ -617,7 +617,7 @@
 "message":  "Refactor this method to reduce its Cognitive Complexity from 22 to the 15 allowed.",
 "location":  [
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\MsgDecoder.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MsgDecoder.cs",
 "region":  {
 "startLine":  37,
 "startColumn":  23,
@@ -626,7 +626,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\MsgDecoder.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MsgDecoder.cs",
 "region":  {
 "startLine":  40,
 "startColumn":  13,
@@ -635,7 +635,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\MsgDecoder.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MsgDecoder.cs",
 "region":  {
 "startLine":  40,
 "startColumn":  27,
@@ -644,7 +644,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\MsgDecoder.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MsgDecoder.cs",
 "region":  {
 "startLine":  42,
 "startColumn":  17,
@@ -653,7 +653,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\MsgDecoder.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MsgDecoder.cs",
 "region":  {
 "startLine":  47,
 "startColumn":  17,
@@ -662,7 +662,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\MsgDecoder.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MsgDecoder.cs",
 "region":  {
 "startLine":  50,
 "startColumn":  21,
@@ -671,7 +671,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\MsgDecoder.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MsgDecoder.cs",
 "region":  {
 "startLine":  56,
 "startColumn":  87,
@@ -680,7 +680,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\MsgDecoder.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MsgDecoder.cs",
 "region":  {
 "startLine":  59,
 "startColumn":  17,
@@ -689,7 +689,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\MsgDecoder.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MsgDecoder.cs",
 "region":  {
 "startLine":  62,
 "startColumn":  21,
@@ -698,7 +698,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\MsgDecoder.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MsgDecoder.cs",
 "region":  {
 "startLine":  78,
 "startColumn":  17,
@@ -707,7 +707,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\MsgDecoder.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MsgDecoder.cs",
 "region":  {
 "startLine":  81,
 "startColumn":  21,
@@ -716,7 +716,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\MsgDecoder.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MsgDecoder.cs",
 "region":  {
 "startLine":  87,
 "startColumn":  17,
@@ -725,7 +725,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\MsgDecoder.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MsgDecoder.cs",
 "region":  {
 "startLine":  91,
 "startColumn":  17,
@@ -740,7 +740,7 @@
 "message":  "Refactor this method to reduce its Cognitive Complexity from 17 to the 15 allowed.",
 "location":  [
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\MsgEncoder.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MsgEncoder.cs",
 "region":  {
 "startLine":  42,
 "startColumn":  21,
@@ -749,7 +749,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\MsgEncoder.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MsgEncoder.cs",
 "region":  {
 "startLine":  46,
 "startColumn":  13,
@@ -758,7 +758,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\MsgEncoder.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MsgEncoder.cs",
 "region":  {
 "startLine":  59,
 "startColumn":  25,
@@ -767,7 +767,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\MsgEncoder.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MsgEncoder.cs",
 "region":  {
 "startLine":  66,
 "startColumn":  50,
@@ -776,7 +776,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\MsgEncoder.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MsgEncoder.cs",
 "region":  {
 "startLine":  87,
 "startColumn":  66,
@@ -785,7 +785,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\MsgEncoder.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MsgEncoder.cs",
 "region":  {
 "startLine":  90,
 "startColumn":  25,
@@ -794,7 +794,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\MsgEncoder.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MsgEncoder.cs",
 "region":  {
 "startLine":  97,
 "startColumn":  25,
@@ -803,7 +803,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\MsgEncoder.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MsgEncoder.cs",
 "region":  {
 "startLine":  97,
 "startColumn":  66,
@@ -812,7 +812,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\MsgEncoder.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MsgEncoder.cs",
 "region":  {
 "startLine":  103,
 "startColumn":  25,
@@ -821,7 +821,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\MsgEncoder.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MsgEncoder.cs",
 "region":  {
 "startLine":  124,
 "startColumn":  13,
@@ -836,7 +836,7 @@
 "message":  "Refactor this method to reduce its Cognitive Complexity from 104 to the 15 allowed.",
 "location":  [
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
 "region":  {
 "startLine":  305,
 "startColumn":  21,
@@ -845,7 +845,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
 "region":  {
 "startLine":  311,
 "startColumn":  17,
@@ -854,7 +854,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
 "region":  {
 "startLine":  316,
 "startColumn":  17,
@@ -863,7 +863,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
 "region":  {
 "startLine":  321,
 "startColumn":  17,
@@ -872,7 +872,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
 "region":  {
 "startLine":  325,
 "startColumn":  17,
@@ -881,7 +881,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
 "region":  {
 "startLine":  336,
 "startColumn":  17,
@@ -890,7 +890,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
 "region":  {
 "startLine":  341,
 "startColumn":  17,
@@ -899,7 +899,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
 "region":  {
 "startLine":  346,
 "startColumn":  17,
@@ -908,7 +908,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
 "region":  {
 "startLine":  350,
 "startColumn":  17,
@@ -917,7 +917,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
 "region":  {
 "startLine":  360,
 "startColumn":  17,
@@ -926,7 +926,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
 "region":  {
 "startLine":  365,
 "startColumn":  17,
@@ -935,7 +935,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
 "region":  {
 "startLine":  365,
 "startColumn":  54,
@@ -944,7 +944,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
 "region":  {
 "startLine":  371,
 "startColumn":  17,
@@ -953,7 +953,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
 "region":  {
 "startLine":  371,
 "startColumn":  38,
@@ -962,7 +962,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
 "region":  {
 "startLine":  377,
 "startColumn":  21,
@@ -971,7 +971,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
 "region":  {
 "startLine":  378,
 "startColumn":  21,
@@ -980,7 +980,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
 "region":  {
 "startLine":  381,
 "startColumn":  25,
@@ -989,7 +989,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
 "region":  {
 "startLine":  385,
 "startColumn":  17,
@@ -998,7 +998,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
 "region":  {
 "startLine":  385,
 "startColumn":  38,
@@ -1007,7 +1007,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
 "region":  {
 "startLine":  391,
 "startColumn":  17,
@@ -1016,7 +1016,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
 "region":  {
 "startLine":  391,
 "startColumn":  50,
@@ -1025,7 +1025,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
 "region":  {
 "startLine":  394,
 "startColumn":  21,
@@ -1034,7 +1034,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
 "region":  {
 "startLine":  396,
 "startColumn":  25,
@@ -1043,7 +1043,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
 "region":  {
 "startLine":  400,
 "startColumn":  25,
@@ -1052,7 +1052,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
 "region":  {
 "startLine":  403,
 "startColumn":  29,
@@ -1061,7 +1061,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
 "region":  {
 "startLine":  410,
 "startColumn":  29,
@@ -1070,7 +1070,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
 "region":  {
 "startLine":  416,
 "startColumn":  29,
@@ -1079,7 +1079,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
 "region":  {
 "startLine":  425,
 "startColumn":  21,
@@ -1088,7 +1088,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
 "region":  {
 "startLine":  427,
 "startColumn":  25,
@@ -1097,7 +1097,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
 "region":  {
 "startLine":  431,
 "startColumn":  25,
@@ -1106,7 +1106,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
 "region":  {
 "startLine":  438,
 "startColumn":  21,
@@ -1115,7 +1115,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
 "region":  {
 "startLine":  441,
 "startColumn":  25,
@@ -1124,7 +1124,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
 "region":  {
 "startLine":  442,
 "startColumn":  25,
@@ -1133,7 +1133,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
 "region":  {
 "startLine":  443,
 "startColumn":  25,
@@ -1142,7 +1142,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
 "region":  {
 "startLine":  453,
 "startColumn":  29,
@@ -1151,7 +1151,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
 "region":  {
 "startLine":  460,
 "startColumn":  21,
@@ -1160,7 +1160,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
 "region":  {
 "startLine":  464,
 "startColumn":  21,
@@ -1169,7 +1169,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
 "region":  {
 "startLine":  466,
 "startColumn":  25,
@@ -1178,7 +1178,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
 "region":  {
 "startLine":  466,
 "startColumn":  64,
@@ -1187,7 +1187,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
 "region":  {
 "startLine":  471,
 "startColumn":  25,
@@ -1196,7 +1196,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
 "region":  {
 "startLine":  471,
 "startColumn":  64,
@@ -1205,7 +1205,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
 "region":  {
 "startLine":  478,
 "startColumn":  25,
@@ -1214,7 +1214,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
 "region":  {
 "startLine":  484,
 "startColumn":  21,
@@ -1223,7 +1223,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
 "region":  {
 "startLine":  491,
 "startColumn":  17,
@@ -1232,7 +1232,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
 "region":  {
 "startLine":  495,
 "startColumn":  17,
@@ -1241,7 +1241,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
 "region":  {
 "startLine":  505,
 "startColumn":  17,

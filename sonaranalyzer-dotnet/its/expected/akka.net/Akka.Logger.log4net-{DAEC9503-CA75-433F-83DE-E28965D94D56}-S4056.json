@@ -4,7 +4,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "akka.net\src\contrib\loggers\Akka.Logger.log4net\Log4NetLogger.cs",
+"uri":  "sources\akka.net\src\contrib\loggers\Akka.Logger.log4net\Log4NetLogger.cs",
 "region":  {
 "startLine":  36,
 "startColumn":  63,
@@ -17,7 +17,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "akka.net\src\contrib\loggers\Akka.Logger.log4net\Log4NetLogger.cs",
+"uri":  "sources\akka.net\src\contrib\loggers\Akka.Logger.log4net\Log4NetLogger.cs",
 "region":  {
 "startLine":  37,
 "startColumn":  52,
@@ -30,7 +30,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "akka.net\src\contrib\loggers\Akka.Logger.log4net\Log4NetLogger.cs",
+"uri":  "sources\akka.net\src\contrib\loggers\Akka.Logger.log4net\Log4NetLogger.cs",
 "region":  {
 "startLine":  38,
 "startColumn":  49,
@@ -43,7 +43,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "akka.net\src\contrib\loggers\Akka.Logger.log4net\Log4NetLogger.cs",
+"uri":  "sources\akka.net\src\contrib\loggers\Akka.Logger.log4net\Log4NetLogger.cs",
 "region":  {
 "startLine":  39,
 "startColumn":  50,

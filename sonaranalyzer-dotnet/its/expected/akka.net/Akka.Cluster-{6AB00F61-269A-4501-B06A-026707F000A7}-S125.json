@@ -4,7 +4,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterRemoteWatcher.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterRemoteWatcher.cs",
 "region":  {
 "startLine":  73,
 "startColumn":  25,
@@ -17,7 +17,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\Util.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Util.cs",
 "region":  {
 "startLine":  51,
 "startColumn":  13,

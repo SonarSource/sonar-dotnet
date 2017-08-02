@@ -4,7 +4,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Demo.Validation\CustomersModule.cs",
+"uri":  "sources\Nancy\src\Nancy.Demo.Validation\CustomersModule.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -17,7 +17,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Demo.Validation\Database\DB.cs",
+"uri":  "sources\Nancy\src\Nancy.Demo.Validation\Database\DB.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -30,7 +30,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Demo.Validation\MainModule.cs",
+"uri":  "sources\Nancy\src\Nancy.Demo.Validation\MainModule.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -43,7 +43,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Demo.Validation\Models\Customer.cs",
+"uri":  "sources\Nancy\src\Nancy.Demo.Validation\Models\Customer.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -56,7 +56,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Demo.Validation\Models\OddLengthStringAttribute.cs",
+"uri":  "sources\Nancy\src\Nancy.Demo.Validation\Models\OddLengthStringAttribute.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -69,7 +69,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Demo.Validation\Models\OddLengthStringAttributeAdapter.cs",
+"uri":  "sources\Nancy\src\Nancy.Demo.Validation\Models\OddLengthStringAttributeAdapter.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -82,7 +82,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Demo.Validation\Models\Product.cs",
+"uri":  "sources\Nancy\src\Nancy.Demo.Validation\Models\Product.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -95,7 +95,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Demo.Validation\ProductsModule.cs",
+"uri":  "sources\Nancy\src\Nancy.Demo.Validation\ProductsModule.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -108,7 +108,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Demo.Validation\ValidationBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Demo.Validation\ValidationBootstrapper.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -121,7 +121,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\SharedAssemblyInfo.cs",
+"uri":  "sources\Nancy\src\SharedAssemblyInfo.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,

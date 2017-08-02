@@ -4,7 +4,7 @@
 "id":  "S1450",
 "message":  "Remove the 'TestActor' field and declare it as a local variable in the relevant methods.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster.Tests\Routing\ClusterRouterSupervisorSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests\Routing\ClusterRouterSupervisorSpec.cs",
 "region":  {
 "startLine":  44,
 "startColumn":  40,

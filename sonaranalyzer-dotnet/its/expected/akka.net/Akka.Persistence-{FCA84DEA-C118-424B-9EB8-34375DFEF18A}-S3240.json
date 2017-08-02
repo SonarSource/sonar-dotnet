@@ -4,7 +4,7 @@
 "id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Fsm\PersistentFSMBase.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Fsm\PersistentFSMBase.cs",
 "region":  {
 "startLine":  681,
 "startColumn":  17,

@@ -4,7 +4,7 @@
 "id":  "S2330",
 "message":  "Refactor the code to not rely on potentially unsafe array conversions.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Helpers\ReflectionUtils.cs",
+"uri":  "sources\Nancy\src\Nancy\Helpers\ReflectionUtils.cs",
 "region":  {
 "startLine":  285,
 "startColumn":  36,
@@ -17,7 +17,7 @@
 "id":  "S2330",
 "message":  "Refactor the code to not rely on potentially unsafe array conversions.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Helpers\ReflectionUtils.cs",
+"uri":  "sources\Nancy\src\Nancy\Helpers\ReflectionUtils.cs",
 "region":  {
 "startLine":  288,
 "startColumn":  23,

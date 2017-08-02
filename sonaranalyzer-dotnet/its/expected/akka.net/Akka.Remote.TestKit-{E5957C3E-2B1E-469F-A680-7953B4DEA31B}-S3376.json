@@ -4,7 +4,7 @@
 "id":  "S3376",
 "message":  "Make this class name end with 'Exception'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\Player.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Player.cs",
 "region":  {
 "startLine":  268,
 "startColumn":  24,

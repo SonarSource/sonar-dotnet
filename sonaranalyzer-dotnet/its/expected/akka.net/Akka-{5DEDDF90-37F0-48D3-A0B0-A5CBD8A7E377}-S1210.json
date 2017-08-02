@@ -4,7 +4,7 @@
 "id":  "S1210",
 "message":  "When implementing IComparable<T>, you should also override <, >, <=, >=.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\ActorPath.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorPath.cs",
 "region":  {
 "startLine":  31,
 "startColumn":  27,

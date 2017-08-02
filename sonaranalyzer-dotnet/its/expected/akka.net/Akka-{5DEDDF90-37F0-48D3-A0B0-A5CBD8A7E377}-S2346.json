@@ -4,7 +4,7 @@
 "id":  "S2346",
 "message":  "Rename 'NotSuspended' to 'None'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Dispatch\Mailbox.cs",
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\Mailbox.cs",
 "region":  {
 "startLine":  187,
 "startColumn":  9,

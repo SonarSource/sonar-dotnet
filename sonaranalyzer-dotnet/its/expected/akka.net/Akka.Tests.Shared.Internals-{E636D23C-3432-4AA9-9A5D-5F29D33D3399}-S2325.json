@@ -4,7 +4,7 @@
 "id":  "S2325",
 "message":  "Make 'Intercept' a static method.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests.Shared.Internals\AkkaSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\AkkaSpec.cs",
 "region":  {
 "startLine":  115,
 "startColumn":  24,
@@ -17,7 +17,7 @@
 "id":  "S2325",
 "message":  "Make 'Intercept' a static method.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests.Shared.Internals\AkkaSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests.Shared.Internals\AkkaSpec.cs",
 "region":  {
 "startLine":  120,
 "startColumn":  24,

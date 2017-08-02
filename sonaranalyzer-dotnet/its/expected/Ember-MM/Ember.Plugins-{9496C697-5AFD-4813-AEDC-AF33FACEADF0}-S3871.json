@@ -4,7 +4,7 @@
 "id":  "S3871",
 "message":  "Make this exception 'public'.",
 "location":  {
-"uri":  "Ember-MM\Ember.Plugins\PluginSectionHandler.cs",
+"uri":  "sources\Ember-MM\Ember.Plugins\PluginSectionHandler.cs",
 "region":  {
 "startLine":  113,
 "startColumn":  23,
@@ -17,7 +17,7 @@
 "id":  "S3871",
 "message":  "Make this exception 'public'.",
 "location":  {
-"uri":  "Ember-MM\Ember.Plugins\PluginSectionHandler.cs",
+"uri":  "sources\Ember-MM\Ember.Plugins\PluginSectionHandler.cs",
 "region":  {
 "startLine":  114,
 "startColumn":  23,

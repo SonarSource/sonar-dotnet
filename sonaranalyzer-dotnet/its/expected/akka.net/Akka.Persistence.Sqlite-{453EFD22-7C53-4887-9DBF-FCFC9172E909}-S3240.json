@@ -4,7 +4,7 @@
 "id":  "S3240",
 "message":  "Use the '?:' operator here.",
 "location":  {
-"uri":  "akka.net\src\contrib\persistence\Akka.Persistence.Sqlite\Journal\SqliteQueryBuilder.cs",
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sqlite\Journal\SqliteQueryBuilder.cs",
 "region":  {
 "startLine":  107,
 "startColumn":  17,

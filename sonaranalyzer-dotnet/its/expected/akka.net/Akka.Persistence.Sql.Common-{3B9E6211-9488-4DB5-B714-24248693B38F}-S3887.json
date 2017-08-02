@@ -4,7 +4,7 @@
 "id":  "S3887",
 "message":  "Use an immutable collection or reduce the accessibility of this field.",
 "location":  {
-"uri":  "akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\JournalDbEngine.cs",
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\JournalDbEngine.cs",
 "region":  {
 "startLine":  32,
 "startColumn":  32,
@@ -17,7 +17,7 @@
 "id":  "S3887",
 "message":  "Use an immutable collection or reduce the accessibility of this field.",
 "location":  {
-"uri":  "akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Queries\Hints.cs",
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Queries\Hints.cs",
 "region":  {
 "startLine":  101,
 "startColumn":  38,
@@ -30,7 +30,7 @@
 "id":  "S3887",
 "message":  "Use an immutable collection or reduce the accessibility of this field.",
 "location":  {
-"uri":  "akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Queries\Query.cs",
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Queries\Query.cs",
 "region":  {
 "startLine":  30,
 "startColumn":  37,
@@ -43,7 +43,7 @@
 "id":  "S3887",
 "message":  "Use an immutable collection or reduce the accessibility of this field.",
 "location":  {
-"uri":  "akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Snapshot\QueryBuilder.cs",
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Snapshot\QueryBuilder.cs",
 "region":  {
 "startLine":  42,
 "startColumn":  32,

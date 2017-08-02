@@ -4,7 +4,7 @@
 "id":  "S105",
 "message":  "Replace all tab characters in this file by sequences of white-spaces.",
 "location":  {
-"uri":  "Nancy\src\Nancy.ViewEngines.Markdown\MarkDownViewEngine.cs",
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Markdown\MarkDownViewEngine.cs",
 "region":  {
 "startLine":  23,
 "startColumn":  20,
@@ -17,7 +17,7 @@
 "id":  "S105",
 "message":  "Replace all tab characters in this file by sequences of white-spaces.",
 "location":  {
-"uri":  "Nancy\src\Nancy.ViewEngines.Markdown\MarkdownViewengineRender.cs",
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Markdown\MarkdownViewengineRender.cs",
 "region":  {
 "startLine":  14,
 "startColumn":  20,

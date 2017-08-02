@@ -4,7 +4,7 @@
 "id":  "S1694",
 "message":  "Convert this 'abstract' class to a concrete class with a private constructor.",
 "location":  {
-"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Sharding.Tests\ClusterShardingFailureSpec.cs",
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding.Tests\ClusterShardingFailureSpec.cs",
 "region":  {
 "startLine":  58,
 "startColumn":  27,
@@ -17,7 +17,7 @@
 "id":  "S1694",
 "message":  "Convert this 'abstract' class to a concrete class with a private constructor.",
 "location":  {
-"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Sharding.Tests\ClusterShardingGracefulShutdownSpec.cs",
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding.Tests\ClusterShardingGracefulShutdownSpec.cs",
 "region":  {
 "startLine":  48,
 "startColumn":  27,
@@ -30,7 +30,7 @@
 "id":  "S1694",
 "message":  "Convert this 'abstract' class to a concrete class with a private constructor.",
 "location":  {
-"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Sharding.Tests\ClusterShardingLeavingSpec.cs",
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding.Tests\ClusterShardingLeavingSpec.cs",
 "region":  {
 "startLine":  55,
 "startColumn":  27,
@@ -43,7 +43,7 @@
 "id":  "S1694",
 "message":  "Convert this 'abstract' class to a concrete class with a private constructor.",
 "location":  {
-"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Sharding.Tests\ClusterShardingSpec.cs",
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding.Tests\ClusterShardingSpec.cs",
 "region":  {
 "startLine":  206,
 "startColumn":  27,

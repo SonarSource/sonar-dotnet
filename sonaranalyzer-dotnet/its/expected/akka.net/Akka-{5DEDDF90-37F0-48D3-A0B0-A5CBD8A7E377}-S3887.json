@@ -4,7 +4,7 @@
 "id":  "S3887",
 "message":  "Use an immutable collection or reduce the accessibility of this field.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Helios.Concurrency.DedicatedThreadPool.cs",
+"uri":  "sources\akka.net\src\core\Akka\Helios.Concurrency.DedicatedThreadPool.cs",
 "region":  {
 "startLine":  289,
 "startColumn":  39,

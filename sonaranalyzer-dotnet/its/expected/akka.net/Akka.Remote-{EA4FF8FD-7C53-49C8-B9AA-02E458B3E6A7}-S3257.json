@@ -4,7 +4,7 @@
 "id":  "S3257",
 "message":  "Remove the explicit delegate creation; it is redundant.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
 "region":  {
 "startLine":  1315,
 "startColumn":  25,

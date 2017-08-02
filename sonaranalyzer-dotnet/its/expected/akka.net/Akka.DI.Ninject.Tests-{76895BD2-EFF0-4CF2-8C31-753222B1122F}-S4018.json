@@ -4,7 +4,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to have parameters matching all the type parameters.",
 "location":  {
-"uri":  "akka.net\src\contrib\dependencyInjection\Akka.DI.Ninject.Tests\NinjectDiSpec.cs",
+"uri":  "sources\akka.net\src\contrib\dependencyInjection\Akka.DI.Ninject.Tests\NinjectDiSpec.cs",
 "region":  {
 "startLine":  36,
 "startColumn":  33,

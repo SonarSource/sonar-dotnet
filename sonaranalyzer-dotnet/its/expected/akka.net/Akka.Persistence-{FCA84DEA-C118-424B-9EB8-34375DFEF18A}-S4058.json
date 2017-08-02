@@ -4,7 +4,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'string.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Persistent.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistent.cs",
 "region":  {
 "startLine":  184,
 "startColumn":  86,
@@ -17,7 +17,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'string.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Persistent.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistent.cs",
 "region":  {
 "startLine":  184,
 "startColumn":  205,
@@ -30,7 +30,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'string.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Snapshot.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot.cs",
 "region":  {
 "startLine":  65,
 "startColumn":  20,

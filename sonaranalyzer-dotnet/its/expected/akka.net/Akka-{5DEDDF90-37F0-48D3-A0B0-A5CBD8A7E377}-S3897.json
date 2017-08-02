@@ -4,7 +4,7 @@
 "id":  "S3897",
 "message":  "Implement 'IEquatable<ActorSelection>'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\ActorSelection.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorSelection.cs",
 "region":  {
 "startLine":  22,
 "startColumn":  18,
@@ -17,7 +17,7 @@
 "id":  "S3897",
 "message":  "Implement 'IEquatable<ActorRefRoutee>'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Routing\Router.cs",
+"uri":  "sources\akka.net\src\core\Akka\Routing\Router.cs",
 "region":  {
 "startLine":  48,
 "startColumn":  18,
@@ -30,7 +30,7 @@
 "id":  "S3897",
 "message":  "Implement 'IEquatable<ActorSelectionRoutee>'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Routing\Router.cs",
+"uri":  "sources\akka.net\src\core\Akka\Routing\Router.cs",
 "region":  {
 "startLine":  86,
 "startColumn":  18,

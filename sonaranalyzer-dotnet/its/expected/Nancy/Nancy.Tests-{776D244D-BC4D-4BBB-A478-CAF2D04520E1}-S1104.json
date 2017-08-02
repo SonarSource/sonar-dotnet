@@ -4,7 +4,7 @@
 "id":  "S1104",
 "message":  "Make this field 'private' and encapsulate it in a 'public' property.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Fakes\FakeRoute.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Fakes\FakeRoute.cs",
 "region":  {
 "startLine":  13,
 "startColumn":  21,
@@ -17,7 +17,7 @@
 "id":  "S1104",
 "message":  "Make this field 'private' and encapsulate it in a 'public' property.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Fakes\FakeRoute.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Fakes\FakeRoute.cs",
 "region":  {
 "startLine":  14,
 "startColumn":  34,
@@ -30,7 +30,7 @@
 "id":  "S1104",
 "message":  "Make this field 'private' and encapsulate it in a 'public' property.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Fakes\FakeRouteCache.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Fakes\FakeRouteCache.cs",
 "region":  {
 "startLine":  11,
 "startColumn":  38,
@@ -43,7 +43,7 @@
 "id":  "S1104",
 "message":  "Make this field 'private' and encapsulate it in a 'public' property.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Fakes\PersonWithAgeField.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Fakes\PersonWithAgeField.cs",
 "region":  {
 "startLine":  5,
 "startColumn":  20,
@@ -56,7 +56,7 @@
 "id":  "S1104",
 "message":  "Make this field 'private' and encapsulate it in a 'public' property.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Resources\Views\SuperSimpleViewEngineSampleContent.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Resources\Views\SuperSimpleViewEngineSampleContent.cs",
 "region":  {
 "startLine":  5,
 "startColumn":  30,
@@ -69,7 +69,7 @@
 "id":  "S1104",
 "message":  "Make this field 'private' and encapsulate it in a 'public' property.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Resources\Views\SuperSimpleViewEngineSampleContent.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Resources\Views\SuperSimpleViewEngineSampleContent.cs",
 "region":  {
 "startLine":  46,
 "startColumn":  30,
@@ -82,7 +82,7 @@
 "id":  "S1104",
 "message":  "Make this field 'private' and encapsulate it in a 'public' property.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\Json\TestConverterType.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Json\TestConverterType.cs",
 "region":  {
 "startLine":  7,
 "startColumn":  14,
@@ -95,7 +95,7 @@
 "id":  "S1104",
 "message":  "Make this field 'private' and encapsulate it in a 'public' property.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\Json\TestData.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Json\TestData.cs",
 "region":  {
 "startLine":  7,
 "startColumn":  28,
@@ -108,7 +108,7 @@
 "id":  "S1104",
 "message":  "Make this field 'private' and encapsulate it in a 'public' property.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\Json\TestData.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Json\TestData.cs",
 "region":  {
 "startLine":  8,
 "startColumn":  37,
@@ -121,7 +121,7 @@
 "id":  "S1104",
 "message":  "Make this field 'private' and encapsulate it in a 'public' property.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\Json\TestPrimitiveConverterType.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Json\TestPrimitiveConverterType.cs",
 "region":  {
 "startLine":  7,
 "startColumn":  14,
@@ -134,7 +134,7 @@
 "id":  "S1104",
 "message":  "Make this field 'private' and encapsulate it in a 'public' property.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\BindingMemberInfoFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\BindingMemberInfoFixture.cs",
 "region":  {
 "startLine":  189,
 "startColumn":  24,
@@ -147,7 +147,7 @@
 "id":  "S1104",
 "message":  "Make this field 'private' and encapsulate it in a 'public' property.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\BindingMemberInfoFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\BindingMemberInfoFixture.cs",
 "region":  {
 "startLine":  190,
 "startColumn":  27,
@@ -160,7 +160,7 @@
 "id":  "S1104",
 "message":  "Make this field 'private' and encapsulate it in a 'public' property.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\BindingMemberInfoFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\BindingMemberInfoFixture.cs",
 "region":  {
 "startLine":  198,
 "startColumn":  24,
@@ -173,7 +173,7 @@
 "id":  "S1104",
 "message":  "Make this field 'private' and encapsulate it in a 'public' property.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\BindingMemberInfoFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\BindingMemberInfoFixture.cs",
 "region":  {
 "startLine":  200,
 "startColumn":  27,
@@ -186,7 +186,7 @@
 "id":  "S1104",
 "message":  "Make this field 'private' and encapsulate it in a 'public' property.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\BindingMemberInfoFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\BindingMemberInfoFixture.cs",
 "region":  {
 "startLine":  202,
 "startColumn":  30,
@@ -199,7 +199,7 @@
 "id":  "S1104",
 "message":  "Make this field 'private' and encapsulate it in a 'public' property.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\BindingMemberInfoFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\BindingMemberInfoFixture.cs",
 "region":  {
 "startLine":  204,
 "startColumn":  36,
@@ -212,7 +212,7 @@
 "id":  "S1104",
 "message":  "Make this field 'private' and encapsulate it in a 'public' property.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\BindingMemberInfoFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\BindingMemberInfoFixture.cs",
 "region":  {
 "startLine":  207,
 "startColumn":  37,
@@ -225,7 +225,7 @@
 "id":  "S1104",
 "message":  "Make this field 'private' and encapsulate it in a 'public' property.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\BindingMemberInfoFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\BindingMemberInfoFixture.cs",
 "region":  {
 "startLine":  210,
 "startColumn":  33,
@@ -238,7 +238,7 @@
 "id":  "S1104",
 "message":  "Make this field 'private' and encapsulate it in a 'public' property.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\BindingMemberInfoFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\BindingMemberInfoFixture.cs",
 "region":  {
 "startLine":  212,
 "startColumn":  29,
@@ -251,7 +251,7 @@
 "id":  "S1104",
 "message":  "Make this field 'private' and encapsulate it in a 'public' property.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\BindingMemberInfoFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\BindingMemberInfoFixture.cs",
 "region":  {
 "startLine":  214,
 "startColumn":  32,
@@ -264,7 +264,7 @@
 "id":  "S1104",
 "message":  "Make this field 'private' and encapsulate it in a 'public' property.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\BindingMemberInfoFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\BindingMemberInfoFixture.cs",
 "region":  {
 "startLine":  246,
 "startColumn":  31,
@@ -277,7 +277,7 @@
 "id":  "S1104",
 "message":  "Make this field 'private' and encapsulate it in a 'public' property.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBinderFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBinderFixture.cs",
 "region":  {
 "startLine":  1580,
 "startColumn":  27,
@@ -290,7 +290,7 @@
 "id":  "S1104",
 "message":  "Make this field 'private' and encapsulate it in a 'public' property.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBinderFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBinderFixture.cs",
 "region":  {
 "startLine":  1582,
 "startColumn":  27,
@@ -303,7 +303,7 @@
 "id":  "S1104",
 "message":  "Make this field 'private' and encapsulate it in a 'public' property.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBinderFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBinderFixture.cs",
 "region":  {
 "startLine":  1588,
 "startColumn":  24,
@@ -316,7 +316,7 @@
 "id":  "S1104",
 "message":  "Make this field 'private' and encapsulate it in a 'public' property.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBinderFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBinderFixture.cs",
 "region":  {
 "startLine":  1590,
 "startColumn":  24,
@@ -329,7 +329,7 @@
 "id":  "S1104",
 "message":  "Make this field 'private' and encapsulate it in a 'public' property.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBinderFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBinderFixture.cs",
 "region":  {
 "startLine":  1594,
 "startColumn":  24,
@@ -342,7 +342,7 @@
 "id":  "S1104",
 "message":  "Make this field 'private' and encapsulate it in a 'public' property.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBinderFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBinderFixture.cs",
 "region":  {
 "startLine":  1598,
 "startColumn":  29,
@@ -355,7 +355,7 @@
 "id":  "S1104",
 "message":  "Make this field 'private' and encapsulate it in a 'public' property.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBinderFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBinderFixture.cs",
 "region":  {
 "startLine":  1602,
 "startColumn":  27,
@@ -368,7 +368,7 @@
 "id":  "S1104",
 "message":  "Make this field 'private' and encapsulate it in a 'public' property.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBinderFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBinderFixture.cs",
 "region":  {
 "startLine":  1606,
 "startColumn":  27,
@@ -381,7 +381,7 @@
 "id":  "S1104",
 "message":  "Make this field 'private' and encapsulate it in a 'public' property.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBinderFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBinderFixture.cs",
 "region":  {
 "startLine":  1612,
 "startColumn":  37,
@@ -394,7 +394,7 @@
 "id":  "S1104",
 "message":  "Make this field 'private' and encapsulate it in a 'public' property.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBinderFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBinderFixture.cs",
 "region":  {
 "startLine":  1616,
 "startColumn":  29,
@@ -407,7 +407,7 @@
 "id":  "S1104",
 "message":  "Make this field 'private' and encapsulate it in a 'public' property.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBinderFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBinderFixture.cs",
 "region":  {
 "startLine":  1626,
 "startColumn":  43,
@@ -420,7 +420,7 @@
 "id":  "S1104",
 "message":  "Make this field 'private' and encapsulate it in a 'public' property.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBinderFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBinderFixture.cs",
 "region":  {
 "startLine":  1640,
 "startColumn":  27,
@@ -433,7 +433,7 @@
 "id":  "S1104",
 "message":  "Make this field 'private' and encapsulate it in a 'public' property.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBinderFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBinderFixture.cs",
 "region":  {
 "startLine":  1641,
 "startColumn":  24,
@@ -446,7 +446,7 @@
 "id":  "S1104",
 "message":  "Make this field 'private' and encapsulate it in a 'public' property.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBinderFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBinderFixture.cs",
 "region":  {
 "startLine":  1642,
 "startColumn":  27,
@@ -459,7 +459,7 @@
 "id":  "S1104",
 "message":  "Make this field 'private' and encapsulate it in a 'public' property.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBodyDeserializers\JsonBodyDeserializerFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBodyDeserializers\JsonBodyDeserializerFixture.cs",
 "region":  {
 "startLine":  358,
 "startColumn":  30,
@@ -472,7 +472,7 @@
 "id":  "S1104",
 "message":  "Make this field 'private' and encapsulate it in a 'public' property.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBodyDeserializers\JsonBodyDeserializerFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBodyDeserializers\JsonBodyDeserializerFixture.cs",
 "region":  {
 "startLine":  436,
 "startColumn":  23,
@@ -485,7 +485,7 @@
 "id":  "S1104",
 "message":  "Make this field 'private' and encapsulate it in a 'public' property.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBodyDeserializers\JsonBodyDeserializerFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBodyDeserializers\JsonBodyDeserializerFixture.cs",
 "region":  {
 "startLine":  443,
 "startColumn":  23,
@@ -498,7 +498,7 @@
 "id":  "S1104",
 "message":  "Make this field 'private' and encapsulate it in a 'public' property.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBodyDeserializers\JsonBodyDeserializerFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBodyDeserializers\JsonBodyDeserializerFixture.cs",
 "region":  {
 "startLine":  452,
 "startColumn":  21,
@@ -511,7 +511,7 @@
 "id":  "S1104",
 "message":  "Make this field 'private' and encapsulate it in a 'public' property.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBodyDeserializers\JsonBodyDeserializerFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBodyDeserializers\JsonBodyDeserializerFixture.cs",
 "region":  {
 "startLine":  453,
 "startColumn":  21,
@@ -524,7 +524,7 @@
 "id":  "S1104",
 "message":  "Make this field 'private' and encapsulate it in a 'public' property.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBodyDeserializers\JsonBodyDeserializerFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBodyDeserializers\JsonBodyDeserializerFixture.cs",
 "region":  {
 "startLine":  454,
 "startColumn":  22,
@@ -537,7 +537,7 @@
 "id":  "S1104",
 "message":  "Make this field 'private' and encapsulate it in a 'public' property.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\Responses\DefaultJsonSerializerFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Responses\DefaultJsonSerializerFixture.cs",
 "region":  {
 "startLine":  104,
 "startColumn":  27,
@@ -550,7 +550,7 @@
 "id":  "S1104",
 "message":  "Make this field 'private' and encapsulate it in a 'public' property.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\Responses\DefaultJsonSerializerFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Responses\DefaultJsonSerializerFixture.cs",
 "region":  {
 "startLine":  105,
 "startColumn":  27,

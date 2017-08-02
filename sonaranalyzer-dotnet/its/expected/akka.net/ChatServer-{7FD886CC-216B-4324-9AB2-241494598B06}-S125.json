@@ -4,7 +4,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\examples\Chat\ChatServer\Program.cs",
+"uri":  "sources\akka.net\src\examples\Chat\ChatServer\Program.cs",
 "region":  {
 "startLine":  59,
 "startColumn":  11,
@@ -17,7 +17,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\examples\Chat\ChatServer\Program.cs",
+"uri":  "sources\akka.net\src\examples\Chat\ChatServer\Program.cs",
 "region":  {
 "startLine":  70,
 "startColumn":  10,

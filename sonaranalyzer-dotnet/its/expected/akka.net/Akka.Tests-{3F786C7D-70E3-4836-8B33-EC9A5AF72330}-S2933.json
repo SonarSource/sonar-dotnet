@@ -4,7 +4,7 @@
 "id":  "S2933",
 "message":  "Make 'generationProvider' 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorLifeCycleSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ActorLifeCycleSpec.cs",
 "region":  {
 "startLine":  25,
 "startColumn":  35,
@@ -17,7 +17,7 @@
 "id":  "S2933",
 "message":  "Make 'id' 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorLifeCycleSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ActorLifeCycleSpec.cs",
 "region":  {
 "startLine":  26,
 "startColumn":  28,
@@ -30,7 +30,7 @@
 "id":  "S2933",
 "message":  "Make 'testActor' 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorLifeCycleSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ActorLifeCycleSpec.cs",
 "region":  {
 "startLine":  27,
 "startColumn":  31,
@@ -43,7 +43,7 @@
 "id":  "S2933",
 "message":  "Make 'CurrentGeneration' 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorLifeCycleSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ActorLifeCycleSpec.cs",
 "region":  {
 "startLine":  28,
 "startColumn":  25,
@@ -56,7 +56,7 @@
 "id":  "S2933",
 "message":  "Make 'generationProvider' 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorLifeCycleSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ActorLifeCycleSpec.cs",
 "region":  {
 "startLine":  73,
 "startColumn":  35,
@@ -69,7 +69,7 @@
 "id":  "S2933",
 "message":  "Make 'id' 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorLifeCycleSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ActorLifeCycleSpec.cs",
 "region":  {
 "startLine":  74,
 "startColumn":  28,
@@ -82,7 +82,7 @@
 "id":  "S2933",
 "message":  "Make 'testActor' 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorLifeCycleSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ActorLifeCycleSpec.cs",
 "region":  {
 "startLine":  75,
 "startColumn":  31,
@@ -95,7 +95,7 @@
 "id":  "S2933",
 "message":  "Make 'CurrentGeneration' 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorLifeCycleSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ActorLifeCycleSpec.cs",
 "region":  {
 "startLine":  76,
 "startColumn":  25,
@@ -108,7 +108,7 @@
 "id":  "S2933",
 "message":  "Make 'testActor' 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorLifeCycleSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ActorLifeCycleSpec.cs",
 "region":  {
 "startLine":  216,
 "startColumn":  31,
@@ -121,7 +121,7 @@
 "id":  "S2933",
 "message":  "Make 'testActor' 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorLifeCycleSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ActorLifeCycleSpec.cs",
 "region":  {
 "startLine":  276,
 "startColumn":  31,
@@ -134,7 +134,7 @@
 "id":  "S2933",
 "message":  "Make 'testActor' 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorLifeCycleSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ActorLifeCycleSpec.cs",
 "region":  {
 "startLine":  324,
 "startColumn":  31,
@@ -147,7 +147,7 @@
 "id":  "S2933",
 "message":  "Make '_resolver' 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorProducerPipelineTests.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ActorProducerPipelineTests.cs",
 "region":  {
 "startLine":  120,
 "startColumn":  47,
@@ -160,7 +160,7 @@
 "id":  "S2933",
 "message":  "Make '_replyTo' 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorRefSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ActorRefSpec.cs",
 "region":  {
 "startLine":  402,
 "startColumn":  31,
@@ -173,7 +173,7 @@
 "id":  "S2933",
 "message":  "Make '_latch' 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorRefSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ActorRefSpec.cs",
 "region":  {
 "startLine":  403,
 "startColumn":  31,
@@ -186,7 +186,7 @@
 "id":  "S2933",
 "message":  "Make '_path' 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorRefSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ActorRefSpec.cs",
 "region":  {
 "startLine":  574,
 "startColumn":  31,
@@ -199,7 +199,7 @@
 "id":  "S2933",
 "message":  "Make '_echoActor' 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorSelectionSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ActorSelectionSpec.cs",
 "region":  {
 "startLine":  21,
 "startColumn":  27,
@@ -212,7 +212,7 @@
 "id":  "S2933",
 "message":  "Make '_selectionTestActor' 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorSelectionSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ActorSelectionSpec.cs",
 "region":  {
 "startLine":  22,
 "startColumn":  27,
@@ -225,7 +225,7 @@
 "id":  "S2933",
 "message":  "Make '_replyActor' 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\AskSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\AskSpec.cs",
 "region":  {
 "startLine":  42,
 "startColumn":  31,
@@ -238,7 +238,7 @@
 "id":  "S2933",
 "message":  "Make '_testActor' 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\AskSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\AskSpec.cs",
 "region":  {
 "startLine":  44,
 "startColumn":  31,
@@ -251,7 +251,7 @@
 "id":  "S2933",
 "message":  "Make '_terminal' 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\DeathWatchSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\DeathWatchSpec.cs",
 "region":  {
 "startLine":  25,
 "startColumn":  27,
@@ -264,7 +264,7 @@
 "id":  "S2933",
 "message":  "Make '_testActor' 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\DeathWatchSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\DeathWatchSpec.cs",
 "region":  {
 "startLine":  459,
 "startColumn":  31,
@@ -277,7 +277,7 @@
 "id":  "S2933",
 "message":  "Make '_taskCompletionSource' 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\PipeToSupportSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\PipeToSupportSpec.cs",
 "region":  {
 "startLine":  19,
 "startColumn":  46,
@@ -290,7 +290,7 @@
 "id":  "S2933",
 "message":  "Make '_task' 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\PipeToSupportSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\PipeToSupportSpec.cs",
 "region":  {
 "startLine":  20,
 "startColumn":  30,
@@ -303,7 +303,7 @@
 "id":  "S2933",
 "message":  "Make 'latchActor' 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\PropsSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\PropsSpec.cs",
 "region":  {
 "startLine":  81,
 "startColumn":  23,
@@ -316,7 +316,7 @@
 "id":  "S2933",
 "message":  "Make '_timeoutLatch' 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ReceiveTimeoutSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ReceiveTimeoutSpec.cs",
 "region":  {
 "startLine":  23,
 "startColumn":  31,
@@ -329,7 +329,7 @@
 "id":  "S2933",
 "message":  "Make '_timeoutLatch' 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ReceiveTimeoutSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ReceiveTimeoutSpec.cs",
 "region":  {
 "startLine":  52,
 "startColumn":  31,
@@ -342,7 +342,7 @@
 "id":  "S2933",
 "message":  "Make '_deadLetters' 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\RootGuardianActorRef_Tests.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\RootGuardianActorRef_Tests.cs",
 "region":  {
 "startLine":  22,
 "startColumn":  23,
@@ -355,7 +355,7 @@
 "id":  "S2933",
 "message":  "Make '_emptyExtraNames' 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\RootGuardianActorRef_Tests.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\RootGuardianActorRef_Tests.cs",
 "region":  {
 "startLine":  23,
 "startColumn":  55,
@@ -368,7 +368,7 @@
 "id":  "S2933",
 "message":  "Make '_dispatcher' 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\RootGuardianActorRef_Tests.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\RootGuardianActorRef_Tests.cs",
 "region":  {
 "startLine":  24,
 "startColumn":  27,
@@ -381,7 +381,7 @@
 "id":  "S2933",
 "message":  "Make '_registerCallReceiver' 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\IO\TcpListenerSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\IO\TcpListenerSpec.cs",
 "region":  {
 "startLine":  182,
 "startColumn":  31,
@@ -394,7 +394,7 @@
 "id":  "S2933",
 "message":  "Make '_interestCallReceiver' 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\IO\TcpListenerSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\IO\TcpListenerSpec.cs",
 "region":  {
 "startLine":  183,
 "startColumn":  31,
@@ -407,7 +407,7 @@
 "id":  "S2933",
 "message":  "Make '_counter' 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Routing\BroadcastSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Routing\BroadcastSpec.cs",
 "region":  {
 "startLine":  30,
 "startColumn":  35,
@@ -420,7 +420,7 @@
 "id":  "S2933",
 "message":  "Make '_latch' 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Routing\BroadcastSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Routing\BroadcastSpec.cs",
 "region":  {
 "startLine":  31,
 "startColumn":  31,
@@ -433,7 +433,7 @@
 "id":  "S2933",
 "message":  "Make 'a' 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Routing\ConsistentHashingRouterSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Routing\ConsistentHashingRouterSpec.cs",
 "region":  {
 "startLine":  79,
 "startColumn":  27,
@@ -446,7 +446,7 @@
 "id":  "S2933",
 "message":  "Make 'b' 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Routing\ConsistentHashingRouterSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Routing\ConsistentHashingRouterSpec.cs",
 "region":  {
 "startLine":  79,
 "startColumn":  30,
@@ -459,7 +459,7 @@
 "id":  "S2933",
 "message":  "Make 'c' 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Routing\ConsistentHashingRouterSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Routing\ConsistentHashingRouterSpec.cs",
 "region":  {
 "startLine":  79,
 "startColumn":  33,
@@ -472,7 +472,7 @@
 "id":  "S2933",
 "message":  "Make '_fooLatch' 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Routing\ListenerSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Routing\ListenerSpec.cs",
 "region":  {
 "startLine":  80,
 "startColumn":  31,
@@ -485,7 +485,7 @@
 "id":  "S2933",
 "message":  "Make '_barLatch' 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Routing\ListenerSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Routing\ListenerSpec.cs",
 "region":  {
 "startLine":  81,
 "startColumn":  31,
@@ -498,7 +498,7 @@
 "id":  "S2933",
 "message":  "Make '_barCount' 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Routing\ListenerSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Routing\ListenerSpec.cs",
 "region":  {
 "startLine":  82,
 "startColumn":  35,
@@ -511,7 +511,7 @@
 "id":  "S2933",
 "message":  "Make '_testLatch' 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Routing\RandomSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Routing\RandomSpec.cs",
 "region":  {
 "startLine":  20,
 "startColumn":  31,
@@ -524,7 +524,7 @@
 "id":  "S2933",
 "message":  "Make '_testLatch' 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Routing\RoundRobinSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Routing\RoundRobinSpec.cs",
 "region":  {
 "startLine":  20,
 "startColumn":  31,
@@ -537,7 +537,7 @@
 "id":  "S2933",
 "message":  "Make '_counter' 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Routing\ScatterGatherFirstCompletedSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Routing\ScatterGatherFirstCompletedSpec.cs",
 "region":  {
 "startLine":  30,
 "startColumn":  35,
@@ -550,7 +550,7 @@
 "id":  "S2933",
 "message":  "Make '_latch' 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Routing\ScatterGatherFirstCompletedSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Routing\ScatterGatherFirstCompletedSpec.cs",
 "region":  {
 "startLine":  31,
 "startColumn":  31,
@@ -563,7 +563,7 @@
 "id":  "S2933",
 "message":  "Make '_id' 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Routing\ScatterGatherFirstCompletedSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Routing\ScatterGatherFirstCompletedSpec.cs",
 "region":  {
 "startLine":  98,
 "startColumn":  25,
@@ -576,7 +576,7 @@
 "id":  "S2933",
 "message":  "Make 'usedActors' 'readonly'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Routing\SmallestMailboxSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Routing\SmallestMailboxSpec.cs",
 "region":  {
 "startLine":  21,
 "startColumn":  55,

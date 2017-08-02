@@ -4,7 +4,7 @@
 "id":  "S126",
 "message":  "Add the missing 'else' clause.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  1345,
 "startColumn":  13,
@@ -17,7 +17,7 @@
 "id":  "S126",
 "message":  "Add the missing 'else' clause.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  1828,
 "startColumn":  13,
@@ -30,7 +30,7 @@
 "id":  "S126",
 "message":  "Add the missing 'else' clause.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
 "region":  {
 "startLine":  758,
 "startColumn":  13,
@@ -43,7 +43,7 @@
 "id":  "S126",
 "message":  "Add the missing 'else' clause.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\Reachability.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
 "region":  {
 "startLine":  146,
 "startColumn":  25,
@@ -56,7 +56,7 @@
 "id":  "S126",
 "message":  "Add the missing 'else' clause.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
 "region":  {
 "startLine":  377,
 "startColumn":  13,

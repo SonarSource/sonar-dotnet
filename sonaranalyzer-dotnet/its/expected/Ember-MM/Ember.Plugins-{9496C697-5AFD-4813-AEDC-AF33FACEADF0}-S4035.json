@@ -4,7 +4,7 @@
 "id":  "S4035",
 "message":  "Seal class 'EmberPlugin' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
-"uri":  "Ember-MM\Ember.Plugins\PluginManager.cs",
+"uri":  "sources\Ember-MM\Ember.Plugins\PluginManager.cs",
 "region":  {
 "startLine":  231,
 "startColumn":  22,

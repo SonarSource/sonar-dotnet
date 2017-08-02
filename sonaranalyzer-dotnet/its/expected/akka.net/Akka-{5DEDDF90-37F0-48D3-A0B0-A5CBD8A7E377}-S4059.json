@@ -5,7 +5,7 @@
 "message":  "Change either the name of property 'NrOfInstances' or the name of method 'GetNrOfInstances' to make them distinguishable.",
 "location":  [
 {
-"uri":  "akka.net\src\core\Akka\Routing\RouterConfig.cs",
+"uri":  "sources\akka.net\src\core\Akka\Routing\RouterConfig.cs",
 "region":  {
 "startLine":  519,
 "startColumn":  28,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka\Routing\RouterConfig.cs",
+"uri":  "sources\akka.net\src\core\Akka\Routing\RouterConfig.cs",
 "region":  {
 "startLine":  533,
 "startColumn":  28,

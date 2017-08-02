@@ -4,7 +4,7 @@
 "id":  "S2201",
 "message":  "Use the return value of method 'Contains', which has no side effect.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.Tests.MultiNode\RemoteRoundRobinSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests.MultiNode\RemoteRoundRobinSpec.cs",
 "region":  {
 "startLine":  225,
 "startColumn":  59,

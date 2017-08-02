@@ -4,7 +4,7 @@
 "id":  "S3253",
 "message":  "Remove this redundant 'base()' call.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\Exceptions.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\Exceptions.cs",
 "region":  {
 "startLine":  122,
 "startColumn":  13,
@@ -17,7 +17,7 @@
 "id":  "S3253",
 "message":  "Remove this redundant 'base()' call.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\Exceptions.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\Exceptions.cs",
 "region":  {
 "startLine":  194,
 "startColumn":  13,
@@ -30,7 +30,7 @@
 "id":  "S3253",
 "message":  "Remove this redundant 'base()' call.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\Exceptions.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\Exceptions.cs",
 "region":  {
 "startLine":  428,
 "startColumn":  13,

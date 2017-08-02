@@ -4,7 +4,7 @@
 "id":  "S4040",
 "message":  "Change this normalization to 'String.ToUpperInvariant()'.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Extensions\StringExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy\Extensions\StringExtensions.cs",
 "region":  {
 "startLine":  90,
 "startColumn":  55,

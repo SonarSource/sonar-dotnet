@@ -4,7 +4,7 @@
 "id":  "S100",
 "message":  "Rename property 'channels' to match camel case naming rules, consider using 'Channels'.",
 "location":  {
-"uri":  "akka.net\src\examples\Chat\ChatMessages\Messages.cs",
+"uri":  "sources\akka.net\src\examples\Chat\ChatMessages\Messages.cs",
 "region":  {
 "startLine":  52,
 "startColumn":  28,

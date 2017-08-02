@@ -4,7 +4,7 @@
 "id":  "S3443",
 "message":  "Remove this use of 'GetType' on a 'System.Type'.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"uri":  "sources\Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
 "region":  {
 "startLine":  300,
 "startColumn":  119,

@@ -5,7 +5,7 @@
 "message":  "Merge this if statement with the enclosing one.",
 "location":  [
 {
-"uri":  "akka.net\src\core\Akka.Tests\Routing\TailChoppingSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Routing\TailChoppingSpec.cs",
 "region":  {
 "startLine":  64,
 "startColumn":  21,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Tests\Routing\TailChoppingSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Routing\TailChoppingSpec.cs",
 "region":  {
 "startLine":  62,
 "startColumn":  17,

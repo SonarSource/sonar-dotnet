@@ -4,7 +4,7 @@
 "id":  "S100",
 "message":  "Rename property 'RequiresSSL' to match camel case naming rules, consider using 'RequiresSsl'.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Authentication.Forms\FormsAuthenticationConfiguration.cs",
+"uri":  "sources\Nancy\src\Nancy.Authentication.Forms\FormsAuthenticationConfiguration.cs",
 "region":  {
 "startLine":  49,
 "startColumn":  21,

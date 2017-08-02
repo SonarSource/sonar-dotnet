@@ -4,7 +4,7 @@
 "id":  "S3052",
 "message":  "Remove this initialization to 'jobCount', the compiler will do that for you.",
 "location":  {
-"uri":  "akka.net\src\examples\Cluster\Routing\Samples.Cluster.ConsistentHashRouting\FrontendActor.cs",
+"uri":  "sources\akka.net\src\examples\Cluster\Routing\Samples.Cluster.ConsistentHashRouting\FrontendActor.cs",
 "region":  {
 "startLine":  17,
 "startColumn":  32,

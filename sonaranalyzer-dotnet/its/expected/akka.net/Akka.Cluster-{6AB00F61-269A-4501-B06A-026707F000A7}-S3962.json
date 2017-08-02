@@ -4,7 +4,7 @@
 "id":  "S3962",
 "message":  "Replace this 'static readonly' declaration with 'const'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
 "region":  {
 "startLine":  102,
 "startColumn":  41,
@@ -17,7 +17,7 @@
 "id":  "S3962",
 "message":  "Replace this 'static readonly' declaration with 'const'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
 "region":  {
 "startLine":  103,
 "startColumn":  41,

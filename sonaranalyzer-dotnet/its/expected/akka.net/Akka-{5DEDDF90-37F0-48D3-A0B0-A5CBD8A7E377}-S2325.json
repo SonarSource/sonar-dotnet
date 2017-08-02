@@ -4,7 +4,7 @@
 "id":  "S2325",
 "message":  "Make 'Sender' a static property.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\ActorBase.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorBase.cs",
 "region":  {
 "startLine":  106,
 "startColumn":  29,
@@ -17,7 +17,7 @@
 "id":  "S2325",
 "message":  "Make 'Become' a static method.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\ActorBase.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorBase.cs",
 "region":  {
 "startLine":  205,
 "startColumn":  24,
@@ -30,7 +30,7 @@
 "id":  "S2325",
 "message":  "Make 'BecomeStacked' a static method.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\ActorBase.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorBase.cs",
 "region":  {
 "startLine":  217,
 "startColumn":  24,
@@ -43,7 +43,7 @@
 "id":  "S2325",
 "message":  "Make 'UnbecomeStacked' a static method.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\ActorBase.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorBase.cs",
 "region":  {
 "startLine":  225,
 "startColumn":  24,
@@ -56,7 +56,7 @@
 "id":  "S2325",
 "message":  "Make 'SetReceiveTimeout' a static method.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\ActorBase.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorBase.cs",
 "region":  {
 "startLine":  265,
 "startColumn":  24,
@@ -69,7 +69,7 @@
 "id":  "S2325",
 "message":  "Make 'CheckName' a static method.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\ActorCell.Children.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.Children.cs",
 "region":  {
 "startLine":  326,
 "startColumn":  22,
@@ -82,7 +82,7 @@
 "id":  "S2325",
 "message":  "Make 'SetActorFields' a static method.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\ActorCell.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.cs",
 "region":  {
 "startLine":  340,
 "startColumn":  24,
@@ -95,7 +95,7 @@
 "id":  "S2325",
 "message":  "Make 'HandleSupervise' a static method.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\ActorCell.DefaultMessages.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.DefaultMessages.cs",
 "region":  {
 "startLine":  267,
 "startColumn":  22,
@@ -108,7 +108,7 @@
 "id":  "S2325",
 "message":  "Make 'Kill' a static method.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\ActorCell.DefaultMessages.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.DefaultMessages.cs",
 "region":  {
 "startLine":  388,
 "startColumn":  22,
@@ -121,7 +121,7 @@
 "id":  "S2325",
 "message":  "Make 'HandleNonFatalOrInterruptedException' a static method.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\ActorCell.FaultHandling.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.FaultHandling.cs",
 "region":  {
 "startLine":  456,
 "startColumn":  22,
@@ -134,7 +134,7 @@
 "id":  "S2325",
 "message":  "Make 'UserGuardianSupervisorStrategy' a static property.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\ActorRefProvider.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorRefProvider.cs",
 "region":  {
 "startLine":  183,
 "startColumn":  36,
@@ -147,7 +147,7 @@
 "id":  "S2325",
 "message":  "Make 'CreateRootGuardianChild' a static method.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\ActorRefProvider.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorRefProvider.cs",
 "region":  {
 "startLine":  248,
 "startColumn":  31,
@@ -160,7 +160,7 @@
 "id":  "S2325",
 "message":  "Make 'ChildStatsAppender' a static method.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\ChildrenContainer\Internal\ChildrenContainerBase.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ChildrenContainer\Internal\ChildrenContainerBase.cs",
 "region":  {
 "startLine":  86,
 "startColumn":  24,
@@ -173,7 +173,7 @@
 "id":  "S2325",
 "message":  "Make 'GoTo' a static method.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\FSM.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\FSM.cs",
 "region":  {
 "startLine":  444,
 "startColumn":  37,
@@ -186,7 +186,7 @@
 "id":  "S2325",
 "message":  "Make 'Transform' a static method.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\FSM.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\FSM.cs",
 "region":  {
 "startLine":  635,
 "startColumn":  32,
@@ -199,7 +199,7 @@
 "id":  "S2325",
 "message":  "Make 'GetSourceString' a static method.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\FSM.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\FSM.cs",
 "region":  {
 "startLine":  852,
 "startColumn":  24,
@@ -212,7 +212,7 @@
 "id":  "S2325",
 "message":  "Make 'BuildNewReceiveHandler' a static method.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\ReceiveActor.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ReceiveActor.cs",
 "region":  {
 "startLine":  41,
 "startColumn":  39,
@@ -225,7 +225,7 @@
 "id":  "S2325",
 "message":  "Make 'RestartChild' a static method.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\SupervisorStrategy.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\SupervisorStrategy.cs",
 "region":  {
 "startLine":  93,
 "startColumn":  24,
@@ -238,7 +238,7 @@
 "id":  "S2325",
 "message":  "Make 'ResumeChild' a static method.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\SupervisorStrategy.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\SupervisorStrategy.cs",
 "region":  {
 "startLine":  118,
 "startColumn":  24,
@@ -251,7 +251,7 @@
 "id":  "S2325",
 "message":  "Make 'Publish' a static method.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\SupervisorStrategy.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\SupervisorStrategy.cs",
 "region":  {
 "startLine":  159,
 "startColumn":  22,
@@ -264,7 +264,7 @@
 "id":  "S2325",
 "message":  "Make 'RunTask' a static method.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\UntypedActor.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\UntypedActor.cs",
 "region":  {
 "startLine":  25,
 "startColumn":  24,
@@ -277,7 +277,7 @@
 "id":  "S2325",
 "message":  "Make 'RunTask' a static method.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\UntypedActor.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\UntypedActor.cs",
 "region":  {
 "startLine":  30,
 "startColumn":  24,
@@ -290,7 +290,7 @@
 "id":  "S2325",
 "message":  "Make 'Become' a static method.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\UntypedActor.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\UntypedActor.cs",
 "region":  {
 "startLine":  55,
 "startColumn":  24,
@@ -303,7 +303,7 @@
 "id":  "S2325",
 "message":  "Make 'BecomeStacked' a static method.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\UntypedActor.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\UntypedActor.cs",
 "region":  {
 "startLine":  67,
 "startColumn":  24,
@@ -316,7 +316,7 @@
 "id":  "S2325",
 "message":  "Make 'QuoteIfNeeded' a static method.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Configuration\Hocon\HoconObject.cs",
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconObject.cs",
 "region":  {
 "startLine":  172,
 "startColumn":  24,
@@ -329,7 +329,7 @@
 "id":  "S2325",
 "message":  "Make 'QuoteIfNeeded' a static method.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconValue.cs",
 "region":  {
 "startLine":  450,
 "startColumn":  24,
@@ -342,7 +342,7 @@
 "id":  "S2325",
 "message":  "Make 'IdConfig' a static method.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Dispatch\Dispatchers.cs",
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\Dispatchers.cs",
 "region":  {
 "startLine":  272,
 "startColumn":  24,
@@ -355,7 +355,7 @@
 "id":  "S2325",
 "message":  "Make 'SimpleName' a static method.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Event\EventBus.cs",
+"uri":  "sources\akka.net\src\core\Akka\Event\EventBus.cs",
 "region":  {
 "startLine":  44,
 "startColumn":  26,
@@ -368,7 +368,7 @@
 "id":  "S2325",
 "message":  "Make 'Allocate' a static method.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\IO\DirectByteBufferPool.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\DirectByteBufferPool.cs",
 "region":  {
 "startLine":  50,
 "startColumn":  28,
@@ -381,7 +381,7 @@
 "id":  "S2325",
 "message":  "Make 'BufferSize' a static property.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\IO\SocketAsyncEventArgsPool.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\SocketAsyncEventArgsPool.cs",
 "region":  {
 "startLine":  33,
 "startColumn":  20,
@@ -394,7 +394,7 @@
 "id":  "S2325",
 "message":  "Make 'CloseReason' a static method.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\IO\TcpConnection.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpConnection.cs",
 "region":  {
 "startLine":  447,
 "startColumn":  38,
@@ -407,7 +407,7 @@
 "id":  "S2325",
 "message":  "Make 'ResizerCell' a static property.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Routing\ResizablePoolActor.cs",
+"uri":  "sources\akka.net\src\core\Akka\Routing\ResizablePoolActor.cs",
 "region":  {
 "startLine":  27,
 "startColumn":  37,
@@ -420,7 +420,7 @@
 "id":  "S2325",
 "message":  "Make 'UnWrap' a static method.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Routing\Router.cs",
+"uri":  "sources\akka.net\src\core\Akka\Routing\Router.cs",
 "region":  {
 "startLine":  235,
 "startColumn":  24,
@@ -433,7 +433,7 @@
 "id":  "S2325",
 "message":  "Make 'Cell' a static property.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Routing\RouterActor.cs",
+"uri":  "sources\akka.net\src\core\Akka\Routing\RouterActor.cs",
 "region":  {
 "startLine":  28,
 "startColumn":  35,
@@ -446,7 +446,7 @@
 "id":  "S2325",
 "message":  "Make 'RouteeFor' a static method.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Routing\RouterConfig.cs",
+"uri":  "sources\akka.net\src\core\Akka\Routing\RouterConfig.cs",
 "region":  {
 "startLine":  335,
 "startColumn":  25,
@@ -459,7 +459,7 @@
 "id":  "S2325",
 "message":  "Make 'TryGetActorCell' a static method.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Routing\SmallestMailbox.cs",
+"uri":  "sources\akka.net\src\core\Akka\Routing\SmallestMailbox.cs",
 "region":  {
 "startLine":  95,
 "startColumn":  23,
@@ -472,7 +472,7 @@
 "id":  "S2325",
 "message":  "Make 'GetString' a static method.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Serialization\NewtonSoftJsonSerializer.cs",
+"uri":  "sources\akka.net\src\core\Akka\Serialization\NewtonSoftJsonSerializer.cs",
 "region":  {
 "startLine":  236,
 "startColumn":  28,
@@ -485,7 +485,7 @@
 "id":  "S2325",
 "message":  "Make 'FromArray' a static method.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Util\ByteString.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\ByteString.cs",
 "region":  {
 "startLine":  49,
 "startColumn":  27,
@@ -498,7 +498,7 @@
 "id":  "S2325",
 "message":  "Make 'FromArray' a static method.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Util\ByteString.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\ByteString.cs",
 "region":  {
 "startLine":  58,
 "startColumn":  27,
@@ -511,7 +511,7 @@
 "id":  "S2325",
 "message":  "Make 'IsLeft' a static property.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Util\Either.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\Either.cs",
 "region":  {
 "startLine":  123,
 "startColumn":  21,
@@ -524,7 +524,7 @@
 "id":  "S2325",
 "message":  "Make 'IsRight' a static property.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Util\Either.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\Either.cs",
 "region":  {
 "startLine":  128,
 "startColumn":  21,
@@ -537,7 +537,7 @@
 "id":  "S2325",
 "message":  "Make 'IsLeft' a static property.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Util\Either.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\Either.cs",
 "region":  {
 "startLine":  165,
 "startColumn":  21,
@@ -550,7 +550,7 @@
 "id":  "S2325",
 "message":  "Make 'IsRight' a static property.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Util\Either.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\Either.cs",
 "region":  {
 "startLine":  170,
 "startColumn":  21,
@@ -563,7 +563,7 @@
 "id":  "S2325",
 "message":  "Make 'Balance' a static method.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Util\Internal\Collections\ImmutableAvlTreeBase.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\Internal\Collections\ImmutableAvlTreeBase.cs",
 "region":  {
 "startLine":  458,
 "startColumn":  15,
@@ -576,7 +576,7 @@
 "id":  "S2325",
 "message":  "Make 'ListsEqual' a static method.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Util\MatchHandler\MatchBuilderSignature.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\MatchBuilderSignature.cs",
 "region":  {
 "startLine":  46,
 "startColumn":  22,

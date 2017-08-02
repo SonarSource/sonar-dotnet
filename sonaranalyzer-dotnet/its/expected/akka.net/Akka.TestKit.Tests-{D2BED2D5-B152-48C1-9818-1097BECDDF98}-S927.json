@@ -4,7 +4,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'm' to 'logEvent' to match the base class declaration.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.TestKit.Tests\TestEventListenerTests\ForwardAllEventsTestEventListener.cs",
+"uri":  "sources\akka.net\src\core\Akka.TestKit.Tests\TestEventListenerTests\ForwardAllEventsTestEventListener.cs",
 "region":  {
 "startLine":  18,
 "startColumn":  48,

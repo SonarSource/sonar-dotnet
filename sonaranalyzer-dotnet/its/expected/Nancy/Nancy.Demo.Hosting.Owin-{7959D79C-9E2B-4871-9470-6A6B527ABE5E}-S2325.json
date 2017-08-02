@@ -4,7 +4,7 @@
 "id":  "S2325",
 "message":  "Make 'Configuration' a static method.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Demo.Hosting.Owin\Startup.cs",
+"uri":  "sources\Nancy\src\Nancy.Demo.Hosting.Owin\Startup.cs",
 "region":  {
 "startLine":  7,
 "startColumn":  21,

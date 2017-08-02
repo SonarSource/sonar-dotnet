@@ -4,7 +4,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Demo.Authentication\AnotherVerySecureModule.cs",
+"uri":  "sources\Nancy\src\Nancy.Demo.Authentication\AnotherVerySecureModule.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -17,7 +17,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Demo.Authentication\AuthenticationBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Demo.Authentication\AuthenticationBootstrapper.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -30,7 +30,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Demo.Authentication\MainModule.cs",
+"uri":  "sources\Nancy\src\Nancy.Demo.Authentication\MainModule.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -43,7 +43,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Demo.Authentication\Models\UserModel.cs",
+"uri":  "sources\Nancy\src\Nancy.Demo.Authentication\Models\UserModel.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -56,7 +56,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Demo.Authentication\SecureModule.cs",
+"uri":  "sources\Nancy\src\Nancy.Demo.Authentication\SecureModule.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -69,7 +69,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\SharedAssemblyInfo.cs",
+"uri":  "sources\Nancy\src\SharedAssemblyInfo.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,

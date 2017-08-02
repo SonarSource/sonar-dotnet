@@ -4,7 +4,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorBecomeTests.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ActorBecomeTests.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -17,7 +17,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorCellTests_SerializationOfUserMessages.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ActorCellTests_SerializationOfUserMessages.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -30,7 +30,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorDslSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ActorDslSpec.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -43,7 +43,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorLifeCycleSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ActorLifeCycleSpec.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -56,7 +56,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorPathSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ActorPathSpec.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -69,7 +69,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorProducerPipelineTests.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ActorProducerPipelineTests.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -82,7 +82,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorRefProviderSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ActorRefProviderSpec.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -95,7 +95,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorRefSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ActorRefSpec.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -108,7 +108,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorSelectionSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ActorSelectionSpec.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -121,7 +121,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorSystemSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ActorSystemSpec.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -134,7 +134,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorSystemTests.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ActorSystemTests.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -147,7 +147,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\AddressSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\AddressSpec.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -160,7 +160,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\AskSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\AskSpec.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -173,7 +173,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\AskTimeoutSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\AskTimeoutSpec.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -186,7 +186,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\Cancellation\AlreadyCancelledCancelableTests.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\Cancellation\AlreadyCancelledCancelableTests.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -199,7 +199,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\Cancellation\CancelableTests.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\Cancellation\CancelableTests.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -212,7 +212,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\DeadLettersSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\DeadLettersSpec.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -225,7 +225,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\DeathWatchSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\DeathWatchSpec.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -238,7 +238,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\DeployerSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\DeployerSpec.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -251,7 +251,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\FSMTimingSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\FSMTimingSpec.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -264,7 +264,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\FSMTransitionSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\FSMTransitionSpec.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -277,7 +277,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\InboxSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\InboxSpec.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -290,7 +290,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\LocalActorRefProviderSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\LocalActorRefProviderSpec.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -303,7 +303,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\PatternSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\PatternSpec.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -316,7 +316,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\PipeToSupportSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\PipeToSupportSpec.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -329,7 +329,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\PropsSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\PropsSpec.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -342,7 +342,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ReceiveActorTests.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ReceiveActorTests.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -355,7 +355,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ReceiveActorTests_Become.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ReceiveActorTests_Become.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -368,7 +368,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ReceiveActorTests_LifeCycle.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ReceiveActorTests_LifeCycle.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -381,7 +381,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ReceiveTimeoutSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ReceiveTimeoutSpec.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -394,7 +394,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\RelativeActorPathSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\RelativeActorPathSpec.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -407,7 +407,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\RootGuardianActorRef_Tests.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\RootGuardianActorRef_Tests.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -420,7 +420,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\Scheduler\TaskBasedScheduler_ActionScheduler_Cancellation_Tests.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\Scheduler\TaskBasedScheduler_ActionScheduler_Cancellation_Tests.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -433,7 +433,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\Scheduler\TaskBasedScheduler_ActionScheduler_Schedule_Tests.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\Scheduler\TaskBasedScheduler_ActionScheduler_Schedule_Tests.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -446,7 +446,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\Scheduler\TaskBasedScheduler_TellScheduler_Cancellation_Tests.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\Scheduler\TaskBasedScheduler_TellScheduler_Cancellation_Tests.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -459,7 +459,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\Scheduler\TaskBasedScheduler_TellScheduler_Schedule_Tests.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\Scheduler\TaskBasedScheduler_TellScheduler_Schedule_Tests.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -472,7 +472,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\Scheduler\TaskBasedScheduler_Verify_TimeProvider.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\Scheduler\TaskBasedScheduler_Verify_TimeProvider.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -485,7 +485,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\Stash\ActorWithStashSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\Stash\ActorWithStashSpec.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -498,7 +498,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\StashMailboxSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\StashMailboxSpec.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -511,7 +511,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\SupervisorHierarchySpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\SupervisorHierarchySpec.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -524,7 +524,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\SupervisorStrategySpecs.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\SupervisorStrategySpecs.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -537,7 +537,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\SystemGuardianTests.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\SystemGuardianTests.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -550,7 +550,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Configuration\ConfigurationSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Configuration\ConfigurationSpec.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -563,7 +563,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Configuration\HoconTests.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Configuration\HoconTests.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -576,7 +576,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Dispatch\AsyncAwaitSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Dispatch\AsyncAwaitSpec.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -589,7 +589,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Dispatch\DispatchersSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Dispatch\DispatchersSpec.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -602,7 +602,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Dispatch\MailboxesSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Dispatch\MailboxesSpec.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -615,7 +615,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Dispatch\XUnitAsyncTestsSanityCheck.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Dispatch\XUnitAsyncTestsSanityCheck.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -628,7 +628,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Event\EventBusSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Event\EventBusSpec.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -641,7 +641,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Event\EventStreamSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Event\EventStreamSpec.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -654,7 +654,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\IO\SimpleDnsCacheSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\IO\SimpleDnsCacheSpec.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -667,7 +667,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -680,7 +680,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\IO\TcpIntegrationSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\IO\TcpIntegrationSpec.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -693,7 +693,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\IO\TcpListenerSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\IO\TcpListenerSpec.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -706,7 +706,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\IO\UdpConnectedIntegrationSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\IO\UdpConnectedIntegrationSpec.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -719,7 +719,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\IO\UdpIntegrationSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\IO\UdpIntegrationSpec.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -732,7 +732,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\MatchHandler\CachedMatchCompilerTests.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\MatchHandler\CachedMatchCompilerTests.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -745,7 +745,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\MatchHandler\MatchBuilderSignatureTests.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\MatchHandler\MatchBuilderSignatureTests.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -758,7 +758,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\MatchHandler\MatchExpressionBuilder_BuildLambdaExpression_Tests.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\MatchHandler\MatchExpressionBuilder_BuildLambdaExpression_Tests.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -771,7 +771,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\MatchHandler\MatchExpressionBuilder_CreateArgumentValuesArray_Tests.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\MatchHandler\MatchExpressionBuilder_CreateArgumentValuesArray_Tests.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -784,7 +784,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\MatchHandler\MatchHandlerBuilderTests.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\MatchHandler\MatchHandlerBuilderTests.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -797,7 +797,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\MatchHandler\PartialActionBuilderTests.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\MatchHandler\PartialActionBuilderTests.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -810,7 +810,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Pattern\BackoffSupervisorSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Pattern\BackoffSupervisorSpec.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -823,7 +823,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Pattern\CircuitBreakerSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Pattern\CircuitBreakerSpec.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -836,7 +836,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Properties\AssemblyInfo.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Properties\AssemblyInfo.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -849,7 +849,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Routing\BroadcastSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Routing\BroadcastSpec.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -862,7 +862,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Routing\ConsistentHashingRouterSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Routing\ConsistentHashingRouterSpec.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -875,7 +875,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Routing\ListenerSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Routing\ListenerSpec.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -888,7 +888,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Routing\RandomSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Routing\RandomSpec.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -901,7 +901,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Routing\ResizerSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Routing\ResizerSpec.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -914,7 +914,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Routing\RoundRobinSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Routing\RoundRobinSpec.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -927,7 +927,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Routing\RoutingSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Routing\RoutingSpec.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -940,7 +940,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Routing\ScatterGatherFirstCompletedSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Routing\ScatterGatherFirstCompletedSpec.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -953,7 +953,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Routing\SmallestMailboxSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Routing\SmallestMailboxSpec.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -966,7 +966,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Routing\TailChoppingSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Routing\TailChoppingSpec.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -979,7 +979,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Serialization\SerializationSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Serialization\SerializationSpec.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -992,7 +992,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\TestUtils\Comparable.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\TestUtils\Comparable.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1005,7 +1005,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\TestUtils\PropsWithName.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\TestUtils\PropsWithName.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1018,7 +1018,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\TestUtils\Supervisor.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\TestUtils\Supervisor.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1031,7 +1031,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Util\ByteStringSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Util\ByteStringSpec.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1044,7 +1044,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Util\CollectionExtensionsSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Util\CollectionExtensionsSpec.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1057,7 +1057,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Util\ContinuousEnumeratorSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Util\ContinuousEnumeratorSpec.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1070,7 +1070,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Util\Internal\Collections\ImmutableAvlTreeMapTests.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Util\Internal\Collections\ImmutableAvlTreeMapTests.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1083,7 +1083,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Util\Internal\Collections\ImmutableAvlTreeTests.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Util\Internal\Collections\ImmutableAvlTreeTests.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1096,7 +1096,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Util\Internal\Collections\IteratorTests.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Util\Internal\Collections\IteratorTests.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1109,7 +1109,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Util\Internal\InterlockedSpinTests.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Util\Internal\InterlockedSpinTests.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1122,7 +1122,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Util\PatternSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Util\PatternSpec.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1135,7 +1135,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Util\SwitchTests.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Util\SwitchTests.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1148,7 +1148,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Util\TypeExtensionsTests.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Util\TypeExtensionsTests.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,

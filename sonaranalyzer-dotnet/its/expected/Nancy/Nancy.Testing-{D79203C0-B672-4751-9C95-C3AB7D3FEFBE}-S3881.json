@@ -5,7 +5,7 @@
 "message":  "Fix this implementation of 'IDisposable' to conform to the dispose pattern.",
 "location":  [
 {
-"uri":  "Nancy\src\Nancy.Testing\StaticConfigurationContext.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\StaticConfigurationContext.cs",
 "region":  {
 "startLine":  10,
 "startColumn":  18,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy.Testing\StaticConfigurationContext.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\StaticConfigurationContext.cs",
 "region":  {
 "startLine":  10,
 "startColumn":  18,
@@ -23,7 +23,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy.Testing\StaticConfigurationContext.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\StaticConfigurationContext.cs",
 "region":  {
 "startLine":  38,
 "startColumn":  21,

@@ -4,7 +4,7 @@
 "id":  "S1481",
 "message":  "Remove this unused 'state' local variable.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
 "region":  {
 "startLine":  670,
 "startColumn":  29,
@@ -17,7 +17,7 @@
 "id":  "S1481",
 "message":  "Remove this unused 'mailboxType' local variable.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\RemoteActorRefProvider.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteActorRefProvider.cs",
 "region":  {
 "startLine":  208,
 "startColumn":  29,
@@ -30,7 +30,7 @@
 "id":  "S1481",
 "message":  "Remove this unused 'socketAddress' local variable.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\Transport\Helios\HeliosTcpTransport.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\Helios\HeliosTcpTransport.cs",
 "region":  {
 "startLine":  244,
 "startColumn":  17,

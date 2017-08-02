@@ -5,7 +5,7 @@
 "message":  "Remove this assignment of 'rootPathProvider' or initialize it statically.",
 "location":  [
 {
-"uri":  "Nancy\src\Nancy\Bootstrapper\FavIconApplicationStartup.cs",
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\FavIconApplicationStartup.cs",
 "region":  {
 "startLine":  25,
 "startColumn":  13,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy\Bootstrapper\FavIconApplicationStartup.cs",
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\FavIconApplicationStartup.cs",
 "region":  {
 "startLine":  15,
 "startColumn":  42,
@@ -29,7 +29,7 @@
 "message":  "Remove this assignment of 'rootPathProvider' or initialize it statically.",
 "location":  [
 {
-"uri":  "Nancy\src\Nancy\StaticContent.cs",
+"uri":  "sources\Nancy\src\Nancy\StaticContent.cs",
 "region":  {
 "startLine":  25,
 "startColumn":  13,
@@ -38,7 +38,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy\StaticContent.cs",
+"uri":  "sources\Nancy\src\Nancy\StaticContent.cs",
 "region":  {
 "startLine":  14,
 "startColumn":  42,
@@ -53,7 +53,7 @@
 "message":  "Remove this assignment of 'conventions' or initialize it statically.",
 "location":  [
 {
-"uri":  "Nancy\src\Nancy\StaticContent.cs",
+"uri":  "sources\Nancy\src\Nancy\StaticContent.cs",
 "region":  {
 "startLine":  26,
 "startColumn":  13,
@@ -62,7 +62,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy\StaticContent.cs",
+"uri":  "sources\Nancy\src\Nancy\StaticContent.cs",
 "region":  {
 "startLine":  15,
 "startColumn":  50,

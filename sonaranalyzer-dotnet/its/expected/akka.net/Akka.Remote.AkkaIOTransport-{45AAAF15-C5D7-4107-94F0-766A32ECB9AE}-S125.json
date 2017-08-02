@@ -4,7 +4,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\contrib\transports\Akka.Remote.AkkaIOTransport\ConnectionAssociation.cs",
+"uri":  "sources\akka.net\src\contrib\transports\Akka.Remote.AkkaIOTransport\ConnectionAssociation.cs",
 "region":  {
 "startLine":  38,
 "startColumn":  13,

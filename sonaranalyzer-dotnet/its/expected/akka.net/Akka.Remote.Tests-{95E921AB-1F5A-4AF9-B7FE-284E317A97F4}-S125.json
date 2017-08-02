@@ -4,7 +4,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.Tests\RemoteRouterSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests\RemoteRouterSpec.cs",
 "region":  {
 "startLine":  318,
 "startColumn":  13,
@@ -17,7 +17,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.Tests\RemotingSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests\RemotingSpec.cs",
 "region":  {
 "startLine":  32,
 "startColumn":  46,

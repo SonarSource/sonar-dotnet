@@ -4,7 +4,7 @@
 "id":  "S4058",
 "message":  "Change this call to '_gossip.ToString().Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  171,
 "startColumn":  53,
@@ -17,7 +17,7 @@
 "id":  "S4058",
 "message":  "Change this call to '_role.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterEvent.cs",
 "region":  {
 "startLine":  356,
 "startColumn":  24,
@@ -30,7 +30,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'metric.Name.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterMetricsCollector.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterMetricsCollector.cs",
 "region":  {
 "startLine":  362,
 "startColumn":  53,
@@ -43,7 +43,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'string.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterMetricsCollector.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterMetricsCollector.cs",
 "region":  {
 "startLine":  446,
 "startColumn":  20,
@@ -56,7 +56,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'x.Host.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\Member.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Member.cs",
 "region":  {
 "startLine":  134,
 "startColumn":  22,
@@ -69,7 +69,7 @@
 "id":  "S4058",
 "message":  "Change this call to '_value.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
 "region":  {
 "startLine":  86,
 "startColumn":  24,

@@ -4,7 +4,7 @@
 "id":  "S3717",
 "message":  "Implement this method or throw 'NotSupportedException' instead.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Json\Converters\TupleConverter.cs",
+"uri":  "sources\Nancy\src\Nancy\Json\Converters\TupleConverter.cs",
 "region":  {
 "startLine":  34,
 "startColumn":  13,
@@ -17,7 +17,7 @@
 "id":  "S3717",
 "message":  "Implement this method or throw 'NotSupportedException' instead.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\NancyViewEngineHost.cs",
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\NancyViewEngineHost.cs",
 "region":  {
 "startLine":  64,
 "startColumn":  13,

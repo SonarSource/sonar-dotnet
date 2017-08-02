@@ -4,7 +4,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Ember-MM\Ember.Plugins\Ember\EmberWorkAroundPlugin.cs",
+"uri":  "sources\Ember-MM\Ember.Plugins\Ember\EmberWorkAroundPlugin.cs",
 "region":  {
 "startLine":  62,
 "startColumn":  29,
@@ -17,7 +17,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Ember-MM\Ember.Plugins\Ember\EmberWorkAroundPlugin.cs",
+"uri":  "sources\Ember-MM\Ember.Plugins\Ember\EmberWorkAroundPlugin.cs",
 "region":  {
 "startLine":  63,
 "startColumn":  17,
@@ -30,7 +30,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Ember-MM\Ember.Plugins\Ember\EmberWorkAroundPlugin.cs",
+"uri":  "sources\Ember-MM\Ember.Plugins\Ember\EmberWorkAroundPlugin.cs",
 "region":  {
 "startLine":  64,
 "startColumn":  25,
@@ -43,7 +43,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Ember-MM\Ember.Plugins\Ember\EmberWorkAroundPlugin.cs",
+"uri":  "sources\Ember-MM\Ember.Plugins\Ember\EmberWorkAroundPlugin.cs",
 "region":  {
 "startLine":  65,
 "startColumn":  22,
@@ -56,7 +56,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Ember-MM\Ember.Plugins\Ember\EmberWorkAroundPlugin.cs",
+"uri":  "sources\Ember-MM\Ember.Plugins\Ember\EmberWorkAroundPlugin.cs",
 "region":  {
 "startLine":  66,
 "startColumn":  25,
@@ -69,7 +69,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Ember-MM\Ember.Plugins\Ember\EmberWorkAroundPlugin.cs",
+"uri":  "sources\Ember-MM\Ember.Plugins\Ember\EmberWorkAroundPlugin.cs",
 "region":  {
 "startLine":  67,
 "startColumn":  22,
@@ -82,7 +82,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Ember-MM\Ember.Plugins\Ember\EmberWorkAroundPlugin.cs",
+"uri":  "sources\Ember-MM\Ember.Plugins\Ember\EmberWorkAroundPlugin.cs",
 "region":  {
 "startLine":  68,
 "startColumn":  25,
@@ -95,7 +95,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Ember-MM\Ember.Plugins\PluginBase.cs",
+"uri":  "sources\Ember-MM\Ember.Plugins\PluginBase.cs",
 "region":  {
 "startLine":  71,
 "startColumn":  27,
@@ -108,7 +108,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Ember-MM\Ember.Plugins\PluginManager.cs",
+"uri":  "sources\Ember-MM\Ember.Plugins\PluginManager.cs",
 "region":  {
 "startLine":  98,
 "startColumn":  35,
@@ -121,7 +121,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Ember-MM\Ember.Plugins\PluginManager.cs",
+"uri":  "sources\Ember-MM\Ember.Plugins\PluginManager.cs",
 "region":  {
 "startLine":  100,
 "startColumn":  31,
@@ -134,7 +134,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Ember-MM\Ember.Plugins\PluginManager.cs",
+"uri":  "sources\Ember-MM\Ember.Plugins\PluginManager.cs",
 "region":  {
 "startLine":  105,
 "startColumn":  35,
@@ -147,7 +147,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Ember-MM\Ember.Plugins\PluginManager.cs",
+"uri":  "sources\Ember-MM\Ember.Plugins\PluginManager.cs",
 "region":  {
 "startLine":  107,
 "startColumn":  29,
@@ -160,7 +160,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Ember-MM\Ember.Plugins\PluginManager.cs",
+"uri":  "sources\Ember-MM\Ember.Plugins\PluginManager.cs",
 "region":  {
 "startLine":  116,
 "startColumn":  25,
@@ -173,7 +173,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Ember-MM\Ember.Plugins\PluginSectionHandler.cs",
+"uri":  "sources\Ember-MM\Ember.Plugins\PluginSectionHandler.cs",
 "region":  {
 "startLine":  70,
 "startColumn":  35,
@@ -186,7 +186,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Ember-MM\Ember.Plugins\PluginSectionHandler.cs",
+"uri":  "sources\Ember-MM\Ember.Plugins\PluginSectionHandler.cs",
 "region":  {
 "startLine":  92,
 "startColumn":  25,
@@ -199,7 +199,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Ember-MM\Ember.Plugins\Utility.cs",
+"uri":  "sources\Ember-MM\Ember.Plugins\Utility.cs",
 "region":  {
 "startLine":  44,
 "startColumn":  22,

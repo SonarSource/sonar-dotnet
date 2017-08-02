@@ -4,7 +4,7 @@
 "id":  "S3963",
 "message":  "Initialize all 'static fields' inline and remove the 'static constructor'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Util\MurmurHash.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\MurmurHash.cs",
 "region":  {
 "startLine":  52,
 "startColumn":  9,

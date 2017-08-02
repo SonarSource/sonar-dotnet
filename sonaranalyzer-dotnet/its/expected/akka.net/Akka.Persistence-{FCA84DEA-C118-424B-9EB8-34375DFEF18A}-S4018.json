@@ -4,7 +4,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to have parameters matching all the type parameters.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Journal\EventAdapters.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\EventAdapters.cs",
 "region":  {
 "startLine":  217,
 "startColumn":  30,
@@ -17,7 +17,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to have parameters matching all the type parameters.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Journal\EventAdapters.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\EventAdapters.cs",
 "region":  {
 "startLine":  236,
 "startColumn":  26,

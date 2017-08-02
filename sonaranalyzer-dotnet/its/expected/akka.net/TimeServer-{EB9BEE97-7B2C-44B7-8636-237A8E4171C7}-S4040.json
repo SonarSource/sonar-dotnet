@@ -4,7 +4,7 @@
 "id":  "S4040",
 "message":  "Change this normalization to 'String.ToUpperInvariant()'.",
 "location":  {
-"uri":  "akka.net\src\examples\TimeServer\TimeServer\Program.cs",
+"uri":  "sources\akka.net\src\examples\TimeServer\TimeServer\Program.cs",
 "region":  {
 "startLine":  34,
 "startColumn":  29,

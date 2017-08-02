@@ -5,7 +5,7 @@
 "message":  "The Cyclomatic Complexity of this method is 11 which is greater than 10 authorized.",
 "location":  [
 {
-"uri":  "akka.net\src\core\Akka.Persistence\Snapshot\SnapshotStore.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot\SnapshotStore.cs",
 "region":  {
 "startLine":  30,
 "startColumn":  33,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Persistence\Snapshot\SnapshotStore.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot\SnapshotStore.cs",
 "region":  {
 "startLine":  30,
 "startColumn":  33,
@@ -23,7 +23,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Persistence\Snapshot\SnapshotStore.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot\SnapshotStore.cs",
 "region":  {
 "startLine":  32,
 "startColumn":  13,
@@ -32,7 +32,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Persistence\Snapshot\SnapshotStore.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot\SnapshotStore.cs",
 "region":  {
 "startLine":  38,
 "startColumn":  21,
@@ -41,7 +41,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Persistence\Snapshot\SnapshotStore.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot\SnapshotStore.cs",
 "region":  {
 "startLine":  42,
 "startColumn":  18,
@@ -50,7 +50,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Persistence\Snapshot\SnapshotStore.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot\SnapshotStore.cs",
 "region":  {
 "startLine":  48,
 "startColumn":  25,
@@ -59,7 +59,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Persistence\Snapshot\SnapshotStore.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot\SnapshotStore.cs",
 "region":  {
 "startLine":  53,
 "startColumn":  18,
@@ -68,7 +68,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Persistence\Snapshot\SnapshotStore.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot\SnapshotStore.cs",
 "region":  {
 "startLine":  59,
 "startColumn":  18,
@@ -77,7 +77,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Persistence\Snapshot\SnapshotStore.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot\SnapshotStore.cs",
 "region":  {
 "startLine":  66,
 "startColumn":  18,
@@ -86,7 +86,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Persistence\Snapshot\SnapshotStore.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot\SnapshotStore.cs",
 "region":  {
 "startLine":  72,
 "startColumn":  21,
@@ -95,7 +95,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Persistence\Snapshot\SnapshotStore.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot\SnapshotStore.cs",
 "region":  {
 "startLine":  77,
 "startColumn":  18,
@@ -104,7 +104,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Persistence\Snapshot\SnapshotStore.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot\SnapshotStore.cs",
 "region":  {
 "startLine":  83,
 "startColumn":  21,

@@ -4,7 +4,7 @@
 "id":  "S2219",
 "message":  "Use a 'null' check instead.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\EndpointRegistry.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointRegistry.cs",
 "region":  {
 "startLine":  64,
 "startColumn":  21,

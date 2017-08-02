@@ -4,7 +4,7 @@
 "id":  "S1449",
 "message":  "Define the locale to be used in this string operation.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Demo.Caching\MainModule.cs",
+"uri":  "sources\Nancy\src\Nancy.Demo.Caching\MainModule.cs",
 "region":  {
 "startLine":  12,
 "startColumn":  58,
@@ -17,7 +17,7 @@
 "id":  "S1449",
 "message":  "Define the locale to be used in this string operation.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Demo.Caching\MainModule.cs",
+"uri":  "sources\Nancy\src\Nancy.Demo.Caching\MainModule.cs",
 "region":  {
 "startLine":  17,
 "startColumn":  60,
@@ -30,7 +30,7 @@
 "id":  "S1449",
 "message":  "Define the locale to be used in this string operation.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Demo.Caching\MainModule.cs",
+"uri":  "sources\Nancy\src\Nancy.Demo.Caching\MainModule.cs",
 "region":  {
 "startLine":  22,
 "startColumn":  60,

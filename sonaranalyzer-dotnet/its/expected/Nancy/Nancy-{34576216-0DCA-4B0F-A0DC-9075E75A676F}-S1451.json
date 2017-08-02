@@ -4,7 +4,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\AfterPipeline.cs",
+"uri":  "sources\Nancy\src\Nancy\AfterPipeline.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -17,7 +17,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\AsyncNamedPipelineBase.cs",
+"uri":  "sources\Nancy\src\Nancy\AsyncNamedPipelineBase.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -30,7 +30,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\BeforePipeline.cs",
+"uri":  "sources\Nancy\src\Nancy\BeforePipeline.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -43,7 +43,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Bootstrapper\AppDomainAssemblyTypeScanner.cs",
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\AppDomainAssemblyTypeScanner.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -56,7 +56,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Bootstrapper\BootstrapperException.cs",
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\BootstrapperException.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -69,7 +69,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Bootstrapper\CollectionTypeRegistration.cs",
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\CollectionTypeRegistration.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -82,7 +82,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Bootstrapper\ContainerRegistration.cs",
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\ContainerRegistration.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -95,7 +95,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Bootstrapper\FavIconApplicationStartup.cs",
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\FavIconApplicationStartup.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -108,7 +108,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Bootstrapper\IApplicationStartup.cs",
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\IApplicationStartup.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -121,7 +121,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Bootstrapper\INancyBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\INancyBootstrapper.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -134,7 +134,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Bootstrapper\InstanceRegistration.cs",
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\InstanceRegistration.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -147,7 +147,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Bootstrapper\IPipelines.cs",
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\IPipelines.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -160,7 +160,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Bootstrapper\IRegistrations.cs",
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\IRegistrations.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -173,7 +173,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Bootstrapper\IRequestStartup.cs",
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\IRequestStartup.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -186,7 +186,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Bootstrapper\Lifetime.cs",
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\Lifetime.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -199,7 +199,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Bootstrapper\ModuleRegistrationType.cs",
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\ModuleRegistrationType.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -212,7 +212,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Bootstrapper\MultipleRootPathProvidersLocatedException.cs",
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\MultipleRootPathProvidersLocatedException.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -225,7 +225,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Bootstrapper\NancyBootstrapperBase.cs",
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\NancyBootstrapperBase.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -238,7 +238,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Bootstrapper\NancyBootstrapperLocator.cs",
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\NancyBootstrapperLocator.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -251,7 +251,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Bootstrapper\NancyBootstrapperWithRequestContainerBase.cs",
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\NancyBootstrapperWithRequestContainerBase.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -264,7 +264,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Bootstrapper\NancyInternalConfiguration.cs",
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\NancyInternalConfiguration.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -277,7 +277,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Bootstrapper\Pipelines.cs",
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\Pipelines.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -290,7 +290,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Bootstrapper\Registrations.cs",
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\Registrations.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -303,7 +303,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Bootstrapper\ScanMode.cs",
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\ScanMode.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -316,7 +316,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Bootstrapper\TypeRegistration.cs",
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\TypeRegistration.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -329,7 +329,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Configuration\DefaultNancyEnvironment.cs",
+"uri":  "sources\Nancy\src\Nancy\Configuration\DefaultNancyEnvironment.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -342,7 +342,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Configuration\DefaultNancyEnvironmentConfigurator.cs",
+"uri":  "sources\Nancy\src\Nancy\Configuration\DefaultNancyEnvironmentConfigurator.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -355,7 +355,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Configuration\DefaultNancyEnvironmentFactory.cs",
+"uri":  "sources\Nancy\src\Nancy\Configuration\DefaultNancyEnvironmentFactory.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -368,7 +368,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Configuration\INancyDefaultConfigurationProvider.cs",
+"uri":  "sources\Nancy\src\Nancy\Configuration\INancyDefaultConfigurationProvider.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -381,7 +381,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Configuration\INancyEnvironment.cs",
+"uri":  "sources\Nancy\src\Nancy\Configuration\INancyEnvironment.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -394,7 +394,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Configuration\INancyEnvironmentConfigurator.cs",
+"uri":  "sources\Nancy\src\Nancy\Configuration\INancyEnvironmentConfigurator.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -407,7 +407,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Configuration\INancyEnvironmentExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy\Configuration\INancyEnvironmentExtensions.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -420,7 +420,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Configuration\INancyEnvironmentFactory.cs",
+"uri":  "sources\Nancy\src\Nancy\Configuration\INancyEnvironmentFactory.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -433,7 +433,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Configuration\NancyDefaultConfigurationProvider.cs",
+"uri":  "sources\Nancy\src\Nancy\Configuration\NancyDefaultConfigurationProvider.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -446,7 +446,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Conventions\AcceptHeaderCoercionConventions.cs",
+"uri":  "sources\Nancy\src\Nancy\Conventions\AcceptHeaderCoercionConventions.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -459,7 +459,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Conventions\BuiltInAcceptHeaderCoercions.cs",
+"uri":  "sources\Nancy\src\Nancy\Conventions\BuiltInAcceptHeaderCoercions.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -472,7 +472,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Conventions\BuiltInCultureConventions.cs",
+"uri":  "sources\Nancy\src\Nancy\Conventions\BuiltInCultureConventions.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -485,7 +485,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Conventions\CultureConventions.cs",
+"uri":  "sources\Nancy\src\Nancy\Conventions\CultureConventions.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -498,7 +498,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Conventions\DefaultAcceptHeaderCoercionConventions.cs",
+"uri":  "sources\Nancy\src\Nancy\Conventions\DefaultAcceptHeaderCoercionConventions.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -511,7 +511,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Conventions\DefaultCultureConventions.cs",
+"uri":  "sources\Nancy\src\Nancy\Conventions\DefaultCultureConventions.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -524,7 +524,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Conventions\DefaultStaticContentsConventions.cs",
+"uri":  "sources\Nancy\src\Nancy\Conventions\DefaultStaticContentsConventions.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -537,7 +537,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Conventions\DefaultViewLocationConventions.cs",
+"uri":  "sources\Nancy\src\Nancy\Conventions\DefaultViewLocationConventions.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -550,7 +550,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Conventions\IConvention.cs",
+"uri":  "sources\Nancy\src\Nancy\Conventions\IConvention.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -563,7 +563,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Conventions\NancyConventions.cs",
+"uri":  "sources\Nancy\src\Nancy\Conventions\NancyConventions.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -576,7 +576,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Conventions\StaticContentConventionBuilder.cs",
+"uri":  "sources\Nancy\src\Nancy\Conventions\StaticContentConventionBuilder.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -589,7 +589,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Conventions\StaticContentHelper.cs",
+"uri":  "sources\Nancy\src\Nancy\Conventions\StaticContentHelper.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -602,7 +602,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Conventions\StaticContentsConventions.cs",
+"uri":  "sources\Nancy\src\Nancy\Conventions\StaticContentsConventions.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -615,7 +615,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Conventions\StaticContentsConventionsExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy\Conventions\StaticContentsConventionsExtensions.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -628,7 +628,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Conventions\StaticDirectoryContent.cs",
+"uri":  "sources\Nancy\src\Nancy\Conventions\StaticDirectoryContent.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -641,7 +641,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Conventions\StaticFileContent.cs",
+"uri":  "sources\Nancy\src\Nancy\Conventions\StaticFileContent.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -654,7 +654,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Conventions\ViewLocationConventions.cs",
+"uri":  "sources\Nancy\src\Nancy\Conventions\ViewLocationConventions.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -667,7 +667,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Cookies\INancyCookie.cs",
+"uri":  "sources\Nancy\src\Nancy\Cookies\INancyCookie.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -680,7 +680,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Cookies\NancyCookie.cs",
+"uri":  "sources\Nancy\src\Nancy\Cookies\NancyCookie.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -693,7 +693,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Cryptography\Base64Helpers.cs",
+"uri":  "sources\Nancy\src\Nancy\Cryptography\Base64Helpers.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -706,7 +706,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Cryptography\CryptographyConfiguration.cs",
+"uri":  "sources\Nancy\src\Nancy\Cryptography\CryptographyConfiguration.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -719,7 +719,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Cryptography\DefaultHmacProvider.cs",
+"uri":  "sources\Nancy\src\Nancy\Cryptography\DefaultHmacProvider.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -732,7 +732,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Cryptography\HmacComparer.cs",
+"uri":  "sources\Nancy\src\Nancy\Cryptography\HmacComparer.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -745,7 +745,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Cryptography\IEncryptionProvider.cs",
+"uri":  "sources\Nancy\src\Nancy\Cryptography\IEncryptionProvider.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -758,7 +758,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Cryptography\IHmacProvider.cs",
+"uri":  "sources\Nancy\src\Nancy\Cryptography\IHmacProvider.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -771,7 +771,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Cryptography\IKeyGenerator.cs",
+"uri":  "sources\Nancy\src\Nancy\Cryptography\IKeyGenerator.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -784,7 +784,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Cryptography\NoEncryptionProvider.cs",
+"uri":  "sources\Nancy\src\Nancy\Cryptography\NoEncryptionProvider.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -797,7 +797,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Cryptography\PassphraseKeyGenerator.cs",
+"uri":  "sources\Nancy\src\Nancy\Cryptography\PassphraseKeyGenerator.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -810,7 +810,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Cryptography\RandomKeyGenerator.cs",
+"uri":  "sources\Nancy\src\Nancy\Cryptography\RandomKeyGenerator.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -823,7 +823,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Cryptography\RijndaelEncryptionProvider.cs",
+"uri":  "sources\Nancy\src\Nancy\Cryptography\RijndaelEncryptionProvider.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -836,7 +836,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Culture\DefaultCultureService.cs",
+"uri":  "sources\Nancy\src\Nancy\Culture\DefaultCultureService.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -849,7 +849,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Culture\ICultureService.cs",
+"uri":  "sources\Nancy\src\Nancy\Culture\ICultureService.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -862,7 +862,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\DefaultNancyBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy\DefaultNancyBootstrapper.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -875,7 +875,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\DefaultNancyContextFactory.cs",
+"uri":  "sources\Nancy\src\Nancy\DefaultNancyContextFactory.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -888,7 +888,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\DefaultObjectSerializer.cs",
+"uri":  "sources\Nancy\src\Nancy\DefaultObjectSerializer.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -901,7 +901,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\DefaultResponseFormatter.cs",
+"uri":  "sources\Nancy\src\Nancy\DefaultResponseFormatter.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -914,7 +914,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\DefaultResponseFormatterFactory.cs",
+"uri":  "sources\Nancy\src\Nancy\DefaultResponseFormatterFactory.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -927,7 +927,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\DefaultRootPathProvider.cs",
+"uri":  "sources\Nancy\src\Nancy\DefaultRootPathProvider.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -940,7 +940,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\DefaultRuntimeEnvironmentInformation.cs",
+"uri":  "sources\Nancy\src\Nancy\DefaultRuntimeEnvironmentInformation.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -953,7 +953,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\DefaultSerializerFactory.cs",
+"uri":  "sources\Nancy\src\Nancy\DefaultSerializerFactory.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -966,7 +966,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\DefaultStaticContentProvider.cs",
+"uri":  "sources\Nancy\src\Nancy\DefaultStaticContentProvider.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -979,7 +979,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Diagnostics\ConcurrentLimitedCollection.cs",
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\ConcurrentLimitedCollection.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -992,7 +992,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Diagnostics\DefaultDiagnostics.cs",
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\DefaultDiagnostics.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1005,7 +1005,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Diagnostics\DefaultDiagnosticsConfigurationProvider.cs",
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\DefaultDiagnosticsConfigurationProvider.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1018,7 +1018,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Diagnostics\DefaultRequestTrace.cs",
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\DefaultRequestTrace.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1031,7 +1031,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Diagnostics\DefaultRequestTraceFactory.cs",
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\DefaultRequestTraceFactory.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1044,7 +1044,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Diagnostics\DefaultRequestTracing.cs",
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\DefaultRequestTracing.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1057,7 +1057,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Diagnostics\DefaultTraceLog.cs",
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\DefaultTraceLog.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1070,7 +1070,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Diagnostics\DescriptionAttribute.cs",
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\DescriptionAttribute.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1083,7 +1083,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Diagnostics\DiagnosticModule.cs",
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\DiagnosticModule.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1096,7 +1096,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Diagnostics\DiagnosticsConfiguration.cs",
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\DiagnosticsConfiguration.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1109,7 +1109,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Diagnostics\DiagnosticsConfigurationExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\DiagnosticsConfigurationExtensions.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1122,7 +1122,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Diagnostics\DiagnosticsHook.cs",
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\DiagnosticsHook.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1135,7 +1135,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Diagnostics\DiagnosticsModuleBuilder.cs",
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\DiagnosticsModuleBuilder.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1148,7 +1148,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Diagnostics\DiagnosticsModuleCatalog.cs",
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\DiagnosticsModuleCatalog.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1161,7 +1161,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Diagnostics\DiagnosticsSerializerFactory.cs",
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\DiagnosticsSerializerFactory.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1174,7 +1174,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Diagnostics\DiagnosticsSession.cs",
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\DiagnosticsSession.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1187,7 +1187,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Diagnostics\DiagnosticsViewRenderer.cs",
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\DiagnosticsViewRenderer.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1200,7 +1200,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Diagnostics\DisabledDiagnostics.cs",
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\DisabledDiagnostics.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1213,7 +1213,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Diagnostics\IDiagnostics.cs",
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\IDiagnostics.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1226,7 +1226,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Diagnostics\IDiagnosticsProvider.cs",
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\IDiagnosticsProvider.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1239,7 +1239,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Diagnostics\IInteractiveDiagnostics.cs",
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\IInteractiveDiagnostics.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1252,7 +1252,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Diagnostics\InteractiveDiagnostic.cs",
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\InteractiveDiagnostic.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1265,7 +1265,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Diagnostics\InteractiveDiagnosticMethod.cs",
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\InteractiveDiagnosticMethod.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1278,7 +1278,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Diagnostics\InteractiveDiagnostics.cs",
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\InteractiveDiagnostics.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1291,7 +1291,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Diagnostics\IRequestTrace.cs",
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\IRequestTrace.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1304,7 +1304,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Diagnostics\IRequestTraceFactory.cs",
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\IRequestTraceFactory.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1317,7 +1317,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Diagnostics\IRequestTracing.cs",
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\IRequestTracing.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1330,7 +1330,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Diagnostics\ITraceLog.cs",
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\ITraceLog.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1343,7 +1343,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Diagnostics\Modules\InfoModule.cs",
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\Modules\InfoModule.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1356,7 +1356,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Diagnostics\Modules\InteractiveModule.cs",
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\Modules\InteractiveModule.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1369,7 +1369,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Diagnostics\Modules\MainModule.cs",
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\Modules\MainModule.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1382,7 +1382,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Diagnostics\Modules\SettingsModule.cs",
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\Modules\SettingsModule.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1395,7 +1395,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Diagnostics\Modules\TraceModule.cs",
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\Modules\TraceModule.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1408,7 +1408,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Diagnostics\NullLog.cs",
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\NullLog.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1421,7 +1421,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Diagnostics\RequestData.cs",
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\RequestData.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1434,7 +1434,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Diagnostics\RequestTraceSession.cs",
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\RequestTraceSession.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1447,7 +1447,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Diagnostics\ResponseData.cs",
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\ResponseData.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1460,7 +1460,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Diagnostics\TemplateAttribute.cs",
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\TemplateAttribute.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1473,7 +1473,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Diagnostics\TestingDiagnosticProvider.cs",
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\TestingDiagnosticProvider.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1486,7 +1486,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\DisabledStaticContentProvider.cs",
+"uri":  "sources\Nancy\src\Nancy\DisabledStaticContentProvider.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1499,7 +1499,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\DynamicDictionary.cs",
+"uri":  "sources\Nancy\src\Nancy\DynamicDictionary.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1512,7 +1512,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1525,7 +1525,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ErrorHandling\DefaultStatusCodeHandler.cs",
+"uri":  "sources\Nancy\src\Nancy\ErrorHandling\DefaultStatusCodeHandler.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1538,7 +1538,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ErrorHandling\RouteExecutionEarlyExitException.cs",
+"uri":  "sources\Nancy\src\Nancy\ErrorHandling\RouteExecutionEarlyExitException.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1551,7 +1551,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ErrorPipeline.cs",
+"uri":  "sources\Nancy\src\Nancy\ErrorPipeline.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1564,7 +1564,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Extensions\AssemblyExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy\Extensions\AssemblyExtensions.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1577,7 +1577,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Extensions\CollectionExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy\Extensions\CollectionExtensions.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1590,7 +1590,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Extensions\ContextExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy\Extensions\ContextExtensions.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1603,7 +1603,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Extensions\ModelValidationErrorExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy\Extensions\ModelValidationErrorExtensions.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1616,7 +1616,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Extensions\ModuleExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy\Extensions\ModuleExtensions.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1629,7 +1629,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Extensions\RequestExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy\Extensions\RequestExtensions.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1642,7 +1642,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Extensions\RequestStreamExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy\Extensions\RequestStreamExtensions.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1655,7 +1655,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Extensions\StreamExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy\Extensions\StreamExtensions.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1668,7 +1668,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Extensions\StringExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy\Extensions\StringExtensions.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1681,7 +1681,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Extensions\TypeExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy\Extensions\TypeExtensions.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1694,7 +1694,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\FormatterExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy\FormatterExtensions.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1707,7 +1707,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\HeadResponse.cs",
+"uri":  "sources\Nancy\src\Nancy\HeadResponse.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1720,7 +1720,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Helpers\CacheHelpers.cs",
+"uri":  "sources\Nancy\src\Nancy\Helpers\CacheHelpers.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1733,7 +1733,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Helpers\ExceptionExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy\Helpers\ExceptionExtensions.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1746,7 +1746,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1759,7 +1759,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1772,7 +1772,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Helpers\ReflectionUtils.cs",
+"uri":  "sources\Nancy\src\Nancy\Helpers\ReflectionUtils.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1785,7 +1785,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Helpers\TaskHelpers.cs",
+"uri":  "sources\Nancy\src\Nancy\Helpers\TaskHelpers.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1798,7 +1798,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\HttpFile.cs",
+"uri":  "sources\Nancy\src\Nancy\HttpFile.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1811,7 +1811,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\HttpMultipart.cs",
+"uri":  "sources\Nancy\src\Nancy\HttpMultipart.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1824,7 +1824,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\HttpMultipartBoundary.cs",
+"uri":  "sources\Nancy\src\Nancy\HttpMultipartBoundary.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1837,7 +1837,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\HttpMultipartBuffer.cs",
+"uri":  "sources\Nancy\src\Nancy\HttpMultipartBuffer.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1850,7 +1850,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\HttpMultipartSubStream.cs",
+"uri":  "sources\Nancy\src\Nancy\HttpMultipartSubStream.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1863,7 +1863,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\HttpStatusCode.cs",
+"uri":  "sources\Nancy\src\Nancy\HttpStatusCode.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1876,7 +1876,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\IHideObjectMembers.cs",
+"uri":  "sources\Nancy\src\Nancy\IHideObjectMembers.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1889,7 +1889,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\INancyContextFactory.cs",
+"uri":  "sources\Nancy\src\Nancy\INancyContextFactory.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1902,7 +1902,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\INancyEngine.cs",
+"uri":  "sources\Nancy\src\Nancy\INancyEngine.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1915,7 +1915,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\INancyModule.cs",
+"uri":  "sources\Nancy\src\Nancy\INancyModule.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1928,7 +1928,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\INancyModuleCatalog.cs",
+"uri":  "sources\Nancy\src\Nancy\INancyModuleCatalog.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1941,7 +1941,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\IncludeInNancyAssemblyScanningAttribute.cs",
+"uri":  "sources\Nancy\src\Nancy\IncludeInNancyAssemblyScanningAttribute.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1954,7 +1954,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\IO\RequestStream.cs",
+"uri":  "sources\Nancy\src\Nancy\IO\RequestStream.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1967,7 +1967,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\IO\UnclosableStreamWrapper.cs",
+"uri":  "sources\Nancy\src\Nancy\IO\UnclosableStreamWrapper.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1980,7 +1980,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\IObjectSerializer.cs",
+"uri":  "sources\Nancy\src\Nancy\IObjectSerializer.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -1993,7 +1993,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\IObjectSerializerSelector.cs",
+"uri":  "sources\Nancy\src\Nancy\IObjectSerializerSelector.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -2006,7 +2006,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\IResourceAssemblyProvider.cs",
+"uri":  "sources\Nancy\src\Nancy\IResourceAssemblyProvider.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -2019,7 +2019,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\IResponseFormatter.cs",
+"uri":  "sources\Nancy\src\Nancy\IResponseFormatter.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -2032,7 +2032,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\IResponseFormatterFactory.cs",
+"uri":  "sources\Nancy\src\Nancy\IResponseFormatterFactory.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -2045,7 +2045,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\IRootPathProvider.cs",
+"uri":  "sources\Nancy\src\Nancy\IRootPathProvider.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -2058,7 +2058,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\IRuntimeEnvironmentInformation.cs",
+"uri":  "sources\Nancy\src\Nancy\IRuntimeEnvironmentInformation.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -2071,7 +2071,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ISerializer.cs",
+"uri":  "sources\Nancy\src\Nancy\ISerializer.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -2084,7 +2084,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ISerializerFactory.cs",
+"uri":  "sources\Nancy\src\Nancy\ISerializerFactory.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -2097,7 +2097,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\IStaticContentProvider.cs",
+"uri":  "sources\Nancy\src\Nancy\IStaticContentProvider.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -2110,7 +2110,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\IStatusCodeHandler.cs",
+"uri":  "sources\Nancy\src\Nancy\IStatusCodeHandler.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -2123,7 +2123,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Json\Converters\TimeSpanConverter.cs",
+"uri":  "sources\Nancy\src\Nancy\Json\Converters\TimeSpanConverter.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -2136,7 +2136,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Json\Converters\TupleConverter.cs",
+"uri":  "sources\Nancy\src\Nancy\Json\Converters\TupleConverter.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -2149,7 +2149,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Json\DefaultJsonConfigurationProvider.cs",
+"uri":  "sources\Nancy\src\Nancy\Json\DefaultJsonConfigurationProvider.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -2162,7 +2162,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Json\JavaScriptConverter.cs",
+"uri":  "sources\Nancy\src\Nancy\Json\JavaScriptConverter.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -2175,7 +2175,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Json\JavaScriptPrimitiveConverter.cs",
+"uri":  "sources\Nancy\src\Nancy\Json\JavaScriptPrimitiveConverter.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -2188,7 +2188,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"uri":  "sources\Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -2201,7 +2201,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Json\JavaScriptTypeResolver.cs",
+"uri":  "sources\Nancy\src\Nancy\Json\JavaScriptTypeResolver.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -2214,7 +2214,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Json\Json.cs",
+"uri":  "sources\Nancy\src\Nancy\Json\Json.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -2227,7 +2227,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Json\JsonConfiguration.cs",
+"uri":  "sources\Nancy\src\Nancy\Json\JsonConfiguration.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -2240,7 +2240,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Json\JsonConfigurationExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy\Json\JsonConfigurationExtensions.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -2253,7 +2253,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -2266,7 +2266,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Json\JsonSerializer.cs",
+"uri":  "sources\Nancy\src\Nancy\Json\JsonSerializer.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -2279,7 +2279,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Json\ScriptIgnoreAttribute.cs",
+"uri":  "sources\Nancy\src\Nancy\Json\ScriptIgnoreAttribute.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -2292,7 +2292,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Json\StringBuilderExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy\Json\StringBuilderExtensions.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -2305,7 +2305,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Jsonp.cs",
+"uri":  "sources\Nancy\src\Nancy\Jsonp.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -2318,7 +2318,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\JsonpApplicationStartup.cs",
+"uri":  "sources\Nancy\src\Nancy\JsonpApplicationStartup.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -2331,7 +2331,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Localization\ITextResource.cs",
+"uri":  "sources\Nancy\src\Nancy\Localization\ITextResource.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -2344,7 +2344,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Localization\ResourceBasedTextResource.cs",
+"uri":  "sources\Nancy\src\Nancy\Localization\ResourceBasedTextResource.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -2357,7 +2357,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Localization\TextResourceFinder.cs",
+"uri":  "sources\Nancy\src\Nancy\Localization\TextResourceFinder.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -2370,7 +2370,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -2383,7 +2383,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ModelBinding\BindingConfig.cs",
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\BindingConfig.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -2396,7 +2396,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ModelBinding\BindingContext.cs",
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\BindingContext.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -2409,7 +2409,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ModelBinding\BindingDefaults.cs",
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\BindingDefaults.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -2422,7 +2422,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ModelBinding\BindingMemberInfo.cs",
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\BindingMemberInfo.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -2435,7 +2435,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -2448,7 +2448,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ModelBinding\DefaultBodyDeserializers\JsonBodyDeserializer.cs",
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBodyDeserializers\JsonBodyDeserializer.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -2461,7 +2461,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ModelBinding\DefaultBodyDeserializers\XmlBodyDeserializer.cs",
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBodyDeserializers\XmlBodyDeserializer.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -2474,7 +2474,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ModelBinding\DefaultConverters\CollectionConverter.cs",
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultConverters\CollectionConverter.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -2487,7 +2487,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ModelBinding\DefaultConverters\DateTimeConverter.cs",
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultConverters\DateTimeConverter.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -2500,7 +2500,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ModelBinding\DefaultConverters\FallbackConverter.cs",
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultConverters\FallbackConverter.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -2513,7 +2513,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ModelBinding\DefaultConverters\NumericConverter.cs",
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultConverters\NumericConverter.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -2526,7 +2526,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ModelBinding\DefaultFieldNameConverter.cs",
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultFieldNameConverter.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -2539,7 +2539,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ModelBinding\DefaultModelBinderLocator.cs",
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultModelBinderLocator.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -2552,7 +2552,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ModelBinding\DynamicModelBinderAdapter.cs",
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\DynamicModelBinderAdapter.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -2565,7 +2565,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ModelBinding\ExpressionExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\ExpressionExtensions.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -2578,7 +2578,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ModelBinding\IBinder.cs",
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\IBinder.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -2591,7 +2591,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ModelBinding\IBodyDeserializer.cs",
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\IBodyDeserializer.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -2604,7 +2604,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ModelBinding\IFieldNameConverter.cs",
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\IFieldNameConverter.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -2617,7 +2617,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ModelBinding\IModelBinder.cs",
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\IModelBinder.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -2630,7 +2630,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ModelBinding\IModelBinderLocator.cs",
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\IModelBinderLocator.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -2643,7 +2643,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ModelBinding\ITypeConverter.cs",
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\ITypeConverter.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -2656,7 +2656,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ModelBinding\ModelBindingException.cs",
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\ModelBindingException.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -2669,7 +2669,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ModelBinding\ModuleExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\ModuleExtensions.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -2682,7 +2682,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ModelBinding\PropertyBindingException.cs",
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\PropertyBindingException.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -2695,7 +2695,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\NamedPipelineBase.cs",
+"uri":  "sources\Nancy\src\Nancy\NamedPipelineBase.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -2708,7 +2708,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\NancyContext.cs",
+"uri":  "sources\Nancy\src\Nancy\NancyContext.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -2721,7 +2721,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\NancyEngine.cs",
+"uri":  "sources\Nancy\src\Nancy\NancyEngine.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -2734,7 +2734,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\NancyEngineExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy\NancyEngineExtensions.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -2747,7 +2747,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\NancyModule.cs",
+"uri":  "sources\Nancy\src\Nancy\NancyModule.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -2760,7 +2760,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\NegotiatorExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy\NegotiatorExtensions.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -2773,7 +2773,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\NotFoundResponse.cs",
+"uri":  "sources\Nancy\src\Nancy\NotFoundResponse.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -2786,7 +2786,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Owin\DelegateExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy\Owin\DelegateExtensions.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -2799,7 +2799,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Owin\NancyContextExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy\Owin\NancyContextExtensions.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -2812,7 +2812,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Owin\NancyMiddleware.cs",
+"uri":  "sources\Nancy\src\Nancy\Owin\NancyMiddleware.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -2825,7 +2825,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Owin\NancyOptions.cs",
+"uri":  "sources\Nancy\src\Nancy\Owin\NancyOptions.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -2838,7 +2838,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Owin\NancyOptionsExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy\Owin\NancyOptionsExtensions.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -2851,7 +2851,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\PipelineItem.cs",
+"uri":  "sources\Nancy\src\Nancy\PipelineItem.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -2864,7 +2864,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Request.cs",
+"uri":  "sources\Nancy\src\Nancy\Request.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -2877,7 +2877,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\RequestExecutionException.cs",
+"uri":  "sources\Nancy\src\Nancy\RequestExecutionException.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -2890,7 +2890,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\RequestHeaders.cs",
+"uri":  "sources\Nancy\src\Nancy\RequestHeaders.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -2903,7 +2903,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ResourceAssemblyProvider.cs",
+"uri":  "sources\Nancy\src\Nancy\ResourceAssemblyProvider.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -2916,7 +2916,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Response.cs",
+"uri":  "sources\Nancy\src\Nancy\Response.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -2929,7 +2929,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ResponseExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy\ResponseExtensions.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -2942,7 +2942,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Responses\DefaultJsonSerializer.cs",
+"uri":  "sources\Nancy\src\Nancy\Responses\DefaultJsonSerializer.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -2955,7 +2955,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Responses\DefaultXmlSerializer.cs",
+"uri":  "sources\Nancy\src\Nancy\Responses\DefaultXmlSerializer.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -2968,7 +2968,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Responses\EmbeddedFileResponse.cs",
+"uri":  "sources\Nancy\src\Nancy\Responses\EmbeddedFileResponse.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -2981,7 +2981,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Responses\GenericFileResponse.cs",
+"uri":  "sources\Nancy\src\Nancy\Responses\GenericFileResponse.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -2994,7 +2994,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Responses\HtmlResponse.cs",
+"uri":  "sources\Nancy\src\Nancy\Responses\HtmlResponse.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -3007,7 +3007,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Responses\JsonResponse.cs",
+"uri":  "sources\Nancy\src\Nancy\Responses\JsonResponse.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -3020,7 +3020,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Responses\MaterialisingResponse.cs",
+"uri":  "sources\Nancy\src\Nancy\Responses\MaterialisingResponse.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -3033,7 +3033,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Responses\NegotiatedResponse.cs",
+"uri":  "sources\Nancy\src\Nancy\Responses\NegotiatedResponse.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -3046,7 +3046,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Responses\Negotiation\DefaultResponseNegotiator.cs",
+"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\DefaultResponseNegotiator.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -3059,7 +3059,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Responses\Negotiation\IResponseNegotiator.cs",
+"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\IResponseNegotiator.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -3072,7 +3072,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Responses\Negotiation\IResponseProcessor.cs",
+"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\IResponseProcessor.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -3085,7 +3085,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Responses\Negotiation\JsonProcessor.cs",
+"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\JsonProcessor.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -3098,7 +3098,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Responses\Negotiation\MatchResult.cs",
+"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\MatchResult.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -3111,7 +3111,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Responses\Negotiation\MediaRange.cs",
+"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\MediaRange.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -3124,7 +3124,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Responses\Negotiation\MediaRangeParameters.cs",
+"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\MediaRangeParameters.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -3137,7 +3137,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Responses\Negotiation\MediaType.cs",
+"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\MediaType.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -3150,7 +3150,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Responses\Negotiation\NegotiationContext.cs",
+"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\NegotiationContext.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -3163,7 +3163,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Responses\Negotiation\Negotiator.cs",
+"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\Negotiator.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -3176,7 +3176,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Responses\Negotiation\ProcessorMatch.cs",
+"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\ProcessorMatch.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -3189,7 +3189,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Responses\Negotiation\ResponseProcessor.cs",
+"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\ResponseProcessor.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -3202,7 +3202,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Responses\Negotiation\ViewProcessor.cs",
+"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\ViewProcessor.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -3215,7 +3215,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Responses\Negotiation\XmlProcessor.cs",
+"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\XmlProcessor.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -3228,7 +3228,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Responses\NotAcceptableResponse.cs",
+"uri":  "sources\Nancy\src\Nancy\Responses\NotAcceptableResponse.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -3241,7 +3241,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Responses\RedirectResponse.cs",
+"uri":  "sources\Nancy\src\Nancy\Responses\RedirectResponse.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -3254,7 +3254,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Responses\StreamResponse.cs",
+"uri":  "sources\Nancy\src\Nancy\Responses\StreamResponse.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -3267,7 +3267,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Responses\TextResponse.cs",
+"uri":  "sources\Nancy\src\Nancy\Responses\TextResponse.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -3280,7 +3280,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Responses\XmlResponse.cs",
+"uri":  "sources\Nancy\src\Nancy\Responses\XmlResponse.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -3293,7 +3293,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\RootPathApplicationStartup.cs",
+"uri":  "sources\Nancy\src\Nancy\RootPathApplicationStartup.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -3306,7 +3306,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Routing\Constraints\AlphaRouteSegmentConstraint.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\Constraints\AlphaRouteSegmentConstraint.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -3319,7 +3319,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Routing\Constraints\BoolRouteSegmentConstraint.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\Constraints\BoolRouteSegmentConstraint.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -3332,7 +3332,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Routing\Constraints\CustomDateTimeRouteSegmentConstraint.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\Constraints\CustomDateTimeRouteSegmentConstraint.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -3345,7 +3345,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Routing\Constraints\DateTimeRouteSegmentConstraint.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\Constraints\DateTimeRouteSegmentConstraint.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -3358,7 +3358,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Routing\Constraints\DecimalRouteSegmentConstraint.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\Constraints\DecimalRouteSegmentConstraint.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -3371,7 +3371,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Routing\Constraints\GuidRouteSegmentConstraint.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\Constraints\GuidRouteSegmentConstraint.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -3384,7 +3384,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Routing\Constraints\IntRouteSegmentConstraint.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\Constraints\IntRouteSegmentConstraint.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -3397,7 +3397,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Routing\Constraints\IRouteSegmentConstraint.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\Constraints\IRouteSegmentConstraint.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -3410,7 +3410,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Routing\Constraints\LengthRouteSegmentConstraint.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\Constraints\LengthRouteSegmentConstraint.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -3423,7 +3423,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Routing\Constraints\LongRouteSegmentConstraint.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\Constraints\LongRouteSegmentConstraint.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -3436,7 +3436,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Routing\Constraints\MaxLengthRouteSegmentConstraint.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\Constraints\MaxLengthRouteSegmentConstraint.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -3449,7 +3449,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Routing\Constraints\MaxRouteSegmentConstraint.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\Constraints\MaxRouteSegmentConstraint.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -3462,7 +3462,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Routing\Constraints\MinLengthRouteSegmentConstraint.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\Constraints\MinLengthRouteSegmentConstraint.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -3475,7 +3475,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Routing\Constraints\MinRouteSegmentConstraint.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\Constraints\MinRouteSegmentConstraint.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -3488,7 +3488,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Routing\Constraints\ParameterizedRouteSegmentConstraintBase.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\Constraints\ParameterizedRouteSegmentConstraintBase.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -3501,7 +3501,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Routing\Constraints\RangeRouteSegmentConstraint.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\Constraints\RangeRouteSegmentConstraint.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -3514,7 +3514,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Routing\Constraints\RouteSegmentConstraintBase.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\Constraints\RouteSegmentConstraintBase.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -3527,7 +3527,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Routing\Constraints\VersionRouteSegmentConstraint.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\Constraints\VersionRouteSegmentConstraint.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -3540,7 +3540,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Routing\DefaultNancyModuleBuilder.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\DefaultNancyModuleBuilder.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -3553,7 +3553,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Routing\DefaultRequestDispatcher.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\DefaultRequestDispatcher.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -3566,7 +3566,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Routing\DefaultRouteCacheProvider.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\DefaultRouteCacheProvider.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -3579,7 +3579,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Routing\DefaultRouteDescriptionProvider.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\DefaultRouteDescriptionProvider.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -3592,7 +3592,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Routing\DefaultRouteInvoker.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\DefaultRouteInvoker.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -3605,7 +3605,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Routing\DefaultRoutePatternMatcher.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\DefaultRoutePatternMatcher.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -3618,7 +3618,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Routing\DefaultRouteResolver.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\DefaultRouteResolver.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -3631,7 +3631,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Routing\DefaultRouteSegmentExtractor.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\DefaultRouteSegmentExtractor.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -3644,7 +3644,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Routing\INancyModuleBuilder.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\INancyModuleBuilder.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -3657,7 +3657,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Routing\IRequestDispatcher.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\IRequestDispatcher.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -3670,7 +3670,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Routing\IRouteCache.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\IRouteCache.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -3683,7 +3683,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Routing\IRouteCacheProvider.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\IRouteCacheProvider.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -3696,7 +3696,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Routing\IRouteDescriptionProvider.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\IRouteDescriptionProvider.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -3709,7 +3709,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Routing\IRouteInvoker.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\IRouteInvoker.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -3722,7 +3722,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Routing\IRouteMetadataProvider.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\IRouteMetadataProvider.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -3735,7 +3735,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Routing\IRoutePatternMatcher.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\IRoutePatternMatcher.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -3748,7 +3748,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Routing\IRoutePatternMatchResult.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\IRoutePatternMatchResult.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -3761,7 +3761,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Routing\IRouteResolver.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\IRouteResolver.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -3774,7 +3774,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Routing\IRouteSegmentExtractor.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\IRouteSegmentExtractor.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -3787,7 +3787,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Routing\MethodNotAllowedRoute.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\MethodNotAllowedRoute.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -3800,7 +3800,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Routing\NotFoundRoute.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\NotFoundRoute.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -3813,7 +3813,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Routing\OptionsRoute.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\OptionsRoute.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -3826,7 +3826,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Routing\ParameterSegmentInformation.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\ParameterSegmentInformation.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -3839,7 +3839,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Routing\ResolveResult.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\ResolveResult.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -3852,7 +3852,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Routing\Route.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\Route.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -3865,7 +3865,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Routing\RouteCache.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\RouteCache.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -3878,7 +3878,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Routing\RouteCacheExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\RouteCacheExtensions.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -3891,7 +3891,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Routing\RouteDescription.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\RouteDescription.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -3904,7 +3904,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Routing\RouteMetadata.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\RouteMetadata.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -3917,7 +3917,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Routing\RouteMetadataProvider.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\RouteMetadataProvider.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -3930,7 +3930,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Routing\RoutePatternMatchResult.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\RoutePatternMatchResult.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -3943,7 +3943,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Routing\Trie\IRouteResolverTrie.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\Trie\IRouteResolverTrie.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -3956,7 +3956,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Routing\Trie\ITrieNodeFactory.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\Trie\ITrieNodeFactory.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -3969,7 +3969,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Routing\Trie\MatchResult.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\Trie\MatchResult.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -3982,7 +3982,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Routing\Trie\NodeData.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\Trie\NodeData.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -3995,7 +3995,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Routing\Trie\NodeDataExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\Trie\NodeDataExtensions.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -4008,7 +4008,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Routing\Trie\Nodes\CaptureNode.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\Trie\Nodes\CaptureNode.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -4021,7 +4021,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Routing\Trie\Nodes\CaptureNodeWithConstraint.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\Trie\Nodes\CaptureNodeWithConstraint.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -4034,7 +4034,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Routing\Trie\Nodes\CaptureNodeWithDefaultValue.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\Trie\Nodes\CaptureNodeWithDefaultValue.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -4047,7 +4047,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Routing\Trie\Nodes\CaptureNodeWithMultipleParameters.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\Trie\Nodes\CaptureNodeWithMultipleParameters.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -4060,7 +4060,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Routing\Trie\Nodes\GreedyCaptureNode.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\Trie\Nodes\GreedyCaptureNode.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -4073,7 +4073,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Routing\Trie\Nodes\GreedyRegExCaptureNode.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\Trie\Nodes\GreedyRegExCaptureNode.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -4086,7 +4086,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Routing\Trie\Nodes\LiteralNode.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\Trie\Nodes\LiteralNode.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -4099,7 +4099,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Routing\Trie\Nodes\OptionalCaptureNode.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\Trie\Nodes\OptionalCaptureNode.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -4112,7 +4112,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Routing\Trie\Nodes\RegExNode.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\Trie\Nodes\RegExNode.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -4125,7 +4125,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Routing\Trie\Nodes\RootNode.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\Trie\Nodes\RootNode.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -4138,7 +4138,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Routing\Trie\Nodes\TrieNode.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\Trie\Nodes\TrieNode.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -4151,7 +4151,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Routing\Trie\RouteResolverTrie.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\Trie\RouteResolverTrie.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -4164,7 +4164,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Routing\Trie\SegmentMatch.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\Trie\SegmentMatch.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -4177,7 +4177,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Routing\Trie\TrieNodeFactory.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\Trie\TrieNodeFactory.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -4190,7 +4190,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Security\ClaimsPrincipalExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy\Security\ClaimsPrincipalExtensions.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -4203,7 +4203,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Security\Csrf.cs",
+"uri":  "sources\Nancy\src\Nancy\Security\Csrf.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -4216,7 +4216,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Security\CsrfApplicationStartup.cs",
+"uri":  "sources\Nancy\src\Nancy\Security\CsrfApplicationStartup.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -4229,7 +4229,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Security\CsrfToken.cs",
+"uri":  "sources\Nancy\src\Nancy\Security\CsrfToken.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -4242,7 +4242,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Security\CsrfTokenExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy\Security\CsrfTokenExtensions.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -4255,7 +4255,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Security\CsrfTokenValidationResult.cs",
+"uri":  "sources\Nancy\src\Nancy\Security\CsrfTokenValidationResult.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -4268,7 +4268,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Security\CsrfValidationException.cs",
+"uri":  "sources\Nancy\src\Nancy\Security\CsrfValidationException.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -4281,7 +4281,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Security\DefaultCsrfTokenValidator.cs",
+"uri":  "sources\Nancy\src\Nancy\Security\DefaultCsrfTokenValidator.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -4294,7 +4294,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Security\ICsrfTokenValidator.cs",
+"uri":  "sources\Nancy\src\Nancy\Security\ICsrfTokenValidator.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -4307,7 +4307,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Security\ModuleSecurity.cs",
+"uri":  "sources\Nancy\src\Nancy\Security\ModuleSecurity.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -4320,7 +4320,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Security\SecurityHooks.cs",
+"uri":  "sources\Nancy\src\Nancy\Security\SecurityHooks.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -4333,7 +4333,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Security\SSLProxy.cs",
+"uri":  "sources\Nancy\src\Nancy\Security\SSLProxy.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -4346,7 +4346,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Session\CookieBasedSessions.cs",
+"uri":  "sources\Nancy\src\Nancy\Session\CookieBasedSessions.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -4359,7 +4359,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Session\CookieBasedSessionsConfiguration.cs",
+"uri":  "sources\Nancy\src\Nancy\Session\CookieBasedSessionsConfiguration.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -4372,7 +4372,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Session\ISession.cs",
+"uri":  "sources\Nancy\src\Nancy\Session\ISession.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -4385,7 +4385,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Session\NullSessionProvider.cs",
+"uri":  "sources\Nancy\src\Nancy\Session\NullSessionProvider.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -4398,7 +4398,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Session\Session.cs",
+"uri":  "sources\Nancy\src\Nancy\Session\Session.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -4411,7 +4411,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\StaticConfiguration.cs",
+"uri":  "sources\Nancy\src\Nancy\StaticConfiguration.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -4424,7 +4424,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\StaticContent.cs",
+"uri":  "sources\Nancy\src\Nancy\StaticContent.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -4437,7 +4437,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -4450,7 +4450,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Url.cs",
+"uri":  "sources\Nancy\src\Nancy\Url.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -4463,7 +4463,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Validation\CompositeValidator.cs",
+"uri":  "sources\Nancy\src\Nancy\Validation\CompositeValidator.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -4476,7 +4476,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Validation\DefaultValidatorLocator.cs",
+"uri":  "sources\Nancy\src\Nancy\Validation\DefaultValidatorLocator.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -4489,7 +4489,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Validation\IModelValidator.cs",
+"uri":  "sources\Nancy\src\Nancy\Validation\IModelValidator.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -4502,7 +4502,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Validation\IModelValidatorFactory.cs",
+"uri":  "sources\Nancy\src\Nancy\Validation\IModelValidatorFactory.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -4515,7 +4515,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Validation\IModelValidatorLocator.cs",
+"uri":  "sources\Nancy\src\Nancy\Validation\IModelValidatorLocator.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -4528,7 +4528,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Validation\ModelValidationDescriptor.cs",
+"uri":  "sources\Nancy\src\Nancy\Validation\ModelValidationDescriptor.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -4541,7 +4541,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Validation\ModelValidationError.cs",
+"uri":  "sources\Nancy\src\Nancy\Validation\ModelValidationError.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -4554,7 +4554,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Validation\ModelValidationException.cs",
+"uri":  "sources\Nancy\src\Nancy\Validation\ModelValidationException.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -4567,7 +4567,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Validation\ModelValidationResult.cs",
+"uri":  "sources\Nancy\src\Nancy\Validation\ModelValidationResult.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -4580,7 +4580,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Validation\ModelValidationRule.cs",
+"uri":  "sources\Nancy\src\Nancy\Validation\ModelValidationRule.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -4593,7 +4593,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Validation\ModuleExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy\Validation\ModuleExtensions.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -4606,7 +4606,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Validation\Rules\ComparisonOperator.cs",
+"uri":  "sources\Nancy\src\Nancy\Validation\Rules\ComparisonOperator.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -4619,7 +4619,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Validation\Rules\ComparisonValidationRule.cs",
+"uri":  "sources\Nancy\src\Nancy\Validation\Rules\ComparisonValidationRule.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -4632,7 +4632,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Validation\Rules\NotEmptyValidationRule.cs",
+"uri":  "sources\Nancy\src\Nancy\Validation\Rules\NotEmptyValidationRule.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -4645,7 +4645,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Validation\Rules\NotNullValidationRule.cs",
+"uri":  "sources\Nancy\src\Nancy\Validation\Rules\NotNullValidationRule.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -4658,7 +4658,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Validation\Rules\RegexValidationRule.cs",
+"uri":  "sources\Nancy\src\Nancy\Validation\Rules\RegexValidationRule.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -4671,7 +4671,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Validation\Rules\StringLengthValidationRule.cs",
+"uri":  "sources\Nancy\src\Nancy\Validation\Rules\StringLengthValidationRule.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -4684,7 +4684,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ViewEngines\AmbiguousViewsException.cs",
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\AmbiguousViewsException.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -4697,7 +4697,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ViewEngines\DefaultFileSystemReader.cs",
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\DefaultFileSystemReader.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -4710,7 +4710,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ViewEngines\DefaultRenderContext.cs",
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\DefaultRenderContext.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -4723,7 +4723,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ViewEngines\DefaultRenderContextFactory.cs",
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\DefaultRenderContextFactory.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -4736,7 +4736,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ViewEngines\DefaultResourceReader.cs",
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\DefaultResourceReader.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -4749,7 +4749,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ViewEngines\DefaultViewCache.cs",
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\DefaultViewCache.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -4762,7 +4762,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ViewEngines\DefaultViewFactory.cs",
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\DefaultViewFactory.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -4775,7 +4775,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ViewEngines\DefaultViewLocator.cs",
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\DefaultViewLocator.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -4788,7 +4788,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ViewEngines\DefaultViewRenderer.cs",
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\DefaultViewRenderer.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -4801,7 +4801,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ViewEngines\DefaultViewResolver.cs",
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\DefaultViewResolver.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -4814,7 +4814,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ViewEngines\Extensions.cs",
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\Extensions.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -4827,7 +4827,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ViewEngines\FileSystemViewLocationProvider.cs",
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\FileSystemViewLocationProvider.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -4840,7 +4840,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ViewEngines\FileSystemViewLocationResult.cs",
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\FileSystemViewLocationResult.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -4853,7 +4853,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ViewEngines\IFileSystemReader.cs",
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\IFileSystemReader.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -4866,7 +4866,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ViewEngines\IRenderContext.cs",
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\IRenderContext.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -4879,7 +4879,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ViewEngines\IRenderContextFactory.cs",
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\IRenderContextFactory.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -4892,7 +4892,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ViewEngines\IResourceReader.cs",
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\IResourceReader.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -4905,7 +4905,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ViewEngines\IViewCache.cs",
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\IViewCache.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -4918,7 +4918,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ViewEngines\IViewEngine.cs",
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\IViewEngine.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -4931,7 +4931,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ViewEngines\IViewFactory.cs",
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\IViewFactory.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -4944,7 +4944,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ViewEngines\IViewLocationProvider.cs",
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\IViewLocationProvider.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -4957,7 +4957,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ViewEngines\IViewLocator.cs",
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\IViewLocator.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -4970,7 +4970,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ViewEngines\IViewRenderer.cs",
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\IViewRenderer.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -4983,7 +4983,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ViewEngines\IViewResolver.cs",
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\IViewResolver.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -4996,7 +4996,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ViewEngines\ResourceViewLocationProvider.cs",
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\ResourceViewLocationProvider.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -5009,7 +5009,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\ISuperSimpleViewEngineMatcher.cs",
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\ISuperSimpleViewEngineMatcher.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -5022,7 +5022,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\IViewEngineHost.cs",
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\IViewEngineHost.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -5035,7 +5035,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\NancyViewEngineHost.cs",
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\NancyViewEngineHost.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -5048,7 +5048,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\SuperSimpleViewEngine.cs",
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\SuperSimpleViewEngine.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -5061,7 +5061,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\SuperSimpleViewEngineRegistrations.cs",
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\SuperSimpleViewEngineRegistrations.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -5074,7 +5074,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\SuperSimpleViewEngineWrapper.cs",
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\SuperSimpleViewEngineWrapper.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -5087,7 +5087,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ViewEngines\ViewEngineApplicationStartup.cs",
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\ViewEngineApplicationStartup.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -5100,7 +5100,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ViewEngines\ViewEngineStartupContext.cs",
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\ViewEngineStartupContext.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -5113,7 +5113,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ViewEngines\ViewLocationContext.cs",
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\ViewLocationContext.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -5126,7 +5126,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ViewEngines\ViewLocationResult.cs",
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\ViewLocationResult.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -5139,7 +5139,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ViewEngines\ViewNotFoundException.cs",
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\ViewNotFoundException.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -5152,7 +5152,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ViewEngines\ViewRenderException.cs",
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\ViewRenderException.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -5165,7 +5165,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ViewRenderer.cs",
+"uri":  "sources\Nancy\src\Nancy\ViewRenderer.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -5178,7 +5178,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Xml\DefaultXmlConfigurationProvider.cs",
+"uri":  "sources\Nancy\src\Nancy\Xml\DefaultXmlConfigurationProvider.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -5191,7 +5191,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Xml\XmlConfiguration.cs",
+"uri":  "sources\Nancy\src\Nancy\Xml\XmlConfiguration.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -5204,7 +5204,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Xml\XmlConfigurationExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy\Xml\XmlConfigurationExtensions.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -5217,7 +5217,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "Nancy\src\SharedAssemblyInfo.cs",
+"uri":  "sources\Nancy\src\SharedAssemblyInfo.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,

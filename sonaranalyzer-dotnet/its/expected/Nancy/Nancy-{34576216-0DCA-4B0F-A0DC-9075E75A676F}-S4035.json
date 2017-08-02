@@ -4,7 +4,7 @@
 "id":  "S4035",
 "message":  "Seal class 'DynamicDictionary' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
-"uri":  "Nancy\src\Nancy\DynamicDictionary.cs",
+"uri":  "sources\Nancy\src\Nancy\DynamicDictionary.cs",
 "region":  {
 "startLine":  15,
 "startColumn":  18,
@@ -17,7 +17,7 @@
 "id":  "S4035",
 "message":  "Seal class 'DynamicDictionaryValue' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
-"uri":  "Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
 "region":  {
 "startLine":  12,
 "startColumn":  18,
@@ -30,7 +30,7 @@
 "id":  "S4035",
 "message":  "Seal class 'BindingMemberInfo' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ModelBinding\BindingMemberInfo.cs",
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\BindingMemberInfo.cs",
 "region":  {
 "startLine":  11,
 "startColumn":  18,
@@ -43,7 +43,7 @@
 "id":  "S4035",
 "message":  "Seal class 'ViewLocationResult' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ViewEngines\ViewLocationResult.cs",
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\ViewLocationResult.cs",
 "region":  {
 "startLine":  9,
 "startColumn":  18,

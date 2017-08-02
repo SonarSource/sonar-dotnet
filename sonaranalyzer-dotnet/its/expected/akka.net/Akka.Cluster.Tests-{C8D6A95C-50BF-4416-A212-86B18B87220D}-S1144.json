@@ -4,7 +4,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private constructor 'AutoDownTestActor'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster.Tests\AutoDownSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests\AutoDownSpec.cs",
 "region":  {
 "startLine":  47,
 "startColumn":  13,
@@ -17,7 +17,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private field 'g1'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster.Tests\ClusterDomainEventPublisherSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests\ClusterDomainEventPublisherSpec.cs",
 "region":  {
 "startLine":  41,
 "startColumn":  9,
@@ -30,7 +30,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private field 'bJoining'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster.Tests\ClusterDomainEventSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests\ClusterDomainEventSpec.cs",
 "region":  {
 "startLine":  23,
 "startColumn":  9,
@@ -43,7 +43,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private field 'bRemoved'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster.Tests\ClusterDomainEventSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests\ClusterDomainEventSpec.cs",
 "region":  {
 "startLine":  26,
 "startColumn":  9,
@@ -56,7 +56,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private field 'dRemoved'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster.Tests\ClusterDomainEventSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests\ClusterDomainEventSpec.cs",
 "region":  {
 "startLine":  33,
 "startColumn":  9,
@@ -69,7 +69,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private method 'MarkNodeAsAvailable'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster.Tests\ClusterHeartBeatSenderStateSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests\ClusterHeartBeatSenderStateSpec.cs",
 "region":  {
 "startLine":  49,
 "startColumn":  13,
@@ -82,7 +82,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private field 'b2'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster.Tests\GossipSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests\GossipSpec.cs",
 "region":  {
 "startLine":  22,
 "startColumn":  9,
@@ -95,7 +95,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private field 'e3'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster.Tests\GossipSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests\GossipSpec.cs",
 "region":  {
 "startLine":  29,
 "startColumn":  9,
@@ -108,7 +108,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private field 'f1'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster.Tests\Proto\ClusterMessageSerializerSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests\Proto\ClusterMessageSerializerSpec.cs",
 "region":  {
 "startLine":  58,
 "startColumn":  9,

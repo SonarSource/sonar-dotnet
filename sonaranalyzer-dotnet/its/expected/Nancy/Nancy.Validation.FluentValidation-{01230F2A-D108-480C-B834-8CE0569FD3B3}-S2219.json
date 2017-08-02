@@ -4,7 +4,7 @@
 "id":  "S2219",
 "message":  "Use the 'IsInstanceOfType()' method instead.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Validation.FluentValidation\FluentValidationValidatorFactory.cs",
+"uri":  "sources\Nancy\src\Nancy.Validation.FluentValidation\FluentValidationValidatorFactory.cs",
 "region":  {
 "startLine":  50,
 "startColumn":  47,

@@ -4,7 +4,7 @@
 "id":  "S3626",
 "message":  "Remove this redundant jump.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\PersistentView.Recovery.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\PersistentView.Recovery.cs",
 "region":  {
 "startLine":  113,
 "startColumn":  46,
@@ -17,7 +17,7 @@
 "id":  "S3626",
 "message":  "Remove this redundant jump.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\PersistentView.Recovery.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\PersistentView.Recovery.cs",
 "region":  {
 "startLine":  175,
 "startColumn":  46,
@@ -30,7 +30,7 @@
 "id":  "S3626",
 "message":  "Remove this redundant jump.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\PersistentView.Recovery.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\PersistentView.Recovery.cs",
 "region":  {
 "startLine":  207,
 "startColumn":  46,

@@ -4,7 +4,7 @@
 "id":  "S131",
 "message":  "Add a 'default' clause to this 'switch' statement.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\MsgDecoder.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MsgDecoder.cs",
 "region":  {
 "startLine":  50,
 "startColumn":  21,
@@ -17,7 +17,7 @@
 "id":  "S131",
 "message":  "Add a 'default' clause to this 'switch' statement.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit\MsgDecoder.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\MsgDecoder.cs",
 "region":  {
 "startLine":  62,
 "startColumn":  21,

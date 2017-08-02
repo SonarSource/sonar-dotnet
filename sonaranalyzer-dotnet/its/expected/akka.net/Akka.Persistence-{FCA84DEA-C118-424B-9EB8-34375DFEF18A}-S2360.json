@@ -4,7 +4,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Eventsourced.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Eventsourced.cs",
 "region":  {
 "startLine":  314,
 "startColumn":  81,
@@ -17,7 +17,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Fsm\PersistentFSMBase.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Fsm\PersistentFSMBase.cs",
 "region":  {
 "startLine":  144,
 "startColumn":  82,
@@ -30,7 +30,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Fsm\PersistentFSMBase.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Fsm\PersistentFSMBase.cs",
 "region":  {
 "startLine":  159,
 "startColumn":  84,
@@ -43,7 +43,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Fsm\PersistentFSMBase.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Fsm\PersistentFSMBase.cs",
 "region":  {
 "startLine":  227,
 "startColumn":  85,
@@ -56,7 +56,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Fsm\PersistentFSMBase.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Fsm\PersistentFSMBase.cs",
 "region":  {
 "startLine":  718,
 "startColumn":  72,
@@ -69,7 +69,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Fsm\PersistentFSMBase.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Fsm\PersistentFSMBase.cs",
 "region":  {
 "startLine":  718,
 "startColumn":  106,
@@ -82,7 +82,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Fsm\PersistentFSMBase.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Fsm\PersistentFSMBase.cs",
 "region":  {
 "startLine":  719,
 "startColumn":  38,
@@ -95,7 +95,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Fsm\PersistentFSMBase.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Fsm\PersistentFSMBase.cs",
 "region":  {
 "startLine":  719,
 "startColumn":  74,
@@ -108,7 +108,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Fsm\PersistentFSMBase.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Fsm\PersistentFSMBase.cs",
 "region":  {
 "startLine":  719,
 "startColumn":  111,
@@ -121,7 +121,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Fsm\PersistentFSMBase.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Fsm\PersistentFSMBase.cs",
 "region":  {
 "startLine":  774,
 "startColumn":  88,
@@ -134,7 +134,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Fsm\PersistentFSMBase.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Fsm\PersistentFSMBase.cs",
 "region":  {
 "startLine":  775,
 "startColumn":  38,
@@ -147,7 +147,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Fsm\PersistentFSMBase.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Fsm\PersistentFSMBase.cs",
 "region":  {
 "startLine":  775,
 "startColumn":  74,
@@ -160,7 +160,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Fsm\PersistentFSMBase.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Fsm\PersistentFSMBase.cs",
 "region":  {
 "startLine":  775,
 "startColumn":  111,
@@ -173,7 +173,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
 "region":  {
 "startLine":  551,
 "startColumn":  59,
@@ -186,7 +186,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Persistent.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistent.cs",
 "region":  {
 "startLine":  120,
 "startColumn":  59,
@@ -199,7 +199,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Persistent.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistent.cs",
 "region":  {
 "startLine":  120,
 "startColumn":  81,
@@ -212,7 +212,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Persistent.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistent.cs",
 "region":  {
 "startLine":  120,
 "startColumn":  110,
@@ -225,7 +225,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Persistent.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistent.cs",
 "region":  {
 "startLine":  120,
 "startColumn":  133,
@@ -238,7 +238,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Persistent.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistent.cs",
 "region":  {
 "startLine":  120,
 "startColumn":  159,
@@ -251,7 +251,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\PersistentActor.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\PersistentActor.cs",
 "region":  {
 "startLine":  95,
 "startColumn":  82,
@@ -264,7 +264,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\PersistentActor.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\PersistentActor.cs",
 "region":  {
 "startLine":  95,
 "startColumn":  114,
@@ -277,7 +277,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\PersistentActor.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\PersistentActor.cs",
 "region":  {
 "startLine":  155,
 "startColumn":  71,
@@ -290,7 +290,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\PersistentActor.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\PersistentActor.cs",
 "region":  {
 "startLine":  278,
 "startColumn":  80,
@@ -303,7 +303,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\PersistentActor.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\PersistentActor.cs",
 "region":  {
 "startLine":  289,
 "startColumn":  105,
@@ -316,7 +316,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\PersistentActor.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\PersistentActor.cs",
 "region":  {
 "startLine":  328,
 "startColumn":  80,
@@ -329,7 +329,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\PersistentActor.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\PersistentActor.cs",
 "region":  {
 "startLine":  339,
 "startColumn":  105,

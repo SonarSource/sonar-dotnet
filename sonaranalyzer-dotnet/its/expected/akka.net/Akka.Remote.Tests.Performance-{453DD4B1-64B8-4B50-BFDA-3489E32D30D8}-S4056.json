@@ -4,7 +4,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.Tests.Performance\Transports\TestTransportAssociationStressSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests.Performance\Transports\TestTransportAssociationStressSpec.cs",
 "region":  {
 "startLine":  11,
 "startColumn":  20,
@@ -17,7 +17,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.Tests.Performance\Transports\TestTransportRemoteMessagingThroughputSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests.Performance\Transports\TestTransportRemoteMessagingThroughputSpec.cs",
 "region":  {
 "startLine":  9,
 "startColumn":  48,

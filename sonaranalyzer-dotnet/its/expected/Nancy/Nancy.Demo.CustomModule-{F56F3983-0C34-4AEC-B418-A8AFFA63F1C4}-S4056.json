@@ -4,7 +4,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Demo.CustomModule\UglifiedNancyModule.cs",
+"uri":  "sources\Nancy\src\Nancy.Demo.CustomModule\UglifiedNancyModule.cs",
 "region":  {
 "startLine":  106,
 "startColumn":  38,

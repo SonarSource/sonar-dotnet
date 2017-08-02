@@ -4,7 +4,7 @@
 "id":  "S1134",
 "message":  "Take the required action to fix the issue indicated by this 'FIXME' comment.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Eventsourced.Recovery.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Eventsourced.Recovery.cs",
 "region":  {
 "startLine":  148,
 "startColumn":  24,
@@ -17,7 +17,7 @@
 "id":  "S1134",
 "message":  "Take the required action to fix the issue indicated by this 'FIXME' comment.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\PersistentView.Recovery.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\PersistentView.Recovery.cs",
 "region":  {
 "startLine":  137,
 "startColumn":  24,

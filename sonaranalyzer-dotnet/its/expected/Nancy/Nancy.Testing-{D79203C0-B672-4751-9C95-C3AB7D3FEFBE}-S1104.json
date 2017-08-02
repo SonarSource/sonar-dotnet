@@ -4,7 +4,7 @@
 "id":  "S1104",
 "message":  "Make this field 'private' and encapsulate it in a 'public' property.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
 "region":  {
 "startLine":  45,
 "startColumn":  37,

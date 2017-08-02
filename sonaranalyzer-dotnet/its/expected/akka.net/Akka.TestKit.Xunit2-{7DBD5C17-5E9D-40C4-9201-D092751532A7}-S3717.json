@@ -4,7 +4,7 @@
 "id":  "S3717",
 "message":  "Implement this method or throw 'NotSupportedException' instead.",
 "location":  {
-"uri":  "akka.net\src\contrib\testkits\Akka.TestKit.Xunit2\Internals\AkkaAssertEqualityComparer.cs",
+"uri":  "sources\akka.net\src\contrib\testkits\Akka.TestKit.Xunit2\Internals\AkkaAssertEqualityComparer.cs",
 "region":  {
 "startLine":  107,
 "startColumn":  13,
@@ -17,7 +17,7 @@
 "id":  "S3717",
 "message":  "Implement this method or throw 'NotSupportedException' instead.",
 "location":  {
-"uri":  "akka.net\src\contrib\testkits\Akka.TestKit.Xunit2\Internals\AkkaAssertEqualityComparerAdapter.cs",
+"uri":  "sources\akka.net\src\contrib\testkits\Akka.TestKit.Xunit2\Internals\AkkaAssertEqualityComparerAdapter.cs",
 "region":  {
 "startLine":  43,
 "startColumn":  13,

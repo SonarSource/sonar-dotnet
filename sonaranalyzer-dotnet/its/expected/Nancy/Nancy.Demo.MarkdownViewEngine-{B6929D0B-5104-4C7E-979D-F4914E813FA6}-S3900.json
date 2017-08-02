@@ -4,7 +4,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'markdown' before using it.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Demo.MarkdownViewEngine\Model\BlogModel.cs",
+"uri":  "sources\Nancy\src\Nancy.Demo.MarkdownViewEngine\Model\BlogModel.cs",
 "region":  {
 "startLine":  40,
 "startColumn":  31,

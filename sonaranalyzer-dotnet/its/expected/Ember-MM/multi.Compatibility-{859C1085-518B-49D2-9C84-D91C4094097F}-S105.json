@@ -4,7 +4,7 @@
 "id":  "S105",
 "message":  "Replace all tab characters in this file by sequences of white-spaces.",
 "location":  {
-"uri":  "Ember-MM\Addons\multi.Compatibility\frmBoxee.vb",
+"uri":  "sources\Ember-MM\Addons\multi.Compatibility\frmBoxee.vb",
 "region":  {
 "startLine":  22,
 "startColumn":  1,
@@ -17,7 +17,7 @@
 "id":  "S105",
 "message":  "Replace all tab characters in this file by sequences of white-spaces.",
 "location":  {
-"uri":  "Ember-MM\Addons\multi.Compatibility\frmMediaBrowser.vb",
+"uri":  "sources\Ember-MM\Addons\multi.Compatibility\frmMediaBrowser.vb",
 "region":  {
 "startLine":  46,
 "startColumn":  1,
@@ -30,7 +30,7 @@
 "id":  "S105",
 "message":  "Replace all tab characters in this file by sequences of white-spaces.",
 "location":  {
-"uri":  "Ember-MM\Addons\multi.Compatibility\frmYAMJ.vb",
+"uri":  "sources\Ember-MM\Addons\multi.Compatibility\frmYAMJ.vb",
 "region":  {
 "startLine":  41,
 "startColumn":  1,
@@ -43,7 +43,7 @@
 "id":  "S105",
 "message":  "Replace all tab characters in this file by sequences of white-spaces.",
 "location":  {
-"uri":  "Ember-MM\Addons\multi.Compatibility\genericBoxee.vb",
+"uri":  "sources\Ember-MM\Addons\multi.Compatibility\genericBoxee.vb",
 "region":  {
 "startLine":  8,
 "startColumn":  1,
@@ -56,7 +56,7 @@
 "id":  "S105",
 "message":  "Replace all tab characters in this file by sequences of white-spaces.",
 "location":  {
-"uri":  "Ember-MM\Addons\multi.Compatibility\genericMediaBrowser.vb",
+"uri":  "sources\Ember-MM\Addons\multi.Compatibility\genericMediaBrowser.vb",
 "region":  {
 "startLine":  11,
 "startColumn":  1,
@@ -69,7 +69,7 @@
 "id":  "S105",
 "message":  "Replace all tab characters in this file by sequences of white-spaces.",
 "location":  {
-"uri":  "Ember-MM\Addons\multi.Compatibility\genericYAMJ.vb",
+"uri":  "sources\Ember-MM\Addons\multi.Compatibility\genericYAMJ.vb",
 "region":  {
 "startLine":  8,
 "startColumn":  1,

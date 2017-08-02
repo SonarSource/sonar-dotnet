@@ -4,7 +4,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "akka.net\src\examples\Cluster\Roles\Samples.Cluster.Transformation\Program.cs",
+"uri":  "sources\akka.net\src\examples\Cluster\Roles\Samples.Cluster.Transformation\Program.cs",
 "region":  {
 "startLine":  30,
 "startColumn":  31,
@@ -17,7 +17,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "akka.net\src\examples\Cluster\Roles\Samples.Cluster.Transformation\TransformationBackend.cs",
+"uri":  "sources\akka.net\src\examples\Cluster\Roles\Samples.Cluster.Transformation\TransformationBackend.cs",
 "region":  {
 "startLine":  65,
 "startColumn":  80,

@@ -4,7 +4,7 @@
 "id":  "S100",
 "message":  "Rename property 'state' to match camel case naming rules, consider using 'State'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\PhiAccrualFailureDetector.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\PhiAccrualFailureDetector.cs",
 "region":  {
 "startLine":  127,
 "startColumn":  23,
@@ -17,7 +17,7 @@
 "id":  "S100",
 "message":  "Rename method 'InitFSM' to match camel case naming rules, consider using 'InitFsm'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\RemoteActorRefProvider.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteActorRefProvider.cs",
 "region":  {
 "startLine":  452,
 "startColumn":  26,
@@ -30,7 +30,7 @@
 "id":  "S100",
 "message":  "Rename property 'logRemoteLifeCycleEvents' to match camel case naming rules, consider using 'LogRemoteLifeCycleEvents'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\RemoteTransport.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteTransport.cs",
 "region":  {
 "startLine":  52,
 "startColumn":  21,
@@ -43,7 +43,7 @@
 "id":  "S100",
 "message":  "Rename property 'DISASSOCIATE' to match camel case naming rules, consider using 'Disassociate'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\Transport\AkkaPduCodec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaPduCodec.cs",
 "region":  {
 "startLine":  301,
 "startColumn":  28,
@@ -56,7 +56,7 @@
 "id":  "S100",
 "message":  "Rename method 'InitializeFSM' to match camel case naming rules, consider using 'InitializeFsm'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
 "region":  {
 "startLine":  510,
 "startColumn":  22,
@@ -69,7 +69,7 @@
 "id":  "S100",
 "message":  "Rename method 'InitializeFSM' to match camel case naming rules, consider using 'InitializeFsm'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
 "region":  {
 "startLine":  823,
 "startColumn":  22,

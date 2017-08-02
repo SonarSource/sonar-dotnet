@@ -4,7 +4,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\contrib\dependencyInjection\Akka.DI.Core\DIActorContextAdapter.cs",
+"uri":  "sources\akka.net\src\contrib\dependencyInjection\Akka.DI.Core\DIActorContextAdapter.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -17,7 +17,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\contrib\dependencyInjection\Akka.DI.Core\DIActorProducer.cs",
+"uri":  "sources\akka.net\src\contrib\dependencyInjection\Akka.DI.Core\DIActorProducer.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -30,7 +30,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\contrib\dependencyInjection\Akka.DI.Core\DIActorSystemAdapter.cs",
+"uri":  "sources\akka.net\src\contrib\dependencyInjection\Akka.DI.Core\DIActorSystemAdapter.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -43,7 +43,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\contrib\dependencyInjection\Akka.DI.Core\DIExt.cs",
+"uri":  "sources\akka.net\src\contrib\dependencyInjection\Akka.DI.Core\DIExt.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -56,7 +56,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\contrib\dependencyInjection\Akka.DI.Core\DIExtension.cs",
+"uri":  "sources\akka.net\src\contrib\dependencyInjection\Akka.DI.Core\DIExtension.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -69,7 +69,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\contrib\dependencyInjection\Akka.DI.Core\Extensions.cs",
+"uri":  "sources\akka.net\src\contrib\dependencyInjection\Akka.DI.Core\Extensions.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -82,7 +82,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\contrib\dependencyInjection\Akka.DI.Core\IDependencyResolver.cs",
+"uri":  "sources\akka.net\src\contrib\dependencyInjection\Akka.DI.Core\IDependencyResolver.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,
@@ -95,7 +95,7 @@
 "id":  "S1451",
 "message":  "Add or update the header of this file.",
 "location":  {
-"uri":  "akka.net\src\contrib\dependencyInjection\Akka.DI.Core\Properties\AssemblyInfo.cs",
+"uri":  "sources\akka.net\src\contrib\dependencyInjection\Akka.DI.Core\Properties\AssemblyInfo.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,

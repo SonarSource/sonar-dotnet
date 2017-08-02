@@ -4,7 +4,7 @@
 "id":  "S1227",
 "message":  "Refactor the code in order to remove this break statement.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\DefaultFailureDetectorRegistry.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\DefaultFailureDetectorRegistry.cs",
 "region":  {
 "startLine":  97,
 "startColumn":  17,
@@ -17,7 +17,7 @@
 "id":  "S1227",
 "message":  "Refactor the code in order to remove this break statement.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\DefaultFailureDetectorRegistry.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\DefaultFailureDetectorRegistry.cs",
 "region":  {
 "startLine":  108,
 "startColumn":  17,

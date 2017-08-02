@@ -4,7 +4,7 @@
 "id":  "S4022",
 "message":  "Change this enum storage to 'Int32'.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\DynamicDictionaryValueFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\DynamicDictionaryValueFixture.cs",
 "region":  {
 "startLine":  1646,
 "startColumn":  22,

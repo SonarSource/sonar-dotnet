@@ -5,7 +5,7 @@
 "message":  "Fix this implementation of 'IDisposable' to conform to the dispose pattern.",
 "location":  [
 {
-"uri":  "Nancy\src\Nancy\Bootstrapper\NancyBootstrapperBase.cs",
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\NancyBootstrapperBase.cs",
 "region":  {
 "startLine":  21,
 "startColumn":  27,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy\Bootstrapper\NancyBootstrapperBase.cs",
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\NancyBootstrapperBase.cs",
 "region":  {
 "startLine":  398,
 "startColumn":  21,
@@ -29,7 +29,7 @@
 "message":  "Fix this implementation of 'IDisposable' to conform to the dispose pattern.",
 "location":  [
 {
-"uri":  "Nancy\src\Nancy\IO\UnclosableStreamWrapper.cs",
+"uri":  "sources\Nancy\src\Nancy\IO\UnclosableStreamWrapper.cs",
 "region":  {
 "startLine":  12,
 "startColumn":  18,
@@ -38,7 +38,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy\IO\UnclosableStreamWrapper.cs",
+"uri":  "sources\Nancy\src\Nancy\IO\UnclosableStreamWrapper.cs",
 "region":  {
 "startLine":  12,
 "startColumn":  52,
@@ -53,7 +53,7 @@
 "message":  "Fix this implementation of 'IDisposable' to conform to the dispose pattern.",
 "location":  [
 {
-"uri":  "Nancy\src\Nancy\NancyEngine.cs",
+"uri":  "sources\Nancy\src\Nancy\NancyEngine.cs",
 "region":  {
 "startLine":  21,
 "startColumn":  18,
@@ -62,7 +62,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy\NancyEngine.cs",
+"uri":  "sources\Nancy\src\Nancy\NancyEngine.cs",
 "region":  {
 "startLine":  21,
 "startColumn":  18,
@@ -71,7 +71,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy\NancyEngine.cs",
+"uri":  "sources\Nancy\src\Nancy\NancyEngine.cs",
 "region":  {
 "startLine":  144,
 "startColumn":  29,
@@ -80,7 +80,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy\NancyEngine.cs",
+"uri":  "sources\Nancy\src\Nancy\NancyEngine.cs",
 "region":  {
 "startLine":  144,
 "startColumn":  16,
@@ -95,7 +95,7 @@
 "message":  "Fix this implementation of 'IDisposable' to conform to the dispose pattern.",
 "location":  [
 {
-"uri":  "Nancy\src\Nancy\Request.cs",
+"uri":  "sources\Nancy\src\Nancy\Request.cs",
 "region":  {
 "startLine":  20,
 "startColumn":  18,
@@ -104,7 +104,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy\Request.cs",
+"uri":  "sources\Nancy\src\Nancy\Request.cs",
 "region":  {
 "startLine":  20,
 "startColumn":  18,
@@ -113,7 +113,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy\Request.cs",
+"uri":  "sources\Nancy\src\Nancy\Request.cs",
 "region":  {
 "startLine":  230,
 "startColumn":  21,
@@ -128,7 +128,7 @@
 "message":  "Fix this implementation of 'IDisposable' to conform to the dispose pattern.",
 "location":  [
 {
-"uri":  "Nancy\src\Nancy\Response.cs",
+"uri":  "sources\Nancy\src\Nancy\Response.cs",
 "region":  {
 "startLine":  18,
 "startColumn":  18,
@@ -137,7 +137,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy\Response.cs",
+"uri":  "sources\Nancy\src\Nancy\Response.cs",
 "region":  {
 "startLine":  18,
 "startColumn":  18,
@@ -146,7 +146,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy\Response.cs",
+"uri":  "sources\Nancy\src\Nancy\Response.cs",
 "region":  {
 "startLine":  165,
 "startColumn":  29,
@@ -155,7 +155,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy\Response.cs",
+"uri":  "sources\Nancy\src\Nancy\Response.cs",
 "region":  {
 "startLine":  165,
 "startColumn":  16,
@@ -170,7 +170,7 @@
 "message":  "Fix this implementation of 'IDisposable' to conform to the dispose pattern.",
 "location":  [
 {
-"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
 "startLine":  2680,
 "startColumn":  23,
@@ -179,7 +179,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
 "startLine":  2680,
 "startColumn":  23,
@@ -188,7 +188,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
 "startLine":  2734,
 "startColumn":  25,
@@ -203,7 +203,7 @@
 "message":  "Fix this implementation of 'IDisposable' to conform to the dispose pattern.",
 "location":  [
 {
-"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
 "startLine":  2748,
 "startColumn":  23,
@@ -212,7 +212,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
 "startLine":  2748,
 "startColumn":  23,
@@ -221,7 +221,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
 "startLine":  2813,
 "startColumn":  25,
@@ -236,7 +236,7 @@
 "message":  "Fix this implementation of 'IDisposable' to conform to the dispose pattern.",
 "location":  [
 {
-"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
 "startLine":  2825,
 "startColumn":  23,
@@ -245,7 +245,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
 "startLine":  2825,
 "startColumn":  23,
@@ -254,7 +254,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
 "startLine":  2895,
 "startColumn":  25,
@@ -269,7 +269,7 @@
 "message":  "Fix this implementation of 'IDisposable' to conform to the dispose pattern.",
 "location":  [
 {
-"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
 "startLine":  2910,
 "startColumn":  23,
@@ -278,7 +278,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
 "startLine":  2910,
 "startColumn":  23,
@@ -287,7 +287,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
 "startLine":  2992,
 "startColumn":  25,
@@ -302,7 +302,7 @@
 "message":  "Fix this implementation of 'IDisposable' to conform to the dispose pattern.",
 "location":  [
 {
-"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
 "startLine":  90,
 "startColumn":  18,
@@ -311,7 +311,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
 "startLine":  90,
 "startColumn":  18,
@@ -320,7 +320,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
 "startLine":  178,
 "startColumn":  21,

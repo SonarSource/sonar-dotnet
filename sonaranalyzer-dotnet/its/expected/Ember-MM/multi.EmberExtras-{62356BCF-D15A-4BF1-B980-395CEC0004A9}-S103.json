@@ -4,7 +4,7 @@
 "id":  "S103",
 "message":  "Split this 260 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "Ember-MM\Addons\multi.EmberExtras\genericGenresEditor.vb",
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\genericGenresEditor.vb",
 "region":  {
 "startLine":  79,
 "startColumn":  1,
@@ -17,7 +17,7 @@
 "id":  "S103",
 "message":  "Split this 260 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "Ember-MM\Addons\multi.EmberExtras\genericMediaSources.vb",
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\genericMediaSources.vb",
 "region":  {
 "startLine":  80,
 "startColumn":  1,
@@ -30,7 +30,7 @@
 "id":  "S103",
 "message":  "Split this 260 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "Ember-MM\Addons\multi.EmberExtras\genericMetadataEditor.vb",
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\genericMetadataEditor.vb",
 "region":  {
 "startLine":  80,
 "startColumn":  1,
@@ -43,7 +43,7 @@
 "id":  "S103",
 "message":  "Split this 220 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "Ember-MM\Addons\multi.EmberExtras\scraperMoviesEmberModule.vb",
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\scraperMoviesEmberModule.vb",
 "region":  {
 "startLine":  79,
 "startColumn":  1,
@@ -56,7 +56,7 @@
 "id":  "S103",
 "message":  "Split this 226 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "Ember-MM\Addons\multi.EmberExtras\scraperMoviesEmberModule.vb",
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\scraperMoviesEmberModule.vb",
 "region":  {
 "startLine":  102,
 "startColumn":  1,
@@ -69,7 +69,7 @@
 "id":  "S103",
 "message":  "Split this 325 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "Ember-MM\Addons\multi.EmberExtras\scraperMoviesEmberModule.vb",
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\scraperMoviesEmberModule.vb",
 "region":  {
 "startLine":  105,
 "startColumn":  1,

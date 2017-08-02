@@ -4,7 +4,7 @@
 "id":  "S101",
 "message":  "Rename class 'SSLProxy' to match camel case naming rules, consider using 'SslProxy'.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Security\SSLProxy.cs",
+"uri":  "sources\Nancy\src\Nancy\Security\SSLProxy.cs",
 "region":  {
 "startLine":  11,
 "startColumn":  25,

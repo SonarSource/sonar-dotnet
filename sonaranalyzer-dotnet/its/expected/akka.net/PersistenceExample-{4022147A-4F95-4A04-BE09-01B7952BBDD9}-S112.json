@@ -4,7 +4,7 @@
 "id":  "S112",
 "message":  "'System.Exception' should not be thrown by user code.",
 "location":  {
-"uri":  "akka.net\src\examples\PersistenceExample\AtLeastOnceDeliveryExampleActor.cs",
+"uri":  "sources\akka.net\src\examples\PersistenceExample\AtLeastOnceDeliveryExampleActor.cs",
 "region":  {
 "startLine":  133,
 "startColumn":  27,
@@ -17,7 +17,7 @@
 "id":  "S112",
 "message":  "'System.Exception' should not be thrown by user code.",
 "location":  {
-"uri":  "akka.net\src\examples\PersistenceExample\ExamplePersistentFailingActor.cs",
+"uri":  "sources\akka.net\src\examples\PersistenceExample\ExamplePersistentFailingActor.cs",
 "region":  {
 "startLine":  38,
 "startColumn":  27,

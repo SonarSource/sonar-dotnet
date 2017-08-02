@@ -4,7 +4,7 @@
 "id":  "S3717",
 "message":  "Implement this method or throw 'NotSupportedException' instead.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorRefSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ActorRefSpec.cs",
 "region":  {
 "startLine":  585,
 "startColumn":  17,
@@ -17,7 +17,7 @@
 "id":  "S3717",
 "message":  "Implement this method or throw 'NotSupportedException' instead.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorSystemSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ActorSystemSpec.cs",
 "region":  {
 "startLine":  215,
 "startColumn":  13,
@@ -30,7 +30,7 @@
 "id":  "S3717",
 "message":  "Implement this method or throw 'NotSupportedException' instead.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorSystemSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ActorSystemSpec.cs",
 "region":  {
 "startLine":  220,
 "startColumn":  13,
@@ -43,7 +43,7 @@
 "id":  "S3717",
 "message":  "Implement this method or throw 'NotSupportedException' instead.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorSystemSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ActorSystemSpec.cs",
 "region":  {
 "startLine":  226,
 "startColumn":  13,
@@ -56,7 +56,7 @@
 "id":  "S3717",
 "message":  "Implement this method or throw 'NotSupportedException' instead.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorSystemSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ActorSystemSpec.cs",
 "region":  {
 "startLine":  232,
 "startColumn":  13,
@@ -69,7 +69,7 @@
 "id":  "S3717",
 "message":  "Implement this method or throw 'NotSupportedException' instead.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\RootGuardianActorRef_Tests.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\RootGuardianActorRef_Tests.cs",
 "region":  {
 "startLine":  107,
 "startColumn":  23,
@@ -82,7 +82,7 @@
 "id":  "S3717",
 "message":  "Implement this method or throw 'NotSupportedException' instead.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\MatchHandler\CachedMatchCompilerTests.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\MatchHandler\CachedMatchCompilerTests.cs",
 "region":  {
 "startLine":  188,
 "startColumn":  17,
@@ -95,7 +95,7 @@
 "id":  "S3717",
 "message":  "Implement this method or throw 'NotSupportedException' instead.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\MatchHandler\MatchHandlerBuilderTests.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\MatchHandler\MatchHandlerBuilderTests.cs",
 "region":  {
 "startLine":  251,
 "startColumn":  17,
@@ -108,7 +108,7 @@
 "id":  "S3717",
 "message":  "Implement this method or throw 'NotSupportedException' instead.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Serialization\SerializationSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Serialization\SerializationSpec.cs",
 "region":  {
 "startLine":  578,
 "startColumn":  23,
@@ -121,7 +121,7 @@
 "id":  "S3717",
 "message":  "Implement this method or throw 'NotSupportedException' instead.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Serialization\SerializationSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Serialization\SerializationSpec.cs",
 "region":  {
 "startLine":  583,
 "startColumn":  17,
@@ -134,7 +134,7 @@
 "id":  "S3717",
 "message":  "Implement this method or throw 'NotSupportedException' instead.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Serialization\SerializationSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Serialization\SerializationSpec.cs",
 "region":  {
 "startLine":  588,
 "startColumn":  17,

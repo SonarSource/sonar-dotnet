@@ -4,7 +4,7 @@
 "id":  "S3887",
 "message":  "Use an immutable collection or reduce the accessibility of this field.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ViewEngines\ResourceViewLocationProvider.cs",
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\ResourceViewLocationProvider.cs",
 "region":  {
 "startLine":  20,
 "startColumn":  62,
@@ -17,7 +17,7 @@
 "id":  "S3887",
 "message":  "Use an immutable collection or reduce the accessibility of this field.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ViewEngines\ResourceViewLocationProvider.cs",
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\ResourceViewLocationProvider.cs",
 "region":  {
 "startLine":  25,
 "startColumn":  48,

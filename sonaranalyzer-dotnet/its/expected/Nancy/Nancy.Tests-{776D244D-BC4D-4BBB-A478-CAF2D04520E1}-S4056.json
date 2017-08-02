@@ -4,7 +4,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Fakes\FakeDefaultNancyBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Fakes\FakeDefaultNancyBootstrapper.cs",
 "region":  {
 "startLine":  43,
 "startColumn":  101,
@@ -17,7 +17,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\ShouldExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\ShouldExtensions.cs",
 "region":  {
 "startLine":  15,
 "startColumn":  25,
@@ -30,7 +30,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\ShouldExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\ShouldExtensions.cs",
 "region":  {
 "startLine":  15,
 "startColumn":  54,
@@ -43,7 +43,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\ShouldExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\ShouldExtensions.cs",
 "region":  {
 "startLine":  20,
 "startColumn":  25,
@@ -56,7 +56,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\ShouldExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\ShouldExtensions.cs",
 "region":  {
 "startLine":  20,
 "startColumn":  52,
@@ -69,7 +69,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\ShouldExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\ShouldExtensions.cs",
 "region":  {
 "startLine":  72,
 "startColumn":  45,
@@ -82,7 +82,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\ShouldExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\ShouldExtensions.cs",
 "region":  {
 "startLine":  79,
 "startColumn":  52,
@@ -95,7 +95,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\ShouldExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\ShouldExtensions.cs",
 "region":  {
 "startLine":  84,
 "startColumn":  53,
@@ -108,7 +108,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\Configuration\DefaultNancyEnvironmentFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Configuration\DefaultNancyEnvironmentFixture.cs",
 "region":  {
 "startLine":  22,
 "startColumn":  41,
@@ -121,7 +121,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\Configuration\DefaultNancyEnvironmentFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Configuration\DefaultNancyEnvironmentFixture.cs",
 "region":  {
 "startLine":  38,
 "startColumn":  29,
@@ -134,7 +134,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\Configuration\DefaultNancyEnvironmentFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Configuration\DefaultNancyEnvironmentFixture.cs",
 "region":  {
 "startLine":  59,
 "startColumn":  39,
@@ -147,7 +147,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\Configuration\DefaultNancyEnvironmentFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Configuration\DefaultNancyEnvironmentFixture.cs",
 "region":  {
 "startLine":  171,
 "startColumn":  38,
@@ -160,7 +160,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\Culture\BuiltInCultureConventionFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Culture\BuiltInCultureConventionFixture.cs",
 "region":  {
 "startLine":  257,
 "startColumn":  54,
@@ -173,7 +173,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\Culture\BuiltInCultureConventionFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Culture\BuiltInCultureConventionFixture.cs",
 "region":  {
 "startLine":  278,
 "startColumn":  54,
@@ -186,7 +186,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\Diagnostics\CustomInteractiveDiagnosticsFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Diagnostics\CustomInteractiveDiagnosticsFixture.cs",
 "region":  {
 "startLine":  163,
 "startColumn":  20,
@@ -199,7 +199,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\Diagnostics\DiagnosticsHookFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Diagnostics\DiagnosticsHookFixture.cs",
 "region":  {
 "startLine":  336,
 "startColumn":  20,
@@ -212,7 +212,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\DynamicDictionaryFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\DynamicDictionaryFixture.cs",
 "region":  {
 "startLine":  231,
 "startColumn":  37,
@@ -225,7 +225,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\DynamicDictionaryFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\DynamicDictionaryFixture.cs",
 "region":  {
 "startLine":  245,
 "startColumn":  37,
@@ -238,7 +238,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\DynamicDictionaryFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\DynamicDictionaryFixture.cs",
 "region":  {
 "startLine":  287,
 "startColumn":  37,
@@ -251,7 +251,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\DynamicDictionaryFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\DynamicDictionaryFixture.cs",
 "region":  {
 "startLine":  301,
 "startColumn":  37,
@@ -264,7 +264,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\DynamicDictionaryFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\DynamicDictionaryFixture.cs",
 "region":  {
 "startLine":  343,
 "startColumn":  37,
@@ -277,7 +277,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\DynamicDictionaryFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\DynamicDictionaryFixture.cs",
 "region":  {
 "startLine":  357,
 "startColumn":  37,
@@ -290,7 +290,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\DynamicDictionaryFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\DynamicDictionaryFixture.cs",
 "region":  {
 "startLine":  673,
 "startColumn":  31,
@@ -303,7 +303,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\DynamicDictionaryFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\DynamicDictionaryFixture.cs",
 "region":  {
 "startLine":  688,
 "startColumn":  31,
@@ -316,7 +316,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\DynamicDictionaryFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\DynamicDictionaryFixture.cs",
 "region":  {
 "startLine":  719,
 "startColumn":  31,
@@ -329,7 +329,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\DynamicDictionaryValueFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\DynamicDictionaryValueFixture.cs",
 "region":  {
 "startLine":  264,
 "startColumn":  26,
@@ -342,7 +342,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\DynamicDictionaryValueFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\DynamicDictionaryValueFixture.cs",
 "region":  {
 "startLine":  278,
 "startColumn":  26,
@@ -355,7 +355,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\DynamicDictionaryValueFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\DynamicDictionaryValueFixture.cs",
 "region":  {
 "startLine":  292,
 "startColumn":  26,
@@ -368,7 +368,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\DynamicDictionaryValueFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\DynamicDictionaryValueFixture.cs",
 "region":  {
 "startLine":  306,
 "startColumn":  26,
@@ -381,7 +381,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\DynamicDictionaryValueFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\DynamicDictionaryValueFixture.cs",
 "region":  {
 "startLine":  320,
 "startColumn":  26,
@@ -394,7 +394,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\DynamicDictionaryValueFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\DynamicDictionaryValueFixture.cs",
 "region":  {
 "startLine":  334,
 "startColumn":  26,
@@ -407,7 +407,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\DynamicDictionaryValueFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\DynamicDictionaryValueFixture.cs",
 "region":  {
 "startLine":  348,
 "startColumn":  26,
@@ -420,7 +420,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\DynamicDictionaryValueFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\DynamicDictionaryValueFixture.cs",
 "region":  {
 "startLine":  362,
 "startColumn":  26,
@@ -433,7 +433,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\DynamicDictionaryValueFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\DynamicDictionaryValueFixture.cs",
 "region":  {
 "startLine":  376,
 "startColumn":  26,
@@ -446,7 +446,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\DynamicDictionaryValueFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\DynamicDictionaryValueFixture.cs",
 "region":  {
 "startLine":  390,
 "startColumn":  26,
@@ -459,7 +459,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\DynamicDictionaryValueFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\DynamicDictionaryValueFixture.cs",
 "region":  {
 "startLine":  404,
 "startColumn":  26,
@@ -472,7 +472,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\DynamicDictionaryValueFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\DynamicDictionaryValueFixture.cs",
 "region":  {
 "startLine":  418,
 "startColumn":  26,
@@ -485,7 +485,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\DynamicDictionaryValueFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\DynamicDictionaryValueFixture.cs",
 "region":  {
 "startLine":  432,
 "startColumn":  26,
@@ -498,7 +498,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\DynamicDictionaryValueFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\DynamicDictionaryValueFixture.cs",
 "region":  {
 "startLine":  446,
 "startColumn":  26,
@@ -511,7 +511,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\DynamicDictionaryValueFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\DynamicDictionaryValueFixture.cs",
 "region":  {
 "startLine":  460,
 "startColumn":  26,
@@ -524,7 +524,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\DynamicDictionaryValueFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\DynamicDictionaryValueFixture.cs",
 "region":  {
 "startLine":  474,
 "startColumn":  26,
@@ -537,7 +537,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\DynamicDictionaryValueFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\DynamicDictionaryValueFixture.cs",
 "region":  {
 "startLine":  607,
 "startColumn":  33,
@@ -550,7 +550,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\DynamicDictionaryValueFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\DynamicDictionaryValueFixture.cs",
 "region":  {
 "startLine":  820,
 "startColumn":  33,
@@ -563,7 +563,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\DynamicDictionaryValueFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\DynamicDictionaryValueFixture.cs",
 "region":  {
 "startLine":  821,
 "startColumn":  36,
@@ -576,7 +576,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\DynamicDictionaryValueFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\DynamicDictionaryValueFixture.cs",
 "region":  {
 "startLine":  905,
 "startColumn":  33,
@@ -589,7 +589,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\DynamicDictionaryValueFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\DynamicDictionaryValueFixture.cs",
 "region":  {
 "startLine":  964,
 "startColumn":  33,
@@ -602,7 +602,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\DynamicDictionaryValueFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\DynamicDictionaryValueFixture.cs",
 "region":  {
 "startLine":  979,
 "startColumn":  33,
@@ -615,7 +615,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\DynamicDictionaryValueFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\DynamicDictionaryValueFixture.cs",
 "region":  {
 "startLine":  1040,
 "startColumn":  31,
@@ -628,7 +628,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\DynamicDictionaryValueFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\DynamicDictionaryValueFixture.cs",
 "region":  {
 "startLine":  1041,
 "startColumn":  34,
@@ -641,7 +641,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\DynamicDictionaryValueFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\DynamicDictionaryValueFixture.cs",
 "region":  {
 "startLine":  1042,
 "startColumn":  56,
@@ -654,7 +654,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\DynamicDictionaryValueFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\DynamicDictionaryValueFixture.cs",
 "region":  {
 "startLine":  1321,
 "startColumn":  33,
@@ -667,7 +667,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\DynamicDictionaryValueFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\DynamicDictionaryValueFixture.cs",
 "region":  {
 "startLine":  1350,
 "startColumn":  33,
@@ -680,7 +680,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\HttpMultipartBoundaryFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\HttpMultipartBoundaryFixture.cs",
 "region":  {
 "startLine":  170,
 "startColumn":  13,
@@ -693,7 +693,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\HttpMultipartBoundaryFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\HttpMultipartBoundaryFixture.cs",
 "region":  {
 "startLine":  180,
 "startColumn":  17,
@@ -706,7 +706,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\HttpMultipartFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\HttpMultipartFixture.cs",
 "region":  {
 "startLine":  172,
 "startColumn":  24,
@@ -719,7 +719,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\HttpMultipartFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\HttpMultipartFixture.cs",
 "region":  {
 "startLine":  247,
 "startColumn":  13,
@@ -732,7 +732,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\HttpMultipartFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\HttpMultipartFixture.cs",
 "region":  {
 "startLine":  285,
 "startColumn":  17,
@@ -745,7 +745,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\HttpMultipartFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\HttpMultipartFixture.cs",
 "region":  {
 "startLine":  288,
 "startColumn":  17,
@@ -758,7 +758,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\HttpMultipartFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\HttpMultipartFixture.cs",
 "region":  {
 "startLine":  298,
 "startColumn":  13,
@@ -771,7 +771,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\Json\TestConverter.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Json\TestConverter.cs",
 "region":  {
 "startLine":  22,
 "startColumn":  16,
@@ -784,7 +784,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\Json\TestPrimitiveConverter.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Json\TestPrimitiveConverter.cs",
 "region":  {
 "startLine":  22,
 "startColumn":  16,
@@ -797,7 +797,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\BindingMemberInfoFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\BindingMemberInfoFixture.cs",
 "region":  {
 "startLine":  61,
 "startColumn":  21,
@@ -810,7 +810,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\BindingMemberInfoFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\BindingMemberInfoFixture.cs",
 "region":  {
 "startLine":  65,
 "startColumn":  26,
@@ -823,7 +823,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\BindingMemberInfoFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\BindingMemberInfoFixture.cs",
 "region":  {
 "startLine":  80,
 "startColumn":  81,
@@ -836,7 +836,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\BindingMemberInfoFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\BindingMemberInfoFixture.cs",
 "region":  {
 "startLine":  101,
 "startColumn":  81,
@@ -849,7 +849,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\BindingMemberInfoFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\BindingMemberInfoFixture.cs",
 "region":  {
 "startLine":  120,
 "startColumn":  81,
@@ -862,7 +862,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\BindingMemberInfoFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\BindingMemberInfoFixture.cs",
 "region":  {
 "startLine":  141,
 "startColumn":  81,
@@ -875,7 +875,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBodyDeserializers\JsonBodyDeserializerFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBodyDeserializers\JsonBodyDeserializerFixture.cs",
 "region":  {
 "startLine":  35,
 "startColumn":  36,
@@ -888,7 +888,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultConverters\FallbackConverterFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultConverters\FallbackConverterFixture.cs",
 "region":  {
 "startLine":  41,
 "startColumn":  25,
@@ -901,7 +901,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultConverters\FallbackConverterFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultConverters\FallbackConverterFixture.cs",
 "region":  {
 "startLine":  52,
 "startColumn":  25,
@@ -914,7 +914,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\ModelBindingExceptionFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\ModelBindingExceptionFixture.cs",
 "region":  {
 "startLine":  59,
 "startColumn":  43,
@@ -927,7 +927,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\PropertyBindingExceptionFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\PropertyBindingExceptionFixture.cs",
 "region":  {
 "startLine":  35,
 "startColumn":  43,
@@ -940,7 +940,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\NancyCookieFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\NancyCookieFixture.cs",
 "region":  {
 "startLine":  100,
 "startColumn":  37,
@@ -953,7 +953,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\RequestFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\RequestFixture.cs",
 "region":  {
 "startLine":  546,
 "startColumn":  25,
@@ -966,7 +966,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\RequestFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\RequestFixture.cs",
 "region":  {
 "startLine":  565,
 "startColumn":  46,
@@ -979,7 +979,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\RequestFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\RequestFixture.cs",
 "region":  {
 "startLine":  584,
 "startColumn":  46,
@@ -992,7 +992,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\RequestFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\RequestFixture.cs",
 "region":  {
 "startLine":  603,
 "startColumn":  46,
@@ -1005,7 +1005,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\RequestFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\RequestFixture.cs",
 "region":  {
 "startLine":  622,
 "startColumn":  46,
@@ -1018,7 +1018,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\RequestFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\RequestFixture.cs",
 "region":  {
 "startLine":  642,
 "startColumn":  44,
@@ -1031,7 +1031,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\RequestFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\RequestFixture.cs",
 "region":  {
 "startLine":  738,
 "startColumn":  17,
@@ -1044,7 +1044,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\RequestFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\RequestFixture.cs",
 "region":  {
 "startLine":  771,
 "startColumn":  17,
@@ -1057,7 +1057,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\RequestFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\RequestFixture.cs",
 "region":  {
 "startLine":  839,
 "startColumn":  17,
@@ -1070,7 +1070,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\RequestFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\RequestFixture.cs",
 "region":  {
 "startLine":  877,
 "startColumn":  17,
@@ -1083,7 +1083,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\RequestFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\RequestFixture.cs",
 "region":  {
 "startLine":  880,
 "startColumn":  17,
@@ -1096,7 +1096,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\Responses\DefaultJsonSerializerFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Responses\DefaultJsonSerializerFixture.cs",
 "region":  {
 "startLine":  126,
 "startColumn":  32,
@@ -1109,7 +1109,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\Responses\DefaultJsonSerializerFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Responses\DefaultJsonSerializerFixture.cs",
 "region":  {
 "startLine":  150,
 "startColumn":  32,
@@ -1122,7 +1122,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\Responses\DefaultJsonSerializerFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Responses\DefaultJsonSerializerFixture.cs",
 "region":  {
 "startLine":  174,
 "startColumn":  32,
@@ -1135,7 +1135,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\Responses\DefaultJsonSerializerFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Responses\DefaultJsonSerializerFixture.cs",
 "region":  {
 "startLine":  210,
 "startColumn":  29,
@@ -1148,7 +1148,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\Responses\DefaultJsonSerializerFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Responses\DefaultJsonSerializerFixture.cs",
 "region":  {
 "startLine":  210,
 "startColumn":  72,
@@ -1161,7 +1161,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\Responses\GenericFileResponseFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Responses\GenericFileResponseFixture.cs",
 "region":  {
 "startLine":  136,
 "startColumn":  28,
@@ -1174,7 +1174,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\Routing\ConstraintNodeRouteResolverFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Routing\ConstraintNodeRouteResolverFixture.cs",
 "region":  {
 "startLine":  400,
 "startColumn":  68,
@@ -1187,7 +1187,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\StaticContentConventionBuilderFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\StaticContentConventionBuilderFixture.cs",
 "region":  {
 "startLine":  240,
 "startColumn":  28,
@@ -1200,7 +1200,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\StaticContentConventionBuilderFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\StaticContentConventionBuilderFixture.cs",
 "region":  {
 "startLine":  266,
 "startColumn":  20,
@@ -1213,7 +1213,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\StaticContentConventionBuilderFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\StaticContentConventionBuilderFixture.cs",
 "region":  {
 "startLine":  285,
 "startColumn":  28,
@@ -1226,7 +1226,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ViewEngines\ResourceViewLocationProviderFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ViewEngines\ResourceViewLocationProviderFixture.cs",
 "region":  {
 "startLine":  150,
 "startColumn":  17,
@@ -1239,7 +1239,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ViewEngines\SuperSimpleViewEngineTests.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ViewEngines\SuperSimpleViewEngineTests.cs",
 "region":  {
 "startLine":  1423,
 "startColumn":  25,
@@ -1252,7 +1252,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ViewEngines\SuperSimpleViewEngineTests.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ViewEngines\SuperSimpleViewEngineTests.cs",
 "region":  {
 "startLine":  1430,
 "startColumn":  26,

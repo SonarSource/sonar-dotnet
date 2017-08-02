@@ -4,7 +4,7 @@
 "id":  "S103",
 "message":  "Split this 277 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
 "region":  {
 "startLine":  107,
 "startColumn":  1,

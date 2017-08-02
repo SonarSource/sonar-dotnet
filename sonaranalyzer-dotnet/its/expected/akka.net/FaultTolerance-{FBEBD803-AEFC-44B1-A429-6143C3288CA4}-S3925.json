@@ -5,7 +5,7 @@
 "message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
 "location":  [
 {
-"uri":  "akka.net\src\examples\FaultTolerance\Program.cs",
+"uri":  "sources\akka.net\src\examples\FaultTolerance\Program.cs",
 "region":  {
 "startLine":  189,
 "startColumn":  18,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "akka.net\src\examples\FaultTolerance\Program.cs",
+"uri":  "sources\akka.net\src\examples\FaultTolerance\Program.cs",
 "region":  {
 "startLine":  189,
 "startColumn":  12,
@@ -23,7 +23,7 @@
 }
 },
 {
-"uri":  "akka.net\src\examples\FaultTolerance\Program.cs",
+"uri":  "sources\akka.net\src\examples\FaultTolerance\Program.cs",
 "region":  {
 "startLine":  189,
 "startColumn":  12,
@@ -38,7 +38,7 @@
 "message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
 "location":  [
 {
-"uri":  "akka.net\src\examples\FaultTolerance\Program.cs",
+"uri":  "sources\akka.net\src\examples\FaultTolerance\Program.cs",
 "region":  {
 "startLine":  515,
 "startColumn":  18,
@@ -47,7 +47,7 @@
 }
 },
 {
-"uri":  "akka.net\src\examples\FaultTolerance\Program.cs",
+"uri":  "sources\akka.net\src\examples\FaultTolerance\Program.cs",
 "region":  {
 "startLine":  515,
 "startColumn":  12,
@@ -56,7 +56,7 @@
 }
 },
 {
-"uri":  "akka.net\src\examples\FaultTolerance\Program.cs",
+"uri":  "sources\akka.net\src\examples\FaultTolerance\Program.cs",
 "region":  {
 "startLine":  515,
 "startColumn":  12,

@@ -4,7 +4,7 @@
 "id":  "S1481",
 "message":  "Remove this unused 'resolver' local variable.",
 "location":  {
-"uri":  "akka.net\src\contrib\dependencyInjection\Akka.DI.TestKit\DiResolverSpec.cs",
+"uri":  "sources\akka.net\src\contrib\dependencyInjection\Akka.DI.TestKit\DiResolverSpec.cs",
 "region":  {
 "startLine":  205,
 "startColumn":  17,

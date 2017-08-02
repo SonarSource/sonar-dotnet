@@ -5,7 +5,7 @@
 "message":  "Fix this implementation of 'IDisposable' to conform to the dispose pattern.",
 "location":  [
 {
-"uri":  "akka.net\src\core\Akka.Remote\Transport\Helios\HeliosHelpers.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\Helios\HeliosHelpers.cs",
 "region":  {
 "startLine":  28,
 "startColumn":  29,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\Transport\Helios\HeliosHelpers.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\Helios\HeliosHelpers.cs",
 "region":  {
 "startLine":  28,
 "startColumn":  29,
@@ -23,7 +23,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\Transport\Helios\HeliosHelpers.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\Helios\HeliosHelpers.cs",
 "region":  {
 "startLine":  94,
 "startColumn":  29,
@@ -32,7 +32,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.Remote\Transport\Helios\HeliosHelpers.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\Helios\HeliosHelpers.cs",
 "region":  {
 "startLine":  94,
 "startColumn":  16,

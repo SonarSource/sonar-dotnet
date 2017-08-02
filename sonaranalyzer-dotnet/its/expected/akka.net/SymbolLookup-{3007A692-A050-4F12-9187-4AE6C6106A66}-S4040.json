@@ -4,7 +4,7 @@
 "id":  "S4040",
 "message":  "Change this normalization to 'String.ToUpperInvariant()'.",
 "location":  {
-"uri":  "akka.net\src\examples\Stocks\SymbolLookup\YahooFinance\StockUriHelper.cs",
+"uri":  "sources\akka.net\src\examples\Stocks\SymbolLookup\YahooFinance\StockUriHelper.cs",
 "region":  {
 "startLine":  21,
 "startColumn":  85,
@@ -17,7 +17,7 @@
 "id":  "S4040",
 "message":  "Change this normalization to 'String.ToUpperInvariant()'.",
 "location":  {
-"uri":  "akka.net\src\examples\Stocks\SymbolLookup\YahooFinance\StockUriHelper.cs",
+"uri":  "sources\akka.net\src\examples\Stocks\SymbolLookup\YahooFinance\StockUriHelper.cs",
 "region":  {
 "startLine":  26,
 "startColumn":  83,

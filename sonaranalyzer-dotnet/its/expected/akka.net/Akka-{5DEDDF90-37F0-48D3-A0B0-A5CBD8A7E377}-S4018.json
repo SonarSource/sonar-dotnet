@@ -4,7 +4,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to have parameters matching all the type parameters.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\ActorRefFactoryExtensions.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorRefFactoryExtensions.cs",
 "region":  {
 "startLine":  12,
 "startColumn":  33,
@@ -17,7 +17,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to have parameters matching all the type parameters.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\ActorSystem.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorSystem.cs",
 "region":  {
 "startLine":  117,
 "startColumn":  27,
@@ -30,7 +30,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to have parameters matching all the type parameters.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\ActorSystem.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorSystem.cs",
 "region":  {
 "startLine":  127,
 "startColumn":  30,
@@ -43,7 +43,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to have parameters matching all the type parameters.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\ExtendedActorSystem.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ExtendedActorSystem.cs",
 "region":  {
 "startLine":  50,
 "startColumn":  35,
@@ -56,7 +56,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to have parameters matching all the type parameters.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\Extensions.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\Extensions.cs",
 "region":  {
 "startLine":  74,
 "startColumn":  25,
@@ -69,7 +69,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to have parameters matching all the type parameters.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\Extensions.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\Extensions.cs",
 "region":  {
 "startLine":  82,
 "startColumn":  25,
@@ -82,7 +82,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to have parameters matching all the type parameters.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\Extensions.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\Extensions.cs",
 "region":  {
 "startLine":  95,
 "startColumn":  25,
@@ -95,7 +95,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to have parameters matching all the type parameters.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\Futures.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\Futures.cs",
 "region":  {
 "startLine":  32,
 "startColumn":  31,
@@ -108,7 +108,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to have parameters matching all the type parameters.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\Internal\ActorSystemImpl.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\Internal\ActorSystemImpl.cs",
 "region":  {
 "startLine":  93,
 "startColumn":  35,
@@ -121,7 +121,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to have parameters matching all the type parameters.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\Internal\ActorSystemImpl.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\Internal\ActorSystemImpl.cs",
 "region":  {
 "startLine":  211,
 "startColumn":  27,
@@ -134,7 +134,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to have parameters matching all the type parameters.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\Internal\ActorSystemImpl.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\Internal\ActorSystemImpl.cs",
 "region":  {
 "startLine":  227,
 "startColumn":  30,
@@ -147,7 +147,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to have parameters matching all the type parameters.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\Props.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\Props.cs",
 "region":  {
 "startLine":  375,
 "startColumn":  29,
@@ -160,7 +160,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to have parameters matching all the type parameters.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\Props.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\Props.cs",
 "region":  {
 "startLine":  386,
 "startColumn":  29,
@@ -173,7 +173,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to have parameters matching all the type parameters.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\Props.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\Props.cs",
 "region":  {
 "startLine":  397,
 "startColumn":  29,
@@ -186,7 +186,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to have parameters matching all the type parameters.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\Stash\StashFactory.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\Stash\StashFactory.cs",
 "region":  {
 "startLine":  19,
 "startColumn":  30,
@@ -199,7 +199,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to have parameters matching all the type parameters.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\SupervisorStrategy.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\SupervisorStrategy.cs",
 "region":  {
 "startLine":  627,
 "startColumn":  53,
@@ -212,7 +212,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to have parameters matching all the type parameters.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Configuration\ConfigurationFactory.cs",
+"uri":  "sources\akka.net\src\core\Akka\Configuration\ConfigurationFactory.cs",
 "region":  {
 "startLine":  119,
 "startColumn":  30,
@@ -225,7 +225,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to have parameters matching all the type parameters.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Event\EventStreamExtensions.cs",
+"uri":  "sources\akka.net\src\core\Akka\Event\EventStreamExtensions.cs",
 "region":  {
 "startLine":  31,
 "startColumn":  28,
@@ -238,7 +238,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to have parameters matching all the type parameters.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Event\EventStreamExtensions.cs",
+"uri":  "sources\akka.net\src\core\Akka\Event\EventStreamExtensions.cs",
 "region":  {
 "startLine":  44,
 "startColumn":  28,
@@ -251,7 +251,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to have parameters matching all the type parameters.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Event\Logging.cs",
+"uri":  "sources\akka.net\src\core\Akka\Event\Logging.cs",
 "region":  {
 "startLine":  170,
 "startColumn":  32,
@@ -264,7 +264,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to have parameters matching all the type parameters.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\PatternMatch.cs",
+"uri":  "sources\akka.net\src\core\Akka\PatternMatch.cs",
 "region":  {
 "startLine":  75,
 "startColumn":  21,
@@ -277,7 +277,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to have parameters matching all the type parameters.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Util\Internal\Extensions.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\Internal\Extensions.cs",
 "region":  {
 "startLine":  16,
 "startColumn":  25,
@@ -290,7 +290,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to have parameters matching all the type parameters.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Util\Internal\TaskExtensions.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\Internal\TaskExtensions.cs",
 "region":  {
 "startLine":  15,
 "startColumn":  37,
@@ -303,7 +303,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to have parameters matching all the type parameters.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Util\MatchHandler\IPartialActionBuilder.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\IPartialActionBuilder.cs",
 "region":  {
 "startLine":  29,
 "startColumn":  26,
@@ -316,7 +316,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to have parameters matching all the type parameters.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Util\MatchHandler\PartialActionBuilder.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialActionBuilder.cs",
 "region":  {
 "startLine":  41,
 "startColumn":  33,
@@ -329,7 +329,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to have parameters matching all the type parameters.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Util\Resolver.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\Resolver.cs",
 "region":  {
 "startLine":  15,
 "startColumn":  11,
@@ -342,7 +342,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to have parameters matching all the type parameters.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Util\TypeExtensions.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\TypeExtensions.cs",
 "region":  {
 "startLine":  24,
 "startColumn":  28,
@@ -355,7 +355,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to have parameters matching all the type parameters.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Util\Vector.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\Vector.cs",
 "region":  {
 "startLine":  16,
 "startColumn":  47,

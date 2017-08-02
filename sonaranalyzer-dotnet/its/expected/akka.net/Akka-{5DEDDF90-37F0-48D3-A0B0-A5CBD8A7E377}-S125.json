@@ -4,7 +4,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\ActorCell.Children.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.Children.cs",
 "region":  {
 "startLine":  339,
 "startColumn":  13,
@@ -17,7 +17,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\ActorCell.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.cs",
 "region":  {
 "startLine":  101,
 "startColumn":  13,
@@ -30,7 +30,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\ActorCell.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.cs",
 "region":  {
 "startLine":  272,
 "startColumn":  17,
@@ -43,7 +43,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\ActorCell.DeathWatch.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.DeathWatch.cs",
 "region":  {
 "startLine":  167,
 "startColumn":  21,
@@ -56,7 +56,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\ActorCell.DeathWatch.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.DeathWatch.cs",
 "region":  {
 "startLine":  192,
 "startColumn":  21,
@@ -69,7 +69,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\ActorCell.DeathWatch.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.DeathWatch.cs",
 "region":  {
 "startLine":  216,
 "startColumn":  21,
@@ -82,7 +82,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\ActorCell.DefaultMessages.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.DefaultMessages.cs",
 "region":  {
 "startLine":  88,
 "startColumn":  1,
@@ -95,7 +95,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\ActorCell.FaultHandling.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.FaultHandling.cs",
 "region":  {
 "startLine":  122,
 "startColumn":  13,
@@ -108,7 +108,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\ActorCell.FaultHandling.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.FaultHandling.cs",
 "region":  {
 "startLine":  194,
 "startColumn":  13,
@@ -121,7 +121,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\ActorCell.FaultHandling.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.FaultHandling.cs",
 "region":  {
 "startLine":  386,
 "startColumn":  13,
@@ -134,7 +134,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\ActorPath.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorPath.cs",
 "region":  {
 "startLine":  419,
 "startColumn":  9,
@@ -147,7 +147,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\ActorRef.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorRef.cs",
 "region":  {
 "startLine":  436,
 "startColumn":  1,
@@ -160,7 +160,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\ActorRefProvider.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorRefProvider.cs",
 "region":  {
 "startLine":  315,
 "startColumn":  13,
@@ -173,7 +173,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\ActorSystem.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorSystem.cs",
 "region":  {
 "startLine":  86,
 "startColumn":  13,
@@ -186,7 +186,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\ActorSystem.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorSystem.cs",
 "region":  {
 "startLine":  196,
 "startColumn":  35,
@@ -199,7 +199,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\ActorSystem.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorSystem.cs",
 "region":  {
 "startLine":  200,
 "startColumn":  9,
@@ -212,7 +212,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\ActorSystem.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorSystem.cs",
 "region":  {
 "startLine":  242,
 "startColumn":  17,
@@ -225,7 +225,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\Cancellation\Cancelable.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\Cancellation\Cancelable.cs",
 "region":  {
 "startLine":  191,
 "startColumn":  35,
@@ -238,7 +238,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\Cancellation\Cancelable.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\Cancellation\Cancelable.cs",
 "region":  {
 "startLine":  234,
 "startColumn":  17,
@@ -251,7 +251,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\ChildrenContainer.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ChildrenContainer.cs",
 "region":  {
 "startLine":  8,
 "startColumn":  1,
@@ -264,7 +264,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\ChildrenContainer\Internal\ChildStats.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ChildrenContainer\Internal\ChildStats.cs",
 "region":  {
 "startLine":  69,
 "startColumn":  13,
@@ -277,7 +277,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\LocalActorRef.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\LocalActorRef.cs",
 "region":  {
 "startLine":  38,
 "startColumn":  9,
@@ -290,7 +290,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\Props.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\Props.cs",
 "region":  {
 "startLine":  116,
 "startColumn":  15,
@@ -303,7 +303,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\Props.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\Props.cs",
 "region":  {
 "startLine":  469,
 "startColumn":  13,
@@ -316,7 +316,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Dispatch\ConcurrentQueueMailbox.cs",
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\ConcurrentQueueMailbox.cs",
 "region":  {
 "startLine":  17,
 "startColumn":  1,
@@ -329,7 +329,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Dispatch\ConcurrentQueueMailbox.cs",
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\ConcurrentQueueMailbox.cs",
 "region":  {
 "startLine":  64,
 "startColumn":  21,
@@ -342,7 +342,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Dispatch\ConcurrentQueueMailbox.cs",
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\ConcurrentQueueMailbox.cs",
 "region":  {
 "startLine":  84,
 "startColumn":  25,
@@ -355,7 +355,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Dispatch\ConcurrentQueueMailbox.cs",
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\ConcurrentQueueMailbox.cs",
 "region":  {
 "startLine":  212,
 "startColumn":  13,
@@ -368,7 +368,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Dispatch\GenericMailbox.cs",
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\GenericMailbox.cs",
 "region":  {
 "startLine":  85,
 "startColumn":  21,
@@ -381,7 +381,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Dispatch\GenericMailbox.cs",
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\GenericMailbox.cs",
 "region":  {
 "startLine":  105,
 "startColumn":  25,
@@ -394,7 +394,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Dispatch\GenericMailbox.cs",
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\GenericMailbox.cs",
 "region":  {
 "startLine":  233,
 "startColumn":  13,
@@ -407,7 +407,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Dispatch\Mailboxes.cs",
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\Mailboxes.cs",
 "region":  {
 "startLine":  47,
 "startColumn":  19,
@@ -420,7 +420,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Helios.Concurrency.DedicatedThreadPool.cs",
+"uri":  "sources\akka.net\src\core\Akka\Helios.Concurrency.DedicatedThreadPool.cs",
 "region":  {
 "startLine":  324,
 "startColumn":  17,
@@ -433,7 +433,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Helios.Concurrency.DedicatedThreadPool.cs",
+"uri":  "sources\akka.net\src\core\Akka\Helios.Concurrency.DedicatedThreadPool.cs",
 "region":  {
 "startLine":  334,
 "startColumn":  17,
@@ -446,7 +446,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\IO\Tcp.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\Tcp.cs",
 "region":  {
 "startLine":  731,
 "startColumn":  13,
@@ -459,7 +459,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\IO\TcpConnection.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpConnection.cs",
 "region":  {
 "startLine":  354,
 "startColumn":  13,
@@ -472,7 +472,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\IO\TcpConnection.cs",
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpConnection.cs",
 "region":  {
 "startLine":  523,
 "startColumn":  1,
@@ -485,7 +485,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Pattern\CircuitBreaker.cs",
+"uri":  "sources\akka.net\src\core\Akka\Pattern\CircuitBreaker.cs",
 "region":  {
 "startLine":  114,
 "startColumn":  13,
@@ -498,7 +498,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Pattern\CircuitBreaker.cs",
+"uri":  "sources\akka.net\src\core\Akka\Pattern\CircuitBreaker.cs",
 "region":  {
 "startLine":  155,
 "startColumn":  17,
@@ -511,7 +511,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Pattern\CircuitBreaker.cs",
+"uri":  "sources\akka.net\src\core\Akka\Pattern\CircuitBreaker.cs",
 "region":  {
 "startLine":  259,
 "startColumn":  9,
@@ -524,7 +524,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Pattern\CircuitBreakerState.cs",
+"uri":  "sources\akka.net\src\core\Akka\Pattern\CircuitBreakerState.cs",
 "region":  {
 "startLine":  55,
 "startColumn":  13,
@@ -537,7 +537,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Pattern\CircuitBreakerState.cs",
+"uri":  "sources\akka.net\src\core\Akka\Pattern\CircuitBreakerState.cs",
 "region":  {
 "startLine":  63,
 "startColumn":  13,
@@ -550,7 +550,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Routing\ResizablePoolActor.cs",
+"uri":  "sources\akka.net\src\core\Akka\Routing\ResizablePoolActor.cs",
 "region":  {
 "startLine":  21,
 "startColumn":  9,
@@ -563,7 +563,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Routing\RoutedActorRef.cs",
+"uri":  "sources\akka.net\src\core\Akka\Routing\RoutedActorRef.cs",
 "region":  {
 "startLine":  37,
 "startColumn":  13,
@@ -576,7 +576,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Routing\RouterConfig.cs",
+"uri":  "sources\akka.net\src\core\Akka\Routing\RouterConfig.cs",
 "region":  {
 "startLine":  25,
 "startColumn":  9,
@@ -589,7 +589,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Routing\RouterConfig.cs",
+"uri":  "sources\akka.net\src\core\Akka\Routing\RouterConfig.cs",
 "region":  {
 "startLine":  581,
 "startColumn":  13,
@@ -602,7 +602,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Routing\RouterConfig.cs",
+"uri":  "sources\akka.net\src\core\Akka\Routing\RouterConfig.cs",
 "region":  {
 "startLine":  708,
 "startColumn":  9,
@@ -615,7 +615,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Util\Internal\Collections\ImmutableAvlTreeBase.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\Internal\Collections\ImmutableAvlTreeBase.cs",
 "region":  {
 "startLine":  127,
 "startColumn":  21,
@@ -628,7 +628,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Util\MatchHandler\MatchBuilder.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\MatchBuilder.cs",
 "region":  {
 "startLine":  22,
 "startColumn":  9,
@@ -641,7 +641,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Util\MatchHandler\MatchExpressionBuilder.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\MatchExpressionBuilder.cs",
 "region":  {
 "startLine":  41,
 "startColumn":  13,
@@ -654,7 +654,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Util\MatchHandler\MatchExpressionBuilder.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\MatchExpressionBuilder.cs",
 "region":  {
 "startLine":  66,
 "startColumn":  25,
@@ -667,7 +667,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Util\MatchHandler\MatchExpressionBuilder.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\MatchExpressionBuilder.cs",
 "region":  {
 "startLine":  72,
 "startColumn":  25,
@@ -680,7 +680,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Util\MatchHandler\MatchExpressionBuilder.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\MatchExpressionBuilder.cs",
 "region":  {
 "startLine":  89,
 "startColumn":  25,
@@ -693,7 +693,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Util\MatchHandler\MatchExpressionBuilder.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\MatchExpressionBuilder.cs",
 "region":  {
 "startLine":  100,
 "startColumn":  29,
@@ -706,7 +706,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Util\MatchHandler\MatchExpressionBuilder.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\MatchExpressionBuilder.cs",
 "region":  {
 "startLine":  111,
 "startColumn":  25,
@@ -719,7 +719,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Util\MatchHandler\MatchExpressionBuilder.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\MatchExpressionBuilder.cs",
 "region":  {
 "startLine":  269,
 "startColumn":  13,
@@ -732,7 +732,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Util\MatchHandler\MatchExpressionBuilder.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\MatchExpressionBuilder.cs",
 "region":  {
 "startLine":  280,
 "startColumn":  13,
@@ -745,7 +745,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Util\MatchHandler\MatchExpressionBuilder.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\MatchExpressionBuilder.cs",
 "region":  {
 "startLine":  297,
 "startColumn":  13,
@@ -758,7 +758,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Util\MatchHandler\MatchExpressionBuilder.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\MatchExpressionBuilder.cs",
 "region":  {
 "startLine":  310,
 "startColumn":  9,
@@ -771,7 +771,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
 "region":  {
 "startLine":  14,
 "startColumn":  5,
@@ -784,7 +784,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
 "region":  {
 "startLine":  27,
 "startColumn":  13,
@@ -797,7 +797,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
 "region":  {
 "startLine":  38,
 "startColumn":  13,
@@ -810,7 +810,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
 "region":  {
 "startLine":  51,
 "startColumn":  13,
@@ -823,7 +823,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
 "region":  {
 "startLine":  65,
 "startColumn":  13,
@@ -836,7 +836,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
 "region":  {
 "startLine":  81,
 "startColumn":  13,
@@ -849,7 +849,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
 "region":  {
 "startLine":  99,
 "startColumn":  13,
@@ -862,7 +862,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
 "region":  {
 "startLine":  119,
 "startColumn":  13,
@@ -875,7 +875,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
 "region":  {
 "startLine":  141,
 "startColumn":  13,
@@ -888,7 +888,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
 "region":  {
 "startLine":  165,
 "startColumn":  13,
@@ -901,7 +901,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
 "region":  {
 "startLine":  191,
 "startColumn":  13,
@@ -914,7 +914,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
 "region":  {
 "startLine":  219,
 "startColumn":  13,
@@ -927,7 +927,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
 "region":  {
 "startLine":  249,
 "startColumn":  13,
@@ -940,7 +940,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
 "region":  {
 "startLine":  281,
 "startColumn":  13,
@@ -953,7 +953,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
 "region":  {
 "startLine":  315,
 "startColumn":  13,
@@ -966,7 +966,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
 "region":  {
 "startLine":  351,
 "startColumn":  13,
@@ -979,7 +979,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
 "region":  {
 "startLine":  389,
 "startColumn":  13,

@@ -4,7 +4,7 @@
 "id":  "S2933",
 "message":  "Make 'bootstrapper' 'readonly'.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests.Functional\Tests\SerializerTests.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests.Functional\Tests\SerializerTests.cs",
 "region":  {
 "startLine":  12,
 "startColumn":  42,
@@ -17,7 +17,7 @@
 "id":  "S2933",
 "message":  "Make 'browser' 'readonly'.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests.Functional\Tests\SerializerTests.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests.Functional\Tests\SerializerTests.cs",
 "region":  {
 "startLine":  13,
 "startColumn":  25,

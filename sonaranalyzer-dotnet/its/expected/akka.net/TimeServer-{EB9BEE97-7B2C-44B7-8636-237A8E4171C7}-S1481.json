@@ -4,7 +4,7 @@
 "id":  "S1481",
 "message":  "Remove this unused 'server' local variable.",
 "location":  {
-"uri":  "akka.net\src\examples\TimeServer\TimeServer\Program.cs",
+"uri":  "sources\akka.net\src\examples\TimeServer\TimeServer\Program.cs",
 "region":  {
 "startLine":  21,
 "startColumn":  21,

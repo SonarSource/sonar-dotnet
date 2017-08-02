@@ -4,7 +4,7 @@
 "id":  "S2325",
 "message":  "Make 'CreateContext' a static method.",
 "location":  {
-"uri":  "Nancy\src\Nancy.ViewEngines.DotLiquid.Tests\DotLiquidViewEngineFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.DotLiquid.Tests\DotLiquidViewEngineFixture.cs",
 "region":  {
 "startLine":  387,
 "startColumn":  42,

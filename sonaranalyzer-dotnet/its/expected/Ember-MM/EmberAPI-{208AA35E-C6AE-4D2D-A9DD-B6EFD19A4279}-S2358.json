@@ -4,7 +4,7 @@
 "id":  "S2358",
 "message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAdvancedSettings.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAdvancedSettings.vb",
 "region":  {
 "startLine":  141,
 "startColumn":  12,
@@ -17,7 +17,7 @@
 "id":  "S2358",
 "message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAdvancedSettings.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAdvancedSettings.vb",
 "region":  {
 "startLine":  157,
 "startColumn":  16,
@@ -30,7 +30,7 @@
 "id":  "S2358",
 "message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAdvancedSettings.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAdvancedSettings.vb",
 "region":  {
 "startLine":  264,
 "startColumn":  20,
@@ -43,7 +43,7 @@
 "id":  "S2358",
 "message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPILocalization.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPILocalization.vb",
 "region":  {
 "startLine":  222,
 "startColumn":  38,
@@ -56,7 +56,7 @@
 "id":  "S2358",
 "message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
 "region":  {
 "startLine":  102,
 "startColumn":  20,
@@ -69,7 +69,7 @@
 "id":  "S2358",
 "message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaInfo.vb",
 "region":  {
 "startLine":  124,
 "startColumn":  20,
@@ -82,7 +82,7 @@
 "id":  "S2358",
 "message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
 "region":  {
 "startLine":  144,
 "startColumn":  32,
@@ -95,7 +95,7 @@
 "id":  "S2358",
 "message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
 "region":  {
 "startLine":  207,
 "startColumn":  28,
@@ -108,7 +108,7 @@
 "id":  "S2358",
 "message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIModules.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIModules.vb",
 "region":  {
 "startLine":  278,
 "startColumn":  28,
@@ -121,7 +121,7 @@
 "id":  "S2358",
 "message":  "Replace this use of 'Not...Is...' with 'IsNot'.",
 "location":  {
-"uri":  "Ember-MM\EmberAPI\clsAPIXML.vb",
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIXML.vb",
 "region":  {
 "startLine":  221,
 "startColumn":  20,

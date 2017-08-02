@@ -4,7 +4,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\ActorCell.DefaultMessages.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.DefaultMessages.cs",
 "region":  {
 "startLine":  226,
 "startColumn":  32,
@@ -17,7 +17,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\ActorCell.FaultHandling.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.FaultHandling.cs",
 "region":  {
 "startLine":  151,
 "startColumn":  80,
@@ -30,7 +30,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\ActorProducerPipeline.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorProducerPipeline.cs",
 "region":  {
 "startLine":  223,
 "startColumn":  48,
@@ -43,7 +43,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\ActorProducerPipeline.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorProducerPipeline.cs",
 "region":  {
 "startLine":  243,
 "startColumn":  48,
@@ -56,7 +56,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\Deployer.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\Deployer.cs",
 "region":  {
 "startLine":  104,
 "startColumn":  46,
@@ -69,7 +69,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\EmptyLocalActorRef.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\EmptyLocalActorRef.cs",
 "region":  {
 "startLine":  66,
 "startColumn":  32,
@@ -82,7 +82,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\Futures.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\Futures.cs",
 "region":  {
 "startLine":  373,
 "startColumn":  43,
@@ -95,7 +95,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\Futures.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\Futures.cs",
 "region":  {
 "startLine":  381,
 "startColumn":  40,
@@ -108,7 +108,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\Internal\ActorSystemImpl.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\Internal\ActorSystemImpl.cs",
 "region":  {
 "startLine":  272,
 "startColumn":  75,
@@ -121,7 +121,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\RepointableActorRef.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\RepointableActorRef.cs",
 "region":  {
 "startLine":  334,
 "startColumn":  44,
@@ -134,7 +134,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\RepointableActorRef.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\RepointableActorRef.cs",
 "region":  {
 "startLine":  369,
 "startColumn":  44,
@@ -147,7 +147,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Configuration\ConfigurationFactory.cs",
+"uri":  "sources\akka.net\src\core\Akka\Configuration\ConfigurationFactory.cs",
 "region":  {
 "startLine":  134,
 "startColumn":  46,
@@ -160,7 +160,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Dispatch\ConcurrentQueueMailbox.cs",
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\ConcurrentQueueMailbox.cs",
 "region":  {
 "startLine":  154,
 "startColumn":  36,
@@ -173,7 +173,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Dispatch\ConcurrentQueueMailbox.cs",
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\ConcurrentQueueMailbox.cs",
 "region":  {
 "startLine":  159,
 "startColumn":  36,
@@ -186,7 +186,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Dispatch\GenericMailbox.cs",
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\GenericMailbox.cs",
 "region":  {
 "startLine":  175,
 "startColumn":  36,
@@ -199,7 +199,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Dispatch\GenericMailbox.cs",
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\GenericMailbox.cs",
 "region":  {
 "startLine":  180,
 "startColumn":  36,
@@ -212,7 +212,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Dispatch\Mailbox.cs",
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\Mailbox.cs",
 "region":  {
 "startLine":  28,
 "startColumn":  29,
@@ -225,7 +225,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Event\TraceLogger.cs",
+"uri":  "sources\akka.net\src\core\Akka\Event\TraceLogger.cs",
 "region":  {
 "startLine":  27,
 "startColumn":  66,

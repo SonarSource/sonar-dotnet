@@ -4,7 +4,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence.TestKit\PluginSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit\PluginSpec.cs",
 "region":  {
 "startLine":  54,
 "startColumn":  13,

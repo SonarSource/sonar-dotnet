@@ -4,7 +4,7 @@
 "id":  "S3963",
 "message":  "Initialize all 'static fields' inline and remove the 'static constructor'.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Conventions\StaticContentConventionBuilder.cs",
+"uri":  "sources\Nancy\src\Nancy\Conventions\StaticContentConventionBuilder.cs",
 "region":  {
 "startLine":  22,
 "startColumn":  9,
@@ -17,7 +17,7 @@
 "id":  "S3963",
 "message":  "Initialize all 'static fields' inline and remove the 'static constructor'.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
 "region":  {
 "startLine":  103,
 "startColumn":  9,
@@ -30,7 +30,7 @@
 "id":  "S3963",
 "message":  "Initialize all 'static fields' inline and remove the 'static constructor'.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Jsonp.cs",
+"uri":  "sources\Nancy\src\Nancy\Jsonp.cs",
 "region":  {
 "startLine":  19,
 "startColumn":  9,
@@ -43,7 +43,7 @@
 "id":  "S3963",
 "message":  "Initialize all 'static fields' inline and remove the 'static constructor'.",
 "location":  {
-"uri":  "Nancy\src\Nancy\MimeTypes.cs",
+"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
 "region":  {
 "startLine":  40,
 "startColumn":  9,
@@ -56,7 +56,7 @@
 "id":  "S3963",
 "message":  "Initialize all 'static fields' inline and remove the 'static constructor'.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Responses\EmbeddedFileResponse.cs",
+"uri":  "sources\Nancy\src\Nancy\Responses\EmbeddedFileResponse.cs",
 "region":  {
 "startLine":  15,
 "startColumn":  9,
@@ -69,7 +69,7 @@
 "id":  "S3963",
 "message":  "Initialize all 'static fields' inline and remove the 'static constructor'.",
 "location":  {
-"uri":  "Nancy\src\Nancy\StaticConfiguration.cs",
+"uri":  "sources\Nancy\src\Nancy\StaticConfiguration.cs",
 "region":  {
 "startLine":  17,
 "startColumn":  9,
@@ -82,7 +82,7 @@
 "id":  "S3963",
 "message":  "Initialize all 'static fields' inline and remove the 'static constructor'.",
 "location":  {
-"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
 "startLine":  317,
 "startColumn":  9,

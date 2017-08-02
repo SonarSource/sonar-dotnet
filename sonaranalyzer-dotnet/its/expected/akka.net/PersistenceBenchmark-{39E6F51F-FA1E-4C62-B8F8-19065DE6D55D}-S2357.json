@@ -4,7 +4,7 @@
 "id":  "S2357",
 "message":  "Make 'SequenceNr' private.",
 "location":  {
-"uri":  "akka.net\src\benchmark\PersistenceBenchmark\Messages.cs",
+"uri":  "sources\akka.net\src\benchmark\PersistenceBenchmark\Messages.cs",
 "region":  {
 "startLine":  26,
 "startColumn":  30,
@@ -17,7 +17,7 @@
 "id":  "S2357",
 "message":  "Make 'MessagesCount' private.",
 "location":  {
-"uri":  "akka.net\src\benchmark\PersistenceBenchmark\Messages.cs",
+"uri":  "sources\akka.net\src\benchmark\PersistenceBenchmark\Messages.cs",
 "region":  {
 "startLine":  37,
 "startColumn":  29,

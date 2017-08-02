@@ -4,7 +4,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to have parameters matching all the type parameters.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\xUnitExtensions\RecordAsync.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\xUnitExtensions\RecordAsync.cs",
 "region":  {
 "startLine":  25,
 "startColumn":  37,

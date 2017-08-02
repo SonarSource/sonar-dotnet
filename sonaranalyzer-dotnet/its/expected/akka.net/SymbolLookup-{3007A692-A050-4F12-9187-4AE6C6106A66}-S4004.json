@@ -4,7 +4,7 @@
 "id":  "S4004",
 "message":  "Make the 'StockData' property read-only by removing the property setter or making it private.",
 "location":  {
-"uri":  "akka.net\src\examples\Stocks\SymbolLookup\MainForm.cs",
+"uri":  "sources\akka.net\src\examples\Stocks\SymbolLookup\MainForm.cs",
 "region":  {
 "startLine":  23,
 "startColumn":  65,

@@ -5,7 +5,7 @@
 "message":  "Refactor this method to reduce its Cognitive Complexity from 23 to the 15 allowed.",
 "location":  [
 {
-"uri":  "akka.net\src\contrib\testkits\Akka.TestKit.Xunit\Internals\AkkaAssertEqualityComparer.cs",
+"uri":  "sources\akka.net\src\contrib\testkits\Akka.TestKit.Xunit\Internals\AkkaAssertEqualityComparer.cs",
 "region":  {
 "startLine":  44,
 "startColumn":  21,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "akka.net\src\contrib\testkits\Akka.TestKit.Xunit\Internals\AkkaAssertEqualityComparer.cs",
+"uri":  "sources\akka.net\src\contrib\testkits\Akka.TestKit.Xunit\Internals\AkkaAssertEqualityComparer.cs",
 "region":  {
 "startLine":  49,
 "startColumn":  13,
@@ -23,7 +23,7 @@
 }
 },
 {
-"uri":  "akka.net\src\contrib\testkits\Akka.TestKit.Xunit\Internals\AkkaAssertEqualityComparer.cs",
+"uri":  "sources\akka.net\src\contrib\testkits\Akka.TestKit.Xunit\Internals\AkkaAssertEqualityComparer.cs",
 "region":  {
 "startLine":  49,
 "startColumn":  38,
@@ -32,7 +32,7 @@
 }
 },
 {
-"uri":  "akka.net\src\contrib\testkits\Akka.TestKit.Xunit\Internals\AkkaAssertEqualityComparer.cs",
+"uri":  "sources\akka.net\src\contrib\testkits\Akka.TestKit.Xunit\Internals\AkkaAssertEqualityComparer.cs",
 "region":  {
 "startLine":  49,
 "startColumn":  65,
@@ -41,7 +41,7 @@
 }
 },
 {
-"uri":  "akka.net\src\contrib\testkits\Akka.TestKit.Xunit\Internals\AkkaAssertEqualityComparer.cs",
+"uri":  "sources\akka.net\src\contrib\testkits\Akka.TestKit.Xunit\Internals\AkkaAssertEqualityComparer.cs",
 "region":  {
 "startLine":  51,
 "startColumn":  17,
@@ -50,7 +50,7 @@
 }
 },
 {
-"uri":  "akka.net\src\contrib\testkits\Akka.TestKit.Xunit\Internals\AkkaAssertEqualityComparer.cs",
+"uri":  "sources\akka.net\src\contrib\testkits\Akka.TestKit.Xunit\Internals\AkkaAssertEqualityComparer.cs",
 "region":  {
 "startLine":  54,
 "startColumn":  17,
@@ -59,7 +59,7 @@
 }
 },
 {
-"uri":  "akka.net\src\contrib\testkits\Akka.TestKit.Xunit\Internals\AkkaAssertEqualityComparer.cs",
+"uri":  "sources\akka.net\src\contrib\testkits\Akka.TestKit.Xunit\Internals\AkkaAssertEqualityComparer.cs",
 "region":  {
 "startLine":  59,
 "startColumn":  13,
@@ -68,7 +68,7 @@
 }
 },
 {
-"uri":  "akka.net\src\contrib\testkits\Akka.TestKit.Xunit\Internals\AkkaAssertEqualityComparer.cs",
+"uri":  "sources\akka.net\src\contrib\testkits\Akka.TestKit.Xunit\Internals\AkkaAssertEqualityComparer.cs",
 "region":  {
 "startLine":  59,
 "startColumn":  31,
@@ -77,7 +77,7 @@
 }
 },
 {
-"uri":  "akka.net\src\contrib\testkits\Akka.TestKit.Xunit\Internals\AkkaAssertEqualityComparer.cs",
+"uri":  "sources\akka.net\src\contrib\testkits\Akka.TestKit.Xunit\Internals\AkkaAssertEqualityComparer.cs",
 "region":  {
 "startLine":  64,
 "startColumn":  13,
@@ -86,7 +86,7 @@
 }
 },
 {
-"uri":  "akka.net\src\contrib\testkits\Akka.TestKit.Xunit\Internals\AkkaAssertEqualityComparer.cs",
+"uri":  "sources\akka.net\src\contrib\testkits\Akka.TestKit.Xunit\Internals\AkkaAssertEqualityComparer.cs",
 "region":  {
 "startLine":  69,
 "startColumn":  13,
@@ -95,7 +95,7 @@
 }
 },
 {
-"uri":  "akka.net\src\contrib\testkits\Akka.TestKit.Xunit\Internals\AkkaAssertEqualityComparer.cs",
+"uri":  "sources\akka.net\src\contrib\testkits\Akka.TestKit.Xunit\Internals\AkkaAssertEqualityComparer.cs",
 "region":  {
 "startLine":  74,
 "startColumn":  13,
@@ -104,7 +104,7 @@
 }
 },
 {
-"uri":  "akka.net\src\contrib\testkits\Akka.TestKit.Xunit\Internals\AkkaAssertEqualityComparer.cs",
+"uri":  "sources\akka.net\src\contrib\testkits\Akka.TestKit.Xunit\Internals\AkkaAssertEqualityComparer.cs",
 "region":  {
 "startLine":  81,
 "startColumn":  13,
@@ -113,7 +113,7 @@
 }
 },
 {
-"uri":  "akka.net\src\contrib\testkits\Akka.TestKit.Xunit\Internals\AkkaAssertEqualityComparer.cs",
+"uri":  "sources\akka.net\src\contrib\testkits\Akka.TestKit.Xunit\Internals\AkkaAssertEqualityComparer.cs",
 "region":  {
 "startLine":  81,
 "startColumn":  36,
@@ -122,7 +122,7 @@
 }
 },
 {
-"uri":  "akka.net\src\contrib\testkits\Akka.TestKit.Xunit\Internals\AkkaAssertEqualityComparer.cs",
+"uri":  "sources\akka.net\src\contrib\testkits\Akka.TestKit.Xunit\Internals\AkkaAssertEqualityComparer.cs",
 "region":  {
 "startLine":  87,
 "startColumn":  17,
@@ -131,7 +131,7 @@
 }
 },
 {
-"uri":  "akka.net\src\contrib\testkits\Akka.TestKit.Xunit\Internals\AkkaAssertEqualityComparer.cs",
+"uri":  "sources\akka.net\src\contrib\testkits\Akka.TestKit.Xunit\Internals\AkkaAssertEqualityComparer.cs",
 "region":  {
 "startLine":  92,
 "startColumn":  21,
@@ -140,7 +140,7 @@
 }
 },
 {
-"uri":  "akka.net\src\contrib\testkits\Akka.TestKit.Xunit\Internals\AkkaAssertEqualityComparer.cs",
+"uri":  "sources\akka.net\src\contrib\testkits\Akka.TestKit.Xunit\Internals\AkkaAssertEqualityComparer.cs",
 "region":  {
 "startLine":  92,
 "startColumn":  34,
@@ -149,7 +149,7 @@
 }
 },
 {
-"uri":  "akka.net\src\contrib\testkits\Akka.TestKit.Xunit\Internals\AkkaAssertEqualityComparer.cs",
+"uri":  "sources\akka.net\src\contrib\testkits\Akka.TestKit.Xunit\Internals\AkkaAssertEqualityComparer.cs",
 "region":  {
 "startLine":  95,
 "startColumn":  21,

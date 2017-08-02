@@ -4,7 +4,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Demo.Hosting.Aspnet\MainModule.cs",
+"uri":  "sources\Nancy\src\Nancy.Demo.Hosting.Aspnet\MainModule.cs",
 "region":  {
 "startLine":  236,
 "startColumn":  35,
@@ -17,7 +17,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Demo.Hosting.Aspnet\Models\Payload.cs",
+"uri":  "sources\Nancy\src\Nancy.Demo.Hosting.Aspnet\Models\Payload.cs",
 "region":  {
 "startLine":  77,
 "startColumn":  20,
@@ -30,7 +30,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Demo.Hosting.Aspnet\Piratizer4000.cs",
+"uri":  "sources\Nancy\src\Nancy.Demo.Hosting.Aspnet\Piratizer4000.cs",
 "region":  {
 "startLine":  15,
 "startColumn":  20,
@@ -43,7 +43,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Demo.Hosting.Aspnet\Piratizer4000.cs",
+"uri":  "sources\Nancy\src\Nancy.Demo.Hosting.Aspnet\Piratizer4000.cs",
 "region":  {
 "startLine":  15,
 "startColumn":  44,

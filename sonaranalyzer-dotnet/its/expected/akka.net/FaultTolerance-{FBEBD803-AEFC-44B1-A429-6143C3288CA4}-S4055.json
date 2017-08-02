@@ -4,7 +4,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "akka.net\src\examples\FaultTolerance\Program.cs",
+"uri":  "sources\akka.net\src\examples\FaultTolerance\Program.cs",
 "region":  {
 "startLine":  30,
 "startColumn":  25,
@@ -17,7 +17,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "akka.net\src\examples\FaultTolerance\Program.cs",
+"uri":  "sources\akka.net\src\examples\FaultTolerance\Program.cs",
 "region":  {
 "startLine":  32,
 "startColumn":  31,
@@ -30,7 +30,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "akka.net\src\examples\FaultTolerance\Program.cs",
+"uri":  "sources\akka.net\src\examples\FaultTolerance\Program.cs",
 "region":  {
 "startLine":  133,
 "startColumn":  121,
@@ -43,7 +43,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "akka.net\src\examples\FaultTolerance\Program.cs",
+"uri":  "sources\akka.net\src\examples\FaultTolerance\Program.cs",
 "region":  {
 "startLine":  142,
 "startColumn":  50,
@@ -56,7 +56,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "akka.net\src\examples\FaultTolerance\Program.cs",
+"uri":  "sources\akka.net\src\examples\FaultTolerance\Program.cs",
 "region":  {
 "startLine":  285,
 "startColumn":  101,

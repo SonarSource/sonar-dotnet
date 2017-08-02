@@ -4,7 +4,7 @@
 "id":  "S1858",
 "message":  "There's no need to call 'ToString()', the compiler will do it for you.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\ActorBase.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorBase.cs",
 "region":  {
 "startLine":  48,
 "startColumn":  43,
@@ -17,7 +17,7 @@
 "id":  "S1858",
 "message":  "There's no need to call 'ToString()', the compiler will do it for you.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\RepointableActorRef.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\RepointableActorRef.cs",
 "region":  {
 "startLine":  374,
 "startColumn":  110,

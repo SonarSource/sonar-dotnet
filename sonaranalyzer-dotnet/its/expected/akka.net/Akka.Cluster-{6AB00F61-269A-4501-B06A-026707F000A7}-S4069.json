@@ -4,7 +4,7 @@
 "id":  "S4069",
 "message":  "Implement alternative method 'Add' for the operator '+'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  1975,
 "startColumn":  44,
@@ -17,7 +17,7 @@
 "id":  "S4069",
 "message":  "Implement alternative method 'Subtract' for the operator '-'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  1984,
 "startColumn":  44,
@@ -30,7 +30,7 @@
 "id":  "S4069",
 "message":  "Implement alternative method 'Add' for the operator '+'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
 "region":  {
 "startLine":  399,
 "startColumn":  50,
@@ -43,7 +43,7 @@
 "id":  "S4069",
 "message":  "Implement alternative method 'Subtract' for the operator '-'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
 "region":  {
 "startLine":  404,
 "startColumn":  50,
@@ -56,7 +56,7 @@
 "id":  "S4069",
 "message":  "Implement alternative method 'Add' for the operator '+'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterMetricsCollector.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterMetricsCollector.cs",
 "region":  {
 "startLine":  254,
 "startColumn":  46,
@@ -69,7 +69,7 @@
 "id":  "S4069",
 "message":  "Implement alternative method 'Add' for the operator '+'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterMetricsCollector.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterMetricsCollector.cs",
 "region":  {
 "startLine":  465,
 "startColumn":  39,
@@ -82,7 +82,7 @@
 "id":  "S4069",
 "message":  "Implement alternative method 'Add' for the operator '+'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterMetricsCollector.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterMetricsCollector.cs",
 "region":  {
 "startLine":  569,
 "startColumn":  37,

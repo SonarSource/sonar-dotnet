@@ -4,7 +4,7 @@
 "id":  "S1449",
 "message":  "Use 'CompareOrdinal' or 'Compare' with the locale specified instead of 'CompareTo'.",
 "location":  {
-"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\DistributedPubSubMediator.cs",
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\DistributedPubSubMediator.cs",
 "region":  {
 "startLine":  472,
 "startColumn":  74,
@@ -17,7 +17,7 @@
 "id":  "S1449",
 "message":  "Use 'CompareOrdinal' or 'Compare' with the locale specified instead of 'CompareTo'.",
 "location":  {
-"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\DistributedPubSubMediator.cs",
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\DistributedPubSubMediator.cs",
 "region":  {
 "startLine":  472,
 "startColumn":  108,

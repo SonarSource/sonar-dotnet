@@ -4,7 +4,7 @@
 "id":  "S2325",
 "message":  "Make 'GetWorkerRouter' a static method.",
 "location":  {
-"uri":  "akka.net\src\examples\Cluster\ClusterTools\ClusterToolsExample.Shared\WorkerManager.cs",
+"uri":  "sources\akka.net\src\examples\Cluster\ClusterTools\ClusterToolsExample.Shared\WorkerManager.cs",
 "region":  {
 "startLine":  43,
 "startColumn":  27,

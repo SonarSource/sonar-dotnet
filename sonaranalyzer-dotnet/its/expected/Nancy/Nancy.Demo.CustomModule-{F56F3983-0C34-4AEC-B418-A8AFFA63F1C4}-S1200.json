@@ -4,7 +4,7 @@
 "id":  "S1200",
 "message":  "Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 27 to the maximum authorized 20 or less.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Demo.CustomModule\UglifiedNancyModule.cs",
+"uri":  "sources\Nancy\src\Nancy.Demo.CustomModule\UglifiedNancyModule.cs",
 "region":  {
 "startLine":  22,
 "startColumn":  27,

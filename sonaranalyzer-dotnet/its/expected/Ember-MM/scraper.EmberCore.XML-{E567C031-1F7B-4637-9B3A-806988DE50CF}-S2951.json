@@ -4,7 +4,7 @@
 "id":  "S2951",
 "message":  "Remove this redundant use of 'Exit Select'.",
 "location":  {
-"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
 "region":  {
 "startLine":  386,
 "startColumn":  25,
@@ -17,7 +17,7 @@
 "id":  "S2951",
 "message":  "Remove this redundant use of 'Exit Select'.",
 "location":  {
-"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
 "region":  {
 "startLine":  414,
 "startColumn":  25,
@@ -30,7 +30,7 @@
 "id":  "S2951",
 "message":  "Remove this redundant use of 'Exit Select'.",
 "location":  {
-"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\Scraper.vb",
 "region":  {
 "startLine":  428,
 "startColumn":  25,
@@ -43,7 +43,7 @@
 "id":  "S2951",
 "message":  "Remove this redundant use of 'Exit Select'.",
 "location":  {
-"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScrapeResultsEntity.vb",
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScrapeResultsEntity.vb",
 "region":  {
 "startLine":  241,
 "startColumn":  25,
@@ -56,7 +56,7 @@
 "id":  "S2951",
 "message":  "Remove this redundant use of 'Exit Select'.",
 "location":  {
-"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScrapeResultsEntity.vb",
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScrapeResultsEntity.vb",
 "region":  {
 "startLine":  255,
 "startColumn":  25,
@@ -69,7 +69,7 @@
 "id":  "S2951",
 "message":  "Remove this redundant use of 'Exit Select'.",
 "location":  {
-"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScrapeResultsEntity.vb",
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScrapeResultsEntity.vb",
 "region":  {
 "startLine":  269,
 "startColumn":  25,
@@ -82,7 +82,7 @@
 "id":  "S2951",
 "message":  "Remove this redundant use of 'Exit Select'.",
 "location":  {
-"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScrapeResultsEntity.vb",
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScrapeResultsEntity.vb",
 "region":  {
 "startLine":  283,
 "startColumn":  25,
@@ -95,7 +95,7 @@
 "id":  "S2951",
 "message":  "Remove this redundant use of 'Exit Select'.",
 "location":  {
-"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScrapeResultsEntity.vb",
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScrapeResultsEntity.vb",
 "region":  {
 "startLine":  297,
 "startColumn":  25,
@@ -108,7 +108,7 @@
 "id":  "S2951",
 "message":  "Remove this redundant use of 'Exit Select'.",
 "location":  {
-"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScrapeResultsEntity.vb",
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScrapeResultsEntity.vb",
 "region":  {
 "startLine":  313,
 "startColumn":  25,
@@ -121,7 +121,7 @@
 "id":  "S2951",
 "message":  "Remove this redundant use of 'Exit Select'.",
 "location":  {
-"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScrapeResultsEntity.vb",
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScrapeResultsEntity.vb",
 "region":  {
 "startLine":  327,
 "startColumn":  25,
@@ -134,7 +134,7 @@
 "id":  "S2951",
 "message":  "Remove this redundant use of 'Exit Select'.",
 "location":  {
-"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScrapeResultsEntity.vb",
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScrapeResultsEntity.vb",
 "region":  {
 "startLine":  341,
 "startColumn":  25,
@@ -147,7 +147,7 @@
 "id":  "S2951",
 "message":  "Remove this redundant use of 'Exit Select'.",
 "location":  {
-"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScrapeResultsEntity.vb",
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScrapeResultsEntity.vb",
 "region":  {
 "startLine":  482,
 "startColumn":  29,
@@ -160,7 +160,7 @@
 "id":  "S2951",
 "message":  "Remove this redundant use of 'Exit Select'.",
 "location":  {
-"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScrapeResultsEntity.vb",
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScrapeResultsEntity.vb",
 "region":  {
 "startLine":  485,
 "startColumn":  29,
@@ -173,7 +173,7 @@
 "id":  "S2951",
 "message":  "Remove this redundant use of 'Exit Select'.",
 "location":  {
-"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScrapeResultsEntity.vb",
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScrapeResultsEntity.vb",
 "region":  {
 "startLine":  492,
 "startColumn":  29,
@@ -186,7 +186,7 @@
 "id":  "S2951",
 "message":  "Remove this redundant use of 'Exit Select'.",
 "location":  {
-"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScrapeResultsEntity.vb",
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScrapeResultsEntity.vb",
 "region":  {
 "startLine":  495,
 "startColumn":  29,
@@ -199,7 +199,7 @@
 "id":  "S2951",
 "message":  "Remove this redundant use of 'Exit Select'.",
 "location":  {
-"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScrapeResultsEntity.vb",
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScrapeResultsEntity.vb",
 "region":  {
 "startLine":  498,
 "startColumn":  29,
@@ -212,7 +212,7 @@
 "id":  "S2951",
 "message":  "Remove this redundant use of 'Exit Select'.",
 "location":  {
-"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScrapeResultsEntity.vb",
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScrapeResultsEntity.vb",
 "region":  {
 "startLine":  501,
 "startColumn":  29,
@@ -225,7 +225,7 @@
 "id":  "S2951",
 "message":  "Remove this redundant use of 'Exit Select'.",
 "location":  {
-"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScrapeResultsEntity.vb",
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScrapeResultsEntity.vb",
 "region":  {
 "startLine":  504,
 "startColumn":  29,
@@ -238,7 +238,7 @@
 "id":  "S2951",
 "message":  "Remove this redundant use of 'Exit Select'.",
 "location":  {
-"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScrapeResultsEntity.vb",
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScrapeResultsEntity.vb",
 "region":  {
 "startLine":  507,
 "startColumn":  29,
@@ -251,7 +251,7 @@
 "id":  "S2951",
 "message":  "Remove this redundant use of 'Exit Select'.",
 "location":  {
-"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScrapeResultsEntity.vb",
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScrapeResultsEntity.vb",
 "region":  {
 "startLine":  514,
 "startColumn":  29,
@@ -264,7 +264,7 @@
 "id":  "S2951",
 "message":  "Remove this redundant use of 'Exit Select'.",
 "location":  {
-"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScrapeResultsEntity.vb",
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScrapeResultsEntity.vb",
 "region":  {
 "startLine":  521,
 "startColumn":  29,
@@ -277,7 +277,7 @@
 "id":  "S2951",
 "message":  "Remove this redundant use of 'Exit Select'.",
 "location":  {
-"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScrapeResultsEntity.vb",
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScrapeResultsEntity.vb",
 "region":  {
 "startLine":  524,
 "startColumn":  29,
@@ -290,7 +290,7 @@
 "id":  "S2951",
 "message":  "Remove this redundant use of 'Exit Select'.",
 "location":  {
-"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScrapeResultsEntity.vb",
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\ScraperLib\ScrapeResultsEntity.vb",
 "region":  {
 "startLine":  526,
 "startColumn":  29,
@@ -303,7 +303,7 @@
 "id":  "S2951",
 "message":  "Remove this redundant use of 'Exit Select'.",
 "location":  {
-"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\UrlInfo.vb",
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\UrlInfo.vb",
 "region":  {
 "startLine":  184,
 "startColumn":  25,
@@ -316,7 +316,7 @@
 "id":  "S2951",
 "message":  "Remove this redundant use of 'Exit Select'.",
 "location":  {
-"uri":  "Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\UrlInfo.vb",
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\XMLScraper\Utilities\UrlInfo.vb",
 "region":  {
 "startLine":  192,
 "startColumn":  25,

@@ -4,7 +4,7 @@
 "id":  "S2201",
 "message":  "Use the return value of method 'ToImmutableSortedSet', which has no side effect.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster.Tests.MultiNode\MultiNodeClusterSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests.MultiNode\MultiNodeClusterSpec.cs",
 "region":  {
 "startLine":  301,
 "startColumn":  13,

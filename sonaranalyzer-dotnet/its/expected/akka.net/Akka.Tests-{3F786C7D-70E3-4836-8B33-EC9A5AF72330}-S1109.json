@@ -4,7 +4,7 @@
 "id":  "S1109",
 "message":  "Move this closing curly brace to the next line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Dispatch\DispatchersSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Dispatch\DispatchersSpec.cs",
 "region":  {
 "startLine":  60,
 "startColumn":  17,

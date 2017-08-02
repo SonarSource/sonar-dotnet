@@ -4,7 +4,7 @@
 "id":  "S105",
 "message":  "Replace all tab characters in this file by sequences of white-spaces.",
 "location":  {
-"uri":  "Ember-MM\Addons\multi.EmberExtras\genericGenresEditor.vb",
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\genericGenresEditor.vb",
 "region":  {
 "startLine":  8,
 "startColumn":  1,
@@ -17,7 +17,7 @@
 "id":  "S105",
 "message":  "Replace all tab characters in this file by sequences of white-spaces.",
 "location":  {
-"uri":  "Ember-MM\Addons\multi.EmberExtras\genericMediaSources.vb",
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\genericMediaSources.vb",
 "region":  {
 "startLine":  8,
 "startColumn":  1,
@@ -30,7 +30,7 @@
 "id":  "S105",
 "message":  "Replace all tab characters in this file by sequences of white-spaces.",
 "location":  {
-"uri":  "Ember-MM\Addons\multi.EmberExtras\genericMetadataEditor.vb",
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\genericMetadataEditor.vb",
 "region":  {
 "startLine":  8,
 "startColumn":  1,

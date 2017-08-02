@@ -5,7 +5,7 @@
 "message":  "Fix this implementation of 'IDisposable' to conform to the dispose pattern.",
 "location":  [
 {
-"uri":  "Nancy\src\Nancy.ViewEngines.Razor\CSharp\CSharpRazorViewRenderer.cs",
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\CSharp\CSharpRazorViewRenderer.cs",
 "region":  {
 "startLine":  17,
 "startColumn":  18,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy.ViewEngines.Razor\CSharp\CSharpRazorViewRenderer.cs",
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\CSharp\CSharpRazorViewRenderer.cs",
 "region":  {
 "startLine":  17,
 "startColumn":  18,
@@ -23,7 +23,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy.ViewEngines.Razor\CSharp\CSharpRazorViewRenderer.cs",
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\CSharp\CSharpRazorViewRenderer.cs",
 "region":  {
 "startLine":  70,
 "startColumn":  21,
@@ -38,7 +38,7 @@
 "message":  "Fix this implementation of 'IDisposable' to conform to the dispose pattern.",
 "location":  [
 {
-"uri":  "Nancy\src\Nancy.ViewEngines.Razor\RazorViewEngine.cs",
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\RazorViewEngine.cs",
 "region":  {
 "startLine":  25,
 "startColumn":  18,
@@ -47,7 +47,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy.ViewEngines.Razor\RazorViewEngine.cs",
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\RazorViewEngine.cs",
 "region":  {
 "startLine":  25,
 "startColumn":  18,
@@ -56,7 +56,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy.ViewEngines.Razor\RazorViewEngine.cs",
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\RazorViewEngine.cs",
 "region":  {
 "startLine":  414,
 "startColumn":  21,
@@ -71,7 +71,7 @@
 "message":  "Fix this implementation of 'IDisposable' to conform to the dispose pattern.",
 "location":  [
 {
-"uri":  "Nancy\src\Nancy.ViewEngines.Razor\VisualBasic\VisualBasicRazorViewRenderer.cs",
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\VisualBasic\VisualBasicRazorViewRenderer.cs",
 "region":  {
 "startLine":  14,
 "startColumn":  18,
@@ -80,7 +80,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy.ViewEngines.Razor\VisualBasic\VisualBasicRazorViewRenderer.cs",
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\VisualBasic\VisualBasicRazorViewRenderer.cs",
 "region":  {
 "startLine":  14,
 "startColumn":  18,
@@ -89,7 +89,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy.ViewEngines.Razor\VisualBasic\VisualBasicRazorViewRenderer.cs",
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\VisualBasic\VisualBasicRazorViewRenderer.cs",
 "region":  {
 "startLine":  62,
 "startColumn":  21,

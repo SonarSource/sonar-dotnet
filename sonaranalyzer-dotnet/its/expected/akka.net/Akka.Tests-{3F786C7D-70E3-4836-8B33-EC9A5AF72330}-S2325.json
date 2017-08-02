@@ -4,7 +4,7 @@
 "id":  "S2325",
 "message":  "Make 'ActorPathParse' a static method.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorPathSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ActorPathSpec.cs",
 "region":  {
 "startLine":  27,
 "startColumn":  27,
@@ -17,7 +17,7 @@
 "id":  "S2325",
 "message":  "Make 'Work' a static method.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorRefSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ActorRefSpec.cs",
 "region":  {
 "startLine":  394,
 "startColumn":  26,
@@ -30,7 +30,7 @@
 "id":  "S2325",
 "message":  "Make 'CreateWatchAndForwarderProps' a static method.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\DeathWatchSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\DeathWatchSpec.cs",
 "region":  {
 "startLine":  245,
 "startColumn":  23,
@@ -43,7 +43,7 @@
 "id":  "S2325",
 "message":  "Make 'Elements' a static method.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\RelativeActorPathSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\RelativeActorPathSpec.cs",
 "region":  {
 "startLine":  19,
 "startColumn":  39,
@@ -56,7 +56,7 @@
 "id":  "S2325",
 "message":  "Make 'AbortClose' a static method.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
 "region":  {
 "startLine":  1008,
 "startColumn":  21,
@@ -69,7 +69,7 @@
 "id":  "S2325",
 "message":  "Make 'ChitChat' a static method.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\IO\TcpIntegrationSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\IO\TcpIntegrationSpec.cs",
 "region":  {
 "startLine":  238,
 "startColumn":  22,
@@ -82,7 +82,7 @@
 "id":  "S2325",
 "message":  "Make 'AssertNoCall' a static method.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\MatchHandler\CachedMatchCompilerTests.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\MatchHandler\CachedMatchCompilerTests.cs",
 "region":  {
 "startLine":  114,
 "startColumn":  22,
@@ -95,7 +95,7 @@
 "id":  "S2325",
 "message":  "Make 'AssertOneCall' a static method.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\MatchHandler\CachedMatchCompilerTests.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\MatchHandler\CachedMatchCompilerTests.cs",
 "region":  {
 "startLine":  119,
 "startColumn":  22,
@@ -108,7 +108,7 @@
 "id":  "S2325",
 "message":  "Make 'AssertOneCall' a static method.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\MatchHandler\CachedMatchCompilerTests.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\MatchHandler\CachedMatchCompilerTests.cs",
 "region":  {
 "startLine":  125,
 "startColumn":  22,
@@ -121,7 +121,7 @@
 "id":  "S2325",
 "message":  "Make 'TestSignature' a static method.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\MatchHandler\MatchHandlerBuilderTests.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\MatchHandler\MatchHandlerBuilderTests.cs",
 "region":  {
 "startLine":  217,
 "startColumn":  22,
@@ -134,7 +134,7 @@
 "id":  "S2325",
 "message":  "Make 'Delay' a static method.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Pattern\CircuitBreakerSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Pattern\CircuitBreakerSpec.cs",
 "region":  {
 "startLine":  253,
 "startColumn":  21,
@@ -147,7 +147,7 @@
 "id":  "S2325",
 "message":  "Make 'ThrowException' a static method.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Pattern\CircuitBreakerSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Pattern\CircuitBreakerSpec.cs",
 "region":  {
 "startLine":  258,
 "startColumn":  21,
@@ -160,7 +160,7 @@
 "id":  "S2325",
 "message":  "Make 'SayTest' a static method.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Pattern\CircuitBreakerSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Pattern\CircuitBreakerSpec.cs",
 "region":  {
 "startLine":  263,
 "startColumn":  23,
@@ -173,7 +173,7 @@
 "id":  "S2325",
 "message":  "Make 'ShortCallTimeoutCb' a static method.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Pattern\CircuitBreakerSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Pattern\CircuitBreakerSpec.cs",
 "region":  {
 "startLine":  302,
 "startColumn":  28,
@@ -186,7 +186,7 @@
 "id":  "S2325",
 "message":  "Make 'ShortResetTimeoutCb' a static method.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Pattern\CircuitBreakerSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Pattern\CircuitBreakerSpec.cs",
 "region":  {
 "startLine":  307,
 "startColumn":  28,
@@ -199,7 +199,7 @@
 "id":  "S2325",
 "message":  "Make 'LongCallTimeoutCb' a static method.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Pattern\CircuitBreakerSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Pattern\CircuitBreakerSpec.cs",
 "region":  {
 "startLine":  312,
 "startColumn":  28,
@@ -212,7 +212,7 @@
 "id":  "S2325",
 "message":  "Make 'LongResetTimeoutCb' a static method.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Pattern\CircuitBreakerSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Pattern\CircuitBreakerSpec.cs",
 "region":  {
 "startLine":  317,
 "startColumn":  28,
@@ -225,7 +225,7 @@
 "id":  "S2325",
 "message":  "Make 'MultiFailureCb' a static method.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Pattern\CircuitBreakerSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Pattern\CircuitBreakerSpec.cs",
 "region":  {
 "startLine":  322,
 "startColumn":  28,
@@ -238,7 +238,7 @@
 "id":  "S2325",
 "message":  "Make 'OneOfShouldEqual' a static method.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Routing\TailChoppingSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Routing\TailChoppingSpec.cs",
 "region":  {
 "startLine":  86,
 "startColumn":  49,
@@ -251,7 +251,7 @@
 "id":  "S2325",
 "message":  "Make 'AllShouldEqual' a static method.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Routing\TailChoppingSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Routing\TailChoppingSpec.cs",
 "region":  {
 "startLine":  95,
 "startColumn":  49,

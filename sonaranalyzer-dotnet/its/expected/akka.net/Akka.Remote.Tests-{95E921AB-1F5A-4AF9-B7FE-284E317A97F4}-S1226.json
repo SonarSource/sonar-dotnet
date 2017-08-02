@@ -4,7 +4,7 @@
 "id":  "S1226",
 "message":  "Introduce a new variable instead of reusing the parameter 'acc'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.Tests\AckedDeliverySpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests\AckedDeliverySpec.cs",
 "region":  {
 "startLine":  308,
 "startColumn":  17,

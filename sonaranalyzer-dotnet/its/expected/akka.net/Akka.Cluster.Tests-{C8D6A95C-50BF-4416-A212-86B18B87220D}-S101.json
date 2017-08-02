@@ -4,7 +4,7 @@
 "id":  "S101",
 "message":  "Rename class 'EWMASpec' to match camel case naming rules, consider using 'EwmaSpec'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster.Tests\EWMASpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests\EWMASpec.cs",
 "region":  {
 "startLine":  18,
 "startColumn":  18,

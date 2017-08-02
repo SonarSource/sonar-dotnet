@@ -4,7 +4,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
 "region":  {
 "startLine":  569,
 "startColumn":  13,
@@ -17,7 +17,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Helpers\ReflectionUtils.cs",
+"uri":  "sources\Nancy\src\Nancy\Helpers\ReflectionUtils.cs",
 "region":  {
 "startLine":  83,
 "startColumn":  21,
@@ -30,7 +30,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Security\CsrfToken.cs",
+"uri":  "sources\Nancy\src\Nancy\Security\CsrfToken.cs",
 "region":  {
 "startLine":  34,
 "startColumn":  13,
@@ -43,7 +43,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Security\CsrfToken.cs",
+"uri":  "sources\Nancy\src\Nancy\Security\CsrfToken.cs",
 "region":  {
 "startLine":  35,
 "startColumn":  13,
@@ -56,7 +56,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Security\CsrfToken.cs",
+"uri":  "sources\Nancy\src\Nancy\Security\CsrfToken.cs",
 "region":  {
 "startLine":  51,
 "startColumn":  13,
@@ -69,7 +69,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Security\CsrfToken.cs",
+"uri":  "sources\Nancy\src\Nancy\Security\CsrfToken.cs",
 "region":  {
 "startLine":  52,
 "startColumn":  13,
@@ -82,7 +82,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Security\CsrfToken.cs",
+"uri":  "sources\Nancy\src\Nancy\Security\CsrfToken.cs",
 "region":  {
 "startLine":  53,
 "startColumn":  13,
@@ -95,7 +95,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Session\Session.cs",
+"uri":  "sources\Nancy\src\Nancy\Session\Session.cs",
 "region":  {
 "startLine":  48,
 "startColumn":  13,
@@ -108,7 +108,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ViewEngines\ViewLocationResult.cs",
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\ViewLocationResult.cs",
 "region":  {
 "startLine":  75,
 "startColumn":  13,
@@ -121,7 +121,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ViewEngines\ViewLocationResult.cs",
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\ViewLocationResult.cs",
 "region":  {
 "startLine":  76,
 "startColumn":  13,
@@ -134,7 +134,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ViewEngines\ViewLocationResult.cs",
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\ViewLocationResult.cs",
 "region":  {
 "startLine":  87,
 "startColumn":  13,
@@ -147,7 +147,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ViewEngines\ViewLocationResult.cs",
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\ViewLocationResult.cs",
 "region":  {
 "startLine":  88,
 "startColumn":  13,

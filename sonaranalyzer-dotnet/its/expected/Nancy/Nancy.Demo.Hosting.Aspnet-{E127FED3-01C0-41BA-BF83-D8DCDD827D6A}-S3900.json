@@ -4,7 +4,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'context' before using it.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Demo.Hosting.Aspnet\CustomStatusHandler.cs",
+"uri":  "sources\Nancy\src\Nancy.Demo.Hosting.Aspnet\CustomStatusHandler.cs",
 "region":  {
 "startLine":  25,
 "startColumn":  13,
@@ -17,7 +17,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'routeDescription' before using it.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Demo.Hosting.Aspnet\DefaultRouteMetadataProvider.cs",
+"uri":  "sources\Nancy\src\Nancy.Demo.Hosting.Aspnet\DefaultRouteMetadataProvider.cs",
 "region":  {
 "startLine":  16,
 "startColumn":  40,
@@ -30,7 +30,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'existingContainer' before using it.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Demo.Hosting.Aspnet\DemoBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Demo.Hosting.Aspnet\DemoBootstrapper.cs",
 "region":  {
 "startLine":  25,
 "startColumn":  13,
@@ -43,7 +43,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'existingContainer' before using it.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Demo.Hosting.Aspnet\DemoBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Demo.Hosting.Aspnet\DemoBootstrapper.cs",
 "region":  {
 "startLine":  54,
 "startColumn":  13,
@@ -56,7 +56,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'pipelines' before using it.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Demo.Hosting.Aspnet\DemoBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Demo.Hosting.Aspnet\DemoBootstrapper.cs",
 "region":  {
 "startLine":  69,
 "startColumn":  13,
@@ -69,7 +69,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'response' before using it.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Demo.Hosting.Aspnet\HereBeAResponseYouScurvyDog.cs",
+"uri":  "sources\Nancy\src\Nancy.Demo.Hosting.Aspnet\HereBeAResponseYouScurvyDog.cs",
 "region":  {
 "startLine":  15,
 "startColumn":  32,
@@ -82,7 +82,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'environment' before using it.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Demo.Hosting.Aspnet\MyConfigExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy.Demo.Hosting.Aspnet\MyConfigExtensions.cs",
 "region":  {
 "startLine":  14,
 "startColumn":  13,
@@ -95,7 +95,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'input' before using it.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Demo.Hosting.Aspnet\Piratizer4000.cs",
+"uri":  "sources\Nancy\src\Nancy.Demo.Hosting.Aspnet\Piratizer4000.cs",
 "region":  {
 "startLine":  15,
 "startColumn":  44,
@@ -108,7 +108,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'mediaRange' before using it.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Demo.Hosting.Aspnet\PngSerializer.cs",
+"uri":  "sources\Nancy\src\Nancy.Demo.Hosting.Aspnet\PngSerializer.cs",
 "region":  {
 "startLine":  29,
 "startColumn":  20,

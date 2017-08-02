@@ -4,7 +4,7 @@
 "id":  "S101",
 "message":  "Rename class 'FSMSpecHelpers' to match camel case naming rules, consider using 'FsmSpecHelpers'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.TestKit\FSMSpecHelpers.cs",
+"uri":  "sources\akka.net\src\core\Akka.TestKit\FSMSpecHelpers.cs",
 "region":  {
 "startLine":  14,
 "startColumn":  25,
@@ -17,7 +17,7 @@
 "id":  "S101",
 "message":  "Rename class 'TestFSMRef' to match camel case naming rules, consider using 'TestFsmRef'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.TestKit\TestFSMRef.cs",
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestFSMRef.cs",
 "region":  {
 "startLine":  21,
 "startColumn":  18,

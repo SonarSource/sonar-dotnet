@@ -4,7 +4,7 @@
 "id":  "S1227",
 "message":  "Refactor the code in order to remove this break statement.",
 "location":  {
-"uri":  "akka.net\src\contrib\loggers\Akka.Logger.Serilog\SerilogLogMessageFormatter.cs",
+"uri":  "sources\akka.net\src\contrib\loggers\Akka.Logger.Serilog\SerilogLogMessageFormatter.cs",
 "region":  {
 "startLine":  52,
 "startColumn":  21,

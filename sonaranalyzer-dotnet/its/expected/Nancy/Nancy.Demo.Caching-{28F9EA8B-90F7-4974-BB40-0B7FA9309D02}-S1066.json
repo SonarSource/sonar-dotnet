@@ -5,7 +5,7 @@
 "message":  "Merge this if statement with the enclosing one.",
 "location":  [
 {
-"uri":  "Nancy\src\Nancy.Demo.Caching\CachingBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Demo.Caching\CachingBootstrapper.cs",
 "region":  {
 "startLine":  37,
 "startColumn":  17,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy.Demo.Caching\CachingBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Demo.Caching\CachingBootstrapper.cs",
 "region":  {
 "startLine":  35,
 "startColumn":  13,

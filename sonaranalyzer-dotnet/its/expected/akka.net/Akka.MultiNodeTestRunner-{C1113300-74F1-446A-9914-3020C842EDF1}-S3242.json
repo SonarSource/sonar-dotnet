@@ -4,7 +4,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'Xunit.Abstractions.ITestCaseMessage' instead of 'Xunit.Abstractions.ITestCaseDiscoveryMessage'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.MultiNodeTestRunner\Discovery.cs",
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Discovery.cs",
 "region":  {
 "startLine":  59,
 "startColumn":  67,

@@ -4,7 +4,7 @@
 "id":  "S3962",
 "message":  "Replace this 'static readonly' declaration with 'const'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Persistence\TimelineItemFactory.cs",
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Persistence\TimelineItemFactory.cs",
 "region":  {
 "startLine":  31,
 "startColumn":  40,

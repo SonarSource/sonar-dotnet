@@ -4,7 +4,7 @@
 "id":  "S125",
 "message":  "Remove this commented out code.",
 "location":  {
-"uri":  "akka.net\src\contrib\testkits\Akka.TestKit.NUnit\TestKit.cs",
+"uri":  "sources\akka.net\src\contrib\testkits\Akka.TestKit.NUnit\TestKit.cs",
 "region":  {
 "startLine":  24,
 "startColumn":  35,

@@ -4,7 +4,7 @@
 "id":  "S1481",
 "message":  "Remove this unused 'shardCoordinatorSingleton' local variable.",
 "location":  {
-"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingGuardian.cs",
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingGuardian.cs",
 "region":  {
 "startLine":  102,
 "startColumn":  25,
@@ -17,7 +17,7 @@
 "id":  "S1481",
 "message":  "Remove this unused 'coordinatorSingletonManagerName' local variable.",
 "location":  {
-"uri":  "akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingGuardian.cs",
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingGuardian.cs",
 "region":  {
 "startLine":  121,
 "startColumn":  21,

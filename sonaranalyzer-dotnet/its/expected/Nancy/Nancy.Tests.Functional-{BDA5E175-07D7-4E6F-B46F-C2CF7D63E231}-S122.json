@@ -4,7 +4,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests.Functional\Tests\RouteConstraintTests.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests.Functional\Tests\RouteConstraintTests.cs",
 "region":  {
 "startLine":  48,
 "startColumn":  13,
@@ -17,7 +17,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests.Functional\Tests\RouteConstraintTests.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests.Functional\Tests\RouteConstraintTests.cs",
 "region":  {
 "startLine":  60,
 "startColumn":  13,
@@ -30,7 +30,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests.Functional\Tests\RouteConstraintTests.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests.Functional\Tests\RouteConstraintTests.cs",
 "region":  {
 "startLine":  72,
 "startColumn":  13,

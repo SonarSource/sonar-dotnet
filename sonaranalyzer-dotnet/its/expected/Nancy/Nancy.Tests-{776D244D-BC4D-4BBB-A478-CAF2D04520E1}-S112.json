@@ -4,7 +4,7 @@
 "id":  "S112",
 "message":  "'System.Exception' should not be thrown by user code.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Helpers\ExceptionExtensionsFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Helpers\ExceptionExtensionsFixture.cs",
 "region":  {
 "startLine":  12,
 "startColumn":  33,
@@ -17,7 +17,7 @@
 "id":  "S112",
 "message":  "'System.Exception' should not be thrown by user code.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Helpers\ExceptionExtensionsFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Helpers\ExceptionExtensionsFixture.cs",
 "region":  {
 "startLine":  12,
 "startColumn":  78,
@@ -30,7 +30,7 @@
 "id":  "S112",
 "message":  "'System.Exception' should not be thrown by user code.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Helpers\ExceptionExtensionsFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Helpers\ExceptionExtensionsFixture.cs",
 "region":  {
 "startLine":  21,
 "startColumn":  34,
@@ -43,7 +43,7 @@
 "id":  "S112",
 "message":  "'System.Exception' should not be thrown by user code.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Helpers\ExceptionExtensionsFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Helpers\ExceptionExtensionsFixture.cs",
 "region":  {
 "startLine":  21,
 "startColumn":  63,
@@ -56,7 +56,7 @@
 "id":  "S112",
 "message":  "'System.Exception' should not be thrown by user code.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Helpers\ExceptionExtensionsFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Helpers\ExceptionExtensionsFixture.cs",
 "region":  {
 "startLine":  22,
 "startColumn":  34,
@@ -69,7 +69,7 @@
 "id":  "S112",
 "message":  "'System.Exception' should not be thrown by user code.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Helpers\ExceptionExtensionsFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Helpers\ExceptionExtensionsFixture.cs",
 "region":  {
 "startLine":  22,
 "startColumn":  63,
@@ -82,7 +82,7 @@
 "id":  "S112",
 "message":  "'System.Exception' should not be thrown by user code.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Helpers\ExceptionExtensionsFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Helpers\ExceptionExtensionsFixture.cs",
 "region":  {
 "startLine":  23,
 "startColumn":  34,
@@ -95,7 +95,7 @@
 "id":  "S112",
 "message":  "'System.Exception' should not be thrown by user code.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Helpers\ExceptionExtensionsFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Helpers\ExceptionExtensionsFixture.cs",
 "region":  {
 "startLine":  23,
 "startColumn":  63,
@@ -108,7 +108,7 @@
 "id":  "S112",
 "message":  "'System.Exception' should not be thrown by user code.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\NoAppStartupsFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\NoAppStartupsFixture.cs",
 "region":  {
 "startLine":  51,
 "startColumn":  27,
@@ -121,7 +121,7 @@
 "id":  "S112",
 "message":  "'System.Exception' should not be thrown by user code.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\BeforePipelineFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\BeforePipelineFixture.cs",
 "region":  {
 "startLine":  166,
 "startColumn":  27,
@@ -134,7 +134,7 @@
 "id":  "S112",
 "message":  "'System.ApplicationException' should not be thrown by user code.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\Bootstrapper\NancyBootstrapperBaseFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Bootstrapper\NancyBootstrapperBaseFixture.cs",
 "region":  {
 "startLine":  336,
 "startColumn":  27,
@@ -147,7 +147,7 @@
 "id":  "S112",
 "message":  "'System.ApplicationException' should not be thrown by user code.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\Bootstrapper\NancyBootstrapperWithRequestContainerBaseFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Bootstrapper\NancyBootstrapperWithRequestContainerBaseFixture.cs",
 "region":  {
 "startLine":  248,
 "startColumn":  31,
@@ -160,7 +160,7 @@
 "id":  "S112",
 "message":  "'System.Exception' should not be thrown by user code.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\DefaultSerializerFactoryFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\DefaultSerializerFactoryFixture.cs",
 "region":  {
 "startLine":  174,
 "startColumn":  27,
@@ -173,7 +173,7 @@
 "id":  "S112",
 "message":  "'System.Exception' should not be thrown by user code.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ErrorPipelineFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ErrorPipelineFixture.cs",
 "region":  {
 "startLine":  67,
 "startColumn":  50,
@@ -186,7 +186,7 @@
 "id":  "S112",
 "message":  "'System.Exception' should not be thrown by user code.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ErrorPipelineFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ErrorPipelineFixture.cs",
 "region":  {
 "startLine":  108,
 "startColumn":  50,
@@ -199,7 +199,7 @@
 "id":  "S112",
 "message":  "'System.Exception' should not be thrown by user code.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\PropertyBindingExceptionFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\PropertyBindingExceptionFixture.cs",
 "region":  {
 "startLine":  18,
 "startColumn":  38,
@@ -212,7 +212,7 @@
 "id":  "S112",
 "message":  "'System.Exception' should not be thrown by user code.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\NancyEngineFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\NancyEngineFixture.cs",
 "region":  {
 "startLine":  392,
 "startColumn":  30,
@@ -225,7 +225,7 @@
 "id":  "S112",
 "message":  "'System.Exception' should not be thrown by user code.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\NancyEngineFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\NancyEngineFixture.cs",
 "region":  {
 "startLine":  444,
 "startColumn":  66,
@@ -238,7 +238,7 @@
 "id":  "S112",
 "message":  "'System.Exception' should not be thrown by user code.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\NancyEngineFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\NancyEngineFixture.cs",
 "region":  {
 "startLine":  455,
 "startColumn":  67,
@@ -251,7 +251,7 @@
 "id":  "S112",
 "message":  "'System.Exception' should not be thrown by user code.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\NancyEngineFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\NancyEngineFixture.cs",
 "region":  {
 "startLine":  475,
 "startColumn":  41,
@@ -264,7 +264,7 @@
 "id":  "S112",
 "message":  "'System.Exception' should not be thrown by user code.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\NancyEngineFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\NancyEngineFixture.cs",
 "region":  {
 "startLine":  507,
 "startColumn":  41,
@@ -277,7 +277,7 @@
 "id":  "S112",
 "message":  "'System.Exception' should not be thrown by user code.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\Routing\DefaultRequestDispatcherFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Routing\DefaultRequestDispatcherFixture.cs",
 "region":  {
 "startLine":  750,
 "startColumn":  41,
@@ -290,7 +290,7 @@
 "id":  "S112",
 "message":  "'System.Exception' should not be thrown by user code.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\Routing\DefaultRequestDispatcherFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Routing\DefaultRequestDispatcherFixture.cs",
 "region":  {
 "startLine":  794,
 "startColumn":  68,
@@ -303,7 +303,7 @@
 "id":  "S112",
 "message":  "'System.Exception' should not be thrown by user code.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\Routing\DefaultRequestDispatcherFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Routing\DefaultRequestDispatcherFixture.cs",
 "region":  {
 "startLine":  843,
 "startColumn":  40,
@@ -316,7 +316,7 @@
 "id":  "S112",
 "message":  "'System.Exception' should not be thrown by user code.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\Routing\DefaultRequestDispatcherFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Routing\DefaultRequestDispatcherFixture.cs",
 "region":  {
 "startLine":  872,
 "startColumn":  58,
@@ -329,7 +329,7 @@
 "id":  "S112",
 "message":  "'System.Exception' should not be thrown by user code.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\Routing\DefaultRequestDispatcherFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Routing\DefaultRequestDispatcherFixture.cs",
 "region":  {
 "startLine":  906,
 "startColumn":  85,
@@ -342,7 +342,7 @@
 "id":  "S112",
 "message":  "'System.Exception' should not be thrown by user code.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\Routing\DefaultRequestDispatcherFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Routing\DefaultRequestDispatcherFixture.cs",
 "region":  {
 "startLine":  980,
 "startColumn":  23,
@@ -355,7 +355,7 @@
 "id":  "S112",
 "message":  "'System.Exception' should not be thrown by user code.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ViewEngines\DefaultViewFactoryFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ViewEngines\DefaultViewFactoryFixture.cs",
 "region":  {
 "startLine":  298,
 "startColumn":  130,
@@ -368,7 +368,7 @@
 "id":  "S112",
 "message":  "'System.Exception' should not be thrown by user code.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ViewEngines\DefaultViewFactoryFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ViewEngines\DefaultViewFactoryFixture.cs",
 "region":  {
 "startLine":  323,
 "startColumn":  109,
@@ -381,7 +381,7 @@
 "id":  "S112",
 "message":  "'System.Exception' should not be thrown by user code.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ViewEngines\DefaultViewResolverFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ViewEngines\DefaultViewResolverFixture.cs",
 "region":  {
 "startLine":  272,
 "startColumn":  56,

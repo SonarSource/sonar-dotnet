@@ -4,7 +4,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\contrib\testkits\Akka.TestKit.NUnit\NUnitAssertions.cs",
+"uri":  "sources\akka.net\src\contrib\testkits\Akka.TestKit.NUnit\NUnitAssertions.cs",
 "region":  {
 "startLine":  41,
 "startColumn":  13,
@@ -17,7 +17,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\contrib\testkits\Akka.TestKit.NUnit\TestKit.cs",
+"uri":  "sources\akka.net\src\contrib\testkits\Akka.TestKit.NUnit\TestKit.cs",
 "region":  {
 "startLine":  35,
 "startColumn":  13,
@@ -30,7 +30,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\contrib\testkits\Akka.TestKit.NUnit\TestKit.cs",
+"uri":  "sources\akka.net\src\contrib\testkits\Akka.TestKit.NUnit\TestKit.cs",
 "region":  {
 "startLine":  76,
 "startColumn":  13,

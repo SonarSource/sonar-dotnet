@@ -4,7 +4,7 @@
 "id":  "S126",
 "message":  "Add the missing 'else' clause.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.Tests\Transport\AkkaProtocolStressTest.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests\Transport\AkkaProtocolStressTest.cs",
 "region":  {
 "startLine":  98,
 "startColumn":  17,

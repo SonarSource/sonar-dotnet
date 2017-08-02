@@ -5,7 +5,7 @@
 "message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
 "location":  [
 {
-"uri":  "Nancy\src\Nancy\Bootstrapper\BootstrapperException.cs",
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\BootstrapperException.cs",
 "region":  {
 "startLine":  10,
 "startColumn":  18,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy\Bootstrapper\BootstrapperException.cs",
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\BootstrapperException.cs",
 "region":  {
 "startLine":  10,
 "startColumn":  12,
@@ -29,7 +29,7 @@
 "message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
 "location":  [
 {
-"uri":  "Nancy\src\Nancy\Bootstrapper\MultipleRootPathProvidersLocatedException.cs",
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\MultipleRootPathProvidersLocatedException.cs",
 "region":  {
 "startLine":  13,
 "startColumn":  18,
@@ -38,7 +38,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy\Bootstrapper\MultipleRootPathProvidersLocatedException.cs",
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\MultipleRootPathProvidersLocatedException.cs",
 "region":  {
 "startLine":  13,
 "startColumn":  12,
@@ -53,7 +53,7 @@
 "message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
 "location":  [
 {
-"uri":  "Nancy\src\Nancy\ErrorHandling\RouteExecutionEarlyExitException.cs",
+"uri":  "sources\Nancy\src\Nancy\ErrorHandling\RouteExecutionEarlyExitException.cs",
 "region":  {
 "startLine":  11,
 "startColumn":  18,
@@ -62,7 +62,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy\ErrorHandling\RouteExecutionEarlyExitException.cs",
+"uri":  "sources\Nancy\src\Nancy\ErrorHandling\RouteExecutionEarlyExitException.cs",
 "region":  {
 "startLine":  11,
 "startColumn":  12,
@@ -71,7 +71,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy\ErrorHandling\RouteExecutionEarlyExitException.cs",
+"uri":  "sources\Nancy\src\Nancy\ErrorHandling\RouteExecutionEarlyExitException.cs",
 "region":  {
 "startLine":  11,
 "startColumn":  12,
@@ -86,7 +86,7 @@
 "message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
 "location":  [
 {
-"uri":  "Nancy\src\Nancy\ModelBinding\ModelBindingException.cs",
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\ModelBindingException.cs",
 "region":  {
 "startLine":  10,
 "startColumn":  18,
@@ -95,7 +95,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy\ModelBinding\ModelBindingException.cs",
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\ModelBindingException.cs",
 "region":  {
 "startLine":  10,
 "startColumn":  12,
@@ -110,7 +110,7 @@
 "message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
 "location":  [
 {
-"uri":  "Nancy\src\Nancy\ModelBinding\PropertyBindingException.cs",
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\PropertyBindingException.cs",
 "region":  {
 "startLine":  5,
 "startColumn":  18,
@@ -119,7 +119,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy\ModelBinding\PropertyBindingException.cs",
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\PropertyBindingException.cs",
 "region":  {
 "startLine":  5,
 "startColumn":  12,
@@ -128,7 +128,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy\ModelBinding\PropertyBindingException.cs",
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\PropertyBindingException.cs",
 "region":  {
 "startLine":  5,
 "startColumn":  12,
@@ -143,7 +143,7 @@
 "message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
 "location":  [
 {
-"uri":  "Nancy\src\Nancy\RequestExecutionException.cs",
+"uri":  "sources\Nancy\src\Nancy\RequestExecutionException.cs",
 "region":  {
 "startLine":  9,
 "startColumn":  18,
@@ -152,7 +152,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy\RequestExecutionException.cs",
+"uri":  "sources\Nancy\src\Nancy\RequestExecutionException.cs",
 "region":  {
 "startLine":  9,
 "startColumn":  12,
@@ -161,7 +161,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy\RequestExecutionException.cs",
+"uri":  "sources\Nancy\src\Nancy\RequestExecutionException.cs",
 "region":  {
 "startLine":  9,
 "startColumn":  12,
@@ -176,7 +176,7 @@
 "message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
 "location":  [
 {
-"uri":  "Nancy\src\Nancy\Routing\RouteCache.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\RouteCache.cs",
 "region":  {
 "startLine":  12,
 "startColumn":  18,
@@ -185,7 +185,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy\Routing\RouteCache.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\RouteCache.cs",
 "region":  {
 "startLine":  12,
 "startColumn":  12,
@@ -194,7 +194,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy\Routing\RouteCache.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\RouteCache.cs",
 "region":  {
 "startLine":  12,
 "startColumn":  12,
@@ -209,7 +209,7 @@
 "message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
 "location":  [
 {
-"uri":  "Nancy\src\Nancy\Security\CsrfValidationException.cs",
+"uri":  "sources\Nancy\src\Nancy\Security\CsrfValidationException.cs",
 "region":  {
 "startLine":  5,
 "startColumn":  18,
@@ -218,7 +218,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy\Security\CsrfValidationException.cs",
+"uri":  "sources\Nancy\src\Nancy\Security\CsrfValidationException.cs",
 "region":  {
 "startLine":  5,
 "startColumn":  12,
@@ -227,7 +227,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy\Security\CsrfValidationException.cs",
+"uri":  "sources\Nancy\src\Nancy\Security\CsrfValidationException.cs",
 "region":  {
 "startLine":  5,
 "startColumn":  12,
@@ -242,7 +242,7 @@
 "message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
 "location":  [
 {
-"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
 "startLine":  528,
 "startColumn":  18,
@@ -251,7 +251,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
 "startLine":  528,
 "startColumn":  12,
@@ -260,7 +260,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
 "startLine":  528,
 "startColumn":  12,
@@ -275,7 +275,7 @@
 "message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
 "location":  [
 {
-"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
 "startLine":  543,
 "startColumn":  18,
@@ -284,7 +284,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
 "startLine":  543,
 "startColumn":  12,
@@ -293,7 +293,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
 "startLine":  543,
 "startColumn":  12,
@@ -308,7 +308,7 @@
 "message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
 "location":  [
 {
-"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
 "startLine":  558,
 "startColumn":  18,
@@ -317,7 +317,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
 "startLine":  558,
 "startColumn":  12,
@@ -326,7 +326,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
 "startLine":  558,
 "startColumn":  12,
@@ -341,7 +341,7 @@
 "message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
 "location":  [
 {
-"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
 "startLine":  584,
 "startColumn":  18,
@@ -350,7 +350,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
 "startLine":  584,
 "startColumn":  12,
@@ -359,7 +359,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
 "startLine":  584,
 "startColumn":  12,
@@ -374,7 +374,7 @@
 "message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
 "location":  [
 {
-"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
 "startLine":  599,
 "startColumn":  18,
@@ -383,7 +383,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
 "startLine":  599,
 "startColumn":  12,
@@ -392,7 +392,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
 "startLine":  599,
 "startColumn":  12,
@@ -407,7 +407,7 @@
 "message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
 "location":  [
 {
-"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
 "startLine":  624,
 "startColumn":  18,
@@ -416,7 +416,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
 "startLine":  624,
 "startColumn":  12,
@@ -425,7 +425,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
 "startLine":  624,
 "startColumn":  12,
@@ -440,7 +440,7 @@
 "message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
 "location":  [
 {
-"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
 "startLine":  652,
 "startColumn":  25,
@@ -449,7 +449,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
 "startLine":  652,
 "startColumn":  19,
@@ -458,7 +458,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
 "startLine":  652,
 "startColumn":  19,
@@ -473,7 +473,7 @@
 "message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
 "location":  [
 {
-"uri":  "Nancy\src\Nancy\Validation\ModelValidationException.cs",
+"uri":  "sources\Nancy\src\Nancy\Validation\ModelValidationException.cs",
 "region":  {
 "startLine":  8,
 "startColumn":  18,
@@ -482,7 +482,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy\Validation\ModelValidationException.cs",
+"uri":  "sources\Nancy\src\Nancy\Validation\ModelValidationException.cs",
 "region":  {
 "startLine":  8,
 "startColumn":  12,
@@ -491,7 +491,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy\Validation\ModelValidationException.cs",
+"uri":  "sources\Nancy\src\Nancy\Validation\ModelValidationException.cs",
 "region":  {
 "startLine":  8,
 "startColumn":  12,
@@ -506,7 +506,7 @@
 "message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
 "location":  [
 {
-"uri":  "Nancy\src\Nancy\ViewEngines\AmbiguousViewsException.cs",
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\AmbiguousViewsException.cs",
 "region":  {
 "startLine":  8,
 "startColumn":  18,
@@ -515,7 +515,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy\ViewEngines\AmbiguousViewsException.cs",
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\AmbiguousViewsException.cs",
 "region":  {
 "startLine":  8,
 "startColumn":  12,
@@ -524,7 +524,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy\ViewEngines\AmbiguousViewsException.cs",
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\AmbiguousViewsException.cs",
 "region":  {
 "startLine":  8,
 "startColumn":  12,
@@ -539,7 +539,7 @@
 "message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
 "location":  [
 {
-"uri":  "Nancy\src\Nancy\ViewEngines\ViewNotFoundException.cs",
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\ViewNotFoundException.cs",
 "region":  {
 "startLine":  8,
 "startColumn":  18,
@@ -548,7 +548,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy\ViewEngines\ViewNotFoundException.cs",
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\ViewNotFoundException.cs",
 "region":  {
 "startLine":  8,
 "startColumn":  12,
@@ -557,7 +557,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy\ViewEngines\ViewNotFoundException.cs",
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\ViewNotFoundException.cs",
 "region":  {
 "startLine":  8,
 "startColumn":  12,
@@ -572,7 +572,7 @@
 "message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
 "location":  [
 {
-"uri":  "Nancy\src\Nancy\ViewEngines\ViewRenderException.cs",
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\ViewRenderException.cs",
 "region":  {
 "startLine":  8,
 "startColumn":  18,
@@ -581,7 +581,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy\ViewEngines\ViewRenderException.cs",
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\ViewRenderException.cs",
 "region":  {
 "startLine":  8,
 "startColumn":  12,
@@ -590,7 +590,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy\ViewEngines\ViewRenderException.cs",
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\ViewRenderException.cs",
 "region":  {
 "startLine":  8,
 "startColumn":  12,

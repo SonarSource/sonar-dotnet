@@ -4,7 +4,7 @@
 "id":  "S1226",
 "message":  "Introduce a new variable instead of reusing the parameter 'line'.",
 "location":  {
-"uri":  "Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
 "region":  {
 "startLine":  606,
 "startColumn":  21,
@@ -17,7 +17,7 @@
 "id":  "S1226",
 "message":  "Introduce a new variable instead of reusing the parameter 'line'.",
 "location":  {
-"uri":  "Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
 "region":  {
 "startLine":  610,
 "startColumn":  25,
@@ -30,7 +30,7 @@
 "id":  "S1226",
 "message":  "Introduce a new variable instead of reusing the parameter 'line'.",
 "location":  {
-"uri":  "Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
 "region":  {
 "startLine":  617,
 "startColumn":  21,
@@ -43,7 +43,7 @@
 "id":  "S1226",
 "message":  "Introduce a new variable instead of reusing the parameter 'line'.",
 "location":  {
-"uri":  "Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
 "region":  {
 "startLine":  621,
 "startColumn":  25,
@@ -56,7 +56,7 @@
 "id":  "S1226",
 "message":  "Introduce a new variable instead of reusing the parameter 'line'.",
 "location":  {
-"uri":  "Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
 "region":  {
 "startLine":  627,
 "startColumn":  21,
@@ -69,7 +69,7 @@
 "id":  "S1226",
 "message":  "Introduce a new variable instead of reusing the parameter 'line'.",
 "location":  {
-"uri":  "Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
 "region":  {
 "startLine":  631,
 "startColumn":  25,
@@ -82,7 +82,7 @@
 "id":  "S1226",
 "message":  "Introduce a new variable instead of reusing the parameter 'line'.",
 "location":  {
-"uri":  "Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
 "region":  {
 "startLine":  637,
 "startColumn":  21,
@@ -95,7 +95,7 @@
 "id":  "S1226",
 "message":  "Introduce a new variable instead of reusing the parameter 'line'.",
 "location":  {
-"uri":  "Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
 "region":  {
 "startLine":  641,
 "startColumn":  25,
@@ -108,7 +108,7 @@
 "id":  "S1226",
 "message":  "Introduce a new variable instead of reusing the parameter 'line'.",
 "location":  {
-"uri":  "Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
 "region":  {
 "startLine":  647,
 "startColumn":  21,
@@ -121,7 +121,7 @@
 "id":  "S1226",
 "message":  "Introduce a new variable instead of reusing the parameter 'line'.",
 "location":  {
-"uri":  "Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
 "region":  {
 "startLine":  651,
 "startColumn":  25,

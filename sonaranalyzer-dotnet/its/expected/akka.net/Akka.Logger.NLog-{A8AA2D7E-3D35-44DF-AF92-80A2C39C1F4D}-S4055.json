@@ -4,7 +4,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "akka.net\src\contrib\loggers\Akka.Logger.NLog\NLogLogger.cs",
+"uri":  "sources\akka.net\src\contrib\loggers\Akka.Logger.NLog\NLogLogger.cs",
 "region":  {
 "startLine":  38,
 "startColumn":  64,
@@ -17,7 +17,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "akka.net\src\contrib\loggers\Akka.Logger.NLog\NLogLogger.cs",
+"uri":  "sources\akka.net\src\contrib\loggers\Akka.Logger.NLog\NLogLogger.cs",
 "region":  {
 "startLine":  39,
 "startColumn":  61,
@@ -30,7 +30,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "akka.net\src\contrib\loggers\Akka.Logger.NLog\NLogLogger.cs",
+"uri":  "sources\akka.net\src\contrib\loggers\Akka.Logger.NLog\NLogLogger.cs",
 "region":  {
 "startLine":  40,
 "startColumn":  63,

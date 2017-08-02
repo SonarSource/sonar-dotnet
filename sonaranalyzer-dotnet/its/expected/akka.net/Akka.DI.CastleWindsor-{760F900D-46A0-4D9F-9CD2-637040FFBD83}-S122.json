@@ -4,7 +4,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\contrib\dependencyInjection\Akka.DI.CastleWindsor\WindsorDependencyResolver.cs",
+"uri":  "sources\akka.net\src\contrib\dependencyInjection\Akka.DI.CastleWindsor\WindsorDependencyResolver.cs",
 "region":  {
 "startLine":  37,
 "startColumn":  13,
@@ -17,7 +17,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\contrib\dependencyInjection\Akka.DI.CastleWindsor\WindsorDependencyResolver.cs",
+"uri":  "sources\akka.net\src\contrib\dependencyInjection\Akka.DI.CastleWindsor\WindsorDependencyResolver.cs",
 "region":  {
 "startLine":  38,
 "startColumn":  13,

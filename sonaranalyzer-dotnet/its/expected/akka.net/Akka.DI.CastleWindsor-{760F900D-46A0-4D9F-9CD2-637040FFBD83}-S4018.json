@@ -4,7 +4,7 @@
 "id":  "S4018",
 "message":  "Refactor this method to have parameters matching all the type parameters.",
 "location":  {
-"uri":  "akka.net\src\contrib\dependencyInjection\Akka.DI.CastleWindsor\WindsorDependencyResolver.cs",
+"uri":  "sources\akka.net\src\contrib\dependencyInjection\Akka.DI.CastleWindsor\WindsorDependencyResolver.cs",
 "region":  {
 "startLine":  80,
 "startColumn":  22,

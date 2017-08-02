@@ -4,7 +4,7 @@
 "id":  "S2339",
 "message":  "Change this constant to a 'static' read-only property.",
 "location":  {
-"uri":  "akka.net\src\examples\Cluster\Roles\Samples.Cluster.Transformation\TransformationMessages.cs",
+"uri":  "sources\akka.net\src\examples\Cluster\Roles\Samples.Cluster.Transformation\TransformationMessages.cs",
 "region":  {
 "startLine":  60,
 "startColumn":  29,

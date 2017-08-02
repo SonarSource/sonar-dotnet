@@ -4,7 +4,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster.Tests\AutoDownSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests\AutoDownSpec.cs",
 "region":  {
 "startLine":  29,
 "startColumn":  17,
@@ -17,7 +17,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster.Tests\EWMASpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests\EWMASpec.cs",
 "region":  {
 "startLine":  113,
 "startColumn":  21,
@@ -30,7 +30,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster.Tests\MetricsCollectorSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests\MetricsCollectorSpec.cs",
 "region":  {
 "startLine":  96,
 "startColumn":  17,
@@ -43,7 +43,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster.Tests\MetricsCollectorSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests\MetricsCollectorSpec.cs",
 "region":  {
 "startLine":  97,
 "startColumn":  17,
@@ -56,7 +56,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster.Tests\MetricsCollectorSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests\MetricsCollectorSpec.cs",
 "region":  {
 "startLine":  98,
 "startColumn":  17,
@@ -69,7 +69,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster.Tests\MetricsCollectorSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests\MetricsCollectorSpec.cs",
 "region":  {
 "startLine":  99,
 "startColumn":  17,

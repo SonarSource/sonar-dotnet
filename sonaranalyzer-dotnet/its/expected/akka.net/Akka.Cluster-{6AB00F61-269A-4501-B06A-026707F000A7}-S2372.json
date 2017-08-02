@@ -4,7 +4,7 @@
 "id":  "S2372",
 "message":  "Remove the exception throwing from this property getter, or refactor the property into a method.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\Gossip.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Gossip.cs",
 "region":  {
 "startLine":  292,
 "startColumn":  38,

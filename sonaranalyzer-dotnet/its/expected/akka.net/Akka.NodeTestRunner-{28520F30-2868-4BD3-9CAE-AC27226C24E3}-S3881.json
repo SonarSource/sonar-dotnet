@@ -5,7 +5,7 @@
 "message":  "Fix this implementation of 'IDisposable' to conform to the dispose pattern.",
 "location":  [
 {
-"uri":  "akka.net\src\core\Akka.NodeTestRunner\Sink.cs",
+"uri":  "sources\akka.net\src\core\Akka.NodeTestRunner\Sink.cs",
 "region":  {
 "startLine":  17,
 "startColumn":  11,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.NodeTestRunner\Sink.cs",
+"uri":  "sources\akka.net\src\core\Akka.NodeTestRunner\Sink.cs",
 "region":  {
 "startLine":  17,
 "startColumn":  11,
@@ -23,7 +23,7 @@
 }
 },
 {
-"uri":  "akka.net\src\core\Akka.NodeTestRunner\Sink.cs",
+"uri":  "sources\akka.net\src\core\Akka.NodeTestRunner\Sink.cs",
 "region":  {
 "startLine":  73,
 "startColumn":  21,

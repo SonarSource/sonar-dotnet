@@ -4,7 +4,7 @@
 "id":  "S2219",
 "message":  "Use the 'is' operator instead.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Util\MatchHandler\MatchBuilderSignature.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\MatchBuilderSignature.cs",
 "region":  {
 "startLine":  74,
 "startColumn":  62,

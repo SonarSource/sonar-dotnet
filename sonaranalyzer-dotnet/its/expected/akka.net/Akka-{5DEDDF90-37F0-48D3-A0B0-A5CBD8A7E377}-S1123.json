@@ -4,7 +4,7 @@
 "id":  "S1123",
 "message":  "Add an explanation.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\ActorBase.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorBase.cs",
 "region":  {
 "startLine":  63,
 "startColumn":  6,

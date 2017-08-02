@@ -4,7 +4,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private constructor 'DiPerRequestActor'.",
 "location":  {
-"uri":  "akka.net\src\contrib\dependencyInjection\Akka.DI.TestKit\DiResolverSpec.cs",
+"uri":  "sources\akka.net\src\contrib\dependencyInjection\Akka.DI.TestKit\DiResolverSpec.cs",
 "region":  {
 "startLine":  33,
 "startColumn":  13,
@@ -17,7 +17,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private constructor 'DiSingletonActor'.",
 "location":  {
-"uri":  "akka.net\src\contrib\dependencyInjection\Akka.DI.TestKit\DiResolverSpec.cs",
+"uri":  "sources\akka.net\src\contrib\dependencyInjection\Akka.DI.TestKit\DiResolverSpec.cs",
 "region":  {
 "startLine":  46,
 "startColumn":  13,
@@ -30,7 +30,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private constructor 'DiParentActor'.",
 "location":  {
-"uri":  "akka.net\src\contrib\dependencyInjection\Akka.DI.TestKit\DiResolverSpec.cs",
+"uri":  "sources\akka.net\src\contrib\dependencyInjection\Akka.DI.TestKit\DiResolverSpec.cs",
 "region":  {
 "startLine":  61,
 "startColumn":  13,
@@ -43,7 +43,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private constructor 'DisposableActor'.",
 "location":  {
-"uri":  "akka.net\src\contrib\dependencyInjection\Akka.DI.TestKit\DiResolverSpec.cs",
+"uri":  "sources\akka.net\src\contrib\dependencyInjection\Akka.DI.TestKit\DiResolverSpec.cs",
 "region":  {
 "startLine":  81,
 "startColumn":  13,
@@ -56,7 +56,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private constructor 'UnboundedStashActor'.",
 "location":  {
-"uri":  "akka.net\src\contrib\dependencyInjection\Akka.DI.TestKit\DiResolverSpec.cs",
+"uri":  "sources\akka.net\src\contrib\dependencyInjection\Akka.DI.TestKit\DiResolverSpec.cs",
 "region":  {
 "startLine":  169,
 "startColumn":  13,
@@ -69,7 +69,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private constructor 'BoundedStashActor'.",
 "location":  {
-"uri":  "akka.net\src\contrib\dependencyInjection\Akka.DI.TestKit\DiResolverSpec.cs",
+"uri":  "sources\akka.net\src\contrib\dependencyInjection\Akka.DI.TestKit\DiResolverSpec.cs",
 "region":  {
 "startLine":  181,
 "startColumn":  13,

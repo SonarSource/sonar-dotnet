@@ -4,7 +4,7 @@
 "id":  "S1172",
 "message":  "Remove this unused method parameter 'serializer'.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Diagnostics\DiagnosticsHook.cs",
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\DiagnosticsHook.cs",
 "region":  {
 "startLine":  259,
 "startColumn":  129,
@@ -17,7 +17,7 @@
 "id":  "S1172",
 "message":  "Remove this unused method parameter 'diagnosticsProvider'.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Diagnostics\InteractiveDiagnostics.cs",
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\InteractiveDiagnostics.cs",
 "region":  {
 "startLine":  176,
 "startColumn":  59,
@@ -30,7 +30,7 @@
 "id":  "S1172",
 "message":  "Remove this unused method parameter 'model'.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\SuperSimpleViewEngine.cs",
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\SuperSimpleViewEngine.cs",
 "region":  {
 "startLine":  377,
 "startColumn":  76,
@@ -43,7 +43,7 @@
 "id":  "S1172",
 "message":  "Remove this unused method parameter 'model'.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\SuperSimpleViewEngine.cs",
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\SuperSimpleViewEngine.cs",
 "region":  {
 "startLine":  439,
 "startColumn":  76,
@@ -56,7 +56,7 @@
 "id":  "S1172",
 "message":  "Remove this unused method parameter 'model'.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\SuperSimpleViewEngine.cs",
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\SuperSimpleViewEngine.cs",
 "region":  {
 "startLine":  597,
 "startColumn":  73,
@@ -69,7 +69,7 @@
 "id":  "S1172",
 "message":  "Remove this unused method parameter 'model'.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\SuperSimpleViewEngine.cs",
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\SuperSimpleViewEngine.cs",
 "region":  {
 "startLine":  633,
 "startColumn":  85,
@@ -82,7 +82,7 @@
 "id":  "S1172",
 "message":  "Remove this unused method parameter 'viewEngine'.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ViewEngines\ViewEngineApplicationStartup.cs",
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\ViewEngineApplicationStartup.cs",
 "region":  {
 "startLine":  42,
 "startColumn":  73,

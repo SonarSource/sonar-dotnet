@@ -4,7 +4,7 @@
 "id":  "S1449",
 "message":  "Define the locale to be used in this string operation.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\ShouldExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\ShouldExtensions.cs",
 "region":  {
 "startLine":  71,
 "startColumn":  40,
@@ -17,7 +17,7 @@
 "id":  "S1449",
 "message":  "Define the locale to be used in this string operation.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\DynamicDictionaryFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\DynamicDictionaryFixture.cs",
 "region":  {
 "startLine":  287,
 "startColumn":  42,
@@ -30,7 +30,7 @@
 "id":  "S1449",
 "message":  "Define the locale to be used in this string operation.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\DynamicDictionaryFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\DynamicDictionaryFixture.cs",
 "region":  {
 "startLine":  301,
 "startColumn":  42,
@@ -43,7 +43,7 @@
 "id":  "S1449",
 "message":  "Define the locale to be used in this string operation.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultConverters\FallbackConverterFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultConverters\FallbackConverterFixture.cs",
 "region":  {
 "startLine":  41,
 "startColumn":  31,
@@ -56,7 +56,7 @@
 "id":  "S1449",
 "message":  "Define the locale to be used in this string operation.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultConverters\FallbackConverterFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultConverters\FallbackConverterFixture.cs",
 "region":  {
 "startLine":  52,
 "startColumn":  29,

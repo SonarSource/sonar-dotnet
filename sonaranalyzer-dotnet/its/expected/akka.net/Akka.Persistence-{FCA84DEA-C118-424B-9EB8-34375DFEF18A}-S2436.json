@@ -4,7 +4,7 @@
 "id":  "S2436",
 "message":  "Reduce the number of generic parameters in the 'PersistentFSM' class to no more than the 2 authorized.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Fsm\PersistentFSM.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Fsm\PersistentFSM.cs",
 "region":  {
 "startLine":  18,
 "startColumn":  27,
@@ -17,7 +17,7 @@
 "id":  "S2436",
 "message":  "Reduce the number of generic parameters in the 'PersistentFSMBase' class to no more than the 2 authorized.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Fsm\PersistentFSMBase.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Fsm\PersistentFSMBase.cs",
 "region":  {
 "startLine":  22,
 "startColumn":  27,
@@ -30,7 +30,7 @@
 "id":  "S2436",
 "message":  "Reduce the number of generic parameters in the 'State' class to no more than the 2 authorized.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Fsm\PersistentFSMBase.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Fsm\PersistentFSMBase.cs",
 "region":  {
 "startLine":  713,
 "startColumn":  22,

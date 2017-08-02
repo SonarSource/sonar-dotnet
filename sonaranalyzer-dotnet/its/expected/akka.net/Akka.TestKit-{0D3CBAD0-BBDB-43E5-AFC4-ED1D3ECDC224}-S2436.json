@@ -4,7 +4,7 @@
 "id":  "S2436",
 "message":  "Reduce the number of generic parameters in the 'TestFSMRef' class to no more than the 2 authorized.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.TestKit\TestFSMRef.cs",
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestFSMRef.cs",
 "region":  {
 "startLine":  21,
 "startColumn":  18,
@@ -17,7 +17,7 @@
 "id":  "S2436",
 "message":  "Reduce the number of generic parameters in the 'TestKitBase.ActorOfAsTestFSMRef' method to no more than the 2 authorized.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
 "region":  {
 "startLine":  231,
 "startColumn":  53,
@@ -30,7 +30,7 @@
 "id":  "S2436",
 "message":  "Reduce the number of generic parameters in the 'TestKitBase.ActorOfAsTestFSMRef' method to no more than the 2 authorized.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
 "region":  {
 "startLine":  247,
 "startColumn":  53,
@@ -43,7 +43,7 @@
 "id":  "S2436",
 "message":  "Reduce the number of generic parameters in the 'TestKitBase.ActorOfAsTestFSMRef' method to no more than the 2 authorized.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
 "region":  {
 "startLine":  265,
 "startColumn":  53,
@@ -56,7 +56,7 @@
 "id":  "S2436",
 "message":  "Reduce the number of generic parameters in the 'TestKitBase.ActorOfAsTestFSMRef' method to no more than the 2 authorized.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
 "region":  {
 "startLine":  281,
 "startColumn":  53,
@@ -69,7 +69,7 @@
 "id":  "S2436",
 "message":  "Reduce the number of generic parameters in the 'TestKitBase.ActorOfAsTestFSMRef' method to no more than the 2 authorized.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
 "region":  {
 "startLine":  299,
 "startColumn":  53,
@@ -82,7 +82,7 @@
 "id":  "S2436",
 "message":  "Reduce the number of generic parameters in the 'TestKitBase.ActorOfAsTestFSMRef' method to no more than the 2 authorized.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_ActorOf.cs",
 "region":  {
 "startLine":  316,
 "startColumn":  53,

@@ -4,7 +4,7 @@
 "id":  "S1858",
 "message":  "There's no need to call 'ToString()', the compiler will do it for you.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence.Tests\PersistentActorSpec.Actors.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\PersistentActorSpec.Actors.cs",
 "region":  {
 "startLine":  491,
 "startColumn":  54,
@@ -17,7 +17,7 @@
 "id":  "S1858",
 "message":  "There's no need to call 'ToString()', the compiler will do it for you.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence.Tests\PersistentActorSpec.Actors.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\PersistentActorSpec.Actors.cs",
 "region":  {
 "startLine":  522,
 "startColumn":  58,
@@ -30,7 +30,7 @@
 "id":  "S1858",
 "message":  "There's no need to call 'ToString()', the compiler will do it for you.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence.Tests\PersistentActorSpec.Actors.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\PersistentActorSpec.Actors.cs",
 "region":  {
 "startLine":  557,
 "startColumn":  49,
@@ -43,7 +43,7 @@
 "id":  "S1858",
 "message":  "There's no need to call 'ToString()', the compiler will do it for you.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence.Tests\PersistentActorSpec.Actors.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\PersistentActorSpec.Actors.cs",
 "region":  {
 "startLine":  560,
 "startColumn":  73,
@@ -56,7 +56,7 @@
 "id":  "S1858",
 "message":  "There's no need to call 'ToString()', the compiler will do it for you.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence.Tests\PersistentViewSpec.Actors.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\PersistentViewSpec.Actors.cs",
 "region":  {
 "startLine":  35,
 "startColumn":  52,

@@ -4,7 +4,7 @@
 "id":  "S2674",
 "message":  "Check the return value of the 'Read' call to see how many bytes were read.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Bootstrapper\FavIconApplicationStartup.cs",
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\FavIconApplicationStartup.cs",
 "region":  {
 "startLine":  58,
 "startColumn":  13,

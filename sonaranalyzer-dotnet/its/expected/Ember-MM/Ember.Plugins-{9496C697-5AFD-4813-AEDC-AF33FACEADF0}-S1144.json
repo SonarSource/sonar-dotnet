@@ -4,7 +4,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private field 'log'.",
 "location":  {
-"uri":  "Ember-MM\Ember.Plugins\Ember\EmberWorkAroundPlugin.cs",
+"uri":  "sources\Ember-MM\Ember.Plugins\Ember\EmberWorkAroundPlugin.cs",
 "region":  {
 "startLine":  12,
 "startColumn":  9,
@@ -17,7 +17,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private field 'log'.",
 "location":  {
-"uri":  "Ember-MM\Ember.Plugins\Scraper\MovieScraperManager.cs",
+"uri":  "sources\Ember-MM\Ember.Plugins\Scraper\MovieScraperManager.cs",
 "region":  {
 "startLine":  42,
 "startColumn":  9,

@@ -4,7 +4,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'existingContainer' to 'container' to match the base class declaration.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Demo.Hosting.Aspnet\DemoBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Demo.Hosting.Aspnet\DemoBootstrapper.cs",
 "region":  {
 "startLine":  21,
 "startColumn":  80,
@@ -17,7 +17,7 @@
 "id":  "S927",
 "message":  "Rename parameter 'existingContainer' to 'container' to match the base class declaration.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Demo.Hosting.Aspnet\DemoBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Demo.Hosting.Aspnet\DemoBootstrapper.cs",
 "region":  {
 "startLine":  50,
 "startColumn":  76,

@@ -4,7 +4,7 @@
 "id":  "S2178",
 "message":  "Correct this '&' to '&&'.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Diagnostics\InteractiveDiagnostics.cs",
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\InteractiveDiagnostics.cs",
 "region":  {
 "startLine":  24,
 "startColumn":  74,

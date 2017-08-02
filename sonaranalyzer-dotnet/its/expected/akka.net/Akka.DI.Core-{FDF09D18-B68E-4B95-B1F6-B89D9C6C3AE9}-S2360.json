@@ -4,7 +4,7 @@
 "id":  "S2360",
 "message":  "Use the overloading mechanism instead of the optional parameters.",
 "location":  {
-"uri":  "akka.net\src\contrib\dependencyInjection\Akka.DI.Core\DIActorContextAdapter.cs",
+"uri":  "sources\akka.net\src\contrib\dependencyInjection\Akka.DI.Core\DIActorContextAdapter.cs",
 "region":  {
 "startLine":  25,
 "startColumn":  54,

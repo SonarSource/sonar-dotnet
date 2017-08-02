@@ -4,7 +4,7 @@
 "id":  "S104",
 "message":  "This file has 2187 lines, which is greater than 1000 authorized. Split it into smaller files.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,

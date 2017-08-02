@@ -4,7 +4,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "akka.net\src\benchmark\PersistenceBenchmark\PerformanceActors.cs",
+"uri":  "sources\akka.net\src\benchmark\PersistenceBenchmark\PerformanceActors.cs",
 "region":  {
 "startLine":  117,
 "startColumn":  45,
@@ -17,7 +17,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "akka.net\src\benchmark\PersistenceBenchmark\Program.cs",
+"uri":  "sources\akka.net\src\benchmark\PersistenceBenchmark\Program.cs",
 "region":  {
 "startLine":  65,
 "startColumn":  13,
@@ -30,7 +30,7 @@
 "id":  "S2228",
 "message":  "Remove this logging statement.",
 "location":  {
-"uri":  "akka.net\src\benchmark\PersistenceBenchmark\Program.cs",
+"uri":  "sources\akka.net\src\benchmark\PersistenceBenchmark\Program.cs",
 "region":  {
 "startLine":  79,
 "startColumn":  13,

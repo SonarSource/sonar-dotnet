@@ -4,7 +4,7 @@
 "id":  "S103",
 "message":  "Split this 213 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "akka.net\src\benchmark\PingPong\Program.cs",
+"uri":  "sources\akka.net\src\benchmark\PingPong\Program.cs",
 "region":  {
 "startLine":  162,
 "startColumn":  1,
@@ -17,7 +17,7 @@
 "id":  "S103",
 "message":  "Split this 228 characters long line (which is greater than 200 authorized).",
 "location":  {
-"uri":  "akka.net\src\benchmark\PingPong\Program.cs",
+"uri":  "sources\akka.net\src\benchmark\PingPong\Program.cs",
 "region":  {
 "startLine":  229,
 "startColumn":  1,

@@ -4,7 +4,7 @@
 "id":  "S100",
 "message":  "Rename property 'DBMovie' to match camel case naming rules, consider using 'DbMovie'.",
 "location":  {
-"uri":  "Ember-MM\Ember.Plugins\Scraper\IMovieImageScraper.cs",
+"uri":  "sources\Ember-MM\Ember.Plugins\Scraper\IMovieImageScraper.cs",
 "region":  {
 "startLine":  39,
 "startColumn":  35,
@@ -17,7 +17,7 @@
 "id":  "S100",
 "message":  "Rename property 'DBMovie' to match camel case naming rules, consider using 'DbMovie'.",
 "location":  {
-"uri":  "Ember-MM\Ember.Plugins\Scraper\IMovieInfoScraper.cs",
+"uri":  "sources\Ember-MM\Ember.Plugins\Scraper\IMovieInfoScraper.cs",
 "region":  {
 "startLine":  41,
 "startColumn":  35,
@@ -30,7 +30,7 @@
 "id":  "S100",
 "message":  "Rename method 'SanitiseIMDbId' to match camel case naming rules, consider using 'SanitiseImDbId'.",
 "location":  {
-"uri":  "Ember-MM\Ember.Plugins\Utility.cs",
+"uri":  "sources\Ember-MM\Ember.Plugins\Utility.cs",
 "region":  {
 "startLine":  34,
 "startColumn":  30,

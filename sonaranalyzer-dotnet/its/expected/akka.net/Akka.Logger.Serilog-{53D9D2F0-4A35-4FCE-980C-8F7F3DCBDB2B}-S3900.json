@@ -4,7 +4,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'args' before using it.",
 "location":  {
-"uri":  "akka.net\src\contrib\loggers\Akka.Logger.Serilog\SerilogLogMessageFormatter.cs",
+"uri":  "sources\akka.net\src\contrib\loggers\Akka.Logger.Serilog\SerilogLogMessageFormatter.cs",
 "region":  {
 "startLine":  48,
 "startColumn":  33,

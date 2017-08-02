@@ -4,7 +4,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests.Functional\Tests\ContentNegotiationFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests.Functional\Tests\ContentNegotiationFixture.cs",
 "region":  {
 "startLine":  599,
 "startColumn":  25,
@@ -17,7 +17,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests.Functional\Tests\ContentNegotiationFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests.Functional\Tests\ContentNegotiationFixture.cs",
 "region":  {
 "startLine":  599,
 "startColumn":  67,
@@ -30,7 +30,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests.Functional\Tests\ContentNegotiationFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests.Functional\Tests\ContentNegotiationFixture.cs",
 "region":  {
 "startLine":  719,
 "startColumn":  26,
@@ -43,7 +43,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests.Functional\Tests\RouteConstraintTests.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests.Functional\Tests\RouteConstraintTests.cs",
 "region":  {
 "startLine":  88,
 "startColumn":  21,
@@ -56,7 +56,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests.Functional\Tests\SerializerTests.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests.Functional\Tests\SerializerTests.cs",
 "region":  {
 "startLine":  34,
 "startColumn":  26,
@@ -69,7 +69,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests.Functional\Tests\SerializerTests.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests.Functional\Tests\SerializerTests.cs",
 "region":  {
 "startLine":  91,
 "startColumn":  29,
@@ -82,7 +82,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests.Functional\Tests\SerializerTests.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests.Functional\Tests\SerializerTests.cs",
 "region":  {
 "startLine":  91,
 "startColumn":  66,

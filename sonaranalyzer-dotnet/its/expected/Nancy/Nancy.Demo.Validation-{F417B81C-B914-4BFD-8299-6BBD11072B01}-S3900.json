@@ -4,7 +4,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'validationContext' before using it.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Demo.Validation\Models\OddLengthStringAttribute.cs",
+"uri":  "sources\Nancy\src\Nancy.Demo.Validation\Models\OddLengthStringAttribute.cs",
 "region":  {
 "startLine":  15,
 "startColumn":  93,
@@ -17,7 +17,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'attribute' before using it.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Demo.Validation\Models\OddLengthStringAttributeAdapter.cs",
+"uri":  "sources\Nancy\src\Nancy.Demo.Validation\Models\OddLengthStringAttributeAdapter.cs",
 "region":  {
 "startLine":  15,
 "startColumn":  20,
@@ -30,7 +30,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'context' before using it.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Demo.Validation\Models\Product.cs",
+"uri":  "sources\Nancy\src\Nancy.Demo.Validation\Models\Product.cs",
 "region":  {
 "startLine":  45,
 "startColumn":  17,
@@ -43,7 +43,7 @@
 "id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'ruleBuilder' before using it.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Demo.Validation\Models\Product.cs",
+"uri":  "sources\Nancy\src\Nancy.Demo.Validation\Models\Product.cs",
 "region":  {
 "startLine":  60,
 "startColumn":  20,

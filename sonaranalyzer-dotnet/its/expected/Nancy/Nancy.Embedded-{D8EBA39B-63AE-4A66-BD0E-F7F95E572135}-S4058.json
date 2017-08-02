@@ -4,7 +4,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'requestedPath.StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Embedded\Conventions\EmbeddedStaticContentConventionBuilder.cs",
+"uri":  "sources\Nancy\src\Nancy.Embedded\Conventions\EmbeddedStaticContentConventionBuilder.cs",
 "region":  {
 "startLine":  32,
 "startColumn":  18,
@@ -17,7 +17,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'contentPath.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Embedded\Conventions\EmbeddedStaticContentConventionBuilder.cs",
+"uri":  "sources\Nancy\src\Nancy.Embedded\Conventions\EmbeddedStaticContentConventionBuilder.cs",
 "region":  {
 "startLine":  127,
 "startColumn":  18,
@@ -30,7 +30,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'requestedPath.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Embedded\Conventions\EmbeddedStaticContentConventionBuilder.cs",
+"uri":  "sources\Nancy\src\Nancy.Embedded\Conventions\EmbeddedStaticContentConventionBuilder.cs",
 "region":  {
 "startLine":  129,
 "startColumn":  17,
@@ -43,7 +43,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'contentPath.StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Embedded\Conventions\EmbeddedStaticContentConventionBuilder.cs",
+"uri":  "sources\Nancy\src\Nancy.Embedded\Conventions\EmbeddedStaticContentConventionBuilder.cs",
 "region":  {
 "startLine":  145,
 "startColumn":  18,
@@ -56,7 +56,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'pathWithoutFileName.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Embedded\Conventions\EmbeddedStaticContentConventionBuilder.cs",
+"uri":  "sources\Nancy\src\Nancy.Embedded\Conventions\EmbeddedStaticContentConventionBuilder.cs",
 "region":  {
 "startLine":  158,
 "startColumn":  21,

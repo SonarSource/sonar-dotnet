@@ -4,7 +4,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "akka.net\src\benchmark\PingPong\Program.cs",
+"uri":  "sources\akka.net\src\benchmark\PingPong\Program.cs",
 "region":  {
 "startLine":  64,
 "startColumn":  35,
@@ -17,7 +17,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "akka.net\src\benchmark\PingPong\Program.cs",
+"uri":  "sources\akka.net\src\benchmark\PingPong\Program.cs",
 "region":  {
 "startLine":  72,
 "startColumn":  31,
@@ -30,7 +30,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "akka.net\src\benchmark\PingPong\Program.cs",
+"uri":  "sources\akka.net\src\benchmark\PingPong\Program.cs",
 "region":  {
 "startLine":  73,
 "startColumn":  31,
@@ -43,7 +43,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "akka.net\src\benchmark\PingPong\Program.cs",
+"uri":  "sources\akka.net\src\benchmark\PingPong\Program.cs",
 "region":  {
 "startLine":  74,
 "startColumn":  31,
@@ -56,7 +56,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "akka.net\src\benchmark\PingPong\Program.cs",
+"uri":  "sources\akka.net\src\benchmark\PingPong\Program.cs",
 "region":  {
 "startLine":  75,
 "startColumn":  31,
@@ -69,7 +69,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "akka.net\src\benchmark\PingPong\Program.cs",
+"uri":  "sources\akka.net\src\benchmark\PingPong\Program.cs",
 "region":  {
 "startLine":  76,
 "startColumn":  31,
@@ -82,7 +82,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "akka.net\src\benchmark\PingPong\Program.cs",
+"uri":  "sources\akka.net\src\benchmark\PingPong\Program.cs",
 "region":  {
 "startLine":  77,
 "startColumn":  31,
@@ -95,7 +95,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "akka.net\src\benchmark\PingPong\Program.cs",
+"uri":  "sources\akka.net\src\benchmark\PingPong\Program.cs",
 "region":  {
 "startLine":  82,
 "startColumn":  27,
@@ -108,7 +108,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "akka.net\src\benchmark\PingPong\Program.cs",
+"uri":  "sources\akka.net\src\benchmark\PingPong\Program.cs",
 "region":  {
 "startLine":  84,
 "startColumn":  31,
@@ -121,7 +121,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "akka.net\src\benchmark\PingPong\Program.cs",
+"uri":  "sources\akka.net\src\benchmark\PingPong\Program.cs",
 "region":  {
 "startLine":  85,
 "startColumn":  27,
@@ -134,7 +134,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "akka.net\src\benchmark\PingPong\Program.cs",
+"uri":  "sources\akka.net\src\benchmark\PingPong\Program.cs",
 "region":  {
 "startLine":  87,
 "startColumn":  31,
@@ -147,7 +147,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "akka.net\src\benchmark\PingPong\Program.cs",
+"uri":  "sources\akka.net\src\benchmark\PingPong\Program.cs",
 "region":  {
 "startLine":  91,
 "startColumn":  31,
@@ -160,7 +160,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "akka.net\src\benchmark\PingPong\Program.cs",
+"uri":  "sources\akka.net\src\benchmark\PingPong\Program.cs",
 "region":  {
 "startLine":  93,
 "startColumn":  35,
@@ -173,7 +173,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "akka.net\src\benchmark\PingPong\Program.cs",
+"uri":  "sources\akka.net\src\benchmark\PingPong\Program.cs",
 "region":  {
 "startLine":  98,
 "startColumn":  27,
@@ -186,7 +186,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "akka.net\src\benchmark\PingPong\Program.cs",
+"uri":  "sources\akka.net\src\benchmark\PingPong\Program.cs",
 "region":  {
 "startLine":  101,
 "startColumn":  31,
@@ -199,7 +199,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "akka.net\src\benchmark\PingPong\Program.cs",
+"uri":  "sources\akka.net\src\benchmark\PingPong\Program.cs",
 "region":  {
 "startLine":  105,
 "startColumn":  27,
@@ -212,7 +212,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "akka.net\src\benchmark\PingPong\Program.cs",
+"uri":  "sources\akka.net\src\benchmark\PingPong\Program.cs",
 "region":  {
 "startLine":  108,
 "startColumn":  31,
@@ -225,7 +225,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "akka.net\src\benchmark\PingPong\Program.cs",
+"uri":  "sources\akka.net\src\benchmark\PingPong\Program.cs",
 "region":  {
 "startLine":  125,
 "startColumn":  35,
@@ -238,7 +238,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "akka.net\src\benchmark\PingPong\Program.cs",
+"uri":  "sources\akka.net\src\benchmark\PingPong\Program.cs",
 "region":  {
 "startLine":  132,
 "startColumn":  39,
@@ -251,7 +251,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "akka.net\src\benchmark\PingPong\Program.cs",
+"uri":  "sources\akka.net\src\benchmark\PingPong\Program.cs",
 "region":  {
 "startLine":  143,
 "startColumn":  31,
@@ -264,7 +264,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "akka.net\src\benchmark\PingPong\Program.cs",
+"uri":  "sources\akka.net\src\benchmark\PingPong\Program.cs",
 "region":  {
 "startLine":  192,
 "startColumn":  35,
@@ -277,7 +277,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "akka.net\src\benchmark\PingPong\Program.cs",
+"uri":  "sources\akka.net\src\benchmark\PingPong\Program.cs",
 "region":  {
 "startLine":  222,
 "startColumn":  31,
@@ -290,7 +290,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "akka.net\src\benchmark\PingPong\Program.cs",
+"uri":  "sources\akka.net\src\benchmark\PingPong\Program.cs",
 "region":  {
 "startLine":  227,
 "startColumn":  35,
@@ -303,7 +303,7 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "akka.net\src\benchmark\PingPong\Program.cs",
+"uri":  "sources\akka.net\src\benchmark\PingPong\Program.cs",
 "region":  {
 "startLine":  229,
 "startColumn":  35,

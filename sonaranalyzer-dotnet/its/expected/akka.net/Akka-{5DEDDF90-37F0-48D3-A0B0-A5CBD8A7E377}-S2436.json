@@ -4,7 +4,7 @@
 "id":  "S2436",
 "message":  "Reduce the number of generic parameters in the 'EventBus' class to no more than the 2 authorized.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Event\EventBus.cs",
+"uri":  "sources\akka.net\src\core\Akka\Event\EventBus.cs",
 "region":  {
 "startLine":  21,
 "startColumn":  27,
@@ -17,7 +17,7 @@
 "id":  "S2436",
 "message":  "Reduce the number of generic parameters in the 'PartialHandlerArgumentsCapture' class to no more than the 2 authorized.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
 "region":  {
 "startLine":  47,
 "startColumn":  25,
@@ -30,7 +30,7 @@
 "id":  "S2436",
 "message":  "Reduce the number of generic parameters in the 'PartialHandlerArgumentsCapture' class to no more than the 2 authorized.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
 "region":  {
 "startLine":  61,
 "startColumn":  25,
@@ -43,7 +43,7 @@
 "id":  "S2436",
 "message":  "Reduce the number of generic parameters in the 'PartialHandlerArgumentsCapture' class to no more than the 2 authorized.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
 "region":  {
 "startLine":  77,
 "startColumn":  25,
@@ -56,7 +56,7 @@
 "id":  "S2436",
 "message":  "Reduce the number of generic parameters in the 'PartialHandlerArgumentsCapture' class to no more than the 2 authorized.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
 "region":  {
 "startLine":  95,
 "startColumn":  25,
@@ -69,7 +69,7 @@
 "id":  "S2436",
 "message":  "Reduce the number of generic parameters in the 'PartialHandlerArgumentsCapture' class to no more than the 2 authorized.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
 "region":  {
 "startLine":  115,
 "startColumn":  25,
@@ -82,7 +82,7 @@
 "id":  "S2436",
 "message":  "Reduce the number of generic parameters in the 'PartialHandlerArgumentsCapture' class to no more than the 2 authorized.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
 "region":  {
 "startLine":  137,
 "startColumn":  25,
@@ -95,7 +95,7 @@
 "id":  "S2436",
 "message":  "Reduce the number of generic parameters in the 'PartialHandlerArgumentsCapture' class to no more than the 2 authorized.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
 "region":  {
 "startLine":  161,
 "startColumn":  25,
@@ -108,7 +108,7 @@
 "id":  "S2436",
 "message":  "Reduce the number of generic parameters in the 'PartialHandlerArgumentsCapture' class to no more than the 2 authorized.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
 "region":  {
 "startLine":  187,
 "startColumn":  25,
@@ -121,7 +121,7 @@
 "id":  "S2436",
 "message":  "Reduce the number of generic parameters in the 'PartialHandlerArgumentsCapture' class to no more than the 2 authorized.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
 "region":  {
 "startLine":  215,
 "startColumn":  25,
@@ -134,7 +134,7 @@
 "id":  "S2436",
 "message":  "Reduce the number of generic parameters in the 'PartialHandlerArgumentsCapture' class to no more than the 2 authorized.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
 "region":  {
 "startLine":  245,
 "startColumn":  25,
@@ -147,7 +147,7 @@
 "id":  "S2436",
 "message":  "Reduce the number of generic parameters in the 'PartialHandlerArgumentsCapture' class to no more than the 2 authorized.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
 "region":  {
 "startLine":  277,
 "startColumn":  25,
@@ -160,7 +160,7 @@
 "id":  "S2436",
 "message":  "Reduce the number of generic parameters in the 'PartialHandlerArgumentsCapture' class to no more than the 2 authorized.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
 "region":  {
 "startLine":  311,
 "startColumn":  25,
@@ -173,7 +173,7 @@
 "id":  "S2436",
 "message":  "Reduce the number of generic parameters in the 'PartialHandlerArgumentsCapture' class to no more than the 2 authorized.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
 "region":  {
 "startLine":  347,
 "startColumn":  25,
@@ -186,7 +186,7 @@
 "id":  "S2436",
 "message":  "Reduce the number of generic parameters in the 'PartialHandlerArgumentsCapture' class to no more than the 2 authorized.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\PartialHandlerArgumentsCapture.cs",
 "region":  {
 "startLine":  385,
 "startColumn":  25,

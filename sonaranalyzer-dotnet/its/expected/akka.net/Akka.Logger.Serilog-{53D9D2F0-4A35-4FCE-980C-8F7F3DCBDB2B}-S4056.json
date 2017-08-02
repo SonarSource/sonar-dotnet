@@ -4,7 +4,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "akka.net\src\contrib\loggers\Akka.Logger.Serilog\SerilogLogger.cs",
+"uri":  "sources\akka.net\src\contrib\loggers\Akka.Logger.Serilog\SerilogLogger.cs",
 "region":  {
 "startLine":  36,
 "startColumn":  45,

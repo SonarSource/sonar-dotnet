@@ -4,7 +4,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\contrib\dependencyInjection\Akka.DI.CastleWindsor\WindsorDependencyResolver.cs",
+"uri":  "sources\akka.net\src\contrib\dependencyInjection\Akka.DI.CastleWindsor\WindsorDependencyResolver.cs",
 "region":  {
 "startLine":  37,
 "startColumn":  13,
@@ -17,7 +17,7 @@
 "id":  "S121",
 "message":  "Add curly braces around the nested statement(s) in this 'if' block.",
 "location":  {
-"uri":  "akka.net\src\contrib\dependencyInjection\Akka.DI.CastleWindsor\WindsorDependencyResolver.cs",
+"uri":  "sources\akka.net\src\contrib\dependencyInjection\Akka.DI.CastleWindsor\WindsorDependencyResolver.cs",
 "region":  {
 "startLine":  38,
 "startColumn":  13,

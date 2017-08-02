@@ -4,7 +4,7 @@
 "id":  "S1067",
 "message":  "Reduce the number of conditional operators (5) used in the expression (maximum allowed 3).",
 "location":  {
-"uri":  "akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common.TestKit\SqlJournalQuerySpec.cs",
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common.TestKit\SqlJournalQuerySpec.cs",
 "region":  {
 "startLine":  136,
 "startColumn":  21,

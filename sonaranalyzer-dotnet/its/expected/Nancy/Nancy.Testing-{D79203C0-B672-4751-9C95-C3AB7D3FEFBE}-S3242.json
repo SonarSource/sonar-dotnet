@@ -4,7 +4,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'System.Collections.Generic.IEnumerable<Nancy.Testing.NodeWrapper>' instead of 'Nancy.Testing.QueryWrapper'.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Testing\AssertExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\AssertExtensions.cs",
 "region":  {
 "startLine":  51,
 "startColumn":  83,
@@ -17,7 +17,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'System.Collections.Generic.IEnumerable<Nancy.Testing.NodeWrapper>' instead of 'Nancy.Testing.QueryWrapper'.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Testing\AssertExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\AssertExtensions.cs",
 "region":  {
 "startLine":  60,
 "startColumn":  87,
@@ -30,7 +30,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<string, string>>' instead of 'System.Collections.Generic.IDictionary<string, string>'.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Testing\BrowserContextExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContextExtensions.cs",
 "region":  {
 "startLine":  112,
 "startColumn":  99,
@@ -43,7 +43,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'System.Collections.Generic.IEnumerable<byte>' instead of 'Nancy.Testing.BrowserResponseBodyWrapper'.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Testing\BrowserResponseBodyWrapperExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\BrowserResponseBodyWrapperExtensions.cs",
 "region":  {
 "startLine":  21,
 "startColumn":  71,
@@ -56,7 +56,7 @@
 "id":  "S3242",
 "message":  "Consider using more general type 'System.Collections.Generic.IEnumerable<byte>' instead of 'Nancy.Testing.BrowserResponseBodyWrapper'.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Testing\BrowserResponseBodyWrapperExtensions.cs",
+"uri":  "sources\Nancy\src\Nancy.Testing\BrowserResponseBodyWrapperExtensions.cs",
 "region":  {
 "startLine":  31,
 "startColumn":  71,

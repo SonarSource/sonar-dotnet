@@ -4,7 +4,7 @@
 "id":  "S127",
 "message":  "Do not update the loop counter 'i' within the loop body.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
 "region":  {
 "startLine":  163,
 "startColumn":  29,
@@ -17,7 +17,7 @@
 "id":  "S127",
 "message":  "Do not update the loop counter 'i' within the loop body.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
 "region":  {
 "startLine":  171,
 "startColumn":  25,
@@ -30,7 +30,7 @@
 "id":  "S127",
 "message":  "Do not update the loop counter 'i' within the loop body.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
 "region":  {
 "startLine":  285,
 "startColumn":  29,
@@ -43,7 +43,7 @@
 "id":  "S127",
 "message":  "Do not update the loop counter 'i' within the loop body.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
 "region":  {
 "startLine":  292,
 "startColumn":  25,
@@ -56,7 +56,7 @@
 "id":  "S127",
 "message":  "Do not update the loop counter 'i' within the loop body.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
 "region":  {
 "startLine":  375,
 "startColumn":  25,

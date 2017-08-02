@@ -4,7 +4,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'str.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.Tests\RemotingSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests\RemotingSpec.cs",
 "region":  {
 "startLine":  447,
 "startColumn":  29,
@@ -17,7 +17,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'actorTuple.Item1.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.Tests\RemotingSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests\RemotingSpec.cs",
 "region":  {
 "startLine":  451,
 "startColumn":  29,
@@ -30,7 +30,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'actorTuple.Item1.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.Tests\RemotingSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests\RemotingSpec.cs",
 "region":  {
 "startLine":  455,
 "startColumn":  29,
@@ -43,7 +43,7 @@
 "id":  "S4058",
 "message":  "Change this call to 's.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.Tests\Transport\ThrottlerTransportAdapterSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests\Transport\ThrottlerTransportAdapterSpec.cs",
 "region":  {
 "startLine":  65,
 "startColumn":  38,
@@ -56,7 +56,7 @@
 "id":  "S4058",
 "message":  "Change this call to 's.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.Tests\Transport\ThrottlerTransportAdapterSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests\Transport\ThrottlerTransportAdapterSpec.cs",
 "region":  {
 "startLine":  71,
 "startColumn":  38,
@@ -69,7 +69,7 @@
 "id":  "S4058",
 "message":  "Change this call to 's.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.Tests\Transport\ThrottlerTransportAdapterSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests\Transport\ThrottlerTransportAdapterSpec.cs",
 "region":  {
 "startLine":  78,
 "startColumn":  38,
@@ -82,7 +82,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'string.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.Tests\Transport\ThrottlerTransportAdapterSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests\Transport\ThrottlerTransportAdapterSpec.cs",
 "region":  {
 "startLine":  99,
 "startColumn":  28,
@@ -95,7 +95,7 @@
 "id":  "S4058",
 "message":  "Change this call to 'string.Equals' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.Tests\Transport\ThrottlerTransportAdapterSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests\Transport\ThrottlerTransportAdapterSpec.cs",
 "region":  {
 "startLine":  121,
 "startColumn":  50,

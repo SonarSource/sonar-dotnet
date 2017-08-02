@@ -4,7 +4,7 @@
 "id":  "S3717",
 "message":  "Implement this method or throw 'NotSupportedException' instead.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\ActorCell.DeathWatch.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.DeathWatch.cs",
 "region":  {
 "startLine":  303,
 "startColumn":  17,
@@ -17,7 +17,7 @@
 "id":  "S3717",
 "message":  "Implement this method or throw 'NotSupportedException' instead.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Actor\ActorRef.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorRef.cs",
 "region":  {
 "startLine":  78,
 "startColumn":  19,
@@ -30,7 +30,7 @@
 "id":  "S3717",
 "message":  "Implement this method or throw 'NotSupportedException' instead.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Configuration\Hocon\HoconArray.cs",
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconArray.cs",
 "region":  {
 "startLine":  49,
 "startColumn":  13,
@@ -43,7 +43,7 @@
 "id":  "S3717",
 "message":  "Implement this method or throw 'NotSupportedException' instead.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Configuration\Hocon\HoconLiteral.cs",
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconLiteral.cs",
 "region":  {
 "startLine":  70,
 "startColumn":  13,
@@ -56,7 +56,7 @@
 "id":  "S3717",
 "message":  "Implement this method or throw 'NotSupportedException' instead.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Configuration\Hocon\HoconObject.cs",
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconObject.cs",
 "region":  {
 "startLine":  86,
 "startColumn":  13,
@@ -69,7 +69,7 @@
 "id":  "S3717",
 "message":  "Implement this method or throw 'NotSupportedException' instead.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Configuration\Hocon\HoconObject.cs",
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconObject.cs",
 "region":  {
 "startLine":  108,
 "startColumn":  13,
@@ -82,7 +82,7 @@
 "id":  "S3717",
 "message":  "Implement this method or throw 'NotSupportedException' instead.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Routing\RouterConfig.cs",
+"uri":  "sources\akka.net\src\core\Akka\Routing\RouterConfig.cs",
 "region":  {
 "startLine":  157,
 "startColumn":  13,
@@ -95,7 +95,7 @@
 "id":  "S3717",
 "message":  "Implement this method or throw 'NotSupportedException' instead.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Routing\RouterConfig.cs",
+"uri":  "sources\akka.net\src\core\Akka\Routing\RouterConfig.cs",
 "region":  {
 "startLine":  174,
 "startColumn":  13,
@@ -108,7 +108,7 @@
 "id":  "S3717",
 "message":  "Implement this method or throw 'NotSupportedException' instead.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Routing\RouterConfig.cs",
+"uri":  "sources\akka.net\src\core\Akka\Routing\RouterConfig.cs",
 "region":  {
 "startLine":  191,
 "startColumn":  13,
@@ -121,7 +121,7 @@
 "id":  "S3717",
 "message":  "Implement this method or throw 'NotSupportedException' instead.",
 "location":  {
-"uri":  "akka.net\src\core\Akka\Routing\RouterConfig.cs",
+"uri":  "sources\akka.net\src\core\Akka\Routing\RouterConfig.cs",
 "region":  {
 "startLine":  368,
 "startColumn":  13,

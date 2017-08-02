@@ -4,7 +4,7 @@
 "id":  "S1210",
 "message":  "When implementing IComparable<T>, you should also override <, >, <=, >=, ==, !=.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
 "region":  {
 "startLine":  775,
 "startColumn":  25,

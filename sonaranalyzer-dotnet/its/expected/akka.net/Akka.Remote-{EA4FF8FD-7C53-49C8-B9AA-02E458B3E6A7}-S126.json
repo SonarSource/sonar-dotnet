@@ -4,7 +4,7 @@
 "id":  "S126",
 "message":  "Add the missing 'else' clause.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\AckedDelivery.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\AckedDelivery.cs",
 "region":  {
 "startLine":  146,
 "startColumn":  17,
@@ -17,7 +17,7 @@
 "id":  "S126",
 "message":  "Add the missing 'else' clause.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\AckedDelivery.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\AckedDelivery.cs",
 "region":  {
 "startLine":  418,
 "startColumn":  21,
@@ -30,7 +30,7 @@
 "id":  "S126",
 "message":  "Add the missing 'else' clause.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
 "region":  {
 "startLine":  1145,
 "startColumn":  13,
@@ -43,7 +43,7 @@
 "id":  "S126",
 "message":  "Add the missing 'else' clause.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\Endpoint.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
 "region":  {
 "startLine":  1306,
 "startColumn":  17,
@@ -56,7 +56,7 @@
 "id":  "S126",
 "message":  "Add the missing 'else' clause.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\EndpointRegistry.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointRegistry.cs",
 "region":  {
 "startLine":  76,
 "startColumn":  13,
@@ -69,7 +69,7 @@
 "id":  "S126",
 "message":  "Add the missing 'else' clause.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\EndpointRegistry.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointRegistry.cs",
 "region":  {
 "startLine":  143,
 "startColumn":  13,
@@ -82,7 +82,7 @@
 "id":  "S126",
 "message":  "Add the missing 'else' clause.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\RemoteActorRefProvider.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteActorRefProvider.cs",
 "region":  {
 "startLine":  176,
 "startColumn":  17,
@@ -95,7 +95,7 @@
 "id":  "S126",
 "message":  "Add the missing 'else' clause.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\RemoteSystemDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteSystemDaemon.cs",
 "region":  {
 "startLine":  140,
 "startColumn":  13,
@@ -108,7 +108,7 @@
 "id":  "S126",
 "message":  "Add the missing 'else' clause.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\RemoteWatcher.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteWatcher.cs",
 "region":  {
 "startLine":  334,
 "startColumn":  13,
@@ -121,7 +121,7 @@
 "id":  "S126",
 "message":  "Add the missing 'else' clause.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
 "region":  {
 "startLine":  344,
 "startColumn":  13,

@@ -4,7 +4,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit.Tests\BarrierSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit.Tests\BarrierSpec.cs",
 "region":  {
 "startLine":  46,
 "startColumn":  17,
@@ -17,7 +17,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit.Tests\BarrierSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit.Tests\BarrierSpec.cs",
 "region":  {
 "startLine":  47,
 "startColumn":  17,
@@ -30,7 +30,7 @@
 "id":  "S122",
 "message":  "Reformat the code to have only one statement per line.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.TestKit.Tests\BarrierSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.TestKit.Tests\BarrierSpec.cs",
 "region":  {
 "startLine":  377,
 "startColumn":  13,

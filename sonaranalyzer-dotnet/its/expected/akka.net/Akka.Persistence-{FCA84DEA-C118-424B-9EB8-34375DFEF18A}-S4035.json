@@ -4,7 +4,7 @@
 "id":  "S4035",
 "message":  "Seal class 'EventSequence' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Journal\EventSequences.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\EventSequences.cs",
 "region":  {
 "startLine":  42,
 "startColumn":  18,
@@ -17,7 +17,7 @@
 "id":  "S4035",
 "message":  "Seal class 'WriteMessagesSuccessful' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
 "region":  {
 "startLine":  279,
 "startColumn":  18,
@@ -30,7 +30,7 @@
 "id":  "S4035",
 "message":  "Seal class 'ReplayMessagesSuccess' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
 "region":  {
 "startLine":  666,
 "startColumn":  18,
@@ -43,7 +43,7 @@
 "id":  "S4035",
 "message":  "Seal class 'Persistent' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Persistent.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistent.cs",
 "region":  {
 "startLine":  116,
 "startColumn":  18,

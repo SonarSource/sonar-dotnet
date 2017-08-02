@@ -4,7 +4,7 @@
 "id":  "S3897",
 "message":  "Implement 'IEquatable<Quarantined>'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Remote.Tests\RemoteWatcherSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests\RemoteWatcherSpec.cs",
 "region":  {
 "startLine":  81,
 "startColumn":  26,

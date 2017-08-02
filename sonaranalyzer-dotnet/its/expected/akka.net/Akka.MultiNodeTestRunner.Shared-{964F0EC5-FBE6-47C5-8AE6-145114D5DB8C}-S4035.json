@@ -4,7 +4,7 @@
 "id":  "S4035",
 "message":  "Seal class 'TestRunTree' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Reporting\TestRunTree.cs",
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Reporting\TestRunTree.cs",
 "region":  {
 "startLine":  18,
 "startColumn":  18,
@@ -17,7 +17,7 @@
 "id":  "S4035",
 "message":  "Seal class 'FactData' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Reporting\TestRunTree.cs",
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Reporting\TestRunTree.cs",
 "region":  {
 "startLine":  130,
 "startColumn":  18,
@@ -30,7 +30,7 @@
 "id":  "S4035",
 "message":  "Seal class 'NodeData' or implement 'IEqualityComparer<T>' instead.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Reporting\TestRunTree.cs",
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Reporting\TestRunTree.cs",
 "region":  {
 "startLine":  277,
 "startColumn":  18,

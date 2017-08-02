@@ -4,7 +4,7 @@
 "id":  "S104",
 "message":  "This file has 1040 lines, which is greater than 1000 authorized. Split it into smaller files.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
 "region":  {
 "startLine":  1,
 "startColumn":  1,

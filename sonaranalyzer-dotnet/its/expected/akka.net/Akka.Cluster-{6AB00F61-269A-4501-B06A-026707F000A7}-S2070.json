@@ -4,7 +4,7 @@
 "id":  "S2070",
 "message":  "Use a stronger hashing/asymmetric algorithm.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\VectorClock.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\VectorClock.cs",
 "region":  {
 "startLine":  65,
 "startColumn":  27,

@@ -4,7 +4,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private property 'RootPath'.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Conventions\StaticContentConventionBuilder.cs",
+"uri":  "sources\Nancy\src\Nancy\Conventions\StaticContentConventionBuilder.cs",
 "region":  {
 "startLine":  246,
 "startColumn":  13,
@@ -17,7 +17,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private property 'DebuggerDisplay'.",
 "location":  {
-"uri":  "Nancy\src\Nancy\DynamicDictionary.cs",
+"uri":  "sources\Nancy\src\Nancy\DynamicDictionary.cs",
 "region":  {
 "startLine":  351,
 "startColumn":  9,
@@ -30,7 +30,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private method 'SerializeGenericDictionary'.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Json\JsonSerializer.cs",
+"uri":  "sources\Nancy\src\Nancy\Json\JsonSerializer.cs",
 "region":  {
 "startLine":  408,
 "startColumn":  3,
@@ -43,7 +43,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private property 'DebuggerDisplay'.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Request.cs",
+"uri":  "sources\Nancy\src\Nancy\Request.cs",
 "region":  {
 "startLine":  323,
 "startColumn":  9,
@@ -56,7 +56,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private property 'DebuggerDisplay'.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Response.cs",
+"uri":  "sources\Nancy\src\Nancy\Response.cs",
 "region":  {
 "startLine":  169,
 "startColumn":  9,
@@ -69,7 +69,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private method 'GetAllRoutes'.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Routing\DefaultRouteCacheProvider.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\DefaultRouteCacheProvider.cs",
 "region":  {
 "startLine":  73,
 "startColumn":  13,
@@ -82,7 +82,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private property 'DebuggerDisplay'.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Routing\RouteDescription.cs",
+"uri":  "sources\Nancy\src\Nancy\Routing\RouteDescription.cs",
 "region":  {
 "startLine":  81,
 "startColumn":  9,
@@ -95,7 +95,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private method 'RemoveRegistration'.",
 "location":  {
-"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
 "startLine":  3230,
 "startColumn":  9,
@@ -108,7 +108,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private method 'ConstructType'.",
 "location":  {
-"uri":  "Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
 "startLine":  3620,
 "startColumn":  9,

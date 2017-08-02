@@ -4,7 +4,7 @@
 "id":  "S3898",
 "message":  "Implement 'IEquatable<T>' in value type 'ReplyTo'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\ActorRefSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ActorRefSpec.cs",
 "region":  {
 "startLine":  316,
 "startColumn":  24,
@@ -17,7 +17,7 @@
 "id":  "S3898",
 "message":  "Implement 'IEquatable<T>' in value type 'W'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\DeathWatchSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\DeathWatchSpec.cs",
 "region":  {
 "startLine":  409,
 "startColumn":  25,
@@ -30,7 +30,7 @@
 "id":  "S3898",
 "message":  "Implement 'IEquatable<T>' in value type 'U'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\DeathWatchSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\DeathWatchSpec.cs",
 "region":  {
 "startLine":  420,
 "startColumn":  25,
@@ -43,7 +43,7 @@
 "id":  "S3898",
 "message":  "Implement 'IEquatable<T>' in value type 'FF'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\DeathWatchSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\DeathWatchSpec.cs",
 "region":  {
 "startLine":  430,
 "startColumn":  25,
@@ -56,7 +56,7 @@
 "id":  "S3898",
 "message":  "Implement 'IEquatable<T>' in value type 'Latches'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Actor\DeathWatchSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\DeathWatchSpec.cs",
 "region":  {
 "startLine":  441,
 "startColumn":  25,
@@ -69,7 +69,7 @@
 "id":  "S3898",
 "message":  "Implement 'IEquatable<T>' in value type 'Notification'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Event\EventBusSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Event\EventBusSpec.cs",
 "region":  {
 "startLine":  61,
 "startColumn":  21,

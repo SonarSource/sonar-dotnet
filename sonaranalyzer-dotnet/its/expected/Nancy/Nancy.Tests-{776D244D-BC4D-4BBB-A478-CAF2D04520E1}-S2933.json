@@ -4,7 +4,7 @@
 "id":  "S2933",
 "message":  "Make 'configuration' 'readonly'.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Fakes\FakeDefaultNancyBootstrapper.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Fakes\FakeDefaultNancyBootstrapper.cs",
 "region":  {
 "startLine":  16,
 "startColumn":  44,
@@ -17,7 +17,7 @@
 "id":  "S2933",
 "message":  "Make '_Modules' 'readonly'.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Fakes\FakeModuleCatalog.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Fakes\FakeModuleCatalog.cs",
 "region":  {
 "startLine":  9,
 "startColumn":  48,
@@ -30,7 +30,7 @@
 "id":  "S2933",
 "message":  "Make 'etag' 'readonly'.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Helpers\CacheHelpersFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Helpers\CacheHelpersFixture.cs",
 "region":  {
 "startLine":  13,
 "startColumn":  24,
@@ -43,7 +43,7 @@
 "id":  "S2933",
 "message":  "Make 'lastModified' 'readonly'.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Helpers\CacheHelpersFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Helpers\CacheHelpersFixture.cs",
 "region":  {
 "startLine":  15,
 "startColumn":  26,
@@ -56,7 +56,7 @@
 "id":  "S2933",
 "message":  "Make 'provider' 'readonly'.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\Cryptography\RijndaelEncryptionProviderFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Cryptography\RijndaelEncryptionProviderFixture.cs",
 "region":  {
 "startLine":  9,
 "startColumn":  44,
@@ -69,7 +69,7 @@
 "id":  "S2933",
 "message":  "Make 'bootstrapper' 'readonly'.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\DefaultNancyBootstrapperModuleCatalogFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\DefaultNancyBootstrapperModuleCatalogFixture.cs",
 "region":  {
 "startLine":  10,
 "startColumn":  34,
@@ -82,7 +82,7 @@
 "id":  "S2933",
 "message":  "Make 'moduleRegistrations' 'readonly'.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\DefaultNancyBootstrapperModuleCatalogFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\DefaultNancyBootstrapperModuleCatalogFixture.cs",
 "region":  {
 "startLine":  29,
 "startColumn":  53,
@@ -95,7 +95,7 @@
 "id":  "S2933",
 "message":  "Make 'buffer' 'readonly'.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\HttpMultipartBufferFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\HttpMultipartBufferFixture.cs",
 "region":  {
 "startLine":  9,
 "startColumn":  37,
@@ -108,7 +108,7 @@
 "id":  "S2933",
 "message":  "Make 'converter' 'readonly'.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultConverters\CollectionConverterFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultConverters\CollectionConverterFixture.cs",
 "region":  {
 "startLine":  15,
 "startColumn":  32,
@@ -121,7 +121,7 @@
 "id":  "S2933",
 "message":  "Make 'context' 'readonly'.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultConverters\CollectionConverterFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultConverters\CollectionConverterFixture.cs",
 "region":  {
 "startLine":  16,
 "startColumn":  32,
@@ -134,7 +134,7 @@
 "id":  "S2933",
 "message":  "Make 'mockStringTypeConverter' 'readonly'.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultConverters\CollectionConverterFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultConverters\CollectionConverterFixture.cs",
 "region":  {
 "startLine":  17,
 "startColumn":  32,
@@ -147,7 +147,7 @@
 "id":  "S2933",
 "message":  "Make 'converter' 'readonly'.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultConverters\FallbackConverterFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultConverters\FallbackConverterFixture.cs",
 "region":  {
 "startLine":  13,
 "startColumn":  32,
@@ -160,7 +160,7 @@
 "id":  "S2933",
 "message":  "Make 'negotiator' 'readonly'.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\Routing\DefaultRequestDispatcherFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Routing\DefaultRequestDispatcherFixture.cs",
 "region":  {
 "startLine":  24,
 "startColumn":  37,
@@ -173,7 +173,7 @@
 "id":  "S2933",
 "message":  "Make '_Provider' 'readonly'.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\Routing\DefaultRouteCacheProviderFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Routing\DefaultRouteCacheProviderFixture.cs",
 "region":  {
 "startLine":  11,
 "startColumn":  37,
@@ -186,7 +186,7 @@
 "id":  "S2933",
 "message":  "Make '_RouteCache' 'readonly'.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\Routing\DefaultRouteCacheProviderFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Routing\DefaultRouteCacheProviderFixture.cs",
 "region":  {
 "startLine":  12,
 "startColumn":  29,
@@ -199,7 +199,7 @@
 "id":  "S2933",
 "message":  "Make 'rijndaelEncryptionProvider' 'readonly'.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\Sessions\CookieBasedSessionsFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Sessions\CookieBasedSessionsFixture.cs",
 "region":  {
 "startLine":  29,
 "startColumn":  44,
@@ -212,7 +212,7 @@
 "id":  "S2933",
 "message":  "Make 'defaultHmacProvider' 'readonly'.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\Sessions\CookieBasedSessionsFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Sessions\CookieBasedSessionsFixture.cs",
 "region":  {
 "startLine":  31,
 "startColumn":  37,
@@ -225,7 +225,7 @@
 "id":  "S2933",
 "message":  "Make 'defaultObjectSerializer' 'readonly'.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\Sessions\CookieBasedSessionsFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Sessions\CookieBasedSessionsFixture.cs",
 "region":  {
 "startLine":  33,
 "startColumn":  35,
@@ -238,7 +238,7 @@
 "id":  "S2933",
 "message":  "Make 'serializer' 'readonly'.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\Sessions\DefaultSessionObjectFormatterFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Sessions\DefaultSessionObjectFormatterFixture.cs",
 "region":  {
 "startLine":  9,
 "startColumn":  41,
@@ -251,7 +251,7 @@
 "id":  "S2933",
 "message":  "Make 'provider' 'readonly'.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\Sessions\NullSessionProviderFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Sessions\NullSessionProviderFixture.cs",
 "region":  {
 "startLine":  11,
 "startColumn":  37,
@@ -264,7 +264,7 @@
 "id":  "S2933",
 "message":  "Make 'views' 'readonly'.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ViewEngines\ViewEngineStartupFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ViewEngines\ViewEngineStartupFixture.cs",
 "region":  {
 "startLine":  13,
 "startColumn":  43,

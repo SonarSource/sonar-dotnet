@@ -5,7 +5,7 @@
 "message":  "Update this implementation of 'ISerializable' to conform to the recommended serialization pattern.",
 "location":  [
 {
-"uri":  "Ember-MM\Ember.Plugins\Scraper\Exceptions.cs",
+"uri":  "sources\Ember-MM\Ember.Plugins\Scraper\Exceptions.cs",
 "region":  {
 "startLine":  9,
 "startColumn":  18,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "Ember-MM\Ember.Plugins\Scraper\Exceptions.cs",
+"uri":  "sources\Ember-MM\Ember.Plugins\Scraper\Exceptions.cs",
 "region":  {
 "startLine":  9,
 "startColumn":  12,
@@ -23,7 +23,7 @@
 }
 },
 {
-"uri":  "Ember-MM\Ember.Plugins\Scraper\Exceptions.cs",
+"uri":  "sources\Ember-MM\Ember.Plugins\Scraper\Exceptions.cs",
 "region":  {
 "startLine":  9,
 "startColumn":  12,

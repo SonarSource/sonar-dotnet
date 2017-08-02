@@ -4,7 +4,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "akka.net\src\examples\FaultTolerance\Program.cs",
+"uri":  "sources\akka.net\src\examples\FaultTolerance\Program.cs",
 "region":  {
 "startLine":  94,
 "startColumn":  20,
@@ -17,7 +17,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "akka.net\src\examples\FaultTolerance\Program.cs",
+"uri":  "sources\akka.net\src\examples\FaultTolerance\Program.cs",
 "region":  {
 "startLine":  170,
 "startColumn":  20,
@@ -30,7 +30,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "akka.net\src\examples\FaultTolerance\Program.cs",
+"uri":  "sources\akka.net\src\examples\FaultTolerance\Program.cs",
 "region":  {
 "startLine":  185,
 "startColumn":  20,
@@ -43,7 +43,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "akka.net\src\examples\FaultTolerance\Program.cs",
+"uri":  "sources\akka.net\src\examples\FaultTolerance\Program.cs",
 "region":  {
 "startLine":  250,
 "startColumn":  17,
@@ -56,7 +56,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "akka.net\src\examples\FaultTolerance\Program.cs",
+"uri":  "sources\akka.net\src\examples\FaultTolerance\Program.cs",
 "region":  {
 "startLine":  345,
 "startColumn":  20,
@@ -69,7 +69,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "akka.net\src\examples\FaultTolerance\Program.cs",
+"uri":  "sources\akka.net\src\examples\FaultTolerance\Program.cs",
 "region":  {
 "startLine":  417,
 "startColumn":  20,
@@ -82,7 +82,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "akka.net\src\examples\FaultTolerance\Program.cs",
+"uri":  "sources\akka.net\src\examples\FaultTolerance\Program.cs",
 "region":  {
 "startLine":  433,
 "startColumn":  20,
@@ -95,7 +95,7 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "akka.net\src\examples\FaultTolerance\Program.cs",
+"uri":  "sources\akka.net\src\examples\FaultTolerance\Program.cs",
 "region":  {
 "startLine":  448,
 "startColumn":  20,

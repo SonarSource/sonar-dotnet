@@ -4,7 +4,7 @@
 "id":  "S1450",
 "message":  "Remove the 'defaultConfigurationProviders' field and declare it as a local variable in the relevant methods.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\Configuration\DefaultNancyEnvironmentConfiguratorFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Configuration\DefaultNancyEnvironmentConfiguratorFixture.cs",
 "region":  {
 "startLine":  17,
 "startColumn":  74,
@@ -17,7 +17,7 @@
 "id":  "S1450",
 "message":  "Remove the 'environment' field and declare it as a local variable in the relevant methods.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\DefaultResponseFormatterFactoryFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\DefaultResponseFormatterFactoryFixture.cs",
 "region":  {
 "startLine":  13,
 "startColumn":  44,
@@ -30,7 +30,7 @@
 "id":  "S1450",
 "message":  "Remove the 'model' field and declare it as a local variable in the relevant methods.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\JsonFormatterExtensionsFixtures.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\JsonFormatterExtensionsFixtures.cs",
 "region":  {
 "startLine":  17,
 "startColumn":  33,
@@ -43,7 +43,7 @@
 "id":  "S1450",
 "message":  "Remove the 'testModel' field and declare it as a local variable in the relevant methods.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBodyDeserializers\JsonBodyDeserializerFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBodyDeserializers\JsonBodyDeserializerFixture.cs",
 "region":  {
 "startLine":  22,
 "startColumn":  36,
@@ -56,7 +56,7 @@
 "id":  "S1450",
 "message":  "Remove the 'route' field and declare it as a local variable in the relevant methods.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\NancyEngineFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\NancyEngineFixture.cs",
 "region":  {
 "startLine":  26,
 "startColumn":  36,
@@ -69,7 +69,7 @@
 "id":  "S1450",
 "message":  "Remove the 'validatorLocator' field and declare it as a local variable in the relevant methods.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\Routing\DefaultNancyModuleBuilderFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Routing\DefaultNancyModuleBuilderFixture.cs",
 "region":  {
 "startLine":  20,
 "startColumn":  49,
@@ -82,7 +82,7 @@
 "id":  "S1450",
 "message":  "Remove the 'negotiator' field and declare it as a local variable in the relevant methods.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\Routing\DefaultRequestDispatcherFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Routing\DefaultRequestDispatcherFixture.cs",
 "region":  {
 "startLine":  24,
 "startColumn":  37,
@@ -95,7 +95,7 @@
 "id":  "S1450",
 "message":  "Remove the 'routeDescriptionProvider' field and declare it as a local variable in the relevant methods.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\Routing\RouteCacheFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Routing\RouteCacheFixture.cs",
 "region":  {
 "startLine":  19,
 "startColumn":  52,
@@ -108,7 +108,7 @@
 "id":  "S1450",
 "message":  "Remove the 'routeMetadataProviders' field and declare it as a local variable in the relevant methods.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\Routing\RouteCacheFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Routing\RouteCacheFixture.cs",
 "region":  {
 "startLine":  20,
 "startColumn":  62,
@@ -121,7 +121,7 @@
 "id":  "S1450",
 "message":  "Remove the 'viewLocation' field and declare it as a local variable in the relevant methods.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ViewEngines\DefaultViewLocatorFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ViewEngines\DefaultViewLocatorFixture.cs",
 "region":  {
 "startLine":  15,
 "startColumn":  45,
@@ -134,7 +134,7 @@
 "id":  "S1450",
 "message":  "Remove the 'locationResult' field and declare it as a local variable in the relevant methods.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ViewEngines\FileSystemViewLocationProviderFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ViewEngines\FileSystemViewLocationProviderFixture.cs",
 "region":  {
 "startLine":  19,
 "startColumn":  60,
@@ -147,7 +147,7 @@
 "id":  "S1450",
 "message":  "Remove the 'views' field and declare it as a local variable in the relevant methods.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\ViewEngines\ViewEngineStartupFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ViewEngines\ViewEngineStartupFixture.cs",
 "region":  {
 "startLine":  13,
 "startColumn":  43,
@@ -160,7 +160,7 @@
 "id":  "S1450",
 "message":  "Remove the 'model' field and declare it as a local variable in the relevant methods.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\XmlFormatterExtensionsFixtures.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\XmlFormatterExtensionsFixtures.cs",
 "region":  {
 "startLine":  15,
 "startColumn":  33,
@@ -173,7 +173,7 @@
 "id":  "S1450",
 "message":  "Remove the 'rootPathProvider' field and declare it as a local variable in the relevant methods.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\XmlFormatterExtensionsFixtures.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\XmlFormatterExtensionsFixtures.cs",
 "region":  {
 "startLine":  17,
 "startColumn":  44,

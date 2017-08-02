@@ -4,7 +4,7 @@
 "id":  "S3897",
 "message":  "Implement 'IEquatable<BaseClusterUserAction>'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  32,
 "startColumn":  33,
@@ -17,7 +17,7 @@
 "id":  "S3897",
 "message":  "Implement 'IEquatable<Join>'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  99,
 "startColumn":  31,
@@ -30,7 +30,7 @@
 "id":  "S3897",
 "message":  "Implement 'IEquatable<Welcome>'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  145,
 "startColumn":  31,
@@ -43,7 +43,7 @@
 "id":  "S3897",
 "message":  "Implement 'IEquatable<InitJoinAck>'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  229,
 "startColumn":  31,
@@ -56,7 +56,7 @@
 "id":  "S3897",
 "message":  "Implement 'IEquatable<InitJoinNack>'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
 "startLine":  264,
 "startColumn":  31,
@@ -69,7 +69,7 @@
 "id":  "S3897",
 "message":  "Implement 'IEquatable<Heartbeat>'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
 "region":  {
 "startLine":  181,
 "startColumn":  31,
@@ -82,7 +82,7 @@
 "id":  "S3897",
 "message":  "Implement 'IEquatable<HeartbeatRsp>'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterHeartbeat.cs",
 "region":  {
 "startLine":  208,
 "startColumn":  31,
@@ -95,7 +95,7 @@
 "id":  "S3897",
 "message":  "Implement 'IEquatable<MetricsGossip>'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterMetricsCollector.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterMetricsCollector.cs",
 "region":  {
 "startLine":  203,
 "startColumn":  27,
@@ -108,7 +108,7 @@
 "id":  "S3897",
 "message":  "Implement 'IEquatable<MetricsGossipEnvelope>'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterMetricsCollector.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterMetricsCollector.cs",
 "region":  {
 "startLine":  293,
 "startColumn":  27,
@@ -121,7 +121,7 @@
 "id":  "S3897",
 "message":  "Implement 'IEquatable<NodeMetrics>'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterMetricsCollector.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterMetricsCollector.cs",
 "region":  {
 "startLine":  338,
 "startColumn":  18,
@@ -134,7 +134,7 @@
 "id":  "S3897",
 "message":  "Implement 'IEquatable<Metric>'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\ClusterMetricsCollector.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterMetricsCollector.cs",
 "region":  {
 "startLine":  404,
 "startColumn":  25,
@@ -147,7 +147,7 @@
 "id":  "S3897",
 "message":  "Implement 'IEquatable<GossipStatus>'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Cluster\Gossip.cs",
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Gossip.cs",
 "region":  {
 "startLine":  366,
 "startColumn":  11,

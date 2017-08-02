@@ -4,7 +4,7 @@
 "id":  "S3216",
 "message":  "Add '.ConfigureAwait(false)' to this call to allow execution to continue in any thread.",
 "location":  {
-"uri":  "akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\JournalDbEngine.cs",
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\JournalDbEngine.cs",
 "region":  {
 "startLine":  132,
 "startColumn":  23,
@@ -17,7 +17,7 @@
 "id":  "S3216",
 "message":  "Add '.ConfigureAwait(false)' to this call to allow execution to continue in any thread.",
 "location":  {
-"uri":  "akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\JournalDbEngine.cs",
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\JournalDbEngine.cs",
 "region":  {
 "startLine":  137,
 "startColumn":  36,
@@ -30,7 +30,7 @@
 "id":  "S3216",
 "message":  "Add '.ConfigureAwait(false)' to this call to allow execution to continue in any thread.",
 "location":  {
-"uri":  "akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\JournalDbEngine.cs",
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\JournalDbEngine.cs",
 "region":  {
 "startLine":  168,
 "startColumn":  23,
@@ -43,7 +43,7 @@
 "id":  "S3216",
 "message":  "Add '.ConfigureAwait(false)' to this call to allow execution to continue in any thread.",
 "location":  {
-"uri":  "akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\JournalDbEngine.cs",
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\JournalDbEngine.cs",
 "region":  {
 "startLine":  173,
 "startColumn":  36,
@@ -56,7 +56,7 @@
 "id":  "S3216",
 "message":  "Add '.ConfigureAwait(false)' to this call to allow execution to continue in any thread.",
 "location":  {
-"uri":  "akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\JournalDbEngine.cs",
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\JournalDbEngine.cs",
 "region":  {
 "startLine":  198,
 "startColumn":  23,
@@ -69,7 +69,7 @@
 "id":  "S3216",
 "message":  "Add '.ConfigureAwait(false)' to this call to allow execution to continue in any thread.",
 "location":  {
-"uri":  "akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\JournalDbEngine.cs",
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\JournalDbEngine.cs",
 "region":  {
 "startLine":  203,
 "startColumn":  35,
@@ -82,7 +82,7 @@
 "id":  "S3216",
 "message":  "Add '.ConfigureAwait(false)' to this call to allow execution to continue in any thread.",
 "location":  {
-"uri":  "akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\JournalDbEngine.cs",
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\JournalDbEngine.cs",
 "region":  {
 "startLine":  218,
 "startColumn":  23,
@@ -95,7 +95,7 @@
 "id":  "S3216",
 "message":  "Add '.ConfigureAwait(false)' to this call to allow execution to continue in any thread.",
 "location":  {
-"uri":  "akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\JournalDbEngine.cs",
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\JournalDbEngine.cs",
 "region":  {
 "startLine":  225,
 "startColumn":  23,
@@ -108,7 +108,7 @@
 "id":  "S3216",
 "message":  "Add '.ConfigureAwait(false)' to this call to allow execution to continue in any thread.",
 "location":  {
-"uri":  "akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\JournalDbEngine.cs",
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\JournalDbEngine.cs",
 "region":  {
 "startLine":  238,
 "startColumn":  23,
@@ -121,7 +121,7 @@
 "id":  "S3216",
 "message":  "Add '.ConfigureAwait(false)' to this call to allow execution to continue in any thread.",
 "location":  {
-"uri":  "akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\JournalDbEngine.cs",
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\JournalDbEngine.cs",
 "region":  {
 "startLine":  243,
 "startColumn":  23,
@@ -134,7 +134,7 @@
 "id":  "S3216",
 "message":  "Add '.ConfigureAwait(false)' to this call to allow execution to continue in any thread.",
 "location":  {
-"uri":  "akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\JournalDbEngine.cs",
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\JournalDbEngine.cs",
 "region":  {
 "startLine":  296,
 "startColumn":  44,
@@ -147,7 +147,7 @@
 "id":  "S3216",
 "message":  "Add '.ConfigureAwait(false)' to this call to allow execution to continue in any thread.",
 "location":  {
-"uri":  "akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Snapshot\SqlSnapshotStore.cs",
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Snapshot\SqlSnapshotStore.cs",
 "region":  {
 "startLine":  84,
 "startColumn":  23,
@@ -160,7 +160,7 @@
 "id":  "S3216",
 "message":  "Add '.ConfigureAwait(false)' to this call to allow execution to continue in any thread.",
 "location":  {
-"uri":  "akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Snapshot\SqlSnapshotStore.cs",
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Snapshot\SqlSnapshotStore.cs",
 "region":  {
 "startLine":  89,
 "startColumn":  36,
@@ -173,7 +173,7 @@
 "id":  "S3216",
 "message":  "Add '.ConfigureAwait(false)' to this call to allow execution to continue in any thread.",
 "location":  {
-"uri":  "akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Snapshot\SqlSnapshotStore.cs",
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Snapshot\SqlSnapshotStore.cs",
 "region":  {
 "startLine":  108,
 "startColumn":  23,
@@ -186,7 +186,7 @@
 "id":  "S3216",
 "message":  "Add '.ConfigureAwait(false)' to this call to allow execution to continue in any thread.",
 "location":  {
-"uri":  "akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Snapshot\SqlSnapshotStore.cs",
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Snapshot\SqlSnapshotStore.cs",
 "region":  {
 "startLine":  114,
 "startColumn":  23,
@@ -199,7 +199,7 @@
 "id":  "S3216",
 "message":  "Add '.ConfigureAwait(false)' to this call to allow execution to continue in any thread.",
 "location":  {
-"uri":  "akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Snapshot\SqlSnapshotStore.cs",
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Snapshot\SqlSnapshotStore.cs",
 "region":  {
 "startLine":  124,
 "startColumn":  23,
@@ -212,7 +212,7 @@
 "id":  "S3216",
 "message":  "Add '.ConfigureAwait(false)' to this call to allow execution to continue in any thread.",
 "location":  {
-"uri":  "akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Snapshot\SqlSnapshotStore.cs",
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Snapshot\SqlSnapshotStore.cs",
 "region":  {
 "startLine":  128,
 "startColumn":  23,
@@ -225,7 +225,7 @@
 "id":  "S3216",
 "message":  "Add '.ConfigureAwait(false)' to this call to allow execution to continue in any thread.",
 "location":  {
-"uri":  "akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Snapshot\SqlSnapshotStore.cs",
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Snapshot\SqlSnapshotStore.cs",
 "region":  {
 "startLine":  136,
 "startColumn":  23,
@@ -238,7 +238,7 @@
 "id":  "S3216",
 "message":  "Add '.ConfigureAwait(false)' to this call to allow execution to continue in any thread.",
 "location":  {
-"uri":  "akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Snapshot\SqlSnapshotStore.cs",
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Snapshot\SqlSnapshotStore.cs",
 "region":  {
 "startLine":  140,
 "startColumn":  23,

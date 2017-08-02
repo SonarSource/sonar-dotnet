@@ -4,7 +4,7 @@
 "id":  "S1694",
 "message":  "Convert this 'abstract' class to a concrete class with a private constructor.",
 "location":  {
-"uri":  "Nancy\src\Nancy.Tests\Unit\Bootstrapper\BootstrapperLocatorFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Bootstrapper\BootstrapperLocatorFixture.cs",
 "region":  {
 "startLine":  23,
 "startColumn":  31,

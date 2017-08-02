@@ -4,7 +4,7 @@
 "id":  "S1450",
 "message":  "Remove the 'viewEngineStartupContext' field and declare it as a local variable in the relevant methods.",
 "location":  {
-"uri":  "Nancy\src\Nancy.ViewEngines.DotLiquid\LiquidNancyFileSystem.cs",
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.DotLiquid\LiquidNancyFileSystem.cs",
 "region":  {
 "startLine":  18,
 "startColumn":  51,

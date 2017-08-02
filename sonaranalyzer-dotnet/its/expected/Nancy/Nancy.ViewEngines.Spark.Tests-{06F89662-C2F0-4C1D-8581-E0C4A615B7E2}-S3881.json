@@ -5,7 +5,7 @@
 "message":  "Fix this implementation of 'IDisposable' to conform to the dispose pattern.",
 "location":  [
 {
-"uri":  "Nancy\src\Nancy.ViewEngines.Spark.Tests\SparkViewEngineFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark.Tests\SparkViewEngineFixture.cs",
 "region":  {
 "startLine":  533,
 "startColumn":  22,
@@ -14,7 +14,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy.ViewEngines.Spark.Tests\SparkViewEngineFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark.Tests\SparkViewEngineFixture.cs",
 "region":  {
 "startLine":  533,
 "startColumn":  22,
@@ -23,7 +23,7 @@
 }
 },
 {
-"uri":  "Nancy\src\Nancy.ViewEngines.Spark.Tests\SparkViewEngineFixture.cs",
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark.Tests\SparkViewEngineFixture.cs",
 "region":  {
 "startLine":  543,
 "startColumn":  25,

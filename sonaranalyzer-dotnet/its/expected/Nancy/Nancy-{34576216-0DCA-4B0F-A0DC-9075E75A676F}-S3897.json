@@ -4,7 +4,7 @@
 "id":  "S3897",
 "message":  "Implement 'IEquatable<BindingMemberInfo>'.",
 "location":  {
-"uri":  "Nancy\src\Nancy\ModelBinding\BindingMemberInfo.cs",
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\BindingMemberInfo.cs",
 "region":  {
 "startLine":  11,
 "startColumn":  18,
@@ -17,7 +17,7 @@
 "id":  "S3897",
 "message":  "Implement 'IEquatable<CsrfToken>'.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Security\CsrfToken.cs",
+"uri":  "sources\Nancy\src\Nancy\Security\CsrfToken.cs",
 "region":  {
 "startLine":  10,
 "startColumn":  25,

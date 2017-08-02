@@ -4,7 +4,7 @@
 "id":  "S101",
 "message":  "Rename class 'PersistentFSM' to match camel case naming rules, consider using 'PersistentFsm'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Fsm\PersistentFSM.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Fsm\PersistentFSM.cs",
 "region":  {
 "startLine":  18,
 "startColumn":  27,
@@ -17,7 +17,7 @@
 "id":  "S101",
 "message":  "Rename class 'PersistentFSMBase' to match camel case naming rules, consider using 'PersistentFsmBase'.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Persistence\Fsm\PersistentFSMBase.cs",
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Fsm\PersistentFSMBase.cs",
 "region":  {
 "startLine":  22,
 "startColumn":  27,

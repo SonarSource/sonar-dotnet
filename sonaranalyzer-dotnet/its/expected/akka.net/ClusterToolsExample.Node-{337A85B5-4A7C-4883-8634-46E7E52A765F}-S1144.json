@@ -4,7 +4,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private method 'RunClusterSingletonClient'.",
 "location":  {
-"uri":  "akka.net\src\examples\Cluster\ClusterTools\ClusterToolsExample.Node\Program.cs",
+"uri":  "sources\akka.net\src\examples\Cluster\ClusterTools\ClusterToolsExample.Node\Program.cs",
 "region":  {
 "startLine":  27,
 "startColumn":  9,
@@ -17,7 +17,7 @@
 "id":  "S1144",
 "message":  "Remove the unused private method 'RunClusterClient'.",
 "location":  {
-"uri":  "akka.net\src\examples\Cluster\ClusterTools\ClusterToolsExample.Node\Program.cs",
+"uri":  "sources\akka.net\src\examples\Cluster\ClusterTools\ClusterToolsExample.Node\Program.cs",
 "region":  {
 "startLine":  48,
 "startColumn":  9,

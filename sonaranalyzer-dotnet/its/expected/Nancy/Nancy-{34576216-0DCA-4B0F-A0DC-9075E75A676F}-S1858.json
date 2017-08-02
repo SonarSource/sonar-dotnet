@@ -4,7 +4,7 @@
 "id":  "S1858",
 "message":  "There's no need to call 'ToString()', the compiler will do it for you.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Diagnostics\Modules\InfoModule.cs",
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\Modules\InfoModule.cs",
 "region":  {
 "startLine":  28,
 "startColumn":  101,
@@ -17,7 +17,7 @@
 "id":  "S1858",
 "message":  "There's no need to call 'ToString()', the compiler will do it for you.",
 "location":  {
-"uri":  "Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
 "region":  {
 "startLine":  390,
 "startColumn":  36,

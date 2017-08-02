@@ -4,7 +4,7 @@
 "id":  "S1659",
 "message":  "Declare 'b' in a separate statement.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Routing\ConsistentHashingRouterSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Routing\ConsistentHashingRouterSpec.cs",
 "region":  {
 "startLine":  79,
 "startColumn":  30,
@@ -17,7 +17,7 @@
 "id":  "S1659",
 "message":  "Declare 'c' in a separate statement.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Routing\ConsistentHashingRouterSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Routing\ConsistentHashingRouterSpec.cs",
 "region":  {
 "startLine":  79,
 "startColumn":  33,
@@ -30,7 +30,7 @@
 "id":  "S1659",
 "message":  "Declare 'receivedLatch' in a separate statement.",
 "location":  {
-"uri":  "akka.net\src\core\Akka.Tests\Routing\SmallestMailboxSpec.cs",
+"uri":  "sources\akka.net\src\core\Akka.Tests\Routing\SmallestMailboxSpec.cs",
 "region":  {
 "startLine":  33,
 "startColumn":  51,
