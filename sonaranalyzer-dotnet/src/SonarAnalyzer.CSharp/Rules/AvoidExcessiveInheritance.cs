@@ -106,13 +106,15 @@ namespace SonarAnalyzer.Rules.CSharp
                 }, SyntaxKind.ClassDeclaration);
         }
 
-        private static string GetRootNamespace(INamedTypeSymbol namedSymbol)
+        private static string GetRootNamespace(ISymbol symbol)
         {
-            return namedSymbol
-                        .ContainingNamespace
-                        .ToDisplayString()
-                        .SplitCamelCaseToWords()
-                        .First();
+            var namespaceString
+                = symbol.ContainingNamespace.ToDisplayString();
+
+            var lastDotIndex = namespaceString.IndexOf(".");
+            return lastDotIndex == -1
+                ? namespaceString
+                : namespaceString.Substring(0, lastDotIndex);
         }
 
         private static Regex WilcardPatternToRegularExpression(string pattern)
