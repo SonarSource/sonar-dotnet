@@ -26,7 +26,7 @@ function ExtractAnalyzerPerformancesFromLogs
 # Process all build logs in the "output" folder
 $timings = ExtractAnalyzerPerformancesFromLogs(Get-ChildItem output -filter *.log | Foreach-Object { $_.FullName })
 
-$timings | Where-Object { $_.Rule -match 'SonarAnalyzer\.CSharp.*' }                | Format-Table -AutoSize
-$timings | Where-Object { $_.Rule -match 'SonarAnalyzer\.VisualBasic.*' }           | Format-Table -AutoSize
-$timings | Where-Object { $_.Rule -match 'SonarAnalyzer\.Rules\.CSharp.*' }         | Format-Table -AutoSize
-$timings | Where-Object { $_.Rule -match 'SonarAnalyzer\.Rules\.VisualBasic.*' }    | Format-Table -AutoSize
+$timings | Where-Object { $_.Rule -match 'SonarAnalyzer\.CSharp.*' }                | Format-Table -Wrap -AutoSize | Out-String -Width 100
+$timings | Where-Object { $_.Rule -match 'SonarAnalyzer\.VisualBasic.*' }           | Format-Table -Wrap -AutoSize | Out-String -Width 100
+$timings | Where-Object { $_.Rule -match 'SonarAnalyzer\.Rules\.CSharp.*' }         | Format-Table -Wrap -AutoSize | Out-String -Width 100
+$timings | Where-Object { $_.Rule -match 'SonarAnalyzer\.Rules\.VisualBasic.*' }    | Format-Table -Wrap -AutoSize | Out-String -Width 100
