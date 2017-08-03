@@ -38,19 +38,6 @@
 "endColumn":  56
 }
 }
-},
-{
-"id":  "S3242",
-"message":  "Consider using more general type 'Akka.Actor.ActorSystem' instead of 'Akka.Actor.ExtendedActorSystem'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
-"region":  {
-"startLine":  24,
-"startColumn":  81,
-"endLine":  24,
-"endColumn":  87
-}
-}
 }
 ]
 }
