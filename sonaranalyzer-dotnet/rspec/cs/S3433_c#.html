@@ -1,0 +1,26 @@
+<p>Whether or not they have a test attribute, non-<code>public</code> methods are not recognized as tests, and therefore not executed.</p>
+<p>Also, In general, generic and <code>async</code> <code>void</code> test methods are not executed by test frameworks, therefore it's better to avoid
+them altogether.</p>
+<p>A method is detected as test method if marked with one of the following attributes <code>[TestMethod]</code> (for mstest), <code>[Fact]</code> (for
+xunit) or <code>[Test]</code> (for nunit).</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+[TestMethod]
+void TestNullArg()  // Noncompliant
+{  /* ... */  }
+
+[TestMethod]
+public async void MyIgnoredTestMethod()  // Noncompliant
+{ /* ... */ }
+
+[TestMethod]
+public void MyIgnoredGenericTestMethod&lt;T&gt;()  // Noncompliant
+{ /* ... */ }
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+[TestMethod]
+public void TestNullArg()
+{  /* ... */  }
+</pre>
+

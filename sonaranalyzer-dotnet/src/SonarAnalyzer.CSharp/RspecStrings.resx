@@ -4911,6 +4911,33 @@
   <data name="S3427_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
   </data>
+  <data name="S3433_Category" xml:space="preserve">
+    <value>Sonar Code Smell</value>
+  </data>
+  <data name="S3433_Description" xml:space="preserve">
+    <value>Whether or not they have a test attribute, non-public methods are not recognized as tests, and therefore not executed.</value>
+  </data>
+  <data name="S3433_IsActivatedByDefault" xml:space="preserve">
+    <value>True</value>
+  </data>
+  <data name="S3433_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S3433_RemediationCost" xml:space="preserve">
+    <value>2min</value>
+  </data>
+  <data name="S3433_Severity" xml:space="preserve">
+    <value>Blocker</value>
+  </data>
+  <data name="S3433_Tags" xml:space="preserve">
+    <value>tests</value>
+  </data>
+  <data name="S3433_Title" xml:space="preserve">
+    <value>Test method signatures should be correct</value>
+  </data>
+  <data name="S3433_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S3440_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
