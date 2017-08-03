@@ -834,6 +834,33 @@
   <data name="S1163_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
   </data>
+  <data name="S1168_Category" xml:space="preserve">
+    <value>Sonar Code Smell</value>
+  </data>
+  <data name="S1168_Description" xml:space="preserve">
+    <value>Returning null instead of an actual array or collection forces callers of the method to explicitly test for nullity, making them more complex and less readable.</value>
+  </data>
+  <data name="S1168_IsActivatedByDefault" xml:space="preserve">
+    <value>True</value>
+  </data>
+  <data name="S1168_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S1168_RemediationCost" xml:space="preserve">
+    <value>30min</value>
+  </data>
+  <data name="S1168_Severity" xml:space="preserve">
+    <value>Major</value>
+  </data>
+  <data name="S1168_Tags" xml:space="preserve">
+    <value>cert</value>
+  </data>
+  <data name="S1168_Title" xml:space="preserve">
+    <value>Empty arrays and collections should be returned instead of null</value>
+  </data>
+  <data name="S1168_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S1172_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>

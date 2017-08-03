@@ -1,0 +1,67 @@
+<p>Returning <code>null</code> instead of an actual array or collection forces callers of the method to explicitly test for nullity, making them more
+complex and less readable.</p>
+<p>Moreover, in many cases, <code>null</code> is used as a synonym for empty.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+public List&lt;Result&gt; GetResults()
+{
+  return null; // Noncompliant
+}
+
+public Result[] GetResults()
+{
+  return null; // Noncompliant
+}
+
+public IEnumerable&lt;Result&gt; GetResults()
+{
+  return null; // Noncompliant
+}
+
+public static void Main(string[] args)
+{
+  var results = GetResults();
+
+  if (results != null) // Nullity test required to prevent NPE
+  {
+    for (var result in results)
+    {
+       /* ... */
+    }
+  }
+}
+
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+public static List&lt;Result&gt; GetResults()
+{
+  return new List&lt;Result&gt;(); // Compliant
+}
+
+public static Result[] GetResults()
+{
+  return new Result[0]; // Compliant
+}
+
+public static IEnumerable&lt;Result&gt; GetResults()
+{
+  return Enumerable.Empty&lt;Result&gt;(); // Compliant
+}
+
+public static void Main(string[] args)
+{
+  for (var result in GetResults())
+  {
+     /* ... */
+  }
+}
+</pre>
+<h2>See</h2>
+<ul>
+  <li> <a href="https://www.securecoding.cert.org/confluence/x/AgG7AQ">CERT, MSC19-C.</a> - For functions that return an array, prefer returning an
+  empty array over a null value </li>
+  <li> <a href="https://www.securecoding.cert.org/confluence/x/zwHEAw">CERT, MET55-J.</a> - Return an empty array or collection instead of a null
+  value for methods that return an array or collection </li>
+</ul>
+
