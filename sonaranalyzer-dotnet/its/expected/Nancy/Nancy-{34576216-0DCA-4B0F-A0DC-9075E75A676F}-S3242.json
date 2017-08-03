@@ -171,6 +171,19 @@
 },
 {
 "id":  "S3242",
+"message":  "Consider using more general type 'Nancy.Routing.Trie.NodeData' instead of 'Nancy.Routing.Trie.MatchResult'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\Trie\MatchResult.cs",
+"region":  {
+"startLine":  59,
+"startColumn":  42,
+"endLine":  59,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S3242",
 "message":  "Consider using more general type 'System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<string, object>>' instead of 'System.Collections.Generic.IDictionary<string, object>'.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Routing\Trie\Nodes\TrieNode.cs",

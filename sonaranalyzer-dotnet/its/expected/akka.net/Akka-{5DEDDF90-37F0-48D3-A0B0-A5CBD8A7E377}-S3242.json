@@ -28,6 +28,19 @@
 },
 {
 "id":  "S3242",
+"message":  "Consider using more general type 'Akka.Util.ISurrogated' instead of 'Akka.Actor.ActorPath'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorPath.cs",
+"region":  {
+"startLine":  78,
+"startColumn":  42,
+"endLine":  78,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S3242",
 "message":  "Consider using more general type 'Akka.Actor.ICanTell' instead of 'Akka.Actor.IActorRef'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka\Actor\ActorRef.cs",
@@ -62,6 +75,32 @@
 "startColumn":  107,
 "endLine":  237,
 "endColumn":  119
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Actor.Internal.IChildStats' instead of 'Akka.Actor.Internal.ChildRestartStats'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ChildrenContainer\Internal\EmptyChildrenContainer.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  78,
+"endLine":  28,
+"endColumn":  83
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'Akka.Actor.ICanTell' instead of 'Akka.Actor.IActorRef'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Inbox.cs",
+"region":  {
+"startLine":  284,
+"startColumn":  36,
+"endLine":  284,
+"endColumn":  44
 }
 }
 },
@@ -335,6 +374,19 @@
 "startColumn":  126,
 "endLine":  135,
 "endColumn":  135
+}
+}
+},
+{
+"id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IReadOnlyCollection<Akka.Tools.MatchHandler.Argument>' instead of 'System.Collections.Generic.IReadOnlyList<Akka.Tools.MatchHandler.Argument>'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\MatchExpressionBuilder.cs",
+"region":  {
+"startLine":  198,
+"startColumn":  75,
+"endLine":  198,
+"endColumn":  84
 }
 }
 },
