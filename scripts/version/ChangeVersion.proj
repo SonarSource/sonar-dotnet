@@ -3,7 +3,7 @@
   <Import Project="$(MSBuildProjectDirectory)\Version.props" />
   <Import Project="$(MSBuildProjectDirectory)\RegexTransform.tasks" />
   <PropertyGroup>
-    <SolutionRoot>$(MSBuildProjectDirectory)\..</SolutionRoot>
+    <SolutionRoot>$(MSBuildProjectDirectory)\..\..\sonaranalyzer-dotnet</SolutionRoot>
   </PropertyGroup>
 
   <ItemGroup>

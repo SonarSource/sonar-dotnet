@@ -1,7 +1,5 @@
 $importBeforePath = "$env:USERPROFILE\AppData\Local\Microsoft\MSBuild\14.0\Microsoft.Common.targets\ImportBefore"
 
-. (Join-Path $PSScriptRoot "..\build\build-utils.ps1")
-
 function Test-SonarAnalyzerDll {
     if (-Not (Test-Path ".\binaries\SonarAnalyzer.dll")) {
         throw "Could not find '.\binaries\SonarAnalyzer.dll'."
@@ -11,12 +9,13 @@ function Test-SonarAnalyzerDll {
 function Build-Project([string]$ProjectName, [string]$SolutionRelativePath) {
     New-Item -ItemType directory -Path .\output\$ProjectName | out-null
 
-    $solutionPath = (Resolve-Path ".\sources\${ProjectName}\${SolutionRelativePath}")
+    $solutionPath = Resolve-Path ".\sources\${ProjectName}\${SolutionRelativePath}"
 
     # The PROJECT env variable is used by 'SonarAnalyzer.Testing.ImportBefore.targets'
     $Env:PROJECT = $ProjectName
 
-    (Build-Solution $solutionPath /v:detailed /m /t:rebuild /p:Configuration=Debug) `
+    Restore-Packages $solutionPath
+    (Invoke-MSBuild $solutionPath /v:detailed /m /t:rebuild /p:Configuration=Debug) `
         > .\output\$ProjectName.log
 }
 
@@ -27,7 +26,7 @@ function Initialize-ActualFolder {
     }
 
     Copy-Item .\expected -Destination .\actual -Recurse
-    Exec-InLocation "actual" {
+    Invoke-InLocation "actual" {
         Exec { git init }
         Exec { git config user.email "regression-test@example.com" }
         Exec { git config user.name "regression-test" }
@@ -46,6 +45,7 @@ function Initialize-OutputFolder {
 }
 
 try {
+    . (Join-Path $PSScriptRoot "${PSScriptRoot}\..\..\scripts\build\build-utils.ps1")
     Push-Location -Path $PSScriptRoot
 
     Test-SonarAnalyzerDll
@@ -61,13 +61,13 @@ try {
     Build-Project "Ember-MM" "Ember Media Manager.sln"
 
     Write-Host "Normalizing the SARIF reports"
-    Exec { & ./CreateIssueReports.ps1 | out-null }
+    Exec { & .\create-issue-reports.ps1 | out-null }
 
     Write-Host "Computing analyzer performance"
-    Exec { & ./ExtractAnalyzerPerformancesFromLogs.ps1 }
+    Exec { & .\extract-analyzer-performances.ps1 }
 
     Write-Host "Checking for differences..."
-    Exec-InLocation "actual" {
+    Invoke-InLocation "actual" {
         Exec { git add -A . }
         Exec { git diff --cached --exit-code | out-null } -errorMessage "ERROR: There are differences between the actual and the expected issues."
     }
@@ -76,7 +76,9 @@ try {
     exit 0
 }
 catch {
-    Write-Host -ForegroundColor Red $_.Exception.Message
+    Write-Host -ForegroundColor Red $_
+    Write-Host $_.Exception
+    Write-Host $_.ScriptStackTrace
     exit 1
 }
 finally {
