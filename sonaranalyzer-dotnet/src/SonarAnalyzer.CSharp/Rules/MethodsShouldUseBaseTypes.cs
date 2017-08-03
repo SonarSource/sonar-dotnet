@@ -59,8 +59,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             if (methodSymbol == null ||
                 methodSymbol.Parameters.Length == 0 ||
-                methodSymbol.IsOverride ||
-                methodSymbol.GetInterfaceMember() != null)
+                methodSymbol.IsOverride)
             {
                 return Enumerable.Empty<Diagnostic>();
             }
