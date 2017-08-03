@@ -15,8 +15,7 @@ param
 
 $projectUri = "https://api.github.com/repos/SonarSource/sonar-csharp/issues"
 
-$ruleapiLanguageMap =
-@{
+$ruleapiLanguageMap = @{
     "cs" = "c#";
     "vbnet" = "vb.net";
 }
@@ -72,9 +71,9 @@ function Get-RspecMetadata() {
 
 function Get-Labels() {
     switch ($action) {
-        "new" { return @("rules", "new feature") }
-        "fix" { return @("rules", "bug", "false-positive") }
-        "update" { return @("rules", "improvement") }
+        "new" { return @("rules", "Type: New Feature") }
+        "fix" { return @("rules", "Type: Bug", "Type: False Positive") }
+        "update" { return @("rules", "Type: Improvement") }
         Default {
             throw "Not supported action: ${action}"
         }
