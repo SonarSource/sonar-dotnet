@@ -64,29 +64,28 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
-            c =>
-            {
-                var expression = (ExpressionSyntax)c.Node;
-                var right = (expression as BinaryExpressionSyntax)?.Right
-                            ?? (expression as AssignmentExpressionSyntax)?.Right;
-
-                int shiftByCount;
-                if (!TryGetConstantValue(right, out shiftByCount))
+                c =>
                 {
-                    return;
-                }
+                    var right = (c.Node as BinaryExpressionSyntax)?.Right
+                                ?? (c.Node as AssignmentExpressionSyntax)?.Right;
 
-                var typeInfo = c.SemanticModel.GetTypeInfo(expression);
-                ReportProblems(typeInfo.ConvertedType, shiftByCount, expression.GetLocation(), c);
-            },
-            SyntaxKind.LeftShiftExpression,
-            SyntaxKind.LeftShiftAssignmentExpression);
+                    int shiftByCount;
+                    if (!TryGetConstantValue(right, out shiftByCount))
+                    {
+                        return;
+                    }
+
+                    var typeInfo = c.SemanticModel.GetTypeInfo(c.Node);
+                    ReportProblems(typeInfo.ConvertedType, shiftByCount, c.Node.GetLocation(), c);
+                },
+                SyntaxKind.LeftShiftExpression,
+                SyntaxKind.LeftShiftAssignmentExpression);
         }
 
         private static bool TryGetConstantValue(ExpressionSyntax expression, out int value)
         {
             value = 0;
-            var literalExpression = expression as LiteralExpressionSyntax;
+            var literalExpression = expression?.RemoveParentheses() as LiteralExpressionSyntax;
             return literalExpression != null &&
                 int.TryParse(literalExpression.Token.ValueText, out value);
         }

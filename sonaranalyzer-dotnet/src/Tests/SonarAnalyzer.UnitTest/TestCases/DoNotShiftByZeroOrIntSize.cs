@@ -18,6 +18,8 @@ namespace Tests.Diagnostics
             i = i << 32;  // Noncompliant
             uint ui = 1 << 32; // Noncompliant
             Int32 i32 = 1 << 32; // Noncompliant
+            Int64 i64 = 1 << 32;
+            Int64 i64 = 1 << 64; // Noncompliant
 
             long l = 1 << 32;
             l = 1 << 64; // Noncompliant {{Remove this useless shift by 64.}}
@@ -41,6 +43,7 @@ namespace Tests.Diagnostics
                     | (b & 0xff) << 8
                     | (b & 0xff) << 0; // Noncompliant {{Remove this useless shift by 0.}}
         }
+
         private void NonIntegerTypes()
         {
             object o = 1 << 1024; // Compliant
@@ -50,6 +53,18 @@ namespace Tests.Diagnostics
             float f = 1 << 1024; // Compliant
             decimal m = 1 << 1024; // Compliant
             Single s = 1 << 1024; // Compliant
+        }
+
+        private void ParanthesesAttack()
+        {
+            int i;
+            i = (1) << 0; // Noncompliant
+            i = (((1))) << 0; // Noncompliant
+            i = 1 << (0); // Noncompliant
+            i = 1 << (((0))); // Noncompliant
+            (((i))) = (((1))) << (((0))); // Noncompliant
+
+            (((i))) <<= (((0))); // Noncompliant
         }
     }
 }
