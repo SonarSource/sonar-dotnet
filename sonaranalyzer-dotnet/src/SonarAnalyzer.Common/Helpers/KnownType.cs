@@ -329,11 +329,6 @@ namespace SonarAnalyzer.Helpers
 
         public static readonly KnownType System_Xml_XmlDocument = new KnownType("System.Xml.XmlDocument");
 
-        public static readonly KnownType Microsoft_VisualStudio_TestTools_UnitTesting_TestMethodAttribute =
-            new KnownType("Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute");
-        public static readonly KnownType Xunit_FactAttribute = new KnownType("Xunit.FactAttribute");
-        public static readonly KnownType NUnit_Framework_TestAttribute = new KnownType("NUnit.Framework.TestAttribute");
-
         #endregion
 
         public string TypeName { get; }
