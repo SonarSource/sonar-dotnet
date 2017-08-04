@@ -409,7 +409,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 return AdditionalData == null
                     ? message
-                    : string.Concat(message, DiagnosticReportHelper.CreateStringFromArgs(AdditionalData), ".");
+                    : string.Concat(message, AdditionalData.ToSentence(quoteWords: true), ".");
             }
         }
 

@@ -3,7 +3,7 @@ using System;
 namespace MyLibrary
 {
     public class Foo
-//               ^^^ Noncompliant {{Provide an implementation for: 'operator==', 'operator!=', 'Object.Equals', 'Object.GetHashCode'.}}
+//               ^^^ Noncompliant {{Provide an implementation for: 'operator==', 'operator!=', 'Object.Equals' and 'Object.GetHashCode'.}}
     {
         private int left;
         private int right;
@@ -67,7 +67,7 @@ namespace MyLibrary
     }
 
     public class Foo6
-//               ^^^^ Noncompliant {{Provide an implementation for: 'operator!=', 'Object.Equals', 'Object.GetHashCode'.}}
+//               ^^^^ Noncompliant {{Provide an implementation for: 'operator!=', 'Object.Equals' and 'Object.GetHashCode'.}}
     {
         public static object operator ==(Foo6 a, Foo6 b) => new object();
     }
