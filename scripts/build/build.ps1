@@ -42,7 +42,7 @@ function Get-BranchName() {
 }
 
 function Clear-MSBuildImportBefore() {
-    Get-ChildItem Get-MSBuildImportBeforePath -Recurse -Include "Sonar*.targets" `
+    Get-ChildItem (Get-MSBuildImportBeforePath) -Recurse -Include "Sonar*.targets" `
         | ForEach-Object { Remove-Item -Force $_ }
 }
 
