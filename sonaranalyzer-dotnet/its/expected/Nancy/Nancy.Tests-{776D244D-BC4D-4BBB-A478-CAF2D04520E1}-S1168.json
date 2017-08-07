@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1168",
+"message":  "Return an empty collection instead of null.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Json\TestConverter.cs",
+"region":  {
+"startLine":  32,
+"startColumn":  5,
+"endLine":  32,
+"endColumn":  17
+}
+}
+}
+]
+}
