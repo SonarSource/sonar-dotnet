@@ -1,16 +1,24 @@
-# Usage:
-# rspec.ps1 cs|vbnet
-#
-# Will download only the updated RSPEC files for the corresponding language
-#
-# or
-# rspec.ps1 cs|vbnet <rule-key>
-#
-# Add will download the specified rule json and html files. If you want to add a
-# rule to both c# and vb.net execute the operation for each language.
-#
-# NOTES:
-# - All operations recreate the projects' resources, do not edit manually.
+<#
+
+.SYNOPSIS
+This script allows to download metadata for the given language from RSPEC repository.
+
+.DESCRIPTION
+This script allows to download metadata for the given language from RSPEC repository:
+https://jira.sonarsource.com/browse/RSPEC
+If you want to add a rule to both c# and vb.net execute the operation for each language.
+
+Usage: rspec.ps1
+    [cs|vbnet]        The language to synchronize
+    <rulekey>         The specific rule to synchronize
+    <className>       The name to use for the automatically generated classes
+
+NOTES:
+- All operations recreate the projects' resources, do not edit manually.
+
+#>
+
+[CmdletBinding(PositionalBinding=$false)]
 param (
     [Parameter(Mandatory = $true, HelpMessage = "language: cs or vbnet", Position = 0)]
     [ValidateSet("cs", "vbnet")]
@@ -24,60 +32,12 @@ param (
     $className
 )
 
-if ((-Not $env:rule_api_path) -Or (-Not (Test-Path $env:rule_api_path))) {
-    throw "Download the latest version of rule-api jar from repox and set the %rule_api_path% environment variable with the full path of the jar."
-}
-
-$resgenPath = "${Env:ProgramFiles(x86)}\\Microsoft SDKs\\Windows\\v10.0A\\bin\\NETFX 4.6.1 Tools\\ResGen.exe"
-if (-Not (Test-Path $resgenPath)) {
-    throw "You need to install the Windows SDK before using this script."
-}
-
-$categoriesMap =
-@{
-    "BUG" = "Sonar Bug";
-    "CODE_SMELL" = "Sonar Code Smell";
-    "VULNERABILITY" = "Sonar Vulnerability";
-}
-
-$severitiesMap =
-@{
-    "Critical" = "Critical";
-    "Major" = "Major";
-    "Minor" = "Minor";
-    "Info" = "Info";
-    "Blocker" = "Blocker";
-}
-
-$remediationsMap =
-@{
-    "" = "";
-    "Constant/Issue" = "Constant/Issue";
-}
-
-$projectsMap =
-@{
-    "cs" = "SonarAnalyzer.CSharp";
-    "vbnet" = "SonarAnalyzer.VisualBasic";
-}
-
-$ruleapiLanguageMap =
-@{
-    "cs" = "c#";
-    "vbnet" = "vb.net";
-}
-
-$resourceLanguageMap =
-@{
-    "cs" = "cs";
-    "vbnet" = "vb";
-}
+Set-StrictMode -version 2.0
+$ErrorActionPreference = "Stop"
 
 # Returns the path to the folder where the RSPEC html and json files for the specified language will be downloaded.
-function GetRspecDownloadPath() {
-    param ($lang)
-
-    $rspecFolder = "${PSScriptRoot}\\..\\rspec\\${lang}"
+function Get-RspecDownloadPath($lang) {
+    $rspecFolder = "rspec\${lang}"
     if (-Not (Test-Path $rspecFolder)) {
         New-Item $rspecFolder | Out-Null
     }
@@ -86,12 +46,10 @@ function GetRspecDownloadPath() {
 }
 
 # Returns a string array with rule keys for the specified language.
-function GetRules() {
-    param ($lang)
-
+function Get-Rules($lang) {
     $suffix = $ruleapiLanguageMap.Get_Item($lang)
 
-    $htmlFiles = Get-ChildItem "$(GetRspecDownloadPath $lang)\\*" -Include "*.html"
+    $htmlFiles = Get-ChildItem "$(Get-RspecDownloadPath $lang)\\*" -Include "*.html"
     foreach ($htmlFile in $htmlFiles) {
         if ($htmlFile -Match "(S\d+)_(${suffix}).html") {
             $Matches[1]
@@ -103,11 +61,9 @@ function GetRules() {
 # to 'SonarAnalyzer.Utilities\Rules.Description'. If a rule is present in the otherLanguageRules
 # collection, a language suffix will be added to the target file name, so that the VB.NET and
 # C# files could have different html resources.
-function CopyResources() {
-    param ($lang, $rules, $otherLanguageRules)
-
-    $descriptionsFolder = "${PSScriptRoot}\\..\\src\\SonarAnalyzer.Utilities\\Rules.Description"
-    $rspecFolder = GetRspecDownloadPath $lang
+function Copy-Resources($lang, $rules, $otherLanguageRules) {
+    $descriptionsFolder = "src\SonarAnalyzer.Utilities\Rules.Description"
+    $rspecFolder = Get-RspecDownloadPath $lang
 
     $source_suffix = "_" + $ruleapiLanguageMap.Get_Item($lang)
 
@@ -126,26 +82,19 @@ function CopyResources() {
     }
 }
 
-function UpdateTestEntry()
-{
-    param ($rule)
-
-    $ruleType = $rule.type
-    if (!$ruleType)
-    {
+function Update-TestEntry($rule) {
+    if (!$rule.type) {
         return
     }
 
-    $csharpRuleTypeTestCase = "${PSScriptRoot}\\..\\src\\Tests\\SonarAnalyzer.UnitTest\\PackagingTests\\RuleTypeTests.cs"
+    $csharpRuleTypeTestCase = "src\Tests\SonarAnalyzer.UnitTest\PackagingTests\RuleTypeTests.cs"
     $ruleId = $ruleKey.Substring(1)
-    (Get-Content "${csharpRuleTypeTestCase}") -replace "//\[`"$ruleId`"\]", "[`"$ruleId`"] = `"$ruleType`"" |
+    (Get-Content "${csharpRuleTypeTestCase}") -replace "//\[`"$ruleId`"\]", "[`"$ruleId`"] = `"$rule.type`"" |
         Set-Content "${csharpRuleTypeTestCase}"
 }
 
-function CreateStringResources() {
-    param ($lang, $rules)
-
-    $rspecFolder = GetRspecDownloadPath $lang
+function New-StringResources($lang, $rules) {
+    $rspecFolder = Get-RspecDownloadPath $lang
     $suffix = $ruleapiLanguageMap.Get_Item($lang)
 
     $sonarWayRules = Get-Content -Raw "${rspecFolder}\\Sonar_way_profile.json" | ConvertFrom-Json
@@ -194,7 +143,7 @@ function CreateStringResources() {
     [void]$resources.Sort()
 
     $rawResourcesPath = "${PSScriptRoot}\\${lang}_strings.restext"
-    $resourcesPath = "${PSScriptRoot}\\..\\src\\$($projectsMap.Get_Item($lang))\\RspecStrings.resx"
+    $resourcesPath = "src\$($projectsMap.Get_Item($lang))\RspecStrings.resx"
 
     Set-Content $rawResourcesPath $resources
 
@@ -204,11 +153,11 @@ function CreateStringResources() {
     return $newRuleData
 }
 
-function GenerateRuleClasses() {
+function New-RuleClasses() {
     $ruleTemplateFolder = "${PSScriptRoot}\\rspec-templates"
-    $csharpRulesFolder = "${PSScriptRoot}\\..\\src\\SonarAnalyzer.CSharp\\Rules"
-    $csharpRuleTestsFolder = "${PSScriptRoot}\\..\\src\\Tests\\SonarAnalyzer.UnitTest\\Rules"
-    $csharpRuleTestCasesFolder = "${PSScriptRoot}\\..\\src\\Tests\\SonarAnalyzer.UnitTest\\TestCases"
+    $csharpRulesFolder = "src\\SonarAnalyzer.CSharp\\Rules"
+    $csharpRuleTestsFolder = "src\\Tests\\SonarAnalyzer.UnitTest\\Rules"
+    $csharpRuleTestCasesFolder = "src\\Tests\\SonarAnalyzer.UnitTest\\TestCases"
 
     (Get-Content "${ruleTemplateFolder}\\CSharpRuleTemplate.cs") -replace '\$DiagnosticClassName\$', $className -replace '\$DiagnosticId\$', $ruleKey |
         Set-Content "${csharpRulesFolder}\\${className}.cs"
@@ -220,32 +169,88 @@ function GenerateRuleClasses() {
         Set-Content "${csharpRuleTestCasesFolder}\\${className}.cs"
 }
 
-if ($ruleKey) {
-    java -jar $env:rule_api_path generate -directory $(GetRspecDownloadPath $language) -language $($ruleapiLanguageMap.Get_Item($language)) -rule $ruleKey
-}
-else {
-    java -jar $env:rule_api_path update -directory $(GetRspecDownloadPath $language) -language $($ruleapiLanguageMap.Get_Item($language))
-}
+try {
+    Push-Location "${PSScriptRoot}\..\..\sonaranalyzer-dotnet"
 
-$csRules = GetRules "cs"
-$vbRules = GetRules "vbnet"
-
-CopyResources "cs" $csRules $vbRules
-CopyResources "vbnet" $vbRules $csRules
-$csRuleData = CreateStringResources "cs" $csRules
-$vbRuleData = CreateStringResources "vbnet" $vbRules
-
-if ($className -And $ruleKey) {
-    GenerateRuleClasses
-
-    if ($language -eq "cs")
-    {
-       UpdateTestEntry $csRuleData
+    if ((-Not $env:rule_api_path) -Or (-Not (Test-Path $env:rule_api_path))) {
+        throw "Download the latest version of rule-api jar from repox and set the %rule_api_path% environment variable with the full path of the jar."
     }
 
-    $vsTempFolder = "${PSScriptRoot}\\..\\.vs"
-    if (Test-Path $vsTempFolder) 
-    {
-        Remove-Item -Recurse -Force $vsTempFolder
+    $resgenPath = "${Env:ProgramFiles(x86)}\\Microsoft SDKs\\Windows\\v10.0A\\bin\\NETFX 4.6.1 Tools\\ResGen.exe"
+    if (-Not (Test-Path $resgenPath)) {
+        throw "You need to install the Windows SDK before using this script."
     }
+
+    $categoriesMap = @{
+        "BUG" = "Sonar Bug";
+        "CODE_SMELL" = "Sonar Code Smell";
+        "VULNERABILITY" = "Sonar Vulnerability";
+    }
+
+    $severitiesMap = @{
+        "Critical" = "Critical";
+        "Major" = "Major";
+        "Minor" = "Minor";
+        "Info" = "Info";
+        "Blocker" = "Blocker";
+    }
+
+    $remediationsMap = @{
+        "" = "";
+        "Constant/Issue" = "Constant/Issue";
+    }
+
+    $projectsMap = @{
+        "cs" = "SonarAnalyzer.CSharp";
+        "vbnet" = "SonarAnalyzer.VisualBasic";
+    }
+
+    $ruleapiLanguageMap = @{
+        "cs" = "c#";
+        "vbnet" = "vb.net";
+    }
+
+    $resourceLanguageMap = @{
+        "cs" = "cs";
+        "vbnet" = "vb";
+    }
+
+    if ($ruleKey) {
+        java -jar $env:rule_api_path generate -directory $(Get-RspecDownloadPath $language) -language $($ruleapiLanguageMap.Get_Item($language)) -rule $ruleKey
+    }
+    else {
+        java -jar $env:rule_api_path update -directory $(Get-RspecDownloadPath $language) -language $($ruleapiLanguageMap.Get_Item($language))
+    }
+
+    $csRules = GetRules "cs"
+    $vbRules = GetRules "vbnet"
+
+    Copy-Resources "cs" $csRules $vbRules
+    Copy-Resources "vbnet" $vbRules $csRules
+    $csRuleData = New-StringResources "cs" $csRules
+    $vbRuleData = New-StringResources "vbnet" $vbRules
+
+    if ($className -And $ruleKey) {
+        New-RuleClasses
+
+        if ($language -eq "cs") {
+            Update-TestEntry $csRuleData
+        }
+
+        $vsTempFolder = ".vs"
+        if (Test-Path $vsTempFolder) {
+            Remove-Item -Recurse -Force $vsTempFolder
+        }
+    }
+
+    exit 0
+}
+catch {
+    Write-Host $_
+    Write-Host $_.Exception
+    Write-Host $_.ScriptStackTrace
+    exit 1
+}
+finally {
+    Pop-Location
 }
