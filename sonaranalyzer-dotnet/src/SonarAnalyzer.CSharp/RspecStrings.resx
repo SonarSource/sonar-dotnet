@@ -834,6 +834,33 @@
   <data name="S1163_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
   </data>
+  <data name="S1168_Category" xml:space="preserve">
+    <value>Sonar Code Smell</value>
+  </data>
+  <data name="S1168_Description" xml:space="preserve">
+    <value>Returning null instead of an actual array or collection forces callers of the method to explicitly test for nullity, making them more complex and less readable.</value>
+  </data>
+  <data name="S1168_IsActivatedByDefault" xml:space="preserve">
+    <value>True</value>
+  </data>
+  <data name="S1168_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S1168_RemediationCost" xml:space="preserve">
+    <value>30min</value>
+  </data>
+  <data name="S1168_Severity" xml:space="preserve">
+    <value>Major</value>
+  </data>
+  <data name="S1168_Tags" xml:space="preserve">
+    <value>cert</value>
+  </data>
+  <data name="S1168_Title" xml:space="preserve">
+    <value>Empty arrays and collections should be returned instead of null</value>
+  </data>
+  <data name="S1168_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S1172_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
@@ -2237,6 +2264,33 @@
   </data>
   <data name="S2178_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
+  </data>
+  <data name="S2183_Category" xml:space="preserve">
+    <value>Sonar Bug</value>
+  </data>
+  <data name="S2183_Description" xml:space="preserve">
+    <value>Since an int is a 32-bit variable, shifting by more than +/-31 is confusing at best and an error at worst. Shifting an int by 32 is the same as shifting it by 0, and shifting it by 33 is the same as shifting it by 1.</value>
+  </data>
+  <data name="S2183_IsActivatedByDefault" xml:space="preserve">
+    <value>True</value>
+  </data>
+  <data name="S2183_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S2183_RemediationCost" xml:space="preserve">
+    <value>5min</value>
+  </data>
+  <data name="S2183_Severity" xml:space="preserve">
+    <value>Minor</value>
+  </data>
+  <data name="S2183_Tags" xml:space="preserve">
+    <value>cert</value>
+  </data>
+  <data name="S2183_Title" xml:space="preserve">
+    <value>Ints and longs should not be shifted by zero or more than their number of bits-1</value>
+  </data>
+  <data name="S2183_Type" xml:space="preserve">
+    <value>BUG</value>
   </data>
   <data name="S2184_Category" xml:space="preserve">
     <value>Sonar Bug</value>
