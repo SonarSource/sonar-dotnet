@@ -43,13 +43,12 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static readonly ISet<KnownType> CollectionTypes = ImmutableHashSet.Create(
             KnownType.System_Collections_IEnumerable,
-            KnownType.System_Array
-            );
+            KnownType.System_Array);
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(ReportIfReturnsNull, SyntaxKind.MethodDeclaration);
-            context.RegisterSyntaxNodeActionInNonGenerated(ReportIfReturnsNull, SyntaxKind.PropertyDeclaration);
+            context.RegisterSyntaxNodeActionInNonGenerated(ReportIfReturnsNull,
+                SyntaxKind.MethodDeclaration, SyntaxKind.PropertyDeclaration);
         }
 
         private static void ReportIfReturnsNull(SyntaxNodeAnalysisContext context)
