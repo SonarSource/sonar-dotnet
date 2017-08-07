@@ -32,23 +32,25 @@ function New-NuGetPackages([string]$binPath) {
     }
 }
 
-function Restore-Packages ([string]$solutionName) {
+function Restore-Packages ([string]$solutionPath) {
+    $solutionName = Split-Path $solutionPath -leaf
     Write-Header "Restoring NuGet packages for ${solutionName}..."
 
     $nuget_exe = Get-NuGetPath
-    & $nuget_exe restore $solutionName
+    & $nuget_exe restore $solutionPath
     Test-ExitCode "ERROR: Restoring NuGet packages FAILED."
 }
 
 # Build
 function Invoke-MSBuild (
-    [string][Parameter(Mandatory = $true, Position = 0)]$solutionName,
+    [string][Parameter(Mandatory = $true, Position = 0)]$solutionPath,
     [array][parameter(ValueFromRemainingArguments = $true)] $remainingArgs) {
 
+    $solutionName = Split-Path $solutionPath -leaf
     Write-Header "Building solution ${solutionName}..."
 
     $msbuild_exe = Get-MsBuildPath
-    & $msbuild_exe $solutionName $remainingArgs
+    & $msbuild_exe $solutionPath $remainingArgs
     Test-ExitCode "ERROR: Build FAILED."
 }
 

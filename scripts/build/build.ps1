@@ -47,7 +47,7 @@ function Get-DotNetVersion() {
 }
 
 function Set-DotNetVersion() {
-    Write-Header "Updating version in all .Net related files..."
+    Write-Header "Updating version in .Net files..."
 
     $branchName = Get-BranchName
 
@@ -167,7 +167,7 @@ function Invoke-DotNetBuild() {
             /d:sonar.scanAllFiles="true" `
             /v:"latest"
     }
-    elseif ($analyze -And $isMaster) {
+    elseif ($isMaster) {
         Invoke-SonarBeginAnalysis `
             /v:"master" `
             /d:sonar.cs.vstest.reportsPaths="**\*.trx" `
