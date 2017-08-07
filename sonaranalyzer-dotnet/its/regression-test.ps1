@@ -43,8 +43,8 @@ function Initialize-OutputFolder {
 }
 
 try {
-    . (Join-Path $PSScriptRoot "${PSScriptRoot}\..\..\scripts\build\build-utils.ps1")
-    Push-Location -Path $PSScriptRoot
+    . (Join-Path $PSScriptRoot "..\..\scripts\build\build-utils.ps1")
+    # Push-Location -Path $PSScriptRoot
 
     Test-SonarAnalyzerDll
 
@@ -60,7 +60,7 @@ try {
     Build-Project "Ember-MM" "Ember Media Manager.sln"
 
     Write-Host "Normalizing the SARIF reports"
-    Exec { & .\create-issue-reports.ps1 | out-null }
+    Exec { & .\create-issue-reports.ps1 }
 
     Write-Host "Computing analyzer performance"
     Exec { & .\extract-analyzer-performances.ps1 }
