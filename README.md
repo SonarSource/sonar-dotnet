@@ -29,8 +29,8 @@ To provide feedback (request a feature, report a bug etc.), simply
 
 ## Get started
 
- *  [Building, testing and debugging the plugin](https://github.com/SonarSource/sonar-csharp/docs/contributing-plugin.md)
- *  [Building, testing and debugging the analyzer](https://github.com/SonarSource/sonar-csharp/docs/contributing-analyzer.md)
+ *  [Building, testing and debugging the plugin](./docs/contributing-plugin.md)
+ *  [Building, testing and debugging the analyzer](./docs/contributing-analyzer.md)
 
 ## How to contribute
 

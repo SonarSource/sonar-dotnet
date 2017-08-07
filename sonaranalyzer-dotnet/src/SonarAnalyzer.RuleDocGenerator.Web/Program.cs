@@ -30,10 +30,11 @@ namespace SonarAnalyzer.RuleDocGenerator
 {
     public static class Program
     {
-        public static void Main()
+        public static void Main(string[] args)
         {
-            var productVersion = FileVersionInfo.GetVersionInfo(typeof(Program).Assembly.Location).FileVersion;
-            WriteRuleJson(productVersion);
+            var targetFolder = args.FirstOrDefault() 
+                ?? FileVersionInfo.GetVersionInfo(typeof(Program).Assembly.Location).FileVersion;
+            WriteRuleJson(targetFolder);
         }
 
         private static void WriteRuleJson(string productVersion)
