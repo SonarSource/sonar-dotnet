@@ -7,6 +7,8 @@ This script controls the analyzer QA process.
 
 [CmdletBinding(PositionalBinding = $false)]
 param (
+    [string]$version = $env:VERSION,
+
     # GitHub related parameters
     [string]$githubBranch = $env:GITHUB_BRANCH,
     [string]$githubSha1 = $env:GIT_SHA1,
@@ -90,17 +92,17 @@ function Initialize-ArtifactsStep() {
     ConvertTo-UnixLineEndings $sha1propertiesPath
 
     $content = Get-Content $sha1propertiesPath
-    Write-Host "sha1.properties content is '${content}'"
+    Write-Host "Successfully created sha1.properties with '${content}'"
 }
 
 try {
     . (Join-Path $PSScriptRoot "build-utils.ps1")
-    Push-Location "${PSScriptRoot}\..\..\sonaranalyzer-dotnet"
 
-    Get-BuildArtifacts
-    Invoke-IntegrationTests
-
-    Initialize-ArtifactsStep
+    Invoke-InLocation "${PSScriptRoot}\..\..\sonaranalyzer-dotnet" {
+        Get-BuildArtifacts
+        Invoke-IntegrationTests
+        Initialize-ArtifactsStep
+    }
 
     exit 0
 }
@@ -109,7 +111,4 @@ catch {
     Write-Host $_.Exception
     Write-Host $_.ScriptStackTrace
     exit 1
-}
-finally {
-    Pop-Location
 }
