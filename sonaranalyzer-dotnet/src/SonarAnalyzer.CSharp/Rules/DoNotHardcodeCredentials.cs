@@ -20,6 +20,7 @@
 
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Linq;
 using System.Text.RegularExpressions;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -35,7 +36,7 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class DoNotHardcodeCredentials : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S2068";
-        private const string MessageFormat = "Remove this hard-coded password.";
+        private const string MessageFormat = "Remove hard-coded password(s): '{0}'.";
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
@@ -54,15 +55,15 @@ namespace SonarAnalyzer.Rules.CSharp
             "wachtwoord", "wachtwurd", "wagwoord"
         };
 
-        private static readonly Regex passwordValuePattern
-            = new Regex(string.Format(@"\b({0})\b[:=]\S", string.Join("|", passwordVariants)),
-                        RegexOptions.Compiled);
-
         protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(VerifyDeclaration, SyntaxKind.VariableDeclaration);
             context.RegisterSyntaxNodeActionInNonGenerated(VerifyAssignment, SyntaxKind.SimpleAssignmentExpression);
         }
+
+        private static readonly Regex passwordValuePattern
+            = new Regex(string.Format(@"\b(?<password>{0})\b[:=]\S", string.Join("|", passwordVariants)),
+                        RegexOptions.Compiled);
 
         private static void VerifyAssignment(SyntaxNodeAnalysisContext context)
         {
@@ -82,9 +83,10 @@ namespace SonarAnalyzer.Rules.CSharp
             string variableName = (assignment.Left as IdentifierNameSyntax)?.Identifier.ValueText;
             string variableValue = (assignment.Right as LiteralExpressionSyntax)?.Token.ValueText;
 
-            if (DoesContainPassword(variableName, variableValue))
+            var bannedWords = FindBannedWords(variableName, variableValue);
+            if (bannedWords != null)
             {
-                context.ReportDiagnostic(Diagnostic.Create(rule, assignment.GetLocation()));
+                context.ReportDiagnostic(Diagnostic.Create(rule, assignment.GetLocation(), bannedWords));
             }
         }
 
@@ -96,42 +98,55 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             var declaration = context.Node as VariableDeclarationSyntax;
-            foreach (var variableDeclarator in declaration.Variables)
+
+            var stringTypeDeclarators = declaration.Variables
+                .Where(v => v.IsDeclarationKnownType(KnownType.System_String, context.SemanticModel));
+
+            foreach (var variableDeclarator in stringTypeDeclarators)
             {
-                if (variableDeclarator.IsDeclarationKnownType(KnownType.System_String, context.SemanticModel) &&
-                    DoesContainPassword(variableDeclarator))
+                var bannedWords = FindBannedWords(variableDeclarator);
+                if (bannedWords != null)
                 {
-                    context.ReportDiagnostic(Diagnostic.Create(rule, variableDeclarator.GetLocation()));
+                    context.ReportDiagnostic(Diagnostic.Create(rule,
+                        variableDeclarator.GetLocation(), bannedWords));
                 }
             }
         }
 
-        private static bool DoesContainPassword(VariableDeclaratorSyntax variableDeclarator)
+        private static string FindBannedWords(VariableDeclaratorSyntax variableDeclarator)
         {
             string variableName = variableDeclarator?.Identifier.ValueText;
             var literalExpression = variableDeclarator?.Initializer?.Value as LiteralExpressionSyntax;
             if (literalExpression == null ||
                 !literalExpression.IsKind(SyntaxKind.StringLiteralExpression))
             {
-                return false;
+                return null;
             }
 
-            return DoesContainPassword(variableName, literalExpression.Token.ValueText);
+            return FindBannedWords(variableName, literalExpression.Token.ValueText);
         }
 
-        private static bool DoesContainPassword(string variableName, string variableValue)
+        private static string FindBannedWords(string variableName, string variableValue)
         {
             if (string.IsNullOrWhiteSpace(variableValue))
             {
-                return false;
+                return null;
             }
 
-            if (passwordVariants.Contains(variableName?.ToLowerInvariant()))
+            var bannedWordsFound = variableName
+                .SplitCamelCaseToWords()
+                .Intersect(passwordVariants)
+                .ToHashSet();
+
+            var matches = passwordValuePattern.Matches(variableValue.ToLowerInvariant());
+            foreach (Match match in matches)
             {
-                return true;
+                bannedWordsFound.Add(match.Groups["password"].Value);
             }
 
-            return passwordValuePattern.IsMatch(variableValue.ToLowerInvariant());
+            return bannedWordsFound.Count > 0
+                ? string.Join(", ", bannedWordsFound)
+                : null;
         }
     }
 }
