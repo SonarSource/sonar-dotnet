@@ -51,8 +51,9 @@ function Get-BuildArtifacts() {
     $authHeaders = (Get-AuthHeaders)
     $packagesToDownload = "SonarAnalyzer.CSharp", "SonarAnalyzer.VisualBasic"
 
+    $currentDir = (Resolve-Path .\).Path
+    $tempFolder = Join-Path $currentDir "temp" #TODO: make path random
     try {
-        $tempFolder = "temp" #TODO: make path random
 
         Remove-Item $tempFolder -Recurse -Force -ErrorAction Ignore
         New-Item $tempFolder -ItemType Directory
