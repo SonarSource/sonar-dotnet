@@ -52,7 +52,8 @@ try {
     Initialize-OutputFolder
 
     Write-Host "Installing the imports before targets file"
-    Copy-Item .\SonarAnalyzer.Testing.ImportBefore.targets -Destination Get-MSBuildImportBeforePath -Recurse -Container
+    Copy-Item .\SonarAnalyzer.Testing.ImportBefore.targets -Destination (Get-MSBuildImportBeforePath) `
+        -Recurse -Container
 
     Build-Project "akka.net" "src\Akka.sln"
     Build-Project "Nancy" "src\Nancy.sln"
@@ -82,6 +83,6 @@ catch {
 }
 finally {
     Pop-Location
-    Remove-Item -Force (Join-Path Get-MSBuildImportBeforePath "\SonarAnalyzer.Testing.ImportBefore.targets") `
+    Remove-Item -Force (Join-Path (Get-MSBuildImportBeforePath) "\SonarAnalyzer.Testing.ImportBefore.targets") `
         -ErrorAction Ignore
 }
