@@ -559,7 +559,7 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.CSharp
             {
                 var symbol = SemanticModel.GetSymbolInfo(identifier).Symbol;
                 var fieldSymbol = symbol as IFieldSymbol;
-                if (fieldSymbol != null && fieldSymbol.IsConst)
+                if (fieldSymbol != null && (memberAccess.IsOnThis() || fieldSymbol.IsConst))
                 {
                     sv = newProgramState.GetSymbolValue(symbol);
                     if (sv == null)
