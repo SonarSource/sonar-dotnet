@@ -88,9 +88,12 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
+                    var thisTypeRootNamespace = GetRootNamespace(symbol);
+
                     var baseTypesCount = symbol.GetSelfAndBaseTypes()
-                        .Select(nts => nts.OriginalDefinition.ToDisplayString())
                         .Skip(1) // remove the class itself
+                        .TakeWhile(s => GetRootNamespace(s) == thisTypeRootNamespace)
+                        .Select(nts => nts.OriginalDefinition.ToDisplayString())
                         .TakeWhile(className => filteredClassesRegex.All(regex => !regex.IsMatch(className)))
                         .Count();
 
@@ -101,6 +104,17 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
 
                 }, SyntaxKind.ClassDeclaration);
+        }
+
+        private static string GetRootNamespace(ISymbol symbol)
+        {
+            var namespaceString
+                = symbol.ContainingNamespace.ToDisplayString();
+
+            var lastDotIndex = namespaceString.IndexOf(".");
+            return lastDotIndex == -1
+                ? namespaceString
+                : namespaceString.Substring(0, lastDotIndex);
         }
 
         private static Regex WilcardPatternToRegularExpression(string pattern)
