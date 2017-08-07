@@ -12,19 +12,6 @@
 "endColumn":  80
 }
 }
-},
-{
-"id":  "S3242",
-"message":  "Consider using more general type 'Akka.Actor.IActorRefFactory' instead of 'Akka.Actor.ActorSystem'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\MessageSink.cs",
-"region":  {
-"startLine":  37,
-"startColumn":  38,
-"endLine":  37,
-"endColumn":  45
-}
-}
 }
 ]
 }
