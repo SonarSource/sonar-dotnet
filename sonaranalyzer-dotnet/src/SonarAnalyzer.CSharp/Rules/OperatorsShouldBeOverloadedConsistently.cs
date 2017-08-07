@@ -66,11 +66,11 @@ namespace SonarAnalyzer.Rules.CSharp
                     return;
                 }
 
-                var missingMethods = FindMissingMethods(classSymbol);
-                if (missingMethods.Any())
+                var missingMethods = FindMissingMethods(classSymbol).ToList();
+                if (missingMethods.Count > 0)
                 {
-                    string missingMethodsMessage = DiagnosticReportHelper.CreateStringFromArgs(missingMethods);
-                    c.ReportDiagnostic(Diagnostic.Create(rule, classDeclaration.Identifier.GetLocation(), missingMethodsMessage));
+                    c.ReportDiagnostic(Diagnostic.Create(rule, classDeclaration.Identifier.GetLocation(),
+                        missingMethods.ToSentence(quoteWords: true)));
                 }
             },
             SyntaxKind.ClassDeclaration);

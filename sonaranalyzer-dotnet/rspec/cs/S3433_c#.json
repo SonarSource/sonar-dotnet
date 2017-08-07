@@ -1,0 +1,13 @@
+{
+  "title": "Test method signatures should be correct",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "2min"
+  },
+  "tags": [
+    "tests"
+  ],
+  "defaultSeverity": "Blocker"
+}

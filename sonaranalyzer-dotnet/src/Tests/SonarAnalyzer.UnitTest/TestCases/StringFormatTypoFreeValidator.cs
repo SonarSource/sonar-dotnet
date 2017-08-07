@@ -25,7 +25,7 @@ namespace Tests.Diagnostics
             s = string.Format(format: "{0}", arg0: 1);
 
             s = string.Format("{0}", arg0, arg1); // Noncompliant {{The format string might be wrong, the following arguments are unused: 'arg1'.}}
-            s = string.Format("{0}", arg0, arg1, arg2); // Noncompliant {{The format string might be wrong, the following arguments are unused: 'arg1', 'arg2'.}}
+            s = string.Format("{0}", arg0, arg1, arg2); // Noncompliant {{The format string might be wrong, the following arguments are unused: 'arg1' and 'arg2'.}}
 
             s = string.Format("{0} {2}", arg0, arg1, arg2); // Noncompliant {{The format string might be wrong, the following item indexes are missing: '1'.}}
         }

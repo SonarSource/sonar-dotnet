@@ -20,6 +20,8 @@
 
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
+using System.Text;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Text;
 
@@ -62,9 +64,34 @@ namespace SonarAnalyzer.Helpers
 
         #endregion
 
-        public static string CreateStringFromArgs<T>(IEnumerable<T> values)
+        public static string ToSentence(this IEnumerable<string> words,
+            bool quoteWords = false,
+            LastJoiningWord lastJoiningWord = LastJoiningWord.And)
         {
-            return string.Concat("'", string.Join("', '", values), "'");
+            var wordCollection = words as ICollection<string> ?? words.ToList();
+            var singleQuoteOrBlank = quoteWords ? "'" : "";
+
+            switch (wordCollection.Count)
+            {
+                case 0:
+                    return null;
+                case 1:
+                    return string.Concat(singleQuoteOrBlank, wordCollection.First(), singleQuoteOrBlank);
+                default:
+                    return new StringBuilder(singleQuoteOrBlank)
+                        .Append(string.Join($"{singleQuoteOrBlank}, {singleQuoteOrBlank}",
+                            wordCollection.Take(wordCollection.Count - 1)))
+                        .Append(singleQuoteOrBlank)
+                        .Append(" ")
+                        .Append(lastJoiningWord.ToString().ToLower())
+                        .Append(" ")
+                        .Append(singleQuoteOrBlank)
+                        .Append(wordCollection.Last())
+                        .Append(singleQuoteOrBlank)
+                        .ToString();
+            }
         }
     }
+
+    public enum LastJoiningWord { And, Or }
 }
