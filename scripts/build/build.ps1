@@ -41,6 +41,11 @@ function Get-BranchName() {
     return $githubBranch
 }
 
+function Clear-MSBuildImportBefore() {
+    Get-ChildItem Get-MSBuildImportBeforePath -Recurse -Include "Sonar*.targets" `
+        | ForEach-Object { Remove-Item -Force $_ }
+}
+
 function Get-DotNetVersion() {
     [xml]$versionProps = Get-Content "${PSScriptRoot}\..\version\Version.props"
     return $versionProps.Project.PropertyGroup.MainVersion + "." + $versionProps.Project.PropertyGroup.BuildNumber
@@ -312,6 +317,9 @@ try {
     if ($isPullRequest) {
         Write-Host "PR: $githubPullRequest"
     }
+
+    # Ensure the ImportBefore folder does not contain our targets
+    Clear-MSBuildImportBefore
 
     Invoke-InLocation "${PSScriptRoot}\..\..\sonaranalyzer-dotnet" {
         Invoke-DotNetBuild

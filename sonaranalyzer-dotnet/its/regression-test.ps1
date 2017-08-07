@@ -1,5 +1,3 @@
-$importBeforePath = "$env:USERPROFILE\AppData\Local\Microsoft\MSBuild\14.0\Microsoft.Common.targets\ImportBefore"
-
 function Test-SonarAnalyzerDll {
     if (-Not (Test-Path ".\binaries\SonarAnalyzer.dll")) {
         throw "Could not find '.\binaries\SonarAnalyzer.dll'."
@@ -54,7 +52,7 @@ try {
     Initialize-OutputFolder
 
     Write-Host "Installing the imports before targets file"
-    Copy-Item .\SonarAnalyzer.Testing.ImportBefore.targets -Destination $importBeforePath -Recurse -Container
+    Copy-Item .\SonarAnalyzer.Testing.ImportBefore.targets -Destination Get-MSBuildImportBeforePath -Recurse -Container
 
     Build-Project "akka.net" "src\Akka.sln"
     Build-Project "Nancy" "src\Nancy.sln"
@@ -69,7 +67,8 @@ try {
     Write-Host "Checking for differences..."
     Invoke-InLocation "actual" {
         Exec { git add -A . }
-        Exec { git diff --cached --exit-code | out-null } -errorMessage "ERROR: There are differences between the actual and the expected issues."
+        Exec { git diff --cached --exit-code | out-null } -errorMessage `
+            "ERROR: There are differences between the actual and the expected issues."
     }
 
     Write-Host -ForegroundColor Green "SUCCESS: No differences were found!"
@@ -83,5 +82,6 @@ catch {
 }
 finally {
     Pop-Location
-    Remove-Item -Force "${importBeforePath}\SonarAnalyzer.Testing.ImportBefore.targets" -ErrorAction Ignore
+    Remove-Item -Force (Join-Path Get-MSBuildImportBeforePath "\SonarAnalyzer.Testing.ImportBefore.targets") `
+        -ErrorAction Ignore
 }

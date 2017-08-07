@@ -18,6 +18,10 @@ function Get-CodeCoveragePath {
     return Get-ExecutablePath -name "CodeCoverage.exe" -directory $codeCoverageDirectory -envVar "CODE_COVERAGE_PATH"
 }
 
+function Get-MSBuildImportBeforePath() {
+    return "$env:USERPROFILE\AppData\Local\Microsoft\MSBuild\14.0\Microsoft.Common.targets\ImportBefore"
+}
+
 # NuGet
 function New-NuGetPackages([string]$binPath) {
     Write-Header "Building NuGet packages..."
