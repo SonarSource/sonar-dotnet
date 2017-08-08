@@ -580,4 +580,17 @@ namespace Tests.Diagnostics
     {
         public static void MyExtension(this object o) { }
     }
+
+    class Foo // https://github.com/SonarSource/sonar-csharp/issues/538
+    {
+        private string bar;
+
+        private void Invoke()
+        {
+            this.bar = null;
+            if (this.bar != null)
+                this.bar.GetHashCode();
+        }
+    }
+
 }
