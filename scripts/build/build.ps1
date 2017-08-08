@@ -56,21 +56,21 @@ function Set-DotNetVersion() {
     Write-Header "Updating version in .Net files"
 
     $branchName = Get-BranchName
-
     Write-Host "Setting build number ${buildNumber}, sha1 ${githubSha1} and branch ${branchName}"
 
-    $versionPropsPath = "${PSScriptRoot}\..\version\Version.props"
+    Invoke-InLocation (Join-Path $PSScriptRoot "..\version") {
+        $versionProperties = "Version.props"
+        (Get-Content $versionProperties) `
+                -Replace '<Sha1>.*</Sha1>', "<Sha1>$githubSha1</Sha1>" `
+                -Replace '<BuildNumber>\d+</BuildNumber>', "<BuildNumber>$buildNumber</BuildNumber>" `
+                -Replace '<BranchName>.*</BranchName>', "<BranchName>$branchName</BranchName>" `
+            | Set-Content $versionProperties
 
-    (Get-Content $versionPropsPath) `
-            -Replace '<Sha1>.*</Sha1>', "<Sha1>$githubSha1</Sha1>" `
-            -Replace '<BuildNumber>\d+</BuildNumber>', "<BuildNumber>$buildNumber</BuildNumber>" `
-            -Replace '<BranchName>.*</BranchName>', "<BranchName>$branchName</BranchName>" `
-        | Set-Content $versionPropsPath
+        Invoke-MSBuild "14.0" "ChangeVersion.proj"
 
-    Invoke-MSBuild "14.0" "${PSScriptRoot}\..\version\ChangeVersion.proj"
-
-    $version = Get-DotNetVersion
-    Write-Host "Version successfully set to '${version}'"
+        $version = Get-DotNetVersion
+        Write-Host "Version successfully set to '${version}'"
+    }
 }
 
 function Get-ScannerMsBuildPath() {
