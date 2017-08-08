@@ -1,4 +1,10 @@
-﻿$ErrorActionPreference = "Stop"
+﻿# Do not set this to 2.0 otherwise testing whether a property exists in the json file will cause the script to
+# crash with:
+#   The property 'issues' cannot be found on this object. Verify that the property exists.
+#   System.Management.Automation.PropertyNotFoundException: The property 'issues' cannot be found on this object.
+#   Verify that the property exists.
+Set-StrictMode -version 1.0
+$ErrorActionPreference = "Stop"
 
 function Restore-UriDeclaration($files, $pathPrefix) {
 	$files | Foreach-Object {

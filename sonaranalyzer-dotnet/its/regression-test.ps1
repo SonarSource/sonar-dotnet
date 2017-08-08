@@ -1,3 +1,6 @@
+Set-StrictMode -version 2.0
+$ErrorActionPreference = "Stop"
+
 function Test-SonarAnalyzerDll {
     if (-Not (Test-Path ".\binaries\SonarAnalyzer.dll")) {
         throw "Could not find '.\binaries\SonarAnalyzer.dll'."
