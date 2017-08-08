@@ -28,7 +28,7 @@ param (
 
     # Build output options
     [switch]$release = $false,
-    [ValidateSet("", "VS2015", "VS2017")][string]$analyzerKind = ""
+    [ValidateSet("Classic", "VS2015", "VS2017")][string]$analyzerKind = "Classic"
 )
 
 Set-StrictMode -version 2.0
@@ -39,24 +39,30 @@ try {
     Push-Location "${PSScriptRoot}\..\..\sonaranalyzer-dotnet"
 
     $buildConfiguration = if ($release) { "Release" } else { "Debug" }
-    $binPath = if ($analyzerKind -Eq "") { "bin\${buildConfiguration}" } else { "bin\${analyzerKind}\${buildConfiguration}" }
+    $binPath = "bin\${analyzerKind}\${buildConfiguration}"
     $solutionName =
         switch ($analyzerKind) {
-            "" { "SonarAnalyzer.sln" }
+            "Classic" { "SonarAnalyzer.sln" }
             "VS2015" { "SonarAnalyzer.VS2015.sln" }
             "VS2017" { "SonarAnalyzer.VS2017.sln" }
+        }
+    $msbuildVersion =
+        switch ($analyzerKind) {
+            "VS2017" { "15.0" }
+            Default { "14.0" }
         }
 
     Write-Host "Solution to build: $solutionName"
     Write-Host "Build configuration: $buildConfiguration"
     Write-Host "Bin folder to use: $binPath"
+    Write-Host "MSBuild: ${msbuildVersion}"
 
     if ($restore) {
         Restore-Packages $solutionName
     }
 
     if ($build) {
-        Invoke-MSBuild $solutionName `
+        Invoke-MSBuild $msbuildVersion $solutionName `
             /v:q `
             /consoleloggerparameters:Summary `
             /m `
@@ -69,7 +75,7 @@ try {
     }
 
     if ($its) {
-        Invoke-IntegrationTests
+        Invoke-IntegrationTests $msbuildVersion
     }
 
     if ($coverage) {

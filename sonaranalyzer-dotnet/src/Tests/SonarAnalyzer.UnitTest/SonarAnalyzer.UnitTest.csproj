@@ -23,19 +23,26 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <OutputPath>bin\Classic\Debug\</OutputPath>
+    <IntermediateOutputPath>obj\Classic</IntermediateOutputPath>
+    <DefineConstants>TRACE;DEBUG;ROSLYN_10</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AppConfig>app.Classic.config</AppConfig>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
+    <OutputPath>bin\Classic\Release\</OutputPath>
+    <IntermediateOutputPath>obj\Classic</IntermediateOutputPath>
+    <DefineConstants>TRACE;ROSLYN_10</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AppConfig>app.Classic.config</AppConfig>
   </PropertyGroup>
+  <ItemGroup>
+    <None Include="app.classic.config" />
+  </ItemGroup>
   <ItemGroup>
     <Reference Include="FluentAssertions, Version=3.4.1.0, Culture=neutral, PublicKeyToken=33f2691a05b67b6a, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\FluentAssertions.3.4.1\lib\net45\FluentAssertions.dll</HintPath>
@@ -197,7 +204,6 @@
     <Compile Include="TestFramework\IssueLocationCollectorTests\IssueLocationCollector_MergeLocations.cs" />
     <Compile Include="Verifier.cs" />
     <Compile Include="Rules\*.cs" />
-    <None Include="app.config" />
     <None Include="TestCases\*.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -212,7 +218,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <None Include="packages.SonarAnalyzer.UnitTest.config" />
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\..\..\packages\Microsoft.CodeAnalysis.Analyzers.1.0.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.Analyzers.dll" />

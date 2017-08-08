@@ -23,12 +23,12 @@
       <ExpectedMatchCount>1</ExpectedMatchCount>
     </AssemblyInformationalVersion>
 
-    <VsixVersion Include="$(SolutionRoot)\src\SonarAnalyzer.Vsix\source.extension.vsixmanifest">
+    <VsixVersion Include="$(SolutionRoot)\src\VsixManifests\**\source.extension.vsixmanifest">
       <Find>(?&lt;=Identity.*Version=")([^"]*)</Find>
       <ReplaceWith>$(VsixVersion)</ReplaceWith>
       <ExpectedMatchCount>1</ExpectedMatchCount>
     </VsixVersion>
-    <VsixReleaseNotes Include="$(SolutionRoot)\src\SonarAnalyzer.Vsix\source.extension.vsixmanifest">
+    <VsixReleaseNotes Include="$(SolutionRoot)\src\VsixManifests\**\source.extension.vsixmanifest">
       <Find>(?&lt;=&lt;ReleaseNotes&gt;http:\/\/www\.sonarlint\.org\/visualstudio\/rules\/index.html#version=)([^&lt;]*)</Find>
       <ReplaceWith>$(AssemblyFileVersion)</ReplaceWith>
       <ExpectedMatchCount>1</ExpectedMatchCount>

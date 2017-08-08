@@ -182,6 +182,7 @@
       </activation>
       <properties>
         <analyzer.configuration>Release</analyzer.configuration>
+        <analyzer.kind>Classic</analyzer.kind>
       </properties>
       <build>
         <plugins>
@@ -198,7 +199,7 @@
                   <tasks>
                     <!-- ITs requires the SonarAnalyzer-VERSION.zip to be present so don't remove these lines -->
                     <copy todir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.CSharp">
-                      <fileset dir="${project.build.directory}/../../sonaranalyzer-dotnet/src/SonarAnalyzer.Vsix/bin/${analyzer.configuration}/">
+                      <fileset dir="${project.build.directory}/../../sonaranalyzer-dotnet/src/SonarAnalyzer.Vsix/bin/${analyzer.kind}/${analyzer.configuration}/">
                         <include name="SonarAnalyzer.dll"/>
                         <include name="SonarAnalyzer.CSharp.dll"/>
                         <include name="Google.Protobuf.dll"/>
@@ -209,7 +210,7 @@
 
                     <!-- SQALE XML in sslr requires a resource to read from -->
                     <copy todir="${sonarAnalyzer.workDirectory}/org/sonar/plugins/csharp">
-                      <fileset dir="${project.build.directory}/../../sonaranalyzer-dotnet/src/SonarAnalyzer.RuleDescriptorGenerator/bin/${analyzer.configuration}/cs">
+                      <fileset dir="${project.build.directory}/../../sonaranalyzer-dotnet/src/SonarAnalyzer.RuleDescriptorGenerator/bin/${analyzer.kind}/${analyzer.configuration}/cs">
                         <include name="rules.xml"/>
                         <include name="profile.xml"/>
                         <include name="sqale.xml"/>

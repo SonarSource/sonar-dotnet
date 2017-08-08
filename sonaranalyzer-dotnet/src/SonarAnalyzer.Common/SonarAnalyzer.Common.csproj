@@ -18,7 +18,8 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>bin\Classic\Debug\</OutputPath>
+	<IntermediateOutputPath>obj\Classic</IntermediateOutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -26,7 +27,8 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>bin\Classic\Release\</OutputPath>
+	<IntermediateOutputPath>obj\Classic</IntermediateOutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -89,11 +91,10 @@
     <Compile Include="..\Signing.cs">
       <Link>Properties\Signing.cs</Link>
     </Compile>
-    <Compile Include="Helpers\ControlFlowGraph\Block.cs" />
-    <Compile Include="Helpers\ControlFlowGraph\IControlFlowGraph.cs" />
+    <Compile Include="Helpers\ControlFlowGraph\*.cs" />
     <Compile Include="Helpers\ControlFlowGraph\SyntaxNodeBased\Blocks\*.cs" />
-    <Compile Include="Helpers\ControlFlowGraph\SyntaxNodeBased\ControlFlowGraphBuilder.cs" />
-    <Compile Include="Helpers\LiveVariableAnalysis\LiveVariableAnalysis.cs" />
+    <Compile Include="Helpers\ControlFlowGraph\SyntaxNodeBased\*.cs" />
+    <Compile Include="Helpers\LiveVariableAnalysis\*.cs" />
     <Compile Include="Helpers\SymbolicExecution\Constraints\*.cs" />
     <Compile Include="Helpers\SymbolicExecution\Relationships\*.cs" />
     <Compile Include="Helpers\SymbolicExecution\SymbolicValues\Binary\*.cs" />
@@ -114,7 +115,7 @@
     <Compile Include="Rules\Utilities\*.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <None Include="packages.SonarAnalyzer.Common.config" />
     <None Include="Protobuf\AnalyzerReport.proto">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

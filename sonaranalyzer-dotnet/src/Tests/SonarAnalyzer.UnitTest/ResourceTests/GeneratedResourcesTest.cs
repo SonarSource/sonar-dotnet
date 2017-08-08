@@ -19,16 +19,16 @@
  */
 
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
+using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Rules;
-using FluentAssertions;
-using System.Collections.Generic;
 
 namespace SonarAnalyzer.UnitTest.ResourceTests
 {
@@ -38,7 +38,7 @@ namespace SonarAnalyzer.UnitTest.ResourceTests
         [TestMethod]
         public void AnalyzersHaveCorrespondingResource_CS()
         {
-            var rulesFromResources = GetRulesFromResources(@"..\..\..\..\..\rspec\cs");
+            var rulesFromResources = GetRulesFromResources(@"..\..\..\..\..\..\rspec\cs");
 
             var rulesFromClasses = GetRulesFromClasses(typeof(SyntaxHelper).Assembly);
 
@@ -48,7 +48,7 @@ namespace SonarAnalyzer.UnitTest.ResourceTests
         [TestMethod]
         public void AnalyzersHaveCorrespondingResource_VB()
         {
-            var rulesFromResources = GetRulesFromResources(@"..\..\..\..\..\rspec\vbnet");
+            var rulesFromResources = GetRulesFromResources(@"..\..\..\..\..\..\rspec\vbnet");
 
             var rulesFromClasses = GetRulesFromClasses(typeof(SonarAnalyzer.Helpers.VisualBasic.SyntaxHelper).Assembly);
 

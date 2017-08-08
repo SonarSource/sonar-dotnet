@@ -19,11 +19,9 @@
  */
 
 using System;
-using System.Runtime.Serialization;
 
 namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
 {
-    [Serializable]
     public class TooManyInternalStatesException : Exception
     {
         public TooManyInternalStatesException()
@@ -35,10 +33,6 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
 
         public TooManyInternalStatesException(string message, Exception innerException)
             : base(message, innerException)
-        { }
-
-        protected TooManyInternalStatesException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
         { }
     }
 }

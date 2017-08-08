@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2017 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -22,6 +22,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Reflection;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Text;
 
@@ -58,7 +59,12 @@ namespace SonarAnalyzer.Helpers
         private const string HelpLinkPattern = "http://vs.sonarlint.org/rules/index.html#version={0}&ruleId={1}";
         public static string GetHelpLink(this string ruleId)
         {
-            var productVersion = FileVersionInfo.GetVersionInfo(typeof(DiagnosticReportHelper).Assembly.Location).FileVersion;
+            var productVersion = typeof(DiagnosticReportHelper)
+                .GetTypeInfo()
+                .Assembly
+                .GetCustomAttributes<AssemblyFileVersionAttribute>()
+                .First()
+                .Version;
             return string.Format(HelpLinkPattern, productVersion, ruleId);
         }
 

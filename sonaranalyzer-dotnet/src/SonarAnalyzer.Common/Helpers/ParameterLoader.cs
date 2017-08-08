@@ -99,15 +99,15 @@ namespace SonarAnalyzer.Helpers
             }
 
             ImmutableList<RuleParameterValues> parameters;
-            using (XmlTextReader xtr = new XmlTextReader(additionalFile.Path))
+            using (var xtr = XmlReader.Create(additionalFile.Path))
             {
-                xtr.Normalization = false;
                 var xml = XDocument.Load(xtr);
                 parameters = ParseParameters(xml);
             }
 
             var propertyParameterPairs = parameteredAnalyzer.GetType()
-                .GetProperties()
+                .GetTypeInfo()
+                .DeclaredProperties
                 .Select(p => new { Property = p, Descriptor = p.GetCustomAttributes<RuleParameterAttribute>().SingleOrDefault() })
                 .Where(p => p.Descriptor != null);
 

@@ -30,6 +30,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using TypeInfo = System.Reflection.TypeInfo;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -46,11 +47,6 @@ namespace SonarAnalyzer.Rules.CSharp
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         private static readonly ISet<string> SkippedWords = ImmutableHashSet.Create("VERSION", "ASSEMBLY");
-
-        private static readonly ISet<Type> NodeTypesToCheck = ImmutableHashSet.Create(
-            typeof(StatementSyntax),
-            typeof(VariableDeclaratorSyntax),
-            typeof(ParameterSyntax));
 
         protected sealed override void Initialize(SonarAnalysisContext context)
         {
@@ -77,14 +73,11 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    foreach (var type in NodeTypesToCheck)
+                    SyntaxNode ancestorOrSelf = stringLiteral.FirstAncestorOrSelf<SyntaxNode>(IsCheckedType);
+                    var ancestorString = ancestorOrSelf?.ToString().ToUpperInvariant();
+                    if (ancestorString != null && SkippedWords.Any(s => ancestorString.Contains(s)))
                     {
-                        var ancestorOrSelf = stringLiteral.FirstAncestorOrSelf<SyntaxNode>(type.IsInstanceOfType);
-                        var ancestorString = ancestorOrSelf?.ToString().ToUpperInvariant();
-                        if (ancestorString != null && SkippedWords.Any(s => ancestorString.Contains(s)))
-                        {
-                            return;
-                        }
+                        return;
                     }
 
                     var attribute = stringLiteral.FirstAncestorOrSelf<AttributeSyntax>();
@@ -96,6 +89,13 @@ namespace SonarAnalyzer.Rules.CSharp
                     c.ReportDiagnostic(Diagnostic.Create(rule, stringLiteral.GetLocation(), text));
                 },
                 SyntaxKind.StringLiteralExpression);
+        }
+
+        private static bool IsCheckedType(SyntaxNode syntaxNode)
+        {
+            return syntaxNode is StatementSyntax ||
+                syntaxNode is VariableDeclaratorSyntax ||
+                syntaxNode is ParameterSyntax;
         }
     }
 }
