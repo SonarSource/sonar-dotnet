@@ -10,7 +10,7 @@ function Get-VsWherePath {
 
 function Get-MsBuildPath([ValidateSet("14.0", "15.0")][string]$msbuildVersion) {
     if ($msbuildVersion -eq "14.0") {
-        return Get-ExecutablePath -name "msbuild.exe" -envVar "MSBUILD_14_PATH"
+        return Get-ExecutablePath -name "msbuild.exe" -envVar "MSBUILD_PATH"
     }
 
     $msbuild15Env = "MSBUILD_15_PATH"

@@ -48,12 +48,10 @@ function Get-ExecutablePath([string]$name, [string]$directory, [string]$envVar) 
 
     if (!$path) {
         if (!$directory) {
-            $path = Exec { & where.exe $name } `
-                | Select-Object -First 1
+            $path = Exec { & where.exe $name } | Select-Object -First 1
         }
         else {
-            $path = Exec { & where.exe /R $directory $name } `
-                | Select-Object -First 1
+            $path = Exec { & where.exe /R $directory $name } | Select-Object -First 1
         }
     }
 
