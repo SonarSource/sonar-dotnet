@@ -171,6 +171,19 @@
 },
 {
 "id":  "S2325",
+"message":  "Make 'InterceptExceptionType' a static method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Pattern\CircuitBreakerSpec.cs",
+"region":  {
+"startLine":  269,
+"startColumn":  21,
+"endLine":  269,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2325",
 "message":  "Make 'ShortCallTimeoutCb' a static method.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Tests\Pattern\CircuitBreakerSpec.cs",

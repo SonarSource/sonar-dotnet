@@ -54,15 +54,38 @@ namespace SonarAnalyzer.Rules.CSharp
         protected sealed override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
-                c => CheckIssue<PropertyDeclarationSyntax>(c, d => d.Identifier, "property"),
+                c => CheckIssue<PropertyDeclarationSyntax>(c, GetPropertyDescendants, d => d.Identifier, "property"),
                 SyntaxKind.PropertyDeclaration);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
-                c => CheckIssue<MethodDeclarationSyntax>(c, d => d.Identifier, "method"),
+                c => CheckIssue<MethodDeclarationSyntax>(c, GetMethodDescendants, d => d.Identifier, "method"),
                 SyntaxKind.MethodDeclaration);
         }
 
-        private static void CheckIssue<TDeclarationSyntax>(SyntaxNodeAnalysisContext context, Func<TDeclarationSyntax, SyntaxToken> getIdentifier, string memberKind)
+        private IEnumerable<SyntaxNode> GetPropertyDescendants(PropertyDeclarationSyntax propertyDeclaration)
+        {
+            if (propertyDeclaration.ExpressionBody != null)
+            {
+                return propertyDeclaration.ExpressionBody.DescendantNodes();
+            }
+
+            return propertyDeclaration.AccessorList.Accessors.SelectMany(a => a.DescendantNodes());
+        }
+
+        private IEnumerable<SyntaxNode> GetMethodDescendants(MethodDeclarationSyntax methodDeclaration)
+        {
+            if (methodDeclaration.ExpressionBody != null)
+            {
+                return methodDeclaration.ExpressionBody.DescendantNodes();
+            }
+
+            return methodDeclaration.Body.DescendantNodes();
+        }
+
+        private static void CheckIssue<TDeclarationSyntax>(SyntaxNodeAnalysisContext context,
+            Func<TDeclarationSyntax, IEnumerable<SyntaxNode>> getDescendants,
+            Func<TDeclarationSyntax, SyntaxToken> getIdentifier,
+            string memberKind)
             where TDeclarationSyntax : MemberDeclarationSyntax
         {
             var declaration = (TDeclarationSyntax)context.Node;
@@ -77,17 +100,23 @@ namespace SonarAnalyzer.Rules.CSharp
                 symbol.ContainingType.IsInterface() ||
                 symbol.GetInterfaceMember() != null ||
                 symbol.GetOverriddenMember() != null ||
+                symbol.GetAttributes().Any(IsIgnoredAttribute) ||
                 IsNewMethod(symbol) ||
                 IsEmptyMethod(declaration) ||
                 IsNewProperty(symbol) ||
                 IsAutoProperty(symbol) ||
-                HasInstanceReferences(declaration, context.SemanticModel))
+                HasInstanceReferences(getDescendants(declaration), context.SemanticModel))
             {
                 return;
             }
 
             var identifier = getIdentifier(declaration);
             context.ReportDiagnostic(Diagnostic.Create(rule, identifier.GetLocation(), identifier.Text, memberKind));
+        }
+
+        private static bool IsIgnoredAttribute(AttributeData attribute)
+        {
+            return !attribute.AttributeClass.Is(KnownType.System_Diagnostics_CodeAnalysis_SuppressMessageAttribute);
         }
 
         private static bool IsEmptyMethod(MemberDeclarationSyntax node)
@@ -122,10 +151,9 @@ namespace SonarAnalyzer.Rules.CSharp
                 .Any(s => s.AccessorList != null && s.AccessorList.Accessors.All(a => a.Body == null));
         }
 
-        private static bool HasInstanceReferences(MemberDeclarationSyntax memberDeclaration, SemanticModel semanticModel)
+        private static bool HasInstanceReferences(IEnumerable<SyntaxNode> nodes, SemanticModel semanticModel)
         {
-            return memberDeclaration.DescendantNodes()
-                .OfType<ExpressionSyntax>()
+            return nodes.OfType<ExpressionSyntax>()
                 .Where(IsLeftmostIdentifierName)
                 .Where(n => !SyntaxHelper.IsInNameofCall(n, semanticModel))
                 .Any(n => IsInstanceMember(n, semanticModel));

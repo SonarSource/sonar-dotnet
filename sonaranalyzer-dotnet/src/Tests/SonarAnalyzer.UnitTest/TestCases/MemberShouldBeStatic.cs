@@ -30,7 +30,7 @@ namespace Tests.Diagnostics
         public int Property13 => this.instanceMember;
         public int Property14 => staticMember; // Noncompliant
         public int Property15 => Class1.staticMember; // Noncompliant
-        public int Property16 => new Class1().instanceMember; // Noncompliant
+        public int Property16 => new Tests.Diagnostics.Class1().instanceMember; // Noncompliant
         public int Property17 => instanceInterface.InterfaceProperty1;
         public Class1 Property18 => this;
         public static int StaticProperty1 => 0;
@@ -108,5 +108,32 @@ namespace Tests.Diagnostics
     {
         public int InterfaceProperty1 { get { return 0; } set { } } // if Class4 adds an explicit implementation of this property an issue will be raised here
         public int InterfaceMethod1() => 0;
+    }
+
+    // Adding exception for SuppressMessage https://github.com/SonarSource/sonar-csharp/issues/631
+    public class Class5
+    {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Foo", "Bar", Justification = "baz")]
+        public int Property1 { get { return 0; } } // Noncompliant
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Foo", "Bar", Justification = "baz")]
+        public int Property2 => 0; // Noncompliant
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Foo", "Bar", Justification = "baz")]
+        public int Property3 { }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Foo", "Bar", Justification = "baz")]
+        public int Method1() { return 0; } // Noncompliant
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Foo", "Bar", Justification = "baz")]
+        public int Method2() => 0; // Noncompliant
+    }
+
+    public class Class6
+    {
+        [System.ObsoleteAttribute]
+        public int Property1 { get { return 0; } } // Compliant, any attribute disables this rule
+        [System.ObsoleteAttribute]
+        public int Property2 => 0; // Compliant, any attribute disables this rule
+        [System.ObsoleteAttribute]
+        public int Method1() { return 0; } // Compliant, any attribute disables this rule
+        [System.ObsoleteAttribute]
+        public int Method2() => 0; // Compliant, any attribute disables this rule
     }
 }
