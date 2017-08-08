@@ -19,6 +19,7 @@ function Build-Project([string]$ProjectName, [string]$SolutionRelativePath) {
     $Env:PROJECT = $ProjectName
 
     Restore-Packages $solutionPath
+    # Note: Summary doesn't work for MSBuild 14
     Invoke-MSBuild $msbuildVersion $solutionPath /m /t:rebuild /p:Configuration=Debug `
         /clp:"Summary;ErrorsOnly" `
         /fl /flp:"logFile=output\$ProjectName.log;verbosity=d"
