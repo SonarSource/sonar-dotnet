@@ -61,7 +61,7 @@ function New-IssueReports([string]$sarifReportPath) {
     $pathPrefix = $pathPrefix -Replace '\\', '\\' # escape path
 
     # Is there any issue?
-    if ($json.issues) {
+    if ($json.issues) { # sarif v0.1
         $allIssues = $json.issues
 
         # Adjust positions to previous SARIF format
@@ -83,12 +83,13 @@ function New-IssueReports([string]$sarifReportPath) {
         Restore-UriDeclaration $allIssues.locations.analysisTarget $pathPrefix
         $allIssues = $allIssues | Foreach-Object { Get-Issue($_) }
     }
-    elseif ($json.runLogs) {
+    elseif ($json.runLogs) { # sarif v0.4
         $allIssues = $json.runLogs | Foreach-Object { $_.results }
         Restore-UriDeclaration $allIssues.locations.analysisTarget $pathPrefix
         $allIssues = $allIssues | Foreach-Object { Get-Issue($_) }
     }
-    elseif ($json.runs) {
+    elseif ($json.runs) { # sarif v1.0.0
+
         $allIssues = $json.runs | Foreach-Object { $_.results }
         Restore-UriDeclaration $allIssues.locations.resultFile $pathPrefix
 	    Restore-UriDeclaration $allIssues.relatedLocations.physicalLocation $pathPrefix
