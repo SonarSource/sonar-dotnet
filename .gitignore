@@ -58,3 +58,6 @@ packages/
 # MSTest test results
 [Tt]est[Rr]esult*/
 [Bb]uild[Ll]og.*
+
+# rule-api temp artifacts
+.restext
