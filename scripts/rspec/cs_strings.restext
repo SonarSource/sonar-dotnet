@@ -1623,6 +1623,15 @@ S3427_Severity=Blocker
 S3427_Tags=unused,pitfall
 S3427_Title=Method overloads with default parameter values should not overlap 
 S3427_Type=CODE_SMELL
+S3431_Category=Sonar Code Smell
+S3431_Description=It should be clear to a casual reader what code a test is testing and what results are expected. Unfortunately, that's not usually the case with the [ExpectedException] attribute since an exception could be thrown from almost any line in the method.
+S3431_IsActivatedByDefault=False
+S3431_Remediation=Constant/Issue
+S3431_RemediationCost=5min
+S3431_Severity=Major
+S3431_Tags=tests
+S3431_Title="[ExpectedException]" should not be used
+S3431_Type=CODE_SMELL
 S3433_Category=Sonar Code Smell
 S3433_Description=A method is detected as test method if marked with one of the following attributes [TestMethod] (for mstest), [Fact] (for xunit) or [Test] (for nunit). However, whether or not they have a test attribute, non-public methods are not recognized as tests, and therefore not executed. Neither are async void methods, or methods with generics anywhere in their signatures. 
 S3433_IsActivatedByDefault=True
