@@ -5,7 +5,6 @@
     <AssemblyName>SonarAnalyzer.Utilities</AssemblyName>
     <RootNamespace>SonarAnalyzer</RootNamespace>
     <CodeAnalysisRuleSet>..\SonarAnalyzer.ruleset</CodeAnalysisRuleSet>
-    <AppConfig>app.VS2017.config</AppConfig>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
 
@@ -27,7 +26,6 @@
 
   <ItemGroup>
     <None Remove="*.config" />
-    <None Include="app.VS2017.config" />
   </ItemGroup>
 
   <ItemGroup>
