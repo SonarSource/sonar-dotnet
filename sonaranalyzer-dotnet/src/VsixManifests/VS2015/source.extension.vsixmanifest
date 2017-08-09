@@ -26,4 +26,8 @@
     <Asset Type="Microsoft.VisualStudio.MefComponent" d:Source="Project" d:ProjectName="SonarAnalyzer.VisualBasic.VS2015" Path="|SonarAnalyzer.VisualBasic.VS2015|" />
     <Asset Type="Microsoft.VisualStudio.Analyzer" d:Source="File" Path="Google.Protobuf.dll" />
   </Assets>
+    <Prerequisites>
+    <Prerequisite Id="Microsoft.VisualStudio.Component.CodeClone" Version="[14.0]" DisplayName="Microsoft.VisualStudio.Component.CoreEditor" />
+    <Prerequisite Id="Microsoft.VisualStudio.Component.Roslyn.LanguageServices" Version="[14.0]" DisplayName="Roslyn Language Services" />
+  </Prerequisites>
 </PackageManifest>
