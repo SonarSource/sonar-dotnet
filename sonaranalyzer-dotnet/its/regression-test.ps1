@@ -55,6 +55,7 @@ try {
     . (Join-Path $PSScriptRoot "..\..\scripts\build\build-utils.ps1")
     $msBuildImportBefore = Get-MSBuildImportBeforePath $msbuildVersion
 
+    Push-Location $PSScriptRoot
     Test-SonarAnalyzerDll
 
     Write-Header "Initializing the environment"
@@ -91,6 +92,7 @@ catch {
     exit 1
 }
 finally {
+    Pop-Location
     Write-Host "Removing the import before target file from '${msBuildImportBefore}'"
     Remove-Item -Force (Join-Path $msBuildImportBefore "\SonarAnalyzer.Testing.ImportBefore.targets") `
         -ErrorAction Ignore
