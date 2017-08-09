@@ -1,0 +1,30 @@
+<p>There's no point in having an NUnit <code>TestFixture</code> nor a MSTest <code>TestClass</code> without any test methods (<code>Test</code> or
+<code>TestCase</code> for NUnit and <code>TestMethod</code> for MSTest). This could lead a maintainer to assume a class is covered by tests even
+though it is not.</p>
+<p>This rule raises an issue when classes are marked with either <code>TestFixture</code> or <code>TestClass</code> but don't contain any test
+methods.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+[TestFixture]
+public class SomeClassTest { } // Noncompliant - no test
+
+[TestClass]
+public class SomeOtherClassTest { } // Noncompliant - no test
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+[TestFixture]
+public class SomeClassTest
+{
+    [Test]
+    public void SomeMethodShouldReturnTrue() { }
+}
+
+[TestClass]
+public class SomeOtherClassTest
+{
+    [TestMethod]
+    public void SomeMethodShouldReturnTrue() { }
+}
+</pre>
+
