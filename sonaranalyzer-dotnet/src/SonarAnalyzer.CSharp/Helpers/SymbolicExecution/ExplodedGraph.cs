@@ -364,6 +364,7 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.CSharp
                         var sv = new SymbolicValue();
                         newProgramState = sv.SetConstraint(ObjectConstraint.NotNull, newProgramState);
                         newProgramState = newProgramState.PushValue(sv);
+                        newProgramState = ObjectCreated(newProgramState, sv, instruction);
                     }
                     break;
 
@@ -430,6 +431,11 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.CSharp
             newProgramState = EnsureStackState(parenthesizedExpression, newProgramState);
             OnInstructionProcessed(instruction, node.ProgramPoint, newProgramState);
             EnqueueNewNode(newProgramPoint, newProgramState);
+        }
+
+        private ProgramState ObjectCreated(ProgramState programState, SymbolicValue symbolicValue, SyntaxNode instruction)
+        {
+            return explodedGraphChecks.Aggregate(programState, (ps, check) => check.ObjectCreated(ps, symbolicValue, instruction));
         }
 
         private ProgramState EnsureStackState(ExpressionSyntax parenthesizedExpression, ProgramState programState)
@@ -714,7 +720,11 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.CSharp
                 newProgramState = sv.SetConstraint(ObjectConstraint.NotNull, newProgramState);
             }
 
-            return newProgramState.PushValue(sv);
+            newProgramState = newProgramState.PushValue(sv);
+
+            newProgramState = ObjectCreated(newProgramState, sv, ctor);
+
+            return newProgramState;
         }
 
         private static ProgramState VisitInitializer(SyntaxNode instruction, ExpressionSyntax parenthesizedExpression, ProgramState programState)

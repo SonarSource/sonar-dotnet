@@ -7896,6 +7896,33 @@
   <data name="S4144_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
   </data>
+  <data name="S4158_Category" xml:space="preserve">
+    <value>Sonar Code Smell</value>
+  </data>
+  <data name="S4158_Description" xml:space="preserve">
+    <value>When a collection is empty it makes no sense to access or iterate it. Doing so anyway is surely an error; either population was accidentally omitted or the developer doesn't understand the situation.</value>
+  </data>
+  <data name="S4158_IsActivatedByDefault" xml:space="preserve">
+    <value>True</value>
+  </data>
+  <data name="S4158_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S4158_RemediationCost" xml:space="preserve">
+    <value>15min</value>
+  </data>
+  <data name="S4158_Severity" xml:space="preserve">
+    <value>Minor</value>
+  </data>
+  <data name="S4158_Tags" xml:space="preserve">
+    <value />
+  </data>
+  <data name="S4158_Title" xml:space="preserve">
+    <value>Empty collections should not be accessed or iterated</value>
+  </data>
+  <data name="S4158_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S818_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
