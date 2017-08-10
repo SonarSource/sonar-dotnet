@@ -4992,6 +4992,33 @@
   <data name="S3427_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
   </data>
+  <data name="S3431_Category" xml:space="preserve">
+    <value>Sonar Code Smell</value>
+  </data>
+  <data name="S3431_Description" xml:space="preserve">
+    <value>It should be clear to a casual reader what code a test is testing and what results are expected. Unfortunately, that's not usually the case with the [ExpectedException] attribute since an exception could be thrown from almost any line in the method.</value>
+  </data>
+  <data name="S3431_IsActivatedByDefault" xml:space="preserve">
+    <value>False</value>
+  </data>
+  <data name="S3431_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S3431_RemediationCost" xml:space="preserve">
+    <value>5min</value>
+  </data>
+  <data name="S3431_Severity" xml:space="preserve">
+    <value>Major</value>
+  </data>
+  <data name="S3431_Tags" xml:space="preserve">
+    <value>tests</value>
+  </data>
+  <data name="S3431_Title" xml:space="preserve">
+    <value>"[ExpectedException]" should not be used</value>
+  </data>
+  <data name="S3431_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S3433_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
