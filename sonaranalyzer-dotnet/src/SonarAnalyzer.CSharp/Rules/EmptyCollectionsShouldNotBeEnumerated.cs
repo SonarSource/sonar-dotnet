@@ -54,25 +54,18 @@ namespace SonarAnalyzer.Rules.CSharp
             var check = new EmptyCollectionAccessedCheck(explodedGraph);
             explodedGraph.AddExplodedGraphCheck(check);
 
-
             EventHandler<CollectionAccessedEventArgs> collectionAccessedHandler =
-                (sender, args) => context.ReportDiagnostic(Diagnostic.Create(rule, args.iden);
+                (sender, args) => context.ReportDiagnostic(Diagnostic.Create(rule, args.Location));
 
-            ////check.CollectionAccessed += collectionAccessedHandler;
-
+            check.CollectionAccessed += collectionAccessedHandler;
             try
             {
                 explodedGraph.Walk();
             }
             finally
             {
-                ////check.CollectionAccessed -= memberAccessedHandler;
+                check.CollectionAccessed -= collectionAccessedHandler;
             }
-
-            ////foreach (var nullIdentifier in nullIdentifiers)
-            ////{
-            ////    context.ReportDiagnostic(Diagnostic.Create(rule, nullIdentifier.GetLocation(), nullIdentifier.Identifier.ValueText));
-            ////}
         }
 
 
@@ -85,9 +78,9 @@ namespace SonarAnalyzer.Rules.CSharp
             {
             }
 
-            private void OnCollectionAccessed(SyntaxToken identifier)
+            private void OnCollectionAccessed(Location location)
             {
-                CollectionAccessed?.Invoke(this, new CollectionAccessedEventArgs(identifier));
+                CollectionAccessed?.Invoke(this, new CollectionAccessedEventArgs(location));
             }
 
             public override ProgramState PreProcessInstruction(ProgramPoint programPoint, ProgramState programState)
@@ -98,9 +91,34 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     case SyntaxKind.InvocationExpression:
                         return ProcessInvocation(programState, (InvocationExpressionSyntax)instruction);
+                    case SyntaxKind.ElementAccessExpression:
+                        return ProcessElementAccess(programState, (ElementAccessExpressionSyntax)instruction);
                     default:
                         return programState;
                 }
+            }
+
+            private ProgramState ProcessElementAccess(ProgramState programState, ElementAccessExpressionSyntax instruction)
+            {
+                var newProgramState = programState;
+
+                var collectionVariableSymbol = semanticModel.GetSymbolInfo(instruction.Expression).Symbol;
+                if (collectionVariableSymbol == null)
+                {
+                    return newProgramState;
+                }
+
+                var collectionType = collectionVariableSymbol.GetSymbolType() as INamedTypeSymbol;
+                if (collectionType?.ConstructedFrom != null &&
+                    collectionType.ConstructedFrom.IsAny(CollectionTypes))
+                {
+                    if (collectionVariableSymbol.HasConstraint(CollectionConstraint.Empty, programState))
+                    {
+                        OnCollectionAccessed(instruction.GetLocation());
+                    }
+                }
+
+                return newProgramState;
             }
 
             private ProgramState ProcessInvocation(ProgramState programState, InvocationExpressionSyntax instruction)
@@ -115,14 +133,20 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (collectionType.IsAny(CollectionTypes))
                     {
                         var methodSymbol = semanticModel.GetSymbolInfo(instruction).Symbol as IMethodSymbol;
-                        if (AccessMethods.Any(m => m(methodSymbol)) &&
+                        if (methodSymbol == null ||
+                            IgnoredMethods.Any(m => m(methodSymbol)))
+                        {
+                            return newProgramState;
+                        }
+
+                        if (AddMethods.Any(m => m(methodSymbol)))
+                        {
+                            newProgramState = collectionSymbol.SetConstraint(CollectionConstraint.NotEmpty, newProgramState);
+                        }
+                        else if (methodSymbol.ContainingType.ConstructedFrom.Is(KnownType.System_Collections_Generic_List_T) &&
                             collectionSymbol.HasConstraint(CollectionConstraint.Empty, programState))
                         {
-                            OnCollectionAccessed(memberAccess.Name.Identifier);
-                        }
-                        else if (AddMethods.Any(m => m(methodSymbol)))
-                        {
-                            newProgramState = methodSymbol.SetConstraint(CollectionConstraint.NotEmpty, newProgramState);
+                            OnCollectionAccessed(memberAccess.Name.GetLocation());
                         }
                         else
                         {
@@ -135,53 +159,75 @@ namespace SonarAnalyzer.Rules.CSharp
 
             public override ProgramState ObjectCreated(ProgramState programState, SymbolicValue symbolicValue, SyntaxNode instruction)
             {
-                switch (instruction.Kind())
+                var newProgramState = programState;
+                if (instruction.IsKind(SyntaxKind.ObjectCreationExpression))
                 {
-                    case SyntaxKind.ObjectCreationExpression:
-                        var collectionSymbol = semanticModel.GetSymbolInfo(instruction).Symbol;
-                        var collectionType = collectionSymbol.ContainingType?.ConstructedFrom;
-                        if (collectionType.IsAny(CollectionTypes))
-                        {
-                            return symbolicValue.SetConstraint(CollectionConstraint.Empty, programState);
-                        }
-                        return programState;
-                    case SyntaxKind.ArrayCreationExpression:
-                        ////var arrayCreation = (ArrayCreationExpressionSyntax)instruction;
-                        ////var rankSpecifiers = arrayCreation.Type.RankSpecifiers;
-                        ////if (rankSpecifiers != null && 
-                        ////    rankSpecifiers.Count > 0 &&
-                        ////    rankSpecifiers[0].le)
-                        ////{
-                        ////}
-                    default:
-                        return programState;
+                    var objectCreation = (ObjectCreationExpressionSyntax)instruction;
+                    var constructorSymbol = semanticModel.GetSymbolInfo(objectCreation).Symbol as IMethodSymbol;
+
+                    if (constructorSymbol.ContainingType.ConstructedFrom.IsAny(CollectionTypes) &&
+                        (!constructorSymbol.Parameters.Any()
+                        || constructorSymbol.Parameters.Count(p => p.IsType(KnownType.System_Int32)) == 1))
+                    // TODO: HashSet, Queue, Stack, ObservableCollection, Immutable*
+                    {
+                        newProgramState = symbolicValue.SetConstraint(CollectionConstraint.Empty, newProgramState);
+                    }
+                    if (objectCreation.Initializer != null)
+                    {
+                        var constraint = objectCreation.Initializer.Expressions.Count == 0
+                            ? CollectionConstraint.Empty
+                            : CollectionConstraint.NotEmpty;
+                        newProgramState = symbolicValue.SetConstraint(constraint, newProgramState);
+                    }
                 }
+                return newProgramState;
             }
+
+            private static bool IsListMethod(IMethodSymbol symbol, string name) =>
+                symbol != null &&
+                symbol.Name == name &&
+                symbol.ContainingType.ConstructedFrom.Is(KnownType.System_Collections_Generic_List_T);
+
+            private static bool IsObjectMethod(IMethodSymbol symbol, string name) =>
+                symbol != null &&
+                symbol.Name == name &&
+                symbol.ContainingType.Is(KnownType.System_Object);
+
+            ////private static bool IsAtrrayMethod(IMethodSymbol symbol, string name) =>
+            ////    symbol?.Name == name &&
+            ////    symbol.ContainingType.Is(KnownType.System_Array);
 
             private static readonly ISet<KnownType> CollectionTypes = new HashSet<KnownType>
             {
                 KnownType.System_Collections_Generic_List_T
             };
 
-            private static readonly ISet<Func<IMethodSymbol, bool>> AddMethods = new HashSet<Func<IMethodSymbol, bool>>
+            private static readonly IEnumerable<Func<IMethodSymbol, bool>> AddMethods = new List<Func<IMethodSymbol, bool>>
             {
-                symbol => symbol.Name == nameof(ICollection<object>.Add),
+                symbol => IsListMethod(symbol, nameof(List<object>.Add)),
+                symbol => IsListMethod(symbol, nameof(List<object>.AddRange)),
+                symbol => IsListMethod(symbol, nameof(List<object>.Insert)),
+                symbol => IsListMethod(symbol, nameof(List<object>.InsertRange)),
             };
 
-            private static readonly ISet<Func<IMethodSymbol, bool>> AccessMethods = new HashSet<Func<IMethodSymbol, bool>>
+            private static readonly IEnumerable<Func<IMethodSymbol, bool>> IgnoredMethods = new List<Func<IMethodSymbol, bool>>
             {
-                symbol => symbol.Name == nameof(ICollection<object>.Contains),
-                symbol => symbol.Name == nameof(ICollection<object>.Remove),
+                symbol => IsListMethod(symbol, nameof(List<object>.AsReadOnly)),
+                symbol => IsListMethod(symbol, nameof(List<object>.ToArray)),
+                symbol => IsObjectMethod(symbol, nameof(List<object>.GetHashCode)),
+                symbol => IsObjectMethod(symbol, nameof(List<object>.Equals)),
+                symbol => IsObjectMethod(symbol, nameof(List<object>.GetType)),
+                symbol => IsObjectMethod(symbol, nameof(List<object>.ToString)),
             };
         }
 
         internal sealed class CollectionAccessedEventArgs : EventArgs
         {
-            public SyntaxToken Identifier { get; }
+            public Location Location { get; }
 
-            public CollectionAccessedEventArgs(SyntaxToken identifier)
+            public CollectionAccessedEventArgs(Location location)
             {
-                this.Identifier = identifier;
+                Location = location;
             }
         }
     }
