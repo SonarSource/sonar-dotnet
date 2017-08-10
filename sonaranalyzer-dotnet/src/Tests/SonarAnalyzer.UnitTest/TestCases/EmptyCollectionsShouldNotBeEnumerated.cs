@@ -2,10 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.Linq;
 
 namespace Tests.Diagnostics
 {
-    class ListTests 
+    class ListTests
     {
         private IEnumerable<int> items = new List<int> { 1, 2, 3 };
 
@@ -74,6 +75,12 @@ namespace Tests.Diagnostics
             list.Equals(items);
             list.GetType();
             list.ToString();
+        }
+
+        public void ExtensionMethods_Should_Not_Raise()
+        {
+            var list = new List<int>();
+            list.Any(); // Compliant
         }
 
         public void Methods_Set_NotEmpty()
@@ -314,6 +321,92 @@ namespace Tests.Diagnostics
 
             list = new ObservableCollection<int>();
             list.Insert(0, 1);
+            list.Clear(); // Compliant
+        }
+    }
+
+    class ArrayTests
+    {
+        public void Zero_Length_Applies_Empty()
+        {
+            var list = new int[0];
+            list.Clone(); // Noncompliant
+        }
+
+        public void NonZero_Length_Applies_NonEmpty()
+        {
+            var list = new int[5];
+            list.Clone(); // Compliant
+        }
+
+        public void Initializer_Applies_NonEmpty()
+        {
+            var list = new int[] { 1, 2, 3 };
+            list.Clone(); // Compliant
+        }
+
+        public void EmptyInitializer_Applies_Empty()
+        {
+            var list = new int[] { };
+            list.Clone(); // Noncompliant
+        }
+
+        public void HigherRank_And_Jagged_Array_Is_NotEmpty()
+        {
+            var list1 = new int[0, 0];
+            list1.Clone(); // Compliant
+            int[][] list2 = new int[1][];
+            list2.Clone(); // Compliant
+        }
+
+        public void Methods_Raise_Issue()
+        {
+            var other = new int[] { };
+            var list = new int[] { };
+            list.Clone(); // Noncompliant
+            list.CopyTo(other, 0); // Noncompliant
+            list.GetValue(5); // Noncompliant
+            list.Initialize(); // Noncompliant
+            list.SetValue(5, 1); // Noncompliant
+            var x = list[5]; // Noncompliant
+            list[5] = 5; // Noncompliant
+        }
+
+        public void Methods_Ignored()
+        {
+            var list = new int[] { };
+            list.GetLength(0);
+            list.GetLongLength(0);
+            list.GetLowerBound(0);
+            list.GetUpperBound(0);
+            list.GetHashCode();
+            list.Equals(items);
+            list.GetType();
+            list.ToString();
+            list.Length;
+        }
+
+        public void Methods_Set_NotEmpty()
+        {
+            var list = new ObservableCollection<int>();
+            list.Add(1);
+            list.Clear(); // Compliant, will normally raise
+
+            list = new ObservableCollection<int>();
+            list.Insert(0, 1);
+            list.Clear(); // Compliant
+        }
+    }
+
+    class Flows
+    {
+        public void Foo(bool condition)
+        {
+            var list = new List<int>();
+            if (condition)
+            {
+                list.Add(5);
+            }
             list.Clear(); // Compliant
         }
     }

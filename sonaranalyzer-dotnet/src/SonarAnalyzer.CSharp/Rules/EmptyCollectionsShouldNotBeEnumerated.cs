@@ -54,8 +54,21 @@ namespace SonarAnalyzer.Rules.CSharp
             var check = new EmptyCollectionAccessedCheck(explodedGraph);
             explodedGraph.AddExplodedGraphCheck(check);
 
+            var empty = new HashSet<SyntaxNode>();
+            var full = new HashSet<SyntaxNode>();
+
             EventHandler<CollectionAccessedEventArgs> collectionAccessedHandler =
-                (sender, args) => context.ReportDiagnostic(Diagnostic.Create(rule, args.Location));
+                (sender, args) =>
+                {
+                    if (args.IsEmpty)
+                    {
+                        empty.Add(args.Node);
+                    }
+                    else
+                    {
+                        full.Add(args.Node);
+                    }
+                };
 
             check.CollectionAccessed += collectionAccessedHandler;
             try
@@ -65,6 +78,11 @@ namespace SonarAnalyzer.Rules.CSharp
             finally
             {
                 check.CollectionAccessed -= collectionAccessedHandler;
+            }
+
+            foreach (var node in empty.Except(full))
+            {
+                context.ReportDiagnostic(Diagnostic.Create(rule, node.GetLocation()));
             }
         }
 
@@ -78,9 +96,9 @@ namespace SonarAnalyzer.Rules.CSharp
             {
             }
 
-            private void OnCollectionAccessed(Location location)
+            private void OnCollectionAccessed(SyntaxNode node, bool empty)
             {
-                CollectionAccessed?.Invoke(this, new CollectionAccessedEventArgs(location));
+                CollectionAccessed?.Invoke(this, new CollectionAccessedEventArgs(node, empty));
             }
 
             public override ProgramState PreProcessInstruction(ProgramPoint programPoint, ProgramState programState)
@@ -93,6 +111,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         return ProcessInvocation(programState, (InvocationExpressionSyntax)instruction);
                     case SyntaxKind.ElementAccessExpression:
                         return ProcessElementAccess(programState, (ElementAccessExpressionSyntax)instruction);
+
                     default:
                         return programState;
                 }
@@ -108,14 +127,11 @@ namespace SonarAnalyzer.Rules.CSharp
                     return newProgramState;
                 }
 
-                var collectionType = collectionVariableSymbol.GetSymbolType() as INamedTypeSymbol;
+                var collectionType = GetCollectionType(collectionVariableSymbol);
                 if (collectionType?.ConstructedFrom != null &&
                     collectionType.ConstructedFrom.IsAny(CollectionTypes))
                 {
-                    if (collectionVariableSymbol.HasConstraint(CollectionConstraint.Empty, programState))
-                    {
-                        OnCollectionAccessed(instruction.GetLocation());
-                    }
+                    OnCollectionAccessed(instruction, collectionVariableSymbol.HasConstraint(CollectionConstraint.Empty, programState));
                 }
 
                 return newProgramState;
@@ -129,11 +145,13 @@ namespace SonarAnalyzer.Rules.CSharp
                 if (memberAccess != null)
                 {
                     var collectionSymbol = semanticModel.GetSymbolInfo(memberAccess.Expression).Symbol;
-                    var collectionType = (collectionSymbol.GetSymbolType() as INamedTypeSymbol)?.ConstructedFrom;
+                    var collectionType = GetCollectionType(collectionSymbol);
+
                     if (collectionType.IsAny(CollectionTypes))
                     {
                         var methodSymbol = semanticModel.GetSymbolInfo(instruction).Symbol as IMethodSymbol;
                         if (methodSymbol == null ||
+                            methodSymbol.IsExtensionMethod ||
                             IgnoredMethods.Contains(methodSymbol.Name))
                         {
                             return newProgramState;
@@ -143,40 +161,64 @@ namespace SonarAnalyzer.Rules.CSharp
                         {
                             newProgramState = collectionSymbol.SetConstraint(CollectionConstraint.NotEmpty, newProgramState);
                         }
-                        else if (collectionSymbol.HasConstraint(CollectionConstraint.Empty, programState))
-                        {
-                            OnCollectionAccessed(memberAccess.Name.GetLocation());
-                        }
                         else
                         {
-                            // do nothing
+                            OnCollectionAccessed(instruction, collectionSymbol.HasConstraint(CollectionConstraint.Empty, programState));
                         }
                     }
                 }
                 return newProgramState;
             }
 
+            private static INamedTypeSymbol GetCollectionType(ISymbol collectionSymbol) =>
+                (collectionSymbol.GetSymbolType() as INamedTypeSymbol)?.ConstructedFrom ?? // collections
+                collectionSymbol.GetSymbolType()?.BaseType; // arrays
+
             public override ProgramState ObjectCreated(ProgramState programState, SymbolicValue symbolicValue, SyntaxNode instruction)
             {
                 var newProgramState = programState;
-                if (instruction.IsKind(SyntaxKind.ObjectCreationExpression))
+                switch (instruction.Kind())
                 {
-                    var objectCreation = (ObjectCreationExpressionSyntax)instruction;
-                    var constructorSymbol = semanticModel.GetSymbolInfo(objectCreation).Symbol as IMethodSymbol;
+                    case SyntaxKind.ObjectCreationExpression:
+                        var objectCreation = (ObjectCreationExpressionSyntax)instruction;
+                        var constructorSymbol = semanticModel.GetSymbolInfo(objectCreation).Symbol as IMethodSymbol;
 
-                    if (constructorSymbol.ContainingType.ConstructedFrom.IsAny(CollectionTypes) &&
-                        (!constructorSymbol.Parameters.Any()
-                        || constructorSymbol.Parameters.Count(p => p.IsType(KnownType.System_Int32)) == 1))
-                    {
-                        newProgramState = symbolicValue.SetConstraint(CollectionConstraint.Empty, newProgramState);
-                    }
-                    if (objectCreation.Initializer != null)
-                    {
-                        var constraint = objectCreation.Initializer.Expressions.Count == 0
-                            ? CollectionConstraint.Empty
-                            : CollectionConstraint.NotEmpty;
-                        newProgramState = symbolicValue.SetConstraint(constraint, newProgramState);
-                    }
+                        if (constructorSymbol?.ContainingType?.ConstructedFrom != null &&
+                            constructorSymbol.ContainingType.ConstructedFrom.IsAny(CollectionTypes) &&
+                            (!constructorSymbol.Parameters.Any()
+                            || constructorSymbol.Parameters.Count(p => p.IsType(KnownType.System_Int32)) == 1))
+                        {
+                            newProgramState = symbolicValue.SetConstraint(CollectionConstraint.Empty, newProgramState);
+                        }
+                        if (objectCreation.Initializer != null)
+                        {
+                            var constraint = objectCreation.Initializer.Expressions.Count == 0
+                                ? CollectionConstraint.Empty
+                                : CollectionConstraint.NotEmpty;
+                            newProgramState = symbolicValue.SetConstraint(constraint, newProgramState);
+                        }
+                        break;
+                    case SyntaxKind.ArrayCreationExpression:
+                        var arrayCreation = (ArrayCreationExpressionSyntax)instruction;
+                        if (arrayCreation.Type.RankSpecifiers.Count == 1 &&
+                            arrayCreation.Type.RankSpecifiers[0].Sizes.Count == 1)
+                        {
+                            var size = arrayCreation.Type.RankSpecifiers[0].Sizes[0] as LiteralExpressionSyntax;
+                            if (size?.Token.ValueText == "0")
+                            {
+                                newProgramState = symbolicValue.SetConstraint(CollectionConstraint.Empty, newProgramState);
+                            }
+                        }
+                        if (arrayCreation.Initializer != null)
+                        {
+                            var constraint = arrayCreation.Initializer.Expressions.Count == 0
+                                ? CollectionConstraint.Empty
+                                : CollectionConstraint.NotEmpty;
+                            newProgramState = symbolicValue.SetConstraint(constraint, newProgramState);
+                        }
+                        break;
+                    default:
+                        break;
                 }
                 return newProgramState;
             }
@@ -188,6 +230,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 KnownType.System_Collections_Generic_Stack_T,
                 KnownType.System_Collections_Generic_HashSet_T,
                 KnownType.System_Collections_ObjectModel_ObservableCollection_T,
+                KnownType.System_Array,
             };
 
             private static readonly HashSet<string> AddMethods = new HashSet<string>
@@ -208,16 +251,22 @@ namespace SonarAnalyzer.Rules.CSharp
                 nameof(List<object>.Equals),
                 nameof(List<object>.GetType),
                 nameof(List<object>.ToString),
+                nameof(Array.GetLength),
+                nameof(Array.GetLongLength),
+                nameof(Array.GetLowerBound),
+                nameof(Array.GetUpperBound),
             };
         }
 
         internal sealed class CollectionAccessedEventArgs : EventArgs
         {
-            public Location Location { get; }
+            public SyntaxNode Node { get; }
+            public bool IsEmpty { get; }
 
-            public CollectionAccessedEventArgs(Location location)
+            public CollectionAccessedEventArgs(SyntaxNode node, bool isEmpty)
             {
-                Location = location;
+                Node = node;
+                IsEmpty = isEmpty;
             }
         }
     }

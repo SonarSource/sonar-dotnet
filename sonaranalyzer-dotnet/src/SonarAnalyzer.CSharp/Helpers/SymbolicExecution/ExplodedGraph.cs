@@ -349,6 +349,7 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.CSharp
                         var sv = new SymbolicValue();
                         newProgramState = sv.SetConstraint(ObjectConstraint.NotNull, newProgramState);
                         newProgramState = newProgramState.PushValue(sv);
+                        newProgramState = ObjectCreated(newProgramState, sv, instruction);
                     }
                     break;
 
