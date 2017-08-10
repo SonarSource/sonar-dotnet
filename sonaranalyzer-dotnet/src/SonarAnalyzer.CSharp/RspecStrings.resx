@@ -4965,6 +4965,33 @@
   <data name="S3397_Type" xml:space="preserve">
     <value>BUG</value>
   </data>
+  <data name="S3415_Category" xml:space="preserve">
+    <value>Sonar Code Smell</value>
+  </data>
+  <data name="S3415_Description" xml:space="preserve">
+    <value>The standard assertions library methods such as AreEqual, and AreSame expect the first argument to be the expected value and the second argument to be the actual value. Swap them, and your test will still have the same outcome (succeed/fail when it should) but the error messages will be confusing. </value>
+  </data>
+  <data name="S3415_IsActivatedByDefault" xml:space="preserve">
+    <value>True</value>
+  </data>
+  <data name="S3415_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S3415_RemediationCost" xml:space="preserve">
+    <value>2min</value>
+  </data>
+  <data name="S3415_Severity" xml:space="preserve">
+    <value>Major</value>
+  </data>
+  <data name="S3415_Tags" xml:space="preserve">
+    <value>tests,suspicious</value>
+  </data>
+  <data name="S3415_Title" xml:space="preserve">
+    <value>Assertion arguments should be passed in the correct order</value>
+  </data>
+  <data name="S3415_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S3427_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
