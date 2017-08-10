@@ -55,7 +55,8 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
 
                     var methodCall = (InvocationExpressionSyntax)c.Node;
-                    if (!methodCall.Expression.IsKind(SyntaxKind.SimpleMemberAccessExpression))
+                    if (!methodCall.Expression.IsKind(SyntaxKind.SimpleMemberAccessExpression) ||
+                        methodCall.ArgumentList.Arguments.Count < 2)
                     {
                         return;
                     }
@@ -73,14 +74,14 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    if (methodCall.ArgumentList.Arguments.Count >= 2 &&
-                        !(methodCall.ArgumentList.Arguments[0].Expression is LiteralExpressionSyntax) &&
-                        methodCall.ArgumentList.Arguments[1].Expression is LiteralExpressionSyntax)
+                    var firstArgument = methodCall.ArgumentList.Arguments[0];
+                    var secondArgument = methodCall.ArgumentList.Arguments[1];
+
+                    if (!(firstArgument.Expression is LiteralExpressionSyntax) &&
+                        secondArgument.Expression is LiteralExpressionSyntax)
                     {
-                        var location = Location.Create(c.Node.SyntaxTree, new TextSpan(
-                            methodCall.ArgumentList.Arguments[0].SpanStart,
-                            methodCall.ArgumentList.Arguments[1].Span.End -
-                                methodCall.ArgumentList.Arguments[0].SpanStart));
+                        var location = Location.Create(c.Node.SyntaxTree, new TextSpan(firstArgument.SpanStart,
+                            secondArgument.Span.End - firstArgument.SpanStart));
                         c.ReportDiagnostic(Diagnostic.Create(rule, location));
                     }
                 }, SyntaxKind.InvocationExpression);
