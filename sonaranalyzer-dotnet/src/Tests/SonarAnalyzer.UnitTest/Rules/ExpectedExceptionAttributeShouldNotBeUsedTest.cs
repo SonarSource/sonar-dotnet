@@ -33,8 +33,8 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzer(@"TestCases\ExpectedExceptionAttributeShouldNotBeUsed.cs",
                 new ExpectedExceptionAttributeShouldNotBeUsed(),
                 null,
-                TestMethodShouldHaveCorrectSignatureTest.MicrosoftVisualStudioTestToolsUnitTestingAssembly,
-                TestMethodShouldHaveCorrectSignatureTest.NUnitFrameworkAssembly);
+                Verifier.MicrosoftVisualStudioTestToolsUnitTestingAssembly,
+                Verifier.NUnitFrameworkAssembly);
         }
     }
 }

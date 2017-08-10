@@ -35,6 +35,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.Diagnostics;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.UnitTest.TestFramework;
@@ -45,12 +46,26 @@ namespace SonarAnalyzer.UnitTest
 {
     internal static class Verifier
     {
-        private static readonly MetadataReference systemAssembly = MetadataReference.CreateFromFile(typeof(object).Assembly.Location);
-        private static readonly MetadataReference systemLinqAssembly = MetadataReference.CreateFromFile(typeof(Enumerable).Assembly.Location);
-        private static readonly MetadataReference systemNetAssembly = MetadataReference.CreateFromFile(typeof(WebClient).Assembly.Location);
-        internal static readonly MetadataReference SystemImmutableAssembly = MetadataReference.CreateFromFile(typeof(ImmutableArray).Assembly.Location);
-        internal static readonly MetadataReference SystemDataAssembly = MetadataReference.CreateFromFile(typeof(DataTable).Assembly.Location);
-        internal static readonly MetadataReference SystemXmlAssembly = MetadataReference.CreateFromFile(typeof(System.Xml.XmlDocument).Assembly.Location);
+        #region Well known metadata references
+        private static readonly MetadataReference systemAssembly =
+            MetadataReference.CreateFromFile(typeof(object).Assembly.Location);
+        private static readonly MetadataReference systemLinqAssembly =
+            MetadataReference.CreateFromFile(typeof(Enumerable).Assembly.Location);
+        private static readonly MetadataReference systemNetAssembly =
+            MetadataReference.CreateFromFile(typeof(WebClient).Assembly.Location);
+        internal static readonly MetadataReference SystemImmutableAssembly =
+            MetadataReference.CreateFromFile(typeof(ImmutableArray).Assembly.Location);
+        internal static readonly MetadataReference SystemDataAssembly =
+            MetadataReference.CreateFromFile(typeof(DataTable).Assembly.Location);
+        internal static readonly MetadataReference SystemXmlAssembly =
+            MetadataReference.CreateFromFile(typeof(System.Xml.XmlDocument).Assembly.Location);
+        internal static readonly MetadataReference MicrosoftVisualStudioTestToolsUnitTestingAssembly =
+            MetadataReference.CreateFromFile(typeof(TestMethodAttribute).Assembly.Location);
+        internal static readonly MetadataReference XunitAssembly =
+            MetadataReference.CreateFromFile(@"..\..\..\..\..\..\packages\xunit.extensibility.core.2.2.0\lib\netstandard1.1\xunit.core.dll");
+        internal static readonly MetadataReference NUnitFrameworkAssembly =
+            MetadataReference.CreateFromFile(@"..\..\..\..\..\..\packages\NUnit.2.6.4\lib\nunit.framework.dll");
+        #endregion
 
         private const string FIXED_MESSAGE = "Fixed";
 

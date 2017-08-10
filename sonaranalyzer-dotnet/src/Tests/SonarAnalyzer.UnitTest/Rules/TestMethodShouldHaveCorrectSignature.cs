@@ -18,23 +18,14 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using NUnit.Framework;
 using SonarAnalyzer.Rules.CSharp;
-using Xunit;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
     [TestClass]
     public class TestMethodShouldHaveCorrectSignatureTest
     {
-        internal static readonly MetadataReference MicrosoftVisualStudioTestToolsUnitTestingAssembly =
-            MetadataReference.CreateFromFile(typeof(TestMethodAttribute).Assembly.Location);
-        internal static readonly MetadataReference XunitAssembly =
-            MetadataReference.CreateFromFile(typeof(FactAttribute).Assembly.Location);
-        internal static readonly MetadataReference NUnitFrameworkAssembly =
-            MetadataReference.CreateFromFile(typeof(TestAttribute).Assembly.Location);
 
         [TestMethod]
         [TestCategory("Rule")]
@@ -42,9 +33,9 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldHaveCorrectSignature.cs",
                 new TestMethodShouldHaveCorrectSignature(), null,
-                MicrosoftVisualStudioTestToolsUnitTestingAssembly,
-                XunitAssembly,
-                NUnitFrameworkAssembly);
+                Verifier.MicrosoftVisualStudioTestToolsUnitTestingAssembly,
+                Verifier.XunitAssembly,
+                Verifier.NUnitFrameworkAssembly);
         }
     }
 }

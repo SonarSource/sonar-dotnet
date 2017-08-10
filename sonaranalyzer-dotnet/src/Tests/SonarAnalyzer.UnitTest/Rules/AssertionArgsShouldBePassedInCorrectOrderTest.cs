@@ -33,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzer(@"TestCases\AssertionArgsShouldBePassedInCorrectOrder.cs",
                 new AssertionArgsShouldBePassedInCorrectOrder(),
                 null,
-                TestMethodShouldHaveCorrectSignatureTest.MicrosoftVisualStudioTestToolsUnitTestingAssembly);
+                Verifier.MicrosoftVisualStudioTestToolsUnitTestingAssembly);
         }
     }
 }
