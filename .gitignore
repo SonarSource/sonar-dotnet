@@ -60,4 +60,4 @@ packages/
 [Bb]uild[Ll]og.*
 
 # rule-api temp artifacts
-.restext
+*.restext
