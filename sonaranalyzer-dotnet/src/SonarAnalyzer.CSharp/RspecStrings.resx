@@ -1563,6 +1563,33 @@
   <data name="S1541_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
   </data>
+  <data name="S1607_Category" xml:space="preserve">
+    <value>Sonar Code Smell</value>
+  </data>
+  <data name="S1607_Description" xml:space="preserve">
+    <value>When a test fails due, for example, to infrastructure issues, you might want to ignore it temporarily. But without some kind of notation about why the test is being ignored, it may never be reactivated. Such tests are difficult to address without comprehensive knowledge of the project, and end up polluting their projects.</value>
+  </data>
+  <data name="S1607_IsActivatedByDefault" xml:space="preserve">
+    <value>True</value>
+  </data>
+  <data name="S1607_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S1607_RemediationCost" xml:space="preserve">
+    <value>10min</value>
+  </data>
+  <data name="S1607_Severity" xml:space="preserve">
+    <value>Major</value>
+  </data>
+  <data name="S1607_Tags" xml:space="preserve">
+    <value>tests,suspicious</value>
+  </data>
+  <data name="S1607_Title" xml:space="preserve">
+    <value>Tests should not be ignored</value>
+  </data>
+  <data name="S1607_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S1643_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>

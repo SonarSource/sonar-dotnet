@@ -80,7 +80,7 @@ namespace SonarAnalyzer.Rules.CSharp
             KnownType[] expectedParameterTypes)
         {
             return constructor.DeclaredAccessibility == accessibility &&
-                   CollectionUtils.AreEqual(constructor.Parameters, expectedParameterTypes,
+                   EnumerableExtensions.Equals(constructor.Parameters, expectedParameterTypes,
                        (p1, p2) => p1.Type.Is(p2));
         }
     }

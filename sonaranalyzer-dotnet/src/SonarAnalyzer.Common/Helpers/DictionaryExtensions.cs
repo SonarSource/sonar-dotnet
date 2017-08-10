@@ -18,31 +18,27 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SonarAnalyzer.Helpers;
-using System.Linq;
+using System.Collections.Generic;
 
-namespace SonarAnalyzer.UnitTest.Helpers
+namespace SonarAnalyzer.Helpers
 {
-    [TestClass]
-    public class StringUtilsTest
+    public static class DictionaryExtensions
     {
-        [TestMethod]
-        public void TestSplitCamelCaseToWords()
+        public static TValue GetValueOrDefault<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key)
         {
-            AssertSplitEquivalent("thisIsAName", "this", "is", "a", "name");
-            AssertSplitEquivalent("ThisIsIt", "this", "is", "it");
-            AssertSplitEquivalent("bin2hex", "bin", "hex");
-            AssertSplitEquivalent("HTML", "h", "t", "m", "l");
-            AssertSplitEquivalent("PEHeader", "p", "e", "header");
-            AssertSplitEquivalent("__url_foo", "url", "foo");
-            AssertSplitEquivalent("");
-            AssertSplitEquivalent(null);
+            return dictionary.GetValueOrDefault(key, default(TValue));
         }
 
-        private void AssertSplitEquivalent(string name, params string[] words)
+        public static TValue GetValueOrDefault<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key,
+            TValue defaultValue)
         {
-            CollectionAssert.AreEquivalent(name.SplitCamelCaseToWords().ToList(), words);
+            TValue result;
+            if (dictionary.TryGetValue(key, out result))
+            {
+                return result;
+            }
+
+            return defaultValue;
         }
     }
 }

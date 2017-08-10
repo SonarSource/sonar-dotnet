@@ -23,7 +23,7 @@ using System.Text;
 
 namespace SonarAnalyzer.Helpers
 {
-    public static class StringUtils
+    public static class StringExtensions
     {
         /// <summary>
         /// Splits the input string to the list of words.
