@@ -109,6 +109,9 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType System_Console = new KnownType("System.Console");
         public static readonly KnownType System_Collections_IList = new KnownType("System.Collections.IList");
         public static readonly KnownType System_Collections_Generic_List_T = new KnownType("System.Collections.Generic.List<T>");
+        public static readonly KnownType System_Collections_Generic_Queue_T = new KnownType("System.Collections.Generic.Queue<T>");
+        public static readonly KnownType System_Collections_Generic_Stack_T = new KnownType("System.Collections.Generic.Stack<T>");
+        public static readonly KnownType System_Collections_Generic_HashSet_T = new KnownType("System.Collections.Generic.HashSet<T>");
         public static readonly KnownType System_EventArgs = new KnownType("System.EventArgs");
         public static readonly KnownType System_EventHandler = new KnownType("System.EventHandler");
         public static readonly KnownType System_EventHandler_TEventArgs = new KnownType("System.EventHandler<TEventArgs>");
@@ -204,6 +207,7 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType System_Collections_ObjectModel_Collection_T = new KnownType("System.Collections.ObjectModel.Collection<T>");
         public static readonly KnownType System_Collections_ObjectModel_ReadOnlyCollection_T = new KnownType("System.Collections.ObjectModel.ReadOnlyCollection<T>");
         public static readonly KnownType System_Collections_ObjectModel_ReadOnlyDictionary_TKey_TValue = new KnownType("System.Collections.ObjectModel.ReadOnlyDictionary<TKey, TValue>");
+        public static readonly KnownType System_Collections_ObjectModel_ObservableCollection_T = new KnownType("System.Collections.ObjectModel.ObservableCollection<T>");
 
         public static readonly KnownType System_Data_DataTable = new KnownType("System.Data.DataTable");
         public static readonly KnownType System_Data_DataSet = new KnownType("System.Data.DataSet");

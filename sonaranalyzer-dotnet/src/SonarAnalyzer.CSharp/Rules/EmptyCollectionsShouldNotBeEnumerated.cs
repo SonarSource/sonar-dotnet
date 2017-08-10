@@ -134,17 +134,16 @@ namespace SonarAnalyzer.Rules.CSharp
                     {
                         var methodSymbol = semanticModel.GetSymbolInfo(instruction).Symbol as IMethodSymbol;
                         if (methodSymbol == null ||
-                            IgnoredMethods.Any(m => m(methodSymbol)))
+                            IgnoredMethods.Contains(methodSymbol.Name))
                         {
                             return newProgramState;
                         }
 
-                        if (AddMethods.Any(m => m(methodSymbol)))
+                        if (AddMethods.Contains(methodSymbol.Name))
                         {
                             newProgramState = collectionSymbol.SetConstraint(CollectionConstraint.NotEmpty, newProgramState);
                         }
-                        else if (methodSymbol.ContainingType.ConstructedFrom.Is(KnownType.System_Collections_Generic_List_T) &&
-                            collectionSymbol.HasConstraint(CollectionConstraint.Empty, programState))
+                        else if (collectionSymbol.HasConstraint(CollectionConstraint.Empty, programState))
                         {
                             OnCollectionAccessed(memberAccess.Name.GetLocation());
                         }
@@ -168,7 +167,6 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (constructorSymbol.ContainingType.ConstructedFrom.IsAny(CollectionTypes) &&
                         (!constructorSymbol.Parameters.Any()
                         || constructorSymbol.Parameters.Count(p => p.IsType(KnownType.System_Int32)) == 1))
-                    // TODO: HashSet, Queue, Stack, ObservableCollection, Immutable*
                     {
                         newProgramState = symbolicValue.SetConstraint(CollectionConstraint.Empty, newProgramState);
                     }
@@ -183,41 +181,33 @@ namespace SonarAnalyzer.Rules.CSharp
                 return newProgramState;
             }
 
-            private static bool IsListMethod(IMethodSymbol symbol, string name) =>
-                symbol != null &&
-                symbol.Name == name &&
-                symbol.ContainingType.ConstructedFrom.Is(KnownType.System_Collections_Generic_List_T);
-
-            private static bool IsObjectMethod(IMethodSymbol symbol, string name) =>
-                symbol != null &&
-                symbol.Name == name &&
-                symbol.ContainingType.Is(KnownType.System_Object);
-
-            ////private static bool IsAtrrayMethod(IMethodSymbol symbol, string name) =>
-            ////    symbol?.Name == name &&
-            ////    symbol.ContainingType.Is(KnownType.System_Array);
-
             private static readonly ISet<KnownType> CollectionTypes = new HashSet<KnownType>
             {
-                KnownType.System_Collections_Generic_List_T
+                KnownType.System_Collections_Generic_List_T,
+                KnownType.System_Collections_Generic_Queue_T,
+                KnownType.System_Collections_Generic_Stack_T,
+                KnownType.System_Collections_Generic_HashSet_T,
+                KnownType.System_Collections_ObjectModel_ObservableCollection_T,
             };
 
-            private static readonly IEnumerable<Func<IMethodSymbol, bool>> AddMethods = new List<Func<IMethodSymbol, bool>>
+            private static readonly HashSet<string> AddMethods = new HashSet<string>
             {
-                symbol => IsListMethod(symbol, nameof(List<object>.Add)),
-                symbol => IsListMethod(symbol, nameof(List<object>.AddRange)),
-                symbol => IsListMethod(symbol, nameof(List<object>.Insert)),
-                symbol => IsListMethod(symbol, nameof(List<object>.InsertRange)),
+                nameof(List<object>.Add),
+                nameof(List<object>.AddRange),
+                nameof(List<object>.Insert),
+                nameof(List<object>.InsertRange),
+                nameof(Queue<object>.Enqueue),
+                nameof(Stack<object>.Push),
+                nameof(HashSet<object>.Add),
+                nameof(HashSet<object>.UnionWith),
             };
 
-            private static readonly IEnumerable<Func<IMethodSymbol, bool>> IgnoredMethods = new List<Func<IMethodSymbol, bool>>
+            private static readonly HashSet<string> IgnoredMethods = new HashSet<string>
             {
-                symbol => IsListMethod(symbol, nameof(List<object>.AsReadOnly)),
-                symbol => IsListMethod(symbol, nameof(List<object>.ToArray)),
-                symbol => IsObjectMethod(symbol, nameof(List<object>.GetHashCode)),
-                symbol => IsObjectMethod(symbol, nameof(List<object>.Equals)),
-                symbol => IsObjectMethod(symbol, nameof(List<object>.GetType)),
-                symbol => IsObjectMethod(symbol, nameof(List<object>.ToString)),
+                nameof(List<object>.GetHashCode),
+                nameof(List<object>.Equals),
+                nameof(List<object>.GetType),
+                nameof(List<object>.ToString),
             };
         }
 
