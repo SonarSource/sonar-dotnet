@@ -7855,7 +7855,7 @@
     <value>Constant/Issue</value>
   </data>
   <data name="S4144_RemediationCost" xml:space="preserve">
-    <value />
+    <value>15</value>
   </data>
   <data name="S4144_Severity" xml:space="preserve">
     <value>Major</value>

@@ -142,7 +142,7 @@ function Update-AnalyzerMavenArtifacts() {
         $packageId = ($_.Name -Replace $_.Extension, "") -Replace ".$version", ""
         $pomPath = ".\sonaranalyzer-maven-artifacts\${packageId}\pom.xml"
 
-        Write-Host "Upating ${pomPath} artifact file with $_.FullName"
+        Write-Host "Upating ${pomPath} artifact file with $_"
         (Get-Content $pomPath) -Replace "file-${packageId}", $_.FullName | Set-Content $pomPath
     }
 }
