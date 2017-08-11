@@ -1,0 +1,28 @@
+{
+"issues":  [
+{
+"id":  "S4144",
+"message":  "Update this method so that its implementation is not identical to 'Post'.",
+"location":  [
+{
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
+"region":  {
+"startLine":  254,
+"startColumn":  56,
+"endLine":  254,
+"endColumn":  59
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
+"region":  {
+"startLine":  218,
+"startColumn":  56,
+"endLine":  218,
+"endColumn":  60
+}
+}
+]
+}
+]
+}

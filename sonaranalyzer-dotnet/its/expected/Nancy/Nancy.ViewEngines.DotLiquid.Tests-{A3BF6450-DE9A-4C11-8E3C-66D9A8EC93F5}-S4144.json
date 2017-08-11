@@ -1,0 +1,28 @@
+{
+"issues":  [
+{
+"id":  "S4144",
+"message":  "Update this method so that its implementation is not identical to 'Should_locate_template_with_unquoted_name'.",
+"location":  [
+{
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.DotLiquid.Tests\LiquidNancyFileSystemFixture.cs",
+"region":  {
+"startLine":  112,
+"startColumn":  21,
+"endLine":  112,
+"endColumn":  107
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.DotLiquid.Tests\LiquidNancyFileSystemFixture.cs",
+"region":  {
+"startLine":  49,
+"startColumn":  21,
+"endLine":  49,
+"endColumn":  62
+}
+}
+]
+}
+]
+}

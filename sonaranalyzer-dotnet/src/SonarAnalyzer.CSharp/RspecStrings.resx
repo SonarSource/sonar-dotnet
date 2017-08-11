@@ -7842,6 +7842,33 @@
   <data name="S4070_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
   </data>
+  <data name="S4144_Category" xml:space="preserve">
+    <value>Sonar Code Smell</value>
+  </data>
+  <data name="S4144_Description" xml:space="preserve">
+    <value>When two methods have the same implementation, either it was a mistake - something else was intended - or the duplication was intentional, but may be confusing to maintainers. In the latter case, one implementation should invoke the other.</value>
+  </data>
+  <data name="S4144_IsActivatedByDefault" xml:space="preserve">
+    <value>True</value>
+  </data>
+  <data name="S4144_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S4144_RemediationCost" xml:space="preserve">
+    <value>15min</value>
+  </data>
+  <data name="S4144_Severity" xml:space="preserve">
+    <value>Major</value>
+  </data>
+  <data name="S4144_Tags" xml:space="preserve">
+    <value>confusing,duplicate,suspicious</value>
+  </data>
+  <data name="S4144_Title" xml:space="preserve">
+    <value>Methods should not have identical implementations</value>
+  </data>
+  <data name="S4144_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S818_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>

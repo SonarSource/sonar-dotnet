@@ -1,0 +1,28 @@
+{
+"issues":  [
+{
+"id":  "S4144",
+"message":  "Update this method so that its implementation is not identical to 'Command'.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\PersistentActor.cs",
+"region":  {
+"startLine":  368,
+"startColumn":  24,
+"endLine":  368,
+"endColumn":  34
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Persistence\PersistentActor.cs",
+"region":  {
+"startLine":  362,
+"startColumn":  24,
+"endLine":  362,
+"endColumn":  31
+}
+}
+]
+}
+]
+}

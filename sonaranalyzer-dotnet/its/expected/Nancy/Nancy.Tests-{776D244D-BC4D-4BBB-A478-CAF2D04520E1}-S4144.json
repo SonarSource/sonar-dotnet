@@ -1,0 +1,100 @@
+{
+"issues":  [
+{
+"id":  "S4144",
+"message":  "Update this method so that its implementation is not identical to 'Should_support_single_default_value_parameter_when_segment_contains_multiple_optional_parameters'.",
+"location":  [
+{
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Routing\DefaultRoutePatternMatcherFixture.cs",
+"region":  {
+"startLine":  333,
+"startColumn":  21,
+"endLine":  333,
+"endColumn":  110
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Routing\DefaultRoutePatternMatcherFixture.cs",
+"region":  {
+"startLine":  322,
+"startColumn":  21,
+"endLine":  322,
+"endColumn":  117
+}
+}
+]
+},
+{
+"id":  "S4144",
+"message":  "Update this method so that its implementation is not identical to 'Should_throw_argumentexception_when_instantiated_with_null_path'.",
+"location":  [
+{
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Routing\RouteFixture.cs",
+"region":  {
+"startLine":  46,
+"startColumn":  21,
+"endLine":  46,
+"endColumn":  85
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Routing\RouteFixture.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  21,
+"endLine":  35,
+"endColumn":  84
+}
+}
+]
+},
+{
+"id":  "S4144",
+"message":  "Update this method so that its implementation is not identical to 'Should_return_token_ok_if_tokens_match_and_no_expiry_set'.",
+"location":  [
+{
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Security\DefaultCsrfTokenValidatorFixture.cs",
+"region":  {
+"startLine":  125,
+"startColumn":  21,
+"endLine":  125,
+"endColumn":  71
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Security\DefaultCsrfTokenValidatorFixture.cs",
+"region":  {
+"startLine":  53,
+"startColumn":  21,
+"endLine":  53,
+"endColumn":  77
+}
+}
+]
+},
+{
+"id":  "S4144",
+"message":  "Update this method so that its implementation is not identical to 'IsSecure_should_return_false_if_scheme_is_not_https'.",
+"location":  [
+{
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\UrlFixture.cs",
+"region":  {
+"startLine":  360,
+"startColumn":  21,
+"endLine":  360,
+"endColumn":  78
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\UrlFixture.cs",
+"region":  {
+"startLine":  345,
+"startColumn":  21,
+"endLine":  345,
+"endColumn":  72
+}
+}
+]
+}
+]
+}
