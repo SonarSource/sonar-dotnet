@@ -35,7 +35,7 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         internal const string DiagnosticId = "S1607";
         private const string MessageFormat = "Either remove this 'Ignore' attribute or add an explanation about why " +
-            "it is skipped.";
+            "this test is ignored.";
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);

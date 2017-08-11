@@ -7,7 +7,7 @@ namespace Tests.Diagnostics1
     {
         [TestMethod]
         [Ignore]
-//       ^^^^^^ Noncompliant {{Either remove this 'Ignore' attribute or add an explanation about why it is skipped.}}
+//       ^^^^^^ Noncompliant {{Either remove this 'Ignore' attribute or add an explanation about why this test is ignored.}}
         public void Foo1()
         {
         }
