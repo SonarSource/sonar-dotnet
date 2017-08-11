@@ -136,6 +136,23 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
                 programState.Relationships);
         }
 
+        internal virtual ProgramState RemoveConstraint(SymbolicValueConstraint constraint, ProgramState programState)
+        {
+            if (constraint == null)
+            {
+                return programState;
+            }
+
+            var updatedConstraintsMap = RemoveConstraintForSymbolicValue(this, constraint, programState.Constraints);
+
+            return new ProgramState(
+                programState.Values,
+                updatedConstraintsMap,
+                programState.ProgramPointVisitCounts,
+                programState.ExpressionStack,
+                programState.Relationships);
+        }
+
         private ImmutableDictionary<SymbolicValue, SymbolicValueConstraints> AddConstraintForSymbolicValue(SymbolicValue symbolicValue,
             SymbolicValueConstraint constraint, ImmutableDictionary<SymbolicValue, SymbolicValueConstraints> constraintMap)
         {
@@ -144,6 +161,21 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
             var updatedConstraints = constraints != null
                 ? constraints.WithConstraint(constraint)
                 : SymbolicValueConstraints.Create(constraint);
+
+            return constraintMap.SetItem(symbolicValue, updatedConstraints);
+        }
+
+        private ImmutableDictionary<SymbolicValue, SymbolicValueConstraints> RemoveConstraintForSymbolicValue(SymbolicValue symbolicValue,
+            SymbolicValueConstraint constraint, ImmutableDictionary<SymbolicValue, SymbolicValueConstraints> constraintMap)
+        {
+            var constraints = constraintMap.GetValueOrDefault(symbolicValue);
+
+            if (constraints == null)
+            {
+                return constraintMap;
+            }
+
+            var updatedConstraints = constraints.WithoutConstraint(constraint);
 
             return constraintMap.SetItem(symbolicValue, updatedConstraints);
         }

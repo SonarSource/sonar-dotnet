@@ -42,5 +42,10 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
         {
             return programState;
         }
+
+        public virtual ProgramState ObjectCreated(ProgramState programState, SymbolicValue symbolicValue, SyntaxNode instruction)
+        {
+            return programState;
+        }
     }
 }
