@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2017 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -19,30 +19,23 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SonarAnalyzer.Helpers;
-using System.Linq;
+using SonarAnalyzer.Rules.CSharp;
 
-namespace SonarAnalyzer.UnitTest.Helpers
+namespace SonarAnalyzer.UnitTest.Rules
 {
     [TestClass]
-    public class StringUtilsTest
+    public class TestMethodShouldNotBeIgnoredTest
     {
         [TestMethod]
-        public void TestSplitCamelCaseToWords()
+        [TestCategory("Rule")]
+        public void TestMethodShouldNotBeIgnored()
         {
-            AssertSplitEquivalent("thisIsAName", "this", "is", "a", "name");
-            AssertSplitEquivalent("ThisIsIt", "this", "is", "it");
-            AssertSplitEquivalent("bin2hex", "bin", "hex");
-            AssertSplitEquivalent("HTML", "h", "t", "m", "l");
-            AssertSplitEquivalent("PEHeader", "p", "e", "header");
-            AssertSplitEquivalent("__url_foo", "url", "foo");
-            AssertSplitEquivalent("");
-            AssertSplitEquivalent(null);
-        }
-
-        private void AssertSplitEquivalent(string name, params string[] words)
-        {
-            CollectionAssert.AreEquivalent(name.SplitCamelCaseToWords().ToList(), words);
+            Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldNotBeIgnored.cs",
+                new TestMethodShouldNotBeIgnored(),
+                null,
+                Verifier.MicrosoftVisualStudioTestToolsUnitTestingAssembly,
+                Verifier.NUnitFrameworkAssembly,
+                Verifier.XunitAssembly);
         }
     }
 }

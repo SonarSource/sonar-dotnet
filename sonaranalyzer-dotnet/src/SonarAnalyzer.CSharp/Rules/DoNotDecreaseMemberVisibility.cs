@@ -169,7 +169,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 return baseMethod.Name == methodSymbol.Name &&
                     baseMethod.TypeParameters.Length == methodSymbol.TypeParameters.Length &&
-                    CollectionUtils.AreEqual(baseMethod.Parameters, methodSymbol.Parameters, AreParameterTypesEqual);
+                    EnumerableExtensions.Equals(baseMethod.Parameters, methodSymbol.Parameters, AreParameterTypesEqual);
             }
 
             private static bool AreParameterTypesEqual(IParameterSymbol p1, IParameterSymbol p2)
