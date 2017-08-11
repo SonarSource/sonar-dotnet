@@ -4,7 +4,7 @@
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",
-    "constantCost": "15"
+    "constantCost": "15min"
   },
   "tags": [
     "confusing",

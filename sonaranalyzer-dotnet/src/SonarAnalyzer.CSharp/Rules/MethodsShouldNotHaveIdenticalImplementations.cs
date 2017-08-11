@@ -41,10 +41,6 @@ namespace SonarAnalyzer.Rules.CSharp
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        private static readonly ISet<KnownType> ThrowStatementTypesToIgnore = ImmutableHashSet.Create(
-            KnownType.System_NotImplementedException,
-            KnownType.System_NotSupportedException);
-
         protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
@@ -62,7 +58,7 @@ namespace SonarAnalyzer.Rules.CSharp
                             continue;
                         }
 
-                        var duplicates = methods.Where(m => AreDuplicates(method, m, c.SemanticModel)).ToList();
+                        var duplicates = methods.Where(m => AreDuplicates(method, m)).ToList();
                         if (duplicates.Count > 0)
                         {
                             alreadyHandledMethods.Add(method);
@@ -79,8 +75,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 }, SyntaxKind.ClassDeclaration);
         }
 
-        private bool AreDuplicates(MethodDeclarationSyntax firstMethod, MethodDeclarationSyntax secondMethod,
-            SemanticModel model)
+        private bool AreDuplicates(MethodDeclarationSyntax firstMethod, MethodDeclarationSyntax secondMethod)
         {
             if (firstMethod == secondMethod)
             {
