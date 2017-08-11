@@ -59,6 +59,7 @@ namespace SonarAnalyzer.Common
             {
                 throw new ArgumentOutOfRangeException(nameof(index));
             }
+
             return new SecondaryLocation(diagnostic.AdditionalLocations[index],
                 diagnostic.Properties.GetValueOrDefault(index.ToString()));
         }

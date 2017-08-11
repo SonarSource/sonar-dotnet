@@ -48,7 +48,8 @@ namespace SonarAnalyzer.Common.CSharp
 
         protected override bool IsClass(SyntaxNode node) => ClassKinds.Contains(node.Kind());
 
-        protected override bool IsStatement(SyntaxNode node) => node is StatementSyntax && !node.IsKind(SyntaxKind.Block);
+        protected override bool IsStatement(SyntaxNode node) => node is StatementSyntax &&
+            !node.IsKind(SyntaxKind.Block);
 
         protected override bool IsFunction(SyntaxNode node)
         {

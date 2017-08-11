@@ -34,7 +34,8 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
         private readonly SemanticModel semanticModel;
         private readonly ProgramState programState;
 
-        public InvocationVisitor(InvocationExpressionSyntax invocation, SemanticModel semanticModel, ProgramState programState)
+        public InvocationVisitor(InvocationExpressionSyntax invocation, SemanticModel semanticModel,
+            ProgramState programState)
         {
             this.invocation = invocation;
             this.semanticModel = semanticModel;
@@ -257,8 +258,11 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
 
             private bool ArgumentsHaveDifferentNullability()
             {
-                return valueLeft.HasConstraint(ObjectConstraint.Null, programState) && valueRight.HasConstraint(ObjectConstraint.NotNull, programState) ||
-                    valueLeft.HasConstraint(ObjectConstraint.NotNull, programState) && valueRight.HasConstraint(ObjectConstraint.Null, programState);
+                return (valueLeft.HasConstraint(ObjectConstraint.Null, programState) &&
+                    valueRight.HasConstraint(ObjectConstraint.NotNull, programState))
+                    ||
+                    (valueLeft.HasConstraint(ObjectConstraint.NotNull, programState) &&
+                    valueRight.HasConstraint(ObjectConstraint.Null, programState));
             }
 
             private bool IsAnyArgumentNonNullValueType()

@@ -140,7 +140,8 @@ namespace SonarAnalyzer.Helpers
             };
         }
 
-        private static IEnumerable<SyntaxNode> SelectMatchingDeclarations(TypeWithSemanticModel container, ISet<SyntaxKind> kinds)
+        private static IEnumerable<SyntaxNode> SelectMatchingDeclarations(TypeWithSemanticModel container,
+            ISet<SyntaxKind> kinds)
         {
             return container.SyntaxNode.DescendantNodes(IsNodeContainerTypeDeclaration)
                 .Where(node => kinds.Contains(node.Kind()));

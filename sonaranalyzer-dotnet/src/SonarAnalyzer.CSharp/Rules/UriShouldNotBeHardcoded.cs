@@ -53,15 +53,13 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static readonly Regex PathDelimiterRegex = new Regex(@"^(\\|/)$", RegexOptions.Compiled);
 
-        private static readonly ISet<string> checkedVariableNames = new HashSet<string>
-        {
+        private static readonly ISet<string> checkedVariableNames = ImmutableHashSet.Create(
             "file",
             "path",
             "uri",
             "url",
             "urn",
-            "stream"
-        };
+            "stream");
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
@@ -132,19 +130,18 @@ namespace SonarAnalyzer.Rules.CSharp
                     ? model.GetSymbolInfo(constructorOrMethod).Symbol as IMethodSymbol
                     : null;
 
-                return (methodSymbol != null && argumentIndex.Value < methodSymbol.Parameters.Length)
-                     ? methodSymbol.Parameters[argumentIndex.Value].Name.SplitCamelCaseToWords()
-                         .Any(name => checkedVariableNames.Contains(name))
-                     : false;
+                return methodSymbol != null &&
+                    argumentIndex.Value < methodSymbol.Parameters.Length &&
+                    methodSymbol.Parameters[argumentIndex.Value].Name.SplitCamelCaseToWords()
+                         .Any(name => checkedVariableNames.Contains(name));
             }
 
             var variableDeclarator = expression.FirstAncestorOrSelf<VariableDeclaratorSyntax>();
 
-            return variableDeclarator != null
-                ? variableDeclarator.Identifier.ValueText
+            return variableDeclarator != null &&
+                variableDeclarator.Identifier.ValueText
                     .SplitCamelCaseToWords()
-                    .Any(name => checkedVariableNames.Contains(name))
-                : false;
+                    .Any(name => checkedVariableNames.Contains(name));
         }
 
         private static bool IsPathDelimiter(ExpressionSyntax expression)

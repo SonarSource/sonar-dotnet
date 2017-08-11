@@ -28,12 +28,14 @@ namespace SonarAnalyzer.Helpers
 {
     public static class DiagnosticDescriptorBuilder
     {
-        public static DiagnosticDescriptor GetDescriptor(string diagnosticId, string messageFormat, ResourceManager resourceManager)
+        public static DiagnosticDescriptor GetDescriptor(string diagnosticId, string messageFormat,
+            ResourceManager resourceManager)
         {
             return GetDescriptor(diagnosticId, messageFormat, IdeVisibility.Visible, resourceManager);
         }
 
-        public static DiagnosticDescriptor GetDescriptor(string diagnosticId, string messageFormat, IdeVisibility ideVisibility, ResourceManager resourceManager)
+        public static DiagnosticDescriptor GetDescriptor(string diagnosticId, string messageFormat,
+            IdeVisibility ideVisibility, ResourceManager resourceManager)
         {
             return new DiagnosticDescriptor(
                 diagnosticId,
@@ -48,7 +50,8 @@ namespace SonarAnalyzer.Helpers
         }
 
         /// <summary>
-        /// Creates a new DiagnosticDescriptor instance copying all the properties from the original, overriding the Severity.
+        /// Creates a new DiagnosticDescriptor instance copying all the properties from the original, overriding the
+        /// Severity.
         /// </summary>
         /// <param name="descriptor">DiagnosticDescriptor instance to copy.</param>
         /// <param name="severity">The new value of the Severity property.</param>
@@ -68,10 +71,13 @@ namespace SonarAnalyzer.Helpers
         }
 
         /// <summary>
-        /// Creates a new DiagnosticDescriptor instance copying all the properties from the original, overriding the IsEnabledByDefault.
+        /// Creates a new DiagnosticDescriptor instance copying all the properties from the original, overriding the
+        /// IsEnabledByDefault.
         /// </summary>
         /// <param name="descriptor">DiagnosticDescriptor instance to copy.</param>
-        /// <returns>A new DiagnosticDescriptor instance with overridden value of the IsEnabledByDefault property.</returns>
+        /// <returns>
+        /// A new DiagnosticDescriptor instance with overridden value of the IsEnabledByDefault property.
+        /// </returns>
         public static DiagnosticDescriptor DisabledByDefault(this DiagnosticDescriptor descriptor)
         {
             return new DiagnosticDescriptor(

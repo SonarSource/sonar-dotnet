@@ -35,7 +35,8 @@ namespace SonarAnalyzer.Helpers.CSharp
         {
         }
 
-        private static readonly Lazy<GeneratedCodeRecognizer> lazy = new Lazy<GeneratedCodeRecognizer>(() => new GeneratedCodeRecognizer());
+        private static readonly Lazy<GeneratedCodeRecognizer> lazy =
+            new Lazy<GeneratedCodeRecognizer>(() => new GeneratedCodeRecognizer());
         public static GeneratedCodeRecognizer Instance => lazy.Value;
 
         #endregion
@@ -54,7 +55,8 @@ namespace SonarAnalyzer.Helpers.CSharp
                 .Any(
                     t =>
                         t.IsKind(SyntaxKind.RegionDirectiveTrivia) &&
-                        CultureInfo.InvariantCulture.CompareInfo.IndexOf(t.ToString(), "generated", CompareOptions.IgnoreCase) >= 0);
+                        CultureInfo.InvariantCulture.CompareInfo.IndexOf(t.ToString(), "generated",
+                        CompareOptions.IgnoreCase) >= 0);
         }
 
         protected override bool IsTriviaComment(SyntaxTrivia trivia) =>
