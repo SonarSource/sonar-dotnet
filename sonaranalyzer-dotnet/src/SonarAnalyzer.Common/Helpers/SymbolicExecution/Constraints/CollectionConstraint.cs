@@ -1,9 +1,9 @@
 ﻿namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
 {
-    public class CollectionConstraint : SymbolicValueConstraint
+    public sealed class CollectionCapacityConstraint : SymbolicValueConstraint
     {
-        public static readonly CollectionConstraint Empty = new CollectionConstraint();
-        public static readonly CollectionConstraint NotEmpty = new CollectionConstraint();
+        public static readonly CollectionCapacityConstraint Empty = new CollectionCapacityConstraint();
+        public static readonly CollectionCapacityConstraint NotEmpty = new CollectionCapacityConstraint();
 
         public override SymbolicValueConstraint OppositeForLogicalNot =>
             this == Empty ? NotEmpty : Empty;

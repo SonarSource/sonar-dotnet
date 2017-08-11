@@ -38,14 +38,14 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class EmptyCollectionsShouldNotBeEnumerated : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S4158";
-        private const string MessageFormat = "Remove this call the collection can only be empty here.";
+        private const string MessageFormat = "Remove this call, the collection is known to be empty here.";
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        private static readonly ISet<KnownType> CollectionTypes = new HashSet<KnownType>
+        private static readonly ISet<KnownType> TrackedCollectionTypes = new HashSet<KnownType>
         {
             KnownType.System_Collections_Generic_Dictionary_TKey_TValue,
             KnownType.System_Collections_Generic_List_T,
@@ -96,13 +96,11 @@ namespace SonarAnalyzer.Rules.CSharp
             var check = new EmptyCollectionAccessedCheck(explodedGraph);
             explodedGraph.AddExplodedGraphCheck(check);
 
-            var empty = new HashSet<SyntaxNode>();
-            var full = new HashSet<SyntaxNode>();
+            var emptyCollections = new HashSet<SyntaxNode>();
+            var nonEmptyCollections = new HashSet<SyntaxNode>();
 
             EventHandler<CollectionAccessedEventArgs> collectionAccessedHandler = (sender, args) =>
-                {
-                    (args.IsEmpty ? empty : full).Add(args.Node);
-                };
+                (args.IsEmpty ? emptyCollections : nonEmptyCollections).Add(args.Node);
 
             check.CollectionAccessed += collectionAccessedHandler;
             try
@@ -114,12 +112,11 @@ namespace SonarAnalyzer.Rules.CSharp
                 check.CollectionAccessed -= collectionAccessedHandler;
             }
 
-            foreach (var node in empty.Except(full))
+            foreach (var node in emptyCollections.Except(nonEmptyCollections))
             {
                 context.ReportDiagnostic(Diagnostic.Create(rule, node.GetLocation()));
             }
         }
-
 
         internal sealed class EmptyCollectionAccessedCheck : ExplodedGraphCheck
         {
@@ -150,141 +147,180 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
             }
 
-            private ProgramState ProcessElementAccess(ProgramState programState, ElementAccessExpressionSyntax instruction)
+            private ProgramState ProcessInvocation(ProgramState programState, InvocationExpressionSyntax invocation)
             {
-                var newProgramState = programState;
+                var newProgramState = RemoveCollectionConstraintsFromArguments(invocation, programState);
 
-                var collectionSymbol = semanticModel.GetSymbolInfo(instruction.Expression).Symbol;
-                if (collectionSymbol == null)
+                var memberAccess = invocation.Expression as MemberAccessExpressionSyntax;
+                if (memberAccess == null)
                 {
                     return newProgramState;
                 }
 
+                var collectionSymbol = semanticModel.GetSymbolInfo(memberAccess.Expression).Symbol;
                 var collectionType = GetCollectionType(collectionSymbol);
-                if (collectionType?.ConstructedFrom != null &&
-                    collectionType.ConstructedFrom.IsAny(CollectionTypes))
+
+                // When invoking a collection method ...
+                if (collectionType.IsAny(TrackedCollectionTypes))
                 {
-                    if (collectionType.ConstructedFrom.Is(KnownType.System_Collections_Generic_Dictionary_TKey_TValue) &&
-                        IsDictionarySetItem(instruction))
+                    var methodSymbol = semanticModel.GetSymbolInfo(invocation).Symbol as IMethodSymbol;
+                    if (IsIgnoredMethod(methodSymbol))
                     {
-                        newProgramState = collectionSymbol.SetConstraint(CollectionConstraint.NotEmpty, newProgramState);
+                        // ... ignore some methods that are irrelevant
+                        return newProgramState;
+                    }
+
+                    if (AddMethods.Contains(methodSymbol.Name))
+                    {
+                        // ... set constraint if we are adding items
+                        newProgramState = collectionSymbol.SetConstraint(CollectionCapacityConstraint.NotEmpty,
+                            newProgramState);
                     }
                     else
                     {
-                        OnCollectionAccessed(instruction, collectionSymbol.HasConstraint(CollectionConstraint.Empty, programState));
+                        // ... notify we are accessing the collection
+                        OnCollectionAccessed(invocation,
+                            collectionSymbol.HasConstraint(CollectionCapacityConstraint.Empty, newProgramState));
                     }
                 }
 
                 return newProgramState;
             }
 
-            private ProgramState ProcessInvocation(ProgramState programState, InvocationExpressionSyntax instruction)
+            private ProgramState ProcessElementAccess(ProgramState programState, ElementAccessExpressionSyntax elementAccess)
             {
-                var newProgramState = programState;
+                var collectionSymbol = semanticModel.GetSymbolInfo(elementAccess.Expression).Symbol;
+                var collectionType = GetCollectionType(collectionSymbol);
 
-                var memberAccess = instruction.Expression as MemberAccessExpressionSyntax;
-                if (memberAccess != null)
+                // When accessing elements from a collection ...
+                if (collectionType?.ConstructedFrom != null &&
+                    collectionType.ConstructedFrom.IsAny(TrackedCollectionTypes))
                 {
-                    var collectionSymbol = semanticModel.GetSymbolInfo(memberAccess.Expression).Symbol;
-                    var collectionType = GetCollectionType(collectionSymbol);
-
-                    if (collectionType.IsAny(CollectionTypes))
+                    if (collectionType.ConstructedFrom.Is(KnownType.System_Collections_Generic_Dictionary_TKey_TValue) &&
+                        IsDictionarySetItem(elementAccess))
                     {
-                        var methodSymbol = semanticModel.GetSymbolInfo(instruction).Symbol as IMethodSymbol;
-                        if (methodSymbol == null ||
-                            methodSymbol.IsExtensionMethod ||
-                            IgnoredMethods.Contains(methodSymbol.Name))
-                        {
-                            return newProgramState;
-                        }
-
-                        if (AddMethods.Contains(methodSymbol.Name))
-                        {
-                            newProgramState = collectionSymbol.SetConstraint(CollectionConstraint.NotEmpty, newProgramState);
-                        }
-                        else
-                        {
-                            OnCollectionAccessed(instruction, collectionSymbol.HasConstraint(CollectionConstraint.Empty, programState));
-                        }
+                        // ... set constraint if we are calling the Dictionary set accessor
+                        return collectionSymbol.SetConstraint(CollectionCapacityConstraint.NotEmpty, programState);
+                    }
+                    else
+                    {
+                        // ... notify we are accessing the collection
+                        OnCollectionAccessed(elementAccess,
+                            collectionSymbol.HasConstraint(CollectionCapacityConstraint.Empty, programState));
                     }
                 }
 
-                newProgramState = RemoveCollectionConstraintsFromArguments(instruction, newProgramState);
-
-                return newProgramState;
+                return programState;
             }
 
-            private static ProgramState RemoveCollectionConstraintsFromArguments(InvocationExpressionSyntax instruction, ProgramState newProgramState)
+            public override ProgramState ObjectCreated(ProgramState programState, SymbolicValue symbolicValue,
+                SyntaxNode instruction)
             {
-                var values = instruction.ArgumentList.Arguments.Select((node, index) =>
+                CollectionCapacityConstraint constraint = null;
+
+                if (instruction.IsKind(SyntaxKind.ObjectCreationExpression))
+                {
+                    // When a collection is being created ...
+                    var objectCreationSyntax = (ObjectCreationExpressionSyntax)instruction;
+
+                    var constructor = semanticModel.GetSymbolInfo(objectCreationSyntax).Symbol as IMethodSymbol;
+                    if (IsCollectionConstructor(constructor))
+                    {
+                        // ... try to devise what constraint could be applied by the constructor or the initializer
+                        constraint =
+                            GetInitializerConstraint(objectCreationSyntax.Initializer) ??
+                            GetCollectionConstraint(constructor);
+                    }
+                }
+                else if (instruction.IsKind(SyntaxKind.ArrayCreationExpression))
+                {
+                    // When an array is being created ...
+                    var arrayCreationSyntax = (ArrayCreationExpressionSyntax)instruction;
+
+                    // ... try to devise what constraint could be applied by the array size or the initializer
+                    constraint =
+                        GetInitializerConstraint(arrayCreationSyntax.Initializer) ??
+                        GetArrayConstraint(arrayCreationSyntax);
+                }
+
+                return constraint != null
+                    ? symbolicValue.SetConstraint(constraint, programState)
+                    : programState;
+            }
+
+            private static bool IsIgnoredMethod(IMethodSymbol methodSymbol)
+            {
+                return methodSymbol == null
+                    || methodSymbol.IsExtensionMethod
+                    || IgnoredMethods.Contains(methodSymbol.Name);
+            }
+
+            private CollectionCapacityConstraint GetArrayConstraint(ArrayCreationExpressionSyntax arrayCreation)
+            {
+                // Only one-dimensional arrays can be empty, others are indeterminate, because this code becomes ugly
+                if (arrayCreation.Type.RankSpecifiers.Count != 1 ||
+                    arrayCreation.Type.RankSpecifiers[0].Sizes.Count != 1)
+                {
+                    return null;
+                }
+
+                var size = arrayCreation.Type.RankSpecifiers[0].Sizes[0] as LiteralExpressionSyntax;
+
+                return size?.Token.ValueText == "0"
+                    ? CollectionCapacityConstraint.Empty
+                    : null;
+            }
+
+            private CollectionCapacityConstraint GetCollectionConstraint(IMethodSymbol constructor)
+            {
+                // Default constructor, or constructor that specifies capacity means empty collection,
+                // otherwise do not apply constraint because we cannot be sure what has been passed
+                // as arguments.
+                var defaultCtorOrCapacityCtor = !constructor.Parameters.Any()
+                    || constructor.Parameters.Count(p => p.IsType(KnownType.System_Int32)) == 1;
+
+                return defaultCtorOrCapacityCtor ? CollectionCapacityConstraint.Empty : null;
+            }
+
+            private CollectionCapacityConstraint GetInitializerConstraint(InitializerExpressionSyntax initializer)
+            {
+                if (initializer == null)
+                {
+                    return null;
+                }
+
+                return initializer.Expressions.Count == 0
+                    ? CollectionCapacityConstraint.Empty // No items added through the initializer
+                    : CollectionCapacityConstraint.NotEmpty;
+            }
+
+            private static ProgramState RemoveCollectionConstraintsFromArguments(InvocationExpressionSyntax invocation,
+                ProgramState programState)
+            {
+                // Remove the collection constraints from all arguments of the invocation expression
+
+                var values = invocation.ArgumentList.Arguments.Select((node, index) =>
                 {
                     SymbolicValue value;
-                    newProgramState.ExpressionStack.Pop(out value);
+                    programState.ExpressionStack.Pop(out value);
                     return value;
-                });
+                }).ToList();
+
                 foreach (var value in values)
                 {
-                    newProgramState = value.RemoveConstraint(CollectionConstraint.Empty, newProgramState);
+                    programState = value.RemoveConstraint(CollectionCapacityConstraint.Empty, programState);
                 }
 
-                return newProgramState;
+                return programState;
             }
 
-            public override ProgramState ObjectCreated(ProgramState programState, SymbolicValue symbolicValue, SyntaxNode instruction)
-            {
-                var newProgramState = programState;
-                switch (instruction.Kind())
-                {
-                    case SyntaxKind.ObjectCreationExpression:
-                        var objectCreation = (ObjectCreationExpressionSyntax)instruction;
-                        var constructorSymbol = semanticModel.GetSymbolInfo(objectCreation).Symbol as IMethodSymbol;
-
-                        if (IsCollectionConstructor(constructorSymbol) &&
-                            (!constructorSymbol.Parameters.Any()
-                            || constructorSymbol.Parameters.Count(p => p.IsType(KnownType.System_Int32)) == 1))
-                        {
-                            newProgramState = symbolicValue.SetConstraint(CollectionConstraint.Empty, newProgramState);
-                        }
-                        if (objectCreation.Initializer != null)
-                        {
-                            var constraint = objectCreation.Initializer.Expressions.Count == 0
-                                ? CollectionConstraint.Empty
-                                : CollectionConstraint.NotEmpty;
-                            newProgramState = symbolicValue.SetConstraint(constraint, newProgramState);
-                        }
-                        break;
-                    case SyntaxKind.ArrayCreationExpression:
-                        var arrayCreation = (ArrayCreationExpressionSyntax)instruction;
-                        if (arrayCreation.Type.RankSpecifiers.Count == 1 &&
-                            arrayCreation.Type.RankSpecifiers[0].Sizes.Count == 1)
-                        {
-                            var size = arrayCreation.Type.RankSpecifiers[0].Sizes[0] as LiteralExpressionSyntax;
-                            if (size?.Token.ValueText == "0")
-                            {
-                                newProgramState = symbolicValue.SetConstraint(CollectionConstraint.Empty, newProgramState);
-                            }
-                        }
-                        if (arrayCreation.Initializer != null)
-                        {
-                            var constraint = arrayCreation.Initializer.Expressions.Count == 0
-                                ? CollectionConstraint.Empty
-                                : CollectionConstraint.NotEmpty;
-                            newProgramState = symbolicValue.SetConstraint(constraint, newProgramState);
-                        }
-                        break;
-                    default:
-                        break;
-                }
-                return newProgramState;
-            }
-
-            private static bool IsDictionarySetItem(ElementAccessExpressionSyntax instruction) =>
-                (instruction.GetSelfOrTopParenthesizedExpression().Parent as AssignmentExpressionSyntax)
-                    ?.Left.RemoveParentheses() == instruction;
+            private static bool IsDictionarySetItem(ElementAccessExpressionSyntax elementAccess) =>
+                (elementAccess.GetSelfOrTopParenthesizedExpression().Parent as AssignmentExpressionSyntax)
+                    ?.Left.RemoveParentheses() == elementAccess;
 
             private static bool IsCollectionConstructor(IMethodSymbol constructorSymbol) =>
-                constructorSymbol?.ContainingType?.ConstructedFrom != null && 
-                constructorSymbol.ContainingType.ConstructedFrom.IsAny(CollectionTypes);
+                constructorSymbol?.ContainingType?.ConstructedFrom != null &&
+                constructorSymbol.ContainingType.ConstructedFrom.IsAny(TrackedCollectionTypes);
 
             private static INamedTypeSymbol GetCollectionType(ISymbol collectionSymbol) =>
                 (collectionSymbol.GetSymbolType() as INamedTypeSymbol)?.ConstructedFrom ?? // collections

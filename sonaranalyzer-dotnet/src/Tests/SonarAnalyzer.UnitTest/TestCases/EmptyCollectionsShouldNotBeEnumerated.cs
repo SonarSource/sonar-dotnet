@@ -18,7 +18,7 @@ namespace Tests.Diagnostics
         public void DefaultConstructor_Applies_Empty()
         {
             var list = new List<int>();
-            list.Clear(); // Noncompliant {{Remove this call the collection can only be empty here.}}
+            list.Clear(); // Noncompliant {{Remove this call, the collection is known to be empty here.}}
 //          ^^^^^^^^^^^^
         }
 
