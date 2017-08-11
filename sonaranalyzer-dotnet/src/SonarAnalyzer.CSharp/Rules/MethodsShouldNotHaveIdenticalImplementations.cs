@@ -97,30 +97,5 @@ namespace SonarAnalyzer.Rules.CSharp
 
             return false;
         }
-
-        private bool IsIgnoredThrowStatement(StatementSyntax statement, SemanticModel model)
-        {
-            var throwStatement = statement as ThrowStatementSyntax;
-            if (throwStatement == null ||
-                !throwStatement.Expression.IsKind(SyntaxKind.ObjectCreationExpression))
-            {
-                return false;
-            }
-
-            var symbol = model.GetSymbolInfo(throwStatement.Expression).Symbol?.ContainingType;
-            return symbol.IsAny(ThrowStatementTypesToIgnore);
-        }
-
-        private class MethodDuplicates
-        {
-            public MethodDuplicates(MethodDeclarationSyntax original, ICollection<MethodDeclarationSyntax> duplicates)
-            {
-                Original = original;
-                Duplicates = duplicates;
-            }
-
-            public MethodDeclarationSyntax Original { get; }
-            public ICollection<MethodDeclarationSyntax> Duplicates { get; }
-        }
     }
 }
