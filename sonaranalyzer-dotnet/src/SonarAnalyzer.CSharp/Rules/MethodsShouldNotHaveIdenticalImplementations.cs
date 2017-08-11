@@ -58,18 +58,19 @@ namespace SonarAnalyzer.Rules.CSharp
                             continue;
                         }
 
-                        var duplicates = methods.Where(m => AreDuplicates(method, m)).ToList();
-                        if (duplicates.Count > 0)
-                        {
-                            alreadyHandledMethods.Add(method);
-                            alreadyHandledMethods.UnionWith(duplicates);
+                        alreadyHandledMethods.Add(method);
 
-                            foreach (var duplicate in duplicates)
-                            {
-                                c.ReportDiagnostic(Diagnostic.Create(rule, duplicate.Identifier.GetLocation(),
-                                    additionalLocations: new[] { method.Identifier.GetLocation() },
-                                    messageArgs: method.Identifier.ValueText));
-                            }
+                        var duplicates = methods.Except(alreadyHandledMethods)
+                            .Where(m => AreDuplicates(method, m))
+                            .ToList();
+
+                        alreadyHandledMethods.UnionWith(duplicates);
+
+                        foreach (var duplicate in duplicates)
+                        {
+                            c.ReportDiagnostic(Diagnostic.Create(rule, duplicate.Identifier.GetLocation(),
+                                additionalLocations: new[] { method.Identifier.GetLocation() },
+                                messageArgs: method.Identifier.ValueText));
                         }
                     }
                 }, SyntaxKind.ClassDeclaration);
@@ -77,20 +78,11 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private bool AreDuplicates(MethodDeclarationSyntax firstMethod, MethodDeclarationSyntax secondMethod)
         {
-            if (firstMethod == secondMethod)
-            {
-                return false;
-            }
-
-            if (firstMethod.Body != null &&
-                secondMethod.Body != null)
-            {
-                return firstMethod.Body.Statements.Count >= 2 &&
-                    firstMethod.Identifier.ValueText != secondMethod.Identifier.ValueText &&
-                    firstMethod.Body.IsEquivalentTo(secondMethod.Body, false);
-            }
-
-            return false;
+            return firstMethod.Body != null &&
+                secondMethod.Body != null &&
+                firstMethod.Body.Statements.Count >= 2 &&
+                firstMethod.Identifier.ValueText != secondMethod.Identifier.ValueText &&
+                firstMethod.Body.IsEquivalentTo(secondMethod.Body, false);
         }
     }
 }
