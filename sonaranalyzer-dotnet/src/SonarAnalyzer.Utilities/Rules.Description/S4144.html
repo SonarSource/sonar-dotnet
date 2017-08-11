@@ -2,29 +2,36 @@
 be confusing to maintainers. In the latter case, one implementation should invoke the other.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-private final static String CODE = "bounteous";
+private const string CODE = "bounteous";
+private int callCount = 0;
 
-public String getCode() {
+public string GetCode()
+{
+  callCount++;
   return CODE;
 }
 
-public String getName() {  // Noncompliant
+public string GetName()  // Noncompliant
+{
+  callCount++;
   return CODE;
 }
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-private final static String CODE = "bounteous";
+private const string CODE = "bounteous";
 
-public String getCode() {
+public string GetCode()
+{
+  callCount++;
   return CODE;
 }
 
-public String getName() {
-  return getCode();
+public string GetName()
+{
+  return GetCode();
 }
 </pre>
 <h2>Exceptions</h2>
-<p>Empty methods that only <code>return void;</code> and methods that simply throw an <code>UnsupportedOperationException()</code> or
-<code>NotImplementedException</code> are ignored.</p>
+<p>Empty methods, methods with only one line of code and methods with the same name (overload) are ignored.</p>
 

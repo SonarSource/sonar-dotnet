@@ -1,0 +1,52 @@
+{
+"issues":  [
+{
+"id":  "S4144",
+"message":  "Update this method so that its implementation is not identical to 'GetChildByName'.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.cs",
+"region":  {
+"startLine":  134,
+"startColumn":  33,
+"endLine":  134,
+"endColumn":  38
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.cs",
+"region":  {
+"startLine":  128,
+"startColumn":  34,
+"endLine":  128,
+"endColumn":  48
+}
+}
+]
+},
+{
+"id":  "S4144",
+"message":  "Update this method so that its implementation is not identical to 'Become'.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka\ActorState.cs",
+"region":  {
+"startLine":  241,
+"startColumn":  28,
+"endLine":  241,
+"endColumn":  41
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka\ActorState.cs",
+"region":  {
+"startLine":  231,
+"startColumn":  28,
+"endLine":  231,
+"endColumn":  34
+}
+}
+]
+}
+]
+}

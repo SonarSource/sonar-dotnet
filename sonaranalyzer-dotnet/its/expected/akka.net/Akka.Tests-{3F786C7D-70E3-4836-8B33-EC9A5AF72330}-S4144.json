@@ -1,0 +1,52 @@
+{
+"issues":  [
+{
+"id":  "S4144",
+"message":  "Update this method so that its implementation is not identical to 'A_constructed_OneForOne_supervisor_strategy_with_nullable_retries_and_a_decider_has_the_expected_properties'.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\SupervisorStrategySpecs.cs",
+"region":  {
+"startLine":  90,
+"startColumn":  21,
+"endLine":  90,
+"endColumn":  128
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\SupervisorStrategySpecs.cs",
+"region":  {
+"startLine":  54,
+"startColumn":  21,
+"endLine":  54,
+"endColumn":  128
+}
+}
+]
+},
+{
+"id":  "S4144",
+"message":  "Update this method so that its implementation is not identical to 'A_constructed_OneForOne_supervisor_strategy_with_nullable_timeouts_and_a_decider_has_the_expected_properties'.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\SupervisorStrategySpecs.cs",
+"region":  {
+"startLine":  99,
+"startColumn":  21,
+"endLine":  99,
+"endColumn":  129
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\SupervisorStrategySpecs.cs",
+"region":  {
+"startLine":  63,
+"startColumn":  21,
+"endLine":  63,
+"endColumn":  129
+}
+}
+]
+}
+]
+}

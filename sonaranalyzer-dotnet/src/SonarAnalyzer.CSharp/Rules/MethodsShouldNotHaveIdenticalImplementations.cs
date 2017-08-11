@@ -87,25 +87,12 @@ namespace SonarAnalyzer.Rules.CSharp
                 return false;
             }
 
-            if (firstMethod.ExpressionBody != null &&
-                secondMethod.ExpressionBody != null)
-            {
-                return firstMethod.ExpressionBody.IsEquivalentTo(secondMethod.ExpressionBody);
-            }
-
             if (firstMethod.Body != null &&
                 secondMethod.Body != null)
             {
-                switch (firstMethod.Body.Statements.Count)
-                {
-                    case 0:
-                        return false;
-                    case 1:
-                        return !IsIgnoredThrowStatement(firstMethod.Body.Statements[0], model) &&
-                            firstMethod.Body.WithoutTrivia().IsEquivalentTo(secondMethod.Body.WithoutTrivia());
-                    default:
-                        return firstMethod.Body.WithoutTrivia().IsEquivalentTo(secondMethod.Body.WithoutTrivia());
-                }
+                return firstMethod.Body.Statements.Count >= 2 &&
+                    firstMethod.Identifier.ValueText != secondMethod.Identifier.ValueText &&
+                    firstMethod.Body.IsEquivalentTo(secondMethod.Body, false);
             }
 
             return false;

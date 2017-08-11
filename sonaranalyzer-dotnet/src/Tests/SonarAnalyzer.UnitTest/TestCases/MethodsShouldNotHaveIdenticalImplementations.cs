@@ -7,6 +7,7 @@ namespace Tests.Diagnostics
         void Foo1()
 //           ^^^^ Secondary
 //           ^^^^ Secondary@-1
+//           ^^^^ Secondary@-2
         {
             string s = "test";
             Console.WriteLine("Result: {0}", s);
@@ -25,7 +26,13 @@ namespace Tests.Diagnostics
             Console.WriteLine("Result: {0}", s);
         }
 
-        void Foo4()
+        void Foo4() // Noncompliant {{Update this method so that its implementation is not identical to 'Foo1'.}}
+        {
+            string s = "test"; // Comment are excluded from comparison
+            Console.WriteLine("Result: {0}", s);
+        }
+
+        void Foo5()
         {
             string s = "test";
             Console.WriteLine("Result: {0}", s);
@@ -58,22 +65,22 @@ namespace Tests.Diagnostics
 
 
 
-        int Baz1(int a) => a; // Secondary
+        int Baz1(int a) => a;
 
-        int Baz2(int a) => a; // Noncompliant
+        int Baz2(int a) => a; // Compliant we ignore expression body
 
 
 
-        string Qux1(int val) // Secondary
+        string Qux1(int val)
         {
             return val.ToString();
         }
 
-        string Qux2(int val) // Noncompliant
+        string Qux2(int val)
         {
-            return val.ToString();
+            return val.ToString(); // Compliant because we ignore one liner
         }
 
-        string Qux1(int val) => val.ToString(); // Compliant because we don't mix Body and ExpressionBody
+        string Qux3(int val) => val.ToString(); // Compliant we ignore expression body
     }
 }

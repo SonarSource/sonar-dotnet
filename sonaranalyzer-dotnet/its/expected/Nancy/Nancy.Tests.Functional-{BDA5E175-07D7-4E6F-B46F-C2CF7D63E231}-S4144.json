@@ -1,0 +1,28 @@
+{
+"issues":  [
+{
+"id":  "S4144",
+"message":  "Update this method so that its implementation is not identical to 'When_get_sync_then_should_throw'.",
+"location":  [
+{
+"uri":  "sources\Nancy\src\Nancy.Tests.Functional\Tests\AsyncExceptionTests.cs",
+"region":  {
+"startLine":  34,
+"startColumn":  27,
+"endLine":  34,
+"endColumn":  59
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy.Tests.Functional\Tests\AsyncExceptionTests.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  27,
+"endLine":  26,
+"endColumn":  58
+}
+}
+]
+}
+]
+}
