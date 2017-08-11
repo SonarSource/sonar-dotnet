@@ -335,6 +335,8 @@ namespace SonarAnalyzer.Helpers
             new KnownType("Microsoft.VisualStudio.TestTools.UnitTesting.TestClassAttribute");
         public static readonly KnownType Microsoft_VisualStudio_TestTools_UnitTesting_ExpectedExceptionAttribute =
             new KnownType("Microsoft.VisualStudio.TestTools.UnitTesting.ExpectedExceptionAttribute");
+        public static readonly KnownType Microsoft_VisualStudio_TestTools_UnitTesting_Assert =
+            new KnownType("Microsoft.VisualStudio.TestTools.UnitTesting.Assert");
         public static readonly KnownType Xunit_FactAttribute = new KnownType("Xunit.FactAttribute");
         public static readonly KnownType NUnit_Framework_TestAttribute = new KnownType("NUnit.Framework.TestAttribute");
         public static readonly KnownType NUnit_Framework_TestCaseAttribute = new KnownType("NUnit.Framework.TestCaseAttribute");

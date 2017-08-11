@@ -24,18 +24,16 @@ using SonarAnalyzer.Rules.CSharp;
 namespace SonarAnalyzer.UnitTest.Rules
 {
     [TestClass]
-    public class TestMethodShouldHaveCorrectSignatureTest
+    public class AssertionArgsShouldBePassedInCorrectOrderTest
     {
-
         [TestMethod]
         [TestCategory("Rule")]
-        public void TestMethodShouldHaveCorrectSignature()
+        public void AssertionArgsShouldBePassedInCorrectOrder()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldHaveCorrectSignature.cs",
-                new TestMethodShouldHaveCorrectSignature(), null,
-                Verifier.MicrosoftVisualStudioTestToolsUnitTestingAssembly,
-                Verifier.XunitAssembly,
-                Verifier.NUnitFrameworkAssembly);
+            Verifier.VerifyAnalyzer(@"TestCases\AssertionArgsShouldBePassedInCorrectOrder.cs",
+                new AssertionArgsShouldBePassedInCorrectOrder(),
+                null,
+                Verifier.MicrosoftVisualStudioTestToolsUnitTestingAssembly);
         }
     }
 }
