@@ -50,12 +50,22 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
 
         internal IEnumerable<SymbolicValueConstraint> GetConstraints() => constraints.Values;
 
-        internal virtual SymbolicValueConstraints WithConstraint(SymbolicValueConstraint constraint)
+        internal SymbolicValueConstraints WithConstraint(SymbolicValueConstraint constraint)
         {
             var constraintsCopy = new Dictionary<Type, SymbolicValueConstraint>(constraints);
             SetConstraint(constraint, constraintsCopy);
 
             return new SymbolicValueConstraints(constraintsCopy);
+        }
+
+        internal SymbolicValueConstraints WithoutConstraint(SymbolicValueConstraint constraint)
+        {
+            var constraintsCopy = new Dictionary<Type, SymbolicValueConstraint>(constraints);
+            if (constraintsCopy.Remove(constraint.GetType()))
+            {
+                return new SymbolicValueConstraints(constraintsCopy);
+            }
+            return this;
         }
 
         private static void SetConstraint(SymbolicValueConstraint constraint,
