@@ -155,5 +155,17 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.CSharp
 
             return symbolicValue.SetConstraint(constraint, programState);
         }
+
+        public static ProgramState RemoveConstraint(this ISymbol symbol, SymbolicValueConstraint constraint, ProgramState programState)
+        {
+            var symbolicValue = programState.GetSymbolValue(symbol);
+            if (symbolicValue == null ||
+                !symbolicValue.HasConstraint(constraint, programState))
+            {
+                return programState;
+            }
+
+            return symbolicValue.RemoveConstraint(constraint, programState);
+        }
     }
 }
