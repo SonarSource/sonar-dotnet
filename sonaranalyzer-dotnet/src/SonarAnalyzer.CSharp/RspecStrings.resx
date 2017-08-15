@@ -3588,6 +3588,33 @@
   <data name="S2696_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
   </data>
+  <data name="S2699_Category" xml:space="preserve">
+    <value>Sonar Code Smell</value>
+  </data>
+  <data name="S2699_Description" xml:space="preserve">
+    <value>A test case without assertions ensures only that no exceptions are thrown. Beyond basic runnability, it ensures nothing about the behavior of the code under test.</value>
+  </data>
+  <data name="S2699_IsActivatedByDefault" xml:space="preserve">
+    <value>False</value>
+  </data>
+  <data name="S2699_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S2699_RemediationCost" xml:space="preserve">
+    <value>10min</value>
+  </data>
+  <data name="S2699_Severity" xml:space="preserve">
+    <value>Blocker</value>
+  </data>
+  <data name="S2699_Tags" xml:space="preserve">
+    <value>tests</value>
+  </data>
+  <data name="S2699_Title" xml:space="preserve">
+    <value>Tests should include assertions</value>
+  </data>
+  <data name="S2699_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S2737_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>

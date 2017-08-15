@@ -63,8 +63,14 @@ namespace SonarAnalyzer.UnitTest
             MetadataReference.CreateFromFile(typeof(TestMethodAttribute).Assembly.Location);
         internal static readonly MetadataReference XunitAssembly =
             MetadataReference.CreateFromFile(@"..\..\..\..\..\..\packages\xunit.extensibility.core.2.2.0\lib\netstandard1.1\xunit.core.dll");
+        internal static readonly MetadataReference XunitAssertAssembly =
+            MetadataReference.CreateFromFile(@"..\..\..\..\..\..\packages\xunit.assert.2.2.0\lib\netstandard1.1\xunit.assert.dll");
         internal static readonly MetadataReference NUnitFrameworkAssembly =
             MetadataReference.CreateFromFile(@"..\..\..\..\..\..\packages\NUnit.2.6.4\lib\nunit.framework.dll");
+        internal static readonly MetadataReference FluentAssertionsAssembly =
+            MetadataReference.CreateFromFile(typeof(AssertionExtensions).Assembly.Location);
+        internal static readonly MetadataReference FluentAssertionsCoreAssembly =
+            MetadataReference.CreateFromFile(typeof(AssertionOptions).Assembly.Location);
         #endregion
 
         private const string FIXED_MESSAGE = "Fixed";
