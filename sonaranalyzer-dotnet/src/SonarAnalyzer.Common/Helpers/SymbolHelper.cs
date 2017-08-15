@@ -245,7 +245,6 @@ namespace SonarAnalyzer.Helpers
                 if (container.DeclaredAccessibility == Accessibility.Internal)
                 {
                     result = Accessibility.Internal;
-                    continue;
                 }
             }
 

@@ -89,14 +89,15 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 if (IsRegularExpression && !IsRegexPatternValid(HeaderFormat))
                 {
-                    throw new ArgumentException($"Invalid regular expression: {HeaderFormat}", HeaderFormatRuleParameterKey);
+                    throw new InvalidOperationException($"Invalid regular expression: {HeaderFormat}");
                 }
 
                 var firstNode = stac.Tree.GetRoot().ChildTokens().FirstOrDefault().Parent;
                 if (!HasValidLicenseHeader(firstNode))
                 {
                     var properties = CreateDiagnosticProperties();
-                    stac.ReportDiagnostic(Diagnostic.Create(rule, Location.Create(stac.Tree, TextSpan.FromBounds(0, 0)), properties));
+                    stac.ReportDiagnostic(Diagnostic.Create(rule, Location.Create(stac.Tree,
+                        TextSpan.FromBounds(0, 0)), properties));
                 }
             });
         }

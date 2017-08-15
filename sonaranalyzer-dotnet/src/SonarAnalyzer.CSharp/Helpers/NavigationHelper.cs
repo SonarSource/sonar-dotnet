@@ -45,12 +45,14 @@ namespace SonarAnalyzer.Helpers
             return ifList;
         }
 
-        public static IEnumerable<StatementSyntax> GetPrecedingStatementsInConditionChain(this IfStatementSyntax ifStatement)
+        public static IEnumerable<StatementSyntax> GetPrecedingStatementsInConditionChain(
+            this IfStatementSyntax ifStatement)
         {
             return GetPrecedingIfsInConditionChain(ifStatement).Select(i => i.Statement);
         }
 
-        public static IEnumerable<ExpressionSyntax> GetPrecedingConditionsInConditionChain(this IfStatementSyntax ifStatement)
+        public static IEnumerable<ExpressionSyntax> GetPrecedingConditionsInConditionChain(
+            this IfStatementSyntax ifStatement)
         {
             return GetPrecedingIfsInConditionChain(ifStatement).Select(i => i.Condition);
         }

@@ -32,7 +32,8 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.CSharp
     {
         private readonly Stack<Block> BreakTarget = new Stack<Block>();
         private readonly Stack<Block> ContinueTargets = new Stack<Block>();
-        private readonly Stack<Dictionary<object, List<JumpBlock>>> SwitchGotoJumpBlocks = new Stack<Dictionary<object, List<JumpBlock>>>();
+        private readonly Stack<Dictionary<object, List<JumpBlock>>> SwitchGotoJumpBlocks =
+            new Stack<Dictionary<object, List<JumpBlock>>>();
         private readonly Dictionary<string, List<JumpBlock>> GotoJumpBlocks = new Dictionary<string, List<JumpBlock>>();
         private readonly Dictionary<string, JumpBlock> LabeledStatements = new Dictionary<string, JumpBlock>();
         private static readonly object GotoDefaultEntry = new object();
@@ -99,7 +100,8 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.CSharp
                     return BuildExpression(((ExpressionStatementSyntax)statement).Expression, currentBlock);
 
                 case SyntaxKind.LocalDeclarationStatement:
-                    return BuildVariableDeclaration(((LocalDeclarationStatementSyntax)statement).Declaration, currentBlock);
+                    return BuildVariableDeclaration(((LocalDeclarationStatementSyntax)statement).Declaration,
+                        currentBlock);
 
                 case SyntaxKind.IfStatement:
                     return BuildIfStatement((IfStatementSyntax)statement, currentBlock);
@@ -312,14 +314,16 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.CSharp
                     }
 
                 case SyntaxKind.InterpolatedStringExpression:
-                    return BuildInterpolatedStringExpression((InterpolatedStringExpressionSyntax)expression, currentBlock);
+                    return BuildInterpolatedStringExpression((InterpolatedStringExpressionSyntax)expression,
+                        currentBlock);
 
 
                 case SyntaxKind.InvocationExpression:
                     return BuildInvocationExpression((InvocationExpressionSyntax)expression, currentBlock);
 
                 case SyntaxKind.AnonymousObjectCreationExpression:
-                    return BuildAnonymousObjectCreationExpression((AnonymousObjectCreationExpressionSyntax)expression, currentBlock);
+                    return BuildAnonymousObjectCreationExpression((AnonymousObjectCreationExpressionSyntax)expression,
+                        currentBlock);
 
                 case SyntaxKind.ObjectCreationExpression:
                     return BuildObjectCreationExpression((ObjectCreationExpressionSyntax)expression, currentBlock);
@@ -410,7 +414,8 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.CSharp
                 case SyntaxKind.ElementBindingExpression:
                     {
                         var parent = (ElementBindingExpressionSyntax)expression;
-                        return BuildSimpleNestedExpression(parent, currentBlock, parent.ArgumentList?.Arguments.Select(a => a.Expression));
+                        return BuildSimpleNestedExpression(parent, currentBlock,
+                            parent.ArgumentList?.Arguments.Select(a => a.Expression));
                     }
 
                 default:
@@ -850,7 +855,8 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.CSharp
 
         #region Build expressions
 
-        private Block BuildConditionalAccessExpression(ConditionalAccessExpressionSyntax conditionalAccess, Block currentBlock)
+        private Block BuildConditionalAccessExpression(ConditionalAccessExpressionSyntax conditionalAccess,
+            Block currentBlock)
         {
             var whenNotNull = BuildExpression(conditionalAccess.WhenNotNull, CreateBlock(currentBlock));
 
@@ -899,7 +905,8 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.CSharp
 
         private Block BuildElementAccessExpression(ElementAccessExpressionSyntax expression, Block currentBlock)
         {
-            return BuildInvocationLikeExpression(expression, currentBlock, expression.Expression, expression.ArgumentList?.Arguments);
+            return BuildInvocationLikeExpression(expression, currentBlock, expression.Expression,
+                expression.ArgumentList?.Arguments);
         }
 
         private Block BuildImplicitElementAccessExpression(ImplicitElementAccessSyntax expression, Block currentBlock)
@@ -907,7 +914,8 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.CSharp
             return BuildInvocationLikeExpression(expression, currentBlock, null, expression.ArgumentList?.Arguments);
         }
 
-        private Block BuildInvocationLikeExpression(ExpressionSyntax parent, Block currentBlock, ExpressionSyntax child, IEnumerable<ArgumentSyntax> arguments)
+        private Block BuildInvocationLikeExpression(ExpressionSyntax parent, Block currentBlock,
+            ExpressionSyntax child, IEnumerable<ArgumentSyntax> arguments)
         {
             var args = arguments == null
                 ? Enumerable.Empty<ExpressionSyntax>()
@@ -928,27 +936,34 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.CSharp
             return BuildExpressions(arguments, objectInitializerBlock);
             }
 
-        private Block BuildAnonymousObjectCreationExpression(AnonymousObjectCreationExpressionSyntax expression, Block currentBlock)
+        private Block BuildAnonymousObjectCreationExpression(AnonymousObjectCreationExpressionSyntax expression,
+            Block currentBlock)
         {
-            return BuildSimpleNestedExpression(expression, currentBlock, expression.Initializers.Select(i => i.Expression));
+            return BuildSimpleNestedExpression(expression, currentBlock,
+                expression.Initializers.Select(i => i.Expression));
         }
 
         private Block BuildInvocationExpression(InvocationExpressionSyntax expression, Block currentBlock)
         {
-            return BuildInvocationLikeExpression(expression, currentBlock, expression.Expression, expression.ArgumentList?.Arguments);
+            return BuildInvocationLikeExpression(expression, currentBlock, expression.Expression,
+                expression.ArgumentList?.Arguments);
         }
 
-        private Block BuildInterpolatedStringExpression(InterpolatedStringExpressionSyntax expression, Block currentBlock)
+        private Block BuildInterpolatedStringExpression(InterpolatedStringExpressionSyntax expression,
+            Block currentBlock)
         {
-            return BuildSimpleNestedExpression(expression, currentBlock, expression.Contents.OfType<InterpolationSyntax>().Select(i => i.Expression));
+            return BuildSimpleNestedExpression(expression, currentBlock,
+                expression.Contents.OfType<InterpolationSyntax>().Select(i => i.Expression));
         }
 
-        private Block BuildSimpleNestedExpression(ExpressionSyntax parent, Block currentBlock, params ExpressionSyntax[] children)
+        private Block BuildSimpleNestedExpression(ExpressionSyntax parent, Block currentBlock,
+            params ExpressionSyntax[] children)
         {
             return BuildSimpleNestedExpression(parent, currentBlock, (IEnumerable<ExpressionSyntax>)children);
         }
 
-        private Block BuildSimpleNestedExpression(ExpressionSyntax parent, Block currentBlock, IEnumerable<ExpressionSyntax> children)
+        private Block BuildSimpleNestedExpression(ExpressionSyntax parent, Block currentBlock,
+            IEnumerable<ExpressionSyntax> children)
         {
             currentBlock.ReversedInstructions.Add(parent);
 

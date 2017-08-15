@@ -26,10 +26,10 @@ namespace SonarAnalyzer.Common
     [AttributeUsage(AttributeTargets.Property)]
     public sealed class RuleParameterAttribute : Attribute
     {
-        public string Key { get; private set; }
-        public string Description { get; private set; }
-        public PropertyType Type { get; private set; }
-        public string DefaultValue { get; private set; }
+        public string Key { get; }
+        public string Description { get; }
+        public PropertyType Type { get; }
+        public string DefaultValue { get; }
 
         public RuleParameterAttribute(string key, PropertyType type, string description, string defaultValue)
         {
@@ -38,14 +38,17 @@ namespace SonarAnalyzer.Common
             Type = type;
             DefaultValue = defaultValue;
         }
+
         public RuleParameterAttribute(string key, PropertyType type, string description, int defaultValue)
             : this(key, type, description, defaultValue.ToString(CultureInfo.InvariantCulture))
         {
         }
+
         public RuleParameterAttribute(string key, PropertyType type, string description)
             : this(key, type, description, null)
         {
         }
+
         public RuleParameterAttribute(string key, PropertyType type)
             : this(key, type, null, null)
         {

@@ -32,14 +32,16 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.CSharp
         private readonly ISymbol declaration;
         private readonly SemanticModel semanticModel;
 
-        private LiveVariableAnalysis(IControlFlowGraph controlFlowGraph, ISymbol declaration, SemanticModel semanticModel)
+        private LiveVariableAnalysis(IControlFlowGraph controlFlowGraph, ISymbol declaration,
+            SemanticModel semanticModel)
             : base(controlFlowGraph)
         {
             this.declaration = declaration;
             this.semanticModel = semanticModel;
         }
 
-        public static Common.LiveVariableAnalysis Analyze(IControlFlowGraph controlFlowGraph, ISymbol declaration, SemanticModel semanticModel)
+        public static Common.LiveVariableAnalysis Analyze(IControlFlowGraph controlFlowGraph, ISymbol declaration,
+            SemanticModel semanticModel)
         {
             var lva = new LiveVariableAnalysis(controlFlowGraph, declaration, semanticModel);
             lva.PerformAnalysis();
@@ -47,10 +49,10 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.CSharp
         }
 
         protected override void ProcessBlock(Block block, out HashSet<ISymbol> assignedInBlock,
-            out HashSet<ISymbol> usedBeforeAssigned)
+            out HashSet<ISymbol> usedInBlock)
         {
             assignedInBlock = new HashSet<ISymbol>(); // Kill (The set of variables that are assigned a value.)
-            usedBeforeAssigned = new HashSet<ISymbol>(); // Gen (The set of variables that are used before any assignment.)
+            usedInBlock = new HashSet<ISymbol>(); // Gen (The set of variables that are used before any assignment.)
 
             var assignmentLhs = new HashSet<SyntaxNode>();
 
@@ -59,15 +61,16 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.CSharp
                 switch (instruction.Kind())
                 {
                     case SyntaxKind.IdentifierName:
-                        ProcessIdentifier(instruction, assignedInBlock, usedBeforeAssigned, assignmentLhs);
+                        ProcessIdentifier(instruction, assignedInBlock, usedInBlock, assignmentLhs);
                         break;
 
                     case SyntaxKind.SimpleAssignmentExpression:
-                        ProcessSimpleAssignment(instruction, assignedInBlock, usedBeforeAssigned, assignmentLhs);
+                        ProcessSimpleAssignment(instruction, assignedInBlock, usedInBlock, assignmentLhs);
                         break;
 
                     case SyntaxKind.VariableDeclarator:
-                        ProcessVariableDeclarator((VariableDeclaratorSyntax)instruction, assignedInBlock, usedBeforeAssigned);
+                        ProcessVariableDeclarator((VariableDeclaratorSyntax)instruction, assignedInBlock,
+                            usedInBlock);
                         break;
 
                     case SyntaxKind.AnonymousMethodExpression:
@@ -93,7 +96,7 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.CSharp
                 foreachBlock.BranchingNode.IsKind(SyntaxKind.ForEachStatement))
             {
                 var foreachNode = (ForEachStatementSyntax)foreachBlock.BranchingNode;
-                ProcessVariableInForeach(foreachNode, assignedInBlock, usedBeforeAssigned);
+                ProcessVariableInForeach(foreachNode, assignedInBlock, usedInBlock);
             }
 
             // Keep alive the variables declared and used in the using statement until the UsingFinalizerBlock
@@ -101,17 +104,18 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.CSharp
             if (usingFinalizerBlock != null)
             {
                 var disposableSymbols = usingFinalizerBlock.Identifiers
-                    .Select(i => semanticModel.GetDeclaredSymbol(i.Parent) 
+                    .Select(i => semanticModel.GetDeclaredSymbol(i.Parent)
                                 ?? semanticModel.GetSymbolInfo(i.Parent).Symbol)
                     .WhereNotNull();
                 foreach (var disposableSymbol in disposableSymbols)
                 {
-                    usedBeforeAssigned.Add(disposableSymbol);
+                    usedInBlock.Add(disposableSymbol);
                 }
             }
         }
 
-        private void ProcessVariableInForeach(ForEachStatementSyntax foreachNode, HashSet<ISymbol> assignedInBlock, HashSet<ISymbol> usedBeforeAssigned)
+        private void ProcessVariableInForeach(ForEachStatementSyntax foreachNode, HashSet<ISymbol> assignedInBlock,
+            HashSet<ISymbol> usedBeforeAssigned)
         {
             var symbol = semanticModel.GetDeclaredSymbol(foreachNode);
             if (symbol == null)
@@ -136,7 +140,8 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.CSharp
             usedBeforeAssigned.Remove(symbol);
         }
 
-        private void ProcessSimpleAssignment(SyntaxNode instruction, HashSet<ISymbol> assignedInBlock, HashSet<ISymbol> usedBeforeAssigned, HashSet<SyntaxNode> assignmentLhs)
+        private void ProcessSimpleAssignment(SyntaxNode instruction, HashSet<ISymbol> assignedInBlock,
+            HashSet<ISymbol> usedBeforeAssigned, HashSet<SyntaxNode> assignmentLhs)
         {
             var assignment = (AssignmentExpressionSyntax)instruction;
             var left = assignment.Left.RemoveParentheses();
@@ -157,8 +162,8 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.CSharp
             }
         }
 
-        private void ProcessIdentifier(SyntaxNode instruction, HashSet<ISymbol> assignedInBlock, HashSet<ISymbol> usedBeforeAssigned,
-            HashSet<SyntaxNode> assignmentLhs)
+        private void ProcessIdentifier(SyntaxNode instruction, HashSet<ISymbol> assignedInBlock,
+            HashSet<ISymbol> usedBeforeAssigned, HashSet<SyntaxNode> assignmentLhs)
         {
             var identifier = (IdentifierNameSyntax)instruction;
             var symbol = semanticModel.GetSymbolInfo(identifier).Symbol;

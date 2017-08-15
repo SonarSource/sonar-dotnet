@@ -144,7 +144,8 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.CSharp
             return symbolicValue.HasConstraint(constraint, programState);
         }
 
-        public static ProgramState SetConstraint(this ISymbol symbol, SymbolicValueConstraint constraint, ProgramState programState)
+        public static ProgramState SetConstraint(this ISymbol symbol, SymbolicValueConstraint constraint,
+            ProgramState programState)
         {
             var symbolicValue = programState.GetSymbolValue(symbol);
             if (symbolicValue == null ||
