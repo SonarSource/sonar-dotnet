@@ -45,6 +45,20 @@
                 throw new Exception(); // Compliant - setters are ignored by this rule
             }
         }
+        public int MyProperty6
+        {
+            get
+            {
+                throw new InvalidOperationException(); // Compliant
+            }
+        }
+        public int MyProperty7
+        {
+            get
+            {
+                throw new ObjectDisposedException(); // Compliant
+            }
+        }
         public int this[int i]
         {
             get

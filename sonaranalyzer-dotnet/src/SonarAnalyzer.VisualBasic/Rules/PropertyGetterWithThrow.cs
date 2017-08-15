@@ -20,11 +20,11 @@
 
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
-using SonarAnalyzer.Common;
-using SonarAnalyzer.Rules.Common;
 using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
+using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.Rules.Common;
 
 namespace SonarAnalyzer.Rules.VisualBasic
 {
@@ -38,7 +38,8 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         protected override SyntaxKind ThrowSyntaxKind => SyntaxKind.ThrowStatement;
 
-        protected override bool IsGetter(AccessorBlockSyntax propertyGetter) => propertyGetter.IsKind(SyntaxKind.GetAccessorBlock);
+        protected override bool IsGetter(AccessorBlockSyntax propertyGetter) =>
+            propertyGetter.IsKind(SyntaxKind.GetAccessorBlock);
 
         protected override bool IsIndexer(AccessorBlockSyntax propertyGetter)
         {
@@ -47,12 +48,15 @@ namespace SonarAnalyzer.Rules.VisualBasic
             {
                 return false;
             }
+
             return propertyBlock.PropertyStatement.ParameterList != null &&
                 propertyBlock.PropertyStatement.ParameterList.Parameters.Any();
         }
 
-        protected override SyntaxNode GetThrowExpression(SyntaxNode syntaxNode) => ((ThrowStatementSyntax)syntaxNode).Expression;
+        protected override SyntaxNode GetThrowExpression(SyntaxNode syntaxNode) =>
+            ((ThrowStatementSyntax)syntaxNode).Expression;
 
-        protected sealed override GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.VisualBasic.GeneratedCodeRecognizer.Instance;
+        protected sealed override GeneratedCodeRecognizer GeneratedCodeRecognizer =>
+            Helpers.VisualBasic.GeneratedCodeRecognizer.Instance;
     }
 }
