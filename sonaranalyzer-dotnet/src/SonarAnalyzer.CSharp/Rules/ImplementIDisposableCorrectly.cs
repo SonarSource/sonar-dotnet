@@ -191,7 +191,8 @@ namespace SonarAnalyzer.Rules.CSharp
                         "'GC.SuppressFinalize(this)'.");
                 }
 
-                var disposeMethodSymbol = semanticModel.GetDeclaredSymbol(disposeMethod);
+                // See issue: https://github.com/SonarSource/sonar-csharp/issues/690
+                var disposeMethodSymbol = semanticModel.GetCorrectSemanticModel(disposeMethod).GetDeclaredSymbol(disposeMethod);
                 if (disposeMethodSymbol == null)
                 {
                     return;
