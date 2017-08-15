@@ -18,4 +18,11 @@ namespace Tests.Diagnostics
         {
         }
     }
+
+    public class Foo
+    {
+        protected bool Equals(Foo other)
+        {
+        }
+    }
 }
