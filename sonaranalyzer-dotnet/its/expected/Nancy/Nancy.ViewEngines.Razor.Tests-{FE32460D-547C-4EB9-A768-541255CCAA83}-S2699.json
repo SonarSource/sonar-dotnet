@@ -1,0 +1,407 @@
+{
+"issues":  [
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor.Tests\RazorViewEngineFixture.cs",
+"region":  {
+"startLine":  69,
+"startColumn":  21,
+"endLine":  69,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor.Tests\RazorViewEngineFixture.cs",
+"region":  {
+"startLine":  90,
+"startColumn":  21,
+"endLine":  90,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor.Tests\RazorViewEngineFixture.cs",
+"region":  {
+"startLine":  120,
+"startColumn":  21,
+"endLine":  120,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor.Tests\RazorViewEngineFixture.cs",
+"region":  {
+"startLine":  131,
+"startColumn":  21,
+"endLine":  131,
+"endColumn":  86
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor.Tests\RazorViewEngineFixture.cs",
+"region":  {
+"startLine":  155,
+"startColumn":  21,
+"endLine":  155,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor.Tests\RazorViewEngineFixture.cs",
+"region":  {
+"startLine":  173,
+"startColumn":  21,
+"endLine":  173,
+"endColumn":  90
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor.Tests\RazorViewEngineFixture.cs",
+"region":  {
+"startLine":  200,
+"startColumn":  21,
+"endLine":  200,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor.Tests\RazorViewEngineFixture.cs",
+"region":  {
+"startLine":  229,
+"startColumn":  21,
+"endLine":  229,
+"endColumn":  99
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor.Tests\RazorViewEngineFixture.cs",
+"region":  {
+"startLine":  263,
+"startColumn":  21,
+"endLine":  263,
+"endColumn":  106
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor.Tests\RazorViewEngineFixture.cs",
+"region":  {
+"startLine":  294,
+"startColumn":  21,
+"endLine":  294,
+"endColumn":  85
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor.Tests\RazorViewEngineFixture.cs",
+"region":  {
+"startLine":  313,
+"startColumn":  21,
+"endLine":  313,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor.Tests\RazorViewEngineFixture.cs",
+"region":  {
+"startLine":  330,
+"startColumn":  21,
+"endLine":  330,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor.Tests\RazorViewEngineFixture.cs",
+"region":  {
+"startLine":  350,
+"startColumn":  21,
+"endLine":  350,
+"endColumn":  84
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor.Tests\RazorViewEngineFixture.cs",
+"region":  {
+"startLine":  370,
+"startColumn":  21,
+"endLine":  370,
+"endColumn":  90
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor.Tests\RazorViewEngineFixture.cs",
+"region":  {
+"startLine":  391,
+"startColumn":  21,
+"endLine":  391,
+"endColumn":  93
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor.Tests\RazorViewEngineFixture.cs",
+"region":  {
+"startLine":  409,
+"startColumn":  21,
+"endLine":  409,
+"endColumn":  106
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor.Tests\RazorViewEngineFixture.cs",
+"region":  {
+"startLine":  427,
+"startColumn":  21,
+"endLine":  427,
+"endColumn":  116
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor.Tests\RazorViewEngineFixture.cs",
+"region":  {
+"startLine":  445,
+"startColumn":  21,
+"endLine":  445,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor.Tests\RazorViewEngineFixture.cs",
+"region":  {
+"startLine":  462,
+"startColumn":  21,
+"endLine":  462,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor.Tests\RazorViewEngineFixture.cs",
+"region":  {
+"startLine":  491,
+"startColumn":  21,
+"endLine":  491,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor.Tests\RazorViewEngineFixture.cs",
+"region":  {
+"startLine":  519,
+"startColumn":  21,
+"endLine":  519,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor.Tests\RazorViewEngineFixture.cs",
+"region":  {
+"startLine":  553,
+"startColumn":  21,
+"endLine":  553,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor.Tests\RazorViewEngineFixture.cs",
+"region":  {
+"startLine":  568,
+"startColumn":  21,
+"endLine":  568,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor.Tests\RazorViewEngineFixture.cs",
+"region":  {
+"startLine":  594,
+"startColumn":  21,
+"endLine":  594,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor.Tests\RazorViewEngineFixture.cs",
+"region":  {
+"startLine":  610,
+"startColumn":  21,
+"endLine":  610,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor.Tests\RazorViewEngineFixture.cs",
+"region":  {
+"startLine":  628,
+"startColumn":  21,
+"endLine":  628,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor.Tests\RazorViewEngineFixture.cs",
+"region":  {
+"startLine":  645,
+"startColumn":  21,
+"endLine":  645,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor.Tests\TextResourceFinderFixture.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  21,
+"endLine":  43,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor.Tests\TextResourceFinderFixture.cs",
+"region":  {
+"startLine":  54,
+"startColumn":  21,
+"endLine":  54,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor.Tests\TextResourceFinderFixture.cs",
+"region":  {
+"startLine":  65,
+"startColumn":  21,
+"endLine":  65,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor.Tests\TextResourceFinderFixture.cs",
+"region":  {
+"startLine":  76,
+"startColumn":  21,
+"endLine":  76,
+"endColumn":  102
+}
+}
+}
+]
+}

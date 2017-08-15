@@ -1,0 +1,238 @@
+{
+"issues":  [
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Authentication.Basic.Tests\BasicAuthenticationConfigurationFixture.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  15,
+"endLine":  14,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Authentication.Basic.Tests\BasicAuthenticationConfigurationFixture.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  15,
+"endLine":  22,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Authentication.Basic.Tests\BasicAuthenticationFixture.cs",
+"region":  {
+"startLine":  32,
+"startColumn":  21,
+"endLine":  32,
+"endColumn":  79
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Authentication.Basic.Tests\BasicAuthenticationFixture.cs",
+"region":  {
+"startLine":  48,
+"startColumn":  21,
+"endLine":  48,
+"endColumn":  102
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Authentication.Basic.Tests\BasicAuthenticationFixture.cs",
+"region":  {
+"startLine":  62,
+"startColumn":  21,
+"endLine":  62,
+"endColumn":  84
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Authentication.Basic.Tests\BasicAuthenticationFixture.cs",
+"region":  {
+"startLine":  72,
+"startColumn":  21,
+"endLine":  72,
+"endColumn":  79
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Authentication.Basic.Tests\BasicAuthenticationFixture.cs",
+"region":  {
+"startLine":  82,
+"startColumn":  21,
+"endLine":  82,
+"endColumn":  81
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Authentication.Basic.Tests\BasicAuthenticationFixture.cs",
+"region":  {
+"startLine":  92,
+"startColumn":  21,
+"endLine":  92,
+"endColumn":  79
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Authentication.Basic.Tests\BasicAuthenticationFixture.cs",
+"region":  {
+"startLine":  102,
+"startColumn":  21,
+"endLine":  102,
+"endColumn":  86
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Authentication.Basic.Tests\BasicAuthenticationFixture.cs",
+"region":  {
+"startLine":  119,
+"startColumn":  21,
+"endLine":  119,
+"endColumn":  100
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Authentication.Basic.Tests\BasicAuthenticationFixture.cs",
+"region":  {
+"startLine":  142,
+"startColumn":  21,
+"endLine":  142,
+"endColumn":  86
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Authentication.Basic.Tests\BasicAuthenticationFixture.cs",
+"region":  {
+"startLine":  164,
+"startColumn":  21,
+"endLine":  164,
+"endColumn":  107
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Authentication.Basic.Tests\BasicAuthenticationFixture.cs",
+"region":  {
+"startLine":  188,
+"startColumn":  21,
+"endLine":  188,
+"endColumn":  105
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Authentication.Basic.Tests\BasicAuthenticationFixture.cs",
+"region":  {
+"startLine":  211,
+"startColumn":  21,
+"endLine":  211,
+"endColumn":  100
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Authentication.Basic.Tests\BasicAuthenticationFixture.cs",
+"region":  {
+"startLine":  226,
+"startColumn":  21,
+"endLine":  226,
+"endColumn":  106
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Authentication.Basic.Tests\BasicAuthenticationFixture.cs",
+"region":  {
+"startLine":  241,
+"startColumn":  21,
+"endLine":  241,
+"endColumn":  93
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Authentication.Basic.Tests\BasicAuthenticationFixture.cs",
+"region":  {
+"startLine":  255,
+"startColumn":  21,
+"endLine":  255,
+"endColumn":  110
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Authentication.Basic.Tests\BasicAuthenticationFixture.cs",
+"region":  {
+"startLine":  269,
+"startColumn":  21,
+"endLine":  269,
+"endColumn":  82
+}
+}
+}
+]
+}

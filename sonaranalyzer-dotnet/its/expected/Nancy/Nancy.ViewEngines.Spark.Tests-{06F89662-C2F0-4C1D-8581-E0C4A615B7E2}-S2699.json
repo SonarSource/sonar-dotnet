@@ -1,0 +1,433 @@
+{
+"issues":  [
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark.Tests\NancyViewFolderFixture.cs",
+"region":  {
+"startLine":  24,
+"startColumn":  21,
+"endLine":  24,
+"endColumn":  100
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark.Tests\NancyViewFolderFixture.cs",
+"region":  {
+"startLine":  41,
+"startColumn":  21,
+"endLine":  41,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark.Tests\NancyViewFolderFixture.cs",
+"region":  {
+"startLine":  58,
+"startColumn":  21,
+"endLine":  58,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark.Tests\NancyViewFolderFixture.cs",
+"region":  {
+"startLine":  75,
+"startColumn":  21,
+"endLine":  75,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark.Tests\NancyViewFolderFixture.cs",
+"region":  {
+"startLine":  92,
+"startColumn":  21,
+"endLine":  92,
+"endColumn":  86
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark.Tests\SparkViewEngineFixture.cs",
+"region":  {
+"startLine":  44,
+"startColumn":  21,
+"endLine":  44,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark.Tests\SparkViewEngineFixture.cs",
+"region":  {
+"startLine":  58,
+"startColumn":  21,
+"endLine":  58,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark.Tests\SparkViewEngineFixture.cs",
+"region":  {
+"startLine":  69,
+"startColumn":  21,
+"endLine":  69,
+"endColumn":  83
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark.Tests\SparkViewEngineFixture.cs",
+"region":  {
+"startLine":  79,
+"startColumn":  21,
+"endLine":  79,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark.Tests\SparkViewEngineFixture.cs",
+"region":  {
+"startLine":  91,
+"startColumn":  21,
+"endLine":  91,
+"endColumn":  79
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark.Tests\SparkViewEngineFixture.cs",
+"region":  {
+"startLine":  105,
+"startColumn":  21,
+"endLine":  105,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark.Tests\SparkViewEngineFixture.cs",
+"region":  {
+"startLine":  115,
+"startColumn":  21,
+"endLine":  115,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark.Tests\SparkViewEngineFixture.cs",
+"region":  {
+"startLine":  125,
+"startColumn":  21,
+"endLine":  125,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark.Tests\SparkViewEngineFixture.cs",
+"region":  {
+"startLine":  135,
+"startColumn":  21,
+"endLine":  135,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark.Tests\SparkViewEngineFixture.cs",
+"region":  {
+"startLine":  145,
+"startColumn":  21,
+"endLine":  145,
+"endColumn":  81
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark.Tests\SparkViewEngineFixture.cs",
+"region":  {
+"startLine":  155,
+"startColumn":  21,
+"endLine":  155,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark.Tests\SparkViewEngineFixture.cs",
+"region":  {
+"startLine":  170,
+"startColumn":  21,
+"endLine":  170,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark.Tests\SparkViewEngineFixture.cs",
+"region":  {
+"startLine":  198,
+"startColumn":  21,
+"endLine":  198,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark.Tests\SparkViewEngineFixture.cs",
+"region":  {
+"startLine":  215,
+"startColumn":  21,
+"endLine":  215,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark.Tests\SparkViewEngineFixture.cs",
+"region":  {
+"startLine":  227,
+"startColumn":  21,
+"endLine":  227,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark.Tests\SparkViewEngineFixture.cs",
+"region":  {
+"startLine":  240,
+"startColumn":  21,
+"endLine":  240,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark.Tests\SparkViewEngineFixture.cs",
+"region":  {
+"startLine":  253,
+"startColumn":  21,
+"endLine":  253,
+"endColumn":  87
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark.Tests\SparkViewEngineFixture.cs",
+"region":  {
+"startLine":  267,
+"startColumn":  21,
+"endLine":  267,
+"endColumn":  98
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark.Tests\SparkViewEngineFixture.cs",
+"region":  {
+"startLine":  282,
+"startColumn":  21,
+"endLine":  282,
+"endColumn":  99
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark.Tests\SparkViewEngineFixture.cs",
+"region":  {
+"startLine":  297,
+"startColumn":  21,
+"endLine":  297,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark.Tests\SparkViewEngineFixture.cs",
+"region":  {
+"startLine":  311,
+"startColumn":  21,
+"endLine":  311,
+"endColumn":  85
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark.Tests\SparkViewEngineFixture.cs",
+"region":  {
+"startLine":  331,
+"startColumn":  21,
+"endLine":  331,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark.Tests\SparkViewEngineFixture.cs",
+"region":  {
+"startLine":  358,
+"startColumn":  21,
+"endLine":  358,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark.Tests\SparkViewEngineFixture.cs",
+"region":  {
+"startLine":  380,
+"startColumn":  21,
+"endLine":  380,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark.Tests\SparkViewEngineFixture.cs",
+"region":  {
+"startLine":  400,
+"startColumn":  21,
+"endLine":  400,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark.Tests\SparkViewEngineFixture.cs",
+"region":  {
+"startLine":  418,
+"startColumn":  21,
+"endLine":  418,
+"endColumn":  101
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark.Tests\SparkViewEngineFixture.cs",
+"region":  {
+"startLine":  441,
+"startColumn":  21,
+"endLine":  441,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark.Tests\SparkViewEngineFixture.cs",
+"region":  {
+"startLine":  468,
+"startColumn":  21,
+"endLine":  468,
+"endColumn":  87
+}
+}
+}
+]
+}

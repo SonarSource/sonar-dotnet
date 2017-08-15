@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests.Functional\Tests\MethodRewriteFixture.cs",
+"region":  {
+"startLine":  62,
+"startColumn":  27,
+"endLine":  62,
+"endColumn":  135
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests.Functional\Tests\MethodRewriteFixture.cs",
+"region":  {
+"startLine":  72,
+"startColumn":  27,
+"endLine":  72,
+"endColumn":  134
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests.Functional\Tests\MethodRewriteFixture.cs",
+"region":  {
+"startLine":  82,
+"startColumn":  27,
+"endLine":  82,
+"endColumn":  137
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests.Functional\Tests\MethodRewriteFixture.cs",
+"region":  {
+"startLine":  92,
+"startColumn":  27,
+"endLine":  92,
+"endColumn":  146
+}
+}
+}
+]
+}

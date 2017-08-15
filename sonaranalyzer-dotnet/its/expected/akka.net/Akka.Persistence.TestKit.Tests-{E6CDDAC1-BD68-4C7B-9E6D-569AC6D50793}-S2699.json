@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit.Tests\LocalSnapshotStoreSpec.cs",
+"region":  {
+"startLine":  40,
+"startColumn":  21,
+"endLine":  40,
+"endColumn":  113
+}
+}
+}
+]
+}

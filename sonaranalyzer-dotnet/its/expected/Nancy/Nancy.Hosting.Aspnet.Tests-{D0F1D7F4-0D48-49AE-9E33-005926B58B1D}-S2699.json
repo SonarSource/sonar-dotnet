@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Hosting.Aspnet.Tests\NancyHandlerFixture.cs",
+"region":  {
+"startLine":  47,
+"startColumn":  27,
+"endLine":  47,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Hosting.Aspnet.Tests\NancyHandlerFixture.cs",
+"region":  {
+"startLine":  69,
+"startColumn":  27,
+"endLine":  69,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S2699",
+"message":  "Add at least one assertion to this test case.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Hosting.Aspnet.Tests\NancyHandlerFixture.cs",
+"region":  {
+"startLine":  92,
+"startColumn":  27,
+"endLine":  92,
+"endColumn":  53
+}
+}
+}
+]
+}
