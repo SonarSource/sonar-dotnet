@@ -35,7 +35,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 null,
                 Verifier.MicrosoftVisualStudioTestToolsUnitTestingAssembly,
                 Verifier.NUnitFrameworkAssembly,
-                Verifier.XunitAssembly);
+                Verifier.XunitCoreAssembly);
         }
     }
 }
