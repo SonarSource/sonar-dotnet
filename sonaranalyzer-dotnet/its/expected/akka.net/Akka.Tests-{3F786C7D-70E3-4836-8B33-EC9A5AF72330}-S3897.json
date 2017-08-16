@@ -12,32 +12,6 @@
 "endColumn":  49
 }
 }
-},
-{
-"id":  "S3897",
-"message":  "Implement 'IEquatable<ImmutableMessageWithPrivateCtor>'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests\Serialization\SerializationSpec.cs",
-"region":  {
-"startLine":  70,
-"startColumn":  22,
-"endLine":  70,
-"endColumn":  53
-}
-}
-},
-{
-"id":  "S3897",
-"message":  "Implement 'IEquatable<ImmutableMessage>'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests\Serialization\SerializationSpec.cs",
-"region":  {
-"startLine":  107,
-"startColumn":  22,
-"endLine":  107,
-"endColumn":  38
-}
-}
 }
 ]
 }
