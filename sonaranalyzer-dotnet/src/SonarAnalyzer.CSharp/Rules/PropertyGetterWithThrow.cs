@@ -38,11 +38,15 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override SyntaxKind ThrowSyntaxKind => SyntaxKind.ThrowStatement;
 
-        protected override bool IsGetter(AccessorDeclarationSyntax propertyGetter) => propertyGetter.IsKind(SyntaxKind.GetAccessorDeclaration);
-        protected override bool IsIndexer(AccessorDeclarationSyntax propertyGetter) => propertyGetter.Parent.Parent is IndexerDeclarationSyntax;
+        protected override bool IsGetter(AccessorDeclarationSyntax propertyGetter) =>
+            propertyGetter.IsKind(SyntaxKind.GetAccessorDeclaration);
+        protected override bool IsIndexer(AccessorDeclarationSyntax propertyGetter) =>
+            propertyGetter.Parent.Parent is IndexerDeclarationSyntax;
 
-        protected override SyntaxNode GetThrowExpression(SyntaxNode syntaxNode) => ((ThrowStatementSyntax)syntaxNode).Expression;
+        protected override SyntaxNode GetThrowExpression(SyntaxNode syntaxNode) =>
+            ((ThrowStatementSyntax)syntaxNode).Expression;
 
-        protected sealed override GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.CSharp.GeneratedCodeRecognizer.Instance;
+        protected sealed override GeneratedCodeRecognizer GeneratedCodeRecognizer =>
+            Helpers.CSharp.GeneratedCodeRecognizer.Instance;
     }
 }

@@ -28,15 +28,15 @@ namespace SonarAnalyzer.Rules.Common
     public abstract class PropertyGetterWithThrowBase : SonarDiagnosticAnalyzer
     {
         protected const string DiagnosticId = "S2372";
-        protected const string MessageFormat = "Remove the exception throwing from this property getter, or refactor the property into a method.";
+        protected const string MessageFormat = "Remove the exception throwing from this property getter, or refactor the " +
+            "property into a method.";
 
         protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
 
-        internal static readonly ISet<KnownType> AllowedExceptionTypes = new HashSet<KnownType>
-        {
+        internal static readonly ISet<KnownType> AllowedExceptionBaseTypes = ImmutableHashSet.Create(
             KnownType.System_NotImplementedException,
-            KnownType.System_NotSupportedException
-        };
+            KnownType.System_NotSupportedException,
+            KnownType.System_InvalidOperationException);
     }
 
     public abstract class PropertyGetterWithThrowBase<TLanguageKindEnum, TAccessorSyntax> :
@@ -69,7 +69,7 @@ namespace SonarAnalyzer.Rules.Common
                             var throwExpression = GetThrowExpression(c.Node);
                             var symbol = c.SemanticModel.GetSymbolInfo(throwExpression).Symbol;
                             if (symbol == null ||
-                                symbol.ContainingType.DerivesFromAny(AllowedExceptionTypes))
+                                symbol.ContainingType.DerivesFromAny(AllowedExceptionBaseTypes))
                             {
                                 return;
                             }
