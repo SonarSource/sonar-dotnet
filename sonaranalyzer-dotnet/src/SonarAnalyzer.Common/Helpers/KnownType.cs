@@ -359,6 +359,8 @@ namespace SonarAnalyzer.Helpers
             new KnownType("NUnit.Framework.ExpectedExceptionAttribute");
         public static readonly KnownType NUnit_Framework_Assert =
             new KnownType("NUnit.Framework.Assert");
+        public static readonly KnownType NUnit_Framework_IgnoreAttribute =
+            new KnownType("NUnit.Framework.IgnoreAttribute");
 
         #endregion
 

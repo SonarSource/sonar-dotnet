@@ -28,16 +28,38 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void TestMethodShouldContainAssertion()
+        public void TestMethodShouldContainAssertion_MSTest()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldContainAssertion.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldContainAssertion_MSTest.cs",
                 new TestMethodShouldContainAssertion(),
                 null,
                 Verifier.FluentAssertionsAssembly,
                 Verifier.FluentAssertionsCoreAssembly,
-                Verifier.MicrosoftVisualStudioTestToolsUnitTestingAssembly,
-                Verifier.NUnitFrameworkAssembly,
-                Verifier.XunitAssembly,
+                Verifier.MicrosoftVisualStudioTestToolsUnitTestingAssembly);
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void TestMethodShouldContainAssertion_NUnit()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldContainAssertion_NUnit.cs",
+                new TestMethodShouldContainAssertion(),
+                null,
+                Verifier.FluentAssertionsAssembly,
+                Verifier.FluentAssertionsCoreAssembly,
+                Verifier.NUnitFrameworkAssembly);
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void TestMethodShouldContainAssertion_Xunit()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldContainAssertion_Xunit.cs",
+                new TestMethodShouldContainAssertion(),
+                null,
+                Verifier.FluentAssertionsAssembly,
+                Verifier.FluentAssertionsCoreAssembly,
+                Verifier.XunitCoreAssembly,
                 Verifier.XunitAssertAssembly);
         }
     }

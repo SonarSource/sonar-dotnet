@@ -50,13 +50,12 @@ namespace SonarAnalyzer.Rules.CSharp
             KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_ExpectedExceptionAttribute,
             KnownType.NUnit_Framework_ExpectedExceptionAttribute);
 
-        private static readonly ISet<KnownType> TrackedAssertionTypes = ImmutableHashSet.Create(
-            KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_Assert,
-            KnownType.NUnit_Framework_Assert,
-            KnownType.Xunit_Assert);
+        private static readonly ISet<KnownType> TrackedIgnoreAttributes = ImmutableHashSet.Create(
+            KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_IgnoreAttribute,
+            KnownType.NUnit_Framework_IgnoreAttribute);
 
-        private static readonly IEnumerable<string> TrackedAssertionStartWithMethodName = ImmutableList.Create(
-            "Assert", "Should", "Expect", "Must", "Verify");
+        private static readonly IEnumerable<string> TrackedAssertionMethodName = ImmutableList.Create(
+            "Assert", "Should", "Expect", "Must", "Verify", "Validate");
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -75,7 +74,8 @@ namespace SonarAnalyzer.Rules.CSharp
                     var attributes = methodSymbol?.GetAttributes();
                     if (methodSymbol == null ||
                         !IsTestMethod(attributes) ||
-                        HasExpectedExceptionAttribute(attributes))
+                        HasExpectedExceptionAttribute(attributes) ||
+                        IsTestIgnored(attributes))
                     {
                         return;
                     }
@@ -91,29 +91,38 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         private static bool IsTestMethod(IEnumerable<AttributeData> attributes) =>
-            attributes.Any(attribute => attribute.AttributeClass.IsAny(TrackedTestAttributes));
+            attributes.Any(a => a.AttributeClass.IsAny(TrackedTestAttributes));
 
         private static bool HasExpectedExceptionAttribute(IEnumerable<AttributeData> attributes) =>
-            attributes.Any(attribute => attribute.AttributeClass.IsAny(ExpectedExceptionAttributes));
+            attributes.Any(a => a.AttributeClass.IsAny(ExpectedExceptionAttributes));
+
+        private static bool IsTestIgnored(IEnumerable<AttributeData> attributes)
+        {
+            if (attributes.Any(a => a.AttributeClass.IsAny(TrackedIgnoreAttributes)))
+            {
+                return true;
+            }
+
+            var factAttributeSyntax = attributes.FirstOrDefault(a => a.AttributeClass.Is(KnownType.Xunit_FactAttribute))
+                ?.ApplicationSyntaxReference.GetSyntax() as AttributeSyntax;
+
+            return factAttributeSyntax?.ArgumentList != null &&
+                factAttributeSyntax.ArgumentList.Arguments.Any(x => x.NameEquals.Name.Identifier.ValueText == "Skip");
+        }
 
         private static bool IsAssertion(InvocationExpressionSyntax invocation, SemanticModel model)
         {
             var symbolInfo = model.GetSymbolInfo(invocation);
 
-            // For some reason FluentAssertions is not loaded correctly in the test so we have to test
-            // for CandidateSymbols.
-            var symbol = symbolInfo.CandidateReason == CandidateReason.OverloadResolutionFailure
-                ? symbolInfo.CandidateSymbols.FirstOrDefault()
-                : symbolInfo.Symbol;
-
+            // We try the CandidateSymbols to handle dynamic variable (with a late binding to the semantic model)
+            // and also for some framework that do not always resolve well in tests.
+            var symbol = symbolInfo.Symbol ?? symbolInfo.CandidateSymbols.FirstOrDefault();
             if (symbol == null)
             {
                 return false;
             }
 
-            return symbol.ContainingType.ToString().StartsWith("FluentAssertions") ||
-                symbol.ContainingType.IsAny(TrackedAssertionTypes) ||
-                TrackedAssertionStartWithMethodName.Any(name => symbol.Name.StartsWith(name));
+            return symbol.Name.SplitCamelCaseToWords().Union(TrackedAssertionMethodName).Any();
         }
     }
 }

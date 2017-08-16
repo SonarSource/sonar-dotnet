@@ -34,7 +34,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldHaveCorrectSignature.cs",
                 new TestMethodShouldHaveCorrectSignature(), null,
                 Verifier.MicrosoftVisualStudioTestToolsUnitTestingAssembly,
-                Verifier.XunitAssembly,
+                Verifier.XunitCoreAssembly,
                 Verifier.NUnitFrameworkAssembly);
         }
     }
