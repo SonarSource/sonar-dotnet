@@ -56,7 +56,7 @@ namespace SonarAnalyzer.Rules.CSharp
             KnownType.Xunit_Assert);
 
         private static readonly IEnumerable<string> TrackedAssertionStartWithMethodName = ImmutableList.Create(
-            "Assert", "Should", "Expect");
+            "Assert", "Should", "Expect", "Must", "Verify");
 
         protected override void Initialize(SonarAnalysisContext context)
         {

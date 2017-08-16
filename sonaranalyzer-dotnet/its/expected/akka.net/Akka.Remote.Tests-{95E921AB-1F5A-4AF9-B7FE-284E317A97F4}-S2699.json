@@ -43,45 +43,6 @@
 "id":  "S2699",
 "message":  "Add at least one assertion to this test case.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote.Tests\Serialization\DaemonMsgCreateSerializerSpec.cs",
-"region":  {
-"startLine":  53,
-"startColumn":  21,
-"endLine":  53,
-"endColumn":  103
-}
-}
-},
-{
-"id":  "S2699",
-"message":  "Add at least one assertion to this test case.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote.Tests\Serialization\DaemonMsgCreateSerializerSpec.cs",
-"region":  {
-"startLine":  59,
-"startColumn":  21,
-"endLine":  59,
-"endColumn":  103
-}
-}
-},
-{
-"id":  "S2699",
-"message":  "Add at least one assertion to this test case.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote.Tests\Serialization\DaemonMsgCreateSerializerSpec.cs",
-"region":  {
-"startLine":  65,
-"startColumn":  21,
-"endLine":  65,
-"endColumn":  110
-}
-}
-},
-{
-"id":  "S2699",
-"message":  "Add at least one assertion to this test case.",
-"location":  {
 "uri":  "sources\akka.net\src\core\Akka.Remote.Tests\Transport\AkkaProtocolSpec.cs",
 "region":  {
 "startLine":  134,
