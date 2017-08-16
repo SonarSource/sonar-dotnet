@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2017 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -18,24 +18,18 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SonarAnalyzer.Rules.CSharp;
+using Microsoft.CodeAnalysis;
 
-namespace SonarAnalyzer.UnitTest.Rules
+namespace SonarAnalyzer.Helpers
 {
-    [TestClass]
-    public class TestMethodShouldNotBeIgnoredTest
+    public static class SemanticModelHelper
     {
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void TestMethodShouldNotBeIgnored()
+        public static SemanticModel GetSyntaxTreeSemanticModel(this SemanticModel model, SyntaxNode node)
         {
-            Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldNotBeIgnored.cs",
-                new TestMethodShouldNotBeIgnored(),
-                null,
-                Verifier.MicrosoftVisualStudioTestToolsUnitTestingAssembly,
-                Verifier.NUnitFrameworkAssembly,
-                Verifier.XunitCoreAssembly);
+            // See https://github.com/dotnet/roslyn/issues/18730
+            return model.SyntaxTree == node.SyntaxTree
+                ? model
+                : model.Compilation.GetSemanticModel(node.SyntaxTree);
         }
     }
 }

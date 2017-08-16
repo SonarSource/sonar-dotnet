@@ -4,32 +4,6 @@
 "id":  "S2372",
 "message":  "Remove the exception throwing from this property getter, or refactor the property into a method.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\NancyModule.cs",
-"region":  {
-"startLine":  89,
-"startColumn":  21,
-"endLine":  89,
-"endColumn":  148
-}
-}
-},
-{
-"id":  "S2372",
-"message":  "Remove the exception throwing from this property getter, or refactor the property into a method.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\Session\NullSessionProvider.cs",
-"region":  {
-"startLine":  41,
-"startColumn":  17,
-"endLine":  41,
-"endColumn":  88
-}
-}
-},
-{
-"id":  "S2372",
-"message":  "Remove the exception throwing from this property getter, or refactor the property into a method.",
-"location":  {
 "uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
 "region":  {
 "startLine":  2449,

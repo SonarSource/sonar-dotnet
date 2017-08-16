@@ -450,5 +450,36 @@ namespace Tests.Diagnostics
                 }
             }
         }
+
+        protected virtual FileStream CreateLock(string lockFileName, bool retries)
+        {
+            if (retries) ResetRetryTimeout();
+            FileStream filelock = null;
+            while (true)
+            {
+                try
+                {
+                    filelock = new FileStream(lockFileName,
+                        FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.None, 8, FileOptions.DeleteOnClose);
+                    return filelock;
+                }
+                catch (Exception e)
+                {
+                    int code = System.Runtime.InteropServices.Marshal.GetHRForException(e);
+                    if (code == unchecked((int)0x80070020) ||
+                        code == unchecked((int)0x80070021))
+                    {
+                        // Sharing violation
+                        if (!retries) return null;
+                        if (!WaitRetryTimeout()) throw;
+                    }
+                    else
+                    {
+                        // All others are considered an error and we don't retry
+                        throw;
+                    }
+                }
+            };
+        }
     }
 }
