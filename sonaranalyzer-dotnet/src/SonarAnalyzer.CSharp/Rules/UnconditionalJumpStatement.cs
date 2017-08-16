@@ -49,6 +49,10 @@ namespace SonarAnalyzer.Rules.CSharp
             SyntaxKind.DoStatement
         };
 
+        private static readonly ISet<SyntaxKind> StatementsThatCanThrow = ImmutableHashSet.Create(
+            SyntaxKind.InvocationExpression,
+            SyntaxKind.ObjectCreationExpression);
+
         protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
@@ -157,7 +161,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
 
                 if (node.IsKind(SyntaxKind.ReturnStatement) &&
-                    node.DescendantNodes().Any(n => n.IsKind(SyntaxKind.InvocationExpression)))
+                    node.DescendantNodes().Any(n => n.IsAnyKind(StatementsThatCanThrow)))
                 {
                     return true;
                 }
@@ -165,7 +169,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return tryAncestor.Block.Statements
                     .TakeWhile(statement => !statement.Equals(node))
                     .SelectMany(statement => statement.DescendantNodes())
-                    .Any(statement => statement.IsKind(SyntaxKind.InvocationExpression));
+                    .Any(statement => statement.IsAnyKind(StatementsThatCanThrow));
             }
 
             private static readonly ISet<SyntaxKind> lambdaOrLoop
