@@ -50,10 +50,13 @@ namespace SonarAnalyzer.Rules.CSharp
             KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_ExpectedExceptionAttribute,
             KnownType.NUnit_Framework_ExpectedExceptionAttribute);
 
-        private static readonly ISet<KnownType> TrackedAssertions = ImmutableHashSet.Create(
+        private static readonly ISet<KnownType> TrackedAssertionTypes = ImmutableHashSet.Create(
             KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_Assert,
             KnownType.NUnit_Framework_Assert,
             KnownType.Xunit_Assert);
+
+        private static readonly IEnumerable<string> TrackedAssertionStartWithMethodName = ImmutableList.Create(
+            "Assert", "Should", "Expect");
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -109,7 +112,8 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             return symbol.ContainingType.ToString().StartsWith("FluentAssertions") ||
-                symbol.ContainingType.IsAny(TrackedAssertions);
+                symbol.ContainingType.IsAny(TrackedAssertionTypes) ||
+                TrackedAssertionStartWithMethodName.Any(name => symbol.Name.StartsWith(name));
         }
     }
 }

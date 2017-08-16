@@ -55,6 +55,17 @@ namespace TestMsTest
             Action act = () => { throw new Exception(); };
             act.ShouldNotThrow<Exception>();
         }
+
+        [TestMethod]
+        public void TestMethod8()
+        {
+            AssertSomething();
+        }
+
+        public void AssertSomething()
+        {
+            Assert.IsTrue(true);
+        }
     }
 }
 
@@ -115,6 +126,17 @@ namespace TestNUnit
             Action act = () => { throw new Exception(); };
             act.ShouldNotThrow<Exception>();
         }
+
+        [Test]
+        public void Test8()
+        {
+            AssertSomething();
+        }
+
+        public void AssertSomething()
+        {
+            Assert.IsTrue(true);
+        }
     }
 }
 
@@ -166,6 +188,17 @@ namespace TestXunit
         {
             Action act = () => { throw new Exception(); };
             act.ShouldNotThrow<Exception>();
+        }
+
+        [Fact]
+        public void Fact8()
+        {
+            AssertSomething();
+        }
+
+        public void AssertSomething()
+        {
+            Assert.True(true);
         }
     }
 }

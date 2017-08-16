@@ -6,62 +6,10 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.Validation.FluentValidation.Tests\DefaultFluentAdapterFactoryFixture.cs",
 "region":  {
-"startLine":  14,
-"startColumn":  21,
-"endLine":  14,
-"endColumn":  68
-}
-}
-},
-{
-"id":  "S2699",
-"message":  "Add at least one assertion to this test case.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.Validation.FluentValidation.Tests\DefaultFluentAdapterFactoryFixture.cs",
-"region":  {
 "startLine":  35,
 "startColumn":  21,
 "endLine":  35,
 "endColumn":  73
-}
-}
-},
-{
-"id":  "S2699",
-"message":  "Add at least one assertion to this test case.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.Validation.FluentValidation.Tests\DefaultFluentAdapterFactoryFixture.cs",
-"region":  {
-"startLine":  50,
-"startColumn":  21,
-"endLine":  50,
-"endColumn":  94
-}
-}
-},
-{
-"id":  "S2699",
-"message":  "Add at least one assertion to this test case.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.Validation.FluentValidation.Tests\FluentValidationValidatorFactoryFixture.cs",
-"region":  {
-"startLine":  28,
-"startColumn":  21,
-"endLine":  28,
-"endColumn":  77
-}
-}
-},
-{
-"id":  "S2699",
-"message":  "Add at least one assertion to this test case.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.Validation.FluentValidation.Tests\FluentValidationValidatorFactoryFixture.cs",
-"region":  {
-"startLine":  39,
-"startColumn":  21,
-"endLine":  39,
-"endColumn":  76
 }
 }
 }
