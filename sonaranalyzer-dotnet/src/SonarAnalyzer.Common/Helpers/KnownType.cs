@@ -344,17 +344,23 @@ namespace SonarAnalyzer.Helpers
             new KnownType("Microsoft.VisualStudio.TestTools.UnitTesting.IgnoreAttribute");
         public static readonly KnownType Microsoft_VisualStudio_TestTools_UnitTesting_WorkItemAttribute =
             new KnownType("Microsoft.VisualStudio.TestTools.UnitTesting.WorkItemAttribute");
-
         public static readonly KnownType Microsoft_VisualStudio_TestTools_UnitTesting_Assert =
             new KnownType("Microsoft.VisualStudio.TestTools.UnitTesting.Assert");
+
         public static readonly KnownType Xunit_FactAttribute = new KnownType("Xunit.FactAttribute");
         public static readonly KnownType Xunit_TheoryAttribute = new KnownType("Xunit.TheoryAttribute");
+        public static readonly KnownType Xunit_Assert =
+            new KnownType("Xunit.Assert");
 
         public static readonly KnownType NUnit_Framework_TestAttribute = new KnownType("NUnit.Framework.TestAttribute");
         public static readonly KnownType NUnit_Framework_TestCaseAttribute = new KnownType("NUnit.Framework.TestCaseAttribute");
         public static readonly KnownType NUnit_Framework_TestFixtureAttribute = new KnownType("NUnit.Framework.TestFixtureAttribute");
         public static readonly KnownType NUnit_Framework_ExpectedExceptionAttribute =
             new KnownType("NUnit.Framework.ExpectedExceptionAttribute");
+        public static readonly KnownType NUnit_Framework_Assert =
+            new KnownType("NUnit.Framework.Assert");
+        public static readonly KnownType NUnit_Framework_IgnoreAttribute =
+            new KnownType("NUnit.Framework.IgnoreAttribute");
 
         #endregion
 
