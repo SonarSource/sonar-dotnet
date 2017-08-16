@@ -32,5 +32,17 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             Verifier.VerifyAnalyzer(@"TestCases\ImplementIDisposableCorrectly.cs", new ImplementIDisposableCorrectly());
         }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void ImplementIDisposableCorrectly_PartialClassesInDifferentFiles()
+        {
+            Verifier.VerifyAnalyzer(
+                new[]
+                {
+                    @"TestCases\ImplementIDisposableCorrectlyPartial1.cs",
+                    @"TestCases\ImplementIDisposableCorrectlyPartial2.cs"
+                }, new ImplementIDisposableCorrectly());
+        }
     }
 }
