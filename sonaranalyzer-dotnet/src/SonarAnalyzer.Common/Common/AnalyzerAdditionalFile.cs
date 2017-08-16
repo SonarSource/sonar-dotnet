@@ -27,18 +27,17 @@ namespace SonarAnalyzer.Common
 {
     public sealed class AnalyzerAdditionalFile : AdditionalText
     {
-        private readonly string path;
 
         public AnalyzerAdditionalFile(string path)
         {
-            this.path = path;
+            Path = path;
         }
 
-        public override string Path => path;
+        public override string Path { get; }
 
         public override SourceText GetText(CancellationToken cancellationToken = default(CancellationToken))
         {
-            return SourceText.From(File.ReadAllText(path));
+            return SourceText.From(File.ReadAllText(Path));
         }
     }
 }

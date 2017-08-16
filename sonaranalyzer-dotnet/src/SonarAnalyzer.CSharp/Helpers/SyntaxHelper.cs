@@ -29,9 +29,12 @@ namespace SonarAnalyzer.Helpers
 {
     internal static class SyntaxHelper
     {
-        public static readonly ExpressionSyntax NullLiteralExpression = SyntaxFactory.LiteralExpression(SyntaxKind.NullLiteralExpression);
-        public static readonly ExpressionSyntax FalseLiteralExpression = SyntaxFactory.LiteralExpression(SyntaxKind.FalseLiteralExpression);
-        public static readonly ExpressionSyntax TrueLiteralExpression = SyntaxFactory.LiteralExpression(SyntaxKind.TrueLiteralExpression);
+        public static readonly ExpressionSyntax NullLiteralExpression =
+            SyntaxFactory.LiteralExpression(SyntaxKind.NullLiteralExpression);
+        public static readonly ExpressionSyntax FalseLiteralExpression =
+            SyntaxFactory.LiteralExpression(SyntaxKind.FalseLiteralExpression);
+        public static readonly ExpressionSyntax TrueLiteralExpression =
+            SyntaxFactory.LiteralExpression(SyntaxKind.TrueLiteralExpression);
         public static readonly string NameOfKeywordText = SyntaxFacts.GetText(SyntaxKind.NameOfKeyword);
 
         public static bool HasExactlyNArguments(this InvocationExpressionSyntax invocation, int count)
@@ -65,8 +68,8 @@ namespace SonarAnalyzer.Helpers
             return current;
         }
 
-        public static bool TryGetAttribute(this SyntaxList<AttributeListSyntax> attributeLists, KnownType attributeKnownType,
-            SemanticModel semanticModel, out AttributeSyntax searchedAttribute)
+        public static bool TryGetAttribute(this SyntaxList<AttributeListSyntax> attributeLists,
+            KnownType attributeKnownType, SemanticModel semanticModel, out AttributeSyntax searchedAttribute)
         {
             searchedAttribute = null;
 
@@ -165,7 +168,8 @@ namespace SonarAnalyzer.Helpers
             return collection.Contains((SyntaxKind)syntaxToken.RawKind);
         }
 
-        public static bool ContainsMethodInvocation(BaseMethodDeclarationSyntax methodDeclarationBase, SemanticModel semanticModel,
+        public static bool ContainsMethodInvocation(BaseMethodDeclarationSyntax methodDeclarationBase,
+            SemanticModel semanticModel,
             Func<InvocationExpressionSyntax, bool> syntaxPredicate, Func<IMethodSymbol, bool> symbolPredicate)
         {
             IEnumerable<SyntaxNode> childNodes = methodDeclarationBase?.Body?.DescendantNodes();

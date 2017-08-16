@@ -101,7 +101,8 @@ namespace SonarAnalyzer.Rules.CSharp
             if (identifier.ValueText.StartsWith("_", StringComparison.Ordinal) ||
                 identifier.ValueText.EndsWith("_", StringComparison.Ordinal))
             {
-                context.ReportDiagnostic(Diagnostic.Create(rule_TypeName, identifier.GetLocation(), TypeKindNameMapping[typeDeclaration.Kind()],
+                context.ReportDiagnostic(Diagnostic.Create(rule_TypeName, identifier.GetLocation(),
+                    TypeKindNameMapping[typeDeclaration.Kind()],
                     identifier.ValueText, MessageFormatUnderscore));
                 return;
             }
@@ -141,7 +142,8 @@ namespace SonarAnalyzer.Rules.CSharp
             if (identifier.ValueText.StartsWith("_", StringComparison.Ordinal) ||
                 identifier.ValueText.EndsWith("_", StringComparison.Ordinal))
             {
-                context.ReportDiagnostic(Diagnostic.Create(rule_MethodName, identifier.GetLocation(), TypeKindNameMapping[member.Kind()],
+                context.ReportDiagnostic(Diagnostic.Create(rule_MethodName, identifier.GetLocation(),
+                    TypeKindNameMapping[member.Kind()],
                     identifier.ValueText, MessageFormatUnderscore));
                 return;
             }
@@ -155,7 +157,8 @@ namespace SonarAnalyzer.Rules.CSharp
             if (!IsMemberNameValid(identifier.ValueText, out suggestion))
             {
                 var messageEnding = string.Format(MessageFormatNonUnderscore, suggestion);
-                context.ReportDiagnostic(Diagnostic.Create(rule_MethodName, identifier.GetLocation(), TypeKindNameMapping[member.Kind()],
+                context.ReportDiagnostic(Diagnostic.Create(rule_MethodName, identifier.GetLocation(),
+                    TypeKindNameMapping[member.Kind()],
                     identifier.ValueText, messageEnding));
             }
         }
@@ -331,11 +334,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 : input;
         }
 
-        private static bool IsCharUpper(string input, int idx)
-        {
-            return idx < 0 || idx >= input.Length
-                ? false
-                : char.IsUpper(input[idx]);
-        }
+        private static bool IsCharUpper(string input, int idx) => idx >= 0
+            && idx < input.Length
+            && char.IsUpper(input[idx]);
     }
 }

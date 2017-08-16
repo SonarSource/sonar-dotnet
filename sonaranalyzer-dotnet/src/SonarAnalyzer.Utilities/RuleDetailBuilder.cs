@@ -24,10 +24,10 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using SonarAnalyzer.Helpers;
-using SonarAnalyzer.Common;
-using SonarAnalyzer.RuleDescriptors;
 using System.Resources;
+using SonarAnalyzer.Common;
+using SonarAnalyzer.Helpers;
+using SonarAnalyzer.RuleDescriptors;
 
 namespace SonarAnalyzer.Utilities
 {
@@ -52,7 +52,8 @@ namespace SonarAnalyzer.Utilities
                 .SelectMany(t => GetRuleDetailFromRuleAttributes(t, language));
         }
 
-        private static IEnumerable<RuleDetail> GetRuleDetailFromRuleAttributes(Type analyzerType, AnalyzerLanguage language)
+        private static IEnumerable<RuleDetail> GetRuleDetailFromRuleAttributes(Type analyzerType,
+            AnalyzerLanguage language)
         {
             return analyzerType.GetCustomAttributes<RuleAttribute>()
                 .Select(ruleAttribute => GetRuleDetail(ruleAttribute, analyzerType, language));
@@ -74,7 +75,8 @@ namespace SonarAnalyzer.Utilities
                 RemediationCost = resources.GetString($"{rule.Key}_RemediationCost")
             };
 
-            ruleDetail.Tags.AddRange(resources.GetString($"{rule.Key}_Tags").Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries));
+            ruleDetail.Tags.AddRange(resources.GetString($"{rule.Key}_Tags").Split(new[] { ',' },
+                StringSplitOptions.RemoveEmptyEntries));
 
             GetParameters(analyzerType, ruleDetail);
             GetCodeFixNames(analyzerType, ruleDetail);
@@ -178,14 +180,18 @@ namespace SonarAnalyzer.Utilities
             if (language == AnalyzerLanguage.CSharp)
             {
                 return resources.FirstOrDefault(r =>
-                    r.EndsWith(string.Format(CultureInfo.InvariantCulture, RuleDescriptionPathPattern, key), StringComparison.OrdinalIgnoreCase) ||
-                    r.EndsWith(string.Format(CultureInfo.InvariantCulture, RuleDescriptionPathPattern, key + "_cs"), StringComparison.OrdinalIgnoreCase));
+                    r.EndsWith(string.Format(CultureInfo.InvariantCulture, RuleDescriptionPathPattern, key),
+                        StringComparison.OrdinalIgnoreCase) ||
+                    r.EndsWith(string.Format(CultureInfo.InvariantCulture, RuleDescriptionPathPattern, key + "_cs"),
+                        StringComparison.OrdinalIgnoreCase));
             }
             if (language == AnalyzerLanguage.VisualBasic)
             {
                 return resources.FirstOrDefault(r =>
-                    r.EndsWith(string.Format(CultureInfo.InvariantCulture, RuleDescriptionPathPattern, key), StringComparison.OrdinalIgnoreCase) ||
-                    r.EndsWith(string.Format(CultureInfo.InvariantCulture, RuleDescriptionPathPattern, key + "_vb"), StringComparison.OrdinalIgnoreCase));
+                    r.EndsWith(string.Format(CultureInfo.InvariantCulture, RuleDescriptionPathPattern, key),
+                        StringComparison.OrdinalIgnoreCase) ||
+                    r.EndsWith(string.Format(CultureInfo.InvariantCulture, RuleDescriptionPathPattern, key + "_vb"),
+                        StringComparison.OrdinalIgnoreCase));
             }
 
             throw new ArgumentException("Language needs to be either C# or VB.NET", nameof(language));

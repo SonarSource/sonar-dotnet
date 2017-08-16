@@ -53,8 +53,7 @@ namespace SonarAnalyzer.Rules.CSharp
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
             ImmutableArray.Create(bugRule, codeSmellRule);
 
-        private static readonly ISet<MethodSignature> HandledFormatMethods = new HashSet<MethodSignature>
-        {
+        private static readonly ISet<MethodSignature> HandledFormatMethods = ImmutableHashSet.Create(
             new MethodSignature(KnownType.System_String, "Format"),
             new MethodSignature(KnownType.System_Console, "Write"),
             new MethodSignature(KnownType.System_Console, "WriteLine"),
@@ -65,12 +64,9 @@ namespace SonarAnalyzer.Rules.CSharp
             new MethodSignature(KnownType.System_Diagnostics_Trace, "TraceError"),
             new MethodSignature(KnownType.System_Diagnostics_Trace, "TraceInformation"),
             new MethodSignature(KnownType.System_Diagnostics_Trace, "TraceWarning"),
-            new MethodSignature(KnownType.System_Diagnostics_TraceSource, "TraceInformation")
-        };
+            new MethodSignature(KnownType.System_Diagnostics_TraceSource, "TraceInformation"));
 
-        private static readonly ISet<ValidationFailure> bugRelatedFailures =
-            new HashSet<ValidationFailure>
-            {
+        private static readonly ISet<ValidationFailure> bugRelatedFailures = ImmutableHashSet.Create(
                 ValidationFailure.UnknownError,
                 ValidationFailure.NullFormatString,
                 ValidationFailure.InvalidCharacterAfterOpenCurlyBrace,
@@ -78,16 +74,12 @@ namespace SonarAnalyzer.Rules.CSharp
                 ValidationFailure.FormatItemMalformed,
                 ValidationFailure.FormatItemIndexBiggerThanArgsCount,
                 ValidationFailure.FormatItemIndexBiggerThanMaxValue,
-                ValidationFailure.FormatItemAlignmentBiggerThanMaxValue
-            };
+                ValidationFailure.FormatItemAlignmentBiggerThanMaxValue);
 
-        private static readonly ISet<ValidationFailure> codeSmellRelatedFailures =
-            new HashSet<ValidationFailure>
-            {
+        private static readonly ISet<ValidationFailure> codeSmellRelatedFailures = ImmutableHashSet.Create(
                 ValidationFailure.SimpleString,
                 ValidationFailure.MissingFormatItemIndex,
-                ValidationFailure.UnusedFormatArguments
-            };
+                ValidationFailure.UnusedFormatArguments);
 
         private static readonly Regex StringFormatItemRegex = // pattern is: index[,alignment][:formatString]
             new Regex(@"^(?<Index>\d+)(\s*,\s*(?<Alignment>-?\d+)\s*)?(:(?<Format>.+))?$", RegexOptions.Compiled);
@@ -171,8 +163,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             List<FormatStringItem> formatStringItems;
             return ExtractFormatItems(formatStringText, out formatStringItems) ??
-                TryValidateFormatString(formatStringText, formatStringItems, argumentList, formatArgumentIndex,
-                    semanticModel);
+                TryValidateFormatString(formatStringItems, argumentList, formatArgumentIndex, semanticModel);
         }
 
         private static ValidationFailure ExtractFormatItems(string formatString,
@@ -267,9 +258,8 @@ namespace SonarAnalyzer.Rules.CSharp
             return null;
         }
 
-        private static ValidationFailure TryValidateFormatString(string formatStringText,
-            ICollection<FormatStringItem> formatStringItems, ArgumentListSyntax argumentList, int formatArgumentIndex,
-            SemanticModel semanticModel)
+        private static ValidationFailure TryValidateFormatString(ICollection<FormatStringItem> formatStringItems,
+            ArgumentListSyntax argumentList, int formatArgumentIndex, SemanticModel semanticModel)
         {
             if (formatStringItems.Any(x => x.Index > MaxValueForArgumentIndexAndAlignment))
             {

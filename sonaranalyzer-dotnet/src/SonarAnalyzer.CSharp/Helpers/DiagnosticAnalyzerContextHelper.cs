@@ -33,7 +33,8 @@ namespace SonarAnalyzer.Helpers
             Action<SyntaxNodeAnalysisContext> action,
             params TLanguageKindEnum[] syntaxKinds) where TLanguageKindEnum : struct
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(CSharp.GeneratedCodeRecognizer.Instance, action, syntaxKinds);
+            context.RegisterSyntaxNodeActionInNonGenerated(CSharp.GeneratedCodeRecognizer.Instance, action,
+                syntaxKinds);
         }
 
         public static void RegisterSyntaxNodeActionInNonGenerated<TLanguageKindEnum>(
@@ -41,7 +42,8 @@ namespace SonarAnalyzer.Helpers
             Action<SyntaxNodeAnalysisContext> action,
             params TLanguageKindEnum[] syntaxKinds) where TLanguageKindEnum : struct
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(CSharp.GeneratedCodeRecognizer.Instance, action, syntaxKinds);
+            context.RegisterSyntaxNodeActionInNonGenerated(CSharp.GeneratedCodeRecognizer.Instance, action,
+                syntaxKinds);
         }
 
         public static void RegisterSyntaxNodeActionInNonGenerated<TLanguageKindEnum>(
@@ -49,7 +51,8 @@ namespace SonarAnalyzer.Helpers
             Action<SyntaxNodeAnalysisContext> action,
             params TLanguageKindEnum[] syntaxKinds) where TLanguageKindEnum : struct
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(CSharp.GeneratedCodeRecognizer.Instance, action, syntaxKinds);
+            context.RegisterSyntaxNodeActionInNonGenerated(CSharp.GeneratedCodeRecognizer.Instance, action,
+                syntaxKinds);
         }
 
         public static void RegisterSyntaxTreeActionInNonGenerated(
@@ -104,7 +107,8 @@ namespace SonarAnalyzer.Helpers
             this SymbolAnalysisContext context,
             Diagnostic diagnostic)
         {
-            context.ReportDiagnosticIfNonGenerated(CSharp.GeneratedCodeRecognizer.Instance, diagnostic, context.Compilation);
+            context.ReportDiagnosticIfNonGenerated(CSharp.GeneratedCodeRecognizer.Instance, diagnostic,
+                context.Compilation);
         }
 
         #endregion

@@ -46,8 +46,8 @@ namespace SonarAnalyzer.Helpers
         {
             if (!VisitEndedCorrectly)
             {
-                throw new InvalidOperationException(
-                    $"There is a problem with the cognitive complexity walker. Expecting ending nesting to be '0' got '{nestingLevel}'");
+                throw new InvalidOperationException("There is a problem with the cognitive complexity walker. " +
+                    $"Expecting ending nesting to be '0' got '{nestingLevel}'");
             }
         }
 
