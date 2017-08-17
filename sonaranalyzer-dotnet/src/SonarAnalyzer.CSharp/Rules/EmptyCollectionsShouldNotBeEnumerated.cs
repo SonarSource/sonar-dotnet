@@ -75,14 +75,16 @@ namespace SonarAnalyzer.Rules.CSharp
             nameof(List<object>.GetType),
             nameof(List<object>.ToString),
             nameof(List<object>.ToArray),
+            nameof(List<object>.Contains),
             nameof(Array.GetLength),
-            nameof(Array.GetLongLength),
+            "GetLongLength",
             nameof(Array.GetLowerBound),
             nameof(Array.GetUpperBound),
+            nameof(HashSet<object>.Contains),
             nameof(Dictionary<object, object>.ContainsKey),
             nameof(Dictionary<object, object>.ContainsValue),
-            nameof(Dictionary<object, object>.GetObjectData),
-            nameof(Dictionary<object, object>.OnDeserialization),
+            "GetObjectData",
+            "OnDeserialization",
             nameof(Dictionary<object, object>.TryGetValue),
         };
 
@@ -149,7 +151,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
             private ProgramState ProcessInvocation(ProgramState programState, InvocationExpressionSyntax invocation)
             {
-                var newProgramState = RemoveCollectionConstraintsFromArguments(invocation, programState);
+                // Remove collection constraint from all arguments passed to an invocation
+                var newProgramState = RemoveCollectionConstraintsFromArguments(invocation.ArgumentList, programState);
 
                 var memberAccess = invocation.Expression as MemberAccessExpressionSyntax;
                 if (memberAccess == null)
@@ -168,6 +171,12 @@ namespace SonarAnalyzer.Rules.CSharp
                     {
                         // ... ignore some methods that are irrelevant
                         return newProgramState;
+                    }
+
+                    if (methodSymbol.IsExtensionMethod)
+                    {
+                        // Extension methods could modify the collection, hence we remove the Empty constraint if present
+                        return collectionSymbol.RemoveConstraint(CollectionCapacityConstraint.Empty, newProgramState);
                     }
 
                     if (AddMethods.Contains(methodSymbol.Name))
@@ -213,17 +222,32 @@ namespace SonarAnalyzer.Rules.CSharp
                 return programState;
             }
 
+            public override ProgramState ObjectCreating(ProgramState programState, SyntaxNode instruction)
+            {
+                if (instruction.IsKind(SyntaxKind.ObjectCreationExpression))
+                {
+                    // When any object is being created ...
+                    var objectCreationSyntax = (ObjectCreationExpressionSyntax)instruction;
+
+                    // Remove collection constraint from all arguments passed to the constructor
+                    var newProgramState = RemoveCollectionConstraintsFromArguments(objectCreationSyntax.ArgumentList, programState);
+                    return newProgramState;
+                }
+
+                return programState;
+            }
+
             public override ProgramState ObjectCreated(ProgramState programState, SymbolicValue symbolicValue,
                 SyntaxNode instruction)
             {
+                var newProgramState = programState;
                 CollectionCapacityConstraint constraint = null;
 
                 if (instruction.IsKind(SyntaxKind.ObjectCreationExpression))
                 {
-                    // When a collection is being created ...
                     var objectCreationSyntax = (ObjectCreationExpressionSyntax)instruction;
-
                     var constructor = semanticModel.GetSymbolInfo(objectCreationSyntax).Symbol as IMethodSymbol;
+                    // When a collection is being created ...
                     if (IsCollectionConstructor(constructor))
                     {
                         // ... try to devise what constraint could be applied by the constructor or the initializer
@@ -244,21 +268,21 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
 
                 return constraint != null
-                    ? symbolicValue.SetConstraint(constraint, programState)
-                    : programState;
+                    ? symbolicValue.SetConstraint(constraint, newProgramState)
+                    : newProgramState;
             }
 
             private static bool IsIgnoredMethod(IMethodSymbol methodSymbol)
             {
                 return methodSymbol == null
-                    || methodSymbol.IsExtensionMethod
                     || IgnoredMethods.Contains(methodSymbol.Name);
             }
 
             private CollectionCapacityConstraint GetArrayConstraint(ArrayCreationExpressionSyntax arrayCreation)
             {
-                // Only one-dimensional arrays can be empty, others are indeterminate, because this code becomes ugly
-                if (arrayCreation.Type.RankSpecifiers.Count != 1 ||
+                // Only one-dimensional arrays can be empty, others are indeterminate, this can be improved in the future
+                if (arrayCreation?.Type?.RankSpecifiers == null ||
+                    arrayCreation.Type.RankSpecifiers.Count != 1 ||
                     arrayCreation.Type.RankSpecifiers[0].Sizes.Count != 1)
                 {
                     return null;
@@ -284,7 +308,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             private CollectionCapacityConstraint GetInitializerConstraint(InitializerExpressionSyntax initializer)
             {
-                if (initializer == null)
+                if (initializer?.Expressions == null)
                 {
                     return null;
                 }
@@ -294,24 +318,32 @@ namespace SonarAnalyzer.Rules.CSharp
                     : CollectionCapacityConstraint.NotEmpty;
             }
 
-            private static ProgramState RemoveCollectionConstraintsFromArguments(InvocationExpressionSyntax invocation,
+            private static ProgramState RemoveCollectionConstraintsFromArguments(ArgumentListSyntax argumentList,
                 ProgramState programState)
             {
-                // Remove the collection constraints from all arguments of the invocation expression
+                return GetArgumentSymbolicValues(argumentList, programState)
+                    .Aggregate(programState, 
+                        (state, value) => value.RemoveConstraint(CollectionCapacityConstraint.Empty, state));
+            }
 
-                var values = invocation.ArgumentList.Arguments.Select((node, index) =>
+            private static IEnumerable<SymbolicValue> GetArgumentSymbolicValues(ArgumentListSyntax argumentList,
+                ProgramState programState)
+            {
+                if (argumentList?.Arguments == null)
                 {
-                    SymbolicValue value;
-                    programState.ExpressionStack.Pop(out value);
-                    return value;
-                }).ToList();
-
-                foreach (var value in values)
-                {
-                    programState = value.RemoveConstraint(CollectionCapacityConstraint.Empty, programState);
+                    return Enumerable.Empty<SymbolicValue>();
                 }
 
-                return programState;
+                var tempProgramState = programState;
+
+                return argumentList.Arguments
+                    .Select(argument =>
+                    {
+                        SymbolicValue value;
+                        // We have side effect here, but it is harmless, we only need the symbolic values
+                        tempProgramState = tempProgramState.PopValue(out value);
+                        return value;
+                    });
             }
 
             private static bool IsDictionarySetItem(ElementAccessExpressionSyntax elementAccess) =>
