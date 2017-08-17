@@ -56,7 +56,6 @@ namespace Tests.Diagnostics
         {
             var list = new List<int>();
             list.Clear(); // Noncompliant
-            list.Contains(1); // Noncompliant
             list.Exists(Predicate); // Noncompliant
             list.Find(Predicate); // Noncompliant
             list.FindIndex(Predicate); // Noncompliant
@@ -105,6 +104,20 @@ namespace Tests.Diagnostics
             list.InsertRange(0, items);
             list.Clear(); // Compliant
         }
+
+        public void ExtensionMethods_Remove_Constraints()
+        {
+            var list = new List<int>();
+            list.Any(); // Compliant
+            list.Clear(); // Compliant, this will normally raise
+        }
+
+        public void PassingToConstructor_Removes_Constraints()
+        {
+            var list = new List<int>();
+            new Foo(1, 2, list); // Compliant
+            list.Clear(); // Compliant, this will normally raise
+        }
     }
 
     class QueueTests
@@ -149,7 +162,6 @@ namespace Tests.Diagnostics
         {
             var list = new Queue<int>();
             list.Clear(); // Noncompliant
-            list.Contains(1); // Noncompliant
             list.Dequeue(); // Noncompliant
             list.Peek(); // Noncompliant
         }
@@ -168,6 +180,20 @@ namespace Tests.Diagnostics
             var list = new Queue<int>();
             list.Enqueue(1);
             list.Clear(); // Compliant, will normally raise
+        }
+
+        public void ExtensionMethods_Remove_Constraints()
+        {
+            var list = new Queue<int>();
+            list.Any(); // Compliant
+            list.Clear(); // Compliant, this will normally raise
+        }
+
+        public void PassingToConstructor_Removes_Constraints()
+        {
+            var list = new Queue<int>();
+            new Foo(1, 2, list); // Compliant
+            list.Clear(); // Compliant, this will normally raise
         }
     }
 
@@ -213,7 +239,6 @@ namespace Tests.Diagnostics
         {
             var list = new Stack<int>();
             list.Clear(); // Noncompliant
-            list.Contains(1); // Noncompliant
             list.Pop(); // Noncompliant
             list.Peek(); // Noncompliant
         }
@@ -232,6 +257,20 @@ namespace Tests.Diagnostics
             var list = new Stack<int>();
             list.Push(1);
             list.Clear(); // Compliant, will normally raise
+        }
+
+        public void ExtensionMethods_Remove_Constraints()
+        {
+            var list = new Stack<int>();
+            list.Any(); // Compliant
+            list.Clear(); // Compliant, this will normally raise
+        }
+
+        public void PassingToConstructor_Removes_Constraints()
+        {
+            var list = new Stack<int>();
+            new Foo(1, 2, list); // Compliant
+            list.Clear(); // Compliant, this will normally raise
         }
     }
 
@@ -277,7 +316,6 @@ namespace Tests.Diagnostics
         {
             var list = new ObservableCollection<int>();
             list.Clear(); // Noncompliant
-            list.Contains(1); // Noncompliant
             list.IndexOf(1); // Noncompliant
             list.Move(1, 0); // Noncompliant
             list.Remove(1); // Noncompliant
@@ -310,6 +348,20 @@ namespace Tests.Diagnostics
             list = new ObservableCollection<int>();
             list.Insert(0, 1);
             list.Clear(); // Compliant
+        }
+
+        public void ExtensionMethods_Remove_Constraints()
+        {
+            var list = new ObservableCollection<int>();
+            list.Any(); // Compliant
+            list.Clear(); // Compliant, this will normally raise
+        }
+
+        public void PassingToConstructor_Removes_Constraints()
+        {
+            var list = new ObservableCollection<int>();
+            new Foo(1, 2, list); // Compliant
+            list.Clear(); // Compliant, this will normally raise
         }
     }
 
@@ -374,18 +426,101 @@ namespace Tests.Diagnostics
             var a =list.Length;
         }
 
-        public void Methods_Set_NotEmpty()
+        public void ExtensionMethods_Remove_Constraints()
         {
-            var list = new ObservableCollection<int>();
-            list.Add(1);
-            list.Clear(); // Compliant, will normally raise
+            var list = new int[] { };
+            list.Any(); // Compliant
+            list.Clone(); // Compliant, this will normally raise
+        }
 
-            list = new ObservableCollection<int>();
-            list.Insert(0, 1);
-            list.Clear(); // Compliant
+        public void PassingToConstructor_Removes_Constraints()
+        {
+            var list = new int[] { };
+            new Foo(1, 2, list); // Compliant
+            list.Clone(); // Compliant, this will normally raise
         }
     }
 
+    class HashSetTests
+    {
+        private IEnumerable<int> items = new HashSet<int> { 1, 2, 3 };
+
+        private static bool Predicate(int i) => true;
+        private HashSet<int> Factory() => new HashSet<int>();
+
+        public void DefaultConstructor_Applies_Empty()
+        {
+            var set = new HashSet<int>();
+            set.Clear(); // Noncompliant
+        }
+
+        public void ConstructorWithEnumerable_Applies_NonEmpty()
+        {
+            var set = new HashSet<int>(items);
+            set.Clear(); // Compliant
+        }
+
+        public void ConstructorWithInitializer_Applies_NonEmpty()
+        {
+            var set = new HashSet<int> { 1, 2, 3 };
+            set.Clear(); // Compliant
+        }
+
+        public void ConstructorWithEmptyInitializer_Applies_Empty()
+        {
+            var set = new HashSet<int> { };
+            set.Clear(); // Noncompliant
+        }
+
+        public void Other_Initialization_Applies_No_Constraints()
+        {
+            var set = Factory();
+            set.Clear(); // Compliant, we don't know anything about the set
+        }
+
+        public void Methods_Raise_Issue()
+        {
+            var set = new HashSet<int>();
+            set.Clear(); // Noncompliant
+            set.Remove(1); // Noncompliant
+        }
+
+        public void Methods_Ignored()
+        {
+            var set = new HashSet<int>();
+            set.GetHashCode();
+            set.Equals(items);
+            set.GetType();
+            set.Contains(5);
+        }
+
+        public void ExtensionMethods_Should_Not_Raise()
+        {
+            var set = new HashSet<int>();
+            set.Any(); // Compliant
+        }
+
+        public void ExtensionMethods_Remove_Constraints()
+        {
+            var set = new HashSet<int>();
+            set.Any(); // Compliant
+            set.Clear(); // Compliant, this will normally raise
+        }
+
+        public void PassingToConstructor_Removes_Constraints()
+        {
+            var set = new HashSet<int>();
+            new Foo(1, 2, set); // Compliant
+            set.Clear(); // Compliant, this will normally raise
+        }
+
+        public void Methods_Set_NotEmpty()
+        {
+            var set = new HashSet<int>();
+            set.Add(1);
+            set.Clear(); // Compliant, will normally raise
+        }
+    }
 
     class DictionaryTests
     {
@@ -488,6 +623,20 @@ namespace Tests.Diagnostics
             list.Clear(); // Compliant
         }
 
+        public void Conditional_Add_With_Loop(bool condition)
+        {
+            var list = new List<int>();
+            while (true)
+            {
+                if (condition)
+                {
+                    list.Add(5);
+                    break;
+                }
+            }
+            list.Clear(); // Compliant
+        }
+
         public void Collection_Passed_As_Argument()
         {
             var list = new List<int>();
@@ -550,14 +699,19 @@ namespace Tests.Diagnostics
 
         private static void WriteCharBytes(List<byte> bytes, char v, Encoding e)
         {
-            throw new NotImplementedException();
         }
 
         private static int GetChar(string s, int v1, int v2)
         {
-            throw new NotImplementedException();
+            return 1;
         }
-
     }
 
+    class Foo
+    {
+        // Important to test not only the first argument
+        public Foo(int param, int other, IEnumerable<int> arg)
+        {
+        }
+    }
 }

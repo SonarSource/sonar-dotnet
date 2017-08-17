@@ -49,10 +49,7 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.CSharp
             var usingFinalizerBlock = block as UsingEndBlock;
             if (usingFinalizerBlock != null)
             {
-                foreach (var explodedGraphCheck in explodedGraphChecks)
-                {
-                    newProgramState = explodedGraphCheck.PreProcessUsingStatement(node.ProgramPoint, newProgramState);
-                }
+                newProgramState = InvokeChecks(newProgramState, (ps, check) => check.PreProcessUsingStatement(node.ProgramPoint, ps));
                 newProgramState = CleanStateAfterBlock(newProgramState, block);
                 EnqueueAllSuccessors(block, newProgramState);
                 return;
@@ -149,13 +146,10 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.CSharp
             var newProgramPoint = new ProgramPoint(node.ProgramPoint.Block, node.ProgramPoint.Offset + 1);
             var newProgramState = node.ProgramState;
 
-            foreach (var explodedGraphCheck in explodedGraphChecks)
+            newProgramState = InvokeChecks(newProgramState, (ps, check) => check.PreProcessInstruction(node.ProgramPoint, ps));
+            if (newProgramState == null)
             {
-                newProgramState = explodedGraphCheck.PreProcessInstruction(node.ProgramPoint, newProgramState);
-                if (newProgramState == null)
-                {
-                    return;
-                }
+                return;
             }
 
             switch (instruction.Kind())
@@ -349,7 +343,8 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.CSharp
                         var sv = new SymbolicValue();
                         newProgramState = sv.SetConstraint(ObjectConstraint.NotNull, newProgramState);
                         newProgramState = newProgramState.PushValue(sv);
-                        newProgramState = ObjectCreated(newProgramState, sv, instruction);
+                        newProgramState = InvokeChecks(newProgramState, 
+                            (ps, check) => check.ObjectCreated(ps, sv, instruction));
                     }
                     break;
 
@@ -365,7 +360,8 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.CSharp
                         var sv = new SymbolicValue();
                         newProgramState = sv.SetConstraint(ObjectConstraint.NotNull, newProgramState);
                         newProgramState = newProgramState.PushValue(sv);
-                        newProgramState = ObjectCreated(newProgramState, sv, instruction);
+                        newProgramState = InvokeChecks(newProgramState, 
+                            (ps, check) => check.ObjectCreated(ps, sv, instruction));
                     }
                     break;
 
@@ -434,9 +430,10 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.CSharp
             EnqueueNewNode(newProgramPoint, newProgramState);
         }
 
-        private ProgramState ObjectCreated(ProgramState programState, SymbolicValue symbolicValue, SyntaxNode instruction)
+        private ProgramState InvokeChecks(ProgramState programState, Func<ProgramState, ExplodedGraphCheck, ProgramState> invoke)
         {
-            return explodedGraphChecks.Aggregate(programState, (ps, check) => check.ObjectCreated(ps, symbolicValue, instruction));
+            // If a check returns null, we will skip the next checks and return null
+            return explodedGraphChecks.Aggregate(programState, (ps, check) => ps == null ? null : invoke(ps, check));
         }
 
         private ProgramState EnsureStackState(ExpressionSyntax parenthesizedExpression, ProgramState programState)
@@ -704,8 +701,10 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.CSharp
 
         private ProgramState VisitObjectCreation(ObjectCreationExpressionSyntax ctor, ProgramState programState)
         {
-            var newProgramState = programState.PopValues(ctor.ArgumentList?.Arguments.Count ?? 0);
+            var newProgramState = InvokeChecks(programState, (ps, check) => check.ObjectCreating(ps, ctor));
+
             var sv = new SymbolicValue();
+            newProgramState = newProgramState.PopValues(ctor.ArgumentList?.Arguments.Count ?? 0);
 
             var ctorSymbol = SemanticModel.GetSymbolInfo(ctor).Symbol as IMethodSymbol;
             if (ctorSymbol == null)
@@ -723,9 +722,7 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.CSharp
 
             newProgramState = newProgramState.PushValue(sv);
 
-            newProgramState = ObjectCreated(newProgramState, sv, ctor);
-
-            return newProgramState;
+            return InvokeChecks(newProgramState, (ps, check) => check.ObjectCreated(ps, sv, ctor));
         }
 
         private static ProgramState VisitInitializer(SyntaxNode instruction, ExpressionSyntax parenthesizedExpression, ProgramState programState)
