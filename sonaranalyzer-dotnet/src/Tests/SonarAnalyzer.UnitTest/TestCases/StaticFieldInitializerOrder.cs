@@ -8,7 +8,7 @@ namespace Tests.TestCases
 {
     public partial class StaticFieldInitializerOrder
     {
-        public static Action<int> A = (i) => { var x = i + StaticFieldInitializerOrder.Y; }; // Okay??? Might or might not. For no we don't report on it
+        public static Action<int> A = (i) => { var x = i + StaticFieldInitializerOrder.Y; }; // Okay??? Might or might not. For now, we don't report on it
         public static int X = Y; // Noncompliant; Y at this time is still assigned default(int), i.e. 0
 //                          ^^^
         public static int X2 = M(StaticFieldInitializerOrder.Y); // Noncompliant; Y at this time is still assigned default(int), i.e. 0
@@ -18,9 +18,17 @@ namespace Tests.TestCases
         public static int U = Const; // Compliant
         public const int Const = 5;
 
+        public static readonly StaticFieldInitializerOrder Foo = new StaticFieldInitializerOrder("foo");
+
         public int nonStat = W;
+        private readonly string name;
 
         public static int M(int i) { return i; }
+
+        public StaticFieldInitializerOrder(string name)
+        {
+            this.name = name;
+        }
     }
 
     public partial class StaticFieldInitializerOrder

@@ -71,7 +71,8 @@ namespace SonarAnalyzer.Rules.CSharp
                         var sameClassIdentifiersAfterThis = identifierClassMappings
                             .Where(mapping => mapping.ClassDeclaration == classDeclaration)
                             .Where(mapping => !mapping.Identifier.Field.IsConst)
-                            .Where(mapping => mapping.Identifier.Field.DeclaringSyntaxReferences.First().Span.Start > variable.SpanStart);
+                            .Where(mapping =>
+                                mapping.Identifier.Field.DeclaringSyntaxReferences.First().Span.Start > variable.SpanStart);
                         var isAnyAfterInSameClass = sameClassIdentifiersAfterThis.Any();
 
                         if (isAnyInDifferentClass ||
@@ -84,7 +85,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.FieldDeclaration);
         }
 
-        private static List<IdentifierClassDeclarationMapping> GetIdentifierClassMappings(IEnumerable<IdentifierFieldMapping> identifierFieldMappings)
+        private static List<IdentifierClassDeclarationMapping> GetIdentifierClassMappings(
+            IEnumerable<IdentifierFieldMapping> identifierFieldMappings)
         {
             return identifierFieldMappings
                 .Select(i => new IdentifierClassDeclarationMapping
