@@ -5,12 +5,21 @@ This script controls the analyzer build process (from buildling to creating the 
 
 .DESCRIPTION
 Usage: build.ps1
-    -restore              Restore packages
-    -build                Build the solution (based on analyzerKind)
-    -test                 Run unit tests
-    -pack                 Create the NuGet packages and extra metadata
-    -release              Perform release build (default is debug)
-    -analyzerKind         The kind of analyzer to build: Classic, VS2015 or VS2017 (default is Classic)
+    Steps
+        -restore            Restore packages
+        -build              Build the analyzer solution (based on analyzerKind)
+        -buildJava          Build the plugin (java)
+        -coverage           Compute the code coverage of the analyzer
+        -pack               Create the NuGet packages and extra metadata
+
+    Test options
+        -test               Run analyzer unit tests
+        -its                Run analyzer ITs
+        -itsJava            Run plugin ITs
+
+    Special options
+        -release            Perform release build (default is debug)
+        -analyzerKind       The kind of analyzer to build: Classic, VS2015 or VS2017 (default is Classic)
 
 #>
 
@@ -19,12 +28,14 @@ param (
     # Steps to execute
     [switch]$restore = $false,
     [switch]$build = $false,
+    [switch]$buildJava = $false,
     [switch]$coverage = $false,
     [switch]$pack = $false,
 
     # Test options
     [switch]$test = $false,
     [switch]$its = $false,
+    [switch]$itsJava = $false,
 
     # Build output options
     [switch]$release = $false,
@@ -85,6 +96,18 @@ try {
     if ($pack) {
         New-Metadata $binPath
         New-NuGetPackages $binPath
+    }
+
+    if ($buildJava) {
+        Invoke-InLocation ".." {
+            & mvn clean install -P local-analyzer -D analyzer.configuration=$buildConfiguration
+        }
+    }
+
+    if ($itsJava) {
+        Invoke-InLocation "..\its" {
+            & mvn clean install
+        }
     }
 
     exit 0
