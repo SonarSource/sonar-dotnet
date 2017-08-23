@@ -10,10 +10,9 @@ Solution</strong> section for examples.</p>
   <li> The class should not implement <code>IDisposable</code> explicitly, e.g. the <code>Dispose()</code> method should be public. </li>
   <li> The class should contain <code>protected virtual void Dispose(bool)</code> method. This method allows the derived classes to correctly dispose
   the resources of this class. </li>
-  <li> The content of the <code>Dispose()</code> method should be a single invocation of <code>Dispose(true)</code>. </li>
+  <li> The content of the <code>Dispose()</code> method should be invocation of <code>Dispose(true)</code> followed by
+  <code>GC.SuppressFinalize(this)</code> </li>
   <li> If the class has a finalizer, i.e. a destructor, the only code in its body should be a single invocation of <code>Dispose(false)</code>. </li>
-  <li> If the class has a finalizer, an additional call to <code>GC.SuppressFinalize(this)</code> is required in the <code>Dispose()</code> method.
-  </li>
   <li> If the class inherits from a class that implements <code>IDisposable</code> it must call the <code>Dispose</code>, or
   <code>Dispose(bool)</code> method of the base class from within its own implementation of <code>Dispose</code> or <code>Dispose(bool)</code>,
   respectively. This ensures that all resources from the base class are properly released. </li>
@@ -79,6 +78,7 @@ public class Foo2 : IDisposable
     public void Dispose()
     {
         Dispose(true);
+        GC.SuppressFinalize(this);
     }
 
     protected virtual void Dispose(bool disposing)
@@ -126,5 +126,6 @@ public class Foo4 : DisposableBase
   IDisposable </li>
   <li> <a href="http://pragmateek.com/c-scope-your-global-state-changes-with-idisposable-and-the-using-statement/">Pragma Geek</a> for additional
   usages of IDisposable, beyond releasing resources. </li>
+  <li> <a href="https://docs.microsoft.com/en-us/dotnet/api/system.idisposable?view=netframework-4.7">IDisposable documentation</a> </li>
 </ul>
 
