@@ -1,0 +1,28 @@
+{
+"issues":  [
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 1st argument.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\examples\Cluster\ClusterSharding\ClusterSharding.Node\Program.cs",
+"region":  {
+"startLine":  59,
+"startColumn":  83,
+"endLine":  59,
+"endColumn":  106
+}
+},
+{
+"uri":  "sources\akka.net\src\examples\Cluster\ClusterSharding\ClusterSharding.Node\Program.cs",
+"region":  {
+"startLine":  59,
+"startColumn":  58,
+"endLine":  59,
+"endColumn":  81
+}
+}
+]
+}
+]
+}

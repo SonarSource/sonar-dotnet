@@ -1,0 +1,28 @@
+{
+"issues":  [
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 1st argument.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\examples\Cluster\ClusterTools\ClusterToolsExample.Seed\Program.cs",
+"region":  {
+"startLine":  45,
+"startColumn":  78,
+"endLine":  45,
+"endColumn":  101
+}
+},
+{
+"uri":  "sources\akka.net\src\examples\Cluster\ClusterTools\ClusterToolsExample.Seed\Program.cs",
+"region":  {
+"startLine":  45,
+"startColumn":  53,
+"endLine":  45,
+"endColumn":  76
+}
+}
+]
+}
+]
+}

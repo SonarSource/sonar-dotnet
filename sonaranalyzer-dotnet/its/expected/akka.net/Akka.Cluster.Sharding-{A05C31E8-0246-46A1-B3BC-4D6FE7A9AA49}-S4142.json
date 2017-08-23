@@ -1,0 +1,52 @@
+{
+"issues":  [
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 1st argument.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"region":  {
+"startLine":  178,
+"startColumn":  134,
+"endLine":  178,
+"endColumn":  178
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\PersistentShardCoordinator.cs",
+"region":  {
+"startLine":  178,
+"startColumn":  88,
+"endLine":  178,
+"endColumn":  132
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 1st argument.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"region":  {
+"startLine":  352,
+"startColumn":  126,
+"endLine":  352,
+"endColumn":  166
+}
+},
+{
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"region":  {
+"startLine":  352,
+"startColumn":  84,
+"endLine":  352,
+"endColumn":  124
+}
+}
+]
+}
+]
+}
