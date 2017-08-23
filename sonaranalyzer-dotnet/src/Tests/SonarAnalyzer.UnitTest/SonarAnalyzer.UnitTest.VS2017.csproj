@@ -41,6 +41,7 @@
     <AppConfig>app.VS2017.config</AppConfig>
   </PropertyGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="app.VS2017.config" />
   </ItemGroup>
   <ItemGroup>
@@ -64,9 +65,6 @@
     <Reference Include="Microsoft.CodeAnalysis.CSharp.Workspaces, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\Microsoft.CodeAnalysis.CSharp.Workspaces.2.0.0\lib\netstandard1.3\Microsoft.CodeAnalysis.CSharp.Workspaces.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.CodeAnalysis.Elfie, Version=0.10.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Microsoft.CodeAnalysis.Elfie.0.10.6\lib\net46\Microsoft.CodeAnalysis.Elfie.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.CodeAnalysis.VisualBasic, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\Microsoft.CodeAnalysis.VisualBasic.2.0.0\lib\netstandard1.3\Microsoft.CodeAnalysis.VisualBasic.dll</HintPath>
     </Reference>
@@ -78,9 +76,6 @@
     </Reference>
     <Reference Include="Microsoft.CodeAnalysis.Workspaces.Desktop, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\Microsoft.CodeAnalysis.Workspaces.Common.2.0.0\lib\net46\Microsoft.CodeAnalysis.Workspaces.Desktop.dll</HintPath>
-    </Reference>
-    <Reference Include="nunit.framework, Version=3.7.1.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\NUnit.3.7.1\lib\net45\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="Oracle.ManagedDataAccess, Version=4.122.1.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\Oracle.ManagedDataAccess.12.2.1100\lib\net40\Oracle.ManagedDataAccess.dll</HintPath>
@@ -172,18 +167,6 @@
     <Reference Include="System.Xml.XPath.XDocument, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\System.Xml.XPath.XDocument.4.3.0\lib\net46\System.Xml.XPath.XDocument.dll</HintPath>
     </Reference>
-    <Reference Include="xunit.abstractions, Version=2.0.0.0, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\xunit.abstractions.2.0.1\lib\net35\xunit.abstractions.dll</HintPath>
-    </Reference>
-    <Reference Include="xunit.assert, Version=2.2.0.3545, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\xunit.assert.2.2.0\lib\netstandard1.1\xunit.assert.dll</HintPath>
-    </Reference>
-    <Reference Include="xunit.core, Version=2.2.0.3545, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\xunit.extensibility.core.2.2.0\lib\netstandard1.1\xunit.core.dll</HintPath>
-    </Reference>
-    <Reference Include="xunit.execution.desktop, Version=2.2.0.3545, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\xunit.extensibility.execution.2.2.0\lib\net452\xunit.execution.desktop.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -198,39 +181,19 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <None Include="packages.SonarAnalyzer.UnitTest.VS2017.config" />
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="..\..\AssemblyInfo.Shared.cs">
       <Link>Properties\AssemblyInfo.Shared.cs</Link>
     </Compile>
-    <Compile Include="Common\AnalyzerAdditionalFileTest.cs" />
-    <Compile Include="Common\AnalyzerLanguageTest.cs" />
-    <Compile Include="Common\DistrubtionTest.cs" />
-    <Compile Include="Common\MultiValueDictionaryTest.cs" />
+    <Compile Include="Common\*.cs" />
     <None Include="Common\Resources\input.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <Compile Include="Common\RuleDescriptorTest.cs" />
-    <Compile Include="Common\RuleFinderTest.cs" />
-    <Compile Include="Common\RuleTest.cs" />
-    <Compile Include="Helpers\FlowAnalysis\NullableSymbolicValue_TrySetOppositeConstraint.cs" />
-    <Compile Include="Helpers\FlowAnalysis\NullableSymbolicValue_TrySetConstraint.cs" />
-    <Compile Include="Helpers\FlowAnalysis\ProgramStateTests.cs" />
-    <Compile Include="Helpers\FlowAnalysis\ProgramPointTests.cs" />
-    <Compile Include="Helpers\FlowAnalysis\ExplodedGraphTest.cs" />
-    <Compile Include="Helpers\FlowAnalysis\ControlFlowGraphTest.cs" />
-    <Compile Include="Helpers\SonarAnalysisContextTest.cs" />
-    <Compile Include="Helpers\CollectionUtilsTest.cs" />
-    <Compile Include="Helpers\StringUtilsTest.cs" />
-    <Compile Include="Helpers\SymbolHelperTest.IsExtensionOn.cs" />
-    <Compile Include="Helpers\FluentTestHelper.cs" />
-    <Compile Include="Helpers\TypeHelperTest.cs" />
-    <Compile Include="Helpers\SymbolHelperTest.cs" />
-    <Compile Include="PackagingTests\DocGeneratorTest.cs" />
-    <Compile Include="Helpers\DiagnosticAnalyzerContextHelperTest.cs" />
-    <Compile Include="Helpers\DiagnosticReportHelperTest.cs" />
-    <Compile Include="Helpers\NavigationHelperTest.cs" />
-    <Compile Include="Helpers\EquivalenceCheckerTest.cs" />
-    <Compile Include="Common\MetricsTest.cs" />
-    <Compile Include="PackagingTests\RuleTypeTests.cs" />
+    <Compile Include="Helpers\FlowAnalysis\*.cs" />
+    <Compile Include="Helpers\*.cs" />
+    <Compile Include="PackagingTests\*.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="FixAllDiagnosticProvider.cs" />
     <Compile Include="ResourceTests\GeneratedResourcesTest.cs" />
@@ -240,12 +203,7 @@
       <DependentUpon>SomeResources.resx</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="TestFramework\IIssueLocation.cs" />
-    <Compile Include="TestFramework\IssueLocationCollector.cs" />
-    <Compile Include="TestFramework\IssueLocationCollectorTests\IssueLocationCollector_GetExpectedIssueLocations.cs" />
-    <Compile Include="TestFramework\IssueLocationCollectorTests\IssueLocationCollector_GetPreciseIssueLocations.cs" />
-    <Compile Include="TestFramework\IssueLocationCollectorTests\IssueLocationCollector_GetIssueLocations.cs" />
-    <Compile Include="TestFramework\IssueLocationCollectorTests\IssueLocationCollector_MergeLocations.cs" />
+    <Compile Include="TestFramework\*.cs" />
     <Compile Include="Verifier.cs" />
     <Compile Include="Rules\*.cs" />
     <None Include="TestCases\*.cs">
@@ -262,7 +220,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.SonarAnalyzer.UnitTest.VS2017.config" />
+    <EmbeddedResource Include="ResourceTests\SomeResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>SomeResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\SonarAnalyzer.VisualBasic\SonarAnalyzer.VisualBasic.VS2017.csproj">
@@ -296,12 +257,6 @@
     <AdditionalFiles Include="..\..\SonarLint.xml">
       <Link>Properties\SonarLint.xml</Link>
     </AdditionalFiles>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="ResourceTests\SomeResources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>SomeResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\..\..\packages\Microsoft.CodeAnalysis.Analyzers.1.1.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.Analyzers.dll" />
