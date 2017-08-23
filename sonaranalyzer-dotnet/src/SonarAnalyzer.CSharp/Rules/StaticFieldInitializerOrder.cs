@@ -110,6 +110,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         Identifier = identifier,
                         Field = field,
                         IsRelevant = field != null &&
+                            !field.IsConst &&
                             field.IsStatic &&
                             containingType.Equals(field.ContainingType) &&
                             enclosingSymbol is IFieldSymbol &&
