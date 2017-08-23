@@ -26,11 +26,4 @@ namespace Tests.TestCases
 
         public static int M(int i) { return i; }
     }
-
-    public partial class StaticFieldInitializerOrder
-    {
-        public static int W = 2;
-
-        public const int Const2 = 5;
-    }
 }
