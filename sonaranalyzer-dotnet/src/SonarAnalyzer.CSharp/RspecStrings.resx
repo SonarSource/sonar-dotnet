@@ -7896,6 +7896,33 @@
   <data name="S4070_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
   </data>
+  <data name="S4142_Category" xml:space="preserve">
+    <value>Sonar Code Smell</value>
+  </data>
+  <data name="S4142_Description" xml:space="preserve">
+    <value>There are valid cases for passing a variable multiple times into the same method call, but usually doing so is a mistake, and something else was intended for one of the arguments.</value>
+  </data>
+  <data name="S4142_IsActivatedByDefault" xml:space="preserve">
+    <value>True</value>
+  </data>
+  <data name="S4142_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S4142_RemediationCost" xml:space="preserve">
+    <value>5min</value>
+  </data>
+  <data name="S4142_Severity" xml:space="preserve">
+    <value>Major</value>
+  </data>
+  <data name="S4142_Tags" xml:space="preserve">
+    <value>suspicious</value>
+  </data>
+  <data name="S4142_Title" xml:space="preserve">
+    <value>Duplicate values should not be passed as arguments</value>
+  </data>
+  <data name="S4142_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S4144_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>

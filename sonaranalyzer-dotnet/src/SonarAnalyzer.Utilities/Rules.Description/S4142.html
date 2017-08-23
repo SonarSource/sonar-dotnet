@@ -1,0 +1,15 @@
+<p>There are valid cases for passing a variable multiple times into the same method call, but usually doing so is a mistake, and something else was
+intended for one of the arguments.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+if (compare(a, a) != 0) {  // Noncompliant
+  //...
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+if (compare(a, b) != 0) {
+  //...
+}
+</pre>
+
