@@ -30,7 +30,13 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void StaticFieldInitializerOrder()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\StaticFieldInitializerOrder.cs", new StaticFieldInitializerOrder());
+            Verifier.VerifyAnalyzer(
+                new []
+                {
+                    @"TestCases\StaticFieldInitializerOrder.cs",
+                    @"TestCases\StaticFieldInitializerOrder_PartialClass.cs"
+                }
+                , new StaticFieldInitializerOrder());
         }
     }
 }

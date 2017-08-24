@@ -8,6 +8,10 @@ namespace Tests.TestCases
 {
     public partial class StaticFieldInitializerOrder
     {
+        public static string s1 = new string('x', Const); // Compliant. Const do not suffer from initialization order fiasco.
+        public static string s2 = new string('x', Const2);
+        public static string s3 = new string('x', Y); // Noncompliant
+
         public static Action<int> A = (i) => { var x = i + StaticFieldInitializerOrder.Y; }; // Okay??? Might or might not. For no we don't report on it
         public static int X = Y; // Noncompliant; Y at this time is still assigned default(int), i.e. 0
 //                          ^^^
@@ -21,10 +25,5 @@ namespace Tests.TestCases
         public int nonStat = W;
 
         public static int M(int i) { return i; }
-    }
-
-    public partial class StaticFieldInitializerOrder
-    {
-        public static int W = 2;
     }
 }
