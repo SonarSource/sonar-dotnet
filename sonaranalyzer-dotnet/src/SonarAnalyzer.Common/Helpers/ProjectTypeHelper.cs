@@ -50,6 +50,7 @@ namespace SonarAnalyzer.Helpers
         private const string TestAssemblyNamePattern = "TEST";
 
         private static readonly ISet<string> TestAssemblyNames = ImmutableHashSet.Create(
+            "MICROSOFT.VISUALSTUDIO.TESTPLATFORM.TESTFRAMEWORK",
             "MICROSOFT.VISUALSTUDIO.QUALITYTOOLS.UNITTESTFRAMEWORK",
             "XUNIT.CORE",
             "NUNIT.FRAMEWORK");
