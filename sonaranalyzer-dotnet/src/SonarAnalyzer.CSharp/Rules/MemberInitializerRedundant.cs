@@ -20,6 +20,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -27,13 +28,10 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
-using SonarAnalyzer.Helpers.FlowAnalysis;
-using SonarAnalyzer.Helpers.FlowAnalysis.Common;
-using SonarAnalyzer.Helpers.FlowAnalysis.CSharp;
+using SonarAnalyzer.SymbolicExecution.ControlFlowGraph;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
-    using System.Collections.Immutable;
     using CtorDeclarationTuple = SyntaxNodeSymbolSemanticModelTuple<ConstructorDeclarationSyntax, IMethodSymbol>;
     using SymbolWithInitializer = KeyValuePair<ISymbol, EqualsValueClauseSyntax>;
 
@@ -138,7 +136,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             IControlFlowGraph cfg;
-            if (!ControlFlowGraph.TryGet(ctor.SyntaxNode.Body, ctor.SemanticModel, out cfg))
+            if (!CSharpControlFlowGraph.TryGet(ctor.SyntaxNode.Body, ctor.SemanticModel, out cfg))
             {
                 return false;
             }

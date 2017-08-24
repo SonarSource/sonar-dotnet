@@ -91,28 +91,11 @@
     <Compile Include="..\Signing.cs">
       <Link>Properties\Signing.cs</Link>
     </Compile>
-    <Compile Include="Helpers\ControlFlowGraph\*.cs" />
-    <Compile Include="Helpers\ControlFlowGraph\SyntaxNodeBased\Blocks\*.cs" />
-    <Compile Include="Helpers\ControlFlowGraph\SyntaxNodeBased\*.cs" />
-    <Compile Include="Helpers\LiveVariableAnalysis\*.cs" />
-    <Compile Include="Helpers\SymbolicExecution\Constraints\*.cs" />
-    <Compile Include="Helpers\SymbolicExecution\Relationships\*.cs" />
-    <Compile Include="Helpers\SymbolicExecution\SymbolicValues\Binary\*.cs" />
-    <Compile Include="Helpers\SymbolicExecution\SymbolicValues\Unary\*.cs" />
-    <Compile Include="Helpers\SymbolicExecution\SymbolicValues\*.cs" />
-    <Compile Include="Helpers\SymbolicExecution\*.cs" />
-    <Compile Include="Helpers\*.cs" />
-    <Compile Include="Metrics\*.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Common\Sqale\*.cs" />
-    <Compile Include="Common\FixAllProviders\*.cs" />
-    <Compile Include="Common\*.cs" />
+    <Compile Include="**\*.cs" Exclude="**\obj\**\*;**\*.Designer.cs;Protobuf\AnalyzerReport.cs" />
     <Compile Include="Protobuf\AnalyzerReport.cs">
       <!-- Exclude the file from analysis -->
       <SonarQubeExclude>true</SonarQubeExclude>
     </Compile>
-    <Compile Include="Rules\*.cs" />
-    <Compile Include="Rules\Utilities\*.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.SonarAnalyzer.Common.config" />

@@ -21,9 +21,9 @@
 using System.Linq;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SonarAnalyzer.Helpers.FlowAnalysis.Common;
+using SonarAnalyzer.SymbolicExecution.Constraints;
 
-namespace SonarAnalyzer.UnitTest.Helpers.FlowAnalysis
+namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
 {
     [TestClass]
     public class NullableSymbolicValue_TrySetConstraint
