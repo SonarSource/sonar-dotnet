@@ -46,7 +46,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 [KnownType.Xunit_Assert] = new HashSet<string>
                 {
-                    "Equal", "Equals", "False", "NotEqual", "Same", "StrictEqual", "NotSame"
+                    "Equal", "False", "NotEqual", "Same", "StrictEqual", "NotSame"
                 },
 
                 [KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_Assert] = new HashSet<string>
@@ -107,8 +107,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool IsBooleanLiteral(ArgumentSyntax argument)
         {
-            return argument.Expression is LiteralExpressionSyntax &&
-                   argument.Expression.IsAnyKind(boolLiterals);
+            return argument.Expression.IsAnyKind(boolLiterals);
         }
 
         private static bool IsTrackedMethod(ISymbol methodSymbol)
