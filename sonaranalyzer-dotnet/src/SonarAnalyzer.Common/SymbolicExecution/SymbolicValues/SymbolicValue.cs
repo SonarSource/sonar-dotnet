@@ -86,7 +86,7 @@ namespace SonarAnalyzer.SymbolicExecution
 
         private static int SymbolicValueCounter = 0;
 
-        internal SymbolicValue()
+        public SymbolicValue()
             : this(SymbolicValueCounter++)
         {
         }
@@ -155,13 +155,13 @@ namespace SonarAnalyzer.SymbolicExecution
             var boolConstraint = constraint as BoolConstraint;
             if (boolConstraint != null)
             {
-                return TrySetConstraint(boolConstraint, oldConstraints, programState);
+                return TrySetBoolConstraint(boolConstraint, oldConstraints, programState);
             }
 
             var objectConstraint = constraint as ObjectConstraint;
             if (objectConstraint != null)
             {
-                return TrySetConstraint(objectConstraint, oldConstraints, programState);
+                return TrySetObjectConstraint(objectConstraint, oldConstraints, programState);
             }
 
             if (constraint is NullableValueConstraint ||
@@ -214,7 +214,7 @@ namespace SonarAnalyzer.SymbolicExecution
             return programStates;
         }
 
-        private IEnumerable<ProgramState> TrySetConstraint(BoolConstraint boolConstraint,
+        private IEnumerable<ProgramState> TrySetBoolConstraint(BoolConstraint constraint,
             SymbolicValueConstraints oldConstraints, ProgramState programState)
         {
             if (oldConstraints.HasConstraint(ObjectConstraint.Null))
@@ -225,22 +225,21 @@ namespace SonarAnalyzer.SymbolicExecution
 
             var oldBoolConstraint = oldConstraints.GetConstraintOrDefault<BoolConstraint>();
             if (oldBoolConstraint != null &&
-                oldBoolConstraint != boolConstraint)
+                oldBoolConstraint != constraint)
             {
                 return Enumerable.Empty<ProgramState>();
             }
 
             // Either same bool constraint, or previously not null, and now a bool constraint
-            return new[] { programState.SetConstraint(this, boolConstraint) };
+            return new[] { programState.SetConstraint(this, constraint) };
         }
 
-        private IEnumerable<ProgramState> TrySetConstraint(ObjectConstraint objectConstraint,
+        private IEnumerable<ProgramState> TrySetObjectConstraint(ObjectConstraint constraint,
             SymbolicValueConstraints oldConstraints, ProgramState programState)
         {
-            var oldBoolConstraint = oldConstraints.GetConstraintOrDefault<BoolConstraint>();
-            if (oldBoolConstraint != null)
+            if (oldConstraints.HasConstraint<BoolConstraint>())
             {
-                if (objectConstraint == ObjectConstraint.Null)
+                if (constraint == ObjectConstraint.Null)
                 {
                     return Enumerable.Empty<ProgramState>();
                 }
@@ -251,12 +250,12 @@ namespace SonarAnalyzer.SymbolicExecution
             var oldObjectConstraint = oldConstraints.GetConstraintOrDefault<ObjectConstraint>();
             if (oldObjectConstraint != null)
             {
-                if (oldObjectConstraint != objectConstraint)
+                if (oldObjectConstraint != constraint)
                 {
                     return Enumerable.Empty<ProgramState>();
                 }
 
-                return new[] { programState.SetConstraint(this, objectConstraint) };
+                return new[] { programState.SetConstraint(this, constraint) };
             }
 
             throw new NotSupportedException($"Neither {nameof(BoolConstraint)}, nor {nameof(ObjectConstraint)}");

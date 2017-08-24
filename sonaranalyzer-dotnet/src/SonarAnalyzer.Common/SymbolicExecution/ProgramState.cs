@@ -59,7 +59,7 @@ namespace SonarAnalyzer.SymbolicExecution
             SymbolicValue.This,
             SymbolicValue.Base);
 
-        internal ProgramState()
+        public ProgramState()
             : this(ImmutableDictionary<ISymbol, SymbolicValue>.Empty,
                   InitialConstraints,
                   ImmutableDictionary<ProgramPoint, int>.Empty,

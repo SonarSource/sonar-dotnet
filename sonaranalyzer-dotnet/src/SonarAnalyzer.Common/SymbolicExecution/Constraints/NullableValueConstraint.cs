@@ -20,7 +20,7 @@
 
 namespace SonarAnalyzer.SymbolicExecution.Constraints
 {
-    internal sealed class NullableValueConstraint : SymbolicValueConstraint
+    public sealed class NullableValueConstraint : SymbolicValueConstraint
     {
         public static readonly NullableValueConstraint NoValue = new NullableValueConstraint();
         public static readonly NullableValueConstraint HasValue = new NullableValueConstraint();

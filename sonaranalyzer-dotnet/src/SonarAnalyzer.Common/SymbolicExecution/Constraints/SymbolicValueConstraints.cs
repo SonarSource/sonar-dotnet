@@ -109,6 +109,12 @@ namespace SonarAnalyzer.SymbolicExecution.Constraints
                    storedConstraint == constraint;
         }
 
+        internal bool HasConstraint<T>()
+        {
+            SymbolicValueConstraint storedConstraint;
+            return constraints.TryGetValue(typeof(T), out storedConstraint);
+        }
+
         private int ComputeHashcode()
         {
             int hash = 17 * constraints.Count;

@@ -20,7 +20,7 @@
 
 namespace SonarAnalyzer.SymbolicExecution.Constraints
 {
-    internal sealed class ObjectConstraint : SymbolicValueConstraint
+    public sealed class ObjectConstraint : SymbolicValueConstraint
     {
         public static readonly ObjectConstraint Null = new ObjectConstraint();
         public static readonly ObjectConstraint NotNull = new ObjectConstraint();

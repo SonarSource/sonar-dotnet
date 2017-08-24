@@ -20,7 +20,7 @@
 
 namespace SonarAnalyzer.SymbolicExecution.Constraints
 {
-    internal sealed class BoolConstraint : SymbolicValueConstraint
+    public sealed class BoolConstraint : SymbolicValueConstraint
     {
         public static readonly BoolConstraint True = new BoolConstraint();
         public static readonly BoolConstraint False = new BoolConstraint();
