@@ -86,7 +86,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static string ToOrdinalNumberString(int number)
         {
-            switch (number % 10)
+            switch (number)
             {
                 case  1: return number + "st";
                 case  2: return number + "nd";
