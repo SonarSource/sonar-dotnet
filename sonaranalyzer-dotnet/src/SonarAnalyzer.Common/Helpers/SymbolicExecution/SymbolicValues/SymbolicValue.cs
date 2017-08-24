@@ -270,13 +270,14 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.Common
             }
 
             if (constraint is NullableValueConstraint ||
-                constraint is DisposableConstraint)
+                constraint is DisposableConstraint ||
+                constraint is CollectionCapacityConstraint)
             {
                 return new[] { currentProgramState };
             }
 
             throw new NotSupportedException($"Neither one of {nameof(BoolConstraint)}, {nameof(ObjectConstraint)}, " +
-                $"{nameof(ObjectConstraint)}, {nameof(DisposableConstraint)}.");
+                $"{nameof(ObjectConstraint)}, {nameof(DisposableConstraint)}, {nameof(CollectionCapacityConstraint)}.");
         }
 
         public virtual IEnumerable<ProgramState> TrySetOppositeConstraint(SymbolicValueConstraint constraint,
