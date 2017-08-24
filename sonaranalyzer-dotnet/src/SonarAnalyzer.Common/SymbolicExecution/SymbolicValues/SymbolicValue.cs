@@ -117,115 +117,6 @@ namespace SonarAnalyzer.SymbolicExecution
             return base.ToString();
         }
 
-        internal virtual ProgramState SetConstraint(SymbolicValueConstraint constraint, ProgramState programState)
-        {
-            if (constraint == null)
-            {
-                return programState;
-            }
-
-            var updatedConstraintsMap = AddConstraintForSymbolicValue(this, constraint, programState.Constraints);
-            updatedConstraintsMap = AddConstraintTo<EqualsRelationship>(constraint, programState, updatedConstraintsMap);
-
-            if (constraint is BoolConstraint)
-            {
-                updatedConstraintsMap = AddConstraintTo<NotEqualsRelationship>(constraint.OppositeForLogicalNot, programState, updatedConstraintsMap);
-            }
-
-            return new ProgramState(
-                programState.Values,
-                updatedConstraintsMap,
-                programState.ProgramPointVisitCounts,
-                programState.ExpressionStack,
-                programState.Relationships);
-        }
-
-        internal virtual ProgramState RemoveConstraint(SymbolicValueConstraint constraint, ProgramState programState)
-        {
-            if (constraint == null)
-            {
-                return programState;
-            }
-
-            var updatedConstraintsMap = RemoveConstraintForSymbolicValue(this, constraint, programState.Constraints);
-
-            return new ProgramState(
-                programState.Values,
-                updatedConstraintsMap,
-                programState.ProgramPointVisitCounts,
-                programState.ExpressionStack,
-                programState.Relationships);
-        }
-
-        private ImmutableDictionary<SymbolicValue, SymbolicValueConstraints> AddConstraintForSymbolicValue(SymbolicValue symbolicValue,
-            SymbolicValueConstraint constraint, ImmutableDictionary<SymbolicValue, SymbolicValueConstraints> constraintMap)
-        {
-            var constraints = ImmutableDictionary.GetValueOrDefault(constraintMap, symbolicValue);
-
-            var updatedConstraints = constraints != null
-                ? constraints.WithConstraint(constraint)
-                : SymbolicValueConstraints.Create(constraint);
-
-            return constraintMap.SetItem(symbolicValue, updatedConstraints);
-        }
-
-        private ImmutableDictionary<SymbolicValue, SymbolicValueConstraints> RemoveConstraintForSymbolicValue(SymbolicValue symbolicValue,
-            SymbolicValueConstraint constraint, ImmutableDictionary<SymbolicValue, SymbolicValueConstraints> constraintMap)
-        {
-            var constraints = ImmutableDictionary.GetValueOrDefault(constraintMap, symbolicValue);
-
-            if (constraints == null)
-            {
-                return constraintMap;
-            }
-
-            var updatedConstraints = constraints.WithoutConstraint(constraint);
-
-            return constraintMap.SetItem(symbolicValue, updatedConstraints);
-        }
-
-        private ImmutableDictionary<SymbolicValue, SymbolicValueConstraints> AddConstraintTo<TRelationship>(
-            SymbolicValueConstraint constraint, ProgramState programState,
-            ImmutableDictionary<SymbolicValue, SymbolicValueConstraints> constraintsMap)
-            where TRelationship : BinaryRelationship
-        {
-            var newConstraintsMap = constraintsMap;
-            var equalSymbols = programState.Relationships
-                            .OfType<TRelationship>()
-                            .Select(r => GetOtherOperandFromMatchingRelationship(r))
-                            .Where(e => e != null);
-
-            foreach (var equalSymbol in equalSymbols.Where(e => !e.HasConstraint(constraint, programState)))
-            {
-                newConstraintsMap = AddConstraintForSymbolicValue(equalSymbol, constraint, newConstraintsMap);
-            }
-
-            return newConstraintsMap;
-        }
-
-        private SymbolicValue GetOtherOperandFromMatchingRelationship(BinaryRelationship relationship)
-        {
-            if (relationship.RightOperand == this)
-            {
-                return relationship.LeftOperand;
-            }
-            else if (relationship.LeftOperand == this)
-            {
-                return relationship.RightOperand;
-            }
-            else
-            {
-                return null;
-            }
-        }
-
-        public bool HasConstraint(SymbolicValueConstraint constraint, ProgramState programState)
-        {
-            SymbolicValueConstraints constraints;
-            return programState.Constraints.TryGetValue(this, out constraints) &&
-                   constraints.HasConstraint(constraint);
-        }
-
         public bool TryGetConstraints(ProgramState programState, out SymbolicValueConstraints constraints)
         {
             return programState.Constraints.TryGetValue(this, out constraints);
@@ -233,7 +124,7 @@ namespace SonarAnalyzer.SymbolicExecution
 
         public bool IsNull(ProgramState programState)
         {
-            return this.HasConstraint(ObjectConstraint.Null, programState);
+            return programState.HasConstraint(this, ObjectConstraint.Null);
         }
 
         protected IEnumerable<ProgramState> ThrowIfTooMany(IEnumerable<ProgramState> states)
@@ -248,36 +139,36 @@ namespace SonarAnalyzer.SymbolicExecution
         }
 
         public virtual IEnumerable<ProgramState> TrySetConstraint(SymbolicValueConstraint constraint,
-            ProgramState currentProgramState)
+            ProgramState programState)
         {
             if (constraint == null)
             {
-                return new[] { currentProgramState };
+                return new[] { programState };
             }
 
             SymbolicValueConstraints oldConstraints;
-            if (!currentProgramState.Constraints.TryGetValue(this, out oldConstraints))
+            if (!programState.Constraints.TryGetValue(this, out oldConstraints))
             {
-                return new[] { SetConstraint(constraint, currentProgramState) };
+                return new[] { programState.SetConstraint(this, constraint) };
             }
 
             var boolConstraint = constraint as BoolConstraint;
             if (boolConstraint != null)
             {
-                return TrySetConstraint(boolConstraint, oldConstraints, currentProgramState);
+                return TrySetConstraint(boolConstraint, oldConstraints, programState);
             }
 
             var objectConstraint = constraint as ObjectConstraint;
             if (objectConstraint != null)
             {
-                return TrySetConstraint(objectConstraint, oldConstraints, currentProgramState);
+                return TrySetConstraint(objectConstraint, oldConstraints, programState);
             }
 
             if (constraint is NullableValueConstraint ||
                 constraint is DisposableConstraint ||
                 constraint is CollectionCapacityConstraint)
             {
-                return new[] { currentProgramState };
+                return new[] { programState };
             }
 
             throw new NotSupportedException($"Neither one of {nameof(BoolConstraint)}, {nameof(ObjectConstraint)}, " +
@@ -324,7 +215,7 @@ namespace SonarAnalyzer.SymbolicExecution
         }
 
         private IEnumerable<ProgramState> TrySetConstraint(BoolConstraint boolConstraint,
-            SymbolicValueConstraints oldConstraints, ProgramState currentProgramState)
+            SymbolicValueConstraints oldConstraints, ProgramState programState)
         {
             if (oldConstraints.HasConstraint(ObjectConstraint.Null))
             {
@@ -340,11 +231,11 @@ namespace SonarAnalyzer.SymbolicExecution
             }
 
             // Either same bool constraint, or previously not null, and now a bool constraint
-            return new[] { SetConstraint(boolConstraint, currentProgramState) };
+            return new[] { programState.SetConstraint(this, boolConstraint) };
         }
 
         private IEnumerable<ProgramState> TrySetConstraint(ObjectConstraint objectConstraint,
-            SymbolicValueConstraints oldConstraints, ProgramState currentProgramState)
+            SymbolicValueConstraints oldConstraints, ProgramState programState)
         {
             var oldBoolConstraint = oldConstraints.GetConstraintOrDefault<BoolConstraint>();
             if (oldBoolConstraint != null)
@@ -354,7 +245,7 @@ namespace SonarAnalyzer.SymbolicExecution
                     return Enumerable.Empty<ProgramState>();
                 }
 
-                return new[] { currentProgramState };
+                return new[] { programState };
             }
 
             var oldObjectConstraint = oldConstraints.GetConstraintOrDefault<ObjectConstraint>();
@@ -365,7 +256,7 @@ namespace SonarAnalyzer.SymbolicExecution
                     return Enumerable.Empty<ProgramState>();
                 }
 
-                return new[] { SetConstraint(objectConstraint, currentProgramState) };
+                return new[] { programState.SetConstraint(this, objectConstraint) };
             }
 
             throw new NotSupportedException($"Neither {nameof(BoolConstraint)}, nor {nameof(ObjectConstraint)}");

@@ -32,9 +32,9 @@ namespace SonarAnalyzer.SymbolicExecution
 {
     public sealed class ProgramState : IEquatable<ProgramState>
     {
-        internal ImmutableDictionary<ISymbol, SymbolicValue> Values { get; }
-        internal ImmutableDictionary<SymbolicValue, SymbolicValueConstraints> Constraints { get; }
-        internal ImmutableDictionary<ProgramPoint, int> ProgramPointVisitCounts { get; }
+        private ImmutableDictionary<ISymbol, SymbolicValue> Values { get; }
+        public ImmutableDictionary<SymbolicValue, SymbolicValueConstraints> Constraints { get; }
+        private ImmutableDictionary<ProgramPoint, int> ProgramPointVisitCounts { get; }
         internal ImmutableStack<SymbolicValue> ExpressionStack { get; }
         internal ImmutableHashSet<BinaryRelationship> Relationships { get; }
 
@@ -421,6 +421,55 @@ namespace SonarAnalyzer.SymbolicExecution
             }
 
             return hash;
+        }
+
+        public ProgramState SetConstraint(SymbolicValue symbolicValue, SymbolicValueConstraint constraint)
+        {
+            if (constraint == null)
+            {
+                return this;
+            }
+
+            var updatedConstraintsMap = Constraints.AddConstraintForSymbolicValue(symbolicValue, constraint);
+            updatedConstraintsMap = updatedConstraintsMap.AddConstraintTo<EqualsRelationship>(symbolicValue,
+                constraint, this);
+
+            if (constraint is BoolConstraint)
+            {
+                updatedConstraintsMap = updatedConstraintsMap.AddConstraintTo<NotEqualsRelationship>(symbolicValue,
+                    constraint.OppositeForLogicalNot, this);
+            }
+
+            return new ProgramState(
+                Values,
+                updatedConstraintsMap,
+                ProgramPointVisitCounts,
+                ExpressionStack,
+                Relationships);
+        }
+
+        public ProgramState RemoveConstraint(SymbolicValue symbolicValue, SymbolicValueConstraint constraint)
+        {
+            if (constraint == null)
+            {
+                return this;
+            }
+
+            var updatedConstraintsMap = Constraints.RemoveConstraintForSymbolicValue(symbolicValue, constraint);
+
+            return new ProgramState(
+                Values,
+                updatedConstraintsMap,
+                ProgramPointVisitCounts,
+                ExpressionStack,
+                Relationships);
+        }
+
+        public bool HasConstraint(SymbolicValue symbolicValue, SymbolicValueConstraint constraint)
+        {
+            SymbolicValueConstraints constraints;
+            return Constraints.TryGetValue(symbolicValue, out constraints) &&
+                   constraints.HasConstraint(constraint);
         }
     }
 }

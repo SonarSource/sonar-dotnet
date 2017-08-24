@@ -384,15 +384,16 @@ namespace SonarAnalyzer.SymbolicExecution
                 : programState;
         }
 
-        protected static ProgramState SetNonNullConstraintIfValueType(ITypeSymbol typeSymbol, SymbolicValue symbolicValue, ProgramState programState)
+        protected static ProgramState SetNonNullConstraintIfValueType(ITypeSymbol typeSymbol, 
+            SymbolicValue symbolicValue, ProgramState programState)
         {
-            var isDefinitelyNotNull = !symbolicValue.HasConstraint(ObjectConstraint.NotNull, programState) &&
+            var isDefinitelyNotNull = !programState.HasConstraint(symbolicValue, ObjectConstraint.NotNull) &&
                 IsNonNullableValueType(typeSymbol) &&
                 !IsValueTypeWithOverloadedNullCompatibleOpEquals(typeSymbol) &&
                 !IsPointer(typeSymbol);
 
             return isDefinitelyNotNull
-                ? symbolicValue.SetConstraint(ObjectConstraint.NotNull, programState)
+                ? programState.SetConstraint(symbolicValue, ObjectConstraint.NotNull)
                 : programState;
         }
 

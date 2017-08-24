@@ -344,7 +344,7 @@ namespace SonarAnalyzer.SymbolicExecution
                 case SyntaxKind.StackAllocArrayCreationExpression:
                     {
                         var sv = new SymbolicValue();
-                        newProgramState = sv.SetConstraint(ObjectConstraint.NotNull, newProgramState);
+                        newProgramState = newProgramState.SetConstraint(sv, ObjectConstraint.NotNull);
                         newProgramState = newProgramState.PushValue(sv);
                         newProgramState = InvokeChecks(newProgramState, 
                             (ps, check) => check.ObjectCreated(ps, sv, instruction));
@@ -361,7 +361,7 @@ namespace SonarAnalyzer.SymbolicExecution
                         newProgramState = newProgramState.PopValues(creation.Initializers.Count);
 
                         var sv = new SymbolicValue();
-                        newProgramState = sv.SetConstraint(ObjectConstraint.NotNull, newProgramState);
+                        newProgramState = newProgramState.SetConstraint(sv, ObjectConstraint.NotNull);
                         newProgramState = newProgramState.PushValue(sv);
                         newProgramState = InvokeChecks(newProgramState, 
                             (ps, check) => check.ObjectCreated(ps, sv, instruction));
@@ -590,12 +590,12 @@ namespace SonarAnalyzer.SymbolicExecution
             SymbolicValue sv;
             var newProgramState = programState.PopValue(out sv);
             var resultValue = new SymbolicValue();
-            if (sv.HasConstraint(ObjectConstraint.Null, newProgramState))
+            if (newProgramState.HasConstraint(sv, ObjectConstraint.Null))
             {
                 var constraint = instruction.IsKind(SyntaxKind.IsExpression)
                     ? (SymbolicValueConstraint)BoolConstraint.False
                     : ObjectConstraint.Null;
-                newProgramState = resultValue.SetConstraint(constraint, newProgramState);
+                newProgramState = newProgramState.SetConstraint(resultValue, constraint);
             }
 
             return newProgramState.PushValue(resultValue);
@@ -610,7 +610,7 @@ namespace SonarAnalyzer.SymbolicExecution
                 typeSymbol.OriginalDefinition.Is(KnownType.System_Nullable_T);
 
             var newProgramState = isReferenceOrNullable
-                ? sv.SetConstraint(ObjectConstraint.Null, programState)
+                ? programState.SetConstraint(sv, ObjectConstraint.Null)
                 : SetNonNullConstraintIfValueType(typeSymbol, sv, programState);
 
             return newProgramState.PushValue(sv);
@@ -716,11 +716,11 @@ namespace SonarAnalyzer.SymbolicExecution
             }
             else if (IsEmptyNullableCtorCall(ctorSymbol))
             {
-                newProgramState = sv.SetConstraint(ObjectConstraint.Null, newProgramState);
+                newProgramState = newProgramState.SetConstraint(sv, ObjectConstraint.Null);
             }
             else
             {
-                newProgramState = sv.SetConstraint(ObjectConstraint.NotNull, newProgramState);
+                newProgramState = newProgramState.SetConstraint(sv, ObjectConstraint.NotNull);
             }
 
             newProgramState = newProgramState.PushValue(sv);

@@ -35,11 +35,11 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
         }
 
         public override IEnumerable<ProgramState> TrySetConstraint(SymbolicValueConstraint constraint,
-            ProgramState currentProgramState)
+            ProgramState programState)
         {
             if (constraint == null)
             {
-                return new[] { currentProgramState };
+                return new[] { programState };
             }
 
             if (constraint is ObjectConstraint)
@@ -48,15 +48,16 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
                     ? NullableValueConstraint.NoValue
                     : NullableValueConstraint.HasValue;
 
-                return TrySetConstraint(optionalConstraint, currentProgramState);
+                return TrySetConstraint(optionalConstraint, programState);
             }
 
-            var oldConstraint = currentProgramState.Constraints.GetValueOrDefault(this)?.GetConstraintOrDefault<NullableValueConstraint>();
+            var oldConstraint = programState.Constraints.GetValueOrDefault(this)?
+                .GetConstraintOrDefault<NullableValueConstraint>();
             if (constraint is NullableValueConstraint)
             {
                 if (oldConstraint == null)
                 {
-                    return new[] { SetConstraint(constraint, currentProgramState) };
+                    return new[] { programState.SetConstraint(this, constraint) };
                 }
 
                 if (oldConstraint != constraint)
@@ -64,10 +65,10 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
                     return Enumerable.Empty<ProgramState>();
                 }
 
-                return new[] { currentProgramState };
+                return new[] { programState };
             }
 
-            return TrySetConstraint(NullableValueConstraint.HasValue, currentProgramState)
+            return TrySetConstraint(NullableValueConstraint.HasValue, programState)
                 .SelectMany(ps => WrappedValue.TrySetConstraint(constraint, ps));
         }
 

@@ -268,7 +268,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
 
                 return constraint != null
-                    ? symbolicValue.SetConstraint(constraint, newProgramState)
+                    ? newProgramState.SetConstraint(symbolicValue, constraint)
                     : newProgramState;
             }
 
@@ -323,7 +323,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 return GetArgumentSymbolicValues(argumentList, programState)
                     .Aggregate(programState, 
-                        (state, value) => value.RemoveConstraint(CollectionCapacityConstraint.Empty, state));
+                        (state, value) => state.RemoveConstraint(value, CollectionCapacityConstraint.Empty));
             }
 
             private static IEnumerable<SymbolicValue> GetArgumentSymbolicValues(ArgumentListSyntax argumentList,

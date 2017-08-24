@@ -92,7 +92,7 @@ namespace SonarAnalyzer.SymbolicExecution
 
             var nameof = new SymbolicValue();
             newProgramState = newProgramState.PushValue(nameof);
-            return nameof.SetConstraint(ObjectConstraint.NotNull, newProgramState);
+            return newProgramState.SetConstraint(nameof, ObjectConstraint.NotNull);
         }
 
         private ProgramState HandleStringNullCheckMethod()
@@ -103,7 +103,7 @@ namespace SonarAnalyzer.SymbolicExecution
                 .PopValue(out arg1)
                 .PopValue();
 
-            if (arg1.HasConstraint(ObjectConstraint.Null, newProgramState))
+            if (newProgramState.HasConstraint(arg1, ObjectConstraint.Null))
             {
                 // Value is null, so the result of the call is true
                 return newProgramState.PushValue(SymbolicValue.True);
@@ -204,7 +204,7 @@ namespace SonarAnalyzer.SymbolicExecution
         {
             if (equals.LeftOperand == equals.RightOperand)
             {
-                return equals.SetConstraint(BoolConstraint.True, programState);
+                return programState.SetConstraint(equals, BoolConstraint.True);
             }
 
             return programState;
@@ -242,18 +242,18 @@ namespace SonarAnalyzer.SymbolicExecution
             {
                 if (AreBothArgumentsNull())
                 {
-                    return refEquals.SetConstraint(BoolConstraint.True, programState);
+                    return programState.SetConstraint(refEquals, BoolConstraint.True);
                 }
 
                 if (IsAnyArgumentNonNullValueType() ||
                     ArgumentsHaveDifferentNullability())
                 {
-                    return refEquals.SetConstraint(BoolConstraint.False, programState);
+                    return programState.SetConstraint(refEquals, BoolConstraint.False);
                 }
 
                 if (valueLeft == valueRight)
                 {
-                    return refEquals.SetConstraint(BoolConstraint.True, programState);
+                    return programState.SetConstraint(refEquals, BoolConstraint.True);
                 }
 
                 return programState;
@@ -261,11 +261,11 @@ namespace SonarAnalyzer.SymbolicExecution
 
             private bool ArgumentsHaveDifferentNullability()
             {
-                return (valueLeft.HasConstraint(ObjectConstraint.Null, programState) &&
-                    valueRight.HasConstraint(ObjectConstraint.NotNull, programState))
+                return (programState.HasConstraint(valueLeft, ObjectConstraint.Null) &&
+                    programState.HasConstraint(valueRight, ObjectConstraint.NotNull))
                     ||
-                    (valueLeft.HasConstraint(ObjectConstraint.NotNull, programState) &&
-                    valueRight.HasConstraint(ObjectConstraint.Null, programState));
+                    (programState.HasConstraint(valueLeft, ObjectConstraint.NotNull) &&
+                    programState.HasConstraint(valueRight, ObjectConstraint.Null));
             }
 
             private bool IsAnyArgumentNonNullValueType()
@@ -285,14 +285,14 @@ namespace SonarAnalyzer.SymbolicExecution
 
             private static bool IsValueNotNull(SymbolicValue arg, ITypeSymbol type, ProgramState programState)
             {
-                return arg.HasConstraint(ObjectConstraint.NotNull, programState) &&
+                return programState.HasConstraint(arg, ObjectConstraint.NotNull) &&
                     type.IsValueType;
             }
 
             private bool AreBothArgumentsNull()
             {
-                return valueLeft.HasConstraint(ObjectConstraint.Null, programState) &&
-                    valueRight.HasConstraint(ObjectConstraint.Null, programState);
+                return programState.HasConstraint(valueLeft, ObjectConstraint.Null) &&
+                    programState.HasConstraint(valueRight, ObjectConstraint.Null);
             }
         }
     }

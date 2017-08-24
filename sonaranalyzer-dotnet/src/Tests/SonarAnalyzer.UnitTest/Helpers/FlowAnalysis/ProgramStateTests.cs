@@ -53,9 +53,9 @@ namespace SonarAnalyzer.UnitTest.Helpers
             var constraint = new FakeConstraint();
             var symbol = GetSymbol();
             ps1 = ps1.StoreSymbolicValue(symbol, sv);
-            ps1 = sv.SetConstraint(constraint, ps1);
+            ps1 = ps1.SetConstraint(sv, constraint);
             ps2 = ps2.StoreSymbolicValue(symbol, sv);
-            ps2 = sv.SetConstraint(constraint, ps2);
+            ps2 = ps2.SetConstraint(sv, constraint);
 
             ps2.Should().Be(ps1);
             ps2.GetHashCode().Should().Be(ps1.GetHashCode());
@@ -86,9 +86,9 @@ namespace SonarAnalyzer.UnitTest.Helpers
             var symbol = GetSymbol();
             var sv = new SymbolicValue();
             ps1 = ps1.StoreSymbolicValue(symbol, sv);
-            ps1 = sv.SetConstraint(new FakeConstraint(), ps1);
+            ps1 = ps1.SetConstraint(sv, new FakeConstraint());
             ps2 = ps2.StoreSymbolicValue(symbol, sv);
-            ps2 = sv.SetConstraint(new FakeConstraint(), ps2);
+            ps2 = ps2.SetConstraint(sv, new FakeConstraint());
 
             ps2.Should().NotBe(ps1);
             ps2.GetHashCode().Should().NotBe(ps1.GetHashCode());
@@ -119,7 +119,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             var constraint = new FakeConstraint();
 
             ps = ps.StoreSymbolicValue(symbol, sv);
-            ps = sv.SetConstraint(constraint, ps);
+            ps = ps.SetConstraint(sv, constraint);
             symbol.HasConstraint(constraint, ps).Should().BeTrue();
             symbol.HasConstraint(new FakeConstraint(), ps).Should().BeFalse();
         }
@@ -133,17 +133,17 @@ namespace SonarAnalyzer.UnitTest.Helpers
             var symbol = GetSymbol();
 
             ps = ps.StoreSymbolicValue(symbol, sv);
-            ps = sv.SetConstraint(BoolConstraint.True, ps);
+            ps = ps.SetConstraint(sv, BoolConstraint.True);
             symbol.HasConstraint(BoolConstraint.True, ps).Should().BeTrue();
             symbol.HasConstraint(ObjectConstraint.NotNull, ps).Should().BeTrue();
 
             ps = ps.StoreSymbolicValue(symbol, sv);
-            ps = sv.SetConstraint(BoolConstraint.False, ps);
+            ps = ps.SetConstraint(sv, BoolConstraint.False);
             symbol.HasConstraint(BoolConstraint.False, ps).Should().BeTrue();
             symbol.HasConstraint(ObjectConstraint.NotNull, ps).Should().BeTrue();
 
             ps = ps.StoreSymbolicValue(symbol, sv);
-            ps = sv.SetConstraint(ObjectConstraint.NotNull, ps);
+            ps = ps.SetConstraint(sv, ObjectConstraint.NotNull);
             symbol.HasConstraint(BoolConstraint.False, ps).Should().BeTrue();
             symbol.HasConstraint(ObjectConstraint.NotNull, ps).Should().BeTrue();
         }

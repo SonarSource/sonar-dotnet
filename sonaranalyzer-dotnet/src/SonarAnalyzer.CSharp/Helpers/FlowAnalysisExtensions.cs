@@ -143,7 +143,7 @@ namespace SonarAnalyzer.SymbolicExecution
                 return false;
             }
 
-            return symbolicValue.HasConstraint(constraint, programState);
+            return programState.HasConstraint(symbolicValue, constraint);
         }
 
         public static ProgramState SetConstraint(this ISymbol symbol, SymbolicValueConstraint constraint,
@@ -151,24 +151,24 @@ namespace SonarAnalyzer.SymbolicExecution
         {
             var symbolicValue = programState.GetSymbolValue(symbol);
             if (symbolicValue == null ||
-                symbolicValue.HasConstraint(constraint, programState))
+                programState.HasConstraint(symbolicValue, constraint))
             {
                 return programState;
             }
 
-            return symbolicValue.SetConstraint(constraint, programState);
+            return programState.SetConstraint(symbolicValue, constraint);
         }
 
         public static ProgramState RemoveConstraint(this ISymbol symbol, SymbolicValueConstraint constraint, ProgramState programState)
         {
             var symbolicValue = programState.GetSymbolValue(symbol);
             if (symbolicValue == null ||
-                !symbolicValue.HasConstraint(constraint, programState))
+                !programState.HasConstraint(symbolicValue, constraint))
             {
                 return programState;
             }
 
-            return symbolicValue.RemoveConstraint(constraint, programState);
+            return programState.RemoveConstraint(symbolicValue, constraint);
         }
     }
 }

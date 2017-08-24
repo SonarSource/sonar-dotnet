@@ -143,7 +143,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 if (type == null ||
                     type.OriginalDefinition.Is(KnownType.System_Nullable_T) ||
                     !semanticModel.Compilation.ClassifyConversion(typeExpression, type).IsNullable ||
-                    !programState.PeekValue().HasConstraint(ObjectConstraint.Null, programState))
+                    !programState.HasConstraint(programState.PeekValue(), ObjectConstraint.Null))
                 {
                     return programState;
                 }

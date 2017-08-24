@@ -93,6 +93,15 @@ namespace SonarAnalyzer.SymbolicExecution.Constraints
                 : null;
         }
 
+        internal SymbolicValueConstraint GetConstraintOrDefault(Type constraintType)
+        {
+            SymbolicValueConstraint constraint = null;
+            return constraints.TryGetValue(constraintType, out constraint)
+                ? constraint
+                : null;
+        }
+
+
         internal bool HasConstraint(SymbolicValueConstraint constraint)
         {
             SymbolicValueConstraint storedConstraint;
