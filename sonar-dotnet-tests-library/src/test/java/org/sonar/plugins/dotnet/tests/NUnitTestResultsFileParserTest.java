@@ -83,17 +83,4 @@ public class NUnitTestResultsFileParserTest {
     assertThat(results.executionTime()).isNull();
   }
 
-  @Test
-  public void nunit3_sample() throws Exception {
-    UnitTestResults results = new UnitTestResults();
-    new NUnitTestResultsFileParser().accept(new File("src/test/resources/nunit/nunit3_sample.xml"), results);
-
-    assertThat(results.tests()).isEqualTo(18);
-    assertThat(results.passedPercentage()).isEqualTo(12 * 100.0 / 18);
-    assertThat(results.skipped()).isEqualTo(4);
-    assertThat(results.failures()).isEqualTo(2);
-    assertThat(results.errors()).isEqualTo(1);
-    assertThat(results.executionTime()).isEqualTo(154);
-  }
-
 }

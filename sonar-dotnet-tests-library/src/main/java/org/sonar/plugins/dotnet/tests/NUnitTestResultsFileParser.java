@@ -48,18 +48,15 @@ public class NUnitTestResultsFileParser implements UnitTestResultsParser {
 
     public void parse() {
       try (XmlParserHelper xmlParserHelper = new XmlParserHelper(file)) {
-        String rootTag = xmlParserHelper.nextStartTag();
-        if ("test-results".equals(rootTag)) {
-          handleTestResultsTag(xmlParserHelper);
-        } else if ("test-run".equals(rootTag)) {
-          handleTestRunTag(xmlParserHelper);
-        } else {
-          throw xmlParserHelper.parseError("Unrecognized root element <" + rootTag + ">");
-        }
-
+        checkRootTag(xmlParserHelper);
+        handleTestResultsTag(xmlParserHelper);
       } catch (IOException e) {
         throw new IllegalStateException("Unable to close report", e);
       }
+    }
+
+    private static void checkRootTag(XmlParserHelper xmlParserHelper) {
+      xmlParserHelper.checkRootTag("test-results");
     }
 
     private void handleTestResultsTag(XmlParserHelper xmlParserHelper) {
@@ -76,22 +73,6 @@ public class NUnitTestResultsFileParser implements UnitTestResultsParser {
       Double executionTime = readExecutionTimeFromDirectlyNestedTestSuiteTags(xmlParserHelper);
 
       unitTestResults.add(tests, passed, skipped, failures, errors, executionTime != null ? (long) executionTime.doubleValue() : null);
-    }
-
-    private void handleTestRunTag(XmlParserHelper xmlParserHelper) {
-      int total = xmlParserHelper.getRequiredIntAttribute("total");
-      int failures = xmlParserHelper.getRequiredIntAttribute("failed");
-      int inconclusive = xmlParserHelper.getRequiredIntAttribute("inconclusive");
-      int passed = xmlParserHelper.getRequiredIntAttribute("passed");
-      int skipped = xmlParserHelper.getRequiredIntAttribute("skipped");
-
-      skipped += inconclusive;
-
-      Double executionTime = xmlParserHelper.getDoubleAttribute("duration");
-
-      int errors = readErrorCountFromNestedTestCaseTags(xmlParserHelper);
-
-      unitTestResults.add(total, passed, skipped, failures, errors, executionTime != null ? (long) (executionTime.doubleValue() * 1000) : null);
     }
 
     @CheckForNull
@@ -117,28 +98,6 @@ public class NUnitTestResultsFileParser implements UnitTestResultsParser {
       }
 
       return executionTime;
-    }
-
-    @CheckForNull
-    private static int readErrorCountFromNestedTestCaseTags(XmlParserHelper xmlParserHelper) {
-      int errors = 0;
-
-      String tag;
-      int level = 0;
-      while ((tag = xmlParserHelper.nextStartOrEndTag()) != null) {
-        if ("<test-case>".equals(tag)) {
-          level++;
-          String label = xmlParserHelper.getAttribute("label");
-
-          if (level == 1 && "Error".equals(label)) {
-            errors++;
-          }
-        } else if ("</test-case>".equals(tag)) {
-          level--;
-        }
-      }
-
-      return errors;
     }
   }
 
