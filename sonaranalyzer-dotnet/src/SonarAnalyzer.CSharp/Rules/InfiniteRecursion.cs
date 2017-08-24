@@ -28,9 +28,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
-using SonarAnalyzer.Helpers.FlowAnalysis;
-using SonarAnalyzer.Helpers.FlowAnalysis.Common;
-using SonarAnalyzer.Helpers.FlowAnalysis.CSharp;
+using SonarAnalyzer.SymbolicExecution.CFG;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -69,7 +67,7 @@ namespace SonarAnalyzer.Rules.CSharp
             IControlFlowGraph cfg;
             if (property.ExpressionBody?.Expression != null)
             {
-                if (ControlFlowGraph.TryGet(property.ExpressionBody.Expression, c.SemanticModel, out cfg))
+                if (CSharpControlFlowGraph.TryGet(property.ExpressionBody.Expression, c.SemanticModel, out cfg))
                 {
                     var walker = new CfgWalkerForProperty(
                          new RecursionAnalysisContext(cfg, propertySymbol, property.Identifier.GetLocation(), c),
@@ -85,7 +83,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 foreach (var accessor in accessors)
                 {
-                    if (ControlFlowGraph.TryGet(accessor.Body, c.SemanticModel, out cfg))
+                    if (CSharpControlFlowGraph.TryGet(accessor.Body, c.SemanticModel, out cfg))
                     {
                         var walker = new CfgWalkerForProperty(
                             new RecursionAnalysisContext(cfg, propertySymbol, accessor.Keyword.GetLocation(), c),
@@ -110,8 +108,8 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             IControlFlowGraph cfg;
-            if (ControlFlowGraph.TryGet(method.Body, c.SemanticModel, out cfg) ||
-                ControlFlowGraph.TryGet(method.ExpressionBody?.Expression, c.SemanticModel, out cfg))
+            if (CSharpControlFlowGraph.TryGet(method.Body, c.SemanticModel, out cfg) ||
+                CSharpControlFlowGraph.TryGet(method.ExpressionBody?.Expression, c.SemanticModel, out cfg))
             {
                 var walker = new CfgWalkerForMethod(
                     new RecursionAnalysisContext(cfg, methodSymbol, method.Identifier.GetLocation(), c));

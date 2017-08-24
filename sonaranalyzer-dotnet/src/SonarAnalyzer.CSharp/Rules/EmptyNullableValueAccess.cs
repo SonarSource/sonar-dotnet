@@ -20,20 +20,19 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
-using SonarAnalyzer.Helpers.FlowAnalysis.Common;
-using SonarAnalyzer.Helpers.FlowAnalysis.CSharp;
+using SonarAnalyzer.SymbolicExecution;
+using SonarAnalyzer.SymbolicExecution.Constraints;
+using SonarAnalyzer.SymbolicExecution.SymbolicValues;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
-    using System.Collections.Immutable;
-    using ExplodedGraph = Helpers.FlowAnalysis.CSharp.ExplodedGraph;
-
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
     public class EmptyNullableValueAccess : SonarDiagnosticAnalyzer
@@ -54,7 +53,7 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterExplodedGraphBasedAnalysis((e, c) => CheckEmptyNullableAccess(e, c));
         }
 
-        private static void CheckEmptyNullableAccess(ExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context)
+        private static void CheckEmptyNullableAccess(CSharpExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context)
         {
             var nullPointerCheck = new NullValueAccessedCheck(explodedGraph);
             explodedGraph.AddExplodedGraphCheck(nullPointerCheck);
@@ -85,7 +84,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             public event EventHandler<MemberAccessedEventArgs> ValuePropertyAccessed;
 
-            public NullValueAccessedCheck(ExplodedGraph explodedGraph)
+            public NullValueAccessedCheck(CSharpExplodedGraph explodedGraph)
                 : base(explodedGraph)
             {
             }

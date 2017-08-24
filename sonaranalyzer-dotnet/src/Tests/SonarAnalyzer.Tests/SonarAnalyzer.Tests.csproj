@@ -58,7 +58,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataFlowAnalysis\SymbolicValueTests\SymbolicValue_TrySetConstraint.cs" />
+    <Compile Include="SymbolicExecution\SymbolicValues\SymbolicValue_TrySetConstraint.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="..\..\AssemblyInfo.Shared.cs">
       <Link>Properties\AssemblyInfo.Shared.cs</Link>

@@ -28,8 +28,8 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
-using SonarAnalyzer.Helpers.FlowAnalysis.Common;
-using SonarAnalyzer.Helpers.FlowAnalysis.CSharp;
+using SonarAnalyzer.SymbolicExecution;
+using SonarAnalyzer.SymbolicExecution.Constraints;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -93,7 +93,7 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterExplodedGraphBasedAnalysis(CheckForEmptyCollectionAccess);
         }
 
-        private void CheckForEmptyCollectionAccess(ExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context)
+        private void CheckForEmptyCollectionAccess(CSharpExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context)
         {
             var check = new EmptyCollectionAccessedCheck(explodedGraph);
             explodedGraph.AddExplodedGraphCheck(check);
@@ -124,7 +124,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             public event EventHandler<CollectionAccessedEventArgs> CollectionAccessed;
 
-            public EmptyCollectionAccessedCheck(ExplodedGraph explodedGraph)
+            public EmptyCollectionAccessedCheck(CSharpExplodedGraph explodedGraph)
                 : base(explodedGraph)
             {
             }

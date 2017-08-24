@@ -23,14 +23,16 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
-using SonarAnalyzer.Helpers.FlowAnalysis.Common;
+using SonarAnalyzer.Helpers;
+using SonarAnalyzer.SymbolicExecution.CFG;
+using SonarAnalyzer.SymbolicExecution.LVA;
 
-namespace SonarAnalyzer.Helpers.FlowAnalysis.CSharp
+namespace SonarAnalyzer.SymbolicExecution
 {
     internal static class FlowAnalysisExtensions
     {
         public static void RegisterExplodedGraphBasedAnalysis(this SonarAnalysisContext context,
-            Action<ExplodedGraph, SyntaxNodeAnalysisContext> analyze)
+            Action<CSharpExplodedGraph, SyntaxNodeAnalysisContext> analyze)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
@@ -113,7 +115,7 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.CSharp
         }
 
         private static void Analyze(CSharpSyntaxNode declarationBody, ISymbol symbol,
-            Action<ExplodedGraph, SyntaxNodeAnalysisContext> analyze, SyntaxNodeAnalysisContext context)
+            Action<CSharpExplodedGraph, SyntaxNodeAnalysisContext> analyze, SyntaxNodeAnalysisContext context)
         {
             if (declarationBody == null ||
                 declarationBody.ContainsDiagnostics)
@@ -122,14 +124,14 @@ namespace SonarAnalyzer.Helpers.FlowAnalysis.CSharp
             }
 
             IControlFlowGraph cfg;
-            if (!ControlFlowGraph.TryGet(declarationBody, context.SemanticModel, out cfg))
+            if (!CSharpControlFlowGraph.TryGet(declarationBody, context.SemanticModel, out cfg))
             {
                 return;
             }
 
-            var lva = LiveVariableAnalysis.Analyze(cfg, symbol, context.SemanticModel);
+            var lva = CSharpLiveVariableAnalysis.Analyze(cfg, symbol, context.SemanticModel);
 
-            var explodedGraph = new ExplodedGraph(cfg, symbol, context.SemanticModel, lva);
+            var explodedGraph = new CSharpExplodedGraph(cfg, symbol, context.SemanticModel, lva);
             analyze(explodedGraph, context);
         }
 

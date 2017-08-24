@@ -20,6 +20,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -27,14 +28,12 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
-using SonarAnalyzer.Helpers.FlowAnalysis.Common;
-using SonarAnalyzer.Helpers.FlowAnalysis.CSharp;
+using SonarAnalyzer.SymbolicExecution;
+using SonarAnalyzer.SymbolicExecution.CFG;
+using SonarAnalyzer.SymbolicExecution.Constraints;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
-    using System.Collections.Immutable;
-    using ExplodedGraph = Helpers.FlowAnalysis.CSharp.ExplodedGraph;
-
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
     public class NullPointerDereference : SonarDiagnosticAnalyzer
@@ -52,7 +51,7 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterExplodedGraphBasedAnalysis((e, c) => CheckForNullDereference(e, c));
         }
 
-        private static void CheckForNullDereference(ExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context)
+        private static void CheckForNullDereference(CSharpExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context)
         {
             var nullPointerCheck = new NullPointerCheck(explodedGraph);
             explodedGraph.AddExplodedGraphCheck(nullPointerCheck);
@@ -94,7 +93,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             public event EventHandler<MemberAccessedEventArgs> MemberAccessed;
 
-            public NullPointerCheck(ExplodedGraph explodedGraph)
+            public NullPointerCheck(CSharpExplodedGraph explodedGraph)
                 : base(explodedGraph)
             {
 

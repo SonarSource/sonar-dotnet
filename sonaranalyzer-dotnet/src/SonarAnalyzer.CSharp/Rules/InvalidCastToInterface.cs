@@ -19,6 +19,7 @@
  */
 
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -26,14 +27,11 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
-using SonarAnalyzer.Helpers.FlowAnalysis.Common;
-using SonarAnalyzer.Helpers.FlowAnalysis.CSharp;
+using SonarAnalyzer.SymbolicExecution;
+using SonarAnalyzer.SymbolicExecution.Constraints;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
-    using System.Collections.Immutable;
-    using ExplodedGraph = Helpers.FlowAnalysis.CSharp.ExplodedGraph;
-
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
     public class InvalidCastToInterface : SonarDiagnosticAnalyzer
@@ -101,7 +99,7 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterExplodedGraphBasedAnalysis((e, c) => CheckEmptyNullableCast(e, c));
         }
 
-        private static void CheckEmptyNullableCast(ExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context)
+        private static void CheckEmptyNullableCast(CSharpExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context)
         {
             explodedGraph.AddExplodedGraphCheck(new NullableCastCheck(explodedGraph, context));
             explodedGraph.Walk();
@@ -111,12 +109,12 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             private readonly SyntaxNodeAnalysisContext context;
 
-            public NullableCastCheck(ExplodedGraph explodedGraph)
+            public NullableCastCheck(CSharpExplodedGraph explodedGraph)
                 : base(explodedGraph)
             {
             }
 
-            public NullableCastCheck(ExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context)
+            public NullableCastCheck(CSharpExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context)
                 : this(explodedGraph)
             {
                 this.context = context;

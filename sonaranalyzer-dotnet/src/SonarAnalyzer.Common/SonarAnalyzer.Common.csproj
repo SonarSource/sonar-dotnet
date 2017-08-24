@@ -91,16 +91,16 @@
     <Compile Include="..\Signing.cs">
       <Link>Properties\Signing.cs</Link>
     </Compile>
-    <Compile Include="Helpers\ControlFlowGraph\*.cs" />
-    <Compile Include="Helpers\ControlFlowGraph\SyntaxNodeBased\Blocks\*.cs" />
-    <Compile Include="Helpers\ControlFlowGraph\SyntaxNodeBased\*.cs" />
-    <Compile Include="Helpers\LiveVariableAnalysis\*.cs" />
-    <Compile Include="Helpers\SymbolicExecution\Constraints\*.cs" />
-    <Compile Include="Helpers\SymbolicExecution\Relationships\*.cs" />
-    <Compile Include="Helpers\SymbolicExecution\SymbolicValues\Binary\*.cs" />
-    <Compile Include="Helpers\SymbolicExecution\SymbolicValues\Unary\*.cs" />
-    <Compile Include="Helpers\SymbolicExecution\SymbolicValues\*.cs" />
-    <Compile Include="Helpers\SymbolicExecution\*.cs" />
+    <Compile Include="SymbolicExecution\ControlFlowGraph\*.cs" />
+    <Compile Include="SymbolicExecution\ControlFlowGraph\SyntaxNodeBased\Blocks\*.cs" />
+    <Compile Include="SymbolicExecution\ControlFlowGraph\SyntaxNodeBased\*.cs" />
+    <Compile Include="SymbolicExecution\LiveVariableAnalysis\*.cs" />
+    <Compile Include="SymbolicExecution\Constraints\*.cs" />
+    <Compile Include="SymbolicExecution\Relationships\*.cs" />
+    <Compile Include="SymbolicExecution\SymbolicValues\Binary\*.cs" />
+    <Compile Include="SymbolicExecution\SymbolicValues\Unary\*.cs" />
+    <Compile Include="SymbolicExecution\SymbolicValues\*.cs" />
+    <Compile Include="SymbolicExecution\*.cs" />
     <Compile Include="Helpers\*.cs" />
     <Compile Include="Metrics\*.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

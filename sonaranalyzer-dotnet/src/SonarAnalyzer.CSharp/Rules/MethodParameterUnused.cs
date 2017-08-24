@@ -27,13 +27,11 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
-using SonarAnalyzer.Helpers.FlowAnalysis.Common;
-using SonarAnalyzer.Helpers.FlowAnalysis.CSharp;
+using SonarAnalyzer.SymbolicExecution.CFG;
+using SonarAnalyzer.SymbolicExecution.LVA;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
-    using LiveVariableAnalysis = Helpers.FlowAnalysis.CSharp.LiveVariableAnalysis;
-
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
     public class MethodParameterUnused : SonarDiagnosticAnalyzer
@@ -135,12 +133,12 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             IControlFlowGraph cfg;
-            if (!ControlFlowGraph.TryGet(declaration.Body, context.SemanticModel, out cfg))
+            if (!CSharpControlFlowGraph.TryGet(declaration.Body, context.SemanticModel, out cfg))
             {
                 return;
             }
 
-            var lva = LiveVariableAnalysis.Analyze(cfg, methodSymbol, context.SemanticModel);
+            var lva = CSharpLiveVariableAnalysis.Analyze(cfg, methodSymbol, context.SemanticModel);
             var liveParameters = lva.GetLiveIn(cfg.EntryBlock).OfType<IParameterSymbol>();
 
             ReportOnUnusedParameters(declaration, candidateParameters.Except(liveParameters).Except(lva.CapturedVariables), MessageDead,

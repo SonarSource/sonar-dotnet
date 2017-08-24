@@ -18,14 +18,13 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Linq;
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SonarAnalyzer.Helpers.FlowAnalysis.Common;
-using SonarAnalyzer.Helpers.FlowAnalysis.CSharp;
-using System.Linq;
+using SonarAnalyzer.SymbolicExecution.CFG;
 
 namespace SonarAnalyzer.UnitTest.Helpers
 {
@@ -58,7 +57,7 @@ namespace NS
             SemanticModel semanticModel;
             var method = CompileWithMethodBody(input, "Bar", out semanticModel);
             var expression = method.ExpressionBody.Expression;
-            var cfg = SonarAnalyzer.Helpers.FlowAnalysis.CSharp.ControlFlowGraph.Create(expression, semanticModel);
+            var cfg = CSharpControlFlowGraph.Create(expression, semanticModel);
             VerifyMinimalCfg(cfg);
         }
 
@@ -2412,7 +2411,7 @@ namespace NS
         {
             SemanticModel semanticModel;
             var method = CompileWithMethodBody(string.Format(TestInput, methodBody), "Bar", out semanticModel);
-            return ControlFlowGraph.Create(method.Body, semanticModel);
+            return CSharpControlFlowGraph.Create(method.Body, semanticModel);
         }
 
         #endregion
