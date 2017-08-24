@@ -1,0 +1,134 @@
+{
+"issues":  [
+{
+"id":  "S2701",
+"message":  "Remove or correct this assertion.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Configuration\ConfigurationSpec.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  13,
+"endLine":  43,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S2701",
+"message":  "Remove or correct this assertion.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Configuration\HoconTests.cs",
+"region":  {
+"startLine":  119,
+"startColumn":  13,
+"endLine":  119,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S2701",
+"message":  "Remove or correct this assertion.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Configuration\HoconTests.cs",
+"region":  {
+"startLine":  152,
+"startColumn":  13,
+"endLine":  152,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S2701",
+"message":  "Remove or correct this assertion.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Configuration\HoconTests.cs",
+"region":  {
+"startLine":  153,
+"startColumn":  13,
+"endLine":  153,
+"endColumn":  76
+}
+}
+},
+{
+"id":  "S2701",
+"message":  "Remove or correct this assertion.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Configuration\HoconTests.cs",
+"region":  {
+"startLine":  187,
+"startColumn":  13,
+"endLine":  187,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S2701",
+"message":  "Remove or correct this assertion.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Configuration\HoconTests.cs",
+"region":  {
+"startLine":  188,
+"startColumn":  13,
+"endLine":  188,
+"endColumn":  76
+}
+}
+},
+{
+"id":  "S2701",
+"message":  "Remove or correct this assertion.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Configuration\HoconTests.cs",
+"region":  {
+"startLine":  358,
+"startColumn":  13,
+"endLine":  358,
+"endColumn":  88
+}
+}
+},
+{
+"id":  "S2701",
+"message":  "Remove or correct this assertion.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Configuration\HoconTests.cs",
+"region":  {
+"startLine":  360,
+"startColumn":  13,
+"endLine":  360,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S2701",
+"message":  "Remove or correct this assertion.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Configuration\HoconTests.cs",
+"region":  {
+"startLine":  363,
+"startColumn":  13,
+"endLine":  363,
+"endColumn":  88
+}
+}
+},
+{
+"id":  "S2701",
+"message":  "Remove or correct this assertion.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Configuration\HoconTests.cs",
+"region":  {
+"startLine":  365,
+"startColumn":  13,
+"endLine":  365,
+"endColumn":  89
+}
+}
+}
+]
+}

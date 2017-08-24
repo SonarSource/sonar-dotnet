@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S2701",
+"message":  "Remove or correct this assertion.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests\MetricsCollectorSpec.cs",
+"region":  {
+"startLine":  57,
+"startColumn":  25,
+"endLine":  57,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S2701",
+"message":  "Remove or correct this assertion.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests\MetricsCollectorSpec.cs",
+"region":  {
+"startLine":  75,
+"startColumn":  25,
+"endLine":  75,
+"endColumn":  82
+}
+}
+}
+]
+}
