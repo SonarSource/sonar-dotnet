@@ -50,54 +50,6 @@
 },
 {
 "id":  "S4142",
-"message":  "Verify that this is the intended value; it is the same as the 3rd argument.",
-"location":  [
-{
-"uri":  "sources\akka.net\src\core\Akka.Persistence\AtLeastOnceDeliverySemantic.cs",
-"region":  {
-"startLine":  508,
-"startColumn":  42,
-"endLine":  508,
-"endColumn":  55
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Persistence\AtLeastOnceDeliverySemantic.cs",
-"region":  {
-"startLine":  507,
-"startColumn":  99,
-"endLine":  507,
-"endColumn":  112
-}
-}
-]
-},
-{
-"id":  "S4142",
-"message":  "Verify that this is the intended value; it is the same as the 2nd argument.",
-"location":  [
-{
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Fsm\PersistentFSMBase.cs",
-"region":  {
-"startLine":  465,
-"startColumn":  61,
-"endLine":  465,
-"endColumn":  73
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Fsm\PersistentFSMBase.cs",
-"region":  {
-"startLine":  464,
-"startColumn":  97,
-"endLine":  464,
-"endColumn":  109
-}
-}
-]
-},
-{
-"id":  "S4142",
 "message":  "Verify that this is the intended value; it is the same as the 1st argument.",
 "location":  [
 {

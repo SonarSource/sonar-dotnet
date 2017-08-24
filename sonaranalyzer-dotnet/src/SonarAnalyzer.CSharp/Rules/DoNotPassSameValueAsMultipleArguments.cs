@@ -18,7 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -52,12 +54,19 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
 
                 var arguments = invocation.ArgumentList.Arguments;
+                var argsConvertedType = arguments
+                    .Select(arg => c.SemanticModel.GetTypeInfo(arg.Expression).ConvertedType)
+                    .ToList();
+
                 for (int i = 1; i < arguments.Count; i++)
                 {
+                    var parameterUsage = new HashSet<ISymbol> { argsConvertedType[i] };
+
                     for (int j = 0; j < i; j++)
                     {
-                        if (ShouldReportOnArgument(arguments[i]) &&
-                            arguments[i].IsEquivalentTo(arguments[j]))
+                        if (!IsLiteral(arguments[i]) &&
+                            arguments[i].IsEquivalentTo(arguments[j]) &&
+                            IsDuplicateUsage(parameterUsage, argsConvertedType[j]))
                         {
                             c.ReportDiagnostic(Diagnostic.Create(rule,
                                 arguments[i].GetLocation(),
@@ -72,16 +81,15 @@ namespace SonarAnalyzer.Rules.CSharp
             SyntaxKind.InvocationExpression);
         }
 
-        private static bool ShouldReportOnArgument(ArgumentSyntax argument)
+        private static bool IsDuplicateUsage(ISet<ISymbol> parameterUsage, ISymbol typeSymbol)
         {
-            bool isLiteral = argument.Expression is LiteralExpressionSyntax ||
+            return typeSymbol != null && !parameterUsage.Add(typeSymbol);
+        }
+
+        private static bool IsLiteral(ArgumentSyntax argument)
+        {
+            return argument.Expression is LiteralExpressionSyntax ||
                 (argument.Expression as PrefixUnaryExpressionSyntax)?.Operand is LiteralExpressionSyntax;
-
-            var variableName = (argument.Expression as IdentifierNameSyntax)?.Identifier.ValueText;
-
-            return !isLiteral &&
-                   variableName != "self" &&
-                   variableName != "Self";
         }
 
         private static string ToOrdinalNumberString(int number)

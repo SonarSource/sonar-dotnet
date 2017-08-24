@@ -2,13 +2,18 @@ using System;
 
 namespace Tests.Diagnostics
 {
+    interface IA { }
+    class A : IA { }
+
     class Foo
     {
-        public void Foo2(decimal a, decimal b) { }
         public void Foo2(decimal a, decimal b) { }
         public void Foo2(bool a, bool b) { }
         public void Foo2(string a, string b) { }
         public void Foo2(int a, int b) { }
+
+        public void DifferentUsages(IA a, A b) { }
+        public void Foo2(A a, A b) { }
 
         public void Foo5(int a, int b, int c, int d, int e) {}
         public void Bar(string a, int b) {}
@@ -17,7 +22,7 @@ namespace Tests.Diagnostics
 
         public void Test()
         {
-            int x, y, self, Self;
+            int x, y;
 
             Foo5(x, x, x, x, x);
 //                  ^ Noncompliant    {{Verify that this is the intended value; it is the same as the 1st argument.}}
@@ -61,11 +66,13 @@ namespace Tests.Diagnostics
             Foo2(foo1.x, foo2.x);
 
             Foo2(-1, -1);
-            Foo2(Self, Self);
-            Foo2(self, self);
-
             Foo2(1.0, 1.0);
             Foo2(1m, 1m);
+
+            A a = new A();
+            DifferentUsages(a, a);
+            Foo2(a, a); // Noncompliant
+// Secondary@-1;
         }
     }
 }
