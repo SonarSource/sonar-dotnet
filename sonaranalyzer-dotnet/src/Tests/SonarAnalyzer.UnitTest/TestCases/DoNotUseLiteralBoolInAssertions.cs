@@ -49,7 +49,8 @@ namespace Tests.Diagnostics
             NUnit.Framework.Assert.AreEqual(b, b);
             Xunit.Assert.Equal(b, b);
             Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual(b, b);
-            Xunit.Assert.True(true); // There is no Assert.Fail in Xunit. Assert.True(false) is way to simulate it.
+            Xunit.Assert.True(true);
+            // There is no Assert.Fail in Xunit. Assert.True(false) is way to simulate it.
             Xunit.Assert.True(false);
         }
     }
