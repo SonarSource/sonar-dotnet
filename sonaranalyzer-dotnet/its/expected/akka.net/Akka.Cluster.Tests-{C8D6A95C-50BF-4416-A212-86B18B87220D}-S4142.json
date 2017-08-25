@@ -1,0 +1,28 @@
+{
+"issues":  [
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 1st argument.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests\ClusterDomainEventSpec.cs",
+"region":  {
+"startLine":  55,
+"startColumn":  96,
+"endLine":  55,
+"endColumn":  98
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests\ClusterDomainEventSpec.cs",
+"region":  {
+"startLine":  55,
+"startColumn":  92,
+"endLine":  55,
+"endColumn":  94
+}
+}
+]
+}
+]
+}

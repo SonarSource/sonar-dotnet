@@ -1,0 +1,76 @@
+{
+"issues":  [
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 1st argument.",
+"location":  [
+{
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  1170,
+"startColumn":  103,
+"endLine":  1170,
+"endColumn":  115
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  1170,
+"startColumn":  89,
+"endLine":  1170,
+"endColumn":  101
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 1st argument.",
+"location":  [
+{
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  1181,
+"startColumn":  95,
+"endLine":  1181,
+"endColumn":  107
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  1181,
+"startColumn":  81,
+"endLine":  1181,
+"endColumn":  93
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 1st argument.",
+"location":  [
+{
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3099,
+"startColumn":  92,
+"endLine":  3099,
+"endColumn":  96
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3099,
+"startColumn":  86,
+"endLine":  3099,
+"endColumn":  90
+}
+}
+]
+}
+]
+}

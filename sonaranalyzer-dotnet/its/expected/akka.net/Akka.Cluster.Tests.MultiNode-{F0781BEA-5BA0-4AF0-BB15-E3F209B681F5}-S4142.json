@@ -1,0 +1,28 @@
+{
+"issues":  [
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 5th argument.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests.MultiNode\MultiNodeClusterSpec.cs",
+"region":  {
+"startLine":  191,
+"startColumn":  21,
+"endLine":  191,
+"endColumn":  41
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests.MultiNode\MultiNodeClusterSpec.cs",
+"region":  {
+"startLine":  190,
+"startColumn":  21,
+"endLine":  190,
+"endColumn":  41
+}
+}
+]
+}
+]
+}

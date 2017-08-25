@@ -1,0 +1,52 @@
+{
+"issues":  [
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 1st argument.",
+"location":  [
+{
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\BeforePipelineFixture.cs",
+"region":  {
+"startLine":  68,
+"startColumn":  33,
+"endLine":  68,
+"endColumn":  39
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\BeforePipelineFixture.cs",
+"region":  {
+"startLine":  68,
+"startColumn":  25,
+"endLine":  68,
+"endColumn":  31
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 1st argument.",
+"location":  [
+{
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Routing\DefaultRoutePatternMatcherFixture.cs",
+"region":  {
+"startLine":  180,
+"startColumn":  67,
+"endLine":  180,
+"endColumn":  86
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Routing\DefaultRoutePatternMatcherFixture.cs",
+"region":  {
+"startLine":  180,
+"startColumn":  46,
+"endLine":  180,
+"endColumn":  65
+}
+}
+]
+}
+]
+}

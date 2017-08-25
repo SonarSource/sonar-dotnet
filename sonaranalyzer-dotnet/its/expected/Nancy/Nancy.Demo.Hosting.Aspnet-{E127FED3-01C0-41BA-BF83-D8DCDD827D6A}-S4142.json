@@ -1,0 +1,28 @@
+{
+"issues":  [
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 1st argument.",
+"location":  [
+{
+"uri":  "sources\Nancy\src\Nancy.Demo.Hosting.Aspnet\Piratizer4000.cs",
+"region":  {
+"startLine":  90,
+"startColumn":  82,
+"endLine":  90,
+"endColumn":  115
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy.Demo.Hosting.Aspnet\Piratizer4000.cs",
+"region":  {
+"startLine":  90,
+"startColumn":  47,
+"endLine":  90,
+"endColumn":  80
+}
+}
+]
+}
+]
+}

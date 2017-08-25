@@ -1,0 +1,28 @@
+{
+"issues":  [
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 1st argument.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests\Transport\AkkaProtocolStressTest.cs",
+"region":  {
+"startLine":  114,
+"startColumn":  102,
+"endLine":  114,
+"endColumn":  125
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests\Transport\AkkaProtocolStressTest.cs",
+"region":  {
+"startLine":  114,
+"startColumn":  77,
+"endLine":  114,
+"endColumn":  100
+}
+}
+]
+}
+]
+}

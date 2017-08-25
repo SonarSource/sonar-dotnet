@@ -1,0 +1,100 @@
+{
+"issues":  [
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 1st argument.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  886,
+"startColumn":  114,
+"endLine":  886,
+"endColumn":  129
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
+"region":  {
+"startLine":  886,
+"startColumn":  97,
+"endLine":  886,
+"endColumn":  112
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 1st argument.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"region":  {
+"startLine":  325,
+"startColumn":  124,
+"endLine":  325,
+"endColumn":  137
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\EndpointManager.cs",
+"region":  {
+"startLine":  325,
+"startColumn":  109,
+"endLine":  325,
+"endColumn":  122
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 1st argument.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteWatcher.cs",
+"region":  {
+"startLine":  279,
+"startColumn":  113,
+"endLine":  279,
+"endColumn":  130
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteWatcher.cs",
+"region":  {
+"startLine":  279,
+"startColumn":  94,
+"endLine":  279,
+"endColumn":  111
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 1st argument.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteWatcher.cs",
+"region":  {
+"startLine":  280,
+"startColumn":  133,
+"endLine":  280,
+"endColumn":  158
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteWatcher.cs",
+"region":  {
+"startLine":  280,
+"startColumn":  106,
+"endLine":  280,
+"endColumn":  131
+}
+}
+]
+}
+]
+}

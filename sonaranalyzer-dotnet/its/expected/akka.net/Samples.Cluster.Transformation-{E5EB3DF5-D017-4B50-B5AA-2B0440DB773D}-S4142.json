@@ -1,0 +1,28 @@
+{
+"issues":  [
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 1st argument.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\examples\Cluster\Roles\Samples.Cluster.Transformation\Program.cs",
+"region":  {
+"startLine":  60,
+"startColumn":  68,
+"endLine":  60,
+"endColumn":  76
+}
+},
+{
+"uri":  "sources\akka.net\src\examples\Cluster\Roles\Samples.Cluster.Transformation\Program.cs",
+"region":  {
+"startLine":  60,
+"startColumn":  58,
+"endLine":  60,
+"endColumn":  66
+}
+}
+]
+}
+]
+}

@@ -1,0 +1,52 @@
+{
+"issues":  [
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 1st argument.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  1455,
+"startColumn":  59,
+"endLine":  1455,
+"endColumn":  76
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  1455,
+"startColumn":  40,
+"endLine":  1455,
+"endColumn":  57
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 1st argument.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  1865,
+"startColumn":  114,
+"endLine":  1865,
+"endColumn":  137
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  1865,
+"startColumn":  89,
+"endLine":  1865,
+"endColumn":  112
+}
+}
+]
+}
+]
+}

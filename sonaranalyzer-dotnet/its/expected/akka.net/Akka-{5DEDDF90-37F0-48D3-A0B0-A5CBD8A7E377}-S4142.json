@@ -1,0 +1,172 @@
+{
+"issues":  [
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 3rd argument.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorRef.cs",
+"region":  {
+"startLine":  412,
+"startColumn":  85,
+"endLine":  412,
+"endColumn":  90
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorRef.cs",
+"region":  {
+"startLine":  412,
+"startColumn":  75,
+"endLine":  412,
+"endColumn":  80
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 1st argument.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka\Actor\FSM.cs",
+"region":  {
+"startLine":  193,
+"startColumn":  76,
+"endLine":  193,
+"endColumn":  83
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka\Actor\FSM.cs",
+"region":  {
+"startLine":  193,
+"startColumn":  67,
+"endLine":  193,
+"endColumn":  74
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 3rd argument.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka\Event\TraceLogger.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  154,
+"endLine":  26,
+"endColumn":  162
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka\Event\TraceLogger.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  144,
+"endLine":  26,
+"endColumn":  152
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 1st argument.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka\IO\SimpleDnsManager.cs",
+"region":  {
+"startLine":  34,
+"startColumn":  101,
+"endLine":  34,
+"endColumn":  109
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka\IO\SimpleDnsManager.cs",
+"region":  {
+"startLine":  34,
+"startColumn":  91,
+"endLine":  34,
+"endColumn":  99
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 1st argument.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka\Util\Internal\Collections\ImmutableTreeSet.cs",
+"region":  {
+"startLine":  36,
+"startColumn":  33,
+"endLine":  36,
+"endColumn":  38
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka\Util\Internal\Collections\ImmutableTreeSet.cs",
+"region":  {
+"startLine":  36,
+"startColumn":  26,
+"endLine":  36,
+"endColumn":  31
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 1st argument.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka\Util\Internal\Collections\ImmutableTreeSet.cs",
+"region":  {
+"startLine":  62,
+"startColumn":  18,
+"endLine":  62,
+"endColumn":  23
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka\Util\Internal\Collections\ImmutableTreeSet.cs",
+"region":  {
+"startLine":  62,
+"startColumn":  11,
+"endLine":  62,
+"endColumn":  16
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 3rd argument.",
+"location":  [
+{
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\MatchExpressionBuilder.cs",
+"region":  {
+"startLine":  58,
+"startColumn":  113,
+"endLine":  58,
+"endColumn":  127
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\MatchExpressionBuilder.cs",
+"region":  {
+"startLine":  58,
+"startColumn":  83,
+"endLine":  58,
+"endColumn":  97
+}
+}
+]
+}
+]
+}
