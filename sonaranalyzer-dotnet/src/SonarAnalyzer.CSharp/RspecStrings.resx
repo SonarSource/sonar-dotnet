@@ -3615,6 +3615,33 @@
   <data name="S2699_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
   </data>
+  <data name="S2701_Category" xml:space="preserve">
+    <value>Sonar Code Smell</value>
+  </data>
+  <data name="S2701_Description" xml:space="preserve">
+    <value>There's no reason to use literal boolean values in assertions. Doing so is at best confusing for maintainers, and at worst a bug.</value>
+  </data>
+  <data name="S2701_IsActivatedByDefault" xml:space="preserve">
+    <value>False</value>
+  </data>
+  <data name="S2701_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S2701_RemediationCost" xml:space="preserve">
+    <value>5min</value>
+  </data>
+  <data name="S2701_Severity" xml:space="preserve">
+    <value>Critical</value>
+  </data>
+  <data name="S2701_Tags" xml:space="preserve">
+    <value>tests</value>
+  </data>
+  <data name="S2701_Title" xml:space="preserve">
+    <value>Literal boolean values should not be used in assertions</value>
+  </data>
+  <data name="S2701_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S2737_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>

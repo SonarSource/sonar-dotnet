@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S2701",
+"message":  "Remove or correct this assertion.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing.Tests\BrowserFixture.cs",
+"region":  {
+"startLine":  462,
+"startColumn":  13,
+"endLine":  462,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S2701",
+"message":  "Remove or correct this assertion.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing.Tests\BrowserFixture.cs",
+"region":  {
+"startLine":  484,
+"startColumn":  13,
+"endLine":  484,
+"endColumn":  56
+}
+}
+}
+]
+}
