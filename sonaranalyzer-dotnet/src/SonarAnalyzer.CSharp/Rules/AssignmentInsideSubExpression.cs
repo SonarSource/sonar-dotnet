@@ -147,14 +147,14 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             var expressionOrParenthesizedParent = expression.GetSelfOrTopParenthesizedExpression();
 
-            return IsInStatementCondition<IfStatementSyntax>(expressionOrParenthesizedParent, expression, s => s.Condition) ||
-                IsInStatementCondition<ForStatementSyntax>(expressionOrParenthesizedParent, expression, s => s.Condition) ||
-                IsInStatementCondition<WhileStatementSyntax>(expressionOrParenthesizedParent, expression, s => s.Condition) ||
-                IsInStatementCondition<DoStatementSyntax>(expressionOrParenthesizedParent, expression, s => s.Condition);
+            return IsInStatementCondition<IfStatementSyntax>(expressionOrParenthesizedParent, expression, s => s?.Condition) ||
+                IsInStatementCondition<ForStatementSyntax>(expressionOrParenthesizedParent, expression, s => s?.Condition) ||
+                IsInStatementCondition<WhileStatementSyntax>(expressionOrParenthesizedParent, expression, s => s?.Condition) ||
+                IsInStatementCondition<DoStatementSyntax>(expressionOrParenthesizedParent, expression, s => s?.Condition);
         }
 
-        private static bool IsDirectlyInStatementCondition<T>(ExpressionSyntax expressionParent, ExpressionSyntax originalExpression,
-            Func<T, ExpressionSyntax> conditionSelector) where T : SyntaxNode
+        private static bool IsDirectlyInStatementCondition<T>(ExpressionSyntax expressionParent,
+            ExpressionSyntax originalExpression, Func<T, ExpressionSyntax> conditionSelector) where T : SyntaxNode
         {
             var statement = expressionParent.Parent.FirstAncestorOrSelf<T>();
             return statement != null &&
@@ -165,8 +165,9 @@ namespace SonarAnalyzer.Rules.CSharp
             Func<T, ExpressionSyntax> conditionSelector) where T : SyntaxNode
         {
             var statement = expressionParent.Parent.FirstAncestorOrSelf<T>();
-            return statement != null &&
-                conditionSelector(statement).Contains(originalExpression);
+            var condition = conditionSelector(statement);
+            return condition != null
+                && condition.Contains(originalExpression);
         }
 
         private static readonly ISet<SyntaxKind> AllowedParentExpressionKinds = ImmutableHashSet.Create(
