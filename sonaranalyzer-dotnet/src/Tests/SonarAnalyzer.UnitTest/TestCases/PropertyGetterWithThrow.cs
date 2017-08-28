@@ -59,6 +59,19 @@
                 throw new ObjectDisposedException(); // Compliant
             }
         }
+        public int MyProperty8
+        {
+            get
+            {
+                try
+                {
+                }
+                catch(Exception)
+                {
+                    throw; // Compliant
+                }
+            }
+        }
         public int this[int i]
         {
             get
