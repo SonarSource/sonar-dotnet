@@ -68,7 +68,7 @@ namespace SonarAnalyzer.Rules.Common
                         {
                             var throwExpression = GetThrowExpression(c.Node);
 
-                            // This is the case in rethrow - throw;
+                            // This is the case in rethrow - see ticket #730.
                             if (throwExpression == null)
                             {
                                 return;
