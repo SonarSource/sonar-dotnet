@@ -31,6 +31,8 @@ namespace SonarAnalyzer.Helpers
     {
         private readonly List<SecondaryLocation> incrementLocations = new List<SecondaryLocation>();
         private readonly List<ExpressionSyntax> logicalOperationsToIgnore = new List<ExpressionSyntax>();
+        private readonly Queue<BinaryExpressionSyntax> binaryNodesToVisit =
+            new Queue<BinaryExpressionSyntax>();
 
         private string currentMethodName;
         private int nestingLevel = 0;
@@ -48,6 +50,15 @@ namespace SonarAnalyzer.Helpers
             {
                 throw new InvalidOperationException("There is a problem with the cognitive complexity walker. " +
                     $"Expecting ending nesting to be '0' got '{nestingLevel}'");
+            }
+        }
+
+        public override void Visit(SyntaxNode node)
+        {
+            base.Visit(node);
+            while (binaryNodesToVisit.Count > 0)
+            {
+                base.VisitBinaryExpression(binaryNodesToVisit.Dequeue());
             }
         }
 
@@ -155,7 +166,7 @@ namespace SonarAnalyzer.Helpers
                 }
             }
 
-            base.VisitBinaryExpression(node);
+            binaryNodesToVisit.Enqueue(node);
         }
 
         public override void VisitGotoStatement(GotoStatementSyntax node)
