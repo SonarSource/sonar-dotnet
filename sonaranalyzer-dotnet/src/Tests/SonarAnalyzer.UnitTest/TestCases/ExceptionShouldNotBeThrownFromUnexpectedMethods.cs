@@ -113,6 +113,67 @@ namespace Tests.Diagnostics
         }
     }
 
+    class ValidRethrowProgram : IDisposable
+    {
+        static ValidRethrowProgram()
+        {
+            try
+            {
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        event EventHandler OnSomething
+        {
+            add
+            {
+                try
+                {
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+            }
+            remove
+            {
+                try
+                {
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+            }
+        }
+
+        public override bool Equals(object obj)
+        {
+            try
+            {
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public static bool operator ==(ValidProgram a, ValidProgram b)
+        {
+            try
+            {
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+    }
+
     class InvalidProgram : IDisposable
     {
         static InvalidProgram()
