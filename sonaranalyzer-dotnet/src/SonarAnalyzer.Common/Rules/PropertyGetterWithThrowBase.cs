@@ -67,6 +67,13 @@ namespace SonarAnalyzer.Rules.Common
                         c =>
                         {
                             var throwExpression = GetThrowExpression(c.Node);
+
+                            // This is the case in rethrow - see ticket #730.
+                            if (throwExpression == null)
+                            {
+                                return;
+                            }
+
                             var symbol = c.SemanticModel.GetSymbolInfo(throwExpression).Symbol;
                             if (symbol == null ||
                                 symbol.ContainingType.DerivesFromAny(AllowedExceptionBaseTypes))
