@@ -32,13 +32,16 @@ param (
 
 Set-StrictMode -version 1.0
 $ErrorActionPreference = "Stop"
+$RuleTemplateFolder = "${PSScriptRoot}\\rspec-templates"
 
-if ((-Not $env:rule_api_path) -Or (-Not (Test-Path $env:rule_api_path))) {
+if ((-Not $env:rule_api_path) -Or (-Not (Test-Path $env:rule_api_path)))
+{
     throw "Download the latest version of rule-api jar from repox and set the %rule_api_path% environment variable with the full path of the jar."
 }
 
 $resgenPath = "${Env:ProgramFiles(x86)}\\Microsoft SDKs\\Windows\\v10.0A\\bin\\NETFX 4.6.1 Tools\\ResGen.exe"
-if (-Not (Test-Path $resgenPath)) {
+if (-Not (Test-Path $resgenPath))
+{
     throw "You need to install the Windows SDK before using this script."
 }
 
@@ -85,11 +88,11 @@ $resourceLanguageMap =
 }
 
 # Returns the path to the folder where the RSPEC html and json files for the specified language will be downloaded.
-function GetRspecDownloadPath() {
-    param ($lang)
-
+function GetRspecDownloadPath($lang)
+{
     $rspecFolder = "${sonaranalyzerPath}\\rspec\\${lang}"
-    if (-Not (Test-Path $rspecFolder)) {
+    if (-Not (Test-Path $rspecFolder))
+    {
         New-Item $rspecFolder | Out-Null
     }
 
@@ -97,14 +100,15 @@ function GetRspecDownloadPath() {
 }
 
 # Returns a string array with rule keys for the specified language.
-function GetRules() {
-    param ($lang)
-
+function GetRules($lang)
+{
     $suffix = $ruleapiLanguageMap.Get_Item($lang)
 
     $htmlFiles = Get-ChildItem "$(GetRspecDownloadPath $lang)\\*" -Include "*.html"
-    foreach ($htmlFile in $htmlFiles) {
-        if ($htmlFile -Match "(S\d+)_(${suffix}).html") {
+    foreach ($htmlFile in $htmlFiles)
+    {
+        if ($htmlFile -Match "(S\d+)_(${suffix}).html")
+        {
             $Matches[1]
         }
     }
@@ -114,21 +118,23 @@ function GetRules() {
 # to 'SonarAnalyzer.Utilities\Rules.Description'. If a rule is present in the otherLanguageRules
 # collection, a language suffix will be added to the target file name, so that the VB.NET and
 # C# files could have different html resources.
-function CopyResources() {
-    param ($lang, $rules, $otherLanguageRules)
-
+function CopyResources($lang, $rules, $otherLanguageRules)
+{
     $descriptionsFolder = "${sonaranalyzerPath}\\src\\SonarAnalyzer.Utilities\\Rules.Description"
     $rspecFolder = GetRspecDownloadPath $lang
 
     $source_suffix = "_" + $ruleapiLanguageMap.Get_Item($lang)
 
-    foreach ($rule in $rules) {
+    foreach ($rule in $rules)
+    {
         $suffix = ""
-        if ($otherLanguageRules -contains $rule) {
+        if ($otherLanguageRules -contains $rule)
+        {
             $suffix = "_$($resourceLanguageMap.Get_Item($lang))"
 
             $sharedLanguageDescription = "${descriptionsFolder}\\${rule}.html"
-            if (Test-Path $sharedLanguageDescription) {
+            if (Test-Path $sharedLanguageDescription)
+            {
                 Remove-Item $sharedLanguageDescription -Force
             }
         }
@@ -137,25 +143,23 @@ function CopyResources() {
     }
 }
 
-function UpdateTestEntry()
+function UpdateTestEntry($rule)
 {
-    param ($rule)
-
     $ruleType = $rule.type
     if (!$ruleType)
     {
         return
     }
 
-    $csharpRuleTypeTestCase = "${sonaranalyzerPath}\\src\\Tests\\SonarAnalyzer.UnitTest\\PackagingTests\\RuleTypeTests.cs"
+    $fileToEdit = if ($language -eq "cs") {"CsRuleTypeMapping"} else {"VbRuleTypeMapping"}
+    $ruleTypeTestCase = "${sonaranalyzerPath}\\src\\Tests\\SonarAnalyzer.UnitTest\\PackagingTests\\$fileToEdit.cs"
     $ruleId = $ruleKey.Substring(1)
-    (Get-Content "${csharpRuleTypeTestCase}") -replace "//\[`"$ruleId`"\]", "[`"$ruleId`"] = `"$ruleType`"" |
-        Set-Content "${csharpRuleTypeTestCase}"
+    (Get-Content "${ruleTypeTestCase}") -replace "//\[`"$ruleId`"\]", "[`"$ruleId`"] = `"$ruleType`"" |
+        Set-Content "${ruleTypeTestCase}"
 }
 
-function CreateStringResources() {
-    param ($lang, $rules)
-
+function CreateStringResources($lang, $rules)
+{
     $rspecFolder = GetRspecDownloadPath $lang
     $suffix = $ruleapiLanguageMap.Get_Item($lang)
 
@@ -163,12 +167,14 @@ function CreateStringResources() {
 
     $newRuleData = @{}
     $resources = New-Object System.Collections.ArrayList
-    foreach ($rule in $rules) {
+    foreach ($rule in $rules)
+    {
         $json = Get-Content -Raw "${rspecFolder}\\${rule}_${suffix}.json" | ConvertFrom-Json
         $html = Get-Content -Raw "${rspecFolder}\\${rule}_${suffix}.html"
 
         # take the first paragraph of the HTML file
-        if ($html -Match "<p>((.|\n)*?)</p>") {
+        if ($html -Match "<p>((.|\n)*?)</p>")
+        {
             # strip HTML tags and new lines
             $description = $Matches[1] -replace '<[^>]*>', ''
             $description = $description -replace '\n|( +)', ' '
@@ -178,7 +184,8 @@ function CreateStringResources() {
             $description = $description -replace '\\!', '!'
             $description = $description -replace '\\}', '}'
         }
-        else {
+        else
+        {
             throw "The downloaded HTML for rule '${rule}' does not contain any paragraphs."
         }
 
@@ -215,27 +222,120 @@ function CreateStringResources() {
     return $newRuleData
 }
 
-function GenerateRuleClasses() {
-    $ruleTemplateFolder = "${PSScriptRoot}\\rspec-templates"
-    $csharpRulesFolder = "${sonaranalyzerPath}\\src\\SonarAnalyzer.CSharp\\Rules"
-    $csharpRuleTestsFolder = "${sonaranalyzerPath}\\src\\Tests\\SonarAnalyzer.UnitTest\\Rules"
+function GenerateCsRuleClasses()
+{
+    Write-Host "GenerateCsRuleClasses"
+    
+    $csharpRulesFolder         = "${sonaranalyzerPath}\\src\\SonarAnalyzer.CSharp\\Rules"
+    $csharpRuleTestsFolder     = "${sonaranalyzerPath}\\src\\Tests\\SonarAnalyzer.UnitTest\\Rules"
     $csharpRuleTestCasesFolder = "${sonaranalyzerPath}\\src\\Tests\\SonarAnalyzer.UnitTest\\TestCases"
 
-    (Get-Content "${ruleTemplateFolder}\\CSharpRuleTemplate.cs") -replace '\$DiagnosticClassName\$', $className -replace '\$DiagnosticId\$', $ruleKey |
-        Set-Content "${csharpRulesFolder}\\${className}.cs"
-
-    (Get-Content "${ruleTemplateFolder}\\CSharpTestTemplate.cs") -replace '\$DiagnosticClassName\$', $className |
-        Set-Content "${csharpRuleTestsFolder}\\${className}Test.cs"
-
-    (Get-Content "${ruleTemplateFolder}\\CSharpTestCaseTemplate.cs") -replace '\$DiagnosticClassName\$', $className |
-        Set-Content "${csharpRuleTestCasesFolder}\\${className}.cs"
+    $filesMap = @{
+        "CSharpRuleTemplate.cs"     = "${csharpRulesFolder}\\${className}.cs"
+        "CSharpTestTemplate.cs"     = "${csharpRuleTestsFolder}\\${className}Test.cs"
+        "CSharpTestCaseTemplate.cs" = "${csharpRuleTestCasesFolder}\\${className}.cs"
+    }
+    WriteClasses -filesMap $filesMap -classNameToUse $className
 }
 
-if ($ruleKey) {
+function GenerateVbRuleClasses($language)
+{
+    Write-Host "GenerateVbRuleClasses"
+    
+    $vbRulesFolder         = "${sonaranalyzerPath}\\src\\SonarAnalyzer.VisualBasic\\Rules"
+    $csRulesFolder         = "${sonaranalyzerPath}\\src\\SonarAnalyzer.CSharp\\Rules"
+    $commonRulesFolder     = "${sonaranalyzerPath}\\src\\SonarAnalyzer.Common\\Rules"
+    $ruleTestsFolder       = "${sonaranalyzerPath}\\src\\Tests\\SonarAnalyzer.UnitTest\\Rules"
+    $vbRuleTestCasesFolder = "${sonaranalyzerPath}\\src\\Tests\\SonarAnalyzer.UnitTest\\TestCases"
+
+    $csClassName = FindCsName -csRulesPath $csRulesFolder
+
+    $filesMap = @{}
+    if ($csClassName)
+    {
+        $className = $csClassName
+        AppendVbTestCase -ruleTestsFolder $ruleTestsFolder
+    }
+    else
+    {
+        $filesMap["VbNetTestTemplate.cs"] = "${ruleTestsFolder}\\${className}Test.cs"
+    }
+    
+    $filesMap["CommonBaseClassTemplate.cs"] = "${commonRulesFolder}\\${className}Base.cs"
+    $filesMap["VbNetRuleTemplate.cs"] = "${vbRulesFolder}\\${className}.cs"
+    $filesMap["VbNetTestCaseTemplate.vb"] = "${vbRuleTestCasesFolder}\\${className}.vb"
+    
+    WriteClasses -filesMap $filesMap
+}
+
+function AppendVbTestCase($ruleTestsFolder)
+{
+    $existingClassText = Get-Content -Path "${ruleTestsFolder}\\${csClassName}Test.cs" -Raw
+    $snippetText = Get-Content -Path "${RuleTemplateFolder}\\VbNetTestSnippet.cs" -Raw
+
+    $token = "        }"
+    $idx = $existingClassText.LastIndexOf($token)
+
+    $newText = ""
+    if ($idx -gt -1)
+    {
+        $newText = $existingClassText.Remove($idx, $token.Length).Insert($idx, "${token}`r`n`r`n${snippetText}")
+    }
+    else
+    {
+        $newText = "${existingClassText}`r`n${snippetText}"
+    }
+
+    $replaced = ReplaceTokens -text $newText
+
+    Set-Content -Path "${ruleTestsFolder}\\${csClassName}Test.cs" `
+                -Value $replaced
+}
+
+function FindCsName($csRulesPath)
+{
+    $csRuleFiles = Get-ChildItem -Path $csRulesPath -Filter "*.cs"
+
+    $quotedRuleKey = "`"$ruleKey`";"
+    foreach ($csRuleFile in $csRuleFiles)
+    {
+        $content = $null = Get-Content -Path $csRuleFile.FullName -Raw
+        if ($content -match $quotedRuleKey)
+        {
+            return $csRuleFile.BaseName
+        }
+    }
+    return $null
+}
+
+function WriteClasses($filesMap)
+{
+    $filesMap.GetEnumerator() | ForEach-Object `
+    {
+        $fileContent = Get-Content "${RuleTemplateFolder}\\$($_.Key)" -Raw
+        $replaced = ReplaceTokens -text $fileContent
+
+        Set-Content -Path $_.Value -Value $replaced
+    }
+}
+
+function ReplaceTokens($text)
+{
+    return $text `
+        -replace '\$DiagnosticClassName\$', $className `
+        -replace '\$DiagnosticId\$', $ruleKey
+}
+
+
+### SCRIPT START ###
+
+if ($ruleKey)
+{
     java -jar $env:rule_api_path generate -directory $(GetRspecDownloadPath $language) -language $($ruleapiLanguageMap.Get_Item($language)) -rule $ruleKey
 }
-else {
-    java -jar $env:rule_api_path update -directory $(GetRspecDownloadPath $language) -language $($ruleapiLanguageMap.Get_Item($language))
+else
+{
+    java -jar $env:rule_api_path update   -directory $(GetRspecDownloadPath $language) -language $($ruleapiLanguageMap.Get_Item($language))
 }
 
 $csRules = GetRules "cs"
@@ -246,12 +346,17 @@ CopyResources "vbnet" $vbRules $csRules
 $csRuleData = CreateStringResources "cs" $csRules
 $vbRuleData = CreateStringResources "vbnet" $vbRules
 
-if ($className -And $ruleKey) {
-    GenerateRuleClasses
-
+if ($className -And $ruleKey)
+{
     if ($language -eq "cs")
     {
+       GenerateCsRuleClasses
        UpdateTestEntry $csRuleData
+    }
+    elseif ($language -eq "vbnet")
+    {
+       GenerateVbRuleClasses
+       UpdateTestEntry $vbRuleData
     }
 
     $vsTempFolder = "${sonaranalyzerPath}\\.vs"
