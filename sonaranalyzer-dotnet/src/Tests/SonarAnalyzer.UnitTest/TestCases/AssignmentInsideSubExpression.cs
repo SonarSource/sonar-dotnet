@@ -60,6 +60,12 @@ namespace Tests.Diagnostics
             for (int j = 0; b &= false; j++) { } // Noncompliant
             for (int j = 0; b == false; j++) { }
 
+            // Fix S1121: NullReferenceException when while loop with assignment expression is within a for loop with no condition (#725)
+            for (;;)
+            {
+                while ((b = GetBool()) == true) { }
+            }
+
             while (b &= false) { } // Noncompliant
 
             while ((i = 1) == 1) { } // Compliant
@@ -110,5 +116,7 @@ namespace Tests.Diagnostics
             i = j =
                 k = 10;
         }
+
+        public bool GetBool() => return true;
     }
 }
