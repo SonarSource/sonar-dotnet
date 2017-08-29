@@ -31,8 +31,6 @@ namespace SonarAnalyzer.Helpers
     {
         private readonly List<SecondaryLocation> incrementLocations = new List<SecondaryLocation>();
         private readonly List<ExpressionSyntax> logicalOperationsToIgnore = new List<ExpressionSyntax>();
-        private readonly Queue<BinaryExpressionSyntax> binaryNodesToVisit =
-            new Queue<BinaryExpressionSyntax>();
 
         private string currentMethodName;
         private int nestingLevel = 0;
@@ -68,7 +66,6 @@ namespace SonarAnalyzer.Helpers
 
                 // Reset nesting level, so the problem with the walker is not reported.
                 nestingLevel = 0;
-                return;
             }
         }
 
