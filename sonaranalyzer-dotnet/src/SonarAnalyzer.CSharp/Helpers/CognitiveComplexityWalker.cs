@@ -51,6 +51,24 @@ namespace SonarAnalyzer.Helpers
             }
         }
 
+        public void Walk(SyntaxNode node)
+        {
+            try
+            {
+                Visit(node);
+            }
+            catch (InsufficientExecutionStackException)
+            {
+                // TODO: trace this exception
+
+                // Roslyn walker overflows the stack when the depth of the call is around 2050.
+                // See ticket #727.
+
+                // Reset nesting level, so the problem with the walker is not reported.
+                nestingLevel = 0;
+            }
+        }
+
         public override void VisitMethodDeclaration(MethodDeclarationSyntax node)
         {
             currentMethodName = node.Identifier.ValueText;

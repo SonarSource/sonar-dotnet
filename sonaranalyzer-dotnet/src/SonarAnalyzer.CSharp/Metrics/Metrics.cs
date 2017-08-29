@@ -151,7 +151,7 @@ namespace SonarAnalyzer.Common.CSharp
         public override int GetCognitiveComplexity(SyntaxNode node)
         {
             var walker = new CognitiveComplexityWalker();
-            walker.Visit(node);
+            walker.Walk(node);
             return walker.VisitEndedCorrectly ? walker.Complexity : -1;
         }
 
