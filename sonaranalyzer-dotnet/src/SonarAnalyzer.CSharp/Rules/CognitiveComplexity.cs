@@ -104,7 +104,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             var cognitiveWalker = new CognitiveComplexityWalker();
-            cognitiveWalker.Visit(nodeToAnalyze);
+            cognitiveWalker.Walk(nodeToAnalyze);
             cognitiveWalker.EnsureVisitEndedCorrectly();
 
             if (cognitiveWalker.Complexity > Threshold)

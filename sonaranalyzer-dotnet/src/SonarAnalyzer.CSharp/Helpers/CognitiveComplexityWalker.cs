@@ -53,12 +53,22 @@ namespace SonarAnalyzer.Helpers
             }
         }
 
-        public override void Visit(SyntaxNode node)
+        public void Walk(SyntaxNode node)
         {
-            base.Visit(node);
-            while (binaryNodesToVisit.Count > 0)
+            try
             {
-                base.VisitBinaryExpression(binaryNodesToVisit.Dequeue());
+                Visit(node);
+            }
+            catch (InsufficientExecutionStackException)
+            {
+                // TODO: trace this exception
+
+                // Roslyn walker overflows the stack when the depth of the call is around 2050.
+                // See ticket #727.
+
+                // Reset nesting level, so the problem with the walker is not reported.
+                nestingLevel = 0;
+                return;
             }
         }
 
@@ -166,7 +176,7 @@ namespace SonarAnalyzer.Helpers
                 }
             }
 
-            binaryNodesToVisit.Enqueue(node);
+            base.VisitBinaryExpression(node);
         }
 
         public override void VisitGotoStatement(GotoStatementSyntax node)
