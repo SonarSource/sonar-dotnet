@@ -23,6 +23,7 @@ param (
     [string]
     $language,
     [Parameter(HelpMessage = "The key of the rule to add/update, e.g. S1234. If omitted will update all existing rules.", Position = 1)]
+    [ValidatePattern("^S[0-9]+$")]
     [string]
     $ruleKey,
     [Parameter(HelpMessage = "The name of the rule class.", Position = 2)]
