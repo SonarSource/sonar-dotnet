@@ -19,7 +19,6 @@
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -31,7 +30,16 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void DoNotCheckZeroSizeCollection()
         {
             Verifier.VerifyAnalyzer(@"TestCases\DoNotCheckZeroSizeCollection.cs",
-                new DoNotCheckZeroSizeCollection());
+                new SonarAnalyzer.Rules.CSharp.DoNotCheckZeroSizeCollection());
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void DoNotCheckZeroSizeCollection_VB()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\DoNotCheckZeroSizeCollection.vb",
+                new SonarAnalyzer.Rules.VisualBasic.DoNotCheckZeroSizeCollection());
         }
     }
 }
+
