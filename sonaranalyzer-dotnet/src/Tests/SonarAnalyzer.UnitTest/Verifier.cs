@@ -71,6 +71,8 @@ namespace SonarAnalyzer.UnitTest
             MetadataReference.CreateFromFile(typeof(AssertionExtensions).Assembly.Location);
         internal static readonly MetadataReference FluentAssertionsCoreAssembly =
             MetadataReference.CreateFromFile(typeof(AssertionOptions).Assembly.Location);
+        internal static readonly MetadataReference MicrosoftVisualBasicAssembly =
+            MetadataReference.CreateFromFile(typeof(Microsoft.VisualBasic.Interaction).Assembly.Location);
         #endregion
 
         private const string FIXED_MESSAGE = "Fixed";
@@ -227,26 +229,33 @@ namespace SonarAnalyzer.UnitTest
             VerifyNoIssueReported(path, GeneratedAssemblyName, diagnosticAnalyzer);
         }
 
-        public static void VerifyCodeFix(string path, string pathToExpected, SonarDiagnosticAnalyzer diagnosticAnalyzer,
-            SonarCodeFixProvider codeFixProvider)
+        public static void VerifyCodeFix(string path, string pathToExpected,
+            SonarDiagnosticAnalyzer diagnosticAnalyzer, SonarCodeFixProvider codeFixProvider,
+            params MetadataReference[] additionalReferences)
         {
-            VerifyCodeFix(path, pathToExpected, pathToExpected, diagnosticAnalyzer, codeFixProvider, null);
+            VerifyCodeFix(path, pathToExpected, pathToExpected, diagnosticAnalyzer, codeFixProvider,
+                null, additionalReferences);
         }
 
-        public static void VerifyCodeFix(string path, string pathToExpected, string pathToBatchExpected, SonarDiagnosticAnalyzer diagnosticAnalyzer,
-            SonarCodeFixProvider codeFixProvider)
+        public static void VerifyCodeFix(string path, string pathToExpected, string pathToBatchExpected,
+            SonarDiagnosticAnalyzer diagnosticAnalyzer, SonarCodeFixProvider codeFixProvider,
+            params MetadataReference[] additionalReferences)
         {
-            VerifyCodeFix(path, pathToExpected, pathToBatchExpected, diagnosticAnalyzer, codeFixProvider, null);
+            VerifyCodeFix(path, pathToExpected, pathToBatchExpected, diagnosticAnalyzer, codeFixProvider,
+                null, additionalReferences);
         }
 
-        public static void VerifyCodeFix(string path, string pathToExpected, SonarDiagnosticAnalyzer diagnosticAnalyzer,
-            SonarCodeFixProvider codeFixProvider, string codeFixTitle)
+        public static void VerifyCodeFix(string path, string pathToExpected,
+            SonarDiagnosticAnalyzer diagnosticAnalyzer, SonarCodeFixProvider codeFixProvider, string codeFixTitle,
+            params MetadataReference[] additionalReferences)
         {
-            VerifyCodeFix(path, pathToExpected, pathToExpected, diagnosticAnalyzer, codeFixProvider, codeFixTitle);
+            VerifyCodeFix(path, pathToExpected, pathToExpected, diagnosticAnalyzer, codeFixProvider, 
+                codeFixTitle, additionalReferences);
         }
 
-        public static void VerifyCodeFix(string path, string pathToExpected, string pathToBatchExpected, SonarDiagnosticAnalyzer diagnosticAnalyzer,
-            SonarCodeFixProvider codeFixProvider, string codeFixTitle)
+        public static void VerifyCodeFix(string path, string pathToExpected, string pathToBatchExpected,
+            SonarDiagnosticAnalyzer diagnosticAnalyzer, SonarCodeFixProvider codeFixProvider, string codeFixTitle,
+            params MetadataReference[] additionalReferences)
         {
             using (var workspace = new AdhocWorkspace())
             {
@@ -255,7 +264,7 @@ namespace SonarAnalyzer.UnitTest
 
                 foreach (var parseOption in parseOptions)
                 {
-                    var document = CreateProject(file.Extension, GeneratedAssemblyName, workspace)
+                    var document = CreateProject(file.Extension, GeneratedAssemblyName, workspace, additionalReferences)
                         .AddDocument(file, true)
                         .Documents
                         .Single(d => d.Name == file.Name);
@@ -263,7 +272,7 @@ namespace SonarAnalyzer.UnitTest
                 }
             }
 
-            VerifyFixAllCodeFix(path, pathToBatchExpected, diagnosticAnalyzer, codeFixProvider, codeFixTitle);
+            VerifyFixAllCodeFix(path, pathToBatchExpected, diagnosticAnalyzer, codeFixProvider, codeFixTitle, additionalReferences);
         }
 
         #endregion
@@ -285,7 +294,7 @@ namespace SonarAnalyzer.UnitTest
         }
 
         private static void VerifyFixAllCodeFix(string path, string pathToExpected, DiagnosticAnalyzer diagnosticAnalyzer,
-            CodeFixProvider codeFixProvider, string codeFixTitle)
+            CodeFixProvider codeFixProvider, string codeFixTitle, params MetadataReference[] additionalReferences)
         {
             var fixAllProvider = codeFixProvider.GetFixAllProvider();
             if (fixAllProvider == null)
@@ -300,7 +309,7 @@ namespace SonarAnalyzer.UnitTest
 
                 foreach (var parseOption in parseOptions)
                 {
-                    var document = CreateProject(file.Extension, GeneratedAssemblyName, workspace)
+                    var document = CreateProject(file.Extension, GeneratedAssemblyName, workspace, additionalReferences)
                         .AddDocument(file, true)
                         .Documents
                         .Single(d => d.Name == file.Name);

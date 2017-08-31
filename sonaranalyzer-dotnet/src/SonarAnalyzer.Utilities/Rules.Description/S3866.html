@@ -1,0 +1,26 @@
+<p>Visual Basic .NET offers a non-short-circuit conditional function, <code>IIf()</code>, which returns either its second or third parameter based on
+the expression in the first parameter. Using it is slower than using <code>If()</code> because each parameter is unconditionally evaluated. Further,
+its use can lead to runtime exceptions because <code>IIf</code> always evaluates all three of its arguments. </p>
+<p>The newer version, <code>If()</code>, should be used instead because it short-circuits the evaluation of its parameters.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+Public Class Foo
+    Public Sub Bar()
+        Dim var As Object = IIf(Date.Now.Year = 1999, "Lets party!", "Lets party like it is 1999!") ' Noncompliant
+    End Sub
+End Class
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+Public Class Foo
+    Public Sub Bar()
+        Dim var As String = If(Date.Now.Year = 1999, "Lets party!", "Lets party like it is 1999!")
+    End Sub
+End Class
+</pre>
+<h2>See</h2>
+<ul>
+  <li> <a href="https://msdn.microsoft.com/en-us/library/27ydhh0d(v=vs.90).aspx">IIf Function (MSDN)</a> </li>
+  <li> <a href="https://msdn.microsoft.com/en-us/library/bb513985(v=vs.90).aspx">If Operator (MSDN)</a> </li>
+</ul>
+
