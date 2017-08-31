@@ -38,7 +38,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void CognitiveComplexity_StackOverflow()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\CognitiveComplexity_InsufficientExecutionStackException.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\SyntaxWalker_InsufficientExecutionStackException.cs",
                 new CognitiveComplexity { Threshold = 0, PropertyThreshold = 0 });
         }
     }

@@ -144,7 +144,7 @@ namespace SonarAnalyzer.Common.CSharp
         public override int GetComplexity(SyntaxNode node)
         {
             var walker = new CyclomaticComplexityWalker();
-            walker.Visit(node);
+            walker.Walk(node);
             return walker.CyclomaticComplexity;
         }
 
