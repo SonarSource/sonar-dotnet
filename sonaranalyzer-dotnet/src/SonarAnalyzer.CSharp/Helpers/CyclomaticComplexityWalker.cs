@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
@@ -34,6 +35,21 @@ namespace SonarAnalyzer
         public IEnumerable<SecondaryLocation> IncrementLocations => incrementLocations;
 
         public int CyclomaticComplexity => incrementLocations.Count;
+
+        public void Walk(SyntaxNode node)
+        {
+            try
+            {
+                Visit(node);
+            }
+            catch (InsufficientExecutionStackException)
+            {
+                // TODO: trace this exception
+
+                // Roslyn walker overflows the stack when the depth of the call is around 2050.
+                // See ticket #727.
+            }
+        }
 
         public override void VisitMethodDeclaration(MethodDeclarationSyntax node)
         {

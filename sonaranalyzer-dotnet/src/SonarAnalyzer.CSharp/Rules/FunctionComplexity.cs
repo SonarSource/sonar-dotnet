@@ -96,7 +96,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            walker.Visit(nodeToCheck);
+            walker.Walk(nodeToCheck);
 
             if (walker.CyclomaticComplexity > Maximum)
             {

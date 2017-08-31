@@ -29,8 +29,16 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void FunctionComplexity_CSharp()
         {
-            var diagnostic = new SonarAnalyzer.Rules.CSharp.FunctionComplexity { Maximum = 3};
+            var diagnostic = new SonarAnalyzer.Rules.CSharp.FunctionComplexity { Maximum = 3 };
             Verifier.VerifyAnalyzer(@"TestCases\FunctionComplexity.cs", diagnostic);
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void FunctionComplexity_InsufficientExecutionStack_CSharp()
+        {
+            var diagnostic = new SonarAnalyzer.Rules.CSharp.FunctionComplexity { Maximum = 3 };
+            Verifier.VerifyAnalyzer(@"TestCases\SyntaxWalker_InsufficientExecutionStackException.cs", diagnostic);
         }
 
         [TestMethod]
