@@ -1,0 +1,745 @@
+{
+"issues":  [
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\frmNotify.vb",
+"region":  {
+"startLine":  52,
+"startColumn":  34,
+"endLine":  52,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\frmNotify.vb",
+"region":  {
+"startLine":  70,
+"startColumn":  31,
+"endLine":  70,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\frmNotify.vb",
+"region":  {
+"startLine":  70,
+"startColumn":  54,
+"endLine":  70,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\frmNotify.vb",
+"region":  {
+"startLine":  70,
+"startColumn":  78,
+"endLine":  70,
+"endColumn":  83
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\frmNotify.vb",
+"region":  {
+"startLine":  70,
+"startColumn":  102,
+"endLine":  70,
+"endColumn":  107
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\frmNotify.vb",
+"region":  {
+"startLine":  70,
+"startColumn":  128,
+"endLine":  70,
+"endColumn":  133
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\frmNotify.vb",
+"region":  {
+"startLine":  94,
+"startColumn":  27,
+"endLine":  94,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\frmNotify.vb",
+"region":  {
+"startLine":  94,
+"startColumn":  51,
+"endLine":  94,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\frmNotify.vb",
+"region":  {
+"startLine":  133,
+"startColumn":  42,
+"endLine":  133,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\frmNotify.vb",
+"region":  {
+"startLine":  133,
+"startColumn":  64,
+"endLine":  133,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\frmNotify.vb",
+"region":  {
+"startLine":  133,
+"startColumn":  97,
+"endLine":  133,
+"endColumn":  102
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\frmNotify.vb",
+"region":  {
+"startLine":  133,
+"startColumn":  117,
+"endLine":  133,
+"endColumn":  122
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\frmNotify.vb",
+"region":  {
+"startLine":  133,
+"startColumn":  137,
+"endLine":  133,
+"endColumn":  142
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\frmNotify.vb",
+"region":  {
+"startLine":  133,
+"startColumn":  158,
+"endLine":  133,
+"endColumn":  163
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\frmNotify.vb",
+"region":  {
+"startLine":  133,
+"startColumn":  179,
+"endLine":  133,
+"endColumn":  184
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\frmNotify.vb",
+"region":  {
+"startLine":  136,
+"startColumn":  33,
+"endLine":  136,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\frmNotify.vb",
+"region":  {
+"startLine":  136,
+"startColumn":  57,
+"endLine":  136,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\frmNotify.vb",
+"region":  {
+"startLine":  140,
+"startColumn":  38,
+"endLine":  140,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\frmNotify.vb",
+"region":  {
+"startLine":  140,
+"startColumn":  62,
+"endLine":  140,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\frmNotify.vb",
+"region":  {
+"startLine":  145,
+"startColumn":  32,
+"endLine":  145,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\frmNotify.vb",
+"region":  {
+"startLine":  145,
+"startColumn":  56,
+"endLine":  145,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\frmNotify.vb",
+"region":  {
+"startLine":  165,
+"startColumn":  33,
+"endLine":  165,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\frmNotify.vb",
+"region":  {
+"startLine":  165,
+"startColumn":  57,
+"endLine":  165,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\frmNotify.vb",
+"region":  {
+"startLine":  172,
+"startColumn":  34,
+"endLine":  172,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\frmNotify.vb",
+"region":  {
+"startLine":  172,
+"startColumn":  65,
+"endLine":  172,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\frmNotify.vb",
+"region":  {
+"startLine":  176,
+"startColumn":  32,
+"endLine":  176,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\frmNotify.vb",
+"region":  {
+"startLine":  176,
+"startColumn":  63,
+"endLine":  176,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\frmNotify.vb",
+"region":  {
+"startLine":  180,
+"startColumn":  30,
+"endLine":  180,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\frmNotify.vb",
+"region":  {
+"startLine":  180,
+"startColumn":  61,
+"endLine":  180,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\frmSettingsHolder.vb",
+"region":  {
+"startLine":  27,
+"startColumn":  39,
+"endLine":  27,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\frmSettingsHolder.vb",
+"region":  {
+"startLine":  35,
+"startColumn":  47,
+"endLine":  35,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\frmSettingsHolder.vb",
+"region":  {
+"startLine":  35,
+"startColumn":  78,
+"endLine":  35,
+"endColumn":  83
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\frmSettingsHolder.vb",
+"region":  {
+"startLine":  39,
+"startColumn":  43,
+"endLine":  39,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\frmSettingsHolder.vb",
+"region":  {
+"startLine":  39,
+"startColumn":  74,
+"endLine":  39,
+"endColumn":  79
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\frmSettingsHolder.vb",
+"region":  {
+"startLine":  43,
+"startColumn":  43,
+"endLine":  43,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\frmSettingsHolder.vb",
+"region":  {
+"startLine":  43,
+"startColumn":  74,
+"endLine":  43,
+"endColumn":  79
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\frmSettingsHolder.vb",
+"region":  {
+"startLine":  47,
+"startColumn":  50,
+"endLine":  47,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\frmSettingsHolder.vb",
+"region":  {
+"startLine":  47,
+"startColumn":  81,
+"endLine":  47,
+"endColumn":  86
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\frmSettingsHolder.vb",
+"region":  {
+"startLine":  51,
+"startColumn":  43,
+"endLine":  51,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\frmSettingsHolder.vb",
+"region":  {
+"startLine":  51,
+"startColumn":  74,
+"endLine":  51,
+"endColumn":  79
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\frmSettingsHolder.vb",
+"region":  {
+"startLine":  71,
+"startColumn":  35,
+"endLine":  71,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\frmSettingsHolder.vb",
+"region":  {
+"startLine":  71,
+"startColumn":  66,
+"endLine":  71,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\Module.Notifications.vb",
+"region":  {
+"startLine":  39,
+"startColumn":  31,
+"endLine":  39,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\Module.Notifications.vb",
+"region":  {
+"startLine":  41,
+"startColumn":  39,
+"endLine":  41,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\Module.Notifications.vb",
+"region":  {
+"startLine":  41,
+"startColumn":  61,
+"endLine":  41,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\Module.Notifications.vb",
+"region":  {
+"startLine":  41,
+"startColumn":  85,
+"endLine":  41,
+"endColumn":  90
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\Module.Notifications.vb",
+"region":  {
+"startLine":  53,
+"startColumn":  13,
+"endLine":  53,
+"endColumn":  18
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\Module.Notifications.vb",
+"region":  {
+"startLine":  80,
+"startColumn":  18,
+"endLine":  80,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\Module.Notifications.vb",
+"region":  {
+"startLine":  80,
+"startColumn":  49,
+"endLine":  80,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\Module.Notifications.vb",
+"region":  {
+"startLine":  106,
+"startColumn":  32,
+"endLine":  106,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\Module.Notifications.vb",
+"region":  {
+"startLine":  136,
+"startColumn":  45,
+"endLine":  136,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\Module.Notifications.vb",
+"region":  {
+"startLine":  144,
+"startColumn":  40,
+"endLine":  144,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\Module.Notifications.vb",
+"region":  {
+"startLine":  167,
+"startColumn":  19,
+"endLine":  167,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\Module.Notifications.vb",
+"region":  {
+"startLine":  202,
+"startColumn":  17,
+"endLine":  202,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\Module.Notifications.vb",
+"region":  {
+"startLine":  211,
+"startColumn":  17,
+"endLine":  211,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\Module.Notifications.vb",
+"region":  {
+"startLine":  220,
+"startColumn":  17,
+"endLine":  220,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.Notifications\Module.Notifications.vb",
+"region":  {
+"startLine":  229,
+"startColumn":  17,
+"endLine":  229,
+"endColumn":  22
+}
+}
+}
+]
+}

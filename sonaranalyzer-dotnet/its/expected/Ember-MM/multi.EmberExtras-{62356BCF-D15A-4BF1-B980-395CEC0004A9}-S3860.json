@@ -1,0 +1,1486 @@
+{
+"issues":  [
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmAVCodecEditor.vb",
+"region":  {
+"startLine":  39,
+"startColumn":  35,
+"endLine":  39,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmAVCodecEditor.vb",
+"region":  {
+"startLine":  39,
+"startColumn":  66,
+"endLine":  39,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmAVCodecEditor.vb",
+"region":  {
+"startLine":  46,
+"startColumn":  35,
+"endLine":  46,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmAVCodecEditor.vb",
+"region":  {
+"startLine":  46,
+"startColumn":  66,
+"endLine":  46,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmAVCodecEditor.vb",
+"region":  {
+"startLine":  54,
+"startColumn":  38,
+"endLine":  54,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmAVCodecEditor.vb",
+"region":  {
+"startLine":  54,
+"startColumn":  69,
+"endLine":  54,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmAVCodecEditor.vb",
+"region":  {
+"startLine":  60,
+"startColumn":  38,
+"endLine":  60,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmAVCodecEditor.vb",
+"region":  {
+"startLine":  60,
+"startColumn":  69,
+"endLine":  60,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmAVCodecEditor.vb",
+"region":  {
+"startLine":  66,
+"startColumn":  55,
+"endLine":  66,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmAVCodecEditor.vb",
+"region":  {
+"startLine":  66,
+"startColumn":  79,
+"endLine":  66,
+"endColumn":  84
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmAVCodecEditor.vb",
+"region":  {
+"startLine":  69,
+"startColumn":  55,
+"endLine":  69,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmAVCodecEditor.vb",
+"region":  {
+"startLine":  69,
+"startColumn":  79,
+"endLine":  69,
+"endColumn":  84
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmAVCodecEditor.vb",
+"region":  {
+"startLine":  73,
+"startColumn":  43,
+"endLine":  73,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmAVCodecEditor.vb",
+"region":  {
+"startLine":  73,
+"startColumn":  67,
+"endLine":  73,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmAVCodecEditor.vb",
+"region":  {
+"startLine":  81,
+"startColumn":  43,
+"endLine":  81,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmAVCodecEditor.vb",
+"region":  {
+"startLine":  81,
+"startColumn":  67,
+"endLine":  81,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmAVCodecEditor.vb",
+"region":  {
+"startLine":  90,
+"startColumn":  34,
+"endLine":  90,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmAVCodecEditor.vb",
+"region":  {
+"startLine":  90,
+"startColumn":  58,
+"endLine":  90,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmAVCodecEditor.vb",
+"region":  {
+"startLine":  94,
+"startColumn":  34,
+"endLine":  94,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmAVCodecEditor.vb",
+"region":  {
+"startLine":  94,
+"startColumn":  58,
+"endLine":  94,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmGenresEditor.vb",
+"region":  {
+"startLine":  71,
+"startColumn":  56,
+"endLine":  71,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmGenresEditor.vb",
+"region":  {
+"startLine":  71,
+"startColumn":  80,
+"endLine":  71,
+"endColumn":  85
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmGenresEditor.vb",
+"region":  {
+"startLine":  83,
+"startColumn":  35,
+"endLine":  83,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmGenresEditor.vb",
+"region":  {
+"startLine":  83,
+"startColumn":  59,
+"endLine":  83,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmGenresEditor.vb",
+"region":  {
+"startLine":  87,
+"startColumn":  44,
+"endLine":  87,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmGenresEditor.vb",
+"region":  {
+"startLine":  87,
+"startColumn":  68,
+"endLine":  87,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmGenresEditor.vb",
+"region":  {
+"startLine":  126,
+"startColumn":  54,
+"endLine":  126,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmGenresEditor.vb",
+"region":  {
+"startLine":  126,
+"startColumn":  78,
+"endLine":  126,
+"endColumn":  83
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmGenresEditor.vb",
+"region":  {
+"startLine":  146,
+"startColumn":  42,
+"endLine":  146,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmGenresEditor.vb",
+"region":  {
+"startLine":  146,
+"startColumn":  66,
+"endLine":  146,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmGenresEditor.vb",
+"region":  {
+"startLine":  154,
+"startColumn":  46,
+"endLine":  154,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmGenresEditor.vb",
+"region":  {
+"startLine":  154,
+"startColumn":  77,
+"endLine":  154,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmGenresEditor.vb",
+"region":  {
+"startLine":  158,
+"startColumn":  35,
+"endLine":  158,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmGenresEditor.vb",
+"region":  {
+"startLine":  158,
+"startColumn":  66,
+"endLine":  158,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmGenresEditor.vb",
+"region":  {
+"startLine":  171,
+"startColumn":  34,
+"endLine":  171,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmGenresEditor.vb",
+"region":  {
+"startLine":  171,
+"startColumn":  65,
+"endLine":  171,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmGenresEditor.vb",
+"region":  {
+"startLine":  178,
+"startColumn":  38,
+"endLine":  178,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmGenresEditor.vb",
+"region":  {
+"startLine":  178,
+"startColumn":  69,
+"endLine":  178,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmGenresEditor.vb",
+"region":  {
+"startLine":  185,
+"startColumn":  37,
+"endLine":  185,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmGenresEditor.vb",
+"region":  {
+"startLine":  185,
+"startColumn":  68,
+"endLine":  185,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmGenresEditor.vb",
+"region":  {
+"startLine":  209,
+"startColumn":  36,
+"endLine":  209,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmGenresEditor.vb",
+"region":  {
+"startLine":  209,
+"startColumn":  67,
+"endLine":  209,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmGenresEditor.vb",
+"region":  {
+"startLine":  250,
+"startColumn":  37,
+"endLine":  250,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmGenresEditor.vb",
+"region":  {
+"startLine":  268,
+"startColumn":  25,
+"endLine":  268,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmMediaSourcesEditor.vb",
+"region":  {
+"startLine":  36,
+"startColumn":  36,
+"endLine":  36,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmMediaSourcesEditor.vb",
+"region":  {
+"startLine":  36,
+"startColumn":  67,
+"endLine":  36,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmMediaSourcesEditor.vb",
+"region":  {
+"startLine":  43,
+"startColumn":  39,
+"endLine":  43,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmMediaSourcesEditor.vb",
+"region":  {
+"startLine":  43,
+"startColumn":  70,
+"endLine":  43,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmMediaSourcesEditor.vb",
+"region":  {
+"startLine":  49,
+"startColumn":  57,
+"endLine":  49,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmMediaSourcesEditor.vb",
+"region":  {
+"startLine":  49,
+"startColumn":  81,
+"endLine":  49,
+"endColumn":  86
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmMediaSourcesEditor.vb",
+"region":  {
+"startLine":  54,
+"startColumn":  45,
+"endLine":  54,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmMediaSourcesEditor.vb",
+"region":  {
+"startLine":  54,
+"startColumn":  69,
+"endLine":  54,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmMediaSourcesEditor.vb",
+"region":  {
+"startLine":  62,
+"startColumn":  36,
+"endLine":  62,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmMediaSourcesEditor.vb",
+"region":  {
+"startLine":  62,
+"startColumn":  60,
+"endLine":  62,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmMediaSourcesEditor.vb",
+"region":  {
+"startLine":  66,
+"startColumn":  34,
+"endLine":  66,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmMediaSourcesEditor.vb",
+"region":  {
+"startLine":  66,
+"startColumn":  58,
+"endLine":  66,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmMediaSourcesEditor.vb",
+"region":  {
+"startLine":  109,
+"startColumn":  38,
+"endLine":  109,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmMediaSourcesEditor.vb",
+"region":  {
+"startLine":  109,
+"startColumn":  69,
+"endLine":  109,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmMediaSourcesEditor.vb",
+"region":  {
+"startLine":  114,
+"startColumn":  45,
+"endLine":  114,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmMediaSourcesEditor.vb",
+"region":  {
+"startLine":  114,
+"startColumn":  76,
+"endLine":  114,
+"endColumn":  81
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmMediaSourcesEditor.vb",
+"region":  {
+"startLine":  119,
+"startColumn":  33,
+"endLine":  119,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmMediaSourcesEditor.vb",
+"region":  {
+"startLine":  126,
+"startColumn":  36,
+"endLine":  126,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmMediaSourcesEditor.vb",
+"region":  {
+"startLine":  126,
+"startColumn":  67,
+"endLine":  126,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmMediaSourcesEditor.vb",
+"region":  {
+"startLine":  134,
+"startColumn":  39,
+"endLine":  134,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmMediaSourcesEditor.vb",
+"region":  {
+"startLine":  134,
+"startColumn":  70,
+"endLine":  134,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmMediaSourcesEditor.vb",
+"region":  {
+"startLine":  141,
+"startColumn":  56,
+"endLine":  141,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmMediaSourcesEditor.vb",
+"region":  {
+"startLine":  141,
+"startColumn":  80,
+"endLine":  141,
+"endColumn":  85
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmMediaSourcesEditor.vb",
+"region":  {
+"startLine":  146,
+"startColumn":  44,
+"endLine":  146,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\frmMediaSourcesEditor.vb",
+"region":  {
+"startLine":  146,
+"startColumn":  68,
+"endLine":  146,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\genericGenresEditor.vb",
+"region":  {
+"startLine":  15,
+"startColumn":  28,
+"endLine":  15,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\genericGenresEditor.vb",
+"region":  {
+"startLine":  19,
+"startColumn":  34,
+"endLine":  19,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\genericGenresEditor.vb",
+"region":  {
+"startLine":  19,
+"startColumn":  56,
+"endLine":  19,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\genericGenresEditor.vb",
+"region":  {
+"startLine":  19,
+"startColumn":  80,
+"endLine":  19,
+"endColumn":  85
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\genericGenresEditor.vb",
+"region":  {
+"startLine":  29,
+"startColumn":  7,
+"endLine":  29,
+"endColumn":  12
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\genericGenresEditor.vb",
+"region":  {
+"startLine":  55,
+"startColumn":  18,
+"endLine":  55,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\genericGenresEditor.vb",
+"region":  {
+"startLine":  55,
+"startColumn":  49,
+"endLine":  55,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\genericGenresEditor.vb",
+"region":  {
+"startLine":  79,
+"startColumn":  29,
+"endLine":  79,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\genericGenresEditor.vb",
+"region":  {
+"startLine":  83,
+"startColumn":  23,
+"endLine":  83,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\genericMediaSources.vb",
+"region":  {
+"startLine":  15,
+"startColumn":  28,
+"endLine":  15,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\genericMediaSources.vb",
+"region":  {
+"startLine":  19,
+"startColumn":  34,
+"endLine":  19,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\genericMediaSources.vb",
+"region":  {
+"startLine":  19,
+"startColumn":  56,
+"endLine":  19,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\genericMediaSources.vb",
+"region":  {
+"startLine":  19,
+"startColumn":  80,
+"endLine":  19,
+"endColumn":  85
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\genericMediaSources.vb",
+"region":  {
+"startLine":  29,
+"startColumn":  7,
+"endLine":  29,
+"endColumn":  12
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\genericMediaSources.vb",
+"region":  {
+"startLine":  55,
+"startColumn":  18,
+"endLine":  55,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\genericMediaSources.vb",
+"region":  {
+"startLine":  55,
+"startColumn":  49,
+"endLine":  55,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\genericMediaSources.vb",
+"region":  {
+"startLine":  80,
+"startColumn":  29,
+"endLine":  80,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\genericMediaSources.vb",
+"region":  {
+"startLine":  84,
+"startColumn":  26,
+"endLine":  84,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\genericMetadataEditor.vb",
+"region":  {
+"startLine":  15,
+"startColumn":  28,
+"endLine":  15,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\genericMetadataEditor.vb",
+"region":  {
+"startLine":  19,
+"startColumn":  34,
+"endLine":  19,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\genericMetadataEditor.vb",
+"region":  {
+"startLine":  19,
+"startColumn":  56,
+"endLine":  19,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\genericMetadataEditor.vb",
+"region":  {
+"startLine":  19,
+"startColumn":  80,
+"endLine":  19,
+"endColumn":  85
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\genericMetadataEditor.vb",
+"region":  {
+"startLine":  29,
+"startColumn":  7,
+"endLine":  29,
+"endColumn":  12
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\genericMetadataEditor.vb",
+"region":  {
+"startLine":  55,
+"startColumn":  18,
+"endLine":  55,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\genericMetadataEditor.vb",
+"region":  {
+"startLine":  55,
+"startColumn":  49,
+"endLine":  55,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\genericMetadataEditor.vb",
+"region":  {
+"startLine":  80,
+"startColumn":  29,
+"endLine":  80,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\genericMetadataEditor.vb",
+"region":  {
+"startLine":  84,
+"startColumn":  26,
+"endLine":  84,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\scraperMoviesEmberModule.vb",
+"region":  {
+"startLine":  18,
+"startColumn":  36,
+"endLine":  18,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\scraperMoviesEmberModule.vb",
+"region":  {
+"startLine":  18,
+"startColumn":  80,
+"endLine":  18,
+"endColumn":  85
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\scraperMoviesEmberModule.vb",
+"region":  {
+"startLine":  20,
+"startColumn":  42,
+"endLine":  20,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\scraperMoviesEmberModule.vb",
+"region":  {
+"startLine":  20,
+"startColumn":  64,
+"endLine":  20,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\scraperMoviesEmberModule.vb",
+"region":  {
+"startLine":  20,
+"startColumn":  88,
+"endLine":  20,
+"endColumn":  93
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\scraperMoviesEmberModule.vb",
+"region":  {
+"startLine":  22,
+"startColumn":  38,
+"endLine":  22,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\scraperMoviesEmberModule.vb",
+"region":  {
+"startLine":  22,
+"startColumn":  60,
+"endLine":  22,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\scraperMoviesEmberModule.vb",
+"region":  {
+"startLine":  22,
+"startColumn":  84,
+"endLine":  22,
+"endColumn":  89
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\scraperMoviesEmberModule.vb",
+"region":  {
+"startLine":  56,
+"startColumn":  13,
+"endLine":  56,
+"endColumn":  18
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\scraperMoviesEmberModule.vb",
+"region":  {
+"startLine":  65,
+"startColumn":  13,
+"endLine":  65,
+"endColumn":  18
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\scraperMoviesEmberModule.vb",
+"region":  {
+"startLine":  73,
+"startColumn":  43,
+"endLine":  73,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\scraperMoviesEmberModule.vb",
+"region":  {
+"startLine":  82,
+"startColumn":  21,
+"endLine":  82,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\scraperMoviesEmberModule.vb",
+"region":  {
+"startLine":  93,
+"startColumn":  70,
+"endLine":  93,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\scraperMoviesEmberModule.vb",
+"region":  {
+"startLine":  96,
+"startColumn":  37,
+"endLine":  96,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\scraperMoviesEmberModule.vb",
+"region":  {
+"startLine":  99,
+"startColumn":  33,
+"endLine":  99,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\scraperMoviesEmberModule.vb",
+"region":  {
+"startLine":  105,
+"startColumn":  76,
+"endLine":  105,
+"endColumn":  81
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\scraperMoviesEmberModule.vb",
+"region":  {
+"startLine":  105,
+"startColumn":  159,
+"endLine":  105,
+"endColumn":  164
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\multi.EmberExtras\scraperMoviesEmberModule.vb",
+"region":  {
+"startLine":  105,
+"startColumn":  202,
+"endLine":  105,
+"endColumn":  207
+}
+}
+}
+]
+}
