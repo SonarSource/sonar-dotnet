@@ -32,158 +32,113 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class UnconditionalJumpStatement : SonarDiagnosticAnalyzer
+    public sealed class UnconditionalJumpStatement : UnconditionalJumpStatementBase<StatementSyntax, SyntaxKind>
     {
-        internal const string DiagnosticId = "S1751";
-        private const string MessageFormat = "Remove this '{0}' statement or make it conditional.";
-
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+
+        protected override DiagnosticDescriptor Rule => rule;
+        protected sealed override Helpers.GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.CSharp.GeneratedCodeRecognizer.Instance;
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
-
-        private static readonly ISet<SyntaxKind> loopStatements = new HashSet<SyntaxKind>
-        {
-            SyntaxKind.ForEachStatement,
-            SyntaxKind.ForStatement,
-            SyntaxKind.WhileStatement,
-            SyntaxKind.DoStatement
-        };
-
-        private static readonly ISet<SyntaxKind> StatementsThatCanThrow = ImmutableHashSet.Create(
-            SyntaxKind.InvocationExpression,
-            SyntaxKind.ObjectCreationExpression);
-
-        protected override void Initialize(SonarAnalysisContext context)
-        {
-            context.RegisterSyntaxNodeActionInNonGenerated(c =>
+        protected override ISet<SyntaxKind> LoopStatements { get; }
+            = new HashSet<SyntaxKind>
             {
-                var walker = new LoopWalker(c);
-                walker.Visit(c.Node);
-                foreach (var node in walker.GetRuleViolations())
-                {
-                    c.ReportDiagnostic(Diagnostic.Create(rule, node.GetLocation(), GetKeywordText(node)));
-                }
-            },
-            loopStatements.ToArray());
-        }
+                SyntaxKind.ForEachStatement,
+                SyntaxKind.ForStatement,
+                SyntaxKind.WhileStatement,
+                SyntaxKind.DoStatement
+            };
 
-        private static string GetKeywordText(StatementSyntax statement) =>
+        protected override string GetKeywordText(StatementSyntax statement) =>
             (statement as BreakStatementSyntax)?.BreakKeyword.ToString() ??
             (statement as ContinueStatementSyntax)?.ContinueKeyword.ToString() ??
             (statement as ReturnStatementSyntax)?.ReturnKeyword.ToString() ??
             (statement as ThrowStatementSyntax)?.ThrowKeyword.ToString();
 
-        private class LoopWalker : CSharpSyntaxWalker
+        protected override LoopWalkerBase<StatementSyntax, SyntaxKind> GetWalker(SyntaxNodeAnalysisContext context)
+            => new LoopWalker(context, LoopStatements);
+
+
+        private class LoopWalker : LoopWalkerBase<StatementSyntax, SyntaxKind>
         {
-            private readonly SyntaxNode rootExpression;
+            protected override ISet<SyntaxKind> StatementsThatCanThrow { get; }
+                = ImmutableHashSet.Create(SyntaxKind.InvocationExpression,
+                                          SyntaxKind.ObjectCreationExpression);
 
-            private readonly List<StatementSyntax> conditionalContinues = new List<StatementSyntax>();
-            private readonly List<StatementSyntax> conditionalTerminates = new List<StatementSyntax>();
+            protected override ISet<SyntaxKind> LambdaSyntaxes { get; }
+                = new HashSet<SyntaxKind> {
+                    SyntaxKind.ParenthesizedLambdaExpression,
+                    SyntaxKind.SimpleLambdaExpression };
 
-            private readonly List<StatementSyntax> unconditionalContinues = new List<StatementSyntax>();
-            private readonly List<StatementSyntax> unconditionalTerminates = new List<StatementSyntax>();
-
-            public LoopWalker(SyntaxNodeAnalysisContext context)
+            protected override ISet<SyntaxKind> ConditionalStatements { get; } = new HashSet<SyntaxKind>
             {
-                rootExpression = context.Node;
+                SyntaxKind.IfStatement,
+                SyntaxKind.SwitchStatement,
+                SyntaxKind.CatchClause
+            };
+
+            public LoopWalker(SyntaxNodeAnalysisContext context, ISet<SyntaxKind> loopStatements)
+                : base(context, loopStatements)
+            {
             }
 
-            public List<StatementSyntax> GetRuleViolations()
+            public override void Visit()
             {
-                var ruleViolations = new List<StatementSyntax>();
+                var csWalker = new CsLoopwalker(this);
+                csWalker.Visit(rootExpression);
+            }
 
-                ruleViolations.AddRange(unconditionalContinues);
+            private class CsLoopwalker : CSharpSyntaxWalker
+            {
+                private LoopWalker walker;
 
-                if (!conditionalContinues.Any())
+                public CsLoopwalker(LoopWalker loopWalker)
                 {
-                    ruleViolations.AddRange(unconditionalTerminates);
+                    walker = loopWalker;
                 }
 
-                return ruleViolations;
-            }
-
-            public override void VisitContinueStatement(ContinueStatementSyntax node)
-            {
-                base.VisitContinueStatement(node);
-                StoreVisitData(node, conditionalContinues, unconditionalContinues);
-            }
-
-            public override void VisitBreakStatement(BreakStatementSyntax node)
-            {
-                base.VisitBreakStatement(node);
-                StoreVisitData(node, conditionalTerminates, unconditionalTerminates);
-            }
-
-            public override void VisitReturnStatement(ReturnStatementSyntax node)
-            {
-                base.VisitReturnStatement(node);
-                StoreVisitData(node, conditionalTerminates, unconditionalTerminates);
-            }
-
-            public override void VisitThrowStatement(ThrowStatementSyntax node)
-            {
-                base.VisitThrowStatement(node);
-                StoreVisitData(node, conditionalTerminates, unconditionalTerminates);
-            }
-
-            private void StoreVisitData(StatementSyntax node, List<StatementSyntax> conditionalCollection,
-                List<StatementSyntax> unconditionalCollection)
-            {
-                var ancestors = node
-                    .Ancestors()
-                    .TakeWhile(n => !rootExpression.Equals(n))
-                    .ToList();
-
-                if (ancestors.Any(n => n.IsAnyKind(lambdaOrLoop)))
+                public override void VisitContinueStatement(ContinueStatementSyntax node)
                 {
-                    return;
+                    base.VisitContinueStatement(node);
+                    walker.StoreVisitData(node, walker.ConditionalContinues, walker.UnconditionalContinues);
                 }
 
-                if (ancestors.Any(n => n.IsAnyKind(conditionalStatements)) ||
-                    IsInTryCatchWithMethodInvocation(node, ancestors))
+                public override void VisitBreakStatement(BreakStatementSyntax node)
                 {
-                    conditionalCollection.Add(node);
+                    base.VisitBreakStatement(node);
+                    walker.StoreVisitData(node, walker.ConditionalTerminates, walker.UnconditionalTerminates);
                 }
-                else
+
+                public override void VisitReturnStatement(ReturnStatementSyntax node)
                 {
-                    unconditionalCollection.Add(node);
+                    base.VisitReturnStatement(node);
+                    walker.StoreVisitData(node, walker.ConditionalTerminates, walker.UnconditionalTerminates);
+                }
+
+                public override void VisitThrowStatement(ThrowStatementSyntax node)
+                {
+                    base.VisitThrowStatement(node);
+                    walker.StoreVisitData(node, walker.ConditionalTerminates, walker.UnconditionalTerminates);
                 }
             }
 
-            private static bool IsInTryCatchWithMethodInvocation(StatementSyntax node, List<SyntaxNode> ancestors)
+            protected override bool IsAnyKind(SyntaxNode node, ICollection<SyntaxKind> collection) => node.IsAnyKind(collection);
+            protected override bool IsReturnStatement(SyntaxNode node) => node.IsKind(SyntaxKind.ReturnStatement);
+
+            protected override bool TryGetTryAncestorStatements(StatementSyntax node, List<SyntaxNode> ancestors, out IEnumerable<StatementSyntax> tryAncestorStatements)
             {
                 var tryAncestor = (TryStatementSyntax)ancestors.FirstOrDefault(n => n.IsKind(SyntaxKind.TryStatement));
 
                 if (tryAncestor == null ||
                     tryAncestor.Catches.Count == 0)
                 {
+                    tryAncestorStatements = null;
                     return false;
                 }
 
-                if (node.IsKind(SyntaxKind.ReturnStatement) &&
-                    node.DescendantNodes().Any(n => n.IsAnyKind(StatementsThatCanThrow)))
-                {
-                    return true;
-                }
-
-                return tryAncestor.Block.Statements
-                    .TakeWhile(statement => !statement.Equals(node))
-                    .SelectMany(statement => statement.DescendantNodes())
-                    .Any(statement => statement.IsAnyKind(StatementsThatCanThrow));
+                tryAncestorStatements = tryAncestor.Block.Statements;
+                return true;
             }
-
-            private static readonly ISet<SyntaxKind> lambdaOrLoop
-                = new HashSet<SyntaxKind>(
-                    loopStatements.Union(
-                        new[] { SyntaxKind.ParenthesizedLambdaExpression,
-                                SyntaxKind.SimpleLambdaExpression}));
-
-            private static readonly ISet<SyntaxKind> conditionalStatements = new HashSet<SyntaxKind>
-            {
-                SyntaxKind.IfStatement,
-                SyntaxKind.SwitchStatement,
-                SyntaxKind.CatchClause
-            };
-        };
+        }
     }
 }

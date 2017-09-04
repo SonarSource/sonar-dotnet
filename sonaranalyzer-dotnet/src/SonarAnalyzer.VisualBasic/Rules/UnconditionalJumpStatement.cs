@@ -19,7 +19,6 @@
  */
 
 
-using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
@@ -29,21 +28,130 @@ using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
-using SonarAnalyzer.Rules.Common;
+using SonarAnalyzer.Helpers.VisualBasic;
 
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
-    public sealed class UnconditionalJumpStatement : UnconditionalJumpStatementBase
+    public sealed class UnconditionalJumpStatement : UnconditionalJumpStatementBase<StatementSyntax, SyntaxKind>
     {
         private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+                    DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        protected override void Initialize(SonarAnalysisContext context)
+        protected override DiagnosticDescriptor Rule => rule;
+        protected sealed override Helpers.GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.VisualBasic.GeneratedCodeRecognizer.Instance;
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+        protected override ISet<SyntaxKind> LoopStatements { get; }
+            = new HashSet<SyntaxKind>
+            {
+                SyntaxKind.ForBlock,
+                SyntaxKind.ForEachBlock,
+                SyntaxKind.WhileBlock,
+                SyntaxKind.DoLoopWhileBlock,
+                SyntaxKind.DoLoopUntilBlock,
+                SyntaxKind.SimpleDoLoopBlock
+            };
+
+        protected override string GetKeywordText(StatementSyntax statement) =>
+            (statement as ExitStatementSyntax)?.ExitKeyword.ToString() ??
+            (statement as ContinueStatementSyntax)?.ContinueKeyword.ToString() ??
+            (statement as ReturnStatementSyntax)?.ReturnKeyword.ToString() ??
+            (statement as ThrowStatementSyntax)?.ThrowKeyword.ToString();
+
+        protected override LoopWalkerBase<StatementSyntax, SyntaxKind> GetWalker(SyntaxNodeAnalysisContext context)
+            => new LoopWalker(context, LoopStatements);
+
+
+        private class LoopWalker : LoopWalkerBase<StatementSyntax, SyntaxKind>
         {
-            throw new NotImplementedException();
+            protected override ISet<SyntaxKind> StatementsThatCanThrow { get; }
+                = ImmutableHashSet.Create(SyntaxKind.InvocationExpression,
+                                          SyntaxKind.ObjectCreationExpression);
+
+            protected override ISet<SyntaxKind> LambdaSyntaxes { get; }
+                = new HashSet<SyntaxKind>
+                {
+                    SyntaxKind.FunctionLambdaHeader,
+                    SyntaxKind.MultiLineFunctionLambdaExpression,
+                    SyntaxKind.MultiLineSubLambdaExpression,
+                    SyntaxKind.SingleLineFunctionLambdaExpression,
+                    SyntaxKind.SingleLineSubLambdaExpression,
+                    SyntaxKind.SubLambdaHeader
+                };
+
+            protected override ISet<SyntaxKind> ConditionalStatements { get; } = new HashSet<SyntaxKind>
+            {
+                SyntaxKind.SingleLineIfStatement,
+                SyntaxKind.SingleLineIfPart,
+                SyntaxKind.MultiLineIfBlock,
+                SyntaxKind.CaseBlock,
+                SyntaxKind.CaseElseBlock,
+                SyntaxKind.CatchBlock
+            };
+
+            public LoopWalker(SyntaxNodeAnalysisContext context, ISet<SyntaxKind> loopStatements)
+                : base(context, loopStatements)
+            {
+            }
+
+            public override void Visit()
+            {
+                var vbWalker = new VbLoopwalker(this);
+                vbWalker.Visit(rootExpression);
+            }
+
+            private class VbLoopwalker : VisualBasicSyntaxWalker
+            {
+                private LoopWalker walker;
+
+                public VbLoopwalker(LoopWalker loopWalker)
+                {
+                    walker = loopWalker;
+                }
+
+                public override void VisitContinueStatement(ContinueStatementSyntax node)
+                {
+                    base.VisitContinueStatement(node);
+                    walker.StoreVisitData(node, walker.ConditionalContinues, walker.UnconditionalContinues);
+                }
+
+                public override void VisitExitStatement(ExitStatementSyntax node)
+                {
+                    base.VisitExitStatement(node);
+                    walker.StoreVisitData(node, walker.ConditionalTerminates, walker.UnconditionalTerminates);
+                }
+
+                public override void VisitReturnStatement(ReturnStatementSyntax node)
+                {
+                    base.VisitReturnStatement(node);
+                    walker.StoreVisitData(node, walker.ConditionalTerminates, walker.UnconditionalTerminates);
+                }
+
+                public override void VisitThrowStatement(ThrowStatementSyntax node)
+                {
+                    base.VisitThrowStatement(node);
+                    walker.StoreVisitData(node, walker.ConditionalTerminates, walker.UnconditionalTerminates);
+                }
+            }
+
+            protected override bool IsAnyKind(SyntaxNode node, ICollection<SyntaxKind> collection) => node.IsAnyKind(collection);
+            protected override bool IsReturnStatement(SyntaxNode node) => node.IsKind(SyntaxKind.ReturnStatement);
+
+            protected override bool TryGetTryAncestorStatements(StatementSyntax node, List<SyntaxNode> ancestors, out IEnumerable<StatementSyntax> tryAncestorStatements)
+            {
+                var tryAncestor = (TryBlockSyntax)ancestors.FirstOrDefault(n => n.IsKind(SyntaxKind.TryBlock));
+
+                if (tryAncestor == null ||
+                    tryAncestor.CatchBlocks.Count == 0)
+                {
+                    tryAncestorStatements = null;
+                    return false;
+                }
+
+                tryAncestorStatements = tryAncestor.Statements;
+                return true;
+            }
         }
     }
 }
