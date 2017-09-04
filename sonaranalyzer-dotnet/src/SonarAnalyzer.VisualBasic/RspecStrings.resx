@@ -711,6 +711,33 @@
   <data name="S1659_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
   </data>
+  <data name="S1751_Category" xml:space="preserve">
+    <value>Sonar Code Smell</value>
+  </data>
+  <data name="S1751_Description" xml:space="preserve">
+    <value>Having an unconditional break, return, (@)throw or goto in a loop renders it useless; the loop will only execute once and the loop structure itself is simply wasted keystrokes.</value>
+  </data>
+  <data name="S1751_IsActivatedByDefault" xml:space="preserve">
+    <value>True</value>
+  </data>
+  <data name="S1751_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S1751_RemediationCost" xml:space="preserve">
+    <value>5min</value>
+  </data>
+  <data name="S1751_Severity" xml:space="preserve">
+    <value>Major</value>
+  </data>
+  <data name="S1751_Tags" xml:space="preserve">
+    <value>misra,cert,unused</value>
+  </data>
+  <data name="S1751_Title" xml:space="preserve">
+    <value>Jump statements should not be used unconditionally</value>
+  </data>
+  <data name="S1751_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S1764_Category" xml:space="preserve">
     <value>Sonar Bug</value>
   </data>
