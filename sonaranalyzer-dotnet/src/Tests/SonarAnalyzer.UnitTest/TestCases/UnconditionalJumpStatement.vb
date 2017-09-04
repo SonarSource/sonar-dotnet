@@ -1,4 +1,4 @@
-
+Imports System
 Imports System.IO
 Imports System.Threading.Tasks
 
@@ -8,7 +8,7 @@ Namespace Tests.Diagnostics
             Dim length As Integer = Nothing
             For i As Integer = 0 To length - 1
                 Exit For
-'               ^^^^^^^^ Noncompliant {{Remove this 'break' statement or make it conditional.}}
+'               ^^^^^^^^ Noncompliant {{Remove this 'Exit' statement or make it conditional.}}
             Next
 
             For i As Integer = 0 To length - 1
@@ -96,6 +96,16 @@ Namespace Tests.Diagnostics
                     Throw New Exception() ' Compliant
                 End If
             End While
+
+            While True
+                If [stop] Then Throw New Exception() ' Compliant
+            End While
+
+            Dim s As String
+            For Each cs As Char In s
+                If Not False Then Return ' Compliant
+            Next
+
         End Sub
 
         Public Sub Test3(strings As String(), [stop] As Boolean)
@@ -110,12 +120,12 @@ Namespace Tests.Diagnostics
 
                 While True
                     Return
-'                   ^^^^^^ Noncompliant {{Remove this 'return' statement or make it conditional.}}
+'                   ^^^^^^ Noncompliant {{Remove this 'Return' statement or make it conditional.}}
                 End While
 
                 While True
                     Throw New Exception()
-'                   ^^^^^^^^^^^^^^^^^^^^^ Noncompliant {{Remove this 'throw' statement or make it conditional.}}
+'                   ^^^^^^^^^^^^^^^^^^^^^ Noncompliant {{Remove this 'Throw' statement or make it conditional.}}
                 End While
             End If
         End Sub
@@ -318,18 +328,6 @@ Namespace Tests.Diagnostics
                         Return False ' Compliant
                     End If
                 End Try
-            Next
-        End Function
-
-        Public Function TestWithRetry4(doSomething As Action, logError As Action(Of Exception)) As Boolean
-            For i As Integer = 0 To 2
-                Try
-                    doSomething()
-                Catch e As Exception
-                    logError(e)
-                Finally
-                End Try
-                Return True
             Next
         End Function
 

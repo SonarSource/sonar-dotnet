@@ -18,16 +18,132 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Linq;
+using System.Collections.Generic;
 using Microsoft.CodeAnalysis;
-using SonarAnalyzer.Common;
+using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Helpers;
-using System.Collections.Immutable;
 
 namespace SonarAnalyzer.Rules
 {
-    public abstract class UnconditionalJumpStatementBase : SonarDiagnosticAnalyzer
+    public abstract class UnconditionalJumpStatementBase<TStatementSyntax, TLanguageKindEnum> : SonarDiagnosticAnalyzer
+        where TStatementSyntax : SyntaxNode
+        where TLanguageKindEnum : struct
     {
         protected const string DiagnosticId = "S1751";
-        protected const string MessageFormat = "";
+        protected const string MessageFormat = "Remove this '{0}' statement or make it conditional.";
+
+        protected abstract DiagnosticDescriptor Rule { get; }
+        protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
+
+        protected abstract LoopWalkerBase<TStatementSyntax, TLanguageKindEnum> GetWalker(SyntaxNodeAnalysisContext context);
+        protected abstract ISet<TLanguageKindEnum> LoopStatements { get; }
+
+        protected override void Initialize(SonarAnalysisContext context)
+        {
+            context.RegisterSyntaxNodeActionInNonGenerated(GeneratedCodeRecognizer,
+                c =>
+                {
+                    var walker = GetWalker(c);
+                    walker.Visit();
+                    foreach (var node in walker.GetRuleViolations())
+                    {
+                        c.ReportDiagnostic(Diagnostic.Create(Rule, node.GetLocation(), GetKeywordText(node)));
+                    }
+                },
+                LoopStatements.ToArray());
+        }
+
+        protected abstract string GetKeywordText(TStatementSyntax statement);
+    }
+
+    public abstract class LoopWalkerBase<TStatementSyntax, TLanguageKindEnum>
+        where TStatementSyntax : SyntaxNode
+        where TLanguageKindEnum : struct
+    {
+        protected readonly SyntaxNode rootExpression;
+
+        protected List<TStatementSyntax> ConditionalContinues { get; } = new List<TStatementSyntax>();
+        protected List<TStatementSyntax> ConditionalTerminates { get; } = new List<TStatementSyntax>();
+
+        protected List<TStatementSyntax> UnconditionalContinues { get; } = new List<TStatementSyntax>();
+        protected List<TStatementSyntax> UnconditionalTerminates { get; } = new List<TStatementSyntax>();
+
+        protected abstract ISet<TLanguageKindEnum> ConditionalStatements { get; }
+        protected abstract ISet<TLanguageKindEnum> StatementsThatCanThrow { get; }
+        protected abstract ISet<TLanguageKindEnum> LambdaSyntaxes { get; }
+
+        private ISet<TLanguageKindEnum> lambdaOrLoopStatements;
+        private ISet<TLanguageKindEnum> loopStatements;
+
+        public LoopWalkerBase(SyntaxNodeAnalysisContext context, ISet<TLanguageKindEnum> loopStatements)
+        {
+            rootExpression = context.Node;
+            this.loopStatements = loopStatements;
+            lambdaOrLoopStatements = LambdaSyntaxes.Union(loopStatements).ToHashSet();
+        }
+
+        public abstract void Visit();
+
+        public List<TStatementSyntax> GetRuleViolations()
+        {
+            var ruleViolations = new List<TStatementSyntax>(UnconditionalContinues);
+            if (!ConditionalContinues.Any())
+            {
+                ruleViolations.AddRange(UnconditionalTerminates);
+            }
+
+            return ruleViolations;
+        }
+
+        protected void StoreVisitData(TStatementSyntax node, List<TStatementSyntax> conditionalCollection,
+            List<TStatementSyntax> unconditionalCollection)
+        {
+            var ancestors = node
+                .Ancestors()
+                .TakeWhile(n => !rootExpression.Equals(n))
+                .ToList();
+
+            if (ancestors.Any(n => IsAnyKind(n, lambdaOrLoopStatements)))
+            {
+                return;
+            }
+
+            if (ancestors.Any(n => IsAnyKind(n, ConditionalStatements)) ||
+                IsInTryCatchWithMethodInvocation(node, ancestors))
+            {
+                conditionalCollection.Add(node);
+            }
+            else
+            {
+                unconditionalCollection.Add(node);
+            }
+        }
+
+        protected abstract bool IsAnyKind(SyntaxNode node, ICollection<TLanguageKindEnum> collection);
+        protected abstract bool IsReturnStatement(SyntaxNode node);
+
+        protected abstract bool TryGetTryAncestorStatements(TStatementSyntax node, List<SyntaxNode> ancestors,
+            out IEnumerable<TStatementSyntax> tryAncestorStatements);
+
+        private bool IsInTryCatchWithMethodInvocation(TStatementSyntax node, List<SyntaxNode> ancestors)
+        {
+            IEnumerable<TStatementSyntax> tryAncestorStatements;
+            if (!TryGetTryAncestorStatements(node, ancestors, out tryAncestorStatements))
+            {
+                return false;
+            }
+
+            if (IsReturnStatement(node) &&
+                node.DescendantNodes().Any(n => IsAnyKind(n, StatementsThatCanThrow)))
+            {
+                return true;
+            }
+
+            return tryAncestorStatements
+                .TakeWhile(statement => !statement.Equals(node))
+                .SelectMany(statement => statement.DescendantNodes())
+                .Any(statement => IsAnyKind(statement, StatementsThatCanThrow));
+        }
     }
 }
