@@ -23,15 +23,13 @@ param (
 Set-StrictMode -version 2.0
 $ErrorActionPreference = "Stop"
 
-function Get-RuleApiLanguageMap() {
-    return @{
-        "cs" = "c#";
-        "vbnet" = "vb.net";
-    }
+$languageMap = @{
+    "cs" = "c#";
+    "vbnet" = "vb.net";
 }
 
 function Get-Description() {
-    $convertedLanguage = Get-RuleApiLanguageMap.Get_Item($language)
+    $convertedLanguage = $languageMap.Get_Item($language)
 
     $htmlPath = "${rspecFolder}\\S${rspecKey}_${convertedLanguage}.html"
     if (-Not (Test-Path $htmlPath)) {
@@ -51,7 +49,7 @@ function Get-Description() {
 }
 
 function Get-Title() {
-    $convertedLanguage = Get-RuleApiLanguageMap.Get_Item($language)
+    $convertedLanguage = $languageMap.Get_Item($language)
 
     $jsonPath = "${rspecFolder}\\S${rspecKey}_${convertedLanguage}.json"
     if (-Not (Test-Path $jsonPath)) {
@@ -75,7 +73,7 @@ function Get-Title() {
 function Get-RspecMetadata() {
     Write-Host "Downloading RSPEC metadata to ${rspecFolder}"
 
-    $convertedLanguage = Get-RuleApiLanguageMap.Get_Item($language)
+    $convertedLanguage = $languageMap.Get_Item($language)
     java -jar $env:rule_api_path generate -directory $rspecFolder -language $convertedLanguage -rule "S${rspecKey}" | Out-Host
 }
 
@@ -115,6 +113,7 @@ function New-Issue() {
 
     # we don't add issues to the project because the api is still experimental
 }
+
 
 try {
     $rspecFolder = (Join-Path $PSScriptRoot "temp-rspec")
