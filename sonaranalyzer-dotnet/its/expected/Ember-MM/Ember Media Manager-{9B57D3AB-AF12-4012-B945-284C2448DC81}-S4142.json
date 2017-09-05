@@ -1,0 +1,316 @@
+{
+"issues":  [
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 1st argument.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  1315,
+"startColumn":  105,
+"endLine":  1315,
+"endColumn":  132
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  1315,
+"startColumn":  40,
+"endLine":  1315,
+"endColumn":  67
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 1st argument.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  1315,
+"startColumn":  170,
+"endLine":  1315,
+"endColumn":  197
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  1315,
+"startColumn":  40,
+"endLine":  1315,
+"endColumn":  67
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 1st argument.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  1317,
+"startColumn":  105,
+"endLine":  1317,
+"endColumn":  132
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  1317,
+"startColumn":  40,
+"endLine":  1317,
+"endColumn":  67
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 1st argument.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  1317,
+"startColumn":  170,
+"endLine":  1317,
+"endColumn":  197
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  1317,
+"startColumn":  40,
+"endLine":  1317,
+"endColumn":  67
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 1st argument.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  1317,
+"startColumn":  235,
+"endLine":  1317,
+"endColumn":  262
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  1317,
+"startColumn":  40,
+"endLine":  1317,
+"endColumn":  67
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 1st argument.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  1319,
+"startColumn":  105,
+"endLine":  1319,
+"endColumn":  132
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  1319,
+"startColumn":  40,
+"endLine":  1319,
+"endColumn":  67
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 2nd argument.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  1381,
+"startColumn":  107,
+"endLine":  1381,
+"endColumn":  134
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  1381,
+"startColumn":  63,
+"endLine":  1381,
+"endColumn":  90
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 1st argument.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  439,
+"startColumn":  104,
+"endLine":  439,
+"endColumn":  114
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgEditMovie.vb",
+"region":  {
+"startLine":  439,
+"startColumn":  48,
+"endLine":  439,
+"endColumn":  58
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 2nd argument.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgErrorViewer.vb",
+"region":  {
+"startLine":  79,
+"startColumn":  100,
+"endLine":  79,
+"endColumn":  127
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgErrorViewer.vb",
+"region":  {
+"startLine":  79,
+"startColumn":  64,
+"endLine":  79,
+"endColumn":  91
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 2nd argument.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSortFiles.vb",
+"region":  {
+"startLine":  52,
+"startColumn":  154,
+"endLine":  52,
+"endColumn":  163
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSortFiles.vb",
+"region":  {
+"startLine":  52,
+"startColumn":  143,
+"endLine":  52,
+"endColumn":  152
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 2nd argument.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  1681,
+"startColumn":  163,
+"endLine":  1681,
+"endColumn":  172
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  1681,
+"startColumn":  152,
+"endLine":  1681,
+"endColumn":  161
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 2nd argument.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  1696,
+"startColumn":  177,
+"endLine":  1696,
+"endColumn":  186
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  1696,
+"startColumn":  166,
+"endLine":  1696,
+"endColumn":  175
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 2nd argument.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  1696,
+"startColumn":  202,
+"endLine":  1696,
+"endColumn":  211
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\frmMain.vb",
+"region":  {
+"startLine":  1696,
+"startColumn":  166,
+"endLine":  1696,
+"endColumn":  175
+}
+}
+]
+}
+]
+}

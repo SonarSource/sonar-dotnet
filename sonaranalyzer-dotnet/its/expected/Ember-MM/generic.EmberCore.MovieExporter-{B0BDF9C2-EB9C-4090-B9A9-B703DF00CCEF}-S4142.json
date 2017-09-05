@@ -1,0 +1,316 @@
+{
+"issues":  [
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 3rd argument.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"region":  {
+"startLine":  147,
+"startColumn":  117,
+"endLine":  147,
+"endColumn":  144
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"region":  {
+"startLine":  147,
+"startColumn":  80,
+"endLine":  147,
+"endColumn":  107
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 3rd argument.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"region":  {
+"startLine":  147,
+"startColumn":  156,
+"endLine":  147,
+"endColumn":  183
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"region":  {
+"startLine":  147,
+"startColumn":  80,
+"endLine":  147,
+"endColumn":  107
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 3rd argument.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"region":  {
+"startLine":  153,
+"startColumn":  107,
+"endLine":  153,
+"endColumn":  134
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"region":  {
+"startLine":  153,
+"startColumn":  70,
+"endLine":  153,
+"endColumn":  97
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 3rd argument.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"region":  {
+"startLine":  153,
+"startColumn":  146,
+"endLine":  153,
+"endColumn":  173
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"region":  {
+"startLine":  153,
+"startColumn":  70,
+"endLine":  153,
+"endColumn":  97
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 2nd argument.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"region":  {
+"startLine":  368,
+"startColumn":  52,
+"endLine":  368,
+"endColumn":  64
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"region":  {
+"startLine":  368,
+"startColumn":  38,
+"endLine":  368,
+"endColumn":  50
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 3rd argument.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"region":  {
+"startLine":  388,
+"startColumn":  117,
+"endLine":  388,
+"endColumn":  144
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"region":  {
+"startLine":  388,
+"startColumn":  79,
+"endLine":  388,
+"endColumn":  106
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 2nd argument.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"region":  {
+"startLine":  577,
+"startColumn":  73,
+"endLine":  577,
+"endColumn":  82
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"region":  {
+"startLine":  577,
+"startColumn":  62,
+"endLine":  577,
+"endColumn":  71
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 2nd argument.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"region":  {
+"startLine":  67,
+"startColumn":  51,
+"endLine":  67,
+"endColumn":  63
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"region":  {
+"startLine":  67,
+"startColumn":  37,
+"endLine":  67,
+"endColumn":  49
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 3rd argument.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"region":  {
+"startLine":  68,
+"startColumn":  116,
+"endLine":  68,
+"endColumn":  143
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"region":  {
+"startLine":  68,
+"startColumn":  79,
+"endLine":  68,
+"endColumn":  106
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 3rd argument.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"region":  {
+"startLine":  68,
+"startColumn":  155,
+"endLine":  68,
+"endColumn":  182
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"region":  {
+"startLine":  68,
+"startColumn":  79,
+"endLine":  68,
+"endColumn":  106
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 2nd argument.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"region":  {
+"startLine":  713,
+"startColumn":  45,
+"endLine":  713,
+"endColumn":  57
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"region":  {
+"startLine":  713,
+"startColumn":  31,
+"endLine":  713,
+"endColumn":  43
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 3rd argument.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"region":  {
+"startLine":  756,
+"startColumn":  120,
+"endLine":  756,
+"endColumn":  147
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"region":  {
+"startLine":  756,
+"startColumn":  83,
+"endLine":  756,
+"endColumn":  110
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 3rd argument.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"region":  {
+"startLine":  756,
+"startColumn":  164,
+"endLine":  756,
+"endColumn":  191
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MovieExport\dlgExportMovies.vb",
+"region":  {
+"startLine":  756,
+"startColumn":  83,
+"endLine":  756,
+"endColumn":  110
+}
+}
+]
+}
+]
+}

@@ -81,6 +81,7 @@ namespace SonarAnalyzer.UnitTest
         private const string TestAssemblyName = "fooTest";
         private const string AnalyzerFailedDiagnosticId = "AD0001";
         private const string CSharpFileExtension = ".cs";
+        private const string VisualBasicFileExtension = ".vb";
 
         #region Verify
 
@@ -101,6 +102,12 @@ namespace SonarAnalyzer.UnitTest
             params MetadataReference[] additionalReferences)
         {
             VerifyAnalyzer(new[] { new DocumentInfo($"file1{CSharpFileExtension}", snippet) }, CSharpFileExtension, diagnosticAnalyzer, options, additionalReferences);
+        }
+
+        public static void VerifyVisualBasicAnalyzer(string snippet, SonarDiagnosticAnalyzer diagnosticAnalyzer, ParseOptions options = null,
+            params MetadataReference[] additionalReferences)
+        {
+            VerifyAnalyzer(new[] { new DocumentInfo($"file1{VisualBasicFileExtension}", snippet) }, VisualBasicFileExtension, diagnosticAnalyzer, options, additionalReferences);
         }
 
         public static void VerifyAnalyzer(string path, SonarDiagnosticAnalyzer diagnosticAnalyzer, ParseOptions options = null,
@@ -249,7 +256,7 @@ namespace SonarAnalyzer.UnitTest
             SonarDiagnosticAnalyzer diagnosticAnalyzer, SonarCodeFixProvider codeFixProvider, string codeFixTitle,
             params MetadataReference[] additionalReferences)
         {
-            VerifyCodeFix(path, pathToExpected, pathToExpected, diagnosticAnalyzer, codeFixProvider, 
+            VerifyCodeFix(path, pathToExpected, pathToExpected, diagnosticAnalyzer, codeFixProvider,
                 codeFixTitle, additionalReferences);
         }
 

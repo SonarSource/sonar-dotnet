@@ -20,15 +20,15 @@
 
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using Microsoft.CodeAnalysis.VisualBasic;
+using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.Rules.VisualBasic
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
+    [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
     public sealed class DoNotPassSameValueAsMultipleArguments :
         DoNotPassSameValueAsMultipleArgumentsBase<SyntaxKind, InvocationExpressionSyntax, ArgumentSyntax>
@@ -40,7 +40,7 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override DiagnosticDescriptor Rule => rule;
 
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer =>
-            Helpers.CSharp.GeneratedCodeRecognizer.Instance;
+            Helpers.VisualBasic.GeneratedCodeRecognizer.Instance;
 
         protected override SyntaxKind InvocationExpressionSyntaxKind =>
             SyntaxKind.InvocationExpression;
@@ -49,10 +49,10 @@ namespace SonarAnalyzer.Rules.CSharp
             invocation.ArgumentList.Arguments;
 
         protected override ITypeSymbol GetConvertedType(ArgumentSyntax argument, SemanticModel semanticModel) =>
-            semanticModel.GetTypeInfo(argument.Expression).ConvertedType;
+            semanticModel.GetTypeInfo(argument.GetExpression()).ConvertedType;
 
         protected override bool IsLiteral(ArgumentSyntax argument) =>
-            argument.Expression is LiteralExpressionSyntax ||
-            (argument.Expression as PrefixUnaryExpressionSyntax)?.Operand is LiteralExpressionSyntax;
+            argument.GetExpression() is LiteralExpressionSyntax ||
+            (argument.GetExpression() as UnaryExpressionSyntax)?.Operand is LiteralExpressionSyntax;
     }
 }

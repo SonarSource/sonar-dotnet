@@ -1,0 +1,28 @@
+{
+"issues":  [
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 1st argument.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgBulkRename.vb",
+"region":  {
+"startLine":  442,
+"startColumn":  49,
+"endLine":  442,
+"endColumn":  61
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgBulkRename.vb",
+"region":  {
+"startLine":  442,
+"startColumn":  35,
+"endLine":  442,
+"endColumn":  47
+}
+}
+]
+}
+]
+}
