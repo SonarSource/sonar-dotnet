@@ -57,7 +57,7 @@ Namespace Tests.Diagnostics
 
             Dim someEnumerable As IEnumerable(Of String) = New List(Of String)()
 
-            result = Enumerable.Count(someEnumerable) >= 0 ' Noncompliant {{The count of 'IEnumerable<T>' is always '>=0', so fix this test to get the real expected behavior.}}
+            result = Enumerable.Count(someEnumerable) >= 0 ' Noncompliant {{The count of 'IEnumerable(Of T)' is always '>=0', so fix this test to get the real expected behavior.}}
 '                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
             result = someEnumerable.Count(Function(foo) True) >= 0 ' Noncompliant
             result = someEnumerable?.Count() >= 0 ' Noncompliant

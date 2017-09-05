@@ -45,6 +45,7 @@ namespace SonarAnalyzer.Rules
         protected abstract TExpressionSyntax GetLeftNode(TBinaryExpressionSyntax binaryExpression);
         protected abstract TExpressionSyntax GetRightNode(TBinaryExpressionSyntax binaryExpression);
         protected abstract ISymbol GetSymbol(SyntaxNodeAnalysisContext context, TExpressionSyntax expression);
+        protected abstract string IEnumerableTString { get; }
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -87,7 +88,7 @@ namespace SonarAnalyzer.Rules
                 symbol.Name.ToLowerInvariant(), symbolType));
         }
 
-        private static string GetDeclaringTypeName(ISymbol symbol)
+        private string GetDeclaringTypeName(ISymbol symbol)
         {
             if (IsArrayLengthProperty(symbol))
             {
@@ -96,7 +97,7 @@ namespace SonarAnalyzer.Rules
 
             if (IsEnumerableCountMethod(symbol))
             {
-                return "IEnumerable<T>";
+                return IEnumerableTString;
             }
 
             if (IsCollectionProperty(symbol))

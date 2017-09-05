@@ -42,6 +42,7 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override ExpressionSyntax GetLeftNode(BinaryExpressionSyntax binaryExpression) => binaryExpression.Left;
         protected override ExpressionSyntax GetRightNode(BinaryExpressionSyntax binaryExpression) => binaryExpression.Right;
         protected override ExpressionSyntax RemoveParentheses(ExpressionSyntax expression) => expression.RemoveParentheses();
+        protected override string IEnumerableTString { get; } = "IEnumerable<T>";
 
         protected override ISymbol GetSymbol(SyntaxNodeAnalysisContext context, ExpressionSyntax expression)
         {

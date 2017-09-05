@@ -43,6 +43,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
         protected override ExpressionSyntax GetLeftNode(BinaryExpressionSyntax binaryExpression) => binaryExpression.Left;
         protected override ExpressionSyntax GetRightNode(BinaryExpressionSyntax binaryExpression) => binaryExpression.Right;
         protected override ExpressionSyntax RemoveParentheses(ExpressionSyntax expression) => expression.RemoveParentheses();
+        protected override string IEnumerableTString { get; } = "IEnumerable(Of T)";
 
         protected override ISymbol GetSymbol(SyntaxNodeAnalysisContext context, ExpressionSyntax expression)
         {
