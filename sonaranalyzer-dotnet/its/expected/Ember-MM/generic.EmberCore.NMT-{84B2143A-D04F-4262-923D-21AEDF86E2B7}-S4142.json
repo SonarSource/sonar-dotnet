@@ -1,0 +1,292 @@
+{
+"issues":  [
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 2nd argument.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  1059,
+"startColumn":  77,
+"endLine":  1059,
+"endColumn":  86
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  1059,
+"startColumn":  66,
+"endLine":  1059,
+"endColumn":  75
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 2nd argument.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  1138,
+"startColumn":  77,
+"endLine":  1138,
+"endColumn":  86
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  1138,
+"startColumn":  66,
+"endLine":  1138,
+"endColumn":  75
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 2nd argument.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  1193,
+"startColumn":  73,
+"endLine":  1193,
+"endColumn":  82
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  1193,
+"startColumn":  62,
+"endLine":  1193,
+"endColumn":  71
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 3rd argument.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  1481,
+"startColumn":  112,
+"endLine":  1481,
+"endColumn":  139
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  1481,
+"startColumn":  74,
+"endLine":  1481,
+"endColumn":  101
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 3rd argument.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  1542,
+"startColumn":  116,
+"endLine":  1542,
+"endColumn":  143
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  1542,
+"startColumn":  78,
+"endLine":  1542,
+"endColumn":  105
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 2nd argument.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  553,
+"startColumn":  90,
+"endLine":  553,
+"endColumn":  102
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  553,
+"startColumn":  76,
+"endLine":  553,
+"endColumn":  88
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 2nd argument.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  555,
+"startColumn":  139,
+"endLine":  555,
+"endColumn":  151
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  555,
+"startColumn":  125,
+"endLine":  555,
+"endColumn":  137
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 2nd argument.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  556,
+"startColumn":  141,
+"endLine":  556,
+"endColumn":  153
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  556,
+"startColumn":  127,
+"endLine":  556,
+"endColumn":  139
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 1st argument.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  627,
+"startColumn":  149,
+"endLine":  627,
+"endColumn":  161
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  627,
+"startColumn":  135,
+"endLine":  627,
+"endColumn":  147
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 1st argument.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  627,
+"startColumn":  163,
+"endLine":  627,
+"endColumn":  175
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  627,
+"startColumn":  135,
+"endLine":  627,
+"endColumn":  147
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 2nd argument.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  648,
+"startColumn":  130,
+"endLine":  648,
+"endColumn":  142
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  648,
+"startColumn":  116,
+"endLine":  648,
+"endColumn":  128
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 2nd argument.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  649,
+"startColumn":  143,
+"endLine":  649,
+"endColumn":  155
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.NMT\dlgNMTMovies.vb",
+"region":  {
+"startLine":  649,
+"startColumn":  129,
+"endLine":  649,
+"endColumn":  141
+}
+}
+]
+}
+]
+}

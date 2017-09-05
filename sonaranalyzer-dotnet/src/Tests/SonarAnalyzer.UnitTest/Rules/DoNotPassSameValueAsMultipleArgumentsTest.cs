@@ -33,5 +33,14 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzer(@"TestCases\DoNotPassSameValueAsMultipleArguments.cs",
                 new DoNotPassSameValueAsMultipleArguments());
         }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void DoNotPassSameValueAsMultipleArguments_VB()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\DoNotPassSameValueAsMultipleArguments.vb",
+                new SonarAnalyzer.Rules.VisualBasic.DoNotPassSameValueAsMultipleArguments());
+        }
     }
 }
+

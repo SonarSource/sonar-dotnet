@@ -1,0 +1,580 @@
+{
+"issues":  [
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 2nd argument.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIErrorLog.vb",
+"region":  {
+"startLine":  61,
+"startColumn":  154,
+"endLine":  61,
+"endColumn":  163
+}
+},
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIErrorLog.vb",
+"region":  {
+"startLine":  61,
+"startColumn":  143,
+"endLine":  61,
+"endColumn":  152
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 2nd argument.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIHTTP.vb",
+"region":  {
+"startLine":  135,
+"startColumn":  115,
+"endLine":  135,
+"endColumn":  121
+}
+},
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIHTTP.vb",
+"region":  {
+"startLine":  135,
+"startColumn":  40,
+"endLine":  135,
+"endColumn":  46
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 2nd argument.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIHTTP.vb",
+"region":  {
+"startLine":  135,
+"startColumn":  123,
+"endLine":  135,
+"endColumn":  129
+}
+},
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIHTTP.vb",
+"region":  {
+"startLine":  135,
+"startColumn":  40,
+"endLine":  135,
+"endColumn":  46
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 2nd argument.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIHTTP.vb",
+"region":  {
+"startLine":  135,
+"startColumn":  138,
+"endLine":  135,
+"endColumn":  144
+}
+},
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIHTTP.vb",
+"region":  {
+"startLine":  135,
+"startColumn":  40,
+"endLine":  135,
+"endColumn":  46
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 2nd argument.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIHTTP.vb",
+"region":  {
+"startLine":  138,
+"startColumn":  133,
+"endLine":  138,
+"endColumn":  139
+}
+},
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIHTTP.vb",
+"region":  {
+"startLine":  138,
+"startColumn":  40,
+"endLine":  138,
+"endColumn":  46
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 2nd argument.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIHTTP.vb",
+"region":  {
+"startLine":  138,
+"startColumn":  183,
+"endLine":  138,
+"endColumn":  189
+}
+},
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIHTTP.vb",
+"region":  {
+"startLine":  138,
+"startColumn":  40,
+"endLine":  138,
+"endColumn":  46
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 2nd argument.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIHTTP.vb",
+"region":  {
+"startLine":  138,
+"startColumn":  191,
+"endLine":  138,
+"endColumn":  197
+}
+},
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIHTTP.vb",
+"region":  {
+"startLine":  138,
+"startColumn":  40,
+"endLine":  138,
+"endColumn":  46
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 1st argument.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIHTTP.vb",
+"region":  {
+"startLine":  157,
+"startColumn":  114,
+"endLine":  157,
+"endColumn":  120
+}
+},
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIHTTP.vb",
+"region":  {
+"startLine":  157,
+"startColumn":  96,
+"endLine":  157,
+"endColumn":  102
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 3rd argument.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPILocalization.vb",
+"region":  {
+"startLine":  213,
+"startColumn":  111,
+"endLine":  213,
+"endColumn":  138
+}
+},
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPILocalization.vb",
+"region":  {
+"startLine":  213,
+"startColumn":  73,
+"endLine":  213,
+"endColumn":  100
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 3rd argument.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPILocalization.vb",
+"region":  {
+"startLine":  214,
+"startColumn":  112,
+"endLine":  214,
+"endColumn":  139
+}
+},
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPILocalization.vb",
+"region":  {
+"startLine":  214,
+"startColumn":  74,
+"endLine":  214,
+"endColumn":  101
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 2nd argument.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPILocalization.vb",
+"region":  {
+"startLine":  249,
+"startColumn":  102,
+"endLine":  249,
+"endColumn":  111
+}
+},
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPILocalization.vb",
+"region":  {
+"startLine":  249,
+"startColumn":  91,
+"endLine":  249,
+"endColumn":  100
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 2nd argument.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPILocalization.vb",
+"region":  {
+"startLine":  249,
+"startColumn":  131,
+"endLine":  249,
+"endColumn":  140
+}
+},
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPILocalization.vb",
+"region":  {
+"startLine":  249,
+"startColumn":  91,
+"endLine":  249,
+"endColumn":  100
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 2nd argument.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPILocalization.vb",
+"region":  {
+"startLine":  56,
+"startColumn":  103,
+"endLine":  56,
+"endColumn":  112
+}
+},
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPILocalization.vb",
+"region":  {
+"startLine":  56,
+"startColumn":  63,
+"endLine":  56,
+"endColumn":  72
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 2nd argument.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPILocalization.vb",
+"region":  {
+"startLine":  56,
+"startColumn":  74,
+"endLine":  56,
+"endColumn":  83
+}
+},
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPILocalization.vb",
+"region":  {
+"startLine":  56,
+"startColumn":  63,
+"endLine":  56,
+"endColumn":  72
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 1st argument.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
+"region":  {
+"startLine":  939,
+"startColumn":  46,
+"endLine":  939,
+"endColumn":  58
+}
+},
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
+"region":  {
+"startLine":  939,
+"startColumn":  32,
+"endLine":  939,
+"endColumn":  44
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 2nd argument.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"region":  {
+"startLine":  235,
+"startColumn":  189,
+"endLine":  235,
+"endColumn":  216
+}
+},
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"region":  {
+"startLine":  235,
+"startColumn":  145,
+"endLine":  235,
+"endColumn":  172
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 2nd argument.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"region":  {
+"startLine":  236,
+"startColumn":  169,
+"endLine":  236,
+"endColumn":  196
+}
+},
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"region":  {
+"startLine":  236,
+"startColumn":  125,
+"endLine":  236,
+"endColumn":  152
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 2nd argument.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"region":  {
+"startLine":  250,
+"startColumn":  189,
+"endLine":  250,
+"endColumn":  216
+}
+},
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"region":  {
+"startLine":  250,
+"startColumn":  145,
+"endLine":  250,
+"endColumn":  172
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 2nd argument.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"region":  {
+"startLine":  251,
+"startColumn":  169,
+"endLine":  251,
+"endColumn":  196
+}
+},
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"region":  {
+"startLine":  251,
+"startColumn":  125,
+"endLine":  251,
+"endColumn":  152
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 2nd argument.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"region":  {
+"startLine":  268,
+"startColumn":  159,
+"endLine":  268,
+"endColumn":  186
+}
+},
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"region":  {
+"startLine":  268,
+"startColumn":  115,
+"endLine":  268,
+"endColumn":  142
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 2nd argument.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"region":  {
+"startLine":  269,
+"startColumn":  139,
+"endLine":  269,
+"endColumn":  166
+}
+},
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
+"region":  {
+"startLine":  269,
+"startColumn":  95,
+"endLine":  269,
+"endColumn":  122
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 3rd argument.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIXML.vb",
+"region":  {
+"startLine":  100,
+"startColumn":  118,
+"endLine":  100,
+"endColumn":  145
+}
+},
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIXML.vb",
+"region":  {
+"startLine":  100,
+"startColumn":  78,
+"endLine":  100,
+"endColumn":  105
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 3rd argument.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIXML.vb",
+"region":  {
+"startLine":  67,
+"startColumn":  117,
+"endLine":  67,
+"endColumn":  144
+}
+},
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIXML.vb",
+"region":  {
+"startLine":  67,
+"startColumn":  78,
+"endLine":  67,
+"endColumn":  105
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 3rd argument.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIXML.vb",
+"region":  {
+"startLine":  80,
+"startColumn":  118,
+"endLine":  80,
+"endColumn":  145
+}
+},
+{
+"uri":  "sources\Ember-MM\EmberAPI\clsAPIXML.vb",
+"region":  {
+"startLine":  80,
+"startColumn":  78,
+"endLine":  80,
+"endColumn":  105
+}
+}
+]
+}
+]
+}

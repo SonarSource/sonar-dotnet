@@ -1,0 +1,508 @@
+{
+"issues":  [
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 2nd argument.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"region":  {
+"startLine":  53,
+"startColumn":  97,
+"endLine":  53,
+"endColumn":  124
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"region":  {
+"startLine":  53,
+"startColumn":  60,
+"endLine":  53,
+"endColumn":  87
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 2nd argument.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"region":  {
+"startLine":  669,
+"startColumn":  98,
+"endLine":  669,
+"endColumn":  125
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\clsScrapeImages.vb",
+"region":  {
+"startLine":  669,
+"startColumn":  61,
+"endLine":  669,
+"endColumn":  88
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 2nd argument.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\dlgIMDBSearchResults.vb",
+"region":  {
+"startLine":  227,
+"startColumn":  161,
+"endLine":  227,
+"endColumn":  170
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\dlgIMDBSearchResults.vb",
+"region":  {
+"startLine":  227,
+"startColumn":  150,
+"endLine":  227,
+"endColumn":  159
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 2nd argument.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\dlgImgSelect.vb",
+"region":  {
+"startLine":  1135,
+"startColumn":  106,
+"endLine":  1135,
+"endColumn":  133
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\Scraper\dlgImgSelect.vb",
+"region":  {
+"startLine":  1135,
+"startColumn":  56,
+"endLine":  1135,
+"endColumn":  83
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 2nd argument.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"region":  {
+"startLine":  1174,
+"startColumn":  251,
+"endLine":  1174,
+"endColumn":  278
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"region":  {
+"startLine":  1174,
+"startColumn":  217,
+"endLine":  1174,
+"endColumn":  244
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 2nd argument.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"region":  {
+"startLine":  1174,
+"startColumn":  298,
+"endLine":  1174,
+"endColumn":  325
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"region":  {
+"startLine":  1174,
+"startColumn":  217,
+"endLine":  1174,
+"endColumn":  244
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 2nd argument.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"region":  {
+"startLine":  1202,
+"startColumn":  162,
+"endLine":  1202,
+"endColumn":  189
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"region":  {
+"startLine":  1202,
+"startColumn":  128,
+"endLine":  1202,
+"endColumn":  155
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 2nd argument.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"region":  {
+"startLine":  1202,
+"startColumn":  201,
+"endLine":  1202,
+"endColumn":  228
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"region":  {
+"startLine":  1202,
+"startColumn":  128,
+"endLine":  1202,
+"endColumn":  155
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 2nd argument.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"region":  {
+"startLine":  1203,
+"startColumn":  163,
+"endLine":  1203,
+"endColumn":  190
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"region":  {
+"startLine":  1203,
+"startColumn":  129,
+"endLine":  1203,
+"endColumn":  156
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 2nd argument.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"region":  {
+"startLine":  1203,
+"startColumn":  202,
+"endLine":  1203,
+"endColumn":  229
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"region":  {
+"startLine":  1203,
+"startColumn":  129,
+"endLine":  1203,
+"endColumn":  156
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 2nd argument.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"region":  {
+"startLine":  1209,
+"startColumn":  163,
+"endLine":  1209,
+"endColumn":  190
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"region":  {
+"startLine":  1209,
+"startColumn":  129,
+"endLine":  1209,
+"endColumn":  156
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 2nd argument.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"region":  {
+"startLine":  1209,
+"startColumn":  203,
+"endLine":  1209,
+"endColumn":  230
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"region":  {
+"startLine":  1209,
+"startColumn":  129,
+"endLine":  1209,
+"endColumn":  156
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 2nd argument.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"region":  {
+"startLine":  1216,
+"startColumn":  165,
+"endLine":  1216,
+"endColumn":  192
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"region":  {
+"startLine":  1216,
+"startColumn":  131,
+"endLine":  1216,
+"endColumn":  158
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 2nd argument.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"region":  {
+"startLine":  1216,
+"startColumn":  211,
+"endLine":  1216,
+"endColumn":  238
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"region":  {
+"startLine":  1216,
+"startColumn":  131,
+"endLine":  1216,
+"endColumn":  158
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 2nd argument.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"region":  {
+"startLine":  1222,
+"startColumn":  163,
+"endLine":  1222,
+"endColumn":  190
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"region":  {
+"startLine":  1222,
+"startColumn":  129,
+"endLine":  1222,
+"endColumn":  156
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 2nd argument.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"region":  {
+"startLine":  1222,
+"startColumn":  209,
+"endLine":  1222,
+"endColumn":  236
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"region":  {
+"startLine":  1222,
+"startColumn":  129,
+"endLine":  1222,
+"endColumn":  156
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 2nd argument.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"region":  {
+"startLine":  242,
+"startColumn":  135,
+"endLine":  242,
+"endColumn":  162
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"region":  {
+"startLine":  242,
+"startColumn":  92,
+"endLine":  242,
+"endColumn":  119
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 2nd argument.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"region":  {
+"startLine":  304,
+"startColumn":  131,
+"endLine":  304,
+"endColumn":  158
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"region":  {
+"startLine":  304,
+"startColumn":  88,
+"endLine":  304,
+"endColumn":  115
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 2nd argument.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"region":  {
+"startLine":  382,
+"startColumn":  207,
+"endLine":  382,
+"endColumn":  234
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"region":  {
+"startLine":  382,
+"startColumn":  164,
+"endLine":  382,
+"endColumn":  191
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 2nd argument.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"region":  {
+"startLine":  382,
+"startColumn":  254,
+"endLine":  382,
+"endColumn":  281
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"region":  {
+"startLine":  382,
+"startColumn":  164,
+"endLine":  382,
+"endColumn":  191
+}
+}
+]
+},
+{
+"id":  "S4142",
+"message":  "Verify that this is the intended value; it is the same as the 2nd argument.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"region":  {
+"startLine":  950,
+"startColumn":  116,
+"endLine":  950,
+"endColumn":  143
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore\TVScraper\clsScrapeTVDB.vb",
+"region":  {
+"startLine":  950,
+"startColumn":  82,
+"endLine":  950,
+"endColumn":  109
+}
+}
+]
+}
+]
+}
