@@ -90,7 +90,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             private class CsLoopwalker : CSharpSyntaxWalker
             {
-                private LoopWalker walker;
+                private readonly LoopWalker walker;
 
                 public CsLoopwalker(LoopWalker loopWalker)
                 {

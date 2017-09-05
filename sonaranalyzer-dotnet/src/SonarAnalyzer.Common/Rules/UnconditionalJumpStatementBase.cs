@@ -73,13 +73,11 @@ namespace SonarAnalyzer.Rules
         protected abstract ISet<TLanguageKindEnum> StatementsThatCanThrow { get; }
         protected abstract ISet<TLanguageKindEnum> LambdaSyntaxes { get; }
 
-        private ISet<TLanguageKindEnum> lambdaOrLoopStatements;
-        private ISet<TLanguageKindEnum> loopStatements;
+        private readonly ISet<TLanguageKindEnum> lambdaOrLoopStatements;
 
-        public LoopWalkerBase(SyntaxNodeAnalysisContext context, ISet<TLanguageKindEnum> loopStatements)
+        protected LoopWalkerBase(SyntaxNodeAnalysisContext context, ISet<TLanguageKindEnum> loopStatements)
         {
             rootExpression = context.Node;
-            this.loopStatements = loopStatements;
             lambdaOrLoopStatements = LambdaSyntaxes.Union(loopStatements).ToHashSet();
         }
 

@@ -103,7 +103,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
             private class VbLoopwalker : VisualBasicSyntaxWalker
             {
-                private LoopWalker walker;
+                private readonly LoopWalker walker;
 
                 public VbLoopwalker(LoopWalker loopWalker)
                 {
