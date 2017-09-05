@@ -7,32 +7,31 @@ method useless.</p>
 <p>For these reasons, unconditional jump statements should never be used except for the final <code>return</code> in a function or method.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-int i;
-for (i = 0; i &lt; 10; ++i)
-{
-    printf("i is %d", i);
-    break;  // loop only executes once
-}
+Dim length As Integer
 
-for (i = 0; i &lt; 10; ++i)
-{
-    continue;
-    printf("i is %d", i);  // this is never executed
-}
+For i As Integer = 0 To length - 1
+    foo(i)
+    Exit For ' loop only executes once
+Next
 
-for (i = 0; i &lt; 10; ++i)
-{
-    printf("i is %d", i);
-    continue;  // this is meaningless; the loop would continue anyway
-}
+For i As Integer = 0 To length - 1
+    Continue For
+    foo(i) ' this is never executed
+Next
+
+For i As Integer = 0 To length - 1
+    foo(i)
+    Continue For ' this is meaningless; the loop would continue anyway
+Next
+
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-int i;
-for (i = 0; i &lt; 10; ++i)
-{
-    printf("i is %d", i);
-}
+Dim length As Integer
+
+For i As Integer = 0 To length - 1
+    foo(i)
+Next
 </pre>
 <h2>See</h2>
 <ul>
