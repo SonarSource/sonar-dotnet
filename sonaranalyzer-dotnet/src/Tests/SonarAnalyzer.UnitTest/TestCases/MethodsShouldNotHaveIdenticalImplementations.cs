@@ -40,6 +40,20 @@ namespace Tests.Diagnostics
         }
 
 
+        int DiffBySignature1(int arg1)
+//          ^^^^^^^^^^^^^^^^ Secondary
+        {
+            Console.WriteLine(arg1);
+            return arg1;
+        }
+
+        string DiffBySignature2(string arg1) // Noncompliant {{Update this method so that its implementation is not identical to 'DiffBySignature1'.}}
+//             ^^^^^^^^^^^^^^^^
+        {
+            Console.WriteLine(arg1);
+            return arg1;
+        }
+
 
         void Bar1()
         {

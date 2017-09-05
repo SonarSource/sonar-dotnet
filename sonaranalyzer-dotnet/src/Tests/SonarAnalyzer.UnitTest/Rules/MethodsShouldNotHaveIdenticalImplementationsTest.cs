@@ -33,5 +33,14 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzer(@"TestCases\MethodsShouldNotHaveIdenticalImplementations.cs",
                 new MethodsShouldNotHaveIdenticalImplementations());
         }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void MethodsShouldNotHaveIdenticalImplementations_VB()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\MethodsShouldNotHaveIdenticalImplementations.vb",
+                new SonarAnalyzer.Rules.VisualBasic.MethodsShouldNotHaveIdenticalImplementations());
+        }
     }
 }
+

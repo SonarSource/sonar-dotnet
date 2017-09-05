@@ -18,71 +18,47 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
-using System.Collections.Immutable;
-using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class MethodsShouldNotHaveIdenticalImplementations : SonarDiagnosticAnalyzer
+    public sealed class MethodsShouldNotHaveIdenticalImplementations
+        : MethodsShouldNotHaveIdenticalImplementationsBase<MethodDeclarationSyntax, SyntaxKind>
     {
-        internal const string DiagnosticId = "S4144";
-        private const string MessageFormat = "Update this method so that its implementation is not identical to '{0}'.";
-
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+        protected override DiagnosticDescriptor Rule => rule;
+        protected sealed override Helpers.GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.CSharp.GeneratedCodeRecognizer.Instance;
 
-        protected override void Initialize(SonarAnalysisContext context)
+        protected override SyntaxKind ClassDeclarationSyntaxKind => SyntaxKind.ClassDeclaration;
+
+        protected override IEnumerable<MethodDeclarationSyntax> GetMethodDeclarations(SyntaxNode node)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
-                {
-                    var classDeclaration = (ClassDeclarationSyntax)c.Node;
-                    var methods = classDeclaration.Members.OfType<MethodDeclarationSyntax>().ToList();
-
-                    var alreadyHandledMethods = new HashSet<MethodDeclarationSyntax>();
-
-                    foreach (var method in methods)
-                    {
-                        if (alreadyHandledMethods.Contains(method))
-                        {
-                            continue;
-                        }
-
-                        alreadyHandledMethods.Add(method);
-
-                        var duplicates = methods.Except(alreadyHandledMethods)
-                            .Where(m => AreDuplicates(method, m))
-                            .ToList();
-
-                        alreadyHandledMethods.UnionWith(duplicates);
-
-                        foreach (var duplicate in duplicates)
-                        {
-                            c.ReportDiagnostic(Diagnostic.Create(rule, duplicate.Identifier.GetLocation(),
-                                additionalLocations: new[] { method.Identifier.GetLocation() },
-                                messageArgs: method.Identifier.ValueText));
-                        }
-                    }
-                }, SyntaxKind.ClassDeclaration);
+            var classDeclaration = (ClassDeclarationSyntax)node;
+            return classDeclaration.Members.OfType<MethodDeclarationSyntax>().ToList();
         }
 
-        private bool AreDuplicates(MethodDeclarationSyntax firstMethod, MethodDeclarationSyntax secondMethod)
+        protected override bool AreDuplicates(MethodDeclarationSyntax firstMethod, MethodDeclarationSyntax secondMethod)
         {
             return firstMethod.Body != null &&
                 secondMethod.Body != null &&
                 firstMethod.Body.Statements.Count >= 2 &&
                 firstMethod.Identifier.ValueText != secondMethod.Identifier.ValueText &&
                 firstMethod.Body.IsEquivalentTo(secondMethod.Body, false);
+        }
+
+        protected override SyntaxToken GetMethodIdentifier(MethodDeclarationSyntax method)
+        {
+            return method.Identifier;
         }
     }
 }
