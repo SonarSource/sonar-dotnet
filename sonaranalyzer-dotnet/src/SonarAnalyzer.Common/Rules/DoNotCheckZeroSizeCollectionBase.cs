@@ -19,6 +19,7 @@
  */
 
 using System;
+using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Helpers;
@@ -37,6 +38,7 @@ namespace SonarAnalyzer.Rules
             "The {0} of '{1}' is always '>=0', so fix this test to get the real expected behavior.";
 
         protected abstract DiagnosticDescriptor Rule { get; }
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
         protected abstract TLanguageKindEnum GreaterThanOrEqualExpression { get; }
         protected abstract TLanguageKindEnum LessThanOrEqualExpression { get; }
