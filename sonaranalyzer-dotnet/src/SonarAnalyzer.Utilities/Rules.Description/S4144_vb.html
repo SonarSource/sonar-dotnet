@@ -2,28 +2,33 @@
 be confusing to maintainers. In the latter case, one implementation should invoke the other.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-private final static String CODE = "bounteous";
+Private Const CODE As String = "bounteous"
+Private callCount As Integer = 0
 
-public String getCode() {
-  return CODE;
-}
+Public Function GetCode() As String
+  callCount = callCount + 1
+  Return CODE
+End Function
 
-public String getName() {  // Noncompliant
-  return CODE;
-}
+Public Function GetName() As String ' Noncompliant
+  callCount = callCount + 1
+  Return CODE
+End Function
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-private final static String CODE = "bounteous";
+Private Const CODE As String = "bounteous"
+Private callCount As Integer = 0
 
-public String getCode() {
-  return CODE;
-}
+Public Function GetCode() As String
+  callCount = callCount + 1
+  Return CODE
+End Function
 
-public String getName() {
-  return getCode();
-}
+Public Function GetName() As String
+  Return GetCode()
+End Function
 </pre>
 <h2>Exceptions</h2>
-<p>Methods that are not accessors (getters and setters), with fewer than 2 statements are ignored.</p>
+<p>Empty methods, methods with only one line of code and methods with the same name (overload) are ignored.</p>
 

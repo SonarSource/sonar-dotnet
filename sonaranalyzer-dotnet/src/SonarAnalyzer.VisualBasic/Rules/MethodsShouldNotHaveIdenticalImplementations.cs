@@ -36,8 +36,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
     public sealed class MethodsShouldNotHaveIdenticalImplementations
         : MethodsShouldNotHaveIdenticalImplementationsBase<MethodBlockSyntax, SyntaxKind>
     {
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         protected override DiagnosticDescriptor Rule => rule;
         protected sealed override Helpers.GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.VisualBasic.GeneratedCodeRecognizer.Instance;
 
@@ -51,15 +50,9 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         protected override bool AreDuplicates(MethodBlockSyntax firstMethod, MethodBlockSyntax secondMethod)
         {
-            bool same = firstMethod.Statements.Count >= 2 &&
-                firstMethod.SubOrFunctionStatement.Identifier.ValueText != secondMethod.SubOrFunctionStatement.Identifier.ValueText;
-
-            if (same)
-            {
-                same = EquivalenceChecker.AreEquivalent(firstMethod.Statements, secondMethod.Statements);
-            }
-
-            return same;
+            return firstMethod.Statements.Count >= 2 &&
+                firstMethod.SubOrFunctionStatement.Identifier.ValueText != secondMethod.SubOrFunctionStatement.Identifier.ValueText &&
+                EquivalenceChecker.AreEquivalent(firstMethod.Statements, secondMethod.Statements);
         }
 
         protected override SyntaxToken GetMethodIdentifier(MethodBlockSyntax method)
