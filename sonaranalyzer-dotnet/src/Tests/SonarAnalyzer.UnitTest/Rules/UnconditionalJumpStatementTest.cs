@@ -33,5 +33,14 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzer(@"TestCases\UnconditionalJumpStatement.cs",
                 new UnconditionalJumpStatement());
         }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void UnconditionalJumpStatement_VB()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\UnconditionalJumpStatement.vb",
+                new SonarAnalyzer.Rules.VisualBasic.UnconditionalJumpStatement());
+        }
     }
 }
+

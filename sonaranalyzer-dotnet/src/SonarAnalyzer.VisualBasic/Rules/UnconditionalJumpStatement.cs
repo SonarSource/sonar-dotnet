@@ -18,39 +18,43 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using Microsoft.CodeAnalysis.VisualBasic;
+using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.Helpers.VisualBasic;
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.Rules.VisualBasic
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
+    [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
     public sealed class UnconditionalJumpStatement : UnconditionalJumpStatementBase<StatementSyntax, SyntaxKind>
     {
         private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+                    DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
         protected override DiagnosticDescriptor Rule => rule;
-        protected sealed override Helpers.GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.CSharp.GeneratedCodeRecognizer.Instance;
+        protected sealed override Helpers.GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.VisualBasic.GeneratedCodeRecognizer.Instance;
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
         protected override ISet<SyntaxKind> LoopStatements { get; }
             = new HashSet<SyntaxKind>
             {
-                SyntaxKind.ForEachStatement,
-                SyntaxKind.ForStatement,
-                SyntaxKind.WhileStatement,
-                SyntaxKind.DoStatement
+                SyntaxKind.ForBlock,
+                SyntaxKind.ForEachBlock,
+                SyntaxKind.WhileBlock,
+                SyntaxKind.DoLoopWhileBlock,
+                SyntaxKind.DoLoopUntilBlock,
+                SyntaxKind.SimpleDoLoopBlock
             };
 
         protected override string GetKeywordText(StatementSyntax statement) =>
-            (statement as BreakStatementSyntax)?.BreakKeyword.ToString() ??
+            (statement as ExitStatementSyntax)?.ExitKeyword.ToString() ??
             (statement as ContinueStatementSyntax)?.ContinueKeyword.ToString() ??
             (statement as ReturnStatementSyntax)?.ReturnKeyword.ToString() ??
             (statement as ThrowStatementSyntax)?.ThrowKeyword.ToString();
@@ -66,15 +70,24 @@ namespace SonarAnalyzer.Rules.CSharp
                                           SyntaxKind.ObjectCreationExpression);
 
             protected override ISet<SyntaxKind> LambdaSyntaxes { get; }
-                = new HashSet<SyntaxKind> {
-                    SyntaxKind.ParenthesizedLambdaExpression,
-                    SyntaxKind.SimpleLambdaExpression };
+                = new HashSet<SyntaxKind>
+                {
+                    SyntaxKind.FunctionLambdaHeader,
+                    SyntaxKind.MultiLineFunctionLambdaExpression,
+                    SyntaxKind.MultiLineSubLambdaExpression,
+                    SyntaxKind.SingleLineFunctionLambdaExpression,
+                    SyntaxKind.SingleLineSubLambdaExpression,
+                    SyntaxKind.SubLambdaHeader
+                };
 
             protected override ISet<SyntaxKind> ConditionalStatements { get; } = new HashSet<SyntaxKind>
             {
-                SyntaxKind.IfStatement,
-                SyntaxKind.SwitchStatement,
-                SyntaxKind.CatchClause
+                SyntaxKind.SingleLineIfStatement,
+                SyntaxKind.SingleLineIfPart,
+                SyntaxKind.MultiLineIfBlock,
+                SyntaxKind.CaseBlock,
+                SyntaxKind.CaseElseBlock,
+                SyntaxKind.CatchBlock
             };
 
             public LoopWalker(SyntaxNodeAnalysisContext context, ISet<SyntaxKind> loopStatements)
@@ -84,15 +97,15 @@ namespace SonarAnalyzer.Rules.CSharp
 
             public override void Visit()
             {
-                var csWalker = new CsLoopwalker(this);
-                csWalker.Visit(rootExpression);
+                var vbWalker = new VbLoopwalker(this);
+                vbWalker.Visit(rootExpression);
             }
 
-            private class CsLoopwalker : CSharpSyntaxWalker
+            private class VbLoopwalker : VisualBasicSyntaxWalker
             {
                 private readonly LoopWalker walker;
 
-                public CsLoopwalker(LoopWalker loopWalker)
+                public VbLoopwalker(LoopWalker loopWalker)
                 {
                     walker = loopWalker;
                 }
@@ -103,9 +116,9 @@ namespace SonarAnalyzer.Rules.CSharp
                     walker.StoreVisitData(node, walker.ConditionalContinues, walker.UnconditionalContinues);
                 }
 
-                public override void VisitBreakStatement(BreakStatementSyntax node)
+                public override void VisitExitStatement(ExitStatementSyntax node)
                 {
-                    base.VisitBreakStatement(node);
+                    base.VisitExitStatement(node);
                     walker.StoreVisitData(node, walker.ConditionalTerminates, walker.UnconditionalTerminates);
                 }
 
@@ -127,16 +140,16 @@ namespace SonarAnalyzer.Rules.CSharp
 
             protected override bool TryGetTryAncestorStatements(StatementSyntax node, List<SyntaxNode> ancestors, out IEnumerable<StatementSyntax> tryAncestorStatements)
             {
-                var tryAncestor = (TryStatementSyntax)ancestors.FirstOrDefault(n => n.IsKind(SyntaxKind.TryStatement));
+                var tryAncestor = (TryBlockSyntax)ancestors.FirstOrDefault(n => n.IsKind(SyntaxKind.TryBlock));
 
                 if (tryAncestor == null ||
-                    tryAncestor.Catches.Count == 0)
+                    tryAncestor.CatchBlocks.Count == 0)
                 {
                     tryAncestorStatements = null;
                     return false;
                 }
 
-                tryAncestorStatements = tryAncestor.Block.Statements;
+                tryAncestorStatements = tryAncestor.Statements;
                 return true;
             }
         }

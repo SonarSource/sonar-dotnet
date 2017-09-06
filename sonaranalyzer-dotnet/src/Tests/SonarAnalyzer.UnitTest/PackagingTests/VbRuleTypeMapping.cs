@@ -1748,7 +1748,7 @@ namespace SonarAnalyzer.UnitTest.PackagingTests
             //["1748"],
             //["1749"],
             //["1750"],
-            //["1751"],
+            ["1751"] = "CODE_SMELL",
             //["1752"],
             //["1753"],
             //["1754"],
@@ -5002,3 +5002,4 @@ namespace SonarAnalyzer.UnitTest.PackagingTests
         #endregion
     }
 }
+
