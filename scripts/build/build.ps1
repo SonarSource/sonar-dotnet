@@ -52,6 +52,11 @@ function Get-DotNetVersion() {
     return $versionProps.Project.PropertyGroup.MainVersion + "." + $versionProps.Project.PropertyGroup.BuildNumber
 }
 
+function Get-LeakPeriodVersion() {
+    [xml]$versionProps = Get-Content "${PSScriptRoot}\..\version\Version.props"
+    return $versionProps.Project.PropertyGroup.MainVersion
+}
+
 function Set-DotNetVersion() {
     Write-Header "Updating version in .Net files"
 
@@ -174,8 +179,9 @@ function Invoke-DotNetBuild() {
             /v:"latest"
     }
     elseif ($isMaster) {
+        $leakPeriodVersion = Get-LeakPeriodVersion
         Invoke-SonarBeginAnalysis `
-            /v:"master" `
+            /v:$leakPeriodVersion `
             /d:sonar.cs.vstest.reportsPaths="**\*.trx" `
             /d:sonar.cs.vscoveragexml.reportsPaths="**\*.coveragexml"
     }
