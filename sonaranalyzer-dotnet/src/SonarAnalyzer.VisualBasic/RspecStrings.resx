@@ -1791,6 +1791,33 @@
   <data name="S3385_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
   </data>
+  <data name="S3860_Category" xml:space="preserve">
+    <value>Sonar Code Smell</value>
+  </data>
+  <data name="S3860_Description" xml:space="preserve">
+    <value>Since Visual Studio 2010 SP1, the ByVal parameter modifier is implicitly applied, and therefore not required anymore. Removing it from your source code will improve readability.</value>
+  </data>
+  <data name="S3860_IsActivatedByDefault" xml:space="preserve">
+    <value>False</value>
+  </data>
+  <data name="S3860_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S3860_RemediationCost" xml:space="preserve">
+    <value>1min</value>
+  </data>
+  <data name="S3860_Severity" xml:space="preserve">
+    <value>Minor</value>
+  </data>
+  <data name="S3860_Tags" xml:space="preserve">
+    <value>clumsy</value>
+  </data>
+  <data name="S3860_Title" xml:space="preserve">
+    <value>"ByVal" should not be used</value>
+  </data>
+  <data name="S3860_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S3866_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>

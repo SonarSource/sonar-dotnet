@@ -1,0 +1,706 @@
+{
+"issues":  [
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\dlgCopyFiles.vb",
+"region":  {
+"startLine":  25,
+"startColumn":  37,
+"endLine":  25,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\dlgCopyFiles.vb",
+"region":  {
+"startLine":  25,
+"startColumn":  68,
+"endLine":  25,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\dlgCopyFiles.vb",
+"region":  {
+"startLine":  30,
+"startColumn":  33,
+"endLine":  30,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\dlgCopyFiles.vb",
+"region":  {
+"startLine":  30,
+"startColumn":  64,
+"endLine":  30,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\frmSettingsHolder.vb",
+"region":  {
+"startLine":  33,
+"startColumn":  39,
+"endLine":  33,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\frmSettingsHolder.vb",
+"region":  {
+"startLine":  41,
+"startColumn":  34,
+"endLine":  41,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\frmSettingsHolder.vb",
+"region":  {
+"startLine":  41,
+"startColumn":  65,
+"endLine":  41,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\frmSettingsHolder.vb",
+"region":  {
+"startLine":  50,
+"startColumn":  33,
+"endLine":  50,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\frmSettingsHolder.vb",
+"region":  {
+"startLine":  50,
+"startColumn":  64,
+"endLine":  50,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\frmSettingsHolder.vb",
+"region":  {
+"startLine":  61,
+"startColumn":  36,
+"endLine":  61,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\frmSettingsHolder.vb",
+"region":  {
+"startLine":  61,
+"startColumn":  67,
+"endLine":  61,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\frmSettingsHolder.vb",
+"region":  {
+"startLine":  70,
+"startColumn":  31,
+"endLine":  70,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\frmSettingsHolder.vb",
+"region":  {
+"startLine":  70,
+"startColumn":  62,
+"endLine":  70,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\frmSettingsHolder.vb",
+"region":  {
+"startLine":  76,
+"startColumn":  42,
+"endLine":  76,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\frmSettingsHolder.vb",
+"region":  {
+"startLine":  76,
+"startColumn":  73,
+"endLine":  76,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\frmSettingsHolder.vb",
+"region":  {
+"startLine":  88,
+"startColumn":  48,
+"endLine":  88,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\frmSettingsHolder.vb",
+"region":  {
+"startLine":  88,
+"startColumn":  79,
+"endLine":  88,
+"endColumn":  84
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\frmSettingsHolder.vb",
+"region":  {
+"startLine":  103,
+"startColumn":  38,
+"endLine":  103,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\frmSettingsHolder.vb",
+"region":  {
+"startLine":  103,
+"startColumn":  69,
+"endLine":  103,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\frmSettingsHolder.vb",
+"region":  {
+"startLine":  107,
+"startColumn":  38,
+"endLine":  107,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\frmSettingsHolder.vb",
+"region":  {
+"startLine":  107,
+"startColumn":  69,
+"endLine":  107,
+"endColumn":  74
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\frmSettingsHolder.vb",
+"region":  {
+"startLine":  126,
+"startColumn":  35,
+"endLine":  126,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\frmSettingsHolder.vb",
+"region":  {
+"startLine":  126,
+"startColumn":  66,
+"endLine":  126,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"region":  {
+"startLine":  52,
+"startColumn":  31,
+"endLine":  52,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"region":  {
+"startLine":  54,
+"startColumn":  39,
+"endLine":  54,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"region":  {
+"startLine":  54,
+"startColumn":  61,
+"endLine":  54,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"region":  {
+"startLine":  54,
+"startColumn":  85,
+"endLine":  54,
+"endColumn":  90
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"region":  {
+"startLine":  72,
+"startColumn":  13,
+"endLine":  72,
+"endColumn":  18
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"region":  {
+"startLine":  99,
+"startColumn":  47,
+"endLine":  99,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"region":  {
+"startLine":  99,
+"startColumn":  74,
+"endLine":  99,
+"endColumn":  79
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"region":  {
+"startLine":  128,
+"startColumn":  32,
+"endLine":  128,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"region":  {
+"startLine":  143,
+"startColumn":  40,
+"endLine":  143,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"region":  {
+"startLine":  143,
+"startColumn":  64,
+"endLine":  143,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"region":  {
+"startLine":  149,
+"startColumn":  23,
+"endLine":  149,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"region":  {
+"startLine":  149,
+"startColumn":  44,
+"endLine":  149,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"region":  {
+"startLine":  149,
+"startColumn":  74,
+"endLine":  149,
+"endColumn":  79
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"region":  {
+"startLine":  165,
+"startColumn":  23,
+"endLine":  165,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"region":  {
+"startLine":  165,
+"startColumn":  44,
+"endLine":  165,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"region":  {
+"startLine":  165,
+"startColumn":  74,
+"endLine":  165,
+"endColumn":  79
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"region":  {
+"startLine":  207,
+"startColumn":  41,
+"endLine":  207,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"region":  {
+"startLine":  207,
+"startColumn":  72,
+"endLine":  207,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"region":  {
+"startLine":  253,
+"startColumn":  45,
+"endLine":  253,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"region":  {
+"startLine":  261,
+"startColumn":  11,
+"endLine":  261,
+"endColumn":  16
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"region":  {
+"startLine":  261,
+"startColumn":  42,
+"endLine":  261,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"region":  {
+"startLine":  293,
+"startColumn":  43,
+"endLine":  293,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"region":  {
+"startLine":  293,
+"startColumn":  74,
+"endLine":  293,
+"endColumn":  79
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"region":  {
+"startLine":  297,
+"startColumn":  43,
+"endLine":  297,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"region":  {
+"startLine":  297,
+"startColumn":  74,
+"endLine":  297,
+"endColumn":  79
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"region":  {
+"startLine":  301,
+"startColumn":  25,
+"endLine":  301,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"region":  {
+"startLine":  319,
+"startColumn":  26,
+"endLine":  319,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"region":  {
+"startLine":  336,
+"startColumn":  32,
+"endLine":  336,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"region":  {
+"startLine":  336,
+"startColumn":  63,
+"endLine":  336,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"region":  {
+"startLine":  336,
+"startColumn":  92,
+"endLine":  336,
+"endColumn":  97
+}
+}
+},
+{
+"id":  "S3860",
+"message":  "Remove this redundant 'ByVal' modifier.",
+"location":  {
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.MediaFileManager\Module.MediaFileManagerModule.vb",
+"region":  {
+"startLine":  415,
+"startColumn":  17,
+"endLine":  415,
+"endColumn":  22
+}
+}
+}
+]
+}
