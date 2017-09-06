@@ -33,5 +33,14 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzer(@"TestCases\UriShouldNotBeHardcoded.cs",
                 new UriShouldNotBeHardcoded());
         }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void UriShouldNotBeHardcoded_VB()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\UriShouldNotBeHardcoded.vb",
+                new SonarAnalyzer.Rules.VisualBasic.UriShouldNotBeHardcoded());
+        }
     }
 }
+
