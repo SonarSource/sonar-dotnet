@@ -248,7 +248,7 @@ function Invoke-JavaBuild() {
         Remove-Item Env:\CI_PRODUCT
     }
 
-    if ($isMaster -And -Not $isPullRequest) {
+    if ($isMaster -and -not $isPullRequest) {
         Write-Header "Building, deploying and analyzing SonarC#"
 
         $currentVersion = Get-MavenExpression "project.version"
@@ -265,7 +265,15 @@ function Invoke-JavaBuild() {
             -B -e -V
         Test-ExitCode "ERROR: Maven build deploy sonar FAILED."
     }
-    elseif ($env:IS_PULLREQUEST -eq "true" -and $githubToken -ne $null) {
+    elseif ($isMaintenanceBranch -and -not $isPullRequest) {
+        $env:MAVEN_OPTS = "-Xmx1536m -Xms128m"
+
+        & mvn deploy `
+            "-Pdeploy-sonarsource,release" `
+            -B -e -V
+        Test-ExitCode "ERROR: Maven deploy sonar FAILED."
+    }
+    elseif ($isPullRequest -and $githubToken -ne $null) {
         Write-Header "Building and analyzing SonarC#"
 
         # Do not deploy a SNAPSHOT version but the release version related to this build and PR
@@ -308,8 +316,10 @@ try {
     $binPath = "bin\Classic\${buildConfiguration}"
     $solutionName = "SonarAnalyzer.sln"
     $branchName = Get-BranchName
-    $isMaster = $branchName -Eq "master"
-    $isPullRequest = $githubIsPullRequest -Eq "true"
+    $isMaster = $branchName -eq "master"
+    # See https://xtranet.sonarsource.com/display/DEV/Release+Procedures for info about maintenance branches
+    $isMaintenanceBranch = $branchName -like 'branch-*'
+    $isPullRequest = $githubIsPullRequest -eq "true"
 
     Write-Host "Solution to build: $solutionName"
     Write-Host "Build configuration: $buildConfiguration"
@@ -330,7 +340,7 @@ try {
         Invoke-JavaBuild
     }
 
-    if ($isPullRequest -Or $isMaster) {
+    if ($isPullRequest -or $isMaster -or $isMaintenanceBranch) {
         Invoke-InLocation "${PSScriptRoot}\..\..\sonaranalyzer-dotnet" { Initialize-QaStep }
     }
 
