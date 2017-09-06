@@ -92,7 +92,7 @@ namespace Tests.Diagnostics
 //                        ^^^^^^^^^^^^^^^^^^^^^^^^^
 
             var nonCollection = new FooProperty();
-            result = nonCollection.Count() >= 0;
+            result = nonCollection.Count >= 0;
         }
 
         public void TestLengthProperty()
