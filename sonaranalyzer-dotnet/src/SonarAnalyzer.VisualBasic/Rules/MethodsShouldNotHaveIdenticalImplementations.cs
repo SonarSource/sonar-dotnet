@@ -18,46 +18,47 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
+using Microsoft.CodeAnalysis.VisualBasic;
+using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.Helpers.VisualBasic;
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.Rules.VisualBasic
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
+    [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
     public sealed class MethodsShouldNotHaveIdenticalImplementations
-        : MethodsShouldNotHaveIdenticalImplementationsBase<MethodDeclarationSyntax, SyntaxKind>
+        : MethodsShouldNotHaveIdenticalImplementationsBase<MethodBlockSyntax, SyntaxKind>
     {
         private static readonly DiagnosticDescriptor rule = DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         protected override DiagnosticDescriptor Rule => rule;
-        protected sealed override Helpers.GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.CSharp.GeneratedCodeRecognizer.Instance;
+        protected sealed override Helpers.GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.VisualBasic.GeneratedCodeRecognizer.Instance;
 
-        protected override SyntaxKind ClassDeclarationSyntaxKind => SyntaxKind.ClassDeclaration;
+        protected override SyntaxKind ClassDeclarationSyntaxKind => SyntaxKind.ClassBlock;
 
-        protected override IEnumerable<MethodDeclarationSyntax> GetMethodDeclarations(SyntaxNode node)
+        protected override IEnumerable<MethodBlockSyntax> GetMethodDeclarations(SyntaxNode node)
         {
-            var classDeclaration = (ClassDeclarationSyntax)node;
-            return classDeclaration.Members.OfType<MethodDeclarationSyntax>().ToList();
+            var classDeclaration = (ClassBlockSyntax)node;
+            return classDeclaration.Members.OfType<MethodBlockSyntax>().ToList();
         }
 
-        protected override bool AreDuplicates(MethodDeclarationSyntax firstMethod, MethodDeclarationSyntax secondMethod)
+        protected override bool AreDuplicates(MethodBlockSyntax firstMethod, MethodBlockSyntax secondMethod)
         {
-            return firstMethod.Body != null &&
-                secondMethod.Body != null &&
-                firstMethod.Body.Statements.Count >= 2 &&
-                firstMethod.Identifier.ValueText != secondMethod.Identifier.ValueText &&
-                firstMethod.Body.IsEquivalentTo(secondMethod.Body, false);
+            return firstMethod.Statements.Count >= 2 &&
+                firstMethod.SubOrFunctionStatement.Identifier.ValueText != secondMethod.SubOrFunctionStatement.Identifier.ValueText &&
+                EquivalenceChecker.AreEquivalent(firstMethod.Statements, secondMethod.Statements);
         }
 
-        protected override SyntaxToken GetMethodIdentifier(MethodDeclarationSyntax method)
+        protected override SyntaxToken GetMethodIdentifier(MethodBlockSyntax method)
         {
-            return method.Identifier;
+            return method.SubOrFunctionStatement.Identifier;
         }
+
     }
 }
