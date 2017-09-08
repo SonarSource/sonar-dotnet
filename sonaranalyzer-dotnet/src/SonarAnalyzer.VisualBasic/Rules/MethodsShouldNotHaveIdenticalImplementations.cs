@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
@@ -55,10 +54,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 EquivalenceChecker.AreEquivalent(firstMethod.Statements, secondMethod.Statements);
         }
 
-        protected override SyntaxToken GetMethodIdentifier(MethodBlockSyntax method)
-        {
-            return method.SubOrFunctionStatement.Identifier;
-        }
+        protected override SyntaxToken GetMethodIdentifier(MethodBlockSyntax method) => method.SubOrFunctionStatement.Identifier;
 
     }
 }
