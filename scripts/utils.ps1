@@ -46,8 +46,7 @@ function Write-Header([string]$text) {
 function Get-ExecutablePath([string]$name, [string]$directory, [string]$envVar) {
     $path = [environment]::GetEnvironmentVariable($envVar, "Process")
 
-    try
-    {
+    try{
         if (!$path) {
             if (!$directory) {
                 $path = Exec { & where.exe $name } | Select-Object -First 1
@@ -59,8 +58,7 @@ function Get-ExecutablePath([string]$name, [string]$directory, [string]$envVar) 
     }
     catch
     {
-        Write-Error "Failed to locate executable '${name}' on the path"
-        exit 1
+        throw "Failed to locate executable '${name}' on the path"
     }
 
 
@@ -70,8 +68,7 @@ function Get-ExecutablePath([string]$name, [string]$directory, [string]$envVar) 
         return $path
     }
 
-    Write-Host "Cannot find '${name}'"
-    exit 1
+    throw "Cannot find '${name}'"
 }
 
 function Expand-ZIPFile($source, $destination) {
