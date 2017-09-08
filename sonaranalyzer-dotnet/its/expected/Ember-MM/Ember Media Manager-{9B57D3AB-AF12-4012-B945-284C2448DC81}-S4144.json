@@ -1,0 +1,124 @@
+{
+"issues":  [
+{
+"id":  "S4144",
+"message":  "Update this method so that its implementation is not identical to 'chkNoDisplayFanart_CheckedChanged'.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  1486,
+"startColumn":  17,
+"endLine":  1486,
+"endColumn":  50
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  1476,
+"startColumn":  17,
+"endLine":  1476,
+"endColumn":  50
+}
+}
+]
+},
+{
+"id":  "S4144",
+"message":  "Update this method so that its implementation is not identical to 'chkEpProperCase_CheckedChanged'.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  1599,
+"startColumn":  17,
+"endLine":  1599,
+"endColumn":  45
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  1249,
+"startColumn":  17,
+"endLine":  1249,
+"endColumn":  47
+}
+}
+]
+},
+{
+"id":  "S4144",
+"message":  "Update this method so that its implementation is not identical to 'chkEpProperCase_CheckedChanged'.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  1952,
+"startColumn":  17,
+"endLine":  1952,
+"endColumn":  49
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  1249,
+"startColumn":  17,
+"endLine":  1249,
+"endColumn":  47
+}
+}
+]
+},
+{
+"id":  "S4144",
+"message":  "Update this method so that its implementation is not identical to 'chkVideoTSParent_CheckedChanged'.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  4550,
+"startColumn":  17,
+"endLine":  4550,
+"endColumn":  44
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  2062,
+"startColumn":  17,
+"endLine":  2062,
+"endColumn":  48
+}
+}
+]
+},
+{
+"id":  "S4144",
+"message":  "Update this method so that its implementation is not identical to 'chkVideoTSParent_CheckedChanged'.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  4559,
+"startColumn":  17,
+"endLine":  4559,
+"endColumn":  46
+}
+},
+{
+"uri":  "sources\Ember-MM\Ember%20Media%20Manager\dlgSettings.vb",
+"region":  {
+"startLine":  2062,
+"startColumn":  17,
+"endLine":  2062,
+"endColumn":  48
+}
+}
+]
+}
+]
+}

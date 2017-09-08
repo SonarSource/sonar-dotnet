@@ -1,0 +1,28 @@
+{
+"issues":  [
+{
+"id":  "S4144",
+"message":  "Update this method so that its implementation is not identical to 'rbLinux_CheckedChanged'.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\dlgXBMCHost.vb",
+"region":  {
+"startLine":  319,
+"startColumn":  17,
+"endLine":  319,
+"endColumn":  41
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\generic.EmberCore.XBMC\dlgXBMCHost.vb",
+"region":  {
+"startLine":  314,
+"startColumn":  17,
+"endLine":  314,
+"endColumn":  39
+}
+}
+]
+}
+]
+}
