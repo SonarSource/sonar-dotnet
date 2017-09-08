@@ -1,0 +1,76 @@
+{
+"issues":  [
+{
+"id":  "S4144",
+"message":  "Update this method so that its implementation is not identical to 'rbLarge_CheckedChanged'.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  764,
+"startColumn":  17,
+"endLine":  764,
+"endColumn":  40
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  759,
+"startColumn":  17,
+"endLine":  759,
+"endColumn":  39
+}
+}
+]
+},
+{
+"id":  "S4144",
+"message":  "Update this method so that its implementation is not identical to 'rbLarge_CheckedChanged'.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  769,
+"startColumn":  17,
+"endLine":  769,
+"endColumn":  39
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  759,
+"startColumn":  17,
+"endLine":  759,
+"endColumn":  39
+}
+}
+]
+},
+{
+"id":  "S4144",
+"message":  "Update this method so that its implementation is not identical to 'rbLarge_CheckedChanged'.",
+"location":  [
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  774,
+"startColumn":  17,
+"endLine":  774,
+"endColumn":  40
+}
+},
+{
+"uri":  "sources\Ember-MM\Addons\scraper.EmberCore.XML\dlgImgSelect.vb",
+"region":  {
+"startLine":  759,
+"startColumn":  17,
+"endLine":  759,
+"endColumn":  39
+}
+}
+]
+}
+]
+}
