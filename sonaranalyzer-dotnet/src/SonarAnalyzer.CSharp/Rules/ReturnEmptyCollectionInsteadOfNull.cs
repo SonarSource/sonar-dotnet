@@ -41,9 +41,11 @@ namespace SonarAnalyzer.Rules.CSharp
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        private static readonly ISet<KnownType> CollectionTypes = ImmutableHashSet.Create(
+        private static readonly ISet<KnownType> CollectionTypes = new HashSet<KnownType>
+        {
             KnownType.System_Collections_IEnumerable,
-            KnownType.System_Array);
+            KnownType.System_Array
+        };
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -115,7 +117,9 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             return methodBlock.DescendantNodes()
                 .OfType<ReturnStatementSyntax>()
-                .Where(returnStatement => returnStatement.Expression.IsKind(SyntaxKind.NullLiteralExpression));
+                .Where(returnStatement =>
+                    returnStatement.Expression.IsKind(SyntaxKind.NullLiteralExpression) &&
+                    returnStatement.FirstAncestorOrSelf<ParenthesizedLambdaExpressionSyntax>() == null);
         }
     }
 }
