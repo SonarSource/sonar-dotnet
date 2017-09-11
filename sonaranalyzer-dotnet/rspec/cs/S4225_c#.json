@@ -1,0 +1,13 @@
+{
+  "title": "Extension methods should not extend \"object\"",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "15min"
+  },
+  "tags": [
+    
+  ],
+  "defaultSeverity": "Minor"
+}
