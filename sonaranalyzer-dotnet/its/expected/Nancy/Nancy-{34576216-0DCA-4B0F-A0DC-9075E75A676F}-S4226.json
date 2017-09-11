@@ -1,0 +1,446 @@
+{
+"issues":  [
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the type itself.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Configuration\INancyEnvironmentExtensions.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  28,
+"endLine":  16,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the type itself.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Configuration\INancyEnvironmentExtensions.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  25,
+"endLine":  27,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the type itself.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Configuration\INancyEnvironmentExtensions.cs",
+"region":  {
+"startLine":  39,
+"startColumn":  25,
+"endLine":  39,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the type itself.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Configuration\INancyEnvironmentExtensions.cs",
+"region":  {
+"startLine":  52,
+"startColumn":  25,
+"endLine":  52,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the type itself.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Configuration\INancyEnvironmentExtensions.cs",
+"region":  {
+"startLine":  67,
+"startColumn":  25,
+"endLine":  67,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the type itself.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Conventions\StaticContentHelper.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  28,
+"endLine":  22,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the type itself.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\FormatterExtensions.cs",
+"region":  {
+"startLine":  25,
+"startColumn":  32,
+"endLine":  25,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the type itself.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\FormatterExtensions.cs",
+"region":  {
+"startLine":  37,
+"startColumn":  32,
+"endLine":  37,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the type itself.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\FormatterExtensions.cs",
+"region":  {
+"startLine":  51,
+"startColumn":  32,
+"endLine":  51,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the type itself.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\FormatterExtensions.cs",
+"region":  {
+"startLine":  64,
+"startColumn":  32,
+"endLine":  64,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the type itself.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\FormatterExtensions.cs",
+"region":  {
+"startLine":  76,
+"startColumn":  32,
+"endLine":  76,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the type itself.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\FormatterExtensions.cs",
+"region":  {
+"startLine":  86,
+"startColumn":  32,
+"endLine":  86,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the type itself.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\FormatterExtensions.cs",
+"region":  {
+"startLine":  99,
+"startColumn":  32,
+"endLine":  99,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the type itself.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\FormatterExtensions.cs",
+"region":  {
+"startLine":  115,
+"startColumn":  32,
+"endLine":  115,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the type itself.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\FormatterExtensions.cs",
+"region":  {
+"startLine":  128,
+"startColumn":  32,
+"endLine":  128,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the type itself.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\FormatterExtensions.cs",
+"region":  {
+"startLine":  142,
+"startColumn":  32,
+"endLine":  142,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the type itself.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\FormatterExtensions.cs",
+"region":  {
+"startLine":  154,
+"startColumn":  32,
+"endLine":  154,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the type itself.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\NancyEngineExtensions.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  42,
+"endLine":  14,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the type itself.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Owin\NancyOptionsExtensions.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  28,
+"endLine":  16,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the type itself.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ResponseExtensions.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  32,
+"endLine":  22,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the type itself.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ResponseExtensions.cs",
+"region":  {
+"startLine":  51,
+"startColumn":  32,
+"endLine":  51,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the type itself.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ResponseExtensions.cs",
+"region":  {
+"startLine":  64,
+"startColumn":  32,
+"endLine":  64,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the type itself.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ResponseExtensions.cs",
+"region":  {
+"startLine":  79,
+"startColumn":  32,
+"endLine":  79,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the type itself.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ResponseExtensions.cs",
+"region":  {
+"startLine":  90,
+"startColumn":  32,
+"endLine":  90,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the type itself.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ResponseExtensions.cs",
+"region":  {
+"startLine":  103,
+"startColumn":  32,
+"endLine":  103,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the type itself.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ResponseExtensions.cs",
+"region":  {
+"startLine":  117,
+"startColumn":  32,
+"endLine":  117,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the type itself.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ResponseExtensions.cs",
+"region":  {
+"startLine":  131,
+"startColumn":  32,
+"endLine":  131,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the type itself.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ResponseExtensions.cs",
+"region":  {
+"startLine":  152,
+"startColumn":  32,
+"endLine":  152,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the type itself.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ResponseExtensions.cs",
+"region":  {
+"startLine":  164,
+"startColumn":  32,
+"endLine":  164,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the type itself.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ResponseExtensions.cs",
+"region":  {
+"startLine":  176,
+"startColumn":  32,
+"endLine":  176,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the type itself.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\Trie\NodeDataExtensions.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  35,
+"endLine":  16,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the type itself.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Security\CsrfTokenExtensions.cs",
+"region":  {
+"startLine":  19,
+"startColumn":  30,
+"endLine":  19,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the type itself.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Security\CsrfTokenExtensions.cs",
+"region":  {
+"startLine":  32,
+"startColumn":  28,
+"endLine":  32,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the type itself.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Security\CsrfTokenExtensions.cs",
+"region":  {
+"startLine":  41,
+"startColumn":  28,
+"endLine":  41,
+"endColumn":  45
+}
+}
+}
+]
+}

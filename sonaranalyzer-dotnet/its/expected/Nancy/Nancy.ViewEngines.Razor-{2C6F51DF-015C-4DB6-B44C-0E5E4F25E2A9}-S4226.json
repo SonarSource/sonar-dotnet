@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4226",
+"message":  "Either move this extension to another namespace or move the method inside the type itself.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\HtmlHelpersExtensions.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  35,
+"endLine":  15,
+"endColumn":  53
+}
+}
+}
+]
+}

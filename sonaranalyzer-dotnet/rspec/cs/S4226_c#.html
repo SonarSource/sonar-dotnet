@@ -1,0 +1,39 @@
+<p>It makes little sense to create an extension method when it is possible to just add that method to the type itself.</p>
+<p>This rule raises an issue when an extension is declared in the same namespace as the type it is extending.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+using System;
+
+namespace MyLibrary
+{
+    public class Foo
+    {
+        // ...
+    }
+
+    public static MyExtensions
+    {
+        public static void Bar(this Foo a) // Noncompliant
+        {
+            // ...
+        }
+    }
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+using System;
+
+namespace MyLibrary
+{
+    public class Foo
+    {
+        // ...
+        public void Bar()
+        {
+            // ...
+        }
+    }
+}
+</pre>
+
