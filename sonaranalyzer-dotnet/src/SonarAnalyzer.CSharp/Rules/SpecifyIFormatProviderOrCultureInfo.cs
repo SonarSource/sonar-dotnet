@@ -99,3 +99,4 @@ namespace SonarAnalyzer.Rules.CSharp
         }
     }
 }
+
