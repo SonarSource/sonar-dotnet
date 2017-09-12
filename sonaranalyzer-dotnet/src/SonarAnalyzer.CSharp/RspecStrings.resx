@@ -8004,6 +8004,33 @@
   <data name="S4158_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
   </data>
+  <data name="S4225_Category" xml:space="preserve">
+    <value>Sonar Code Smell</value>
+  </data>
+  <data name="S4225_Description" xml:space="preserve">
+    <value>Creating an extension method that extends object is not recommended because it makes the method available on every type. Extensions should be applied at the most specialized level possible, and that is very unlikely to be object.</value>
+  </data>
+  <data name="S4225_IsActivatedByDefault" xml:space="preserve">
+    <value>False</value>
+  </data>
+  <data name="S4225_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S4225_RemediationCost" xml:space="preserve">
+    <value>15min</value>
+  </data>
+  <data name="S4225_Severity" xml:space="preserve">
+    <value>Minor</value>
+  </data>
+  <data name="S4225_Tags" xml:space="preserve">
+    <value />
+  </data>
+  <data name="S4225_Title" xml:space="preserve">
+    <value>Extension methods should not extend "object"</value>
+  </data>
+  <data name="S4225_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S818_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
