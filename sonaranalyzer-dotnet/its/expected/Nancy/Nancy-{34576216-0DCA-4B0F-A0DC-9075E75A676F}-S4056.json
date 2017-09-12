@@ -2136,19 +2136,6 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\Nancy\src\Nancy\Response.cs",
-"region":  {
-"startLine":  171,
-"startColumn":  58,
-"endLine":  171,
-"endColumn":  84
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
 "uri":  "sources\Nancy\src\Nancy\ResponseExtensions.cs",
 "region":  {
 "startLine":  203,
@@ -2688,19 +2675,6 @@
 "startColumn":  17,
 "endLine":  73,
 "endColumn":  39
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\Security\CsrfValidationException.cs",
-"region":  {
-"startLine":  10,
-"startColumn":  20,
-"endLine":  10,
-"endColumn":  37
 }
 }
 },

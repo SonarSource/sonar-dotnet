@@ -771,19 +771,6 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\ForkJoinDispatcher.cs",
-"region":  {
-"startLine":  29,
-"startColumn":  98,
-"endLine":  29,
-"endColumn":  130
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
 "uri":  "sources\akka.net\src\core\Akka\Dispatch\Mailbox.cs",
 "region":  {
 "startLine":  27,
@@ -810,38 +797,12 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\SingleThreadDispatcher.cs",
-"region":  {
-"startLine":  39,
-"startColumn":  25,
-"endLine":  39,
-"endColumn":  57
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
 "uri":  "sources\akka.net\src\core\Akka\Dispatch\ThreadPoolBuilder.cs",
 "region":  {
 "startLine":  31,
 "startColumn":  20,
 "endLine":  31,
 "endColumn":  125
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\ThreadPoolBuilder.cs",
-"region":  {
-"startLine":  31,
-"startColumn":  47,
-"endLine":  31,
-"endColumn":  79
 }
 }
 },
@@ -907,19 +868,6 @@
 "startColumn":  28,
 "endLine":  54,
 "endColumn":  118
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka\Event\Error.cs",
-"region":  {
-"startLine":  53,
-"startColumn":  17,
-"endLine":  53,
-"endColumn":  38
 }
 }
 },
@@ -1037,19 +985,6 @@
 "startColumn":  20,
 "endLine":  70,
 "endColumn":  213
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka\Event\LogEvent.cs",
-"region":  {
-"startLine":  70,
-"startColumn":  69,
-"endLine":  70,
-"endColumn":  90
 }
 }
 },
