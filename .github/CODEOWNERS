@@ -1,0 +1,7 @@
+# Automatically request reviews when a pull request changes any owned files
+# More information:
+# https://github.com/blog/2392-introducing-code-owners
+# https://help.github.com/articles/about-codeowners/
+
+# These owners will be the default owners for everything in the repo.
+* @SonarSource/dotnet @evangelink @valhristov @michalb-sonar @duncanp-sonar
