@@ -62,5 +62,15 @@ namespace Tests.Diagnostics
         }
 
         int Age { get; private set; }
+
+        // See https://github.com/SonarSource/sonar-csharp/issues/761
+        public List<int> Method()
+        {
+            Func<int?> aFunc = () =>
+            {
+                return null; // Compliant because we return from a func
+            };
+            return new List<int>();
+        }
     }
 }
