@@ -8031,6 +8031,33 @@
   <data name="S4225_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
   </data>
+  <data name="S4226_Category" xml:space="preserve">
+    <value>Sonar Code Smell</value>
+  </data>
+  <data name="S4226_Description" xml:space="preserve">
+    <value>It makes little sense to create an extension method when it is possible to just add that method to the type itself.</value>
+  </data>
+  <data name="S4226_IsActivatedByDefault" xml:space="preserve">
+    <value>False</value>
+  </data>
+  <data name="S4226_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S4226_RemediationCost" xml:space="preserve">
+    <value>10min</value>
+  </data>
+  <data name="S4226_Severity" xml:space="preserve">
+    <value>Minor</value>
+  </data>
+  <data name="S4226_Tags" xml:space="preserve">
+    <value>confusing</value>
+  </data>
+  <data name="S4226_Title" xml:space="preserve">
+    <value>Extensions should be in separate namespaces</value>
+  </data>
+  <data name="S4226_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S818_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
