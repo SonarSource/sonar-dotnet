@@ -74,6 +74,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             return semanticModel.GetMemberGroup(expression)
                 .OfType<IMethodSymbol>()
+                .Where(m => !IsObsolete(m))
                 .Any(HasAnyCheckedTypeParameter);
         }
 
@@ -87,7 +88,12 @@ namespace SonarAnalyzer.Rules.CSharp
                 !HasAnyCheckedTypeParameter(methodSymbol);
         }
 
-        private static bool HasAnyCheckedTypeParameter(IMethodSymbol method)
+        private static bool IsObsolete(ISymbol method)
+        {
+            return method.GetAttributes().Any(a => a.AttributeClass.Is(KnownType.System_ObsoleteAttribute));
+        }
+
+        private static bool HasAnyCheckedTypeParameter(ISymbol method)
         {
             return method.GetParameters().Any(parameter => parameter.Type.IsAny(checkedTypes));
         }
