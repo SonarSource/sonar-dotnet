@@ -19,7 +19,7 @@
  */
 
 using System;
-using SonarAnalyzer.SymbolicExecution.CFG;
+using SonarAnalyzer.SymbolicExecution.ControlFlowGraph;
 
 namespace SonarAnalyzer.SymbolicExecution
 {

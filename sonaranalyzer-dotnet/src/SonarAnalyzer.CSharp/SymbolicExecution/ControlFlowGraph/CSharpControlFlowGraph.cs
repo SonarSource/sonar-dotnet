@@ -23,7 +23,7 @@ using System.Diagnostics;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 
-namespace SonarAnalyzer.SymbolicExecution.CFG
+namespace SonarAnalyzer.SymbolicExecution.ControlFlowGraph
 {
     public static class CSharpControlFlowGraph
     {

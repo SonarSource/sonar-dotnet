@@ -29,8 +29,8 @@ using Microsoft.CodeAnalysis.Text;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.SymbolicExecution;
-using SonarAnalyzer.SymbolicExecution.CFG;
-using SonarAnalyzer.SymbolicExecution.LVA;
+using SonarAnalyzer.SymbolicExecution.ControlFlowGraph;
+using SonarAnalyzer.SymbolicExecution.LiveVariableAnalysis;
 
 namespace SonarAnalyzer.Rules.CSharp
 {

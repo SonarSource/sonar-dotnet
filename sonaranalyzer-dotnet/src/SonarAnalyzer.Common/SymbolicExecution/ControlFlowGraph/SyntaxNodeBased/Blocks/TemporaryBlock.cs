@@ -22,7 +22,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 
-namespace SonarAnalyzer.SymbolicExecution.CFG
+namespace SonarAnalyzer.SymbolicExecution.ControlFlowGraph
 {
     internal sealed class TemporaryBlock : Block
     {

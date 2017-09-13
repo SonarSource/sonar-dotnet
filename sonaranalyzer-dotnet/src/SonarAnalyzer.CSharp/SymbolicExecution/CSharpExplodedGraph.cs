@@ -26,8 +26,9 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Helpers.SymbolicExecution;
 using SonarAnalyzer.Rules.CSharp;
-using SonarAnalyzer.SymbolicExecution.CFG;
 using SonarAnalyzer.SymbolicExecution.Constraints;
+using SonarAnalyzer.SymbolicExecution.ControlFlowGraph;
+using SonarAnalyzer.SymbolicExecution.LiveVariableAnalysis;
 using SonarAnalyzer.SymbolicExecution.SymbolicValues;
 
 namespace SonarAnalyzer.SymbolicExecution
@@ -346,7 +347,7 @@ namespace SonarAnalyzer.SymbolicExecution
                         var sv = new SymbolicValue();
                         newProgramState = newProgramState.SetConstraint(sv, ObjectConstraint.NotNull);
                         newProgramState = newProgramState.PushValue(sv);
-                        newProgramState = InvokeChecks(newProgramState, 
+                        newProgramState = InvokeChecks(newProgramState,
                             (ps, check) => check.ObjectCreated(ps, sv, instruction));
                     }
                     break;
@@ -363,7 +364,7 @@ namespace SonarAnalyzer.SymbolicExecution
                         var sv = new SymbolicValue();
                         newProgramState = newProgramState.SetConstraint(sv, ObjectConstraint.NotNull);
                         newProgramState = newProgramState.PushValue(sv);
-                        newProgramState = InvokeChecks(newProgramState, 
+                        newProgramState = InvokeChecks(newProgramState,
                             (ps, check) => check.ObjectCreated(ps, sv, instruction));
                     }
                     break;

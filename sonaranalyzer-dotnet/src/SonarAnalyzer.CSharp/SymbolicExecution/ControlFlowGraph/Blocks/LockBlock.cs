@@ -21,7 +21,7 @@
 using System;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-namespace SonarAnalyzer.SymbolicExecution.CFG
+namespace SonarAnalyzer.SymbolicExecution.ControlFlowGraph
 {
     public class LockBlock : SimpleBlock
     {

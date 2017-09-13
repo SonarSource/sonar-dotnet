@@ -24,8 +24,9 @@ using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Helpers;
-using SonarAnalyzer.SymbolicExecution.CFG;
+using SonarAnalyzer.SymbolicExecution.ControlFlowGraph;
 using SonarAnalyzer.SymbolicExecution.Constraints;
+using SonarAnalyzer.SymbolicExecution.LiveVariableAnalysis;
 
 namespace SonarAnalyzer.SymbolicExecution
 {
@@ -384,7 +385,7 @@ namespace SonarAnalyzer.SymbolicExecution
                 : programState;
         }
 
-        protected static ProgramState SetNonNullConstraintIfValueType(ITypeSymbol typeSymbol, 
+        protected static ProgramState SetNonNullConstraintIfValueType(ITypeSymbol typeSymbol,
             SymbolicValue symbolicValue, ProgramState programState)
         {
             var isDefinitelyNotNull = !programState.HasConstraint(symbolicValue, ObjectConstraint.NotNull) &&

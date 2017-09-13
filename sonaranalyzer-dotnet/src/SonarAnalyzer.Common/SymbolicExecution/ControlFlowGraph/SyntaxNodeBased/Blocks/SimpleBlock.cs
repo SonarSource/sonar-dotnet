@@ -24,7 +24,7 @@ using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 
-namespace SonarAnalyzer.SymbolicExecution.CFG
+namespace SonarAnalyzer.SymbolicExecution.ControlFlowGraph
 {
     public class SimpleBlock : Block
     {

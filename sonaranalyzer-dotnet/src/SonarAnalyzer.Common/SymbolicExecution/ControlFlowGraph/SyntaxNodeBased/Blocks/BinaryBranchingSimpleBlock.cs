@@ -20,7 +20,7 @@
 
 using Microsoft.CodeAnalysis;
 
-namespace SonarAnalyzer.SymbolicExecution.CFG
+namespace SonarAnalyzer.SymbolicExecution.ControlFlowGraph
 {
     public sealed class BinaryBranchingSimpleBlock : SimpleBlock
     {

@@ -29,7 +29,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.SymbolicExecution;
-using SonarAnalyzer.SymbolicExecution.CFG;
+using SonarAnalyzer.SymbolicExecution.ControlFlowGraph;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 
 namespace SonarAnalyzer.Rules.CSharp

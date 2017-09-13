@@ -24,7 +24,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SonarAnalyzer.SymbolicExecution.CFG;
+using SonarAnalyzer.SymbolicExecution.ControlFlowGraph;
 
 namespace SonarAnalyzer.UnitTest.Helpers
 {

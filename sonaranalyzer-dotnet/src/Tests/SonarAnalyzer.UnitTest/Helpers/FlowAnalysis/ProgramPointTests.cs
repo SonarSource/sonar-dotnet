@@ -21,7 +21,7 @@
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.SymbolicExecution;
-using SonarAnalyzer.SymbolicExecution.CFG;
+using SonarAnalyzer.SymbolicExecution.ControlFlowGraph;
 
 namespace SonarAnalyzer.UnitTest.Helpers
 {

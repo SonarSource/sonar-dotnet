@@ -21,7 +21,7 @@
 using System;
 using Microsoft.CodeAnalysis;
 
-namespace SonarAnalyzer.SymbolicExecution.CFG
+namespace SonarAnalyzer.SymbolicExecution.ControlFlowGraph
 {
     public class BinaryBranchBlock : BranchBlock
     {

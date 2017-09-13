@@ -20,7 +20,7 @@
 
 using System.Collections.Generic;
 
-namespace SonarAnalyzer.SymbolicExecution.CFG
+namespace SonarAnalyzer.SymbolicExecution.ControlFlowGraph
 {
     /// <summary>
     /// Represents a Control Flow Graph of a method or property.

@@ -29,9 +29,8 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.SymbolicExecution;
-using SonarAnalyzer.SymbolicExecution.CFG;
 using SonarAnalyzer.SymbolicExecution.Constraints;
-using CSharpExplodedGraph = SonarAnalyzer.SymbolicExecution.CSharpExplodedGraph;
+using SonarAnalyzer.SymbolicExecution.ControlFlowGraph;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
