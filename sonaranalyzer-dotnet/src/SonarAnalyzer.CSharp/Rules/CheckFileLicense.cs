@@ -135,7 +135,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private bool AreHeadersEqual(string currentHeader)
         {
             var unixEndingHeader = currentHeader.Replace("\r\n", "\n");
-            var unixEndingHeaderFormat = HeaderFormat.Replace("\r\n", "\n");
+            var unixEndingHeaderFormat = HeaderFormat.Replace("\r\n", "\n").Replace("\\r\\n", "\n");
 
             return IsRegularExpression
                 ? Regex.IsMatch(unixEndingHeader, unixEndingHeaderFormat)
