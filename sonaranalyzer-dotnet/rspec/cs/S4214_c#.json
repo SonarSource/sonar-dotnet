@@ -1,0 +1,13 @@
+{
+  "title": "\"P\/Invoke\" methods should not be visible",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "2min"
+  },
+  "tags": [
+    
+  ],
+  "defaultSeverity": "Major"
+}

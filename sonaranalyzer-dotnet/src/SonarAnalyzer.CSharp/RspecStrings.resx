@@ -8004,6 +8004,33 @@
   <data name="S4158_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
   </data>
+  <data name="S4214_Category" xml:space="preserve">
+    <value>Sonar Code Smell</value>
+  </data>
+  <data name="S4214_Description" xml:space="preserve">
+    <value>Methods marked with the System.Runtime.InteropServices.DllImportAttribute attribute use Platform Invocation Services to access unmanaged code and should not be exposed. Keeping them private or internal makes sure that their access is controlled and properly managed.</value>
+  </data>
+  <data name="S4214_IsActivatedByDefault" xml:space="preserve">
+    <value>True</value>
+  </data>
+  <data name="S4214_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S4214_RemediationCost" xml:space="preserve">
+    <value>2min</value>
+  </data>
+  <data name="S4214_Severity" xml:space="preserve">
+    <value>Major</value>
+  </data>
+  <data name="S4214_Tags" xml:space="preserve">
+    <value />
+  </data>
+  <data name="S4214_Title" xml:space="preserve">
+    <value>"P/Invoke" methods should not be visible</value>
+  </data>
+  <data name="S4214_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S4225_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
