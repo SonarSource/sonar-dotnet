@@ -49,6 +49,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     if (methodSymbol != null &&
                         methodSymbol.IsExtern &&
+                        methodSymbol.IsStatic &&
                         methodSymbol.IsPubliclyAccessible() &&
                         IsPInvokeMethod(methodSymbol))
                     {
