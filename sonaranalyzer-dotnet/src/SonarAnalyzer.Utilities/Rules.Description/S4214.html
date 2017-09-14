@@ -1,0 +1,32 @@
+<p>Methods marked with the <code>System.Runtime.InteropServices.DllImportAttribute</code> attribute use Platform Invocation Services to access
+unmanaged code and should not be exposed. Keeping them private or internal makes sure that their access is controlled and properly managed.</p>
+<p>This rule raises an issue when a method declared with <code>DllImport</code> is public or protected.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+using System;
+using System.Runtime.InteropServices;
+
+namespace MyLibrary
+{
+    public class Foo
+    {
+        [DllImport("kernel32.dll", CharSet = CharSet.Unicode)]
+        public static extern bool RemoveDirectory(string name);  // Noncompliant
+    }
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+using System;
+using System.Runtime.InteropServices;
+
+namespace MyLibrary
+{
+    public class Foo
+    {
+        [DllImport("kernel32.dll", CharSet = CharSet.Unicode)]
+        private static extern bool RemoveDirectory(string name);
+    }
+}
+</pre>
+
