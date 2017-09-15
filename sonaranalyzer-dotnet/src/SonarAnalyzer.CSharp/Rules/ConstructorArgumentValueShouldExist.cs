@@ -53,16 +53,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    var attributes = propertySymbol.GetAttributes()
-                        .Where(attribute =>
-                            attribute.AttributeClass.Is(KnownType.System_Windows_Markup_ConstructorArgumentAttribute))
-                        .ToList();
-                    if (attributes.Count != 1)
-                    {
-                        return;
-                    }
-
-                    var constructorArgumentAttribute = attributes[0];
+                    var constructorArgumentAttribute = GetConstructorArgumentAttributeOrDefault(propertySymbol);
                     if (constructorArgumentAttribute != null &&
                         constructorArgumentAttribute.ConstructorArguments.Length == 1 &&
                         !IsValidConstructorArgumentName(constructorArgumentAttribute, propertyDeclaration))
@@ -74,6 +65,18 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
                 },
                 SyntaxKind.PropertyDeclaration);
+        }
+
+        private AttributeData GetConstructorArgumentAttributeOrDefault(IPropertySymbol propertySymbol)
+        {
+            var attributes = propertySymbol.GetAttributes()
+                .Where(attribute =>
+                    attribute.AttributeClass.Is(KnownType.System_Windows_Markup_ConstructorArgumentAttribute))
+                .ToList();
+
+            return attributes.Count == 1
+                ? attributes[0]
+                : null;
         }
 
         private static bool IsValidConstructorArgumentName(AttributeData attribute,
