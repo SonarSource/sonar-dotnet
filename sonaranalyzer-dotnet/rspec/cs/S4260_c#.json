@@ -1,0 +1,13 @@
+{
+  "title": "\"ConstructorArgument' parameters should exist",
+  "type": "BUG",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "2min"
+  },
+  "tags": [
+    
+  ],
+  "defaultSeverity": "Major"
+}

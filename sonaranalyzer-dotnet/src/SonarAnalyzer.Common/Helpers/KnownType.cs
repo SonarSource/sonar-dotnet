@@ -348,7 +348,7 @@ namespace SonarAnalyzer.Helpers
             new KnownType("Microsoft.VisualStudio.TestTools.UnitTesting.Assert");
 
         public static readonly KnownType Microsoft_VisualBasic_Interaction =
-            new KnownType("Microsoft.VisualBasic.Interaction"); 
+            new KnownType("Microsoft.VisualBasic.Interaction");
 
         public static readonly KnownType Xunit_FactAttribute = new KnownType("Xunit.FactAttribute");
         public static readonly KnownType Xunit_TheoryAttribute = new KnownType("Xunit.TheoryAttribute");
@@ -364,6 +364,9 @@ namespace SonarAnalyzer.Helpers
             new KnownType("NUnit.Framework.Assert");
         public static readonly KnownType NUnit_Framework_IgnoreAttribute =
             new KnownType("NUnit.Framework.IgnoreAttribute");
+
+        public static readonly KnownType System_Windows_Markup_ConstructorArgumentAttribute =
+            new KnownType("System.Windows.Markup.ConstructorArgumentAttribute");
 
         #endregion
 
