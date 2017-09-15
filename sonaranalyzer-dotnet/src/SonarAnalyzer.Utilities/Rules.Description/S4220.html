@@ -1,0 +1,43 @@
+<p>When raising an event, two arguments are expected by the <code>EventHandler</code> delegate: Sender and event-data. There are three guidelines
+regarding these parameters:</p>
+<ul>
+  <li> Do not pass <code>null</code> as the sender when raising a non-static event. </li>
+  <li> Do pass <code>null</code> as the sender when raising a static event. </li>
+  <li> Do not pass <code>null</code> as the event-data. If no data should be passed, then <code>EventArgs.Empty</code> should be used. </li>
+</ul>
+<p>This rule raises an issue when any of these guidelines is not met.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+using System;
+
+namespace MyLibrary
+{
+  class Foo
+  {
+    public event EventHandler ThresholdReached;
+
+    protected virtual void OnThresholdReached(EventArgs e)
+    {
+        ThresholdReached?.Invoke(null, e); // Noncompliant
+    }
+  }
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+using System;
+
+namespace MyLibrary
+{
+  class Foo
+  {
+    public event EventHandler ThresholdReached;
+
+    protected virtual void OnThresholdReached(EventArgs e)
+    {
+        ThresholdReached?.Invoke(this, e);
+    }
+  }
+}
+</pre>
+

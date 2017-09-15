@@ -1,0 +1,14 @@
+{
+  "title": "Events should have proper arguments",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Linear",
+    "linearDesc": null,
+    "linearFactor": null
+  },
+  "tags": [
+    "pitfall"
+  ],
+  "defaultSeverity": "Major"
+}

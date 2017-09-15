@@ -8031,6 +8031,33 @@
   <data name="S4214_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
   </data>
+  <data name="S4220_Category" xml:space="preserve">
+    <value>Sonar Code Smell</value>
+  </data>
+  <data name="S4220_Description" xml:space="preserve">
+    <value>When raising an event, two arguments are expected by the EventHandler delegate: Sender and event-data. There are three guidelines regarding these parameters:</value>
+  </data>
+  <data name="S4220_IsActivatedByDefault" xml:space="preserve">
+    <value>True</value>
+  </data>
+  <data name="S4220_Remediation" xml:space="preserve">
+    <value />
+  </data>
+  <data name="S4220_RemediationCost" xml:space="preserve">
+    <value />
+  </data>
+  <data name="S4220_Severity" xml:space="preserve">
+    <value>Major</value>
+  </data>
+  <data name="S4220_Tags" xml:space="preserve">
+    <value>pitfall</value>
+  </data>
+  <data name="S4220_Title" xml:space="preserve">
+    <value>Events should have proper arguments</value>
+  </data>
+  <data name="S4220_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S4225_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>
