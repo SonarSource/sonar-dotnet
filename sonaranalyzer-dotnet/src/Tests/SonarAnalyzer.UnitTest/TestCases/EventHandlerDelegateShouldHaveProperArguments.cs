@@ -27,6 +27,10 @@ namespace Tests.Diagnostics
                                                  // Noncompliant@-1
 
             SomeStaticEvent(this, e); // Noncompliant {{Make the sender on this static event invocation null.}}
+
+
+            SomeEvent?.Invoke(default(object), e); // Compliant - we don't handle default(T)
+            SomeEvent?.Invoke(this, default(EventArgs)); // Compliant - we don't handle default(T)
         }
 
         public event EventHandler<ResolveEventArgs> SomeOtherEvent;
