@@ -272,6 +272,9 @@ function Invoke-JavaBuild() {
         Test-ExitCode "ERROR: Maven build deploy sonar FAILED."
     }
     elseif ($isMaintenanceBranch -and -not $isPullRequest) {
+        Write-Header "Building and deploying SonarC#"
+
+        Set-MavenBuildVersion
         $env:MAVEN_OPTS = "-Xmx1536m -Xms128m"
 
         & mvn deploy `
