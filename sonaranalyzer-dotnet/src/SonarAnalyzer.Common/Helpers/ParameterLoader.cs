@@ -107,7 +107,7 @@ namespace SonarAnalyzer.Helpers
 
             var propertyParameterPairs = parameteredAnalyzer.GetType()
                 .GetTypeInfo()
-                .DeclaredProperties
+                .GetProperties()
                 .Select(p => new { Property = p, Descriptor = p.GetCustomAttributes<RuleParameterAttribute>().SingleOrDefault() })
                 .Where(p => p.Descriptor != null);
 
