@@ -86,7 +86,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 ? MessageIsInstanceOfTypeWithGetType
                 : MessageIsInstanceOfType;
 
-            context.ReportDiagnostic(Diagnostic.Create(rule, argument.GetLocation(), message));
+            context.CheckReportDiagnostic(Diagnostic.Create(rule, argument.GetLocation(), message));
         }
 
         private static void CheckGetTypeCallOnType(InvocationExpressionSyntax invocation, IMethodSymbol invokedMethod,
@@ -107,7 +107,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             var location = Location.Create(memberCall.SyntaxTree, TextSpan.FromBounds(memberCall.OperatorToken.SpanStart, invocation.Span.End));
-            context.ReportDiagnostic(Diagnostic.Create(rule, location, MessageGetType));
+            context.CheckReportDiagnostic(Diagnostic.Create(rule, location, MessageGetType));
         }
 
         private static bool IsGetTypeCall(IMethodSymbol invokedMethod)

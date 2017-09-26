@@ -53,7 +53,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                     if (leftType.Is(KnownType.System_String) ||
                         rightType.Is(KnownType.System_String))
                     {
-                        c.ReportDiagnostic(Diagnostic.Create(rule, binary.OperatorToken.GetLocation()));
+                        c.CheckReportDiagnostic(Diagnostic.Create(rule, binary.OperatorToken.GetLocation()));
                     }
                 },
                 SyntaxKind.AddExpression);

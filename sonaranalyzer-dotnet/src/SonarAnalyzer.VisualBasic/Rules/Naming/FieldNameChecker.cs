@@ -51,7 +51,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                             IsCandidateSymbol(symbol) &&
                             !NamingHelper.IsRegexMatch(symbol.Name, Pattern))
                         {
-                            c.ReportDiagnostic(Diagnostic.Create(Rule, name.GetLocation(),
+                            c.CheckReportDiagnostic(Diagnostic.Create(Rule, name.GetLocation(),
                                 symbol.Name, Pattern));
                         }
                     }

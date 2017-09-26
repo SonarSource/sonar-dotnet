@@ -72,7 +72,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 if (implementationErrors.Count > 0)
                 {
-                    c.ReportDiagnostic(Diagnostic.Create(rule, classDeclaration.Identifier.GetLocation(),
+                    c.CheckReportDiagnostic(Diagnostic.Create(rule, classDeclaration.Identifier.GetLocation(),
                         additionalLocations: implementationErrors.ToAdditionalLocations(),
                         properties: implementationErrors.ToProperties()));
                 }

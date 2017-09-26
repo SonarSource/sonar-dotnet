@@ -62,7 +62,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     foreach (var throwStatement in throwStatementsPerCtor)
                     {
-                        c.ReportDiagnostic(Diagnostic.Create(rule, throwStatement.First().GetLocation(),
+                        c.CheckReportDiagnostic(Diagnostic.Create(rule, throwStatement.First().GetLocation(),
                             throwStatement.Skip(1).Select(@throw => @throw.GetLocation())));
                     }
                 },

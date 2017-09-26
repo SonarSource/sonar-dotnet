@@ -63,7 +63,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             if (AreCovariantArrayTypes(typeDerived, typeBase))
             {
-                context.ReportDiagnostic(Diagnostic.Create(rule, assignment.Right.GetLocation()));
+                context.CheckReportDiagnostic(Diagnostic.Create(rule, assignment.Right.GetLocation()));
             }
         }
 
@@ -79,7 +79,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 if (AreCovariantArrayTypes(typeDerived, typeBase))
                 {
-                    context.ReportDiagnostic(Diagnostic.Create(rule, variable.Initializer.Value.GetLocation()));
+                    context.CheckReportDiagnostic(Diagnostic.Create(rule, variable.Initializer.Value.GetLocation()));
                 }
             }
         }
@@ -101,7 +101,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 var typeDerived = context.SemanticModel.GetTypeInfo(argument.Expression).Type;
                 if (AreCovariantArrayTypes(typeDerived, parameter.Type))
                 {
-                    context.ReportDiagnostic(Diagnostic.Create(rule, argument.GetLocation()));
+                    context.CheckReportDiagnostic(Diagnostic.Create(rule, argument.GetLocation()));
                 }
             }
         }
@@ -114,7 +114,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             if (AreCovariantArrayTypes(typeDerived, typeBase))
             {
-                context.ReportDiagnostic(Diagnostic.Create(rule, castExpression.Type.GetLocation()));
+                context.CheckReportDiagnostic(Diagnostic.Create(rule, castExpression.Type.GetLocation()));
             }
         }
 

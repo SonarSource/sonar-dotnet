@@ -80,7 +80,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             if (IsMultiDimensionalArray(typeSymbol))
             {
-                context.ReportDiagnostic(Diagnostic.Create(rule, getLocation(syntax)));
+                context.CheckReportDiagnostic(Diagnostic.Create(rule, getLocation(syntax)));
             }
         }
 

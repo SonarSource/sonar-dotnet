@@ -64,7 +64,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var pluralize = calledMethod.Parameters.Length - invocation.ArgumentList.Arguments.Count > 1
                         ? "s"
                         : string.Empty;
-                    c.ReportDiagnostic(Diagnostic.Create(rule, invocation.GetLocation(), pluralize));
+                    c.CheckReportDiagnostic(Diagnostic.Create(rule, invocation.GetLocation(), pluralize));
                 },
                 SyntaxKind.InvocationExpression);
         }

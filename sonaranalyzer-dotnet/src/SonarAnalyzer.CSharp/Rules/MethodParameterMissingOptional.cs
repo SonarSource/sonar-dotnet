@@ -68,7 +68,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     if (optionalAttribute == null)
                     {
-                        c.ReportDiagnostic(Diagnostic.Create(rule, defaultParameterValueAttribute.SyntaxNode.GetLocation()));
+                        c.CheckReportDiagnostic(Diagnostic.Create(rule, defaultParameterValueAttribute.SyntaxNode.GetLocation()));
                     }
                 },
                 SyntaxKind.Parameter);

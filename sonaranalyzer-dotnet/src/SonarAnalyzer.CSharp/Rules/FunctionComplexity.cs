@@ -100,7 +100,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             if (walker.CyclomaticComplexity > Maximum)
             {
-                context.ReportDiagnostic(
+                context.CheckReportDiagnostic(
                     Diagnostic.Create(
                         rule,
                         getLocation(node),

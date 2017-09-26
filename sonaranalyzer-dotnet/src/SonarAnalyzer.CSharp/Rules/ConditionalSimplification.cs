@@ -86,7 +86,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 possiblyNullCoalescing ? comparedToNull : null, context.SemanticModel,
                 comparedIsNullInTrue, out isNullCoalescing))
             {
-                context.ReportDiagnostic(Diagnostic.Create(rule, ifStatement.IfKeyword.GetLocation(),
+                context.CheckReportDiagnostic(Diagnostic.Create(rule, ifStatement.IfKeyword.GetLocation(),
                     ImmutableDictionary<string, string>.Empty.Add(IsNullCoalescingKey, isNullCoalescing.ToString()),
                     isNullCoalescing ? "??" : "?:"));
             }
@@ -117,7 +117,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             if (CanExpressionBeNullCoalescing(whenTrue, whenFalse, comparedToNull, context.SemanticModel, comparedIsNullInTrue))
             {
-                context.ReportDiagnostic(Diagnostic.Create(rule, conditional.GetLocation(), "??"));
+                context.CheckReportDiagnostic(Diagnostic.Create(rule, conditional.GetLocation(), "??"));
             }
         }
 

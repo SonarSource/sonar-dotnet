@@ -49,7 +49,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 var parameter = (ParameterSyntax)c.Node;
                 foreach (var byVal in parameter.Modifiers.Where(IsByVal))
                 {
-                    c.ReportDiagnostic(Diagnostic.Create(rule, byVal.GetLocation()));
+                    c.CheckReportDiagnostic(Diagnostic.Create(rule, byVal.GetLocation()));
                 }
             },
             SyntaxKind.Parameter);

@@ -111,7 +111,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             var identifier = getIdentifier(declaration);
-            context.ReportDiagnostic(Diagnostic.Create(rule, identifier.GetLocation(), identifier.Text, memberKind));
+            context.CheckReportDiagnostic(Diagnostic.Create(rule, identifier.GetLocation(), identifier.Text, memberKind));
         }
 
         private static bool IsIgnoredAttribute(AttributeData attribute)

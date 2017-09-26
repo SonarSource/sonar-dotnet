@@ -90,7 +90,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         var symbol = c.SemanticModel.GetSymbolInfo(affectedExpression).Symbol;
                         if (symbol != null && loopCounters.Contains(symbol))
                         {
-                            c.ReportDiagnostic(Diagnostic.Create(rule, affectedExpression.GetLocation(), affectedExpression.ToString()/*symbol.OriginalDefinition.Name*/));
+                            c.CheckReportDiagnostic(Diagnostic.Create(rule, affectedExpression.GetLocation(), affectedExpression.ToString()/*symbol.OriginalDefinition.Name*/));
                         }
                     }
                 },

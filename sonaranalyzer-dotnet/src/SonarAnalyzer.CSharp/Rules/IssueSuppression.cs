@@ -64,7 +64,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     if (identifier != null)
                     {
-                        c.ReportDiagnostic(Diagnostic.Create(rule, identifier.GetLocation()));
+                        c.CheckReportDiagnostic(Diagnostic.Create(rule, identifier.GetLocation()));
                     }
                 },
                 SyntaxKind.Attribute);
@@ -92,7 +92,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 var location = Location.Create(pragmaWarning.SyntaxTree,
                     TextSpan.FromBounds(pragmaWarning.SpanStart, pragmaWarning.DisableOrRestoreKeyword.Span.End));
-                c.ReportDiagnostic(Diagnostic.Create(rule, location));
+                c.CheckReportDiagnostic(Diagnostic.Create(rule, location));
             }
         }
     }

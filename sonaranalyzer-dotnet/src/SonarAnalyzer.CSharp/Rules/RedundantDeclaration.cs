@@ -117,7 +117,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             foreach (var parameter in lambda.ParameterList.Parameters)
             {
-                context.ReportDiagnostic(Diagnostic.Create(rule, parameter.Type.GetLocation(),
+                context.CheckReportDiagnostic(Diagnostic.Create(rule, parameter.Type.GetLocation(),
                     ImmutableDictionary<string, string>.Empty.Add(DiagnosticTypeKey, RedundancyType.LambdaParameterType.ToString()),
                     "type specification"));
             }
@@ -221,7 +221,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             foreach (var size in rankSpecifier.Sizes)
             {
-                context.ReportDiagnostic(Diagnostic.Create(rule, size.GetLocation(),
+                context.CheckReportDiagnostic(Diagnostic.Create(rule, size.GetLocation(),
                     ImmutableDictionary<string, string>.Empty.Add(DiagnosticTypeKey, RedundancyType.ArraySize.ToString()),
                     "array size specification"));
             }
@@ -258,7 +258,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 var location = Location.Create(array.SyntaxTree, TextSpan.FromBounds(
                     array.Type.ElementType.SpanStart, array.Type.RankSpecifiers.Last().SpanStart));
 
-                context.ReportDiagnostic(Diagnostic.Create(rule, location,
+                context.CheckReportDiagnostic(Diagnostic.Create(rule, location,
                     ImmutableDictionary<string, string>.Empty.Add(DiagnosticTypeKey, RedundancyType.ArrayType.ToString()),
                     "array type"));
             }
@@ -279,7 +279,7 @@ namespace SonarAnalyzer.Rules.CSharp
             if (objectCreation.Initializer != null &&
                 !objectCreation.Initializer.Expressions.Any())
             {
-                context.ReportDiagnostic(Diagnostic.Create(rule, objectCreation.Initializer.GetLocation(),
+                context.CheckReportDiagnostic(Diagnostic.Create(rule, objectCreation.Initializer.GetLocation(),
                     ImmutableDictionary<string, string>.Empty.Add(DiagnosticTypeKey, RedundancyType.ObjectInitializer.ToString()),
                     "initializer"));
             }
@@ -411,7 +411,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             if (!usedParameters.Intersect(methodSymbol.Parameters).Any())
             {
-                context.ReportDiagnostic(Diagnostic.Create(rule, anonymousMethod.ParameterList.GetLocation(),
+                context.CheckReportDiagnostic(Diagnostic.Create(rule, anonymousMethod.ParameterList.GetLocation(),
                     ImmutableDictionary<string, string>.Empty.Add(DiagnosticTypeKey, RedundancyType.DelegateParameterList.ToString()),
                     "parameter list"));
             }
@@ -461,7 +461,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             var location = Location.Create(objectCreation.SyntaxTree,
                 TextSpan.FromBounds(objectCreation.SpanStart, objectCreation.Type.Span.End));
-            context.ReportDiagnostic(Diagnostic.Create(rule, location,
+            context.CheckReportDiagnostic(Diagnostic.Create(rule, location,
                     ImmutableDictionary<string, string>.Empty.Add(DiagnosticTypeKey, redundancyType.ToString()),
                     message));
         }

@@ -82,7 +82,7 @@ namespace SonarAnalyzer.Rules.Common
                 return;
             }
 
-            context.ReportDiagnostic(Diagnostic.Create(Rule, assignment.GetLocation()));
+            context.CheckReportDiagnostic(Diagnostic.Create(Rule, assignment.GetLocation()));
         }
 
         protected abstract DiagnosticDescriptor Rule { get; }
@@ -127,7 +127,7 @@ namespace SonarAnalyzer.Rules.Common
                 return;
             }
 
-            context.ReportDiagnostic(Diagnostic.Create(Rule, addAssignment.GetLocation()));
+            context.CheckReportDiagnostic(Diagnostic.Create(Rule, addAssignment.GetLocation()));
         }
 
         protected abstract bool IsExpressionConcatenation(TBinaryExpression addExpression);

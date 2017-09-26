@@ -106,7 +106,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             if (typeExpression.DerivesOrImplements(typeCastTo))
             {
-                context.ReportDiagnostic(Diagnostic.Create(rule, binary.GetLocation(), MessageNullCheck));
+                context.CheckReportDiagnostic(Diagnostic.Create(rule, binary.GetLocation(), MessageNullCheck));
             }
         }
 
@@ -123,7 +123,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            context.ReportDiagnostic(Diagnostic.Create(rule, location, MessageIsOperator));
+            context.CheckReportDiagnostic(Diagnostic.Create(rule, location, MessageIsOperator));
         }
 
         private static void CheckGetTypeAndTypeOfEquality(ExpressionSyntax sideA, ExpressionSyntax sideB, Location location,
@@ -148,7 +148,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            context.ReportDiagnostic(Diagnostic.Create(rule, location, MessageIsOperator));
+            context.CheckReportDiagnostic(Diagnostic.Create(rule, location, MessageIsOperator));
         }
 
         private static void CheckForIsInstanceOfType(SyntaxNodeAnalysisContext context, InvocationExpressionSyntax invocation,
@@ -161,7 +161,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             if (memberAccess.Expression is TypeOfExpressionSyntax)
             {
-                context.ReportDiagnostic(Diagnostic.Create(rule, invocation.GetLocation(),
+                context.CheckReportDiagnostic(Diagnostic.Create(rule, invocation.GetLocation(),
                     ImmutableDictionary<string, string>.Empty
                         .Add(UseIsOperatorKey, true.ToString())
                         .Add(ShouldRemoveGetType, false.ToString()),
@@ -179,7 +179,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            context.ReportDiagnostic(memberAccess.Expression is TypeOfExpressionSyntax
+            context.CheckReportDiagnostic(memberAccess.Expression is TypeOfExpressionSyntax
                 ? Diagnostic.Create(rule, invocation.GetLocation(),
                     ImmutableDictionary<string, string>.Empty
                         .Add(UseIsOperatorKey, true.ToString())

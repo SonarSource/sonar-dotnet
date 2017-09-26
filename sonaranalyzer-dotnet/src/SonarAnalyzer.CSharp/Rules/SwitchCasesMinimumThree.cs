@@ -49,7 +49,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var switchNode = (SwitchStatementSyntax)c.Node;
                     if (!HasAtLeastThreeLabels(switchNode))
                     {
-                        c.ReportDiagnostic(Diagnostic.Create(rule, switchNode.SwitchKeyword.GetLocation()));
+                        c.CheckReportDiagnostic(Diagnostic.Create(rule, switchNode.SwitchKeyword.GetLocation()));
                     }
                 },
                 SyntaxKind.SwitchStatement);

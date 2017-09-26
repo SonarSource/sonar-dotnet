@@ -59,7 +59,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (methodDeclaration.AttributeLists.TryGetAttribute(KnownType.System_Diagnostics_Contracts_PureAttribute,
                             c.SemanticModel, out pureAttribute))
                     {
-                        c.ReportDiagnostic(Diagnostic.Create(rule, pureAttribute.GetLocation()));
+                        c.CheckReportDiagnostic(Diagnostic.Create(rule, pureAttribute.GetLocation()));
                     }
                 },
                 SyntaxKind.MethodDeclaration);

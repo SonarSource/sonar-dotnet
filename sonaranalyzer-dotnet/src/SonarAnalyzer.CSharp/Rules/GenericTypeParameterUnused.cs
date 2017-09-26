@@ -80,7 +80,7 @@ namespace SonarAnalyzer.Rules.CSharp
                             .Select(typeParameter => typeParameter.Identifier.Text)
                             .Where(typeParameter => !usedTypeParameters.Contains(typeParameter)))
                         {
-                            c.ReportDiagnostic(Diagnostic.Create(rule,
+                            c.CheckReportDiagnostic(Diagnostic.Create(rule,
                                 helper.TypeParameterList.Parameters.First(tp => tp.Identifier.Text == typeParameter)
                                     .GetLocation(),
                                 typeParameter, helper.ContainerSyntaxTypeName));

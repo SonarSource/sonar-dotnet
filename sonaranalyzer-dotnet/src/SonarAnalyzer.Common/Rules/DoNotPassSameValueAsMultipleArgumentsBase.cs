@@ -78,7 +78,7 @@ namespace SonarAnalyzer.Rules
                                 arguments[i].IsEquivalentTo(arguments[j]) &&
                                 IsDuplicateUsage(parameterUsage, argConvertedTypes[j]))
                             {
-                                c.ReportDiagnostic(Diagnostic.Create(Rule,
+                                c.CheckReportDiagnostic(Diagnostic.Create(Rule,
                                     arguments[i].GetLocation(),
                                     additionalLocations: new[] { arguments[j].GetLocation() },
                                     messageArgs: ToOrdinalNumberString(j + 1)));

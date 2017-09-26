@@ -68,7 +68,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (paramsKeyword != default(SyntaxToken) &&
                         IsNotSemanticallyParams(lastParameter, c.SemanticModel))
                     {
-                        c.ReportDiagnostic(Diagnostic.Create(rule, paramsKeyword.GetLocation()));
+                        c.CheckReportDiagnostic(Diagnostic.Create(rule, paramsKeyword.GetLocation()));
                     }
                 },
                 SyntaxKind.MethodDeclaration);

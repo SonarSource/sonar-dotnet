@@ -49,7 +49,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                     var symbol = c.SemanticModel.GetDeclaredSymbol(propertyStatement);
                     if (symbol?.Type is IArrayTypeSymbol)
                     {
-                        c.ReportDiagnostic(Diagnostic.Create(rule, propertyStatement.Identifier.GetLocation(), symbol.Name));
+                        c.CheckReportDiagnostic(Diagnostic.Create(rule, propertyStatement.Identifier.GetLocation(), symbol.Name));
                     }
                 },
                 SyntaxKind.PropertyStatement);

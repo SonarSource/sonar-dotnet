@@ -73,7 +73,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (IsStringIdentifier(firstArgument.Expression, c.SemanticModel) &&
                         IsConstantEmptyString(memberAccessExpression.Expression, c.SemanticModel))
                     {
-                        c.ReportDiagnostic(Diagnostic.Create(rule, invocationExpression.GetLocation(), MessageFormat));
+                        c.CheckReportDiagnostic(Diagnostic.Create(rule, invocationExpression.GetLocation(), MessageFormat));
                         return;
                     }
 
@@ -81,7 +81,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (IsStringIdentifier(memberAccessExpression.Expression, c.SemanticModel) &&
                         IsConstantEmptyString(firstArgument.Expression, c.SemanticModel))
                     {
-                        c.ReportDiagnostic(Diagnostic.Create(rule, invocationExpression.GetLocation(), MessageFormat));
+                        c.CheckReportDiagnostic(Diagnostic.Create(rule, invocationExpression.GetLocation(), MessageFormat));
                     }
                 },
                 SyntaxKind.InvocationExpression);

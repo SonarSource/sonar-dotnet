@@ -99,7 +99,7 @@ namespace SonarAnalyzer.Rules
                            var message = GetDiagnosticMessageArgument(cbc.CodeBlock, cbc.OwningSymbol, fieldWithLocations.Key);
                            var secondaryLocations = fieldWithLocations.Key.DeclaringSyntaxReferences
                                                                       .Select(x => x.GetSyntax().GetLocation());
-                           c.ReportDiagnostic(Diagnostic.Create(Rule, location,
+                           c.CheckReportDiagnostic(Diagnostic.Create(Rule, location,
                                additionalLocations: secondaryLocations,
                                messageArgs: message));
                        }

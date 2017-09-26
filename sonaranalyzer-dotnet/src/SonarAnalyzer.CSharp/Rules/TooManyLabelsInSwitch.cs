@@ -63,7 +63,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var numberOfSections = switchNode.Sections.Count;
                     if (numberOfSections > Maximum)
                     {
-                        c.ReportDiagnostic(Diagnostic.Create(rule, switchNode.SwitchKeyword.GetLocation(), Maximum, numberOfSections));
+                        c.CheckReportDiagnostic(Diagnostic.Create(rule, switchNode.SwitchKeyword.GetLocation(), Maximum, numberOfSections));
                     }
                 },
                 SyntaxKind.SwitchStatement);

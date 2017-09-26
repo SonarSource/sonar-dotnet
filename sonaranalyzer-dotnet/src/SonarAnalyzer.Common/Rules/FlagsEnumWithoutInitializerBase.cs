@@ -55,7 +55,7 @@ namespace SonarAnalyzer.Rules.Common
 
                     if (!AreAllRequiredMembersInitialized(enumDeclaration))
                     {
-                        c.ReportDiagnostic(Diagnostic.Create(Rule, GetIdentifier(enumDeclaration).GetLocation()));
+                        c.CheckReportDiagnostic(Diagnostic.Create(Rule, GetIdentifier(enumDeclaration).GetLocation()));
                     }
                 },
                 SyntaxKindsOfInterest.ToArray());

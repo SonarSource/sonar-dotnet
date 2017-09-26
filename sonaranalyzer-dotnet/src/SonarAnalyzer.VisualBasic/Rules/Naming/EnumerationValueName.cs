@@ -53,7 +53,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                     var enumMemberDeclaration = (EnumMemberDeclarationSyntax)c.Node;
                     if (!NamingHelper.IsRegexMatch(enumMemberDeclaration.Identifier.ValueText, Pattern))
                     {
-                        c.ReportDiagnostic(Diagnostic.Create(rule, enumMemberDeclaration.Identifier.GetLocation(),
+                        c.CheckReportDiagnostic(Diagnostic.Create(rule, enumMemberDeclaration.Identifier.GetLocation(),
                             enumMemberDeclaration.Identifier.ValueText, Pattern));
                     }
                 },

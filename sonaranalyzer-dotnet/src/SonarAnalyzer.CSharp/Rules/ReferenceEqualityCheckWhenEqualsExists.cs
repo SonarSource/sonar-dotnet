@@ -93,7 +93,7 @@ namespace SonarAnalyzer.Rules.CSharp
                             if (MightOverrideEquals(typeLeft, allInterfacesWithImplementationsOverriddenEquals) ||
                                 MightOverrideEquals(typeRight, allInterfacesWithImplementationsOverriddenEquals))
                             {
-                                c.ReportDiagnostic(Diagnostic.Create(rule, binary.OperatorToken.GetLocation()));
+                                c.CheckReportDiagnostic(Diagnostic.Create(rule, binary.OperatorToken.GetLocation()));
                             }
                         },
                         SyntaxKind.EqualsExpression,

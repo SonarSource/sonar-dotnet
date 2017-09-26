@@ -56,7 +56,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (IsDebugAssert(invokedMethodSyntax, c) &&
                         ContainsCallsWithSideEffects(invokedMethodSyntax))
                     {
-                        c.ReportDiagnostic(Diagnostic.Create(rule, invokedMethodSyntax.ArgumentList.GetLocation()));
+                        c.CheckReportDiagnostic(Diagnostic.Create(rule, invokedMethodSyntax.ArgumentList.GetLocation()));
                     }
                 },
                 SyntaxKind.InvocationExpression);

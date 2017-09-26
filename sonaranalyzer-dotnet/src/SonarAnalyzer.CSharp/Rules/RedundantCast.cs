@@ -90,7 +90,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             if (expressionType.Equals(castType))
             {
-                context.ReportDiagnostic(Diagnostic.Create(rule, location,
+                context.CheckReportDiagnostic(Diagnostic.Create(rule, location,
                     castType.ToMinimalDisplayString(context.SemanticModel, expression.SpanStart)));
             }
         }
@@ -124,7 +124,7 @@ namespace SonarAnalyzer.Rules.CSharp
             if (elementType.Equals(castType))
             {
                 var methodCalledAsStatic = methodSymbol.MethodKind == MethodKind.Ordinary;
-                context.ReportDiagnostic(Diagnostic.Create(rule, GetReportLocation(invocation, methodCalledAsStatic),
+                context.CheckReportDiagnostic(Diagnostic.Create(rule, GetReportLocation(invocation, methodCalledAsStatic),
                     returnType.ToMinimalDisplayString(context.SemanticModel, invocation.SpanStart)));
             }
         }

@@ -74,7 +74,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 .FirstOrDefault(x => x.Type.IsEquivalentTo(castType));
             if (castExpressionWithCorrectType != null)
             {
-                analysisContext.ReportDiagnostic(Diagnostic.Create(rule, isExpression.GetLocation(),
+                analysisContext.CheckReportDiagnostic(Diagnostic.Create(rule, isExpression.GetLocation(),
                     additionalLocations: new[] { castExpressionWithCorrectType.GetLocation() }));
             }
         }

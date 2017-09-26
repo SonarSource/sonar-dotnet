@@ -94,7 +94,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 var identifierName = getIdentifierName(memberDeclaration);
 
-                analysisContext.ReportDiagnostic(Diagnostic.Create(rule, identifierName.GetLocation(),
+                analysisContext.CheckReportDiagnostic(Diagnostic.Create(rule, identifierName.GetLocation(),
                     classDeclaration.Identifier.ValueText,
                     string.Concat(explicitInterfaceSpecifier.Name, ".", identifierName.ValueText)));
             }

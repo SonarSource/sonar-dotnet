@@ -53,7 +53,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         expression.WhenTrue.RemoveParentheses(),
                         expression.WhenFalse.RemoveParentheses()))
                     {
-                        c.ReportDiagnostic(Diagnostic.Create(rule, expression.GetLocation()));
+                        c.CheckReportDiagnostic(Diagnostic.Create(rule, expression.GetLocation()));
                     }
                 },
                 SyntaxKind.ConditionalExpression);

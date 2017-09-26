@@ -93,7 +93,7 @@ namespace SonarAnalyzer.Rules
                     if (IsInCheckedContext(stringLiteral, c.SemanticModel) &&
                         UriRegex.IsMatch(GetLiteralText(stringLiteral)))
                     {
-                        c.ReportDiagnostic(Diagnostic.Create(Rule, stringLiteral.GetLocation(), AbsoluteUriMessage));
+                        c.CheckReportDiagnostic(Diagnostic.Create(Rule, stringLiteral.GetLocation(), AbsoluteUriMessage));
                     }
 
                 },
@@ -115,14 +115,14 @@ namespace SonarAnalyzer.Rules
                     var leftNode = GetLeftNode(addExpression);
                     if (IsPathDelimiter(leftNode))
                     {
-                        c.ReportDiagnostic(Diagnostic.Create(Rule, leftNode.GetLocation(),
+                        c.CheckReportDiagnostic(Diagnostic.Create(Rule, leftNode.GetLocation(),
                             PathDelimiterMessage));
                     }
 
                     var rightNode = GetRightNode(addExpression);
                     if (IsPathDelimiter(rightNode))
                     {
-                        c.ReportDiagnostic(Diagnostic.Create(Rule, rightNode.GetLocation(),
+                        c.CheckReportDiagnostic(Diagnostic.Create(Rule, rightNode.GetLocation(),
                             PathDelimiterMessage));
                     }
                 },

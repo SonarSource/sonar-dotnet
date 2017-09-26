@@ -51,7 +51,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     classSymbol.DerivesFrom(KnownType.System_Exception) &&
                     !HasStandardConstructors(classSymbol))
                 {
-                    c.ReportDiagnostic(Diagnostic.Create(rule, classDeclaration.Identifier.GetLocation()));
+                    c.CheckReportDiagnostic(Diagnostic.Create(rule, classDeclaration.Identifier.GetLocation()));
                 }
             },
             SyntaxKind.ClassDeclaration);

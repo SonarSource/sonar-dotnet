@@ -55,7 +55,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var parameterName = parameter.ToString();
                     if (string.Equals(parameterName, methodName, StringComparison.OrdinalIgnoreCase))
                     {
-                        c.ReportDiagnostic(Diagnostic.Create(rule, parameter.GetLocation(),
+                        c.CheckReportDiagnostic(Diagnostic.Create(rule, parameter.GetLocation(),
                             new[] { method.Identifier.GetLocation() }, parameterName));
                     }
                 }

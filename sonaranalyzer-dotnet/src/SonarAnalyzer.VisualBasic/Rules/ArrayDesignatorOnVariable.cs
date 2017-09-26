@@ -54,7 +54,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
                     foreach (var name in declarator.Names.Where(n => n.ArrayRankSpecifiers.Any()))
                     {
-                        c.ReportDiagnostic(Diagnostic.Create(rule, name.GetLocation()));
+                        c.CheckReportDiagnostic(Diagnostic.Create(rule, name.GetLocation()));
                     }
                 },
                 SyntaxKind.VariableDeclarator);

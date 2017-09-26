@@ -120,7 +120,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             if (throwToReportOn != null)
             {
-                analysisContext.ReportDiagnostic(Diagnostic.Create(rule, throwToReportOn.GetLocation()));
+                analysisContext.CheckReportDiagnostic(Diagnostic.Create(rule, throwToReportOn.GetLocation()));
             }
         }
 

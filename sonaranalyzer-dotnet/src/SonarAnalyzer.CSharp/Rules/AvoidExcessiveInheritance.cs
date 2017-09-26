@@ -99,7 +99,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     if (baseTypesCount > MaximumDepth)
                     {
-                        c.ReportDiagnostic(Diagnostic.Create(rule, declaration.Identifier.GetLocation(),
+                        c.CheckReportDiagnostic(Diagnostic.Create(rule, declaration.Identifier.GetLocation(),
                             baseTypesCount, MaximumDepth));
                     }
 

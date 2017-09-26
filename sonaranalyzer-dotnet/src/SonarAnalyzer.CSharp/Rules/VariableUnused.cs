@@ -69,7 +69,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     declaredLocals.ExceptWith(usedLocals);
                     foreach (var unused in declaredLocals)
                     {
-                        c.ReportDiagnostic(Diagnostic.Create(rule, unused.Locations.First(), unused.Name));
+                        c.CheckReportDiagnostic(Diagnostic.Create(rule, unused.Locations.First(), unused.Name));
                     }
                 });
             });

@@ -93,7 +93,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            context.ReportDiagnostic(Diagnostic.Create(rule, location));
+            context.CheckReportDiagnostic(Diagnostic.Create(rule, location));
         }
 
         private static bool HasGenericType(SyntaxNode root, IEnumerable<string> typeParameterNames,

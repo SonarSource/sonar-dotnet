@@ -74,7 +74,7 @@ namespace SonarAnalyzer.Rules.Common
             }
             foreach (var variable in variables.Skip(1))
             {
-                context.ReportDiagnostic(Diagnostic.Create(rule, variable.GetLocation(), variable.ValueText));
+                context.CheckReportDiagnostic(Diagnostic.Create(rule, variable.GetLocation(), variable.ValueText));
             }
         }
 

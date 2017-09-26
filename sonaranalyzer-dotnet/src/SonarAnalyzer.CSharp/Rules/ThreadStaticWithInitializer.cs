@@ -58,7 +58,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     foreach (var variableDeclaratorSyntax in fieldDeclaration.Declaration.Variables
                         .Where(variableDeclaratorSyntax => variableDeclaratorSyntax.Initializer != null))
                     {
-                        c.ReportDiagnostic(Diagnostic.Create(rule, variableDeclaratorSyntax.Initializer.GetLocation(),
+                        c.CheckReportDiagnostic(Diagnostic.Create(rule, variableDeclaratorSyntax.Initializer.GetLocation(),
                             variableDeclaratorSyntax.Identifier.ValueText));
                     }
                 },
