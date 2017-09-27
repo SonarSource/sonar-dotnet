@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 
@@ -27,27 +28,35 @@ namespace SonarAnalyzer.Helpers
     {
         public static void CheckReportDiagnostic(this SyntaxNodeAnalysisContext context, Diagnostic diagnostic)
         {
-            context.ReportDiagnostic(diagnostic);
+            ReportWhenNotSuppressed(diagnostic, d => context.ReportDiagnostic(d));
         }
 
         public static void CheckReportDiagnostic(this SyntaxTreeAnalysisContext context, Diagnostic diagnostic)
         {
-            context.ReportDiagnostic(diagnostic);
+            ReportWhenNotSuppressed(diagnostic, d => context.ReportDiagnostic(d));
         }
 
         public static void CheckReportDiagnostic(this CompilationAnalysisContext context, Diagnostic diagnostic)
         {
-            context.ReportDiagnostic(diagnostic);
+            ReportWhenNotSuppressed(diagnostic, d => context.ReportDiagnostic(d));
         }
 
         public static void CheckReportDiagnostic(this SymbolAnalysisContext context, Diagnostic diagnostic)
         {
-            context.ReportDiagnostic(diagnostic);
+            ReportWhenNotSuppressed(diagnostic, d => context.ReportDiagnostic(d));
         }
 
         public static void CheckReportDiagnostic(this CodeBlockAnalysisContext context, Diagnostic diagnostic)
         {
-            context.ReportDiagnostic(diagnostic);
+            ReportWhenNotSuppressed(diagnostic, d => context.ReportDiagnostic(d));
+        }
+
+        private static void ReportWhenNotSuppressed(Diagnostic diagnostic, Action<Diagnostic> report)
+        {
+            if (!SonarAnalysisContext.ShouldDiagnosticBeReported(diagnostic))
+            {
+                report(diagnostic);
+            }
         }
     }
 }
