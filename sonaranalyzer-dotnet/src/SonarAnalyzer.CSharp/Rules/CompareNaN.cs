@@ -52,7 +52,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (TryGetFloatingPointType(binaryExpressionSyntax.Left, c.SemanticModel, out floatingPointType) ||
                         TryGetFloatingPointType(binaryExpressionSyntax.Right, c.SemanticModel, out floatingPointType))
                     {
-                        c.CheckReportDiagnostic(Diagnostic.Create(rule, binaryExpressionSyntax.GetLocation(), floatingPointType.TypeName));
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, binaryExpressionSyntax.GetLocation(), floatingPointType.TypeName));
                     }
                 },
                 SyntaxKind.GreaterThanExpression,

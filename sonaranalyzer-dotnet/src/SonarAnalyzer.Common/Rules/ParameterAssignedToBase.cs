@@ -49,7 +49,7 @@ namespace SonarAnalyzer.Rules
 
                     if (symbol != null && (IsAssignmentToParameter(symbol) || IsAssignmentToCatchVariable(symbol, left)))
                     {
-                        c.CheckReportDiagnostic(Diagnostic.Create(Rule, left.GetLocation(), left.ToString()));
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, left.GetLocation(), left.ToString()));
                     }
                 },
                 SyntaxKindsOfInterest.ToArray());

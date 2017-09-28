@@ -58,7 +58,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     HasNativeHandleFields(classDeclaration, c.SemanticModel) &&
                     !HasFinalizer(classDeclaration))
                 {
-                    c.CheckReportDiagnostic(Diagnostic.Create(rule, classDeclaration.Identifier.GetLocation()));
+                    c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, classDeclaration.Identifier.GetLocation()));
                 }
             },
             SyntaxKind.ClassDeclaration);

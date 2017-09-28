@@ -70,7 +70,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     if (typeParameters.Except(typeParametersInArguments).Any())
                     {
-                        c.CheckReportDiagnostic(Diagnostic.Create(rule, methodDeclaration.Identifier.GetLocation()));
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, methodDeclaration.Identifier.GetLocation()));
                     }
                 },
                 SyntaxKind.MethodDeclaration);

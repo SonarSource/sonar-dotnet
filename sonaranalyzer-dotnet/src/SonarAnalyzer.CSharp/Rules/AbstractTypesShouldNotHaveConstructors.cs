@@ -58,7 +58,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     if (isAbstractClass && !invalidAccessModifier.IsKind(SyntaxKind.None))
                     {
-                        c.CheckReportDiagnostic(Diagnostic.Create(rule, invalidAccessModifier.GetLocation()));
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, invalidAccessModifier.GetLocation()));
                     }
                 }, SyntaxKind.ConstructorDeclaration);
         }

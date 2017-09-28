@@ -52,7 +52,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         constValue == 0 &&
                         IsIndexOfCall(lessThan.Right, c.SemanticModel))
                     {
-                        c.CheckReportDiagnostic(Diagnostic.Create(rule, Location.Create(lessThan.SyntaxTree,
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, Location.Create(lessThan.SyntaxTree,
                             TextSpan.FromBounds(lessThan.Left.SpanStart, lessThan.OperatorToken.Span.End))));
                     }
                 },
@@ -67,7 +67,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         constValue == 0 &&
                         IsIndexOfCall(greaterThan.Left, c.SemanticModel))
                     {
-                        c.CheckReportDiagnostic(Diagnostic.Create(rule, Location.Create(greaterThan.SyntaxTree,
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, Location.Create(greaterThan.SyntaxTree,
                             TextSpan.FromBounds(greaterThan.OperatorToken.SpanStart, greaterThan.Right.Span.End))));
                     }
                 },

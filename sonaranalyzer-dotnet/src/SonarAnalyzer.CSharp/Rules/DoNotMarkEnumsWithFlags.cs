@@ -74,7 +74,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     if (invalidMembers.Count > 0)
                     {
-                        c.CheckReportDiagnostic(Diagnostic.Create(rule, enumDeclaration.Identifier.GetLocation(),
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, enumDeclaration.Identifier.GetLocation(),
                             additionalLocations: invalidMembers));
                     }
                 }, SyntaxKind.EnumDeclaration);

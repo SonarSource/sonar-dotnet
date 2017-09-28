@@ -106,7 +106,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     if (methodSymbol.IsInType(KnownType.System_String))
                     {
-                        c.CheckReportDiagnostic(Diagnostic.Create(rule, location, MessageCallOnString));
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, location, MessageCallOnString));
                         return;
                     }
 
@@ -130,7 +130,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (parameterLookup.TryGetParameterSymbol(stringFormatArgument, out argParameter) &&
                         argParameter.Name.StartsWith("arg", StringComparison.Ordinal))
                     {
-                        c.CheckReportDiagnostic(Diagnostic.Create(rule, location, MessageCompiler));
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, location, MessageCompiler));
                     }
                 },
                 SyntaxKind.InvocationExpression);
@@ -179,7 +179,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var stringParameterIndex = (checkedSideIndex + 1) % 2;
             if (!DoesCollidingAdditionExist(subExpressionType, stringParameterIndex))
             {
-                context.CheckReportDiagnostic(Diagnostic.Create(rule, location, MessageCompiler));
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, location, MessageCompiler));
             }
         }
 

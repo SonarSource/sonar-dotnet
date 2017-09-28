@@ -56,7 +56,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var diff = ifNode.IfKeyword.Span.End - parentElse.ElseKeyword.SpanStart;
                     var location = Location.Create(c.Node.SyntaxTree, new TextSpan(parentElse.ElseKeyword.SpanStart, diff));
 
-                    c.CheckReportDiagnostic(Diagnostic.Create(rule, location));
+                    c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, location));
                 },
                 SyntaxKind.IfStatement);
         }

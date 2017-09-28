@@ -196,7 +196,7 @@ namespace SonarAnalyzer.UnitTest
                     // method.
                     if (diagnostics.Any())
                     {
-                        ExtensionMethodsCalledForAllDiagnostics(diagnosticAnalyzer).Should().BeTrue("The CheckReportDiagnostic should be used instead of ReportDiagnostic");
+                        ExtensionMethodsCalledForAllDiagnostics(diagnosticAnalyzer).Should().BeTrue("The ReportDiagnosticWhenActive should be used instead of ReportDiagnostic");
                     }
                 }
             }

@@ -62,7 +62,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             if (!IsCorrectEventHandlerSignature(methodSymbol))
             {
-                analysisContext.CheckReportDiagnostic(Diagnostic.Create(rule, typeSyntax.GetLocation()));
+                analysisContext.ReportDiagnosticWhenActive(Diagnostic.Create(rule, typeSyntax.GetLocation()));
             }
         }
 

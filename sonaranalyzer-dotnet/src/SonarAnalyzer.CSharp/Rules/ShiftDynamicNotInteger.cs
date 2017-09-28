@@ -68,7 +68,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 var typeInMessage = GetTypeNameForMessage(right, typeOfRight, context.SemanticModel);
 
-                context.CheckReportDiagnostic(Diagnostic.Create(rule, right.GetLocation(),
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, right.GetLocation(),
                     typeInMessage));
             }
         }

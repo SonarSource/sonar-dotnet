@@ -62,7 +62,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     {
                         var argument = argumentMapping.Argument;
                         var parameter = argumentMapping.Parameter;
-                        c.CheckReportDiagnostic(Diagnostic.Create(rule, argument.GetLocation(), parameter.Name));
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, argument.GetLocation(), parameter.Name));
                     }
                 },
                 SyntaxKind.InvocationExpression);

@@ -51,7 +51,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (methodSymbol != null &&
                         IsMethodCandidate(methodSymbol))
                     {
-                        c.CheckReportDiagnostic(Diagnostic.Create(rule, methodDeclaration.ReturnType.GetLocation()));
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, methodDeclaration.ReturnType.GetLocation()));
                     }
                 },
                 SyntaxKind.MethodDeclaration);

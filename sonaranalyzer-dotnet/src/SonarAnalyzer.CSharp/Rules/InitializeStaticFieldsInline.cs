@@ -65,7 +65,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         .Any(fs => fs.ContainingType.Equals(currentType));
                     if (hasFieldAssignment)
                     {
-                        c.CheckReportDiagnostic(Diagnostic.Create(rule, constructorDeclaration.GetLocation()));
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, constructorDeclaration.GetLocation()));
                     }
                 }, SyntaxKind.ConstructorDeclaration);
         }

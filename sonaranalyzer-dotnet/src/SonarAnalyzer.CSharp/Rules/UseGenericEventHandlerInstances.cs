@@ -79,7 +79,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 eventSymbol.GetInterfaceMember() == null &&
                 (eventSymbol.Type as INamedTypeSymbol)?.ConstructedFrom.IsAny(allowedTypes) == false)
             {
-                analysisContext.CheckReportDiagnostic(Diagnostic.Create(rule, getLocationToReportOn()));
+                analysisContext.ReportDiagnosticWhenActive(Diagnostic.Create(rule, getLocationToReportOn()));
             }
         }
     }

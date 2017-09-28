@@ -70,7 +70,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         var thrown = c.SemanticModel.GetSymbolInfo(@throw.Expression).Symbol as ILocalSymbol;
                         if (Equals(thrown, exceptionIdentifier))
                         {
-                            c.CheckReportDiagnostic(Diagnostic.Create(rule, @throw.GetLocation()));
+                            c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, @throw.GetLocation()));
                         }
                     }
                 },

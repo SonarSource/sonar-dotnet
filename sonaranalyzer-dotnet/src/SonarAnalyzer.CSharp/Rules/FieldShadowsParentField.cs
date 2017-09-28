@@ -59,7 +59,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     fieldDeclaration.Declaration.Variables
                         .SelectMany(v => CheckFields(c.SemanticModel, v))
                         .ToList()
-                        .ForEach(d => c.CheckReportDiagnostic(d));
+                        .ForEach(d => c.ReportDiagnosticWhenActive(d));
                 },
                 SyntaxKind.FieldDeclaration);
         }

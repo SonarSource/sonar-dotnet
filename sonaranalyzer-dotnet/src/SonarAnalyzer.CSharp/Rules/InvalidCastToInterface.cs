@@ -152,7 +152,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 if (!context.Equals(default(SyntaxNodeAnalysisContext)))
                 {
-                    context.CheckReportDiagnostic(Diagnostic.Create(rule, castExpression.GetLocation(), MessageDefinite));
+                    context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, castExpression.GetLocation(), MessageDefinite));
                 }
 
                 return null;
@@ -207,7 +207,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 ? $"implements both '{expressionTypeName}' and '{interfaceTypeName}'"
                 : $"extends '{expressionTypeName}' and implements '{interfaceTypeName}'";
 
-            context.CheckReportDiagnostic(Diagnostic.Create(rule, issueLocation, string.Format(MessageReviewFormat, messageReasoning)));
+            context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, issueLocation, string.Format(MessageReviewFormat, messageReasoning)));
         }
     }
 }

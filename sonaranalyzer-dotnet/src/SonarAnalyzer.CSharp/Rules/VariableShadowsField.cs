@@ -116,7 +116,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            context.CheckReportDiagnostic(Diagnostic.Create(rule, identifier.GetLocation(),
+            context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, identifier.GetLocation(),
                 identifier.Text,
                 (matchingMember is IFieldSymbol) ? "field" : "property"));
         }

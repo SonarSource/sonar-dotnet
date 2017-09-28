@@ -26,27 +26,27 @@ namespace SonarAnalyzer.Helpers
 {
     public static class AnalysisContextExtensions
     {
-        public static void CheckReportDiagnostic(this SyntaxNodeAnalysisContext context, Diagnostic diagnostic)
+        public static void ReportDiagnosticWhenActive(this SyntaxNodeAnalysisContext context, Diagnostic diagnostic)
         {
             ReportWhenNotSuppressed(diagnostic, d => context.ReportDiagnostic(d));
         }
 
-        public static void CheckReportDiagnostic(this SyntaxTreeAnalysisContext context, Diagnostic diagnostic)
+        public static void ReportDiagnosticWhenActive(this SyntaxTreeAnalysisContext context, Diagnostic diagnostic)
         {
             ReportWhenNotSuppressed(diagnostic, d => context.ReportDiagnostic(d));
         }
 
-        public static void CheckReportDiagnostic(this CompilationAnalysisContext context, Diagnostic diagnostic)
+        public static void ReportDiagnosticWhenActive(this CompilationAnalysisContext context, Diagnostic diagnostic)
         {
             ReportWhenNotSuppressed(diagnostic, d => context.ReportDiagnostic(d));
         }
 
-        public static void CheckReportDiagnostic(this SymbolAnalysisContext context, Diagnostic diagnostic)
+        public static void ReportDiagnosticWhenActive(this SymbolAnalysisContext context, Diagnostic diagnostic)
         {
             ReportWhenNotSuppressed(diagnostic, d => context.ReportDiagnostic(d));
         }
 
-        public static void CheckReportDiagnostic(this CodeBlockAnalysisContext context, Diagnostic diagnostic)
+        public static void ReportDiagnosticWhenActive(this CodeBlockAnalysisContext context, Diagnostic diagnostic)
         {
             ReportWhenNotSuppressed(diagnostic, d => context.ReportDiagnostic(d));
         }

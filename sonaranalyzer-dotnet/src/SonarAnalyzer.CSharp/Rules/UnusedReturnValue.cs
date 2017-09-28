@@ -78,7 +78,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                         if (!IsReturnValueUsed(matchingInvocations))
                         {
-                            c.CheckReportDiagnostic(Diagnostic.Create(rule, declaredPrivateMethodWithReturn.SyntaxNode.ReturnType.GetLocation()));
+                            c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, declaredPrivateMethodWithReturn.SyntaxNode.ReturnType.GetLocation()));
                         }
                     }
                 },

@@ -57,7 +57,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     foreach (var ns in namespaces)
                     {
-                        c.CheckReportDiagnostic(Diagnostic.Create(rule, ns.GetLocation()));
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, ns.GetLocation()));
                     }
                 });
         }

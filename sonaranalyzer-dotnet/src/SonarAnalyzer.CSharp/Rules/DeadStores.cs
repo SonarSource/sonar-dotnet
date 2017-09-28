@@ -271,7 +271,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     !IsUnusedLocal(symbol))
                 {
                     var location = GetFirstLineLocationFromToken(declarator.Initializer.EqualsToken, declarator.Initializer);
-                    context.CheckReportDiagnostic(Diagnostic.Create(rule, location, symbol.Name));
+                    context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, location, symbol.Name));
                 }
                 liveOut.Remove(symbol);
             }
@@ -333,7 +333,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (LiveVariableAnalysis.IsLocalScoped(symbol, declaration) &&
                         !liveOut.Contains(symbol))
                     {
-                        context.CheckReportDiagnostic(Diagnostic.Create(rule, prefixExpression.GetLocation(), symbol.Name));
+                        context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, prefixExpression.GetLocation(), symbol.Name));
                     }
                 }
             }
@@ -353,7 +353,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (LiveVariableAnalysis.IsLocalScoped(symbol, declaration) &&
                         !liveOut.Contains(symbol))
                     {
-                        context.CheckReportDiagnostic(Diagnostic.Create(rule, postfixExpression.GetLocation(), symbol.Name));
+                        context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, postfixExpression.GetLocation(), symbol.Name));
                     }
                 }
             }
@@ -365,7 +365,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     !outState.Contains(symbol))
                 {
                     var location = GetFirstLineLocationFromToken(assignment.OperatorToken, assignment.Right);
-                    context.CheckReportDiagnostic(Diagnostic.Create(rule, location, symbol.Name));
+                    context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, location, symbol.Name));
                 }
 
                 assignmentLhs.Add(left);

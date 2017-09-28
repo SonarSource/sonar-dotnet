@@ -54,7 +54,7 @@ namespace SonarAnalyzer.Rules.CSharp
                             .SplitCamelCaseToWords()
                             .Any(w => w == "reserved"))
                     {
-                        c.CheckReportDiagnostic(Diagnostic.Create(rule, enumMemberDeclaration.GetLocation()));
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, enumMemberDeclaration.GetLocation()));
                     }
                 },
                 SyntaxKind.EnumMemberDeclaration);

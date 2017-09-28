@@ -45,7 +45,7 @@ namespace SonarAnalyzer.Rules.Common
                     Diagnostic diagnostic;
                     if (TryGetDiagnostic(c.Node, out diagnostic))
                     {
-                        c.CheckReportDiagnostic(diagnostic);
+                        c.ReportDiagnosticWhenActive(diagnostic);
                     }
                 },
                 SyntaxKindsOfInterest.ToArray());

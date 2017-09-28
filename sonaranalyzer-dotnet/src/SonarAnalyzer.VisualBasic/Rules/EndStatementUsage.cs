@@ -41,7 +41,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
         protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
-                c => c.CheckReportDiagnostic(Diagnostic.Create(rule, c.Node.GetLocation())),
+                c => c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, c.Node.GetLocation())),
                 SyntaxKind.EndStatement);
         }
     }

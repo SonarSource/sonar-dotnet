@@ -63,7 +63,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     foreach (var candidate in propertyCandidates)
                     {
-                        c.CheckReportDiagnostic(Diagnostic.Create(
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(
                             rule,
                             candidate.Locations.FirstOrDefault(),
                             messageArgs: candidate.Name));

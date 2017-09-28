@@ -147,7 +147,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     .Select(s => GetIdentifierLocation(s.GetSyntax()))
                     .WhereNotNull();
 
-                analysisContext.CheckReportDiagnostic(Diagnostic.Create(rule, getLocation(),
+                analysisContext.ReportDiagnosticWhenActive(Diagnostic.Create(rule, getLocation(),
                     additionalLocations: secondaryLocations,
                     messageArgs: methodSymbol.Name));
             }

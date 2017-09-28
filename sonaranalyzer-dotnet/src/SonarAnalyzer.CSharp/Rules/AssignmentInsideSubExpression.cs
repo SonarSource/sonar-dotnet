@@ -55,7 +55,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (IsNonCompliantSubExpression(assignment, topParenthesizedExpression) ||
                         IsDirectlyInStatementCondition(assignment, topParenthesizedExpression))
                     {
-                        c.CheckReportDiagnostic(Diagnostic.Create(rule, assignment.OperatorToken.GetLocation(),
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, assignment.OperatorToken.GetLocation(),
                             assignment.Left.ToString()));
                     }
                 },

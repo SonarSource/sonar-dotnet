@@ -101,7 +101,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             if (isNameClash)
             {
-                context.CheckReportDiagnostic(Diagnostic.Create(rule, typeNameLocation, typeName));
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, typeNameLocation, typeName));
             }
         }
 

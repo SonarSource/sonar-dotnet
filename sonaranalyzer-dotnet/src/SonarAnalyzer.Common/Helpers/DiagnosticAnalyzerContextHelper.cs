@@ -162,7 +162,7 @@ namespace SonarAnalyzer.Helpers
         {
             if (!diagnostic.Location.SourceTree.IsGenerated(generatedCodeRecognizer, compilation))
             {
-                context.CheckReportDiagnostic(diagnostic);
+                context.ReportDiagnosticWhenActive(diagnostic);
             }
         }
 
@@ -174,7 +174,7 @@ namespace SonarAnalyzer.Helpers
         {
             if (!diagnostic.Location.SourceTree.IsGenerated(generatedCodeRecognizer, compilation))
             {
-                context.CheckReportDiagnostic(diagnostic);
+                context.ReportDiagnosticWhenActive(diagnostic);
             }
         }
 

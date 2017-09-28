@@ -85,7 +85,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     if (returnedSymbols.Any())
                     {
-                        c.CheckReportDiagnostic(Diagnostic.Create(rule, usingStatement.UsingKeyword.GetLocation(),
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, usingStatement.UsingKeyword.GetLocation(),
                             string.Join(", ",
                                 returnedSymbols.Select(s => $"'{s.Name}'").OrderBy(s => s))));
                     }

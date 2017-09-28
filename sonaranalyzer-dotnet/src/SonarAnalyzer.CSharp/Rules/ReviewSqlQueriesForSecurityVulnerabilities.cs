@@ -69,7 +69,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         methodSymbol.Parameters.FirstOrDefault()?.Type.Is(KnownType.System_String) == true &&
                         !IsSanitizedQuery(objectCreation.ArgumentList.Arguments[0].Expression, c.SemanticModel))
                     {
-                        c.CheckReportDiagnostic(Diagnostic.Create(rule, objectCreation.Type.GetLocation()));
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, objectCreation.Type.GetLocation()));
                     }
                 }, SyntaxKind.ObjectCreationExpression);
 
@@ -84,7 +84,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         propertySymbol.ContainingType.IsAny(checkedTypes) &&
                         !IsSanitizedQuery(assignment.Right, c.SemanticModel))
                     {
-                        c.CheckReportDiagnostic(Diagnostic.Create(rule, assignment.Left.GetLocation()));
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, assignment.Left.GetLocation()));
                     }
                 }, SyntaxKind.SimpleAssignmentExpression);
         }

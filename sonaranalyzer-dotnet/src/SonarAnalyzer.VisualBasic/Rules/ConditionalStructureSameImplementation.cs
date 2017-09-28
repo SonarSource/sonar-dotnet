@@ -125,7 +125,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             var location = Location.Create(context.Node.SyntaxTree,
                 TextSpan.FromBounds(firstStatement.SpanStart, lastStatement.Span.End));
 
-            context.CheckReportDiagnostic(Diagnostic.Create(rule,
+            context.ReportDiagnosticWhenActive(Diagnostic.Create(rule,
                 location, locationProvider.First().GetLineNumberToReport(), constructType));
         }
 

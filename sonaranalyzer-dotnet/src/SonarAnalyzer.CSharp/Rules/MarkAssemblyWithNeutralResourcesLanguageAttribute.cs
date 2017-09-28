@@ -72,7 +72,7 @@ namespace SonarAnalyzer.Rules.CSharp
                                 return;
                             }
 
-                            cc.CheckReportDiagnostic(Diagnostic.Create(rule, null));
+                            cc.ReportDiagnosticWhenActive(Diagnostic.Create(rule, null));
                         });
                 });
         }

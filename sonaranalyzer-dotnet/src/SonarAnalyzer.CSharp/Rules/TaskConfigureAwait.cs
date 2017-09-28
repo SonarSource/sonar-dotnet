@@ -63,7 +63,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var type = c.SemanticModel.GetTypeInfo(expression).Type;
                     if (type.DerivesFrom(KnownType.System_Threading_Tasks_Task))
                     {
-                        c.CheckReportDiagnostic(Diagnostic.Create(rule, expression.GetLocation()));
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, expression.GetLocation()));
                     }
                 },
                 SyntaxKind.AwaitExpression);

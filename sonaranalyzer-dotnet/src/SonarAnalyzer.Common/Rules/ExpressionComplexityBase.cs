@@ -80,7 +80,7 @@ namespace SonarAnalyzer.Rules
 
                     foreach (var complexExpression in complexExpressions)
                     {
-                        c.CheckReportDiagnostic(Diagnostic.Create(Rule,
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule,
                             complexExpression.Expression.GetLocation(),
                             Maximum,
                             complexExpression.Complexity));

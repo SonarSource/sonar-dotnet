@@ -71,7 +71,7 @@ namespace SonarAnalyzer.Rules.CSharp
             if (typeSymbol != null &&
                 typeSymbol.OriginalDefinition.Is(KnownType.System_Nullable_T))
             {
-                context.CheckReportDiagnostic(Diagnostic.Create(rule, location));
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, location));
             }
         }
     }

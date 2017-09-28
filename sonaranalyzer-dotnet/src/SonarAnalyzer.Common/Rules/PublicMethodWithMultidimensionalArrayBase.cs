@@ -56,7 +56,7 @@ namespace SonarAnalyzer.Rules.Common
                     }
 
                     var identifier = GetIdentifier(method);
-                    c.CheckReportDiagnostic(Diagnostic.Create(Rule, identifier.GetLocation()));
+                    c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, identifier.GetLocation()));
                 },
                 SyntaxKindsOfInterest.ToArray());
         }

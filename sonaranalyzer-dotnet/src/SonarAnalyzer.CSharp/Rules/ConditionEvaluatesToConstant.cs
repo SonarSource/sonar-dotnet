@@ -91,7 +91,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         .Except(conditionTrue)
                         .Select(node => GetDiagnostics(node, false)))
                     .ToList()
-                    .ForEach(d => context.CheckReportDiagnostic(d));
+                    .ForEach(d => context.ReportDiagnosticWhenActive(d));
 
             explodedGraph.ExplorationEnded += explorationEnded;
             explodedGraph.ConditionEvaluated += collectConditions;

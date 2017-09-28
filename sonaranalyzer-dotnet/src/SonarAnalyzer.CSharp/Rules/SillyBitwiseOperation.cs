@@ -74,7 +74,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 var location = assignment.Parent is StatementSyntax
                     ? assignment.Parent.GetLocation()
                     : GetReportLocation(assignment.OperatorToken.Span, assignment.Right.Span, assignment.SyntaxTree);
-                context.CheckReportDiagnostic(Diagnostic.Create(rule, location));
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, location));
             }
         }
 
@@ -86,7 +86,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 constValue == constValueToLookFor)
             {
                 var location = GetReportLocation(binary.Left.Span, binary.OperatorToken.Span, binary.SyntaxTree);
-                context.CheckReportDiagnostic(Diagnostic.Create(rule, location, ImmutableDictionary<string, string>.Empty.Add(IsReportingOnLeftKey, true.ToString())));
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, location, ImmutableDictionary<string, string>.Empty.Add(IsReportingOnLeftKey, true.ToString())));
                 return;
             }
 
@@ -94,7 +94,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 constValue == constValueToLookFor)
             {
                 var location = GetReportLocation(binary.OperatorToken.Span, binary.Right.Span, binary.SyntaxTree);
-                context.CheckReportDiagnostic(Diagnostic.Create(rule, location, ImmutableDictionary<string, string>.Empty.Add(IsReportingOnLeftKey, false.ToString())));
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, location, ImmutableDictionary<string, string>.Empty.Add(IsReportingOnLeftKey, false.ToString())));
             }
         }
 

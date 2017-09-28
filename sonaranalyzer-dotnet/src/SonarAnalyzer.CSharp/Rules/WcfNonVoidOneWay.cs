@@ -71,7 +71,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (isOneWay.HasValue &&
                         isOneWay.Value)
                     {
-                        c.CheckReportDiagnostic(Diagnostic.Create(rule, methodDeclaration.ReturnType.GetLocation()));
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, methodDeclaration.ReturnType.GetLocation()));
                     }
                 },
                 SyntaxKind.MethodDeclaration);

@@ -48,7 +48,7 @@ namespace SonarAnalyzer.Rules
                     foreach (var line in c.Tree.GetText().Lines
                         .Where(line => line.Span.Length > Maximum))
                     {
-                        c.CheckReportDiagnostic(Diagnostic.Create(Rule, c.Tree.GetLocation(line.Span),
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, c.Tree.GetLocation(line.Span),
                             Maximum, line.Span.Length));
                     }
                 });

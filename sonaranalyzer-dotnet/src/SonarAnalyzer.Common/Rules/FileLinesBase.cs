@@ -50,7 +50,7 @@ namespace SonarAnalyzer.Rules
 
                     if (lines > Maximum)
                     {
-                        c.CheckReportDiagnostic(Diagnostic.Create(Rule, Location.Create(c.Tree, TextSpan.FromBounds(0, 0)), Maximum, lines));
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, Location.Create(c.Tree, TextSpan.FromBounds(0, 0)), Maximum, lines));
                     }
                 });
         }

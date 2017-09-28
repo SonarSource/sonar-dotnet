@@ -57,7 +57,7 @@ namespace SonarAnalyzer.Rules
             var complexity = GetComplexity(nodeToAnalyze);
             if (complexity > Maximum)
             {
-                context.CheckReportDiagnostic(Diagnostic.Create(Rule, location(syntax), Maximum, complexity, declarationType));
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, location(syntax), Maximum, complexity, declarationType));
             }
         }
 

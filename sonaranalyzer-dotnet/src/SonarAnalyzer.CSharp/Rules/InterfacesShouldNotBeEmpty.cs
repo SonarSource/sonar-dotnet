@@ -56,7 +56,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     !interfaceDeclaration.Identifier.IsMissing &&
                     interfaceDeclaration.Members.Count == 0)
                 {
-                    c.CheckReportDiagnostic(Diagnostic.Create(rule, interfaceDeclaration.Identifier.GetLocation()));
+                    c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, interfaceDeclaration.Identifier.GetLocation()));
                 }
             },
             SyntaxKind.InterfaceDeclaration);

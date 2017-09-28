@@ -68,7 +68,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (enclosingMethodSymbol == null ||
                         !IsMethodMatchingDisposeMethodName(enclosingMethodSymbol))
                     {
-                        c.CheckReportDiagnostic(Diagnostic.Create(rule, memberAccess.Name.GetLocation()));
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, memberAccess.Name.GetLocation()));
                     }
                 },
                 SyntaxKind.InvocationExpression);

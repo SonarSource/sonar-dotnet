@@ -62,7 +62,7 @@ namespace SonarAnalyzer.Rules
 
                     if (!NamingHelper.IsRegexMatch(enumIdentifier.ValueText, enumPattern))
                     {
-                        c.CheckReportDiagnostic(Diagnostic.Create(Rule, enumIdentifier.GetLocation(),
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, enumIdentifier.GetLocation(),
                             enumPattern));
                     }
                 },

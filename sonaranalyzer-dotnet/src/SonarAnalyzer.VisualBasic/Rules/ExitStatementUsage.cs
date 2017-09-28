@@ -43,7 +43,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
         protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
-                c => c.CheckReportDiagnostic(Diagnostic.Create(rule, c.Node.GetLocation())),
+                c => c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, c.Node.GetLocation())),
                 SyntaxKind.ExitForStatement,
                 SyntaxKind.ExitFunctionStatement,
                 SyntaxKind.ExitPropertyStatement,
@@ -67,7 +67,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                         return;
                     }
 
-                    c.CheckReportDiagnostic(Diagnostic.Create(rule, c.Node.GetLocation()));
+                    c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, c.Node.GetLocation()));
                 },
                 SyntaxKind.ExitDoStatement);
         }

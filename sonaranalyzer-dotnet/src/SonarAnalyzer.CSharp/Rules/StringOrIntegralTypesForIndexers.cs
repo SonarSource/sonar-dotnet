@@ -69,7 +69,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     return;
                 }
 
-                c.CheckReportDiagnostic(Diagnostic.Create(rule, parameter.Type.GetLocation()));
+                c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, parameter.Type.GetLocation()));
             },
             SyntaxKind.IndexerDeclaration);
         }

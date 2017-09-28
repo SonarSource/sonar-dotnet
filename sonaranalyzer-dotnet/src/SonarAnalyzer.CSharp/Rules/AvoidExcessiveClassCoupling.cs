@@ -100,7 +100,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     if (classCouplingCount > Threshold)
                     {
-                        c.CheckReportDiagnostic(Diagnostic.Create(rule, classDeclaration.Identifier.GetLocation(),
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, classDeclaration.Identifier.GetLocation(),
                             classCouplingCount, Threshold));
                     }
                 }, SyntaxKind.ClassDeclaration);

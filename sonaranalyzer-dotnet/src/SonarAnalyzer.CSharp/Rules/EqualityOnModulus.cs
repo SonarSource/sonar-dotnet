@@ -51,7 +51,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (CheckExpression(equalsExpression.Left, equalsExpression.Right, c.SemanticModel, out constantValue) ||
                         CheckExpression(equalsExpression.Right, equalsExpression.Left, c.SemanticModel, out constantValue))
                     {
-                        c.CheckReportDiagnostic(Diagnostic.Create(rule, equalsExpression.GetLocation(),
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, equalsExpression.GetLocation(),
                             constantValue < 0 ? "negative" : "positive"));
                     }
                 },
