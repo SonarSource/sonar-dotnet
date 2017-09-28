@@ -61,7 +61,7 @@ namespace SonarAnalyzer.Rules.Common
                     foreach (var parameter in parameters.Where(p => IsOptional(p) && !HasAllowedAttribute(p, c.SemanticModel)))
                     {
                         var location = GetReportLocation(parameter);
-                        c.ReportDiagnostic(Diagnostic.Create(Rule, location));
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, location));
                     }
                 },
                 SyntaxKindsOfInterest.ToArray());

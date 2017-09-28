@@ -46,7 +46,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                     var expression = (AssignmentStatementSyntax) c.Node;
                     if (EquivalenceChecker.AreEquivalent(expression.Left, expression.Right))
                     {
-                        c.ReportDiagnostic(Diagnostic.Create(rule, c.Node.GetLocation()));
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, c.Node.GetLocation()));
                     }
                 },
                 SyntaxKind.SimpleAssignmentStatement);

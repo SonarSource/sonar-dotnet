@@ -59,7 +59,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         !classSymbol.IsAbstract &&
                         !classSymbol.IsSealed)
                     {
-                        c.ReportDiagnostic(Diagnostic.Create(rule, classDeclaration.Identifier.GetLocation()));
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, classDeclaration.Identifier.GetLocation()));
                     }
                 }, SyntaxKind.ClassDeclaration);
         }

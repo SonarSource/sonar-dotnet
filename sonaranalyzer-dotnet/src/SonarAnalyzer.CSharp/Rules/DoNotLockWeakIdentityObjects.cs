@@ -64,7 +64,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 if (lockExpressionType != null &&
                     lockExpressionType.DerivesFromAny(weakIdentityTypes))
                 {
-                    c.ReportDiagnostic(Diagnostic.Create(rule, lockExpression.GetLocation(), 
+                    c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, lockExpression.GetLocation(), 
                         lockExpressionType.Name));
                 }
             },

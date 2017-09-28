@@ -61,7 +61,7 @@ namespace SonarAnalyzer.Rules.Common
                     var identifier = GetIdentifier(zeroMember);
                     if (identifier.ValueText != "None")
                     {
-                        c.ReportDiagnostic(Diagnostic.Create(Rule, zeroMember.GetLocation(),
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, zeroMember.GetLocation(),
                             identifier.ValueText));
                     }
                 },

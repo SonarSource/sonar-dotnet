@@ -55,7 +55,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     if (!structSymbol.Implements(KnownType.System_IEquatable_T))
                     {
-                        c.ReportDiagnostic(Diagnostic.Create(rule, declaration.Identifier.GetLocation(),
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, declaration.Identifier.GetLocation(),
                             declaration.Identifier.ValueText));
                     }
 

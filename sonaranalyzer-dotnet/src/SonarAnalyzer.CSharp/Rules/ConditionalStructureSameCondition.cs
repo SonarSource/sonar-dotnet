@@ -54,7 +54,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     if (precedingCondition != null)
                     {
-                        c.ReportDiagnostic(Diagnostic.Create(
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(
                             rule,
                             currentCondition.GetLocation(),
                             additionalLocations: new[] { precedingCondition.GetLocation() },

@@ -69,7 +69,7 @@ namespace SonarAnalyzer.Rules
 
             if (ShouldReportOnMethodCall(invocation, analysisContext.SemanticModel))
             {
-                analysisContext.ReportDiagnostic(Diagnostic.Create(Rule, identifier.Value.GetLocation(),
+                analysisContext.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, identifier.Value.GetLocation(),
                     methodSignature.ToShortName()));
             }
         }

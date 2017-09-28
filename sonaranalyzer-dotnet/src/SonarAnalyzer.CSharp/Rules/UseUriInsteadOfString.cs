@@ -110,14 +110,14 @@ namespace SonarAnalyzer.Rules.CSharp
                         mSyntax => true,
                         mSymbol => methodOverloadSet.Contains(mSymbol)))
                 {
-                    context.ReportDiagnostic(Diagnostic.Create(rule_S3997, methodDeclaration.FindIdentifierLocation()));
+                    context.ReportDiagnosticWhenActive(Diagnostic.Create(rule_S3997, methodDeclaration.FindIdentifierLocation()));
                 }
             }
             else
             {
                 foreach (int paramIdx in stringUrlParams)
                 {
-                    context.ReportDiagnostic(Diagnostic.Create(rule_S3994,
+                    context.ReportDiagnosticWhenActive(Diagnostic.Create(rule_S3994,
                         methodDeclaration.ParameterList.Parameters[paramIdx].Type.GetLocation()));
                 }
             }
@@ -132,7 +132,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 !propertySymbol.IsOverride &&
                 NameContainsUri(propertySymbol.Name))
             {
-                context.ReportDiagnostic(Diagnostic.Create(rule_S3996, propertyDeclaration.Type.GetLocation()));
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule_S3996, propertyDeclaration.Type.GetLocation()));
             }
         }
 
@@ -148,7 +148,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var methodOverloads = FindOverloadsThatUseUriTypeInPlaceOfString(invokedMethodSymbol, stringUrlParams);
             if (stringUrlParams.Count > 0 && methodOverloads.Any())
             {
-                context.ReportDiagnostic(Diagnostic.Create(rule_S4005, context.Node.GetLocation()));
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule_S4005, context.Node.GetLocation()));
             }
         }
 
@@ -161,7 +161,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 methodSymbol.ReturnType.Is(KnownType.System_String) &&
                 NameContainsUri(methodSymbol.Name))
             {
-                context.ReportDiagnostic(Diagnostic.Create(rule_S3995, returnTypeLocation));
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule_S3995, returnTypeLocation));
             }
         }
 

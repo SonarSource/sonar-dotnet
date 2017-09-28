@@ -86,7 +86,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var bannedWords = FindBannedWords(variableName, variableValue);
             if (bannedWords != null)
             {
-                context.ReportDiagnostic(Diagnostic.Create(rule, assignment.GetLocation(), bannedWords));
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, assignment.GetLocation(), bannedWords));
             }
         }
 
@@ -107,7 +107,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 var bannedWords = FindBannedWords(variableDeclarator);
                 if (bannedWords != null)
                 {
-                    context.ReportDiagnostic(Diagnostic.Create(rule,
+                    context.ReportDiagnosticWhenActive(Diagnostic.Create(rule,
                         variableDeclarator.GetLocation(), bannedWords));
                 }
             }

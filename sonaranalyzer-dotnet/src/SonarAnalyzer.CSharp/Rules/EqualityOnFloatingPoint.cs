@@ -85,7 +85,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 var messageEqualityPart = GetMessageEqualityPart(isEquality);
 
-                context.ReportDiagnostic(Diagnostic.Create(rule, binaryExpression.GetLocation(), messageEqualityPart));
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, binaryExpression.GetLocation(), messageEqualityPart));
             }
         }
 
@@ -106,7 +106,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 var messageEqualityPart = GetMessageEqualityPart(equals.IsKind(SyntaxKind.EqualsExpression));
 
-                context.ReportDiagnostic(Diagnostic.Create(rule, equals.OperatorToken.GetLocation(), messageEqualityPart));
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, equals.OperatorToken.GetLocation(), messageEqualityPart));
             }
         }
 

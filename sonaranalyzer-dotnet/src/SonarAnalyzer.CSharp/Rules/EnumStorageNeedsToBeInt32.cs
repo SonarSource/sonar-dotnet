@@ -50,7 +50,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (enumDeclaration != null &&
                         !IsInt32OrDefault(enumBaseType, c.SemanticModel))
                     {
-                        c.ReportDiagnostic(Diagnostic.Create(rule, enumDeclaration.Identifier.GetLocation()));
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, enumDeclaration.Identifier.GetLocation()));
                     }
                 },
                 SyntaxKind.EnumDeclaration);

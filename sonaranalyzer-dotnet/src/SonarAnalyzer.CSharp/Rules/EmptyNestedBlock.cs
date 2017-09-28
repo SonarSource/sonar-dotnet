@@ -49,7 +49,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     if (IsEmpty(c.Node))
                     {
-                        c.ReportDiagnostic(Diagnostic.Create(rule, c.Node.GetLocation()));
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, c.Node.GetLocation()));
                     }
                 },
                 SyntaxKind.Block,

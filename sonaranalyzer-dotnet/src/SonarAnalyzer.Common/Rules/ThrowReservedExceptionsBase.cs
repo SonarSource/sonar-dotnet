@@ -55,7 +55,7 @@ namespace SonarAnalyzer.Rules
             var expressionType = context.SemanticModel.GetTypeInfo(throwStatementExpression).Type;
             if (expressionType.IsAny(ReservedExceptionTypeNames))
             {
-                context.ReportDiagnostic(Diagnostic.Create(Rule, throwStatementExpression.GetLocation(),
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, throwStatementExpression.GetLocation(),
                     expressionType.ToDisplayString()));
             }
         }

@@ -87,7 +87,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             if (dllImportAttribute.ConstructorArguments.Any(x => x.Value.Equals(InteropDllName)))
             {
-                analysisContext.ReportDiagnostic(Diagnostic.Create(rule, directMethodCall.Identifier.GetLocation(),
+                analysisContext.ReportDiagnosticWhenActive(Diagnostic.Create(rule, directMethodCall.Identifier.GetLocation(),
                     directMethodCall.Identifier.ValueText));
             }
         }

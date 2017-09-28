@@ -60,7 +60,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 foreach (var location in walker.Locations)
                 {
-                    c.ReportDiagnostic(Diagnostic.Create(s2365, location, property.Identifier.Text));
+                    c.ReportDiagnosticWhenActive(Diagnostic.Create(s2365, location, property.Identifier.Text));
                 }
             }, SyntaxKind.PropertyDeclaration);
         }

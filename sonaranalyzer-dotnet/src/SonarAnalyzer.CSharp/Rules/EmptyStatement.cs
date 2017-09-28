@@ -43,7 +43,7 @@ namespace SonarAnalyzer.Rules.CSharp
         protected sealed override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
-                c => c.ReportDiagnostic(Diagnostic.Create(rule, c.Node.GetLocation())),
+                c => c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, c.Node.GetLocation())),
                 SyntaxKind.EmptyStatement);
         }
     }

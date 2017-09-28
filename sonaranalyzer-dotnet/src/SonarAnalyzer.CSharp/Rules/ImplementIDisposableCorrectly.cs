@@ -59,7 +59,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 var locations = checker.GetIssueLocations();
                 if (locations.Any())
                 {
-                    c.ReportDiagnostic(Diagnostic.Create(rule, classDeclaration.Identifier.GetLocation(),
+                    c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, classDeclaration.Identifier.GetLocation(),
                         locations.ToAdditionalLocations(),
                         locations.ToProperties()));
                 }

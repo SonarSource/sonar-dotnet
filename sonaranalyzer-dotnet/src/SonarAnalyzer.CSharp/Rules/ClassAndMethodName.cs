@@ -101,7 +101,7 @@ namespace SonarAnalyzer.Rules.CSharp
             if (identifier.ValueText.StartsWith("_", StringComparison.Ordinal) ||
                 identifier.ValueText.EndsWith("_", StringComparison.Ordinal))
             {
-                context.ReportDiagnostic(Diagnostic.Create(rule_TypeName, identifier.GetLocation(),
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule_TypeName, identifier.GetLocation(),
                     TypeKindNameMapping[typeDeclaration.Kind()],
                     identifier.ValueText, MessageFormatUnderscore));
                 return;
@@ -117,7 +117,7 @@ namespace SonarAnalyzer.Rules.CSharp
             if (!isNameValid)
             {
                 var messageEnding = string.Format(MessageFormatNonUnderscore, suggestion);
-                context.ReportDiagnostic(Diagnostic.Create(rule_TypeName, identifier.GetLocation(),
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule_TypeName, identifier.GetLocation(),
                     TypeKindNameMapping[typeDeclaration.Kind()], identifier.ValueText, messageEnding));
             }
         }
@@ -142,7 +142,7 @@ namespace SonarAnalyzer.Rules.CSharp
             if (identifier.ValueText.StartsWith("_", StringComparison.Ordinal) ||
                 identifier.ValueText.EndsWith("_", StringComparison.Ordinal))
             {
-                context.ReportDiagnostic(Diagnostic.Create(rule_MethodName, identifier.GetLocation(),
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule_MethodName, identifier.GetLocation(),
                     TypeKindNameMapping[member.Kind()],
                     identifier.ValueText, MessageFormatUnderscore));
                 return;
@@ -157,7 +157,7 @@ namespace SonarAnalyzer.Rules.CSharp
             if (!IsMemberNameValid(identifier.ValueText, out suggestion))
             {
                 var messageEnding = string.Format(MessageFormatNonUnderscore, suggestion);
-                context.ReportDiagnostic(Diagnostic.Create(rule_MethodName, identifier.GetLocation(),
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule_MethodName, identifier.GetLocation(),
                     TypeKindNameMapping[member.Kind()],
                     identifier.ValueText, messageEnding));
             }

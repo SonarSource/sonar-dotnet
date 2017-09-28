@@ -61,7 +61,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 if (refObjectParameters.Count > 0)
                 {
                     var parameterLocations = refObjectParameters.Select(p => p.Locations.FirstOrDefault()).WhereNotNull();
-                    c.ReportDiagnostic(Diagnostic.Create(rule, methodDeclaration.Identifier.GetLocation(),
+                    c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, methodDeclaration.Identifier.GetLocation(),
                         additionalLocations: parameterLocations));
                 }
 

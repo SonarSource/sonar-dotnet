@@ -60,7 +60,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         .Where(IsIEquatableEqualsMethodCandidate)
                         .Where(ms => ms.GetInterfaceMember() == null)
                         .ToList()
-                        .ForEach(ms => c.ReportDiagnostic(Diagnostic.Create(rule,
+                        .ForEach(ms => c.ReportDiagnosticWhenActive(Diagnostic.Create(rule,
                             classDeclaration.Identifier.GetLocation(),
                             ms.Parameters[0].Type.Name)));
                 }, SyntaxKind.ClassDeclaration);

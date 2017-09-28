@@ -59,7 +59,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     {
                         var additionalLocations = new[] { parentIfStatment.IfKeyword.GetLocation() };
 
-                        c.ReportDiagnostic(Diagnostic.Create(
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(
                             rule,
                             ifStatement.IfKeyword.GetLocation(),
                             additionalLocations: additionalLocations));

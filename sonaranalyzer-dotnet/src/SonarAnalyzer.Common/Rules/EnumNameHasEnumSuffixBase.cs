@@ -51,7 +51,7 @@ namespace SonarAnalyzer.Rules
                     var nameEnding = NameEndings.FirstOrDefault(ending => name.EndsWith(ending, System.StringComparison.OrdinalIgnoreCase));
                     if (nameEnding != null)
                     {
-                        c.ReportDiagnostic(Diagnostic.Create(Rule, identifier.GetLocation(),
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, identifier.GetLocation(),
                             name.Substring(name.Length - nameEnding.Length, nameEnding.Length)));
                     }
                 },

@@ -51,7 +51,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    c.ReportDiagnostic(Diagnostic.Create(rule, destructorDeclaration.GetLocation()));
+                    c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, destructorDeclaration.GetLocation()));
                 }, SyntaxKind.DestructorDeclaration);
         }
     }

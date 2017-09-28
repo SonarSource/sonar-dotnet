@@ -63,7 +63,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         var propertyIdentifier = collidingMembers.Item1;
                         var methodIdentifier = collidingMembers.Item2;
 
-                        c.ReportDiagnostic(Diagnostic.Create(
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(
                             rule,
                             propertyIdentifier.GetLocation(),
                             additionalLocations: new[] { methodIdentifier.GetLocation() },

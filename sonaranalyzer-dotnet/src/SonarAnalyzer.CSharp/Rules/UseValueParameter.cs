@@ -94,7 +94,7 @@ namespace SonarAnalyzer.Rules.CSharp
                             if (!foundValueReference)
                             {
                                 var accessorType = GetAccessorType(accessorDeclaration);
-                                c.ReportDiagnostic(Diagnostic.Create(rule, accessorDeclaration.Keyword.GetLocation(), accessorType));
+                                c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, accessorDeclaration.Keyword.GetLocation(), accessorType));
                             }
                         });
                 });

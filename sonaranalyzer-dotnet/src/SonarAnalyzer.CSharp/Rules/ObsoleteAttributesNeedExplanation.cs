@@ -51,7 +51,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (attributeConstructorSymbol.IsInType(KnownType.System_ObsoleteAttribute) &&
                         !attributeConstructorSymbol.GetParameters().Any())
                     {
-                        c.ReportDiagnostic(Diagnostic.Create(rule, attributeSyntax.GetLocation()));
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, attributeSyntax.GetLocation()));
                     }
                 },
                 SyntaxKind.Attribute);

@@ -70,7 +70,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 var issues = FindIssues(methodSymbol).ToList();
                 if (issues.Count > 0)
                 {
-                    c.ReportDiagnostic(Diagnostic.Create(rule,
+                    c.ReportDiagnosticWhenActive(Diagnostic.Create(rule,
                         methodDeclaration.Identifier.GetLocation(),
                         BuildErrorMessage(issues)));
                 }

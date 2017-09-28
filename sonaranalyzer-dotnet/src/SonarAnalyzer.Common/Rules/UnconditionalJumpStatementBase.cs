@@ -48,7 +48,7 @@ namespace SonarAnalyzer.Rules
                     walker.Visit();
                     foreach (var node in walker.GetRuleViolations())
                     {
-                        c.ReportDiagnostic(Diagnostic.Create(Rule, node.GetLocation(), GetKeywordText(node)));
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, node.GetLocation(), GetKeywordText(node)));
                     }
                 },
                 LoopStatements.ToArray());

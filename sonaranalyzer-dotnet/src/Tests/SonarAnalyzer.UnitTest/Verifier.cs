@@ -19,6 +19,7 @@
  */
 
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Data;
@@ -142,6 +143,8 @@ namespace SonarAnalyzer.UnitTest
         private static void VerifyAnalyzer(IEnumerable<DocumentInfo> documents, string fileExtension, SonarDiagnosticAnalyzer diagnosticAnalyzer, ParseOptions options = null,
             params MetadataReference[] additionalReferences)
         {
+            HookSuppression();
+
             var parseOptions = GetParseOptionsAlternatives(options, fileExtension);
 
             using (var workspace = new AdhocWorkspace())
@@ -186,6 +189,14 @@ namespace SonarAnalyzer.UnitTest
                     if (expectedIssues.Count != 0)
                     {
                         Execute.Assertion.FailWith($"Issue expected but not raised on line(s) {string.Join(",", expectedIssues.Select(i => i.LineNumber))}.");
+                    }
+
+                    // When there are no diagnostics reported from the test (for example the FileLines analyzer
+                    // does not report in each call to Verifier.VerifyAnalyzer) we skip the check for the extension
+                    // method.
+                    if (diagnostics.Any())
+                    {
+                        ExtensionMethodsCalledForAllDiagnostics(diagnosticAnalyzer).Should().BeTrue("The ReportDiagnosticWhenActive should be used instead of ReportDiagnostic");
                     }
                 }
             }
@@ -575,6 +586,38 @@ namespace SonarAnalyzer.UnitTest
             return actions;
         }
 
+        #endregion
+
+        #region Suppression
+
+        private static bool isHooked = false;
+
+        private static ConcurrentDictionary<string, int> counters = new ConcurrentDictionary<string, int>();
+
+        private static void HookSuppression()
+        {
+            if (isHooked)
+            {
+                return;
+            }
+
+            SonarAnalysisContext.ShouldDiagnosticBeReported = (d) =>
+            {
+                counters.AddOrUpdate(d.Id, addValueFactory: (key) => 1, updateValueFactory: (key, count) => count + 1);
+                return false;
+            };
+        }
+
+        private static bool ExtensionMethodsCalledForAllDiagnostics(DiagnosticAnalyzer analyzer)
+        {
+            // In general this check is not very precise, because when the tests are run in parallel
+            // we cannot determine which diagnostic was reported from which analyzer instance. In other
+            // words, we cannot distinguish between diagnostics reported from different tests. That's
+            // why we require each diagnostic to be reported through the extension methods at least once.
+            return analyzer.SupportedDiagnostics
+                .Select(d => counters.GetValueOrDefault(d.Id))
+                .Any(count => count > 0);
+        }
         #endregion
 
         private class DocumentInfo

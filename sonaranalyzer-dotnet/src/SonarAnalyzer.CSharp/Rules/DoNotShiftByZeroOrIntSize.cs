@@ -107,7 +107,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var issueDescription = FindProblemDescription(variableBitLength, shiftByCount);
             if (issueDescription != null)
             {
-                context.ReportDiagnostic(Diagnostic.Create(rule, location, issueDescription));
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, location, issueDescription));
             }
         }
 

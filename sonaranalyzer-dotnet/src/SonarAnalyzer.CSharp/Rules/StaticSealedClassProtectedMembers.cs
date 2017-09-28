@@ -81,7 +81,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 .Where(m => m.IsKind(SyntaxKind.ProtectedKeyword))
                 .Select(m => Diagnostic.Create(rule, m.GetLocation()))
                 .ToList()
-                .ForEach(context.ReportDiagnostic);
+                .ForEach(d => context.ReportDiagnosticWhenActive(d));
         }
     }
 }

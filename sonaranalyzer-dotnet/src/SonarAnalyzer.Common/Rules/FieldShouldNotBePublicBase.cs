@@ -66,7 +66,7 @@ namespace SonarAnalyzer.Rules
                         .Where(f => FieldIsRelevant(f.Symbol)))
                     {
                         var identifier = GetIdentifier(variable.Syntax);
-                        c.ReportDiagnostic(Diagnostic.Create(Rule, identifier.GetLocation(),
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, identifier.GetLocation(),
                             identifier.ValueText));
                     }
                 },

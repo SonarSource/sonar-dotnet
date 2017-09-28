@@ -199,13 +199,13 @@ namespace SonarAnalyzer.Rules.CSharp
 
             if (variance == VarianceKind.In)
             {
-                context.ReportDiagnostic(Diagnostic.Create(rule, location, "in", typeParameter.Name, "contravariant"));
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, location, "in", typeParameter.Name, "contravariant"));
                 return;
             }
 
             if (variance == VarianceKind.Out)
             {
-                context.ReportDiagnostic(Diagnostic.Create(rule, location, "out", typeParameter.Name, "covariant"));
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, location, "out", typeParameter.Name, "covariant"));
             }
         }
 

@@ -59,7 +59,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     if (breakStatement.IsKind(SyntaxKind.BreakStatement))
                     {
-                        c.ReportDiagnostic(Diagnostic.Create(rule, section.GetLocation()));
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, section.GetLocation()));
                     }
                 },
                 SyntaxKind.SwitchSection);

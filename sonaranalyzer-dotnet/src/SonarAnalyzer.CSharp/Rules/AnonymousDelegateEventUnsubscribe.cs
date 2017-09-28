@@ -56,7 +56,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         var location = Location.Create(c.Node.SyntaxTree,
                             new TextSpan(assignment.OperatorToken.SpanStart, assignment.Span.End - assignment.OperatorToken.SpanStart));
 
-                        c.ReportDiagnostic(Diagnostic.Create(rule, location));
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, location));
                     }
                 },
                 SyntaxKind.SubtractAssignmentExpression);

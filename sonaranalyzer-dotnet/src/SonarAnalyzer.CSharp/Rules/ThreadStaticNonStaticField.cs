@@ -52,7 +52,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (!fieldDeclaration.Modifiers.Any(modifier => modifier.IsKind(SyntaxKind.StaticKeyword)) &&
                         fieldDeclaration.AttributeLists.TryGetAttribute(KnownType.System_ThreadStaticAttribute, c.SemanticModel, out threadStaticAttribute))
                     {
-                        c.ReportDiagnostic(Diagnostic.Create(rule, threadStaticAttribute.Name.GetLocation()));
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, threadStaticAttribute.Name.GetLocation()));
                     }
                 },
                 SyntaxKind.FieldDeclaration);

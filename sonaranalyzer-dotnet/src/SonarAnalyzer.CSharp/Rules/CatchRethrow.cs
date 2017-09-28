@@ -89,7 +89,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             foreach (var redundantCatch in redundantCatches)
             {
-                context.ReportDiagnostic(Diagnostic.Create(rule, redundantCatch.GetLocation()));
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, redundantCatch.GetLocation()));
             }
         }
 

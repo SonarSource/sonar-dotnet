@@ -55,7 +55,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
                     if (caseBlock.Statements.Last() == exit)
                     {
-                        c.ReportDiagnostic(Diagnostic.Create(rule, exit.GetLocation()));
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, exit.GetLocation()));
                     }
                 },
                 SyntaxKind.ExitSelectStatement);

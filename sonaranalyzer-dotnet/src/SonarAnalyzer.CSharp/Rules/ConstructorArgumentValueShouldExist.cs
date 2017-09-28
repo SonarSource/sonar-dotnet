@@ -60,7 +60,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     {
                         var attributeSyntax =
                             (AttributeSyntax)constructorArgumentAttribute.ApplicationSyntaxReference.GetSyntax();
-                        c.ReportDiagnostic(Diagnostic.Create(rule,
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule,
                             attributeSyntax.ArgumentList.Arguments[0].GetLocation()));
                     }
                 },

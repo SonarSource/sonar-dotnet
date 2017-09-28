@@ -100,7 +100,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var symbol = context.SemanticModel.GetTypeInfo(memberAccess.Expression).Type;
             if (symbol.GetMembers(CountName).OfType<IPropertySymbol>().Any())
             {
-                context.ReportDiagnostic(Diagnostic.Create(rule, GetReportLocation(invocation),
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, GetReportLocation(invocation),
                     string.Format(MessageUseInstead, $"'{CountName}' property")));
             }
         }
@@ -125,7 +125,7 @@ namespace SonarAnalyzer.Rules.CSharp
             if (innerMethodSymbol != null &&
                 IsToCollectionCall(innerMethodSymbol))
             {
-                context.ReportDiagnostic(Diagnostic.Create(rule, GetReportLocation(innerInvocation),
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, GetReportLocation(innerInvocation),
                     string.Format(MessageDropFromMiddle, innerMethodSymbol.Name)));
             }
         }
@@ -250,7 +250,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 IsFirstExpressionInLambdaIsNullChecking(outerMethodSymbol, outerInvocation) &&
                 TryGetCastInLambda(SyntaxKind.AsExpression, innerMethodSymbol, innerInvocation, out typeNameInInner))
             {
-                context.ReportDiagnostic(Diagnostic.Create(rule, GetReportLocation(innerInvocation),
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, GetReportLocation(innerInvocation),
                     string.Format(MessageUseInstead, $"'OfType<{typeNameInInner}>()'")));
             }
 
@@ -261,7 +261,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 TryGetCastInLambda(SyntaxKind.IsExpression, innerMethodSymbol, innerInvocation, out typeNameInInner) &&
                 typeNameInOuter == typeNameInInner)
             {
-                context.ReportDiagnostic(Diagnostic.Create(rule, GetReportLocation(innerInvocation),
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, GetReportLocation(innerInvocation),
                     string.Format(MessageUseInstead, $"'OfType<{typeNameInInner}>()'")));
             }
         }
@@ -417,7 +417,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 innerMethodSymbol.Name == WhereMethodName &&
                 innerMethodSymbol.Parameters.Any(symbol => (symbol.Type as INamedTypeSymbol)?.TypeArguments.Length == 2))
             {
-                context.ReportDiagnostic(Diagnostic.Create(rule, GetReportLocation(innerInvocation),
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, GetReportLocation(innerInvocation),
                     string.Format(MessageDropAndChange, WhereMethodName, outerMethodSymbol.Name)));
                 return true;
             }

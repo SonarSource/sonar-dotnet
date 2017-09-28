@@ -53,7 +53,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         methodSymbol.IsPubliclyAccessible() &&
                         IsPInvokeMethod(methodSymbol))
                     {
-                        c.ReportDiagnostic(Diagnostic.Create(rule, methodDeclaration.Identifier.GetLocation()));
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, methodDeclaration.Identifier.GetLocation()));
                     }
                 },
                 SyntaxKind.MethodDeclaration);

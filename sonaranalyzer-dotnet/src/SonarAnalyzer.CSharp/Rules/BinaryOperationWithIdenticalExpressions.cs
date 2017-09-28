@@ -91,7 +91,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 string message = string.Format(EqualsMessage, operands.Item2);
 
-                context.ReportDiagnostic(Diagnostic.Create(rule, operands.Item1.GetLocation(),
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, operands.Item1.GetLocation(),
                     additionalLocations: new[] { operands.Item2.GetLocation() },
                     messageArgs: message));
             }
@@ -134,7 +134,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 string message = string.Format(OperatorMessageFormat, operatorToken);
 
-                context.ReportDiagnostic(Diagnostic.Create(rule, right.GetLocation(),
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, right.GetLocation(),
                     additionalLocations: new[] { left.GetLocation() },
                     messageArgs: message));
             }
