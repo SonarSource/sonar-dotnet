@@ -80,6 +80,11 @@ $resourceLanguageMap = @{
     "vbnet" = "vb";
 }
 
+$helpLanguageMap = @{
+    "cs" = "csharp";
+    "vbnet" = "vbnet";
+}
+
 # Returns the path to the folder where the RSPEC html and json files for the specified language will be downloaded.
 function GetRspecDownloadPath($lang) {
     $rspecFolder = "${sonaranalyzerPath}\\rspec\\${lang}"
@@ -188,6 +193,8 @@ function CreateStringResources($lang, $rules) {
     # improve readability of the generated file
     [void]$resources.Sort()
 
+    [void]$resources.Add("HelpLinkFormat=https://rules.sonarsource.com/$($helpLanguageMap.Get_Item($lang))/RSPEC-{0}")
+    
     $rawResourcesPath = "${PSScriptRoot}\\${lang}_strings.restext"
     $resourcesPath = "${sonaranalyzerPath}\\src\\$($projectsMap.Get_Item($lang))\\RspecStrings.resx"
 

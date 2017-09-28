@@ -1980,4 +1980,7 @@
   <data name="S4144_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
   </data>
+  <data name="HelpLinkFormat" xml:space="preserve">
+    <value>https://rules.sonarsource.com/vbnet/RSPEC-{0}</value>
+  </data>
 </root>
