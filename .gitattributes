@@ -1,0 +1,46 @@
+# Explanation of line ending settings:
+# http://www.davidlaing.com/2012/09/19/customise-your-gitattributes-to-become-a-git-ninja/
+# http://adaptivepatchwork.com/2012/03/01/mind-the-end-of-your-line/
+# https://help.github.com/articles/dealing-with-line-endings/
+# https://stackoverflow.com/questions/3206843/how-line-ending-conversions-work-with-git-core-autocrlf-between-different-operat
+
+# Set the default behavior, in case people don't have core.autocrlf set.
+# If the file exntesion is not on one of the lists below, git will use heuristic to determine whether the file is text or binary
+* text=auto
+
+# These files will have line endings normalized to LF in git repository.
+*.bat           text
+*.cmd           text
+*.config        text
+*.coveragexml   text
+*.cs            text diff=csharp
+*.css           text
+*.csproj        text
+*.editorconfig  text
+*.html          text
+*.java          text
+*.json          text
+*.md            text
+*.msbuild       text
+*.proj          text
+*.props         text
+*.ps1           text
+*.resources     text
+*.resx          text
+*.rtf           text
+*.ruleset       text
+*.sh            text
+*.targets       text
+*.txt           text
+*.vb            text
+*.xaml          text
+*.xml           text
+
+# These files will be treated as binary and won't be normalized.
+*.png     binary
+*.jepg    binary
+*.sdf     binary
+*.ico     binary
+*.sln     binary
+*.csproj  binary
+*.vbproj  binary
