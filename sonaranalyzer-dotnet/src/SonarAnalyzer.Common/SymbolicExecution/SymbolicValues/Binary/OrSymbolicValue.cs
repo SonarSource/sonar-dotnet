@@ -31,27 +31,27 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
         {
         }
 
-        public override IEnumerable<ProgramState> TrySetConstraint(SymbolicValueConstraint constraint, ProgramState currentProgramState)
+        public override IEnumerable<ProgramState> TrySetConstraint(SymbolicValueConstraint constraint, ProgramState programState)
         {
             var boolConstraint = constraint as BoolConstraint;
             if (boolConstraint == null)
             {
-                return new[] { currentProgramState };
+                return new[] { programState };
             }
 
             if (constraint == BoolConstraint.False)
             {
                 return ThrowIfTooMany(
-                    LeftOperand.TrySetConstraint(BoolConstraint.False, currentProgramState)
+                    LeftOperand.TrySetConstraint(BoolConstraint.False, programState)
                         .SelectMany(ps => RightOperand.TrySetConstraint(BoolConstraint.False, ps)));
             }
 
             return ThrowIfTooMany(
-                LeftOperand.TrySetConstraint(BoolConstraint.True, currentProgramState)
+                LeftOperand.TrySetConstraint(BoolConstraint.True, programState)
                     .SelectMany(ps => RightOperand.TrySetConstraint(BoolConstraint.False, ps))
-                .Union(LeftOperand.TrySetConstraint(BoolConstraint.False, currentProgramState)
+                .Union(LeftOperand.TrySetConstraint(BoolConstraint.False, programState)
                     .SelectMany(ps => RightOperand.TrySetConstraint(BoolConstraint.True, ps)))
-                .Union(LeftOperand.TrySetConstraint(BoolConstraint.True, currentProgramState)
+                .Union(LeftOperand.TrySetConstraint(BoolConstraint.True, programState)
                     .SelectMany(ps => RightOperand.TrySetConstraint(BoolConstraint.True, ps))));
         }
 

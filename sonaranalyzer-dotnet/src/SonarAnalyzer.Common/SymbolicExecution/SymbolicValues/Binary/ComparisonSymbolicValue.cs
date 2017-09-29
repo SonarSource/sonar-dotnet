@@ -35,17 +35,17 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
             this.comparisonKind = comparisonKind;
         }
 
-        public override IEnumerable<ProgramState> TrySetConstraint(SymbolicValueConstraint constraint, ProgramState currentProgramState)
+        public override IEnumerable<ProgramState> TrySetConstraint(SymbolicValueConstraint constraint, ProgramState programState)
         {
             var boolConstraint = constraint as BoolConstraint;
             if (boolConstraint == null)
             {
-                return new[] { currentProgramState };
+                return new[] { programState };
             }
 
             var relationship = GetRelationship(boolConstraint);
 
-            var newProgramState = currentProgramState.TrySetRelationship(relationship);
+            var newProgramState = programState.TrySetRelationship(relationship);
             if (newProgramState == null)
             {
                 return Enumerable.Empty<ProgramState>();

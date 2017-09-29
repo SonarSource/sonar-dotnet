@@ -77,17 +77,17 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
             return GetNormalizedRelationship(boolConstraint, LeftOperand, RightOperand);
         }
 
-        public override IEnumerable<ProgramState> TrySetConstraint(SymbolicValueConstraint constraint, ProgramState currentProgramState)
+        public override IEnumerable<ProgramState> TrySetConstraint(SymbolicValueConstraint constraint, ProgramState programState)
         {
             var boolConstraint = constraint as BoolConstraint;
             if (boolConstraint == null)
             {
-                return new[] { currentProgramState };
+                return new[] { programState };
             }
 
             SymbolicValueConstraints oldConstraints;
             BoolConstraint oldBoolConstraint = null;
-            if (TryGetConstraints(currentProgramState, out oldConstraints))
+            if (TryGetConstraints(programState, out oldConstraints))
             {
                 oldBoolConstraint = oldConstraints.GetConstraintOrDefault<BoolConstraint>();
             }
@@ -99,13 +99,13 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
             }
 
             SymbolicValueConstraints leftConstraints;
-            var leftHasConstraint = LeftOperand.TryGetConstraints(currentProgramState, out leftConstraints);
+            var leftHasConstraint = LeftOperand.TryGetConstraints(programState, out leftConstraints);
             SymbolicValueConstraints rightConstraints;
-            var rightHasConstraint = RightOperand.TryGetConstraints(currentProgramState, out rightConstraints);
+            var rightHasConstraint = RightOperand.TryGetConstraints(programState, out rightConstraints);
 
             var relationship = GetRelationship(boolConstraint);
 
-            var newProgramState = currentProgramState.TrySetRelationship(relationship);
+            var newProgramState = programState.TrySetRelationship(relationship);
             if (newProgramState == null)
             {
                 return Enumerable.Empty<ProgramState>();

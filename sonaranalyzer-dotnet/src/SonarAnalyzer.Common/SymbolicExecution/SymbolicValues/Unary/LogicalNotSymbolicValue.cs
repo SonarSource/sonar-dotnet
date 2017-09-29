@@ -30,15 +30,15 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
         {
         }
 
-        public override IEnumerable<ProgramState> TrySetConstraint(SymbolicValueConstraint constraint, ProgramState currentProgramState)
+        public override IEnumerable<ProgramState> TrySetConstraint(SymbolicValueConstraint constraint, ProgramState programState)
         {
             var boolConstraint = constraint as BoolConstraint;
             if (boolConstraint == null)
             {
-                return new[] { currentProgramState };
+                return new[] { programState };
             }
 
-            return Operand.TrySetConstraint(boolConstraint.OppositeForLogicalNot, currentProgramState);
+            return Operand.TrySetConstraint(boolConstraint.OppositeForLogicalNot, programState);
         }
 
         public override string ToString()
