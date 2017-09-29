@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2017 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -22,19 +22,18 @@ using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
 using SonarAnalyzer.SymbolicExecution.Constraints;
-using Xunit;
 
 namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
 {
     public class SymbolicValue_TrySetConstraint
     {
-        [Theory]
-        [MemberData(nameof(TrueConstraintData))]
-        [MemberData(nameof(FalseConstraintData))]
-        [MemberData(nameof(NullConstraintData))]
-        [MemberData(nameof(NotNullConstraintData))]
-        [MemberData(nameof(NoValueConstraintData))]
-        [MemberData(nameof(HasValueConstraintData))]
+        ////[Theory]
+        ////[MemberData(nameof(TrueConstraintData))]
+        ////[MemberData(nameof(FalseConstraintData))]
+        ////[MemberData(nameof(NullConstraintData))]
+        ////[MemberData(nameof(NotNullConstraintData))]
+        ////[MemberData(nameof(NoValueConstraintData))]
+        ////[MemberData(nameof(HasValueConstraintData))]
         public void TrySetConstraint(SymbolicValueConstraint constraint,
             IList<SymbolicValueConstraint> existingConstraints,
             IList<IList<SymbolicValueConstraint>> expectedConstraintsPerProgramState)
@@ -242,7 +241,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
 
         private ProgramState SetupProgramState(SymbolicValue sv, IEnumerable<SymbolicValueConstraint> constraints)
         {
-            return constraints.Aggregate(new ProgramState(), 
+            return constraints.Aggregate(new ProgramState(),
                 (ps, constraint) => ps.SetConstraint(sv, constraint));
         }
     }
