@@ -53,7 +53,7 @@ namespace SonarAnalyzer.Helpers
 
         private static void ReportWhenNotSuppressed(Diagnostic diagnostic, Action<Diagnostic> report)
         {
-            if (!SonarAnalysisContext.ShouldDiagnosticBeReported(diagnostic))
+            if (SonarAnalysisContext.ShouldDiagnosticBeReported(diagnostic))
             {
                 report(diagnostic);
             }

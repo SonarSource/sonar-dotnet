@@ -24,6 +24,7 @@ using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Rules.CSharp;
 using System.Collections.Generic;
 using System.IO;
+using Microsoft.CodeAnalysis;
 
 namespace SonarAnalyzer.UnitTest.Helpers
 {
@@ -47,20 +48,25 @@ namespace SonarAnalyzer.UnitTest.Helpers
         });
 
         [TestMethod]
-        public void SonarAnalysis_NoIssueReported()
+        public void SonarAnalysis_NoIssueReportedIfAnalysisIsDisabled()
         {
             SonarAnalysisContext.ShouldAnalysisBeDisabled = tree => true;
 
-            foreach (var testCase in TestCases)
+            try
             {
-                Verifier.VerifyNoIssueReported(testCase.Path, testCase.Analyzer);
+                foreach (var testCase in TestCases)
+                {
+                    Verifier.VerifyNoIssueReported(testCase.Path, testCase.Analyzer);
+                }
             }
-
-            SonarAnalysisContext.ShouldAnalysisBeDisabled = null;
+            finally
+            {
+                SonarAnalysisContext.ShouldAnalysisBeDisabled = null;
+            }
         }
 
         [TestMethod]
-        public void SonarAnalysis_IssueReported()
+        public void SonarAnalysis_IssueReportedIfAnalysisIsEnabled()
         {
             foreach (var testCase in TestCases)
             {
@@ -73,12 +79,30 @@ namespace SonarAnalyzer.UnitTest.Helpers
         {
             TestCases.Count.Should().BeGreaterThan(2);
 
-            SonarAnalysisContext.ShouldAnalysisBeDisabled = tree =>
-                tree.FilePath.EndsWith(new FileInfo(TestCases[0].Path).Name, System.StringComparison.OrdinalIgnoreCase);
-            Verifier.VerifyNoIssueReported(TestCases[0].Path, TestCases[0].Analyzer);
-            Verifier.VerifyAnalyzer(TestCases[1].Path, TestCases[1].Analyzer);
+            try
+            {
+                SonarAnalysisContext.ShouldAnalysisBeDisabled = tree =>
+                    tree.FilePath.EndsWith(new FileInfo(TestCases[0].Path).Name, System.StringComparison.OrdinalIgnoreCase);
+                Verifier.VerifyNoIssueReported(TestCases[0].Path, TestCases[0].Analyzer);
+                Verifier.VerifyAnalyzer(TestCases[1].Path, TestCases[1].Analyzer);
+            }
+            finally
+            {
+                SonarAnalysisContext.ShouldAnalysisBeDisabled = null;
+            }
+        }
 
-            SonarAnalysisContext.ShouldAnalysisBeDisabled = null;
+        [TestMethod]
+        public void SonarAnalysis_IssuesAreReportedByDefault()
+        {
+            DiagnosticDescriptor dummyDescriptor = new DiagnosticDescriptor(
+                "x1", "title", "format", "category", DiagnosticSeverity.Error, false);
+            Diagnostic dummyDiag = Diagnostic.Create(dummyDescriptor, Location.None);
+
+            var shouldIssueBeReported = SonarAnalysisContext.ShouldDiagnosticBeReported;
+            shouldIssueBeReported.Should().NotBeNull();
+
+            shouldIssueBeReported(dummyDiag).Should().BeTrue();
         }
     }
 }
