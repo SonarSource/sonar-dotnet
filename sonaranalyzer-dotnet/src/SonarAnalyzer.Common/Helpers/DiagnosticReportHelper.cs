@@ -54,22 +54,6 @@ namespace SonarAnalyzer.Helpers
 
         #endregion
 
-        #region Help link
-
-        private const string HelpLinkPattern = "http://vs.sonarlint.org/rules/index.html#version={0}&ruleId={1}";
-        public static string GetHelpLink(this string ruleId)
-        {
-            var productVersion = typeof(DiagnosticReportHelper)
-                .GetTypeInfo()
-                .Assembly
-                .GetCustomAttributes<AssemblyFileVersionAttribute>()
-                .First()
-                .Version;
-            return string.Format(HelpLinkPattern, productVersion, ruleId);
-        }
-
-        #endregion
-
         public static string ToSentence(this IEnumerable<string> words,
             bool quoteWords = false,
             LastJoiningWord lastJoiningWord = LastJoiningWord.And)

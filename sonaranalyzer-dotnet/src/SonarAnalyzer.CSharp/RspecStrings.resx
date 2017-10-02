@@ -8220,4 +8220,7 @@
   <data name="S927_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
   </data>
+  <data name="HelpLinkFormat" xml:space="preserve">
+    <value>https://rules.sonarsource.com/csharp/RSPEC-{0}</value>
+  </data>
 </root>
