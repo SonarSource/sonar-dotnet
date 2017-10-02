@@ -52,7 +52,7 @@ namespace SonarAnalyzer.Helpers
         public static string GetHelpLink(ResourceManager resourceManager, string diagnosticId)
         {
             var helpLinkFormat = resourceManager.GetString("HelpLinkFormat");
-            return string.Format(helpLinkFormat, diagnosticId.Trim('S'));
+            return string.Format(helpLinkFormat, diagnosticId.Substring(1));
         }
 
         /// <summary>
