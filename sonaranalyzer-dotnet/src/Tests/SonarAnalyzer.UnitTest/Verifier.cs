@@ -601,10 +601,11 @@ namespace SonarAnalyzer.UnitTest
                 return;
             }
 
+
             SonarAnalysisContext.ShouldDiagnosticBeReported = (d) =>
             {
                 counters.AddOrUpdate(d.Id, addValueFactory: (key) => 1, updateValueFactory: (key, count) => count + 1);
-                return false;
+                return true;
             };
         }
 

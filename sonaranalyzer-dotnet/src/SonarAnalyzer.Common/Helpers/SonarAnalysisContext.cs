@@ -30,7 +30,7 @@ namespace SonarAnalyzer.Helpers
     {
         private readonly AnalysisContext context;
         public static Func<SyntaxTree, bool> ShouldAnalysisBeDisabled { get; set; }
-        public static Func<Diagnostic, bool> ShouldDiagnosticBeReported { get; set; } = d => false;
+        public static Func<Diagnostic, bool> ShouldDiagnosticBeReported { get; set; } = d => true;
 
         internal SonarAnalysisContext(AnalysisContext context)
         {
