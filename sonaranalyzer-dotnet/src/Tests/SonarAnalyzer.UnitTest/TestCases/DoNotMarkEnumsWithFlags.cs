@@ -88,4 +88,24 @@ namespace Tests.Diagnostics
     {
         MyValue = "toto" // Secondary
     }
+
+    [Flags]
+    enum EnumFoo3
+    {
+        N1 = 1,
+        N2 = 2,
+        N3 = N1 | N2,
+        N4 = 4,
+        N5 = N4 | N1,
+        N6 = N4 | N2
+    }
+
+    [Flags]
+    enum EnumFoo4 // Noncompliant
+    {
+        N1 = 1,
+        N2 = 2,
+        N3 = N1 | N2,
+        N5 = 5 // Secondary
+    }
 }
