@@ -39,6 +39,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         protected override void Initialize(SonarAnalysisContext context)
@@ -114,16 +115,15 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             var newValue = value;
-            foreach (var otherValue in otherValues)
+            foreach (var otherValue in otherValues.SkipWhile(v => value <= v))
             {
-                if (newValue <= 0)
+                if (otherValue <= newValue)
                 {
-                    return true;
-                }
-
-                if (otherValue < value)
-                {
-                    newValue -= otherValue;
+                    newValue ^= otherValue;
+                    if (newValue == 0)
+                    {
+                        return true;
+                    }
                 }
             }
 
