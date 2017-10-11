@@ -18,13 +18,13 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
+using System.IO;
 using FluentAssertions;
+using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Rules.CSharp;
-using System.Collections.Generic;
-using System.IO;
-using Microsoft.CodeAnalysis;
 
 namespace SonarAnalyzer.UnitTest.Helpers
 {
@@ -102,7 +102,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             var shouldIssueBeReported = SonarAnalysisContext.ShouldDiagnosticBeReported;
             shouldIssueBeReported.Should().NotBeNull();
 
-            shouldIssueBeReported(dummyDiag).Should().BeTrue();
+            shouldIssueBeReported(null, dummyDiag).Should().BeTrue();
         }
     }
 }
