@@ -602,7 +602,7 @@ namespace SonarAnalyzer.UnitTest
             }
 
 
-            SonarAnalysisContext.ShouldDiagnosticBeReported = (d) =>
+            SonarAnalysisContext.ShouldDiagnosticBeReported = (s, d) =>
             {
                 counters.AddOrUpdate(d.Id, addValueFactory: (key) => 1, updateValueFactory: (key, count) => count + 1);
                 return true;
