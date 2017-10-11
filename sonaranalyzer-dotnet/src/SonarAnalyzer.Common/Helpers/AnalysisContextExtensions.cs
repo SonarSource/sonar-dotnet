@@ -19,6 +19,7 @@
  */
 
 using System;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 
@@ -28,32 +29,34 @@ namespace SonarAnalyzer.Helpers
     {
         public static void ReportDiagnosticWhenActive(this SyntaxNodeAnalysisContext context, Diagnostic diagnostic)
         {
-            ReportWhenNotSuppressed(diagnostic, d => context.ReportDiagnostic(d));
+            ReportWhenNotSuppressed(context.Node.SyntaxTree, diagnostic, d => context.ReportDiagnostic(d));
         }
 
         public static void ReportDiagnosticWhenActive(this SyntaxTreeAnalysisContext context, Diagnostic diagnostic)
         {
-            ReportWhenNotSuppressed(diagnostic, d => context.ReportDiagnostic(d));
+            ReportWhenNotSuppressed(context.Tree, diagnostic, d => context.ReportDiagnostic(d));
         }
 
         public static void ReportDiagnosticWhenActive(this CompilationAnalysisContext context, Diagnostic diagnostic)
         {
-            ReportWhenNotSuppressed(diagnostic, d => context.ReportDiagnostic(d));
+            ReportWhenNotSuppressed(context.Compilation.SyntaxTrees.FirstOrDefault(), diagnostic,
+                d => context.ReportDiagnostic(d));
         }
 
         public static void ReportDiagnosticWhenActive(this SymbolAnalysisContext context, Diagnostic diagnostic)
         {
-            ReportWhenNotSuppressed(diagnostic, d => context.ReportDiagnostic(d));
+            ReportWhenNotSuppressed(context.Symbol.Locations.FirstOrDefault(l => l.SourceTree != null)?.SourceTree,
+                diagnostic, d => context.ReportDiagnostic(d));
         }
 
         public static void ReportDiagnosticWhenActive(this CodeBlockAnalysisContext context, Diagnostic diagnostic)
         {
-            ReportWhenNotSuppressed(diagnostic, d => context.ReportDiagnostic(d));
+            ReportWhenNotSuppressed(context.CodeBlock.SyntaxTree, diagnostic, d => context.ReportDiagnostic(d));
         }
 
-        private static void ReportWhenNotSuppressed(Diagnostic diagnostic, Action<Diagnostic> report)
+        private static void ReportWhenNotSuppressed(SyntaxTree tree, Diagnostic diagnostic, Action<Diagnostic> report)
         {
-            if (SonarAnalysisContext.ShouldDiagnosticBeReported(diagnostic))
+            if (SonarAnalysisContext.ShouldDiagnosticBeReported(tree, diagnostic))
             {
                 report(diagnostic);
             }

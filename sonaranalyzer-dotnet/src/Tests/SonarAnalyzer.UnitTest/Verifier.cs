@@ -37,8 +37,6 @@ using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SonarAnalyzer.Common;
-using SonarAnalyzer.Helpers;
 using SonarAnalyzer.UnitTest.TestFramework;
 using CS = Microsoft.CodeAnalysis.CSharp;
 using VB = Microsoft.CodeAnalysis.VisualBasic;
@@ -602,7 +600,7 @@ namespace SonarAnalyzer.UnitTest
             }
 
 
-            SonarAnalysisContext.ShouldDiagnosticBeReported = (d) =>
+            SonarAnalysisContext.ShouldDiagnosticBeReported = (s, d) =>
             {
                 counters.AddOrUpdate(d.Id, addValueFactory: (key) => 1, updateValueFactory: (key, count) => count + 1);
                 return true;
