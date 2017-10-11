@@ -181,6 +181,10 @@ function Invoke-DotNetBuild() {
     elseif ($isMaster) {
         $leakPeriodVersion = Get-LeakPeriodVersion
         Invoke-SonarBeginAnalysis `
+            /d:sonar.analysis.buildNumber=$buildNumber `
+            /d:sonar.analysis.pipeline=$buildNumber `
+            /d:sonar.analysis.sha1=$githubSha1 `
+            /d:sonar.analysis.repository=$githubRepo `
             /v:$leakPeriodVersion `
             /d:sonar.cs.vstest.reportsPaths="**\*.trx" `
             /d:sonar.cs.vscoveragexml.reportsPaths="**\*.coveragexml"
