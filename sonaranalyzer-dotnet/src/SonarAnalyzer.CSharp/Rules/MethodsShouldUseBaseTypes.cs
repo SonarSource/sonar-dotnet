@@ -67,7 +67,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
             var parametersToCheck = methodSymbol.Parameters
                 .Where(IsTrackedParameter)
-                .ToDictionary(p => p.Name, p => new ParameterData(p));
+                .GroupBy(p => p.Name)
+                .ToDictionary(p => p.Key, p => new ParameterData(p.First()));
 
             var parameterUsesInMethod = context
                 .Node
