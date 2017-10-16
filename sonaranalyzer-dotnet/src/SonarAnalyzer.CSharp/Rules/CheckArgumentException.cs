@@ -108,6 +108,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             if (messageValue.HasValue &&
+                messageValue.Value != null &&
                 methodArgumentNames.Contains(TakeOnlyBeforeDot(messageValue)))
             {
                 analysisContext.ReportDiagnosticWhenActive(Diagnostic.Create(rule,

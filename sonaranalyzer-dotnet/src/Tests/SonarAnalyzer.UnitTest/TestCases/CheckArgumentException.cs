@@ -115,6 +115,13 @@ namespace Tests.Diagnostics
                 };
         }
 
+        void NullMessage(string item)
+        {
+            string item2;
+            throw new ArgumentOutOfRangeException(nameof(item), item, null);
+            throw new ArgumentOutOfRangeException(nameof(item2), item2, null); // Noncompliant
+        }
+
         public int Foo
         {
             get
