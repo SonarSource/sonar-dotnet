@@ -65,6 +65,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 return Enumerable.Empty<Diagnostic>();
             }
 
+            // The GroupBy is useless in most of the cases but safe-guard in case of 2+ parameters with same name (invalid code).
+            // In this case we analyze only the first parameter (a new analysis will be triggered after fixing the names).
             var parametersToCheck = methodSymbol.Parameters
                 .Where(IsTrackedParameter)
                 .GroupBy(p => p.Name)

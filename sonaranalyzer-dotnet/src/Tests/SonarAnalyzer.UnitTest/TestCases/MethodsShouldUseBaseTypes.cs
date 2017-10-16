@@ -617,5 +617,10 @@ namespace Test_22
         {
             a.ToList();
         }
+
+        private void FooBar(IList<int> , IList<string>)
+        {
+            a.ToList();
+        }
     }
 }
