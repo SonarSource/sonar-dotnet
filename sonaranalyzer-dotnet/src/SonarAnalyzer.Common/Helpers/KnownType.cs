@@ -368,6 +368,9 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType System_Windows_Markup_ConstructorArgumentAttribute =
             new KnownType("System.Windows.Markup.ConstructorArgumentAttribute");
 
+        public static readonly KnownType System_Runtime_Serialization_DataMemberAttribute =
+            new KnownType("System.Runtime.Serialization.DataMemberAttribute");
+
         #endregion
 
         public string TypeName { get; }

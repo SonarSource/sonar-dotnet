@@ -31,7 +31,9 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void CollectionPropertiesShouldBeReadOnly()
         {
             Verifier.VerifyAnalyzer(@"TestCases\CollectionPropertiesShouldBeReadOnly.cs",
-                new CollectionPropertiesShouldBeReadOnly());
+                new CollectionPropertiesShouldBeReadOnly(),
+                null,
+                Verifier.RuntimeSerializationAssembly);
         }
     }
 }
