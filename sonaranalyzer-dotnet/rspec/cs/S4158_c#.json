@@ -1,6 +1,6 @@
 {
   "title": "Empty collections should not be accessed or iterated",
-  "type": "CODE_SMELL",
+  "type": "BUG",
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",
