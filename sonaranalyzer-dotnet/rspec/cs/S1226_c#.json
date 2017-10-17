@@ -1,6 +1,6 @@
 {
-  "type": "CODE_SMELL",
   "title": "Method parameters, caught exceptions and foreach variables' initial values should not be ignored",
+  "type": "BUG",
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",

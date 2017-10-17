@@ -1105,7 +1105,7 @@
     <value>CODE_SMELL</value>
   </data>
   <data name="S1226_Category" xml:space="preserve">
-    <value>Sonar Code Smell</value>
+    <value>Sonar Bug</value>
   </data>
   <data name="S1226_Description" xml:space="preserve">
     <value>While it is technically correct to assign to parameters from within method bodies, doing so before the parameter value is read is likely a bug. Instead, initial values of parameters, caught exceptions, and foreach parameters should be, if not treated as final, then at least read before reassignment.</value>
@@ -1129,7 +1129,7 @@
     <value>Method parameters, caught exceptions and foreach variables' initial values should not be ignored</value>
   </data>
   <data name="S1226_Type" xml:space="preserve">
-    <value>CODE_SMELL</value>
+    <value>BUG</value>
   </data>
   <data name="S1227_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
