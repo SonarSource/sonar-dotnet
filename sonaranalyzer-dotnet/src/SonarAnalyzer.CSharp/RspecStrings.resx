@@ -3481,7 +3481,7 @@
     <value>BUG</value>
   </data>
   <data name="S2681_Category" xml:space="preserve">
-    <value>Sonar Bug</value>
+    <value>Sonar Code Smell</value>
   </data>
   <data name="S2681_Description" xml:space="preserve">
     <value>Curly braces can be omitted from a one-line block, such as with an if statement or for loop, but doing so can be misleading and induce bugs. </value>
@@ -3505,7 +3505,7 @@
     <value>Multiline blocks should be enclosed in curly braces</value>
   </data>
   <data name="S2681_Type" xml:space="preserve">
-    <value>BUG</value>
+    <value>CODE_SMELL</value>
   </data>
   <data name="S2688_Category" xml:space="preserve">
     <value>Sonar Bug</value>
