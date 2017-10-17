@@ -10,5 +10,6 @@
     "api-design",
     "performance"
   ],
-  "defaultSeverity": "Critical"
+  "defaultSeverity": "Critical",
+  "ruleSpecification": "RSPEC-2365"
 }

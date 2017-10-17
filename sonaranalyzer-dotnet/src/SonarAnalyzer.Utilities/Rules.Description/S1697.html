@@ -3,12 +3,14 @@ null-testing the object before dereferencing it. Unfortunately the effect is jus
 <em>only</em> if it is null, leading to a guaranteed null pointer dereference.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-if (str == null &amp;&amp; str.length() == 0) {
-  System.out.println("String is empty");
+if (str == null &amp;&amp; str.Length == 0)
+{
+  Console.WriteLine("String is empty");
 }
 
-if (str != null || str.length() &gt; 0) {
-  System.out.println("String is not empty");
+if (str != null || str.Length &gt; 0)
+{
+  Console.WriteLine("String is not empty");
 }
 </pre>
 <h2>Compliant Solution</h2>

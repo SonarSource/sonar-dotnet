@@ -11,5 +11,6 @@
     "unpredictable",
     "bad-practice"
   ],
-  "defaultSeverity": "Critical"
+  "defaultSeverity": "Critical",
+  "ruleSpecification": "RSPEC-1215"
 }

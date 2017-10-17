@@ -12,5 +12,6 @@
   "standards": [
     "OWASP Top Ten"
   ],
-  "defaultSeverity": "Minor"
+  "defaultSeverity": "Minor",
+  "ruleSpecification": "RSPEC-2228"
 }

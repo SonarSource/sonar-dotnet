@@ -10,5 +10,6 @@
     "multi-threading",
     "unpredictable"
   ],
-  "defaultSeverity": "Blocker"
+  "defaultSeverity": "Blocker",
+  "ruleSpecification": "RSPEC-3889"
 }

@@ -17,5 +17,6 @@
     "CWE",
     "SANS Top 25"
   ],
-  "defaultSeverity": "Minor"
+  "defaultSeverity": "Minor",
+  "ruleSpecification": "RSPEC-2184"
 }

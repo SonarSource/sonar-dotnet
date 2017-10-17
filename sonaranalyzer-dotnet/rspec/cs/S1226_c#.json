@@ -1,14 +1,14 @@
 {
-  "title": "Method parameters and caught exceptions should not be reassigned",
   "type": "CODE_SMELL",
+  "title": "Method parameters, caught exceptions and foreach variables' initial values should not be ignored",
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",
     "constantCost": "5min"
   },
   "tags": [
-    "misra",
-    "pitfall"
+    "misra"
   ],
-  "defaultSeverity": "Minor"
+  "defaultSeverity": "Minor",
+  "ruleSpecification": "RSPEC-1226"
 }
