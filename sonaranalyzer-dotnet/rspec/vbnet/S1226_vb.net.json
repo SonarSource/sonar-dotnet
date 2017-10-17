@@ -1,6 +1,6 @@
 {
   "title": "Method parameters and caught exceptions should not be reassigned",
-  "type": "CODE_SMELL",
+  "type": "BUG",
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",

@@ -3,10 +3,12 @@ Instead, initial values of parameters, caught exceptions, and foreach parameters
 before reassignment.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-public void DoTheThing(string str, int i, List&lt;string&gt; strings) {
-  str = i.toString(i);  // Noncompliant
+public void DoTheThing(string str, int i, List&lt;string&gt; strings)
+{
+  str = i.ToString(i);  // Noncompliant
 
-  foreach (String s in strings) {
+  foreach (var s in strings)
+  {
     s = "hello world";  // Noncompliant
   }
 }
