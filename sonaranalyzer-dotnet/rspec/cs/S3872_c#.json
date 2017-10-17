@@ -10,5 +10,6 @@
     "convention",
     "confusing"
   ],
-  "defaultSeverity": "Minor"
+  "defaultSeverity": "Minor",
+  "ruleSpecification": "RSPEC-3872"
 }

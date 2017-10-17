@@ -1,5 +1,5 @@
 {
-  "title": "\"ConstructorArgument' parameters should exist",
+  "title": "\"ConstructorArgument\" parameters should exist in constructors",
   "type": "BUG",
   "status": "ready",
   "remediation": {
@@ -9,5 +9,6 @@
   "tags": [
     
   ],
-  "defaultSeverity": "Major"
+  "defaultSeverity": "Major",
+  "ruleSpecification": "RSPEC-4260"
 }

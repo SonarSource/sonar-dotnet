@@ -1,5 +1,6 @@
-<p>Classes with <code>IDisposable</code> members are responsible for cleaning up those members by calling their <code>Dispose</code> methods. The best
-practice here is for the owning class to itself implement <code>IDisposable</code> and call its members' <code>Dispose</code> methods from its own
+<p>Classes with <code>IDisposable</code> members or native resources (<code>IntPtr</code>, <code>UIntPtr</code>, and <code>HandleRef</code>) are
+responsible for cleaning up those members. Native resources shoudl be released, and <code>Dispose</code> should be called for <code>IDisposable</code>
+methods. The best practice here is for the owning class to itself implement <code>IDisposable</code> and handle member cleanup in its own
 <code>Dispose</code> method.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>

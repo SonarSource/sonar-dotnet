@@ -445,7 +445,7 @@
     <value>Sonar Code Smell</value>
   </data>
   <data name="S1226_Description" xml:space="preserve">
-    <value>While it is technically correct to assign to parameters from within method bodies, it is better to use temporary variables to store intermediate results.</value>
+    <value>While it is technically correct to assign to parameters from within method bodies, doing so before the parameter value is read is likely a bug. Instead, initial values of parameters should be, if not treated as readonly then at least read before reassignment.</value>
   </data>
   <data name="S1226_IsActivatedByDefault" xml:space="preserve">
     <value>False</value>
@@ -460,7 +460,7 @@
     <value>Minor</value>
   </data>
   <data name="S1226_Tags" xml:space="preserve">
-    <value>misra,pitfall</value>
+    <value>misra</value>
   </data>
   <data name="S1226_Title" xml:space="preserve">
     <value>Method parameters and caught exceptions should not be reassigned</value>

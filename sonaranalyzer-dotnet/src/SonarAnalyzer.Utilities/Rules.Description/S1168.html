@@ -3,60 +3,54 @@ complex and less readable.</p>
 <p>Moreover, in many cases, <code>null</code> is used as a synonym for empty.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-public List&lt;Result&gt; GetResults()
-{
-  return null; // Noncompliant
-}
-
 public Result[] GetResults()
 {
-  return null; // Noncompliant
+    return null; // Noncompliant
 }
 
 public IEnumerable&lt;Result&gt; GetResults()
 {
-  return null; // Noncompliant
+    return null; // Noncompliant
 }
 
-public static void Main(string[] args)
+public IEnumerable&lt;Result&gt; GetResults() =&gt; null; // Noncompliant
+
+public IEnumerable&lt;Result&gt; Results
 {
-  var results = GetResults();
-
-  if (results != null) // Nullity test required to prevent NPE
-  {
-    for (var result in results)
+    get
     {
-       /* ... */
+        return null; // Noncompliant
     }
-  }
 }
 
+public IEnumerable&lt;Result&gt; Results =&gt; null; // Noncompliant
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-public static List&lt;Result&gt; GetResults()
+public Result[] GetResults()
 {
-  return new List&lt;Result&gt;(); // Compliant
+    return new Result[0];
 }
 
-public static Result[] GetResults()
+public IEnumerable&lt;Result&gt; GetResults()
 {
-  return new Result[0]; // Compliant
+    return Enumerable.Empty&lt;Result&gt;();
 }
 
-public static IEnumerable&lt;Result&gt; GetResults()
+public IEnumerable&lt;Result&gt; GetResults() =&gt; Enumerable.Empty&lt;Result&gt;();
+
+public IEnumerable&lt;Result&gt; Results
 {
-  return Enumerable.Empty&lt;Result&gt;(); // Compliant
+    get
+    {
+        return Enumerable.Empty&lt;Result&gt;();
+    }
 }
 
-public static void Main(string[] args)
-{
-  for (var result in GetResults())
-  {
-     /* ... */
-  }
-}
+public IEnumerable&lt;Result&gt; Results =&gt; Enumerable.Empty&lt;Result&gt;();
 </pre>
+<h2>Exceptions</h2>
+<p>Although <code>string</code> is a collection, the rule won't report on it.</p>
 <h2>See</h2>
 <ul>
   <li> <a href="https://www.securecoding.cert.org/confluence/x/AgG7AQ">CERT, MSC19-C.</a> - For functions that return an array, prefer returning an
