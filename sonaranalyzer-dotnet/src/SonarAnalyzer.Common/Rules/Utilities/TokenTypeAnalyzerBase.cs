@@ -23,6 +23,7 @@ using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Text;
+using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Protobuf;
 
 namespace SonarAnalyzer.Rules
@@ -34,7 +35,7 @@ namespace SonarAnalyzer.Rules
 
         private static readonly DiagnosticDescriptor rule =
             new DiagnosticDescriptor(DiagnosticId, Title, string.Empty, string.Empty, DiagnosticSeverity.Warning,
-                true, customTags: WellKnownDiagnosticTags.NotConfigurable);
+                true, customTags: DiagnosticTagsHelper.NotConfigurableTag());
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 

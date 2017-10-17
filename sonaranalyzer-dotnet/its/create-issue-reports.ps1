@@ -6,6 +6,14 @@
 Set-StrictMode -version 1.0
 $ErrorActionPreference = "Stop"
 
+$thrd = [Threading.Thread]::CurrentThread
+$thrd.CurrentCulture = [Globalization.CultureInfo]::InvariantCulture
+$thrd.CurrentUICulture = $thrd.CurrentCulture
+
+[void][System.Reflection.Assembly]::LoadWithPartialName("System.Web.Extensions")
+$jsonserial= New-Object -TypeName System.Web.Script.Serialization.JavaScriptSerializer
+$jsonserial.MaxJsonLength = 100000000
+
 function Restore-UriDeclaration($files, $pathPrefix) {
 	$files | Foreach-Object {
         if ($_.uri) {
@@ -51,16 +59,9 @@ function Get-IssueV3($entry) {
 }
 
 function New-IssueReports([string]$sarifReportPath) {
-    $thrd = [Threading.Thread]::CurrentThread
-    $thrd.CurrentCulture = [Globalization.CultureInfo]::InvariantCulture
-    $thrd.CurrentUICulture = $thrd.CurrentCulture
-
     # Load the JSON, working around CovertFrom-Json max size limitation
     # See http://stackoverflow.com/questions/16854057/convertfrom-json-max-length
     $contents = Get-Content $sarifReportPath -Raw
-    [void][System.Reflection.Assembly]::LoadWithPartialName("System.Web.Extensions")
-    $jsonserial= New-Object -TypeName System.Web.Script.Serialization.JavaScriptSerializer
-    $jsonserial.MaxJsonLength = 100000000
     $json = $jsonserial.DeserializeObject($contents)
 
     $pathPrefix = ([System.IO.DirectoryInfo]$pwd.Path).FullName + "\"

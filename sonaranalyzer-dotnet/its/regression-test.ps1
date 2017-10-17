@@ -8,7 +8,7 @@ param
     [Parameter(HelpMessage = "The key of the rule to test, e.g. S1234. If omitted, all rule will be tested.")]
     [ValidatePattern("^S[0-9]+$")]
     [string]
-    $singleRuleIdToTest = "S101" # TODO: REMOVE!
+    $singleRuleIdToTest
 )
 
 Set-StrictMode -version 2.0
@@ -42,28 +42,9 @@ function Initialize-ActualFolder($ruleId) {
     if (Test-Path .\actual) {
         Remove-Item -Recurse -Force actual
     }
-
-    Copy-Item .\expected -Destination .\actual -Recurse
-    Invoke-InLocation "actual" {
-
-        # if ($ruleId) {
-        #     Copy-Item * -Exclude "*${ruleId}.json" -Recurse | Remove-Item -Force
-        # }
-        # else {
-        #     Copy-Item * -Include "*${ruleId}.json" -Recurse | Remove-Item -Force
-        # }
-
-
-
-
-        if ($ruleId) {
-            Get-ChildItem * -Include "*${ruleId}.json" -Recurse | Remove-Item -Force
-        }
-        else {
-            Get-ChildItem * -Include *.json -Recurse | Remove-Item -Force
-        }
-        Write-Host "Initialize-ActualFolder:" + $timer.Elapsed.TotalSeconds
-    }
+    # this copies no files if ruleId is not set, and all but ending with ruleId if set
+    Copy-Item .\expected -Destination .\actual -Exclude "*${ruleId}.json" -Recurse
+    Write-Host "Initialize-ActualFolder:" + $timer.Elapsed.TotalSeconds
 }
 
 function Initialize-OutputFolder($ruleId) {
@@ -85,7 +66,62 @@ function Initialize-OutputFolder($ruleId) {
         Copy-Item ".\AllSonarAnalyzerRules.ruleset" -Destination ".\output"
     }
     Write-Host "Initialize-OutputFolder:" + $timer.Elapsed.TotalSeconds
+}
+
+function Export-AnalyzerPerformancesFromLogs([string[]]$buildLogsPaths) {
+    return $buildLogsPaths |
+        Foreach-Object { Get-Content $_ } |
+        Where-Object { $_ -match '^\s*<?([0-9.]+)\s*<?[0-9]+\s*(SonarAnalyzer\..*)$' -and ($matches[1] -ne '0.001') } |
+        Foreach-Object {
+            New-Object PSObject -Property @{
+                Rule = $matches[2];
+                Time = [decimal]$matches[1]}
+        } |
+        Group-Object Rule |
+        Foreach-Object {
+            New-Object PSObject -property @{
+                Rule = $_.Name;
+                Time = [math]::Round(($_.Group.Time | Measure-Object -sum).Sum, 3)}
+        } |
+        Sort-Object Time -Descending
+}
+
+
+
+function GetFullPath($folder) {
+    return [System.IO.Path]::GetFullPath((Join-Path (Get-Location).Path $folder))
+}
+
+function CopyFolderRecursively($from, $to, $include) {
+    $fromPath = GetFullPath -folder $from
+    $toPath = GetFullPath -folder $to
+
+    $files = Get-ChildItem -Path $fromPath -Recurse -Include $include
     
+    foreach ($file in $files) {
+        $path = Join-Path $toPath $file.FullName.Substring($fromPath.length)
+        $parent = split-path $path -parent
+        if (-Not (Test-Path $parent)) {
+            New-Item $parent -Type Directory -Force
+        }
+        Copy-Item $file -Destination $path
+    }
+}
+
+
+function Measure-AnalyzerPerformance()
+{
+    # Process all build logs in the "output" folder
+    $timings = Export-AnalyzerPerformancesFromLogs(Get-ChildItem output -filter *.log | Foreach-Object { $_.FullName })
+
+    $timings | Where-Object { $_.Rule -match 'SonarAnalyzer\.CSharp.*' }                |
+        Format-Table -Wrap -AutoSize | Out-String -Width 100
+    $timings | Where-Object { $_.Rule -match 'SonarAnalyzer\.VisualBasic.*' }           |
+        Format-Table -Wrap -AutoSize | Out-String -Width 100
+    $timings | Where-Object { $_.Rule -match 'SonarAnalyzer\.Rules\.CSharp.*' }         |
+        Format-Table -Wrap -AutoSize | Out-String -Width 100
+    $timings | Where-Object { $_.Rule -match 'SonarAnalyzer\.Rules\.VisualBasic.*' }    |
+        Format-Table -Wrap -AutoSize | Out-String -Width 100
 }
 
 try {
@@ -116,21 +152,34 @@ try {
         
     Write-Host "Computing analyzer performance"
     $timer3 = [system.diagnostics.stopwatch]::StartNew()
-        Exec { & .\extract-analyzer-performances.ps1 }
+    Measure-AnalyzerPerformance
     Write-Host "Computing analyzer performance:" + $timer3.Elapsed.TotalSeconds
-        
+
+
+
+
+    New-Item "./diff" -Type Directory 
+    New-Item "./diff/actual" -Type Directory 
+    New-Item "./diff/expected" -Type Directory 
+
+    CopyFolderRecursively -from .\expected -to .\diff\expected -include "*${ruleId}.json"
+    CopyFolderRecursively -from .\actual   -to .\diff\actual -include "*${ruleId}.json"
+
+
     Write-Host "Checking for differences..."
     $timer4 = [system.diagnostics.stopwatch]::StartNew()
-    Exec { git diff --no-index --quiet --exit-code ./expected ./actual } -errorMessage `
+    Exec { & git diff --no-index --quiet --exit-code ./diff/expected ./diff/actual } -errorMessage `
         "ERROR: There are differences between the actual and the expected issues."
     Write-Host "Checking for differences..." + $timer4.Elapsed.TotalSeconds
-        
 
-    # Invoke-InLocation "actual" {
-    #     Exec { git add -A . }
-    #     Exec { git diff --cached --exit-code | out-null } -errorMessage `
-    #         "ERROR: There are differences between the actual and the expected issues."
-    # }
+
+
+
+    # Write-Host "Checking for differences..."
+    # $timer4 = [system.diagnostics.stopwatch]::StartNew()
+    # Exec { & git diff --no-index --quiet --exit-code ./expected ./actual } -errorMessage `
+    #     "ERROR: There are differences between the actual and the expected issues."
+    # Write-Host "Checking for differences..." + $timer4.Elapsed.TotalSeconds
 
     Write-Host -ForegroundColor Green "SUCCESS: No differences were found!"
     exit 0
