@@ -9,5 +9,6 @@
   "tags": [
     "performance"
   ],
-  "defaultSeverity": "Critical"
+  "defaultSeverity": "Critical",
+  "ruleSpecification": "RSPEC-3866"
 }

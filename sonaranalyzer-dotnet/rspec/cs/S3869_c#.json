@@ -10,5 +10,6 @@
     "leak",
     "unpredictable"
   ],
-  "defaultSeverity": "Blocker"
+  "defaultSeverity": "Blocker",
+  "ruleSpecification": "RSPEC-3869"
 }

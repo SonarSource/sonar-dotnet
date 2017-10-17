@@ -1,5 +1,5 @@
 {
-  "title": "Child class fields should not differ from parent class fields only be capitalization",
+  "title": "Child class fields should not differ from parent class fields only by capitalization",
   "type": "CODE_SMELL",
   "status": "ready",
   "remediation": {
@@ -9,5 +9,6 @@
   "tags": [
     "pitfall"
   ],
-  "defaultSeverity": "Critical"
+  "defaultSeverity": "Critical",
+  "ruleSpecification": "RSPEC-4025"
 }

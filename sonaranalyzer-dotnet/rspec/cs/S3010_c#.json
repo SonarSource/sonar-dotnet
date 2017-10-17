@@ -1,6 +1,6 @@
 {
   "title": "Static fields should not be updated in constructors",
-  "type": "BUG",
+  "type": "CODE_SMELL",
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",
@@ -9,5 +9,6 @@
   "tags": [
     
   ],
-  "defaultSeverity": "Major"
+  "defaultSeverity": "Major",
+  "ruleSpecification": "RSPEC-3010"
 }

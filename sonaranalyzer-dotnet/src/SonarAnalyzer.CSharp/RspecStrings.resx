@@ -670,7 +670,7 @@
     <value>Constant/Issue</value>
   </data>
   <data name="S1125_RemediationCost" xml:space="preserve">
-    <value>2min</value>
+    <value>5min</value>
   </data>
   <data name="S1125_Severity" xml:space="preserve">
     <value>Minor</value>
@@ -1105,10 +1105,10 @@
     <value>CODE_SMELL</value>
   </data>
   <data name="S1226_Category" xml:space="preserve">
-    <value>Sonar Code Smell</value>
+    <value>Sonar Bug</value>
   </data>
   <data name="S1226_Description" xml:space="preserve">
-    <value>While it is technically correct to assign to parameters from within method bodies, it is better to use temporary variables to store intermediate results.</value>
+    <value>While it is technically correct to assign to parameters from within method bodies, doing so before the parameter value is read is likely a bug. Instead, initial values of parameters, caught exceptions, and foreach parameters should be, if not treated as final, then at least read before reassignment.</value>
   </data>
   <data name="S1226_IsActivatedByDefault" xml:space="preserve">
     <value>False</value>
@@ -1123,13 +1123,13 @@
     <value>Minor</value>
   </data>
   <data name="S1226_Tags" xml:space="preserve">
-    <value>misra,pitfall</value>
+    <value>misra</value>
   </data>
   <data name="S1226_Title" xml:space="preserve">
-    <value>Method parameters and caught exceptions should not be reassigned</value>
+    <value>Method parameters, caught exceptions and foreach variables' initial values should not be ignored</value>
   </data>
   <data name="S1226_Type" xml:space="preserve">
-    <value>CODE_SMELL</value>
+    <value>BUG</value>
   </data>
   <data name="S1227_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
@@ -1807,7 +1807,7 @@
     <value>CODE_SMELL</value>
   </data>
   <data name="S1751_Category" xml:space="preserve">
-    <value>Sonar Bug</value>
+    <value>Sonar Code Smell</value>
   </data>
   <data name="S1751_Description" xml:space="preserve">
     <value>Having an unconditional break, return, (@)throw or goto in a loop renders it useless; the loop will only execute once and the loop structure itself is simply wasted keystrokes.</value>
@@ -1831,7 +1831,7 @@
     <value>Jump statements should not be used unconditionally</value>
   </data>
   <data name="S1751_Type" xml:space="preserve">
-    <value>BUG</value>
+    <value>CODE_SMELL</value>
   </data>
   <data name="S1764_Category" xml:space="preserve">
     <value>Sonar Bug</value>
@@ -2590,7 +2590,7 @@
     <value>VULNERABILITY</value>
   </data>
   <data name="S2234_Category" xml:space="preserve">
-    <value>Sonar Bug</value>
+    <value>Sonar Code Smell</value>
   </data>
   <data name="S2234_Description" xml:space="preserve">
     <value>When the names of parameters in a method call match the names of the method arguments, it contributes to clearer, more readable code. However, when the names match, but are passed in a different order than the method arguments, it indicates a mistake in the parameter order which will likely lead to unexpected results.</value>
@@ -2614,7 +2614,7 @@
     <value>Parameters should be passed in the correct order</value>
   </data>
   <data name="S2234_Type" xml:space="preserve">
-    <value>BUG</value>
+    <value>CODE_SMELL</value>
   </data>
   <data name="S2259_Category" xml:space="preserve">
     <value>Sonar Bug</value>
@@ -3481,7 +3481,7 @@
     <value>BUG</value>
   </data>
   <data name="S2681_Category" xml:space="preserve">
-    <value>Sonar Bug</value>
+    <value>Sonar Code Smell</value>
   </data>
   <data name="S2681_Description" xml:space="preserve">
     <value>Curly braces can be omitted from a one-line block, such as with an if statement or for loop, but doing so can be misleading and induce bugs. </value>
@@ -3505,7 +3505,7 @@
     <value>Multiline blocks should be enclosed in curly braces</value>
   </data>
   <data name="S2681_Type" xml:space="preserve">
-    <value>BUG</value>
+    <value>CODE_SMELL</value>
   </data>
   <data name="S2688_Category" xml:space="preserve">
     <value>Sonar Bug</value>
@@ -3835,7 +3835,7 @@
     <value>Sonar Bug</value>
   </data>
   <data name="S2931_Description" xml:space="preserve">
-    <value>Classes with IDisposable members are responsible for cleaning up those members by calling their Dispose methods. The best practice here is for the owning class to itself implement IDisposable and call its members' Dispose methods from its own Dispose method.</value>
+    <value>Classes with IDisposable members or native resources (IntPtr, UIntPtr, and HandleRef) are responsible for cleaning up those members. Native resources shoudl be released, and Dispose should be called for IDisposable methods. The best practice here is for the owning class to itself implement IDisposable and handle member cleanup in its own Dispose method.</value>
   </data>
   <data name="S2931_IsActivatedByDefault" xml:space="preserve">
     <value>False</value>
@@ -3853,7 +3853,7 @@
     <value>cwe,denial-of-service</value>
   </data>
   <data name="S2931_Title" xml:space="preserve">
-    <value>Classes with "IDisposable" members should implement "IDisposable"</value>
+    <value>Classes with "IDisposable" members or native resources should implement "IDisposable"</value>
   </data>
   <data name="S2931_Type" xml:space="preserve">
     <value>BUG</value>
@@ -4129,7 +4129,7 @@
     <value>BUG</value>
   </data>
   <data name="S3010_Category" xml:space="preserve">
-    <value>Sonar Bug</value>
+    <value>Sonar Code Smell</value>
   </data>
   <data name="S3010_Description" xml:space="preserve">
     <value>Assigning a value to a static field in a constructor could cause unreliable behavior at runtime since it will change the value for all instances of the class.</value>
@@ -4153,7 +4153,7 @@
     <value>Static fields should not be updated in constructors</value>
   </data>
   <data name="S3010_Type" xml:space="preserve">
-    <value>BUG</value>
+    <value>CODE_SMELL</value>
   </data>
   <data name="S3052_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
@@ -4567,7 +4567,7 @@
     <value>When a derived type is used as a parameter instead of the base type, it limits the uses of the method. If the additional functionality that is provided in the derived type is not requires then that limitation isn't required, and should be removed.</value>
   </data>
   <data name="S3242_IsActivatedByDefault" xml:space="preserve">
-    <value>True</value>
+    <value>False</value>
   </data>
   <data name="S3242_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -5794,7 +5794,7 @@
     <value>Minor</value>
   </data>
   <data name="S3626_Tags" xml:space="preserve">
-    <value>finding,redundant,clumsy</value>
+    <value>redundant,clumsy</value>
   </data>
   <data name="S3626_Title" xml:space="preserve">
     <value>Jump statements should not be redundant</value>
@@ -6799,7 +6799,7 @@
     <value>Sonar Code Smell</value>
   </data>
   <data name="S3972_Description" xml:space="preserve">
-    <value>Code is clearest when each statement has its own line. Nonetheless, it is a common pattern to combine on the same line an if and it's resulting then statement. However, when an if is placed on the same line as the closing } from a preceding else or else if, it is either an error - else is missing - or the invitation to a future error as maintainers fail to understand that the two statements are unconnected.</value>
+    <value>Code is clearest when each statement has its own line. Nonetheless, it is a common pattern to combine on the same line an if and its resulting then statement. However, when an if is placed on the same line as the closing } from a preceding else or else if, it is either an error - else is missing - or the invitation to a future error as maintainers fail to understand that the two statements are unconnected.</value>
   </data>
   <data name="S3972_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -7291,7 +7291,7 @@
     <value>15min</value>
   </data>
   <data name="S4018_Severity" xml:space="preserve">
-    <value>Major</value>
+    <value>Minor</value>
   </data>
   <data name="S4018_Tags" xml:space="preserve">
     <value />
@@ -7405,7 +7405,7 @@
     <value>pitfall</value>
   </data>
   <data name="S4025_Title" xml:space="preserve">
-    <value>Child class fields should not differ from parent class fields only be capitalization</value>
+    <value>Child class fields should not differ from parent class fields only by capitalization</value>
   </data>
   <data name="S4025_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
@@ -7864,7 +7864,7 @@
     <value />
   </data>
   <data name="S4061_Title" xml:space="preserve">
-    <value>"params" should be use instead of "varargs"</value>
+    <value>"params" should be used instead of "varargs"</value>
   </data>
   <data name="S4061_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
@@ -7930,7 +7930,7 @@
     <value>There are valid cases for passing a variable multiple times into the same method call, but usually doing so is a mistake, and something else was intended for one of the arguments.</value>
   </data>
   <data name="S4142_IsActivatedByDefault" xml:space="preserve">
-    <value>True</value>
+    <value>False</value>
   </data>
   <data name="S4142_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -7978,7 +7978,7 @@
     <value>CODE_SMELL</value>
   </data>
   <data name="S4158_Category" xml:space="preserve">
-    <value>Sonar Code Smell</value>
+    <value>Sonar Bug</value>
   </data>
   <data name="S4158_Description" xml:space="preserve">
     <value>When a collection is empty it makes no sense to access or iterate it. Doing so anyway is surely an error; either population was accidentally omitted or the developer doesn't understand the situation.</value>
@@ -8002,7 +8002,7 @@
     <value>Empty collections should not be accessed or iterated</value>
   </data>
   <data name="S4158_Type" xml:space="preserve">
-    <value>CODE_SMELL</value>
+    <value>BUG</value>
   </data>
   <data name="S4214_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
@@ -8134,7 +8134,7 @@
     <value />
   </data>
   <data name="S4260_Title" xml:space="preserve">
-    <value>"ConstructorArgument' parameters should exist</value>
+    <value>"ConstructorArgument" parameters should exist in constructors</value>
   </data>
   <data name="S4260_Type" xml:space="preserve">
     <value>BUG</value>

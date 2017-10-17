@@ -9,5 +9,6 @@
   "tags": [
     "tests"
   ],
-  "defaultSeverity": "Major"
+  "defaultSeverity": "Major",
+  "ruleSpecification": "RSPEC-3431"
 }

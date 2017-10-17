@@ -1,6 +1,6 @@
 {
   "title": "Multiline blocks should be enclosed in curly braces",
-  "type": "BUG",
+  "type": "CODE_SMELL",
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",
@@ -13,5 +13,6 @@
   "standards": [
     "CWE"
   ],
-  "defaultSeverity": "Major"
+  "defaultSeverity": "Major",
+  "ruleSpecification": "RSPEC-2681"
 }

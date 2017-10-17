@@ -11,5 +11,6 @@
     "misra",
     "cert"
   ],
-  "defaultSeverity": "Minor"
+  "defaultSeverity": "Minor",
+  "ruleSpecification": "RSPEC-1659"
 }

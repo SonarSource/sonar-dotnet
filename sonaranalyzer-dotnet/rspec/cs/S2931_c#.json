@@ -1,5 +1,5 @@
 {
-  "title": "Classes with \"IDisposable\" members should implement \"IDisposable\"",
+  "title": "Classes with \"IDisposable\" members or native resources should implement \"IDisposable\"",
   "type": "BUG",
   "status": "ready",
   "remediation": {
@@ -13,5 +13,6 @@
   "standards": [
     "CWE"
   ],
-  "defaultSeverity": "Blocker"
+  "defaultSeverity": "Blocker",
+  "ruleSpecification": "RSPEC-2931"
 }

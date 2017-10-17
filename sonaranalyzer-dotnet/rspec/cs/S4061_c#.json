@@ -1,5 +1,5 @@
 {
-  "title": "\"params\" should be use instead of \"varargs\"",
+  "title": "\"params\" should be used instead of \"varargs\"",
   "type": "CODE_SMELL",
   "status": "ready",
   "remediation": {
@@ -9,5 +9,6 @@
   "tags": [
     
   ],
-  "defaultSeverity": "Minor"
+  "defaultSeverity": "Minor",
+  "ruleSpecification": "RSPEC-4061"
 }
