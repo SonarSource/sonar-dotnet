@@ -4129,7 +4129,7 @@
     <value>BUG</value>
   </data>
   <data name="S3010_Category" xml:space="preserve">
-    <value>Sonar Bug</value>
+    <value>Sonar Code Smell</value>
   </data>
   <data name="S3010_Description" xml:space="preserve">
     <value>Assigning a value to a static field in a constructor could cause unreliable behavior at runtime since it will change the value for all instances of the class.</value>
@@ -4153,7 +4153,7 @@
     <value>Static fields should not be updated in constructors</value>
   </data>
   <data name="S3010_Type" xml:space="preserve">
-    <value>BUG</value>
+    <value>CODE_SMELL</value>
   </data>
   <data name="S3052_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
