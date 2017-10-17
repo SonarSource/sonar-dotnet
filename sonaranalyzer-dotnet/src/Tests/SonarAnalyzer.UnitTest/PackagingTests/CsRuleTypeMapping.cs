@@ -1223,7 +1223,7 @@ namespace SonarAnalyzer.UnitTest.PackagingTests
             //["1223"],
             //["1224"],
             //["1225"],
-            ["1226"] = "CODE_SMELL",
+            ["1226"] = "BUG",
             ["1227"] = "CODE_SMELL",
             //["1228"],
             //["1229"],
