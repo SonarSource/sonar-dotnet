@@ -2590,7 +2590,7 @@
     <value>VULNERABILITY</value>
   </data>
   <data name="S2234_Category" xml:space="preserve">
-    <value>Sonar Bug</value>
+    <value>Sonar Code Smell</value>
   </data>
   <data name="S2234_Description" xml:space="preserve">
     <value>When the names of parameters in a method call match the names of the method arguments, it contributes to clearer, more readable code. However, when the names match, but are passed in a different order than the method arguments, it indicates a mistake in the parameter order which will likely lead to unexpected results.</value>
@@ -2614,7 +2614,7 @@
     <value>Parameters should be passed in the correct order</value>
   </data>
   <data name="S2234_Type" xml:space="preserve">
-    <value>BUG</value>
+    <value>CODE_SMELL</value>
   </data>
   <data name="S2259_Category" xml:space="preserve">
     <value>Sonar Bug</value>
