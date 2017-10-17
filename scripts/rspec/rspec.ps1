@@ -35,8 +35,17 @@ Set-StrictMode -version 1.0
 $ErrorActionPreference = "Stop"
 $RuleTemplateFolder = "${PSScriptRoot}\\rspec-templates"
 
-if ((-Not $env:rule_api_path) -Or (-Not (Test-Path $env:rule_api_path))) {
-    throw "Download the latest version of rule-api jar from repox and set the %rule_api_path% environment variable with the full path of the jar."
+# Update the following variable when a new version of rule-api has to be used.
+$rule_api_version = "1.16.0.954"
+$rule_api_error = "Download Rule-api from " + `
+    "'https://repox.sonarsource.com/sonarsource-private-releases/com/sonarsource/rule-api/rule-api/${rule_api_version}' " +`
+    "to a folder and set the %rule_api_path% environment variable with the full path of that folder. For example 'c:\\work\\tools'."
+if (-Not $Env:rule_api_path) {
+    throw $rule_api_error
+}
+$rule_api_jar = "${Env:rule_api_path}\\rule-api-${rule_api_version}.jar"
+if (-Not (Test-Path $rule_api_jar)) {
+    throw $rule_api_error
 }
 
 $resgenPath = "${Env:ProgramFiles(x86)}\\Microsoft SDKs\\Windows\\v10.0A\\bin\\NETFX 4.6.1 Tools\\ResGen.exe"
@@ -297,10 +306,10 @@ function ReplaceTokens($text) {
 ### SCRIPT START ###
 
 if ($ruleKey) {
-    java -jar $env:rule_api_path generate -directory $(GetRspecDownloadPath $language) -language $($ruleapiLanguageMap.Get_Item($language)) -rule $ruleKey
+    java -jar $rule_api_jar generate -directory $(GetRspecDownloadPath $language) -language $($ruleapiLanguageMap.Get_Item($language)) -rule $ruleKey
 }
 else {
-    java -jar $env:rule_api_path update   -directory $(GetRspecDownloadPath $language) -language $($ruleapiLanguageMap.Get_Item($language))
+    java -jar $rule_api_jar update   -directory $(GetRspecDownloadPath $language) -language $($ruleapiLanguageMap.Get_Item($language))
 }
 
 $csRules = GetRules "cs"
