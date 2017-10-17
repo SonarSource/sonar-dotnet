@@ -1807,7 +1807,7 @@
     <value>CODE_SMELL</value>
   </data>
   <data name="S1751_Category" xml:space="preserve">
-    <value>Sonar Bug</value>
+    <value>Sonar Code Smell</value>
   </data>
   <data name="S1751_Description" xml:space="preserve">
     <value>Having an unconditional break, return, (@)throw or goto in a loop renders it useless; the loop will only execute once and the loop structure itself is simply wasted keystrokes.</value>
@@ -1831,7 +1831,7 @@
     <value>Jump statements should not be used unconditionally</value>
   </data>
   <data name="S1751_Type" xml:space="preserve">
-    <value>BUG</value>
+    <value>CODE_SMELL</value>
   </data>
   <data name="S1764_Category" xml:space="preserve">
     <value>Sonar Bug</value>
