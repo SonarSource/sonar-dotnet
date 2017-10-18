@@ -6,9 +6,16 @@ $ErrorActionPreference = "Stop"
 try {
     Push-Location $PSScriptRoot
 
+    if (-not (Test-Path .\actual)) {
+        Write-Error "no 'actual' folder. Have you run this script twice after tests? Have you run the test?"
+    }
+
     Remove-Item .\expected -Recurse -Force
     Rename-Item .\actual .\expected
-    Remove-Item .\expected\.git -Recurse -Force
+    
+    if (Test-Path .\diff) {
+        Remove-Item .\diff -Recurse -Force 
+    }
 }
 finally {
     Pop-Location

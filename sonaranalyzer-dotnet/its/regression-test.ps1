@@ -8,7 +8,7 @@ param
     [Parameter(HelpMessage = "The key of the rule to test, e.g. S1234. If omitted, all rule will be tested.")]
     [ValidatePattern("^S[0-9]+$")]
     [string]
-    $singleRuleIdToTest
+    $ruleId
 )
 
 Set-StrictMode -version 2.0
@@ -35,21 +35,22 @@ function Build-Project([string]$ProjectName, [string]$SolutionRelativePath) {
         /fl /flp:"logFile=output\$ProjectName.log;verbosity=d"
 }
 
-function Initialize-ActualFolder($ruleId) {
+function Initialize-ActualFolder() {
     $timer = [system.diagnostics.stopwatch]::StartNew()
-    
+
     Write-Host "Initializing the actual issues Git repo with the expected ones"
     if (Test-Path .\actual) {
         Remove-Item -Recurse -Force actual
     }
     # this copies no files if ruleId is not set, and all but ending with ruleId if set
-    Copy-Item .\expected -Destination .\actual -Exclude "*${ruleId}.json" -Recurse
-    Write-Host "Initialize-ActualFolder:" + $timer.Elapsed.TotalSeconds
+
+    CopyFolderRecursively -from .\expected -to .\actual -exclude "*${ruleId}.json"
+    Write-Host "Initialize-ActualFolder:" $timer.Elapsed.TotalSeconds
 }
 
-function Initialize-OutputFolder($ruleId) {
+function Initialize-OutputFolder() {
     $timer = [system.diagnostics.stopwatch]::StartNew()
-    
+
     Write-Host "Initializing the output folder"
     if (Test-Path .\output) {
         Remove-Item -Recurse -Force output
@@ -65,7 +66,7 @@ function Initialize-OutputFolder($ruleId) {
     else {
         Copy-Item ".\AllSonarAnalyzerRules.ruleset" -Destination ".\output"
     }
-    Write-Host "Initialize-OutputFolder:" + $timer.Elapsed.TotalSeconds
+    Write-Host "Initialize-OutputFolder:" $timer.Elapsed.TotalSeconds
 }
 
 function Export-AnalyzerPerformancesFromLogs([string[]]$buildLogsPaths) {
@@ -86,28 +87,27 @@ function Export-AnalyzerPerformancesFromLogs([string[]]$buildLogsPaths) {
         Sort-Object Time -Descending
 }
 
-
-
 function GetFullPath($folder) {
     return [System.IO.Path]::GetFullPath((Join-Path (Get-Location).Path $folder))
 }
 
-function CopyFolderRecursively($from, $to, $include) {
+function CopyFolderRecursively($from, $to, $include, $exclude) {
     $fromPath = GetFullPath -folder $from
     $toPath = GetFullPath -folder $to
 
-    $files = Get-ChildItem -Path $fromPath -Recurse -Include $include
-    
+    $files = if ($include)
+    {     Get-ChildItem -Path $fromPath -Recurse -Include $include }
+    else {Get-ChildItem -Path $fromPath -Recurse -Exclude $exclude }
+
     foreach ($file in $files) {
         $path = Join-Path $toPath $file.FullName.Substring($fromPath.length)
         $parent = split-path $path -parent
         if (-Not (Test-Path $parent)) {
-            New-Item $parent -Type Directory -Force
+            New-Item $parent -Type Directory -Force | out-null
         }
         Copy-Item $file -Destination $path
     }
 }
-
 
 function Measure-AnalyzerPerformance()
 {
@@ -124,6 +124,30 @@ function Measure-AnalyzerPerformance()
         Format-Table -Wrap -AutoSize | Out-String -Width 100
 }
 
+function DiffResults() {
+    if (Test-Path .\diff) {
+        Remove-Item -Recurse -Force .\diff
+    }
+
+    $errorMsg = "ERROR: There are differences between the actual and the expected issues."
+    if (!$ruleId)
+    {
+        Exec { & git diff --no-index --quiet --exit-code ./expected ./actual } `
+              -errorMessage $errorMsg
+        return
+    }
+
+    New-Item ".\diff" -Type Directory | out-null
+    New-Item ".\diff\actual" -Type Directory | out-null
+    New-Item ".\diff\expected" -Type Directory | out-null
+
+    CopyFolderRecursively -from .\expected -to .\diff\expected -include "*${ruleId}.json"
+    CopyFolderRecursively -from .\actual   -to .\diff\actual -include "*${ruleId}.json"
+
+    Exec { & git diff --no-index --quiet --exit-code .\diff\expected .\diff\actual } `
+          -errorMessage $errorMsg
+}
+
 try {
     $sw = [system.diagnostics.stopwatch]::StartNew()
     . (Join-Path $PSScriptRoot "..\..\scripts\build\build-utils.ps1")
@@ -133,8 +157,8 @@ try {
     Test-SonarAnalyzerDll
 
     Write-Header "Initializing the environment"
-    Initialize-ActualFolder -ruleId $singleRuleIdToTest
-    Initialize-OutputFolder -ruleId $singleRuleIdToTest
+    Initialize-ActualFolder
+    Initialize-OutputFolder
 
     Write-Host "Installing the import before target file in '${msBuildImportBefore}'"
     Copy-Item .\SonarAnalyzer.Testing.ImportBefore.targets -Destination $msBuildImportBefore -Recurse -Container
@@ -148,38 +172,17 @@ try {
     Write-Host "Normalizing the SARIF reports"
     $timer2 = [system.diagnostics.stopwatch]::StartNew()
         Exec { & .\create-issue-reports.ps1 }
-    Write-Host "Normalizing the SARIF reports:" + $timer2.Elapsed.TotalSeconds
-        
+    Write-Host "Normalizing the SARIF reports:" $timer2.Elapsed.TotalSeconds
+
     Write-Host "Computing analyzer performance"
     $timer3 = [system.diagnostics.stopwatch]::StartNew()
     Measure-AnalyzerPerformance
-    Write-Host "Computing analyzer performance:" + $timer3.Elapsed.TotalSeconds
-
-
-
-
-    New-Item "./diff" -Type Directory 
-    New-Item "./diff/actual" -Type Directory 
-    New-Item "./diff/expected" -Type Directory 
-
-    CopyFolderRecursively -from .\expected -to .\diff\expected -include "*${ruleId}.json"
-    CopyFolderRecursively -from .\actual   -to .\diff\actual -include "*${ruleId}.json"
-
+    Write-Host "Computing analyzer performance:" $timer3.Elapsed.TotalSeconds
 
     Write-Host "Checking for differences..."
     $timer4 = [system.diagnostics.stopwatch]::StartNew()
-    Exec { & git diff --no-index --quiet --exit-code ./diff/expected ./diff/actual } -errorMessage `
-        "ERROR: There are differences between the actual and the expected issues."
-    Write-Host "Checking for differences..." + $timer4.Elapsed.TotalSeconds
-
-
-
-
-    # Write-Host "Checking for differences..."
-    # $timer4 = [system.diagnostics.stopwatch]::StartNew()
-    # Exec { & git diff --no-index --quiet --exit-code ./expected ./actual } -errorMessage `
-    #     "ERROR: There are differences between the actual and the expected issues."
-    # Write-Host "Checking for differences..." + $timer4.Elapsed.TotalSeconds
+    DiffResults
+    Write-Host "Checking for differences..." $timer4.Elapsed.TotalSeconds
 
     Write-Host -ForegroundColor Green "SUCCESS: No differences were found!"
     exit 0
@@ -196,5 +199,9 @@ finally {
 
     $sw.Stop()
     $totalTimesec = [int]$sw.Elapsed.TotalSeconds
-    Write-Host "Total time: ${totalTimesec}s"
+    if ($ruleId) {
+        Write-Host "Analyzed ${ruleId} in ${totalTimesec}s"
+    } else {
+        Write-Host "Analyzed all rules in ${totalTimesec}s"
+    }
 }
