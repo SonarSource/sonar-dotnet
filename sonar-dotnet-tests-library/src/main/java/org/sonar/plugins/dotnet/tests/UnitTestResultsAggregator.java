@@ -50,7 +50,9 @@ public class UnitTestResultsAggregator {
   }
 
   boolean hasUnitTestResultsProperty(Predicate<String> hasKeyPredicate) {
-    return hasVisualStudioTestResultsFile(hasKeyPredicate) || hasNUnitTestResultsFile(hasKeyPredicate) || hasXUnitTestResultsFile(hasKeyPredicate);
+    return hasVisualStudioTestResultsFile(hasKeyPredicate)
+      || hasNUnitTestResultsFile(hasKeyPredicate)
+      || hasXUnitTestResultsFile(hasKeyPredicate);
   }
 
   boolean hasUnitTestResultsProperty() {
