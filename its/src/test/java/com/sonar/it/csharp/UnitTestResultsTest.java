@@ -20,6 +20,9 @@
 package com.sonar.it.csharp;
 
 import com.sonar.orchestrator.Orchestrator;
+import com.sonar.orchestrator.build.BuildResult;
+import com.sonar.orchestrator.version.Version;
+
 import java.io.IOException;
 import java.nio.file.Path;
 import org.junit.Before;
@@ -47,8 +50,13 @@ public class UnitTestResultsTest {
 
   @Test
   public void should_not_import_unit_test_results_without_report() throws Exception {
-    analyzeTestProject();
+    BuildResult buildResult = analyzeTestProject();
 
+    if (orchestrator.getServer().version().isGreaterThanOrEquals("6.5")) {
+      assertThat(buildResult.getLogs()).doesNotContain("C# Unit Test Results Import");
+    } else {
+      assertThat(buildResult.getLogs()).contains("C# Unit Test Results Import");
+    }
     assertThat(getMeasure("UnitTestResultsTest", "tests")).isNull();
     assertThat(getMeasure("UnitTestResultsTest", "test_errors")).isNull();
     assertThat(getMeasure("UnitTestResultsTest", "test_failures")).isNull();
@@ -57,8 +65,9 @@ public class UnitTestResultsTest {
 
   @Test
   public void vstest() throws Exception {
-    analyzeTestProject("sonar.cs.vstest.reportsPaths", "reports/vstest.trx");
+    BuildResult buildResult = analyzeTestProject("sonar.cs.vstest.reportsPaths", "reports/vstest.trx");
 
+    assertThat(buildResult.getLogs()).contains("C# Unit Test Results Import");
     assertThat(getMeasureAsInt("UnitTestResultsTest", "tests")).isEqualTo(32);
     assertThat(getMeasureAsInt("UnitTestResultsTest", "test_errors")).isEqualTo(1);
     assertThat(getMeasureAsInt("UnitTestResultsTest", "test_failures")).isEqualTo(10);
@@ -67,8 +76,9 @@ public class UnitTestResultsTest {
 
   @Test
   public void nunit() throws Exception {
-    analyzeTestProject("sonar.cs.nunit.reportsPaths", "reports/nunit.xml");
+    BuildResult buildResult = analyzeTestProject("sonar.cs.nunit.reportsPaths", "reports/nunit.xml");
 
+    assertThat(buildResult.getLogs()).contains("C# Unit Test Results Import");
     assertThat(getMeasureAsInt("UnitTestResultsTest", "tests")).isEqualTo(196);
     assertThat(getMeasureAsInt("UnitTestResultsTest", "test_errors")).isEqualTo(30);
     assertThat(getMeasureAsInt("UnitTestResultsTest", "test_failures")).isEqualTo(20);
@@ -82,7 +92,7 @@ public class UnitTestResultsTest {
     assertThat(getMeasureAsInt("UnitTestResultsTest", "tests")).isEqualTo(32);
   }
 
-  private void analyzeTestProject(String... keyValues) throws IOException {
+  private BuildResult analyzeTestProject(String... keyValues) throws IOException {
     Path projectDir = Tests.projectDir(temp, "UnitTestResultsTest");
     orchestrator.executeBuild(Tests.newScanner(projectDir)
       .addArgument("begin")
@@ -94,7 +104,7 @@ public class UnitTestResultsTest {
 
     Tests.runMSBuild(orchestrator, projectDir, "/t:Rebuild");
 
-    orchestrator.executeBuild(Tests.newScanner(projectDir)
+    return orchestrator.executeBuild(Tests.newScanner(projectDir)
       .addArgument("end"));
   }
 }

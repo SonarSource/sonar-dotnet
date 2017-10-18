@@ -27,10 +27,8 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
-import org.mockito.invocation.InvocationOnMock;
-import org.mockito.stubbing.Answer;
-import org.sonar.api.config.MapSettings;
 import org.sonar.api.config.Settings;
+import org.sonar.api.config.internal.MapSettings;
 
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
