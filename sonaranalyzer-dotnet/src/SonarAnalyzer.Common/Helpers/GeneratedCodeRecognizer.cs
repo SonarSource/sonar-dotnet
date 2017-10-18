@@ -53,8 +53,6 @@ namespace SonarAnalyzer.Helpers
                 "DebuggerNonUserCodeAttribute",
                 "GeneratedCode",
                 "GeneratedCodeAttribute",
-                "ExcludeFromCodeCoverage",
-                "ExcludeFromCodeCoverageAttribute",
                 "CompilerGenerated",
                 "CompilerGeneratedAttribute"
             };
