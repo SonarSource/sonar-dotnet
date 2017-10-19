@@ -657,7 +657,7 @@ namespace Test_23
             }
         }
 
-        public void MethodThree(IReadOnlyList<Foo> list)
+        public void MethodThree(IList<Foo> list)
         {
             list[0] = new Test_23.Foo();
         }
