@@ -136,4 +136,15 @@ namespace Tests.Diagnostics
         [System.ObsoleteAttribute]
         public int Method2() => 0; // Compliant, any attribute disables this rule
     }
+
+    // Handle invalid code causing NullReferenceException: https://github.com/SonarSource/sonar-csharp/issues/819
+    public class Class7
+    {
+        public async Task<Result<T> Function<T>(Func<Task<Result<T>>> f)
+        {
+            Result<T> result;
+            result = await f();
+            return result;
+        }
+    }
 }
