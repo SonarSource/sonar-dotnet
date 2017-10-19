@@ -656,6 +656,11 @@ namespace Test_23
                 Console.WriteLine(list[0]);
             }
         }
+
+        public void MethodThree(IReadOnlyList<Foo> list)
+        {
+            list[0] = new Test_23.Foo();
+        }
     }
 }
 
