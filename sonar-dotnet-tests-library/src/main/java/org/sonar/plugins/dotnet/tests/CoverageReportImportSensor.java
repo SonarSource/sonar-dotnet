@@ -73,11 +73,14 @@ public class CoverageReportImportSensor implements Sensor {
         descriptor.name(this.languageName + " Unit Tests Coverage Report Import");
       }
     }
-    descriptor.onlyOnLanguage(this.languageKey);
-
     if (sonarQubeVersion.isGreaterThanOrEqual(Version.create(6,4))) {
       descriptor.global();
     }
+    if (sonarQubeVersion.isGreaterThanOrEqual(Version.create(6,5))) {
+      descriptor.onlyWhenConfiguration(c -> coverageAggregator.hasCoverageProperty(c::hasKey));
+    }
+
+    descriptor.onlyOnLanguage(this.languageKey);
   }
 
   @Override

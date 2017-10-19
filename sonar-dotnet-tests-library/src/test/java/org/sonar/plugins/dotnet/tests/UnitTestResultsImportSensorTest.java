@@ -22,13 +22,21 @@ package org.sonar.plugins.dotnet.tests;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.stubbing.Answer;
+
 import org.sonar.api.SonarQubeVersion;
 import org.sonar.api.batch.bootstrap.ProjectDefinition;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.internal.DefaultSensorDescriptor;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
+import org.sonar.api.config.Configuration;
 import org.sonar.api.measures.CoreMetrics;
+import org.sonar.api.utils.Version;
+
+import java.util.function.Predicate;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.groups.Tuple.tuple;
@@ -116,6 +124,42 @@ public class UnitTestResultsImportSensorTest {
         tuple(CoreMetrics.SKIPPED_TESTS_KEY, 1),
         tuple(CoreMetrics.TEST_FAILURES_KEY, 2),
         tuple(CoreMetrics.TEST_ERRORS_KEY, 3));
+  }
+
+  @Test
+  public void describe_when_sonarqube_is_6_5_plus_execute_only_when_key_present() {
+    UnitTestResultsAggregator unitTestResultsAggregator = mock(UnitTestResultsAggregator.class);
+    SonarQubeVersion sonarQubeVersion = new SonarQubeVersion(Version.create(6,5));
+
+    Configuration configWithKey = mock(Configuration.class);
+    when(configWithKey.hasKey("expectedKey")).thenReturn(true);
+
+    Configuration configWithoutKey = mock(Configuration.class);
+
+    when(unitTestResultsAggregator.hasUnitTestResultsProperty(any(Predicate.class))).thenAnswer((invocationOnMock) -> {
+        Predicate<String> pr = invocationOnMock.getArgument(0);
+        return pr.test("expectedKey");
+      });
+    DefaultSensorDescriptor descriptor = new DefaultSensorDescriptor();
+
+    new UnitTestResultsImportSensor(unitTestResultsAggregator, ProjectDefinition.create(), "cs", "C#", sonarQubeVersion)
+      .describe(descriptor);
+
+    assertThat(descriptor.configurationPredicate()).accepts(configWithKey);
+    assertThat(descriptor.configurationPredicate()).rejects(configWithoutKey);
+  }
+
+  @Test
+  public void describe_when_sonarqube_is_6_4_plus_is_global_and_only_on_language() {
+    UnitTestResultsAggregator unitTestResultsAggregator = mock(UnitTestResultsAggregator.class);
+    SonarQubeVersion sonarQubeVersion = new SonarQubeVersion(Version.create(6,4));
+    DefaultSensorDescriptor descriptor = new DefaultSensorDescriptor();
+
+    new UnitTestResultsImportSensor(unitTestResultsAggregator, ProjectDefinition.create(), "cs", "C#", sonarQubeVersion)
+      .describe(descriptor);
+
+    assertThat(descriptor.isGlobal()).isTrue();
+    assertThat(descriptor.languages()).containsOnly("cs");
   }
 
 }

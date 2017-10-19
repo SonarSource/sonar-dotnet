@@ -20,6 +20,8 @@
 package org.sonar.plugins.dotnet.tests;
 
 import java.io.File;
+import java.util.function.Predicate;
+
 import org.sonar.api.batch.BatchSide;
 import org.sonar.api.config.Settings;
 
@@ -47,32 +49,38 @@ public class UnitTestResultsAggregator {
     this.xunitTestResultsFileParser = xunitTestResultsFileParser;
   }
 
+  boolean hasUnitTestResultsProperty(Predicate<String> hasKeyPredicate) {
+    return hasVisualStudioTestResultsFile(hasKeyPredicate)
+      || hasNUnitTestResultsFile(hasKeyPredicate)
+      || hasXUnitTestResultsFile(hasKeyPredicate);
+  }
+
   boolean hasUnitTestResultsProperty() {
-    return hasVisualStudioTestResultsFile() || hasNUnitTestResultsFile() || hasXUnitTestResultsFile();
+    return hasUnitTestResultsProperty(settings::hasKey);
   }
 
-  private boolean hasVisualStudioTestResultsFile() {
-    return settings.hasKey(unitTestConf.visualStudioTestResultsFilePropertyKey());
+  private boolean hasVisualStudioTestResultsFile(Predicate<String> hasKeyPredicate) {
+    return hasKeyPredicate.test(unitTestConf.visualStudioTestResultsFilePropertyKey());
   }
 
-  private boolean hasNUnitTestResultsFile() {
-    return settings.hasKey(unitTestConf.nunitTestResultsFilePropertyKey());
+  private boolean hasNUnitTestResultsFile(Predicate<String> hasKeyPredicate) {
+    return hasKeyPredicate.test(unitTestConf.nunitTestResultsFilePropertyKey());
   }
 
-  private boolean hasXUnitTestResultsFile() {
-    return settings.hasKey(unitTestConf.xunitTestResultsFilePropertyKey());
+  private boolean hasXUnitTestResultsFile(Predicate<String> hasKeyPredicate) {
+    return hasKeyPredicate.test(unitTestConf.xunitTestResultsFilePropertyKey());
   }
 
   UnitTestResults aggregate(WildcardPatternFileProvider wildcardPatternFileProvider, UnitTestResults unitTestResults) {
-    if (hasVisualStudioTestResultsFile()) {
+    if (hasVisualStudioTestResultsFile(settings::hasKey)) {
       aggregate(wildcardPatternFileProvider, settings.getStringArray(unitTestConf.visualStudioTestResultsFilePropertyKey()), visualStudioTestResultsFileParser, unitTestResults);
     }
 
-    if (hasNUnitTestResultsFile()) {
+    if (hasNUnitTestResultsFile(settings::hasKey)) {
       aggregate(wildcardPatternFileProvider, settings.getStringArray(unitTestConf.nunitTestResultsFilePropertyKey()), nunitTestResultsFileParser, unitTestResults);
     }
 
-    if (hasXUnitTestResultsFile()) {
+    if (hasXUnitTestResultsFile(settings::hasKey)) {
       aggregate(wildcardPatternFileProvider, settings.getStringArray(unitTestConf.xunitTestResultsFilePropertyKey()), xunitTestResultsFileParser, unitTestResults);
     }
 

@@ -26,19 +26,23 @@ import org.junit.rules.TemporaryFolder;
 import org.mockito.Mockito;
 
 import org.sonar.api.SonarQubeVersion;
+import org.sonar.api.batch.bootstrap.ProjectDefinition;
 import org.sonar.api.batch.fs.internal.DefaultInputFile;
 import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 import org.sonar.api.batch.sensor.internal.DefaultSensorDescriptor;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
+import org.sonar.api.config.Configuration;
 import org.sonar.api.utils.Version;
 import org.sonar.api.utils.log.LogTester;
 import org.sonar.api.utils.log.LoggerLevel;
 
 import java.io.File;
 import java.util.HashSet;
+import java.util.function.Predicate;
 
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -134,6 +138,30 @@ public class CoverageReportImportSensorTest {
       .describe(descriptor);
 
     assertThat(descriptor.isGlobal()).isTrue();
+  }
+
+  @Test
+  public void describe_when_sonarqube_is_6_5_plus_execute_only_when_key_present() {
+    CoverageConfiguration coverageConf = new CoverageConfiguration("", "", "", "", "");
+    CoverageAggregator coverageAggregator = mock(CoverageAggregator.class);
+    SonarQubeVersion sonarQubeVersion = new SonarQubeVersion(Version.create(6,5));
+
+    Configuration configWithKey = mock(Configuration.class);
+    when(configWithKey.hasKey("expectedKey")).thenReturn(true);
+
+    Configuration configWithoutKey = mock(Configuration.class);
+
+    when(coverageAggregator.hasCoverageProperty(any(Predicate.class))).thenAnswer((invocationOnMock) -> {
+      Predicate<String> pr = invocationOnMock.getArgument(0);
+      return pr.test("expectedKey");
+    });
+    DefaultSensorDescriptor descriptor = new DefaultSensorDescriptor();
+
+    new CoverageReportImportSensor(coverageConf, coverageAggregator, "cs", "C#", sonarQubeVersion, false)
+      .describe(descriptor);
+
+    assertThat(descriptor.configurationPredicate()).accepts(configWithKey);
+    assertThat(descriptor.configurationPredicate()).rejects(configWithoutKey);
   }
 
   @Test

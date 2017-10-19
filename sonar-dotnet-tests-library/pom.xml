@@ -23,7 +23,7 @@
   </developers>
 
   <properties>
-    <sonarqube.version>6.4</sonarqube.version>
+    <sonarqube.version>6.5</sonarqube.version>
     <maven.test.redirectTestOutputToFile>true</maven.test.redirectTestOutputToFile>
     <gitRepositoryName>sonar-dotnet-tests-library</gitRepositoryName>
   </properties>
@@ -83,7 +83,7 @@
             <configuration>
               <rules>
                 <requireFilesSize>
-                  <maxsize>52000</maxsize>
+                  <maxsize>54000</maxsize>
                   <minsize>40000</minsize>
                   <files>
                     <file>${project.build.directory}/${project.build.finalName}.jar</file>
