@@ -20,6 +20,8 @@
 package com.sonar.it.csharp;
 
 import com.sonar.orchestrator.Orchestrator;
+import com.sonar.orchestrator.build.BuildResult;
+
 import java.io.IOException;
 import java.nio.file.Path;
 import org.junit.Before;
@@ -47,40 +49,67 @@ public class CoverageTest {
 
   @Test
   public void should_not_import_coverage_without_report() throws Exception {
-    analyzeCoverageTestProject();
+    BuildResult buildResult = analyzeCoverageTestProject();
 
+    if (orchestrator.getServer().version().isGreaterThanOrEquals("6.5")) {
+      assertThat(buildResult.getLogs()).doesNotContain("C# Tests Coverage Report Import");
+    } else if (orchestrator.getServer().version().isGreaterThanOrEquals("6.2")) {
+      assertThat(buildResult.getLogs()).contains("C# Tests Coverage Report Import");
+    } else {
+      assertThat(buildResult.getLogs()).contains("C# Unit Tests Coverage Report Import");
+    }
     assertThat(getMeasure("CoverageTest", "lines_to_cover")).isNull();
     assertThat(getMeasure("CoverageTest", "uncovered_lines")).isNull();
   }
 
   @Test
   public void ncover3() throws Exception {
-    analyzeCoverageTestProject("sonar.cs.ncover3.reportsPaths", "reports/ncover3.nccov");
+    BuildResult buildResult = analyzeCoverageTestProject("sonar.cs.ncover3.reportsPaths", "reports/ncover3.nccov");
 
+    if (orchestrator.getServer().version().isGreaterThanOrEquals("6.2")) {
+      assertThat(buildResult.getLogs()).contains("C# Tests Coverage Report Import");
+    } else {
+      assertThat(buildResult.getLogs()).contains("C# Unit Tests Coverage Report Import");
+    }
     assertThat(getMeasureAsInt("CoverageTest", "lines_to_cover")).isEqualTo(2);
     assertThat(getMeasureAsInt("CoverageTest", "uncovered_lines")).isEqualTo(1);
   }
 
   @Test
   public void open_cover() throws Exception {
-    analyzeCoverageTestProject("sonar.cs.opencover.reportsPaths", "reports/opencover.xml");
+    BuildResult buildResult = analyzeCoverageTestProject("sonar.cs.opencover.reportsPaths", "reports/opencover.xml");
 
+    if (orchestrator.getServer().version().isGreaterThanOrEquals("6.2")) {
+      assertThat(buildResult.getLogs()).contains("C# Tests Coverage Report Import");
+    } else {
+      assertThat(buildResult.getLogs()).contains("C# Unit Tests Coverage Report Import");
+    }
     assertThat(getMeasureAsInt("CoverageTest", "lines_to_cover")).isEqualTo(2);
     assertThat(getMeasureAsInt("CoverageTest", "uncovered_lines")).isEqualTo(0);
   }
 
   @Test
   public void dotcover() throws Exception {
-    analyzeCoverageTestProject("sonar.cs.dotcover.reportsPaths", "reports/dotcover.html");
+    BuildResult buildResult = analyzeCoverageTestProject("sonar.cs.dotcover.reportsPaths", "reports/dotcover.html");
 
+    if (orchestrator.getServer().version().isGreaterThanOrEquals("6.2")) {
+      assertThat(buildResult.getLogs()).contains("C# Tests Coverage Report Import");
+    } else {
+      assertThat(buildResult.getLogs()).contains("C# Unit Tests Coverage Report Import");
+    }
     assertThat(getMeasureAsInt("CoverageTest", "lines_to_cover")).isEqualTo(2);
     assertThat(getMeasureAsInt("CoverageTest", "uncovered_lines")).isEqualTo(1);
   }
 
   @Test
   public void visual_studio() throws Exception {
-    analyzeCoverageTestProject("sonar.cs.vscoveragexml.reportsPaths", "reports/visualstudio.coveragexml");
+    BuildResult buildResult = analyzeCoverageTestProject("sonar.cs.vscoveragexml.reportsPaths", "reports/visualstudio.coveragexml");
 
+    if (orchestrator.getServer().version().isGreaterThanOrEquals("6.2")) {
+      assertThat(buildResult.getLogs()).contains("C# Tests Coverage Report Import");
+    } else {
+      assertThat(buildResult.getLogs()).contains("C# Unit Tests Coverage Report Import");
+    }
     assertThat(getMeasureAsInt("CoverageTest", "lines_to_cover")).isEqualTo(2);
     assertThat(getMeasureAsInt("CoverageTest", "uncovered_lines")).isEqualTo(1);
   }
@@ -114,7 +143,7 @@ public class CoverageTest {
     assertThat(getMeasureAsInt("CoverageTest", "lines_to_cover")).isEqualTo(2);
   }
 
-  private void analyzeCoverageTestProject(String... keyValues) throws IOException {
+  private BuildResult analyzeCoverageTestProject(String... keyValues) throws IOException {
     Path projectDir = Tests.projectDir(temp, "CoverageTest");
     orchestrator.executeBuild(Tests.newScanner(projectDir)
       .addArgument("begin")
@@ -126,7 +155,7 @@ public class CoverageTest {
 
     Tests.runMSBuild(orchestrator, projectDir, "/t:Rebuild");
 
-    orchestrator.executeBuild(Tests.newScanner(projectDir)
+    return orchestrator.executeBuild(Tests.newScanner(projectDir)
       .addArgument("end"));
   }
 

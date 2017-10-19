@@ -20,6 +20,8 @@
 package org.sonar.plugins.dotnet.tests;
 
 import java.io.File;
+import java.util.function.Predicate;
+
 import org.sonar.api.batch.BatchSide;
 import org.sonar.api.config.Settings;
 
@@ -60,39 +62,46 @@ public class CoverageAggregator {
   }
 
   boolean hasCoverageProperty() {
-    return hasNCover3ReportPaths() || hasOpenCoverReportPaths() || hasDotCoverReportPaths() || hasVisualStudioCoverageXmlReportPaths();
+    return hasCoverageProperty(settings::hasKey);
   }
 
-  private boolean hasNCover3ReportPaths() {
-    return settings.hasKey(coverageConf.ncover3PropertyKey());
+  boolean hasCoverageProperty(Predicate<String> hasKeyPredicate) {
+    return hasNCover3ReportPaths(hasKeyPredicate)
+      || hasOpenCoverReportPaths(hasKeyPredicate)
+      || hasDotCoverReportPaths(hasKeyPredicate)
+      || hasVisualStudioCoverageXmlReportPaths(hasKeyPredicate);
   }
 
-  private boolean hasOpenCoverReportPaths() {
-    return settings.hasKey(coverageConf.openCoverPropertyKey());
+  private boolean hasNCover3ReportPaths(Predicate<String> hasKeyPredicate) {
+    return hasKeyPredicate.test(coverageConf.ncover3PropertyKey());
   }
 
-  private boolean hasDotCoverReportPaths() {
-    return settings.hasKey(coverageConf.dotCoverPropertyKey());
+  private boolean hasOpenCoverReportPaths(Predicate<String> hasKeyPredicate) {
+    return hasKeyPredicate.test(coverageConf.openCoverPropertyKey());
   }
 
-  private boolean hasVisualStudioCoverageXmlReportPaths() {
-    return settings.hasKey(coverageConf.visualStudioCoverageXmlPropertyKey());
+  private boolean hasDotCoverReportPaths(Predicate<String> hasKeyPredicate) {
+    return hasKeyPredicate.test(coverageConf.dotCoverPropertyKey());
+  }
+
+  private boolean hasVisualStudioCoverageXmlReportPaths(Predicate<String> hasKeyPredicate) {
+    return hasKeyPredicate.test(coverageConf.visualStudioCoverageXmlPropertyKey());
   }
 
   Coverage aggregate(WildcardPatternFileProvider wildcardPatternFileProvider, Coverage coverage) {
-    if (hasNCover3ReportPaths()) {
+    if (hasNCover3ReportPaths(settings::hasKey)) {
       aggregate(wildcardPatternFileProvider, settings.getStringArray(coverageConf.ncover3PropertyKey()), ncover3ReportParser, coverage);
     }
 
-    if (hasOpenCoverReportPaths()) {
+    if (hasOpenCoverReportPaths(settings::hasKey)) {
       aggregate(wildcardPatternFileProvider, settings.getStringArray(coverageConf.openCoverPropertyKey()), openCoverReportParser, coverage);
     }
 
-    if (hasDotCoverReportPaths()) {
+    if (hasDotCoverReportPaths(settings::hasKey)) {
       aggregate(wildcardPatternFileProvider, settings.getStringArray(coverageConf.dotCoverPropertyKey()), dotCoverReportsAggregator, coverage);
     }
 
-    if (hasVisualStudioCoverageXmlReportPaths()) {
+    if (hasVisualStudioCoverageXmlReportPaths(settings::hasKey)) {
       aggregate(wildcardPatternFileProvider, settings.getStringArray(coverageConf.visualStudioCoverageXmlPropertyKey()), visualStudioCoverageXmlReportParser, coverage);
     }
 

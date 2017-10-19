@@ -60,6 +60,9 @@ public class UnitTestResultsImportSensor implements Sensor {
       descriptor.global();
       descriptor.onlyOnLanguage(this.languageKey);
     }
+    if (sonarQubeVersion.isGreaterThanOrEqual(Version.create(6,5))) {
+      descriptor.onlyWhenConfiguration(c -> unitTestResultsAggregator.hasUnitTestResultsProperty(c::hasKey));
+    }
   }
 
   @Override
