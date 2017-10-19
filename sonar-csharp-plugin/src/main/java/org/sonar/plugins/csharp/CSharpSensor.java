@@ -35,6 +35,8 @@ import org.sonar.api.config.Settings;
 import org.sonar.api.issue.NoSonarFilter;
 import org.sonar.api.measures.FileLinesContextFactory;
 import org.sonar.api.rule.RuleKey;
+import org.sonar.api.utils.MessageException;
+import org.sonar.api.utils.System2;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 import org.sonarsource.dotnet.shared.plugins.AbstractSensor;
@@ -50,12 +52,14 @@ public class CSharpSensor extends AbstractSensor implements Sensor {
 
   private final Settings settings;
   private final CSharpConfiguration config;
+  private final System2 system;
 
   public CSharpSensor(Settings settings, FileLinesContextFactory fileLinesContextFactory,
-    NoSonarFilter noSonarFilter, CSharpConfiguration config, EncodingPerFile encodingPerFile) {
+    NoSonarFilter noSonarFilter, CSharpConfiguration config, EncodingPerFile encodingPerFile, System2 system) {
     super(fileLinesContextFactory, noSonarFilter, config, encodingPerFile, CSharpSonarRulesDefinition.REPOSITORY_KEY);
     this.settings = settings;
     this.config = config;
+    this.system = system;
   }
 
   @Override
@@ -70,15 +74,15 @@ public class CSharpSensor extends AbstractSensor implements Sensor {
     }
   }
 
-  private static boolean shouldExecuteOnProject(FileSystem fs) {
-    if (!SystemUtils.IS_OS_WINDOWS) {
-      LOG.debug("OS is not Windows. Skip Sensor.");
-      return false;
-    }
-
+  private boolean shouldExecuteOnProject(FileSystem fs) {
     if (!filesToAnalyze(fs).iterator().hasNext()) {
       LOG.debug("No files to analyze. Skip Sensor.");
       return false;
+    }
+
+    if (!system.isOsWindows()) {
+      throw MessageException.of("C# analysis is not supported on " + SystemUtils.OS_NAME +
+        ". Please, refer to the SonarC# documentation page for more information.");
     }
 
     return true;
