@@ -20,6 +20,7 @@
 
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -74,7 +75,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 if (propertyDeclaration.AccessorList != null &&
                     propertySymbol != null &&
                     HasPublicSetter(propertySymbol) &&
-                    IsObservedCollectionType(propertySymbol.Type))
+                    IsObservedCollectionType(propertySymbol))
                 {
                     c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, propertyDeclaration.Identifier.GetLocation(),
                         propertySymbol.Name));
@@ -83,10 +84,14 @@ namespace SonarAnalyzer.Rules.CSharp
             SyntaxKind.PropertyDeclaration);
         }
 
-        private static bool IsObservedCollectionType(ITypeSymbol typeSymbol)
+        private static bool IsObservedCollectionType(IPropertySymbol propertySymbol)
         {
-            return typeSymbol.OriginalDefinition.DerivesOrImplementsAny(collectionTypes) &&
-                !typeSymbol.OriginalDefinition.DerivesOrImplementsAny(ignoredCollectionTypes);
+            var hasDataMemberAttribute = propertySymbol.GetAttributes().Any(attribute =>
+                attribute.AttributeClass.Is(KnownType.System_Runtime_Serialization_DataMemberAttribute));
+
+            return !hasDataMemberAttribute &&
+                propertySymbol.Type.OriginalDefinition.DerivesOrImplementsAny(collectionTypes) &&
+                !propertySymbol.Type.OriginalDefinition.DerivesOrImplementsAny(ignoredCollectionTypes);
         }
 
         private static bool HasPublicSetter(IPropertySymbol propertySymbol)

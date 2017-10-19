@@ -1,6 +1,6 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace Tests.Diagnostics
 {
@@ -50,5 +50,22 @@ namespace Tests.Diagnostics
     {
         ArrayList NongenericList { get; set; } // Noncompliant
         List<string> GenericList { get; set; } // Noncompliant
+    }
+
+    // Ignore collections marked with DataMember attribute: https://github.com/SonarSource/sonar-csharp/issues/795
+    [DataContract]
+    public class Message
+    {
+        [DataMember]
+        public string Id { get; set; }
+
+        [DataMember]
+        public string MessageBody { get; set; }
+
+        [DataMember]
+        public Dictionary<string, string> Properties { get; set; }
+
+        [System.Runtime.Serialization.DataMember]
+        public List<int> Values { get; set; }
     }
 }
