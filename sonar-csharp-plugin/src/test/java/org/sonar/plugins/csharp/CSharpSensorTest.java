@@ -31,6 +31,7 @@ import java.nio.file.StandardCopyOption;
 import java.nio.file.StandardOpenOption;
 import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.SystemUtils;
 import org.assertj.core.groups.Tuple;
 import org.junit.Before;
 import org.junit.Rule;
@@ -49,6 +50,8 @@ import org.sonar.api.issue.NoSonarFilter;
 import org.sonar.api.measures.FileLinesContext;
 import org.sonar.api.measures.FileLinesContextFactory;
 import org.sonar.api.rule.RuleKey;
+import org.sonar.api.utils.MessageException;
+import org.sonar.api.utils.System2;
 import org.sonarsource.dotnet.protobuf.SonarAnalyzer.EncodingInfo;
 import org.sonarsource.dotnet.shared.plugins.EncodingPerFile;
 
@@ -75,6 +78,7 @@ public class CSharpSensorTest {
   private FileLinesContextFactory fileLinesContextFactory;
   private NoSonarFilter noSonarFilter;
   private SensorContextTester tester;
+  private System2 system;
 
   private Path workDir;
 
@@ -127,9 +131,12 @@ public class CSharpSensorTest {
     noSonarFilter = mock(NoSonarFilter.class);
     settings = new Settings();
 
+    system = mock(System2.class);
+
     CSharpConfiguration csConfigConfiguration = new CSharpConfiguration(settings);
     sensor = new CSharpSensor(settings, fileLinesContextFactory, noSonarFilter, csConfigConfiguration,
-      new EncodingPerFile(ProjectDefinition.create().setProperty(CoreProperties.ENCODING_PROPERTY, "UTF-8"), new SonarQubeVersion(tester.getSonarQubeVersion())));
+      new EncodingPerFile(ProjectDefinition.create().setProperty(CoreProperties.ENCODING_PROPERTY, "UTF-8"), new SonarQubeVersion(tester.getSonarQubeVersion())),
+            system);
   }
 
   @Test
@@ -190,6 +197,34 @@ public class CSharpSensorTest {
     spy.execute(tester);
 
     verify(spy, never()).executeInternal(tester);
+  }
+
+  @Test
+  public void failWhenOsIsNotWindows() throws MessageException {
+    // Arrange
+    when(system.isOsWindows()).thenReturn(false);
+
+    // Assert exception
+    thrown.expect(MessageException.class);
+    thrown.expectMessage("C# analysis is not supported on " + SystemUtils.OS_NAME +
+            ". Please, refer to the SonarC# documentation page for more information.");
+
+    // Act
+    sensor.execute(tester);
+  }
+
+  @Test
+  public void doNotFail_WhenOsIsNotWindows_And_NoCS_FilesDetected() throws MessageException {
+    // Arrange
+    // Empty context, no C# files to analyze
+    tester = SensorContextTester.create(new File("src/test/resources"));
+    // Non-windows OS
+    when(system.isOsWindows()).thenReturn(false);
+
+    // Act
+    sensor.execute(tester);
+
+    // No exceptions thrown
   }
 
   private static String readFile(Path directory, String fileName) throws Exception {
