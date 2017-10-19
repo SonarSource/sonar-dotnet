@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 // Test interface inheritance
 namespace Test_01
@@ -603,6 +604,23 @@ namespace Test_21
         public void MethodB(B b)
         {
             b.Foo();
+        }
+    }
+}
+
+namespace Test_22
+{
+    public class Foo
+    {
+        // New test case - code doesn't compile but was making analyzer crash
+        private void Foo(IList<int> a, IList<string> a)
+        {
+            a.ToList();
+        }
+
+        private void FooBar(IList<int> , IList<string>)
+        {
+            a.ToList();
         }
     }
 }
