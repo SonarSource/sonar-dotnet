@@ -15,6 +15,19 @@
 },
 {
 "id":  "S3242",
+"message":  "Consider using more general type 'System.Collections.Generic.IReadOnlyDictionary<string, object>' instead of 'Nancy.Configuration.INancyEnvironment'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Configuration\INancyEnvironmentExtensions.cs",
+"region":  {
+"startLine":  39,
+"startColumn":  60,
+"endLine":  39,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S3242",
 "message":  "Consider using more general type 'System.Collections.Generic.ICollection<System.Func<Nancy.NancyContext, string, Nancy.Response>>' instead of 'System.Collections.Generic.IList<System.Func<Nancy.NancyContext, string, Nancy.Response>>'.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Conventions\StaticContentsConventionsExtensions.cs",
@@ -106,19 +119,6 @@
 },
 {
 "id":  "S3242",
-"message":  "Consider using more general type 'System.Dynamic.DynamicObject' instead of 'Nancy.DynamicDictionary'.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
-"region":  {
-"startLine":  362,
-"startColumn":  88,
-"endLine":  362,
-"endColumn":  98
-}
-}
-},
-{
-"id":  "S3242",
 "message":  "Consider using more general type 'System.Collections.Generic.IEnumerable<Nancy.Responses.Negotiation.DefaultResponseNegotiator.CompatibleHeader>' instead of 'System.Collections.Generic.IList<Nancy.Responses.Negotiation.DefaultResponseNegotiator.CompatibleHeader>'.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\DefaultResponseNegotiator.cs",
@@ -140,19 +140,6 @@
 "startColumn":  111,
 "endLine":  59,
 "endColumn":  119
-}
-}
-},
-{
-"id":  "S3242",
-"message":  "Consider using more general type 'System.Collections.Generic.IEnumerable<System.Text.RegularExpressions.Group>' instead of 'System.Collections.Generic.IList<System.Text.RegularExpressions.Group>'.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\Routing\DefaultRoutePatternMatcher.cs",
-"region":  {
-"startLine":  76,
-"startColumn":  132,
-"endLine":  76,
-"endColumn":  139
 }
 }
 },

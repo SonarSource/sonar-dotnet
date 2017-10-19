@@ -625,6 +625,40 @@ namespace Test_22
     }
 }
 
+// Test collection accessed through indexer
+namespace Test_23
+{
+    using System.Collections;
+    using System.Collections.Generic;
+
+    public class Foo
+    {
+        public void MethodOne(IList list)
+        {
+            if (list.Count > 0)
+            {
+                Console.WriteLine(list[0]);
+            }
+        }
+
+        public void MethodTwo(IList<Foo> list)
+        {
+            if (list.Count > 0)
+            {
+                Console.WriteLine(list[0]);
+            }
+        }
+
+        public void MethodThree(IReadOnlyList<Foo> list)
+        {
+            if (list.Count > 0)
+            {
+                Console.WriteLine(list[0]);
+            }
+        }
+    }
+}
+
 // Test that rule doesn't suggest other types for EventHandler methods
 namespace Test_24
 {

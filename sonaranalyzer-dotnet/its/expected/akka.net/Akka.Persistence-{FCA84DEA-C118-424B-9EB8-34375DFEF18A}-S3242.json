@@ -28,19 +28,6 @@
 },
 {
 "id":  "S3242",
-"message":  "Consider using more general type 'System.Collections.Generic.ICollection<T>' instead of 'System.Collections.Generic.IList<T>'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\EventAdapters.cs",
-"region":  {
-"startLine":  202,
-"startColumn":  51,
-"endLine":  202,
-"endColumn":  55
-}
-}
-},
-{
-"id":  "S3242",
 "message":  "Consider using more general type 'Akka.Persistence.IWithPersistenceId' instead of 'Akka.Persistence.Journal.AsyncWriteTarget.ReadHighestSequenceNr'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\MemoryJournal.cs",

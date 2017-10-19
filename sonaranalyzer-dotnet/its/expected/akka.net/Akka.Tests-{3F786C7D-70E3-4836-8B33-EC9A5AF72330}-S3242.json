@@ -90,32 +90,6 @@
 "endColumn":  57
 }
 }
-},
-{
-"id":  "S3242",
-"message":  "Consider using more general type 'System.Collections.Generic.IReadOnlyCollection<T>' instead of 'System.Collections.Generic.IReadOnlyList<T>'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests\MatchHandler\CachedMatchCompilerTests.cs",
-"region":  {
-"startLine":  119,
-"startColumn":  56,
-"endLine":  119,
-"endColumn":  58
-}
-}
-},
-{
-"id":  "S3242",
-"message":  "Consider using more general type 'System.Collections.Generic.IReadOnlyCollection<T>' instead of 'System.Collections.Generic.IReadOnlyList<T>'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests\MatchHandler\CachedMatchCompilerTests.cs",
-"region":  {
-"startLine":  125,
-"startColumn":  56,
-"endLine":  125,
-"endColumn":  58
-}
-}
 }
 ]
 }

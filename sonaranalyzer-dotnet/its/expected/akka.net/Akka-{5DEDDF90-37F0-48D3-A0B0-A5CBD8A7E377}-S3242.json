@@ -301,45 +301,6 @@
 },
 {
 "id":  "S3242",
-"message":  "Consider using more general type 'System.Collections.Generic.IReadOnlyCollection<object>' instead of 'System.Collections.Generic.IReadOnlyList<object>'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\MatchBuilderSignature.cs",
-"region":  {
-"startLine":  46,
-"startColumn":  55,
-"endLine":  46,
-"endColumn":  56
-}
-}
-},
-{
-"id":  "S3242",
-"message":  "Consider using more general type 'System.Collections.Generic.IReadOnlyCollection<object>' instead of 'System.Collections.Generic.IReadOnlyList<object>'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\MatchBuilderSignature.cs",
-"region":  {
-"startLine":  46,
-"startColumn":  80,
-"endLine":  46,
-"endColumn":  81
-}
-}
-},
-{
-"id":  "S3242",
-"message":  "Consider using more general type 'System.Collections.Generic.IReadOnlyCollection<Akka.Tools.MatchHandler.Argument>' instead of 'System.Collections.Generic.IReadOnlyList<Akka.Tools.MatchHandler.Argument>'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\MatchExpressionBuilder.cs",
-"region":  {
-"startLine":  135,
-"startColumn":  126,
-"endLine":  135,
-"endColumn":  135
-}
-}
-},
-{
-"id":  "S3242",
 "message":  "Consider using more general type 'System.Collections.Generic.ICollection<System.Linq.Expressions.Expression>' instead of 'System.Collections.Generic.List<System.Linq.Expressions.Expression>'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka\Util\MatchHandler\MatchExpressionBuilder.cs",
@@ -374,19 +335,6 @@
 "startColumn":  101,
 "endLine":  293,
 "endColumn":  105
-}
-}
-},
-{
-"id":  "S3242",
-"message":  "Consider using more general type 'System.Collections.Generic.ICollection<object>' instead of 'System.Collections.Generic.IList<object>'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\StringFormat.cs",
-"region":  {
-"startLine":  26,
-"startColumn":  61,
-"endLine":  26,
-"endColumn":  65
 }
 }
 }
