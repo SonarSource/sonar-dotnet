@@ -79,7 +79,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return methodDeclaration.ExpressionBody.DescendantNodes();
             }
 
-            return methodDeclaration.Body.DescendantNodes();
+            return methodDeclaration.Body?.DescendantNodes();
         }
 
         private static void CheckIssue<TDeclarationSyntax>(SyntaxNodeAnalysisContext context,
@@ -104,8 +104,13 @@ namespace SonarAnalyzer.Rules.CSharp
                 IsNewMethod(symbol) ||
                 IsEmptyMethod(declaration) ||
                 IsNewProperty(symbol) ||
-                IsAutoProperty(symbol) ||
-                HasInstanceReferences(getDescendants(declaration), context.SemanticModel))
+                IsAutoProperty(symbol))
+            {
+                return;
+            }
+
+            var descendants = getDescendants(declaration);
+            if (descendants == null || HasInstanceReferences(descendants, context.SemanticModel))
             {
                 return;
             }
