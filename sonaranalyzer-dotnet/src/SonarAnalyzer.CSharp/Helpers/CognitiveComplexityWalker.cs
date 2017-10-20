@@ -32,7 +32,7 @@ namespace SonarAnalyzer.Helpers
         private readonly List<SecondaryLocation> incrementLocations = new List<SecondaryLocation>();
         private readonly List<ExpressionSyntax> logicalOperationsToIgnore = new List<ExpressionSyntax>();
 
-        private string currentMethodName;
+        private MethodDeclarationSyntax currentMethod;
         private int nestingLevel = 0;
         private bool hasDirectRecursiveCall = false;
 
@@ -71,7 +71,7 @@ namespace SonarAnalyzer.Helpers
 
         public override void VisitMethodDeclaration(MethodDeclarationSyntax node)
         {
-            currentMethodName = node.Identifier.ValueText;
+            currentMethod = node;
             base.VisitMethodDeclaration(node);
 
             if (hasDirectRecursiveCall)
@@ -144,8 +144,11 @@ namespace SonarAnalyzer.Helpers
         public override void VisitInvocationExpression(InvocationExpressionSyntax node)
         {
             var identifierNameSyntax = node.Expression as IdentifierNameSyntax;
-            if (identifierNameSyntax != null &&
-                identifierNameSyntax.Identifier.ValueText.Equals(currentMethodName, StringComparison.Ordinal))
+            if (currentMethod != null &&
+                identifierNameSyntax != null &&
+                node.HasExactlyNArguments(currentMethod.ParameterList.Parameters.Count) &&
+                string.Equals(identifierNameSyntax.Identifier.ValueText,
+                    currentMethod.Identifier.ValueText, StringComparison.Ordinal))
             {
                 hasDirectRecursiveCall = true;
             }
