@@ -25,19 +25,6 @@
 "endColumn":  79
 }
 }
-},
-{
-"id":  "S3242",
-"message":  "Consider using more general type 'System.Collections.Generic.ICollection<Akka.Actor.Address>' instead of 'System.Collections.Generic.IList<Akka.Actor.Address>'.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\DistributedPubSubMediator.cs",
-"region":  {
-"startLine":  509,
-"startColumn":  57,
-"endLine":  509,
-"endColumn":  66
-}
-}
 }
 ]
 }
