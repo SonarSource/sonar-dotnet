@@ -66,12 +66,13 @@ namespace SonarAnalyzer.Rules.CSharp
                 return Enumerable.Empty<Diagnostic>();
             }
 
+            var methodAccessibility = methodSymbol.GetEffectiveAccessibility();
             // The GroupBy is useless in most of the cases but safe-guard in case of 2+ parameters with same name (invalid code).
             // In this case we analyze only the first parameter (a new analysis will be triggered after fixing the names).
             var parametersToCheck = methodSymbol.Parameters
                 .Where(IsTrackedParameter)
                 .GroupBy(p => p.Name)
-                .ToDictionary(p => p.Key, p => new ParameterData(p.First()));
+                .ToDictionary(p => p.Key, p => new ParameterData(p.First(), methodAccessibility));
 
             var parameterUsesInMethod = context
                 .Node
@@ -258,11 +259,13 @@ namespace SonarAnalyzer.Rules.CSharp
             public bool ShouldReportOn { get; set; } = true;
 
             private readonly IParameterSymbol parameterSymbol;
+            private readonly Accessibility methodAccessibility;
             private readonly HashSet<ITypeSymbol> usedAs = new HashSet<ITypeSymbol>();
 
-            public ParameterData(IParameterSymbol parameterSymbol)
+            public ParameterData(IParameterSymbol parameterSymbol, Accessibility methodAccessibility)
             {
                 this.parameterSymbol = parameterSymbol;
+                this.methodAccessibility = methodAccessibility;
             }
 
             public void AddUsage(ITypeSymbol symbolUsedAs)
