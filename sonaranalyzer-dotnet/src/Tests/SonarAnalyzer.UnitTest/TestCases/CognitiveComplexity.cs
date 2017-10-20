@@ -460,6 +460,15 @@ namespace Tests.Diagnostics
             DirectRecursionComplexity();
         }
 
+        void DirectRecursionComplexity_DifferentArguments()
+        {
+            DirectRecursionComplexity_DifferentArguments(1); // This is not recursion, no complexity increase
+        }
+
+        void DirectRecursionComplexity_DifferentArguments(int arg)
+        {
+        }
+
         void IndirectRecursionComplexity()
         {
             TmpIndirectRecursion();
