@@ -12,19 +12,6 @@
 "endColumn":  50
 }
 }
-},
-{
-"id":  "S3242",
-"message":  "Consider using more general type 'System.Collections.Generic.ICollection<string>' instead of 'System.Collections.Generic.IList<string>'.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\RazorViewEngine.cs",
-"region":  {
-"startLine":  331,
-"startColumn":  93,
-"endLine":  331,
-"endColumn":  106
-}
-}
 }
 ]
 }

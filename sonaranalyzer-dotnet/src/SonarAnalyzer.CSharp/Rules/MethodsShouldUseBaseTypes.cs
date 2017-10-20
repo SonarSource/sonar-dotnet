@@ -179,6 +179,11 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 return semanticModel.GetTypeInfo(identifier).ConvertedType;
             }
+            else if (identifierParent is ElementAccessExpressionSyntax)
+            {
+                var accessedMember = semanticModel.GetSymbolInfo(identifierParent).Symbol;
+                return HandlePropertyOrField(identifier, accessedMember);
+            }
             else
             {
                 // nothing to do
