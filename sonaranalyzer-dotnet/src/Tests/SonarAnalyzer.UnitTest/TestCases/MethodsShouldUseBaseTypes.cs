@@ -624,3 +624,31 @@ namespace Test_22
         }
     }
 }
+
+// Test that rule doesn't suggest other types for EventHandler methods
+namespace Test_24
+{
+    public interface IFooEventArgs
+    {
+        bool IsFoo { get; }
+    }
+    public class FooEventArgs : EventArgs, IFooEventArgs
+    {
+        public bool IsFoo { get; set; }
+    }
+
+    public class Foo
+    {
+        public event EventHandler<FooEventArgs> FooEvent;
+
+        public Foo()
+        {
+            FooEvent += Foo_FooEvent;
+        }
+
+        private void Foo_FooEvent(object sender, FooEventArgs e)
+        {
+            var x = e.IsFoo;
+        }
+    }
+}

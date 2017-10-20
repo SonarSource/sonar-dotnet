@@ -60,7 +60,8 @@ namespace SonarAnalyzer.Rules.CSharp
             if (methodSymbol == null ||
                 methodSymbol.Parameters.Length == 0 ||
                 methodSymbol.IsOverride ||
-                methodSymbol.GetInterfaceMember() != null)
+                methodSymbol.GetInterfaceMember() != null ||
+                IsEventHandlerImplementation(methodSymbol))
             {
                 return Enumerable.Empty<Diagnostic>();
             }
@@ -234,6 +235,17 @@ namespace SonarAnalyzer.Rules.CSharp
             return overridenSymbol != null
                 ? overridenSymbol.ContainingType
                 : accessedMember.ContainingType;
+        }
+
+        private bool IsEventHandlerImplementation(IMethodSymbol methodSymbol)
+        {
+            // Cannot find a way to precisely tell whether this method is a event handler implementation
+            // without doing too much browsing in all trees.
+            // Let's go for a simple heuristic.
+            return methodSymbol.ReturnsVoid &&
+                methodSymbol.Parameters.Length == 2 &&
+                methodSymbol.Parameters[0].Name == "sender" &&
+                methodSymbol.Parameters[0].Type.Is(KnownType.System_Object);
         }
 
         private class ParameterData
