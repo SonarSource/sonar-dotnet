@@ -799,25 +799,6 @@ namespace Test_26
 
     public class IEnumerable_Tests
     {
-        protected void IEnumerable_Once(IEnumerable<string> foo)
-        {
-            var y = foo.Where(z => z != null);
-        }
-
-        protected void IEnumerable_Twice(IList<string> foo)
-        {
-            var y = foo.Where(z => z != null);
-            y = foo.Where(z => z != null);
-        }
-
-        protected void IEnumerable_T_Once_With_List(IList<string> foo) // Noncompliant
-        {
-            var y = foo.Where(z => z != null);
-        }
-    }
-
-    public class IEnumerable_Tests
-    {
         protected void IEnumerable_Once(IEnumerable foo)
         {
             var x = foo.GetEnumerator();
