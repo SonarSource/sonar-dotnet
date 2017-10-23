@@ -371,6 +371,9 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType System_Runtime_Serialization_DataMemberAttribute =
             new KnownType("System.Runtime.Serialization.DataMemberAttribute");
 
+        public static readonly KnownType System_Collections_Generic_KeyValuePair_TKey_TValue =
+            new KnownType("System.Collections.Generic.KeyValuePair<TKey, TValue>");
+
         #endregion
 
         public string TypeName { get; }
