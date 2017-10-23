@@ -703,6 +703,10 @@ namespace Something
     {
         public bool IsFoo { get; set; }
     }
+
+    public class Bar : Foo
+    {
+    }
 }
 
 // Test that rule doesn't suggest base with inconsistent accessibility
@@ -726,6 +730,26 @@ namespace Test_25
         }
 
         internal void MethodFour(Something.Foo f) // Noncompliant
+        {
+            var x = f.IsFoo;
+        }
+
+        public void MethodFive(Something.Bar f) // Noncompliant {{Consider using more general type 'Something.Foo' instead of 'Something.Bar'.}}
+        {
+            var x = f.IsFoo;
+        }
+
+        protected void MethodSix(Something.Bar f) // Noncompliant {{Consider using more general type 'Something.Foo' instead of 'Something.Bar'.}}
+        {
+            var x = f.IsFoo;
+        }
+
+        private void MethodSeven(Something.Bar f) // Noncompliant {{Consider using more general type 'Something.IFoo' instead of 'Something.Bar'.}}
+        {
+            var x = f.IsFoo;
+        }
+
+        internal void MethodEight(Something.Bar f) // Noncompliant {{Consider using more general type 'Something.IFoo' instead of 'Something.Bar'.}}
         {
             var x = f.IsFoo;
         }
