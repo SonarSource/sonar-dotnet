@@ -14,7 +14,7 @@ namespace Test_01
         public void Method() { }
 
         public void Test_01(B foo) // Noncompliant {{Consider using more general type 'Test_01.A' instead of 'Test_01.B'.}}
-                                   //                            ^^^
+//                            ^^^
         {
             foo.Method();
         }
@@ -423,8 +423,8 @@ namespace Test_16
         public void OtherMethod() { }
 
         public void Test_16(B foo1, B foo2, B foo3)
-        //                            ^^^^ Noncompliant {{Consider using more general type 'Test_16.A' instead of 'Test_16.B'.}}
-        //                                    ^^^^ Noncompliant@-1 {{Consider using more general type 'Test_16.A' instead of 'Test_16.B'.}}
+//                            ^^^^ Noncompliant {{Consider using more general type 'Test_16.A' instead of 'Test_16.B'.}}
+//                                    ^^^^ Noncompliant@-1 {{Consider using more general type 'Test_16.A' instead of 'Test_16.B'.}}
         {
             foo1.Method();
             var x = foo2.Property;
@@ -539,7 +539,7 @@ namespace Test_19
 
         public void Test_19_Method2(B foo) // Noncompliant
         {
-            Foo((((foo))));
+            Foo( (((foo))) );
         }
 
         public void Test_19_Property(B foo) // Noncompliant
