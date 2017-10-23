@@ -330,14 +330,11 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 var mostGeneralType = parameterSymbol.Type;
 
-                var multipleEnumerableCalls = usedAs.Where(kvp => kvp.Value > 1 &&
-                        kvp.Key.OriginalDefinition.Is(KnownType.System_Collections_Generic_IEnumerable_T)).ToArray();
-
+                var multipleEnumerableCalls = usedAs.Where(HasMultipleUseOfIEnumerable).ToList();
                 foreach (var v in multipleEnumerableCalls)
                 {
                     usedAs.Remove(v.Key);
                 }
-
 
                 if (usedAs.Count == 0)
                 {
@@ -347,6 +344,13 @@ namespace SonarAnalyzer.Rules.CSharp
                 mostGeneralType = FindMostGeneralAccessibleClassOrSelf(mostGeneralType);
                 mostGeneralType = FindMostGeneralAccessibleInterfaceOrSelf(mostGeneralType);
                 return mostGeneralType;
+            }
+
+            private static bool HasMultipleUseOfIEnumerable(KeyValuePair<ITypeSymbol, int> kvp)
+            {
+                return kvp.Value > 1 &&
+                    (kvp.Key.OriginalDefinition.Is(KnownType.System_Collections_Generic_IEnumerable_T) ||
+                     kvp.Key.Is(KnownType.System_Collections_IEnumerable));
             }
 
             private ITypeSymbol FindMostGeneralAccessibleClassOrSelf(ITypeSymbol mostGeneralType)
