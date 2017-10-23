@@ -692,8 +692,72 @@ namespace Test_24
     }
 }
 
-// Do not suggest ICollection<KVP<T1, T2>> instead of Dictionary<T1, T2>
+namespace Something
+{
+    internal interface IFoo
+    {
+        bool IsFoo { get; }
+    }
+
+    public class Foo : IFoo
+    {
+        public bool IsFoo { get; set; }
+    }
+
+    public class Bar : Foo
+    {
+    }
+}
+
+// Test that rule doesn't suggest base with inconsistent accessibility
 namespace Test_25
+{
+    public class Bar
+    {
+        public void MethodOne(Something.Foo f)
+        {
+            var x = f.IsFoo;
+        }
+
+        protected void MethodTwo(Something.Foo f)
+        {
+            var x = f.IsFoo;
+        }
+
+        private void MethodThree(Something.Foo f) // Noncompliant
+        {
+            var x = f.IsFoo;
+        }
+
+        internal void MethodFour(Something.Foo f) // Noncompliant
+        {
+            var x = f.IsFoo;
+        }
+
+        public void MethodFive(Something.Bar f) // Noncompliant {{Consider using more general type 'Something.Foo' instead of 'Something.Bar'.}}
+        {
+            var x = f.IsFoo;
+        }
+
+        protected void MethodSix(Something.Bar f) // Noncompliant {{Consider using more general type 'Something.Foo' instead of 'Something.Bar'.}}
+        {
+            var x = f.IsFoo;
+        }
+
+        private void MethodSeven(Something.Bar f) // Noncompliant {{Consider using more general type 'Something.IFoo' instead of 'Something.Bar'.}}
+        {
+            var x = f.IsFoo;
+        }
+
+        internal void MethodEight(Something.Bar f) // Noncompliant {{Consider using more general type 'Something.IFoo' instead of 'Something.Bar'.}}
+        {
+            var x = f.IsFoo;
+        }
+    }
+}
+
+// Do not suggest ICollection<KVP<T1, T2>> instead of Dictionary<T1, T2>
+namespace Test_26
 {
     public class Foo
     {

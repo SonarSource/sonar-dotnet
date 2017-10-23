@@ -66,12 +66,13 @@ namespace SonarAnalyzer.Rules.CSharp
                 return Enumerable.Empty<Diagnostic>();
             }
 
+            var methodAccessibility = methodSymbol.GetEffectiveAccessibility();
             // The GroupBy is useless in most of the cases but safe-guard in case of 2+ parameters with same name (invalid code).
             // In this case we analyze only the first parameter (a new analysis will be triggered after fixing the names).
             var parametersToCheck = methodSymbol.Parameters
                 .Where(IsTrackedParameter)
                 .GroupBy(p => p.Name)
-                .ToDictionary(p => p.Key, p => new ParameterData(p.First()));
+                .ToDictionary(p => p.Key, p => new ParameterData(p.First(), methodAccessibility));
 
             var parameterUsesInMethod = context
                 .Node
@@ -258,11 +259,13 @@ namespace SonarAnalyzer.Rules.CSharp
             public bool ShouldReportOn { get; set; } = true;
 
             private readonly IParameterSymbol parameterSymbol;
+            private readonly Accessibility methodAccessibility;
             private readonly HashSet<ITypeSymbol> usedAs = new HashSet<ITypeSymbol>();
 
-            public ParameterData(IParameterSymbol parameterSymbol)
+            public ParameterData(IParameterSymbol parameterSymbol, Accessibility methodAccessibility)
             {
                 this.parameterSymbol = parameterSymbol;
+                this.methodAccessibility = methodAccessibility;
             }
 
             public void AddUsage(ITypeSymbol symbolUsedAs)
@@ -326,12 +329,12 @@ namespace SonarAnalyzer.Rules.CSharp
                     return mostGeneralType;
                 }
 
-                mostGeneralType = FindMostGeneralClassOrSelf(mostGeneralType);
-                mostGeneralType = FindMostGeneralInterfaceOrSelf(mostGeneralType);
+                mostGeneralType = FindMostGeneralAccessibleClassOrSelf(mostGeneralType);
+                mostGeneralType = FindMostGeneralAccessibleInterfaceOrSelf(mostGeneralType);
                 return mostGeneralType;
             }
 
-            private ITypeSymbol FindMostGeneralClassOrSelf(ITypeSymbol mostGeneralType)
+            private ITypeSymbol FindMostGeneralAccessibleClassOrSelf(ITypeSymbol mostGeneralType)
             {
                 ITypeSymbol currentSymbol = mostGeneralType.BaseType;
 
@@ -348,13 +351,13 @@ namespace SonarAnalyzer.Rules.CSharp
                 return mostGeneralType;
             }
 
-            private ITypeSymbol FindMostGeneralInterfaceOrSelf(ITypeSymbol mostGeneralType)
+            private ITypeSymbol FindMostGeneralAccessibleInterfaceOrSelf(ITypeSymbol mostGeneralType)
             {
                 foreach (var @interface in mostGeneralType.Interfaces)
                 {
                     if (DerivesOrImplementsAll(@interface))
                     {
-                        return FindMostGeneralInterfaceOrSelf(@interface);
+                        return FindMostGeneralAccessibleInterfaceOrSelf(@interface);
                     }
                 }
 
@@ -363,7 +366,33 @@ namespace SonarAnalyzer.Rules.CSharp
 
             private bool DerivesOrImplementsAll(ITypeSymbol type)
             {
-                return type != null && usedAs.All(type.DerivesOrImplements);
+                return type != null &&
+                    usedAs.All(type.DerivesOrImplements) &&
+                    IsConsistentAccessibility(type.GetEffectiveAccessibility());
+            }
+
+            private bool IsConsistentAccessibility(Accessibility baseTypeAccessibility)
+            {
+                switch (this.methodAccessibility)
+                {
+                    case Accessibility.NotApplicable:
+                        return false;
+
+                    case Accessibility.Private:
+                        return true;
+
+                    case Accessibility.Protected:
+                    case Accessibility.Internal:
+                        return baseTypeAccessibility == Accessibility.Public ||
+                            baseTypeAccessibility == this.methodAccessibility;
+
+                    case Accessibility.ProtectedAndInternal:
+                    case Accessibility.Public:
+                        return baseTypeAccessibility == Accessibility.Public;
+
+                    default:
+                        return false;
+                }
             }
         }
     }
