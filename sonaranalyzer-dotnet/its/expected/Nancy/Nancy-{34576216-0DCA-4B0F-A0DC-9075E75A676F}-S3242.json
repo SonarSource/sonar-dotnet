@@ -2,19 +2,6 @@
 "issues":  [
 {
 "id":  "S3242",
-"message":  "Consider using more general type 'System.Collections.Generic.IEnumerable<System.Type>' instead of 'System.Collections.Generic.List<System.Type>'.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\Bootstrapper\NancyBootstrapperLocator.cs",
-"region":  {
-"startLine":  68,
-"startColumn":  64,
-"endLine":  68,
-"endColumn":  83
-}
-}
-},
-{
-"id":  "S3242",
 "message":  "Consider using more general type 'System.Collections.Generic.IReadOnlyDictionary<string, object>' instead of 'Nancy.Configuration.INancyEnvironment'.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Configuration\INancyEnvironmentExtensions.cs",
@@ -114,32 +101,6 @@
 "startColumn":  39,
 "endLine":  284,
 "endColumn":  41
-}
-}
-},
-{
-"id":  "S3242",
-"message":  "Consider using more general type 'System.Collections.Generic.IEnumerable<Nancy.Responses.Negotiation.DefaultResponseNegotiator.CompatibleHeader>' instead of 'System.Collections.Generic.IList<Nancy.Responses.Negotiation.DefaultResponseNegotiator.CompatibleHeader>'.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\DefaultResponseNegotiator.cs",
-"region":  {
-"startLine":  213,
-"startColumn":  37,
-"endLine":  213,
-"endColumn":  54
-}
-}
-},
-{
-"id":  "S3242",
-"message":  "Consider using more general type 'System.Collections.Generic.IEnumerable<string>' instead of 'System.Collections.Generic.IList<string>'.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\Routing\DefaultRoutePatternMatcher.cs",
-"region":  {
-"startLine":  59,
-"startColumn":  111,
-"endLine":  59,
-"endColumn":  119
 }
 }
 },
