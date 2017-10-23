@@ -260,7 +260,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             private readonly IParameterSymbol parameterSymbol;
             private readonly Accessibility methodAccessibility;
-            private readonly HashSet<ITypeSymbol> usedAs = new HashSet<ITypeSymbol>();
+            private readonly Dictionary<ITypeSymbol, int> usedAs = new Dictionary<ITypeSymbol, int>();
 
             public ParameterData(IParameterSymbol parameterSymbol, Accessibility methodAccessibility)
             {
@@ -270,7 +270,14 @@ namespace SonarAnalyzer.Rules.CSharp
 
             public void AddUsage(ITypeSymbol symbolUsedAs)
             {
-                usedAs.Add(symbolUsedAs);
+                if (usedAs.ContainsKey(symbolUsedAs))
+                {
+                    usedAs[symbolUsedAs]++;
+                }
+                else
+                {
+                    usedAs[symbolUsedAs] = 1;
+                }
             }
 
             public bool MatchesIdentifier(IdentifierNameSyntax id, SemanticModel semanticModel)
@@ -324,6 +331,15 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 var mostGeneralType = parameterSymbol.Type;
 
+                var multipleEnumerableCalls = usedAs.Where(kvp => kvp.Value > 1 &&
+                        kvp.Key.OriginalDefinition.Is(KnownType.System_Collections_Generic_IEnumerable_T)).ToArray();
+
+                foreach (var v in multipleEnumerableCalls)
+                {
+                    usedAs.Remove(v.Key);
+                }
+
+
                 if (usedAs.Count == 0)
                 {
                     return mostGeneralType;
@@ -367,7 +383,7 @@ namespace SonarAnalyzer.Rules.CSharp
             private bool DerivesOrImplementsAll(ITypeSymbol type)
             {
                 return type != null &&
-                    usedAs.All(type.DerivesOrImplements) &&
+                    usedAs.Keys.All(type.DerivesOrImplements) &&
                     IsConsistentAccessibility(type.GetEffectiveAccessibility());
             }
 
