@@ -26,6 +26,8 @@ namespace SonarAnalyzer.Helpers
     {
         public static string[] NotConfigurableTag()
         {
+            // Allow to configure the analyzers in debug mode only.
+            // This allows to run test selectively (for example to test only one rule)
 #if DEBUG
             return new string[0];
 #else

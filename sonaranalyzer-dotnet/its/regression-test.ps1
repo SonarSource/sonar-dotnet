@@ -38,13 +38,13 @@ function Build-Project([string]$ProjectName, [string]$SolutionRelativePath) {
 function Initialize-ActualFolder() {
     $timer = [system.diagnostics.stopwatch]::StartNew()
 
-    Write-Host "Initializing the actual issues Git repo with the expected ones"
+    Write-Host "Initializing the actual issues folder with the expected  result"
     if (Test-Path .\actual) {
         Remove-Item -Recurse -Force actual
     }
     # this copies no files if ruleId is not set, and all but ending with ruleId if set
 
-    CopyFolderRecursively -from .\expected -to .\actual -exclude "*${ruleId}.json"
+    Copy-FolderRecursively -From .\expected -To .\actual -Exclude "*${ruleId}.json"
     Write-Host "Initialize-ActualFolder:" $timer.Elapsed.TotalSeconds
 }
 
@@ -87,17 +87,19 @@ function Export-AnalyzerPerformancesFromLogs([string[]]$buildLogsPaths) {
         Sort-Object Time -Descending
 }
 
-function GetFullPath($folder) {
-    return [System.IO.Path]::GetFullPath((Join-Path (Get-Location).Path $folder))
+function Get-FullPath($Folder) {
+    return [System.IO.Path]::GetFullPath((Join-Path (Get-Location).Path $Folder))
 }
 
-function CopyFolderRecursively($from, $to, $include, $exclude) {
-    $fromPath = GetFullPath -folder $from
-    $toPath = GetFullPath -folder $to
+function Copy-FolderRecursively($From, $To, $Include, $Exclude) {
+    $fromPath = Get-FullPath -Folder $From
+    $toPath   = Get-FullPath -Folder $To
 
-    $files = if ($include)
-    {     Get-ChildItem -Path $fromPath -Recurse -Include $include }
-    else {Get-ChildItem -Path $fromPath -Recurse -Exclude $exclude }
+    $files = if ($Include) {
+        Get-ChildItem -Path $fromPath -Recurse -Include $Include
+    } else {
+        Get-ChildItem -Path $fromPath -Recurse -Exclude $Exclude
+    }
 
     foreach ($file in $files) {
         $path = Join-Path $toPath $file.FullName.Substring($fromPath.length)
@@ -124,7 +126,7 @@ function Measure-AnalyzerPerformance()
         Format-Table -Wrap -AutoSize | Out-String -Width 100
 }
 
-function DiffResults() {
+function Show-DiffResults() {
     if (Test-Path .\diff) {
         Remove-Item -Recurse -Force .\diff
     }
@@ -141,15 +143,15 @@ function DiffResults() {
     New-Item ".\diff\actual" -Type Directory | out-null
     New-Item ".\diff\expected" -Type Directory | out-null
 
-    CopyFolderRecursively -from .\expected -to .\diff\expected -include "*${ruleId}.json"
-    CopyFolderRecursively -from .\actual   -to .\diff\actual -include "*${ruleId}.json"
+    Copy-FolderRecursively -From .\expected -To .\diff\expected -Include "*${ruleId}.json"
+    Copy-FolderRecursively -From .\actual   -To .\diff\actual   -Include "*${ruleId}.json"
 
     Exec { & git diff --no-index --quiet --exit-code .\diff\expected .\diff\actual } `
           -errorMessage $errorMsg
 }
 
 try {
-    $sw = [system.diagnostics.stopwatch]::StartNew()
+    $scriptTimer = [system.diagnostics.stopwatch]::StartNew()
     . (Join-Path $PSScriptRoot "..\..\scripts\build\build-utils.ps1")
     $msBuildImportBefore = Get-MSBuildImportBeforePath $msbuildVersion
 
@@ -170,19 +172,19 @@ try {
     Write-Header "Processing analyzer results"
 
     Write-Host "Normalizing the SARIF reports"
-    $timer2 = [system.diagnostics.stopwatch]::StartNew()
+    $sarifTimer = [system.diagnostics.stopwatch]::StartNew()
         Exec { & .\create-issue-reports.ps1 }
-    Write-Host "Normalizing the SARIF reports:" $timer2.Elapsed.TotalSeconds
+    Write-Host "Normalizing the SARIF reports:" $sarifTimer.Elapsed.TotalSeconds
 
     Write-Host "Computing analyzer performance"
-    $timer3 = [system.diagnostics.stopwatch]::StartNew()
+    $measurePerfTimer = [system.diagnostics.stopwatch]::StartNew()
     Measure-AnalyzerPerformance
-    Write-Host "Computing analyzer performance:" $timer3.Elapsed.TotalSeconds
+    Write-Host "Computing analyzer performance:" $measurePerfTimer.Elapsed.TotalSeconds
 
     Write-Host "Checking for differences..."
-    $timer4 = [system.diagnostics.stopwatch]::StartNew()
-    DiffResults
-    Write-Host "Checking for differences..." $timer4.Elapsed.TotalSeconds
+    $diffTimer = [system.diagnostics.stopwatch]::StartNew()
+    Show-DiffResults
+    Write-Host "Checking for differences..." $diffTimer.Elapsed.TotalSeconds
 
     Write-Host -ForegroundColor Green "SUCCESS: No differences were found!"
     exit 0
@@ -197,8 +199,8 @@ finally {
     Remove-Item -Force (Join-Path $msBuildImportBefore "\SonarAnalyzer.Testing.ImportBefore.targets") `
         -ErrorAction Ignore
 
-    $sw.Stop()
-    $totalTimesec = [int]$sw.Elapsed.TotalSeconds
+    $scriptTimer.Stop()
+    $totalTimesec = [int]$scriptTimer.Elapsed.TotalSeconds
     if ($ruleId) {
         Write-Host "Analyzed ${ruleId} in ${totalTimesec}s"
     } else {
