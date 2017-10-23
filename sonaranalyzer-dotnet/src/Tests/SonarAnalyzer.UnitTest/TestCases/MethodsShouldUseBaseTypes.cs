@@ -1,5 +1,7 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 // Test interface inheritance
 namespace Test_01
@@ -769,6 +771,48 @@ namespace Test_26
         public void Bar(ICollection<KeyValuePair<string, string>> b)
         {
             var x = b.Count;
+        }
+    }
+}
+
+// Test IEnumerable iterated over twice
+namespace Test_26
+{
+    public class IEnumerable_T_Tests
+    {
+        protected void IEnumerable_Once(IEnumerable<string> foo)
+        {
+            var y = foo.Where(z => z != null);
+        }
+
+        protected void IEnumerable_Twice(List<string> foo)
+        {
+            var y = foo.Where(z => z != null);
+            y = foo.Where(z => z != null);
+        }
+
+        protected void IEnumerable_T_Once_With_List(List<string> foo) // Noncompliant
+        {
+            var y = foo.Where(z => z != null);
+        }
+    }
+
+    public class IEnumerable_Tests
+    {
+        protected void IEnumerable_Once(IEnumerable foo)
+        {
+            var x = foo.GetEnumerator();
+        }
+
+        protected void IEnumerable_Twice(IList foo)
+        {
+            var x = foo.GetEnumerator();
+            var y = foo.GetEnumerator();
+        }
+
+        protected void IEnumerable_T_Once_With_List(IList foo) // Noncompliant
+        {
+            var x = foo.GetEnumerator();
         }
     }
 }
