@@ -715,7 +715,17 @@ namespace Test_25
             var x = f.IsFoo;
         }
 
-        private void MethodOne(Something.Foo f) // Noncompliant
+        protected void MethodTwo(Something.Foo f)
+        {
+            var x = f.IsFoo;
+        }
+
+        private void MethodThree(Something.Foo f) // Noncompliant
+        {
+            var x = f.IsFoo;
+        }
+
+        internal void MethodFour(Something.Foo f) // Noncompliant
         {
             var x = f.IsFoo;
         }
