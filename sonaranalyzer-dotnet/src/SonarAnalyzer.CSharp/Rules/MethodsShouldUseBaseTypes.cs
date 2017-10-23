@@ -286,7 +286,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 var mostGeneralType = FindMostGeneralType();
 
                 if (!Equals(mostGeneralType, parameterSymbol.Type) &&
-                    ShouldReportOnType(mostGeneralType.GetSymbolType()))
+                    CanSuggestBaseType(mostGeneralType.GetSymbolType()))
                 {
                     return Diagnostic.Create(rule,
                         parameterSymbol.Locations.First(),
@@ -296,13 +296,25 @@ namespace SonarAnalyzer.Rules.CSharp
                 return null;
             }
 
-            private static bool ShouldReportOnType(ITypeSymbol typeSymbol)
+            private static bool CanSuggestBaseType(ITypeSymbol typeSymbol)
             {
                 return
-                       !typeSymbol.Is(KnownType.System_Object) &&
-                       !typeSymbol.Is(KnownType.System_ValueType) &&
-                       !typeSymbol.Name.StartsWith("_", StringComparison.Ordinal) &&
-                       !typeSymbol.Is(KnownType.System_Enum);
+                    !typeSymbol.Is(KnownType.System_Object) &&
+                    !typeSymbol.Is(KnownType.System_ValueType) &&
+                    !typeSymbol.Name.StartsWith("_", StringComparison.Ordinal) &&
+                    !typeSymbol.Is(KnownType.System_Enum) &&
+                    !IsCollectionKvp(typeSymbol);
+            }
+
+            private static bool IsCollectionKvp(ITypeSymbol typeSymbol)
+            {
+                var namedType = typeSymbol as INamedTypeSymbol;
+                var firstGenericType = namedType?.TypeArguments.FirstOrDefault() as INamedTypeSymbol;
+
+                return namedType != null &&
+                    firstGenericType != null &&
+                    namedType.ConstructedFrom.Is(KnownType.System_Collections_Generic_ICollection_T) &&
+                    firstGenericType.ConstructedFrom.Is(KnownType.System_Collections_Generic_KeyValuePair_TKey_TValue);
             }
 
             private ISymbol FindMostGeneralType()
