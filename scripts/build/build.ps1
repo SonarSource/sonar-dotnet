@@ -83,7 +83,7 @@ function Get-ScannerMsBuildPath() {
     $scannerMsbuild = Join-Path $currentDir "SonarQube.Scanner.MSBuild.exe"
 
     if (-Not (Test-Path $scannerMsbuild)) {
-        # This links always redirect to the latest release scanner
+        # This links always redirect to the latest released scanner
         $downloadLink = "https://repox.sonarsource.com/sonarsource-public-releases/org/sonarsource/scanner/msbuild/" +
             "sonar-scanner-msbuild/%5BRELEASE%5D/sonar-scanner-msbuild-%5BRELEASE%5D.zip"
         $scannerMsbuildZip = Join-Path $currentDir "\MSBuild.SonarQube.Runner.zip"
