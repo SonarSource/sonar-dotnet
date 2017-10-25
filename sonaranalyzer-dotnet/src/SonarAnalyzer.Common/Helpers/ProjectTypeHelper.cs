@@ -41,13 +41,15 @@ namespace SonarAnalyzer.Helpers
                 assemblyName = compilation.AssemblyName;
             }
 
-            return
-                assemblyName.ToUpperInvariant().Contains(TestAssemblyNamePattern) ||
+            return IsTestAssemblyName(assemblyName) ||
                 compilation.ReferencedAssemblyNames
                     .Any(assembly => TestAssemblyNames.Contains(assembly.Name.ToUpperInvariant()));
         }
 
-        private const string TestAssemblyNamePattern = "TEST";
+        internal static bool IsTestAssemblyName(string assemblyName)
+        {
+            return assemblyName.SplitCamelCaseToWords().Any(word => word == "test" || word == "tests");
+        }
 
         private static readonly ISet<string> TestAssemblyNames = ImmutableHashSet.Create(
             "MICROSOFT.VISUALSTUDIO.TESTPLATFORM.TESTFRAMEWORK",
