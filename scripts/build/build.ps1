@@ -176,6 +176,9 @@ function Invoke-DotNetBuild() {
             /d:sonar.github.oauth=$githubToken `
             /d:sonar.analysis.mode="issues" `
             /d:sonar.scanAllFiles="true" `
+            /d:sonar.analysis.sha1=$githubSha1 `
+            /d:sonar.analysis.prNumber=$githubPullRequest `
+            /d:sonar.branch.name=$branchName `
             /v:"latest"
     }
     elseif ($isMaster) {
@@ -302,11 +305,14 @@ function Invoke-JavaBuild() {
             "-Pdeploy-sonarsource,sonaranalyzer" `
             "-Dmaven.test.redirectTestOutputToFile=false" `
             "-Dsonar.analysis.mode=issues" `
-            "-Dsonar.github.pullRequest=$githubPullRequest" `
-            "-Dsonar.github.repository=$githubRepo" `
-            "-Dsonar.github.oauth=$githubToken" `
-            "-Dsonar.host.url=$sonarQubeUrl" `
-            "-Dsonar.login=$sonarQubeToken" `
+            "-Dsonar.github.pullRequest=${githubPullRequest}" `
+            "-Dsonar.github.repository=${githubRepo}" `
+            "-Dsonar.github.oauth=${githubToken}" `
+            "-Dsonar.host.url=${sonarQubeUrl}" `
+            "-Dsonar.login=${sonarQubeToken}" `
+            "-Dsonar.analysis.sha1=${githubSha1}" `
+            "-Dsonar.analysis.prNumber=${githubPullRequest}" `
+            "-Dsonar.branch.name=${branchName}" `
             -B -e -V
         Test-ExitCode "ERROR: Maven build deploy sonar FAILED."
     }
