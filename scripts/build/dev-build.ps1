@@ -82,7 +82,7 @@ try {
     }
 
     if ($test) {
-        Invoke-UnitTests $binPath
+        Invoke-UnitTests $binPath $true
     }
 
     if ($its) {

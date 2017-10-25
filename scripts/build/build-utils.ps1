@@ -86,18 +86,29 @@ function Invoke-MSBuild (
 }
 
 # Tests
-function Invoke-UnitTests([string]$binPath) {
+function Invoke-UnitTests([string]$binPath, [bool]$failsIfNotTest) {
     Write-Header "Running unit tests"
 
     $escapedPath = $binPath -Replace '\\', '\\'
 
     $testFiles = @()
+    $testDirs = @()
     Get-ChildItem ".\src" -Recurse -Include "*.UnitTest.dll" `
         | Where-Object { $_.DirectoryName -Match $escapedPath } `
-        | ForEach-Object { $testFiles += $_ }
+        | ForEach-Object {
+            $testFiles += $_
+            $testDirs += $_.Directory
+        }
+    $testDirs = $testDirs | Select-Object -Uniq
 
-    & (Get-VsTestPath) $testFiles /Enablecodecoverage /inIsolation /Logger:trx
+    & (Get-VsTestPath) $testFiles /Enablecodecoverage /InIsolation /Logger:trx /UseVsixExtensions:true `
+        /TestAdapterPath:$testDirs `
+        | Tee-Object -Variable cmdOutput
     Test-ExitCode "ERROR: Unit Tests execution FAILED."
+
+    if ($failsIfNotTest -And $cmdOutput -Match "Warning: No test is available") {
+        throw "No test was found but was expecting to find some"
+    }
 }
 
 function Invoke-IntegrationTests([ValidateSet("14.0", "15.0")][string] $msbuildVersion) {
