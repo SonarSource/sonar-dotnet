@@ -57,6 +57,10 @@
       <HintPath>..\..\..\packages\FluentAssertions.4.19.4\lib\net45\FluentAssertions.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Google.Protobuf, Version=3.1.0.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Google.Protobuf.3.1.0\lib\net45\Google.Protobuf.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CodeAnalysis, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\Microsoft.CodeAnalysis.Common.1.0.0\lib\net45\Microsoft.CodeAnalysis.dll</HintPath>
       <Private>True</Private>
@@ -152,7 +156,7 @@
     </Compile>
     <Compile Include="Common\*.cs" />
     <None Include="Common\Resources\input.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <Compile Include="Helpers\FlowAnalysis\*.cs" />
     <Compile Include="Helpers\*.cs" />
@@ -165,24 +169,18 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SomeResources.resx</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
     <Compile Include="TestFramework\*.cs" />
     <Compile Include="Verifier.cs" />
-    <Compile Include="Rules\*.cs" />
+    <Compile Include="Rules\**\*.cs" />
     <Compile Include="SymbolicExecution\*.cs" />
     <Compile Include="SymbolicExecution\SymbolicValues\*.cs" />
-    <None Include="TestCases\*.cs">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <None Include="TestCases\**\*.*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="TestCases\*.vb">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="TestCasesForRuleFailure\*.cs">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="TestCasesForRuleFailure\*.vb">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <None Include="TestCasesForRuleFailure\**\*.*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
