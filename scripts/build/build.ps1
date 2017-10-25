@@ -238,13 +238,13 @@ function Set-MavenBuildVersion() {
     # Mandatory in order to compare versions (patch VS non patch)
     $digitCount = $releaseVersion.Split(".").Count
     if ($digitCount -lt 3) {
-        $releaseVersion = "$releaseVersion.0"
+        $releaseVersion = "${releaseVersion}.0"
     }
-    $newVersion = "$releaseVersion.$buildNumber"
+    $newVersion = "${releaseVersion}.${buildNumber}"
 
-    Write-Host "Replacing version $currentVersion with $newVersion"
+    Write-Host "Replacing version ${currentVersion} with ${newVersion}"
 
-    mvn org.codehaus.mojo:versions-maven-plugin:2.2:set "-DnewVersion=$newVersion" -DgenerateBackupPoms=false -B -e
+    mvn org.codehaus.mojo:versions-maven-plugin:2.2:set "-DnewVersion=${newVersion}" -DgenerateBackupPoms=false -B -e
     Test-ExitCode "ERROR: Maven set version FAILED."
 
     # Set the version used by Jenkins to associate artifacts to the right version
