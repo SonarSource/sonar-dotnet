@@ -41,12 +41,12 @@ namespace SonarAnalyzer.Helpers
                 assemblyName = compilation.AssemblyName;
             }
 
-            return ContainsTestWord(assemblyName) ||
+            return IsTestAssemblyName(assemblyName) ||
                 compilation.ReferencedAssemblyNames
                     .Any(assembly => TestAssemblyNames.Contains(assembly.Name.ToUpperInvariant()));
         }
 
-        internal static bool ContainsTestWord(string assemblyName)
+        internal static bool IsTestAssemblyName(string assemblyName)
         {
             return assemblyName.SplitCamelCaseToWords().Any(word => word == "test" || word == "tests");
         }

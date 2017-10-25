@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4004",
+"message":  "Make the 'Headers' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\IBrowserContextValues.cs",
+"region":  {
+"startLine":  33,
+"startColumn":  50,
+"endLine":  33,
+"endColumn":  57
+}
+}
+}
+]
+}

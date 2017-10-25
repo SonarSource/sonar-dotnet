@@ -1,0 +1,134 @@
+{
+"issues":  [
+{
+"id":  "S4039",
+"message":  "Make 'BrowserContext' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IBrowserContextValues.Body'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContext.cs",
+"region":  {
+"startLine":  42,
+"startColumn":  38,
+"endLine":  42,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'BrowserContext' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IBrowserContextValues.Protocol'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContext.cs",
+"region":  {
+"startLine":  48,
+"startColumn":  38,
+"endLine":  48,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'BrowserContext' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IBrowserContextValues.QueryString'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContext.cs",
+"region":  {
+"startLine":  53,
+"startColumn":  38,
+"endLine":  53,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'BrowserContext' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IBrowserContextValues.HostName'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContext.cs",
+"region":  {
+"startLine":  58,
+"startColumn":  38,
+"endLine":  58,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'BrowserContext' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IBrowserContextValues.UserHostAddress'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContext.cs",
+"region":  {
+"startLine":  63,
+"startColumn":  38,
+"endLine":  63,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'BrowserContext' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IBrowserContextValues.ClientCertificate'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContext.cs",
+"region":  {
+"startLine":  68,
+"startColumn":  48,
+"endLine":  68,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'BrowserContext' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IBrowserContextValues.BodyString'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContext.cs",
+"region":  {
+"startLine":  73,
+"startColumn":  38,
+"endLine":  73,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'BrowserContext' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IBrowserContextValues.FormValues'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContext.cs",
+"region":  {
+"startLine":  78,
+"startColumn":  38,
+"endLine":  78,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'BrowserContext' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IBrowserContextValues.Headers'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContext.cs",
+"region":  {
+"startLine":  84,
+"startColumn":  72,
+"endLine":  84,
+"endColumn":  79
+}
+}
+},
+{
+"id":  "S4039",
+"message":  "Make 'FakeRootPathProvider' sealed, change to a non-explicit declaration or provide a new method exposing the functionality of 'IRootPathProvider.GetRootPath'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\Fakes\FakeRootPathProvider.cs",
+"region":  {
+"startLine":  30,
+"startColumn":  34,
+"endLine":  30,
+"endColumn":  45
+}
+}
+}
+]
+}

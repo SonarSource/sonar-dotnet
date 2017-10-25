@@ -28,13 +28,14 @@ namespace SonarAnalyzer.UnitTest.Helpers
     public class ProjectTypeHelperTests
     {
         [TestMethod]
-        public void ContainsTestWord_ReturnsExpectedValue()
+        public void IsTestAssemblyName_ReturnsExpectedValue()
         {
-            ProjectTypeHelper.ContainsTestWord("SonarAnalyzer.UnitTest").Should().BeTrue();
-            ProjectTypeHelper.ContainsTestWord("SonarLint.VisualStudio.Integration.UnitTests").Should().BeTrue();
-            ProjectTypeHelper.ContainsTestWord("SonarLint.VisualStudio.Integration.TestInfrastructure").Should().BeTrue();
-            ProjectTypeHelper.ContainsTestWord("SonarAnalyzer.BestEstimator").Should().BeFalse();
-            ProjectTypeHelper.ContainsTestWord("RainbowTeam.TheCutestPony").Should().BeFalse();
+            ProjectTypeHelper.IsTestAssemblyName("SonarAnalyzer.UnitTest").Should().BeTrue();
+            ProjectTypeHelper.IsTestAssemblyName("SonarLint.VisualStudio.Integration.UnitTests").Should().BeTrue();
+            ProjectTypeHelper.IsTestAssemblyName("SonarLint.VisualStudio.Integration.TestInfrastructure").Should().BeTrue();
+            ProjectTypeHelper.IsTestAssemblyName("Nancy.Demo.Authentication.Forms.TestingDemo").Should().BeFalse();
+            ProjectTypeHelper.IsTestAssemblyName("SonarAnalyzer.BestEstimator").Should().BeFalse();
+            ProjectTypeHelper.IsTestAssemblyName("RainbowTeam.TheCutestPony").Should().BeFalse();
         }
     }
 }
