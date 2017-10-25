@@ -29,8 +29,8 @@
       <ExpectedMatchCount>1</ExpectedMatchCount>
     </VsixVersion>
     <VsixReleaseNotes Include="$(SolutionRoot)\src\VsixManifests\**\source.extension.vsixmanifest">
-      <Find>(?&lt;=&lt;ReleaseNotes&gt;http:\/\/www\.sonarlint\.org\/visualstudio\/rules\/index.html#version=)([^&lt;]*)</Find>
-      <ReplaceWith>$(AssemblyFileVersion)</ReplaceWith>
+      <Find>(?&lt;=&lt;ReleaseNotes&gt;https:\/\/github.com\/SonarSource\/sonar-csharp\/issues\?q=is:issue\+-label:Task\+milestone:)([^&lt;]*)</Find>
+      <ReplaceWith>$(MilestoneVersion)</ReplaceWith>
       <ExpectedMatchCount>1</ExpectedMatchCount>
     </VsixReleaseNotes>
 
@@ -40,8 +40,8 @@
       <ExpectedMatchCount>1</ExpectedMatchCount>
     </NugetAnalyzer>
     <NugetReleaseNotes Include="$(SolutionRoot)\src\SonarAnalyzer.Vsix\SonarAnalyzer.CSharp.nuspec">
-      <Find>(?&lt;=&lt;releaseNotes&gt;http:\/\/www\.sonarlint\.org\/visualstudio\/rules\/index.html#version=)([^&lt;]*)</Find>
-      <ReplaceWith>$(AssemblyFileVersion)</ReplaceWith>
+      <Find>(?&lt;=&lt;releaseNotes&gt;https:\/\/github.com\/SonarSource\/sonar-csharp\/issues\?q=is:issue\+-label:Task\+milestone:)([^&lt;]*)</Find>
+      <ReplaceWith>$(MilestoneVersion)</ReplaceWith>
       <ExpectedMatchCount>1</ExpectedMatchCount>
     </NugetReleaseNotes>
     <NugetAnalyzer Include="$(SolutionRoot)\src\SonarAnalyzer.Vsix\SonarAnalyzer.VisualBasic.nuspec">
@@ -49,11 +49,6 @@
       <ReplaceWith>$(NugetVersion)</ReplaceWith>
       <ExpectedMatchCount>1</ExpectedMatchCount>
     </NugetAnalyzer>
-    <NugetReleaseNotes Include="$(SolutionRoot)\src\SonarAnalyzer.Vsix\SonarAnalyzer.VisualBasic.nuspec">
-      <Find>(?&lt;=&lt;releaseNotes&gt;http:\/\/www\.sonarlint\.org\/visualstudio\/rules\/index.html#version=)([^&lt;]*)</Find>
-      <ReplaceWith>$(AssemblyFileVersion)</ReplaceWith>
-      <ExpectedMatchCount>1</ExpectedMatchCount>
-    </NugetReleaseNotes>
 
     <NugetDescriptorCs Include="$(SolutionRoot)\src\SonarAnalyzer.RuleDescriptorGenerator\Descriptor.cs.nuspec">
       <Find>(?&lt;=&lt;version&gt;)([^&lt;]*)</Find>

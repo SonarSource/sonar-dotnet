@@ -18,11 +18,6 @@ $ErrorActionPreference = "Stop"
 function Set-VersionForJava() {
     Write-Header "Updating version in Java files"
 
-    $fixedVersion = $version
-    if ($fixedVersion.EndsWith(".0")) {
-        $fixedVersion = $version.Substring(0, $version.Length - 2)
-    }
-
     mvn org.codehaus.mojo:versions-maven-plugin:2.2:set "-DnewVersion=${fixedVersion}-SNAPSHOT" `
         -DgenerateBackupPoms=false -B -e
     Test-ExitCode "ERROR: Maven set version FAILED."
@@ -35,6 +30,7 @@ function Set-VersionForDotNet() {
         $versionPropsFile = Resolve-Path "Version.props"
         $xml = [xml](Get-Content $versionPropsFile)
         $xml.Project.PropertyGroup.MainVersion = $version
+        $xml.Project.PropertyGroup.MilestoneVersion = $fixedVersion
         $xml.Save($versionPropsFile)
         msbuild "ChangeVersion.proj"
         Test-ExitCode "ERROR: Change version FAILED."
@@ -45,6 +41,12 @@ try {
     . (Join-Path $PSScriptRoot "..\utils.ps1")
 
     Push-Location "${PSScriptRoot}\..\.."
+
+    $fixedVersion = $version
+    if ($fixedVersion.EndsWith(".0")) {
+        $fixedVersion = $version.Substring(0, $version.Length - 2)
+    }
+
     Set-VersionForJava
     Set-VersionForDotNet
 
