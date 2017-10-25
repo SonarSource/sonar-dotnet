@@ -27,6 +27,7 @@ param (
     [string]$repoxUserName = $env:ARTIFACTORY_DEPLOY_USERNAME,
     [string]$repoxPassword = $env:ARTIFACTORY_DEPLOY_PASSWORD,
 
+    # Others
     [string]$appDataPath = $env:APPDATA
 )
 
@@ -208,7 +209,7 @@ function Invoke-DotNetBuild() {
         /p:SignAssembly=true `
         /p:AssemblyOriginatorKeyFile=$certificatePath
 
-    Invoke-UnitTests $binPath
+    Invoke-UnitTests $binPath $true
     Invoke-CodeCoverage
 
     if (-Not $skippedAnalysis) {
