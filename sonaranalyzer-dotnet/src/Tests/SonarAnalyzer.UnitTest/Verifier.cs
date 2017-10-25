@@ -32,6 +32,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using FluentAssertions;
 using FluentAssertions.Execution;
+using Google.Protobuf;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CodeFixes;
@@ -39,6 +40,8 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.Protobuf;
+using SonarAnalyzer.Rules;
 using SonarAnalyzer.UnitTest.TestFramework;
 using CS = Microsoft.CodeAnalysis.CSharp;
 using VB = Microsoft.CodeAnalysis.VisualBasic;
@@ -103,25 +106,38 @@ namespace SonarAnalyzer.UnitTest
             }
         }
 
-        public static void VerifyCSharpAnalyzer(string snippet, SonarDiagnosticAnalyzer diagnosticAnalyzer, ParseOptions options = null,
-            params MetadataReference[] additionalReferences)
+        public static void VerifyCSharpAnalyzer(string snippet, SonarDiagnosticAnalyzer diagnosticAnalyzer,
+            ParseOptions options = null, params MetadataReference[] additionalReferences)
         {
-            VerifyAnalyzer(new[] { new DocumentInfo($"file1{CSharpFileExtension}", snippet) }, CSharpFileExtension, diagnosticAnalyzer, options, additionalReferences);
+            VerifyAnalyzer(new[] { new DocumentInfo($"file1{CSharpFileExtension}", snippet) },
+                CSharpFileExtension, diagnosticAnalyzer, options, null, additionalReferences);
         }
 
-        public static void VerifyVisualBasicAnalyzer(string snippet, SonarDiagnosticAnalyzer diagnosticAnalyzer, ParseOptions options = null,
-            params MetadataReference[] additionalReferences)
+        public static void VerifyVisualBasicAnalyzer(string snippet, SonarDiagnosticAnalyzer diagnosticAnalyzer,
+            ParseOptions options = null, params MetadataReference[] additionalReferences)
         {
-            VerifyAnalyzer(new[] { new DocumentInfo($"file1{VisualBasicFileExtension}", snippet) }, VisualBasicFileExtension, diagnosticAnalyzer, options, additionalReferences);
+            VerifyAnalyzer(new[] { new DocumentInfo($"file1{VisualBasicFileExtension}", snippet) },
+                VisualBasicFileExtension, diagnosticAnalyzer, options, null, additionalReferences);
         }
 
-        public static void VerifyAnalyzer(string path, SonarDiagnosticAnalyzer diagnosticAnalyzer, ParseOptions options = null,
-            params MetadataReference[] additionalReferences)
+        public static void VerifyAnalyzer(string path, SonarDiagnosticAnalyzer diagnosticAnalyzer,
+            ParseOptions options = null, params MetadataReference[] additionalReferences)
         {
-            VerifyAnalyzer(new[] { path }, diagnosticAnalyzer, options, additionalReferences);
+            VerifyAnalyzer(new[] { path }, diagnosticAnalyzer, null, options, additionalReferences);
         }
 
-        public static void VerifyAnalyzer(IEnumerable<string> paths, SonarDiagnosticAnalyzer diagnosticAnalyzer, ParseOptions options = null,
+        public static void VerifyUtilityAnalyzer<TMessage>(IEnumerable<string> paths, UtilityAnalyzerBase diagnosticAnalyzer,
+            string protobufPath, Action<IList<TMessage>> verifyProtobuf)
+            where TMessage : IMessage<TMessage>, new()
+        {
+            VerifyAnalyzer(paths, diagnosticAnalyzer, (analyzer, compilation) =>
+            {
+                verifyProtobuf(ReadProtobuf<TMessage>(protobufPath).ToList());
+            });
+        }
+
+        public static void VerifyAnalyzer(IEnumerable<string> paths, SonarDiagnosticAnalyzer diagnosticAnalyzer,
+            Action<DiagnosticAnalyzer, Compilation> additionalVerify = null, ParseOptions options = null,
             params MetadataReference[] additionalReferences)
         {
             if (paths == null || !paths.Any())
@@ -139,11 +155,24 @@ namespace SonarAnalyzer.UnitTest
 
             var fileContents = files.Select(file => new DocumentInfo(file));
 
-            VerifyAnalyzer(fileContents, fileExtension, diagnosticAnalyzer, options, additionalReferences);
+            VerifyAnalyzer(fileContents, fileExtension, diagnosticAnalyzer, options, additionalVerify, additionalReferences);
         }
 
-        private static void VerifyAnalyzer(IEnumerable<DocumentInfo> documents, string fileExtension, SonarDiagnosticAnalyzer diagnosticAnalyzer, ParseOptions options = null,
-            params MetadataReference[] additionalReferences)
+        private static IEnumerable<TMessage> ReadProtobuf<TMessage>(string path)
+            where TMessage: IMessage<TMessage>, new()
+        {
+            using (var input = File.OpenRead(path))
+            {
+                var parser = new MessageParser<TMessage>(() => new TMessage());
+                while (input.Position < input.Length)
+                {
+                    yield return parser.ParseDelimitedFrom(input);
+                }
+            }
+        }
+
+        private static void VerifyAnalyzer(IEnumerable<DocumentInfo> documents, string fileExtension, DiagnosticAnalyzer diagnosticAnalyzer,
+            ParseOptions options = null, Action<DiagnosticAnalyzer, Compilation> additionalVerify = null, params MetadataReference[] additionalReferences)
         {
             HookSuppression();
 
@@ -152,7 +181,7 @@ namespace SonarAnalyzer.UnitTest
             using (var workspace = new AdhocWorkspace())
             {
                 var project = CreateProject(fileExtension, GeneratedAssemblyName, workspace, additionalReferences);
-                documents.ToList().ForEach(document => project = project.AddDocument(document.Name, document.Content).Project); // side effect on purpose (project is immutable)
+                project = documents.Aggregate(project, (p, doc) => p.AddDocument(doc.Name, doc.Content).Project); // side effect on purpose (project is immutable)
 
                 var issueLocationCollector = new IssueLocationCollector();
 
@@ -200,6 +229,8 @@ namespace SonarAnalyzer.UnitTest
                     {
                         ExtensionMethodsCalledForAllDiagnostics(diagnosticAnalyzer).Should().BeTrue("The ReportDiagnosticWhenActive should be used instead of ReportDiagnostic");
                     }
+
+                    additionalVerify?.Invoke(diagnosticAnalyzer, compilation);
                 }
             }
         }
