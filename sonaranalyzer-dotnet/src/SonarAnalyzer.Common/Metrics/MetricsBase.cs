@@ -40,6 +40,8 @@ namespace SonarAnalyzer.Common
 
         public int LineCount => tree.GetText().Lines.Count;
 
+        public abstract int GetExecutableLinesCount();
+
         public IImmutableSet<int> CodeLines
         {
             get

@@ -582,7 +582,7 @@ End Class").Should().BeEquivalentTo(1, 2, 3, 4, 5, 6, 7, 8);
             }
 
             return language == AnalyzerLanguage.CSharp
-                ? (MetricsBase)new SonarAnalyzer.Common.CSharp.Metrics(CSharpSyntaxTree.ParseText(text))
+                ? (MetricsBase)new SonarAnalyzer.Metrics.CSharp.Metrics(CSharpSyntaxTree.ParseText(text))
                 : new SonarAnalyzer.Common.VisualBasic.Metrics(VisualBasicSyntaxTree.ParseText(text));
         }
 
@@ -591,7 +591,7 @@ End Class").Should().BeEquivalentTo(1, 2, 3, 4, 5, 6, 7, 8);
         [ExpectedException(typeof(ArgumentException))]
         public void WrongMetrics_CSharp()
         {
-            new SonarAnalyzer.Common.CSharp.Metrics(VisualBasicSyntaxTree.ParseText(""));
+            new SonarAnalyzer.Metrics.CSharp.Metrics(VisualBasicSyntaxTree.ParseText(""));
         }
 
         [TestMethod]

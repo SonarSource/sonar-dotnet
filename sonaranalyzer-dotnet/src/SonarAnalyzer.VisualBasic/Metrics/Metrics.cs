@@ -80,7 +80,12 @@ namespace SonarAnalyzer.Common.VisualBasic
 
         public override int GetCognitiveComplexity(SyntaxNode node)
         {
-            return 0;
+            return 0; // Not implemented
+        }
+
+        public override int GetExecutableLinesCount()
+        {
+            return 0; // Not implemented
         }
 
         private static readonly ISet<SyntaxKind> TriviaKinds = ImmutableHashSet.Create(
