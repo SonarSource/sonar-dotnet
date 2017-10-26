@@ -21,7 +21,6 @@
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
-using SonarAnalyzer.Common.CSharp;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules.CSharp
@@ -31,6 +30,7 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.CSharp.GeneratedCodeRecognizer.Instance;
 
-        protected override MetricsBase GetMetrics(SyntaxTree syntaxTree) => new Metrics(syntaxTree);
+        protected override MetricsBase GetMetrics(SyntaxTree syntaxTree)
+            => new SonarAnalyzer.Metrics.CSharp.Metrics(syntaxTree);
     }
 }

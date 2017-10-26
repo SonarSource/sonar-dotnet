@@ -156,6 +156,7 @@
     </None>
     <Compile Include="Helpers\FlowAnalysis\*.cs" />
     <Compile Include="Helpers\*.cs" />
+    <Compile Include="Metrics\*.cs" />
     <Compile Include="PackagingTests\*.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="FixAllDiagnosticProvider.cs" />
