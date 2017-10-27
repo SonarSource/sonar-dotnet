@@ -14,6 +14,9 @@ param (
     [string]$githubIsPullRequest = $env:IS_PULLREQUEST,
     [string]$githubBranch = $env:GITHUB_BRANCH,
     [string]$githubSha1 = $env:GIT_SHA1,
+    # GitHub PR related parameters
+    [string]$githubPRBaseBranch = $env:GITHUB_BASE_BRANCH,
+    [string]$githubPRTargetBranch = $env:GITHUB_TARGET_BRANCH,
 
     # SonarQube related parameters
     [string]$sonarQubeUrl = $env:SONAR_HOST_URL,
@@ -179,7 +182,8 @@ function Invoke-DotNetBuild() {
             /d:sonar.scanAllFiles="true" `
             /d:sonar.analysis.sha1=$githubSha1 `
             /d:sonar.analysis.prNumber=$githubPullRequest `
-            /d:sonar.branch.name=$branchName `
+            /d:sonar.branch.name=$githubPRBaseBranch `
+            /d:sonar.branch.target=$githubPRTargetBranch `
             /v:"latest"
     }
     elseif ($isMaster) {
@@ -313,7 +317,8 @@ function Invoke-JavaBuild() {
             "-Dsonar.login=${sonarQubeToken}" `
             "-Dsonar.analysis.sha1=${githubSha1}" `
             "-Dsonar.analysis.prNumber=${githubPullRequest}" `
-            "-Dsonar.branch.name=${branchName}" `
+            "-Dsonar.branch.name=${githubPRBaseBranch}" `
+            "-Dsonar.branch.target=${githubPRTargetBranch}" `
             -B -e -V
         Test-ExitCode "ERROR: Maven build deploy sonar FAILED."
     }
