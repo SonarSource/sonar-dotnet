@@ -19,6 +19,7 @@
  */
 package org.sonarsource.dotnet.shared.plugins.protobuf;
 
+import org.sonar.api.batch.ScannerSide;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.issue.NoSonarFilter;
@@ -26,7 +27,8 @@ import org.sonar.api.measures.FileLinesContextFactory;
 
 import java.util.function.Predicate;
 
-public final class ProtobufImporters {
+@ScannerSide
+public class ProtobufImporters {
 
   public static final String HIGHLIGHT_OUTPUT_PROTOBUF_NAME = "token-type.pb";
   public static final String SYMBOLREFS_OUTPUT_PROTOBUF_NAME = "symrefs.pb";
@@ -34,10 +36,7 @@ public final class ProtobufImporters {
   public static final String METRICS_OUTPUT_PROTOBUF_NAME = "metrics.pb";
   public static final String ISSUES_OUTPUT_PROTOBUF_NAME = "issues.pb";
   public static final String ENCODING_OUTPUT_PROTOBUF_NAME = "encoding.pb";
-
-  private ProtobufImporters() {
-    // utility class, forbidden constructor
-  }
+  public static final String FILEMETADATA_OUTPUT_PROTOBUF_NAME = "file-metadata.pb";
 
   public static RawProtobufImporter highlightImporter(SensorContext context, Predicate<InputFile> inputFileFilter) {
     return new HighlightImporter(context, inputFileFilter);
@@ -62,5 +61,9 @@ public final class ProtobufImporters {
 
   public static EncodingImporter encodingImporter() {
     return new EncodingImporter();
+  }
+
+  public FileMetadataImporter fileMetadataImporter() {
+    return new FileMetadataImporter();
   }
 }
