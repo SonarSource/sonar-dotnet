@@ -36,6 +36,12 @@ param (
 
 Set-StrictMode -version 2.0
 $ErrorActionPreference = "Stop"
+$global:DebugPreference = "Continue"
+$global:VerbosePreference = "Continue"
+
+Write-Debug "DEBUG LOG"
+Write-Verbose "VERBOSE LOG"
+Write-Host "HOST LOG"
 
 function Get-BranchName() {
     if ($githubBranch.StartsWith("refs/heads/")) {
