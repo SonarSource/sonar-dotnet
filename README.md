@@ -12,7 +12,7 @@ supported code by helping you to find and to correct bugs, vulnerabilities and s
 
 ## Features
 
-* 280+ rules (including 60+ bug detection)
+* 300+ rules (including 60+ bug detection)
 * Metrics (complexity, number of lines etc.)
 * Import of [test coverage reports](https://docs.sonarqube.org/x/CoBh) from Visual Studio Code Coverage, dotCover,
 OpenCover and NCover 3.
@@ -22,6 +22,8 @@ OpenCover and NCover 3.
 
 * [Project homepage](https://redirect.sonarsource.com/plugins/csharp.html)
 * [Issue tracking](https://github.com/SonarSource/sonar-csharp/issues)
+* [C# rules](https://rules.sonarsource.com/csharp)
+* [VB.Net rules](https://rules.sonarsource.com/vbnet)
 
 ## Have question or feedback?
 
