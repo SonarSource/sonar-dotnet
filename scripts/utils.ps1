@@ -2,12 +2,12 @@ Add-Type -AssemblyName "System.IO.Compression.FileSystem"
 
 # Original: http://jameskovacs.com/2010/02/25/the-exec-problem
 function Exec ([scriptblock]$command, [string]$errorMessage = "ERROR: Command '${command}' FAILED.") {
-    $output = & $command
+    Write-Debug "Invoking command:${command}"
+
+    & $command
     if ((-not $?) -or ($lastexitcode -ne 0)) {
-        Write-Host $output
         throw $errorMessage
     }
-    return $output
 }
 
 function Test-ExitCode([string]$errorMessage = "ERROR: Command FAILED.") {
@@ -20,16 +20,20 @@ function Test-ExitCode([string]$errorMessage = "ERROR: Command FAILED.") {
 # When the script finishes sets the original current folder.
 function Invoke-InLocation([string]$path, [scriptblock]$command) {
     try {
+        Write-Debug "Changing current directory to: '${path}'"
         Push-Location $path
+
         & $command
     }
     finally {
+        Write-Debug "Changing current directory back to previous one"
         Pop-Location
     }
 }
 
 function ConvertTo-UnixLineEndings([string]$fileName) {
     Get-ChildItem $fileName | ForEach-Object {
+        Write-Debug "Changing line ending for '${$_}'"
         $content = [IO.File]::ReadAllText($_) -Replace "`r`n?", "`n"
         $utf8 = New-Object System.Text.UTF8Encoding $false
         [IO.File]::WriteAllText($_, $content, $utf8)
@@ -44,31 +48,34 @@ function Write-Header([string]$text) {
 }
 
 function Get-ExecutablePath([string]$name, [string]$directory, [string]$envVar) {
+    Write-Debug "Trying to find '${name}' using '${envVar}' environment variable"
     $path = [environment]::GetEnvironmentVariable($envVar, "Process")
 
-    try{
+    try {
         if (!$path) {
+            Write-Debug "Environment variable not found"
+
             if (!$directory) {
+                Write-Debug "Trying to find path using 'where.exe'"
                 $path = Exec { & where.exe $name } | Select-Object -First 1
             }
             else {
+                Write-Debug "Trying to find path using 'where.exe' in '${directory}'"
                 $path = Exec { & where.exe /R $directory $name } | Select-Object -First 1
             }
         }
     }
-    catch
-    {
+    catch {
         throw "Failed to locate executable '${name}' on the path"
     }
 
-
     if (Test-Path $path) {
-        Write-Host "Found '${name}' at '${path}'"
+        Write-Debug "Found '${name}' at '${path}'"
         [environment]::SetEnvironmentVariable($envVar, $path)
         return $path
     }
 
-    throw "Cannot find '${name}'"
+    throw "'${name}' located at '${path}' doesn't exist"
 }
 
 function Expand-ZIPFile($source, $destination) {
@@ -76,17 +83,23 @@ function Expand-ZIPFile($source, $destination) {
 
     if (Get-Command "Expand-Archive" -errorAction SilentlyContinue) {
         # PS v5.0+
+        Write-Debug "Unzipping using 'Expand-Archive'"
         Expand-Archive $source $destination -Force
     }
     else {
         if (-Not (Test-Path $destination)) {
+            Write-Debug "Creating folder '${destination}'"
             New-Item $destination -ItemType Directory
-            Write-Host "Succesfully created folder '${destination}'"
         }
 
+        Write-Debug "Unzipping using 'Shell.Application'"
         $application = New-Object -Com Shell.Application
 
         $zip = $application.NameSpace($source)
         $application.NameSpace($destination).CopyHere($zip.items(), 0x14)
     }
+}
+
+function Test-Debug() {
+    return $DebugPreference -ne "SilentlyContinue"
 }

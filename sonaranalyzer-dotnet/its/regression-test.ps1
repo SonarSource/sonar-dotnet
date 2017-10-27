@@ -14,6 +14,10 @@ param
 Set-StrictMode -version 2.0
 $ErrorActionPreference = "Stop"
 
+if ($PSBoundParameters['Verbose'] -Or $PSBoundParameters['Debug']) {
+    $global:DebugPreference = "Continue"
+}
+
 function Test-SonarAnalyzerDll {
     if (-Not (Test-Path ".\binaries\SonarAnalyzer.dll")) {
         throw "Could not find '.\binaries\SonarAnalyzer.dll'."
@@ -26,47 +30,61 @@ function Build-Project([string]$ProjectName, [string]$SolutionRelativePath) {
     $solutionPath = Resolve-Path ".\sources\${ProjectName}\${SolutionRelativePath}"
 
     # The PROJECT env variable is used by 'SonarAnalyzer.Testing.ImportBefore.targets'
+    Write-Debug "Setting PROJECT environment variable to '${ProjectName}'"
     $Env:PROJECT = $ProjectName
 
     Restore-Packages $solutionPath
     # Note: Summary doesn't work for MSBuild 14
-    Invoke-MSBuild $msbuildVersion $solutionPath /m /t:rebuild /p:Configuration=Debug `
+    Invoke-MSBuild $msbuildVersion $solutionPath `
+        /m `
+        /t:rebuild `
+        /p:Configuration=Debug `
         /clp:"Summary;ErrorsOnly" `
-        /fl /flp:"logFile=output\$ProjectName.log;verbosity=d"
+        /fl `
+        /flp:"logFile=output\${ProjectName}.log;verbosity=d"
 }
 
 function Initialize-ActualFolder() {
-    $timer = [system.diagnostics.stopwatch]::StartNew()
+    $methodTimer = [system.diagnostics.stopwatch]::StartNew()
 
     Write-Host "Initializing the actual issues folder with the expected  result"
     if (Test-Path .\actual) {
+        Write-Debug "Removing folder 'actual'"
         Remove-Item -Recurse -Force actual
     }
-    # this copies no files if ruleId is not set, and all but ending with ruleId if set
 
+    # this copies no files if ruleId is not set, and all but ending with ruleId if set
     Copy-FolderRecursively -From .\expected -To .\actual -Exclude "*${ruleId}.json"
-    Write-Host "Initialize-ActualFolder:" $timer.Elapsed.TotalSeconds
+    $methodTimerElapsed = $methodTimer.Elapsed.TotalSeconds
+    Write-Debug "Initialized actual folder in '${methodTimerElapsed}'"
 }
 
 function Initialize-OutputFolder() {
-    $timer = [system.diagnostics.stopwatch]::StartNew()
+    $methodTimer = [system.diagnostics.stopwatch]::StartNew()
 
     Write-Host "Initializing the output folder"
     if (Test-Path .\output) {
+        Write-Debug "Removing folder 'output'"
         Remove-Item -Recurse -Force output
     }
+
+    Write-Debug "Creating folder 'output'"
     New-Item -ItemType directory -Path .\output | out-null
 
     if ($ruleId) {
+        Write-Debug "Running ITs with only rule ${ruleId} turned on"
         $template = Get-Content -Path ".\SingleRule.ruleset.template" -Raw
         $rulesetWithOneRule = $template.Replace("<Rule Id=`"$ruleId`" Action=`"None`" />", `
                                                 "<Rule Id=`"$ruleId`" Action=`"Warning`" />")
         Set-Content -Path ".\output\AllSonarAnalyzerRules.ruleset" -Value $rulesetWithOneRule
     }
     else {
+        Write-Debug "Running ITs with all rules turned on"
         Copy-Item ".\AllSonarAnalyzerRules.ruleset" -Destination ".\output"
     }
-    Write-Host "Initialize-OutputFolder:" $timer.Elapsed.TotalSeconds
+
+    $methodTimerElapsed = $methodTimer.Elapsed.TotalSeconds
+    Write-Debug "Initialized output folder in '${methodTimerElapsed}'"
 }
 
 function Export-AnalyzerPerformancesFromLogs([string[]]$buildLogsPaths) {
@@ -104,6 +122,7 @@ function Copy-FolderRecursively($From, $To, $Include, $Exclude) {
     foreach ($file in $files) {
         $path = Join-Path $toPath $file.FullName.Substring($fromPath.length)
         $parent = split-path $path -parent
+
         if (-Not (Test-Path $parent)) {
             New-Item $parent -Type Directory -Force | out-null
         }
@@ -128,14 +147,16 @@ function Measure-AnalyzerPerformance()
 
 function Show-DiffResults() {
     if (Test-Path .\diff) {
+        Write-Debug "Removing folder 'diff'"
         Remove-Item -Recurse -Force .\diff
     }
 
     $errorMsg = "ERROR: There are differences between the actual and the expected issues."
     if (!$ruleId)
     {
-        Exec { & git diff --no-index --quiet --exit-code ./expected ./actual } `
-              -errorMessage $errorMsg
+        Write-Debug "Running 'git diff' between 'actual' and 'expected'"
+        Exec { & git diff --no-index --quiet --exit-code ./expected ./actual `
+        } -errorMessage $errorMsg
         return
     }
 
@@ -146,8 +167,8 @@ function Show-DiffResults() {
     Copy-FolderRecursively -From .\expected -To .\diff\expected -Include "*${ruleId}.json"
     Copy-FolderRecursively -From .\actual   -To .\diff\actual   -Include "*${ruleId}.json"
 
-    Exec { & git diff --no-index --quiet --exit-code .\diff\expected .\diff\actual } `
-          -errorMessage $errorMsg
+    Exec { & git diff --no-index --quiet --exit-code .\diff\expected .\diff\actual `
+    } -errorMessage $errorMsg
 }
 
 try {
@@ -162,7 +183,7 @@ try {
     Initialize-ActualFolder
     Initialize-OutputFolder
 
-    Write-Host "Installing the import before target file in '${msBuildImportBefore}'"
+    Write-Debug "Installing the import before target file at '${msBuildImportBefore}'"
     Copy-Item .\SonarAnalyzer.Testing.ImportBefore.targets -Destination $msBuildImportBefore -Recurse -Container
 
     Build-Project "akka.net" "src\Akka.sln"
@@ -173,37 +194,42 @@ try {
 
     Write-Host "Normalizing the SARIF reports"
     $sarifTimer = [system.diagnostics.stopwatch]::StartNew()
-        Exec { & .\create-issue-reports.ps1 }
-    Write-Host "Normalizing the SARIF reports:" $sarifTimer.Elapsed.TotalSeconds
+    Exec { & .\create-issue-reports.ps1 }
+    $sarifTimerElapsed = $sarifTimer.Elapsed.TotalSeconds
+    Write-Debug "Normalized the SARIF reports in '${sarifTimerElapsed}'"
 
     Write-Host "Computing analyzer performance"
     $measurePerfTimer = [system.diagnostics.stopwatch]::StartNew()
     Measure-AnalyzerPerformance
-    Write-Host "Computing analyzer performance:" $measurePerfTimer.Elapsed.TotalSeconds
+    $measurePerfTimerElapsed = $measurePerfTimer.Elapsed.TotalSeconds
+    Write-Debug "Computed analyzer performance in '${measurePerfTimerElapsed}'"
 
     Write-Host "Checking for differences..."
     $diffTimer = [system.diagnostics.stopwatch]::StartNew()
     Show-DiffResults
-    Write-Host "Checking for differences..." $diffTimer.Elapsed.TotalSeconds
+    $diffTimerElapsed = $diffTimer.Elapsed.TotalSeconds
+    Write-Debug "Checked for differences in '${diffTimerElapsed}'"
 
-    Write-Host -ForegroundColor Green "SUCCESS: No differences were found!"
+    Write-Host -ForegroundColor Green "SUCCESS: ITs were successful! No differences were found!"
     exit 0
 }
 catch {
     Write-Host -ForegroundColor Red $_
+    Write-Host $_.Exception
+    Write-Host $_.ScriptStackTrace
     exit 1
 }
 finally {
     Pop-Location
-    Write-Host "Removing the import before target file from '${msBuildImportBefore}'"
+    Write-Debug "Removing the import before target file from '${msBuildImportBefore}'"
     Remove-Item -Force (Join-Path $msBuildImportBefore "\SonarAnalyzer.Testing.ImportBefore.targets") `
         -ErrorAction Ignore
 
     $scriptTimer.Stop()
-    $totalTimesec = [int]$scriptTimer.Elapsed.TotalSeconds
+    $totalTimeInSeconds = [int]$scriptTimer.Elapsed.TotalSeconds
     if ($ruleId) {
-        Write-Host "Analyzed ${ruleId} in ${totalTimesec}s"
+        Write-Debug "Analyzed ${ruleId} in ${totalTimeInSeconds}s"
     } else {
-        Write-Host "Analyzed all rules in ${totalTimesec}s"
+        Write-Debug "Analyzed all rules in ${totalTimeInSeconds}s"
     }
 }

@@ -45,6 +45,10 @@ param (
 Set-StrictMode -version 2.0
 $ErrorActionPreference = "Stop"
 
+if ($PSBoundParameters['Verbose'] -Or $PSBoundParameters['Debug']) {
+    $DebugPreference = "Continue"
+}
+
 try {
     . (Join-Path $PSScriptRoot "build-utils.ps1")
     Push-Location "${PSScriptRoot}\..\..\sonaranalyzer-dotnet"
@@ -74,7 +78,6 @@ try {
 
     if ($build) {
         Invoke-MSBuild $msbuildVersion $solutionName `
-            /v:q `
             /consoleloggerparameters:Summary `
             /m `
             /p:configuration=$buildConfiguration `
@@ -100,20 +103,21 @@ try {
 
     if ($buildJava) {
         Invoke-InLocation ".." {
-            & mvn clean install -P local-analyzer -D analyzer.configuration=$buildConfiguration
+            Exec { & mvn clean install -P local-analyzer -D analyzer.configuration=$buildConfiguration }
         }
     }
 
     if ($itsJava) {
         Invoke-InLocation "..\its" {
-            & mvn clean install
+            Exec { & mvn clean install }
         }
     }
 
+    Write-Host -ForegroundColor Green "SUCCESS: script was successful!"
     exit 0
 }
 catch {
-    Write-Host $_
+    Write-Host -ForegroundColor Red $_
     Write-Host $_.Exception
     Write-Host $_.ScriptStackTrace
     exit 1

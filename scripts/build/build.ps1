@@ -37,6 +37,10 @@ param (
 Set-StrictMode -version 2.0
 $ErrorActionPreference = "Stop"
 
+if ($PSBoundParameters['Verbose'] -Or $PSBoundParameters['Debug']) {
+    $global:DebugPreference = "Continue"
+}
+
 function Get-BranchName() {
     if ($githubBranch.StartsWith("refs/heads/")) {
         return $githubBranch.Substring(11)
@@ -48,24 +52,35 @@ function Get-BranchName() {
 function Clear-MSBuildImportBefore() {
     $importBeforePath = Get-MSBuildImportBeforePath "14.0"
     Get-ChildItem $importBeforePath -Recurse -Include "Sonar*.targets" `
-        | ForEach-Object { Remove-Item -Force $_ }
+        | ForEach-Object {
+            Write-Debug "Removing $_"
+            Remove-Item -Force $_
+        }
 }
 
 function Get-DotNetVersion() {
     [xml]$versionProps = Get-Content "${PSScriptRoot}\..\version\Version.props"
-    return $versionProps.Project.PropertyGroup.MainVersion + "." + $versionProps.Project.PropertyGroup.BuildNumber
+    $fullVersion = $versionProps.Project.PropertyGroup.MainVersion + "." + $versionProps.Project.PropertyGroup.BuildNumber
+
+    Write-Debug ".Net version is '${fullVersion}'"
+
+    return $fullVersion
 }
 
 function Get-LeakPeriodVersion() {
     [xml]$versionProps = Get-Content "${PSScriptRoot}\..\version\Version.props"
-    return $versionProps.Project.PropertyGroup.MainVersion
+    $mainVersion = $versionProps.Project.PropertyGroup.MainVersion
+
+    Write-Debug "Leak period version is '${mainVersion}'"
+
+    return $mainVersion
 }
 
 function Set-DotNetVersion() {
     Write-Header "Updating version in .Net files"
 
     $branchName = Get-BranchName
-    Write-Host "Setting build number ${buildNumber}, sha1 ${githubSha1} and branch ${branchName}"
+    Write-Debug "Setting build number ${buildNumber}, sha1 ${githubSha1} and branch ${branchName}"
 
     Invoke-InLocation (Join-Path $PSScriptRoot "..\version") {
         $versionProperties = "Version.props"
@@ -87,59 +102,70 @@ function Get-ScannerMsBuildPath() {
     $scannerMsbuild = Join-Path $currentDir "SonarQube.Scanner.MSBuild.exe"
 
     if (-Not (Test-Path $scannerMsbuild)) {
+        Write-Debug "Scanner for MSBuild not found, downloading it"
+
         # This links always redirect to the latest released scanner
         $downloadLink = "https://repox.sonarsource.com/sonarsource-public-releases/org/sonarsource/scanner/msbuild/" +
             "sonar-scanner-msbuild/%5BRELEASE%5D/sonar-scanner-msbuild-%5BRELEASE%5D.zip"
         $scannerMsbuildZip = Join-Path $currentDir "\MSBuild.SonarQube.Runner.zip"
 
+        Write-Debug "Downloading scanner from '${downloadLink}' at '${currentDir}'"
         (New-Object System.Net.WebClient).DownloadFile($downloadLink, $scannerMsbuildZip)
 
         # perhaps we could use other folder, not the repository root
         Expand-ZIPFile $scannerMsbuildZip $currentDir
 
+        Write-Debug "Deleting downloaded zip"
         Remove-Item $scannerMsbuildZip -Force
     }
 
+    Write-Debug "Scanner for MSBuild found at '$scannerMsbuild'"
     return $scannerMsbuild
 }
 
 function Invoke-SonarBeginAnalysis([array][parameter(ValueFromRemainingArguments = $true)]$remainingArgs) {
     Write-Header "Running SonarQube Analysis begin step"
 
-    $scannerMsbuildExe = Get-ScannerMsBuildPath
-    & $scannerMsbuildExe begin `
-        /k:"sonaranalyzer-csharp-vbnet" `
-        /n:"SonarAnalyzer for C#" `
-        /d:sonar.host.url=$sonarQubeUrl `
-        /d:sonar.login=$sonarQubeToken `
-        $remainingArgs
-    Test-ExitCode "ERROR: SonarQube Analysis begin step FAILED."
+    if (Test-Debug) {
+        $remainingArgs += "/d:sonar.verbose=true"
+    }
+
+    Exec { & (Get-ScannerMsBuildPath) begin /k:sonaranalyzer-csharp-vbnet /n:"SonarAnalyzer for C#"
+        /d:sonar.host.url=${sonarQubeUrl} /d:sonar.login=$sonarQubeToken $remainingArgs } `
+        -errorMessage "ERROR: SonarQube Analysis begin step FAILED."
 }
 
 function Invoke-SonarEndAnalysis() {
     Write-Header "Running SonarQube Analysis end step"
 
-    $scannerMsbuildExe = Get-ScannerMsBuildPath
-    & $scannerMsbuildExe end /d:sonar.login=$sonarQubeToken
-    Test-ExitCode "ERROR: SonarQube Analysis end step FAILED."
+    Exec { & (Get-ScannerMsBuildPath) end /d:sonar.login=$sonarQubeToken } `
+        -errorMessage "ERROR: SonarQube Analysis end step FAILED."
 }
 
 function Initialize-NuGetConfig() {
     Write-Header "Setting up nuget.config"
 
-    Remove-Item $appDataPath\NuGet\NuGet.Config
+    $nugetFile = "${appDataPath}\NuGet\NuGet.Config"
+    Write-Debug "Deleting '${nugetFile}'"
+    Remove-Item $nugetFile
 
-    $nuget_exe = Get-NuGetPath
-    Exec { & $nuget_exe Sources Add -Name "repox" -Source "https://repox.sonarsource.com/api/nuget/sonarsource-nuget-qa" }
-    Exec { & $nuget_exe SetApiKey "${repoxUserName}:${repoxPassword}" -Source repox }
+    $nugetExe = Get-NuGetPath
+    Write-Debug "Adding repox source to NuGet config"
+    Exec { & $nugetExe Sources Add -Name "repox" -Source "https://repox.sonarsource.com/api/nuget/sonarsource-nuget-qa" }
+
+    Write-Debug "Adding repox API key to NuGet config"
+    Exec { & $nugetExe SetApiKey "${repoxUserName}:${repoxPassword}" -Source "repox" }
 }
 
 function Publish-NuGetPackages {
     Write-Header "Publishing NuGet packages"
 
-    $nuget_exe = Get-NuGetPath
+    $nugetExe = Get-NuGetPath
+    $extraArgs = if (Test-Debug) { "-Verbosity detailed" } else { }
+
     foreach ($file in (Get-ChildItem "src" -Recurse "*.nupkg")) {
-        Exec { & $nuget_exe push $file.FullName -Source "repox" }
+        Write-Debug "Pushing NuGet package '${file}' to repox"
+        Exec { & $nugetExe push $file.FullName -Source repox $extraArgs }
     }
 }
 
@@ -151,7 +177,7 @@ function Update-AnalyzerMavenArtifacts() {
         $packageId = ($_.Name -Replace $_.Extension, "") -Replace ".$version", ""
         $pomPath = ".\sonaranalyzer-maven-artifacts\${packageId}\pom.xml"
 
-        Write-Host "Upating ${pomPath} artifact file with $_"
+        Write-Debug "Updating ${pomPath} artifact file with $_"
         (Get-Content $pomPath) -Replace "file-${packageId}", $_.FullName | Set-Content $pomPath
     }
 }
@@ -166,7 +192,8 @@ function Initialize-QaStep() {
     ConvertTo-UnixLineEndings $versionPropertiesPath
 
     $content = Get-Content $versionPropertiesPath
-    Write-Host "Successfully created version.properties with content '${content}'"
+    Write-Debug "Successfully created version.properties with content '${content}'"
+    Write-Host "Triggering QA job"
 }
 
 function Invoke-DotNetBuild() {
@@ -203,7 +230,6 @@ function Invoke-DotNetBuild() {
 
     Restore-Packages $solutionName
     Invoke-MSBuild "14.0" $solutionName `
-        /v:q `
         /consoleloggerparameters:Summary `
         /m `
         /p:configuration=$buildConfiguration `
@@ -229,10 +255,10 @@ function Invoke-DotNetBuild() {
 }
 
 function Get-MavenExpression([string]$exp) {
-    $out = mvn help:evaluate -B -Dexpression="${exp}"
-    Test-ExitCode "ERROR: Evaluation of expression ${exp} FAILED."
+    Exec { & mvn help:evaluate -B -Dexpression="${exp}" | Tee-Object -Variable output `
+    } -errorMessage "ERROR: Evaluation of expression ${exp} FAILED."
 
-    return ($out | Select-String -NotMatch -Pattern '^\[|Download\w\+\:').Line
+    return ($output | Select-String -NotMatch -Pattern '^\[|Download\w\+\:').Line
 }
 
 function Set-MavenBuildVersion() {
@@ -249,8 +275,9 @@ function Set-MavenBuildVersion() {
 
     Write-Host "Replacing version ${currentVersion} with ${newVersion}"
 
-    mvn org.codehaus.mojo:versions-maven-plugin:2.2:set "-DnewVersion=${newVersion}" -DgenerateBackupPoms=false -B -e
-    Test-ExitCode "ERROR: Maven set version FAILED."
+    Exec { & mvn org.codehaus.mojo:versions-maven-plugin:2.2:set "-DnewVersion=${newVersion}" `
+        -DgenerateBackupPoms=false -B -e `
+    } -errorMessage "ERROR: Maven set version FAILED."
 
     # Set the version used by Jenkins to associate artifacts to the right version
     $env:PROJECT_VERSION = $newVersion
@@ -274,14 +301,14 @@ function Invoke-JavaBuild() {
 
         $env:MAVEN_OPTS = "-Xmx1536m -Xms128m"
 
-        & mvn org.jacoco:jacoco-maven-plugin:prepare-agent deploy sonar:sonar `
+        Exec { & mvn org.jacoco:jacoco-maven-plugin:prepare-agent deploy sonar:sonar `
             "-Pcoverage-per-test,deploy-sonarsource,release,sonaranalyzer" `
             "-Dmaven.test.redirectTestOutputToFile=false" `
             "-Dsonar.host.url=${sonarQubeUrl}" `
             "-Dsonar.login=${sonarQubeToken}" `
             "-Dsonar.projectVersion=${currentVersion}" `
-            -B -e -V
-        Test-ExitCode "ERROR: Maven build deploy sonar FAILED."
+            -B -e -V `
+        } -errorMessage "ERROR: Maven build deploy sonar FAILED."
     }
     elseif ($isMaintenanceBranch -and -not $isPullRequest) {
         Write-Header "Building and deploying SonarC#"
@@ -289,10 +316,10 @@ function Invoke-JavaBuild() {
         Set-MavenBuildVersion
         $env:MAVEN_OPTS = "-Xmx1536m -Xms128m"
 
-        & mvn deploy `
+        Exec { & mvn deploy `
             "-Pdeploy-sonarsource,release" `
-            -B -e -V
-        Test-ExitCode "ERROR: Maven deploy sonar FAILED."
+            -B -e -V `
+        } -errorMessage "ERROR: Maven deploy sonar FAILED."
     }
     elseif ($isPullRequest -and $githubToken -ne $null) {
         Write-Header "Building and analyzing SonarC#"
@@ -306,7 +333,7 @@ function Invoke-JavaBuild() {
         # in Maven local repository. Phase "verify" is enough.
         Write-Host "SonarC# will be deployed"
 
-        & mvn org.jacoco:jacoco-maven-plugin:prepare-agent deploy sonar:sonar `
+        Exec { & mvn org.jacoco:jacoco-maven-plugin:prepare-agent deploy sonar:sonar `
             "-Pdeploy-sonarsource,sonaranalyzer" `
             "-Dmaven.test.redirectTestOutputToFile=false" `
             "-Dsonar.analysis.mode=issues" `
@@ -319,8 +346,8 @@ function Invoke-JavaBuild() {
             "-Dsonar.analysis.prNumber=${githubPullRequest}" `
             "-Dsonar.branch.name=${githubPRBaseBranch}" `
             "-Dsonar.branch.target=${githubPRTargetBranch}" `
-            -B -e -V
-        Test-ExitCode "ERROR: Maven build deploy sonar FAILED."
+            -B -e -V `
+        } -errorMessage "ERROR: Maven build deploy sonar FAILED."
     }
     else {
         Write-Header "Building SonarC#"
@@ -329,8 +356,8 @@ function Invoke-JavaBuild() {
 
         # No need for Maven phase "install" as the generated JAR files do not need to be installed
         # in Maven local repository. Phase "verify" is enough.
-        & mvn verify "-Dmaven.test.redirectTestOutputToFile=false" -B -e -V
-        Test-ExitCode "ERROR: Maven verify FAILED."
+        Exec { & mvn verify "-Dmaven.test.redirectTestOutputToFile=false" -B -e -V `
+        } -errorMessage "ERROR: Maven verify FAILED."
     }
 }
 
@@ -346,12 +373,24 @@ try {
     $isMaintenanceBranch = $branchName -like 'branch-*'
     $isPullRequest = $githubIsPullRequest -eq "true"
 
-    Write-Host "Solution to build: $solutionName"
-    Write-Host "Build configuration: $buildConfiguration"
-    Write-Host "Bin folder to use: $binPath"
-    Write-Host "Branch: $branchName"
-    if ($isPullRequest) {
-        Write-Host "PR: $githubPullRequest"
+    Write-Debug "Solution to build: ${solutionName}"
+    Write-Debug "Build configuration: ${buildConfiguration}"
+    Write-Debug "Bin folder to use: ${binPath}"
+    Write-Debug "Branch: ${branchName}"
+    if ($isMaster) {
+        Write-Debug "Build kind: master"
+    }
+    elseif ($isPullRequest) {
+        Write-Debug "Build kind: PR"
+        Write-Debug "PR: ${githubPullRequest}"
+        Write-Debug "PR source: ${githubPRBaseBranch}"
+        Write-Debug "PR target: ${githubPRTargetBranch}"
+    }
+    elseif ($isMaintenanceBranch) {
+        Write-Debug "Build kind: maintenance"
+    }
+    else {
+        Write-Debug "Build kind: branch"
     }
 
     # Ensure the ImportBefore folder does not contain our targets
@@ -369,6 +408,7 @@ try {
         Invoke-InLocation "${PSScriptRoot}\..\..\sonaranalyzer-dotnet" { Initialize-QaStep }
     }
 
+    Write-Host -ForegroundColor Green "SUCCESS: BUILD job was successful!"
     exit 0
 }
 catch {
