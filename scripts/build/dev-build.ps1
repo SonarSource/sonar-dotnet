@@ -44,6 +44,12 @@ param (
 
 Set-StrictMode -version 2.0
 $ErrorActionPreference = "Stop"
+$global:DebugPreference = "Continue"
+$global:VerbosePreference = "Continue"
+
+Write-Verbose "VERBOSE LOG"
+Write-Debug "DEBUG LOG"
+Write-Host "HOST LOG"
 
 try {
     . (Join-Path $PSScriptRoot "build-utils.ps1")
