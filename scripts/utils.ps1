@@ -33,10 +33,11 @@ function Invoke-InLocation([string]$path, [scriptblock]$command) {
 
 function ConvertTo-UnixLineEndings([string]$fileName) {
     Get-ChildItem $fileName | ForEach-Object {
-        Write-Debug "Changing line ending for '${$_}'"
-        $content = [IO.File]::ReadAllText($_) -Replace "`r`n?", "`n"
+        $currentFile = $_
+        Write-Debug "Changing line ending for '${currentFile}'"
+        $content = [IO.File]::ReadAllText($currentFile) -Replace "`r`n?", "`n"
         $utf8 = New-Object System.Text.UTF8Encoding $false
-        [IO.File]::WriteAllText($_, $content, $utf8)
+        [IO.File]::WriteAllText($currentFile, $content, $utf8)
     }
 }
 
