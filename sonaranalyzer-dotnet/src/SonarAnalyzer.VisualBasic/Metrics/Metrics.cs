@@ -83,10 +83,7 @@ namespace SonarAnalyzer.Common.VisualBasic
             return 0; // Not implemented
         }
 
-        public override int GetExecutableLinesCount()
-        {
-            return 0; // Not implemented
-        }
+        public override int ExecutableLinesCount => 0; // Not implemented
 
         private static readonly ISet<SyntaxKind> TriviaKinds = ImmutableHashSet.Create(
             SyntaxKind.CommentTrivia,

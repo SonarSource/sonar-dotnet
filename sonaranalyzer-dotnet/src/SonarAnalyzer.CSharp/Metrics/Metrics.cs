@@ -41,11 +41,14 @@ namespace SonarAnalyzer.Metrics.CSharp
             }
         }
 
-        public override int GetExecutableLinesCount()
+        public override int ExecutableLinesCount
         {
-            var walker = new ExecutableLinesWalker();
-            walker.Visit(tree.GetRoot());
-            return walker.ExecutableLineCount;
+            get
+            {
+                var walker = new ExecutableLinesWalker();
+                walker.Visit(tree.GetRoot());
+                return walker.ExecutableLineCount;
+            }
         }
 
         protected override bool IsEndOfFile(SyntaxToken token) => token.IsKind(SyntaxKind.EndOfFileToken);

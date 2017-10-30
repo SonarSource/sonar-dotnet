@@ -601,5 +601,17 @@ End Class").Should().BeEquivalentTo(1, 2, 3, 4, 5, 6, 7, 8);
         {
             new SonarAnalyzer.Common.VisualBasic.Metrics(CSharpSyntaxTree.ParseText(""));
         }
+
+        private static int ExecutableLines(AnalyzerLanguage language, string text) =>
+            MetricsFor(language, text).ExecutableLinesCount;
+
+        [TestMethod]
+        [TestCategory(MetricsTestCategoryName)]
+        public void ExecutableLinesMetricsIsPopulated()
+        {
+            ExecutableLines(AnalyzerLanguage.CSharp,
+                @"public void Foo(int x) { int i = 0; if (i == 0) {i++;i--;} else { while(true){i--;} } }")
+                .Should().Be(1);
+        }
     }
 }

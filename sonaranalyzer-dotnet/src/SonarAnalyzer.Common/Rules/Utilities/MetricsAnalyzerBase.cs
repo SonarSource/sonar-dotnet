@@ -65,6 +65,7 @@ namespace SonarAnalyzer.Rules
                 FunctionCount = metrics.FunctionCount,
                 PublicApiCount = metrics.PublicApiCount,
                 PublicUndocumentedApiCount = metrics.PublicUndocumentedApiCount,
+                ExecutableLines = metrics.ExecutableLinesCount,
 
                 Complexity = complexity,
                 ComplexityInClasses = metrics.ClassNodes.Sum(metrics.GetComplexity),
@@ -79,7 +80,6 @@ namespace SonarAnalyzer.Rules
             var comments = metrics.GetComments(ignoreHeaderComments);
             metricsInfo.NoSonarComment.AddRange(comments.NoSonar);
             metricsInfo.NonBlankComment.AddRange(comments.NonBlank);
-
             metricsInfo.CodeLine.AddRange(metrics.CodeLines);
             return metricsInfo;
         }
