@@ -19,8 +19,11 @@
  */
 package com.sonar.it.csharp;
 
+import java.io.File;
+import java.io.IOException;
 import java.nio.file.Path;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.SystemUtils;
 import org.junit.ClassRule;
 import org.junit.Test;
@@ -49,6 +52,14 @@ public class MetricsTest {
 
   private static RuleChain getRuleChain() {
     assertThat(SystemUtils.IS_OS_WINDOWS).withFailMessage("OS should be Windows.").isTrue();
+
+    String localappData = System.getenv("LOCALAPPDATA") + "\\Temp\\.sonarqube";
+    try {
+      FileUtils.deleteDirectory(new File(localappData));
+    }
+    catch (IOException ioe) {
+      throw new IllegalStateException("could not delete Scanner for MSBuild cache folder", ioe);
+    }
 
     return RuleChain
       .outerRule(ORCHESTRATOR)
@@ -312,6 +323,23 @@ public class MetricsTest {
     assertThat(getFileMeasure("comment_lines_data").getValue()).contains("7=1");
     assertThat(getFileMeasure("comment_lines_data").getValue()).contains("11=1");
     assertThat(countMatches(getFileMeasure("comment_lines_data").getValue(), "=1")).isEqualTo(2);
+  }
+
+  /* Executable lines */
+
+  @Test
+  public void executableLines() {
+    if (!ORCHESTRATOR.getServer().version().isGreaterThanOrEquals("6.2")) {
+      return;
+    }
+
+    String value = getFileMeasure("executable_lines_data").getValue();
+
+    assertThat(value).contains("18=1");
+    assertThat(value).contains("28=1");
+    assertThat(value).contains("29=1");
+
+    assertThat(value.length()).isEqualTo(14); // No other lines
   }
 
   /* Helper methods */
