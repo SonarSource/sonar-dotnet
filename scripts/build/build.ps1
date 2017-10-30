@@ -255,9 +255,10 @@ function Invoke-DotNetBuild() {
 }
 
 function Get-MavenExpression([string]$exp) {
-    Exec { & mvn help:evaluate -B -Dexpression="${exp}" | Tee-Object -Variable output `
-        return ($output | Select-String -NotMatch -Pattern '^\[|Download\w\+\:').Line
-    } -errorMessage "ERROR: Evaluation of expression ${exp} FAILED."
+    $out = mvn help:evaluate -B -Dexpression="${exp}"
+    Test-ExitCode "ERROR: Evaluation of expression ${exp} FAILED."
+
+    return ($out | Select-String -NotMatch -Pattern '^\[|Download\w\+\:').Line
 }
 
 function Set-MavenBuildVersion() {
