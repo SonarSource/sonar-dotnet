@@ -24,8 +24,8 @@ function Get-MsBuildPath([ValidateSet("14.0", "15.0")][string]$msbuildVersion) {
         # Sets the path to MSBuild 15 into an the MSBUILD_PATH environment variable
         # All subsequent builds after this command will use MSBuild 15!
         # Test if vswhere.exe is in your path. Download from: https://github.com/Microsoft/vswhere/releases
-        Exec { & (Get-VsWherePath) -latest -products * -requires Microsoft.Component.MSBuild `
-            -property installationPath | Tee-Object -Variable path }
+        $path = Exec { & (Get-VsWherePath) -latest -products * -requires Microsoft.Component.MSBuild `
+            -property installationPath }
         if ($path) {
             $msbuild15Path = Join-Path $path "MSBuild\15.0\Bin\MSBuild.exe"
             [environment]::SetEnvironmentVariable($msbuild15Env, $msbuild15Path)
@@ -130,14 +130,13 @@ function Invoke-UnitTests([string]$binPath, [bool]$failsIfNotTest) {
         }
     $testDirs = $testDirs | Select-Object -Uniq
 
-    Exec { & (Get-VsTestPath) $testFiles /Parallel /Enablecodecoverage /InIsolation /Logger:trx `
+    $cmdOutput = Exec { & (Get-VsTestPath) $testFiles /Parallel /Enablecodecoverage /InIsolation /Logger:trx `
         /UseVsixExtensions:true /TestAdapterPath:$testDirs `
-        | Tee-Object -Variable cmdOutput
-
-        if ($failsIfNotTest -And $cmdOutput -Match "Warning: No test is available") {
-            throw "No test was found but was expecting to find some"
-        }
     } -errorMessage "ERROR: Unit Tests execution FAILED."
+
+    if ($failsIfNotTest -And $cmdOutput -Match "Warning: No test is available") {
+        throw "No test was found but was expecting to find some"
+    }
 }
 
 function Invoke-IntegrationTests([ValidateSet("14.0", "15.0")][string] $msbuildVersion) {

@@ -4,10 +4,13 @@ Add-Type -AssemblyName "System.IO.Compression.FileSystem"
 function Exec ([scriptblock]$command, [string]$errorMessage = "ERROR: Command '${command}' FAILED.") {
     Write-Debug "Invoking command:${command}"
 
-    & $command
+    $output = ""
+    & $command | Tee-Object -Variable output
     if ((-not $?) -or ($lastexitcode -ne 0)) {
         throw $errorMessage
     }
+
+    return $output
 }
 
 function Test-ExitCode([string]$errorMessage = "ERROR: Command FAILED.") {
