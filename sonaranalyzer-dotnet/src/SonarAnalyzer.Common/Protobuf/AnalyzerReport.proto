@@ -106,7 +106,7 @@ message MetricsInfo {
   repeated int32 code_line = 14;
 
   int32 cognitive_complexity = 15;
-  int32 executable_lines = 16;
+  repeated int32 executable_lines = 16;
 }
 
 // Issues

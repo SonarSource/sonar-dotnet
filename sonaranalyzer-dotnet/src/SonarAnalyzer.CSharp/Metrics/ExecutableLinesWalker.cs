@@ -29,7 +29,7 @@ namespace SonarAnalyzer.Metrics.CSharp
     {
         private readonly HashSet<int> executableLineNumbers = new HashSet<int>();
 
-        public int ExecutableLineCount => executableLineNumbers.Count;
+        public ICollection<int> ExecutableLines => executableLineNumbers;
 
         public override void DefaultVisit(SyntaxNode node)
         {

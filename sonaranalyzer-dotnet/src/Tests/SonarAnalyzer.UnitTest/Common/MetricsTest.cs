@@ -25,6 +25,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
 using Microsoft.CodeAnalysis.VisualBasic;
 using System;
+using System.Collections.Generic;
 
 namespace SonarAnalyzer.UnitTest.Common
 {
@@ -602,8 +603,8 @@ End Class").Should().BeEquivalentTo(1, 2, 3, 4, 5, 6, 7, 8);
             new SonarAnalyzer.Common.VisualBasic.Metrics(CSharpSyntaxTree.ParseText(""));
         }
 
-        private static int ExecutableLines(AnalyzerLanguage language, string text) =>
-            MetricsFor(language, text).ExecutableLinesCount;
+        private static ICollection<int> ExecutableLines(AnalyzerLanguage language, string text) =>
+            MetricsFor(language, text).ExecutableLines;
 
         [TestMethod]
         [TestCategory(MetricsTestCategoryName)]
@@ -611,7 +612,7 @@ End Class").Should().BeEquivalentTo(1, 2, 3, 4, 5, 6, 7, 8);
         {
             ExecutableLines(AnalyzerLanguage.CSharp,
                 @"public void Foo(int x) { int i = 0; if (i == 0) {i++;i--;} else { while(true){i--;} } }")
-                .Should().Be(1);
+                .Should().BeEquivalentTo(new[] { 1 });
         }
     }
 }

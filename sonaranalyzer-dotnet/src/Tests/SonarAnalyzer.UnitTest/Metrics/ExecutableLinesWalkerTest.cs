@@ -27,17 +27,17 @@ namespace SonarAnalyzer.UnitTest.Common
     [TestClass]
     public class ExecutableLinesWalkerTest
     {
-        private static void AssertLinesOfCode(int expectedLineCount, string code)
+        private static void AssertLinesOfCode(string code, params int[] expectedExecutableLines)
         {
             var walker = new Metrics.CSharp.ExecutableLinesWalker();
             walker.Visit(CSharpSyntaxTree.ParseText(code).GetRoot());
-            walker.ExecutableLineCount.Should().Be(expectedLineCount);
+            walker.ExecutableLines.Should().BeEquivalentTo(expectedExecutableLines);
         }
 
         [TestMethod]
         public void Test_01_No_Executable_Lines()
         {
-            AssertLinesOfCode(0,
+            AssertLinesOfCode(
               @"using System;
                 using System.Linq;
 
@@ -55,7 +55,7 @@ namespace SonarAnalyzer.UnitTest.Common
         [TestMethod]
         public void Test_02_Checked_Unchecked()
         {
-            AssertLinesOfCode(2,
+            AssertLinesOfCode(
               @"
                 static void Main(string[] args)
                 {
@@ -65,13 +65,14 @@ namespace SonarAnalyzer.UnitTest.Common
                         {
                         }
                     }
-                }");
+                }",
+              4, 6);
         }
 
         [TestMethod]
         public void Test_03_Blocks()
         {
-            AssertLinesOfCode(4,
+            AssertLinesOfCode(
               @"
                 unsafe static void Main(int[] arr, object obj)
                 {
@@ -79,44 +80,44 @@ namespace SonarAnalyzer.UnitTest.Common
                     fixed (int* p = arr) { } // +1
                     unsafe { } // +1
                     using ((IDisposable)obj) { } // +1
-                }");
+                }",
+              4 ,5 ,6, 7);
         }
-
 
         [TestMethod]
         public void Test_04_Statements()
         {
-            AssertLinesOfCode(2,
+            AssertLinesOfCode(
               @"
                 void Foo(int i)
                 {
                     ; // +1
                     i++; // +1
-                }");
+                }",
+              4, 5);
         }
-
-
 
         [TestMethod]
         public void Test_06_Loops()
         {
-            AssertLinesOfCode(4,
+            AssertLinesOfCode(
               @"
                 void Foo(int[] arr)
                 {
-                    do {}
-while (true); // +1
+                    do {} // +1
+                        while (true);
                     foreach (var a in arr) { }// +1
                     for (;;) { } // +1
-                    while 
-(true) { } // +1
-                }");
+                    while // +1
+                        (true) { }
+                }",
+              4, 6, 7, 8);
         }
 
         [TestMethod]
         public void Test_07_Conditionals()
         {
-            AssertLinesOfCode(6,
+            AssertLinesOfCode(
               @"
                 void Foo(int? i, string s)
                 {
@@ -131,13 +132,15 @@ while (true); // +1
                     }
                     var x = s?.Length; // +1
                     var xx = i == 1 ? 1 : 1; // +1
-                }");
+                }",
+              4, 5, 6, 11, 13, 14
+              );
         }
 
         [TestMethod]
         public void Test_08_Conditionals()
         {
-            AssertLinesOfCode(7,
+            AssertLinesOfCode(
               @"
                 void Foo(Exception ex)
                 {
@@ -151,13 +154,14 @@ while (true); // +1
                         break; // +1
                     }
                     return; // +1
-                }");
+                }",
+              4, 5, 6, 8, 10, 11, 13);
         }
 
         [TestMethod]
         public void Test_09_Yields()
         {
-            AssertLinesOfCode(2,
+            AssertLinesOfCode(
               @"
                using System;
                using System.Collections.Generic;
@@ -173,25 +177,27 @@ while (true); // +1
                            yield break; // +1
                        }
                    }
-               }");
+               }",
+               12, 13);
         }
 
         [TestMethod]
         public void Test_10_AccessAndInvocation()
         {
-            AssertLinesOfCode(2,
+            AssertLinesOfCode(
               @"
                 static void Main(string[] args)
                 {
                     var x = args.Length; // +1
                     args.ToString(); // +1
-                }");
+                }",
+              4, 5);
         }
 
         [TestMethod]
         public void Test_11_Initialization()
         {
-            AssertLinesOfCode(2,
+            AssertLinesOfCode(
               @"
                 static string GetString() => "";
 
@@ -205,14 +211,14 @@ while (true); // +1
                         Source = GetString(), // +1
                         HelpLink = ""
                     };
-                }");
+                }",
+              7, 11);
         }
-
 
         [TestMethod]
         public void Test_12_Property_Set()
         {
-            AssertLinesOfCode(1,
+            AssertLinesOfCode(
               @"
                 class Program
                 {
@@ -222,13 +228,14 @@ while (true); // +1
                     {
                         Prop = 1; // + 1
                     }
-                }");
+                }",
+              8);
         }
 
         [TestMethod]
         public void Test_13_Property_Get()
         {
-            AssertLinesOfCode(0,
+            AssertLinesOfCode(
               @"
                 class Program
                 {
@@ -244,7 +251,7 @@ while (true); // +1
         [TestMethod]
         public void Test_14_Lambdas()
         {
-            AssertLinesOfCode(3,
+            AssertLinesOfCode(
               @"
                 using System;
                 using System.Linq;
@@ -258,13 +265,14 @@ while (true); // +1
                             .OrderBy(s => s) // +1
                             .ToList();
                     }
-                }");
+                }",
+              9, 10, 11);
         }
 
         [TestMethod]
         public void Test_15_TryCatch()
         {
-            AssertLinesOfCode(2,
+            AssertLinesOfCode(
               @"
                 using System;
                 class Program
@@ -285,28 +293,30 @@ while (true); // +1
                         {
                         }
                     }
-                }");
+                }",
+              9, 14);
         }
 
         [TestMethod]
         public void Test_16()
         {
-            AssertLinesOfCode(2,
+            AssertLinesOfCode(
              @"using System;
                public void Foo(int x) {
-               int i = 0; if (i == 0) {i++;i--;} else
-               { while(true){i--;} }
-               }");
+               int i = 0; if (i == 0) {i++;i--;} else // +1
+               { while(true){i--;} } // +1
+               }",
+             3, 4);
         }
 
         [TestMethod]
         public void Test_17()
         {
-            AssertLinesOfCode(1,
+            AssertLinesOfCode(
              @"
                 static void Main(string[] args)
                 {
-                    do
+                    do // +1
                     {
 
                     }
@@ -316,7 +326,8 @@ while (true); // +1
                     true
                     )
                     ;
-                }");
+                }",
+             4);
         }
     }
 }
