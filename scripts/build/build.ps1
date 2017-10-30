@@ -130,7 +130,7 @@ function Invoke-SonarBeginAnalysis([array][parameter(ValueFromRemainingArguments
         $remainingArgs += "/d:sonar.verbose=true"
     }
 
-    Exec { & (Get-ScannerMsBuildPath) begin /k:sonaranalyzer-csharp-vbnet /n:"SonarAnalyzer for C#"
+    Exec { & (Get-ScannerMsBuildPath) begin /k:sonaranalyzer-csharp-vbnet /n:"SonarAnalyzer for C#" `
         /d:sonar.host.url=${sonarQubeUrl} /d:sonar.login=$sonarQubeToken $remainingArgs } `
         -errorMessage "ERROR: SonarQube Analysis begin step FAILED."
 }
