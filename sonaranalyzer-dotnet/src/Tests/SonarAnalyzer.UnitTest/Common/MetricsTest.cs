@@ -603,7 +603,7 @@ End Class").Should().BeEquivalentTo(1, 2, 3, 4, 5, 6, 7, 8);
         }
 
         private static int ExecutableLines(AnalyzerLanguage language, string text) =>
-            MetricsFor(language, text).GetExecutableLinesCount();
+            MetricsFor(language, text).ExecutableLinesCount;
 
         [TestMethod]
         [TestCategory(MetricsTestCategoryName)]

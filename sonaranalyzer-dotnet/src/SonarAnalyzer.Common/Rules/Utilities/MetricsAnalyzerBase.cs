@@ -65,7 +65,7 @@ namespace SonarAnalyzer.Rules
                 FunctionCount = metrics.FunctionCount,
                 PublicApiCount = metrics.PublicApiCount,
                 PublicUndocumentedApiCount = metrics.PublicUndocumentedApiCount,
-                ExecutableLines = metrics.GetExecutableLinesCount(),
+                ExecutableLines = metrics.ExecutableLinesCount,
 
                 Complexity = complexity,
                 ComplexityInClasses = metrics.ClassNodes.Sum(metrics.GetComplexity),
