@@ -21,6 +21,10 @@ param (
 Set-StrictMode -version 2.0
 $ErrorActionPreference = "Stop"
 
+if ($PSBoundParameters['Verbose'] -Or $PSBoundParameters['Debug']) {
+    $global:DebugPreference = "Continue"
+}
+
 function Get-BranchName() {
     if ($githubBranch.StartsWith("refs/heads/")) {
         return $githubBranch.Substring(11)
@@ -35,7 +39,7 @@ function Get-PackageUrl([string]$packageName) {
 
 function Get-AuthHeaders() {
     if ((-Not $repoxUserName) -Or (-Not $repoxPassword)) {
-        Write-Warning "Username and password not provided, the NuGet download request will be not authenticated."
+        Write-Host "Username and password not provided, the NuGet download request will be not authenticated."
         return @{ }
     }
 
@@ -62,6 +66,7 @@ function Get-BuildArtifacts() {
             $downloadUrl = Get-PackageUrl "${packageName}.${version}.nupkg"
             $zipPath = Join-Path $tempFolder "${packageName}.${version}.zip"
 
+            Write-Debug "Downloading '${downloadUrl}' at '${zipPath}'"
             Invoke-WebRequest -UseBasicParsing -Uri $downloadUrl -Headers $authHeaders -OutFile $zipPath
 
             if (-Not (Test-Path $zipPath)) {
@@ -73,9 +78,11 @@ function Get-BuildArtifacts() {
 
         $tempAnalyzers = Join-Path $tempFolder "analyzers"
         $binaryFolder = ".\its\binaries"
+        Write-Debug "Copying unzipped items to '${tempAnalyzers}'"
         Copy-Item $tempAnalyzers $binaryFolder -Recurse -Force
     }
     finally {
+        Write-Debug "Removing temp folder '${tempFolder}'"
         Remove-Item $tempFolder -Recurse -Force -ErrorAction Ignore
     }
 }
@@ -93,7 +100,8 @@ function Initialize-ArtifactsStep() {
     ConvertTo-UnixLineEndings $sha1propertiesPath
 
     $content = Get-Content $sha1propertiesPath
-    Write-Host "Successfully created sha1.properties with '${content}'"
+    Write-Debug "Successfully created sha1.properties with '${content}'"
+    Write-Host "Triggering Artifacts job"
 }
 
 try {
@@ -105,6 +113,7 @@ try {
         Initialize-ArtifactsStep
     }
 
+    Write-Host -ForegroundColor Green "SUCCESS: QA job was successful!"
     exit 0
 }
 catch {
