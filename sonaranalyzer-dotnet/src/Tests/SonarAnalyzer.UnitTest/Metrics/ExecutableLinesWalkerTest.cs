@@ -66,7 +66,7 @@ namespace SonarAnalyzer.UnitTest.Common
                         }
                     }
                 }",
-              4, 6);
+                4, 6);
         }
 
         [TestMethod]
@@ -81,7 +81,7 @@ namespace SonarAnalyzer.UnitTest.Common
                     unsafe { } // +1
                     using ((IDisposable)obj) { } // +1
                 }",
-              4 ,5 ,6, 7);
+                4 ,5 ,6, 7);
         }
 
         [TestMethod]
@@ -94,7 +94,7 @@ namespace SonarAnalyzer.UnitTest.Common
                     ; // +1
                     i++; // +1
                 }",
-              4, 5);
+                4, 5);
         }
 
         [TestMethod]
@@ -111,7 +111,7 @@ namespace SonarAnalyzer.UnitTest.Common
                     while // +1
                         (true) { }
                 }",
-              4, 6, 7, 8);
+                4, 6, 7, 8);
         }
 
         [TestMethod]
@@ -133,8 +133,7 @@ namespace SonarAnalyzer.UnitTest.Common
                     var x = s?.Length; // +1
                     var xx = i == 1 ? 1 : 1; // +1
                 }",
-              4, 5, 6, 11, 13, 14
-              );
+                4, 5, 6, 11, 13, 14);
         }
 
         [TestMethod]
@@ -155,7 +154,7 @@ namespace SonarAnalyzer.UnitTest.Common
                     }
                     return; // +1
                 }",
-              4, 5, 6, 8, 10, 11, 13);
+                4, 5, 6, 8, 10, 11, 13);
         }
 
         [TestMethod]
@@ -191,7 +190,7 @@ namespace SonarAnalyzer.UnitTest.Common
                     var x = args.Length; // +1
                     args.ToString(); // +1
                 }",
-              4, 5);
+                4, 5);
         }
 
         [TestMethod]
@@ -212,7 +211,7 @@ namespace SonarAnalyzer.UnitTest.Common
                         HelpLink = ""
                     };
                 }",
-              7, 11);
+                7, 11);
         }
 
         [TestMethod]
@@ -229,7 +228,7 @@ namespace SonarAnalyzer.UnitTest.Common
                         Prop = 1; // + 1
                     }
                 }",
-              8);
+                8);
         }
 
         [TestMethod]
@@ -266,7 +265,7 @@ namespace SonarAnalyzer.UnitTest.Common
                             .ToList();
                     }
                 }",
-              9, 10, 11);
+                9, 10, 11);
         }
 
         [TestMethod]
@@ -294,7 +293,7 @@ namespace SonarAnalyzer.UnitTest.Common
                         }
                     }
                 }",
-              9, 14);
+                9, 14);
         }
 
         [TestMethod]
@@ -306,7 +305,7 @@ namespace SonarAnalyzer.UnitTest.Common
                int i = 0; if (i == 0) {i++;i--;} else // +1
                { while(true){i--;} } // +1
                }",
-             3, 4);
+               3, 4);
         }
 
         [TestMethod]
@@ -327,7 +326,7 @@ namespace SonarAnalyzer.UnitTest.Common
                     )
                     ;
                 }",
-             4);
+                4);
         }
     }
 }

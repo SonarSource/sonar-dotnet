@@ -32,7 +32,6 @@ import org.sonarsource.dotnet.protobuf.SonarAnalyzer.MetricsInfo;
 
 import java.io.Serializable;
 import java.util.HashSet;
-import java.util.List;
 import java.util.function.Predicate;
 
 class MetricsImporter extends ProtobufImporter<SonarAnalyzer.MetricsInfo> {
@@ -86,9 +85,9 @@ class MetricsImporter extends ProtobufImporter<SonarAnalyzer.MetricsInfo> {
       for (Integer executableLineNumber : message.getExecutableLinesList()) {
         fileLinesContext.setIntValue(CoreMetrics.EXECUTABLE_LINES_DATA_KEY, executableLineNumber, 1);
       }
-
-      fileLinesContext.save();
     }
+
+    fileLinesContext.save();
   }
 
   private boolean isSonarQubeGreaterThanOrEqualTo63() {

@@ -31,10 +31,8 @@ import org.sonar.api.issue.NoSonarFilter;
 import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.FileLinesContext;
 import org.sonar.api.measures.FileLinesContextFactory;
-import org.sonarsource.dotnet.protobuf.SonarAnalyzer;
 
 import java.io.*;
-import java.nio.file.Files;
 import java.util.Collection;
 import java.util.Collections;
 
