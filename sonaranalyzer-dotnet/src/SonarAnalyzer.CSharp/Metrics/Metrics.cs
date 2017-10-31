@@ -41,13 +41,13 @@ namespace SonarAnalyzer.Metrics.CSharp
             }
         }
 
-        public override int ExecutableLinesCount
+        public override ICollection<int> ExecutableLines
         {
             get
             {
                 var walker = new ExecutableLinesWalker();
                 walker.Visit(tree.GetRoot());
-                return walker.ExecutableLineCount;
+                return walker.ExecutableLines;
             }
         }
 

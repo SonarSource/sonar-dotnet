@@ -58,8 +58,19 @@ public class CoverageTest {
     } else {
       assertThat(buildResult.getLogs()).contains("C# Unit Tests Coverage Report Import");
     }
-    assertThat(getMeasure("CoverageTest", "lines_to_cover")).isNull();
-    assertThat(getMeasure("CoverageTest", "uncovered_lines")).isNull();
+
+    org.sonarqube.ws.WsMeasures.Measure linesToCover = getMeasure("CoverageTest", "lines_to_cover");
+    org.sonarqube.ws.WsMeasures.Measure uncoveredLines = getMeasure("CoverageTest", "uncovered_lines");
+
+    if (orchestrator.getServer().version().isGreaterThanOrEquals("6.2")) {
+      // In SQ 6.2+, executable lines are calculated even if there is no coverage report
+
+      assertThat(linesToCover.getValue()).isEqualTo("2");
+      assertThat(uncoveredLines.getValue()).isEqualTo("2");
+    } else {
+      assertThat(linesToCover).isNull();
+      assertThat(uncoveredLines).isNull();
+    }
   }
 
   @Test
