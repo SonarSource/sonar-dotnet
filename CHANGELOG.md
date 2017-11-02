@@ -16,7 +16,7 @@ For reference, the possible headings are:
 ## Unreleased
 
 ### Notes
-* [All commits](https://github.com/SonarSource/sonarlint-visualstudio/compare/6.5.0.3766...HEAD)
+* [All commits](https://github.com/SonarSource/sonar-csharp/compare/6.5.0.3766...HEAD)
 
 
 ## [6.5](https://github.com/SonarSource/sonar-csharp/releases/tag/6.5.0.3766)
@@ -36,7 +36,7 @@ For reference, the possible headings are:
 * [#779](https://github.com/SonarSource/sonar-csharp/issues/779) - Rule S4260: "ConstructorArgument" parameters should exist
 
 ### Notes
-* [All commits](https://github.com/SonarSource/sonarlint-visualstudio/compare/6.4.1.3596...6.5.0.3766)
+* [All commits](https://github.com/SonarSource/sonar-csharp/compare/6.4.1.3596...6.5.0.3766)
 
 
 ## [6.4.1](https://github.com/SonarSource/sonar-csharp/releases/tag/6.4.1.3596)
@@ -45,7 +45,7 @@ For reference, the possible headings are:
 * [#791](https://github.com/SonarSource/sonar-csharp/issues/791) - Fix SonarC#: Parameterized rules are not read properly
 
 ### Notes
-* [All commits](https://github.com/SonarSource/sonarlint-visualstudio/compare/6.4.0.3347...6.4.1.3596)
+* [All commits](https://github.com/SonarSource/sonar-csharp/compare/6.4.0.3347...6.4.1.3596)
 
 
 ## [6.4](https://github.com/SonarSource/sonar-csharp/releases/tag/6.4.0.3347)
@@ -91,7 +91,7 @@ For reference, the possible headings are:
 * [#667](https://github.com/SonarSource/sonar-csharp/issues/667) - Rule S2187: Test class should contain test methods
 
 ### Notes
-* [All commits](https://github.com/SonarSource/sonarlint-visualstudio/compare/6.3.0.2862...6.4.0.3347)
+* [All commits](https://github.com/SonarSource/sonar-csharp/compare/6.3.0.2862...6.4.0.3347)
 
 
 ## [6.3](https://github.com/SonarSource/sonar-csharp/releases/tag/6.3.0.2862)
@@ -127,7 +127,7 @@ For reference, the possible headings are:
 * [#585](https://github.com/SonarSource/sonar-csharp/issues/585) - Rule S3717: Track use of "NotImplementedException"
 
 ### Notes
-* [All commits](https://github.com/SonarSource/sonarlint-visualstudio/compare/6.2.0.2536...6.3.0.2862)
+* [All commits](https://github.com/SonarSource/sonar-csharp/compare/6.2.0.2536...6.3.0.2862)
 
 
 ## [6.2](https://github.com/SonarSource/sonar-csharp/releases/tag/6.2.0.2536)
@@ -164,7 +164,7 @@ For reference, the possible headings are:
 * [#517](https://github.com/SonarSource/sonar-csharp/issues/517) - Rule S3649: User-provided values should be sanitized before use in SQL statements
 
 ### Notes
-* [All commits](https://github.com/SonarSource/sonarlint-visualstudio/compare/6.1.0.2359...6.2.0.2536)
+* [All commits](https://github.com/SonarSource/sonar-csharp/compare/6.1.0.2359...6.2.0.2536)
 
 
 ## [6.1](https://github.com/SonarSource/sonar-csharp/releases/tag/6.1.0.2359)
@@ -207,7 +207,7 @@ For reference, the possible headings are:
 * [#461](https://github.com/SonarSource/sonar-csharp/issues/461) - Rule S4035: Classes implementing "IEquatable<T>" should be sealed
 
 ### Notes
-* [All commits](https://github.com/SonarSource/sonarlint-visualstudio/compare/6.0.0.2033...6.1.0.2359)
+* [All commits](https://github.com/SonarSource/sonar-csharp/compare/6.0.0.2033...6.1.0.2359)
 
 
 ## [6.0](https://github.com/SonarSource/sonar-csharp/releases/tag/6.0.0.2033)
@@ -259,7 +259,7 @@ For reference, the possible headings are:
 * [#384](https://github.com/SonarSource/sonar-csharp/issues/384) - Rule S4027: Exceptions should provide standard constructor
 
 ### Notes
-* [All commits](https://github.com/SonarSource/sonarlint-visualstudio/compare/5.11.0.1761...6.0.0.2033)
+* [All commits](https://github.com/SonarSource/sonar-csharp/compare/5.11.0.1761...6.0.0.2033)
 
 
 ## [5.11](https://github.com/SonarSource/sonar-csharp/releases/tag/5.11.0.1761)
@@ -301,4 +301,4 @@ For reference, the possible headings are:
 * [#281](https://github.com/SonarSource/sonar-csharp/issues/281) - Rule S4005: "System.Uri" argument should be passed instead of string
 
 ### Notes
-* [All commits](https://github.com/SonarSource/sonarlint-visualstudio/compare/5.10.1.1411...5.11.0.1761)
+* [All commits](https://github.com/SonarSource/sonar-csharp/compare/5.10.1.1411...5.11.0.1761)
