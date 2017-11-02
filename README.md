@@ -1,5 +1,7 @@
 # SonarC#
 
+[![Waffle.io - Columns and their card count](https://badge.waffle.io/SonarSource/sonar-csharp.svg?columns=all)](https://waffle.io/SonarSource/sonar-csharp)
+
 |Product|Quality Gate|Coverage|
 |:--:|:--:|:--:|
 |Analyzer|[![Quality Gate](https://next.sonarqube.com/sonarqube/api/badges/gate?key=sonaranalyzer-csharp-vbnet)](https://next.sonarqube.com/sonarqube/dashboard?id=sonaranalyzer-csharp-vbnet)|[![Coverage](https://next.sonarqube.com/sonarqube/api/badges/measure?key=sonaranalyzer-csharp-vbnet&metric=coverage)](https://next.sonarqube.com/sonarqube/component_measures/domain/Coverage?id=sonaranalyzer-csharp-vbnet)|
