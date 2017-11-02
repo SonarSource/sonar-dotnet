@@ -1,46 +1,37 @@
 ﻿param($installPath, $toolsPath, $package, $project)
 
-if($project.Type -ne "VB.NET")
-{
+if ($project.Type -ne "VB.NET") {
     return
 }
 
-if ('14.0', '15.0' -notcontains $project.DTE.Version)
-{
+if ('14.0', '15.0' -notcontains $project.DTE.Version) {
     return
 }
 
-if ($project.Object.AnalyzerReferences -eq $null)
-{
+if ($project.Object.AnalyzerReferences -eq $null) {
     return
 }
 
-$analyzersPath = split-path -path $toolsPath -parent
-$analyzersPath = join-path $analyzersPath "analyzers"
+$analyzersPath = Split-Path -Path $toolsPath -Parent
+$analyzersPath = Join-Path $analyzersPath "analyzers"
 
-$analyzerFilePath = join-path $analyzersPath "Google.Protobuf.dll"
-try
-{
+$analyzerFilePath = Join-Path $analyzersPath "Google.Protobuf.dll"
+try {
     $project.Object.AnalyzerReferences.Remove($analyzerFilePath)
 }
-catch
-{
+catch {
 }
 
-$analyzerFilePath = join-path $analyzersPath "SonarAnalyzer.dll"
-try
-{
+$analyzerFilePath = Join-Path $analyzersPath "SonarAnalyzer.dll"
+try {
     $project.Object.AnalyzerReferences.Remove($analyzerFilePath)
 }
-catch
-{
+catch {
 }
 
-$analyzerFilePath = join-path $analyzersPath "SonarAnalyzer.VisualBasic.dll"
-try
-{
+$analyzerFilePath = Join-Path $analyzersPath "SonarAnalyzer.VisualBasic.dll"
+try {
     $project.Object.AnalyzerReferences.Remove($analyzerFilePath)
 }
-catch
-{
+catch {
 }
