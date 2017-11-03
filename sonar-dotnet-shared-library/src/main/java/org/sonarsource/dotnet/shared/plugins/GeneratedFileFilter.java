@@ -26,11 +26,8 @@ import org.sonar.api.utils.log.Loggers;
 import org.sonarsource.dotnet.shared.plugins.protobuf.FileMetadataImporter;
 import org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters;
 
-import javax.swing.text.StyledEditorKit;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 
 import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.FILEMETADATA_OUTPUT_PROTOBUF_NAME;
