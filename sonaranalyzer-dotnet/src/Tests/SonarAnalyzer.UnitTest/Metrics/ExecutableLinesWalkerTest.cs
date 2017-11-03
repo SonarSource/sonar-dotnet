@@ -328,5 +328,24 @@ namespace SonarAnalyzer.UnitTest.Common
                 }",
                 4);
         }
+
+        [TestMethod]
+        public void Test_18_ExcludeFromTestCoverage()
+        {
+            AssertLinesOfCode(
+              @"using System.Diagnostics.CodeAnalysis;
+                namespace project_1
+                {
+                    public class ComplicatedCode
+                    {
+                        [ExcludeFromCodeCoverage]
+                        public string ComplexFoo()
+                        {
+                            string text = null;
+                            return text.ToLower();
+                        }
+                    }
+                }");
+        }
     }
 }

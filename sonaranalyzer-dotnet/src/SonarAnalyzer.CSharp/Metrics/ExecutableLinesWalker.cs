@@ -18,9 +18,12 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Metrics.CSharp
@@ -29,16 +32,29 @@ namespace SonarAnalyzer.Metrics.CSharp
     {
         private readonly HashSet<int> executableLineNumbers = new HashSet<int>();
 
+        private static readonly string[] ExcludeAttrs =
+            {
+                "ExcludeFromCodeCoverage",
+                "ExcludeFromCodeCoverageAttribute"
+            };
+
         public ICollection<int> ExecutableLines => executableLineNumbers;
 
         public override void DefaultVisit(SyntaxNode node)
         {
-            FindExecutableLines(node);
-            base.DefaultVisit(node);
+            if (FindExecutableLines(node))
+            {
+                base.DefaultVisit(node);
+            }
         }
 
-        private void FindExecutableLines(SyntaxNode node)
+        private bool FindExecutableLines(SyntaxNode node)
         {
+            if (HasExcludedCodeAttribute(node))
+            {
+                return false;
+            }
+
             var kind = node.Kind();
             switch (kind)
             {
@@ -81,11 +97,31 @@ namespace SonarAnalyzer.Metrics.CSharp
 
                 case SyntaxKind.ArrayInitializerExpression:
                     executableLineNumbers.Add(node.GetLocation().GetLineNumberToReport());
-                    return;
+                    return true;
 
                 default:
-                    return;
+                    return true;
             }
+        }
+
+        private static bool HasExcludedCodeAttribute(SyntaxNode node)
+        {
+            return node
+                .DescendantNodesAndSelf()
+                .Select(GetAttributeName)
+                .Any(IsExcludedAttribute);
+        }
+
+        private static string GetAttributeName(SyntaxNode node)
+        {
+            var attribute = node as AttributeSyntax;
+            return attribute?.Name.ToString() ?? string.Empty;
+        }
+
+        private static bool IsExcludedAttribute(string attributeName)
+        {
+            return ExcludeAttrs.Any(attr =>
+                attributeName.EndsWith(attr, StringComparison.Ordinal));
         }
     }
 }
