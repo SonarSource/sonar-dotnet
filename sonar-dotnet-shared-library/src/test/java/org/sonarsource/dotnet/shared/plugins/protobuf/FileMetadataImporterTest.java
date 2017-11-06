@@ -23,6 +23,8 @@ import com.google.protobuf.AbstractParser;
 import org.junit.Test;
 import org.sonarsource.dotnet.protobuf.SonarAnalyzer;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -37,10 +39,10 @@ public class FileMetadataImporterTest {
 
     SonarAnalyzer.FileMetadataInfo.Builder builder = SonarAnalyzer.FileMetadataInfo.newBuilder();
 
-    SonarAnalyzer.FileMetadataInfo message1 = builder.setIsGenerated(true).setFilePath("file1").build();
-    SonarAnalyzer.FileMetadataInfo message2 = builder.setIsGenerated(true).setFilePath("file2").build();
-    SonarAnalyzer.FileMetadataInfo message3 = builder.setIsGenerated(false).setFilePath("file3").build();
-    SonarAnalyzer.FileMetadataInfo messageSamePath = builder.setIsGenerated(false).setFilePath("file3").build();
+    SonarAnalyzer.FileMetadataInfo message1 = builder.setIsGenerated(true).setFilePath("c:\\file1").build();
+    SonarAnalyzer.FileMetadataInfo message2 = builder.setIsGenerated(true).setFilePath("c:\\file2").build();
+    SonarAnalyzer.FileMetadataInfo message3 = builder.setIsGenerated(false).setFilePath("c:\\file3").build();
+    SonarAnalyzer.FileMetadataInfo messageSamePath = builder.setIsGenerated(false).setFilePath("c:/file3").build();
 
     fileMetadataImporter.consume(message1);
     fileMetadataImporter.consume(message2);
@@ -48,13 +50,13 @@ public class FileMetadataImporterTest {
     fileMetadataImporter.consume(messageSamePath);
 
     // Act
-    Set<String> paths = fileMetadataImporter.getGeneratedFilePaths();
+    Set<Path> paths = fileMetadataImporter.getGeneratedFilePaths();
 
     // Assert
     assertThat(paths.size()).isEqualTo(2);
-    assertThat(paths.contains("file1")).isTrue();
-    assertThat(paths.contains("file2")).isTrue();
-    assertThat(paths.contains("file3")).isFalse();
+    assertThat(paths.contains(Paths.get("c:\\file1"))).isTrue();
+    assertThat(paths.contains(Paths.get("c:/file2"))).isTrue();
+    assertThat(paths.contains(Paths.get("c:/file3"))).isFalse();
   }
 
   @Test
@@ -66,7 +68,7 @@ public class FileMetadataImporterTest {
     // No consume calls means that the protobuf contained no messages
 
     // Act
-    Set<String> paths = fileMetadataImporter.getGeneratedFilePaths();
+    Set<Path> paths = fileMetadataImporter.getGeneratedFilePaths();
 
     // Assert
     assertThat(paths.isEmpty()).isTrue();
