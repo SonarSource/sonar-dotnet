@@ -32,7 +32,7 @@ namespace SonarAnalyzer.Metrics.CSharp
     {
         private readonly HashSet<int> executableLineNumbers = new HashSet<int>();
 
-        private static readonly string[] ExcludeAttrs =
+        private static readonly string[] ExcludeFromCoverageAttributes =
             {
                 "ExcludeFromCodeCoverage",
                 "ExcludeFromCodeCoverageAttribute"
@@ -50,11 +50,6 @@ namespace SonarAnalyzer.Metrics.CSharp
 
         private bool FindExecutableLines(SyntaxNode node)
         {
-            if (HasExcludedCodeAttribute(node))
-            {
-                return false;
-            }
-
             var kind = node.Kind();
             switch (kind)
             {
@@ -99,28 +94,45 @@ namespace SonarAnalyzer.Metrics.CSharp
                     executableLineNumbers.Add(node.GetLocation().GetLineNumberToReport());
                     return true;
 
+                case SyntaxKind.StructDeclaration:
+                case SyntaxKind.ClassDeclaration:
+                    var typeDeclarationSyntax = (BaseTypeDeclarationSyntax)node;
+                    return !HasExcludedCodeAttribute(typeDeclarationSyntax.AttributeLists);
+
+                case SyntaxKind.MethodDeclaration:
+                    var methodSyntax = (BaseMethodDeclarationSyntax)node;
+                    return !HasExcludedCodeAttribute(methodSyntax.AttributeLists);
+
+                case SyntaxKind.PropertyDeclaration:
+                    var propertySyntax = (PropertyDeclarationSyntax)node;
+                    return !HasExcludedCodeAttribute(propertySyntax.AttributeLists);
+
+                case SyntaxKind.EventDeclaration:
+                    var eventSyntax = (EventDeclarationSyntax)node;
+                    return !HasExcludedCodeAttribute(eventSyntax.AttributeLists);
+
                 default:
                     return true;
             }
         }
 
-        private static bool HasExcludedCodeAttribute(SyntaxNode node)
+        private bool HasExcludedCodeAttribute(SyntaxList<AttributeListSyntax> attributeSyntaxLists)
         {
-            return node
-                .DescendantNodesAndSelf()
+            var attributes = attributeSyntaxLists.SelectMany(attributeList => attributeList.Attributes);
+            return attributes
+                .OfType<AttributeSyntax>()
                 .Select(GetAttributeName)
                 .Any(IsExcludedAttribute);
         }
 
-        private static string GetAttributeName(SyntaxNode node)
+        private static string GetAttributeName(AttributeSyntax attribute)
         {
-            var attribute = node as AttributeSyntax;
-            return attribute?.Name.ToString() ?? string.Empty;
+            return attribute?.Name?.ToString() ?? string.Empty;
         }
 
         private static bool IsExcludedAttribute(string attributeName)
         {
-            return ExcludeAttrs.Any(attr =>
+            return ExcludeFromCoverageAttributes.Any(attr =>
                 attributeName.EndsWith(attr, StringComparison.Ordinal));
         }
     }
