@@ -1,0 +1,6 @@
+{
+  "rules-metadata-path": ".\\sonaranalyzer-dotnet\\rspec\\cs",
+  "languages": [
+    "CSH"
+  ]
+}
