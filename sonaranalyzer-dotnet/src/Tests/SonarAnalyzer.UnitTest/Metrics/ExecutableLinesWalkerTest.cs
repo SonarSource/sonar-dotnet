@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
 using FluentAssertions;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -327,6 +328,115 @@ namespace SonarAnalyzer.UnitTest.Common
                     ;
                 }",
                 4);
+        }
+
+        [TestMethod]
+        public void Test_18_ExcludeFromTestCoverage()
+        {
+            AssertLinesOfCode(
+              @"using System.Diagnostics.CodeAnalysis;
+                namespace project_1
+                {
+                    public class ComplicatedCode
+                    {
+                        [ExcludeFromCodeCoverage]
+                        public string ComplexFoo()
+                        {
+                            string text = null;
+                            return text.ToLower();
+                        }
+
+                        [SomeAttribute]
+                        public string ComplexFoo2()
+                        {
+                            string text = null;
+                            return text.ToLower(); // +1
+                        }
+                    }
+                }",
+                17);
+        }
+
+        [TestMethod]
+        public void Test_19_ExcludeFromTestCoverage_Variants()
+        {
+            var attributeVariants = new List<string>
+            {
+                "ExcludeFromCodeCoverage",
+                "ExcludeFromCodeCoverage()",
+                "ExcludeFromCodeCoverageAttribute",
+                "ExcludeFromCodeCoverageAttribute()",
+                "System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute()"
+            };
+
+            attributeVariants.ForEach(attr => AssertLinesOfCode(GenerateTest(attr)));
+        }
+
+        private static string GenerateTest(string attribute)
+        {
+            return @"using System.Diagnostics.CodeAnalysis;
+                namespace project_1
+                {
+                    public class ComplicatedCode
+                    {
+                        [" + attribute + @"]
+                        public string ComplexFoo()
+                        {
+                            string text = null;
+                            return text.ToLower();
+                        }
+                    }
+                }";
+        }
+
+        [TestMethod]
+        public void Test_20_ExcludeClassFromTestCoverage()
+        {
+            AssertLinesOfCode(
+              @"
+                using System;
+                [ExcludeFromCodeCoverage]
+                class Program
+                {
+                    static void Main(string[] args)
+                    {
+                        Main(null);
+                    }
+                }");
+        }
+
+        [TestMethod]
+        public void Test_21_ExcludeStructFromTestCoverage()
+        {
+            AssertLinesOfCode(
+              @"namespace project_1
+                {
+                    [ExcludeFromCodeCoverage]
+                    struct Program
+                    {
+                        static void Foo()
+                        {
+                            Foo();
+                        }
+                    }
+                }");
+        }
+
+        [TestMethod]
+        public void Test_22_ExcludePropertyFromTestCoverage()
+        {
+            AssertLinesOfCode(
+              @"[ExcludeFromCodeCoverage]
+                class Program
+                {
+                    int FooProperty
+                    {
+                        get
+                        {
+                            return 1;
+                        }
+                    }
+                }");
         }
     }
 }
