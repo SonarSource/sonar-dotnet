@@ -1,8 +1,8 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <MainVersion>6.6.0</MainVersion>
+    <MainVersion>6.7.0</MainVersion>
     <BuildNumber>0</BuildNumber>
-    <MilestoneVersion>6.6</MilestoneVersion>
+    <MilestoneVersion>6.7</MilestoneVersion>
     <Sha1>f3bccbf5bee16073c7ba18bc8dee5d3358bd21d8</Sha1>
     <BranchName>improve-build-script</BranchName>
     <FullVersion>$(MainVersion).$(BuildNumber)</FullVersion>
