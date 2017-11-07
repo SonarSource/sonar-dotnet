@@ -3,7 +3,7 @@
 using System;
 namespace SomeNamespace
 {
-    class Class_01
+    class Class_01_1
     {
         static void Method(string[] args)
         {
