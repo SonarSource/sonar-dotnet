@@ -36,7 +36,7 @@ $ErrorActionPreference = "Stop"
 $RuleTemplateFolder = "${PSScriptRoot}\\rspec-templates"
 
 # Update the following variable when a new version of rule-api has to be used.
-$rule_api_version = "1.16.0.954"
+$rule_api_version = "1.17.0.1017"
 $rule_api_error = "Download Rule-api from " + `
     "'https://repox.sonarsource.com/sonarsource-private-releases/com/sonarsource/rule-api/rule-api/${rule_api_version}' " +`
     "to a folder and set the %rule_api_path% environment variable with the full path of that folder. For example 'c:\\work\\tools'."
@@ -203,7 +203,7 @@ function CreateStringResources($lang, $rules) {
     [void]$resources.Sort()
 
     [void]$resources.Add("HelpLinkFormat=https://rules.sonarsource.com/$($helpLanguageMap.Get_Item($lang))/RSPEC-{0}")
-    
+
     $rawResourcesPath = "${PSScriptRoot}\\${lang}_strings.restext"
     $resourcesPath = "${sonaranalyzerPath}\\src\\$($projectsMap.Get_Item($lang))\\RspecStrings.resx"
 
@@ -245,11 +245,11 @@ function GenerateVbRuleClasses($language) {
     else {
         $filesMap["VbNetTestTemplate.cs"] = "${ruleTestsFolder}\\${className}Test.cs"
     }
-    
+
     $filesMap["CommonBaseClassTemplate.cs"] = "${commonRulesFolder}\\${className}Base.cs"
     $filesMap["VbNetRuleTemplate.cs"] = "${vbRulesFolder}\\${className}.cs"
     $filesMap["VbNetTestCaseTemplate.vb"] = "${vbRuleTestCasesFolder}\\${className}.vb"
-    
+
     WriteClasses -filesMap $filesMap
 }
 
