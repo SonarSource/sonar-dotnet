@@ -61,7 +61,6 @@ public class CSharpPluginTest {
       expectedExtensions.length
         + CSharpCodeCoverageProvider.extensions().size()
         + CSharpUnitTestResultsProvider.extensions().size()
-        + CSharpMsBuildIntegrationProvider.extensions().size()
         + RoslynProfileExporter.sonarLintRepositoryProperties().size());
   }
 
