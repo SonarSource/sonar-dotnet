@@ -29,7 +29,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void LineLength()
         {
-            var diagnosticCs = new SonarAnalyzer.Rules.CSharp.LineLength {Maximum = 127};
+            var diagnosticCs = new SonarAnalyzer.Rules.CSharp.LineLength { Maximum = 127 };
             Verifier.VerifyAnalyzer(@"TestCases\LineLength.cs", diagnosticCs);
 
             var diagnosticVb = new SonarAnalyzer.Rules.VisualBasic.LineLength { Maximum = 127 };
