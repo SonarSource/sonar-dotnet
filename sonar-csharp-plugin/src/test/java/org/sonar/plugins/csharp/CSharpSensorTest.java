@@ -19,196 +19,115 @@
  */
 package org.sonar.plugins.csharp;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-import static org.sonar.plugins.csharp.CSharpSonarRulesDefinition.REPOSITORY_KEY;
-
 import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
-import java.nio.file.StandardOpenOption;
-
-import org.apache.commons.lang.StringEscapeUtils;
-import org.apache.commons.lang.StringUtils;
-import org.assertj.core.groups.Tuple;
+import java.util.List;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.rules.TemporaryFolder;
 import org.sonar.api.batch.fs.internal.DefaultInputFile;
-import org.sonar.api.batch.fs.internal.FileMetadata;
 import org.sonar.api.batch.rule.internal.ActiveRulesBuilder;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
-import org.sonar.api.config.Settings;
-import org.sonar.api.issue.NoSonarFilter;
-import org.sonar.api.measures.FileLinesContext;
-import org.sonar.api.measures.FileLinesContextFactory;
+import org.sonar.api.internal.google.common.collect.ImmutableList;
+import org.sonar.api.internal.google.common.collect.ImmutableMap;
 import org.sonar.api.rule.RuleKey;
 import org.sonar.api.utils.MessageException;
 import org.sonar.api.utils.System2;
-import org.sonarsource.dotnet.protobuf.SonarAnalyzer.EncodingInfo;
+import org.sonar.api.utils.log.LogTester;
+import org.sonar.api.utils.log.LoggerLevel;
+import org.sonarsource.dotnet.shared.plugins.ProtobufDataImporter;
+import org.sonarsource.dotnet.shared.plugins.RoslynDataImporter;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyZeroInteractions;
+import static org.mockito.Mockito.when;
 
 public class CSharpSensorTest {
-
+  @Rule
+  public LogTester logTester = new LogTester();
   @Rule
   public ExpectedException thrown = ExpectedException.none();
-
   @Rule
   public TemporaryFolder temp = new TemporaryFolder();
 
-  private CSharpSensor sensor;
-  private Settings settings;
-  private DefaultInputFile inputFile;
-  private FileLinesContext fileLinesContext;
-  private FileLinesContextFactory fileLinesContextFactory;
-  private NoSonarFilter noSonarFilter;
-  private SensorContextTester tester;
-  private System2 system;
+  private System2 system = mock(System2.class);
+  private RoslynDataImporter roslynDataImporter = mock(RoslynDataImporter.class);
+  private ProtobufDataImporter protobufDataImporter = mock(ProtobufDataImporter.class);
+  private CSharpConfiguration csConfigConfiguration = mock(CSharpConfiguration.class);
 
+  private SensorContextTester tester;
+  private CSharpSensor sensor;
   private Path workDir;
 
   @Before
   public void prepare() throws Exception {
     workDir = temp.newFolder().toPath();
-    Path srcDir = Paths.get("src/test/resources/CSharpSensorTest");
-    Files.walk(srcDir).forEach(path -> {
-      if (Files.isDirectory(path)) {
-        return;
-      }
-      Path relativized = srcDir.relativize(path);
-      try {
-        Path destFile = workDir.resolve(relativized);
-        if (!Files.exists(destFile.getParent())) {
-          Files.createDirectories(destFile.getParent());
-        }
-        Files.copy(path, destFile, StandardCopyOption.COPY_ATTRIBUTES, StandardCopyOption.REPLACE_EXISTING);
-      } catch (Exception e) {
-        throw new IllegalStateException(e);
-      }
-    });
-    File csFile = new File("src/test/resources/Program.cs").getAbsoluteFile();
-
-    EncodingInfo msg = EncodingInfo.newBuilder().setEncoding("UTF-8").setFilePath(csFile.getAbsolutePath()).build();
-    try (OutputStream output = Files.newOutputStream(workDir.resolve("output-cs\\encoding.pb"))) {
-      msg.writeDelimitedTo(output);
-    } catch (IOException e) {
-      throw new IllegalStateException("could not save message to file", e);
-    }
-
-    Path roslynReportPath = workDir.resolve("roslyn-report.json");
-    String report = new String(Files.readAllBytes(roslynReportPath), StandardCharsets.UTF_8);
-    Files.write(roslynReportPath, StringUtils.replace(report, "Program.cs",
-      StringEscapeUtils.escapeJavaScript(csFile.getAbsolutePath())).getBytes(StandardCharsets.UTF_8),
-      StandardOpenOption.WRITE);
-
     tester = SensorContextTester.create(new File("src/test/resources"));
     tester.fileSystem().setWorkDir(workDir.toFile());
+    when(system.isOsWindows()).thenReturn(true);
+    sensor = new CSharpSensor(csConfigConfiguration, system, protobufDataImporter, roslynDataImporter);
+  }
 
-    inputFile = new DefaultInputFile(tester.module().key(), "Program.cs")
-      .setLanguage(CSharpPlugin.LANGUAGE_KEY)
-      .initMetadata(new FileMetadata().readMetadata(new FileReader(csFile)));
+  private void addFileToFs() {
+    DefaultInputFile inputFile = new DefaultInputFile("mod", "file.cs").setLanguage(CSharpPlugin.LANGUAGE_KEY);
     tester.fileSystem().add(inputFile);
-
-    fileLinesContext = mock(FileLinesContext.class);
-    fileLinesContextFactory = mock(FileLinesContextFactory.class);
-    when(fileLinesContextFactory.createFor(inputFile)).thenReturn(fileLinesContext);
-
-    noSonarFilter = mock(NoSonarFilter.class);
-    settings = new Settings();
-
-    system = mock(System2.class);
-
-    CSharpConfiguration csConfigConfiguration = new CSharpConfiguration(settings);
-    sensor = new CSharpSensor(settings, fileLinesContextFactory, noSonarFilter, csConfigConfiguration, system);
   }
 
   @Test
-  public void roslynReportIsProcessed() throws IOException {
+  public void noProtobufFilesShouldNotFail() {
+    addFileToFs();
+    when(csConfigConfiguration.areProtobufReportsPresent()).thenReturn(false);
+    when(csConfigConfiguration.isRoslynReportPresent()).thenReturn(true);
+    when(csConfigConfiguration.roslynReportPath()).thenReturn(workDir.getRoot());
     tester.setActiveRules(new ActiveRulesBuilder()
-      .create(RuleKey.of(REPOSITORY_KEY, "S1186"))
+      .create(RuleKey.of(CSharpSonarRulesDefinition.REPOSITORY_KEY, "S1186"))
       .activate()
-      .create(RuleKey.of(REPOSITORY_KEY, "[parameters_key]"))
+      .create(RuleKey.of(CSharpSonarRulesDefinition.REPOSITORY_KEY, "[parameters_key]"))
       .activate()
       .create(RuleKey.of("roslyn.foo", "custom-roslyn"))
       .activate()
       .build());
 
-    settings.setProperty(CSharpConfiguration.ROSLYN_REPORT_PATH_PROPERTY_KEY, workDir.resolve("roslyn-report.json").toString());
-    createProtobufOut();
+    sensor.execute(tester);
 
-    sensor.executeInternal(tester);
-
-    assertThat(tester.allIssues())
-      .extracting("ruleKey", "primaryLocation.textRange.start.line", "primaryLocation.message")
-      .containsOnly(
-        Tuple.tuple(RuleKey.of(REPOSITORY_KEY, "[parameters_key]"), 19,
-          "Short messages should be used first in Roslyn reports"),
-        Tuple.tuple(RuleKey.of(REPOSITORY_KEY, "[parameters_key]"), 1,
-          "There only is a full message in the Roslyn report"),
-        Tuple.tuple(RuleKey.of("roslyn.foo", "custom-roslyn"), 19,
-          "Custom Roslyn analyzer message"),
-        Tuple.tuple(RuleKey.of(REPOSITORY_KEY, "[parameters_key]"), null,
-          "This is an assembly level Roslyn issue with no location")
-
-    );
+    verify(csConfigConfiguration).areProtobufReportsPresent();
+    verifyZeroInteractions(protobufDataImporter);
+    // {"sonaranalyzer-cs" = [csharpsquid:S1186, csharpsquid:[parameters_key]], "foo" = [roslyn.foo:custom-roslyn]}
+    ImmutableMap<String, List<RuleKey>> expectedMap = ImmutableMap.of(
+      "sonaranalyzer-cs", ImmutableList.of(RuleKey.of("csharpsquid", "S1186"), RuleKey.of("csharpsquid", "[parameters_key]")),
+      "foo", ImmutableList.of(RuleKey.of("roslyn.foo", "custom-roslyn")));
+    verify(roslynDataImporter).importRoslynReport(workDir.getRoot(), tester, expectedMap);
   }
 
   @Test
-  public void roslynEmptyReportShouldNotFail() throws IOException {
-    settings.setProperty(CSharpConfiguration.ROSLYN_REPORT_PATH_PROPERTY_KEY, workDir.resolve("roslyn-report-empty.json").toString());
-    createProtobufOut();
-    sensor.executeInternal(tester);
+  public void noRoslynReportShouldNotFail() {
+    addFileToFs();
+    when(csConfigConfiguration.areProtobufReportsPresent()).thenReturn(true);
+    when(csConfigConfiguration.isRoslynReportPresent()).thenReturn(false);
+    when(csConfigConfiguration.protobufReportPath()).thenReturn(workDir.getRoot());
+    sensor.execute(tester);
+
+    verify(csConfigConfiguration).areProtobufReportsPresent();
+    verify(protobufDataImporter).importResults(tester, workDir.getRoot(), CSharpSonarRulesDefinition.REPOSITORY_KEY, true);
+    verifyZeroInteractions(roslynDataImporter);
   }
 
   @Test
-  public void failWithDuplicateRuleKey() throws IOException {
-    tester.setActiveRules(new ActiveRulesBuilder()
-      .create(RuleKey.of(REPOSITORY_KEY, "[parameters_key]"))
-      .activate()
-      .create(RuleKey.of("roslyn.foo", "[parameters_key]"))
-      .activate()
-      .build());
+  public void noAnalysisIfNoFilesDetected() throws Exception {
+    sensor.execute(tester);
 
-    settings.setProperty(CSharpConfiguration.ROSLYN_REPORT_PATH_PROPERTY_KEY, workDir.resolve("roslyn-report.json").toString());
-    createProtobufOut();
-    thrown.expectMessage("Rule keys must be unique, but \"[parameters_key]\" is defined in both the \"csharpsquid\" and \"roslyn.foo\" rule repositories.");
-
-    sensor.executeInternal(tester);
-  }
-
-  private void createProtobufOut() throws IOException {
-    Path path = workDir.resolve("report");
-    Path outputCs = path.resolve("output-cs");
-    Files.createDirectories(outputCs);
-    Files.createFile(outputCs.resolve("dummy.pb"));
-    settings.setProperty(CSharpConfiguration.ANALYZER_PROJECT_OUT_PATH_PROPERTY_KEY, path.toString());
-
-  }
-
-  @Test
-  public void noAnalysisIsExecutedOnEmptyContext() throws Exception {
-    tester = SensorContextTester.create(new File("src/test/resources"));
-
-    CSharpSensor spy = spy(sensor);
-    spy.execute(tester);
-
-    verify(spy, never()).executeInternal(tester);
+    assertThat(logTester.logs(LoggerLevel.DEBUG)).hasSize(1);
+    assertThat(logTester.logs(LoggerLevel.DEBUG).get(0)).isEqualTo("No files to analyze. Skip Sensor.");
   }
 
   @Test
   public void failWhenOsIsNotWindows() throws MessageException {
     // Arrange
+    addFileToFs();
     when(system.isOsWindows()).thenReturn(false);
 
     // Assert exception
@@ -222,14 +141,10 @@ public class CSharpSensorTest {
   @Test
   public void doNotFail_WhenOsIsNotWindows_And_NoCS_FilesDetected() throws MessageException {
     // Arrange
-    // Empty context, no C# files to analyze
-    tester = SensorContextTester.create(new File("src/test/resources"));
-    // Non-windows OS
     when(system.isOsWindows()).thenReturn(false);
 
     // Act
     sensor.execute(tester);
-
-    // No exceptions thrown
   }
+
 }

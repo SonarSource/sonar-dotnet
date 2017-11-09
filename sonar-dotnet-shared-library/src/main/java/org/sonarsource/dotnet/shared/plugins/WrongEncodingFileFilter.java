@@ -45,7 +45,7 @@ public class WrongEncodingFileFilter implements InputFileFilter {
    */
   private synchronized void initOnce() {
     if (!init) {
-      encodingPerFile.init(config.protobufReportPathFromScanner());
+      encodingPerFile.init(config.protobufReportPath());
       init = true;
     }
   }

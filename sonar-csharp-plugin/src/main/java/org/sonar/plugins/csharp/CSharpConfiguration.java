@@ -33,17 +33,17 @@ public class CSharpConfiguration extends AbstractConfiguration {
   }
 
   @Override
-  public String getRoslynJsonReportPathProperty() {
+  protected String getRoslynJsonReportPathProperty() {
     return ROSLYN_REPORT_PATH_PROPERTY_KEY;
   }
 
   @Override
-  public String getAnalyzerWorkDirProperty() {
+  protected String getAnalyzerWorkDirProperty() {
     return ANALYZER_PROJECT_OUT_PATH_PROPERTY_KEY;
   }
 
   @Override
-  public String getAnalyzerReportDir() {
+  protected String getAnalyzerReportDir() {
     return ANALYSIS_OUTPUT_DIRECTORY_NAME;
   }
 
