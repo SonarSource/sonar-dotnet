@@ -27,6 +27,8 @@ import org.sonar.api.config.PropertyDefinition;
 import org.sonar.api.utils.Version;
 import org.sonarsource.dotnet.shared.plugins.EncodingPerFile;
 import org.sonarsource.dotnet.shared.plugins.GeneratedFileFilter;
+import org.sonarsource.dotnet.shared.plugins.ProtobufDataImporter;
+import org.sonarsource.dotnet.shared.plugins.RoslynDataImporter;
 import org.sonarsource.dotnet.shared.plugins.WrongEncodingFileFilter;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -52,6 +54,8 @@ public class CSharpPluginTest {
       GeneratedFileFilter.class,
       SonarLintProfileExporter.class,
       SonarLintFakeProfileImporter.class,
+      ProtobufDataImporter.class,
+      RoslynDataImporter.class,
       RoslynProfileExporter.class
     };
 

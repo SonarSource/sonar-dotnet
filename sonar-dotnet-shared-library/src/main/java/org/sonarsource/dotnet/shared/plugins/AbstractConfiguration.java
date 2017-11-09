@@ -41,18 +41,18 @@ public abstract class AbstractConfiguration {
     this.settings = settings;
   }
 
-  public abstract String getRoslynJsonReportPathProperty();
+  protected abstract String getRoslynJsonReportPathProperty();
 
-  public abstract String getAnalyzerWorkDirProperty();
+  protected abstract String getAnalyzerWorkDirProperty();
 
-  public abstract String getAnalyzerReportDir();
+  protected abstract String getAnalyzerReportDir();
 
   public boolean areProtobufReportsPresent() {
     if (!settings.hasKey(getAnalyzerWorkDirProperty())) {
       LOG.warn("Property missing: '" + getAnalyzerWorkDirProperty() + "'. No protobuf files will be loaded.");
       return false;
     }
-    Path analyzerOutputDir = protobufReportPathFromScanner();
+    Path analyzerOutputDir = protobufReportPath();
 
     if (!analyzerOutputDir.toFile().exists()) {
       LOG.warn("Analyzer working directory does not exist: " + analyzerOutputDir.toAbsolutePath() + ". No protobuf files will be loaded.");
@@ -72,7 +72,19 @@ public abstract class AbstractConfiguration {
     }
   }
 
-  public Path protobufReportPathFromScanner() {
+  public boolean isRoslynReportPresent() {
+    return settings.hasKey(getRoslynJsonReportPathProperty());
+  }
+
+  public Path roslynReportPath() {
+    return Paths.get(settings.getString(getRoslynJsonReportPathProperty()));
+  }
+
+  /**
+   * Returns path of the directory containing all protobuf files.
+   * Check if it exists with {@link AbstractConfiguration#areProtobufReportsPresent()}.
+   */
+  public Path protobufReportPath() {
     String analyzerWorkDirPath = settings.getString(getAnalyzerWorkDirProperty());
     return Paths.get(analyzerWorkDirPath, getAnalyzerReportDir());
   }

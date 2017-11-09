@@ -25,6 +25,8 @@ import org.sonar.api.Property;
 import org.sonar.api.PropertyType;
 import org.sonarsource.dotnet.shared.plugins.EncodingPerFile;
 import org.sonarsource.dotnet.shared.plugins.GeneratedFileFilter;
+import org.sonarsource.dotnet.shared.plugins.ProtobufDataImporter;
+import org.sonarsource.dotnet.shared.plugins.RoslynDataImporter;
 import org.sonarsource.dotnet.shared.plugins.WrongEncodingFileFilter;
 
 @Properties({
@@ -67,6 +69,8 @@ public class CSharpPlugin implements Plugin {
       GeneratedFileFilter.class,
       SonarLintProfileExporter.class,
       SonarLintFakeProfileImporter.class,
+      ProtobufDataImporter.class,
+      RoslynDataImporter.class,
       RoslynProfileExporter.class);
 
     context.addExtensions(CSharpCodeCoverageProvider.extensions());

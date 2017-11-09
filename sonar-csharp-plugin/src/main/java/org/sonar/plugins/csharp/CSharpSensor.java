@@ -19,46 +19,40 @@
  */
 package org.sonar.plugins.csharp;
 
-import static java.util.stream.Collectors.toList;
-
 import java.io.File;
 import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.batch.fs.InputFile.Type;
 import org.sonar.api.batch.rule.ActiveRule;
 import org.sonar.api.batch.sensor.Sensor;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
-import org.sonar.api.config.Settings;
-import org.sonar.api.issue.NoSonarFilter;
-import org.sonar.api.measures.FileLinesContextFactory;
 import org.sonar.api.rule.RuleKey;
 import org.sonar.api.utils.MessageException;
 import org.sonar.api.utils.System2;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
-import org.sonarsource.dotnet.shared.plugins.AbstractSensor;
-import org.sonarsource.dotnet.shared.sarif.SarifParserCallback;
-import org.sonarsource.dotnet.shared.sarif.SarifParserFactory;
+import org.sonarsource.dotnet.shared.plugins.ProtobufDataImporter;
+import org.sonarsource.dotnet.shared.plugins.RoslynDataImporter;
 
-public class CSharpSensor extends AbstractSensor implements Sensor {
+import static java.util.stream.Collectors.toList;
+
+public class CSharpSensor implements Sensor {
 
   private static final Logger LOG = Loggers.get(CSharpSensor.class);
 
-  private final Settings settings;
   private final CSharpConfiguration config;
   private final System2 system;
+  private final ProtobufDataImporter protobufDataImporter;
+  private final RoslynDataImporter roslynDataImporter;
 
-  public CSharpSensor(Settings settings, FileLinesContextFactory fileLinesContextFactory, NoSonarFilter noSonarFilter, CSharpConfiguration config, System2 system) {
-    super(fileLinesContextFactory, noSonarFilter, config, CSharpSonarRulesDefinition.REPOSITORY_KEY);
-    this.settings = settings;
+  public CSharpSensor(CSharpConfiguration config, System2 system, ProtobufDataImporter protobufDataImporter, RoslynDataImporter roslynDataImporter) {
     this.config = config;
     this.system = system;
+    this.protobufDataImporter = protobufDataImporter;
+    this.roslynDataImporter = roslynDataImporter;
   }
 
   @Override
@@ -91,41 +85,24 @@ public class CSharpSensor extends AbstractSensor implements Sensor {
     return fs.files(fs.predicates().and(fs.predicates().hasType(Type.MAIN), fs.predicates().hasLanguage(CSharpPlugin.LANGUAGE_KEY)));
   }
 
-  void executeInternal(SensorContext context) {
-    String roslynReportPath = settings.getString(config.getRoslynJsonReportPathProperty());
-    boolean hasRoslynReportPath = roslynReportPath != null;
+  private void executeInternal(SensorContext context) {
+    boolean hasRoslynReportPath = config.isRoslynReportPresent();
 
-    Path protobufReportsDirectory = config.protobufReportPathFromScanner();
+    if (config.areProtobufReportsPresent()) {
+      Path protobufReportsDirectory = config.protobufReportPath();
 
-    LOG.info("Importing analysis results from " + protobufReportsDirectory.toAbsolutePath());
-    importResults(context, protobufReportsDirectory, !hasRoslynReportPath);
+      LOG.info("Importing analysis results from " + protobufReportsDirectory.toAbsolutePath());
+      protobufDataImporter.importResults(context, protobufReportsDirectory, CSharpSonarRulesDefinition.REPOSITORY_KEY, !hasRoslynReportPath);
+    }
 
     if (hasRoslynReportPath) {
       LOG.info("Importing Roslyn report");
-      importRoslynReport(roslynReportPath, context);
+      Map<String, List<RuleKey>> activeRoslynRulesByPartialRepoKey = RoslynProfileExporter.activeRoslynRulesByPartialRepoKey(context.activeRules()
+        .findAll()
+        .stream()
+        .map(ActiveRule::ruleKey)
+        .collect(toList()));
+      roslynDataImporter.importRoslynReport(config.roslynReportPath(), context, activeRoslynRulesByPartialRepoKey);
     }
   }
-
-  private static void importRoslynReport(String reportPath, final SensorContext context) {
-    Map<String, List<RuleKey>> activeRoslynRulesByPartialRepoKey = RoslynProfileExporter.activeRoslynRulesByPartialRepoKey(context.activeRules()
-      .findAll()
-      .stream()
-      .map(ActiveRule::ruleKey)
-      .collect(toList()));
-    final Map<String, String> repositoryKeyByRoslynRuleKey = new HashMap<>();
-    for (List<RuleKey> rules : activeRoslynRulesByPartialRepoKey.values()) {
-      for (RuleKey activeRoslynRuleKey : rules) {
-        String previousRepositoryKey = repositoryKeyByRoslynRuleKey.put(activeRoslynRuleKey.rule(), activeRoslynRuleKey.repository());
-        if (previousRepositoryKey != null) {
-          throw new IllegalArgumentException("Rule keys must be unique, but \"" + activeRoslynRuleKey.rule() +
-            "\" is defined in both the \"" + previousRepositoryKey + "\" and \"" + activeRoslynRuleKey.repository() +
-            "\" rule repositories.");
-        }
-      }
-    }
-
-    SarifParserCallback callback = new SarifParserCallbackImplementation(context, repositoryKeyByRoslynRuleKey);
-    SarifParserFactory.create(Paths.get(reportPath)).accept(callback);
-  }
-
 }

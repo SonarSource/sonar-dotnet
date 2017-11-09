@@ -1,0 +1,128 @@
+/*
+ * SonarSource :: .NET :: Shared library
+ * Copyright (C) 2014-2017 SonarSource SA
+ * mailto:info AT sonarsource DOT com
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ */
+package org.sonarsource.dotnet.shared.plugins;
+
+import java.io.File;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+import java.util.List;
+import java.util.Map;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang.StringEscapeUtils;
+import org.apache.commons.lang.StringUtils;
+import org.assertj.core.groups.Tuple;
+import org.junit.Before;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.rules.ExpectedException;
+import org.junit.rules.TemporaryFolder;
+import org.sonar.api.batch.fs.internal.DefaultInputFile;
+import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
+import org.sonar.api.batch.sensor.internal.SensorContextTester;
+import org.sonar.api.internal.google.common.collect.ImmutableList;
+import org.sonar.api.internal.google.common.collect.ImmutableMap;
+import org.sonar.api.rule.RuleKey;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+public class RoslynDataImporterTest {
+  @Rule
+  public ExpectedException exception = ExpectedException.none();
+  @Rule
+  public TemporaryFolder temp = new TemporaryFolder();
+
+  private RoslynDataImporter roslynDataImporter = new RoslynDataImporter();
+  private SensorContextTester tester;
+  private Path workDir;
+
+  @Before
+  public void setUp() throws IOException, URISyntaxException {
+    workDir = temp.getRoot().toPath().resolve("reports");
+    Path csFile = Paths.get("src/test/resources/Program.cs").toAbsolutePath();
+
+    // copy test reports to work dir
+    FileUtils.copyDirectory(new File("src/test/resources/RoslynDataImporterTest"), workDir.toFile());
+
+    // replace file path in the roslyn report to point to real cs file in the resources
+    Path roslynReportPath = workDir.resolve("roslyn-report.json");
+    String report = new String(Files.readAllBytes(roslynReportPath), StandardCharsets.UTF_8);
+    Files.write(roslynReportPath, StringUtils.replace(report, "Program.cs",
+      StringEscapeUtils.escapeJavaScript(csFile.toString())).getBytes(StandardCharsets.UTF_8),
+      StandardOpenOption.WRITE);
+
+    tester = SensorContextTester.create(new File("src/test/resources"));
+    tester.fileSystem().setWorkDir(workDir.toFile());
+
+    DefaultInputFile inputFile = new TestInputFileBuilder(tester.module().key(), "Program.cs")
+      .setLanguage("cs")
+      .initMetadata(new String(Files.readAllBytes(csFile), StandardCharsets.UTF_8))
+      .build();
+
+    roslynReportPath = Paths.get(this.getClass().getResource("/RoslynDataImporterTest").toURI());
+    tester = SensorContextTester.create(new File("src/test/resources"));
+    tester.fileSystem().setWorkDir(workDir.toFile());
+    tester.fileSystem().add(inputFile);
+  }
+
+  @Test
+  public void roslynReportIsProcessed() throws IOException {
+    Map<String, List<RuleKey>> activeRules = createActiveRules();
+    roslynDataImporter.importRoslynReport(workDir.resolve("roslyn-report.json"), tester, activeRules);
+
+    assertThat(tester.allIssues())
+      .extracting("ruleKey", "primaryLocation.textRange.start.line", "primaryLocation.message")
+      .containsOnly(
+        Tuple.tuple(RuleKey.of("csharpsquid", "[parameters_key]"), 19,
+          "Short messages should be used first in Roslyn reports"),
+        Tuple.tuple(RuleKey.of("csharpsquid", "[parameters_key]"), 1,
+          "There only is a full message in the Roslyn report"),
+        Tuple.tuple(RuleKey.of("roslyn.foo", "custom-roslyn"), 19,
+          "Custom Roslyn analyzer message"),
+        Tuple.tuple(RuleKey.of("csharpsquid", "[parameters_key]"), null,
+          "This is an assembly level Roslyn issue with no location"));
+  }
+
+  @Test
+  public void roslynEmptyReportShouldNotFail() throws IOException {
+    Map<String, List<RuleKey>> activeRules = createActiveRules();
+    roslynDataImporter.importRoslynReport(workDir.resolve("roslyn-report-empty.json"), tester, activeRules);
+  }
+
+  @Test
+  public void failWithDuplicateRuleKey() throws IOException {
+    Map<String, List<RuleKey>> activeRules = ImmutableMap.of(
+      "sonaranalyzer-cs", ImmutableList.of(RuleKey.of("csharpsquid", "[parameters_key]")),
+      "foo", ImmutableList.of(RuleKey.of("roslyn.foo", "[parameters_key]")));
+
+    exception.expectMessage("Rule keys must be unique, but \"[parameters_key]\" is defined in both the \"csharpsquid\" and \"roslyn.foo\" rule repositories.");
+    roslynDataImporter.importRoslynReport(workDir.resolve("roslyn-report.json"), tester, activeRules);
+  }
+
+  private Map<String, List<RuleKey>> createActiveRules() {
+    return ImmutableMap.of(
+      "sonaranalyzer-cs", ImmutableList.of(RuleKey.of("csharpsquid", "S1186"), RuleKey.of("csharpsquid", "[parameters_key]")),
+      "foo", ImmutableList.of(RuleKey.of("roslyn.foo", "custom-roslyn")));
+  }
+}
