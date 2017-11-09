@@ -19,12 +19,15 @@
  */
 package org.sonar.plugins.csharp;
 
+import static java.util.stream.Collectors.toList;
+
 import java.io.File;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.apache.commons.lang.SystemUtils;
+
 import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.batch.fs.InputFile.Type;
 import org.sonar.api.batch.rule.ActiveRule;
@@ -40,11 +43,8 @@ import org.sonar.api.utils.System2;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 import org.sonarsource.dotnet.shared.plugins.AbstractSensor;
-import org.sonarsource.dotnet.shared.plugins.EncodingPerFile;
 import org.sonarsource.dotnet.shared.sarif.SarifParserCallback;
 import org.sonarsource.dotnet.shared.sarif.SarifParserFactory;
-
-import static java.util.stream.Collectors.toList;
 
 public class CSharpSensor extends AbstractSensor implements Sensor {
 
@@ -54,9 +54,8 @@ public class CSharpSensor extends AbstractSensor implements Sensor {
   private final CSharpConfiguration config;
   private final System2 system;
 
-  public CSharpSensor(Settings settings, FileLinesContextFactory fileLinesContextFactory,
-    NoSonarFilter noSonarFilter, CSharpConfiguration config, EncodingPerFile encodingPerFile, System2 system) {
-    super(fileLinesContextFactory, noSonarFilter, config, encodingPerFile, CSharpSonarRulesDefinition.REPOSITORY_KEY);
+  public CSharpSensor(Settings settings, FileLinesContextFactory fileLinesContextFactory, NoSonarFilter noSonarFilter, CSharpConfiguration config, System2 system) {
+    super(fileLinesContextFactory, noSonarFilter, config, CSharpSonarRulesDefinition.REPOSITORY_KEY);
     this.settings = settings;
     this.config = config;
     this.system = system;
@@ -81,7 +80,7 @@ public class CSharpSensor extends AbstractSensor implements Sensor {
     }
 
     if (!system.isOsWindows()) {
-      throw MessageException.of("C# analysis is not supported on " + SystemUtils.OS_NAME +
+      throw MessageException.of("C# analysis is not supported on " + System.getProperty("os.name") +
         ". Please, refer to the SonarC# documentation page for more information.");
     }
 
@@ -98,7 +97,7 @@ public class CSharpSensor extends AbstractSensor implements Sensor {
 
     Path protobufReportsDirectory = config.protobufReportPathFromScanner();
 
-    LOG.info("Importing analysis results from " + protobufReportsDirectory.toAbsolutePath().toString());
+    LOG.info("Importing analysis results from " + protobufReportsDirectory.toAbsolutePath());
     importResults(context, protobufReportsDirectory, !hasRoslynReportPath);
 
     if (hasRoslynReportPath) {
@@ -126,7 +125,7 @@ public class CSharpSensor extends AbstractSensor implements Sensor {
     }
 
     SarifParserCallback callback = new SarifParserCallbackImplementation(context, repositoryKeyByRoslynRuleKey);
-    SarifParserFactory.create(new File(reportPath)).accept(callback);
+    SarifParserFactory.create(Paths.get(reportPath)).accept(callback);
   }
 
 }

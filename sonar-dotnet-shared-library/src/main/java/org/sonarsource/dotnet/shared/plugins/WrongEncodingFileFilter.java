@@ -34,19 +34,8 @@ public class WrongEncodingFileFilter implements InputFileFilter {
     this.config = config;
   }
 
-  /**
-   * synchronized because InputFileFilter are executed in parallel
-   */
-  private synchronized boolean isApplicable() {
-    return config.isReportsComingFromMSBuild();
-  }
-
   @Override
   public boolean accept(InputFile inputFile) {
-    if (!isApplicable()) {
-      // Encoding reports not present (MSBuild 12 or old scanner) filtering will be done later
-      return true;
-    }
     initOnce();
     return encodingPerFile.encodingMatch(inputFile);
   }

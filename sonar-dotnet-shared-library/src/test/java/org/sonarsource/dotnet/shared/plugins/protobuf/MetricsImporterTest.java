@@ -19,6 +19,19 @@
  */
 package org.sonarsource.dotnet.shared.plugins.protobuf;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.METRICS_OUTPUT_PROTOBUF_NAME;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.util.Collection;
+import java.util.Collections;
+
 import org.assertj.core.groups.Tuple;
 import org.junit.Test;
 import org.sonar.api.batch.fs.InputFile;
@@ -32,37 +45,12 @@ import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.FileLinesContext;
 import org.sonar.api.measures.FileLinesContextFactory;
 
-import java.io.*;
-import java.util.Collection;
-import java.util.Collections;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.*;
-import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.METRICS_OUTPUT_PROTOBUF_NAME;
-
 public class MetricsImporterTest {
 
   // see src/test/resources/ProtobufImporterTest/README.md for explanation
   private static final File TEST_DATA_DIR = new File("src/test/resources/ProtobufImporterTest");
   private static final String TEST_FILE_PATH = "Program.cs";
   private static final File TEST_FILE = new File(TEST_DATA_DIR, TEST_FILE_PATH);
-
-  @Test
-  public void test_skip_filtered_files() {
-    SensorContextTester tester = SensorContextTester.create(TEST_DATA_DIR);
-
-    DefaultInputFile inputFile = new TestInputFileBuilder("dummyKey", TEST_FILE_PATH)
-      .build();
-    tester.fileSystem().add(inputFile);
-
-    File protobuf = new File(TEST_DATA_DIR, METRICS_OUTPUT_PROTOBUF_NAME);
-    assertThat(protobuf.isFile()).withFailMessage("no such file: " + protobuf).isTrue();
-
-    new MetricsImporter(tester, null, null, f -> false).accept(protobuf.toPath());
-
-    assertThat(tester.measures(inputFile.key())).isEmpty();
-  }
 
   @Test
   public void test_metrics_get_imported() throws FileNotFoundException {
@@ -82,7 +70,7 @@ public class MetricsImporterTest {
 
     NoSonarFilter noSonarFilter = mock(NoSonarFilter.class);
 
-    new MetricsImporter(tester, fileLinesContextFactory, noSonarFilter, f -> true).accept(protobuf.toPath());
+    new MetricsImporter(tester, fileLinesContextFactory, noSonarFilter).accept(protobuf.toPath());
 
     Collection<Measure> measures = tester.measures(inputFile.key());
     assertThat(measures).hasSize(13);

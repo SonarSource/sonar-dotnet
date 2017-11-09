@@ -19,22 +19,20 @@
  */
 package org.sonarsource.dotnet.shared.plugins.protobuf;
 
+import static org.sonarsource.dotnet.shared.plugins.SensorContextUtils.toTextRange;
+
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.cpd.NewCpdTokens;
 import org.sonarsource.dotnet.protobuf.SonarAnalyzer;
 import org.sonarsource.dotnet.protobuf.SonarAnalyzer.CopyPasteTokenInfo;
 
-import java.util.function.Predicate;
-
-import static org.sonarsource.dotnet.shared.plugins.SensorContextUtils.toTextRange;
-
 class CPDTokensImporter extends ProtobufImporter<SonarAnalyzer.CopyPasteTokenInfo> {
 
   private final SensorContext context;
 
-  CPDTokensImporter(SensorContext context, Predicate<InputFile> inputFileFilter) {
-    super(SonarAnalyzer.CopyPasteTokenInfo.parser(), context, inputFileFilter, SonarAnalyzer.CopyPasteTokenInfo::getFilePath);
+  CPDTokensImporter(SensorContext context) {
+    super(SonarAnalyzer.CopyPasteTokenInfo.parser(), context, SonarAnalyzer.CopyPasteTokenInfo::getFilePath);
     this.context = context;
   }
 

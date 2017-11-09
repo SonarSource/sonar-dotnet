@@ -19,13 +19,15 @@
  */
 package org.sonarsource.dotnet.shared.plugins;
 
+import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.ENCODING_OUTPUT_PROTOBUF_NAME;
+
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.util.Map;
+
 import org.sonar.api.CoreProperties;
 import org.sonar.api.SonarQubeVersion;
-import org.sonar.api.batch.BatchSide;
 import org.sonar.api.batch.ScannerSide;
 import org.sonar.api.batch.bootstrap.ProjectDefinition;
 import org.sonar.api.batch.fs.InputFile;
@@ -35,9 +37,6 @@ import org.sonar.api.utils.log.Loggers;
 import org.sonarsource.dotnet.shared.plugins.protobuf.EncodingImporter;
 import org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters;
 
-import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.ENCODING_OUTPUT_PROTOBUF_NAME;
-
-@BatchSide
 @ScannerSide
 public class EncodingPerFile {
   private static final Logger LOG = Loggers.get(EncodingPerFile.class);

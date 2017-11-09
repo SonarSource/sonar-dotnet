@@ -55,7 +55,7 @@ public class IssuesImporterTest {
     File protobuf = new File(TEST_DATA_DIR, ISSUES_OUTPUT_PROTOBUF_NAME);
     assertThat(protobuf.isFile()).withFailMessage("no such file: " + protobuf).isTrue();
 
-    new IssuesImporter(tester, "dummy", f -> true).accept(protobuf.toPath());
+    new IssuesImporter(tester, "dummy").accept(protobuf.toPath());
 
     Collection<Issue> issues = tester.allIssues();
     assertThat(issues).hasSize(6);

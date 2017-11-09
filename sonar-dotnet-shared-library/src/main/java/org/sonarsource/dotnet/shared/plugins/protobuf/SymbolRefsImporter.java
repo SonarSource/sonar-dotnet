@@ -19,6 +19,8 @@
  */
 package org.sonarsource.dotnet.shared.plugins.protobuf;
 
+import static org.sonarsource.dotnet.shared.plugins.SensorContextUtils.toTextRange;
+
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.symbol.NewSymbol;
@@ -26,16 +28,12 @@ import org.sonar.api.batch.sensor.symbol.NewSymbolTable;
 import org.sonarsource.dotnet.protobuf.SonarAnalyzer;
 import org.sonarsource.dotnet.protobuf.SonarAnalyzer.SymbolReferenceInfo;
 
-import java.util.function.Predicate;
-
-import static org.sonarsource.dotnet.shared.plugins.SensorContextUtils.toTextRange;
-
 class SymbolRefsImporter extends ProtobufImporter<SonarAnalyzer.SymbolReferenceInfo> {
 
   private final SensorContext context;
 
-  SymbolRefsImporter(SensorContext context, Predicate<InputFile> inputFileFilter) {
-    super(SonarAnalyzer.SymbolReferenceInfo.parser(), context, inputFileFilter, SonarAnalyzer.SymbolReferenceInfo::getFilePath);
+  SymbolRefsImporter(SensorContext context) {
+    super(SonarAnalyzer.SymbolReferenceInfo.parser(), context, SonarAnalyzer.SymbolReferenceInfo::getFilePath);
     this.context = context;
   }
 

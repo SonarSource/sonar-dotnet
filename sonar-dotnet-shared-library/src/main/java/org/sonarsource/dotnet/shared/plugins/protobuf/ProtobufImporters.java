@@ -20,12 +20,14 @@
 package org.sonarsource.dotnet.shared.plugins.protobuf;
 
 import org.sonar.api.batch.ScannerSide;
-import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.issue.NoSonarFilter;
 import org.sonar.api.measures.FileLinesContextFactory;
-
-import java.util.function.Predicate;
+import org.sonarsource.dotnet.protobuf.SonarAnalyzer.CopyPasteTokenInfo;
+import org.sonarsource.dotnet.protobuf.SonarAnalyzer.FileIssues;
+import org.sonarsource.dotnet.protobuf.SonarAnalyzer.MetricsInfo;
+import org.sonarsource.dotnet.protobuf.SonarAnalyzer.SymbolReferenceInfo;
+import org.sonarsource.dotnet.protobuf.SonarAnalyzer.TokenTypeInfo;
 
 @ScannerSide
 public class ProtobufImporters {
@@ -38,25 +40,24 @@ public class ProtobufImporters {
   public static final String ENCODING_OUTPUT_PROTOBUF_NAME = "encoding.pb";
   public static final String FILEMETADATA_OUTPUT_PROTOBUF_NAME = "file-metadata.pb";
 
-  public static RawProtobufImporter highlightImporter(SensorContext context, Predicate<InputFile> inputFileFilter) {
-    return new HighlightImporter(context, inputFileFilter);
+  public static RawProtobufImporter<TokenTypeInfo> highlightImporter(SensorContext context) {
+    return new HighlightImporter(context);
   }
 
-  public static RawProtobufImporter symbolRefsImporter(SensorContext context, Predicate<InputFile> inputFileFilter) {
-    return new SymbolRefsImporter(context, inputFileFilter);
+  public static RawProtobufImporter<SymbolReferenceInfo> symbolRefsImporter(SensorContext context) {
+    return new SymbolRefsImporter(context);
   }
 
-  public static RawProtobufImporter cpdTokensImporter(SensorContext context, Predicate<InputFile> inputFileFilter) {
-    return new CPDTokensImporter(context, inputFileFilter);
+  public static RawProtobufImporter<CopyPasteTokenInfo> cpdTokensImporter(SensorContext context) {
+    return new CPDTokensImporter(context);
   }
 
-  public static RawProtobufImporter metricsImporter(SensorContext context, FileLinesContextFactory fileLinesContextFactory, NoSonarFilter noSonarFilter,
-    Predicate<InputFile> inputFileFilter) {
-    return new MetricsImporter(context, fileLinesContextFactory, noSonarFilter, inputFileFilter);
+  public static RawProtobufImporter<MetricsInfo> metricsImporter(SensorContext context, FileLinesContextFactory fileLinesContextFactory, NoSonarFilter noSonarFilter) {
+    return new MetricsImporter(context, fileLinesContextFactory, noSonarFilter);
   }
 
-  public static RawProtobufImporter issuesImporter(SensorContext context, String repositoryKey, Predicate<InputFile> inputFileFilter) {
-    return new IssuesImporter(context, repositoryKey, inputFileFilter);
+  public static RawProtobufImporter<FileIssues> issuesImporter(SensorContext context, String repositoryKey) {
+    return new IssuesImporter(context, repositoryKey);
   }
 
   public static EncodingImporter encodingImporter() {
