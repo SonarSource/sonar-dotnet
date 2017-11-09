@@ -154,28 +154,16 @@
     <Compile Include="..\..\AssemblyInfo.Shared.cs">
       <Link>Properties\AssemblyInfo.Shared.cs</Link>
     </Compile>
-    <Compile Include="Common\*.cs" />
     <None Include="Common\Resources\input.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <Compile Include="Helpers\FlowAnalysis\*.cs" />
-    <Compile Include="Helpers\*.cs" />
-    <Compile Include="Metrics\*.cs" />
-    <Compile Include="PackagingTests\*.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="FixAllDiagnosticProvider.cs" />
-    <Compile Include="ResourceTests\GeneratedResourcesTest.cs" />
     <Compile Include="ResourceTests\SomeResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SomeResources.resx</DependentUpon>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="TestFramework\*.cs" />
-    <Compile Include="Verifier.cs" />
-    <Compile Include="Rules\**\*.cs" />
-    <Compile Include="SymbolicExecution\*.cs" />
-    <Compile Include="SymbolicExecution\SymbolicValues\*.cs" />
+    <Compile Include="**\*.cs" Exclude="**\obj\**\*;**\bin\**\*;**\*.Designer.cs;TestCases\**\*.cs;TestCasesForRuleFailure\**\*.*" />
     <None Include="TestCases\**\*.*">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
