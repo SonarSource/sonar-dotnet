@@ -19,10 +19,16 @@
  */
 package org.sonarsource.dotnet.shared.plugins;
 
+import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.CPDTOKENS_OUTPUT_PROTOBUF_NAME;
+import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.HIGHLIGHT_OUTPUT_PROTOBUF_NAME;
+import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.ISSUES_OUTPUT_PROTOBUF_NAME;
+import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.METRICS_OUTPUT_PROTOBUF_NAME;
+import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.SYMBOLREFS_OUTPUT_PROTOBUF_NAME;
+
 import java.nio.file.Path;
 import java.util.Collection;
 import java.util.Map;
-import java.util.function.Predicate;
+
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.issue.NewIssue;
@@ -38,48 +44,32 @@ import org.sonarsource.dotnet.shared.plugins.protobuf.RawProtobufImporter;
 import org.sonarsource.dotnet.shared.sarif.Location;
 import org.sonarsource.dotnet.shared.sarif.SarifParserCallback;
 
-import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.CPDTOKENS_OUTPUT_PROTOBUF_NAME;
-import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.HIGHLIGHT_OUTPUT_PROTOBUF_NAME;
-import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.ISSUES_OUTPUT_PROTOBUF_NAME;
-import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.METRICS_OUTPUT_PROTOBUF_NAME;
-import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.SYMBOLREFS_OUTPUT_PROTOBUF_NAME;
-
 public abstract class AbstractSensor {
   private static final Logger LOG = Loggers.get(AbstractSensor.class);
   private final FileLinesContextFactory fileLinesContextFactory;
   private final NoSonarFilter noSonarFilter;
-  private final EncodingPerFile encodingPerFile;
   private final AbstractConfiguration config;
   private final String repositoryKey;
 
-  protected AbstractSensor(FileLinesContextFactory fileLinesContextFactory, NoSonarFilter noSonarFilter, AbstractConfiguration config, EncodingPerFile encodingPerFile,
+  protected AbstractSensor(FileLinesContextFactory fileLinesContextFactory, NoSonarFilter noSonarFilter, AbstractConfiguration config,
     String repositoryKey) {
     this.fileLinesContextFactory = fileLinesContextFactory;
     this.noSonarFilter = noSonarFilter;
     this.config = config;
-    this.encodingPerFile = encodingPerFile;
     this.repositoryKey = repositoryKey;
   }
 
   public void importResults(SensorContext context, Path protobufReportsDirectory, boolean importIssues) {
-    Predicate<InputFile> inputFileFilter;
-    if (!config.isReportsComingFromMSBuild()) {
-      // Filter was not executed during FS indexing because protobuf reports were not present (MSBuild 12 or old scanner)
-      encodingPerFile.init(protobufReportsDirectory);
-      inputFileFilter = encodingPerFile::encodingMatch;
-    } else {
-      // Files with wrong encoding were already skipped
-      inputFileFilter = f -> true;
+    if (config.areProtobufReportsPresent()) {
+      // Note: the no-sonar "measure" must be imported before issues, otherwise the affected issues won't get excluded!
+      parseProtobuf(ProtobufImporters.metricsImporter(context, fileLinesContextFactory, noSonarFilter), protobufReportsDirectory, METRICS_OUTPUT_PROTOBUF_NAME);
+      if (importIssues) {
+        parseProtobuf(ProtobufImporters.issuesImporter(context, repositoryKey), protobufReportsDirectory, ISSUES_OUTPUT_PROTOBUF_NAME);
+      }
+      parseProtobuf(ProtobufImporters.highlightImporter(context), protobufReportsDirectory, HIGHLIGHT_OUTPUT_PROTOBUF_NAME);
+      parseProtobuf(ProtobufImporters.symbolRefsImporter(context), protobufReportsDirectory, SYMBOLREFS_OUTPUT_PROTOBUF_NAME);
+      parseProtobuf(ProtobufImporters.cpdTokensImporter(context), protobufReportsDirectory, CPDTOKENS_OUTPUT_PROTOBUF_NAME);
     }
-
-    // Note: the no-sonar "measure" must be imported before issues, otherwise the affected issues won't get excluded!
-    parseProtobuf(ProtobufImporters.metricsImporter(context, fileLinesContextFactory, noSonarFilter, inputFileFilter), protobufReportsDirectory, METRICS_OUTPUT_PROTOBUF_NAME);
-    if (importIssues) {
-      parseProtobuf(ProtobufImporters.issuesImporter(context, repositoryKey, inputFileFilter), protobufReportsDirectory, ISSUES_OUTPUT_PROTOBUF_NAME);
-    }
-    parseProtobuf(ProtobufImporters.highlightImporter(context, inputFileFilter), protobufReportsDirectory, HIGHLIGHT_OUTPUT_PROTOBUF_NAME);
-    parseProtobuf(ProtobufImporters.symbolRefsImporter(context, inputFileFilter), protobufReportsDirectory, SYMBOLREFS_OUTPUT_PROTOBUF_NAME);
-    parseProtobuf(ProtobufImporters.cpdTokensImporter(context, inputFileFilter), protobufReportsDirectory, CPDTOKENS_OUTPUT_PROTOBUF_NAME);
   }
 
   private static void parseProtobuf(RawProtobufImporter<?> importer, Path workDirectory, String filename) {

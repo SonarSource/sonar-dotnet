@@ -19,27 +19,23 @@
  */
 package org.sonarsource.dotnet.shared.plugins;
 
-import org.sonar.api.batch.BatchSide;
-import org.sonar.api.batch.ScannerSide;
-import org.sonar.api.config.Settings;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
-
 import java.io.IOException;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.stream.StreamSupport;
+import org.sonar.api.batch.ScannerSide;
+import org.sonar.api.config.Settings;
+import org.sonar.api.utils.log.Logger;
+import org.sonar.api.utils.log.Loggers;
 
-@BatchSide
 @ScannerSide
 public abstract class AbstractConfiguration {
 
   private static final Logger LOG = Loggers.get(AbstractConfiguration.class);
 
   private final Settings settings;
-  private Boolean reportsComingFromMSBuild;
 
   public AbstractConfiguration(Settings settings) {
     this.settings = settings;
@@ -51,31 +47,28 @@ public abstract class AbstractConfiguration {
 
   public abstract String getAnalyzerReportDir();
 
-  public boolean isReportsComingFromMSBuild() {
-    if (reportsComingFromMSBuild == null) {
-      reportsComingFromMSBuild = areProtobufReportsPresent();
-    }
-    return reportsComingFromMSBuild;
-  }
-
-  private boolean areProtobufReportsPresent() {
+  public boolean areProtobufReportsPresent() {
     if (!settings.hasKey(getAnalyzerWorkDirProperty())) {
+      LOG.warn("Property missing: '" + getAnalyzerWorkDirProperty() + "'. No protobuf files will be loaded.");
       return false;
     }
     Path analyzerOutputDir = protobufReportPathFromScanner();
 
     if (!analyzerOutputDir.toFile().exists()) {
-      LOG.info("Analyzer working directory does not exist");
+      LOG.warn("Analyzer working directory does not exist: " + analyzerOutputDir.toAbsolutePath() + ". No protobuf files will be loaded.");
       return false;
     }
 
-    try (DirectoryStream<Path> files = Files.newDirectoryStream(analyzerOutputDir, p -> p.toAbsolutePath().toString().toLowerCase().endsWith(".pb"))) {
+    try (DirectoryStream<Path> files = Files.newDirectoryStream(analyzerOutputDir, p -> p.getFileName().toString().toLowerCase().endsWith(".pb"))) {
       long count = StreamSupport.stream(files.spliterator(), false).count();
+      if (count == 0) {
+        LOG.warn("Analyzer working directory contains no .pb file(s). No protobuf files will be loaded.");
+        return false;
+      }
       LOG.info("Analyzer working directory contains " + count + " .pb file(s)");
-      return count != 0;
+      return true;
     } catch (IOException e) {
-      LOG.warn("Could not check for .pb files in " + analyzerOutputDir.toAbsolutePath().toString(), e);
-      return false;
+      throw new IllegalStateException("Could not check for .pb files in " + analyzerOutputDir.toAbsolutePath(), e);
     }
   }
 

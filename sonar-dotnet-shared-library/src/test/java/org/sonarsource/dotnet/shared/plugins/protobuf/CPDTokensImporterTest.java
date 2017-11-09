@@ -19,20 +19,20 @@
  */
 package org.sonarsource.dotnet.shared.plugins.protobuf;
 
-import org.junit.Test;
-import org.sonar.api.batch.fs.internal.DefaultInputFile;
-import org.sonar.api.batch.fs.internal.FileMetadata;
-import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
-import org.sonar.api.batch.sensor.internal.SensorContextTester;
-import org.sonar.duplications.internal.pmd.TokensLine;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.CPDTOKENS_OUTPUT_PROTOBUF_NAME;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.CPDTOKENS_OUTPUT_PROTOBUF_NAME;
+import org.junit.Test;
+import org.sonar.api.batch.fs.internal.DefaultInputFile;
+import org.sonar.api.batch.fs.internal.FileMetadata;
+import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
+import org.sonar.api.batch.sensor.internal.SensorContextTester;
+import org.sonar.duplications.internal.pmd.TokensLine;
 
 public class CPDTokensImporterTest {
 
@@ -53,7 +53,7 @@ public class CPDTokensImporterTest {
     File protobuf = new File(TEST_DATA_DIR, CPDTOKENS_OUTPUT_PROTOBUF_NAME);
     assertThat(protobuf.isFile()).withFailMessage("no such file: " + protobuf).isTrue();
 
-    new CPDTokensImporter(tester, f -> true).accept(protobuf.toPath());
+    new CPDTokensImporter(tester).accept(protobuf.toPath());
 
     List<TokensLine> lines = tester.cpdTokens(inputFile.key());
     assertThat(lines).hasSize(35);

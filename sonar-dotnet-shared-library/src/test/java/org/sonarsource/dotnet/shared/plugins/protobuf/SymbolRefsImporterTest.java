@@ -19,18 +19,18 @@
  */
 package org.sonarsource.dotnet.shared.plugins.protobuf;
 
-import org.junit.Test;
-import org.sonar.api.batch.fs.internal.DefaultInputFile;
-import org.sonar.api.batch.fs.internal.FileMetadata;
-import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
-import org.sonar.api.batch.sensor.internal.SensorContextTester;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.SYMBOLREFS_OUTPUT_PROTOBUF_NAME;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.SYMBOLREFS_OUTPUT_PROTOBUF_NAME;
+import org.junit.Test;
+import org.sonar.api.batch.fs.internal.DefaultInputFile;
+import org.sonar.api.batch.fs.internal.FileMetadata;
+import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
+import org.sonar.api.batch.sensor.internal.SensorContextTester;
 
 public class SymbolRefsImporterTest {
 
@@ -51,7 +51,7 @@ public class SymbolRefsImporterTest {
     File protobuf = new File(TEST_DATA_DIR, SYMBOLREFS_OUTPUT_PROTOBUF_NAME);
     assertThat(protobuf.isFile()).withFailMessage("no such file: " + protobuf).isTrue();
 
-    new SymbolRefsImporter(tester, f -> true).accept(protobuf.toPath());
+    new SymbolRefsImporter(tester).accept(protobuf.toPath());
 
     // a symbol is defined at this location, and referenced at 3 other locations
     assertThat(tester.referencesForSymbolAt(inputFile.key(), 25, 34)).hasSize(3);

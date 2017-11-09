@@ -19,6 +19,14 @@
  */
 package org.sonar.plugins.csharp;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+import static org.sonar.plugins.csharp.CSharpSonarRulesDefinition.REPOSITORY_KEY;
+
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
@@ -29,18 +37,15 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.nio.file.StandardOpenOption;
+
 import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang.SystemUtils;
 import org.assertj.core.groups.Tuple;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.rules.TemporaryFolder;
-import org.sonar.api.CoreProperties;
-import org.sonar.api.SonarQubeVersion;
-import org.sonar.api.batch.bootstrap.ProjectDefinition;
 import org.sonar.api.batch.fs.internal.DefaultInputFile;
 import org.sonar.api.batch.fs.internal.FileMetadata;
 import org.sonar.api.batch.rule.internal.ActiveRulesBuilder;
@@ -53,15 +58,6 @@ import org.sonar.api.rule.RuleKey;
 import org.sonar.api.utils.MessageException;
 import org.sonar.api.utils.System2;
 import org.sonarsource.dotnet.protobuf.SonarAnalyzer.EncodingInfo;
-import org.sonarsource.dotnet.shared.plugins.EncodingPerFile;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-import static org.sonar.plugins.csharp.CSharpSonarRulesDefinition.REPOSITORY_KEY;
 
 public class CSharpSensorTest {
 
@@ -110,10 +106,10 @@ public class CSharpSensorTest {
       throw new IllegalStateException("could not save message to file", e);
     }
 
-    Path roslynReport = workDir.resolve("roslyn-report.json");
-    Files.write(roslynReport,
-      StringUtils.replace(new String(Files.readAllBytes(roslynReport), StandardCharsets.UTF_8), "Program.cs",
-        StringEscapeUtils.escapeJavaScript(csFile.getAbsolutePath())).getBytes(StandardCharsets.UTF_8),
+    Path roslynReportPath = workDir.resolve("roslyn-report.json");
+    String report = new String(Files.readAllBytes(roslynReportPath), StandardCharsets.UTF_8);
+    Files.write(roslynReportPath, StringUtils.replace(report, "Program.cs",
+      StringEscapeUtils.escapeJavaScript(csFile.getAbsolutePath())).getBytes(StandardCharsets.UTF_8),
       StandardOpenOption.WRITE);
 
     tester = SensorContextTester.create(new File("src/test/resources"));
@@ -134,13 +130,11 @@ public class CSharpSensorTest {
     system = mock(System2.class);
 
     CSharpConfiguration csConfigConfiguration = new CSharpConfiguration(settings);
-    sensor = new CSharpSensor(settings, fileLinesContextFactory, noSonarFilter, csConfigConfiguration,
-      new EncodingPerFile(ProjectDefinition.create().setProperty(CoreProperties.ENCODING_PROPERTY, "UTF-8"), new SonarQubeVersion(tester.getSonarQubeVersion())),
-            system);
+    sensor = new CSharpSensor(settings, fileLinesContextFactory, noSonarFilter, csConfigConfiguration, system);
   }
 
   @Test
-  public void roslynReportIsProcessed() {
+  public void roslynReportIsProcessed() throws IOException {
     tester.setActiveRules(new ActiveRulesBuilder()
       .create(RuleKey.of(REPOSITORY_KEY, "S1186"))
       .activate()
@@ -150,7 +144,9 @@ public class CSharpSensorTest {
       .activate()
       .build());
 
-    settings.setProperty(CSharpConfiguration.ROSLYN_REPORT_PATH_PROPERTY_KEY, workDir.resolve("roslyn-report.json").toAbsolutePath().toString());
+    settings.setProperty(CSharpConfiguration.ROSLYN_REPORT_PATH_PROPERTY_KEY, workDir.resolve("roslyn-report.json").toString());
+    createProtobufOut();
+
     sensor.executeInternal(tester);
 
     assertThat(tester.allIssues())
@@ -169,13 +165,14 @@ public class CSharpSensorTest {
   }
 
   @Test
-  public void roslynEmptyReportShouldNotFail() {
-    settings.setProperty(CSharpConfiguration.ROSLYN_REPORT_PATH_PROPERTY_KEY, workDir.resolve("roslyn-report-empty.json").toAbsolutePath().toString());
+  public void roslynEmptyReportShouldNotFail() throws IOException {
+    settings.setProperty(CSharpConfiguration.ROSLYN_REPORT_PATH_PROPERTY_KEY, workDir.resolve("roslyn-report-empty.json").toString());
+    createProtobufOut();
     sensor.executeInternal(tester);
   }
 
   @Test
-  public void failWithDuplicateRuleKey() {
+  public void failWithDuplicateRuleKey() throws IOException {
     tester.setActiveRules(new ActiveRulesBuilder()
       .create(RuleKey.of(REPOSITORY_KEY, "[parameters_key]"))
       .activate()
@@ -183,10 +180,20 @@ public class CSharpSensorTest {
       .activate()
       .build());
 
-    settings.setProperty(CSharpConfiguration.ROSLYN_REPORT_PATH_PROPERTY_KEY, workDir.resolve("roslyn-report.json").toAbsolutePath().toString());
+    settings.setProperty(CSharpConfiguration.ROSLYN_REPORT_PATH_PROPERTY_KEY, workDir.resolve("roslyn-report.json").toString());
+    createProtobufOut();
     thrown.expectMessage("Rule keys must be unique, but \"[parameters_key]\" is defined in both the \"csharpsquid\" and \"roslyn.foo\" rule repositories.");
 
     sensor.executeInternal(tester);
+  }
+
+  private void createProtobufOut() throws IOException {
+    Path path = workDir.resolve("report");
+    Path outputCs = path.resolve("output-cs");
+    Files.createDirectories(outputCs);
+    Files.createFile(outputCs.resolve("dummy.pb"));
+    settings.setProperty(CSharpConfiguration.ANALYZER_PROJECT_OUT_PATH_PROPERTY_KEY, path.toString());
+
   }
 
   @Test
@@ -206,8 +213,7 @@ public class CSharpSensorTest {
 
     // Assert exception
     thrown.expect(MessageException.class);
-    thrown.expectMessage("C# analysis is not supported on " + SystemUtils.OS_NAME +
-            ". Please, refer to the SonarC# documentation page for more information.");
+    thrown.expectMessage("C# analysis is not supported");
 
     // Act
     sensor.execute(tester);
@@ -226,13 +232,4 @@ public class CSharpSensorTest {
 
     // No exceptions thrown
   }
-
-  private static String readFile(Path directory, String fileName) throws Exception {
-    return new String(Files.readAllBytes(directory.resolve(fileName)));
-  }
-
-  private static String readFile(String fileName) throws Exception {
-    return new String(Files.readAllBytes(Paths.get(fileName)));
-  }
-
 }

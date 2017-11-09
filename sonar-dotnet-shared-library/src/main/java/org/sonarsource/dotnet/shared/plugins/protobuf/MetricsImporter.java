@@ -19,6 +19,9 @@
  */
 package org.sonarsource.dotnet.shared.plugins.protobuf;
 
+import java.io.Serializable;
+import java.util.HashSet;
+
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.measure.Metric;
 import org.sonar.api.batch.sensor.SensorContext;
@@ -27,22 +30,17 @@ import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.FileLinesContext;
 import org.sonar.api.measures.FileLinesContextFactory;
 import org.sonar.api.utils.Version;
-import org.sonarsource.dotnet.protobuf.SonarAnalyzer;
 import org.sonarsource.dotnet.protobuf.SonarAnalyzer.MetricsInfo;
 
-import java.io.Serializable;
-import java.util.HashSet;
-import java.util.function.Predicate;
-
-class MetricsImporter extends ProtobufImporter<SonarAnalyzer.MetricsInfo> {
+class MetricsImporter extends ProtobufImporter<MetricsInfo> {
 
   private final SensorContext context;
   private final FileLinesContextFactory fileLinesContextFactory;
   private final NoSonarFilter noSonarFilter;
   private final boolean supportsCognitiveComplexity;
 
-  MetricsImporter(SensorContext context, FileLinesContextFactory fileLinesContextFactory, NoSonarFilter noSonarFilter, Predicate<InputFile> inputFileFilter) {
-    super(SonarAnalyzer.MetricsInfo.parser(), context, inputFileFilter, SonarAnalyzer.MetricsInfo::getFilePath);
+  MetricsImporter(SensorContext context, FileLinesContextFactory fileLinesContextFactory, NoSonarFilter noSonarFilter) {
+    super(MetricsInfo.parser(), context, MetricsInfo::getFilePath);
     this.context = context;
     this.fileLinesContextFactory = fileLinesContextFactory;
     this.noSonarFilter = noSonarFilter;

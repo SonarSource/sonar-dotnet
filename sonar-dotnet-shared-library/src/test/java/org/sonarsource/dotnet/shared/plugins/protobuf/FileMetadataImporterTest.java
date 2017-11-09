@@ -31,12 +31,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 
 public class FileMetadataImporterTest {
+  private AbstractParser<SonarAnalyzer.FileMetadataInfo> parser = mock(AbstractParser.class);
+  private FileMetadataImporter fileMetadataImporter = new FileMetadataImporter(parser);
+
   @Test
   public void getGeneratedFilePaths_returns_only_generated_paths() {
-    // Arrange
-    AbstractParser<SonarAnalyzer.FileMetadataInfo> parser = mock(AbstractParser.class);
-    FileMetadataImporter fileMetadataImporter = new FileMetadataImporter(parser);
-
     SonarAnalyzer.FileMetadataInfo.Builder builder = SonarAnalyzer.FileMetadataInfo.newBuilder();
 
     SonarAnalyzer.FileMetadataInfo message1 = builder.setIsGenerated(true).setFilePath("c:\\file1").build();
@@ -61,10 +60,6 @@ public class FileMetadataImporterTest {
 
   @Test
   public void getGeneratedFilePaths_returns_empty_set_when_protobuf_is_empty() {
-    // Arrange
-    AbstractParser<SonarAnalyzer.FileMetadataInfo> parser = mock(AbstractParser.class);
-    FileMetadataImporter fileMetadataImporter = new FileMetadataImporter(parser);
-
     // No consume calls means that the protobuf contained no messages
 
     // Act

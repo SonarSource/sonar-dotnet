@@ -19,22 +19,22 @@
  */
 package org.sonarsource.dotnet.shared.sarif;
 
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 public class SarifParserFactory {
   private SarifParserFactory() {
     // private
   }
 
-  public static SarifParser create(File file) {
-    try (InputStreamReader reader = new InputStreamReader(new FileInputStream(file), StandardCharsets.UTF_8)) {
+  public static SarifParser create(Path filePath) {
+    try (InputStreamReader reader = new InputStreamReader(Files.newInputStream(filePath), StandardCharsets.UTF_8)) {
 
       JsonParser parser = new JsonParser();
       JsonObject root = parser.parse(reader).getAsJsonObject();
@@ -51,9 +51,9 @@ public class SarifParserFactory {
         }
       }
     } catch (IOException e) {
-      throw new IllegalStateException("Unable to read the Roslyn SARIF report file: " + file.getAbsolutePath(), e);
+      throw new IllegalStateException("Unable to read the Roslyn SARIF report file: " + filePath.toAbsolutePath(), e);
     }
 
-    throw new IllegalStateException(String.format("Unable to parse the Roslyn SARIF report file: %s. Unrecognized format", file.getAbsolutePath()));
+    throw new IllegalStateException(String.format("Unable to parse the Roslyn SARIF report file: %s. Unrecognized format", filePath.toAbsolutePath()));
   }
 }

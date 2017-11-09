@@ -19,6 +19,8 @@
  */
 package org.sonarsource.dotnet.shared.plugins.protobuf;
 
+import static org.sonarsource.dotnet.shared.plugins.SensorContextUtils.toTextRange;
+
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.issue.NewIssue;
@@ -27,17 +29,13 @@ import org.sonar.api.rule.RuleKey;
 import org.sonarsource.dotnet.protobuf.SonarAnalyzer;
 import org.sonarsource.dotnet.protobuf.SonarAnalyzer.FileIssues;
 
-import java.util.function.Predicate;
-
-import static org.sonarsource.dotnet.shared.plugins.SensorContextUtils.toTextRange;
-
 class IssuesImporter extends ProtobufImporter<SonarAnalyzer.FileIssues> {
 
   private final SensorContext context;
   private final String repositoryKey;
 
-  IssuesImporter(SensorContext context, String repositoryKey, Predicate<InputFile> inputFileFilter) {
-    super(SonarAnalyzer.FileIssues.parser(), context, inputFileFilter, SonarAnalyzer.FileIssues::getFilePath);
+  IssuesImporter(SensorContext context, String repositoryKey) {
+    super(SonarAnalyzer.FileIssues.parser(), context, SonarAnalyzer.FileIssues::getFilePath);
     this.context = context;
     this.repositoryKey = repositoryKey;
   }
@@ -54,7 +52,7 @@ class IssuesImporter extends ProtobufImporter<SonarAnalyzer.FileIssues> {
       SonarAnalyzer.TextRange issueTextRange = issue.getLocation();
 
       if (issueTextRange.getStartOffset() == issueTextRange.getEndOffset() &&
-          issueTextRange.getStartLine() == issueTextRange.getEndLine()) {
+        issueTextRange.getStartLine() == issueTextRange.getEndLine()) {
         // file level issue
       } else {
         location = location.at(toTextRange(inputFile, issueTextRange));
