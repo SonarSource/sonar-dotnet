@@ -1,32 +1,23 @@
 # top-most EditorConfig file
 root = true
 
+# ----------------------------------------------------------------------------------------------------------------------
+# General settings
+# ----------------------------------------------------------------------------------------------------------------------
+
 # Don't use tabs for indentation.
 [*]
-charset = utf-8
 indent_style = space
-insert_final_newline = false
-trim_trailing_whitespace = true
 # (Please don't specify an indent_size here; that has too many unintended consequences.)
 
-# Scripting files
-[*.{ps1,bat,cmd}]
+# Code files
+[*.{cs,csx,vb,vbx}]
 indent_size = 4
-
-# C# code files
-[*.{cs}]
-indent_size = 4
-
-# Java code files
-[*.{java}]
-indent_size = 2
-
-# Pom files
-[pom.xml]
-indent_size = 2
+insert_final_newline = true
+charset = utf-8-bom
 
 # Xml project files
-[*.{csproj,proj}]
+[*.{csproj,vbproj,vcxproj,vcxproj.filters,proj,projitems,shproj}]
 indent_size = 2
 
 # Xml config files
@@ -37,7 +28,28 @@ indent_size = 2
 [*.json]
 indent_size = 2
 
-# CSharp code style settings:
-[*.{cs}]
+# Scripting files
+[*.{ps1,bat,cmd}]
+indent_size = 4
+
+# Java code files
+[*.java]
+indent_size = 2
+
+# Pom files
+[pom.xml]
+indent_size = 2
+
+# ----------------------------------------------------------------------------------------------------------------------
+# Coding styles
+# ----------------------------------------------------------------------------------------------------------------------
+
+# Dotnet code style settings:
+[*.{cs,vb}]
 # Sort using and Import directives with System.* appearing first
 dotnet_sort_system_directives_first = true
+# Avoid "this." and "Me." if not necessary
+dotnet_style_qualification_for_field = false:suggestion
+dotnet_style_qualification_for_property = false:suggestion
+dotnet_style_qualification_for_method = false:suggestion
+dotnet_style_qualification_for_event = false:suggestion
