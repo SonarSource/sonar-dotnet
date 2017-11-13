@@ -246,7 +246,7 @@ function Invoke-DotNetBuild() {
         Invoke-SonarEndAnalysis
     }
 
-    New-Metadata $binPath
+    New-Metadata "${binPath}\net46"
     New-NuGetPackages $binPath
 
     Initialize-NuGetConfig
@@ -365,7 +365,7 @@ try {
     . (Join-Path $PSScriptRoot "build-utils.ps1")
 
     $buildConfiguration = "Release"
-    $binPath = "bin\Classic\${buildConfiguration}\net46"
+    $binPath = "bin\Classic\${buildConfiguration}"
     $solutionName = "SonarAnalyzer.sln"
     $branchName = Get-BranchName
     $isMaster = $branchName -eq "master"
