@@ -174,7 +174,8 @@ function Show-DiffResults() {
 try {
     $scriptTimer = [system.diagnostics.stopwatch]::StartNew()
     . (Join-Path $PSScriptRoot "..\..\scripts\build\build-utils.ps1")
-    $msBuildImportBefore = Get-MSBuildImportBeforePath $msbuildVersion
+    $msBuildImportBefore14 = Get-MSBuildImportBeforePath "14.0"
+    $msBuildImportBefore15 = Get-MSBuildImportBeforePath "15.0"
 
     Push-Location $PSScriptRoot
     Test-SonarAnalyzerDll
@@ -183,8 +184,10 @@ try {
     Initialize-ActualFolder
     Initialize-OutputFolder
 
-    Write-Debug "Installing the import before target file at '${msBuildImportBefore}'"
-    Copy-Item .\SonarAnalyzer.Testing.ImportBefore.targets -Destination $msBuildImportBefore -Recurse -Container
+    Write-Debug "Installing the import before target file at '${msBuildImportBefore14}'"
+    Copy-Item .\SonarAnalyzer.Testing.ImportBefore.targets -Destination $msBuildImportBefore14 -Recurse -Container
+    Write-Debug "Installing the import before target file at '${msBuildImportBefore15}'"
+    Copy-Item .\SonarAnalyzer.Testing.ImportBefore.targets -Destination $msBuildImportBefore15 -Recurse -Container
 
     Build-Project "akka.net" "src\Akka.sln"
     Build-Project "Nancy" "src\Nancy.sln"
@@ -221,8 +224,12 @@ catch {
 }
 finally {
     Pop-Location
-    Write-Debug "Removing the import before target file from '${msBuildImportBefore}'"
-    Remove-Item -Force (Join-Path $msBuildImportBefore "\SonarAnalyzer.Testing.ImportBefore.targets") `
+    Write-Debug "Removing the import before target file from '${msBuildImportBefore14}'"
+    Remove-Item -Force (Join-Path $msBuildImportBefore14 "\SonarAnalyzer.Testing.ImportBefore.targets") `
+        -ErrorAction Ignore
+
+    Write-Debug "Removing the import before target file from '${msBuildImportBefore15}'"
+    Remove-Item -Force (Join-Path $msBuildImportBefore15 "\SonarAnalyzer.Testing.ImportBefore.targets") `
         -ErrorAction Ignore
 
     $scriptTimer.Stop()
