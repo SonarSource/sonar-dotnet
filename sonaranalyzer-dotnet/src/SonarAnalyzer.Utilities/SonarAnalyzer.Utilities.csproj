@@ -11,7 +11,7 @@
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <OutputPath>bin\Classic\Release\</OutputPath>
-    <IntermediateOutputPath>obj\VS2Classic015</IntermediateOutputPath>
+    <IntermediateOutputPath>obj\Classic</IntermediateOutputPath>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
