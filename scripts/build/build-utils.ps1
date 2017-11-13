@@ -13,8 +13,8 @@ function Get-MsBuildPath([ValidateSet("14.0", "15.0")][string]$msbuildVersion) {
         return Get-ExecutablePath -name "msbuild.exe" -envVar "MSBUILD_PATH"
     }
 
-    Write-Debug "Trying to find 'msbuild.exe 15' using 'MSBUILD_15_PATH' environment variable"
-    $msbuild15Env = "MSBUILD_15_PATH"
+    Write-Debug "Trying to find 'msbuild.exe 15' using 'MSBUILD_PATH' environment variable"
+    $msbuild15Env = "MSBUILD_PATH"
     $msbuild15Path = [environment]::GetEnvironmentVariable($msbuild15Env, "Process")
 
     if (!$msbuild15Path) {
@@ -63,29 +63,37 @@ function New-NuGetPackages([string]$binPath) {
         $outputDir = Join-Path $_.DirectoryName $binPath
 
         Write-Debug "Creating NuGet package for '$_' in ${outputDir}"
+
+        $fixedBinPath = if ($_.Name -Like "Descriptor.*.nuspec") { "${binPath}\net46" } else { $binPath }
+
         if (Test-Debug) {
             Exec { & $nugetExe pack $_.FullName -NoPackageAnalysis -OutputDirectory $outputDir `
-                -Prop binPath=$binPath -Verbosity detailed `
+                -Prop binPath=$fixedBinPath -Verbosity detailed `
             } -errorMessage "ERROR: NuGet package creation FAILED."
         }
         else {
             Exec { & $nugetExe pack $_.FullName -NoPackageAnalysis -OutputDirectory $outputDir `
-                -Prop binPath=$binPath `
+                -Prop binPath=$fixedBinPath `
             } -errorMessage "ERROR: NuGet package creation FAILED."
         }
     }
 }
 
-function Restore-Packages ([string]$solutionPath) {
-    $solutionName = Split-Path $solutionPath -leaf
+function Restore-Packages (
+    [Parameter(Mandatory = $true, Position = 0)][ValidateSet("14.0", "15.0")][string]$msbuildVersion,
+    [Parameter(Mandatory = $true, Position = 1)][string]$solutionPath) {
+
+    $solutionName = Split-Path $solutionPath -Leaf
     Write-Header "Restoring NuGet packages for ${solutionName}"
 
+    $msbuildBinDir = Split-Path -Parent (Get-MsBuildPath $msbuildVersion)
+
     if (Test-Debug) {
-        Exec { & (Get-NuGetPath) restore $solutionPath -Verbosity detailed `
+        Exec { & (Get-NuGetPath) restore $solutionPath -MSBuildPath $msbuildBinDir -Verbosity detailed `
         } -errorMessage "ERROR: Restoring NuGet packages FAILED."
     }
     else {
-        Exec { & (Get-NuGetPath) restore $solutionPath `
+        Exec { & (Get-NuGetPath) restore $solutionPath -MSBuildPath $msbuildBinDir `
         } -errorMessage "ERROR: Restoring NuGet packages FAILED."
     }
 }
@@ -176,7 +184,7 @@ function New-Metadata([string]$binPath) {
     Write-Header "Generating rules metadata"
 
     #Generate the XML descriptor files for the SQ plugin
-    Invoke-InLocation "src\SonarAnalyzer.RuleDescriptorGenerator\${binPath}" {
+    Invoke-InLocation "src\SonarAnalyzer.RuleDescriptorGenerator\${binPath}\net46" {
         Exec { & .\SonarAnalyzer.RuleDescriptorGenerator.exe cs }
         Write-Host "Sucessfully created metadata for C#"
         Exec { & .\SonarAnalyzer.RuleDescriptorGenerator.exe vbnet }

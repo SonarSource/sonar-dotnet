@@ -50,7 +50,7 @@ function Get-BranchName() {
 }
 
 function Clear-MSBuildImportBefore() {
-    $importBeforePath = Get-MSBuildImportBeforePath "14.0"
+    $importBeforePath = Get-MSBuildImportBeforePath "15.0"
     Get-ChildItem $importBeforePath -Recurse -Include "Sonar*.targets" `
         | ForEach-Object {
             Write-Debug "Removing $_"
@@ -90,7 +90,7 @@ function Set-DotNetVersion() {
                 -Replace '<BranchName>.*</BranchName>', "<BranchName>$branchName</BranchName>" `
             | Set-Content $versionProperties
 
-        Invoke-MSBuild "14.0" "ChangeVersion.proj"
+        Invoke-MSBuild "15.0" "ChangeVersion.proj"
 
         $version = Get-DotNetVersion
         Write-Host "Version successfully set to '${version}'"
@@ -228,8 +228,8 @@ function Invoke-DotNetBuild() {
         $skippedAnalysis = $true
     }
 
-    Restore-Packages $solutionName
-    Invoke-MSBuild "14.0" $solutionName `
+    Restore-Packages "15.0" $solutionName
+    Invoke-MSBuild "15.0" $solutionName `
         /consoleloggerparameters:Summary `
         /m `
         /p:configuration=$buildConfiguration `
