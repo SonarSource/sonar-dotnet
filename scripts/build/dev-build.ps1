@@ -93,7 +93,7 @@ try {
     }
 
     if ($pack) {
-        New-Metadata "${binPath}\net46"
+        New-Metadata $binPath
         New-NuGetPackages $binPath
     }
 

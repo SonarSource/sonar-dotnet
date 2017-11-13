@@ -63,14 +63,17 @@ function New-NuGetPackages([string]$binPath) {
         $outputDir = Join-Path $_.DirectoryName $binPath
 
         Write-Debug "Creating NuGet package for '$_' in ${outputDir}"
+
+        $fixedBinPath = if ($_.Name -Like "*.Descriptor.*") { "${binPath}\net46" } else { $binPath }
+
         if (Test-Debug) {
             Exec { & $nugetExe pack $_.FullName -NoPackageAnalysis -OutputDirectory $outputDir `
-                -Prop binPath=$binPath -Verbosity detailed `
+                -Prop binPath=$fixedBinPath -Verbosity detailed `
             } -errorMessage "ERROR: NuGet package creation FAILED."
         }
         else {
             Exec { & $nugetExe pack $_.FullName -NoPackageAnalysis -OutputDirectory $outputDir `
-                -Prop binPath=$binPath `
+                -Prop binPath=$fixedBinPath `
             } -errorMessage "ERROR: NuGet package creation FAILED."
         }
     }
@@ -181,7 +184,7 @@ function New-Metadata([string]$binPath) {
     Write-Header "Generating rules metadata"
 
     #Generate the XML descriptor files for the SQ plugin
-    Invoke-InLocation "src\SonarAnalyzer.RuleDescriptorGenerator\${binPath}" {
+    Invoke-InLocation "src\SonarAnalyzer.RuleDescriptorGenerator\${binPath}\net46" {
         Exec { & .\SonarAnalyzer.RuleDescriptorGenerator.exe cs }
         Write-Host "Sucessfully created metadata for C#"
         Exec { & .\SonarAnalyzer.RuleDescriptorGenerator.exe vbnet }
