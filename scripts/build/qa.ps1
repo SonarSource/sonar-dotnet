@@ -109,7 +109,7 @@ try {
 
     Invoke-InLocation "${PSScriptRoot}\..\..\sonaranalyzer-dotnet" {
         Get-BuildArtifacts
-        Invoke-IntegrationTests "14.0"
+        Invoke-IntegrationTests "15.0"
         Initialize-ArtifactsStep
     }
 
