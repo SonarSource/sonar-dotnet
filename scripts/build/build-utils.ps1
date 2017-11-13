@@ -13,8 +13,8 @@ function Get-MsBuildPath([ValidateSet("14.0", "15.0")][string]$msbuildVersion) {
         return Get-ExecutablePath -name "msbuild.exe" -envVar "MSBUILD_PATH"
     }
 
-    Write-Debug "Trying to find 'msbuild.exe 15' using 'MSBUILD_15_PATH' environment variable"
-    $msbuild15Env = "MSBUILD_15_PATH"
+    Write-Debug "Trying to find 'msbuild.exe 15' using 'MSBUILD_PATH' environment variable"
+    $msbuild15Env = "MSBUILD_PATH"
     $msbuild15Path = [environment]::GetEnvironmentVariable($msbuild15Env, "Process")
 
     if (!$msbuild15Path) {
