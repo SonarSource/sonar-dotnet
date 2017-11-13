@@ -64,7 +64,7 @@ function New-NuGetPackages([string]$binPath) {
 
         Write-Debug "Creating NuGet package for '$_' in ${outputDir}"
 
-        $fixedBinPath = if ($_.Name -Like "*.Descriptor.*") { "${binPath}\net46" } else { $binPath }
+        $fixedBinPath = if ($_.Name -Like "Descriptor.*.nuspec") { "${binPath}\net46" } else { $binPath }
 
         if (Test-Debug) {
             Exec { & $nugetExe pack $_.FullName -NoPackageAnalysis -OutputDirectory $outputDir `
