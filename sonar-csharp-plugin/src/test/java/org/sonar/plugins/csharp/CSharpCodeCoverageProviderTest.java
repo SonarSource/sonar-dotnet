@@ -20,18 +20,18 @@
 package org.sonar.plugins.csharp;
 
 import com.google.common.collect.ImmutableSet;
+import java.lang.reflect.Constructor;
+import java.util.List;
+import java.util.Set;
 import org.junit.Test;
 import org.sonar.api.SonarQubeVersion;
 import org.sonar.api.config.PropertyDefinition;
-import org.sonar.api.config.Settings;
+import org.sonar.api.config.internal.MapSettings;
+import org.sonar.api.utils.Version;
 import org.sonar.plugins.csharp.CSharpCodeCoverageProvider.CSharpCoverageAggregator;
 import org.sonar.plugins.csharp.CSharpCodeCoverageProvider.CSharpCoverageReportImportSensor;
 import org.sonar.plugins.csharp.CSharpCodeCoverageProvider.CSharpIntegrationCoverageAggregator;
 import org.sonar.plugins.csharp.CSharpCodeCoverageProvider.CSharpIntegrationCoverageReportImportSensor;
-
-import java.lang.reflect.Constructor;
-import java.util.List;
-import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -61,13 +61,13 @@ public class CSharpCodeCoverageProviderTest {
 
   @Test
   public void createInstance_CoverageReport() {
-    new CSharpCoverageReportImportSensor(new CSharpCoverageAggregator(new Settings()), new SonarQubeVersion(SonarQubeVersion.V5_6));
+    new CSharpCoverageReportImportSensor(new CSharpCoverageAggregator(new MapSettings().asConfig()), new SonarQubeVersion(Version.create(6, 7)));
   }
 
   @Test
   public void createInstance_IntegrationCoverageReport() {
-    new CSharpIntegrationCoverageReportImportSensor(new CSharpIntegrationCoverageAggregator(new Settings()),
-        new SonarQubeVersion(SonarQubeVersion.V5_6));
+    new CSharpIntegrationCoverageReportImportSensor(new CSharpIntegrationCoverageAggregator(new MapSettings().asConfig()),
+      new SonarQubeVersion(Version.create(6, 7)));
   }
 
   private static Set<Object> nonProperties(List extensions) {

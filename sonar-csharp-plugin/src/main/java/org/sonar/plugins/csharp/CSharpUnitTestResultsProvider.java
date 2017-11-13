@@ -19,17 +19,16 @@
  */
 package org.sonar.plugins.csharp;
 
+import java.util.Arrays;
+import java.util.List;
 import org.sonar.api.SonarQubeVersion;
 import org.sonar.api.batch.bootstrap.ProjectDefinition;
+import org.sonar.api.config.Configuration;
 import org.sonar.api.config.PropertyDefinition;
-import org.sonar.api.config.Settings;
 import org.sonar.api.resources.Qualifiers;
 import org.sonar.plugins.dotnet.tests.UnitTestConfiguration;
 import org.sonar.plugins.dotnet.tests.UnitTestResultsAggregator;
 import org.sonar.plugins.dotnet.tests.UnitTestResultsImportSensor;
-
-import java.util.Arrays;
-import java.util.List;
 
 public class CSharpUnitTestResultsProvider {
 
@@ -40,8 +39,8 @@ public class CSharpUnitTestResultsProvider {
   private static final String NUNIT_TEST_RESULTS_PROPERTY_KEY = "sonar.cs.nunit.reportsPaths";
   private static final String XUNIT_TEST_RESULTS_PROPERTY_KEY = "sonar.cs.xunit.reportsPaths";
 
-  private static final UnitTestConfiguration UNIT_TEST_CONF =
-      new UnitTestConfiguration(VISUAL_STUDIO_TEST_RESULTS_PROPERTY_KEY, NUNIT_TEST_RESULTS_PROPERTY_KEY, XUNIT_TEST_RESULTS_PROPERTY_KEY);
+  private static final UnitTestConfiguration UNIT_TEST_CONF = new UnitTestConfiguration(VISUAL_STUDIO_TEST_RESULTS_PROPERTY_KEY, NUNIT_TEST_RESULTS_PROPERTY_KEY,
+    XUNIT_TEST_RESULTS_PROPERTY_KEY);
 
   private CSharpUnitTestResultsProvider() {
   }
@@ -68,8 +67,8 @@ public class CSharpUnitTestResultsProvider {
 
   public static class CSharpUnitTestResultsAggregator extends UnitTestResultsAggregator {
 
-    public CSharpUnitTestResultsAggregator(Settings settings) {
-      super(UNIT_TEST_CONF, settings);
+    public CSharpUnitTestResultsAggregator(Configuration configuration) {
+      super(UNIT_TEST_CONF, configuration);
     }
 
   }
@@ -77,7 +76,7 @@ public class CSharpUnitTestResultsProvider {
   public static class CSharpUnitTestResultsImportSensor extends UnitTestResultsImportSensor {
 
     public CSharpUnitTestResultsImportSensor(CSharpUnitTestResultsAggregator unitTestResultsAggregator, ProjectDefinition projectDef,
-                                             SonarQubeVersion sonarQubeVersion) {
+      SonarQubeVersion sonarQubeVersion) {
       super(unitTestResultsAggregator, projectDef, CSharpPlugin.LANGUAGE_KEY, CSharpPlugin.LANGUAGE_NAME, sonarQubeVersion);
     }
 

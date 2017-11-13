@@ -19,55 +19,42 @@
  */
 package org.sonarsource.dotnet.shared.plugins;
 
-import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.ENCODING_OUTPUT_PROTOBUF_NAME;
-
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
+import java.util.Collections;
 import java.util.Map;
-
-import org.sonar.api.CoreProperties;
-import org.sonar.api.SonarQubeVersion;
+import java.util.Optional;
 import org.sonar.api.batch.ScannerSide;
-import org.sonar.api.batch.bootstrap.ProjectDefinition;
 import org.sonar.api.batch.fs.InputFile;
-import org.sonar.api.utils.Version;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 import org.sonarsource.dotnet.shared.plugins.protobuf.EncodingImporter;
 import org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters;
 
+import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.ENCODING_OUTPUT_PROTOBUF_NAME;
+
 @ScannerSide
 public class EncodingPerFile {
   private static final Logger LOG = Loggers.get(EncodingPerFile.class);
-  private static final Version INPUT_FILE_CHARSET = Version.create(6, 1);
 
   // Lazy initialized
   private Map<Path, Charset> roslynEncodingPerPath;
 
-  private final ProjectDefinition projectDef;
-  private final SonarQubeVersion sonarQubeVersion;
-
-  public EncodingPerFile(ProjectDefinition projectDef, SonarQubeVersion sonarQubeVersion) {
-    this.projectDef = projectDef;
-    this.sonarQubeVersion = sonarQubeVersion;
-  }
-
-  void init(Path reportDir) {
-    EncodingImporter encodingImporter = getEncodingImporter();
-
-    Path encodingReportProtobuf = reportDir.resolve(ENCODING_OUTPUT_PROTOBUF_NAME);
-    if (encodingReportProtobuf.toFile().exists()) {
-      encodingImporter.accept(encodingReportProtobuf);
-    } else {
-      LOG.warn("Protobuf file not found: {}", encodingReportProtobuf);
+  void init(Optional<Path> protobufDir) {
+    if (protobufDir.isPresent()) {
+      Path encodingReportProtobuf = protobufDir.get().resolve(ENCODING_OUTPUT_PROTOBUF_NAME);
+      if (encodingReportProtobuf.toFile().exists()) {
+        EncodingImporter encodingImporter = ProtobufImporters.encodingImporter();
+        encodingImporter.accept(encodingReportProtobuf);
+        this.roslynEncodingPerPath = encodingImporter.getEncodingPerPath();
+        return;
+      }
     }
 
-    this.roslynEncodingPerPath = encodingImporter.getEncodingPerPath();
-  }
+    this.roslynEncodingPerPath = Collections.emptyMap();
+    LOG.warn("Protobuf file with encoding not found");
 
-  EncodingImporter getEncodingImporter() {
-    return ProtobufImporters.encodingImporter();
   }
 
   boolean encodingMatch(InputFile inputFile) {
@@ -84,15 +71,7 @@ public class EncodingPerFile {
       return false;
     }
 
-    Charset sqEncoding;
-    if (sonarQubeVersion.isGreaterThanOrEqual(INPUT_FILE_CHARSET)) {
-      sqEncoding = inputFile.charset();
-    } else {
-      // Prior to 6.1 there was only global module encoding
-      // can't use FileSystem::encoding since it is not yet initialized
-      String encoding = projectDef.properties().get(CoreProperties.ENCODING_PROPERTY);
-      sqEncoding = encoding != null && encoding.length() > 0 ? Charset.forName(encoding) : Charset.defaultCharset();
-    }
+    Charset sqEncoding = inputFile.charset();
 
     boolean sameEncoding = sqEncoding.equals(roslynEncoding);
     if (!sameEncoding) {

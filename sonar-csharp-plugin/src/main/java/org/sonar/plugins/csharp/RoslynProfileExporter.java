@@ -33,8 +33,8 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import org.sonar.api.config.Configuration;
 import org.sonar.api.config.PropertyDefinition;
-import org.sonar.api.config.Settings;
 import org.sonar.api.profiles.ProfileExporter;
 import org.sonar.api.profiles.RulesProfile;
 import org.sonar.api.rule.RuleKey;
@@ -48,7 +48,6 @@ import org.sonar.api.server.rule.RulesDefinition.Rule;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 
-import static java.util.Objects.requireNonNull;
 import static java.util.stream.Collectors.toList;
 
 public class RoslynProfileExporter extends ProfileExporter {
@@ -58,12 +57,12 @@ public class RoslynProfileExporter extends ProfileExporter {
 
   private static final String ROSLYN_REPOSITORY_PREFIX = "roslyn.";
 
-  private final Settings settings;
+  private final Configuration configuration;
   private final RulesDefinition[] rulesDefinitions;
 
-  public RoslynProfileExporter(Settings settings, RulesDefinition[] rulesDefinitions) {
+  public RoslynProfileExporter(Configuration configuration, RulesDefinition[] rulesDefinitions) {
     super("roslyn-cs", "Technical exporter for the MSBuild SonarQube Scanner");
-    this.settings = settings;
+    this.configuration = configuration;
     this.rulesDefinitions = rulesDefinitions;
     setSupportedLanguages(CSharpPlugin.LANGUAGE_KEY);
   }
@@ -296,7 +295,7 @@ public class RoslynProfileExporter extends ProfileExporter {
   }
 
   private String mandatoryPropertyValue(String propertyKey) {
-    return requireNonNull(settings.getDefaultValue(propertyKey), "The mandatory property \"" + propertyKey + "\" must be set by the Roslyn plugin.");
+    return configuration.get(propertyKey).orElseThrow(() -> new IllegalStateException("The mandatory property \"" + propertyKey + "\" must be set by the Roslyn plugin."));
   }
 
   private static String pluginKeyPropertyKey(String partialRepoKey) {

@@ -19,7 +19,7 @@
  */
 package org.sonar.plugins.csharp;
 
-import org.sonar.api.config.Settings;
+import org.sonar.api.config.Configuration;
 import org.sonarsource.dotnet.shared.plugins.AbstractConfiguration;
 
 public class CSharpConfiguration extends AbstractConfiguration {
@@ -28,8 +28,8 @@ public class CSharpConfiguration extends AbstractConfiguration {
   static final String ANALYZER_PROJECT_OUT_PATH_PROPERTY_KEY = "sonar.cs.analyzer.projectOutPath";
   private static final String ANALYSIS_OUTPUT_DIRECTORY_NAME = "output-cs";
 
-  public CSharpConfiguration(Settings settings) {
-    super(settings);
+  public CSharpConfiguration(Configuration configuration) {
+    super(configuration);
   }
 
   @Override

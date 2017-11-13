@@ -20,16 +20,15 @@
 package org.sonar.plugins.csharp;
 
 import com.google.common.collect.ImmutableSet;
+import java.io.StringWriter;
+import java.util.Collections;
+import java.util.Set;
 import org.junit.Test;
 import org.sonar.api.profiles.RulesProfile;
 import org.sonar.api.rules.ActiveRule;
 import org.sonar.api.rules.Rule;
 import org.sonar.api.rules.RuleParam;
 import org.sonar.api.rules.RulePriority;
-
-import java.io.StringWriter;
-import java.util.Collections;
-import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;

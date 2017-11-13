@@ -21,19 +21,21 @@ package org.sonar.plugins.csharp;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.sonar.api.config.Settings;
+import org.sonar.api.config.PropertyDefinitions;
+import org.sonar.api.config.internal.MapSettings;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class CSharpTest {
 
-  private Settings settings;
+  private MapSettings settings;
   private CSharp csharp;
 
   @Before
   public void init() {
-    settings = Settings.createForComponent(new CSharpPlugin());
-    csharp = new CSharp(settings);
+    PropertyDefinitions defs = new PropertyDefinitions(CSharpPlugin.class);
+    settings = new MapSettings(defs);
+    csharp = new CSharp(settings.asConfig());
   }
 
   @Test

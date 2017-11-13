@@ -26,7 +26,7 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
-import org.sonar.api.config.Settings;
+import org.sonar.api.config.internal.MapSettings;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -35,9 +35,9 @@ public class CSharpConfigurationTest {
   public TemporaryFolder temp = new TemporaryFolder();
 
   private Path workDir;
-  private Settings settings = new Settings();
+  private MapSettings settings = new MapSettings();
 
-  private CSharpConfiguration config = new CSharpConfiguration(settings);
+  private CSharpConfiguration config;
 
   @Before
   public void setUp() {
@@ -60,16 +60,17 @@ public class CSharpConfigurationTest {
   @Test
   public void onlyRoslynReportPresent() throws IOException {
     createRoslynOut();
-    assertThat(config.areProtobufReportsPresent()).isFalse();
-    assertThat(config.isRoslynReportPresent()).isTrue();
-    assertThat(config.roslynReportPath()).isEqualTo(workDir.resolve("roslyn-report.json"));
+    config = new CSharpConfiguration(settings.asConfig());
+    assertThat(config.protobufReportPath()).isNotPresent();
+    assertThat(config.roslynReportPath().get()).isEqualTo(workDir.resolve("roslyn-report.json"));
   }
 
   @Test
   public void onlyProtobufReportsPresent() throws IOException {
     createProtobufOut();
-    assertThat(config.areProtobufReportsPresent()).isTrue();
-    assertThat(config.isRoslynReportPresent()).isFalse();
-    assertThat(config.protobufReportPath()).isEqualTo(workDir.resolve("report").resolve("output-cs"));
+    config = new CSharpConfiguration(settings.asConfig());
+    assertThat(config.protobufReportPath()).isPresent();
+    assertThat(config.roslynReportPath()).isNotPresent();
+    assertThat(config.protobufReportPath().get()).isEqualTo(workDir.resolve("report").resolve("output-cs"));
   }
 }

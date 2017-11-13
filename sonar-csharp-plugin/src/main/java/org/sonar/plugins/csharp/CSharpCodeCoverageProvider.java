@@ -20,8 +20,8 @@
 package org.sonar.plugins.csharp;
 
 import org.sonar.api.SonarQubeVersion;
+import org.sonar.api.config.Configuration;
 import org.sonar.api.config.PropertyDefinition;
-import org.sonar.api.config.Settings;
 import org.sonar.api.resources.Qualifiers;
 import org.sonar.plugins.dotnet.tests.CoverageAggregator;
 import org.sonar.plugins.dotnet.tests.CoverageConfiguration;
@@ -127,8 +127,8 @@ public class CSharpCodeCoverageProvider {
 
   public static class CSharpCoverageAggregator extends CoverageAggregator {
 
-    public CSharpCoverageAggregator(Settings settings) {
-      super(COVERAGE_CONF, settings);
+    public CSharpCoverageAggregator(Configuration configuration) {
+      super(COVERAGE_CONF, configuration);
     }
 
   }
@@ -143,8 +143,8 @@ public class CSharpCodeCoverageProvider {
 
   public static class CSharpIntegrationCoverageAggregator extends CoverageAggregator {
 
-    public CSharpIntegrationCoverageAggregator(Settings settings) {
-      super(IT_COVERAGE_CONF, settings);
+    public CSharpIntegrationCoverageAggregator(Configuration configuration) {
+      super(IT_COVERAGE_CONF, configuration);
     }
 
   }

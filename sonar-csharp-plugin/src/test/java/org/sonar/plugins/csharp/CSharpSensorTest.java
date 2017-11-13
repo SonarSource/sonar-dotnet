@@ -22,12 +22,14 @@ package org.sonar.plugins.csharp;
 import java.io.File;
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Optional;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.rules.TemporaryFolder;
 import org.sonar.api.batch.fs.internal.DefaultInputFile;
+import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 import org.sonar.api.batch.rule.internal.ActiveRulesBuilder;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.api.internal.google.common.collect.ImmutableList;
@@ -67,22 +69,21 @@ public class CSharpSensorTest {
   public void prepare() throws Exception {
     workDir = temp.newFolder().toPath();
     tester = SensorContextTester.create(new File("src/test/resources"));
-    tester.fileSystem().setWorkDir(workDir.toFile());
+    tester.fileSystem().setWorkDir(workDir);
     when(system.isOsWindows()).thenReturn(true);
     sensor = new CSharpSensor(csConfigConfiguration, system, protobufDataImporter, roslynDataImporter);
   }
 
   private void addFileToFs() {
-    DefaultInputFile inputFile = new DefaultInputFile("mod", "file.cs").setLanguage(CSharpPlugin.LANGUAGE_KEY);
+    DefaultInputFile inputFile = new TestInputFileBuilder("mod", "file.cs").setLanguage(CSharpPlugin.LANGUAGE_KEY).build();
     tester.fileSystem().add(inputFile);
   }
 
   @Test
   public void noProtobufFilesShouldNotFail() {
     addFileToFs();
-    when(csConfigConfiguration.areProtobufReportsPresent()).thenReturn(false);
-    when(csConfigConfiguration.isRoslynReportPresent()).thenReturn(true);
-    when(csConfigConfiguration.roslynReportPath()).thenReturn(workDir.getRoot());
+    when(csConfigConfiguration.protobufReportPath()).thenReturn(Optional.empty());
+    when(csConfigConfiguration.roslynReportPath()).thenReturn(Optional.of(workDir.getRoot()));
     tester.setActiveRules(new ActiveRulesBuilder()
       .create(RuleKey.of(CSharpSonarRulesDefinition.REPOSITORY_KEY, "S1186"))
       .activate()
@@ -94,7 +95,7 @@ public class CSharpSensorTest {
 
     sensor.execute(tester);
 
-    verify(csConfigConfiguration).areProtobufReportsPresent();
+    verify(csConfigConfiguration).protobufReportPath();
     verifyZeroInteractions(protobufDataImporter);
     // {"sonaranalyzer-cs" = [csharpsquid:S1186, csharpsquid:[parameters_key]], "foo" = [roslyn.foo:custom-roslyn]}
     ImmutableMap<String, List<RuleKey>> expectedMap = ImmutableMap.of(
@@ -106,12 +107,11 @@ public class CSharpSensorTest {
   @Test
   public void noRoslynReportShouldNotFail() {
     addFileToFs();
-    when(csConfigConfiguration.areProtobufReportsPresent()).thenReturn(true);
-    when(csConfigConfiguration.isRoslynReportPresent()).thenReturn(false);
-    when(csConfigConfiguration.protobufReportPath()).thenReturn(workDir.getRoot());
+    when(csConfigConfiguration.roslynReportPath()).thenReturn(Optional.empty());
+    when(csConfigConfiguration.protobufReportPath()).thenReturn(Optional.of(workDir.getRoot()));
     sensor.execute(tester);
 
-    verify(csConfigConfiguration).areProtobufReportsPresent();
+    verify(csConfigConfiguration).protobufReportPath();
     verify(protobufDataImporter).importResults(tester, workDir.getRoot(), CSharpSonarRulesDefinition.REPOSITORY_KEY, true);
     verifyZeroInteractions(roslynDataImporter);
   }

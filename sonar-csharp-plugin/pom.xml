@@ -63,7 +63,7 @@
   </scm>
 
   <properties>
-    <sonar.version>5.6</sonar.version>
+    <sonar.version>6.7</sonar.version>
     <maven.test.redirectTestOutputToFile>true</maven.test.redirectTestOutputToFile>
     <sonar.pluginName>SonarC#</sonar.pluginName>
     <sonar.pluginClass>org.sonar.plugins.csharp.CSharpPlugin</sonar.pluginClass>
@@ -93,14 +93,14 @@
       <version>${sonar.version}</version>
       <scope>provided</scope>
     </dependency>
+    
+    <!-- test dependencies -->
     <dependency>
       <groupId>ch.qos.logback</groupId>
       <artifactId>logback-classic</artifactId>
       <version>0.9.15</version>
       <scope>test</scope>
     </dependency>
-
-    <!-- test dependencies -->
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>

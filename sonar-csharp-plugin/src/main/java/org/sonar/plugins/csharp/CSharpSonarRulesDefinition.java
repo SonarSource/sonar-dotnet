@@ -23,13 +23,13 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.LinkedHashSet;
 import java.util.Set;
-import org.sonar.api.batch.BatchSide;
+import org.sonar.api.batch.ScannerSide;
 import org.sonar.api.server.rule.RulesDefinition;
 import org.sonar.api.server.rule.RulesDefinitionXmlLoader;
 
 import static java.util.Objects.requireNonNull;
 
-@BatchSide
+@ScannerSide
 public class CSharpSonarRulesDefinition implements RulesDefinition {
 
   static final String REPOSITORY_KEY = "csharpsquid";

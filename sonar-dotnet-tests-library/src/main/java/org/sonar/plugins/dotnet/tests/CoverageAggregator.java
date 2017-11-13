@@ -21,23 +21,22 @@ package org.sonar.plugins.dotnet.tests;
 
 import java.io.File;
 import java.util.function.Predicate;
+import org.sonar.api.batch.ScannerSide;
+import org.sonar.api.config.Configuration;
 
-import org.sonar.api.batch.BatchSide;
-import org.sonar.api.config.Settings;
-
-@BatchSide
+@ScannerSide
 public class CoverageAggregator {
 
   private final CoverageConfiguration coverageConf;
-  private final Settings settings;
+  private final Configuration configuration;
   private final CoverageCache coverageCache;
   private final NCover3ReportParser ncover3ReportParser;
   private final OpenCoverReportParser openCoverReportParser;
   private final DotCoverReportsAggregator dotCoverReportsAggregator;
   private final VisualStudioCoverageXmlReportParser visualStudioCoverageXmlReportParser;
 
-  public CoverageAggregator(CoverageConfiguration coverageConf, Settings settings) {
-    this(coverageConf, settings,
+  public CoverageAggregator(CoverageConfiguration coverageConf, Configuration configuration) {
+    this(coverageConf, configuration,
       new CoverageCache(),
       new NCover3ReportParser(),
       new OpenCoverReportParser(),
@@ -45,7 +44,7 @@ public class CoverageAggregator {
       new VisualStudioCoverageXmlReportParser());
   }
 
-  public CoverageAggregator(CoverageConfiguration coverageConf, Settings settings,
+  public CoverageAggregator(CoverageConfiguration coverageConf, Configuration configuration,
     CoverageCache coverageCache,
     NCover3ReportParser ncover3ReportParser,
     OpenCoverReportParser openCoverReportParser,
@@ -53,7 +52,7 @@ public class CoverageAggregator {
     VisualStudioCoverageXmlReportParser visualStudioCoverageXmlReportParser) {
 
     this.coverageConf = coverageConf;
-    this.settings = settings;
+    this.configuration = configuration;
     this.coverageCache = coverageCache;
     this.ncover3ReportParser = ncover3ReportParser;
     this.openCoverReportParser = openCoverReportParser;
@@ -62,7 +61,7 @@ public class CoverageAggregator {
   }
 
   boolean hasCoverageProperty() {
-    return hasCoverageProperty(settings::hasKey);
+    return hasCoverageProperty(configuration::hasKey);
   }
 
   boolean hasCoverageProperty(Predicate<String> hasKeyPredicate) {
@@ -89,20 +88,20 @@ public class CoverageAggregator {
   }
 
   Coverage aggregate(WildcardPatternFileProvider wildcardPatternFileProvider, Coverage coverage) {
-    if (hasNCover3ReportPaths(settings::hasKey)) {
-      aggregate(wildcardPatternFileProvider, settings.getStringArray(coverageConf.ncover3PropertyKey()), ncover3ReportParser, coverage);
+    if (hasNCover3ReportPaths(configuration::hasKey)) {
+      aggregate(wildcardPatternFileProvider, configuration.getStringArray(coverageConf.ncover3PropertyKey()), ncover3ReportParser, coverage);
     }
 
-    if (hasOpenCoverReportPaths(settings::hasKey)) {
-      aggregate(wildcardPatternFileProvider, settings.getStringArray(coverageConf.openCoverPropertyKey()), openCoverReportParser, coverage);
+    if (hasOpenCoverReportPaths(configuration::hasKey)) {
+      aggregate(wildcardPatternFileProvider, configuration.getStringArray(coverageConf.openCoverPropertyKey()), openCoverReportParser, coverage);
     }
 
-    if (hasDotCoverReportPaths(settings::hasKey)) {
-      aggregate(wildcardPatternFileProvider, settings.getStringArray(coverageConf.dotCoverPropertyKey()), dotCoverReportsAggregator, coverage);
+    if (hasDotCoverReportPaths(configuration::hasKey)) {
+      aggregate(wildcardPatternFileProvider, configuration.getStringArray(coverageConf.dotCoverPropertyKey()), dotCoverReportsAggregator, coverage);
     }
 
-    if (hasVisualStudioCoverageXmlReportPaths(settings::hasKey)) {
-      aggregate(wildcardPatternFileProvider, settings.getStringArray(coverageConf.visualStudioCoverageXmlPropertyKey()), visualStudioCoverageXmlReportParser, coverage);
+    if (hasVisualStudioCoverageXmlReportPaths(configuration::hasKey)) {
+      aggregate(wildcardPatternFileProvider, configuration.getStringArray(coverageConf.visualStudioCoverageXmlPropertyKey()), visualStudioCoverageXmlReportParser, coverage);
     }
 
     return coverage;

@@ -20,16 +20,16 @@
 package org.sonar.plugins.csharp;
 
 import com.google.common.collect.ImmutableSet;
+import java.util.List;
+import java.util.Set;
 import org.junit.Test;
 import org.sonar.api.SonarQubeVersion;
 import org.sonar.api.batch.bootstrap.ProjectDefinition;
 import org.sonar.api.config.PropertyDefinition;
-import org.sonar.api.config.Settings;
+import org.sonar.api.config.internal.MapSettings;
+import org.sonar.api.utils.Version;
 import org.sonar.plugins.csharp.CSharpUnitTestResultsProvider.CSharpUnitTestResultsAggregator;
 import org.sonar.plugins.csharp.CSharpUnitTestResultsProvider.CSharpUnitTestResultsImportSensor;
-
-import java.util.List;
-import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -47,8 +47,8 @@ public class CSharpUnitTestResultsProviderTest {
 
   @Test
   public void createInstance_CSharpUnitTestResultsImportSensor() {
-    new CSharpUnitTestResultsImportSensor(new CSharpUnitTestResultsAggregator(new Settings()), ProjectDefinition.create(),
-        new SonarQubeVersion(SonarQubeVersion.V5_6));
+    new CSharpUnitTestResultsImportSensor(new CSharpUnitTestResultsAggregator(new MapSettings().asConfig()), ProjectDefinition.create(),
+      new SonarQubeVersion(Version.create(6, 7)));
   }
 
   private static Set<Object> nonProperties(List extensions) {

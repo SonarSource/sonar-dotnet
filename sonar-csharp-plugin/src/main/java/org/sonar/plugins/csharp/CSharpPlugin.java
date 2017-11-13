@@ -35,7 +35,7 @@ import org.sonarsource.dotnet.shared.plugins.WrongEncodingFileFilter;
     defaultValue = CSharpPlugin.FILE_SUFFIXES_DEFVALUE,
     name = "File suffixes",
     description = "Comma-separated list of suffixes of files to analyze.",
-    project = true, global = true),
+    project = true, global = true, multiValues = true),
   @Property(
     key = CSharpPlugin.IGNORE_HEADER_COMMENTS,
     defaultValue = "true",
