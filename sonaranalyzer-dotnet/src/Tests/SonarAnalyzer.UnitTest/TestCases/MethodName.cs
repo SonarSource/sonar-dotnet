@@ -61,4 +61,11 @@
             base.foo();
         }
     }
+
+    public partial class SomeClass
+    {
+        public partial void MY_METHOD()
+        {
+        }
+    }
 }

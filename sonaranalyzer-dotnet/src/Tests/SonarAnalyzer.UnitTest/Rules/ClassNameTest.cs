@@ -27,9 +27,20 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void ClassName()
+        public void ClassName_CSharp()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\ClassName.cs", new SonarAnalyzer.Rules.CSharp.ClassAndMethodName());
+            Verifier.VerifyAnalyzer(
+                new[]
+                {
+                    @"TestCases\ClassName.cs",
+                    @"TestCases\ClassName.Partial.cs",
+                }, new SonarAnalyzer.Rules.CSharp.ClassAndMethodName());
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void ClassName_VB()
+        {
             Verifier.VerifyAnalyzer(@"TestCases\ClassName.vb", new SonarAnalyzer.Rules.VisualBasic.ClassName());
         }
 
@@ -37,7 +48,12 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void MethodName()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\MethodName.cs",
+            Verifier.VerifyAnalyzer(
+                new[]
+                {
+                    @"TestCases\MethodName.cs",
+                    @"TestCases\MethodName.Partial.cs",
+                },
                 new SonarAnalyzer.Rules.CSharp.ClassAndMethodName());
         }
     }
