@@ -210,7 +210,7 @@
 
                     <!-- SQALE XML in sslr requires a resource to read from -->
                     <copy todir="${sonarAnalyzer.workDirectory}/org/sonar/plugins/csharp">
-                      <fileset dir="${project.build.directory}/../../sonaranalyzer-dotnet/src/SonarAnalyzer.RuleDescriptorGenerator/bin/${analyzer.kind}/${analyzer.configuration}/cs">
+                      <fileset dir="${project.build.directory}/../../sonaranalyzer-dotnet/src/SonarAnalyzer.RuleDescriptorGenerator/bin/${analyzer.kind}/${analyzer.configuration}/net46/cs">
                         <include name="rules.xml"/>
                         <include name="profile.xml"/>
                         <include name="sqale.xml"/>
