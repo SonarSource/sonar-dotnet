@@ -61,11 +61,7 @@ try {
             "VS2015" { "SonarAnalyzer.VS2015.sln" }
             "VS2017" { "SonarAnalyzer.VS2017.sln" }
         }
-    $msbuildVersion =
-        switch ($analyzerKind) {
-            "VS2017" { "15.0" }
-            Default { "14.0" }
-        }
+    $msbuildVersion = "15.0"
 
     Write-Host "Solution to build: $solutionName"
     Write-Host "Build configuration: $buildConfiguration"

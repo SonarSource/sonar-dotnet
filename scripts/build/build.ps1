@@ -365,7 +365,7 @@ try {
     . (Join-Path $PSScriptRoot "build-utils.ps1")
 
     $buildConfiguration = "Release"
-    $binPath = "bin\Classic\${buildConfiguration}"
+    $binPath = "bin\Classic\${buildConfiguration}\net46"
     $solutionName = "SonarAnalyzer.sln"
     $branchName = Get-BranchName
     $isMaster = $branchName -eq "master"
