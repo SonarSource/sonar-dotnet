@@ -105,4 +105,6 @@
     class _AbABaa { } // Noncompliant {{Rename class '_AbABaa' to match camel case naming rules, trim underscores from the name.}}
 
     class 你好 { } // Compliant
+
+    public partial class ELN { }
 }

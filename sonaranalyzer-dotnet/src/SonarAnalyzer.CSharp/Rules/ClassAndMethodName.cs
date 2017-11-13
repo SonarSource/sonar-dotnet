@@ -107,6 +107,13 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
+            if (symbol.DeclaringSyntaxReferences.Length > 1 &&
+                symbol.DeclaringSyntaxReferences.Any(syntax =>
+                    Helpers.CSharp.GeneratedCodeRecognizer.Instance.IsGenerated(syntax.SyntaxTree)))
+            {
+                return;
+            }
+
             string suggestion;
             bool isNameValid = IsTypeNameValid(identifier.ValueText,
                 requireInitialI: typeDeclaration is InterfaceDeclarationSyntax,
