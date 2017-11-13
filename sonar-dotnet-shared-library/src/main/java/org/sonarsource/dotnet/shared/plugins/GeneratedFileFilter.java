@@ -56,7 +56,7 @@ public class GeneratedFileFilter implements InputFileFilter {
 
     boolean isGenerated = generatedFilePaths.contains(inputFile.path());
     if (isGenerated) {
-      LOG.info("Skipping auto generated file: {}", inputFile.path());
+      LOG.debug("Skipping auto generated file: {}", inputFile.path());
     }
     return !isGenerated;
   }
