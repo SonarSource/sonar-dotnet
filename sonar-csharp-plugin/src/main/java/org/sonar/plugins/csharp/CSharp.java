@@ -19,21 +19,21 @@
  */
 package org.sonar.plugins.csharp;
 
-import org.sonar.api.config.Settings;
+import org.sonar.api.config.Configuration;
 import org.sonar.api.resources.AbstractLanguage;
 
 public class CSharp extends AbstractLanguage {
 
-  private final Settings settings;
+  private final Configuration configuration;
 
-  public CSharp(Settings settings) {
+  public CSharp(Configuration configuration) {
     super(CSharpPlugin.LANGUAGE_KEY, CSharpPlugin.LANGUAGE_NAME);
-    this.settings = settings;
+    this.configuration = configuration;
   }
 
   @Override
   public String[] getFileSuffixes() {
-    return settings.getStringArray(CSharpPlugin.FILE_SUFFIXES_KEY);
+    return configuration.getStringArray(CSharpPlugin.FILE_SUFFIXES_KEY);
   }
 
 }

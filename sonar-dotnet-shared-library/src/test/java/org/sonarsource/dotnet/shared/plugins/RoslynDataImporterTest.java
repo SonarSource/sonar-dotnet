@@ -72,17 +72,15 @@ public class RoslynDataImporterTest {
       StringEscapeUtils.escapeJavaScript(csFile.toString())).getBytes(StandardCharsets.UTF_8),
       StandardOpenOption.WRITE);
 
-    tester = SensorContextTester.create(new File("src/test/resources"));
-    tester.fileSystem().setWorkDir(workDir.toFile());
+    roslynReportPath = Paths.get(this.getClass().getResource("/RoslynDataImporterTest").toURI());
+    tester = SensorContextTester.create(csFile.getParent());
 
-    DefaultInputFile inputFile = new TestInputFileBuilder(tester.module().key(), "Program.cs")
+    DefaultInputFile inputFile = new TestInputFileBuilder(tester.module().key(), csFile.getParent().toFile(), csFile.toFile())
       .setLanguage("cs")
       .initMetadata(new String(Files.readAllBytes(csFile), StandardCharsets.UTF_8))
       .build();
 
-    roslynReportPath = Paths.get(this.getClass().getResource("/RoslynDataImporterTest").toURI());
-    tester = SensorContextTester.create(new File("src/test/resources"));
-    tester.fileSystem().setWorkDir(workDir.toFile());
+    tester.fileSystem().setWorkDir(workDir);
     tester.fileSystem().add(inputFile);
   }
 
@@ -120,7 +118,7 @@ public class RoslynDataImporterTest {
     roslynDataImporter.importRoslynReport(workDir.resolve("roslyn-report.json"), tester, activeRules);
   }
 
-  private Map<String, List<RuleKey>> createActiveRules() {
+  private static Map<String, List<RuleKey>> createActiveRules() {
     return ImmutableMap.of(
       "sonaranalyzer-cs", ImmutableList.of(RuleKey.of("csharpsquid", "S1186"), RuleKey.of("csharpsquid", "[parameters_key]")),
       "foo", ImmutableList.of(RuleKey.of("roslyn.foo", "custom-roslyn")));

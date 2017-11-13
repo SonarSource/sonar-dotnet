@@ -19,11 +19,12 @@
  */
 package org.sonar.plugins.csharp;
 
-import java.io.File;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import org.sonar.api.batch.fs.FileSystem;
+import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.InputFile.Type;
 import org.sonar.api.batch.rule.ActiveRule;
 import org.sonar.api.batch.sensor.Sensor;
@@ -81,28 +82,27 @@ public class CSharpSensor implements Sensor {
     return true;
   }
 
-  private static Iterable<File> filesToAnalyze(FileSystem fs) {
-    return fs.files(fs.predicates().and(fs.predicates().hasType(Type.MAIN), fs.predicates().hasLanguage(CSharpPlugin.LANGUAGE_KEY)));
+  private static Iterable<InputFile> filesToAnalyze(FileSystem fs) {
+    return fs.inputFiles(fs.predicates().and(fs.predicates().hasType(Type.MAIN), fs.predicates().hasLanguage(CSharpPlugin.LANGUAGE_KEY)));
   }
 
   private void executeInternal(SensorContext context) {
-    boolean hasRoslynReportPath = config.isRoslynReportPresent();
+    Optional<Path> roslynReportPath = config.roslynReportPath();
+    Optional<Path> protobufReportsDirectory = config.protobufReportPath();
 
-    if (config.areProtobufReportsPresent()) {
-      Path protobufReportsDirectory = config.protobufReportPath();
-
-      LOG.info("Importing analysis results from " + protobufReportsDirectory.toAbsolutePath());
-      protobufDataImporter.importResults(context, protobufReportsDirectory, CSharpSonarRulesDefinition.REPOSITORY_KEY, !hasRoslynReportPath);
+    if (protobufReportsDirectory.isPresent()) {
+      LOG.info("Importing analysis results from " + protobufReportsDirectory.get().toAbsolutePath());
+      protobufDataImporter.importResults(context, protobufReportsDirectory.get(), CSharpSonarRulesDefinition.REPOSITORY_KEY, !roslynReportPath.isPresent());
     }
 
-    if (hasRoslynReportPath) {
+    if (roslynReportPath.isPresent()) {
       LOG.info("Importing Roslyn report");
       Map<String, List<RuleKey>> activeRoslynRulesByPartialRepoKey = RoslynProfileExporter.activeRoslynRulesByPartialRepoKey(context.activeRules()
         .findAll()
         .stream()
         .map(ActiveRule::ruleKey)
         .collect(toList()));
-      roslynDataImporter.importRoslynReport(config.roslynReportPath(), context, activeRoslynRulesByPartialRepoKey);
+      roslynDataImporter.importRoslynReport(roslynReportPath.get(), context, activeRoslynRulesByPartialRepoKey);
     }
   }
 }

@@ -65,7 +65,7 @@ public class ProtobufDataImporterTest {
     Path csFile = Paths.get("src/test/resources/Program.cs").toAbsolutePath();
 
     tester = SensorContextTester.create(new File("src/test/resources"));
-    tester.fileSystem().setWorkDir(workDir.toFile());
+    tester.fileSystem().setWorkDir(workDir);
 
     inputFile = new TestInputFileBuilder(tester.module().key(), "Program.cs")
       .setLanguage("cs")

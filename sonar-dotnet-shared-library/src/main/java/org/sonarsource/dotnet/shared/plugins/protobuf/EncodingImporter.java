@@ -19,17 +19,16 @@
  */
 package org.sonarsource.dotnet.shared.plugins.protobuf;
 
+import java.nio.charset.Charset;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 import org.sonarsource.dotnet.protobuf.SonarAnalyzer;
 import org.sonarsource.dotnet.protobuf.SonarAnalyzer.EncodingInfo;
-
-import java.nio.charset.Charset;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 public class EncodingImporter extends RawProtobufImporter<EncodingInfo> {
 
@@ -56,10 +55,11 @@ public class EncodingImporter extends RawProtobufImporter<EncodingInfo> {
   }
 
   public Map<Path, Charset> getEncodingPerPath() {
-    return encodingPerPath.entrySet()
-        .stream()
-        .collect(Collectors.toMap(entry -> Paths.get(entry.getKey()),
-                                  Map.Entry::getValue));
+    // stream collector can't handle null values
+    HashMap<Path, Charset> map = new HashMap<>();
+    for (Map.Entry<String, Charset> e : encodingPerPath.entrySet()) {
+      map.put(Paths.get(e.getKey()), e.getValue());
+    }
+    return Collections.unmodifiableMap(map);
   }
-
 }

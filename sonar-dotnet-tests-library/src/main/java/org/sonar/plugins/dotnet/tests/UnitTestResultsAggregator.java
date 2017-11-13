@@ -21,29 +21,28 @@ package org.sonar.plugins.dotnet.tests;
 
 import java.io.File;
 import java.util.function.Predicate;
+import org.sonar.api.batch.ScannerSide;
+import org.sonar.api.config.Configuration;
 
-import org.sonar.api.batch.BatchSide;
-import org.sonar.api.config.Settings;
-
-@BatchSide
+@ScannerSide
 public class UnitTestResultsAggregator {
 
   private final UnitTestConfiguration unitTestConf;
-  private final Settings settings;
+  private final Configuration configuration;
   private final VisualStudioTestResultsFileParser visualStudioTestResultsFileParser;
   private final NUnitTestResultsFileParser nunitTestResultsFileParser;
   private final XUnitTestResultsFileParser xunitTestResultsFileParser;
 
-  public UnitTestResultsAggregator(UnitTestConfiguration unitTestConf, Settings settings) {
-    this(unitTestConf, settings, new VisualStudioTestResultsFileParser(), new NUnitTestResultsFileParser(), new XUnitTestResultsFileParser());
+  public UnitTestResultsAggregator(UnitTestConfiguration unitTestConf, Configuration configuration) {
+    this(unitTestConf, configuration, new VisualStudioTestResultsFileParser(), new NUnitTestResultsFileParser(), new XUnitTestResultsFileParser());
   }
 
-  UnitTestResultsAggregator(UnitTestConfiguration unitTestConf, Settings settings,
+  UnitTestResultsAggregator(UnitTestConfiguration unitTestConf, Configuration configuration,
     VisualStudioTestResultsFileParser visualStudioTestResultsFileParser,
     NUnitTestResultsFileParser nunitTestResultsFileParser,
     XUnitTestResultsFileParser xunitTestResultsFileParser) {
     this.unitTestConf = unitTestConf;
-    this.settings = settings;
+    this.configuration = configuration;
     this.visualStudioTestResultsFileParser = visualStudioTestResultsFileParser;
     this.nunitTestResultsFileParser = nunitTestResultsFileParser;
     this.xunitTestResultsFileParser = xunitTestResultsFileParser;
@@ -56,7 +55,7 @@ public class UnitTestResultsAggregator {
   }
 
   boolean hasUnitTestResultsProperty() {
-    return hasUnitTestResultsProperty(settings::hasKey);
+    return hasUnitTestResultsProperty(configuration::hasKey);
   }
 
   private boolean hasVisualStudioTestResultsFile(Predicate<String> hasKeyPredicate) {
@@ -72,16 +71,17 @@ public class UnitTestResultsAggregator {
   }
 
   UnitTestResults aggregate(WildcardPatternFileProvider wildcardPatternFileProvider, UnitTestResults unitTestResults) {
-    if (hasVisualStudioTestResultsFile(settings::hasKey)) {
-      aggregate(wildcardPatternFileProvider, settings.getStringArray(unitTestConf.visualStudioTestResultsFilePropertyKey()), visualStudioTestResultsFileParser, unitTestResults);
+    if (hasVisualStudioTestResultsFile(configuration::hasKey)) {
+      aggregate(wildcardPatternFileProvider, configuration.getStringArray(unitTestConf.visualStudioTestResultsFilePropertyKey()), visualStudioTestResultsFileParser,
+        unitTestResults);
     }
 
-    if (hasNUnitTestResultsFile(settings::hasKey)) {
-      aggregate(wildcardPatternFileProvider, settings.getStringArray(unitTestConf.nunitTestResultsFilePropertyKey()), nunitTestResultsFileParser, unitTestResults);
+    if (hasNUnitTestResultsFile(configuration::hasKey)) {
+      aggregate(wildcardPatternFileProvider, configuration.getStringArray(unitTestConf.nunitTestResultsFilePropertyKey()), nunitTestResultsFileParser, unitTestResults);
     }
 
-    if (hasXUnitTestResultsFile(settings::hasKey)) {
-      aggregate(wildcardPatternFileProvider, settings.getStringArray(unitTestConf.xunitTestResultsFilePropertyKey()), xunitTestResultsFileParser, unitTestResults);
+    if (hasXUnitTestResultsFile(configuration::hasKey)) {
+      aggregate(wildcardPatternFileProvider, configuration.getStringArray(unitTestConf.xunitTestResultsFilePropertyKey()), xunitTestResultsFileParser, unitTestResults);
     }
 
     return unitTestResults;

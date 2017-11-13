@@ -24,9 +24,10 @@ import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Optional;
 import java.util.stream.StreamSupport;
 import org.sonar.api.batch.ScannerSide;
-import org.sonar.api.config.Settings;
+import org.sonar.api.config.Configuration;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 
@@ -35,10 +36,10 @@ public abstract class AbstractConfiguration {
 
   private static final Logger LOG = Loggers.get(AbstractConfiguration.class);
 
-  private final Settings settings;
+  private final Configuration configuration;
 
-  public AbstractConfiguration(Settings settings) {
-    this.settings = settings;
+  public AbstractConfiguration(Configuration configuration) {
+    this.configuration = configuration;
   }
 
   protected abstract String getRoslynJsonReportPathProperty();
@@ -47,46 +48,43 @@ public abstract class AbstractConfiguration {
 
   protected abstract String getAnalyzerReportDir();
 
-  public boolean areProtobufReportsPresent() {
-    if (!settings.hasKey(getAnalyzerWorkDirProperty())) {
+  /**
+   * Returns path of the directory containing all protobuf files, if:
+   * - Property with it's location is defined
+   * - The directory exists
+   * - The directory contains at least one protobuf
+   */
+  public Optional<Path> protobufReportPath() {
+    Optional<String> analyzerWorkDirPath = configuration.get(getAnalyzerWorkDirProperty());
+
+    if (!analyzerWorkDirPath.isPresent()) {
       LOG.warn("Property missing: '" + getAnalyzerWorkDirProperty() + "'. No protobuf files will be loaded.");
-      return false;
+      return Optional.empty();
     }
-    Path analyzerOutputDir = protobufReportPath();
+
+    Path analyzerOutputDir = Paths.get(analyzerWorkDirPath.get(), getAnalyzerReportDir());
+    configuration.get(getAnalyzerWorkDirProperty());
 
     if (!analyzerOutputDir.toFile().exists()) {
       LOG.warn("Analyzer working directory does not exist: " + analyzerOutputDir.toAbsolutePath() + ". No protobuf files will be loaded.");
-      return false;
+      return Optional.empty();
     }
 
     try (DirectoryStream<Path> files = Files.newDirectoryStream(analyzerOutputDir, p -> p.getFileName().toString().toLowerCase().endsWith(".pb"))) {
       long count = StreamSupport.stream(files.spliterator(), false).count();
       if (count == 0) {
         LOG.warn("Analyzer working directory contains no .pb file(s). No protobuf files will be loaded.");
-        return false;
+        return Optional.empty();
       }
       LOG.info("Analyzer working directory contains " + count + " .pb file(s)");
-      return true;
+
+      return Optional.of(analyzerOutputDir);
     } catch (IOException e) {
       throw new IllegalStateException("Could not check for .pb files in " + analyzerOutputDir.toAbsolutePath(), e);
     }
   }
 
-  public boolean isRoslynReportPresent() {
-    return settings.hasKey(getRoslynJsonReportPathProperty());
+  public Optional<Path> roslynReportPath() {
+    return configuration.get(getRoslynJsonReportPathProperty()).map(Paths::get);
   }
-
-  public Path roslynReportPath() {
-    return Paths.get(settings.getString(getRoslynJsonReportPathProperty()));
-  }
-
-  /**
-   * Returns path of the directory containing all protobuf files.
-   * Check if it exists with {@link AbstractConfiguration#areProtobufReportsPresent()}.
-   */
-  public Path protobufReportPath() {
-    String analyzerWorkDirPath = settings.getString(getAnalyzerWorkDirProperty());
-    return Paths.get(analyzerWorkDirPath, getAnalyzerReportDir());
-  }
-
 }

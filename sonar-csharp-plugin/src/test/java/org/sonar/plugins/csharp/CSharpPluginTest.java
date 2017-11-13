@@ -23,8 +23,8 @@ import com.google.common.collect.ImmutableList;
 import java.util.List;
 import org.junit.Test;
 import org.sonar.api.Plugin;
+import org.sonar.api.SonarRuntime;
 import org.sonar.api.config.PropertyDefinition;
-import org.sonar.api.utils.Version;
 import org.sonarsource.dotnet.shared.plugins.EncodingPerFile;
 import org.sonarsource.dotnet.shared.plugins.GeneratedFileFilter;
 import org.sonarsource.dotnet.shared.plugins.ProtobufDataImporter;
@@ -38,7 +38,7 @@ public class CSharpPluginTest {
 
   @Test
   public void getExtensions() {
-    Plugin.Context context = new Plugin.Context(mock(Version.class));
+    Plugin.Context context = new Plugin.Context(mock(SonarRuntime.class));
     new CSharpPlugin().define(context);
 
     List extensions = context.getExtensions();

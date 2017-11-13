@@ -19,16 +19,16 @@
  */
 package org.sonarsource.dotnet.shared.plugins;
 
+import java.nio.file.Path;
+import java.util.HashSet;
+import java.util.Optional;
+import java.util.Set;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.InputFileFilter;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 import org.sonarsource.dotnet.shared.plugins.protobuf.FileMetadataImporter;
 import org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters;
-
-import java.nio.file.Path;
-import java.util.HashSet;
-import java.util.Set;
 
 import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.FILEMETADATA_OUTPUT_PROTOBUF_NAME;
 
@@ -56,7 +56,7 @@ public class GeneratedFileFilter implements InputFileFilter {
 
     boolean isGenerated = generatedFilePaths.contains(inputFile.path());
     if (isGenerated) {
-      LOG.debug("Skipping auto generated file: {}", inputFile.path());
+      LOG.debug("Skipping auto generated file: {}", inputFile);
     }
     return !isGenerated;
   }
@@ -70,16 +70,15 @@ public class GeneratedFileFilter implements InputFileFilter {
     }
     initialized = true;
 
-    Path protobufPath = config
-            .protobufReportPath()
-            .resolve(FILEMETADATA_OUTPUT_PROTOBUF_NAME);
-
-    if (protobufPath.toFile().exists()) {
-      FileMetadataImporter fileMetadataImporter = protobufImporters.fileMetadataImporter();
-
-      fileMetadataImporter.accept(protobufPath);
-
-      generatedFilePaths.addAll(fileMetadataImporter.getGeneratedFilePaths());
+    Optional<Path> protobufPath = config
+      .protobufReportPath();
+    if (protobufPath.isPresent()) {
+      Path metadataPath = protobufPath.get().resolve(FILEMETADATA_OUTPUT_PROTOBUF_NAME);
+      if (metadataPath.toFile().exists()) {
+        FileMetadataImporter fileMetadataImporter = protobufImporters.fileMetadataImporter();
+        fileMetadataImporter.accept(metadataPath);
+        generatedFilePaths.addAll(fileMetadataImporter.getGeneratedFilePaths());
+      }
     }
   }
 }
