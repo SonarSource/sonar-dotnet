@@ -76,16 +76,21 @@ function New-NuGetPackages([string]$binPath) {
     }
 }
 
-function Restore-Packages ([string]$solutionPath) {
-    $solutionName = Split-Path $solutionPath -leaf
+function Restore-Packages (
+    [Parameter(Mandatory = $true, Position = 0)][ValidateSet("14.0", "15.0")][string]$msbuildVersion,
+    [Parameter(Mandatory = $true, Position = 1)][string]$solutionPath) {
+
+    $solutionName = Split-Path $solutionPath -Leaf
     Write-Header "Restoring NuGet packages for ${solutionName}"
 
+    $msbuildBinDir = Split-Path -Parent (Get-MsBuildPath $msbuildVersion)
+
     if (Test-Debug) {
-        Exec { & (Get-NuGetPath) restore $solutionPath -Verbosity detailed `
+        Exec { & (Get-NuGetPath) restore $solutionPath -MSBuildPath $msbuildBinDir -Verbosity detailed `
         } -errorMessage "ERROR: Restoring NuGet packages FAILED."
     }
     else {
-        Exec { & (Get-NuGetPath) restore $solutionPath `
+        Exec { & (Get-NuGetPath) restore $solutionPath -MSBuildPath $msbuildBinDir `
         } -errorMessage "ERROR: Restoring NuGet packages FAILED."
     }
 }

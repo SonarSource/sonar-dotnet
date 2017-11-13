@@ -33,7 +33,7 @@ function Build-Project([string]$ProjectName, [string]$SolutionRelativePath) {
     Write-Debug "Setting PROJECT environment variable to '${ProjectName}'"
     $Env:PROJECT = $ProjectName
 
-    Restore-Packages $solutionPath
+    Restore-Packages $msbuildVersion $solutionPath
     # Note: Summary doesn't work for MSBuild 14
     Invoke-MSBuild $msbuildVersion $solutionPath `
         /m `

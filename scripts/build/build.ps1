@@ -228,7 +228,7 @@ function Invoke-DotNetBuild() {
         $skippedAnalysis = $true
     }
 
-    Restore-Packages $solutionName
+    Restore-Packages "15.0" $solutionName
     Invoke-MSBuild "15.0" $solutionName `
         /consoleloggerparameters:Summary `
         /m `

@@ -73,7 +73,7 @@ try {
     Write-Host "MSBuild: ${msbuildVersion}"
 
     if ($restore) {
-        Restore-Packages $solutionName
+        Restore-Packages $msbuildVersion $solutionName
     }
 
     if ($build) {
