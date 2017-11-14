@@ -24,9 +24,14 @@ using System.Runtime.Serialization;
 
 namespace SonarAnalyzer.Common
 {
+    [Serializable]
     public class MultiValueDictionary<TKey, TValue> : Dictionary<TKey, ICollection<TValue>>
     {
         public MultiValueDictionary()
+        {
+        }
+
+        protected MultiValueDictionary(SerializationInfo info, StreamingContext context) : base(info, context)
         {
         }
 
@@ -69,6 +74,11 @@ namespace SonarAnalyzer.Common
             {
                 values.Add(addedValue);
             }
+        }
+
+        public override void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            base.GetObjectData(info, context);
         }
     }
 

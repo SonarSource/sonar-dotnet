@@ -118,9 +118,8 @@ namespace SonarAnalyzer.Metrics.CSharp
 
         private bool HasExcludedCodeAttribute(SyntaxList<AttributeListSyntax> attributeSyntaxLists)
         {
-            var attributes = attributeSyntaxLists.SelectMany(attributeList => attributeList.Attributes);
-            return attributes
-                .OfType<AttributeSyntax>()
+            return attributeSyntaxLists
+                .SelectMany(attributeList => attributeList.Attributes)
                 .Select(GetAttributeName)
                 .Any(IsExcludedAttribute);
         }

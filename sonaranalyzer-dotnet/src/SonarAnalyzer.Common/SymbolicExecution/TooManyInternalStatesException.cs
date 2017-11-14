@@ -19,9 +19,11 @@
  */
 
 using System;
+using System.Runtime.Serialization;
 
 namespace SonarAnalyzer.SymbolicExecution
 {
+    [Serializable]
     public class TooManyInternalStatesException : Exception
     {
         public TooManyInternalStatesException()
@@ -34,5 +36,9 @@ namespace SonarAnalyzer.SymbolicExecution
         public TooManyInternalStatesException(string message, Exception innerException)
             : base(message, innerException)
         { }
+
+        protected TooManyInternalStatesException(SerializationInfo info, StreamingContext context) : base(info, context)
+        {
+        }
     }
 }
