@@ -64,8 +64,8 @@ namespace SonarAnalyzer.Rules.CSharp
                     var classSymbol = c.SemanticModel.GetDeclaredSymbol(classDeclaration);
 
                     if (classSymbol == null ||
-                        !classSymbol.GetAttributes().Any(a => a.AttributeClass.IsAny(HandledTestClassAttributes)) ||
-                        classSymbol.IsAbstract)
+                        classSymbol.IsAbstract ||
+                        !classSymbol.GetAttributes().Any(a => a.AttributeClass.IsAny(HandledTestClassAttributes)))
                     {
                         return;
                     }
