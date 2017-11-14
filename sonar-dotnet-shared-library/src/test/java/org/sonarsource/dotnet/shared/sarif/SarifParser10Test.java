@@ -107,6 +107,19 @@ public class SarifParser10Test {
     verifyNoMoreInteractions(callback);
   }
 
+  // #934
+  @Test
+  public void sarif_version_1_0_file_name_with_illegal_char() throws IOException {
+    SarifParserCallback callback = mock(SarifParserCallback.class);
+    new SarifParser10(getRoot("v1_0_file_name_with_illegal_char.json")).accept(callback);
+
+    InOrder inOrder = inOrder(callback);
+    Location location = new Location(new File("C:/ConsoleApplication1/P@!$#&+-=r^{}og_r()a m[1].cs").getAbsolutePath(),
+      "Add a 'protected' constructor or the 'static' keyword to the class declaration.", 9, 10, 9, 17);
+    inOrder.verify(callback).onIssue("S1118", location, Collections.emptyList());
+    verifyNoMoreInteractions(callback);
+  }
+
   @Test
   public void sarif_version_1_0_no_location() throws IOException {
     SarifParserCallback callback = mock(SarifParserCallback.class);
