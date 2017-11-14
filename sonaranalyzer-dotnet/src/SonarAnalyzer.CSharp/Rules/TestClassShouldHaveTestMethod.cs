@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2017 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -62,7 +62,9 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     var classDeclaration = (ClassDeclarationSyntax)c.Node;
                     var classSymbol = c.SemanticModel.GetDeclaredSymbol(classDeclaration);
+
                     if (classSymbol == null ||
+                        classSymbol.IsAbstract ||
                         !classSymbol.GetAttributes().Any(a => a.AttributeClass.IsAny(HandledTestClassAttributes)))
                     {
                         return;
