@@ -10,5 +10,6 @@
     "suspicious"
   ],
   "defaultSeverity": "Blocker",
-  "ruleSpecification": "RSPEC-3443"
+  "ruleSpecification": "RSPEC-3443",
+  "sqKey": "S3443"
 }

@@ -11,5 +11,6 @@
     "misra"
   ],
   "defaultSeverity": "Major",
-  "ruleSpecification": "RSPEC-907"
+  "ruleSpecification": "RSPEC-907",
+  "sqKey": "S907"
 }

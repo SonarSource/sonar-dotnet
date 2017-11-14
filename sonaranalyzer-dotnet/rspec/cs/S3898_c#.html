@@ -12,4 +12,20 @@ struct MyStruct  // Noncompliant
   }
 }
 </pre>
+<h2>Compliant Solution</h2>
+<pre>
+struct MyStruct : IEquatable&lt;MyStruct&gt;
+{
+  private int i;
+  public int I
+  {
+    //...
+  }
+
+  public bool Equals(MyStruct other)
+  {
+    throw new NotImplementedException();
+  }
+}
+</pre>
 

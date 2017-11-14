@@ -10,5 +10,6 @@
     "error-handling"
   ],
   "defaultSeverity": "Critical",
-  "ruleSpecification": "RSPEC-2291"
+  "ruleSpecification": "RSPEC-2291",
+  "sqKey": "S2291"
 }

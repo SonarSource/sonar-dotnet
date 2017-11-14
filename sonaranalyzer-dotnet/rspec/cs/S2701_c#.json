@@ -10,5 +10,6 @@
     "tests"
   ],
   "defaultSeverity": "Critical",
-  "ruleSpecification": "RSPEC-2701"
+  "ruleSpecification": "RSPEC-2701",
+  "sqKey": "S2701"
 }

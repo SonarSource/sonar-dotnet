@@ -11,5 +11,6 @@
     "confusing"
   ],
   "defaultSeverity": "Minor",
-  "ruleSpecification": "RSPEC-3872"
+  "ruleSpecification": "RSPEC-3872",
+  "sqKey": "S3872"
 }

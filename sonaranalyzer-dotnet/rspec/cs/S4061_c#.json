@@ -10,5 +10,6 @@
     
   ],
   "defaultSeverity": "Minor",
-  "ruleSpecification": "RSPEC-4061"
+  "ruleSpecification": "RSPEC-4061",
+  "sqKey": "obsolete"
 }

@@ -10,5 +10,6 @@
     "tests"
   ],
   "defaultSeverity": "Major",
-  "ruleSpecification": "RSPEC-3431"
+  "ruleSpecification": "RSPEC-3431",
+  "sqKey": "S3431"
 }

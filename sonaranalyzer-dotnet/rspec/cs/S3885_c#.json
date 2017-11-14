@@ -10,5 +10,6 @@
     "unpredictable"
   ],
   "defaultSeverity": "Major",
-  "ruleSpecification": "RSPEC-3885"
+  "ruleSpecification": "RSPEC-3885",
+  "sqKey": "S3885"
 }

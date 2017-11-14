@@ -10,5 +10,6 @@
     "clumsy"
   ],
   "defaultSeverity": "Minor",
-  "ruleSpecification": "RSPEC-3256"
+  "ruleSpecification": "RSPEC-3256",
+  "sqKey": "S3256"
 }

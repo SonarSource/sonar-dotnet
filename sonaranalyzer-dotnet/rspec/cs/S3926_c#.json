@@ -10,5 +10,6 @@
     "serialization"
   ],
   "defaultSeverity": "Major",
-  "ruleSpecification": "RSPEC-3926"
+  "ruleSpecification": "RSPEC-3926",
+  "sqKey": "S3926"
 }

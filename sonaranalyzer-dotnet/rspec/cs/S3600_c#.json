@@ -10,5 +10,6 @@
     "confusing"
   ],
   "defaultSeverity": "Critical",
-  "ruleSpecification": "RSPEC-3600"
+  "ruleSpecification": "RSPEC-3600",
+  "sqKey": "S3600"
 }
