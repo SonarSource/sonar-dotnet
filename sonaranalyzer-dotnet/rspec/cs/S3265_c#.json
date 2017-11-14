@@ -10,5 +10,6 @@
     "convention"
   ],
   "defaultSeverity": "Critical",
-  "ruleSpecification": "RSPEC-3265"
+  "ruleSpecification": "RSPEC-3265",
+  "sqKey": "S3265"
 }

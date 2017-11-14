@@ -10,5 +10,6 @@
     
   ],
   "defaultSeverity": "Minor",
-  "ruleSpecification": "RSPEC-4018"
+  "ruleSpecification": "RSPEC-4018",
+  "sqKey": "S4018"
 }

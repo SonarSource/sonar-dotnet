@@ -12,5 +12,6 @@
     "finding"
   ],
   "defaultSeverity": "Minor",
-  "ruleSpecification": "RSPEC-3235"
+  "ruleSpecification": "RSPEC-3235",
+  "sqKey": "S3235"
 }

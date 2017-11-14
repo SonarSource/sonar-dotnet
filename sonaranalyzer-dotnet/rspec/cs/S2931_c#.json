@@ -14,5 +14,6 @@
     "CWE"
   ],
   "defaultSeverity": "Blocker",
-  "ruleSpecification": "RSPEC-2931"
+  "ruleSpecification": "RSPEC-2931",
+  "sqKey": "S2931"
 }

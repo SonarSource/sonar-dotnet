@@ -11,5 +11,6 @@
     "pitfall"
   ],
   "defaultSeverity": "Critical",
-  "ruleSpecification": "RSPEC-3998"
+  "ruleSpecification": "RSPEC-3998",
+  "sqKey": "S3998"
 }

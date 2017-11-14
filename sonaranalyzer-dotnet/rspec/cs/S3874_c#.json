@@ -10,5 +10,6 @@
     "suspicious"
   ],
   "defaultSeverity": "Critical",
-  "ruleSpecification": "RSPEC-3874"
+  "ruleSpecification": "RSPEC-3874",
+  "sqKey": "S3874"
 }

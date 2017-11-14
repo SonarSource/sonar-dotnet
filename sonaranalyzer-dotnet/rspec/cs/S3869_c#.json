@@ -11,5 +11,6 @@
     "unpredictable"
   ],
   "defaultSeverity": "Blocker",
-  "ruleSpecification": "RSPEC-3869"
+  "ruleSpecification": "RSPEC-3869",
+  "sqKey": "S3869"
 }

@@ -10,5 +10,6 @@
     "pitfall"
   ],
   "defaultSeverity": "Minor",
-  "ruleSpecification": "RSPEC-3220"
+  "ruleSpecification": "RSPEC-3220",
+  "sqKey": "S3220"
 }

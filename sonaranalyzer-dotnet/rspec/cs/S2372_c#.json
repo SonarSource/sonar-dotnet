@@ -10,5 +10,6 @@
     "error-handling"
   ],
   "defaultSeverity": "Major",
-  "ruleSpecification": "RSPEC-2372"
+  "ruleSpecification": "RSPEC-2372",
+  "sqKey": "S2372"
 }

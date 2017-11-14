@@ -10,5 +10,6 @@
     "pitfall"
   ],
   "defaultSeverity": "Blocker",
-  "ruleSpecification": "RSPEC-2306"
+  "ruleSpecification": "RSPEC-2306",
+  "sqKey": "AsyncAwaitIdentifier"
 }

@@ -14,5 +14,6 @@
     "CWE"
   ],
   "defaultSeverity": "Critical",
-  "ruleSpecification": "RSPEC-2952"
+  "ruleSpecification": "RSPEC-2952",
+  "sqKey": "S2952"
 }

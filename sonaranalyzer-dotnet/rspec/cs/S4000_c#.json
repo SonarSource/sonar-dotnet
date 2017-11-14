@@ -10,5 +10,6 @@
     
   ],
   "defaultSeverity": "Critical",
-  "ruleSpecification": "RSPEC-4000"
+  "ruleSpecification": "RSPEC-4000",
+  "sqKey": "S4000"
 }

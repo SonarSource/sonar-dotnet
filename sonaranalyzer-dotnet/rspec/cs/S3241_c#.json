@@ -12,5 +12,6 @@
     "unused"
   ],
   "defaultSeverity": "Minor",
-  "ruleSpecification": "RSPEC-3241"
+  "ruleSpecification": "RSPEC-3241",
+  "sqKey": "S3241"
 }

@@ -10,5 +10,6 @@
     "api-design"
   ],
   "defaultSeverity": "Minor",
-  "ruleSpecification": "RSPEC-3897"
+  "ruleSpecification": "RSPEC-3897",
+  "sqKey": "S3897"
 }
