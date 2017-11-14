@@ -103,7 +103,7 @@ class SarifParser10 implements SarifParser {
   }
 
   private static boolean handleResultFileElement(String ruleId, String message, JsonObject resultFileObj, JsonArray relatedLocations,
-                                                 Map<String, String> messageMap, SarifParserCallback callback) {
+    Map<String, String> messageMap, SarifParserCallback callback) {
     if (!resultFileObj.has("uri") || !resultFileObj.has("region")) {
       return false;
     }
@@ -185,7 +185,8 @@ class SarifParser10 implements SarifParser {
   }
 
   private static String uriToAbsolutePath(String uri) {
-    return new File(URI.create(uri)).getAbsolutePath();
+    String uriEscaped = uri.replace("[", "%5B").replace("]", "%5D");
+    return new File(URI.create(uriEscaped)).getAbsolutePath();
   }
 
 }
