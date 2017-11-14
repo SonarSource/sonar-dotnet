@@ -144,8 +144,8 @@ namespace SonarAnalyzer.SymbolicExecution.ControlFlowGraph
                     return BuildThrowStatement((ThrowStatementSyntax)statement, currentBlock);
 
                 case SyntaxKind.YieldReturnStatement:
-                        // A JumpBlock could be used, just to mark that something special is happening here.
-                        // But for the time being we wouldn't do anything with that information.
+                    // A JumpBlock could be used, just to mark that something special is happening here.
+                    // But for the time being we wouldn't do anything with that information.
                     return BuildExpression(((YieldStatementSyntax)statement).Expression, currentBlock);
 
                 case SyntaxKind.EmptyStatement:
@@ -600,12 +600,12 @@ namespace SonarAnalyzer.SymbolicExecution.ControlFlowGraph
 
                     blocks.Add(fallThroughBlock);
 
-                        var caseLabel = label as CaseSwitchLabelSyntax;
+                    var caseLabel = label as CaseSwitchLabelSyntax;
                     bool isDefaultLabel = label is DefaultSwitchLabelSyntax;
                     if (caseLabel == null && !isDefaultLabel)
-                        {
-                            throw new NotSupportedException("C# 7 features are not supported yet.");
-                        }
+                    {
+                        throw new NotSupportedException("C# 7 features are not supported yet.");
+                    }
 
                     var key = isDefaultLabel ? GotoDefaultEntry : GetCaseIndexer(caseLabel.Value);
                     caseBlocksByValue[key] = fallThroughBlock;
@@ -709,7 +709,7 @@ namespace SonarAnalyzer.SymbolicExecution.ControlFlowGraph
             return usingStatement.Expression != null
                 ? BuildExpression(usingStatement.Expression, usingBlock)
                 : BuildVariableDeclaration(usingStatement.Declaration, usingBlock);
-            }
+        }
 
         private Block BuildFixedStatement(FixedStatementSyntax fixedStatement, Block currentBlock)
         {
@@ -782,7 +782,7 @@ namespace SonarAnalyzer.SymbolicExecution.ControlFlowGraph
             forInitializer = BuildExpressions(forStatement.Initializers, forInitializer);
 
             return forInitializer;
-                }
+        }
 
         private Block BuildForEachStatement(ForEachStatementSyntax foreachStatement, Block currentBlock)
         {
@@ -934,7 +934,7 @@ namespace SonarAnalyzer.SymbolicExecution.ControlFlowGraph
                 : expression.ArgumentList.Arguments.Select(a => a.Expression);
 
             return BuildExpressions(arguments, objectInitializerBlock);
-            }
+        }
 
         private Block BuildAnonymousObjectCreationExpression(AnonymousObjectCreationExpressionSyntax expression,
             Block currentBlock)
@@ -970,14 +970,14 @@ namespace SonarAnalyzer.SymbolicExecution.ControlFlowGraph
             return children == null
                 ? currentBlock
                 : BuildExpressions(children, currentBlock);
-            }
+        }
 
         private Block BuildBinaryExpression(BinaryExpressionSyntax expression, Block currentBlock)
-            {
+        {
             currentBlock.ReversedInstructions.Add(expression);
             var binaryExpressionBlock = BuildExpression(expression.Right, currentBlock);
             return BuildExpression(expression.Left, binaryExpressionBlock);
-            }
+        }
 
         private Block BuildAssignmentExpression(AssignmentExpressionSyntax expression, Block currentBlock)
         {

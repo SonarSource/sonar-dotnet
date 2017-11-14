@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2017 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -37,31 +37,31 @@ namespace SonarAnalyzer.Rules.VisualBasic
         public override ImmutableArray<string> FixableDiagnosticIds =>
             ImmutableArray.Create(DoNotUseByVal.DiagnosticId);
 
-        protected override async Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
+        protected override Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
         {
             var diagnostic = context.Diagnostics.First();
             var diagnosticSpan = diagnostic.Location.SourceSpan;
             var oldNode = root.FindNode(diagnosticSpan) as ParameterSyntax;
 
-            if (oldNode == null)
+            if (oldNode != null)
             {
-                return;
+                context.RegisterCodeFix(
+                    CodeAction.Create(
+                        Title,
+                        c =>
+                        {
+                            var modifiers = default(SyntaxTokenList)
+                                .AddRange(oldNode.Modifiers.Where(m => !DoNotUseByVal.IsByVal(m)));
+
+                            var newNode = oldNode.WithModifiers(modifiers);
+                            var newRoot = root.ReplaceNode(oldNode, newNode);
+
+                            return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
+                        }),
+                    context.Diagnostics);
             }
 
-            context.RegisterCodeFix(
-                CodeAction.Create(
-                    Title,
-                    c =>
-                    {
-                        var modifiers = default(SyntaxTokenList)
-                            .AddRange(oldNode.Modifiers.Where(m => !DoNotUseByVal.IsByVal(m)));
-
-                        var newNode = oldNode.WithModifiers(modifiers);
-                        var newRoot = root.ReplaceNode(oldNode, newNode);
-
-                        return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
-                    }),
-                context.Diagnostics);
+            return Task.CompletedTask;
         }
     }
 }

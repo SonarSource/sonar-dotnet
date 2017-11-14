@@ -44,30 +44,30 @@ namespace SonarAnalyzer.Rules.VisualBasic
             return WellKnownFixAllProviders.BatchFixer;
         }
 
-        protected override async Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
+        protected override Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
         {
             var diagnostic = context.Diagnostics.First();
             var diagnosticSpan = diagnostic.Location.SourceSpan;
 
             var iifInvocation = root.FindNode(diagnosticSpan) as InvocationExpressionSyntax;
-            if (iifInvocation == null)
+            if (iifInvocation != null)
             {
-                return;
+                context.RegisterCodeFix(
+                    CodeAction.Create(
+                        Title,
+                        c =>
+                        {
+                            var ifInvocation = SyntaxFactory.InvocationExpression(
+                                SyntaxFactory.IdentifierName(IfOperatorName), iifInvocation.ArgumentList);
+
+                            var newRoot = root.ReplaceNode(iifInvocation, ifInvocation);
+
+                            return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
+                        }),
+                        context.Diagnostics);
             }
 
-            context.RegisterCodeFix(
-                CodeAction.Create(
-                    Title,
-                    c =>
-                    {
-                        var ifInvocation = SyntaxFactory.InvocationExpression(
-                            SyntaxFactory.IdentifierName(IfOperatorName), iifInvocation.ArgumentList);
-
-                        var newRoot = root.ReplaceNode(iifInvocation, ifInvocation);
-
-                        return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
-                    }),
-                    context.Diagnostics);
+            return Task.CompletedTask;
         }
     }
 }
