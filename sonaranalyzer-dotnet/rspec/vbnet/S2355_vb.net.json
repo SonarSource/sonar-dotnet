@@ -10,5 +10,6 @@
     "clumsy"
   ],
   "defaultSeverity": "Minor",
-  "ruleSpecification": "RSPEC-2355"
+  "ruleSpecification": "RSPEC-2355",
+  "sqKey": "LongArrayCreationSyntaxUsage"
 }

@@ -10,5 +10,6 @@
     "convention"
   ],
   "defaultSeverity": "Minor",
-  "ruleSpecification": "RSPEC-2364"
+  "ruleSpecification": "RSPEC-2364",
+  "sqKey": "PrivateFieldName"
 }

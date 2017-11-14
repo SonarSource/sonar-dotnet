@@ -10,5 +10,6 @@
     "convention"
   ],
   "defaultSeverity": "Minor",
-  "ruleSpecification": "RSPEC-2354"
+  "ruleSpecification": "RSPEC-2354",
+  "sqKey": "LineContinuationUsage"
 }

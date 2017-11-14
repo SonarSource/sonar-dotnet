@@ -10,5 +10,6 @@
     "convention"
   ],
   "defaultSeverity": "Minor",
-  "ruleSpecification": "RSPEC-2347"
+  "ruleSpecification": "RSPEC-2347",
+  "sqKey": "EventHandlerName"
 }
