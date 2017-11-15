@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
@@ -55,7 +56,10 @@ namespace SonarAnalyzer.Rules.CSharp
             set
             {
                 credentialWords = value;
-                splitCredentialWords = value.ToLowerInvariant().Split(',').Select(x => x.Trim()).ToList();
+                splitCredentialWords = value.ToLowerInvariant()
+                    .Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
+                    .Select(x => x.Trim())
+                    .ToList();
                 passwordValuePattern = new Regex(string.Format(@"\b(?<password>{0})\b[:=]\S",
                     string.Join("|", splitCredentialWords)), RegexOptions.Compiled);
             }
@@ -141,7 +145,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             var bannedWordsFound = variableName
                 .SplitCamelCaseToWords()
-                .Intersect(this.splitCredentialWords)
+                .Intersect(splitCredentialWords)
                 .ToHashSet();
 
             var matches = passwordValuePattern.Matches(variableValue.ToLowerInvariant());

@@ -47,7 +47,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void DoNotHardcodeCredentials_CustomValues_CaseInsensitive()
         {
             Verifier.VerifyAnalyzer(@"TestCases\DoNotHardcodeCredentials_CustomValues.cs",
-                new DoNotHardcodeCredentials { CredentialWords = "KODE , FaCaL-FaIrE " });
+                new DoNotHardcodeCredentials { CredentialWords = "KODE ,,,, FaCaL-FaIrE " });
         }
     }
 }
