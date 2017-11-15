@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2017 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
@@ -33,7 +34,7 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class DoNotHardcodeCredentials : SonarDiagnosticAnalyzer
+    public sealed class DoNotHardcodeCredentials : ParameterLoadingDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S2068";
         private const string MessageFormat = "Remove hard-coded password(s): '{0}'.";
@@ -42,30 +43,40 @@ namespace SonarAnalyzer.Rules.CSharp
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        private static readonly ISet<string> passwordVariants = new HashSet<string>
-        {
-            "password", "passwd",
-            "achinsinsi", "adgangskode", "codice", "contrasena", "contrasenya", "contrasinal",
-            "cynfrinair", "facal-faire", "facalfaire", "fjaleklaim", "focalfaire", "geslo", "haslo",
-            "heslo", "iphasiwedi", "jelszo", "kalmarsirri", "katalaluan", "katasandi", "kennwort",
-            "kode", "kupuhipa", "loluszais", "losen", "losenord", "lozinka", "lykilorth", "mathkau",
-            "modpas", "motdepasse", "olelohuna", "oroigbaniwole", "parol", "parola", "parole", "parool",
-            "pasahitza", "pasiwedhi", "passe", "passord", "passwort", "passwuert", "paswoodu", "phasewete",
-            "salasana", "sandi", "senha", "sifre", "sifreya", "slaptazois", "tenimiafina", "upufaalilolilo",
-            "wachtwoord", "wachtwurd", "wagwoord"
-        };
+        private IEnumerable<string> splitCredentialWords;
+        private string credentialWords;
+        private Regex passwordValuePattern;
 
-        protected override void Initialize(SonarAnalysisContext context)
+        private const string DefaultCredentialWords = "password, passwd, pwd";
+        [RuleParameter("credentialWords", PropertyType.String, "Comma separated list of words identifying potential credentials",
+            DefaultCredentialWords)]
+        public string CredentialWords
+        {
+            get { return credentialWords; }
+            set
+            {
+                credentialWords = value;
+                splitCredentialWords = value.ToLowerInvariant()
+                    .Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
+                    .Select(x => x.Trim())
+                    .ToList();
+                passwordValuePattern = new Regex(string.Format(@"\b(?<password>{0})\b[:=]\S",
+                    string.Join("|", splitCredentialWords)), RegexOptions.Compiled);
+            }
+        }
+
+        public DoNotHardcodeCredentials()
+        {
+            CredentialWords = DefaultCredentialWords;
+        }
+
+        protected override void Initialize(ParameterLoadingAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(VerifyDeclaration, SyntaxKind.VariableDeclaration);
             context.RegisterSyntaxNodeActionInNonGenerated(VerifyAssignment, SyntaxKind.SimpleAssignmentExpression);
         }
 
-        private static readonly Regex passwordValuePattern
-            = new Regex(string.Format(@"\b(?<password>{0})\b[:=]\S", string.Join("|", passwordVariants)),
-                        RegexOptions.Compiled);
-
-        private static void VerifyAssignment(SyntaxNodeAnalysisContext context)
+        private void VerifyAssignment(SyntaxNodeAnalysisContext context)
         {
             if (context.IsTest())
             {
@@ -90,7 +101,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static void VerifyDeclaration(SyntaxNodeAnalysisContext context)
+        private void VerifyDeclaration(SyntaxNodeAnalysisContext context)
         {
             if (context.IsTest())
             {
@@ -107,13 +118,12 @@ namespace SonarAnalyzer.Rules.CSharp
                 var bannedWords = FindBannedWords(variableDeclarator);
                 if (bannedWords != null)
                 {
-                    context.ReportDiagnosticWhenActive(Diagnostic.Create(rule,
-                        variableDeclarator.GetLocation(), bannedWords));
+                    context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, variableDeclarator.GetLocation(), bannedWords));
                 }
             }
         }
 
-        private static string FindBannedWords(VariableDeclaratorSyntax variableDeclarator)
+        private string FindBannedWords(VariableDeclaratorSyntax variableDeclarator)
         {
             string variableName = variableDeclarator?.Identifier.ValueText;
             var literalExpression = variableDeclarator?.Initializer?.Value as LiteralExpressionSyntax;
@@ -126,7 +136,7 @@ namespace SonarAnalyzer.Rules.CSharp
             return FindBannedWords(variableName, literalExpression.Token.ValueText);
         }
 
-        private static string FindBannedWords(string variableName, string variableValue)
+        private string FindBannedWords(string variableName, string variableValue)
         {
             if (string.IsNullOrWhiteSpace(variableValue))
             {
@@ -135,7 +145,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             var bannedWordsFound = variableName
                 .SplitCamelCaseToWords()
-                .Intersect(passwordVariants)
+                .Intersect(splitCredentialWords)
                 .ToHashSet();
 
             var matches = passwordValuePattern.Matches(variableValue.ToLowerInvariant());

@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2017 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -28,10 +28,26 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void DoNotHardcodeCredentials()
+        public void DoNotHardcodeCredentials_DefaultValues()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\DoNotHardcodeCredentials.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\DoNotHardcodeCredentials_DefaultValues.cs",
                 new DoNotHardcodeCredentials());
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void DoNotHardcodeCredentials_CustomValues()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\DoNotHardcodeCredentials_CustomValues.cs",
+                new DoNotHardcodeCredentials { CredentialWords = "kode,facal-faire" });
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void DoNotHardcodeCredentials_CustomValues_CaseInsensitive()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\DoNotHardcodeCredentials_CustomValues.cs",
+                new DoNotHardcodeCredentials { CredentialWords = "KODE ,,,, FaCaL-FaIrE " });
         }
     }
 }
