@@ -10,5 +10,6 @@
     "convention"
   ],
   "defaultSeverity": "Minor",
-  "ruleSpecification": "RSPEC-2349"
+  "ruleSpecification": "RSPEC-2349",
+  "sqKey": "EventNameHasBeforeOrAfterSuffixOrPrefix"
 }

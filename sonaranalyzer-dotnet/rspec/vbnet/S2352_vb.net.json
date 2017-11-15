@@ -10,5 +10,6 @@
     "clumsy"
   ],
   "defaultSeverity": "Major",
-  "ruleSpecification": "RSPEC-2352"
+  "ruleSpecification": "RSPEC-2352",
+  "sqKey": "IndexedPropertyWithMultipleParameters"
 }

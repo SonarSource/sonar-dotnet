@@ -10,5 +10,6 @@
     
   ],
   "defaultSeverity": "Minor",
-  "ruleSpecification": "RSPEC-2353"
+  "ruleSpecification": "RSPEC-2353",
+  "sqKey": "IndexedPropertyName"
 }
