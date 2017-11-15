@@ -25,7 +25,7 @@ function Get-MsBuildPath([ValidateSet("14.0", "15.0")][string]$msbuildVersion) {
         # All subsequent builds after this command will use MSBuild 15!
         # Test if vswhere.exe is in your path. Download from: https://github.com/Microsoft/vswhere/releases
         $path = Exec { & (Get-VsWherePath) -latest -products * -requires Microsoft.Component.MSBuild `
-            -property installationPath }
+            -property installationPath } | Select-Object -First 1
         if ($path) {
             $msbuild15Path = Join-Path $path "MSBuild\15.0\Bin\MSBuild.exe"
             [environment]::SetEnvironmentVariable($msbuild15Env, $msbuild15Path)
@@ -185,9 +185,9 @@ function New-Metadata([string]$binPath) {
 
     #Generate the XML descriptor files for the SQ plugin
     Invoke-InLocation "src\SonarAnalyzer.RuleDescriptorGenerator\${binPath}\net46" {
-        Exec { & .\SonarAnalyzer.RuleDescriptorGenerator.exe cs }
+        Exec { & .\SonarAnalyzer.RuleDescriptorGenerator.exe cs } | Out-Null
         Write-Host "Sucessfully created metadata for C#"
-        Exec { & .\SonarAnalyzer.RuleDescriptorGenerator.exe vbnet }
+        Exec { & .\SonarAnalyzer.RuleDescriptorGenerator.exe vbnet } | Out-Null
         Write-Host "Sucessfully created metadata for VB.Net"
     }
 }
