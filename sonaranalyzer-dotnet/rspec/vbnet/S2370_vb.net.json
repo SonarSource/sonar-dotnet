@@ -11,5 +11,5 @@
   ],
   "defaultSeverity": "Minor",
   "ruleSpecification": "RSPEC-2370",
-  "sqKey": "PublicReadOnlySharedFieldName"
+  "sqKey": "S2370"
 }

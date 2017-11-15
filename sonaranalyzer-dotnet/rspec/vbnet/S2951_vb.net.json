@@ -12,5 +12,5 @@
   ],
   "defaultSeverity": "Minor",
   "ruleSpecification": "RSPEC-2951",
-  "sqKey": "ExitSelectRedundantUsage"
+  "sqKey": "S2951"
 }

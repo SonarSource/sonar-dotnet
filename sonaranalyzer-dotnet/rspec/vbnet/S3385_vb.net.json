@@ -12,5 +12,5 @@
   ],
   "defaultSeverity": "Major",
   "ruleSpecification": "RSPEC-3385",
-  "sqKey": "ExitStatementUsage"
+  "sqKey": "S3385"
 }

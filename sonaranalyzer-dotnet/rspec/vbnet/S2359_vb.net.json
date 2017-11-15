@@ -11,5 +11,5 @@
   ],
   "defaultSeverity": "Major",
   "ruleSpecification": "RSPEC-2359",
-  "sqKey": "OnErrorStatement"
+  "sqKey": "S2359"
 }

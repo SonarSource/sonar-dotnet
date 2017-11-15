@@ -11,5 +11,5 @@
   ],
   "defaultSeverity": "Minor",
   "ruleSpecification": "RSPEC-2364",
-  "sqKey": "PrivateFieldName"
+  "sqKey": "S2364"
 }

@@ -11,5 +11,5 @@
   ],
   "defaultSeverity": "Critical",
   "ruleSpecification": "RSPEC-2374",
-  "sqKey": "UnsignedUsage"
+  "sqKey": "S2374"
 }

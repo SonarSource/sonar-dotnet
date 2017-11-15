@@ -11,5 +11,5 @@
   ],
   "defaultSeverity": "Minor",
   "ruleSpecification": "RSPEC-2429",
-  "sqKey": "ImmediateArrayInitialization"
+  "sqKey": "S2429"
 }

@@ -11,5 +11,5 @@
   ],
   "defaultSeverity": "Minor",
   "ruleSpecification": "RSPEC-2375",
-  "sqKey": "WithUsageCandidate"
+  "sqKey": "S2375"
 }

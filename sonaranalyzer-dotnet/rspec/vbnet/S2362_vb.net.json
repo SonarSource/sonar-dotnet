@@ -11,5 +11,5 @@
   ],
   "defaultSeverity": "Minor",
   "ruleSpecification": "RSPEC-2362",
-  "sqKey": "PrivateConstantName"
+  "sqKey": "S2362"
 }
