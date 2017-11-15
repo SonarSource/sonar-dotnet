@@ -119,6 +119,19 @@
 },
 {
 "id":  "S1450",
+"message":  "Remove the '_includeCallback' field and declare it as a local variable in the relevant methods.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconParser.cs",
+"region":  {
+"startLine":  23,
+"startColumn":  41,
+"endLine":  23,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S1450",
 "message":  "Remove the '_system' field and declare it as a local variable in the relevant methods.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka\Dispatch\Dispatchers.cs",
@@ -140,6 +153,19 @@
 "startColumn":  27,
 "endLine":  18,
 "endColumn":  36
+}
+}
+},
+{
+"id":  "S1450",
+"message":  "Remove the 'Off' field and declare it as a local variable in the relevant methods.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Event\Logging.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  30,
+"endLine":  28,
+"endColumn":  41
 }
 }
 },
