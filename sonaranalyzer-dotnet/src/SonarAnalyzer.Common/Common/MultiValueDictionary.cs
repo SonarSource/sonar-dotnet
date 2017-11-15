@@ -20,6 +20,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Runtime.Serialization;
 
 namespace SonarAnalyzer.Common
@@ -31,7 +32,9 @@ namespace SonarAnalyzer.Common
         {
         }
 
-        protected MultiValueDictionary(SerializationInfo info, StreamingContext context) : base(info, context)
+        [ExcludeFromCodeCoverage]
+        protected MultiValueDictionary(SerializationInfo info, StreamingContext context)
+            : base(info, context)
         {
         }
 
@@ -76,6 +79,7 @@ namespace SonarAnalyzer.Common
             }
         }
 
+        [ExcludeFromCodeCoverage]
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             base.GetObjectData(info, context);

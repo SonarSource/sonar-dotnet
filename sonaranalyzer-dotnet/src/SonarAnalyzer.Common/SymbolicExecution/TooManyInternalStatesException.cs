@@ -19,6 +19,7 @@
  */
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Runtime.Serialization;
 
 namespace SonarAnalyzer.SymbolicExecution
@@ -37,7 +38,9 @@ namespace SonarAnalyzer.SymbolicExecution
             : base(message, innerException)
         { }
 
-        protected TooManyInternalStatesException(SerializationInfo info, StreamingContext context) : base(info, context)
+        [ExcludeFromCodeCoverage]
+        protected TooManyInternalStatesException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
         {
         }
     }
