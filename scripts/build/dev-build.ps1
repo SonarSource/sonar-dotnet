@@ -10,6 +10,7 @@ Usage: build.ps1
         -build              Build the analyzer solution (based on analyzerKind)
         -buildJava          Build the plugin (java)
         -coverage           Compute the code coverage of the analyzer
+        -metadata           Create the metadata used by the plugin
         -pack               Create the NuGet packages and extra metadata
 
     Test options
@@ -30,6 +31,7 @@ param (
     [switch]$build = $false,
     [switch]$buildJava = $false,
     [switch]$coverage = $false,
+    [switch]$metadata = $false,
     [switch]$pack = $false,
 
     # Test options
@@ -53,6 +55,7 @@ try {
     . (Join-Path $PSScriptRoot "build-utils.ps1")
     Push-Location "${PSScriptRoot}\..\..\sonaranalyzer-dotnet"
 
+    Write-Header "Script configuration"
     $buildConfiguration = if ($release) { "Release" } else { "Debug" }
     $binPath = "bin\${analyzerKind}\${buildConfiguration}"
     $solutionName =
@@ -92,8 +95,11 @@ try {
         Invoke-CodeCoverage
     }
 
-    if ($pack) {
+    if ($metadata) {
         New-Metadata $binPath
+    }
+
+    if ($pack) {
         New-NuGetPackages $binPath
     }
 
