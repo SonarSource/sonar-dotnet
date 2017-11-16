@@ -1,0 +1,121 @@
+{
+"issues":  [
+{
+"id":  "S3415",
+"message":  "Make sure these 2 arguments are in the correct order: expected value, actual value.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding.Tests\LeastShardAllocationStrategySpec.cs",
+"region":  {
+"startLine":  60,
+"startColumn":  26,
+"endLine":  60,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S3415",
+"message":  "Make sure these 2 arguments are in the correct order: expected value, actual value.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding.Tests\LeastShardAllocationStrategySpec.cs",
+"region":  {
+"startLine":  64,
+"startColumn":  26,
+"endLine":  64,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S3415",
+"message":  "Make sure these 2 arguments are in the correct order: expected value, actual value.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding.Tests\LeastShardAllocationStrategySpec.cs",
+"region":  {
+"startLine":  65,
+"startColumn":  26,
+"endLine":  65,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S3415",
+"message":  "Make sure these 2 arguments are in the correct order: expected value, actual value.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding.Tests\LeastShardAllocationStrategySpec.cs",
+"region":  {
+"startLine":  68,
+"startColumn":  26,
+"endLine":  68,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S3415",
+"message":  "Make sure these 2 arguments are in the correct order: expected value, actual value.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding.Tests\LeastShardAllocationStrategySpec.cs",
+"region":  {
+"startLine":  72,
+"startColumn":  26,
+"endLine":  72,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S3415",
+"message":  "Make sure these 2 arguments are in the correct order: expected value, actual value.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding.Tests\LeastShardAllocationStrategySpec.cs",
+"region":  {
+"startLine":  73,
+"startColumn":  26,
+"endLine":  73,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S3415",
+"message":  "Make sure these 2 arguments are in the correct order: expected value, actual value.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding.Tests\LeastShardAllocationStrategySpec.cs",
+"region":  {
+"startLine":  87,
+"startColumn":  26,
+"endLine":  87,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S3415",
+"message":  "Make sure these 2 arguments are in the correct order: expected value, actual value.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding.Tests\LeastShardAllocationStrategySpec.cs",
+"region":  {
+"startLine":  88,
+"startColumn":  26,
+"endLine":  88,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S3415",
+"message":  "Make sure these 2 arguments are in the correct order: expected value, actual value.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding.Tests\LeastShardAllocationStrategySpec.cs",
+"region":  {
+"startLine":  91,
+"startColumn":  26,
+"endLine":  91,
+"endColumn":  37
+}
+}
+}
+]
+}

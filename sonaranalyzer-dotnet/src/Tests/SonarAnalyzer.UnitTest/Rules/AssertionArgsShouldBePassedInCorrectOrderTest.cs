@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2017 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -33,7 +33,9 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzer(@"TestCases\AssertionArgsShouldBePassedInCorrectOrder.cs",
                 new AssertionArgsShouldBePassedInCorrectOrder(),
                 null,
-                Verifier.MicrosoftVisualStudioTestToolsUnitTestingAssembly);
+                Verifier.MicrosoftVisualStudioTestToolsUnitTestingAssembly,
+                Verifier.NUnitFrameworkAssembly,
+                Verifier.XunitAssertAssembly);
         }
     }
 }

@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2017 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -42,7 +42,15 @@ namespace SonarAnalyzer.Rules.CSharp
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        private static readonly ISet<string> TrackedMethodNames = ImmutableHashSet.Create("AreEqual", "AreSame");
+        private static readonly IDictionary<string, ISet<KnownType>> methodsWithType = new Dictionary<string, ISet<KnownType>>
+        {
+            ["AreEqual"] = new HashSet<KnownType> { KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_Assert,
+                KnownType.NUnit_Framework_Assert },
+            ["AreSame"] = new HashSet<KnownType> { KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_Assert,
+                KnownType.NUnit_Framework_Assert },
+            ["Equal"] = new HashSet<KnownType> { KnownType.Xunit_Assert },
+            ["Same"] = new HashSet<KnownType> { KnownType.Xunit_Assert }
+        };
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -62,14 +70,16 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
 
                     var methodCallExpression = (MemberAccessExpressionSyntax)methodCall.Expression;
-                    if (!TrackedMethodNames.Contains(methodCallExpression.Name.Identifier.ValueText))
+
+                    var methodKnownTypes = methodsWithType.GetValueOrDefault(methodCallExpression.Name.Identifier.ValueText);
+                    if (methodKnownTypes == null)
                     {
                         return;
                     }
 
-                    var methodCallClassSymbol = c.SemanticModel
-                        .GetSymbolInfo(methodCallExpression.Expression).Symbol as INamedTypeSymbol;
-                    if (!methodCallClassSymbol.Is(KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_Assert))
+                    var isAnyTrackedAssertType = (c.SemanticModel.GetSymbolInfo(methodCallExpression.Expression).Symbol
+                        as INamedTypeSymbol).IsAny(methodKnownTypes);
+                    if (!isAnyTrackedAssertType)
                     {
                         return;
                     }

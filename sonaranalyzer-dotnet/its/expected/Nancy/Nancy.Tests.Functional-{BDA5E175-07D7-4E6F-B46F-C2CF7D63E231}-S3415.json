@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S3415",
+"message":  "Make sure these 2 arguments are in the correct order: expected value, actual value.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests.Functional\Tests\RouteConstraintTests.cs",
+"region":  {
+"startLine":  51,
+"startColumn":  26,
+"endLine":  51,
+"endColumn":  94
+}
+}
+},
+{
+"id":  "S3415",
+"message":  "Make sure these 2 arguments are in the correct order: expected value, actual value.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests.Functional\Tests\RouteConstraintTests.cs",
+"region":  {
+"startLine":  63,
+"startColumn":  26,
+"endLine":  63,
+"endColumn":  83
+}
+}
+},
+{
+"id":  "S3415",
+"message":  "Make sure these 2 arguments are in the correct order: expected value, actual value.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests.Functional\Tests\RouteConstraintTests.cs",
+"region":  {
+"startLine":  75,
+"startColumn":  26,
+"endLine":  75,
+"endColumn":  89
+}
+}
+}
+]
+}

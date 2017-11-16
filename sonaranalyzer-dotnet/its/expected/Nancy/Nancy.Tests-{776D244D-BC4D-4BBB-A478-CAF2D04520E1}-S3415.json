@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3415",
+"message":  "Make sure these 2 arguments are in the correct order: expected value, actual value.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ErrorHandling\DefaultStatusCodeHandlerFixture.cs",
+"region":  {
+"startLine":  205,
+"startColumn":  26,
+"endLine":  205,
+"endColumn":  67
+}
+}
+}
+]
+}

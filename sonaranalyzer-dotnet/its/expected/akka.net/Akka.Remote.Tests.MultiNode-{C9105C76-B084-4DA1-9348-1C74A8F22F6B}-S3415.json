@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3415",
+"message":  "Make sure these 2 arguments are in the correct order: expected value, actual value.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests.MultiNode\RemoteRoundRobinSpec.cs",
+"region":  {
+"startLine":  214,
+"startColumn":  34,
+"endLine":  214,
+"endColumn":  54
+}
+}
+}
+]
+}
