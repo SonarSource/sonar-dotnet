@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2017 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -41,9 +41,13 @@ namespace SonarAnalyzer.Rules.CSharp
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         private const int DefaultValueMaximum = 2;
-
         [RuleParameter("max", PropertyType.Integer, "Maximum authorized number of generic parameters.", DefaultValueMaximum)]
         public int Maximum { get; set; } = DefaultValueMaximum;
+
+        private const int DefaultValueMaximumMethod = 3;
+        [RuleParameter("maxMethod", PropertyType.Integer, "Maximum authorized number of generic parameters for methods.",
+            DefaultValueMaximumMethod)]
+        public int MaximumMethod { get; set; } = DefaultValueMaximumMethod;
 
         protected override void Initialize(ParameterLoadingAnalysisContext context)
         {
@@ -71,13 +75,13 @@ namespace SonarAnalyzer.Rules.CSharp
                 var methodSymbol = c.SemanticModel.GetDeclaredSymbol(methodDeclaration);
 
                 if (methodSymbol == null ||
-                    methodSymbol.TypeArguments.Length <= Maximum)
+                    methodSymbol.TypeArguments.Length <= MaximumMethod)
                 {
                     return;
                 }
 
                 c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, methodDeclaration.Identifier.GetLocation(),
-                    $"{methodSymbol.ContainingType.Name}.{methodSymbol.Name}", "method", Maximum));
+                    $"{methodSymbol.ContainingType.Name}.{methodSymbol.Name}", "method", MaximumMethod));
             },
             SyntaxKind.MethodDeclaration);
         }

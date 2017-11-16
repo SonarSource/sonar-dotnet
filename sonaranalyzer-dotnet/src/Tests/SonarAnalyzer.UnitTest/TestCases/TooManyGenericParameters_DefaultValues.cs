@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace Tests.Diagnostics
@@ -17,12 +17,11 @@ namespace Tests.Diagnostics
         {
         }
 
-        public void Foo<T1, T2, T3>() // Noncompliant {{Reduce the number of generic parameters in the 'Bar.Foo' method to no more than the 2 authorized.}}
-//                  ^^^
+        public void Foo<T1, T2, T3>()
         {
         }
 
-        public void Foo<T1, T2, T3, T4>() // Noncompliant
+        public void Foo<T1, T2, T3, T4>() // Noncompliant  {{Reduce the number of generic parameters in the 'Bar.Foo' method to no more than the 3 authorized.}}
 //                  ^^^
         {
         }
