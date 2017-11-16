@@ -59,6 +59,13 @@ namespace Tests.Diagnostics
         public void Foo() { }
     }
 
+    [TestFixture]
+    class ClassTest10
+    {
+        [Theory]
+        public void Foo() { }
+    }
+
     [TestClass]
     public abstract class MyCommonCode1
     {

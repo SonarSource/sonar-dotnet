@@ -357,6 +357,7 @@ namespace SonarAnalyzer.Helpers
 
         public static readonly KnownType NUnit_Framework_TestAttribute = new KnownType("NUnit.Framework.TestAttribute");
         public static readonly KnownType NUnit_Framework_TestCaseAttribute = new KnownType("NUnit.Framework.TestCaseAttribute");
+        public static readonly KnownType NUnit_Framework_TheoryAttribute = new KnownType("NUnit.Framework.TheoryAttribute");
         public static readonly KnownType NUnit_Framework_TestFixtureAttribute = new KnownType("NUnit.Framework.TestFixtureAttribute");
         public static readonly KnownType NUnit_Framework_ExpectedExceptionAttribute =
             new KnownType("NUnit.Framework.ExpectedExceptionAttribute");
