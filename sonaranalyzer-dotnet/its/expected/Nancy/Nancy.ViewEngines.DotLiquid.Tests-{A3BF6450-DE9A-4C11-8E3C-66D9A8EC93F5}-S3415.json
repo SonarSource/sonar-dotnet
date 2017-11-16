@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S3415",
+"message":  "Make sure these 2 arguments are in the correct order: expected value, actual value.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.DotLiquid.Tests\Functional\PartialRenderingFixture.cs",
+"region":  {
+"startLine":  32,
+"startColumn":  26,
+"endLine":  32,
+"endColumn":  84
+}
+}
+},
+{
+"id":  "S3415",
+"message":  "Make sure these 2 arguments are in the correct order: expected value, actual value.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.DotLiquid.Tests\Functional\PartialRenderingFixture.cs",
+"region":  {
+"startLine":  44,
+"startColumn":  26,
+"endLine":  44,
+"endColumn":  84
+}
+}
+},
+{
+"id":  "S3415",
+"message":  "Make sure these 2 arguments are in the correct order: expected value, actual value.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.DotLiquid.Tests\Functional\PartialRenderingFixture.cs",
+"region":  {
+"startLine":  56,
+"startColumn":  26,
+"endLine":  56,
+"endColumn":  84
+}
+}
+}
+]
+}

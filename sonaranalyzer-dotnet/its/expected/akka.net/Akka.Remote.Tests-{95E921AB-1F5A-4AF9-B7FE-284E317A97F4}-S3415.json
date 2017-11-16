@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3415",
+"message":  "Make sure these 2 arguments are in the correct order: expected value, actual value.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests\AccrualFailureDetectorSpec.cs",
+"region":  {
+"startLine":  79,
+"startColumn":  26,
+"endLine":  79,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S3415",
+"message":  "Make sure these 2 arguments are in the correct order: expected value, actual value.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests\AccrualFailureDetectorSpec.cs",
+"region":  {
+"startLine":  80,
+"startColumn":  26,
+"endLine":  80,
+"endColumn":  44
+}
+}
+}
+]
+}

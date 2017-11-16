@@ -5050,7 +5050,7 @@
     <value>Sonar Code Smell</value>
   </data>
   <data name="S3415_Description" xml:space="preserve">
-    <value>The standard assertions library methods such as AreEqual, and AreSame expect the first argument to be the expected value and the second argument to be the actual value. Swap them, and your test will still have the same outcome (succeed/fail when it should) but the error messages will be confusing. </value>
+    <value>The standard assertions library methods such as AreEqual and AreSame in MSTest and NUnit, or Equal and Same in XUnit, expect the first argument to be the expected value and the second argument to be the actual value. Swap them, and your test will still have the same outcome (succeed/fail when it should) but the error messages will be confusing. </value>
   </data>
   <data name="S3415_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
