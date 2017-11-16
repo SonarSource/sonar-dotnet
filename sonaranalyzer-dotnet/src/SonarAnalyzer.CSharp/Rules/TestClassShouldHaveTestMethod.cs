@@ -48,7 +48,8 @@ namespace SonarAnalyzer.Rules.CSharp
         private static readonly ISet<KnownType> HandledTestMethodAttributes = ImmutableHashSet.Create(
             KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_TestMethodAttribute,
             KnownType.NUnit_Framework_TestAttribute,
-            KnownType.NUnit_Framework_TestCaseAttribute);
+            KnownType.NUnit_Framework_TestCaseAttribute,
+            KnownType.NUnit_Framework_TheoryAttribute);
 
         protected override void Initialize(SonarAnalysisContext context)
         {

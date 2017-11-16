@@ -2350,7 +2350,7 @@
     <value>Sonar Code Smell</value>
   </data>
   <data name="S2187_Description" xml:space="preserve">
-    <value>There's no point in having an NUnit TestFixture nor a MSTest TestClass without any test methods (Test or TestCase for NUnit and TestMethod for MSTest). This could lead a maintainer to assume a class is covered by tests even though it is not.</value>
+    <value>There's no point in having a test class without any test methods.This could lead a maintainer to assume a class is covered by tests even though it is not.</value>
   </data>
   <data name="S2187_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
