@@ -31,8 +31,6 @@ import org.sonar.api.batch.sensor.Sensor;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
 import org.sonar.api.rule.RuleKey;
-import org.sonar.api.utils.MessageException;
-import org.sonar.api.utils.System2;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 import org.sonarsource.dotnet.shared.plugins.ProtobufDataImporter;
@@ -45,13 +43,11 @@ public class CSharpSensor implements Sensor {
   private static final Logger LOG = Loggers.get(CSharpSensor.class);
 
   private final CSharpConfiguration config;
-  private final System2 system;
   private final ProtobufDataImporter protobufDataImporter;
   private final RoslynDataImporter roslynDataImporter;
 
-  public CSharpSensor(CSharpConfiguration config, System2 system, ProtobufDataImporter protobufDataImporter, RoslynDataImporter roslynDataImporter) {
+  public CSharpSensor(CSharpConfiguration config, ProtobufDataImporter protobufDataImporter, RoslynDataImporter roslynDataImporter) {
     this.config = config;
-    this.system = system;
     this.protobufDataImporter = protobufDataImporter;
     this.roslynDataImporter = roslynDataImporter;
   }
@@ -68,15 +64,10 @@ public class CSharpSensor implements Sensor {
     }
   }
 
-  private boolean shouldExecuteOnProject(FileSystem fs) {
+  private static boolean shouldExecuteOnProject(FileSystem fs) {
     if (!filesToAnalyze(fs).iterator().hasNext()) {
       LOG.debug("No files to analyze. Skip Sensor.");
       return false;
-    }
-
-    if (!system.isOsWindows()) {
-      throw MessageException.of("C# analysis is not supported on " + System.getProperty("os.name") +
-        ". Please, refer to the SonarC# documentation page for more information.");
     }
 
     return true;
