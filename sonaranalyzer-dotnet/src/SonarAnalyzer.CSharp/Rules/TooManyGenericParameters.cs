@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2017 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -40,10 +40,15 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        private const int DefaultValueMaximum = 2;
+        private const int DefaultMaxNumberOfGenericParametersInClass = 2;
+        [RuleParameter("max", PropertyType.Integer, "Maximum authorized number of generic parameters.",
+            DefaultMaxNumberOfGenericParametersInClass)]
+        public int MaxNumberOfGenericParametersInClass { get; set; } = DefaultMaxNumberOfGenericParametersInClass;
 
-        [RuleParameter("max", PropertyType.Integer, "Maximum authorized number of generic parameters.", DefaultValueMaximum)]
-        public int Maximum { get; set; } = DefaultValueMaximum;
+        private const int DefaultMaxNumberOfGenericParametersInMethod = 3;
+        [RuleParameter("maxMethod", PropertyType.Integer, "Maximum authorized number of generic parameters for methods.",
+            DefaultMaxNumberOfGenericParametersInMethod)]
+        public int MaxNumberOfGenericParametersInMethod { get; set; } = DefaultMaxNumberOfGenericParametersInMethod;
 
         protected override void Initialize(ParameterLoadingAnalysisContext context)
         {
@@ -54,13 +59,13 @@ namespace SonarAnalyzer.Rules.CSharp
                 var classSymbol = c.SemanticModel.GetDeclaredSymbol(classDeclaration);
 
                 if (classSymbol == null ||
-                    classSymbol.TypeArguments.Length <= Maximum)
+                    classSymbol.TypeArguments.Length <= MaxNumberOfGenericParametersInClass)
                 {
                     return;
                 }
 
                 c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, classDeclaration.Identifier.GetLocation(),
-                    classSymbol.Name, "class", Maximum));
+                    classSymbol.Name, "class", MaxNumberOfGenericParametersInClass));
             },
             SyntaxKind.ClassDeclaration);
 
@@ -71,13 +76,13 @@ namespace SonarAnalyzer.Rules.CSharp
                 var methodSymbol = c.SemanticModel.GetDeclaredSymbol(methodDeclaration);
 
                 if (methodSymbol == null ||
-                    methodSymbol.TypeArguments.Length <= Maximum)
+                    methodSymbol.TypeArguments.Length <= MaxNumberOfGenericParametersInMethod)
                 {
                     return;
                 }
 
                 c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, methodDeclaration.Identifier.GetLocation(),
-                    $"{methodSymbol.ContainingType.Name}.{methodSymbol.Name}", "method", Maximum));
+                    $"{methodSymbol.ContainingType.Name}.{methodSymbol.Name}", "method", MaxNumberOfGenericParametersInMethod));
             },
             SyntaxKind.MethodDeclaration);
         }
