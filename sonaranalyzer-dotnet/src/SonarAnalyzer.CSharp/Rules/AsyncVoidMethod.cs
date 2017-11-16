@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -62,7 +63,16 @@ namespace SonarAnalyzer.Rules.CSharp
             return methodSymbol.IsAsync &&
                 methodSymbol.ReturnsVoid &&
                 methodSymbol.IsChangeable() &&
-                !methodSymbol.IsProbablyEventHandler();
+                !IsEventHanderMethod(methodSymbol);
+        }
+
+        private static bool IsEventHanderMethod(IMethodSymbol methodSymbol)
+        {
+            return methodSymbol.ReturnsVoid &&
+                methodSymbol.Parameters.Length == 2 &&
+                methodSymbol.Parameters[0].Name == "sender" &&
+                methodSymbol.Parameters[0].Type.Is(KnownType.System_Object) &&
+                methodSymbol.Parameters[1].Type.ToString().EndsWith("EventArgs", StringComparison.Ordinal);
         }
     }
 }
