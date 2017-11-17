@@ -29,7 +29,7 @@ namespace SonarAnalyzer.Helpers
 #if DEBUG
             return new string[0];
 #else
-            return new[] { WellKnownDiagnosticTags.NotConfigurable };
+            return new[] { Microsoft.CodeAnalysis.WellKnownDiagnosticTags.NotConfigurable };
 #endif
         }
     }
