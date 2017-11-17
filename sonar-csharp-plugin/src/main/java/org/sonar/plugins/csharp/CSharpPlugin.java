@@ -26,6 +26,7 @@ import org.sonar.api.PropertyType;
 import org.sonarsource.dotnet.shared.plugins.EncodingPerFile;
 import org.sonarsource.dotnet.shared.plugins.GeneratedFileFilter;
 import org.sonarsource.dotnet.shared.plugins.ProtobufDataImporter;
+import org.sonarsource.dotnet.shared.plugins.ReportPathCollector;
 import org.sonarsource.dotnet.shared.plugins.RoslynDataImporter;
 import org.sonarsource.dotnet.shared.plugins.WrongEncodingFileFilter;
 
@@ -51,6 +52,11 @@ public class CSharpPlugin implements Plugin {
 
   static final String LANGUAGE_KEY = "cs";
   static final String LANGUAGE_NAME = "C#";
+  
+  static final String REPOSITORY_KEY = "csharpsquid";
+  static final String REPOSITORY_NAME = "SonarAnalyzer";
+  static final String PLUGIN_KEY = "csharp";
+  static final String SONARANALYZER_NAME = "SonarAnalyzer.CSharp";
 
   static final String FILE_SUFFIXES_KEY = "sonar.cs.file.suffixes";
   static final String FILE_SUFFIXES_DEFVALUE = ".cs";
@@ -60,6 +66,7 @@ public class CSharpPlugin implements Plugin {
   public void define(Context context) {
     context.addExtensions(
       CSharp.class,
+      ReportPathCollector.class,
       CSharpSonarRulesDefinition.class,
       CSharpSonarWayProfile.class,
       CSharpSensor.class,
@@ -67,6 +74,7 @@ public class CSharpPlugin implements Plugin {
       WrongEncodingFileFilter.class,
       EncodingPerFile.class,
       GeneratedFileFilter.class,
+      CSharpPropertiesSensor.class,
       SonarLintProfileExporter.class,
       SonarLintFakeProfileImporter.class,
       ProtobufDataImporter.class,

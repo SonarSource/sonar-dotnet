@@ -21,8 +21,9 @@ package org.sonar.plugins.csharp;
 
 import java.io.File;
 import java.nio.file.Path;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -36,11 +37,10 @@ import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.api.internal.google.common.collect.ImmutableList;
 import org.sonar.api.internal.google.common.collect.ImmutableMap;
 import org.sonar.api.rule.RuleKey;
-import org.sonar.api.utils.MessageException;
-import org.sonar.api.utils.System2;
 import org.sonar.api.utils.log.LogTester;
 import org.sonar.api.utils.log.LoggerLevel;
 import org.sonarsource.dotnet.shared.plugins.ProtobufDataImporter;
+import org.sonarsource.dotnet.shared.plugins.ReportPathCollector;
 import org.sonarsource.dotnet.shared.plugins.RoslynDataImporter;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -57,10 +57,10 @@ public class CSharpSensorTest {
   @Rule
   public TemporaryFolder temp = new TemporaryFolder();
 
-  private System2 system = mock(System2.class);
+  private List<Path> reportPaths;
   private RoslynDataImporter roslynDataImporter = mock(RoslynDataImporter.class);
   private ProtobufDataImporter protobufDataImporter = mock(ProtobufDataImporter.class);
-  private CSharpConfiguration csConfigConfiguration = mock(CSharpConfiguration.class);
+  private ReportPathCollector reportPathCollector = mock(ReportPathCollector.class);
 
   private SensorContextTester tester;
   private CSharpSensor sensor;
@@ -69,10 +69,11 @@ public class CSharpSensorTest {
   @Before
   public void prepare() throws Exception {
     workDir = temp.newFolder().toPath();
+    reportPaths = Arrays.asList(new Path[] {workDir.getRoot()});
     tester = SensorContextTester.create(new File("src/test/resources"));
     tester.fileSystem().setWorkDir(workDir);
-    when(system.isOsWindows()).thenReturn(true);
-    sensor = new CSharpSensor(csConfigConfiguration, protobufDataImporter, roslynDataImporter);
+    when(reportPathCollector.protobufDirs()).thenReturn(reportPaths);
+    sensor = new CSharpSensor(reportPathCollector, protobufDataImporter, roslynDataImporter);
   }
 
   private void addFileToFs() {
@@ -84,6 +85,7 @@ public class CSharpSensorTest {
   public void checkDescriptor() {
     DefaultSensorDescriptor sensorDescriptor = new DefaultSensorDescriptor();
     sensor.describe(sensorDescriptor);
+    assertThat(sensorDescriptor.isGlobal()).isTrue();
     assertThat(sensorDescriptor.languages()).containsOnly("cs");
     assertThat(sensorDescriptor.name()).isEqualTo("C#");
   }
@@ -91,12 +93,12 @@ public class CSharpSensorTest {
   @Test
   public void noProtobufFilesShouldNotFail() {
     addFileToFs();
-    when(csConfigConfiguration.protobufReportPath()).thenReturn(Optional.empty());
-    when(csConfigConfiguration.roslynReportPath()).thenReturn(Optional.of(workDir.getRoot()));
+    when(reportPathCollector.protobufDirs()).thenReturn(Collections.emptyList());
+    when(reportPathCollector.roslynDirs()).thenReturn(Collections.singletonList(workDir.getRoot()));
     tester.setActiveRules(new ActiveRulesBuilder()
-      .create(RuleKey.of(CSharpSonarRulesDefinition.REPOSITORY_KEY, "S1186"))
+      .create(RuleKey.of(CSharpPlugin.REPOSITORY_KEY, "S1186"))
       .activate()
-      .create(RuleKey.of(CSharpSonarRulesDefinition.REPOSITORY_KEY, "[parameters_key]"))
+      .create(RuleKey.of(CSharpPlugin.REPOSITORY_KEY, "[parameters_key]"))
       .activate()
       .create(RuleKey.of("roslyn.foo", "custom-roslyn"))
       .activate()
@@ -104,24 +106,22 @@ public class CSharpSensorTest {
 
     sensor.execute(tester);
 
-    verify(csConfigConfiguration).protobufReportPath();
+    verify(reportPathCollector).protobufDirs();
     verifyZeroInteractions(protobufDataImporter);
     // {"sonaranalyzer-cs" = [csharpsquid:S1186, csharpsquid:[parameters_key]], "foo" = [roslyn.foo:custom-roslyn]}
     ImmutableMap<String, List<RuleKey>> expectedMap = ImmutableMap.of(
       "sonaranalyzer-cs", ImmutableList.of(RuleKey.of("csharpsquid", "S1186"), RuleKey.of("csharpsquid", "[parameters_key]")),
       "foo", ImmutableList.of(RuleKey.of("roslyn.foo", "custom-roslyn")));
-    verify(roslynDataImporter).importRoslynReport(workDir.getRoot(), tester, expectedMap);
+    verify(roslynDataImporter).importRoslynReport(Collections.singletonList(workDir.getRoot()), tester, expectedMap);
   }
 
   @Test
   public void noRoslynReportShouldNotFail() {
     addFileToFs();
-    when(csConfigConfiguration.roslynReportPath()).thenReturn(Optional.empty());
-    when(csConfigConfiguration.protobufReportPath()).thenReturn(Optional.of(workDir.getRoot()));
     sensor.execute(tester);
 
-    verify(csConfigConfiguration).protobufReportPath();
-    verify(protobufDataImporter).importResults(tester, workDir.getRoot(), CSharpSonarRulesDefinition.REPOSITORY_KEY, true);
+    verify(reportPathCollector).protobufDirs();
+    verify(protobufDataImporter).importResults(tester, reportPaths, CSharpPlugin.REPOSITORY_KEY, true);
     verifyZeroInteractions(roslynDataImporter);
   }
 
@@ -132,14 +132,4 @@ public class CSharpSensorTest {
     assertThat(logTester.logs(LoggerLevel.DEBUG)).hasSize(1);
     assertThat(logTester.logs(LoggerLevel.DEBUG).get(0)).isEqualTo("No files to analyze. Skip Sensor.");
   }
-
-  @Test
-  public void doNotFail_WhenOsIsNotWindows_And_NoCS_FilesDetected() throws MessageException {
-    // Arrange
-    when(system.isOsWindows()).thenReturn(false);
-
-    // Act
-    sensor.execute(tester);
-  }
-
 }

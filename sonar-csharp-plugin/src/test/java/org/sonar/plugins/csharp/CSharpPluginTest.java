@@ -28,6 +28,7 @@ import org.sonar.api.config.PropertyDefinition;
 import org.sonarsource.dotnet.shared.plugins.EncodingPerFile;
 import org.sonarsource.dotnet.shared.plugins.GeneratedFileFilter;
 import org.sonarsource.dotnet.shared.plugins.ProtobufDataImporter;
+import org.sonarsource.dotnet.shared.plugins.ReportPathCollector;
 import org.sonarsource.dotnet.shared.plugins.RoslynDataImporter;
 import org.sonarsource.dotnet.shared.plugins.WrongEncodingFileFilter;
 
@@ -51,6 +52,8 @@ public class CSharpPluginTest {
       CSharpConfiguration.class,
       WrongEncodingFileFilter.class,
       EncodingPerFile.class,
+      ReportPathCollector.class,
+      CSharpPropertiesSensor.class,
       GeneratedFileFilter.class,
       SonarLintProfileExporter.class,
       SonarLintFakeProfileImporter.class,

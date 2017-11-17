@@ -19,13 +19,23 @@
  */
 package org.sonarsource.dotnet.shared.plugins;
 
+import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.List;
+import java.util.Locale;
+import java.util.stream.Stream;
 import org.sonar.api.batch.ScannerSide;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.issue.NoSonarFilter;
 import org.sonar.api.measures.FileLinesContextFactory;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
+import org.sonarsource.dotnet.protobuf.SonarAnalyzer.CopyPasteTokenInfo;
+import org.sonarsource.dotnet.protobuf.SonarAnalyzer.FileIssues;
+import org.sonarsource.dotnet.protobuf.SonarAnalyzer.MetricsInfo;
+import org.sonarsource.dotnet.protobuf.SonarAnalyzer.SymbolReferenceInfo;
+import org.sonarsource.dotnet.protobuf.SonarAnalyzer.TokenTypeInfo;
 import org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters;
 import org.sonarsource.dotnet.shared.plugins.protobuf.RawProtobufImporter;
 
@@ -47,15 +57,42 @@ public class ProtobufDataImporter {
     this.noSonarFilter = noSonarFilter;
   }
 
-  public void importResults(SensorContext context, Path protobufReportsDirectory, String repositoryKey, boolean importIssues) {
-    // Note: the no-sonar "measure" must be imported before issues, otherwise the affected issues won't get excluded!
-    parseProtobuf(ProtobufImporters.metricsImporter(context, fileLinesContextFactory, noSonarFilter), protobufReportsDirectory, METRICS_OUTPUT_PROTOBUF_NAME);
-    if (importIssues) {
-      parseProtobuf(ProtobufImporters.issuesImporter(context, repositoryKey), protobufReportsDirectory, ISSUES_OUTPUT_PROTOBUF_NAME);
+  public void importResults(SensorContext context, List<Path> protobufReportsDirectories, String repositoryKey, boolean importIssues) {
+    RawProtobufImporter<MetricsInfo> metricsImporter = ProtobufImporters.metricsImporter(context, fileLinesContextFactory, noSonarFilter);
+    RawProtobufImporter<FileIssues> issuesImporter = ProtobufImporters.issuesImporter(context, repositoryKey);
+    RawProtobufImporter<TokenTypeInfo> highlightImporter = ProtobufImporters.highlightImporter(context);
+    RawProtobufImporter<SymbolReferenceInfo> symbolRefsImporter = ProtobufImporters.symbolRefsImporter(context);
+    RawProtobufImporter<CopyPasteTokenInfo> cpdTokensImporter = ProtobufImporters.cpdTokensImporter(context);
+
+    for (Path protobufReportsDir : protobufReportsDirectories) {
+      long protoFiles = countProtoFiles(protobufReportsDir);
+      LOG.info(String.format("Importing results from %d proto %s in '%s'", protoFiles, pluralize("file", protoFiles), protobufReportsDir));
+      // Note: the no-sonar "measure" must be imported before issues, otherwise the affected issues won't get excluded!
+      parseProtobuf(metricsImporter, protobufReportsDir, METRICS_OUTPUT_PROTOBUF_NAME);
+      if (importIssues) {
+        parseProtobuf(issuesImporter, protobufReportsDir, ISSUES_OUTPUT_PROTOBUF_NAME);
+      }
+      parseProtobuf(highlightImporter, protobufReportsDir, HIGHLIGHT_OUTPUT_PROTOBUF_NAME);
+      parseProtobuf(symbolRefsImporter, protobufReportsDir, SYMBOLREFS_OUTPUT_PROTOBUF_NAME);
+      parseProtobuf(cpdTokensImporter, protobufReportsDir, CPDTOKENS_OUTPUT_PROTOBUF_NAME);
     }
-    parseProtobuf(ProtobufImporters.highlightImporter(context), protobufReportsDirectory, HIGHLIGHT_OUTPUT_PROTOBUF_NAME);
-    parseProtobuf(ProtobufImporters.symbolRefsImporter(context), protobufReportsDirectory, SYMBOLREFS_OUTPUT_PROTOBUF_NAME);
-    parseProtobuf(ProtobufImporters.cpdTokensImporter(context), protobufReportsDirectory, CPDTOKENS_OUTPUT_PROTOBUF_NAME);
+  }
+
+  private static String pluralize(String s, long count) {
+    if (count == 1) {
+      return s;
+    }
+    return s + "s";
+  }
+
+  private static long countProtoFiles(Path dir) {
+    try (Stream<Path> stream = Files.list(dir)) {
+      return stream
+        .filter(p -> p.getFileName().toString().toLowerCase(Locale.ENGLISH).endsWith(".pb"))
+        .count();
+    } catch (IOException e) {
+      throw new IllegalStateException("unexpected error while reading files in: " + dir, e);
+    }
   }
 
   private static void parseProtobuf(RawProtobufImporter<?> importer, Path workDirectory, String filename) {

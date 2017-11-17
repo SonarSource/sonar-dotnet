@@ -44,7 +44,6 @@ import org.sonar.api.server.rule.RulesDefinition;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-import static org.sonar.plugins.csharp.RoslynProfileExporter.SONARANALYZER_CSHARP_NAME;
 
 public class RoslynProfileExporterTest {
 
@@ -102,9 +101,9 @@ public class RoslynProfileExporterTest {
     when(configuration.get("sonaranalyzer-cs.pluginKey")).thenReturn(Optional.of("csharp"));
     when(configuration.get("sonaranalyzer-cs.pluginVersion")).thenReturn(Optional.of("1.7.0"));
     when(configuration.get("sonaranalyzer-cs.staticResourceName")).thenReturn(Optional.of("SonarAnalyzer.zip"));
-    when(configuration.get("sonaranalyzer-cs.analyzerId")).thenReturn(Optional.of(SONARANALYZER_CSHARP_NAME));
-    when(configuration.get("sonaranalyzer-cs.ruleNamespace")).thenReturn(Optional.of(SONARANALYZER_CSHARP_NAME));
-    when(configuration.get("sonaranalyzer-cs.nuget.packageId")).thenReturn(Optional.of(SONARANALYZER_CSHARP_NAME));
+    when(configuration.get("sonaranalyzer-cs.analyzerId")).thenReturn(Optional.of(CSharpPlugin.SONARANALYZER_NAME));
+    when(configuration.get("sonaranalyzer-cs.ruleNamespace")).thenReturn(Optional.of(CSharpPlugin.SONARANALYZER_NAME));
+    when(configuration.get("sonaranalyzer-cs.nuget.packageId")).thenReturn(Optional.of(CSharpPlugin.SONARANALYZER_NAME));
     when(configuration.get("sonaranalyzer-cs.nuget.packageVersion")).thenReturn(Optional.of("1.10.0"));
 
     RulesDefinition sonarLintRepo = context -> {
@@ -155,9 +154,9 @@ public class RoslynProfileExporterTest {
     when(configuration.get("sonaranalyzer-cs.pluginKey")).thenReturn(Optional.of("csharp"));
     when(configuration.get("sonaranalyzer-cs.pluginVersion")).thenReturn(Optional.of("1.7.0"));
     when(configuration.get("sonaranalyzer-cs.staticResourceName")).thenReturn(Optional.of("SonarAnalyzer.zip"));
-    when(configuration.get("sonaranalyzer-cs.analyzerId")).thenReturn(Optional.of(SONARANALYZER_CSHARP_NAME));
-    when(configuration.get("sonaranalyzer-cs.ruleNamespace")).thenReturn(Optional.of(SONARANALYZER_CSHARP_NAME));
-    when(configuration.get("sonaranalyzer-cs.nuget.packageId")).thenReturn(Optional.of(SONARANALYZER_CSHARP_NAME));
+    when(configuration.get("sonaranalyzer-cs.analyzerId")).thenReturn(Optional.of(CSharpPlugin.SONARANALYZER_NAME));
+    when(configuration.get("sonaranalyzer-cs.ruleNamespace")).thenReturn(Optional.of(CSharpPlugin.SONARANALYZER_NAME));
+    when(configuration.get("sonaranalyzer-cs.nuget.packageId")).thenReturn(Optional.of(CSharpPlugin.SONARANALYZER_NAME));
     when(configuration.get("sonaranalyzer-cs.nuget.packageVersion")).thenReturn(Optional.of("1.10.0"));
 
     when(configuration.get("custom.pluginKey")).thenReturn(Optional.of("customPluginKey"));
@@ -232,9 +231,9 @@ public class RoslynProfileExporterTest {
     when(configuration.get("sonaranalyzer-cs.pluginKey")).thenReturn(Optional.of("csharp"));
     when(configuration.get("sonaranalyzer-cs.pluginVersion")).thenReturn(Optional.of("1.7.0"));
     when(configuration.get("sonaranalyzer-cs.staticResourceName")).thenReturn(Optional.of("SonarAnalyzer.zip"));
-    when(configuration.get("sonaranalyzer-cs.analyzerId")).thenReturn(Optional.of(SONARANALYZER_CSHARP_NAME));
-    when(configuration.get("sonaranalyzer-cs.ruleNamespace")).thenReturn(Optional.of(SONARANALYZER_CSHARP_NAME));
-    when(configuration.get("sonaranalyzer-cs.nuget.packageId")).thenReturn(Optional.of(SONARANALYZER_CSHARP_NAME));
+    when(configuration.get("sonaranalyzer-cs.analyzerId")).thenReturn(Optional.of(CSharpPlugin.SONARANALYZER_NAME));
+    when(configuration.get("sonaranalyzer-cs.ruleNamespace")).thenReturn(Optional.of(CSharpPlugin.SONARANALYZER_NAME));
+    when(configuration.get("sonaranalyzer-cs.nuget.packageId")).thenReturn(Optional.of(CSharpPlugin.SONARANALYZER_NAME));
     when(configuration.get("sonaranalyzer-cs.nuget.packageVersion")).thenReturn(Optional.of("1.10.0"));
 
     RulesDefinition sonarLintRepo = context -> {

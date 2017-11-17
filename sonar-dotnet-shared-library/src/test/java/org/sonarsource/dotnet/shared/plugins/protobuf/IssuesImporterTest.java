@@ -19,6 +19,7 @@
  */
 package org.sonarsource.dotnet.shared.plugins.protobuf;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.sonar.api.batch.fs.TextRange;
 import org.sonar.api.batch.fs.internal.DefaultInputFile;
@@ -43,19 +44,23 @@ public class IssuesImporterTest {
   private static final String TEST_FILE_PATH = "Program.cs";
   private static final File TEST_FILE = new File(TEST_DATA_DIR, TEST_FILE_PATH);
 
+  File protobuf = new File(TEST_DATA_DIR, ISSUES_OUTPUT_PROTOBUF_NAME);
+  private SensorContextTester tester = SensorContextTester.create(TEST_DATA_DIR);
+  private IssuesImporter importer = new IssuesImporter(tester, "dummy");
+
+  @Before
+  public void before() {
+    assertThat(protobuf.isFile()).withFailMessage("no such file: " + protobuf).isTrue();
+  }
+
   @Test
   public void test_issues_get_imported() throws FileNotFoundException {
-    SensorContextTester tester = SensorContextTester.create(TEST_DATA_DIR);
-
     DefaultInputFile inputFile = new TestInputFileBuilder("dummyKey", TEST_FILE_PATH)
       .setMetadata(new FileMetadata().readMetadata(new FileReader(TEST_FILE)))
       .build();
     tester.fileSystem().add(inputFile);
 
-    File protobuf = new File(TEST_DATA_DIR, ISSUES_OUTPUT_PROTOBUF_NAME);
-    assertThat(protobuf.isFile()).withFailMessage("no such file: " + protobuf).isTrue();
-
-    new IssuesImporter(tester, "dummy").accept(protobuf.toPath());
+    importer.accept(protobuf.toPath());
 
     Collection<Issue> issues = tester.allIssues();
     assertThat(issues).hasSize(6);

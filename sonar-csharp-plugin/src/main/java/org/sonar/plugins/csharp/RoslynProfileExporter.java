@@ -52,16 +52,15 @@ import static java.util.stream.Collectors.toList;
 
 public class RoslynProfileExporter extends ProfileExporter {
   private static final Logger LOG = Loggers.get(RoslynProfileExporter.class);
-  static final String SONARANALYZER_CSHARP_NAME = "SonarAnalyzer.CSharp";
   private static final String SONARANALYZER_PARTIAL_REPO_KEY = "sonaranalyzer-cs";
-
+  private static final String PROFILE_KEY = "roslyn-cs";
   private static final String ROSLYN_REPOSITORY_PREFIX = "roslyn.";
 
   private final Configuration configuration;
   private final RulesDefinition[] rulesDefinitions;
 
   public RoslynProfileExporter(Configuration configuration, RulesDefinition[] rulesDefinitions) {
-    super("roslyn-cs", "Technical exporter for the MSBuild SonarQube Scanner");
+    super(PROFILE_KEY, "Technical exporter for the MSBuild SonarQube Scanner");
     this.configuration = configuration;
     this.rulesDefinitions = rulesDefinitions;
     setSupportedLanguages(CSharpPlugin.LANGUAGE_KEY);
@@ -71,7 +70,7 @@ public class RoslynProfileExporter extends ProfileExporter {
     String analyzerVersion = getAnalyzerVersion();
     return Arrays.asList(
       PropertyDefinition.builder(pluginKeyPropertyKey(SONARANALYZER_PARTIAL_REPO_KEY))
-        .defaultValue("csharp")
+        .defaultValue(CSharpPlugin.PLUGIN_KEY)
         .hidden()
         .build(),
       PropertyDefinition.builder(pluginVersionPropertyKey(SONARANALYZER_PARTIAL_REPO_KEY))
@@ -83,15 +82,15 @@ public class RoslynProfileExporter extends ProfileExporter {
         .hidden()
         .build(),
       PropertyDefinition.builder(analyzerIdPropertyKey(SONARANALYZER_PARTIAL_REPO_KEY))
-        .defaultValue(SONARANALYZER_CSHARP_NAME)
+        .defaultValue(CSharpPlugin.SONARANALYZER_NAME)
         .hidden()
         .build(),
       PropertyDefinition.builder(ruleNamespacePropertyKey(SONARANALYZER_PARTIAL_REPO_KEY))
-        .defaultValue(SONARANALYZER_CSHARP_NAME)
+        .defaultValue(CSharpPlugin.SONARANALYZER_NAME)
         .hidden()
         .build(),
       PropertyDefinition.builder(nugetPackageIdPropertyKey(SONARANALYZER_PARTIAL_REPO_KEY))
-        .defaultValue(SONARANALYZER_CSHARP_NAME)
+        .defaultValue(CSharpPlugin.SONARANALYZER_NAME)
         .hidden()
         .build(),
       PropertyDefinition.builder(nugetPackageVersionPropertyKey(SONARANALYZER_PARTIAL_REPO_KEY))
@@ -212,7 +211,7 @@ public class RoslynProfileExporter extends ProfileExporter {
 
     appendLine(sb, "  <Rules>");
     if (includeRules) {
-      for (ActiveRule activeRule : ruleProfile.getActiveRulesByRepository(CSharpSonarRulesDefinition.REPOSITORY_KEY)) {
+      for (ActiveRule activeRule : ruleProfile.getActiveRulesByRepository(CSharpPlugin.REPOSITORY_KEY)) {
         appendLine(sb, "    <Rule>");
         appendLine(sb, "      <Key>" + escapeXml(activeRule.getRuleKey()) + "</Key>");
         appendParameters(sb, effectiveParameters(activeRule));
@@ -270,7 +269,7 @@ public class RoslynProfileExporter extends ProfileExporter {
         String pluginKey = activeRule.repository().substring(ROSLYN_REPOSITORY_PREFIX.length());
         result.putIfAbsent(pluginKey, new ArrayList<>());
         result.get(pluginKey).add(activeRule);
-      } else if (CSharpSonarRulesDefinition.REPOSITORY_KEY.equals(activeRule.repository())) {
+      } else if (CSharpPlugin.REPOSITORY_KEY.equals(activeRule.repository())) {
         result.putIfAbsent(SONARANALYZER_PARTIAL_REPO_KEY, new ArrayList<>());
         result.get(SONARANALYZER_PARTIAL_REPO_KEY).add(activeRule);
       }

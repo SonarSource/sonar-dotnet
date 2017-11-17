@@ -19,11 +19,15 @@
  */
 package org.sonar.plugins.csharp;
 
-import org.sonar.api.config.Configuration;
-import org.sonarsource.dotnet.shared.plugins.AbstractConfiguration;
+import org.sonar.api.batch.ScannerSide;
+import org.sonarsource.dotnet.shared.plugins.AbstractPropertiesSensor;
+import org.sonarsource.dotnet.shared.plugins.ReportPathCollector;
 
-public class CSharpConfiguration extends AbstractConfiguration {
-  public CSharpConfiguration(Configuration configuration) {
-    super(configuration, CSharpPlugin.LANGUAGE_KEY);
+@ScannerSide
+public class CSharpPropertiesSensor extends AbstractPropertiesSensor {
+  private static final String SENSOR_NAME = "C# Properties";
+
+  public CSharpPropertiesSensor(CSharpConfiguration configuration, ReportPathCollector reportPathCollector) {
+    super(configuration, reportPathCollector, SENSOR_NAME, CSharpPlugin.LANGUAGE_KEY);
   }
 }

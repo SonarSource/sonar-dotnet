@@ -19,18 +19,19 @@
  */
 package org.sonarsource.dotnet.shared.plugins.protobuf;
 
+import com.google.protobuf.Parser;
+import java.nio.file.Path;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.function.Function;
-
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonarsource.dotnet.shared.plugins.SensorContextUtils;
 
-import com.google.protobuf.Parser;
-
 public abstract class ProtobufImporter<T> extends RawProtobufImporter<T> {
-
   private final Function<T, String> toFilePath;
   private final SensorContext context;
+  private final Set<Path> filesProcessed = new HashSet<>();
 
   ProtobufImporter(Parser<T> parser, SensorContext context, Function<T, String> toFilePath) {
     super(parser);
@@ -41,8 +42,13 @@ public abstract class ProtobufImporter<T> extends RawProtobufImporter<T> {
   @Override
   final void consume(T message) {
     InputFile inputFile = SensorContextUtils.toInputFile(context.fileSystem(), toFilePath.apply(message));
+
     // file may be null because it's not within the project base dir
     if (inputFile == null) {
+      return;
+    }
+
+    if (!filesProcessed.add(inputFile.path().toAbsolutePath())) {
       return;
     }
     consumeFor(inputFile, message);

@@ -19,44 +19,17 @@
  */
 package org.sonar.plugins.csharp;
 
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
-import java.util.LinkedHashSet;
-import java.util.Set;
 import org.sonar.api.batch.ScannerSide;
-import org.sonar.api.server.rule.RulesDefinition;
-import org.sonar.api.server.rule.RulesDefinitionXmlLoader;
+import org.sonarsource.dotnet.shared.plugins.AbstractRulesDefinition;
 
-import static java.util.Objects.requireNonNull;
+import static org.sonar.plugins.csharp.CSharpPlugin.REPOSITORY_KEY;
+import static org.sonar.plugins.csharp.CSharpPlugin.REPOSITORY_NAME;
 
 @ScannerSide
-public class CSharpSonarRulesDefinition implements RulesDefinition {
+public class CSharpSonarRulesDefinition extends AbstractRulesDefinition {
+  private static final String RULES_XML = "/org/sonar/plugins/csharp/rules.xml";
 
-  static final String REPOSITORY_KEY = "csharpsquid";
-  private static final String REPOSITORY_NAME = "SonarAnalyzer";
-
-  private Set<String> allRuleKeys = null;
-
-  @Override
-  public void define(Context context) {
-    NewRepository repository = context
-      .createRepository(REPOSITORY_KEY, CSharpPlugin.LANGUAGE_KEY)
-      .setName(REPOSITORY_NAME);
-
-    RulesDefinitionXmlLoader loader = new RulesDefinitionXmlLoader();
-    loader.load(repository, new InputStreamReader(getClass().getResourceAsStream("/org/sonar/plugins/csharp/rules.xml"), StandardCharsets.UTF_8));
-
-    allRuleKeys = new LinkedHashSet<>();
-    for (NewRule rule : repository.rules()) {
-      allRuleKeys.add(rule.key());
-    }
-
-    repository.done();
+  public CSharpSonarRulesDefinition() {
+    super(REPOSITORY_KEY, REPOSITORY_NAME, CSharpPlugin.LANGUAGE_KEY, RULES_XML);
   }
-
-  Set<String> allRuleKeys() {
-    requireNonNull(allRuleKeys);
-    return allRuleKeys;
-  }
-
 }

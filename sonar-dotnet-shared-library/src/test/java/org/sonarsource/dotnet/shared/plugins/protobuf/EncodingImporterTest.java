@@ -19,11 +19,6 @@
  */
 package org.sonarsource.dotnet.shared.plugins.protobuf;
 
-import org.junit.Test;
-import org.sonar.api.batch.fs.internal.DefaultInputFile;
-import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
-import org.sonar.api.batch.sensor.internal.SensorContextTester;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.nio.charset.Charset;
@@ -31,6 +26,11 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Map;
+import org.junit.Before;
+import org.junit.Test;
+import org.sonar.api.batch.fs.internal.DefaultInputFile;
+import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
+import org.sonar.api.batch.sensor.internal.SensorContextTester;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.ENCODING_OUTPUT_PROTOBUF_NAME;
@@ -41,25 +41,25 @@ public class EncodingImporterTest {
   private static final File TEST_DATA_DIR = new File("src/test/resources/ProtobufImporterTest");
   private static final String TEST_FILE_PATH = "Program.cs";
 
+  private SensorContextTester tester = SensorContextTester.create(TEST_DATA_DIR);
+  private File protobuf = new File(TEST_DATA_DIR, ENCODING_OUTPUT_PROTOBUF_NAME);
+  private EncodingImporter importer = new EncodingImporter();
+
+  @Before
+  public void setUp() {
+    assertThat(protobuf.isFile()).withFailMessage("no such file: " + protobuf).isTrue();
+  }
+
   @Test
   public void test_encoding_get_imported() throws FileNotFoundException {
-    SensorContextTester tester = SensorContextTester.create(TEST_DATA_DIR);
-
     DefaultInputFile inputFile = new TestInputFileBuilder("dummyKey", TEST_FILE_PATH)
       .build();
     tester.fileSystem().add(inputFile);
 
-    File protobuf = new File(TEST_DATA_DIR, ENCODING_OUTPUT_PROTOBUF_NAME);
-    assertThat(protobuf.isFile()).withFailMessage("no such file: " + protobuf).isTrue();
-
-    EncodingImporter importer = new EncodingImporter();
-
     importer.accept(protobuf.toPath());
 
     Map<Path, Charset> encodingPerPath = importer.getEncodingPerPath();
-
     assertThat(encodingPerPath.size()).isEqualTo(1);
     assertThat(encodingPerPath.get(Paths.get(TEST_FILE_PATH))).isEqualTo(StandardCharsets.UTF_8);
   }
-
 }

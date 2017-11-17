@@ -1,5 +1,5 @@
 /*
- * SonarC#
+ * SonarSource :: .NET :: Shared library
  * Copyright (C) 2014-2017 SonarSource SA
  * mailto:info AT sonarsource DOT com
  *
@@ -17,7 +17,7 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.plugins.csharp;
+package org.sonarsource.dotnet.shared.plugins;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -30,14 +30,14 @@ import org.sonar.api.config.internal.MapSettings;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class CSharpConfigurationTest {
+public class AbstractConfigurationTest {
   @Rule
   public TemporaryFolder temp = new TemporaryFolder();
 
   private Path workDir;
   private MapSettings settings = new MapSettings();
 
-  private CSharpConfiguration config;
+  private AbstractConfiguration config;
 
   @Before
   public void setUp() {
@@ -49,18 +49,19 @@ public class CSharpConfigurationTest {
     Path outputCs = path.resolve("output-cs");
     Files.createDirectories(outputCs);
     Files.createFile(outputCs.resolve("dummy.pb"));
-    settings.setProperty(CSharpConfiguration.ANALYZER_PROJECT_OUT_PATH_PROPERTY_KEY, path.toString());
+    settings.setProperty("sonar.cs.analyzer.projectOutPath", path.toString());
   }
 
   private void createRoslynOut() throws IOException {
     Path path = temp.newFile("roslyn-report.json").toPath();
-    settings.setProperty(CSharpConfiguration.ROSLYN_REPORT_PATH_PROPERTY_KEY, path.toString());
+    settings.setProperty("sonar.cs.roslyn.reportFilePath", path.toString());
   }
 
   @Test
   public void onlyRoslynReportPresent() throws IOException {
     createRoslynOut();
-    config = new CSharpConfiguration(settings.asConfig());
+    config = new AbstractConfiguration(settings.asConfig(), "cs") {
+    };
     assertThat(config.protobufReportPathSilent()).isNotPresent();
     assertThat(config.roslynReportPath().get()).isEqualTo(workDir.resolve("roslyn-report.json"));
   }
@@ -68,7 +69,8 @@ public class CSharpConfigurationTest {
   @Test
   public void onlyProtobufReportsPresent() throws IOException {
     createProtobufOut();
-    config = new CSharpConfiguration(settings.asConfig());
+    config = new AbstractConfiguration(settings.asConfig(), "cs") {
+    };
     assertThat(config.protobufReportPathSilent()).isPresent();
     assertThat(config.roslynReportPath()).isNotPresent();
     assertThat(config.protobufReportPathSilent().get()).isEqualTo(workDir.resolve("report").resolve("output-cs"));

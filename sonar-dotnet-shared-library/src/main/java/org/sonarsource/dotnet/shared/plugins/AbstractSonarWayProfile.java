@@ -19,27 +19,24 @@
  */
 package org.sonarsource.dotnet.shared.plugins;
 
-import javax.annotation.CheckForNull;
-import org.sonar.api.batch.fs.FileSystem;
-import org.sonar.api.batch.fs.InputFile;
-import org.sonar.api.batch.fs.TextRange;
-import org.sonarsource.dotnet.protobuf.SonarAnalyzer;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
+import org.sonar.api.profiles.ProfileDefinition;
+import org.sonar.api.profiles.RulesProfile;
+import org.sonar.api.profiles.XMLProfileParser;
+import org.sonar.api.utils.ValidationMessages;
 
-public final class SensorContextUtils {
-  private SensorContextUtils() {
-    // utility class, forbidden constructor
+public class AbstractSonarWayProfile extends ProfileDefinition {
+  private final XMLProfileParser xmlParser;
+  private final String profileXmlPath;
+
+  public AbstractSonarWayProfile(XMLProfileParser xmlParser, String profileXmlPath) {
+    this.xmlParser = xmlParser;
+    this.profileXmlPath = profileXmlPath;
   }
 
-  @CheckForNull
-  public static InputFile toInputFile(FileSystem fs, String file) {
-    return fs.inputFile(fs.predicates().hasPath(file));
-  }
-
-  public static TextRange toTextRange(InputFile inputFile, SonarAnalyzer.TextRange pbTextRange) {
-    int startLine = pbTextRange.getStartLine();
-    int startLineOffset = pbTextRange.getStartOffset();
-    int endLine = pbTextRange.getEndLine();
-    int endLineOffset = pbTextRange.getEndOffset();
-    return inputFile.newRange(startLine, startLineOffset, endLine, endLineOffset);
+  @Override
+  public RulesProfile createProfile(ValidationMessages validation) {
+    return xmlParser.parse(new InputStreamReader(getClass().getResourceAsStream(profileXmlPath), StandardCharsets.UTF_8), validation);
   }
 }

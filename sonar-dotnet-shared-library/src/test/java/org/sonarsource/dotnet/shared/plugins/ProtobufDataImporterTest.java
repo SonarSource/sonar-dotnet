@@ -25,6 +25,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Collections;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -83,7 +84,7 @@ public class ProtobufDataImporterTest {
 
   @Test
   public void should_import_existing_data() {
-    dataImporter.importResults(tester, workDir, "cs", true);
+    dataImporter.importResults(tester, Collections.singletonList(workDir), "cs", true);
 
     assertThat(tester.measures(inputFile.key())).isNotEmpty();
     assertThat(tester.measure(inputFile.key(), CoreMetrics.NCLOC).value()).isEqualTo(2);
@@ -91,7 +92,7 @@ public class ProtobufDataImporterTest {
 
   @Test
   public void warn_about_files_not_found() {
-    dataImporter.importResults(tester, workDir, "cs", true);
+    dataImporter.importResults(tester, Collections.singletonList(workDir), "cs", true);
 
     String prefix = "Protobuf file not found: ";
     assertThat(logTester.logs(LoggerLevel.WARN)).containsOnly(
