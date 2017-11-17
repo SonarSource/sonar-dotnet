@@ -67,8 +67,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void CheckAssignment(SyntaxNodeAnalysisContext context, int constValueToLookFor)
         {
             var assignment = (AssignmentExpressionSyntax)context.Node;
-            int constValue;
-            if (ExpressionNumericConverter.TryGetConstantIntValue(assignment.Right, out constValue) &&
+            if (ExpressionNumericConverter.TryGetConstantIntValue(assignment.Right, out var constValue) &&
                 constValue == constValueToLookFor)
             {
                 var location = assignment.Parent is StatementSyntax
@@ -81,8 +80,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void CheckBinary(SyntaxNodeAnalysisContext context, int constValueToLookFor)
         {
             var binary = (BinaryExpressionSyntax) context.Node;
-            int constValue;
-            if (ExpressionNumericConverter.TryGetConstantIntValue(binary.Left, out constValue) &&
+            if (ExpressionNumericConverter.TryGetConstantIntValue(binary.Left, out var constValue) &&
                 constValue == constValueToLookFor)
             {
                 var location = GetReportLocation(binary.Left.Span, binary.OperatorToken.Span, binary.SyntaxTree);

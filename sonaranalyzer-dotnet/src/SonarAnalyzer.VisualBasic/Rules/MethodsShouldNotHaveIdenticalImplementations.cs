@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2017 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -55,6 +55,5 @@ namespace SonarAnalyzer.Rules.VisualBasic
         }
 
         protected override SyntaxToken GetMethodIdentifier(MethodBlockSyntax method) => method.SubOrFunctionStatement.Identifier;
-
     }
 }

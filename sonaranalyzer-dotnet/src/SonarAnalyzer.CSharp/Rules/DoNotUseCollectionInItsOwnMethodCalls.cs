@@ -82,8 +82,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             var methodSymbol = model.GetSymbolInfo(invocation).Symbol as IMethodSymbol;
 
-            bool isEnumerableMethod;
-            var message = ProcessIssueMessageFromMethod(methodSymbol, out isEnumerableMethod);
+            var message = ProcessIssueMessageFromMethod(methodSymbol, out var isEnumerableMethod);
             if (message == null)
             {
                 return null;

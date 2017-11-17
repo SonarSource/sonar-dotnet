@@ -30,6 +30,7 @@ namespace SonarAnalyzer.RuleDescriptorGenerator
         {
             Rules= new List<RuleDetail>();
         }
+
         [XmlElement("rule")]
         public List<RuleDetail> Rules { get; private set; }
     }

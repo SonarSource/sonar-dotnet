@@ -20,12 +20,10 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.SymbolicExecution.Constraints;
-using SonarAnalyzer.SymbolicExecution.Relationships;
 using SonarAnalyzer.SymbolicExecution.SymbolicValues;
 
 namespace SonarAnalyzer.SymbolicExecution
@@ -52,6 +50,7 @@ namespace SonarAnalyzer.SymbolicExecution
                 : base(new object())
             {
             }
+
             public override string ToString()
             {
                 return "SV_THIS";
@@ -64,6 +63,7 @@ namespace SonarAnalyzer.SymbolicExecution
                 : base(new object())
             {
             }
+
             public override string ToString()
             {
                 return "SV_BASE";
@@ -76,6 +76,7 @@ namespace SonarAnalyzer.SymbolicExecution
                 : base(new object())
             {
             }
+
             public override string ToString()
             {
                 return "SV_NULL";
@@ -146,20 +147,17 @@ namespace SonarAnalyzer.SymbolicExecution
                 return new[] { programState };
             }
 
-            SymbolicValueConstraints oldConstraints;
-            if (!programState.Constraints.TryGetValue(this, out oldConstraints))
+            if (!programState.Constraints.TryGetValue(this, out var oldConstraints))
             {
                 return new[] { programState.SetConstraint(this, constraint) };
             }
 
-            var boolConstraint = constraint as BoolConstraint;
-            if (boolConstraint != null)
+            if (constraint is BoolConstraint boolConstraint)
             {
                 return TrySetBoolConstraint(boolConstraint, oldConstraints, programState);
             }
 
-            var objectConstraint = constraint as ObjectConstraint;
-            if (objectConstraint != null)
+            if (constraint is ObjectConstraint objectConstraint)
             {
                 return TrySetObjectConstraint(objectConstraint, oldConstraints, programState);
             }

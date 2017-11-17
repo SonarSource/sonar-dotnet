@@ -135,8 +135,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return true;
             }
 
-            IControlFlowGraph cfg;
-            if (!CSharpControlFlowGraph.TryGet(ctor.SyntaxNode.Body, ctor.SemanticModel, out cfg))
+            if (!CSharpControlFlowGraph.TryGet(ctor.SyntaxNode.Body, ctor.SemanticModel, out var cfg))
             {
                 return false;
             }
@@ -225,9 +224,8 @@ namespace SonarAnalyzer.Rules.CSharp
                             {
                                 var memberAccess = GetPossibleMemberAccessParent(instruction);
 
-                                bool isRead;
                                 if (memberAccess != null &&
-                                    TryGetReadWriteFromMemberAccess(memberAccess, out isRead))
+                                    TryGetReadWriteFromMemberAccess(memberAccess, out var isRead))
                                 {
                                     return !isRead;
                                 }
@@ -263,9 +261,8 @@ namespace SonarAnalyzer.Rules.CSharp
                             {
                                 var memberAccess = GetPossibleMemberAccessParent(instruction);
 
-                                bool isRead;
                                 if (memberAccess != null &&
-                                    TryGetReadWriteFromMemberAccess(memberAccess, out isRead))
+                                    TryGetReadWriteFromMemberAccess(memberAccess, out var isRead))
                                 {
                                     return isRead;
                                 }
@@ -348,14 +345,12 @@ namespace SonarAnalyzer.Rules.CSharp
 
             private static ExpressionSyntax GetPossibleMemberAccessParent(SyntaxNode node)
             {
-                var memberAccess = node as MemberAccessExpressionSyntax;
-                if (memberAccess != null)
+                if (node is MemberAccessExpressionSyntax memberAccess)
                 {
                     return memberAccess;
                 }
 
-                var identifier = node as IdentifierNameSyntax;
-                if (identifier != null)
+                if (node is IdentifierNameSyntax identifier)
                 {
                     return GetPossibleMemberAccessParent(identifier);
                 }
@@ -365,14 +360,12 @@ namespace SonarAnalyzer.Rules.CSharp
 
             private static ExpressionSyntax GetPossibleMemberAccessParent(IdentifierNameSyntax identifier)
             {
-                var memberAccess = identifier.Parent as MemberAccessExpressionSyntax;
-                if (memberAccess != null)
+                if (identifier.Parent is MemberAccessExpressionSyntax memberAccess)
                 {
                     return memberAccess;
                 }
 
-                var memberBinding = identifier.Parent as MemberBindingExpressionSyntax;
-                if (memberBinding != null)
+                if (identifier.Parent is MemberBindingExpressionSyntax memberBinding)
                 {
                     return (ExpressionSyntax)memberBinding.Parent;
                 }
@@ -398,15 +391,13 @@ namespace SonarAnalyzer.Rules.CSharp
                     identifier = (IdentifierNameSyntax)expression;
                 }
 
-                var memberAccess = expression as MemberAccessExpressionSyntax;
-                if (memberAccess != null &&
+                if (expression is MemberAccessExpressionSyntax memberAccess &&
                     memberAccess.Expression.IsKind(SyntaxKind.ThisExpression))
                 {
                     identifier = memberAccess.Name as IdentifierNameSyntax;
                 }
 
-                var conditionalAccess = expression as ConditionalAccessExpressionSyntax;
-                if (conditionalAccess != null &&
+                if (expression is ConditionalAccessExpressionSyntax conditionalAccess &&
                     conditionalAccess.Expression.IsKind(SyntaxKind.ThisExpression))
                 {
                     identifier = (conditionalAccess.WhenNotNull as MemberBindingExpressionSyntax)?.Name as IdentifierNameSyntax;

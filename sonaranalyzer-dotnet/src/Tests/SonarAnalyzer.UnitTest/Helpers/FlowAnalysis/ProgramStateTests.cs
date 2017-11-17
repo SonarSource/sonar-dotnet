@@ -36,9 +36,8 @@ namespace SonarAnalyzer.UnitTest.Helpers
 
         private static ISymbol GetSymbol()
         {
-            string testInput = "var a = true; var b = false; b = !b; a = (b);";
-            SemanticModel semanticModel;
-            var method = ControlFlowGraphTest.CompileWithMethodBody(string.Format(ControlFlowGraphTest.TestInput, testInput), "Bar", out semanticModel);
+            var testInput = "var a = true; var b = false; b = !b; a = (b);";
+            var method = ControlFlowGraphTest.CompileWithMethodBody(string.Format(ControlFlowGraphTest.TestInput, testInput), "Bar", out var semanticModel);
             return semanticModel.GetDeclaredSymbol(method);
         }
 

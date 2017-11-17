@@ -37,9 +37,10 @@ namespace SonarAnalyzer.Helpers.CSharp
 
         private static readonly Lazy<GeneratedCodeRecognizer> lazy =
             new Lazy<GeneratedCodeRecognizer>(() => new GeneratedCodeRecognizer());
+
         public static GeneratedCodeRecognizer Instance => lazy.Value;
 
-        #endregion
+        #endregion Singleton implementation
 
         public override bool IsGenerated(SyntaxTree tree)
         {

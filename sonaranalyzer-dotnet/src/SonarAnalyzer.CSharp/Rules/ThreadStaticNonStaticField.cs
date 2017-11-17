@@ -48,9 +48,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 c =>
                 {
                     var fieldDeclaration = (FieldDeclarationSyntax) c.Node;
-                    AttributeSyntax threadStaticAttribute;
                     if (!fieldDeclaration.Modifiers.Any(modifier => modifier.IsKind(SyntaxKind.StaticKeyword)) &&
-                        fieldDeclaration.AttributeLists.TryGetAttribute(KnownType.System_ThreadStaticAttribute, c.SemanticModel, out threadStaticAttribute))
+                        fieldDeclaration.AttributeLists.TryGetAttribute(KnownType.System_ThreadStaticAttribute, c.SemanticModel, out var threadStaticAttribute))
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, threadStaticAttribute.Name.GetLocation()));
                     }

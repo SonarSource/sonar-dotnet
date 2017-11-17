@@ -60,7 +60,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    for (int i = 0; i < methodSymbol.Parameters.Length; i++)
+                    for (var i = 0; i < methodSymbol.Parameters.Length; i++)
                     {
                         var overridingParameter = methodSymbol.Parameters[i];
                         var overriddenParameter = overriddenMember.Parameters[i];

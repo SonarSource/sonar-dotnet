@@ -91,8 +91,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static void CheckForUnnecessaryUnsafeBlocksBelow(TypeDeclarationSyntax typeDeclaration, SyntaxNodeAnalysisContext context)
         {
-            SyntaxToken unsafeKeyword;
-            if (TryGetUnsafeKeyword(typeDeclaration, out unsafeKeyword))
+            if (TryGetUnsafeKeyword(typeDeclaration, out var unsafeKeyword))
             {
                 MarkAllUnsafeBlockInside(typeDeclaration, context);
                 if (!HasUnsafeConstructInside(typeDeclaration, context.SemanticModel))
@@ -114,8 +113,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     continue;
                 }
 
-                var nestedTypeDeclaration = member as TypeDeclarationSyntax;
-                if (nestedTypeDeclaration != null)
+                if (member is TypeDeclarationSyntax nestedTypeDeclaration)
                 {
                     CheckForUnnecessaryUnsafeBlocksBelow(nestedTypeDeclaration, context);
                     continue;
@@ -219,36 +217,31 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool TryGetUnsafeKeyword(MemberDeclarationSyntax memberDeclaration, out SyntaxToken unsafeKeyword)
         {
-            var delegateDeclaration = memberDeclaration as DelegateDeclarationSyntax;
-            if (delegateDeclaration != null)
+            if (memberDeclaration is DelegateDeclarationSyntax delegateDeclaration)
             {
                 unsafeKeyword = delegateDeclaration.Modifiers.FirstOrDefault(m => m.IsKind(SyntaxKind.UnsafeKeyword));
                 return unsafeKeyword != default(SyntaxToken);
             }
 
-            var propertyDeclaration = memberDeclaration as BasePropertyDeclarationSyntax;
-            if (propertyDeclaration != null)
+            if (memberDeclaration is BasePropertyDeclarationSyntax propertyDeclaration)
             {
                 unsafeKeyword = propertyDeclaration.Modifiers.FirstOrDefault(m => m.IsKind(SyntaxKind.UnsafeKeyword));
                 return unsafeKeyword != default(SyntaxToken);
             }
 
-            var methodDeclaration = memberDeclaration as BaseMethodDeclarationSyntax;
-            if (methodDeclaration != null)
+            if (memberDeclaration is BaseMethodDeclarationSyntax methodDeclaration)
             {
                 unsafeKeyword = methodDeclaration.Modifiers.FirstOrDefault(m => m.IsKind(SyntaxKind.UnsafeKeyword));
                 return unsafeKeyword != default(SyntaxToken);
             }
 
-            var fieldDeclaration = memberDeclaration as BaseFieldDeclarationSyntax;
-            if (fieldDeclaration != null)
+            if (memberDeclaration is BaseFieldDeclarationSyntax fieldDeclaration)
             {
                 unsafeKeyword = fieldDeclaration.Modifiers.FirstOrDefault(m => m.IsKind(SyntaxKind.UnsafeKeyword));
                 return unsafeKeyword != default(SyntaxToken);
             }
 
-            var typeDeclaration = memberDeclaration as BaseTypeDeclarationSyntax;
-            if (typeDeclaration != null)
+            if (memberDeclaration is BaseTypeDeclarationSyntax typeDeclaration)
             {
                 unsafeKeyword = typeDeclaration.Modifiers.FirstOrDefault(m => m.IsKind(SyntaxKind.UnsafeKeyword));
                 return unsafeKeyword != default(SyntaxToken);
@@ -276,8 +269,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static SyntaxTokenList GetModifiers(MemberDeclarationSyntax memberDeclaration)
         {
-            var method = memberDeclaration as MethodDeclarationSyntax;
-            if (method != null)
+            if (memberDeclaration is MethodDeclarationSyntax method)
             {
                 return method.Modifiers;
             }
@@ -321,15 +313,13 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 this.context = context;
 
-                var statement = context.Node as CheckedStatementSyntax;
-                if (statement != null)
+                if (context.Node is CheckedStatementSyntax statement)
                 {
                     isCurrentContextChecked = statement.IsKind(SyntaxKind.CheckedStatement);
                     return;
                 }
 
-                var expression = context.Node as CheckedExpressionSyntax;
-                if (expression != null)
+                if (context.Node is CheckedExpressionSyntax expression)
                 {
                     isCurrentContextChecked = expression.IsKind(SyntaxKind.CheckedExpression);
                     return;

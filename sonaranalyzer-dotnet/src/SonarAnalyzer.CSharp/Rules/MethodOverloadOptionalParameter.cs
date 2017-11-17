@@ -127,7 +127,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool MethodsUsingSameParameterNames(ParameterHidingMethodInfo hidingInfo)
         {
-            for (int i = 0; i < hidingInfo.HidingMethod.Parameters.Length; i++)
+            for (var i = 0; i < hidingInfo.HidingMethod.Parameters.Length; i++)
             {
                 if (hidingInfo.HidingMethod.Parameters[i].Name !=
                     hidingInfo.HiddenMethod.Parameters[i].Name)

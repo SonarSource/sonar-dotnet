@@ -28,6 +28,7 @@ namespace SonarAnalyzer.Rules.Common
     public abstract class PropertyGetterWithThrowBase : SonarDiagnosticAnalyzer
     {
         protected const string DiagnosticId = "S2372";
+
         protected const string MessageFormat = "Remove the exception throwing from this property getter, or refactor the " +
             "property into a method.";
 
@@ -92,10 +93,11 @@ namespace SonarAnalyzer.Rules.Common
         protected abstract bool IsGetter(TAccessorSyntax propertyGetter);
 
         protected abstract TLanguageKindEnum ThrowSyntaxKind { get; }
+
         protected abstract SyntaxNode GetThrowExpression(SyntaxNode syntaxNode);
 
         protected abstract DiagnosticDescriptor Rule { get; }
 
-        public sealed override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
+        public override sealed ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
     }
 }

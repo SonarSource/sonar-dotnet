@@ -32,8 +32,10 @@ namespace SonarAnalyzer.SymbolicExecution.ControlFlowGraph
     {
         private readonly Stack<Block> BreakTarget = new Stack<Block>();
         private readonly Stack<Block> ContinueTargets = new Stack<Block>();
+
         private readonly Stack<Dictionary<object, List<JumpBlock>>> SwitchGotoJumpBlocks =
             new Stack<Dictionary<object, List<JumpBlock>>>();
+
         private readonly Dictionary<string, List<JumpBlock>> GotoJumpBlocks = new Dictionary<string, List<JumpBlock>>();
         private readonly Dictionary<string, JumpBlock> LabeledStatements = new Dictionary<string, JumpBlock>();
         private static readonly object GotoDefaultEntry = new object();
@@ -69,19 +71,17 @@ namespace SonarAnalyzer.SymbolicExecution.ControlFlowGraph
             }
         }
 
-        #endregion
+        #endregion Fix jump statements
 
         #region Top level Build*
 
         protected override Block Build(SyntaxNode node, Block currentBlock)
         {
-            var statement = node as StatementSyntax;
-            if (statement != null)
+            if (node is StatementSyntax statement)
             {
                 return BuildStatement(statement, currentBlock);
             }
-            var expression = node as ExpressionSyntax;
-            if (expression != null)
+            if (node is ExpressionSyntax expression)
             {
                 return BuildExpression(expression, currentBlock);
             }
@@ -317,7 +317,6 @@ namespace SonarAnalyzer.SymbolicExecution.ControlFlowGraph
                     return BuildInterpolatedStringExpression((InterpolatedStringExpressionSyntax)expression,
                         currentBlock);
 
-
                 case SyntaxKind.InvocationExpression:
                     return BuildInvocationExpression((InvocationExpressionSyntax)expression, currentBlock);
 
@@ -423,7 +422,7 @@ namespace SonarAnalyzer.SymbolicExecution.ControlFlowGraph
             }
         }
 
-        #endregion
+        #endregion Top level Build*
 
         #region Build*
 
@@ -576,7 +575,7 @@ namespace SonarAnalyzer.SymbolicExecution.ControlFlowGraph
             return jumpBlock;
         }
 
-        #endregion
+        #endregion Build label, goto, goto case, goto default
 
         #region Build switch
 
@@ -601,7 +600,7 @@ namespace SonarAnalyzer.SymbolicExecution.ControlFlowGraph
                     blocks.Add(fallThroughBlock);
 
                     var caseLabel = label as CaseSwitchLabelSyntax;
-                    bool isDefaultLabel = label is DefaultSwitchLabelSyntax;
+                    var isDefaultLabel = label is DefaultSwitchLabelSyntax;
                     if (caseLabel == null && !isDefaultLabel)
                     {
                         throw new NotSupportedException("C# 7 features are not supported yet.");
@@ -644,7 +643,7 @@ namespace SonarAnalyzer.SymbolicExecution.ControlFlowGraph
             return indexer;
         }
 
-        #endregion
+        #endregion Build switch
 
         #region Build jumps: break, continue, return, throw, yield break
 
@@ -690,7 +689,7 @@ namespace SonarAnalyzer.SymbolicExecution.ControlFlowGraph
             return BuildExpression(expression, CreateJumpBlock(statement, ExitTarget.Peek(), currentBlock));
         }
 
-        #endregion
+        #endregion Build jumps: break, continue, return, throw, yield break
 
         #region Build lock, using, fixed, unsafe checked statements
 
@@ -729,7 +728,7 @@ namespace SonarAnalyzer.SymbolicExecution.ControlFlowGraph
             return CreateJumpBlock(statement, statementBlock);
         }
 
-        #endregion
+        #endregion Build lock, using, fixed, unsafe checked statements
 
         #region Build loops - do, for, foreach, while
 
@@ -759,7 +758,7 @@ namespace SonarAnalyzer.SymbolicExecution.ControlFlowGraph
 
             var tempLoopBlock = CreateTemporaryBlock();
 
-            Block incrementorBlock = BuildExpressions(forStatement.Incrementors, CreateBlock(tempLoopBlock)); // C
+            var incrementorBlock = BuildExpressions(forStatement.Incrementors, CreateBlock(tempLoopBlock)); // C
 
             BreakTarget.Push(currentBlock);
             ContinueTargets.Push(incrementorBlock);
@@ -823,24 +822,24 @@ namespace SonarAnalyzer.SymbolicExecution.ControlFlowGraph
             return CreateBlock(loopCondition);
         }
 
-        #endregion
+        #endregion Build loops - do, for, foreach, while
 
         #region Build if statement
 
         private Block BuildIfStatement(IfStatementSyntax ifStatement, Block currentBlock)
         {
-            Block elseBlock = ifStatement.Else?.Statement != null
+            var elseBlock = ifStatement.Else?.Statement != null
                 ? BuildStatement(ifStatement.Else.Statement, CreateBlock(currentBlock))
                 : currentBlock;
-            Block trueBlock = BuildStatement(ifStatement.Statement, CreateBlock(currentBlock));
+            var trueBlock = BuildStatement(ifStatement.Statement, CreateBlock(currentBlock));
 
-            Block ifConditionBlock = BuildExpression(ifStatement.Condition,
+            var ifConditionBlock = BuildExpression(ifStatement.Condition,
                 AddBlock(new BinaryBranchBlock(ifStatement, trueBlock, elseBlock)));
 
             return ifConditionBlock;
         }
 
-        #endregion
+        #endregion Build if statement
 
         #region Build block
 
@@ -849,9 +848,9 @@ namespace SonarAnalyzer.SymbolicExecution.ControlFlowGraph
             return BuildStatements(block.Statements, currentBlock);
         }
 
-        #endregion
+        #endregion Build block
 
-        #endregion
+        #endregion Build statements
 
         #region Build expressions
 
@@ -1011,7 +1010,7 @@ namespace SonarAnalyzer.SymbolicExecution.ControlFlowGraph
             return BuildExpressions(arraySizes, currentBlock);
         }
 
-        #endregion
+        #endregion Build expressions
 
         #region Build variable declaration
 
@@ -1022,7 +1021,7 @@ namespace SonarAnalyzer.SymbolicExecution.ControlFlowGraph
                 return currentBlock;
             }
 
-            Block variableDeclaratorBlock = currentBlock;
+            var variableDeclaratorBlock = currentBlock;
             foreach (var variable in declaration.Variables.Reverse())
             {
                 variableDeclaratorBlock = BuildVariableDeclarator(variable, variableDeclaratorBlock);
@@ -1043,7 +1042,7 @@ namespace SonarAnalyzer.SymbolicExecution.ControlFlowGraph
                 : BuildExpression(initializer, currentBlock);
         }
 
-        #endregion
+        #endregion Build variable declaration
 
         #region Create*
 
@@ -1053,8 +1052,8 @@ namespace SonarAnalyzer.SymbolicExecution.ControlFlowGraph
         internal UsingEndBlock CreateUsingFinalizerBlock(UsingStatementSyntax usingStatement, Block successor) =>
             AddBlock(new UsingEndBlock(usingStatement, successor));
 
-        #endregion
+        #endregion Create*
 
-        #endregion
+        #endregion Build*
     }
 }

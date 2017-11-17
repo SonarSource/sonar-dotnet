@@ -19,14 +19,14 @@
  */
 
 using System.Collections.Immutable;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CodeFixes;
-using System.Threading.Tasks;
 using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CodeActions;
+using Microsoft.CodeAnalysis.CodeFixes;
+using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Common;
-using Microsoft.CodeAnalysis.VisualBasic;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules.VisualBasic
@@ -35,6 +35,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
     public sealed class StringConcatenationWithPlusCodeFixProvider : SonarCodeFixProvider
     {
         internal const string Title = "Change to '&'";
+
         public sealed override ImmutableArray<string> FixableDiagnosticIds
         {
             get
@@ -52,9 +53,8 @@ namespace SonarAnalyzer.Rules.VisualBasic
         {
             var diagnostic = context.Diagnostics.First();
             var diagnosticSpan = diagnostic.Location.SourceSpan;
-            var binary = root.FindNode(diagnosticSpan, getInnermostNodeForTie: true) as BinaryExpressionSyntax;
 
-            if (binary != null)
+            if (root.FindNode(diagnosticSpan, getInnermostNodeForTie: true) is BinaryExpressionSyntax binary)
             {
                 context.RegisterCodeFix(
                     CodeAction.Create(
@@ -80,4 +80,3 @@ namespace SonarAnalyzer.Rules.VisualBasic
         }
     }
 }
-

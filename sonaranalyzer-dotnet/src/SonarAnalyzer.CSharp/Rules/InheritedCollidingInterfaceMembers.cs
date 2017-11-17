@@ -90,7 +90,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 .OfType<IMethodSymbol>()
                 .ToList();
 
-            for (int i = 0; i < interfacesToCheck.Length; i++)
+            for (var i = 0; i < interfacesToCheck.Length; i++)
             {
                 var notRedefinedMembersFromInterface1 = interfacesToCheck[i].GetMembers()
                     .OfType<IMethodSymbol>()
@@ -98,7 +98,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 foreach (var notRedefinedMemberFromInterface1 in notRedefinedMembersFromInterface1)
                 {
-                    for (int j = i + 1; j < interfacesToCheck.Length; j++)
+                    for (var j = i + 1; j < interfacesToCheck.Length; j++)
                     {
                         var collidingMembersFromInterface2 = interfacesToCheck[j]
                             .GetMembers(notRedefinedMemberFromInterface1.Name)
@@ -173,7 +173,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return false;
             }
 
-            for (int i = 0; i < methodSymbol1.Parameters.Length; i++)
+            for (var i = 0; i < methodSymbol1.Parameters.Length; i++)
             {
                 var param1 = methodSymbol1.Parameters[i];
                 var param2 = methodSymbol2.Parameters[i];

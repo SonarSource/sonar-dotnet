@@ -66,8 +66,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             foreach (var initializer in initializers.Where(initializer => initializer.NameEquals != null))
             {
-                var identifier = initializer.Expression as IdentifierNameSyntax;
-                if (identifier != null &&
+                if (initializer.Expression is IdentifierNameSyntax identifier &&
                     identifier.Identifier.ValueText == initializer.NameEquals.Name.Identifier.ValueText)
                 {
                     initializersToReportOn.Add(initializer);

@@ -44,9 +44,8 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
             {
                 var ifKeyword = ((IfStatementSyntax)c.Node).IfKeyword;
-                SyntaxToken previousTokenInSameLine;
 
-                if (TryGetPreviousTokenInSameLine(ifKeyword, out previousTokenInSameLine) &&
+                if (TryGetPreviousTokenInSameLine(ifKeyword, out var previousTokenInSameLine) &&
                     previousTokenInSameLine.IsKind(SyntaxKind.CloseBraceToken))
                 {
                     c.ReportDiagnosticWhenActive(Diagnostic.Create(rule,

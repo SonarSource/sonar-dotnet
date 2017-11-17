@@ -19,11 +19,11 @@
  */
 
 using System.Collections.Immutable;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CodeFixes;
-using System.Threading.Tasks;
 using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CodeActions;
+using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Helpers;
 
@@ -33,6 +33,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
     public sealed class ArrayCreationLongSyntaxCodeFixProvider : SonarCodeFixProvider
     {
         internal const string Title = "Use an array literal";
+
         public sealed override ImmutableArray<string> FixableDiagnosticIds
         {
             get
@@ -40,6 +41,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 return ImmutableArray.Create(ArrayCreationLongSyntax.DiagnosticId);
             }
         }
+
         public sealed override FixAllProvider GetFixAllProvider()
         {
             return WellKnownFixAllProviders.BatchFixer;
@@ -68,4 +70,3 @@ namespace SonarAnalyzer.Rules.VisualBasic
         }
     }
 }
-

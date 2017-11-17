@@ -114,12 +114,11 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            string suggestion;
-            bool isNameValid = IsTypeNameValid(identifier.ValueText,
+            var isNameValid = IsTypeNameValid(identifier.ValueText,
                 requireInitialI: typeDeclaration is InterfaceDeclarationSyntax,
                 allowInitialI: typeDeclaration.Modifiers.Any(m => m.IsKind(SyntaxKind.StaticKeyword)),
                 areUnderscoresAllowed: context.IsTest(),
-                suggestion: out suggestion);
+                suggestion: out var suggestion);
 
             if (!isNameValid)
             {
@@ -160,8 +159,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            string suggestion;
-            if (!IsMemberNameValid(identifier.ValueText, out suggestion))
+            if (!IsMemberNameValid(identifier.ValueText, out var suggestion))
             {
                 var messageEnding = string.Format(MessageFormatNonUnderscore, suggestion);
                 context.ReportDiagnosticWhenActive(Diagnostic.Create(rule_MethodName, identifier.GetLocation(),
@@ -204,9 +202,9 @@ namespace SonarAnalyzer.Rules.CSharp
             var acceptableNameVariant = new StringBuilder(identifierName.Length);
 
             var parts = SplitToParts(identifierName).ToList();
-            for (int i = 0; i < parts.Count; i++)
+            for (var i = 0; i < parts.Count; i++)
             {
-                string part = parts[i];
+                var part = parts[i];
                 if (part.Length == 1 && part[0] == '_' && !areUnderscoresAllowed)
                 {
                     continue;
@@ -234,11 +232,11 @@ namespace SonarAnalyzer.Rules.CSharp
         private static string HandleFirstPartOfTypeName(string input,
             bool requireInitialI, bool allowInitialI, int maxUppercase)
         {
-            bool startsWithI = input[0] == 'I';
+            var startsWithI = input[0] == 'I';
 
             if (requireInitialI)
             {
-                string prefix = startsWithI ? string.Empty : "I";
+                var prefix = startsWithI ? string.Empty : "I";
                 return prefix + SuggestFixedCaseName(FirstCharToUpper(input), maxUppercase + 1);
             }
 
@@ -261,7 +259,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static string SuggestCapitalLetterAfterNonLetter(StringBuilder suggestion)
         {
-            for (int i = 1; i < suggestion.Length; i++)
+            for (var i = 1; i < suggestion.Length; i++)
             {
                 if (!char.IsLetter(suggestion[i - 1]) &&
                     char.IsLower(suggestion[i]))

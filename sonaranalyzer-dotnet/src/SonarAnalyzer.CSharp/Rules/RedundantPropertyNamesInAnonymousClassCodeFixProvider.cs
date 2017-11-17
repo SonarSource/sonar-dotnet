@@ -79,8 +79,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             var member = (AnonymousObjectMemberDeclaratorSyntax)item.AsNode();
-            var identifier = member.Expression as IdentifierNameSyntax;
-            if (identifier != null &&
+            if (member.Expression is IdentifierNameSyntax identifier &&
                 identifier.Identifier.ValueText == member.NameEquals.Name.Identifier.ValueText)
             {
                 return SyntaxFactory.AnonymousObjectMemberDeclarator(member.Expression).WithTriviaFrom(member);

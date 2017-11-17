@@ -57,12 +57,13 @@ namespace SonarAnalyzer.Rules.Common
         }
 
         protected abstract SyntaxToken GetIdentifier(TPropertyDeclaration prop);
+
         protected abstract bool IsWriteOnlyProperty(TPropertyDeclaration prop);
 
         public abstract ImmutableArray<TLanguageKindEnum> SyntaxKindsOfInterest { get; }
 
         protected abstract DiagnosticDescriptor Rule { get; }
 
-        public sealed override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
+        public override sealed ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
     }
 }

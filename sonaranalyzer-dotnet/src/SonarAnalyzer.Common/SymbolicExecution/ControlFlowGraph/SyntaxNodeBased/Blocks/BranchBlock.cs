@@ -29,18 +29,8 @@ namespace SonarAnalyzer.SymbolicExecution.ControlFlowGraph
     {
         internal BranchBlock(SyntaxNode branchingNode, params Block[] successors)
         {
-            if (branchingNode == null)
-            {
-                throw new ArgumentNullException(nameof(branchingNode));
-            }
-
-            if (successors == null)
-            {
-                throw new ArgumentNullException(nameof(successors));
-            }
-
-            this.successors = successors;
-            BranchingNode = branchingNode;
+            this.successors = successors ?? throw new ArgumentNullException(nameof(successors));
+            BranchingNode = branchingNode ?? throw new ArgumentNullException(nameof(branchingNode));
         }
 
         public SyntaxNode BranchingNode { get; }
@@ -51,7 +41,7 @@ namespace SonarAnalyzer.SymbolicExecution.ControlFlowGraph
 
         internal override void ReplaceSuccessors(Dictionary<Block, Block> replacementMapping)
         {
-            for (int i = 0; i < successors.Length; i++)
+            for (var i = 0; i < successors.Length; i++)
             {
                 if (replacementMapping.ContainsKey(successors[i]))
                 {

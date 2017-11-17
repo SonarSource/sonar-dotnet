@@ -83,7 +83,7 @@ namespace SonarAnalyzer.Helpers
             context.RegisterCodeBlockStartActionInNonGenerated(CSharp.GeneratedCodeRecognizer.Instance, action);
         }
 
-        #endregion
+        #endregion Register*ActionInNonGenerated
 
         #region ReportDiagnosticIfNonGenerated
 
@@ -111,7 +111,7 @@ namespace SonarAnalyzer.Helpers
                 context.Compilation);
         }
 
-        #endregion
+        #endregion ReportDiagnosticIfNonGenerated
 
         #region SyntaxTree.IsGenerated
 
@@ -121,6 +121,6 @@ namespace SonarAnalyzer.Helpers
             return tree.IsGenerated(CSharp.GeneratedCodeRecognizer.Instance, compilation);
         }
 
-        #endregion
+        #endregion SyntaxTree.IsGenerated
     }
 }

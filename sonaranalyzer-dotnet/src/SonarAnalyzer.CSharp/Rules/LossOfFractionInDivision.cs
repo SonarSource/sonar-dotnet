@@ -55,8 +55,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    ITypeSymbol assignedToType;
-                    if (TryGetTypeFromAssignmentToFloatType(division, c.SemanticModel, out assignedToType) ||
+                    if (TryGetTypeFromAssignmentToFloatType(division, c.SemanticModel, out var assignedToType) ||
                         TryGetTypeFromArgumentMappedToFloatType(division, c.SemanticModel, out assignedToType) ||
                         TryGetTypeFromReturnMappedToFloatType(division, c.SemanticModel, out assignedToType))
                     {
@@ -101,8 +100,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             var lookup = new MethodParameterLookup(invocation, semanticModel);
-            IParameterSymbol parameter;
-            if (!lookup.TryGetParameterSymbol(argument, out parameter))
+            if (!lookup.TryGetParameterSymbol(argument, out var parameter))
             {
                 type = null;
                 return false;
@@ -115,15 +113,13 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool TryGetTypeFromAssignmentToFloatType(BinaryExpressionSyntax division, SemanticModel semanticModel,
             out ITypeSymbol type)
         {
-            var assignment = division.Parent as AssignmentExpressionSyntax;
-            if (assignment != null)
+            if (division.Parent is AssignmentExpressionSyntax assignment)
             {
                 type = semanticModel.GetTypeInfo(assignment.Left).Type;
                 return type.IsAny(KnownType.NonIntegralNumbers);
             }
 
-            var variableDecl = division.Parent.Parent.Parent as VariableDeclarationSyntax;
-            if (variableDecl != null)
+            if (division.Parent.Parent.Parent is VariableDeclarationSyntax variableDecl)
             {
                 type = semanticModel.GetTypeInfo(variableDecl.Type).Type;
                 return type.IsAny(KnownType.NonIntegralNumbers);

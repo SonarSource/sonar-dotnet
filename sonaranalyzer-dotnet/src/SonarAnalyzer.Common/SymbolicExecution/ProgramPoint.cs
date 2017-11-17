@@ -45,7 +45,7 @@ namespace SonarAnalyzer.SymbolicExecution
                 return false;
             }
 
-            ProgramPoint p = obj as ProgramPoint;
+            var p = obj as ProgramPoint;
             return Equals(p);
         }
 

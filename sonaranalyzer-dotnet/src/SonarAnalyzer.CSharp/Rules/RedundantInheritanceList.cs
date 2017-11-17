@@ -136,7 +136,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var baseList = typeDeclaration.BaseList;
             var interfaceTypesWithAllInterfaces = GetImplementedInterfaceMappings(baseList, context.SemanticModel);
 
-            for (int i = 0; i < baseList.Types.Count; i++)
+            for (var i = 0; i < baseList.Types.Count; i++)
             {
                 var baseType = baseList.Types[i];
                 var interfaceType = context.SemanticModel.GetSymbolInfo(baseType.Type).Symbol as INamedTypeSymbol;
@@ -146,8 +146,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     continue;
                 }
 
-                INamedTypeSymbol collidingDeclaration;
-                if (!TryGetCollidingDeclaration(declaredType, interfaceType, interfaceTypesWithAllInterfaces, out collidingDeclaration))
+                if (!TryGetCollidingDeclaration(declaredType, interfaceType, interfaceTypesWithAllInterfaces, out var collidingDeclaration))
                 {
                     continue;
                 }

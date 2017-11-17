@@ -61,7 +61,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var redundantCatches = new HashSet<CatchClauseSyntax>();
             var isIntermediate = false;
 
-            for (int i = catches.Count - 1; i >= 0; i--)
+            for (var i = catches.Count - 1; i >= 0; i--)
             {
                 var currentCatch = catches[i];
                 if (!EquivalenceChecker.AreEquivalent(currentCatch.Block, ThrowBlock))
@@ -97,7 +97,7 @@ namespace SonarAnalyzer.Rules.CSharp
             List<INamedTypeSymbol> caughtExceptionTypes, ISet<CatchClauseSyntax> redundantCatches)
         {
             var currentType = caughtExceptionTypes[catchIndex];
-            for (int i = catchIndex + 1; i < caughtExceptionTypes.Count; i++)
+            for (var i = catchIndex + 1; i < caughtExceptionTypes.Count; i++)
             {
                 var followingType = caughtExceptionTypes[i];
 

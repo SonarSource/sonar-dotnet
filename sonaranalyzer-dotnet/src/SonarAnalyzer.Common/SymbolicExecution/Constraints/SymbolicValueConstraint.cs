@@ -22,7 +22,9 @@ namespace SonarAnalyzer.SymbolicExecution
 {
     public abstract class SymbolicValueConstraint
     {
-        protected SymbolicValueConstraint() { }
+        protected SymbolicValueConstraint()
+        {
+        }
 
         public abstract SymbolicValueConstraint OppositeForLogicalNot { get; }
     }

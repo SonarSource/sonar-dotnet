@@ -56,8 +56,7 @@ namespace SonarAnalyzer.Common
 
         public void AddWithKey(TKey key, TValue value)
         {
-            ICollection<TValue> values;
-            if (!TryGetValue(key, out values))
+            if (!TryGetValue(key, out var values))
             {
                 values = UnderlyingCollectionFactory();
                 Add(key, values);
@@ -67,8 +66,7 @@ namespace SonarAnalyzer.Common
 
         public void AddRangeWithKey(TKey key, IEnumerable<TValue> addedValues)
         {
-            ICollection<TValue> values;
-            if (!TryGetValue(key, out values))
+            if (!TryGetValue(key, out var values))
             {
                 values = UnderlyingCollectionFactory();
                 Add(key, values);
@@ -105,6 +103,5 @@ namespace SonarAnalyzer.Common
         }
     }
 
-    #endregion
+    #endregion Extensions
 }
-

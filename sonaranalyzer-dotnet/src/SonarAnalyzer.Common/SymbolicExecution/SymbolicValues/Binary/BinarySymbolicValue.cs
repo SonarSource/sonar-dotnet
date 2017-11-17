@@ -27,8 +27,8 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
 
         public BinarySymbolicValue(SymbolicValue leftOperand, SymbolicValue rightOperand)
         {
-            this.LeftOperand = leftOperand;
-            this.RightOperand = rightOperand;
+            LeftOperand = leftOperand;
+            RightOperand = rightOperand;
         }
     }
 }

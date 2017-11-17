@@ -111,21 +111,12 @@ namespace SonarAnalyzer.SymbolicExecution.ControlFlowGraph
 
         protected AbstractControlFlowGraphBuilder(SyntaxNode node, SemanticModel semanticModel)
         {
-            if (node == null)
-            {
-                throw new ArgumentNullException(nameof(node));
-            }
-
-            if (semanticModel == null)
-            {
-                throw new ArgumentNullException(nameof(semanticModel));
-            }
-
-            this.rootNode = node;
-            this.semanticModel = semanticModel;
+            rootNode = node ?? throw new ArgumentNullException(nameof(node));
+            this.semanticModel = semanticModel ?? throw new ArgumentNullException(nameof(semanticModel));
 
             ExitTarget.Push(CreateExitBlock());
         }
+
         protected abstract void PostProcessGraph();
 
         internal IControlFlowGraph Build()
@@ -163,6 +154,6 @@ namespace SonarAnalyzer.SymbolicExecution.ControlFlowGraph
             return block;
         }
 
-        #endregion
+        #endregion CreateBlock*
     }
 }

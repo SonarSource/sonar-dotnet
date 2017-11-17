@@ -62,9 +62,8 @@ namespace SonarAnalyzer.Rules.CSharp
             var left = leftSelector(nodeWithTwoSides);
             var right = rightSelector(nodeWithTwoSides);
 
-            ITypeSymbol typeOfRight;
             if (IsDynamic(left, context.SemanticModel) &&
-                !MightBeConvertibleToInt(right, context.SemanticModel, out typeOfRight))
+                !MightBeConvertibleToInt(right, context.SemanticModel, out var typeOfRight))
             {
                 var typeInMessage = GetTypeNameForMessage(right, typeOfRight, context.SemanticModel);
 

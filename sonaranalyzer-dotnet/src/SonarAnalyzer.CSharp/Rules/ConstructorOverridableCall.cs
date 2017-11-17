@@ -64,9 +64,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            var methodSymbol = context.SemanticModel.GetSymbolInfo(invocationExpression.Expression).Symbol as IMethodSymbol;
 
-            if (methodSymbol != null &&
+            if (context.SemanticModel.GetSymbolInfo(invocationExpression.Expression).Symbol is IMethodSymbol methodSymbol &&
                 IsMethodOverridable(methodSymbol) &&
                 enclosingSymbol.IsInType(methodSymbol.ContainingType))
             {

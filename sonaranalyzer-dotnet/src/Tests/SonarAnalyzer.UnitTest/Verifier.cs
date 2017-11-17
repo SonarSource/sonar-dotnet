@@ -202,8 +202,7 @@ namespace SonarAnalyzer.UnitTest
 
                     foreach (var diagnostic in diagnostics)
                     {
-                        string issueId;
-                        VerifyIssue(expectedIssues, issue => issue.IsPrimary, diagnostic.Location, diagnostic.GetMessage(), out issueId);
+                        VerifyIssue(expectedIssues, issue => issue.IsPrimary, diagnostic.Location, diagnostic.GetMessage(), out var issueId);
 
                         diagnostic.AdditionalLocations
                             .Select((location, i) => diagnostic.GetSecondaryLocation(i))
@@ -395,7 +394,7 @@ namespace SonarAnalyzer.UnitTest
         private static Project AddDocument(this Project project, FileInfo file,
             bool removeAnalysisComments = false)
         {
-            string text = ReadDocument(file.FullName, removeAnalysisComments);
+            var text = ReadDocument(file.FullName, removeAnalysisComments);
 
             return project.AddDocument(file.Name, text).Project;
         }
@@ -514,9 +513,7 @@ namespace SonarAnalyzer.UnitTest
             string codeFixTitle, Document document, ParseOptions parseOption, string pathToExpected)
         {
             var currentDocument = document;
-            List<Diagnostic> diagnostics;
-            string actualCode;
-            CalculateDiagnosticsAndCode(diagnosticAnalyzer, currentDocument, parseOption, out diagnostics, out actualCode);
+            CalculateDiagnosticsAndCode(diagnosticAnalyzer, currentDocument, parseOption, out var diagnostics, out var actualCode);
 
             diagnostics.Should().NotBeEmpty();
 
@@ -528,12 +525,11 @@ namespace SonarAnalyzer.UnitTest
                 codeBeforeFix = actualCode;
 
                 var codeFixExecuted = false;
-                for (int diagnosticIndexToFix = 0; !codeFixExecuted && diagnosticIndexToFix < diagnostics.Count; diagnosticIndexToFix++)
+                for (var diagnosticIndexToFix = 0; !codeFixExecuted && diagnosticIndexToFix < diagnostics.Count; diagnosticIndexToFix++)
                 {
                     var codeActionsForDiagnostic = GetCodeActionsForDiagnostic(codeFixProvider, currentDocument, diagnostics[diagnosticIndexToFix]);
 
-                    CodeAction codeActionToExecute;
-                    if (TryGetCodeActionToApply(codeFixTitle, codeActionsForDiagnostic, out codeActionToExecute))
+                    if (TryGetCodeActionToApply(codeFixTitle, codeActionsForDiagnostic, out var codeActionToExecute))
                     {
                         currentDocument = ApplyCodeFix(currentDocument, codeActionToExecute);
                         CalculateDiagnosticsAndCode(diagnosticAnalyzer, currentDocument, parseOption, out diagnostics, out actualCode);
@@ -552,9 +548,7 @@ namespace SonarAnalyzer.UnitTest
             string codeFixTitle, FixAllProvider fixAllProvider, Document document, ParseOptions parseOption, string pathToExpected)
         {
             var currentDocument = document;
-            List<Diagnostic> diagnostics;
-            string actualCode;
-            CalculateDiagnosticsAndCode(diagnosticAnalyzer, currentDocument, parseOption, out diagnostics, out actualCode);
+            CalculateDiagnosticsAndCode(diagnosticAnalyzer, currentDocument, parseOption, out var diagnostics, out var actualCode);
 
             diagnostics.Should().NotBeEmpty();
 
@@ -663,8 +657,8 @@ namespace SonarAnalyzer.UnitTest
 
             public DocumentInfo(string name, string content)
             {
-                this.Name = name;
-                this.Content = content;
+                Name = name;
+                Content = content;
             }
 
             public string Name { get; }

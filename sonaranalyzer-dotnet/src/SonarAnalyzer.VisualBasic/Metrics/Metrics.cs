@@ -18,13 +18,13 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.VisualBasic;
-using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.VisualBasic;
+using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 
 namespace SonarAnalyzer.Common.VisualBasic
 {
@@ -58,8 +58,7 @@ namespace SonarAnalyzer.Common.VisualBasic
                 return false;
             }
 
-            var method = node as MethodBaseSyntax;
-            if (method != null && method.Modifiers.Any(m => m.IsKind(SyntaxKind.MustOverrideKeyword)))
+            if (node is MethodBaseSyntax method && method.Modifiers.Any(m => m.IsKind(SyntaxKind.MustOverrideKeyword)))
             {
                 return false;
             }

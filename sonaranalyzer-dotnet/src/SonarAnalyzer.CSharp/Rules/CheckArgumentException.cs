@@ -74,9 +74,9 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            Optional<object> parameterNameValue = new Optional<object>();
-            Optional<object> messageValue = new Optional<object>();
-            for (int i = 0; i < methodSymbol.Parameters.Length; i++)
+            var parameterNameValue = new Optional<object>();
+            var messageValue = new Optional<object>();
+            for (var i = 0; i < methodSymbol.Parameters.Length; i++)
             {
                 var argumentExpression = objectCreationSyntax.ArgumentList.Arguments[i].Expression;
                 if (methodSymbol.Parameters[i].MetadataName == "paramName" ||
@@ -133,25 +133,21 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static IEnumerable<string> GetArgumentNames(SyntaxNode node)
         {
-            var simpleLambda = node as SimpleLambdaExpressionSyntax;
-            if (simpleLambda != null)
+            if (node is SimpleLambdaExpressionSyntax simpleLambda)
             {
                 return new[] { simpleLambda.Parameter.Identifier.ValueText };
             }
 
-            var method = node as BaseMethodDeclarationSyntax;
-            if (method != null)
+            if (node is BaseMethodDeclarationSyntax method)
             {
                 return method.ParameterList.Parameters.Select(p => p.Identifier.ValueText);
             }
 
-            var lambda = node as ParenthesizedLambdaExpressionSyntax;
-            if (lambda != null)
+            if (node is ParenthesizedLambdaExpressionSyntax lambda)
             {
                 return lambda.ParameterList.Parameters.Select(p => p.Identifier.ValueText);
             }
-            var accessor = node as AccessorDeclarationSyntax;
-            if (accessor != null)
+            if (node is AccessorDeclarationSyntax accessor)
             {
                 var arguments = new List<string>();
                 var indexer = node.FirstAncestorOrSelf<IndexerDeclarationSyntax>();

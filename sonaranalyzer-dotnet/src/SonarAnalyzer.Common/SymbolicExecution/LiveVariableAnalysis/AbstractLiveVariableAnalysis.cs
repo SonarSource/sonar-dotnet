@@ -43,7 +43,7 @@ namespace SonarAnalyzer.SymbolicExecution.LiveVariableAnalysis
         protected AbstractLiveVariableAnalysis(IControlFlowGraph controlFlowGraph)
         {
             this.controlFlowGraph = controlFlowGraph;
-            this.reversedBlocks = controlFlowGraph.Blocks.Reverse().ToList();
+            reversedBlocks = controlFlowGraph.Blocks.Reverse().ToList();
         }
 
         public IReadOnlyList<ISymbol> GetLiveOut(Block block)
@@ -62,10 +62,7 @@ namespace SonarAnalyzer.SymbolicExecution.LiveVariableAnalysis
         {
             foreach (var block in reversedBlocks)
             {
-                HashSet<ISymbol> assignedInBlock;
-                HashSet<ISymbol> usedInBlock;
-
-                ProcessBlock(block, out assignedInBlock, out usedInBlock);
+                ProcessBlock(block, out var assignedInBlock, out var usedInBlock);
 
                 assigned[block] = assignedInBlock;
                 used[block] = usedInBlock;

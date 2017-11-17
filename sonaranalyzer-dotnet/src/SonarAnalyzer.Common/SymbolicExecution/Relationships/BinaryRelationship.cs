@@ -20,7 +20,6 @@
 
 using System;
 using System.Collections.Generic;
-using SonarAnalyzer.SymbolicExecution.SymbolicValues;
 
 namespace SonarAnalyzer.SymbolicExecution.Relationships
 {

@@ -64,9 +64,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static string GetIdentifierName(InvocationExpressionSyntax invocation)
         {
-            var memberAccess = invocation.Expression as MemberAccessExpressionSyntax;
 
-            if (memberAccess != null)
+            if (invocation.Expression is MemberAccessExpressionSyntax memberAccess)
             {
                 return memberAccess.Name?.Identifier.ValueText;
             }

@@ -546,8 +546,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
 
         private void ShouldHaveConstraint(ProgramState ps, SymbolicValue sv, SymbolicValueConstraint constraint)
         {
-            SymbolicValueConstraints existing;
-            sv.TryGetConstraints(ps, out existing).Should().BeTrue();
+            sv.TryGetConstraints(ps, out var existing).Should().BeTrue();
             existing.HasConstraint(constraint).Should().BeTrue();
         }
     }

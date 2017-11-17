@@ -78,7 +78,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 this.classDeclaration = classDeclaration;
                 this.semanticModel = semanticModel;
-                this.classSymbol = semanticModel.GetDeclaredSymbol(classDeclaration);
+                classSymbol = semanticModel.GetDeclaredSymbol(classDeclaration);
             }
 
             public IEnumerable<SecondaryLocation> GetIssueLocations()

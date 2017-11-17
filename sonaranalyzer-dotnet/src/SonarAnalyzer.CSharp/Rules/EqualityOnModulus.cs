@@ -47,8 +47,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     var equalsExpression = (BinaryExpressionSyntax)c.Node;
 
-                    int constantValue;
-                    if (CheckExpression(equalsExpression.Left, equalsExpression.Right, c.SemanticModel, out constantValue) ||
+                    if (CheckExpression(equalsExpression.Left, equalsExpression.Right, c.SemanticModel, out var constantValue) ||
                         CheckExpression(equalsExpression.Right, equalsExpression.Left, c.SemanticModel, out constantValue))
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, equalsExpression.GetLocation(),

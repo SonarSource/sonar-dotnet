@@ -73,8 +73,7 @@ namespace SonarAnalyzer.Rules.CSharp
                             continue;
                         }
 
-                        var symbolForArgument = c.SemanticModel.GetSymbolInfo(argument.Expression).Symbol as IParameterSymbol;
-                        if (symbolForArgument != null &&
+                        if (c.SemanticModel.GetSymbolInfo(argument.Expression).Symbol is IParameterSymbol symbolForArgument &&
                             Equals(callerInfoAttributeDataOnCall.AttributeClass, GetCallerInfoAttribute(symbolForArgument)?.AttributeClass))
                         {
                             continue;

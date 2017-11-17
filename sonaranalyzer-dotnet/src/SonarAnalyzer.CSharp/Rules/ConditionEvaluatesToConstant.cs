@@ -161,8 +161,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 // When the constant expression is the only child of a if/while/etc. statement
                 // it is not reported as unreachable, but regardless we want to check if its
                 // parent has an unreachable branch.
-                var expression = constantExpression as ExpressionSyntax;
-                if (expression != null)
+                if (constantExpression is ExpressionSyntax expression)
                 {
                     unreachableExpressions.Add(expression);
                 }

@@ -123,8 +123,7 @@ namespace SonarAnalyzer.SymbolicExecution
                 return;
             }
 
-            IControlFlowGraph cfg;
-            if (!CSharpControlFlowGraph.TryGet(declarationBody, context.SemanticModel, out cfg))
+            if (!CSharpControlFlowGraph.TryGet(declarationBody, context.SemanticModel, out var cfg))
             {
                 return;
             }

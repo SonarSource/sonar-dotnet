@@ -19,12 +19,12 @@
  */
 
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Text;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
-using System.Collections.Immutable;
 
 namespace SonarAnalyzer.Rules.Common
 {
@@ -75,6 +75,7 @@ namespace SonarAnalyzer.Rules.Common
         }
 
         protected abstract bool StatementShouldBeExcluded(TStatementSyntax statement);
+
         private TStatementSyntax GetContainingStatement(SyntaxToken token)
         {
             var node = token.Parent;

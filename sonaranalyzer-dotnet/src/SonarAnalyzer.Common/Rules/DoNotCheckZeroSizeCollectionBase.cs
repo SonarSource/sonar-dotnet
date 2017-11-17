@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2017 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -34,6 +34,7 @@ namespace SonarAnalyzer.Rules
         where TExpressionSyntax : SyntaxNode
     {
         protected const string DiagnosticId = "S3981";
+
         protected const string MessageFormat =
             "The {0} of '{1}' is always '>=0', so fix this test to get the real expected behavior.";
 
@@ -45,8 +46,11 @@ namespace SonarAnalyzer.Rules
         protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
 
         protected abstract TExpressionSyntax GetLeftNode(TBinaryExpressionSyntax binaryExpression);
+
         protected abstract TExpressionSyntax GetRightNode(TBinaryExpressionSyntax binaryExpression);
+
         protected abstract ISymbol GetSymbol(SyntaxNodeAnalysisContext context, TExpressionSyntax expression);
+
         protected abstract string IEnumerableTString { get; }
 
         protected override void Initialize(SonarAnalysisContext context)
@@ -74,13 +78,13 @@ namespace SonarAnalyzer.Rules
                 return;
             }
 
-            ISymbol symbol = GetSymbol(context, expressionValueNode);
+            var symbol = GetSymbol(context, expressionValueNode);
             if (symbol == null)
             {
                 return;
             }
 
-            string symbolType = GetDeclaringTypeName(symbol);
+            var symbolType = GetDeclaringTypeName(symbol);
             if (symbolType == null)
             {
                 return;

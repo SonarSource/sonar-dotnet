@@ -95,8 +95,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             foreach (var declaringSyntaxReference in symbol.DeclaringSyntaxReferences)
             {
-                var classDeclaration = declaringSyntaxReference.GetSyntax() as ClassDeclarationSyntax;
-                if (classDeclaration != null)
+                if (declaringSyntaxReference.GetSyntax() is ClassDeclarationSyntax classDeclaration)
                 {
                     context.ReportDiagnosticIfNonGenerated(
                         Diagnostic.Create(rule, classDeclaration.Identifier.GetLocation(), message),

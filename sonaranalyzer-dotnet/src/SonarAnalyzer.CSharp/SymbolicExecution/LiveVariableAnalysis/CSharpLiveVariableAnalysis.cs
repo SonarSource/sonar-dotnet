@@ -92,8 +92,7 @@ namespace SonarAnalyzer.SymbolicExecution.LiveVariableAnalysis
             }
 
             // Variable declaration in a foreach statement is not a VariableDeclarator, so handling it separately:
-            var foreachBlock = block as BinaryBranchBlock;
-            if (foreachBlock != null &&
+            if (block is BinaryBranchBlock foreachBlock &&
                 foreachBlock.BranchingNode.IsKind(SyntaxKind.ForEachStatement))
             {
                 var foreachNode = (ForEachStatementSyntax)foreachBlock.BranchingNode;
@@ -101,8 +100,7 @@ namespace SonarAnalyzer.SymbolicExecution.LiveVariableAnalysis
             }
 
             // Keep alive the variables declared and used in the using statement until the UsingFinalizerBlock
-            var usingFinalizerBlock = block as UsingEndBlock;
-            if (usingFinalizerBlock != null)
+            if (block is UsingEndBlock usingFinalizerBlock)
             {
                 var disposableSymbols = usingFinalizerBlock.Identifiers
                     .Select(i => semanticModel.GetDeclaredSymbol(i.Parent)

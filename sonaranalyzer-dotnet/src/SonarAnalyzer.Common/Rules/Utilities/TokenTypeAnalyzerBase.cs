@@ -167,8 +167,7 @@ namespace SonarAnalyzer.Rules
                     return;
                 }
 
-                var ctorSymbol = symbol as IMethodSymbol;
-                if (ctorSymbol != null && ConstructorKinds.Contains(ctorSymbol.MethodKind))
+                if (symbol is IMethodSymbol ctorSymbol && ConstructorKinds.Contains(ctorSymbol.MethodKind))
                 {
                     CollectClassified(TokenType.TypeName, token.Span);
                     return;

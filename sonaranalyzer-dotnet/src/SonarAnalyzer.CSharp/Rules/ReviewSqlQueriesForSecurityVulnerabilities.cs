@@ -61,9 +61,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 c =>
                 {
                     var objectCreation = (ObjectCreationExpressionSyntax)c.Node;
-                    var methodSymbol = c.SemanticModel.GetSymbolInfo(objectCreation).Symbol as IMethodSymbol;
 
-                    if (methodSymbol != null &&
+                    if (c.SemanticModel.GetSymbolInfo(objectCreation).Symbol is IMethodSymbol methodSymbol &&
                         methodSymbol.IsConstructor() &&
                         methodSymbol.ContainingType.IsAny(checkedTypes) &&
                         methodSymbol.Parameters.FirstOrDefault()?.Type.Is(KnownType.System_String) == true &&
@@ -77,9 +76,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 c =>
                 {
                     var assignment = (AssignmentExpressionSyntax)c.Node;
-                    var propertySymbol = c.SemanticModel.GetSymbolInfo(assignment.Left).Symbol as IPropertySymbol;
 
-                    if (propertySymbol != null &&
+                    if (c.SemanticModel.GetSymbolInfo(assignment.Left).Symbol is IPropertySymbol propertySymbol &&
                         propertySymbol.Name == "CommandText" &&
                         propertySymbol.ContainingType.IsAny(checkedTypes) &&
                         !IsSanitizedQuery(assignment.Right, c.SemanticModel))

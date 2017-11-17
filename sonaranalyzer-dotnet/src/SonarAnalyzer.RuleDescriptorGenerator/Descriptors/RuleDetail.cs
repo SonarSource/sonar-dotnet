@@ -64,17 +64,22 @@ namespace SonarAnalyzer.RuleDescriptorGenerator
 
         [XmlElement("key")]
         public string Key { get; set; }
+
         [XmlElement("type")]
         public string Type { get; set; }
+
         [XmlElement("name")]
         public string Title { get; set; }
+
         [XmlElement("severity")]
         public string Severity { get; set; }
+
         [XmlElement("cardinality")]
         public string Cardinality { get; set; }
 
         [XmlIgnore]
         public string Description { get; set; }
+
         [XmlElement("description")]
         public XmlCDataSection DescriptionCDataSection
         {

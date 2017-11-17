@@ -161,8 +161,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return ValidationFailure.NullFormatString;
             }
 
-            List<FormatStringItem> formatStringItems;
-            return ExtractFormatItems(formatStringText, out formatStringItems) ??
+            return ExtractFormatItems(formatStringText, out var formatStringItems) ??
                 TryValidateFormatString(formatStringItems, argumentList, formatArgumentIndex, semanticModel);
         }
 
@@ -174,7 +173,7 @@ namespace SonarAnalyzer.Rules.CSharp
             StringBuilder currentFormatItemBuilder = null;
             var isEscapingOpenCurlyBrace = false;
             var isEscapingCloseCurlyBrace = false;
-            for (int i = 0; i < formatString.Length; i++)
+            for (var i = 0; i < formatString.Length; i++)
             {
                 var currentChar = formatString[i];
                 var previousChar = i > 0 ? formatString[i - 1] : '\0';
@@ -212,8 +211,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     if (currentFormatItemBuilder != null)
                     {
-                        FormatStringItem formatStringItem;
-                        var failure = TryParseItem(currentFormatItemBuilder.ToString(), out formatStringItem);
+                        var failure = TryParseItem(currentFormatItemBuilder.ToString(), out var formatStringItem);
                         if (failure != null)
                         {
                             return failure;
@@ -432,14 +430,12 @@ namespace SonarAnalyzer.Rules.CSharp
                 var arraySize = -1;
                 if (type.Is(TypeKind.Array))
                 {
-                    var implicitArray = expression as ImplicitArrayCreationExpressionSyntax;
-                    if (implicitArray != null)
+                    if (expression is ImplicitArrayCreationExpressionSyntax implicitArray)
                     {
                         arraySize = implicitArray.Initializer.Expressions.Count;
                     }
 
-                    var array = expression as ArrayCreationExpressionSyntax;
-                    if (array != null)
+                    if (expression is ArrayCreationExpressionSyntax array)
                     {
                         arraySize = array.Initializer.Expressions.Count;
                     }

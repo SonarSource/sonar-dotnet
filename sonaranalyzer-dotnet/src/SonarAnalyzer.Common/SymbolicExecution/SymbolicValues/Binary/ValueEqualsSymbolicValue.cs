@@ -33,7 +33,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
         {
             return new ValueEqualsRelationship(left, right);
         }
-        
+
         public override string ToString()
         {
             return $"Eq({LeftOperand}, {RightOperand})";

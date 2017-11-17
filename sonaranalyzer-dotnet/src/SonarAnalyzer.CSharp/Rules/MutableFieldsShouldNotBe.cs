@@ -95,15 +95,13 @@ namespace SonarAnalyzer.Rules
 
         private bool IsImmutableOrValidMutableType(ISymbol symbol)
         {
-            var namedTypeSymbol = symbol as INamedTypeSymbol;
-            if (namedTypeSymbol != null)
+            if (symbol is INamedTypeSymbol namedTypeSymbol)
             {
                 return !namedTypeSymbol.ConstructedFrom.DerivesOrImplementsAny(InvalidMutableTypes) ||
                     namedTypeSymbol.ConstructedFrom.DerivesOrImplementsAny(AllowedTypes);
             }
 
-            var typeSymbol = symbol as ITypeSymbol;
-            if (typeSymbol != null)
+            if (symbol is ITypeSymbol typeSymbol)
             {
                 return !typeSymbol.DerivesOrImplementsAny(InvalidMutableTypes) ||
                     typeSymbol.DerivesOrImplementsAny(AllowedTypes);

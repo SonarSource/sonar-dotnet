@@ -106,8 +106,7 @@ namespace SonarAnalyzer.SymbolicExecution.Relationships
         {
             foreach (var other in relationships)
             {
-                var comparison = other as ComparisonRelationship;
-                if (comparison != null)
+                if (other is ComparisonRelationship comparison)
                 {
                     var transitive = GetTransitiveRelationship(comparison);
                     if (transitive != null)
@@ -116,8 +115,7 @@ namespace SonarAnalyzer.SymbolicExecution.Relationships
                     }
                 }
 
-                var equals = other as EqualsRelationship;
-                if (equals != null)
+                if (other is EqualsRelationship equals)
                 {
                     var transitive = GetTransitiveRelationship(equals);
                     if (transitive != null)

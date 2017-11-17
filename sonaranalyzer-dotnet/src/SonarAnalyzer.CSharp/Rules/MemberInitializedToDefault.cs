@@ -110,9 +110,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
             foreach (var variableDeclarator in field.Declaration.Variables.Where(v => v.Initializer != null))
             {
-                var fieldSymbol = context.SemanticModel.GetDeclaredSymbol(variableDeclarator) as IFieldSymbol;
 
-                if (fieldSymbol != null &&
+                if (context.SemanticModel.GetDeclaredSymbol(variableDeclarator) is IFieldSymbol fieldSymbol &&
                     !fieldSymbol.IsConst &&
                     IsDefaultValueInitializer(variableDeclarator.Initializer, fieldSymbol.Type))
                 {
@@ -155,8 +154,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 case SpecialType.System_Double:
                 case SpecialType.System_Single:
                     {
-                        double constantValue;
-                        return ExpressionNumericConverter.TryGetConstantDoubleValue(initializer.Value, out constantValue) &&
+                        return ExpressionNumericConverter.TryGetConstantDoubleValue(initializer.Value, out var constantValue) &&
                             Math.Abs(constantValue - default(double)) < double.Epsilon;
                     }
                 case SpecialType.System_Char:
@@ -169,8 +167,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 case SpecialType.System_UInt32:
                 case SpecialType.System_UInt64:
                     {
-                        int constantValue;
-                        return ExpressionNumericConverter.TryGetConstantIntValue(initializer.Value, out constantValue) &&
+                        return ExpressionNumericConverter.TryGetConstantIntValue(initializer.Value, out var constantValue) &&
                             constantValue == default(int);
                     }
                 default:

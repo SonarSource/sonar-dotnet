@@ -18,16 +18,17 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
-using System;
 
 namespace SonarAnalyzer.Helpers.VisualBasic
 {
     public sealed class GeneratedCodeRecognizer : Helpers.GeneratedCodeRecognizer
     {
         #region Singleton implementation
+
         private GeneratedCodeRecognizer()
         {
         }
@@ -35,7 +36,7 @@ namespace SonarAnalyzer.Helpers.VisualBasic
         private static readonly Lazy<GeneratedCodeRecognizer> lazy = new Lazy<GeneratedCodeRecognizer>(() => new GeneratedCodeRecognizer());
         public static GeneratedCodeRecognizer Instance => lazy.Value;
 
-        #endregion
+        #endregion Singleton implementation
 
         protected override bool IsTriviaComment(SyntaxTrivia trivia) =>
             trivia.IsKind(SyntaxKind.CommentTrivia);

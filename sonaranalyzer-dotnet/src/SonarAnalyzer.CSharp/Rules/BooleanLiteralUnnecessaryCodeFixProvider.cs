@@ -61,15 +61,13 @@ namespace SonarAnalyzer.Rules.CSharp
             var parent = syntaxNode.Parent;
             syntaxNode = syntaxNode.RemoveParentheses();
 
-            var binary = syntaxNode as BinaryExpressionSyntax;
-            if (binary != null)
+            if (syntaxNode is BinaryExpressionSyntax binary)
             {
                 RegisterBinaryExpressionReplacement(context, root, syntaxNode, binary);
                 return TaskHelper.CompletedTask;
             }
 
-            var conditional = syntaxNode as ConditionalExpressionSyntax;
-            if (conditional != null)
+            if (syntaxNode is ConditionalExpressionSyntax conditional)
             {
                 RegisterConditionalExpressionRemoval(context, root, conditional);
                 return TaskHelper.CompletedTask;
@@ -87,22 +85,19 @@ namespace SonarAnalyzer.Rules.CSharp
                 return TaskHelper.CompletedTask;
             }
 
-            var conditionalParent = parent as ConditionalExpressionSyntax;
-            if (conditionalParent != null)
+            if (parent is ConditionalExpressionSyntax conditionalParent)
             {
                 RegisterConditionalExpressionRewrite(context, root, literal, conditionalParent);
                 return TaskHelper.CompletedTask;
             }
 
-            var binaryParent = parent as BinaryExpressionSyntax;
-            if (binaryParent != null)
+            if (parent is BinaryExpressionSyntax binaryParent)
             {
                 RegisterBinaryExpressionRemoval(context, root, literal, binaryParent);
                 return TaskHelper.CompletedTask;
             }
 
-            var forStatement = parent as ForStatementSyntax;
-            if (forStatement != null)
+            if (parent is ForStatementSyntax forStatement)
             {
                 RegisterForStatementConditionRemoval(context, root, forStatement);
                 return TaskHelper.CompletedTask;

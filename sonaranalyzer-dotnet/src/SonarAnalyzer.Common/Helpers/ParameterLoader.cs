@@ -138,10 +138,13 @@ namespace SonarAnalyzer.Helpers
             {
                 case PropertyType.String:
                     return parameter;
+
                 case PropertyType.Integer:
                     return int.Parse(parameter, NumberStyles.None, CultureInfo.InvariantCulture);
+
                 case PropertyType.Boolean:
                     return bool.Parse(parameter);
+
                 default:
                     throw new NotSupportedException();
             }

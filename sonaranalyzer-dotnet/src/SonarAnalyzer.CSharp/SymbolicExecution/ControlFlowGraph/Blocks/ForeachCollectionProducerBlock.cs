@@ -28,12 +28,7 @@ namespace SonarAnalyzer.SymbolicExecution.ControlFlowGraph
         internal ForeachCollectionProducerBlock(ForEachStatementSyntax foreachNode, Block successor)
             : base(successor)
         {
-            if (foreachNode == null)
-            {
-                throw new ArgumentNullException(nameof(foreachNode));
-            }
-
-            ForeachNode = foreachNode;
+            ForeachNode = foreachNode ?? throw new ArgumentNullException(nameof(foreachNode));
         }
 
         public ForEachStatementSyntax ForeachNode { get; }

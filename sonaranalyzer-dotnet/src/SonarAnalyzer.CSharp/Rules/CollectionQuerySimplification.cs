@@ -121,8 +121,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            var innerMethodSymbol = context.SemanticModel.GetSymbolInfo(innerInvocation).Symbol as IMethodSymbol;
-            if (innerMethodSymbol != null &&
+            if (context.SemanticModel.GetSymbolInfo(innerInvocation).Symbol is IMethodSymbol innerMethodSymbol &&
                 IsToCollectionCall(innerMethodSymbol))
             {
                 context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, GetReportLocation(innerInvocation),
@@ -156,7 +155,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return false;
             }
 
-            for (int i = 1; i < member.Parameters.Length; i++)
+            for (var i = 1; i < member.Parameters.Length; i++)
             {
                 if (!originalDefinition.Parameters[i - parameterIndexOffset].Type.Equals(member.Parameters[i].Type))
                 {
@@ -210,8 +209,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             if (outerMethodSymbol.MethodKind == MethodKind.ReducedExtension)
             {
-                var memberAccess = outerInvocation.Expression as MemberAccessExpressionSyntax;
-                if (memberAccess != null)
+                if (outerInvocation.Expression is MemberAccessExpressionSyntax memberAccess)
                 {
                     return memberAccess.Expression as InvocationExpressionSyntax;
                 }
@@ -224,8 +222,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     return argument.Expression as InvocationExpressionSyntax;
                 }
 
-                var memberAccess = outerInvocation.Expression as MemberAccessExpressionSyntax;
-                if (memberAccess != null)
+                if (outerInvocation.Expression is MemberAccessExpressionSyntax memberAccess)
                 {
                     return memberAccess.Expression as InvocationExpressionSyntax;
                 }
@@ -244,20 +241,18 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void CheckForCastSimplification(IMethodSymbol outerMethodSymbol, InvocationExpressionSyntax outerInvocation,
             IMethodSymbol innerMethodSymbol, InvocationExpressionSyntax innerInvocation, SyntaxNodeAnalysisContext context)
         {
-            string typeNameInInner;
             if (MethodNamesForTypeCheckingWithSelect.Contains(outerMethodSymbol.Name) &&
                 innerMethodSymbol.Name == SelectMethodName &&
                 IsFirstExpressionInLambdaIsNullChecking(outerMethodSymbol, outerInvocation) &&
-                TryGetCastInLambda(SyntaxKind.AsExpression, innerMethodSymbol, innerInvocation, out typeNameInInner))
+                TryGetCastInLambda(SyntaxKind.AsExpression, innerMethodSymbol, innerInvocation, out var typeNameInInner))
             {
                 context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, GetReportLocation(innerInvocation),
                     string.Format(MessageUseInstead, $"'OfType<{typeNameInInner}>()'")));
             }
 
-            string typeNameInOuter;
             if (outerMethodSymbol.Name == SelectMethodName &&
                 innerMethodSymbol.Name == WhereMethodName &&
-                IsExpressionInLambdaIsCast(outerMethodSymbol, outerInvocation, out typeNameInOuter) &&
+                IsExpressionInLambdaIsCast(outerMethodSymbol, outerInvocation, out var typeNameInOuter) &&
                 TryGetCastInLambda(SyntaxKind.IsExpression, innerMethodSymbol, innerInvocation, out typeNameInInner) &&
                 typeNameInOuter == typeNameInInner)
             {
@@ -334,8 +329,7 @@ namespace SonarAnalyzer.Rules.CSharp
         }
         private static string GetLambdaParameter(ExpressionSyntax expression)
         {
-            var lambda = expression as SimpleLambdaExpressionSyntax;
-            if (lambda != null)
+            if (expression is SimpleLambdaExpressionSyntax lambda)
             {
                 return lambda.Parameter.Identifier.ValueText;
             }

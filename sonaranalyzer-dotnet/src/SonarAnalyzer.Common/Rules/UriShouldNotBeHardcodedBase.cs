@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2017 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -19,11 +19,11 @@
  */
 
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Helpers;
-using System.Collections.Immutable;
 
 namespace SonarAnalyzer.Rules
 {
@@ -38,6 +38,7 @@ namespace SonarAnalyzer.Rules
         // Simplified implementation of specification listed on
         // https://en.wikipedia.org/wiki/Uniform_Resource_Identifier
         private const string UriScheme = "^[a-zA-Z][a-zA-Z\\+\\.\\-]+://.+";
+
         private const string AbsoluteDiskUri = @"^[A-Za-z]:(/|\\)";
         private const string AbsoluteMappedDiskUri = @"^\\\\\w[ \w\.]*";
         private const string AbsoluteUnixUri = @"^(~\\|~/|/)\w";
@@ -72,11 +73,17 @@ namespace SonarAnalyzer.Rules
         protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
         protected abstract TLanguageKindEnum StringLiteralSyntaxKind { get; }
         protected abstract TLanguageKindEnum[] StringConcatenateExpressions { get; }
+
         protected abstract string GetLiteralText(TLiteralExpressionSyntax literalExpression);
+
         protected abstract string GetDeclaratorIdentifierName(TVariableDeclaratorSyntax declarator);
+
         protected abstract TExpressionSyntax GetLeftNode(TBinaryExpressionSyntax binaryExpression);
+
         protected abstract TExpressionSyntax GetRightNode(TBinaryExpressionSyntax binaryExpression);
+
         protected abstract bool IsInvocationOrObjectCreation(SyntaxNode node);
+
         protected abstract int? GetArgumentIndex(TArgumentSyntax argument);
 
         protected override void Initialize(SonarAnalysisContext context)
@@ -95,7 +102,6 @@ namespace SonarAnalyzer.Rules
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, stringLiteral.GetLocation(), AbsoluteUriMessage));
                     }
-
                 },
                 StringLiteralSyntaxKind);
 
@@ -162,7 +168,7 @@ namespace SonarAnalyzer.Rules
 
         private bool IsPathDelimiter(TExpressionSyntax expression)
         {
-            string text = GetLiteralText(expression as TLiteralExpressionSyntax);
+            var text = GetLiteralText(expression as TLiteralExpressionSyntax);
             return text != null && PathDelimiterRegex.IsMatch(text);
         }
     }

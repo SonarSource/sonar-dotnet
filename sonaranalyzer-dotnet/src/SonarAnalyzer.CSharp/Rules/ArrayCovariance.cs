@@ -91,8 +91,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             foreach (var argument in invocation.ArgumentList.Arguments)
             {
-                IParameterSymbol parameter;
-                if (!methodParameterLookup.TryGetParameterSymbol(argument, out parameter) ||
+                if (!methodParameterLookup.TryGetParameterSymbol(argument, out var parameter) ||
                     parameter.IsParams)
                 {
                     continue;

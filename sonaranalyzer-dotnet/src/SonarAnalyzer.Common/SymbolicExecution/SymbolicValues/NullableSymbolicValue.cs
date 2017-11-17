@@ -31,7 +31,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
 
         public NullableSymbolicValue(SymbolicValue wrappedValue)
         {
-            this.WrappedValue = wrappedValue;
+            WrappedValue = wrappedValue;
         }
 
         public override IEnumerable<ProgramState> TrySetConstraint(SymbolicValueConstraint constraint,
@@ -92,7 +92,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
                 return $"NULLABLE_SV_{base.identifier}";
             }
 
-            return this.WrappedValue?.ToString() ?? base.ToString();
+            return WrappedValue?.ToString() ?? base.ToString();
         }
     }
 }

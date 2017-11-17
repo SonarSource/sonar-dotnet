@@ -184,8 +184,7 @@ namespace SonarAnalyzer.Rules
                     };
                 }
 
-                var ctorSymbol = symbol as IMethodSymbol;
-                if (ctorSymbol != null &&
+                if (symbol is IMethodSymbol ctorSymbol &&
                     ctorSymbol.MethodKind == MethodKind.Constructor &&
                     ctorSymbol.IsImplicitlyDeclared)
                 {

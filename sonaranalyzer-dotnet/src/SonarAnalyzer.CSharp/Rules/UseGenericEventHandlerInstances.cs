@@ -72,9 +72,8 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void AnalyzeEventType(SyntaxNodeAnalysisContext analysisContext, SyntaxNode eventNode,
             Func<Location> getLocationToReportOn)
         {
-            var eventSymbol = analysisContext.SemanticModel.GetDeclaredSymbol(eventNode) as IEventSymbol;
 
-            if (eventSymbol != null &&
+            if (analysisContext.SemanticModel.GetDeclaredSymbol(eventNode) is IEventSymbol eventSymbol &&
                 !eventSymbol.IsOverride &&
                 eventSymbol.GetInterfaceMember() == null &&
                 (eventSymbol.Type as INamedTypeSymbol)?.ConstructedFrom.IsAny(allowedTypes) == false)

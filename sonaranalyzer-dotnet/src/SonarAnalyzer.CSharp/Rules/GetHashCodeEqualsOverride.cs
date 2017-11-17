@@ -69,8 +69,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     cb.RegisterSyntaxNodeAction(
                         c =>
                         {
-                            Location location;
-                            if (TryGetLocationFromInvocationInsideMethod(c, methodSymbol, out location))
+                            if (TryGetLocationFromInvocationInsideMethod(c, methodSymbol, out var location))
                             {
                                 locations.Add(location);
                             }
@@ -143,8 +142,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             var statement = ifStatement.Statement;
             var returnStatement = statement as ReturnStatementSyntax;
-            var block = statement as BlockSyntax;
-            if (block != null)
+            if (statement is BlockSyntax block)
             {
                 if (!block.Statements.Any())
                 {

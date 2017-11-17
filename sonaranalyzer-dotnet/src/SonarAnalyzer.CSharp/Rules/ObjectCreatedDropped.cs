@@ -51,8 +51,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
 
                     var objectCreation = (ObjectCreationExpressionSyntax)c.Node;
-                    var parent = objectCreation.Parent as ExpressionStatementSyntax;
-                    if (parent != null)
+                    if (objectCreation.Parent is ExpressionStatementSyntax parent)
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, objectCreation.GetLocation(), objectCreation.Type));
                     }

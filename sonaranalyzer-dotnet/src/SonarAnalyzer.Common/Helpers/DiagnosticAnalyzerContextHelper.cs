@@ -150,7 +150,7 @@ namespace SonarAnalyzer.Helpers
                 });
         }
 
-        #endregion
+        #endregion Register*ActionInNonGenerated
 
         #region ReportDiagnosticIfNonGenerated
 
@@ -186,7 +186,7 @@ namespace SonarAnalyzer.Helpers
             context.ReportDiagnosticIfNonGenerated(generatedCodeRecognizer, diagnostic, context.Compilation);
         }
 
-        #endregion
+        #endregion ReportDiagnosticIfNonGenerated
 
         #region SyntaxTree.IsGenerated
 
@@ -204,8 +204,7 @@ namespace SonarAnalyzer.Helpers
 
             //this is locking if the compilation is not present in the Cache.
             var cache = Cache.GetOrCreateValue(compilation);
-            bool result;
-            if (cache.TryGetValue(tree, out result))
+            if (cache.TryGetValue(tree, out var result))
             {
                 return result;
             }
@@ -215,6 +214,6 @@ namespace SonarAnalyzer.Helpers
             return generated;
         }
 
-        #endregion
+        #endregion SyntaxTree.IsGenerated
     }
 }

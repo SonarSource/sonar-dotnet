@@ -54,8 +54,7 @@ namespace NS
   }
 }";
 
-            SemanticModel semanticModel;
-            var method = CompileWithMethodBody(input, "Bar", out semanticModel);
+            var method = CompileWithMethodBody(input, "Bar", out var semanticModel);
             var expression = method.ExpressionBody.Expression;
             var cfg = CSharpControlFlowGraph.Create(expression, semanticModel);
             VerifyMinimalCfg(cfg);
@@ -2409,8 +2408,7 @@ namespace NS
 
         private static IControlFlowGraph Build(string methodBody)
         {
-            SemanticModel semanticModel;
-            var method = CompileWithMethodBody(string.Format(TestInput, methodBody), "Bar", out semanticModel);
+            var method = CompileWithMethodBody(string.Format(TestInput, methodBody), "Bar", out var semanticModel);
             return CSharpControlFlowGraph.Create(method.Body, semanticModel);
         }
 
@@ -2421,7 +2419,7 @@ namespace NS
         private void VerifyInstructions(Block block, int fromIndex, params string[] instructions)
         {
             block.Instructions.Count.Should().BeGreaterOrEqualTo(fromIndex + instructions.Length);
-            for (int i = 0; i < instructions.Length; i++)
+            for (var i = 0; i < instructions.Length; i++)
             {
                 block.Instructions[fromIndex + i].ToString().Should().BeEquivalentTo(instructions[i]);
             }

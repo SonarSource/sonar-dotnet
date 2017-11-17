@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2017 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -18,8 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Linq;
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Helpers;
@@ -37,6 +37,7 @@ namespace SonarAnalyzer.Rules
         protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
 
         protected abstract LoopWalkerBase<TStatementSyntax, TLanguageKindEnum> GetWalker(SyntaxNodeAnalysisContext context);
+
         protected abstract ISet<TLanguageKindEnum> LoopStatements { get; }
 
         protected override void Initialize(SonarAnalysisContext context)
@@ -119,6 +120,7 @@ namespace SonarAnalyzer.Rules
         }
 
         protected abstract bool IsAnyKind(SyntaxNode node, ICollection<TLanguageKindEnum> collection);
+
         protected abstract bool IsReturnStatement(SyntaxNode node);
 
         protected abstract bool TryGetTryAncestorStatements(TStatementSyntax node, List<SyntaxNode> ancestors,
@@ -126,8 +128,7 @@ namespace SonarAnalyzer.Rules
 
         private bool IsInTryCatchWithMethodInvocation(TStatementSyntax node, List<SyntaxNode> ancestors)
         {
-            IEnumerable<TStatementSyntax> tryAncestorStatements;
-            if (!TryGetTryAncestorStatements(node, ancestors, out tryAncestorStatements))
+            if (!TryGetTryAncestorStatements(node, ancestors, out var tryAncestorStatements))
             {
                 return false;
             }

@@ -47,8 +47,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return TaskHelper.CompletedTask;
             }
 
-            bool b;
-            if (!bool.TryParse(diagnostic.Properties[CheckFileLicense.IsRegularExpressionPropertyKey], out b) || b)
+            if (!bool.TryParse(diagnostic.Properties[CheckFileLicense.IsRegularExpressionPropertyKey], out var b) || b)
             {
                 return TaskHelper.CompletedTask;
             }

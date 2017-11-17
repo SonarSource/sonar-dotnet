@@ -88,10 +88,9 @@ namespace SonarAnalyzer.Rules
 
         private void ReadHeaderCommentProperties(IEnumerable<XElement> settings, string propertyName)
         {
-            string propertyStringValue = GetPropertyStringValue(settings, propertyName);
-            bool propertyValue;
+            var propertyStringValue = GetPropertyStringValue(settings, propertyName);
             if (propertyStringValue != null &&
-                bool.TryParse(propertyStringValue, out propertyValue))
+                bool.TryParse(propertyStringValue, out var propertyValue))
             {
                 IgnoreHeaderComments[propertyName] = propertyValue;
             }

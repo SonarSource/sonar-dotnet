@@ -165,20 +165,17 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 var expressionWithoutParentheses = memberAccess.Expression.RemoveParentheses();
 
-                var identifier = expressionWithoutParentheses as IdentifierNameSyntax;
-                if (identifier != null)
+                if (expressionWithoutParentheses is IdentifierNameSyntax identifier)
                 {
                     return new MemberAccessIdentifierScope(identifier, true);
                 }
 
-                var subMemberBinding = expressionWithoutParentheses as MemberBindingExpressionSyntax;
-                if (subMemberBinding != null)
+                if (expressionWithoutParentheses is MemberBindingExpressionSyntax subMemberBinding)
                 {
                     return new MemberAccessIdentifierScope(subMemberBinding.Name as IdentifierNameSyntax, true);
                 }
 
-                var subMemberAccess = expressionWithoutParentheses as MemberAccessExpressionSyntax;
-                if (subMemberAccess != null &&
+                if (expressionWithoutParentheses is MemberAccessExpressionSyntax subMemberAccess &&
                     subMemberAccess.IsKind(SyntaxKind.SimpleMemberAccessExpression))
                 {
                     var isThisAccess = subMemberAccess.Expression.RemoveParentheses() is ThisExpressionSyntax;
@@ -202,8 +199,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     return programState;
                 }
 
-                var fieldSymbol = symbol as IFieldSymbol;
-                if (fieldSymbol != null && !fieldSymbol.IsConst && !memberAccessIdentifierScope.IsOnCurrentInstance)
+                if (symbol is IFieldSymbol fieldSymbol && !fieldSymbol.IsConst && !memberAccessIdentifierScope.IsOnCurrentInstance)
                 {
                     return programState;
                 }

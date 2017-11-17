@@ -98,9 +98,11 @@ namespace SonarAnalyzer.Utilities
                     case LanguageNames.CSharp:
                         language = language.AddLanguage(AnalyzerLanguage.CSharp);
                         break;
+
                     case LanguageNames.VisualBasic:
                         language = language.AddLanguage(AnalyzerLanguage.VisualBasic);
                         break;
+
                     default:
                         break;
                 }

@@ -49,8 +49,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             var diagnostic = context.Diagnostics.First();
             var diagnosticSpan = diagnostic.Location.SourceSpan;
 
-            var iifInvocation = root.FindNode(diagnosticSpan) as InvocationExpressionSyntax;
-            if (iifInvocation != null)
+            if (root.FindNode(diagnosticSpan) is InvocationExpressionSyntax iifInvocation)
             {
                 context.RegisterCodeFix(
                     CodeAction.Create(

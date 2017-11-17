@@ -50,16 +50,12 @@ namespace SonarAnalyzer.Rules.CSharp
             var syntax = root.FindNode(diagnosticSpan);
             var semanticModel = await context.Document.GetSemanticModelAsync(context.CancellationToken).ConfigureAwait(false);
 
-            var conditional = syntax as ConditionalExpressionSyntax;
-            if (conditional != null)
+            if (syntax is ConditionalExpressionSyntax conditional)
             {
                 var condition = conditional.Condition.RemoveParentheses();
                 var whenTrue = conditional.WhenTrue.RemoveParentheses();
                 var whenFalse = conditional.WhenFalse.RemoveParentheses();
-
-                ExpressionSyntax compared;
-                bool comparedIsNullInTrue;
-                ConditionalSimplification.TryGetExpressionComparedToNull(condition, out compared, out comparedIsNullInTrue);
+                ConditionalSimplification.TryGetExpressionComparedToNull(condition, out var compared, out var comparedIsNullInTrue);
 
                 var annotation = new SyntaxAnnotation();
                 var coalescing = GetNullCoalescing(whenTrue, whenFalse, compared, semanticModel, annotation);
@@ -69,15 +65,11 @@ namespace SonarAnalyzer.Rules.CSharp
                     context.Diagnostics);
             }
 
-            var ifStatement = syntax as IfStatementSyntax;
-            if (ifStatement != null)
+            if (syntax is IfStatementSyntax ifStatement)
             {
                 var whenTrue = ConditionalSimplification.ExtractSingleStatement(ifStatement.Statement);
                 var whenFalse = ConditionalSimplification.ExtractSingleStatement(ifStatement.Else.Statement);
-
-                ExpressionSyntax compared;
-                bool comparedIsNullInTrue;
-                ConditionalSimplification.TryGetExpressionComparedToNull(ifStatement.Condition, out compared, out comparedIsNullInTrue);
+                ConditionalSimplification.TryGetExpressionComparedToNull(ifStatement.Condition, out var compared, out var comparedIsNullInTrue);
                 var isNullCoalescing = bool.Parse(diagnostic.Properties[ConditionalSimplification.IsNullCoalescingKey]);
 
                 var annotation = new SyntaxAnnotation();
@@ -245,7 +237,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             var newArgumentList = SyntaxFactory.ArgumentList();
 
-            for (int i = 0; i < methodCall1.ArgumentList.Arguments.Count; i++)
+            for (var i = 0; i < methodCall1.ArgumentList.Arguments.Count; i++)
             {
                 var arg1 = methodCall1.ArgumentList.Arguments[i];
                 var arg2 = methodCall2.ArgumentList.Arguments[i];

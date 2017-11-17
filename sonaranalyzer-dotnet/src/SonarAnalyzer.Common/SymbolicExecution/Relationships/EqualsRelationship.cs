@@ -19,7 +19,6 @@
  */
 
 using System;
-using SonarAnalyzer.SymbolicExecution.SymbolicValues;
 
 namespace SonarAnalyzer.SymbolicExecution.Relationships
 {

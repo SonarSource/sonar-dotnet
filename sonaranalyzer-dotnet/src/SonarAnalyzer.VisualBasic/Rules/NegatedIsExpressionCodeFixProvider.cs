@@ -19,12 +19,12 @@
  */
 
 using System.Collections.Immutable;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CodeFixes;
-using System.Threading.Tasks;
 using System.Linq;
-using Microsoft.CodeAnalysis.CodeActions;
 using System.Threading;
+using System.Threading.Tasks;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CodeActions;
+using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Helpers;
@@ -35,6 +35,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
     public sealed class NegatedIsExpressionCodeFixProvider : SonarCodeFixProvider
     {
         internal const string Title = "Replace 'Not...Is...' with 'IsNot'.";
+
         public sealed override ImmutableArray<string> FixableDiagnosticIds
         {
             get
@@ -42,6 +43,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 return ImmutableArray.Create(NegatedIsExpression.DiagnosticId);
             }
         }
+
         public sealed override FixAllProvider GetFixAllProvider()
         {
             return WellKnownFixAllProviders.BatchFixer;
@@ -84,4 +86,3 @@ namespace SonarAnalyzer.Rules.VisualBasic
         }
     }
 }
-

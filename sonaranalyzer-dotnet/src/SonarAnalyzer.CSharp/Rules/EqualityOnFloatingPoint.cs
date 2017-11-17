@@ -97,9 +97,8 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void CheckEquality(SyntaxNodeAnalysisContext context)
         {
             var equals = (BinaryExpressionSyntax)context.Node;
-            var equalitySymbol = context.SemanticModel.GetSymbolInfo(equals).Symbol as IMethodSymbol;
 
-            if (equalitySymbol != null &&
+            if (context.SemanticModel.GetSymbolInfo(equals).Symbol is IMethodSymbol equalitySymbol &&
                 equalitySymbol.ContainingType != null &&
                 equalitySymbol.ContainingType.IsAny(KnownType.FloatingPointNumbers) &&
                 EqualityOperators.Contains(equalitySymbol.Name))

@@ -87,24 +87,18 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static void CheckCountZero(ExpressionSyntax zero, ExpressionSyntax count, SyntaxNodeAnalysisContext context)
         {
-            Location reportLocation;
-            string typeArgument;
-            int value;
-            if (ExpressionNumericConverter.TryGetConstantIntValue(zero, out value) &&
+            if (ExpressionNumericConverter.TryGetConstantIntValue(zero, out var value) &&
                 value == 0 &&
-                TryGetCountCall(count, context.SemanticModel, out reportLocation, out typeArgument))
+                TryGetCountCall(count, context.SemanticModel, out var reportLocation, out var typeArgument))
             {
                 context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, reportLocation, typeArgument));
             }
         }
         private static void CheckCountOne(ExpressionSyntax one, ExpressionSyntax count, SyntaxNodeAnalysisContext context)
         {
-            Location reportLocation;
-            string typeArgument;
-            int value;
-            if (ExpressionNumericConverter.TryGetConstantIntValue(one, out value) &&
+            if (ExpressionNumericConverter.TryGetConstantIntValue(one, out var value) &&
                 value == 1 &&
-                TryGetCountCall(count, context.SemanticModel, out reportLocation, out typeArgument))
+                TryGetCountCall(count, context.SemanticModel, out var reportLocation, out var typeArgument))
             {
                 context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, reportLocation, typeArgument));
             }

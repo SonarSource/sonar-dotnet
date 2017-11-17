@@ -45,9 +45,8 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
-                    var enumMemberDeclaration = c.Node as EnumMemberDeclarationSyntax;
 
-                    if (enumMemberDeclaration != null &&
+                    if (c.Node is EnumMemberDeclarationSyntax enumMemberDeclaration &&
                         enumMemberDeclaration
                             .Identifier
                             .ValueText

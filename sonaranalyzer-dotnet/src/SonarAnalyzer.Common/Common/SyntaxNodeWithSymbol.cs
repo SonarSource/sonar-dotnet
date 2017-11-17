@@ -26,7 +26,6 @@ namespace SonarAnalyzer.Common
         where TSyntaxNode : SyntaxNode
         where TSymbol : ISymbol
     {
-
         public SyntaxNodeWithSymbol(TSyntaxNode syntax, TSymbol symbol)
         {
             Syntax = syntax;

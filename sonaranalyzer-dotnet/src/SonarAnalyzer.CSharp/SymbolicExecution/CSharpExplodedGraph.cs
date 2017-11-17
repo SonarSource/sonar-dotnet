@@ -50,8 +50,7 @@ namespace SonarAnalyzer.SymbolicExecution
         {
             var newProgramState = node.ProgramState;
 
-            var usingFinalizerBlock = block as UsingEndBlock;
-            if (usingFinalizerBlock != null)
+            if (block is UsingEndBlock usingFinalizerBlock)
             {
                 newProgramState = InvokeChecks(newProgramState, (ps, check) => check.PreProcessUsingStatement(node.ProgramPoint, ps));
                 newProgramState = CleanStateAfterBlock(newProgramState, block);
@@ -68,8 +67,7 @@ namespace SonarAnalyzer.SymbolicExecution
                 return;
             }
 
-            var forInitializerBlock = block as ForInitializerBlock;
-            if (forInitializerBlock != null)
+            if (block is ForInitializerBlock forInitializerBlock)
             {
                 newProgramState = newProgramState.PopValues(
                     forInitializerBlock.ForNode.Initializers.Count);
@@ -83,8 +81,7 @@ namespace SonarAnalyzer.SymbolicExecution
                 return;
             }
 
-            var lockBlock = block as LockBlock;
-            if (lockBlock != null)
+            if (block is LockBlock lockBlock)
             {
                 newProgramState = newProgramState.PopValue();
 
@@ -106,9 +103,11 @@ namespace SonarAnalyzer.SymbolicExecution
                 case SyntaxKind.ForEachStatement:
                     VisitForeachBinaryBranch(binaryBranchBlock, newProgramState);
                     return;
+
                 case SyntaxKind.CoalesceExpression:
                     VisitCoalesceExpressionBinaryBranch(binaryBranchBlock, newProgramState);
                     return;
+
                 case SyntaxKind.ConditionalAccessExpression:
                     VisitConditionalAccessBinaryBranch(binaryBranchBlock, newProgramState);
                     return;
@@ -121,9 +120,11 @@ namespace SonarAnalyzer.SymbolicExecution
                 case SyntaxKind.WhileStatement:
                     VisitBinaryBranch(binaryBranchBlock, node, ((WhileStatementSyntax)binaryBranchBlock.BranchingNode).Condition);
                     return;
+
                 case SyntaxKind.DoStatement:
                     VisitBinaryBranch(binaryBranchBlock, node, ((DoStatementSyntax)binaryBranchBlock.BranchingNode).Condition);
                     return;
+
                 case SyntaxKind.ForStatement:
                     VisitBinaryBranch(binaryBranchBlock, node, ((ForStatementSyntax)binaryBranchBlock.BranchingNode).Condition);
                     return;
@@ -131,6 +132,7 @@ namespace SonarAnalyzer.SymbolicExecution
                 case SyntaxKind.IfStatement:
                     VisitBinaryBranch(binaryBranchBlock, node, ((IfStatementSyntax)binaryBranchBlock.BranchingNode).Condition);
                     return;
+
                 case SyntaxKind.ConditionalExpression:
                     VisitBinaryBranch(binaryBranchBlock, node, ((ConditionalExpressionSyntax)binaryBranchBlock.BranchingNode).Condition);
                     return;
@@ -161,6 +163,7 @@ namespace SonarAnalyzer.SymbolicExecution
                 case SyntaxKind.VariableDeclarator:
                     newProgramState = VisitVariableDeclarator((VariableDeclaratorSyntax)instruction, newProgramState);
                     break;
+
                 case SyntaxKind.SimpleAssignmentExpression:
                     newProgramState = VisitSimpleAssignment((AssignmentExpressionSyntax)instruction, newProgramState);
                     break;
@@ -168,9 +171,11 @@ namespace SonarAnalyzer.SymbolicExecution
                 case SyntaxKind.OrAssignmentExpression:
                     newProgramState = VisitBooleanBinaryOpAssignment(newProgramState, (AssignmentExpressionSyntax)instruction, (l, r) => new OrSymbolicValue(l, r));
                     break;
+
                 case SyntaxKind.AndAssignmentExpression:
                     newProgramState = VisitBooleanBinaryOpAssignment(newProgramState, (AssignmentExpressionSyntax)instruction, (l, r) => new AndSymbolicValue(l, r));
                     break;
+
                 case SyntaxKind.ExclusiveOrAssignmentExpression:
                     newProgramState = VisitBooleanBinaryOpAssignment(newProgramState, (AssignmentExpressionSyntax)instruction, (l, r) => new XorSymbolicValue(l, r));
                     break;
@@ -203,9 +208,11 @@ namespace SonarAnalyzer.SymbolicExecution
                 case SyntaxKind.BitwiseOrExpression:
                     newProgramState = VisitBinaryOperator(newProgramState, (l, r) => new OrSymbolicValue(l, r));
                     break;
+
                 case SyntaxKind.BitwiseAndExpression:
                     newProgramState = VisitBinaryOperator(newProgramState, (l, r) => new AndSymbolicValue(l, r));
                     break;
+
                 case SyntaxKind.ExclusiveOrExpression:
                     newProgramState = VisitBinaryOperator(newProgramState, (l, r) => new XorSymbolicValue(l, r));
                     break;
@@ -213,12 +220,15 @@ namespace SonarAnalyzer.SymbolicExecution
                 case SyntaxKind.LessThanExpression:
                     newProgramState = VisitComparisonBinaryOperator(newProgramState, (BinaryExpressionSyntax)instruction, (l, r) => new ComparisonSymbolicValue(ComparisonKind.Less, l, r));
                     break;
+
                 case SyntaxKind.LessThanOrEqualExpression:
                     newProgramState = VisitComparisonBinaryOperator(newProgramState, (BinaryExpressionSyntax)instruction, (l, r) => new ComparisonSymbolicValue(ComparisonKind.LessOrEqual, l, r));
                     break;
+
                 case SyntaxKind.GreaterThanExpression:
                     newProgramState = VisitComparisonBinaryOperator(newProgramState, (BinaryExpressionSyntax)instruction, (l, r) => new ComparisonSymbolicValue(ComparisonKind.Less, r, l));
                     break;
+
                 case SyntaxKind.GreaterThanOrEqualExpression:
                     newProgramState = VisitComparisonBinaryOperator(newProgramState, (BinaryExpressionSyntax)instruction, (l, r) => new ComparisonSymbolicValue(ComparisonKind.LessOrEqual, r, l));
                     break;
@@ -308,10 +318,10 @@ namespace SonarAnalyzer.SymbolicExecution
                 case SyntaxKind.ArgListExpression:
                     newProgramState = newProgramState.PushValue(new SymbolicValue());
                     break;
+
                 case SyntaxKind.LogicalNotExpression:
                     {
-                        SymbolicValue sv;
-                        newProgramState = newProgramState.PopValue(out sv);
+                        newProgramState = newProgramState.PopValue(out var sv);
                         newProgramState = newProgramState.PushValue(new LogicalNotSymbolicValue(sv));
                     }
                     break;
@@ -319,9 +329,11 @@ namespace SonarAnalyzer.SymbolicExecution
                 case SyntaxKind.TrueLiteralExpression:
                     newProgramState = newProgramState.PushValue(SymbolicValue.True);
                     break;
+
                 case SyntaxKind.FalseLiteralExpression:
                     newProgramState = newProgramState.PushValue(SymbolicValue.False);
                     break;
+
                 case SyntaxKind.NullLiteralExpression:
                     newProgramState = newProgramState.PushValue(SymbolicValue.Null);
                     break;
@@ -329,6 +341,7 @@ namespace SonarAnalyzer.SymbolicExecution
                 case SyntaxKind.ThisExpression:
                     newProgramState = newProgramState.PushValue(SymbolicValue.This);
                     break;
+
                 case SyntaxKind.BaseExpression:
                     newProgramState = newProgramState.PushValue(SymbolicValue.Base);
                     break;
@@ -468,8 +481,7 @@ namespace SonarAnalyzer.SymbolicExecution
 
         private void VisitCoalesceExpressionBinaryBranch(BinaryBranchBlock binaryBranchBlock, ProgramState programState)
         {
-            SymbolicValue sv;
-            var ps = programState.PopValue(out sv);
+            var ps = programState.PopValue(out var sv);
 
             foreach (var newProgramState in sv.TrySetConstraint(ObjectConstraint.Null, ps))
             {
@@ -490,8 +502,7 @@ namespace SonarAnalyzer.SymbolicExecution
 
         private void VisitConditionalAccessBinaryBranch(BinaryBranchBlock binaryBranchBlock, ProgramState programState)
         {
-            SymbolicValue sv;
-            var ps = programState.PopValue(out sv);
+            var ps = programState.PopValue(out var sv);
 
             foreach (var newProgramState in sv.TrySetConstraint(ObjectConstraint.Null, ps))
             {
@@ -515,8 +526,7 @@ namespace SonarAnalyzer.SymbolicExecution
             var ps = node.ProgramState;
             SymbolicValue sv;
 
-            var forStatement = binaryBranchBlock.BranchingNode as ForStatementSyntax;
-            if (forStatement != null)
+            if (binaryBranchBlock.BranchingNode is ForStatementSyntax forStatement)
             {
                 if (forStatement.Condition == null)
                 {
@@ -553,21 +563,18 @@ namespace SonarAnalyzer.SymbolicExecution
             }
         }
 
-        #endregion
+        #endregion Handle VisitBinaryBranch cases
 
         #region VisitExpression
 
         private ProgramState VisitMemberAccess(MemberAccessExpressionSyntax memberAccess, ProgramState programState)
         {
-            SymbolicValue memberExpression;
-            var newProgramState = programState.PopValue(out memberExpression);
+            var newProgramState = programState.PopValue(out var memberExpression);
             SymbolicValue sv = null;
-            var identifier = memberAccess.Name as IdentifierNameSyntax;
-            if (identifier != null)
+            if (memberAccess.Name is IdentifierNameSyntax identifier)
             {
                 var symbol = SemanticModel.GetSymbolInfo(identifier).Symbol;
-                var fieldSymbol = symbol as IFieldSymbol;
-                if (fieldSymbol != null && (memberAccess.IsOnThis() || fieldSymbol.IsConst))
+                if (symbol is IFieldSymbol fieldSymbol && (memberAccess.IsOnThis() || fieldSymbol.IsConst))
                 {
                     sv = newProgramState.GetSymbolValue(symbol);
                     if (sv == null)
@@ -588,8 +595,7 @@ namespace SonarAnalyzer.SymbolicExecution
 
         private static ProgramState VisitSafeCastExpression(BinaryExpressionSyntax instruction, ProgramState programState)
         {
-            SymbolicValue sv;
-            var newProgramState = programState.PopValue(out sv);
+            var newProgramState = programState.PopValue(out var sv);
             var resultValue = new SymbolicValue();
             if (newProgramState.HasConstraint(sv, ObjectConstraint.Null))
             {
@@ -626,12 +632,9 @@ namespace SonarAnalyzer.SymbolicExecution
 
         private static ProgramState VisitValueEquals(ProgramState programState)
         {
-            SymbolicValue leftSymbol;
-            SymbolicValue rightSymbol;
-
             var newProgramState = programState
-                .PopValue(out rightSymbol)
-                .PopValue(out leftSymbol);
+                .PopValue(out var rightSymbol)
+                .PopValue(out var leftSymbol);
 
             var equals = new ValueEqualsSymbolicValue(leftSymbol, rightSymbol);
             newProgramState = newProgramState.PushValue(equals);
@@ -640,12 +643,9 @@ namespace SonarAnalyzer.SymbolicExecution
 
         private ProgramState VisitReferenceEquals(BinaryExpressionSyntax equals, ProgramState programState)
         {
-            SymbolicValue leftSymbol;
-            SymbolicValue rightSymbol;
-
             var newProgramState = programState
-                .PopValue(out rightSymbol)
-                .PopValue(out leftSymbol);
+                .PopValue(out var rightSymbol)
+                .PopValue(out var leftSymbol);
 
             return new InvocationVisitor.ReferenceEqualsConstraintHandler(leftSymbol, rightSymbol,
                 equals.Left, equals.Right, newProgramState, SemanticModel).PushWithConstraint();
@@ -654,12 +654,9 @@ namespace SonarAnalyzer.SymbolicExecution
         private ProgramState VisitComparisonBinaryOperator(ProgramState programState, BinaryExpressionSyntax comparison,
             Func<SymbolicValue, SymbolicValue, SymbolicValue> svFactory)
         {
-            SymbolicValue leftSymbol;
-            SymbolicValue rightSymbol;
-
             var newProgramState = programState
-                .PopValue(out rightSymbol)
-                .PopValue(out leftSymbol);
+                .PopValue(out var rightSymbol)
+                .PopValue(out var leftSymbol);
 
             var op = SemanticModel.GetSymbolInfo(comparison).Symbol as IMethodSymbol;
 
@@ -676,12 +673,9 @@ namespace SonarAnalyzer.SymbolicExecution
         private static ProgramState VisitBinaryOperator(ProgramState programState,
             Func<SymbolicValue, SymbolicValue, SymbolicValue> svFactory)
         {
-            SymbolicValue leftSymbol;
-            SymbolicValue rightSymbol;
-
             return programState
-                .PopValue(out rightSymbol)
-                .PopValue(out leftSymbol)
+                .PopValue(out var rightSymbol)
+                .PopValue(out var leftSymbol)
                 .PushValue(svFactory(leftSymbol, rightSymbol));
         }
 
@@ -690,12 +684,9 @@ namespace SonarAnalyzer.SymbolicExecution
         {
             var symbol = SemanticModel.GetSymbolInfo(assignment.Left).Symbol;
 
-            SymbolicValue leftSymbol;
-            SymbolicValue rightSymbol;
-
             var newProgramState = programState
-                .PopValue(out rightSymbol)
-                .PopValue(out leftSymbol);
+                .PopValue(out var rightSymbol)
+                .PopValue(out var leftSymbol);
 
             var sv = symbolicValueFactory(leftSymbol, rightSymbol);
             newProgramState = newProgramState.PushValue(sv);
@@ -754,8 +745,7 @@ namespace SonarAnalyzer.SymbolicExecution
 
             if (sv == null)
             {
-                var fieldSymbol = symbol as IFieldSymbol;
-                if (fieldSymbol != null) // TODO: Fix me when implementing SLVS-1130
+                if (symbol is IFieldSymbol fieldSymbol) // TODO: Fix me when implementing SLVS-1130
                 {
                     sv = fieldSymbol.CreateFieldSymbolicValue();
                     newProgramState = newProgramState.StoreSymbolicValue(symbol, sv);
@@ -819,8 +809,7 @@ namespace SonarAnalyzer.SymbolicExecution
         private ProgramState VisitSimpleAssignment(AssignmentExpressionSyntax assignment, ProgramState programState)
         {
             var newProgramState = programState;
-            SymbolicValue sv;
-            newProgramState = newProgramState.PopValue(out sv);
+            newProgramState = newProgramState.PopValue(out var sv);
             if (!CSharpControlFlowGraphBuilder.IsAssignmentWithSimpleLeftSide(assignment))
             {
                 newProgramState = newProgramState.PopValue();
@@ -852,7 +841,7 @@ namespace SonarAnalyzer.SymbolicExecution
             return SetNonNullConstraintIfValueType(leftSymbol, sv, newProgramState);
         }
 
-        #endregion
+        #endregion VisitExpression
 
         protected override bool IsValueConsumingStatement(SyntaxNode jumpNode)
         {
@@ -861,26 +850,22 @@ namespace SonarAnalyzer.SymbolicExecution
                 return true;
             }
 
-            var usingStatement = jumpNode as UsingStatementSyntax;
-            if (usingStatement != null)
+            if (jumpNode is UsingStatementSyntax usingStatement)
             {
                 return usingStatement.Expression != null;
             }
 
-            var throwStatement = jumpNode as ThrowStatementSyntax;
-            if (throwStatement != null)
+            if (jumpNode is ThrowStatementSyntax throwStatement)
             {
                 return throwStatement.Expression != null;
             }
 
-            var returnStatement = jumpNode as ReturnStatementSyntax;
-            if (returnStatement != null)
+            if (jumpNode is ReturnStatementSyntax returnStatement)
             {
                 return returnStatement.Expression != null;
             }
 
-            var switchStatement = jumpNode as SwitchStatementSyntax;
-            if (switchStatement != null)
+            if (jumpNode is SwitchStatementSyntax switchStatement)
             {
                 return switchStatement.Expression != null;
             }
@@ -898,8 +883,7 @@ namespace SonarAnalyzer.SymbolicExecution
             }
 
             var parent = expression.Parent;
-            var conditionalAccess = parent as ConditionalAccessExpressionSyntax;
-            if (conditionalAccess != null &&
+            if (parent is ConditionalAccessExpressionSyntax conditionalAccess &&
                 conditionalAccess.WhenNotNull == expression)
             {
                 return ShouldConsumeValue(conditionalAccess.GetSelfOrTopParenthesizedExpression());
@@ -917,6 +901,6 @@ namespace SonarAnalyzer.SymbolicExecution
                 nullableConstructorCall.Parameters.Length == 0;
         }
 
-        #endregion
+        #endregion Visit*
     }
 }

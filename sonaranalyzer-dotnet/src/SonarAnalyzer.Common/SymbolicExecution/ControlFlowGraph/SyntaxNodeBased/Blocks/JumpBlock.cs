@@ -29,12 +29,7 @@ namespace SonarAnalyzer.SymbolicExecution.ControlFlowGraph
         internal JumpBlock(SyntaxNode jumpNode, Block successor, Block wouldBeSuccessor)
             : base(successor)
         {
-            if (jumpNode == null)
-            {
-                throw new ArgumentNullException(nameof(jumpNode));
-            }
-
-            JumpNode = jumpNode;
+            JumpNode = jumpNode ?? throw new ArgumentNullException(nameof(jumpNode));
             WouldBeSuccessor = wouldBeSuccessor;
         }
 

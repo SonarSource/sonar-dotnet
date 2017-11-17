@@ -52,8 +52,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             var statement = ifStatement.Statement;
-            var block = statement as BlockSyntax;
-            if (block != null)
+            if (statement is BlockSyntax block)
             {
                 statement = block.Statements.FirstOrDefault();
             }

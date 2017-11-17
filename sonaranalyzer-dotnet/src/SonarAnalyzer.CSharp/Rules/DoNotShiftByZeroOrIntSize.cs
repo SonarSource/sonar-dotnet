@@ -69,8 +69,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var right = (c.Node as BinaryExpressionSyntax)?.Right
                                 ?? (c.Node as AssignmentExpressionSyntax)?.Right;
 
-                    int shiftByCount;
-                    if (!TryGetConstantValue(right, out shiftByCount))
+                    if (!TryGetConstantValue(right, out var shiftByCount))
                     {
                         return;
                     }
@@ -131,7 +130,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return null;
             }
 
-            int shiftSuggestion = shiftBy % typeSizeInBits;
+            var shiftSuggestion = shiftBy % typeSizeInBits;
 
             if (typeSizeInBits == 64)
             {

@@ -189,14 +189,12 @@ namespace SonarAnalyzer.Rules.CSharp
                 return true;
             }
 
-            var memberAccess = reference.Key as MemberAccessExpressionSyntax;
-            if (memberAccess != null && memberAccess.Expression.IsKind(SyntaxKind.ThisExpression))
+            if (reference.Key is MemberAccessExpressionSyntax memberAccess && memberAccess.Expression.IsKind(SyntaxKind.ThisExpression))
             {
                 return true;
             }
 
-            var conditionalAccess = reference.Key as ConditionalAccessExpressionSyntax;
-            if (conditionalAccess != null && conditionalAccess.Expression.IsKind(SyntaxKind.ThisExpression))
+            if (reference.Key is ConditionalAccessExpressionSyntax conditionalAccess && conditionalAccess.Expression.IsKind(SyntaxKind.ThisExpression))
             {
                 return true;
             }
@@ -216,10 +214,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 var references = referencesByEnclosingSymbol[classMethod].Where(r => !privateFields[r.Value].Excluded)
                     .ToImmutableDictionary(kv => kv.Key, kv => kv.Value);
-
-                BlockSyntax body;
-                BlockSyntax newBody;
-                if (TryRewriteMethodBody(privateFields, references, classMethod, out body, out newBody))
+                if (TryRewriteMethodBody(privateFields, references, classMethod, out var body, out var newBody))
                 {
                     replacements.Add(body, newBody);
                 }
@@ -281,8 +276,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return false;
             }
 
-            ISet<SyntaxNode> rewrittenNodes;
-            newBody = RewriteBody(privateFields, body, references, out rewrittenNodes);
+            newBody = RewriteBody(privateFields, body, references, out var rewrittenNodes);
 
             return !ExcludePrivateFieldsBasedOnRewrittenNodes(privateFields, references, rewrittenNodes);
         }
@@ -294,14 +288,12 @@ namespace SonarAnalyzer.Rules.CSharp
             var syntax = memberSymbol.DeclaringSyntaxReferences.SingleOrDefault()?.GetSyntax();
             if (syntax != null)
             {
-                var methodSyntax = syntax as BaseMethodDeclarationSyntax;
-                if (methodSyntax != null)
+                if (syntax is BaseMethodDeclarationSyntax methodSyntax)
                 {
                     body = methodSyntax.Body;
                 }
 
-                var accessorSyntax = syntax as AccessorDeclarationSyntax;
-                if (accessorSyntax != null)
+                if (syntax is AccessorDeclarationSyntax accessorSyntax)
                 {
                     body = accessorSyntax.Body;
                 }

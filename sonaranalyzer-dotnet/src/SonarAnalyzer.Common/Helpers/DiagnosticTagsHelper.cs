@@ -18,8 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis;
-
 namespace SonarAnalyzer.Helpers
 {
     public static class DiagnosticTagsHelper
@@ -31,7 +29,7 @@ namespace SonarAnalyzer.Helpers
 #if DEBUG
             return new string[0];
 #else
-            return new[] { WellKnownDiagnosticTags.NotConfigurable };
+            return new[] { Microsoft.CodeAnalysis.WellKnownDiagnosticTags.NotConfigurable };
 #endif
         }
     }

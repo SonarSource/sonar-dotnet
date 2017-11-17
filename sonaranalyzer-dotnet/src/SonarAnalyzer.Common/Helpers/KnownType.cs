@@ -43,7 +43,6 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType System_Collections_SortedList = new KnownType("System.Collections.SortedList");
         public static readonly KnownType System_Collections_Stack = new KnownType("System.Collections.Stack");
 
-
         public static readonly KnownType System_Object = new KnownType(SpecialType.System_Object, "object");
         public static readonly KnownType System_String = new KnownType(SpecialType.System_String, "string");
         public static readonly KnownType System_Boolean = new KnownType(SpecialType.System_Boolean, "bool");
@@ -127,7 +126,6 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType System_ObsoleteAttribute = new KnownType("System.ObsoleteAttribute");
         public static readonly KnownType System_Resources_NeutralResourcesLanguageAttribute = new KnownType("System.Resources.NeutralResourcesLanguageAttribute");
         public static readonly KnownType System_CodeDom_Compiler_GeneratedCodeAttribute = new KnownType("System.CodeDom.Compiler.GeneratedCodeAttribute");
-
 
         public static readonly KnownType System_Collections_Generic_IReadOnlyCollection_T = new KnownType("System.Collections.Generic.IReadOnlyCollection<T>");
         public static readonly KnownType System_Collections_Generic_IReadOnlyDictionary_TKey_TValue = new KnownType("System.Collections.Generic.IReadOnlyDictionary<TKey, TValue>");
@@ -239,7 +237,6 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType System_Runtime_Serialization_OnSerializingAttribute = new KnownType("System.Runtime.Serialization.OnSerializingAttribute");
         public static readonly KnownType System_Runtime_Serialization_OnSerializedAttribute = new KnownType("System.Runtime.Serialization.OnSerializedAttribute");
 
-
         public static readonly ISet<KnownType> CallerInfoAttributes = ImmutableHashSet.Create(
             System_Runtime_CompilerServices_CallerFilePathAttribute,
             System_Runtime_CompilerServices_CallerLineNumberAttribute,
@@ -288,7 +285,6 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType System_Func_T = new KnownType("System.Func<T, TResult>");
         public static readonly KnownType System_Action_T = new KnownType("System.Action<T>");
 
-
         public static readonly KnownType System_ServiceModel_ServiceContractAttribute = new KnownType("System.ServiceModel.ServiceContractAttribute");
         public static readonly KnownType System_ServiceModel_OperationContractAttribute = new KnownType("System.ServiceModel.OperationContractAttribute");
 
@@ -317,7 +313,6 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType System_DuplicateWaitObjectException = new KnownType("System.DuplicateWaitObjectException");
         public static readonly KnownType System_StackOverflowException = new KnownType("System.StackOverflowException");
 
-
         public static readonly KnownType System_IComparable = new KnownType("System.IComparable");
         public static readonly KnownType System_IComparable_T = new KnownType("System.IComparable<T>");
         public static readonly KnownType System_IEquatable_T = new KnownType("System.IEquatable<T>");
@@ -336,14 +331,19 @@ namespace SonarAnalyzer.Helpers
 
         public static readonly KnownType Microsoft_VisualStudio_TestTools_UnitTesting_TestMethodAttribute =
             new KnownType("Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute");
+
         public static readonly KnownType Microsoft_VisualStudio_TestTools_UnitTesting_TestClassAttribute =
             new KnownType("Microsoft.VisualStudio.TestTools.UnitTesting.TestClassAttribute");
+
         public static readonly KnownType Microsoft_VisualStudio_TestTools_UnitTesting_ExpectedExceptionAttribute =
             new KnownType("Microsoft.VisualStudio.TestTools.UnitTesting.ExpectedExceptionAttribute");
+
         public static readonly KnownType Microsoft_VisualStudio_TestTools_UnitTesting_IgnoreAttribute =
             new KnownType("Microsoft.VisualStudio.TestTools.UnitTesting.IgnoreAttribute");
+
         public static readonly KnownType Microsoft_VisualStudio_TestTools_UnitTesting_WorkItemAttribute =
             new KnownType("Microsoft.VisualStudio.TestTools.UnitTesting.WorkItemAttribute");
+
         public static readonly KnownType Microsoft_VisualStudio_TestTools_UnitTesting_Assert =
             new KnownType("Microsoft.VisualStudio.TestTools.UnitTesting.Assert");
 
@@ -352,6 +352,7 @@ namespace SonarAnalyzer.Helpers
 
         public static readonly KnownType Xunit_FactAttribute = new KnownType("Xunit.FactAttribute");
         public static readonly KnownType Xunit_TheoryAttribute = new KnownType("Xunit.TheoryAttribute");
+
         public static readonly KnownType Xunit_Assert =
             new KnownType("Xunit.Assert");
 
@@ -359,10 +360,13 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType NUnit_Framework_TestCaseAttribute = new KnownType("NUnit.Framework.TestCaseAttribute");
         public static readonly KnownType NUnit_Framework_TheoryAttribute = new KnownType("NUnit.Framework.TheoryAttribute");
         public static readonly KnownType NUnit_Framework_TestFixtureAttribute = new KnownType("NUnit.Framework.TestFixtureAttribute");
+
         public static readonly KnownType NUnit_Framework_ExpectedExceptionAttribute =
             new KnownType("NUnit.Framework.ExpectedExceptionAttribute");
+
         public static readonly KnownType NUnit_Framework_Assert =
             new KnownType("NUnit.Framework.Assert");
+
         public static readonly KnownType NUnit_Framework_IgnoreAttribute =
             new KnownType("NUnit.Framework.IgnoreAttribute");
 
@@ -375,7 +379,7 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType System_Collections_Generic_KeyValuePair_TKey_TValue =
             new KnownType("System.Collections.Generic.KeyValuePair<TKey, TValue>");
 
-        #endregion
+        #endregion Known types
 
         public string TypeName { get; }
         private readonly SpecialType specialType;

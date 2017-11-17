@@ -80,8 +80,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             var localArgumentSymbol = argumentSymbol;
 
-            var arrayTypeSymbol = localArgumentSymbol as IArrayTypeSymbol;
-            if (arrayTypeSymbol != null)
+            if (localArgumentSymbol is IArrayTypeSymbol arrayTypeSymbol)
             {
                 localArgumentSymbol = arrayTypeSymbol.ElementType;
             }
@@ -91,8 +90,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 set.Add(localArgumentSymbol as ITypeParameterSymbol);
             }
 
-            var namedSymbol = localArgumentSymbol as INamedTypeSymbol;
-            if (namedSymbol != null)
+            if (localArgumentSymbol is INamedTypeSymbol namedSymbol)
             {
                 foreach (var typeParam in namedSymbol.TypeArguments)
                 {

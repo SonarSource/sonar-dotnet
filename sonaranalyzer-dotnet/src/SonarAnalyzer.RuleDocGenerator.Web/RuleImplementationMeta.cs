@@ -18,14 +18,14 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using SonarAnalyzer.Common;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text.RegularExpressions;
-using SonarAnalyzer.RuleDescriptors;
-using System.Text;
 using System.Globalization;
+using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
 using Newtonsoft.Json;
+using SonarAnalyzer.Common;
+using SonarAnalyzer.RuleDescriptors;
 
 namespace SonarAnalyzer.RuleDocGenerator
 {
