@@ -71,7 +71,7 @@ public class CSharpSensorTest {
     tester = SensorContextTester.create(new File("src/test/resources"));
     tester.fileSystem().setWorkDir(workDir);
     when(system.isOsWindows()).thenReturn(true);
-    sensor = new CSharpSensor(csConfigConfiguration, system, protobufDataImporter, roslynDataImporter);
+    sensor = new CSharpSensor(csConfigConfiguration, protobufDataImporter, roslynDataImporter);
   }
 
   private void addFileToFs() {
@@ -122,20 +122,6 @@ public class CSharpSensorTest {
 
     assertThat(logTester.logs(LoggerLevel.DEBUG)).hasSize(1);
     assertThat(logTester.logs(LoggerLevel.DEBUG).get(0)).isEqualTo("No files to analyze. Skip Sensor.");
-  }
-
-  @Test
-  public void failWhenOsIsNotWindows() throws MessageException {
-    // Arrange
-    addFileToFs();
-    when(system.isOsWindows()).thenReturn(false);
-
-    // Assert exception
-    thrown.expect(MessageException.class);
-    thrown.expectMessage("C# analysis is not supported");
-
-    // Act
-    sensor.execute(tester);
   }
 
   @Test
