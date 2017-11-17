@@ -187,13 +187,13 @@ namespace Tests.Diagnostics
 
         public void Method2Literals()
         {
-            if (true) // Noncompliant
+            if (true) // Compliant
             {
                 Console.WriteLine();
             }
 
-            if (false) // Noncompliant
-            { // Secondary
+            if (false) // Compliant
+            {
                 Console.WriteLine();
             }
 
@@ -1345,6 +1345,50 @@ namespace Tests.Diagnostics
                     { // Secondary
                     }
                 }
+            }
+        }
+
+        public class ConstantExpressionsAreExcluded
+        {
+            const bool T = true;
+            const bool F = false;
+
+            void LocalConstants()
+            {
+                const bool t = true;
+                if (t)
+                {
+                    Console.WriteLine();
+                }
+                const bool f = false;
+                if (f)
+                {
+                    Console.WriteLine();
+                }
+            }
+            void Constants()
+            {
+                if (ConstantExpressionsAreExcluded.T)
+                {
+                    Console.WriteLine();
+                }
+                if (Exceptions.F)
+                {
+                    Console.WriteLine();
+                }
+            }
+            void Conditions()
+            {
+                while (ConstantExpressionsAreExcluded.T)
+                {
+                    Console.WriteLine();
+                }
+                do
+                {
+                    Console.WriteLine();
+                }
+                while (ConstantExpressionsAreExcluded.F);
+                var x = Exceptions.T ? 1 : 2;
             }
         }
     }

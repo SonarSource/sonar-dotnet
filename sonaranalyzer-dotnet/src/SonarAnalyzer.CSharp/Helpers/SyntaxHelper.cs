@@ -29,6 +29,12 @@ namespace SonarAnalyzer.Helpers
 {
     internal static class SyntaxHelper
     {
+        private static readonly ISet<SyntaxKind> BooleanLiterals = new HashSet<SyntaxKind>
+        {
+            SyntaxKind.TrueLiteralExpression,
+            SyntaxKind.FalseLiteralExpression
+        };
+
         public static readonly ExpressionSyntax NullLiteralExpression =
             SyntaxFactory.LiteralExpression(SyntaxKind.NullLiteralExpression);
 
@@ -225,6 +231,22 @@ namespace SonarAnalyzer.Helpers
 
             return catchClause.Filter == null &&
                 (exceptionTypeName == "Exception" || exceptionTypeName == "System.Exception");
+        }
+
+        public static bool IsBooleanConstant(this SyntaxNode syntaxNode, SemanticModel semanticModel)
+        {
+            if (syntaxNode is MemberAccessExpressionSyntax ||
+                syntaxNode is IdentifierNameSyntax)
+            {
+                var constant = semanticModel.GetConstantValue(syntaxNode);
+                return constant.HasValue && constant.Value is bool;
+            }
+            return false;
+        }
+
+        public static bool IsBooleanLiteral(this SyntaxNode syntaxNode)
+        {
+            return syntaxNode.IsAnyKind(BooleanLiterals);
         }
     }
 }
