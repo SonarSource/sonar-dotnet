@@ -1,0 +1,23 @@
+<p>The use of parentheses, even those not required to enforce a desired order of operations, can clarify the intent behind a piece of code. But
+redundant pairs of parentheses could be misleading, and should be removed. </p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+if (a &amp;&amp; ((x + y &gt; 0))) // Noncompliant
+{
+  //...
+}
+
+return ((x + 1));  // Noncompliant
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+if (a &amp;&amp; (x + y &gt; 0))
+{
+  //...
+}
+
+return x + 1;
+
+return (x + 1);
+</pre>
+

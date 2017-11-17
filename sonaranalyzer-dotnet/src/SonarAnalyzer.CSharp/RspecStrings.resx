@@ -495,6 +495,33 @@
   <data name="S1109_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
   </data>
+  <data name="S1110_Category" xml:space="preserve">
+    <value>Sonar Code Smell</value>
+  </data>
+  <data name="S1110_Description" xml:space="preserve">
+    <value>The use of parentheses, even those not required to enforce a desired order of operations, can clarify the intent behind a piece of code. But redundant pairs of parentheses could be misleading, and should be removed. </value>
+  </data>
+  <data name="S1110_IsActivatedByDefault" xml:space="preserve">
+    <value>True</value>
+  </data>
+  <data name="S1110_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S1110_RemediationCost" xml:space="preserve">
+    <value>1min</value>
+  </data>
+  <data name="S1110_Severity" xml:space="preserve">
+    <value>Major</value>
+  </data>
+  <data name="S1110_Tags" xml:space="preserve">
+    <value>confusing</value>
+  </data>
+  <data name="S1110_Title" xml:space="preserve">
+    <value>Redundant pairs of parentheses should be removed</value>
+  </data>
+  <data name="S1110_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S1116_Category" xml:space="preserve">
     <value>Sonar Code Smell</value>
   </data>

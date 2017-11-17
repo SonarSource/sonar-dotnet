@@ -1,0 +1,15 @@
+{
+  "title": "Redundant pairs of parentheses should be removed",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "1min"
+  },
+  "tags": [
+    "confusing"
+  ],
+  "defaultSeverity": "Major",
+  "ruleSpecification": "RSPEC-1110",
+  "sqKey": "S1110"
+}
