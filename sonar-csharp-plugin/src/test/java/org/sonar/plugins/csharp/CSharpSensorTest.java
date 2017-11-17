@@ -31,6 +31,7 @@ import org.junit.rules.TemporaryFolder;
 import org.sonar.api.batch.fs.internal.DefaultInputFile;
 import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 import org.sonar.api.batch.rule.internal.ActiveRulesBuilder;
+import org.sonar.api.batch.sensor.internal.DefaultSensorDescriptor;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.api.internal.google.common.collect.ImmutableList;
 import org.sonar.api.internal.google.common.collect.ImmutableMap;
@@ -77,6 +78,14 @@ public class CSharpSensorTest {
   private void addFileToFs() {
     DefaultInputFile inputFile = new TestInputFileBuilder("mod", "file.cs").setLanguage(CSharpPlugin.LANGUAGE_KEY).build();
     tester.fileSystem().add(inputFile);
+  }
+
+  @Test
+  public void checkDescriptor() {
+    DefaultSensorDescriptor sensorDescriptor = new DefaultSensorDescriptor();
+    sensor.describe(sensorDescriptor);
+    assertThat(sensorDescriptor.languages()).containsOnly("cs");
+    assertThat(sensorDescriptor.name()).isEqualTo("C#");
   }
 
   @Test

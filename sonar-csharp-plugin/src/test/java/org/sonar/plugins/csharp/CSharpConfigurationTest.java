@@ -61,7 +61,7 @@ public class CSharpConfigurationTest {
   public void onlyRoslynReportPresent() throws IOException {
     createRoslynOut();
     config = new CSharpConfiguration(settings.asConfig());
-    assertThat(config.protobufReportPath()).isNotPresent();
+    assertThat(config.protobufReportPathSilent()).isNotPresent();
     assertThat(config.roslynReportPath().get()).isEqualTo(workDir.resolve("roslyn-report.json"));
   }
 
@@ -69,8 +69,8 @@ public class CSharpConfigurationTest {
   public void onlyProtobufReportsPresent() throws IOException {
     createProtobufOut();
     config = new CSharpConfiguration(settings.asConfig());
-    assertThat(config.protobufReportPath()).isPresent();
+    assertThat(config.protobufReportPathSilent()).isPresent();
     assertThat(config.roslynReportPath()).isNotPresent();
-    assertThat(config.protobufReportPath().get()).isEqualTo(workDir.resolve("report").resolve("output-cs"));
+    assertThat(config.protobufReportPathSilent().get()).isEqualTo(workDir.resolve("report").resolve("output-cs"));
   }
 }

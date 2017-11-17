@@ -24,7 +24,6 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.util.Collections;
 import java.util.Map;
-import java.util.Optional;
 import org.sonar.api.batch.ScannerSide;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.utils.log.Logger;
@@ -41,15 +40,13 @@ public class EncodingPerFile {
   // Lazy initialized
   private Map<Path, Charset> roslynEncodingPerPath;
 
-  void init(Optional<Path> protobufDir) {
-    if (protobufDir.isPresent()) {
-      Path encodingReportProtobuf = protobufDir.get().resolve(ENCODING_OUTPUT_PROTOBUF_NAME);
-      if (encodingReportProtobuf.toFile().exists()) {
-        EncodingImporter encodingImporter = ProtobufImporters.encodingImporter();
-        encodingImporter.accept(encodingReportProtobuf);
-        this.roslynEncodingPerPath = encodingImporter.getEncodingPerPath();
-        return;
-      }
+  void init(Path protobufDir) {
+    Path encodingReportProtobuf = protobufDir.resolve(ENCODING_OUTPUT_PROTOBUF_NAME);
+    if (encodingReportProtobuf.toFile().exists()) {
+      EncodingImporter encodingImporter = ProtobufImporters.encodingImporter();
+      encodingImporter.accept(encodingReportProtobuf);
+      this.roslynEncodingPerPath = encodingImporter.getEncodingPerPath();
+      return;
     }
 
     this.roslynEncodingPerPath = Collections.emptyMap();
