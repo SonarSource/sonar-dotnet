@@ -37,9 +37,9 @@ public class GeneratedFileFilter implements InputFileFilter {
 
   private final AbstractConfiguration config;
   private final ProtobufImporters protobufImporters;
-
+  
+  private final Set<Path> generatedFilePaths = new HashSet<>();
   private boolean initialized;
-  private Set<Path> generatedFilePaths = new HashSet<>();
 
   public GeneratedFileFilter(AbstractConfiguration config) {
     this(config, new ProtobufImporters());

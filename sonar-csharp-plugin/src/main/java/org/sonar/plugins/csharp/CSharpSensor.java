@@ -22,7 +22,6 @@ package org.sonar.plugins.csharp;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.InputFile.Type;
@@ -34,6 +33,7 @@ import org.sonar.api.rule.RuleKey;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 import org.sonarsource.dotnet.shared.plugins.ProtobufDataImporter;
+import org.sonarsource.dotnet.shared.plugins.ReportPathCollector;
 import org.sonarsource.dotnet.shared.plugins.RoslynDataImporter;
 
 import static java.util.stream.Collectors.toList;
@@ -42,21 +42,21 @@ public class CSharpSensor implements Sensor {
 
   private static final Logger LOG = Loggers.get(CSharpSensor.class);
 
-  private final CSharpConfiguration config;
   private final ProtobufDataImporter protobufDataImporter;
   private final RoslynDataImporter roslynDataImporter;
+  private final ReportPathCollector reportPathCollector;
 
-  public CSharpSensor(CSharpConfiguration config, ProtobufDataImporter protobufDataImporter, RoslynDataImporter roslynDataImporter) {
-    this.config = config;
+  public CSharpSensor(ReportPathCollector reportPathCollector, ProtobufDataImporter protobufDataImporter, RoslynDataImporter roslynDataImporter) {
+    this.reportPathCollector = reportPathCollector;
     this.protobufDataImporter = protobufDataImporter;
     this.roslynDataImporter = roslynDataImporter;
   }
 
   @Override
   public void describe(SensorDescriptor descriptor) {
-    descriptor
-      .name("C#")
-      .onlyOnLanguage(CSharpPlugin.LANGUAGE_KEY);
+    descriptor.name("C#")
+      .onlyOnLanguage(CSharpPlugin.LANGUAGE_KEY)
+      .global();
   }
 
   @Override
@@ -80,22 +80,21 @@ public class CSharpSensor implements Sensor {
   }
 
   private void executeInternal(SensorContext context) {
-    Optional<Path> roslynReportPath = config.roslynReportPath();
-    Optional<Path> protobufReportsDirectory = config.protobufReportPath();
+    List<Path> protobufPaths = reportPathCollector.protobufDirs();
+    List<Path> roslynDirs = reportPathCollector.roslynDirs();
 
-    if (protobufReportsDirectory.isPresent()) {
-      LOG.info("Importing analysis results from " + protobufReportsDirectory.get().toAbsolutePath());
-      protobufDataImporter.importResults(context, protobufReportsDirectory.get(), CSharpSonarRulesDefinition.REPOSITORY_KEY, !roslynReportPath.isPresent());
+    if (!protobufPaths.isEmpty()) {
+      protobufDataImporter.importResults(context, protobufPaths, CSharpPlugin.REPOSITORY_KEY, roslynDirs.isEmpty());
     }
 
-    if (roslynReportPath.isPresent()) {
+    if (!roslynDirs.isEmpty()) {
       LOG.info("Importing Roslyn report");
       Map<String, List<RuleKey>> activeRoslynRulesByPartialRepoKey = RoslynProfileExporter.activeRoslynRulesByPartialRepoKey(context.activeRules()
         .findAll()
         .stream()
         .map(ActiveRule::ruleKey)
         .collect(toList()));
-      roslynDataImporter.importRoslynReport(roslynReportPath.get(), context, activeRoslynRulesByPartialRepoKey);
+      roslynDataImporter.importRoslynReport(roslynDirs, context, activeRoslynRulesByPartialRepoKey);
     }
   }
 }

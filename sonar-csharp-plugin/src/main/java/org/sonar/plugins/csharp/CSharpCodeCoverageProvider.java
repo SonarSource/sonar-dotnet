@@ -152,7 +152,7 @@ public class CSharpCodeCoverageProvider {
   public static class CSharpIntegrationCoverageReportImportSensor extends CoverageReportImportSensor {
 
     public CSharpIntegrationCoverageReportImportSensor(CSharpIntegrationCoverageAggregator coverageAggregator,
-                                                       SonarQubeVersion sonarQubeVersion) {
+      SonarQubeVersion sonarQubeVersion) {
       super(IT_COVERAGE_CONF, coverageAggregator, CSharpPlugin.LANGUAGE_KEY, CSharpPlugin.LANGUAGE_NAME, sonarQubeVersion, true);
     }
 

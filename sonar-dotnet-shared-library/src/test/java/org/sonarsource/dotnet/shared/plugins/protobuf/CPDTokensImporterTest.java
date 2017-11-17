@@ -26,7 +26,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.List;
-
+import org.junit.Before;
 import org.junit.Test;
 import org.sonar.api.batch.fs.internal.DefaultInputFile;
 import org.sonar.api.batch.fs.internal.FileMetadata;
@@ -41,21 +41,43 @@ public class CPDTokensImporterTest {
   private static final String TEST_FILE_PATH = "Program.cs";
   private static final File TEST_FILE = new File(TEST_DATA_DIR, TEST_FILE_PATH);
 
+  private SensorContextTester tester = SensorContextTester.create(TEST_DATA_DIR);
+  private CPDTokensImporter underTest = new CPDTokensImporter(tester);
+  private File protobuf = new File(TEST_DATA_DIR, CPDTOKENS_OUTPUT_PROTOBUF_NAME);
+
+  @Before
+  public void before() {
+    assertThat(protobuf.isFile()).withFailMessage("no such file: " + protobuf).isTrue();
+  }
+
   @Test
   public void test_copy_paste_tokens_get_imported() throws FileNotFoundException {
-    SensorContextTester tester = SensorContextTester.create(TEST_DATA_DIR);
-
     DefaultInputFile inputFile = new TestInputFileBuilder("dummyKey", TEST_FILE_PATH)
       .setMetadata(new FileMetadata().readMetadata(new FileReader(TEST_FILE)))
       .build();
     tester.fileSystem().add(inputFile);
 
-    File protobuf = new File(TEST_DATA_DIR, CPDTOKENS_OUTPUT_PROTOBUF_NAME);
-    assertThat(protobuf.isFile()).withFailMessage("no such file: " + protobuf).isTrue();
-
-    new CPDTokensImporter(tester).accept(protobuf.toPath());
+    underTest.accept(protobuf.toPath());
 
     List<TokensLine> lines = tester.cpdTokens(inputFile.key());
+    checkExpectedData(lines);
+  }
+
+  @Test
+  public void ignore_repeated_files() throws FileNotFoundException {
+    DefaultInputFile inputFile = new TestInputFileBuilder("dummyKey", TEST_FILE_PATH)
+      .setMetadata(new FileMetadata().readMetadata(new FileReader(TEST_FILE)))
+      .build();
+    tester.fileSystem().add(inputFile);
+
+    underTest.accept(protobuf.toPath());
+    underTest.accept(protobuf.toPath());
+
+    List<TokensLine> lines = tester.cpdTokens(inputFile.key());
+    checkExpectedData(lines);
+  }
+
+  private void checkExpectedData(List<TokensLine> lines) {
     assertThat(lines).hasSize(35);
 
     assertThat(lines.get(0).getValue()).isEqualTo("namespaceConsoleApplication1");

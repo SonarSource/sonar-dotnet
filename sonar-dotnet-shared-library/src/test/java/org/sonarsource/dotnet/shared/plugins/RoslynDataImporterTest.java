@@ -27,6 +27,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import org.apache.commons.io.FileUtils;
@@ -87,7 +88,7 @@ public class RoslynDataImporterTest {
   @Test
   public void roslynReportIsProcessed() throws IOException {
     Map<String, List<RuleKey>> activeRules = createActiveRules();
-    roslynDataImporter.importRoslynReport(workDir.resolve("roslyn-report.json"), tester, activeRules);
+    roslynDataImporter.importRoslynReport(Collections.singletonList(workDir.resolve("roslyn-report.json")), tester, activeRules);
 
     assertThat(tester.allIssues())
       .extracting("ruleKey", "primaryLocation.textRange.start.line", "primaryLocation.message")
@@ -105,7 +106,7 @@ public class RoslynDataImporterTest {
   @Test
   public void roslynEmptyReportShouldNotFail() throws IOException {
     Map<String, List<RuleKey>> activeRules = createActiveRules();
-    roslynDataImporter.importRoslynReport(workDir.resolve("roslyn-report-empty.json"), tester, activeRules);
+    roslynDataImporter.importRoslynReport(Collections.singletonList(workDir.resolve("roslyn-report-empty.json")), tester, activeRules);
   }
 
   @Test
@@ -115,7 +116,7 @@ public class RoslynDataImporterTest {
       "foo", ImmutableList.of(RuleKey.of("roslyn.foo", "[parameters_key]")));
 
     exception.expectMessage("Rule keys must be unique, but \"[parameters_key]\" is defined in both the \"csharpsquid\" and \"roslyn.foo\" rule repositories.");
-    roslynDataImporter.importRoslynReport(workDir.resolve("roslyn-report.json"), tester, activeRules);
+    roslynDataImporter.importRoslynReport(Collections.singletonList(workDir.resolve("roslyn-report.json")), tester, activeRules);
   }
 
   private static Map<String, List<RuleKey>> createActiveRules() {

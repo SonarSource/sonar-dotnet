@@ -69,7 +69,7 @@ public class SonarLintProfileExporterTest {
 
     StringWriter writer = new StringWriter();
     RulesProfile rulesProfile = mock(RulesProfile.class);
-    when(rulesProfile.getActiveRulesByRepository(CSharpSonarRulesDefinition.REPOSITORY_KEY)).thenReturn(Collections.singletonList(activeRuleS1000));
+    when(rulesProfile.getActiveRulesByRepository(CSharpPlugin.REPOSITORY_KEY)).thenReturn(Collections.singletonList(activeRuleS1000));
     exporter.exportProfile(rulesProfile, writer);
     assertThat(writer.toString()).isEqualTo(
       "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n" +

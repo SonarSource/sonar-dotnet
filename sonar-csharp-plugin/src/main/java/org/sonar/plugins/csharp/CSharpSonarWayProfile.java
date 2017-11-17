@@ -19,25 +19,13 @@
  */
 package org.sonar.plugins.csharp;
 
-import org.sonar.api.profiles.ProfileDefinition;
-import org.sonar.api.profiles.RulesProfile;
 import org.sonar.api.profiles.XMLProfileParser;
-import org.sonar.api.utils.ValidationMessages;
+import org.sonarsource.dotnet.shared.plugins.AbstractSonarWayProfile;
 
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
-
-public class CSharpSonarWayProfile extends ProfileDefinition {
-
-  private final XMLProfileParser xmlParser;
+public class CSharpSonarWayProfile extends AbstractSonarWayProfile {
+  private static final String PROFILE_XML_PATH = "/org/sonar/plugins/csharp/profile.xml";
 
   public CSharpSonarWayProfile(XMLProfileParser xmlParser) {
-    this.xmlParser = xmlParser;
+    super(xmlParser, PROFILE_XML_PATH);
   }
-
-  @Override
-  public RulesProfile createProfile(ValidationMessages validation) {
-    return xmlParser.parse(new InputStreamReader(getClass().getResourceAsStream("/org/sonar/plugins/csharp/profile.xml"), StandardCharsets.UTF_8), validation);
-  }
-
 }

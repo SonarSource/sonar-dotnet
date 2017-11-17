@@ -19,56 +19,13 @@
  */
 package org.sonar.plugins.csharp;
 
-import java.io.IOException;
-import java.io.Writer;
-import java.util.LinkedHashSet;
-import java.util.Set;
-import org.sonar.api.profiles.ProfileExporter;
-import org.sonar.api.profiles.RulesProfile;
-import org.sonar.api.rules.ActiveRule;
-import org.sonar.api.rules.Rule;
+import org.sonarsource.dotnet.shared.plugins.AbstractSonarLintProfileExporter;
 
-public class SonarLintProfileExporter extends ProfileExporter {
-
-  private final CSharpSonarRulesDefinition csharpRulesDefinition;
+public class SonarLintProfileExporter extends AbstractSonarLintProfileExporter {
+  private static final String PROFILE_KEY = "sonarlint-vs-cs";
+  private static final String PROFILE_NAME = "SonarLint for Visual Studio Rule Set";
 
   public SonarLintProfileExporter(CSharpSonarRulesDefinition csharpRulesDefinition) {
-    super("sonarlint-vs-cs", "SonarLint for Visual Studio Rule Set");
-    setSupportedLanguages(CSharpPlugin.LANGUAGE_KEY);
-    this.csharpRulesDefinition = csharpRulesDefinition;
+    super(csharpRulesDefinition, PROFILE_KEY, PROFILE_NAME, CSharpPlugin.LANGUAGE_KEY, CSharpPlugin.SONARANALYZER_NAME, CSharpPlugin.REPOSITORY_KEY);
   }
-
-  @Override
-  public void exportProfile(RulesProfile ruleProfile, Writer writer) {
-    Set<String> disabledRuleKeys = new LinkedHashSet<>();
-    disabledRuleKeys.addAll(csharpRulesDefinition.allRuleKeys());
-
-    appendLine(writer, "<?xml version=\"1.0\" encoding=\"utf-8\"?>");
-    appendLine(writer, "<RuleSet Name=\"Rules for SonarLint\" Description=\"This rule set was automatically generated from SonarQube.\" ToolsVersion=\"14.0\">");
-    appendLine(writer, "  <Rules AnalyzerId=\"SonarAnalyzer.CSharp\" RuleNamespace=\"SonarAnalyzer.CSharp\">");
-
-    for (ActiveRule activeRule : ruleProfile.getActiveRulesByRepository(CSharpSonarRulesDefinition.REPOSITORY_KEY)) {
-      Rule rule = activeRule.getRule();
-      disabledRuleKeys.remove(rule.getKey());
-
-      appendLine(writer, "    <Rule Id=\"" + rule.getKey() + "\" Action=\"Warning\" />");
-    }
-
-    for (String disableRuleKey : disabledRuleKeys) {
-      appendLine(writer, "    <Rule Id=\"" + disableRuleKey + "\" Action=\"None\" />");
-    }
-
-    appendLine(writer, "  </Rules>");
-    appendLine(writer, "</RuleSet>");
-  }
-
-  private static void appendLine(Writer writer, String line) {
-    try {
-      writer.write(line);
-      writer.write("\r\n");
-    } catch (IOException e) {
-      throw new IllegalStateException(e);
-    }
-  }
-
 }

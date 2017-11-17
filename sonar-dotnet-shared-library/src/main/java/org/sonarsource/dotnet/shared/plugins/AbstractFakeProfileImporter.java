@@ -19,27 +19,24 @@
  */
 package org.sonarsource.dotnet.shared.plugins;
 
-import javax.annotation.CheckForNull;
-import org.sonar.api.batch.fs.FileSystem;
-import org.sonar.api.batch.fs.InputFile;
-import org.sonar.api.batch.fs.TextRange;
-import org.sonarsource.dotnet.protobuf.SonarAnalyzer;
+import java.io.Reader;
+import org.sonar.api.profiles.ProfileImporter;
+import org.sonar.api.profiles.RulesProfile;
+import org.sonar.api.utils.ValidationMessages;
 
-public final class SensorContextUtils {
-  private SensorContextUtils() {
-    // utility class, forbidden constructor
+public abstract class AbstractFakeProfileImporter extends ProfileImporter {
+  private final String languageKey;
+
+  public AbstractFakeProfileImporter(String languageKey) {
+    super("sonarlint-vs-" + languageKey + "-fake", "Technical importer for the MSBuild SonarQube Scanner");
+    this.languageKey = languageKey;
+    setSupportedLanguages(languageKey);
   }
 
-  @CheckForNull
-  public static InputFile toInputFile(FileSystem fs, String file) {
-    return fs.inputFile(fs.predicates().hasPath(file));
+  @Override
+  public RulesProfile importProfile(Reader reader, ValidationMessages messages) {
+    messages.addErrorText("The technical importer for the MSBuild SonarQube Scanner cannot be used.");
+    return RulesProfile.create(getName(), languageKey);
   }
 
-  public static TextRange toTextRange(InputFile inputFile, SonarAnalyzer.TextRange pbTextRange) {
-    int startLine = pbTextRange.getStartLine();
-    int startLineOffset = pbTextRange.getStartOffset();
-    int endLine = pbTextRange.getEndLine();
-    int endLineOffset = pbTextRange.getEndOffset();
-    return inputFile.newRange(startLine, startLineOffset, endLine, endLineOffset);
-  }
 }

@@ -31,8 +31,18 @@ import org.sonarsource.dotnet.shared.sarif.SarifParserFactory;
 
 @ScannerSide
 public class RoslynDataImporter {
-  public void importRoslynReport(Path reportPath, final SensorContext context, Map<String, List<RuleKey>> activeRoslynRulesByPartialRepoKey) {
-    final Map<String, String> repositoryKeyByRoslynRuleKey = new HashMap<>();
+  public void importRoslynReport(List<Path> reportPaths, final SensorContext context, Map<String, List<RuleKey>> activeRoslynRulesByPartialRepoKey) {
+    Map<String, String> repositoryKeyByRoslynRuleKey = getRepoKeyByRoslynRuleKey(activeRoslynRulesByPartialRepoKey);
+    SarifParserCallback callback = new SarifParserCallbackImpl(context, repositoryKeyByRoslynRuleKey);
+
+    for (Path reportPath : reportPaths) {
+      // TODO handle possible collisions
+      SarifParserFactory.create(reportPath).accept(callback);
+    }
+  }
+
+  private static Map<String, String> getRepoKeyByRoslynRuleKey(Map<String, List<RuleKey>> activeRoslynRulesByPartialRepoKey) {
+    Map<String, String> repositoryKeyByRoslynRuleKey = new HashMap<>();
     for (List<RuleKey> rules : activeRoslynRulesByPartialRepoKey.values()) {
       for (RuleKey activeRoslynRuleKey : rules) {
         String previousRepositoryKey = repositoryKeyByRoslynRuleKey.put(activeRoslynRuleKey.rule(), activeRoslynRuleKey.repository());
@@ -43,8 +53,6 @@ public class RoslynDataImporter {
         }
       }
     }
-
-    SarifParserCallback callback = new SarifParserCallbackImpl(context, repositoryKeyByRoslynRuleKey);
-    SarifParserFactory.create(reportPath).accept(callback);
+    return repositoryKeyByRoslynRuleKey;
   }
 }

@@ -19,27 +19,32 @@
  */
 package org.sonarsource.dotnet.shared.plugins;
 
-import javax.annotation.CheckForNull;
-import org.sonar.api.batch.fs.FileSystem;
-import org.sonar.api.batch.fs.InputFile;
-import org.sonar.api.batch.fs.TextRange;
-import org.sonarsource.dotnet.protobuf.SonarAnalyzer;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import org.junit.Test;
 
-public final class SensorContextUtils {
-  private SensorContextUtils() {
-    // utility class, forbidden constructor
+import static org.assertj.core.api.Assertions.assertThat;
+
+public class ReportPathCollectorTest {
+  private ReportPathCollector underTest = new ReportPathCollector();
+
+  @Test
+  public void should_save_roslyn_report_paths() {
+    Path p1 = Paths.get("p1");
+    Path p2 = Paths.get("p2");
+    underTest.addRoslynDir(p1);
+    underTest.addRoslynDir(p2);
+    assertThat(underTest.roslynDirs()).containsOnly(p1, p2);
+    assertThat(underTest.protobufDirs()).isEmpty();
   }
 
-  @CheckForNull
-  public static InputFile toInputFile(FileSystem fs, String file) {
-    return fs.inputFile(fs.predicates().hasPath(file));
-  }
-
-  public static TextRange toTextRange(InputFile inputFile, SonarAnalyzer.TextRange pbTextRange) {
-    int startLine = pbTextRange.getStartLine();
-    int startLineOffset = pbTextRange.getStartOffset();
-    int endLine = pbTextRange.getEndLine();
-    int endLineOffset = pbTextRange.getEndOffset();
-    return inputFile.newRange(startLine, startLineOffset, endLine, endLineOffset);
+  @Test
+  public void should_save_proto_report_paths() {
+    Path p1 = Paths.get("p1");
+    Path p2 = Paths.get("p2");
+    underTest.addProtobufDir(p1);
+    underTest.addProtobufDir(p2);
+    assertThat(underTest.protobufDirs()).containsOnly(p1, p2);
+    assertThat(underTest.roslynDirs()).isEmpty();
   }
 }
