@@ -93,7 +93,7 @@ public class GeneratedFileFilterTest {
     filter.accept(newInputFile("File3"));
 
     // Assert
-    verify(configuration, times(1)).protobufReportPath();
+    verify(configuration, times(1)).protobufReportPathSilent();
     verify(protobufImporterFactory, times(1)).fileMetadataImporter();
     verify(fileMetadataImporter, times(1)).accept(anyObject());
   }
@@ -119,7 +119,7 @@ public class GeneratedFileFilterTest {
     // Create temporary empty protobuf to satisfy a file.exists check, the content is ignored
     temp.newFile("file-metadata.pb");
 
-    when(configuration.protobufReportPath()).thenReturn(Optional.of(temp.getRoot().toPath()));
+    when(configuration.protobufReportPathSilent()).thenReturn(Optional.of(temp.getRoot().toPath()));
 
     return new GeneratedFileFilter(configuration, protobufImporterFactory);
   }

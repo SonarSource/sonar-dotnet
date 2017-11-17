@@ -25,7 +25,6 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Optional;
 import javax.annotation.Nullable;
 import org.junit.Before;
 import org.junit.Rule;
@@ -56,13 +55,13 @@ public class EncodingPerFileTest {
     Charset sqCharset = StandardCharsets.UTF_16;
 
     Path protobufFile = createProtobuf(roslynCharset);
-    assertEncodingMatch(Optional.of(protobufFile.getParent()), Paths.get("dummy"), sqCharset, true);
+    assertEncodingMatch(protobufFile.getParent(), Paths.get("dummy"), sqCharset, true);
   }
 
   @Test
   public void should_treat_as_mismatch_when_roslyn_encoding_missing() throws IOException {
     Path protobufFile = createProtobuf(null);
-    assertEncodingMatch(Optional.of(protobufFile.getParent()), filePath, null, false);
+    assertEncodingMatch(protobufFile.getParent(), filePath, null, false);
   }
 
   @Test
@@ -71,7 +70,7 @@ public class EncodingPerFileTest {
     Charset sqCharset = StandardCharsets.UTF_16;
 
     Path protobufFile = createProtobuf(roslynCharset);
-    assertEncodingMatch(Optional.of(protobufFile.getParent()), filePath, sqCharset, false);
+    assertEncodingMatch(protobufFile.getParent(), filePath, sqCharset, false);
   }
 
   @Test
@@ -80,10 +79,10 @@ public class EncodingPerFileTest {
     Charset sqCharset = StandardCharsets.UTF_16LE;
 
     Path protobufFile = createProtobuf(roslynCharset);
-    assertEncodingMatch(Optional.of(protobufFile.getParent()), filePath, sqCharset, true);
+    assertEncodingMatch(protobufFile.getParent(), filePath, sqCharset, true);
   }
 
-  private void assertEncodingMatch(Optional<Path> protobufDir, Path filePath, Charset sqCharset, boolean result) throws IOException {
+  private void assertEncodingMatch(Path protobufDir, Path filePath, Charset sqCharset, boolean result) throws IOException {
     EncodingPerFile encodingPerFile = new EncodingPerFile();
     encodingPerFile.init(protobufDir);
     InputFile inputFile = newInputFile(filePath, sqCharset);

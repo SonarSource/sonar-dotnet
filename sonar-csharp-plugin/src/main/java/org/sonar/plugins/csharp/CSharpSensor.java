@@ -58,7 +58,9 @@ public class CSharpSensor implements Sensor {
 
   @Override
   public void describe(SensorDescriptor descriptor) {
-    descriptor.name("C#").onlyOnLanguage(CSharpPlugin.LANGUAGE_KEY);
+    descriptor
+      .name("C#")
+      .onlyOnLanguage(CSharpPlugin.LANGUAGE_KEY);
   }
 
   @Override

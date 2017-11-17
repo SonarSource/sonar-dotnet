@@ -70,8 +70,7 @@ public class GeneratedFileFilter implements InputFileFilter {
     }
     initialized = true;
 
-    Optional<Path> protobufPath = config
-      .protobufReportPath();
+    Optional<Path> protobufPath = config.protobufReportPathSilent();
     if (protobufPath.isPresent()) {
       Path metadataPath = protobufPath.get().resolve(FILEMETADATA_OUTPUT_PROTOBUF_NAME);
       if (metadataPath.toFile().exists()) {

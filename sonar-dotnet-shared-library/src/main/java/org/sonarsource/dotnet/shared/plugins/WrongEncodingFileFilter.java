@@ -19,6 +19,8 @@
  */
 package org.sonarsource.dotnet.shared.plugins;
 
+import java.nio.file.Path;
+import java.util.Optional;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.InputFileFilter;
 
@@ -26,6 +28,7 @@ public class WrongEncodingFileFilter implements InputFileFilter {
 
   private final AbstractConfiguration config;
   private final EncodingPerFile encodingPerFile;
+  private boolean skipFilter = false;
 
   private boolean init;
 
@@ -37,7 +40,7 @@ public class WrongEncodingFileFilter implements InputFileFilter {
   @Override
   public boolean accept(InputFile inputFile) {
     initOnce();
-    return encodingPerFile.encodingMatch(inputFile);
+    return skipFilter || encodingPerFile.encodingMatch(inputFile);
   }
 
   /**
@@ -45,7 +48,12 @@ public class WrongEncodingFileFilter implements InputFileFilter {
    */
   private synchronized void initOnce() {
     if (!init) {
-      encodingPerFile.init(config.protobufReportPath());
+      Optional<Path> protobufReportPath = config.protobufReportPathSilent();
+      if (protobufReportPath.isPresent()) {
+        encodingPerFile.init(protobufReportPath.get());
+      } else {
+        skipFilter = true;
+      }
       init = true;
     }
   }

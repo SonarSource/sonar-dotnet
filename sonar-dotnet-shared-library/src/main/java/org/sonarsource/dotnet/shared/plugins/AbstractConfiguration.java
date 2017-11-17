@@ -55,33 +55,51 @@ public abstract class AbstractConfiguration {
    * - The directory contains at least one protobuf
    */
   public Optional<Path> protobufReportPath() {
+    return protobufReportPath(false);
+  }
+
+  /**
+   * See {@link #protobufReportPath}. This method won't log anything.
+   */
+  public Optional<Path> protobufReportPathSilent() {
+    return protobufReportPath(true);
+  }
+
+  private Optional<Path> protobufReportPath(boolean silent) {
     Optional<String> analyzerWorkDirPath = configuration.get(getAnalyzerWorkDirProperty());
 
     if (!analyzerWorkDirPath.isPresent()) {
-      LOG.warn("Property missing: '" + getAnalyzerWorkDirProperty() + "'. No protobuf files will be loaded.");
-      return Optional.empty();
+      return empty("Property missing: '" + getAnalyzerWorkDirProperty() + "'. No protobuf files will be loaded.", silent);
     }
 
     Path analyzerOutputDir = Paths.get(analyzerWorkDirPath.get(), getAnalyzerReportDir());
     configuration.get(getAnalyzerWorkDirProperty());
 
     if (!analyzerOutputDir.toFile().exists()) {
-      LOG.warn("Analyzer working directory does not exist: " + analyzerOutputDir.toAbsolutePath() + ". No protobuf files will be loaded.");
-      return Optional.empty();
+      return empty("Analyzer working directory does not exist: " + analyzerOutputDir.toAbsolutePath() + ". No protobuf files will be loaded.", silent);
     }
 
     try (DirectoryStream<Path> files = Files.newDirectoryStream(analyzerOutputDir, p -> p.getFileName().toString().toLowerCase().endsWith(".pb"))) {
       long count = StreamSupport.stream(files.spliterator(), false).count();
       if (count == 0) {
-        LOG.warn("Analyzer working directory contains no .pb file(s). No protobuf files will be loaded.");
-        return Optional.empty();
+        return empty("Analyzer working directory contains no .pb file(s). No protobuf files will be loaded.", silent);
       }
-      LOG.info("Analyzer working directory contains " + count + " .pb file(s)");
+
+      if (!silent) {
+        LOG.info("Analyzer working directory contains " + count + " .pb file(s)");
+      }
 
       return Optional.of(analyzerOutputDir);
     } catch (IOException e) {
       throw new IllegalStateException("Could not check for .pb files in " + analyzerOutputDir.toAbsolutePath(), e);
     }
+  }
+
+  private Optional<Path> empty(String msg, boolean silent) {
+    if (!silent) {
+      LOG.warn(msg);
+    }
+    return Optional.empty();
   }
 
   public Optional<Path> roslynReportPath() {
