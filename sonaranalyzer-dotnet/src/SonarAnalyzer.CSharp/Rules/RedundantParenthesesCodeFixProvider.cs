@@ -33,13 +33,8 @@ namespace SonarAnalyzer.Rules.CSharp
     public class RedundantParenthesesCodeFixProvider : SonarCodeFixProvider
     {
         internal const string Title = "Remove redundant parentheses";
-        public sealed override ImmutableArray<string> FixableDiagnosticIds
-        {
-            get
-            {
-                return ImmutableArray.Create(RedundantParentheses.DiagnosticId);
-            }
-        }
+        public sealed override ImmutableArray<string> FixableDiagnosticIds =>
+            ImmutableArray.Create(RedundantParentheses.DiagnosticId, RedundantParenthesesObjectsCreation.DiagnosticId);
 
         public sealed override FixAllProvider GetFixAllProvider()
         {

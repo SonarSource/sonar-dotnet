@@ -24,13 +24,24 @@ using SonarAnalyzer.Rules.CSharp;
 namespace SonarAnalyzer.UnitTest.Rules
 {
     [TestClass]
-    public class RedundantParenthesesTest
+    public class RedundantParenthesesObjectCreationTest
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void RedundantParenthesesExpression()
+        public void RedundantParenthesesObjectCreation()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\RedundantParenthesesExpression.cs", new RedundantParentheses());
+            Verifier.VerifyAnalyzer(@"TestCases\RedundantParenthesesObjectCreation.cs", new RedundantParenthesesObjectsCreation());
+        }
+
+        [TestMethod]
+        [TestCategory("CodeFix")]
+        public void RedundantParenthesesObjectCreation_CodeFix()
+        {
+            Verifier.VerifyCodeFix(
+                @"TestCases\RedundantParenthesesObjectCreation.cs",
+                @"TestCases\RedundantParenthesesObjectCreation.Fixed.cs",
+                new RedundantParenthesesObjectsCreation(),
+                new RedundantParenthesesCodeFixProvider());
         }
     }
 }
