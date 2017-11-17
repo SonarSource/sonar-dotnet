@@ -53,6 +53,12 @@ namespace SonarAnalyzer.Rules.CSharp
             SyntaxKind.DoStatement,
             SyntaxKind.ForStatement);
 
+        private static readonly ISet<SyntaxKind> ConditionalStatements = ImmutableHashSet.Create(
+            SyntaxKind.IfStatement,
+            SyntaxKind.WhileStatement,
+            SyntaxKind.DoStatement,
+            SyntaxKind.ConditionalExpression);
+
         private const string S2583DiagnosticId = "S2583"; // Bug
         private const string S2583MessageFormat = "Change this condition so that it does not always evaluate to '{0}'; some subsequent code is never executed.";
 
@@ -78,7 +84,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var conditionFalse = new HashSet<SyntaxNode>();
 
             EventHandler<ConditionEvaluatedEventArgs> collectConditions =
-                (sender, args) => CollectConditions(args, conditionTrue, conditionFalse);
+                (sender, args) => CollectConditions(args, conditionTrue, conditionFalse, context.SemanticModel);
 
             EventHandler explorationEnded =
                 (sender, args) => Enumerable.Empty<Diagnostic>()
@@ -233,13 +239,13 @@ namespace SonarAnalyzer.Rules.CSharp
                     expression.IsKind(SyntaxKind.LogicalOrExpression) && constantValueIsTrue);
         }
 
-        private static void CollectConditions(ConditionEvaluatedEventArgs args, HashSet<SyntaxNode> conditionTrue, HashSet<SyntaxNode> conditionFalse)
+        private static void CollectConditions(ConditionEvaluatedEventArgs args, HashSet<SyntaxNode> conditionTrue, HashSet<SyntaxNode> conditionFalse, SemanticModel semanticModel)
         {
             var condition = (args.Condition as ExpressionSyntax).RemoveParentheses() ?? args.Condition;
 
             if (condition == null ||
                 OmittedSyntaxKinds.Contains(condition.Kind()) ||
-                IsWhileTrueLoopCondition(condition))
+                IsConstantOrLiteralCondition(condition, semanticModel))
             {
                 return;
             }
@@ -254,10 +260,14 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static bool IsWhileTrueLoopCondition(SyntaxNode condition)
+        private static bool IsConstantOrLiteralCondition(SyntaxNode condition, SemanticModel semanticModel)
         {
-            return condition.IsKind(SyntaxKind.TrueLiteralExpression) &&
-                condition.Parent.IsKind(SyntaxKind.WhileStatement);
+            if (!condition.Parent.IsAnyKind(ConditionalStatements))
+            {
+                return false;
+            }
+            return condition.IsBooleanLiteral()
+                || condition.IsBooleanConstant(semanticModel);
         }
     }
 }
