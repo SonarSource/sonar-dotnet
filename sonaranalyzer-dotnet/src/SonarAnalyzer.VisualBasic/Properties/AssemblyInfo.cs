@@ -24,6 +24,4 @@ using System.Runtime.CompilerServices;
 [assembly: AssemblyTitle("SonarAnalyzer Visual Basic .NET")]
 [assembly: AssemblyProduct("SonarAnalyzer")]
 [assembly: AssemblyDescription("")]
-
 [assembly: InternalsVisibleTo("SonarAnalyzer.UnitTest" + Signing.InternalsVisibleToPublicKey)]
-

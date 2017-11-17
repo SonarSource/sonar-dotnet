@@ -31,10 +31,13 @@ namespace SonarAnalyzer.Helpers
     {
         public static readonly ExpressionSyntax NullLiteralExpression =
             SyntaxFactory.LiteralExpression(SyntaxKind.NullLiteralExpression);
+
         public static readonly ExpressionSyntax FalseLiteralExpression =
             SyntaxFactory.LiteralExpression(SyntaxKind.FalseLiteralExpression);
+
         public static readonly ExpressionSyntax TrueLiteralExpression =
             SyntaxFactory.LiteralExpression(SyntaxKind.TrueLiteralExpression);
+
         public static readonly string NameOfKeywordText = SyntaxFacts.GetText(SyntaxKind.NameOfKeyword);
 
         public static bool HasExactlyNArguments(this InvocationExpressionSyntax invocation, int count)
@@ -99,15 +102,13 @@ namespace SonarAnalyzer.Helpers
                 return true;
             }
 
-            var memberAccess = expression as MemberAccessExpressionSyntax;
-            if (memberAccess != null &&
+            if (expression is MemberAccessExpressionSyntax memberAccess &&
                 memberAccess.Expression.RemoveParentheses().IsKind(SyntaxKind.ThisExpression))
             {
                 return true;
             }
 
-            var conditionalAccess = expression as ConditionalAccessExpressionSyntax;
-            if (conditionalAccess != null &&
+            if (expression is ConditionalAccessExpressionSyntax conditionalAccess &&
                 conditionalAccess.Expression.RemoveParentheses().IsKind(SyntaxKind.ThisExpression))
             {
                 return true;
@@ -131,8 +132,7 @@ namespace SonarAnalyzer.Helpers
 
         public static bool IsNameof(this InvocationExpressionSyntax expression, SemanticModel semanticModel)
         {
-            var calledSymbol = semanticModel.GetSymbolInfo(expression).Symbol as IMethodSymbol;
-            if (calledSymbol != null)
+            if (semanticModel.GetSymbolInfo(expression).Symbol is IMethodSymbol calledSymbol)
             {
                 return false;
             }
@@ -172,7 +172,7 @@ namespace SonarAnalyzer.Helpers
             SemanticModel semanticModel,
             Func<InvocationExpressionSyntax, bool> syntaxPredicate, Func<IMethodSymbol, bool> symbolPredicate)
         {
-            IEnumerable<SyntaxNode> childNodes = methodDeclarationBase?.Body?.DescendantNodes();
+            var childNodes = methodDeclarationBase?.Body?.DescendantNodes();
             if (childNodes == null)
             {
                 childNodes = (methodDeclarationBase as MethodDeclarationSyntax)?.ExpressionBody?.DescendantNodes();

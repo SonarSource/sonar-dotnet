@@ -18,22 +18,26 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using SonarAnalyzer.Common;
 using System.Xml.Serialization;
+using SonarAnalyzer.Common;
 
 namespace SonarAnalyzer.RuleDescriptorGenerator
 {
     [XmlType("rule")]
     public class QualityProfileRuleDescriptor
     {
-        public QualityProfileRuleDescriptor() { }
+        public QualityProfileRuleDescriptor()
+        {
+        }
 
         public QualityProfileRuleDescriptor(AnalyzerLanguage language)
         {
             RepositoryKey = language.GetQualityProfileRepositoryKey();
         }
+
         [XmlElement("repositoryKey")]
         public string RepositoryKey { get; set; }
+
         [XmlElement("key")]
         public string Key { get; set; }
     }

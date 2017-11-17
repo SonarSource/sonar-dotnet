@@ -58,36 +58,31 @@ namespace SonarAnalyzer.Rules.CSharp
                     var members = innerClassSymbol.GetMembers().Where(member => !member.IsImplicitlyDeclared);
                     foreach (var member in members)
                     {
-                        var property = member as IPropertySymbol;
-                        if (property != null)
+                        if (member is IPropertySymbol property)
                         {
                             CheckProperty(c, containerClassSymbol, property);
                             continue;
                         }
 
-                        var field = member as IFieldSymbol;
-                        if (field != null)
+                        if (member is IFieldSymbol field)
                         {
                             CheckField(c, containerClassSymbol, field);
                             continue;
                         }
 
-                        var @event = member as IEventSymbol;
-                        if (@event != null)
+                        if (member is IEventSymbol @event)
                         {
                             CheckEvent(c, containerClassSymbol, @event);
                             continue;
                         }
 
-                        var method = member as IMethodSymbol;
-                        if (method != null)
+                        if (member is IMethodSymbol method)
                         {
                             CheckMethod(c, containerClassSymbol, method);
                             continue;
                         }
 
-                        var namedType = member as INamedTypeSymbol;
-                        if (namedType != null)
+                        if (member is INamedTypeSymbol namedType)
                         {
                             CheckNamedType(c, containerClassSymbol, namedType);
                         }
@@ -113,15 +108,13 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 var syntax = reference.GetSyntax();
 
-                var delegateSyntax = syntax as DelegateDeclarationSyntax;
-                if (delegateSyntax != null)
+                if (syntax is DelegateDeclarationSyntax delegateSyntax)
                 {
                     context.ReportDiagnosticIfNonGenerated(Diagnostic.Create(rule, delegateSyntax.Identifier.GetLocation(), "delegate"));
                     continue;
                 }
 
-                var classSyntax = syntax as ClassDeclarationSyntax;
-                if (classSyntax != null)
+                if (syntax is ClassDeclarationSyntax classSyntax)
                 {
                     context.ReportDiagnosticIfNonGenerated(Diagnostic.Create(rule, classSyntax.Identifier.GetLocation(), "class"));
                 }
@@ -151,8 +144,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         return null;
                     }
 
-                    var variableSyntax = reference.GetSyntax() as VariableDeclaratorSyntax;
-                    if (variableSyntax != null)
+                    if (reference.GetSyntax() is VariableDeclaratorSyntax variableSyntax)
                     {
                         return variableSyntax.Identifier.GetLocation();
                     }

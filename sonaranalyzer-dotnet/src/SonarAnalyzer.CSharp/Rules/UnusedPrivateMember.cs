@@ -522,8 +522,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static VariableDeclarationSyntax GetVariableDeclaration(SyntaxNode syntax)
         {
-            var fieldDeclaration = syntax.Parent.Parent as FieldDeclarationSyntax;
-            if (fieldDeclaration != null)
+            if (syntax.Parent.Parent is FieldDeclarationSyntax fieldDeclaration)
             {
                 return fieldDeclaration.Declaration;
             }

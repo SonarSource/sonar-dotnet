@@ -19,11 +19,11 @@
  */
 
 using System.Collections.Immutable;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CodeFixes;
-using System.Threading.Tasks;
 using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CodeActions;
+using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.Helpers;
@@ -34,6 +34,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
     public sealed class ArrayDesignatorOnVariableCodeFixProvider : SonarCodeFixProvider
     {
         internal const string Title = "Move the array designator to the type";
+
         public sealed override ImmutableArray<string> FixableDiagnosticIds
         {
             get
@@ -41,6 +42,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 return ImmutableArray.Create(ArrayDesignatorOnVariable.DiagnosticId);
             }
         }
+
         public sealed override FixAllProvider GetFixAllProvider()
         {
             return WellKnownFixAllProviders.BatchFixer;
@@ -99,4 +101,3 @@ namespace SonarAnalyzer.Rules.VisualBasic
         }
     }
 }
-

@@ -74,14 +74,12 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static SyntaxToken? GetIdentifier(SyntaxNode declaration)
         {
-            var baseTypeDeclaration = declaration as BaseTypeDeclarationSyntax;
-            if (baseTypeDeclaration != null)
+            if (declaration is BaseTypeDeclarationSyntax baseTypeDeclaration)
             {
                 return baseTypeDeclaration.Identifier;
             }
 
-            var delegateDeclaration = declaration as DelegateDeclarationSyntax;
-            if (delegateDeclaration != null)
+            if (declaration is DelegateDeclarationSyntax delegateDeclaration)
             {
                 return delegateDeclaration.Identifier;
             }
@@ -92,10 +90,10 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void ReportIfNameClashesWithFrameworkNamespace(SyntaxToken? identifier,
             SyntaxNodeAnalysisContext context)
         {
-            string typeName = identifier?.ValueText;
+            var typeName = identifier?.ValueText;
             var typeNameLocation = identifier?.GetLocation();
 
-            bool isNameClash = typeName != null &&
+            var isNameClash = typeName != null &&
                  typeNameLocation != null &&
                  frameworkNamespaces.Contains(typeName.ToLowerInvariant());
 

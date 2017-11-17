@@ -29,8 +29,8 @@ namespace SonarAnalyzer.Common
 
         public FileComments(IImmutableSet<int> noSonar, IImmutableSet<int> nonBlank)
         {
-            this.NoSonar = noSonar;
-            this.NonBlank = nonBlank;
+            NoSonar = noSonar;
+            NonBlank = nonBlank;
         }
     }
 }

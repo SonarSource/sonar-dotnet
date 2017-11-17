@@ -127,17 +127,14 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             var parent = objectCreation.GetSelfOrTopParenthesizedExpression().Parent;
 
-            var assignment = parent as AssignmentExpressionSyntax;
-            if (assignment != null)
+            if (parent is AssignmentExpressionSyntax assignment)
             {
                 return assignment.Left;
             }
 
-            var equalsClause = parent as EqualsValueClauseSyntax;
-            if (equalsClause != null)
+            if (parent is EqualsValueClauseSyntax equalsClause)
             {
-                var variableDeclaration = equalsClause.Parent.Parent as VariableDeclarationSyntax;
-                if (variableDeclaration != null)
+                if (equalsClause.Parent.Parent is VariableDeclarationSyntax variableDeclaration)
                 {
                     return variableDeclaration.Variables.Last();
                 }
@@ -155,8 +152,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             var variable = assignment.Left.RemoveParentheses();
 
-            var identifier = variable as IdentifierNameSyntax;
-            if (identifier != null)
+            if (variable is IdentifierNameSyntax identifier)
             {
                 var leftSideOfParentAssignment = identifier
                     .FirstAncestorOrSelf<ObjectCreationExpressionSyntax>()

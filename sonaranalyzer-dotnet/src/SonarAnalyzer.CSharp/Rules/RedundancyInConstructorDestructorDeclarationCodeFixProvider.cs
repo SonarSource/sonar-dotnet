@@ -52,8 +52,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var diagnostic = context.Diagnostics.First();
             var diagnosticSpan = diagnostic.Location.SourceSpan;
             var syntaxNode = root.FindNode(diagnosticSpan);
-            var initializer = syntaxNode as ConstructorInitializerSyntax;
-            if (initializer != null)
+            if (syntaxNode is ConstructorInitializerSyntax initializer)
             {
                 RegisterActionForBaseCall(context, root, initializer);
                 return TaskHelper.CompletedTask;

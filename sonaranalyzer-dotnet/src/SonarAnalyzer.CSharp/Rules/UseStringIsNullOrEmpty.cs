@@ -63,8 +63,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    ArgumentSyntax firstArgument;
-                    if (!TryGetFirstArgument(invocationExpression, out firstArgument))
+                    if (!TryGetFirstArgument(invocationExpression, out var firstArgument))
                     {
                         return;
                     }

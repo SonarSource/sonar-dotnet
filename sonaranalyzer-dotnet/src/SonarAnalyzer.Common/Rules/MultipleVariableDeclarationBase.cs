@@ -19,11 +19,11 @@
  */
 
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Helpers;
-using System.Collections.Immutable;
 
 namespace SonarAnalyzer.Rules.Common
 {
@@ -79,6 +79,7 @@ namespace SonarAnalyzer.Rules.Common
         }
 
         protected abstract IEnumerable<SyntaxToken> GetIdentifiers(TLocalDeclarationSyntax node);
+
         protected abstract IEnumerable<SyntaxToken> GetIdentifiers(TFieldDeclarationSyntax node);
 
         public abstract TLanguageKindEnum LocalDeclarationKind { get; }

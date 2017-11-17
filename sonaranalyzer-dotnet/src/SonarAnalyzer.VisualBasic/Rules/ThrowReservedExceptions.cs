@@ -33,6 +33,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
     {
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+
         protected override DiagnosticDescriptor Rule => rule;
 
         protected sealed override void Initialize(SonarAnalysisContext context)

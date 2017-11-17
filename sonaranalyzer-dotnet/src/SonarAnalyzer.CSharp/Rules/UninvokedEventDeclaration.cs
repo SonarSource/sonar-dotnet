@@ -223,9 +223,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
             foreach (var node in allNodes)
             {
-                var symbol = node.SemanticModel.GetSymbolInfo(node.SyntaxNode).Symbol as IEventSymbol;
 
-                if (symbol != null)
+                if (node.SemanticModel.GetSymbolInfo(node.SyntaxNode).Symbol is IEventSymbol symbol)
                 {
                     usedSymbols.Add(symbol.OriginalDefinition);
                 }

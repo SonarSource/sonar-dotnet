@@ -91,8 +91,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            string variableName = (assignment.Left as IdentifierNameSyntax)?.Identifier.ValueText;
-            string variableValue = (assignment.Right as LiteralExpressionSyntax)?.Token.ValueText;
+            var variableName = (assignment.Left as IdentifierNameSyntax)?.Identifier.ValueText;
+            var variableValue = (assignment.Right as LiteralExpressionSyntax)?.Token.ValueText;
 
             var bannedWords = FindBannedWords(variableName, variableValue);
             if (bannedWords != null)
@@ -125,7 +125,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private string FindBannedWords(VariableDeclaratorSyntax variableDeclarator)
         {
-            string variableName = variableDeclarator?.Identifier.ValueText;
+            var variableName = variableDeclarator?.Identifier.ValueText;
             var literalExpression = variableDeclarator?.Initializer?.Value as LiteralExpressionSyntax;
             if (literalExpression == null ||
                 !literalExpression.IsKind(SyntaxKind.StringLiteralExpression))

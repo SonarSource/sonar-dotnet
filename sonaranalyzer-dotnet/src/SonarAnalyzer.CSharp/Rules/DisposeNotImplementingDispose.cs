@@ -145,8 +145,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return true;
             }
 
-            var memberAccess = invocation.Expression as MemberAccessExpressionSyntax;
-            if (memberAccess != null && memberAccess.Expression.IsKind(SyntaxKind.ThisExpression))
+            if (invocation.Expression is MemberAccessExpressionSyntax memberAccess && memberAccess.Expression.IsKind(SyntaxKind.ThisExpression))
             {
                 return true;
             }

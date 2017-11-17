@@ -28,12 +28,7 @@ namespace SonarAnalyzer.SymbolicExecution.ControlFlowGraph
         internal ForInitializerBlock(ForStatementSyntax forNode, Block successor)
             : base(successor)
         {
-            if (forNode == null)
-            {
-                throw new ArgumentNullException(nameof(forNode));
-            }
-
-            ForNode = forNode;
+            ForNode = forNode ?? throw new ArgumentNullException(nameof(forNode));
         }
 
         public ForStatementSyntax ForNode { get; }

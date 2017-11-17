@@ -30,12 +30,7 @@ namespace SonarAnalyzer.SymbolicExecution.ControlFlowGraph
     {
         internal SimpleBlock(Block successor)
         {
-            if (successor == null)
-            {
-                throw new ArgumentNullException(nameof(successor));
-            }
-
-            SuccessorBlock = successor;
+            SuccessorBlock = successor ?? throw new ArgumentNullException(nameof(successor));
         }
 
         public Block SuccessorBlock { get; internal set; }

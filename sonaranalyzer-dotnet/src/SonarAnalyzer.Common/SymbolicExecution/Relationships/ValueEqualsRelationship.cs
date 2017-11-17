@@ -69,8 +69,7 @@ namespace SonarAnalyzer.SymbolicExecution.Relationships
         {
             foreach (var other in relationships)
             {
-                var equals = other as EqualsRelationship;
-                if (equals != null)
+                if (other is EqualsRelationship equals)
                 {
                     var transitive = ComputeTransitiveRelationship(equals, this);
                     if (transitive != null)

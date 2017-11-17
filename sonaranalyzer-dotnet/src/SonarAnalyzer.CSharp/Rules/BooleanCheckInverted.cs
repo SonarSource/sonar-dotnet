@@ -61,8 +61,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         parenthesizedParent = parenthesizedParent.Parent;
                     }
 
-                    var logicalNot = parenthesizedParent as PrefixUnaryExpressionSyntax;
-                    if (logicalNot != null && logicalNot.OperatorToken.IsKind(SyntaxKind.ExclamationToken))
+                    if (parenthesizedParent is PrefixUnaryExpressionSyntax logicalNot && logicalNot.OperatorToken.IsKind(SyntaxKind.ExclamationToken))
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, logicalNot.GetLocation(),
                             OppositeTokens[expression.OperatorToken.Kind()]));

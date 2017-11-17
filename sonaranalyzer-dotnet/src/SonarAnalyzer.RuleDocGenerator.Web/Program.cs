@@ -18,13 +18,13 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using Newtonsoft.Json;
-using SonarAnalyzer.Utilities;
 using SonarAnalyzer.Common;
-using System.Collections.Generic;
+using SonarAnalyzer.Utilities;
 
 namespace SonarAnalyzer.RuleDocGenerator
 {
@@ -32,7 +32,7 @@ namespace SonarAnalyzer.RuleDocGenerator
     {
         public static void Main(string[] args)
         {
-            var targetFolder = args.FirstOrDefault() 
+            var targetFolder = args.FirstOrDefault()
                 ?? FileVersionInfo.GetVersionInfo(typeof(Program).Assembly.Location).FileVersion;
             WriteRuleJson(targetFolder);
         }

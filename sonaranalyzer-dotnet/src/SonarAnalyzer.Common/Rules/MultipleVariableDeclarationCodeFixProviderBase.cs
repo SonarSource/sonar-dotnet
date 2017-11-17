@@ -19,11 +19,11 @@
  */
 
 using System.Collections.Immutable;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CodeFixes;
-using System.Threading.Tasks;
 using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CodeActions;
+using Microsoft.CodeAnalysis.CodeFixes;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
@@ -32,6 +32,7 @@ namespace SonarAnalyzer.Rules.Common
     public abstract class MultipleVariableDeclarationCodeFixProviderBase : SonarCodeFixProvider
     {
         internal const string Title = "Separate declarations";
+
         public sealed override ImmutableArray<string> FixableDiagnosticIds
         {
             get

@@ -42,6 +42,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager)
                                        .DisabledByDefault();
+
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         private const int DefaultMinimumSeriesLength = 6;
@@ -136,8 +137,8 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         private static ExecutableStatementSyntax GetParentStatement(ExpressionSyntax expression)
         {
-            ExpressionSyntax expr = expression;
-            ExpressionSyntax parent = expression.Parent as ExpressionSyntax;
+            var expr = expression;
+            var parent = expression.Parent as ExpressionSyntax;
             while (parent != null)
             {
                 expr = parent;

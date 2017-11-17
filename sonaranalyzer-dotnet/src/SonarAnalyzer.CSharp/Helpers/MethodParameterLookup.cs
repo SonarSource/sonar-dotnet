@@ -82,8 +82,7 @@ namespace SonarAnalyzer.Helpers
         {
             foreach (var argument in argumentList.Arguments)
             {
-                IParameterSymbol parameter;
-                if (TryGetParameterSymbol(argument, out parameter))
+                if (TryGetParameterSymbol(argument, out var parameter))
                 {
                     yield return new ArgumentParameterMapping(argument, parameter);
                 }

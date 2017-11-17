@@ -72,8 +72,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    var assignment = increment.Parent as AssignmentExpressionSyntax;
-                    if (assignment != null &&
+                    if (increment.Parent is AssignmentExpressionSyntax assignment &&
                         assignment.IsKind(SyntaxKind.SimpleAssignmentExpression) &&
                         assignment.Right == increment &&
                         EquivalenceChecker.AreEquivalent(assignment.Left, increment.Operand))

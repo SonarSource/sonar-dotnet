@@ -54,12 +54,11 @@ namespace SonarAnalyzer.Rules.CSharp
                     var parameterListNode = (ParameterListSyntax)c.Node;
                     var parameters = parameterListNode.Parameters.Count;
 
-                    string declarationName;
 
                     if (parameters > Maximum &&
                         parameterListNode.Parent != null &&
                         CanBeChanged(parameterListNode.Parent, c.SemanticModel) &&
-                        Mapping.TryGetValue(parameterListNode.Parent.Kind(), out declarationName))
+                        Mapping.TryGetValue(parameterListNode.Parent.Kind(), out var declarationName))
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, parameterListNode.GetLocation(),
                             Maximum, parameters, declarationName));

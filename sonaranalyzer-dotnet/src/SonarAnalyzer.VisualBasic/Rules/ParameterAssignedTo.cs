@@ -22,9 +22,9 @@ using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
-using SonarAnalyzer.Common;
 using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
+using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules.VisualBasic
@@ -35,6 +35,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
     {
         private static readonly DiagnosticDescriptor rule =
            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+
         protected override DiagnosticDescriptor Rule => rule;
 
         private static readonly ImmutableArray<SyntaxKind> kindsOfInterest = ImmutableArray.Create(
@@ -50,6 +51,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             SyntaxKind.LeftShiftAssignmentStatement,
             SyntaxKind.RightShiftAssignmentStatement
             );
+
         public override ImmutableArray<SyntaxKind> SyntaxKindsOfInterest => kindsOfInterest;
 
         protected override bool IsAssignmentToCatchVariable(ISymbol symbol, SyntaxNode node)
@@ -84,6 +86,6 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         protected override SyntaxNode GetAssignedNode(AssignmentStatementSyntax assignment) => assignment.Left;
 
-        protected sealed override GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.VisualBasic.GeneratedCodeRecognizer.Instance;
+        protected override sealed GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.VisualBasic.GeneratedCodeRecognizer.Instance;
     }
 }

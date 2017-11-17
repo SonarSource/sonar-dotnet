@@ -34,6 +34,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
     {
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+
         protected override DiagnosticDescriptor Rule => rule;
 
         protected override SyntaxKind ThrowSyntaxKind => SyntaxKind.ThrowStatement;
@@ -56,7 +57,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
         protected override SyntaxNode GetThrowExpression(SyntaxNode syntaxNode) =>
             ((ThrowStatementSyntax)syntaxNode).Expression;
 
-        protected sealed override GeneratedCodeRecognizer GeneratedCodeRecognizer =>
+        protected override sealed GeneratedCodeRecognizer GeneratedCodeRecognizer =>
             Helpers.VisualBasic.GeneratedCodeRecognizer.Instance;
     }
 }

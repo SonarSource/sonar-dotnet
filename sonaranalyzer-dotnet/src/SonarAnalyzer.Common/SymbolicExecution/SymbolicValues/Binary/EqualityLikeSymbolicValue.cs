@@ -85,9 +85,8 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
                 return new[] { programState };
             }
 
-            SymbolicValueConstraints oldConstraints;
             BoolConstraint oldBoolConstraint = null;
-            if (TryGetConstraints(programState, out oldConstraints))
+            if (TryGetConstraints(programState, out var oldConstraints))
             {
                 oldBoolConstraint = oldConstraints.GetConstraintOrDefault<BoolConstraint>();
             }
@@ -98,10 +97,8 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
                 return Enumerable.Empty<ProgramState>();
             }
 
-            SymbolicValueConstraints leftConstraints;
-            var leftHasConstraint = LeftOperand.TryGetConstraints(programState, out leftConstraints);
-            SymbolicValueConstraints rightConstraints;
-            var rightHasConstraint = RightOperand.TryGetConstraints(programState, out rightConstraints);
+            var leftHasConstraint = LeftOperand.TryGetConstraints(programState, out var leftConstraints);
+            var rightHasConstraint = RightOperand.TryGetConstraints(programState, out var rightConstraints);
 
             var relationship = GetRelationship(boolConstraint);
 

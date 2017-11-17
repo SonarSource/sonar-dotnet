@@ -54,14 +54,12 @@ namespace SonarAnalyzer.Rules.CSharp
             var diagnosticSpan = diagnostic.Location.SourceSpan;
             var syntaxNode = root.FindNode(diagnosticSpan, getInnermostNodeForTie: true);
 
-            RedundantDeclaration.RedundancyType diagnosticType;
-            if (!Enum.TryParse(diagnostic.Properties[RedundantDeclaration.DiagnosticTypeKey], out diagnosticType))
+            if (!Enum.TryParse(diagnostic.Properties[RedundantDeclaration.DiagnosticTypeKey], out RedundantDeclaration.RedundancyType diagnosticType))
             {
                 return TaskHelper.CompletedTask;
             }
 
-            CodeAction action;
-            if (TryGetAction(syntaxNode, root, diagnosticType, context.Document, out action))
+            if (TryGetAction(syntaxNode, root, diagnosticType, context.Document, out var action))
             {
                 context.RegisterCodeFix(action, context.Diagnostics);
             }

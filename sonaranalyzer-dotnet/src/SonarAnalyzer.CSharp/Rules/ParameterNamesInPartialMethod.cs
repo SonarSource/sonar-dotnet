@@ -52,9 +52,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     if (methodSymbol?.PartialImplementationPart != null)
                     {
-                        var methodImplementationSyntax = methodSymbol.PartialImplementationPart.DeclaringSyntaxReferences
-                             .FirstOrDefault()?.GetSyntax() as MethodDeclarationSyntax;
-                        if (methodImplementationSyntax != null)
+                        if (methodSymbol.PartialImplementationPart.DeclaringSyntaxReferences
+                             .FirstOrDefault()?.GetSyntax() is MethodDeclarationSyntax methodImplementationSyntax)
                         {
                             VerifyParameters(c, methodImplementationSyntax, methodSymbol.Parameters, "partial class");
                         }

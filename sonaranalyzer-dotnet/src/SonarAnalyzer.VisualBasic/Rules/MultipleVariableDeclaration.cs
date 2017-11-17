@@ -27,10 +27,9 @@ using SonarAnalyzer.Rules.Common;
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     using System.Collections.Generic;
+    using Helpers;
     using Microsoft.CodeAnalysis.VisualBasic;
     using Microsoft.CodeAnalysis.VisualBasic.Syntax;
-    using Helpers;
-    using System.Collections.Immutable;
 
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     [Rule(DiagnosticId)]
@@ -39,11 +38,11 @@ namespace SonarAnalyzer.Rules.VisualBasic
     {
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+
         protected override DiagnosticDescriptor Rule => rule;
 
         public override SyntaxKind FieldDeclarationKind => SyntaxKind.FieldDeclaration;
         public override SyntaxKind LocalDeclarationKind => SyntaxKind.LocalDeclarationStatement;
-
 
         protected override IEnumerable<SyntaxToken> GetIdentifiers(FieldDeclarationSyntax node) =>
             node.Declarators.SelectMany(d => d.Names.Select(n => n.Identifier));
@@ -51,6 +50,6 @@ namespace SonarAnalyzer.Rules.VisualBasic
         protected override IEnumerable<SyntaxToken> GetIdentifiers(LocalDeclarationStatementSyntax node) =>
             node.Declarators.SelectMany(d => d.Names.Select(n => n.Identifier));
 
-        protected sealed override GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.VisualBasic.GeneratedCodeRecognizer.Instance;
+        protected override sealed GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.VisualBasic.GeneratedCodeRecognizer.Instance;
     }
 }

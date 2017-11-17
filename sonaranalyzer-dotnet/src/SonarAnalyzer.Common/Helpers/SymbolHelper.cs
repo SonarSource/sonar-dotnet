@@ -97,10 +97,13 @@ namespace SonarAnalyzer.Helpers
             {
                 case SymbolKind.Method:
                     return (T)((IMethodSymbol)symbol).OverriddenMethod;
+
                 case SymbolKind.Property:
                     return (T)((IPropertySymbol)symbol).OverriddenProperty;
+
                 case SymbolKind.Event:
                     return (T)((IEventSymbol)symbol).OverriddenEvent;
+
                 default:
                     throw new ArgumentException(
                         $"Only methods, properties and events can be overridden. {typeof(T).Name} was provided",
@@ -175,14 +178,12 @@ namespace SonarAnalyzer.Helpers
 
         public static IEnumerable<IParameterSymbol> GetParameters(this ISymbol symbol)
         {
-            var methodSymbol = symbol as IMethodSymbol;
-            if (methodSymbol != null)
+            if (symbol is IMethodSymbol methodSymbol)
             {
                 return methodSymbol.Parameters;
             }
 
-            var propertySymbol = symbol as IPropertySymbol;
-            if (propertySymbol != null)
+            if (symbol is IPropertySymbol propertySymbol)
             {
                 return propertySymbol.Parameters;
             }

@@ -39,7 +39,7 @@ namespace SonarAnalyzer.Common
         private static readonly Lazy<DocumentBasedFixAllProvider> lazy = new Lazy<DocumentBasedFixAllProvider>(() => new DocumentBasedFixAllProvider());
         public static DocumentBasedFixAllProvider Instance => lazy.Value;
 
-        #endregion
+        #endregion Singleton implementation
 
         private const string titleSolutionPattern = "Fix all '{0}' in Solution";
         private const string titleScopePattern = "Fix all '{0}' in '{1}'";
@@ -54,10 +54,13 @@ namespace SonarAnalyzer.Common
             {
                 case FixAllScope.Document:
                     return string.Format(titleScopePattern, diagnosticId, fixAllContext.Document.Name);
+
                 case FixAllScope.Project:
                     return string.Format(titleScopePattern, diagnosticId, fixAllContext.Project.Name);
+
                 case FixAllScope.Solution:
                     return string.Format(titleSolutionPattern, diagnosticId);
+
                 default:
                     return titleFixAll;
             }
@@ -73,12 +76,15 @@ namespace SonarAnalyzer.Common
                     return Task.FromResult(CodeAction.Create(title,
                         async ct => fixAllContext.Document.WithSyntaxRoot(
                             await GetFixedDocumentAsync(fixAllContext, fixAllContext.Document).ConfigureAwait(false))));
+
                 case FixAllScope.Project:
                     return Task.FromResult(CodeAction.Create(title,
                         ct => GetFixedProjectAsync(fixAllContext, fixAllContext.Project)));
+
                 case FixAllScope.Solution:
                     return Task.FromResult(CodeAction.Create(title,
                         ct => GetFixedSolutionAsync(fixAllContext)));
+
                 default:
                     return null;
             }
@@ -234,4 +240,3 @@ namespace SonarAnalyzer.Common
         }
     }
 }
-

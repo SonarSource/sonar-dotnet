@@ -18,16 +18,16 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
-using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Helpers.VisualBasic;
-using System.Collections.Generic;
-using System.Collections.Immutable;
 
 namespace SonarAnalyzer.Rules.VisualBasic
 {
@@ -37,6 +37,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
     {
         internal static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         protected override void Initialize(SonarAnalysisContext context)
@@ -52,7 +53,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                         .Select(cond => cond.RemoveParentheses())
                         .ToList();
 
-                    for (int i = 1; i < conditions.Count; i++)
+                    for (var i = 1; i < conditions.Count; i++)
                     {
                         CheckConditionAt(i, conditions, c);
                     }
@@ -62,7 +63,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         private static void CheckConditionAt(int currentIndex, List<ExpressionSyntax> conditions, SyntaxNodeAnalysisContext context)
         {
-            for (int j = 0; j < currentIndex; j++)
+            for (var j = 0; j < currentIndex; j++)
             {
                 if (EquivalenceChecker.AreEquivalent(conditions[currentIndex], conditions[j]))
                 {

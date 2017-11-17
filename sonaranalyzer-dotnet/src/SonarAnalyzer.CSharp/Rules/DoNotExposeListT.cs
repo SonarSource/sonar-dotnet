@@ -60,10 +60,9 @@ namespace SonarAnalyzer.Rules.CSharp
                     return;
                 }
 
-                string methodType = methodSymbol.IsConstructor() ? "constructor" : "method";
+                var methodType = methodSymbol.IsConstructor() ? "constructor" : "method";
 
-                var methodDeclaration = baseMethodDeclaration as MethodDeclarationSyntax;
-                if (methodDeclaration != null)
+                if (baseMethodDeclaration is MethodDeclarationSyntax methodDeclaration)
                 {
                     ReportIfListT(methodDeclaration.ReturnType, c, methodType);
                 }

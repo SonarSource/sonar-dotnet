@@ -53,8 +53,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return TaskHelper.CompletedTask;
             }
 
-            SyntaxNode newRoot;
-            if (!TryGetNewRoot(root, diagnostic, invocation, binary, out newRoot))
+            if (!TryGetNewRoot(root, diagnostic, invocation, binary, out var newRoot))
             {
                 return TaskHelper.CompletedTask;
             }
@@ -82,8 +81,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
             else
             {
-                ExpressionSyntax expression;
-                if (TryGetRefactoredExpression(binary, out expression))
+                if (TryGetRefactoredExpression(binary, out var expression))
                 {
                     newRoot = root.ReplaceNode(binary, expression.WithAdditionalAnnotations(Formatter.Annotation));
                 }
@@ -117,18 +115,15 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool TryGetRefactoredExpression(BinaryExpressionSyntax binary, out ExpressionSyntax expression)
         {
-            TypeOfExpressionSyntax typeofExpression;
-            ExpressionSyntax getTypeSide;
-            BinaryExpressionSyntax asExpression;
 
-            bool noNegationRequired = binary.IsKind(SyntaxKind.EqualsExpression);
+            var noNegationRequired = binary.IsKind(SyntaxKind.EqualsExpression);
             ExpressionSyntax newExpression;
 
-            if (TryGetTypeOfComparison(binary, out typeofExpression, out getTypeSide))
+            if (TryGetTypeOfComparison(binary, out var typeofExpression, out var getTypeSide))
             {
                 newExpression = GetIsExpression(typeofExpression, getTypeSide, shouldRemoveGetType: true);
             }
-            else if (TryGetAsOperatorComparisonToNull(binary, out asExpression))
+            else if (TryGetAsOperatorComparisonToNull(binary, out var asExpression))
             {
                 newExpression = GetIsExpression(asExpression);
                 noNegationRequired = !noNegationRequired;

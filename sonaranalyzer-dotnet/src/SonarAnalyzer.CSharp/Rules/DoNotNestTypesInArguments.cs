@@ -74,8 +74,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static int GetNestingDepth(ITypeSymbol argumentSymbol, int depth, bool ignoreExpressions)
         {
             var currentOrNestedArgument = argumentSymbol;
-            var arrayTypeSymbol = currentOrNestedArgument as IArrayTypeSymbol;
-            if (arrayTypeSymbol != null)
+            if (currentOrNestedArgument is IArrayTypeSymbol arrayTypeSymbol)
             {
                 currentOrNestedArgument = arrayTypeSymbol.ElementType;
             }
@@ -86,7 +85,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return depth;
             }
 
-            int nextDepth = ignoreExpressions && namedTypeSymbol.ConstructedFrom.IsAny(expressionFuncActionTypes) ? depth : depth + 1;
+            var nextDepth = ignoreExpressions && namedTypeSymbol.ConstructedFrom.IsAny(expressionFuncActionTypes) ? depth : depth + 1;
 
             var typeArguments = namedTypeSymbol.TypeArguments;
             if (typeArguments != null && typeArguments.Any())

@@ -45,8 +45,8 @@ namespace SonarAnalyzer.Helpers
             var enum1 = first.GetEnumerator();
             var enum2 = second.GetEnumerator();
 
-            bool enum1HasNext = enum1.MoveNext();
-            bool enum2HasNext = enum2.MoveNext();
+            var enum1HasNext = enum1.MoveNext();
+            var enum2HasNext = enum2.MoveNext();
 
             while (enum1HasNext && enum2HasNext)
             {

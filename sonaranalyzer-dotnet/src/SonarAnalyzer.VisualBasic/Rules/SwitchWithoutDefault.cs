@@ -22,11 +22,11 @@ using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
-using SonarAnalyzer.Common;
-using SonarAnalyzer.Rules.Common;
 using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
+using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.Rules.Common;
 
 namespace SonarAnalyzer.Rules.VisualBasic
 {
@@ -54,11 +54,12 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
             return false;
         }
+
         private static bool HasDefaultLabel(SelectBlockSyntax node)
         {
             return node.CaseBlocks.Any(section => section.IsKind(SyntaxKind.CaseElseBlock));
         }
 
-        protected sealed override GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.VisualBasic.GeneratedCodeRecognizer.Instance;
+        protected override sealed GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.VisualBasic.GeneratedCodeRecognizer.Instance;
     }
 }

@@ -62,7 +62,7 @@ namespace SonarAnalyzer.Common
 
         protected abstract bool IsEndOfFile(SyntaxToken token);
 
-        #endregion
+        #endregion LinesOfCode
 
         #region Comments
 
@@ -126,7 +126,7 @@ namespace SonarAnalyzer.Common
 
         protected abstract bool IsCommentTrivia(SyntaxTrivia trivia);
 
-        #endregion
+        #endregion Comments
 
         #region Classes, Accessors, Functions, Statements
 
@@ -146,7 +146,7 @@ namespace SonarAnalyzer.Common
 
         public IEnumerable<SyntaxNode> FunctionNodes => tree.GetRoot().DescendantNodes().Where(IsFunction);
 
-        #endregion
+        #endregion Classes, Accessors, Functions, Statements
 
         #region PublicApi
 
@@ -156,7 +156,7 @@ namespace SonarAnalyzer.Common
 
         protected abstract IEnumerable<SyntaxNode> PublicApiNodes { get; }
 
-        #endregion
+        #endregion PublicApi
 
         #region Complexity
 
@@ -181,6 +181,6 @@ namespace SonarAnalyzer.Common
             }
         }
 
-        #endregion
+        #endregion Complexity
     }
 }

@@ -153,7 +153,7 @@ namespace SonarAnalyzer.SymbolicExecution
             var notEquals = relationships.OfType<ValueNotEqualsRelationship>();
 
             var toChange = new List<ComparisonRelationship>();
-            for (int i = 0; i < leComparisions.Count; i++)
+            for (var i = 0; i < leComparisions.Count; i++)
             {
                 var leComparision = leComparisions[i];
                 var matchingPairs = notEquals.Where(o => o.AreOperandsMatching(leComparision)).ToList();
@@ -178,7 +178,7 @@ namespace SonarAnalyzer.SymbolicExecution
             var leComparisions = GetComparisions(relationships, ComparisonKind.LessOrEqual);
 
             var toChange = new List<ComparisonRelationship>();
-            for (int i = 0; i < leComparisions.Count; i++)
+            for (var i = 0; i < leComparisions.Count; i++)
             {
                 var leComparision = leComparisions[i];
                 var matchingPairs = leComparisions.Where(o => o.AreOperandsSwapped(leComparision)).ToList();
@@ -255,8 +255,7 @@ namespace SonarAnalyzer.SymbolicExecution
 
         public ProgramState PopValue()
         {
-            SymbolicValue poppedValue;
-            return PopValue(out poppedValue);
+            return PopValue(out var poppedValue);
         }
 
         public ProgramState PopValue(out SymbolicValue poppedValue)
@@ -332,8 +331,7 @@ namespace SonarAnalyzer.SymbolicExecution
 
         internal int GetVisitedCount(ProgramPoint programPoint)
         {
-            int value;
-            if (!ProgramPointVisitCounts.TryGetValue(programPoint, out value))
+            if (!ProgramPointVisitCounts.TryGetValue(programPoint, out var value))
             {
                 value = 0;
             }
@@ -377,7 +375,7 @@ namespace SonarAnalyzer.SymbolicExecution
                 return false;
             }
 
-            ProgramState p = obj as ProgramState;
+            var p = obj as ProgramState;
             return Equals(p);
         }
 
@@ -467,8 +465,7 @@ namespace SonarAnalyzer.SymbolicExecution
 
         public bool HasConstraint(SymbolicValue symbolicValue, SymbolicValueConstraint constraint)
         {
-            SymbolicValueConstraints constraints;
-            return Constraints.TryGetValue(symbolicValue, out constraints) &&
+            return Constraints.TryGetValue(symbolicValue, out var constraints) &&
                    constraints.HasConstraint(constraint);
         }
     }

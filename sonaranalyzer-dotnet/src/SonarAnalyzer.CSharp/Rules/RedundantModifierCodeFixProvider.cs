@@ -103,8 +103,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static void RegisterCodeFixForChecked(SyntaxNode node, SyntaxNode root, CodeFixContext context)
         {
-            var checkedStatement = node as CheckedStatementSyntax;
-            if (checkedStatement != null)
+            if (node is CheckedStatementSyntax checkedStatement)
             {
                 context.RegisterCodeFix(
                     CodeAction.Create(
@@ -118,8 +117,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            var checkedExpression = node as CheckedExpressionSyntax;
-            if (checkedExpression != null)
+            if (node is CheckedExpressionSyntax checkedExpression)
             {
                 context.RegisterCodeFix(
                     CodeAction.Create(
@@ -141,8 +139,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return RemoveRedundantToken(root, token);
             }
 
-            var parentBlock = unsafeStatement.Parent as BlockSyntax;
-            if (parentBlock != null &&
+            if (unsafeStatement.Parent is BlockSyntax parentBlock &&
                 parentBlock.Statements.Count == 1)
             {
                 return root.ReplaceNode(

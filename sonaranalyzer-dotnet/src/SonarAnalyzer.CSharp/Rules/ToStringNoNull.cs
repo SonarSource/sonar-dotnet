@@ -57,8 +57,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     {
                         var returnStatement = (ReturnStatementSyntax)c.Node;
 
-                        var nullExpression = returnStatement.Expression as LiteralExpressionSyntax;
-                        if (nullExpression != null && nullExpression.IsKind(SyntaxKind.NullLiteralExpression))
+                        if (returnStatement.Expression is LiteralExpressionSyntax nullExpression && nullExpression.IsKind(SyntaxKind.NullLiteralExpression))
                         {
                             c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, returnStatement.GetLocation()));
                         }

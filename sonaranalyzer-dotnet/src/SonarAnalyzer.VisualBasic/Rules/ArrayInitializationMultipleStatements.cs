@@ -40,6 +40,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         protected override void Initialize(SonarAnalysisContext context)
@@ -137,10 +138,9 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 yield break;
             }
 
-            for (int i = index + 1; i < siblings.Count; i++)
+            for (var i = index + 1; i < siblings.Count; i++)
             {
-                var statement = siblings[i] as StatementSyntax;
-                if (statement != null)
+                if (siblings[i] is StatementSyntax statement)
                 {
                     yield return statement;
                 }

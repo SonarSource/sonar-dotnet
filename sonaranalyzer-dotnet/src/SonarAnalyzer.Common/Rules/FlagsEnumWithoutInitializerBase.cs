@@ -18,11 +18,11 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Helpers;
-using System.Collections.Generic;
 
 namespace SonarAnalyzer.Rules.Common
 {
@@ -62,9 +62,13 @@ namespace SonarAnalyzer.Rules.Common
         }
 
         public abstract ImmutableArray<TLanguageKindEnum> SyntaxKindsOfInterest { get; }
+
         protected abstract SyntaxToken GetIdentifier(TEnumDeclarationSyntax declaration);
+
         protected abstract IList<TEnumMemberDeclarationSyntax> GetMembers(TEnumDeclarationSyntax declaration);
+
         protected abstract bool IsInitialized(TEnumMemberDeclarationSyntax member);
+
         protected abstract DiagnosticDescriptor Rule { get; }
 
         public sealed override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);

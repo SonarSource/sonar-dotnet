@@ -27,6 +27,7 @@ namespace SonarAnalyzer.RuleDescriptorGenerator
     {
         [XmlElement("key")]
         public string Key { get; set; }
+
         [XmlIgnore]
         public string Description { get; set; }
 

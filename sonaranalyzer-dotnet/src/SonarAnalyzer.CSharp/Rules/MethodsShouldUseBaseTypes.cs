@@ -84,8 +84,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 var key = identifierReference.Identifier.ValueText ?? "";
 
-                ParameterData paramData;
-                if (!parametersToCheck.TryGetValue(key, out paramData) ||
+                if (!parametersToCheck.TryGetValue(key, out var paramData) ||
                     !paramData.ShouldReportOn)
                 {
                     continue;
@@ -139,9 +138,8 @@ namespace SonarAnalyzer.Rules.CSharp
             if (identifierParent is ConditionalAccessExpressionSyntax)
             {
                 var conditionalAccess = (ConditionalAccessExpressionSyntax)identifierParent;
-                var binding = conditionalAccess.WhenNotNull as MemberBindingExpressionSyntax;
 
-                if (binding != null)
+                if (conditionalAccess.WhenNotNull is MemberBindingExpressionSyntax binding)
                 {
                     var name = binding.Name;
                     if (name == null)
@@ -153,11 +151,9 @@ namespace SonarAnalyzer.Rules.CSharp
                     return HandlePropertyOrField(identifier, accessedMember);
                 }
 
-                var invocationExpression = conditionalAccess.WhenNotNull as InvocationExpressionSyntax;
-                if (invocationExpression != null)
+                if (conditionalAccess.WhenNotNull is InvocationExpressionSyntax invocationExpression)
                 {
-                    var memberBinding = invocationExpression.Expression as MemberBindingExpressionSyntax;
-                    if (memberBinding != null)
+                    if (invocationExpression.Expression is MemberBindingExpressionSyntax memberBinding)
                     {
                         var invocationSymbol = semanticModel.GetSymbolInfo(memberBinding).Symbol;
                         return HandleInvocation(identifier, invocationSymbol, semanticModel);
@@ -166,8 +162,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
             else if (identifierParent is MemberAccessExpressionSyntax)
             {
-                var invocationExpression = GetNextUnparenthesizedParent(identifierParent) as InvocationExpressionSyntax;
-                if (invocationExpression != null)
+                if (GetNextUnparenthesizedParent(identifierParent) is InvocationExpressionSyntax invocationExpression)
                 {
                     var invocationSymbol = semanticModel.GetSymbolInfo(invocationExpression).Symbol;
                     return HandleInvocation(identifier, invocationSymbol, semanticModel);
@@ -393,7 +388,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             private bool IsConsistentAccessibility(Accessibility baseTypeAccessibility)
             {
-                switch (this.methodAccessibility)
+                switch (methodAccessibility)
                 {
                     case Accessibility.NotApplicable:
                         return false;
@@ -404,7 +399,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     case Accessibility.Protected:
                     case Accessibility.Internal:
                         return baseTypeAccessibility == Accessibility.Public ||
-                            baseTypeAccessibility == this.methodAccessibility;
+                            baseTypeAccessibility == methodAccessibility;
 
                     case Accessibility.ProtectedAndInternal:
                     case Accessibility.Public:

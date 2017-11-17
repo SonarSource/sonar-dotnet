@@ -75,8 +75,7 @@ namespace SonarAnalyzer.Rules.Common
                 return;
             }
 
-            SyntaxNode nearestLoop;
-            if (!TryGetNearestLoop(assignment, out nearestLoop) ||
+            if (!TryGetNearestLoop(assignment, out var nearestLoop) ||
                 IsDefinedInLoop(assigned, nearestLoop, context.SemanticModel))
             {
                 return;
@@ -114,14 +113,12 @@ namespace SonarAnalyzer.Rules.Common
                 return;
             }
 
-            SyntaxNode nearestLoop;
-            if (!TryGetNearestLoop(addAssignment, out nearestLoop))
+            if (!TryGetNearestLoop(addAssignment, out var nearestLoop))
             {
                 return;
             }
 
-            var symbol = context.SemanticModel.GetSymbolInfo(GetLeft(addAssignment)).Symbol as ILocalSymbol;
-            if (symbol != null &&
+            if (context.SemanticModel.GetSymbolInfo(GetLeft(addAssignment)).Symbol is ILocalSymbol symbol &&
                 IsDefinedInLoop(GetLeft(addAssignment), nearestLoop, context.SemanticModel))
             {
                 return;
@@ -131,9 +128,13 @@ namespace SonarAnalyzer.Rules.Common
         }
 
         protected abstract bool IsExpressionConcatenation(TBinaryExpression addExpression);
+
         protected abstract SyntaxNode GetLeft(TAssignmentExpression assignment);
+
         protected abstract SyntaxNode GetRight(TAssignmentExpression assignment);
+
         protected abstract SyntaxNode GetLeft(TBinaryExpression binary);
+
         protected abstract bool AreEquivalent(SyntaxNode node1, SyntaxNode node2);
 
         protected abstract ImmutableArray<TLanguageKindEnum> SimpleAssignmentKinds { get; }
@@ -174,8 +175,7 @@ namespace SonarAnalyzer.Rules.Common
                 return false;
             }
 
-            SyntaxNode nearestLoop;
-            if (!TryGetNearestLoop(declaration, out nearestLoop))
+            if (!TryGetNearestLoop(declaration, out var nearestLoop))
             {
                 return false;
             }

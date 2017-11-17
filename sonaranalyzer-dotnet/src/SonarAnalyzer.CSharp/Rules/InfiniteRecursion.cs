@@ -107,8 +107,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            IControlFlowGraph cfg;
-            if (CSharpControlFlowGraph.TryGet(method.Body, c.SemanticModel, out cfg) ||
+            if (CSharpControlFlowGraph.TryGet(method.Body, c.SemanticModel, out var cfg) ||
                 CSharpControlFlowGraph.TryGet(method.ExpressionBody?.Expression, c.SemanticModel, out cfg))
             {
                 var walker = new CfgWalkerForMethod(
@@ -287,17 +286,15 @@ namespace SonarAnalyzer.Rules.CSharp
                     return false;
                 }
 
-                NameSyntax name = expression as NameSyntax;
+                var name = expression as NameSyntax;
 
-                var memberAccess = expression as MemberAccessExpressionSyntax;
-                if (memberAccess != null &&
+                if (expression is MemberAccessExpressionSyntax memberAccess &&
                     memberAccess.Expression.IsKind(SyntaxKind.ThisExpression))
                 {
                     name = memberAccess.Name as IdentifierNameSyntax;
                 }
 
-                var conditionalAccess = expression as ConditionalAccessExpressionSyntax;
-                if (conditionalAccess != null &&
+                if (expression is ConditionalAccessExpressionSyntax conditionalAccess &&
                     conditionalAccess.Expression.IsKind(SyntaxKind.ThisExpression))
                 {
                     name = (conditionalAccess.WhenNotNull as MemberBindingExpressionSyntax)?.Name as IdentifierNameSyntax;

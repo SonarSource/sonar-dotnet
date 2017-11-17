@@ -41,9 +41,8 @@ namespace SonarAnalyzer.Rules.VisualBasic
         {
             var diagnostic = context.Diagnostics.First();
             var diagnosticSpan = diagnostic.Location.SourceSpan;
-            var oldNode = root.FindNode(diagnosticSpan) as ParameterSyntax;
 
-            if (oldNode != null)
+            if (root.FindNode(diagnosticSpan) is ParameterSyntax oldNode)
             {
                 context.RegisterCodeFix(
                     CodeAction.Create(

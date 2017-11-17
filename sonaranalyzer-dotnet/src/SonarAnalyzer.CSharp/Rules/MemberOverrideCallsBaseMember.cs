@@ -251,7 +251,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return false;
             }
 
-            for (int i = 0; i < argumentExpressions.Count; i++)
+            for (var i = 0; i < argumentExpressions.Count; i++)
             {
                 var parameterSymbol = semanticModel.GetSymbolInfo(argumentExpressions[i]).Symbol as IParameterSymbol;
                 if (parameterSymbol == null ||

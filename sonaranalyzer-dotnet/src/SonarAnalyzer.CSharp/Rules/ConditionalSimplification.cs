@@ -74,17 +74,13 @@ namespace SonarAnalyzer.Rules.CSharp
                 /// Equivalence handled by S1871, <see cref="ConditionalStructureSameImplementation"/>
                 return;
             }
-
-            ExpressionSyntax comparedToNull;
-            bool comparedIsNullInTrue;
             var possiblyNullCoalescing =
-                TryGetExpressionComparedToNull(ifStatement.Condition, out comparedToNull, out comparedIsNullInTrue) &&
+                TryGetExpressionComparedToNull(ifStatement.Condition, out var comparedToNull, out var comparedIsNullInTrue) &&
                 ExpressionCanBeNull(comparedToNull, context.SemanticModel);
 
-            bool isNullCoalescing;
             if (CanBeSimplified(whenTrue, whenFalse,
                 possiblyNullCoalescing ? comparedToNull : null, context.SemanticModel,
-                comparedIsNullInTrue, out isNullCoalescing))
+                comparedIsNullInTrue, out var isNullCoalescing))
             {
                 context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, ifStatement.IfKeyword.GetLocation(),
                     ImmutableDictionary<string, string>.Empty.Add(IsNullCoalescingKey, isNullCoalescing.ToString()),
@@ -105,10 +101,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 /// handled by S2758, <see cref="TernaryOperatorPointless"/>
                 return;
             }
-
-            ExpressionSyntax comparedToNull;
-            bool comparedIsNullInTrue;
-            if (!TryGetExpressionComparedToNull(condition, out comparedToNull, out comparedIsNullInTrue) ||
+            if (!TryGetExpressionComparedToNull(condition, out var comparedToNull, out var comparedIsNullInTrue) ||
                 !ExpressionCanBeNull(comparedToNull, context.SemanticModel))
             {
                 // expression not compared to null, or can't be null
@@ -291,7 +284,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             var numberOfDifferences = 0;
             var numberOfComparisonsToCondition = 0;
-            for (int i = 0; i < methodCall1.ArgumentList.Arguments.Count; i++)
+            for (var i = 0; i < methodCall1.ArgumentList.Arguments.Count; i++)
             {
                 var arg1 = methodCall1.ArgumentList.Arguments[i]?.Expression.RemoveParentheses();
                 var arg2 = methodCall2.ArgumentList.Arguments[i]?.Expression.RemoveParentheses();

@@ -339,9 +339,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 return argumentList.Arguments
                     .Select(argument =>
                     {
-                        SymbolicValue value;
                         // We have side effect here, but it is harmless, we only need the symbolic values
-                        tempProgramState = tempProgramState.PopValue(out value);
+                        tempProgramState = tempProgramState.PopValue(out var value);
                         return value;
                     });
             }

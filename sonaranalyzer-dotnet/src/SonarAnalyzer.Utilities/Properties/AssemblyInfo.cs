@@ -24,5 +24,4 @@ using System.Runtime.CompilerServices;
 [assembly: AssemblyTitle("SonarAnalyzer Utilities")]
 [assembly: AssemblyProduct("SonarAnalyzer.Utilities")]
 [assembly: AssemblyDescription("")]
-
 [assembly: InternalsVisibleTo("SonarAnalyzer.UnitTest" + Signing.InternalsVisibleToPublicKey)]

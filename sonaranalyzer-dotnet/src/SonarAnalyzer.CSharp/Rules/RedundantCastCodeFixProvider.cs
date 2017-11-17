@@ -53,8 +53,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var diagnosticSpan = diagnostic.Location.SourceSpan;
             var syntaxNode = root.FindNode(diagnosticSpan, getInnermostNodeForTie: true);
 
-            var castExpression = syntaxNode.Parent as CastExpressionSyntax;
-            if (castExpression != null)
+            if (syntaxNode.Parent is CastExpressionSyntax castExpression)
             {
                 //this is handled by IDE0004 code fix.
                 return TaskHelper.CompletedTask;
@@ -76,8 +75,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     context.Diagnostics);
             }
 
-            var asExpression = syntaxNode as BinaryExpressionSyntax;
-            if (asExpression != null)
+            if (syntaxNode is BinaryExpressionSyntax asExpression)
             {
                 context.RegisterCodeFix(
                     CodeAction.Create(

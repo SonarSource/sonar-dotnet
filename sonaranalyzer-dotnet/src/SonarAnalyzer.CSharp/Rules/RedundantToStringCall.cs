@@ -96,10 +96,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 c =>
                 {
                     var invocation = (InvocationExpressionSyntax)c.Node;
-
-                    Location location;
-                    IMethodSymbol methodSymbol;
-                    if (!IsArgumentlessToStringCallNotOnBaseExpression(invocation, c.SemanticModel, out location, out methodSymbol))
+                    if (!IsArgumentlessToStringCallNotOnBaseExpression(invocation, c.SemanticModel, out var location, out var methodSymbol))
                     {
                         return;
                     }
@@ -110,8 +107,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    ITypeSymbol subExpressionType;
-                    if (!TryGetExpressionTypeOfOwner(invocation, c.SemanticModel, out subExpressionType) ||
+                    if (!TryGetExpressionTypeOfOwner(invocation, c.SemanticModel, out var subExpressionType) ||
                         subExpressionType.IsValueType)
                     {
                         return;
@@ -126,8 +122,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
 
                     var parameterLookup = new MethodParameterLookup(stringFormatInvocation, c.SemanticModel);
-                    IParameterSymbol argParameter;
-                    if (parameterLookup.TryGetParameterSymbol(stringFormatArgument, out argParameter) &&
+                    if (parameterLookup.TryGetParameterSymbol(stringFormatArgument, out var argParameter) &&
                         argParameter.Name.StartsWith("arg", StringComparison.Ordinal))
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, location, MessageCompiler));
@@ -155,9 +150,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void CheckExpressionForRemovableToStringCall(SyntaxNodeAnalysisContext context,
             ExpressionSyntax expressionWithToStringCall, ExpressionSyntax otherOperandOfAddition, int checkedSideIndex)
         {
-            Location location;
-            IMethodSymbol methodSymbol;
-            if (!IsArgumentlessToStringCallNotOnBaseExpression(expressionWithToStringCall, context.SemanticModel, out location, out methodSymbol) ||
+            if (!IsArgumentlessToStringCallNotOnBaseExpression(expressionWithToStringCall, context.SemanticModel, out var location, out var methodSymbol) ||
                 methodSymbol.IsInType(KnownType.System_String))
             {
                 return;
@@ -169,8 +162,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            ITypeSymbol subExpressionType;
-            if (!TryGetExpressionTypeOfOwner((InvocationExpressionSyntax)expressionWithToStringCall, context.SemanticModel, out subExpressionType) ||
+            if (!TryGetExpressionTypeOfOwner((InvocationExpressionSyntax)expressionWithToStringCall, context.SemanticModel, out var subExpressionType) ||
                 subExpressionType.IsValueType)
             {
                 return;

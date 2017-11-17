@@ -30,7 +30,7 @@ namespace SonarAnalyzer.SymbolicExecution
         protected ExplodedGraphCheck(AbstractExplodedGraph explodedGraph)
         {
             this.explodedGraph = explodedGraph;
-            this.semanticModel = explodedGraph.SemanticModel;
+            semanticModel = explodedGraph.SemanticModel;
         }
 
         public virtual ProgramState PreProcessInstruction(ProgramPoint programPoint, ProgramState programState)

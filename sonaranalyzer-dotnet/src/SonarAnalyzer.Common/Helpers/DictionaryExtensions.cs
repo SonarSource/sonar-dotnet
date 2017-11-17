@@ -32,8 +32,7 @@ namespace SonarAnalyzer.Helpers
         public static TValue GetValueOrDefault<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key,
             TValue defaultValue)
         {
-            TValue result;
-            if (dictionary.TryGetValue(key, out result))
+            if (dictionary.TryGetValue(key, out var result))
             {
                 return result;
             }

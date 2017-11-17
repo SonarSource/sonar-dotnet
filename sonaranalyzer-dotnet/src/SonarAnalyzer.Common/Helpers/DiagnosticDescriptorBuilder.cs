@@ -100,8 +100,7 @@ namespace SonarAnalyzer.Helpers
 
         private static Severity ParseSeverity(string severity)
         {
-            Severity result;
-            if (Enum.TryParse(severity, out result))
+            if (Enum.TryParse(severity, out Severity result))
             {
                 return result;
             }
@@ -121,12 +120,15 @@ namespace SonarAnalyzer.Helpers
             {
                 case Severity.Info:
                     return ideVisibility == IdeVisibility.Hidden ? DiagnosticSeverity.Hidden : DiagnosticSeverity.Info;
+
                 case Severity.Minor:
                     return ideVisibility == IdeVisibility.Hidden ? DiagnosticSeverity.Hidden : DiagnosticSeverity.Warning;
+
                 case Severity.Major:
                 case Severity.Critical:
                 case Severity.Blocker:
                     return DiagnosticSeverity.Warning;
+
                 default:
                     throw new NotSupportedException();
             }

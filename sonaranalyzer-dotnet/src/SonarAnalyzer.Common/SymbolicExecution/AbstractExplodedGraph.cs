@@ -24,8 +24,8 @@ using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Helpers;
-using SonarAnalyzer.SymbolicExecution.ControlFlowGraph;
 using SonarAnalyzer.SymbolicExecution.Constraints;
+using SonarAnalyzer.SymbolicExecution.ControlFlowGraph;
 using SonarAnalyzer.SymbolicExecution.LiveVariableAnalysis;
 
 namespace SonarAnalyzer.SymbolicExecution
@@ -52,11 +52,17 @@ namespace SonarAnalyzer.SymbolicExecution
         internal SemanticModel SemanticModel { get; }
 
         public event EventHandler ExplorationEnded;
+
         public event EventHandler MaxStepCountReached;
+
         public event EventHandler MaxInternalStateCountReached;
+
         public event EventHandler<InstructionProcessedEventArgs> InstructionProcessed;
+
         public event EventHandler<VisitCountExceedLimitEventArgs> ProgramPointVisitCountExceedLimit;
+
         public event EventHandler ExitBlockReached;
+
         public event EventHandler<ConditionEvaluatedEventArgs> ConditionEvaluated;
 
         protected AbstractExplodedGraph(IControlFlowGraph cfg, ISymbol declaration, SemanticModel semanticModel, AbstractLiveVariableAnalysis lva)
@@ -105,30 +111,26 @@ namespace SonarAnalyzer.SymbolicExecution
                         continue;
                     }
 
-                    var binaryBranchBlock = programPoint.Block as BinaryBranchBlock;
-                    if (binaryBranchBlock != null)
+                    if (programPoint.Block is BinaryBranchBlock binaryBranchBlock)
                     {
                         VisitBinaryBranch(binaryBranchBlock, node);
                         continue;
                     }
 
-                    var singleSuccessorBinaryBranchBlock = programPoint.Block as BinaryBranchingSimpleBlock;
-                    if (singleSuccessorBinaryBranchBlock != null)
+                    if (programPoint.Block is BinaryBranchingSimpleBlock singleSuccessorBinaryBranchBlock)
                     {
                         // Right operand of logical && and ||
                         VisitSingleSuccessorBinaryBranch(singleSuccessorBinaryBranchBlock, node);
                         continue;
                     }
 
-                    var simpleBlock = programPoint.Block as SimpleBlock;
-                    if (simpleBlock != null)
+                    if (programPoint.Block is SimpleBlock simpleBlock)
                     {
                         VisitSimpleBlock(simpleBlock, node);
                         continue;
                     }
 
-                    var branchBlock = programPoint.Block as BranchBlock;
-                    if (branchBlock != null)
+                    if (programPoint.Block is BranchBlock branchBlock)
                     {
                         // switch:
                         VisitBranchBlock(branchBlock, node);
@@ -210,7 +212,7 @@ namespace SonarAnalyzer.SymbolicExecution
             });
         }
 
-        #endregion
+        #endregion OnEvent*
 
         #region Visit*
 
@@ -238,8 +240,7 @@ namespace SonarAnalyzer.SymbolicExecution
 
         protected virtual void VisitSingleSuccessorBinaryBranch(BinaryBranchingSimpleBlock block, ExplodedGraphNode node)
         {
-            SymbolicValue sv;
-            var programState = node.ProgramState.PopValue(out sv);
+            var programState = node.ProgramState.PopValue(out var sv);
 
             foreach (var newProgramState in sv.TrySetConstraint(BoolConstraint.True, programState))
             {
@@ -260,8 +261,7 @@ namespace SonarAnalyzer.SymbolicExecution
         {
             var newProgramState = CleanStateAfterBlock(node.ProgramState, block);
 
-            var jumpBlock = block as JumpBlock;
-            if (jumpBlock != null &&
+            if (block is JumpBlock jumpBlock &&
                 IsValueConsumingStatement(jumpBlock.JumpNode))
             {
                 newProgramState = newProgramState.PopValue();
@@ -321,7 +321,7 @@ namespace SonarAnalyzer.SymbolicExecution
                     .Contains(field.ContainingType));
         }
 
-        #endregion
+        #endregion Visit*
 
         #region Enqueue exploded graph node
 
@@ -376,7 +376,7 @@ namespace SonarAnalyzer.SymbolicExecution
             }
         }
 
-        #endregion
+        #endregion Enqueue exploded graph node
 
         protected ProgramState SetNewSymbolicValueIfTracked(ISymbol symbol, SymbolicValue symbolicValue, ProgramState programState)
         {

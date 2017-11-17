@@ -51,8 +51,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    Location locationToReportOn;
-                    if (HasIsNullReferenceExceptionFilter(catchClause.Filter, c.SemanticModel, out locationToReportOn))
+                    if (HasIsNullReferenceExceptionFilter(catchClause.Filter, c.SemanticModel, out var locationToReportOn))
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, locationToReportOn));
                     }

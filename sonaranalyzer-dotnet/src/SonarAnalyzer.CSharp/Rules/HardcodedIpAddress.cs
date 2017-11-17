@@ -61,8 +61,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    IPAddress address;
-                    if (!IPAddress.TryParse(text, out address))
+                    if (!IPAddress.TryParse(text, out var address))
                     {
                         return;
                     }
@@ -73,7 +72,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    SyntaxNode ancestorOrSelf = stringLiteral.FirstAncestorOrSelf<SyntaxNode>(IsCheckedType);
+                    var ancestorOrSelf = stringLiteral.FirstAncestorOrSelf<SyntaxNode>(IsCheckedType);
                     var ancestorString = ancestorOrSelf?.ToString().ToUpperInvariant();
                     if (ancestorString != null && SkippedWords.Any(s => ancestorString.Contains(s)))
                     {

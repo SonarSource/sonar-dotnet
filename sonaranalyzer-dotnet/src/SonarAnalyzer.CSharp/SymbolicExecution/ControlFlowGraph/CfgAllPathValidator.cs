@@ -60,8 +60,14 @@ namespace SonarAnalyzer.SymbolicExecution.ControlFlowGraph
                 .All(b => IsBlockValidWithSuccessors(b));
         }
 
-        protected virtual bool IsBlockValid(Block block) { return false; }
+        protected virtual bool IsBlockValid(Block block)
+        {
+            return false;
+        }
 
-        protected virtual bool IsBlockInvalid(Block block) { return false; }
+        protected virtual bool IsBlockInvalid(Block block)
+        {
+            return false;
+        }
     }
 }

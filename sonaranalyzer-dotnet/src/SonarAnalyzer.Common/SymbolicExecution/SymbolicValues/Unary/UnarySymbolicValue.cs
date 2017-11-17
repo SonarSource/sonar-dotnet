@@ -26,7 +26,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
 
         public UnarySymbolicValue(SymbolicValue operand)
         {
-            this.Operand = operand;
+            Operand = operand;
         }
     }
 }

@@ -170,7 +170,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 var arguments = usingExpression.DescendantNodes()
                     .OfType<ObjectCreationExpressionSyntax>()
-                    .Where(this.IsStreamDisposingType)
+                    .Where(IsStreamDisposingType)
                     .Select(FirstArgumentOrDefault)
                     .WhereNotNull();
 

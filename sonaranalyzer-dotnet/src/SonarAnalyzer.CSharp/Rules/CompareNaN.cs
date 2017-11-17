@@ -48,8 +48,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     var binaryExpressionSyntax = (BinaryExpressionSyntax)c.Node;
 
-                    KnownType floatingPointType;
-                    if (TryGetFloatingPointType(binaryExpressionSyntax.Left, c.SemanticModel, out floatingPointType) ||
+                    if (TryGetFloatingPointType(binaryExpressionSyntax.Left, c.SemanticModel, out var floatingPointType) ||
                         TryGetFloatingPointType(binaryExpressionSyntax.Right, c.SemanticModel, out floatingPointType))
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, binaryExpressionSyntax.GetLocation(), floatingPointType.TypeName));

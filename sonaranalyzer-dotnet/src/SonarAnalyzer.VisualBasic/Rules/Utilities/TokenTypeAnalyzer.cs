@@ -18,12 +18,12 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
-using System.Collections.Generic;
-using SonarAnalyzer.Helpers;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.VisualBasic;
+using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules.VisualBasic
 {
@@ -87,7 +87,6 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 SyntaxKind.CharacterLiteralToken,
                 SyntaxKind.InterpolatedStringTextToken,
                 SyntaxKind.EndOfInterpolatedStringToken);
-
 
             private static readonly ISet<SyntaxKind> NumericKinds = ImmutableHashSet.Create(
                 SyntaxKind.DecimalLiteralToken,

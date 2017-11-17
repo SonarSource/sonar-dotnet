@@ -54,8 +54,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    AttributeData attribute;
-                    if (!TryGetOperationContract(methodSymbol, out attribute))
+                    if (!TryGetOperationContract(methodSymbol, out var attribute))
                     {
                         return;
                     }

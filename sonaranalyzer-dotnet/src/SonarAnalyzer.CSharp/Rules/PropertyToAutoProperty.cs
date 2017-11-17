@@ -66,11 +66,8 @@ namespace SonarAnalyzer.Rules.CSharp
                     {
                         return;
                     }
-
-                    IFieldSymbol getterField;
-                    IFieldSymbol setterField;
-                    if (TryGetFieldFromGetter(getter, c.SemanticModel, out getterField) &&
-                        TryGetFieldFromSetter(setter, c.SemanticModel, out setterField) &&
+                    if (TryGetFieldFromGetter(getter, c.SemanticModel, out var getterField) &&
+                        TryGetFieldFromSetter(setter, c.SemanticModel, out var setterField) &&
                         getterField.Equals(setterField) &&
                         !getterField.GetAttributes().Any() &&
                         getterField.IsStatic == propertySymbol.IsStatic &&

@@ -28,12 +28,7 @@ namespace SonarAnalyzer.SymbolicExecution.ControlFlowGraph
         public LockBlock(LockStatementSyntax lockNode, Block successor)
             : base(successor)
         {
-            if (lockNode == null)
-            {
-                throw new ArgumentNullException(nameof(lockNode));
-            }
-
-            LockNode = lockNode;
+            LockNode = lockNode ?? throw new ArgumentNullException(nameof(lockNode));
         }
 
         public LockStatementSyntax LockNode { get; }

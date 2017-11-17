@@ -179,22 +179,19 @@ namespace SonarAnalyzer.Rules.CSharp
                 yield return model.GetSymbolInfo(parameter.Type).Symbol as ITypeSymbol;
             }
 
-            var variableDeclaration = node as VariableDeclarationSyntax;
-            if (variableDeclaration != null)
+            if (node is VariableDeclarationSyntax variableDeclaration)
             {
                 yield return model.GetSymbolInfo(variableDeclaration.Type).Symbol as ITypeSymbol;
             }
 
-            var objectCreation = node as ObjectCreationExpressionSyntax;
-            if (objectCreation != null)
+            if (node is ObjectCreationExpressionSyntax objectCreation)
             {
                 var objectCreationTypeInfo = model.GetTypeInfo(objectCreation);
                 yield return objectCreationTypeInfo.Type;
                 yield return objectCreationTypeInfo.ConvertedType;
             }
 
-            var identifierName = node as IdentifierNameSyntax;
-            if (identifierName != null)
+            if (node is IdentifierNameSyntax identifierName)
             {
                 yield return model.GetSymbolInfo(identifierName).Symbol as ITypeSymbol;
             }

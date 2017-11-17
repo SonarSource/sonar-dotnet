@@ -54,9 +54,8 @@ namespace NS
         [TestCategory("Symbolic execution")]
         public void ExplodedGraph_SequentialInput()
         {
-            string testInput = "var a = true; var b = false; b = !b; a = (b);";
-            SemanticModel semanticModel;
-            var method = ControlFlowGraphTest.CompileWithMethodBody(string.Format(TestInput, testInput), "Bar", out semanticModel);
+            var testInput = "var a = true; var b = false; b = !b; a = (b);";
+            var method = ControlFlowGraphTest.CompileWithMethodBody(string.Format(TestInput, testInput), "Bar", out var semanticModel);
             var methodSymbol = semanticModel.GetDeclaredSymbol(method);
             var varDeclarators = method.DescendantNodes().OfType<VariableDeclaratorSyntax>();
             var aSymbol = semanticModel.GetDeclaredSymbol(varDeclarators.First(d => d.Identifier.ToString() == "a"));
@@ -108,9 +107,8 @@ namespace NS
         [TestCategory("Symbolic execution")]
         public void ExplodedGraph_SequentialInput_OutParameter()
         {
-            string testInput = "outParameter = true;";
-            SemanticModel semanticModel;
-            var method = ControlFlowGraphTest.CompileWithMethodBody(string.Format(TestInput, testInput), "Bar", out semanticModel);
+            var testInput = "outParameter = true;";
+            var method = ControlFlowGraphTest.CompileWithMethodBody(string.Format(TestInput, testInput), "Bar", out var semanticModel);
             var methodSymbol = semanticModel.GetDeclaredSymbol(method);
             var parameters = method.DescendantNodes().OfType<ParameterSyntax>();
             var outParameterSymbol = semanticModel.GetDeclaredSymbol(parameters.First(d => d.Identifier.ToString() == "outParameter"));
@@ -149,13 +147,12 @@ namespace NS
         public void ExplodedGraph_SequentialInput_Max()
         {
             var inputBuilder = new StringBuilder();
-            for (int i = 0; i < CSharpExplodedGraph.MaxStepCount / 2 + 1; i++)
+            for (var i = 0; i < CSharpExplodedGraph.MaxStepCount / 2 + 1; i++)
             {
                 inputBuilder.AppendLine($"var x{i} = true;");
             }
-            string testInput = inputBuilder.ToString();
-            SemanticModel semanticModel;
-            var method = ControlFlowGraphTest.CompileWithMethodBody(string.Format(TestInput, testInput), "Bar", out semanticModel);
+            var testInput = inputBuilder.ToString();
+            var method = ControlFlowGraphTest.CompileWithMethodBody(string.Format(TestInput, testInput), "Bar", out var semanticModel);
             var methodSymbol = semanticModel.GetDeclaredSymbol(method);
 
             var cfg = CSharpControlFlowGraph.Create(method.Body, semanticModel);
@@ -181,9 +178,8 @@ namespace NS
         [TestCategory("Symbolic execution")]
         public void ExplodedGraph_SingleBranchVisited_If()
         {
-            string testInput = "var a = false; bool b; if (a) { b = true; } else { b = false; } a = b;";
-            SemanticModel semanticModel;
-            var method = ControlFlowGraphTest.CompileWithMethodBody(string.Format(TestInput, testInput), "Bar", out semanticModel);
+            var testInput = "var a = false; bool b; if (a) { b = true; } else { b = false; } a = b;";
+            var method = ControlFlowGraphTest.CompileWithMethodBody(string.Format(TestInput, testInput), "Bar", out var semanticModel);
             var methodSymbol = semanticModel.GetDeclaredSymbol(method);
             var varDeclarators = method.DescendantNodes().OfType<VariableDeclaratorSyntax>();
             var aSymbol = semanticModel.GetDeclaredSymbol(varDeclarators.First(d => d.Identifier.ToString() == "a"));
@@ -238,9 +234,8 @@ namespace NS
         [TestCategory("Symbolic execution")]
         public void ExplodedGraph_SingleBranchVisited_And()
         {
-            string testInput = "var a = false; if (a && !a) { a = true; }";
-            SemanticModel semanticModel;
-            var method = ControlFlowGraphTest.CompileWithMethodBody(string.Format(TestInput, testInput), "Bar", out semanticModel);
+            var testInput = "var a = false; if (a && !a) { a = true; }";
+            var method = ControlFlowGraphTest.CompileWithMethodBody(string.Format(TestInput, testInput), "Bar", out var semanticModel);
             var methodSymbol = semanticModel.GetDeclaredSymbol(method);
             var varDeclarators = method.DescendantNodes().OfType<VariableDeclaratorSyntax>();
             var aSymbol = semanticModel.GetDeclaredSymbol(varDeclarators.First(d => d.Identifier.ToString() == "a"));
@@ -281,9 +276,8 @@ namespace NS
         [TestCategory("Symbolic execution")]
         public void ExplodedGraph_BothBranchesVisited()
         {
-            string testInput = "var a = false; bool b; if (inParameter) { b = inParameter; } else { b = !inParameter; } a = b;";
-            SemanticModel semanticModel;
-            var method = ControlFlowGraphTest.CompileWithMethodBody(string.Format(TestInput, testInput), "Bar", out semanticModel);
+            var testInput = "var a = false; bool b; if (inParameter) { b = inParameter; } else { b = !inParameter; } a = b;";
+            var method = ControlFlowGraphTest.CompileWithMethodBody(string.Format(TestInput, testInput), "Bar", out var semanticModel);
             var methodSymbol = semanticModel.GetDeclaredSymbol(method);
 
             var varDeclarators = method.DescendantNodes().OfType<VariableDeclaratorSyntax>();
@@ -364,9 +358,8 @@ namespace NS
         [TestCategory("Symbolic execution")]
         public void ExplodedGraph_BothBranchesVisited_StateMerge()
         {
-            string testInput = "var a = !true; bool b; if (inParameter) { b = false; } else { b = false; } a = b;";
-            SemanticModel semanticModel;
-            var method = ControlFlowGraphTest.CompileWithMethodBody(string.Format(TestInput, testInput), "Bar", out semanticModel);
+            var testInput = "var a = !true; bool b; if (inParameter) { b = false; } else { b = false; } a = b;";
+            var method = ControlFlowGraphTest.CompileWithMethodBody(string.Format(TestInput, testInput), "Bar", out var semanticModel);
             var methodSymbol = semanticModel.GetDeclaredSymbol(method);
 
             var varDeclarators = method.DescendantNodes().OfType<VariableDeclaratorSyntax>();
@@ -407,9 +400,8 @@ namespace NS
         [TestCategory("Symbolic execution")]
         public void ExplodedGraph_BothBranchesVisited_NonCondition()
         {
-            string testInput = "var str = this?.ToString();";
-            SemanticModel semanticModel;
-            var method = ControlFlowGraphTest.CompileWithMethodBody(string.Format(TestInput, testInput), "Bar", out semanticModel);
+            var testInput = "var str = this?.ToString();";
+            var method = ControlFlowGraphTest.CompileWithMethodBody(string.Format(TestInput, testInput), "Bar", out var semanticModel);
             var methodSymbol = semanticModel.GetDeclaredSymbol(method);
 
             var cfg = CSharpControlFlowGraph.Create(method.Body, semanticModel);
@@ -441,9 +433,8 @@ namespace NS
         [TestCategory("Symbolic execution")]
         public void ExplodedGraph_AllBranchesVisited()
         {
-            string testInput = "int i = 1; switch (i) { case 1: default: cw1(); break; case 2: cw2(); break; }";
-            SemanticModel semanticModel;
-            var method = ControlFlowGraphTest.CompileWithMethodBody(string.Format(TestInput, testInput), "Bar", out semanticModel);
+            var testInput = "int i = 1; switch (i) { case 1: default: cw1(); break; case 2: cw2(); break; }";
+            var method = ControlFlowGraphTest.CompileWithMethodBody(string.Format(TestInput, testInput), "Bar", out var semanticModel);
             var methodSymbol = semanticModel.GetDeclaredSymbol(method);
 
             var cfg = CSharpControlFlowGraph.Create(method.Body, semanticModel);
@@ -486,9 +477,8 @@ namespace NS
         [TestCategory("Symbolic execution")]
         public void ExplodedGraph_NonDecisionMakingAssignments()
         {
-            string testInput = "var a = true; a |= false; var b = 42; b++; ++b;";
-            SemanticModel semanticModel;
-            var method = ControlFlowGraphTest.CompileWithMethodBody(string.Format(TestInput, testInput), "Bar", out semanticModel);
+            var testInput = "var a = true; a |= false; var b = 42; b++; ++b;";
+            var method = ControlFlowGraphTest.CompileWithMethodBody(string.Format(TestInput, testInput), "Bar", out var semanticModel);
             var methodSymbol = semanticModel.GetDeclaredSymbol(method);
             var varDeclarators = method.DescendantNodes().OfType<VariableDeclaratorSyntax>();
             var aSymbol = semanticModel.GetDeclaredSymbol(varDeclarators.First(d => d.Identifier.ToString() == "a"));
@@ -551,9 +541,8 @@ namespace NS
         [TestCategory("Symbolic execution")]
         public void ExplodedGraph_NonLocalNorFieldSymbolBranching()
         {
-            string testInput = "if (Property) { cw(); }";
-            SemanticModel semanticModel;
-            var method = ControlFlowGraphTest.CompileWithMethodBody(string.Format(TestInput, testInput), "Bar", out semanticModel);
+            var testInput = "if (Property) { cw(); }";
+            var method = ControlFlowGraphTest.CompileWithMethodBody(string.Format(TestInput, testInput), "Bar", out var semanticModel);
             var methodSymbol = semanticModel.GetDeclaredSymbol(method);
             var propertySymbol = semanticModel.GetSymbolInfo(
                 method.DescendantNodes().OfType<IdentifierNameSyntax>().First(d => d.Identifier.ToString() == "Property")).Symbol;
@@ -592,9 +581,8 @@ namespace NS
         [TestCategory("Symbolic execution")]
         public void ExplodedGraph_LoopExploration()
         {
-            string testInput = "var i = 0; while (i < 1) { i = i + 1; }";
-            SemanticModel semanticModel;
-            var method = ControlFlowGraphTest.CompileWithMethodBody(string.Format(TestInput, testInput), "Bar", out semanticModel);
+            var testInput = "var i = 0; while (i < 1) { i = i + 1; }";
+            var method = ControlFlowGraphTest.CompileWithMethodBody(string.Format(TestInput, testInput), "Bar", out var semanticModel);
             var methodSymbol = semanticModel.GetDeclaredSymbol(method);
 
             var cfg = CSharpControlFlowGraph.Create(method.Body, semanticModel);
@@ -659,8 +647,7 @@ namespace TesteAnalyzer
     }
 }
 ";
-            SemanticModel semanticModel;
-            var tree = ControlFlowGraphTest.Compile(testInput, out semanticModel);
+            var tree = ControlFlowGraphTest.Compile(testInput, out var semanticModel);
             var method = tree.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().First(m => m.Identifier.ValueText == "Main");
             var methodSymbol = semanticModel.GetDeclaredSymbol(method);
 

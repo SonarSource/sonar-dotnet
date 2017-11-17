@@ -55,16 +55,14 @@ namespace SonarAnalyzer.Helpers
             Func<object, T> converter, Func<int, T, T> multiplierCalculator, out T value)
             where T : struct
         {
-            ExpressionSyntax internalExpression;
-            var multiplier = GetMultiplier(expression, out internalExpression);
+            var multiplier = GetMultiplier(expression, out var internalExpression);
             if (multiplier == null)
             {
                 value = default(T);
                 return false;
             }
 
-            var literalExpression = internalExpression as LiteralExpressionSyntax;
-            if (literalExpression != null &&
+            if (internalExpression is LiteralExpressionSyntax literalExpression &&
                 TryConvertWith(literalExpression.Token.Value, converter, out value))
             {
                 value = multiplierCalculator(multiplier.Value, value);
@@ -113,6 +111,7 @@ namespace SonarAnalyzer.Helpers
                 (multiplier, v) => multiplier * v,
                 out value);
         }
+
         public static bool TryGetConstantDoubleValue(ExpressionSyntax expression, out double value)
         {
             return TryGetConstantValue(

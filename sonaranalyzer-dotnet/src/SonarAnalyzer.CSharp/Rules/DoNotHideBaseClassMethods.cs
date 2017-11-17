@@ -140,8 +140,8 @@ namespace SonarAnalyzer.Rules.CSharp
                     return Match.Different;
                 }
 
-                Match signatureMatch = Match.Identical;
-                for (int i = 0; i < methodParams.Length; i++)
+                var signatureMatch = Match.Identical;
+                for (var i = 0; i < methodParams.Length; i++)
                 {
                     var match = ComputeParameterMatch(baseMethodParams[i], methodParams[i]);
 

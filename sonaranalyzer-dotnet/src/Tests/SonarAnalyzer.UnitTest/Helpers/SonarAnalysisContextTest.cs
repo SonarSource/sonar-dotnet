@@ -94,9 +94,9 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [TestMethod]
         public void SonarAnalysis_IssuesAreReportedByDefault()
         {
-            DiagnosticDescriptor dummyDescriptor = new DiagnosticDescriptor(
+            var dummyDescriptor = new DiagnosticDescriptor(
                 "x1", "title", "format", "category", DiagnosticSeverity.Error, false);
-            Diagnostic dummyDiag = Diagnostic.Create(dummyDescriptor, Location.None);
+            var dummyDiag = Diagnostic.Create(dummyDescriptor, Location.None);
 
             var shouldIssueBeReported = SonarAnalysisContext.ShouldDiagnosticBeReported;
             shouldIssueBeReported.Should().NotBeNull();

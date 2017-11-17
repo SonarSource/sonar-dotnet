@@ -110,8 +110,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return model.GetSymbolInfo(expression).Symbol as IEventSymbol;
             }
 
-            var simpleMemberAccess = expression as MemberAccessExpressionSyntax;
-            if (simpleMemberAccess != null)
+            if (expression is MemberAccessExpressionSyntax simpleMemberAccess)
             {
                 return GetEventSymbol(simpleMemberAccess.Expression, model);
             }

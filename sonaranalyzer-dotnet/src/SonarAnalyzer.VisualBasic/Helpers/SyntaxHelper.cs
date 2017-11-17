@@ -18,11 +18,11 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis.VisualBasic.Syntax;
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.VisualBasic;
-using System.Collections.Generic;
+using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 
 namespace SonarAnalyzer.Helpers.VisualBasic
 {
@@ -68,7 +68,7 @@ namespace SonarAnalyzer.Helpers.VisualBasic
             return index == children.Count - 1 ? null : children[index + 1] as StatementSyntax;
         }
 
-        #endregion
+        #endregion Statement
 
         public static bool IsAnyKind(this SyntaxNode syntaxNode, ICollection<SyntaxKind> collection)
         {

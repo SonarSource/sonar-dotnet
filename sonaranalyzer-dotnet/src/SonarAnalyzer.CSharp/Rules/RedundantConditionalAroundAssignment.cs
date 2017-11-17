@@ -52,11 +52,8 @@ namespace SonarAnalyzer.Rules.CSharp
                     {
                         return;
                     }
-
-                    AssignmentExpressionSyntax assignment;
-                    BinaryExpressionSyntax condition;
-                    if (!TryGetNotEqualsCondition(ifStatement, out condition) ||
-                        !TryGetSingleAssignment(ifStatement, out assignment))
+                    if (!TryGetNotEqualsCondition(ifStatement, out var condition) ||
+                        !TryGetSingleAssignment(ifStatement, out var assignment))
                     {
                         return;
                     }
@@ -87,8 +84,7 @@ namespace SonarAnalyzer.Rules.CSharp
             assignment = null;
 
             var statement = ifStatement.Statement;
-            var block = statement as BlockSyntax;
-            if (block != null &&
+            if (statement is BlockSyntax block &&
                 block.Statements.Count == 1)
             {
                 statement = block.Statements.First();

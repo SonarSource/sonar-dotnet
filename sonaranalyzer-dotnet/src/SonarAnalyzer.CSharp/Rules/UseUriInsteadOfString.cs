@@ -115,7 +115,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
             else
             {
-                foreach (int paramIdx in stringUrlParams)
+                foreach (var paramIdx in stringUrlParams)
                 {
                     context.ReportDiagnosticWhenActive(Diagnostic.Create(rule_S3994,
                         methodDeclaration.ParameterList.Parameters[paramIdx].Type.GetLocation()));
@@ -187,7 +187,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             var set = new HashSet<int>();
 
-            int i = 0;
+            var i = 0;
             foreach (var paramSymbol in methodSymbol.Parameters)
             {
                 if (paramSymbol.Type.Is(KnownType.System_String) &&

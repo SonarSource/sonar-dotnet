@@ -42,8 +42,7 @@ namespace SonarAnalyzer.Rules.Common
                 GeneratedCodeRecognizer,
                 c =>
                 {
-                    Diagnostic diagnostic;
-                    if (TryGetDiagnostic(c.Node, out diagnostic))
+                    if (TryGetDiagnostic(c.Node, out var diagnostic))
                     {
                         c.ReportDiagnosticWhenActive(diagnostic);
                     }

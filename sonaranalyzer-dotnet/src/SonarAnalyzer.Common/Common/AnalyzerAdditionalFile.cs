@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2017 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -27,7 +27,6 @@ namespace SonarAnalyzer.Common
 {
     public sealed class AnalyzerAdditionalFile : AdditionalText
     {
-
         public AnalyzerAdditionalFile(string path)
         {
             Path = path;

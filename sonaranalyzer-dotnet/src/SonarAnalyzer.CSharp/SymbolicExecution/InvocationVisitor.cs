@@ -97,10 +97,8 @@ namespace SonarAnalyzer.SymbolicExecution
 
         private ProgramState HandleStringNullCheckMethod()
         {
-            SymbolicValue arg1;
-
             var newProgramState = programState
-                .PopValue(out arg1)
+                .PopValue(out var arg1)
                 .PopValue();
 
             if (newProgramState.HasConstraint(arg1, ObjectConstraint.Null))
@@ -114,12 +112,9 @@ namespace SonarAnalyzer.SymbolicExecution
 
         private ProgramState HandleStaticEqualsCall()
         {
-            SymbolicValue arg1;
-            SymbolicValue arg2;
-
             var newProgramState = programState
-                .PopValue(out arg1)
-                .PopValue(out arg2)
+                .PopValue(out var arg1)
+                .PopValue(out var arg2)
                 .PopValue();
 
             var equals = new ValueEqualsSymbolicValue(arg1, arg2);
@@ -129,12 +124,9 @@ namespace SonarAnalyzer.SymbolicExecution
 
         private ProgramState HandleReferenceEqualsCall()
         {
-            SymbolicValue arg1;
-            SymbolicValue arg2;
-
             var newProgramState = programState
-                .PopValue(out arg1)
-                .PopValue(out arg2)
+                .PopValue(out var arg1)
+                .PopValue(out var arg2)
                 .PopValue();
 
             return new ReferenceEqualsConstraintHandler(arg1, arg2,
@@ -146,16 +138,13 @@ namespace SonarAnalyzer.SymbolicExecution
 
         private ProgramState HandleInstanceEqualsCall()
         {
-            SymbolicValue arg1;
-            SymbolicValue expression;
-
             var newProgramState = programState
-                .PopValue(out arg1)
-                .PopValue(out expression);
+                .PopValue(out var arg1)
+                .PopValue(out var expression);
 
             var memberAccess = expression as MemberAccessSymbolicValue;
 
-            SymbolicValue arg2 = memberAccess != null
+            var arg2 = memberAccess != null
                 ? memberAccess.MemberExpression
                 : SymbolicValue.This;
 

@@ -57,7 +57,7 @@ namespace SonarAnalyzer.Helpers
             return GetPrecedingIfsInConditionChain(ifStatement).Select(i => i.Condition);
         }
 
-        #endregion
+        #endregion If
 
         #region Switch
 
@@ -73,7 +73,7 @@ namespace SonarAnalyzer.Helpers
             return switchStatement.Sections.Take(currentSectionIndex);
         }
 
-        #endregion
+        #endregion Switch
 
         #region Statement
 
@@ -86,6 +86,6 @@ namespace SonarAnalyzer.Helpers
             return index == 0 ? null : statements[index - 1];
         }
 
-        #endregion
+        #endregion Statement
     }
 }

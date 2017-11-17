@@ -19,10 +19,10 @@
  */
 
 using Microsoft.CodeAnalysis;
-using SonarAnalyzer.Helpers;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
+using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules.VisualBasic
 {
@@ -48,8 +48,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
                 // If this node is on the left side of a member access expression, don't ascend
                 // further or we'll end up binding to something else.
-                var memberAccess = parent as MemberAccessExpressionSyntax;
-                if (memberAccess != null &&
+                if (parent is MemberAccessExpressionSyntax memberAccess &&
                     memberAccess.Expression == node)
                 {
                     return node;
@@ -57,8 +56,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
                 // If this node is on the left side of a qualified name, don't ascend
                 // further or we'll end up binding to something else.
-                var qualifiedName = parent as QualifiedNameSyntax;
-                if (qualifiedName != null &&
+                if (parent is QualifiedNameSyntax qualifiedName &&
                     qualifiedName.Left == node)
                 {
                     return node;
@@ -66,8 +64,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
                 // If this node is the type of an object creation expression, return the
                 // object creation expression.
-                var objectCreation = parent as ObjectCreationExpressionSyntax;
-                if (objectCreation != null &&
+                if (parent is ObjectCreationExpressionSyntax objectCreation &&
                     objectCreation.Type == node)
                 {
                     return parent;

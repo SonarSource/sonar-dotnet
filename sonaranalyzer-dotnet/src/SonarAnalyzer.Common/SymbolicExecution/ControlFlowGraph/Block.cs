@@ -50,7 +50,9 @@ namespace SonarAnalyzer.SymbolicExecution.ControlFlowGraph
             return this;
         }
 
-        internal virtual void ReplaceSuccessors(Dictionary<Block, Block> replacementMapping) { }
+        internal virtual void ReplaceSuccessors(Dictionary<Block, Block> replacementMapping)
+        {
+        }
 
         public ISet<Block> AllSuccessorBlocks => GetAll(this, b => b.SuccessorBlocks);
 

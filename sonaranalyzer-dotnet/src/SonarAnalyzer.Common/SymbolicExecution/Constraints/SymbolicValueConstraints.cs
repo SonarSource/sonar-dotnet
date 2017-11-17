@@ -38,7 +38,7 @@ namespace SonarAnalyzer.SymbolicExecution.Constraints
 
         private SymbolicValueConstraints(SymbolicValueConstraint constraint)
         {
-            SetConstraint(constraint, this.constraints);
+            SetConstraint(constraint, constraints);
             hashCode = ComputeHashcode();
         }
 
@@ -87,37 +87,32 @@ namespace SonarAnalyzer.SymbolicExecution.Constraints
         internal T GetConstraintOrDefault<T>()
             where T : SymbolicValueConstraint
         {
-            SymbolicValueConstraint constraint = null;
-            return constraints.TryGetValue(typeof(T), out constraint)
+            return constraints.TryGetValue(typeof(T), out var constraint)
                 ? (T)constraint
                 : null;
         }
 
         internal SymbolicValueConstraint GetConstraintOrDefault(Type constraintType)
         {
-            SymbolicValueConstraint constraint = null;
-            return constraints.TryGetValue(constraintType, out constraint)
+            return constraints.TryGetValue(constraintType, out var constraint)
                 ? constraint
                 : null;
         }
 
-
         internal bool HasConstraint(SymbolicValueConstraint constraint)
         {
-            SymbolicValueConstraint storedConstraint;
-            return constraints.TryGetValue(constraint.GetType(), out storedConstraint) &&
+            return constraints.TryGetValue(constraint.GetType(), out var storedConstraint) &&
                    storedConstraint == constraint;
         }
 
         internal bool HasConstraint<T>()
         {
-            SymbolicValueConstraint storedConstraint;
-            return constraints.TryGetValue(typeof(T), out storedConstraint);
+            return constraints.TryGetValue(typeof(T), out var storedConstraint);
         }
 
         private int ComputeHashcode()
         {
-            int hash = 17 * constraints.Count;
+            var hash = 17 * constraints.Count;
 
             foreach (var item in constraints)
             {

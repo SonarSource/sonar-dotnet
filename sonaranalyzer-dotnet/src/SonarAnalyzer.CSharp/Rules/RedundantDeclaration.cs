@@ -105,8 +105,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxFactory.SeparatedList(lambda.ParameterList.Parameters.Select(p => SyntaxFactory.Parameter(p.Identifier))));
             var newLambda = lambda.WithParameterList(newParameterList);
 
-            SemanticModel newSemanticModel;
-            newLambda = ChangeSyntaxElement(lambda, newLambda, context.SemanticModel, out newSemanticModel);
+            newLambda = ChangeSyntaxElement(lambda, newLambda, context.SemanticModel, out var newSemanticModel);
             var newSymbol = newSemanticModel.GetSymbolInfo(newLambda).Symbol as IMethodSymbol;
 
             if (newSymbol == null ||
@@ -133,7 +132,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool ParameterTypesDoNotMatch(IMethodSymbol method1, IMethodSymbol method2)
         {
-            for (int i = 0; i < method1.Parameters.Length; i++)
+            for (var i = 0; i < method1.Parameters.Length; i++)
             {
                 if (method1.Parameters[i].Type.ToDisplayString() != method2.Parameters[i].Type.ToDisplayString())
                 {
@@ -448,8 +447,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         ? SyntaxFactory.Argument(objectCreation.ArgumentList.Arguments.First().Expression)
                         : a)));
             var newInvocation = invocation.WithArgumentList(newArgumentList);
-            SemanticModel newSemanticModel;
-            newInvocation = ChangeSyntaxElement(invocation, newInvocation, semanticModel, out newSemanticModel);
+            newInvocation = ChangeSyntaxElement(invocation, newInvocation, semanticModel, out var newSemanticModel);
             var newMethodSymbol = newSemanticModel.GetSymbolInfo(newInvocation).Symbol as IMethodSymbol;
 
             return newMethodSymbol != null &&

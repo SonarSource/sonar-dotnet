@@ -112,8 +112,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool IsInitializedOrFixed(VariableDeclaratorSyntax declarator)
         {
-            var fieldDeclaration = declarator.Parent.Parent as BaseFieldDeclarationSyntax;
-            if (fieldDeclaration != null &&
+            if (declarator.Parent.Parent is BaseFieldDeclarationSyntax fieldDeclaration &&
                 fieldDeclaration.Modifiers.Any(m => m.IsKind(SyntaxKind.FixedKeyword)))
             {
                 return true;
@@ -175,8 +174,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 var memberSymbol = memberUsage.Symbol;
 
                 // Handle "expr.FieldName"
-                var simpleMemberAccess = node.Parent as MemberAccessExpressionSyntax;
-                if (simpleMemberAccess != null &&
+                if (node.Parent is MemberAccessExpressionSyntax simpleMemberAccess &&
                     simpleMemberAccess.Name == node)
                 {
                     node = simpleMemberAccess;
@@ -206,8 +204,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     continue;
                 }
 
-                var assignment = parentNode as AssignmentExpressionSyntax;
-                if (assignment != null)
+                if (parentNode is AssignmentExpressionSyntax assignment)
                 {
                     if (assignment.Left == node)
                     {
@@ -217,8 +214,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     continue;
                 }
 
-                var argument = parentNode as ArgumentSyntax;
-                if (argument != null &&
+                if (parentNode is ArgumentSyntax argument &&
                     !argument.RefOrOutKeyword.IsKind(SyntaxKind.None))
                 {
                     assignedMembers.Add(memberSymbol);
@@ -236,14 +232,12 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool IsValueType(ISymbol symbol)
         {
-            var field = symbol as IFieldSymbol;
-            if (field != null)
+            if (symbol is IFieldSymbol field)
             {
                 return field.Type.IsValueType;
             }
 
-            var property = symbol as IPropertySymbol;
-            if (property != null)
+            if (symbol is IPropertySymbol property)
             {
                 return property.Type.IsValueType;
             }

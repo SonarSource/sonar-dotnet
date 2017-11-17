@@ -19,10 +19,8 @@
  */
 
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Text;
-using System.Reflection;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Text;
 
@@ -52,7 +50,7 @@ namespace SonarAnalyzer.Helpers
             return self.Line + 1;
         }
 
-        #endregion
+        #endregion Line Number
 
         public static string ToSentence(this IEnumerable<string> words,
             bool quoteWords = false,
@@ -65,8 +63,10 @@ namespace SonarAnalyzer.Helpers
             {
                 case 0:
                     return null;
+
                 case 1:
                     return string.Concat(singleQuoteOrBlank, wordCollection.First(), singleQuoteOrBlank);
+
                 default:
                     return new StringBuilder(singleQuoteOrBlank)
                         .Append(string.Join($"{singleQuoteOrBlank}, {singleQuoteOrBlank}",

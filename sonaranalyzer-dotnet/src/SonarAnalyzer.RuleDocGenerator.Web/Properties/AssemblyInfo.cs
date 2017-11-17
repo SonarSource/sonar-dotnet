@@ -24,5 +24,4 @@ using System.Runtime.CompilerServices;
 [assembly: AssemblyTitle("SonarAnalyzer.RuleDocGenerator.Web")]
 [assembly: AssemblyProduct("SonarAnalyzer.RuleDocGenerator.Web")]
 [assembly: AssemblyDescription("")]
-
 [assembly: InternalsVisibleTo("SonarAnalyzer.UnitTest" + Signing.InternalsVisibleToPublicKey)]

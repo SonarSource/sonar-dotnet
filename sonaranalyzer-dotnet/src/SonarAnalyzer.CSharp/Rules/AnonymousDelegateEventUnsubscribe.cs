@@ -48,9 +48,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     var assignment = (AssignmentExpressionSyntax)c.Node;
 
-                    var @event = c.SemanticModel.GetSymbolInfo(assignment.Left).Symbol as IEventSymbol;
 
-                    if (@event != null &&
+                    if (c.SemanticModel.GetSymbolInfo(assignment.Left).Symbol is IEventSymbol @event &&
                         assignment.Right is AnonymousFunctionExpressionSyntax)
                     {
                         var location = Location.Create(c.Node.SyntaxTree,

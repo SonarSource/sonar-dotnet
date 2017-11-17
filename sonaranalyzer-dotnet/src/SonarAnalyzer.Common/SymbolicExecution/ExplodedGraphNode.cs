@@ -40,7 +40,7 @@ namespace SonarAnalyzer.SymbolicExecution
                 return false;
             }
 
-            ExplodedGraphNode n = obj as ExplodedGraphNode;
+            var n = obj as ExplodedGraphNode;
             return Equals(n);
         }
 

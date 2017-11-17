@@ -96,8 +96,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 var memberSymbol = semanticModel.GetDeclaredSymbol(memberDeclaration);
 
-                var methodSymbol = memberSymbol as IMethodSymbol;
-                if (methodSymbol != null)
+                if (memberSymbol is IMethodSymbol methodSymbol)
                 {
                     var methodDeclaration = memberDeclaration as MethodDeclarationSyntax;
                     if (methodDeclaration == null ||
@@ -122,8 +121,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     return null;
                 }
 
-                var propertySymbol = memberSymbol as IPropertySymbol;
-                if (propertySymbol != null)
+                if (memberSymbol is IPropertySymbol propertySymbol)
                 {
                     var hidingProperty = allBaseClassProperties.FirstOrDefault(
                         p => IsDecreasingPropertyAccess(p, propertySymbol, propertySymbol.IsOverride));

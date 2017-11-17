@@ -145,8 +145,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 if (IsHasValueAccess(instruction))
                 {
-                    SymbolicValue nullable;
-                    newProgramState = programState.PopValue(out nullable);
+                    newProgramState = programState.PopValue(out var nullable);
                     newProgramState = newProgramState.PushValue(new HasValueAccessSymbolicValue(nullable));
                     return true;
                 }

@@ -64,14 +64,12 @@ namespace SonarAnalyzer.Metrics.CSharp
 
         protected override bool IsFunction(SyntaxNode node)
         {
-            var property = node as PropertyDeclarationSyntax;
-            if (property != null && property.ExpressionBody != null)
+            if (node is PropertyDeclarationSyntax property && property.ExpressionBody != null)
             {
                 return true;
             }
 
-            var method = node as MethodDeclarationSyntax;
-            if (method != null && method.ExpressionBody != null)
+            if (node is MethodDeclarationSyntax method && method.ExpressionBody != null)
             {
                 return true;
             }
@@ -83,8 +81,7 @@ namespace SonarAnalyzer.Metrics.CSharp
                 return true;
             }
 
-            var accessor = node as AccessorDeclarationSyntax;
-            if (accessor != null)
+            if (node is AccessorDeclarationSyntax accessor)
             {
                 if (accessor.Body != null)
                 {

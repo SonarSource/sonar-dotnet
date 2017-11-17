@@ -108,10 +108,9 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool IsCompliantCoalesceExpression(ExpressionSyntax parentExpression, AssignmentExpressionSyntax assignment)
         {
-            BinaryExpressionSyntax coalesceExpression;
 
             return assignment.IsKind(SyntaxKind.SimpleAssignmentExpression) &&
-                TryGetCoalesceExpressionParent(parentExpression, out coalesceExpression) &&
+                TryGetCoalesceExpressionParent(parentExpression, out var coalesceExpression) &&
                 EquivalenceChecker.AreEquivalent(assignment.Left.RemoveParentheses(), coalesceExpression.Left.RemoveParentheses());
         }
 

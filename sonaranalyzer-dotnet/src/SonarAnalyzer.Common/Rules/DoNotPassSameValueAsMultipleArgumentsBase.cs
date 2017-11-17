@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2017 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -28,6 +28,7 @@ namespace SonarAnalyzer.Rules
     public abstract class DoNotPassSameValueAsMultipleArgumentsBase : SonarDiagnosticAnalyzer
     {
         protected const string DiagnosticId = "S4142";
+
         protected const string MessageFormat =
             "Verify that this is the intended value; it is the same as the {0} argument.";
     }
@@ -68,11 +69,11 @@ namespace SonarAnalyzer.Rules
                         .Select(arg => GetConvertedType(arg, c.SemanticModel))
                         .ToList();
 
-                    for (int i = 1; i < arguments.Count; i++)
+                    for (var i = 1; i < arguments.Count; i++)
                     {
                         var parameterUsage = new HashSet<ISymbol> { argConvertedTypes[i] };
 
-                        for (int j = 0; j < i; j++)
+                        for (var j = 0; j < i; j++)
                         {
                             if (!IsLiteral(arguments[i]) &&
                                 arguments[i].IsEquivalentTo(arguments[j]) &&
@@ -101,10 +102,13 @@ namespace SonarAnalyzer.Rules
             {
                 case 1:
                     return number + "st";
+
                 case 2:
                     return number + "nd";
+
                 case 3:
                     return number + "rd";
+
                 default:
                     return number + "th";
             }

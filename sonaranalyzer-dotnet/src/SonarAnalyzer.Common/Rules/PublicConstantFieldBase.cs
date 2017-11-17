@@ -73,6 +73,7 @@ namespace SonarAnalyzer.Rules.Common
         }
 
         protected abstract IEnumerable<TFieldName> GetVariables(TFieldDeclarationSyntax node);
+
         public abstract TLanguageKindEnum FieldDeclarationKind { get; }
         public abstract string MessageArgument { get; }
 
@@ -80,6 +81,6 @@ namespace SonarAnalyzer.Rules.Common
 
         protected abstract DiagnosticDescriptor Rule { get; }
 
-        public sealed override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
+        public override sealed ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
     }
 }

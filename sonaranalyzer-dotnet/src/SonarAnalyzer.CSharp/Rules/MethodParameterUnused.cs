@@ -132,8 +132,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            IControlFlowGraph cfg;
-            if (!CSharpControlFlowGraph.TryGet(declaration.Body, context.SemanticModel, out cfg))
+            if (!CSharpControlFlowGraph.TryGet(declaration.Body, context.SemanticModel, out var cfg))
             {
                 return;
             }

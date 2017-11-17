@@ -102,8 +102,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static void CheckForDeadStores(CSharpSyntaxNode node, ISymbol declaration, SyntaxNodeAnalysisContext context)
         {
-            IControlFlowGraph cfg;
-            if (!CSharpControlFlowGraph.TryGet(node, context.SemanticModel, out cfg))
+            if (!CSharpControlFlowGraph.TryGet(node, context.SemanticModel, out var cfg))
             {
                 return;
             }

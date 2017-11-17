@@ -74,10 +74,13 @@ namespace SonarAnalyzer.Rules
         }
 
         public abstract ImmutableArray<TLanguageKindEnum> SyntaxKindsOfInterest { get; }
+
         protected abstract IEnumerable<TVariableSyntax> GetVariables(TFieldDeclarationSyntax fieldDeclaration);
+
         protected abstract SyntaxToken GetIdentifier(TVariableSyntax variable);
+
         protected abstract DiagnosticDescriptor Rule { get; }
 
-        public sealed override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
+        public override sealed ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
     }
 }

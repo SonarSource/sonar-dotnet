@@ -48,7 +48,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
             // Assert
             programStates.Should().HaveCount(expectedConstraintsPerProgramState.Count);
 
-            for (int i = 0; i < programStates.Count; i++)
+            for (var i = 0; i < programStates.Count; i++)
             {
                 var programState = programStates[i];
                 var expectedConstraints = expectedConstraintsPerProgramState[i];

@@ -80,8 +80,11 @@ namespace SonarAnalyzer.Rules.Common
         }
 
         protected abstract IEnumerable<TParameterSyntax> GetParameters(TMethodSyntax method);
+
         protected abstract bool IsOptional(TParameterSyntax parameter);
+
         protected abstract Location GetReportLocation(TParameterSyntax parameter);
+
         public abstract ImmutableArray<TLanguageKindEnum> SyntaxKindsOfInterest { get; }
     }
 }

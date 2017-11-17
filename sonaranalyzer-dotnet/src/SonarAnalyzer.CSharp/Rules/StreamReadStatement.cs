@@ -52,8 +52,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var statement = (ExpressionStatementSyntax)c.Node;
                     var expression = statement.Expression;
 
-                    var awaitExpression = expression as AwaitExpressionSyntax;
-                    if (awaitExpression != null)
+                    if (expression is AwaitExpressionSyntax awaitExpression)
                     {
                         expression = awaitExpression.Expression;
                     }

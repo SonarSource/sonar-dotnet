@@ -29,6 +29,7 @@ namespace SonarAnalyzer.Helpers
     public class ParameterLoadingAnalysisContext
     {
         private readonly SonarAnalysisContext context;
+
         private readonly ICollection<Action<CompilationStartAnalysisContext>> compilationStartActions =
             new List<Action<CompilationStartAnalysisContext>>();
 

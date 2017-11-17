@@ -122,8 +122,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     continue;
                 }
 
-                var positional = identifierArgument as PositionalIdentifierArgument;
-                if (positional != null &&
+                if (identifierArgument is PositionalIdentifierArgument positional &&
                     (parameter.IsParams ||
                      !identifierNames.Contains(parameterName) ||
                      identifierName == parameterName))
@@ -131,8 +130,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     continue;
                 }
 
-                var named = identifierArgument as NamedIdentifierArgument;
-                if (named != null &&
+                if (identifierArgument is NamedIdentifierArgument named &&
                     (!identifierNames.Contains(named.DeclaredName) || named.DeclaredName == named.IdentifierName))
                 {
                     continue;
@@ -187,14 +185,12 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static Location GetIdentifierLocation(SyntaxNode syntax)
         {
-            var methodDeclaration = syntax as MethodDeclarationSyntax;
-            if (methodDeclaration != null)
+            if (syntax is MethodDeclarationSyntax methodDeclaration)
             {
                 return methodDeclaration.Identifier.GetLocation();
             }
 
-            var constructorDeclaration = syntax as ConstructorDeclarationSyntax;
-            if (constructorDeclaration != null)
+            if (syntax is ConstructorDeclarationSyntax constructorDeclaration)
             {
                 return constructorDeclaration.Identifier.GetLocation();
             }

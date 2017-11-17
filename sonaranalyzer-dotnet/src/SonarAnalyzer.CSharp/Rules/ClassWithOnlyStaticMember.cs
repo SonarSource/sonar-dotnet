@@ -73,8 +73,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             foreach (var syntaxReference in utilityClass.DeclaringSyntaxReferences)
             {
-                var classDeclarationSyntax = syntaxReference.GetSyntax() as ClassDeclarationSyntax;
-                if (classDeclarationSyntax != null)
+                if (syntaxReference.GetSyntax() is ClassDeclarationSyntax classDeclarationSyntax)
                 {
                     context.ReportDiagnosticIfNonGenerated(
                         Diagnostic.Create(rule, classDeclarationSyntax.Identifier.GetLocation(), reportMessage),
@@ -105,8 +104,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 var syntaxReferences = constructor.DeclaringSyntaxReferences;
                 foreach (var syntaxReference in syntaxReferences)
                 {
-                    var constructorDeclaration = syntaxReference.GetSyntax() as ConstructorDeclarationSyntax;
-                    if (constructorDeclaration != null)
+                    if (syntaxReference.GetSyntax() is ConstructorDeclarationSyntax constructorDeclaration)
                     {
                         context.ReportDiagnosticIfNonGenerated(
                             Diagnostic.Create(rule, constructorDeclaration.Identifier.GetLocation(), reportMessage),

@@ -18,9 +18,9 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02
  */
 
+using System;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
-using System;
 
 namespace SonarAnalyzer.Helpers
 {
@@ -72,7 +72,7 @@ namespace SonarAnalyzer.Helpers
             context.RegisterCodeBlockStartActionInNonGenerated(VisualBasic.GeneratedCodeRecognizer.Instance, action);
         }
 
-        #endregion
+        #endregion Register*ActionInNonGenerated
 
         #region ReportDiagnosticIfNonGenerated
 
@@ -92,6 +92,6 @@ namespace SonarAnalyzer.Helpers
             context.ReportDiagnosticIfNonGenerated(VisualBasic.GeneratedCodeRecognizer.Instance, diagnostic, compilation);
         }
 
-        #endregion
+        #endregion ReportDiagnosticIfNonGenerated
     }
 }

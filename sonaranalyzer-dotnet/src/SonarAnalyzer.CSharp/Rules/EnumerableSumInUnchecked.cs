@@ -70,11 +70,10 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool IsSumInsideUnchecked(InvocationExpressionSyntax invocation)
         {
             SyntaxNode current = invocation;
-            SyntaxNode parent = current.Parent;
+            var parent = current.Parent;
             while (parent != null)
             {
-                var tryStatement = parent as TryStatementSyntax;
-                if (tryStatement != null &&
+                if (parent is TryStatementSyntax tryStatement &&
                     tryStatement.Block == current)
                 {
                     return false;

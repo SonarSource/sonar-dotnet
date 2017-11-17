@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2017 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -17,7 +17,6 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-
 
 using System.Collections.Generic;
 using System.Collections.Immutable;
@@ -42,6 +41,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
         protected override DiagnosticDescriptor Rule => rule;
         protected sealed override Helpers.GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.VisualBasic.GeneratedCodeRecognizer.Instance;
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+
         protected override ISet<SyntaxKind> LoopStatements { get; }
             = new HashSet<SyntaxKind>
             {
@@ -61,7 +61,6 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         protected override LoopWalkerBase<StatementSyntax, SyntaxKind> GetWalker(SyntaxNodeAnalysisContext context)
             => new LoopWalker(context, LoopStatements);
-
 
         private class LoopWalker : LoopWalkerBase<StatementSyntax, SyntaxKind>
         {
@@ -136,6 +135,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             }
 
             protected override bool IsAnyKind(SyntaxNode node, ICollection<SyntaxKind> collection) => node.IsAnyKind(collection);
+
             protected override bool IsReturnStatement(SyntaxNode node) => node.IsKind(SyntaxKind.ReturnStatement);
 
             protected override bool TryGetTryAncestorStatements(StatementSyntax node, List<SyntaxNode> ancestors, out IEnumerable<StatementSyntax> tryAncestorStatements)

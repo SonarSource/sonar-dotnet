@@ -47,8 +47,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 c =>
                 {
                     var lessThan = (BinaryExpressionSyntax) c.Node;
-                    int constValue;
-                    if (ExpressionNumericConverter.TryGetConstantIntValue(lessThan.Left, out constValue) &&
+                    if (ExpressionNumericConverter.TryGetConstantIntValue(lessThan.Left, out var constValue) &&
                         constValue == 0 &&
                         IsIndexOfCall(lessThan.Right, c.SemanticModel))
                     {
@@ -62,8 +61,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 c =>
                 {
                     var greaterThan = (BinaryExpressionSyntax)c.Node;
-                    int constValue;
-                    if (ExpressionNumericConverter.TryGetConstantIntValue(greaterThan.Right, out constValue) &&
+                    if (ExpressionNumericConverter.TryGetConstantIntValue(greaterThan.Right, out var constValue) &&
                         constValue == 0 &&
                         IsIndexOfCall(greaterThan.Left, c.SemanticModel))
                     {

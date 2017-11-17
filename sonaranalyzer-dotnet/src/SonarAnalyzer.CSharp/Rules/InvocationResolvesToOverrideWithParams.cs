@@ -114,8 +114,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var allParameterMatches = new List<IParameterSymbol>();
             foreach (var argument in argumentList.Arguments)
             {
-                IParameterSymbol parameter;
-                if (!MethodParameterLookup.TryGetParameterSymbol(argument, argumentList, invokedMethodSymbol, out parameter))
+                if (!MethodParameterLookup.TryGetParameterSymbol(argument, argumentList, invokedMethodSymbol, out var parameter))
                 {
                     return false;
                 }
@@ -141,12 +140,11 @@ namespace SonarAnalyzer.Rules.CSharp
             IMethodSymbol possibleOtherMethod, SemanticModel semanticModel)
         {
             var matchedParameters = new List<IParameterSymbol>();
-            for (int i = 0; i < argumentList.Arguments.Count; i++)
+            for (var i = 0; i < argumentList.Arguments.Count; i++)
             {
                 var argument = argumentList.Arguments[i];
                 var argumentType = argumentTypes[i];
-                IParameterSymbol parameter;
-                if (!MethodParameterLookup.TryGetParameterSymbol(argument, argumentList, possibleOtherMethod, out parameter))
+                if (!MethodParameterLookup.TryGetParameterSymbol(argument, argumentList, possibleOtherMethod, out var parameter))
                 {
                     return false;
                 }

@@ -144,7 +144,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return false;
             }
 
-            foreach (INamedTypeSymbol baseInterface in interfaceType.AllInterfaces)
+            foreach (var baseInterface in interfaceType.AllInterfaces)
             {
                 var canBeVariant = CanTypeParameterBeVariant(
                     typeParameter, variance,
@@ -159,7 +159,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
             }
 
-            foreach (ISymbol member in interfaceType.GetMembers())
+            foreach (var member in interfaceType.GetMembers())
             {
                 bool canBeVariant;
                 switch (member.Kind)
@@ -249,7 +249,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool CheckTypeParameterInParameters(ITypeParameterSymbol typeParameter, VarianceKind variance,
             ImmutableArray<IParameterSymbol> parameters, ISymbol context)
         {
-            foreach (IParameterSymbol param in parameters)
+            foreach (var param in parameters)
             {
                 var canBe = CanTypeParameterBeVariant(
                     typeParameter, variance,
@@ -269,7 +269,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool CheckTypeParameterContraintsInSymbol(ITypeParameterSymbol typeParameter, VarianceKind variance,
             ISymbol context)
         {
-            foreach (ITypeSymbol constraintType in typeParameter.ConstraintTypes)
+            foreach (var constraintType in typeParameter.ConstraintTypes)
             {
                 var canBe = CanTypeParameterBeVariant(
                     typeParameter,
@@ -346,7 +346,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var currentNamedType = namedType;
             while (currentNamedType != null)
             {
-                for (int i = 0; i < currentNamedType.Arity; i++)
+                for (var i = 0; i < currentNamedType.Arity; i++)
                 {
                     var typeParam = currentNamedType.TypeParameters[i];
                     var typeArg = currentNamedType.TypeArguments[i];

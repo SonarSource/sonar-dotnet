@@ -51,8 +51,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var diagnosticSpan = diagnostic.Location.SourceSpan;
             var nodeToRemove = root.FindNode(diagnosticSpan);
 
-            var attributeList = nodeToRemove.Parent as AttributeListSyntax;
-            if (attributeList != null && attributeList.Attributes.Count == 1)
+            if (nodeToRemove.Parent is AttributeListSyntax attributeList && attributeList.Attributes.Count == 1)
             {
                 nodeToRemove = attributeList;
             }

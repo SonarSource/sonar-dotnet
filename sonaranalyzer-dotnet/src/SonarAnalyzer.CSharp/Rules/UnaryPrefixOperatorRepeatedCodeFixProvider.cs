@@ -63,9 +63,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     Title,
                     c =>
                     {
-                        ExpressionSyntax expression;
-                        uint count;
-                        GetExpression(prefix, out expression, out count);
+                        GetExpression(prefix, out var expression, out var count);
 
                         if (count%2 == 1)
                         {

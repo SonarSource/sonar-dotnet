@@ -76,14 +76,12 @@ namespace SonarAnalyzer.Rules
 
         protected SyntaxToken? GetMethodCallIdentifier(InvocationExpressionSyntax invocation)
         {
-            var directMethodCall = invocation.Expression as IdentifierNameSyntax;
-            if (directMethodCall != null)
+            if (invocation.Expression is IdentifierNameSyntax directMethodCall)
             {
                 return directMethodCall.Identifier;
             }
 
-            var memberAccessCall = invocation.Expression as MemberAccessExpressionSyntax;
-            if (memberAccessCall != null)
+            if (invocation.Expression is MemberAccessExpressionSyntax memberAccessCall)
             {
                 return memberAccessCall.Name.Identifier;
             }

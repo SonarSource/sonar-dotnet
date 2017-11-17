@@ -19,16 +19,16 @@
  */
 
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.Diagnostics;
+using Microsoft.CodeAnalysis.Text;
 using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
-using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Helpers.VisualBasic;
-using Microsoft.CodeAnalysis.Text;
-using System.Collections.Immutable;
 
 namespace SonarAnalyzer.Rules.VisualBasic
 {
@@ -38,6 +38,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
     {
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         private static readonly ISet<SyntaxKind> ignoredStatementsInSwitch = new HashSet<SyntaxKind>
@@ -72,7 +73,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                         .Where(l => l.Any())
                         .ToList();
 
-                    for (int i = 1; i < statements.Count; i++)
+                    for (var i = 1; i < statements.Count; i++)
                     {
                         CheckStatementsAt(i, statements, c, "branch");
                     }
@@ -84,7 +85,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 {
                     var select = (SelectBlockSyntax)c.Node;
                     var statements = select.CaseBlocks.Select(b => b.Statements).ToList();
-                    for (int i = 1; i < statements.Count; i++)
+                    for (var i = 1; i < statements.Count; i++)
                     {
                         CheckStatementsAt(i, statements, c, "case");
                     }
@@ -101,7 +102,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 return;
             }
 
-            for (int j = 0; j < currentIndex; j++)
+            for (var j = 0; j < currentIndex; j++)
             {
                 if (EquivalenceChecker.AreEquivalent(currentBlockStatements, statements[j]))
                 {
