@@ -3,7 +3,7 @@ param
 (
     [ValidateSet("14.0", "15.0")]
     [string]
-    $msbuildVersion = "14.0",
+    $msbuildVersion = "15.0",
 
     [Parameter(HelpMessage = "The key of the rule to test, e.g. S1234. If omitted, all rule will be tested.")]
     [ValidatePattern("^S[0-9]+")]
