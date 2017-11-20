@@ -2,19 +2,6 @@
 "issues":  [
 {
 "id":  "S4058",
-"message":  "Change this call to 'message.StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
-"region":  {
-"startLine":  116,
-"startColumn":  42,
-"endLine":  116,
-"endColumn":  105
-}
-}
-},
-{
-"id":  "S4058",
 "message":  "Change this call to 'arg.StartsWith' to an overload that accepts a 'StringComparison' as a parameter.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\CommandLine.cs",

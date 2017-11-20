@@ -51,19 +51,6 @@
 "endColumn":  165
 }
 }
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.DotLiquid\LiquidNancyFileSystem.cs",
-"region":  {
-"startLine":  52,
-"startColumn":  26,
-"endLine":  52,
-"endColumn":  86
-}
-}
 }
 ]
 }

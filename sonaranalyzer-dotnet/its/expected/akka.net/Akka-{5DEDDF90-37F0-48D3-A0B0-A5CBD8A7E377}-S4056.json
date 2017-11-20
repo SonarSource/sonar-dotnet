@@ -97,19 +97,6 @@
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka\Actor\ActorPath.cs",
 "region":  {
-"startLine":  305,
-"startColumn":  18,
-"endLine":  305,
-"endColumn":  81
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorPath.cs",
-"region":  {
 "startLine":  458,
 "startColumn":  24,
 "endLine":  458,
@@ -127,32 +114,6 @@
 "startColumn":  20,
 "endLine":  460,
 "endColumn":  60
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorPath.cs",
-"region":  {
-"startLine":  516,
-"startColumn":  20,
-"endLine":  516,
-"endColumn":  90
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorPath.cs",
-"region":  {
-"startLine":  585,
-"startColumn":  37,
-"endLine":  585,
-"endColumn":  100
 }
 }
 },
@@ -790,45 +751,6 @@
 "startColumn":  68,
 "endLine":  28,
 "endColumn":  94
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\ThreadPoolBuilder.cs",
-"region":  {
-"startLine":  31,
-"startColumn":  20,
-"endLine":  31,
-"endColumn":  125
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\ThreadPoolBuilder.cs",
-"region":  {
-"startLine":  38,
-"startColumn":  20,
-"endLine":  38,
-"endColumn":  89
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\ThreadPoolBuilder.cs",
-"region":  {
-"startLine":  40,
-"startColumn":  19,
-"endLine":  40,
-"endColumn":  88
 }
 }
 },
