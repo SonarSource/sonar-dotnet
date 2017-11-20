@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="S101_Category" xml:space="preserve">
-    <value>Sonar Code Smell</value>
+    <value>Minor Code Smell</value>
   </data>
   <data name="S101_Description" xml:space="preserve">
     <value>Sharing some naming conventions is a key point to make it possible for a team to efficiently collaborate. This rule allows to check that all class names match a provided regular expression.</value>
@@ -145,7 +145,7 @@
     <value>CODE_SMELL</value>
   </data>
   <data name="S103_Category" xml:space="preserve">
-    <value>Sonar Code Smell</value>
+    <value>Major Code Smell</value>
   </data>
   <data name="S103_Description" xml:space="preserve">
     <value>Having to scroll horizontally makes it harder to get a quick overview and understanding of any piece of code.</value>
@@ -172,7 +172,7 @@
     <value>CODE_SMELL</value>
   </data>
   <data name="S104_Category" xml:space="preserve">
-    <value>Sonar Code Smell</value>
+    <value>Major Code Smell</value>
   </data>
   <data name="S104_Description" xml:space="preserve">
     <value>A source file that grows too much tends to aggregate too many responsibilities and inevitably becomes harder to understand and therefore to maintain. Above a specific threshold, it is strongly advised to refactor it into smaller pieces of code which focus on well defined tasks. Those smaller files will not only be easier to understand but also probably easier to test.</value>
@@ -199,7 +199,7 @@
     <value>CODE_SMELL</value>
   </data>
   <data name="S105_Category" xml:space="preserve">
-    <value>Sonar Code Smell</value>
+    <value>Minor Code Smell</value>
   </data>
   <data name="S105_Description" xml:space="preserve">
     <value>Developers should not need to configure the tab width of their text editors in order to be able to read source code.</value>
@@ -226,7 +226,7 @@
     <value>CODE_SMELL</value>
   </data>
   <data name="S1067_Category" xml:space="preserve">
-    <value>Sonar Code Smell</value>
+    <value>Critical Code Smell</value>
   </data>
   <data name="S1067_Description" xml:space="preserve">
     <value>Complex boolean expressions are hard to read and so to maintain.</value>
@@ -253,7 +253,7 @@
     <value>CODE_SMELL</value>
   </data>
   <data name="S1075_Category" xml:space="preserve">
-    <value>Sonar Code Smell</value>
+    <value>Minor Code Smell</value>
   </data>
   <data name="S1075_Description" xml:space="preserve">
     <value>Hard coding a URI makes it difficult to test a program: path literals are not always portable across operating systems, a given absolute path may not exist on a specific test environment, a specified Internet URL may not be available when executing the tests, production environment filesystems usually differ from the development environment, ...etc. For all those reasons, a URI should never be hard coded. Instead, it should be replaced by customizable parameter.</value>
@@ -280,7 +280,7 @@
     <value>CODE_SMELL</value>
   </data>
   <data name="S112_Category" xml:space="preserve">
-    <value>Sonar Code Smell</value>
+    <value>Major Code Smell</value>
   </data>
   <data name="S112_Description" xml:space="preserve">
     <value>Throwing such general exceptions as Exception, SystemException, ApplicationException, IndexOutOfRangeException, NullReferenceException, OutOfMemoryException and ExecutionEngineException prevents calling methods from handling true, system-generated exceptions differently than application-generated errors. </value>
@@ -307,7 +307,7 @@
     <value>CODE_SMELL</value>
   </data>
   <data name="S114_Category" xml:space="preserve">
-    <value>Sonar Code Smell</value>
+    <value>Minor Code Smell</value>
   </data>
   <data name="S114_Description" xml:space="preserve">
     <value>Sharing some naming conventions is a key point to make it possible for a team to efficiently collaborate.</value>
@@ -334,7 +334,7 @@
     <value>CODE_SMELL</value>
   </data>
   <data name="S1147_Category" xml:space="preserve">
-    <value>Sonar Code Smell</value>
+    <value>Blocker Code Smell</value>
   </data>
   <data name="S1147_Description" xml:space="preserve">
     <value>End statements exit the control flow of the program in an unstructured way. This statement stops code execution immediately without executing Dispose or Finalize methods, or executing Finally blocks. Therefore, it should be avoided.</value>
@@ -361,7 +361,7 @@
     <value>CODE_SMELL</value>
   </data>
   <data name="S117_Category" xml:space="preserve">
-    <value>Sonar Code Smell</value>
+    <value>Minor Code Smell</value>
   </data>
   <data name="S117_Description" xml:space="preserve">
     <value>Sharing some naming conventions is a key point to make it possible for a team to efficiently collaborate.This rule checks that all local variables follow a naming convention.</value>
@@ -388,7 +388,7 @@
     <value>CODE_SMELL</value>
   </data>
   <data name="S1197_Category" xml:space="preserve">
-    <value>Sonar Code Smell</value>
+    <value>Minor Code Smell</value>
   </data>
   <data name="S1197_Description" xml:space="preserve">
     <value>Array designators should always be located on the type for better code readability. Otherwise, developers must look both at the type and the variable name to know whether or not a variable is an array.</value>
@@ -415,7 +415,7 @@
     <value>CODE_SMELL</value>
   </data>
   <data name="S122_Category" xml:space="preserve">
-    <value>Sonar Code Smell</value>
+    <value>Major Code Smell</value>
   </data>
   <data name="S122_Description" xml:space="preserve">
     <value>For better readability, do not put more than one statement on a single line.</value>
@@ -442,7 +442,7 @@
     <value>CODE_SMELL</value>
   </data>
   <data name="S1226_Category" xml:space="preserve">
-    <value>Sonar Bug</value>
+    <value>Minor Bug</value>
   </data>
   <data name="S1226_Description" xml:space="preserve">
     <value>While it is technically correct to assign to parameters from within method bodies, doing so before the parameter value is read is likely a bug. Instead, initial values of parameters should be, if not treated as readonly then at least read before reassignment.</value>
@@ -469,7 +469,7 @@
     <value>BUG</value>
   </data>
   <data name="S131_Category" xml:space="preserve">
-    <value>Sonar Code Smell</value>
+    <value>Critical Code Smell</value>
   </data>
   <data name="S131_Description" xml:space="preserve">
     <value>The requirement for a final Case Else clause is defensive programming.</value>
@@ -496,7 +496,7 @@
     <value>CODE_SMELL</value>
   </data>
   <data name="S134_Category" xml:space="preserve">
-    <value>Sonar Code Smell</value>
+    <value>Critical Code Smell</value>
   </data>
   <data name="S134_Description" xml:space="preserve">
     <value>Nested If, Select, For, For Each, While, Do, and Try statements are key ingredients for making what's known as "Spaghetti code".</value>
@@ -523,7 +523,7 @@
     <value>CODE_SMELL</value>
   </data>
   <data name="S139_Category" xml:space="preserve">
-    <value>Sonar Code Smell</value>
+    <value>Minor Code Smell</value>
   </data>
   <data name="S139_Description" xml:space="preserve">
     <value>This rule verifies that single-line comments are not located at the ends of lines of code. The main idea behind this rule is that in order to be really readable, trailing comments would have to be properly written and formatted (correct alignment, no interference with the visual structure of the code, not too long to be visible) but most often, automatic code formatters would not handle this correctly: the code would end up less readable. Comments are far better placed on the previous empty line of code, where they will always be visible and properly formatted.</value>
@@ -550,7 +550,7 @@
     <value>CODE_SMELL</value>
   </data>
   <data name="S1541_Category" xml:space="preserve">
-    <value>Sonar Code Smell</value>
+    <value>Critical Code Smell</value>
   </data>
   <data name="S1541_Description" xml:space="preserve">
     <value>The cyclomatic complexity of a function, procedure or property should not exceed a defined threshold. Complex code can perform poorly and will in any case be difficult to understand and therefore to maintain.</value>
@@ -577,7 +577,7 @@
     <value>CODE_SMELL</value>
   </data>
   <data name="S1542_Category" xml:space="preserve">
-    <value>Sonar Code Smell</value>
+    <value>Major Code Smell</value>
   </data>
   <data name="S1542_Description" xml:space="preserve">
     <value>Shared naming conventions allow teams to collaborate efficiently. This rule checks that all subroutine and function names match a provided regular expression.</value>
@@ -604,7 +604,7 @@
     <value>CODE_SMELL</value>
   </data>
   <data name="S1643_Category" xml:space="preserve">
-    <value>Sonar Code Smell</value>
+    <value>Minor Code Smell</value>
   </data>
   <data name="S1643_Description" xml:space="preserve">
     <value>StringBuilder is more efficient than string concatenation, especially when the operator is repeated over and over as in loops.</value>
@@ -631,7 +631,7 @@
     <value>CODE_SMELL</value>
   </data>
   <data name="S1645_Category" xml:space="preserve">
-    <value>Sonar Code Smell</value>
+    <value>Critical Code Smell</value>
   </data>
   <data name="S1645_Description" xml:space="preserve">
     <value>Consistently using the &amp; operator for string concatenation make the developer intentions clear.</value>
@@ -658,7 +658,7 @@
     <value>CODE_SMELL</value>
   </data>
   <data name="S1654_Category" xml:space="preserve">
-    <value>Sonar Code Smell</value>
+    <value>Major Code Smell</value>
   </data>
   <data name="S1654_Description" xml:space="preserve">
     <value>Sharing some naming conventions is a key point to make it possible for a team to efficiently collaborate.</value>
@@ -685,7 +685,7 @@
     <value>CODE_SMELL</value>
   </data>
   <data name="S1656_Category" xml:space="preserve">
-    <value>Sonar Bug</value>
+    <value>Major Bug</value>
   </data>
   <data name="S1656_Description" xml:space="preserve">
     <value>There is no reason to re-assign a variable to itself. Either this statement is redundant and should be removed, or the re-assignment is a mistake and some other value or variable was intended for the assignment instead.</value>
@@ -712,7 +712,7 @@
     <value>BUG</value>
   </data>
   <data name="S1659_Category" xml:space="preserve">
-    <value>Sonar Code Smell</value>
+    <value>Minor Code Smell</value>
   </data>
   <data name="S1659_Description" xml:space="preserve">
     <value>Declaring multiple variable on one line is difficult to read.</value>
@@ -739,7 +739,7 @@
     <value>CODE_SMELL</value>
   </data>
   <data name="S1751_Category" xml:space="preserve">
-    <value>Sonar Code Smell</value>
+    <value>Major Code Smell</value>
   </data>
   <data name="S1751_Description" xml:space="preserve">
     <value>Having an unconditional break, return, (@)throw or goto in a loop renders it useless; the loop will only execute once and the loop structure itself is simply wasted keystrokes.</value>
@@ -766,7 +766,7 @@
     <value>CODE_SMELL</value>
   </data>
   <data name="S1764_Category" xml:space="preserve">
-    <value>Sonar Bug</value>
+    <value>Major Bug</value>
   </data>
   <data name="S1764_Description" xml:space="preserve">
     <value>Using the same value on either side of a binary operator is almost always a mistake. In the case of logical operators, it is either a copy/paste error and therefore a bug, or it is simply wasted code, and should be simplified. In the case of most binary mathematical operators, having the same value on both sides of an operator yields predictable results, and should be simplified.</value>
@@ -793,7 +793,7 @@
     <value>BUG</value>
   </data>
   <data name="S1862_Category" xml:space="preserve">
-    <value>Sonar Bug</value>
+    <value>Major Bug</value>
   </data>
   <data name="S1862_Description" xml:space="preserve">
     <value>A chain of If/ElseIf statements is evaluated from top to bottom. At most, only one branch will be executed: the first one with a condition that evaluates to True.</value>
@@ -820,7 +820,7 @@
     <value>BUG</value>
   </data>
   <data name="S1871_Category" xml:space="preserve">
-    <value>Sonar Code Smell</value>
+    <value>Major Code Smell</value>
   </data>
   <data name="S1871_Description" xml:space="preserve">
     <value>Having two Cases in the same Select statement or branches in the same If structure with the same implementation is at best duplicate code, and at worst a coding error. If the same logic is truly needed for both instances, then in an If structure they should be combined, or for a Select, one should fall through to the other.</value>
@@ -847,7 +847,7 @@
     <value>CODE_SMELL</value>
   </data>
   <data name="S2178_Category" xml:space="preserve">
-    <value>Sonar Code Smell</value>
+    <value>Blocker Code Smell</value>
   </data>
   <data name="S2178_Description" xml:space="preserve">
     <value>The use of non-short-circuit logic in a boolean context is likely a mistake - one that could cause serious program errors as conditions are evaluated under the wrong circumstances.</value>
@@ -874,7 +874,7 @@
     <value>CODE_SMELL</value>
   </data>
   <data name="S2304_Category" xml:space="preserve">
-    <value>Sonar Code Smell</value>
+    <value>Minor Code Smell</value>
   </data>
   <data name="S2304_Description" xml:space="preserve">
     <value>Shared coding conventions allow teams to collaborate efficiently. This rule checks that all namespace names match a provided regular expression.</value>
@@ -901,7 +901,7 @@
     <value>CODE_SMELL</value>
   </data>
   <data name="S2339_Category" xml:space="preserve">
-    <value>Sonar Code Smell</value>
+    <value>Critical Code Smell</value>
   </data>
   <data name="S2339_Description" xml:space="preserve">
     <value>Constant members are copied at compile time to the call sites, instead of being fetched at runtime.</value>
@@ -928,7 +928,7 @@
     <value>CODE_SMELL</value>
   </data>
   <data name="S2340_Category" xml:space="preserve">
-    <value>Sonar Code Smell</value>
+    <value>Critical Code Smell</value>
   </data>
   <data name="S2340_Description" xml:space="preserve">
     <value>A Do ... Loop without a While or Until condition must be terminated by an unstructured Exit Do statement. It is safer and more readable to use structured loops instead.</value>
@@ -955,7 +955,7 @@
     <value>CODE_SMELL</value>
   </data>
   <data name="S2342_Category" xml:space="preserve">
-    <value>Sonar Code Smell</value>
+    <value>Minor Code Smell</value>
   </data>
   <data name="S2342_Description" xml:space="preserve">
     <value>Shared naming conventions allow teams to collaborate efficiently. This rule checks that all enum names match a provided regular expression.</value>
@@ -982,7 +982,7 @@
     <value>CODE_SMELL</value>
   </data>
   <data name="S2343_Category" xml:space="preserve">
-    <value>Sonar Code Smell</value>
+    <value>Minor Code Smell</value>
   </data>
   <data name="S2343_Description" xml:space="preserve">
     <value>Shared coding conventions allow teams to collaborate efficiently. This rule checks that all enumeration value names match a provided regular expression.</value>
@@ -1009,7 +1009,7 @@
     <value>CODE_SMELL</value>
   </data>
   <data name="S2344_Category" xml:space="preserve">
-    <value>Sonar Code Smell</value>
+    <value>Minor Code Smell</value>
   </data>
   <data name="S2344_Description" xml:space="preserve">
     <value>The information that an enumeration type is actually an enumeration or a set of flags should not be duplicated in its name.</value>
@@ -1036,7 +1036,7 @@
     <value>CODE_SMELL</value>
   </data>
   <data name="S2345_Category" xml:space="preserve">
-    <value>Sonar Bug</value>
+    <value>Minor Bug</value>
   </data>
   <data name="S2345_Description" xml:space="preserve">
     <value>Flags enumerations should not rely on the language to initialize the values of their members. Implicit initialization will set the first member to 0, and increment the value by one for each subsequent member. This implicit behavior does not allow members to be combined using the bitwise or operator in a useful way.</value>
@@ -1063,7 +1063,7 @@
     <value>BUG</value>
   </data>
   <data name="S2346_Category" xml:space="preserve">
-    <value>Sonar Code Smell</value>
+    <value>Critical Code Smell</value>
   </data>
   <data name="S2346_Description" xml:space="preserve">
     <value>Consistent use of "None" in flags enumerations indicates that all flag values are cleared. The value 0 should not be used to indicate any other state, since there is no way to check that the bit 0 is set.</value>
@@ -1090,7 +1090,7 @@
     <value>CODE_SMELL</value>
   </data>
   <data name="S2347_Category" xml:space="preserve">
-    <value>Sonar Code Smell</value>
+    <value>Minor Code Smell</value>
   </data>
   <data name="S2347_Description" xml:space="preserve">
     <value>Shared coding conventions allow teams to collaborate efficiently. This rule checks that all even handler names match a provided regular expression.</value>
@@ -1117,7 +1117,7 @@
     <value>CODE_SMELL</value>
   </data>
   <data name="S2348_Category" xml:space="preserve">
-    <value>Sonar Code Smell</value>
+    <value>Minor Code Smell</value>
   </data>
   <data name="S2348_Description" xml:space="preserve">
     <value>Shared coding conventions allow teams to collaborate efficiently. This rule checks that all even names match a provided regular expression.</value>
@@ -1144,7 +1144,7 @@
     <value>CODE_SMELL</value>
   </data>
   <data name="S2349_Category" xml:space="preserve">
-    <value>Sonar Code Smell</value>
+    <value>Minor Code Smell</value>
   </data>
   <data name="S2349_Description" xml:space="preserve">
     <value>"After" and "Before" prefixes or suffixes should not be used to indicate pre and post events. The concepts of before and after should be given to events using the present and past tense.</value>
@@ -1171,7 +1171,7 @@
     <value>CODE_SMELL</value>
   </data>
   <data name="S2352_Category" xml:space="preserve">
-    <value>Sonar Code Smell</value>
+    <value>Major Code Smell</value>
   </data>
   <data name="S2352_Description" xml:space="preserve">
     <value>Indexed properties are meant to represent access to a logical collection. When multiple parameters are required, this design guideline may be violated, and refactoring the property into a method is preferable.</value>
@@ -1198,7 +1198,7 @@
     <value>CODE_SMELL</value>
   </data>
   <data name="S2353_Category" xml:space="preserve">
-    <value>Sonar Code Smell</value>
+    <value>Minor Code Smell</value>
   </data>
   <data name="S2353_Description" xml:space="preserve">
     <value>In most cases, indexed properties should be named Item for consistency. Exceptions are when there exists a name which is obviously better, for example System.String.Chars(System.Int32).</value>
@@ -1225,7 +1225,7 @@
     <value>CODE_SMELL</value>
   </data>
   <data name="S2354_Category" xml:space="preserve">
-    <value>Sonar Code Smell</value>
+    <value>Minor Code Smell</value>
   </data>
   <data name="S2354_Description" xml:space="preserve">
     <value>To improve the code readability, the explicit line continuation character, _, should not be used. Instead, it is better to break lines after an operator.</value>
@@ -1252,7 +1252,7 @@
     <value>CODE_SMELL</value>
   </data>
   <data name="S2355_Category" xml:space="preserve">
-    <value>Sonar Code Smell</value>
+    <value>Minor Code Smell</value>
   </data>
   <data name="S2355_Description" xml:space="preserve">
     <value>Array literals are more compact than array creation expressions.</value>
@@ -1279,7 +1279,7 @@
     <value>CODE_SMELL</value>
   </data>
   <data name="S2357_Category" xml:space="preserve">
-    <value>Sonar Code Smell</value>
+    <value>Major Code Smell</value>
   </data>
   <data name="S2357_Description" xml:space="preserve">
     <value>Fields should not be part of an API, and therefore should always be private. Indeed, they cannot be added to an interface for instance, and validation cannot be added later on without breaking backward compatibility. Instead, developers should encapsulate their fields into properties. Explicit property getters and setters can be introduced for validation purposes or to smooth the transition to a newer system.</value>
@@ -1306,7 +1306,7 @@
     <value>CODE_SMELL</value>
   </data>
   <data name="S2358_Category" xml:space="preserve">
-    <value>Sonar Code Smell</value>
+    <value>Major Code Smell</value>
   </data>
   <data name="S2358_Description" xml:space="preserve">
     <value>The ... IsNot ... syntax is more compact and more readable than the Not ... Is ... syntax.</value>
@@ -1333,7 +1333,7 @@
     <value>CODE_SMELL</value>
   </data>
   <data name="S2359_Category" xml:space="preserve">
-    <value>Sonar Code Smell</value>
+    <value>Major Code Smell</value>
   </data>
   <data name="S2359_Description" xml:space="preserve">
     <value>Prefer the use of Try ... Catch blocks instead of On Error statements.</value>
@@ -1360,7 +1360,7 @@
     <value>CODE_SMELL</value>
   </data>
   <data name="S2360_Category" xml:space="preserve">
-    <value>Sonar Code Smell</value>
+    <value>Critical Code Smell</value>
   </data>
   <data name="S2360_Description" xml:space="preserve">
     <value>The overloading mechanism should be used in place of optional parameters for several reasons:</value>
@@ -1387,7 +1387,7 @@
     <value>CODE_SMELL</value>
   </data>
   <data name="S2362_Category" xml:space="preserve">
-    <value>Sonar Code Smell</value>
+    <value>Minor Code Smell</value>
   </data>
   <data name="S2362_Description" xml:space="preserve">
     <value>Shared coding conventions allow teams to collaborate efficiently. This rule checks that all Private Const field names comply with the provided regular expression.</value>
@@ -1414,7 +1414,7 @@
     <value>CODE_SMELL</value>
   </data>
   <data name="S2363_Category" xml:space="preserve">
-    <value>Sonar Code Smell</value>
+    <value>Minor Code Smell</value>
   </data>
   <data name="S2363_Description" xml:space="preserve">
     <value>Shared coding conventions allow teams to collaborate efficiently. This rule checks that all Private Shared ReadOnly field names comply with the provided regular expression.</value>
@@ -1441,7 +1441,7 @@
     <value>CODE_SMELL</value>
   </data>
   <data name="S2364_Category" xml:space="preserve">
-    <value>Sonar Code Smell</value>
+    <value>Minor Code Smell</value>
   </data>
   <data name="S2364_Description" xml:space="preserve">
     <value>Shared coding conventions allow teams to collaborate efficiently. This rule checks that all Private field names match the provided regular expression.</value>
@@ -1468,7 +1468,7 @@
     <value>CODE_SMELL</value>
   </data>
   <data name="S2365_Category" xml:space="preserve">
-    <value>Sonar Code Smell</value>
+    <value>Critical Code Smell</value>
   </data>
   <data name="S2365_Description" xml:space="preserve">
     <value>Most developers expect property access to be as efficient as field access. However, if a property returns a copy of an array or collection, it will be much slower than a simple field access, contrary to the caller's likely expectations. Therefore, such properties should be refactored into methods so that callers are not surprised by unexpectedly poor performance.</value>
@@ -1495,7 +1495,7 @@
     <value>CODE_SMELL</value>
   </data>
   <data name="S2366_Category" xml:space="preserve">
-    <value>Sonar Code Smell</value>
+    <value>Minor Code Smell</value>
   </data>
   <data name="S2366_Description" xml:space="preserve">
     <value>Shared coding conventions allow teams to collaborate efficiently. This rule checks that property names match a provided regular expression.</value>
@@ -1522,7 +1522,7 @@
     <value>CODE_SMELL</value>
   </data>
   <data name="S2367_Category" xml:space="preserve">
-    <value>Sonar Code Smell</value>
+    <value>Minor Code Smell</value>
   </data>
   <data name="S2367_Description" xml:space="preserve">
     <value>Shared coding conventions allow teams to collaborate efficiently. This rule checks that all non-private Const field names comply with the provided regular expression.</value>
@@ -1549,7 +1549,7 @@
     <value>CODE_SMELL</value>
   </data>
   <data name="S2368_Category" xml:space="preserve">
-    <value>Sonar Code Smell</value>
+    <value>Blocker Code Smell</value>
   </data>
   <data name="S2368_Description" xml:space="preserve">
     <value>Exposing methods with multidimensional array parameters requires developers to have advanced knowledge about the language in order to be able to use them. Moreover, what exactly to pass to such parameters is not intuitive. Therefore, such methods should not be exposed, but can be used internally.</value>
@@ -1576,7 +1576,7 @@
     <value>CODE_SMELL</value>
   </data>
   <data name="S2369_Category" xml:space="preserve">
-    <value>Sonar Code Smell</value>
+    <value>Minor Code Smell</value>
   </data>
   <data name="S2369_Description" xml:space="preserve">
     <value>Shared coding conventions allow teams to collaborate efficiently. This rule checks that all non-private fields names match a provided regular expression. </value>
@@ -1603,7 +1603,7 @@
     <value>CODE_SMELL</value>
   </data>
   <data name="S2370_Category" xml:space="preserve">
-    <value>Sonar Code Smell</value>
+    <value>Minor Code Smell</value>
   </data>
   <data name="S2370_Description" xml:space="preserve">
     <value>Shared naming conventions allow teams to collaborate efficiently. This rule checks that all non-private Shared ReadOnly fields names match a provided regular expression.</value>
@@ -1630,7 +1630,7 @@
     <value>CODE_SMELL</value>
   </data>
   <data name="S2372_Category" xml:space="preserve">
-    <value>Sonar Code Smell</value>
+    <value>Major Code Smell</value>
   </data>
   <data name="S2372_Description" xml:space="preserve">
     <value>Property getters should be simple operations that are always safe to call. If exceptions need to be thrown, it is best to convert the property to a method. </value>
@@ -1657,7 +1657,7 @@
     <value>CODE_SMELL</value>
   </data>
   <data name="S2373_Category" xml:space="preserve">
-    <value>Sonar Code Smell</value>
+    <value>Minor Code Smell</value>
   </data>
   <data name="S2373_Description" xml:space="preserve">
     <value>Shared naming conventions allow teams to collaborate efficiently. This rule checks that all generic type parameter names match a provided regular expression.</value>
@@ -1684,7 +1684,7 @@
     <value>CODE_SMELL</value>
   </data>
   <data name="S2374_Category" xml:space="preserve">
-    <value>Sonar Code Smell</value>
+    <value>Critical Code Smell</value>
   </data>
   <data name="S2374_Description" xml:space="preserve">
     <value>Unsigned integers have different arithmetic operators than signed ones - operators that few developers understand. Therefore, signed types should be preferred where possible.</value>
@@ -1711,7 +1711,7 @@
     <value>CODE_SMELL</value>
   </data>
   <data name="S2375_Category" xml:space="preserve">
-    <value>Sonar Code Smell</value>
+    <value>Minor Code Smell</value>
   </data>
   <data name="S2375_Description" xml:space="preserve">
     <value>Using the With statement for a series of calls to the same object makes the code more readable.</value>
@@ -1738,7 +1738,7 @@
     <value>CODE_SMELL</value>
   </data>
   <data name="S2376_Category" xml:space="preserve">
-    <value>Sonar Code Smell</value>
+    <value>Major Code Smell</value>
   </data>
   <data name="S2376_Description" xml:space="preserve">
     <value>Properties with only setters are confusing and counterintuitive. Instead, a property getter should be added if possible, or the property should be replaced with a setter method.</value>
@@ -1765,7 +1765,7 @@
     <value>CODE_SMELL</value>
   </data>
   <data name="S2429_Category" xml:space="preserve">
-    <value>Sonar Code Smell</value>
+    <value>Minor Code Smell</value>
   </data>
   <data name="S2429_Description" xml:space="preserve">
     <value>The ... = {} syntax is more compact, more readable and less error-prone.</value>
@@ -1792,7 +1792,7 @@
     <value>CODE_SMELL</value>
   </data>
   <data name="S2951_Category" xml:space="preserve">
-    <value>Sonar Code Smell</value>
+    <value>Minor Code Smell</value>
   </data>
   <data name="S2951_Description" xml:space="preserve">
     <value>Visual Basic .NET, unlike many other programming languages, has no "fall-through" for its Select cases. Each case already has an implicit Exit Select as its last instruction. It therefore is redundant to explicitly add one.</value>
@@ -1819,7 +1819,7 @@
     <value>CODE_SMELL</value>
   </data>
   <data name="S3385_Category" xml:space="preserve">
-    <value>Sonar Code Smell</value>
+    <value>Major Code Smell</value>
   </data>
   <data name="S3385_Description" xml:space="preserve">
     <value>Other than Exit Select, using an Exit statement is never a good idea.</value>
@@ -1846,7 +1846,7 @@
     <value>CODE_SMELL</value>
   </data>
   <data name="S3860_Category" xml:space="preserve">
-    <value>Sonar Code Smell</value>
+    <value>Minor Code Smell</value>
   </data>
   <data name="S3860_Description" xml:space="preserve">
     <value>Since Visual Studio 2010 SP1, the ByVal parameter modifier is implicitly applied, and therefore not required anymore. Removing it from your source code will improve readability.</value>
@@ -1873,7 +1873,7 @@
     <value>CODE_SMELL</value>
   </data>
   <data name="S3866_Category" xml:space="preserve">
-    <value>Sonar Code Smell</value>
+    <value>Critical Code Smell</value>
   </data>
   <data name="S3866_Description" xml:space="preserve">
     <value>Visual Basic .NET offers a non-short-circuit conditional function, IIf(), which returns either its second or third parameter based on the expression in the first parameter. Using it is slower than using If() because each parameter is unconditionally evaluated. Further, its use can lead to runtime exceptions because IIf always evaluates all three of its arguments. </value>
@@ -1900,7 +1900,7 @@
     <value>CODE_SMELL</value>
   </data>
   <data name="S3981_Category" xml:space="preserve">
-    <value>Sonar Bug</value>
+    <value>Major Bug</value>
   </data>
   <data name="S3981_Description" xml:space="preserve">
     <value>The size of a collection and the length of an array are always greater than or equal to zero. So testing that a size or length is greater than or equal to zero doesn't make sense, since the result is always true. Similarly testing that it is less than zero will always return false. Perhaps the intent was to check the non-emptiness of the collection or array instead. </value>
@@ -1927,7 +1927,7 @@
     <value>BUG</value>
   </data>
   <data name="S4142_Category" xml:space="preserve">
-    <value>Sonar Code Smell</value>
+    <value>Major Code Smell</value>
   </data>
   <data name="S4142_Description" xml:space="preserve">
     <value>There are valid cases for passing a variable multiple times into the same method call, but usually doing so is a mistake, and something else was intended for one of the arguments.</value>
@@ -1954,7 +1954,7 @@
     <value>CODE_SMELL</value>
   </data>
   <data name="S4144_Category" xml:space="preserve">
-    <value>Sonar Code Smell</value>
+    <value>Major Code Smell</value>
   </data>
   <data name="S4144_Description" xml:space="preserve">
     <value>When two methods have the same implementation, either it was a mistake - something else was intended - or the duplication was intentional, but may be confusing to maintainers. In the latter case, one implementation should invoke the other.</value>

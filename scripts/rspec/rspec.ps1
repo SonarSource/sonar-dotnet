@@ -56,9 +56,9 @@ if (-Not (Test-Path $resgenPath)) {
 $sonaranalyzerPath = "${PSScriptRoot}\\..\\..\\sonaranalyzer-dotnet"
 
 $categoriesMap = @{
-    "BUG" = "Sonar Bug";
-    "CODE_SMELL" = "Sonar Code Smell";
-    "VULNERABILITY" = "Sonar Vulnerability";
+    "BUG" = "Bug";
+    "CODE_SMELL" = "Code Smell";
+    "VULNERABILITY" = "Vulnerability";
 }
 
 $severitiesMap = @{
@@ -181,12 +181,14 @@ function CreateStringResources($lang, $rules) {
             throw "The downloaded HTML for rule '${rule}' does not contain any paragraphs."
         }
 
+        $severity = $severitiesMap.Get_Item(${json}.defaultSeverity)
+
         [void]$resources.Add("${rule}_Description=${description}")
         [void]$resources.Add("${rule}_Type=$(${json}.type)")
         [void]$resources.Add("${rule}_Title=$(${json}.title)")
-        [void]$resources.Add("${rule}_Category=$($categoriesMap.Get_Item(${json}.type))")
+        [void]$resources.Add("${rule}_Category=${severity} $($categoriesMap.Get_Item(${json}.type))")
         [void]$resources.Add("${rule}_IsActivatedByDefault=$(${sonarWayRules}.ruleKeys -Contains ${rule})")
-        [void]$resources.Add("${rule}_Severity=$($severitiesMap.Get_Item(${json}.defaultSeverity))") # TODO see how can we implement lowering the severity for certain rules
+        [void]$resources.Add("${rule}_Severity=${severity}") # TODO see how can we implement lowering the severity for certain rules
         [void]$resources.Add("${rule}_Tags=" + (${json}.tags -Join ","))
 
         if (${json}.remediation.func) {
