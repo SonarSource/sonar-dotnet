@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2017 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -41,7 +41,7 @@ namespace SonarAnalyzer.Rules.CSharp
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        private static readonly ISet<KnownType> checkedTypes = new HashSet<KnownType>
+        private static readonly ISet<KnownType> formatAndClutureTypes = new HashSet<KnownType>
         {
             KnownType.System_IFormatProvider,
             KnownType.System_Globalization_CultureInfo
@@ -63,19 +63,19 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     if (invocation.Expression != null &&
                         IsInvalidCall(invocation.Expression, c.SemanticModel) &&
-                        HasOverloadWithStringComparison(invocation.Expression, c.SemanticModel))
+                        HasOverloadWithFormatOrCulture(invocation.Expression, c.SemanticModel))
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, invocation.GetLocation(), invocation.Expression));
                     }
                 }, SyntaxKind.InvocationExpression);
         }
 
-        private static bool HasOverloadWithStringComparison(ExpressionSyntax expression, SemanticModel semanticModel)
+        private static bool HasOverloadWithFormatOrCulture(ExpressionSyntax expression, SemanticModel semanticModel)
         {
             return semanticModel.GetMemberGroup(expression)
                 .OfType<IMethodSymbol>()
-                .Where(m => !IsObsolete(m))
-                .Any(HasAnyCheckedTypeParameter);
+                .Where(m => !m.IsObsolete())
+                .Any(HasAnyFormatOrCultureParameter);
         }
 
         private static bool IsInvalidCall(ExpressionSyntax expression, SemanticModel semanticModel)
@@ -85,17 +85,13 @@ namespace SonarAnalyzer.Rules.CSharp
             return methodSymbol != null &&
                 !allowedMethods.Any(x => methodSymbol.ContainingType.Is(x.ContainingType) &&
                                          methodSymbol.Name == x.Name) &&
-                !HasAnyCheckedTypeParameter(methodSymbol);
+                !HasAnyFormatOrCultureParameter(methodSymbol) &&
+                !SpecifyStringComparison.HasAnyStringComparisonParameter(methodSymbol);
         }
 
-        private static bool IsObsolete(ISymbol method)
+        public static bool HasAnyFormatOrCultureParameter(ISymbol method)
         {
-            return method.GetAttributes().Any(a => a.AttributeClass.Is(KnownType.System_ObsoleteAttribute));
-        }
-
-        private static bool HasAnyCheckedTypeParameter(ISymbol method)
-        {
-            return method.GetParameters().Any(parameter => parameter.Type.IsAny(checkedTypes));
+            return method.GetParameters().Any(parameter => parameter.Type.IsAny(formatAndClutureTypes));
         }
     }
 }
