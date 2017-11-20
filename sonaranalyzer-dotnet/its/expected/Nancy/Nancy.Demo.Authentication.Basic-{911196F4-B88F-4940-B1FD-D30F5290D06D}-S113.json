@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'AuthenticationBootstrapper.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Demo.Authentication.Basic\AuthenticationBootstrapper.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  1,
+"endLine":  18,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'MainModule.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Demo.Authentication.Basic\MainModule.cs",
+"region":  {
+"startLine":  10,
+"startColumn":  1,
+"endLine":  10,
+"endColumn":  2
+}
+}
+}
+]
+}

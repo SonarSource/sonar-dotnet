@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'Actors.cs'.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\TcpEchoService.Server\Actors.cs",
+"region":  {
+"startLine":  61,
+"startColumn":  1,
+"endLine":  61,
+"endColumn":  2
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'SqlJournalQuerySpec.cs'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common.TestKit\SqlJournalQuerySpec.cs",
+"region":  {
+"startLine":  147,
+"startColumn":  1,
+"endLine":  147,
+"endColumn":  2
+}
+}
+}
+]
+}

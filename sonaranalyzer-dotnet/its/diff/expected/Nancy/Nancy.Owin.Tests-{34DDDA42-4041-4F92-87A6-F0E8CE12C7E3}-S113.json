@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'AppBuilderExtensionsFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Owin.Tests\AppBuilderExtensionsFixture.cs",
+"region":  {
+"startLine":  44,
+"startColumn":  1,
+"endLine":  44,
+"endColumn":  2
+}
+}
+}
+]
+}

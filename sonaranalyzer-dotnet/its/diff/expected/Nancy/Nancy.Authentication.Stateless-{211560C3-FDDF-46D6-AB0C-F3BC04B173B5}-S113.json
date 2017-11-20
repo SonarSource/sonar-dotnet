@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'StatelessAuthentication.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Authentication.Stateless\StatelessAuthentication.cs",
+"region":  {
+"startLine":  89,
+"startColumn":  1,
+"endLine":  89,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'StatelessAuthenticationConfiguration.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Authentication.Stateless\StatelessAuthenticationConfiguration.cs",
+"region":  {
+"startLine":  32,
+"startColumn":  1,
+"endLine":  32,
+"endColumn":  2
+}
+}
+}
+]
+}

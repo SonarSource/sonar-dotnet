@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'MachineKeyHmacProviderFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Encryption.MachineKey.Tests\MachineKeyHmacProviderFixture.cs",
+"region":  {
+"startLine":  38,
+"startColumn":  1,
+"endLine":  38,
+"endColumn":  2
+}
+}
+}
+]
+}

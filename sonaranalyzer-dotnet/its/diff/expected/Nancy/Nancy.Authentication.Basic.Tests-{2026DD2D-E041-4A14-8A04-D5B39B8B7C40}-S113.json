@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'FakeRequest.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Fakes\FakeRequest.cs",
+"region":  {
+"startLine":  30,
+"startColumn":  1,
+"endLine":  30,
+"endColumn":  2
+}
+}
+}
+]
+}

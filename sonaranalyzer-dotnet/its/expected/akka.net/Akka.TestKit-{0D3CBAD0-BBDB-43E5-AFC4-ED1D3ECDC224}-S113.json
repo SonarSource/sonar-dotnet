@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'TestBreaker.cs'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestBreaker.cs",
+"region":  {
+"startLine":  37,
+"startColumn":  1,
+"endLine":  37,
+"endColumn":  2
+}
+}
+}
+]
+}

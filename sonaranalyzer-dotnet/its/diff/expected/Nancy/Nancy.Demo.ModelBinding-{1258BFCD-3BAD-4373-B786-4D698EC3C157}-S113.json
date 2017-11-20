@@ -1,0 +1,147 @@
+{
+"issues":  [
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'CustomersModule.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Demo.ModelBinding\CustomersModule.cs",
+"region":  {
+"startLine":  33,
+"startColumn":  1,
+"endLine":  33,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DB.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Demo.ModelBinding\Database\DB.cs",
+"region":  {
+"startLine":  19,
+"startColumn":  1,
+"endLine":  19,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'EventsModule.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Demo.ModelBinding\EventsModule.cs",
+"region":  {
+"startLine":  33,
+"startColumn":  1,
+"endLine":  33,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'JsonModule.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Demo.ModelBinding\JsonModule.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  1,
+"endLine":  35,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'MainModule.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Demo.ModelBinding\MainModule.cs",
+"region":  {
+"startLine":  13,
+"startColumn":  1,
+"endLine":  13,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'CustomerModelBinder.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Demo.ModelBinding\ModelBinders\CustomerModelBinder.cs",
+"region":  {
+"startLine":  42,
+"startColumn":  1,
+"endLine":  42,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ModelBindingBootstrapper.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Demo.ModelBinding\ModelBindingBootstrapper.cs",
+"region":  {
+"startLine":  6,
+"startColumn":  1,
+"endLine":  6,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'Customer.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Demo.ModelBinding\Models\Customer.cs",
+"region":  {
+"startLine":  13,
+"startColumn":  1,
+"endLine":  13,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'Event.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Demo.ModelBinding\Models\Event.cs",
+"region":  {
+"startLine":  25,
+"startColumn":  1,
+"endLine":  25,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'User.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Demo.ModelBinding\Models\User.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  1,
+"endLine":  9,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'XmlModule.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Demo.ModelBinding\XmlModule.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  1,
+"endLine":  35,
+"endColumn":  2
+}
+}
+}
+]
+}

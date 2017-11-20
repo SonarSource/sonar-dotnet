@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'LookupRemoteActorMultiNetSpec.cs'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests.MultiNode\LookupRemoteActorMultiNetSpec.cs",
+"region":  {
+"startLine":  101,
+"startColumn":  1,
+"endLine":  101,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'RemoteDeliverySpec.cs'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests.MultiNode\RemoteDeliverySpec.cs",
+"region":  {
+"startLine":  138,
+"startColumn":  1,
+"endLine":  138,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'RemoteDeploymentDeathWatchSpec.cs'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests.MultiNode\RemoteDeploymentDeathWatchSpec.cs",
+"region":  {
+"startLine":  160,
+"startColumn":  1,
+"endLine":  160,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'RemoteRoundRobinSpec.cs'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests.MultiNode\RemoteRoundRobinSpec.cs",
+"region":  {
+"startLine":  282,
+"startColumn":  1,
+"endLine":  282,
+"endColumn":  2
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'BlogModel.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Demo.MarkdownViewEngine\Model\BlogModel.cs",
+"region":  {
+"startLine":  133,
+"startColumn":  1,
+"endLine":  133,
+"endColumn":  2
+}
+}
+}
+]
+}

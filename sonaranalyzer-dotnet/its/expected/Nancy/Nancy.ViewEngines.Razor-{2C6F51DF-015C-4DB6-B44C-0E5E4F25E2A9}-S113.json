@@ -1,0 +1,225 @@
+{
+"issues":  [
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'AttributeValue.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\AttributeValue.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  1,
+"endLine":  35,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'CSharpClrTypeResolver.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\CSharp\CSharpClrTypeResolver.cs",
+"region":  {
+"startLine":  90,
+"startColumn":  1,
+"endLine":  90,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'CSharpRazorViewRenderer.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\CSharp\CSharpRazorViewRenderer.cs",
+"region":  {
+"startLine":  78,
+"startColumn":  1,
+"endLine":  78,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'NancyCSharpRazorCodeParser.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\CSharp\NancyCSharpRazorCodeParser.cs",
+"region":  {
+"startLine":  82,
+"startColumn":  1,
+"endLine":  82,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DefaultRazorConfiguration.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\DefaultRazorConfiguration.cs",
+"region":  {
+"startLine":  59,
+"startColumn":  1,
+"endLine":  59,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'HelperResult.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\HelperResult.cs",
+"region":  {
+"startLine":  60,
+"startColumn":  1,
+"endLine":  60,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'HtmlHelpersExtensions.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\HtmlHelpersExtensions.cs",
+"region":  {
+"startLine":  23,
+"startColumn":  1,
+"endLine":  23,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'IHtmlString.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\IHtmlString.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  1,
+"endLine":  11,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'INancyRazorView.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\INancyRazorView.cs",
+"region":  {
+"startLine":  6,
+"startColumn":  1,
+"endLine":  6,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ModelCodeGenerator.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\ModelCodeGenerator.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  1,
+"endLine":  35,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'NancyRazorEngineHost.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\NancyRazorEngineHost.cs",
+"region":  {
+"startLine":  53,
+"startColumn":  1,
+"endLine":  53,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'NonEncodedHtmlString.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\NonEncodedHtmlString.cs",
+"region":  {
+"startLine":  38,
+"startColumn":  1,
+"endLine":  38,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'RazorViewEngine.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\RazorViewEngine.cs",
+"region":  {
+"startLine":  427,
+"startColumn":  1,
+"endLine":  427,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'RazorViewEngineApplicationStartupRegistrations.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\RazorViewEngineApplicationStartupRegistrations.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  1,
+"endLine":  15,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'UrlHelpers.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\UrlHelpers.cs",
+"region":  {
+"startLine":  41,
+"startColumn":  1,
+"endLine":  41,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'NancyVisualBasicRazorCodeParser.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\VisualBasic\NancyVisualBasicRazorCodeParser.cs",
+"region":  {
+"startLine":  108,
+"startColumn":  1,
+"endLine":  108,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'VisualBasicClrTypeResolver.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\VisualBasic\VisualBasicClrTypeResolver.cs",
+"region":  {
+"startLine":  98,
+"startColumn":  1,
+"endLine":  98,
+"endColumn":  2
+}
+}
+}
+]
+}

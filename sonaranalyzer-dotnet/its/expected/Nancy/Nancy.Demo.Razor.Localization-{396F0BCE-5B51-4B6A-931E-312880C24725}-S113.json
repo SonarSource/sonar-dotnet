@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'CustomResourceAssemblyProvider.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Demo.Razor.Localization\CustomResourceAssemblyProvider.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  1,
+"endLine":  28,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DemoBootstrapper.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Demo.Razor.Localization\DemoBootstrapper.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  1,
+"endLine":  15,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'HomeModule.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Demo.Razor.Localization\Modules\HomeModule.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  1,
+"endLine":  21,
+"endColumn":  2
+}
+}
+}
+]
+}

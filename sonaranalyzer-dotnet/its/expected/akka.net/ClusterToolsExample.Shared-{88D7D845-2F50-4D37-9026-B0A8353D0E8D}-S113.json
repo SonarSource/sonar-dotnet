@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'Echo.cs'.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\Cluster\ClusterTools\ClusterToolsExample.Shared\Echo.cs",
+"region":  {
+"startLine":  44,
+"startColumn":  1,
+"endLine":  44,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'Messages.cs'.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\Cluster\ClusterTools\ClusterToolsExample.Shared\Messages.cs",
+"region":  {
+"startLine":  60,
+"startColumn":  1,
+"endLine":  60,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'Worker.cs'.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\Cluster\ClusterTools\ClusterToolsExample.Shared\Worker.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  1,
+"endLine":  21,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'WorkLoadCounter.cs'.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\Cluster\ClusterTools\ClusterToolsExample.Shared\WorkLoadCounter.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  1,
+"endLine":  26,
+"endColumn":  2
+}
+}
+}
+]
+}

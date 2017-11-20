@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'NetSh.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Hosting.Self\NetSh.cs",
+"region":  {
+"startLine":  37,
+"startColumn":  1,
+"endLine":  37,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'UacHelper.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Hosting.Self\UacHelper.cs",
+"region":  {
+"startLine":  39,
+"startColumn":  1,
+"endLine":  39,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'UrlReservations.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Hosting.Self\UrlReservations.cs",
+"region":  {
+"startLine":  53,
+"startColumn":  1,
+"endLine":  53,
+"endColumn":  2
+}
+}
+}
+]
+}

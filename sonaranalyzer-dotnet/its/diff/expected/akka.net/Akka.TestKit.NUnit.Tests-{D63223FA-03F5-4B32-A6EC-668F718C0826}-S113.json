@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'TestKitTestFixtureTest.cs'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\testkits\Akka.TestKit.NUnit.Tests\TestKitTestFixtureTest.cs",
+"region":  {
+"startLine":  30,
+"startColumn":  1,
+"endLine":  30,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'TestKitTests.cs'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\testkits\Akka.TestKit.NUnit.Tests\TestKitTests.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  1,
+"endLine":  29,
+"endColumn":  2
+}
+}
+}
+]
+}

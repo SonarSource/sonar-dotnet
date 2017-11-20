@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DataAnnotationsValidatorFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Validation.DataAnnotatioins.Tests\DataAnnotationsValidatorFixture.cs",
+"region":  {
+"startLine":  144,
+"startColumn":  1,
+"endLine":  144,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DataAnnotationValidatorFactoryFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Validation.DataAnnotatioins.Tests\DataAnnotationValidatorFactoryFixture.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  1,
+"endLine":  35,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DefaultValidatableObjectAdapterFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Validation.DataAnnotatioins.Tests\DefaultValidatableObjectAdapterFixture.cs",
+"region":  {
+"startLine":  100,
+"startColumn":  1,
+"endLine":  100,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'PropertyValidatorFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Validation.DataAnnotatioins.Tests\PropertyValidatorFixture.cs",
+"region":  {
+"startLine":  142,
+"startColumn":  1,
+"endLine":  142,
+"endColumn":  2
+}
+}
+}
+]
+}

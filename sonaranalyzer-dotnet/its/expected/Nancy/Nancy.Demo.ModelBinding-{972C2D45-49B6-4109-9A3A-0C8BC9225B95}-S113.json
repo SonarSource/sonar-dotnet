@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ConstraintRoutingModule.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Demo.ConstraintRouting\ConstraintRoutingModule.cs",
+"region":  {
+"startLine":  40,
+"startColumn":  1,
+"endLine":  40,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'EmailRouteSegmentConstraint.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Demo.ConstraintRouting\EmailRouteSegmentConstraint.cs",
+"region":  {
+"startLine":  25,
+"startColumn":  1,
+"endLine":  25,
+"endColumn":  2
+}
+}
+}
+]
+}

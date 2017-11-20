@@ -1,0 +1,121 @@
+{
+"issues":  [
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'PerRouteAuthModule.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests.Functional\Modules\PerRouteAuthModule.cs",
+"region":  {
+"startLine":  33,
+"startColumn":  1,
+"endLine":  33,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ThrowingModule.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests.Functional\Modules\ThrowingModule.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  1,
+"endLine":  31,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'AsyncExceptionTests.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests.Functional\Tests\AsyncExceptionTests.cs",
+"region":  {
+"startLine":  53,
+"startColumn":  1,
+"endLine":  53,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'CookieFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests.Functional\Tests\CookieFixture.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  1,
+"endLine":  26,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ManualStaticContentTests.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests.Functional\Tests\ManualStaticContentTests.cs",
+"region":  {
+"startLine":  93,
+"startColumn":  1,
+"endLine":  93,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ModelBindingTests.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests.Functional\Tests\ModelBindingTests.cs",
+"region":  {
+"startLine":  92,
+"startColumn":  1,
+"endLine":  92,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'PerRouteAuthFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests.Functional\Tests\PerRouteAuthFixture.cs",
+"region":  {
+"startLine":  97,
+"startColumn":  1,
+"endLine":  97,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'RouteConstraintTests.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests.Functional\Tests\RouteConstraintTests.cs",
+"region":  {
+"startLine":  115,
+"startColumn":  1,
+"endLine":  115,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'RecordAsync.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\xUnitExtensions\RecordAsync.cs",
+"region":  {
+"startLine":  39,
+"startColumn":  1,
+"endLine":  39,
+"endColumn":  2
+}
+}
+}
+]
+}

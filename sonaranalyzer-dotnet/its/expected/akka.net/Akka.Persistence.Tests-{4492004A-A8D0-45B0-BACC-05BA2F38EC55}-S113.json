@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'AtLeastOnceDeliveryReceiveActorSpec.cs'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\AtLeastOnceDeliveryReceiveActorSpec.cs",
+"region":  {
+"startLine":  562,
+"startColumn":  1,
+"endLine":  562,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'EndToEndEventAdapterSpec.cs'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\EndToEndEventAdapterSpec.cs",
+"region":  {
+"startLine":  392,
+"startColumn":  1,
+"endLine":  392,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'PersistentFSMSpec.cs'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\Fsm\PersistentFSMSpec.cs",
+"region":  {
+"startLine":  672,
+"startColumn":  1,
+"endLine":  672,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'MemoryEventAdapterSpec.cs'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\MemoryEventAdapterSpec.cs",
+"region":  {
+"startLine":  393,
+"startColumn":  1,
+"endLine":  393,
+"endColumn":  2
+}
+}
+}
+]
+}

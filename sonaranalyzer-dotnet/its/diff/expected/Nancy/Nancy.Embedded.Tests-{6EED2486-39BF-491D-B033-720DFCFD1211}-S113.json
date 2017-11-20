@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'EmbeddedStaticContentConventionBuilderFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Embedded.Tests\Unit\EmbeddedStaticContentConventionBuilderFixture.cs",
+"region":  {
+"startLine":  107,
+"startColumn":  1,
+"endLine":  107,
+"endColumn":  2
+}
+}
+}
+]
+}

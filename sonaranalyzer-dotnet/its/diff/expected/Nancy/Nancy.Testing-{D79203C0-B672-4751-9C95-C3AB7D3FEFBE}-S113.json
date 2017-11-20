@@ -1,0 +1,251 @@
+{
+"issues":  [
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'Accept.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\Accept.cs",
+"region":  {
+"startLine":  32,
+"startColumn":  1,
+"endLine":  32,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'AndConnector.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\AndConnector.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  1,
+"endLine":  29,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'AssertEqualityComparer.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\AssertEqualityComparer.cs",
+"region":  {
+"startLine":  58,
+"startColumn":  1,
+"endLine":  58,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'AssertException.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\AssertException.cs",
+"region":  {
+"startLine":  46,
+"startColumn":  1,
+"endLine":  46,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'Asserts.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\Asserts.cs",
+"region":  {
+"startLine":  155,
+"startColumn":  1,
+"endLine":  155,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'BrowserContext.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContext.cs",
+"region":  {
+"startLine":  267,
+"startColumn":  1,
+"endLine":  267,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'BrowserContextMultipartFormData.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContextMultipartFormData.cs",
+"region":  {
+"startLine":  132,
+"startColumn":  1,
+"endLine":  132,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'BrowserResponseExtensions.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\BrowserResponseExtensions.cs",
+"region":  {
+"startLine":  51,
+"startColumn":  1,
+"endLine":  51,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ConfigurableNancyModule.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableNancyModule.cs",
+"region":  {
+"startLine":  312,
+"startColumn":  1,
+"endLine":  312,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DocumentWrapper.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\DocumentWrapper.cs",
+"region":  {
+"startLine":  37,
+"startColumn":  1,
+"endLine":  37,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'FakeRootPathProvider.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\Fakes\FakeRootPathProvider.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  1,
+"endLine":  35,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'IBrowserContextValues.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\IBrowserContextValues.cs",
+"region":  {
+"startLine":  61,
+"startColumn":  1,
+"endLine":  61,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'IndexHelper.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\IndexHelper.cs",
+"region":  {
+"startLine":  32,
+"startColumn":  1,
+"endLine":  32,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'NancyContextExtensions.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\NancyContextExtensions.cs",
+"region":  {
+"startLine":  88,
+"startColumn":  1,
+"endLine":  88,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'NodeWrapper.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\NodeWrapper.cs",
+"region":  {
+"startLine":  66,
+"startColumn":  1,
+"endLine":  66,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'PassThroughStatusHandler.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\PassThroughStatusHandler.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  1,
+"endLine":  26,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'PathHelper.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\PathHelper.cs",
+"region":  {
+"startLine":  44,
+"startColumn":  1,
+"endLine":  44,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'QueryWrapper.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\QueryWrapper.cs",
+"region":  {
+"startLine":  68,
+"startColumn":  1,
+"endLine":  68,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'StaticConfigurationContext.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\StaticConfigurationContext.cs",
+"region":  {
+"startLine":  71,
+"startColumn":  1,
+"endLine":  71,
+"endColumn":  2
+}
+}
+}
+]
+}

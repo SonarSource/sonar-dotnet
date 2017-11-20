@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'Messages.cs'.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\PersistenceBenchmark\Messages.cs",
+"region":  {
+"startLine":  77,
+"startColumn":  1,
+"endLine":  77,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'PerformanceActors.cs'.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\PersistenceBenchmark\PerformanceActors.cs",
+"region":  {
+"startLine":  149,
+"startColumn":  1,
+"endLine":  149,
+"endColumn":  2
+}
+}
+}
+]
+}

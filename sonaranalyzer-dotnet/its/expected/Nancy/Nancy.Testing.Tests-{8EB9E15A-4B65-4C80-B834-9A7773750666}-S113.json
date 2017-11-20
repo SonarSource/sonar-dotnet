@@ -1,0 +1,160 @@
+{
+"issues":  [
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'AssertEqualityComparerFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing.Tests\AssertEqualityComparerFixture.cs",
+"region":  {
+"startLine":  205,
+"startColumn":  1,
+"endLine":  205,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'AssertExtensionsTests.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing.Tests\AssertExtensionsTests.cs",
+"region":  {
+"startLine":  467,
+"startColumn":  1,
+"endLine":  467,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'BrowserContextExtensionsFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing.Tests\BrowserContextExtensionsFixture.cs",
+"region":  {
+"startLine":  94,
+"startColumn":  1,
+"endLine":  94,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'BrowserResponseBodyWrapperExtensionsFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing.Tests\BrowserResponseBodyWrapperExtensionsFixture.cs",
+"region":  {
+"startLine":  32,
+"startColumn":  1,
+"endLine":  32,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ConfigurableBootstrapperDependenciesTests.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing.Tests\ConfigurableBootstrapperDependenciesTests.cs",
+"region":  {
+"startLine":  214,
+"startColumn":  1,
+"endLine":  214,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ConfigurableBootstrapperFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing.Tests\ConfigurableBootstrapperFixture.cs",
+"region":  {
+"startLine":  239,
+"startColumn":  1,
+"endLine":  239,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DocumentWrapperTests.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing.Tests\DocumentWrapperTests.cs",
+"region":  {
+"startLine":  38,
+"startColumn":  1,
+"endLine":  38,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'PathHelperTests.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing.Tests\PathHelperTests.cs",
+"region":  {
+"startLine":  91,
+"startColumn":  1,
+"endLine":  91,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'QueryWrapperTests.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing.Tests\QueryWrapperTests.cs",
+"region":  {
+"startLine":  53,
+"startColumn":  1,
+"endLine":  53,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'GetModulePathExtensionMethodTests.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing.Tests\TestingViewExtensions\GetModulePathExtensionMethodTests.cs",
+"region":  {
+"startLine":  59,
+"startColumn":  1,
+"endLine":  59,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'TestingViewFactoryTestModule.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing.Tests\TestingViewExtensions\TestingViewFactoryTestModule.cs",
+"region":  {
+"startLine":  34,
+"startColumn":  1,
+"endLine":  34,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'RecordAsync.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\xUnitExtensions\RecordAsync.cs",
+"region":  {
+"startLine":  39,
+"startColumn":  1,
+"endLine":  39,
+"endColumn":  2
+}
+}
+}
+]
+}

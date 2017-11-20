@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'AssemblyInfo.cs'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\dependencyInjection\Akka.DI.StructureMap\Properties\AssemblyInfo.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  56,
+"endLine":  26,
+"endColumn":  57
+}
+}
+}
+]
+}

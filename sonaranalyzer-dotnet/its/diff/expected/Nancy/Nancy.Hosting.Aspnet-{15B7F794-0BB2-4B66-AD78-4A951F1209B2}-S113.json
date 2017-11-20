@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DefaultNancyAspNetBootstrapper.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Hosting.Aspnet\DefaultNancyAspNetBootstrapper.cs",
+"region":  {
+"startLine":  252,
+"startColumn":  1,
+"endLine":  252,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'NancyHandler.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Hosting.Aspnet\NancyHandler.cs",
+"region":  {
+"startLine":  170,
+"startColumn":  1,
+"endLine":  170,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'NancyHttpRequestHandler.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Hosting.Aspnet\NancyHttpRequestHandler.cs",
+"region":  {
+"startLine":  96,
+"startColumn":  1,
+"endLine":  96,
+"endColumn":  2
+}
+}
+}
+]
+}

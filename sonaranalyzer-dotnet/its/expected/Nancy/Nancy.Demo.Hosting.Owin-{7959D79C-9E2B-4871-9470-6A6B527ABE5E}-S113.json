@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'MainModule.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Demo.Hosting.Owin\MainModule.cs",
+"region":  {
+"startLine":  37,
+"startColumn":  1,
+"endLine":  37,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'Index.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Demo.Hosting.Owin\Models\Index.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  1,
+"endLine":  7,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'Startup.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Demo.Hosting.Owin\Startup.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  1,
+"endLine":  12,
+"endColumn":  2
+}
+}
+}
+]
+}

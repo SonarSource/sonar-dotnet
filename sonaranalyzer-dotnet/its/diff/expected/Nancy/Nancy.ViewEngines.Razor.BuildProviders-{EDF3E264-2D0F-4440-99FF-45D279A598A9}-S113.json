@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'NancyCSharpRazorBuildProvider.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor.BuildProviders\NancyCSharpRazorBuildProvider.cs",
+"region":  {
+"startLine":  81,
+"startColumn":  1,
+"endLine":  81,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'NancyVisualBasicRazorBuildProvider.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor.BuildProviders\NancyVisualBasicRazorBuildProvider.cs",
+"region":  {
+"startLine":  81,
+"startColumn":  1,
+"endLine":  81,
+"endColumn":  2
+}
+}
+}
+]
+}

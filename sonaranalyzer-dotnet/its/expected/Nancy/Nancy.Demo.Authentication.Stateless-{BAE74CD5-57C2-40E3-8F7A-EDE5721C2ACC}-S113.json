@@ -1,0 +1,82 @@
+{
+"issues":  [
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'AuthModule.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Demo.Authentication.Stateless\AuthModule.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  1,
+"endLine":  27,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'UserModel.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Demo.Authentication.Stateless\Models\UserModel.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  1,
+"endLine":  12,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'RootModule.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Demo.Authentication.Stateless\RootModule.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  1,
+"endLine":  15,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'SecureModule.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Demo.Authentication.Stateless\SecureModule.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  1,
+"endLine":  29,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'StatelessAuthBootstrapper.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Demo.Authentication.Stateless\StatelessAuthBootstrapper.cs",
+"region":  {
+"startLine":  42,
+"startColumn":  1,
+"endLine":  42,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'UserDatabase.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Demo.Authentication.Stateless\UserDatabase.cs",
+"region":  {
+"startLine":  55,
+"startColumn":  1,
+"endLine":  55,
+"endColumn":  2
+}
+}
+}
+]
+}

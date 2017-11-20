@@ -1,0 +1,251 @@
+{
+"issues":  [
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ApplicationDependencyClass.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Demo.Hosting.Aspnet\ApplicationDependencyClass.cs",
+"region":  {
+"startLine":  25,
+"startColumn":  1,
+"endLine":  25,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'CustomStatusHandler.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Demo.Hosting.Aspnet\CustomStatusHandler.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  1,
+"endLine":  28,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DefaultRouteMetadataProvider.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Demo.Hosting.Aspnet\DefaultRouteMetadataProvider.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  1,
+"endLine":  43,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DependencyModule.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Demo.Hosting.Aspnet\DependencyModule.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  1,
+"endLine":  28,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'HereBeAResponseYouScurvyDog.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Demo.Hosting.Aspnet\HereBeAResponseYouScurvyDog.cs",
+"region":  {
+"startLine":  37,
+"startColumn":  1,
+"endLine":  37,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'IApplicationDependency.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Demo.Hosting.Aspnet\IApplicationDependency.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  1,
+"endLine":  7,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'IRequestDependency.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Demo.Hosting.Aspnet\IRequestDependency.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  1,
+"endLine":  7,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'MainMetadataModule.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Demo.Hosting.Aspnet\Metadata\MainMetadataModule.cs",
+"region":  {
+"startLine":  19,
+"startColumn":  1,
+"endLine":  19,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'MyUberRouteMetadata.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Demo.Hosting.Aspnet\Metadata\MyUberRouteMetadata.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  1,
+"endLine":  12,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'Payload.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Demo.Hosting.Aspnet\Models\Payload.cs",
+"region":  {
+"startLine":  80,
+"startColumn":  1,
+"endLine":  80,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'RatPack.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Demo.Hosting.Aspnet\Models\RatPack.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  1,
+"endLine":  7,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'RatPackWithDependencyText.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Demo.Hosting.Aspnet\Models\RatPackWithDependencyText.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  1,
+"endLine":  9,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'Razor2.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Demo.Hosting.Aspnet\Models\Razor2.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  1,
+"endLine":  27,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'SomeViewModel.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Demo.Hosting.Aspnet\Models\SomeViewModel.cs",
+"region":  {
+"startLine":  6,
+"startColumn":  1,
+"endLine":  6,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'MyConfig.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Demo.Hosting.Aspnet\MyConfig.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  1,
+"endLine":  16,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'MyConfigExtensions.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Demo.Hosting.Aspnet\MyConfigExtensions.cs",
+"region":  {
+"startLine":  19,
+"startColumn":  1,
+"endLine":  19,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'Piratizer4000.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Demo.Hosting.Aspnet\Piratizer4000.cs",
+"region":  {
+"startLine":  100,
+"startColumn":  1,
+"endLine":  100,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'PngSerializer.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Demo.Hosting.Aspnet\PngSerializer.cs",
+"region":  {
+"startLine":  59,
+"startColumn":  1,
+"endLine":  59,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'RequestDependencyClass.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Demo.Hosting.Aspnet\RequestDependencyClass.cs",
+"region":  {
+"startLine":  25,
+"startColumn":  1,
+"endLine":  25,
+"endColumn":  2
+}
+}
+}
+]
+}

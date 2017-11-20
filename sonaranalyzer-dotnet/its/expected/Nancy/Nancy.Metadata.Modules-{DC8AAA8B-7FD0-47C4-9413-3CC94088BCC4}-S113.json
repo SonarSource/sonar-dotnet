@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DefaultMetadataModuleResolver.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Metadata.Modules\DefaultMetadataModuleResolver.cs",
+"region":  {
+"startLine":  61,
+"startColumn":  1,
+"endLine":  61,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'IMetadataModule.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Metadata.Modules\IMetadataModule.cs",
+"region":  {
+"startLine":  24,
+"startColumn":  1,
+"endLine":  24,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'IMetadataModuleResolver.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Metadata.Modules\IMetadataModuleResolver.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  1,
+"endLine":  15,
+"endColumn":  2
+}
+}
+}
+]
+}

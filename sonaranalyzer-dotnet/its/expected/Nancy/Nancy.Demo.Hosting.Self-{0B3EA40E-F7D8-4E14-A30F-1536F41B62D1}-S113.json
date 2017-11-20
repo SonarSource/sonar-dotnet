@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'Index.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Demo.Hosting.Self\Models\Index.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  1,
+"endLine":  14,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'TestModule.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Demo.Hosting.Self\TestModule.cs",
+"region":  {
+"startLine":  45,
+"startColumn":  1,
+"endLine":  45,
+"endColumn":  2
+}
+}
+}
+]
+}

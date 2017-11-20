@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'NUnitAssertions.cs'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\testkits\Akka.TestKit.NUnit\NUnitAssertions.cs",
+"region":  {
+"startLine":  50,
+"startColumn":  1,
+"endLine":  50,
+"endColumn":  2
+}
+}
+}
+]
+}

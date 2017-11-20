@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'NancyViewFolderFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark.Tests\NancyViewFolderFixture.cs",
+"region":  {
+"startLine":  134,
+"startColumn":  1,
+"endLine":  134,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'SparkViewEngineFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark.Tests\SparkViewEngineFixture.cs",
+"region":  {
+"startLine":  549,
+"startColumn":  1,
+"endLine":  549,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'FakeViewModel.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark.Tests\ViewModels\FakeViewModel.cs",
+"region":  {
+"startLine":  13,
+"startColumn":  1,
+"endLine":  13,
+"endColumn":  2
+}
+}
+}
+]
+}
