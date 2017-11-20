@@ -966,7 +966,12 @@ namespace SonarAnalyzer.SymbolicExecution.ControlFlowGraph
         {
             currentBlock.ReversedInstructions.Add(parent);
 
-            return children == null
+            // The nameof arguments are not evaluated at runtime and should not be added
+            // to the block as instructions
+            var isNameof = parent is InvocationExpressionSyntax invocation
+                && invocation.IsNameof(semanticModel);
+
+            return children == null || isNameof
                 ? currentBlock
                 : BuildExpressions(children, currentBlock);
         }
