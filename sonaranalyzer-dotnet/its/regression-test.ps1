@@ -185,9 +185,9 @@ try {
     Initialize-OutputFolder
 
     Write-Debug "Installing the import before target file at '${msBuildImportBefore14}'"
-    Copy-Item .\SonarAnalyzer.Testing.ImportBefore.targets -Destination $msBuildImportBefore14 -Recurse -Container
+    Copy-Item .\SonarAnalyzer.Testing.ImportBefore.targets -Destination (New-Item $msBuildImportBefore14 -Type container -Force) -Force -Recurse
     Write-Debug "Installing the import before target file at '${msBuildImportBefore15}'"
-    Copy-Item .\SonarAnalyzer.Testing.ImportBefore.targets -Destination $msBuildImportBefore15 -Recurse -Container
+    Copy-Item .\SonarAnalyzer.Testing.ImportBefore.targets -Destination (New-Item $msBuildImportBefore15 -Type container -Force) -Force -Recurse
 
     Build-Project "akka.net" "src\Akka.sln"
     Build-Project "Nancy" "src\Nancy.sln"
