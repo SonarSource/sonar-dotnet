@@ -17,6 +17,23 @@ else
   DoSomethingElse(); // never executed
 }
 </pre>
+<h2>Exceptions</h2>
+<p>This rule will not raise an issue in either of these cases:</p>
+<ul>
+  <li> When the condition is a single <code>const bool</code> </li>
+</ul>
+<pre>
+const bool debug = false;
+//...
+if (debug)
+{
+  // Print something
+}
+</pre>
+<ul>
+  <li> When the condition is the literal <code>true</code> or <code>false</code>. </li>
+</ul>
+<p>In these cases it is obvious the code is as intended.</p>
 <h2>See</h2>
 <ul>
   <li> MISRA C:2004, 13.7 - Boolean operations whose results are invariant shall not be permitted. </li>
