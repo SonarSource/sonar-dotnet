@@ -74,7 +74,7 @@ namespace SonarAnalyzer.SymbolicExecution
 
             if (invocation.IsNameof(semanticModel))
             {
-                return HandleNameofExpression(invocationArgsCount);
+                return HandleNameofExpression();
             }
 
             return programState
@@ -82,16 +82,11 @@ namespace SonarAnalyzer.SymbolicExecution
                 .PushValue(new SymbolicValue());
         }
 
-        private ProgramState HandleNameofExpression(int argumentsCount)
+        private ProgramState HandleNameofExpression()
         {
-            // We want to handle the correct nameof(a) but also malformed ones likes nameof(), nameof(a, b)...
-            // So we pop number of arguments + the nameof itself
-            var newProgramState = programState
-                .PopValues(argumentsCount)
-                .PopValue();
-
+            // The nameof arguments are not on the stack, we just push the nameof result
             var nameof = new SymbolicValue();
-            newProgramState = newProgramState.PushValue(nameof);
+            var newProgramState = programState.PushValue(nameof);
             return newProgramState.SetConstraint(nameof, ObjectConstraint.NotNull);
         }
 

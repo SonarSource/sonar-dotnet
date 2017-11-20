@@ -524,6 +524,12 @@ namespace Tests.Diagnostics
             _foo1.ToString(); // Noncompliant
         }
 
+        void DereferenceInNameOfShouldNotRaise()
+        {
+            object o = null;
+            var name = nameof(o.ToString);
+        }
+
         void DoSomething() { }
 
         void TestNameOf()
