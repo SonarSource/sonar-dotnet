@@ -3,8 +3,8 @@
     <MainVersion>6.7.0</MainVersion>
     <BuildNumber>0</BuildNumber>
     <MilestoneVersion>6.7</MilestoneVersion>
-    <Sha1>f3bccbf5bee16073c7ba18bc8dee5d3358bd21d8</Sha1>
-    <BranchName>improve-build-script</BranchName>
+    <Sha1>not-set</Sha1>
+    <BranchName>not-set</BranchName>
     <FullVersion>$(MainVersion).$(BuildNumber)</FullVersion>
     <AssemblyVersion>$(MainVersion)</AssemblyVersion>
     <AssemblyFileVersion>$(FullVersion)</AssemblyFileVersion>
