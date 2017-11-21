@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'Discovery.cs'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Discovery.cs",
+"region":  {
+"startLine":  78,
+"startColumn":  1,
+"endLine":  78,
+"endColumn":  2
+}
+}
+}
+]
+}

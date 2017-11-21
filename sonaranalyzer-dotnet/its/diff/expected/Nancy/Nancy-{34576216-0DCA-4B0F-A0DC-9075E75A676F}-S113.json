@@ -1,0 +1,3956 @@
+{
+"issues":  [
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'AfterPipeline.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\AfterPipeline.cs",
+"region":  {
+"startLine":  88,
+"startColumn":  1,
+"endLine":  88,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'AsyncNamedPipelineBase.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\AsyncNamedPipelineBase.cs",
+"region":  {
+"startLine":  332,
+"startColumn":  1,
+"endLine":  332,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'BootstrapperException.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\BootstrapperException.cs",
+"region":  {
+"startLine":  41,
+"startColumn":  1,
+"endLine":  41,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'CollectionTypeRegistration.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\CollectionTypeRegistration.cs",
+"region":  {
+"startLine":  46,
+"startColumn":  1,
+"endLine":  46,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ContainerRegistration.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\ContainerRegistration.cs",
+"region":  {
+"startLine":  51,
+"startColumn":  1,
+"endLine":  51,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'IApplicationStartup.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\IApplicationStartup.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  1,
+"endLine":  14,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'INancyBootstrapper.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\INancyBootstrapper.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  1,
+"endLine":  31,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'InstanceRegistration.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\InstanceRegistration.cs",
+"region":  {
+"startLine":  39,
+"startColumn":  1,
+"endLine":  39,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'IPipelines.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\IPipelines.cs",
+"region":  {
+"startLine":  39,
+"startColumn":  1,
+"endLine":  39,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'IRegistrations.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\IRegistrations.cs",
+"region":  {
+"startLine":  25,
+"startColumn":  1,
+"endLine":  25,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'IRequestStartup.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\IRequestStartup.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  1,
+"endLine":  15,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'Lifetime.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\Lifetime.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  1,
+"endLine":  27,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ModuleRegistrationType.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\ModuleRegistrationType.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  1,
+"endLine":  18,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'NancyBootstrapperLocator.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\NancyBootstrapperLocator.cs",
+"region":  {
+"startLine":  97,
+"startColumn":  1,
+"endLine":  97,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'NancyBootstrapperWithRequestContainerBase.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\NancyBootstrapperWithRequestContainerBase.cs",
+"region":  {
+"startLine":  217,
+"startColumn":  1,
+"endLine":  217,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'Pipelines.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\Pipelines.cs",
+"region":  {
+"startLine":  85,
+"startColumn":  1,
+"endLine":  85,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'Registrations.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\Registrations.cs",
+"region":  {
+"startLine":  198,
+"startColumn":  1,
+"endLine":  198,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ScanMode.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\ScanMode.cs",
+"region":  {
+"startLine":  33,
+"startColumn":  1,
+"endLine":  33,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'TypeRegistration.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\TypeRegistration.cs",
+"region":  {
+"startLine":  40,
+"startColumn":  1,
+"endLine":  40,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DefaultNancyEnvironment.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Configuration\DefaultNancyEnvironment.cs",
+"region":  {
+"startLine":  123,
+"startColumn":  1,
+"endLine":  123,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DefaultNancyEnvironmentConfigurator.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Configuration\DefaultNancyEnvironmentConfigurator.cs",
+"region":  {
+"startLine":  73,
+"startColumn":  1,
+"endLine":  73,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DefaultNancyEnvironmentFactory.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Configuration\DefaultNancyEnvironmentFactory.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  1,
+"endLine":  18,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'INancyDefaultConfigurationProvider.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Configuration\INancyDefaultConfigurationProvider.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  1,
+"endLine":  20,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'INancyEnvironment.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Configuration\INancyEnvironment.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  1,
+"endLine":  28,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'INancyEnvironmentConfigurator.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Configuration\INancyEnvironmentConfigurator.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  1,
+"endLine":  17,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'INancyEnvironmentExtensions.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Configuration\INancyEnvironmentExtensions.cs",
+"region":  {
+"startLine":  73,
+"startColumn":  1,
+"endLine":  73,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'INancyEnvironmentFactory.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Configuration\INancyEnvironmentFactory.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  1,
+"endLine":  14,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'NancyDefaultConfigurationProvider.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Configuration\NancyDefaultConfigurationProvider.cs",
+"region":  {
+"startLine":  33,
+"startColumn":  1,
+"endLine":  33,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'AcceptHeaderCoercionConventions.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Conventions\AcceptHeaderCoercionConventions.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  1,
+"endLine":  29,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'BuiltInAcceptHeaderCoercions.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Conventions\BuiltInAcceptHeaderCoercions.cs",
+"region":  {
+"startLine":  100,
+"startColumn":  1,
+"endLine":  100,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DefaultAcceptHeaderCoercionConventions.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Conventions\DefaultAcceptHeaderCoercionConventions.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  1,
+"endLine":  35,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DefaultStaticContentsConventions.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Conventions\DefaultStaticContentsConventions.cs",
+"region":  {
+"startLine":  40,
+"startColumn":  1,
+"endLine":  40,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DefaultViewLocationConventions.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Conventions\DefaultViewLocationConventions.cs",
+"region":  {
+"startLine":  145,
+"startColumn":  1,
+"endLine":  145,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'IConvention.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Conventions\IConvention.cs",
+"region":  {
+"startLine":  23,
+"startColumn":  1,
+"endLine":  23,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'NancyConventions.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Conventions\NancyConventions.cs",
+"region":  {
+"startLine":  104,
+"startColumn":  1,
+"endLine":  104,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'StaticContentsConventions.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Conventions\StaticContentsConventions.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  1,
+"endLine":  29,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'StaticContentsConventionsExtensions.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Conventions\StaticContentsConventionsExtensions.cs",
+"region":  {
+"startLine":  34,
+"startColumn":  1,
+"endLine":  34,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ViewLocationConventions.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Conventions\ViewLocationConventions.cs",
+"region":  {
+"startLine":  34,
+"startColumn":  1,
+"endLine":  34,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'INancyCookie.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Cookies\INancyCookie.cs",
+"region":  {
+"startLine":  53,
+"startColumn":  1,
+"endLine":  53,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'NancyCookie.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Cookies\NancyCookie.cs",
+"region":  {
+"startLine":  164,
+"startColumn":  1,
+"endLine":  164,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'Base64Helpers.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Cryptography\Base64Helpers.cs",
+"region":  {
+"startLine":  19,
+"startColumn":  1,
+"endLine":  19,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'CryptographyConfiguration.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Cryptography\CryptographyConfiguration.cs",
+"region":  {
+"startLine":  57,
+"startColumn":  1,
+"endLine":  57,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DefaultHmacProvider.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Cryptography\DefaultHmacProvider.cs",
+"region":  {
+"startLine":  65,
+"startColumn":  1,
+"endLine":  65,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'HmacComparer.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Cryptography\HmacComparer.cs",
+"region":  {
+"startLine":  44,
+"startColumn":  1,
+"endLine":  44,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'IEncryptionProvider.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Cryptography\IEncryptionProvider.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  1,
+"endLine":  22,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'IHmacProvider.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Cryptography\IHmacProvider.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  1,
+"endLine":  27,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'NoEncryptionProvider.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Cryptography\NoEncryptionProvider.cs",
+"region":  {
+"startLine":  32,
+"startColumn":  1,
+"endLine":  32,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'RandomKeyGenerator.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Cryptography\RandomKeyGenerator.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  1,
+"endLine":  21,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'RijndaelEncryptionProvider.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Cryptography\RijndaelEncryptionProvider.cs",
+"region":  {
+"startLine":  71,
+"startColumn":  1,
+"endLine":  71,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DefaultNancyContextFactory.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\DefaultNancyContextFactory.cs",
+"region":  {
+"startLine":  50,
+"startColumn":  1,
+"endLine":  50,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DefaultResponseFormatter.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\DefaultResponseFormatter.cs",
+"region":  {
+"startLine":  65,
+"startColumn":  1,
+"endLine":  65,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DefaultResponseFormatterFactory.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\DefaultResponseFormatterFactory.cs",
+"region":  {
+"startLine":  37,
+"startColumn":  1,
+"endLine":  37,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DefaultRootPathProvider.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\DefaultRootPathProvider.cs",
+"region":  {
+"startLine":  19,
+"startColumn":  1,
+"endLine":  19,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DefaultSerializerFactory.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\DefaultSerializerFactory.cs",
+"region":  {
+"startLine":  85,
+"startColumn":  1,
+"endLine":  85,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ConcurrentLimitedCollection.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\ConcurrentLimitedCollection.cs",
+"region":  {
+"startLine":  85,
+"startColumn":  1,
+"endLine":  85,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DefaultDiagnostics.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\DefaultDiagnostics.cs",
+"region":  {
+"startLine":  96,
+"startColumn":  1,
+"endLine":  96,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DefaultDiagnosticsConfigurationProvider.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\DefaultDiagnosticsConfigurationProvider.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  1,
+"endLine":  20,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DefaultRequestTrace.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\DefaultRequestTrace.cs",
+"region":  {
+"startLine":  34,
+"startColumn":  1,
+"endLine":  34,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DefaultRequestTraceFactory.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\DefaultRequestTraceFactory.cs",
+"region":  {
+"startLine":  37,
+"startColumn":  1,
+"endLine":  37,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DefaultRequestTracing.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\DefaultRequestTracing.cs",
+"region":  {
+"startLine":  75,
+"startColumn":  1,
+"endLine":  75,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DefaultTraceLog.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\DefaultTraceLog.cs",
+"region":  {
+"startLine":  44,
+"startColumn":  1,
+"endLine":  44,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DescriptionAttribute.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\DescriptionAttribute.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  1,
+"endLine":  15,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DiagnosticModule.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\DiagnosticModule.cs",
+"region":  {
+"startLine":  19,
+"startColumn":  1,
+"endLine":  19,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DiagnosticsConfigurationExtensions.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\DiagnosticsConfigurationExtensions.cs",
+"region":  {
+"startLine":  30,
+"startColumn":  1,
+"endLine":  30,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DiagnosticsModuleBuilder.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\DiagnosticsModuleBuilder.cs",
+"region":  {
+"startLine":  41,
+"startColumn":  1,
+"endLine":  41,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DiagnosticsSession.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\DiagnosticsSession.cs",
+"region":  {
+"startLine":  50,
+"startColumn":  1,
+"endLine":  50,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DiagnosticsViewRenderer.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\DiagnosticsViewRenderer.cs",
+"region":  {
+"startLine":  120,
+"startColumn":  1,
+"endLine":  120,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DisabledDiagnostics.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\DisabledDiagnostics.cs",
+"region":  {
+"startLine":  19,
+"startColumn":  1,
+"endLine":  19,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'IDiagnostics.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\IDiagnostics.cs",
+"region":  {
+"startLine":  13,
+"startColumn":  1,
+"endLine":  13,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'IDiagnosticsProvider.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\IDiagnosticsProvider.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  1,
+"endLine":  26,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'IInteractiveDiagnostics.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\IInteractiveDiagnostics.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  1,
+"endLine":  17,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'InteractiveDiagnostic.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\InteractiveDiagnostic.cs",
+"region":  {
+"startLine":  13,
+"startColumn":  1,
+"endLine":  13,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'InteractiveDiagnosticMethod.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\InteractiveDiagnosticMethod.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  1,
+"endLine":  27,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'InteractiveDiagnostics.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\InteractiveDiagnostics.cs",
+"region":  {
+"startLine":  192,
+"startColumn":  1,
+"endLine":  192,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'IRequestTrace.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\IRequestTrace.cs",
+"region":  {
+"startLine":  34,
+"startColumn":  1,
+"endLine":  34,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'IRequestTraceFactory.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\IRequestTraceFactory.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  1,
+"endLine":  15,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'IRequestTracing.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\IRequestTracing.cs",
+"region":  {
+"startLine":  42,
+"startColumn":  1,
+"endLine":  42,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ITraceLog.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\ITraceLog.cs",
+"region":  {
+"startLine":  19,
+"startColumn":  1,
+"endLine":  19,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'InfoModule.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\Modules\InfoModule.cs",
+"region":  {
+"startLine":  86,
+"startColumn":  1,
+"endLine":  86,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'InteractiveModule.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\Modules\InteractiveModule.cs",
+"region":  {
+"startLine":  153,
+"startColumn":  1,
+"endLine":  153,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'SettingsModule.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\Modules\SettingsModule.cs",
+"region":  {
+"startLine":  79,
+"startColumn":  1,
+"endLine":  79,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'TraceModule.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\Modules\TraceModule.cs",
+"region":  {
+"startLine":  55,
+"startColumn":  1,
+"endLine":  55,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'NullLog.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\NullLog.cs",
+"region":  {
+"startLine":  30,
+"startColumn":  1,
+"endLine":  30,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'RequestData.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\RequestData.cs",
+"region":  {
+"startLine":  47,
+"startColumn":  1,
+"endLine":  47,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'RequestTraceSession.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\RequestTraceSession.cs",
+"region":  {
+"startLine":  32,
+"startColumn":  1,
+"endLine":  32,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ResponseData.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\ResponseData.cs",
+"region":  {
+"startLine":  50,
+"startColumn":  1,
+"endLine":  50,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'TemplateAttribute.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\TemplateAttribute.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  1,
+"endLine":  15,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'TestingDiagnosticProvider.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\TestingDiagnosticProvider.cs",
+"region":  {
+"startLine":  85,
+"startColumn":  1,
+"endLine":  85,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DisabledStaticContentProvider.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\DisabledStaticContentProvider.cs",
+"region":  {
+"startLine":  19,
+"startColumn":  1,
+"endLine":  19,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DynamicDictionary.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\DynamicDictionary.cs",
+"region":  {
+"startLine":  378,
+"startColumn":  1,
+"endLine":  378,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DynamicDictionaryValue.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\DynamicDictionaryValue.cs",
+"region":  {
+"startLine":  767,
+"startColumn":  1,
+"endLine":  767,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'RouteExecutionEarlyExitException.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ErrorHandling\RouteExecutionEarlyExitException.cs",
+"region":  {
+"startLine":  38,
+"startColumn":  1,
+"endLine":  38,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ErrorPipeline.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ErrorPipeline.cs",
+"region":  {
+"startLine":  83,
+"startColumn":  1,
+"endLine":  83,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'CollectionExtensions.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Extensions\CollectionExtensions.cs",
+"region":  {
+"startLine":  88,
+"startColumn":  1,
+"endLine":  88,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ContextExtensions.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Extensions\ContextExtensions.cs",
+"region":  {
+"startLine":  179,
+"startColumn":  1,
+"endLine":  179,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ModelValidationErrorExtensions.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Extensions\ModelValidationErrorExtensions.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  1,
+"endLine":  31,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ModuleExtensions.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Extensions\ModuleExtensions.cs",
+"region":  {
+"startLine":  78,
+"startColumn":  1,
+"endLine":  78,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'StreamExtensions.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Extensions\StreamExtensions.cs",
+"region":  {
+"startLine":  73,
+"startColumn":  1,
+"endLine":  73,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'TypeExtensions.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Extensions\TypeExtensions.cs",
+"region":  {
+"startLine":  133,
+"startColumn":  1,
+"endLine":  133,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'HeadResponse.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\HeadResponse.cs",
+"region":  {
+"startLine":  133,
+"startColumn":  1,
+"endLine":  133,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'CacheHelpers.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Helpers\CacheHelpers.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  1,
+"endLine":  43,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ExceptionExtensions.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Helpers\ExceptionExtensions.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  1,
+"endLine":  27,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'HttpEncoder.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  916,
+"startColumn":  1,
+"endLine":  916,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'TaskHelpers.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Helpers\TaskHelpers.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  1,
+"endLine":  17,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'HttpFile.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\HttpFile.cs",
+"region":  {
+"startLine":  61,
+"startColumn":  1,
+"endLine":  61,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'HttpMultipart.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\HttpMultipart.cs",
+"region":  {
+"startLine":  133,
+"startColumn":  1,
+"endLine":  133,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'HttpMultipartBoundary.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\HttpMultipartBoundary.cs",
+"region":  {
+"startLine":  103,
+"startColumn":  1,
+"endLine":  103,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'HttpMultipartBuffer.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\HttpMultipartBuffer.cs",
+"region":  {
+"startLine":  77,
+"startColumn":  1,
+"endLine":  77,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'HttpMultipartSubStream.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\HttpMultipartSubStream.cs",
+"region":  {
+"startLine":  221,
+"startColumn":  1,
+"endLine":  221,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'IHideObjectMembers.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\IHideObjectMembers.cs",
+"region":  {
+"startLine":  38,
+"startColumn":  1,
+"endLine":  38,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'INancyContextFactory.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\INancyContextFactory.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  1,
+"endLine":  14,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'INancyEngine.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\INancyEngine.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  1,
+"endLine":  29,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'INancyModule.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\INancyModule.cs",
+"region":  {
+"startLine":  107,
+"startColumn":  1,
+"endLine":  107,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'INancyModuleCatalog.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\INancyModuleCatalog.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  1,
+"endLine":  26,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'IncludeInNancyAssemblyScanningAttribute.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\IncludeInNancyAssemblyScanningAttribute.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  1,
+"endLine":  17,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'UnclosableStreamWrapper.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\IO\UnclosableStreamWrapper.cs",
+"region":  {
+"startLine":  320,
+"startColumn":  1,
+"endLine":  320,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'IObjectSerializer.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\IObjectSerializer.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  1,
+"endLine":  22,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'IObjectSerializerSelector.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\IObjectSerializerSelector.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  1,
+"endLine":  14,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'IResourceAssemblyProvider.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\IResourceAssemblyProvider.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  1,
+"endLine":  17,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'IResponseFormatter.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\IResponseFormatter.cs",
+"region":  {
+"startLine":  34,
+"startColumn":  1,
+"endLine":  34,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'IResponseFormatterFactory.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\IResponseFormatterFactory.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  1,
+"endLine":  15,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'IRootPathProvider.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\IRootPathProvider.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  1,
+"endLine":  14,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ISerializer.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ISerializer.cs",
+"region":  {
+"startLine":  34,
+"startColumn":  1,
+"endLine":  34,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ISerializerFactory.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ISerializerFactory.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  1,
+"endLine":  17,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'IStaticContentProvider.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\IStaticContentProvider.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  1,
+"endLine":  15,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'TimeSpanConverter.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Json\Converters\TimeSpanConverter.cs",
+"region":  {
+"startLine":  67,
+"startColumn":  1,
+"endLine":  67,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'TupleConverter.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Json\Converters\TupleConverter.cs",
+"region":  {
+"startLine":  37,
+"startColumn":  1,
+"endLine":  37,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DefaultJsonConfigurationProvider.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Json\DefaultJsonConfigurationProvider.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  1,
+"endLine":  20,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'JavaScriptConverter.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Json\JavaScriptConverter.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  1,
+"endLine":  43,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'JavaScriptTypeResolver.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Json\JavaScriptTypeResolver.cs",
+"region":  {
+"startLine":  40,
+"startColumn":  1,
+"endLine":  40,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'JsonConfigurationExtensions.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Json\JsonConfigurationExtensions.cs",
+"region":  {
+"startLine":  37,
+"startColumn":  1,
+"endLine":  37,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ScriptIgnoreAttribute.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Json\ScriptIgnoreAttribute.cs",
+"region":  {
+"startLine":  37,
+"startColumn":  1,
+"endLine":  37,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'StringBuilderExtensions.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Json\StringBuilderExtensions.cs",
+"region":  {
+"startLine":  175,
+"startColumn":  1,
+"endLine":  175,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ITextResource.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Localization\ITextResource.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  1,
+"endLine":  15,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'BindingConfig.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\BindingConfig.cs",
+"region":  {
+"startLine":  47,
+"startColumn":  1,
+"endLine":  47,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'BindingContext.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\BindingContext.cs",
+"region":  {
+"startLine":  51,
+"startColumn":  1,
+"endLine":  51,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'XmlBodyDeserializer.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBodyDeserializers\XmlBodyDeserializer.cs",
+"region":  {
+"startLine":  48,
+"startColumn":  1,
+"endLine":  48,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'CollectionConverter.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultConverters\CollectionConverter.cs",
+"region":  {
+"startLine":  134,
+"startColumn":  1,
+"endLine":  134,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'FallbackConverter.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultConverters\FallbackConverter.cs",
+"region":  {
+"startLine":  53,
+"startColumn":  1,
+"endLine":  53,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DefaultFieldNameConverter.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultFieldNameConverter.cs",
+"region":  {
+"startLine":  32,
+"startColumn":  1,
+"endLine":  32,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DefaultModelBinderLocator.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultModelBinderLocator.cs",
+"region":  {
+"startLine":  44,
+"startColumn":  1,
+"endLine":  44,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DynamicModelBinderAdapter.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\DynamicModelBinderAdapter.cs",
+"region":  {
+"startLine":  72,
+"startColumn":  1,
+"endLine":  72,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ExpressionExtensions.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\ExpressionExtensions.cs",
+"region":  {
+"startLine":  33,
+"startColumn":  1,
+"endLine":  33,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'IBinder.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\IBinder.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  1,
+"endLine":  21,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'IBodyDeserializer.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\IBodyDeserializer.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  1,
+"endLine":  29,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'IFieldNameConverter.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\IFieldNameConverter.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  1,
+"endLine":  16,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'IModelBinder.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\IModelBinder.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  1,
+"endLine":  17,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'IModelBinderLocator.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\IModelBinderLocator.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  1,
+"endLine":  18,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ITypeConverter.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\ITypeConverter.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  1,
+"endLine":  28,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ModelBindingException.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\ModelBindingException.cs",
+"region":  {
+"startLine":  52,
+"startColumn":  1,
+"endLine":  52,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'PropertyBindingException.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\PropertyBindingException.cs",
+"region":  {
+"startLine":  32,
+"startColumn":  1,
+"endLine":  32,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'NamedPipelineBase.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\NamedPipelineBase.cs",
+"region":  {
+"startLine":  213,
+"startColumn":  1,
+"endLine":  213,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'NancyEngineExtensions.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\NancyEngineExtensions.cs",
+"region":  {
+"startLine":  19,
+"startColumn":  1,
+"endLine":  19,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'NegotiatorExtensions.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\NegotiatorExtensions.cs",
+"region":  {
+"startLine":  273,
+"startColumn":  1,
+"endLine":  273,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'NotFoundResponse.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\NotFoundResponse.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  1,
+"endLine":  11,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'NancyContextExtensions.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Owin\NancyContextExtensions.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  1,
+"endLine":  26,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'NancyOptions.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Owin\NancyOptions.cs",
+"region":  {
+"startLine":  39,
+"startColumn":  1,
+"endLine":  39,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'NancyOptionsExtensions.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Owin\NancyOptionsExtensions.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  1,
+"endLine":  21,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'PipelineItem.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\PipelineItem.cs",
+"region":  {
+"startLine":  25,
+"startColumn":  1,
+"endLine":  25,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'RequestExecutionException.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\RequestExecutionException.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  1,
+"endLine":  21,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ResourceAssemblyProvider.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ResourceAssemblyProvider.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  1,
+"endLine":  35,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ResponseExtensions.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ResponseExtensions.cs",
+"region":  {
+"startLine":  207,
+"startColumn":  1,
+"endLine":  207,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DefaultXmlSerializer.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Responses\DefaultXmlSerializer.cs",
+"region":  {
+"startLine":  95,
+"startColumn":  1,
+"endLine":  95,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'EmbeddedFileResponse.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Responses\EmbeddedFileResponse.cs",
+"region":  {
+"startLine":  84,
+"startColumn":  1,
+"endLine":  84,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'HtmlResponse.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Responses\HtmlResponse.cs",
+"region":  {
+"startLine":  45,
+"startColumn":  1,
+"endLine":  45,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'MaterialisingResponse.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Responses\MaterialisingResponse.cs",
+"region":  {
+"startLine":  54,
+"startColumn":  1,
+"endLine":  54,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'NegotiatedResponse.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Responses\NegotiatedResponse.cs",
+"region":  {
+"startLine":  23,
+"startColumn":  1,
+"endLine":  23,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'IResponseNegotiator.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\IResponseNegotiator.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  1,
+"endLine":  16,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'IResponseProcessor.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\IResponseProcessor.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  1,
+"endLine":  35,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'JsonProcessor.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\JsonProcessor.cs",
+"region":  {
+"startLine":  114,
+"startColumn":  1,
+"endLine":  114,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'MatchResult.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\MatchResult.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  1,
+"endLine":  29,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'MediaRangeParameters.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\MediaRangeParameters.cs",
+"region":  {
+"startLine":  115,
+"startColumn":  1,
+"endLine":  115,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'MediaType.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\MediaType.cs",
+"region":  {
+"startLine":  60,
+"startColumn":  1,
+"endLine":  60,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'NegotiationContext.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\NegotiationContext.cs",
+"region":  {
+"startLine":  112,
+"startColumn":  1,
+"endLine":  112,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'Negotiator.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\Negotiator.cs",
+"region":  {
+"startLine":  32,
+"startColumn":  1,
+"endLine":  32,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ProcessorMatch.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\ProcessorMatch.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  1,
+"endLine":  27,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ResponseProcessor.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\ResponseProcessor.cs",
+"region":  {
+"startLine":  52,
+"startColumn":  1,
+"endLine":  52,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ViewProcessor.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\ViewProcessor.cs",
+"region":  {
+"startLine":  75,
+"startColumn":  1,
+"endLine":  75,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'NotAcceptableResponse.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Responses\NotAcceptableResponse.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  1,
+"endLine":  16,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'RedirectResponse.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Responses\RedirectResponse.cs",
+"region":  {
+"startLine":  53,
+"startColumn":  1,
+"endLine":  53,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'TextResponse.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Responses\TextResponse.cs",
+"region":  {
+"startLine":  94,
+"startColumn":  1,
+"endLine":  94,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'RootPathApplicationStartup.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\RootPathApplicationStartup.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  1,
+"endLine":  28,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'AlphaRouteSegmentConstraint.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\Constraints\AlphaRouteSegmentConstraint.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  1,
+"endLine":  27,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'BoolRouteSegmentConstraint.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\Constraints\BoolRouteSegmentConstraint.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  1,
+"endLine":  18,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'CustomDateTimeRouteSegmentConstraint.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\Constraints\CustomDateTimeRouteSegmentConstraint.cs",
+"region":  {
+"startLine":  25,
+"startColumn":  1,
+"endLine":  25,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DateTimeRouteSegmentConstraint.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\Constraints\DateTimeRouteSegmentConstraint.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  1,
+"endLine":  20,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DecimalRouteSegmentConstraint.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\Constraints\DecimalRouteSegmentConstraint.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  1,
+"endLine":  20,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'GuidRouteSegmentConstraint.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\Constraints\GuidRouteSegmentConstraint.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  1,
+"endLine":  20,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'IntRouteSegmentConstraint.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\Constraints\IntRouteSegmentConstraint.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  1,
+"endLine":  20,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'IRouteSegmentConstraint.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\Constraints\IRouteSegmentConstraint.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  1,
+"endLine":  26,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'LengthRouteSegmentConstraint.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\Constraints\LengthRouteSegmentConstraint.cs",
+"region":  {
+"startLine":  53,
+"startColumn":  1,
+"endLine":  53,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'LongRouteSegmentConstraint.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\Constraints\LongRouteSegmentConstraint.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  1,
+"endLine":  20,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'MaxLengthRouteSegmentConstraint.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\Constraints\MaxLengthRouteSegmentConstraint.cs",
+"region":  {
+"startLine":  33,
+"startColumn":  1,
+"endLine":  33,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'MaxRouteSegmentConstraint.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\Constraints\MaxRouteSegmentConstraint.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  1,
+"endLine":  35,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'MinLengthRouteSegmentConstraint.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\Constraints\MinLengthRouteSegmentConstraint.cs",
+"region":  {
+"startLine":  33,
+"startColumn":  1,
+"endLine":  33,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'MinRouteSegmentConstraint.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\Constraints\MinRouteSegmentConstraint.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  1,
+"endLine":  35,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ParameterizedRouteSegmentConstraintBase.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\Constraints\ParameterizedRouteSegmentConstraintBase.cs",
+"region":  {
+"startLine":  44,
+"startColumn":  1,
+"endLine":  44,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'RangeRouteSegmentConstraint.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\Constraints\RangeRouteSegmentConstraint.cs",
+"region":  {
+"startLine":  45,
+"startColumn":  1,
+"endLine":  45,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'RouteSegmentConstraintBase.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\Constraints\RouteSegmentConstraintBase.cs",
+"region":  {
+"startLine":  51,
+"startColumn":  1,
+"endLine":  51,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DefaultNancyModuleBuilder.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\DefaultNancyModuleBuilder.cs",
+"region":  {
+"startLine":  51,
+"startColumn":  1,
+"endLine":  51,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DefaultRouteCacheProvider.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\DefaultRouteCacheProvider.cs",
+"region":  {
+"startLine":  91,
+"startColumn":  1,
+"endLine":  91,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DefaultRouteDescriptionProvider.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\DefaultRouteDescriptionProvider.cs",
+"region":  {
+"startLine":  48,
+"startColumn":  1,
+"endLine":  48,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DefaultRouteSegmentExtractor.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\DefaultRouteSegmentExtractor.cs",
+"region":  {
+"startLine":  48,
+"startColumn":  1,
+"endLine":  48,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'INancyModuleBuilder.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\INancyModuleBuilder.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  1,
+"endLine":  16,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'IRequestDispatcher.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\IRequestDispatcher.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  1,
+"endLine":  18,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'IRouteDescriptionProvider.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\IRouteDescriptionProvider.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  1,
+"endLine":  16,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'IRouteInvoker.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\IRouteInvoker.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  1,
+"endLine":  21,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'IRouteMetadataProvider.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\IRouteMetadataProvider.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  1,
+"endLine":  26,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'IRoutePatternMatcher.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\IRoutePatternMatcher.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  1,
+"endLine":  21,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'IRoutePatternMatchResult.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\IRoutePatternMatchResult.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  1,
+"endLine":  27,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'IRouteSegmentExtractor.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\IRouteSegmentExtractor.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  1,
+"endLine":  17,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'MethodNotAllowedRoute.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\MethodNotAllowedRoute.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  1,
+"endLine":  35,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'NotFoundRoute.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\NotFoundRoute.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  1,
+"endLine":  22,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'OptionsRoute.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\OptionsRoute.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  1,
+"endLine":  27,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ParameterSegmentInformation.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\ParameterSegmentInformation.cs",
+"region":  {
+"startLine":  51,
+"startColumn":  1,
+"endLine":  51,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ResolveResult.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\ResolveResult.cs",
+"region":  {
+"startLine":  48,
+"startColumn":  1,
+"endLine":  48,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'RouteCache.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\RouteCache.cs",
+"region":  {
+"startLine":  104,
+"startColumn":  1,
+"endLine":  104,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'RouteCacheExtensions.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\RouteCacheExtensions.cs",
+"region":  {
+"startLine":  23,
+"startColumn":  1,
+"endLine":  23,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'RouteDescription.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\RouteDescription.cs",
+"region":  {
+"startLine":  98,
+"startColumn":  1,
+"endLine":  98,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'RouteMetadata.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\RouteMetadata.cs",
+"region":  {
+"startLine":  51,
+"startColumn":  1,
+"endLine":  51,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'RouteMetadataProvider.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\RouteMetadataProvider.cs",
+"region":  {
+"startLine":  41,
+"startColumn":  1,
+"endLine":  41,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'RoutePatternMatchResult.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\RoutePatternMatchResult.cs",
+"region":  {
+"startLine":  40,
+"startColumn":  1,
+"endLine":  40,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'IRouteResolverTrie.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\Trie\IRouteResolverTrie.cs",
+"region":  {
+"startLine":  33,
+"startColumn":  1,
+"endLine":  33,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ITrieNodeFactory.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\Trie\ITrieNodeFactory.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  1,
+"endLine":  18,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'MatchResult.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\Trie\MatchResult.cs",
+"region":  {
+"startLine":  98,
+"startColumn":  1,
+"endLine":  98,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'NodeData.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\Trie\NodeData.cs",
+"region":  {
+"startLine":  42,
+"startColumn":  1,
+"endLine":  42,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'NodeDataExtensions.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\Trie\NodeDataExtensions.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  1,
+"endLine":  29,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'CaptureNode.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\Trie\Nodes\CaptureNode.cs",
+"region":  {
+"startLine":  41,
+"startColumn":  1,
+"endLine":  41,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'CaptureNodeWithDefaultValue.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\Trie\Nodes\CaptureNodeWithDefaultValue.cs",
+"region":  {
+"startLine":  76,
+"startColumn":  1,
+"endLine":  76,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'CaptureNodeWithMultipleParameters.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\Trie\Nodes\CaptureNodeWithMultipleParameters.cs",
+"region":  {
+"startLine":  135,
+"startColumn":  1,
+"endLine":  135,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'GreedyCaptureNode.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\Trie\Nodes\GreedyCaptureNode.cs",
+"region":  {
+"startLine":  106,
+"startColumn":  1,
+"endLine":  106,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'GreedyRegExCaptureNode.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\Trie\Nodes\GreedyRegExCaptureNode.cs",
+"region":  {
+"startLine":  83,
+"startColumn":  1,
+"endLine":  83,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'LiteralNode.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\Trie\Nodes\LiteralNode.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  1,
+"endLine":  43,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'OptionalCaptureNode.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\Trie\Nodes\OptionalCaptureNode.cs",
+"region":  {
+"startLine":  64,
+"startColumn":  1,
+"endLine":  64,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'RegExNode.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\Trie\Nodes\RegExNode.cs",
+"region":  {
+"startLine":  61,
+"startColumn":  1,
+"endLine":  61,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'RootNode.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\Trie\Nodes\RootNode.cs",
+"region":  {
+"startLine":  55,
+"startColumn":  1,
+"endLine":  55,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'TrieNode.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\Trie\Nodes\TrieNode.cs",
+"region":  {
+"startLine":  276,
+"startColumn":  1,
+"endLine":  276,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'SegmentMatch.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\Trie\SegmentMatch.cs",
+"region":  {
+"startLine":  38,
+"startColumn":  1,
+"endLine":  38,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ClaimsPrincipalExtensions.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Security\ClaimsPrincipalExtensions.cs",
+"region":  {
+"startLine":  60,
+"startColumn":  1,
+"endLine":  60,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'Csrf.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Security\Csrf.cs",
+"region":  {
+"startLine":  157,
+"startColumn":  1,
+"endLine":  157,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'CsrfApplicationStartup.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Security\CsrfApplicationStartup.cs",
+"region":  {
+"startLine":  48,
+"startColumn":  1,
+"endLine":  48,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'CsrfToken.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Security\CsrfToken.cs",
+"region":  {
+"startLine":  85,
+"startColumn":  1,
+"endLine":  85,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'CsrfTokenExtensions.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Security\CsrfTokenExtensions.cs",
+"region":  {
+"startLine":  50,
+"startColumn":  1,
+"endLine":  50,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'CsrfTokenValidationResult.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Security\CsrfTokenValidationResult.cs",
+"region":  {
+"startLine":  33,
+"startColumn":  1,
+"endLine":  33,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'CsrfValidationException.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Security\CsrfValidationException.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  1,
+"endLine":  15,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DefaultCsrfTokenValidator.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Security\DefaultCsrfTokenValidator.cs",
+"region":  {
+"startLine":  100,
+"startColumn":  1,
+"endLine":  100,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ICsrfTokenValidator.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Security\ICsrfTokenValidator.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  1,
+"endLine":  26,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'SecurityHooks.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Security\SecurityHooks.cs",
+"region":  {
+"startLine":  143,
+"startColumn":  1,
+"endLine":  143,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'CookieBasedSessions.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Session\CookieBasedSessions.cs",
+"region":  {
+"startLine":  237,
+"startColumn":  1,
+"endLine":  237,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ISession.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Session\ISession.cs",
+"region":  {
+"startLine":  33,
+"startColumn":  1,
+"endLine":  33,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'NullSessionProvider.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Session\NullSessionProvider.cs",
+"region":  {
+"startLine":  85,
+"startColumn":  1,
+"endLine":  85,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'Session.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Session\Session.cs",
+"region":  {
+"startLine":  110,
+"startColumn":  1,
+"endLine":  110,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'StaticContent.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\StaticContent.cs",
+"region":  {
+"startLine":  54,
+"startColumn":  1,
+"endLine":  54,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DefaultValidatorLocator.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Validation\DefaultValidatorLocator.cs",
+"region":  {
+"startLine":  60,
+"startColumn":  1,
+"endLine":  60,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'IModelValidator.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Validation\IModelValidator.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  1,
+"endLine":  28,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'IModelValidatorFactory.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Validation\IModelValidatorFactory.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  1,
+"endLine":  17,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'IModelValidatorLocator.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Validation\IModelValidatorLocator.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  1,
+"endLine":  17,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ModelValidationDescriptor.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Validation\ModelValidationDescriptor.cs",
+"region":  {
+"startLine":  69,
+"startColumn":  1,
+"endLine":  69,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ModelValidationError.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Validation\ModelValidationError.cs",
+"region":  {
+"startLine":  61,
+"startColumn":  1,
+"endLine":  61,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ModelValidationException.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Validation\ModelValidationException.cs",
+"region":  {
+"startLine":  36,
+"startColumn":  1,
+"endLine":  36,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ModelValidationRule.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Validation\ModelValidationRule.cs",
+"region":  {
+"startLine":  68,
+"startColumn":  1,
+"endLine":  68,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ModuleExtensions.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Validation\ModuleExtensions.cs",
+"region":  {
+"startLine":  39,
+"startColumn":  1,
+"endLine":  39,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ComparisonOperator.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Validation\Rules\ComparisonOperator.cs",
+"region":  {
+"startLine":  38,
+"startColumn":  1,
+"endLine":  38,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ComparisonValidationRule.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Validation\Rules\ComparisonValidationRule.cs",
+"region":  {
+"startLine":  37,
+"startColumn":  1,
+"endLine":  37,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'NotEmptyValidationRule.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Validation\Rules\NotEmptyValidationRule.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  1,
+"endLine":  22,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'NotNullValidationRule.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Validation\Rules\NotNullValidationRule.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  1,
+"endLine":  21,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'RegexValidationRule.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Validation\Rules\RegexValidationRule.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  1,
+"endLine":  29,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'AmbiguousViewsException.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\AmbiguousViewsException.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  1,
+"endLine":  26,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DefaultFileSystemReader.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\DefaultFileSystemReader.cs",
+"region":  {
+"startLine":  75,
+"startColumn":  1,
+"endLine":  75,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DefaultRenderContext.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\DefaultRenderContext.cs",
+"region":  {
+"startLine":  130,
+"startColumn":  1,
+"endLine":  130,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DefaultRenderContextFactory.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\DefaultRenderContextFactory.cs",
+"region":  {
+"startLine":  37,
+"startColumn":  1,
+"endLine":  37,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DefaultResourceReader.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\DefaultResourceReader.cs",
+"region":  {
+"startLine":  39,
+"startColumn":  1,
+"endLine":  39,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DefaultViewCache.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\DefaultViewCache.cs",
+"region":  {
+"startLine":  42,
+"startColumn":  1,
+"endLine":  42,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DefaultViewFactory.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\DefaultViewFactory.cs",
+"region":  {
+"startLine":  178,
+"startColumn":  1,
+"endLine":  178,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DefaultViewLocator.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\DefaultViewLocator.cs",
+"region":  {
+"startLine":  249,
+"startColumn":  1,
+"endLine":  249,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DefaultViewRenderer.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\DefaultViewRenderer.cs",
+"region":  {
+"startLine":  34,
+"startColumn":  1,
+"endLine":  34,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DefaultViewResolver.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\DefaultViewResolver.cs",
+"region":  {
+"startLine":  96,
+"startColumn":  1,
+"endLine":  96,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'Extensions.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\Extensions.cs",
+"region":  {
+"startLine":  36,
+"startColumn":  1,
+"endLine":  36,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'FileSystemViewLocationProvider.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\FileSystemViewLocationProvider.cs",
+"region":  {
+"startLine":  125,
+"startColumn":  1,
+"endLine":  125,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'FileSystemViewLocationResult.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\FileSystemViewLocationResult.cs",
+"region":  {
+"startLine":  61,
+"startColumn":  1,
+"endLine":  61,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'IFileSystemReader.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\IFileSystemReader.cs",
+"region":  {
+"startLine":  36,
+"startColumn":  1,
+"endLine":  36,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'IRenderContext.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\IRenderContext.cs",
+"region":  {
+"startLine":  65,
+"startColumn":  1,
+"endLine":  65,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'IRenderContextFactory.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\IRenderContextFactory.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  1,
+"endLine":  15,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'IResourceReader.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\IResourceReader.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  1,
+"endLine":  21,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'IViewCache.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\IViewCache.cs",
+"region":  {
+"startLine":  19,
+"startColumn":  1,
+"endLine":  19,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'IViewEngine.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\IViewEngine.cs",
+"region":  {
+"startLine":  32,
+"startColumn":  1,
+"endLine":  32,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'IViewFactory.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\IViewFactory.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  1,
+"endLine":  17,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'IViewLocationProvider.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\IViewLocationProvider.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  1,
+"endLine":  28,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'IViewLocator.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\IViewLocator.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  1,
+"endLine":  27,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'IViewRenderer.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\IViewRenderer.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  1,
+"endLine":  18,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'IViewResolver.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\IViewResolver.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  1,
+"endLine":  17,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ResourceViewLocationProvider.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\ResourceViewLocationProvider.cs",
+"region":  {
+"startLine":  180,
+"startColumn":  1,
+"endLine":  180,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ISuperSimpleViewEngineMatcher.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\ISuperSimpleViewEngineMatcher.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  1,
+"endLine":  17,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'IViewEngineHost.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\IViewEngineHost.cs",
+"region":  {
+"startLine":  51,
+"startColumn":  1,
+"endLine":  51,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'NancyViewEngineHost.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\NancyViewEngineHost.cs",
+"region":  {
+"startLine":  88,
+"startColumn":  1,
+"endLine":  88,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'SuperSimpleViewEngineRegistrations.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\SuperSimpleViewEngineRegistrations.cs",
+"region":  {
+"startLine":  41,
+"startColumn":  1,
+"endLine":  41,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'SuperSimpleViewEngineWrapper.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\SuperSimpleViewEngineWrapper.cs",
+"region":  {
+"startLine":  74,
+"startColumn":  1,
+"endLine":  74,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ViewEngineApplicationStartup.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\ViewEngineApplicationStartup.cs",
+"region":  {
+"startLine":  49,
+"startColumn":  1,
+"endLine":  49,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ViewEngineStartupContext.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\ViewEngineStartupContext.cs",
+"region":  {
+"startLine":  25,
+"startColumn":  1,
+"endLine":  25,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ViewLocationContext.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\ViewLocationContext.cs",
+"region":  {
+"startLine":  25,
+"startColumn":  1,
+"endLine":  25,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ViewLocationResult.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\ViewLocationResult.cs",
+"region":  {
+"startLine":  117,
+"startColumn":  1,
+"endLine":  117,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ViewNotFoundException.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\ViewNotFoundException.cs",
+"region":  {
+"startLine":  77,
+"startColumn":  1,
+"endLine":  77,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ViewRenderException.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\ViewRenderException.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  1,
+"endLine":  27,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ViewRenderer.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ViewRenderer.cs",
+"region":  {
+"startLine":  69,
+"startColumn":  1,
+"endLine":  69,
+"endColumn":  2
+}
+}
+}
+]
+}

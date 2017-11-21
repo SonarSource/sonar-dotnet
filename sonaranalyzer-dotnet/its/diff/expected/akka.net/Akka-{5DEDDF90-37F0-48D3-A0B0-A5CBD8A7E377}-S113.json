@@ -1,0 +1,238 @@
+{
+"issues":  [
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ActorCell.DeathWatch.cs'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.DeathWatch.cs",
+"region":  {
+"startLine":  307,
+"startColumn":  1,
+"endLine":  307,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'SingleThreadDispatcher.cs'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\SingleThreadDispatcher.cs",
+"region":  {
+"startLine":  109,
+"startColumn":  1,
+"endLine":  109,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'BusLogging.cs'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Event\BusLogging.cs",
+"region":  {
+"startLine":  99,
+"startColumn":  1,
+"endLine":  99,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'StandardOutLogger.cs'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Event\StandardOutLogger.cs",
+"region":  {
+"startLine":  126,
+"startColumn":  1,
+"endLine":  126,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ByteBuffer.cs'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\ByteBuffer.cs",
+"region":  {
+"startLine":  115,
+"startColumn":  1,
+"endLine":  115,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DatagramChannel.cs'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\DatagramChannel.cs",
+"region":  {
+"startLine":  50,
+"startColumn":  1,
+"endLine":  50,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'SocketAsyncEventArgsPool.cs'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\SocketAsyncEventArgsPool.cs",
+"region":  {
+"startLine":  56,
+"startColumn":  1,
+"endLine":  56,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'SocketChannel.cs'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\SocketChannel.cs",
+"region":  {
+"startLine":  119,
+"startColumn":  1,
+"endLine":  119,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'TcpConnection.cs'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpConnection.cs",
+"region":  {
+"startLine":  808,
+"startColumn":  1,
+"endLine":  808,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'TcpListener.cs'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpListener.cs",
+"region":  {
+"startLine":  181,
+"startColumn":  1,
+"endLine":  181,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'TcpManager.cs'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\TcpManager.cs",
+"region":  {
+"startLine":  82,
+"startColumn":  1,
+"endLine":  82,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'BackoffSupervisor.cs'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Pattern\BackoffSupervisor.cs",
+"region":  {
+"startLine":  142,
+"startColumn":  1,
+"endLine":  142,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'CircuitBreakerState.cs'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Pattern\CircuitBreakerState.cs",
+"region":  {
+"startLine":  227,
+"startColumn":  1,
+"endLine":  227,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'RoutedActorCell.cs'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Routing\RoutedActorCell.cs",
+"region":  {
+"startLine":  166,
+"startColumn":  1,
+"endLine":  166,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'RouterConfig.cs'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Routing\RouterConfig.cs",
+"region":  {
+"startLine":  815,
+"startColumn":  1,
+"endLine":  815,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ByteIterator.cs'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\ByteIterator.cs",
+"region":  {
+"startLine":  565,
+"startColumn":  1,
+"endLine":  565,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ByteString.cs'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\ByteString.cs",
+"region":  {
+"startLine":  723,
+"startColumn":  1,
+"endLine":  723,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'Iterator.cs'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\Internal\Collections\Iterator.cs",
+"region":  {
+"startLine":  40,
+"startColumn":  1,
+"endLine":  40,
+"endColumn":  2
+}
+}
+}
+]
+}

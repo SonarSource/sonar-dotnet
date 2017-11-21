@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'IUserMapper.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Authentication.Forms\IUserMapper.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  1,
+"endLine":  20,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ModuleExtensions.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Authentication.Forms\ModuleExtensions.cs",
+"region":  {
+"startLine":  86,
+"startColumn":  1,
+"endLine":  86,
+"endColumn":  2
+}
+}
+}
+]
+}

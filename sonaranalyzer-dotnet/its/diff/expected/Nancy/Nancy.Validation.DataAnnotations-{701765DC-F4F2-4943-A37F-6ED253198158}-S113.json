@@ -1,0 +1,173 @@
+{
+"issues":  [
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DataAnnotationsRegistrations.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Validation.DataAnnotations\DataAnnotationsRegistrations.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  1,
+"endLine":  21,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DataAnnotationsValidator.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Validation.DataAnnotations\DataAnnotationsValidator.cs",
+"region":  {
+"startLine":  75,
+"startColumn":  1,
+"endLine":  75,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DataAnnotationsValidatorFactory.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Validation.DataAnnotations\DataAnnotationsValidatorFactory.cs",
+"region":  {
+"startLine":  40,
+"startColumn":  1,
+"endLine":  40,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DefaultPropertyValidatorFactory.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Validation.DataAnnotations\DefaultPropertyValidatorFactory.cs",
+"region":  {
+"startLine":  99,
+"startColumn":  1,
+"endLine":  99,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DefaultValidatableObjectAdapter.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Validation.DataAnnotations\DefaultValidatableObjectAdapter.cs",
+"region":  {
+"startLine":  37,
+"startColumn":  1,
+"endLine":  37,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'IDataAnnotationsValidatorAdapter.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Validation.DataAnnotations\IDataAnnotationsValidatorAdapter.cs",
+"region":  {
+"startLine":  38,
+"startColumn":  1,
+"endLine":  38,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'IPropertyValidator.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Validation.DataAnnotations\IPropertyValidator.cs",
+"region":  {
+"startLine":  37,
+"startColumn":  1,
+"endLine":  37,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'IPropertyValidatorFactory.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Validation.DataAnnotations\IPropertyValidatorFactory.cs",
+"region":  {
+"startLine":  19,
+"startColumn":  1,
+"endLine":  19,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'IValidatableObjectAdapter.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Validation.DataAnnotations\IValidatableObjectAdapter.cs",
+"region":  {
+"startLine":  19,
+"startColumn":  1,
+"endLine":  19,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'PropertyValidator.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Validation.DataAnnotations\PropertyValidator.cs",
+"region":  {
+"startLine":  72,
+"startColumn":  1,
+"endLine":  72,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'RangeValidatorAdapter.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Validation.DataAnnotations\RangeValidatorAdapter.cs",
+"region":  {
+"startLine":  72,
+"startColumn":  1,
+"endLine":  72,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'RegexValidatorAdapter.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Validation.DataAnnotations\RegexValidatorAdapter.cs",
+"region":  {
+"startLine":  45,
+"startColumn":  1,
+"endLine":  45,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'RequiredValidatorAdapter.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Validation.DataAnnotations\RequiredValidatorAdapter.cs",
+"region":  {
+"startLine":  44,
+"startColumn":  1,
+"endLine":  44,
+"endColumn":  2
+}
+}
+}
+]
+}

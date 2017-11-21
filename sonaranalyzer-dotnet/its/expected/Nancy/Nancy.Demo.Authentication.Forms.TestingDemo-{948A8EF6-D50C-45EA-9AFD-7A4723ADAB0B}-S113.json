@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'LoginFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Demo.Authentication.Forms.TestingDemo\LoginFixture.cs",
+"region":  {
+"startLine":  49,
+"startColumn":  1,
+"endLine":  49,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'TestBootstrapper.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Demo.Authentication.Forms.TestingDemo\TestBootstrapper.cs",
+"region":  {
+"startLine":  33,
+"startColumn":  1,
+"endLine":  33,
+"endColumn":  2
+}
+}
+}
+]
+}

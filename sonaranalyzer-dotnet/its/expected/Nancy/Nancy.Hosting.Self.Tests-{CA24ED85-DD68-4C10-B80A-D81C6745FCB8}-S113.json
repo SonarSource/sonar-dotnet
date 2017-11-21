@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'MakeAppLocalPathFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Hosting.Self.Tests\MakeAppLocalPathFixture.cs",
+"region":  {
+"startLine":  102,
+"startColumn":  1,
+"endLine":  102,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'TestModule.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Hosting.Self.Tests\TestModule.cs",
+"region":  {
+"startLine":  33,
+"startColumn":  1,
+"endLine":  33,
+"endColumn":  2
+}
+}
+}
+]
+}

@@ -1,0 +1,82 @@
+{
+"issues":  [
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ContainerMessage.cs'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\serializers\Akka.Serialization.TestKit\ContainerMessage.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  1,
+"endLine":  11,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'EmptyActor.cs'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\serializers\Akka.Serialization.TestKit\EmptyActor.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  1,
+"endLine":  12,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ImmutableMessage.cs'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\serializers\Akka.Serialization.TestKit\ImmutableMessage.cs",
+"region":  {
+"startLine":  42,
+"startColumn":  1,
+"endLine":  42,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ImmutableMessageWithPrivateCtor.cs'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\serializers\Akka.Serialization.TestKit\ImmutableMessageWithPrivateCtor.cs",
+"region":  {
+"startLine":  41,
+"startColumn":  1,
+"endLine":  41,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'SomeMessage.cs'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\serializers\Akka.Serialization.TestKit\SomeMessage.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  1,
+"endLine":  9,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'UntypedContainerMessage.cs'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\serializers\Akka.Serialization.TestKit\UntypedContainerMessage.cs",
+"region":  {
+"startLine":  44,
+"startColumn":  1,
+"endLine":  44,
+"endColumn":  2
+}
+}
+}
+]
+}

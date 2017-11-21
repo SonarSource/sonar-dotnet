@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DefaultFluentAdapterFactoryFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Validation.FluentValidation.Tests\DefaultFluentAdapterFactoryFixture.cs",
+"region":  {
+"startLine":  75,
+"startColumn":  1,
+"endLine":  75,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'FluentValidationValidatorFactoryFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Validation.FluentValidation.Tests\FluentValidationValidatorFactoryFixture.cs",
+"region":  {
+"startLine":  61,
+"startColumn":  1,
+"endLine":  61,
+"endColumn":  2
+}
+}
+}
+]
+}

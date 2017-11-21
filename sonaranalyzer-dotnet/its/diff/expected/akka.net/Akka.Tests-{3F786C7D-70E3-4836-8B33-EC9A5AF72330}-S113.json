@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'PipeToSupportSpec.cs'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\PipeToSupportSpec.cs",
+"region":  {
+"startLine":  61,
+"startColumn":  1,
+"endLine":  61,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'BackoffSupervisorSpec.cs'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Pattern\BackoffSupervisorSpec.cs",
+"region":  {
+"startLine":  59,
+"startColumn":  1,
+"endLine":  59,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'CircuitBreakerSpec.cs'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Pattern\CircuitBreakerSpec.cs",
+"region":  {
+"startLine":  351,
+"startColumn":  1,
+"endLine":  351,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'AssemblyInfo.cs'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Properties\AssemblyInfo.cs",
+"region":  {
+"startLine":  46,
+"startColumn":  107,
+"endLine":  46,
+"endColumn":  108
+}
+}
+}
+]
+}

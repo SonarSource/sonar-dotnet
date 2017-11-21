@@ -1,0 +1,82 @@
+{
+"issues":  [
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ClusterClientSpec.cs'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools.Tests\ClusterClient\ClusterClientSpec.cs",
+"region":  {
+"startLine":  333,
+"startColumn":  1,
+"endLine":  333,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DistributedPubSubMediatorSpec.cs'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools.Tests\PublishSubscribe\DistributedPubSubMediatorSpec.cs",
+"region":  {
+"startLine":  769,
+"startColumn":  1,
+"endLine":  769,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ClusterSingletonManagerChaosSpec.cs'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools.Tests\Singleton\ClusterSingletonManagerChaosSpec.cs",
+"region":  {
+"startLine":  241,
+"startColumn":  1,
+"endLine":  241,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ClusterSingletonManagerLeaveSpec.cs'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools.Tests\Singleton\ClusterSingletonManagerLeaveSpec.cs",
+"region":  {
+"startLine":  158,
+"startColumn":  1,
+"endLine":  158,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ClusterSingletonManagerSpec.cs'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools.Tests\Singleton\ClusterSingletonManagerSpec.cs",
+"region":  {
+"startLine":  631,
+"startColumn":  1,
+"endLine":  631,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ClusterSingletonManagerStartupSpec.cs'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools.Tests\Singleton\ClusterSingletonManagerStartupSpec.cs",
+"region":  {
+"startLine":  110,
+"startColumn":  1,
+"endLine":  110,
+"endColumn":  2
+}
+}
+}
+]
+}

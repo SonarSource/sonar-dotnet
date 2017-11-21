@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'TestTransport.cs'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\TestTransport.cs",
+"region":  {
+"startLine":  649,
+"startColumn":  1,
+"endLine":  649,
+"endColumn":  2
+}
+}
+}
+]
+}

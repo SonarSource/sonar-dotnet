@@ -1,0 +1,160 @@
+{
+"issues":  [
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'InternalExtensions.cs'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\InternalExtensions.cs",
+"region":  {
+"startLine":  19,
+"startColumn":  1,
+"endLine":  19,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ITimestampProvider.cs'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\ITimestampProvider.cs",
+"region":  {
+"startLine":  33,
+"startColumn":  1,
+"endLine":  33,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'JournalDbEngine.cs'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\JournalDbEngine.cs",
+"region":  {
+"startLine":  313,
+"startColumn":  1,
+"endLine":  313,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'QueryBuilder.cs'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\QueryBuilder.cs",
+"region":  {
+"startLine":  45,
+"startColumn":  1,
+"endLine":  45,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'QueryMapper.cs'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\QueryMapper.cs",
+"region":  {
+"startLine":  67,
+"startColumn":  1,
+"endLine":  67,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'SqlJournal.cs'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\SqlJournal.cs",
+"region":  {
+"startLine":  84,
+"startColumn":  1,
+"endLine":  84,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'Hints.cs'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Queries\Hints.cs",
+"region":  {
+"startLine":  183,
+"startColumn":  1,
+"endLine":  183,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'Query.cs'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Queries\Query.cs",
+"region":  {
+"startLine":  192,
+"startColumn":  1,
+"endLine":  192,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'Settings.cs'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Settings.cs",
+"region":  {
+"startLine":  103,
+"startColumn":  1,
+"endLine":  103,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'QueryBuilder.cs'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Snapshot\QueryBuilder.cs",
+"region":  {
+"startLine":  84,
+"startColumn":  1,
+"endLine":  84,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'QueryMapper.cs'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Snapshot\QueryMapper.cs",
+"region":  {
+"startLine":  56,
+"startColumn":  1,
+"endLine":  56,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'SqlSnapshotStore.cs'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Snapshot\SqlSnapshotStore.cs",
+"region":  {
+"startLine":  165,
+"startColumn":  1,
+"endLine":  165,
+"endColumn":  2
+}
+}
+}
+]
+}

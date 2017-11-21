@@ -1,0 +1,160 @@
+{
+"issues":  [
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'BuildDescriptorParams.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark\Descriptors\BuildDescriptorParams.cs",
+"region":  {
+"startLine":  104,
+"startColumn":  1,
+"endLine":  104,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DefaultDescriptorBuilder.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark\Descriptors\DefaultDescriptorBuilder.cs",
+"region":  {
+"startLine":  245,
+"startColumn":  1,
+"endLine":  245,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DescriptorFilterExtensions.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark\Descriptors\DescriptorFilterExtensions.cs",
+"region":  {
+"startLine":  30,
+"startColumn":  1,
+"endLine":  30,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'IDescriptorBuilder.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark\Descriptors\IDescriptorBuilder.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  1,
+"endLine":  27,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'IDescriptorFilter.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark\Descriptors\IDescriptorFilter.cs",
+"region":  {
+"startLine":  25,
+"startColumn":  1,
+"endLine":  25,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'NancyBindingProvider.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark\NancyBindingProvider.cs",
+"region":  {
+"startLine":  56,
+"startColumn":  1,
+"endLine":  56,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'NancySparkView.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark\NancySparkView.cs",
+"region":  {
+"startLine":  90,
+"startColumn":  1,
+"endLine":  90,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'NancyViewData.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark\NancyViewData.cs",
+"region":  {
+"startLine":  54,
+"startColumn":  1,
+"endLine":  54,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'NancyViewFolder.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark\NancyViewFolder.cs",
+"region":  {
+"startLine":  245,
+"startColumn":  1,
+"endLine":  245,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'SparkRenderContextWrapper.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark\SparkRenderContextWrapper.cs",
+"region":  {
+"startLine":  64,
+"startColumn":  1,
+"endLine":  64,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'SparkViewEngine.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark\SparkViewEngine.cs",
+"region":  {
+"startLine":  137,
+"startColumn":  1,
+"endLine":  137,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'SparkViewEngineResult.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark\SparkViewEngineResult.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  1,
+"endLine":  27,
+"endColumn":  2
+}
+}
+}
+]
+}

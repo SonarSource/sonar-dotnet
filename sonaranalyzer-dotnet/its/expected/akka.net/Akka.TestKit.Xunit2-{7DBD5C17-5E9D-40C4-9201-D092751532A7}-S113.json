@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'Loggers.cs'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\testkits\Akka.TestKit.Xunit2\Internals\Loggers.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  1,
+"endLine":  28,
+"endColumn":  2
+}
+}
+}
+]
+}

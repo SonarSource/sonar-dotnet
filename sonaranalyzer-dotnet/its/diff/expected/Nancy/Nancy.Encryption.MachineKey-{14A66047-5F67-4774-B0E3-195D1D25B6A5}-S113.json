@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'MachineKeyCryptographyConfigurations.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Encryption.MachineKey\MachineKeyCryptographyConfigurations.cs",
+"region":  {
+"startLine":  45,
+"startColumn":  1,
+"endLine":  45,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'MachineKeyHmacProvider.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Encryption.MachineKey\MachineKeyHmacProvider.cs",
+"region":  {
+"startLine":  106,
+"startColumn":  1,
+"endLine":  106,
+"endColumn":  2
+}
+}
+}
+]
+}

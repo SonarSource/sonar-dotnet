@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'AssemblyInfo.cs'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit.Tests\Properties\AssemblyInfo.cs",
+"region":  {
+"startLine":  41,
+"startColumn":  107,
+"endLine":  41,
+"endColumn":  108
+}
+}
+}
+]
+}

@@ -1,0 +1,1486 @@
+{
+"issues":  [
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ResponseExtensions.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Extensions\ResponseExtensions.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  1,
+"endLine":  18,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'FakeDefaultNancyBootstrapper.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Fakes\FakeDefaultNancyBootstrapper.cs",
+"region":  {
+"startLine":  103,
+"startColumn":  1,
+"endLine":  103,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'FakeHookedModule.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Fakes\FakeHookedModule.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  1,
+"endLine":  11,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'FakeNancyModule.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Fakes\FakeNancyModule.cs",
+"region":  {
+"startLine":  67,
+"startColumn":  1,
+"endLine":  67,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'FakeNancyModuleWithBasePath.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Fakes\FakeNancyModuleWithBasePath.cs",
+"region":  {
+"startLine":  46,
+"startColumn":  1,
+"endLine":  46,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'FakeNancyModuleWithPreAndPostHooks.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Fakes\FakeNancyModuleWithPreAndPostHooks.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  1,
+"endLine":  16,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'FakeObjectSerializer.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Fakes\FakeObjectSerializer.cs",
+"region":  {
+"startLine":  25,
+"startColumn":  1,
+"endLine":  25,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'FakeRequest.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Fakes\FakeRequest.cs",
+"region":  {
+"startLine":  30,
+"startColumn":  1,
+"endLine":  30,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'FakeRoute.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Fakes\FakeRoute.cs",
+"region":  {
+"startLine":  46,
+"startColumn":  1,
+"endLine":  46,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'FakeRouteCache.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Fakes\FakeRouteCache.cs",
+"region":  {
+"startLine":  64,
+"startColumn":  1,
+"endLine":  64,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'FakeRoutePatternMatchResult.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Fakes\FakeRoutePatternMatchResult.cs",
+"region":  {
+"startLine":  64,
+"startColumn":  1,
+"endLine":  64,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'FakeViewEngine.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Fakes\FakeViewEngine.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  1,
+"endLine":  29,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'FakeViewEngineHost.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Fakes\FakeViewEngineHost.cs",
+"region":  {
+"startLine":  97,
+"startColumn":  1,
+"endLine":  97,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'MockPipelines.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Fakes\MockPipelines.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  1,
+"endLine":  21,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'Person.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Fakes\Person.cs",
+"region":  {
+"startLine":  8,
+"startColumn":  1,
+"endLine":  8,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ViewModel.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Fakes\ViewModel.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  1,
+"endLine":  7,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'NoAppStartupsFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\NoAppStartupsFixture.cs",
+"region":  {
+"startLine":  119,
+"startColumn":  1,
+"endLine":  119,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'MaterialisingResponseFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Responses\MaterialisingResponseFixture.cs",
+"region":  {
+"startLine":  76,
+"startColumn":  1,
+"endLine":  76,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'AfterPipelineFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\AfterPipelineFixture.cs",
+"region":  {
+"startLine":  107,
+"startColumn":  1,
+"endLine":  107,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'BeforePipelineFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\BeforePipelineFixture.cs",
+"region":  {
+"startLine":  206,
+"startColumn":  1,
+"endLine":  206,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ModuleCatalogFixtureBase.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Bootstrapper\Base\ModuleCatalogFixtureBase.cs",
+"region":  {
+"startLine":  60,
+"startColumn":  1,
+"endLine":  60,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'CollectionTypeRegistrationFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Bootstrapper\CollectionTypeRegistrationFixture.cs",
+"region":  {
+"startLine":  52,
+"startColumn":  1,
+"endLine":  52,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'InstanceRegistrationFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Bootstrapper\InstanceRegistrationFixture.cs",
+"region":  {
+"startLine":  51,
+"startColumn":  1,
+"endLine":  51,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'NancyBootstrapperWithRequestContainerBaseFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Bootstrapper\NancyBootstrapperWithRequestContainerBaseFixture.cs",
+"region":  {
+"startLine":  444,
+"startColumn":  1,
+"endLine":  444,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'NancyInternalConfigurationFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Bootstrapper\NancyInternalConfigurationFixture.cs",
+"region":  {
+"startLine":  66,
+"startColumn":  1,
+"endLine":  66,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'PipelinesFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Bootstrapper\PipelinesFixture.cs",
+"region":  {
+"startLine":  90,
+"startColumn":  1,
+"endLine":  90,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'TypeRegistrationFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Bootstrapper\TypeRegistrationFixture.cs",
+"region":  {
+"startLine":  63,
+"startColumn":  1,
+"endLine":  63,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DefaultNancyEnvironmentConfiguratorFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Configuration\DefaultNancyEnvironmentConfiguratorFixture.cs",
+"region":  {
+"startLine":  159,
+"startColumn":  1,
+"endLine":  159,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DefaultNancyEnvironmentFactoryFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Configuration\DefaultNancyEnvironmentFactoryFixture.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  1,
+"endLine":  21,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DefaultNancyEnvironmentFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Configuration\DefaultNancyEnvironmentFixture.cs",
+"region":  {
+"startLine":  177,
+"startColumn":  1,
+"endLine":  177,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'INancyEnvironmentExtensionsFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Configuration\INancyEnvironmentExtensionsFixture.cs",
+"region":  {
+"startLine":  137,
+"startColumn":  1,
+"endLine":  137,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DefaultAcceptHeaderCoercionConventionsFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Conventions\DefaultAcceptHeaderCoercionConventionsFixture.cs",
+"region":  {
+"startLine":  54,
+"startColumn":  1,
+"endLine":  54,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DefaultStaticContentsConventionsFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Conventions\DefaultStaticContentsConventionsFixture.cs",
+"region":  {
+"startLine":  122,
+"startColumn":  1,
+"endLine":  122,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DefaultViewLocationConventionsFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Conventions\DefaultViewLocationConventionsFixture.cs",
+"region":  {
+"startLine":  700,
+"startColumn":  1,
+"endLine":  700,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DefaultHmacProviderFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Cryptography\DefaultHmacProviderFixture.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  1,
+"endLine":  31,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'HmacComparerFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Cryptography\HmacComparerFixture.cs",
+"region":  {
+"startLine":  53,
+"startColumn":  1,
+"endLine":  53,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'NoEncryptionProviderFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Cryptography\NoEncryptionProviderFixture.cs",
+"region":  {
+"startLine":  37,
+"startColumn":  1,
+"endLine":  37,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'RijndaelEncryptionProviderFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Cryptography\RijndaelEncryptionProviderFixture.cs",
+"region":  {
+"startLine":  48,
+"startColumn":  1,
+"endLine":  48,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DefaultNancyBootstrapperFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\DefaultNancyBootstrapperFixture.cs",
+"region":  {
+"startLine":  161,
+"startColumn":  1,
+"endLine":  161,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DefaultNancyBootstrapperModuleCatalogFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\DefaultNancyBootstrapperModuleCatalogFixture.cs",
+"region":  {
+"startLine":  42,
+"startColumn":  1,
+"endLine":  42,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DefaultResponseFormatterFactoryFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\DefaultResponseFormatterFactoryFixture.cs",
+"region":  {
+"startLine":  64,
+"startColumn":  1,
+"endLine":  64,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DefaultResponseFormatterFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\DefaultResponseFormatterFixture.cs",
+"region":  {
+"startLine":  37,
+"startColumn":  1,
+"endLine":  37,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DefaultSerializerFactoryFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\DefaultSerializerFactoryFixture.cs",
+"region":  {
+"startLine":  207,
+"startColumn":  1,
+"endLine":  207,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ConcurrentLimitedCollectionFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Diagnostics\ConcurrentLimitedCollectionFixture.cs",
+"region":  {
+"startLine":  98,
+"startColumn":  1,
+"endLine":  98,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DefaultRequestTraceFactoryFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Diagnostics\DefaultRequestTraceFactoryFixture.cs",
+"region":  {
+"startLine":  128,
+"startColumn":  1,
+"endLine":  128,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DefaultStatusCodeHandlerFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ErrorHandling\DefaultStatusCodeHandlerFixture.cs",
+"region":  {
+"startLine":  208,
+"startColumn":  1,
+"endLine":  208,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ErrorPipelineFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ErrorPipelineFixture.cs",
+"region":  {
+"startLine":  117,
+"startColumn":  1,
+"endLine":  117,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'StringExtensionsFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Extensions\StringExtensionsFixture.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  1,
+"endLine":  27,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'FormatterExtensionsFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\FormatterExtensionsFixture.cs",
+"region":  {
+"startLine":  58,
+"startColumn":  1,
+"endLine":  58,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'HeadResponseFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\HeadResponseFixture.cs",
+"region":  {
+"startLine":  99,
+"startColumn":  1,
+"endLine":  99,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'HttpUtilityFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Helpers\HttpUtilityFixture.cs",
+"region":  {
+"startLine":  153,
+"startColumn":  1,
+"endLine":  153,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'HttpMultipartBoundaryFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\HttpMultipartBoundaryFixture.cs",
+"region":  {
+"startLine":  195,
+"startColumn":  1,
+"endLine":  195,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'HttpMultipartBufferFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\HttpMultipartBufferFixture.cs",
+"region":  {
+"startLine":  104,
+"startColumn":  1,
+"endLine":  104,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'HttpMultipartFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\HttpMultipartFixture.cs",
+"region":  {
+"startLine":  321,
+"startColumn":  1,
+"endLine":  321,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'RequestStreamFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\IO\RequestStreamFixture.cs",
+"region":  {
+"startLine":  645,
+"startColumn":  1,
+"endLine":  645,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'TypeWithTuple.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Json\TypeWithTuple.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  1,
+"endLine":  9,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'JsonFormatterExtensionsFixtures.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\JsonFormatterExtensionsFixtures.cs",
+"region":  {
+"startLine":  95,
+"startColumn":  1,
+"endLine":  95,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'JsonSerializerFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\JsonSerializerFixture.cs",
+"region":  {
+"startLine":  58,
+"startColumn":  1,
+"endLine":  58,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'XmlBodyDeserializerfixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBodyDeserializers\XmlBodyDeserializerfixture.cs",
+"region":  {
+"startLine":  172,
+"startColumn":  1,
+"endLine":  172,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'CollectionConverterFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultConverters\CollectionConverterFixture.cs",
+"region":  {
+"startLine":  101,
+"startColumn":  1,
+"endLine":  101,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'FallbackConverterFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultConverters\FallbackConverterFixture.cs",
+"region":  {
+"startLine":  73,
+"startColumn":  1,
+"endLine":  73,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DefaultFieldNameConverterFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultFieldNameConverterFixture.cs",
+"region":  {
+"startLine":  39,
+"startColumn":  1,
+"endLine":  39,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DefaultModelBinderLocatorFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultModelBinderLocatorFixture.cs",
+"region":  {
+"startLine":  149,
+"startColumn":  1,
+"endLine":  149,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DynamicModelBinderAdapterFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\DynamicModelBinderAdapterFixture.cs",
+"region":  {
+"startLine":  252,
+"startColumn":  1,
+"endLine":  252,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ModelBindingExceptionFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\ModelBindingExceptionFixture.cs",
+"region":  {
+"startLine":  62,
+"startColumn":  1,
+"endLine":  62,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'PropertyBindingExceptionFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\PropertyBindingExceptionFixture.cs",
+"region":  {
+"startLine":  38,
+"startColumn":  1,
+"endLine":  38,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'NamedPipelineBaseFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\NamedPipelineBaseFixture.cs",
+"region":  {
+"startLine":  256,
+"startColumn":  1,
+"endLine":  256,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'NancyContextFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\NancyContextFixture.cs",
+"region":  {
+"startLine":  111,
+"startColumn":  1,
+"endLine":  111,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'NancyCookieFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\NancyCookieFixture.cs",
+"region":  {
+"startLine":  184,
+"startColumn":  1,
+"endLine":  184,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'NancyEngineFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\NancyEngineFixture.cs",
+"region":  {
+"startLine":  605,
+"startColumn":  1,
+"endLine":  605,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'NancyMiddlewareFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\NancyMiddlewareFixture.cs",
+"region":  {
+"startLine":  261,
+"startColumn":  1,
+"endLine":  261,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'NancyOptionsExtensionsFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\NancyOptionsExtensionsFixture.cs",
+"region":  {
+"startLine":  24,
+"startColumn":  1,
+"endLine":  24,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'NancyOptionsFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\NancyOptionsFixture.cs",
+"region":  {
+"startLine":  58,
+"startColumn":  1,
+"endLine":  58,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'RequestHeadersFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\RequestHeadersFixture.cs",
+"region":  {
+"startLine":  2083,
+"startColumn":  1,
+"endLine":  2083,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ResponseExtensionsFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ResponseExtensionsFixture.cs",
+"region":  {
+"startLine":  181,
+"startColumn":  1,
+"endLine":  181,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'EmbeddedFileResponseFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Responses\EmbeddedFileResponseFixture.cs",
+"region":  {
+"startLine":  76,
+"startColumn":  1,
+"endLine":  76,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'MediaRangeFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Responses\Negotiation\MediaRangeFixture.cs",
+"region":  {
+"startLine":  87,
+"startColumn":  1,
+"endLine":  87,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'StreamResponseFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Responses\StreamResponseFixture.cs",
+"region":  {
+"startLine":  81,
+"startColumn":  1,
+"endLine":  81,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'TextResponseFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Responses\TextResponseFixture.cs",
+"region":  {
+"startLine":  125,
+"startColumn":  1,
+"endLine":  125,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ConstraintNodeRouteScoringFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Routing\ConstraintNodeRouteScoringFixture.cs",
+"region":  {
+"startLine":  42,
+"startColumn":  1,
+"endLine":  42,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DefaultNancyModuleBuilderFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Routing\DefaultNancyModuleBuilderFixture.cs",
+"region":  {
+"startLine":  116,
+"startColumn":  1,
+"endLine":  116,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DefaultRequestDispatcherFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Routing\DefaultRequestDispatcherFixture.cs",
+"region":  {
+"startLine":  983,
+"startColumn":  1,
+"endLine":  983,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DefaultRouteSegmentExtractorFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Routing\DefaultRouteSegmentExtractorFixture.cs",
+"region":  {
+"startLine":  67,
+"startColumn":  1,
+"endLine":  67,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'NotFoundRouteFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Routing\NotFoundRouteFixture.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  1,
+"endLine":  35,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'RouteFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Routing\RouteFixture.cs",
+"region":  {
+"startLine":  108,
+"startColumn":  1,
+"endLine":  108,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ClaimsPrincipalExtensionsFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Security\ClaimsPrincipalExtensionsFixture.cs",
+"region":  {
+"startLine":  291,
+"startColumn":  1,
+"endLine":  291,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'CsrfFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Security\CsrfFixture.cs",
+"region":  {
+"startLine":  212,
+"startColumn":  1,
+"endLine":  212,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DefaultCsrfTokenValidatorFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Security\DefaultCsrfTokenValidatorFixture.cs",
+"region":  {
+"startLine":  138,
+"startColumn":  1,
+"endLine":  138,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ModuleSecurityFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Security\ModuleSecurityFixture.cs",
+"region":  {
+"startLine":  404,
+"startColumn":  1,
+"endLine":  404,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'CookieBasedSessionsConfigurationFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Sessions\CookieBasedSessionsConfigurationFixture.cs",
+"region":  {
+"startLine":  86,
+"startColumn":  1,
+"endLine":  86,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'CookieBasedSessionsFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Sessions\CookieBasedSessionsFixture.cs",
+"region":  {
+"startLine":  526,
+"startColumn":  1,
+"endLine":  526,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DefaultSessionObjectFormatterFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Sessions\DefaultSessionObjectFormatterFixture.cs",
+"region":  {
+"startLine":  144,
+"startColumn":  1,
+"endLine":  144,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'NullSessionProviderFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Sessions\NullSessionProviderFixture.cs",
+"region":  {
+"startLine":  66,
+"startColumn":  1,
+"endLine":  66,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'SessionFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Sessions\SessionFixture.cs",
+"region":  {
+"startLine":  102,
+"startColumn":  1,
+"endLine":  102,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'StaticContentConventionBuilderFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\StaticContentConventionBuilderFixture.cs",
+"region":  {
+"startLine":  309,
+"startColumn":  1,
+"endLine":  309,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'TextFormatterFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\TextFormatterFixture.cs",
+"region":  {
+"startLine":  55,
+"startColumn":  1,
+"endLine":  55,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'UrlFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\UrlFixture.cs",
+"region":  {
+"startLine":  372,
+"startColumn":  1,
+"endLine":  372,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'CompositeValidatorFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Validation\CompositeValidatorFixture.cs",
+"region":  {
+"startLine":  46,
+"startColumn":  1,
+"endLine":  46,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DefaultValidatorLocatorFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Validation\DefaultValidatorLocatorFixture.cs",
+"region":  {
+"startLine":  91,
+"startColumn":  1,
+"endLine":  91,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ModuleExtensionsFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Validation\ModuleExtensionsFixture.cs",
+"region":  {
+"startLine":  126,
+"startColumn":  1,
+"endLine":  126,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ValidationResultFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Validation\ValidationResultFixture.cs",
+"region":  {
+"startLine":  47,
+"startColumn":  1,
+"endLine":  47,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DefaultRenderContextFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ViewEngines\DefaultRenderContextFixture.cs",
+"region":  {
+"startLine":  221,
+"startColumn":  1,
+"endLine":  221,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DefaultViewFactoryFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ViewEngines\DefaultViewFactoryFixture.cs",
+"region":  {
+"startLine":  466,
+"startColumn":  1,
+"endLine":  466,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DefaultViewLocatorFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ViewEngines\DefaultViewLocatorFixture.cs",
+"region":  {
+"startLine":  333,
+"startColumn":  1,
+"endLine":  333,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DefaultViewRendererFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ViewEngines\DefaultViewRendererFixture.cs",
+"region":  {
+"startLine":  62,
+"startColumn":  1,
+"endLine":  62,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DefaultViewResolverFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ViewEngines\DefaultViewResolverFixture.cs",
+"region":  {
+"startLine":  332,
+"startColumn":  1,
+"endLine":  332,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'FileSystemViewLocationProviderFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ViewEngines\FileSystemViewLocationProviderFixture.cs",
+"region":  {
+"startLine":  133,
+"startColumn":  1,
+"endLine":  133,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'FileSystemViewLocationResultFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ViewEngines\FileSystemViewLocationResultFixture.cs",
+"region":  {
+"startLine":  69,
+"startColumn":  1,
+"endLine":  69,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ResourceViewLocationProviderFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ViewEngines\ResourceViewLocationProviderFixture.cs",
+"region":  {
+"startLine":  220,
+"startColumn":  1,
+"endLine":  220,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'SuperSimpleViewEngineTests.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ViewEngines\SuperSimpleViewEngineTests.cs",
+"region":  {
+"startLine":  1471,
+"startColumn":  1,
+"endLine":  1471,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ViewEngineStartupFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ViewEngines\ViewEngineStartupFixture.cs",
+"region":  {
+"startLine":  67,
+"startColumn":  1,
+"endLine":  67,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ViewNotFoundExceptionFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ViewEngines\ViewNotFoundExceptionFixture.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  1,
+"endLine":  29,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'XmlFormatterExtensionsFixtures.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\XmlFormatterExtensionsFixtures.cs",
+"region":  {
+"startLine":  85,
+"startColumn":  1,
+"endLine":  85,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'RecordAsync.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\xUnitExtensions\RecordAsync.cs",
+"region":  {
+"startLine":  39,
+"startColumn":  1,
+"endLine":  39,
+"endColumn":  2
+}
+}
+}
+]
+}

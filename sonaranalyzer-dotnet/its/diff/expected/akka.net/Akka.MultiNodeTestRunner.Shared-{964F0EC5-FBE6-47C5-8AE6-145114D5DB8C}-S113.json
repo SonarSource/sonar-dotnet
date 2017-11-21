@@ -1,0 +1,95 @@
+{
+"issues":  [
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'EnumerableExtensions.cs'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Persistence\EnumerableExtensions.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  1,
+"endLine":  22,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'FileNameGenerator.cs'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Persistence\FileNameGenerator.cs",
+"region":  {
+"startLine":  32,
+"startColumn":  1,
+"endLine":  32,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'IRetrievableTestRunStore.cs'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Persistence\IRetrievableTestRunStore.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  1,
+"endLine":  21,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'TimelineItem.cs'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Persistence\TimelineItem.cs",
+"region":  {
+"startLine":  38,
+"startColumn":  1,
+"endLine":  38,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'TimelineItemFactory.cs'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Persistence\TimelineItemFactory.cs",
+"region":  {
+"startLine":  49,
+"startColumn":  1,
+"endLine":  49,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'VisualizerPersistentTestRunStore.cs'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Persistence\VisualizerPersistentTestRunStore.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  1,
+"endLine":  28,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'VisualizerRuntimeTemplate.Tree.cs'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Persistence\VisualizerRuntimeTemplate.Tree.cs",
+"region":  {
+"startLine":  147,
+"startColumn":  1,
+"endLine":  147,
+"endColumn":  2
+}
+}
+}
+]
+}

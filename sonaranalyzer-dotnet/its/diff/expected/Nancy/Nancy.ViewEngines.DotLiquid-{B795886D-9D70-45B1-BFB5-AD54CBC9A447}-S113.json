@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DefaultFileSystemFactory.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.DotLiquid\DefaultFileSystemFactory.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  1,
+"endLine":  31,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DynamicDrop.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.DotLiquid\DynamicDrop.cs",
+"region":  {
+"startLine":  85,
+"startColumn":  1,
+"endLine":  85,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'IFileSystemFactory.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.DotLiquid\IFileSystemFactory.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  1,
+"endLine":  20,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'LiquidNancyFileSystem.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.DotLiquid\LiquidNancyFileSystem.cs",
+"region":  {
+"startLine":  87,
+"startColumn":  1,
+"endLine":  87,
+"endColumn":  2
+}
+}
+}
+]
+}

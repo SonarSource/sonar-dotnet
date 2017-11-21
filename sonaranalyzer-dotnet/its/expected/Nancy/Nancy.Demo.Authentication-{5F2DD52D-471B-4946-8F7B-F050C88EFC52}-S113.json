@@ -1,0 +1,69 @@
+{
+"issues":  [
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'AnotherVerySecureModule.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Demo.Authentication\AnotherVerySecureModule.cs",
+"region":  {
+"startLine":  24,
+"startColumn":  1,
+"endLine":  24,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'AuthenticationBootstrapper.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Demo.Authentication\AuthenticationBootstrapper.cs",
+"region":  {
+"startLine":  62,
+"startColumn":  1,
+"endLine":  62,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'MainModule.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Demo.Authentication\MainModule.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  1,
+"endLine":  16,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'UserModel.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Demo.Authentication\Models\UserModel.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  1,
+"endLine":  12,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'SecureModule.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Demo.Authentication\SecureModule.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  1,
+"endLine":  18,
+"endColumn":  2
+}
+}
+}
+]
+}

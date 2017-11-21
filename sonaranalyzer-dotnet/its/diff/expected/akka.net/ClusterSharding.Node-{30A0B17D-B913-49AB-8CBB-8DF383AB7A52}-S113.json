@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'AutomaticCluster.cs'.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\Cluster\ClusterSharding\ClusterSharding.Node\AutomaticJoin\AutomaticCluster.cs",
+"region":  {
+"startLine":  56,
+"startColumn":  1,
+"endLine":  56,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DBHelper.cs'.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\Cluster\ClusterSharding\ClusterSharding.Node\AutomaticJoin\DBHelper.cs",
+"region":  {
+"startLine":  78,
+"startColumn":  1,
+"endLine":  78,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'Printer.cs'.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\Cluster\ClusterSharding\ClusterSharding.Node\Printer.cs",
+"region":  {
+"startLine":  59,
+"startColumn":  1,
+"endLine":  59,
+"endColumn":  2
+}
+}
+}
+]
+}

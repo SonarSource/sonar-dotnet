@@ -1,0 +1,108 @@
+{
+"issues":  [
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ApplicationDependencyClass.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Demo.Bootstrapper.Aspnet\ApplicationDependencyClass.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  1,
+"endLine":  27,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'Bootstrapper.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Demo.Bootstrapper.Aspnet\Bootstrapper.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  1,
+"endLine":  18,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DependencyModule.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Demo.Bootstrapper.Aspnet\DependencyModule.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  1,
+"endLine":  28,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'IApplicationDependency.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Demo.Bootstrapper.Aspnet\IApplicationDependency.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  1,
+"endLine":  7,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'IRequestDependency.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Demo.Bootstrapper.Aspnet\IRequestDependency.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  1,
+"endLine":  7,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'RatPack.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Demo.Bootstrapper.Aspnet\Models\RatPack.cs",
+"region":  {
+"startLine":  7,
+"startColumn":  1,
+"endLine":  7,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'RatPackWithDependencyText.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Demo.Bootstrapper.Aspnet\Models\RatPackWithDependencyText.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  1,
+"endLine":  9,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'RequestDependencyClass.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Demo.Bootstrapper.Aspnet\RequestDependencyClass.cs",
+"region":  {
+"startLine":  25,
+"startColumn":  1,
+"endLine":  25,
+"endColumn":  2
+}
+}
+}
+]
+}

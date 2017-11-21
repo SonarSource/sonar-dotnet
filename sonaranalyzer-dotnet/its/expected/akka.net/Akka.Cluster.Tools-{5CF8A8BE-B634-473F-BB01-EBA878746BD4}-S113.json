@@ -1,0 +1,225 @@
+{
+"issues":  [
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ClusterClient.cs'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterClient.cs",
+"region":  {
+"startLine":  314,
+"startColumn":  1,
+"endLine":  314,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ClusterClientReceptionist.cs'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterClientReceptionist.cs",
+"region":  {
+"startLine":  130,
+"startColumn":  1,
+"endLine":  130,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ClusterClientSettings.cs'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterClientSettings.cs",
+"region":  {
+"startLine":  125,
+"startColumn":  1,
+"endLine":  125,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ClusterReceptionist.cs'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterReceptionist.cs",
+"region":  {
+"startLine":  287,
+"startColumn":  1,
+"endLine":  287,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ClusterReceptionistSettings.cs'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterReceptionistSettings.cs",
+"region":  {
+"startLine":  85,
+"startColumn":  1,
+"endLine":  85,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ClusterClientMessageSerializer.cs'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\Serialization\ClusterClientMessageSerializer.cs",
+"region":  {
+"startLine":  77,
+"startColumn":  1,
+"endLine":  77,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DistributedMessages.cs'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\DistributedMessages.cs",
+"region":  {
+"startLine":  438,
+"startColumn":  1,
+"endLine":  438,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DistributedPubSub.cs'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\DistributedPubSub.cs",
+"region":  {
+"startLine":  93,
+"startColumn":  1,
+"endLine":  93,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DistributedPubSubMediator.cs'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\DistributedPubSubMediator.cs",
+"region":  {
+"startLine":  544,
+"startColumn":  1,
+"endLine":  544,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DistributedPubSubSettings.cs'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\DistributedPubSubSettings.cs",
+"region":  {
+"startLine":  124,
+"startColumn":  1,
+"endLine":  124,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'TopicMessages.cs'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Internal\TopicMessages.cs",
+"region":  {
+"startLine":  150,
+"startColumn":  1,
+"endLine":  150,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'Topics.cs'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Internal\Topics.cs",
+"region":  {
+"startLine":  199,
+"startColumn":  1,
+"endLine":  199,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DistributedPubSubMessageSerializer.cs'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Serialization\DistributedPubSubMessageSerializer.cs",
+"region":  {
+"startLine":  288,
+"startColumn":  1,
+"endLine":  288,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ClusterSingletonManagerSettings.cs'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManagerSettings.cs",
+"region":  {
+"startLine":  113,
+"startColumn":  1,
+"endLine":  113,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ClusterSingletonProxySettings.cs'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonProxySettings.cs",
+"region":  {
+"startLine":  103,
+"startColumn":  1,
+"endLine":  103,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'OldestChangedBuffer.cs'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\OldestChangedBuffer.cs",
+"region":  {
+"startLine":  172,
+"startColumn":  1,
+"endLine":  172,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ClusterSingletonMessageSerializer.cs'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\Serialization\ClusterSingletonMessageSerializer.cs",
+"region":  {
+"startLine":  82,
+"startColumn":  1,
+"endLine":  82,
+"endColumn":  2
+}
+}
+}
+]
+}

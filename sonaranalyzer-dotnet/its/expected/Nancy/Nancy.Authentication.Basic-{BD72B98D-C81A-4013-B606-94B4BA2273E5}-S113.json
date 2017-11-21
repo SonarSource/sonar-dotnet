@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'BasicAuthentication.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Authentication.Basic\BasicAuthentication.cs",
+"region":  {
+"startLine":  140,
+"startColumn":  1,
+"endLine":  140,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'IUserValidator.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Authentication.Basic\IUserValidator.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  1,
+"endLine":  18,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'UserPromptBehaviour.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Authentication.Basic\UserPromptBehaviour.cs",
+"region":  {
+"startLine":  23,
+"startColumn":  1,
+"endLine":  23,
+"endColumn":  2
+}
+}
+}
+]
+}

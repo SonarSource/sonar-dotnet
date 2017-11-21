@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ClusterConfigSpec.cs'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests\ClusterConfigSpec.cs",
+"region":  {
+"startLine":  74,
+"startColumn":  1,
+"endLine":  74,
+"endColumn":  2
+}
+}
+}
+]
+}

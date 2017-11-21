@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'CachedResponse.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Demo.Caching\CachedResponse.cs",
+"region":  {
+"startLine":  53,
+"startColumn":  1,
+"endLine":  53,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'CachingBootstrapper.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Demo.Caching\CachingBootstrapper.cs",
+"region":  {
+"startLine":  78,
+"startColumn":  1,
+"endLine":  78,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ContextExtensions.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Demo.Caching\CachingExtensions\ContextExtensions.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  1,
+"endLine":  26,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'MainModule.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Demo.Caching\MainModule.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  1,
+"endLine":  26,
+"endColumn":  2
+}
+}
+}
+]
+}

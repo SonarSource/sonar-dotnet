@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'AddressConverters.cs'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\transports\Akka.Remote.AkkaIOTransport\AddressConverters.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  1,
+"endLine":  35,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ConnectionAssociation.cs'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\transports\Akka.Remote.AkkaIOTransport\ConnectionAssociation.cs",
+"region":  {
+"startLine":  119,
+"startColumn":  1,
+"endLine":  119,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'TransportListener.cs'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\transports\Akka.Remote.AkkaIOTransport\TransportListener.cs",
+"region":  {
+"startLine":  48,
+"startColumn":  1,
+"endLine":  48,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'TransportManager.cs'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\transports\Akka.Remote.AkkaIOTransport\TransportManager.cs",
+"region":  {
+"startLine":  118,
+"startColumn":  1,
+"endLine":  118,
+"endColumn":  2
+}
+}
+}
+]
+}

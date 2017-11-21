@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'GreetingViewBase.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor.Tests\GreetingViewBase.cs",
+"region":  {
+"startLine":  10,
+"startColumn":  1,
+"endLine":  10,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'TestModel.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor.Tests\TestModel.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  1,
+"endLine":  9,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'TextResourceFinderFixture.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor.Tests\TextResourceFinderFixture.cs",
+"region":  {
+"startLine":  86,
+"startColumn":  1,
+"endLine":  86,
+"endColumn":  2
+}
+}
+}
+]
+}

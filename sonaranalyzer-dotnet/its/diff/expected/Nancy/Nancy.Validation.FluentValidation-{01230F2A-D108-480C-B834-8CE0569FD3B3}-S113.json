@@ -1,0 +1,277 @@
+{
+"issues":  [
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'AdapterBase.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Validation.FluentValidation\AdapterBase.cs",
+"region":  {
+"startLine":  50,
+"startColumn":  1,
+"endLine":  50,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'DefaultFluentAdapterFactory.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Validation.FluentValidation\DefaultFluentAdapterFactory.cs",
+"region":  {
+"startLine":  36,
+"startColumn":  1,
+"endLine":  36,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'EmailAdapter.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Validation.FluentValidation\EmailAdapter.cs",
+"region":  {
+"startLine":  37,
+"startColumn":  1,
+"endLine":  37,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'EqualAdapter.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Validation.FluentValidation\EqualAdapter.cs",
+"region":  {
+"startLine":  38,
+"startColumn":  1,
+"endLine":  38,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ExactLengthAdapater.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Validation.FluentValidation\ExactLengthAdapater.cs",
+"region":  {
+"startLine":  38,
+"startColumn":  1,
+"endLine":  38,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'ExclusiveBetweenAdapter.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Validation.FluentValidation\ExclusiveBetweenAdapter.cs",
+"region":  {
+"startLine":  44,
+"startColumn":  1,
+"endLine":  44,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'FallbackAdapter.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Validation.FluentValidation\FallbackAdapter.cs",
+"region":  {
+"startLine":  37,
+"startColumn":  1,
+"endLine":  37,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'FluentValidationRegistrations.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Validation.FluentValidation\FluentValidationRegistrations.cs",
+"region":  {
+"startLine":  23,
+"startColumn":  1,
+"endLine":  23,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'FluentValidationValidator.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Validation.FluentValidation\FluentValidationValidator.cs",
+"region":  {
+"startLine":  105,
+"startColumn":  1,
+"endLine":  105,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'FluentValidationValidatorFactory.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Validation.FluentValidation\FluentValidationValidatorFactory.cs",
+"region":  {
+"startLine":  58,
+"startColumn":  1,
+"endLine":  58,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'GreaterThanAdapter.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Validation.FluentValidation\GreaterThanAdapter.cs",
+"region":  {
+"startLine":  38,
+"startColumn":  1,
+"endLine":  38,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'GreaterThanOrEqualAdapter.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Validation.FluentValidation\GreaterThanOrEqualAdapter.cs",
+"region":  {
+"startLine":  38,
+"startColumn":  1,
+"endLine":  38,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'IFluentAdapter.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Validation.FluentValidation\IFluentAdapter.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  1,
+"endLine":  26,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'IFluentAdapterFactory.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Validation.FluentValidation\IFluentAdapterFactory.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  1,
+"endLine":  17,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'InclusiveBetweenAdapter.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Validation.FluentValidation\InclusiveBetweenAdapter.cs",
+"region":  {
+"startLine":  44,
+"startColumn":  1,
+"endLine":  44,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'LengthAdapter.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Validation.FluentValidation\LengthAdapter.cs",
+"region":  {
+"startLine":  38,
+"startColumn":  1,
+"endLine":  38,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'LessThanAdapter.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Validation.FluentValidation\LessThanAdapter.cs",
+"region":  {
+"startLine":  38,
+"startColumn":  1,
+"endLine":  38,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'LessThanOrEqualAdapter.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Validation.FluentValidation\LessThanOrEqualAdapter.cs",
+"region":  {
+"startLine":  38,
+"startColumn":  1,
+"endLine":  38,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'NotEmptyAdapter.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Validation.FluentValidation\NotEmptyAdapter.cs",
+"region":  {
+"startLine":  36,
+"startColumn":  1,
+"endLine":  36,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'NotEqualAdapter.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Validation.FluentValidation\NotEqualAdapter.cs",
+"region":  {
+"startLine":  38,
+"startColumn":  1,
+"endLine":  38,
+"endColumn":  2
+}
+}
+},
+{
+"id":  "S113",
+"message":  "Add a new line at the end of the file 'NotNullAdapter.cs'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Validation.FluentValidation\NotNullAdapter.cs",
+"region":  {
+"startLine":  36,
+"startColumn":  1,
+"endLine":  36,
+"endColumn":  2
+}
+}
+}
+]
+}
