@@ -45,6 +45,12 @@ namespace SonarAnalyzer.Helpers
             }
         }
 
+        public static bool IsObsolete(this ISymbol symbol)
+        {
+            return symbol != null &&
+                symbol.GetAttributes().Any(a => a.AttributeClass.Is(KnownType.System_ObsoleteAttribute));
+        }
+
         public static IEnumerable<INamedTypeSymbol> GetAllNamedTypes(this INamedTypeSymbol type)
         {
             if (type == null)

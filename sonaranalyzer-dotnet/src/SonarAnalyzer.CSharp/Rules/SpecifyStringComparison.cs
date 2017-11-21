@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2017 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -61,6 +61,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             return semanticModel.GetMemberGroup(expression)
                 .OfType<IMethodSymbol>()
+                .Where(m => !m.IsObsolete())
                 .Any(HasAnyStringComparisonParameter);
         }
 
@@ -70,10 +71,11 @@ namespace SonarAnalyzer.Rules.CSharp
 
             return methodSymbol != null &&
                 !HasAnyStringComparisonParameter(methodSymbol) &&
-                methodSymbol.GetParameters().Any(parameter => parameter.Type.Is(KnownType.System_String));
+                methodSymbol.GetParameters().Any(parameter => parameter.Type.Is(KnownType.System_String)) &&
+                !SpecifyIFormatProviderOrCultureInfo.HasAnyFormatOrCultureParameter(methodSymbol);
         }
 
-        private static bool HasAnyStringComparisonParameter(IMethodSymbol method)
+        public static bool HasAnyStringComparisonParameter(IMethodSymbol method)
         {
             return method.GetParameters()
                 .Any(parameter => parameter.Type.Is(KnownType.System_StringComparison));

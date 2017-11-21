@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Globalization;
 using System.Resources;
 
@@ -29,6 +29,8 @@ namespace Tests.Diagnostics
 //          ^^^^^^^^^^^^^
             string.Format("bla"); // Noncompliant
             Methods.DoStuff2("foo"); // Noncompliant
+
+            "".StartsWith(""); // Noncompliant
         }
 
         void ValidCases()
@@ -41,6 +43,9 @@ namespace Tests.Diagnostics
             var resourceManager = new ResourceManager(typeof(Program));
             resourceManager.GetObject("a"); // Compliant - excluded
             resourceManager.GetString("a"); // Compliant - excluded
+
+            "".StartsWith("", StringComparison.CurrentCulture); // Compliant - StringComparison implies culture
+            "".StartsWith("", true, CultureInfo.CurrentCulture); // Compliant
 
             Console.WriteLine("Colors.Red = {0}", Colors.Red.ToString("d"));
             Colors myColor = Colors.Yellow;
