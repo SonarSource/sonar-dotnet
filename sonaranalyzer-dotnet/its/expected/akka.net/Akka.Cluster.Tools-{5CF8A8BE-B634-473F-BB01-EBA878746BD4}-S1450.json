@@ -25,6 +25,19 @@
 "endColumn":  49
 }
 }
+},
+{
+"id":  "S1450",
+"message":  "Remove the 'EmptyBytes' field and declare it as a local variable in the relevant methods.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\Serialization\ClusterSingletonMessageSerializer.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  40,
+"endLine":  22,
+"endColumn":  64
+}
+}
 }
 ]
 }
