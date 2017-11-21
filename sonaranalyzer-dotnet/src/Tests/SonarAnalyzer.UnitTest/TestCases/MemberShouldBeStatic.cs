@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 
 namespace Tests.Diagnostics
 {
@@ -135,6 +135,50 @@ namespace Tests.Diagnostics
         public int Method1() { return 0; } // Compliant, any attribute disables this rule
         [System.ObsoleteAttribute]
         public int Method2() => 0; // Compliant, any attribute disables this rule
+    }
+
+    // The following test cases are linked to FP when using ASP controllers.
+    // See https://github.com/SonarSource/sonar-csharp/issues/733
+    public class WebClass1 : System.Web.Mvc.Controller
+    {
+        public int Foo() => 0;
+
+        protected int FooFoo() => 0; // Noncompliant
+    }
+
+    public class DerivedWebClass1 : WebClass1
+    {
+        public int Bar() => 1;
+
+        protected int BarBar() => 1; // Noncompliant
+    }
+
+    public class WebClass2 : System.Web.Http.ApiController
+    {
+        public int Foo() => 0;
+
+        protected int FooFoo() => 0; // Noncompliant
+    }
+
+    public class DerivedWebClass2 : WebClass2
+    {
+        public int Bar() => 1;
+
+        protected int BarBar() => 1; // Noncompliant
+    }
+
+    public class WebClass3 : Microsoft.AspNetCore.Mvc.Controller
+    {
+        public int Foo() => 0;
+
+        protected int FooFoo() => 0; // Noncompliant
+    }
+
+    public class DerivedWebClass3 : WebClass3
+    {
+        public int Bar() => 1;
+
+        protected int BarBar() => 1; // Noncompliant
     }
 
     // Handle invalid code causing NullReferenceException: https://github.com/SonarSource/sonar-csharp/issues/819

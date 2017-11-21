@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2017 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -49,6 +49,13 @@ namespace SonarAnalyzer.Rules.CSharp
             SymbolKind.Property,
             SymbolKind.Event,
             SymbolKind.Method
+        };
+
+        private static readonly ISet<KnownType> WebControllerTypes = new HashSet<KnownType>
+        {
+            KnownType.System_Web_Mvc_Controller,
+            KnownType.System_Web_Http_ApiController,
+            KnownType.Microsoft_AspNetCore_Mvc_Controller
         };
 
         protected sealed override void Initialize(SonarAnalysisContext context)
@@ -104,7 +111,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 IsNewMethod(symbol) ||
                 IsEmptyMethod(declaration) ||
                 IsNewProperty(symbol) ||
-                IsAutoProperty(symbol))
+                IsAutoProperty(symbol) ||
+                IsPublicControllerMethod(symbol))
             {
                 return;
             }
@@ -154,6 +162,17 @@ namespace SonarAnalyzer.Rules.CSharp
                 .Select(r => r.GetSyntax())
                 .OfType<PropertyDeclarationSyntax>()
                 .Any(s => s.AccessorList != null && s.AccessorList.Accessors.All(a => a.Body == null));
+        }
+
+        private static bool IsPublicControllerMethod(ISymbol symbol)
+        {
+            if (symbol is IMethodSymbol methodSymbol)
+            {
+                return methodSymbol.DeclaredAccessibility == Accessibility.Public &&
+                    methodSymbol.ContainingType.DerivesFromAny(WebControllerTypes);
+            }
+
+            return false;
         }
 
         private static bool HasInstanceReferences(IEnumerable<SyntaxNode> nodes, SemanticModel semanticModel)

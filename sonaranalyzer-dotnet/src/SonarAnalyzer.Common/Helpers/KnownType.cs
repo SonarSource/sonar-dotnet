@@ -379,6 +379,10 @@ namespace SonarAnalyzer.Helpers
         public static readonly KnownType System_Collections_Generic_KeyValuePair_TKey_TValue =
             new KnownType("System.Collections.Generic.KeyValuePair<TKey, TValue>");
 
+        public static readonly KnownType System_Web_Mvc_Controller = new KnownType("System.Web.Mvc.Controller");
+        public static readonly KnownType System_Web_Http_ApiController = new KnownType("System.Web.Http.ApiController");
+        public static readonly KnownType Microsoft_AspNetCore_Mvc_Controller = new KnownType("Microsoft.AspNetCore.Mvc.Controller");
+
         #endregion Known types
 
         public string TypeName { get; }
