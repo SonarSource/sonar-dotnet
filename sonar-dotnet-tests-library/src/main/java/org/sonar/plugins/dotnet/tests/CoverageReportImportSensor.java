@@ -19,21 +19,17 @@
  */
 package org.sonar.plugins.dotnet.tests;
 
-import org.sonar.api.SonarQubeVersion;
+import java.io.File;
+import java.util.Map;
 import org.sonar.api.batch.fs.FilePredicates;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.InputFile.Type;
 import org.sonar.api.batch.sensor.Sensor;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
-import org.sonar.api.batch.sensor.coverage.CoverageType;
 import org.sonar.api.batch.sensor.coverage.NewCoverage;
-import org.sonar.api.utils.Version;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
-
-import java.io.File;
-import java.util.Map;
 
 public class CoverageReportImportSensor implements Sensor {
 
@@ -45,40 +41,25 @@ public class CoverageReportImportSensor implements Sensor {
   private final boolean isIntegrationTest;
   private final String languageKey;
   private final String languageName;
-  private final SonarQubeVersion sonarQubeVersion;
 
   public CoverageReportImportSensor(CoverageConfiguration coverageConf, CoverageAggregator coverageAggregator,
-                                    String languageKey, String languageName, SonarQubeVersion sonarQubeVersion,
-                                    boolean isIntegrationTest) {
+    String languageKey, String languageName, boolean isIntegrationTest) {
     this.coverageConf = coverageConf;
     this.coverageAggregator = coverageAggregator;
     this.isIntegrationTest = isIntegrationTest;
     this.languageKey = languageKey;
     this.languageName = languageName;
-    this.sonarQubeVersion = sonarQubeVersion;
   }
 
   @Override
   public void describe(SensorDescriptor descriptor) {
-    if (this.sonarQubeVersion.isGreaterThanOrEqual(Version.create(6, 2))) {
-      if (this.isIntegrationTest) {
-        descriptor.name("[Deprecated] " + this.languageName + " Integration Tests Coverage Report Import");
-      } else {
-        descriptor.name(this.languageName + " Tests Coverage Report Import");
-      }
+    if (this.isIntegrationTest) {
+      descriptor.name("[Deprecated] " + this.languageName + " Integration Tests Coverage Report Import");
     } else {
-      if (this.isIntegrationTest) {
-        descriptor.name(this.languageName + " Integration Tests Coverage Report Import");
-      } else {
-        descriptor.name(this.languageName + " Unit Tests Coverage Report Import");
-      }
+      descriptor.name(this.languageName + " Tests Coverage Report Import");
     }
-    if (sonarQubeVersion.isGreaterThanOrEqual(Version.create(6,4))) {
-      descriptor.global();
-    }
-    if (sonarQubeVersion.isGreaterThanOrEqual(Version.create(6,5))) {
-      descriptor.onlyWhenConfiguration(c -> coverageAggregator.hasCoverageProperty(c::hasKey));
-    }
+    descriptor.global();
+    descriptor.onlyWhenConfiguration(c -> coverageAggregator.hasCoverageProperty(c::hasKey));
 
     descriptor.onlyOnLanguage(this.languageKey);
   }
@@ -90,7 +71,7 @@ public class CoverageReportImportSensor implements Sensor {
       return;
     }
 
-    if (this.isIntegrationTest && this.sonarQubeVersion.isGreaterThanOrEqual(Version.create(6,2))) {
+    if (this.isIntegrationTest) {
       LOG.warn("Starting with SonarQube 6.2 separation between Unit Tests and Integration Tests Coverage" +
         " reports is deprecated. Please move all reports specified from *.it.reportPaths into *.reportPaths.");
     }
@@ -115,8 +96,7 @@ public class CoverageReportImportSensor implements Sensor {
       }
 
       NewCoverage newCoverage = context.newCoverage()
-        .onFile(inputFile)
-        .ofType(isIntegrationTest ? CoverageType.IT : CoverageType.UNIT);
+        .onFile(inputFile);
 
       for (Map.Entry<Integer, Integer> entry : coverage.hits(filePath).entrySet()) {
         newCoverage.lineHits(entry.getKey(), entry.getValue());

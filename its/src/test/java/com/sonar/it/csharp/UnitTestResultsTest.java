@@ -21,8 +21,6 @@ package com.sonar.it.csharp;
 
 import com.sonar.orchestrator.Orchestrator;
 import com.sonar.orchestrator.build.BuildResult;
-import com.sonar.orchestrator.version.Version;
-
 import java.io.IOException;
 import java.nio.file.Path;
 import org.junit.Before;
@@ -52,11 +50,7 @@ public class UnitTestResultsTest {
   public void should_not_import_unit_test_results_without_report() throws Exception {
     BuildResult buildResult = analyzeTestProject();
 
-    if (orchestrator.getServer().version().isGreaterThanOrEquals("6.5")) {
-      assertThat(buildResult.getLogs()).doesNotContain("C# Unit Test Results Import");
-    } else {
-      assertThat(buildResult.getLogs()).contains("C# Unit Test Results Import");
-    }
+    assertThat(buildResult.getLogs()).doesNotContain("C# Unit Test Results Import");
     assertThat(getMeasure("UnitTestResultsTest", "tests")).isNull();
     assertThat(getMeasure("UnitTestResultsTest", "test_errors")).isNull();
     assertThat(getMeasure("UnitTestResultsTest", "test_failures")).isNull();

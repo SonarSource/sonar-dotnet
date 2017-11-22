@@ -19,28 +19,25 @@
  */
 package org.sonar.plugins.dotnet.tests;
 
+import java.util.function.Predicate;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
-import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
-import org.mockito.invocation.InvocationOnMock;
-import org.mockito.stubbing.Answer;
-
-import org.sonar.api.SonarQubeVersion;
 import org.sonar.api.batch.bootstrap.ProjectDefinition;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.internal.DefaultSensorDescriptor;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.api.config.Configuration;
 import org.sonar.api.measures.CoreMetrics;
-import org.sonar.api.utils.Version;
-
-import java.util.function.Predicate;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.groups.Tuple.tuple;
-import static org.mockito.Mockito.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyZeroInteractions;
+import static org.mockito.Mockito.when;
 
 public class UnitTestResultsImportSensorTest {
 
@@ -50,18 +47,17 @@ public class UnitTestResultsImportSensorTest {
   @Test
   public void coverage() {
     UnitTestResultsAggregator unitTestResultsAggregator = mock(UnitTestResultsAggregator.class);
-    SonarQubeVersion sonarQubeVersion = new SonarQubeVersion(SonarQubeVersion.V5_6);
-    new UnitTestResultsImportSensor(unitTestResultsAggregator, ProjectDefinition.create(), "cs", "C#", sonarQubeVersion)
-        .describe(new DefaultSensorDescriptor());
+    new UnitTestResultsImportSensor(unitTestResultsAggregator, ProjectDefinition.create(), "cs", "C#")
+      .describe(new DefaultSensorDescriptor());
     SensorContext sensorContext = mock(SensorContext.class);
-    new UnitTestResultsImportSensor(unitTestResultsAggregator, ProjectDefinition.create(), "cs", "C#", sonarQubeVersion)
-        .execute(sensorContext);
+    new UnitTestResultsImportSensor(unitTestResultsAggregator, ProjectDefinition.create(), "cs", "C#")
+      .execute(sensorContext);
     verifyZeroInteractions(sensorContext);
     when(unitTestResultsAggregator.hasUnitTestResultsProperty()).thenReturn(true);
     ProjectDefinition sub = ProjectDefinition.create();
     ProjectDefinition.create().addSubProject(sub);
-    new UnitTestResultsImportSensor(unitTestResultsAggregator, sub, "cs", "C#", sonarQubeVersion)
-        .execute(sensorContext);
+    new UnitTestResultsImportSensor(unitTestResultsAggregator, sub, "cs", "C#")
+      .execute(sensorContext);
     verifyZeroInteractions(sensorContext);
   }
 
@@ -78,12 +74,11 @@ public class UnitTestResultsImportSensorTest {
     UnitTestResultsAggregator unitTestResultsAggregator = mock(UnitTestResultsAggregator.class);
     SensorContextTester context = SensorContextTester.create(temp.newFolder());
 
-    SonarQubeVersion sonarQubeVersion = new SonarQubeVersion(SonarQubeVersion.V5_6);
     when(unitTestResultsAggregator.aggregate(Mockito.any(WildcardPatternFileProvider.class), Mockito.any(UnitTestResults.class)))
-        .thenReturn(results);
+      .thenReturn(results);
 
-    new UnitTestResultsImportSensor(unitTestResultsAggregator, ProjectDefinition.create(), "cs", "C#", sonarQubeVersion)
-        .analyze(context, results);
+    new UnitTestResultsImportSensor(unitTestResultsAggregator, ProjectDefinition.create(), "cs", "C#")
+      .analyze(context, results);
 
     verify(unitTestResultsAggregator).aggregate(Mockito.any(WildcardPatternFileProvider.class), Mockito.eq(results));
 
@@ -111,9 +106,8 @@ public class UnitTestResultsImportSensorTest {
     when(results.executionTime()).thenReturn(null);
     when(unitTestResultsAggregator.aggregate(Mockito.any(WildcardPatternFileProvider.class), Mockito.any(UnitTestResults.class))).thenReturn(results);
 
-    SonarQubeVersion sonarQubeVersion = new SonarQubeVersion(SonarQubeVersion.V5_6);
-    new UnitTestResultsImportSensor(unitTestResultsAggregator, ProjectDefinition.create(), "cs", "C#", sonarQubeVersion)
-        .analyze(context, results);
+    new UnitTestResultsImportSensor(unitTestResultsAggregator, ProjectDefinition.create(), "cs", "C#")
+      .analyze(context, results);
 
     verify(unitTestResultsAggregator).aggregate(Mockito.any(WildcardPatternFileProvider.class), Mockito.eq(results));
 
@@ -127,9 +121,8 @@ public class UnitTestResultsImportSensorTest {
   }
 
   @Test
-  public void describe_when_sonarqube_is_6_5_plus_execute_only_when_key_present() {
+  public void describe_execute_only_when_key_present() {
     UnitTestResultsAggregator unitTestResultsAggregator = mock(UnitTestResultsAggregator.class);
-    SonarQubeVersion sonarQubeVersion = new SonarQubeVersion(Version.create(6,5));
 
     Configuration configWithKey = mock(Configuration.class);
     when(configWithKey.hasKey("expectedKey")).thenReturn(true);
@@ -137,12 +130,12 @@ public class UnitTestResultsImportSensorTest {
     Configuration configWithoutKey = mock(Configuration.class);
 
     when(unitTestResultsAggregator.hasUnitTestResultsProperty(any(Predicate.class))).thenAnswer((invocationOnMock) -> {
-        Predicate<String> pr = invocationOnMock.getArgument(0);
-        return pr.test("expectedKey");
-      });
+      Predicate<String> pr = invocationOnMock.getArgument(0);
+      return pr.test("expectedKey");
+    });
     DefaultSensorDescriptor descriptor = new DefaultSensorDescriptor();
 
-    new UnitTestResultsImportSensor(unitTestResultsAggregator, ProjectDefinition.create(), "cs", "C#", sonarQubeVersion)
+    new UnitTestResultsImportSensor(unitTestResultsAggregator, ProjectDefinition.create(), "cs", "C#")
       .describe(descriptor);
 
     assertThat(descriptor.configurationPredicate()).accepts(configWithKey);
@@ -150,12 +143,11 @@ public class UnitTestResultsImportSensorTest {
   }
 
   @Test
-  public void describe_when_sonarqube_is_6_4_plus_is_global_and_only_on_language() {
+  public void describe_is_global_and_only_on_language() {
     UnitTestResultsAggregator unitTestResultsAggregator = mock(UnitTestResultsAggregator.class);
-    SonarQubeVersion sonarQubeVersion = new SonarQubeVersion(Version.create(6,4));
     DefaultSensorDescriptor descriptor = new DefaultSensorDescriptor();
 
-    new UnitTestResultsImportSensor(unitTestResultsAggregator, ProjectDefinition.create(), "cs", "C#", sonarQubeVersion)
+    new UnitTestResultsImportSensor(unitTestResultsAggregator, ProjectDefinition.create(), "cs", "C#")
       .describe(descriptor);
 
     assertThat(descriptor.isGlobal()).isTrue();

@@ -24,10 +24,8 @@ import java.lang.reflect.Constructor;
 import java.util.List;
 import java.util.Set;
 import org.junit.Test;
-import org.sonar.api.SonarQubeVersion;
 import org.sonar.api.config.PropertyDefinition;
 import org.sonar.api.config.internal.MapSettings;
-import org.sonar.api.utils.Version;
 import org.sonar.plugins.csharp.CSharpCodeCoverageProvider.CSharpCoverageAggregator;
 import org.sonar.plugins.csharp.CSharpCodeCoverageProvider.CSharpCoverageReportImportSensor;
 import org.sonar.plugins.csharp.CSharpCodeCoverageProvider.CSharpIntegrationCoverageAggregator;
@@ -61,13 +59,12 @@ public class CSharpCodeCoverageProviderTest {
 
   @Test
   public void createInstance_CoverageReport() {
-    new CSharpCoverageReportImportSensor(new CSharpCoverageAggregator(new MapSettings().asConfig()), new SonarQubeVersion(Version.create(6, 7)));
+    new CSharpCoverageReportImportSensor(new CSharpCoverageAggregator(new MapSettings().asConfig()));
   }
 
   @Test
   public void createInstance_IntegrationCoverageReport() {
-    new CSharpIntegrationCoverageReportImportSensor(new CSharpIntegrationCoverageAggregator(new MapSettings().asConfig()),
-      new SonarQubeVersion(Version.create(6, 7)));
+    new CSharpIntegrationCoverageReportImportSensor(new CSharpIntegrationCoverageAggregator(new MapSettings().asConfig()));
   }
 
   private static Set<Object> nonProperties(List extensions) {
