@@ -80,19 +80,21 @@ public class VisualStudioTestResultsFileParser implements UnitTestResultsParser 
     private void handleCountersTag(XmlParserHelper xmlParserHelper) {
       foundCounters = true;
 
+      int total = xmlParserHelper.getIntAttributeOrZero("total");
       int passed = xmlParserHelper.getIntAttributeOrZero("passed");
       int failed = xmlParserHelper.getIntAttributeOrZero("failed");
       int errors = xmlParserHelper.getIntAttributeOrZero("error");
       int timeout = xmlParserHelper.getIntAttributeOrZero("timeout");
       int aborted = xmlParserHelper.getIntAttributeOrZero("aborted");
+      int executed = xmlParserHelper.getIntAttributeOrZero("executed");
 
-      int inconclusive = xmlParserHelper.getIntAttributeOrZero("inconclusive");
-
-      int tests = passed + failed + errors + timeout + aborted;
-      int skipped = inconclusive;
+      // IgnoreAttribute and Assert.Inconclusive do not appear in the trx (xml attributes are always 0).
+      // There is no official documentation but it seems like the only way to get skipped tests is to do the following
+      // maths.
+      int skipped = total - executed;
       int failures = timeout + failed + aborted;
 
-      unitTestResults.add(tests, passed, skipped, failures, errors, null);
+      unitTestResults.add(total, passed, skipped, failures, errors, null);
     }
 
     private void handleTimesTag(XmlParserHelper xmlParserHelper) {

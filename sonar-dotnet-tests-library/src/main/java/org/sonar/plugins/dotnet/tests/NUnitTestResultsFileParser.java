@@ -68,14 +68,15 @@ public class NUnitTestResultsFileParser implements UnitTestResultsParser {
       int failures = xmlParserHelper.getRequiredIntAttribute("failures");
       int inconclusive = xmlParserHelper.getRequiredIntAttribute("inconclusive");
       int ignored = xmlParserHelper.getRequiredIntAttribute("ignored");
+      int skipped = xmlParserHelper.getRequiredIntAttribute("skipped");
 
-      int tests = total - inconclusive;
-      int passed = total - errors - failures - inconclusive;
-      int skipped = inconclusive + ignored;
+      int totalSkipped = skipped + inconclusive + ignored;
+      int passed = total - errors - failures;
 
-      Double executionTime = readExecutionTimeFromDirectlyNestedTestSuiteTags(xmlParserHelper);
+      Double duration = readExecutionTimeFromDirectlyNestedTestSuiteTags(xmlParserHelper);
+      Long executionTime = duration != null ? (long) duration.doubleValue() : null;
 
-      unitTestResults.add(tests, passed, skipped, failures, errors, executionTime != null ? (long) executionTime.doubleValue() : null);
+      unitTestResults.add(total, passed, totalSkipped, failures, errors, executionTime);
     }
 
     private void handleTestRunTag(XmlParserHelper xmlParserHelper) {
@@ -85,13 +86,14 @@ public class NUnitTestResultsFileParser implements UnitTestResultsParser {
       int passed = xmlParserHelper.getRequiredIntAttribute("passed");
       int skipped = xmlParserHelper.getRequiredIntAttribute("skipped");
 
-      skipped += inconclusive;
+      int totalSkipped = skipped + inconclusive;
 
-      Double executionTime = xmlParserHelper.getDoubleAttribute("duration");
+      Double duration = xmlParserHelper.getDoubleAttribute("duration");
+      Long executionTime = duration != null ? (long) (duration * 1000) : null;
 
       int errors = readErrorCountFromNestedTestCaseTags(xmlParserHelper);
 
-      unitTestResults.add(total, passed, skipped, failures, errors, executionTime != null ? (long) (executionTime.doubleValue() * 1000) : null);
+      unitTestResults.add(total, passed, totalSkipped, failures, errors, executionTime);
     }
 
     @CheckForNull

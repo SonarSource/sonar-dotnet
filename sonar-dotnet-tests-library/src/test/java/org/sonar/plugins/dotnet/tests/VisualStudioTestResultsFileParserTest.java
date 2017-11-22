@@ -54,11 +54,11 @@ public class VisualStudioTestResultsFileParserTest {
     UnitTestResults results = new UnitTestResults();
     new VisualStudioTestResultsFileParser().accept(new File("src/test/resources/visualstudio_test_results/valid.trx"), results);
 
-    assertThat(results.tests()).isEqualTo(31);
-    assertThat(results.passedPercentage()).isEqualTo(14 * 100.0 / 31);
-    assertThat(results.skipped()).isEqualTo(11);
     assertThat(results.failures()).isEqualTo(14);
     assertThat(results.errors()).isEqualTo(3);
+    assertThat(results.tests()).isEqualTo(43);
+    assertThat(results.passedPercentage()).isEqualTo(14 * 100.0 / 43);
+    assertThat(results.skipped()).isEqualTo(12); // 43 - 31
     assertThat(results.executionTime()).isEqualTo(816l);
   }
 
