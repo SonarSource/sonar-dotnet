@@ -71,15 +71,12 @@ public class NUnitTestResultsFileParser implements UnitTestResultsParser {
       int skipped = xmlParserHelper.getRequiredIntAttribute("skipped");
 
       int totalSkipped = skipped + inconclusive + ignored;
-      // Surprisingly the Unit Tests measure count in SonarQube is not the total number of tests but the total of
-      // not-skipped tests. To actually get the total you need to add this metric with the skipped one.
-      int tests = total - totalSkipped;
-      int passed = tests - errors - failures;
+      int passed = total - errors - failures;
 
       Double duration = readExecutionTimeFromDirectlyNestedTestSuiteTags(xmlParserHelper);
       Long executionTime = duration != null ? (long) duration.doubleValue() : null;
 
-      unitTestResults.add(tests, passed, totalSkipped, failures, errors, executionTime);
+      unitTestResults.add(total, passed, totalSkipped, failures, errors, executionTime);
     }
 
     private void handleTestRunTag(XmlParserHelper xmlParserHelper) {
@@ -90,16 +87,13 @@ public class NUnitTestResultsFileParser implements UnitTestResultsParser {
       int skipped = xmlParserHelper.getRequiredIntAttribute("skipped");
 
       int totalSkipped = skipped + inconclusive;
-      // Surprisingly the Unit Tests measure count in SonarQube is not the total number of tests but the total of
-      // not-skipped tests. To actually get the total you need to add this metric with the skipped one.
-      int tests = total - totalSkipped;
 
       Double duration = xmlParserHelper.getDoubleAttribute("duration");
       Long executionTime = duration != null ? (long) (duration * 1000) : null;
 
       int errors = readErrorCountFromNestedTestCaseTags(xmlParserHelper);
 
-      unitTestResults.add(tests, passed, totalSkipped, failures, errors, executionTime);
+      unitTestResults.add(total, passed, totalSkipped, failures, errors, executionTime);
     }
 
     @CheckForNull

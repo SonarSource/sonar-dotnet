@@ -68,7 +68,7 @@ public class UnitTestResultsTest {
     BuildResult buildResult = analyzeTestProject("sonar.cs.vstest.reportsPaths", "reports/vstest.trx");
 
     assertThat(buildResult.getLogs()).contains("C# Unit Test Results Import");
-    assertThat(getMeasureAsInt("UnitTestResultsTest", "tests")).isEqualTo(40);
+    assertThat(getMeasureAsInt("UnitTestResultsTest", "tests")).isEqualTo(42);
     assertThat(getMeasureAsInt("UnitTestResultsTest", "test_errors")).isEqualTo(1);
     assertThat(getMeasureAsInt("UnitTestResultsTest", "test_failures")).isEqualTo(10);
     assertThat(getMeasureAsInt("UnitTestResultsTest", "skipped_tests")).isEqualTo(2);
@@ -79,7 +79,7 @@ public class UnitTestResultsTest {
     BuildResult buildResult = analyzeTestProject("sonar.cs.nunit.reportsPaths", "reports/nunit.xml");
 
     assertThat(buildResult.getLogs()).contains("C# Unit Test Results Import");
-    assertThat(getMeasureAsInt("UnitTestResultsTest", "tests")).isEqualTo(191);
+    assertThat(getMeasureAsInt("UnitTestResultsTest", "tests")).isEqualTo(200);
     assertThat(getMeasureAsInt("UnitTestResultsTest", "test_errors")).isEqualTo(30);
     assertThat(getMeasureAsInt("UnitTestResultsTest", "test_failures")).isEqualTo(20);
     assertThat(getMeasureAsInt("UnitTestResultsTest", "skipped_tests")).isEqualTo(9);

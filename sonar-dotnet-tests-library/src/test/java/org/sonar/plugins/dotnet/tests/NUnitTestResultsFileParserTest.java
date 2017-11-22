@@ -56,9 +56,9 @@ public class NUnitTestResultsFileParserTest {
 
     assertThat(results.errors()).isEqualTo(30);
     assertThat(results.failures()).isEqualTo(20);
+    assertThat(results.tests()).isEqualTo(200);
+    assertThat(results.passedPercentage()).isEqualTo(150 * 100.0 / 200); // 200 - 30 - 20
     assertThat(results.skipped()).isEqualTo(9); // 4 + 3 + 2
-    assertThat(results.tests()).isEqualTo(191); // 200 - 9
-    assertThat(results.passedPercentage()).isEqualTo(141 * 100.0 / 191); // 191 - 30 - 20
     assertThat(results.executionTime()).isEqualTo(51);
   }
 
@@ -77,9 +77,9 @@ public class NUnitTestResultsFileParserTest {
 
     assertThat(results.failures()).isEqualTo(20);
     assertThat(results.errors()).isEqualTo(30);
+    assertThat(results.tests()).isEqualTo(200);
+    assertThat(results.passedPercentage()).isEqualTo(150 * 100.0 / 200); // 200 - 30 - 20
     assertThat(results.skipped()).isEqualTo(9); // 4 + 3 + 2
-    assertThat(results.tests()).isEqualTo(191); // 200 - 9
-    assertThat(results.passedPercentage()).isEqualTo(141 * 100.0 / 191); // 191 - 30 - 20
     assertThat(results.executionTime()).isNull();
   }
 
@@ -90,9 +90,9 @@ public class NUnitTestResultsFileParserTest {
 
     assertThat(results.failures()).isEqualTo(2);
     assertThat(results.errors()).isEqualTo(1);
+    assertThat(results.tests()).isEqualTo(18);
+    assertThat(results.passedPercentage()).isEqualTo(12 * 100.0 / 18);
     assertThat(results.skipped()).isEqualTo(4); // 1 + 3
-    assertThat(results.tests()).isEqualTo(14); // 18 - 4
-    assertThat(results.passedPercentage()).isEqualTo(12 * 100.0 / 14); // 16 - 2 - 1
     assertThat(results.executionTime()).isEqualTo(154);
   }
 

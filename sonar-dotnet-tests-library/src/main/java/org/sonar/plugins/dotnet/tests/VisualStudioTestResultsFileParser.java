@@ -92,12 +92,9 @@ public class VisualStudioTestResultsFileParser implements UnitTestResultsParser 
       // There is no official documentation but it seems like the only way to get skipped tests is to do the following
       // maths.
       int skipped = total - executed;
-      // Surprisingly the Unit Tests measure count in SonarQube is not the total number of tests but the total of
-      // not-skipped tests. To actually get the total you need to add this metric with the skipped one.
-      int tests = total - skipped;
       int failures = timeout + failed + aborted;
 
-      unitTestResults.add(tests, passed, skipped, failures, errors, null);
+      unitTestResults.add(total, passed, skipped, failures, errors, null);
     }
 
     private void handleTimesTag(XmlParserHelper xmlParserHelper) {
