@@ -67,11 +67,11 @@ public class XUnitTestResultsFileParserTest {
     UnitTestResults results = new UnitTestResults();
     new XUnitTestResultsFileParser().accept(new File("src/test/resources/xunit/valid.xml"), results);
 
-    assertThat(results.tests()).isEqualTo(17);
-    assertThat(results.passedPercentage()).isEqualTo(5 * 100.0 / 17);
-    assertThat(results.skipped()).isEqualTo(4);
     assertThat(results.failures()).isEqualTo(3);
     assertThat(results.errors()).isEqualTo(5);
+    assertThat(results.skipped()).isEqualTo(4);
+    assertThat(results.tests()).isEqualTo(13); // 17 - 4
+    assertThat(results.passedPercentage()).isEqualTo(5 * 100.0 / 13);
     assertThat(results.executionTime()).isEqualTo(227 + 228);
   }
 
@@ -80,11 +80,11 @@ public class XUnitTestResultsFileParserTest {
     UnitTestResults results = new UnitTestResults();
     new XUnitTestResultsFileParser().accept(new File("src/test/resources/xunit/valid_xunit-1.9.2.xml"), results);
 
-    assertThat(results.tests()).isEqualTo(6);
-    assertThat(results.passedPercentage()).isEqualTo(3 * 100.0 / 6);
-    assertThat(results.skipped()).isEqualTo(2);
     assertThat(results.failures()).isEqualTo(1);
     assertThat(results.errors()).isEqualTo(0);
+    assertThat(results.skipped()).isEqualTo(2);
+    assertThat(results.tests()).isEqualTo(4);
+    assertThat(results.passedPercentage()).isEqualTo(3 * 100.0 / 4);
   }
 
   @Test
@@ -92,11 +92,11 @@ public class XUnitTestResultsFileParserTest {
     UnitTestResults results = new UnitTestResults();
     new XUnitTestResultsFileParser().accept(new File("src/test/resources/xunit/no_execution_time.xml"), results);
 
-    assertThat(results.tests()).isEqualTo(17);
-    assertThat(results.passedPercentage()).isEqualTo(5 * 100.0 / 17);
-    assertThat(results.skipped()).isEqualTo(4);
     assertThat(results.failures()).isEqualTo(3);
     assertThat(results.errors()).isEqualTo(5);
+    assertThat(results.skipped()).isEqualTo(4);
+    assertThat(results.tests()).isEqualTo(13); // 17 - 4
+    assertThat(results.passedPercentage()).isEqualTo(5 * 100.0 / 13);
     assertThat(results.executionTime()).isNull();
   }
 
