@@ -30,6 +30,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Collections;
 import java.util.List;
 import javax.annotation.CheckForNull;
 import org.apache.commons.io.FileUtils;
@@ -38,6 +39,7 @@ import org.junit.rules.TemporaryFolder;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
+import org.sonarqube.ws.Issues;
 import org.sonarqube.ws.WsComponents;
 import org.sonarqube.ws.WsMeasures;
 import org.sonarqube.ws.WsMeasures.Measure;
@@ -45,6 +47,7 @@ import org.sonarqube.ws.client.HttpConnector;
 import org.sonarqube.ws.client.WsClient;
 import org.sonarqube.ws.client.WsClientFactories;
 import org.sonarqube.ws.client.component.ShowWsRequest;
+import org.sonarqube.ws.client.issue.SearchWsRequest;
 import org.sonarqube.ws.client.measure.ComponentWsRequest;
 
 import static java.util.Collections.singletonList;
@@ -98,8 +101,8 @@ public class Tests {
       + "Visual Studio\\2017\\Enterprise\\MSBuild\\15.0\\Bin\\MSBuild.exe");
     Path msBuildPath = Paths.get(msBuildPathStr).toAbsolutePath();
     if (!Files.exists(msBuildPath)) {
-      throw new IllegalStateException("Unable to find MSBuild at " + msBuildPath.toString() +
-        ". Please configure property '" + MSBUILD_PATH + "'");
+      throw new IllegalStateException("Unable to find MSBuild at '" + msBuildPath.toString() +
+        "'. Please configure property '" + MSBUILD_PATH + "'");
     }
     return msBuildPath;
   }
@@ -127,6 +130,10 @@ public class Tests {
 
   static WsComponents.Component getComponent(String componentKey) {
     return newWsClient().components().show(new ShowWsRequest().setKey(componentKey)).getComponent();
+  }
+  
+  static List<Issues.Issue> getIssues(String componentKey) {
+    return newWsClient().issues().search(new SearchWsRequest().setComponentKeys(Collections.singletonList(componentKey))).getIssuesList();
   }
 
   static WsClient newWsClient() {
