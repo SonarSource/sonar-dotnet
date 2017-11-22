@@ -19,8 +19,12 @@
  */
 package org.sonarsource.dotnet.shared.plugins;
 
+import java.nio.file.Paths;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.issue.NewIssue;
@@ -32,6 +36,7 @@ import org.sonarsource.dotnet.shared.sarif.SarifParserCallback;
 public class SarifParserCallbackImpl implements SarifParserCallback {
   private final SensorContext context;
   private final Map<String, String> repositoryKeyByRoslynRuleKey;
+  private final Set<Issue> savedIssues = new HashSet<>();
 
   public SarifParserCallbackImpl(SensorContext context, Map<String, String> repositoryKeyByRoslynRuleKey) {
     this.context = context;
@@ -82,6 +87,11 @@ public class SarifParserCallbackImpl implements SarifParserCallback {
       return;
     }
 
+    Issue issue = new Issue(ruleId, primaryLocation);
+    if (!savedIssues.add(issue)) {
+      return;
+    }
+
     InputFile inputFile = context.fileSystem().inputFile(context.fileSystem().predicates()
       .hasAbsolutePath(primaryLocation.getAbsolutePath()));
     if (inputFile == null) {
@@ -120,5 +130,41 @@ public class SarifParserCallbackImpl implements SarifParserCallback {
     }
 
     newIssue.save();
+  }
+
+  private static class Issue {
+    private String ruleId;
+    private String absolutePath;
+    private int startLine;
+    private int startColumn;
+    private int endLine;
+    private int endColumn;
+
+    Issue(String ruleId, Location location) {
+      this.ruleId = ruleId;
+      this.absolutePath = location.getAbsolutePath();
+      this.startLine = location.getStartLine();
+      this.startColumn = location.getStartColumn();
+      this.endLine = location.getEndLine();
+      this.endColumn = location.getEndColumn();
+    }
+
+    @Override
+    public int hashCode() {
+      return Objects.hash(ruleId, absolutePath, startLine, startColumn, endLine, endColumn);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+      if (!(other instanceof Issue)) {
+        return false;
+      }
+      Issue o = (Issue) other;
+
+      // note that comparison of absolute path is done using Path.
+      return Objects.equals(ruleId, o.ruleId) && Objects.equals(startLine, o.startLine)
+        && Objects.equals(startColumn, o.startColumn) && Objects.equals(endLine, o.endLine)
+        && Objects.equals(endColumn, o.endColumn) && Paths.get(absolutePath).equals(Paths.get(o.absolutePath));
+    }
   }
 }
