@@ -20,25 +20,20 @@
 package org.sonar.plugins.dotnet.tests;
 
 import com.google.common.collect.ImmutableMap;
+import java.io.File;
+import java.util.HashSet;
+import java.util.function.Predicate;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 import org.mockito.Mockito;
-
-import org.sonar.api.SonarQubeVersion;
-import org.sonar.api.batch.bootstrap.ProjectDefinition;
 import org.sonar.api.batch.fs.internal.DefaultInputFile;
 import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 import org.sonar.api.batch.sensor.internal.DefaultSensorDescriptor;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.api.config.Configuration;
-import org.sonar.api.utils.Version;
 import org.sonar.api.utils.log.LogTester;
 import org.sonar.api.utils.log.LoggerLevel;
-
-import java.io.File;
-import java.util.HashSet;
-import java.util.function.Predicate;
 
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -56,95 +51,48 @@ public class CoverageReportImportSensorTest {
   public LogTester logTester = new LogTester();
 
   @Test
-  public void describe_unit_test_sonarqube_5_6() {
+  public void describe_unit_test() {
     CoverageConfiguration coverageConf = new CoverageConfiguration("", "", "", "", "");
 
     CoverageAggregator coverageAggregator = mock(CoverageAggregator.class);
 
-    SonarQubeVersion sonarQubeVersion = new SonarQubeVersion(SonarQubeVersion.V5_6);
     DefaultSensorDescriptor descriptor = new DefaultSensorDescriptor();
-    new CoverageReportImportSensor(coverageConf, coverageAggregator, "cs", "C#", sonarQubeVersion, false)
-        .describe(descriptor);
-
-    assertThat(descriptor.name()).isEqualTo("C# Unit Tests Coverage Report Import");
-  }
-
-  @Test
-  public void describe_unit_test_sonarqube_6_2() {
-    CoverageConfiguration coverageConf = new CoverageConfiguration("", "", "", "", "");
-
-    CoverageAggregator coverageAggregator = mock(CoverageAggregator.class);
-
-    SonarQubeVersion sonarQubeVersion = new SonarQubeVersion(Version.create(6,2));
-    DefaultSensorDescriptor descriptor = new DefaultSensorDescriptor();
-    new CoverageReportImportSensor(coverageConf, coverageAggregator, "cs", "C#", sonarQubeVersion, false)
+    new CoverageReportImportSensor(coverageConf, coverageAggregator, "cs", "C#", false)
       .describe(descriptor);
 
     assertThat(descriptor.name()).isEqualTo("C# Tests Coverage Report Import");
   }
 
   @Test
-  public void describe_integration_test_sonarqube_5_6() {
+  public void describe_integration_test() {
     CoverageConfiguration coverageConf = new CoverageConfiguration("", "", "", "", "");
 
     CoverageAggregator coverageAggregator = mock(CoverageAggregator.class);
 
-    SonarQubeVersion sonarQubeVersion = new SonarQubeVersion(SonarQubeVersion.V5_6);
     DefaultSensorDescriptor descriptor = new DefaultSensorDescriptor();
-    new CoverageReportImportSensor(coverageConf, coverageAggregator, "cs", "C#", sonarQubeVersion, true)
-      .describe(descriptor);
-
-    assertThat(descriptor.name()).isEqualTo("C# Integration Tests Coverage Report Import");
-  }
-
-  @Test
-  public void describe_integration_test_sonarqube_6_2() {
-    CoverageConfiguration coverageConf = new CoverageConfiguration("", "", "", "", "");
-
-    CoverageAggregator coverageAggregator = mock(CoverageAggregator.class);
-
-    SonarQubeVersion sonarQubeVersion = new SonarQubeVersion(Version.create(6,2));
-    DefaultSensorDescriptor descriptor = new DefaultSensorDescriptor();
-    new CoverageReportImportSensor(coverageConf, coverageAggregator, "cs", "C#", sonarQubeVersion, true)
+    new CoverageReportImportSensor(coverageConf, coverageAggregator, "cs", "C#", true)
       .describe(descriptor);
 
     assertThat(descriptor.name()).isEqualTo("[Deprecated] C# Integration Tests Coverage Report Import");
   }
 
   @Test
-  public void describe() {
+  public void describe_global_sensor() {
     CoverageConfiguration coverageConf = new CoverageConfiguration("", "", "", "", "");
 
     CoverageAggregator coverageAggregator = mock(CoverageAggregator.class);
 
-    SonarQubeVersion sonarQubeVersion = new SonarQubeVersion(Version.create(5,6));
     DefaultSensorDescriptor descriptor = new DefaultSensorDescriptor();
-    new CoverageReportImportSensor(coverageConf, coverageAggregator, "cs", "C#", sonarQubeVersion, false)
-      .describe(descriptor);
-
-    assertThat(descriptor.languages()).containsOnly("cs");
-    assertThat(descriptor.isGlobal()).isFalse();
-  }
-
-  @Test
-  public void describe_global_sensor_sonarqube_6_4() {
-    CoverageConfiguration coverageConf = new CoverageConfiguration("", "", "", "", "");
-
-    CoverageAggregator coverageAggregator = mock(CoverageAggregator.class);
-
-    SonarQubeVersion sonarQubeVersion = new SonarQubeVersion(Version.create(6,4));
-    DefaultSensorDescriptor descriptor = new DefaultSensorDescriptor();
-    new CoverageReportImportSensor(coverageConf, coverageAggregator, "cs", "C#", sonarQubeVersion, false)
+    new CoverageReportImportSensor(coverageConf, coverageAggregator, "cs", "C#", false)
       .describe(descriptor);
 
     assertThat(descriptor.isGlobal()).isTrue();
   }
 
   @Test
-  public void describe_when_sonarqube_is_6_5_plus_execute_only_when_key_present() {
+  public void describe_execute_only_when_key_present() {
     CoverageConfiguration coverageConf = new CoverageConfiguration("", "", "", "", "");
     CoverageAggregator coverageAggregator = mock(CoverageAggregator.class);
-    SonarQubeVersion sonarQubeVersion = new SonarQubeVersion(Version.create(6,5));
 
     Configuration configWithKey = mock(Configuration.class);
     when(configWithKey.hasKey("expectedKey")).thenReturn(true);
@@ -157,7 +105,7 @@ public class CoverageReportImportSensorTest {
     });
     DefaultSensorDescriptor descriptor = new DefaultSensorDescriptor();
 
-    new CoverageReportImportSensor(coverageConf, coverageAggregator, "cs", "C#", sonarQubeVersion, false)
+    new CoverageReportImportSensor(coverageConf, coverageAggregator, "cs", "C#", false)
       .describe(descriptor);
 
     assertThat(descriptor.configurationPredicate()).accepts(configWithKey);
@@ -171,27 +119,11 @@ public class CoverageReportImportSensorTest {
 
     CoverageConfiguration coverageConf = new CoverageConfiguration("", "", "", "", "");
     CoverageAggregator coverageAggregator = mock(CoverageAggregator.class);
-    SonarQubeVersion sonarQubeVersion = new SonarQubeVersion(Version.create(5,6));
 
-    new CoverageReportImportSensor(coverageConf, coverageAggregator, "cs", "C#", sonarQubeVersion, false)
+    new CoverageReportImportSensor(coverageConf, coverageAggregator, "cs", "C#", false)
       .execute(context);
 
     assertThat(logTester.logs(LoggerLevel.DEBUG)).contains("No coverage property. Skip Sensor");
-  }
-
-  @Test
-  public void execute_coverage_property_sonarqube_6_2() throws Exception {
-    CoverageConfiguration coverageConf = new CoverageConfiguration("", "", "", "", "");
-    CoverageAggregator coverageAggregator = mock(CoverageAggregator.class);
-    when(coverageAggregator.hasCoverageProperty()).thenReturn(true);
-    SonarQubeVersion sonarQubeVersion = new SonarQubeVersion(Version.create(6,2));
-
-    SensorContextTester context = computeCoverageMeasures(true);
-    new CoverageReportImportSensor(coverageConf, coverageAggregator, "cs", "C#", sonarQubeVersion, true)
-      .execute(context);
-
-    assertThat(logTester.logs(LoggerLevel.WARN)).contains("Starting with SonarQube 6.2 separation between Unit Tests and Integration Tests Coverage" +
-      " reports is deprecated. Please move all reports specified from *.it.reportPaths into *.reportPaths.");
   }
 
   @Test
@@ -240,9 +172,8 @@ public class CoverageReportImportSensorTest {
 
     CoverageConfiguration coverageConf = new CoverageConfiguration("cs", "", "", "", "");
 
-    SonarQubeVersion sonarQubeVersion = new SonarQubeVersion(SonarQubeVersion.V5_6);
-    new CoverageReportImportSensor(coverageConf, coverageAggregator,"cs", "C#", sonarQubeVersion, isIntegrationTest)
-        .analyze(context, coverage);
+    new CoverageReportImportSensor(coverageConf, coverageAggregator, "cs", "C#", isIntegrationTest)
+      .analyze(context, coverage);
 
     verify(coverageAggregator).aggregate(Mockito.any(WildcardPatternFileProvider.class), Mockito.eq(coverage));
 

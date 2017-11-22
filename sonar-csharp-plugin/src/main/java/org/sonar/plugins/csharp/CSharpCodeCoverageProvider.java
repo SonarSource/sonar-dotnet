@@ -19,16 +19,14 @@
  */
 package org.sonar.plugins.csharp;
 
-import org.sonar.api.SonarQubeVersion;
+import java.util.Arrays;
+import java.util.List;
 import org.sonar.api.config.Configuration;
 import org.sonar.api.config.PropertyDefinition;
 import org.sonar.api.resources.Qualifiers;
 import org.sonar.plugins.dotnet.tests.CoverageAggregator;
 import org.sonar.plugins.dotnet.tests.CoverageConfiguration;
 import org.sonar.plugins.dotnet.tests.CoverageReportImportSensor;
-
-import java.util.Arrays;
-import java.util.List;
 
 public class CSharpCodeCoverageProvider {
 
@@ -135,8 +133,8 @@ public class CSharpCodeCoverageProvider {
 
   public static class CSharpCoverageReportImportSensor extends CoverageReportImportSensor {
 
-    public CSharpCoverageReportImportSensor(CSharpCoverageAggregator coverageAggregator, SonarQubeVersion sonarQubeVersion) {
-      super(COVERAGE_CONF, coverageAggregator, CSharpPlugin.LANGUAGE_KEY, CSharpPlugin.LANGUAGE_NAME, sonarQubeVersion, false);
+    public CSharpCoverageReportImportSensor(CSharpCoverageAggregator coverageAggregator) {
+      super(COVERAGE_CONF, coverageAggregator, CSharpPlugin.LANGUAGE_KEY, CSharpPlugin.LANGUAGE_NAME, false);
     }
 
   }
@@ -151,9 +149,8 @@ public class CSharpCodeCoverageProvider {
 
   public static class CSharpIntegrationCoverageReportImportSensor extends CoverageReportImportSensor {
 
-    public CSharpIntegrationCoverageReportImportSensor(CSharpIntegrationCoverageAggregator coverageAggregator,
-      SonarQubeVersion sonarQubeVersion) {
-      super(IT_COVERAGE_CONF, coverageAggregator, CSharpPlugin.LANGUAGE_KEY, CSharpPlugin.LANGUAGE_NAME, sonarQubeVersion, true);
+    public CSharpIntegrationCoverageReportImportSensor(CSharpIntegrationCoverageAggregator coverageAggregator) {
+      super(IT_COVERAGE_CONF, coverageAggregator, CSharpPlugin.LANGUAGE_KEY, CSharpPlugin.LANGUAGE_NAME, true);
     }
 
   }
