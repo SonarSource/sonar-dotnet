@@ -100,7 +100,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             return SyntaxFactory.BinaryExpression(SyntaxKind.NotEqualsExpression,
                 binary.Left.RemoveParentheses(),
-                SyntaxHelper.NullLiteralExpression);
+                CSharpSyntaxHelper.NullLiteralExpression);
         }
 
         private static SyntaxNode ChangeInvocation(SyntaxNode root, Diagnostic diagnostic,

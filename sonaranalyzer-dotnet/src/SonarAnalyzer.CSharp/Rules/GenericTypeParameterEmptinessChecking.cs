@@ -50,8 +50,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     var equalsExpression = (BinaryExpressionSyntax) c.Node;
 
-                    var leftIsNull = EquivalenceChecker.AreEquivalent(equalsExpression.Left, SyntaxHelper.NullLiteralExpression);
-                    var rightIsNull = EquivalenceChecker.AreEquivalent(equalsExpression.Right, SyntaxHelper.NullLiteralExpression);
+                    var leftIsNull = EquivalenceChecker.AreEquivalent(equalsExpression.Left, CSharpSyntaxHelper.NullLiteralExpression);
+                    var rightIsNull = EquivalenceChecker.AreEquivalent(equalsExpression.Right, CSharpSyntaxHelper.NullLiteralExpression);
 
                     if (!(leftIsNull ^ rightIsNull))
                     {

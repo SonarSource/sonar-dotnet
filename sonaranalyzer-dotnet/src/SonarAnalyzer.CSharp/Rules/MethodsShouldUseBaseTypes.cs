@@ -127,7 +127,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return node;
             }
 
-            var topmostParent = SyntaxHelper.GetSelfOrTopParenthesizedExpression(expression);
+            var topmostParent = CSharpSyntaxHelper.GetSelfOrTopParenthesizedExpression(expression);
             return topmostParent.Parent;
         }
 

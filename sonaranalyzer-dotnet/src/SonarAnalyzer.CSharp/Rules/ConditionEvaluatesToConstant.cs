@@ -192,7 +192,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static SyntaxNode GetUnreachableStatement(IEnumerable<ExpressionSyntax> unreachableExpressions, bool constantValue)
         {
             var parent = unreachableExpressions
-                .Select(SyntaxHelper.GetSelfOrTopParenthesizedExpression) // unreachable expressions
+                .Select(CSharpSyntaxHelper.GetSelfOrTopParenthesizedExpression) // unreachable expressions
                 .Select(node => node.Parent is BinaryExpressionSyntax
                     ? node.Parent.Parent
                     : node.Parent) // Constant node is the only expression in an if statement condition

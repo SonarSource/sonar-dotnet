@@ -27,15 +27,20 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void FileLines()
+        public void FileLines_CSharp()
         {
-            var diagnosticCs = new SonarAnalyzer.Rules.CSharp.FileLines {Maximum = 12};
-            Verifier.VerifyAnalyzer(@"TestCases\FileLines12.cs", diagnosticCs);
-            Verifier.VerifyAnalyzer(@"TestCases\FileLines13.cs", diagnosticCs);
+            var diagnosticCs = new SonarAnalyzer.Rules.CSharp.FileLines { Maximum = 10 };
+            Verifier.VerifyAnalyzer(@"TestCases\FileLines20.cs", diagnosticCs);
+            Verifier.VerifyAnalyzer(@"TestCases\FileLines9.cs", diagnosticCs);
+        }
 
-            var diagnosticVb = new SonarAnalyzer.Rules.VisualBasic.FileLines { Maximum = 12 };
-            Verifier.VerifyAnalyzer(@"TestCases\FileLines12.vb", diagnosticVb);
-            Verifier.VerifyAnalyzer(@"TestCases\FileLines13.vb", diagnosticVb);
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void FileLines_VBNet()
+        {
+            var diagnosticVb = new SonarAnalyzer.Rules.VisualBasic.FileLines { Maximum = 10 };
+            Verifier.VerifyAnalyzer(@"TestCases\FileLines20.vb", diagnosticVb);
+            Verifier.VerifyAnalyzer(@"TestCases\FileLines9.vb", diagnosticVb);
         }
     }
 }

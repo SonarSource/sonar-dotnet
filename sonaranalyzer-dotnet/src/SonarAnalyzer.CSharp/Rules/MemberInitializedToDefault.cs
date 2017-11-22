@@ -136,7 +136,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool CheckReferenceTypeNullInitializer(EqualsValueClauseSyntax initializer, ITypeSymbol type)
         {
             return type.IsReferenceType &&
-                EquivalenceChecker.AreEquivalent(SyntaxHelper.NullLiteralExpression, initializer.Value);
+                EquivalenceChecker.AreEquivalent(CSharpSyntaxHelper.NullLiteralExpression, initializer.Value);
         }
 
         private static bool CheckValueTypeDefaultValueInitializer(EqualsValueClauseSyntax initializer, ITypeSymbol type)
@@ -149,7 +149,7 @@ namespace SonarAnalyzer.Rules.CSharp
             switch (type.SpecialType)
             {
                 case SpecialType.System_Boolean:
-                    return EquivalenceChecker.AreEquivalent(initializer.Value, SyntaxHelper.FalseLiteralExpression);
+                    return EquivalenceChecker.AreEquivalent(initializer.Value, CSharpSyntaxHelper.FalseLiteralExpression);
                 case SpecialType.System_Decimal:
                 case SpecialType.System_Double:
                 case SpecialType.System_Single:

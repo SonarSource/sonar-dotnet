@@ -247,7 +247,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             private bool CallsSuppressFinalize(BaseMethodDeclarationSyntax methodDeclaration)
             {
-                return SyntaxHelper.ContainsMethodInvocation(methodDeclaration,
+                return CSharpSyntaxHelper.ContainsMethodInvocation(methodDeclaration,
                     semanticModel,
                     method => HasArgumentValues(method, "this"),
                     KnownMethods.IsGcSuppressFinalize);
@@ -255,7 +255,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             private bool CallsVirtualDispose(BaseMethodDeclarationSyntax methodDeclaration, string argumentValue)
             {
-                return SyntaxHelper.ContainsMethodInvocation(methodDeclaration,
+                return CSharpSyntaxHelper.ContainsMethodInvocation(methodDeclaration,
                     semanticModel,
                     method => HasArgumentValues(method, argumentValue),
                     IsVirtualDisposeBool);

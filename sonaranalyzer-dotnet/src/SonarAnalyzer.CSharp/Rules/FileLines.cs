@@ -19,6 +19,7 @@
  */
 
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
@@ -35,5 +36,7 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override DiagnosticDescriptor Rule => rule;
 
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.CSharp.GeneratedCodeRecognizer.Instance;
+
+        protected override bool IsEndOfFileToken(SyntaxToken token) => token.IsKind(SyntaxKind.EndOfFileToken);
     }
 }

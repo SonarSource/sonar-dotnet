@@ -158,7 +158,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             return returnStatement.Expression != null &&
-                EquivalenceChecker.AreEquivalent(returnStatement.Expression, SyntaxHelper.TrueLiteralExpression);
+                EquivalenceChecker.AreEquivalent(returnStatement.Expression, CSharpSyntaxHelper.TrueLiteralExpression);
         }
 
         internal static bool MethodIsRelevant(IMethodSymbol methodSymbol, ISet<string> methodNames)

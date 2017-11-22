@@ -483,7 +483,7 @@ namespace SonarAnalyzer.SymbolicExecution.ControlFlowGraph
             // If there is a catch with no Exception filter or equivalent we don't want to
             // join the tryStatement start/end blocks with the exit block because all
             // exceptions will be caught before going to finally
-            var areAllExceptionsCaught = tryStatement.Catches.Any(SyntaxHelper.IsCatchingAllExceptions);
+            var areAllExceptionsCaught = tryStatement.Catches.Any(CSharpSyntaxHelper.IsCatchingAllExceptions);
 
             // try end
             var tryEndStatementConnections = catchBlocks.ToList();
