@@ -106,7 +106,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 var methodOverloadSet = new HashSet<IMethodSymbol>(methodOverloads);
                 if (!methodDeclaration.IsKind(SyntaxKind.ConstructorDeclaration) &&
-                    !SyntaxHelper.ContainsMethodInvocation(methodDeclaration, context.SemanticModel,
+                    !CSharpSyntaxHelper.ContainsMethodInvocation(methodDeclaration, context.SemanticModel,
                         mSyntax => true,
                         mSymbol => methodOverloadSet.Contains(mSymbol)))
                 {

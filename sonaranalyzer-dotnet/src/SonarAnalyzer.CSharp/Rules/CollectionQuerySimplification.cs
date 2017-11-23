@@ -301,13 +301,13 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool IsNullChecking(BinaryExpressionSyntax binaryExpression, string lambdaParameter)
         {
-            if (EquivalenceChecker.AreEquivalent(SyntaxHelper.NullLiteralExpression, binaryExpression.Left.RemoveParentheses()) &&
+            if (EquivalenceChecker.AreEquivalent(CSharpSyntaxHelper.NullLiteralExpression, binaryExpression.Left.RemoveParentheses()) &&
                 binaryExpression.Right.RemoveParentheses().ToString() == lambdaParameter)
             {
                 return true;
             }
 
-            if (EquivalenceChecker.AreEquivalent(SyntaxHelper.NullLiteralExpression, binaryExpression.Right.RemoveParentheses()) &&
+            if (EquivalenceChecker.AreEquivalent(CSharpSyntaxHelper.NullLiteralExpression, binaryExpression.Right.RemoveParentheses()) &&
                 binaryExpression.Left.RemoveParentheses().ToString() == lambdaParameter)
             {
                 return true;

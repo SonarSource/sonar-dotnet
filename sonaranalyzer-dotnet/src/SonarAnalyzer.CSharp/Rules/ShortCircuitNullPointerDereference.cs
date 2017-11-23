@@ -86,8 +86,8 @@ namespace SonarAnalyzer.Rules.CSharp
                     continue;
                 }
 
-                var leftNull = SyntaxFactory.AreEquivalent(comparisonToNull.Left, SyntaxHelper.NullLiteralExpression);
-                var rightNull = SyntaxFactory.AreEquivalent(comparisonToNull.Right, SyntaxHelper.NullLiteralExpression);
+                var leftNull = SyntaxFactory.AreEquivalent(comparisonToNull.Left, CSharpSyntaxHelper.NullLiteralExpression);
+                var rightNull = SyntaxFactory.AreEquivalent(comparisonToNull.Right, CSharpSyntaxHelper.NullLiteralExpression);
 
                 if (leftNull && rightNull)
                 {

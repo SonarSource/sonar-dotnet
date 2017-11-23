@@ -19,6 +19,7 @@
  */
 
 using System.Collections.Immutable;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Text;
 using SonarAnalyzer.Common;
@@ -29,7 +30,10 @@ namespace SonarAnalyzer.Rules
     public abstract class FileLinesBase : ParameterLoadingDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S104";
-        internal const string MessageFormat = "This file has {1} lines, which is greater than {0} authorized. Split it into smaller files.";
+        internal const string MessageFormat = "This file has {1} lines, which is greater than {0} authorized. Split it into " +
+            "smaller files.";
+
+        public override sealed ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
         private const int DefaultValueMaximum = 1000;
 
@@ -37,26 +41,30 @@ namespace SonarAnalyzer.Rules
             DefaultValueMaximum)]
         public int Maximum { get; set; } = DefaultValueMaximum;
 
-        protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
-
-        protected sealed override void Initialize(ParameterLoadingAnalysisContext context)
+        protected override void Initialize(ParameterLoadingAnalysisContext context)
         {
             context.RegisterSyntaxTreeActionInNonGenerated(
                 GeneratedCodeRecognizer,
-                c =>
+                stac =>
                 {
-                    var root = c.Tree.GetRoot();
-                    var lines = root.GetLocation().GetLineSpan().EndLinePosition.Line + 1;
+                    var linesCount = stac.Tree
+                        .GetRoot()
+                        .DescendantTokens()
+                        .Where(token => !IsEndOfFileToken(token))
+                        .Select(token => token.GetLineNumber(isZeroBasedCount: false))
+                        .Distinct()
+                        .LongCount();
 
-                    if (lines > Maximum)
+                    if (linesCount > Maximum)
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, Location.Create(c.Tree, TextSpan.FromBounds(0, 0)), Maximum, lines));
+                        stac.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, Location.Create(stac.Tree,
+                            TextSpan.FromBounds(0, 0)), Maximum, linesCount));
                     }
                 });
         }
 
         protected abstract DiagnosticDescriptor Rule { get; }
-
-        public override sealed ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
+        protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
+        protected abstract bool IsEndOfFileToken(SyntaxToken token);
     }
 }

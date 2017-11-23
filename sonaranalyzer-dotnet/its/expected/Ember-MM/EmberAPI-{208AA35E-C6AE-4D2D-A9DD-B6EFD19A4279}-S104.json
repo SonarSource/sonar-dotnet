@@ -2,20 +2,7 @@
 "issues":  [
 {
 "id":  "S104",
-"message":  "This file has 1298 lines, which is greater than 1000 authorized. Split it into smaller files.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPICommon.vb",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S104",
-"message":  "This file has 2070 lines, which is greater than 1000 authorized. Split it into smaller files.",
+"message":  "This file has 1717 lines, which is greater than 1000 authorized. Split it into smaller files.",
 "location":  {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIDatabase.vb",
 "region":  {
@@ -28,7 +15,7 @@
 },
 {
 "id":  "S104",
-"message":  "This file has 1347 lines, which is greater than 1000 authorized. Split it into smaller files.",
+"message":  "This file has 1126 lines, which is greater than 1000 authorized. Split it into smaller files.",
 "location":  {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIImages.vb",
 "region":  {
@@ -41,7 +28,7 @@
 },
 {
 "id":  "S104",
-"message":  "This file has 1818 lines, which is greater than 1000 authorized. Split it into smaller files.",
+"message":  "This file has 1466 lines, which is greater than 1000 authorized. Split it into smaller files.",
 "location":  {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIMediaContainers.vb",
 "region":  {
@@ -54,20 +41,7 @@
 },
 {
 "id":  "S104",
-"message":  "This file has 1149 lines, which is greater than 1000 authorized. Split it into smaller files.",
-"location":  {
-"uri":  "sources\Ember-MM\EmberAPI\clsAPINFO.vb",
-"region":  {
-"startLine":  1,
-"startColumn":  1,
-"endLine":  1,
-"endColumn":  1
-}
-}
-},
-{
-"id":  "S104",
-"message":  "This file has 1762 lines, which is greater than 1000 authorized. Split it into smaller files.",
+"message":  "This file has 1334 lines, which is greater than 1000 authorized. Split it into smaller files.",
 "location":  {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPIScanner.vb",
 "region":  {
@@ -80,7 +54,7 @@
 },
 {
 "id":  "S104",
-"message":  "This file has 3831 lines, which is greater than 1000 authorized. Split it into smaller files.",
+"message":  "This file has 3398 lines, which is greater than 1000 authorized. Split it into smaller files.",
 "location":  {
 "uri":  "sources\Ember-MM\EmberAPI\clsAPISettings.vb",
 "region":  {

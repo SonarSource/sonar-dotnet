@@ -357,13 +357,13 @@ namespace SonarAnalyzer.Rules.CSharp
 
             comparedIsNullInTrue = binary.IsKind(SyntaxKind.EqualsExpression);
 
-            if (EquivalenceChecker.AreEquivalent(binary.Left, SyntaxHelper.NullLiteralExpression))
+            if (EquivalenceChecker.AreEquivalent(binary.Left, CSharpSyntaxHelper.NullLiteralExpression))
             {
                 compared = binary.Right;
                 return true;
             }
 
-            if (EquivalenceChecker.AreEquivalent(binary.Right, SyntaxHelper.NullLiteralExpression))
+            if (EquivalenceChecker.AreEquivalent(binary.Right, CSharpSyntaxHelper.NullLiteralExpression))
             {
                 compared = binary.Left;
                 return true;

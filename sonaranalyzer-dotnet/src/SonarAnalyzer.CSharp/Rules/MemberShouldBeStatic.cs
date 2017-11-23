@@ -179,7 +179,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             return nodes.OfType<ExpressionSyntax>()
                 .Where(IsLeftmostIdentifierName)
-                .Where(n => !SyntaxHelper.IsInNameofCall(n, semanticModel))
+                .Where(n => !CSharpSyntaxHelper.IsInNameofCall(n, semanticModel))
                 .Any(n => IsInstanceMember(n, semanticModel));
         }
 
