@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Tests.Diagnostics1
@@ -72,6 +72,21 @@ namespace Tests.Diagnostics2
         public void Foo6(string s)
         {
         }
+
+        [TestCaseSource("DivideCases")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.Ignore]
+        // Noncompliant@-1
+        public void DivideTest(int n, int d, int q)
+        {
+            Assert.AreEqual(q, n / d);
+        }
+
+        static object[] DivideCases =
+        {
+            new object[] { 12, 3, 4 },
+            new object[] { 12, 2, 6 },
+            new object[] { 12, 4, 3 }
+        };
     }
 }
 

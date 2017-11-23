@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2017 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -45,6 +45,7 @@ namespace SonarAnalyzer.Rules.CSharp
             KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_TestMethodAttribute,
             KnownType.NUnit_Framework_TestAttribute,
             KnownType.NUnit_Framework_TestCaseAttribute,
+            KnownType.NUnit_Framework_TestCaseSourceAttribute,
             KnownType.Xunit_FactAttribute,
             KnownType.Xunit_TheoryAttribute);
 
