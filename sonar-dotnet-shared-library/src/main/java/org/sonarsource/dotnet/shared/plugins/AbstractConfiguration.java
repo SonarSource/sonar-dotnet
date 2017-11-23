@@ -24,7 +24,11 @@ import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 import org.sonar.api.batch.ScannerSide;
 import org.sonar.api.config.Configuration;
@@ -35,6 +39,7 @@ import org.sonar.api.utils.log.Loggers;
 public abstract class AbstractConfiguration {
   private static final Logger LOG = Loggers.get(AbstractConfiguration.class);
   private static final String MSG_SUFFIX = "'. No protobuf files will be loaded for this project.";
+  private static final String PROP_PREFIX = "sonar.";
 
   private final Configuration configuration;
   private final String languageKey;
@@ -44,12 +49,26 @@ public abstract class AbstractConfiguration {
     this.languageKey = languageKey;
   }
 
+  /**
+   * To support Scanner for MSBuild <= 3.0
+   */
+  private String getOldRoslynJsonReportPathProperty() {
+    return PROP_PREFIX + languageKey + ".roslyn.reportFilePath";
+  }
+
+  /**
+   * The new property is written by scanners, and might contain multiple paths.
+   */
   private String getRoslynJsonReportPathProperty() {
-    return "sonar." + languageKey + ".roslyn.reportFilePath";
+    return PROP_PREFIX + languageKey + ".roslyn.reportFilePaths";
   }
 
   private String getAnalyzerWorkDirProperty() {
-    return "sonar." + languageKey + ".analyzer.projectOutPath";
+    return PROP_PREFIX + languageKey + ".analyzer.projectOutPaths";
+  }
+
+  private String getOldAnalyzerWorkDirProperty() {
+    return PROP_PREFIX + languageKey + ".analyzer.projectOutPath";
   }
 
   private String getAnalyzerReportDir() {
@@ -62,44 +81,61 @@ public abstract class AbstractConfiguration {
    * - The directory exists
    * - The directory contains at least one protobuf
    */
-  public Optional<Path> protobufReportPath() {
-    return protobufReportPath(false);
+  public List<Path> protobufReportPaths() {
+    return protobufReportPaths(false);
   }
 
   /**
    * See {@link #protobufReportPath}. This method won't log anything.
    */
-  public Optional<Path> protobufReportPathSilent() {
-    return protobufReportPath(true);
+  public List<Path> protobufReportPathsSilent() {
+    return protobufReportPaths(true);
   }
 
-  private Optional<Path> protobufReportPath(boolean silent) {
-    Optional<String> analyzerWorkDirPath = configuration.get(getAnalyzerWorkDirProperty());
+  private List<Path> protobufReportPaths(boolean silent) {
+    List<Path> analyzerWorkDirPaths = Arrays.asList(configuration.getStringArray(getAnalyzerWorkDirProperty()))
+      .stream().map(Paths::get).collect(Collectors.toList());
 
-    if (!analyzerWorkDirPath.isPresent()) {
-      return empty("Property missing: '" + getAnalyzerWorkDirProperty() + "'" + MSG_SUFFIX, silent);
+    if (analyzerWorkDirPaths.isEmpty()) {
+      Optional<String> oldValue = configuration.get(getOldAnalyzerWorkDirProperty());
+      if (oldValue.isPresent()) {
+        analyzerWorkDirPaths = Collections.singletonList(Paths.get(oldValue.get()));
+      } else {
+        return empty("Property missing: '" + getAnalyzerWorkDirProperty() + "'" + MSG_SUFFIX, silent);
+      }
     }
 
-    Path analyzerOutputDir = Paths.get(analyzerWorkDirPath.get(), getAnalyzerReportDir());
-    configuration.get(getAnalyzerWorkDirProperty());
+    return analyzerWorkDirPaths.stream()
+      .map(x -> x.resolve(getAnalyzerReportDir()))
+      .filter(p -> AbstractConfiguration.validateOutputDir(p, silent))
+      .collect(Collectors.toList());
+  }
 
-    if (!analyzerOutputDir.toFile().exists()) {
-      return empty("Analyzer working directory does not exist: " + analyzerOutputDir.toAbsolutePath() + MSG_SUFFIX, silent);
-    }
-
-    try (DirectoryStream<Path> files = Files.newDirectoryStream(analyzerOutputDir, protoFileFilter())) {
-      long count = StreamSupport.stream(files.spliterator(), false).count();
-      if (count == 0) {
-        return empty("Analyzer working directory contains no .pb file(s)" + MSG_SUFFIX, silent);
+  private static boolean validateOutputDir(Path analyzerOutputDir, boolean silent) {
+    try {
+      if (!analyzerOutputDir.toFile().exists()) {
+        ifNotSilent(silent, () -> LOG.warn("Analyzer working directory does not exist: " + analyzerOutputDir.toAbsolutePath() + MSG_SUFFIX));
+        return false;
       }
 
-      if (!silent) {
-        LOG.debug("Analyzer working directory contains " + count + " .pb file(s)");
-      }
+      try (DirectoryStream<Path> files = Files.newDirectoryStream(analyzerOutputDir, protoFileFilter())) {
+        long count = StreamSupport.stream(files.spliterator(), false).count();
+        if (count == 0) {
+          ifNotSilent(silent, () -> LOG.warn("Analyzer working directory contains no .pb file(s)" + MSG_SUFFIX));
+          return false;
+        }
 
-      return Optional.of(analyzerOutputDir);
+        ifNotSilent(silent, () -> LOG.debug("Analyzer working directory contains " + count + " .pb file(s)"));
+        return true;
+      }
     } catch (IOException e) {
       throw new IllegalStateException("Could not check for .pb files in " + analyzerOutputDir.toAbsolutePath(), e);
+    }
+  }
+
+  static void ifNotSilent(boolean silent, Runnable r) {
+    if (!silent) {
+      r.run();
     }
   }
 
@@ -107,20 +143,27 @@ public abstract class AbstractConfiguration {
     return p -> p.getFileName().toString().toLowerCase().endsWith(".pb");
   }
 
-  private static Optional<Path> empty(String msg, boolean silent) {
-    if (!silent) {
-      LOG.warn(msg);
-    }
-    return Optional.empty();
+  private static List<Path> empty(String msg, boolean silent) {
+    ifNotSilent(silent, () -> LOG.warn(msg));
+    return Collections.emptyList();
   }
 
-  public Optional<Path> roslynReportPath() {
-    Optional<Path> path = configuration.get(getRoslynJsonReportPathProperty()).map(Paths::get);
-    if (!path.isPresent()) {
-      LOG.warn("Roslyn issues report not found for this project.");
+  public List<Path> roslynReportPaths() {
+    String[] strPaths = configuration.getStringArray(getRoslynJsonReportPathProperty());
+    if (strPaths.length > 0) {
+      return Arrays.asList(strPaths).stream()
+        .map(Paths::get)
+        .collect(Collectors.toList());
     } else {
-      LOG.debug("Found Roslyn issues report");
+      // fallback to old property
+      Optional<Path> path = configuration.get(getOldRoslynJsonReportPathProperty()).map(Paths::get);
+      if (!path.isPresent()) {
+        LOG.warn("No roslyn issues report not found for this project.");
+        return Collections.emptyList();
+      } else {
+        LOG.debug("Found Roslyn issues report");
+        return Collections.singletonList(path.get());
+      }
     }
-    return path;
   }
 }

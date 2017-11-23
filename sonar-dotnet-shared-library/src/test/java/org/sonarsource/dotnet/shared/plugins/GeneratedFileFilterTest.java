@@ -22,8 +22,8 @@ package org.sonarsource.dotnet.shared.plugins;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Collections;
 import java.util.HashSet;
-import java.util.Optional;
 import java.util.Set;
 import org.junit.Rule;
 import org.junit.Test;
@@ -93,7 +93,7 @@ public class GeneratedFileFilterTest {
     filter.accept(newInputFile("File3"));
 
     // Assert
-    verify(configuration, times(1)).protobufReportPathSilent();
+    verify(configuration, times(1)).protobufReportPathsSilent();
     verify(protobufImporterFactory, times(1)).fileMetadataImporter();
     verify(fileMetadataImporter, times(1)).accept(anyObject());
   }
@@ -119,7 +119,7 @@ public class GeneratedFileFilterTest {
     // Create temporary empty protobuf to satisfy a file.exists check, the content is ignored
     temp.newFile("file-metadata.pb");
 
-    when(configuration.protobufReportPathSilent()).thenReturn(Optional.of(temp.getRoot().toPath()));
+    when(configuration.protobufReportPathsSilent()).thenReturn(Collections.singletonList(temp.getRoot().toPath()));
 
     return new GeneratedFileFilter(configuration, protobufImporterFactory);
   }

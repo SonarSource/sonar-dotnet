@@ -20,9 +20,6 @@
 package org.sonar.plugins.csharp;
 
 import org.sonar.api.Plugin;
-import org.sonar.api.Properties;
-import org.sonar.api.Property;
-import org.sonar.api.PropertyType;
 import org.sonarsource.dotnet.shared.plugins.EncodingPerFile;
 import org.sonarsource.dotnet.shared.plugins.GeneratedFileFilter;
 import org.sonarsource.dotnet.shared.plugins.ProtobufDataImporter;
@@ -30,24 +27,6 @@ import org.sonarsource.dotnet.shared.plugins.ReportPathCollector;
 import org.sonarsource.dotnet.shared.plugins.RoslynDataImporter;
 import org.sonarsource.dotnet.shared.plugins.WrongEncodingFileFilter;
 
-@Properties({
-  @Property(
-    key = CSharpPlugin.FILE_SUFFIXES_KEY,
-    defaultValue = CSharpPlugin.FILE_SUFFIXES_DEFVALUE,
-    name = "File suffixes",
-    description = "Comma-separated list of suffixes of files to analyze.",
-    project = true, global = true, multiValues = true),
-  @Property(
-    key = CSharpPlugin.IGNORE_HEADER_COMMENTS,
-    defaultValue = "true",
-    name = "Ignore header comments",
-    description = "If set to \"true\", the file headers (that are usually the same on each file: " +
-      "licensing information for example) are not considered as comments. Thus metrics such as \"Comment lines\" " +
-      "do not get incremented. If set to \"false\", those file headers are considered as comments and metrics such as " +
-      "\"Comment lines\" get incremented.",
-    project = true, global = true,
-    type = PropertyType.BOOLEAN)
-})
 public class CSharpPlugin implements Plugin {
 
   static final String LANGUAGE_KEY = "cs";
@@ -81,6 +60,7 @@ public class CSharpPlugin implements Plugin {
       RoslynDataImporter.class,
       RoslynProfileExporter.class);
 
+    context.addExtensions(new CSharpPropertyDefinitions().create());
     context.addExtensions(CSharpCodeCoverageProvider.extensions());
     context.addExtensions(CSharpUnitTestResultsProvider.extensions());
     context.addExtensions(RoslynProfileExporter.sonarLintRepositoryProperties());

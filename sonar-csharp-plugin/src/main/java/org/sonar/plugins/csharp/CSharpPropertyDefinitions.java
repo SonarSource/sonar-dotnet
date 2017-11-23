@@ -19,34 +19,11 @@
  */
 package org.sonar.plugins.csharp;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.sonar.api.config.PropertyDefinitions;
-import org.sonar.api.config.internal.MapSettings;
+import org.sonarsource.dotnet.shared.plugins.AbstractPropertyDefinitions;
 
-import static org.assertj.core.api.Assertions.assertThat;
+public class CSharpPropertyDefinitions extends AbstractPropertyDefinitions {
 
-public class CSharpTest {
-
-  private MapSettings settings;
-  private CSharp csharp;
-
-  @Before
-  public void init() {
-    PropertyDefinitions defs = new PropertyDefinitions(new CSharpPropertyDefinitions().create());
-    settings = new MapSettings(defs);
-    csharp = new CSharp(settings.asConfig());
+  public CSharpPropertyDefinitions() {
+    super(CSharpPlugin.LANGUAGE_KEY, CSharpPlugin.FILE_SUFFIXES_DEFVALUE);
   }
-
-  @Test
-  public void shouldGetDefaultFileSuffixes() {
-    assertThat(csharp.getFileSuffixes()).containsOnly(".cs");
-  }
-
-  @Test
-  public void shouldGetCustomFileSuffixes() {
-    settings.setProperty(CSharpPlugin.FILE_SUFFIXES_KEY, ".cs,.csharp");
-    assertThat(csharp.getFileSuffixes()).containsOnly(".cs", ".csharp");
-  }
-
 }

@@ -21,6 +21,7 @@ package org.sonarsource.dotnet.shared.plugins;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Collections;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -32,8 +33,8 @@ public class ReportPathCollectorTest {
   public void should_save_roslyn_report_paths() {
     Path p1 = Paths.get("p1");
     Path p2 = Paths.get("p2");
-    underTest.addRoslynDir(p1);
-    underTest.addRoslynDir(p2);
+    underTest.addRoslynDirs(Collections.singletonList(p1));
+    underTest.addRoslynDirs(Collections.singletonList(p2));
     assertThat(underTest.roslynDirs()).containsOnly(p1, p2);
     assertThat(underTest.protobufDirs()).isEmpty();
   }
@@ -42,8 +43,8 @@ public class ReportPathCollectorTest {
   public void should_save_proto_report_paths() {
     Path p1 = Paths.get("p1");
     Path p2 = Paths.get("p2");
-    underTest.addProtobufDir(p1);
-    underTest.addProtobufDir(p2);
+    underTest.addProtobufDirs(Collections.singletonList(p1));
+    underTest.addProtobufDirs(Collections.singletonList(p2));
     assertThat(underTest.protobufDirs()).containsOnly(p1, p2);
     assertThat(underTest.roslynDirs()).isEmpty();
   }

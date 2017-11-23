@@ -20,7 +20,7 @@
 package org.sonarsource.dotnet.shared.plugins;
 
 import java.nio.file.Path;
-import java.util.Optional;
+import java.util.List;
 import org.sonar.api.batch.ScannerSide;
 import org.sonar.api.batch.sensor.Sensor;
 import org.sonar.api.batch.sensor.SensorContext;
@@ -48,14 +48,14 @@ public abstract class AbstractPropertiesSensor implements Sensor {
 
   @Override
   public void execute(SensorContext context) {
-    Optional<Path> protobufReportPath = configuration.protobufReportPath();
-    if (protobufReportPath.isPresent()) {
-      reportPathCollector.addProtobufDir(protobufReportPath.get());
+    List<Path> protobufReportPaths = configuration.protobufReportPaths();
+    if (!protobufReportPaths.isEmpty()) {
+      reportPathCollector.addProtobufDirs(protobufReportPaths);
     }
 
-    Optional<Path> roslynReportPath = configuration.roslynReportPath();
-    if (roslynReportPath.isPresent()) {
-      reportPathCollector.addRoslynDir(roslynReportPath.get());
+    List<Path> roslynReportPaths = configuration.roslynReportPaths();
+    if (!roslynReportPaths.isEmpty()) {
+      reportPathCollector.addRoslynDirs(roslynReportPaths);
     }
   }
 }

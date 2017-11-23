@@ -21,16 +21,14 @@ package org.sonarsource.dotnet.shared.plugins;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Optional;
+import java.util.Collections;
 import org.junit.Test;
-import org.mockito.Mockito;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
 
+import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.anyString;
-
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
@@ -49,17 +47,17 @@ public class AbstractPropertiesSensorTest {
     Path proto1 = Paths.get("proto1");
     Path proto2 = Paths.get("proto2");
 
-    when(config.roslynReportPath()).thenReturn(Optional.of(roslyn1));
-    when(config.protobufReportPath()).thenReturn(Optional.of(proto1));
+    when(config.roslynReportPaths()).thenReturn(Collections.singletonList(roslyn1));
+    when(config.protobufReportPaths()).thenReturn(Collections.singletonList(proto1));
     underTest.execute(mock(SensorContext.class));
-    verify(reportPathCollector).addProtobufDir(proto1);
-    verify(reportPathCollector).addRoslynDir(roslyn1);
+    verify(reportPathCollector).addProtobufDirs(Collections.singletonList(proto1));
+    verify(reportPathCollector).addRoslynDirs(Collections.singletonList(roslyn1));
 
-    when(config.roslynReportPath()).thenReturn(Optional.of(roslyn2));
-    when(config.protobufReportPath()).thenReturn(Optional.of(proto2));
+    when(config.roslynReportPaths()).thenReturn(Collections.singletonList(roslyn2));
+    when(config.protobufReportPaths()).thenReturn(Collections.singletonList(proto2));
     underTest.execute(mock(SensorContext.class));
-    verify(reportPathCollector).addProtobufDir(proto2);
-    verify(reportPathCollector).addRoslynDir(roslyn2);
+    verify(reportPathCollector).addProtobufDirs(Collections.singletonList(proto2));
+    verify(reportPathCollector).addRoslynDirs(Collections.singletonList(roslyn2));
 
     verifyNoMoreInteractions(reportPathCollector);
   }
@@ -77,8 +75,8 @@ public class AbstractPropertiesSensorTest {
 
   @Test
   public void should_continue_if_report_path_not_present() {
-    when(config.roslynReportPath()).thenReturn(Optional.empty());
-    when(config.protobufReportPath()).thenReturn(Optional.empty());
+    when(config.roslynReportPaths()).thenReturn(Collections.emptyList());
+    when(config.protobufReportPaths()).thenReturn(Collections.emptyList());
     underTest.execute(mock(SensorContext.class));
     verifyZeroInteractions(reportPathCollector);
   }
