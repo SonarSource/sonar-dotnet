@@ -68,7 +68,8 @@ public class CSharpPluginTest {
       expectedExtensions.length
         + CSharpCodeCoverageProvider.extensions().size()
         + CSharpUnitTestResultsProvider.extensions().size()
-        + RoslynProfileExporter.sonarLintRepositoryProperties().size());
+        + RoslynProfileExporter.sonarLintRepositoryProperties().size()
+        + new CSharpPropertyDefinitions().create().size());
   }
 
   private static List nonProperties(List extensions) {

@@ -21,4 +21,3 @@
 package org.sonarsource.dotnet.shared.plugins;
 
 import javax.annotation.ParametersAreNonnullByDefault;
-

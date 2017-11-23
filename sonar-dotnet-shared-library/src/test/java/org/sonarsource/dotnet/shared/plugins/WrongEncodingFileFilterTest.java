@@ -20,7 +20,7 @@
 package org.sonarsource.dotnet.shared.plugins;
 
 import java.nio.file.Paths;
-import java.util.Optional;
+import java.util.Collections;
 import org.junit.Before;
 import org.junit.Test;
 import org.sonar.api.batch.fs.InputFile;
@@ -43,7 +43,7 @@ public class WrongEncodingFileFilterTest {
 
   @Test
   public void should_exclude_files_with_mismatching_encoding() {
-    when(config.protobufReportPathSilent()).thenReturn(Optional.of(Paths.get("report")));
+    when(config.protobufReportPathsSilent()).thenReturn(Collections.singletonList(Paths.get("report")));
     InputFile file = mock(InputFile.class);
     when(encodingPerFile.encodingMatch(file)).thenReturn(true);
     assertThat(filter.accept(file)).isTrue();
@@ -51,7 +51,7 @@ public class WrongEncodingFileFilterTest {
 
   @Test
   public void should_accept_files_with_matching_encoding() {
-    when(config.protobufReportPathSilent()).thenReturn(Optional.of(Paths.get("report")));
+    when(config.protobufReportPathsSilent()).thenReturn(Collections.singletonList(Paths.get("report")));
     InputFile file = mock(InputFile.class);
     when(encodingPerFile.encodingMatch(file)).thenReturn(false);
     assertThat(filter.accept(file)).isFalse();
@@ -59,7 +59,7 @@ public class WrongEncodingFileFilterTest {
 
   @Test
   public void should_be_skipped_if_no_proto_file_found() {
-    when(config.protobufReportPathSilent()).thenReturn(Optional.empty());
+    when(config.protobufReportPathsSilent()).thenReturn(Collections.emptyList());
     assertThat(filter.accept(mock(InputFile.class))).isTrue();
   }
 

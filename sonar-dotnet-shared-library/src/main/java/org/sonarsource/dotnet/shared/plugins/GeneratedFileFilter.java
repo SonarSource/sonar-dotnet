@@ -21,7 +21,7 @@ package org.sonarsource.dotnet.shared.plugins;
 
 import java.nio.file.Path;
 import java.util.HashSet;
-import java.util.Optional;
+import java.util.List;
 import java.util.Set;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.InputFileFilter;
@@ -37,7 +37,7 @@ public class GeneratedFileFilter implements InputFileFilter {
 
   private final AbstractConfiguration config;
   private final ProtobufImporters protobufImporters;
-  
+
   private final Set<Path> generatedFilePaths = new HashSet<>();
   private boolean initialized;
 
@@ -70,9 +70,9 @@ public class GeneratedFileFilter implements InputFileFilter {
     }
     initialized = true;
 
-    Optional<Path> protobufPath = config.protobufReportPathSilent();
-    if (protobufPath.isPresent()) {
-      Path metadataPath = protobufPath.get().resolve(FILEMETADATA_OUTPUT_PROTOBUF_NAME);
+    List<Path> protobufPath = config.protobufReportPathsSilent();
+    if (!protobufPath.isEmpty()) {
+      Path metadataPath = protobufPath.get(0).resolve(FILEMETADATA_OUTPUT_PROTOBUF_NAME);
       if (metadataPath.toFile().exists()) {
         FileMetadataImporter fileMetadataImporter = protobufImporters.fileMetadataImporter();
         fileMetadataImporter.accept(metadataPath);

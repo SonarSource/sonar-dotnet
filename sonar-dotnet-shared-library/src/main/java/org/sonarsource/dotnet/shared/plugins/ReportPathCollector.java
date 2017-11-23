@@ -32,16 +32,16 @@ public class ReportPathCollector {
   private final List<Path> protobufDirs = new ArrayList<>();
   private final List<Path> roslynDirs = new ArrayList<>();
 
-  public void addProtobufDir(Path path) {
-    protobufDirs.add(path);
+  public void addProtobufDirs(List<Path> paths) {
+    protobufDirs.addAll(paths);
   }
 
   public List<Path> protobufDirs() {
     return Collections.unmodifiableList(new ArrayList<>(protobufDirs));
   }
 
-  public void addRoslynDir(Path path) {
-    roslynDirs.add(path);
+  public void addRoslynDirs(List<Path> paths) {
+    roslynDirs.addAll(paths);
   }
 
   public List<Path> roslynDirs() {
