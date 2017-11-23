@@ -89,6 +89,15 @@ public class AbstractConfigurationTest {
   }
 
   @Test
+  public void informHowManyProtoFilesAreFound() throws IOException {
+    createProtobufOut();
+    config = new AbstractConfiguration(settings.asConfig(), "cs") {
+    };
+    assertThat(config.protobufReportPath()).isPresent();
+    assertThat(logTester.logs(LoggerLevel.DEBUG)).containsOnly("Analyzer working directory contains 1 .pb file(s)");
+  }
+
+  @Test
   public void giveWarningsWhenGettingProtobufPathAndFolderIsEmpty() throws IOException {
     Path path = workDir.resolve("report");
     Path outputCs = path.resolve("output-cs");

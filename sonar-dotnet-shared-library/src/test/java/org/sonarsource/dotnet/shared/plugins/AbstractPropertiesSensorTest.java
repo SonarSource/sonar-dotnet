@@ -23,10 +23,14 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Optional;
 import org.junit.Test;
+import org.mockito.Mockito;
 import org.sonar.api.batch.sensor.SensorContext;
+import org.sonar.api.batch.sensor.SensorDescriptor;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.anyString;
+
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
@@ -58,6 +62,17 @@ public class AbstractPropertiesSensorTest {
     verify(reportPathCollector).addRoslynDir(roslyn2);
 
     verifyNoMoreInteractions(reportPathCollector);
+  }
+
+  @Test
+  public void should_describe() {
+    SensorDescriptor desc = mock(SensorDescriptor.class);
+    when(desc.name(anyString())).thenReturn(desc);
+
+    underTest.describe(desc);
+
+    verify(desc).name("sensor");
+    verify(desc).onlyOnLanguage("languageKey");
   }
 
   @Test
