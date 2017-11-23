@@ -93,8 +93,9 @@ public abstract class AbstractConfiguration {
   }
 
   private List<Path> protobufReportPaths(boolean silent) {
-    List<Path> analyzerWorkDirPaths = Arrays.asList(configuration.getStringArray(getAnalyzerWorkDirProperty()))
-      .stream().map(Paths::get).collect(Collectors.toList());
+    List<Path> analyzerWorkDirPaths = Arrays.stream(configuration.getStringArray(getAnalyzerWorkDirProperty()))
+      .map(Paths::get)
+      .collect(Collectors.toList());
 
     if (analyzerWorkDirPaths.isEmpty()) {
       Optional<String> oldValue = configuration.get(getOldAnalyzerWorkDirProperty());
@@ -133,13 +134,13 @@ public abstract class AbstractConfiguration {
     }
   }
 
-  static void ifNotSilent(boolean silent, Runnable r) {
+  private static void ifNotSilent(boolean silent, Runnable r) {
     if (!silent) {
       r.run();
     }
   }
 
-  static DirectoryStream.Filter<Path> protoFileFilter() {
+  private static DirectoryStream.Filter<Path> protoFileFilter() {
     return p -> p.getFileName().toString().toLowerCase().endsWith(".pb");
   }
 
@@ -151,7 +152,7 @@ public abstract class AbstractConfiguration {
   public List<Path> roslynReportPaths() {
     String[] strPaths = configuration.getStringArray(getRoslynJsonReportPathProperty());
     if (strPaths.length > 0) {
-      return Arrays.asList(strPaths).stream()
+      return Arrays.stream(strPaths)
         .map(Paths::get)
         .collect(Collectors.toList());
     } else {
