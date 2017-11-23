@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2017 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -44,7 +44,11 @@ namespace SonarAnalyzer.Rules.CSharp
         private static readonly ISet<KnownType> TrackedTestAttributes = ImmutableHashSet.Create(
             KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_TestMethodAttribute,
             KnownType.NUnit_Framework_TestAttribute,
-            KnownType.Xunit_FactAttribute);
+            KnownType.NUnit_Framework_TestCaseAttribute,
+            KnownType.NUnit_Framework_TestCaseSourceAttribute,
+            KnownType.NUnit_Framework_TheoryAttribute,
+            KnownType.Xunit_FactAttribute,
+            KnownType.Xunit_TheoryAttribute);
 
         private static readonly ISet<KnownType> ExpectedExceptionAttributes = ImmutableHashSet.Create(
             KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_ExpectedExceptionAttribute,

@@ -1,4 +1,4 @@
-namespace TestXunit
+﻿namespace TestXunit
 {
     using System;
     using FluentAssertions;
@@ -94,6 +94,91 @@ namespace TestXunit
         [Fact(Skip="reason")]
         public void Fact15() // Don't raise on skipped test methods
         {
+        }
+
+        [Theory]
+        public void Theory1() // Noncompliant {{Add at least one assertion to this test case.}}
+//                  ^^^^^^^
+        {
+            var x = 42;
+        }
+
+        [Theory]
+        public void Theory2()
+        {
+            var x = 42;
+            Assert.Equal(x, 42);
+        }
+
+        [Theory]
+        public void Theory3()
+        {
+            var x = 42;
+            Xunit.Assert.Equal(x, 42);
+        }
+
+        [Theory]
+        public void Theory5()
+        {
+            var x = 42;
+            x.Should().Be(42);
+        }
+
+        [Theory]
+        public void Theory6()
+        {
+            Action act = () => { throw new Exception(); };
+            act.ShouldThrow<Exception>();
+        }
+
+        [Theory]
+        public void Theory7()
+        {
+            Action act = () => { throw new Exception(); };
+            act.ShouldNotThrow<Exception>();
+        }
+
+        [Theory]
+        public void Theory8()
+        {
+            AssertSomething();
+        }
+
+        [Theory]
+        public void Theory9()
+        {
+            ShouldSomething();
+        }
+
+        [Theory]
+        public void Theory10()
+        {
+            ExpectSomething();
+        }
+
+        [Theory]
+        public void Theory11()
+        {
+            MustSomething();
+        }
+
+        [Theory]
+        public void Theory12()
+        {
+            VerifySomething();
+        }
+
+        [Theory]
+        public void Theory13()
+        {
+            ValidateSomething();
+        }
+
+        [Theory]
+        public void Theory14()
+        {
+            dynamic d = 10;
+            Assert.Equal(d, 10.0);
         }
 
         public void AssertSomething()
