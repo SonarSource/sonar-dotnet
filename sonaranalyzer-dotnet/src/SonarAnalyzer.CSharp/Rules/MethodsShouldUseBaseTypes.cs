@@ -135,10 +135,8 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             var identifierParent = GetNextUnparenthesizedParent(identifier);
 
-            if (identifierParent is ConditionalAccessExpressionSyntax)
+            if (identifierParent is ConditionalAccessExpressionSyntax conditionalAccess)
             {
-                var conditionalAccess = (ConditionalAccessExpressionSyntax)identifierParent;
-
                 if (conditionalAccess.WhenNotNull is MemberBindingExpressionSyntax binding)
                 {
                     var name = binding.Name;
