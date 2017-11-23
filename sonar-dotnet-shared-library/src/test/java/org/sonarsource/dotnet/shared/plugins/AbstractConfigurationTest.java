@@ -27,12 +27,16 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 import org.sonar.api.config.internal.MapSettings;
+import org.sonar.api.utils.log.LogTester;
+import org.sonar.api.utils.log.LoggerLevel;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class AbstractConfigurationTest {
   @Rule
   public TemporaryFolder temp = new TemporaryFolder();
+  @Rule
+  public LogTester logTester = new LogTester();
 
   private Path workDir;
   private MapSettings settings = new MapSettings();
@@ -64,6 +68,38 @@ public class AbstractConfigurationTest {
     };
     assertThat(config.protobufReportPathSilent()).isNotPresent();
     assertThat(config.roslynReportPath().get()).isEqualTo(workDir.resolve("roslyn-report.json"));
+  }
+
+  @Test
+  public void giveWarningsWhenGettingProtobufPathAndNoPropertyAvailable() {
+    config = new AbstractConfiguration(settings.asConfig(), "cs") {
+    };
+    assertThat(config.protobufReportPath()).isNotPresent();
+    assertThat(logTester.logs(LoggerLevel.WARN)).containsOnly("Property missing: 'sonar.cs.analyzer.projectOutPath''. No protobuf files will be loaded for this project.");
+  }
+
+  @Test
+  public void giveWarningsWhenGettingProtobufPathAndNoFolderAvailable() {
+    settings.setProperty("sonar.cs.analyzer.projectOutPath", "non-existing");
+    config = new AbstractConfiguration(settings.asConfig(), "cs") {
+    };
+    assertThat(config.protobufReportPath()).isNotPresent();
+    assertThat(logTester.logs(LoggerLevel.WARN)).hasSize(1);
+    assertThat(logTester.logs(LoggerLevel.WARN).get(0)).matches(s -> s.startsWith("Analyzer working directory does not exist"));
+  }
+
+  @Test
+  public void giveWarningsWhenGettingProtobufPathAndFolderIsEmpty() throws IOException {
+    Path path = workDir.resolve("report");
+    Path outputCs = path.resolve("output-cs");
+    Files.createDirectories(outputCs);
+    settings.setProperty("sonar.cs.analyzer.projectOutPath", path.toString());
+    config = new AbstractConfiguration(settings.asConfig(), "cs") {
+    };
+    assertThat(config.protobufReportPath()).isNotPresent();
+    assertThat(logTester.logs(LoggerLevel.WARN)).hasSize(1);
+    assertThat(logTester.logs(LoggerLevel.WARN).get(0))
+      .matches(s -> s.startsWith("Analyzer working directory contains no .pb file(s)'. No protobuf files will be loaded for this project."));
   }
 
   @Test

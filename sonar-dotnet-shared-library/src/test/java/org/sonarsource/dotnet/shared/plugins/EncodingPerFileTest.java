@@ -50,6 +50,11 @@ public class EncodingPerFileTest {
   }
 
   @Test
+  public void should_treat_as_match_when_proto_file_not_found() throws IOException {
+    assertEncodingMatch(Paths.get("non-existing"), Paths.get("any-file"), StandardCharsets.UTF_8, true);
+  }
+
+  @Test
   public void should_treat_as_match_when_roslyn_entry_missing_for_file() throws IOException {
     Charset roslynCharset = StandardCharsets.UTF_8;
     Charset sqCharset = StandardCharsets.UTF_16;

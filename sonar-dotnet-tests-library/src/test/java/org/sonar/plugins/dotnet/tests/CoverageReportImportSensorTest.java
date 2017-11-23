@@ -21,6 +21,7 @@ package org.sonar.plugins.dotnet.tests;
 
 import com.google.common.collect.ImmutableMap;
 import java.io.File;
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.function.Predicate;
 import org.junit.Rule;
@@ -123,7 +124,23 @@ public class CoverageReportImportSensorTest {
     new CoverageReportImportSensor(coverageConf, coverageAggregator, "cs", "C#", false)
       .execute(context);
 
-    assertThat(logTester.logs(LoggerLevel.DEBUG)).contains("No coverage property. Skip Sensor");
+    assertThat(logTester.logs(LoggerLevel.DEBUG)).containsOnly("No coverage property. Skip Sensor");
+  }
+
+  @Test
+  public void execute_warn_about_deprecated_integration_tests() throws IOException {
+    File baseDir = temp.newFolder();
+    SensorContextTester context = SensorContextTester.create(baseDir);
+
+    CoverageConfiguration coverageConf = new CoverageConfiguration("", "", "", "", "");
+    CoverageAggregator coverageAggregator = mock(CoverageAggregator.class);
+    when(coverageAggregator.hasCoverageProperty()).thenReturn(true);
+
+    new CoverageReportImportSensor(coverageConf, coverageAggregator, "cs", "C#", true)
+      .execute(context);
+
+    assertThat(logTester.logs(LoggerLevel.WARN)).containsOnly("Starting with SonarQube 6.2 separation between Unit Tests and Integration Tests "
+      + "Coverage reports is deprecated. Please move all reports specified from *.it.reportPaths into *.reportPaths.");
   }
 
   @Test
