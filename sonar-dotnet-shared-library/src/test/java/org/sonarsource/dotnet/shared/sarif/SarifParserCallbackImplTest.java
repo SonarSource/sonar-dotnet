@@ -21,13 +21,17 @@ package org.sonarsource.dotnet.shared.sarif;
 
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
+import org.sonar.api.batch.fs.TextRange;
 import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
+import org.sonar.api.batch.sensor.issue.Issue.Flow;
+import org.sonar.api.batch.sensor.issue.IssueLocation;
 import org.sonarsource.dotnet.shared.plugins.SarifParserCallbackImpl;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -56,12 +60,68 @@ public class SarifParserCallbackImplTest {
   }
 
   @Test
+  public void should_add_project_issues() {
+    callback.onProjectIssue("rule1", "msg");
+    assertThat(ctx.allIssues()).hasSize(1);
+    assertThat(ctx.allIssues().iterator().next().primaryLocation().inputComponent().key()).isEqualTo("projectKey");
+    assertThat(ctx.allIssues().iterator().next().ruleKey().rule()).isEqualTo("rule1");
+  }
+
+  @Test
+  public void should_add_file_issues() {
+    String absoluteFilePath = temp.getRoot().toPath().resolve("file1").toString();
+    callback.onFileIssue("rule1", absoluteFilePath, "msg");
+    assertThat(ctx.allIssues()).hasSize(1);
+    assertThat(ctx.allIssues().iterator().next().primaryLocation().inputComponent().key()).isEqualTo("module1:file1");
+    assertThat(ctx.allIssues().iterator().next().ruleKey().rule()).isEqualTo("rule1");
+  }
+
+  @Test
+  public void should_ignore_file_issue_with_unknown_rule_key() {
+    String absoluteFilePath = temp.getRoot().toPath().resolve("file1").toString();
+    callback.onFileIssue("rule45", absoluteFilePath, "msg");
+    assertThat(ctx.allIssues()).isEmpty();
+  }
+
+  @Test
+  public void should_ignore_file_issue_with_unknown_file() {
+    callback.onFileIssue("rule1", "file-unknown", "msg");
+    assertThat(ctx.allIssues()).isEmpty();
+  }
+
+  @Test
+  public void should_ignore_project_issue_with_unknown_rule_key() {
+    callback.onProjectIssue("rule45", "msg");
+    assertThat(ctx.allIssues()).isEmpty();
+  }
+
+  @Test
   public void should_add_issues() {
     callback.onIssue("rule1", createLocation("file1", 2, 3), Collections.emptyList());
     callback.onIssue("rule2", createLocation("file1", 2, 3), Collections.emptyList());
 
     assertThat(ctx.allIssues()).extracting("ruleKey").extracting("rule")
       .containsOnly("rule1", "rule2");
+  }
+
+  @Test
+  public void should_add_issue_with_secondary_location() {
+    callback.onIssue("rule1", createLocation("file1", 2, 3), Collections.singletonList(createLocation("file1", 4, 5)));
+
+    assertThat(ctx.allIssues()).hasSize(1);
+
+    List<Flow> flows = ctx.allIssues().iterator().next().flows();
+    assertThat(flows).hasSize(1);
+
+    List<IssueLocation> locations = flows.get(0).locations();
+    assertThat(locations).hasSize(1);
+
+    assertThat(locations.get(0).inputComponent().key()).isEqualTo("module1:file1");
+    TextRange textRange = locations.get(0).textRange();
+    assertThat(textRange.start().lineOffset()).isEqualTo(5);
+    assertThat(textRange.start().line()).isEqualTo(4);
+    assertThat(textRange.end().lineOffset()).isEqualTo(6);
+    assertThat(textRange.end().line()).isEqualTo(4);
   }
 
   @Test
