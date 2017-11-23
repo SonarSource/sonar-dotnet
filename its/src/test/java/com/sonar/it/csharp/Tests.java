@@ -65,6 +65,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class Tests {
 
   private static final String MSBUILD_PATH = "msbuild.path";
+  private static final String NUGET_PATH = "nuget.path";
 
   @ClassRule
   public static final Orchestrator ORCHESTRATOR = Orchestrator.builderEnv()
@@ -85,6 +86,26 @@ public class Tests {
   public static Build<ScannerForMSBuild> newScanner(Path projectDir) {
     return ScannerForMSBuild.create(projectDir.toFile())
       .setScannerVersion(System.getProperty("scannerMsbuild.version"));
+  }
+
+  public static void runNuGet(Orchestrator orch, Path projectDir, String... arguments) {
+    Path nugetPath = getNuGetPath(orch);
+
+    int r = CommandExecutor.create().execute(Command.create(nugetPath.toString())
+      .addArguments(arguments)
+      .setDirectory(projectDir.toFile()), 60 * 1000);
+    assertThat(r).isEqualTo(0);
+  }
+
+  private static Path getNuGetPath(Orchestrator orch) {
+    String toolsFolder = Paths.get("tools").resolve("nuget-4.4.1.exe").toAbsolutePath().toString();
+    String nugetPathStr = orch.getConfiguration().getString(NUGET_PATH, toolsFolder);
+    Path nugetPath = Paths.get(nugetPathStr).toAbsolutePath();
+    if (!Files.exists(nugetPath)) {
+      throw new IllegalStateException("Unable to find NuGet at '" + nugetPath.toString() +
+        "'. Please configure property '" + NUGET_PATH + "'");
+    }
+    return nugetPath;
   }
 
   public static void runMSBuild(Orchestrator orch, Path projectDir, String... arguments) {
