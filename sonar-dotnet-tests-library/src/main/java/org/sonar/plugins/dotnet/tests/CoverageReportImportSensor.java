@@ -82,27 +82,38 @@ public class CoverageReportImportSensor implements Sensor {
   void analyze(SensorContext context, Coverage coverage) {
     coverageAggregator.aggregate(wildcardPatternFileProvider, coverage);
 
+    boolean hasAnyMainFileCovered = false;
     for (String filePath : coverage.files()) {
       FilePredicates p = context.fileSystem().predicates();
-      InputFile inputFile = context.fileSystem().inputFile(p.and(p.hasType(Type.MAIN), p.hasAbsolutePath(filePath)));
+      InputFile inputFile = context.fileSystem().inputFile(p.and(p.hasAbsolutePath(filePath)));
 
       if (inputFile == null) {
-        LOG.debug("Code coverage will not be imported for the following file outside of SonarQube: " + filePath);
+        LOG.debug("The file '" + filePath +"' is either excluded or outside of your solution folder therefore Code "
+         + "Coverage will not be imported.");
         continue;
+      }
+
+      if (inputFile.type().equals(Type.TEST)) {
+        continue; // Do not log for test files to avoid pointless noise
       }
 
       if (!coverageConf.languageKey().equals(inputFile.language())) {
         continue;
       }
 
-      NewCoverage newCoverage = context.newCoverage()
-        .onFile(inputFile);
+      hasAnyMainFileCovered = true;
+      NewCoverage newCoverage = context.newCoverage().onFile(inputFile);
 
       for (Map.Entry<Integer, Integer> entry : coverage.hits(filePath).entrySet()) {
         newCoverage.lineHits(entry.getKey(), entry.getValue());
       }
 
       newCoverage.save();
+    }
+
+    if (!coverage.files().isEmpty() && !hasAnyMainFileCovered) {
+      LOG.warn("The Code Coverage report doesn't contain any coverage data for the included files. For "
+        + "troubleshooting hints, please refer to https://docs.sonarqube.org/x/CoBh");
     }
   }
 
