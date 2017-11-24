@@ -85,7 +85,7 @@ public class CoverageReportImportSensor implements Sensor {
     boolean hasAnyMainFileCovered = false;
     for (String filePath : coverage.files()) {
       FilePredicates p = context.fileSystem().predicates();
-      InputFile inputFile = context.fileSystem().inputFile(p.and(p.hasAbsolutePath(filePath)));
+      InputFile inputFile = context.fileSystem().inputFile(p.hasAbsolutePath(filePath));
 
       if (inputFile == null) {
         LOG.debug("The file '" + filePath +"' is either excluded or outside of your solution folder therefore Code "
