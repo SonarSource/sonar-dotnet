@@ -22,6 +22,7 @@ package org.sonar.plugins.dotnet.tests;
 import com.google.common.collect.ImmutableMap;
 import java.io.File;
 import java.io.IOException;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.function.Predicate;
 import org.junit.Rule;
@@ -30,6 +31,7 @@ import org.junit.rules.TemporaryFolder;
 import org.mockito.Mockito;
 import org.sonar.api.batch.fs.internal.DefaultInputFile;
 import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
+import org.sonar.api.batch.fs.InputFile.Type;
 import org.sonar.api.batch.sensor.internal.DefaultSensorDescriptor;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.api.config.Configuration;
@@ -155,6 +157,50 @@ public class CoverageReportImportSensorTest {
     SensorContextTester context = computeCoverageMeasures(true);
     assertThat(context.lineHits("foo:Foo.cs", 2)).isEqualTo(1);
     assertThat(context.lineHits("foo:Foo.cs", 4)).isEqualTo(0);
+  }
+
+  @Test
+  public void execute_coverage_no_main_file() throws IOException {
+    File baseDir = temp.newFolder();
+
+    Coverage coverage = mock(Coverage.class);
+    String fooPath = new File(baseDir, "Foo.cs").getCanonicalPath();
+    when(coverage.files()).thenReturn(new HashSet<>(Collections.singletonList(fooPath)));
+
+    CoverageAggregator coverageAggregator = mock(CoverageAggregator.class);
+
+    SensorContextTester context = SensorContextTester.create(baseDir);
+    context.fileSystem().add(new TestInputFileBuilder("foo", "Foo.cs").setLanguage("cs")
+      .setType(Type.TEST).build());
+
+    CoverageConfiguration coverageConf = new CoverageConfiguration("cs", "", "", "", "");
+
+    new CoverageReportImportSensor(coverageConf, coverageAggregator, "cs", "C#", false)
+      .analyze(context, coverage);
+
+    assertThat(logTester.logs(LoggerLevel.WARN)).containsOnly("The Code Coverage report doesn't contain any coverage "
+      + "data for the included files. For troubleshooting hints, please refer to https://docs.sonarqube.org/x/CoBh");
+  }
+
+  @Test
+  public void execute_coverage_not_indexed_file() throws IOException {
+    File baseDir = temp.newFolder();
+
+    Coverage coverage = mock(Coverage.class);
+    String fooPath = new File(baseDir, "Foo.cs").getCanonicalPath();
+    when(coverage.files()).thenReturn(new HashSet<>(Collections.singletonList(fooPath)));
+
+    CoverageAggregator coverageAggregator = mock(CoverageAggregator.class);
+
+    SensorContextTester context = SensorContextTester.create(baseDir);
+
+    CoverageConfiguration coverageConf = new CoverageConfiguration("cs", "", "", "", "");
+
+    new CoverageReportImportSensor(coverageConf, coverageAggregator, "cs", "C#", false)
+      .analyze(context, coverage);
+
+    assertThat(logTester.logs(LoggerLevel.DEBUG)).containsOnly("The file '" + fooPath + "' is either excluded or outside of "
+      + "your solution folder therefore Code Coverage will not be imported.");
   }
 
   private SensorContextTester computeCoverageMeasures(boolean isIntegrationTest) throws Exception {
