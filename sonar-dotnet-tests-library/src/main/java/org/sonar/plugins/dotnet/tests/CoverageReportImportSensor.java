@@ -94,7 +94,8 @@ public class CoverageReportImportSensor implements Sensor {
       }
 
       if (inputFile.type().equals(Type.TEST)) {
-        continue; // Do not log for test files to avoid pointless noise
+        // Do not log for test files to avoid pointless noise
+        continue;
       }
 
       if (!coverageConf.languageKey().equals(inputFile.language())) {
