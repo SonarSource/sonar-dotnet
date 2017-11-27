@@ -88,8 +88,8 @@ public class CoverageReportImportSensor implements Sensor {
       InputFile inputFile = context.fileSystem().inputFile(p.hasAbsolutePath(filePath));
 
       if (inputFile == null) {
-        LOG.debug("The file '" + filePath +"' is either excluded or outside of your solution folder therefore Code "
-         + "Coverage will not be imported.");
+        LOG.debug("The file '{}' is either excluded or outside of your solution folder therefore Code "
+          + "Coverage will not be imported.", filePath);
         continue;
       }
 

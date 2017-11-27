@@ -25,6 +25,7 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.function.Predicate;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
@@ -53,13 +54,20 @@ public class CoverageReportImportSensorTest {
   @Rule
   public LogTester logTester = new LogTester();
 
+  private CoverageConfiguration coverageConf = new CoverageConfiguration("cs", "", "", "", "");
+  private CoverageAggregator coverageAggregator = mock(CoverageAggregator.class);
+  private File baseDir;
+  private SensorContextTester context;
+  private DefaultSensorDescriptor descriptor = new DefaultSensorDescriptor();
+
+  @Before
+  public void setUp() throws IOException {
+    baseDir = temp.newFolder();
+    context = SensorContextTester.create(baseDir);
+  }
+
   @Test
   public void describe_unit_test() {
-    CoverageConfiguration coverageConf = new CoverageConfiguration("", "", "", "", "");
-
-    CoverageAggregator coverageAggregator = mock(CoverageAggregator.class);
-
-    DefaultSensorDescriptor descriptor = new DefaultSensorDescriptor();
     new CoverageReportImportSensor(coverageConf, coverageAggregator, "cs", "C#", false)
       .describe(descriptor);
 
@@ -68,11 +76,6 @@ public class CoverageReportImportSensorTest {
 
   @Test
   public void describe_integration_test() {
-    CoverageConfiguration coverageConf = new CoverageConfiguration("", "", "", "", "");
-
-    CoverageAggregator coverageAggregator = mock(CoverageAggregator.class);
-
-    DefaultSensorDescriptor descriptor = new DefaultSensorDescriptor();
     new CoverageReportImportSensor(coverageConf, coverageAggregator, "cs", "C#", true)
       .describe(descriptor);
 
@@ -81,11 +84,6 @@ public class CoverageReportImportSensorTest {
 
   @Test
   public void describe_global_sensor() {
-    CoverageConfiguration coverageConf = new CoverageConfiguration("", "", "", "", "");
-
-    CoverageAggregator coverageAggregator = mock(CoverageAggregator.class);
-
-    DefaultSensorDescriptor descriptor = new DefaultSensorDescriptor();
     new CoverageReportImportSensor(coverageConf, coverageAggregator, "cs", "C#", false)
       .describe(descriptor);
 
@@ -94,9 +92,6 @@ public class CoverageReportImportSensorTest {
 
   @Test
   public void describe_execute_only_when_key_present() {
-    CoverageConfiguration coverageConf = new CoverageConfiguration("", "", "", "", "");
-    CoverageAggregator coverageAggregator = mock(CoverageAggregator.class);
-
     Configuration configWithKey = mock(Configuration.class);
     when(configWithKey.hasKey("expectedKey")).thenReturn(true);
 
@@ -106,7 +101,6 @@ public class CoverageReportImportSensorTest {
       Predicate<String> pr = invocationOnMock.getArgument(0);
       return pr.test("expectedKey");
     });
-    DefaultSensorDescriptor descriptor = new DefaultSensorDescriptor();
 
     new CoverageReportImportSensor(coverageConf, coverageAggregator, "cs", "C#", false)
       .describe(descriptor);
@@ -117,12 +111,6 @@ public class CoverageReportImportSensorTest {
 
   @Test
   public void execute_no_coverage_property() throws Exception {
-    File baseDir = temp.newFolder();
-    SensorContextTester context = SensorContextTester.create(baseDir);
-
-    CoverageConfiguration coverageConf = new CoverageConfiguration("", "", "", "", "");
-    CoverageAggregator coverageAggregator = mock(CoverageAggregator.class);
-
     new CoverageReportImportSensor(coverageConf, coverageAggregator, "cs", "C#", false)
       .execute(context);
 
@@ -131,11 +119,6 @@ public class CoverageReportImportSensorTest {
 
   @Test
   public void execute_warn_about_deprecated_integration_tests() throws IOException {
-    File baseDir = temp.newFolder();
-    SensorContextTester context = SensorContextTester.create(baseDir);
-
-    CoverageConfiguration coverageConf = new CoverageConfiguration("", "", "", "", "");
-    CoverageAggregator coverageAggregator = mock(CoverageAggregator.class);
     when(coverageAggregator.hasCoverageProperty()).thenReturn(true);
 
     new CoverageReportImportSensor(coverageConf, coverageAggregator, "cs", "C#", true)
@@ -161,19 +144,12 @@ public class CoverageReportImportSensorTest {
 
   @Test
   public void execute_coverage_no_main_file() throws IOException {
-    File baseDir = temp.newFolder();
-
     Coverage coverage = mock(Coverage.class);
     String fooPath = new File(baseDir, "Foo.cs").getCanonicalPath();
     when(coverage.files()).thenReturn(new HashSet<>(Collections.singletonList(fooPath)));
 
-    CoverageAggregator coverageAggregator = mock(CoverageAggregator.class);
-
-    SensorContextTester context = SensorContextTester.create(baseDir);
     context.fileSystem().add(new TestInputFileBuilder("foo", "Foo.cs").setLanguage("cs")
       .setType(Type.TEST).build());
-
-    CoverageConfiguration coverageConf = new CoverageConfiguration("cs", "", "", "", "");
 
     new CoverageReportImportSensor(coverageConf, coverageAggregator, "cs", "C#", false)
       .analyze(context, coverage);
@@ -184,17 +160,9 @@ public class CoverageReportImportSensorTest {
 
   @Test
   public void execute_coverage_not_indexed_file() throws IOException {
-    File baseDir = temp.newFolder();
-
     Coverage coverage = mock(Coverage.class);
     String fooPath = new File(baseDir, "Foo.cs").getCanonicalPath();
     when(coverage.files()).thenReturn(new HashSet<>(Collections.singletonList(fooPath)));
-
-    CoverageAggregator coverageAggregator = mock(CoverageAggregator.class);
-
-    SensorContextTester context = SensorContextTester.create(baseDir);
-
-    CoverageConfiguration coverageConf = new CoverageConfiguration("cs", "", "", "", "");
 
     new CoverageReportImportSensor(coverageConf, coverageAggregator, "cs", "C#", false)
       .analyze(context, coverage);
@@ -204,8 +172,6 @@ public class CoverageReportImportSensorTest {
   }
 
   private SensorContextTester computeCoverageMeasures(boolean isIntegrationTest) throws Exception {
-    File baseDir = temp.newFolder();
-
     Coverage coverage = mock(Coverage.class);
     String fooPath = new File(baseDir, "Foo.cs").getCanonicalPath();
     String bazPath = new File(baseDir, "Baz.java").getCanonicalPath();
@@ -222,18 +188,12 @@ public class CoverageReportImportSensorTest {
       .put(42, 1)
       .build());
 
-    CoverageAggregator coverageAggregator = mock(CoverageAggregator.class);
-
-    SensorContextTester context = SensorContextTester.create(baseDir);
-
     DefaultInputFile inputFile = new TestInputFileBuilder("foo", baseDir, new File(baseDir, "Foo.cs"))
       .setLanguage("cs")
       .initMetadata("a\na\na\na\na\na\na\na\na\na\n")
       .build();
     context.fileSystem().add(inputFile);
     context.fileSystem().add(new TestInputFileBuilder("foo", "Baz.java").setLanguage("java").build());
-
-    CoverageConfiguration coverageConf = new CoverageConfiguration("cs", "", "", "", "");
 
     new CoverageReportImportSensor(coverageConf, coverageAggregator, "cs", "C#", isIntegrationTest)
       .analyze(context, coverage);
