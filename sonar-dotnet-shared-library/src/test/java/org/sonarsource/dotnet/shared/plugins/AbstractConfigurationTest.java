@@ -52,24 +52,22 @@ public class AbstractConfigurationTest {
     settings = new MapSettings(new PropertyDefinitions(definitions.create()));
   }
 
-  private void createProtobufOut() throws IOException {
-    Path path = workDir.resolve("report");
+  private Path createProtobufOut(String name) throws IOException {
+    Path path = workDir.resolve(name);
     Path outputCs = path.resolve("output-cs");
     Files.createDirectories(outputCs);
     Files.createFile(outputCs.resolve("dummy.pb"));
-
-    Path path2 = workDir.resolve("report2");
-    Path outputCs2 = path2.resolve("output-cs");
-    Files.createDirectories(outputCs2);
-    Files.createFile(outputCs2.resolve("dummy.pb"));
-    settings.setProperty("sonar.cs.analyzer.projectOutPaths", new String[] {path.toString(), path2.toString()});
+    return path;
   }
 
-  private void createOldProtobufOut() throws IOException {
-    Path path = workDir.resolve("report");
-    Path outputCs = path.resolve("output-cs");
-    Files.createDirectories(outputCs);
-    Files.createFile(outputCs.resolve("dummy.pb"));
+  private void setProtobufOut() throws IOException {
+    Path path1 = createProtobufOut("report1");
+    Path path2 = createProtobufOut("report2");
+    settings.setProperty("sonar.cs.analyzer.projectOutPaths", new String[] {path1.toString(), path2.toString()});
+  }
+
+  private void setOldProtobufOut() throws IOException {
+    Path path = createProtobufOut("report");
     settings.setProperty("sonar.cs.analyzer.projectOutPath", path.toString());
   }
 
@@ -107,11 +105,22 @@ public class AbstractConfigurationTest {
     config = new AbstractConfiguration(settings.asConfig(), "cs") {
     };
     assertThat(config.protobufReportPaths()).isEmpty();
-    assertThat(logTester.logs(LoggerLevel.WARN)).containsOnly("Property missing: 'sonar.cs.analyzer.projectOutPaths''. No protobuf files will be loaded for this project.");
+    assertThat(logTester.logs(LoggerLevel.WARN)).containsOnly("Property missing: 'sonar.cs.analyzer.projectOutPaths'. No protobuf files will be loaded for this project.");
   }
 
   @Test
-  public void giveWarningsWhenGettingProtobufPathAndNoFolderAvailable() {
+  public void giveWarningsWhenGettingProtobufPathAndNoFolderAvailable() throws IOException {
+    Path path1 = createProtobufOut("report");
+    settings.setProperty("sonar.cs.analyzer.projectOutPaths", new String[] {path1.toString(), "non-existing"});
+    config = new AbstractConfiguration(settings.asConfig(), "cs") {
+    };
+    assertThat(config.protobufReportPaths()).containsOnly(path1.resolve("output-cs"));
+    assertThat(logTester.logs(LoggerLevel.WARN)).hasSize(1);
+    assertThat(logTester.logs(LoggerLevel.WARN).get(0)).matches(s -> s.startsWith("Analyzer working directory does not exist"));
+  }
+
+  @Test
+  public void giveWarningsWhenGettingOldProtobufPathAndNoFolderAvailable() {
     settings.setProperty("sonar.cs.analyzer.projectOutPath", "non-existing");
     config = new AbstractConfiguration(settings.asConfig(), "cs") {
     };
@@ -122,11 +131,12 @@ public class AbstractConfigurationTest {
 
   @Test
   public void informHowManyProtoFilesAreFound() throws IOException {
-    createOldProtobufOut();
+    setProtobufOut();
     config = new AbstractConfiguration(settings.asConfig(), "cs") {
     };
     assertThat(config.protobufReportPaths()).isNotEmpty();
-    assertThat(logTester.logs(LoggerLevel.DEBUG)).containsOnly("Analyzer working directory contains 1 .pb file(s)");
+    assertThat(logTester.logs(LoggerLevel.DEBUG)).hasSize(2);
+    assertThat(logTester.logs(LoggerLevel.WARN)).allMatch(s -> s.endsWith("contains no .pb file(s). No protobuf files will be loaded from this directory."));
   }
 
   @Test
@@ -140,22 +150,22 @@ public class AbstractConfigurationTest {
     assertThat(config.protobufReportPaths()).isEmpty();
     assertThat(logTester.logs(LoggerLevel.WARN)).hasSize(1);
     assertThat(logTester.logs(LoggerLevel.WARN).get(0))
-      .matches(s -> s.startsWith("Analyzer working directory contains no .pb file(s)'. No protobuf files will be loaded for this project."));
+      .matches(s -> s.endsWith("contains no .pb file(s). Analyzer results won't be loaded from this directory."));
   }
 
   @Test
   public void onlyProtobufReportsPresent() throws IOException {
-    createProtobufOut();
+    setProtobufOut();
     config = new AbstractConfiguration(settings.asConfig(), "cs") {
     };
     assertThat(config.protobufReportPathsSilent()).isNotEmpty();
     assertThat(config.roslynReportPaths()).isEmpty();
-    assertThat(config.protobufReportPathsSilent()).containsOnly(workDir.resolve("report").resolve("output-cs"), workDir.resolve("report2").resolve("output-cs"));
+    assertThat(config.protobufReportPathsSilent()).containsOnly(workDir.resolve("report1").resolve("output-cs"), workDir.resolve("report2").resolve("output-cs"));
   }
 
   @Test
   public void onlyOldProtobufReportsPresent() throws IOException {
-    createOldProtobufOut();
+    setOldProtobufOut();
     config = new AbstractConfiguration(settings.asConfig(), "cs") {
     };
     assertThat(config.protobufReportPathsSilent()).isNotEmpty();
