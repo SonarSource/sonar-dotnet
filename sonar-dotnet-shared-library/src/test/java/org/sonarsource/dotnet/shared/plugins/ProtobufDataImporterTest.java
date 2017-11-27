@@ -84,7 +84,7 @@ public class ProtobufDataImporterTest {
 
   @Test
   public void should_import_existing_data() {
-    dataImporter.importResults(tester, Collections.singletonList(workDir), "cs", true);
+    dataImporter.importResults(tester, Collections.singletonList(workDir));
 
     assertThat(tester.measures(inputFile.key())).isNotEmpty();
     assertThat(tester.measure(inputFile.key(), CoreMetrics.NCLOC).value()).isEqualTo(2);
@@ -92,11 +92,10 @@ public class ProtobufDataImporterTest {
 
   @Test
   public void warn_about_files_not_found() {
-    dataImporter.importResults(tester, Collections.singletonList(workDir), "cs", true);
+    dataImporter.importResults(tester, Collections.singletonList(workDir));
 
     String prefix = "Protobuf file not found: ";
     assertThat(logTester.logs(LoggerLevel.WARN)).containsOnly(
-      prefix + workDir.resolve("issues.pb"),
       prefix + workDir.resolve("token-type.pb"),
       prefix + workDir.resolve("symrefs.pb"),
       prefix + workDir.resolve("token-cpd.pb"));

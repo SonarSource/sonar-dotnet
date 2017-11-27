@@ -112,7 +112,7 @@ public class CSharpSensorTest {
     ImmutableMap<String, List<RuleKey>> expectedMap = ImmutableMap.of(
       "sonaranalyzer-cs", ImmutableList.of(RuleKey.of("csharpsquid", "S1186"), RuleKey.of("csharpsquid", "[parameters_key]")),
       "foo", ImmutableList.of(RuleKey.of("roslyn.foo", "custom-roslyn")));
-    verify(roslynDataImporter).importRoslynReport(Collections.singletonList(workDir.getRoot()), tester, expectedMap);
+    verify(roslynDataImporter).importRoslynReports(Collections.singletonList(workDir.getRoot()), tester, expectedMap);
   }
 
   @Test
@@ -121,7 +121,7 @@ public class CSharpSensorTest {
     sensor.execute(tester);
 
     verify(reportPathCollector).protobufDirs();
-    verify(protobufDataImporter).importResults(tester, reportPaths, CSharpPlugin.REPOSITORY_KEY, true);
+    verify(protobufDataImporter).importResults(tester, reportPaths);
     verifyZeroInteractions(roslynDataImporter);
   }
 

@@ -81,20 +81,18 @@ public class CSharpSensor implements Sensor {
 
   private void executeInternal(SensorContext context) {
     List<Path> protobufPaths = reportPathCollector.protobufDirs();
-    List<Path> roslynDirs = reportPathCollector.roslynDirs();
-
     if (!protobufPaths.isEmpty()) {
-      protobufDataImporter.importResults(context, protobufPaths, CSharpPlugin.REPOSITORY_KEY, roslynDirs.isEmpty());
+      protobufDataImporter.importResults(context, protobufPaths);
     }
 
+    List<Path> roslynDirs = reportPathCollector.roslynDirs();
     if (!roslynDirs.isEmpty()) {
-      LOG.info("Importing Roslyn report");
       Map<String, List<RuleKey>> activeRoslynRulesByPartialRepoKey = RoslynProfileExporter.activeRoslynRulesByPartialRepoKey(context.activeRules()
         .findAll()
         .stream()
         .map(ActiveRule::ruleKey)
         .collect(toList()));
-      roslynDataImporter.importRoslynReport(roslynDirs, context, activeRoslynRulesByPartialRepoKey);
+      roslynDataImporter.importRoslynReports(roslynDirs, context, activeRoslynRulesByPartialRepoKey);
     }
   }
 }

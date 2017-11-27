@@ -32,7 +32,6 @@ import org.sonar.api.measures.FileLinesContextFactory;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 import org.sonarsource.dotnet.protobuf.SonarAnalyzer.CopyPasteTokenInfo;
-import org.sonarsource.dotnet.protobuf.SonarAnalyzer.FileIssues;
 import org.sonarsource.dotnet.protobuf.SonarAnalyzer.MetricsInfo;
 import org.sonarsource.dotnet.protobuf.SonarAnalyzer.SymbolReferenceInfo;
 import org.sonarsource.dotnet.protobuf.SonarAnalyzer.TokenTypeInfo;
@@ -41,7 +40,6 @@ import org.sonarsource.dotnet.shared.plugins.protobuf.RawProtobufImporter;
 
 import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.CPDTOKENS_OUTPUT_PROTOBUF_NAME;
 import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.HIGHLIGHT_OUTPUT_PROTOBUF_NAME;
-import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.ISSUES_OUTPUT_PROTOBUF_NAME;
 import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.METRICS_OUTPUT_PROTOBUF_NAME;
 import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.SYMBOLREFS_OUTPUT_PROTOBUF_NAME;
 
@@ -57,9 +55,8 @@ public class ProtobufDataImporter {
     this.noSonarFilter = noSonarFilter;
   }
 
-  public void importResults(SensorContext context, List<Path> protobufReportsDirectories, String repositoryKey, boolean importIssues) {
+  public void importResults(SensorContext context, List<Path> protobufReportsDirectories) {
     RawProtobufImporter<MetricsInfo> metricsImporter = ProtobufImporters.metricsImporter(context, fileLinesContextFactory, noSonarFilter);
-    RawProtobufImporter<FileIssues> issuesImporter = ProtobufImporters.issuesImporter(context, repositoryKey);
     RawProtobufImporter<TokenTypeInfo> highlightImporter = ProtobufImporters.highlightImporter(context);
     RawProtobufImporter<SymbolReferenceInfo> symbolRefsImporter = ProtobufImporters.symbolRefsImporter(context);
     RawProtobufImporter<CopyPasteTokenInfo> cpdTokensImporter = ProtobufImporters.cpdTokensImporter(context);
@@ -69,9 +66,6 @@ public class ProtobufDataImporter {
       LOG.info(String.format("Importing results from %d proto %s in '%s'", protoFiles, pluralize("file", protoFiles), protobufReportsDir));
       // Note: the no-sonar "measure" must be imported before issues, otherwise the affected issues won't get excluded!
       parseProtobuf(metricsImporter, protobufReportsDir, METRICS_OUTPUT_PROTOBUF_NAME);
-      if (importIssues) {
-        parseProtobuf(issuesImporter, protobufReportsDir, ISSUES_OUTPUT_PROTOBUF_NAME);
-      }
       parseProtobuf(highlightImporter, protobufReportsDir, HIGHLIGHT_OUTPUT_PROTOBUF_NAME);
       parseProtobuf(symbolRefsImporter, protobufReportsDir, SYMBOLREFS_OUTPUT_PROTOBUF_NAME);
       parseProtobuf(cpdTokensImporter, protobufReportsDir, CPDTOKENS_OUTPUT_PROTOBUF_NAME);

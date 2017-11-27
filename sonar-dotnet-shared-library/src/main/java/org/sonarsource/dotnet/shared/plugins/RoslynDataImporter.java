@@ -26,17 +26,22 @@ import java.util.Map;
 import org.sonar.api.batch.ScannerSide;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.rule.RuleKey;
+import org.sonar.api.utils.log.Logger;
+import org.sonar.api.utils.log.Loggers;
 import org.sonarsource.dotnet.shared.sarif.SarifParserCallback;
 import org.sonarsource.dotnet.shared.sarif.SarifParserFactory;
 
 @ScannerSide
 public class RoslynDataImporter {
-  public void importRoslynReport(List<Path> reportPaths, final SensorContext context, Map<String, List<RuleKey>> activeRoslynRulesByPartialRepoKey) {
+  private static final Logger LOG = Loggers.get(RoslynDataImporter.class);
+
+  public void importRoslynReports(List<Path> reportPaths, final SensorContext context, Map<String, List<RuleKey>> activeRoslynRulesByPartialRepoKey) {
     Map<String, String> repositoryKeyByRoslynRuleKey = getRepoKeyByRoslynRuleKey(activeRoslynRulesByPartialRepoKey);
     SarifParserCallback callback = new SarifParserCallbackImpl(context, repositoryKeyByRoslynRuleKey);
 
+    LOG.info("Importing Roslyn {} {}", reportPaths.size(), pluralize("report", reportPaths.size()));
+
     for (Path reportPath : reportPaths) {
-      // TODO handle possible collisions
       SarifParserFactory.create(reportPath).accept(callback);
     }
   }
@@ -54,5 +59,12 @@ public class RoslynDataImporter {
       }
     }
     return repositoryKeyByRoslynRuleKey;
+  }
+
+  private static String pluralize(String s, int count) {
+    if (count == 1) {
+      return s;
+    }
+    return s + "s";
   }
 }
