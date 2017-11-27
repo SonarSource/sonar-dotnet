@@ -24,7 +24,6 @@ import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.issue.NoSonarFilter;
 import org.sonar.api.measures.FileLinesContextFactory;
 import org.sonarsource.dotnet.protobuf.SonarAnalyzer.CopyPasteTokenInfo;
-import org.sonarsource.dotnet.protobuf.SonarAnalyzer.FileIssues;
 import org.sonarsource.dotnet.protobuf.SonarAnalyzer.MetricsInfo;
 import org.sonarsource.dotnet.protobuf.SonarAnalyzer.SymbolReferenceInfo;
 import org.sonarsource.dotnet.protobuf.SonarAnalyzer.TokenTypeInfo;
@@ -36,7 +35,6 @@ public class ProtobufImporters {
   public static final String SYMBOLREFS_OUTPUT_PROTOBUF_NAME = "symrefs.pb";
   public static final String CPDTOKENS_OUTPUT_PROTOBUF_NAME = "token-cpd.pb";
   public static final String METRICS_OUTPUT_PROTOBUF_NAME = "metrics.pb";
-  public static final String ISSUES_OUTPUT_PROTOBUF_NAME = "issues.pb";
   public static final String ENCODING_OUTPUT_PROTOBUF_NAME = "encoding.pb";
   public static final String FILEMETADATA_OUTPUT_PROTOBUF_NAME = "file-metadata.pb";
 
@@ -54,10 +52,6 @@ public class ProtobufImporters {
 
   public static RawProtobufImporter<MetricsInfo> metricsImporter(SensorContext context, FileLinesContextFactory fileLinesContextFactory, NoSonarFilter noSonarFilter) {
     return new MetricsImporter(context, fileLinesContextFactory, noSonarFilter);
-  }
-
-  public static RawProtobufImporter<FileIssues> issuesImporter(SensorContext context, String repositoryKey) {
-    return new IssuesImporter(context, repositoryKey);
   }
 
   public static EncodingImporter encodingImporter() {

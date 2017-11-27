@@ -21,8 +21,6 @@ package org.sonarsource.dotnet.shared.plugins.testutils;
 
 import com.google.protobuf.Message;
 import com.google.protobuf.Parser;
-import org.sonarsource.dotnet.protobuf.SonarAnalyzer;
-
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -32,8 +30,12 @@ import java.nio.file.Path;
 import java.util.Optional;
 import java.util.function.Function;
 import java.util.function.Predicate;
+import org.sonarsource.dotnet.protobuf.SonarAnalyzer;
 
-import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.*;
+import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.CPDTOKENS_OUTPUT_PROTOBUF_NAME;
+import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.HIGHLIGHT_OUTPUT_PROTOBUF_NAME;
+import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.METRICS_OUTPUT_PROTOBUF_NAME;
+import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.SYMBOLREFS_OUTPUT_PROTOBUF_NAME;
 
 /**
  * Utility class to filter protobuf binary files to contain a single input-file (Program.cs)
@@ -60,8 +62,6 @@ public class ProtobufFilterTool {
     rewrite(METRICS_OUTPUT_PROTOBUF_NAME, SonarAnalyzer.MetricsInfo.parser(),
       m -> m.getFilePath().endsWith(pathSuffix), m -> m.toBuilder().setFilePath(TEST_FILENAME).build());
 
-    rewrite(ISSUES_OUTPUT_PROTOBUF_NAME, SonarAnalyzer.FileIssues.parser(),
-      m -> m.getFilePath().endsWith(pathSuffix), m -> m.toBuilder().setFilePath(TEST_FILENAME).build());
   }
 
   private static <T extends Message> void rewrite(String filename, Parser<T> parser, Predicate<T> predicate, Function<T, T> rewriter) throws IOException {

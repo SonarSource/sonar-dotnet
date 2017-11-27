@@ -109,19 +109,6 @@ message MetricsInfo {
   repeated int32 executable_lines = 16;
 }
 
-// Issues
-message FileIssues {
-  string file_path = 1;
-
-  message Issue {
-    string id = 1;
-    string message = 2;
-    TextRange location = 3;
-  }
-
-  repeated Issue issue = 2;
-}
-
 message EncodingInfo {
   string file_path = 1;
   string encoding = 2;
