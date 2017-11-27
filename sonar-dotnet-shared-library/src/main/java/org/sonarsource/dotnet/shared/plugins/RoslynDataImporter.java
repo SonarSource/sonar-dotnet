@@ -39,7 +39,7 @@ public class RoslynDataImporter {
     Map<String, String> repositoryKeyByRoslynRuleKey = getRepoKeyByRoslynRuleKey(activeRoslynRulesByPartialRepoKey);
     SarifParserCallback callback = new SarifParserCallbackImpl(context, repositoryKeyByRoslynRuleKey);
 
-    LOG.info("Importing Roslyn {} {}", reportPaths.size(), pluralize("report", reportPaths.size()));
+    LOG.info("Importing {} Roslyn {}", reportPaths.size(), pluralize("report", reportPaths.size()));
 
     for (Path reportPath : reportPaths) {
       SarifParserFactory.create(reportPath).accept(callback);
@@ -62,9 +62,6 @@ public class RoslynDataImporter {
   }
 
   private static String pluralize(String s, int count) {
-    if (count == 1) {
-      return s;
-    }
-    return s + "s";
+    return (count == 1) ? s : (s + "s");
   }
 }
