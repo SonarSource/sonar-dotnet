@@ -65,8 +65,6 @@
   <properties>
     <sonar.version>6.7</sonar.version>
     <maven.test.redirectTestOutputToFile>true</maven.test.redirectTestOutputToFile>
-    <sonar.pluginName>SonarC#</sonar.pluginName>
-    <sonar.pluginClass>org.sonar.plugins.csharp.CSharpPlugin</sonar.pluginClass>
     <sonarAnalyzer.workDirectory>${project.build.directory}/analyzer</sonarAnalyzer.workDirectory>
   </properties>
 
@@ -148,6 +146,46 @@
 
     <plugins>
       <plugin>
+        <groupId>org.sonarsource.sonar-packaging-maven-plugin</groupId>
+        <artifactId>sonar-packaging-maven-plugin</artifactId>
+        <configuration>
+          <pluginName>SonarC#</pluginName>
+          <pluginClass>org.sonar.plugins.csharp.CSharpPlugin</pluginClass>
+          <skipDependenciesPackaging>true</skipDependenciesPackaging>
+          <sonarLintSupported>false</sonarLintSupported>
+          <sonarQubeMinVersion>${sonar.version}</sonarQubeMinVersion>
+        </configuration>
+      </plugin>
+       <plugin>
+        <artifactId>maven-shade-plugin</artifactId>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+            <configuration>
+              <shadedArtifactAttached>false</shadedArtifactAttached>
+              <createDependencyReducedPom>false</createDependencyReducedPom>
+              <minimizeJar>true</minimizeJar>
+              <filters>
+                <filter>
+                  <artifact>*:*</artifact>
+                  <excludes>
+                    <exclude>META-INF/LICENSE*</exclude>
+                    <exclude>META-INF/NOTICE*</exclude>
+                    <exclude>META-INF/*.RSA</exclude>
+                    <exclude>META-INF/*.SF</exclude>
+                    <exclude>LICENSE*</exclude>
+                    <exclude>NOTICE*</exclude>
+                  </excludes>
+                </filter>
+              </filters>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-enforcer-plugin</artifactId>
         <executions>
@@ -160,8 +198,8 @@
             <configuration>
               <rules>
                 <requireFilesSize>
-                  <maxsize>3000000</maxsize>
-                  <minsize>2000000</minsize>
+                  <maxsize>2000000</maxsize>
+                  <minsize>1000000</minsize>
                   <files>
                     <file>${project.build.directory}/${project.build.finalName}.jar</file>
                   </files>
