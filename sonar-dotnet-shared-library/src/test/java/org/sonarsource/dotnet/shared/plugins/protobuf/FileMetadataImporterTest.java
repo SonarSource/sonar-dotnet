@@ -38,9 +38,9 @@ public class FileMetadataImporterTest {
   public void getGeneratedFilePaths_returns_only_generated_paths() {
     SonarAnalyzer.FileMetadataInfo.Builder builder = SonarAnalyzer.FileMetadataInfo.newBuilder();
 
-    SonarAnalyzer.FileMetadataInfo message1 = builder.setIsGenerated(true).setFilePath("c:\\file1").build();
-    SonarAnalyzer.FileMetadataInfo message2 = builder.setIsGenerated(true).setFilePath("c:\\file2").build();
-    SonarAnalyzer.FileMetadataInfo message3 = builder.setIsGenerated(false).setFilePath("c:\\file3").build();
+    SonarAnalyzer.FileMetadataInfo message1 = builder.setIsGenerated(true).setFilePath("c:/file1").build();
+    SonarAnalyzer.FileMetadataInfo message2 = builder.setIsGenerated(true).setFilePath("c:/file2").build();
+    SonarAnalyzer.FileMetadataInfo message3 = builder.setIsGenerated(false).setFilePath("c:/file3").build();
     SonarAnalyzer.FileMetadataInfo messageSamePath = builder.setIsGenerated(false).setFilePath("c:/file3").build();
 
     fileMetadataImporter.consume(message1);
@@ -53,7 +53,7 @@ public class FileMetadataImporterTest {
 
     // Assert
     assertThat(paths.size()).isEqualTo(2);
-    assertThat(paths.contains(Paths.get("c:\\file1"))).isTrue();
+    assertThat(paths.contains(Paths.get("c:/file1"))).isTrue();
     assertThat(paths.contains(Paths.get("c:/file2"))).isTrue();
     assertThat(paths.contains(Paths.get("c:/file3"))).isFalse();
   }
