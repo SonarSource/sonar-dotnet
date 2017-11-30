@@ -19,7 +19,7 @@
  */
 package org.sonarsource.dotnet.shared.plugins.testutils;
 
-import com.google.protobuf.Message;
+import com.google.protobuf.MessageLite;
 import com.google.protobuf.Parser;
 import java.io.File;
 import java.io.IOException;
@@ -64,7 +64,7 @@ public class ProtobufFilterTool {
 
   }
 
-  private static <T extends Message> void rewrite(String filename, Parser<T> parser, Predicate<T> predicate, Function<T, T> rewriter) throws IOException {
+  private static <T extends MessageLite> void rewrite(String filename, Parser<T> parser, Predicate<T> predicate, Function<T, T> rewriter) throws IOException {
     Path path = new File(TEST_DATA_DIR, filename).toPath();
     readFirstMatching(path, parser, predicate).ifPresent(m -> save(path, rewriter.apply(m)));
   }
@@ -86,7 +86,7 @@ public class ProtobufFilterTool {
     return Optional.empty();
   }
 
-  private static <T extends Message> void save(Path path, T message) {
+  private static <T extends MessageLite> void save(Path path, T message) {
     try (OutputStream output = Files.newOutputStream(path)) {
       message.writeDelimitedTo(output);
     } catch (IOException e) {
