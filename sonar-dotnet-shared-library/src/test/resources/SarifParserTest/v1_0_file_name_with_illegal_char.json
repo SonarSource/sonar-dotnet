@@ -18,7 +18,7 @@
           "locations": [
             {
               "resultFile": {
-                "uri": "file:///C:/ConsoleApplication1/P@!$%23&+-=r%5E%7B%7Dog_r()a%20m[1].cs",
+                "uri": "%BASEDIR%ConsoleApplication1/P@!$%23&+-=r%5E%7B%7Dog_r()a%20m[1].cs",
                 "region": {
                   "startLine": 9,
                   "startColumn": 11,
