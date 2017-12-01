@@ -15,24 +15,28 @@ For reference, the possible headings are:
 
 ## Unreleased
 
+## [6.8]()
+
 ### Notes
-* [All commits](https://github.com/SonarSource/sonar-csharp/compare/6.6.0.3969...HEAD)
+* [All commits](https://github.com/SonarSource/sonar-csharp/compare/6.7.0.4267...HEAD)
 
 
-## [6.7]()
+## [6.7](https://github.com/SonarSource/sonar-csharp/releases/tag/6.7.0.4267)
 
-### Bug
+### Bugs
 * [#934](https://github.com/SonarSource/sonar-csharp/issues/934) - Don't fail to parse issues on file names with '['
 
-### False Positive
+### False Positives
 * [#318](https://github.com/SonarSource/sonar-csharp/issues/318) - Fix S101: Rule should not report an issue on auto-generated members
 * [#704](https://github.com/SonarSource/sonar-csharp/issues/704) - Fix S3168: Rule should not raise FP with UWP event args
+* [#707](https://github.com/SonarSource/sonar-csharp/issues/707) - Fix S4056 and S4058: False positive for string comparisons with StringComparison parameter
 * [#733](https://github.com/SonarSource/sonar-csharp/issues/733) - Update S2325: Rule should exempt MVC / Web Api controller public methods
 * [#804](https://github.com/SonarSource/sonar-csharp/issues/804) - Update S2583: Should not raise issues for boolean constants and literals in conditions
 * [#929](https://github.com/SonarSource/sonar-csharp/issues/929) - Fix S2187: Rule should not raise an issue when class is abstract
 
-### Improvement
+### Improvements
 * [#396](https://github.com/SonarSource/sonar-csharp/issues/396) - Update S104: "Too many lines in a file" should only count lines of code
+* [#656](https://github.com/SonarSource/sonar-csharp/issues/656) - Update sensors to support projects with linked (shared) files
 * [#722](https://github.com/SonarSource/sonar-csharp/issues/722) - Update S3415: Support other test frameworks
 * [#752](https://github.com/SonarSource/sonar-csharp/issues/752) - Rule S1110: Redundant parenthesis - move the implementation from S3235
 * [#786](https://github.com/SonarSource/sonar-csharp/issues/786) - Update S2187: Rule should handle "TheoryAttribute"
@@ -45,9 +49,13 @@ For reference, the possible headings are:
 * [#981](https://github.com/SonarSource/sonar-csharp/issues/981) - Update S1607: Rule should handle 'TestCaseSourceAttribute'
 * [#983](https://github.com/SonarSource/sonar-csharp/issues/983) - Update S2699: Rule should handle more test method attributes
 * [#989](https://github.com/SonarSource/sonar-csharp/issues/989) - SonarC# should display a warning when coverage report doesn't cover any file imported in SonarQube
+* [#991](https://github.com/SonarSource/sonar-csharp/issues/991) - Enable analysis on non-Windows OSes
 
-### New Feature
+### New Features
 * [#955](https://github.com/SonarSource/sonar-csharp/issues/955) - Rule S113: Files should contain an empty newline at the end
+
+### Notes
+* [All commits](https://github.com/SonarSource/sonar-csharp/compare/6.6.0.3969...6.7.0.4267)
 
 
 ## [6.6](https://github.com/SonarSource/sonar-csharp/releases/tag/6.6.0.3969)
