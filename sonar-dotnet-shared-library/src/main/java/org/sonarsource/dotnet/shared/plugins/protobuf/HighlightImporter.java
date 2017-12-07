@@ -29,10 +29,14 @@ import org.sonar.api.batch.sensor.highlighting.NewHighlighting;
 import org.sonar.api.batch.sensor.highlighting.TypeOfText;
 import org.sonarsource.dotnet.protobuf.SonarAnalyzer;
 import org.sonarsource.dotnet.protobuf.SonarAnalyzer.TokenTypeInfo;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
 
 class HighlightImporter extends ProtobufImporter<SonarAnalyzer.TokenTypeInfo> {
 
   private final SensorContext context;
+  private final Map<InputFile, HashSet<TokenTypeInfo.TokenInfo>> fileHighlights = new HashMap<>();
 
   HighlightImporter(SensorContext context) {
     super(SonarAnalyzer.TokenTypeInfo.parser(), context, SonarAnalyzer.TokenTypeInfo::getFilePath);
@@ -41,20 +45,36 @@ class HighlightImporter extends ProtobufImporter<SonarAnalyzer.TokenTypeInfo> {
 
   @Override
   void consumeFor(InputFile inputFile, TokenTypeInfo message) {
-    NewHighlighting highlights = context.newHighlighting().onFile(inputFile);
-
-    boolean foundMappableHighlights = false;
-
     for (SonarAnalyzer.TokenTypeInfo.TokenInfo tokenInfo : message.getTokenInfoList()) {
-      TypeOfText typeOfText = toType(tokenInfo.getTokenType());
-      if (typeOfText != null) {
-        highlights.highlight(toTextRange(inputFile, tokenInfo.getTextRange()), typeOfText);
-        foundMappableHighlights = true;
+      fileHighlights
+        .computeIfAbsent(inputFile, f -> new HashSet<>())
+        .add(tokenInfo);
+    }
+  }
+
+  @Override
+  public void save() {
+    for (Map.Entry<InputFile, HashSet<SonarAnalyzer.TokenTypeInfo.TokenInfo>> entry : fileHighlights.entrySet()) {
+      NewHighlighting highlighting = context.newHighlighting().onFile(entry.getKey());
+
+      boolean foundMappableHighlightings = false;
+      for (SonarAnalyzer.TokenTypeInfo.TokenInfo message : entry.getValue()) {
+        TypeOfText typeOfText = toType(message.getTokenType());
+        if (typeOfText != null) {
+          highlighting.highlight(toTextRange(entry.getKey(), message.getTextRange()), typeOfText);
+          foundMappableHighlightings = true;
+        }
+      }
+      if (foundMappableHighlightings) {
+        highlighting.save();
       }
     }
-    if (foundMappableHighlights) {
-      highlights.save();
-    }
+  }
+
+  @Override
+  boolean isProcessed(InputFile inputFile) {
+    // we aggregate all highlighting information, no need to process only the first protobuf file
+    return false;
   }
 
   @CheckForNull

@@ -48,7 +48,8 @@ public abstract class ProtobufImporter<T> extends RawProtobufImporter<T> {
       return;
     }
 
-    if (!filesProcessed.add(inputFile.path().toAbsolutePath())) {
+    // process each protobuf file only once but allow overriding
+    if (isProcessed(inputFile)) {
       return;
     }
     consumeFor(inputFile, message);
@@ -56,4 +57,7 @@ public abstract class ProtobufImporter<T> extends RawProtobufImporter<T> {
 
   abstract void consumeFor(InputFile inputFile, T message);
 
+  boolean isProcessed(InputFile inputFile) {
+    return !filesProcessed.add(inputFile.path().toAbsolutePath());
+  }
 }

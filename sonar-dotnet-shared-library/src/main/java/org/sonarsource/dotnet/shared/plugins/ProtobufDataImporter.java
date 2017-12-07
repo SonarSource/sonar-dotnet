@@ -70,6 +70,11 @@ public class ProtobufDataImporter {
       parseProtobuf(symbolRefsImporter, protobufReportsDir, SYMBOLREFS_OUTPUT_PROTOBUF_NAME);
       parseProtobuf(cpdTokensImporter, protobufReportsDir, CPDTOKENS_OUTPUT_PROTOBUF_NAME);
     }
+
+    metricsImporter.save();
+    highlightImporter.save();
+    symbolRefsImporter.save();
+    cpdTokensImporter.save();
   }
 
   private static String pluralize(String s, long count) {
