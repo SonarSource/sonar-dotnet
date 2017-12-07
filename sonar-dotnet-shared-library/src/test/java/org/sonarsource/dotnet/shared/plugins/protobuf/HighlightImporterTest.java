@@ -52,7 +52,9 @@ public class HighlightImporterTest {
     File protobuf = new File(TEST_DATA_DIR, HIGHLIGHT_OUTPUT_PROTOBUF_NAME);
     assertThat(protobuf.isFile()).withFailMessage("no such file: " + protobuf).isTrue();
 
-    new HighlightImporter(tester).accept(protobuf.toPath());
+    HighlightImporter importer = new HighlightImporter(tester);
+    importer.accept(protobuf.toPath());
+    importer.save();
 
     // using System;
     assertThat(tester.highlightingTypeAt(inputFile.key(), 1, 0).get(0)).isEqualTo(TypeOfText.KEYWORD);

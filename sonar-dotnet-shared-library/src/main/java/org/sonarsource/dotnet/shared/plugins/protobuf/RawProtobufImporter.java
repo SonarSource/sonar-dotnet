@@ -50,4 +50,8 @@ public abstract class RawProtobufImporter<T> {
 
   abstract void consume(T message);
 
+  public void save() {
+    // only highlight importer is using this method for now but we should expand to other importers
+    // when we start merging other protobuf data
+  }
 }
