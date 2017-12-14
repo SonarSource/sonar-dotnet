@@ -67,6 +67,14 @@ namespace Tests.Diagnostics
     }
 
     [TestClass]
+    class ClassTest12
+    {
+        [DataTestMethod]
+        [DataRow(1)]
+        public void Foo(int i) { }
+    }
+
+    [TestClass]
     public abstract class MyCommonCode1
     {
     }
