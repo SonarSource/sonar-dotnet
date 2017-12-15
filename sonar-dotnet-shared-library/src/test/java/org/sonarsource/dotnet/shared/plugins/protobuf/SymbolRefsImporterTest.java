@@ -56,6 +56,7 @@ public class SymbolRefsImporterTest {
     tester.fileSystem().add(inputFile);
 
     underTest.accept(protobuf.toPath());
+    underTest.save();
 
     // a symbol is defined at this location, and referenced at 3 other locations
     assertThat(tester.referencesForSymbolAt(inputFile.key(), 25, 34)).hasSize(3);
@@ -65,5 +66,4 @@ public class SymbolRefsImporterTest {
     assertThat(tester.referencesForSymbolAt(inputFile.key(), 56, 30)).hasSize(1);
     assertThat(tester.referencesForSymbolAt(inputFile.key(), 56, 37)).hasSize(1);
   }
-
 }
