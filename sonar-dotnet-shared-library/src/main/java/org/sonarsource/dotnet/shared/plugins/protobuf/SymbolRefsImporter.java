@@ -28,9 +28,13 @@ import org.sonar.api.batch.sensor.symbol.NewSymbolTable;
 import org.sonarsource.dotnet.protobuf.SonarAnalyzer;
 import org.sonarsource.dotnet.protobuf.SonarAnalyzer.SymbolReferenceInfo;
 
+import java.util.HashMap;
+import java.util.HashSet;
+
 class SymbolRefsImporter extends ProtobufImporter<SonarAnalyzer.SymbolReferenceInfo> {
 
   private final SensorContext context;
+  private final HashMap<InputFile, HashSet<SonarAnalyzer.SymbolReferenceInfo.SymbolReference>> fileSymbolReferences = new HashMap<>();
 
   SymbolRefsImporter(SensorContext context) {
     super(SonarAnalyzer.SymbolReferenceInfo.parser(), context, SonarAnalyzer.SymbolReferenceInfo::getFilePath);
@@ -39,15 +43,33 @@ class SymbolRefsImporter extends ProtobufImporter<SonarAnalyzer.SymbolReferenceI
 
   @Override
   void consumeFor(InputFile inputFile, SymbolReferenceInfo message) {
-    NewSymbolTable symbolTable = context.newSymbolTable().onFile(inputFile);
-
     for (SonarAnalyzer.SymbolReferenceInfo.SymbolReference tokenInfo : message.getReferenceList()) {
-      NewSymbol symbol = symbolTable.newSymbol(toTextRange(inputFile, tokenInfo.getDeclaration()));
-      for (SonarAnalyzer.TextRange refTextRange : tokenInfo.getReferenceList()) {
-        symbol.newReference(toTextRange(inputFile, refTextRange));
-      }
+      fileSymbolReferences
+        .computeIfAbsent(inputFile, f -> new HashSet<>())
+        .add(tokenInfo);
     }
-    symbolTable.save();
   }
 
+  @Override
+  public void save() {
+    for (HashMap.Entry<InputFile, HashSet<SonarAnalyzer.SymbolReferenceInfo.SymbolReference>> entry : fileSymbolReferences.entrySet()) {
+
+      NewSymbolTable symbolTable = context.newSymbolTable().onFile(entry.getKey());
+
+      for (SonarAnalyzer.SymbolReferenceInfo.SymbolReference tokenInfo : entry.getValue()) {
+        NewSymbol symbol = symbolTable.newSymbol(toTextRange(entry.getKey(), tokenInfo.getDeclaration()));
+        for (SonarAnalyzer.TextRange refTextRange : tokenInfo.getReferenceList()) {
+          symbol.newReference(toTextRange(entry.getKey(), refTextRange));
+        }
+      }
+
+      symbolTable.save();
+    }
+  }
+
+  @Override
+  boolean isProcessed(InputFile inputFile) {
+    // we aggregate all symbol reference information, no need to process only the first protobuf file
+    return false;
+  }
 }
