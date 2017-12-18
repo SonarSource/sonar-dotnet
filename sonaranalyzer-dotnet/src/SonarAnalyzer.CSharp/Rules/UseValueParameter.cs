@@ -19,7 +19,6 @@
  */
 
 using System.Collections.Immutable;
-using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -53,13 +52,14 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     var accessorDeclaration = cbc.CodeBlock as AccessorDeclarationSyntax;
                     if (accessorDeclaration == null ||
-                        accessorDeclaration.IsKind(SyntaxKind.GetAccessorDeclaration))
+                        accessorDeclaration.IsKind(SyntaxKind.GetAccessorDeclaration) ||
+                        accessorDeclaration.Body == null)
                     {
                         return;
                     }
 
                     if (accessorDeclaration.Body.Statements.Count == 1 &&
-                        accessorDeclaration.Body.Statements.Single() is ThrowStatementSyntax)
+                        accessorDeclaration.Body.Statements[0] is ThrowStatementSyntax)
                     {
                         return;
                     }
