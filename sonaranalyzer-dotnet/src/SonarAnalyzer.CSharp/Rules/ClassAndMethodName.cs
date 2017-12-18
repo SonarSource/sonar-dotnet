@@ -137,7 +137,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            if (IsTypeComRelated(symbol.ContainingType) ||
+            if (string.IsNullOrWhiteSpace(identifier.ValueText) ||
+                IsTypeComRelated(symbol.ContainingType) ||
                 symbol.GetInterfaceMember() != null ||
                 symbol.GetOverriddenMember() != null ||
                 symbol.IsExtern)
@@ -278,7 +279,7 @@ namespace SonarAnalyzer.Rules.CSharp
             return new string(upper.Concat(lower).ToArray());
         }
 
-        private static IEnumerable<string> SplitToParts(string name)
+        internal static IEnumerable<string> SplitToParts(string name)
         {
             var currentWord = new StringBuilder();
             foreach (var c in name)

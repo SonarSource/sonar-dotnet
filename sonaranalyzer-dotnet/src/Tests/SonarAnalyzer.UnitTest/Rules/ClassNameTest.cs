@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Linq;
+using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace SonarAnalyzer.UnitTest.Rules
@@ -55,6 +57,32 @@ namespace SonarAnalyzer.UnitTest.Rules
                     @"TestCases\MethodName.Partial.cs",
                 },
                 new SonarAnalyzer.Rules.CSharp.ClassAndMethodName());
+        }
+
+        [TestMethod]
+        public void TestSplitToParts()
+        {
+            new[]
+            {
+                ("foo", new [] { "foo" }),
+                ("Foo", new [] { "Foo" }),
+                ("FFF", new [] { "FFF" }),
+                ("FfF", new [] { "Ff", "F" }),
+                ("Ff9F", new [] { "Ff", "9", "F" }),
+                ("你好", new [] { "你", "好" }),
+                ("FFf", new [] { "F", "Ff" }),
+                ("", new string[0]),
+                ("FF9d", new [] { "FF", "9", "d" }),
+                ("y2x5__w7", new[] { "y", "2", "x", "5", "_", "_", "w", "7" }),
+                ("3%c#account", new[] { "3", "%", "c", "#", "account" }),
+            }
+            .Select(x =>
+            (
+                actual: SonarAnalyzer.Rules.CSharp.ClassAndMethodName.SplitToParts(x.Item1).ToArray(),
+                expected: x.Item2
+            ))
+            .ToList()
+            .ForEach(x => x.actual.Should().Equal(x.expected));
         }
     }
 }

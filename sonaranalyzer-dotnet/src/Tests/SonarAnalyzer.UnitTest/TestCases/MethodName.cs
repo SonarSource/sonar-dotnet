@@ -42,6 +42,16 @@
         public void 你好 { }
 
         public void Łódź() { }
+
+        public int ArrowedMethod() => 42;
+
+        public int ArrowedProperty1 => 42;
+
+        public int ArrowedProperty2
+        {
+            get => 41;
+            set => null;
+        }
     }
 
     [System.Runtime.InteropServices.ComImport()]
@@ -67,5 +77,10 @@
         public partial void MY_METHOD()
         {
         }
+    }
+
+    public class Invalid
+    {
+        public int () => 42;
     }
 }
