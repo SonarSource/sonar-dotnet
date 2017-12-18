@@ -115,4 +115,16 @@ namespace Tests.Diagnostics
             remove { } // Noncompliant
         }
     }
+
+    class Program
+    {
+
+        private string id;
+
+        public string Id
+        {
+            get => null;
+            set => id = 10; // Compliant (should not be, see https://github.com/SonarSource/sonar-csharp/issues/1021)
+        }
+    }
 }
