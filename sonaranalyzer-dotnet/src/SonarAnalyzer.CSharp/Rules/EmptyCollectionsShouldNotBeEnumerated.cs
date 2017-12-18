@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2017 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -151,6 +151,13 @@ namespace SonarAnalyzer.Rules.CSharp
 
             private ProgramState ProcessInvocation(ProgramState programState, InvocationExpressionSyntax invocation)
             {
+                // Argument of the nameof expression is not pushed on stack so we need to exit the checks
+                if (invocation.IsNameof(this.semanticModel))
+                {
+                    return programState;
+                }
+
+
                 // Remove collection constraint from all arguments passed to an invocation
                 var newProgramState = RemoveCollectionConstraintsFromArguments(invocation.ArgumentList, programState);
 
@@ -322,7 +329,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 ProgramState programState)
             {
                 return GetArgumentSymbolicValues(argumentList, programState)
-                    .Aggregate(programState, 
+                    .Aggregate(programState,
                         (state, value) => state.RemoveConstraint(value, CollectionCapacityConstraint.Empty));
             }
 
