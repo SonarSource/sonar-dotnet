@@ -30,7 +30,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void TooManyParameters()
         {
-            var diagnostic = new TooManyParameters {Maximum = 3};
+            var diagnostic = new TooManyParameters { Maximum = 3 };
             Verifier.VerifyAnalyzer(@"TestCases\TooManyParameters.cs", diagnostic);
         }
     }
