@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
@@ -712,6 +712,15 @@ namespace Tests.Diagnostics
         // Important to test not only the first argument
         public Foo(int param, int other, IEnumerable<int> arg)
         {
+        }
+    }
+
+    // See https://github.com/SonarSource/sonar-csharp/issues/1002
+    class Program
+    {
+        public Program(string id)
+        {
+            if (string.IsNullOrEmpty(id)) throw new ArgumentNullException(nameof(id));
         }
     }
 }
