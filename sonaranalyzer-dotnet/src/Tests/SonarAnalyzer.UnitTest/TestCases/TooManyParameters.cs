@@ -47,5 +47,17 @@ namespace Tests.Diagnostics
             : base(a, b, c, d, e, f, g, h)
         {
         }
+
+        public SubClass()
+            : base("", "", "", "", "", "", "", "")
+        { }
+    }
+
+    public class SubClass2 : TooManyParameters
+    {
+        public SubClass2(int p1, int p2, int p3, string s1, string s2) // Noncompliant
+        {
+
+        }
     }
 }
