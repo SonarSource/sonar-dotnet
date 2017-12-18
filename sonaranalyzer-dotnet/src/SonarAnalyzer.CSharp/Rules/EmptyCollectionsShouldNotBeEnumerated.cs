@@ -152,11 +152,10 @@ namespace SonarAnalyzer.Rules.CSharp
             private ProgramState ProcessInvocation(ProgramState programState, InvocationExpressionSyntax invocation)
             {
                 // Argument of the nameof expression is not pushed on stack so we need to exit the checks
-                if (invocation.IsNameof(this.semanticModel))
+                if (invocation.IsNameof(semanticModel))
                 {
                     return programState;
                 }
-
 
                 // Remove collection constraint from all arguments passed to an invocation
                 var newProgramState = RemoveCollectionConstraintsFromArguments(invocation.ArgumentList, programState);
