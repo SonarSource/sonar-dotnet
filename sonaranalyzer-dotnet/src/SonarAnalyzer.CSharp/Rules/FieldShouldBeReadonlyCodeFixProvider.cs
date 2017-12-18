@@ -72,8 +72,13 @@ namespace SonarAnalyzer.Rules.CSharp
                         Title,
                         c =>
                         {
-                            var newFieldDeclaration = fieldDeclaration.AddModifiers(
-                                SyntaxFactory.Token(SyntaxKind.ReadOnlyKeyword));
+                            var readonlyToken = SyntaxFactory.Token(SyntaxKind.ReadOnlyKeyword);
+
+                            var newFieldDeclaration = HasAnyAccessibilityModifier(fieldDeclaration)
+                                ? fieldDeclaration.AddModifiers(readonlyToken)
+                                : fieldDeclaration.WithoutLeadingTrivia()
+                                    .AddModifiers(readonlyToken.WithLeadingTrivia(fieldDeclaration.GetLeadingTrivia()));
+
                             var newRoot = root.ReplaceNode(fieldDeclaration, newFieldDeclaration);
                             return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
                         }),
@@ -81,6 +86,15 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             return TaskHelper.CompletedTask;
+        }
+
+        private bool HasAnyAccessibilityModifier(FieldDeclarationSyntax fieldDeclaration)
+        {
+            return fieldDeclaration.Modifiers.Any(modifier =>
+                modifier.IsKind(SyntaxKind.PrivateKeyword) ||
+                modifier.IsKind(SyntaxKind.PublicKeyword) ||
+                modifier.IsKind(SyntaxKind.InternalKeyword) ||
+                modifier.IsKind(SyntaxKind.ProtectedKeyword));
         }
     }
 }

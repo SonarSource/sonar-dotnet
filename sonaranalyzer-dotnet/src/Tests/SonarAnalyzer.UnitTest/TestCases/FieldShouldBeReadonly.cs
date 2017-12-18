@@ -157,4 +157,18 @@ namespace Tests.Diagnostics
     }
 
     public class MyAttribute : Attribute { }
+
+    // See https://github.com/SonarSource/sonar-csharp/issues/1009
+    // Error with leading trivia not moved to the readonly modifier
+    public class MyClassWithField
+    {
+        #region Test
+        string teststring = null; // Noncompliant
+        #endregion
+
+        public void Do()
+        {
+            var x = teststring;
+        }
+    }
 }
