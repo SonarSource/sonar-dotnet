@@ -31,4 +31,33 @@ namespace Tests.Diagnostics
         void F1(int p1, int p2, int p3);
         void F2(int p1, int p2, int p3, int p4); // Noncompliant
     }
+
+    public class MyWrongClass
+    {
+        public MyWrongClass(string a, string b, string c, string d, string e, string f, string g, string h) // Noncompliant
+        {
+        }
+    }
+
+    public class SubClass : MyWrongClass
+    {
+        // See https://github.com/SonarSource/sonar-csharp/issues/1015
+        // We should not raise when parent base class forces usage of too many args
+        public SubClass(string a, string b, string c, string d, string e, string f, string g, string h) // Compliant (base class requires them)
+            : base(a, b, c, d, e, f, g, h)
+        {
+        }
+
+        public SubClass()
+            : base("", "", "", "", "", "", "", "")
+        { }
+    }
+
+    public class SubClass2 : TooManyParameters
+    {
+        public SubClass2(int p1, int p2, int p3, string s1, string s2) // Noncompliant
+        {
+
+        }
+    }
 }

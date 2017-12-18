@@ -67,7 +67,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.ParameterList);
         }
 
-        private static bool CanBeChanged(SyntaxNode node, SemanticModel semanticModel)
+        private bool CanBeChanged(SyntaxNode node, SemanticModel semanticModel)
         {
             var declaredSymbol = semanticModel.GetDeclaredSymbol(node);
             var symbol = semanticModel.GetSymbolInfo(node).Symbol;
@@ -82,6 +82,14 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 // Not a declaration, such as Action
                 return true;
+            }
+
+            if ((node as ConstructorDeclarationSyntax)?.Initializer?.ArgumentList?.Arguments.Count > Maximum)
+            {
+                // Base class is already not compliant so let's ignore current constructor.
+                // Another option could be to substract current number of parameters from base count and raise only if greater
+                // than threshold.
+                return false;
             }
 
             return declaredSymbol.GetOverriddenMember() == null &&
