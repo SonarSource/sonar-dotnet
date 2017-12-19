@@ -41,7 +41,9 @@ namespace SonarAnalyzer.Helpers
                 (
                     methodSymbol.ReturnsVoid ||
                     methodSymbol.ReturnType.Is(KnownType.System_Int32) ||
-                    (methodSymbol.ReturnType.Is(KnownType.System_Threading_Tasks_Task) && methodSymbol.IsAsync)
+                    methodSymbol.ReturnType.Is(KnownType.System_Threading_Tasks_Task) ||
+                    (methodSymbol.ReturnType.OriginalDefinition.Is(KnownType.System_Threading_Tasks_Task_T) &&
+                    ((methodSymbol.ReturnType as INamedTypeSymbol)?.TypeArguments.FirstOrDefault().Is(KnownType.System_Int32) ?? false))
                 );
         }
 

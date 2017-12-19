@@ -67,7 +67,22 @@ namespace Tests.Diagnostics
     class NewClass
     {
         // See https://github.com/SonarSource/sonar-csharp/issues/888
+        static async Task Main() // Compliant - valid main method since C# 7.1
+        {
+            Console.WriteLine("Test");
+        }
+
+        static async Task<int> Main() // Compliant - valid main method since C# 7.1
+        {
+            Console.WriteLine("Test");
+        }
+
         static async Task Main(string[] args) // Compliant - valid main method since C# 7.1
+        {
+            Console.WriteLine("Test");
+        }
+
+        static async Task<int> Main(string[] args) // Compliant - valid main method since C# 7.1
         {
             Console.WriteLine("Test");
         }

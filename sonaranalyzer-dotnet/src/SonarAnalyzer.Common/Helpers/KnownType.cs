@@ -226,6 +226,7 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_SystemException = new KnownType("System.SystemException");
         internal static readonly KnownType System_Text_StringBuilder = new KnownType("System.Text.StringBuilder");
         internal static readonly KnownType System_Threading_Tasks_Task = new KnownType("System.Threading.Tasks.Task");
+        internal static readonly KnownType System_Threading_Tasks_Task_T = new KnownType("System.Threading.Tasks.Task<TResult>");
         internal static readonly KnownType System_Threading_Thread = new KnownType("System.Threading.Thread");
         internal static readonly KnownType System_ThreadStaticAttribute = new KnownType("System.ThreadStaticAttribute");
         internal static readonly KnownType System_Type = new KnownType("System.Type");

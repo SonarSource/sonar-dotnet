@@ -50,6 +50,14 @@ namespace Tests.TestCases
             throw new NotImplementedException();
         }
 
+        public void Foo(int arg1) // Compliant
+        {
+            // Empty on purpose
+        }
+    }
+
+    class MainEntryPoints
+    {
         static void Main(string[] args) // Compliant because Main is ignored + empty method
         {
         }
@@ -59,9 +67,14 @@ namespace Tests.TestCases
             Console.WriteLine("Test");
         }
 
-        public void Foo(int arg1) // Compliant
+        static async Task<int> Main(string[] args) // Compliant - new main syntax
         {
-            // Empty on purpose
+            Console.WriteLine("Test");
+        }
+
+        static async Task<string> Main(string[] args) // Noncompliant
+        {
+            Console.WriteLine("Test");
         }
     }
 
