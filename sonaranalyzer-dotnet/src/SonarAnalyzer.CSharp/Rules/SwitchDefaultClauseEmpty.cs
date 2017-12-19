@@ -66,7 +66,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool HasAnyComment(SwitchSectionSyntax section) =>
             section.Labels.Last()
-                .GetTrailingTrivia()                                // handle comments after default:
+                .GetTrailingTrivia()                                // handle comments after last label, which will normally be default:
                 .Union(section.Statements[0].GetLeadingTrivia())    // handle comments before break
                 .Union(section.Statements[0].GetTrailingTrivia())   // handle comments after break
                 .Any(trivia =>
