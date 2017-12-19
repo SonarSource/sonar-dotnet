@@ -30,12 +30,19 @@ namespace SonarAnalyzer.Helpers
         public static bool IsMainMethod(this IMethodSymbol methodSymbol)
         {
             // Based on Microsoft definition: https://msdn.microsoft.com/en-us/library/1y814bzs.aspx
+            // Adding support for new async main: https://blogs.msdn.microsoft.com/mazhou/2017/05/30/c-7-series-part-2-async-main
             return methodSymbol != null &&
                 methodSymbol.IsStatic &&
-                (methodSymbol.ReturnsVoid || methodSymbol.ReturnType.Is(KnownType.System_Int32)) &&
                 methodSymbol.Name.Equals("Main", StringComparison.Ordinal) &&
-                (methodSymbol.Parameters.Length == 0 ||
-                    (methodSymbol.Parameters.Length == 1 && methodSymbol.Parameters[0].IsType(KnownType.System_String_Array)));
+                (
+                    methodSymbol.Parameters.Length == 0 ||
+                    (methodSymbol.Parameters.Length == 1 && methodSymbol.Parameters[0].IsType(KnownType.System_String_Array))
+                ) &&
+                (
+                    methodSymbol.ReturnsVoid ||
+                    methodSymbol.ReturnType.Is(KnownType.System_Int32) ||
+                    (methodSymbol.ReturnType.Is(KnownType.System_Threading_Tasks_Task) && methodSymbol.IsAsync)
+                );
         }
 
         public static bool IsObjectEquals(this IMethodSymbol methodSymbol)

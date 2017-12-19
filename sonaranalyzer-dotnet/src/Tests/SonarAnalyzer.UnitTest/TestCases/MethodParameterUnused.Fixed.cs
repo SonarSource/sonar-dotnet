@@ -53,6 +53,11 @@ namespace Tests.TestCases
         {
         }
 
+        static async Task Main(string[] args) // Compliant - new main syntax
+        {
+            Console.WriteLine("Test");
+        }
+
         public void Foo(int arg1) // Compliant
         {
             // Empty on purpose

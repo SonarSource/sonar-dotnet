@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using System.Threading.Tasks;
 
 namespace Tests.Diagnostics
 {
@@ -110,6 +111,16 @@ namespace Tests.Diagnostics
         }
         internal class Class4 : MyInterface { } // Noncompliant {{Remove the unused internal type 'Class4'.}}
     }
+
+    class NewClass
+    {
+        // See https://github.com/SonarSource/sonar-csharp/issues/888
+        static async Task Main(string[] args) // Compliant - valid main method since C# 7.1
+        {
+            Console.WriteLine("Test");
+        }
+    }
+
     public static class MyExtension
     {
         private static void MyMethod<T>(this T self) { "".MyMethod<string>(); }
