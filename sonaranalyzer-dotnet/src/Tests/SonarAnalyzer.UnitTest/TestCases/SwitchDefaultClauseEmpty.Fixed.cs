@@ -80,6 +80,27 @@
                 case Fruit.Apple:
                     Console.WriteLine("apple");
                     break;
+                default: // Single line comment after
+                    break;
+            }
+
+            switch (fruit)
+            {
+                case Fruit.Apple:
+                    Console.WriteLine("apple");
+                    break;
+                default:
+                    {
+                        // comment
+                    }
+                    break;
+            }
+
+            switch (fruit)
+            {
+                case Fruit.Apple:
+                    Console.WriteLine("apple");
+                    break;
                 default:
                     Console.WriteLine("other");
                     break;

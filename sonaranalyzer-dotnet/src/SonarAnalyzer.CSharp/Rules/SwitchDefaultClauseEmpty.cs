@@ -56,7 +56,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
 
                     if (section.Statements[0].IsKind(SyntaxKind.BreakStatement) &&
-                        !HasAnyComment(section.Statements[0]))
+                        !HasAnyComment(section))
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, section.GetLocation()));
                     }
@@ -64,9 +64,11 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.SwitchSection);
         }
 
-        private static bool HasAnyComment(StatementSyntax statement) =>
-            statement.GetLeadingTrivia()
-                .Union(statement.GetTrailingTrivia())
+        private static bool HasAnyComment(SwitchSectionSyntax section) =>
+            section.Labels.Last()
+                .GetTrailingTrivia()                                // handle comments after default:
+                .Union(section.Statements[0].GetLeadingTrivia())    // handle comments before break
+                .Union(section.Statements[0].GetTrailingTrivia())   // handle comments after break
                 .Any(trivia =>
                     trivia.IsKind(SyntaxKind.SingleLineCommentTrivia) ||
                     trivia.IsKind(SyntaxKind.MultiLineCommentTrivia));
