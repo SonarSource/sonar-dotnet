@@ -55,14 +55,22 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    var breakStatement = section.Statements.First();
-
-                    if (breakStatement.IsKind(SyntaxKind.BreakStatement))
+                    if (section.Statements[0].IsKind(SyntaxKind.BreakStatement) &&
+                        !HasAnyComment(section))
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, section.GetLocation()));
                     }
                 },
                 SyntaxKind.SwitchSection);
         }
+
+        private static bool HasAnyComment(SwitchSectionSyntax section) =>
+            section.Labels.Last()
+                .GetTrailingTrivia()                                // handle comments after last label, which will normally be default:
+                .Union(section.Statements[0].GetLeadingTrivia())    // handle comments before break
+                .Union(section.Statements[0].GetTrailingTrivia())   // handle comments after break
+                .Any(trivia =>
+                    trivia.IsKind(SyntaxKind.SingleLineCommentTrivia) ||
+                    trivia.IsKind(SyntaxKind.MultiLineCommentTrivia));
     }
 }
