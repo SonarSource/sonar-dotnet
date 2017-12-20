@@ -24,9 +24,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Classic\Debug\</OutputPath>
-    <IntermediateOutputPath>obj\Classic</IntermediateOutputPath>
-    <DefineConstants>TRACE;DEBUG;ROSLYN_10</DefineConstants>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AppConfig>app.Classic.config</AppConfig>
@@ -34,9 +32,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Classic\Release\</OutputPath>
-    <IntermediateOutputPath>obj\Classic</IntermediateOutputPath>
-    <DefineConstants>TRACE;ROSLYN_10</DefineConstants>
+    <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AppConfig>app.Classic.config</AppConfig>

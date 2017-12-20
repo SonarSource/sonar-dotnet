@@ -6,18 +6,6 @@
     <RootNamespace>SonarAnalyzer</RootNamespace>
     <CodeAnalysisRuleSet>..\SonarAnalyzer.ruleset</CodeAnalysisRuleSet>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <!-- This is a temporary workaround for https://github.com/Microsoft/vstest/issues/800 -->
-    <DebugType>Full</DebugType>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <OutputPath>bin\Classic\Release\</OutputPath>
-    <IntermediateOutputPath>obj\Classic</IntermediateOutputPath>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <OutputPath>bin\Classic\Debug\</OutputPath>
-    <IntermediateOutputPath>obj\Classic</IntermediateOutputPath>
   </PropertyGroup>
 
   <ItemGroup>
