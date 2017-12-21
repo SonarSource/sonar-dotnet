@@ -27,9 +27,9 @@
     <DefineConstants>TRACE;DEBUG</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <AppConfig>app.Classic.config</AppConfig>
-    <OutputPath>bin\Classic\Debug\</OutputPath>
-    <IntermediateOutputPath>obj\Classic</IntermediateOutputPath>
+    <AppConfig>app.config</AppConfig>
+    <OutputPath>bin\Debug\</OutputPath>
+    <IntermediateOutputPath>obj</IntermediateOutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -37,12 +37,12 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <AppConfig>app.Classic.config</AppConfig>
-    <OutputPath>bin\Classic\Release\</OutputPath>
-    <IntermediateOutputPath>obj\Classic</IntermediateOutputPath>
+    <AppConfig>app.config</AppConfig>
+    <OutputPath>bin\Release\</OutputPath>
+    <IntermediateOutputPath>obj</IntermediateOutputPath>
   </PropertyGroup>
   <ItemGroup>
-    <None Include="app.classic.config" />
+    <None Include="app.config" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Castle.Core, Version=4.1.1.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">

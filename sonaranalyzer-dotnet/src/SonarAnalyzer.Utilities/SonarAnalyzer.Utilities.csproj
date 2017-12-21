@@ -4,7 +4,7 @@
     <TargetFramework>net46</TargetFramework>
     <AssemblyName>SonarAnalyzer.Utilities</AssemblyName>
     <RootNamespace>SonarAnalyzer</RootNamespace>
-    <AppConfig>app.classic.config</AppConfig>
+    <AppConfig>app.config</AppConfig>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
 
@@ -16,7 +16,7 @@
 
   <ItemGroup>
     <None Remove="*.config" />
-    <None Include="app.classic.config" />
+    <None Include="app.config" />
   </ItemGroup>
 
   <ItemGroup>

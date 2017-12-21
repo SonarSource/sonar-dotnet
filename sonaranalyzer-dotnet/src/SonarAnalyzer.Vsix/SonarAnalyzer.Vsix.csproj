@@ -40,7 +40,7 @@
     <WarningLevel>4</WarningLevel>
     <CreateVsixContainer>True</CreateVsixContainer>
     <DeployExtension>True</DeployExtension>
-    <AppConfig>app.classic.config</AppConfig>
+    <AppConfig>app.config</AppConfig>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -48,10 +48,10 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <AppConfig>app.classic.config</AppConfig>
+    <AppConfig>app.config</AppConfig>
   </PropertyGroup>
   <ItemGroup>
-    <None Include="app.classic.config" />
+    <None Include="app.config" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.SonarAnalyzer.Vsix.config" />
@@ -66,10 +66,7 @@
     <None Include="tools-cs\uninstall.ps1" />
     <None Include="tools-vbnet\install.ps1" />
     <None Include="tools-vbnet\uninstall.ps1" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\VsixManifests\Classic\source.extension.vsixmanifest">
-      <Link>source.extension.vsixmanifest</Link>
+    <None Include="source.extension.vsixmanifest">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
