@@ -7,17 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <AssemblyVersion Include="$(SolutionRoot)\src\AssemblyInfo.Shared.cs">
+    <AssemblyVersion Include="$(SolutionRoot)\AssemblyInfo.Shared.cs">
       <Find>(?&lt;=\[assembly\: AssemblyVersion\(")([^"]*)</Find>
       <ReplaceWith>$(AssemblyVersion)</ReplaceWith>
       <ExpectedMatchCount>1</ExpectedMatchCount>
     </AssemblyVersion>
-    <AssemblyFileVersion Include="$(SolutionRoot)\src\AssemblyInfo.Shared.cs">
+    <AssemblyFileVersion Include="$(SolutionRoot)\AssemblyInfo.Shared.cs">
       <Find>(?&lt;=\[assembly\: AssemblyFileVersion\(")([^"]*)</Find>
       <ReplaceWith>$(AssemblyFileVersion)</ReplaceWith>
       <ExpectedMatchCount>1</ExpectedMatchCount>
     </AssemblyFileVersion>
-    <AssemblyInformationalVersion Include="$(SolutionRoot)\src\AssemblyInfo.Shared.cs">
+    <AssemblyInformationalVersion Include="$(SolutionRoot)\AssemblyInfo.Shared.cs">
       <Find>(?&lt;=\[assembly\: AssemblyInformationalVersion\(")([^"]*)</Find>
       <ReplaceWith>$(AssemblyInformationalVersion)</ReplaceWith>
       <ExpectedMatchCount>1</ExpectedMatchCount>
