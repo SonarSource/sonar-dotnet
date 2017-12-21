@@ -18,7 +18,28 @@ For reference, the possible headings are:
 ## [6.8]()
 
 ### Notes
-* [All commits](https://github.com/SonarSource/sonar-csharp/compare/6.7.0.4267...HEAD)
+* [All commits](https://github.com/SonarSource/sonar-csharp/compare/6.7.1.4347...HEAD)
+
+
+## [6.7.1](https://github.com/SonarSource/sonar-csharp/releases/tag/6.7.1.4347)
+
+### Bug
+* [#992](https://github.com/SonarSource/sonar-csharp/issues/992) - Fix S3532: default clauses with comments should not be reported
+* [#1002](https://github.com/SonarSource/sonar-csharp/issues/1002) - Fix S4158: "Empty Collections Should Not Be Enumerated" should not throw InvalidOperationException
+* [#1003](https://github.com/SonarSource/sonar-csharp/issues/1003) - Fix S3237: Rule should not throw NullReferenceException when using expression body accessor
+* [#1006](https://github.com/SonarSource/sonar-csharp/issues/1006) - Fix S101: Rule should not throw IndexOutOfRangeException
+* [#1009](https://github.com/SonarSource/sonar-csharp/issues/1009) - Fix S2933: Code Fix should handle regions
+
+### False Positive
+* [#888](https://github.com/SonarSource/sonar-csharp/issues/888) - Fix S1144: False positive on async Main
+* [#1010](https://github.com/SonarSource/sonar-csharp/issues/1010) - Fix S2187: rule should not warn on MSTest when using DataTestMethodAttribute
+* [#1015](https://github.com/SonarSource/sonar-csharp/issues/1015) - Fix S107: "Methods with too many parameters" should not raise on constructors calling base
+* [#1024](https://github.com/SonarSource/sonar-csharp/issues/1024) - Fix S1172: Rule should also ignore the new Main syntax
+
+### Improvement
+* [#1004](https://github.com/SonarSource/sonar-csharp/issues/1004) - Support syntax highlighting for multi-targetting projects that use conditional compilation
+* [#1014](https://github.com/SonarSource/sonar-csharp/issues/1014) - Support symbol highlighting for multi-targetting projects that use conditional compilation
+
 
 
 ## [6.7](https://github.com/SonarSource/sonar-csharp/releases/tag/6.7.0.4267)
