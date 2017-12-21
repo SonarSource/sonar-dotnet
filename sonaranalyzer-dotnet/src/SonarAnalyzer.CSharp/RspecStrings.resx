@@ -712,7 +712,7 @@
     <value>CODE_SMELL</value>
   </data>
   <data name="S113_Category" xml:space="preserve">
-    <value>Sonar Code Smell</value>
+    <value>Minor Code Smell</value>
   </data>
   <data name="S113_Description" xml:space="preserve">
     <value>Some tools work better when files end with an empty line.</value>
@@ -2230,7 +2230,7 @@
     <value>Critical</value>
   </data>
   <data name="S2070_Tags" xml:space="preserve">
-    <value>cwe,owasp-a6,sans-top25-porous</value>
+    <value>cwe,sans-top25-porous,owasp-a3</value>
   </data>
   <data name="S2070_Title" xml:space="preserve">
     <value>SHA-1 and Message-Digest hash algorithms should not be used</value>
@@ -2323,7 +2323,7 @@
     <value>Blocker Code Smell</value>
   </data>
   <data name="S2178_Description" xml:space="preserve">
-    <value>The use of non-short-circuit logic in a boolean context is likely a mistake - one that could cause serious program errors as conditions are evaluated under the wrong circumstances.</value>
+    <value>The use of non-short-circuit logic in a boolean context is likely a mistake - one that could cause serious program errors as conditions are evaluated under the wrong circumstances. </value>
   </data>
   <data name="S2178_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -2635,7 +2635,7 @@
     <value>Minor</value>
   </data>
   <data name="S2228_Tags" xml:space="preserve">
-    <value>owasp-a6</value>
+    <value>owasp-a3</value>
   </data>
   <data name="S2228_Title" xml:space="preserve">
     <value>Console logging should not be used</value>
@@ -2743,7 +2743,7 @@
     <value>Blocker</value>
   </data>
   <data name="S2278_Tags" xml:space="preserve">
-    <value>cwe,cert,owasp-a6,sans-top25-porous</value>
+    <value>cwe,cert,sans-top25-porous,owasp-a3</value>
   </data>
   <data name="S2278_Title" xml:space="preserve">
     <value>Neither DES (Data Encryption Standard) nor DESede (3DES) should be used</value>
@@ -3418,7 +3418,7 @@
     <value>Minor</value>
   </data>
   <data name="S2486_Tags" xml:space="preserve">
-    <value>cwe,error-handling,suspicious</value>
+    <value>cwe,error-handling,owasp-a10,suspicious</value>
   </data>
   <data name="S2486_Title" xml:space="preserve">
     <value>Generic exceptions should not be ignored</value>
@@ -6031,7 +6031,7 @@
     <value>Critical</value>
   </data>
   <data name="S3871_Tags" xml:space="preserve">
-    <value>error-handling,api-design</value>
+    <value>error-handling,api-design,owasp-a10</value>
   </data>
   <data name="S3871_Title" xml:space="preserve">
     <value>Exception types should be "public"</value>

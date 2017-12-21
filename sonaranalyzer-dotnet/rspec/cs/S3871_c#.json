@@ -8,7 +8,8 @@
   },
   "tags": [
     "error-handling",
-    "api-design"
+    "api-design",
+    "owasp-a10"
   ],
   "defaultSeverity": "Critical",
   "ruleSpecification": "RSPEC-3871",
