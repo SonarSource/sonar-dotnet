@@ -19,7 +19,7 @@
  */
 
 using Microsoft.CodeAnalysis;
-using SonarAnalyzer.Common;
+using SonarAnalyzer;
 using SonarAnalyzer.Helpers;
 using System.Collections.Immutable;
 

@@ -18,7 +18,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SonarQube Integration", "So
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SonarAnalyzer.Vsix.VS2015", "src\SonarAnalyzer.Vsix\SonarAnalyzer.Vsix.VS2015.csproj", "{9D2DF65B-8BB4-4F85-8B71-C4B636513EF3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SonarAnalyzer.Common.VS2015", "src\SonarAnalyzer.Common\SonarAnalyzer.Common.VS2015.csproj", "{D1AE804F-AE78-4883-B3D6-9E3C4026DEF6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SonarAnalyzer.VS2015", "src\SonarAnalyzer\SonarAnalyzer.VS2015.csproj", "{D1AE804F-AE78-4883-B3D6-9E3C4026DEF6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SonarAnalyzer.Utilities.VS2015", "src\SonarAnalyzer.Utilities\SonarAnalyzer.Utilities.VS2015.csproj", "{4C1BB6CE-645F-400B-B491-AF7BB40E5C01}"
 EndProject

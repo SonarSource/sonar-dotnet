@@ -128,7 +128,7 @@ function Invoke-UnitTests([string]$binPath, [bool]$failsIfNotTest) {
     Write-Debug "Running unit tests for"
     $testFiles = @()
     $testDirs = @()
-    Get-ChildItem ".\src" -Recurse -Include "*.UnitTest.dll" `
+    Get-ChildItem ".\tests" -Recurse -Include "*.UnitTest.dll" `
         | Where-Object { $_.DirectoryName -Match $escapedPath } `
         | ForEach-Object {
             $currentFile = $_

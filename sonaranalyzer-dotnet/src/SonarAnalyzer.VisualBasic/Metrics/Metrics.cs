@@ -26,7 +26,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 
-namespace SonarAnalyzer.Common.VisualBasic
+namespace SonarAnalyzer.VisualBasic
 {
     public sealed class Metrics : MetricsBase
     {

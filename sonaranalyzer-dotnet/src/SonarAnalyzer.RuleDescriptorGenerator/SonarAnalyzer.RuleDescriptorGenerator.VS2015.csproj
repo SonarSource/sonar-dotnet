@@ -20,7 +20,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SonarAnalyzer.Common\SonarAnalyzer.Common.VS2015.csproj" />
+    <ProjectReference Include="..\SonarAnalyzer\SonarAnalyzer.VS2015.csproj" />
     <ProjectReference Include="..\SonarAnalyzer.Utilities\SonarAnalyzer.Utilities.VS2015.csproj" />
   </ItemGroup>
 

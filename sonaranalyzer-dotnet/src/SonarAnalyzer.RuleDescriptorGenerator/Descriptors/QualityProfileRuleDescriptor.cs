@@ -19,7 +19,7 @@
  */
 
 using System.Xml.Serialization;
-using SonarAnalyzer.Common;
+using SonarAnalyzer;
 
 namespace SonarAnalyzer.RuleDescriptorGenerator
 {

@@ -24,7 +24,7 @@ using System.Linq;
 using System.Reflection;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
-using SonarAnalyzer.Common;
+using SonarAnalyzer;
 
 namespace SonarAnalyzer.Utilities
 {

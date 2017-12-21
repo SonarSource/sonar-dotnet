@@ -24,7 +24,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using Newtonsoft.Json;
-using SonarAnalyzer.Common;
+using SonarAnalyzer;
 using SonarAnalyzer.RuleDescriptors;
 
 namespace SonarAnalyzer.RuleDocGenerator

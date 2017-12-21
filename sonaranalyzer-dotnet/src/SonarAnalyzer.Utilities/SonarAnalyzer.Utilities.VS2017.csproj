@@ -19,7 +19,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SonarAnalyzer.Common\SonarAnalyzer.Common.VS2017.csproj" />
+    <ProjectReference Include="..\SonarAnalyzer\SonarAnalyzer.VS2017.csproj" />
     <ProjectReference Include="..\SonarAnalyzer.CSharp\SonarAnalyzer.CSharp.VS2017.csproj" />
     <ProjectReference Include="..\SonarAnalyzer.VisualBasic\SonarAnalyzer.VisualBasic.VS2017.csproj" />
   </ItemGroup>

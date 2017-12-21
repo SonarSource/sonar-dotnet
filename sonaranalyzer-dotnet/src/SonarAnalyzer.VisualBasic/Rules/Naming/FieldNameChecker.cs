@@ -23,14 +23,14 @@ using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
-using SonarAnalyzer.Common;
+using SonarAnalyzer;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules.VisualBasic
 {
     public abstract class FieldNameChecker : ParameterLoadingDiagnosticAnalyzer
     {
-        internal const string Category = SonarAnalyzer.Common.Category.Maintainability;
+        internal const string Category = SonarAnalyzer.Category.Maintainability;
         internal const Severity RuleSeverity = Severity.Minor;
         internal const bool IsActivatedByDefault = false;
 

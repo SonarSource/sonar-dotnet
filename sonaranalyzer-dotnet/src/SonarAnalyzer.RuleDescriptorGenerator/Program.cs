@@ -25,7 +25,7 @@ using System.Linq;
 using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
-using SonarAnalyzer.Common;
+using SonarAnalyzer;
 using SonarAnalyzer.Utilities;
 
 namespace SonarAnalyzer.RuleDescriptorGenerator
