@@ -53,4 +53,18 @@ namespace Tests.Diagnostics
     internal class Cl : List<object>
     {
     }
+
+    public class Lambdas
+    {
+        public void Foo(List<int> list)
+        {
+            list.Select(item => 1);
+
+            list.Select(item =>
+                {
+                    var value = 1; // Noncompliant
+                    return item;
+                });
+        }
+    }
 }
