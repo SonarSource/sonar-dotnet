@@ -77,6 +77,11 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSymbolAction(
                 c =>
                 {
+                    if (c.Compilation.IsTest())
+                    {
+                        return;
+                    }
+
                     var namedType = (INamedTypeSymbol)c.Symbol;
                     if (namedType.ContainingType != null ||
                         !namedType.IsClassOrStruct())
@@ -303,7 +308,8 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             var type = semanticModel.GetTypeInfo(expression).Type;
-            if (!type.IsAny(TrackedTypes))
+
+            if (!type.Implements(KnownType.System_IDisposable))
             {
                 return false;
             }
