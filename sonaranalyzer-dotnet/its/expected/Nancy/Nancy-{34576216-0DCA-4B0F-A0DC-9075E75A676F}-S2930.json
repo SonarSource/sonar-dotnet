@@ -1,0 +1,173 @@
+{
+"issues":  [
+{
+"id":  "S2930",
+"message":  "'Dispose' of 'hmacGenerator'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Cryptography\DefaultHmacProvider.cs",
+"region":  {
+"startLine":  60,
+"startColumn":  17,
+"endLine":  60,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S2930",
+"message":  "'Dispose' of 'provider'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Cryptography\PassphraseKeyGenerator.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  13,
+"endLine":  31,
+"endColumn":  81
+}
+}
+},
+{
+"id":  "S2930",
+"message":  "'Dispose' of 'provider'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Cryptography\RandomKeyGenerator.cs",
+"region":  {
+"startLine":  10,
+"startColumn":  51,
+"endLine":  10,
+"endColumn":  92
+}
+}
+},
+{
+"id":  "S2930",
+"message":  "'Dispose' of 'provider'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\DiagnosticsSession.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  17,
+"endLine":  18,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S2930",
+"message":  "'Dispose' of 'algorithm'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\DiagnosticsSession.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  17,
+"endLine":  28,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S2930",
+"message":  "'Dispose' of 'view'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\DiagnosticsViewRenderer.cs",
+"region":  {
+"startLine":  72,
+"startColumn":  17,
+"endLine":  72,
+"endColumn":  123
+}
+}
+},
+{
+"id":  "S2930",
+"message":  "'Dispose' of 'result'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"region":  {
+"startLine":  360,
+"startColumn":  26,
+"endLine":  360,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S2930",
+"message":  "'Dispose' of 'engineDisposedCts'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\NancyEngine.cs",
+"region":  {
+"startLine":  86,
+"startColumn":  13,
+"endLine":  86,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S2930",
+"message":  "'Dispose' of 'randomGenerator'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Security\CsrfTokenExtensions.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  55,
+"endLine":  11,
+"endColumn":  103
+}
+}
+},
+{
+"id":  "S2930",
+"message":  "'Dispose' of '_padlock'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  92,
+"startColumn":  47,
+"endLine":  92,
+"endColumn":  84
+}
+}
+},
+{
+"id":  "S2930",
+"message":  "'Dispose' of '_genericMethodCache'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  319,
+"startColumn":  13,
+"endLine":  319,
+"endColumn":  90
+}
+}
+},
+{
+"id":  "S2930",
+"message":  "'Dispose' of '_ObjectConstructorCache'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3063,
+"startColumn":  84,
+"endLine":  3063,
+"endColumn":  166
+}
+}
+},
+{
+"id":  "S2930",
+"message":  "'Dispose' of 'padlock'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\DefaultViewLocator.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  47,
+"endLine":  20,
+"endColumn":  83
+}
+}
+}
+]
+}

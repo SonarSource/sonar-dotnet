@@ -1,9 +1,15 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Net;
 using System.Net.Sockets;
 
 namespace Tests.Diagnostics
 {
+    public class MyDisposable : IDisposable
+    {
+        public void Dispose() { }
+    }
+
     public class DisposableNotDisposed
     {
         private FileStream field_fs1; // Compliant - not instantiated
@@ -19,6 +25,7 @@ namespace Tests.Diagnostics
         private FileStream field_fs10 = new FileStream(@"c:\foo.txt", FileMode.Open); // Compliant - aliased in constructor initializer
 
         private TcpListener listener = new TcpListener(9000); // Compliant, not IDisposable
+        private MyDisposable myDisposable = new MyDisposable(); // Noncompliant
 
         private class InnerClass
         {
@@ -113,5 +120,12 @@ namespace Tests.Diagnostics
         {
             // do nothing
         }
+
+        private void ReturningDisposable()
+        {
+            var myDisposable = new MyDisposable(); // Compliant - returning disposable
+            return myDisposable;
+        }
+
     }
 }
