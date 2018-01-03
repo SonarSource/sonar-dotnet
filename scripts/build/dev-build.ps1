@@ -7,7 +7,7 @@ This script controls the analyzer build process (from buildling to creating the 
 Usage: build.ps1
     Steps
         -restore            Restore packages
-        -build              Build the analyzer solution (based on analyzerKind)
+        -build              Build the analyzer solution
         -buildJava          Build the plugin (java)
         -coverage           Compute the code coverage of the analyzer
         -metadata           Create the metadata used by the plugin
@@ -20,7 +20,6 @@ Usage: build.ps1
 
     Special options
         -release            Perform release build (default is debug)
-        -analyzerKind       The kind of analyzer to build: Classic, VS2015 or VS2017 (default is Classic)
 
 #>
 
@@ -40,8 +39,7 @@ param (
     [switch]$itsJava = $false,
 
     # Build output options
-    [switch]$release = $false,
-    [ValidateSet("Classic", "VS2015", "VS2017")][string]$analyzerKind = "Classic"
+    [switch]$release = $false
 )
 
 Set-StrictMode -version 2.0
@@ -57,13 +55,8 @@ try {
 
     Write-Header "Script configuration"
     $buildConfiguration = if ($release) { "Release" } else { "Debug" }
-    $binPath = "bin\${analyzerKind}\${buildConfiguration}"
-    $solutionName =
-        switch ($analyzerKind) {
-            "Classic" { "SonarAnalyzer.sln" }
-            "VS2015" { "SonarAnalyzer.VS2015.sln" }
-            "VS2017" { "SonarAnalyzer.VS2017.sln" }
-        }
+    $binPath = "bin\${buildConfiguration}"
+    $solutionName = "SonarAnalyzer.sln"
     $msbuildVersion = "15.0"
 
     Write-Host "Solution to build: $solutionName"

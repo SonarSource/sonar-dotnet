@@ -20,7 +20,7 @@
 
 using System.Globalization;
 using System.Text.RegularExpressions;
-using SonarAnalyzer.Common;
+using SonarAnalyzer;
 
 namespace SonarAnalyzer.Helpers
 {

@@ -25,7 +25,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Resources;
-using SonarAnalyzer.Common;
+using SonarAnalyzer;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.RuleDescriptors;
 

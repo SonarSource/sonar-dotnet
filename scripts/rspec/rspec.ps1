@@ -233,7 +233,7 @@ function GenerateCsRuleClasses() {
 function GenerateVbRuleClasses($language) {
     $vbRulesFolder         = "${sonaranalyzerPath}\\src\\SonarAnalyzer.VisualBasic\\Rules"
     $csRulesFolder         = "${sonaranalyzerPath}\\src\\SonarAnalyzer.CSharp\\Rules"
-    $commonRulesFolder     = "${sonaranalyzerPath}\\src\\SonarAnalyzer.Common\\Rules"
+    $commonRulesFolder     = "${sonaranalyzerPath}\\src\\SonarAnalyzer\\Rules"
     $ruleTestsFolder       = "${sonaranalyzerPath}\\src\\Tests\\SonarAnalyzer.UnitTest\\Rules"
     $vbRuleTestCasesFolder = "${sonaranalyzerPath}\\src\\Tests\\SonarAnalyzer.UnitTest\\TestCases"
 

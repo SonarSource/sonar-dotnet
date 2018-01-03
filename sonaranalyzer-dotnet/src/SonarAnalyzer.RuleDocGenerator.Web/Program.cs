@@ -23,7 +23,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using Newtonsoft.Json;
-using SonarAnalyzer.Common;
+using SonarAnalyzer;
 using SonarAnalyzer.Utilities;
 
 namespace SonarAnalyzer.RuleDocGenerator
