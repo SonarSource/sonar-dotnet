@@ -1,0 +1,121 @@
+{
+"issues":  [
+{
+"id":  "S2930",
+"message":  "'Dispose' of 'cancellationSource'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Futures.cs",
+"region":  {
+"startLine":  73,
+"startColumn":  21,
+"endLine":  73,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S2930",
+"message":  "'Dispose' of 'cancellationSource'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\GracefulStopSupport.cs",
+"region":  {
+"startLine":  51,
+"startColumn":  17,
+"endLine":  51,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S2930",
+"message":  "'Dispose' of 't'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\Dispatchers.cs",
+"region":  {
+"startLine":  99,
+"startColumn":  17,
+"endLine":  99,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2930",
+"message":  "'Dispose' of '_dedicatedThreadPool'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\ForkJoinDispatcher.cs",
+"region":  {
+"startLine":  67,
+"startColumn":  13,
+"endLine":  67,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S2930",
+"message":  "'Dispose' of '_queue'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\MessageQueues\BoundedMessageQueue.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  13,
+"endLine":  22,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S2930",
+"message":  "'Dispose' of '_queue'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\MessageQueues\BoundedMessageQueue.cs",
+"region":  {
+"startLine":  38,
+"startColumn":  17,
+"endLine":  38,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S2930",
+"message":  "'Dispose' of '_queue'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\MessageQueues\BoundedMessageQueue.cs",
+"region":  {
+"startLine":  42,
+"startColumn":  17,
+"endLine":  42,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S2930",
+"message":  "'Dispose' of '_queue'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\SelectionHandler.cs",
+"region":  {
+"startLine":  404,
+"startColumn":  53,
+"endLine":  404,
+"endColumn":  94
+}
+}
+},
+{
+"id":  "S2930",
+"message":  "'Dispose' of '_rng'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\ThreadLocalRandom.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  44,
+"endLine":  22,
+"endColumn":  126
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2930",
+"message":  "'Dispose' of 'listener'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Hosting.Self\NancyHost.cs",
+"region":  {
+"startLine":  173,
+"startColumn":  17,
+"endLine":  173,
+"endColumn":  51
+}
+}
+}
+]
+}

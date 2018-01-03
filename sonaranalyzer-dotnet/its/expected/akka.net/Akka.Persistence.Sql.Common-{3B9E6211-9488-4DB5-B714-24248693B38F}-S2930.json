@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S2930",
+"message":  "'Dispose' of '_pendingRequestsCancellation'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\JournalDbEngine.cs",
+"region":  {
+"startLine":  71,
+"startColumn":  13,
+"endLine":  71,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S2930",
+"message":  "'Dispose' of '_pendingRequestsCancellation'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Snapshot\SqlSnapshotStore.cs",
+"region":  {
+"startLine":  30,
+"startColumn":  13,
+"endLine":  30,
+"endColumn":  73
+}
+}
+}
+]
+}
