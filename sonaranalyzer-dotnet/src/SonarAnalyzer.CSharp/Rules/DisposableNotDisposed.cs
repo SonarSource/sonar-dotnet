@@ -43,19 +43,6 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        private static readonly ISet<KnownType> TrackedTypes = ImmutableHashSet.Create(
-            KnownType.System_IO_FileStream,
-            KnownType.System_IO_StreamReader,
-            KnownType.System_IO_StreamWriter,
-
-            KnownType.System_Net_WebClient,
-
-            KnownType.System_Net_Sockets_TcpClient,
-            KnownType.System_Net_Sockets_UdpClient,
-
-            KnownType.System_Drawing_Image,
-            KnownType.System_Drawing_Bitmap);
-
         private static readonly ISet<string> DisposeMethods = ImmutableHashSet.Create(
             "Dispose",
             "Close");
