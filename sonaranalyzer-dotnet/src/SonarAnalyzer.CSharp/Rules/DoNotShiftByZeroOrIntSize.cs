@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2017 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
@@ -26,7 +28,6 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
-using System.Collections.Generic;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -39,6 +40,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string MessageFormat_UseLargerTypeOrPromote
             = "Either promote shift target to a larger integer type or shift by {0} instead.";
         private const string MessageFormat_ShiftTooLarge = "Correct this shift; shift by {0} instead.";
+        private const string MessageFormat_RightShiftTooLarge = "Correct this shift; '{0}' is larger than the type size.";
         private const string MessageFormat_UselessShift = "Remove this useless shift by {0}.";
 
         private static readonly DiagnosticDescriptor rule =
@@ -66,19 +68,70 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
-                    var right = (c.Node as BinaryExpressionSyntax)?.Right
-                                ?? (c.Node as AssignmentExpressionSyntax)?.Right;
+                    var shiftInstances = (c.Node as MemberDeclarationSyntax)
+                        .DescendantNodes()
+                        .Select(n => FindIssues(n, c.SemanticModel))
+                        .WhereNotNull();
 
-                    if (!TryGetConstantValue(right, out var shiftByCount))
+                    var zeroShiftIssues = new List<ShiftInstance>();
+                    var linesWithShiftOperations = new HashSet<int>();
+
+                    foreach (var shift in shiftInstances)
                     {
-                        return;
+                        if (shift.IsLiteralZero)
+                        {
+                            zeroShiftIssues.Add(shift);
+                            continue;
+                        }
+
+                        linesWithShiftOperations.Add(shift.Line);
+                        if (shift.Diagnostic != null)
+                        {
+                            c.ReportDiagnosticWhenActive(shift.Diagnostic);
+                        }
                     }
 
-                    var typeInfo = c.SemanticModel.GetTypeInfo(c.Node);
-                    ReportProblems(typeInfo.ConvertedType, shiftByCount, c.Node.GetLocation(), c);
+                    foreach (var issue in zeroShiftIssues)
+                    {
+                        if (!linesWithShiftOperations.Contains(issue.Line - 2) &&
+                            !linesWithShiftOperations.Contains(issue.Line - 1) &&
+                            !linesWithShiftOperations.Contains(issue.Line) &&
+                            !linesWithShiftOperations.Contains(issue.Line + 1) &&
+                            !linesWithShiftOperations.Contains(issue.Line + 2))
+                        {
+                            c.ReportDiagnosticWhenActive(issue.Diagnostic);
+                        }
+                    }
                 },
-                SyntaxKind.LeftShiftExpression,
-                SyntaxKind.LeftShiftAssignmentExpression);
+                SyntaxKind.MethodDeclaration,
+                SyntaxKind.PropertyDeclaration);
+        }
+
+        private static Tuple<bool, ExpressionSyntax> GetRhsArgumentOfShiftNode(SyntaxNode node)
+        {
+            var binaryExpression = node as BinaryExpressionSyntax;
+            if (binaryExpression?.OperatorToken.IsKind(SyntaxKind.LessThanLessThanToken) ?? false)
+            {
+                return new Tuple<bool, ExpressionSyntax>(true, binaryExpression.Right);
+            }
+
+            if (binaryExpression?.OperatorToken.IsKind(SyntaxKind.GreaterThanGreaterThanToken) ?? false)
+            {
+                return new Tuple<bool, ExpressionSyntax>(false, binaryExpression.Right);
+            }
+
+            var assignmentExpession = node as AssignmentExpressionSyntax;
+            if (assignmentExpession?.OperatorToken.IsKind(SyntaxKind.LessThanLessThanEqualsToken) ?? false)
+            {
+                return new Tuple<bool, ExpressionSyntax>(true, assignmentExpession.Right);
+            }
+
+            if (assignmentExpession?.OperatorToken.IsKind(SyntaxKind.GreaterThanGreaterThanEqualsToken) ?? false)
+            {
+                return new Tuple<bool, ExpressionSyntax>(false, assignmentExpession.Right);
+            }
+
+            return null;
         }
 
         private static bool TryGetConstantValue(ExpressionSyntax expression, out int value)
@@ -89,25 +142,33 @@ namespace SonarAnalyzer.Rules.CSharp
                 int.TryParse(literalExpression.Token.ValueText, out value);
         }
 
-        private static void ReportProblems(ITypeSymbol typeSymbol, int shiftByCount,
-            Location location, SyntaxNodeAnalysisContext context)
+        private static ShiftInstance FindIssues(SyntaxNode node, SemanticModel semanticModel)
         {
+            var tuple = GetRhsArgumentOfShiftNode(node);
+            if (tuple == null)
+            {
+                return null;
+            }
+
+            if (!TryGetConstantValue(tuple.Item2, out var shiftByCount))
+            {
+                return new ShiftInstance(node);
+            }
+
+            var typeSymbol = semanticModel.GetTypeInfo(node).ConvertedType;
             if (typeSymbol == null)
             {
-                return;
+                return new ShiftInstance(node);
             }
 
             var variableBitLength = FindTypeSizeOrDefault(typeSymbol);
             if (variableBitLength == 0)
             {
-                return;
+                return new ShiftInstance(node);
             }
 
-            var issueDescription = FindProblemDescription(variableBitLength, shiftByCount);
-            if (issueDescription != null)
-            {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, location, issueDescription));
-            }
+            var issueDescription = FindProblemDescription(variableBitLength, shiftByCount, tuple.Item1, out bool isLiteralZero);
+            return issueDescription == null ? new ShiftInstance(node) : new ShiftInstance(issueDescription, isLiteralZero, node);
         }
 
         private static int FindTypeSizeOrDefault(ITypeSymbol typeSymbol)
@@ -118,16 +179,23 @@ namespace SonarAnalyzer.Rules.CSharp
                 .FirstOrDefault();
         }
 
-        private static string FindProblemDescription(int typeSizeInBits, int shiftBy)
+        private static string FindProblemDescription(int typeSizeInBits, int shiftBy, bool isLeftShift, out bool isLiteralZero)
         {
+            isLiteralZero = false;
             if (shiftBy == 0)
             {
+                isLiteralZero = true;
                 return string.Format(MessageFormat_UselessShift, 0);
             }
 
             if (shiftBy < typeSizeInBits)
             {
                 return null;
+            }
+
+            if (!isLeftShift)
+            {
+                return string.Format(MessageFormat_RightShiftTooLarge, shiftBy);
             }
 
             var shiftSuggestion = shiftBy % typeSizeInBits;
@@ -146,6 +214,25 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             return string.Format(MessageFormat_UseLargerTypeOrPromote, shiftSuggestion);
+        }
+
+        private class ShiftInstance
+        {
+            public Diagnostic Diagnostic { get; }
+            public bool IsLiteralZero { get; }
+            public int Line { get; }
+
+            public ShiftInstance(SyntaxNode node)
+            {
+                Line = node.GetLineNumberToReport();
+            }
+
+            public ShiftInstance(string description, bool isLieralZero, SyntaxNode node)
+                : this(node)
+            {
+                Diagnostic = Diagnostic.Create(rule, node.GetLocation(), description);
+                IsLiteralZero = isLieralZero;
+            }
         }
     }
 }
