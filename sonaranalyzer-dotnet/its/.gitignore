@@ -6,3 +6,6 @@ actual/
 
 # MSBuild & other output
 output/
+
+# Temporary diff folder
+diff/
