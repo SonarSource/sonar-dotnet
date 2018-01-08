@@ -2,7 +2,7 @@
 
 namespace Tests.Diagnostics
 {
-    public partial class ImplementIDisposableCorrectlyPartial : IDisposable // Noncompliant
+    public partial class ImplementIDisposableCorrectlyPartial : IDisposable
     {
         protected virtual void Dispose(bool disposing)
         {
@@ -19,4 +19,3 @@ namespace Tests.Diagnostics
 
 
 
-// Secondary
