@@ -250,7 +250,18 @@ namespace SonarAnalyzer.Rules.CSharp
             HashSet<ISymbol> declaredPrivateSymbols)
         {
             var methodSymbols = declarationCollector.TypeDeclarations
-                .SelectMany(container => container.SyntaxNode.DescendantNodes(RemovableDeclarationCollector.IsNodeContainerTypeDeclaration)
+                .SelectMany(GetMethodsNodesAndModels)
+                .Select(node => node.SemanticModel.GetDeclaredSymbol(node.SyntaxNode) as IMethodSymbol)
+                .Select(symbol => symbol.PartialDefinitionPart ?? symbol)
+                .Where(method => RemovableDeclarationCollector.IsRemovable(method, maxAccessibility));
+
+            declaredPrivateSymbols.UnionWith(methodSymbols);
+        }
+
+        private static IEnumerable<SyntaxNodeSemanticModelTuple<SyntaxNode>> GetMethodsNodesAndModels(
+            SyntaxNodeSemanticModelTuple<BaseTypeDeclarationSyntax> container)
+        {
+            return container.SyntaxNode.DescendantNodes(RemovableDeclarationCollector.IsNodeContainerTypeDeclaration)
                     .Where(node =>
                         node.IsKind(SyntaxKind.MethodDeclaration) ||
                         node.IsKind(SyntaxKind.ConstructorDeclaration))
@@ -258,12 +269,8 @@ namespace SonarAnalyzer.Rules.CSharp
                         new SyntaxNodeSemanticModelTuple<SyntaxNode>
                         {
                             SyntaxNode = node,
-                            SemanticModel = container.SemanticModel
-                        }))
-                    .Select(node => node.SemanticModel.GetDeclaredSymbol(node.SyntaxNode) as IMethodSymbol)
-                    .Where(method => RemovableDeclarationCollector.IsRemovable(method, maxAccessibility));
-
-            declaredPrivateSymbols.UnionWith(methodSymbols);
+                            SemanticModel = container.SemanticModel.GetSyntaxTreeSemanticModel(node)
+                        });
         }
 
         private static void CollectRemovableEventsAndProperties(RemovableDeclarationCollector helper,
