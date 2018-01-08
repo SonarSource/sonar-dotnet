@@ -34,6 +34,16 @@ namespace SonarAnalyzer.UnitTest.Rules
         }
 
         [TestMethod]
+        [TestCategory("Rule")]
+        public void UnusedPrivateMemberWithPartialClasses()
+        {
+            Verifier.VerifyAnalyzer(new[]{
+                    @"TestCases\UnusedPrivateMember.part1.cs",
+                    @"TestCases\UnusedPrivateMember.part2.cs" },
+                new UnusedPrivateMember());
+        }
+
+        [TestMethod]
         [TestCategory("CodeFix")]
         public void UnusedPrivateMember_CodeFix()
         {
