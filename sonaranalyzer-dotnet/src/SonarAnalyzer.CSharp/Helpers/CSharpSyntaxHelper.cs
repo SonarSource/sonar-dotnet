@@ -242,5 +242,42 @@ namespace SonarAnalyzer.Helpers
         {
             return syntaxNode.IsAnyKind(BooleanLiterals);
         }
+
+        /// <summary>
+        /// Determines whether the node is being used as part of an expression tree
+        /// i.e. whether it is part of lamba being assigned to System.Linq.Expressions.Expression[TDelegate].
+        /// This could be a local declaration, an assignment, a field, or a property
+        /// </summary>
+        public static bool IsInExpressionTree(this SyntaxNode node, SemanticModel semanticModel)
+        {
+            // Possible ancestors:
+            // * VariableDeclarationSyntax (for local variable or field),
+            // * PropertyDeclarationSyntax,
+            // * SimpleAssigmentExpression
+
+            var potentialExpressionNode = node.Ancestors().FirstOrDefault(ancestor =>
+                ancestor is VariableDeclarationSyntax ||
+                ancestor is PropertyDeclarationSyntax ||
+                ancestor is AssignmentExpressionSyntax);
+
+            SyntaxNode typeIdentifiedNode = null;
+            switch (potentialExpressionNode)
+            {
+                case VariableDeclarationSyntax varDecl:
+                    typeIdentifiedNode = varDecl.Type;
+                    break;
+                case PropertyDeclarationSyntax propDecl:
+                    typeIdentifiedNode = propDecl.Type;
+                    break;
+                case AssignmentExpressionSyntax assignExpr:
+                    typeIdentifiedNode = assignExpr.Left;
+                    break;
+                default:
+                    return false;
+            }
+
+            return typeIdentifiedNode?.IsKnownType(KnownType.System_Linq_Expressions_Expression_T, semanticModel) ?? false;
+        }
+
     }
 }

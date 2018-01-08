@@ -47,6 +47,12 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
+                    // Can't use optional arguments in expression trees (CS0584), so skip those
+                    if (c.Node.IsInExpressionTree(c.SemanticModel))
+                    {
+                        return;
+                    }
+
                     var methodCall = (InvocationExpressionSyntax) c.Node;
                     var methodParameterLookup = new MethodParameterLookup(methodCall, c.SemanticModel);
                     var argumentMappings = methodParameterLookup.GetAllArgumentParameterMappings()

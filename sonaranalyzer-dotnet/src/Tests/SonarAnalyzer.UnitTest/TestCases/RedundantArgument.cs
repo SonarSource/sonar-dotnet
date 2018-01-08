@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 
 namespace Tests.Diagnostics
 {
@@ -40,6 +41,34 @@ namespace Tests.Diagnostics
 
             M3(1, 4, //Noncompliant
                 7); //Noncompliant
+        }
+    }
+
+    // Issue #789: Cannot use optional arguments when using expression trees (CS0584)
+    public class RedundantArgsInExpressionTrees
+    {
+        private static string FuncWithOptionals(string str = null)
+        {
+            return str;
+        }
+
+        // Field declaration -> variable declaration
+        Func<string> normalField = () => FuncWithOptionals(null); // Noncompliant -- non-expression tree, so can use defaults
+        readonly Expression<Action> expTreeField = () => FuncWithOptionals(null); // Compliant - expression tree, so cannot use defaults
+
+        // Property declaration
+        Func<string> normalProperty => () => FuncWithOptionals(null); // Noncompliant
+        Expression<Action> expTreeProperty => () => FuncWithOptionals(null); // Compliant
+
+        public static void Method1()
+        {
+            // Variable declaration
+            Func<string> var1 = () => FuncWithOptionals(null); // Noncompliant
+            Expression<Action> expTreeVar = () => FuncWithOptionals(null);
+
+            // Simple assigment
+            var1 = () => FuncWithOptionals(null); // Noncompliant
+            expTreeVar = () => FuncWithOptionals(null); // Compliant
         }
     }
 }
