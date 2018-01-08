@@ -63,14 +63,16 @@ namespace SonarAnalyzer.Rules.CSharp
                 [KnownType.System_SByte] = 8
             };
 
+        private enum Shift { Left, Right };
+
         protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
-                    var shiftInstances = (c.Node as MemberDeclarationSyntax)
+                    var shiftInstances = ((MemberDeclarationSyntax)c.Node)
                         .DescendantNodes()
-                        .Select(n => FindIssues(n, c.SemanticModel))
+                        .Select(n => FindShiftInstance(n, c.SemanticModel))
                         .WhereNotNull();
 
                     var zeroShiftIssues = new List<ShiftInstance>();
@@ -91,44 +93,47 @@ namespace SonarAnalyzer.Rules.CSharp
                         }
                     }
 
-                    foreach (var issue in zeroShiftIssues)
-                    {
-                        if (!linesWithShiftOperations.Contains(issue.Line - 2) &&
-                            !linesWithShiftOperations.Contains(issue.Line - 1) &&
-                            !linesWithShiftOperations.Contains(issue.Line) &&
-                            !linesWithShiftOperations.Contains(issue.Line + 1) &&
-                            !linesWithShiftOperations.Contains(issue.Line + 2))
-                        {
-                            c.ReportDiagnosticWhenActive(issue.Diagnostic);
-                        }
-                    }
+                    zeroShiftIssues
+                        .Where(sh => !ContainsShiftExpressionWithinTwoLines(linesWithShiftOperations, sh.Line))
+                        .ToList()
+                        .ForEach(sh => c.ReportDiagnosticWhenActive(sh.Diagnostic));
                 },
                 SyntaxKind.MethodDeclaration,
                 SyntaxKind.PropertyDeclaration);
         }
 
-        private static Tuple<bool, ExpressionSyntax> GetRhsArgumentOfShiftNode(SyntaxNode node)
+        private static bool ContainsShiftExpressionWithinTwoLines(HashSet<int> linesWithShiftOperations,
+            int lineNumber)
+        {
+            return linesWithShiftOperations.Contains(lineNumber - 2) ||
+                   linesWithShiftOperations.Contains(lineNumber - 1) ||
+                   linesWithShiftOperations.Contains(lineNumber)     ||
+                   linesWithShiftOperations.Contains(lineNumber + 1) ||
+                   linesWithShiftOperations.Contains(lineNumber + 2);
+        }
+
+        private static Tuple<Shift, ExpressionSyntax> GetRhsArgumentOfShiftNode(SyntaxNode node)
         {
             var binaryExpression = node as BinaryExpressionSyntax;
             if (binaryExpression?.OperatorToken.IsKind(SyntaxKind.LessThanLessThanToken) ?? false)
             {
-                return new Tuple<bool, ExpressionSyntax>(true, binaryExpression.Right);
+                return new Tuple<Shift, ExpressionSyntax>(Shift.Left, binaryExpression.Right);
             }
 
             if (binaryExpression?.OperatorToken.IsKind(SyntaxKind.GreaterThanGreaterThanToken) ?? false)
             {
-                return new Tuple<bool, ExpressionSyntax>(false, binaryExpression.Right);
+                return new Tuple<Shift, ExpressionSyntax>(Shift.Right, binaryExpression.Right);
             }
 
             var assignmentExpession = node as AssignmentExpressionSyntax;
             if (assignmentExpession?.OperatorToken.IsKind(SyntaxKind.LessThanLessThanEqualsToken) ?? false)
             {
-                return new Tuple<bool, ExpressionSyntax>(true, assignmentExpession.Right);
+                return new Tuple<Shift, ExpressionSyntax>(Shift.Left, assignmentExpession.Right);
             }
 
             if (assignmentExpession?.OperatorToken.IsKind(SyntaxKind.GreaterThanGreaterThanEqualsToken) ?? false)
             {
-                return new Tuple<bool, ExpressionSyntax>(false, assignmentExpession.Right);
+                return new Tuple<Shift, ExpressionSyntax>(Shift.Right, assignmentExpession.Right);
             }
 
             return null;
@@ -139,10 +144,10 @@ namespace SonarAnalyzer.Rules.CSharp
             value = 0;
             var literalExpression = expression?.RemoveParentheses() as LiteralExpressionSyntax;
             return literalExpression != null &&
-                int.TryParse(literalExpression.Token.ValueText, out value);
+                int.TryParse(literalExpression?.Token.ValueText, out value);
         }
 
-        private static ShiftInstance FindIssues(SyntaxNode node, SemanticModel semanticModel)
+        private static ShiftInstance FindShiftInstance(SyntaxNode node, SemanticModel semanticModel)
         {
             var tuple = GetRhsArgumentOfShiftNode(node);
             if (tuple == null)
@@ -179,21 +184,22 @@ namespace SonarAnalyzer.Rules.CSharp
                 .FirstOrDefault();
         }
 
-        private static string FindProblemDescription(int typeSizeInBits, int shiftBy, bool isLeftShift, out bool isLiteralZero)
+        private static string FindProblemDescription(int typeSizeInBits, int shiftBy, Shift shiftDirection, out bool isLiteralZero)
         {
-            isLiteralZero = false;
             if (shiftBy == 0)
             {
                 isLiteralZero = true;
                 return string.Format(MessageFormat_UselessShift, 0);
             }
 
+            isLiteralZero = false;
+
             if (shiftBy < typeSizeInBits)
             {
                 return null;
             }
 
-            if (!isLeftShift)
+            if (shiftDirection == Shift.Right)
             {
                 return string.Format(MessageFormat_RightShiftTooLarge, shiftBy);
             }
