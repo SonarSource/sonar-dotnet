@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2017 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -152,8 +152,10 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (disposedObject != null)
                     {
                         var disposableSymbol = semanticModel.GetSymbolInfo(disposedObject).Symbol;
+
                         if (disposableSymbol is IMethodSymbol ||
-                            disposableSymbol is IParameterSymbol)
+                            // Special case - if the parameter symbol is "this" then resolve it to the containing type
+                            (disposableSymbol is IParameterSymbol parameter && parameter.IsThis))
                         {
                             disposableSymbol = disposableSymbol.ContainingType;
                         }
