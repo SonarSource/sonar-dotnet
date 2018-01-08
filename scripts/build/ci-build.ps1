@@ -235,7 +235,7 @@ function Invoke-DotNetBuild() {
         /p:configuration=$buildConfiguration `
         /p:DeployExtension=false `
         /p:ZipPackageCompressionLevel=normal `
-        /p:defineConstants="SignAssembly ROSLYN_10" `
+        /p:defineConstants="SignAssembly" `
         /p:SignAssembly=true `
         /p:AssemblyOriginatorKeyFile=$certificatePath
 
