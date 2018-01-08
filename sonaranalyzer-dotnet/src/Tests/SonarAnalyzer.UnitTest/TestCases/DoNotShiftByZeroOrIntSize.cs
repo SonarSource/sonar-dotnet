@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 
 namespace Tests.Diagnostics
 {
@@ -10,7 +10,7 @@ namespace Tests.Diagnostics
 //                   ^^^^^^^
             b = 1 << 10; // Noncompliant {{Either promote shift target to a larger integer type or shift by 2 instead.}}
 //              ^^^^^^^
-            b = 1 << 0; // Noncompliant {{Remove this useless shift by 0.}}
+            b = 1 << 0;
 
             sbyte sb = 1 << 10; // Noncompliant
 
@@ -26,8 +26,7 @@ namespace Tests.Diagnostics
             ulong ul = 1 << 64; // Noncompliant
             ul = 1 << 65; // Noncompliant {{Correct this shift; shift by 1 instead.}}
 
-            ul <<= 0; // Noncompliant {{Remove this useless shift by 0.}}
-//          ^^^^^^^^
+            ul <<= 0;
             ul <<= 1025; // Noncompliant {{Correct this shift; shift by 1 instead.}}
 
             b <<= 16; // Noncompliant {{Either promote shift target to a larger integer type or shift by less than 8 instead.}}
@@ -41,7 +40,7 @@ namespace Tests.Diagnostics
                     | (b & 0xff) << 24
                     | (b & 0xff) << 16
                     | (b & 0xff) << 8
-                    | (b & 0xff) << 0; // Noncompliant {{Remove this useless shift by 0.}}
+                    | (b & 0xff) << 0;
         }
 
         private void NonIntegerTypes()
@@ -55,16 +54,67 @@ namespace Tests.Diagnostics
             Single s = 1 << 1024; // Compliant
         }
 
+
+        private int Property
+        {
+            get { return 1 << 0; } // Noncompliant
+            set { int i = 1 << 0; } // Noncompliant
+        }
+
+        private void Lambda()
+        {
+            var x = () => 1 << 0; // Noncompliant
+        }
+
         private void ParanthesesAttack()
         {
             int i;
             i = (1) << 0; // Noncompliant
+
+
             i = (((1))) << 0; // Noncompliant
+
+
             i = 1 << (0); // Noncompliant
+
+
             i = 1 << (((0))); // Noncompliant
+
+
             (((i))) = (((1))) << (((0))); // Noncompliant
 
+
             (((i))) <<= (((0))); // Noncompliant
+        }
+
+        public byte Next() => 1;
+
+        public int GetInt(ByteOrder byteOrder = ByteOrder.BigEndian)
+        {
+            return (short)(((Next() & 0xff) << 24)
+                        | ((Next() & 0xff) << 16)
+                        | ((Next() & 0xff) << 8)
+                        | ((Next() & 0xff) << 0));
+        }
+
+        private int RightShift()
+        {
+            int i = i >> 60; // Noncompliant {{Correct this shift; '60' is larger than the type size.}}
+            i >>= 60; // Noncompliant {{Correct this shift; '60' is larger than the type size.}}
+            int i = i >> 31; // Compliant
+            ulong ul = ul >> 64; // Noncompliant {{Correct this shift; '64' is larger than the type size.}}
+            i = i >> 0; // Compliant
+
+
+            i = i >> 0; // Noncompliant {{Remove this useless shift by 0.}}
+
+
+            ul = ul >> 32; // Compliant
+            ul = ul << 0;  // Compliant
+
+
+            ul = ul << 32; // Compliant
+            ul = ul >> 0;  // Compliant
         }
     }
 }
