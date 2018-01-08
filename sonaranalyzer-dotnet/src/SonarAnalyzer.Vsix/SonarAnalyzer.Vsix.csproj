@@ -74,7 +74,7 @@
     <None Include="tools-vbnet\uninstall.ps1" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\VsixManifests\Classic\source.extension.vsixmanifest">
+    <None Include="source.extension.vsixmanifest">
       <Link>source.extension.vsixmanifest</Link>
       <SubType>Designer</SubType>
     </None>
