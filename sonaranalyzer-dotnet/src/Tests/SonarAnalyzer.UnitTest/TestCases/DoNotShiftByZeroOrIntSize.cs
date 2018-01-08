@@ -111,6 +111,10 @@ namespace Tests.Diagnostics
 
             ul = ul >> 32; // Compliant
             ul = ul << 0;  // Compliant
+
+
+            ul = ul << 32; // Compliant
+            ul = ul >> 0;  // Compliant
         }
     }
 }
