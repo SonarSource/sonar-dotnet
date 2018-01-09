@@ -40,7 +40,6 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
-using SonarAnalyzer.Protobuf;
 using SonarAnalyzer.Rules;
 using SonarAnalyzer.UnitTest.TestFramework;
 using CS = Microsoft.CodeAnalysis.CSharp;
@@ -51,6 +50,8 @@ namespace SonarAnalyzer.UnitTest
     internal static class Verifier
     {
         #region Well known metadata references
+        private const string PackagesFolderRelativePath = @"..\..\..\..\..\packages\";
+
         private static readonly MetadataReference systemAssembly =
             MetadataReference.CreateFromFile(typeof(object).Assembly.Location);
         private static readonly MetadataReference systemLinqAssembly =
@@ -66,11 +67,11 @@ namespace SonarAnalyzer.UnitTest
         internal static readonly MetadataReference MicrosoftVisualStudioTestToolsUnitTestingAssembly =
             MetadataReference.CreateFromFile(typeof(TestMethodAttribute).Assembly.Location);
         internal static readonly MetadataReference XunitCoreAssembly =
-            MetadataReference.CreateFromFile(@"..\..\..\..\..\..\packages\xunit.extensibility.core.2.2.0\lib\netstandard1.1\xunit.core.dll");
+            MetadataReference.CreateFromFile(PackagesFolderRelativePath + @"xunit.extensibility.core.2.2.0\lib\netstandard1.1\xunit.core.dll");
         internal static readonly MetadataReference XunitAssertAssembly =
-            MetadataReference.CreateFromFile(@"..\..\..\..\..\..\packages\xunit.assert.2.2.0\lib\netstandard1.1\xunit.assert.dll");
+            MetadataReference.CreateFromFile(PackagesFolderRelativePath + @"xunit.assert.2.2.0\lib\netstandard1.1\xunit.assert.dll");
         internal static readonly MetadataReference NUnitFrameworkAssembly =
-            MetadataReference.CreateFromFile(@"..\..\..\..\..\..\packages\NUnit.2.6.4\lib\nunit.framework.dll");
+            MetadataReference.CreateFromFile(PackagesFolderRelativePath + @"NUnit.2.6.4\lib\nunit.framework.dll");
         internal static readonly MetadataReference FluentAssertionsAssembly =
             MetadataReference.CreateFromFile(typeof(AssertionExtensions).Assembly.Location);
         internal static readonly MetadataReference FluentAssertionsCoreAssembly =

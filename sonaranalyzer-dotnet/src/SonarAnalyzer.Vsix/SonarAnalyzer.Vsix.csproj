@@ -38,23 +38,25 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CreateVsixContainer>True</CreateVsixContainer>
     <DeployExtension>True</DeployExtension>
-    <AppConfig>app.classic.config</AppConfig>
+    <AppConfig>app.config</AppConfig>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <AppConfig>app.classic.config</AppConfig>
+    <AppConfig>app.config</AppConfig>
   </PropertyGroup>
   <ItemGroup>
-    <None Include="app.classic.config" />
+    <None Include="app.config" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.SonarAnalyzer.Vsix.config" />
@@ -75,7 +77,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="source.extension.vsixmanifest">
-      <Link>source.extension.vsixmanifest</Link>
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>

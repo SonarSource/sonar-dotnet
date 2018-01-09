@@ -5,7 +5,7 @@
     <AssemblyName>SonarAnalyzer.Utilities</AssemblyName>
     <RootNamespace>SonarAnalyzer</RootNamespace>
     <CodeAnalysisRuleSet>..\SonarAnalyzer.ruleset</CodeAnalysisRuleSet>
-    <AppConfig>app.classic.config</AppConfig>
+    <AppConfig>app.config</AppConfig>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
 
@@ -17,7 +17,7 @@
 
   <ItemGroup>
     <None Remove="*.config" />
-    <None Include="app.classic.config" />
+    <None Include="app.config" />
   </ItemGroup>
 
   <ItemGroup>
