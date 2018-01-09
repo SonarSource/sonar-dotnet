@@ -47,28 +47,28 @@ namespace Tests.Diagnostics
     // Issue #789: Cannot use optional arguments when using expression trees (CS0584)
     public class RedundantArgsInExpressionTrees
     {
-        private static string FuncWithOptionals(string str = null)
+        private static string FuncWithOptionals(string str = null, params string[] args)
         {
             return str;
         }
 
         // Field declaration -> variable declaration
-        Func<string> normalField = () => FuncWithOptionals(null); // Noncompliant -- non-expression tree, so can use defaults
-        readonly Expression<Action> expTreeField = () => FuncWithOptionals(null); // Compliant - expression tree, so cannot use defaults
+        Func<string> normalField = () => FuncWithOptionals(null, "111", "222"); //Noncompliant -- non-expression tree, so can use defaults
+        readonly Expression<Action> expTreeField = () => FuncWithOptionals(null); //Compliant - expression tree, so cannot use defaults
 
         // Property declaration
-        Func<string> normalProperty => () => FuncWithOptionals(null); // Noncompliant
-        Expression<Action> expTreeProperty => () => FuncWithOptionals(null); // Compliant
+        Func<string> normalProperty => () => FuncWithOptionals(str: null); //Noncompliant
+        Expression<Action> expTreeProperty => () => FuncWithOptionals(null); //Compliant
 
         public static void Method1()
         {
             // Variable declaration
-            Func<string> var1 = () => FuncWithOptionals(null); // Noncompliant
-            Expression<Action> expTreeVar = () => FuncWithOptionals(null);
+            Func<string> var1 = () => FuncWithOptionals(null); //Noncompliant
+            Expression<Action> expTreeVar = () => FuncWithOptionals(null); //Compliant
 
             // Simple assigment
-            var1 = () => FuncWithOptionals(null); // Noncompliant
-            expTreeVar = () => FuncWithOptionals(null); // Compliant
+            var1 = () => FuncWithOptionals(str: null, args: "123"); //Noncompliant
+            expTreeVar = () => FuncWithOptionals(null); //Compliant
         }
     }
 }
