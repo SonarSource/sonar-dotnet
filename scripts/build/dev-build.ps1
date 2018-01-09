@@ -55,7 +55,7 @@ try {
 
     Write-Header "Script configuration"
     $buildConfiguration = if ($release) { "Release" } else { "Debug" }
-    $binPath = "bin\Classic\${buildConfiguration}"
+    $binPath = "bin\${buildConfiguration}"
     $solutionName = "SonarAnalyzer.sln"
     $msbuildVersion = "15.0"
 

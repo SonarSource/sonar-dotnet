@@ -37,10 +37,12 @@ namespace SonarAnalyzer.UnitTest.ResourceTests
     [TestClass]
     public class GeneratedResourcesTest
     {
+        private const string RspecRelativeFolderPath = @"..\..\..\..\..\rspec\";
+
         [TestMethod]
         public void AnalyzersHaveCorrespondingResource_CS()
         {
-            var rulesFromResources = GetRulesFromResources(@"..\..\..\..\..\..\rspec\cs");
+            var rulesFromResources = GetRulesFromResources(RspecRelativeFolderPath + "cs");
 
             var rulesFromClasses = GetRulesFromClasses(typeof(CSharpSyntaxHelper).Assembly);
 
@@ -50,7 +52,7 @@ namespace SonarAnalyzer.UnitTest.ResourceTests
         [TestMethod]
         public void AnalyzersHaveCorrespondingResource_VB()
         {
-            var rulesFromResources = GetRulesFromResources(@"..\..\..\..\..\..\rspec\vbnet");
+            var rulesFromResources = GetRulesFromResources(RspecRelativeFolderPath + "vbnet");
 
             var rulesFromClasses = GetRulesFromClasses(typeof(VisualBasicSyntaxHelper).Assembly);
 
