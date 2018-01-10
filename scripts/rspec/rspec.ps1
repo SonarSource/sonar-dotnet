@@ -148,7 +148,7 @@ function UpdateTestEntry($rule) {
     }
 
     $fileToEdit = if ($language -eq "cs") {"CsRuleTypeMapping"} else {"VbRuleTypeMapping"}
-    $ruleTypeTestCase = "${sonaranalyzerPath}\\src\\Tests\\SonarAnalyzer.UnitTest\\PackagingTests\\$fileToEdit.cs"
+    $ruleTypeTestCase = "${sonaranalyzerPath}\\tests\\SonarAnalyzer.UnitTest\\PackagingTests\\$fileToEdit.cs"
     $ruleId = $ruleKey.Substring(1)
     (Get-Content "${ruleTypeTestCase}") -replace "//\[`"$ruleId`"\]", "[`"$ruleId`"] = `"$ruleType`"" |
         Set-Content "${ruleTypeTestCase}"
@@ -219,8 +219,8 @@ function CreateStringResources($lang, $rules) {
 
 function GenerateCsRuleClasses() {
     $csharpRulesFolder         = "${sonaranalyzerPath}\\src\\SonarAnalyzer.CSharp\\Rules"
-    $csharpRuleTestsFolder     = "${sonaranalyzerPath}\\src\\Tests\\SonarAnalyzer.UnitTest\\Rules"
-    $csharpRuleTestCasesFolder = "${sonaranalyzerPath}\\src\\Tests\\SonarAnalyzer.UnitTest\\TestCases"
+    $csharpRuleTestsFolder     = "${sonaranalyzerPath}\\tests\\SonarAnalyzer.UnitTest\\Rules"
+    $csharpRuleTestCasesFolder = "${sonaranalyzerPath}\\tests\\SonarAnalyzer.UnitTest\\TestCases"
 
     $filesMap = @{
         "CSharpRuleTemplate.cs"     = "${csharpRulesFolder}\\${className}.cs"
@@ -234,8 +234,8 @@ function GenerateVbRuleClasses($language) {
     $vbRulesFolder         = "${sonaranalyzerPath}\\src\\SonarAnalyzer.VisualBasic\\Rules"
     $csRulesFolder         = "${sonaranalyzerPath}\\src\\SonarAnalyzer.CSharp\\Rules"
     $commonRulesFolder     = "${sonaranalyzerPath}\\src\\SonarAnalyzer.Common\\Rules"
-    $ruleTestsFolder       = "${sonaranalyzerPath}\\src\\Tests\\SonarAnalyzer.UnitTest\\Rules"
-    $vbRuleTestCasesFolder = "${sonaranalyzerPath}\\src\\Tests\\SonarAnalyzer.UnitTest\\TestCases"
+    $ruleTestsFolder       = "${sonaranalyzerPath}\\tests\\SonarAnalyzer.UnitTest\\Rules"
+    $vbRuleTestCasesFolder = "${sonaranalyzerPath}\\tests\\SonarAnalyzer.UnitTest\\TestCases"
 
     $csClassName = FindCsName -csRulesPath $csRulesFolder
 
