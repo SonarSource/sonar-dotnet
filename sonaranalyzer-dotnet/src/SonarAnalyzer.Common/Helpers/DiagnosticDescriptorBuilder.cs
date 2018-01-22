@@ -43,7 +43,7 @@ namespace SonarAnalyzer.Helpers
                 messageFormat,
                 resourceManager.GetString($"{diagnosticId}_Category"),
                 ParseSeverity(resourceManager.GetString($"{diagnosticId}_Severity")).ToDiagnosticSeverity(ideVisibility),
-                bool.Parse(resourceManager.GetString($"{diagnosticId}_IsActivatedByDefault")),
+                isEnabledByDefault: true, // We want to have all rules enabled by default
                 helpLinkUri: GetHelpLink(resourceManager, diagnosticId),
                 description: resourceManager.GetString($"{diagnosticId}_Description"),
                 customTags: ideVisibility.ToCustomTags());
