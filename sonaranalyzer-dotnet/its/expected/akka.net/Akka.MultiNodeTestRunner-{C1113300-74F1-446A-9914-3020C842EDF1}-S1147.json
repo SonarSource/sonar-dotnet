@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1147",
+"message":  "Remove this call to 'Environment.Exit' or ensure it is really required.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner\Program.cs",
+"region":  {
+"startLine":  159,
+"startColumn":  25,
+"endLine":  159,
+"endColumn":  29
+}
+}
+}
+]
+}
