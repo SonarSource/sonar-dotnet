@@ -31,8 +31,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
     public sealed class FileLines : FileLinesBase
     {
         private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager)
-                                       .DisabledByDefault();
+            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         protected override DiagnosticDescriptor Rule => rule;
 
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.VisualBasic.GeneratedCodeRecognizer.Instance;

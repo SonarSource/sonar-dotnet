@@ -37,9 +37,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string MessageFormat = "{2} has {1} parameters, which is greater than the {0} authorized.";
 
         private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager)
-                                       .DisabledByDefault();
-
+            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         private const int DefaultValueMaximum = 7;

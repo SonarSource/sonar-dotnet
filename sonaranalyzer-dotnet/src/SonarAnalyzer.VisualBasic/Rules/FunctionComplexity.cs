@@ -33,9 +33,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
     public sealed class FunctionComplexity : FunctionComplexityBase
     {
         private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager)
-                                       .DisabledByDefault();
-
+            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         protected override DiagnosticDescriptor Rule => rule;
 
         protected override void Initialize(ParameterLoadingAnalysisContext context)
