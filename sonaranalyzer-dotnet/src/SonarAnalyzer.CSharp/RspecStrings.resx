@@ -2230,7 +2230,7 @@
     <value>Critical</value>
   </data>
   <data name="S2070_Tags" xml:space="preserve">
-    <value>cwe,sans-top25-porous,owasp-a3</value>
+    <value>cwe,owasp-a6,sans-top25-porous</value>
   </data>
   <data name="S2070_Title" xml:space="preserve">
     <value>SHA-1 and Message-Digest hash algorithms should not be used</value>
@@ -2635,7 +2635,7 @@
     <value>Minor</value>
   </data>
   <data name="S2228_Tags" xml:space="preserve">
-    <value>owasp-a3</value>
+    <value>owasp-a6</value>
   </data>
   <data name="S2228_Title" xml:space="preserve">
     <value>Console logging should not be used</value>
@@ -2743,7 +2743,7 @@
     <value>Blocker</value>
   </data>
   <data name="S2278_Tags" xml:space="preserve">
-    <value>cwe,cert,sans-top25-porous,owasp-a3</value>
+    <value>cwe,cert,owasp-a6,sans-top25-porous</value>
   </data>
   <data name="S2278_Title" xml:space="preserve">
     <value>Neither DES (Data Encryption Standard) nor DESede (3DES) should be used</value>
@@ -4051,7 +4051,7 @@
     <value>Major Code Smell</value>
   </data>
   <data name="S2971_Description" xml:space="preserve">
-    <value>In the interests of readability, code that can be simplified should be simplified. To that end, there are several ways IEnumerable LINQs can be simplified</value>
+    <value>In the interests of readability, code that can be simplified should be simplified. To that end, there are several ways IEnumerable language integrated queries (LINQ) can be simplified</value>
   </data>
   <data name="S2971_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>

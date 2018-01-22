@@ -7,7 +7,7 @@
     "constantCost": "5min"
   },
   "tags": [
-    "owasp-a3"
+    "owasp-a6"
   ],
   "standards": [
     "OWASP Top Ten"
