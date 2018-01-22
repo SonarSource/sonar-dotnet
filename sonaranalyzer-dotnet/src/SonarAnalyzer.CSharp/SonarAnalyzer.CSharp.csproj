@@ -25,4 +25,8 @@
     <AdditionalFiles Include="..\SonarLint.xml" Link="Properties\SonarLint.xml" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="System.ComponentModel.Composition" />
+  </ItemGroup>
+
 </Project>

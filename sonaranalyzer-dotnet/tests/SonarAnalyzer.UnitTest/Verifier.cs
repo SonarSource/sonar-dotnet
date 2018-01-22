@@ -66,6 +66,8 @@ namespace SonarAnalyzer.UnitTest
             MetadataReference.CreateFromFile(typeof(System.Xml.XmlDocument).Assembly.Location);
         internal static readonly MetadataReference MicrosoftVisualStudioTestToolsUnitTestingAssembly =
             MetadataReference.CreateFromFile(typeof(TestMethodAttribute).Assembly.Location);
+        internal static readonly MetadataReference SystemComponentModelComposition =
+            MetadataReference.CreateFromFile(typeof(System.ComponentModel.Composition.PartCreationPolicyAttribute).Assembly.Location);
         internal static readonly MetadataReference XunitCoreAssembly =
             MetadataReference.CreateFromFile(PackagesFolderRelativePath + @"xunit.extensibility.core.2.2.0\lib\netstandard1.1\xunit.core.dll");
         internal static readonly MetadataReference XunitAssertAssembly =
