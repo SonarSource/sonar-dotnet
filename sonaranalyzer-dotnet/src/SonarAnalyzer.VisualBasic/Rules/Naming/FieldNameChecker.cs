@@ -30,10 +30,6 @@ namespace SonarAnalyzer.Rules.VisualBasic
 {
     public abstract class FieldNameChecker : ParameterLoadingDiagnosticAnalyzer
     {
-        internal const string Category = SonarAnalyzer.Common.Category.Maintainability;
-        internal const Severity RuleSeverity = Severity.Minor;
-        internal const bool IsActivatedByDefault = false;
-
         public virtual string Pattern { get; set; }
 
         protected abstract bool IsCandidateSymbol(IFieldSymbol symbol);
