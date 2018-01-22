@@ -134,6 +134,7 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_Drawing_Image = new KnownType("System.Drawing.Image");
         internal static readonly KnownType System_DuplicateWaitObjectException = new KnownType("System.DuplicateWaitObjectException");
         internal static readonly KnownType System_Enum = new KnownType(SpecialType.System_Enum, "Enum");
+        internal static readonly KnownType System_Environment = new KnownType("System.Environment");
         internal static readonly KnownType System_EventArgs = new KnownType("System.EventArgs");
         internal static readonly KnownType System_EventHandler = new KnownType("System.EventHandler");
         internal static readonly KnownType System_EventHandler_TEventArgs = new KnownType("System.EventHandler<TEventArgs>");
@@ -239,6 +240,7 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_Web_Http_ApiController = new KnownType("System.Web.Http.ApiController");
         internal static readonly KnownType System_Web_Mvc_Controller = new KnownType("System.Web.Mvc.Controller");
         internal static readonly KnownType System_Windows_DependencyObject = new KnownType("System.Windows.DependencyObject");
+        internal static readonly KnownType System_Windows_Forms_Application = new KnownType("System.Windows.Forms.Application");
         internal static readonly KnownType System_Windows_Markup_ConstructorArgumentAttribute = new KnownType("System.Windows.Markup.ConstructorArgumentAttribute");
         internal static readonly KnownType System_Xml_XmlDocument = new KnownType("System.Xml.XmlDocument");
         internal static readonly ISet<KnownType> SystemActionVariants = new HashSet<KnownType>

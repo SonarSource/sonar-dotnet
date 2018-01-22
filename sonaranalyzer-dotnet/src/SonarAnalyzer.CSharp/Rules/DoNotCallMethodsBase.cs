@@ -54,15 +54,14 @@ namespace SonarAnalyzer.Rules
                 return;
             }
 
-            var methodSignature = CheckedMethods.FirstOrDefault(method => method.Name.Equals(identifier.Value.ValueText));
-            if (methodSignature == null)
+            var methodCallSymbol = analysisContext.SemanticModel.GetSymbolInfo(identifier.Value.Parent).Symbol;
+            if (methodCallSymbol == null)
             {
                 return;
             }
 
-            var methodCallSymbol = analysisContext.SemanticModel.GetSymbolInfo(identifier.Value.Parent);
-            if (methodCallSymbol.Symbol == null ||
-                !methodCallSymbol.Symbol.ContainingType.ConstructedFrom.Is(methodSignature.ContainingType))
+            var disallowedMethodSignature = FindDisallowedMethodSignature(identifier.Value, methodCallSymbol);
+            if (disallowedMethodSignature == null)
             {
                 return;
             }
@@ -70,7 +69,7 @@ namespace SonarAnalyzer.Rules
             if (ShouldReportOnMethodCall(invocation, analysisContext.SemanticModel))
             {
                 analysisContext.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, identifier.Value.GetLocation(),
-                    methodSignature.ToShortName()));
+                    disallowedMethodSignature.ToShortName()));
             }
         }
 
@@ -87,6 +86,13 @@ namespace SonarAnalyzer.Rules
             }
 
             return null;
+        }
+
+        private MethodSignature FindDisallowedMethodSignature(SyntaxToken identifier, ISymbol methodCallSymbol)
+        {
+            return CheckedMethods
+                .Where(method => method.Name.Equals(identifier.ValueText))
+                .FirstOrDefault(m => methodCallSymbol.ContainingType.ConstructedFrom.Is(m.ContainingType));
         }
     }
 }

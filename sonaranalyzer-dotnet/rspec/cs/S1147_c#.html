@@ -1,0 +1,11 @@
+<p>Calling <code>Environment.Exit(exitCode)</code> or <code>Application.Exit()</code> terminates the process and returns an exit code to the operating
+system..</p>
+<p>Each of these methods should be used with extreme care, and only when the intent is to stop the whole application.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+Environment.Exit(0);
+Application.Exit();
+</pre>
+<h2>Exceptions</h2>
+<p>These methods are ignored inside <code>Main</code>.</p>
+

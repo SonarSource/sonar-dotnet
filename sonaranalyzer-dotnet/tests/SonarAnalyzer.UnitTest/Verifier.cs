@@ -80,6 +80,8 @@ namespace SonarAnalyzer.UnitTest
             MetadataReference.CreateFromFile(typeof(Microsoft.VisualBasic.Interaction).Assembly.Location);
         internal static readonly MetadataReference SystemXamlAssembly =
             MetadataReference.CreateFromFile(typeof(System.Windows.Markup.ConstructorArgumentAttribute).Assembly.Location);
+        internal static readonly MetadataReference SystemWindowsFormsAssembly =
+            MetadataReference.CreateFromFile(typeof(System.Windows.Forms.Form).Assembly.Location);
         internal static readonly MetadataReference RuntimeSerializationAssembly =
             MetadataReference.CreateFromFile(typeof(System.Runtime.Serialization.DataMemberAttribute).Assembly.Location);
         #endregion
