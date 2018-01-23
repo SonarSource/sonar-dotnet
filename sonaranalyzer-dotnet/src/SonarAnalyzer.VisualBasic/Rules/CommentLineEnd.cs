@@ -37,9 +37,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
         private const string MessageFormat = "Move this trailing comment on the previous empty line.";
 
         private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager)
-                                       .DisabledByDefault();
-
+            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         private const string DefaultPattern = @"^'\s*\S+\s*$";
