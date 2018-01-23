@@ -44,5 +44,18 @@ namespace SonarAnalyzer.UnitTest.Helpers
                 .GetHelpLink(vbnet.SonarAnalyzer.RspecStrings.ResourceManager, "S1234");
             helpLink.Should().Be("https://rules.sonarsource.com/vbnet/RSPEC-1234");
         }
+
+        [TestMethod]
+        public void GetDescriptor_SetsIsEnabledByDefaultToTrue()
+        {
+            DiagnosticDescriptorBuilder.GetDescriptor("S100", "", csharp.SonarAnalyzer.RspecStrings.ResourceManager)
+                .IsEnabledByDefault
+                .Should().BeTrue();
+
+            DiagnosticDescriptorBuilder.GetDescriptor("S100", "", SonarAnalyzer.Common.IdeVisibility.Hidden,
+                csharp.SonarAnalyzer.RspecStrings.ResourceManager)
+                .IsEnabledByDefault
+                .Should().BeTrue();
+        }
     }
 }

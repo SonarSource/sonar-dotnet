@@ -43,7 +43,7 @@ namespace SonarAnalyzer.Helpers
                 messageFormat,
                 resourceManager.GetString($"{diagnosticId}_Category"),
                 ParseSeverity(resourceManager.GetString($"{diagnosticId}_Severity")).ToDiagnosticSeverity(ideVisibility),
-                bool.Parse(resourceManager.GetString($"{diagnosticId}_IsActivatedByDefault")),
+                isEnabledByDefault: true, // We want to have all rules enabled by default
                 helpLinkUri: GetHelpLink(resourceManager, diagnosticId),
                 description: resourceManager.GetString($"{diagnosticId}_Description"),
                 customTags: ideVisibility.ToCustomTags());
@@ -74,29 +74,7 @@ namespace SonarAnalyzer.Helpers
                 (string)descriptor.Description,
                 descriptor.HelpLinkUri,
                 descriptor.CustomTags.ToArray());
-        }
-
-        /// <summary>
-        /// Creates a new DiagnosticDescriptor instance copying all the properties from the original, overriding the
-        /// IsEnabledByDefault.
-        /// </summary>
-        /// <param name="descriptor">DiagnosticDescriptor instance to copy.</param>
-        /// <returns>
-        /// A new DiagnosticDescriptor instance with overridden value of the IsEnabledByDefault property.
-        /// </returns>
-        public static DiagnosticDescriptor DisabledByDefault(this DiagnosticDescriptor descriptor)
-        {
-            return new DiagnosticDescriptor(
-                descriptor.Id,
-                (string)descriptor.Title,
-                (string)descriptor.MessageFormat,
-                descriptor.Category,
-                descriptor.DefaultSeverity,
-                false,
-                (string)descriptor.Description,
-                descriptor.HelpLinkUri,
-                descriptor.CustomTags.ToArray());
-        }
+        }        
 
         private static Severity ParseSeverity(string severity)
         {
