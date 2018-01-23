@@ -43,7 +43,7 @@ namespace SonarAnalyzer.Helpers
             /// we can only disable one of them if they are created from different assembly-versions.
             /// If the VSIX and the Nuget has the same version, then code fixes show up multiple times, this ticket will fix
             /// this problem: https://github.com/dotnet/roslyn/issues/4030
-            if (SonarAnalysisContext.IsAnalysisDisabled(syntaxTree))
+            if (SonarAnalysisContext.IsAnalysisDisabled(syntaxTree, null))
             {
                 return;
             }
