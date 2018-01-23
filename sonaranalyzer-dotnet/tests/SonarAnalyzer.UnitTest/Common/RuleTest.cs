@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2018 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -18,16 +18,16 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using FluentAssertions;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Utilities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
 
 namespace SonarAnalyzer.UnitTest.Common
 {
@@ -122,6 +122,17 @@ namespace SonarAnalyzer.UnitTest.Common
                 analyzer.Should().BeAssignableTo<SonarDiagnosticAnalyzer>(
                     $"{analyzer.Name} is not a subclass of SonarDiagnosticAnalyzer");
             }
+        }
+
+        [TestMethod]
+        public void AllRules_AreActivatedByDefault()
+        {
+            new RuleFinder()
+                .GetAllAnalyzerTypes()
+                .Select(type => (DiagnosticAnalyzer)Activator.CreateInstance(type))
+                .SelectMany(analyzer => analyzer.SupportedDiagnostics)
+                .ToList()
+                .ForEach(diagnostic => diagnostic.IsEnabledByDefault.Should().BeTrue());
         }
     }
 }
