@@ -34,8 +34,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
         private const string MessageFormat = "Rename '{0}' to match the regular expression: '{1}'.";
 
         private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager)
-                                       .DisabledByDefault();
+            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
         protected override DiagnosticDescriptor Rule => rule;
 

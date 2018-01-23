@@ -36,8 +36,7 @@ namespace SonarAnalyzer.Rules.CSharp
             "Complete the task associated to this 'TODO' comment.";
 
         internal static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager)
-                                       .DisabledByDefault();
+            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         protected override DiagnosticDescriptor Rule => rule;
     }
 }
