@@ -15,6 +15,18 @@ namespace Tests.Diagnostics
             Application.Exit();
         }
 
+        public void FooProperty
+        {
+            get
+            {
+                Environment.Exit(0); // Noncompliant
+            }
+            set
+            {
+                Environment.Exit(0); // Noncompliant
+            }
+        }
+
         public static void Main()
         {
             Environment.Exit(0); // Compliant - inside Main

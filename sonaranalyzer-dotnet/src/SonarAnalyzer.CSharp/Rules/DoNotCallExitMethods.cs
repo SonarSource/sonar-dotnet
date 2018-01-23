@@ -19,6 +19,7 @@
  */
 
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
@@ -46,22 +47,16 @@ namespace SonarAnalyzer.Rules.CSharp
         };
         internal override IEnumerable<MethodSignature> CheckedMethods => checkedMethods;
 
-        protected override bool ShouldReportPreCheck(InvocationExpressionSyntax invocationSyntax,
+        protected override bool IsInValidContext(InvocationExpressionSyntax invocationSyntax,
             SemanticModel semanticModel)
         {
-            var parent = invocationSyntax.Parent;
-            while (parent != null)
-            {
-                if (parent is BaseMethodDeclarationSyntax)
-                {
-                    var parentMethodSymbol = semanticModel.GetDeclaredSymbol(parent) as IMethodSymbol;
-                    return !parentMethodSymbol.IsMainMethod();
-                }
-
-                parent = parent.Parent;
-            }
-
-            return true;
+            // Do not report if call is inside Main.
+            return !invocationSyntax
+                .Ancestors()
+                .OfType<BaseMethodDeclarationSyntax>()
+                .Select(m => semanticModel.GetDeclaredSymbol(m) as IMethodSymbol)
+                .Select(s => s.IsMainMethod())
+                .FirstOrDefault();
         }
     }
 }
