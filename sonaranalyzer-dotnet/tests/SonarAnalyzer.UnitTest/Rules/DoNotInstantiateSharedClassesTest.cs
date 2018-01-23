@@ -35,5 +35,14 @@ namespace SonarAnalyzer.UnitTest.Rules
                 null,
                 Verifier.SystemComponentModelComposition);
         }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void DoNotInstantiateSharedClasses_InTest()
+        {
+            Verifier.VerifyNoIssueReportedInTest(@"TestCases\DoNotInstantiateSharedClasses.cs",
+                new csharp::SonarAnalyzer.Rules.CSharp.DoNotInstantiateSharedClasses(),
+                Verifier.SystemComponentModelComposition);
+        }
     }
 }

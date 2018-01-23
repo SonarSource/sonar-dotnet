@@ -19,7 +19,6 @@
  */
 
 using System.Collections.Immutable;
-using System.ComponentModel.Composition;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -74,9 +73,13 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool IsShared(AttributeData data)
         {
+            // This is equivalent to System.ComponentModel.Composition.CreationPolicy.Shared,
+            // but we do not want dependency on System.ComponentModel.Composition just for that.
+            const int CreationPolicy_Shared = 1;
+
             return data.ConstructorArguments.Any(arg =>
                     arg.Type.Is(KnownType.System_ComponentModel_Composition_CreationPolicy) &&
-                    Equals(arg.Value, (int)CreationPolicy.Shared));
+                    Equals(arg.Value, CreationPolicy_Shared));
         }
     }
 }
