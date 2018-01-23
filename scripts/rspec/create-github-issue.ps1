@@ -23,6 +23,10 @@ param (
 Set-StrictMode -version 2.0
 $ErrorActionPreference = "Stop"
 
+if ($language -eq "vbnet") {
+    throw "At the moment, script only supports C#. Create a ticket manually in JIRA: https://jira.sonarsource.com/browse/SONARVB"
+}
+
 $languageMap = @{
     "cs" = "c#";
     "vbnet" = "vb.net";
