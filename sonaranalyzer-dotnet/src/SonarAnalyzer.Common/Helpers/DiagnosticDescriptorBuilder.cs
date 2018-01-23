@@ -19,6 +19,7 @@
  */
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Resources;
 using Microsoft.CodeAnalysis;
@@ -46,7 +47,7 @@ namespace SonarAnalyzer.Helpers
                 isEnabledByDefault: true, // We want to have all rules enabled by default
                 helpLinkUri: GetHelpLink(resourceManager, diagnosticId),
                 description: resourceManager.GetString($"{diagnosticId}_Description"),
-                customTags: ideVisibility.ToCustomTags());
+                customTags: BuildCustomTags(diagnosticId, ideVisibility, resourceManager));
         }
 
         public static string GetHelpLink(ResourceManager resourceManager, string diagnosticId)
@@ -74,7 +75,24 @@ namespace SonarAnalyzer.Helpers
                 (string)descriptor.Description,
                 descriptor.HelpLinkUri,
                 descriptor.CustomTags.ToArray());
-        }        
+        }
+
+        private static string[] BuildCustomTags(string diagnosticId, IdeVisibility ideVisibility, ResourceManager resourceManager)
+        {
+            var tags = new List<string>();
+
+            if (bool.Parse(resourceManager.GetString($"{diagnosticId}_IsActivatedByDefault")))
+            {
+                tags.Add(DiagnosticTagsHelper.SonarWayTag);
+            }
+
+            if (ideVisibility == IdeVisibility.Hidden)
+            {
+                tags.Add(WellKnownDiagnosticTags.Unnecessary);
+            }
+
+            return tags.ToArray();
+        }
 
         private static Severity ParseSeverity(string severity)
         {
@@ -110,13 +128,6 @@ namespace SonarAnalyzer.Helpers
                 default:
                     throw new NotSupportedException();
             }
-        }
-
-        private static string[] ToCustomTags(this IdeVisibility ideVisibility)
-        {
-            return ideVisibility == IdeVisibility.Hidden
-                ? new[] { WellKnownDiagnosticTags.Unnecessary }
-                : new string[0];
         }
     }
 }
