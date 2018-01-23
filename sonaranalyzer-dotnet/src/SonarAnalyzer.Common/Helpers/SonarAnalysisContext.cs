@@ -29,7 +29,13 @@ namespace SonarAnalyzer.Helpers
     public class SonarAnalysisContext
     {
         private readonly AnalysisContext context;
+
+        // This delegate should always be kept in sync with its usage in SonarLint for Visual Studio. See file:
+        // https://github.com/SonarSource/sonarlint-visualstudio/blob/12119be2157542259fe3be7ce99bb14123092a0f/src/Integration.Vsix/SonarAnalyzerManager.cs
         public static Func<SyntaxTree, bool> ShouldAnalysisBeDisabled { get; set; }
+
+        // This delegate should always be kept in sync with its usage in SonarLint for Visual Studio. See file:
+        // https://github.com/SonarSource/sonarlint-visualstudio/blob/34bbe9f9576337eeb578ebba78a61a1d9c6740ac/src/Integration.Vsix/Suppression/DelegateInjector.cs
         public static Func<SyntaxTree, Diagnostic, bool> ShouldDiagnosticBeReported { get; set; } = (s, d) => true;
 
         internal SonarAnalysisContext(AnalysisContext context)
@@ -37,143 +43,101 @@ namespace SonarAnalyzer.Helpers
             this.context = context;
         }
 
-        internal void RegisterCodeBlockAction(Action<CodeBlockAnalysisContext> action)
-        {
+        internal void RegisterCodeBlockAction(Action<CodeBlockAnalysisContext> action) =>
             context.RegisterCodeBlockAction(
                 c =>
                 {
-                    if (IsAnalysisDisabled(c.CodeBlock.SyntaxTree))
+                    if (!IsAnalysisDisabled(c.CodeBlock.SyntaxTree))
                     {
-                        return;
+                        action(c);
                     }
-
-                    action(c);
                 });
-        }
 
         internal void RegisterCodeBlockStartAction<TLanguageKindEnum>(Action<CodeBlockStartAnalysisContext<TLanguageKindEnum>> action)
-             where TLanguageKindEnum : struct
-        {
+             where TLanguageKindEnum : struct =>
             context.RegisterCodeBlockStartAction<TLanguageKindEnum>(
                 c =>
                 {
-                    if (IsAnalysisDisabled(c.CodeBlock.SyntaxTree))
+                    if (!IsAnalysisDisabled(c.CodeBlock.SyntaxTree))
                     {
-                        return;
+                        action(c);
                     }
-
-                    action(c);
                 });
-        }
 
-        internal void RegisterCompilationAction(Action<CompilationAnalysisContext> action)
-        {
+        internal void RegisterCompilationAction(Action<CompilationAnalysisContext> action) =>
             context.RegisterCompilationAction(
                 c =>
                 {
-                    if (IsAnalysisDisabled(c.Compilation.SyntaxTrees.FirstOrDefault()))
+                    if (!IsAnalysisDisabled(c.Compilation.SyntaxTrees.FirstOrDefault()))
                     {
-                        return;
+                        action(c);
+
                     }
-
-                    action(c);
                 });
-        }
 
-        public void RegisterCompilationStartAction(Action<CompilationStartAnalysisContext> action)
-        {
+        public void RegisterCompilationStartAction(Action<CompilationStartAnalysisContext> action) =>
             context.RegisterCompilationStartAction(
                 c =>
                 {
-                    if (IsAnalysisDisabled(c.Compilation.SyntaxTrees.FirstOrDefault()))
+                    if (!IsAnalysisDisabled(c.Compilation.SyntaxTrees.FirstOrDefault()))
                     {
-                        return;
+                        action(c);
                     }
-
-                    action(c);
                 });
-        }
 
-        internal void RegisterSemanticModelAction(Action<SemanticModelAnalysisContext> action)
-        {
+        internal void RegisterSemanticModelAction(Action<SemanticModelAnalysisContext> action) =>
             context.RegisterSemanticModelAction(
                 c =>
                 {
-                    if (IsAnalysisDisabled(c.SemanticModel.SyntaxTree))
+                    if (!IsAnalysisDisabled(c.SemanticModel.SyntaxTree))
                     {
-                        return;
+                        action(c);
                     }
-
-                    action(c);
                 });
-        }
 
         internal void RegisterSyntaxNodeAction<TLanguageKindEnum>(Action<SyntaxNodeAnalysisContext> action,
             ImmutableArray<TLanguageKindEnum> syntaxKinds)
-            where TLanguageKindEnum : struct
-        {
+            where TLanguageKindEnum : struct =>
             RegisterSyntaxNodeAction(action, syntaxKinds.ToArray());
-        }
 
         internal void RegisterSyntaxNodeAction<TLanguageKindEnum>(Action<SyntaxNodeAnalysisContext> action,
             params TLanguageKindEnum[] syntaxKinds)
-            where TLanguageKindEnum : struct
-        {
+            where TLanguageKindEnum : struct =>
             context.RegisterSyntaxNodeAction(
                 c =>
                 {
-                    if (IsAnalysisDisabled(c.Node.SyntaxTree))
+                    if (!IsAnalysisDisabled(c.Node.SyntaxTree))
                     {
-                        return;
+                        action(c);
                     }
+                }, syntaxKinds);
 
-                    action(c);
-                },
-                syntaxKinds);
-        }
-
-        internal void RegisterSyntaxTreeAction(Action<SyntaxTreeAnalysisContext> action)
-        {
+        internal void RegisterSyntaxTreeAction(Action<SyntaxTreeAnalysisContext> action) =>
             context.RegisterSyntaxTreeAction(
                 c =>
                 {
-                    if (IsAnalysisDisabled(c.Tree))
+                    if (!IsAnalysisDisabled(c.Tree))
                     {
-                        return;
+                        action(c);
                     }
-
-                    action(c);
                 });
-        }
 
-        internal void RegisterSymbolAction(Action<SymbolAnalysisContext> action, ImmutableArray<SymbolKind> symbolKinds)
-        {
+        internal void RegisterSymbolAction(Action<SymbolAnalysisContext> action, ImmutableArray<SymbolKind> symbolKinds) =>
             RegisterSymbolAction(action, symbolKinds.ToArray());
-        }
 
-        public void RegisterSymbolAction(Action<SymbolAnalysisContext> action, params SymbolKind[] symbolKinds)
-        {
+        public void RegisterSymbolAction(Action<SymbolAnalysisContext> action, params SymbolKind[] symbolKinds) =>
             context.RegisterSymbolAction(
                 c =>
                 {
-                    if (IsAnalysisDisabled(c.Symbol.Locations.FirstOrDefault(l => l.SourceTree != null)?.SourceTree))
+                    if (!IsAnalysisDisabled(c.Symbol.Locations.FirstOrDefault(l => l.SourceTree != null)?.SourceTree))
                     {
-                        return;
+                        action(c);
                     }
+                }, symbolKinds);
 
-                    action(c);
-                },
-                symbolKinds);
-        }
-
-        internal static bool IsAnalysisDisabled(SyntaxTree tree)
-        {
-            if (ShouldAnalysisBeDisabled == null)
-            {
-                return false;
-            }
-
-            return tree != null && ShouldAnalysisBeDisabled(tree);
-        }
+        internal static bool IsAnalysisDisabled(SyntaxTree tree) =>
+            tree != null &&
+            ShouldAnalysisBeDisabled != null &&
+            ShouldAnalysisBeDisabled(tree);
     }
 }

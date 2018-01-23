@@ -57,6 +57,7 @@ namespace SonarAnalyzer.Helpers
         private static void ReportWhenNotSuppressed(SyntaxTree tree, Diagnostic diagnostic, Action<Diagnostic> report)
         {
             if (!VbcHelper.IsTriggeringVbcError(diagnostic) &&
+                !SonarAnalysisContext.IsAnalysisDisabled(tree, new[] { diagnostic.Descriptor }) &&
                 SonarAnalysisContext.ShouldDiagnosticBeReported(tree, diagnostic))
             {
                 report(diagnostic);
