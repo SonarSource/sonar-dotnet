@@ -8220,6 +8220,33 @@
   <data name="S4260_Type" xml:space="preserve">
     <value>BUG</value>
   </data>
+  <data name="S4277_Category" xml:space="preserve">
+    <value>Major Code Smell</value>
+  </data>
+  <data name="S4277_Description" xml:space="preserve">
+    <value>Marking a class with PartCreationPolicy(CreationPolicy.Shared), which is part of Managed Extensibility Framework (MEF), means that a single, shared instance of the exported object will be created. Therefore it doesn't make sense to create new instances using the constructor and it will most likely result in unexpected behaviours.</value>
+  </data>
+  <data name="S4277_IsActivatedByDefault" xml:space="preserve">
+    <value>True</value>
+  </data>
+  <data name="S4277_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S4277_RemediationCost" xml:space="preserve">
+    <value>5min</value>
+  </data>
+  <data name="S4277_Severity" xml:space="preserve">
+    <value>Major</value>
+  </data>
+  <data name="S4277_Tags" xml:space="preserve">
+    <value>pitfall</value>
+  </data>
+  <data name="S4277_Title" xml:space="preserve">
+    <value>"Shared" parts should not be created with "new"</value>
+  </data>
+  <data name="S4277_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S818_Category" xml:space="preserve">
     <value>Minor Code Smell</value>
   </data>

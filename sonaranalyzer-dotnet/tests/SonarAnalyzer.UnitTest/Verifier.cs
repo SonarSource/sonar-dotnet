@@ -66,6 +66,8 @@ namespace SonarAnalyzer.UnitTest
             MetadataReference.CreateFromFile(typeof(System.Xml.XmlDocument).Assembly.Location);
         internal static readonly MetadataReference MicrosoftVisualStudioTestToolsUnitTestingAssembly =
             MetadataReference.CreateFromFile(typeof(TestMethodAttribute).Assembly.Location);
+        internal static readonly MetadataReference SystemComponentModelComposition =
+            MetadataReference.CreateFromFile(typeof(System.ComponentModel.Composition.PartCreationPolicyAttribute).Assembly.Location);
         internal static readonly MetadataReference XunitCoreAssembly =
             MetadataReference.CreateFromFile(PackagesFolderRelativePath + @"xunit.extensibility.core.2.2.0\lib\netstandard1.1\xunit.core.dll");
         internal static readonly MetadataReference XunitAssertAssembly =
@@ -277,14 +279,16 @@ namespace SonarAnalyzer.UnitTest
             issueId = expectedIssue.IssueId;
         }
 
-        public static void VerifyNoIssueReportedInTest(string path, SonarDiagnosticAnalyzer diagnosticAnalyzer)
+        public static void VerifyNoIssueReportedInTest(string path, SonarDiagnosticAnalyzer diagnosticAnalyzer,
+            params MetadataReference[] additionalReferences)
         {
-            VerifyNoIssueReported(path, TestAssemblyName, diagnosticAnalyzer);
+            VerifyNoIssueReported(path, TestAssemblyName, diagnosticAnalyzer, additionalReferences);
         }
 
-        public static void VerifyNoIssueReported(string path, SonarDiagnosticAnalyzer diagnosticAnalyzer)
+        public static void VerifyNoIssueReported(string path, SonarDiagnosticAnalyzer diagnosticAnalyzer,
+            params MetadataReference[] additionalReferences)
         {
-            VerifyNoIssueReported(path, GeneratedAssemblyName, diagnosticAnalyzer);
+            VerifyNoIssueReported(path, GeneratedAssemblyName, diagnosticAnalyzer, additionalReferences);
         }
 
         public static void VerifyCodeFix(string path, string pathToExpected,
@@ -337,12 +341,13 @@ namespace SonarAnalyzer.UnitTest
 
         #region Generic helper
 
-        private static void VerifyNoIssueReported(string path, string assemblyName, DiagnosticAnalyzer diagnosticAnalyzer)
+        private static void VerifyNoIssueReported(string path, string assemblyName, DiagnosticAnalyzer diagnosticAnalyzer,
+            MetadataReference[] additionalReferences)
         {
             using (var workspace = new AdhocWorkspace())
             {
                 var file = new FileInfo(path);
-                var project = CreateProject(file.Extension, assemblyName, workspace)
+                var project = CreateProject(file.Extension, assemblyName, workspace, additionalReferences)
                     .AddDocument(file);
                 var compilation = project.GetCompilationAsync().Result;
                 var diagnostics = GetDiagnostics(compilation, diagnosticAnalyzer);
