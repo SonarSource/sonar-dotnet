@@ -48,6 +48,11 @@ namespace SonarAnalyzer.Rules
         {
             var invocation = (InvocationExpressionSyntax)analysisContext.Node;
 
+            if (!ShouldReportPreCheck(invocation, analysisContext.SemanticModel))
+            {
+                return;
+            }
+
             var identifier = GetMethodCallIdentifier(invocation);
             if (identifier == null)
             {
@@ -72,6 +77,9 @@ namespace SonarAnalyzer.Rules
                     disallowedMethodSignature.ToShortName()));
             }
         }
+
+        protected virtual bool ShouldReportPreCheck(InvocationExpressionSyntax invocationSyntax,
+            SemanticModel semanticModel) => true;
 
         protected SyntaxToken? GetMethodCallIdentifier(InvocationExpressionSyntax invocation)
         {

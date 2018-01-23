@@ -20,6 +20,7 @@
 
 using System.Collections.Generic;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
@@ -44,5 +45,23 @@ namespace SonarAnalyzer.Rules.CSharp
             new MethodSignature(KnownType.System_Windows_Forms_Application, "Exit")
         };
         internal override IEnumerable<MethodSignature> CheckedMethods => checkedMethods;
+
+        protected override bool ShouldReportPreCheck(InvocationExpressionSyntax invocationSyntax,
+            SemanticModel semanticModel)
+        {
+            var parent = invocationSyntax.Parent;
+            while (parent != null)
+            {
+                if (parent is BaseMethodDeclarationSyntax)
+                {
+                    var parentMethodSymbol = semanticModel.GetDeclaredSymbol(parent) as IMethodSymbol;
+                    return !parentMethodSymbol.IsMainMethod();
+                }
+
+                parent = parent.Parent;
+            }
+
+            return true;
+        }
     }
 }
