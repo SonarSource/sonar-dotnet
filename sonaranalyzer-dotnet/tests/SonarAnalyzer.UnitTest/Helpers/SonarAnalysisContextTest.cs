@@ -50,13 +50,39 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [TestMethod]
         public void SonarAnalysis_NoIssueReportedIfAnalysisIsDisabled()
         {
-            SonarAnalysisContext.ShouldAnalysisBeDisabled = tree => true;
+            SonarAnalysisContext.ShouldAnalysisBeDisabled = (tree, descriptor) => true;
 
             try
             {
                 foreach (var testCase in TestCases)
                 {
                     Verifier.VerifyNoIssueReported(testCase.Path, testCase.Analyzer);
+                }
+            }
+            finally
+            {
+                SonarAnalysisContext.ShouldAnalysisBeDisabled = null;
+            }
+        }
+
+        [TestMethod]
+        public void SonarAnalysis_IsAbleToDisableSpecificRules()
+        {
+            SonarAnalysisContext.ShouldAnalysisBeDisabled = (tree, descriptor) =>
+                descriptor.Id == AnonymousDelegateEventUnsubscribe.DiagnosticId;
+
+            try
+            {
+                foreach (var testCase in TestCases)
+                {
+                    if (testCase.Analyzer.GetType() == typeof(AnonymousDelegateEventUnsubscribe))
+                    {
+                        Verifier.VerifyNoIssueReported(testCase.Path, testCase.Analyzer);
+                    }
+                    else
+                    {
+                        Verifier.VerifyAnalyzer(testCase.Path, testCase.Analyzer);
+                    }
                 }
             }
             finally
@@ -81,7 +107,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
 
             try
             {
-                SonarAnalysisContext.ShouldAnalysisBeDisabled = tree =>
+                SonarAnalysisContext.ShouldAnalysisBeDisabled = (tree, descriptor) =>
                     tree.FilePath.EndsWith(new FileInfo(TestCases[0].Path).Name, System.StringComparison.OrdinalIgnoreCase);
                 Verifier.VerifyNoIssueReported(TestCases[0].Path, TestCases[0].Analyzer);
                 Verifier.VerifyAnalyzer(TestCases[1].Path, TestCases[1].Analyzer);
