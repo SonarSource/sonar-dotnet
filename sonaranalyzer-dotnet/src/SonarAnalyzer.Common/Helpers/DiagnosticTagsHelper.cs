@@ -22,6 +22,8 @@ namespace SonarAnalyzer.Helpers
 {
     public static class DiagnosticTagsHelper
     {
+        public const string SonarWayTag = "SonarWay";
+
         public static string[] NotConfigurableTag()
         {
             // Allow to configure the analyzers in debug mode only.
