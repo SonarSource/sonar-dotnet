@@ -18,8 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -31,7 +31,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void DoNotInstantiateSharedClasses()
         {
             Verifier.VerifyAnalyzer(@"TestCases\DoNotInstantiateSharedClasses.cs",
-                new csharp::SonarAnalyzer.Rules.CSharp.DoNotInstantiateSharedClasses(),
+                new DoNotInstantiateSharedClasses(),
                 null,
                 Verifier.SystemComponentModelComposition);
         }
@@ -41,7 +41,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void DoNotInstantiateSharedClasses_InTest()
         {
             Verifier.VerifyNoIssueReportedInTest(@"TestCases\DoNotInstantiateSharedClasses.cs",
-                new csharp::SonarAnalyzer.Rules.CSharp.DoNotInstantiateSharedClasses(),
+                new DoNotInstantiateSharedClasses(),
                 Verifier.SystemComponentModelComposition);
         }
     }
