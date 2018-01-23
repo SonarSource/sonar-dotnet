@@ -834,6 +834,33 @@
   <data name="S1145_Type" xml:space="preserve">
     <value>BUG</value>
   </data>
+  <data name="S1147_Category" xml:space="preserve">
+    <value>Blocker Code Smell</value>
+  </data>
+  <data name="S1147_Description" xml:space="preserve">
+    <value>Calling Environment.Exit(exitCode) or Application.Exit() terminates the process and returns an exit code to the operating system..</value>
+  </data>
+  <data name="S1147_IsActivatedByDefault" xml:space="preserve">
+    <value>False</value>
+  </data>
+  <data name="S1147_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S1147_RemediationCost" xml:space="preserve">
+    <value>30min</value>
+  </data>
+  <data name="S1147_Severity" xml:space="preserve">
+    <value>Blocker</value>
+  </data>
+  <data name="S1147_Tags" xml:space="preserve">
+    <value>cwe,cert,suspicious</value>
+  </data>
+  <data name="S1147_Title" xml:space="preserve">
+    <value>Exit methods should not be called</value>
+  </data>
+  <data name="S1147_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S1155_Category" xml:space="preserve">
     <value>Minor Code Smell</value>
   </data>
