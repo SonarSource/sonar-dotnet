@@ -26,7 +26,7 @@ namespace SonarAnalyzer.Helpers
     {
         public sealed override void Initialize(AnalysisContext context)
         {
-            Initialize(new SonarAnalysisContext(context));
+            Initialize(new SonarAnalysisContext(context, SupportedDiagnostics));
         }
 
         protected abstract void Initialize(SonarAnalysisContext context);
