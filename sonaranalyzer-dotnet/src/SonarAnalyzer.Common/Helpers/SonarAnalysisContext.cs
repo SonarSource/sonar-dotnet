@@ -29,7 +29,13 @@ namespace SonarAnalyzer.Helpers
     public class SonarAnalysisContext
     {
         private readonly AnalysisContext context;
+
+        // This delegate should always be kept in sync with its usage in SonarLint for Visual Studio. See file:
+        // https://github.com/SonarSource/sonarlint-visualstudio/blob/12119be2157542259fe3be7ce99bb14123092a0f/src/Integration.Vsix/SonarAnalyzerManager.cs
         public static Func<SyntaxTree, bool> ShouldAnalysisBeDisabled { get; set; }
+
+        // This delegate should always be kept in sync with its usage in SonarLint for Visual Studio. See file:
+        // https://github.com/SonarSource/sonarlint-visualstudio/blob/34bbe9f9576337eeb578ebba78a61a1d9c6740ac/src/Integration.Vsix/Suppression/DelegateInjector.cs
         public static Func<SyntaxTree, Diagnostic, bool> ShouldDiagnosticBeReported { get; set; } = (s, d) => true;
 
         internal SonarAnalysisContext(AnalysisContext context)
