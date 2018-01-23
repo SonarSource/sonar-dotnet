@@ -60,7 +60,8 @@ namespace SonarAnalyzer.Helpers
 
         private static void ReportWhenNotSuppressed(SyntaxTree tree, Diagnostic diagnostic, Action<Diagnostic> report)
         {
-            if (SonarAnalysisContext.ShouldDiagnosticBeReported(tree, diagnostic))
+            if (!SonarAnalysisContext.IsAnalysisDisabled(tree, new[] { diagnostic.Descriptor }) &&
+                SonarAnalysisContext.ShouldDiagnosticBeReported(tree, diagnostic))
             {
                 // VB.Net complier (VBC) post-process issues and will fail if the line contains the VbNetErrorPattern.
                 // See https://github.com/dotnet/roslyn/issues/5724
