@@ -110,6 +110,7 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_ComponentModel_DefaultValueAttribute = new KnownType("System.ComponentModel.DefaultValueAttribute");
         internal static readonly KnownType System_ComponentModel_LocalizableAttribute = new KnownType("System.ComponentModel.LocalizableAttribute");
         internal static readonly KnownType System_ComponentModel_Composition_CreationPolicy = new KnownType("System.ComponentModel.Composition.CreationPolicy");
+        internal static readonly KnownType System_ComponentModel_Composition_ExportAttribute = new KnownType("System.ComponentModel.Composition.ExportAttribute");
         internal static readonly KnownType System_ComponentModel_Composition_PartCreationPolicyAttribute = new KnownType("System.ComponentModel.Composition.PartCreationPolicyAttribute");
         internal static readonly KnownType System_Console = new KnownType("System.Console");
         internal static readonly KnownType System_Data_Common_CommandTrees_DbExpression = new KnownType("System.Data.Common.CommandTrees.DbExpression");

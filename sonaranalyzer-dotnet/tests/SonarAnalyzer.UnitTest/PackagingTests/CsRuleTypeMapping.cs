@@ -4156,7 +4156,7 @@ namespace SonarAnalyzer.UnitTest.PackagingTests
             //["4156"],
             //["4157"],
             ["4158"] = "BUG",
-            //["4159"],
+            ["4159"] = "BUG",
             //["4160"],
             //["4161"],
             //["4162"],
