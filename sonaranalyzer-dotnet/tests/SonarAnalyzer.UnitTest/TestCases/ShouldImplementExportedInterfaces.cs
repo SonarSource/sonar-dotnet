@@ -3,6 +3,11 @@ using System.ComponentModel.Composition;
 
 namespace Classes
 {
+    static class Constants
+    {
+        public const string ContractName = "asdasd";
+    }
+
     interface MyInterface { }
 
     [Export(typeof(MyInterface))] // Noncompliant {{Implement 'MyInterface' on 'NotExported' or remove this Export attribute.}}
@@ -18,6 +23,7 @@ namespace Classes
     }
 
     [Export("something", typeof(MyInterface))] // Noncompliant
+    [Export(Constants.ContractName, typeof(IDisposable))] // Noncompliant
     class NotExported_MultipleArgs
     {
     }
@@ -47,10 +53,11 @@ namespace Classes
     {
     }
 
+    [Export(1)]
+    [Export(1, typeof(IComparable))]
     [Export(typeof(ASDASD))]
     [Export(typeof(MyInterface), typeof(IComparable))]
-    [Export(1)]
-    class InvalidSyntax // Don't report on invalid syntax to reduce the noise
+    class InvalidSyntax
     {
     }
 }

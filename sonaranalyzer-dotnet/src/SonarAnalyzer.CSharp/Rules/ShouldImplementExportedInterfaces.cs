@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
@@ -45,56 +44,90 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(c =>
-            {
-                var classSymbol = c.SemanticModel.GetDeclaredSymbol((ClassDeclarationSyntax)c.Node);
-                if (classSymbol == null)
+            context.RegisterSyntaxNodeActionInNonGenerated(
+                c =>
                 {
-                    return;
-                }
+                    var attributeSyntax = (AttributeSyntax)c.Node;
 
-                classSymbol.GetAttributes()
-                    .Where(IsExportAttribute)
-                    .Select(a => new { Attribute = a, Location = GetLocation(a), ExportedType = GetExportedType(a) })
-                    .Where(x => x.Location.SourceTree.Equals(c.Node.SyntaxTree))
-                    .Where(x => x.ExportedType != null && !classSymbol.DerivesOrImplements(x.ExportedType))
-                    .Select(x => Diagnostic.Create(rule, x.Location, x.ExportedType.Name, classSymbol.Name))
-                    .ToList()
-                    .ForEach(d => c.ReportDiagnosticWhenActive(d));
-            },
-            SyntaxKind.ClassDeclaration);
+                    var exportedType = GetExportedTypeSyntax(attributeSyntax, c.SemanticModel);
+                    var attributeTargetType = GetAttributeTargetSymbol(attributeSyntax, c.SemanticModel);
+
+                    if (exportedType != null && !attributeTargetType.DerivesOrImplements(exportedType))
+                    {
+                        c.ReportDiagnosticWhenActive(
+                            Diagnostic.Create(rule, attributeSyntax.GetLocation(), exportedType.Name, attributeTargetType.Name));
+                    }
+                },
+                SyntaxKind.Attribute);
         }
 
-        private static INamedTypeSymbol GetExportedType(AttributeData attribute)
+        private ITypeSymbol GetAttributeTargetSymbol(AttributeSyntax attributeSyntax, SemanticModel semanticModel)
         {
-            var exportedType = attribute.ConstructorArguments
-                .ElementAtOrDefault(IndexOfTypeArgument(attribute)).Value as INamedTypeSymbol;
-
-            return exportedType?.TypeKind != TypeKind.Error
-                ? exportedType
-                : null;
+            // Parent is AttributeListSyntax, we handle only class attributes
+            var attributeTarget = attributeSyntax.Parent?.Parent as ClassDeclarationSyntax;
+            if (attributeTarget == null)
+            {
+                return null;
+            }
+            return semanticModel.GetDeclaredSymbol(attributeTarget);
         }
 
-        private static int IndexOfTypeArgument(AttributeData attribute)
+        private ITypeSymbol GetExportedTypeSyntax(AttributeSyntax attribute, SemanticModel semanticModel)
         {
-            if (attribute.ConstructorArguments.Length == 1)
+            if (attribute.ArgumentList == null)
             {
-                return 0;
+                return null;
             }
-            else if (attribute.ConstructorArguments.Length == 2)
+
+            var arguments = attribute.ArgumentList.Arguments;
+            if (arguments.Count == 0 ||
+                arguments.Count > 2)
             {
-                return 1;
+                return null;
             }
-            else
+
+            var typeOfExpression = GetTypeFromNamedArgument(arguments) ??
+                GetTypeFromSingleArgumentAttribute(arguments) ??
+                GetTypeFromDoubleArgumentAttribute(arguments, semanticModel);
+
+            var exportedTypeSyntax = (typeOfExpression as TypeOfExpressionSyntax)?.Type;
+            if (exportedTypeSyntax == null)
             {
-                return -1; // No type argument in this ctor overload or invalid code
+                return null;
             }
+
+            return semanticModel.GetSymbolInfo(exportedTypeSyntax).Symbol as ITypeSymbol;
         }
 
-        private static bool IsExportAttribute(AttributeData attribute) =>
-            attribute.AttributeClass.Is(KnownType.System_ComponentModel_Composition_ExportAttribute);
+        private static ExpressionSyntax GetTypeFromNamedArgument(IEnumerable<AttributeArgumentSyntax> arguments) =>
+            arguments.FirstOrDefault(IsContractTypeNamedArgument)?.Expression;
 
-        private Location GetLocation(AttributeData attributeData) =>
-            attributeData.ApplicationSyntaxReference.GetSyntax().GetLocation();
+        private static ExpressionSyntax GetTypeFromDoubleArgumentAttribute(IEnumerable<AttributeArgumentSyntax> arguments,
+            SemanticModel semanticModel)
+        {
+            var firstArgument = arguments.ElementAtOrDefault(0)?.Expression;
+            if (firstArgument != null &&
+                semanticModel.GetConstantValue(firstArgument).Value is string)
+            {
+                // Two arguments, second should be typeof expression
+                return arguments.ElementAtOrDefault(1)?.Expression;
+            }
+
+            return null;
+        }
+
+        private static ExpressionSyntax GetTypeFromSingleArgumentAttribute(IEnumerable<AttributeArgumentSyntax> arguments)
+        {
+            if (arguments.ElementAtOrDefault(1) != null)
+            {
+                return null;
+            }
+
+            // Only one argument, should be typeof expression
+            return arguments.ElementAtOrDefault(0)?.Expression;
+        }
+
+        private static bool IsContractTypeNamedArgument(AttributeArgumentSyntax argument) =>
+            argument.NameColon?.Name.Identifier.ValueText == "contractType";
     }
 }

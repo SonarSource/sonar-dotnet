@@ -9,7 +9,6 @@ namespace Classes
     }
 
     [Export(typeof(IDisposable))] // Noncompliant
-    // Noncompliant@-1
     partial class NotExported
     {
     }
