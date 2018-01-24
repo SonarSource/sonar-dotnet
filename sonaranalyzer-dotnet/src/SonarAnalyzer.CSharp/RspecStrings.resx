@@ -4263,6 +4263,33 @@
   <data name="S3052_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
   </data>
+  <data name="S3060_Category" xml:space="preserve">
+    <value>Blocker Code Smell</value>
+  </data>
+  <data name="S3060_Description" xml:space="preserve">
+    <value>There's no valid reason to test this with is. The only plausible explanation for such a test is that you're executing code in a parent class conditionally based on the kind of child class this is. But code that's specific to a child class should be in that child class, not in the parent.</value>
+  </data>
+  <data name="S3060_IsActivatedByDefault" xml:space="preserve">
+    <value>True</value>
+  </data>
+  <data name="S3060_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S3060_RemediationCost" xml:space="preserve">
+    <value>30min</value>
+  </data>
+  <data name="S3060_Severity" xml:space="preserve">
+    <value>Blocker</value>
+  </data>
+  <data name="S3060_Tags" xml:space="preserve">
+    <value>api-design,bad-practice</value>
+  </data>
+  <data name="S3060_Title" xml:space="preserve">
+    <value>"is" should not be used with "this"</value>
+  </data>
+  <data name="S3060_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S3168_Category" xml:space="preserve">
     <value>Major Bug</value>
   </data>
