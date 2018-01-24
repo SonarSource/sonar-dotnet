@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3060",
+"message":  "Offload the code that's conditional on this 'is' test to the appropriate subclass and remove the test.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Fsm\PersistentFSMBase.cs",
+"region":  {
+"startLine":  75,
+"startColumn":  17,
+"endLine":  75,
+"endColumn":  36
+}
+}
+}
+]
+}

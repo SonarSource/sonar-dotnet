@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3060",
+"message":  "Offload the code that's conditional on this 'is' test to the appropriate subclass and remove the test.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\FSM.cs",
+"region":  {
+"startLine":  390,
+"startColumn":  16,
+"endLine":  390,
+"endColumn":  35
+}
+}
+}
+]
+}

@@ -1,0 +1,16 @@
+{
+  "title": "\"is\" should not be used with \"this\"",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "30min"
+  },
+  "tags": [
+    "api-design",
+    "bad-practice"
+  ],
+  "defaultSeverity": "Blocker",
+  "ruleSpecification": "RSPEC-3060",
+  "sqKey": "S3060"
+}

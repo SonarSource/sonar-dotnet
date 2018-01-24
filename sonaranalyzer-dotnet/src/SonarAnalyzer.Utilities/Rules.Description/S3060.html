@@ -1,0 +1,17 @@
+<p>There's no valid reason to test <code>this</code> with <code>is</code>. The only plausible explanation for such a test is that you're executing
+code in a parent class conditionally based on the kind of child class <code>this</code> is. But code that's specific to a child class should be
+<em>in</em> that child class, not in the parent.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+public class JunkFood
+{
+  public void DoSomething()
+  {
+    if (this is Pizza) // Noncompliant
+    {
+      // ...
+    } else if (...
+  }
+}
+</pre>
+
