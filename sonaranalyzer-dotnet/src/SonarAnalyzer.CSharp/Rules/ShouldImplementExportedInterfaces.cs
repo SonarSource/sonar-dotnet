@@ -49,6 +49,13 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     var attributeSyntax = (AttributeSyntax)c.Node;
 
+                    var attributeCtorSymbol = c.SemanticModel.GetSymbolInfo(attributeSyntax.Name).Symbol as IMethodSymbol;
+                    if (attributeCtorSymbol == null ||
+                        !attributeCtorSymbol.ContainingType.Is(KnownType.System_ComponentModel_Composition_ExportAttribute))
+                    {
+                        return;
+                    }
+
                     var exportedType = GetExportedTypeSyntax(attributeSyntax, c.SemanticModel);
                     var attributeTargetType = GetAttributeTargetSymbol(attributeSyntax, c.SemanticModel);
 

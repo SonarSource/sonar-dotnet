@@ -60,4 +60,9 @@ namespace Classes
     class InvalidSyntax
     {
     }
+
+    [Import(typeof(MyInterface))]
+    class OtherAttributes
+    {
+    }
 }
