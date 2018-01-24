@@ -64,7 +64,19 @@ namespace Tests.Diagnostics
             }
         }
 
-        // Compliant. Properties are not checked
+        public string Method_07() // Noncompliant {{This method 'Method_07' has 4 lines, which is greater than the 2 lines authorized. Split it into smaller methods.}}
+            =>
+            1
+            .ToString()
+            .ToString()
+            .ToString();
+
+        public string Method_08()
+            =>
+            1
+            .ToString();
+
+        // Compliant. Properties are not covered by this rule
         public int Property_01
         {
             get

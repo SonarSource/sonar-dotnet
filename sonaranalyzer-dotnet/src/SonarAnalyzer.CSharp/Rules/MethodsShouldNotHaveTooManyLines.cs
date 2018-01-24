@@ -19,6 +19,7 @@
  */
 
 using System;
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
@@ -42,11 +43,12 @@ namespace SonarAnalyzer.Rules.CSharp
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         private const int DefaultMaxMethodLines = 80;
+
         [RuleParameter("max", PropertyType.Integer, "Maximum authorized lines of code in a method",
             DefaultMaxMethodLines)]
 
         public int Max { get; set; } = DefaultMaxMethodLines;
-        
+
         protected override void Initialize(ParameterLoadingAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
@@ -64,14 +66,12 @@ namespace SonarAnalyzer.Rules.CSharp
                     var baseMethodSyntax = (BaseMethodDeclarationSyntax)c.Node;
 
                     var identifierLocation = baseMethodSyntax?.FindIdentifierLocation();
-                    var bodyStatements = baseMethodSyntax?.Body?.Statements;
-                    if (bodyStatements == null || identifierLocation == null)
+                    if (identifierLocation == null)
                     {
                         return;
                     }
 
-                    var linesCount = bodyStatements.Value
-                        .SelectMany(s => s.DescendantTokens())
+                    var linesCount = GetBodyTokens(baseMethodSyntax)
                         .Select(token => token.GetLineNumber())
                         .Distinct()
                         .LongCount();
@@ -85,6 +85,20 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.MethodDeclaration,
                 SyntaxKind.ConstructorDeclaration,
                 SyntaxKind.DestructorDeclaration);
+        }
+
+        private static IEnumerable<SyntaxToken> GetBodyTokens(BaseMethodDeclarationSyntax baseMethodSyntax)
+        {
+            var expressionTokens =
+                (baseMethodSyntax as MethodDeclarationSyntax)?.ExpressionBody?.Expression?.DescendantTokens();
+
+            if (expressionTokens != null && expressionTokens.Any())
+            {
+                return expressionTokens;
+            }
+
+            var bodyStatements = baseMethodSyntax?.Body?.Statements.SelectMany(s => s.DescendantTokens());
+            return bodyStatements ?? Enumerable.Empty<SyntaxToken>();
         }
 
         private static string GetDescription(BaseMethodDeclarationSyntax baseMethodDeclaration)
