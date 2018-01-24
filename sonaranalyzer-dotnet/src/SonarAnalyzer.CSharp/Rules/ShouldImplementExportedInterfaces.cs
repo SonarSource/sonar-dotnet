@@ -53,20 +53,17 @@ namespace SonarAnalyzer.Rules.CSharp
                     return;
                 }
 
-                ReportNotExportedTypes(classSymbol, classSymbol.GetAttributes(),
-                    d => c.ReportDiagnosticWhenActive(d));
+                classSymbol.GetAttributes()
+                    .Where(IsExportAttribute)
+                    .Select(a => new { Attribute = a, Location = GetLocation(a), ExportedType = GetExportedType(a) })
+                    .Where(x => x.Location.SourceTree.Equals(c.Node.SyntaxTree))
+                    .Where(x => x.ExportedType != null && !classSymbol.DerivesOrImplements(x.ExportedType))
+                    .Select(x => Diagnostic.Create(rule, x.Location, x.ExportedType.Name, classSymbol.Name))
+                    .ToList()
+                    .ForEach(d => c.ReportDiagnosticWhenActive(d));
             },
             SyntaxKind.ClassDeclaration);
         }
-
-        private void ReportNotExportedTypes(ITypeSymbol type, IEnumerable<AttributeData> attributes, Action<Diagnostic> report) =>
-            attributes
-                .Where(IsExportAttribute)
-                .Select(a => new { Attribute = a, ExportedType = GetExportedType(a) })
-                .Where(x => x.ExportedType != null && !type.DerivesOrImplements(x.ExportedType))
-                .Select(x => Diagnostic.Create(rule, GetLocation(x.Attribute), x.ExportedType.Name, type.Name))
-                .ToList()
-                .ForEach(report);
 
         private static INamedTypeSymbol GetExportedType(AttributeData attribute)
         {
