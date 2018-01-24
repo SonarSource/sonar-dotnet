@@ -1,0 +1,50 @@
+<p>When an assembly uses Windows Forms (classes and interfaces from the <code>System.Windows.Forms</code> namespace) its entry point should be marked
+with the <code>STAThreadAttribute</code> to indicate that the threading model should be "Single-Threaded Apartment" (STA) which is the only one
+supported by Windows Forms.</p>
+<p>This rule raises an issue when the entry point (<code>static void Main</code> method) of an assembly using Windows Forms is not marked as STA.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+using System;
+using System.Windows.Forms;
+
+namespace MyLibrary
+{
+    public class MyForm: Form
+    {
+        public MyForm()
+        {
+            this.Text = "Hello World!";
+        }
+
+        public static void Main()  // Noncompliant
+        {
+            var form = new MyForm();
+            Application.Run(form);
+        }
+    }
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+using System;
+using System.Windows.Forms;
+
+namespace MyLibrary
+{
+    public class MyForm: Form
+    {
+        public MyForm()
+        {
+            this.Text = "Hello World!";
+        }
+
+        [STAThread]
+        public static void Main()
+        {
+            var form = new MyForm();
+            Application.Run(form);
+        }
+    }
+}
+</pre>
+
