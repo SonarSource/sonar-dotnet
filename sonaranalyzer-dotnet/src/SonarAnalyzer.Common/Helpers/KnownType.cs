@@ -167,6 +167,7 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_Linq_Expressions_Expression_T = new KnownType("System.Linq.Expressions.Expression<TDelegate>");
         internal static readonly KnownType System_Linq_ImmutableArrayExtensions = new KnownType("System.Linq.ImmutableArrayExtensions");
         internal static readonly KnownType System_MarshalByRefObject = new KnownType("System.MarshalByRefObject");
+        internal static readonly KnownType System_MTAThreadAttribute = new KnownType("System.MTAThreadAttribute");
         internal static readonly KnownType System_Net_Sockets_TcpClient = new KnownType("System.Net.Sockets.TcpClient");
         internal static readonly KnownType System_Net_Sockets_UdpClient = new KnownType("System.Net.Sockets.UdpClient");
         internal static readonly KnownType System_Net_WebClient = new KnownType("System.Net.WebClient");
@@ -223,6 +224,7 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_ServiceModel_ServiceContractAttribute = new KnownType("System.ServiceModel.ServiceContractAttribute");
         internal static readonly KnownType System_Single = new KnownType(SpecialType.System_Single, "float");
         internal static readonly KnownType System_StackOverflowException = new KnownType("System.StackOverflowException");
+        internal static readonly KnownType System_STAThreadAttribute = new KnownType("System.STAThreadAttribute");
         internal static readonly KnownType System_String = new KnownType(SpecialType.System_String, "string");
         internal static readonly KnownType System_String_Array = new KnownType("string[]");
         internal static readonly KnownType System_StringComparison = new KnownType("System.StringComparison");
