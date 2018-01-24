@@ -1,0 +1,108 @@
+{
+"issues":  [
+{
+"id":  "S138",
+"message":  "This constructor 'InteractiveModule' has 81 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\Modules\InteractiveModule.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  16,
+"endLine":  14,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'HtmlDecode' has 132 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  389,
+"startColumn":  32,
+"endLine":  389,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'InitEntities' has 253 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  656,
+"startColumn":  21,
+"endLine":  656,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'ProcessCharacter' has 238 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  577,
+"startColumn":  8,
+"endLine":  577,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'SerializeValueImpl' has 127 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Json\JsonSerializer.cs",
+"region":  {
+"startLine":  104,
+"startColumn":  8,
+"endLine":  104,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This constructor 'MimeTypes' has 541 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"region":  {
+"startLine":  40,
+"startColumn":  16,
+"endLine":  40,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'Bind' has 104 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"region":  {
+"startLine":  68,
+"startColumn":  23,
+"endLine":  68,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'ResolveInternal' has 82 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3361,
+"startColumn":  24,
+"endLine":  3361,
+"endColumn":  39
+}
+}
+}
+]
+}

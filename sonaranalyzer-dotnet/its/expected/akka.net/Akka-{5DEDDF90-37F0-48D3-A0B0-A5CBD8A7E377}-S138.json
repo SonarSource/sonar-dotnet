@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S138",
+"message":  "This method 'Receive' has 90 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Inbox.Actor.cs",
+"region":  {
+"startLine":  84,
+"startColumn":  33,
+"endLine":  84,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S138",
+"message":  "This method 'TryAdd' has 84 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\Internal\Collections\ImmutableAvlTreeBase.cs",
+"region":  {
+"startLine":  103,
+"startColumn":  25,
+"endLine":  103,
+"endColumn":  31
+}
+}
+}
+]
+}

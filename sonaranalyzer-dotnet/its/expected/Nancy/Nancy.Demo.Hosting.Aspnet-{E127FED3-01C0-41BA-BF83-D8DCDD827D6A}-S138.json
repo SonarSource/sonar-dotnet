@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S138",
+"message":  "This constructor 'MainModule' has 174 lines, which is greater than the 80 lines authorized. Split it into smaller methods.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Demo.Hosting.Aspnet\MainModule.cs",
+"region":  {
+"startLine":  13,
+"startColumn":  16,
+"endLine":  13,
+"endColumn":  26
+}
+}
+}
+]
+}
