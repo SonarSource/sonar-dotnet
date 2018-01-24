@@ -51,7 +51,7 @@ namespace SonarAnalyzer.Rules
                            var expression = assignment.Left;
 
                            var fieldSymbol = c.SemanticModel.GetSymbolInfo(expression).Symbol as IFieldSymbol;
-                           if (IsStatic(fieldSymbol))
+                           if (fieldSymbol.IsStatic())
                            {
                                var location = Location.Create(expression.SyntaxTree,
                                    new TextSpan(expression.SpanStart,
@@ -126,16 +126,10 @@ namespace SonarAnalyzer.Rules
         private static void CollectLocationOfStaticField(ExpressionSyntax expression, Dictionary<IFieldSymbol, List<Location>> locationsForFields, SyntaxNodeAnalysisContext context)
         {
             var fieldSymbol = context.SemanticModel.GetSymbolInfo(expression).Symbol as IFieldSymbol;
-            if (IsStatic(fieldSymbol))
+            if (fieldSymbol.IsStatic())
             {
                 AddFieldLocation(fieldSymbol, expression.GetLocation(), locationsForFields);
             }
-        }
-
-        private static bool IsStatic(IFieldSymbol fieldSymbol)
-        {
-            return fieldSymbol != null &&
-                fieldSymbol.IsStatic;
         }
     }
 }

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3366",
+"message":  "Make sure the use of 'this' doesn't expose partially-constructed instances of this class in multi-threaded environments.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\dependencyInjection\Akka.DI.Unity\UnityDependencyResolver.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  47,
+"endLine":  43,
+"endColumn":  51
+}
+}
+}
+]
+}

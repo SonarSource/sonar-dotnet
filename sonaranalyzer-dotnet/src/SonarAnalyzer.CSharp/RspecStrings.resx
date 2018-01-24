@@ -5127,6 +5127,33 @@
   <data name="S3346_Type" xml:space="preserve">
     <value>BUG</value>
   </data>
+  <data name="S3366_Category" xml:space="preserve">
+    <value>Major Code Smell</value>
+  </data>
+  <data name="S3366_Description" xml:space="preserve">
+    <value>In single-threaded environments, the use of this in constructors is normal, and expected. But in multi-threaded environments, it could expose partially-constructed objects to other threads, and should be used with caution.</value>
+  </data>
+  <data name="S3366_IsActivatedByDefault" xml:space="preserve">
+    <value>False</value>
+  </data>
+  <data name="S3366_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S3366_RemediationCost" xml:space="preserve">
+    <value>30min</value>
+  </data>
+  <data name="S3366_Severity" xml:space="preserve">
+    <value>Major</value>
+  </data>
+  <data name="S3366_Tags" xml:space="preserve">
+    <value>multi-threading,cert,suspicious</value>
+  </data>
+  <data name="S3366_Title" xml:space="preserve">
+    <value>"this" should not be exposed from constructors</value>
+  </data>
+  <data name="S3366_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S3376_Category" xml:space="preserve">
     <value>Minor Code Smell</value>
   </data>
