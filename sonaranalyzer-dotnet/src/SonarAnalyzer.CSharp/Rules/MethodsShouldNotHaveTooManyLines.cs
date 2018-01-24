@@ -44,9 +44,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private const int DefaultMaxMethodLines = 80;
 
-        [RuleParameter("max", PropertyType.Integer, "Maximum authorized lines of code in a method",
-            DefaultMaxMethodLines)]
-
+        [RuleParameter("max", PropertyType.Integer, "Maximum authorized lines of code in a method", DefaultMaxMethodLines)]
         public int Max { get; set; } = DefaultMaxMethodLines;
 
         protected override void Initialize(ParameterLoadingAnalysisContext context)
@@ -119,7 +117,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return $"finalizer '~{identifierName}'";
             }
 
-            if (baseMethodDeclaration is MethodDeclarationSyntax methodDeclaration)
+            if (baseMethodDeclaration is MethodDeclarationSyntax)
             {
                 return $"method '{identifierName}'";
             }
