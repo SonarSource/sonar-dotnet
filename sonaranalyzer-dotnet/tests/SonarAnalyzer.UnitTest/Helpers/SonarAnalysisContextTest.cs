@@ -18,13 +18,14 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+extern alias csharp;
 using System.Collections.Generic;
 using System.IO;
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Helpers;
-using SonarAnalyzer.Rules.CSharp;
+using csharp::SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Helpers
 {
