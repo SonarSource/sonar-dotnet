@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S3366",
+"message":  "Make sure the use of 'this' doesn't expose partially-constructed instances of this class in multi-threaded environments.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Scheduler\DedicatedThreadScheduler.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  46,
+"endLine":  27,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S3366",
+"message":  "Make sure the use of 'this' doesn't expose partially-constructed instances of this class in multi-threaded environments.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Helios.Concurrency.DedicatedThreadPool.cs",
+"region":  {
+"startLine":  410,
+"startColumn":  41,
+"endLine":  410,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S3366",
+"message":  "Make sure the use of 'this' doesn't expose partially-constructed instances of this class in multi-threaded environments.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Routing\ConsistentHashRouter.cs",
+"region":  {
+"startLine":  151,
+"startColumn":  79,
+"endLine":  151,
+"endColumn":  83
+}
+}
+}
+]
+}

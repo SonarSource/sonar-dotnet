@@ -1,0 +1,17 @@
+{
+  "title": "\"this\" should not be exposed from constructors",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "30min"
+  },
+  "tags": [
+    "multi-threading",
+    "cert",
+    "suspicious"
+  ],
+  "defaultSeverity": "Major",
+  "ruleSpecification": "RSPEC-3366",
+  "sqKey": "S3366"
+}
