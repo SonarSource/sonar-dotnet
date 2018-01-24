@@ -52,7 +52,9 @@ namespace SonarAnalyzer.Rules.CSharp
                     var exportedType = GetExportedTypeSyntax(attributeSyntax, c.SemanticModel);
                     var attributeTargetType = GetAttributeTargetSymbol(attributeSyntax, c.SemanticModel);
 
-                    if (exportedType != null && !attributeTargetType.DerivesOrImplements(exportedType))
+                    if (exportedType != null &&
+                        attributeTargetType != null &&
+                        !attributeTargetType.DerivesOrImplements(exportedType))
                     {
                         c.ReportDiagnosticWhenActive(
                             Diagnostic.Create(rule, attributeSyntax.GetLocation(), exportedType.Name, attributeTargetType.Name));
