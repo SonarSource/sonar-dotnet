@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S2302",
+"message":  "Replace the string 'configPath' with 'nameof(configPath)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistence.cs",
+"region":  {
+"startLine":  154,
+"startColumn":  116,
+"endLine":  154,
+"endColumn":  128
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'obj' with 'nameof(obj)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Serialization\SnapshotSerializer.cs",
+"region":  {
+"startLine":  71,
+"startColumn":  122,
+"endLine":  71,
+"endColumn":  127
+}
+}
+}
+]
+}

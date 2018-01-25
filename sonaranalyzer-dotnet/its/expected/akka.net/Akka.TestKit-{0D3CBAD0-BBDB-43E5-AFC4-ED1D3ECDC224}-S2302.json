@@ -1,0 +1,108 @@
+{
+"issues":  [
+{
+"id":  "S2302",
+"message":  "Replace the string 'logLevel' with 'nameof(logLevel)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\EventFilterFactory.cs",
+"region":  {
+"startLine":  183,
+"startColumn":  59,
+"endLine":  183,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'logLevel' with 'nameof(logLevel)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\EventFilterFactory.cs",
+"region":  {
+"startLine":  205,
+"startColumn":  59,
+"endLine":  205,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'interval' with 'nameof(interval)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_AwaitAssert.cs",
+"region":  {
+"startLine":  34,
+"startColumn":  50,
+"endLine":  34,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'max' with 'nameof(max)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_AwaitConditions.cs",
+"region":  {
+"startLine":  209,
+"startColumn":  40,
+"endLine":  209,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'max' with 'nameof(max)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Expect.cs",
+"region":  {
+"startLine":  320,
+"startColumn":  40,
+"endLine":  320,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'max' with 'nameof(max)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Receive.cs",
+"region":  {
+"startLine":  331,
+"startColumn":  40,
+"endLine":  331,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'min' with 'nameof(min)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Within.cs",
+"region":  {
+"startLine":  63,
+"startColumn":  40,
+"endLine":  63,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'max' with 'nameof(max)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Within.cs",
+"region":  {
+"startLine":  64,
+"startColumn":  40,
+"endLine":  64,
+"endColumn":  45
+}
+}
+}
+]
+}

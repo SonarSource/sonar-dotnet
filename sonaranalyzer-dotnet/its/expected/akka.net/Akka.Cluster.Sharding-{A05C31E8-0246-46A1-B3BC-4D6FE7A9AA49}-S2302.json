@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S2302",
+"message":  "Replace the string 'tunningParameters' with 'nameof(tunningParameters)'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingSettings.cs",
+"region":  {
+"startLine":  174,
+"startColumn":  49,
+"endLine":  174,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'coordinatorSingletonSettings' with 'nameof(coordinatorSingletonSettings)'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingSettings.cs",
+"region":  {
+"startLine":  182,
+"startColumn":  49,
+"endLine":  182,
+"endColumn":  79
+}
+}
+}
+]
+}

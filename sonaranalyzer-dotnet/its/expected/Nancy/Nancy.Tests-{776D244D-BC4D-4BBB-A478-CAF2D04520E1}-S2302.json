@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2302",
+"message":  "Replace the string 'https' with 'nameof(https)'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Security\ModuleSecurityFixture.cs",
+"region":  {
+"startLine":  400,
+"startColumn":  34,
+"endLine":  400,
+"endColumn":  41
+}
+}
+}
+]
+}

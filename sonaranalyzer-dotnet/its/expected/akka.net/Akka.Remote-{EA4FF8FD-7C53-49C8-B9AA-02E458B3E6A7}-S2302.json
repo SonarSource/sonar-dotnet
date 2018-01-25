@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S2302",
+"message":  "Replace the string 'routerConfig' with 'nameof(routerConfig)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Routing\RemoteRouterConfig.cs",
+"region":  {
+"startLine":  159,
+"startColumn":  111,
+"endLine":  159,
+"endColumn":  125
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'address' with 'nameof(address)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\Helios\HeliosTransport.cs",
+"region":  {
+"startLine":  345,
+"startColumn":  171,
+"endLine":  345,
+"endColumn":  180
+}
+}
+}
+]
+}

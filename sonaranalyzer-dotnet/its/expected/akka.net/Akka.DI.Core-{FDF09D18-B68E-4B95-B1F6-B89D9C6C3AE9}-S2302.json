@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S2302",
+"message":  "Replace the string 'dependencyResolver' with 'nameof(dependencyResolver)'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\dependencyInjection\Akka.DI.Core\DIExt.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  77,
+"endLine":  26,
+"endColumn":  97
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'system' with 'nameof(system)'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\dependencyInjection\Akka.DI.Core\Extensions.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  65,
+"endLine":  26,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'dependencyResolver' with 'nameof(dependencyResolver)'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\dependencyInjection\Akka.DI.Core\Extensions.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  77,
+"endLine":  27,
+"endColumn":  97
+}
+}
+}
+]
+}

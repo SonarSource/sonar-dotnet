@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S2302",
+"message":  "Replace the string 'from' with 'nameof(from)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterMetricsCollector.cs",
+"region":  {
+"startLine":  528,
+"startColumn":  84,
+"endLine":  528,
+"endColumn":  90
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'halfLife' with 'nameof(halfLife)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterMetricsCollector.cs",
+"region":  {
+"startLine":  598,
+"startColumn":  75,
+"endLine":  598,
+"endColumn":  85
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'address' with 'nameof(address)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Proto\ClusterMessageSerializer.cs",
+"region":  {
+"startLine":  158,
+"startColumn":  133,
+"endLine":  158,
+"endColumn":  142
+}
+}
+}
+]
+}

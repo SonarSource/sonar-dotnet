@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S2302",
+"message":  "Replace the string 'data' with 'nameof(data)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Persistence\JsonPersistentTestRunStore.cs",
+"region":  {
+"startLine":  63,
+"startColumn":  63,
+"endLine":  63,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'message' with 'nameof(message)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\MessageSink.cs",
+"region":  {
+"startLine":  227,
+"startColumn":  53,
+"endLine":  227,
+"endColumn":  62
+}
+}
+}
+]
+}

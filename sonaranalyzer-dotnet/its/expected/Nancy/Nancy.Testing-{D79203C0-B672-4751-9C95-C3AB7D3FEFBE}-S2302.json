@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S2302",
+"message":  "Replace the string 'path' with 'nameof(path)'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\PathHelper.cs",
+"region":  {
+"startLine":  19,
+"startColumn":  77,
+"endLine":  19,
+"endColumn":  83
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'levels' with 'nameof(levels)'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\PathHelper.cs",
+"region":  {
+"startLine":  24,
+"startColumn":  74,
+"endLine":  24,
+"endColumn":  82
+}
+}
+}
+]
+}

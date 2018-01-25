@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S2302",
+"message":  "Replace the string 'endpoint' with 'nameof(endpoint)'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\transports\Akka.Remote.AkkaIOTransport\AddressConverters.cs",
+"region":  {
+"startLine":  25,
+"startColumn":  41,
+"endLine":  25,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'address' with 'nameof(address)'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\transports\Akka.Remote.AkkaIOTransport\AddressConverters.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  64,
+"endLine":  31,
+"endColumn":  73
+}
+}
+}
+]
+}

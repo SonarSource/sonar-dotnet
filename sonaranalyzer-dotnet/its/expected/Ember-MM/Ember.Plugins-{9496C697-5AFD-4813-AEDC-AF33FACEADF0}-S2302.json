@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S2302",
+"message":  "Replace the string 'context' with 'nameof(context)'.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember.Plugins\Scraper\MovieScraperManager.cs",
+"region":  {
+"startLine":  70,
+"startColumn":  49,
+"endLine":  70,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'context' with 'nameof(context)'.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember.Plugins\Scraper\MovieScraperManager.cs",
+"region":  {
+"startLine":  110,
+"startColumn":  49,
+"endLine":  110,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'paths' with 'nameof(paths)'.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember.Plugins\Utility.cs",
+"region":  {
+"startLine":  23,
+"startColumn":  49,
+"endLine":  23,
+"endColumn":  56
+}
+}
+}
+]
+}
