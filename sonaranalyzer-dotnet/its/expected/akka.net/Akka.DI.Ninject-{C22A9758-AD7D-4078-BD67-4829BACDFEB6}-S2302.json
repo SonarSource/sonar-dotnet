@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S2302",
+"message":  "Replace the string 'system' with 'nameof(system)'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\dependencyInjection\Akka.DI.Ninject\NinjectDependencyResolver.cs",
+"region":  {
+"startLine":  40,
+"startColumn":  65,
+"endLine":  40,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'container' with 'nameof(container)'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\dependencyInjection\Akka.DI.Ninject\NinjectDependencyResolver.cs",
+"region":  {
+"startLine":  41,
+"startColumn":  68,
+"endLine":  41,
+"endColumn":  79
+}
+}
+}
+]
+}

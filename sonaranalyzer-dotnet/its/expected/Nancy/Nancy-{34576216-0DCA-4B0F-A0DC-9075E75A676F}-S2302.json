@@ -2,6 +2,97 @@
 "issues":  [
 {
 "id":  "S2302",
+"message":  "Replace the string 'registrationType' with 'nameof(registrationType)'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\CollectionTypeRegistration.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  49,
+"endLine":  26,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'implementationTypes' with 'nameof(implementationTypes)'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\CollectionTypeRegistration.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  49,
+"endLine":  31,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'registrationType' with 'nameof(registrationType)'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\InstanceRegistration.cs",
+"region":  {
+"startLine":  19,
+"startColumn":  49,
+"endLine":  19,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'implementation' with 'nameof(implementation)'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\InstanceRegistration.cs",
+"region":  {
+"startLine":  24,
+"startColumn":  49,
+"endLine":  24,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'registrationType' with 'nameof(registrationType)'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\TypeRegistration.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  49,
+"endLine":  20,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'implementationType' with 'nameof(implementationType)'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\TypeRegistration.cs",
+"region":  {
+"startLine":  25,
+"startColumn":  49,
+"endLine":  25,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'salt' with 'nameof(salt)'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Cryptography\PassphraseKeyGenerator.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  55,
+"endLine":  28,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S2302",
 "message":  "Replace the string 'bytes' with 'nameof(bytes)'.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
@@ -314,6 +405,19 @@
 },
 {
 "id":  "S2302",
+"message":  "Replace the string 'baseStream' with 'nameof(baseStream)'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\IO\UnclosableStreamWrapper.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  49,
+"endLine":  27,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S2302",
 "message":  "Replace the string 'converters' with 'nameof(converters)'.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
@@ -392,6 +496,19 @@
 },
 {
 "id":  "S2302",
+"message":  "Replace the string 'serializer' with 'nameof(serializer)'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Json\JsonSerializer.cs",
+"region":  {
+"startLine":  63,
+"startColumn":  38,
+"endLine":  63,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S2302",
 "message":  "Replace the string 'output' with 'nameof(output)'.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Json\JsonSerializer.cs",
@@ -418,6 +535,84 @@
 },
 {
 "id":  "S2302",
+"message":  "Replace the string 'propertyInfo' with 'nameof(propertyInfo)'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\BindingMemberInfo.cs",
+"region":  {
+"startLine":  58,
+"startColumn":  49,
+"endLine":  58,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'fieldInfo' with 'nameof(fieldInfo)'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\BindingMemberInfo.cs",
+"region":  {
+"startLine":  72,
+"startColumn":  49,
+"endLine":  72,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'typeConverters' with 'nameof(typeConverters)'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  49,
+"endLine":  35,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'bodyDeserializers' with 'nameof(bodyDeserializers)'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"region":  {
+"startLine":  40,
+"startColumn":  49,
+"endLine":  40,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'fieldNameConverter' with 'nameof(fieldNameConverter)'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"region":  {
+"startLine":  45,
+"startColumn":  49,
+"endLine":  45,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'defaults' with 'nameof(defaults)'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
+"region":  {
+"startLine":  50,
+"startColumn":  49,
+"endLine":  50,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S2302",
 "message":  "Replace the string 'modelType' with 'nameof(modelType)'.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
@@ -426,6 +621,136 @@
 "startColumn":  110,
 "endLine":  88,
 "endColumn":  121
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'locator' with 'nameof(locator)'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\DynamicModelBinderAdapter.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  49,
+"endLine":  29,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'context' with 'nameof(context)'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\DynamicModelBinderAdapter.cs",
+"region":  {
+"startLine":  34,
+"startColumn":  49,
+"endLine":  34,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'configuration' with 'nameof(configuration)'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\DynamicModelBinderAdapter.cs",
+"region":  {
+"startLine":  39,
+"startColumn":  49,
+"endLine":  39,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'boundType' with 'nameof(boundType)'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ModelBinding\ModelBindingException.cs",
+"region":  {
+"startLine":  36,
+"startColumn":  49,
+"endLine":  36,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'dispatcher' with 'nameof(dispatcher)'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\NancyEngine.cs",
+"region":  {
+"startLine":  52,
+"startColumn":  49,
+"endLine":  52,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'contextFactory' with 'nameof(contextFactory)'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\NancyEngine.cs",
+"region":  {
+"startLine":  57,
+"startColumn":  49,
+"endLine":  57,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'statusCodeHandlers' with 'nameof(statusCodeHandlers)'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\NancyEngine.cs",
+"region":  {
+"startLine":  62,
+"startColumn":  49,
+"endLine":  62,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'requestTracing' with 'nameof(requestTracing)'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\NancyEngine.cs",
+"region":  {
+"startLine":  67,
+"startColumn":  49,
+"endLine":  67,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'staticContentProvider' with 'nameof(staticContentProvider)'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\NancyEngine.cs",
+"region":  {
+"startLine":  72,
+"startColumn":  49,
+"endLine":  72,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'negotiator' with 'nameof(negotiator)'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\NancyEngine.cs",
+"region":  {
+"startLine":  77,
+"startColumn":  49,
+"endLine":  77,
+"endColumn":  61
 }
 }
 },
@@ -444,6 +769,32 @@
 },
 {
 "id":  "S2302",
+"message":  "Replace the string 'method' with 'nameof(method)'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Request.cs",
+"region":  {
+"startLine":  58,
+"startColumn":  55,
+"endLine":  58,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'url' with 'nameof(url)'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Request.cs",
+"region":  {
+"startLine":  63,
+"startColumn":  49,
+"endLine":  63,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S2302",
 "message":  "Replace the string 'module' with 'nameof(module)'.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\NegotiationContext.cs",
@@ -452,6 +803,84 @@
 "startColumn":  49,
 "endLine":  105,
 "endColumn":  57
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'context' with 'nameof(context)'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\Negotiator.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  49,
+"endLine":  20,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'action' with 'nameof(action)'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\Route.cs",
+"region":  {
+"startLine":  23,
+"startColumn":  49,
+"endLine":  23,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'method' with 'nameof(method)'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\RouteDescription.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  73,
+"endLine":  26,
+"endColumn":  81
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'path' with 'nameof(path)'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\RouteDescription.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  71,
+"endLine":  31,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'configuration' with 'nameof(configuration)'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Session\CookieBasedSessions.cs",
+"region":  {
+"startLine":  55,
+"startColumn":  49,
+"endLine":  55,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'configuration' with 'nameof(configuration)'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Session\CookieBasedSessions.cs",
+"region":  {
+"startLine":  60,
+"startColumn":  73,
+"endLine":  60,
+"endColumn":  88
 }
 }
 },
@@ -574,6 +1003,45 @@
 },
 {
 "id":  "S2302",
+"message":  "Replace the string 'factory' with 'nameof(factory)'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  2580,
+"startColumn":  53,
+"endLine":  2580,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'factory' with 'nameof(factory)'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  2643,
+"startColumn":  53,
+"endLine":  2643,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'lifetimeProvider' with 'nameof(lifetimeProvider)'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  2920,
+"startColumn":  53,
+"endLine":  2920,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S2302",
 "message":  "Replace the string 'parameters' with 'nameof(parameters)'.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
@@ -608,6 +1076,32 @@
 "startColumn":  49,
 "endLine":  3589,
 "endColumn":  61
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'ruleType' with 'nameof(ruleType)'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Validation\ModelValidationRule.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  49,
+"endLine":  22,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'errorMessageFormatter' with 'nameof(errorMessageFormatter)'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Validation\ModelValidationRule.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  49,
+"endLine":  27,
+"endColumn":  72
 }
 }
 },

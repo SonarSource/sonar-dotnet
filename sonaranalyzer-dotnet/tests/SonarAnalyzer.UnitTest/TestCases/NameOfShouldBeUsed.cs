@@ -15,11 +15,21 @@ namespace Tests.Diagnostics
 
             const string foo = "arg1";
 
+            ValidateArgument(arg1, "arg1");
+
             if ("arg1" == foo)
                 return;
 
             throw new ArgumentException("arg1 ");
             throw new ArgumentException("ARG1");
+        }
+
+        private void ValidateArgument(int v, string name)
+        {
+            if (v < 0)
+                throw new ArgumentOutOfRangeException("name"); // Noncompliant
+            if (v < 0)
+                throw new Exception(nameof(name));
         }
 
         public Program(int arg1, int arg2)
@@ -32,5 +42,6 @@ namespace Tests.Diagnostics
         {
             throw new Exception("arg1");
         }
+
     }
 }

@@ -64,6 +64,32 @@
 "endColumn":  64
 }
 }
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'userValidator' with 'nameof(userValidator)'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Authentication.Basic\BasicAuthenticationConfiguration.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  49,
+"endLine":  20,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'realm' with 'nameof(realm)'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Authentication.Basic\BasicAuthenticationConfiguration.cs",
+"region":  {
+"startLine":  25,
+"startColumn":  45,
+"endLine":  25,
+"endColumn":  52
+}
+}
 }
 ]
 }

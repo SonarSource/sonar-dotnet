@@ -84,7 +84,8 @@ namespace SonarAnalyzer.Rules.CSharp
                             messageArgs: literalText));
                     }
                 },
-                SyntaxKind.MethodDeclaration);
+                SyntaxKind.MethodDeclaration,
+                SyntaxKind.ConstructorDeclaration);
         }
     }
 }
