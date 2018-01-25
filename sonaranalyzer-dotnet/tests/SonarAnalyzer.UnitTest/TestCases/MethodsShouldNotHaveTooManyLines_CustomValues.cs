@@ -55,7 +55,8 @@ namespace Tests.Diagnostics
 
         public int Method_06() // Noncompliant {{This method 'Method_06' has 6 lines, which is greater than the 2 lines authorized. Split it into smaller methods.}}
         {
-
+            // We only report on outer methods.
+            // The lines of code of inner functions are counted against the method.
             void InnerFunction_06()
             {
                 int i = 0;
