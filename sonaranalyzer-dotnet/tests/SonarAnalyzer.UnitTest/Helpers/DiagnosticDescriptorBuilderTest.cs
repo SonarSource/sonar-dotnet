@@ -101,7 +101,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             var result = DiagnosticDescriptorBuilder.GetDescriptor(diagnosticId, "", IdeVisibility.Hidden, mockedResourceManager);
 
             // Assert
-            result.CustomTags.Should().ContainInOrder(DiagnosticTagsHelper.SonarWayTag, WellKnownDiagnosticTags.Unnecessary);
+            result.CustomTags.Should().Contain(DiagnosticTagsHelper.SonarWayTag, WellKnownDiagnosticTags.Unnecessary);
         }
 
         [TestMethod]
