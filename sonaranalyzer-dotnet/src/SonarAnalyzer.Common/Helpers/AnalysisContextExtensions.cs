@@ -33,32 +33,32 @@ namespace SonarAnalyzer.Helpers
 
         public static void ReportDiagnosticWhenActive(this SyntaxNodeAnalysisContext context, Diagnostic diagnostic)
         {
-            TryReportDiagnostic(context.Node.SyntaxTree, diagnostic, d => context.ReportDiagnostic(d));
+            InternalReportDiagnostic(context.Node.SyntaxTree, diagnostic, d => context.ReportDiagnostic(d));
         }
 
         public static void ReportDiagnosticWhenActive(this SyntaxTreeAnalysisContext context, Diagnostic diagnostic)
         {
-            TryReportDiagnostic(context.Tree, diagnostic, d => context.ReportDiagnostic(d));
+            InternalReportDiagnostic(context.Tree, diagnostic, d => context.ReportDiagnostic(d));
         }
 
         public static void ReportDiagnosticWhenActive(this CompilationAnalysisContext context, Diagnostic diagnostic)
         {
-            TryReportDiagnostic(context.Compilation.SyntaxTrees.FirstOrDefault(), diagnostic,
+            InternalReportDiagnostic(context.Compilation.SyntaxTrees.FirstOrDefault(), diagnostic,
                 d => context.ReportDiagnostic(d));
         }
 
         public static void ReportDiagnosticWhenActive(this SymbolAnalysisContext context, Diagnostic diagnostic)
         {
-            TryReportDiagnostic(context.Symbol.Locations.FirstOrDefault(l => l.SourceTree != null)?.SourceTree, diagnostic,
+            InternalReportDiagnostic(context.Symbol.Locations.FirstOrDefault(l => l.SourceTree != null)?.SourceTree, diagnostic,
                 d => context.ReportDiagnostic(d));
         }
 
         public static void ReportDiagnosticWhenActive(this CodeBlockAnalysisContext context, Diagnostic diagnostic)
         {
-            TryReportDiagnostic(context.CodeBlock.SyntaxTree, diagnostic, d => context.ReportDiagnostic(d));
+            InternalReportDiagnostic(context.CodeBlock.SyntaxTree, diagnostic, d => context.ReportDiagnostic(d));
         }
 
-        private static void TryReportDiagnostic(SyntaxTree tree, Diagnostic diagnostic, Action<Diagnostic> report)
+        private static void InternalReportDiagnostic(SyntaxTree tree, Diagnostic diagnostic, Action<Diagnostic> report)
         {
             if (SonarAnalysisContext.IsAnalysisDisabled(tree, new[] { diagnostic.Descriptor }) ||
                 !SonarAnalysisContext.ShouldDiagnosticBeReported(tree, diagnostic))
