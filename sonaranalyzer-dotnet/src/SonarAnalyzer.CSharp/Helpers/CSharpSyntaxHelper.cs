@@ -205,13 +205,16 @@ namespace SonarAnalyzer.Helpers
                 .Any(symbolPredicate);
         }
 
+        public static SyntaxToken? GetIdentifierOrDefault(this BaseMethodDeclarationSyntax methodDeclaration)
+        {
+            return (methodDeclaration as MethodDeclarationSyntax)?.Identifier ??
+                   (methodDeclaration as ConstructorDeclarationSyntax)?.Identifier ??
+                   (methodDeclaration as DestructorDeclarationSyntax)?.Identifier;
+        }
+
         public static Location FindIdentifierLocation(this BaseMethodDeclarationSyntax methodDeclaration)
         {
-            var identifierSyntax = (methodDeclaration as MethodDeclarationSyntax)?.Identifier ??
-                                   (methodDeclaration as ConstructorDeclarationSyntax)?.Identifier ??
-                                   (methodDeclaration as DestructorDeclarationSyntax)?.Identifier;
-
-            return identifierSyntax?.GetLocation();
+            return GetIdentifierOrDefault(methodDeclaration)?.GetLocation();
         }
 
         public static bool IsCatchingAllExceptions(this CatchClauseSyntax catchClause)
