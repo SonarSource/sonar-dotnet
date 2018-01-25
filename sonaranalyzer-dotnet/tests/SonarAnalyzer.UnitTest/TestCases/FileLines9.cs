@@ -35,11 +35,11 @@ namespace Tests.Diagnostics
         /// <summary>
         ///
         /// </summary>
-        public Foo() // TEST
-        {
-            // SOMETHING
-        }
-    }
-}
+        public Foo() { // TEST
+            string multilineToken = @"
+
+                ";
+} } }
+
 
 // hello
