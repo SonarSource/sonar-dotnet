@@ -52,7 +52,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {
-                    var methodSyntax = (MethodDeclarationSyntax)c.Node;
+                    var methodSyntax = (BaseMethodDeclarationSyntax)c.Node;
 
                     var paramGroups = methodSyntax.ParameterList.Parameters
                         .GroupBy(p => p.Identifier.ValueText);
@@ -67,7 +67,9 @@ namespace SonarAnalyzer.Rules.CSharp
                                       g => g.Single().GetLocation());
 
                     var childTokens = methodSyntax
-                        .DescendantTokens()
+                        .DescendantNodes()
+                        .OfType<ThrowStatementSyntax>()
+                        .SelectMany(th => th.DescendantTokens())
                         .Where(t => t.IsAnyKind(StringTokenTypes))
                         .Where(t => paramLookup.ContainsKey(t.ValueText))
                         .ToArray();
@@ -84,7 +86,5 @@ namespace SonarAnalyzer.Rules.CSharp
                 },
                 SyntaxKind.MethodDeclaration);
         }
-
-
     }
 }
