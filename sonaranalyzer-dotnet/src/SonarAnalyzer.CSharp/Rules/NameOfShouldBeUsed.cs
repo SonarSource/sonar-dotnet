@@ -41,8 +41,8 @@ namespace SonarAnalyzer.Rules.CSharp
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        private static readonly List<SyntaxKind> StringTokenTypes
-            = new List<SyntaxKind>
+        private static readonly HashSet<SyntaxKind> StringTokenTypes
+            = new HashSet<SyntaxKind>
             {
                 SyntaxKind.InterpolatedStringTextToken,
                 SyntaxKind.StringLiteralToken
@@ -54,38 +54,39 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     var methodSyntax = (BaseMethodDeclarationSyntax)c.Node;
 
-                    var paramGroups = methodSyntax.ParameterList.Parameters
+                    var paramGroups = methodSyntax.ParameterList?.Parameters
                         .GroupBy(p => p.Identifier.ValueText);
 
-                    if (paramGroups.Any(g => g.Skip(1).Any()))
+                    if (paramGroups != null &&
+                        paramGroups.Any(g => g.Count() != 1))
                     {
                         return;
                     }
 
                     var paramLookup = paramGroups
-                        .ToDictionary(g => g.Single().Identifier.ValueText,
-                                      g => g.Single().GetLocation());
+                        .ToDictionary(g => g.First().Identifier.ValueText,
+                                      g => g.First().GetLocation());
 
-                    var childTokens = methodSyntax
+                    methodSyntax
                         .DescendantNodes()
                         .OfType<ThrowStatementSyntax>()
                         .SelectMany(th => th.DescendantTokens())
                         .Where(t => t.IsAnyKind(StringTokenTypes))
                         .Where(t => paramLookup.ContainsKey(t.ValueText))
-                        .ToArray();
-
-                    foreach (var stringLiteralToken in childTokens)
-                    {
-                        var literalText = stringLiteralToken.ValueText;
-
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(
-                            descriptor: rule,
-                            location: stringLiteralToken.GetLocation(),
-                            messageArgs: literalText));
-                    }
+                        .ToList()
+                        .ForEach(t => ReportIssue(t, c));
                 },
                 SyntaxKind.MethodDeclaration,
                 SyntaxKind.ConstructorDeclaration);
+        }
+
+        private static void ReportIssue(SyntaxToken stringLiteralToken,
+            SyntaxNodeAnalysisContext context)
+        {
+            context.ReportDiagnosticWhenActive(Diagnostic.Create(
+                    descriptor: rule,
+                    location: stringLiteralToken.GetLocation(),
+                    messageArgs: stringLiteralToken.ValueText));
         }
     }
 }
