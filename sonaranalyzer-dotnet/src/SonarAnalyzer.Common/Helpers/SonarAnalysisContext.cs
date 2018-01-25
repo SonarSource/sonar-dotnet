@@ -27,13 +27,23 @@ using Microsoft.CodeAnalysis.Diagnostics;
 
 namespace SonarAnalyzer.Helpers
 {
+    /// <summary>
+    /// SonarC# and SonarVB specific context for initializing an analyzer. This type acts as a wrapper around Roslyn
+    /// <see cref="AnalysisContext"/> to allow for specialized control over the analyzer.
+    /// Here is the list of fine-grained changes we are doing:
+    /// - Avoid duplicated issues when the analyzer NuGet (SonarAnalyzer) and the VSIX (SonarLint) are installed simultaneously.
+    /// - Allow a specific kind of ruleset for SonarLint (enable/disable a rule).
+    /// - Prevent reporting an issue when it was suppressed on SonarQube.
+    /// </summary>
     public class SonarAnalysisContext
     {
         private readonly AnalysisContext context;
         private readonly IEnumerable<DiagnosticDescriptor> supportedDiagnostics;
 
         /// <summary>
-        /// This delegate is only set by the VSIX when the projects have the NuGet package installed to avoid repeated behaviors.
+        /// This delegate is set by:
+        /// - the VSIX (SonarLint) when the projects have the NuGet package installed to avoid repeated behaviors.
+        /// - the VSIX (SonarLint) when rule is disabled on the specialized ruleset.
         /// </summary>
         /// <remarks>
         /// This delegate should always be kept in sync with its usage in SonarLint for Visual Studio. See file:
