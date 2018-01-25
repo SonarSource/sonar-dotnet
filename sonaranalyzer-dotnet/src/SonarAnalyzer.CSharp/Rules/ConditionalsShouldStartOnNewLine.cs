@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2018 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -60,7 +60,10 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool TryGetPreviousTokenInSameLine(SyntaxToken token, out SyntaxToken previousToken)
         {
             previousToken = token.GetPreviousToken();
-            return previousToken.GetStartLineNumber() == token.GetStartLineNumber();
+            return GetFirstLineNumber(previousToken) == GetFirstLineNumber(token);
         }
+
+        private static int GetFirstLineNumber(SyntaxToken token)
+            => token.GetLocation().GetLineSpan().StartLinePosition.Line;
     }
 }

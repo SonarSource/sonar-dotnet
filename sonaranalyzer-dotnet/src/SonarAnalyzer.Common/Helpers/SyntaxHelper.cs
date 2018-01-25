@@ -26,11 +26,6 @@ namespace SonarAnalyzer.Helpers
 {
     internal static class SyntaxHelper
     {
-        public static int GetStartLineNumber(this SyntaxToken token, bool isZeroBasedCount = true)
-        {
-            return GetLineNumbers(token, isZeroBasedCount).First();
-        }
-
         public static IEnumerable<int> GetLineNumbers(this SyntaxToken token, bool isZeroBasedCount = true)
         {
             var offset = isZeroBasedCount ? 0 : 1;

@@ -13,9 +13,10 @@ Namespace Tests.Diagnostics
             System.Collections.Generic.List(Of Integer).Enumerator.Equals(Nothing)
             System.Collections.Generic.List(Of Integer).Enumerator.Equals(Nothing)
             System.Collections.Generic.List(Of Integer).Enumerator.Equals(Nothing)
-            System.Collections.Generic.List(Of Integer).Enumerator.Equals(Nothing)
-            System.Collections.Generic.List(Of Integer).Enumerator.Equals(Nothing)
-            System.Collections.Generic.List(Of Integer).Enumerator.Equals(Nothing)
+
+            Dim s As String = "a
+                b
+                c"
         End Sub
     End Class
 

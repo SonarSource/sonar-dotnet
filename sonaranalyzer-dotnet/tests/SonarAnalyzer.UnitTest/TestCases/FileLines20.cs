@@ -6,22 +6,21 @@ namespace Tests.Diagnostics
         public FooBar()
         {
             System
-                   .
-                   Collections
-
+                   .Collections
                    .
                    // WTF
                    Generic
 
-                   .
-                   List<int>
+                   .List<int>
                    .
                    // Who writes this kind of code!
                    Enumerator
 
-                   .
+                   .Equals(null);
 
-                   Equals(null);
+            var str = @"
+                a
+                b";
         }
     }
 }
