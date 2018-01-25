@@ -2886,6 +2886,33 @@
   <data name="S2292_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
   </data>
+  <data name="S2302_Category" xml:space="preserve">
+    <value>Critical Code Smell</value>
+  </data>
+  <data name="S2302_Description" xml:space="preserve">
+    <value>Because parameter names could be changed during refactoring, they should not be spelled out literally in strings. Instead, use nameof(), and the string that's output will always be correct.</value>
+  </data>
+  <data name="S2302_IsActivatedByDefault" xml:space="preserve">
+    <value>False</value>
+  </data>
+  <data name="S2302_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S2302_RemediationCost" xml:space="preserve">
+    <value>5min</value>
+  </data>
+  <data name="S2302_Severity" xml:space="preserve">
+    <value>Critical</value>
+  </data>
+  <data name="S2302_Tags" xml:space="preserve">
+    <value>c#6</value>
+  </data>
+  <data name="S2302_Title" xml:space="preserve">
+    <value>"nameof" should be used</value>
+  </data>
+  <data name="S2302_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S2306_Category" xml:space="preserve">
     <value>Blocker Code Smell</value>
   </data>

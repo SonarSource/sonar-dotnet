@@ -1,0 +1,21 @@
+<p>Because parameter names could be changed during refactoring, they should not be spelled out literally in strings. Instead, use
+<code>nameof()</code>, and the string that's output will always be correct.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+void DoSomething(int someParameter)
+{
+  if (someParameter &lt; 0) {
+    throw new ArgumentException("Bad argument", "someParameter");  // Noncompliant
+  }
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+void DoSomething(int someParameter)
+{
+  if (someParameter &lt; 0) {
+    throw new ArgumentException("Bad argument", nameof(someParameter));  // Noncompliant
+  }
+}
+</pre>
+
