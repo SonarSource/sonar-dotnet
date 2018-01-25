@@ -51,7 +51,7 @@ namespace SonarAnalyzer.Rules
                         .GetRoot()
                         .DescendantTokens()
                         .Where(token => !IsEndOfFileToken(token))
-                        .Select(token => token.GetLineNumber(isZeroBasedCount: false))
+                        .Select(token => token.GetStartLineNumber(isZeroBasedCount: false))
                         .Distinct()
                         .LongCount();
 

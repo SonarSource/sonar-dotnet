@@ -25,10 +25,10 @@ namespace Tests.Diagnostics
         public void Method_01() // Noncompliant {{This method 'Method_01' has 4 lines, which is greater than the 2 lines authorized. Split it into smaller methods.}}
 //                  ^^^^^^^^^
         {
-            int i = 1; i++;
-            i++;
-            i++;
-            i++;
+            for (int i = 1; i < 10; i++)
+            {
+                i++;
+            }
         }
 
         public int Method_02() // Noncompliant {{This method 'Method_02' has 13 lines, which is greater than the 2 lines authorized. Split it into smaller methods.}}
@@ -75,6 +75,34 @@ namespace Tests.Diagnostics
             =>
             1
             .ToString();
+
+        public string Method_09()
+        {
+            /*
+             * comments are not counted, y'know?
+             *
+             */
+
+            //
+            // Neither are these
+            //
+
+            return null;
+        }
+
+        public string Method_10() // Noncompliant {{This method 'Method_10' has 3 lines, which is greater than the 2 lines authorized. Split it into smaller methods.}}
+        { int i = 0;
+            i++;
+            return null; }
+
+        public string Method_11() // Noncompliant {{This method 'Method_11' has 5 lines, which is greater than the 2 lines authorized. Split it into smaller methods.}}
+        {
+            return @"
+
+
+
+            ";
+        }
 
         // Compliant. Properties are not covered by this rule
         public int Property_01

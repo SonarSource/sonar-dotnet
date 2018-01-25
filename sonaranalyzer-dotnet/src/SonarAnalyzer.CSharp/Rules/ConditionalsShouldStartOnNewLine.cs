@@ -60,7 +60,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool TryGetPreviousTokenInSameLine(SyntaxToken token, out SyntaxToken previousToken)
         {
             previousToken = token.GetPreviousToken();
-            return previousToken.GetLineNumber() == token.GetLineNumber();
+            return previousToken.GetStartLineNumber() == token.GetStartLineNumber();
         }
     }
 }

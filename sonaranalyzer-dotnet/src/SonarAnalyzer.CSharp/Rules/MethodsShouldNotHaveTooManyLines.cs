@@ -53,7 +53,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     if (Max < 2)
                     {
-                        throw new InvalidOperationException($"Invalid maximum number of lines: {Max}");
+                        throw new ArgumentOutOfRangeException(
+                            $"Invalid rule parameter: maximum number of lines = {Max}. Must be at least 2.");
                     }
 
                     if (c.IsTest())
@@ -70,7 +71,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
 
                     var linesCount = GetBodyTokens(baseMethodSyntax)
-                        .Select(token => token.GetLineNumber())
+                        .SelectMany(token => token.GetLineNumbers())
                         .Distinct()
                         .LongCount();
 
