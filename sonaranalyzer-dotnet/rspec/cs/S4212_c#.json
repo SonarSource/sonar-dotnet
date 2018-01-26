@@ -1,0 +1,15 @@
+{
+  "title": "Serialization constructors should be secured",
+  "type": "VULNERABILITY",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    "security"
+  ],
+  "defaultSeverity": "Critical",
+  "ruleSpecification": "RSPEC-4212",
+  "sqKey": "S4212"
+}
