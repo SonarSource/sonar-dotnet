@@ -67,8 +67,8 @@ namespace SonarAnalyzer.Rules.VisualBasic
             {
                 if (EquivalenceChecker.AreEquivalent(conditions[currentIndex], conditions[j]))
                 {
-                    context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, conditions[currentIndex].GetLocation(),
-                        conditions[j].GetLineNumberToReport()));
+                    Diagnostic.Create(rule, conditions[currentIndex].GetLocation(), conditions[j].GetLineNumberToReport())
+                        .ReportFor(context);
                     return;
                 }
             }

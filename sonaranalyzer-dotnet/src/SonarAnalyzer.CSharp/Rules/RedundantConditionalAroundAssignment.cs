@@ -66,7 +66,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (AreMatchingExpressions(expression1Condition, expression2Condition, expression2Assignment, expression1Assignment) ||
                         AreMatchingExpressions(expression1Condition, expression2Condition, expression1Assignment, expression2Assignment))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, condition.GetLocation()));
+                        Diagnostic.Create(rule, condition.GetLocation()).ReportFor(c);
                     }
                 },
                 SyntaxKind.IfStatement);

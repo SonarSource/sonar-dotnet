@@ -54,7 +54,7 @@ namespace SonarAnalyzer.Rules.CSharp
                                 c.Tree,
                                 TextSpan.FromBounds(startLocation, startLocation + Word.Length));
 
-                            c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, location));
+                            Diagnostic.Create(Rule, location).ReportFor(c);
                         }
                     }
                 });

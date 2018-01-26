@@ -59,8 +59,8 @@ namespace SonarAnalyzer.Rules.Common
 
                     if (GetOperands(node).All(o => IsBool(o, c.SemanticModel)))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, GetOperator(node).GetLocation(),
-                            GetCurrentOpName(node), GetSuggestedOpName(node)));
+                        Diagnostic.Create(Rule, GetOperator(node).GetLocation(), GetCurrentOpName(node), GetSuggestedOpName(node))
+                            .ReportFor(c);
                     }
                 },
                 SyntaxKindsOfInterest.ToArray());

@@ -64,8 +64,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         var secondaryLocation = Location.Create(expression.SyntaxTree,
                             GetSpan(innermostExpression.CloseParenToken, expression.CloseParenToken));
 
-                        c.ReportDiagnosticWhenActive(
-                            Diagnostic.Create(rule, location, additionalLocations: new[] { secondaryLocation }));
+                                                    Diagnostic.Create(rule, location, additionalLocations: new[] { secondaryLocation }).ReportFor(c);
                     }
                 },
                 SyntaxKind.ParenthesizedExpression);

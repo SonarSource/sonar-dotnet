@@ -163,7 +163,7 @@ namespace SonarAnalyzer.UnitTest
         }
 
         private static IEnumerable<TMessage> ReadProtobuf<TMessage>(string path)
-            where TMessage: IMessage<TMessage>, new()
+            where TMessage : IMessage<TMessage>, new()
         {
             using (var input = File.OpenRead(path))
             {
@@ -640,10 +640,14 @@ namespace SonarAnalyzer.UnitTest
             }
 
 
-            SonarAnalysisContext.ShouldDiagnosticBeReported = (s, d) =>
+            DiagnosticReportHelper.ReportDiagnostic = context =>
             {
-                counters.AddOrUpdate(d.Id, addValueFactory: (key) => 1, updateValueFactory: (key, count) => count + 1);
-                return true;
+                counters.AddOrUpdate(context.Diagnostic.Id, addValueFactory: (key) => 1, updateValueFactory: (key, count) => count + 1);
+
+                if (!VbcHelper.IsTriggeringVbcError(context.Diagnostic))
+                {
+                    context.ReportDiagnostic(context.Diagnostic);
+                }
             };
         }
 

@@ -110,15 +110,14 @@ namespace SonarAnalyzer.Rules.CSharp
                         mSyntax => true,
                         mSymbol => methodOverloadSet.Contains(mSymbol)))
                 {
-                    context.ReportDiagnosticWhenActive(Diagnostic.Create(rule_S3997, methodDeclaration.FindIdentifierLocation()));
+                    Diagnostic.Create(rule_S3997, methodDeclaration.FindIdentifierLocation()).ReportFor(context);
                 }
             }
             else
             {
                 foreach (var paramIdx in stringUrlParams)
                 {
-                    context.ReportDiagnosticWhenActive(Diagnostic.Create(rule_S3994,
-                        methodDeclaration.ParameterList.Parameters[paramIdx].Type.GetLocation()));
+                    Diagnostic.Create(rule_S3994,                        methodDeclaration.ParameterList.Parameters[paramIdx].Type.GetLocation()).ReportFor(context);
                 }
             }
         }
@@ -132,7 +131,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 !propertySymbol.IsOverride &&
                 NameContainsUri(propertySymbol.Name))
             {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule_S3996, propertyDeclaration.Type.GetLocation()));
+                Diagnostic.Create(rule_S3996, propertyDeclaration.Type.GetLocation()).ReportFor(context);
             }
         }
 
@@ -148,7 +147,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var methodOverloads = FindOverloadsThatUseUriTypeInPlaceOfString(invokedMethodSymbol, stringUrlParams);
             if (stringUrlParams.Count > 0 && methodOverloads.Any())
             {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule_S4005, context.Node.GetLocation()));
+                Diagnostic.Create(rule_S4005, context.Node.GetLocation()).ReportFor(context);
             }
         }
 
@@ -161,7 +160,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 methodSymbol.ReturnType.Is(KnownType.System_String) &&
                 NameContainsUri(methodSymbol.Name))
             {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule_S3995, returnTypeLocation));
+                Diagnostic.Create(rule_S3995, returnTypeLocation).ReportFor(context);
             }
         }
 

@@ -108,10 +108,10 @@ namespace SonarAnalyzer.Rules.CSharp
 
             if (cognitiveWalker.Complexity > Threshold)
             {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, getLocationToReport(syntax),
-                    cognitiveWalker.IncrementLocations.ToAdditionalLocations(),
-                    cognitiveWalker.IncrementLocations.ToProperties(),
-                    new object[] { declarationType, cognitiveWalker.Complexity, threshold }));
+                Diagnostic.Create(rule, getLocationToReport(syntax), cognitiveWalker.IncrementLocations.ToAdditionalLocations(),
+                        cognitiveWalker.IncrementLocations.ToProperties(),
+                        new object[] { declarationType, cognitiveWalker.Complexity, threshold })
+                    .ReportFor(context);
             }
         }
     }

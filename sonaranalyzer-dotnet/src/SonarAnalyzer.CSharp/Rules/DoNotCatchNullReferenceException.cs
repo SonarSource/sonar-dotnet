@@ -47,13 +47,13 @@ namespace SonarAnalyzer.Rules.CSharp
                     var catchClause = (CatchClauseSyntax)c.Node;
                     if (IsCatchingNullReferenceException(catchClause.Declaration, c.SemanticModel))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, catchClause.Declaration.Type.GetLocation()));
+                        Diagnostic.Create(rule, catchClause.Declaration.Type.GetLocation()).ReportFor(c);
                         return;
                     }
 
                     if (HasIsNullReferenceExceptionFilter(catchClause.Filter, c.SemanticModel, out var locationToReportOn))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, locationToReportOn));
+                        Diagnostic.Create(rule, locationToReportOn).ReportFor(c);
                     }
                 },
                 SyntaxKind.CatchClause);

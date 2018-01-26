@@ -68,7 +68,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var firstArgument = invocationSyntax.ArgumentList.Arguments.FirstOrDefault();
                     if (IsStringLiteral(firstArgument?.Expression, c.SemanticModel))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, firstArgument.GetLocation()));
+                        Diagnostic.Create(rule, firstArgument.GetLocation()).ReportFor(c);
                     }
                 }
                 else
@@ -81,7 +81,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         .ToList()
                         .ForEach(x =>
                         {
-                            c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, x.syntax.GetLocation()));
+                            Diagnostic.Create(rule, x.syntax.GetLocation()).ReportFor(c);
                         });
                 }
             },
@@ -96,7 +96,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     IsLocalizable(propertySymbol) &&
                     IsStringLiteral(assignmentSyntax.Right, c.SemanticModel))
                 {
-                    c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, assignmentSyntax.GetLocation()));
+                    Diagnostic.Create(rule, assignmentSyntax.GetLocation()).ReportFor(c);
                 }
             },
             SyntaxKind.SimpleAssignmentExpression);

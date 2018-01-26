@@ -86,7 +86,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                             var firstPosition = locations.Select(loc => loc.SourceSpan.Start).Min();
                             var location = locations.First(loc => loc.SourceSpan.Start == firstPosition);
-                            c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, location, methodSymbol.Name));
+                            Diagnostic.Create(rule, location, methodSymbol.Name).ReportFor(c);
                         });
                 });
         }

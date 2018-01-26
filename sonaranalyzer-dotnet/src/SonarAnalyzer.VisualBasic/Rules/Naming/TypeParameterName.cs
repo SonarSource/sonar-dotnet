@@ -54,8 +54,8 @@ namespace SonarAnalyzer.Rules.VisualBasic
                     var typeParameter = (TypeParameterSyntax)c.Node;
                     if (!NamingHelper.IsRegexMatch(typeParameter.Identifier.ValueText, Pattern))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, typeParameter.Identifier.GetLocation(),
-                            typeParameter.Identifier.ValueText, Pattern));
+                        Diagnostic.Create(rule, typeParameter.Identifier.GetLocation(), typeParameter.Identifier.ValueText, Pattern)
+                            .ReportFor(c);
                     }
                 },
                 SyntaxKind.TypeParameter);

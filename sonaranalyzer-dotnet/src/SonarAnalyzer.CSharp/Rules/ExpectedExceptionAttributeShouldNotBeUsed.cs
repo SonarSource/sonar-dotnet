@@ -73,7 +73,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         var attributeLocation = firstExpectedExceptionAttributeOrDefault.ApplicationSyntaxReference
                             .GetSyntax()
                             .GetLocation();
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, attributeLocation));
+                        Diagnostic.Create(rule, attributeLocation).ReportFor(c);
                     }
                 }, SyntaxKind.MethodDeclaration);
         }

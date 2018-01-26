@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2018 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -63,11 +63,12 @@ namespace SonarAnalyzer.Rules.CSharp
                         var propertyIdentifier = collidingMembers.Item1;
                         var methodIdentifier = collidingMembers.Item2;
 
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(
+                        Diagnostic.Create(
                             rule,
                             propertyIdentifier.GetLocation(),
                             additionalLocations: new[] { methodIdentifier.GetLocation() },
-                            messageArgs: new[] { propertyIdentifier.ValueText, methodIdentifier.ValueText }));
+                            messageArgs: new[] { propertyIdentifier.ValueText, methodIdentifier.ValueText })
+                            .ReportFor(c);
                     }
                 }, SyntaxKind.ClassDeclaration);
         }

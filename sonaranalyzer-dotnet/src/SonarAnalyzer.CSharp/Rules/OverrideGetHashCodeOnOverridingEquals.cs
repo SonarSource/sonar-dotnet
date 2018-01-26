@@ -62,8 +62,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, declaration.Identifier.GetLocation(),
-                        declaration.Keyword.ValueText, overridenMethods[0], GetMissingMethodName(overridenMethods[0])));
+                    Diagnostic.Create(rule, declaration.Identifier.GetLocation(),                        declaration.Keyword.ValueText, overridenMethods[0], GetMissingMethodName(overridenMethods[0])).ReportFor(c);
                 },
                 SyntaxKind.ClassDeclaration,
                 SyntaxKind.StructDeclaration);

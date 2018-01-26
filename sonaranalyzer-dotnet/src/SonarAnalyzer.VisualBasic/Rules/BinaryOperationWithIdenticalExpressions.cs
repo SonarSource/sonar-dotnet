@@ -81,7 +81,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             if (EquivalenceChecker.AreEquivalent(left.RemoveParentheses(), right.RemoveParentheses()))
             {
                 var message = string.Format(OperatorMessageFormat, operatorToken);
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, context.Node.GetLocation(), message));
+                Diagnostic.Create(rule, context.Node.GetLocation(), message).ReportFor(context);
             }
         }
     }

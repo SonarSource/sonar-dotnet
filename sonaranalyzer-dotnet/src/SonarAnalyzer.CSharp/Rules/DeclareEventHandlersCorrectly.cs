@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2018 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -62,7 +62,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             if (!IsCorrectEventHandlerSignature(methodSymbol))
             {
-                analysisContext.ReportDiagnosticWhenActive(Diagnostic.Create(rule, typeSyntax.GetLocation()));
+                Diagnostic.Create(rule, typeSyntax.GetLocation()).ReportFor(analysisContext);
             }
         }
 

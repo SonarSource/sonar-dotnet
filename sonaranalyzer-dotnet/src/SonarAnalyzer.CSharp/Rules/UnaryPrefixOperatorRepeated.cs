@@ -70,9 +70,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
 
                     var errorLocation = new TextSpan(topLevelUnary.SpanStart, lastUnary.OperatorToken.Span.End - topLevelUnary.SpanStart);
-                    c.ReportDiagnosticWhenActive(Diagnostic.Create(rule,
-                            Location.Create(c.Node.SyntaxTree, errorLocation),
-                            topLevelUnary.OperatorToken.ToString()));
+                    Diagnostic.Create(rule,                            Location.Create(c.Node.SyntaxTree, errorLocation),                            topLevelUnary.OperatorToken.ToString()).ReportFor(c);
                 },
                 SyntaxKind.LogicalNotExpression,
                 SyntaxKind.BitwiseNotExpression);

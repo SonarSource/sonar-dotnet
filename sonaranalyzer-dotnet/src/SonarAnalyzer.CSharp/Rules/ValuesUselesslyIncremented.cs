@@ -63,12 +63,12 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     if (increment.Parent is ReturnStatementSyntax)
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, increment.GetLocation(), operatorText));
+                        Diagnostic.Create(rule, increment.GetLocation(), operatorText).ReportFor(c);
                         return;
                     }
                     if (increment.Parent is ArrowExpressionClauseSyntax)
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, increment.GetLocation(), operatorText));
+                        Diagnostic.Create(rule, increment.GetLocation(), operatorText).ReportFor(c);
                         return;
                     }
 
@@ -77,7 +77,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         assignment.Right == increment &&
                         EquivalenceChecker.AreEquivalent(assignment.Left, increment.Operand))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, increment.GetLocation(), operatorText));
+                        Diagnostic.Create(rule, increment.GetLocation(), operatorText).ReportFor(c);
                     }
                 },
                 SyntaxKind.PostIncrementExpression,

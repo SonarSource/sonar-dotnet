@@ -78,8 +78,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     foreach (var faultyMethod in allFaultyMethods)
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, faultyMethod.Location,
-                            faultyMethod.Message));
+                        Diagnostic.Create(rule, faultyMethod.Location,                            faultyMethod.Message).ReportFor(c);
                     }
                 },
                 SyntaxKind.ClassDeclaration);

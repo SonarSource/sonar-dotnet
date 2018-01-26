@@ -81,7 +81,7 @@ namespace SonarAnalyzer.Rules.CSharp
             if (forLoop.Condition != null &&
                 EquivalenceChecker.AreEquivalent(forLoop.Condition.RemoveParentheses(), CSharpSyntaxHelper.TrueLiteralExpression))
             {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, forLoop.Condition.GetLocation()));
+                Diagnostic.Create(rule, forLoop.Condition.GetLocation()).ReportFor(context);
             }
         }
 
@@ -110,7 +110,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     ? conditional.WhenTrue
                     : conditional.WhenFalse;
 
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, side.GetLocation()));
+                Diagnostic.Create(rule, side.GetLocation()).ReportFor(context);
                 return;
             }
 
@@ -123,7 +123,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 var location = Location.Create(conditional.SyntaxTree,
                     new TextSpan(conditional.WhenTrue.SpanStart, conditional.WhenFalse.Span.End - conditional.WhenTrue.SpanStart));
 
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, location));
+                Diagnostic.Create(rule, location).ReportFor(context);
             }
         }
 
@@ -136,7 +136,7 @@ namespace SonarAnalyzer.Rules.CSharp
             if (EquivalenceChecker.AreEquivalent(logicalNotOperand, CSharpSyntaxHelper.TrueLiteralExpression) ||
                 EquivalenceChecker.AreEquivalent(logicalNotOperand, CSharpSyntaxHelper.FalseLiteralExpression))
             {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, logicalNot.Operand.GetLocation()));
+                Diagnostic.Create(rule, logicalNot.Operand.GetLocation()).ReportFor(context);
             }
         }
 
@@ -259,7 +259,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     ? CalculateExtendedLocation(binaryExpression, false)
                     : CalculateExtendedLocation(binaryExpression, reportOnTrue == leftIsTrue);
 
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, errorLocation));
+                Diagnostic.Create(rule, errorLocation).ReportFor(context);
                 return true;
             }
             return false;
@@ -334,7 +334,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     break;
             }
 
-            context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, location));
+            Diagnostic.Create(rule, location).ReportFor(context);
         }
 
         private static Location CalculateExtendedLocation(BinaryExpressionSyntax binaryExpression, bool leftSide)

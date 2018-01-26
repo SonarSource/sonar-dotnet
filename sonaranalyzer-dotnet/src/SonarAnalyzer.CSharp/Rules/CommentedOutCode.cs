@@ -80,7 +80,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         continue;
                     }
 
-                    context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, trivia.GetLocation()));
+                    Diagnostic.Create(rule, trivia.GetLocation()).ReportFor(context);
                     shouldReport = false;
                 }
             }
@@ -104,7 +104,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 var commentLineSpan = lineSpan.Intersection(comment.GetLocation().SourceSpan);
 
                 var location = Location.Create(context.Tree, commentLineSpan ?? lineSpan);
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, location));
+                Diagnostic.Create(rule, location).ReportFor(context);
                 return;
             }
         }

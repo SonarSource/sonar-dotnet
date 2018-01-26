@@ -55,8 +55,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         })
                         .Where(f => FieldIsRelevant(f.Symbol)))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, field.Syntax.Identifier.GetLocation(),
-                            field.Syntax.Identifier.ValueText));
+                        Diagnostic.Create(rule, field.Syntax.Identifier.GetLocation(),                            field.Syntax.Identifier.ValueText).ReportFor(c);
                     }
 
                 },

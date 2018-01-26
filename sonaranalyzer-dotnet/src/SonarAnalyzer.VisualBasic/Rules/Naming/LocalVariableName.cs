@@ -77,7 +77,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 return;
             }
 
-            context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, controlVar.GetLocation(), Pattern));
+            Diagnostic.Create(rule, controlVar.GetLocation(), Pattern).ReportFor(context);
         }
 
         private void ProcessVariableDeclarator(SyntaxNodeAnalysisContext context)
@@ -99,7 +99,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                     continue;
                 }
 
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, name.Identifier.GetLocation(), Pattern));
+                Diagnostic.Create(rule, name.Identifier.GetLocation(), Pattern).ReportFor(context);
             }
         }
     }

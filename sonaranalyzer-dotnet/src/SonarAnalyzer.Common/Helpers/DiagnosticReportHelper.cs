@@ -18,16 +18,58 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Text;
 
 namespace SonarAnalyzer.Helpers
 {
     public static class DiagnosticReportHelper
     {
+        private static Action<ReportingContext> reportDiagnosticAction =
+            context =>
+            {
+                if (!VbcHelper.IsTriggeringVbcError(context.Diagnostic))
+                {
+                    context.ReportDiagnostic(context.Diagnostic);
+                }
+            };
+
+        /// <summary>
+        /// When this delegate is not null, it is used to overwrite the action executed when reporting a <see cref="Diagnostic"/>.
+        /// It is currently expected to be set only by SonarLint for Visual Studio.
+        /// </summary>
+        public static Action<ReportingContext> ReportDiagnostic
+        {
+            get { return reportDiagnosticAction; }
+            set
+            {
+                if (value != null)
+                {
+                    reportDiagnosticAction = value;
+                }
+            }
+        }
+
+        public static void ReportFor(this Diagnostic diagnostic, SyntaxNodeAnalysisContext context) =>
+            ReportDiagnostic(new ReportingContext(context, diagnostic));
+
+        public static void ReportFor(this Diagnostic diagnostic, SyntaxTreeAnalysisContext context) =>
+            ReportDiagnostic(new ReportingContext(context, diagnostic));
+
+        public static void ReportFor(this Diagnostic diagnostic, CompilationAnalysisContext context) =>
+            ReportDiagnostic(new ReportingContext(context, diagnostic));
+
+        public static void ReportFor(this Diagnostic diagnostic, SymbolAnalysisContext context) =>
+            ReportDiagnostic(new ReportingContext(context, diagnostic));
+
+        public static void ReportFor(this Diagnostic diagnostic, CodeBlockAnalysisContext context) =>
+            ReportDiagnostic(new ReportingContext(context, diagnostic));
+
         #region Line Number
 
         public static int GetLineNumberToReport(this SyntaxNode self)
@@ -81,6 +123,7 @@ namespace SonarAnalyzer.Helpers
                         .ToString();
             }
         }
+
     }
 
     public enum LastJoiningWord { And, Or }

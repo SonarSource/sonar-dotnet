@@ -53,7 +53,7 @@ namespace SonarAnalyzer.Rules.CSharp
                             !IsOnSameLineAsOpenBrace(closeBraceToken) &&
                             !IsInitializer(closeBraceToken.Parent)))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, closeBraceToken.GetLocation()));
+                        Diagnostic.Create(rule, closeBraceToken.GetLocation()).ReportFor(c);
                     }
                 });
         }

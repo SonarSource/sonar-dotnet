@@ -116,7 +116,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             foreach (var node in emptyCollections.Except(nonEmptyCollections))
             {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, node.GetLocation()));
+                Diagnostic.Create(rule, node.GetLocation()).ReportFor(context);
             }
         }
 

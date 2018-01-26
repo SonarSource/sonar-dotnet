@@ -53,7 +53,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var method = (MethodDeclarationSyntax)c.Node;
                     if (IsMethodCandidate(method, c.SemanticModel))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, method.GetLocation(), method.Identifier.ValueText, "method"));
+                        Diagnostic.Create(rule, method.GetLocation(), method.Identifier.ValueText, "method").ReportFor(c);
                     }
                 },
                 SyntaxKind.MethodDeclaration);
@@ -64,7 +64,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var property = (PropertyDeclarationSyntax)c.Node;
                     if (IsPropertyCandidate(property, c.SemanticModel))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, property.GetLocation(), property.Identifier.ValueText, "property"));
+                        Diagnostic.Create(rule, property.GetLocation(), property.Identifier.ValueText, "property").ReportFor(c);
                     }
                 },
                 SyntaxKind.PropertyDeclaration);

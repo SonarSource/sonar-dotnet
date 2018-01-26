@@ -44,7 +44,7 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
-                    c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, c.Node.GetFirstToken().GetLocation()));
+                    Diagnostic.Create(rule, c.Node.GetFirstToken().GetLocation()).ReportFor(c);
                 },
                 SyntaxKind.GotoStatement,
                 SyntaxKind.GotoCaseStatement,

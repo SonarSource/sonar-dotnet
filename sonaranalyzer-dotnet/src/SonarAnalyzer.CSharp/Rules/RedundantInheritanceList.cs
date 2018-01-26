@@ -84,9 +84,7 @@ namespace SonarAnalyzer.Rules.CSharp
             if (baseTypeSymbol.Is(KnownType.System_Object))
             {
                 var location = GetLocationWithToken(baseTypeSyntax, classDeclaration.BaseList.Types);
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, location,
-                    ImmutableDictionary<string, string>.Empty.Add(RedundantIndexKey, "0"),
-                    MessageObjectBase));
+                Diagnostic.Create(rule, location,                    ImmutableDictionary<string, string>.Empty.Add(RedundantIndexKey, "0"),                    MessageObjectBase).ReportFor(context);
             }
 
             ReportRedundantInterfaces(context, classDeclaration);
@@ -120,9 +118,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, enumDeclaration.BaseList.GetLocation(),
-                ImmutableDictionary<string, string>.Empty.Add(RedundantIndexKey, "0"),
-                MessageEnum));
+            Diagnostic.Create(rule, enumDeclaration.BaseList.GetLocation(),                ImmutableDictionary<string, string>.Empty.Add(RedundantIndexKey, "0"),                MessageEnum).ReportFor(context);
         }
 
         private static void ReportRedundantInterfaces(SyntaxNodeAnalysisContext context, BaseTypeDeclarationSyntax typeDeclaration)
@@ -156,9 +152,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     collidingDeclaration.ToMinimalDisplayString(context.SemanticModel, baseType.Type.SpanStart),
                     interfaceType.ToMinimalDisplayString(context.SemanticModel, baseType.Type.SpanStart));
 
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, location,
-                    ImmutableDictionary<string, string>.Empty.Add(RedundantIndexKey, i.ToString(CultureInfo.InvariantCulture)),
-                    message));
+                Diagnostic.Create(rule, location,                    ImmutableDictionary<string, string>.Empty.Add(RedundantIndexKey, i.ToString(CultureInfo.InvariantCulture)),                    message).ReportFor(context);
             }
         }
 

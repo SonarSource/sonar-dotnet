@@ -164,10 +164,10 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 if (parametersToReportOn.Contains(parameter.Symbol))
                 {
-                    context.ReportDiagnosticWhenActive(
-                        Diagnostic.Create(rule, parameter.Syntax.GetLocation(),
+                    Diagnostic.Create(rule, parameter.Syntax.GetLocation(),
                         ImmutableDictionary<string, string>.Empty.Add(IsRemovableKey, isRemovable.ToString()),
-                        string.Format(messagePattern, parameter.Symbol.Name)));
+                        string.Format(messagePattern, parameter.Symbol.Name))
+                        .ReportFor(context);
                 }
             }
         }

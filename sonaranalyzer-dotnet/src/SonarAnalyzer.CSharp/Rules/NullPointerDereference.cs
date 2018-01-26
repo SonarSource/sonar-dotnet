@@ -74,7 +74,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             foreach (var nullIdentifier in nullIdentifiers)
             {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, nullIdentifier.GetLocation(), nullIdentifier.Identifier.ValueText));
+                Diagnostic.Create(rule, nullIdentifier.GetLocation(), nullIdentifier.Identifier.ValueText).ReportFor(context);
             }
         }
 

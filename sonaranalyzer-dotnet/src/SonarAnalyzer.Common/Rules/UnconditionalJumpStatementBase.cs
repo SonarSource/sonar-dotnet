@@ -49,7 +49,7 @@ namespace SonarAnalyzer.Rules
                     walker.Visit();
                     foreach (var node in walker.GetRuleViolations())
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, node.GetLocation(), GetKeywordText(node)));
+                        Diagnostic.Create(Rule, node.GetLocation(), GetKeywordText(node)).ReportFor(c);
                     }
                 },
                 LoopStatements.ToArray());

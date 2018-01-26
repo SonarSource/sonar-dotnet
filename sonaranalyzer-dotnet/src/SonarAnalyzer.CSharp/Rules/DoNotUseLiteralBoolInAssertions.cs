@@ -88,7 +88,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         IsTrackedMethod(methodSymbol) &&
                         IsFirstOrSecondArgumentABoolLiteral(invocation.ArgumentList.Arguments))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, invocation.GetLocation()));
+                        Diagnostic.Create(rule, invocation.GetLocation()).ReportFor(c);
                     }
                 },
                 SyntaxKind.InvocationExpression);

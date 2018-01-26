@@ -55,8 +55,8 @@ namespace SonarAnalyzer.Rules.VisualBasic
                     if (!NamingHelper.IsRegexMatch(methodDeclaration.Identifier.ValueText, Pattern) &&
                         IsEventHandler(methodDeclaration, c.SemanticModel))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, methodDeclaration.Identifier.GetLocation(),
-                            methodDeclaration.Identifier.ValueText, Pattern));
+                        Diagnostic.Create(rule, methodDeclaration.Identifier.GetLocation(), methodDeclaration.Identifier.ValueText, Pattern)
+                            .ReportFor(c);
                     }
                 },
                 SyntaxKind.SubStatement);
