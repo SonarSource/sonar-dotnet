@@ -91,7 +91,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 value == 0 &&
                 TryGetCountCall(count, context.SemanticModel, out var reportLocation, out var typeArgument))
             {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, reportLocation, typeArgument));
+                Diagnostic.Create(rule, reportLocation, typeArgument).ReportFor(context);
             }
         }
         private static void CheckCountOne(ExpressionSyntax one, ExpressionSyntax count, SyntaxNodeAnalysisContext context)
@@ -100,7 +100,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 value == 1 &&
                 TryGetCountCall(count, context.SemanticModel, out var reportLocation, out var typeArgument))
             {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, reportLocation, typeArgument));
+                Diagnostic.Create(rule, reportLocation, typeArgument).ReportFor(context);
             }
         }
 

@@ -61,7 +61,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         TiedTogether(previousSpan, operatorSpan) &&
                         !(operatorToken.IsKind(SyntaxKind.MinusToken) && TiedTogether(operatorSpan, nextSpan)))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, operatorLocation, $"{operatorToken.Text}="));
+                        Diagnostic.Create(rule, operatorLocation, $"{operatorToken.Text}=").ReportFor(c);
                     }
                 },
                 SyntaxKind.UnaryMinusExpression,

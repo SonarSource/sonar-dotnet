@@ -78,7 +78,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         .Any(m => m.GetAttributes().Any(a => a.AttributeClass.IsAny(HandledTestMethodAttributes)));
                     if (!hasAnyTestMethod)
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, classDeclaration.Identifier.GetLocation()));
+                        Diagnostic.Create(rule, classDeclaration.Identifier.GetLocation()).ReportFor(c);
                     }
                 }, SyntaxKind.ClassDeclaration);
         }

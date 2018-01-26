@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2018 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -81,7 +81,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 .Where(m => m.IsKind(SyntaxKind.ProtectedKeyword))
                 .Select(m => Diagnostic.Create(rule, m.GetLocation()))
                 .ToList()
-                .ForEach(d => context.ReportDiagnosticWhenActive(d));
+                .ForEach(d => d.ReportFor(context));
         }
     }
 }

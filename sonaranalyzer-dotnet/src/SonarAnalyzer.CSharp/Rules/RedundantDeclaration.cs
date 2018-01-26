@@ -116,9 +116,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             foreach (var parameter in lambda.ParameterList.Parameters)
             {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, parameter.Type.GetLocation(),
-                    ImmutableDictionary<string, string>.Empty.Add(DiagnosticTypeKey, RedundancyType.LambdaParameterType.ToString()),
-                    "type specification"));
+                Diagnostic.Create(rule, parameter.Type.GetLocation(),                    ImmutableDictionary<string, string>.Empty.Add(DiagnosticTypeKey, RedundancyType.LambdaParameterType.ToString()),                    "type specification").ReportFor(context);
             }
         }
 
@@ -220,9 +218,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             foreach (var size in rankSpecifier.Sizes)
             {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, size.GetLocation(),
-                    ImmutableDictionary<string, string>.Empty.Add(DiagnosticTypeKey, RedundancyType.ArraySize.ToString()),
-                    "array size specification"));
+                Diagnostic.Create(rule, size.GetLocation(),                    ImmutableDictionary<string, string>.Empty.Add(DiagnosticTypeKey, RedundancyType.ArraySize.ToString()),                    "array size specification").ReportFor(context);
             }
         }
 
@@ -257,9 +253,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 var location = Location.Create(array.SyntaxTree, TextSpan.FromBounds(
                     array.Type.ElementType.SpanStart, array.Type.RankSpecifiers.Last().SpanStart));
 
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, location,
-                    ImmutableDictionary<string, string>.Empty.Add(DiagnosticTypeKey, RedundancyType.ArrayType.ToString()),
-                    "array type"));
+                Diagnostic.Create(rule, location,                    ImmutableDictionary<string, string>.Empty.Add(DiagnosticTypeKey, RedundancyType.ArrayType.ToString()),                    "array type").ReportFor(context);
             }
         }
 
@@ -278,9 +272,7 @@ namespace SonarAnalyzer.Rules.CSharp
             if (objectCreation.Initializer != null &&
                 !objectCreation.Initializer.Expressions.Any())
             {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, objectCreation.Initializer.GetLocation(),
-                    ImmutableDictionary<string, string>.Empty.Add(DiagnosticTypeKey, RedundancyType.ObjectInitializer.ToString()),
-                    "initializer"));
+                Diagnostic.Create(rule, objectCreation.Initializer.GetLocation(),                    ImmutableDictionary<string, string>.Empty.Add(DiagnosticTypeKey, RedundancyType.ObjectInitializer.ToString()),                    "initializer").ReportFor(context);
             }
         }
 
@@ -410,9 +402,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             if (!usedParameters.Intersect(methodSymbol.Parameters).Any())
             {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, anonymousMethod.ParameterList.GetLocation(),
-                    ImmutableDictionary<string, string>.Empty.Add(DiagnosticTypeKey, RedundancyType.DelegateParameterList.ToString()),
-                    "parameter list"));
+                Diagnostic.Create(rule, anonymousMethod.ParameterList.GetLocation(),                    ImmutableDictionary<string, string>.Empty.Add(DiagnosticTypeKey, RedundancyType.DelegateParameterList.ToString()),                    "parameter list").ReportFor(context);
             }
         }
 
@@ -459,9 +449,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             var location = Location.Create(objectCreation.SyntaxTree,
                 TextSpan.FromBounds(objectCreation.SpanStart, objectCreation.Type.Span.End));
-            context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, location,
-                    ImmutableDictionary<string, string>.Empty.Add(DiagnosticTypeKey, redundancyType.ToString()),
-                    message));
+            Diagnostic.Create(rule, location,                    ImmutableDictionary<string, string>.Empty.Add(DiagnosticTypeKey, redundancyType.ToString()),                    message).ReportFor(context);
         }
 
         private static T ChangeSyntaxElement<T>(T originalNode, T newNode, SemanticModel originalSemanticModel,

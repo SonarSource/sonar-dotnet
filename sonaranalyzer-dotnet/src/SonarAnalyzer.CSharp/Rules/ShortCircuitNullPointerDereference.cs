@@ -132,8 +132,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 if (descendantNodes.Any())
                 {
-                    context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, comparisonToNull.GetLocation(),
-                        expressionComparedToNull.ToString()));
+                    Diagnostic.Create(rule, comparisonToNull.GetLocation(),                        expressionComparedToNull.ToString()).ReportFor(context);
                 }
             }
         }

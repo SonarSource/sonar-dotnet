@@ -75,8 +75,7 @@ namespace SonarAnalyzer.Rules.CSharp
             if (EquivalenceChecker.AreEquivalent(currentExpression, previousExpression) &&
                 !ContainsPossibleUpdate(previousStatement, currentExpression, context.SemanticModel))
             {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, currentExpression.GetLocation(),
-                    previousExpression.GetLineNumberToReport()));
+                Diagnostic.Create(rule, currentExpression.GetLocation(),                    previousExpression.GetLineNumberToReport()).ReportFor(context);
             }
         }
 

@@ -53,7 +53,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                     if (parameterDeclaration.Identifier != null &&
                         !NamingHelper.IsRegexMatch(parameterDeclaration.Identifier.Identifier.ValueText, Pattern))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, parameterDeclaration.Identifier.Identifier.GetLocation(), Pattern));
+                        Diagnostic.Create(rule, parameterDeclaration.Identifier.Identifier.GetLocation(), Pattern).ReportFor(c);
                     }
                 },
                 SyntaxKind.Parameter);

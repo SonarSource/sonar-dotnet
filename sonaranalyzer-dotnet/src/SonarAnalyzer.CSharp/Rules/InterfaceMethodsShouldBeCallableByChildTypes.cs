@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2018 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -94,9 +94,9 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 var identifierName = getIdentifierName(memberDeclaration);
 
-                analysisContext.ReportDiagnosticWhenActive(Diagnostic.Create(rule, identifierName.GetLocation(),
-                    classDeclaration.Identifier.ValueText,
-                    string.Concat(explicitInterfaceSpecifier.Name, ".", identifierName.ValueText)));
+                Diagnostic.Create(rule, identifierName.GetLocation(), classDeclaration.Identifier.ValueText,
+                    string.Concat(explicitInterfaceSpecifier.Name, ".", identifierName.ValueText))
+                    .ReportFor(analysisContext);
             }
         }
 

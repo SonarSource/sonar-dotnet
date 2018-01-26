@@ -18,9 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
 using System.Linq;
-using System.Text.RegularExpressions;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 
@@ -28,65 +26,17 @@ namespace SonarAnalyzer.Helpers
 {
     public static class AnalysisContextExtensions
     {
-        private static readonly Regex VbNetErrorPattern = new Regex(@"\s+error\s*:",
-            RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
-
-        public static void ReportDiagnosticWhenActive(this SyntaxNodeAnalysisContext context, Diagnostic diagnostic)
+        public static SyntaxTree GetSyntaxTree(this SyntaxNodeAnalysisContext context) => context.Node.SyntaxTree;
+        public static SyntaxTree GetSyntaxTree(this SyntaxTreeAnalysisContext context) => context.Tree;
+        public static SyntaxTree GetSyntaxTree(this CompilationAnalysisContext context) => context.Compilation.SyntaxTrees.FirstOrDefault();
+        public static SyntaxTree GetSyntaxTree(this CompilationStartAnalysisContext context) => context.Compilation.SyntaxTrees.FirstOrDefault();
+        public static SyntaxTree GetSyntaxTree(this SymbolAnalysisContext context) => context.Symbol.Locations.FirstOrDefault(l => l.SourceTree != null)?.SourceTree;
+        public static SyntaxTree GetSyntaxTree(this CodeBlockAnalysisContext context) => context.CodeBlock.SyntaxTree;
+        public static SyntaxTree GetSyntaxTree<TLanguageKindEnum>(this CodeBlockStartAnalysisContext<TLanguageKindEnum> context)
+            where TLanguageKindEnum : struct
         {
-            InternalReportDiagnostic(context.Node.SyntaxTree, diagnostic, d => context.ReportDiagnostic(d));
+            return context.CodeBlock.SyntaxTree;
         }
-
-        public static void ReportDiagnosticWhenActive(this SyntaxTreeAnalysisContext context, Diagnostic diagnostic)
-        {
-            InternalReportDiagnostic(context.Tree, diagnostic, d => context.ReportDiagnostic(d));
-        }
-
-        public static void ReportDiagnosticWhenActive(this CompilationAnalysisContext context, Diagnostic diagnostic)
-        {
-            InternalReportDiagnostic(context.Compilation.SyntaxTrees.FirstOrDefault(), diagnostic,
-                d => context.ReportDiagnostic(d));
-        }
-
-        public static void ReportDiagnosticWhenActive(this SymbolAnalysisContext context, Diagnostic diagnostic)
-        {
-            InternalReportDiagnostic(context.Symbol.Locations.FirstOrDefault(l => l.SourceTree != null)?.SourceTree, diagnostic,
-                d => context.ReportDiagnostic(d));
-        }
-
-        public static void ReportDiagnosticWhenActive(this CodeBlockAnalysisContext context, Diagnostic diagnostic)
-        {
-            InternalReportDiagnostic(context.CodeBlock.SyntaxTree, diagnostic, d => context.ReportDiagnostic(d));
-        }
-
-        private static void InternalReportDiagnostic(SyntaxTree tree, Diagnostic diagnostic, Action<Diagnostic> report)
-        {
-            if (SonarAnalysisContext.IsAnalysisDisabled(tree, new[] { diagnostic.Descriptor }) ||
-                !SonarAnalysisContext.ShouldDiagnosticBeReported(tree, diagnostic))
-            {
-                return;
-            }
-
-            // VB.Net complier (VBC) post-process issues and will fail if the line contains the VbNetErrorPattern.
-            // See https://github.com/dotnet/roslyn/issues/5724
-            // As a workaround we will prevent reporting the issue if the issue is on a line with the error pattern and the
-            // language VB.Net
-            // TODO: Remove this workaround when issue is fixed on Microsoft side.
-            var rootNode = diagnostic.Location.SourceTree?.GetRoot();
-
-            if (rootNode != null &&
-                rootNode.Language == LanguageNames.VisualBasic)
-            {
-                var diagnosticNode = rootNode.FindNode(diagnostic.Location.SourceSpan);
-                var lineContent = diagnosticNode?.ToString();
-
-                if (lineContent != null &&
-                    VbNetErrorPattern.IsMatch(lineContent))
-                {
-                    return;
-                }
-            }
-
-            report(diagnostic);
-        }
+        public static SyntaxTree GetSyntaxTree(this SemanticModelAnalysisContext context) => context.SemanticModel.SyntaxTree;
     }
 }

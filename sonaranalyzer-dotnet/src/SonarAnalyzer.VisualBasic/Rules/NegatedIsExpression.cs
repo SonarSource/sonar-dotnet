@@ -48,7 +48,8 @@ namespace SonarAnalyzer.Rules.VisualBasic
                     var unary = (UnaryExpressionSyntax)c.Node;
                     if (unary.Operand.IsKind(SyntaxKind.IsExpression))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, unary.GetLocation()));
+                        Diagnostic.Create(rule, unary.GetLocation())
+                            .ReportFor(c);
                     }
                 },
                 SyntaxKind.NotExpression);

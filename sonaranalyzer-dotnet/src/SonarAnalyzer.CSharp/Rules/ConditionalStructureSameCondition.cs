@@ -54,11 +54,12 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     if (precedingCondition != null)
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(
+                        Diagnostic.Create(
                             rule,
                             currentCondition.GetLocation(),
                             additionalLocations: new[] { precedingCondition.GetLocation() },
-                            messageArgs: precedingCondition.GetLineNumberToReport()));
+                            messageArgs: precedingCondition.GetLineNumberToReport())
+                            .ReportFor(c);
                     }
                 },
                 SyntaxKind.IfStatement);

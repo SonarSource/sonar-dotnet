@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2018 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -87,8 +87,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             if (dllImportAttribute.ConstructorArguments.Any(x => x.Value.Equals(InteropDllName)))
             {
-                analysisContext.ReportDiagnosticWhenActive(Diagnostic.Create(rule, directMethodCall.Identifier.GetLocation(),
-                    directMethodCall.Identifier.ValueText));
+                Diagnostic.Create(rule, directMethodCall.Identifier.GetLocation(),                    directMethodCall.Identifier.ValueText).ReportFor(analysisContext);
             }
         }
     }

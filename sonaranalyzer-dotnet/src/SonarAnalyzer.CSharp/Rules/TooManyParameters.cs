@@ -58,8 +58,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         CanBeChanged(parameterListNode.Parent, c.SemanticModel) &&
                         Mapping.TryGetValue(parameterListNode.Parent.Kind(), out var declarationName))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, parameterListNode.GetLocation(),
-                            Maximum, parameters, declarationName));
+                        Diagnostic.Create(rule, parameterListNode.GetLocation(),                            Maximum, parameters, declarationName).ReportFor(c);
                     }
                 },
                 SyntaxKind.ParameterList);

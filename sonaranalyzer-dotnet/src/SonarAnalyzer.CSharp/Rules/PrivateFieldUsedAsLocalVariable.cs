@@ -74,8 +74,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     foreach (var privateField in privateFields.Values.Where(f => !f.Excluded))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, privateField.Syntax.GetLocation(),
-                            privateField.Symbol.Name));
+                        Diagnostic.Create(rule, privateField.Syntax.GetLocation(),                            privateField.Symbol.Name).ReportFor(c);
                     }
                 },
                 SyntaxKind.ClassDeclaration, SyntaxKind.StructDeclaration);

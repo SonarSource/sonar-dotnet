@@ -52,8 +52,8 @@ namespace SonarAnalyzer.Rules.VisualBasic
                     var methodDeclaration = (MethodStatementSyntax)c.Node;
                     if (!NamingHelper.IsRegexMatch(methodDeclaration.Identifier.ValueText, Pattern))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, methodDeclaration.Identifier.GetLocation(),
-                            "function", methodDeclaration.Identifier.ValueText, Pattern));
+                        Diagnostic.Create(rule, methodDeclaration.Identifier.GetLocation(), "function", methodDeclaration.Identifier.ValueText, Pattern)
+                            .ReportFor(c);
                     }
                 },
                 SyntaxKind.FunctionStatement);
@@ -65,8 +65,8 @@ namespace SonarAnalyzer.Rules.VisualBasic
                     if (!NamingHelper.IsRegexMatch(methodDeclaration.Identifier.ValueText, Pattern) &&
                         !EventHandlerName.IsEventHandler(methodDeclaration, c.SemanticModel))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, methodDeclaration.Identifier.GetLocation(),
-                            "procedure", methodDeclaration.Identifier.ValueText, Pattern));
+                        Diagnostic.Create(rule, methodDeclaration.Identifier.GetLocation(), "procedure", methodDeclaration.Identifier.ValueText, Pattern)
+                            .ReportFor(c);
                     }
                 },
                 SyntaxKind.SubStatement);

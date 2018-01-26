@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2018 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -74,8 +74,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 .FirstOrDefault(x => x.Type.IsEquivalentTo(castType));
             if (castExpressionWithCorrectType != null)
             {
-                analysisContext.ReportDiagnosticWhenActive(Diagnostic.Create(rule, isExpression.GetLocation(),
-                    additionalLocations: new[] { castExpressionWithCorrectType.GetLocation() }));
+                Diagnostic.Create(rule, isExpression.GetLocation(), additionalLocations: new[] { castExpressionWithCorrectType.GetLocation() })
+                    .ReportFor(analysisContext);
             }
         }
     }

@@ -55,7 +55,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         var names = string.Join(", ", eventField.Declaration.Variables
                             .Select(syntax => $"'{syntax.Identifier.ValueText}'")
                             .OrderBy(s => s));
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, virt.GetLocation(), names));
+                        Diagnostic.Create(rule, virt.GetLocation(), names).ReportFor(c);
                     }
                 },
                 SyntaxKind.EventFieldDeclaration);

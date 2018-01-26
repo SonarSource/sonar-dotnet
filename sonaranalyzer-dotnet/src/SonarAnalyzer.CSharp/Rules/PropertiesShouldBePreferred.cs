@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2018 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -63,10 +63,11 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     foreach (var candidate in propertyCandidates)
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(
+                        Diagnostic.Create(
                             rule,
                             candidate.Locations.FirstOrDefault(),
-                            messageArgs: candidate.Name));
+                            messageArgs: candidate.Name)
+                            .ReportFor(c);
                     }
                 },
                 SyntaxKind.ClassDeclaration,

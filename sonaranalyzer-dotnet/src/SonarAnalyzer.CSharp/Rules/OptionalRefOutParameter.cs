@@ -60,7 +60,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (optionalAttribute != null)
                     {
                         var refKind = parameter.Modifiers.Any(m => m.IsKind(SyntaxKind.OutKeyword)) ? "out" : "ref";
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, optionalAttribute.SyntaxNode.GetLocation(), refKind));
+                        Diagnostic.Create(rule, optionalAttribute.SyntaxNode.GetLocation(), refKind).ReportFor(c);
                     }
                 },
                 SyntaxKind.Parameter);

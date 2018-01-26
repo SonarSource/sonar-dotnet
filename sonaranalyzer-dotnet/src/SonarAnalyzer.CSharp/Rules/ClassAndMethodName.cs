@@ -101,9 +101,8 @@ namespace SonarAnalyzer.Rules.CSharp
             if (identifier.ValueText.StartsWith("_", StringComparison.Ordinal) ||
                 identifier.ValueText.EndsWith("_", StringComparison.Ordinal))
             {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule_TypeName, identifier.GetLocation(),
-                    TypeKindNameMapping[typeDeclaration.Kind()],
-                    identifier.ValueText, MessageFormatUnderscore));
+                Diagnostic.Create(rule_TypeName, identifier.GetLocation(), TypeKindNameMapping[typeDeclaration.Kind()], identifier.ValueText, MessageFormatUnderscore)
+                    .ReportFor(context);
                 return;
             }
 
@@ -123,8 +122,8 @@ namespace SonarAnalyzer.Rules.CSharp
             if (!isNameValid)
             {
                 var messageEnding = string.Format(MessageFormatNonUnderscore, suggestion);
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule_TypeName, identifier.GetLocation(),
-                    TypeKindNameMapping[typeDeclaration.Kind()], identifier.ValueText, messageEnding));
+                Diagnostic.Create(rule_TypeName, identifier.GetLocation(), TypeKindNameMapping[typeDeclaration.Kind()], identifier.ValueText, messageEnding)
+                    .ReportFor(context);
             }
         }
 
@@ -149,9 +148,7 @@ namespace SonarAnalyzer.Rules.CSharp
             if (identifier.ValueText.StartsWith("_", StringComparison.Ordinal) ||
                 identifier.ValueText.EndsWith("_", StringComparison.Ordinal))
             {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule_MethodName, identifier.GetLocation(),
-                    TypeKindNameMapping[member.Kind()],
-                    identifier.ValueText, MessageFormatUnderscore));
+                Diagnostic.Create(rule_MethodName, identifier.GetLocation(), TypeKindNameMapping[member.Kind()], identifier.ValueText, MessageFormatUnderscore).ReportFor(context);
                 return;
             }
 
@@ -163,9 +160,7 @@ namespace SonarAnalyzer.Rules.CSharp
             if (!IsMemberNameValid(identifier.ValueText, out var suggestion))
             {
                 var messageEnding = string.Format(MessageFormatNonUnderscore, suggestion);
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule_MethodName, identifier.GetLocation(),
-                    TypeKindNameMapping[member.Kind()],
-                    identifier.ValueText, messageEnding));
+                Diagnostic.Create(rule_MethodName, identifier.GetLocation(), TypeKindNameMapping[member.Kind()], identifier.ValueText, messageEnding).ReportFor(context);
             }
         }
 

@@ -89,14 +89,14 @@ namespace SonarAnalyzer.Rules.CSharp
                         linesWithShiftOperations.Add(shift.Line);
                         if (shift.Diagnostic != null)
                         {
-                            c.ReportDiagnosticWhenActive(shift.Diagnostic);
+                            shift.Diagnostic.ReportFor(c);
                         }
                     }
 
                     zeroShiftIssues
                         .Where(sh => !ContainsShiftExpressionWithinTwoLines(linesWithShiftOperations, sh.Line))
                         .ToList()
-                        .ForEach(sh => c.ReportDiagnosticWhenActive(sh.Diagnostic));
+                        .ForEach(sh => sh.Diagnostic.ReportFor(c));
                 },
                 SyntaxKind.MethodDeclaration,
                 SyntaxKind.PropertyDeclaration);

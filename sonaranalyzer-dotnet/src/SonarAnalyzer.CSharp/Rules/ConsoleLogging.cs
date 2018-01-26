@@ -55,7 +55,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         methodSymbol.IsInType(KnownType.System_Console) &&
                         BannedConsoleMembers.Contains(methodSymbol.Name))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, methodCall.Expression.GetLocation()));
+                        Diagnostic.Create(rule, methodCall.Expression.GetLocation()).ReportFor(c);
                     }
                 },
                 SyntaxKind.InvocationExpression);

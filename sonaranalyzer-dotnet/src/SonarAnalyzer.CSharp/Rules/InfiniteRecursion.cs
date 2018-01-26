@@ -157,7 +157,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 var lastJumpLocation = reportOnOptions.Max(b => b.JumpNode.SpanStart);
                 var reportOn = reportOnOptions.First(b => b.JumpNode.SpanStart == lastJumpLocation);
 
-                analysisContext.ReportDiagnosticWhenActive(Diagnostic.Create(rule, reportOn.JumpNode.GetLocation(), declarationType));
+                Diagnostic.Create(rule, reportOn.JumpNode.GetLocation(), declarationType).ReportFor(analysisContext);
             }
         }
 
@@ -187,7 +187,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             public CfgWalkerForMethod(RecursionAnalysisContext context)
                 : base(context.ControlFlowGraph, context.AnalyzedSymbol, context.SemanticModel,
-                      () => context.AnalysisContext.ReportDiagnosticWhenActive(Diagnostic.Create(rule, context.IssueLocation, "method's recursion")))
+                      () => Diagnostic.Create(rule, context.IssueLocation, "method's recursion").ReportFor(context.AnalysisContext))
             {
             }
 
@@ -212,7 +212,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             public CfgWalkerForProperty(RecursionAnalysisContext context, string reportOn, bool isSetAccessor)
                 : base(context.ControlFlowGraph, context.AnalyzedSymbol, context.SemanticModel,
-                      () => context.AnalysisContext.ReportDiagnosticWhenActive(Diagnostic.Create(rule, context.IssueLocation, reportOn)))
+                      () => Diagnostic.Create(rule, context.IssueLocation, reportOn).ReportFor(context.AnalysisContext))
             {
                 isSet = isSetAccessor;
             }

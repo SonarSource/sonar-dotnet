@@ -71,7 +71,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 var arrowedNullLiteral = GetNullLiteralOrDefault(expressionBody);
                 if (arrowedNullLiteral != null)
                 {
-                    context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, arrowedNullLiteral.GetLocation()));
+                    Diagnostic.Create(rule, arrowedNullLiteral.GetLocation()).ReportFor(context);
                 }
 
                 return;
@@ -90,8 +90,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 .ToList();
             if (returnNullStatements.Count > 0)
             {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, returnNullStatements[0],
-                    additionalLocations: returnNullStatements.Skip(1)));
+                Diagnostic.Create(rule, returnNullStatements[0],                    additionalLocations: returnNullStatements.Skip(1)).ReportFor(context);
             }
         }
 

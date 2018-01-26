@@ -83,9 +83,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 .ToList()
                 .ForEach(x =>
                 {
-                    context.ReportDiagnosticWhenActive(Diagnostic.Create(rule,
-                        x.actual.Identifier.GetLocation(),
-                        x.actual.Identifier.ValueText, x.expected.Name, expectedLocation));
+                    Diagnostic.Create(rule,                        x.actual.Identifier.GetLocation(),                        x.actual.Identifier.ValueText, x.expected.Name, expectedLocation).ReportFor(context);
                 });
         }
     }

@@ -43,15 +43,17 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(c =>
-            {
-                var parameter = (ParameterSyntax)c.Node;
-                foreach (var byVal in parameter.Modifiers.Where(IsByVal))
+            context.RegisterSyntaxNodeActionInNonGenerated(
+                c =>
                 {
-                    c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, byVal.GetLocation()));
-                }
-            },
-            SyntaxKind.Parameter);
+                    var parameter = (ParameterSyntax)c.Node;
+                    foreach (var byVal in parameter.Modifiers.Where(IsByVal))
+                    {
+                        Diagnostic.Create(rule, byVal.GetLocation())
+                            .ReportFor(c);
+                    }
+                },
+                SyntaxKind.Parameter);
         }
 
         public static bool IsByVal(SyntaxToken modifier)

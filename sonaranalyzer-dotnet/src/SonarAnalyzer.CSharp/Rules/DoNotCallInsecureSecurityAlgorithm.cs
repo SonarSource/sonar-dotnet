@@ -64,7 +64,7 @@ namespace SonarAnalyzer.Rules.CSharp
             if (methodSymbol.ReturnType.DerivesFromAny(AlgorithmTypes) ||
                 IsInsecureBaseAlgorithmCreationFactoryCall(methodSymbol, invocation.ArgumentList))
             {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, invocation.GetLocation()));
+                Diagnostic.Create(Rule, invocation.GetLocation()).ReportFor(context);
             }
         }
 
@@ -112,7 +112,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             if (typeInfo.ConvertedType.DerivesFromAny(AlgorithmTypes))
             {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, objectCreation.Type.GetLocation()));
+                Diagnostic.Create(Rule, objectCreation.Type.GetLocation()).ReportFor(context);
             }
         }
     }

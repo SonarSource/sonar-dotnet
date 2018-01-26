@@ -74,7 +74,7 @@ namespace SonarAnalyzer.Rules.CSharp
             if (propertySymbol != null &&
                 IsDefaultValueInitializer(propertyDeclaration.Initializer, propertySymbol.Type))
             {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, propertyDeclaration.Initializer.GetLocation(), propertySymbol.Name));
+                Diagnostic.Create(rule, propertyDeclaration.Initializer.GetLocation(), propertySymbol.Name).ReportFor(context);
             }
         }
 
@@ -98,7 +98,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 if (IsDefaultValueInitializer(eventDeclaration.Initializer, eventSymbol.Type))
                 {
-                    context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, eventDeclaration.Initializer.GetLocation(), eventSymbol.Name));
+                    Diagnostic.Create(rule, eventDeclaration.Initializer.GetLocation(), eventSymbol.Name).ReportFor(context);
                     return;
                 }
             }
@@ -115,7 +115,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     !fieldSymbol.IsConst &&
                     IsDefaultValueInitializer(variableDeclarator.Initializer, fieldSymbol.Type))
                 {
-                    context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, variableDeclarator.Initializer.GetLocation(), fieldSymbol.Name));
+                    Diagnostic.Create(rule, variableDeclarator.Initializer.GetLocation(), fieldSymbol.Name).ReportFor(context);
                 }
             }
         }

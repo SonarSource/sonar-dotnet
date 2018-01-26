@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2018 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -99,8 +99,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     if (baseTypesCount > MaximumDepth)
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, declaration.Identifier.GetLocation(),
-                            baseTypesCount, MaximumDepth));
+                        Diagnostic.Create(rule, declaration.Identifier.GetLocation(), baseTypesCount, MaximumDepth).ReportFor(c);
                     }
 
                 }, SyntaxKind.ClassDeclaration);

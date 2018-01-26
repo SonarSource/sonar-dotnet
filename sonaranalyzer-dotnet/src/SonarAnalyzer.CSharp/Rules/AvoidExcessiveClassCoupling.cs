@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2018 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -100,8 +100,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     if (classCouplingCount > Threshold)
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, classDeclaration.Identifier.GetLocation(),
-                            classCouplingCount, Threshold));
+                        Diagnostic.Create(rule, classDeclaration.Identifier.GetLocation(),                            classCouplingCount, Threshold).ReportFor(c);
                     }
                 }, SyntaxKind.ClassDeclaration);
         }

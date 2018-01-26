@@ -52,7 +52,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         methodSymbol.Parameters.Length >= 1 &&
                         methodSymbol.Parameters[0].Type.Is(KnownType.System_Object))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, methodDeclaration.Identifier.GetLocation()));
+                        Diagnostic.Create(rule, methodDeclaration.Identifier.GetLocation()).ReportFor(c);
                     }
                 },
                 SyntaxKind.MethodDeclaration);

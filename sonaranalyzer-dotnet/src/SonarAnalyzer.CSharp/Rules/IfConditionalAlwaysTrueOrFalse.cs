@@ -79,7 +79,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     ifStatement.SyntaxTree,
                     new TextSpan(ifStatement.IfKeyword.SpanStart, ifStatement.Else.ElseKeyword.Span.End - ifStatement.IfKeyword.SpanStart));
 
-            context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, location, ifStatementLiteral));
+            Diagnostic.Create(rule, location, ifStatementLiteral).ReportFor(context);
         }
 
         private static void ReportIfTrue(IfStatementSyntax ifStatement, SyntaxNodeAnalysisContext context)
@@ -88,11 +88,11 @@ namespace SonarAnalyzer.Rules.CSharp
                 ifStatement.SyntaxTree,
                 new TextSpan(ifStatement.IfKeyword.SpanStart, ifStatement.CloseParenToken.Span.End - ifStatement.IfKeyword.SpanStart));
 
-            context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, location, ifStatementLiteral));
+            Diagnostic.Create(rule, location, ifStatementLiteral).ReportFor(context);
 
             if (ifStatement.Else != null)
             {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, ifStatement.Else.GetLocation(), elseClauseLiteral));
+                Diagnostic.Create(rule, ifStatement.Else.GetLocation(), elseClauseLiteral).ReportFor(context);
             }
         }
     }

@@ -59,10 +59,11 @@ namespace SonarAnalyzer.Rules.CSharp
                         TryGetTypeFromArgumentMappedToFloatType(division, c.SemanticModel, out assignedToType) ||
                         TryGetTypeFromReturnMappedToFloatType(division, c.SemanticModel, out assignedToType))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(
+                        Diagnostic.Create(
                             rule,
                             division.GetLocation(),
-                            assignedToType.ToMinimalDisplayString(c.SemanticModel, division.SpanStart)));
+                            assignedToType.ToMinimalDisplayString(c.SemanticModel, division.SpanStart))
+                            .ReportFor(c);
                     }
                 },
                 SyntaxKind.DivideExpression);

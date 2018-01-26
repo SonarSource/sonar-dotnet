@@ -77,7 +77,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         if (isAnyInDifferentClass ||
                             isAnyAfterInSameClass)
                         {
-                            c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, variable.Initializer.GetLocation()));
+                            Diagnostic.Create(rule, variable.Initializer.GetLocation()).ReportFor(c);
                         }
                     }
                 },

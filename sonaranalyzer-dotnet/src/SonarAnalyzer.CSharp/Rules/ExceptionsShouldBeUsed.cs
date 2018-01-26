@@ -55,7 +55,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 var parent = objectCreation.GetSelfOrTopParenthesizedExpression().Parent;
                 if (parent.IsKind(SyntaxKind.ExpressionStatement))
                 {
-                    c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, objectCreation.GetLocation()));
+                    Diagnostic.Create(rule, objectCreation.GetLocation()).ReportFor(c);
                 }
             },
             SyntaxKind.ObjectCreationExpression);

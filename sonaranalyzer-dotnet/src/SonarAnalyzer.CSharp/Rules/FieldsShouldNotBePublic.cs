@@ -66,7 +66,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     if (symbol.GetEffectiveAccessibility() == Accessibility.Public)
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, firstVariable.GetLocation()));
+                        Diagnostic.Create(rule, firstVariable.GetLocation()).ReportFor(c);
                     }
                 }, SyntaxKind.FieldDeclaration);
         }

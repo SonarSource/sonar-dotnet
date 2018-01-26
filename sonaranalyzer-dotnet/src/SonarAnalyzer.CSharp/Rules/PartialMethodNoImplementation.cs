@@ -68,7 +68,7 @@ namespace SonarAnalyzer.Rules.CSharp
             if (methodSymbol != null &&
                 methodSymbol.PartialImplementationPart == null)
             {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, partialKeyword.GetLocation(), "this", string.Empty));
+                Diagnostic.Create(rule, partialKeyword.GetLocation(), "this", string.Empty).ReportFor(context);
             }
         }
 
@@ -100,7 +100,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 return;
             }
-            context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, statement.GetLocation(), "the", MessageAdditional));
+            Diagnostic.Create(rule, statement.GetLocation(), "the", MessageAdditional).ReportFor(context);
         }
     }
 }

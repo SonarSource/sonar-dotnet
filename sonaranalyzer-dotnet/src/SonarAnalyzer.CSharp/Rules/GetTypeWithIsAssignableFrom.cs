@@ -106,7 +106,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             if (typeExpression.DerivesOrImplements(typeCastTo))
             {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, binary.GetLocation(), MessageNullCheck));
+                Diagnostic.Create(rule, binary.GetLocation(), MessageNullCheck).ReportFor(context);
             }
         }
 
@@ -123,7 +123,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, location, MessageIsOperator));
+            Diagnostic.Create(rule, location, MessageIsOperator).ReportFor(context);
         }
 
         private static void CheckGetTypeAndTypeOfEquality(ExpressionSyntax sideA, ExpressionSyntax sideB, Location location,
@@ -148,7 +148,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, location, MessageIsOperator));
+            Diagnostic.Create(rule, location, MessageIsOperator).ReportFor(context);
         }
 
         private static void CheckForIsInstanceOfType(SyntaxNodeAnalysisContext context, InvocationExpressionSyntax invocation,
@@ -161,11 +161,12 @@ namespace SonarAnalyzer.Rules.CSharp
 
             if (memberAccess.Expression is TypeOfExpressionSyntax)
             {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, invocation.GetLocation(),
+                Diagnostic.Create(rule, invocation.GetLocation(),
                     ImmutableDictionary<string, string>.Empty
                         .Add(UseIsOperatorKey, true.ToString())
                         .Add(ShouldRemoveGetType, false.ToString()),
-                    MessageIsOperator));
+                    MessageIsOperator)
+                    .ReportFor(context);
             }
         }
 
@@ -179,17 +180,24 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            context.ReportDiagnosticWhenActive(memberAccess.Expression is TypeOfExpressionSyntax
-                ? Diagnostic.Create(rule, invocation.GetLocation(),
+            if (memberAccess.Expression is TypeOfExpressionSyntax)
+            {
+                Diagnostic.Create(rule, invocation.GetLocation(),
                     ImmutableDictionary<string, string>.Empty
                         .Add(UseIsOperatorKey, true.ToString())
                         .Add(ShouldRemoveGetType, true.ToString()),
                     MessageIsOperator)
-                : Diagnostic.Create(rule, invocation.GetLocation(),
+                    .ReportFor(context);
+            }
+            else
+            {
+                Diagnostic.Create(rule, invocation.GetLocation(),
                     ImmutableDictionary<string, string>.Empty
                         .Add(UseIsOperatorKey, false.ToString())
                         .Add(ShouldRemoveGetType, true.ToString()),
-                    MessageIsInstanceOfType));
+                    MessageIsInstanceOfType)
+                    .ReportFor(context);
+            }
         }
     }
 }

@@ -212,7 +212,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static void ReportOnUnsafeBlock(SyntaxNodeAnalysisContext context, Location issueLocation)
         {
-            context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, issueLocation, "unsafe", "redundant"));
+            Diagnostic.Create(rule, issueLocation, "unsafe", "redundant").ReportFor(context);
         }
 
         private static bool TryGetUnsafeKeyword(MemberDeclarationSyntax memberDeclaration, out SyntaxToken unsafeKeyword)
@@ -264,7 +264,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             var keyword = classDeclaration.Modifiers.First(m => m.IsKind(SyntaxKind.PartialKeyword));
-            context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, keyword.GetLocation(), "partial", "gratuitous"));
+            Diagnostic.Create(rule, keyword.GetLocation(), "partial", "gratuitous").ReportFor(context);
         }
 
         private static SyntaxTokenList GetModifiers(MemberDeclarationSyntax memberDeclaration)
@@ -297,7 +297,7 @@ namespace SonarAnalyzer.Rules.CSharp
             if (modifiers.Any(m => m.IsKind(SyntaxKind.SealedKeyword)))
             {
                 var keyword = modifiers.First(m => m.IsKind(SyntaxKind.SealedKeyword));
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, keyword.GetLocation(), "sealed", "redundant"));
+                Diagnostic.Create(rule, keyword.GetLocation(), "sealed", "redundant").ReportFor(context);
             }
         }
 
@@ -393,7 +393,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 if (isSimplyRendundant || !currentContextHasIntegralOperation)
                 {
                     var keywordToReport = isThisNodeChecked ? "checked" : "unchecked";
-                    context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, tokenToReport.GetLocation(), keywordToReport, "redundant"));
+                    Diagnostic.Create(rule, tokenToReport.GetLocation(), keywordToReport, "redundant").ReportFor(context);
                 }
 
                 isCurrentContextChecked = originalIsCurrentContextChecked;

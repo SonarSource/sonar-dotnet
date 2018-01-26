@@ -64,8 +64,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     return;
                 }
 
-                c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, classDeclaration.Identifier.GetLocation(),
-                    classSymbol.Name, "class", MaxNumberOfGenericParametersInClass));
+                Diagnostic.Create(rule, classDeclaration.Identifier.GetLocation(),                    classSymbol.Name, "class", MaxNumberOfGenericParametersInClass).ReportFor(c);
             },
             SyntaxKind.ClassDeclaration);
 
@@ -81,8 +80,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     return;
                 }
 
-                c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, methodDeclaration.Identifier.GetLocation(),
-                    $"{methodSymbol.ContainingType.Name}.{methodSymbol.Name}", "method", MaxNumberOfGenericParametersInMethod));
+                Diagnostic.Create(rule, methodDeclaration.Identifier.GetLocation(),                    $"{methodSymbol.ContainingType.Name}.{methodSymbol.Name}", "method", MaxNumberOfGenericParametersInMethod).ReportFor(c);
             },
             SyntaxKind.MethodDeclaration);
         }

@@ -85,7 +85,7 @@ namespace SonarAnalyzer.Rules
                 return;
             }
 
-            analysisContext.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, fieldFirstVariable.GetLocation()));
+            Diagnostic.Create(Rule, fieldFirstVariable.GetLocation()).ReportFor(analysisContext);
         }
 
         private bool IsFieldToAnalyze(FieldDeclarationSyntax fieldDeclaration)

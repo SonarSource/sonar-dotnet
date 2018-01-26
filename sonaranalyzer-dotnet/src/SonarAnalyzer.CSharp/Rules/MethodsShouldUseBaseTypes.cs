@@ -48,7 +48,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 FindViolations(c)
                     .ToList()
-                    .ForEach(d => c.ReportDiagnosticWhenActive(d));
+                    .ForEach(d => d.ReportFor(c));
             },
             SyntaxKind.MethodDeclaration);
         }

@@ -54,7 +54,8 @@ namespace SonarAnalyzer.Rules.VisualBasic
                     var declaration = (InterfaceStatementSyntax)c.Node;
                     if (!NamingHelper.IsRegexMatch(declaration.Identifier.ValueText, Pattern))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, declaration.Identifier.GetLocation(), Pattern));
+                        Diagnostic.Create(rule, declaration.Identifier.GetLocation(), Pattern)
+                            .ReportFor(c);
                     }
                 },
                 SyntaxKind.InterfaceStatement);

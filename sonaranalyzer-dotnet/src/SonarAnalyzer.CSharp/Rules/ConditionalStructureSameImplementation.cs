@@ -119,11 +119,12 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static void ReportSyntaxNode(SyntaxNodeAnalysisContext context, SyntaxNode node, SyntaxNode precedingNode, string errorMessageDiscriminator)
         {
-            context.ReportDiagnosticWhenActive(Diagnostic.Create(
+            Diagnostic.Create(
                 rule,
                 node.GetLocation(),
                 additionalLocations: new[] { precedingNode.GetLocation() },
-                messageArgs: new object[] { precedingNode.GetLineNumberToReport(), errorMessageDiscriminator }));
+                messageArgs: new object[] { precedingNode.GetLineNumberToReport(), errorMessageDiscriminator })
+                .ReportFor(context);
         }
 
         private static bool IsApprovedStatement(StatementSyntax statement)

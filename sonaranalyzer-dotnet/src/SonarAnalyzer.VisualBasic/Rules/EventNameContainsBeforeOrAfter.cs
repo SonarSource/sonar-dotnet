@@ -81,7 +81,8 @@ namespace SonarAnalyzer.Rules.VisualBasic
                         return;
                     }
 
-                    c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, eventStatement.Identifier.GetLocation(), matched, part));
+                    Diagnostic.Create(rule, eventStatement.Identifier.GetLocation(), matched, part)
+                        .ReportFor(c);
                 },
                 SyntaxKind.EventStatement);
         }

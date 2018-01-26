@@ -92,7 +92,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     {
                         var location = Location.Create(c.Node.SyntaxTree, new TextSpan(firstArgument.SpanStart,
                             secondArgument.Span.End - firstArgument.SpanStart));
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, location));
+                        Diagnostic.Create(rule, location).ReportFor(c);
                     }
                 }, SyntaxKind.InvocationExpression);
         }

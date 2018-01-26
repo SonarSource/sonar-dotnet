@@ -90,8 +90,8 @@ namespace SonarAnalyzer.Rules
                 return;
             }
 
-            context.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, context.Node.GetLocation(),
-                symbol.Name.ToLowerInvariant(), symbolType));
+            Diagnostic.Create(Rule, context.Node.GetLocation(), symbol.Name.ToLowerInvariant(), symbolType)
+                .ReportFor(context);
         }
 
         private string GetDeclaringTypeName(ISymbol symbol)

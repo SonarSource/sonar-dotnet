@@ -45,24 +45,24 @@ namespace SonarAnalyzer.Rules
                 GeneratedCodeRecognizer,
                 c =>
                 {
-                    var identifier = GetIdentifier(c.Node);
-                    var name = identifier.ValueText;
+                var identifier = GetIdentifier(c.Node);
+                var name = identifier.ValueText;
 
-                    var nameEnding = NameEndings.FirstOrDefault(ending => name.EndsWith(ending, System.StringComparison.OrdinalIgnoreCase));
-                    if (nameEnding != null)
-                    {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, identifier.GetLocation(),
-                            name.Substring(name.Length - nameEnding.Length, nameEnding.Length)));
-                    }
-                },
+                var nameEnding = NameEndings.FirstOrDefault(ending => name.EndsWith(ending, System.StringComparison.OrdinalIgnoreCase));
+                if (nameEnding != null)
+                {
+                    Diagnostic.Create(Rule, identifier.GetLocation(), name.Substring(name.Length - nameEnding.Length, nameEnding.Length))
+                        .ReportFor(c);
+        }
+    },
                 SyntaxKindsOfInterest.ToArray());
         }
 
-        protected abstract SyntaxToken GetIdentifier(SyntaxNode node);
+protected abstract SyntaxToken GetIdentifier(SyntaxNode node);
 
-        public abstract ImmutableArray<TLanguageKindEnum> SyntaxKindsOfInterest { get; }
-        protected abstract DiagnosticDescriptor Rule { get; }
+public abstract ImmutableArray<TLanguageKindEnum> SyntaxKindsOfInterest { get; }
+protected abstract DiagnosticDescriptor Rule { get; }
 
-        public override sealed ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
+public override sealed ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
     }
 }

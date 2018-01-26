@@ -90,7 +90,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                         if (setInAllCtors)
                         {
-                            c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, symbolInitializerPairs[declaredSymbol].GetLocation()));
+                            Diagnostic.Create(rule, symbolInitializerPairs[declaredSymbol].GetLocation()).ReportFor(c);
                         }
                     }
                 },

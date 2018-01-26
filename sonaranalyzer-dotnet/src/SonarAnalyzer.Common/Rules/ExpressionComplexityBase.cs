@@ -80,10 +80,8 @@ namespace SonarAnalyzer.Rules
 
                     foreach (var complexExpression in complexExpressions)
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule,
-                            complexExpression.Expression.GetLocation(),
-                            Maximum,
-                            complexExpression.Complexity));
+                        Diagnostic.Create(Rule, complexExpression.Expression.GetLocation(), Maximum, complexExpression.Complexity)
+                            .ReportFor(c);
                     }
                 });
         }

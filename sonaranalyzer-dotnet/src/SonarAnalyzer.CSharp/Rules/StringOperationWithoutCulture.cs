@@ -67,7 +67,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         CommonCultureSpecificMethodNames.Contains(calledMethod.Name) &&
                         !calledMethod.Parameters.Any(param => param.Type.IsAny(StringCultureSpecifierNames)))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, memberAccess.Name.GetLocation(), MessageDefineLocale));
+                        Diagnostic.Create(rule, memberAccess.Name.GetLocation(), MessageDefineLocale).ReportFor(c);
                         return;
                     }
 
@@ -76,7 +76,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         calledMethod.Parameters.Any(param => param.Type.SpecialType == SpecialType.System_String) &&
                         !calledMethod.Parameters.Any(param => param.Type.IsAny(StringCultureSpecifierNames)))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, memberAccess.Name.GetLocation(), MessageDefineLocale));
+                        Diagnostic.Create(rule, memberAccess.Name.GetLocation(), MessageDefineLocale).ReportFor(c);
                         return;
                     }
 
@@ -84,14 +84,14 @@ namespace SonarAnalyzer.Rules.CSharp
                         calledMethod.Name == ToStringMethodName &&
                         calledMethod.Parameters.Length == 0)
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, memberAccess.Name.GetLocation(), MessageDefineLocale));
+                        Diagnostic.Create(rule, memberAccess.Name.GetLocation(), MessageDefineLocale).ReportFor(c);
                         return;
                     }
 
                     if (calledMethod.IsInType(KnownType.System_String) &&
                         calledMethod.Name == CompareToMethodName)
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, memberAccess.Name.GetLocation(), MessageChangeCompareTo));
+                        Diagnostic.Create(rule, memberAccess.Name.GetLocation(), MessageChangeCompareTo).ReportFor(c);
                     }
                 },
                 SyntaxKind.InvocationExpression);

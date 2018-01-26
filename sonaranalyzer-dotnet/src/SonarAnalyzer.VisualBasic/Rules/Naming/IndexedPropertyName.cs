@@ -51,7 +51,8 @@ namespace SonarAnalyzer.Rules.VisualBasic
                         propertyDeclaration.ParameterList.Parameters.Any() &&
                         propertyDeclaration.Identifier.ValueText != "Item")
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, propertyDeclaration.Identifier.GetLocation()));
+                        Diagnostic.Create(rule, propertyDeclaration.Identifier.GetLocation())
+                            .ReportFor(c);
                     }
                 },
                 SyntaxKind.PropertyStatement);

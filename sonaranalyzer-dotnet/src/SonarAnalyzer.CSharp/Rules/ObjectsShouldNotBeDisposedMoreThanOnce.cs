@@ -65,8 +65,7 @@ namespace SonarAnalyzer.Rules.CSharp
             EventHandler<ObjectDisposedEventArgs> memberAccessedHandler =
                 (sender, args) =>
                 {
-                    context.ReportDiagnosticWhenActive(
-                        Diagnostic.Create(rule, args.Location, args.Name));
+                                            Diagnostic.Create(rule, args.Location, args.Name).ReportFor(context);
                 };
 
             objectDisposedCheck.ObjectDisposed += memberAccessedHandler;

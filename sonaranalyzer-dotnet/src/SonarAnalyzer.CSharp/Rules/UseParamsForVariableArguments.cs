@@ -53,7 +53,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         methodSymbol.IsPubliclyAccessible() &&
                         HasAnyArgListParameter(methodDeclaration))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, methodDeclaration.Identifier.GetLocation()));
+                        Diagnostic.Create(rule, methodDeclaration.Identifier.GetLocation()).ReportFor(c);
                     }
                 }, SyntaxKind.MethodDeclaration);
         }

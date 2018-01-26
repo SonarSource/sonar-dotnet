@@ -52,7 +52,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     if (c.SemanticModel.GetTypeInfo(throwStatement.Expression).Type.Is(KnownType.System_NotImplementedException))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, throwStatement.GetLocation()));
+                        Diagnostic.Create(rule, throwStatement.GetLocation()).ReportFor(c);
                     }
                 },
                 SyntaxKind.ThrowStatement);

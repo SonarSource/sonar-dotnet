@@ -270,7 +270,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     !IsUnusedLocal(symbol))
                 {
                     var location = GetFirstLineLocationFromToken(declarator.Initializer.EqualsToken, declarator.Initializer);
-                    context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, location, symbol.Name));
+                    Diagnostic.Create(rule, location, symbol.Name).ReportFor(context);
                 }
                 liveOut.Remove(symbol);
             }
@@ -332,7 +332,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (CSharpLiveVariableAnalysis.IsLocalScoped(symbol, declaration) &&
                         !liveOut.Contains(symbol))
                     {
-                        context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, prefixExpression.GetLocation(), symbol.Name));
+                        Diagnostic.Create(rule, prefixExpression.GetLocation(), symbol.Name).ReportFor(context);
                     }
                 }
             }
@@ -352,7 +352,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (CSharpLiveVariableAnalysis.IsLocalScoped(symbol, declaration) &&
                         !liveOut.Contains(symbol))
                     {
-                        context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, postfixExpression.GetLocation(), symbol.Name));
+                        Diagnostic.Create(rule, postfixExpression.GetLocation(), symbol.Name).ReportFor(context);
                     }
                 }
             }
@@ -364,7 +364,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     !outState.Contains(symbol))
                 {
                     var location = GetFirstLineLocationFromToken(assignment.OperatorToken, assignment.Right);
-                    context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, location, symbol.Name));
+                    Diagnostic.Create(rule, location, symbol.Name).ReportFor(context);
                 }
 
                 assignmentLhs.Add(left);

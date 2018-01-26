@@ -50,8 +50,8 @@ namespace SonarAnalyzer.Rules.Common
                     }
 
                     var identifier = GetIdentifier(prop);
-                    c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, identifier.GetLocation(),
-                        identifier.ValueText));
+                    Diagnostic.Create(Rule, identifier.GetLocation(), identifier.ValueText)
+                        .ReportFor(c);
                 },
                 SyntaxKindsOfInterest.ToArray());
         }

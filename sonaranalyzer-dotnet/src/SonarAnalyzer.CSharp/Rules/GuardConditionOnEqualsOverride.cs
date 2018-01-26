@@ -93,7 +93,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 !objectType.Is(KnownType.System_Object) &&
                 GetHashCodeEqualsOverride.IsEqualsCallInGuardCondition(invocation, invokedMethod))
             {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, invocation.GetLocation()));
+                Diagnostic.Create(rule, invocation.GetLocation()).ReportFor(context);
             }
         }
     }

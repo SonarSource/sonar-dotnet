@@ -88,7 +88,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (!hasWorkItemAttribute &&
                         !hasTrailingComment)
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, ignoreAttributeSyntax.GetLocation()));
+                        Diagnostic.Create(rule, ignoreAttributeSyntax.GetLocation()).ReportFor(c);
                     }
                 }, SyntaxKind.MethodDeclaration);
         }

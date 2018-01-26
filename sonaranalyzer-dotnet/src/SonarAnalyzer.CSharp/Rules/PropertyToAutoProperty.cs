@@ -73,7 +73,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         getterField.IsStatic == propertySymbol.IsStatic &&
                         getterField.Type.Equals(propertySymbol.Type))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, propertyDeclaration.Identifier.GetLocation()));
+                        Diagnostic.Create(rule, propertyDeclaration.Identifier.GetLocation()).ReportFor(c);
                     }
                 },
                 SyntaxKind.PropertyDeclaration);

@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2018 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -69,8 +69,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
             if (objectCreationSyntax.ArgumentList.Arguments.Count == 0)
             {
-                analysisContext.ReportDiagnosticWhenActive(Diagnostic.Create(rule, objectCreationSyntax.GetLocation(),
-                    ParameterLessConstructorMessage));
+                Diagnostic.Create(rule, objectCreationSyntax.GetLocation(), ParameterLessConstructorMessage)
+                    .ReportFor(analysisContext);
                 return;
             }
 
@@ -111,13 +111,11 @@ namespace SonarAnalyzer.Rules.CSharp
                 messageValue.Value != null &&
                 methodArgumentNames.Contains(TakeOnlyBeforeDot(messageValue)))
             {
-                analysisContext.ReportDiagnosticWhenActive(Diagnostic.Create(rule,
-                    objectCreationSyntax.GetLocation(), ConstructorParametersInverted));
+                Diagnostic.Create(rule, objectCreationSyntax.GetLocation(), ConstructorParametersInverted).ReportFor(analysisContext);
                 return;
             }
 
-            analysisContext.ReportDiagnosticWhenActive(Diagnostic.Create(rule, objectCreationSyntax.GetLocation(),
-                    string.Format(InvalidParameterName, parameterNameValue.Value)));
+            Diagnostic.Create(rule, objectCreationSyntax.GetLocation(), string.Format(InvalidParameterName, parameterNameValue.Value)).ReportFor(analysisContext);
         }
 
         private static ISet<string> GetMethodArgumentNames(ObjectCreationExpressionSyntax creationSyntax)

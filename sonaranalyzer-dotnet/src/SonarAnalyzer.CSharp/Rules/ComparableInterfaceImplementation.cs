@@ -101,11 +101,12 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     if (membersToOverride.Any())
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(
+                        Diagnostic.Create(
                             rule,
                             classDeclaration.Identifier.GetLocation(),
                             string.Join(" or ", implementedComparableInterfaces),
-                            string.Join(", ", membersToOverride)));
+                            string.Join(", ", membersToOverride))
+                            .ReportFor(c);
                     }
                 },
                 SyntaxKind.ClassDeclaration,

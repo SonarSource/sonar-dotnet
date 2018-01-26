@@ -96,8 +96,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 if (!HasValidLicenseHeader(firstNode))
                 {
                     var properties = CreateDiagnosticProperties();
-                    stac.ReportDiagnosticWhenActive(Diagnostic.Create(rule, Location.Create(stac.Tree,
-                        TextSpan.FromBounds(0, 0)), properties));
+                    Diagnostic.Create(rule, Location.Create(stac.Tree, TextSpan.FromBounds(0, 0)), properties)
+                        .ReportFor(stac);
                 }
             });
         }

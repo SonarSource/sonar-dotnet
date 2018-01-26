@@ -62,8 +62,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     foreach (var throwStatement in throwStatementsPerCtor)
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, throwStatement.First().GetLocation(),
-                            throwStatement.Skip(1).Select(@throw => @throw.GetLocation())));
+                        Diagnostic.Create(rule, throwStatement.First().GetLocation(),                            throwStatement.Skip(1).Select(@throw => @throw.GetLocation())).ReportFor(c);
                     }
                 },
                 SyntaxKind.ClassDeclaration);

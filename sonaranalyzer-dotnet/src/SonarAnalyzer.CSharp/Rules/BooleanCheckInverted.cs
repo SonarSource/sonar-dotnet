@@ -63,8 +63,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     if (parenthesizedParent is PrefixUnaryExpressionSyntax logicalNot && logicalNot.OperatorToken.IsKind(SyntaxKind.ExclamationToken))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, logicalNot.GetLocation(),
-                            OppositeTokens[expression.OperatorToken.Kind()]));
+                        Diagnostic.Create(rule, logicalNot.GetLocation(),                            OppositeTokens[expression.OperatorToken.Kind()]).ReportFor(c);
                     }
                 },
                 SyntaxKind.GreaterThanExpression,

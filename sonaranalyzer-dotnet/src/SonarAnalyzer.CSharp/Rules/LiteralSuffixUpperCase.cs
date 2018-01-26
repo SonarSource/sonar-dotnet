@@ -51,8 +51,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (text[text.Length - 1] == 'l' &&
                         c.SemanticModel.GetTypeInfo(literal).Type.Is(KnownType.System_Int64))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, Location.Create(literal.SyntaxTree,
-                            new TextSpan(literal.Span.End - 1, 1))));
+                        Diagnostic.Create(rule, Location.Create(literal.SyntaxTree,                            new TextSpan(literal.Span.End - 1, 1))).ReportFor(c);
                     }
                 },
                 SyntaxKind.NumericLiteralExpression);

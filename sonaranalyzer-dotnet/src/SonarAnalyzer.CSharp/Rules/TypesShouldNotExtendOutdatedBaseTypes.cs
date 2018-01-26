@@ -63,8 +63,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     !classDeclaration.Identifier.IsMissing &&
                     classSymbol.BaseType.IsAny(outdatedTypes))
                 {
-                    c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, classDeclaration.Identifier.GetLocation(),
-                        messageArgs: classSymbol.BaseType.ToDisplayString()));
+                    Diagnostic.Create(rule, classDeclaration.Identifier.GetLocation(),                        messageArgs: classSymbol.BaseType.ToDisplayString()).ReportFor(c);
                 }
             },
             SyntaxKind.ClassDeclaration);

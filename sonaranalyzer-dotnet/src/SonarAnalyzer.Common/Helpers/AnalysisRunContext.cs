@@ -18,30 +18,22 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-extern alias vbnet;
+using System.Collections.Generic;
+using System.Linq;
+using Microsoft.CodeAnalysis;
 
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-namespace SonarAnalyzer.UnitTest.Rules
+namespace SonarAnalyzer.Helpers
 {
-    [TestClass]
-    public class LineLengthTest
+    public struct AnalysisRunContext
     {
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void LineLength_CSharp()
+        public AnalysisRunContext(SyntaxTree syntaxTree, IEnumerable<DiagnosticDescriptor> supportedDiagnostics)
         {
-            var diagnosticCs = new csharp::SonarAnalyzer.Rules.CSharp.LineLength { Maximum = 127 };
-            Verifier.VerifyAnalyzer(@"TestCases\LineLength.cs", diagnosticCs);
+            SyntaxTree = syntaxTree;
+            SupportedDiagnostics = supportedDiagnostics ?? Enumerable.Empty<DiagnosticDescriptor>();
         }
 
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void LineLength_VisualBasic()
-        {
-            var diagnosticVb = new vbnet::SonarAnalyzer.Rules.VisualBasic.LineLength { Maximum = 127 };
-            Verifier.VerifyAnalyzer(@"TestCases\LineLength.vb", diagnosticVb);
-        }
+        public SyntaxTree SyntaxTree { get; }
+
+        public IEnumerable<DiagnosticDescriptor> SupportedDiagnostics { get; }
     }
 }

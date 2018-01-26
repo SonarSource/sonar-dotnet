@@ -99,13 +99,13 @@ namespace SonarAnalyzer.Rules.CSharp
 
             if (walker.CyclomaticComplexity > Maximum)
             {
-                context.ReportDiagnosticWhenActive(
-                    Diagnostic.Create(
-                        rule,
-                        getLocation(node),
-                        walker.IncrementLocations.ToAdditionalLocations(),
-                        walker.IncrementLocations.ToProperties(),
-                        new object[] { Maximum, walker.CyclomaticComplexity, declarationType}));
+                Diagnostic.Create(
+                    rule,
+                    getLocation(node),
+                    walker.IncrementLocations.ToAdditionalLocations(),
+                    walker.IncrementLocations.ToProperties(),
+                    new object[] { Maximum, walker.CyclomaticComplexity, declarationType })
+                    .ReportFor(context);
             }
         }
     }

@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2018 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -48,10 +48,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 if (TryGetPreviousTokenInSameLine(ifKeyword, out var previousTokenInSameLine) &&
                     previousTokenInSameLine.IsKind(SyntaxKind.CloseBraceToken))
                 {
-                    c.ReportDiagnosticWhenActive(Diagnostic.Create(rule,
-                            ifKeyword.GetLocation(),
-                            additionalLocations: new[] { previousTokenInSameLine.GetLocation() }
-                        ));
+                    Diagnostic.Create(rule, ifKeyword.GetLocation(), additionalLocations: new[] { previousTokenInSameLine.GetLocation() })
+                        .ReportFor(c);
                 }
             },
             SyntaxKind.IfStatement);

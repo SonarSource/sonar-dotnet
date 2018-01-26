@@ -57,10 +57,11 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, foreachStatement.Type.GetLocation(),
+                    Diagnostic.Create(rule, foreachStatement.Type.GetLocation(),
                         foreachStatement.Identifier.ValueText,
                         foreachInfo.ElementType.ToMinimalDisplayString(c.SemanticModel, foreachStatement.Type.SpanStart),
-                        foreachStatement.Type.ToString()));
+                        foreachStatement.Type.ToString())
+                        .ReportFor(c);
                 },
                 SyntaxKind.ForEachStatement);
         }

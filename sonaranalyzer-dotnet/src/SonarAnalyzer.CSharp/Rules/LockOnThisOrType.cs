@@ -50,7 +50,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (LockOnThis(lockStatement.Expression) ||
                         LockOnSystemType(lockStatement.Expression, c.SemanticModel))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, lockStatement.Expression.GetLocation()));
+                        Diagnostic.Create(rule, lockStatement.Expression.GetLocation()).ReportFor(c);
                     }
                 },
                 SyntaxKind.LockStatement);

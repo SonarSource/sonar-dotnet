@@ -89,7 +89,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         .Any(invocation => IsAssertion(invocation, c.SemanticModel));
                     if (!hasAnyAssertion)
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, methodDeclaration.Identifier.GetLocation()));
+                        Diagnostic.Create(rule, methodDeclaration.Identifier.GetLocation()).ReportFor(c);
                     }
                 }, SyntaxKind.MethodDeclaration);
         }
