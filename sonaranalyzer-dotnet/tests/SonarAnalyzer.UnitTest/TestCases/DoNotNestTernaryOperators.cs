@@ -16,8 +16,13 @@ namespace Tests.Diagnostics
 //                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
             var x2 = isMale ? "Mr. " : isMarried ? "Mrs. " : true ? "Miss " : "what? ";
-//                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Noncompliant
-//                                                           ^^^^^^^^^^^^^^^^^^^^^^^^^ Noncompliant @-1
+//                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Noncompliant
+//                                                           ^^^^^^^^^^^^^^^^^^^^^^^^^ Noncompliant@-1
+
+            var x3 = isMale ? "Mr. " :
+                 isMarried // Noncompliant
+                ? "Mrs. "
+                : "Miss ";
         }
     }
 }
