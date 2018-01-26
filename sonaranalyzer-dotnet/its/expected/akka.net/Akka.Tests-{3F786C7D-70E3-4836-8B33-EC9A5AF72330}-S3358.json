@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3358",
+"message":  "Extract this nested ternary operation into an independent statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\SupervisorHierarchySpec.cs",
+"region":  {
+"startLine":  261,
+"startColumn":  113,
+"endLine":  261,
+"endColumn":  182
+}
+}
+}
+]
+}
