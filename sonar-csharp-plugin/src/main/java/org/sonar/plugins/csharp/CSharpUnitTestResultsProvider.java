@@ -54,6 +54,7 @@ public class CSharpUnitTestResultsProvider {
         .category(CATEGORY)
         .subCategory(SUBCATEGORY)
         .onlyOnQualifiers(Qualifiers.PROJECT, Qualifiers.MODULE)
+        .multiValues(true)
         .build(),
       PropertyDefinition.builder(NUNIT_TEST_RESULTS_PROPERTY_KEY)
         .name("NUnit Test Reports Paths")
@@ -61,6 +62,7 @@ public class CSharpUnitTestResultsProvider {
         .category(CATEGORY)
         .subCategory(SUBCATEGORY)
         .onlyOnQualifiers(Qualifiers.PROJECT, Qualifiers.MODULE)
+        .multiValues(true)
         .build());
   }
 

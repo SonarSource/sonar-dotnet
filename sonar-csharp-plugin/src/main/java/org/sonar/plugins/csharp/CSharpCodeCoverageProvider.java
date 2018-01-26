@@ -71,6 +71,7 @@ public class CSharpCodeCoverageProvider {
         .category(CATEGORY)
         .subCategory(SUBCATEGORY)
         .onlyOnQualifiers(Qualifiers.PROJECT, Qualifiers.MODULE)
+        .multiValues(true)
         .build(),
       PropertyDefinition.builder(IT_NCOVER3_PROPERTY_KEY)
         .name("NCover3 Integration Tests Reports Paths")
@@ -78,6 +79,7 @@ public class CSharpCodeCoverageProvider {
         .category(CATEGORY)
         .subCategory(SUBCATEGORY)
         .onlyOnQualifiers(Qualifiers.PROJECT, Qualifiers.MODULE)
+        .multiValues(true)
         .build(),
       PropertyDefinition.builder(OPENCOVER_PROPERTY_KEY)
         .name("OpenCover Unit Tests Reports Paths")
@@ -85,6 +87,7 @@ public class CSharpCodeCoverageProvider {
         .category(CATEGORY)
         .subCategory(SUBCATEGORY)
         .onlyOnQualifiers(Qualifiers.PROJECT, Qualifiers.MODULE)
+        .multiValues(true)
         .build(),
       PropertyDefinition.builder(IT_OPENCOVER_PROPERTY_KEY)
         .name("OpenCover Integration Tests Reports Paths")
@@ -92,6 +95,7 @@ public class CSharpCodeCoverageProvider {
         .category(CATEGORY)
         .subCategory(SUBCATEGORY)
         .onlyOnQualifiers(Qualifiers.PROJECT, Qualifiers.MODULE)
+        .multiValues(true)
         .build(),
       PropertyDefinition.builder(DOTCOVER_PROPERTY_KEY)
         .name("dotCover Unit Tests (HTML) Reports Paths")
@@ -99,6 +103,7 @@ public class CSharpCodeCoverageProvider {
         .category(CATEGORY)
         .subCategory(SUBCATEGORY)
         .onlyOnQualifiers(Qualifiers.PROJECT, Qualifiers.MODULE)
+        .multiValues(true)
         .build(),
       PropertyDefinition.builder(IT_DOTCOVER_PROPERTY_KEY)
         .name("dotCover Integration Tests (HTML) Reports Paths")
@@ -106,6 +111,7 @@ public class CSharpCodeCoverageProvider {
         .category(CATEGORY)
         .subCategory(SUBCATEGORY)
         .onlyOnQualifiers(Qualifiers.PROJECT, Qualifiers.MODULE)
+        .multiValues(true)
         .build(),
       PropertyDefinition.builder(VISUAL_STUDIO_COVERAGE_XML_PROPERTY_KEY)
         .name("Visual Studio Unit Tests (XML) Reports Paths")
@@ -113,6 +119,7 @@ public class CSharpCodeCoverageProvider {
         .category(CATEGORY)
         .subCategory(SUBCATEGORY)
         .onlyOnQualifiers(Qualifiers.PROJECT, Qualifiers.MODULE)
+        .multiValues(true)
         .build(),
       PropertyDefinition.builder(IT_VISUAL_STUDIO_COVERAGE_XML_PROPERTY_KEY)
         .name("Visual Studio Integration Tests (XML) Reports Paths")
@@ -120,6 +127,7 @@ public class CSharpCodeCoverageProvider {
         .category(CATEGORY)
         .subCategory(SUBCATEGORY)
         .onlyOnQualifiers(Qualifiers.PROJECT, Qualifiers.MODULE)
+        .multiValues(true)
         .build());
   }
 
