@@ -76,4 +76,19 @@ namespace Classes
     class Descendant : Exported
     {
     }
+
+    class ExportingMembers_Are_Ignored
+    {
+        [Export(typeof(MyInterface))]
+        [Export(typeof(Exported))]
+        public NotExported MyProperty { get; set; }
+
+        [Export(typeof(MyInterface))]
+        [Export(typeof(Exported))]
+        public NotExported MyField;
+
+        [Export(typeof(MyInterface))]
+        [Export(typeof(Exported))]
+        public NotExported MyMethod() { }
+    }
 }
