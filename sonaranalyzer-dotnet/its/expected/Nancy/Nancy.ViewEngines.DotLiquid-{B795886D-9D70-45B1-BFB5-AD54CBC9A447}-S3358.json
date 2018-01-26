@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3358",
+"message":  "Extract this nested ternary operation into an independent statement.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.DotLiquid\DynamicDrop.cs",
+"region":  {
+"startLine":  81,
+"startColumn":  57,
+"endLine":  81,
+"endColumn":  150
+}
+}
+}
+]
+}

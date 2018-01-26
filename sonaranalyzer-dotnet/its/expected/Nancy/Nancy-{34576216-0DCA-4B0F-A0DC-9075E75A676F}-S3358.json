@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3358",
+"message":  "Extract this nested ternary operation into an independent statement.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  3295,
+"startColumn":  94,
+"endLine":  3295,
+"endColumn":  183
+}
+}
+},
+{
+"id":  "S3358",
+"message":  "Extract this nested ternary operation into an independent statement.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Url.cs",
+"region":  {
+"startLine":  205,
+"startColumn":  66,
+"endLine":  205,
+"endColumn":  103
+}
+}
+}
+]
+}
