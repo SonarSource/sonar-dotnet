@@ -10,8 +10,10 @@ namespace Classes
 
     interface MyInterface { }
 
-    [Export(typeof(MyInterface))] // Noncompliant {{Implement 'MyInterface' on 'NotExported' or remove this Export attribute.}}
+    [Export(typeof(MyInterface))] // Noncompliant {{Implement 'MyInterface' on 'NotExported' or remove this export attribute.}}
 //   ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    [Export(typeof(Exported))] // Noncompliant {{Derive from 'Exported' on 'NotExported' or remove this export attribute.}}
+//   ^^^^^^^^^^^^^^^^^^^^^^^^
     class NotExported
     {
     }
@@ -29,8 +31,8 @@ namespace Classes
     }
 
     [Export(typeof(MyInterface)), Export(typeof(IComparable)), Export(typeof(IDisposable))]
-//   ^^^^^^^^^^^^^^^^^^^^^^^^^^^ {{Implement 'MyInterface' on 'NotExported_Multiple' or remove this Export attribute.}}
-//                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^ @-1 {{Implement 'IComparable' on 'NotExported_Multiple' or remove this Export attribute.}}
+//   ^^^^^^^^^^^^^^^^^^^^^^^^^^^ {{Implement 'MyInterface' on 'NotExported_Multiple' or remove this export attribute.}}
+//                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^ @-1 {{Implement 'IComparable' on 'NotExported_Multiple' or remove this export attribute.}}
     class NotExported_Multiple : IDisposable
     {
         public void Dispose() { }
@@ -42,6 +44,7 @@ namespace Classes
     }
 
     [Export(typeof(MyInterface))]
+    [Export(typeof(Descendant))] // Noncompliant
     class Exported : MyInterface
     {
     }
@@ -62,7 +65,15 @@ namespace Classes
     }
 
     [Import(typeof(MyInterface))]
+    [InheritedExport(typeof(MyInterface))] // Noncompliant
+    [InheritedExport(typeof(OtherAttributes))]
     class OtherAttributes
+    {
+    }
+
+    [Export(typeof(MyInterface))]
+    [Export(typeof(Exported))]
+    class Descendant : Exported
     {
     }
 }

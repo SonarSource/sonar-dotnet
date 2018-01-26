@@ -35,12 +35,20 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class ShouldImplementExportedInterfaces : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S4159";
-        private const string MessageFormat = "Implement '{0}' on '{1}' or remove this Export attribute.";
+        private const string MessageFormat = "{0} '{1}' on '{2}' or remove this export attribute.";
+        private const string ActionForInterface = "Implement";
+        private const string ActionForClass = "Derive from";
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+
+        private static readonly ISet<KnownType> ExportAttributes = new HashSet<KnownType>
+        {
+            KnownType.System_ComponentModel_Composition_ExportAttribute,
+            KnownType.System_ComponentModel_Composition_InheritedExportAttribute,
+        };
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -51,7 +59,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     var attributeCtorSymbol = c.SemanticModel.GetSymbolInfo(attributeSyntax.Name).Symbol as IMethodSymbol;
                     if (attributeCtorSymbol == null ||
-                        !attributeCtorSymbol.ContainingType.Is(KnownType.System_ComponentModel_Composition_ExportAttribute))
+                        !attributeCtorSymbol.ContainingType.IsAny(ExportAttributes))
                     {
                         return;
                     }
@@ -63,8 +71,12 @@ namespace SonarAnalyzer.Rules.CSharp
                         attributeTargetType != null &&
                         !attributeTargetType.DerivesOrImplements(exportedType))
                     {
+                        var action = exportedType.IsInterface()
+                            ? ActionForInterface
+                            : ActionForClass;
+
                         c.ReportDiagnosticWhenActive(
-                            Diagnostic.Create(rule, attributeSyntax.GetLocation(), exportedType.Name, attributeTargetType.Name));
+                            Diagnostic.Create(rule, attributeSyntax.GetLocation(), action, exportedType.Name, attributeTargetType.Name));
                     }
                 },
                 SyntaxKind.Attribute);
