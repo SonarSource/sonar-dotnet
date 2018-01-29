@@ -18,7 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
+using System.Diagnostics;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
@@ -27,40 +27,56 @@ namespace SonarAnalyzer.Helpers
 {
     public static class AnalysisContextExtensions
     {
-        public static void ReportDiagnosticWhenActive(this SyntaxNodeAnalysisContext context, Diagnostic diagnostic)
-        {
-            InternalReportDiagnostic(context.Node.SyntaxTree, diagnostic, d => context.ReportDiagnostic(d));
-        }
+        public static SyntaxTree GetSyntaxTree(this SyntaxNodeAnalysisContext context) =>
+            context.Node.SyntaxTree;
+        public static SyntaxTree GetSyntaxTree(this SyntaxTreeAnalysisContext context) =>
+            context.Tree;
+        public static SyntaxTree GetSyntaxTree(this CompilationAnalysisContext context) =>
+            context.Compilation.SyntaxTrees.FirstOrDefault();
+#pragma warning disable RS1012 // Start action has no registered actions.
+        public static SyntaxTree GetSyntaxTree(this CompilationStartAnalysisContext context) =>
+#pragma warning restore RS1012 // Start action has no registered actions.
+            context.Compilation.SyntaxTrees.FirstOrDefault();
+        public static SyntaxTree GetSyntaxTree(this SymbolAnalysisContext context) =>
+            context.Symbol.Locations.FirstOrDefault(l => l.SourceTree != null)?.SourceTree;
+        public static SyntaxTree GetSyntaxTree(this CodeBlockAnalysisContext context) =>
+            context.CodeBlock.SyntaxTree;
+#pragma warning disable RS1012 // Start action has no registered actions.
+        public static SyntaxTree GetSyntaxTree<TLanguageKindEnum>(this CodeBlockStartAnalysisContext<TLanguageKindEnum> context)
+#pragma warning restore RS1012 // Start action has no registered actions.
+            where TLanguageKindEnum : struct =>
+            context.CodeBlock.SyntaxTree;
+        public static SyntaxTree GetSyntaxTree(this SemanticModelAnalysisContext context) =>
+            context.SemanticModel.SyntaxTree;
 
-        public static void ReportDiagnosticWhenActive(this SyntaxTreeAnalysisContext context, Diagnostic diagnostic)
-        {
-            InternalReportDiagnostic(context.Tree, diagnostic, d => context.ReportDiagnostic(d));
-        }
 
-        public static void ReportDiagnosticWhenActive(this CompilationAnalysisContext context, Diagnostic diagnostic)
-        {
-            InternalReportDiagnostic(context.Compilation.SyntaxTrees.FirstOrDefault(), diagnostic,
-                d => context.ReportDiagnostic(d));
-        }
+        public static void ReportDiagnosticWhenActive(this SyntaxNodeAnalysisContext context, Diagnostic diagnostic) =>
+            ReportDiagnostic(new ReportingContext(context, diagnostic));
+        public static void ReportDiagnosticWhenActive(this SyntaxTreeAnalysisContext context, Diagnostic diagnostic) =>
+            ReportDiagnostic(new ReportingContext(context, diagnostic));
+        public static void ReportDiagnosticWhenActive(this CompilationAnalysisContext context, Diagnostic diagnostic) =>
+            ReportDiagnostic(new ReportingContext(context, diagnostic));
+        public static void ReportDiagnosticWhenActive(this SymbolAnalysisContext context, Diagnostic diagnostic) =>
+            ReportDiagnostic(new ReportingContext(context, diagnostic));
+        public static void ReportDiagnosticWhenActive(this CodeBlockAnalysisContext context, Diagnostic diagnostic) =>
+            ReportDiagnostic(new ReportingContext(context, diagnostic));
 
-        public static void ReportDiagnosticWhenActive(this SymbolAnalysisContext context, Diagnostic diagnostic)
+        private static void ReportDiagnostic(ReportingContext reportingContext)
         {
-            InternalReportDiagnostic(context.Symbol.Locations.FirstOrDefault(l => l.SourceTree != null)?.SourceTree, diagnostic,
-                d => context.ReportDiagnostic(d));
-        }
-
-        public static void ReportDiagnosticWhenActive(this CodeBlockAnalysisContext context, Diagnostic diagnostic)
-        {
-            InternalReportDiagnostic(context.CodeBlock.SyntaxTree, diagnostic, d => context.ReportDiagnostic(d));
-        }
-
-        private static void InternalReportDiagnostic(SyntaxTree tree, Diagnostic diagnostic, Action<Diagnostic> report)
-        {
-            if (!SonarAnalysisContext.IsAnalysisDisabled(tree, new[] { diagnostic.Descriptor }) &&
-                SonarAnalysisContext.ShouldDiagnosticBeReported(tree, diagnostic) &&
-                !VbcHelper.IsTriggeringVbcError(diagnostic))
+            // This is the new way SonarLint will handle how and what to report...
+            if (SonarAnalysisContext.ReportDiagnosticAction != null)
             {
-                report(diagnostic);
+                Debug.Assert(SonarAnalysisContext.ShouldDiagnosticBeReported == null, "Not expecting SonarLint to set both the " +
+                    "old and the new delegates.");
+                SonarAnalysisContext.ReportDiagnosticAction(reportingContext);
+                return;
+            }
+
+            // ... but for compatibility purposes we need to keep handling the old-fashioned way
+            if (!VbcHelper.IsTriggeringVbcError(reportingContext.Diagnostic) &&
+                (SonarAnalysisContext.ShouldDiagnosticBeReported?.Invoke(reportingContext.SyntaxTree, reportingContext.Diagnostic) ?? true))
+            {
+                reportingContext.ReportDiagnostic(reportingContext.Diagnostic);
             }
         }
     }

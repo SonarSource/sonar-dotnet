@@ -21,11 +21,12 @@
 extern alias csharp;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using csharp::SonarAnalyzer.Rules.CSharp;
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Helpers;
-using csharp::SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Helpers
 {
@@ -38,7 +39,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             public SonarDiagnosticAnalyzer Analyzer { get; set; }
         }
 
-        private readonly List<TestSetup> TestCases = new List<TestSetup>(new []
+        private readonly List<TestSetup> TestCases = new List<TestSetup>(new[]
         {
             new TestSetup { Path = @"TestCases\AnonymousDelegateEventUnsubscribe.cs", Analyzer = new AnonymousDelegateEventUnsubscribe() },
             new TestSetup { Path = @"TestCases\AsyncAwaitIdentifier.cs", Analyzer = new AsyncAwaitIdentifier() },
@@ -48,14 +49,15 @@ namespace SonarAnalyzer.UnitTest.Helpers
         });
 
         [TestMethod]
-        public void SonarAnalysis_NoIssueReportedIfAnalysisIsDisabled()
+        public void SonarAnalysis_WhenShouldAnalysisBeDisabledReturnsTrue_NoIssueReported()
         {
-            SonarAnalysisContext.ShouldAnalysisBeDisabled = (tree, descriptor) => true;
+            SonarAnalysisContext.ShouldAnalysisBeDisabled = tree => true;
 
             try
             {
                 foreach (var testCase in TestCases)
                 {
+                    // TODO: We should find a way to ack the fact the action was not run
                     Verifier.VerifyNoIssueReported(testCase.Path, testCase.Analyzer);
                 }
             }
@@ -66,13 +68,41 @@ namespace SonarAnalyzer.UnitTest.Helpers
         }
 
         [TestMethod]
-        public void SonarAnalysis_IsAbleToDisableSpecificRules()
+        public void SonarAnalysis_ByDefault_ExecuteRule()
         {
-            SonarAnalysisContext.ShouldAnalysisBeDisabled = (tree, descriptor) =>
-                descriptor.Id == AnonymousDelegateEventUnsubscribe.DiagnosticId;
+            foreach (var testCase in TestCases)
+            {
+                // FIX ME: We test that a rule is enabled only by checking the issues are reported
+                Verifier.VerifyAnalyzer(testCase.Path, testCase.Analyzer);
+            }
+        }
+
+        [TestMethod]
+        public void SonarAnalysis_WhenAnalysisDisabledBaseOnSyntaxTree_ReportIssuesForEnabledRules()
+        {
+            TestCases.Count.Should().BeGreaterThan(2);
 
             try
             {
+                SonarAnalysisContext.ShouldAnalysisBeDisabled = tree =>
+                    tree.FilePath.EndsWith(new FileInfo(TestCases[0].Path).Name, System.StringComparison.OrdinalIgnoreCase);
+                Verifier.VerifyNoIssueReported(TestCases[0].Path, TestCases[0].Analyzer);
+                Verifier.VerifyAnalyzer(TestCases[1].Path, TestCases[1].Analyzer);
+            }
+            finally
+            {
+                SonarAnalysisContext.ShouldAnalysisBeDisabled = null;
+            }
+        }
+
+        [TestMethod]
+        public void SonarAnalysis_WhenOneRuleDisabled_ReportIssuesOnlyForOtherRules()
+        {
+            try
+            {
+                SonarAnalysisContext.ShouldExecuteRuleFunc = context => context.SupportedDiagnostics
+                    .Any(diagnostic => diagnostic.Id != AnonymousDelegateEventUnsubscribe.DiagnosticId);
+
                 foreach (var testCase in TestCases)
                 {
                     if (testCase.Analyzer.GetType() == typeof(AnonymousDelegateEventUnsubscribe))
@@ -87,48 +117,47 @@ namespace SonarAnalyzer.UnitTest.Helpers
             }
             finally
             {
-                SonarAnalysisContext.ShouldAnalysisBeDisabled = null;
+                SonarAnalysisContext.ShouldExecuteRuleFunc = null;
             }
         }
 
         [TestMethod]
-        public void SonarAnalysis_IssueReportedIfAnalysisIsEnabled()
+        public void SonarAnalysis_WhenReportDiagnosticActionNotNull_AllowToContolWhetherOrNotToReport()
         {
-            foreach (var testCase in TestCases)
-            {
-                Verifier.VerifyAnalyzer(testCase.Path, testCase.Analyzer);
-            }
-        }
-
-        [TestMethod]
-        public void SonarAnalysis_SpecificIssueTurnedOff()
-        {
-            TestCases.Count.Should().BeGreaterThan(2);
-
             try
             {
-                SonarAnalysisContext.ShouldAnalysisBeDisabled = (tree, descriptor) =>
-                    tree.FilePath.EndsWith(new FileInfo(TestCases[0].Path).Name, System.StringComparison.OrdinalIgnoreCase);
-                Verifier.VerifyNoIssueReported(TestCases[0].Path, TestCases[0].Analyzer);
-                Verifier.VerifyAnalyzer(TestCases[1].Path, TestCases[1].Analyzer);
+                SonarAnalysisContext.ReportDiagnosticAction = context =>
+                {
+                    if (context.Diagnostic.Id != AnonymousDelegateEventUnsubscribe.DiagnosticId)
+                    {
+                        // Verifier expects all diagnostics to increase the counter in order to check that all rules call the
+                        // extension method and not the direct `ReportDiagnostic`.
+                        Verifier.IncrementReportCount(context.Diagnostic.Id);
+                        context.ReportDiagnostic(context.Diagnostic);
+                    }
+                };
+
+                // Because the Verifier sets the SonarAnalysisContext.ShouldDiagnosticBeReported delegate we end up in a case
+                // where the Debug.Assert of the AnalysisContextExtensions.ReportDiagnostic() method will raise.
+                using (new AssertIgnoreScope())
+                {
+                    foreach (var testCase in TestCases)
+                    {
+                        if (testCase.Analyzer.GetType() == typeof(AnonymousDelegateEventUnsubscribe))
+                        {
+                            Verifier.VerifyNoIssueReported(testCase.Path, testCase.Analyzer);
+                        }
+                        else
+                        {
+                            Verifier.VerifyAnalyzer(testCase.Path, testCase.Analyzer);
+                        }
+                    }
+                }
             }
             finally
             {
-                SonarAnalysisContext.ShouldAnalysisBeDisabled = null;
+                SonarAnalysisContext.ReportDiagnosticAction = null;
             }
-        }
-
-        [TestMethod]
-        public void SonarAnalysis_IssuesAreReportedByDefault()
-        {
-            var dummyDescriptor = new DiagnosticDescriptor(
-                "x1", "title", "format", "category", DiagnosticSeverity.Error, false);
-            var dummyDiag = Diagnostic.Create(dummyDescriptor, Location.None);
-
-            var shouldIssueBeReported = SonarAnalysisContext.ShouldDiagnosticBeReported;
-            shouldIssueBeReported.Should().NotBeNull();
-
-            shouldIssueBeReported(null, dummyDiag).Should().BeTrue();
         }
     }
 }
