@@ -167,7 +167,7 @@ namespace SonarAnalyzer.UnitTest
         }
 
         private static IEnumerable<TMessage> ReadProtobuf<TMessage>(string path)
-            where TMessage: IMessage<TMessage>, new()
+            where TMessage : IMessage<TMessage>, new()
         {
             using (var input = File.OpenRead(path))
             {
@@ -182,63 +182,70 @@ namespace SonarAnalyzer.UnitTest
         private static void VerifyAnalyzer(IEnumerable<DocumentInfo> documents, string fileExtension, DiagnosticAnalyzer diagnosticAnalyzer,
             ParseOptions options = null, Action<DiagnosticAnalyzer, Compilation> additionalVerify = null, params MetadataReference[] additionalReferences)
         {
-            HookSuppression();
-
-            var parseOptions = GetParseOptionsAlternatives(options, fileExtension);
-
-            using (var workspace = new AdhocWorkspace())
+            try
             {
-                var project = CreateProject(fileExtension, GeneratedAssemblyName, workspace, additionalReferences);
-                project = documents.Aggregate(project, (p, doc) => p.AddDocument(doc.Name, doc.Content).Project); // side effect on purpose (project is immutable)
+                HookSuppression();
 
-                var issueLocationCollector = new IssueLocationCollector();
+                var parseOptions = GetParseOptionsAlternatives(options, fileExtension);
 
-                foreach (var parseOption in parseOptions)
+                using (var workspace = new AdhocWorkspace())
                 {
-                    if (parseOption != null)
+                    var project = CreateProject(fileExtension, GeneratedAssemblyName, workspace, additionalReferences);
+                    project = documents.Aggregate(project, (p, doc) => p.AddDocument(doc.Name, doc.Content).Project); // side effect on purpose (project is immutable)
+
+                    var issueLocationCollector = new IssueLocationCollector();
+
+                    foreach (var parseOption in parseOptions)
                     {
-                        project = project.WithParseOptions(parseOption);
+                        if (parseOption != null)
+                        {
+                            project = project.WithParseOptions(parseOption);
+                        }
+
+                        var compilation = project.GetCompilationAsync().Result;
+
+                        var diagnostics = GetDiagnostics(compilation, diagnosticAnalyzer);
+
+                        var expectedIssues = issueLocationCollector
+                            .GetExpectedIssueLocations(compilation.SyntaxTrees.Skip(1).First().GetText().Lines)
+                            .ToList();
+
+                        foreach (var diagnostic in diagnostics)
+                        {
+                            VerifyIssue(expectedIssues, issue => issue.IsPrimary, diagnostic.Location, diagnostic.GetMessage(), out var issueId);
+
+                            diagnostic.AdditionalLocations
+                                .Select((location, i) => diagnostic.GetSecondaryLocation(i))
+                                .OrderBy(x => x.Location.GetLineNumberToReport())
+                                .ThenBy(x => x.Location.GetLineSpan().StartLinePosition.Character)
+                                .ToList()
+                                .ForEach(secondaryLocation =>
+                                {
+                                    VerifyIssue(expectedIssues, issue => issue.IssueId == issueId && !issue.IsPrimary,
+                                        secondaryLocation.Location, secondaryLocation.Message, out issueId);
+                                });
+                        }
+
+                        if (expectedIssues.Count != 0)
+                        {
+                            Execute.Assertion.FailWith($"Issue expected but not raised on line(s) {string.Join(",", expectedIssues.Select(i => i.LineNumber))}.");
+                        }
+
+                        // When there are no diagnostics reported from the test (for example the FileLines analyzer
+                        // does not report in each call to Verifier.VerifyAnalyzer) we skip the check for the extension
+                        // method.
+                        if (diagnostics.Any())
+                        {
+                            ExtensionMethodsCalledForAllDiagnostics(diagnosticAnalyzer).Should().BeTrue("The ReportDiagnosticWhenActive should be used instead of ReportDiagnostic");
+                        }
+
+                        additionalVerify?.Invoke(diagnosticAnalyzer, compilation);
                     }
-
-                    var compilation = project.GetCompilationAsync().Result;
-
-                    var diagnostics = GetDiagnostics(compilation, diagnosticAnalyzer);
-
-                    var expectedIssues = issueLocationCollector
-                        .GetExpectedIssueLocations(compilation.SyntaxTrees.Skip(1).First().GetText().Lines)
-                        .ToList();
-
-                    foreach (var diagnostic in diagnostics)
-                    {
-                        VerifyIssue(expectedIssues, issue => issue.IsPrimary, diagnostic.Location, diagnostic.GetMessage(), out var issueId);
-
-                        diagnostic.AdditionalLocations
-                            .Select((location, i) => diagnostic.GetSecondaryLocation(i))
-                            .OrderBy(x => x.Location.GetLineNumberToReport())
-                            .ThenBy(x => x.Location.GetLineSpan().StartLinePosition.Character)
-                            .ToList()
-                            .ForEach(secondaryLocation =>
-                            {
-                                VerifyIssue(expectedIssues, issue => issue.IssueId == issueId && !issue.IsPrimary,
-                                    secondaryLocation.Location, secondaryLocation.Message, out issueId);
-                            });
-                    }
-
-                    if (expectedIssues.Count != 0)
-                    {
-                        Execute.Assertion.FailWith($"Issue expected but not raised on line(s) {string.Join(",", expectedIssues.Select(i => i.LineNumber))}.");
-                    }
-
-                    // When there are no diagnostics reported from the test (for example the FileLines analyzer
-                    // does not report in each call to Verifier.VerifyAnalyzer) we skip the check for the extension
-                    // method.
-                    if (diagnostics.Any())
-                    {
-                        ExtensionMethodsCalledForAllDiagnostics(diagnosticAnalyzer).Should().BeTrue("The ReportDiagnosticWhenActive should be used instead of ReportDiagnostic");
-                    }
-
-                    additionalVerify?.Invoke(diagnosticAnalyzer, compilation);
                 }
+            }
+            finally
+            {
+                UnHookSuppression();
             }
         }
 
@@ -647,11 +654,23 @@ namespace SonarAnalyzer.UnitTest
             }
 
 
-            SonarAnalysisContext.ShouldDiagnosticBeReported = (s, d) =>
+            SonarAnalysisContext.ShouldDiagnosticBeReported = (s, d) => { IncrementReportCount(d.Id); return true; };
+        }
+
+        private static void UnHookSuppression()
+        {
+            if (!isHooked)
             {
-                counters.AddOrUpdate(d.Id, addValueFactory: (key) => 1, updateValueFactory: (key, count) => count + 1);
-                return true;
-            };
+                return;
+            }
+
+
+            SonarAnalysisContext.ShouldDiagnosticBeReported = null;
+        }
+
+        internal static void IncrementReportCount(string ruleId)
+        {
+            counters.AddOrUpdate(ruleId, addValueFactory: key => 1, updateValueFactory: (key, count) => count + 1);
         }
 
         private static bool ExtensionMethodsCalledForAllDiagnostics(DiagnosticAnalyzer analyzer)
