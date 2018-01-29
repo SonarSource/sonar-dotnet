@@ -5100,6 +5100,33 @@
   <data name="S3265_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
   </data>
+  <data name="S3343_Category" xml:space="preserve">
+    <value>Major Bug</value>
+  </data>
+  <data name="S3343_Description" xml:space="preserve">
+    <value>Caller information attributes (CallerFilePathAttribute, CallerLineNumberAttribute, and CallerMemberNameAttribute) provide a way to get information about the caller of a method through optional parameters. But they only work right if their values aren't provided explicitly. So if you define a method with caller info attributes in the middle of the parameter list, you put your callers in a bad position: they are forced to use named arguments if they want to use the method properly.</value>
+  </data>
+  <data name="S3343_IsActivatedByDefault" xml:space="preserve">
+    <value>True</value>
+  </data>
+  <data name="S3343_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S3343_RemediationCost" xml:space="preserve">
+    <value>5min</value>
+  </data>
+  <data name="S3343_Severity" xml:space="preserve">
+    <value>Major</value>
+  </data>
+  <data name="S3343_Tags" xml:space="preserve">
+    <value>api-design</value>
+  </data>
+  <data name="S3343_Title" xml:space="preserve">
+    <value>Caller information parameters should come at the end of the parameter list</value>
+  </data>
+  <data name="S3343_Type" xml:space="preserve">
+    <value>BUG</value>
+  </data>
   <data name="S3346_Category" xml:space="preserve">
     <value>Major Bug</value>
   </data>

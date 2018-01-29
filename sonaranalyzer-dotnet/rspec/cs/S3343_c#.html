@@ -1,0 +1,25 @@
+<p>Caller information attributes (<code>CallerFilePathAttribute</code>, <code>CallerLineNumberAttribute</code>, and
+<code>CallerMemberNameAttribute</code>) provide a way to get information about the caller of a method through optional parameters. But they only work
+right if their values aren't provided explicitly. So if you define a method with caller info attributes in the middle of the parameter list, you put
+your callers in a bad position: they are forced to use named arguments if they want to use the method properly.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+void TraceMessage([CallerMemberName] string memberName = "",
+  [CallerFilePath] string filePath = "",
+  [CallerLineNumber] int lineNumber = 0,
+  string message = null)  // Noncompliant
+{
+  /* ... */
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+void TraceMessage(string message = null,
+  [CallerMemberName] string memberName = "",
+  [CallerFilePath] string filePath = "",
+  [CallerLineNumber] int lineNumber = 0)
+{
+  /* ... */
+}
+</pre>
+
