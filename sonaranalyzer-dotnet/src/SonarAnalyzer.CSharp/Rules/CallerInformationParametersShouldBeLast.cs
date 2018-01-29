@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
@@ -51,10 +52,19 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    ParameterSyntax noCallerInfoParameter = null;
+                    var methodSymbol = c.SemanticModel.GetDeclaredSymbol(methodDeclaration);
+                    if (methodSymbol == null ||
+                        methodSymbol.IsOverride ||
+                        methodSymbol.GetInterfaceMember() != null)
+                    {
+                        return;
+                    }
+
+                    ParameterSyntax parameterWithoutCallerInfoAttribute = null;
                     foreach (var parameter in methodDeclaration.ParameterList.Parameters.Reverse())
                     {
-                        if (noCallerInfoParameter != null &&
+                        if (parameterWithoutCallerInfoAttribute != null &&
+                            !string.IsNullOrEmpty(parameter.Identifier.Text) &&
                             HasCallerInfoAttribute(parameter, c.SemanticModel))
                         {
                             c.ReportDiagnosticWhenActive(
@@ -62,7 +72,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         }
                         else
                         {
-                            noCallerInfoParameter = parameter;
+                            parameterWithoutCallerInfoAttribute = parameter;
                         }
                     }
                 },
@@ -71,10 +81,12 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         private static bool HasCallerInfoAttribute(ParameterSyntax parameter, SemanticModel semanticModel) =>
-                parameter.AttributeLists.SelectMany(l => l.Attributes).Any(a => IsCallerInfoAttribute(a, semanticModel));
+            parameter.AttributeLists
+                .SelectMany(l => l.Attributes)
+                .Any(a => IsCallerInfoAttribute(a, semanticModel));
 
         private static bool IsCallerInfoAttribute(AttributeSyntax attribute, SemanticModel semanticModel) =>
-            semanticModel.GetSymbolInfo(attribute).Symbol is IMethodSymbol attributeSymbol
-                && attributeSymbol.ContainingType.IsAny(KnownType.CallerInfoAttributes);
+            semanticModel.GetSymbolInfo(attribute).Symbol is IMethodSymbol attributeCtor &&
+            attributeCtor.ContainingType.IsAny(KnownType.CallerInfoAttributes);
     }
 }
