@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S2302",
+"message":  "Replace the string 'context' with 'nameof(context)'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\BrowserResponse.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  49,
+"endLine":  27,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'hostBrowser' with 'nameof(hostBrowser)'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\BrowserResponse.cs",
+"region":  {
+"startLine":  32,
+"startColumn":  49,
+"endLine":  32,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'path' with 'nameof(path)'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\PathHelper.cs",
+"region":  {
+"startLine":  19,
+"startColumn":  77,
+"endLine":  19,
+"endColumn":  83
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'levels' with 'nameof(levels)'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\PathHelper.cs",
+"region":  {
+"startLine":  24,
+"startColumn":  74,
+"endLine":  24,
+"endColumn":  82
+}
+}
+}
+]
+}

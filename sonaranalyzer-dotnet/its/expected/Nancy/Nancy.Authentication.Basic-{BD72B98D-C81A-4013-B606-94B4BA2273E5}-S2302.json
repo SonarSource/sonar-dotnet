@@ -1,0 +1,95 @@
+{
+"issues":  [
+{
+"id":  "S2302",
+"message":  "Replace the string 'pipelines' with 'nameof(pipelines)'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Authentication.Basic\BasicAuthentication.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  49,
+"endLine":  26,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'configuration' with 'nameof(configuration)'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Authentication.Basic\BasicAuthentication.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  49,
+"endLine":  31,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'module' with 'nameof(module)'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Authentication.Basic\BasicAuthentication.cs",
+"region":  {
+"startLine":  47,
+"startColumn":  49,
+"endLine":  47,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'configuration' with 'nameof(configuration)'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Authentication.Basic\BasicAuthentication.cs",
+"region":  {
+"startLine":  52,
+"startColumn":  49,
+"endLine":  52,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'configuration' with 'nameof(configuration)'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Authentication.Basic\BasicAuthentication.cs",
+"region":  {
+"startLine":  70,
+"startColumn":  49,
+"endLine":  70,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'userValidator' with 'nameof(userValidator)'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Authentication.Basic\BasicAuthenticationConfiguration.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  49,
+"endLine":  20,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'realm' with 'nameof(realm)'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Authentication.Basic\BasicAuthenticationConfiguration.cs",
+"region":  {
+"startLine":  25,
+"startColumn":  45,
+"endLine":  25,
+"endColumn":  52
+}
+}
+}
+]
+}

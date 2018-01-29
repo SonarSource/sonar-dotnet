@@ -1,0 +1,199 @@
+{
+"issues":  [
+{
+"id":  "S2302",
+"message":  "Replace the string 'unconfirmedDeliveries' with 'nameof(unconfirmedDeliveries)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\AtLeastOnceDeliverySemantic.cs",
+"region":  {
+"startLine":  36,
+"startColumn":  49,
+"endLine":  36,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'unconfirmedDeliveries' with 'nameof(unconfirmedDeliveries)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\AtLeastOnceDeliverySemantic.cs",
+"region":  {
+"startLine":  136,
+"startColumn":  49,
+"endLine":  136,
+"endColumn":  72
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'store' with 'nameof(store)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\AsyncWriteProxy.cs",
+"region":  {
+"startLine":  56,
+"startColumn":  49,
+"endLine":  56,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'cause' with 'nameof(cause)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Journal\AsyncWriteProxy.cs",
+"region":  {
+"startLine":  75,
+"startColumn":  53,
+"endLine":  75,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'cause' with 'nameof(cause)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"region":  {
+"startLine":  103,
+"startColumn":  49,
+"endLine":  103,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'persistenceId' with 'nameof(persistenceId)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"region":  {
+"startLine":  142,
+"startColumn":  86,
+"endLine":  142,
+"endColumn":  101
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'cause' with 'nameof(cause)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"region":  {
+"startLine":  196,
+"startColumn":  49,
+"endLine":  196,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'cause' with 'nameof(cause)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"region":  {
+"startLine":  313,
+"startColumn":  49,
+"endLine":  313,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'cause' with 'nameof(cause)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"region":  {
+"startLine":  401,
+"startColumn":  49,
+"endLine":  401,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'cause' with 'nameof(cause)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"region":  {
+"startLine":  695,
+"startColumn":  49,
+"endLine":  695,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'cause' with 'nameof(cause)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\JournalProtocol.cs",
+"region":  {
+"startLine":  821,
+"startColumn":  49,
+"endLine":  821,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'configPath' with 'nameof(configPath)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Persistence.cs",
+"region":  {
+"startLine":  154,
+"startColumn":  116,
+"endLine":  154,
+"endColumn":  128
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'obj' with 'nameof(obj)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Serialization\SnapshotSerializer.cs",
+"region":  {
+"startLine":  71,
+"startColumn":  122,
+"endLine":  71,
+"endColumn":  127
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'metadata' with 'nameof(metadata)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot.cs",
+"region":  {
+"startLine":  443,
+"startColumn":  49,
+"endLine":  443,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'metadata' with 'nameof(metadata)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Snapshot.cs",
+"region":  {
+"startLine":  488,
+"startColumn":  49,
+"endLine":  488,
+"endColumn":  59
+}
+}
+}
+]
+}

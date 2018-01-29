@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2302",
+"message":  "Replace the string 'action' with 'nameof(action)'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\HelperResult.cs",
+"region":  {
+"startLine":  23,
+"startColumn":  49,
+"endLine":  23,
+"endColumn":  57
+}
+}
+}
+]
+}

@@ -1,0 +1,82 @@
+{
+"issues":  [
+{
+"id":  "S2302",
+"message":  "Replace the string 'maxSampleSize' with 'nameof(maxSampleSize)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\PhiAccrualFailureDetector.cs",
+"region":  {
+"startLine":  257,
+"startColumn":  55,
+"endLine":  257,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'intervalSum' with 'nameof(intervalSum)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\PhiAccrualFailureDetector.cs",
+"region":  {
+"startLine":  259,
+"startColumn":  55,
+"endLine":  259,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'squaredIntervalSum' with 'nameof(squaredIntervalSum)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\PhiAccrualFailureDetector.cs",
+"region":  {
+"startLine":  261,
+"startColumn":  55,
+"endLine":  261,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'nodes' with 'nameof(nodes)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Routing\RemoteRouterConfig.cs",
+"region":  {
+"startLine":  63,
+"startColumn":  104,
+"endLine":  63,
+"endColumn":  111
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'routerConfig' with 'nameof(routerConfig)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Routing\RemoteRouterConfig.cs",
+"region":  {
+"startLine":  159,
+"startColumn":  111,
+"endLine":  159,
+"endColumn":  125
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'address' with 'nameof(address)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\Helios\HeliosTransport.cs",
+"region":  {
+"startLine":  345,
+"startColumn":  171,
+"endLine":  345,
+"endColumn":  180
+}
+}
+}
+]
+}

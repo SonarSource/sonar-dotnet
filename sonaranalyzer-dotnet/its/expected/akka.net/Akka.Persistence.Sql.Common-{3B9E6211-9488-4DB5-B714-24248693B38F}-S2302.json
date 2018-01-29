@@ -1,0 +1,82 @@
+{
+"issues":  [
+{
+"id":  "S2302",
+"message":  "Replace the string 'dbEngine' with 'nameof(dbEngine)'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\SqlJournal.cs",
+"region":  {
+"startLine":  24,
+"startColumn":  49,
+"endLine":  24,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'manifest' with 'nameof(manifest)'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Queries\Hints.cs",
+"region":  {
+"startLine":  70,
+"startColumn":  131,
+"endLine":  70,
+"endColumn":  141
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'persistenceIds' with 'nameof(persistenceIds)'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Queries\Hints.cs",
+"region":  {
+"startLine":  105,
+"startColumn":  130,
+"endLine":  105,
+"endColumn":  146
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'hints' with 'nameof(hints)'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Queries\Query.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  49,
+"endLine":  35,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'config' with 'nameof(config)'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Settings.cs",
+"region":  {
+"startLine":  51,
+"startColumn":  65,
+"endLine":  51,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'config' with 'nameof(config)'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Settings.cs",
+"region":  {
+"startLine":  94,
+"startColumn":  65,
+"endLine":  94,
+"endColumn":  73
+}
+}
+}
+]
+}

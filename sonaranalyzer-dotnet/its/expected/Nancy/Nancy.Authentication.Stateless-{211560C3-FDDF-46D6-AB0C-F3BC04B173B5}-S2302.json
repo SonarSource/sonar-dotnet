@@ -1,0 +1,95 @@
+{
+"issues":  [
+{
+"id":  "S2302",
+"message":  "Replace the string 'pipelines' with 'nameof(pipelines)'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Authentication.Stateless\StatelessAuthentication.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  49,
+"endLine":  21,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'configuration' with 'nameof(configuration)'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Authentication.Stateless\StatelessAuthentication.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  49,
+"endLine":  26,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'configuration' with 'nameof(configuration)'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Authentication.Stateless\StatelessAuthentication.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  73,
+"endLine":  31,
+"endColumn":  88
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'module' with 'nameof(module)'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Authentication.Stateless\StatelessAuthentication.cs",
+"region":  {
+"startLine":  46,
+"startColumn":  49,
+"endLine":  46,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'configuration' with 'nameof(configuration)'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Authentication.Stateless\StatelessAuthentication.cs",
+"region":  {
+"startLine":  51,
+"startColumn":  49,
+"endLine":  51,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'configuration' with 'nameof(configuration)'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Authentication.Stateless\StatelessAuthentication.cs",
+"region":  {
+"startLine":  56,
+"startColumn":  73,
+"endLine":  56,
+"endColumn":  88
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'configuration' with 'nameof(configuration)'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Authentication.Stateless\StatelessAuthentication.cs",
+"region":  {
+"startLine":  72,
+"startColumn":  49,
+"endLine":  72,
+"endColumn":  64
+}
+}
+}
+]
+}

@@ -1,0 +1,69 @@
+{
+"issues":  [
+{
+"id":  "S2302",
+"message":  "Replace the string 'pipelines' with 'nameof(pipelines)'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Authentication.Forms\FormsAuthentication.cs",
+"region":  {
+"startLine":  46,
+"startColumn":  49,
+"endLine":  46,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'configuration' with 'nameof(configuration)'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Authentication.Forms\FormsAuthentication.cs",
+"region":  {
+"startLine":  51,
+"startColumn":  49,
+"endLine":  51,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'module' with 'nameof(module)'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Authentication.Forms\FormsAuthentication.cs",
+"region":  {
+"startLine":  74,
+"startColumn":  49,
+"endLine":  74,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'configuration' with 'nameof(configuration)'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Authentication.Forms\FormsAuthentication.cs",
+"region":  {
+"startLine":  79,
+"startColumn":  49,
+"endLine":  79,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'configuration' with 'nameof(configuration)'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Authentication.Forms\FormsAuthentication.cs",
+"region":  {
+"startLine":  199,
+"startColumn":  49,
+"endLine":  199,
+"endColumn":  64
+}
+}
+}
+]
+}

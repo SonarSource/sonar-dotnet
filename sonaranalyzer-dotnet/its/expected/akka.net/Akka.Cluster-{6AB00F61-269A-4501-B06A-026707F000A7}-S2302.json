@@ -1,0 +1,160 @@
+{
+"issues":  [
+{
+"id":  "S2302",
+"message":  "Replace the string 'name' with 'nameof(name)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterMetricsCollector.cs",
+"region":  {
+"startLine":  411,
+"startColumn":  77,
+"endLine":  411,
+"endColumn":  83
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'from' with 'nameof(from)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterMetricsCollector.cs",
+"region":  {
+"startLine":  528,
+"startColumn":  84,
+"endLine":  528,
+"endColumn":  90
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'alpha' with 'nameof(alpha)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterMetricsCollector.cs",
+"region":  {
+"startLine":  560,
+"startColumn":  88,
+"endLine":  560,
+"endColumn":  95
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'halfLife' with 'nameof(halfLife)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterMetricsCollector.cs",
+"region":  {
+"startLine":  598,
+"startColumn":  75,
+"endLine":  598,
+"endColumn":  85
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'used' with 'nameof(used)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterMetricsCollector.cs",
+"region":  {
+"startLine":  645,
+"startColumn":  73,
+"endLine":  645,
+"endColumn":  79
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'max' with 'nameof(max)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterMetricsCollector.cs",
+"region":  {
+"startLine":  646,
+"startColumn":  93,
+"endLine":  646,
+"endColumn":  98
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'address' with 'nameof(address)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Proto\ClusterMessageSerializer.cs",
+"region":  {
+"startLine":  158,
+"startColumn":  133,
+"endLine":  158,
+"endColumn":  142
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'routeesPaths' with 'nameof(routeesPaths)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  168,
+"endLine":  31,
+"endColumn":  182
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'routeesPaths' with 'nameof(routeesPaths)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
+"region":  {
+"startLine":  37,
+"startColumn":  128,
+"endLine":  37,
+"endColumn":  142
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'maxInstancesPerNode' with 'nameof(maxInstancesPerNode)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
+"region":  {
+"startLine":  63,
+"startColumn":  80,
+"endLine":  63,
+"endColumn":  101
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'totalInstances' with 'nameof(totalInstances)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
+"region":  {
+"startLine":  89,
+"startColumn":  75,
+"endLine":  89,
+"endColumn":  91
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'supervisorStrategy' with 'nameof(supervisorStrategy)'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
+"region":  {
+"startLine":  556,
+"startColumn":  78,
+"endLine":  556,
+"endColumn":  98
+}
+}
+}
+]
+}

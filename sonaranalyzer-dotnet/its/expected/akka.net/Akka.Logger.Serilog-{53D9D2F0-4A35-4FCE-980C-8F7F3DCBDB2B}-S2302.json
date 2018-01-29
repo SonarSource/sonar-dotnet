@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S2302",
+"message":  "Replace the string 'innerParser' with 'nameof(innerParser)'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\loggers\Akka.Logger.Serilog\MessageTemplateCache.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  70,
+"endLine":  29,
+"endColumn":  83
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'messageTemplate' with 'nameof(messageTemplate)'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\loggers\Akka.Logger.Serilog\MessageTemplateCache.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  74,
+"endLine":  35,
+"endColumn":  91
+}
+}
+}
+]
+}

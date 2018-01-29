@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S2302",
+"message":  "Replace the string 'resolver' with 'nameof(resolver)'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Bootstrapper\Base\BootstrapperBaseFixtureBase.cs",
+"region":  {
+"startLine":  158,
+"startColumn":  53,
+"endLine":  158,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'routeCache' with 'nameof(routeCache)'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Bootstrapper\Base\BootstrapperBaseFixtureBase.cs",
+"region":  {
+"startLine":  163,
+"startColumn":  53,
+"endLine":  163,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'contextFactory' with 'nameof(contextFactory)'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Bootstrapper\Base\BootstrapperBaseFixtureBase.cs",
+"region":  {
+"startLine":  168,
+"startColumn":  53,
+"endLine":  168,
+"endColumn":  69
+}
+}
+}
+]
+}

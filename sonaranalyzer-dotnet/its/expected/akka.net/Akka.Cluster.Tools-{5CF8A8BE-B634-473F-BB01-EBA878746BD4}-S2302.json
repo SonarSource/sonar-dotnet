@@ -1,0 +1,95 @@
+{
+"issues":  [
+{
+"id":  "S2302",
+"message":  "Replace the string 'settings' with 'nameof(settings)'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterClient.cs",
+"region":  {
+"startLine":  116,
+"startColumn":  49,
+"endLine":  116,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'singletonName' with 'nameof(singletonName)'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManagerSettings.cs",
+"region":  {
+"startLine":  67,
+"startColumn":  49,
+"endLine":  67,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'removalMargin' with 'nameof(removalMargin)'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManagerSettings.cs",
+"region":  {
+"startLine":  69,
+"startColumn":  111,
+"endLine":  69,
+"endColumn":  126
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'handOverRetryInterval' with 'nameof(handOverRetryInterval)'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManagerSettings.cs",
+"region":  {
+"startLine":  71,
+"startColumn":  119,
+"endLine":  71,
+"endColumn":  142
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'singletonName' with 'nameof(singletonName)'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonProxySettings.cs",
+"region":  {
+"startLine":  57,
+"startColumn":  49,
+"endLine":  57,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'singletonIdentificationInterval' with 'nameof(singletonIdentificationInterval)'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonProxySettings.cs",
+"region":  {
+"startLine":  59,
+"startColumn":  127,
+"endLine":  59,
+"endColumn":  160
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'bufferSize' with 'nameof(bufferSize)'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonProxySettings.cs",
+"region":  {
+"startLine":  61,
+"startColumn":  106,
+"endLine":  61,
+"endColumn":  118
+}
+}
+}
+]
+}

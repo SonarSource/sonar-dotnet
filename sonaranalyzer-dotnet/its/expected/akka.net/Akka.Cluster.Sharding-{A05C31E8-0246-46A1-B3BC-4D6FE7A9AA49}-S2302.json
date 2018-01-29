@@ -1,0 +1,69 @@
+{
+"issues":  [
+{
+"id":  "S2302",
+"message":  "Replace the string 'typeName' with 'nameof(typeName)'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingGuardian.cs",
+"region":  {
+"startLine":  47,
+"startColumn":  85,
+"endLine":  47,
+"endColumn":  95
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'entityProps' with 'nameof(entityProps)'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingGuardian.cs",
+"region":  {
+"startLine":  48,
+"startColumn":  74,
+"endLine":  48,
+"endColumn":  87
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'typeName' with 'nameof(typeName)'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingGuardian.cs",
+"region":  {
+"startLine":  70,
+"startColumn":  85,
+"endLine":  70,
+"endColumn":  95
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'tunningParameters' with 'nameof(tunningParameters)'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingSettings.cs",
+"region":  {
+"startLine":  174,
+"startColumn":  49,
+"endLine":  174,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'coordinatorSingletonSettings' with 'nameof(coordinatorSingletonSettings)'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingSettings.cs",
+"region":  {
+"startLine":  182,
+"startColumn":  49,
+"endLine":  182,
+"endColumn":  79
+}
+}
+}
+]
+}

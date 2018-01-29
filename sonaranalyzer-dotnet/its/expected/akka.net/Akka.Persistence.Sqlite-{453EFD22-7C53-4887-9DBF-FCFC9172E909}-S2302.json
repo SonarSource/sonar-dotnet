@@ -1,0 +1,69 @@
+{
+"issues":  [
+{
+"id":  "S2302",
+"message":  "Replace the string 'connectionString' with 'nameof(connectionString)'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sqlite\ConnectionContext.cs",
+"region":  {
+"startLine":  24,
+"startColumn":  89,
+"endLine":  24,
+"endColumn":  107
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'connectionString' with 'nameof(connectionString)'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sqlite\DbHelper.cs",
+"region":  {
+"startLine":  38,
+"startColumn":  89,
+"endLine":  38,
+"endColumn":  107
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'tableName' with 'nameof(tableName)'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sqlite\DbHelper.cs",
+"region":  {
+"startLine":  39,
+"startColumn":  82,
+"endLine":  39,
+"endColumn":  93
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'connectionString' with 'nameof(connectionString)'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sqlite\DbHelper.cs",
+"region":  {
+"startLine":  51,
+"startColumn":  89,
+"endLine":  51,
+"endColumn":  107
+}
+}
+},
+{
+"id":  "S2302",
+"message":  "Replace the string 'tableName' with 'nameof(tableName)'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sqlite\DbHelper.cs",
+"region":  {
+"startLine":  52,
+"startColumn":  82,
+"endLine":  52,
+"endColumn":  93
+}
+}
+}
+]
+}
