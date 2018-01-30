@@ -6157,10 +6157,10 @@
     <value>True</value>
   </data>
   <data name="S3776_Remediation" xml:space="preserve">
-    <value />
+    <value>Constant/Issue</value>
   </data>
   <data name="S3776_RemediationCost" xml:space="preserve">
-    <value />
+    <value>10min</value>
   </data>
   <data name="S3776_Severity" xml:space="preserve">
     <value>Critical</value>
