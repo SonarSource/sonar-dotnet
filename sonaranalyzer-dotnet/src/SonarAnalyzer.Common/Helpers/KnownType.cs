@@ -209,6 +209,7 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_Runtime_Serialization_SerializationInfo = new KnownType("System.Runtime.Serialization.SerializationInfo");
         internal static readonly KnownType System_Runtime_Serialization_StreamingContext = new KnownType("System.Runtime.Serialization.StreamingContext");
         internal static readonly KnownType System_SByte = new KnownType(SpecialType.System_SByte, "sbyte");
+        internal static readonly KnownType System_Security_AllowPartiallyTrustedCallersAttribute = new KnownType("System.Security.AllowPartiallyTrustedCallersAttribute");
         internal static readonly KnownType System_Security_Cryptography_DES = new KnownType("System.Security.Cryptography.DES");
         internal static readonly KnownType System_Security_Cryptography_DSA = new KnownType("System.Security.Cryptography.DSA");
         internal static readonly KnownType System_Security_Cryptography_HashAlgorithm = new KnownType("System.Security.Cryptography.HashAlgorithm");
@@ -220,6 +221,7 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_Security_Cryptography_RIPEMD160 = new KnownType("System.Security.Cryptography.RIPEMD160");
         internal static readonly KnownType System_Security_Cryptography_SHA1 = new KnownType("System.Security.Cryptography.SHA1");
         internal static readonly KnownType System_Security_Cryptography_TripleDES = new KnownType("System.Security.Cryptography.TripleDES");
+        internal static readonly KnownType System_Security_Permissions_CodeAccessSecurityAttribute = new KnownType("System.Security.Permissions.CodeAccessSecurityAttribute");
         internal static readonly KnownType System_Security_PermissionSet = new KnownType("System.Security.PermissionSet");
         internal static readonly KnownType System_SerializableAttribute = new KnownType("System.SerializableAttribute");
         internal static readonly KnownType System_ServiceModel_OperationContractAttribute = new KnownType("System.ServiceModel.OperationContractAttribute");
