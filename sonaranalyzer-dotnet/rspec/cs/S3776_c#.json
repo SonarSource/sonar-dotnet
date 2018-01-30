@@ -3,10 +3,8 @@
   "type": "CODE_SMELL",
   "status": "ready",
   "remediation": {
-    "func": "Linear with offset",
-    "linearDesc": "per complexity point over the threshold",
-    "linearOffset": "5min",
-    "linearFactor": "1min"
+    "func": "Constant\/Issue",
+    "constantCost": "10min"
   },
   "tags": [
     "brain-overload"
