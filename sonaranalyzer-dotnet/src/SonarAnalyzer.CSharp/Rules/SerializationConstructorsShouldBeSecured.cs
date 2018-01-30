@@ -35,7 +35,7 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class SerializationConstructorsShouldBeSecured : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S4212";
-        private const string MessageFormat = "Secure that serialization constructor.";
+        private const string MessageFormat = "Secure this serialization constructor.";
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
@@ -78,10 +78,10 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            var serializationConstructorAttributes = GetCasAttributes(serializationConstructor);
+            var serializationConstructorAttributes = GetCASAttributes(serializationConstructor).ToHashSet();
 
             bool isConstructorMissingAttributes = classSymbol.Constructors
-                .SelectMany(m => GetCasAttributes(m))
+                .SelectMany(m => GetCASAttributes(m))
                 .Any(attr => !serializationConstructorAttributes.Contains(attr, attributeComparer));
 
             if (isConstructorMissingAttributes)
@@ -90,11 +90,11 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static IEnumerable<AttributeData> GetCasAttributes(IMethodSymbol methodSymbol)
+        private static IEnumerable<AttributeData> GetCASAttributes(IMethodSymbol methodSymbol)
         {
-            return methodSymbol.GetAttributes().Where(IsCasAttribute);
+            return methodSymbol.GetAttributes().Where(IsCASAttribute);
 
-            bool IsCasAttribute(AttributeData data) =>
+            bool IsCASAttribute(AttributeData data) =>
                 data?.AttributeClass.DerivesFrom(KnownType.System_Security_Permissions_CodeAccessSecurityAttribute)
                     ?? false;
         }
@@ -109,8 +109,8 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             private bool AreNamedArgumentsEqual(
-                ImmutableArray<KeyValuePair<string, TypedConstant>> argumentsX,
-                ImmutableArray<KeyValuePair<string, TypedConstant>> argumentsY)
+                IEnumerable<KeyValuePair<string, TypedConstant>> argumentsX,
+                IEnumerable<KeyValuePair<string, TypedConstant>> argumentsY)
             {
                 var dictX = argumentsX.ToDictionary(p => p.Key, p => p.Value);
                 var dictY = argumentsY.ToDictionary(p => p.Key, p => p.Value);

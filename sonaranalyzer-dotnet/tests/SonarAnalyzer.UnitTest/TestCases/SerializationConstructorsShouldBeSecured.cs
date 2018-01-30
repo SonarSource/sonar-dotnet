@@ -19,7 +19,7 @@ namespace MyLibrary
             n = -1;
         }
 
-        protected Foo(SerializationInfo info, StreamingContext context) // Noncompliant {{Secure that serialization constructor.}}
+        protected Foo(SerializationInfo info, StreamingContext context) // Noncompliant {{Secure this serialization constructor.}}
 //                ^^^
         {
             n = (int)info.GetValue("n", typeof(int));
@@ -176,6 +176,17 @@ namespace MyLibrary
     }
 
     [Serializable]
+    public partial class MalformedAttributes : ISerializable
+    {
+        [FileIOPermissionAttribute(SecurityAction.Whatever_Mate)]
+        public MalformedAttributes() { }
+
+        protected MalformedAttributes(SerializationInfo info, StreamingContext context) { } // Noncompliant
+
+        public void GetObjectData(SerializationInfo info, StreamingContext context) { }
+    }
+
+[Serializable]
     public partial class InvalidCode : ISerializable
     {
         [FileIOPermissionAttribute(SecurityAction.Demand, Unrestricted = true)]
