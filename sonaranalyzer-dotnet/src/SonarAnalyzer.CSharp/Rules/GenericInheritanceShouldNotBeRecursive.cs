@@ -35,7 +35,7 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class GenericInheritanceShouldNotBeRecursive : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S3464";
-        private const string MessageFormat = "Refactor this class so that the generic inheritance chain is not recursive.";
+        private const string MessageFormat = "Refactor this {0} so that the generic inheritance chain is not recursive.";
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
@@ -47,46 +47,48 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
-                    var classDeclaration = (ClassDeclarationSyntax)c.Node;
-                    var classSymbol = c.SemanticModel.GetDeclaredSymbol(classDeclaration);
+                    var typeDeclaration = (TypeDeclarationSyntax)c.Node;
+                    var typeSymbol = c.SemanticModel.GetDeclaredSymbol(typeDeclaration);
 
-                    if (!IsGenericType(classSymbol) ||
-                        !IsGenericType(classSymbol.BaseType))
+                    if (!IsGenericType(typeSymbol))
                     {
                         return;
                     }
 
-                    if (HasGenericArgumentsOfType(classSymbol.BaseType, classSymbol))
+                    var baseTypes = GetBaseTypes(typeSymbol);
+
+                    if (baseTypes.Any(t => IsGenericType(t) && HasRecursiveGenericSubstitution(t, typeSymbol)))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, classDeclaration.GetLocation()));
+                        c.ReportDiagnosticWhenActive(
+                            Diagnostic.Create(rule, typeDeclaration.Identifier.GetLocation(), typeDeclaration.Keyword));
                     }
                 },
-                SyntaxKind.ClassDeclaration);
+                SyntaxKind.ClassDeclaration,
+                SyntaxKind.InterfaceDeclaration);
         }
 
-        private static bool HasGenericArgumentsOfType(INamedTypeSymbol typeSymbol, INamedTypeSymbol argumentType)
+        private static IEnumerable<INamedTypeSymbol> GetBaseTypes(INamedTypeSymbol typeSymbol)
         {
-            bool ProcessGenericArguments(IEnumerable<ITypeSymbol> types)
-            {
-                foreach (var type in types.OfType<INamedTypeSymbol>())
-                {
-                    if (type.OriginalDefinition.Equals(argumentType) &&
-                        HasSubstitutedTypeArguments(type))
-                    {
-                        return true;
-                    }
-                    if (ProcessGenericArguments(type.TypeArguments))
-                    {
-                        return true;
-                    }
-                }
-                return false;
-            }
-
-            return ProcessGenericArguments(typeSymbol.TypeArguments);
+            var interfaces = typeSymbol.Interfaces.Where(IsGenericType);
+            return typeSymbol.IsClass()
+                ? interfaces.Concat(new[] { typeSymbol.BaseType })
+                : interfaces;
         }
 
-        private static bool IsGenericType(INamedTypeSymbol type) => type != null && type.IsGenericType;
+        private static bool HasRecursiveGenericSubstitution(INamedTypeSymbol typeSymbol, INamedTypeSymbol declaredType)
+        {
+            bool IsSameAsDeclaredType(INamedTypeSymbol type) =>
+                type.OriginalDefinition.Equals(declaredType) && HasSubstitutedTypeArguments(type);
+
+            bool ContainsRecursiveGenericSubstitution(IEnumerable<ITypeSymbol> types) =>
+                types.OfType<INamedTypeSymbol>()
+                    .Any(type => IsSameAsDeclaredType(type) || ContainsRecursiveGenericSubstitution(type.TypeArguments));
+
+            return ContainsRecursiveGenericSubstitution(typeSymbol.TypeArguments);
+        }
+
+        private static bool IsGenericType(INamedTypeSymbol type) =>
+            type != null && type.IsGenericType;
 
         private static bool HasSubstitutedTypeArguments(INamedTypeSymbol type) =>
             type.TypeArguments.OfType<INamedTypeSymbol>().Any();
