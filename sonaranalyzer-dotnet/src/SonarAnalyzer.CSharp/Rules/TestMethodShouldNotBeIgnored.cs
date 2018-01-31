@@ -23,6 +23,7 @@ using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
@@ -43,6 +44,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static readonly ISet<KnownType> TrackedTestMethodAttributes = ImmutableHashSet.Create(
             KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_TestMethodAttribute,
+            KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_TestClassAttribute,
             KnownType.NUnit_Framework_TestAttribute,
             KnownType.NUnit_Framework_TestCaseAttribute,
             KnownType.NUnit_Framework_TestCaseSourceAttribute,
@@ -51,46 +53,56 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
+            context.RegisterSyntaxNodeActionInNonGenerated(c =>
+            {
+                var attribute = (AttributeSyntax)c.Node;
+                if (HasReasonPhrase(attribute) ||
+                    HasTrailingComment(attribute) ||
+                    !IsMsTestIgnoreAttribute(attribute, c.SemanticModel))
                 {
-                    if (!c.IsTest())
-                    {
-                        return;
-                    }
+                    return;
+                }
 
-                    var methodSymbol = c.SemanticModel.GetDeclaredSymbol(c.Node);
-                    if (methodSymbol == null)
-                    {
-                        return;
-                    }
+                var attributeTarget = attribute.Parent?.Parent;
+                if (attributeTarget == null)
+                {
+                    return;
+                }
 
-                    var attributes = methodSymbol.GetAttributes();
-                    if (!attributes.Any(a => a.AttributeClass.IsAny(TrackedTestMethodAttributes)))
-                    {
-                        return;
-                    }
+                var testMethodOrClass = c.SemanticModel.GetDeclaredSymbol(attributeTarget);
 
-                    var ignoreAttribute = attributes.FirstOrDefault(a =>
-                        a.AttributeClass.Is(KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_IgnoreAttribute));
-                    if (ignoreAttribute == null)
-                    {
-                        return;
-                    }
-
-                    var ignoreAttributeSyntax = ignoreAttribute.ApplicationSyntaxReference.GetSyntax();
-
-                    var hasWorkItemAttribute = attributes.Any(a =>
-                        a.AttributeClass.Is(KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_WorkItemAttribute));
-                    var hasTrailingComment = ignoreAttributeSyntax.Parent.GetTrailingTrivia()
-                        .Any(trivia => trivia.IsKind(SyntaxKind.SingleLineCommentTrivia));
-
-                    if (!hasWorkItemAttribute &&
-                        !hasTrailingComment)
-                    {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, ignoreAttributeSyntax.GetLocation()));
-                    }
-                }, SyntaxKind.MethodDeclaration);
+                if (testMethodOrClass != null &&
+                    testMethodOrClass.GetAttributes().Any(IsTestOrTestClassAttribute) &&
+                    !testMethodOrClass.GetAttributes().Any(IsWorkItemAttribute))
+                {
+                    c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, attribute.GetLocation()));
+                }
+            },
+            SyntaxKind.Attribute);
         }
+
+        private bool HasReasonPhrase(AttributeSyntax ignoreAttributeSyntax) =>
+            ignoreAttributeSyntax.ArgumentList?.Arguments.Count > 0; // Any ctor argument counts are reason phrase
+
+        private static bool HasTrailingComment(SyntaxNode ignoreAttributeSyntax) =>
+            ignoreAttributeSyntax.Parent.GetTrailingTrivia()
+                .Any(trivia => trivia.IsKind(SyntaxKind.SingleLineCommentTrivia));
+
+        private static bool IsWorkItemAttribute(AttributeData a) =>
+            a.AttributeClass.Is(KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_WorkItemAttribute);
+
+        private static bool IsMsTestIgnoreAttribute(AttributeSyntax attributeSyntax, SemanticModel semanticModel)
+        {
+            var symbolInfo = semanticModel.GetSymbolInfo(attributeSyntax);
+
+            var attributeConstructor = symbolInfo.Symbol ?? symbolInfo.CandidateSymbols.FirstOrDefault();
+
+            return attributeConstructor != null
+                && attributeConstructor.ContainingType
+                        .Is(KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_IgnoreAttribute);
+        }
+
+        private static bool IsTestOrTestClassAttribute(AttributeData a) =>
+            a.AttributeClass.IsAny(TrackedTestMethodAttributes);
     }
 }
