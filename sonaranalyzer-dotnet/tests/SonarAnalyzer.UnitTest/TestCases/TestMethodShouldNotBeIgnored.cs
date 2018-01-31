@@ -13,12 +13,12 @@ namespace Tests.Diagnostics1
         }
 
         [TestMethod]
-        [Ignore] // Ignored because reasons...
+        [Ignore] // This test is ignored because 'blah blah'
         public void Foo2()
         {
         }
 
-        [Ignore, TestMethod] // Ignored because reasons...
+        [Ignore, TestMethod] // This test is ignored because 'blah blah'
         public void Foo3()
         {
         }
@@ -48,7 +48,7 @@ namespace Tests.Diagnostics1
     {
     }
 
-    [Ignore, TestClass] // Ignored because reasons...
+    [Ignore, TestClass] // This test is ignored because 'blah blah'
     class MsTestClass3
     {
     }
@@ -73,7 +73,7 @@ namespace Tests.Diagnostics2
         }
 
         [Test]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.Ignore] // Ignored because reasons...
+        [Microsoft.VisualStudio.TestTools.UnitTesting.Ignore] // This test is ignored because 'blah blah'
         public void Foo2()
         {
         }
@@ -93,7 +93,7 @@ namespace Tests.Diagnostics2
         }
 
         [TestCase("")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.Ignore] // Ignored because reasons...
+        [Microsoft.VisualStudio.TestTools.UnitTesting.Ignore] // This test is ignored because 'blah blah'
         public void Foo5(string s)
         {
         }
@@ -136,7 +136,7 @@ namespace Tests.Diagnostics3
         }
 
         [Fact]
-        [Ignore] // Ignored because reasons...
+        [Ignore] // This test is ignored because 'blah blah'
         public void Foo2()
         {
         }
@@ -158,7 +158,7 @@ namespace Tests.Diagnostics3
 
         [Theory]
         [InlineData("")]
-        [Ignore] // Ignored because reasons...
+        [Ignore] // This test is ignored because 'blah blah'
         public void Foo5(string s)
         {
         }

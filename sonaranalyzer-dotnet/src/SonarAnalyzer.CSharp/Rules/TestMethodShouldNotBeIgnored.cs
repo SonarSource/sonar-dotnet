@@ -55,6 +55,11 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
             {
+                if (!c.IsTest())
+                {
+                    return;
+                }
+
                 var attribute = (AttributeSyntax)c.Node;
                 if (HasReasonPhrase(attribute) ||
                     HasTrailingComment(attribute) ||
@@ -69,16 +74,24 @@ namespace SonarAnalyzer.Rules.CSharp
                     return;
                 }
 
-                var testMethodOrClass = c.SemanticModel.GetDeclaredSymbol(attributeTarget);
+                var attributes = GetAllAttributes(attributeTarget, c.SemanticModel);
 
-                if (testMethodOrClass != null &&
-                    testMethodOrClass.GetAttributes().Any(IsTestOrTestClassAttribute) &&
-                    !testMethodOrClass.GetAttributes().Any(IsWorkItemAttribute))
+                if (attributes.Any(IsTestOrTestClassAttribute) &&
+                    !attributes.Any(IsWorkItemAttribute))
                 {
                     c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, attribute.GetLocation()));
                 }
             },
             SyntaxKind.Attribute);
+        }
+
+        private IEnumerable<AttributeData> GetAllAttributes(SyntaxNode syntaxNode, SemanticModel semanticModel)
+        {
+            var testMethodOrClass = semanticModel.GetDeclaredSymbol(syntaxNode);
+
+            return testMethodOrClass == null
+                ? Enumerable.Empty<AttributeData>()
+                : testMethodOrClass.GetAttributes();
         }
 
         private bool HasReasonPhrase(AttributeSyntax ignoreAttributeSyntax) =>
