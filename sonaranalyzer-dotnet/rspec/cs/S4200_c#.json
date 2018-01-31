@@ -1,0 +1,15 @@
+{
+  "title": "Native methods should be wrapped",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "30min"
+  },
+  "tags": [
+    "pitfall"
+  ],
+  "defaultSeverity": "Major",
+  "ruleSpecification": "RSPEC-4200",
+  "sqKey": "S4200"
+}
