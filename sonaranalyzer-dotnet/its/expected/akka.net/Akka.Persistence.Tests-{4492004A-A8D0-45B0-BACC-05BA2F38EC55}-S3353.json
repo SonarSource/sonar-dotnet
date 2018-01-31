@@ -1,0 +1,238 @@
+{
+"issues":  [
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'pid'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\EndToEndEventAdapterSpec.cs",
+"region":  {
+"startLine":  352,
+"startColumn":  17,
+"endLine":  352,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'replayPassThroughJournalId'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\MemoryEventAdapterSpec.cs",
+"region":  {
+"startLine":  348,
+"startColumn":  17,
+"endLine":  348,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'm2'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\MemoryEventAdapterSpec.cs",
+"region":  {
+"startLine":  352,
+"startColumn":  17,
+"endLine":  352,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'noAdapter'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\MemoryEventAdapterSpec.cs",
+"region":  {
+"startLine":  372,
+"startColumn":  17,
+"endLine":  372,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'm2'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\MemoryEventAdapterSpec.cs",
+"region":  {
+"startLine":  376,
+"startColumn":  17,
+"endLine":  376,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'n'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\PersistentActorSpec.cs",
+"region":  {
+"startLine":  186,
+"startColumn":  17,
+"endLine":  186,
+"endColumn":  18
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'pid'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\ReceivePersistentActorTests.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  17,
+"endLine":  31,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'pid'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\ReceivePersistentActorTests.cs",
+"region":  {
+"startLine":  48,
+"startColumn":  17,
+"endLine":  48,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'pid'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\ReceivePersistentActorTests.cs",
+"region":  {
+"startLine":  64,
+"startColumn":  17,
+"endLine":  64,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'pid'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\ReceivePersistentActorTests.cs",
+"region":  {
+"startLine":  80,
+"startColumn":  17,
+"endLine":  80,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'pid'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\ReceivePersistentActorTests.cs",
+"region":  {
+"startLine":  101,
+"startColumn":  17,
+"endLine":  101,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'pid'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\ReceivePersistentActorTests.cs",
+"region":  {
+"startLine":  125,
+"startColumn":  17,
+"endLine":  125,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'pid'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\ReceivePersistentActorTests_Become.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  17,
+"endLine":  20,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'pid'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\ReceivePersistentActorTests_Become.cs",
+"region":  {
+"startLine":  46,
+"startColumn":  17,
+"endLine":  46,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'pid'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\ReceivePersistentActorTests_Become.cs",
+"region":  {
+"startLine":  64,
+"startColumn":  17,
+"endLine":  64,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'pid'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\ReceivePersistentActorTests_LifeCycle.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  17,
+"endLine":  20,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'pid'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\ReceivePersistentActorTests_LifeCycle.cs",
+"region":  {
+"startLine":  36,
+"startColumn":  17,
+"endLine":  36,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'pid'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\ReceivePersistentActorTests_LifeCycle.cs",
+"region":  {
+"startLine":  54,
+"startColumn":  17,
+"endLine":  54,
+"endColumn":  20
+}
+}
+}
+]
+}

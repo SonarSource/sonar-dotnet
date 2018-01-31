@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'html'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Markdown.Tests\MarkdownViewengineRenderFixture.cs",
+"region":  {
+"startLine":  13,
+"startColumn":  17,
+"endLine":  13,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'expected'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Markdown.Tests\MarkdownViewengineRenderFixture.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  17,
+"endLine":  15,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'html'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Markdown.Tests\MarkdownViewengineRenderFixture.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  17,
+"endLine":  28,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'expected'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Markdown.Tests\MarkdownViewengineRenderFixture.cs",
+"region":  {
+"startLine":  30,
+"startColumn":  17,
+"endLine":  30,
+"endColumn":  25
+}
+}
+}
+]
+}

@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'logMsg'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"region":  {
+"startLine":  550,
+"startColumn":  25,
+"endLine":  550,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'logMsg'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
+"region":  {
+"startLine":  745,
+"startColumn":  25,
+"endLine":  745,
+"endColumn":  31
+}
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'port'.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\TcpEchoService.Server\Program.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  21,
+"endLine":  20,
+"endColumn":  25
+}
+}
+}
+]
+}

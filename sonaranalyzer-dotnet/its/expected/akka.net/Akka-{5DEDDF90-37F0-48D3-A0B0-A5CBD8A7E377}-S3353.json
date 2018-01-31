@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'success'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Helios.Concurrency.DedicatedThreadPool.cs",
+"region":  {
+"startLine":  316,
+"startColumn":  18,
+"endLine":  316,
+"endColumn":  25
+}
+}
+}
+]
+}

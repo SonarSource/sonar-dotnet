@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'hasPartionHandoffCompletedSuccessfully'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
+"region":  {
+"startLine":  1504,
+"startColumn":  17,
+"endLine":  1504,
+"endColumn":  55
+}
+}
+}
+]
+}
