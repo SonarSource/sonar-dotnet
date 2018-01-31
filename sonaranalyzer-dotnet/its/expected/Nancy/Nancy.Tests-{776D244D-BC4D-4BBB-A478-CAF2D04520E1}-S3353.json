@@ -80,188 +80,6 @@
 },
 {
 "id":  "S3353",
-"message":  "Add the 'const' modifier to 'notExpected'.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.Tests\Unit\DynamicDictionaryValueFixture.cs",
-"region":  {
-"startLine":  950,
-"startColumn":  19,
-"endLine":  950,
-"endColumn":  30
-}
-}
-},
-{
-"id":  "S3353",
-"message":  "Add the 'const' modifier to 'nullableBool'.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Extensions\TypeExtensionsFixture.cs",
-"region":  {
-"startLine":  115,
-"startColumn":  19,
-"endLine":  115,
-"endColumn":  31
-}
-}
-},
-{
-"id":  "S3353",
-"message":  "Add the 'const' modifier to 'nullableChar'.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Extensions\TypeExtensionsFixture.cs",
-"region":  {
-"startLine":  118,
-"startColumn":  19,
-"endLine":  118,
-"endColumn":  31
-}
-}
-},
-{
-"id":  "S3353",
-"message":  "Add the 'const' modifier to 'nullableByte'.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Extensions\TypeExtensionsFixture.cs",
-"region":  {
-"startLine":  128,
-"startColumn":  19,
-"endLine":  128,
-"endColumn":  31
-}
-}
-},
-{
-"id":  "S3353",
-"message":  "Add the 'const' modifier to 'nullableDecimal'.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Extensions\TypeExtensionsFixture.cs",
-"region":  {
-"startLine":  131,
-"startColumn":  22,
-"endLine":  131,
-"endColumn":  37
-}
-}
-},
-{
-"id":  "S3353",
-"message":  "Add the 'const' modifier to 'nullableDouble'.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Extensions\TypeExtensionsFixture.cs",
-"region":  {
-"startLine":  134,
-"startColumn":  21,
-"endLine":  134,
-"endColumn":  35
-}
-}
-},
-{
-"id":  "S3353",
-"message":  "Add the 'const' modifier to 'nullableInt16'.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Extensions\TypeExtensionsFixture.cs",
-"region":  {
-"startLine":  137,
-"startColumn":  20,
-"endLine":  137,
-"endColumn":  33
-}
-}
-},
-{
-"id":  "S3353",
-"message":  "Add the 'const' modifier to 'nullableInt32'.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Extensions\TypeExtensionsFixture.cs",
-"region":  {
-"startLine":  140,
-"startColumn":  20,
-"endLine":  140,
-"endColumn":  33
-}
-}
-},
-{
-"id":  "S3353",
-"message":  "Add the 'const' modifier to 'nullableInt64'.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Extensions\TypeExtensionsFixture.cs",
-"region":  {
-"startLine":  143,
-"startColumn":  20,
-"endLine":  143,
-"endColumn":  33
-}
-}
-},
-{
-"id":  "S3353",
-"message":  "Add the 'const' modifier to 'nullableSByte'.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Extensions\TypeExtensionsFixture.cs",
-"region":  {
-"startLine":  146,
-"startColumn":  20,
-"endLine":  146,
-"endColumn":  33
-}
-}
-},
-{
-"id":  "S3353",
-"message":  "Add the 'const' modifier to 'nullableSingle'.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Extensions\TypeExtensionsFixture.cs",
-"region":  {
-"startLine":  149,
-"startColumn":  20,
-"endLine":  149,
-"endColumn":  34
-}
-}
-},
-{
-"id":  "S3353",
-"message":  "Add the 'const' modifier to 'nullableUInt16'.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Extensions\TypeExtensionsFixture.cs",
-"region":  {
-"startLine":  152,
-"startColumn":  21,
-"endLine":  152,
-"endColumn":  35
-}
-}
-},
-{
-"id":  "S3353",
-"message":  "Add the 'const' modifier to 'nullableUInt32'.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Extensions\TypeExtensionsFixture.cs",
-"region":  {
-"startLine":  155,
-"startColumn":  21,
-"endLine":  155,
-"endColumn":  35
-}
-}
-},
-{
-"id":  "S3353",
-"message":  "Add the 'const' modifier to 'nullableUInt64'.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Extensions\TypeExtensionsFixture.cs",
-"region":  {
-"startLine":  158,
-"startColumn":  21,
-"endLine":  158,
-"endColumn":  35
-}
-}
-},
-{
-"id":  "S3353",
 "message":  "Add the 'const' modifier to 'query'.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.Tests\Unit\Helpers\HttpUtilityFixture.cs",
@@ -795,6 +613,19 @@
 },
 {
 "id":  "S3353",
+"message":  "Add the 'const' modifier to 'context'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ViewEngines\DefaultViewResolverFixture.cs",
+"region":  {
+"startLine":  63,
+"startColumn":  33,
+"endLine":  63,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S3353",
 "message":  "Add the 'const' modifier to 'viewName'.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.Tests\Unit\ViewEngines\DefaultViewResolverFixture.cs",
@@ -803,6 +634,19 @@
 "startColumn":  20,
 "endLine":  76,
 "endColumn":  28
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'extensions'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ViewEngines\ResourceViewLocationProviderFixture.cs",
+"region":  {
+"startLine":  40,
+"startColumn":  33,
+"endLine":  40,
+"endColumn":  43
 }
 }
 }

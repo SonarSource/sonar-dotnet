@@ -41,9 +41,7 @@ namespace SonarAnalyzer.Rules.CSharp
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        public SyntaxToken paramSymbol { get; private set; }
-
-        private enum DeclarationType { Unknown, Value, Reference, String };
+        private enum DeclarationType { CannotBeConst, Value, Reference, String };
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -56,7 +54,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
 
                     var declaredType = FindDeclarationType(localDeclaration, c.SemanticModel);
-                    if (declaredType == DeclarationType.Unknown)
+                    if (declaredType == DeclarationType.CannotBeConst)
                     {
                         return;
                     }
@@ -77,16 +75,15 @@ namespace SonarAnalyzer.Rules.CSharp
             SemanticModel semanticModel)
         {
             var declaredTypeSyntax = localDeclaration.Declaration?.Type;
-
             if (declaredTypeSyntax == null)
             {
-                return DeclarationType.Unknown;
+                return DeclarationType.CannotBeConst;
             }
 
             var declaredType = semanticModel.GetTypeInfo(declaredTypeSyntax).Type;
             if (declaredType == null)
             {
-                return DeclarationType.Unknown;
+                return DeclarationType.CannotBeConst;
             }
 
             if (declaredType.Is(KnownType.System_String))
@@ -94,11 +91,16 @@ namespace SonarAnalyzer.Rules.CSharp
                 return DeclarationType.String;
             }
 
+            if (declaredType.OriginalDefinition?.DerivesFrom(KnownType.System_Nullable_T) ?? false)
+            {
+                // Defining nullable as const raises error CS0283.
+                return DeclarationType.CannotBeConst;
+            }
+
             return declaredType.IsValueType
                 ? DeclarationType.Value
                 : DeclarationType.Reference;
         }
-
 
         private static bool IsInitializedWithCompatibleConstant(VariableDeclaratorSyntax variableDeclarator,
             SemanticModel semanticModel, DeclarationType declarationType)
@@ -115,7 +117,6 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             var constantValue = constantValueContainer.Value;
-
             if (constantValue is string)
             {
                 return declarationType == DeclarationType.String;
@@ -133,7 +134,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool HasMutableUsagesInMethod(VariableDeclaratorSyntax parameter, ISymbol parameterSymbol,
             SemanticModel semanticModel)
         {
-            var methodSyntax = parameter.Parent?.AncestorsAndSelf()?.FirstOrDefault(IsMethodLike);
+            var methodSyntax = parameter?.Ancestors()?.FirstOrDefault(IsMethodLike);
             if (methodSyntax == null)
             {
                 return false;

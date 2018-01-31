@@ -15,7 +15,10 @@ namespace Tests.Diagnostics
             x = 42;
         }
 
-        public static void NormalCall(int x) { }
+        public static void NormalCall(int x)
+        {
+            x = 42;
+        }
 
         public static object GetObj() => new object();
 
@@ -57,7 +60,6 @@ namespace Tests.Diagnostics
             return false;
         }
 
-
         public bool Test_PostIncrement()
         {
             int target = 32;
@@ -86,11 +88,15 @@ namespace Tests.Diagnostics
             return false;
         }
 
-        public bool Test_ShiftAssign()
+        public bool Test_AssignOperators()
         {
-            int target = 32;
+            int i = 1, j = 1, k = 1, l = 1, m = 32;
 
-            target <<= 1;
+            i <<= 1;
+            j *= 1;
+            k -= 1;
+            l /= 1;
+            m %= 1;
 
             return false;
         }
@@ -118,6 +124,7 @@ namespace Tests.Diagnostics
 
             return false;
         }
+
         public bool Test_Lambda()
         {
             int target = 32;
@@ -194,9 +201,15 @@ namespace Tests.Diagnostics
 
             IEnumerable<string> enumerable = null; // Noncompliant
 
-            //dynamic value = 42; // Compliant. Const only works with null.
-            //long? notExpected = 100; // Compliant. Const only works with null.
-            //TestUtils x = 2; // Compliant (type with implicit conversion). Const only works with null.
+            long? nullable = 100; // Compliant. Nullables cannot be const.
+            long? nullable2 = null; // Compliant. Nullables cannot be const.
+
+            dynamic value = 42; // Compliant. Const only works with null.
+            TestUtils x = 2; // Compliant (type with implicit conversion). Const only works with null.
+
+            int[] x = { 1, 2, 3 }; // Compliant (expression on the right is not constant).
+            int[] y = new int[] { 1, 2, 3 }; // Compliant (expression on the right is not constant).
+            Exception[] z = { }; // Compliant (expression on the right is not constant).
         }
 
         public void Test_Property
