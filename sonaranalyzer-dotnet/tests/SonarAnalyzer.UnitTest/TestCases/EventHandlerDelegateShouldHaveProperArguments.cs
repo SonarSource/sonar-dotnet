@@ -1,7 +1,12 @@
-using System;
+﻿using System;
 
 namespace Tests.Diagnostics
 {
+    class Foo
+    {
+        public EventHandler Bar { get; }
+    }
+
     class Program
     {
         public event EventHandler SomeEvent;
@@ -44,6 +49,13 @@ namespace Tests.Diagnostics
         {
             SomeEvent(); // Invalid syntax
             SomeEvent(null, null, null); // Invalid syntax
+        }
+
+        protected void OnEvent()
+        {
+            Foo foo = new Foo();
+
+            foo?.Bar?.Invoke(this, EventArgs.Empty); // Should not cause a StackOverflow
         }
     }
 }

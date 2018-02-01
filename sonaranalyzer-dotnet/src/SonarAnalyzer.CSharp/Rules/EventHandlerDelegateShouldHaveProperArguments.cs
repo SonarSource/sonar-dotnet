@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2018 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -118,6 +118,13 @@ namespace SonarAnalyzer.Rules.CSharp
             if (expression is MemberBindingExpressionSyntax)
             {
                 var conditionalExpression = expression.FirstAncestorOrSelf<ConditionalAccessExpressionSyntax>();
+                var isSelf = expression == conditionalExpression?.Expression;
+
+                if (isSelf)
+                {
+                    return null;
+                }
+
                 return GetEventSymbol(conditionalExpression?.Expression, model);
             }
 
