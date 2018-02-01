@@ -60,25 +60,30 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    ParameterSyntax parameterWithoutCallerInfoAttribute = null;
+                    ParameterSyntax noCallerInfoParameter = null;
                     foreach (var parameter in methodDeclaration.ParameterList.Parameters.Reverse())
                     {
-                        if (parameterWithoutCallerInfoAttribute != null &&
-                            !string.IsNullOrEmpty(parameter.Identifier.Text) &&
-                            HasCallerInfoAttribute(parameter, c.SemanticModel))
+                        if (HasCallerInfoAttribute(parameter, c.SemanticModel))
                         {
-                            c.ReportDiagnosticWhenActive(
-                                Diagnostic.Create(rule, parameter.GetLocation(), parameter.Identifier.Text));
+                            if (noCallerInfoParameter != null &&
+                                HasIdentifier(parameter))
+                            {
+                                c.ReportDiagnosticWhenActive(
+                                    Diagnostic.Create(rule, parameter.GetLocation(), parameter.Identifier.Text));
+                            }
                         }
                         else
                         {
-                            parameterWithoutCallerInfoAttribute = parameter;
+                            noCallerInfoParameter = parameter;
                         }
                     }
                 },
                 SyntaxKind.MethodDeclaration,
                 SyntaxKind.ConstructorDeclaration);
         }
+
+        private static bool HasIdentifier(ParameterSyntax parameter) =>
+            !string.IsNullOrEmpty(parameter.Identifier.Text);
 
         private static bool HasCallerInfoAttribute(ParameterSyntax parameter, SemanticModel semanticModel) =>
             parameter.AttributeLists
