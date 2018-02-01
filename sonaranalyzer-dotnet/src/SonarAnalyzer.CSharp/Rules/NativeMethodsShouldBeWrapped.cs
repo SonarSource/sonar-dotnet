@@ -43,14 +43,6 @@ namespace SonarAnalyzer.Rules.CSharp
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        private static readonly ISet<Accessibility> PublicOrProtected = new HashSet<Accessibility>
-        {
-            Accessibility.Public,
-            Accessibility.Protected,
-            Accessibility.ProtectedOrInternal,
-            Accessibility.ProtectedAndInternal,
-        };
-
         protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeAction(ReportPublicExternalMethods, SyntaxKind.MethodDeclaration);
@@ -63,8 +55,8 @@ namespace SonarAnalyzer.Rules.CSharp
             var methodSymbol = c.SemanticModel.GetDeclaredSymbol(methodDeclaration);
 
             if (methodSymbol != null &&
-                IsExternal(methodSymbol) &&
-                IsPubliclyAccessible(methodSymbol))
+                methodSymbol.IsExtern &&
+                methodSymbol.IsPubliclyAccessible())
             {
                 c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, methodDeclaration.Identifier.GetLocation(),
                     MakeThisMethodPrivateMessage));
@@ -77,7 +69,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var methodSymbol = c.SemanticModel.GetDeclaredSymbol(methodDeclaration);
 
             if (methodSymbol == null ||
-                IsExternal(methodSymbol) ||
+                methodSymbol.IsExtern &&
                 methodDeclaration.ParameterList == null ||
                 methodDeclaration.ParameterList.Parameters.Count == 0)
             {
@@ -118,19 +110,13 @@ namespace SonarAnalyzer.Rules.CSharp
         private static ISet<IMethodSymbol> GetExternalMethods(IMethodSymbol methodSymbol) =>
             methodSymbol.ContainingType.GetMembers()
                 .OfType<IMethodSymbol>()
-                .Where(IsExternal)
+                .Where(m => m.IsExtern)
                 .ToHashSet();
 
         private static IEnumerable<SyntaxNode> GetBodyDescendants(MethodDeclarationSyntax methodDeclaration) =>
             methodDeclaration.Body?.DescendantNodes()
             ?? methodDeclaration.ExpressionBody?.DescendantNodes()
             ?? Enumerable.Empty<SyntaxNode>();
-
-        private static bool IsPubliclyAccessible(IMethodSymbol methodSymbol) =>
-            PublicOrProtected.Contains(methodSymbol.GetEffectiveAccessibility());
-
-        private static bool IsExternal(IMethodSymbol symbol) =>
-            symbol.IsExtern;
 
         private static bool HasAtLeastTwo<T>(IEnumerable<T> collection) =>
             collection.Take(2).Count() == 2;

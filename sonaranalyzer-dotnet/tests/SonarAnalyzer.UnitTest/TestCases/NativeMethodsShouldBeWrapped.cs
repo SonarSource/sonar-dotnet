@@ -1,5 +1,8 @@
 ﻿using System;
 
+// Invalid method, testing if IMethodSymbol.ContainingType returns null (it currently doesn't)
+private void Do(int x) { }
+
 namespace Tests.Diagnostics
 {
     public class Program
