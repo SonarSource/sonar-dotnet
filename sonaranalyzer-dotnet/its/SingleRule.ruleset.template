@@ -20019,6 +20019,7 @@
 
     <Rule Id="S9999-cpd" Action="None" />
     <Rule Id="S9999-encoding" Action="None" />
+    <Rule Id="S9999-metadata" Action="None" />
     <Rule Id="S9999-metrics" Action="None" />
     <Rule Id="S9999-token-type" Action="None" />
     <Rule Id="S9999-symbolRef" Action="None" />
