@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Runtime.Serialization;
 
 namespace Tests.Diagnostics
@@ -94,16 +94,26 @@ namespace Tests.Diagnostics
     }
 
     [Serializable]
-    public class Serializable_ExplicitImplementation : ISerializable
-//               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Noncompliant
+    public class Serializable_ExplicitImplementation : ISerializable // Compliant, False Negative - rule should be extended to ensure there is a virtual GetObjectData method that is called
     {
         public Serializable_ExplicitImplementation()
         { /*do something*/ }
         protected Serializable_ExplicitImplementation(SerializationInfo info, StreamingContext context)
         { /*do something*/ }
         void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
-//                         ^^^^^^^^^^^^^ Secondary {{Make 'GetObjectData' 'public' and 'virtual', or seal 'Serializable_ExplicitImplementation'.}}
         { /*do something*/ }
+    }
+
+    [Serializable]
+    public class Serializable_ExplicitImplementation : ISerializable
+    {
+        public Serializable_ExplicitImplementation()
+        { /*do something*/ }
+        protected Serializable_ExplicitImplementation(SerializationInfo info, StreamingContext context)
+        { /*do something*/ }
+        void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
+        { GetObjectData(info, context); }
+        protected virtual GetObjectData(SerializationInfo info, StreamingContext context) { }
     }
 
     [Serializable]
