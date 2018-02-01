@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2018 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -21,6 +21,7 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
+using System.Runtime.Serialization;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -142,9 +143,9 @@ namespace SonarAnalyzer.Rules.CSharp
                 yield break;
             }
 
-            var isPublicVirtual = getObjectData.DeclaredAccessibility == Accessibility.Public &&
-                (getObjectData.IsVirtual || getObjectData.IsOverride);
-            if (typeSymbol.IsSealed || isPublicVirtual)
+            if (typeSymbol.IsSealed ||
+                IsPublicVirtual(getObjectData) ||
+                IsExplicitImplementation(getObjectData))
             {
                 yield break;
             }
@@ -156,14 +157,12 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static IEnumerable<string> GetSerializableFieldNames(INamedTypeSymbol typeSymbol)
-        {
-            return typeSymbol.GetMembers()
+        private static IEnumerable<string> GetSerializableFieldNames(INamedTypeSymbol typeSymbol) =>
+            typeSymbol.GetMembers()
                 .OfType<IFieldSymbol>()
                 .Where(f => !f.IsStatic)
                 .Where(f => ImplementsISerializable(f.Type))
                 .Select(f => f.Name);
-        }
 
         private static IEnumerable<SecondaryLocation> CheckConstructor(ClassDeclarationSyntax classDeclaration,
             INamedTypeSymbol typeSymbol)
@@ -213,7 +212,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 .OfType<MemberAccessExpressionSyntax>()
                 .Any(memberAccess => memberAccess.IsKind(SyntaxKind.SimpleMemberAccessExpression) &&
                                      memberAccess.Expression.IsKind(SyntaxKind.BaseExpression) &&
-                                     memberAccess.Name.Identifier.ValueText == "GetObjectData");
+                                     memberAccess.Name.Identifier.ValueText == nameof(ISerializable.GetObjectData));
         }
 
         private static bool IsCallingBaseConstructor(IMethodSymbol constructorSymbol)
@@ -231,23 +230,24 @@ namespace SonarAnalyzer.Rules.CSharp
             return baseKeyword.HasValue && baseKeyword.Value.IsKind(SyntaxKind.BaseKeyword);
         }
 
-        private static bool ImplementsISerializable(ITypeSymbol typeSymbol)
-        {
-            return typeSymbol != null &&
-                typeSymbol.IsPubliclyAccessible() &&
-                typeSymbol.AllInterfaces.Any(IsOrImplementsISerializable);
-        }
+        private static bool ImplementsISerializable(ITypeSymbol typeSymbol) =>
+            typeSymbol != null &&
+            typeSymbol.IsPubliclyAccessible() &&
+            typeSymbol.AllInterfaces.Any(IsOrImplementsISerializable);
 
-        private static bool HasSerializableAttribute(ITypeSymbol typeSymbol)
-        {
-            return typeSymbol.GetAttributes()
+        private static bool HasSerializableAttribute(ITypeSymbol typeSymbol) =>
+            typeSymbol.GetAttributes()
                 .Any(a => a.AttributeClass.Is(KnownType.System_SerializableAttribute));
-        }
 
-        private static bool IsOrImplementsISerializable(ITypeSymbol typeSymbol)
-        {
-            return typeSymbol.Is(KnownType.System_Runtime_Serialization_ISerializable) ||
-                typeSymbol.Implements(KnownType.System_Runtime_Serialization_ISerializable);
-        }
+        private static bool IsOrImplementsISerializable(ITypeSymbol typeSymbol) =>
+            typeSymbol.Is(KnownType.System_Runtime_Serialization_ISerializable) ||
+            typeSymbol.Implements(KnownType.System_Runtime_Serialization_ISerializable);
+
+        private static bool IsPublicVirtual(IMethodSymbol methodSymbol) =>
+            methodSymbol.DeclaredAccessibility == Accessibility.Public &&
+            (methodSymbol.IsVirtual || methodSymbol.IsOverride);
+
+        private static bool IsExplicitImplementation(IMethodSymbol methodSymbol) =>
+            methodSymbol.ExplicitInterfaceImplementations.Any(KnownMethods.IsGetObjectData);
     }
 }
