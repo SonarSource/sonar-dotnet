@@ -22,6 +22,9 @@ namespace Tests.Diagnostics
             [CallerMemberName]string callerMemberName, string other) { }
 //          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+        public void Method8([CallerMemberName]string callerMemberName = null,
+            [CallerFilePath]string callerFilePath = null, [CallerLineNumber]int callerLineNumber = 0) { }
+
         public Program([CallerFilePath]string callerFilePath, string other) { } // Noncompliant
         public Program(string other, [CallerFilePath]string callerFilePath) { }
     }
