@@ -43,6 +43,14 @@ namespace SonarAnalyzer.Rules.CSharp
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
+        private static readonly ISet<Accessibility> PublicOrProtected = new HashSet<Accessibility>
+        {
+            Accessibility.Public,
+            Accessibility.Protected,
+            Accessibility.ProtectedOrInternal,
+            Accessibility.ProtectedAndInternal,
+        };
+
         protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeAction(ReportPublicExternalMethods, SyntaxKind.MethodDeclaration);
@@ -52,9 +60,11 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void ReportPublicExternalMethods(SyntaxNodeAnalysisContext c)
         {
             var methodDeclaration = (MethodDeclarationSyntax)c.Node;
+            var methodSymbol = c.SemanticModel.GetDeclaredSymbol(methodDeclaration);
 
-            if (methodDeclaration.Modifiers.Any(IsExternal) &&
-                methodDeclaration.Modifiers.Any(IsPublicOrProtected))
+            if (methodSymbol != null &&
+                IsExternal(methodSymbol) &&
+                IsPubliclyAccessible(methodSymbol))
             {
                 c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, methodDeclaration.Identifier.GetLocation(),
                     MakeThisMethodPrivateMessage));
@@ -66,40 +76,43 @@ namespace SonarAnalyzer.Rules.CSharp
             var methodDeclaration = (MethodDeclarationSyntax)c.Node;
             var methodSymbol = c.SemanticModel.GetDeclaredSymbol(methodDeclaration);
 
-            if (methodDeclaration.Modifiers.Any(IsExternal) ||
-                methodDeclaration.ParameterList?.Parameters.Count == 0 ||
-                HasTwoOrMoreStatements(methodDeclaration))
+            if (methodSymbol == null ||
+                IsExternal(methodSymbol) ||
+                methodDeclaration.ParameterList == null ||
+                methodDeclaration.ParameterList.Parameters.Count == 0)
             {
                 return;
             }
 
-            var invocations = GetBodyDescendants(methodDeclaration)
-                .OfType<InvocationExpressionSyntax>();
+            var descendants = GetBodyDescendants(methodDeclaration);
 
-            if (invocations.Take(2).Count() == 2) // Two or more invocations
+            if (HasAtLeastTwo(descendants.OfType<StatementSyntax>()) ||
+                HasAtLeastTwo(descendants.OfType<InvocationExpressionSyntax>()))
             {
                 return;
             }
-
-            bool ParametersMatchCotnainingMethodDeclaration(InvocationExpressionSyntax invocation) =>
-                invocation.ArgumentList.Arguments
-                    .All(a => a.Expression is LiteralExpressionSyntax ||
-                        a.Expression is IdentifierNameSyntax i
-                        && methodDeclaration.ParameterList.Parameters.Any(p => p.Identifier.Text == i.Identifier.Text));
 
             var externalMethodSymbols = GetExternalMethods(methodSymbol);
 
-            var invokedExternalMethods = invocations
-                .Where(ParametersMatchCotnainingMethodDeclaration)
+            descendants.OfType<InvocationExpressionSyntax>()
+                .Where(ParametersMatchContainingMethodDeclaration)
                 .Select(i => c.SemanticModel.GetSymbolInfo(i).Symbol)
                 .OfType<IMethodSymbol>()
-                .Where(externalMethodSymbols.Contains);
+                .Where(externalMethodSymbols.Contains)
+                .ToList()
+                .ForEach(Report);
 
-            foreach (var invocation in invokedExternalMethods)
-            {
+            void Report(IMethodSymbol externMethod) =>
                 c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, methodDeclaration.Identifier.GetLocation(),
-                  string.Format(MakeThisWrapperLessTrivialMessage, invocation.Name)));
-            }
+                  string.Format(MakeThisWrapperLessTrivialMessage, externMethod.Name)));
+
+            bool ParametersMatchContainingMethodDeclaration(InvocationExpressionSyntax invocation) =>
+                invocation.ArgumentList.Arguments.All(IsDeclaredParameterOrLiteral);
+
+            bool IsDeclaredParameterOrLiteral(ArgumentSyntax a) =>
+                a.Expression is LiteralExpressionSyntax ||
+                a.Expression is IdentifierNameSyntax i
+                    && methodDeclaration.ParameterList.Parameters.Any(p => p.Identifier.Text == i.Identifier.Text);
         }
 
         private static ISet<IMethodSymbol> GetExternalMethods(IMethodSymbol methodSymbol) =>
@@ -108,24 +121,18 @@ namespace SonarAnalyzer.Rules.CSharp
                 .Where(IsExternal)
                 .ToHashSet();
 
-        private static bool HasTwoOrMoreStatements(MethodDeclarationSyntax methodDeclaration) =>
-            GetBodyDescendants(methodDeclaration)
-                .OfType<StatementSyntax>()
-                .Take(2)
-                .Count() == 2;
-
         private static IEnumerable<SyntaxNode> GetBodyDescendants(MethodDeclarationSyntax methodDeclaration) =>
             methodDeclaration.Body?.DescendantNodes()
             ?? methodDeclaration.ExpressionBody?.DescendantNodes()
             ?? Enumerable.Empty<SyntaxNode>();
 
-        private static bool IsPublicOrProtected(SyntaxToken token) =>
-            token.IsKind(SyntaxKind.PublicKeyword) || token.IsKind(SyntaxKind.ProtectedKeyword);
-
-        private static bool IsExternal(SyntaxToken token) =>
-            token.IsKind(SyntaxKind.ExternKeyword);
+        private static bool IsPubliclyAccessible(IMethodSymbol methodSymbol) =>
+            PublicOrProtected.Contains(methodSymbol.GetEffectiveAccessibility());
 
         private static bool IsExternal(IMethodSymbol symbol) =>
             symbol.IsExtern;
+
+        private static bool HasAtLeastTwo<T>(IEnumerable<T> collection) =>
+            collection.Take(2).Count() == 2;
     }
 }

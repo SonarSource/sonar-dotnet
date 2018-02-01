@@ -2,7 +2,7 @@
 
 namespace Tests.Diagnostics
 {
-    class Program
+    public class Program
     {
         private static T DoSomething<T>(T x) => x;
 
@@ -13,7 +13,11 @@ namespace Tests.Diagnostics
         extern public static void Extern2(string s, int x); // Noncompliant {{Make this native method private and provide a wrapper.}}
 //                                ^^^^^^^
 
-        extern private static int Extern3(string s); // Compliant
+        extern internal protected static void Extern3(string s, int x); // Noncompliant
+//                                            ^^^^^^^
+
+
+        extern private static int Extern4(string s); // Compliant
 
         public static void Wrapper1(string s, int x) // Noncompliant {{Make this wrapper for native method 'Extern1' less trivial.}}
         {
@@ -68,5 +72,34 @@ namespace Tests.Diagnostics
 
         public static int Wrapper11() => // Compliant, no arguments
             DoSomething(false) ? Extern0() : 5; // simulate some check
+
+        private class PrivateClass
+        {
+            extern public static void Extern(); // Compliant, container class is private
+        }
+
+        internal class PrivateClass
+        {
+            extern public static void Extern(); // Compliant, container class is internal
+        }
+    }
+
+    public class InvalidSyntax
+    {
+        extern public void Extern1
+        extern public void Extern2;
+        extern private void Extern3(int x);
+        public void Wrapper
+        {
+            Extern3(x);
+        }
+        public void Wrapper(
+        {
+            Extern3(x);
+        }
+        public void Wrapper()
+        {
+            Extern3(x);
+        }
     }
 }
