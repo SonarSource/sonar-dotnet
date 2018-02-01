@@ -60,5 +60,24 @@ namespace Tests.Diagnostics
                 y += 2;
             }
         }
+
+        // Properties are not checked
+        public static void Property
+        {
+            get
+            {
+                if (x != null)
+                {
+                    x = null;
+                }
+            }
+            set
+            {
+                if (x != null)
+                {
+                    x = null;
+                }
+            }
+        }
     }
 }
