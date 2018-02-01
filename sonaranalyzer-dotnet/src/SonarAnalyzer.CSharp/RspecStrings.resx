@@ -8328,6 +8328,33 @@
   <data name="S4159_Type" xml:space="preserve">
     <value>BUG</value>
   </data>
+  <data name="S4200_Category" xml:space="preserve">
+    <value>Major Code Smell</value>
+  </data>
+  <data name="S4200_Description" xml:space="preserve">
+    <value>Native methods are functions that reside in libraries outside the virtual machine. Being able to call them is useful for interoperability with applications and libraries written in other programming languages, in particular when performing platform-specific operations. However doing so comes with extra risks since it means stepping out of the security model of the virtual machine. It is therefore highly recommended to take extra steps, like input validation, when invoking native methods. This is best done by making the native method private and by providing a wrapper that performs these extra steps and verifications.</value>
+  </data>
+  <data name="S4200_IsActivatedByDefault" xml:space="preserve">
+    <value>True</value>
+  </data>
+  <data name="S4200_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S4200_RemediationCost" xml:space="preserve">
+    <value>30min</value>
+  </data>
+  <data name="S4200_Severity" xml:space="preserve">
+    <value>Major</value>
+  </data>
+  <data name="S4200_Tags" xml:space="preserve">
+    <value>pitfall</value>
+  </data>
+  <data name="S4200_Title" xml:space="preserve">
+    <value>Native methods should be wrapped</value>
+  </data>
+  <data name="S4200_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S4210_Category" xml:space="preserve">
     <value>Major Bug</value>
   </data>
