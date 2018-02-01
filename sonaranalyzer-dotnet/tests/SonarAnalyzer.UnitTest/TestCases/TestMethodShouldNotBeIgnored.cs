@@ -38,7 +38,7 @@ namespace Tests.Diagnostics1
     }
 
     [Ignore, TestClass]
-//   ^^^^^^
+//   ^^^^^^ Noncompliant
     class MsTestClass1
     {
     }
@@ -107,7 +107,7 @@ namespace Tests.Diagnostics2
 
         [TestCaseSource("DivideCases")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.Ignore]
-        // Noncompliant@-1
+//       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Noncompliant
         public void DivideTest(int n, int d, int q)
         {
             Assert.AreEqual(q, n / d);
