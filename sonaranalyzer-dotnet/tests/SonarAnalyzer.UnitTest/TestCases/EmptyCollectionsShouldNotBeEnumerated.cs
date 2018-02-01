@@ -723,4 +723,52 @@ namespace Tests.Diagnostics
             if (string.IsNullOrEmpty(id)) throw new ArgumentNullException(nameof(id));
         }
     }
+
+    // Large CFG that causes the exploded graph to hit the exploration limit
+    // See https://github.com/SonarSource/sonar-csharp/issues/767 (comments!)
+    private static void MethodName(object[] table, object[][] aoTable2, ref Dictionary<double, string> dictPorts)
+    {
+        try
+        {
+            string sValue = "-1";
+            switch (5)
+            {
+                case 3: sValue = ""; break;
+                case 4: sValue = ""; break;
+                case 5: sValue = ""; break;
+            }
+
+            var list = new List<double>();
+            for (int i = 0; i < table.Length; i++)
+            {
+                if (Convert.ToInt32(table[3]) == 1 /* Normal */ &&
+                    Convert.ToInt32(aoTable2[5][9]) == 1 /* On */)
+                {
+                    string sValue2;
+                    switch (Convert.ToInt32(aoTable2[5][4]))
+                    {
+                        default: sValue2 = ""; break;
+                    }
+
+                    if (dictPorts.ContainsKey(5))
+                    {
+                        list.Add(7);
+                    }
+                }
+                else
+                {
+                    dictPorts.Add(5, sValue);
+                }
+            }
+
+            if (list.Count > 0)
+            {
+                list.Sort(); // Compliant. This used to be a FP
+            }
+        }
+        catch
+        {
+            // silently do nothing
+        }
+    }
 }
