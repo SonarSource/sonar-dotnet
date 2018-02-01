@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'contentType'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests.Functional\Tests\ContentNegotiationFixture.cs",
+"region":  {
+"startLine":  697,
+"startColumn":  17,
+"endLine":  697,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'contentType'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests.Functional\Tests\ContentNegotiationFixture.cs",
+"region":  {
+"startLine":  712,
+"startColumn":  17,
+"endLine":  712,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'contentType'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests.Functional\Tests\ContentNegotiationFixture.cs",
+"region":  {
+"startLine":  727,
+"startColumn":  17,
+"endLine":  727,
+"endColumn":  28
+}
+}
+}
+]
+}

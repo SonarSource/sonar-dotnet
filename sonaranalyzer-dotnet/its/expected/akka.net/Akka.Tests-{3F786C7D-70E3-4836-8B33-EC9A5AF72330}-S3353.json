@@ -1,0 +1,1174 @@
+{
+"issues":  [
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'remote'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ActorPathSpec.cs",
+"region":  {
+"startLine":  86,
+"startColumn":  17,
+"endLine":  86,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'count'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\ActorSystemSpec.cs",
+"region":  {
+"startLine":  77,
+"startColumn":  17,
+"endLine":  77,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'service'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\DeployerSpec.cs",
+"region":  {
+"startLine":  90,
+"startColumn":  17,
+"endLine":  90,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'service'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\DeployerSpec.cs",
+"region":  {
+"startLine":  103,
+"startColumn":  17,
+"endLine":  103,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'service'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\DeployerSpec.cs",
+"region":  {
+"startLine":  111,
+"startColumn":  17,
+"endLine":  111,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'service'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\DeployerSpec.cs",
+"region":  {
+"startLine":  124,
+"startColumn":  17,
+"endLine":  124,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'missingType'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\PropsSpec.cs",
+"region":  {
+"startLine":  63,
+"startColumn":  18,
+"endLine":  63,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'name'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\RelativeActorPathSpec.cs",
+"region":  {
+"startLine":  60,
+"startColumn":  17,
+"endLine":  60,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'name'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\RelativeActorPathSpec.cs",
+"region":  {
+"startLine":  67,
+"startColumn":  17,
+"endLine":  67,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'hocon1'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Configuration\ConfigurationSpec.cs",
+"region":  {
+"startLine":  51,
+"startColumn":  17,
+"endLine":  51,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'hocon2'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Configuration\ConfigurationSpec.cs",
+"region":  {
+"startLine":  62,
+"startColumn":  17,
+"endLine":  62,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'hocon1'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Configuration\HoconTests.cs",
+"region":  {
+"startLine":  23,
+"startColumn":  17,
+"endLine":  23,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'hocon2'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Configuration\HoconTests.cs",
+"region":  {
+"startLine":  24,
+"startColumn":  17,
+"endLine":  24,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'hocon1'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Configuration\HoconTests.cs",
+"region":  {
+"startLine":  32,
+"startColumn":  17,
+"endLine":  32,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'hocon2'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Configuration\HoconTests.cs",
+"region":  {
+"startLine":  33,
+"startColumn":  17,
+"endLine":  33,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'hocon1'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Configuration\HoconTests.cs",
+"region":  {
+"startLine":  41,
+"startColumn":  17,
+"endLine":  41,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'hocon2'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Configuration\HoconTests.cs",
+"region":  {
+"startLine":  42,
+"startColumn":  17,
+"endLine":  42,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'hocon1'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Configuration\HoconTests.cs",
+"region":  {
+"startLine":  50,
+"startColumn":  17,
+"endLine":  50,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'hocon2'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Configuration\HoconTests.cs",
+"region":  {
+"startLine":  51,
+"startColumn":  17,
+"endLine":  51,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'hocon1'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Configuration\HoconTests.cs",
+"region":  {
+"startLine":  59,
+"startColumn":  17,
+"endLine":  59,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'hocon2'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Configuration\HoconTests.cs",
+"region":  {
+"startLine":  60,
+"startColumn":  17,
+"endLine":  60,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'hocon1'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Configuration\HoconTests.cs",
+"region":  {
+"startLine":  68,
+"startColumn":  17,
+"endLine":  68,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'hocon2'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Configuration\HoconTests.cs",
+"region":  {
+"startLine":  69,
+"startColumn":  17,
+"endLine":  69,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'hocon1'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Configuration\HoconTests.cs",
+"region":  {
+"startLine":  79,
+"startColumn":  17,
+"endLine":  79,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'hocon2'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Configuration\HoconTests.cs",
+"region":  {
+"startLine":  80,
+"startColumn":  17,
+"endLine":  80,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'hocon'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Configuration\HoconTests.cs",
+"region":  {
+"startLine":  89,
+"startColumn":  17,
+"endLine":  89,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'hocon'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Configuration\HoconTests.cs",
+"region":  {
+"startLine":  99,
+"startColumn":  17,
+"endLine":  99,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'hocon'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Configuration\HoconTests.cs",
+"region":  {
+"startLine":  109,
+"startColumn":  17,
+"endLine":  109,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'hocon'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Configuration\HoconTests.cs",
+"region":  {
+"startLine":  126,
+"startColumn":  17,
+"endLine":  126,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'hocon'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Configuration\HoconTests.cs",
+"region":  {
+"startLine":  171,
+"startColumn":  17,
+"endLine":  171,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'hocon'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Configuration\HoconTests.cs",
+"region":  {
+"startLine":  197,
+"startColumn":  17,
+"endLine":  197,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'hocon'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Configuration\HoconTests.cs",
+"region":  {
+"startLine":  215,
+"startColumn":  17,
+"endLine":  215,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'hocon'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Configuration\HoconTests.cs",
+"region":  {
+"startLine":  228,
+"startColumn":  17,
+"endLine":  228,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'hocon'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Configuration\HoconTests.cs",
+"region":  {
+"startLine":  239,
+"startColumn":  17,
+"endLine":  239,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'hocon'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Configuration\HoconTests.cs",
+"region":  {
+"startLine":  246,
+"startColumn":  17,
+"endLine":  246,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'hocon'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Configuration\HoconTests.cs",
+"region":  {
+"startLine":  253,
+"startColumn":  17,
+"endLine":  253,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'hocon'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Configuration\HoconTests.cs",
+"region":  {
+"startLine":  260,
+"startColumn":  17,
+"endLine":  260,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'hocon'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Configuration\HoconTests.cs",
+"region":  {
+"startLine":  267,
+"startColumn":  17,
+"endLine":  267,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'hocon'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Configuration\HoconTests.cs",
+"region":  {
+"startLine":  274,
+"startColumn":  17,
+"endLine":  274,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'hocon'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Configuration\HoconTests.cs",
+"region":  {
+"startLine":  281,
+"startColumn":  17,
+"endLine":  281,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'hocon'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Configuration\HoconTests.cs",
+"region":  {
+"startLine":  288,
+"startColumn":  17,
+"endLine":  288,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'hocon'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Configuration\HoconTests.cs",
+"region":  {
+"startLine":  302,
+"startColumn":  17,
+"endLine":  302,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'hocon'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Configuration\HoconTests.cs",
+"region":  {
+"startLine":  309,
+"startColumn":  17,
+"endLine":  309,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'hocon'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Configuration\HoconTests.cs",
+"region":  {
+"startLine":  324,
+"startColumn":  17,
+"endLine":  324,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'hocon'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Configuration\HoconTests.cs",
+"region":  {
+"startLine":  331,
+"startColumn":  17,
+"endLine":  331,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'hocon'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Configuration\HoconTests.cs",
+"region":  {
+"startLine":  343,
+"startColumn":  17,
+"endLine":  343,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'hocon'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Configuration\HoconTests.cs",
+"region":  {
+"startLine":  350,
+"startColumn":  17,
+"endLine":  350,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'hocon'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Configuration\HoconTests.cs",
+"region":  {
+"startLine":  371,
+"startColumn":  17,
+"endLine":  371,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'hocon'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Configuration\HoconTests.cs",
+"region":  {
+"startLine":  378,
+"startColumn":  17,
+"endLine":  378,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'hocon'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Configuration\HoconTests.cs",
+"region":  {
+"startLine":  385,
+"startColumn":  17,
+"endLine":  385,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'hocon1'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Configuration\HoconTests.cs",
+"region":  {
+"startLine":  392,
+"startColumn":  17,
+"endLine":  392,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'hocon2'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Configuration\HoconTests.cs",
+"region":  {
+"startLine":  398,
+"startColumn":  17,
+"endLine":  398,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'hocon1'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Configuration\HoconTests.cs",
+"region":  {
+"startLine":  420,
+"startColumn":  17,
+"endLine":  420,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'hocon2'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Configuration\HoconTests.cs",
+"region":  {
+"startLine":  426,
+"startColumn":  17,
+"endLine":  426,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'hocon1'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Configuration\HoconTests.cs",
+"region":  {
+"startLine":  448,
+"startColumn":  17,
+"endLine":  448,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'hocon2'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Configuration\HoconTests.cs",
+"region":  {
+"startLine":  454,
+"startColumn":  17,
+"endLine":  454,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'hocon3'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Configuration\HoconTests.cs",
+"region":  {
+"startLine":  462,
+"startColumn":  17,
+"endLine":  462,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'hocon4'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Configuration\HoconTests.cs",
+"region":  {
+"startLine":  469,
+"startColumn":  17,
+"endLine":  469,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'hocon1'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Configuration\HoconTests.cs",
+"region":  {
+"startLine":  493,
+"startColumn":  17,
+"endLine":  493,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'hocon2'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Configuration\HoconTests.cs",
+"region":  {
+"startLine":  499,
+"startColumn":  17,
+"endLine":  499,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'hocon3'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Configuration\HoconTests.cs",
+"region":  {
+"startLine":  507,
+"startColumn":  17,
+"endLine":  507,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'hocon4'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Configuration\HoconTests.cs",
+"region":  {
+"startLine":  514,
+"startColumn":  17,
+"endLine":  514,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'hocon'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Configuration\HoconTests.cs",
+"region":  {
+"startLine":  538,
+"startColumn":  17,
+"endLine":  538,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'hocon'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Configuration\HoconTests.cs",
+"region":  {
+"startLine":  550,
+"startColumn":  17,
+"endLine":  550,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'hocon'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Configuration\HoconTests.cs",
+"region":  {
+"startLine":  565,
+"startColumn":  17,
+"endLine":  565,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'hocon'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Configuration\HoconTests.cs",
+"region":  {
+"startLine":  598,
+"startColumn":  17,
+"endLine":  598,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'hocon'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Configuration\HoconTests.cs",
+"region":  {
+"startLine":  611,
+"startColumn":  17,
+"endLine":  611,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'hocon'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Configuration\HoconTests.cs",
+"region":  {
+"startLine":  629,
+"startColumn":  17,
+"endLine":  629,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'hocon'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Configuration\HoconTests.cs",
+"region":  {
+"startLine":  636,
+"startColumn":  17,
+"endLine":  636,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'hocon'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Configuration\HoconTests.cs",
+"region":  {
+"startLine":  643,
+"startColumn":  17,
+"endLine":  643,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'includeHocon'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Configuration\HoconTests.cs",
+"region":  {
+"startLine":  647,
+"startColumn":  17,
+"endLine":  647,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'hocon'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Configuration\HoconTests.cs",
+"region":  {
+"startLine":  661,
+"startColumn":  17,
+"endLine":  661,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'includeHocon'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Configuration\HoconTests.cs",
+"region":  {
+"startLine":  665,
+"startColumn":  17,
+"endLine":  665,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'hocon'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Configuration\HoconTests.cs",
+"region":  {
+"startLine":  679,
+"startColumn":  17,
+"endLine":  679,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'includeHocon'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Configuration\HoconTests.cs",
+"region":  {
+"startLine":  683,
+"startColumn":  17,
+"endLine":  683,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'includeHocon2'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Configuration\HoconTests.cs",
+"region":  {
+"startLine":  690,
+"startColumn":  17,
+"endLine":  690,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'expected'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Dispatch\DispatchersSpec.cs",
+"region":  {
+"startLine":  122,
+"startColumn":  17,
+"endLine":  122,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'expected'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Dispatch\DispatchersSpec.cs",
+"region":  {
+"startLine":  132,
+"startColumn":  17,
+"endLine":  132,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'expected'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Dispatch\DispatchersSpec.cs",
+"region":  {
+"startLine":  142,
+"startColumn":  17,
+"endLine":  142,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'expected'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Dispatch\DispatchersSpec.cs",
+"region":  {
+"startLine":  154,
+"startColumn":  17,
+"endLine":  154,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'ttl'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\IO\SimpleDnsCacheSpec.cs",
+"region":  {
+"startLine":  76,
+"startColumn":  18,
+"endLine":  76,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'bufferSize'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\IO\TcpConnectionSpec.cs",
+"region":  {
+"startLine":  217,
+"startColumn":  21,
+"endLine":  217,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'message'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Serialization\SerializationSpec.cs",
+"region":  {
+"startLine":  167,
+"startColumn":  17,
+"endLine":  167,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'message'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Serialization\SerializationSpec.cs",
+"region":  {
+"startLine":  209,
+"startColumn":  17,
+"endLine":  209,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'message'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Serialization\SerializationSpec.cs",
+"region":  {
+"startLine":  216,
+"startColumn":  17,
+"endLine":  216,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'message'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Serialization\SerializationSpec.cs",
+"region":  {
+"startLine":  223,
+"startColumn":  17,
+"endLine":  223,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'message'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Serialization\SerializationSpec.cs",
+"region":  {
+"startLine":  230,
+"startColumn":  17,
+"endLine":  230,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'uri'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Serialization\SerializationSpec.cs",
+"region":  {
+"startLine":  434,
+"startColumn":  17,
+"endLine":  434,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'uri'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Serialization\SerializationSpec.cs",
+"region":  {
+"startLine":  443,
+"startColumn":  17,
+"endLine":  443,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'nullObj'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests\Util\PatternSpec.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  20,
+"endLine":  18,
+"endColumn":  27
+}
+}
+}
+]
+}

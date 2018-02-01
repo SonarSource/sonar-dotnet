@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'invalid'.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\TimeServer\TimeServer\Program.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  25,
+"endLine":  43,
+"endColumn":  32
+}
+}
+}
+]
+}

@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'many'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools.Tests\PublishSubscribe\DistributedPubSubMediatorSpec.cs",
+"region":  {
+"startLine":  637,
+"startColumn":  17,
+"endLine":  637,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'topic'.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools.Tests\PublishSubscribe\DistributedPubSubMediatorSpec.cs",
+"region":  {
+"startLine":  702,
+"startColumn":  25,
+"endLine":  702,
+"endColumn":  30
+}
+}
+}
+]
+}

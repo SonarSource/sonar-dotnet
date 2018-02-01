@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'pid'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.TestKit.Tests\LocalSnapshotStoreSpec.cs",
+"region":  {
+"startLine":  42,
+"startColumn":  17,
+"endLine":  42,
+"endColumn":  20
+}
+}
+}
+]
+}

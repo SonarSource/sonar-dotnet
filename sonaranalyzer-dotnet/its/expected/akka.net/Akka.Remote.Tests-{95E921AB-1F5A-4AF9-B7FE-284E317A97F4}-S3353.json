@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'msgCount'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests\AckedDeliverySpec.cs",
+"region":  {
+"startLine":  315,
+"startColumn":  17,
+"endLine":  315,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'deliveryProbability'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests\AckedDeliverySpec.cs",
+"region":  {
+"startLine":  316,
+"startColumn":  17,
+"endLine":  316,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'service'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests\RemoteDeployerSpec.cs",
+"region":  {
+"startLine":  45,
+"startColumn":  17,
+"endLine":  45,
+"endColumn":  24
+}
+}
+}
+]
+}

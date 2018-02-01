@@ -1,0 +1,654 @@
+{
+"issues":  [
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'inputText'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Cryptography\NoEncryptionProviderFixture.cs",
+"region":  {
+"startLine":  19,
+"startColumn":  17,
+"endLine":  19,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'inputText'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Cryptography\NoEncryptionProviderFixture.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  17,
+"endLine":  29,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'inputText'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Cryptography\RijndaelEncryptionProviderFixture.cs",
+"region":  {
+"startLine":  19,
+"startColumn":  17,
+"endLine":  19,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'inputText'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Cryptography\RijndaelEncryptionProviderFixture.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  17,
+"endLine":  29,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'inputText'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Cryptography\RijndaelEncryptionProviderFixture.cs",
+"region":  {
+"startLine":  40,
+"startColumn":  17,
+"endLine":  40,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'value'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\DynamicDictionaryValueFixture.cs",
+"region":  {
+"startLine":  84,
+"startColumn":  36,
+"endLine":  84,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'query'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Helpers\HttpUtilityFixture.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  17,
+"endLine":  15,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'query'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Helpers\HttpUtilityFixture.cs",
+"region":  {
+"startLine":  30,
+"startColumn":  8,
+"endLine":  30,
+"endColumn":  13
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'query'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Helpers\HttpUtilityFixture.cs",
+"region":  {
+"startLine":  45,
+"startColumn":  17,
+"endLine":  45,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'query'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Helpers\HttpUtilityFixture.cs",
+"region":  {
+"startLine":  60,
+"startColumn":  17,
+"endLine":  60,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'query'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Helpers\HttpUtilityFixture.cs",
+"region":  {
+"startLine":  75,
+"startColumn":  17,
+"endLine":  75,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'query'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Helpers\HttpUtilityFixture.cs",
+"region":  {
+"startLine":  90,
+"startColumn":  17,
+"endLine":  90,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'query'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Helpers\HttpUtilityFixture.cs",
+"region":  {
+"startLine":  104,
+"startColumn":  17,
+"endLine":  104,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'query'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Helpers\HttpUtilityFixture.cs",
+"region":  {
+"startLine":  118,
+"startColumn":  17,
+"endLine":  118,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'query'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Helpers\HttpUtilityFixture.cs",
+"region":  {
+"startLine":  131,
+"startColumn":  17,
+"endLine":  131,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'expected'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\HttpMultipartFixture.cs",
+"region":  {
+"startLine":  50,
+"startColumn":  17,
+"endLine":  50,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'expected'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\HttpMultipartFixture.cs",
+"region":  {
+"startLine":  80,
+"startColumn":  17,
+"endLine":  80,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'expected'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\HttpMultipartFixture.cs",
+"region":  {
+"startLine":  110,
+"startColumn":  17,
+"endLine":  110,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'expected'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\HttpMultipartFixture.cs",
+"region":  {
+"startLine":  141,
+"startColumn":  17,
+"endLine":  141,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'expected'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\HttpMultipartFixture.cs",
+"region":  {
+"startLine":  171,
+"startColumn":  17,
+"endLine":  171,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'body'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Json\JavaScriptSerializerFixture.cs",
+"region":  {
+"startLine":  145,
+"startColumn":  20,
+"endLine":  145,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'body'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Json\JavaScriptSerializerFixture.cs",
+"region":  {
+"startLine":  156,
+"startColumn":  20,
+"endLine":  156,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'serialized'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\JsonSerializerFixture.cs",
+"region":  {
+"startLine":  32,
+"startColumn":  17,
+"endLine":  32,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'json'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBodyDeserializers\JsonBodyDeserializerFixture.cs",
+"region":  {
+"startLine":  334,
+"startColumn":  17,
+"endLine":  334,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'input'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultConverters\FallbackConverterFixture.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  17,
+"endLine":  31,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'input'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultConverters\FallbackConverterFixture.cs",
+"region":  {
+"startLine":  66,
+"startColumn":  20,
+"endLine":  66,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'input'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultFieldNameConverterFixture.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  17,
+"endLine":  22,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'input'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultFieldNameConverterFixture.cs",
+"region":  {
+"startLine":  32,
+"startColumn":  17,
+"endLine":  32,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'request'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\NancyEngineFixture.cs",
+"region":  {
+"startLine":  109,
+"startColumn":  21,
+"endLine":  109,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'cookieName'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\RequestFixture.cs",
+"region":  {
+"startLine":  542,
+"startColumn":  17,
+"endLine":  542,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'cookieData'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\RequestFixture.cs",
+"region":  {
+"startLine":  543,
+"startColumn":  17,
+"endLine":  543,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'text'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Responses\TextResponseFixture.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  17,
+"endLine":  16,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'text'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Responses\TextResponseFixture.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  20,
+"endLine":  35,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'text'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Responses\TextResponseFixture.cs",
+"region":  {
+"startLine":  73,
+"startColumn":  20,
+"endLine":  73,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'text'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Responses\TextResponseFixture.cs",
+"region":  {
+"startLine":  110,
+"startColumn":  20,
+"endLine":  110,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'user'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Security\ClaimsPrincipalExtensionsFixture.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  29,
+"endLine":  18,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'requiredClaim'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Security\ClaimsPrincipalExtensionsFixture.cs",
+"region":  {
+"startLine":  45,
+"startColumn":  17,
+"endLine":  45,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'requiredClaim'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Security\ClaimsPrincipalExtensionsFixture.cs",
+"region":  {
+"startLine":  59,
+"startColumn":  17,
+"endLine":  59,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'requiredClaim'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Security\ClaimsPrincipalExtensionsFixture.cs",
+"region":  {
+"startLine":  73,
+"startColumn":  17,
+"endLine":  73,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'user'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Security\ClaimsPrincipalExtensionsFixture.cs",
+"region":  {
+"startLine":  86,
+"startColumn":  29,
+"endLine":  86,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'user'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Security\ClaimsPrincipalExtensionsFixture.cs",
+"region":  {
+"startLine":  156,
+"startColumn":  29,
+"endLine":  156,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'user'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Security\ClaimsPrincipalExtensionsFixture.cs",
+"region":  {
+"startLine":  218,
+"startColumn":  29,
+"endLine":  218,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'input'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Sessions\DefaultSessionObjectFormatterFixture.cs",
+"region":  {
+"startLine":  19,
+"startColumn":  17,
+"endLine":  19,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'input'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Sessions\DefaultSessionObjectFormatterFixture.cs",
+"region":  {
+"startLine":  41,
+"startColumn":  20,
+"endLine":  41,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'input'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Sessions\DefaultSessionObjectFormatterFixture.cs",
+"region":  {
+"startLine":  51,
+"startColumn":  20,
+"endLine":  51,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'urlAsString'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\UrlFixture.cs",
+"region":  {
+"startLine":  178,
+"startColumn":  20,
+"endLine":  178,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'viewName'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ViewEngines\DefaultViewLocatorFixture.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  20,
+"endLine":  28,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'context'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ViewEngines\DefaultViewResolverFixture.cs",
+"region":  {
+"startLine":  63,
+"startColumn":  33,
+"endLine":  63,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'viewName'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ViewEngines\DefaultViewResolverFixture.cs",
+"region":  {
+"startLine":  76,
+"startColumn":  20,
+"endLine":  76,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S3353",
+"message":  "Add the 'const' modifier to 'extensions'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ViewEngines\ResourceViewLocationProviderFixture.cs",
+"region":  {
+"startLine":  40,
+"startColumn":  33,
+"endLine":  40,
+"endColumn":  43
+}
+}
+}
+]
+}
