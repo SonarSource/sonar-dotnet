@@ -13,17 +13,49 @@ namespace Tests.Diagnostics1
         }
 
         [TestMethod]
-        [Ignore] // Reenable when something
+        [Ignore] // This test is ignored because 'blah blah'
         public void Foo2()
+        {
+        }
+
+        [Ignore, TestMethod] // This test is ignored because 'blah blah'
+        public void Foo3()
+        {
+        }
+
+        [TestMethod]
+        [Ignore("Ignored because reasons")]
+        public void Foo4()
         {
         }
 
         [TestMethod]
         [Ignore]
         [WorkItem(1234)]
-        public void Foo3()
+        public void Foo5()
         {
         }
+    }
+
+    [Ignore, TestClass]
+//   ^^^^^^ Noncompliant
+    class MsTestClass1
+    {
+    }
+
+    [Ignore]
+    class MsTestClass2 // No TestClass attribute
+    {
+    }
+
+    [Ignore, TestClass] // This test is ignored because 'blah blah'
+    class MsTestClass3
+    {
+    }
+
+    [Ignore("Ignored because reasons"), TestClass]
+    class MsTestClass4
+    {
     }
 }
 
@@ -41,7 +73,7 @@ namespace Tests.Diagnostics2
         }
 
         [Test]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.Ignore] // Reenable when something
+        [Microsoft.VisualStudio.TestTools.UnitTesting.Ignore] // This test is ignored because 'blah blah'
         public void Foo2()
         {
         }
@@ -61,7 +93,7 @@ namespace Tests.Diagnostics2
         }
 
         [TestCase("")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.Ignore] // Reenable when something
+        [Microsoft.VisualStudio.TestTools.UnitTesting.Ignore] // This test is ignored because 'blah blah'
         public void Foo5(string s)
         {
         }
@@ -75,7 +107,7 @@ namespace Tests.Diagnostics2
 
         [TestCaseSource("DivideCases")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.Ignore]
-        // Noncompliant@-1
+//       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Noncompliant
         public void DivideTest(int n, int d, int q)
         {
             Assert.AreEqual(q, n / d);
@@ -104,7 +136,7 @@ namespace Tests.Diagnostics3
         }
 
         [Fact]
-        [Ignore] // Reenable when something
+        [Ignore] // This test is ignored because 'blah blah'
         public void Foo2()
         {
         }
@@ -126,7 +158,7 @@ namespace Tests.Diagnostics3
 
         [Theory]
         [InlineData("")]
-        [Ignore] // Reenable when something
+        [Ignore] // This test is ignored because 'blah blah'
         public void Foo5(string s)
         {
         }
