@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 
 namespace Tests.Diagnostics
 {
@@ -91,6 +92,16 @@ namespace Tests.Diagnostics
         {
             a[0] = 42;
             b[0] = 42;
+        }
+    }
+
+    // https://github.com/SonarSource/sonar-csharp/issues/242
+    public class MyClass
+    {
+        [StructLayout(LayoutKind.Sequential)]
+        private class InteropMethodArgument
+        {
+            public uint number; // Compliant, we don't raise on members of classes with StructLayout attribute
         }
     }
 }
