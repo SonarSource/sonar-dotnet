@@ -50,7 +50,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var ifStatement = (IfStatementSyntax)c.Node;
                     if (ifStatement.Else != null ||
                         ifStatement.Parent is ElseClauseSyntax ||
-                        ifStatement.Ancestors().OfType<PropertyDeclarationSyntax>().Any())
+                        ifStatement.FirstAncestorOrSelf<PropertyDeclarationSyntax>() is PropertyDeclarationSyntax)
                     {
                         return;
                     }
