@@ -19,6 +19,7 @@
  */
 
 using System.Collections.Immutable;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -48,7 +49,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     var ifStatement = (IfStatementSyntax)c.Node;
                     if (ifStatement.Else != null ||
-                        ifStatement.Parent is ElseClauseSyntax)
+                        ifStatement.Parent is ElseClauseSyntax ||
+                        ifStatement.FirstAncestorOrSelf<PropertyDeclarationSyntax>() is PropertyDeclarationSyntax)
                     {
                         return;
                     }
