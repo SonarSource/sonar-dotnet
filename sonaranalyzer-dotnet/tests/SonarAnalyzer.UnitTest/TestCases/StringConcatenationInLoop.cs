@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 
 namespace Tests.Diagnostics
 {
@@ -7,7 +8,6 @@ namespace Tests.Diagnostics
         public StringConcatenationInLoop()
         {
             string s = "";
-            int i = 0;
             for (int i = 0; i < 50; i++)
             {
                 var sLoop = "";
@@ -21,6 +21,11 @@ namespace Tests.Diagnostics
             }
             s += "a";
 
+            while (true)
+            {
+                // See https://github.com/SonarSource/sonar-csharp/issues/1138
+                s = s ?? "b";
+            }
         }
     }
 }

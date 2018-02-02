@@ -60,6 +60,10 @@ namespace SonarAnalyzer.Rules.CSharp
             SyntaxKind.ForStatement,
             SyntaxKind.ForEachStatement);
 
+        private static readonly ISet<SyntaxKind> AddOperators = ImmutableHashSet.Create(
+            SyntaxKind.PlusToken,
+            SyntaxKind.PlusEqualsToken);
+
         private static readonly ImmutableArray<SyntaxKind> simpleAssignmentKinds =
             ImmutableArray.Create(SyntaxKind.SimpleAssignmentExpression);
 
@@ -71,5 +75,9 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override ImmutableArray<SyntaxKind> CompoundAssignmentKinds => compoundAssignmentKinds;
 
         protected sealed override Helpers.GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.CSharp.GeneratedCodeRecognizer.Instance;
+
+        protected override bool IsAddExpression(BinaryExpressionSyntax rightExpression) =>
+            rightExpression != null &&
+            rightExpression.OperatorToken.IsAnyKind(AddOperators);
     }
 }
