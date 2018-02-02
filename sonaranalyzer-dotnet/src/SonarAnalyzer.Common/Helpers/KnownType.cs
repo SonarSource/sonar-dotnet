@@ -199,6 +199,7 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_Runtime_InteropServices_InterfaceTypeAttribute = new KnownType("System.Runtime.InteropServices.InterfaceTypeAttribute");
         internal static readonly KnownType System_Runtime_InteropServices_OptionalAttribute = new KnownType("System.Runtime.InteropServices.OptionalAttribute");
         internal static readonly KnownType System_Runtime_InteropServices_SafeHandle = new KnownType("System.Runtime.InteropServices.SafeHandle");
+        internal static readonly KnownType System_Runtime_InteropServices_StructLayoutAttribute = new KnownType("System.Runtime.InteropServices.StructLayout");
         internal static readonly KnownType System_Runtime_Serialization_DataMemberAttribute = new KnownType("System.Runtime.Serialization.DataMemberAttribute");
         internal static readonly KnownType System_Runtime_Serialization_ISerializable = new KnownType("System.Runtime.Serialization.ISerializable");
         internal static readonly KnownType System_Runtime_Serialization_OnDeserializedAttribute = new KnownType("System.Runtime.Serialization.OnDeserializedAttribute");

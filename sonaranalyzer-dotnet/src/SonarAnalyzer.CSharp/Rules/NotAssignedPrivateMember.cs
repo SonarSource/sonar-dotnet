@@ -58,6 +58,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     var namedType = (INamedTypeSymbol)c.Symbol;
                     if (!namedType.IsClassOrStruct() ||
+                        namedType.GetAttributes().Any(IsStructLayoutAttribute) ||
                         namedType.ContainingType != null)
                     {
                         return;
@@ -244,6 +245,9 @@ namespace SonarAnalyzer.Rules.CSharp
 
             return false;
         }
+
+        private static bool IsStructLayoutAttribute(AttributeData attribute) =>
+            attribute.AttributeClass.Is(KnownType.System_Runtime_InteropServices_StructLayoutAttribute);
 
         private static readonly ISet<SyntaxKind> PreOrPostfixOpSyntaxKinds = ImmutableHashSet.Create(
             SyntaxKind.PostDecrementExpression,
