@@ -16,10 +16,10 @@ For reference, the possible headings are:
 ## Unreleased
 
 ### Notes
-* [All commits](https://github.com/SonarSource/sonar-csharp/compare/6.8.0.4636...HEAD)
+* [All commits](https://github.com/SonarSource/sonar-csharp/compare/6.8.1.4648...HEAD)
 
 
-## [6.8](https://github.com/SonarSource/sonar-csharp/releases/tag/6.8.0.4636)
+## [6.8.1](https://github.com/SonarSource/sonar-csharp/releases/tag/6.8.1.4648)
 
 ### New Features
 * [#1013](https://github.com/SonarSource/sonar-csharp/issues/1013) - Rule S138: Functions should not have too many lines of code
