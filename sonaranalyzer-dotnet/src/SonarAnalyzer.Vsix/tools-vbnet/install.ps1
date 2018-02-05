@@ -1,34 +1,7 @@
 ﻿param($installPath, $toolsPath, $package, $project)
 
-$invalidVsVersion = $false
-
 if ('14.0', '15.0' -notcontains $project.DTE.Version) {
-    $invalidVsVersion = $true
-}
-
-if ($project.DTE.Version -eq '14.0') {
-    $currentAppDomainBaseDir = [System.AppDomain]::CurrentDomain.BaseDirectory
-    $path = Join-Path $currentAppDomainBaseDir "msenv.dll"
-
-    if (Test-Path $path) {
-        $versionInfo = (Get-Item $path).VersionInfo
-        $fullVersion =  New-Object System.Version -ArgumentList @(
-            $versionInfo.FileMajorPart
-            $versionInfo.FileMinorPart
-            $versionInfo.FileBuildPart
-            $versionInfo.FilePrivatePart
-        )
-        $minVersion = [version]"14.0.25420.00"
-        if ($fullVersion -lt $minVersion) {
-            $invalidVsVersion = $true
-        }
-    } else {
-        $invalidVsVersion = $true
-    }
-}
-
-if ($invalidVsVersion) {
-    throw 'This package can only be installed on Visual Studio 2015 Update 3 or later.'
+    throw 'This package can only be installed on Visual Studio 2015  or Visual Studio 2017.'
 }
 
 if ($project.Object.AnalyzerReferences -eq $null) {
