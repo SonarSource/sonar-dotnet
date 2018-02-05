@@ -57,6 +57,10 @@ For reference, the possible headings are:
 * [#1126](https://github.com/SonarSource/sonar-csharp/issues/1126) - Fix S1607: Should not raise issues for [Ignore] attribute with a parameter
 * [#1138](https://github.com/SonarSource/sonar-csharp/issues/1138) - Fix S1643: check if expression is concatenation
 
+### External Contributor
+
+* [#1129](https://github.com/SonarSource/sonar-csharp/pull/1129) - Thanks @kvpt!
+
 
 ## [6.7.1](https://github.com/SonarSource/sonar-csharp/releases/tag/6.7.1.4347)
 
