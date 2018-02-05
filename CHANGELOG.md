@@ -15,10 +15,47 @@ For reference, the possible headings are:
 
 ## Unreleased
 
-## [6.8]()
+## [6.9]()
 
 ### Notes
-* [All commits](https://github.com/SonarSource/sonar-csharp/compare/6.7.1.4347...HEAD)
+* [All commits](https://github.com/SonarSource/sonar-csharp/compare/6.8.0.4636...HEAD)
+
+## [6.8](https://github.com/SonarSource/sonar-csharp/releases/tag/6.8.0.4636)
+
+### New Features
+* [#1013](https://github.com/SonarSource/sonar-csharp/issues/1013) - Rule S138: Functions should not have too many lines of code
+* [#1056](https://github.com/SonarSource/sonar-csharp/issues/1056) - Rule S4277: "Shared" parts should not be created with "new"
+* [#1058](https://github.com/SonarSource/sonar-csharp/issues/1058) - Rule S4210: Windows Forms entry points should be marked with STAThread
+* [#1059](https://github.com/SonarSource/sonar-csharp/issues/1059) - Rule S4200: Native methods should be wrapped
+* [#1060](https://github.com/SonarSource/sonar-csharp/issues/1060) - Rule S4159: Classes should implement their "ExportAttribute" interfaces
+* [#1063](https://github.com/SonarSource/sonar-csharp/issues/1063) - Rule S3343: Caller information parameters should come at the end of the parameter list
+* [#1064](https://github.com/SonarSource/sonar-csharp/issues/1064) - Rule S3464: Type inheritance should not be recursive
+* [#1065](https://github.com/SonarSource/sonar-csharp/issues/1065) - Rule S3353: Unchanged local variables should be "const"
+* [#1066](https://github.com/SonarSource/sonar-csharp/issues/1066) - Rule S3060: "is" should not be used with "this"
+* [#1067](https://github.com/SonarSource/sonar-csharp/issues/1067) - Rule S3366: "this" should not be exposed from constructors
+* [#1070](https://github.com/SonarSource/sonar-csharp/issues/1070) - Rule S4212: Serialization constructors should be secured
+* [#1071](https://github.com/SonarSource/sonar-csharp/issues/1071) - Rule S1147: Exit methods should not be called
+* [#1073](https://github.com/SonarSource/sonar-csharp/issues/1073) - Rule S3358: Ternary operators should not be nested
+* [#1075](https://github.com/SonarSource/sonar-csharp/issues/1075) - Rule S2302: 'nameof' should be used
+
+### Improvements
+* [#998](https://github.com/SonarSource/sonar-csharp/issues/998) - Reduce size of jar
+* [#1000](https://github.com/SonarSource/sonar-csharp/issues/1000) - Update S3440: "Variables should not be checked before assignment" should not raise on properties
+* [#1104](https://github.com/SonarSource/sonar-csharp/issues/1104) - Update S104: Multiline tokens should count as multiple lines
+* [#1106](https://github.com/SonarSource/sonar-csharp/issues/1106) - Update plugin properties to declare them as multi-values property
+* [#1112](https://github.com/SonarSource/sonar-csharp/issues/1112) - Update S3776: "Cognitive Complexity" should provide values for remediation function and cost
+* [#326](https://github.com/SonarSource/sonar-csharp/issues/326) - Fix S2930: Should report on all classes implementing IDisposable
+* [#1124](https://github.com/SonarSource/sonar-csharp/issues/1124) - Fix S1607: Should be applied for test classes as well
+* [#242](https://github.com/SonarSource/sonar-csharp/issues/242) - Fix S3459: False Positive with interop methods
+* [#710](https://github.com/SonarSource/sonar-csharp/issues/710) - Fix S1144: False positive for partial methods/classes
+* [#760](https://github.com/SonarSource/sonar-csharp/issues/760) - Fix S3881: "Implement IDisposable correctly" has inconsistent behaviour in partial classes
+* [#767](https://github.com/SonarSource/sonar-csharp/issues/767) - Fix S4158: "Empty collections" raises false positive when analyzed method has too many branches
+* [#777](https://github.com/SonarSource/sonar-csharp/issues/777) - Fix S2183: Add 2 exceptions to the rule to reduce the noise
+* [#789](https://github.com/SonarSource/sonar-csharp/issues/789) - Fix S3254: False positive when used in Expression
+* [#1038](https://github.com/SonarSource/sonar-csharp/issues/1038) - False positive in S3966: calls to arg.Dispose() are not handled correctly
+* [#1076](https://github.com/SonarSource/sonar-csharp/issues/1076) - Fix S3925: Should not raise on explicit implementation of ISerializable
+* [#1126](https://github.com/SonarSource/sonar-csharp/issues/1126) - Fix S1607: Should not raise issues for [Ignore] attribute with a parameter
+* [#1138](https://github.com/SonarSource/sonar-csharp/issues/1138) - Fix S1643: check if expression is concatenation
 
 
 ## [6.7.1](https://github.com/SonarSource/sonar-csharp/releases/tag/6.7.1.4347)
