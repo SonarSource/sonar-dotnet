@@ -15,10 +15,9 @@ For reference, the possible headings are:
 
 ## Unreleased
 
-## [6.9]()
-
 ### Notes
 * [All commits](https://github.com/SonarSource/sonar-csharp/compare/6.8.0.4636...HEAD)
+
 
 ## [6.8](https://github.com/SonarSource/sonar-csharp/releases/tag/6.8.0.4636)
 
