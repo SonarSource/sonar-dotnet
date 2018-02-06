@@ -19,6 +19,7 @@
  */
 
 extern alias csharp;
+extern alias vbnet;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
 
@@ -40,7 +41,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void DoNotPassSameValueAsMultipleArguments_VB()
         {
             Verifier.VerifyAnalyzer(@"TestCases\DoNotPassSameValueAsMultipleArguments.vb",
-                new SonarAnalyzer.Rules.VisualBasic.DoNotPassSameValueAsMultipleArguments());
+                new vbnet::SonarAnalyzer.Rules.VisualBasic.DoNotPassSameValueAsMultipleArguments());
         }
     }
 }
