@@ -18,7 +18,11 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
+using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Collections.ObjectModel;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.VisualBasic;
@@ -46,8 +50,9 @@ namespace SonarAnalyzer.Rules.VisualBasic
         protected override SyntaxKind InvocationExpressionSyntaxKind =>
             SyntaxKind.InvocationExpression;
 
-        protected override SeparatedSyntaxList<ArgumentSyntax> GetArguments(InvocationExpressionSyntax invocation) =>
-            invocation.ArgumentList.Arguments;
+        protected override IReadOnlyList<ArgumentSyntax> GetArguments(InvocationExpressionSyntax invocation) =>
+            (IReadOnlyList<ArgumentSyntax>)invocation.ArgumentList?.Arguments
+                ?? new ArgumentSyntax[0];
 
         protected override ITypeSymbol GetConvertedType(ArgumentSyntax argument, SemanticModel semanticModel) =>
             semanticModel.GetTypeInfo(argument.GetExpression()).ConvertedType;

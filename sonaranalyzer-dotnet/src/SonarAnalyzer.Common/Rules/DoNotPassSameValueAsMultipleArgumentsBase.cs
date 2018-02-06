@@ -45,7 +45,7 @@ namespace SonarAnalyzer.Rules
 
         protected abstract TSyntaxKind InvocationExpressionSyntaxKind { get; }
 
-        protected abstract SeparatedSyntaxList<TArgumentSyntax> GetArguments(TInvocationSyntax invocation);
+        protected abstract IReadOnlyList<TArgumentSyntax> GetArguments(TInvocationSyntax invocation);
 
         protected abstract bool IsLiteral(TArgumentSyntax argument);
 

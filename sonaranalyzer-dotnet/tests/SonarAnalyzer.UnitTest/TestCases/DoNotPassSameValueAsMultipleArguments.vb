@@ -25,6 +25,9 @@ Namespace Tests.Diagnostics
         Public Sub Bar(a As String, b As Integer)
         End Sub
 
+        Public Sub Parameterless()
+        End Sub
+
         Private x As String
 
         Public Sub Test()
@@ -77,6 +80,8 @@ Namespace Tests.Diagnostics
             DifferentUsages(a, a)
             Foo2(a, a) ' Noncompliant
 ' Secondary@-1;
+
+            Me.Parameterless
         End Sub
     End Class
 End Namespace
