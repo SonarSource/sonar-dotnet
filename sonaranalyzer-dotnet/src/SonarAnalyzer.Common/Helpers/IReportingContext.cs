@@ -18,22 +18,16 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
-using System.Linq;
 using Microsoft.CodeAnalysis;
 
 namespace SonarAnalyzer.Helpers
 {
-    internal class AnalysisRunContext : IAnalysisRunContext
+    public interface IReportingContext
     {
-        public AnalysisRunContext(SyntaxTree syntaxTree, IEnumerable<DiagnosticDescriptor> supportedDiagnostics)
-        {
-            SyntaxTree = syntaxTree;
-            SupportedDiagnostics = supportedDiagnostics ?? Enumerable.Empty<DiagnosticDescriptor>();
-        }
+        SyntaxTree SyntaxTree { get; }
 
-        public SyntaxTree SyntaxTree { get; }
+        Diagnostic Diagnostic { get; }
 
-        public IEnumerable<DiagnosticDescriptor> SupportedDiagnostics { get; }
+        void ReportDiagnostic(Diagnostic diagnostic);
     }
 }

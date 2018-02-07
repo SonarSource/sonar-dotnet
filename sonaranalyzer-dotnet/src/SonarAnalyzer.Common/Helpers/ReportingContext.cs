@@ -24,7 +24,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 
 namespace SonarAnalyzer.Helpers
 {
-    public struct ReportingContext
+    internal class ReportingContext : IReportingContext
     {
         private readonly Action<Diagnostic> contextSpecificReport;
 

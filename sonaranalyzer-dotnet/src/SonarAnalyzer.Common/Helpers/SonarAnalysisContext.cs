@@ -68,7 +68,7 @@ namespace SonarAnalyzer.Helpers
         /// Newer versions of SonarLint (4.0+) should use this delegate in order to control whether a rule action should be
         /// executed. This will allow to turn off a rule when the new ruleset disable it.
         /// </summary>
-        public static Func<AnalysisRunContext, bool> ShouldExecuteRuleFunc { get; set; }
+        public static Func<IAnalysisRunContext, bool> ShouldExecuteRuleFunc { get; set; }
 
         /// <summary>
         /// Newer versions of SonarLint (4.0+) should use this delegate in order to override the reporting action. This allows
@@ -77,7 +77,7 @@ namespace SonarAnalyzer.Helpers
         /// <remarks>
         /// This action will override the behavior provided by <see cref="ShouldDiagnosticBeReported"/>.
         /// </remarks>
-        public static Action<ReportingContext> ReportDiagnosticAction { get; set; }
+        public static Action<IReportingContext> ReportDiagnosticAction { get; set; }
 
         internal SonarAnalysisContext(AnalysisContext context, IEnumerable<DiagnosticDescriptor> supportedDiagnostics)
         {
