@@ -19,21 +19,14 @@
  */
 
 using System.Collections.Generic;
-using System.Linq;
 using Microsoft.CodeAnalysis;
 
 namespace SonarAnalyzer.Helpers
 {
-    internal class AnalysisRunContext : IAnalysisRunContext
+    public interface IAnalysisRunContext
     {
-        public AnalysisRunContext(SyntaxTree syntaxTree, IEnumerable<DiagnosticDescriptor> supportedDiagnostics)
-        {
-            SyntaxTree = syntaxTree;
-            SupportedDiagnostics = supportedDiagnostics ?? Enumerable.Empty<DiagnosticDescriptor>();
-        }
+        SyntaxTree SyntaxTree { get; }
 
-        public SyntaxTree SyntaxTree { get; }
-
-        public IEnumerable<DiagnosticDescriptor> SupportedDiagnostics { get; }
+        IEnumerable<DiagnosticDescriptor> SupportedDiagnostics { get; }
     }
 }
