@@ -54,32 +54,6 @@
 },
 {
 "id":  "S103",
-"message":  "Split this 418 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
-"region":  {
-"startLine":  694,
-"startColumn":  1,
-"endLine":  694,
-"endColumn":  419
-}
-}
-},
-{
-"id":  "S103",
-"message":  "Split this 355 characters long line (which is greater than 200 authorized).",
-"location":  {
-"uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\clsAPIRenamer.vb",
-"region":  {
-"startLine":  736,
-"startColumn":  1,
-"endLine":  736,
-"endColumn":  356
-}
-}
-},
-{
-"id":  "S103",
 "message":  "Split this 298 characters long line (which is greater than 200 authorized).",
 "location":  {
 "uri":  "sources\Ember-MM\Addons\generic.EmberCore.BulkRename\dlgBulkRename.vb",
