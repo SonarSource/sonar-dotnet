@@ -1,6 +1,6 @@
 # SonarC#
 
-[![Waffle.io - Columns and their card count](https://badge.waffle.io/SonarSource/sonar-csharp.svg?columns=all)](https://waffle.io/SonarSource/sonar-csharp)
+[![Waffle.io - Columns and their card count](https://badge.waffle.io/SonarSource/sonar-csharp.svg?columns=all)](https://waffle.io/SonarSource/sonar-csharp?source=SonarSource%2Fsonar-csharp)
 
 |Product|Quality Gate|Coverage|
 |:--:|:--:|:--:|
