@@ -28,7 +28,7 @@ namespace SonarAnalyzer.Helpers
 {
     public static class AnalysisContextExtensions
     {
-        private static readonly Regex VbNetErrorPattern = new Regex(@"\s+error\s*:",
+        private static readonly Regex VbNetErrorPattern = new Regex(@"\s+error\s*",
             RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
 
         public static void ReportDiagnosticWhenActive(this SyntaxNodeAnalysisContext context, Diagnostic diagnostic)
