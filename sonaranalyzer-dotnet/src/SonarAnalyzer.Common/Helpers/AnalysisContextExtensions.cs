@@ -20,7 +20,6 @@
 
 using System;
 using System.Linq;
-using System.Text.RegularExpressions;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 
@@ -28,9 +27,6 @@ namespace SonarAnalyzer.Helpers
 {
     public static class AnalysisContextExtensions
     {
-        private static readonly Regex VbNetErrorPattern = new Regex(@"\s+error\s*:",
-            RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
-
         public static void ReportDiagnosticWhenActive(this SyntaxNodeAnalysisContext context, Diagnostic diagnostic)
         {
             ReportWhenNotSuppressed(context.Node.SyntaxTree, diagnostic, d => context.ReportDiagnostic(d));
@@ -60,28 +56,9 @@ namespace SonarAnalyzer.Helpers
 
         private static void ReportWhenNotSuppressed(SyntaxTree tree, Diagnostic diagnostic, Action<Diagnostic> report)
         {
-            if (SonarAnalysisContext.ShouldDiagnosticBeReported(tree, diagnostic))
+            if (!VbcHelper.IsTriggeringVbcError(diagnostic) &&
+                SonarAnalysisContext.ShouldDiagnosticBeReported(tree, diagnostic))
             {
-                // VB.Net complier (VBC) post-process issues and will fail if the line contains the VbNetErrorPattern.
-                // See https://github.com/dotnet/roslyn/issues/5724
-                // As a workaround we will prevent reporting the issue if the issue is on a line with the error pattern and the
-                // language VB.Net
-                // TODO: Remove this workaround when issue is fixed on Microsoft side.
-                var rootNode = diagnostic.Location.SourceTree?.GetRoot();
-
-                if (rootNode != null &&
-                    rootNode.Language == LanguageNames.VisualBasic)
-                {
-                    var diagnosticNode = rootNode.FindNode(diagnostic.Location.SourceSpan);
-                    var lineContent = diagnosticNode?.ToString();
-
-                    if (lineContent != null &&
-                        VbNetErrorPattern.IsMatch(lineContent))
-                    {
-                        return;
-                    }
-                }
-
                 report(diagnostic);
             }
         }
