@@ -64,11 +64,11 @@ namespace SonarAnalyzer.Helpers
         private static void ReportDiagnostic(ReportingContext reportingContext)
         {
             // This is the new way SonarLint will handle how and what to report...
-            if (SonarAnalysisContext.ReportDiagnosticAction != null)
+            if (SonarAnalysisContext.ReportDiagnostic != null)
             {
                 Debug.Assert(SonarAnalysisContext.ShouldDiagnosticBeReported == null, "Not expecting SonarLint to set both the " +
                     "old and the new delegates.");
-                SonarAnalysisContext.ReportDiagnosticAction(reportingContext);
+                SonarAnalysisContext.ReportDiagnostic(reportingContext);
                 return;
             }
 
