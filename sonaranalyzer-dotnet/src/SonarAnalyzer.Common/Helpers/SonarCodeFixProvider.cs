@@ -35,19 +35,17 @@ namespace SonarAnalyzer.Helpers
 
             var syntaxRoot = await context.Document.GetSyntaxRootAsync(context.CancellationToken).ConfigureAwait(false);
 
-            /// This only disables codefixes when different versions are loaded
-            /// In case of analyzers, <see cref="SonarAnalysisContext.IsAnalysisDisabled"/> is sufficient, because Roslyn only
+            /// This only disables code-fixes when different versions are loaded
+            /// In case of analyzers, <see cref="SonarAnalysisContext.IsRegisteredActionEnabled"/> is sufficient, because Roslyn only
             /// creates a single instance from each assembly-version, so we can disable the VSIX analyzers
             /// In case of code fix providers Roslyn creates multiple instances of the code fix providers. Which means that
             /// we can only disable one of them if they are created from different assembly-versions.
-            /// If the VSIX and the Nuget has the same version, then code fixes show up multiple times, this ticket will fix
+            /// If the VSIX and the NuGet has the same version, then code fixes show up multiple times, this ticket will fix
             /// this problem: https://github.com/dotnet/roslyn/issues/4030
-            if (SonarAnalysisContext.IsAnalysisDisabled(syntaxRoot.SyntaxTree))
+            if (SonarAnalysisContext.IsRegisteredActionEnabled(syntaxRoot.SyntaxTree))
             {
-                return;
+                await RegisterCodeFixesAsync(syntaxRoot, context).ConfigureAwait(false);
             }
-
-            await RegisterCodeFixesAsync(syntaxRoot, context).ConfigureAwait(false);
         }
 
         protected abstract Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context);

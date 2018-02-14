@@ -51,7 +51,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [TestMethod]
         public void SonarAnalysis_WhenShouldAnalysisBeDisabledReturnsTrue_NoIssueReported()
         {
-            SonarAnalysisContext.ShouldAnalysisBeDisabled = tree => true;
+            SonarAnalysisContext.ShouldExecuteRegisteredAction = tree => false;
 
             try
             {
@@ -63,7 +63,62 @@ namespace SonarAnalyzer.UnitTest.Helpers
             }
             finally
             {
-                SonarAnalysisContext.ShouldAnalysisBeDisabled = null;
+                SonarAnalysisContext.ShouldExecuteRegisteredAction = null;
+            }
+        }
+
+        [TestMethod]
+        public void SonarAnalysis_WhenShouldRegisterContextActionReturnsFalse_NoIssueReported()
+        {
+            SonarAnalysisContext.ShouldRegisterContextAction = diags => false;
+
+            try
+            {
+                foreach (var testCase in TestCases)
+                {
+                    // TODO: We should find a way to ack the fact the action was not run
+                    Verifier.VerifyNoIssueReported(testCase.Path, testCase.Analyzer);
+                }
+            }
+            finally
+            {
+                SonarAnalysisContext.ShouldRegisterContextAction = null;
+            }
+        }
+
+        [TestMethod]
+        public void SonarAnalysis_WhenShouldRegisterContextActionReturnsTrue_IssuesReported()
+        {
+            SonarAnalysisContext.ShouldRegisterContextAction = diags => true;
+
+            try
+            {
+                foreach (var testCase in TestCases)
+                {
+                    Verifier.VerifyAnalyzer(testCase.Path, testCase.Analyzer);
+                }
+            }
+            finally
+            {
+                SonarAnalysisContext.ShouldRegisterContextAction = null;
+            }
+        }
+
+        [TestMethod]
+        public void SonarAnalysis_WhenShouldRegisterContextActionNotSet_IssuesReported()
+        {
+            SonarAnalysisContext.ShouldRegisterContextAction = null;
+
+            try
+            {
+                foreach (var testCase in TestCases)
+                {
+                    Verifier.VerifyAnalyzer(testCase.Path, testCase.Analyzer);
+                }
+            }
+            finally
+            {
+                SonarAnalysisContext.ShouldRegisterContextAction = null;
             }
         }
 
@@ -84,14 +139,14 @@ namespace SonarAnalyzer.UnitTest.Helpers
 
             try
             {
-                SonarAnalysisContext.ShouldAnalysisBeDisabled = tree =>
+                SonarAnalysisContext.ShouldExecuteRegisteredAction = tree =>
                     tree.FilePath.EndsWith(new FileInfo(TestCases[0].Path).Name, System.StringComparison.OrdinalIgnoreCase);
-                Verifier.VerifyNoIssueReported(TestCases[0].Path, TestCases[0].Analyzer);
-                Verifier.VerifyAnalyzer(TestCases[1].Path, TestCases[1].Analyzer);
+                Verifier.VerifyAnalyzer(TestCases[0].Path, TestCases[0].Analyzer);
+                Verifier.VerifyNoIssueReported(TestCases[1].Path, TestCases[1].Analyzer);
             }
             finally
             {
-                SonarAnalysisContext.ShouldAnalysisBeDisabled = null;
+                SonarAnalysisContext.ShouldExecuteRegisteredAction = null;
             }
         }
 
@@ -100,8 +155,8 @@ namespace SonarAnalyzer.UnitTest.Helpers
         {
             try
             {
-                SonarAnalysisContext.ShouldExecuteRuleFunc = context => context.SupportedDiagnostics
-                    .Any(diagnostic => diagnostic.Id != AnonymousDelegateEventUnsubscribe.DiagnosticId);
+                SonarAnalysisContext.ShouldRegisterContextAction = diagnostics =>
+                    diagnostics.Any(diagnostic => diagnostic.Id != AnonymousDelegateEventUnsubscribe.DiagnosticId);
 
                 foreach (var testCase in TestCases)
                 {
@@ -117,7 +172,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             }
             finally
             {
-                SonarAnalysisContext.ShouldExecuteRuleFunc = null;
+                SonarAnalysisContext.ShouldRegisterContextAction = null;
             }
         }
 
@@ -126,7 +181,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         {
             try
             {
-                SonarAnalysisContext.ReportDiagnosticAction = context =>
+                SonarAnalysisContext.ReportDiagnostic = context =>
                 {
                     if (context.Diagnostic.Id != AnonymousDelegateEventUnsubscribe.DiagnosticId)
                     {
@@ -156,7 +211,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             }
             finally
             {
-                SonarAnalysisContext.ReportDiagnosticAction = null;
+                SonarAnalysisContext.ReportDiagnostic = null;
             }
         }
     }

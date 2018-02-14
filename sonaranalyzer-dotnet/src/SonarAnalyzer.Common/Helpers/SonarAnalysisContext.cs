@@ -21,7 +21,6 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Diagnostics;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
@@ -33,7 +32,7 @@ namespace SonarAnalyzer.Helpers
     /// <see cref="AnalysisContext"/> to allow for specialized control over the analyzer.
     /// Here is the list of fine-grained changes we are doing:
     /// - Avoid duplicated issues when the analyzer NuGet (SonarAnalyzer) and the VSIX (SonarLint) are installed simultaneously.
-    /// - Allow a specific kind of ruleset for SonarLint (enable/disable a rule).
+    /// - Allow a specific kind of rule-set for SonarLint (enable/disable a rule).
     /// - Prevent reporting an issue when it was suppressed on SonarQube.
     /// </summary>
     public class SonarAnalysisContext
@@ -42,42 +41,45 @@ namespace SonarAnalyzer.Helpers
         private readonly IEnumerable<DiagnosticDescriptor> supportedDiagnostics;
 
         /// <summary>
-        /// This delegate is set by SonarLint (older than v4.0) when the projects have the NuGet package installed to avoid
-        /// duplicated analysis and issues. When both the NuGet and the VSIX are available, NuGet will take precendence and
-        /// VSIX will be inhibited.
+        /// This delegate is used to decide whether or not the <see cref="SonarDiagnosticAnalyzer"/> should be registered against
+        /// the <see cref="AnalysisContext"/>.
         /// </summary>
         /// <remarks>
-        /// This delegate should always be kept in sync with its usage in SonarLint for Visual Studio. See file:
-        /// https://github.com/SonarSource/sonarlint-visualstudio/blob/12119be2157542259fe3be7ce99bb14123092a0f/src/Integration.Vsix/SonarAnalyzerManager.cs
+        /// Currently this delegate is set by SonarLint (4.0+) Standalone and NewConnected to control the registration based on
+        /// the activation status of the rule.
         /// </remarks>
-        [Obsolete("This delegate is now obsolete, SonarLint should be using 'ShouldExecuteRuleFunc' instead.")]
-        public static Func<SyntaxTree, bool> ShouldAnalysisBeDisabled { get; set; }
+        public static Func<IEnumerable<DiagnosticDescriptor>, bool> ShouldRegisterContextAction { get; set; }
 
         /// <summary>
-        /// This delegate is set by SonarLint (older than v4.0) to provide a suppression mechanism (i.e. specific issues turned off
-        /// on SonarQube).
+        /// This delegate is called on all specific contexts, after the registration to the <see cref="AnalysisContext"/>, to
+        /// control whether or not the action should be executed.
         /// </summary>
         /// <remarks>
-        /// This delegate should always be kept in sync with its usage in SonarLint for Visual Studio. See file:
-        /// https://github.com/SonarSource/sonarlint-visualstudio/blob/34bbe9f9576337eeb578ebba78a61a1d9c6740ac/src/Integration.Vsix/Suppression/DelegateInjector.cs
+        /// Currently this delegate is set by SonarLint (4.0+) when the project has the NuGet package installed to avoid
+        /// duplicated analysis and issues. When both the NuGet and the VSIX are available, NuGet will take precedence and VSIX
+        /// will be inhibited.
+        /// </remarks>
+        public static Func<SyntaxTree, bool> ShouldExecuteRegisteredAction { get; set; }
+
+        /// <summary>
+        /// This delegates control whether or not a diagnostic should be reported to Roslyn.
+        /// </summary>
+        /// <remarks>
+        /// Currently this delegate is set by SonarLint (older than v4.0) to provide a suppression mechanism (i.e. specific
+        /// issues turned off on the bound SonarQube).
         /// </remarks>
         [Obsolete("This delegate is now obsolete, SonarLint should be using 'ReportDiagnosticAction' instead.")]
         public static Func<SyntaxTree, Diagnostic, bool> ShouldDiagnosticBeReported { get; set; }
 
         /// <summary>
-        /// Newer versions of SonarLint (4.0+) should use this delegate in order to control whether a rule action should be
-        /// executed. This will allow to turn off a rule when the new ruleset disable it.
-        /// </summary>
-        public static Func<IAnalysisRunContext, bool> ShouldExecuteRuleFunc { get; set; }
-
-        /// <summary>
-        /// Newer versions of SonarLint (4.0+) should use this delegate in order to override the reporting action. This allows
-        /// for advanced checked and control on SonarLint side.
+        /// This delegate is used to supersede the default reporting action.
+        /// When this delegate is set, the delegate set for <see cref="ShouldDiagnosticBeReported"/> is ignored.
         /// </summary>
         /// <remarks>
-        /// This action will override the behavior provided by <see cref="ShouldDiagnosticBeReported"/>.
+        /// Currently this delegate is set by SonarLint (4.0+) to control how the diagnostic should be reported to Roslyn
+        /// (including not being reported).
         /// </remarks>
-        public static Action<IReportingContext> ReportDiagnosticAction { get; set; }
+        public static Action<IReportingContext> ReportDiagnostic { get; set; }
 
         internal SonarAnalysisContext(AnalysisContext context, IEnumerable<DiagnosticDescriptor> supportedDiagnostics)
         {
@@ -86,56 +88,20 @@ namespace SonarAnalyzer.Helpers
         }
 
         internal void RegisterCodeBlockAction(Action<CodeBlockAnalysisContext> action) =>
-            context.RegisterCodeBlockAction(
-                c =>
-                {
-                    if (!IsAnalysisDisabled(c.GetSyntaxTree(), supportedDiagnostics))
-                    {
-                        action(c);
-                    }
-                });
+            RegisterContextAction(context.RegisterCodeBlockAction, action, c => c.GetSyntaxTree());
 
         internal void RegisterCodeBlockStartAction<TLanguageKindEnum>(Action<CodeBlockStartAnalysisContext<TLanguageKindEnum>> action)
              where TLanguageKindEnum : struct =>
-            context.RegisterCodeBlockStartAction<TLanguageKindEnum>(
-                c =>
-                {
-                    if (!IsAnalysisDisabled(c.GetSyntaxTree(), supportedDiagnostics))
-                    {
-                        action(c);
-                    }
-                });
+            RegisterContextAction(context.RegisterCodeBlockStartAction, action, c => c.GetSyntaxTree());
 
         internal void RegisterCompilationAction(Action<CompilationAnalysisContext> action) =>
-            context.RegisterCompilationAction(
-                c =>
-                {
-                    if (!IsAnalysisDisabled(c.GetSyntaxTree(), supportedDiagnostics))
-                    {
-                        action(c);
-
-                    }
-                });
+            RegisterContextAction(context.RegisterCompilationAction, action, c => c.GetSyntaxTree());
 
         public void RegisterCompilationStartAction(Action<CompilationStartAnalysisContext> action) =>
-            context.RegisterCompilationStartAction(
-                c =>
-                {
-                    if (!IsAnalysisDisabled(c.GetSyntaxTree(), supportedDiagnostics))
-                    {
-                        action(c);
-                    }
-                });
+            RegisterContextAction(context.RegisterCompilationStartAction, action, c => c.GetSyntaxTree());
 
         internal void RegisterSemanticModelAction(Action<SemanticModelAnalysisContext> action) =>
-            context.RegisterSemanticModelAction(
-                c =>
-                {
-                    if (!IsAnalysisDisabled(c.GetSyntaxTree(), supportedDiagnostics))
-                    {
-                        action(c);
-                    }
-                });
+            RegisterContextAction(context.RegisterSemanticModelAction, action, c => c.GetSyntaxTree());
 
         internal void RegisterSyntaxNodeAction<TLanguageKindEnum>(Action<SyntaxNodeAnalysisContext> action,
             ImmutableArray<TLanguageKindEnum> syntaxKinds)
@@ -145,57 +111,49 @@ namespace SonarAnalyzer.Helpers
         internal void RegisterSyntaxNodeAction<TLanguageKindEnum>(Action<SyntaxNodeAnalysisContext> action,
             params TLanguageKindEnum[] syntaxKinds)
             where TLanguageKindEnum : struct =>
-            context.RegisterSyntaxNodeAction(
-                c =>
-                {
-                    if (!IsAnalysisDisabled(c.GetSyntaxTree(), supportedDiagnostics))
-                    {
-                        action(c);
-                    }
-                }, syntaxKinds);
+            RegisterContextAction(act => context.RegisterSyntaxNodeAction(act, syntaxKinds), action, c => c.GetSyntaxTree());
 
         internal void RegisterSyntaxTreeAction(Action<SyntaxTreeAnalysisContext> action) =>
-            context.RegisterSyntaxTreeAction(
-                c =>
-                {
-                    if (!IsAnalysisDisabled(c.GetSyntaxTree(), supportedDiagnostics))
-                    {
-                        action(c);
-                    }
-                });
+            RegisterContextAction(context.RegisterSyntaxTreeAction, action, c => c.GetSyntaxTree());
 
         internal void RegisterSymbolAction(Action<SymbolAnalysisContext> action, ImmutableArray<SymbolKind> symbolKinds) =>
             RegisterSymbolAction(action, symbolKinds.ToArray());
 
         public void RegisterSymbolAction(Action<SymbolAnalysisContext> action, params SymbolKind[] symbolKinds) =>
-            context.RegisterSymbolAction(
-                c =>
-                {
-                    if (!IsAnalysisDisabled(c.GetSyntaxTree(), supportedDiagnostics))
-                    {
-                        action(c);
-                    }
-                }, symbolKinds);
+            RegisterContextAction(act => context.RegisterSymbolAction(act, symbolKinds), action, c => c.GetSyntaxTree());
 
-        internal static bool IsAnalysisDisabled(SyntaxTree tree, IEnumerable<DiagnosticDescriptor> supportedDiagnostics = null)
+        private void RegisterContextAction<TContext>(Action<Action<TContext>> registrationAction, Action<TContext> registeredAction,
+            Func<TContext, SyntaxTree> getSyntaxTree)
         {
-            // This is the new way SonarLint will handle whether or not the analysis should be performed...
-            // (checking `supportedDiagnostics != null` is to force providing the old behavior for SonarCodeFixProvider)
-            if (ShouldExecuteRuleFunc != null &&
-                supportedDiagnostics != null)
+            /*
+             * For performance reasons, we don't want to register callbacks for rules that should not be run. However, we don't
+             * necessarily have enough information to make the decision up front, so the check is broken into two parts:
+             *
+             * 1.   Pre-registration: at this point we only know the rules that are being registered. If we can decide from the
+             *      diagnostic descriptors that a rule should not be run then we won't register the callback with the analysis
+             *      context.
+             *
+             * 2.   Post-registration: we are now being called back by the analysis context, so we now have access to the syntax
+             *      tree (and project) that are being analyzed, and can use that information to decide whether to execute the
+             *      logic of the rule.
+             */
+
+            if (ShouldRegisterContextAction?.Invoke(this.supportedDiagnostics) != false)
             {
-                Debug.Assert(ShouldAnalysisBeDisabled == null, "Not expecting SonarLint to set both the old and the new" +
-                    "delegates.");
-
-                // If any of the diagnostic is enabled then allow to run the rule action BUT filter out at the time when the
-                // issue is being reported.
-                return !ShouldExecuteRuleFunc(new AnalysisRunContext(tree, supportedDiagnostics));
+                registrationAction(
+                    c =>
+                    {
+                        if (IsRegisteredActionEnabled(getSyntaxTree(c)))
+                        {
+                            registeredAction(c);
+                        }
+                    });
             }
-
-            // ... but for compatibility purposes we need to keep handling the old-fashioned way
-            return tree != null &&
-                ShouldAnalysisBeDisabled != null &&
-                ShouldAnalysisBeDisabled(tree);
         }
+
+        internal static bool IsRegisteredActionEnabled(SyntaxTree tree) =>
+            ShouldExecuteRegisteredAction == null ||
+            tree == null ||
+            ShouldExecuteRegisteredAction(tree);
     }
 }
