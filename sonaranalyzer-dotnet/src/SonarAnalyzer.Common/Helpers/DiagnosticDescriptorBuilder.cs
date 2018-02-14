@@ -104,13 +104,8 @@ namespace SonarAnalyzer.Helpers
             throw new NotSupportedException($"Not supported severity");
         }
 
-        private static DiagnosticSeverity ToDiagnosticSeverity(this Severity severity)
-        {
-            return severity.ToDiagnosticSeverity(IdeVisibility.Visible);
-        }
-
         private static DiagnosticSeverity ToDiagnosticSeverity(this Severity severity,
-            IdeVisibility ideVisibility)
+            IdeVisibility ideVisibility = IdeVisibility.Visible)
         {
             switch (severity)
             {
