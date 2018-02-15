@@ -125,7 +125,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         {
             var mockedResourceManager = new Mock<ResourceManager>();
             mockedResourceManager.Setup(x => x.GetString("HelpLinkFormat")).Returns("bar");
-            mockedResourceManager.Setup(x => x.GetString("Language")).Returns(LanguageValue);
+            mockedResourceManager.Setup(x => x.GetString("RoslynLanguage")).Returns(LanguageValue);
 
             mockedResourceManager.Setup(x => x.GetString($"{diagnosticId}_Title")).Returns("title");
             mockedResourceManager.Setup(x => x.GetString($"{diagnosticId}_Category")).Returns("category");

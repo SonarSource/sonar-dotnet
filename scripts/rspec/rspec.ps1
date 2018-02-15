@@ -207,11 +207,11 @@ function CreateStringResources($lang, $rules) {
         }
     }
 
-    [void]$resources.Add("HelpLinkFormat=https://rules.sonarsource.com/$($helpLanguageMap.Get_Item($lang))/RSPEC-{0}")
-    [void]$resources.Add("Language=$($roslynLanguageMap.Get_Item($lang))")
-
     # improve readability of the generated file
     [void]$resources.Sort()
+
+    [void]$resources.Add("HelpLinkFormat=https://rules.sonarsource.com/$($helpLanguageMap.Get_Item($lang))/RSPEC-{0}")
+    [void]$resources.Add("RoslynLanguage=$($roslynLanguageMap.Get_Item($lang))")
 
     $rawResourcesPath = "${PSScriptRoot}\\${lang}_strings.restext"
     $resourcesPath = "${sonaranalyzerPath}\\src\\$($projectsMap.Get_Item($lang))\\RspecStrings.resx"

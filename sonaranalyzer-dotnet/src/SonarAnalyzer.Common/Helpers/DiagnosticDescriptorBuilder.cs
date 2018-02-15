@@ -90,7 +90,7 @@ namespace SonarAnalyzer.Helpers
                 yield return WellKnownDiagnosticTags.Unnecessary;
             }
 
-            yield return resourceManager.GetString("Language");
+            yield return resourceManager.GetString("RoslynLanguage");
         }
 
         private static Severity ParseSeverity(string severity)
