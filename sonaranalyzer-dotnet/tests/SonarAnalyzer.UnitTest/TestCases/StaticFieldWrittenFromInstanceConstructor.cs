@@ -7,6 +7,7 @@ namespace SonarAnalyzer.UnitTest.TestCases
         private static DateTime dateOfBirth;
 //                              ^^^^^^^^^^^ Secondary [0]
         private static int expectedFingers; // Secondary [1]
+        private static Person instance; // Secondary [2]
 
         public Person(DateTime birthday)
         {
@@ -14,6 +15,7 @@ namespace SonarAnalyzer.UnitTest.TestCases
 //          ^^^^^^^^^^^^^
             expectedFingers = 10;  // Noncompliant [1] {{Remove this assignment of 'expectedFingers' or initialize it statically.}}
 //          ^^^^^^^^^^^^^^^^^
+            instance = this; // Noncompliant [2]
         }
 
         public Person() : this(DateTime.Now)

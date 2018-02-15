@@ -23,6 +23,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using FluentAssertions;
+using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
@@ -133,6 +134,28 @@ namespace SonarAnalyzer.UnitTest.Common
                 .SelectMany(analyzer => analyzer.SupportedDiagnostics)
                 .ToList()
                 .ForEach(diagnostic => diagnostic.IsEnabledByDefault.Should().BeTrue());
+        }
+
+        [TestMethod]
+        public void AllCSharpRules_HaveCSharpTag()
+        {
+            new RuleFinder()
+                .GetAnalyzerTypes(AnalyzerLanguage.CSharp)
+                .Select(type => (DiagnosticAnalyzer)Activator.CreateInstance(type))
+                .SelectMany(analyzer => analyzer.SupportedDiagnostics)
+                .ToList()
+                .ForEach(diagnostic => diagnostic.CustomTags.Should().Contain(LanguageNames.CSharp));
+        }
+
+        [TestMethod]
+        public void AllVbNetRules_HaveVbNetTag()
+        {
+            new RuleFinder()
+                .GetAnalyzerTypes(AnalyzerLanguage.VisualBasic)
+                .Select(type => (DiagnosticAnalyzer)Activator.CreateInstance(type))
+                .SelectMany(analyzer => analyzer.SupportedDiagnostics)
+                .ToList()
+                .ForEach(diagnostic => diagnostic.CustomTags.Should().Contain(LanguageNames.VisualBasic));
         }
     }
 }

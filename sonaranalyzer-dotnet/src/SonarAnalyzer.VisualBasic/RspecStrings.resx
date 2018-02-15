@@ -850,7 +850,7 @@
     <value>Blocker Code Smell</value>
   </data>
   <data name="S2178_Description" xml:space="preserve">
-    <value>The use of non-short-circuit logic in a boolean context is likely a mistake - one that could cause serious program errors as conditions are evaluated under the wrong circumstances.</value>
+    <value>The use of non-short-circuit logic in a boolean context is likely a mistake - one that could cause serious program errors as conditions are evaluated under the wrong circumstances. </value>
   </data>
   <data name="S2178_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -1982,5 +1982,8 @@
   </data>
   <data name="HelpLinkFormat" xml:space="preserve">
     <value>https://rules.sonarsource.com/vbnet/RSPEC-{0}</value>
+  </data>
+  <data name="RoslynLanguage" xml:space="preserve">
+    <value>Visual Basic</value>
   </data>
 </root>

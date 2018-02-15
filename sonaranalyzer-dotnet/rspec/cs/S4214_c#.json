@@ -7,7 +7,7 @@
     "constantCost": "2min"
   },
   "tags": [
-    
+    "pinvoke"
   ],
   "defaultSeverity": "Major",
   "ruleSpecification": "RSPEC-4214",

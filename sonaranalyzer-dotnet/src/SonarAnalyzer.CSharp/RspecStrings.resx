@@ -163,7 +163,7 @@
     <value>Critical</value>
   </data>
   <data name="S1006_Tags" xml:space="preserve">
-    <value>misra,cert,pitfall</value>
+    <value>misra,pitfall</value>
   </data>
   <data name="S1006_Title" xml:space="preserve">
     <value>Method overrides should not change parameter defaults</value>
@@ -799,7 +799,7 @@
     <value>Major</value>
   </data>
   <data name="S1144_Tags" xml:space="preserve">
-    <value>cert,unused</value>
+    <value>unused</value>
   </data>
   <data name="S1144_Title" xml:space="preserve">
     <value>Unused private types or members should be removed</value>
@@ -2419,7 +2419,7 @@
     <value>Minor</value>
   </data>
   <data name="S2183_Tags" xml:space="preserve">
-    <value>cert</value>
+    <value />
   </data>
   <data name="S2183_Title" xml:space="preserve">
     <value>Ints and longs should not be shifted by zero or more than their number of bits-1</value>
@@ -3796,7 +3796,7 @@
     <value>Minor</value>
   </data>
   <data name="S2737_Tags" xml:space="preserve">
-    <value>cert,unused,finding,clumsy</value>
+    <value>unused,finding,clumsy</value>
   </data>
   <data name="S2737_Title" xml:space="preserve">
     <value>"catch" clauses should do more than rethrow</value>
@@ -4363,7 +4363,7 @@
     <value>Major</value>
   </data>
   <data name="S3168_Tags" xml:space="preserve">
-    <value>multi-threading</value>
+    <value>multi-threading,async-await</value>
   </data>
   <data name="S3168_Title" xml:space="preserve">
     <value>"async" methods should not return "void"</value>
@@ -4606,7 +4606,7 @@
     <value>Minor</value>
   </data>
   <data name="S3235_Tags" xml:space="preserve">
-    <value>cert,unused,finding</value>
+    <value>unused,finding</value>
   </data>
   <data name="S3235_Title" xml:space="preserve">
     <value>Redundant parentheses should not be used</value>
@@ -4714,7 +4714,7 @@
     <value>Minor</value>
   </data>
   <data name="S3241_Tags" xml:space="preserve">
-    <value>design,cert,unused</value>
+    <value>design,unused</value>
   </data>
   <data name="S3241_Title" xml:space="preserve">
     <value>Methods should not return values that are never used</value>
@@ -5011,7 +5011,7 @@
     <value>Minor</value>
   </data>
   <data name="S3261_Tags" xml:space="preserve">
-    <value>cert,unused</value>
+    <value>unused</value>
   </data>
   <data name="S3261_Title" xml:space="preserve">
     <value>Namespaces should not be empty</value>
@@ -8320,7 +8320,7 @@
     <value>Blocker</value>
   </data>
   <data name="S4159_Tags" xml:space="preserve">
-    <value />
+    <value>mef,pitfall</value>
   </data>
   <data name="S4159_Title" xml:space="preserve">
     <value>Classes should implement their "ExportAttribute" interfaces</value>
@@ -8374,7 +8374,7 @@
     <value>Major</value>
   </data>
   <data name="S4210_Tags" xml:space="preserve">
-    <value>pitfall</value>
+    <value>winforms,pitfall</value>
   </data>
   <data name="S4210_Title" xml:space="preserve">
     <value>Windows Forms entry points should be marked with STAThread</value>
@@ -8401,7 +8401,7 @@
     <value>Critical</value>
   </data>
   <data name="S4212_Tags" xml:space="preserve">
-    <value>security</value>
+    <value>serialization,security</value>
   </data>
   <data name="S4212_Title" xml:space="preserve">
     <value>Serialization constructors should be secured</value>
@@ -8428,7 +8428,7 @@
     <value>Major</value>
   </data>
   <data name="S4214_Tags" xml:space="preserve">
-    <value />
+    <value>pinvoke</value>
   </data>
   <data name="S4214_Title" xml:space="preserve">
     <value>"P/Invoke" methods should not be visible</value>
@@ -8455,7 +8455,7 @@
     <value>Major</value>
   </data>
   <data name="S4220_Tags" xml:space="preserve">
-    <value>pitfall</value>
+    <value>event,pitfall</value>
   </data>
   <data name="S4220_Title" xml:space="preserve">
     <value>Events should have proper arguments</value>
@@ -8536,7 +8536,7 @@
     <value>Major</value>
   </data>
   <data name="S4260_Tags" xml:space="preserve">
-    <value />
+    <value>xaml,wpf</value>
   </data>
   <data name="S4260_Title" xml:space="preserve">
     <value>"ConstructorArgument" parameters should exist in constructors</value>
@@ -8545,7 +8545,7 @@
     <value>BUG</value>
   </data>
   <data name="S4277_Category" xml:space="preserve">
-    <value>Major Code Smell</value>
+    <value>Critical Bug</value>
   </data>
   <data name="S4277_Description" xml:space="preserve">
     <value>Marking a class with PartCreationPolicy(CreationPolicy.Shared), which is part of Managed Extensibility Framework (MEF), means that a single, shared instance of the exported object will be created. Therefore it doesn't make sense to create new instances using the constructor and it will most likely result in unexpected behaviours.</value>
@@ -8560,16 +8560,16 @@
     <value>5min</value>
   </data>
   <data name="S4277_Severity" xml:space="preserve">
-    <value>Major</value>
+    <value>Critical</value>
   </data>
   <data name="S4277_Tags" xml:space="preserve">
-    <value>pitfall</value>
+    <value>mef,pitfall</value>
   </data>
   <data name="S4277_Title" xml:space="preserve">
     <value>"Shared" parts should not be created with "new"</value>
   </data>
   <data name="S4277_Type" xml:space="preserve">
-    <value>CODE_SMELL</value>
+    <value>BUG</value>
   </data>
   <data name="S818_Category" xml:space="preserve">
     <value>Minor Code Smell</value>
@@ -8654,5 +8654,8 @@
   </data>
   <data name="HelpLinkFormat" xml:space="preserve">
     <value>https://rules.sonarsource.com/csharp/RSPEC-{0}</value>
+  </data>
+  <data name="RoslynLanguage" xml:space="preserve">
+    <value>C#</value>
   </data>
 </root>

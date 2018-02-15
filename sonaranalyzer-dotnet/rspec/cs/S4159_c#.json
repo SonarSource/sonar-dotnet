@@ -7,7 +7,8 @@
     "constantCost": "15min"
   },
   "tags": [
-    
+    "mef",
+    "pitfall"
   ],
   "defaultSeverity": "Blocker",
   "ruleSpecification": "RSPEC-4159",

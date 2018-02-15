@@ -1,15 +1,16 @@
 {
   "title": "\"Shared\" parts should not be created with \"new\"",
-  "type": "CODE_SMELL",
+  "type": "BUG",
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",
     "constantCost": "5min"
   },
   "tags": [
+    "mef",
     "pitfall"
   ],
-  "defaultSeverity": "Major",
+  "defaultSeverity": "Critical",
   "ruleSpecification": "RSPEC-4277",
   "sqKey": "S4277"
 }

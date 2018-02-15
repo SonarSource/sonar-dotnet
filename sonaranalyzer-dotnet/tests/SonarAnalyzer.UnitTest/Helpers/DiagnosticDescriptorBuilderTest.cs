@@ -33,6 +33,8 @@ namespace SonarAnalyzer.UnitTest.Helpers
     [TestClass]
     public class DiagnosticDescriptorBuilderTest
     {
+        private const string LanguageValue = "language";
+
         [TestMethod]
         public void GetHelpLink_CSharp()
         {
@@ -63,7 +65,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         }
 
         [TestMethod]
-        public void GetDescriptor_WhenIsActivatedByDefaultAndIdeVisibilityNotHidden_HasOnlySonarWayTag()
+        public void GetDescriptor_WhenIsActivatedByDefaultAndIdeVisibilityNotHidden_HasOnlySonarWayAndLanguageTags()
         {
             // Arrange
             var diagnosticId = "foo";
@@ -73,11 +75,11 @@ namespace SonarAnalyzer.UnitTest.Helpers
             var result = DiagnosticDescriptorBuilder.GetDescriptor(diagnosticId, "", mockedResourceManager);
 
             // Assert
-            result.CustomTags.Should().ContainSingle(DiagnosticTagsHelper.SonarWayTag);
+            result.CustomTags.Should().OnlyContain(DiagnosticTagsHelper.SonarWayTag, LanguageValue);
         }
 
         [TestMethod]
-        public void GetDescriptor_WhenIsNotActivatedByDefaultAndIdeVisibilityNotHidden_IsEmpty()
+        public void GetDescriptor_WhenIsNotActivatedByDefaultAndIdeVisibilityNotHidden_ContainsOnlyLanguage()
         {
             // Arrange
             var diagnosticId = "foo";
@@ -87,11 +89,11 @@ namespace SonarAnalyzer.UnitTest.Helpers
             var result = DiagnosticDescriptorBuilder.GetDescriptor(diagnosticId, "", mockedResourceManager);
 
             // Assert
-            result.CustomTags.Should().BeEmpty();
+            result.CustomTags.Should().OnlyContain(LanguageValue);
         }
 
         [TestMethod]
-        public void GetDescriptor_WhenIsActivatedByDefaultAndIdeVisibilityIsHidden_HasSonarWayAndUnnecessaryTags()
+        public void GetDescriptor_WhenIsActivatedByDefaultAndIdeVisibilityIsHidden_HasSonarWayAndUnnecessaryAndLanguageTags()
         {
             // Arrange
             var diagnosticId = "foo";
@@ -101,11 +103,12 @@ namespace SonarAnalyzer.UnitTest.Helpers
             var result = DiagnosticDescriptorBuilder.GetDescriptor(diagnosticId, "", IdeVisibility.Hidden, mockedResourceManager);
 
             // Assert
-            result.CustomTags.Should().Contain(DiagnosticTagsHelper.SonarWayTag, WellKnownDiagnosticTags.Unnecessary);
+            result.CustomTags.Should().OnlyContain(DiagnosticTagsHelper.SonarWayTag, WellKnownDiagnosticTags.Unnecessary,
+                LanguageValue);
         }
 
         [TestMethod]
-        public void GetDescriptor_WhenIsNotActivatedByDefaultAndIdeVisibilityIsHidden_HasOnlyUnnecessaryTag()
+        public void GetDescriptor_WhenIsNotActivatedByDefaultAndIdeVisibilityIsHidden_HasOnlyUnnecessaryAndLanguageTags()
         {
             // Arrange
             var diagnosticId = "foo";
@@ -115,13 +118,14 @@ namespace SonarAnalyzer.UnitTest.Helpers
             var result = DiagnosticDescriptorBuilder.GetDescriptor(diagnosticId, "", IdeVisibility.Hidden, mockedResourceManager);
 
             // Assert
-            result.CustomTags.Should().ContainSingle(WellKnownDiagnosticTags.Unnecessary);
+            result.CustomTags.Should().OnlyContain(WellKnownDiagnosticTags.Unnecessary, LanguageValue);
         }
 
         private ResourceManager CreateMockedResourceManager(string diagnosticId, bool isActivatedByDefault)
         {
             var mockedResourceManager = new Mock<ResourceManager>();
             mockedResourceManager.Setup(x => x.GetString("HelpLinkFormat")).Returns("bar");
+            mockedResourceManager.Setup(x => x.GetString("RoslynLanguage")).Returns(LanguageValue);
 
             mockedResourceManager.Setup(x => x.GetString($"{diagnosticId}_Title")).Returns("title");
             mockedResourceManager.Setup(x => x.GetString($"{diagnosticId}_Category")).Returns("category");

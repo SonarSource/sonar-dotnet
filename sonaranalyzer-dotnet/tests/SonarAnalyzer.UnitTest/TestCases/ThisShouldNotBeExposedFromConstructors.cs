@@ -8,6 +8,10 @@ namespace Tests.Diagnostics
     {
         public Program()
         {
+            // Fields are handled by S3010
+            privateField = this;
+            publicField = this;
+
             StaticMethod(null);
             StaticMethod(this);
             StaticMethod(((this)));
@@ -50,6 +54,9 @@ namespace Tests.Diagnostics
         public void InstanceMethod(Program program) { }
 
         public Program InstanceProperty { get; set; }
+
+        private static Program privateField;
+        public static Program publicField;
     }
 
     static class Other
