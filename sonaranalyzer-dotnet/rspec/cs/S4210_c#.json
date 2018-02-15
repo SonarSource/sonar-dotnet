@@ -8,6 +8,7 @@
     "linearFactor": null
   },
   "tags": [
+    "winforms",
     "pitfall"
   ],
   "defaultSeverity": "Major",

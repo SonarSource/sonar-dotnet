@@ -94,6 +94,12 @@ $helpLanguageMap = @{
     "vbnet" = "vbnet";
 }
 
+# Values have to match the ones from Microsoft.CodeAnalysis.LanguageNames
+$roslynLanguageMap = @{
+    "cs" = "C#";
+    "vbnet" = "Visual Basic";
+}
+
 # Returns the path to the folder where the RSPEC html and json files for the specified language will be downloaded.
 function GetRspecDownloadPath($lang) {
     $rspecFolder = "${sonaranalyzerPath}\\rspec\\${lang}"
@@ -201,10 +207,11 @@ function CreateStringResources($lang, $rules) {
         }
     }
 
+    [void]$resources.Add("HelpLinkFormat=https://rules.sonarsource.com/$($helpLanguageMap.Get_Item($lang))/RSPEC-{0}")
+    [void]$resources.Add("Language=$($roslynLanguageMap.Get_Item($lang))")
+
     # improve readability of the generated file
     [void]$resources.Sort()
-
-    [void]$resources.Add("HelpLinkFormat=https://rules.sonarsource.com/$($helpLanguageMap.Get_Item($lang))/RSPEC-{0}")
 
     $rawResourcesPath = "${PSScriptRoot}\\${lang}_strings.restext"
     $resourcesPath = "${sonaranalyzerPath}\\src\\$($projectsMap.Get_Item($lang))\\RspecStrings.resx"

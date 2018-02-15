@@ -47,7 +47,7 @@ namespace SonarAnalyzer.Helpers
                 isEnabledByDefault: true, // We want to have all rules enabled by default
                 helpLinkUri: GetHelpLink(resourceManager, diagnosticId),
                 description: resourceManager.GetString($"{diagnosticId}_Description"),
-                customTags: BuildCustomTags(diagnosticId, ideVisibility, resourceManager));
+                customTags: BuildCustomTags(diagnosticId, ideVisibility, resourceManager).ToArray());
         }
 
         public static string GetHelpLink(ResourceManager resourceManager, string diagnosticId)
@@ -77,21 +77,20 @@ namespace SonarAnalyzer.Helpers
                 descriptor.CustomTags.ToArray());
         }
 
-        private static string[] BuildCustomTags(string diagnosticId, IdeVisibility ideVisibility, ResourceManager resourceManager)
+        private static IEnumerable<string> BuildCustomTags(string diagnosticId, IdeVisibility ideVisibility,
+            ResourceManager resourceManager)
         {
-            var tags = new List<string>();
-
             if (bool.Parse(resourceManager.GetString($"{diagnosticId}_IsActivatedByDefault")))
             {
-                tags.Add(DiagnosticTagsHelper.SonarWayTag);
+                yield return DiagnosticTagsHelper.SonarWayTag;
             }
 
             if (ideVisibility == IdeVisibility.Hidden)
             {
-                tags.Add(WellKnownDiagnosticTags.Unnecessary);
+                yield return WellKnownDiagnosticTags.Unnecessary;
             }
 
-            return tags.ToArray();
+            yield return resourceManager.GetString("Language");
         }
 
         private static Severity ParseSeverity(string severity)
