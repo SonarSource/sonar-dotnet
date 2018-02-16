@@ -33,12 +33,15 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Function;
 
 class SarifParser10 implements SarifParser {
   private JsonObject root;
+  private final Function<String, String> toRealPath;
 
-  SarifParser10(JsonObject root) {
+  SarifParser10(JsonObject root, Function<String, String> toRealPath) {
     this.root = root;
+    this.toRealPath = toRealPath;
   }
 
   @Override
@@ -56,14 +59,14 @@ class SarifParser10 implements SarifParser {
     }
   }
 
-  private static void handleIssues(JsonArray results, SarifParserCallback callback) {
+  private void handleIssues(JsonArray results, SarifParserCallback callback) {
     for (JsonElement resultEl : results) {
       JsonObject resultObj = resultEl.getAsJsonObject();
       handleIssue(resultObj, callback);
     }
   }
 
-  private static void handleIssue(JsonObject resultObj, SarifParserCallback callback) {
+  private void handleIssue(JsonObject resultObj, SarifParserCallback callback) {
     if (isSuppressed(resultObj)) {
       return;
     }
@@ -75,7 +78,7 @@ class SarifParser10 implements SarifParser {
     }
   }
 
-  private static boolean handleLocationsElement(JsonObject resultObj, String ruleId, String message, SarifParserCallback callback) {
+  private boolean handleLocationsElement(JsonObject resultObj, String ruleId, String message, SarifParserCallback callback) {
     if (!resultObj.has("locations")) {
       return false;
     }
@@ -102,7 +105,7 @@ class SarifParser10 implements SarifParser {
     return handleResultFileElement(ruleId, message, firstIssueLocation, relatedLocations, messageMap, callback);
   }
 
-  private static boolean handleResultFileElement(String ruleId, String message, JsonObject resultFileObj, JsonArray relatedLocations,
+  private boolean handleResultFileElement(String ruleId, String message, JsonObject resultFileObj, JsonArray relatedLocations,
     Map<String, String> messageMap, SarifParserCallback callback) {
     if (!resultFileObj.has("uri") || !resultFileObj.has("region")) {
       return false;
@@ -111,7 +114,7 @@ class SarifParser10 implements SarifParser {
 
     if (primaryLocation == null) {
       String uri = resultFileObj.get("uri").getAsString();
-      String absolutePath = uriToAbsolutePath(uri);
+      String absolutePath = toRealPath.apply(uriToAbsolutePath(uri));
       callback.onFileIssue(ruleId, absolutePath, message);
     } else {
       Collection<Location> secondaryLocations = new ArrayList<>();
@@ -134,9 +137,9 @@ class SarifParser10 implements SarifParser {
   }
 
   @CheckForNull
-  private static Location handleLocation(JsonObject locationObj, @Nullable String message) {
+  private Location handleLocation(JsonObject locationObj, @Nullable String message) {
     String uri = locationObj.get("uri").getAsString();
-    String absolutePath = uriToAbsolutePath(uri);
+    String absolutePath = toRealPath.apply(uriToAbsolutePath(uri));
     JsonObject region = locationObj.get("region").getAsJsonObject();
     int startLine = region.get("startLine").getAsInt();
 

@@ -27,12 +27,14 @@ import org.sonar.api.batch.sensor.cpd.NewCpdTokens;
 import org.sonarsource.dotnet.protobuf.SonarAnalyzer;
 import org.sonarsource.dotnet.protobuf.SonarAnalyzer.CopyPasteTokenInfo;
 
+import java.util.function.Function;
+
 class CPDTokensImporter extends ProtobufImporter<SonarAnalyzer.CopyPasteTokenInfo> {
 
   private final SensorContext context;
 
-  CPDTokensImporter(SensorContext context) {
-    super(SonarAnalyzer.CopyPasteTokenInfo.parser(), context, SonarAnalyzer.CopyPasteTokenInfo::getFilePath);
+  CPDTokensImporter(SensorContext context, Function<String, String> toRealPath) {
+    super(SonarAnalyzer.CopyPasteTokenInfo.parser(), context, SonarAnalyzer.CopyPasteTokenInfo::getFilePath, toRealPath);
     this.context = context;
   }
 

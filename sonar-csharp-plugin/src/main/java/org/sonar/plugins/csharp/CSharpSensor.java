@@ -22,6 +22,8 @@ package org.sonar.plugins.csharp;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
+
 import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.InputFile.Type;
@@ -33,6 +35,7 @@ import org.sonar.api.rule.RuleKey;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 import org.sonarsource.dotnet.shared.plugins.ProtobufDataImporter;
+import org.sonarsource.dotnet.shared.plugins.RealPathProvider;
 import org.sonarsource.dotnet.shared.plugins.ReportPathCollector;
 import org.sonarsource.dotnet.shared.plugins.RoslynDataImporter;
 
@@ -80,9 +83,11 @@ public class CSharpSensor implements Sensor {
   }
 
   private void executeInternal(SensorContext context) {
+    Function<String, String> toRealPath = new RealPathProvider();
+
     List<Path> protobufPaths = reportPathCollector.protobufDirs();
     if (!protobufPaths.isEmpty()) {
-      protobufDataImporter.importResults(context, protobufPaths);
+      protobufDataImporter.importResults(context, protobufPaths, toRealPath);
     }
 
     List<Path> roslynDirs = reportPathCollector.roslynDirs();
@@ -92,7 +97,7 @@ public class CSharpSensor implements Sensor {
         .stream()
         .map(ActiveRule::ruleKey)
         .collect(toList()));
-      roslynDataImporter.importRoslynReports(roslynDirs, context, activeRoslynRulesByPartialRepoKey);
+      roslynDataImporter.importRoslynReports(roslynDirs, context, activeRoslynRulesByPartialRepoKey, toRealPath);
     }
   }
 }

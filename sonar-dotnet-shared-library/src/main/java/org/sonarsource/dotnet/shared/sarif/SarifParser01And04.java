@@ -27,13 +27,16 @@ import javax.annotation.CheckForNull;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.function.Function;
 
 class SarifParser01And04 implements SarifParser {
   private static final String FILE_PROTOCOL = "file:///";
   private final JsonObject root;
+  private final Function<String, String> toRealPath;
 
-  SarifParser01And04(JsonObject root) {
+  SarifParser01And04(JsonObject root, Function<String, String> toRealPath) {
     this.root = root;
+    this.toRealPath = toRealPath;
   }
 
   @Override
@@ -53,14 +56,14 @@ class SarifParser01And04 implements SarifParser {
     }
   }
 
-  private static void handleIssues(JsonArray issues, boolean offsetStartAtZero, SarifParserCallback callback) {
+  private void handleIssues(JsonArray issues, boolean offsetStartAtZero, SarifParserCallback callback) {
     for (JsonElement issueElement : issues) {
       JsonObject issue = issueElement.getAsJsonObject();
       handleIssue(issue, offsetStartAtZero, callback);
     }
   }
 
-  private static void handleIssue(JsonObject issue, boolean offsetStartAtZero, SarifParserCallback callback) {
+  private void handleIssue(JsonObject issue, boolean offsetStartAtZero, SarifParserCallback callback) {
     if (isSuppressed(issue)) {
       return;
     }
@@ -80,7 +83,7 @@ class SarifParser01And04 implements SarifParser {
       return;
     }
 
-    String primaryLocationPath = uriToAbsolutePath(primaryLocationObject.get("uri").getAsString());
+    String primaryLocationPath = toRealPath.apply(uriToAbsolutePath(primaryLocationObject.get("uri").getAsString()));
     Location primaryLocation = getLocation(offsetStartAtZero, primaryLocationObject, primaryLocationPath, message);
     if (primaryLocation == null) {
       callback.onFileIssue(ruleId, primaryLocationPath, message);
@@ -91,7 +94,7 @@ class SarifParser01And04 implements SarifParser {
     for (int i = 1; i < locationsArray.size(); i++) {
       JsonObject secondaryLocationObject = getAnalysisTargetAt(locationsArray, i);
       if (secondaryLocationObject != null) {
-        String secondaryLocationPath = uriToAbsolutePath(secondaryLocationObject.get("uri").getAsString());
+        String secondaryLocationPath = toRealPath.apply(uriToAbsolutePath(secondaryLocationObject.get("uri").getAsString()));
         Location secondaryLocation = getLocation(offsetStartAtZero, secondaryLocationObject, secondaryLocationPath, getSecondaryMessage(issue, i - 1));
         if (secondaryLocation != null) {
           secondaryLocations.add(secondaryLocation);
