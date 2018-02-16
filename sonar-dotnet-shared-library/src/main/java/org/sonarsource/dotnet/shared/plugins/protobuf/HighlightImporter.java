@@ -32,14 +32,15 @@ import org.sonarsource.dotnet.protobuf.SonarAnalyzer.TokenTypeInfo;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.function.Function;
 
 class HighlightImporter extends ProtobufImporter<SonarAnalyzer.TokenTypeInfo> {
 
   private final SensorContext context;
   private final Map<InputFile, HashSet<TokenTypeInfo.TokenInfo>> fileHighlights = new HashMap<>();
 
-  HighlightImporter(SensorContext context) {
-    super(SonarAnalyzer.TokenTypeInfo.parser(), context, SonarAnalyzer.TokenTypeInfo::getFilePath);
+  HighlightImporter(SensorContext context, Function<String, String> toRealPath) {
+    super(SonarAnalyzer.TokenTypeInfo.parser(), context, SonarAnalyzer.TokenTypeInfo::getFilePath, toRealPath);
     this.context = context;
   }
 

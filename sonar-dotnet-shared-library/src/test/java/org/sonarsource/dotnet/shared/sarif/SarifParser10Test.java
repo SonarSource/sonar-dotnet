@@ -67,7 +67,7 @@ public class SarifParser10Test {
   @Test
   public void sarif_version_1_0() throws IOException {
     SarifParserCallback callback = mock(SarifParserCallback.class);
-    new SarifParser10(getRoot("v1_0.json")).accept(callback);
+    new SarifParser10(getRoot("v1_0.json"), String::toString).accept(callback);
 
     InOrder inOrder = inOrder(callback);
     Location location = new Location(new File(baseDir, "Foo.cs").getAbsolutePath(), "One issue per line", 1, 0, 1, 13);
@@ -80,7 +80,7 @@ public class SarifParser10Test {
   @Test
   public void sarif_version_1_0_file_level() throws IOException {
     SarifParserCallback callback = mock(SarifParserCallback.class);
-    new SarifParser10(getRoot("v1_0_file_level_issue.json")).accept(callback);
+    new SarifParser10(getRoot("v1_0_file_level_issue.json"), String::toString).accept(callback);
 
     InOrder inOrder = inOrder(callback);
     String filePath = new File(baseDir, "Program.cs").getAbsolutePath();
@@ -99,7 +99,7 @@ public class SarifParser10Test {
   @Test
   public void sarif_version_1_0_suppressed() throws IOException {
     SarifParserCallback callback = mock(SarifParserCallback.class);
-    new SarifParser10(getRoot("v1_0_suppressed.json")).accept(callback);
+    new SarifParser10(getRoot("v1_0_suppressed.json"), String::toString).accept(callback);
 
     InOrder inOrder = inOrder(callback);
     Location location = new Location(new File(baseDir, "Bar.cs").getAbsolutePath(), "One issue per line", 2, 0, 2, 33);
@@ -111,7 +111,7 @@ public class SarifParser10Test {
   @Test
   public void sarif_version_1_0_file_name_with_illegal_char() throws IOException {
     SarifParserCallback callback = mock(SarifParserCallback.class);
-    new SarifParser10(getRoot("v1_0_file_name_with_illegal_char.json")).accept(callback);
+    new SarifParser10(getRoot("v1_0_file_name_with_illegal_char.json"), String::toString).accept(callback);
 
     InOrder inOrder = inOrder(callback);
     Location location = new Location(new File(baseDir, "ConsoleApplication1/P@!$#&+-=r^{}og_r()a m[1].cs").getAbsolutePath(),
@@ -123,7 +123,7 @@ public class SarifParser10Test {
   @Test
   public void sarif_version_1_0_no_location() throws IOException {
     SarifParserCallback callback = mock(SarifParserCallback.class);
-    new SarifParser10(getRoot("v1_0_no_location.json")).accept(callback);
+    new SarifParser10(getRoot("v1_0_no_location.json"), String::toString).accept(callback);
 
     InOrder inOrder = inOrder(callback);
     inOrder.verify(callback).onProjectIssue("S1234", "One issue per line");
@@ -133,7 +133,7 @@ public class SarifParser10Test {
   @Test
   public void sarif_version_1_0_empty_location() throws IOException {
     SarifParserCallback callback = mock(SarifParserCallback.class);
-    new SarifParser10(getRoot("v1_0_empty_location.json")).accept(callback);
+    new SarifParser10(getRoot("v1_0_empty_location.json"), String::toString).accept(callback);
 
     InOrder inOrder = inOrder(callback);
     inOrder.verify(callback).onProjectIssue("S1234", "One issue per line");
@@ -143,7 +143,7 @@ public class SarifParser10Test {
   @Test
   public void sarif_version_1_0_more_rules() throws IOException {
     SarifParserCallback callback = mock(SarifParserCallback.class);
-    new SarifParser10(getRoot("v1_0_another.json")).accept(callback);
+    new SarifParser10(getRoot("v1_0_another.json"), String::toString).accept(callback);
 
     InOrder inOrder = inOrder(callback);
     String filePath = new File(baseDir, "Program.cs").getAbsolutePath();
@@ -163,7 +163,7 @@ public class SarifParser10Test {
   @Test
   public void sarif_path_escaping() throws IOException {
     SarifParserCallback callback = mock(SarifParserCallback.class);
-    new SarifParser10(getRoot("v1_0_escaping.json")).accept(callback);
+    new SarifParser10(getRoot("v1_0_escaping.json"), String::toString).accept(callback);
 
     InOrder inOrder = inOrder(callback);
     Location location = new Location(new File(baseDir, "git/Temp Folder SomeRandom!@#$%^&()/csharp/ConsoleApplication1/Program.cs").getAbsolutePath(),
@@ -175,14 +175,14 @@ public class SarifParser10Test {
   @Test
   public void dont_fail_on_empty_report() throws IOException {
     SarifParserCallback callback = mock(SarifParserCallback.class);
-    new SarifParser10(getRoot("v1_0_empty.json")).accept(callback);
+    new SarifParser10(getRoot("v1_0_empty.json"), String::toString).accept(callback);
     verify(callback, Mockito.never()).onIssue(Mockito.anyString(), Mockito.any(Location.class), Mockito.anyCollectionOf(Location.class));
   }
 
   @Test
   public void sarif_version_1_0_secondary_locations() throws IOException {
     SarifParserCallback callback = mock(SarifParserCallback.class);
-    new SarifParser10(getRoot("v1_0_secondary_locations.json")).accept(callback);
+    new SarifParser10(getRoot("v1_0_secondary_locations.json"), String::toString).accept(callback);
 
     InOrder inOrder = inOrder(callback);
     String filePath = new File(baseDir, "Foo.cs").getAbsolutePath();
@@ -197,7 +197,7 @@ public class SarifParser10Test {
   @Test
   public void sarif_version_1_0_secondary_locations_messages() throws IOException {
     SarifParserCallback callback = mock(SarifParserCallback.class);
-    new SarifParser10(getRoot("v1_0_secondary_locations_messages.json")).accept(callback);
+    new SarifParser10(getRoot("v1_0_secondary_locations_messages.json"), String::toString).accept(callback);
 
     InOrder inOrder = inOrder(callback);
     String filePath = new File(baseDir, "Foo.cs").getAbsolutePath();

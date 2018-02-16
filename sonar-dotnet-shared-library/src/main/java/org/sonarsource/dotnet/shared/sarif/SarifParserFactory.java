@@ -24,6 +24,7 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.function.Function;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -33,7 +34,7 @@ public class SarifParserFactory {
     // private
   }
 
-  public static SarifParser create(Path filePath) {
+  public static SarifParser create(Path filePath, Function<String, String> toRealPath) {
     try (InputStreamReader reader = new InputStreamReader(Files.newInputStream(filePath), StandardCharsets.UTF_8)) {
 
       JsonParser parser = new JsonParser();
@@ -44,10 +45,10 @@ public class SarifParserFactory {
         switch (version) {
           case "0.4":
           case "0.1":
-            return new SarifParser01And04(root);
+            return new SarifParser01And04(root, toRealPath);
           case "1.0":
           default:
-            return new SarifParser10(root);
+            return new SarifParser10(root, toRealPath);
         }
       }
     } catch (IOException e) {

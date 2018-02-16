@@ -23,6 +23,8 @@ import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
+
 import org.sonar.api.batch.ScannerSide;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.rule.RuleKey;
@@ -35,14 +37,15 @@ import org.sonarsource.dotnet.shared.sarif.SarifParserFactory;
 public class RoslynDataImporter {
   private static final Logger LOG = Loggers.get(RoslynDataImporter.class);
 
-  public void importRoslynReports(List<Path> reportPaths, final SensorContext context, Map<String, List<RuleKey>> activeRoslynRulesByPartialRepoKey) {
+  public void importRoslynReports(List<Path> reportPaths, final SensorContext context, Map<String,
+    List<RuleKey>> activeRoslynRulesByPartialRepoKey, Function<String, String> toRealPath) {
     Map<String, String> repositoryKeyByRoslynRuleKey = getRepoKeyByRoslynRuleKey(activeRoslynRulesByPartialRepoKey);
     SarifParserCallback callback = new SarifParserCallbackImpl(context, repositoryKeyByRoslynRuleKey);
 
     LOG.info("Importing {} Roslyn {}", reportPaths.size(), pluralize("report", reportPaths.size()));
 
     for (Path reportPath : reportPaths) {
-      SarifParserFactory.create(reportPath).accept(callback);
+      SarifParserFactory.create(reportPath, toRealPath).accept(callback);
     }
   }
 

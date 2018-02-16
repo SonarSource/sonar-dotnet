@@ -52,7 +52,7 @@ public class HighlightImporterTest {
     File protobuf = new File(TEST_DATA_DIR, HIGHLIGHT_OUTPUT_PROTOBUF_NAME);
     assertThat(protobuf.isFile()).withFailMessage("no such file: " + protobuf).isTrue();
 
-    HighlightImporter importer = new HighlightImporter(tester);
+    HighlightImporter importer = new HighlightImporter(tester, String::toString);
     importer.accept(protobuf.toPath());
     importer.save();
 

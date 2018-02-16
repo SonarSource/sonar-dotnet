@@ -30,14 +30,15 @@ import org.sonarsource.dotnet.protobuf.SonarAnalyzer.SymbolReferenceInfo;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.function.Function;
 
 class SymbolRefsImporter extends ProtobufImporter<SonarAnalyzer.SymbolReferenceInfo> {
 
   private final SensorContext context;
   private final HashMap<InputFile, HashSet<SonarAnalyzer.SymbolReferenceInfo.SymbolReference>> fileSymbolReferences = new HashMap<>();
 
-  SymbolRefsImporter(SensorContext context) {
-    super(SonarAnalyzer.SymbolReferenceInfo.parser(), context, SonarAnalyzer.SymbolReferenceInfo::getFilePath);
+  SymbolRefsImporter(SensorContext context, Function<String, String> toRealPath) {
+    super(SonarAnalyzer.SymbolReferenceInfo.parser(), context, SonarAnalyzer.SymbolReferenceInfo::getFilePath, toRealPath);
     this.context = context;
   }
 
