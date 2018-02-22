@@ -292,10 +292,10 @@ namespace SonarAnalyzer.UnitTest
             VerifyNoIssueReported(path, TestAssemblyName, diagnosticAnalyzer, additionalReferences);
         }
 
-        public static void VerifyNoIssueReported(string path, SonarDiagnosticAnalyzer diagnosticAnalyzer,
+        public static void VerifyNoIssueReported(string path, SonarDiagnosticAnalyzer diagnosticAnalyzer, ParseOptions options = null,
             params MetadataReference[] additionalReferences)
         {
-            VerifyNoIssueReported(path, GeneratedAssemblyName, diagnosticAnalyzer, additionalReferences);
+            VerifyNoIssueReported(path, GeneratedAssemblyName, diagnosticAnalyzer, additionalReferences, options);
         }
 
         public static void VerifyCodeFix(string path, string pathToExpected,
@@ -349,13 +349,19 @@ namespace SonarAnalyzer.UnitTest
         #region Generic helper
 
         private static void VerifyNoIssueReported(string path, string assemblyName, DiagnosticAnalyzer diagnosticAnalyzer,
-            MetadataReference[] additionalReferences)
+            MetadataReference[] additionalReferences, ParseOptions parseOptions = null)
         {
             using (var workspace = new AdhocWorkspace())
             {
                 var file = new FileInfo(path);
                 var project = CreateProject(file.Extension, assemblyName, workspace, additionalReferences)
                     .AddDocument(file);
+
+                if (parseOptions != null)
+                {
+                    project = project.WithParseOptions(parseOptions);
+                }
+
                 var compilation = project.GetCompilationAsync().Result;
                 var diagnostics = GetDiagnostics(compilation, diagnosticAnalyzer);
 

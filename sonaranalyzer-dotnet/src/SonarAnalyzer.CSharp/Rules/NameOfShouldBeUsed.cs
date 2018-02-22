@@ -50,8 +50,14 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(c =>
+            context.RegisterSyntaxNodeActionInNonGenerated(
+                c =>
                 {
+                    if ((c.Compilation as CSharpCompilation)?.LanguageVersion.CompareTo(LanguageVersion.CSharp6) < 0)
+                    {
+                        return;
+                    }
+
                     var methodSyntax = (BaseMethodDeclarationSyntax)c.Node;
 
                     var paramGroups = methodSyntax.ParameterList?.Parameters
