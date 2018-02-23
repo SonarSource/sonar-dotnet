@@ -19,8 +19,9 @@
  */
 
 extern alias csharp;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -29,10 +30,18 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void NameOfShouldBeUsed()
+        public void NameOfShouldBeUsed_CSharp6()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\NameOfShouldBeUsed.cs",
-                new NameOfShouldBeUsed());
+            Verifier.VerifyAnalyzer(@"TestCases\NameOfShouldBeUsed.cs", new NameOfShouldBeUsed(),
+                new CSharpParseOptions(LanguageVersion.CSharp6));
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void NameOfShouldBeUsed_CSharp5()
+        {
+            Verifier.VerifyNoIssueReported(@"TestCases\NameOfShouldBeUsed.cs", new NameOfShouldBeUsed(),
+                new CSharpParseOptions(LanguageVersion.CSharp5));
         }
     }
 }
