@@ -16,7 +16,7 @@ namespace Tests.Diagnostics
         // See issue https://github.com/SonarSource/sonar-csharp/issues/704
         private interface ISuspendingEventArgs { }
 
-        async void MyOtherMethod1(object o, ISuspendingEventArgs args) { } // Noncompliant
+        async void MyOtherMethod1(object o, ISuspendingEventArgs args) { } // Compliant
         private async void OnSuspending(object sender, ISuspendingEventArgs e) { } // Compliant - ends with EventArgs and 1st param is object sender
     }
 }

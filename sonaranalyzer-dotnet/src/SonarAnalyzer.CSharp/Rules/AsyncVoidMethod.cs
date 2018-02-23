@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -47,10 +46,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 c =>
                 {
                     var methodDeclaration = (MethodDeclarationSyntax)c.Node;
-                    var methodSymbol = c.SemanticModel.GetDeclaredSymbol(methodDeclaration);
 
-                    if (methodSymbol != null &&
-                        IsMethodCandidate(methodSymbol))
+                    if (IsMethodCandidate(c.SemanticModel.GetDeclaredSymbol(methodDeclaration)))
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, methodDeclaration.ReturnType.GetLocation()));
                     }
@@ -58,21 +55,11 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.MethodDeclaration);
         }
 
-        private static bool IsMethodCandidate(IMethodSymbol methodSymbol)
-        {
-            return methodSymbol.IsAsync &&
-                methodSymbol.ReturnsVoid &&
-                methodSymbol.IsChangeable() &&
-                !IsEventHanderMethod(methodSymbol);
-        }
-
-        private static bool IsEventHanderMethod(IMethodSymbol methodSymbol)
-        {
-            return methodSymbol.ReturnsVoid &&
-                methodSymbol.Parameters.Length == 2 &&
-                methodSymbol.Parameters[0].Name == "sender" &&
-                methodSymbol.Parameters[0].Type.Is(KnownType.System_Object) &&
-                methodSymbol.Parameters[1].Type.ToString().EndsWith("EventArgs", StringComparison.Ordinal);
-        }
+        private static bool IsMethodCandidate(IMethodSymbol methodSymbol) =>
+            methodSymbol != null &&
+            methodSymbol.IsAsync &&
+            methodSymbol.ReturnsVoid &&
+            methodSymbol.IsChangeable() &&
+            !methodSymbol.IsProbablyEventHandler();
     }
 }
