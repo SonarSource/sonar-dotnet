@@ -24,6 +24,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Locale;
+import java.util.function.Function;
 import java.util.stream.Stream;
 import org.sonar.api.batch.ScannerSide;
 import org.sonar.api.batch.sensor.SensorContext;
@@ -55,11 +56,13 @@ public class ProtobufDataImporter {
     this.noSonarFilter = noSonarFilter;
   }
 
-  public void importResults(SensorContext context, List<Path> protobufReportsDirectories) {
-    RawProtobufImporter<MetricsInfo> metricsImporter = ProtobufImporters.metricsImporter(context, fileLinesContextFactory, noSonarFilter);
-    RawProtobufImporter<TokenTypeInfo> highlightImporter = ProtobufImporters.highlightImporter(context);
-    RawProtobufImporter<SymbolReferenceInfo> symbolRefsImporter = ProtobufImporters.symbolRefsImporter(context);
-    RawProtobufImporter<CopyPasteTokenInfo> cpdTokensImporter = ProtobufImporters.cpdTokensImporter(context);
+  public void importResults(SensorContext context, List<Path> protobufReportsDirectories,
+    Function<String, String> toRealPath) {
+    RawProtobufImporter<MetricsInfo> metricsImporter = ProtobufImporters.metricsImporter(context,
+      fileLinesContextFactory, noSonarFilter, toRealPath);
+    RawProtobufImporter<TokenTypeInfo> highlightImporter = ProtobufImporters.highlightImporter(context, toRealPath);
+    RawProtobufImporter<SymbolReferenceInfo> symbolRefsImporter = ProtobufImporters.symbolRefsImporter(context, toRealPath);
+    RawProtobufImporter<CopyPasteTokenInfo> cpdTokensImporter = ProtobufImporters.cpdTokensImporter(context, toRealPath);
 
     for (Path protobufReportsDir : protobufReportsDirectories) {
       long protoFiles = countProtoFiles(protobufReportsDir);

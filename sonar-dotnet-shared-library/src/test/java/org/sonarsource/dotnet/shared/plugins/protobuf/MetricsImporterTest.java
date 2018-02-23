@@ -74,7 +74,7 @@ public class MetricsImporterTest {
 
     NoSonarFilter noSonarFilter = mock(NoSonarFilter.class);
 
-    new MetricsImporter(tester, fileLinesContextFactory, noSonarFilter).accept(protobuf.toPath());
+    new MetricsImporter(tester, fileLinesContextFactory, noSonarFilter, String::toString).accept(protobuf.toPath());
 
     Collection<Measure> measures = tester.measures(inputFile.key());
     assertThat(measures).hasSize(13);

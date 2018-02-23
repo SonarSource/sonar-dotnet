@@ -41,7 +41,7 @@ public class SymbolRefsImporterTest {
 
   private SensorContextTester tester = SensorContextTester.create(TEST_DATA_DIR);
   private File protobuf = new File(TEST_DATA_DIR, SYMBOLREFS_OUTPUT_PROTOBUF_NAME);
-  SymbolRefsImporter underTest = new SymbolRefsImporter(tester);
+  SymbolRefsImporter underTest = new SymbolRefsImporter(tester, String::toString);
 
   @Before
   public void setUp() {

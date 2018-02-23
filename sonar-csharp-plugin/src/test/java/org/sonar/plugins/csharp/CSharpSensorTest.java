@@ -40,10 +40,13 @@ import org.sonar.api.rule.RuleKey;
 import org.sonar.api.utils.log.LogTester;
 import org.sonar.api.utils.log.LoggerLevel;
 import org.sonarsource.dotnet.shared.plugins.ProtobufDataImporter;
+import org.sonarsource.dotnet.shared.plugins.RealPathProvider;
 import org.sonarsource.dotnet.shared.plugins.ReportPathCollector;
 import org.sonarsource.dotnet.shared.plugins.RoslynDataImporter;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyZeroInteractions;
@@ -112,7 +115,7 @@ public class CSharpSensorTest {
     ImmutableMap<String, List<RuleKey>> expectedMap = ImmutableMap.of(
       "sonaranalyzer-cs", ImmutableList.of(RuleKey.of("csharpsquid", "S1186"), RuleKey.of("csharpsquid", "[parameters_key]")),
       "foo", ImmutableList.of(RuleKey.of("roslyn.foo", "custom-roslyn")));
-    verify(roslynDataImporter).importRoslynReports(Collections.singletonList(workDir.getRoot()), tester, expectedMap);
+    verify(roslynDataImporter).importRoslynReports(eq(Collections.singletonList(workDir.getRoot())), eq(tester), eq(expectedMap), any(RealPathProvider.class));
   }
 
   @Test
@@ -121,12 +124,12 @@ public class CSharpSensorTest {
     sensor.execute(tester);
 
     verify(reportPathCollector).protobufDirs();
-    verify(protobufDataImporter).importResults(tester, reportPaths);
+    verify(protobufDataImporter).importResults(eq(tester), eq(reportPaths), any(RealPathProvider.class));
     verifyZeroInteractions(roslynDataImporter);
   }
 
   @Test
-  public void noAnalysisIfNoFilesDetected() throws Exception {
+  public void noAnalysisIfNoFilesDetected() {
     sensor.execute(tester);
 
     assertThat(logTester.logs(LoggerLevel.DEBUG)).hasSize(1);

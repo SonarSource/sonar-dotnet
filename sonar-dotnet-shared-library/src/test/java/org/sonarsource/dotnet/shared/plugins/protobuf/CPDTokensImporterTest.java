@@ -42,7 +42,7 @@ public class CPDTokensImporterTest {
   private static final File TEST_FILE = new File(TEST_DATA_DIR, TEST_FILE_PATH);
 
   private SensorContextTester tester = SensorContextTester.create(TEST_DATA_DIR);
-  private CPDTokensImporter underTest = new CPDTokensImporter(tester);
+  private CPDTokensImporter underTest = new CPDTokensImporter(tester, String::toString);
   private File protobuf = new File(TEST_DATA_DIR, CPDTOKENS_OUTPUT_PROTOBUF_NAME);
 
   @Before

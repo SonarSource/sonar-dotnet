@@ -27,6 +27,9 @@ import org.sonarsource.dotnet.protobuf.SonarAnalyzer.CopyPasteTokenInfo;
 import org.sonarsource.dotnet.protobuf.SonarAnalyzer.MetricsInfo;
 import org.sonarsource.dotnet.protobuf.SonarAnalyzer.SymbolReferenceInfo;
 import org.sonarsource.dotnet.protobuf.SonarAnalyzer.TokenTypeInfo;
+import org.sonarsource.dotnet.shared.plugins.RealPathProvider;
+
+import java.util.function.Function;
 
 @ScannerSide
 public class ProtobufImporters {
@@ -38,20 +41,24 @@ public class ProtobufImporters {
   public static final String ENCODING_OUTPUT_PROTOBUF_NAME = "encoding.pb";
   public static final String FILEMETADATA_OUTPUT_PROTOBUF_NAME = "file-metadata.pb";
 
-  public static RawProtobufImporter<TokenTypeInfo> highlightImporter(SensorContext context) {
-    return new HighlightImporter(context);
+  public static RawProtobufImporter<TokenTypeInfo> highlightImporter(SensorContext context,
+    Function<String, String> toRealPath) {
+    return new HighlightImporter(context, toRealPath);
   }
 
-  public static RawProtobufImporter<SymbolReferenceInfo> symbolRefsImporter(SensorContext context) {
-    return new SymbolRefsImporter(context);
+  public static RawProtobufImporter<SymbolReferenceInfo> symbolRefsImporter(SensorContext context,
+    Function<String, String> toRealPath) {
+    return new SymbolRefsImporter(context, toRealPath);
   }
 
-  public static RawProtobufImporter<CopyPasteTokenInfo> cpdTokensImporter(SensorContext context) {
-    return new CPDTokensImporter(context);
+  public static RawProtobufImporter<CopyPasteTokenInfo> cpdTokensImporter(SensorContext context,
+    Function<String, String> toRealPath) {
+    return new CPDTokensImporter(context, toRealPath);
   }
 
-  public static RawProtobufImporter<MetricsInfo> metricsImporter(SensorContext context, FileLinesContextFactory fileLinesContextFactory, NoSonarFilter noSonarFilter) {
-    return new MetricsImporter(context, fileLinesContextFactory, noSonarFilter);
+  public static RawProtobufImporter<MetricsInfo> metricsImporter(SensorContext context,
+    FileLinesContextFactory fileLinesContextFactory, NoSonarFilter noSonarFilter, Function<String, String> toRealPath) {
+    return new MetricsImporter(context, fileLinesContextFactory, noSonarFilter, toRealPath);
   }
 
   public static EncodingImporter encodingImporter() {
