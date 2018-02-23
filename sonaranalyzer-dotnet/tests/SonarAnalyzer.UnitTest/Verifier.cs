@@ -357,10 +357,9 @@ namespace SonarAnalyzer.UnitTest
                 var project = CreateProject(file.Extension, assemblyName, workspace, additionalReferences)
                     .AddDocument(file);
 
-                if (parseOptions != null)
-                {
-                    project = project.WithParseOptions(parseOptions);
-                }
+                project = parseOptions != null
+                    ? project.WithParseOptions(parseOptions)
+                    : project;
 
                 var compilation = project.GetCompilationAsync().Result;
                 var diagnostics = GetDiagnostics(compilation, diagnosticAnalyzer);
