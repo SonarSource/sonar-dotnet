@@ -245,7 +245,7 @@ namespace SonarAnalyzer.Helpers
                 methodSymbol.ContainingType.ConstructedFrom.Is(KnownType.System_Collections_Generic_List_T);
         }
 
-        public static bool IsProbablyEventHandler(this IMethodSymbol methodSymbol)
+        public static bool IsEventHandler(this IMethodSymbol methodSymbol)
         {
             return methodSymbol.ReturnsVoid &&
                 methodSymbol.Parameters.Length == 2 &&

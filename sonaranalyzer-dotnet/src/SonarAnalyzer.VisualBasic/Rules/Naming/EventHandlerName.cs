@@ -71,7 +71,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
             var symbol = semanticModel.GetDeclaredSymbol(declaration);
             return symbol != null &&
-                symbol.IsProbablyEventHandler();
+                symbol.IsEventHandler();
         }
     }
 }

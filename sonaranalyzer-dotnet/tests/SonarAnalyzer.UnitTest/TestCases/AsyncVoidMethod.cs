@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System;
+﻿using System;
 
 namespace Tests.Diagnostics
 {
@@ -16,6 +13,17 @@ namespace Tests.Diagnostics
         async void MyMethod1(object o, EventArgs e) { }
 
         async void MyMethod2(object o, Foo e) { }
+
+        public event EventHandler<bool> MyEvent;
+
+        public EventHandlerCases()
+        {
+            MyEvent += EventHandlerCases_MyEvent;
+        }
+
+        private async void EventHandlerCases_MyEvent(object sender, bool e)
+        {
+        }
     }
 
     public class UwpCases

@@ -177,7 +177,7 @@ namespace SonarAnalyzer.Rules.CSharp
             return methodSymbol.GetEffectiveAccessibility() == Accessibility.Private &&
                 !methodSymbol.GetAttributes().Any() &&
                 methodSymbol.IsChangeable() &&
-                !methodSymbol.IsProbablyEventHandler();
+                !methodSymbol.IsEventHandler();
         }
 
         private static IImmutableList<IParameterSymbol> GetUnusedParameters(BaseMethodDeclarationSyntax declaration, IMethodSymbol methodSymbol,

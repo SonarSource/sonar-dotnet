@@ -61,7 +61,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 methodSymbol.Parameters.Length == 0 ||
                 methodSymbol.IsOverride ||
                 methodSymbol.GetInterfaceMember() != null ||
-                methodSymbol.IsProbablyEventHandler())
+                methodSymbol.IsEventHandler())
             {
                 return Enumerable.Empty<Diagnostic>();
             }

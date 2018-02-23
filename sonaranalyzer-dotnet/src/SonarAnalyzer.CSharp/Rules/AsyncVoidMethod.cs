@@ -19,6 +19,7 @@
  */
 
 using System.Collections.Immutable;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -46,8 +47,10 @@ namespace SonarAnalyzer.Rules.CSharp
                 c =>
                 {
                     var methodDeclaration = (MethodDeclarationSyntax)c.Node;
+                    var methodSymbol = c.SemanticModel.GetDeclaredSymbol(methodDeclaration);
 
-                    if (IsMethodCandidate(c.SemanticModel.GetDeclaredSymbol(methodDeclaration)))
+                    if (IsViolatingRule(methodSymbol) &&
+                        !IsExceptionToTheRule(methodDeclaration, methodSymbol))
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, methodDeclaration.ReturnType.GetLocation()));
                     }
@@ -55,11 +58,23 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.MethodDeclaration);
         }
 
-        private static bool IsMethodCandidate(IMethodSymbol methodSymbol) =>
+        private static bool IsViolatingRule(IMethodSymbol methodSymbol) =>
             methodSymbol != null &&
             methodSymbol.IsAsync &&
             methodSymbol.ReturnsVoid &&
-            methodSymbol.IsChangeable() &&
-            !methodSymbol.IsProbablyEventHandler();
+            methodSymbol.IsChangeable();
+
+        private static bool IsExceptionToTheRule(MethodDeclarationSyntax methodDeclaration, IMethodSymbol methodSymbol) =>
+            methodSymbol.IsEventHandler() ||
+            IsUsedAsEventHandler(methodDeclaration);
+
+        private static bool IsUsedAsEventHandler(MethodDeclarationSyntax methodDeclaration) =>
+            methodDeclaration.FirstAncestorOrSelf<ClassDeclarationSyntax>()
+                .DescendantNodes()
+                .OfType<AssignmentExpressionSyntax>()
+                .Where(aes => aes.IsKind(SyntaxKind.AddAssignmentExpression))
+                .Select(aes => aes.Right)
+                .OfType<IdentifierNameSyntax>()
+                .Any(ins => ins.Identifier.ValueText == methodDeclaration.Identifier.ValueText);
     }
 }
