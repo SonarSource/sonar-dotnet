@@ -247,7 +247,8 @@ namespace SonarAnalyzer.Helpers
 
         public static bool IsEventHandler(this IMethodSymbol methodSymbol)
         {
-            return methodSymbol.ReturnsVoid &&
+            return methodSymbol != null &&
+                methodSymbol.ReturnsVoid &&
                 methodSymbol.Parameters.Length == 2 &&
                 methodSymbol.Parameters[0].Type.Is(KnownType.System_Object) &&
                 (
