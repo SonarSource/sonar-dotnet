@@ -18,8 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
 using System.Collections.Immutable;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -49,8 +49,8 @@ namespace SonarAnalyzer.Rules.CSharp
                     var methodDeclaration = (MethodDeclarationSyntax)c.Node;
                     var methodSymbol = c.SemanticModel.GetDeclaredSymbol(methodDeclaration);
 
-                    if (methodSymbol != null &&
-                        IsMethodCandidate(methodSymbol))
+                    if (IsViolatingRule(methodSymbol) &&
+                        !IsExceptionToTheRule(methodDeclaration, methodSymbol))
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, methodDeclaration.ReturnType.GetLocation()));
                     }
@@ -58,21 +58,23 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.MethodDeclaration);
         }
 
-        private static bool IsMethodCandidate(IMethodSymbol methodSymbol)
-        {
-            return methodSymbol.IsAsync &&
-                methodSymbol.ReturnsVoid &&
-                methodSymbol.IsChangeable() &&
-                !IsEventHanderMethod(methodSymbol);
-        }
+        private static bool IsViolatingRule(IMethodSymbol methodSymbol) =>
+            methodSymbol != null &&
+            methodSymbol.IsAsync &&
+            methodSymbol.ReturnsVoid &&
+            methodSymbol.IsChangeable();
 
-        private static bool IsEventHanderMethod(IMethodSymbol methodSymbol)
-        {
-            return methodSymbol.ReturnsVoid &&
-                methodSymbol.Parameters.Length == 2 &&
-                methodSymbol.Parameters[0].Name == "sender" &&
-                methodSymbol.Parameters[0].Type.Is(KnownType.System_Object) &&
-                methodSymbol.Parameters[1].Type.ToString().EndsWith("EventArgs", StringComparison.Ordinal);
-        }
+        private static bool IsExceptionToTheRule(MethodDeclarationSyntax methodDeclaration, IMethodSymbol methodSymbol) =>
+            methodSymbol.IsEventHandler() ||
+            IsUsedAsEventHandler(methodDeclaration);
+
+        private static bool IsUsedAsEventHandler(MethodDeclarationSyntax methodDeclaration) =>
+            methodDeclaration.FirstAncestorOrSelf<ClassDeclarationSyntax>()
+                .DescendantNodes()
+                .OfType<AssignmentExpressionSyntax>()
+                .Where(aes => aes.IsKind(SyntaxKind.AddAssignmentExpression))
+                .Select(aes => aes.Right)
+                .OfType<IdentifierNameSyntax>()
+                .Any(ins => ins.Identifier.ValueText == methodDeclaration.Identifier.ValueText);
     }
 }

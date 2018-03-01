@@ -148,21 +148,6 @@ namespace SonarAnalyzer.Helpers
                 symbol.GetOverriddenMember() == null;
         }
 
-        public static bool IsProbablyEventHandler(this IMethodSymbol methodSymbol)
-        {
-            if (!methodSymbol.ReturnsVoid ||
-                methodSymbol.Parameters.Length != 2)
-            {
-                return false;
-            }
-
-            var eventArgs = methodSymbol.Parameters[1];
-            var eventArgsType = eventArgs.Type as INamedTypeSymbol;
-
-            return eventArgsType == null ||
-                eventArgsType.DerivesOrImplements(KnownType.System_EventArgs);
-        }
-
         public static bool IsExtensionOn(this IMethodSymbol methodSymbol, KnownType type)
         {
             if (methodSymbol == null ||

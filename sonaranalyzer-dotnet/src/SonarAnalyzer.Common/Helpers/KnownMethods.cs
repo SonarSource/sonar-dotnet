@@ -245,6 +245,19 @@ namespace SonarAnalyzer.Helpers
                 methodSymbol.ContainingType.ConstructedFrom.Is(KnownType.System_Collections_Generic_List_T);
         }
 
+        public static bool IsEventHandler(this IMethodSymbol methodSymbol)
+        {
+            return methodSymbol != null &&
+                methodSymbol.ReturnsVoid &&
+                methodSymbol.Parameters.Length == 2 &&
+                methodSymbol.Parameters[0].Type.Is(KnownType.System_Object) &&
+                (
+                    methodSymbol.Parameters[1].Type.DerivesFrom(KnownType.System_EventArgs) ||
+                    // This is not enough for UWP as it uses other kind of event args (e.g. ILeavingBackgroundEventArgs)
+                    methodSymbol.Parameters[1].Type.ToString().EndsWith("EventArgs", StringComparison.Ordinal)
+                );
+        }
+
         private static bool HasExactlyNParameters(this IMethodSymbol methodSymbol, int parametersCount)
         {
             if (methodSymbol.MethodKind == MethodKind.Ordinary)
