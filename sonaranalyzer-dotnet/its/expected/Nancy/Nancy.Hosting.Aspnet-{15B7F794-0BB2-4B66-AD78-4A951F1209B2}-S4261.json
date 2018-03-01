@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Hosting.Aspnet\NancyHandler.cs",
+"region":  {
+"startLine":  33,
+"startColumn":  27,
+"endLine":  33,
+"endColumn":  41
+}
+}
+}
+]
+}

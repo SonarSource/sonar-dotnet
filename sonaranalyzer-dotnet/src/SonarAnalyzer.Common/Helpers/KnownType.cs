@@ -25,7 +25,7 @@ namespace SonarAnalyzer.Helpers
 {
     internal sealed class KnownType
     {
-        #region Known types
+        #region Known types        
 
         internal static readonly KnownType Microsoft_AspNetCore_Mvc_Controller = new KnownType("Microsoft.AspNetCore.Mvc.Controller");
         internal static readonly KnownType Microsoft_VisualBasic_Interaction = new KnownType("Microsoft.VisualBasic.Interaction");
@@ -237,6 +237,7 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_Text_StringBuilder = new KnownType("System.Text.StringBuilder");
         internal static readonly KnownType System_Threading_Tasks_Task = new KnownType("System.Threading.Tasks.Task");
         internal static readonly KnownType System_Threading_Tasks_Task_T = new KnownType("System.Threading.Tasks.Task<TResult>");
+        internal static readonly KnownType System_Threading_Tasks_ValueTask_TResult = new KnownType("System.Threading.Tasks.ValueTask<TResult>");
         internal static readonly KnownType System_Threading_Thread = new KnownType("System.Threading.Thread");
         internal static readonly KnownType System_ThreadStaticAttribute = new KnownType("System.ThreadStaticAttribute");
         internal static readonly KnownType System_Type = new KnownType("System.Type");

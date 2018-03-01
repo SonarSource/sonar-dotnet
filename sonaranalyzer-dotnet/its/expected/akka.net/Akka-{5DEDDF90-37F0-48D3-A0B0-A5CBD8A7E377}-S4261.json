@@ -1,0 +1,238 @@
+{
+"issues":  [
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorSelection.cs",
+"region":  {
+"startLine":  103,
+"startColumn":  32,
+"endLine":  103,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorSelection.cs",
+"region":  {
+"startLine":  108,
+"startColumn":  39,
+"endLine":  108,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Futures.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  36,
+"endLine":  27,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Futures.cs",
+"region":  {
+"startLine":  32,
+"startColumn":  31,
+"endLine":  32,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Futures.cs",
+"region":  {
+"startLine":  64,
+"startColumn":  37,
+"endLine":  64,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\GracefulStopSupport.cs",
+"region":  {
+"startLine":  37,
+"startColumn":  34,
+"endLine":  37,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\GracefulStopSupport.cs",
+"region":  {
+"startLine":  42,
+"startColumn":  34,
+"endLine":  42,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\PipeToSupport.cs",
+"region":  {
+"startLine":  24,
+"startColumn":  28,
+"endLine":  24,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\PipeToSupport.cs",
+"region":  {
+"startLine":  44,
+"startColumn":  28,
+"endLine":  44,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Pattern\CircuitBreaker.cs",
+"region":  {
+"startLine":  131,
+"startColumn":  30,
+"endLine":  131,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Pattern\CircuitBreaker.cs",
+"region":  {
+"startLine":  141,
+"startColumn":  27,
+"endLine":  141,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Routing\Router.cs",
+"region":  {
+"startLine":  36,
+"startColumn":  29,
+"endLine":  36,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\Internal\AtomicState.cs",
+"region":  {
+"startLine":  50,
+"startColumn":  30,
+"endLine":  50,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\Internal\AtomicState.cs",
+"region":  {
+"startLine":  79,
+"startColumn":  30,
+"endLine":  79,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\Internal\AtomicState.cs",
+"region":  {
+"startLine":  118,
+"startColumn":  27,
+"endLine":  118,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\Internal\AtomicState.cs",
+"region":  {
+"startLine":  159,
+"startColumn":  30,
+"endLine":  159,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\Internal\AtomicState.cs",
+"region":  {
+"startLine":  195,
+"startColumn":  17,
+"endLine":  195,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\Internal\TaskExtensions.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  37,
+"endLine":  15,
+"endColumn":  45
+}
+}
+}
+]
+}

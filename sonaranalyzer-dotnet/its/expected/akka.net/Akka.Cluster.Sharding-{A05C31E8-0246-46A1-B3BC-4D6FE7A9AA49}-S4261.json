@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardAllocationStrategy.cs",
+"region":  {
+"startLine":  39,
+"startColumn":  25,
+"endLine":  39,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardAllocationStrategy.cs",
+"region":  {
+"startLine":  51,
+"startColumn":  38,
+"endLine":  51,
+"endColumn":  47
+}
+}
+}
+]
+}
