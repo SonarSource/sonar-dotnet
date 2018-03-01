@@ -113,7 +113,7 @@ namespace SonarAnalyzer.Helpers
             return IsRemovable((ISymbol)methodSymbol, maxAccessibility) &&
                 RemovableMethodKinds.Contains(methodSymbol.MethodKind) &&
                 !methodSymbol.IsMainMethod() &&
-                !methodSymbol.IsProbablyEventHandler() &&
+                !methodSymbol.IsEventHandler() &&
                 !methodSymbol.IsSerializationConstructor();
         }
 

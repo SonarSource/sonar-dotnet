@@ -231,13 +231,13 @@ namespace NS
                 .First(m => m.Identifier.ValueText == "Method3");
             var symbol = semanticModel.GetDeclaredSymbol(method) as IMethodSymbol;
 
-            symbol.IsProbablyEventHandler().Should().BeFalse();
+            symbol.IsEventHandler().Should().BeFalse();
 
             method = derivedClassDeclaration2.DescendantNodes().OfType<MethodDeclarationSyntax>()
                 .First(m => m.Identifier.ValueText == "EventHandler");
             symbol = semanticModel.GetDeclaredSymbol(method) as IMethodSymbol;
 
-            symbol.IsProbablyEventHandler().Should().BeTrue();
+            symbol.IsEventHandler().Should().BeTrue();
         }
 
         [TestMethod]
