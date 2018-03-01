@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S1821",
+"message":  "Refactor the code to eliminate this nested 'switch'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  768,
+"startColumn":  7,
+"endLine":  768,
+"endColumn":  13
+}
+}
+},
+{
+"id":  "S1821",
+"message":  "Refactor the code to eliminate this nested 'switch'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  807,
+"startColumn":  6,
+"endLine":  807,
+"endColumn":  12
+}
+}
+},
+{
+"id":  "S1821",
+"message":  "Refactor the code to eliminate this nested 'switch'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  845,
+"startColumn":  6,
+"endLine":  845,
+"endColumn":  12
+}
+}
+}
+]
+}
