@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S109",
+"message":  "Assign this magic number '1.0' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContextExtensions.cs",
+"region":  {
+"startLine":  176,
+"startColumn":  47,
+"endLine":  176,
+"endColumn":  51
+}
+}
+}
+]
+}

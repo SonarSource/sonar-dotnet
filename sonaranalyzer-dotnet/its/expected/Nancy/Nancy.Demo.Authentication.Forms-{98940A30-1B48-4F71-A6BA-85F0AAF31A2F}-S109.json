@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S109",
+"message":  "Assign this magic number '7' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Demo.Authentication.Forms\MainModule.cs",
+"region":  {
+"startLine":  36,
+"startColumn":  51,
+"endLine":  36,
+"endColumn":  52
+}
+}
+}
+]
+}

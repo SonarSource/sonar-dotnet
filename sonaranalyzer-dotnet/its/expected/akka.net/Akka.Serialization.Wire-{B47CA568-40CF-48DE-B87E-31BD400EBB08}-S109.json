@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S109",
+"message":  "Assign this magic number '4' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\serializers\Akka.Serialization.Wire\WireSerializer.cs",
+"region":  {
+"startLine":  41,
+"startColumn":  27,
+"endLine":  41,
+"endColumn":  28
+}
+}
+}
+]
+}

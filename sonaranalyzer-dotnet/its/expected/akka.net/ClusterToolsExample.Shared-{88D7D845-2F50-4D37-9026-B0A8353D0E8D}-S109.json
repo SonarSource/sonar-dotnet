@@ -1,0 +1,108 @@
+{
+"issues":  [
+{
+"id":  "S109",
+"message":  "Assign this magic number '10' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\Cluster\ClusterTools\ClusterToolsExample.Shared\WorkerManager.cs",
+"region":  {
+"startLine":  24,
+"startColumn":  80,
+"endLine":  24,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\Cluster\ClusterTools\ClusterToolsExample.Shared\WorkerManager.cs",
+"region":  {
+"startLine":  39,
+"startColumn":  76,
+"endLine":  39,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '10' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\Cluster\ClusterTools\ClusterToolsExample.Shared\WorkerManager.cs",
+"region":  {
+"startLine":  40,
+"startColumn":  107,
+"endLine":  40,
+"endColumn":  109
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '10' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\Cluster\ClusterTools\ClusterToolsExample.Shared\WorkerManager.cs",
+"region":  {
+"startLine":  46,
+"startColumn":  43,
+"endLine":  46,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '30' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\Cluster\ClusterTools\ClusterToolsExample.Shared\WorkerManager.cs",
+"region":  {
+"startLine":  48,
+"startColumn":  37,
+"endLine":  48,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '10' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\Cluster\ClusterTools\ClusterToolsExample.Shared\WorkerManager.cs",
+"region":  {
+"startLine":  51,
+"startColumn":  42,
+"endLine":  51,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\Cluster\ClusterTools\ClusterToolsExample.Shared\WorkerManager.cs",
+"region":  {
+"startLine":  57,
+"startColumn":  42,
+"endLine":  57,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\Cluster\ClusterTools\ClusterToolsExample.Shared\WorkerManager.cs",
+"region":  {
+"startLine":  57,
+"startColumn":  47,
+"endLine":  57,
+"endColumn":  48
+}
+}
+}
+]
+}

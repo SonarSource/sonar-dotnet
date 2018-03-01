@@ -1,0 +1,108 @@
+{
+"issues":  [
+{
+"id":  "S109",
+"message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\PersistenceBenchmark\PerformanceActors.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  34,
+"endLine":  29,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\PersistenceBenchmark\PerformanceActors.cs",
+"region":  {
+"startLine":  56,
+"startColumn":  42,
+"endLine":  56,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\PersistenceBenchmark\PerformanceActors.cs",
+"region":  {
+"startLine":  76,
+"startColumn":  42,
+"endLine":  76,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\PersistenceBenchmark\PerformanceActors.cs",
+"region":  {
+"startLine":  93,
+"startColumn":  34,
+"endLine":  93,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '10' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\PersistenceBenchmark\PerformanceActors.cs",
+"region":  {
+"startLine":  102,
+"startColumn":  31,
+"endLine":  102,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\PersistenceBenchmark\PerformanceActors.cs",
+"region":  {
+"startLine":  117,
+"startColumn":  34,
+"endLine":  117,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '100' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\PersistenceBenchmark\Program.cs",
+"region":  {
+"startLine":  63,
+"startColumn":  65,
+"endLine":  63,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '100' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\benchmark\PersistenceBenchmark\Program.cs",
+"region":  {
+"startLine":  77,
+"startColumn":  65,
+"endLine":  77,
+"endColumn":  68
+}
+}
+}
+]
+}

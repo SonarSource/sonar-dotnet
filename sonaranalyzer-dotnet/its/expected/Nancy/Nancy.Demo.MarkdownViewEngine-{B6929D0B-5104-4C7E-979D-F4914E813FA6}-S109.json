@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Demo.MarkdownViewEngine\Model\BlogModel.cs",
+"region":  {
+"startLine":  50,
+"startColumn":  39,
+"endLine":  50,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '8' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Demo.MarkdownViewEngine\Model\BlogModel.cs",
+"region":  {
+"startLine":  99,
+"startColumn":  101,
+"endLine":  99,
+"endColumn":  102
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '100' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Demo.MarkdownViewEngine\Model\BlogModel.cs",
+"region":  {
+"startLine":  115,
+"startColumn":  50,
+"endLine":  115,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '100' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Demo.MarkdownViewEngine\Model\BlogModel.cs",
+"region":  {
+"startLine":  115,
+"startColumn":  69,
+"endLine":  115,
+"endColumn":  72
+}
+}
+}
+]
+}
