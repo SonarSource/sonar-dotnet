@@ -46,7 +46,7 @@ namespace Tests.Diagnostics
 
             }
 
-            var array = new string[10]; // Noncompliant
+            var array = new string[10];
             array[5] = "test"; // Noncompliant
         }
 
