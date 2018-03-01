@@ -74,6 +74,8 @@ namespace SonarAnalyzer.UnitTest
             MetadataReference.CreateFromFile(PackagesFolderRelativePath + @"xunit.assert.2.2.0\lib\netstandard1.1\xunit.assert.dll");
         internal static readonly MetadataReference NUnitFrameworkAssembly =
             MetadataReference.CreateFromFile(PackagesFolderRelativePath + @"NUnit.2.6.4\lib\nunit.framework.dll");
+        internal static readonly MetadataReference SystemThreadingTasksExtensionsAssembly =
+           MetadataReference.CreateFromFile(PackagesFolderRelativePath + @"System.Threading.Tasks.Extensions.4.3.0\lib\netstandard1.0\System.Threading.Tasks.Extensions.dll");
         internal static readonly MetadataReference FluentAssertionsAssembly =
             MetadataReference.CreateFromFile(typeof(AssertionExtensions).Assembly.Location);
         internal static readonly MetadataReference FluentAssertionsCoreAssembly =

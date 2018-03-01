@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sql.Common\Journal\JournalDbEngine.cs",
+"region":  {
+"startLine":  128,
+"startColumn":  27,
+"endLine":  128,
+"endColumn":  37
+}
+}
+}
+]
+}

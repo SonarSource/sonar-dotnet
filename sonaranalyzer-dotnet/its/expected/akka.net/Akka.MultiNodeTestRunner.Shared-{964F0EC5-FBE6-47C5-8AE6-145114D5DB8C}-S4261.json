@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Reporting\TestRunCoordinator.cs",
+"region":  {
+"startLine":  158,
+"startColumn":  28,
+"endLine":  158,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.MultiNodeTestRunner.Shared\Sinks\IMessageSink.cs",
+"region":  {
+"startLine":  50,
+"startColumn":  20,
+"endLine":  50,
+"endColumn":  25
+}
+}
+}
+]
+}

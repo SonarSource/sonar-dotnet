@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests\Routing\ClusterRouterAsk1343BugFixSpec.cs",
+"region":  {
+"startLine":  73,
+"startColumn":  27,
+"endLine":  73,
+"endColumn":  85
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests\Routing\ClusterRouterAsk1343BugFixSpec.cs",
+"region":  {
+"startLine":  83,
+"startColumn":  27,
+"endLine":  83,
+"endColumn":  86
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests\Routing\ClusterRouterAsk1343BugFixSpec.cs",
+"region":  {
+"startLine":  94,
+"startColumn":  27,
+"endLine":  94,
+"endColumn":  92
+}
+}
+}
+]
+}

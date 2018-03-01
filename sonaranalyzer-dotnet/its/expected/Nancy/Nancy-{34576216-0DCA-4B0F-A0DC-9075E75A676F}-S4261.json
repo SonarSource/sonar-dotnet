@@ -1,0 +1,238 @@
+{
+"issues":  [
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\AfterPipeline.cs",
+"region":  {
+"startLine":  55,
+"startColumn":  27,
+"endLine":  55,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\BeforePipeline.cs",
+"region":  {
+"startLine":  52,
+"startColumn":  37,
+"endLine":  52,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Helpers\TaskHelpers.cs",
+"region":  {
+"startLine":  10,
+"startColumn":  31,
+"endLine":  10,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\INancyEngine.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  28,
+"endLine":  27,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\IO\RequestStream.cs",
+"region":  {
+"startLine":  89,
+"startColumn":  22,
+"endLine":  89,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\NancyEngine.cs",
+"region":  {
+"startLine":  235,
+"startColumn":  42,
+"endLine":  235,
+"endColumn":  64
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\NancyEngine.cs",
+"region":  {
+"startLine":  256,
+"startColumn":  39,
+"endLine":  256,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\NancyEngine.cs",
+"region":  {
+"startLine":  261,
+"startColumn":  22,
+"endLine":  261,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\NancyEngineExtensions.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  42,
+"endLine":  14,
+"endColumn":  55
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Owin\NancyMiddleware.cs",
+"region":  {
+"startLine":  115,
+"startColumn":  29,
+"endLine":  115,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Response.cs",
+"region":  {
+"startLine":  87,
+"startColumn":  29,
+"endLine":  87,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\DefaultRequestDispatcher.cs",
+"region":  {
+"startLine":  87,
+"startColumn":  28,
+"endLine":  87,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\DefaultRequestDispatcher.cs",
+"region":  {
+"startLine":  110,
+"startColumn":  39,
+"endLine":  110,
+"endColumn":  57
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\IRequestDispatcher.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  24,
+"endLine":  16,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\IRouteInvoker.cs",
+"region":  {
+"startLine":  19,
+"startColumn":  24,
+"endLine":  19,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\MethodNotAllowedRoute.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  38,
+"endLine":  26,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\OptionsRoute.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  38,
+"endLine":  18,
+"endColumn":  65
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\Route.cs",
+"region":  {
+"startLine":  73,
+"startColumn":  30,
+"endLine":  73,
+"endColumn":  36
+}
+}
+}
+]
+}

@@ -5,6 +5,10 @@ namespace Tests.Diagnostics
 {
     public class NonCompliantCases
     {
+        public ValueTask<T> FooValueTaskT<T>() // Noncompliant
+        {
+        }
+
         public Task FooTask() // Noncompliant {{Add the 'Async' suffix to the name of this method.}}
 //                  ^^^^^^^
         {
@@ -35,6 +39,23 @@ namespace Tests.Diagnostics
         public object BarObjectAsync() // Noncompliant
         {
             return null;
+        }
+
+        public Task MyMethodAsync()
+        {
+            if (true)
+            {
+                return OtherSubMethod();
+            }
+
+            return SubMethod();
+
+            Task SubMethod() => Task.Delay(0); // Compliant - should not be but requires C# 7 syntax
+
+            Task OtherSubMethod()// Compliant - should not be but requires C# 7 syntax
+            {
+                return Task.Delay(0);
+            }
         }
     }
 

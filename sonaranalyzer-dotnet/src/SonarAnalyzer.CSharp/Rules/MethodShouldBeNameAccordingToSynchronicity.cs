@@ -46,7 +46,8 @@ namespace SonarAnalyzer.Rules.CSharp
         private static ISet<KnownType> TaskTypes = new HashSet<KnownType>
         {
             KnownType.System_Threading_Tasks_Task,
-            KnownType.System_Threading_Tasks_Task_T
+            KnownType.System_Threading_Tasks_Task_T,
+            KnownType.System_Threading_Tasks_ValueTask_TResult
         };
 
         protected override void Initialize(SonarAnalysisContext context)
@@ -68,8 +69,8 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    var isTaskReturnType = methodSymbol.ReturnType.DerivesFromAny(TaskTypes);
-                    var hasAsyncSuffix = "async".Equals(methodDeclaration.Identifier.ValueText.SplitCamelCaseToWords().LastOrDefault());
+                    var isTaskReturnType = (methodSymbol.ReturnType as INamedTypeSymbol)?.ConstructedFrom.DerivesFromAny(TaskTypes) ?? false;
+                    var hasAsyncSuffix = methodDeclaration.Identifier.ValueText.SplitCamelCaseToWords().LastOrDefault() == "async";
 
                     if (hasAsyncSuffix && !isTaskReturnType)
                     {

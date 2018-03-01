@@ -32,7 +32,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void MethodShouldBeNameAccordingToSynchronicity()
         {
             Verifier.VerifyAnalyzer(@"TestCases\MethodShouldBeNameAccordingToSynchronicity.cs",
-                new MethodShouldBeNameAccordingToSynchronicity());
+                new MethodShouldBeNameAccordingToSynchronicity(), null, Verifier.SystemThreadingTasksExtensionsAssembly);
         }
     }
 }
