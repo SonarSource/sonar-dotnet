@@ -1,0 +1,134 @@
+{
+"issues":  [
+{
+"id":  "S109",
+"message":  "Assign this magic number '100' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Demo.Validation\Models\Customer.cs",
+"region":  {
+"startLine":  19,
+"startColumn":  27,
+"endLine":  19,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Demo.Validation\Models\OddLengthStringAttribute.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  59,
+"endLine":  9,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '10' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Demo.Validation\Models\Product.cs",
+"region":  {
+"startLine":  25,
+"startColumn":  56,
+"endLine":  25,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '10' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Demo.Validation\Models\Product.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  64,
+"endLine":  29,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '15' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Demo.Validation\Models\Product.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  68,
+"endLine":  29,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '10' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Demo.Validation\Models\Product.cs",
+"region":  {
+"startLine":  30,
+"startColumn":  64,
+"endLine":  30,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '15' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Demo.Validation\Models\Product.cs",
+"region":  {
+"startLine":  30,
+"startColumn":  68,
+"endLine":  30,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Demo.Validation\Models\Product.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  53,
+"endLine":  31,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Demo.Validation\Models\Product.cs",
+"region":  {
+"startLine":  52,
+"startColumn":  36,
+"endLine":  52,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '200' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Demo.Validation\ProductsModule.cs",
+"region":  {
+"startLine":  34,
+"startColumn":  24,
+"endLine":  34,
+"endColumn":  27
+}
+}
+}
+]
+}

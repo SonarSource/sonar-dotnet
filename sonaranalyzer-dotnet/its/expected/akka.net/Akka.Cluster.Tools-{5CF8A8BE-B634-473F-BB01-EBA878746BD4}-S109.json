@@ -1,0 +1,69 @@
+{
+"issues":  [
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\DistributedPubSubMediator.cs",
+"region":  {
+"startLine":  142,
+"startColumn":  79,
+"endLine":  142,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\Internal\Topics.cs",
+"region":  {
+"startLine":  30,
+"startColumn":  66,
+"endLine":  30,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  279,
+"startColumn":  39,
+"endLine":  279,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  280,
+"startColumn":  51,
+"endLine":  280,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '15' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
+"region":  {
+"startLine":  311,
+"startColumn":  82,
+"endLine":  311,
+"endColumn":  86
+}
+}
+}
+]
+}

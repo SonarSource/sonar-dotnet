@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S109",
+"message":  "Assign this magic number '9' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember.Plugins\Utility.cs",
+"region":  {
+"startLine":  46,
+"startColumn":  38,
+"endLine":  46,
+"endColumn":  39
+}
+}
+}
+]
+}

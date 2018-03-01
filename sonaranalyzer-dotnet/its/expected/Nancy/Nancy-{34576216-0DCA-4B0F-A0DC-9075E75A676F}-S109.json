@@ -1,0 +1,2084 @@
+{
+"issues":  [
+{
+"id":  "S109",
+"message":  "Assign this magic number '0.2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Conventions\BuiltInAcceptHeaderCoercions.cs",
+"region":  {
+"startLine":  70,
+"startColumn":  73,
+"endLine":  70,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Conventions\DefaultAcceptHeaderCoercionConventions.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  162,
+"endLine":  28,
+"endColumn":  163
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '4' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Cryptography\Base64Helpers.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  70,
+"endLine":  16,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Cryptography\Base64Helpers.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  76,
+"endLine":  16,
+"endColumn":  79
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '8' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Cryptography\PassphraseKeyGenerator.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  31,
+"endLine":  26,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '32' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Cryptography\RijndaelEncryptionProvider.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  46,
+"endLine":  22,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '16' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Cryptography\RijndaelEncryptionProvider.cs",
+"region":  {
+"startLine":  23,
+"startColumn":  45,
+"endLine":  23,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '32' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  152,
+"startColumn":  27,
+"endLine":  152,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '9' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  152,
+"startColumn":  39,
+"endLine":  152,
+"endColumn":  40
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '127' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  152,
+"startColumn":  51,
+"endLine":  152,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '159' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  268,
+"startColumn":  73,
+"endLine":  268,
+"endColumn":  76
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '159' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  317,
+"startColumn":  34,
+"endLine":  317,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '256' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  317,
+"startColumn":  46,
+"endLine":  317,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  464,
+"startColumn":  37,
+"endLine":  464,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  468,
+"startColumn":  37,
+"endLine":  468,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  476,
+"startColumn":  35,
+"endLine":  476,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  482,
+"startColumn":  98,
+"endLine":  482,
+"endColumn":  99
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  483,
+"startColumn":  74,
+"endLine":  483,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  493,
+"startColumn":  35,
+"endLine":  493,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '65535' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  502,
+"startColumn":  38,
+"endLine":  502,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '16' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  521,
+"startColumn":  43,
+"endLine":  521,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '10' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  529,
+"startColumn":  43,
+"endLine":  529,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  544,
+"startColumn":  33,
+"endLine":  544,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '255' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  577,
+"startColumn":  21,
+"endLine":  577,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '12' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  587,
+"startColumn":  28,
+"endLine":  587,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '8' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  589,
+"startColumn":  29,
+"endLine":  589,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '15' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  589,
+"startColumn":  34,
+"endLine":  589,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '4' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  591,
+"startColumn":  29,
+"endLine":  591,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '15' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  591,
+"startColumn":  34,
+"endLine":  591,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '15' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  593,
+"startColumn":  27,
+"endLine":  593,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '127' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  613,
+"startColumn":  38,
+"endLine":  613,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '15' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  625,
+"startColumn":  34,
+"endLine":  625,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '33' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  634,
+"startColumn":  21,
+"endLine":  634,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '126' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  634,
+"startColumn":  31,
+"endLine":  634,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '15' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
+"region":  {
+"startLine":  642,
+"startColumn":  43,
+"endLine":  642,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '255' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"region":  {
+"startLine":  126,
+"startColumn":  22,
+"endLine":  126,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"region":  {
+"startLine":  154,
+"startColumn":  38,
+"endLine":  154,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"region":  {
+"startLine":  156,
+"startColumn":  48,
+"endLine":  156,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"region":  {
+"startLine":  159,
+"startColumn":  48,
+"endLine":  159,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '4' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"region":  {
+"startLine":  159,
+"startColumn":  51,
+"endLine":  159,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"region":  {
+"startLine":  163,
+"startColumn":  34,
+"endLine":  163,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"region":  {
+"startLine":  168,
+"startColumn":  57,
+"endLine":  168,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"region":  {
+"startLine":  171,
+"startColumn":  30,
+"endLine":  171,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '10' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"region":  {
+"startLine":  207,
+"startColumn":  34,
+"endLine":  207,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '10' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"region":  {
+"startLine":  210,
+"startColumn":  34,
+"endLine":  210,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '4' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"region":  {
+"startLine":  224,
+"startColumn":  35,
+"endLine":  224,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '127' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"region":  {
+"startLine":  237,
+"startColumn":  25,
+"endLine":  237,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '4' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"region":  {
+"startLine":  243,
+"startColumn":  31,
+"endLine":  243,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"region":  {
+"startLine":  272,
+"startColumn":  44,
+"endLine":  272,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"region":  {
+"startLine":  274,
+"startColumn":  58,
+"endLine":  274,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"region":  {
+"startLine":  281,
+"startColumn":  52,
+"endLine":  281,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '4' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"region":  {
+"startLine":  281,
+"startColumn":  55,
+"endLine":  281,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"region":  {
+"startLine":  285,
+"startColumn":  34,
+"endLine":  285,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"region":  {
+"startLine":  289,
+"startColumn":  61,
+"endLine":  289,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"region":  {
+"startLine":  292,
+"startColumn":  30,
+"endLine":  292,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"region":  {
+"startLine":  369,
+"startColumn":  48,
+"endLine":  369,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Helpers\HttpUtility.cs",
+"region":  {
+"startLine":  375,
+"startColumn":  30,
+"endLine":  375,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\HttpMultipart.cs",
+"region":  {
+"startLine":  74,
+"startColumn":  80,
+"endLine":  74,
+"endColumn":  81
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\HttpMultipart.cs",
+"region":  {
+"startLine":  76,
+"startColumn":  60,
+"endLine":  76,
+"endColumn":  61
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '100' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\HttpStatusCode.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  20,
+"endLine":  12,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '101' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\HttpStatusCode.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  30,
+"endLine":  16,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '102' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\HttpStatusCode.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  22,
+"endLine":  20,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '103' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\HttpStatusCode.cs",
+"region":  {
+"startLine":  24,
+"startColumn":  22,
+"endLine":  24,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '200' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\HttpStatusCode.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  14,
+"endLine":  28,
+"endColumn":  17
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '201' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\HttpStatusCode.cs",
+"region":  {
+"startLine":  32,
+"startColumn":  19,
+"endLine":  32,
+"endColumn":  22
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '202' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\HttpStatusCode.cs",
+"region":  {
+"startLine":  36,
+"startColumn":  20,
+"endLine":  36,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '203' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\HttpStatusCode.cs",
+"region":  {
+"startLine":  40,
+"startColumn":  39,
+"endLine":  40,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '204' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\HttpStatusCode.cs",
+"region":  {
+"startLine":  44,
+"startColumn":  21,
+"endLine":  44,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '205' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\HttpStatusCode.cs",
+"region":  {
+"startLine":  48,
+"startColumn":  24,
+"endLine":  48,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '206' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\HttpStatusCode.cs",
+"region":  {
+"startLine":  52,
+"startColumn":  26,
+"endLine":  52,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '207' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\HttpStatusCode.cs",
+"region":  {
+"startLine":  56,
+"startColumn":  26,
+"endLine":  56,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '226' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\HttpStatusCode.cs",
+"region":  {
+"startLine":  60,
+"startColumn":  18,
+"endLine":  60,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '300' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\HttpStatusCode.cs",
+"region":  {
+"startLine":  64,
+"startColumn":  27,
+"endLine":  64,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '301' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\HttpStatusCode.cs",
+"region":  {
+"startLine":  68,
+"startColumn":  28,
+"endLine":  68,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '302' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\HttpStatusCode.cs",
+"region":  {
+"startLine":  72,
+"startColumn":  17,
+"endLine":  72,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '303' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\HttpStatusCode.cs",
+"region":  {
+"startLine":  76,
+"startColumn":  20,
+"endLine":  76,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '304' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\HttpStatusCode.cs",
+"region":  {
+"startLine":  80,
+"startColumn":  23,
+"endLine":  80,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '305' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\HttpStatusCode.cs",
+"region":  {
+"startLine":  84,
+"startColumn":  20,
+"endLine":  84,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '306' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\HttpStatusCode.cs",
+"region":  {
+"startLine":  88,
+"startColumn":  23,
+"endLine":  88,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '307' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\HttpStatusCode.cs",
+"region":  {
+"startLine":  92,
+"startColumn":  29,
+"endLine":  92,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '308' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\HttpStatusCode.cs",
+"region":  {
+"startLine":  96,
+"startColumn":  28,
+"endLine":  96,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '400' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\HttpStatusCode.cs",
+"region":  {
+"startLine":  100,
+"startColumn":  22,
+"endLine":  100,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '401' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\HttpStatusCode.cs",
+"region":  {
+"startLine":  104,
+"startColumn":  24,
+"endLine":  104,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '402' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\HttpStatusCode.cs",
+"region":  {
+"startLine":  108,
+"startColumn":  27,
+"endLine":  108,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '403' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\HttpStatusCode.cs",
+"region":  {
+"startLine":  112,
+"startColumn":  21,
+"endLine":  112,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '404' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\HttpStatusCode.cs",
+"region":  {
+"startLine":  116,
+"startColumn":  20,
+"endLine":  116,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '405' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\HttpStatusCode.cs",
+"region":  {
+"startLine":  120,
+"startColumn":  28,
+"endLine":  120,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '406' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\HttpStatusCode.cs",
+"region":  {
+"startLine":  124,
+"startColumn":  25,
+"endLine":  124,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '407' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\HttpStatusCode.cs",
+"region":  {
+"startLine":  128,
+"startColumn":  39,
+"endLine":  128,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '408' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\HttpStatusCode.cs",
+"region":  {
+"startLine":  132,
+"startColumn":  26,
+"endLine":  132,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '409' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\HttpStatusCode.cs",
+"region":  {
+"startLine":  136,
+"startColumn":  20,
+"endLine":  136,
+"endColumn":  23
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '410' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\HttpStatusCode.cs",
+"region":  {
+"startLine":  140,
+"startColumn":  16,
+"endLine":  140,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '411' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\HttpStatusCode.cs",
+"region":  {
+"startLine":  144,
+"startColumn":  26,
+"endLine":  144,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '412' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\HttpStatusCode.cs",
+"region":  {
+"startLine":  148,
+"startColumn":  30,
+"endLine":  148,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '413' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\HttpStatusCode.cs",
+"region":  {
+"startLine":  152,
+"startColumn":  33,
+"endLine":  152,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '414' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\HttpStatusCode.cs",
+"region":  {
+"startLine":  156,
+"startColumn":  29,
+"endLine":  156,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '415' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\HttpStatusCode.cs",
+"region":  {
+"startLine":  160,
+"startColumn":  32,
+"endLine":  160,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '416' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\HttpStatusCode.cs",
+"region":  {
+"startLine":  164,
+"startColumn":  40,
+"endLine":  164,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '417' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\HttpStatusCode.cs",
+"region":  {
+"startLine":  168,
+"startColumn":  29,
+"endLine":  168,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '418' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\HttpStatusCode.cs",
+"region":  {
+"startLine":  172,
+"startColumn":  21,
+"endLine":  172,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '420' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\HttpStatusCode.cs",
+"region":  {
+"startLine":  176,
+"startColumn":  27,
+"endLine":  176,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '422' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\HttpStatusCode.cs",
+"region":  {
+"startLine":  180,
+"startColumn":  31,
+"endLine":  180,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '423' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\HttpStatusCode.cs",
+"region":  {
+"startLine":  184,
+"startColumn":  18,
+"endLine":  184,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '424' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\HttpStatusCode.cs",
+"region":  {
+"startLine":  188,
+"startColumn":  28,
+"endLine":  188,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '425' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\HttpStatusCode.cs",
+"region":  {
+"startLine":  192,
+"startColumn":  31,
+"endLine":  192,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '426' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\HttpStatusCode.cs",
+"region":  {
+"startLine":  196,
+"startColumn":  27,
+"endLine":  196,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '429' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\HttpStatusCode.cs",
+"region":  {
+"startLine":  200,
+"startColumn":  27,
+"endLine":  200,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '444' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\HttpStatusCode.cs",
+"region":  {
+"startLine":  204,
+"startColumn":  22,
+"endLine":  204,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '449' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\HttpStatusCode.cs",
+"region":  {
+"startLine":  208,
+"startColumn":  21,
+"endLine":  208,
+"endColumn":  24
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '450' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\HttpStatusCode.cs",
+"region":  {
+"startLine":  212,
+"startColumn":  44,
+"endLine":  212,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '451' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\HttpStatusCode.cs",
+"region":  {
+"startLine":  216,
+"startColumn":  38,
+"endLine":  216,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '499' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\HttpStatusCode.cs",
+"region":  {
+"startLine":  220,
+"startColumn":  31,
+"endLine":  220,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '500' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\HttpStatusCode.cs",
+"region":  {
+"startLine":  224,
+"startColumn":  31,
+"endLine":  224,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '501' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\HttpStatusCode.cs",
+"region":  {
+"startLine":  228,
+"startColumn":  26,
+"endLine":  228,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '502' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\HttpStatusCode.cs",
+"region":  {
+"startLine":  232,
+"startColumn":  22,
+"endLine":  232,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '503' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\HttpStatusCode.cs",
+"region":  {
+"startLine":  236,
+"startColumn":  30,
+"endLine":  236,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '504' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\HttpStatusCode.cs",
+"region":  {
+"startLine":  240,
+"startColumn":  26,
+"endLine":  240,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '505' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\HttpStatusCode.cs",
+"region":  {
+"startLine":  244,
+"startColumn":  35,
+"endLine":  244,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '506' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\HttpStatusCode.cs",
+"region":  {
+"startLine":  248,
+"startColumn":  33,
+"endLine":  248,
+"endColumn":  36
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '507' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\HttpStatusCode.cs",
+"region":  {
+"startLine":  252,
+"startColumn":  31,
+"endLine":  252,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '509' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\HttpStatusCode.cs",
+"region":  {
+"startLine":  256,
+"startColumn":  34,
+"endLine":  256,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '510' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\HttpStatusCode.cs",
+"region":  {
+"startLine":  260,
+"startColumn":  23,
+"endLine":  260,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '8192' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\IO\RequestStream.cs",
+"region":  {
+"startLine":  360,
+"startColumn":  17,
+"endLine":  360,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '8196' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\IO\RequestStream.cs",
+"region":  {
+"startLine":  442,
+"startColumn":  46,
+"endLine":  442,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '102400' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"region":  {
+"startLine":  71,
+"startColumn":  33,
+"endLine":  71,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '100' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"region":  {
+"startLine":  71,
+"startColumn":  41,
+"endLine":  71,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '102400' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"region":  {
+"startLine":  76,
+"startColumn":  37,
+"endLine":  76,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '100' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"region":  {
+"startLine":  76,
+"startColumn":  45,
+"endLine":  76,
+"endColumn":  48
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Json\JavaScriptSerializer.cs",
+"region":  {
+"startLine":  335,
+"startColumn":  66,
+"endLine":  335,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '6' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  399,
+"startColumn":  14,
+"endLine":  399,
+"endColumn":  15
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '6' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  403,
+"startColumn":  26,
+"endLine":  403,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '128' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
+"region":  {
+"startLine":  581,
+"startColumn":  14,
+"endLine":  581,
+"endColumn":  17
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '4' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Json\JsonSerializer.cs",
+"region":  {
+"startLine":  615,
+"startColumn":  93,
+"endLine":  615,
+"endColumn":  94
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '15' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Json\JsonSerializer.cs",
+"region":  {
+"startLine":  616,
+"startColumn":  18,
+"endLine":  616,
+"endColumn":  21
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '10' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Json\JsonSerializer.cs",
+"region":  {
+"startLine":  617,
+"startColumn":  85,
+"endLine":  617,
+"endColumn":  87
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '10' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Json\JsonSerializer.cs",
+"region":  {
+"startLine":  617,
+"startColumn":  121,
+"endLine":  617,
+"endColumn":  123
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Owin\NancyMiddleware.cs",
+"region":  {
+"startLine":  225,
+"startColumn":  41,
+"endLine":  225,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Request.cs",
+"region":  {
+"startLine":  183,
+"startColumn":  77,
+"endLine":  183,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Response.cs",
+"region":  {
+"startLine":  36,
+"startColumn":  51,
+"endLine":  36,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\MediaRange.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  32,
+"endLine":  29,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\MediaRange.cs",
+"region":  {
+"startLine":  39,
+"startColumn":  32,
+"endLine":  39,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\Constraints\LengthRouteSegmentConstraint.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  38,
+"endLine":  18,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\Constraints\RangeRouteSegmentConstraint.cs",
+"region":  {
+"startLine":  19,
+"startColumn":  38,
+"endLine":  19,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\Trie\Nodes\CaptureNode.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  26,
+"endLine":  15,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2000' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\Trie\Nodes\CaptureNodeWithConstraint.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  26,
+"endLine":  22,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\Trie\Nodes\CaptureNodeWithDefaultValue.cs",
+"region":  {
+"startLine":  19,
+"startColumn":  26,
+"endLine":  19,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\Trie\Nodes\CaptureNodeWithDefaultValue.cs",
+"region":  {
+"startLine":  67,
+"startColumn":  36,
+"endLine":  67,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '100' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\Trie\Nodes\CaptureNodeWithMultipleParameters.cs",
+"region":  {
+"startLine":  65,
+"startColumn":  26,
+"endLine":  65,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '100' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\Trie\Nodes\GreedyRegExCaptureNode.cs",
+"region":  {
+"startLine":  25,
+"startColumn":  26,
+"endLine":  25,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '10000' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\Trie\Nodes\LiteralNode.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  26,
+"endLine":  15,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\Trie\Nodes\OptionalCaptureNode.cs",
+"region":  {
+"startLine":  17,
+"startColumn":  26,
+"endLine":  17,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\Trie\Nodes\RegExNode.cs",
+"region":  {
+"startLine":  19,
+"startColumn":  26,
+"endLine":  19,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\Trie\TrieNodeFactory.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  89,
+"endLine":  43,
+"endColumn":  90
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Session\CookieBasedSessions.cs",
+"region":  {
+"startLine":  193,
+"startColumn":  105,
+"endLine":  193,
+"endColumn":  106
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1000' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\StaticConfiguration.cs",
+"region":  {
+"startLine":  21,
+"startColumn":  46,
+"endLine":  21,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '397' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  494,
+"startColumn":  40,
+"endLine":  494,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '397' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  498,
+"startColumn":  44,
+"endLine":  498,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '397' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  503,
+"startColumn":  44,
+"endLine":  503,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\ResourceViewLocationProvider.cs",
+"region":  {
+"startLine":  169,
+"startColumn":  36,
+"endLine":  169,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\ResourceViewLocationProvider.cs",
+"region":  {
+"startLine":  171,
+"startColumn":  59,
+"endLine":  171,
+"endColumn":  60
+}
+}
+}
+]
+}

@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S109",
+"message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\Cluster\ClusterTools\ClusterToolsExample.Seed\Program.cs",
+"region":  {
+"startLine":  45,
+"startColumn":  74,
+"endLine":  45,
+"endColumn":  75
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\Cluster\ClusterTools\ClusterToolsExample.Seed\Program.cs",
+"region":  {
+"startLine":  45,
+"startColumn":  99,
+"endLine":  45,
+"endColumn":  100
+}
+}
+}
+]
+}

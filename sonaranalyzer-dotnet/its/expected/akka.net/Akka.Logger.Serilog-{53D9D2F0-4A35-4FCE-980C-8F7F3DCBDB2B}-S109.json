@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S109",
+"message":  "Assign this magic number '4' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\loggers\Akka.Logger.Serilog\SerilogLogger.cs",
+"region":  {
+"startLine":  36,
+"startColumn":  96,
+"endLine":  36,
+"endColumn":  97
+}
+}
+}
+]
+}

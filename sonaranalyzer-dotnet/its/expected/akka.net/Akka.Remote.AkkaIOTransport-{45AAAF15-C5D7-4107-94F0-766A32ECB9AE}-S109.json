@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S109",
+"message":  "Assign this magic number '128000' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\transports\Akka.Remote.AkkaIOTransport\AkkaIOTransport.cs",
+"region":  {
+"startLine":  43,
+"startColumn":  65,
+"endLine":  43,
+"endColumn":  71
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '4' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\transports\Akka.Remote.AkkaIOTransport\ConnectionAssociation.cs",
+"region":  {
+"startLine":  68,
+"startColumn":  33,
+"endLine":  68,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '4' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\transports\Akka.Remote.AkkaIOTransport\ConnectionAssociation.cs",
+"region":  {
+"startLine":  71,
+"startColumn":  55,
+"endLine":  71,
+"endColumn":  56
+}
+}
+}
+]
+}

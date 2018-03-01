@@ -414,6 +414,33 @@
   <data name="S108_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
   </data>
+  <data name="S109_Category" xml:space="preserve">
+    <value>Major Code Smell</value>
+  </data>
+  <data name="S109_Description" xml:space="preserve">
+    <value>A magic number is a number that comes out of nowhere, and is directly used in a statement. Magic numbers are often used, for instance to limit the number of iterations of a loops, to test the value of a property, etc.</value>
+  </data>
+  <data name="S109_IsActivatedByDefault" xml:space="preserve">
+    <value>False</value>
+  </data>
+  <data name="S109_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S109_RemediationCost" xml:space="preserve">
+    <value>5min</value>
+  </data>
+  <data name="S109_Severity" xml:space="preserve">
+    <value>Major</value>
+  </data>
+  <data name="S109_Tags" xml:space="preserve">
+    <value>brain-overload</value>
+  </data>
+  <data name="S109_Title" xml:space="preserve">
+    <value>Magic numbers should not be used</value>
+  </data>
+  <data name="S109_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S110_Category" xml:space="preserve">
     <value>Major Code Smell</value>
   </data>

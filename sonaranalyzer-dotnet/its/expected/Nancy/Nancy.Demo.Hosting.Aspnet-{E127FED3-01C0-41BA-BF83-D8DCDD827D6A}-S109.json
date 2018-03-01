@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S109",
+"message":  "Assign this magic number '30' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Demo.Hosting.Aspnet\DemoBootstrapper.cs",
+"region":  {
+"startLine":  36,
+"startColumn":  33,
+"endLine":  36,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '1000000' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Demo.Hosting.Aspnet\MainModule.cs",
+"region":  {
+"startLine":  78,
+"startColumn":  71,
+"endLine":  78,
+"endColumn":  78
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '27' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Demo.Hosting.Aspnet\MainModule.cs",
+"region":  {
+"startLine":  184,
+"startColumn":  50,
+"endLine":  184,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '20' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Demo.Hosting.Aspnet\MainModule.cs",
+"region":  {
+"startLine":  216,
+"startColumn":  65,
+"endLine":  216,
+"endColumn":  67
+}
+}
+}
+]
+}

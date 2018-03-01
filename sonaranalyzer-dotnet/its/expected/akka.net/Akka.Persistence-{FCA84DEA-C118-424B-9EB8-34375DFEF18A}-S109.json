@@ -1,0 +1,173 @@
+{
+"issues":  [
+{
+"id":  "S109",
+"message":  "Assign this magic number '7' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Serialization\MessageSerializer.cs",
+"region":  {
+"startLine":  36,
+"startColumn":  26,
+"endLine":  36,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '8' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Serialization\SnapshotSerializer.cs",
+"region":  {
+"startLine":  59,
+"startColumn":  26,
+"endLine":  59,
+"endColumn":  27
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '4' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Serialization\SnapshotSerializer.cs",
+"region":  {
+"startLine":  86,
+"startColumn":  46,
+"endLine":  86,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '255' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Serialization\SnapshotSerializer.cs",
+"region":  {
+"startLine":  152,
+"startColumn":  41,
+"endLine":  152,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '8' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Serialization\SnapshotSerializer.cs",
+"region":  {
+"startLine":  153,
+"startColumn":  43,
+"endLine":  153,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '255' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Serialization\SnapshotSerializer.cs",
+"region":  {
+"startLine":  153,
+"startColumn":  48,
+"endLine":  153,
+"endColumn":  52
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '16' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Serialization\SnapshotSerializer.cs",
+"region":  {
+"startLine":  154,
+"startColumn":  43,
+"endLine":  154,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '255' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Serialization\SnapshotSerializer.cs",
+"region":  {
+"startLine":  154,
+"startColumn":  49,
+"endLine":  154,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '24' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Serialization\SnapshotSerializer.cs",
+"region":  {
+"startLine":  155,
+"startColumn":  43,
+"endLine":  155,
+"endColumn":  45
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '255' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Serialization\SnapshotSerializer.cs",
+"region":  {
+"startLine":  155,
+"startColumn":  49,
+"endLine":  155,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '8' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Serialization\SnapshotSerializer.cs",
+"region":  {
+"startLine":  163,
+"startColumn":  58,
+"endLine":  163,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '16' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Serialization\SnapshotSerializer.cs",
+"region":  {
+"startLine":  164,
+"startColumn":  58,
+"endLine":  164,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '24' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence\Serialization\SnapshotSerializer.cs",
+"region":  {
+"startLine":  165,
+"startColumn":  58,
+"endLine":  165,
+"endColumn":  60
+}
+}
+}
+]
+}

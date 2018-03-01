@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S109",
+"message":  "Assign this magic number '30' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Demo.Caching\MainModule.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  48,
+"endLine":  16,
+"endColumn":  50
+}
+}
+}
+]
+}

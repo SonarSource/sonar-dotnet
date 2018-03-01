@@ -1,0 +1,121 @@
+{
+"issues":  [
+{
+"id":  "S109",
+"message":  "Assign this magic number '15' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\FaultTolerance\Program.cs",
+"region":  {
+"startLine":  47,
+"startColumn":  60,
+"endLine":  47,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '100' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\FaultTolerance\Program.cs",
+"region":  {
+"startLine":  60,
+"startColumn":  41,
+"endLine":  60,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\FaultTolerance\Program.cs",
+"region":  {
+"startLine":  142,
+"startColumn":  90,
+"endLine":  142,
+"endColumn":  91
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '100' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\FaultTolerance\Program.cs",
+"region":  {
+"startLine":  143,
+"startColumn":  53,
+"endLine":  143,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '3' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\FaultTolerance\Program.cs",
+"region":  {
+"startLine":  217,
+"startColumn":  42,
+"endLine":  217,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '5' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\FaultTolerance\Program.cs",
+"region":  {
+"startLine":  217,
+"startColumn":  66,
+"endLine":  217,
+"endColumn":  67
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '10' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\FaultTolerance\Program.cs",
+"region":  {
+"startLine":  285,
+"startColumn":  90,
+"endLine":  285,
+"endColumn":  92
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '11' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\FaultTolerance\Program.cs",
+"region":  {
+"startLine":  492,
+"startColumn":  17,
+"endLine":  492,
+"endColumn":  19
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '14' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\FaultTolerance\Program.cs",
+"region":  {
+"startLine":  492,
+"startColumn":  41,
+"endLine":  492,
+"endColumn":  43
+}
+}
+}
+]
+}

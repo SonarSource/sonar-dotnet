@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Encryption.MachineKey\MachineKeyHmacProvider.cs",
+"region":  {
+"startLine":  87,
+"startColumn":  61,
+"endLine":  87,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S109",
+"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Encryption.MachineKey\MachineKeyHmacProvider.cs",
+"region":  {
+"startLine":  94,
+"startColumn":  47,
+"endLine":  94,
+"endColumn":  48
+}
+}
+}
+]
+}
