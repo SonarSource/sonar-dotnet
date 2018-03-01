@@ -471,6 +471,7 @@ namespace SonarAnalyzer.UnitTest
                 if (options == null)
                 {
                     var csOptions = new CS.CSharpParseOptions();
+                    yield return csOptions.WithLanguageVersion(CS.LanguageVersion.CSharp7);
                     yield return csOptions.WithLanguageVersion(CS.LanguageVersion.CSharp6);
                     yield return csOptions.WithLanguageVersion(CS.LanguageVersion.CSharp5);
                 }
@@ -478,6 +479,7 @@ namespace SonarAnalyzer.UnitTest
             }
 
             var vbOptions = options as VB.VisualBasicParseOptions ?? new VB.VisualBasicParseOptions();
+            yield return vbOptions.WithLanguageVersion(VB.LanguageVersion.VisualBasic15);
             yield return vbOptions.WithLanguageVersion(VB.LanguageVersion.VisualBasic14);
             yield return vbOptions.WithLanguageVersion(VB.LanguageVersion.VisualBasic12);
         }
