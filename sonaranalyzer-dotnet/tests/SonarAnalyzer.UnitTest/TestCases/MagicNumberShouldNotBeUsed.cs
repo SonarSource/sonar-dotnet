@@ -31,6 +31,7 @@ namespace Tests.Diagnostics
 
         public void Foo(int value = 42)
         {
+            var x = -1 < 1;
         }
     }
 
@@ -44,6 +45,9 @@ namespace Tests.Diagnostics
             {
 
             }
+
+            var array = new string[10]; // Noncompliant
+            array[5] = "test"; // Noncompliant
         }
 
         public int GetValue()
