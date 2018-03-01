@@ -1,0 +1,17 @@
+{
+  "title": "Methods should be named according to their synchronicities",
+  "type": "BUG",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    "convention",
+    "async-await",
+    "confusing"
+  ],
+  "defaultSeverity": "Minor",
+  "ruleSpecification": "RSPEC-4261",
+  "sqKey": "S4261"
+}
