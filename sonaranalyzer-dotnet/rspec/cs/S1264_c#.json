@@ -1,0 +1,15 @@
+{
+  "title": "A \"while\" loop should be used instead of a \"for\" loop",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    "clumsy"
+  ],
+  "defaultSeverity": "Minor",
+  "ruleSpecification": "RSPEC-1264",
+  "sqKey": "S1264"
+}
