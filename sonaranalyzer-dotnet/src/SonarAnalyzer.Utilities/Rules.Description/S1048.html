@@ -1,0 +1,29 @@
+<p>If Finalize or an override of Finalize throws an exception, and the runtime is not hosted by an application that overrides the default policy, the
+runtime terminates the process immediately without graceful cleanup (finally blocks and finalizers are not executed). This behavior ensures process
+integrity if the finalizer cannot free or destroy resources.</p>
+<p>The rule reports on throw statements used in finalizers.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+class MyClass
+{
+    ~MyClass()
+    {
+        throw new NotImplementedException(); // Noncompliant
+    }
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+class MyClass
+{
+    ~MyClass()
+    {
+        // no throw
+    }
+}
+</pre>
+<h2>See</h2>
+<ul>
+  <li> MISRA C++:2008, 15-5-1 - A class destructor shall not exit with an exception. </li>
+</ul>
+
