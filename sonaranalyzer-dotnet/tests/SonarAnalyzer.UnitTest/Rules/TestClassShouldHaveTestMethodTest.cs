@@ -29,13 +29,22 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void TestClassShouldHaveTestMethod()
+        public void TestClassShouldHaveTestMethod_NUnit()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\TestClassShouldHaveTestMethod.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\TestClassShouldHaveTestMethod_NUnit.cs",
                 new TestClassShouldHaveTestMethod(),
                 null,
-                Verifier.MicrosoftVisualStudioTestToolsUnitTestingAssembly,
                 Verifier.NUnitFrameworkAssembly);
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void TestClassShouldHaveTestMethod_MSTest()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\TestClassShouldHaveTestMethod_MSTest.cs",
+                new TestClassShouldHaveTestMethod(),
+                null,
+                Verifier.MicrosoftVisualStudioTestToolsUnitTestingAssembly);
         }
     }
 }
