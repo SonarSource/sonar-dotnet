@@ -19,6 +19,7 @@ namespace Tests.Diagnostics
                     break;
                 default:
                     switch (value) // Noncompliant
+//                  ^^^^^^
                     {
                         case 0:
                             break;
