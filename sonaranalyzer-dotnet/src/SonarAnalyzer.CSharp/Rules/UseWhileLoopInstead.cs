@@ -47,7 +47,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var forStatement = (ForStatementSyntax)c.Node;
 
                     if (forStatement.Declaration == null &&
-                        forStatement.Incrementors.Count == 0)
+                        forStatement.Incrementors?.Count == 0)
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, forStatement.ForKeyword.GetLocation()));
                     }

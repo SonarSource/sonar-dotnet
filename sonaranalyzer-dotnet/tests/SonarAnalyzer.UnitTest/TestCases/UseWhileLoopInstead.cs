@@ -21,6 +21,16 @@ namespace Tests.Diagnostics
                 // Body of the loop.
             }
 
+            for (int k = 0; k < 10;) // Compliant - only the incrementor is missing
+            {
+                k++;
+            }
+
+            int z = 42;
+            for (; z < 50; z++) // Compliant - only the declaration is missing
+            {
+            }
+
             var x = 5;
             for (; x < 10;) // Noncompliant {{Replace this 'for' loop with a 'while' loop.}}
 //          ^^^
