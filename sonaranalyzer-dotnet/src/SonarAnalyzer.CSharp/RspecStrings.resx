@@ -1347,6 +1347,33 @@
   <data name="S126_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
   </data>
+  <data name="S1264_Category" xml:space="preserve">
+    <value>Minor Code Smell</value>
+  </data>
+  <data name="S1264_Description" xml:space="preserve">
+    <value>When only the condition expression is defined in a for loop, and the initialization and increment expressions are missing, a while loop should be used instead to increase readability. </value>
+  </data>
+  <data name="S1264_IsActivatedByDefault" xml:space="preserve">
+    <value>True</value>
+  </data>
+  <data name="S1264_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S1264_RemediationCost" xml:space="preserve">
+    <value>5min</value>
+  </data>
+  <data name="S1264_Severity" xml:space="preserve">
+    <value>Minor</value>
+  </data>
+  <data name="S1264_Tags" xml:space="preserve">
+    <value>clumsy</value>
+  </data>
+  <data name="S1264_Title" xml:space="preserve">
+    <value>A "while" loop should be used instead of a "for" loop</value>
+  </data>
+  <data name="S1264_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S127_Category" xml:space="preserve">
     <value>Major Code Smell</value>
   </data>
