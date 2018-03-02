@@ -1,6 +1,5 @@
 ﻿using System;
 using NUnit.Framework;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Tests.Diagnostics
 {
@@ -10,19 +9,8 @@ namespace Tests.Diagnostics
     {
     }
 
-    [TestClass]
-    class ClassTest2 // Noncompliant
-    {
-    }
-
     [TestFixture]
     class ClassTest3 // Noncompliant
-    {
-        public void Foo() { }
-    }
-
-    [TestClass]
-    class ClassTest4 // Noncompliant
     {
         public void Foo() { }
     }
@@ -52,40 +40,11 @@ namespace Tests.Diagnostics
         public void Foo(string a) { }
     }
 
-    [TestClass]
-    class ClassTest9
-    {
-        [TestMethod]
-        public void Foo() { }
-    }
-
     [TestFixture]
     class ClassTest10
     {
         [Theory]
         public void Foo() { }
-    }
-
-    [TestClass]
-    class ClassTest12
-    {
-        [DataTestMethod]
-        [DataRow(1)]
-        public void Foo(int i) { }
-    }
-
-    [TestClass]
-    public abstract class MyCommonCode1
-    {
-    }
-
-    [TestClass]
-    public class MySubCommonCode1 : MyCommonCode1 // Noncompliant
-    {
-    }
-
-    public class MySubCommonCode11 : MyCommonCode1 // Compliant
-    {
     }
 
     [TestFixture]
@@ -117,5 +76,19 @@ namespace Tests.Diagnostics
             new object[] { 12, 2, 6 },
             new object[] { 12, 4, 3 }
         };
+    }
+
+    [TestFixture]
+    public abstract class TestFooBase
+    {
+        [Test]
+        public void Foo_WhenFoo_ExpectsFoo() { }
+    }
+
+    // See https://github.com/SonarSource/sonar-csharp/issues/1196
+    [TestFixture]
+    public class TestSubFoo : TestFooBase // Compliant - base abstract and at least 1 test in base
+    {
+
     }
 }

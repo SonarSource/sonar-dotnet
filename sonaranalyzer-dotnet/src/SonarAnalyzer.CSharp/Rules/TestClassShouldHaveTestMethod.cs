@@ -41,17 +41,21 @@ namespace SonarAnalyzer.Rules.CSharp
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        private static readonly ISet<KnownType> HandledTestClassAttributes = ImmutableHashSet.Create(
+        private static readonly ISet<KnownType> HandledTestClassAttributes = new HashSet<KnownType>
+        {
             KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_TestClassAttribute,
-            KnownType.NUnit_Framework_TestFixtureAttribute);
+            KnownType.NUnit_Framework_TestFixtureAttribute
+        };
 
-        private static readonly ISet<KnownType> HandledTestMethodAttributes = ImmutableHashSet.Create(
+        private static readonly ISet<KnownType> HandledTestMethodAttributes = new HashSet<KnownType>
+        {
             KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_TestMethodAttribute,
             KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_DataTestMethodAttribute,
             KnownType.NUnit_Framework_TestAttribute,
             KnownType.NUnit_Framework_TestCaseAttribute,
             KnownType.NUnit_Framework_TestCaseSourceAttribute,
-            KnownType.NUnit_Framework_TheoryAttribute);
+            KnownType.NUnit_Framework_TheoryAttribute
+        };
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -64,23 +68,34 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
 
                     var classDeclaration = (ClassDeclarationSyntax)c.Node;
-                    var classSymbol = c.SemanticModel.GetDeclaredSymbol(classDeclaration);
-
-                    if (classSymbol == null ||
-                        classSymbol.IsAbstract ||
-                        !classSymbol.GetAttributes().Any(a => a.AttributeClass.IsAny(HandledTestClassAttributes)))
+                    if (classDeclaration.Identifier.IsMissing)
                     {
                         return;
                     }
 
-                    var hasAnyTestMethod = classSymbol.GetMembers()
-                        .OfType<IMethodSymbol>()
-                        .Any(m => m.GetAttributes().Any(a => a.AttributeClass.IsAny(HandledTestMethodAttributes)));
-                    if (!hasAnyTestMethod)
+                    var classSymbol = c.SemanticModel.GetDeclaredSymbol(classDeclaration);
+
+                    if (classSymbol != null &&
+                        IsViolatingRule(classSymbol) &&
+                        !IsExceptionToTheRule(classSymbol))
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, classDeclaration.Identifier.GetLocation()));
                     }
                 }, SyntaxKind.ClassDeclaration);
         }
+
+        private static bool IsTestClass(INamedTypeSymbol classSymbol) =>
+            classSymbol.GetAttributes().Any(a => a.AttributeClass.IsAny(HandledTestClassAttributes));
+
+        private static bool HasAnyTestMethod(INamedTypeSymbol classSymbol) =>
+            classSymbol.GetMembers().OfType<IMethodSymbol>().Any(m =>
+                m.GetAttributes().Any(a => a.AttributeClass.IsAny(HandledTestMethodAttributes)));
+
+        private bool IsViolatingRule(INamedTypeSymbol classSymbol) =>
+            IsTestClass(classSymbol) && !HasAnyTestMethod(classSymbol);
+
+        private bool IsExceptionToTheRule(INamedTypeSymbol classSymbol) =>
+            classSymbol.IsAbstract ||
+            (classSymbol.BaseType.IsAbstract && HasAnyTestMethod(classSymbol.BaseType));
     }
 }
