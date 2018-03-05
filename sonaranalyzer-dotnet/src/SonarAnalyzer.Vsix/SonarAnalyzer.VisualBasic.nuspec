@@ -15,7 +15,7 @@
     <!-- The link to the release notes needs to be updated manually (the version part) -->
     <releaseNotes>https://jira.sonarsource.com/jira/secure/ReleaseNote.jspa?projectId=10112&amp;version=14045</releaseNotes>
     <language>en-US</language>
-    <copyright>Copyright © 2015-2017 SonarSource SA</copyright>
+    <copyright>Copyright © 2015-2018 SonarSource SA</copyright>
     <tags>Roslyn Analyzers Refactoring CodeAnalysis</tags>
     <developmentDependency>true</developmentDependency>
     <frameworkAssemblies>
