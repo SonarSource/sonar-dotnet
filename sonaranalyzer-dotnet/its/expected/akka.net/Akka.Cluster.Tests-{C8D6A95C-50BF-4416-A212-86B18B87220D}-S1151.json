@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S1151",
+"message":  "Reduce this 'switch/case' number of lines from 7 to at most 5, for example by extracting code into a method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests\ClusterHeartBeatSenderStateSpec.cs",
+"region":  {
+"startLine":  212,
+"startColumn":  25,
+"endLine":  212,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S1151",
+"message":  "Reduce this 'switch/case' number of lines from 10 to at most 5, for example by extracting code into a method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests\ClusterHeartBeatSenderStateSpec.cs",
+"region":  {
+"startLine":  223,
+"startColumn":  25,
+"endLine":  223,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S1151",
+"message":  "Reduce this 'switch/case' number of lines from 6 to at most 5, for example by extracting code into a method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests\ClusterHeartBeatSenderStateSpec.cs",
+"region":  {
+"startLine":  239,
+"startColumn":  25,
+"endLine":  239,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S1151",
+"message":  "Reduce this 'switch/case' number of lines from 14 to at most 5, for example by extracting code into a method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster.Tests\ClusterHeartBeatSenderStateSpec.cs",
+"region":  {
+"startLine":  248,
+"startColumn":  25,
+"endLine":  248,
+"endColumn":  43
+}
+}
+}
+]
+}

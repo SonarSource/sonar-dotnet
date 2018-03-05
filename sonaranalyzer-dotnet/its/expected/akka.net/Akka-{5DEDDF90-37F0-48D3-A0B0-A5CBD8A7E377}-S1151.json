@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S1151",
+"message":  "Reduce this 'switch/case' number of lines from 10 to at most 5, for example by extracting code into a method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\RepointableActorRef.cs",
+"region":  {
+"startLine":  193,
+"startColumn":  17,
+"endLine":  193,
+"endColumn":  25
+}
+}
+},
+{
+"id":  "S1151",
+"message":  "Reduce this 'switch/case' number of lines from 8 to at most 5, for example by extracting code into a method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconParser.cs",
+"region":  {
+"startLine":  79,
+"startColumn":  21,
+"endLine":  79,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S1151",
+"message":  "Reduce this 'switch/case' number of lines from 6 to at most 5, for example by extracting code into a method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Configuration\Hocon\HoconParser.cs",
+"region":  {
+"startLine":  94,
+"startColumn":  21,
+"endLine":  94,
+"endColumn":  40
+}
+}
+}
+]
+}
