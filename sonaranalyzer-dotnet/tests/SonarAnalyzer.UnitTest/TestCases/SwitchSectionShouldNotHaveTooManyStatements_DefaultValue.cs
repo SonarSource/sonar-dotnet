@@ -10,13 +10,16 @@ namespace Tests.Diagnostics
             {
                 case 0:
                     break;
-                case 1: // Noncompliant {{Reduce this 'switch/case' number of lines from 6 to at most 5, for example by extracting code into a method.}}
+                case 1: // Noncompliant {{Reduce this 'switch/case' number of lines from 9 to at most 8, for example by extracting code into a method.}}
 //              ^^^^^^^
                     Console.WriteLine("1");
                     Console.WriteLine("2");
                     Console.WriteLine("3");
                     Console.WriteLine("4");
                     Console.WriteLine("5");
+                    Console.WriteLine("6");
+                    Console.WriteLine("7");
+                    Console.WriteLine("8");
                     break;
                 case 2:
                     {
@@ -26,7 +29,7 @@ namespace Tests.Diagnostics
                         Console.WriteLine("4");
                         break;
                     }
-                case 3: // Noncompliant {{Reduce this 'switch/case' number of lines from 6 to at most 5, for example by extracting code into a method.}}
+                case 3: // Noncompliant {{Reduce this 'switch/case' number of lines from 9 to at most 8, for example by extracting code into a method.}}
                 case 4:
                     if (true)
                     {
@@ -34,6 +37,9 @@ namespace Tests.Diagnostics
                         {
                             for (int i = 0; i < length; i++)
                             {
+                                Console.WriteLine();
+                                Console.WriteLine();
+                                Console.WriteLine();
                                 Console.WriteLine();
                                 Console.WriteLine();
                                 Console.WriteLine();
@@ -51,6 +57,8 @@ namespace Tests.Diagnostics
                         Console.WriteLine("3");
                         Console.WriteLine("4");
                         Console.WriteLine("5");
+                        Console.WriteLine("6");
+                        Console.WriteLine("7");
                     }
                 case:
                 default:

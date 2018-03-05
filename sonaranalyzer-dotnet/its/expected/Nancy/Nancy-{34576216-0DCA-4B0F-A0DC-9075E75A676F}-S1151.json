@@ -2,20 +2,7 @@
 "issues":  [
 {
 "id":  "S1151",
-"message":  "Reduce this 'switch/case' number of lines from 7 to at most 5, for example by extracting code into a method.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\Helpers\HttpEncoder.cs",
-"region":  {
-"startLine":  315,
-"startColumn":  21,
-"endLine":  315,
-"endColumn":  29
-}
-}
-},
-{
-"id":  "S1151",
-"message":  "Reduce this 'switch/case' number of lines from 10 to at most 5, for example by extracting code into a method.",
+"message":  "Reduce this 'switch/case' number of lines from 10 to at most 8, for example by extracting code into a method.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
 "region":  {
@@ -28,20 +15,7 @@
 },
 {
 "id":  "S1151",
-"message":  "Reduce this 'switch/case' number of lines from 6 to at most 5, for example by extracting code into a method.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
-"region":  {
-"startLine":  521,
-"startColumn":  5,
-"endLine":  521,
-"endColumn":  25
-}
-}
-},
-{
-"id":  "S1151",
-"message":  "Reduce this 'switch/case' number of lines from 9 to at most 5, for example by extracting code into a method.",
+"message":  "Reduce this 'switch/case' number of lines from 9 to at most 8, for example by extracting code into a method.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
 "region":  {
@@ -54,7 +28,7 @@
 },
 {
 "id":  "S1151",
-"message":  "Reduce this 'switch/case' number of lines from 9 to at most 5, for example by extracting code into a method.",
+"message":  "Reduce this 'switch/case' number of lines from 9 to at most 8, for example by extracting code into a method.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
 "region":  {
@@ -67,20 +41,7 @@
 },
 {
 "id":  "S1151",
-"message":  "Reduce this 'switch/case' number of lines from 6 to at most 5, for example by extracting code into a method.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
-"region":  {
-"startLine":  711,
-"startColumn":  5,
-"endLine":  711,
-"endColumn":  13
-}
-}
-},
-{
-"id":  "S1151",
-"message":  "Reduce this 'switch/case' number of lines from 10 to at most 5, for example by extracting code into a method.",
+"message":  "Reduce this 'switch/case' number of lines from 10 to at most 8, for example by extracting code into a method.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
 "region":  {
@@ -93,7 +54,7 @@
 },
 {
 "id":  "S1151",
-"message":  "Reduce this 'switch/case' number of lines from 10 to at most 5, for example by extracting code into a method.",
+"message":  "Reduce this 'switch/case' number of lines from 10 to at most 8, for example by extracting code into a method.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
 "region":  {
@@ -106,7 +67,7 @@
 },
 {
 "id":  "S1151",
-"message":  "Reduce this 'switch/case' number of lines from 21 to at most 5, for example by extracting code into a method.",
+"message":  "Reduce this 'switch/case' number of lines from 21 to at most 8, for example by extracting code into a method.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
 "region":  {
@@ -119,20 +80,7 @@
 },
 {
 "id":  "S1151",
-"message":  "Reduce this 'switch/case' number of lines from 6 to at most 5, for example by extracting code into a method.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
-"region":  {
-"startLine":  769,
-"startColumn":  8,
-"endLine":  769,
-"endColumn":  26
-}
-}
-},
-{
-"id":  "S1151",
-"message":  "Reduce this 'switch/case' number of lines from 18 to at most 5, for example by extracting code into a method.",
+"message":  "Reduce this 'switch/case' number of lines from 18 to at most 8, for example by extracting code into a method.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
 "region":  {
@@ -145,33 +93,7 @@
 },
 {
 "id":  "S1151",
-"message":  "Reduce this 'switch/case' number of lines from 7 to at most 5, for example by extracting code into a method.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
-"region":  {
-"startLine":  808,
-"startColumn":  7,
-"endLine":  808,
-"endColumn":  28
-}
-}
-},
-{
-"id":  "S1151",
-"message":  "Reduce this 'switch/case' number of lines from 7 to at most 5, for example by extracting code into a method.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
-"region":  {
-"startLine":  830,
-"startColumn":  5,
-"endLine":  830,
-"endColumn":  13
-}
-}
-},
-{
-"id":  "S1151",
-"message":  "Reduce this 'switch/case' number of lines from 15 to at most 5, for example by extracting code into a method.",
+"message":  "Reduce this 'switch/case' number of lines from 15 to at most 8, for example by extracting code into a method.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Json\JsonDeserializer.cs",
 "region":  {
@@ -179,19 +101,6 @@
 "startColumn":  5,
 "endLine":  842,
 "endColumn":  13
-}
-}
-},
-{
-"id":  "S1151",
-"message":  "Reduce this 'switch/case' number of lines from 8 to at most 5, for example by extracting code into a method.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\Json\JsonSerializer.cs",
-"region":  {
-"startLine":  609,
-"startColumn":  6,
-"endLine":  609,
-"endColumn":  14
 }
 }
 }

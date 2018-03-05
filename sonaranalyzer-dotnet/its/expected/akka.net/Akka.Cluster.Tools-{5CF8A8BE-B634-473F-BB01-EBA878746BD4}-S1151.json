@@ -2,33 +2,7 @@
 "issues":  [
 {
 "id":  "S1151",
-"message":  "Reduce this 'switch/case' number of lines from 8 to at most 5, for example by extracting code into a method.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterClient.cs",
-"region":  {
-"startLine":  234,
-"startColumn":  25,
-"endLine":  234,
-"endColumn":  60
-}
-}
-},
-{
-"id":  "S1151",
-"message":  "Reduce this 'switch/case' number of lines from 6 to at most 5, for example by extracting code into a method.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
-"region":  {
-"startLine":  471,
-"startColumn":  25,
-"endLine":  471,
-"endColumn":  67
-}
-}
-},
-{
-"id":  "S1151",
-"message":  "Reduce this 'switch/case' number of lines from 9 to at most 5, for example by extracting code into a method.",
+"message":  "Reduce this 'switch/case' number of lines from 9 to at most 8, for example by extracting code into a method.",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
 "region":  {

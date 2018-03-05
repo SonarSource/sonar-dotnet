@@ -42,7 +42,7 @@ namespace SonarAnalyzer.Rules.CSharp
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        private const int ThresholdDefaultValue = 5;
+        private const int ThresholdDefaultValue = 8;
         [RuleParameter("max", PropertyType.Integer, "Maximum number of lines of code.", ThresholdDefaultValue)]
         public int Threshold { get; set; } = ThresholdDefaultValue;
 
