@@ -915,6 +915,33 @@
   <data name="S1147_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
   </data>
+  <data name="S1151_Category" xml:space="preserve">
+    <value>Major Code Smell</value>
+  </data>
+  <data name="S1151_Description" xml:space="preserve">
+    <value>The switch statement should be used only to clearly define some new branches in the control flow. As soon as a case clause contains too many statements this highly decreases the readability of the overall control flow statement. In such case, the content of the case clause should be extracted into a dedicated method.</value>
+  </data>
+  <data name="S1151_IsActivatedByDefault" xml:space="preserve">
+    <value>False</value>
+  </data>
+  <data name="S1151_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S1151_RemediationCost" xml:space="preserve">
+    <value>5min</value>
+  </data>
+  <data name="S1151_Severity" xml:space="preserve">
+    <value>Major</value>
+  </data>
+  <data name="S1151_Tags" xml:space="preserve">
+    <value>brain-overload</value>
+  </data>
+  <data name="S1151_Title" xml:space="preserve">
+    <value>"switch case" clauses should not have too many lines of code</value>
+  </data>
+  <data name="S1151_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S1155_Category" xml:space="preserve">
     <value>Minor Code Smell</value>
   </data>

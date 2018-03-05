@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S1151",
+"message":  "Reduce this 'switch/case' number of lines from 10 to at most 8, for example by extracting code into a method.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\RepointableActorRef.cs",
+"region":  {
+"startLine":  193,
+"startColumn":  17,
+"endLine":  193,
+"endColumn":  25
+}
+}
+}
+]
+}
