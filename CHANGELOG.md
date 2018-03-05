@@ -16,7 +16,38 @@ For reference, the possible headings are:
 ## Unreleased
 
 ### Notes
-* [All commits](https://github.com/SonarSource/sonar-csharp/compare/6.8.1.4648...HEAD)
+* [All commits](https://github.com/SonarSource/sonar-csharp/compare/7.0.0.4787...HEAD)
+
+
+## [7.0](https://github.com/SonarSource/sonar-csharp/releases/tag/7.0.0.4787)
+
+### New Features
+* [#780](https://github.com/SonarSource/sonar-csharp/issues/780) - Rule S4261: Methods should be named according to their synchronicity
+* [#996](https://github.com/SonarSource/sonar-csharp/issues/996) - Rule S109: Magic numbers should not be used
+* [#1131](https://github.com/SonarSource/sonar-csharp/issues/1131) - Rule S1048: Destructors should not throw exceptions
+* [#1170](https://github.com/SonarSource/sonar-csharp/issues/1170) - Rule S1151: "switch case" clauses should not have too many lines of code
+* [#1172](https://github.com/SonarSource/sonar-csharp/issues/1172) - Rule S1264: A "while" loop should be used instead of a "for" loop
+* [#1184](https://github.com/SonarSource/sonar-csharp/issues/1184) - Rule S1821: "switch" statements should not be nested
+* [#1212](https://github.com/SonarSource/sonar-csharp/issues/1212) - [New SonarLint] Enable all rules by default
+
+### Improvements
+* [#1155](https://github.com/SonarSource/sonar-csharp/issues/1155) - Move analyzers to Roslyn 1.3.2 and drop compatibility with VS 2015 < Update 3
+
+### False Positives
+* [#1161](https://github.com/SonarSource/sonar-csharp/issues/1161) - Fix S3168: Rule should not be too strict on first parameter name
+* [#1162](https://github.com/SonarSource/sonar-csharp/issues/1162) - Fix S2302: Do not raise issue when C# < 6.0
+* [#1175](https://github.com/SonarSource/sonar-csharp/issues/1175) - Fix S1118 (Utility classes should not have public constructors) ignores its exceptions
+* [#1196](https://github.com/SonarSource/sonar-csharp/issues/1196) - Fix S2187: Rule should not raise False Positives for class inheriting class with tests
+
+### Notes
+* **Breaking change:** [#1155](https://github.com/SonarSource/sonar-csharp/issues/1155) - Move analyzers to Roslyn 1.3.2 and drop compatibility with VS 2015 < Update 3
+* **Breaking change:** [#1212](https://github.com/SonarSource/sonar-csharp/issues/1212) - [New SonarLint] Enable all rules by default
+
+
+## [6.8.2](https://github.com/SonarSource/sonar-csharp/releases/tag/6.8.2.4717)
+
+### Bug
+* [#1174](https://github.com/SonarSource/sonar-csharp/issues/1174) - SonarC# should compare paths using the OS case-sensitivity
 
 
 ## [6.8.1](https://github.com/SonarSource/sonar-csharp/releases/tag/6.8.1.4648)
