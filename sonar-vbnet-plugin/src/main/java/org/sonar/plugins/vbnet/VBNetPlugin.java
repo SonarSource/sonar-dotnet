@@ -29,10 +29,10 @@ import org.sonarsource.dotnet.shared.plugins.WrongEncodingFileFilter;
 
 public class VBNetPlugin implements Plugin {
 
-  static final String LANGUAGE_KEY = "vb";
+  static final String LANGUAGE_KEY = "vbnet";
   static final String LANGUAGE_NAME = "VB.NET";
   
-  static final String REPOSITORY_KEY = "vbnetsquid";
+  static final String REPOSITORY_KEY = "vbnet";
   static final String REPOSITORY_NAME = "SonarAnalyzer";
   static final String PLUGIN_KEY = "vbnet";
   static final String SONARANALYZER_NAME = "SonarAnalyzer.VisualBasic";

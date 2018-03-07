@@ -52,8 +52,8 @@ import static java.util.stream.Collectors.toList;
 
 public class RoslynProfileExporter extends ProfileExporter {
   private static final Logger LOG = Loggers.get(RoslynProfileExporter.class);
-  private static final String SONARANALYZER_PARTIAL_REPO_KEY = "sonaranalyzer-vb";
-  private static final String PROFILE_KEY = "roslyn-vb";
+  private static final String SONARANALYZER_PARTIAL_REPO_KEY = "sonaranalyzer-vbnet";
+  private static final String PROFILE_KEY = "roslyn-vbnet";
   private static final String ROSLYN_REPOSITORY_PREFIX = "roslyn.";
 
   private final Configuration configuration;
