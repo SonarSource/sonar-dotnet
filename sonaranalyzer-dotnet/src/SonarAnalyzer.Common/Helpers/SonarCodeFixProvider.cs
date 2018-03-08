@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CodeFixes;
@@ -42,7 +43,7 @@ namespace SonarAnalyzer.Helpers
             /// we can only disable one of them if they are created from different assembly-versions.
             /// If the VSIX and the NuGet has the same version, then code fixes show up multiple times, this ticket will fix
             /// this problem: https://github.com/dotnet/roslyn/issues/4030
-            if (SonarAnalysisContext.IsRegisteredActionEnabled(syntaxRoot.SyntaxTree))
+            if (SonarAnalysisContext.IsRegisteredActionEnabled(Enumerable.Empty<DiagnosticDescriptor>(), syntaxRoot.SyntaxTree))
             {
                 await RegisterCodeFixesAsync(syntaxRoot, context).ConfigureAwait(false);
             }
