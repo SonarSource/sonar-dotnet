@@ -51,7 +51,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [TestMethod]
         public void SonarAnalysis_WhenShouldAnalysisBeDisabledReturnsTrue_NoIssueReported()
         {
-            SonarAnalysisContext.ShouldExecuteRegisteredAction = tree => false;
+            SonarAnalysisContext.ShouldExecuteRegisteredAction = (diags, tree )=> false;
 
             try
             {
@@ -139,7 +139,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
 
             try
             {
-                SonarAnalysisContext.ShouldExecuteRegisteredAction = tree =>
+                SonarAnalysisContext.ShouldExecuteRegisteredAction = (diags, tree) =>
                     tree.FilePath.EndsWith(new FileInfo(TestCases[0].Path).Name, System.StringComparison.OrdinalIgnoreCase);
                 Verifier.VerifyAnalyzer(TestCases[0].Path, TestCases[0].Analyzer);
                 Verifier.VerifyNoIssueReported(TestCases[1].Path, TestCases[1].Analyzer);

@@ -59,7 +59,7 @@ namespace SonarAnalyzer.Helpers
         /// duplicated analysis and issues. When both the NuGet and the VSIX are available, NuGet will take precedence and VSIX
         /// will be inhibited.
         /// </remarks>
-        public static Func<SyntaxTree, bool> ShouldExecuteRegisteredAction { get; set; }
+        public static Func<IEnumerable<DiagnosticDescriptor>, SyntaxTree, bool> ShouldExecuteRegisteredAction { get; set; }
 
         /// <summary>
         /// This delegates control whether or not a diagnostic should be reported to Roslyn.
@@ -143,7 +143,7 @@ namespace SonarAnalyzer.Helpers
                 registrationAction(
                     c =>
                     {
-                        if (IsRegisteredActionEnabled(getSyntaxTree(c)))
+                        if (IsRegisteredActionEnabled(this.supportedDiagnostics, getSyntaxTree(c)))
                         {
                             registeredAction(c);
                         }
@@ -151,9 +151,9 @@ namespace SonarAnalyzer.Helpers
             }
         }
 
-        internal static bool IsRegisteredActionEnabled(SyntaxTree tree) =>
+        internal static bool IsRegisteredActionEnabled(IEnumerable<DiagnosticDescriptor> diagnostics, SyntaxTree tree) =>
             ShouldExecuteRegisteredAction == null ||
             tree == null ||
-            ShouldExecuteRegisteredAction(tree);
+            ShouldExecuteRegisteredAction(diagnostics, tree);
     }
 }
