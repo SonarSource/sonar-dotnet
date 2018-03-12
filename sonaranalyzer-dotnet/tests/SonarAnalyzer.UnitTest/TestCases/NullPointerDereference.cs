@@ -611,4 +611,18 @@ namespace Tests.Diagnostics
         }
     }
 
+    public class GuardedTests
+    {
+        public void Guarded(string s1)
+        {
+            Guard1(s1);
+
+            if (s1 == null) s1.ToUpper(); // Compliant, this code is unreachable
+        }
+
+        public void Guard1<T>([ValidatedNotNull]T value) where T : class { }
+
+        [AttributeUsage(AttributeTargets.Parameter)]
+        public sealed class ValidatedNotNullAttribute : Attribute { }
+    }
 }

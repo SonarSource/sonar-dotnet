@@ -26,7 +26,7 @@ public class MyClass
 
     public void Foo(MyOtherClass other)
     {
-        this.other = other; // Compliant: other not being dereferenced
+        this.other = other;
     }
 
     public void Bar(MyOtherClass other)
@@ -35,6 +35,30 @@ public class MyClass
         {
             this.other = other.Clone();
         }
+    }
+}
+</pre>
+<h2>Exceptions</h2>
+<p>To create a custom null validation method declare an attribute with name <code>ValidatedNotNullAttribute</code> and mark the parameter that is
+validated for null:</p>
+<pre>
+public static class Guard
+{
+    public static void NotNull&lt;T&gt;(this [ValidatedNotNullAttribute]T value, string name) where T : class
+    {
+        if (value == null) throw new ArgumentNullException(name);
+    }
+}
+
+[AttributeUsage(AttributeTargets.Parameter)]
+public sealed class ValidatedNotNullAttribute : Attribute { }
+
+public static class Utils
+{
+    public static string ToUpper(string value)
+    {
+        Guard.NotNull(value, nameof(value));
+        return value.ToUpper(); // Compliant
     }
 }
 </pre>

@@ -1403,4 +1403,24 @@ namespace Tests.Diagnostics
             }
         }
     }
+
+    public class GuardedTests
+    {
+        public void Guarded(string s1)
+        {
+            Guard1(s1);
+
+            if (s1 == null)  // Noncompliant, always flse
+            { // Secondary, this branch is never executed
+            }
+            else
+            {
+            }
+        }
+
+        public void Guard1<T>([ValidatedNotNull]T value) where T : class { }
+
+        [AttributeUsage(AttributeTargets.Parameter)]
+        public sealed class ValidatedNotNullAttribute : Attribute { }
+    }
 }
