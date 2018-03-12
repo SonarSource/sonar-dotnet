@@ -19,19 +19,6 @@
 "location":  {
 "uri":  "sources\Ember-MM\Ember.Plugins\Utility.cs",
 "region":  {
-"startLine":  36,
-"startColumn":  49,
-"endLine":  36,
-"endColumn":  55
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'imdbId' before using it.",
-"location":  {
-"uri":  "sources\Ember-MM\Ember.Plugins\Utility.cs",
-"region":  {
 "startLine":  44,
 "startColumn":  22,
 "endLine":  44,

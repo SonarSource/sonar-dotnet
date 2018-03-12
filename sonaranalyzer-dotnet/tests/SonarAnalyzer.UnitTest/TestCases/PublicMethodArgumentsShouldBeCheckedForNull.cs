@@ -64,5 +64,26 @@ namespace Tests.Diagnostics
 
             Program.staticField.ToString(); // Compliant
         }
+
+        public void MoreCompliantCases(string s1, string s2)
+        {
+            if (string.IsNullOrEmpty(s1))
+            {
+                s1.ToString(); // Noncompliant, could be null
+            }
+            else
+            {
+                s1.ToString(); // Compliant
+            }
+
+            if (string.IsNullOrWhiteSpace(s2))
+            {
+                s2.ToString(); // Noncompliant, could be null
+            }
+            else
+            {
+                s2.ToString(); // Compliant
+            }
+        }
     }
 }

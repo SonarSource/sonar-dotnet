@@ -278,6 +278,18 @@ namespace Tests.Diagnostics
             System.Diagnostics.Debug.Assert(o1 == null);
             o1.ToString(); // Compliant, we don't learn on Assert
         }
+
+        public void StringEmpty(string s1)
+        {
+            if (string.IsNullOrEmpty(s1))
+            {
+                s1.ToString(); // Noncompliant, could be null
+            }
+            else
+            {
+                s1.ToString(); // Compliant
+            }
+        }
     }
 
     class A

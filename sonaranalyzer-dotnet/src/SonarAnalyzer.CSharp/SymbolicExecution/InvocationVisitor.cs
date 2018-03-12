@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -96,13 +97,12 @@ namespace SonarAnalyzer.SymbolicExecution
                 .PopValue(out var arg1)
                 .PopValue();
 
-            if (newProgramState.HasConstraint(arg1, ObjectConstraint.Null))
-            {
-                // Value is null, so the result of the call is true
-                return newProgramState.PushValue(SymbolicValue.True);
-            }
-
-            return newProgramState.PushValue(new SymbolicValue());
+            // Handle string.IsNullOrEmpty(arg1) as if it was arg1 == null
+            return new ReferenceEqualsConstraintHandler(arg1, SymbolicValue.Null,
+                    invocation.ArgumentList.Arguments[0].Expression,
+                    null,
+                    newProgramState, semanticModel)
+                .PushWithConstraint();
         }
 
         private ProgramState HandleStaticEqualsCall()
@@ -148,9 +148,11 @@ namespace SonarAnalyzer.SymbolicExecution
             return SetConstraintOnValueEquals(equals, newProgramState);
         }
 
-        private static readonly ImmutableHashSet<string> IsNullMethodNames = ImmutableHashSet.Create(
+        private static readonly ISet<string> IsNullMethodNames = new HashSet<string>
+        {
             nameof(string.IsNullOrEmpty),
-            nameof(string.IsNullOrWhiteSpace));
+            nameof(string.IsNullOrWhiteSpace),
+        };
 
         private static bool IsStringNullCheckMethod(IMethodSymbol methodSymbol)
         {
@@ -254,6 +256,12 @@ namespace SonarAnalyzer.SymbolicExecution
 
             private bool IsAnyArgumentNonNullValueType()
             {
+                if (expressionRight == null ||
+                    expressionLeft == null)
+                {
+                    return false;
+                }
+
                 var type1 = semanticModel.GetTypeInfo(expressionLeft).Type;
                 var type2 = semanticModel.GetTypeInfo(expressionRight).Type;
 
