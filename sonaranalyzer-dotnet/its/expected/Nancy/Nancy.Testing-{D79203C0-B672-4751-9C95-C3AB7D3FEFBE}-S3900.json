@@ -548,19 +548,6 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'path' before using it.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy.Testing\PathHelper.cs",
-"region":  {
-"startLine":  32,
-"startColumn":  25,
-"endLine":  32,
-"endColumn":  29
-}
-}
-},
-{
-"id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'closure' before using it.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.Testing\StaticConfigurationContext.cs",

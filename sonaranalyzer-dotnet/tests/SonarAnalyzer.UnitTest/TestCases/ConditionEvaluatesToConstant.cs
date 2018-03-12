@@ -771,15 +771,26 @@ namespace Tests.Diagnostics
             return false;
         }
 
-        public void StringEmpty()
+        public void StringEmpty(string s1)
         {
             string s = null;
             if (string.IsNullOrEmpty(s)) { } // Noncompliant {{Change this condition so that it does not always evaluate to 'true'.}}
             if (string.IsNullOrWhiteSpace(s)) { } // Noncompliant {{Change this condition so that it does not always evaluate to 'true'.}}
             if (string.IsInterned(s)) { }
             s = "";
-            if (string.IsNullOrEmpty(s)) { }
-            if (string.IsNullOrWhiteSpace(s)) { }
+            if (string.IsNullOrEmpty(s)) { } // Noncompliant
+//Secondary@-1
+            if (string.IsNullOrWhiteSpace(s)) { } // Noncompliant
+//Secondary@-1
+
+            if (string.IsNullOrEmpty(s1)) { } // Compliant, we don't know anything about the argument
+            if (string.IsNullOrWhiteSpace(s1)) { } // Compliant
+
+            if (string.IsNullOrEmpty(s1))
+            {
+                if (string.IsNullOrEmpty(s1)) { } // Noncompliant, we know s1 is not null -> this is always false
+// Secndary@-1
+            }
         }
 
         public void Comparisons(int i, int j)
