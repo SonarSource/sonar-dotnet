@@ -20,6 +20,7 @@
 
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -71,6 +72,12 @@ namespace SonarAnalyzer.SymbolicExecution
             if (IsStringNullCheckMethod(methodSymbol))
             {
                 return HandleStringNullCheckMethod();
+            }
+
+            if (methodSymbol != null &&
+                ValidatesNotNull(methodSymbol, out var validatedArgumentIndex))
+            {
+                return HandleNullValidationMethod(validatedArgumentIndex, invocationArgsCount);
             }
 
             if (invocation.IsNameof(semanticModel))
@@ -148,6 +155,13 @@ namespace SonarAnalyzer.SymbolicExecution
             return SetConstraintOnValueEquals(equals, newProgramState);
         }
 
+        private ProgramState HandleNullValidationMethod(int validatedArgumentIndex, int invocationArgsCount) =>
+            programState
+                .PopValues(invocationArgsCount - validatedArgumentIndex - 1)
+                .PopValue(out var guardedArgumentValue)
+                .PopValues(validatedArgumentIndex)
+                .SetConstraint(guardedArgumentValue, ObjectConstraint.NotNull);
+
         private static readonly ISet<string> IsNullMethodNames = new HashSet<string>
         {
             nameof(string.IsNullOrEmpty),
@@ -183,6 +197,19 @@ namespace SonarAnalyzer.SymbolicExecution
                 methodSymbol.ContainingType.Is(KnownType.System_Object) &&
                 methodSymbol.IsStatic &&
                 methodSymbol.Name == EqualsLiteral;
+        }
+
+        private static bool ValidatesNotNull(IMethodSymbol methodSymbol, out int validatedArgumentIndex)
+        {
+            validatedArgumentIndex = methodSymbol.Parameters.IndexOf(IsValidatedParameter);
+
+            return validatedArgumentIndex >= 0;
+
+            bool IsValidatedParameter(IParameterSymbol parameterSymbol) =>
+                parameterSymbol.GetAttributes().Any(IsValidatedNotNullAttribute);
+
+            bool IsValidatedNotNullAttribute(AttributeData attribute) =>
+                "ValidatedNotNullAttribute".Equals(attribute.AttributeClass?.Name);
         }
 
         internal static ProgramState SetConstraintOnValueEquals(ValueEqualsSymbolicValue equals,

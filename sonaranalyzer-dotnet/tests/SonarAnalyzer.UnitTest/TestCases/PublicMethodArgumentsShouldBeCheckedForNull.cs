@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 
 namespace Tests.Diagnostics
 {
@@ -85,5 +85,29 @@ namespace Tests.Diagnostics
                 s2.ToString(); // Compliant
             }
         }
+    }
+
+    public class GuardedTests
+    {
+        public void Guarded(string s1, string s2, string s3)
+        {
+            Guard1(s1);
+            s1.ToUpper();
+
+            Guard2(s2, "s2");
+            s2.ToUpper();
+
+            Guard3("s3", s3);
+            s3.ToUpper();
+        }
+
+        public void Guard1<T>([ValidatedNotNull]T value) where T : class { }
+
+        public void Guard2<T>([ValidatedNotNull]T value, string name) where T : class { }
+
+        public void Guard3<T>(string name, [ValidatedNotNull]T value) where T : class { }
+
+        [AttributeUsage(AttributeTargets.Parameter)]
+        public sealed class ValidatedNotNullAttribute : Attribute { }
     }
 }

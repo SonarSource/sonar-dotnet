@@ -100,5 +100,11 @@ namespace SonarAnalyzer.Helpers
                 }
             }
         }
+
+        public static int IndexOf<T>(this IEnumerable<T> enumerable, Func<T, bool> predicate) =>
+            enumerable
+                .Select((item, index) => new { item, index })
+                .FirstOrDefault(x => predicate(x.item))
+                ?.index ?? -1;
     }
 }
