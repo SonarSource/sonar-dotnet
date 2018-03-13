@@ -5,10 +5,10 @@ namespace Tests.Diagnostics
 {
     class UninvokedEventDeclaration<T>
     {
-        public event Action<object, EventArgs> Event1 //Noncompliant {{Remove this unused event or invoke it.}}
+        public event Action<object, EventArgs> Event1 // Compliant, event accessors cannot be invoked
         {
-            add { }
-            remove { }
+            add { } // S3237 will report
+            remove { } // S3237 will report
         }
         private event Action<object, EventArgs> Event2;
         private event EventHandler<T> Event3,
@@ -34,7 +34,7 @@ namespace Tests.Diagnostics
 
         private class Nested : MyBase<T>, IMyInterface<T>
         {
-            private event EventHandler<T> Event5, // Noncompliant
+            private event EventHandler<T> Event5, // Noncompliant {{Remove the unused event 'Event5' or invoke it.}}
 //                                        ^^^^^^
                 Event6; // Compliant, S1144 reports on it
 
@@ -90,6 +90,25 @@ namespace Tests.Diagnostics
                 v.MyEvent2?.DynamicInvoke(42);
                 v.MyEvent2?.Invoke(42);
             }
+        }
+    }
+
+    // See https://github.com/SonarSource/sonar-csharp/issues/1219
+    public class EventAccessor
+    {
+        private event EventHandler privateEvent;
+
+        public event EventHandler PublicEvent
+        {
+            add { privateEvent += value; }
+            remove { privateEvent -= value; }
+        }
+
+        protected void OnEvent1()
+        {
+            PublicEvent += (s, o) => { }; // Need to use the event to be able to trigger issues
+
+            privateEvent?.Invoke(this, EventArgs.Empty);
         }
     }
 
