@@ -35,7 +35,7 @@ namespace SonarAnalyzer.Rules.CSharp
     public class UninvokedEventDeclaration : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S3264";
-        private const string MessageFormat = "Remove this unused event or invoke it.";
+        private const string MessageFormat = "Remove the unused event '{0}' or invoke it.";
 
         private static readonly Accessibility maxAccessibility = Accessibility.Public;
 
@@ -43,6 +43,11 @@ namespace SonarAnalyzer.Rules.CSharp
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+
+        private static readonly ISet<SyntaxKind> eventSyntax = new HashSet<SyntaxKind>
+        {
+            SyntaxKind.EventFieldDeclaration,
+        };
 
         protected sealed override void Initialize(SonarAnalysisContext context)
         {
@@ -60,41 +65,40 @@ namespace SonarAnalyzer.Rules.CSharp
 
             var removableDeclarationCollector = new RemovableDeclarationCollector(namedType, context.Compilation);
 
-            var removableEvents = removableDeclarationCollector.GetRemovableDeclarations(
-                new HashSet<SyntaxKind> { SyntaxKind.EventDeclaration }, maxAccessibility);
-            var removableEventFields = removableDeclarationCollector.GetRemovableFieldLikeDeclarations(
-                new HashSet<SyntaxKind> { SyntaxKind.EventFieldDeclaration }, maxAccessibility);
+            var removableEventFields = removableDeclarationCollector
+                .GetRemovableFieldLikeDeclarations(eventSyntax, maxAccessibility)
+                .ToList();
 
-            var allRemovableEvents = removableEvents.Concat(removableEventFields).ToList();
-            if (!allRemovableEvents.Any())
+            if (!removableEventFields.Any())
             {
                 return;
             }
 
-            var symbolNames = allRemovableEvents.Select(t => t.Symbol.Name).ToHashSet();
+            var symbolNames = removableEventFields.Select(t => t.Symbol.Name).ToHashSet();
             var usedSymbols = GetReferencedSymbolsWithMatchingNames(removableDeclarationCollector, symbolNames);
             var invokedSymbols = GetInvokedEventSymbols(removableDeclarationCollector);
             var possiblyCopiedSymbols = GetPossiblyCopiedSymbols(removableDeclarationCollector);
 
-            foreach (var removableEvent in allRemovableEvents)
-            {
-                if (!usedSymbols.Contains(removableEvent.Symbol))
-                {
-                    /// reported by <see cref="UnusedPrivateMember"/>
-                    continue;
-                }
+            removableEventFields
+                .Where(IsNotInvoked)
+                .Where(IsNotCopied)
+                .ToList()
+                .ForEach(x => context.ReportDiagnosticIfNonGenerated(
+                    Diagnostic.Create(rule, GetLocation(x.SyntaxNode), x.Symbol.Name)));
 
-                if (!invokedSymbols.Contains(removableEvent.Symbol) &&
-                    !possiblyCopiedSymbols.Contains(removableEvent.Symbol))
-                {
-                    var eventField = removableEvent.SyntaxNode as VariableDeclaratorSyntax;
-                    var location = eventField != null
-                        ? eventField.Identifier.GetLocation()
-                        : ((EventDeclarationSyntax)removableEvent.SyntaxNode).Identifier.GetLocation();
+            Location GetLocation(SyntaxNode node) =>
+                node is VariableDeclaratorSyntax variableDeclarator
+                    ? variableDeclarator.Identifier.GetLocation()
+                    : ((EventDeclarationSyntax)node).Identifier.GetLocation();
 
-                    context.ReportDiagnosticIfNonGenerated(Diagnostic.Create(rule, location));
-                }
-            }
+            bool IsNotInvoked(SyntaxNodeSymbolSemanticModelTuple<SyntaxNode, ISymbol> tuple) =>
+                !invokedSymbols.Contains(tuple.Symbol);
+
+            bool IsNotCopied(SyntaxNodeSymbolSemanticModelTuple<SyntaxNode, ISymbol> tuple) =>
+                !possiblyCopiedSymbols.Contains(tuple.Symbol);
+
+            bool IsUsed(SyntaxNodeSymbolSemanticModelTuple<SyntaxNode, ISymbol> tuple) =>
+                usedSymbols.Contains(tuple.Symbol);
         }
 
         private static ISet<ISymbol> GetReferencedSymbolsWithMatchingNames(RemovableDeclarationCollector removableDeclarationCollector,
