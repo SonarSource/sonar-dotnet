@@ -38,6 +38,8 @@ namespace Tests.Diagnostics
 
             x = Enumerable.Select(coll, element => element as object).Any(element => element != null); //Noncompliant
             x = Enumerable.Any(Enumerable.Select(coll, element => element as object), element => element != null); //Noncompliant
+
+            coll.ToList().AsEnumerable(); // Compliant, we ignore AsEnumerable() as it is somewhat cleaner way to cast to IEnumerable<T> and has no side effects
         }
 
         public bool CheckCondition(object x)
