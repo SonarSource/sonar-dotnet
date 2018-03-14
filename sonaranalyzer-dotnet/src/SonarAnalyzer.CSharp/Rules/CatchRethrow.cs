@@ -38,12 +38,11 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         internal const string DiagnosticId = "S2737";
         private const string MessageFormat = @"Add logic to this catch clause or eliminate it and rethrow the exception automatically.";
-        private const IdeVisibility ideVisibility = IdeVisibility.Hidden;
 
         private static readonly BlockSyntax ThrowBlock = SyntaxFactory.Block(SyntaxFactory.ThrowStatement());
 
         private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, ideVisibility, RspecStrings.ResourceManager);
+            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 

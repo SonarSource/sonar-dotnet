@@ -43,26 +43,17 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string MessageObjectBase = "'Object' should not be explicitly extended.";
         internal const string MessageAlreadyImplements = "'{0}' implements '{1}' so '{1}' can be removed from the inheritance list.";
         internal const string RedundantIndexKey = "redundantIndex";
-        private const IdeVisibility ideVisibility = IdeVisibility.Hidden;
 
         private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, ideVisibility, RspecStrings.ResourceManager);
+            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         protected sealed override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c => CheckEnum(c),
-                SyntaxKind.EnumDeclaration);
-
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c => CheckInterface(c),
-                SyntaxKind.InterfaceDeclaration);
-
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c => CheckClass(c),
-                SyntaxKind.ClassDeclaration);
+            context.RegisterSyntaxNodeActionInNonGenerated(CheckEnum, SyntaxKind.EnumDeclaration);
+            context.RegisterSyntaxNodeActionInNonGenerated(CheckInterface, SyntaxKind.InterfaceDeclaration);
+            context.RegisterSyntaxNodeActionInNonGenerated(CheckClass, SyntaxKind.ClassDeclaration);
         }
 
         private static void CheckClass(SyntaxNodeAnalysisContext context)

@@ -37,11 +37,9 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         internal const string DiagnosticId = "S1450";
         private const string MessageFormat = "Remove the '{0}' field and declare it as a local variable in the relevant methods.";
-        private const IdeVisibility ideVisibility = IdeVisibility.Hidden;
 
         private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, ideVisibility, RspecStrings.ResourceManager)
-                                       .WithSeverity(Severity.Info);
+            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 

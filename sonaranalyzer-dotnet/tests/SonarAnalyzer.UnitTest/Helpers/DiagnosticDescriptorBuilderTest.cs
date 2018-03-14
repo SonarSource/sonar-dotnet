@@ -22,10 +22,8 @@ extern alias csharp;
 extern alias vbnet;
 using System.Resources;
 using FluentAssertions;
-using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.UnitTest.Helpers
@@ -58,8 +56,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
                 .IsEnabledByDefault
                 .Should().BeTrue();
 
-            DiagnosticDescriptorBuilder.GetDescriptor("S100", "", SonarAnalyzer.Common.IdeVisibility.Hidden,
-                csharp.SonarAnalyzer.RspecStrings.ResourceManager)
+            DiagnosticDescriptorBuilder.GetDescriptor("S100", "", csharp.SonarAnalyzer.RspecStrings.ResourceManager)
                 .IsEnabledByDefault
                 .Should().BeTrue();
         }
@@ -92,35 +89,6 @@ namespace SonarAnalyzer.UnitTest.Helpers
             result.CustomTags.Should().OnlyContain(LanguageValue);
         }
 
-        [TestMethod]
-        public void GetDescriptor_WhenIsActivatedByDefaultAndIdeVisibilityIsHidden_HasSonarWayAndUnnecessaryAndLanguageTags()
-        {
-            // Arrange
-            var diagnosticId = "foo";
-            var mockedResourceManager = CreateMockedResourceManager(diagnosticId, true);
-
-            // Act
-            var result = DiagnosticDescriptorBuilder.GetDescriptor(diagnosticId, "", IdeVisibility.Hidden, mockedResourceManager);
-
-            // Assert
-            result.CustomTags.Should().OnlyContain(DiagnosticTagsHelper.SonarWayTag, WellKnownDiagnosticTags.Unnecessary,
-                LanguageValue);
-        }
-
-        [TestMethod]
-        public void GetDescriptor_WhenIsNotActivatedByDefaultAndIdeVisibilityIsHidden_HasOnlyUnnecessaryAndLanguageTags()
-        {
-            // Arrange
-            var diagnosticId = "foo";
-            var mockedResourceManager = CreateMockedResourceManager(diagnosticId, false);
-
-            // Act
-            var result = DiagnosticDescriptorBuilder.GetDescriptor(diagnosticId, "", IdeVisibility.Hidden, mockedResourceManager);
-
-            // Assert
-            result.CustomTags.Should().OnlyContain(WellKnownDiagnosticTags.Unnecessary, LanguageValue);
-        }
-
         private ResourceManager CreateMockedResourceManager(string diagnosticId, bool isActivatedByDefault)
         {
             var mockedResourceManager = new Mock<ResourceManager>();
@@ -130,7 +98,6 @@ namespace SonarAnalyzer.UnitTest.Helpers
             mockedResourceManager.Setup(x => x.GetString($"{diagnosticId}_Title")).Returns("title");
             mockedResourceManager.Setup(x => x.GetString($"{diagnosticId}_Category")).Returns("category");
             mockedResourceManager.Setup(x => x.GetString($"{diagnosticId}_Description")).Returns("description");
-            mockedResourceManager.Setup(x => x.GetString($"{diagnosticId}_Severity")).Returns(Severity.Info.ToString());
             mockedResourceManager.Setup(x => x.GetString($"{diagnosticId}_IsActivatedByDefault")).Returns(isActivatedByDefault.ToString());
 
             return mockedResourceManager.Object;
