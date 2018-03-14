@@ -34,10 +34,10 @@ namespace SonarAnalyzer.Rules.VisualBasic
     {
         internal const string DiagnosticId = "S2951";
         private const string MessageFormat = "Remove this redundant use of 'Exit Select'.";
-        private const IdeVisibility ideVisibility = IdeVisibility.Hidden;
+        
 
         private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, ideVisibility, RspecStrings.ResourceManager);
+            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 

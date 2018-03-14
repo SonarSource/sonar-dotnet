@@ -37,10 +37,10 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string MessageFormat = "Remove this useless {0}.";
         private const string ifStatementLiteral = "'if' statement";
         private const string elseClauseLiteral = "'else' clause";
-        private const IdeVisibility ideVisibility = IdeVisibility.Hidden;
+        
 
         private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, ideVisibility, RspecStrings.ResourceManager);
+            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 

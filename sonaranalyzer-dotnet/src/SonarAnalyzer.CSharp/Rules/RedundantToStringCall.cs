@@ -39,10 +39,10 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string MessageFormat = "There's no need to call 'ToString()'{0}.";
         internal const string MessageCallOnString = " on a string";
         internal const string MessageCompiler = ", the compiler will do it for you";
-        private const IdeVisibility ideVisibility = IdeVisibility.Hidden;
+        
 
         private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, ideVisibility, RspecStrings.ResourceManager);
+            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
