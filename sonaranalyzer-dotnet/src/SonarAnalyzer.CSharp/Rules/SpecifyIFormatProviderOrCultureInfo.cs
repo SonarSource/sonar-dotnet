@@ -44,14 +44,26 @@ namespace SonarAnalyzer.Rules.CSharp
         private static readonly ISet<KnownType> formatAndClutureTypes = new HashSet<KnownType>
         {
             KnownType.System_IFormatProvider,
-            KnownType.System_Globalization_CultureInfo
+            KnownType.System_Globalization_CultureInfo,
         };
 
-        private static readonly ISet<MethodSignature> allowedMethods = new HashSet<MethodSignature>
+        private static readonly ISet<KnownType> formattableTypes = new HashSet<KnownType>
+        {
+            KnownType.System_String,
+            KnownType.System_Object,
+        };
+
+        private static readonly ISet<MethodSignature> whitelistMethods = new HashSet<MethodSignature>
         {
             new MethodSignature(KnownType.System_Activator, "CreateInstance"),
             new MethodSignature(KnownType.Sytem_Resources_ResourceManager, "GetObject"),
-            new MethodSignature(KnownType.Sytem_Resources_ResourceManager, "GetString")
+            new MethodSignature(KnownType.Sytem_Resources_ResourceManager, "GetString"),
+        };
+
+        private static readonly ISet<MethodSignature> blacklistMethods = new HashSet<MethodSignature>
+        {
+            new MethodSignature(KnownType.System_Char, "ToUpper"),
+            new MethodSignature(KnownType.System_Char, "ToLower"),
         };
 
         protected override void Initialize(SonarAnalysisContext context)
@@ -60,38 +72,42 @@ namespace SonarAnalyzer.Rules.CSharp
                 c =>
                 {
                     var invocation = (InvocationExpressionSyntax)c.Node;
-
                     if (invocation.Expression != null &&
-                        IsInvalidCall(invocation.Expression, c.SemanticModel) &&
-                        HasOverloadWithFormatOrCulture(invocation.Expression, c.SemanticModel))
+                        c.SemanticModel.GetSymbolInfo(invocation.Expression).Symbol is IMethodSymbol methodSymbol &&
+                        !IsIgnored(methodSymbol) &&
+                        CanPotentiallyRaise(methodSymbol) &&
+                        HasOverloadWithFormatOrCulture(invocation, c.SemanticModel))
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, invocation.GetLocation(), invocation.Expression));
                     }
                 }, SyntaxKind.InvocationExpression);
         }
 
-        private static bool HasOverloadWithFormatOrCulture(ExpressionSyntax expression, SemanticModel semanticModel)
-        {
-            return semanticModel.GetMemberGroup(expression)
+        private static bool IsIgnored(IMethodSymbol methodSymbol) =>
+            SpecifyStringComparison.HasAnyStringComparisonParameter(methodSymbol) ||
+            HasAnyFormatOrCultureParameter(methodSymbol) ||
+            whitelistMethods.Any(x => Matches(x, methodSymbol));
+
+        private bool CanPotentiallyRaise(IMethodSymbol methodSymbol) =>
+            ReturnsOrAcceptsFormattableType(methodSymbol) ||
+            blacklistMethods.Any(x => Matches(x, methodSymbol));
+
+        private static bool HasOverloadWithFormatOrCulture(InvocationExpressionSyntax invocation, SemanticModel semanticModel) =>
+            semanticModel.GetMemberGroup(invocation.Expression)
                 .OfType<IMethodSymbol>()
                 .Where(m => !m.IsObsolete())
                 .Any(HasAnyFormatOrCultureParameter);
-        }
 
-        private static bool IsInvalidCall(ExpressionSyntax expression, SemanticModel semanticModel)
-        {
-            var methodSymbol = semanticModel.GetSymbolInfo(expression).Symbol as IMethodSymbol;
+        private bool ReturnsOrAcceptsFormattableType(IMethodSymbol methodSymbol) =>
+            methodSymbol.ReturnType.IsAny(formattableTypes) ||
+            methodSymbol.GetParameters().Any(p => p.Type.IsAny(formattableTypes));
 
-            return methodSymbol != null &&
-                !allowedMethods.Any(x => methodSymbol.ContainingType.Is(x.ContainingType) &&
-                                         methodSymbol.Name == x.Name) &&
-                !HasAnyFormatOrCultureParameter(methodSymbol) &&
-                !SpecifyStringComparison.HasAnyStringComparisonParameter(methodSymbol);
-        }
+        public static bool HasAnyFormatOrCultureParameter(ISymbol method) =>
+            method.GetParameters().Any(p => p.Type.IsAny(formatAndClutureTypes));
 
-        public static bool HasAnyFormatOrCultureParameter(ISymbol method)
-        {
-            return method.GetParameters().Any(parameter => parameter.Type.IsAny(formatAndClutureTypes));
-        }
+        private static bool Matches(MethodSignature methodSignature, IMethodSymbol methodSymbol) =>
+            methodSymbol != null &&
+            methodSymbol.ContainingType.Is(methodSignature.ContainingType) &&
+            methodSymbol.Name == methodSignature.Name;
     }
 }
