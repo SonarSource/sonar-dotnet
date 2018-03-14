@@ -46,23 +46,36 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        private static readonly ISet<string> MethodNamesWithPredicate = ImmutableHashSet.Create(
+        private static readonly ISet<string> MethodNamesWithPredicate = new HashSet<string>
+        {
             "Any", "LongCount", "Count",
             "First", "FirstOrDefault", "Last", "LastOrDefault",
-            "Single", "SingleOrDefault");
+            "Single", "SingleOrDefault",
+        };
 
-        private static readonly ISet<string> MethodNamesForTypeCheckingWithSelect = ImmutableHashSet.Create(
+        private static readonly ISet<string> MethodNamesForTypeCheckingWithSelect = new HashSet<string>
+        {
             "Any", "LongCount", "Count",
             "First", "FirstOrDefault", "Last", "LastOrDefault",
-            "Single", "SingleOrDefault", "SkipWhile", "TakeWhile");
+            "Single", "SingleOrDefault", "SkipWhile", "TakeWhile",
+        };
 
-        private static readonly ISet<string> MethodNamesToCollection = ImmutableHashSet.Create(
+        private static readonly ISet<string> MethodNamesToCollection = new HashSet<string>
+        {
             "ToList",
-            "ToArray");
+            "ToArray",
+        };
 
-        private static readonly ISet<SyntaxKind> AsIsSyntaxKinds = ImmutableHashSet.Create(
+        private static readonly ISet<string> IgnoredMethodNames = new HashSet<string>
+        {
+            "AsEnumerable", // ignored as it is somewhat cleaner way to cast to IEnumerable<T> and has no side effects
+        };
+
+        private static readonly ISet<SyntaxKind> AsIsSyntaxKinds = new HashSet<SyntaxKind>
+        {
             SyntaxKind.AsExpression,
-            SyntaxKind.IsExpression);
+            SyntaxKind.IsExpression
+        };
 
         private const string WhereMethodName = "Where";
         private const string SelectMethodName = "Select";
@@ -131,6 +144,11 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool MethodExistsOnIEnumerable(IMethodSymbol methodSymbol, SemanticModel semanticModel)
         {
+            if (IgnoredMethodNames.Contains(methodSymbol.Name))
+            {
+                return false;
+            }
+
             if (methodSymbol.IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T))
             {
                 return true;
