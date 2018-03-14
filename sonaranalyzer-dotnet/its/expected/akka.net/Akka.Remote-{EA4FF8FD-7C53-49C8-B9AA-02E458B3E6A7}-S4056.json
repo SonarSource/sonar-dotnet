@@ -56,19 +56,6 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\DeadlineFailureDetector.cs",
-"region":  {
-"startLine":  36,
-"startColumn":  42,
-"endLine":  36,
-"endColumn":  101
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
 "uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
 "region":  {
 "startLine":  73,
@@ -166,45 +153,6 @@
 "startColumn":  21,
 "endLine":  1107,
 "endColumn":  119
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
-"region":  {
-"startLine":  1139,
-"startColumn":  50,
-"endLine":  1139,
-"endColumn":  94
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
-"region":  {
-"startLine":  1143,
-"startColumn":  50,
-"endLine":  1143,
-"endColumn":  94
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Endpoint.cs",
-"region":  {
-"startLine":  1147,
-"startColumn":  50,
-"endLine":  1147,
-"endColumn":  94
 }
 }
 },
@@ -738,19 +686,6 @@
 "startColumn":  24,
 "endLine":  61,
 "endColumn":  129
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\ThrottleTransportAdapter.cs",
-"region":  {
-"startLine":  557,
-"startColumn":  20,
-"endLine":  557,
-"endColumn":  52
 }
 }
 },
