@@ -31,6 +31,18 @@ namespace Tests.Diagnostics
             Methods.DoStuff2("foo"); // Noncompliant
 
             "".StartsWith(""); // Noncompliant
+
+            Convert.ToInt32("123"); // Noncompliant
+            int result;
+            int.TryParse("123", out result); // Noncompliant, ToInt32(string, IFormatProvider)
+
+            object number = 1.23;
+            Convert.ToInt32(number); // Noncompliant, there is ToInt32(object, IFormatProvider)
+
+            char.ToUpper('a'); // Noncompliant
+            char.ToLower('a'); // Noncompliant
+
+            "asdasd".ToUpper(); // Noncompliant
         }
 
         void ValidCases()
@@ -51,6 +63,10 @@ namespace Tests.Diagnostics
             Colors myColor = Colors.Yellow;
             Console.WriteLine("Colors.Red = {0}", myColor.ToString("d"));
             Methods.DoStuff("foo");
+
+            Convert.ToInt32(1.23);
+            Convert.ToInt32('1');
+            Convert.ToChar(15);
         }
     }
 }

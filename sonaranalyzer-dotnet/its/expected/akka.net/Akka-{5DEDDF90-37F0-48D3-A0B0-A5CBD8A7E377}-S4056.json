@@ -1239,58 +1239,6 @@
 "id":  "S4056",
 "message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\Resizer.cs",
-"region":  {
-"startLine":  195,
-"startColumn":  81,
-"endLine":  195,
-"endColumn":  107
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\Resizer.cs",
-"region":  {
-"startLine":  195,
-"startColumn":  110,
-"endLine":  195,
-"endColumn":  136
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\Resizer.cs",
-"region":  {
-"startLine":  197,
-"startColumn":  24,
-"endLine":  197,
-"endColumn":  82
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka\Routing\Resizer.cs",
-"region":  {
-"startLine":  211,
-"startColumn":  48,
-"endLine":  211,
-"endColumn":  100
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
 "uri":  "sources\akka.net\src\core\Akka\Routing\TailChoppingRoutingLogic.cs",
 "region":  {
 "startLine":  129,
@@ -1323,58 +1271,6 @@
 "startColumn":  52,
 "endLine":  178,
 "endColumn":  68
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\ByteString.cs",
-"region":  {
-"startLine":  653,
-"startColumn":  25,
-"endLine":  653,
-"endColumn":  47
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\ByteString.cs",
-"region":  {
-"startLine":  654,
-"startColumn":  25,
-"endLine":  654,
-"endColumn":  47
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\ByteString.cs",
-"region":  {
-"startLine":  658,
-"startColumn":  25,
-"endLine":  658,
-"endColumn":  47
-}
-}
-},
-{
-"id":  "S4056",
-"message":  "Use the overload that takes a 'CultureInfo' or 'IFormatProvider' parameter.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka\Util\ByteString.cs",
-"region":  {
-"startLine":  659,
-"startColumn":  25,
-"endLine":  659,
-"endColumn":  47
 }
 }
 },
