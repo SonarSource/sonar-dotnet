@@ -57,6 +57,8 @@ namespace MyLibrary
         public virtual int Property_08 { get; set; }
 
         public virtual int Property_09 { get; set; }
+
+        public int Property_10 { get; set; }
     }
 
     class B : A
@@ -121,6 +123,8 @@ namespace MyLibrary
         public override int Property_08 { get { return i; } private set { i = value; } } // Noncompliant. Note: this generates compiler error CS0507
 
         public override int Property_09 { get; } // Compliant. Note: this generates compiler error CS8080.
+
+        private string Property_10 { get; set; } // Noncompliant, return type is irrelevant for method resolution
     }
 
     class Foo
@@ -152,5 +156,25 @@ namespace SomeNamespace
     public class Class3 : OtherNamespace.Class1
     {
         private void SomeMethod(string s) { }
+    }
+}
+
+namespace FalsePositiveOnIndexers
+{
+    public class BaseClass
+    {
+        public int this[int index]
+        {
+            get { return index; }
+            set { }
+        }
+    }
+
+    public class DescendantClass : BaseClass
+    {
+        public int this[string name] // Compliant, parameters are of different types
+        {
+            get { return name.Length; }
+        }
     }
 }
