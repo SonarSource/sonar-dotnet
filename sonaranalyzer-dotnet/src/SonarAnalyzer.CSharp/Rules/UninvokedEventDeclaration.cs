@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
@@ -161,8 +162,9 @@ namespace SonarAnalyzer.Rules.CSharp
                             SemanticModel = container.SemanticModel,
                             Symbol = container.SemanticModel.GetSymbolInfo(node).Symbol as IMethodSymbol
                         }))
-                 .Where(tuple => tuple.Symbol != null &&
-                    tuple.Symbol.MethodKind == MethodKind.DelegateInvoke);
+                 .Where(tuple =>
+                    tuple.Symbol != null &&
+                    IsDelegateInvocation(tuple.Symbol));
 
             var invokedEventSymbols = delegateInvocations
                 .Select(tuple =>
@@ -263,16 +265,32 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool IsExplicitDelegateInvocation(IMethodSymbol symbol, SimpleNameSyntax invokedMethodName)
         {
-            var isDynamicInvocation = symbol.MethodKind == MethodKind.Ordinary &&
-                symbol.Name == "DynamicInvoke" &&
-                symbol.ReceiverType.OriginalDefinition.Is(KnownType.System_Delegate);
-
-            if (isDynamicInvocation)
+            if (IsDynamicInvoke(symbol) ||
+                IsBeginInvoke(symbol))
             {
                 return true;
             }
 
             return symbol.MethodKind == MethodKind.DelegateInvoke && invokedMethodName.Identifier.ValueText == "Invoke";
         }
+
+        private static bool IsDelegateInvocation(IMethodSymbol symbol) =>
+            symbol.MethodKind == MethodKind.DelegateInvoke ||
+            IsInvoke(symbol) ||
+            IsDynamicInvoke(symbol) ||
+            IsBeginInvoke(symbol);
+
+        private static bool IsInvoke(IMethodSymbol symbol) =>
+            symbol.MethodKind == MethodKind.Ordinary &&
+            symbol.Name == nameof(EventHandler.Invoke);
+
+        private static bool IsDynamicInvoke(IMethodSymbol symbol) =>
+            symbol.MethodKind == MethodKind.Ordinary &&
+            symbol.Name == nameof(Delegate.DynamicInvoke) &&
+            symbol.ReceiverType.OriginalDefinition.Is(KnownType.System_Delegate);
+
+        private static bool IsBeginInvoke(IMethodSymbol symbol) =>
+            symbol.MethodKind == MethodKind.Ordinary &&
+            symbol.Name == nameof(EventHandler.BeginInvoke);
     }
 }
