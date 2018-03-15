@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2018 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -45,6 +45,11 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             KnownType.System_Collections_IEnumerable,
             KnownType.System_Array
+        };
+
+        private static readonly ISet<KnownType> IgnoredTypes = new HashSet<KnownType>
+        {
+            KnownType.System_Xml_XmlNode
         };
 
         protected override void Initialize(SonarAnalysisContext context)
@@ -103,7 +108,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
             return methodSymbol != null &&
                 !methodSymbol.ReturnType.Is(KnownType.System_String) &&
-                methodSymbol.ReturnType.DerivesOrImplementsAny(CollectionTypes);
+                methodSymbol.ReturnType.DerivesOrImplementsAny(CollectionTypes) &&
+                !methodSymbol.ReturnType.DerivesFromAny(IgnoredTypes);
         }
 
         private static LiteralExpressionSyntax GetNullLiteralOrDefault(ArrowExpressionClauseSyntax expressionBody)

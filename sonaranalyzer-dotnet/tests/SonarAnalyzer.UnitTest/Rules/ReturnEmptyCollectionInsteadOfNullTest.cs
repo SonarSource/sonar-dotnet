@@ -32,7 +32,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void ReturnEmptyCollectionInsteadOfNull()
         {
             Verifier.VerifyAnalyzer(@"TestCases\ReturnEmptyCollectionInsteadOfNull.cs",
-                new ReturnEmptyCollectionInsteadOfNull());
+                new ReturnEmptyCollectionInsteadOfNull(),
+                additionalReferences: Verifier.SystemXmlAssembly);
         }
     }
 }

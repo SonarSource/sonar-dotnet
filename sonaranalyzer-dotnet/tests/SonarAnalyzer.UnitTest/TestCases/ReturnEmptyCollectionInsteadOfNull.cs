@@ -1,5 +1,6 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Xml;
 
 namespace Tests.Diagnostics
 {
@@ -71,6 +72,21 @@ namespace Tests.Diagnostics
                 return null; // Compliant because we return from a func
             };
             return new List<int>();
+        }
+
+        public XmlNode GetXmlNode()
+        {
+            return null; // Compliant XmlNode and its descendants are ignored
+        }
+
+        public XmlDocument GetXmlDocument()
+        {
+            return null; // Compliant XmlNode and its descendants are ignored
+        }
+
+        public XmlElement GetXmlElement()
+        {
+            return null; // Compliant XmlNode and its descendants are ignored
         }
     }
 }
