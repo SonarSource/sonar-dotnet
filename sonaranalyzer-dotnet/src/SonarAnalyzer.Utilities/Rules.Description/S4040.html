@@ -1,12 +1,14 @@
 <p>Certain characters, once normalized to lowercase, cannot make a round trip. That is, they can not be converted from one locale to another and then
 accurately restored to their original characters.</p>
-<p>It is therefore strongly recommended to normalize strings to uppercase instead.</p>
+<p>It is therefore it is strongly recommended to normalize characters and strings to uppercase instead.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-String s = myString.ToLower(CultureInfo.InvariantCulture);  // Noncompliant
+string s = myString.ToLower(CultureInfo.InvariantCulture);  // Noncompliant
+char c = char.ToLower('A', CultureInfo.InvariantCulture); // Noncompliant
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-String s = myString.ToUpper(CultureInfo.InvariantCulture);
+string s = myString.ToUpperInvariant();
+char c = char.ToUpperInvariant('A');
 </pre>
 

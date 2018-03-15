@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2018 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -46,7 +46,7 @@ namespace SonarAnalyzer.Rules.CSharp
         internal sealed override IEnumerable<MethodSignature> CheckedMethods => checkedMethods;
 
         protected override bool ShouldReportOnMethodCall(InvocationExpressionSyntax invocation,
-            SemanticModel semanticModel)
+            SemanticModel semanticModel, MethodSignature methodSignature)
         {
             var methodDeclaration = invocation.FirstAncestorOrSelf<MethodDeclarationSyntax>();
             if (methodDeclaration == null)
