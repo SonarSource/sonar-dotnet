@@ -54,16 +54,19 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    var hasAnyArgumentException = methodDeclaration.DescendantNodes()
+                    var argumentExceptionLocations = methodDeclaration.DescendantNodes()
                         .OfType<ObjectCreationExpressionSyntax>()
                         .Select(objectCreationSyntax => objectCreationSyntax.Type)
                         .OfType<IdentifierNameSyntax>()
-                        .Select(identifierSyntax => c.SemanticModel.GetSymbolInfo(identifierSyntax).Symbol)
-                        .Any(symbol => (symbol.OriginalDefinition as ITypeSymbol).DerivesFrom(KnownType.System_ArgumentException));
+                        .Select(identifierSyntax => c.SemanticModel.GetSymbolInfo(identifierSyntax).Symbol.ToSymbolWithSyntax(identifierSyntax))
+                        .Where(tuple => (tuple.Symbol.OriginalDefinition as ITypeSymbol).DerivesFrom(KnownType.System_ArgumentException))
+                        .Select(tuple => tuple.Syntax.Identifier.GetLocation())
+                        .ToList();
 
-                    if (hasAnyArgumentException)
+                    if (argumentExceptionLocations.Count > 0)
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, methodDeclaration.Identifier.GetLocation()));
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, methodDeclaration.Identifier.GetLocation(),
+                            additionalLocations: argumentExceptionLocations));
                     }
                 },
                 SyntaxKind.AwaitExpression);

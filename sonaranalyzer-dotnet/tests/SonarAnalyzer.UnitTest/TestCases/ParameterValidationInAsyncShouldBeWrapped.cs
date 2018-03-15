@@ -10,7 +10,9 @@ namespace Tests.Diagnostics
 //                               ^^^^^^^^^^^^^^
         {
             if (reader == null) { throw new ArgumentNullException(nameof(reader)); }
+//                                          ^^^^^^^^^^^^^^^^^^^^^ Secondary
             if (linesToSkip < 0) { throw new ArgumentOutOfRangeException(nameof(linesToSkip)); }
+//                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^ Secondary
 
             for (var i = 0; i < linesToSkip; ++i)
             {
@@ -25,7 +27,7 @@ namespace Tests.Diagnostics
 
             if (value == null)
             {
-                throw new ArgumentNullException(nameof(value));
+                throw new ArgumentNullException(nameof(value)); // Secondary
             }
         }
 
@@ -33,10 +35,27 @@ namespace Tests.Diagnostics
         {
             if (sender == null)
             {
-                throw new ArgumentNullException(nameof(sender));
+                throw new ArgumentNullException(nameof(sender)); // Secondary
             }
 
             await Task.Yield();
+        }
+
+        public static Task SkipLinesAsync(this TextReader reader, int linesToSkip) // Noncompliant - Not sure what should be the expected result (i.e. do local functions suffer from this behavior?)
+        {
+            if (reader == null) { throw new ArgumentNullException(nameof(reader)); } // Secondary
+            if (linesToSkip < 0) { throw new ArgumentOutOfRangeException(nameof(linesToSkip)); } // Secondary
+
+            return reader.SkipLinesInternalAsync(linesToSkip);
+
+            async Task SkipLinesInternalAsync(this TextReader reader, int linesToSkip)
+            {
+                for (var i = 0; i < linesToSkip; ++i)
+                {
+                    var line = await reader.ReadLineAsync().ConfigureAwait(false);
+                    if (line == null) { break; }
+                }
+            }
         }
     }
 

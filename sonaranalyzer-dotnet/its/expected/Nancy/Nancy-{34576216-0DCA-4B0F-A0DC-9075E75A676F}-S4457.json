@@ -3,7 +3,8 @@
 {
 "id":  "S4457",
 "message":  "Split this method into two, one handling parameters check and the other handling the iterator.",
-"location":  {
+"location":  [
+{
 "uri":  "sources\Nancy\src\Nancy\NancyEngine.cs",
 "region":  {
 "startLine":  102,
@@ -11,7 +12,17 @@
 "endLine":  102,
 "endColumn":  54
 }
+},
+{
+"uri":  "sources\Nancy\src\Nancy\NancyEngine.cs",
+"region":  {
+"startLine":  110,
+"startColumn":  31,
+"endLine":  110,
+"endColumn":  52
 }
+}
+]
 }
 ]
 }
