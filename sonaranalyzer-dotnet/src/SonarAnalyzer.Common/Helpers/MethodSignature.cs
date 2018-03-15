@@ -22,7 +22,7 @@ using System.Linq;
 
 namespace SonarAnalyzer.Helpers
 {
-    internal class MethodSignature
+    public class MethodSignature
     {
         internal MethodSignature(KnownType containingType, string name)
         {

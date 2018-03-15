@@ -42,7 +42,7 @@ namespace SonarAnalyzer.Rules
         }
 
         protected virtual bool ShouldReportOnMethodCall(InvocationExpressionSyntax invocation,
-            SemanticModel semanticModel) => true;
+            SemanticModel semanticModel, MethodSignature methodSignature) => true;
 
         private void AnalyzeInvocation(SyntaxNodeAnalysisContext analysisContext)
         {
@@ -71,7 +71,7 @@ namespace SonarAnalyzer.Rules
                 return;
             }
 
-            if (ShouldReportOnMethodCall(invocation, analysisContext.SemanticModel))
+            if (ShouldReportOnMethodCall(invocation, analysisContext.SemanticModel, disallowedMethodSignature))
             {
                 analysisContext.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, identifier.Value.GetLocation(),
                     disallowedMethodSignature.ToShortName()));

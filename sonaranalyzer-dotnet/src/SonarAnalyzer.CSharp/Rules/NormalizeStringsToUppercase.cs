@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2018 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -32,7 +32,7 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class NormalizeStringsToUppercase : DoNotCallMethodsBase
     {
         internal const string DiagnosticId = "S4040";
-        private const string MessageFormat = "Change this normalization to 'String.ToUpperInvariant()'.";
+        private const string MessageFormat = "Change this normalization to 'ToUpperInvariant()'.";
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
@@ -40,13 +40,15 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static readonly List<MethodSignature> checkedMethods = new List<MethodSignature>
         {
+            new MethodSignature(KnownType.System_Char, "ToLower"),
             new MethodSignature(KnownType.System_String, "ToLower"),
+            new MethodSignature(KnownType.System_Char, "ToLowerInvariant"),
             new MethodSignature(KnownType.System_String, "ToLowerInvariant"),
         };
         internal sealed override IEnumerable<MethodSignature> CheckedMethods => checkedMethods;
 
         protected override bool ShouldReportOnMethodCall(InvocationExpressionSyntax invocation,
-            SemanticModel semanticModel)
+            SemanticModel semanticModel, MethodSignature methodSignature)
         {
             var identifier = GetMethodCallIdentifier(invocation).Value.ValueText; // never null when we get here
             if (identifier == "ToLowerInvariant")
@@ -54,9 +56,12 @@ namespace SonarAnalyzer.Rules.CSharp
                 return true;
             }
 
+            // ToLower and ToLowerInvariant are extension methods for string but not for char
+            var isExtensionMethod = methodSignature.ContainingType == KnownType.System_String;
+
             return invocation.ArgumentList != null &&
-                invocation.ArgumentList.Arguments.Count == 1 &&
-                invocation.ArgumentList.Arguments[0].Expression.ToString() == "CultureInfo.InvariantCulture";
+                invocation.ArgumentList.Arguments.Count == (isExtensionMethod ? 1 : 2) &&
+                invocation.ArgumentList.Arguments[isExtensionMethod ? 0 : 1].Expression.ToString() == "CultureInfo.InvariantCulture";
         }
     }
 }
