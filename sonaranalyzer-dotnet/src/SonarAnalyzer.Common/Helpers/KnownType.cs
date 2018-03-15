@@ -25,7 +25,7 @@ namespace SonarAnalyzer.Helpers
 {
     internal sealed class KnownType
     {
-        #region Known types        
+        #region Known types
 
         internal static readonly KnownType Microsoft_AspNetCore_Mvc_Controller = new KnownType("Microsoft.AspNetCore.Mvc.Controller");
         internal static readonly KnownType Microsoft_VisualBasic_Interaction = new KnownType("Microsoft.VisualBasic.Interaction");
@@ -253,6 +253,7 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_Windows_Forms_Application = new KnownType("System.Windows.Forms.Application");
         internal static readonly KnownType System_Windows_Markup_ConstructorArgumentAttribute = new KnownType("System.Windows.Markup.ConstructorArgumentAttribute");
         internal static readonly KnownType System_Xml_XmlDocument = new KnownType("System.Xml.XmlDocument");
+        internal static readonly KnownType System_Xml_XmlNode = new KnownType("System.Xml.XmlNode");
         internal static readonly ISet<KnownType> SystemActionVariants = new HashSet<KnownType>
         {
             new KnownType("System.Action"),
