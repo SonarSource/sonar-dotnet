@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4457",
+"message":  "Split this method into two, one handling parameters check and the other handling the iterator.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\NancyEngine.cs",
+"region":  {
+"startLine":  102,
+"startColumn":  41,
+"endLine":  102,
+"endColumn":  54
+}
+}
+}
+]
+}

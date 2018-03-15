@@ -8760,6 +8760,33 @@
   <data name="S4428_Type" xml:space="preserve">
     <value>BUG</value>
   </data>
+  <data name="S4457_Category" xml:space="preserve">
+    <value>Major Code Smell</value>
+  </data>
+  <data name="S4457_Description" xml:space="preserve">
+    <value>Because of the way async/await methods are rewritten by the compiler, any exceptions thrown during the parameters check will happen only when the task is observed. That could happen far away from the source of the buggy code or never happen for fire-and-forget tasks.</value>
+  </data>
+  <data name="S4457_IsActivatedByDefault" xml:space="preserve">
+    <value>True</value>
+  </data>
+  <data name="S4457_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S4457_RemediationCost" xml:space="preserve">
+    <value>15</value>
+  </data>
+  <data name="S4457_Severity" xml:space="preserve">
+    <value>Major</value>
+  </data>
+  <data name="S4457_Tags" xml:space="preserve">
+    <value>async-await</value>
+  </data>
+  <data name="S4457_Title" xml:space="preserve">
+    <value>Parameter validation in "async"/"await" methods should be wrapped</value>
+  </data>
+  <data name="S4457_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S818_Category" xml:space="preserve">
     <value>Minor Code Smell</value>
   </data>
