@@ -123,6 +123,13 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 if (memberSymbol is IPropertySymbol propertySymbol)
                 {
+                    var propertyDeclaration = memberDeclaration as PropertyDeclarationSyntax;
+                    if (propertyDeclaration == null ||
+                        propertyDeclaration.Modifiers.Any(m => m.IsKind(SyntaxKind.NewKeyword)))
+                    {
+                        return null;
+                    }
+
                     var hidingProperty = allBaseClassProperties.FirstOrDefault(
                         p => IsDecreasingPropertyAccess(p, propertySymbol, propertySymbol.IsOverride));
                     if (hidingProperty != null)
@@ -138,7 +145,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 bool isOverride)
             {
                 if (baseProperty.Name != propertySymbol.Name ||
-                    !Equals(baseProperty.Type, propertySymbol.Type))
+                    !AreParameterTypesEqual(baseProperty.Parameters, propertySymbol.Parameters))
                 {
                     return false;
                 }
@@ -167,8 +174,11 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 return baseMethod.Name == methodSymbol.Name &&
                     baseMethod.TypeParameters.Length == methodSymbol.TypeParameters.Length &&
-                    EnumerableExtensions.Equals(baseMethod.Parameters, methodSymbol.Parameters, AreParameterTypesEqual);
+                    AreParameterTypesEqual(baseMethod.Parameters, methodSymbol.Parameters);
             }
+
+            private static bool AreParameterTypesEqual(IEnumerable<IParameterSymbol> parameters1, IEnumerable<IParameterSymbol> parameters2) =>
+                EnumerableExtensions.Equals(parameters1, parameters2, AreParameterTypesEqual);
 
             private static bool AreParameterTypesEqual(IParameterSymbol p1, IParameterSymbol p2)
             {
