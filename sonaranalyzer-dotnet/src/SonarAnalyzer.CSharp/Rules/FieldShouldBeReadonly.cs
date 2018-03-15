@@ -72,7 +72,11 @@ namespace SonarAnalyzer.Rules.CSharp
                 c =>
                 {
                     var declaredSymbol = (INamedTypeSymbol)c.Symbol;
-                    if (!declaredSymbol.IsClassOrStruct())
+                    if (!declaredSymbol.IsClassOrStruct() ||
+                        // Serializable classes are ignored because the serialized fields
+                        // cannot be readonly. [Nonserialized] fields could be readonly,
+                        // but all fields with attribute are ignored in the ReadonlyFieldCollector.
+                        declaredSymbol.GetAttributes().Any(IsSerializableAttribute))
                     {
                         return;
                     }
@@ -105,6 +109,9 @@ namespace SonarAnalyzer.Rules.CSharp
                 },
                 SymbolKind.NamedType);
         }
+
+        private static bool IsSerializableAttribute(AttributeData attribute) =>
+            attribute.AttributeClass.Is(KnownType.System_SerializableAttribute);
 
         private class ReadonlyFieldCollector
         {

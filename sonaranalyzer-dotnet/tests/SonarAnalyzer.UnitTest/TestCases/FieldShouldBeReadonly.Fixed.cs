@@ -170,4 +170,25 @@ namespace Tests.Diagnostics
             var x = teststring;
         }
     }
+
+    [Serializable]
+    public class SerializableClass
+    {
+        private int field; // Compliant, containing class is marked with [Serializable]
+
+        public SerializableClass()
+        {
+            field = 5;
+        }
+    }
+
+    public class DerivedFromSerializable : SerializableClass
+    {
+        private readonly int otherField; // Fixed
+
+        public DerivedFromSerializable()
+        {
+            otherField = 5;
+        }
+    }
 }
