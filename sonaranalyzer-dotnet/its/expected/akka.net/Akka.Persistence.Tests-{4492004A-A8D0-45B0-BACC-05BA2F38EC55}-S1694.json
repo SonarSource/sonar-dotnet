@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S1694",
-"message":  "Convert this 'abstract' class to a concrete class with a private constructor.",
+"message":  "Convert this 'abstract' class to a concrete class with a protected constructor.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\EndToEndEventAdapterSpec.cs",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S1694",
-"message":  "Convert this 'abstract' class to a concrete class with a private constructor.",
+"message":  "Convert this 'abstract' class to a concrete class with a protected constructor.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\PersistenceSpec.cs",
 "region":  {
@@ -28,7 +28,7 @@
 },
 {
 "id":  "S1694",
-"message":  "Convert this 'abstract' class to a concrete class with a private constructor.",
+"message":  "Convert this 'abstract' class to a concrete class with a protected constructor.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\ReceivePersistentActorTests.cs",
 "region":  {

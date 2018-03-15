@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S1694",
-"message":  "Convert this 'abstract' class to a concrete class with a private constructor.",
+"message":  "Convert this 'abstract' class to a concrete class with a protected constructor.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Cluster.Tests.MultiNode\ClusterDeathWatchSpec.cs",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S1694",
-"message":  "Convert this 'abstract' class to a concrete class with a private constructor.",
+"message":  "Convert this 'abstract' class to a concrete class with a protected constructor.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Cluster.Tests.MultiNode\ConvergenceSpec.cs",
 "region":  {
@@ -28,7 +28,7 @@
 },
 {
 "id":  "S1694",
-"message":  "Convert this 'abstract' class to a concrete class with a private constructor.",
+"message":  "Convert this 'abstract' class to a concrete class with a protected constructor.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Cluster.Tests.MultiNode\InitialHeartbeatSpec.cs",
 "region":  {
@@ -41,7 +41,7 @@
 },
 {
 "id":  "S1694",
-"message":  "Convert this 'abstract' class to a concrete class with a private constructor.",
+"message":  "Convert this 'abstract' class to a concrete class with a protected constructor.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Cluster.Tests.MultiNode\JoinInProgressSpec.cs",
 "region":  {
@@ -54,7 +54,7 @@
 },
 {
 "id":  "S1694",
-"message":  "Convert this 'abstract' class to a concrete class with a private constructor.",
+"message":  "Convert this 'abstract' class to a concrete class with a protected constructor.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Cluster.Tests.MultiNode\JoinSeedNodeSpec.cs",
 "region":  {
@@ -67,7 +67,7 @@
 },
 {
 "id":  "S1694",
-"message":  "Convert this 'abstract' class to a concrete class with a private constructor.",
+"message":  "Convert this 'abstract' class to a concrete class with a protected constructor.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Cluster.Tests.MultiNode\LeaderLeavingSpec.cs",
 "region":  {
@@ -80,7 +80,7 @@
 },
 {
 "id":  "S1694",
-"message":  "Convert this 'abstract' class to a concrete class with a private constructor.",
+"message":  "Convert this 'abstract' class to a concrete class with a protected constructor.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Cluster.Tests.MultiNode\MultiNodeClusterSpec.cs",
 "region":  {
@@ -93,7 +93,7 @@
 },
 {
 "id":  "S1694",
-"message":  "Convert this 'abstract' class to a concrete class with a private constructor.",
+"message":  "Convert this 'abstract' class to a concrete class with a protected constructor.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Cluster.Tests.MultiNode\Routing\ClusterConsistentHashingGroupSpec.cs",
 "region":  {
@@ -106,7 +106,7 @@
 },
 {
 "id":  "S1694",
-"message":  "Convert this 'abstract' class to a concrete class with a private constructor.",
+"message":  "Convert this 'abstract' class to a concrete class with a protected constructor.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Cluster.Tests.MultiNode\Routing\ClusterConsistentHashingRouterSpec.cs",
 "region":  {
