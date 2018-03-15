@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S1694",
-"message":  "Convert this 'abstract' class to a concrete class with a private constructor.",
+"message":  "Convert this 'abstract' class to a concrete class with a protected constructor.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Remote.Tests.MultiNode\PiercingShouldKeepQuarantineSpec.cs",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S1694",
-"message":  "Convert this 'abstract' class to a concrete class with a private constructor.",
+"message":  "Convert this 'abstract' class to a concrete class with a protected constructor.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Remote.Tests.MultiNode\RemoteDeploymentDeathWatchSpec.cs",
 "region":  {
@@ -28,7 +28,7 @@
 },
 {
 "id":  "S1694",
-"message":  "Convert this 'abstract' class to a concrete class with a private constructor.",
+"message":  "Convert this 'abstract' class to a concrete class with a protected constructor.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Remote.Tests.MultiNode\RemoteRandomSpec.cs",
 "region":  {
@@ -41,7 +41,7 @@
 },
 {
 "id":  "S1694",
-"message":  "Convert this 'abstract' class to a concrete class with a private constructor.",
+"message":  "Convert this 'abstract' class to a concrete class with a protected constructor.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Remote.Tests.MultiNode\RemoteRoundRobinSpec.cs",
 "region":  {

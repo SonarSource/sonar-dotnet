@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S1694",
-"message":  "Convert this 'abstract' class to a concrete class with a private constructor.",
+"message":  "Convert this 'abstract' class to a concrete class with a protected constructor.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Bootstrapper\ContainerRegistration.cs",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S1694",
-"message":  "Convert this 'abstract' class to a concrete class with a private constructor.",
+"message":  "Convert this 'abstract' class to a concrete class with a protected constructor.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Bootstrapper\Registrations.cs",
 "region":  {
@@ -28,7 +28,7 @@
 },
 {
 "id":  "S1694",
-"message":  "Convert this 'abstract' class to a concrete class with a private constructor.",
+"message":  "Convert this 'abstract' class to a concrete class with a protected constructor.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Diagnostics\DiagnosticModule.cs",
 "region":  {
@@ -54,7 +54,7 @@
 },
 {
 "id":  "S1694",
-"message":  "Convert this 'abstract' class to a concrete class with a private constructor.",
+"message":  "Convert this 'abstract' class to a concrete class with a protected constructor.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\NamedPipelineBase.cs",
 "region":  {
@@ -67,7 +67,7 @@
 },
 {
 "id":  "S1694",
-"message":  "Convert this 'abstract' class to a concrete class with a private constructor.",
+"message":  "Convert this 'abstract' class to a concrete class with a protected constructor.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\NancyModule.cs",
 "region":  {
