@@ -1,0 +1,40 @@
+<p>Because of the way <code>async/await</code> methods are rewritten by the compiler, any exceptions thrown during the parameters check will happen
+only when the task is observed. That could happen far away from the source of the buggy code or never happen for fire-and-forget tasks.</p>
+<p>Therefore it is recommended to split the method into two: an outer method handling the parameter checks (without being <code>async/await</code>)
+and an inner method to handle the iterator block with the <code>async/await</code> pattern.</p>
+<p>This rule raises an issue when an <code>async</code> method throws any exception derived from <code>ArgumentException</code> and contains
+<code>await</code> keyword.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+public static async Task SkipLinesAsync(this TextReader reader, int linesToSkip) // Noncompliant
+{
+    if (reader == null) { throw new ArgumentNullException(nameof(reader)); }
+    if (linesToSkip &lt; 0) { throw new ArgumentOutOfRangeException(nameof(linesToSkip)); }
+
+    for (var i = 0; i &lt; linesToSkip; ++i)
+    {
+        var line = await reader.ReadLineAsync().ConfigureAwait(false);
+        if (line == null) { break; }
+    }
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+public static Task SkipLinesAsync(this TextReader reader, int linesToSkip)
+{
+    if (reader == null) { throw new ArgumentNullException(nameof(reader)); }
+    if (linesToSkip &lt; 0) { throw new ArgumentOutOfRangeException(nameof(linesToSkip)); }
+
+    return reader.SkipLinesInternalAsync(linesToSkip);
+}
+
+private static async Task SkipLinesInternalAsync(this TextReader reader, int linesToSkip)
+{
+    for (var i = 0; i &lt; linesToSkip; ++i)
+    {
+        var line = await reader.ReadLineAsync().ConfigureAwait(false);
+        if (line == null) { break; }
+    }
+}
+</pre>
+
