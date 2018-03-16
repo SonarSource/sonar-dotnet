@@ -34,5 +34,10 @@ namespace Tests.Diagnostics
             var oo = o; // Fixed
             var i = o as RedundantCast; // Compliant
         }
+
+        public void N(int[,] numbers)
+        {
+            numbers.Cast<int>().Where(x => x > 0); // Compliant, multidimensional arrays need to be cast
+        }
     }
 }

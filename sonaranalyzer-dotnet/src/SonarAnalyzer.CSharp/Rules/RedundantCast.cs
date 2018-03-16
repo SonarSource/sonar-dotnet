@@ -37,7 +37,7 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         internal const string DiagnosticId = "S1905";
         private const string MessageFormat = "Remove this unnecessary cast to '{0}'.";
-        
+
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
@@ -171,8 +171,13 @@ namespace SonarAnalyzer.Rules.CSharp
                 return collectionType.TypeArguments.First();
             }
 
-            var arrayType = semanticModel.GetTypeInfo(collection).Type as IArrayTypeSymbol;
-            return arrayType?.ElementType;
+            if (semanticModel.GetTypeInfo(collection).Type is IArrayTypeSymbol arrayType &&
+                arrayType.Rank == 1) // casting is necessary for multidimensional arrays
+            {
+                return arrayType.ElementType;
+            }
+
+            return null;
         }
     }
 }
