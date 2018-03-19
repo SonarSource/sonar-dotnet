@@ -29,14 +29,15 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class ParameterValidationInAsyncShouldBeWrapped : ParameterValidationInMethodShouldBeWrapped<AwaitExpressionSyntax>
+    public sealed class ParameterValidationInYieldShouldBeWrapped : ParameterValidationInMethodShouldBeWrapped<YieldStatementSyntax>
     {
-        internal const string DiagnosticId = "S4457";
+        internal const string DiagnosticId = "S4456";
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        protected override DiagnosticDescriptor Rule { get; } =  rule;
+        protected override DiagnosticDescriptor Rule { get; } = rule;
 
-        protected override SyntaxKind[] RegisterSyntaxKinds { get; } = new[] { SyntaxKind.AwaitExpression };
+        protected override SyntaxKind[] RegisterSyntaxKinds { get; } =
+            new[] { SyntaxKind.YieldBreakStatement, SyntaxKind.YieldReturnStatement };
     }
 }
