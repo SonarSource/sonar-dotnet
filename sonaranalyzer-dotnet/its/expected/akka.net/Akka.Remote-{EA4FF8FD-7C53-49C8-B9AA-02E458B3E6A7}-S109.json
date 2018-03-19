@@ -145,19 +145,6 @@
 },
 {
 "id":  "S109",
-"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\AkkaProtocolTransport.cs",
-"region":  {
-"startLine":  330,
-"startColumn":  16,
-"endLine":  330,
-"endColumn":  17
-}
-}
-},
-{
-"id":  "S109",
 "message":  "Assign this magic number '32000' to a well-named (variable|constant), and use the (variable|constant) instead.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Remote\Transport\Helios\HeliosTransport.cs",
@@ -270,19 +257,6 @@
 "startColumn":  50,
 "endLine":  637,
 "endColumn":  51
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\Transport.cs",
-"region":  {
-"startLine":  143,
-"startColumn":  23,
-"endLine":  143,
-"endColumn":  24
 }
 }
 }
