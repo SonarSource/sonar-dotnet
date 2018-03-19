@@ -19,7 +19,6 @@
  */
 
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.VisualBasic;
@@ -39,7 +38,8 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         public override GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.VisualBasic.GeneratedCodeRecognizer.Instance;
 
-        private static readonly ISet<SyntaxKind> CompoundExpressionKinds = ImmutableHashSet.Create(
+        private static readonly ISet<SyntaxKind> CompoundExpressionKinds = new HashSet<SyntaxKind>
+        {
             SyntaxKind.MultiLineFunctionLambdaExpression,
             SyntaxKind.MultiLineSubLambdaExpression,
             SyntaxKind.SingleLineFunctionLambdaExpression,
@@ -48,14 +48,17 @@ namespace SonarAnalyzer.Rules.VisualBasic
             SyntaxKind.CollectionInitializer,
             SyntaxKind.ObjectMemberInitializer,
 
-            SyntaxKind.InvocationExpression);
+            SyntaxKind.InvocationExpression
+        };
 
-        private static readonly ISet<SyntaxKind> ComplexityIncreasingKinds = ImmutableHashSet.Create(
+        private static readonly ISet<SyntaxKind> ComplexityIncreasingKinds = new HashSet<SyntaxKind>
+        {
             SyntaxKind.AndExpression,
             SyntaxKind.AndAlsoExpression,
             SyntaxKind.OrExpression,
             SyntaxKind.OrElseExpression,
-            SyntaxKind.ExclusiveOrExpression);
+            SyntaxKind.ExclusiveOrExpression
+        };
 
         protected override bool IsComplexityIncreasingKind(SyntaxNode node) =>
             ComplexityIncreasingKinds.Contains(node.Kind());

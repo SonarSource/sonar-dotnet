@@ -19,6 +19,7 @@
  */
 
 using System;
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
@@ -86,7 +87,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var checkedSymbols = expression.DescendantNodesAndSelf()
                 .Select(node => semanticModel.GetSymbolInfo(node).Symbol)
                 .Where(symbol => symbol != null)
-                .ToImmutableHashSet();
+                .ToHashSet();
 
             var statementDescendents = statement.DescendantNodesAndSelf().ToList();
             var isAnyCheckedSymbolUpdated = statementDescendents
@@ -122,7 +123,7 @@ namespace SonarAnalyzer.Rules.CSharp
             return prefixUnaryExpression;
         }
 
-        private static bool IsCheckedSymbolUpdated(ExpressionSyntax expression, ImmutableHashSet<ISymbol> checkedSymbols, SemanticModel semanticModel)
+        private static bool IsCheckedSymbolUpdated(ExpressionSyntax expression, ISet<ISymbol> checkedSymbols, SemanticModel semanticModel)
         {
             var symbol = semanticModel.GetSymbolInfo(expression).Symbol;
             return symbol != null && checkedSymbols.Contains(symbol);

@@ -211,13 +211,13 @@ namespace SonarAnalyzer.Rules.CSharp
             return unusedParameter.Except(usedParameters).ToImmutableArray();
         }
 
-        private static IImmutableSet<IParameterSymbol> GetUsedParameters(ImmutableArray<IParameterSymbol> parameters, SyntaxNode body, SemanticModel semanticModel)
+        private static ISet<IParameterSymbol> GetUsedParameters(ImmutableArray<IParameterSymbol> parameters, SyntaxNode body, SemanticModel semanticModel)
         {
             return body.DescendantNodes()
                 .Where(n => n.IsKind(SyntaxKind.IdentifierName))
                 .Select(identierName => semanticModel.GetSymbolInfo(identierName).Symbol as IParameterSymbol)
                 .Where(symbol => symbol != null && parameters.Contains(symbol))
-                .ToImmutableHashSet();
+                .ToHashSet();
         }
 
         private static bool IsUsedAsEventHandlerFunctionOrAction(IMethodSymbol methodSymbol, Compilation compilation)

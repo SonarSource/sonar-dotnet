@@ -18,16 +18,16 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
+using System.Collections.Generic;
 
 namespace SonarAnalyzer.Common
 {
     public class FileComments
     {
-        public IImmutableSet<int> NoSonar { get; }
-        public IImmutableSet<int> NonBlank { get; }
+        public ISet<int> NoSonar { get; }
+        public ISet<int> NonBlank { get; }
 
-        public FileComments(IImmutableSet<int> noSonar, IImmutableSet<int> nonBlank)
+        public FileComments(ISet<int> noSonar, ISet<int> nonBlank)
         {
             NoSonar = noSonar;
             NonBlank = nonBlank;

@@ -71,7 +71,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         .Concat(methodSymbol.ContainingType.GetMembers())
                         .Select(symbol => symbol as IFieldSymbol)
                         .Where(symbol => symbol != null)
-                        .ToImmutableHashSet();
+                        .ToHashSet();
 
                     var identifiers = methodSyntax.DescendantNodes().OfType<IdentifierNameSyntax>();
 
@@ -92,7 +92,7 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         private static IEnumerable<IdentifierNameSyntax> GetAllFirstMutableFieldsUsed(SyntaxNodeAnalysisContext context,
-            ImmutableHashSet<IFieldSymbol> fieldsOfClass, IEnumerable<IdentifierNameSyntax> identifiers)
+            ISet<IFieldSymbol> fieldsOfClass, IEnumerable<IdentifierNameSyntax> identifiers)
         {
             var syntaxNodes = new Dictionary<IFieldSymbol, List<IdentifierNameSyntax>>();
 
@@ -122,7 +122,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 .Where(identifierSyntax => identifierSyntax != null);
         }
 
-        private static bool IsFieldRelevant(IFieldSymbol fieldSymbol, ImmutableHashSet<IFieldSymbol> fieldsOfClass)
+        private static bool IsFieldRelevant(IFieldSymbol fieldSymbol, ISet<IFieldSymbol> fieldsOfClass)
         {
             return fieldSymbol != null &&
                 !fieldSymbol.IsConst &&

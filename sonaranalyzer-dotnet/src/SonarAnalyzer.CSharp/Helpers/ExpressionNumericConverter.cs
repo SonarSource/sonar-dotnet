@@ -20,7 +20,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -98,10 +97,11 @@ namespace SonarAnalyzer.Helpers
             return multiplier;
         }
 
-        private static readonly ISet<SyntaxKind> SupportedOperatorTokens = ImmutableHashSet.Create(
+        private static readonly ISet<SyntaxKind> SupportedOperatorTokens = new HashSet<SyntaxKind>
+        {
             SyntaxKind.MinusToken,
             SyntaxKind.PlusToken
-        );
+        };
 
         public static bool TryGetConstantIntValue(ExpressionSyntax expression, out int value)
         {

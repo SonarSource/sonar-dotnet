@@ -117,7 +117,8 @@ namespace SonarAnalyzer.Rules.CSharp
             return containingType.IsAny(ImmutableKnownTypes);
         }
 
-        private static readonly ISet<KnownType> ImmutableKnownTypes = ImmutableHashSet.Create(
+        private static readonly ISet<KnownType> ImmutableKnownTypes = new HashSet<KnownType>
+        {
             KnownType.System_Object,
             KnownType.System_Int16,
             KnownType.System_Int32,
@@ -149,7 +150,8 @@ namespace SonarAnalyzer.Rules.CSharp
             KnownType.System_Collections_Immutable_ImmutableSortedSet,
             KnownType.System_Collections_Immutable_ImmutableSortedSet_T,
             KnownType.System_Collections_Immutable_ImmutableStack,
-            KnownType.System_Collections_Immutable_ImmutableStack_T);
+            KnownType.System_Collections_Immutable_ImmutableStack_T
+        };
 
         private static bool IsLinqMethod(IMethodSymbol methodSymbol)
         {

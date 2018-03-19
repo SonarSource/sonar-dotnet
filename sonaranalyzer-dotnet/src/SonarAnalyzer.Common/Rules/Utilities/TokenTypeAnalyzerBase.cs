@@ -154,10 +154,12 @@ namespace SonarAnalyzer.Rules
 
             protected abstract SyntaxNode GetBindableParent(SyntaxToken token);
 
-            private static readonly ISet<MethodKind> ConstructorKinds = ImmutableHashSet.Create(
+            private static readonly ISet<MethodKind> ConstructorKinds = new HashSet<MethodKind>
+            {
                 MethodKind.Constructor,
                 MethodKind.StaticConstructor,
-                MethodKind.SharedConstructor);
+                MethodKind.SharedConstructor
+            };
 
             private void ClassifyIdentifier(SyntaxToken token, ISymbol symbol)
             {
@@ -201,11 +203,13 @@ namespace SonarAnalyzer.Rules
                 }
             }
 
-            private static readonly ISet<SymbolKind> VarSymbolKinds = ImmutableHashSet.Create(
+            private static readonly ISet<SymbolKind> VarSymbolKinds = new HashSet<SymbolKind>
+            {
                 SymbolKind.NamedType,
                 SymbolKind.TypeParameter,
                 SymbolKind.ArrayType,
-                SymbolKind.PointerType);
+                SymbolKind.PointerType
+            };
 
             private void ClassifyTrivia(SyntaxTrivia trivia)
             {

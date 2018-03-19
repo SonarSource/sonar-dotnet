@@ -49,10 +49,12 @@ namespace SonarAnalyzer.Rules.VisualBasic
             "Minimum length a series must have to trigger an issue.", DefaultMinimumSeriesLength)]
         public int MinimumSeriesLength { get; set; } = DefaultMinimumSeriesLength;
 
-        private static readonly ISet<Type> WhiteListedStatementTypes = ImmutableHashSet.Create(
+        private static readonly ISet<Type> WhiteListedStatementTypes = new HashSet<Type>
+        {
             typeof(AssignmentStatementSyntax),
             typeof(WithBlockSyntax),
-            typeof(ExpressionStatementSyntax));
+            typeof(ExpressionStatementSyntax)
+        };
 
         protected override void Initialize(ParameterLoadingAnalysisContext context)
         {

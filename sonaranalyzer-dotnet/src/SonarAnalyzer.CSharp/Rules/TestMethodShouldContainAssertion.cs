@@ -41,25 +41,31 @@ namespace SonarAnalyzer.Rules.CSharp
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        private static readonly ISet<KnownType> TrackedTestAttributes = ImmutableHashSet.Create(
+        private static readonly ISet<KnownType> TrackedTestAttributes = new HashSet<KnownType>
+        {
             KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_TestMethodAttribute,
             KnownType.NUnit_Framework_TestAttribute,
             KnownType.NUnit_Framework_TestCaseAttribute,
             KnownType.NUnit_Framework_TestCaseSourceAttribute,
             KnownType.NUnit_Framework_TheoryAttribute,
             KnownType.Xunit_FactAttribute,
-            KnownType.Xunit_TheoryAttribute);
+            KnownType.Xunit_TheoryAttribute
+        };
 
-        private static readonly ISet<KnownType> ExpectedExceptionAttributes = ImmutableHashSet.Create(
+        private static readonly ISet<KnownType> ExpectedExceptionAttributes = new HashSet<KnownType>
+        {
             KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_ExpectedExceptionAttribute,
-            KnownType.NUnit_Framework_ExpectedExceptionAttribute);
+            KnownType.NUnit_Framework_ExpectedExceptionAttribute
+        };
 
-        private static readonly ISet<KnownType> TrackedIgnoreAttributes = ImmutableHashSet.Create(
+        private static readonly ISet<KnownType> TrackedIgnoreAttributes = new HashSet<KnownType>
+        {
             KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_IgnoreAttribute,
-            KnownType.NUnit_Framework_IgnoreAttribute);
+            KnownType.NUnit_Framework_IgnoreAttribute
+        };
 
-        private static readonly IEnumerable<string> TrackedAssertionMethodName = ImmutableList.Create(
-            "Assert", "Should", "Expect", "Must", "Verify", "Validate");
+        private static readonly IEnumerable<string> TrackedAssertionMethodName = new List<string> { "Assert", "Should",
+            "Expect", "Must", "Verify", "Validate" };
 
         protected override void Initialize(SonarAnalysisContext context)
         {

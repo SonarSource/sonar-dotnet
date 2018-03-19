@@ -34,14 +34,16 @@ namespace SonarAnalyzer.Rules
         protected abstract DiagnosticDescriptor Rule { get; }
         public sealed override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
-        internal static readonly ISet<KnownType> ReservedExceptionTypeNames = ImmutableHashSet.Create(
+        internal static readonly ISet<KnownType> ReservedExceptionTypeNames = new HashSet<KnownType>
+        {
                 KnownType.System_Exception,
                 KnownType.System_ApplicationException,
                 KnownType.System_SystemException,
                 KnownType.System_ExecutionEngineException,
                 KnownType.System_IndexOutOfRangeException,
                 KnownType.System_NullReferenceException,
-                KnownType.System_OutOfMemoryException);
+                KnownType.System_OutOfMemoryException
+        };
 
         protected void ReportReservedExceptionCreation(SyntaxNodeAnalysisContext context,
             SyntaxNode throwStatementExpression)

@@ -20,9 +20,9 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
+using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Common
 {
@@ -42,7 +42,7 @@ namespace SonarAnalyzer.Common
 
         public abstract ICollection<int> ExecutableLines { get; }
 
-        public IImmutableSet<int> CodeLines
+        public ISet<int> CodeLines
         {
             get
             {
@@ -56,7 +56,7 @@ namespace SonarAnalyzer.Common
                             var end = t.GetLocation().GetLineSpan().EndLinePosition.Line + 1;
                             return Enumerable.Range(start, end - start + 1);
                         })
-                    .ToImmutableHashSet();
+                    .ToHashSet();
             }
         }
 
@@ -70,8 +70,8 @@ namespace SonarAnalyzer.Common
 
         public FileComments GetComments(bool ignoreHeaderComments)
         {
-            var noSonar = ImmutableHashSet.CreateBuilder<int>();
-            var nonBlank = ImmutableHashSet.CreateBuilder<int>();
+            var noSonar = new HashSet<int>();
+            var nonBlank = new HashSet<int>();
 
             var trivias = tree.GetRoot().DescendantTrivia();
 
@@ -100,10 +100,10 @@ namespace SonarAnalyzer.Common
                 }
             }
 
-            return new FileComments(noSonar.ToImmutableHashSet(), nonBlank.ToImmutableHashSet());
+            return new FileComments(noSonar.ToHashSet(), nonBlank.ToHashSet());
         }
 
-        private static void CategorizeLines(string line, int lineNumber, ImmutableHashSet<int>.Builder noSonar, ImmutableHashSet<int>.Builder nonBlank)
+        private static void CategorizeLines(string line, int lineNumber, HashSet<int> noSonar, HashSet<int> nonBlank)
         {
             if (line.Contains("NOSONAR"))
             {

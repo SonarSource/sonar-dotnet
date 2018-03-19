@@ -163,24 +163,27 @@ namespace SonarAnalyzer.Metrics.CSharp
             return walker.VisitEndedCorrectly ? walker.Complexity : -1;
         }
 
-        private static readonly ISet<SyntaxKind> TriviaKinds = ImmutableHashSet.Create(
+        private static readonly ISet<SyntaxKind> TriviaKinds = new HashSet<SyntaxKind>
+        {
             SyntaxKind.SingleLineCommentTrivia,
             SyntaxKind.MultiLineCommentTrivia,
             SyntaxKind.SingleLineDocumentationCommentTrivia,
             SyntaxKind.MultiLineDocumentationCommentTrivia
-        );
+        };
 
-        private static readonly ISet<SyntaxKind> ClassKinds = ImmutableHashSet.Create(
+        private static readonly ISet<SyntaxKind> ClassKinds = new HashSet<SyntaxKind>
+        {
             SyntaxKind.ClassDeclaration,
             SyntaxKind.StructDeclaration,
             SyntaxKind.InterfaceDeclaration
-        );
+        };
 
-        private static readonly ISet<SyntaxKind> FunctionKinds = ImmutableHashSet.Create(
+        private static readonly ISet<SyntaxKind> FunctionKinds = new HashSet<SyntaxKind>
+        {
             SyntaxKind.ConstructorDeclaration,
             SyntaxKind.DestructorDeclaration,
             SyntaxKind.MethodDeclaration,
             SyntaxKind.OperatorDeclaration
-        );
+        };
     }
 }

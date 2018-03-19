@@ -191,13 +191,15 @@ namespace SonarAnalyzer.Rules.CSharp
                 IsUnsafe(((IArrayTypeSymbol)type).ElementType);
         }
 
-        private static readonly ISet<SyntaxKind> UnsafeConstructKinds = ImmutableHashSet.Create(
+        private static readonly ISet<SyntaxKind> UnsafeConstructKinds = new HashSet<SyntaxKind>
+        {
             SyntaxKind.AddressOfExpression,
             SyntaxKind.PointerIndirectionExpression,
             SyntaxKind.SizeOfExpression,
             SyntaxKind.PointerType,
             SyntaxKind.FixedStatement,
-            SyntaxKind.StackAllocArrayCreationExpression);
+            SyntaxKind.StackAllocArrayCreationExpression
+        };
 
         private static void MarkAllUnsafeBlockInside(SyntaxNode container, SyntaxNodeAnalysisContext context)
         {
@@ -419,24 +421,30 @@ namespace SonarAnalyzer.Rules.CSharp
                 currentContextHasIntegralOperation |= methodSymbol != null && methodSymbol.ReceiverType.IsAny(KnownType.IntegralNumbers);
             }
 
-            private static readonly ISet<SyntaxKind> BinaryOperationsForChecked = ImmutableHashSet.Create(
+            private static readonly ISet<SyntaxKind> BinaryOperationsForChecked = new HashSet<SyntaxKind>
+            {
                 SyntaxKind.AddExpression,
                 SyntaxKind.SubtractExpression,
                 SyntaxKind.MultiplyExpression,
-                SyntaxKind.DivideExpression);
+                SyntaxKind.DivideExpression
+            };
 
-            private static readonly ISet<SyntaxKind> AssignmentsForChecked = ImmutableHashSet.Create(
+            private static readonly ISet<SyntaxKind> AssignmentsForChecked = new HashSet<SyntaxKind>
+            {
                 SyntaxKind.AddAssignmentExpression,
                 SyntaxKind.SubtractAssignmentExpression,
                 SyntaxKind.MultiplyAssignmentExpression,
-                SyntaxKind.DivideAssignmentExpression);
+                SyntaxKind.DivideAssignmentExpression
+            };
 
-            private static readonly ISet<SyntaxKind> UnaryOperationsForChecked = ImmutableHashSet.Create(
+            private static readonly ISet<SyntaxKind> UnaryOperationsForChecked = new HashSet<SyntaxKind>
+            {
                 SyntaxKind.UnaryMinusExpression,
                 SyntaxKind.PostDecrementExpression,
                 SyntaxKind.PostIncrementExpression,
                 SyntaxKind.PreDecrementExpression,
-                SyntaxKind.PreIncrementExpression);
+                SyntaxKind.PreIncrementExpression
+            };
 
             public static bool IsTopLevel(SyntaxNode node)
             {

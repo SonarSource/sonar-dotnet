@@ -274,7 +274,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void CollectRemovableEventsAndProperties(RemovableDeclarationCollector helper,
             HashSet<ISymbol> declaredPrivateSymbols)
         {
-            var declarationKinds = ImmutableHashSet.Create(SyntaxKind.EventDeclaration, SyntaxKind.PropertyDeclaration, SyntaxKind.IndexerDeclaration);
+            var declarationKinds = new HashSet<SyntaxKind> { SyntaxKind.EventDeclaration, SyntaxKind.PropertyDeclaration, SyntaxKind.IndexerDeclaration };
             var declarations = helper.GetRemovableDeclarations(declarationKinds, maxAccessibility);
             declaredPrivateSymbols.UnionWith(declarations.Select(d => d.Symbol));
         }
@@ -282,7 +282,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void CollectRemovableFieldLikeDeclarations(RemovableDeclarationCollector declarationCollector,
             HashSet<ISymbol> declaredPrivateSymbols, BidirectionalDictionary<ISymbol, SyntaxNode> fieldLikeSymbols)
         {
-            var declarationKinds = ImmutableHashSet.Create(SyntaxKind.FieldDeclaration, SyntaxKind.EventFieldDeclaration);
+            var declarationKinds = new HashSet<SyntaxKind> { SyntaxKind.FieldDeclaration, SyntaxKind.EventFieldDeclaration };
             var removableFieldsDefinitions = declarationCollector.GetRemovableFieldLikeDeclarations(declarationKinds, maxAccessibility);
 
             foreach (var fieldsDefinitions in removableFieldsDefinitions)
@@ -354,7 +354,7 @@ namespace SonarAnalyzer.Rules.CSharp
             HashSet<ISymbol> usedSymbols, HashSet<ISymbol> declaredPrivateSymbols,
             Dictionary<IPropertySymbol, AccessorAccess> propertyAccessorAccess)
         {
-            var symbolNames = declaredPrivateSymbols.Select(s => s.Name).ToImmutableHashSet();
+            var symbolNames = declaredPrivateSymbols.Select(s => s.Name).ToHashSet();
             var anyRemovableIndexers = declaredPrivateSymbols
                 .OfType<IPropertySymbol>()
                 .Any(p => p.IsIndexer);
@@ -490,11 +490,13 @@ namespace SonarAnalyzer.Rules.CSharp
             return parent;
         }
 
-        private static readonly ISet<SyntaxKind> IncrementKinds = ImmutableHashSet.Create(
+        private static readonly ISet<SyntaxKind> IncrementKinds = new HashSet<SyntaxKind>
+        {
             SyntaxKind.PostIncrementExpression,
             SyntaxKind.PreIncrementExpression,
             SyntaxKind.PostDecrementExpression,
-            SyntaxKind.PreDecrementExpression);
+            SyntaxKind.PreDecrementExpression
+        };
 
         [Flags]
         private enum AccessorAccess

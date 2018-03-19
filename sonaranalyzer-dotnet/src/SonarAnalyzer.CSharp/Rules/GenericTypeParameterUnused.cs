@@ -36,7 +36,7 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         internal const string DiagnosticId = "S2326";
         private const string MessageFormat = "'{0}' is not used in the {1}.";
-        
+
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
@@ -151,9 +151,11 @@ namespace SonarAnalyzer.Rules.CSharp
                 .ToList();
         }
 
-        private static readonly ISet<SyntaxKind> MethodModifiersToSkip = ImmutableHashSet.Create(
+        private static readonly ISet<SyntaxKind> MethodModifiersToSkip = new HashSet<SyntaxKind>
+        {
             SyntaxKind.AbstractKeyword,
             SyntaxKind.VirtualKeyword,
-            SyntaxKind.OverrideKeyword);
+            SyntaxKind.OverrideKeyword
+        };
     }
 }

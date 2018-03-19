@@ -39,25 +39,33 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(S2589DiagnosticId)]
     public class ConditionEvaluatesToConstant : SonarDiagnosticAnalyzer
     {
-        private static readonly ISet<SyntaxKind> OmittedSyntaxKinds = ImmutableHashSet.Create(
+        private static readonly ISet<SyntaxKind> OmittedSyntaxKinds = new HashSet<SyntaxKind>
+        {
             SyntaxKind.LogicalAndExpression,
-            SyntaxKind.LogicalOrExpression);
+            SyntaxKind.LogicalOrExpression
+        };
 
-        private static readonly ISet<SyntaxKind> LoopBreakingStatements = ImmutableHashSet.Create(
+        private static readonly ISet<SyntaxKind> LoopBreakingStatements = new HashSet<SyntaxKind>
+        {
             SyntaxKind.BreakStatement,
             SyntaxKind.ThrowStatement,
-            SyntaxKind.ReturnStatement);
+            SyntaxKind.ReturnStatement
+        };
 
-        private static readonly ISet<SyntaxKind> LoopStatements = ImmutableHashSet.Create(
+        private static readonly ISet<SyntaxKind> LoopStatements = new HashSet<SyntaxKind>
+        {
             SyntaxKind.WhileStatement,
             SyntaxKind.DoStatement,
-            SyntaxKind.ForStatement);
+            SyntaxKind.ForStatement
+        };
 
-        private static readonly ISet<SyntaxKind> ConditionalStatements = ImmutableHashSet.Create(
+        private static readonly ISet<SyntaxKind> ConditionalStatements = new HashSet<SyntaxKind>
+        {
             SyntaxKind.IfStatement,
             SyntaxKind.WhileStatement,
             SyntaxKind.DoStatement,
-            SyntaxKind.ConditionalExpression);
+            SyntaxKind.ConditionalExpression
+        };
 
         private const string S2583DiagnosticId = "S2583"; // Bug
         private const string S2583MessageFormat = "Change this condition so that it does not always evaluate to '{0}'; some subsequent code is never executed.";

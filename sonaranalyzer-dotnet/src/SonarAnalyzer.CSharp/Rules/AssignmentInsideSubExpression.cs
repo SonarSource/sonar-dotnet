@@ -169,16 +169,20 @@ namespace SonarAnalyzer.Rules.CSharp
                 && condition.Contains(originalExpression);
         }
 
-        private static readonly ISet<SyntaxKind> AllowedParentExpressionKinds = ImmutableHashSet.Create(
+        private static readonly ISet<SyntaxKind> AllowedParentExpressionKinds = new HashSet<SyntaxKind>
+        {
             SyntaxKind.SimpleAssignmentExpression,
             SyntaxKind.ParenthesizedLambdaExpression,
             SyntaxKind.SimpleLambdaExpression,
             SyntaxKind.AnonymousMethodExpression,
-            SyntaxKind.ObjectInitializerExpression);
+            SyntaxKind.ObjectInitializerExpression
+        };
 
-        private static readonly ISet<SyntaxKind> RelationalExpressionKinds = ImmutableHashSet.Create(
+        private static readonly ISet<SyntaxKind> RelationalExpressionKinds = new HashSet<SyntaxKind>
+        {
             SyntaxKind.EqualsExpression, SyntaxKind.NotEqualsExpression,
             SyntaxKind.LessThanExpression, SyntaxKind.LessThanOrEqualExpression,
-            SyntaxKind.GreaterThanExpression, SyntaxKind.GreaterThanOrEqualExpression);
+            SyntaxKind.GreaterThanExpression, SyntaxKind.GreaterThanOrEqualExpression
+        };
     }
 }

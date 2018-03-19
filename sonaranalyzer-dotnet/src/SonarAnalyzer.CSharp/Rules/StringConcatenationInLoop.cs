@@ -54,15 +54,19 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override bool AreEquivalent(SyntaxNode node1, SyntaxNode node2) =>
             EquivalenceChecker.AreEquivalent(node1, node2);
 
-        private static readonly ISet<SyntaxKind> LoopKinds = ImmutableHashSet.Create(
+        private static readonly ISet<SyntaxKind> LoopKinds = new HashSet<SyntaxKind>
+        {
             SyntaxKind.WhileStatement,
             SyntaxKind.DoStatement,
             SyntaxKind.ForStatement,
-            SyntaxKind.ForEachStatement);
+            SyntaxKind.ForEachStatement
+        };
 
-        private static readonly ISet<SyntaxKind> AddOperators = ImmutableHashSet.Create(
+        private static readonly ISet<SyntaxKind> AddOperators = new HashSet<SyntaxKind>
+        {
             SyntaxKind.PlusToken,
-            SyntaxKind.PlusEqualsToken);
+            SyntaxKind.PlusEqualsToken
+        };
 
         private static readonly ImmutableArray<SyntaxKind> simpleAssignmentKinds =
             ImmutableArray.Create(SyntaxKind.SimpleAssignmentExpression);

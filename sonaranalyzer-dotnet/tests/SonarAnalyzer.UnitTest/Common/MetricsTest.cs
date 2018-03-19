@@ -18,14 +18,13 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Immutable;
-using FluentAssertions;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SonarAnalyzer.Common;
-using Microsoft.CodeAnalysis.VisualBasic;
 using System;
 using System.Collections.Generic;
+using FluentAssertions;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.VisualBasic;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Common;
 
 namespace SonarAnalyzer.UnitTest.Common
 {
@@ -82,7 +81,7 @@ line 4"")
 End Class").Should().BeEquivalentTo(1, 2, 3, 4, 5, 6, 7, 8);
         }
 
-        private static IImmutableSet<int> LinesOfCode(AnalyzerLanguage language, string text) => MetricsFor(language, text).CodeLines;
+        private static ISet<int> LinesOfCode(AnalyzerLanguage language, string text) => MetricsFor(language, text).CodeLines;
 
         [TestMethod]
         [TestCategory(MetricsTestCategoryName)]

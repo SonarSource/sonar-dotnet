@@ -24,6 +24,7 @@ using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.Helpers;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.SymbolicExecution.Relationships;
 using SonarAnalyzer.SymbolicExecution.SymbolicValues;
@@ -48,16 +49,20 @@ namespace SonarAnalyzer.SymbolicExecution
                 { SymbolicValue.Base,  SymbolicValueConstraints.Create(ObjectConstraint.NotNull) }
             }.ToImmutableDictionary();
 
-        private static readonly ISet<SymbolicValue> ProtectedSymbolicValues = ImmutableHashSet.Create(
+        private static readonly ISet<SymbolicValue> ProtectedSymbolicValues = new HashSet<SymbolicValue>
+        {
             SymbolicValue.True,
             SymbolicValue.False,
             SymbolicValue.Null,
             SymbolicValue.This,
-            SymbolicValue.Base);
+            SymbolicValue.Base
+        };
 
-        private static readonly ISet<SymbolicValue> DistinguishedReferences = ImmutableHashSet.Create(
+        private static readonly ISet<SymbolicValue> DistinguishedReferences = new HashSet<SymbolicValue>
+        {
             SymbolicValue.This,
-            SymbolicValue.Base);
+            SymbolicValue.Base
+        };
 
         public ProgramState()
             : this(ImmutableDictionary<ISymbol, SymbolicValue>.Empty,
@@ -349,7 +354,7 @@ namespace SonarAnalyzer.SymbolicExecution
             var usedSymbolicValues = cleanedValues.Values
                 .Concat(DistinguishedReferences)
                 .Concat(cleanedValues.Values.OfType<NullableSymbolicValue>().Select(x => x.WrappedValue)) // Do not lose constraints on wrapped SV
-                .ToImmutableHashSet();
+                .ToHashSet();
 
             var cleanedConstraints = Constraints
                 .Where(kv =>

@@ -23,6 +23,7 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
+using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.SymbolicExecution.ControlFlowGraph
 {
@@ -76,7 +77,7 @@ namespace SonarAnalyzer.SymbolicExecution.ControlFlowGraph
                 getNexts(current).ToList().ForEach(b => toProcess.Enqueue(b));
             }
 
-            return alreadyProcesses.ToImmutableHashSet();
+            return alreadyProcesses.ToHashSet();
         }
     }
 }
