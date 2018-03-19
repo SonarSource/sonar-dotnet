@@ -54,9 +54,11 @@ namespace SonarAnalyzer.Rules.CSharp
             return DocumentBasedFixAllProvider.Instance;
         }
 
-        private static readonly ISet<SyntaxKind> SimpleTokenKinds = ImmutableHashSet.Create(
+        private static readonly ISet<SyntaxKind> SimpleTokenKinds = new HashSet<SyntaxKind>
+        {
             SyntaxKind.PartialKeyword,
-            SyntaxKind.SealedKeyword);
+            SyntaxKind.SealedKeyword
+        };
 
         protected sealed override Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
         {

@@ -584,7 +584,7 @@ namespace SonarAnalyzer.UnitTest
             diagnostics.Should().NotBeEmpty();
 
             var fixAllDiagnosticProvider = new FixAllDiagnosticProvider(
-                codeFixProvider.FixableDiagnosticIds.ToImmutableHashSet(),
+                codeFixProvider.FixableDiagnosticIds.ToHashSet(),
                 (doc, ids, ct) => Task.FromResult(
                     GetDiagnostics(currentDocument.Project.GetCompilationAsync(ct).Result, diagnosticAnalyzer)),
                 null);

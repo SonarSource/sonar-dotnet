@@ -42,14 +42,16 @@ namespace SonarAnalyzer.Rules.CSharp
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        private static readonly ISet<KnownType> TrackedTestMethodAttributes = ImmutableHashSet.Create(
+        private static readonly ISet<KnownType> TrackedTestMethodAttributes = new HashSet<KnownType>
+        {
             KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_TestMethodAttribute,
             KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_TestClassAttribute,
             KnownType.NUnit_Framework_TestAttribute,
             KnownType.NUnit_Framework_TestCaseAttribute,
             KnownType.NUnit_Framework_TestCaseSourceAttribute,
             KnownType.Xunit_FactAttribute,
-            KnownType.Xunit_TheoryAttribute);
+            KnownType.Xunit_TheoryAttribute
+        };
 
         protected override void Initialize(SonarAnalysisContext context)
         {

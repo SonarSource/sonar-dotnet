@@ -45,7 +45,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        private static readonly ISet<SyntaxKind> assignmentKinds = ImmutableHashSet.Create(
+        private static readonly ISet<SyntaxKind> assignmentKinds = new HashSet<SyntaxKind>
+        {
             SyntaxKind.SimpleAssignmentExpression,
             SyntaxKind.AddAssignmentExpression,
             SyntaxKind.SubtractAssignmentExpression,
@@ -56,15 +57,20 @@ namespace SonarAnalyzer.Rules.CSharp
             SyntaxKind.ExclusiveOrAssignmentExpression,
             SyntaxKind.OrAssignmentExpression,
             SyntaxKind.LeftShiftAssignmentExpression,
-            SyntaxKind.RightShiftAssignmentExpression);
+            SyntaxKind.RightShiftAssignmentExpression
+        };
 
-        private static readonly ISet<SyntaxKind> prefixUnaryKinds = ImmutableHashSet.Create(
+        private static readonly ISet<SyntaxKind> prefixUnaryKinds = new HashSet<SyntaxKind>
+        {
             SyntaxKind.PreDecrementExpression,
-            SyntaxKind.PreIncrementExpression);
+            SyntaxKind.PreIncrementExpression
+        };
 
-        private static readonly ISet<SyntaxKind> postfixUnaryKinds = ImmutableHashSet.Create(
+        private static readonly ISet<SyntaxKind> postfixUnaryKinds = new HashSet<SyntaxKind>
+        {
             SyntaxKind.PostDecrementExpression,
-            SyntaxKind.PostIncrementExpression);
+            SyntaxKind.PostIncrementExpression
+        };
 
         protected sealed override void Initialize(SonarAnalysisContext context)
         {

@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -81,13 +82,13 @@ namespace SonarAnalyzer.Rules.CSharp
                 return false;
             }
 
-            var possibleTypes = new[]
+            var possibleTypes = new HashSet<KnownType>
             {
                 KnownType.System_Array,
                 KnownType.System_Collections_Generic_IList_T,
                 KnownType.System_String,
                 KnownType.System_Collections_IList
-            }.ToImmutableHashSet();
+            };
 
             return indexOfSymbol.ContainingType.DerivesOrImplementsAny(possibleTypes);
         }

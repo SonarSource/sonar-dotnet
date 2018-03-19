@@ -57,7 +57,8 @@ namespace SonarAnalyzer.Rules.VisualBasic
         protected override bool AreEquivalent(SyntaxNode node1, SyntaxNode node2) =>
             SyntaxFactory.AreEquivalent(node1, node2);
 
-        private static readonly ISet<SyntaxKind> LoopKinds = ImmutableHashSet.Create(
+        private static readonly ISet<SyntaxKind> LoopKinds = new HashSet<SyntaxKind>
+        {
             SyntaxKind.WhileBlock,
             SyntaxKind.SimpleDoLoopBlock,
             SyntaxKind.ForBlock,
@@ -65,7 +66,8 @@ namespace SonarAnalyzer.Rules.VisualBasic
             SyntaxKind.DoUntilLoopBlock,
             SyntaxKind.DoWhileLoopBlock,
             SyntaxKind.DoLoopUntilBlock,
-            SyntaxKind.DoLoopWhileBlock);
+            SyntaxKind.DoLoopWhileBlock
+        };
 
         private static readonly ImmutableArray<SyntaxKind> simpleAssignmentKinds =
             ImmutableArray.Create(SyntaxKind.SimpleAssignmentStatement);

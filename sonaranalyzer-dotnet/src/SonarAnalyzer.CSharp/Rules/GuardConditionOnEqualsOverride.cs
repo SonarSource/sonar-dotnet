@@ -41,7 +41,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        private static readonly ISet<string> MethodNames = ImmutableHashSet.Create( GetHashCodeEqualsOverride.EqualsName );
+        private static readonly ISet<string> MethodNames = new HashSet<string> { GetHashCodeEqualsOverride.EqualsName };
 
         protected sealed override void Initialize(SonarAnalysisContext context)
         {

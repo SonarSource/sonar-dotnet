@@ -34,10 +34,12 @@ namespace SonarAnalyzer.Rules.Common
 
         protected abstract GeneratedCodeRecognizer GeneratedCodeRecognizer { get; }
 
-        internal static readonly ISet<KnownType> AllowedExceptionBaseTypes = ImmutableHashSet.Create(
+        internal static readonly ISet<KnownType> AllowedExceptionBaseTypes = new HashSet<KnownType>
+        {
             KnownType.System_NotImplementedException,
             KnownType.System_NotSupportedException,
-            KnownType.System_InvalidOperationException);
+            KnownType.System_InvalidOperationException
+        };
     }
 
     public abstract class PropertyGetterWithThrowBase<TLanguageKindEnum, TAccessorSyntax> :

@@ -37,7 +37,7 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string DiagnosticId = "S2306";
         private const string MessageFormat = "Rename '{0}' to not use a contextual keyword as an identifier.";
 
-        private static readonly ISet<string> AsyncOrAwait = ImmutableHashSet.Create("async", "await");
+        private static readonly ISet<string> AsyncOrAwait = new HashSet<string> { "async", "await" };
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);

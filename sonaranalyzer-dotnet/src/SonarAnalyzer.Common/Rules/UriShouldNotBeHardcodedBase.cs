@@ -49,13 +49,8 @@ namespace SonarAnalyzer.Rules
 
         protected static readonly Regex PathDelimiterRegex = new Regex(@"^(\\|/)$", RegexOptions.Compiled);
 
-        protected static readonly ISet<string> checkedVariableNames = ImmutableHashSet.Create(
-            "file",
-            "path",
-            "uri",
-            "url",
-            "urn",
-            "stream");
+        protected static readonly ISet<string> checkedVariableNames = new HashSet<string> { "file", "path", "uri", "url", "urn",
+            "stream" };
     }
 
     public abstract class UriShouldNotBeHardcodedBase<TExpressionSyntax,

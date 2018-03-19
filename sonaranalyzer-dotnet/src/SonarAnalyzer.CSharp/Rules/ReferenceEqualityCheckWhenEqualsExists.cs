@@ -69,7 +69,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         allNamedTypeSymbols
                             .Where(t => t.AllInterfaces.Any() && HasEqualsOverride(t))
                             .SelectMany(t => t.AllInterfaces)
-                            .ToImmutableHashSet();
+                            .ToHashSet();
 
                     compilationStartContext.RegisterSyntaxNodeActionInNonGenerated(
                         c =>

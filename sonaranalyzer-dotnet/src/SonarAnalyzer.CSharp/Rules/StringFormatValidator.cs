@@ -53,7 +53,8 @@ namespace SonarAnalyzer.Rules.CSharp
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
             ImmutableArray.Create(bugRule, codeSmellRule);
 
-        private static readonly ISet<MethodSignature> HandledFormatMethods = ImmutableHashSet.Create(
+        private static readonly ISet<MethodSignature> HandledFormatMethods = new HashSet<MethodSignature>
+        {
             new MethodSignature(KnownType.System_String, "Format"),
             new MethodSignature(KnownType.System_Console, "Write"),
             new MethodSignature(KnownType.System_Console, "WriteLine"),
@@ -64,22 +65,27 @@ namespace SonarAnalyzer.Rules.CSharp
             new MethodSignature(KnownType.System_Diagnostics_Trace, "TraceError"),
             new MethodSignature(KnownType.System_Diagnostics_Trace, "TraceInformation"),
             new MethodSignature(KnownType.System_Diagnostics_Trace, "TraceWarning"),
-            new MethodSignature(KnownType.System_Diagnostics_TraceSource, "TraceInformation"));
+            new MethodSignature(KnownType.System_Diagnostics_TraceSource, "TraceInformation")
+        };
 
-        private static readonly ISet<ValidationFailure> bugRelatedFailures = ImmutableHashSet.Create(
-                ValidationFailure.UnknownError,
-                ValidationFailure.NullFormatString,
-                ValidationFailure.InvalidCharacterAfterOpenCurlyBrace,
-                ValidationFailure.UnbalancedCurlyBraceCount,
-                ValidationFailure.FormatItemMalformed,
-                ValidationFailure.FormatItemIndexBiggerThanArgsCount,
-                ValidationFailure.FormatItemIndexBiggerThanMaxValue,
-                ValidationFailure.FormatItemAlignmentBiggerThanMaxValue);
+        private static readonly ISet<ValidationFailure> bugRelatedFailures = new HashSet<ValidationFailure>
+        {
+            ValidationFailure.UnknownError,
+            ValidationFailure.NullFormatString,
+            ValidationFailure.InvalidCharacterAfterOpenCurlyBrace,
+            ValidationFailure.UnbalancedCurlyBraceCount,
+            ValidationFailure.FormatItemMalformed,
+            ValidationFailure.FormatItemIndexBiggerThanArgsCount,
+            ValidationFailure.FormatItemIndexBiggerThanMaxValue,
+            ValidationFailure.FormatItemAlignmentBiggerThanMaxValue
+        };
 
-        private static readonly ISet<ValidationFailure> codeSmellRelatedFailures = ImmutableHashSet.Create(
-                ValidationFailure.SimpleString,
-                ValidationFailure.MissingFormatItemIndex,
-                ValidationFailure.UnusedFormatArguments);
+        private static readonly ISet<ValidationFailure> codeSmellRelatedFailures = new HashSet<ValidationFailure>
+        {
+            ValidationFailure.SimpleString,
+            ValidationFailure.MissingFormatItemIndex,
+            ValidationFailure.UnusedFormatArguments
+        };
 
         private static readonly Regex StringFormatItemRegex = // pattern is: index[,alignment][:formatString]
             new Regex(@"^(?<Index>\d+)(\s*,\s*(?<Alignment>-?\d+)\s*)?(:(?<Format>.+))?$", RegexOptions.Compiled);

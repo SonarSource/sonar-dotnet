@@ -129,9 +129,11 @@ namespace SonarAnalyzer.Rules.CSharp
             return returnType.IsAny(DisallowedTypes);
         }
 
-        private static readonly ISet<KnownType> DisallowedTypes = ImmutableHashSet.Create(
+        private static readonly ISet<KnownType> DisallowedTypes = new HashSet<KnownType>
+        {
             KnownType.System_Int64,
             KnownType.System_Int32,
-            KnownType.System_Decimal);
+            KnownType.System_Decimal
+        };
     }
 }

@@ -20,7 +20,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -104,9 +103,11 @@ namespace SonarAnalyzer.Helpers
                     .Where(tuple => IsSymbolNotInInterfaceAndRemovable(tuple.Symbol, maxAcessibility)));
         }
 
-        private static readonly ISet<MethodKind> RemovableMethodKinds = ImmutableHashSet.Create(
+        private static readonly ISet<MethodKind> RemovableMethodKinds = new HashSet<MethodKind>
+        {
             MethodKind.Ordinary,
-            MethodKind.Constructor);
+            MethodKind.Constructor
+        };
 
         public static bool IsRemovable(IMethodSymbol methodSymbol, Accessibility maxAccessibility)
         {

@@ -43,9 +43,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        private static readonly ISet<string> EqualityOperators = ImmutableHashSet.Create(
-            "op_Equality",
-            "op_Inequality");
+        private static readonly ISet<string> EqualityOperators = new HashSet<string> { "op_Equality", "op_Inequality" };
 
         protected sealed override void Initialize(SonarAnalysisContext context)
         {

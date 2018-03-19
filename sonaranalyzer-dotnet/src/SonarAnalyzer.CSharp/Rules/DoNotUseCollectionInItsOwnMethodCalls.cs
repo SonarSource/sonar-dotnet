@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2018 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -48,9 +48,9 @@ namespace SonarAnalyzer.Rules.CSharp
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        private static readonly ISet<string> trackedMethodNames = ImmutableHashSet.Create("AddRange", "Concat",
-            "Except", "ExceptWith", "Intersect", "IntersectWith", "IsSubsetOf", "IsSupersetOf", "IsProperSubsetOf",
-            "IsProperSupersetOf", "Overlaps", "SequenceEqual", "SetEquals", "SymmetricExceptWith", "Union", "UnionWith");
+        private static readonly ISet<string> trackedMethodNames = new HashSet<string> {"AddRange", "Concat", "Except",
+            "ExceptWith", "Intersect", "IntersectWith", "IsSubsetOf", "IsSupersetOf", "IsProperSubsetOf", "IsProperSupersetOf",
+            "Overlaps", "SequenceEqual", "SetEquals", "SymmetricExceptWith", "Union", "UnionWith" };
 
         protected override void Initialize(SonarAnalysisContext context)
         {

@@ -19,7 +19,6 @@
  */
 
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.VisualBasic;
@@ -82,16 +81,20 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 return trivia.IsKind(SyntaxKind.DocumentationCommentTrivia);
             }
 
-            private static readonly ISet<SyntaxKind> StringKinds = ImmutableHashSet.Create(
+            private static readonly ISet<SyntaxKind> StringKinds = new HashSet<SyntaxKind>
+            {
                 SyntaxKind.StringLiteralToken,
                 SyntaxKind.CharacterLiteralToken,
                 SyntaxKind.InterpolatedStringTextToken,
-                SyntaxKind.EndOfInterpolatedStringToken);
+                SyntaxKind.EndOfInterpolatedStringToken
+            };
 
-            private static readonly ISet<SyntaxKind> NumericKinds = ImmutableHashSet.Create(
+            private static readonly ISet<SyntaxKind> NumericKinds = new HashSet<SyntaxKind>
+            {
                 SyntaxKind.DecimalLiteralToken,
                 SyntaxKind.FloatingLiteralToken,
-                SyntaxKind.IntegerLiteralToken);
+                SyntaxKind.IntegerLiteralToken
+            };
         }
     }
 }

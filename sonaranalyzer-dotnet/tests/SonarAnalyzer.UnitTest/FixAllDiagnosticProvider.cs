@@ -18,13 +18,12 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Threading;
+using System.Threading.Tasks;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CodeFixes;
-using System;
-using System.Threading.Tasks;
 
 
 namespace SonarAnalyzer.UnitTest
@@ -34,13 +33,13 @@ namespace SonarAnalyzer.UnitTest
     /// </summary>
     internal class FixAllDiagnosticProvider : FixAllContext.DiagnosticProvider
     {
-        private readonly ImmutableHashSet<string> _diagnosticIds;
+        private readonly ISet<string> _diagnosticIds;
 
         /// <summary>
         /// Delegate to fetch diagnostics for any given document within the given fix all scope.
         /// This delegate is invoked by <see cref="GetDocumentDiagnosticsAsync(Document, CancellationToken)"/> with the given <see cref="_diagnosticIds"/> as arguments.
         /// </summary>
-        private readonly Func<Document, ImmutableHashSet<string>, CancellationToken, Task<IEnumerable<Diagnostic>>> _getDocumentDiagnosticsAsync;
+        private readonly Func<Document, ISet<string>, CancellationToken, Task<IEnumerable<Diagnostic>>> _getDocumentDiagnosticsAsync;
 
         /// <summary>
         /// Delegate to fetch diagnostics for any given project within the given fix all scope.
@@ -50,12 +49,12 @@ namespace SonarAnalyzer.UnitTest
         /// (a) False => Return only diagnostics with <see cref="Location.None"/>.
         /// (b) True => Return all project diagnostics, regardless of whether or not they have a location.
         /// </summary>
-        private readonly Func<Project, bool, ImmutableHashSet<string>, CancellationToken, Task<IEnumerable<Diagnostic>>> _getProjectDiagnosticsAsync;
+        private readonly Func<Project, bool, ISet<string>, CancellationToken, Task<IEnumerable<Diagnostic>>> _getProjectDiagnosticsAsync;
 
         public FixAllDiagnosticProvider(
-            ImmutableHashSet<string> diagnosticIds,
-            Func<Document, ImmutableHashSet<string>, CancellationToken, Task<IEnumerable<Diagnostic>>> getDocumentDiagnosticsAsync,
-            Func<Project, bool, ImmutableHashSet<string>, CancellationToken, Task<IEnumerable<Diagnostic>>> getProjectDiagnosticsAsync)
+            ISet<string> diagnosticIds,
+            Func<Document, ISet<string>, CancellationToken, Task<IEnumerable<Diagnostic>>> getDocumentDiagnosticsAsync,
+            Func<Project, bool, ISet<string>, CancellationToken, Task<IEnumerable<Diagnostic>>> getProjectDiagnosticsAsync)
         {
             _diagnosticIds = diagnosticIds;
             _getDocumentDiagnosticsAsync = getDocumentDiagnosticsAsync;

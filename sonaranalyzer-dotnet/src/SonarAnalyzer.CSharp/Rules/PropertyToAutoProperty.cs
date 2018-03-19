@@ -87,7 +87,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool HasDifferentModifiers(SyntaxList<AccessorDeclarationSyntax> accessors)
         {
             var accessor1 = accessors.First();
-            var modifiers = GetModifierKinds(accessor1).ToImmutableHashSet();
+            var modifiers = GetModifierKinds(accessor1).ToHashSet();
 
             return accessors.Skip(1).Any(a => !modifiers.SetEquals(GetModifierKinds(a)));
         }
