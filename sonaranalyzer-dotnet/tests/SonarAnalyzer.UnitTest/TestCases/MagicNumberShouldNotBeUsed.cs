@@ -35,8 +35,15 @@ namespace Tests.Diagnostics
         }
     }
 
+    public enum MyEnum
+    {
+        Value1 = 1,
+        Value2 = 2,
+        Value3 = 3
+    }
+
     public class WrongUseCases
-    {        
+    {
         public WrongUseCases()
         {
             Console.WriteLine(12); // Noncompliant
