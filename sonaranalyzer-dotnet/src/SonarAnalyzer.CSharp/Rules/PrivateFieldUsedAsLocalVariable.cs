@@ -64,7 +64,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    var classMethods = classSymbol.GetMembers().Where(m => m.Kind == SymbolKind.Method).ToImmutableHashSet();
+                    var classMethods = classSymbol.GetMembers().Where(m => m.Kind == SymbolKind.Method).ToHashSet();
 
                     ExcludePrivateFieldsBasedOnReferences(privateFields, referencesByEnclosingSymbol, classMethods);
                     ExcludePrivateFieldsBasedOnCompilerErrors(privateFields, referencesByEnclosingSymbol, classMethods,
@@ -99,7 +99,7 @@ namespace SonarAnalyzer.Rules.CSharp
             IImmutableDictionary<ISymbol, PrivateField> privateFields,
             SemanticModel semanticModel)
         {
-            var privateFieldNames = privateFields.Keys.Select(s => s.Name).ToImmutableHashSet();
+            var privateFieldNames = privateFields.Keys.Select(s => s.Name).ToHashSet();
 
             var potentialReferences = node.DescendantNodes()
                 .Where(n => n.IsKind(SyntaxKind.IdentifierName))
@@ -144,7 +144,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void ExcludePrivateFieldsBasedOnReferences(
             IImmutableDictionary<ISymbol, PrivateField> privateFields,
             IDictionary<ISymbol, IDictionary<SyntaxNode, ISymbol>> referencesByEnclosingSymbol,
-            IImmutableSet<ISymbol> classMethods)
+            ISet<ISymbol> classMethods)
         {
             var referencedAtLeastOnceFromClassMethod = new HashSet<ISymbol>();
 
@@ -203,7 +203,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void ExcludePrivateFieldsBasedOnCompilerErrors(
             IImmutableDictionary<ISymbol, PrivateField> privateFields,
             IDictionary<ISymbol, IDictionary<SyntaxNode, ISymbol>> referencesByEnclosingSymbol,
-            IImmutableSet<ISymbol> classMethods,
+            IEnumerable<ISymbol> classMethods,
             TypeDeclarationSyntax classNode,
             Compilation compilation)
         {
@@ -306,7 +306,7 @@ namespace SonarAnalyzer.Rules.CSharp
             IImmutableDictionary<SyntaxNode, ISymbol> references,
             out ISet<SyntaxNode> rewrittenNodes)
         {
-            var symbolsToRewrite = references.Values.ToImmutableHashSet();
+            var symbolsToRewrite = references.Values.ToHashSet();
 
             var localDeclaration = SyntaxFactory.LocalDeclarationStatement(
                 SyntaxFactory.VariableDeclaration(
@@ -315,7 +315,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     SyntaxFactory.SeparatedList(symbolsToRewrite.Select(
                         s => SyntaxFactory.VariableDeclarator(privateFields[s].UniqueName)))));
 
-            var rewrittenNodesBuilder = ImmutableHashSet.CreateBuilder<SyntaxNode>();
+            var rewrittenNodesBuilder = new HashSet<SyntaxNode>();
             var newBody = body.ReplaceSyntax(
                 references.Keys,
                 (original, partiallyRewritten) =>
@@ -331,7 +331,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var newStatements = newBody.Statements.Insert(0, localDeclaration);
             newBody = newBody.WithStatements(newStatements);
 
-            rewrittenNodes = rewrittenNodesBuilder.ToImmutable();
+            rewrittenNodes = rewrittenNodesBuilder;
 
             return newBody;
         }
@@ -344,14 +344,14 @@ namespace SonarAnalyzer.Rules.CSharp
             var partiallyRewrittenSymbols = references
                 .Where(r => !rewrittenNodes.Contains(r.Key))
                 .Select(r => r.Value)
-                .ToImmutableHashSet();
+                .ToHashSet();
 
             foreach (var partiallyRewrittenSymbol in partiallyRewrittenSymbols)
             {
                 privateFields[partiallyRewrittenSymbol].Excluded = true;
             }
 
-            var allSymbolsToRewrite = references.Values.ToImmutableHashSet();
+            var allSymbolsToRewrite = references.Values.ToHashSet();
 
             return partiallyRewrittenSymbols.Count == allSymbolsToRewrite.Count;
         }

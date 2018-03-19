@@ -42,16 +42,15 @@ namespace SonarAnalyzer.Rules.VisualBasic
         protected sealed override Helpers.GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.VisualBasic.GeneratedCodeRecognizer.Instance;
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        protected override ISet<SyntaxKind> LoopStatements { get; }
-            = new HashSet<SyntaxKind>
-            {
-                SyntaxKind.ForBlock,
-                SyntaxKind.ForEachBlock,
-                SyntaxKind.WhileBlock,
-                SyntaxKind.DoLoopWhileBlock,
-                SyntaxKind.DoLoopUntilBlock,
-                SyntaxKind.SimpleDoLoopBlock
-            };
+        protected override ISet<SyntaxKind> LoopStatements { get; } = new HashSet<SyntaxKind>
+        {
+            SyntaxKind.ForBlock,
+            SyntaxKind.ForEachBlock,
+            SyntaxKind.WhileBlock,
+            SyntaxKind.DoLoopWhileBlock,
+            SyntaxKind.DoLoopUntilBlock,
+            SyntaxKind.SimpleDoLoopBlock
+        };
 
         protected override string GetKeywordText(StatementSyntax statement) =>
             (statement as ExitStatementSyntax)?.ExitKeyword.ToString() ??
@@ -64,12 +63,13 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         private class LoopWalker : LoopWalkerBase<StatementSyntax, SyntaxKind>
         {
-            protected override ISet<SyntaxKind> StatementsThatCanThrow { get; }
-                = ImmutableHashSet.Create(SyntaxKind.InvocationExpression,
-                                          SyntaxKind.ObjectCreationExpression);
+            protected override ISet<SyntaxKind> StatementsThatCanThrow { get; } = new HashSet<SyntaxKind>
+            {
+                SyntaxKind.InvocationExpression,
+                SyntaxKind.ObjectCreationExpression
+            };
 
-            protected override ISet<SyntaxKind> LambdaSyntaxes { get; }
-                = new HashSet<SyntaxKind>
+            protected override ISet<SyntaxKind> LambdaSyntaxes { get; } = new HashSet<SyntaxKind>
                 {
                     SyntaxKind.FunctionLambdaHeader,
                     SyntaxKind.MultiLineFunctionLambdaExpression,

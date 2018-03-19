@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2018 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -40,14 +40,13 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override DiagnosticDescriptor Rule => rule;
         protected sealed override Helpers.GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.CSharp.GeneratedCodeRecognizer.Instance;
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
-        protected override ISet<SyntaxKind> LoopStatements { get; }
-            = new HashSet<SyntaxKind>
-            {
-                SyntaxKind.ForEachStatement,
-                SyntaxKind.ForStatement,
-                SyntaxKind.WhileStatement,
-                SyntaxKind.DoStatement
-            };
+        protected override ISet<SyntaxKind> LoopStatements { get; } = new HashSet<SyntaxKind>
+        {
+            SyntaxKind.ForEachStatement,
+            SyntaxKind.ForStatement,
+            SyntaxKind.WhileStatement,
+            SyntaxKind.DoStatement
+        };
 
         protected override string GetKeywordText(StatementSyntax statement) =>
             (statement as BreakStatementSyntax)?.BreakKeyword.ToString() ??
@@ -61,9 +60,11 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private class LoopWalker : LoopWalkerBase<StatementSyntax, SyntaxKind>
         {
-            protected override ISet<SyntaxKind> StatementsThatCanThrow { get; }
-                = ImmutableHashSet.Create(SyntaxKind.InvocationExpression,
-                                          SyntaxKind.ObjectCreationExpression);
+            protected override ISet<SyntaxKind> StatementsThatCanThrow { get; } = new HashSet<SyntaxKind>
+            {
+                SyntaxKind.InvocationExpression,
+                SyntaxKind.ObjectCreationExpression
+            };
 
             protected override ISet<SyntaxKind> LambdaSyntaxes { get; }
                 = new HashSet<SyntaxKind> {

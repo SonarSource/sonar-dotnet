@@ -128,7 +128,8 @@ namespace SonarAnalyzer.Rules
             return null;
         }
 
-        private static readonly ISet<SymbolKind> DeclarationKinds = ImmutableHashSet.Create(
+        private static readonly ISet<SymbolKind> DeclarationKinds = new HashSet<SymbolKind>
+        {
             SymbolKind.Event,
             SymbolKind.Field,
             SymbolKind.Local,
@@ -136,7 +137,8 @@ namespace SonarAnalyzer.Rules
             SymbolKind.NamedType,
             SymbolKind.Parameter,
             SymbolKind.Property,
-            SymbolKind.TypeParameter);
+            SymbolKind.TypeParameter
+        };
 
         private static SymRefInfo GetSymRefInfo(SyntaxToken token, SemanticModel semanticModel,
             Func<SyntaxToken, bool> isIdentifier, Func<SyntaxToken, SyntaxNode> getBindableParent)

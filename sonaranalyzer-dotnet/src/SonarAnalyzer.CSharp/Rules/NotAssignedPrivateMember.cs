@@ -67,11 +67,11 @@ namespace SonarAnalyzer.Rules.CSharp
                     var removableDeclarationCollector = new RemovableDeclarationCollector(namedType, c.Compilation);
 
                     var candidateFields = removableDeclarationCollector.GetRemovableFieldLikeDeclarations(
-                        ImmutableHashSet.Create(SyntaxKind.FieldDeclaration), maxAccessibility)
+                        new HashSet<SyntaxKind> { SyntaxKind.FieldDeclaration }, maxAccessibility)
                         .Where(tuple => !IsInitializedOrFixed(((VariableDeclaratorSyntax)tuple.SyntaxNode)));
 
                     var candidateProperties = removableDeclarationCollector.GetRemovableDeclarations(
-                        ImmutableHashSet.Create(SyntaxKind.PropertyDeclaration), maxAccessibility)
+                        new HashSet<SyntaxKind> { SyntaxKind.PropertyDeclaration }, maxAccessibility)
                         .Where(tuple => IsAutoPropertyWithNoInitializer((PropertyDeclarationSyntax)tuple.SyntaxNode));
 
                     var allCandidateMembers = candidateFields.Concat(candidateProperties).ToList();
@@ -132,7 +132,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static IList<MemberUsage> GetMemberUsages(RemovableDeclarationCollector removableDeclarationCollector,
             HashSet<ISymbol> declaredPrivateSymbols)
         {
-            var symbolNames = declaredPrivateSymbols.Select(s => s.Name).ToImmutableHashSet();
+            var symbolNames = declaredPrivateSymbols.Select(s => s.Name).ToHashSet();
 
             var identifiers = removableDeclarationCollector.TypeDeclarations
                 .SelectMany(container => container.SyntaxNode.DescendantNodes()
@@ -249,10 +249,12 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool IsStructLayoutAttribute(AttributeData attribute) =>
             attribute.AttributeClass.Is(KnownType.System_Runtime_InteropServices_StructLayoutAttribute);
 
-        private static readonly ISet<SyntaxKind> PreOrPostfixOpSyntaxKinds = ImmutableHashSet.Create(
+        private static readonly ISet<SyntaxKind> PreOrPostfixOpSyntaxKinds = new HashSet<SyntaxKind>
+        {
             SyntaxKind.PostDecrementExpression,
             SyntaxKind.PostIncrementExpression,
             SyntaxKind.PreDecrementExpression,
-            SyntaxKind.PreIncrementExpression);
+            SyntaxKind.PreIncrementExpression
+        };
     }
 }

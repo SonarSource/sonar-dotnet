@@ -19,7 +19,6 @@
  */
 
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Diagnostics;
@@ -83,17 +82,21 @@ namespace SonarAnalyzer.Rules.CSharp
                     trivia.IsKind(SyntaxKind.MultiLineDocumentationCommentTrivia);
             }
 
-            private static readonly ISet<SyntaxKind> StringKinds = ImmutableHashSet.Create(
+            private static readonly ISet<SyntaxKind> StringKinds = new HashSet<SyntaxKind>
+            {
                 SyntaxKind.StringLiteralToken,
                 SyntaxKind.CharacterLiteralToken,
                 SyntaxKind.InterpolatedStringStartToken,
                 SyntaxKind.InterpolatedVerbatimStringStartToken,
                 SyntaxKind.InterpolatedStringTextToken,
-                SyntaxKind.InterpolatedStringEndToken);
+                SyntaxKind.InterpolatedStringEndToken
+            };
 
-            private static readonly ISet<SyntaxKind> CommentKinds = ImmutableHashSet.Create(
+            private static readonly ISet<SyntaxKind> CommentKinds = new HashSet<SyntaxKind>
+            {
                 SyntaxKind.SingleLineCommentTrivia,
-                SyntaxKind.MultiLineCommentTrivia);
+                SyntaxKind.MultiLineCommentTrivia
+            };
         }
     }
 }

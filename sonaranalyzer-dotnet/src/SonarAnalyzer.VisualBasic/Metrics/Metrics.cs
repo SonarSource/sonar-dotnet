@@ -20,7 +20,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.VisualBasic;
@@ -84,20 +83,23 @@ namespace SonarAnalyzer.Common.VisualBasic
 
         public override ICollection<int> ExecutableLines => new List<int>(); // Not implemented
 
-        private static readonly ISet<SyntaxKind> TriviaKinds = ImmutableHashSet.Create(
+        private static readonly ISet<SyntaxKind> TriviaKinds = new HashSet<SyntaxKind>
+        {
             SyntaxKind.CommentTrivia,
             SyntaxKind.DocumentationCommentExteriorTrivia,
             SyntaxKind.DocumentationCommentTrivia
-        );
+        };
 
-        private static readonly ISet<SyntaxKind> ClassKinds = ImmutableHashSet.Create(
+        private static readonly ISet<SyntaxKind> ClassKinds = new HashSet<SyntaxKind>
+        {
             SyntaxKind.ClassBlock,
             SyntaxKind.StructureBlock,
             SyntaxKind.InterfaceBlock,
             SyntaxKind.ModuleBlock
-        );
+        };
 
-        private static readonly ISet<SyntaxKind> FunctionKinds = ImmutableHashSet.Create(
+        private static readonly ISet<SyntaxKind> FunctionKinds = new HashSet<SyntaxKind>
+        {
             SyntaxKind.SubNewStatement,
             SyntaxKind.SubStatement,
             SyntaxKind.FunctionStatement,
@@ -109,9 +111,10 @@ namespace SonarAnalyzer.Common.VisualBasic
             SyntaxKind.RemoveHandlerAccessorStatement,
             SyntaxKind.DeclareSubStatement,
             SyntaxKind.DeclareFunctionStatement
-        );
+        };
 
-        private static readonly ISet<SyntaxKind> MethodBlocks = ImmutableHashSet.Create(
+        private static readonly ISet<SyntaxKind> MethodBlocks = new HashSet<SyntaxKind>
+        {
             SyntaxKind.ConstructorBlock,
             SyntaxKind.FunctionBlock,
             SyntaxKind.SubBlock,
@@ -121,9 +124,10 @@ namespace SonarAnalyzer.Common.VisualBasic
             SyntaxKind.RaiseEventAccessorBlock,
             SyntaxKind.AddHandlerAccessorBlock,
             SyntaxKind.RemoveHandlerAccessorBlock
-        );
+        };
 
-        private static readonly ISet<SyntaxKind> ComplexityIncreasingKinds = ImmutableHashSet.Create(
+        private static readonly ISet<SyntaxKind> ComplexityIncreasingKinds = new HashSet<SyntaxKind>
+        {
             SyntaxKind.IfStatement,
             SyntaxKind.SingleLineIfStatement,
             SyntaxKind.TernaryConditionalExpression,
@@ -172,6 +176,6 @@ namespace SonarAnalyzer.Common.VisualBasic
             SyntaxKind.OrElseExpression,
 
             SyntaxKind.EndStatement
-        );
+        };
     }
 }

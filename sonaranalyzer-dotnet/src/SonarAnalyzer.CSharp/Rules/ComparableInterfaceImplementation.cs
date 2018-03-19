@@ -45,17 +45,21 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private const string ObjectEquals = nameof(object.Equals);
 
-        private static readonly ISet<KnownType> ComparableInterfaces = ImmutableHashSet.Create(
+        private static readonly ISet<KnownType> ComparableInterfaces = new HashSet<KnownType>
+        {
             KnownType.System_IComparable,
-            KnownType.System_IComparable_T);
+            KnownType.System_IComparable_T
+        };
 
-        private static readonly IList<string> RequiredOperators = ImmutableList.Create(
+        private static readonly IList<string> RequiredOperators = new List<string>
+        {
             "op_LessThan",
             "op_GreaterThan",
             "op_LessThanOrEqual",
             "op_GreaterThanOrEqual",
             "op_Equality",
-            "op_Inequality");
+            "op_Inequality"
+        };
 
         private static readonly IDictionary<string, string> OperatorNamesMap = new Dictionary<string, string>
         {
@@ -65,7 +69,7 @@ namespace SonarAnalyzer.Rules.CSharp
             { "op_GreaterThanOrEqual", ">=" },
             { "op_Equality", "==" },
             { "op_Inequality" , "!=" },
-        }.ToImmutableDictionary();
+        };
 
         protected sealed override void Initialize(SonarAnalysisContext context)
         {

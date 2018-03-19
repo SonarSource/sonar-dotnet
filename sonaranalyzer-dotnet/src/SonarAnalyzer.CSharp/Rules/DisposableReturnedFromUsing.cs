@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
@@ -48,13 +49,13 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     var usingStatement = (UsingStatementSyntax) c.Node;
                     var declaration = usingStatement.Declaration;
-                    var declaredSymbols = ImmutableHashSet<ISymbol>.Empty;
+                    var declaredSymbols = new HashSet<ISymbol>();
                     if (declaration != null)
                     {
                         declaredSymbols =
                             declaration.Variables.Select(syntax => c.SemanticModel.GetDeclaredSymbol(syntax))
                                 .Where(symbol => symbol != null)
-                                .ToImmutableHashSet();
+                                .ToHashSet();
                     }
                     else
                     {
@@ -70,17 +71,17 @@ namespace SonarAnalyzer.Rules.CSharp
                             {
                                 return;
                             }
-                            declaredSymbols = (new[] { symbol }).ToImmutableHashSet();
+                            declaredSymbols = new HashSet<ISymbol> { symbol };
                         }
                     }
 
-                    if (declaredSymbols.IsEmpty)
+                    if (declaredSymbols.Count == 0)
                     {
                         return;
                     }
 
                     var returnedSymbols = GetReturnedSymbols(usingStatement.Statement, c.SemanticModel);
-                    returnedSymbols = returnedSymbols.Intersect(declaredSymbols);
+                    returnedSymbols.IntersectWith(declaredSymbols);
 
                     if (returnedSymbols.Any())
                     {
@@ -92,7 +93,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.UsingStatement);
         }
 
-        private static ImmutableHashSet<ISymbol> GetReturnedSymbols(StatementSyntax usingStatement,
+        private static ISet<ISymbol> GetReturnedSymbols(StatementSyntax usingStatement,
             SemanticModel semanticModel)
         {
             var enclosingSymbol = semanticModel.GetEnclosingSymbol(usingStatement.SpanStart);
@@ -104,7 +105,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 .OfType<IdentifierNameSyntax>()
                 .Select(identifier => semanticModel.GetSymbolInfo(identifier).Symbol)
                 .Where(symbol => symbol != null)
-                .ToImmutableHashSet();
+                .ToHashSet();
         }
     }
 }

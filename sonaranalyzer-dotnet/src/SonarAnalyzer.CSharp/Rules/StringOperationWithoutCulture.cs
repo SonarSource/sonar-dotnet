@@ -103,21 +103,18 @@ namespace SonarAnalyzer.Rules.CSharp
                 methodSymbol.IsInType(KnownType.System_DateTime);
         }
 
-        private static readonly ISet<string> CommonCultureSpecificMethodNames = ImmutableHashSet.Create(
-            "ToLower",
-            "ToUpper",
-            "Compare");
+        private static readonly ISet<string> CommonCultureSpecificMethodNames = new HashSet<string> { "ToLower", "ToUpper", "Compare" };
 
-        private static readonly ISet<string> IndexLookupMethodNames = ImmutableHashSet.Create(
-            "IndexOf",
-            "LastIndexOf");
+        private static readonly ISet<string> IndexLookupMethodNames = new HashSet<string> { "IndexOf", "LastIndexOf" };
 
         private const string CompareToMethodName = "CompareTo";
         private const string ToStringMethodName = "ToString";
 
-        private static readonly ISet<KnownType> StringCultureSpecifierNames = ImmutableHashSet.Create(
+        private static readonly ISet<KnownType> StringCultureSpecifierNames = new HashSet<KnownType>
+        {
             KnownType.System_Globalization_CultureInfo,
             KnownType.System_Globalization_CompareOptions,
-            KnownType.System_StringComparison);
+            KnownType.System_StringComparison
+        };
     }
 }

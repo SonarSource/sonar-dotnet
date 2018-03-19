@@ -42,9 +42,11 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        private static readonly ISet<Accessibility> Accessibilities = ImmutableHashSet.Create(
+        private static readonly ISet<Accessibility> Accessibilities = new HashSet<Accessibility>
+        {
             Accessibility.Protected,
-            Accessibility.Private);
+            Accessibility.Private
+        };
 
         protected sealed override void Initialize(SonarAnalysisContext context)
         {
@@ -56,7 +58,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
 
                 var fieldsByNamedType = MultiValueDictionary<INamedTypeSymbol, IFieldSymbol>.Create<HashSet<IFieldSymbol>>();
-                var fieldsAssigned = ImmutableHashSet<IFieldSymbol>.Empty;
+                var fieldsAssigned = new HashSet<IFieldSymbol>();
 
                 analysisContext.RegisterSymbolAction(c =>
                 {
@@ -70,7 +72,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var disposableFields = namedTypeSymbol.GetMembers()
                         .OfType<IFieldSymbol>()
                         .Where(IsNonStaticNonPublicDisposableField)
-                        .ToImmutableHashSet();
+                        .ToHashSet();
 
                     fieldsByNamedType.AddRangeWithKey(namedTypeSymbol, disposableFields);
                 }, SymbolKind.NamedType);
@@ -82,7 +84,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var expression = assignment.Right;
                     var fieldSymbol = c.SemanticModel.GetSymbolInfo(assignment.Left).Symbol as IFieldSymbol;
 
-                    fieldsAssigned = AddFieldIfNeeded(fieldSymbol, expression, fieldsAssigned);
+                    AddFieldIfNeeded(fieldSymbol, expression, fieldsAssigned);
                 }, SyntaxKind.SimpleAssignmentExpression);
 
                 analysisContext.RegisterSyntaxNodeAction(c =>
@@ -94,8 +96,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     {
                         var fieldSymbol = c.SemanticModel.GetDeclaredSymbol(variableDeclaratorSyntax) as IFieldSymbol;
 
-                        fieldsAssigned = AddFieldIfNeeded(fieldSymbol, variableDeclaratorSyntax.Initializer.Value,
-                            fieldsAssigned);
+                        AddFieldIfNeeded(fieldSymbol, variableDeclaratorSyntax.Initializer.Value, fieldsAssigned);
                     }
 
                 }, SyntaxKind.FieldDeclaration);
@@ -126,17 +127,17 @@ namespace SonarAnalyzer.Rules.CSharp
             });
         }
 
-        private static ImmutableHashSet<IFieldSymbol> AddFieldIfNeeded(IFieldSymbol fieldSymbol, ExpressionSyntax expression,
-            ImmutableHashSet<IFieldSymbol> fieldsAssigned)
+        private static void AddFieldIfNeeded(IFieldSymbol fieldSymbol, ExpressionSyntax expression,
+            HashSet<IFieldSymbol> fieldsAssigned)
         {
             var objectCreation = expression as ObjectCreationExpressionSyntax;
             if (objectCreation == null ||
                 !IsNonStaticNonPublicDisposableField(fieldSymbol))
             {
-                return fieldsAssigned;
+                return;
             }
 
-            return fieldsAssigned.Add(fieldSymbol);
+            fieldsAssigned.Add(fieldSymbol);
         }
 
         internal static bool IsNonStaticNonPublicDisposableField(IFieldSymbol fieldSymbol)

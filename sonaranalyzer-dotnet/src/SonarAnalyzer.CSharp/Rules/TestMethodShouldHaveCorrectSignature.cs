@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2018 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -44,10 +44,12 @@ namespace SonarAnalyzer.Rules.CSharp
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        private static readonly ISet<KnownType> TrackedTestAttributes = ImmutableHashSet.Create(
+        private static readonly ISet<KnownType> TrackedTestAttributes = new HashSet<KnownType>
+        {
             KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_TestMethodAttribute,
             KnownType.NUnit_Framework_TestAttribute,
-            KnownType.Xunit_FactAttribute);
+            KnownType.Xunit_FactAttribute
+        };
 
         protected override void Initialize(SonarAnalysisContext context)
         {

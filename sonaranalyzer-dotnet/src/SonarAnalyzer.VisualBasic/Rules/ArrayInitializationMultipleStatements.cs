@@ -81,7 +81,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                     }
 
                     var statements = GetFollowingStatements(declaration);
-                    var indexes = GetAssignedIndexes(statements, variableSymbol, c.SemanticModel).ToImmutableHashSet();
+                    var indexes = GetAssignedIndexes(statements, variableSymbol, c.SemanticModel).ToHashSet();
 
                     var upperBound = Math.Max(bound.Value, 0);
 

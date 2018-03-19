@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
@@ -30,7 +29,6 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
-using TypeInfo = System.Reflection.TypeInfo;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -46,7 +44,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        private static readonly ISet<string> SkippedWords = ImmutableHashSet.Create("VERSION", "ASSEMBLY");
+        private static readonly ISet<string> SkippedWords = new HashSet<string> { "VERSION", "ASSEMBLY" };
 
         protected sealed override void Initialize(SonarAnalysisContext context)
         {

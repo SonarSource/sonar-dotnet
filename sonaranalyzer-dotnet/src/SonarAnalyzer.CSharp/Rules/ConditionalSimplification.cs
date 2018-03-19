@@ -380,8 +380,10 @@ namespace SonarAnalyzer.Rules.CSharp
                     expressionType.Is(KnownType.System_Nullable_T));
         }
 
-        private static readonly ISet<SyntaxKind> EqualsOrNotEquals = ImmutableHashSet.Create(
+        private static readonly ISet<SyntaxKind> EqualsOrNotEquals = new HashSet<SyntaxKind>
+        {
             SyntaxKind.EqualsExpression,
-            SyntaxKind.NotEqualsExpression);
+            SyntaxKind.NotEqualsExpression
+        };
     }
 }

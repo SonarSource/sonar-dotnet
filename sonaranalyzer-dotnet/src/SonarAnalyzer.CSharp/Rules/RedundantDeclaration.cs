@@ -38,7 +38,7 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         internal const string DiagnosticId = "S3257";
         private const string MessageFormat = "Remove the {0}; it is redundant.";
-        
+
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
@@ -84,8 +84,11 @@ namespace SonarAnalyzer.Rules.CSharp
 
         #region Type specification in lambda
 
-        private static readonly ISet<SyntaxKind> RefOutKeywords = ImmutableHashSet.Create(
-            SyntaxKind.RefKeyword, SyntaxKind.OutKeyword);
+        private static readonly ISet<SyntaxKind> RefOutKeywords = new HashSet<SyntaxKind>
+        {
+            SyntaxKind.RefKeyword,
+            SyntaxKind.OutKeyword
+        };
 
         private static void ReportRedundantTypeSpecificationInLambda(SyntaxNodeAnalysisContext context)
         {
@@ -399,14 +402,14 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            var parameterNames = methodSymbol.Parameters.Select(p => p.Name).ToImmutableHashSet();
+            var parameterNames = methodSymbol.Parameters.Select(p => p.Name).ToHashSet();
 
             var usedParameters = anonymousMethod.Body.DescendantNodes()
                 .OfType<IdentifierNameSyntax>()
                 .Where(id => parameterNames.Contains(id.Identifier.ValueText))
                 .Select(id => context.SemanticModel.GetSymbolInfo(id).Symbol as IParameterSymbol)
                 .Where(p => p != null)
-                .ToImmutableHashSet();
+                .ToHashSet();
 
             if (!usedParameters.Intersect(methodSymbol.Parameters).Any())
             {

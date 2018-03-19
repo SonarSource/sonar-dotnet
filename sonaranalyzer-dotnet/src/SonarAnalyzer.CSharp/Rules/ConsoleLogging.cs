@@ -36,7 +36,7 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string DiagnosticId = "S2228";
         private const string MessageFormat = "Remove this logging statement.";
 
-        private static readonly ISet<string> BannedConsoleMembers = ImmutableHashSet.Create("WriteLine", "Write");
+        private static readonly ISet<string> BannedConsoleMembers = new HashSet<string> { "WriteLine", "Write" };
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);

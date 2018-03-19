@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2018 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -19,7 +19,6 @@
  */
 
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
@@ -51,10 +50,12 @@ namespace SonarAnalyzer.Helpers
             return assemblyName.SplitCamelCaseToWords().Any(word => word == "test" || word == "tests");
         }
 
-        private static readonly ISet<string> TestAssemblyNames = ImmutableHashSet.Create(
+        private static readonly ISet<string> TestAssemblyNames = new HashSet<string>
+        {
             "MICROSOFT.VISUALSTUDIO.TESTPLATFORM.TESTFRAMEWORK",
             "MICROSOFT.VISUALSTUDIO.QUALITYTOOLS.UNITTESTFRAMEWORK",
             "XUNIT.CORE",
-            "NUNIT.FRAMEWORK");
+            "NUNIT.FRAMEWORK"
+        };
     }
 }

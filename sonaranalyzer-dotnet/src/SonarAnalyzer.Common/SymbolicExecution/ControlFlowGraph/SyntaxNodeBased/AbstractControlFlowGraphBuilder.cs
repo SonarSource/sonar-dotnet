@@ -30,9 +30,11 @@ namespace SonarAnalyzer.SymbolicExecution.ControlFlowGraph
     {
         private class ControlFlowGraph : IControlFlowGraph
         {
-            private static readonly ISet<Type> RemovableBlockTypes = ImmutableHashSet.Create(
+            private static readonly ISet<Type> RemovableBlockTypes = new HashSet<Type>
+            {
                    typeof(SimpleBlock),
-                   typeof(TemporaryBlock));
+                   typeof(TemporaryBlock)
+            };
 
             public ControlFlowGraph(List<Block> reversedBlocks, Block entryBlock, ExitBlock exitBlock)
             {

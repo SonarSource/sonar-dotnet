@@ -217,9 +217,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 isSet = isSetAccessor;
             }
 
-            private static readonly ISet<Type> TypesForReference = ImmutableHashSet.Create(
-                typeof(IdentifierNameSyntax),
-                typeof(MemberAccessExpressionSyntax));
+            private static readonly ISet<Type> TypesForReference = new HashSet<Type> { typeof(IdentifierNameSyntax), typeof(MemberAccessExpressionSyntax) };
 
             protected override bool BlockHasReferenceToDeclaringSymbol(Block block)
             {
