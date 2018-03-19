@@ -20,7 +20,6 @@
 
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -70,6 +69,8 @@ namespace SonarAnalyzer.Rules.CSharp
             literalExpression.FirstAncestorOrSelf<VariableDeclarationSyntax>() != null ||
             // It's ok to use magic numbers as part of a parameter declaration
             literalExpression.FirstAncestorOrSelf<ParameterSyntax>() != null ||
+            // It's ok to use magic numbers as part of an enum declaration
+            literalExpression.FirstAncestorOrSelf<EnumMemberDeclarationSyntax>() != null ||
             // It's ok to use magic numbers in the GetHashCode method. Note that I am only checking the method name of the sake of simplicity
             literalExpression.FirstAncestorOrSelf<MethodDeclarationSyntax>()?.Identifier.ValueText == nameof(object.GetHashCode) ||
             // It's ok to use magic numbers in pragma directives

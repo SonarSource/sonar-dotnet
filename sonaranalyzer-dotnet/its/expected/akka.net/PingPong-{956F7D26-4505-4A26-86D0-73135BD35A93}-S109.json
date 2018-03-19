@@ -181,32 +181,6 @@
 "endColumn":  39
 }
 }
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '2' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\benchmark\PingPong\Program.cs",
-"region":  {
-"startLine":  272,
-"startColumn":  21,
-"endLine":  272,
-"endColumn":  22
-}
-}
-},
-{
-"id":  "S109",
-"message":  "Assign this magic number '32768' to a well-named (variable|constant), and use the (variable|constant) instead.",
-"location":  {
-"uri":  "sources\akka.net\src\benchmark\PingPong\Program.cs",
-"region":  {
-"startLine":  273,
-"startColumn":  27,
-"endLine":  273,
-"endColumn":  32
-}
-}
 }
 ]
 }
