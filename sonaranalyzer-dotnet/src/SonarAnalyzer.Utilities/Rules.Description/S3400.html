@@ -1,0 +1,19 @@
+<p>There's no point in forcing the overhead of a method call for a method that always returns the same constant value. Even worse, the fact that a
+method call must be made will likely mislead developers who call the method thinking that something more is done. Declare a constant instead. </p>
+<p>This rule raises an issue if on methods that contain only one statement: the <code>return</code> of a constant value. </p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+int GetBestNumber()
+{
+  return 12;  // Noncompliant
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+const int BestNumber = 12;
+</pre>
+<p>or</p>
+<pre>
+static readonly int BestNumber = 12;
+</pre>
+
