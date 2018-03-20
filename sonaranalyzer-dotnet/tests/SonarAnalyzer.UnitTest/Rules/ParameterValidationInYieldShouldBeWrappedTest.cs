@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2018 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -18,25 +18,21 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.CodeAnalysis.Diagnostics;
-using SonarAnalyzer.Common;
-using SonarAnalyzer.Helpers;
+extern alias csharp;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using csharp::SonarAnalyzer.Rules.CSharp;
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.UnitTest.Rules
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    [Rule(DiagnosticId)]
-    public sealed class ParameterValidationInAsyncShouldBeWrapped : ParameterValidationInMethodShouldBeWrapped<AwaitExpressionSyntax>
+    [TestClass]
+    public class ParameterValidationInYieldShouldBeWrappedTest
     {
-        internal const string DiagnosticId = "S4457";
-
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        protected override DiagnosticDescriptor Rule { get; } =  rule;
-
-        protected override SyntaxKind[] RegisterSyntaxKinds { get; } = new[] { SyntaxKind.AwaitExpression };
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void ParameterValidationInYieldShouldBeWrapped()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\ParameterValidationInYieldShouldBeWrapped.cs",
+                new ParameterValidationInYieldShouldBeWrapped());
+        }
     }
 }

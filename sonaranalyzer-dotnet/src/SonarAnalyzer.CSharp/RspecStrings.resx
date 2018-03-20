@@ -8760,6 +8760,33 @@
   <data name="S4428_Type" xml:space="preserve">
     <value>BUG</value>
   </data>
+  <data name="S4456_Category" xml:space="preserve">
+    <value>Major Code Smell</value>
+  </data>
+  <data name="S4456_Description" xml:space="preserve">
+    <value>Because of the way yield methods are rewritten by the compiler (they become lazily evaluated state machines) any exceptions thrown during the parameters check will happen only when the collection is iterated over. That could happen far away from the source of the buggy code.</value>
+  </data>
+  <data name="S4456_IsActivatedByDefault" xml:space="preserve">
+    <value>True</value>
+  </data>
+  <data name="S4456_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S4456_RemediationCost" xml:space="preserve">
+    <value>15min</value>
+  </data>
+  <data name="S4456_Severity" xml:space="preserve">
+    <value>Major</value>
+  </data>
+  <data name="S4456_Tags" xml:space="preserve">
+    <value>yield</value>
+  </data>
+  <data name="S4456_Title" xml:space="preserve">
+    <value>Parameter validation in yielding methods should be wrapped</value>
+  </data>
+  <data name="S4456_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S4457_Category" xml:space="preserve">
     <value>Major Code Smell</value>
   </data>
