@@ -1,0 +1,39 @@
+<p>Because of the way <code>yield</code> methods are rewritten by the compiler (they become lazily evaluated state machines) any exceptions thrown
+during the parameters check will happen only when the collection is iterated over. That could happen far away from the source of the buggy code.</p>
+<p>Therefore it is recommended to split the method into two: an outer method handling the validation (no longer lazy) and an inner (lazy) method to
+handle the iteration.</p>
+<p>This rule raises an issue when a method throws any exception derived from <code>ArgumentException</code> and contains the <code>yield</code>
+keyword.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+public static IEnumerable&lt;TSource&gt; TakeWhile&lt;TSource&gt;(this IEnumerable&lt;TSource&gt; source, Func&lt;TSource, bool&gt; predicate) // Noncompliant
+{
+    if (source == null) { throw new ArgumentNullException(nameof(source)); }
+    if (predicate == null) { throw new ArgumentNullException(nameof(predicate)); }
+
+    foreach (var element in source)
+    {
+        if (!predicate(element)) { break; }
+        yield return element;
+    }
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+public static IEnumerable&lt;TSource&gt; TakeWhile&lt;TSource&gt;(this IEnumerable&lt;TSource&gt; source, Func&lt;TSource, bool&gt; predicate)
+{
+    if (source == null) { throw new ArgumentNullException(nameof(source)); }
+    if (predicate == null) { throw new ArgumentNullException(nameof(predicate)); }
+    return TakeWhileIterator&lt;TSource&gt;(source, predicate);
+}
+
+private static IEnumerable&lt;TSource&gt; TakeWhileIterator&lt;TSource&gt;(IEnumerable&lt;TSource&gt; source, Func&lt;TSource, bool&gt; predicate)
+{
+    foreach (TSource element in source)
+    {
+        if (!predicate(element)) break;
+        yield return element;
+    }
+}
+</pre>
+

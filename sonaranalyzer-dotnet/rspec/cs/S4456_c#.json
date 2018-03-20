@@ -1,0 +1,15 @@
+{
+  "title": "Parameter validation in yielding methods should be wrapped",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "15min"
+  },
+  "tags": [
+    "yield"
+  ],
+  "defaultSeverity": "Major",
+  "ruleSpecification": "RSPEC-4456",
+  "sqKey": "S4456"
+}
