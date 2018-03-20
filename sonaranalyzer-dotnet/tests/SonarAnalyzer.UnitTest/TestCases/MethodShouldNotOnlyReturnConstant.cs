@@ -8,6 +8,11 @@
             return 12;
         }
 
+        public int GetMultiplication()
+        {
+            return 3 * 2;
+        }
+
         public int GetAge(string name) // Compliant - method takes parameters
         {
             return 12;
@@ -38,6 +43,16 @@
         public char GetChar() // Noncompliant
         {
             return 'a';
+        }
+
+        public int GetWithInner()
+        {
+            return GetInner();
+
+            int GetInner() // Compliant - FN - should not be compliant
+            {
+                return 42;
+            }
         }
     }
 
