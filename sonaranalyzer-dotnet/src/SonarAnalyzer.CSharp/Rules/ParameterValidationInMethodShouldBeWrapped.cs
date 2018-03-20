@@ -28,12 +28,15 @@ using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
-    public abstract class ParameterValidationInMethodShouldBeWrapped<TRegisterExpressionSyntax> : SonarDiagnosticAnalyzer
-        where TRegisterExpressionSyntax : SyntaxNode
+    public abstract class ParameterValidationInMethodShouldBeWrapped : SonarDiagnosticAnalyzer
     {
         protected const string MessageFormat = "Split this method into two, one handling parameters check and the other " +
             "handling the iterator.";
+    }
 
+    public abstract class ParameterValidationInMethodShouldBeWrapped<TRegisterExpressionSyntax> : ParameterValidationInMethodShouldBeWrapped
+        where TRegisterExpressionSyntax : SyntaxNode
+    {
         protected abstract DiagnosticDescriptor Rule { get; }
         public override sealed ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
