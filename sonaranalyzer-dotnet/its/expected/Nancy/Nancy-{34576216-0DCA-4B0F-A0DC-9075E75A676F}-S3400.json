@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S3400",
+"message":  "Remove this method and declare a constant for this value.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\TestingDiagnosticProvider.cs",
+"region":  {
+"startLine":  46,
+"startColumn":  27,
+"endLine":  46,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S3400",
+"message":  "Remove this method and declare a constant for this value.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\ViewLocationResult.cs",
+"region":  {
+"startLine":  63,
+"startColumn":  29,
+"endLine":  63,
+"endColumn":  36
+}
+}
+}
+]
+}

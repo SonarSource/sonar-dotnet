@@ -5451,6 +5451,33 @@
   <data name="S3397_Type" xml:space="preserve">
     <value>BUG</value>
   </data>
+  <data name="S3400_Category" xml:space="preserve">
+    <value>Minor Code Smell</value>
+  </data>
+  <data name="S3400_Description" xml:space="preserve">
+    <value>There's no point in forcing the overhead of a method call for a method that always returns the same constant value. Even worse, the fact that a method call must be made will likely mislead developers who call the method thinking that something more is done. Declare a constant instead. </value>
+  </data>
+  <data name="S3400_IsActivatedByDefault" xml:space="preserve">
+    <value>True</value>
+  </data>
+  <data name="S3400_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S3400_RemediationCost" xml:space="preserve">
+    <value>5min</value>
+  </data>
+  <data name="S3400_Severity" xml:space="preserve">
+    <value>Minor</value>
+  </data>
+  <data name="S3400_Tags" xml:space="preserve">
+    <value>confusing</value>
+  </data>
+  <data name="S3400_Title" xml:space="preserve">
+    <value>Methods should not return constants</value>
+  </data>
+  <data name="S3400_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S3415_Category" xml:space="preserve">
     <value>Major Code Smell</value>
   </data>
