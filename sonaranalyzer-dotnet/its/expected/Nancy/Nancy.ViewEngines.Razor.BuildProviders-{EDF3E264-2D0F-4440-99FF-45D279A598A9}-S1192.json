@@ -1,0 +1,47 @@
+{
+"issues":  [
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using the literal '{0}.{1}' 4 times.",
+"location":  [
+null,
+{
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor.BuildProviders\NancyCSharpRazorBuildProvider.cs",
+"region":  {
+"startLine":  46,
+"startColumn":  93,
+"endLine":  46,
+"endColumn":  102
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor.BuildProviders\NancyCSharpRazorBuildProvider.cs",
+"region":  {
+"startLine":  56,
+"startColumn":  95,
+"endLine":  56,
+"endColumn":  104
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor.BuildProviders\NancyVisualBasicRazorBuildProvider.cs",
+"region":  {
+"startLine":  56,
+"startColumn":  95,
+"endLine":  56,
+"endColumn":  104
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor.BuildProviders\NancyVisualBasicRazorBuildProvider.cs",
+"region":  {
+"startLine":  46,
+"startColumn":  93,
+"endLine":  46,
+"endColumn":  102
+}
+}
+]
+}
+]
+}
