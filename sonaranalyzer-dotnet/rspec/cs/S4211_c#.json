@@ -1,0 +1,19 @@
+{
+  "title": "Members should not have conflicting transparency annotations",
+  "type": "VULNERABILITY",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    "owasp-a6",
+    "pitfall"
+  ],
+  "standards": [
+    "OWASP Top Ten"
+  ],
+  "defaultSeverity": "Major",
+  "ruleSpecification": "RSPEC-4211",
+  "sqKey": "S4211"
+}

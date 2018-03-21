@@ -1,0 +1,47 @@
+<p>Transparency attributes, <code>SecurityCriticalAttribute</code> and <code>SecuritySafeCriticalAttribute</code> are used to identify code that
+performs security-critical operations. The second one indicates that it is safe to call this code from transparent, while the first one does not.
+Since the transparency attributes of code elements with larger scope take precedence over transparency attributes of code elements that are contained
+in the first element a class, for instance, with a <code>SecurityCriticalAttribute</code> can not contain a method with a
+<code>SecuritySafeCriticalAttribute</code>.</p>
+<p>This rule raises an issue when a member is marked with a <code>System.Security</code> security attribute that has a different transparency than the
+security attribute of a container of the member.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+using System;
+using System.Security;
+
+namespace MyLibrary
+{
+
+    [SecurityCritical]
+    public class Foo
+    {
+        [SecuritySafeCritical] // Noncompliant
+        public void Bar()
+        {
+        }
+    }
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+using System;
+using System.Security;
+
+namespace MyLibrary
+{
+
+    [SecurityCritical]
+    public class Foo
+    {
+        public void Bar()
+        {
+        }
+    }
+}
+</pre>
+<h2>See</h2>
+<ul>
+  <li> OWASP Top 10 2017 Category A6 - Security Misconfiguration </li>
+</ul>
+
