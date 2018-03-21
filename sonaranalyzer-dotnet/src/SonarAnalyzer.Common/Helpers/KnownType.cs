@@ -225,6 +225,8 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_Security_Cryptography_TripleDES = new KnownType("System.Security.Cryptography.TripleDES");
         internal static readonly KnownType System_Security_Permissions_CodeAccessSecurityAttribute = new KnownType("System.Security.Permissions.CodeAccessSecurityAttribute");
         internal static readonly KnownType System_Security_PermissionSet = new KnownType("System.Security.PermissionSet");
+        internal static readonly KnownType System_Security_SecurityCriticalAttribute = new KnownType("System.Security.SecurityCriticalAttribute");
+        internal static readonly KnownType System_Security_SecuritySafeCriticalAttribute = new KnownType("System.Security.SecuritySafeCriticalAttribute");
         internal static readonly KnownType System_SerializableAttribute = new KnownType("System.SerializableAttribute");
         internal static readonly KnownType System_ServiceModel_OperationContractAttribute = new KnownType("System.ServiceModel.OperationContractAttribute");
         internal static readonly KnownType System_ServiceModel_ServiceContractAttribute = new KnownType("System.ServiceModel.ServiceContractAttribute");

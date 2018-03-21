@@ -4208,7 +4208,7 @@ namespace SonarAnalyzer.UnitTest.PackagingTests
             //["4208"],
             //["4209"],
             ["4210"] = "BUG",
-            //["4211"],
+            ["4211"] = "VULNERABILITY",
             ["4212"] = "VULNERABILITY",
             //["4213"],
             ["4214"] = "CODE_SMELL",
