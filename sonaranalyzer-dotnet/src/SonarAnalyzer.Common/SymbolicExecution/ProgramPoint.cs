@@ -28,10 +28,20 @@ namespace SonarAnalyzer.SymbolicExecution
         public Block Block { get; }
         public int Offset { get; }
 
+        private readonly Lazy<int> hash;
+
         internal ProgramPoint(Block block, int offset)
         {
             Block = block;
             Offset = offset;
+
+            hash = new Lazy<int>(() =>
+            {
+                var h = 19;
+                h = h * 31 + Block.GetHashCode();
+                h = h * 31 + Offset.GetHashCode();
+                return h;
+            });
         }
 
         internal ProgramPoint(Block block)
@@ -59,12 +69,6 @@ namespace SonarAnalyzer.SymbolicExecution
             return Block == other.Block && Offset == other.Offset;
         }
 
-        public override int GetHashCode()
-        {
-            var hash = 19;
-            hash = hash * 31 + Block.GetHashCode();
-            hash = hash * 31 + Offset.GetHashCode();
-            return hash;
-        }
+        public override int GetHashCode() => hash.Value;
     }
 }
