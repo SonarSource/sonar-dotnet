@@ -38,7 +38,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 new StringLiteralShouldNotBeDuplicated());
 
             act.ShouldThrow<AssertFailedException>()
-                .And.Message.Should().Be("Issue with message 'Define a constant instead of using the literal 'foobar' 7 times.' not expected on line 1");
+                .And.Message.Should().Be("Issue with message 'Define a constant instead of using the literal 'foobar' 8 times.' not expected on line 1");
         }
     }
 }

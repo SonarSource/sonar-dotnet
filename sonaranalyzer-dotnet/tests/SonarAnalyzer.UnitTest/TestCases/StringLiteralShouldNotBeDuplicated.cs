@@ -10,16 +10,25 @@ namespace Tests.Diagnostics
 
         private string name = "foobar"; // Secondary
 
+        private string[] values = new[] { "something", "something", "something" }; // Compliant - repetition below threshold
+
         private string Name { get; } = "foobar"; // Secondary
 
         public Program()
         {
             var x = "foobar"; // Secondary
+
+            var y = "FooBar"; // Compliant - casing is different
         }
 
         public void Do(string s = "foobar") // Secondary
         {
             var x = s ?? "foobar"; // Secondary
+
+            string GetFooBar()
+            {
+                return "foobar"; // Secondary
+            }
         }
 
         public void Validate(object foobar)
