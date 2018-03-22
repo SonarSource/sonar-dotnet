@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.Result' with 'await'.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\FaultTolerance\Program.cs",
+"region":  {
+"startLine":  143,
+"startColumn":  61,
+"endLine":  143,
+"endColumn":  69
+}
+}
+}
+]
+}

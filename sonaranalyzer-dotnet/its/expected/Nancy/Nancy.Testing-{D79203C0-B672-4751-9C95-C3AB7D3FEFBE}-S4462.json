@@ -1,0 +1,212 @@
+{
+"issues":  [
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.GetAwaiter.GetResult' with 'await'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\LegacyBrowser.cs",
+"region":  {
+"startLine":  46,
+"startColumn":  20,
+"endLine":  46,
+"endColumn":  84
+}
+}
+},
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.GetAwaiter.GetResult' with 'await'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\LegacyBrowser.cs",
+"region":  {
+"startLine":  58,
+"startColumn":  20,
+"endLine":  58,
+"endColumn":  83
+}
+}
+},
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.GetAwaiter.GetResult' with 'await'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\LegacyBrowser.cs",
+"region":  {
+"startLine":  70,
+"startColumn":  20,
+"endLine":  70,
+"endColumn":  81
+}
+}
+},
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.GetAwaiter.GetResult' with 'await'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\LegacyBrowser.cs",
+"region":  {
+"startLine":  82,
+"startColumn":  20,
+"endLine":  82,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.GetAwaiter.GetResult' with 'await'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\LegacyBrowser.cs",
+"region":  {
+"startLine":  94,
+"startColumn":  20,
+"endLine":  94,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.GetAwaiter.GetResult' with 'await'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\LegacyBrowser.cs",
+"region":  {
+"startLine":  106,
+"startColumn":  20,
+"endLine":  106,
+"endColumn":  81
+}
+}
+},
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.GetAwaiter.GetResult' with 'await'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\LegacyBrowser.cs",
+"region":  {
+"startLine":  118,
+"startColumn":  20,
+"endLine":  118,
+"endColumn":  85
+}
+}
+},
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.GetAwaiter.GetResult' with 'await'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\LegacyBrowser.cs",
+"region":  {
+"startLine":  130,
+"startColumn":  20,
+"endLine":  130,
+"endColumn":  84
+}
+}
+},
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.GetAwaiter.GetResult' with 'await'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\LegacyBrowser.cs",
+"region":  {
+"startLine":  142,
+"startColumn":  20,
+"endLine":  142,
+"endColumn":  83
+}
+}
+},
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.GetAwaiter.GetResult' with 'await'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\LegacyBrowser.cs",
+"region":  {
+"startLine":  154,
+"startColumn":  20,
+"endLine":  154,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.GetAwaiter.GetResult' with 'await'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\LegacyBrowser.cs",
+"region":  {
+"startLine":  166,
+"startColumn":  20,
+"endLine":  166,
+"endColumn":  82
+}
+}
+},
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.GetAwaiter.GetResult' with 'await'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\LegacyBrowser.cs",
+"region":  {
+"startLine":  178,
+"startColumn":  20,
+"endLine":  178,
+"endColumn":  81
+}
+}
+},
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.GetAwaiter.GetResult' with 'await'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\LegacyBrowser.cs",
+"region":  {
+"startLine":  190,
+"startColumn":  20,
+"endLine":  190,
+"endColumn":  81
+}
+}
+},
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.GetAwaiter.GetResult' with 'await'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\LegacyBrowser.cs",
+"region":  {
+"startLine":  202,
+"startColumn":  20,
+"endLine":  202,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.GetAwaiter.GetResult' with 'await'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\LegacyBrowser.cs",
+"region":  {
+"startLine":  215,
+"startColumn":  20,
+"endLine":  215,
+"endColumn":  98
+}
+}
+},
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.GetAwaiter.GetResult' with 'await'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\LegacyBrowser.cs",
+"region":  {
+"startLine":  228,
+"startColumn":  20,
+"endLine":  228,
+"endColumn":  99
+}
+}
+}
+]
+}

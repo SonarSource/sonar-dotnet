@@ -191,6 +191,8 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_Runtime_CompilerServices_CallerLineNumberAttribute = new KnownType("System.Runtime.CompilerServices.CallerLineNumberAttribute");
         internal static readonly KnownType System_Runtime_CompilerServices_CallerMemberNameAttribute = new KnownType("System.Runtime.CompilerServices.CallerMemberNameAttribute");
         internal static readonly KnownType System_Runtime_CompilerServices_InternalsVisibleToAttribute = new KnownType("System.Runtime.CompilerServices.InternalsVisibleToAttribute");
+        internal static readonly KnownType System_Runtime_CompilerServices_TaskAwaiter = new KnownType("System.Runtime.CompilerServices.TaskAwaiter");
+        internal static readonly KnownType System_Runtime_CompilerServices_TaskAwaiter_TResult = new KnownType("System.Runtime.CompilerServices.TaskAwaiter<TResult>");
         internal static readonly KnownType System_Runtime_InteropServices_ComImportAttribute = new KnownType("System.Runtime.InteropServices.ComImportAttribute");
         internal static readonly KnownType System_Runtime_InteropServices_ComVisibleAttribute = new KnownType("System.Runtime.InteropServices.ComVisibleAttribute");
         internal static readonly KnownType System_Runtime_InteropServices_DefaultParameterValueAttribute = new KnownType("System.Runtime.InteropServices.DefaultParameterValueAttribute");
@@ -240,6 +242,7 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_Text_StringBuilder = new KnownType("System.Text.StringBuilder");
         internal static readonly KnownType System_Threading_Tasks_Task = new KnownType("System.Threading.Tasks.Task");
         internal static readonly KnownType System_Threading_Tasks_Task_T = new KnownType("System.Threading.Tasks.Task<TResult>");
+        internal static readonly KnownType System_Threading_Tasks_TaskFactory = new KnownType("System.Threading.Tasks.TaskFactory");
         internal static readonly KnownType System_Threading_Tasks_ValueTask_TResult = new KnownType("System.Threading.Tasks.ValueTask<TResult>");
         internal static readonly KnownType System_Threading_Thread = new KnownType("System.Threading.Thread");
         internal static readonly KnownType System_ThreadStaticAttribute = new KnownType("System.ThreadStaticAttribute");

@@ -1,0 +1,89 @@
+<p>Making blocking calls to <code>async</code> methods transforms something that was intended to be asynchronous into a synchronous block. Doing so
+can cause deadlocks and unexpected blocking of context threads.</p>
+<p>According to the MSDN documentation:</p>
+<blockquote>
+  <p>The root cause of this deadlock is due to the way <code>await</code> handles contexts. By default, when an incomplete <code>Task</code> is
+  awaited, the current “context” is captured and used to resume the method when the <code>Task</code> completes. This “context” is the current
+  <code>SynchronizationContext</code> unless it’s null, in which case it’s the current <code>TaskScheduler</code>. GUI and ASP.NET applications have a
+  <code>SynchronizationContext</code> that permits only one chunk of code to run at a time. When the <code>await</code> completes, it attempts to
+  execute the remainder of the <code>async</code> method within the captured context. But that context already has a thread in it, which is
+  (synchronously) waiting for the <code>async</code> method to complete. They’re each waiting for the other, causing a deadlock.</p>
+</blockquote>
+<table>
+  <tbody>
+    <tr>
+      <th>To Do This …</th>
+      <th>Instead of This …</th>
+      <th>Use This</th>
+    </tr>
+    <tr>
+      <td>Retrieve the result of a background task</td>
+      <td><code>Task.Wait</code>, <code>Task.Result</code> or <code>Task.GetAwaiter.GetResult</code></td>
+      <td><code>await</code></td>
+    </tr>
+    <tr>
+      <td>Wait for any task to complete</td>
+      <td><code>Task.WaitAny</code></td>
+      <td><code>await Task.WhenAny</code></td>
+    </tr>
+    <tr>
+      <td>Retrieve the results of multiple tasks</td>
+      <td><code>Task.WaitAll</code></td>
+      <td><code>await Task.WhenAll</code></td>
+    </tr>
+    <tr>
+      <td>Wait a period of time</td>
+      <td><code>Thread.Sleep</code></td>
+      <td><code>await Task.Delay</code></td>
+    </tr>
+  </tbody>
+</table>
+<h2>Noncompliant Code Example</h2>
+<pre>
+public static class DeadlockDemo
+{
+    private static async Task DelayAsync()
+    {
+        await Task.Delay(1000);
+    }
+
+    // This method causes a deadlock when called in a GUI or ASP.NET context.
+    public static void Test()
+    {
+        // Start the delay.
+        var delayTask = DelayAsync();
+        // Wait for the delay to complete.
+        delayTask.Wait(); // Noncompliant
+    }
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+public static class DeadlockDemo
+{
+    private static async Task DelayAsync()
+    {
+        await Task.Delay(1000);
+    }
+
+    public static async Task TestAsync()
+    {
+        // Start the delay.
+        var delayTask = DelayAsync();
+        // Wait for the delay to complete.
+        await delayTask;
+    }
+}
+</pre>
+<h2>Exceptions</h2>
+<ul>
+  <li> Main methods of Console Applications are not subject to this deadlock issue and so are ignored by this rule. </li>
+  <li> <code>Thread.Sleep</code> is also ignored when it is used in a non-<code>async</code> method. </li>
+  <li> Calls chained after <code>Task.Run</code> or <code>Task.Factory.StartNew</code> are ignored because they don't suffer from this deadlock issue
+  </li>
+</ul>
+<h2>See</h2>
+<ul>
+  <li> <a href="https://msdn.microsoft.com/en-us/magazine/jj991977.aspx">Async/Await - Best Practices in Asynchronous Programming</a> </li>
+</ul>
+
