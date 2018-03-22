@@ -64,6 +64,37 @@ namespace SonarAnalyzer.SymbolicExecution
             SymbolicValue.Base
         };
 
+        private readonly Lazy<int> hash;
+
+        private int ComputeHash()
+        {
+            var h = 19;
+
+            foreach (var symbolValueAssociation in Values)
+            {
+                h = h * 31 + symbolValueAssociation.Key.GetHashCode();
+                h = h * 31 + symbolValueAssociation.Value.GetHashCode();
+            }
+
+            foreach (var constraint in Constraints)
+            {
+                h = h * 31 + constraint.Key.GetHashCode();
+                h = h * 31 + constraint.Value.GetHashCode();
+            }
+
+            foreach (var value in ExpressionStack)
+            {
+                h = h * 31 + value.GetHashCode();
+            }
+
+            foreach (var relationship in Relationships)
+            {
+                h = h * 31 + relationship.GetHashCode();
+            }
+
+            return h;
+        }
+
         public ProgramState()
             : this(ImmutableDictionary<ISymbol, SymbolicValue>.Empty,
                   InitialConstraints,
@@ -231,6 +262,7 @@ namespace SonarAnalyzer.SymbolicExecution
             ProgramPointVisitCounts = programPointVisitCounts;
             ExpressionStack = expressionStack;
             Relationships = relationships;
+            hash = new Lazy<int>(ComputeHash);
         }
 
         public ProgramState PushValue(SymbolicValue symbolicValue)
@@ -397,34 +429,7 @@ namespace SonarAnalyzer.SymbolicExecution
                 Relationships.SetEquals(other.Relationships);
         }
 
-        public override int GetHashCode()
-        {
-            var hash = 19;
-
-            foreach (var symbolValueAssociation in Values)
-            {
-                hash = hash * 31 + symbolValueAssociation.Key.GetHashCode();
-                hash = hash * 31 + symbolValueAssociation.Value.GetHashCode();
-            }
-
-            foreach (var constraint in Constraints)
-            {
-                hash = hash * 31 + constraint.Key.GetHashCode();
-                hash = hash * 31 + constraint.Value.GetHashCode();
-            }
-
-            foreach (var value in ExpressionStack)
-            {
-                hash = hash * 31 + value.GetHashCode();
-            }
-
-            foreach (var relationship in Relationships)
-            {
-                hash = hash * 31 + relationship.GetHashCode();
-            }
-
-            return hash;
-        }
+        public override int GetHashCode() => hash.Value;
 
         public ProgramState SetConstraint(SymbolicValue symbolicValue, SymbolicValueConstraint constraint)
         {

@@ -27,12 +27,22 @@ namespace SonarAnalyzer.SymbolicExecution.Relationships
 {
     public sealed class ComparisonRelationship : BinaryRelationship, IEquatable<ComparisonRelationship>
     {
+        private readonly Lazy<int> hash;
+
         internal ComparisonKind ComparisonKind { get; }
 
         public ComparisonRelationship(ComparisonKind comparisonKind, SymbolicValue leftOperand, SymbolicValue rightOperand)
             : base(leftOperand, rightOperand)
         {
             ComparisonKind = comparisonKind;
+
+            hash = new Lazy<int>(() =>
+            {
+                var h = 19;
+                h = h * 31 + ComparisonKind.GetHashCode();
+                h = h * 31 + base.GetHashCode();
+                return h;
+            });
         }
 
         public override BinaryRelationship Negate()
@@ -204,13 +214,7 @@ namespace SonarAnalyzer.SymbolicExecution.Relationships
             return base.Equals(other);
         }
 
-        public override int GetHashCode()
-        {
-            var hash = 19;
-            hash = hash * 31 + ComparisonKind.GetHashCode();
-            hash = hash * 31 + base.GetHashCode();
-            return hash;
-        }
+        public override int GetHashCode() => hash.Value;
 
         internal override BinaryRelationship CreateNew(SymbolicValue leftOperand, SymbolicValue rightOperand)
         {

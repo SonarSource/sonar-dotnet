@@ -25,6 +25,8 @@ namespace SonarAnalyzer.SymbolicExecution.Relationships
 {
     public abstract class BinaryRelationship : IEquatable<BinaryRelationship>
     {
+        private readonly Lazy<int> hash;
+
         internal SymbolicValue LeftOperand { get; }
         internal SymbolicValue RightOperand { get; }
 
@@ -32,6 +34,15 @@ namespace SonarAnalyzer.SymbolicExecution.Relationships
         {
             LeftOperand = leftOperand;
             RightOperand = rightOperand;
+
+            hash = new Lazy<int>(() =>
+            {
+                var h = 19;
+                h = h * 31 + GetType().GetHashCode();
+                h = h * 31 + LeftOperand.GetHashCode();
+                h = h * 31 + RightOperand.GetHashCode();
+                return h;
+            });
         }
 
         public override bool Equals(object obj)
@@ -55,14 +66,7 @@ namespace SonarAnalyzer.SymbolicExecution.Relationships
             return LeftOperand.Equals(other.LeftOperand) && RightOperand.Equals(other.RightOperand);
         }
 
-        public override int GetHashCode()
-        {
-            var hash = 19;
-            hash = hash * 31 + GetType().GetHashCode();
-            hash = hash * 31 + LeftOperand.GetHashCode();
-            hash = hash * 31 + RightOperand.GetHashCode();
-            return hash;
-        }
+        public override int GetHashCode() => hash.Value;
 
         internal abstract BinaryRelationship CreateNew(SymbolicValue leftOperand, SymbolicValue rightOperand);
 

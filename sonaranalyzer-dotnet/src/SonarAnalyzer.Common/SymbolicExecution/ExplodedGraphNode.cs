@@ -27,10 +27,20 @@ namespace SonarAnalyzer.SymbolicExecution
         public ProgramState ProgramState { get; }
         public ProgramPoint ProgramPoint { get; }
 
+        private readonly Lazy<int> hash;
+
         public ExplodedGraphNode(ProgramPoint programPoint, ProgramState programState)
         {
             ProgramState = programState;
             ProgramPoint = programPoint;
+
+            hash = new Lazy<int>(() =>
+            {
+                var h = 19;
+                h = h * 31 + ProgramState.GetHashCode();
+                h = h * 31 + ProgramPoint.GetHashCode();
+                return h;
+            });
         }
 
         public override bool Equals(object obj)
@@ -54,12 +64,6 @@ namespace SonarAnalyzer.SymbolicExecution
             return ProgramState.Equals(other.ProgramState) && ProgramPoint.Equals(other.ProgramPoint);
         }
 
-        public override int GetHashCode()
-        {
-            var hash = 19;
-            hash = hash * 31 + ProgramState.GetHashCode();
-            hash = hash * 31 + ProgramPoint.GetHashCode();
-            return hash;
-        }
+        public override int GetHashCode() => hash.Value;
     }
 }

@@ -24,9 +24,18 @@ namespace SonarAnalyzer.SymbolicExecution.Relationships
 {
     public abstract class EqualsRelationship : BinaryRelationship, IEquatable<EqualsRelationship>
     {
+        private readonly Lazy<int> hash;
+
         protected EqualsRelationship(SymbolicValue leftOperand, SymbolicValue rightOperand)
             : base(leftOperand, rightOperand)
         {
+            hash = new Lazy<int>(() =>
+            {
+                var left = LeftOperand.GetHashCode();
+                var right = RightOperand.GetHashCode();
+
+                return GetHashCodeMinMaxOrdered(left, right, GetType().GetHashCode());
+            });
         }
 
         public bool Equals(EqualsRelationship other)
@@ -34,13 +43,7 @@ namespace SonarAnalyzer.SymbolicExecution.Relationships
             return other != null && AreOperandsMatching(other);
         }
 
-        public sealed override int GetHashCode()
-        {
-            var left = LeftOperand.GetHashCode();
-            var right = RightOperand.GetHashCode();
-
-            return GetHashCodeMinMaxOrdered(left, right, GetType().GetHashCode());
-        }
+        public sealed override int GetHashCode() => hash.Value;
 
         public sealed override bool Equals(object obj)
         {
@@ -57,11 +60,11 @@ namespace SonarAnalyzer.SymbolicExecution.Relationships
             var min = Math.Min(leftHash, rightHash);
             var max = Math.Max(leftHash, rightHash);
 
-            var hash = 19;
-            hash = hash * 31 + typeHash;
-            hash = hash * 31 + min.GetHashCode();
-            hash = hash * 31 + max.GetHashCode();
-            return hash;
+            var h = 19;
+            h = h * 31 + typeHash;
+            h = h * 31 + min.GetHashCode();
+            h = h * 31 + max.GetHashCode();
+            return h;
         }
     }
 }

@@ -24,9 +24,18 @@ namespace SonarAnalyzer.SymbolicExecution.Relationships
 {
     public abstract class NotEqualsRelationship : BinaryRelationship, IEquatable<NotEqualsRelationship>
     {
+        private readonly Lazy<int> hash;
+
         protected NotEqualsRelationship(SymbolicValue leftOperand, SymbolicValue rightOperand)
             : base(leftOperand, rightOperand)
         {
+            hash = new Lazy<int>(() =>
+            {
+                var left = LeftOperand.GetHashCode();
+                var right = RightOperand.GetHashCode();
+
+                return EqualsRelationship.GetHashCodeMinMaxOrdered(left, right, GetType().GetHashCode());
+            });
         }
 
         public sealed override bool Equals(object obj)
@@ -44,12 +53,6 @@ namespace SonarAnalyzer.SymbolicExecution.Relationships
             return other != null && AreOperandsMatching(other);
         }
 
-        public sealed override int GetHashCode()
-        {
-            var left = LeftOperand.GetHashCode();
-            var right = RightOperand.GetHashCode();
-
-            return EqualsRelationship.GetHashCodeMinMaxOrdered(left, right, GetType().GetHashCode());
-        }
+        public sealed override int GetHashCode() => hash.Value;
     }
 }
