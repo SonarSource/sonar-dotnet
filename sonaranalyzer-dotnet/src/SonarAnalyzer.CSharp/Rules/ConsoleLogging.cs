@@ -48,6 +48,11 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
+                    if (c.IsTest())
+                    {
+                        return;
+                    }
+
                     var methodCall = (InvocationExpressionSyntax) c.Node;
                     var methodSymbol = c.SemanticModel.GetSymbolInfo(methodCall.Expression).Symbol;
 
