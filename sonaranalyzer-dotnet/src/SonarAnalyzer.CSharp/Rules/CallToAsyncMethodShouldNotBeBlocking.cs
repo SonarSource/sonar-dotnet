@@ -41,7 +41,7 @@ namespace SonarAnalyzer.Rules.CSharp
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        private static readonly Dictionary<string, HashSet<KnownType>> InvalidMemberAccesses =
+        private static readonly Dictionary<string, HashSet<KnownType>> InvalidMemberAccess =
             new Dictionary<string, HashSet<KnownType>>
             {
                 ["Wait"] = new HashSet<KnownType> { KnownType.System_Threading_Tasks_Task },
@@ -53,11 +53,22 @@ namespace SonarAnalyzer.Rules.CSharp
                     KnownType.System_Runtime_CompilerServices_TaskAwaiter_TResult },
             };
 
-        private static readonly Dictionary<string, KnownType> DeadlockPreventingConstructs =
+        private static readonly Dictionary<string, KnownType> TaskThreadPoolCalls =
             new Dictionary<string, KnownType>
             {
                 ["StartNew"] = KnownType.System_Threading_Tasks_TaskFactory,
                 ["Run"] = KnownType.System_Threading_Tasks_Task,
+            };
+
+        private static readonly Dictionary<string, string[]> MemberNameToMessageArguments =
+            new Dictionary<string, string[]>
+            {
+                ["Result"] = new[] { "Task.Result", "await" },
+                ["Wait"] = new[] { "Task.Wait", "await" },
+                ["GetResult"] = new[] { "Task.GetAwaiter.GetResult", "await" },
+                ["WaitAny"] = new[] { "Task.WaitAny", "await Task.WhenAny" },
+                ["WaitAll"] =  new[] { "Task.WaitAll", "await Task.WhenAll" },
+                ["Sleep"] = new[] { "Thread.Sleep", "await Task.Delay" },
             };
 
         protected override void Initialize(SonarAnalysisContext context)
@@ -74,13 +85,13 @@ namespace SonarAnalyzer.Rules.CSharp
                     var memberAccessNameName = simpleMemberAccess.Name?.Identifier.ValueText;
 
                     if (memberAccessNameName == null ||
-                        !InvalidMemberAccesses.ContainsKey(memberAccessNameName) ||
-                        IsPartOfDeadlockPreventingConstruct(simpleMemberAccess, c.SemanticModel))
+                        !InvalidMemberAccess.ContainsKey(memberAccessNameName) ||
+                        IsChainedAfterThreadPoolCall(simpleMemberAccess, c.SemanticModel))
                     {
                         return;
                     }
 
-                    var possibleMemberAccesses = InvalidMemberAccesses[memberAccessNameName];
+                    var possibleMemberAccesses = InvalidMemberAccess[memberAccessNameName];
 
                     var memberAccessSymbol = c.SemanticModel.GetSymbolInfo(simpleMemberAccess).Symbol;
                     if (memberAccessSymbol == null ||
@@ -108,47 +119,26 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
 
                     c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, simpleMemberAccess.GetLocation(),
-                        messageArgs: GetMessageArguments(memberAccessNameName)));
+                        messageArgs: MemberNameToMessageArguments[memberAccessNameName]));
                 },
                 SyntaxKind.SimpleMemberAccessExpression);
         }
 
-        private static bool IsPartOfDeadlockPreventingConstruct(MemberAccessExpressionSyntax memberAccess, SemanticModel semanticModel) =>
+        private static bool IsChainedAfterThreadPoolCall(MemberAccessExpressionSyntax memberAccess, SemanticModel semanticModel) =>
             memberAccess.Expression.DescendantNodes()
                 .OfType<MemberAccessExpressionSyntax>()
-                .Any(subMemberAccess => IsDeadlockPreventingConstruct(subMemberAccess, semanticModel));
+                .Any(subMemberAccess => IsThreadPoolCall(subMemberAccess, semanticModel));
 
-        private static bool IsDeadlockPreventingConstruct(MemberAccessExpressionSyntax memberAccess, SemanticModel semanticModel)
+        private static bool IsThreadPoolCall(MemberAccessExpressionSyntax memberAccess, SemanticModel semanticModel)
         {
             if (memberAccess?.Name == null ||
-                !DeadlockPreventingConstructs.ContainsKey(memberAccess.Name.Identifier.ValueText))
+                !TaskThreadPoolCalls.ContainsKey(memberAccess.Name.Identifier.ValueText))
             {
                 return false;
             }
 
             var memberAccessSymbol = semanticModel.GetSymbolInfo(memberAccess).Symbol?.ContainingType?.ConstructedFrom;
-            return memberAccessSymbol.Is(DeadlockPreventingConstructs[memberAccess.Name.Identifier.ValueText]);
-        }
-
-        private static string[] GetMessageArguments(string memberAccessName)
-        {
-            switch (memberAccessName)
-            {
-                case "Result":
-                    return new[] { "Task.Result", "await" };
-                case "Wait":
-                    return new[] { "Task.Wait", "await" };
-                case "GetResult":
-                    return new[] { "Task.GetAwaiter.GetResult", "await" };
-                case "WaitAny":
-                    return new[] { "Task.WaitAny", "await Task.WhenAny" };
-                case "WaitAll":
-                    return new[] { "Task.WaitAll", "await Task.WhenAll" };
-                case "Sleep":
-                    return new[] { "Thread.Sleep", "await Task.Delay" };
-                default:
-                    return new string[0];
-            }
+            return memberAccessSymbol.Is(TaskThreadPoolCalls[memberAccess.Name.Identifier.ValueText]);
         }
     }
 }
