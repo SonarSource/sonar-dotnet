@@ -2851,7 +2851,7 @@
     <value>Minor</value>
   </data>
   <data name="S2228_Tags" xml:space="preserve">
-    <value>owasp-a6</value>
+    <value>owasp-a3</value>
   </data>
   <data name="S2228_Title" xml:space="preserve">
     <value>Console logging should not be used</value>
