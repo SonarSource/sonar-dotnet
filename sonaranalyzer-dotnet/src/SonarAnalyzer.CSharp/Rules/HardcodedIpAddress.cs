@@ -51,6 +51,11 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
+                    if (c.IsTest())
+                    {
+                        return;
+                    }
+
                     var stringLiteral = (LiteralExpressionSyntax)c.Node;
                     var text = stringLiteral.Token.ValueText;
 
