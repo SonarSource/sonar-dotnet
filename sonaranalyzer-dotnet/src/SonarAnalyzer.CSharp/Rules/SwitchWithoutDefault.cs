@@ -19,7 +19,6 @@
  */
 
 using System.Collections.Immutable;
-using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -46,17 +45,13 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             diagnostic = null;
             var switchNode = (SwitchStatementSyntax)node;
-            if(!HasDefaultLabel(switchNode))
+            if(!switchNode.HasDefaultLabel())
             {
                 diagnostic = Diagnostic.Create(rule, switchNode.SwitchKeyword.GetLocation(), "default", "switch");
                 return true;
             }
 
             return false;
-        }
-        private static bool HasDefaultLabel(SwitchStatementSyntax node)
-        {
-            return node.Sections.Any(section => section.Labels.Any(labels => labels.IsKind(SyntaxKind.DefaultSwitchLabel)));
         }
 
         protected sealed override GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.CSharp.GeneratedCodeRecognizer.Instance;
