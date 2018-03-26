@@ -191,18 +191,18 @@ null,
 {
 "uri":  "sources\Nancy\src\Nancy.Testing\LegacyBrowser.cs",
 "region":  {
-"startLine":  43,
+"startLine":  31,
 "startColumn":  19,
-"endLine":  43,
+"endLine":  31,
 "endColumn":  41
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy.Testing\LegacyBrowser.cs",
 "region":  {
-"startLine":  31,
+"startLine":  43,
 "startColumn":  19,
-"endLine":  31,
+"endLine":  43,
 "endColumn":  41
 }
 },
@@ -281,6 +281,15 @@ null,
 {
 "uri":  "sources\Nancy\src\Nancy.Testing\LegacyBrowser.cs",
 "region":  {
+"startLine":  151,
+"startColumn":  19,
+"endLine":  151,
+"endColumn":  41
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy.Testing\LegacyBrowser.cs",
+"region":  {
 "startLine":  163,
 "startColumn":  19,
 "endLine":  163,
@@ -299,9 +308,9 @@ null,
 {
 "uri":  "sources\Nancy\src\Nancy.Testing\LegacyBrowser.cs",
 "region":  {
-"startLine":  151,
+"startLine":  187,
 "startColumn":  19,
-"endLine":  151,
+"endLine":  187,
 "endColumn":  41
 }
 },
@@ -311,15 +320,6 @@ null,
 "startLine":  199,
 "startColumn":  19,
 "endLine":  199,
-"endColumn":  41
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy.Testing\LegacyBrowser.cs",
-"region":  {
-"startLine":  187,
-"startColumn":  19,
-"endLine":  187,
 "endColumn":  41
 }
 }
@@ -360,18 +360,18 @@ null,
 {
 "uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
 "region":  {
-"startLine":  350,
+"startLine":  330,
 "startColumn":  83,
-"endLine":  350,
+"endLine":  330,
 "endColumn":  90
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
 "region":  {
-"startLine":  330,
+"startLine":  350,
 "startColumn":  83,
-"endLine":  330,
+"endLine":  350,
 "endColumn":  90
 }
 }

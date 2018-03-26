@@ -17,15 +17,6 @@ null,
 {
 "uri":  "sources\akka.net\src\examples\FaultTolerance\Program.cs",
 "region":  {
-"startLine":  128,
-"startColumn":  23,
-"endLine":  128,
-"endColumn":  45
-}
-},
-{
-"uri":  "sources\akka.net\src\examples\FaultTolerance\Program.cs",
-"region":  {
 "startLine":  370,
 "startColumn":  23,
 "endLine":  370,
@@ -38,6 +29,15 @@ null,
 "startLine":  253,
 "startColumn":  23,
 "endLine":  253,
+"endColumn":  45
+}
+},
+{
+"uri":  "sources\akka.net\src\examples\FaultTolerance\Program.cs",
+"region":  {
+"startLine":  128,
+"startColumn":  23,
+"endLine":  128,
 "endColumn":  45
 }
 }

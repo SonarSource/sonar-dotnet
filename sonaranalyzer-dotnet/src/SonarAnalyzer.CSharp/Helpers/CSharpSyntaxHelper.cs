@@ -284,7 +284,12 @@ namespace SonarAnalyzer.Helpers
 
         public static bool HasDefaultLabel(this SwitchStatementSyntax node)
         {
-            return node.Sections.Any(section => section.Labels.Any(label => label.IsKind(SyntaxKind.DefaultSwitchLabel)));
+            return GetDefaultLabelSectionIndex(node) >= 0;
+        }
+
+        public static int GetDefaultLabelSectionIndex(this SwitchStatementSyntax node)
+        {
+            return node.Sections.IndexOf(section => section.Labels.Any(label => label.IsKind(SyntaxKind.DefaultSwitchLabel)));
         }
     }
 }
