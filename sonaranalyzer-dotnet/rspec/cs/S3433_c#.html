@@ -22,4 +22,6 @@ public void MyIgnoredGenericTestMethod&lt;T&gt;(T foo)  // Noncompliant
 public void TestNullArg()
 {  /* ... */  }
 </pre>
+<h2>Exceptions</h2>
+<p>Accessibility is ignored for xUnit <code>Fact</code> test methods, since they do not need to be <code>public</code>.</p>
 
