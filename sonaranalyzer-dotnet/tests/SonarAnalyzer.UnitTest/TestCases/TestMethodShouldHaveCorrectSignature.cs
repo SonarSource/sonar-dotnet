@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using Xunit;
 using NUnit.Framework;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -53,17 +53,17 @@ namespace Tests.Diagnostics
     {
 
         [Xunit.Fact]
-        private void PrivateTestMethod() // Noncompliant
+        private void PrivateTestMethod() // Compliant
         {
         }
 
         [Fact]
-        protected void ProtectedTestMethod() // Noncompliant
+        protected void ProtectedTestMethod() // Compliant
         {
         }
 
         [Fact]
-        internal void InternalTestMethod() // Noncompliant
+        internal void InternalTestMethod() // Compliant
         {
         }
 

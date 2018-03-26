@@ -44,13 +44,6 @@ namespace SonarAnalyzer.Rules.CSharp
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        private static readonly ISet<KnownType> TrackedTestAttributes = new HashSet<KnownType>
-        {
-            KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_TestMethodAttribute,
-            KnownType.NUnit_Framework_TestAttribute,
-            KnownType.Xunit_FactAttribute
-        };
-
         protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
@@ -70,12 +63,15 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     var allFaultyMethods = classSymbol.GetMembers()
                         .OfType<IMethodSymbol>()
-                        .Where(IsTestMethod)
-                        .Select(method => new
-                        {
-                            Location = method.Locations.First(),
-                            Message = GetFaults(method).ToSentence()
-                        })
+                        .Select(m => new { method = m, testType = ToKnownTestType(m) })
+                        .Where(tuple => tuple.testType != null)
+                        .Select(
+                            tuple =>
+                            new
+                            {
+                                Location = tuple.method.Locations.First(),
+                                Message = GetFaults(tuple.method, tuple.testType).ToSentence()
+                            })
                         .Where(tuple => tuple.Message != null);
 
                     foreach (var faultyMethod in allFaultyMethods)
@@ -87,14 +83,36 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.ClassDeclaration);
         }
 
-        private static bool IsTestMethod(IMethodSymbol method)
+        private static KnownType ToKnownTestType(IMethodSymbol method)
         {
-            return method.GetAttributes().Any(attribute => attribute.AttributeClass.IsAny(TrackedTestAttributes));
+            return method.GetAttributes()
+                .Select(
+                    attribute =>
+                    {
+                        if (attribute.AttributeClass.Is(KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_TestMethodAttribute))
+                        {
+                            return KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_TestMethodAttribute;
+                        }
+                        else if (attribute.AttributeClass.Is(KnownType.NUnit_Framework_TestAttribute))
+                        {
+                            return KnownType.NUnit_Framework_TestAttribute;
+                        }
+                        else if (attribute.AttributeClass.Is(KnownType.Xunit_FactAttribute))
+                        {
+                            return KnownType.Xunit_FactAttribute;
+                        }
+                        else
+                        {
+                            return null;
+                        }
+                    })
+                .FirstOrDefault();
         }
 
-        private static IEnumerable<string> GetFaults(IMethodSymbol methodSymbol)
+        private static IEnumerable<string> GetFaults(IMethodSymbol methodSymbol, KnownType knownType)
         {
-            if (methodSymbol.DeclaredAccessibility != Accessibility.Public)
+            if (methodSymbol.DeclaredAccessibility != Accessibility.Public &&
+                knownType != KnownType.Xunit_FactAttribute)
             {
                 yield return MakePublicMessage;
             }
