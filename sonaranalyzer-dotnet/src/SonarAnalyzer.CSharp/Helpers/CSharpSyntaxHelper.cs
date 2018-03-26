@@ -282,5 +282,9 @@ namespace SonarAnalyzer.Helpers
             return typeIdentifiedNode?.IsKnownType(KnownType.System_Linq_Expressions_Expression_T, semanticModel) ?? false;
         }
 
+        public static bool HasDefaultLabel(this SwitchStatementSyntax node)
+        {
+            return node.Sections.Any(section => section.Labels.Any(label => label.IsKind(SyntaxKind.DefaultSwitchLabel)));
+        }
     }
 }

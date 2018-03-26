@@ -1,0 +1,44 @@
+<p>Having all branches in a <code>switch</code> or <code>if</code> chain with the same implementation is an error. Either a copy-paste error was made
+and something different should be executed, or there shouldn't be a <code>switch</code>/<code>if</code> chain at all.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+if (b == 0)  // Noncompliant
+{
+    DoTheThing();
+}
+else
+{
+    DoTheThing();
+}
+
+int b = a &gt; 12 ? 4 : 4;  // Noncompliant
+
+switch (i) // Noncompliant
+{
+    case 1:
+        DoSomething();
+        break;
+    case 2:
+        DoSomething();
+        break;
+    case 3:
+        DoSomething();
+        break;
+    default:
+        DoSomething();
+}
+</pre>
+<h2>Exceptions</h2>
+<p>This rule does not apply to <code>if</code> chains without <code>else</code>-s, or to <code>switch</code>-es without <code>default</code>
+clauses.</p>
+<pre>
+if (b == 0)    //no issue, this could have been done on purpose to make the code more readable
+{
+    DoSomething();
+}
+else if (b == 1)
+{
+    DoSomething();
+}
+</pre>
+
