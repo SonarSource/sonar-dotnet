@@ -26,15 +26,6 @@ null,
 {
 "uri":  "sources\akka.net\src\core\Akka.Remote\RemoteActorRefProvider.cs",
 "region":  {
-"startLine":  245,
-"startColumn":  33,
-"endLine":  245,
-"endColumn":  41
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteActorRefProvider.cs",
-"region":  {
 "startLine":  176,
 "startColumn":  49,
 "endLine":  176,
@@ -48,6 +39,15 @@ null,
 "startColumn":  60,
 "endLine":  218,
 "endColumn":  68
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteActorRefProvider.cs",
+"region":  {
+"startLine":  245,
+"startColumn":  33,
+"endLine":  245,
+"endColumn":  41
 }
 },
 {

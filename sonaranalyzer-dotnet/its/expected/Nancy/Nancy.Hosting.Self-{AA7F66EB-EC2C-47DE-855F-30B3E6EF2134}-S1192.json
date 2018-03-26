@@ -8,24 +8,6 @@ null,
 {
 "uri":  "sources\Nancy\src\Nancy.Hosting.Self\NancyHost.cs",
 "region":  {
-"startLine":  366,
-"startColumn":  68,
-"endLine":  366,
-"endColumn":  84
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy.Hosting.Self\NancyHost.cs",
-"region":  {
-"startLine":  367,
-"startColumn":  55,
-"endLine":  367,
-"endColumn":  71
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy.Hosting.Self\NancyHost.cs",
-"region":  {
 "startLine":  390,
 "startColumn":  46,
 "endLine":  390,
@@ -39,6 +21,24 @@ null,
 "startColumn":  33,
 "endLine":  396,
 "endColumn":  49
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy.Hosting.Self\NancyHost.cs",
+"region":  {
+"startLine":  366,
+"startColumn":  68,
+"endLine":  366,
+"endColumn":  84
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy.Hosting.Self\NancyHost.cs",
+"region":  {
+"startLine":  367,
+"startColumn":  55,
+"endLine":  367,
+"endColumn":  71
 }
 }
 ]

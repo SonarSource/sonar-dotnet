@@ -15,24 +15,6 @@ null,
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.cs",
-"region":  {
-"startLine":  172,
-"startColumn":  19,
-"endLine":  172,
-"endColumn":  104
-}
-},
-{
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.cs",
-"region":  {
-"startLine":  202,
-"startColumn":  19,
-"endLine":  202,
-"endColumn":  104
-}
-},
-{
 "uri":  "sources\akka.net\src\core\Akka\Actor\IActorContext.cs",
 "region":  {
 "startLine":  81,
@@ -51,6 +33,15 @@ null,
 }
 },
 {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorBase.cs",
+"region":  {
+"startLine":  192,
+"startColumn":  19,
+"endLine":  192,
+"endColumn":  104
+}
+},
+{
 "uri":  "sources\akka.net\src\core\Akka\Actor\ReceiveActor.cs",
 "region":  {
 "startLine":  96,
@@ -60,11 +51,20 @@ null,
 }
 },
 {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorBase.cs",
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.cs",
 "region":  {
-"startLine":  192,
+"startLine":  172,
 "startColumn":  19,
-"endLine":  192,
+"endLine":  172,
+"endColumn":  104
+}
+},
+{
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.cs",
+"region":  {
+"startLine":  202,
+"startColumn":  19,
+"endLine":  202,
 "endColumn":  104
 }
 }

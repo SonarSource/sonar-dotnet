@@ -15,6 +15,15 @@ null,
 }
 },
 {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor.BuildProviders\NancyVisualBasicRazorBuildProvider.cs",
+"region":  {
+"startLine":  46,
+"startColumn":  93,
+"endLine":  46,
+"endColumn":  102
+}
+},
+{
 "uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor.BuildProviders\NancyCSharpRazorBuildProvider.cs",
 "region":  {
 "startLine":  56,
@@ -30,15 +39,6 @@ null,
 "startColumn":  95,
 "endLine":  56,
 "endColumn":  104
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor.BuildProviders\NancyVisualBasicRazorBuildProvider.cs",
-"region":  {
-"startLine":  46,
-"startColumn":  93,
-"endLine":  46,
-"endColumn":  102
 }
 }
 ]

@@ -33,48 +33,21 @@ null,
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\ErrorHandling\DefaultStatusCodeHandler.cs",
-"region":  {
-"startLine":  120,
-"startColumn":  44,
-"endLine":  120,
-"endColumn":  55
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Responses\RedirectResponse.cs",
-"region":  {
-"startLine":  19,
-"startColumn":  32,
-"endLine":  19,
-"endColumn":  43
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Responses\HtmlResponse.cs",
-"region":  {
-"startLine":  23,
-"startColumn":  32,
-"endLine":  23,
-"endColumn":  43
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\ViewProcessor.cs",
-"region":  {
-"startLine":  44,
-"startColumn":  45,
-"endLine":  44,
-"endColumn":  56
-}
-},
-{
 "uri":  "sources\Nancy\src\Nancy\Response.cs",
 "region":  {
 "startLine":  33,
 "startColumn":  32,
 "endLine":  33,
 "endColumn":  43
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\ErrorHandling\DefaultStatusCodeHandler.cs",
+"region":  {
+"startLine":  120,
+"startColumn":  44,
+"endLine":  120,
+"endColumn":  55
 }
 },
 {
@@ -138,6 +111,33 @@ null,
 "startColumn":  35,
 "endLine":  433,
 "endColumn":  46
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\Responses\RedirectResponse.cs",
+"region":  {
+"startLine":  19,
+"startColumn":  32,
+"endLine":  19,
+"endColumn":  43
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\Responses\HtmlResponse.cs",
+"region":  {
+"startLine":  23,
+"startColumn":  32,
+"endLine":  23,
+"endColumn":  43
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\ViewProcessor.cs",
+"region":  {
+"startLine":  44,
+"startColumn":  45,
+"endLine":  44,
+"endColumn":  56
 }
 }
 ]
@@ -279,6 +279,15 @@ null,
 "location":  [
 null,
 {
+"uri":  "sources\Nancy\src\Nancy\Extensions\ContextExtensions.cs",
+"region":  {
+"startLine":  51,
+"startColumn":  34,
+"endLine":  51,
+"endColumn":  42
+}
+},
+{
 "uri":  "sources\Nancy\src\Nancy\Diagnostics\InteractiveDiagnostics.cs",
 "region":  {
 "startLine":  143,
@@ -294,15 +303,6 @@ null,
 "startColumn":  46,
 "endLine":  165,
 "endColumn":  54
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Extensions\ContextExtensions.cs",
-"region":  {
-"startLine":  51,
-"startColumn":  34,
-"endLine":  51,
-"endColumn":  42
 }
 },
 {
@@ -340,6 +340,24 @@ null,
 }
 },
 {
+"uri":  "sources\Nancy\src\Nancy\RequestHeaders.cs",
+"region":  {
+"startLine":  115,
+"startColumn":  40,
+"endLine":  115,
+"endColumn":  56
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\RequestHeaders.cs",
+"region":  {
+"startLine":  116,
+"startColumn":  40,
+"endLine":  116,
+"endColumn":  56
+}
+},
+{
 "uri":  "sources\Nancy\src\Nancy\Responses\GenericFileResponse.cs",
 "region":  {
 "startLine":  154,
@@ -356,23 +374,48 @@ null,
 "endLine":  198,
 "endColumn":  61
 }
+}
+]
 },
 {
-"uri":  "sources\Nancy\src\Nancy\RequestHeaders.cs",
+"id":  "S1192",
+"message":  "Define a constant instead of using the literal '; charset=' 4 times.",
+"location":  [
+null,
+{
+"uri":  "sources\Nancy\src\Nancy\Jsonp.cs",
 "region":  {
-"startLine":  115,
+"startLine":  26,
 "startColumn":  40,
-"endLine":  115,
-"endColumn":  56
+"endLine":  26,
+"endColumn":  52
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\RequestHeaders.cs",
+"uri":  "sources\Nancy\src\Nancy\Responses\XmlResponse.cs",
 "region":  {
-"startLine":  116,
+"startLine":  36,
+"startColumn":  37,
+"endLine":  36,
+"endColumn":  49
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\Responses\JsonResponse.cs",
+"region":  {
+"startLine":  44,
 "startColumn":  40,
-"endLine":  116,
-"endColumn":  56
+"endLine":  44,
+"endColumn":  52
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\Responses\TextResponse.cs",
+"region":  {
+"startLine":  90,
+"startColumn":  46,
+"endLine":  90,
+"endColumn":  58
 }
 }
 ]
@@ -901,6 +944,15 @@ null,
 {
 "uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
 "region":  {
+"startLine":  601,
+"startColumn":  26,
+"endLine":  601,
+"endColumn":  52
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
+"region":  {
 "startLine":  79,
 "startColumn":  35,
 "endLine":  79,
@@ -923,15 +975,6 @@ null,
 "startColumn":  35,
 "endLine":  142,
 "endColumn":  61
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\MimeTypes.cs",
-"region":  {
-"startLine":  601,
-"startColumn":  26,
-"endLine":  601,
-"endColumn":  52
 }
 }
 ]
@@ -1331,6 +1374,49 @@ null,
 },
 {
 "id":  "S1192",
+"message":  "Define a constant instead of using the literal 'OPTIONS' 4 times.",
+"location":  [
+null,
+{
+"uri":  "sources\Nancy\src\Nancy\NancyModule.cs",
+"region":  {
+"startLine":  102,
+"startColumn":  43,
+"endLine":  102,
+"endColumn":  52
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\Security\Csrf.cs",
+"region":  {
+"startLine":  31,
+"startColumn":  119,
+"endLine":  31,
+"endColumn":  128
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\Routing\DefaultRouteResolver.cs",
+"region":  {
+"startLine":  95,
+"startColumn":  50,
+"endLine":  95,
+"endColumn":  59
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\Routing\OptionsRoute.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  20,
+"endLine":  14,
+"endColumn":  29
+}
+}
+]
+},
+{
+"id":  "S1192",
 "message":  "Define a constant instead of using the literal 'Content-Type' 8 times.",
 "location":  [
 null,
@@ -1344,12 +1430,30 @@ null,
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Owin\NancyMiddleware.cs",
+"uri":  "sources\Nancy\src\Nancy\HttpMultipartBoundary.cs",
 "region":  {
-"startLine":  141,
-"startColumn":  41,
-"endLine":  141,
-"endColumn":  55
+"startLine":  70,
+"startColumn":  39,
+"endLine":  70,
+"endColumn":  53
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\RequestHeaders.cs",
+"region":  {
+"startLine":  125,
+"startColumn":  40,
+"endLine":  125,
+"endColumn":  54
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\RequestHeaders.cs",
+"region":  {
+"startLine":  126,
+"startColumn":  40,
+"endLine":  126,
+"endColumn":  54
 }
 },
 {
@@ -1380,30 +1484,12 @@ null,
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\RequestHeaders.cs",
+"uri":  "sources\Nancy\src\Nancy\Owin\NancyMiddleware.cs",
 "region":  {
-"startLine":  125,
-"startColumn":  40,
-"endLine":  125,
-"endColumn":  54
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\RequestHeaders.cs",
-"region":  {
-"startLine":  126,
-"startColumn":  40,
-"endLine":  126,
-"endColumn":  54
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\HttpMultipartBoundary.cs",
-"region":  {
-"startLine":  70,
-"startColumn":  39,
-"endLine":  70,
-"endColumn":  53
+"startLine":  141,
+"startColumn":  41,
+"endLine":  141,
+"endColumn":  55
 }
 }
 ]
@@ -1475,42 +1561,6 @@ null,
 }
 },
 {
-"uri":  "sources\Nancy\src\Nancy\Responses\JsonResponse.cs",
-"region":  {
-"startLine":  39,
-"startColumn":  40,
-"endLine":  39,
-"endColumn":  58
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\JsonProcessor.cs",
-"region":  {
-"startLine":  27,
-"startColumn":  78,
-"endLine":  27,
-"endColumn":  96
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Responses\DefaultJsonSerializer.cs",
-"region":  {
-"startLine":  127,
-"startColumn":  43,
-"endLine":  127,
-"endColumn":  61
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\JsonProcessor.cs",
-"region":  {
-"startLine":  93,
-"startColumn":  49,
-"endLine":  93,
-"endColumn":  67
-}
-},
-{
 "uri":  "sources\Nancy\src\Nancy\FormatterExtensions.cs",
 "region":  {
 "startLine":  101,
@@ -1526,6 +1576,42 @@ null,
 "startColumn":  36,
 "endLine":  217,
 "endColumn":  54
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\Responses\JsonResponse.cs",
+"region":  {
+"startLine":  39,
+"startColumn":  40,
+"endLine":  39,
+"endColumn":  58
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\Responses\DefaultJsonSerializer.cs",
+"region":  {
+"startLine":  127,
+"startColumn":  43,
+"endLine":  127,
+"endColumn":  61
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\JsonProcessor.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  78,
+"endLine":  27,
+"endColumn":  96
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\JsonProcessor.cs",
+"region":  {
+"startLine":  93,
+"startColumn":  49,
+"endLine":  93,
+"endColumn":  67
 }
 }
 ]
@@ -1551,60 +1637,6 @@ null,
 "startColumn":  43,
 "endLine":  28,
 "endColumn":  60
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Responses\XmlResponse.cs",
-"region":  {
-"startLine":  28,
-"startColumn":  40,
-"endLine":  28,
-"endColumn":  57
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Responses\DefaultXmlSerializer.cs",
-"region":  {
-"startLine":  89,
-"startColumn":  43,
-"endLine":  89,
-"endColumn":  60
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\XmlProcessor.cs",
-"region":  {
-"startLine":  24,
-"startColumn":  78,
-"endLine":  24,
-"endColumn":  95
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\XmlProcessor.cs",
-"region":  {
-"startLine":  90,
-"startColumn":  46,
-"endLine":  90,
-"endColumn":  63
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\XmlProcessor.cs",
-"region":  {
-"startLine":  93,
-"startColumn":  31,
-"endLine":  93,
-"endColumn":  48
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\XmlProcessor.cs",
-"region":  {
-"startLine":  105,
-"startColumn":  49,
-"endLine":  105,
-"endColumn":  66
 }
 },
 {
@@ -1668,6 +1700,60 @@ null,
 "startColumn":  35,
 "endLine":  559,
 "endColumn":  52
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\Responses\XmlResponse.cs",
+"region":  {
+"startLine":  28,
+"startColumn":  40,
+"endLine":  28,
+"endColumn":  57
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\Responses\DefaultXmlSerializer.cs",
+"region":  {
+"startLine":  89,
+"startColumn":  43,
+"endLine":  89,
+"endColumn":  60
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\XmlProcessor.cs",
+"region":  {
+"startLine":  24,
+"startColumn":  78,
+"endLine":  24,
+"endColumn":  95
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\XmlProcessor.cs",
+"region":  {
+"startLine":  90,
+"startColumn":  46,
+"endLine":  90,
+"endColumn":  63
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\XmlProcessor.cs",
+"region":  {
+"startLine":  93,
+"startColumn":  31,
+"endLine":  93,
+"endColumn":  48
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\Responses\Negotiation\XmlProcessor.cs",
+"region":  {
+"startLine":  105,
+"startColumn":  49,
+"endLine":  105,
+"endColumn":  66
 }
 }
 ]
@@ -1942,92 +2028,6 @@ null,
 },
 {
 "id":  "S1192",
-"message":  "Define a constant instead of using the literal '; charset=' 4 times.",
-"location":  [
-null,
-{
-"uri":  "sources\Nancy\src\Nancy\Responses\XmlResponse.cs",
-"region":  {
-"startLine":  36,
-"startColumn":  37,
-"endLine":  36,
-"endColumn":  49
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Responses\JsonResponse.cs",
-"region":  {
-"startLine":  44,
-"startColumn":  40,
-"endLine":  44,
-"endColumn":  52
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Responses\TextResponse.cs",
-"region":  {
-"startLine":  90,
-"startColumn":  46,
-"endLine":  90,
-"endColumn":  58
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Jsonp.cs",
-"region":  {
-"startLine":  26,
-"startColumn":  40,
-"endLine":  26,
-"endColumn":  52
-}
-}
-]
-},
-{
-"id":  "S1192",
-"message":  "Define a constant instead of using the literal 'OPTIONS' 4 times.",
-"location":  [
-null,
-{
-"uri":  "sources\Nancy\src\Nancy\Routing\DefaultRouteResolver.cs",
-"region":  {
-"startLine":  95,
-"startColumn":  50,
-"endLine":  95,
-"endColumn":  59
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Routing\OptionsRoute.cs",
-"region":  {
-"startLine":  14,
-"startColumn":  20,
-"endLine":  14,
-"endColumn":  29
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Security\Csrf.cs",
-"region":  {
-"startLine":  31,
-"startColumn":  119,
-"endLine":  31,
-"endColumn":  128
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\NancyModule.cs",
-"region":  {
-"startLine":  102,
-"startColumn":  43,
-"endLine":  102,
-"endColumn":  52
-}
-}
-]
-},
-{
-"id":  "S1192",
 "message":  "Define a constant instead of using the literal 'https' 4 times.",
 "location":  [
 null,
@@ -2077,19 +2077,19 @@ null,
 {
 "uri":  "sources\Nancy\src\Nancy\Session\NullSessionProvider.cs",
 "region":  {
-"startLine":  18,
-"startColumn":  49,
-"endLine":  18,
-"endColumn":  82
+"startLine":  41,
+"startColumn":  53,
+"endLine":  41,
+"endColumn":  86
 }
 },
 {
 "uri":  "sources\Nancy\src\Nancy\Session\NullSessionProvider.cs",
 "region":  {
-"startLine":  41,
-"startColumn":  53,
-"endLine":  41,
-"endColumn":  86
+"startLine":  18,
+"startColumn":  49,
+"endLine":  18,
+"endColumn":  82
 }
 },
 {
@@ -2132,18 +2132,61 @@ null,
 },
 {
 "id":  "S1192",
-"message":  "Define a constant instead of using the literal '[ERR!]' 8 times.",
+"message":  "Define a constant instead of using the literal 'Encode' 5 times.",
 "location":  [
 null,
 {
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\NancyViewEngineHost.cs",
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\SuperSimpleViewEngine.cs",
 "region":  {
-"startLine":  49,
-"startColumn":  24,
-"endLine":  49,
-"endColumn":  32
+"startLine":  397,
+"startColumn":  37,
+"endLine":  397,
+"endColumn":  45
 }
 },
+{
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\SuperSimpleViewEngine.cs",
+"region":  {
+"startLine":  428,
+"startColumn":  37,
+"endLine":  428,
+"endColumn":  45
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\SuperSimpleViewEngine.cs",
+"region":  {
+"startLine":  459,
+"startColumn":  37,
+"endLine":  459,
+"endColumn":  45
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\SuperSimpleViewEngine.cs",
+"region":  {
+"startLine":  532,
+"startColumn":  49,
+"endLine":  532,
+"endColumn":  57
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\SuperSimpleViewEngine.cs",
+"region":  {
+"startLine":  549,
+"startColumn":  45,
+"endLine":  549,
+"endColumn":  53
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using the literal '[ERR!]' 8 times.",
+"location":  [
+null,
 {
 "uri":  "sources\Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\SuperSimpleViewEngine.cs",
 "region":  {
@@ -2206,57 +2249,14 @@ null,
 "endLine":  663,
 "endColumn":  44
 }
-}
-]
 },
 {
-"id":  "S1192",
-"message":  "Define a constant instead of using the literal 'Encode' 5 times.",
-"location":  [
-null,
-{
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\SuperSimpleViewEngine.cs",
+"uri":  "sources\Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\NancyViewEngineHost.cs",
 "region":  {
-"startLine":  397,
-"startColumn":  37,
-"endLine":  397,
-"endColumn":  45
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\SuperSimpleViewEngine.cs",
-"region":  {
-"startLine":  428,
-"startColumn":  37,
-"endLine":  428,
-"endColumn":  45
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\SuperSimpleViewEngine.cs",
-"region":  {
-"startLine":  459,
-"startColumn":  37,
-"endLine":  459,
-"endColumn":  45
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\SuperSimpleViewEngine.cs",
-"region":  {
-"startLine":  532,
-"startColumn":  49,
-"endLine":  532,
-"endColumn":  57
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\ViewEngines\SuperSimpleViewEngine\SuperSimpleViewEngine.cs",
-"region":  {
-"startLine":  549,
-"startColumn":  45,
-"endLine":  549,
-"endColumn":  53
+"startLine":  49,
+"startColumn":  24,
+"endLine":  49,
+"endColumn":  32
 }
 }
 ]
@@ -2384,15 +2384,6 @@ null,
 {
 "uri":  "sources\Nancy\src\Nancy\Bootstrapper\AppDomainAssemblyTypeScanner.cs",
 "region":  {
-"startLine":  249,
-"startColumn":  125,
-"endLine":  249,
-"endColumn":  132
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy\Bootstrapper\AppDomainAssemblyTypeScanner.cs",
-"region":  {
 "startLine":  296,
 "startColumn":  74,
 "endLine":  296,
@@ -2406,6 +2397,15 @@ null,
 "startColumn":  75,
 "endLine":  298,
 "endColumn":  82
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy\Bootstrapper\AppDomainAssemblyTypeScanner.cs",
+"region":  {
+"startLine":  249,
+"startColumn":  125,
+"endLine":  249,
+"endColumn":  132
 }
 },
 {
