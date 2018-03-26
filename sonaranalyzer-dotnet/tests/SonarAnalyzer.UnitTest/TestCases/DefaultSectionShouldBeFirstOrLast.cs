@@ -43,6 +43,39 @@ namespace Tests.Diagnostics
                 case 42:
                     break;
             }
+
+            switch (a)
+            {
+                default:
+                    break;
+            }
+
+            switch (a)
+            {
+                case 0:
+                    break;
+                case 1:
+                default:
+                    break;
+            }
+
+            switch (a)
+            {
+                case 0:
+                default:
+                    break;
+            }
+
+            switch (a)
+            {
+                case 0:
+                    break;
+                case 1:
+                default: // Noncompliant 
+                    break;
+                case 2:
+                    break;
+            }
         }
     }
 }
