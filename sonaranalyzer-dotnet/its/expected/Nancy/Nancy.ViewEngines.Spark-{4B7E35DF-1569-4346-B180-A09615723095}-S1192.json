@@ -94,6 +94,24 @@ null,
 {
 "uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark\Descriptors\DefaultDescriptorBuilder.cs",
 "region":  {
+"startLine":  160,
+"startColumn":  75,
+"endLine":  160,
+"endColumn":  83
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark\Descriptors\DefaultDescriptorBuilder.cs",
+"region":  {
+"startLine":  162,
+"startColumn":  75,
+"endLine":  162,
+"endColumn":  83
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark\Descriptors\DefaultDescriptorBuilder.cs",
+"region":  {
 "startLine":  171,
 "startColumn":  78,
 "endLine":  171,
@@ -135,24 +153,6 @@ null,
 "endLine":  179,
 "endColumn":  94
 }
-},
-{
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark\Descriptors\DefaultDescriptorBuilder.cs",
-"region":  {
-"startLine":  160,
-"startColumn":  75,
-"endLine":  160,
-"endColumn":  83
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark\Descriptors\DefaultDescriptorBuilder.cs",
-"region":  {
-"startLine":  162,
-"startColumn":  75,
-"endLine":  162,
-"endColumn":  83
-}
 }
 ]
 },
@@ -161,6 +161,24 @@ null,
 "message":  "Define a constant instead of using the literal '.shade' 7 times.",
 "location":  [
 null,
+{
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark\Descriptors\DefaultDescriptorBuilder.cs",
+"region":  {
+"startLine":  161,
+"startColumn":  75,
+"endLine":  161,
+"endColumn":  83
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark\Descriptors\DefaultDescriptorBuilder.cs",
+"region":  {
+"startLine":  163,
+"startColumn":  75,
+"endLine":  163,
+"endColumn":  83
+}
+},
 {
 "uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark\Descriptors\DefaultDescriptorBuilder.cs",
 "region":  {
@@ -204,24 +222,6 @@ null,
 "startColumn":  86,
 "endLine":  180,
 "endColumn":  94
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark\Descriptors\DefaultDescriptorBuilder.cs",
-"region":  {
-"startLine":  161,
-"startColumn":  75,
-"endLine":  161,
-"endColumn":  83
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark\Descriptors\DefaultDescriptorBuilder.cs",
-"region":  {
-"startLine":  163,
-"startColumn":  75,
-"endLine":  163,
-"endColumn":  83
 }
 }
 ]
@@ -313,6 +313,24 @@ null,
 {
 "uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark\Descriptors\DefaultDescriptorBuilder.cs",
 "region":  {
+"startLine":  162,
+"startColumn":  54,
+"endLine":  162,
+"endColumn":  62
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark\Descriptors\DefaultDescriptorBuilder.cs",
+"region":  {
+"startLine":  163,
+"startColumn":  54,
+"endLine":  163,
+"endColumn":  62
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark\Descriptors\DefaultDescriptorBuilder.cs",
+"region":  {
 "startLine":  173,
 "startColumn":  54,
 "endLine":  173,
@@ -380,24 +398,6 @@ null,
 "startColumn":  63,
 "endLine":  195,
 "endColumn":  71
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark\Descriptors\DefaultDescriptorBuilder.cs",
-"region":  {
-"startLine":  162,
-"startColumn":  54,
-"endLine":  162,
-"endColumn":  62
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark\Descriptors\DefaultDescriptorBuilder.cs",
-"region":  {
-"startLine":  163,
-"startColumn":  54,
-"endLine":  163,
-"endColumn":  62
 }
 }
 ]
