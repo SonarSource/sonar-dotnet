@@ -48,7 +48,8 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
-                    if (c.IsTest())
+                    if (c.IsTest() ||
+                        c.Compilation.Options.OutputKind == OutputKind.ConsoleApplication)
                     {
                         return;
                     }
