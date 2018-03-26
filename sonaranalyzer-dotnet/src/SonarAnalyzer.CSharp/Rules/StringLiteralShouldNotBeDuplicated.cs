@@ -95,7 +95,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     // Report issues as project-level
                     compilationAnalysisContext.ReportDiagnosticWhenActive(Diagnostic.Create(rule, null,
-                        additionalLocations: item.Value.Select(x => x.GetLocation()),
+                        additionalLocations: item.Value.Select(x => x.GetLocation()).OrderBy(x => x.SourceSpan),
                         messageArgs: new object[] { item.Key, item.Value.Count }));
                 }
             }

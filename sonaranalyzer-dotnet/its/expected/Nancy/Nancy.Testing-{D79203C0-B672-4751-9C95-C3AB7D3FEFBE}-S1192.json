@@ -2,76 +2,6 @@
 "issues":  [
 {
 "id":  "S1192",
-"message":  "Define a constant instead of using the literal 'Content-Type' 7 times.",
-"location":  [
-null,
-{
-"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContext.cs",
-"region":  {
-"startLine":  103,
-"startColumn":  25,
-"endLine":  103,
-"endColumn":  39
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContext.cs",
-"region":  {
-"startLine":  114,
-"startColumn":  25,
-"endLine":  114,
-"endColumn":  39
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContextExtensions.cs",
-"region":  {
-"startLine":  45,
-"startColumn":  35,
-"endLine":  45,
-"endColumn":  49
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContextExtensions.cs",
-"region":  {
-"startLine":  67,
-"startColumn":  35,
-"endLine":  67,
-"endColumn":  49
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContextExtensions.cs",
-"region":  {
-"startLine":  89,
-"startColumn":  35,
-"endLine":  89,
-"endColumn":  49
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy.Testing\Browser.cs",
-"region":  {
-"startLine":  293,
-"startColumn":  69,
-"endLine":  293,
-"endColumn":  83
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy.Testing\Browser.cs",
-"region":  {
-"startLine":  295,
-"startColumn":  39,
-"endLine":  295,
-"endColumn":  53
-}
-}
-]
-},
-{
-"id":  "S1192",
 "message":  "Define a constant instead of using the literal 'Cookie' 4 times.",
 "location":  [
 null,
@@ -109,6 +39,76 @@ null,
 "startColumn":  28,
 "endLine":  259,
 "endColumn":  36
+}
+}
+]
+},
+{
+"id":  "S1192",
+"message":  "Define a constant instead of using the literal 'Content-Type' 7 times.",
+"location":  [
+null,
+{
+"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContextExtensions.cs",
+"region":  {
+"startLine":  45,
+"startColumn":  35,
+"endLine":  45,
+"endColumn":  49
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContextExtensions.cs",
+"region":  {
+"startLine":  67,
+"startColumn":  35,
+"endLine":  67,
+"endColumn":  49
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContextExtensions.cs",
+"region":  {
+"startLine":  89,
+"startColumn":  35,
+"endLine":  89,
+"endColumn":  49
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContext.cs",
+"region":  {
+"startLine":  103,
+"startColumn":  25,
+"endLine":  103,
+"endColumn":  39
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContext.cs",
+"region":  {
+"startLine":  114,
+"startColumn":  25,
+"endLine":  114,
+"endColumn":  39
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy.Testing\Browser.cs",
+"region":  {
+"startLine":  293,
+"startColumn":  69,
+"endLine":  293,
+"endColumn":  83
+}
+},
+{
+"uri":  "sources\Nancy\src\Nancy.Testing\Browser.cs",
+"region":  {
+"startLine":  295,
+"startColumn":  39,
+"endLine":  295,
+"endColumn":  53
 }
 }
 ]
