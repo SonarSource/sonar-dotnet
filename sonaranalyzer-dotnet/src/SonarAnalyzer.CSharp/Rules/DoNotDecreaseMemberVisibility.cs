@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2018 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -98,46 +98,59 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 if (memberSymbol is IMethodSymbol methodSymbol)
                 {
-                    var methodDeclaration = memberDeclaration as MethodDeclarationSyntax;
-                    if (methodDeclaration == null ||
-                        methodDeclaration.Modifiers.Any(m => m.IsKind(SyntaxKind.NewKeyword)))
-                    {
-                        return null;
-                    }
-
-                    var hidingMethod = allBaseClassMethods.FirstOrDefault(
-                    m => IsDecreasingAccess(m.DeclaredAccessibility, methodSymbol.DeclaredAccessibility, false) &&
-                         IsMatchingSignature(m, methodSymbol));
-
-                    if (hidingMethod != null)
-                    {
-                        var location = (memberDeclaration as MethodDeclarationSyntax)?.Identifier.GetLocation();
-                        if (location != null)
-                        {
-                            return Diagnostic.Create(rule, location, hidingMethod);
-                        }
-                    }
-
-                    return null;
+                    return FindMethodIssue(memberDeclaration, methodSymbol);
                 }
 
                 if (memberSymbol is IPropertySymbol propertySymbol)
                 {
-                    var propertyDeclaration = memberDeclaration as PropertyDeclarationSyntax;
-                    if (propertyDeclaration == null ||
-                        propertyDeclaration.Modifiers.Any(m => m.IsKind(SyntaxKind.NewKeyword)))
-                    {
-                        return null;
-                    }
+                    return FindPropertyIssue(memberDeclaration, propertySymbol);
+                }
 
-                    var hidingProperty = allBaseClassProperties.FirstOrDefault(
-                        p => IsDecreasingPropertyAccess(p, propertySymbol, propertySymbol.IsOverride));
-                    if (hidingProperty != null)
+                return null;
+            }
+
+            private Diagnostic FindMethodIssue(MemberDeclarationSyntax memberDeclaration, IMethodSymbol methodSymbol)
+            {
+                var methodDeclaration = memberDeclaration as MethodDeclarationSyntax;
+                if (methodDeclaration == null ||
+                    methodDeclaration.Modifiers.Any(m => m.IsKind(SyntaxKind.NewKeyword)))
+                {
+                    return null;
+                }
+
+                var hidingMethod = allBaseClassMethods.FirstOrDefault(
+                m => IsDecreasingAccess(m.DeclaredAccessibility, methodSymbol.DeclaredAccessibility, false) &&
+                     IsMatchingSignature(m, methodSymbol));
+
+                if (hidingMethod != null)
+                {
+                    var location = (memberDeclaration as MethodDeclarationSyntax)?.Identifier.GetLocation();
+                    if (location != null)
                     {
-                        var location = (memberDeclaration as PropertyDeclarationSyntax)?.Identifier.GetLocation();
-                        return Diagnostic.Create(rule, location, hidingProperty);
+                        return Diagnostic.Create(rule, location, hidingMethod);
                     }
                 }
+
+                return null;
+            }
+
+            private Diagnostic FindPropertyIssue(MemberDeclarationSyntax memberDeclaration, IPropertySymbol propertySymbol)
+            {
+                var propertyDeclaration = memberDeclaration as PropertyDeclarationSyntax;
+                if (propertyDeclaration == null ||
+                    propertyDeclaration.Modifiers.Any(m => m.IsKind(SyntaxKind.NewKeyword)))
+                {
+                    return null;
+                }
+
+                var hidingProperty = allBaseClassProperties.FirstOrDefault(
+                    p => IsDecreasingPropertyAccess(p, propertySymbol, propertySymbol.IsOverride));
+                if (hidingProperty != null)
+                {
+                    var location = (memberDeclaration as PropertyDeclarationSyntax)?.Identifier.GetLocation();
+                    return Diagnostic.Create(rule, location, hidingProperty);
+                }
+
                 return null;
             }
 

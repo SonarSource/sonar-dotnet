@@ -83,12 +83,12 @@ namespace SonarAnalyzer.Rules.CSharp
 
                         // This trick avoids to keep walking up the tree when if is children of another if.
                         // For example, with the code below Parent.Parent would be IfStatementSyntax causing the code to produce
-                        // wrong results.
-                        // if (a) { if (b) { if (c) {} } } else { }
+                        // wrong results: if (a) { if (b) { if (c) {} } } else { }
                         currentIfStatement = (currentIfStatement.Parent as ElseClauseSyntax)?.Parent as IfStatementSyntax;
                     }
 
-                    if (allBlocks.All(block => block.IsEquivalentTo(elseBlock, false)))
+                    if (topLevelIfStatement != null && // Should not happen but let's go defensive
+                        allBlocks.All(block => block.IsEquivalentTo(elseBlock, false)))
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, topLevelIfStatement.GetLocation(), IfMessage));
                     }
