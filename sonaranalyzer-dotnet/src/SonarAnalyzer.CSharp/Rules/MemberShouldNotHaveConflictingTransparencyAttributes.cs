@@ -55,70 +55,78 @@ namespace SonarAnalyzer.Rules.CSharp
                     var nodesWithSecurityCritical = new Dictionary<SyntaxNode, AttributeSyntax>();
 
                     csac.RegisterSyntaxNodeActionInNonGenerated(
-                        snac =>
-                        {
-                            var attribute = (AttributeSyntax)snac.Node;
-
-                            var attributeConstructor = snac.SemanticModel.GetSymbolInfo(attribute).Symbol as IMethodSymbol;
-                            if (attributeConstructor == null)
-                            {
-                                return;
-                            }
-
-                            if (attributeConstructor.ContainingType.Is(KnownType.System_Security_SecuritySafeCriticalAttribute))
-                            {
-                                nodesWithSecuritySafeCritical.Add(attribute.Parent.Parent, attribute);
-                            }
-                            else if (attributeConstructor.ContainingType.Is(KnownType.System_Security_SecurityCriticalAttribute))
-                            {
-                                nodesWithSecurityCritical.Add(attribute.Parent.Parent, attribute);
-                            }
-                            else
-                            {
-                                // nothing
-                            }
-                        },
+                        snac => CollectSecurityAttributes(snac, nodesWithSecuritySafeCritical, nodesWithSecurityCritical),
                         SyntaxKind.Attribute);
 
                     csac.RegisterCompilationEndAction(
-                        cac =>
-                        {
-                            var assemblySecurityCriticalAttribute = cac.Compilation.Assembly.GetAttributes()
+                        cac => ReportOnConflictingTransparencyAttributes(cac, nodesWithSecuritySafeCritical,
+                            nodesWithSecurityCritical));
+                });
+        }
+
+        private void CollectSecurityAttributes(SyntaxNodeAnalysisContext syntaxNodeAnalysisContext,
+            Dictionary<SyntaxNode, AttributeSyntax> nodesWithSecuritySafeCritical,
+            Dictionary<SyntaxNode, AttributeSyntax> nodesWithSecurityCritical)
+        {
+            var attribute = (AttributeSyntax)syntaxNodeAnalysisContext.Node;
+            var attributeConstructor = syntaxNodeAnalysisContext.SemanticModel.GetSymbolInfo(attribute).Symbol as IMethodSymbol;
+            if (attributeConstructor == null)
+            {
+                return;
+            }
+
+            if (attributeConstructor.ContainingType.Is(KnownType.System_Security_SecuritySafeCriticalAttribute))
+            {
+                nodesWithSecuritySafeCritical.Add(attribute.Parent.Parent, attribute);
+            }
+            else if (attributeConstructor.ContainingType.Is(KnownType.System_Security_SecurityCriticalAttribute))
+            {
+                nodesWithSecurityCritical.Add(attribute.Parent.Parent, attribute);
+            }
+            else
+            {
+                // nothing
+            }
+        }
+
+        private void ReportOnConflictingTransparencyAttributes(CompilationAnalysisContext compilationContext,
+            Dictionary<SyntaxNode, AttributeSyntax> nodesWithSecuritySafeCritical,
+            Dictionary<SyntaxNode, AttributeSyntax> nodesWithSecurityCritical)
+        {
+            var assemblySecurityCriticalAttribute = compilationContext.Compilation.Assembly.GetAttributes()
                                 .FirstOrDefault(a => a.AttributeClass.Is(KnownType.System_Security_SecurityCriticalAttribute));
 
-                            if (assemblySecurityCriticalAttribute != null)
-                            {
-                                var assemblySecurityLocation = assemblySecurityCriticalAttribute.ApplicationSyntaxReference
-                                    .GetSyntax().GetLocation();
+            if (assemblySecurityCriticalAttribute != null)
+            {
+                var assemblySecurityLocation = assemblySecurityCriticalAttribute.ApplicationSyntaxReference
+                    .GetSyntax().GetLocation();
 
-                                // All parts declaring the 'SecuritySafeCriticalAttribute' are incorrect since the assembly
-                                // itself is marked as 'SecurityCritical'.
-                                foreach (var item in nodesWithSecuritySafeCritical)
-                                {
-                                    cac.ReportDiagnosticWhenActive(Diagnostic.Create(rule, item.Value.GetLocation(),
-                                        additionalLocations: new[] { assemblySecurityLocation }));
-                                }
-                            }
-                            else
-                            {
-                                foreach (var item in nodesWithSecuritySafeCritical)
-                                {
-                                    var current = item.Key.Parent;
-                                    while (current != null)
-                                    {
-                                        if (nodesWithSecurityCritical.ContainsKey(current))
-                                        {
-                                            cac.ReportDiagnosticWhenActive(Diagnostic.Create(rule, item.Value.GetLocation(),
-                                                additionalLocations: new[] { nodesWithSecurityCritical[current].GetLocation() }));
-                                            break;
-                                        }
+                // All parts declaring the 'SecuritySafeCriticalAttribute' are incorrect since the assembly
+                // itself is marked as 'SecurityCritical'.
+                foreach (var item in nodesWithSecuritySafeCritical)
+                {
+                    compilationContext.ReportDiagnosticWhenActive(Diagnostic.Create(rule, item.Value.GetLocation(),
+                        additionalLocations: new[] { assemblySecurityLocation }));
+                }
+            }
+            else
+            {
+                foreach (var item in nodesWithSecuritySafeCritical)
+                {
+                    var current = item.Key.Parent;
+                    while (current != null)
+                    {
+                        if (nodesWithSecurityCritical.ContainsKey(current))
+                        {
+                            compilationContext.ReportDiagnosticWhenActive(Diagnostic.Create(rule, item.Value.GetLocation(),
+                                additionalLocations: new[] { nodesWithSecurityCritical[current].GetLocation() }));
+                            break;
+                        }
 
-                                        current = current.Parent;
-                                    }
-                                }
-                            }
-                        });
-                });
+                        current = current.Parent;
+                    }
+                }
+            }
         }
     }
 }

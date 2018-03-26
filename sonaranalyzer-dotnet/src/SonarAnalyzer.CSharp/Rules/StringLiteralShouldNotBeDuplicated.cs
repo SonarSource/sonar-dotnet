@@ -61,40 +61,44 @@ namespace SonarAnalyzer.Rules.CSharp
                     var stringWithLiterals = new Dictionary<string, List<LiteralExpressionSyntax>>();
 
                     csac.RegisterSyntaxNodeActionInNonGenerated(
-                        snac =>
-                        {
-                            var stringLiteral = (LiteralExpressionSyntax)snac.Node;
-                            var stringValue = stringLiteral.Token.ValueText;
-
-                            if (stringValue != null &&
-                                stringValue.Length >= MinimumStringLength &&
-                                !IsMatchingMethodParameterName(stringLiteral))
-                            {
-                                if (!stringWithLiterals.ContainsKey(stringValue))
-                                {
-                                    stringWithLiterals[stringValue] = new List<LiteralExpressionSyntax>();
-                                }
-
-                                stringWithLiterals[stringValue].Add(stringLiteral);
-                            }
-                        },
+                        snac => CollectDuplications((LiteralExpressionSyntax)snac.Node, stringWithLiterals),
                         SyntaxKind.StringLiteralExpression);
 
-                    csac.RegisterCompilationEndAction(
-                        cac =>
-                        {
-                            foreach (var item in stringWithLiterals)
-                            {
-                                if (item.Value.Count > Threshold)
-                                {
-                                    // Report issues as project-level
-                                    cac.ReportDiagnosticWhenActive(Diagnostic.Create(rule, null,
-                                        additionalLocations: item.Value.Select(x => x.GetLocation()),
-                                        messageArgs: new object[] { item.Key, item.Value.Count }));
-                                }
-                            }
-                        });
+                    csac.RegisterCompilationEndAction(cac => ReportDuplicates(cac, stringWithLiterals));
                 });
+        }
+
+        private void CollectDuplications(LiteralExpressionSyntax stringLiteral,
+            Dictionary<string, List<LiteralExpressionSyntax>> stringWithLiterals)
+        {
+            var stringValue = stringLiteral.Token.ValueText;
+
+            if (stringValue != null &&
+                stringValue.Length >= MinimumStringLength &&
+                !IsMatchingMethodParameterName(stringLiteral))
+            {
+                if (!stringWithLiterals.ContainsKey(stringValue))
+                {
+                    stringWithLiterals[stringValue] = new List<LiteralExpressionSyntax>();
+                }
+
+                stringWithLiterals[stringValue].Add(stringLiteral);
+            }
+        }
+
+        private void ReportDuplicates(CompilationAnalysisContext compilationAnalysisContext,
+            Dictionary<string, List<LiteralExpressionSyntax>> stringWithLiterals)
+        {
+            foreach (var item in stringWithLiterals)
+            {
+                if (item.Value.Count > Threshold)
+                {
+                    // Report issues as project-level
+                    compilationAnalysisContext.ReportDiagnosticWhenActive(Diagnostic.Create(rule, null,
+                        additionalLocations: item.Value.Select(x => x.GetLocation()),
+                        messageArgs: new object[] { item.Key, item.Value.Count }));
+                }
+            }
         }
 
         private bool IsMatchingMethodParameterName(LiteralExpressionSyntax literalExpression) =>
