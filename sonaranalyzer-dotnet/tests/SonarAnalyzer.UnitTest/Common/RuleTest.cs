@@ -146,5 +146,27 @@ namespace SonarAnalyzer.UnitTest.Common
                 .ToList()
                 .ForEach(diagnostic => diagnostic.CustomTags.Should().Contain(LanguageNames.VisualBasic));
         }
+
+        [TestMethod]
+        public void AllRules_SonarWayTagPresenceMatchesIsEnabledByDefault()
+        {
+            var analyzers = new RuleFinder()
+                .GetAllAnalyzerTypes()
+                .Select(type => (DiagnosticAnalyzer)Activator.CreateInstance(type))
+                .SelectMany(analyzer => analyzer.SupportedDiagnostics)
+                .ToList();
+
+            foreach (var analyzer in analyzers)
+            {
+                if (analyzer.IsEnabledByDefault)
+                {
+                    analyzer.CustomTags.Should().Contain(DiagnosticTagsHelper.SonarWayTag);
+                }
+                else
+                {
+                    analyzer.CustomTags.Should().NotContain(DiagnosticTagsHelper.SonarWayTag);
+                }
+            }
+        }
     }
 }
