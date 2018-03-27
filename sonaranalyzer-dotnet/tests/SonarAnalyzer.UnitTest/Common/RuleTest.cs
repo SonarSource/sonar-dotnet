@@ -126,17 +126,6 @@ namespace SonarAnalyzer.UnitTest.Common
         }
 
         [TestMethod]
-        public void AllRules_AreActivatedByDefault()
-        {
-            new RuleFinder()
-                .GetAllAnalyzerTypes()
-                .Select(type => (DiagnosticAnalyzer)Activator.CreateInstance(type))
-                .SelectMany(analyzer => analyzer.SupportedDiagnostics)
-                .ToList()
-                .ForEach(diagnostic => diagnostic.IsEnabledByDefault.Should().BeTrue());
-        }
-
-        [TestMethod]
         public void AllCSharpRules_HaveCSharpTag()
         {
             new RuleFinder()
@@ -156,6 +145,28 @@ namespace SonarAnalyzer.UnitTest.Common
                 .SelectMany(analyzer => analyzer.SupportedDiagnostics)
                 .ToList()
                 .ForEach(diagnostic => diagnostic.CustomTags.Should().Contain(LanguageNames.VisualBasic));
+        }
+
+        [TestMethod]
+        public void AllRules_SonarWayTagPresenceMatchesIsEnabledByDefault()
+        {
+            var analyzers = new RuleFinder()
+                .GetAllAnalyzerTypes()
+                .Select(type => (DiagnosticAnalyzer)Activator.CreateInstance(type))
+                .SelectMany(analyzer => analyzer.SupportedDiagnostics)
+                .ToList();
+
+            foreach (var analyzer in analyzers)
+            {
+                if (analyzer.IsEnabledByDefault)
+                {
+                    analyzer.CustomTags.Should().Contain(DiagnosticTagsHelper.SonarWayTag);
+                }
+                else
+                {
+                    analyzer.CustomTags.Should().NotContain(DiagnosticTagsHelper.SonarWayTag);
+                }
+            }
         }
     }
 }
