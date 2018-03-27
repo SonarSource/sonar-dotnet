@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.Result' with 'await'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Cluster.cs",
+"region":  {
+"startLine":  84,
+"startColumn":  28,
+"endLine":  84,
+"endColumn":  54
+}
+}
+}
+]
+}

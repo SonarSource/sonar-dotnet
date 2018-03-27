@@ -1,0 +1,186 @@
+{
+"issues":  [
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.Result' with 'await'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\GracefulStopSupport.cs",
+"region":  {
+"startLine":  66,
+"startColumn":  36,
+"endLine":  66,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.Wait' with 'await'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Inbox.cs",
+"region":  {
+"startLine":  350,
+"startColumn":  17,
+"endLine":  350,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.Result' with 'await'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Inbox.cs",
+"region":  {
+"startLine":  352,
+"startColumn":  32,
+"endLine":  352,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.Result' with 'await'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Inbox.cs",
+"region":  {
+"startLine":  359,
+"startColumn":  24,
+"endLine":  359,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.Wait' with 'await'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Internal\ActorSystemImpl.cs",
+"region":  {
+"startLine":  352,
+"startColumn":  24,
+"endLine":  352,
+"endColumn":  66
+}
+}
+},
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.Result' with 'await'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\PipeToSupport.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  35,
+"endLine":  35,
+"endColumn":  49
+}
+}
+},
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.Result' with 'await'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\PipeToSupport.cs",
+"region":  {
+"startLine":  36,
+"startColumn":  27,
+"endLine":  36,
+"endColumn":  41
+}
+}
+},
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.Wait' with 'await'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Event\LoggingBus.cs",
+"region":  {
+"startLine":  142,
+"startColumn":  18,
+"endLine":  142,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.Result' with 'await'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Event\LoggingBus.cs",
+"region":  {
+"startLine":  149,
+"startColumn":  32,
+"endLine":  149,
+"endColumn":  46
+}
+}
+},
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.Wait' with 'await'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Pattern\CircuitBreaker.cs",
+"region":  {
+"startLine":  153,
+"startColumn":  19,
+"endLine":  153,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.Wait' with 'await'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Pattern\CircuitBreaker.cs",
+"region":  {
+"startLine":  180,
+"startColumn":  20,
+"endLine":  180,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.Result' with 'await'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Pattern\CircuitBreaker.cs",
+"region":  {
+"startLine":  180,
+"startColumn":  49,
+"endLine":  180,
+"endColumn":  62
+}
+}
+},
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.Result' with 'await'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\Internal\TaskExtensions.cs",
+"region":  {
+"startLine":  18,
+"startColumn":  58,
+"endLine":  18,
+"endColumn":  69
+}
+}
+},
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.Result' with 'await'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\Internal\TaskExtensions.cs",
+"region":  {
+"startLine":  32,
+"startColumn":  62,
+"endLine":  32,
+"endColumn":  73
+}
+}
+}
+]
+}

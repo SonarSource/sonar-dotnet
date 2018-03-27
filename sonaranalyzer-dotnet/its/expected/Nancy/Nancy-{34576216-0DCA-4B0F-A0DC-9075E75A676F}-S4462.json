@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.Wait' with 'await'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\DiagnosticsHook.cs",
+"region":  {
+"startLine":  172,
+"startColumn":  17,
+"endLine":  172,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.Result' with 'await'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\DiagnosticsHook.cs",
+"region":  {
+"startLine":  173,
+"startColumn":  32,
+"endLine":  173,
+"endColumn":  43
+}
+}
+},
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.Result' with 'await'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Diagnostics\DiagnosticsHook.cs",
+"region":  {
+"startLine":  294,
+"startColumn":  47,
+"endLine":  294,
+"endColumn":  108
+}
+}
+},
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.Wait' with 'await'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\IO\RequestStream.cs",
+"region":  {
+"startLine":  78,
+"startColumn":  17,
+"endLine":  78,
+"endColumn":  26
+}
+}
+}
+]
+}

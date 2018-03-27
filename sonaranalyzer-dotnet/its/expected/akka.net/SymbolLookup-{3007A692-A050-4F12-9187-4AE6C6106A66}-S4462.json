@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.Wait' with 'await'.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\Stocks\SymbolLookup\Actors\TickerActors.cs",
+"region":  {
+"startLine":  80,
+"startColumn":  17,
+"endLine":  80,
+"endColumn":  30
+}
+}
+},
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.Result' with 'await'.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\Stocks\SymbolLookup\Actors\TickerActors.cs",
+"region":  {
+"startLine":  81,
+"startColumn":  70,
+"endLine":  81,
+"endColumn":  85
+}
+}
+},
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.Wait' with 'await'.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\Stocks\SymbolLookup\Actors\TickerActors.cs",
+"region":  {
+"startLine":  108,
+"startColumn":  17,
+"endLine":  108,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S4462",
+"message":  "Replace this use of 'Task.Result' with 'await'.",
+"location":  {
+"uri":  "sources\akka.net\src\examples\Stocks\SymbolLookup\Actors\TickerActors.cs",
+"region":  {
+"startLine":  109,
+"startColumn":  32,
+"endLine":  109,
+"endColumn":  51
+}
+}
+}
+]
+}

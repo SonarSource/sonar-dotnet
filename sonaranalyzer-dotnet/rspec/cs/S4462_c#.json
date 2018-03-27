@@ -1,0 +1,16 @@
+{
+  "title": "Calls to \"async\" methods should not be blocking",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "20min"
+  },
+  "tags": [
+    "async-await",
+    "deadlock"
+  ],
+  "defaultSeverity": "Blocker",
+  "ruleSpecification": "RSPEC-4462",
+  "sqKey": "S4462"
+}
