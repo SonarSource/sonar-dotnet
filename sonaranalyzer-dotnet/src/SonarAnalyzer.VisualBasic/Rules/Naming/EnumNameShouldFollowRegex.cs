@@ -32,7 +32,8 @@ namespace SonarAnalyzer.Rules.VisualBasic
     public sealed class EnumNameShouldFollowRegex : EnumNameShouldFollowRegexBase<SyntaxKind, EnumStatementSyntax>
     {
         private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager,
+                isEnabledByDefault: false);
 
         protected override DiagnosticDescriptor Rule => rule;
         protected override SyntaxKind EnumStatementSyntaxKind => SyntaxKind.EnumStatement;

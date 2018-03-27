@@ -126,6 +126,36 @@ namespace SonarAnalyzer.UnitTest.Common
         }
 
         [TestMethod]
+        public void AllParameterizedRules_AreDisabledByDefault()
+        {
+            new RuleFinder()
+                .GetAllAnalyzerTypes()
+                .Where(RuleFinder.IsParameterized)
+                .Select(type => (DiagnosticAnalyzer)Activator.CreateInstance(type))
+                .SelectMany(analyzer => analyzer.SupportedDiagnostics)
+                .ToList()
+                .ForEach(diagnostic => diagnostic.IsEnabledByDefault.Should().BeFalse());
+        }
+
+        [TestMethod]
+        public void AllRulesEnabledByDefault_ContainSonarWayCustomTag()
+        {
+            var analyzers = new RuleFinder()
+                .GetAllAnalyzerTypes()
+                .Select(type => (DiagnosticAnalyzer)Activator.CreateInstance(type))
+                .SelectMany(analyzer => analyzer.SupportedDiagnostics)
+                .ToList();
+
+            foreach (var analyzer in analyzers)
+            {
+                if (analyzer.IsEnabledByDefault)
+                {
+                    analyzer.CustomTags.Should().Contain(DiagnosticTagsHelper.SonarWayTag);
+                }
+            }
+        }
+
+        [TestMethod]
         public void AllCSharpRules_HaveCSharpTag()
         {
             new RuleFinder()
@@ -150,21 +180,34 @@ namespace SonarAnalyzer.UnitTest.Common
         [TestMethod]
         public void AllRules_SonarWayTagPresenceMatchesIsEnabledByDefault()
         {
-            var analyzers = new RuleFinder()
+            var allAnalyzers = new RuleFinder()
                 .GetAllAnalyzerTypes()
                 .Select(type => (DiagnosticAnalyzer)Activator.CreateInstance(type))
                 .SelectMany(analyzer => analyzer.SupportedDiagnostics)
                 .ToList();
 
-            foreach (var analyzer in analyzers)
+            var parameterizedAnalyzers = new RuleFinder()
+                .GetAllAnalyzerTypes()
+                .Where(RuleFinder.IsParameterized)
+                .Select(type => (DiagnosticAnalyzer)Activator.CreateInstance(type))
+                .SelectMany(analyzer => analyzer.SupportedDiagnostics)
+                .ToHashSet();
+
+            foreach (var analyzer in allAnalyzers)
             {
-                if (analyzer.IsEnabledByDefault)
+                var isInSonarWay = analyzer.CustomTags.Contains(DiagnosticTagsHelper.SonarWayTag);
+
+                if (parameterizedAnalyzers.Contains(analyzer))
                 {
-                    analyzer.CustomTags.Should().Contain(DiagnosticTagsHelper.SonarWayTag);
+                    analyzer.IsEnabledByDefault.Should().BeFalse();
+                }
+                else if (isInSonarWay)
+                {
+                    analyzer.IsEnabledByDefault.Should().BeTrue();
                 }
                 else
                 {
-                    analyzer.CustomTags.Should().NotContain(DiagnosticTagsHelper.SonarWayTag);
+                    analyzer.IsEnabledByDefault.Should().BeFalse();
                 }
             }
         }

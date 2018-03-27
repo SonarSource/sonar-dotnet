@@ -50,6 +50,29 @@ namespace SonarAnalyzer.UnitTest.Helpers
         }
 
         [TestMethod]
+        public void GetDescriptor_SetsIsEnabledByDefaultToGivenValue()
+        {
+            // Arrange
+            var diagnosticId = "FooBar";
+            var mockedResourceManager = CreateMockedResourceManager(diagnosticId, isActivatedByDefault: true);
+
+            DiagnosticDescriptorBuilder.GetDescriptor(diagnosticId, "", mockedResourceManager, true)
+                .IsEnabledByDefault
+                .Should()
+                .BeTrue();
+
+            DiagnosticDescriptorBuilder.GetDescriptor(diagnosticId, "", mockedResourceManager, false)
+                .IsEnabledByDefault
+                .Should()
+                .BeFalse();
+
+            DiagnosticDescriptorBuilder.GetDescriptor(diagnosticId, "", mockedResourceManager)
+                .IsEnabledByDefault
+                .Should()
+                .BeTrue();
+        }
+
+        [TestMethod]
         public void GetDescriptor_WhenIsActivatedByDefaultAndIdeVisibilityNotHidden_HasOnlySonarWayAndLanguageTags()
         {
             // Arrange

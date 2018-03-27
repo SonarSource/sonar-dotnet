@@ -28,14 +28,14 @@ namespace SonarAnalyzer.Helpers
     public static class DiagnosticDescriptorBuilder
     {
         public static DiagnosticDescriptor GetDescriptor(string diagnosticId, string messageFormat,
-            ResourceManager resourceManager) =>
+            ResourceManager resourceManager, bool? isEnabledByDefault = null) =>
             new DiagnosticDescriptor(
                 diagnosticId,
                 resourceManager.GetString($"{diagnosticId}_Title"),
                 messageFormat,
                 resourceManager.GetString($"{diagnosticId}_Category"),
                 DiagnosticSeverity.Warning, // We want all rules to be warning by default
-                bool.Parse(resourceManager.GetString($"{diagnosticId}_IsActivatedByDefault")),
+                isEnabledByDefault ?? bool.Parse(resourceManager.GetString($"{diagnosticId}_IsActivatedByDefault")),
                 helpLinkUri: GetHelpLink(resourceManager, diagnosticId),
                 description: resourceManager.GetString($"{diagnosticId}_Description"),
                 customTags: BuildCustomTags(diagnosticId, resourceManager).ToArray());

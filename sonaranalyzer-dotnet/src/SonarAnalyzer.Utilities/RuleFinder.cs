@@ -51,9 +51,7 @@ namespace SonarAnalyzer.Utilities
         public IEnumerable<Type> GetParameterlessAnalyzerTypes(AnalyzerLanguage language)
         {
             return diagnosticAnalyzers
-                .Where(analyzerType =>
-                    !analyzerType.GetProperties()
-                        .Any(p => p.GetCustomAttributes<RuleParameterAttribute>().Any()))
+                .Where(analyzerType => !IsParameterized(analyzerType))
                 .Where(type => GetTargetLanguages(type).IsAlso(language));
         }
 

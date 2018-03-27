@@ -39,7 +39,8 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string MessageFormat = "This {0} has {1} lines, which is greater than the {2} lines authorized. Split it into smaller methods.";
 
         private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager,
+                isEnabledByDefault: false);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         private const int DefaultMaxMethodLines = 80;
