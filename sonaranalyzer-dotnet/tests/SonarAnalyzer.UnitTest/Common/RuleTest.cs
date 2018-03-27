@@ -126,17 +126,6 @@ namespace SonarAnalyzer.UnitTest.Common
         }
 
         [TestMethod]
-        public void AllRules_AreActivatedByDefault()
-        {
-            new RuleFinder()
-                .GetAllAnalyzerTypes()
-                .Select(type => (DiagnosticAnalyzer)Activator.CreateInstance(type))
-                .SelectMany(analyzer => analyzer.SupportedDiagnostics)
-                .ToList()
-                .ForEach(diagnostic => diagnostic.IsEnabledByDefault.Should().BeTrue());
-        }
-
-        [TestMethod]
         public void AllCSharpRules_HaveCSharpTag()
         {
             new RuleFinder()

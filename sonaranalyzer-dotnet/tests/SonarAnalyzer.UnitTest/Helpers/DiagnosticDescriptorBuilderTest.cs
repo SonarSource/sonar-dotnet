@@ -50,18 +50,6 @@ namespace SonarAnalyzer.UnitTest.Helpers
         }
 
         [TestMethod]
-        public void GetDescriptor_SetsIsEnabledByDefaultToTrue()
-        {
-            DiagnosticDescriptorBuilder.GetDescriptor("S100", "", csharp.SonarAnalyzer.RspecStrings.ResourceManager)
-                .IsEnabledByDefault
-                .Should().BeTrue();
-
-            DiagnosticDescriptorBuilder.GetDescriptor("S100", "", csharp.SonarAnalyzer.RspecStrings.ResourceManager)
-                .IsEnabledByDefault
-                .Should().BeTrue();
-        }
-
-        [TestMethod]
         public void GetDescriptor_WhenIsActivatedByDefaultAndIdeVisibilityNotHidden_HasOnlySonarWayAndLanguageTags()
         {
             // Arrange

@@ -35,7 +35,7 @@ namespace SonarAnalyzer.Helpers
                 messageFormat,
                 resourceManager.GetString($"{diagnosticId}_Category"),
                 DiagnosticSeverity.Warning, // We want all rules to be warning by default
-                isEnabledByDefault: true,   // We want all rules to be enabled by default
+                bool.Parse(resourceManager.GetString($"{diagnosticId}_IsActivatedByDefault")),
                 helpLinkUri: GetHelpLink(resourceManager, diagnosticId),
                 description: resourceManager.GetString($"{diagnosticId}_Description"),
                 customTags: BuildCustomTags(diagnosticId, resourceManager).ToArray());
