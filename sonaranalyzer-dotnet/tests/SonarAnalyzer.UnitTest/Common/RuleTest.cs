@@ -150,7 +150,7 @@ namespace SonarAnalyzer.UnitTest.Common
             {
                 if (analyzer.IsEnabledByDefault)
                 {
-                    analyzer.CustomTags.Should().Contain(DiagnosticTagsHelper.SonarWayTag);
+                    analyzer.CustomTags.Should().Contain(DiagnosticDescriptorBuilder.SonarWayTag);
                 }
             }
         }
@@ -195,7 +195,7 @@ namespace SonarAnalyzer.UnitTest.Common
 
             foreach (var analyzer in allAnalyzers)
             {
-                var isInSonarWay = analyzer.CustomTags.Contains(DiagnosticTagsHelper.SonarWayTag);
+                var isInSonarWay = analyzer.CustomTags.Contains(DiagnosticDescriptorBuilder.SonarWayTag);
 
                 if (parameterizedAnalyzers.Contains(analyzer))
                 {

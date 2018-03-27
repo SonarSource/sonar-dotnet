@@ -30,10 +30,7 @@ namespace SonarAnalyzer.Rules
         protected const string DiagnosticId = "S9999-cpd";
         protected const string Title = "Copy-paste token calculator";
 
-        private static DiagnosticDescriptor rule =
-            new DiagnosticDescriptor(DiagnosticId, Title, string.Empty, string.Empty, DiagnosticSeverity.Warning,
-                true, customTags: DiagnosticTagsHelper.NotConfigurableTag());
-
+        private static readonly DiagnosticDescriptor rule = DiagnosticDescriptorBuilder.GetUtilityDescriptor(DiagnosticId, Title);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         internal const string CopyPasteTokenFileName = "token-cpd.pb";

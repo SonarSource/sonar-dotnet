@@ -30,10 +30,7 @@ namespace SonarAnalyzer.Rules
         protected const string DiagnosticId = "S9999-encoding";
         protected const string Title = "File encoding calculator";
 
-        private static readonly DiagnosticDescriptor rule =
-            new DiagnosticDescriptor(DiagnosticId, Title, string.Empty, string.Empty, DiagnosticSeverity.Warning,
-                true, customTags: DiagnosticTagsHelper.NotConfigurableTag());
-
+        private static readonly DiagnosticDescriptor rule = DiagnosticDescriptorBuilder.GetUtilityDescriptor(DiagnosticId, Title);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         internal const string EncodingFileName = "encoding.pb";
