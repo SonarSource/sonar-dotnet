@@ -126,6 +126,36 @@ namespace SonarAnalyzer.UnitTest.Common
         }
 
         [TestMethod]
+        public void AllParameterizedRules_AreDisabledByDefault()
+        {
+            new RuleFinder()
+                .GetAllAnalyzerTypes()
+                .Where(RuleFinder.IsParameterized)
+                .Select(type => (DiagnosticAnalyzer)Activator.CreateInstance(type))
+                .SelectMany(analyzer => analyzer.SupportedDiagnostics)
+                .ToList()
+                .ForEach(diagnostic => diagnostic.IsEnabledByDefault.Should().BeFalse());
+        }
+
+        [TestMethod]
+        public void AllRulesEnabledByDefault_ContainSonarWayCustomTag()
+        {
+            var analyzers = new RuleFinder()
+                .GetAllAnalyzerTypes()
+                .Select(type => (DiagnosticAnalyzer)Activator.CreateInstance(type))
+                .SelectMany(analyzer => analyzer.SupportedDiagnostics)
+                .ToList();
+
+            foreach (var analyzer in analyzers)
+            {
+                if (analyzer.IsEnabledByDefault)
+                {
+                    analyzer.CustomTags.Should().Contain(DiagnosticTagsHelper.SonarWayTag);
+                }
+            }
+        }
+
+        [TestMethod]
         public void AllCSharpRules_HaveCSharpTag()
         {
             new RuleFinder()

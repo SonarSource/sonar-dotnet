@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2018 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -32,7 +32,8 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class EnumNameShouldFollowRegex : EnumNameShouldFollowRegexBase<SyntaxKind, EnumDeclarationSyntax>
     {
         private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager,
+                isEnabledByDefault: false);
         protected override DiagnosticDescriptor Rule => rule;
 
         protected override SyntaxKind EnumStatementSyntaxKind => SyntaxKind.EnumDeclaration;
