@@ -31,7 +31,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void EmptyNullableValueAccess()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\EmptyNullableValueAccess.cs", new EmptyNullableValueAccess());
+            Verifier.VerifyAnalyzer(@"TestCases\EmptyNullableValueAccess.cs",
+                new  SymbolicExecutionAnalyzer(new EmptyNullableValueAccess()));
         }
     }
 }

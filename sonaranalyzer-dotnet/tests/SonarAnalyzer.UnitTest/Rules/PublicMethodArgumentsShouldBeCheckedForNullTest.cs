@@ -32,7 +32,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void PublicMethodArgumentsShouldBeCheckedForNull()
         {
             Verifier.VerifyAnalyzer(@"TestCases\PublicMethodArgumentsShouldBeCheckedForNull.cs",
-                new PublicMethodArgumentsShouldBeCheckedForNull());
+                new SymbolicExecutionAnalyzer(new PublicMethodArgumentsShouldBeCheckedForNull()));
         }
     }
 }

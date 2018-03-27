@@ -120,33 +120,46 @@ namespace SonarAnalyzer.UnitTest
             ParseOptions options = null, params MetadataReference[] additionalReferences)
         {
             VerifyAnalyzer(new[] { new DocumentInfo($"file1{CSharpFileExtension}", snippet) },
-                CSharpFileExtension, diagnosticAnalyzer, options, null, additionalReferences);
+                CSharpFileExtension, new[] { diagnosticAnalyzer }, options, null, additionalReferences);
         }
 
         public static void VerifyVisualBasicAnalyzer(string snippet, SonarDiagnosticAnalyzer diagnosticAnalyzer,
             ParseOptions options = null, params MetadataReference[] additionalReferences)
         {
             VerifyAnalyzer(new[] { new DocumentInfo($"file1{VisualBasicFileExtension}", snippet) },
-                VisualBasicFileExtension, diagnosticAnalyzer, options, null, additionalReferences);
+                VisualBasicFileExtension, new[] { diagnosticAnalyzer }, options, null, additionalReferences);
         }
 
         public static void VerifyAnalyzer(string path, SonarDiagnosticAnalyzer diagnosticAnalyzer,
             ParseOptions options = null, params MetadataReference[] additionalReferences)
         {
-            VerifyAnalyzer(new[] { path }, diagnosticAnalyzer, null, options, additionalReferences);
+            VerifyAnalyzer(new[] { path }, new[] { diagnosticAnalyzer }, null, options, additionalReferences);
+        }
+
+        public static void VerifyAnalyzer(string path, IEnumerable<SonarDiagnosticAnalyzer> diagnosticAnalyzers,
+            ParseOptions options = null, params MetadataReference[] additionalReferences)
+        {
+            VerifyAnalyzer(new[] { path }, diagnosticAnalyzers, null, options, additionalReferences);
         }
 
         public static void VerifyUtilityAnalyzer<TMessage>(IEnumerable<string> paths, UtilityAnalyzerBase diagnosticAnalyzer,
             string protobufPath, Action<IList<TMessage>> verifyProtobuf)
             where TMessage : IMessage<TMessage>, new()
         {
-            VerifyAnalyzer(paths, diagnosticAnalyzer, (analyzer, compilation) =>
+            VerifyAnalyzer(paths, new[] { diagnosticAnalyzer }, (analyzer, compilation) =>
             {
                 verifyProtobuf(ReadProtobuf<TMessage>(protobufPath).ToList());
             });
         }
 
         public static void VerifyAnalyzer(IEnumerable<string> paths, SonarDiagnosticAnalyzer diagnosticAnalyzer,
+            Action<DiagnosticAnalyzer, Compilation> additionalVerify = null, ParseOptions options = null,
+            params MetadataReference[] additionalReferences)
+        {
+            VerifyAnalyzer(paths, new[] { diagnosticAnalyzer }, additionalVerify, options, additionalReferences);
+        }
+
+        public static void VerifyAnalyzer(IEnumerable<string> paths, IEnumerable<SonarDiagnosticAnalyzer> diagnosticAnalyzers,
             Action<DiagnosticAnalyzer, Compilation> additionalVerify = null, ParseOptions options = null,
             params MetadataReference[] additionalReferences)
         {
@@ -165,7 +178,7 @@ namespace SonarAnalyzer.UnitTest
 
             var fileContents = files.Select(file => new DocumentInfo(file));
 
-            VerifyAnalyzer(fileContents, fileExtension, diagnosticAnalyzer, options, additionalVerify, additionalReferences);
+            VerifyAnalyzer(fileContents, fileExtension, diagnosticAnalyzers, options, additionalVerify, additionalReferences);
         }
 
         private static IEnumerable<TMessage> ReadProtobuf<TMessage>(string path)
@@ -181,7 +194,7 @@ namespace SonarAnalyzer.UnitTest
             }
         }
 
-        private static void VerifyAnalyzer(IEnumerable<DocumentInfo> documents, string fileExtension, DiagnosticAnalyzer diagnosticAnalyzer,
+        private static void VerifyAnalyzer(IEnumerable<DocumentInfo> documents, string fileExtension, IEnumerable<SonarDiagnosticAnalyzer> diagnosticAnalyzers,
             ParseOptions options = null, Action<DiagnosticAnalyzer, Compilation> additionalVerify = null, params MetadataReference[] additionalReferences)
         {
             try
@@ -206,7 +219,7 @@ namespace SonarAnalyzer.UnitTest
 
                         var compilation = project.GetCompilationAsync().Result;
 
-                        var diagnostics = GetDiagnostics(compilation, diagnosticAnalyzer);
+                        var diagnostics = GetDiagnostics(compilation, diagnosticAnalyzers);
 
                         var expectedIssues = issueLocationCollector
                             .GetExpectedIssueLocations(compilation.SyntaxTrees.Skip(1).First().GetText().Lines)
@@ -238,10 +251,13 @@ namespace SonarAnalyzer.UnitTest
                         // method.
                         if (diagnostics.Any())
                         {
-                            ExtensionMethodsCalledForAllDiagnostics(diagnosticAnalyzer).Should().BeTrue("The ReportDiagnosticWhenActive should be used instead of ReportDiagnostic");
+                            ExtensionMethodsCalledForAllDiagnostics(diagnosticAnalyzers).Should().BeTrue("The ReportDiagnosticWhenActive should be used instead of ReportDiagnostic");
                         }
 
-                        additionalVerify?.Invoke(diagnosticAnalyzer, compilation);
+                        foreach (var diagnosticAnalyzer in diagnosticAnalyzers)
+                        {
+                            additionalVerify?.Invoke(diagnosticAnalyzer, compilation);
+                        }
                     }
                 }
             }
@@ -350,7 +366,7 @@ namespace SonarAnalyzer.UnitTest
 
         #region Generic helper
 
-        private static void VerifyNoIssueReported(string path, string assemblyName, DiagnosticAnalyzer diagnosticAnalyzer,
+        private static void VerifyNoIssueReported(string path, string assemblyName, SonarDiagnosticAnalyzer diagnosticAnalyzer,
             MetadataReference[] additionalReferences, ParseOptions parseOptions = null)
         {
             using (var workspace = new AdhocWorkspace())
@@ -364,13 +380,13 @@ namespace SonarAnalyzer.UnitTest
                     : project;
 
                 var compilation = project.GetCompilationAsync().Result;
-                var diagnostics = GetDiagnostics(compilation, diagnosticAnalyzer);
+                var diagnostics = GetDiagnostics(compilation, new[] { diagnosticAnalyzer });
 
                 diagnostics.Should().BeEmpty();
             }
         }
 
-        private static void VerifyFixAllCodeFix(string path, string pathToExpected, DiagnosticAnalyzer diagnosticAnalyzer,
+        private static void VerifyFixAllCodeFix(string path, string pathToExpected, SonarDiagnosticAnalyzer diagnosticAnalyzer,
             CodeFixProvider codeFixProvider, string codeFixTitle, params MetadataReference[] additionalReferences)
         {
             var fixAllProvider = codeFixProvider.GetFixAllProvider();
@@ -487,11 +503,12 @@ namespace SonarAnalyzer.UnitTest
         }
 
         internal static IEnumerable<Diagnostic> GetDiagnostics(Compilation compilation,
-            DiagnosticAnalyzer diagnosticAnalyzer)
+            IEnumerable<SonarDiagnosticAnalyzer> diagnosticAnalyzers)
         {
-            var ids = new HashSet<string>(diagnosticAnalyzer.SupportedDiagnostics.Select(diagnostic => diagnostic.Id));
+            var ids = new HashSet<string>(diagnosticAnalyzers
+                .SelectMany(d => d.SupportedDiagnostics.Select(diagnostic => diagnostic.Id)));
 
-            var diagnostics = GetAllDiagnostics(compilation, new[] { diagnosticAnalyzer }).ToList();
+            var diagnostics = GetAllDiagnostics(compilation, diagnosticAnalyzers).ToList();
             VerifyNoExceptionThrown(diagnostics);
 
             return diagnostics.Where(d => ids.Contains(d.Id));
@@ -537,7 +554,7 @@ namespace SonarAnalyzer.UnitTest
 
         #region Codefix helper
 
-        private static void RunCodeFixWhileDocumentChanges(DiagnosticAnalyzer diagnosticAnalyzer, CodeFixProvider codeFixProvider,
+        private static void RunCodeFixWhileDocumentChanges(SonarDiagnosticAnalyzer diagnosticAnalyzer, CodeFixProvider codeFixProvider,
             string codeFixTitle, Document document, ParseOptions parseOption, string pathToExpected)
         {
             var currentDocument = document;
@@ -575,7 +592,7 @@ namespace SonarAnalyzer.UnitTest
             actualWithUnixLineEnding.Should().Be(expectedWithUnixLineEnding);
         }
 
-        private static void RunFixAllProvider(DiagnosticAnalyzer diagnosticAnalyzer, CodeFixProvider codeFixProvider,
+        private static void RunFixAllProvider(SonarDiagnosticAnalyzer diagnosticAnalyzer, CodeFixProvider codeFixProvider,
             string codeFixTitle, FixAllProvider fixAllProvider, Document document, ParseOptions parseOption, string pathToExpected)
         {
             var currentDocument = document;
@@ -586,7 +603,7 @@ namespace SonarAnalyzer.UnitTest
             var fixAllDiagnosticProvider = new FixAllDiagnosticProvider(
                 codeFixProvider.FixableDiagnosticIds.ToHashSet(),
                 (doc, ids, ct) => Task.FromResult(
-                    GetDiagnostics(currentDocument.Project.GetCompilationAsync(ct).Result, diagnosticAnalyzer)),
+                    GetDiagnostics(currentDocument.Project.GetCompilationAsync(ct).Result, new[] { diagnosticAnalyzer })),
                 null);
             var fixAllContext = new FixAllContext(currentDocument, codeFixProvider, FixAllScope.Document,
                 codeFixTitle,
@@ -606,7 +623,7 @@ namespace SonarAnalyzer.UnitTest
             actualWithUnixLineEnding.Should().Be(expectedWithUnixLineEnding);
         }
 
-        private static void CalculateDiagnosticsAndCode(DiagnosticAnalyzer diagnosticAnalyzer, Document document, ParseOptions parseOption,
+        private static void CalculateDiagnosticsAndCode(SonarDiagnosticAnalyzer diagnosticAnalyzer, Document document, ParseOptions parseOption,
             out List<Diagnostic> diagnostics,
             out string actualCode)
         {
@@ -616,7 +633,7 @@ namespace SonarAnalyzer.UnitTest
                 project = project.WithParseOptions(parseOption);
             }
 
-            diagnostics = GetDiagnostics(project.GetCompilationAsync().Result, diagnosticAnalyzer).ToList();
+            diagnostics = GetDiagnostics(project.GetCompilationAsync().Result, new[] { diagnosticAnalyzer }).ToList();
             actualCode = document.GetSyntaxRootAsync().Result.GetText().ToString();
         }
 
@@ -682,13 +699,14 @@ namespace SonarAnalyzer.UnitTest
             counters.AddOrUpdate(ruleId, addValueFactory: key => 1, updateValueFactory: (key, count) => count + 1);
         }
 
-        private static bool ExtensionMethodsCalledForAllDiagnostics(DiagnosticAnalyzer analyzer)
+        private static bool ExtensionMethodsCalledForAllDiagnostics(IEnumerable<DiagnosticAnalyzer> analyzers)
         {
             // In general this check is not very precise, because when the tests are run in parallel
             // we cannot determine which diagnostic was reported from which analyzer instance. In other
             // words, we cannot distinguish between diagnostics reported from different tests. That's
             // why we require each diagnostic to be reported through the extension methods at least once.
-            return analyzer.SupportedDiagnostics
+            return analyzers
+                .SelectMany(a => a.SupportedDiagnostics)
                 .Select(d => counters.GetValueOrDefault(d.Id))
                 .Any(count => count > 0);
         }

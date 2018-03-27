@@ -26,7 +26,6 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
-using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.SymbolicExecution;
 using SonarAnalyzer.SymbolicExecution.Constraints;
@@ -34,50 +33,49 @@ using SonarAnalyzer.SymbolicExecution.ControlFlowGraph;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    [Rule(DiagnosticId)]
-    public sealed class ObjectsShouldNotBeDisposedMoreThanOnce : SonarDiagnosticAnalyzer
+    public sealed class ObjectsShouldNotBeDisposedMoreThanOnce : ISymbolicExecutionAnalyzerFactory
     {
         internal const string DiagnosticId = "S3966";
         private const string MessageFormat = "Refactor this code to make sure '{0}' is disposed only once.";
 
         private static readonly ISet<KnownType> typesDisposingUnderlyingStream = new HashSet<KnownType>
-        {
-            KnownType.System_IO_StreamReader,
-            KnownType.System_IO_StreamWriter
-        };
+            {
+                KnownType.System_IO_StreamReader,
+                KnownType.System_IO_StreamWriter
+            };
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+        public ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        protected sealed override void Initialize(SonarAnalysisContext context)
+        ISymbolicExecutionAnalyzer ISymbolicExecutionAnalyzerFactory.Create(CSharpExplodedGraph explodedGraph) =>
+            new SymbolicExecutionAnalyzer(explodedGraph);
+
+        bool ISymbolicExecutionAnalyzerFactory.IsEnabled(SyntaxNodeAnalysisContext context) => true;
+
+        private sealed class SymbolicExecutionAnalyzer : ISymbolicExecutionAnalyzer
         {
-            context.RegisterExplodedGraphBasedAnalysis(CheckForMultipleDispose);
-        }
+            private readonly List<Diagnostic> diagnostics = new List<Diagnostic>();
 
-        private static void CheckForMultipleDispose(CSharpExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context)
-        {
-            var objectDisposedCheck = new ObjectDisposedPointerCheck(explodedGraph);
-            explodedGraph.AddExplodedGraphCheck(objectDisposedCheck);
+            private readonly ObjectDisposedPointerCheck check;
 
-            EventHandler<ObjectDisposedEventArgs> memberAccessedHandler =
-                (sender, args) =>
-                {
-                    context.ReportDiagnosticWhenActive(
-                        Diagnostic.Create(rule, args.Location, args.Name));
-                };
-
-            objectDisposedCheck.ObjectDisposed += memberAccessedHandler;
-
-            try
+            public SymbolicExecutionAnalyzer(CSharpExplodedGraph explodedGraph)
             {
-                explodedGraph.Walk();
+                check = explodedGraph.GetOrAddCheck(() => new ObjectDisposedPointerCheck(explodedGraph));
+                check.ObjectDisposed += ObjectDisposedHandler;
             }
-            finally
+
+            public void Dispose()
             {
-                objectDisposedCheck.ObjectDisposed -= memberAccessedHandler;
+                check.ObjectDisposed -= ObjectDisposedHandler;
+            }
+
+            public IEnumerable<Diagnostic> Diagnostics => diagnostics;
+
+            private void ObjectDisposedHandler(object sender, ObjectDisposedEventArgs args)
+            {
+                diagnostics.Add(Diagnostic.Create(rule, args.Location, args.Name));
             }
         }
 

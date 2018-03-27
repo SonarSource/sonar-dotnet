@@ -277,5 +277,9 @@ namespace SonarAnalyzer.Helpers
 
         public static bool IsStatic(this ISymbol symbol) =>
             symbol != null && symbol.IsStatic;
+
+        internal static bool IsExtensionMethod(this SyntaxNode expression, SemanticModel semanticModel) =>
+            semanticModel.GetSymbolInfo(expression).Symbol is IMethodSymbol memberSymbol &&
+                memberSymbol.IsExtensionMethod;
     }
 }

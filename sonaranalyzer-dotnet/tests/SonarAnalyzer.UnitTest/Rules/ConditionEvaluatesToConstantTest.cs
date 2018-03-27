@@ -32,7 +32,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void ConditionEvaluatesToConstant()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\ConditionEvaluatesToConstant.cs", new ConditionEvaluatesToConstant(),
+            Verifier.VerifyAnalyzer(@"TestCases\ConditionEvaluatesToConstant.cs",
+                new SymbolicExecutionAnalyzer(new ConditionEvaluatesToConstant()),
                 new CSharpParseOptions(LanguageVersion.CSharp6));
         }
     }

@@ -32,7 +32,7 @@ namespace SonarAnalyzer.SymbolicExecution
 {
     internal abstract class AbstractExplodedGraph
     {
-        internal const int MaxStepCount = 1000;
+        internal const int MaxStepCount = 2000;
         internal const int MaxInternalStateCount = 10000;
         private const int MaxProgramPointExecutionCount = 2;
 
@@ -146,19 +146,16 @@ namespace SonarAnalyzer.SymbolicExecution
             OnExplorationEnded();
         }
 
-        internal void AddExplodedGraphCheck<T>(T check)
+        public T GetOrAddCheck<T>(Func<T> factory)
             where T : ExplodedGraphCheck
         {
             var matchingCheck = explodedGraphChecks.OfType<T>().SingleOrDefault();
             if (matchingCheck == null)
             {
-                explodedGraphChecks.Add(check);
+                matchingCheck = factory();
+                explodedGraphChecks.Add(matchingCheck);
             }
-            else
-            {
-                explodedGraphChecks.Remove(matchingCheck);
-                explodedGraphChecks.Add(check);
-            }
+            return matchingCheck;
         }
 
         #region OnEvent*

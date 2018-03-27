@@ -21,6 +21,7 @@
 extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
+using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -31,7 +32,12 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void InvalidCastToInterface()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\InvalidCastToInterface.cs", new InvalidCastToInterface());
+            Verifier.VerifyAnalyzer(@"TestCases\InvalidCastToInterface.cs",
+                new SonarDiagnosticAnalyzer[]
+                {
+                    new InvalidCastToInterface(),
+                    new SymbolicExecutionAnalyzer(new InvalidCastToInterface()),
+                });
         }
     }
 }
