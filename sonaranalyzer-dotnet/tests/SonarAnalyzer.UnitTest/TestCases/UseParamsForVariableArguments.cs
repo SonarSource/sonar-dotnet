@@ -1,8 +1,25 @@
-using System;
+﻿using System;
+using System.Runtime.InteropServices;
 
 namespace Tests.Diagnostics
 {
-    public class Program
+    public interface IFoo
+    {
+        void Foo(__arglist); // Noncompliant
+    }
+
+    public class BaseClass : IFoo
+    {
+        public void Foo(__arglist) // Compliant - interface implementation
+        {
+        }
+
+        public virtual void Do(__arglist) // Noncompliant
+        {
+        }
+    }
+
+    public class Program : BaseClass
     {
         public Program() { }
 
@@ -37,7 +54,19 @@ namespace Tests.Diagnostics
             }
         }
 
-        private class Foo
+        public override void Do(__arglist) // Compliant - override
+        {
+        }
+
+        [DllImport("msvcrt40.dll")]
+        public static extern int printf(string format, __arglist); // Compliant - interop
+
+        public void Bar4()
+        {
+            printf("Hello %s!\n", __arglist("Bart"));
+        }
+
+        private class FooBar
         {
             public void Bar4(__arglist) // Compliant - private method
             {

@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2018 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -46,22 +46,27 @@ namespace SonarAnalyzer.Rules.CSharp
                 c =>
                 {
                     var methodDeclaration = (MethodDeclarationSyntax)c.Node;
-                    var methodSymbol = c.SemanticModel.GetDeclaredSymbol(methodDeclaration);
 
-                    if (!methodDeclaration.Identifier.IsMissing &&
-                        methodSymbol != null &&
+                    if (methodDeclaration.Identifier.IsMissing ||
+                        methodDeclaration.Modifiers.Any(modifier => modifier.IsKind(SyntaxKind.ExternKeyword)) ||
+                        !HasAnyArgListParameter(methodDeclaration))
+                    {
+                        return;
+                    }
+
+                    var methodSymbol = c.SemanticModel.GetDeclaredSymbol(methodDeclaration);
+                    if (methodSymbol != null &&
                         methodSymbol.IsPubliclyAccessible() &&
-                        HasAnyArgListParameter(methodDeclaration))
+                        methodSymbol.GetInterfaceMember() == null &&
+                        methodSymbol.OverriddenMethod == null)
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, methodDeclaration.Identifier.GetLocation()));
                     }
-                }, SyntaxKind.MethodDeclaration);
+                },
+                SyntaxKind.MethodDeclaration);
         }
 
-        private static bool HasAnyArgListParameter(MethodDeclarationSyntax methodDeclaration)
-        {
-            return methodDeclaration.ParameterList.Parameters
-                .Any(p => p.Identifier.IsKind(SyntaxKind.ArgListKeyword));
-        }
+        private static bool HasAnyArgListParameter(MethodDeclarationSyntax methodDeclaration) =>
+            methodDeclaration.ParameterList.Parameters.Any(p => p.Identifier.IsKind(SyntaxKind.ArgListKeyword));
     }
 }

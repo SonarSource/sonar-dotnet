@@ -41,4 +41,10 @@ namespace MyLibrary
     }
 }
 </pre>
+<h2>Exceptions</h2>
+<p>Interop methods using <code>VarArgs</code> calling convention do not raise an issue.</p>
+<pre>
+[DllImport("msvcrt40.dll")]
+public static extern int printf(string format, __arglist); // Compliant
+</pre>
 

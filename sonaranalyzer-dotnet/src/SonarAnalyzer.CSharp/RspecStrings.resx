@@ -8362,7 +8362,7 @@
     <value>A method using the VarArgs calling convention is not Common Language Specification (CLS) compliant and might not be accessible across programming languages, while the params keyword works the same way and is CLS compliant.</value>
   </data>
   <data name="S4061_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S4061_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
