@@ -5,18 +5,22 @@
 <pre>
 void DoSomething(int someParameter)
 {
-  if (someParameter &lt; 0) {
-    throw new ArgumentException("Bad argument", "someParameter");  // Noncompliant
-  }
+    if (someParameter &lt; 0)
+    {
+        throw new ArgumentException("Bad argument", "someParameter");  // Noncompliant
+    }
 }
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
 void DoSomething(int someParameter)
 {
-  if (someParameter &lt; 0) {
-    throw new ArgumentException("Bad argument", nameof(someParameter));
-  }
+    if (someParameter &lt; 0)
+    {
+        throw new ArgumentException("Bad argument", nameof(someParameter));
+    }
 }
 </pre>
+<h2>Exceptions</h2>
+<p>The rule doesn't raise any issue when using C# &lt; 6.0.</p>
 

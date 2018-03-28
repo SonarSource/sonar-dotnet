@@ -1,10 +1,10 @@
 {
-  "title": "User-provided values should be sanitized before use in SQL statements",
+  "title": "SQL queries should not be vulnerable to injection attacks",
   "type": "VULNERABILITY",
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",
-    "constantCost": "20min"
+    "constantCost": "30min"
   },
   "tags": [
     "cwe",
@@ -20,5 +20,6 @@
   ],
   "defaultSeverity": "Blocker",
   "ruleSpecification": "RSPEC-3649",
-  "sqKey": "S3649"
+  "sqKey": "S3649",
+  "scope": "Main"
 }

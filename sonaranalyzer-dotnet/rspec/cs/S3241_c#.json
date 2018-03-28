@@ -12,5 +12,6 @@
   ],
   "defaultSeverity": "Minor",
   "ruleSpecification": "RSPEC-3241",
-  "sqKey": "S3241"
+  "sqKey": "S3241",
+  "scope": "All"
 }

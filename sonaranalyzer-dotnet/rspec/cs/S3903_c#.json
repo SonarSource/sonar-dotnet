@@ -11,5 +11,6 @@
   ],
   "defaultSeverity": "Major",
   "ruleSpecification": "RSPEC-3903",
-  "sqKey": "S3903"
+  "sqKey": "S3903",
+  "scope": "All"
 }

@@ -11,5 +11,6 @@
   ],
   "defaultSeverity": "Critical",
   "ruleSpecification": "RSPEC-1645",
-  "sqKey": "PlusForConcatenation"
+  "sqKey": "S1645",
+  "scope": "Main"
 }

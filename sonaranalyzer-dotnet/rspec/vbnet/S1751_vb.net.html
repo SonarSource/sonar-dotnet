@@ -1,45 +1,37 @@
-<p>Having an unconditional <code>break</code>, <code>return</code>, <code>(@)throw</code> or <code>goto</code> in a loop renders it useless; the loop
-will only execute once and the loop structure itself is simply wasted keystrokes.</p>
-<p>Having an unconditional <code>continue</code> in a loop can render the loop meaningless, or is itself wasted keystrokes, depending on where in the
-loop it occurs.</p>
-<p>Having an unconditional <code>return</code> anywhere other than at the end of a function or method simply renders all the rest of the code in the
-method useless.</p>
-<p>For these reasons, unconditional jump statements should never be used except for the final <code>return</code> in a function or method.</p>
+<p>A loop with at most one iteration is equivalent to the use of an <code>if</code> statement to conditionally execute one piece of code. No developer
+expects to find such a use of a loop statement. If the initial intention of the author was really to conditionally execute one piece of code, an
+<code>if</code> statement should be used instead.</p>
+<p> </p>
+<p>At worst that was not the initial intention of the author and so the body of the loop should be fixed to use the nested <code>return</code>,
+<code>break</code> or <code>throw</code> statements in a more appropriate way.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-Dim length As Integer
-
-For i As Integer = 0 To length - 1
+For i As Integer = 0 To 10   'noncompliant, loop only executes once
+  foo(i)
+  Exit For
+Next
+...
+For i As Integer = 0 To 10   'noncompliant, loop only executes once
+  If i = Something
+    Exit For
+  Else
     foo(i)
-    Exit For ' loop only executes once
+    Return
+  End If
 Next
-
-For i As Integer = 0 To length - 1
-    Continue For
-    foo(i) ' this is never executed
-Next
-
-For i As Integer = 0 To length - 1
-    foo(i)
-    Continue For ' this is meaningless; the loop would continue anyway
-Next
-
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-Dim length As Integer
-
-For i As Integer = 0 To length - 1
+For i As Integer = 0 To 10
+  foo(i)
+Next
+...
+For i As Integer = 0 To 10
+  If i = Something
+    Exit For
+  Else
     foo(i)
+  End If
 Next
 </pre>
-<h2>See</h2>
-<ul>
-  <li> MISRA C:2004, 14.1 - There shall be no unreachable code. </li>
-  <li> MISRA C++:2008, 0-1-1 - A <em>project</em> shall not contain <em>unreachable code</em>. </li>
-  <li> MISRA C++:2008, 0-1-9 - There shall be no dead code. </li>
-  <li> MISRA C:2012, 2.2 - There shall be no dead code </li>
-  <li> <a href="https://www.securecoding.cert.org/confluence/x/NYA5">CERT, MSC12-C.</a> - Detect and remove code that has no effect or is never
-  executed </li>
-</ul>
 
