@@ -3643,7 +3643,7 @@
     <value>CODE_SMELL</value>
   </data>
   <data name="S2486_Category" xml:space="preserve">
-    <value>Minor Code Smell</value>
+    <value>Minor Vulnerability</value>
   </data>
   <data name="S2486_Description" xml:space="preserve">
     <value>When exceptions occur, it is usually a bad idea to simply ignore them. Instead, it is better to handle them properly, or at least to log them.</value>
@@ -3667,7 +3667,7 @@
     <value>Generic exceptions should not be ignored</value>
   </data>
   <data name="S2486_Type" xml:space="preserve">
-    <value>CODE_SMELL</value>
+    <value>VULNERABILITY</value>
   </data>
   <data name="S2551_Category" xml:space="preserve">
     <value>Critical Bug</value>
