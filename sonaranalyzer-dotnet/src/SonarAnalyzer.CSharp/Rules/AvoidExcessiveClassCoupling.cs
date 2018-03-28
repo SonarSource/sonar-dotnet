@@ -75,8 +75,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     var classDeclaration = (ClassDeclarationSyntax)c.Node;
 
-                    if (c.IsTest() ||
-                        classDeclaration.Identifier.IsMissing)
+                    if (classDeclaration.Identifier.IsMissing)
                     {
                         return;
                     }
@@ -104,7 +103,8 @@ namespace SonarAnalyzer.Rules.CSharp
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, classDeclaration.Identifier.GetLocation(),
                             classCouplingCount, Threshold));
                     }
-                }, SyntaxKind.ClassDeclaration);
+                },
+                SyntaxKind.ClassDeclaration);
         }
 
         private static IEnumerable<ITypeSymbol> CollectCoupledClasses(FieldDeclarationSyntax field,

@@ -62,11 +62,6 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
-                    if (!c.IsTest())
-                    {
-                        return;
-                    }
-
                     var classDeclaration = (ClassDeclarationSyntax)c.Node;
                     if (classDeclaration.Identifier.IsMissing)
                     {
@@ -81,7 +76,8 @@ namespace SonarAnalyzer.Rules.CSharp
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, classDeclaration.Identifier.GetLocation()));
                     }
-                }, SyntaxKind.ClassDeclaration);
+                },
+                SyntaxKind.ClassDeclaration);
         }
 
         private static bool IsTestClass(INamedTypeSymbol classSymbol) =>

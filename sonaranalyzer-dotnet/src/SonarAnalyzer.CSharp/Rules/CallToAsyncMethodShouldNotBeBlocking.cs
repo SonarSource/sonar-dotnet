@@ -76,11 +76,6 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
-                    if (c.IsTest())
-                    {
-                        return;
-                    }
-
                     var simpleMemberAccess = (MemberAccessExpressionSyntax)c.Node;
                     var memberAccessNameName = simpleMemberAccess.Name?.Identifier.ValueText;
 

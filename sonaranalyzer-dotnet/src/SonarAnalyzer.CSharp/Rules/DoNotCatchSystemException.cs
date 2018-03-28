@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2018 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -46,8 +46,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 var catchClause = (CatchClauseSyntax)c.Node;
 
-                if (!c.IsTest() &&
-                    IsSystemException(catchClause.Declaration, c.SemanticModel) &&
+                if (IsSystemException(catchClause.Declaration, c.SemanticModel) &&
                     catchClause?.Filter?.FilterExpression == null &&
                     !IsThrowTheLastStatementInTheBlock(catchClause?.Block))
                 {

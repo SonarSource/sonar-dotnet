@@ -42,13 +42,9 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(c =>
+            context.RegisterSyntaxNodeActionInNonGenerated(
+                c =>
                 {
-                    if (c.IsTest())
-                    {
-                        return;
-                    }
-
                     var creationSyntax = (ObjectCreationExpressionSyntax)c.Node;
 
                     var createdType = c.SemanticModel.GetTypeInfo(creationSyntax).Type;

@@ -57,11 +57,6 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
-                    if (!c.IsTest())
-                    {
-                        return;
-                    }
-
                     var methodCall = (InvocationExpressionSyntax)c.Node;
                     if (!methodCall.Expression.IsKind(SyntaxKind.SimpleMemberAccessExpression) ||
                         methodCall.ArgumentList.Arguments.Count < 2)

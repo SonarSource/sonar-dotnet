@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2018 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -62,26 +62,22 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(c =>
-            {
-                if (c.IsTest())
+            context.RegisterSyntaxNodeActionInNonGenerated(
+                c =>
                 {
-                    return;
-                }
+                    var propertyDeclaration = (PropertyDeclarationSyntax)c.Node;
+                    var propertySymbol = c.SemanticModel.GetDeclaredSymbol(propertyDeclaration);
 
-                var propertyDeclaration = (PropertyDeclarationSyntax)c.Node;
-                var propertySymbol = c.SemanticModel.GetDeclaredSymbol(propertyDeclaration);
-
-                if (propertyDeclaration.AccessorList != null &&
-                    propertySymbol != null &&
-                    HasPublicSetter(propertySymbol) &&
-                    IsObservedCollectionType(propertySymbol))
-                {
-                    c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, propertyDeclaration.Identifier.GetLocation(),
-                        propertySymbol.Name));
-                }
-            },
-            SyntaxKind.PropertyDeclaration);
+                    if (propertyDeclaration.AccessorList != null &&
+                        propertySymbol != null &&
+                        HasPublicSetter(propertySymbol) &&
+                        IsObservedCollectionType(propertySymbol))
+                    {
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, propertyDeclaration.Identifier.GetLocation(),
+                            propertySymbol.Name));
+                    }
+                },
+                SyntaxKind.PropertyDeclaration);
         }
 
         private static bool IsObservedCollectionType(IPropertySymbol propertySymbol)

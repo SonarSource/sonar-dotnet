@@ -47,11 +47,6 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
-                    if (c.IsTest())
-                    {
-                        return;
-                    }
-
                     var objectCreation = (ObjectCreationExpressionSyntax)c.Node;
 
                     var objectCreationSymbol = c.SemanticModel.GetSymbolInfo(objectCreation).Symbol as IMethodSymbol;

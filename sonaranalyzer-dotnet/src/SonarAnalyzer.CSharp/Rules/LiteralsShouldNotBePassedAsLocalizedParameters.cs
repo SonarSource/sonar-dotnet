@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2018 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -52,54 +52,55 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(c =>
-            {
-                var invocationSyntax = (InvocationExpressionSyntax)c.Node;
-                var methodSymbol = c.SemanticModel.GetSymbolInfo(invocationSyntax).Symbol as IMethodSymbol;
-                if (c.IsTest() ||
-                    methodSymbol == null ||
-                    invocationSyntax.ArgumentList == null)
+            context.RegisterSyntaxNodeActionInNonGenerated(
+                c =>
                 {
-                    return;
-                }
-
-                if (methodSymbol.IsConsoleWrite() || methodSymbol.IsConsoleWriteLine())
-                {
-                    var firstArgument = invocationSyntax.ArgumentList.Arguments.FirstOrDefault();
-                    if (IsStringLiteral(firstArgument?.Expression, c.SemanticModel))
+                    var invocationSyntax = (InvocationExpressionSyntax)c.Node;
+                    var methodSymbol = c.SemanticModel.GetSymbolInfo(invocationSyntax).Symbol as IMethodSymbol;
+                    if (methodSymbol == null ||
+                        invocationSyntax.ArgumentList == null)
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, firstArgument.GetLocation()));
+                        return;
                     }
-                }
-                else
-                {
-                    methodSymbol.Parameters
-                        .Merge(invocationSyntax.ArgumentList.Arguments, (parameter, syntax) => new { parameter, syntax })
-                        .Where(x => x.parameter != null && x.syntax != null)
-                        .Where(x => IsLocalizable(x.parameter))
-                        .Where(x => IsStringLiteral(x.syntax.Expression, c.SemanticModel))
-                        .ToList()
-                        .ForEach(x =>
+
+                    if (methodSymbol.IsConsoleWrite() || methodSymbol.IsConsoleWriteLine())
+                    {
+                        var firstArgument = invocationSyntax.ArgumentList.Arguments.FirstOrDefault();
+                        if (IsStringLiteral(firstArgument?.Expression, c.SemanticModel))
                         {
-                            c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, x.syntax.GetLocation()));
-                        });
-                }
-            },
-            SyntaxKind.InvocationExpression);
+                            c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, firstArgument.GetLocation()));
+                        }
+                    }
+                    else
+                    {
+                        methodSymbol.Parameters
+                            .Merge(invocationSyntax.ArgumentList.Arguments, (parameter, syntax) => new { parameter, syntax })
+                            .Where(x => x.parameter != null && x.syntax != null)
+                            .Where(x => IsLocalizable(x.parameter))
+                            .Where(x => IsStringLiteral(x.syntax.Expression, c.SemanticModel))
+                            .ToList()
+                            .ForEach(x =>
+                            {
+                                c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, x.syntax.GetLocation()));
+                            });
+                    }
+                },
+                SyntaxKind.InvocationExpression);
 
-            context.RegisterSyntaxNodeActionInNonGenerated(c =>
-            {
-                var assignmentSyntax = (AssignmentExpressionSyntax)c.Node;
-                var propertySymbol = c.SemanticModel.GetSymbolInfo(assignmentSyntax.Left).Symbol as IPropertySymbol;
-
-                if (!c.IsTest() &&
-                    IsLocalizable(propertySymbol) &&
-                    IsStringLiteral(assignmentSyntax.Right, c.SemanticModel))
+            context.RegisterSyntaxNodeActionInNonGenerated(
+                c =>
                 {
-                    c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, assignmentSyntax.GetLocation()));
-                }
-            },
-            SyntaxKind.SimpleAssignmentExpression);
+                    var assignmentSyntax = (AssignmentExpressionSyntax)c.Node;
+                    var propertySymbol = c.SemanticModel.GetSymbolInfo(assignmentSyntax.Left).Symbol as IPropertySymbol;
+
+                    if (!c.IsTest() &&
+                        IsLocalizable(propertySymbol) &&
+                        IsStringLiteral(assignmentSyntax.Right, c.SemanticModel))
+                    {
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, assignmentSyntax.GetLocation()));
+                    }
+                },
+                SyntaxKind.SimpleAssignmentExpression);
         }
 
         private static bool IsStringLiteral(ExpressionSyntax expression, SemanticModel semanticModel)

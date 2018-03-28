@@ -73,7 +73,8 @@ namespace SonarAnalyzer.Helpers
             }
 
             // ... but for compatibility purposes we need to keep handling the old-fashioned way
-            if (!VbcHelper.IsTriggeringVbcError(reportingContext.Diagnostic) &&
+            if (SonarAnalysisContext.AreAnalysisScopeMatching(reportingContext.Compilation, new[] { reportingContext.Diagnostic.Descriptor }) &&
+                !VbcHelper.IsTriggeringVbcError(reportingContext.Diagnostic) &&
                 (SonarAnalysisContext.ShouldDiagnosticBeReported?.Invoke(reportingContext.SyntaxTree, reportingContext.Diagnostic) ?? true))
             {
                 reportingContext.ReportDiagnostic(reportingContext.Diagnostic);

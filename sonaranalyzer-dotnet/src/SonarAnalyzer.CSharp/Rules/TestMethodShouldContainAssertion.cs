@@ -74,8 +74,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     var methodDeclaration = (MethodDeclarationSyntax)c.Node;
                     if (methodDeclaration.Identifier.IsMissing ||
-                        methodDeclaration.Body == null ||
-                        !c.IsTest())
+                        methodDeclaration.Body == null)
                     {
                         return;
                     }
@@ -97,7 +96,8 @@ namespace SonarAnalyzer.Rules.CSharp
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, methodDeclaration.Identifier.GetLocation()));
                     }
-                }, SyntaxKind.MethodDeclaration);
+                },
+                SyntaxKind.MethodDeclaration);
         }
 
         private static bool IsTestMethod(IEnumerable<AttributeData> attributes) =>

@@ -45,40 +45,36 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(c =>
-            {
-                if (c.IsTest())
+            context.RegisterSyntaxNodeActionInNonGenerated(
+                c =>
                 {
-                    return;
-                }
+                    var classDeclaration = (ClassDeclarationSyntax)c.Node;
+                    var typeSymbol = c.SemanticModel.GetDeclaredSymbol(classDeclaration);
 
-                var classDeclaration = (ClassDeclarationSyntax)c.Node;
-                var typeSymbol = c.SemanticModel.GetDeclaredSymbol(classDeclaration);
+                    if (!ImplementsISerializable(typeSymbol))
+                    {
+                        return;
+                    }
 
-                if (!ImplementsISerializable(typeSymbol))
-                {
-                    return;
-                }
+                    var getObjectData = typeSymbol.GetMembers()
+                        .OfType<IMethodSymbol>()
+                        .FirstOrDefault(KnownMethods.IsGetObjectData);
 
-                var getObjectData = typeSymbol.GetMembers()
-                    .OfType<IMethodSymbol>()
-                    .FirstOrDefault(KnownMethods.IsGetObjectData);
+                    var implementationErrors = new List<SecondaryLocation>();
 
-                var implementationErrors = new List<SecondaryLocation>();
+                    implementationErrors.AddRange(CheckSerializableAttribute(classDeclaration, typeSymbol));
+                    implementationErrors.AddRange(CheckConstructor(classDeclaration, typeSymbol));
+                    implementationErrors.AddRange(CheckGetObjectDataAccessibility(typeSymbol, getObjectData));
+                    implementationErrors.AddRange(CheckGetObjectData(typeSymbol, getObjectData, classDeclaration));
 
-                implementationErrors.AddRange(CheckSerializableAttribute(classDeclaration, typeSymbol));
-                implementationErrors.AddRange(CheckConstructor(classDeclaration, typeSymbol));
-                implementationErrors.AddRange(CheckGetObjectDataAccessibility(typeSymbol, getObjectData));
-                implementationErrors.AddRange(CheckGetObjectData(typeSymbol, getObjectData, classDeclaration));
-
-                if (implementationErrors.Count > 0)
-                {
-                    c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, classDeclaration.Identifier.GetLocation(),
-                        additionalLocations: implementationErrors.ToAdditionalLocations(),
-                        properties: implementationErrors.ToProperties()));
-                }
-            },
-            SyntaxKind.ClassDeclaration);
+                    if (implementationErrors.Count > 0)
+                    {
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, classDeclaration.Identifier.GetLocation(),
+                            additionalLocations: implementationErrors.ToAdditionalLocations(),
+                            properties: implementationErrors.ToProperties()));
+                    }
+                },
+                SyntaxKind.ClassDeclaration);
         }
 
         private static IEnumerable<SecondaryLocation> CheckSerializableAttribute(

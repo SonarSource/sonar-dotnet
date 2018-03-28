@@ -31,6 +31,7 @@ namespace SonarAnalyzer.Helpers
         public ReportingContext(SyntaxNodeAnalysisContext context, Diagnostic diagnostic)
         {
             SyntaxTree = context.GetSyntaxTree();
+            Compilation = context.Compilation;
             Diagnostic = diagnostic;
             contextSpecificReport = context.ReportDiagnostic;
         }
@@ -38,6 +39,7 @@ namespace SonarAnalyzer.Helpers
         public ReportingContext(SyntaxTreeAnalysisContext context, Diagnostic diagnostic)
         {
             SyntaxTree = context.GetSyntaxTree();
+            Compilation = null;
             Diagnostic = diagnostic;
             contextSpecificReport = context.ReportDiagnostic;
         }
@@ -45,6 +47,7 @@ namespace SonarAnalyzer.Helpers
         public ReportingContext(CompilationAnalysisContext context, Diagnostic diagnostic)
         {
             SyntaxTree = context.GetSyntaxTree();
+            Compilation = context.Compilation;
             Diagnostic = diagnostic;
             contextSpecificReport = context.ReportDiagnostic;
         }
@@ -52,6 +55,7 @@ namespace SonarAnalyzer.Helpers
         public ReportingContext(SymbolAnalysisContext context, Diagnostic diagnostic)
         {
             SyntaxTree = context.GetSyntaxTree();
+            Compilation = context.Compilation;
             Diagnostic = diagnostic;
             contextSpecificReport = context.ReportDiagnostic;
         }
@@ -59,6 +63,7 @@ namespace SonarAnalyzer.Helpers
         public ReportingContext(CodeBlockAnalysisContext context, Diagnostic diagnostic)
         {
             SyntaxTree = context.GetSyntaxTree();
+            Compilation = context.SemanticModel.Compilation;
             Diagnostic = diagnostic;
             contextSpecificReport = context.ReportDiagnostic;
         }
@@ -66,6 +71,8 @@ namespace SonarAnalyzer.Helpers
         public SyntaxTree SyntaxTree { get; }
 
         public Diagnostic Diagnostic { get; }
+
+        public Compilation Compilation { get; }
 
         public void ReportDiagnostic(Diagnostic diagnostic) => contextSpecificReport(diagnostic);
     }

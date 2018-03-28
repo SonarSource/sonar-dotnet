@@ -19,6 +19,7 @@
  */
 
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Resources;
 using Microsoft.CodeAnalysis;
@@ -28,6 +29,8 @@ namespace SonarAnalyzer.Helpers
     public static class DiagnosticDescriptorBuilder
     {
         internal const string SonarWayTag = "SonarWay";
+        internal const string MainSourceScopeTag = "MainSourceScope";
+        internal const string TestSourceScopeTag = "TestSourceScope";
 
         public static DiagnosticDescriptor GetUtilityDescriptor(string diagnosticId, string title) =>
             new DiagnosticDescriptor(
@@ -60,6 +63,25 @@ namespace SonarAnalyzer.Helpers
             if (bool.Parse(resourceManager.GetString($"{diagnosticId}_IsActivatedByDefault")))
             {
                 yield return SonarWayTag;
+            }
+
+            var scope = resourceManager.GetString($"{diagnosticId}_Scope");
+            if (scope == "Main")
+            {
+                yield return MainSourceScopeTag;
+            }
+            else if (scope == "Tests")
+            {
+                yield return TestSourceScopeTag;
+            }
+            else if (scope == "All")
+            {
+                yield return MainSourceScopeTag;
+                yield return TestSourceScopeTag;
+            }
+            else
+            {
+                // Do nothing
             }
 
             yield return resourceManager.GetString("RoslynLanguage");

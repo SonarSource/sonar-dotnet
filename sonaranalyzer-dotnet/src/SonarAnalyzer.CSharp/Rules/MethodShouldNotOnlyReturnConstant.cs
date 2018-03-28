@@ -44,11 +44,6 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
-                    if (c.IsTest())
-                    {
-                        return;
-                    }
-
                     var methodDeclaration = (MethodDeclarationSyntax)c.Node;
 
                     if (methodDeclaration.ParameterList?.Parameters.Count > 0)

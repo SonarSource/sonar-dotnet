@@ -50,7 +50,6 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     if (!HasStatements(catchClause) &&
                         !HasComments(catchClause) &&
-                        !c.IsTest() &&
                         IsGenericCatch(catchClause, c.SemanticModel))
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, c.Node.GetLocation()));
