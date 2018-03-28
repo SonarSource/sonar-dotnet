@@ -27,6 +27,18 @@ namespace SonarAnalyzer.Helpers
 {
     public static class DiagnosticDescriptorBuilder
     {
+        internal const string SonarWayTag = "SonarWay";
+
+        public static DiagnosticDescriptor GetUtilityDescriptor(string diagnosticId, string title) =>
+            new DiagnosticDescriptor(
+                diagnosticId,
+                title,
+                string.Empty,
+                string.Empty,
+                DiagnosticSeverity.Warning,
+                isEnabledByDefault: true,
+                customTags: BuildUtilityCustomTags().ToArray());
+
         public static DiagnosticDescriptor GetDescriptor(string diagnosticId, string messageFormat,
             ResourceManager resourceManager, bool? isEnabledByDefault = null) =>
             new DiagnosticDescriptor(
@@ -47,10 +59,22 @@ namespace SonarAnalyzer.Helpers
         {
             if (bool.Parse(resourceManager.GetString($"{diagnosticId}_IsActivatedByDefault")))
             {
-                yield return DiagnosticTagsHelper.SonarWayTag;
+                yield return SonarWayTag;
             }
 
             yield return resourceManager.GetString("RoslynLanguage");
+        }
+
+        private static IEnumerable<string> BuildUtilityCustomTags()
+        {
+            // Allow to configure the analyzers in debug mode only.
+            // This allows to run test selectively (for example to test only one rule)
+#if DEBUG
+            yield break;
+#else
+            yield return Microsoft.CodeAnalysis.WellKnownDiagnosticTags.NotConfigurable;
+#endif
+
         }
     }
 }

@@ -83,7 +83,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
             var result = DiagnosticDescriptorBuilder.GetDescriptor(diagnosticId, "", mockedResourceManager);
 
             // Assert
-            result.CustomTags.Should().OnlyContain(DiagnosticTagsHelper.SonarWayTag, LanguageValue);
+            result.CustomTags.Should().OnlyContain(DiagnosticDescriptorBuilder.SonarWayTag, LanguageValue);
         }
 
         [TestMethod]
