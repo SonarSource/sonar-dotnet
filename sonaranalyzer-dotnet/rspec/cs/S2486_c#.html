@@ -5,7 +5,7 @@
 string text = "";
 try
 {
-  text = File.ReadAllText(fileName);
+    text = File.ReadAllText(fileName);
 }
 catch (Exception exc) // Noncompliant
 {
@@ -16,11 +16,11 @@ catch (Exception exc) // Noncompliant
 string text = "";
 try
 {
-  text = File.ReadAllText(fileName);
+    text = File.ReadAllText(fileName);
 }
 catch (Exception exc)
 {
-  logger.Log(exc);
+    logger.Log(exc);
 }
 </pre>
 <h2>Exceptions</h2>

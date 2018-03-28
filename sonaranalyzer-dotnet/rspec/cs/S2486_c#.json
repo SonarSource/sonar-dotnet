@@ -1,6 +1,6 @@
 {
   "title": "Generic exceptions should not be ignored",
-  "type": "CODE_SMELL",
+  "type": "VULNERABILITY",
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",
@@ -13,7 +13,8 @@
     "suspicious"
   ],
   "standards": [
-    "CWE"
+    "CWE",
+    "OWASP Top Ten"
   ],
   "defaultSeverity": "Minor",
   "ruleSpecification": "RSPEC-2486",
