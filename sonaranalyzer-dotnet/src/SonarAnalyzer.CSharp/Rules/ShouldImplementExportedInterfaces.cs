@@ -117,7 +117,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 return null;
             }
 
-            return semanticModel.GetSymbolInfo(exportedTypeSyntax).Symbol as ITypeSymbol;
+            var typeSymbol = semanticModel.GetSymbolInfo(exportedTypeSyntax).Symbol as INamedTypeSymbol;
+            return typeSymbol?.ConstructedFrom;
         }
 
         private static ExpressionSyntax GetTypeFromNamedArgument(IEnumerable<AttributeArgumentSyntax> arguments) =>
