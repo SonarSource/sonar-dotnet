@@ -91,7 +91,7 @@ namespace SonarAnalyzer.Helpers
         {
             return new[]
             {
-#if DEBUG
+#if !DEBUG
                 // Allow to configure the analyzers in debug mode only.
                 // This allows to run test selectively (for example to test only one rule)
                 WellKnownDiagnosticTags.NotConfigurable,
