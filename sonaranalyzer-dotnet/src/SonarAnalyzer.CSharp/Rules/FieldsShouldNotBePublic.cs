@@ -55,11 +55,6 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
-                    if (c.IsTest())
-                    {
-                        return;
-                    }
-
                     var fieldDeclaration = (FieldDeclarationSyntax)c.Node;
                     if (fieldDeclaration.Modifiers.Any(m => ValidModifiers.Contains(m.Kind())))
                     {
@@ -73,7 +68,8 @@ namespace SonarAnalyzer.Rules.CSharp
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, firstVariable.GetLocation()));
                     }
-                }, SyntaxKind.FieldDeclaration);
+                },
+                SyntaxKind.FieldDeclaration);
         }
     }
 }

@@ -87,21 +87,15 @@ namespace SonarAnalyzer.Helpers
             this.context = context;
         }
 
-        internal void RegisterCodeBlockAction(Action<CodeBlockAnalysisContext> action) =>
-            RegisterContextAction(context.RegisterCodeBlockAction, action, c => c.GetSyntaxTree());
-
         internal void RegisterCodeBlockStartAction<TLanguageKindEnum>(Action<CodeBlockStartAnalysisContext<TLanguageKindEnum>> action)
              where TLanguageKindEnum : struct =>
-            RegisterContextAction(context.RegisterCodeBlockStartAction, action, c => c.GetSyntaxTree());
+            RegisterContextAction(context.RegisterCodeBlockStartAction, action, c => c.GetSyntaxTree(), c => c.SemanticModel.Compilation);
 
         internal void RegisterCompilationAction(Action<CompilationAnalysisContext> action) =>
-            RegisterContextAction(context.RegisterCompilationAction, action, c => c.GetSyntaxTree());
+            RegisterContextAction(context.RegisterCompilationAction, action, c => c.GetSyntaxTree(), c => c.Compilation);
 
         public void RegisterCompilationStartAction(Action<CompilationStartAnalysisContext> action) =>
-            RegisterContextAction(context.RegisterCompilationStartAction, action, c => c.GetSyntaxTree());
-
-        internal void RegisterSemanticModelAction(Action<SemanticModelAnalysisContext> action) =>
-            RegisterContextAction(context.RegisterSemanticModelAction, action, c => c.GetSyntaxTree());
+            RegisterContextAction(context.RegisterCompilationStartAction, action, c => c.GetSyntaxTree(), c => c.Compilation);
 
         internal void RegisterSyntaxNodeAction<TLanguageKindEnum>(Action<SyntaxNodeAnalysisContext> action,
             ImmutableArray<TLanguageKindEnum> syntaxKinds)
@@ -111,19 +105,13 @@ namespace SonarAnalyzer.Helpers
         internal void RegisterSyntaxNodeAction<TLanguageKindEnum>(Action<SyntaxNodeAnalysisContext> action,
             params TLanguageKindEnum[] syntaxKinds)
             where TLanguageKindEnum : struct =>
-            RegisterContextAction(act => context.RegisterSyntaxNodeAction(act, syntaxKinds), action, c => c.GetSyntaxTree());
-
-        internal void RegisterSyntaxTreeAction(Action<SyntaxTreeAnalysisContext> action) =>
-            RegisterContextAction(context.RegisterSyntaxTreeAction, action, c => c.GetSyntaxTree());
-
-        internal void RegisterSymbolAction(Action<SymbolAnalysisContext> action, ImmutableArray<SymbolKind> symbolKinds) =>
-            RegisterSymbolAction(action, symbolKinds.ToArray());
+            RegisterContextAction(act => context.RegisterSyntaxNodeAction(act, syntaxKinds), action, c => c.GetSyntaxTree(), c => c.Compilation);
 
         public void RegisterSymbolAction(Action<SymbolAnalysisContext> action, params SymbolKind[] symbolKinds) =>
-            RegisterContextAction(act => context.RegisterSymbolAction(act, symbolKinds), action, c => c.GetSyntaxTree());
+            RegisterContextAction(act => context.RegisterSymbolAction(act, symbolKinds), action, c => c.GetSyntaxTree(), c => c.Compilation);
 
         private void RegisterContextAction<TContext>(Action<Action<TContext>> registrationAction, Action<TContext> registeredAction,
-            Func<TContext, SyntaxTree> getSyntaxTree)
+            Func<TContext, SyntaxTree> getSyntaxTree, Func<TContext, Compilation> getCompilation)
         {
             /*
              * For performance reasons, we don't want to register callbacks for rules that should not be run. However, we don't
@@ -143,12 +131,27 @@ namespace SonarAnalyzer.Helpers
                 registrationAction(
                     c =>
                     {
-                        if (IsRegisteredActionEnabled(this.supportedDiagnostics, getSyntaxTree(c)))
+                        if (AreAnalysisScopeMatching(getCompilation(c), this.supportedDiagnostics) &&
+                            IsRegisteredActionEnabled(this.supportedDiagnostics, getSyntaxTree(c)))
                         {
                             registeredAction(c);
                         }
                     });
             }
+        }
+
+        internal static bool AreAnalysisScopeMatching(Compilation compilation, IEnumerable<DiagnosticDescriptor> diagnostics)
+        {
+            if (compilation == null)
+            {
+                return true; // We don't know whether this is a Main or Test source so let's run the rule
+            }
+
+            var matchingScopeTag = compilation.IsTest()
+                ? DiagnosticDescriptorBuilder.TestSourceScopeTag
+                : DiagnosticDescriptorBuilder.MainSourceScopeTag;
+
+            return diagnostics.Any(d => d.CustomTags.Contains(matchingScopeTag));
         }
 
         internal static bool IsRegisteredActionEnabled(IEnumerable<DiagnosticDescriptor> diagnostics, SyntaxTree tree) =>

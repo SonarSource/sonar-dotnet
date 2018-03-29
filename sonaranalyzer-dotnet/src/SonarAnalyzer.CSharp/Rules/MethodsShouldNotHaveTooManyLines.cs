@@ -50,17 +50,13 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(ParameterLoadingAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(c =>
+            context.RegisterSyntaxNodeActionInNonGenerated(
+                c =>
                 {
                     if (Max < 2)
                     {
                         throw new ArgumentOutOfRangeException(
                             $"Invalid rule parameter: maximum number of lines = {Max}. Must be at least 2.");
-                    }
-
-                    if (c.IsTest())
-                    {
-                        return;
                     }
 
                     var baseMethodSyntax = (BaseMethodDeclarationSyntax)c.Node;

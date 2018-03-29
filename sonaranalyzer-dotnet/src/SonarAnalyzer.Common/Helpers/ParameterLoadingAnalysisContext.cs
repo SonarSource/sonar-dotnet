@@ -21,7 +21,6 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 
 namespace SonarAnalyzer.Helpers
@@ -40,11 +39,6 @@ namespace SonarAnalyzer.Helpers
             this.context = context;
         }
 
-        internal void RegisterCodeBlockAction(Action<CodeBlockAnalysisContext> action)
-        {
-            context.RegisterCodeBlockAction(action);
-        }
-
         internal void RegisterCompilationAction(Action<CompilationAnalysisContext> action)
         {
             context.RegisterCompilationAction(action);
@@ -56,16 +50,6 @@ namespace SonarAnalyzer.Helpers
             compilationStartActions.Add(action);
         }
 
-        internal void RegisterSemanticModelAction(Action<SemanticModelAnalysisContext> action)
-        {
-            context.RegisterSemanticModelAction(action);
-        }
-
-        internal void RegisterSymbolAction(Action<SymbolAnalysisContext> action, ImmutableArray<SymbolKind> symbolKinds)
-        {
-            context.RegisterSymbolAction(action, symbolKinds);
-        }
-
         internal void RegisterSyntaxNodeAction<TLanguageKindEnum>(Action<SyntaxNodeAnalysisContext> action, ImmutableArray<TLanguageKindEnum> syntaxKinds) where TLanguageKindEnum : struct
         {
             context.RegisterSyntaxNodeAction(action, syntaxKinds);
@@ -74,11 +58,6 @@ namespace SonarAnalyzer.Helpers
         internal void RegisterCodeBlockStartAction<TLanguageKindEnum>(Action<CodeBlockStartAnalysisContext<TLanguageKindEnum>> action) where TLanguageKindEnum : struct
         {
             context.RegisterCodeBlockStartAction(action);
-        }
-
-        internal void RegisterSyntaxTreeAction(Action<SyntaxTreeAnalysisContext> action)
-        {
-            context.RegisterSyntaxTreeAction(action);
         }
     }
 }

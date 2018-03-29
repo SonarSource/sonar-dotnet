@@ -52,11 +52,6 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
-                    if (!c.IsTest())
-                    {
-                        return;
-                    }
-
                     var methodDeclaration = (MethodDeclarationSyntax)c.Node;
                     var methodSymbol = c.SemanticModel.GetDeclaredSymbol(methodDeclaration);
                     if (methodSymbol == null)
@@ -77,7 +72,8 @@ namespace SonarAnalyzer.Rules.CSharp
                             .GetLocation();
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, attributeLocation));
                     }
-                }, SyntaxKind.MethodDeclaration);
+                },
+                SyntaxKind.MethodDeclaration);
         }
     }
 }

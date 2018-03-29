@@ -8,9 +8,13 @@
   },
   "tags": [
     "serialization",
-    "security"
+    "owasp-a8"
+  ],
+  "standards": [
+    "OWASP Top Ten"
   ],
   "defaultSeverity": "Critical",
   "ruleSpecification": "RSPEC-4212",
-  "sqKey": "S4212"
+  "sqKey": "S4212",
+  "scope": "Main"
 }

@@ -6,19 +6,26 @@ debugging time.</p>
 <p>-1, 0 and 1 are not considered magic numbers.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
-public static void doSomething() {
-  for(int i = 0; i &lt; 4; i++){  //Non-Compliant, 4 is a magic number
-    ...
-  }
+public static void DoSomething()
+{
+    for(int i = 0; i &lt; 4; i++)  // Noncompliant, 4 is a magic number
+    {
+        ...
+    }
 }
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-public const int NUMBER_OF_CYCLES = 4;
-public static void doSomething() {
-  for(int i = 0; i &lt; NUMBER_OF_CYCLES ; i++){   //Compliant
-    ...
-  }
+private const int NUMBER_OF_CYCLES = 4;
+
+public static void DoSomething()
+{
+    for(int i = 0; i &lt; NUMBER_OF_CYCLES ; i++)  //Compliant
+    {
+        ...
+    }
 }
 </pre>
+<h2>Exceptions</h2>
+<p>This rule doesn't raise an issue when the magic number is used as part of the <code>GetHashCode</code> method or a variable/field declaration.</p>
 

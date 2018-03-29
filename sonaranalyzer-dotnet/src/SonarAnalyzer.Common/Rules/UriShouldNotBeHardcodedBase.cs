@@ -86,11 +86,6 @@ namespace SonarAnalyzer.Rules
             context.RegisterSyntaxNodeActionInNonGenerated(GeneratedCodeRecognizer,
                 c =>
                 {
-                    if (c.IsTest())
-                    {
-                        return;
-                    }
-
                     var stringLiteral = (TLiteralExpressionSyntax)c.Node;
                     if (IsInCheckedContext(stringLiteral, c.SemanticModel) &&
                         UriRegex.IsMatch(GetLiteralText(stringLiteral)))
@@ -103,11 +98,6 @@ namespace SonarAnalyzer.Rules
             context.RegisterSyntaxNodeActionInNonGenerated(GeneratedCodeRecognizer,
                 c =>
                 {
-                    if (c.IsTest())
-                    {
-                        return;
-                    }
-
                     var addExpression = (TBinaryExpressionSyntax)c.Node;
                     if (!IsInCheckedContext(addExpression, c.SemanticModel))
                     {

@@ -55,36 +55,32 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(c =>
-            {
-                if (!c.IsTest())
+            context.RegisterSyntaxNodeActionInNonGenerated(
+                c =>
                 {
-                    return;
-                }
+                    var attribute = (AttributeSyntax)c.Node;
+                    if (HasReasonPhrase(attribute) ||
+                        HasTrailingComment(attribute) ||
+                        !IsMsTestIgnoreAttribute(attribute, c.SemanticModel))
+                    {
+                        return;
+                    }
 
-                var attribute = (AttributeSyntax)c.Node;
-                if (HasReasonPhrase(attribute) ||
-                    HasTrailingComment(attribute) ||
-                    !IsMsTestIgnoreAttribute(attribute, c.SemanticModel))
-                {
-                    return;
-                }
+                    var attributeTarget = attribute.Parent?.Parent;
+                    if (attributeTarget == null)
+                    {
+                        return;
+                    }
 
-                var attributeTarget = attribute.Parent?.Parent;
-                if (attributeTarget == null)
-                {
-                    return;
-                }
+                    var attributes = GetAllAttributes(attributeTarget, c.SemanticModel);
 
-                var attributes = GetAllAttributes(attributeTarget, c.SemanticModel);
-
-                if (attributes.Any(IsTestOrTestClassAttribute) &&
-                    !attributes.Any(IsWorkItemAttribute))
-                {
-                    c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, attribute.GetLocation()));
-                }
-            },
-            SyntaxKind.Attribute);
+                    if (attributes.Any(IsTestOrTestClassAttribute) &&
+                        !attributes.Any(IsWorkItemAttribute))
+                    {
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, attribute.GetLocation()));
+                    }
+                },
+                SyntaxKind.Attribute);
         }
 
         private IEnumerable<AttributeData> GetAllAttributes(SyntaxNode syntaxNode, SemanticModel semanticModel)

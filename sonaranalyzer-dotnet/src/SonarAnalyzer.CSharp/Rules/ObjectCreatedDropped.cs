@@ -45,11 +45,6 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
-                    if (c.IsTest())
-                    {
-                        return;
-                    }
-
                     var objectCreation = (ObjectCreationExpressionSyntax)c.Node;
                     if (objectCreation.Parent is ExpressionStatementSyntax parent)
                     {

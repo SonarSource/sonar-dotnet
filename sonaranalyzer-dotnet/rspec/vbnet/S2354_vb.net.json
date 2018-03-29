@@ -11,5 +11,6 @@
   ],
   "defaultSeverity": "Minor",
   "ruleSpecification": "RSPEC-2354",
-  "sqKey": "LineContinuationUsage"
+  "sqKey": "LineContinuationUsage",
+  "scope": "Main"
 }

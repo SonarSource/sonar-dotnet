@@ -11,5 +11,6 @@
   ],
   "defaultSeverity": "Blocker",
   "ruleSpecification": "RSPEC-3875",
-  "sqKey": "S3875"
+  "sqKey": "S3875",
+  "scope": "All"
 }

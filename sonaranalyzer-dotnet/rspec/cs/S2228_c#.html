@@ -10,7 +10,12 @@ private void DoSomething()
 }
 </pre>
 <h2>Exceptions</h2>
-<p>Console Applications are excluded from this check</p>
+<p>The following are ignored by this rule:</p>
+<ul>
+  <li> Console Applications </li>
+  <li> Calls in methods decorated with <code>[Conditional ("DEBUG")]</code> </li>
+  <li> Calls included in DEBUG preprocessor branches (<code>#if DEBUG</code>) </li>
+</ul>
 <h2>See</h2>
 <ul>
   <li> OWASP Top 10 2017 Category A3 - Sensitive Data Exposure </li>

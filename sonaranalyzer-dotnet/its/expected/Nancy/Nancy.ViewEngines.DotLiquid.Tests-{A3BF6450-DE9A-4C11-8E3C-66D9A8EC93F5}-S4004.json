@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4004",
+"message":  "Make the 'Items' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.DotLiquid.Tests\DotLiquidViewEngineFixture.cs",
+"region":  {
+"startLine":  408,
+"startColumn":  31,
+"endLine":  408,
+"endColumn":  36
+}
+}
+}
+]
+}

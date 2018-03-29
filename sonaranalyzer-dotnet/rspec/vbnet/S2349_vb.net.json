@@ -11,5 +11,6 @@
   ],
   "defaultSeverity": "Minor",
   "ruleSpecification": "RSPEC-2349",
-  "sqKey": "EventNameHasBeforeOrAfterSuffixOrPrefix"
+  "sqKey": "EventNameHasBeforeOrAfterSuffixOrPrefix",
+  "scope": "Main"
 }

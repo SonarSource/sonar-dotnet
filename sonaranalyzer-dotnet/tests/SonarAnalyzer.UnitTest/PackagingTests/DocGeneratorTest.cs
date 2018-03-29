@@ -43,7 +43,7 @@ namespace SonarAnalyzer.UnitTest.PackagingTests
             var crossReferenceCount = GetNumberOfCrossReferences(AnalyzerLanguage.CSharp);
             crossReferenceCount.Should().Be(7);
             crossReferenceCount = GetNumberOfCrossReferences(AnalyzerLanguage.VisualBasic);
-            crossReferenceCount.Should().Be(1);
+            crossReferenceCount.Should().Be(2);
         }
 
         [TestMethod]

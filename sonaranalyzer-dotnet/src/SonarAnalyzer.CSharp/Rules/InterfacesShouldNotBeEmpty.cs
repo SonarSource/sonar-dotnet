@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2018 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -41,25 +41,21 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(c =>
-            {
-                if (c.IsTest())
+            context.RegisterSyntaxNodeActionInNonGenerated(
+                c =>
                 {
-                    return;
-                }
+                    var interfaceDeclaration = (InterfaceDeclarationSyntax)c.Node;
+                    var interfaceSymbol = c.SemanticModel.GetDeclaredSymbol(interfaceDeclaration);
 
-                var interfaceDeclaration = c.Node as InterfaceDeclarationSyntax;
-                var interfaceSymbol = c.SemanticModel.GetDeclaredSymbol(interfaceDeclaration);
-
-                if (interfaceSymbol != null &&
-                    interfaceSymbol.DeclaredAccessibility == Accessibility.Public &&
-                    !interfaceDeclaration.Identifier.IsMissing &&
-                    interfaceDeclaration.Members.Count == 0)
-                {
-                    c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, interfaceDeclaration.Identifier.GetLocation()));
-                }
-            },
-            SyntaxKind.InterfaceDeclaration);
+                    if (interfaceSymbol != null &&
+                        interfaceSymbol.DeclaredAccessibility == Accessibility.Public &&
+                        !interfaceDeclaration.Identifier.IsMissing &&
+                        interfaceDeclaration.Members.Count == 0)
+                    {
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, interfaceDeclaration.Identifier.GetLocation()));
+                    }
+                },
+                SyntaxKind.InterfaceDeclaration);
         }
     }
 }

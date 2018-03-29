@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S4004",
+"message":  "Make the 'Products' property read-only by removing the property setter or making it private.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing.Tests\BrowserFixture.cs",
+"region":  {
+"startLine":  589,
+"startColumn":  41,
+"endLine":  589,
+"endColumn":  49
+}
+}
+}
+]
+}

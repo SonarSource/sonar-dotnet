@@ -46,8 +46,7 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
-                    if (c.IsTest() ||
-                        c.SemanticModel.Compilation.Options.OutputKind != OutputKind.DynamicallyLinkedLibrary)
+                    if (c.SemanticModel.Compilation.Options.OutputKind != OutputKind.DynamicallyLinkedLibrary)
                     {
                         //this rule only makes sense in libraries
                         return;

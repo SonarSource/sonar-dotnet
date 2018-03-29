@@ -36,7 +36,7 @@ $ErrorActionPreference = "Stop"
 $RuleTemplateFolder = "${PSScriptRoot}\\rspec-templates"
 
 # Update the following variable when a new version of rule-api has to be used.
-$rule_api_version = "1.17.0.1017"
+$rule_api_version = "1.18.0.1055"
 $rule_api_error = "Download Rule-api from " + `
     "'https://repox.sonarsource.com/sonarsource-private-releases/com/sonarsource/rule-api/rule-api/${rule_api_version}' " +`
     "to a folder and set the %rule_api_path% environment variable with the full path of that folder. For example 'c:\\work\\tools'."
@@ -196,6 +196,7 @@ function CreateStringResources($lang, $rules) {
         [void]$resources.Add("${rule}_IsActivatedByDefault=$(${sonarWayRules}.ruleKeys -Contains ${rule})")
         [void]$resources.Add("${rule}_Severity=${severity}") # TODO see how can we implement lowering the severity for certain rules
         [void]$resources.Add("${rule}_Tags=" + (${json}.tags -Join ","))
+        [void]$resources.Add("${rule}_Scope=$(${json}.scope)")
 
         if (${json}.remediation.func) {
             [void]$resources.Add("${rule}_Remediation=$($remediationsMap.Get_Item(${json}.remediation.func))")
