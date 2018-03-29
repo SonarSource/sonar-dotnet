@@ -102,6 +102,7 @@ namespace SonarAnalyzer.Rules.CSharp
             return !IsInsideSwitch(jumpBlock) &&
                    !IsReturnWithExpression(jumpBlock) &&
                    !IsThrow(jumpBlock) &&
+                   !IsYieldReturn(jumpBlock) &&
                    !IsOnlyYieldBreak(jumpBlock, yieldStatementCount) &&
                    jumpBlock.SuccessorBlock == jumpBlock.WouldBeSuccessor;
         }
@@ -112,10 +113,18 @@ namespace SonarAnalyzer.Rules.CSharp
             return jumpBlock.JumpNode.AncestorsAndSelf().OfType<SwitchStatementSyntax>().Any();
         }
 
+        private static bool IsYieldReturn(JumpBlock jumpBlock)
+        {
+            // yield return cannot be redundant
+            return jumpBlock.JumpNode is YieldStatementSyntax yieldStatement &&
+                yieldStatement.IsKind(SyntaxKind.YieldReturnStatement);
+        }
+
         private static bool IsOnlyYieldBreak(JumpBlock jumpBlock, int yieldStatementCount)
         {
-            var yieldStatement = jumpBlock.JumpNode as YieldStatementSyntax;
-            return yieldStatement != null && yieldStatementCount == 1;
+            return jumpBlock.JumpNode is YieldStatementSyntax yieldStatement &&
+                yieldStatement.IsKind(SyntaxKind.YieldBreakStatement) &&
+                yieldStatementCount == 1;
         }
 
         private static bool IsThrow(JumpBlock jumpBlock)

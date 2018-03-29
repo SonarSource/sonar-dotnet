@@ -88,6 +88,11 @@ namespace Tests.Diagnostics
             yield break; // Compliant
         }
 
+        IEnumerable<int> YieldReturn(int j)
+        {
+            yield return 1;
+        }
+
         IEnumerable<int> YieldBreak2(int j)
         {
             yield return 1;

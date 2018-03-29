@@ -144,9 +144,7 @@ namespace SonarAnalyzer.SymbolicExecution.ControlFlowGraph
                     return BuildThrowStatement((ThrowStatementSyntax)statement, currentBlock);
 
                 case SyntaxKind.YieldReturnStatement:
-                    // A JumpBlock could be used, just to mark that something special is happening here.
-                    // But for the time being we wouldn't do anything with that information.
-                    return BuildExpression(((YieldStatementSyntax)statement).Expression, currentBlock);
+                    return BuildYieldReturnStatement((YieldStatementSyntax)statement, currentBlock);
 
                 case SyntaxKind.EmptyStatement:
                     return currentBlock;
@@ -682,6 +680,11 @@ namespace SonarAnalyzer.SymbolicExecution.ControlFlowGraph
         private Block BuildYieldBreakStatement(YieldStatementSyntax yieldBreakStatement, Block currentBlock)
         {
             return BuildJumpToExitStatement(yieldBreakStatement, currentBlock);
+        }
+
+        private Block BuildYieldReturnStatement(YieldStatementSyntax yieldReturnStatement, Block currentBlock)
+        {
+            return BuildExpression(yieldReturnStatement.Expression, CreateJumpBlock(yieldReturnStatement, currentBlock, currentBlock));
         }
 
         private Block BuildJumpToExitStatement(StatementSyntax statement, Block currentBlock, ExpressionSyntax expression = null)

@@ -91,6 +91,12 @@ namespace SonarAnalyzer.SymbolicExecution
                 return;
             }
 
+            if (block is JumpBlock jumpBlock &&
+                jumpBlock.JumpNode.IsKind(SyntaxKind.YieldReturnStatement))
+            {
+                newProgramState = newProgramState.RemoveSymbols(IsFieldSymbol);
+            }
+
             base.VisitSimpleBlock(block, node);
         }
 

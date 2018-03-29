@@ -2164,8 +2164,11 @@ namespace NS
             var cfg = Build(@"yield return 5;");
             VerifyMinimalCfg(cfg);
 
-            cfg.EntryBlock.Should().BeOfType<SimpleBlock>();
-            VerifyAllInstructions(cfg.EntryBlock, "5");
+            cfg.EntryBlock.Should().BeOfType<JumpBlock>();
+
+            var jumpBlock = (JumpBlock)cfg.EntryBlock;
+            jumpBlock.JumpNode.Kind().Should().Be(SyntaxKind.YieldReturnStatement);
+            VerifyAllInstructions(jumpBlock, "5");
         }
 
         #endregion
