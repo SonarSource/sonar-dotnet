@@ -19,8 +19,6 @@
  */
 
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
 using System.Resources;
 using Microsoft.CodeAnalysis;
 
@@ -40,7 +38,7 @@ namespace SonarAnalyzer.Helpers
                 string.Empty,
                 DiagnosticSeverity.Warning,
                 isEnabledByDefault: true,
-                customTags: BuildUtilityCustomTags().ToArray());
+                customTags: BuildUtilityCustomTags());
 
         public static DiagnosticDescriptor GetDescriptor(string diagnosticId, string messageFormat,
             ResourceManager resourceManager, bool? isEnabledByDefault = null) =>
@@ -53,50 +51,54 @@ namespace SonarAnalyzer.Helpers
                 isEnabledByDefault ?? bool.Parse(resourceManager.GetString($"{diagnosticId}_IsActivatedByDefault")),
                 helpLinkUri: GetHelpLink(resourceManager, diagnosticId),
                 description: resourceManager.GetString($"{diagnosticId}_Description"),
-                customTags: BuildCustomTags(diagnosticId, resourceManager).ToArray());
+                customTags: BuildCustomTags(diagnosticId, resourceManager));
 
         public static string GetHelpLink(ResourceManager resourceManager, string diagnosticId) =>
             string.Format(resourceManager.GetString("HelpLinkFormat"), diagnosticId.Substring(1));
 
-        private static IEnumerable<string> BuildCustomTags(string diagnosticId, ResourceManager resourceManager)
+        private static string[] BuildCustomTags(string diagnosticId, ResourceManager resourceManager)
         {
+            var tags = new List<string> { resourceManager.GetString("RoslynLanguage") };
+
             if (bool.Parse(resourceManager.GetString($"{diagnosticId}_IsActivatedByDefault")))
             {
-                yield return SonarWayTag;
+                tags.Add(SonarWayTag);
             }
 
             var scope = resourceManager.GetString($"{diagnosticId}_Scope");
             if (scope == "Main")
             {
-                yield return MainSourceScopeTag;
+                tags.Add(MainSourceScopeTag);
             }
             else if (scope == "Tests")
             {
-                yield return TestSourceScopeTag;
+                tags.Add(TestSourceScopeTag);
             }
             else if (scope == "All")
             {
-                yield return MainSourceScopeTag;
-                yield return TestSourceScopeTag;
+                tags.Add(MainSourceScopeTag);
+                tags.Add(TestSourceScopeTag);
             }
             else
             {
                 // Do nothing
             }
 
-            yield return resourceManager.GetString("RoslynLanguage");
+            return tags.ToArray();
         }
 
-        private static IEnumerable<string> BuildUtilityCustomTags()
+        private static string[] BuildUtilityCustomTags()
         {
-            // Allow to configure the analyzers in debug mode only.
-            // This allows to run test selectively (for example to test only one rule)
+            return new[]
+            {
 #if DEBUG
-            yield break;
-#else
-            yield return Microsoft.CodeAnalysis.WellKnownDiagnosticTags.NotConfigurable;
+                // Allow to configure the analyzers in debug mode only.
+                // This allows to run test selectively (for example to test only one rule)
+                WellKnownDiagnosticTags.NotConfigurable,
 #endif
-
+                MainSourceScopeTag,
+                TestSourceScopeTag
+            };
         }
     }
 }
