@@ -124,14 +124,14 @@ namespace SonarAnalyzer.Helpers
                 symbol is IEventSymbol;
         }
 
-        public static IEnumerable<INamedTypeSymbol> GetSelfAndBaseTypes(this INamedTypeSymbol type)
+        public static IEnumerable<INamedTypeSymbol> GetSelfAndBaseTypes(this ITypeSymbol type)
         {
             if (type == null)
             {
                 yield break;
             }
 
-            var baseType = type;
+            var baseType = type as INamedTypeSymbol;
             while (baseType != null &&
                 !(baseType is IErrorTypeSymbol))
             {
