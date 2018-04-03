@@ -91,4 +91,30 @@ namespace Classes
         [Export(typeof(Exported))]
         public NotExported MyMethod() { }
     }
+
+    interface ISomething<T> { }
+    public class BaseThing { }
+    public class BaseThing2 { }
+
+    [Export(typeof(ISomething<BaseThing>))]
+    public class BaseSomethingImplementation : ISomething<BaseThing>
+    {
+
+    }
+
+    [Export(typeof(ISomething<BaseThing>))] // Noncompliant
+    public class Something<BaseThing>
+    {
+    }
+
+    [Export(typeof(ISomething<BaseThing>))] // Noncompliant
+    public class SomethingImplementation : ISomething<BaseThing2>
+    {
+
+    }
+
+    [Export(typeof(ISomething<>))] // Noncompliant
+    public class Something<T> : ISomething<T>
+    {
+    }
 }

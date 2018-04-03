@@ -69,14 +69,14 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     if (exportedType != null &&
                         attributeTargetType != null &&
-                        !attributeTargetType.DerivesOrImplements(exportedType))
+                        !IsOfExportType(attributeTargetType, exportedType))
                     {
                         var action = exportedType.IsInterface()
                             ? ActionForInterface
                             : ActionForClass;
 
-                        c.ReportDiagnosticWhenActive(
-                            Diagnostic.Create(rule, attributeSyntax.GetLocation(), action, exportedType.Name, attributeTargetType.Name));
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, attributeSyntax.GetLocation(), action,
+                            exportedType.Name, attributeTargetType.Name));
                     }
                 },
                 SyntaxKind.Attribute);
@@ -90,10 +90,11 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 return null;
             }
+
             return semanticModel.GetDeclaredSymbol(attributeTarget);
         }
 
-        private ITypeSymbol GetExportedTypeSyntax(AttributeSyntax attribute, SemanticModel semanticModel)
+        private INamedTypeSymbol GetExportedTypeSyntax(AttributeSyntax attribute, SemanticModel semanticModel)
         {
             if (attribute.ArgumentList == null)
             {
@@ -117,7 +118,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return null;
             }
 
-            return semanticModel.GetSymbolInfo(exportedTypeSyntax).Symbol as ITypeSymbol;
+            return semanticModel.GetSymbolInfo(exportedTypeSyntax).Symbol as INamedTypeSymbol;
         }
 
         private static ExpressionSyntax GetTypeFromNamedArgument(IEnumerable<AttributeArgumentSyntax> arguments) =>
@@ -150,5 +151,10 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool IsContractTypeNamedArgument(AttributeArgumentSyntax argument) =>
             argument.NameColon?.Name.Identifier.ValueText == "contractType";
+
+        private static bool IsOfExportType(ITypeSymbol type, INamedTypeSymbol exportedType) =>
+            type.GetSelfAndBaseTypes()
+                .Union(type.AllInterfaces)
+                .Any(currentType => currentType.Equals(exportedType));
     }
 }
