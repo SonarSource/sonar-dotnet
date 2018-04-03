@@ -21,11 +21,11 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
-using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.SymbolicExecution;
 using SonarAnalyzer.SymbolicExecution.Constraints;
@@ -33,9 +33,7 @@ using SonarAnalyzer.SymbolicExecution.SymbolicValues;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    [Rule(DiagnosticId)]
-    public class EmptyNullableValueAccess : SonarDiagnosticAnalyzer
+    public class EmptyNullableValueAccess : ISymbolicExecutionAnalyzerFactory
     {
         internal const string DiagnosticId = "S3655";
         private const string MessageFormat = "'{0}' is null on at least one execution path.";
@@ -43,40 +41,39 @@ namespace SonarAnalyzer.Rules.CSharp
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
-
+        public ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
         private const string ValueLiteral = "Value";
         private const string HasValueLiteral = "HasValue";
 
-        protected sealed override void Initialize(SonarAnalysisContext context)
+        ISymbolicExecutionAnalyzer ISymbolicExecutionAnalyzerFactory.Create(CSharpExplodedGraph explodedGraph) =>
+            new SymbolicExecutionAnalyzer(explodedGraph);
+
+        bool ISymbolicExecutionAnalyzerFactory.IsEnabled(SyntaxNodeAnalysisContext context) => true;
+
+        private sealed class SymbolicExecutionAnalyzer : ISymbolicExecutionAnalyzer
         {
-            context.RegisterExplodedGraphBasedAnalysis((e, c) => CheckEmptyNullableAccess(e, c));
-        }
+            private readonly NullValueAccessedCheck check;
 
-        private static void CheckEmptyNullableAccess(CSharpExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context)
-        {
-            var nullPointerCheck = new NullValueAccessedCheck(explodedGraph);
-            explodedGraph.AddExplodedGraphCheck(nullPointerCheck);
+            private readonly HashSet<IdentifierNameSyntax> nullIdentifiers = new HashSet<IdentifierNameSyntax>();
 
-            var nullIdentifiers = new HashSet<IdentifierNameSyntax>();
+            public IEnumerable<Diagnostic> Diagnostics =>
+                nullIdentifiers
+                    .Select(i => Diagnostic.Create(rule, i.Parent.GetLocation(), i.Identifier.ValueText));
 
-            EventHandler<MemberAccessedEventArgs> nullValueAccessedHandler =
-                (sender, args) => nullIdentifiers.Add(args.Identifier);
-
-            nullPointerCheck.ValuePropertyAccessed += nullValueAccessedHandler;
-
-            try
+            public SymbolicExecutionAnalyzer(CSharpExplodedGraph explodedGraph)
             {
-                explodedGraph.Walk();
-            }
-            finally
-            {
-                nullPointerCheck.ValuePropertyAccessed -= nullValueAccessedHandler;
+                check = explodedGraph.GetOrAddCheck(() => new NullValueAccessedCheck(explodedGraph));
+                check.ValuePropertyAccessed += OnValuePropertyAccessed;
             }
 
-            foreach (var nullIdentifier in nullIdentifiers)
+            public void Dispose()
             {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, nullIdentifier.Parent.GetLocation(), nullIdentifier.Identifier.ValueText));
+                check.ValuePropertyAccessed -= OnValuePropertyAccessed;
+            }
+
+            private void OnValuePropertyAccessed(object sender, MemberAccessedEventArgs args)
+            {
+                nullIdentifiers.Add(args.Identifier);
             }
         }
 

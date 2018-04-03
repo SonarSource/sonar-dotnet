@@ -32,7 +32,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void ObjectsShouldNotBeDisposedMoreThanOnce()
         {
             Verifier.VerifyAnalyzer(@"TestCases\ObjectsShouldNotBeDisposedMoreThanOnce.cs",
-                new ObjectsShouldNotBeDisposedMoreThanOnce());
+                new SymbolicExecutionAnalyzer(new ObjectsShouldNotBeDisposedMoreThanOnce()));
         }
     }
 }

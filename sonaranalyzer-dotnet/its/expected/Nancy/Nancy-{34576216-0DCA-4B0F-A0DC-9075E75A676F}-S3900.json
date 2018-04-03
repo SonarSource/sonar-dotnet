@@ -1848,32 +1848,6 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'modelType' before using it.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
-"region":  {
-"startLine":  76,
-"startColumn":  35,
-"endLine":  76,
-"endColumn":  44
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'modelType' before using it.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBinder.cs",
-"region":  {
-"startLine":  81,
-"startColumn":  25,
-"endLine":  81,
-"endColumn":  34
-}
-}
-},
-{
-"id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'bodyStream' before using it.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\ModelBinding\DefaultBodyDeserializers\JsonBodyDeserializer.cs",
@@ -2727,19 +2701,6 @@
 "startColumn":  39,
 "endLine":  46,
 "endColumn":  46
-}
-}
-},
-{
-"id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'path' before using it.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\Routing\DefaultRouteSegmentExtractor.cs",
-"region":  {
-"startLine":  20,
-"startColumn":  41,
-"endLine":  20,
-"endColumn":  45
 }
 }
 },

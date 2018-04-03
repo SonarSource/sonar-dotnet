@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2018 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -18,14 +18,13 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
-using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.SymbolicExecution;
 using SonarAnalyzer.SymbolicExecution.Constraints;
@@ -33,9 +32,7 @@ using CSharpExplodedGraph = SonarAnalyzer.SymbolicExecution.CSharpExplodedGraph;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    [Rule(DiagnosticId)]
-    public sealed class PublicMethodArgumentsShouldBeCheckedForNull : SonarDiagnosticAnalyzer
+    public sealed class PublicMethodArgumentsShouldBeCheckedForNull : ISymbolicExecutionAnalyzerFactory
     {
         internal const string DiagnosticId = "S3900";
         private const string MessageFormat = "Refactor this method to add validation of parameter '{0}' before using it.";
@@ -43,61 +40,53 @@ namespace SonarAnalyzer.Rules.CSharp
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+        public ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
+        ISymbolicExecutionAnalyzer ISymbolicExecutionAnalyzerFactory.Create(CSharpExplodedGraph explodedGraph) =>
+            new SymbolicExecutionAnalyzer(explodedGraph);
+
+        bool ISymbolicExecutionAnalyzerFactory.IsEnabled(SyntaxNodeAnalysisContext context)
         {
-            context.RegisterExplodedGraphBasedAnalysis((e, c) => CheckForNullDereference(e, c));
+            return !context.IsTest() &&
+                MethodIsPublic();
+
+            bool MethodIsPublic()
+            {
+                var methodSymbol = context.SemanticModel.GetSymbolInfo(context.Node).Symbol
+                    ?? context.SemanticModel.GetDeclaredSymbol(context.Node);
+                return methodSymbol.IsPubliclyAccessible();
+            };
         }
 
-        private static void CheckForNullDereference(CSharpExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context)
+        private sealed class SymbolicExecutionAnalyzer : ISymbolicExecutionAnalyzer
         {
-            if (context.IsTest())
+            private readonly HashSet<IdentifierNameSyntax> identifiers = new HashSet<IdentifierNameSyntax>();
+            private readonly CSharpExplodedGraph explodedGraph;
+            private readonly NullPointerDereference.NullPointerCheck check;
+
+            public SymbolicExecutionAnalyzer(CSharpExplodedGraph explodedGraph)
             {
-                return;
+                this.explodedGraph = explodedGraph;
+                check = explodedGraph.GetOrAddCheck(() => new NullPointerDereference.NullPointerCheck(explodedGraph));
+                check.MemberAccessing += ObjectDisposedHandler;
             }
 
-            var methodSymbol = context.SemanticModel.GetSymbolInfo(context.Node).Symbol
-                ?? context.SemanticModel.GetDeclaredSymbol(context.Node);
-
-            if (!methodSymbol.IsPubliclyAccessible())
+            public void Dispose()
             {
-                return;
+                check.MemberAccessing -= ObjectDisposedHandler;
             }
 
-            var nullPointerCheck = new NullPointerDereference.NullPointerCheck(explodedGraph);
-            explodedGraph.AddExplodedGraphCheck(nullPointerCheck);
+            public IEnumerable<Diagnostic> Diagnostics =>
+                identifiers.Select(identifier => Diagnostic.Create(rule, identifier.GetLocation(), identifier.Identifier.ValueText));
 
-            var identifiers = new HashSet<IdentifierNameSyntax>();
-
-            EventHandler<MemberAccessingEventArgs> memberAccessingHandler =
-                (sender, args) => CollectMemberAccesses(args, identifiers, context.SemanticModel);
-
-            nullPointerCheck.MemberAccessing += memberAccessingHandler;
-
-            try
+            private void ObjectDisposedHandler(object sender, MemberAccessingEventArgs args)
             {
-                explodedGraph.Walk();
-            }
-            finally
-            {
-                nullPointerCheck.MemberAccessing -= memberAccessingHandler;
-            }
-
-            foreach (var identifier in identifiers)
-            {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, identifier.GetLocation(), identifier.Identifier.ValueText));
-            }
-        }
-
-        private static void CollectMemberAccesses(MemberAccessingEventArgs args, HashSet<IdentifierNameSyntax> identifiers,
-            SemanticModel semanticModel)
-        {
-            if (args.Symbol is IParameterSymbol &&
-                !NullPointerDereference.NullPointerCheck.IsExtensionMethod(args.Identifier.Parent, semanticModel) &&
-                !args.Symbol.HasConstraint(ObjectConstraint.NotNull, args.ProgramState))
-            {
-                identifiers.Add(args.Identifier);
+                if (args.Symbol is IParameterSymbol &&
+                    !args.Identifier.Parent.IsExtensionMethod(explodedGraph.SemanticModel) &&
+                    !args.Symbol.HasConstraint(ObjectConstraint.NotNull, args.ProgramState))
+                {
+                    identifiers.Add(args.Identifier);
+                }
             }
         }
     }

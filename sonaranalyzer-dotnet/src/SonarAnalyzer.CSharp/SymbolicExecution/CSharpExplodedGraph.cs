@@ -39,9 +39,9 @@ namespace SonarAnalyzer.SymbolicExecution
             : base(cfg, declaration, semanticModel, lva)
         {
             // Add mandatory checks
-            AddExplodedGraphCheck(new NullPointerDereference.NullPointerCheck(this));
-            AddExplodedGraphCheck(new EmptyNullableValueAccess.NullValueAccessedCheck(this));
-            AddExplodedGraphCheck(new InvalidCastToInterface.NullableCastCheck(this));
+            GetOrAddCheck(() => new NullPointerDereference.NullPointerCheck(this));
+            GetOrAddCheck(() => new EmptyNullableValueAccess.NullValueAccessedCheck(this));
+            GetOrAddCheck(() => new InvalidCastToInterface.NullableCastCheck(this));
         }
 
         #region Visit*

@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
@@ -33,8 +34,7 @@ using SonarAnalyzer.SymbolicExecution.Constraints;
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    [Rule(DiagnosticId)]
-    public class InvalidCastToInterface : SonarDiagnosticAnalyzer
+    public class InvalidCastToInterface : SonarDiagnosticAnalyzer, ISymbolicExecutionAnalyzerFactory
     {
         internal const string DiagnosticId = "S1944";
         private const string MessageFormat = "{0}";
@@ -95,29 +95,44 @@ namespace SonarAnalyzer.Rules.CSharp
                         },
                         SyntaxKind.CastExpression);
                 });
-
-            context.RegisterExplodedGraphBasedAnalysis((e, c) => CheckEmptyNullableCast(e, c));
         }
 
-        private static void CheckEmptyNullableCast(CSharpExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context)
+        bool ISymbolicExecutionAnalyzerFactory.IsEnabled(SyntaxNodeAnalysisContext context) => true;
+
+        ISymbolicExecutionAnalyzer ISymbolicExecutionAnalyzerFactory.Create(CSharpExplodedGraph explodedGraph) =>
+            new SymbolicExecutionAnalyzer(explodedGraph);
+
+        private sealed class SymbolicExecutionAnalyzer : ISymbolicExecutionAnalyzer
         {
-            explodedGraph.AddExplodedGraphCheck(new NullableCastCheck(explodedGraph, context));
-            explodedGraph.Walk();
+            private readonly NullableCastCheck check;
+            private readonly List<Diagnostic> diagnostics = new List<Diagnostic>();
+
+            public IEnumerable<Diagnostic> Diagnostics => diagnostics;
+
+            public SymbolicExecutionAnalyzer(CSharpExplodedGraph explodedGraph)
+            {
+                check = explodedGraph.GetOrAddCheck(() => new NullableCastCheck(explodedGraph));
+                check.NullNullableValueCast += OnNullNullableValueCast;
+            }
+
+            public void Dispose()
+            {
+                check.NullNullableValueCast -= OnNullNullableValueCast;
+            }
+
+            private void OnNullNullableValueCast(object sender, NullableValueCastEventArgs e)
+            {
+                diagnostics.Add(Diagnostic.Create(rule, e.CastExpression.GetLocation(), MessageDefinite));
+            }
         }
 
         internal sealed class NullableCastCheck : ExplodedGraphCheck
         {
-            private readonly SyntaxNodeAnalysisContext context;
+            public event EventHandler<NullableValueCastEventArgs> NullNullableValueCast;
 
             public NullableCastCheck(CSharpExplodedGraph explodedGraph)
                 : base(explodedGraph)
             {
-            }
-
-            public NullableCastCheck(CSharpExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context)
-                : this(explodedGraph)
-            {
-                this.context = context;
             }
 
             public override ProgramState PreProcessInstruction(ProgramPoint programPoint, ProgramState programState)
@@ -148,13 +163,25 @@ namespace SonarAnalyzer.Rules.CSharp
                     return programState;
                 }
 
-                if (!context.Equals(default(SyntaxNodeAnalysisContext)))
-                {
-                    context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, castExpression.GetLocation(), MessageDefinite));
-                }
+                OnNullNullableValueCast(castExpression);
 
                 return null;
             }
+
+            private void OnNullNullableValueCast(CastExpressionSyntax castExpression)
+            {
+                NullNullableValueCast?.Invoke(this, new NullableValueCastEventArgs(castExpression));
+            }
+        }
+
+        internal class NullableValueCastEventArgs : EventArgs
+        {
+            public NullableValueCastEventArgs(CastExpressionSyntax castExpression)
+            {
+                CastExpression = castExpression;
+            }
+
+            public CastExpressionSyntax CastExpression { get; }
         }
 
         private static void CheckTypesForInvalidCast(INamedTypeSymbol interfaceType, INamedTypeSymbol expressionType,

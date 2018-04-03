@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
@@ -27,50 +26,46 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Text;
-using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.SymbolicExecution;
 using CSharpExplodedGraph = SonarAnalyzer.SymbolicExecution.CSharpExplodedGraph;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    [Rule(S2583DiagnosticId)]
-    [Rule(S2589DiagnosticId)]
-    public class ConditionEvaluatesToConstant : SonarDiagnosticAnalyzer
+    public class ConditionEvaluatesToConstant : ISymbolicExecutionAnalyzerFactory
     {
         private static readonly ISet<SyntaxKind> OmittedSyntaxKinds = new HashSet<SyntaxKind>
-        {
-            SyntaxKind.LogicalAndExpression,
-            SyntaxKind.LogicalOrExpression
-        };
+            {
+                SyntaxKind.LogicalAndExpression,
+                SyntaxKind.LogicalOrExpression
+            };
 
         private static readonly ISet<SyntaxKind> LoopBreakingStatements = new HashSet<SyntaxKind>
-        {
-            SyntaxKind.BreakStatement,
-            SyntaxKind.ThrowStatement,
-            SyntaxKind.ReturnStatement
-        };
+            {
+                SyntaxKind.BreakStatement,
+                SyntaxKind.ThrowStatement,
+                SyntaxKind.ReturnStatement
+            };
 
         private static readonly ISet<SyntaxKind> LoopStatements = new HashSet<SyntaxKind>
-        {
-            SyntaxKind.WhileStatement,
-            SyntaxKind.DoStatement,
-            SyntaxKind.ForStatement
-        };
+            {
+                SyntaxKind.WhileStatement,
+                SyntaxKind.DoStatement,
+                SyntaxKind.ForStatement
+            };
 
         private static readonly ISet<SyntaxKind> ConditionalStatements = new HashSet<SyntaxKind>
-        {
-            SyntaxKind.IfStatement,
-            SyntaxKind.WhileStatement,
-            SyntaxKind.DoStatement,
-            SyntaxKind.ConditionalExpression
-        };
+            {
+                SyntaxKind.IfStatement,
+                SyntaxKind.WhileStatement,
+                SyntaxKind.DoStatement,
+                SyntaxKind.ConditionalExpression
+            };
 
-        private const string S2583DiagnosticId = "S2583"; // Bug
+        internal const string S2583DiagnosticId = "S2583"; // Bug
         private const string S2583MessageFormat = "Change this condition so that it does not always evaluate to '{0}'; some subsequent code is never executed.";
 
-        private const string S2589DiagnosticId = "S2589"; // Code smell
+        internal const string S2589DiagnosticId = "S2589"; // Code smell
         private const string S2589MessageFormat = "Change this condition so that it does not always evaluate to '{0}'.";
 
         private static readonly DiagnosticDescriptor s2583 =
@@ -79,203 +74,198 @@ namespace SonarAnalyzer.Rules.CSharp
         private static readonly DiagnosticDescriptor s2589 =
             DiagnosticDescriptorBuilder.GetDescriptor(S2589DiagnosticId, S2589MessageFormat, RspecStrings.ResourceManager);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(s2583, s2589);
+        public ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(s2583, s2589);
 
-        protected sealed override void Initialize(SonarAnalysisContext context)
+        ISymbolicExecutionAnalyzer ISymbolicExecutionAnalyzerFactory.Create(CSharpExplodedGraph explodedGraph) =>
+            new SymbolicExecutionAnalyzer(explodedGraph);
+
+        bool ISymbolicExecutionAnalyzerFactory.IsEnabled(SyntaxNodeAnalysisContext context) => true;
+
+        private sealed class SymbolicExecutionAnalyzer : ISymbolicExecutionAnalyzer
         {
-            context.RegisterExplodedGraphBasedAnalysis((e, c) => CheckForRedundantConditions(e, c));
-        }
+            private readonly HashSet<SyntaxNode> conditionTrue = new HashSet<SyntaxNode>();
+            private readonly HashSet<SyntaxNode> conditionFalse = new HashSet<SyntaxNode>();
 
-        private static void CheckForRedundantConditions(CSharpExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context)
-        {
-            var conditionTrue = new HashSet<SyntaxNode>();
-            var conditionFalse = new HashSet<SyntaxNode>();
+            private CSharpExplodedGraph explodedGraph;
 
-            EventHandler<ConditionEvaluatedEventArgs> collectConditions =
-                (sender, args) => CollectConditions(args, conditionTrue, conditionFalse, context.SemanticModel);
+            public IEnumerable<Diagnostic> Diagnostics => Enumerable.Empty<Diagnostic>()
+                   .Union(conditionTrue
+                       .Except(conditionFalse)
+                       .Where(c => !IsConditionOfLoopWithBreak((ExpressionSyntax)c))
+                       .Select(node => GetDiagnostics(node, true)))
+                   .Union(conditionFalse
+                       .Except(conditionTrue)
+                       .Select(node => GetDiagnostics(node, false)));
 
-            EventHandler explorationEnded =
-                (sender, args) => Enumerable.Empty<Diagnostic>()
-                    .Union(conditionTrue
-                        .Except(conditionFalse)
-                        .Where(c => !IsConditionOfLoopWithBreak((ExpressionSyntax)c))
-                        .Select(node => GetDiagnostics(node, true)))
-                    .Union(conditionFalse
-                        .Except(conditionTrue)
-                        .Select(node => GetDiagnostics(node, false)))
-                    .ToList()
-                    .ForEach(d => context.ReportDiagnosticWhenActive(d));
-
-            explodedGraph.ExplorationEnded += explorationEnded;
-            explodedGraph.ConditionEvaluated += collectConditions;
-
-            try
+            public SymbolicExecutionAnalyzer(CSharpExplodedGraph explodedGraph)
             {
-                explodedGraph.Walk();
-            }
-            finally
-            {
-                explodedGraph.ExplorationEnded -= explorationEnded;
-                explodedGraph.ConditionEvaluated -= collectConditions;
-            }
-        }
-
-        private static bool IsConditionOfLoopWithBreak(ExpressionSyntax constantExpression)
-        {
-            var loop = constantExpression.RemoveParentheses().Parent;
-
-            var loopBody = (loop as WhileStatementSyntax)?.Statement ??
-                (loop as DoStatementSyntax)?.Statement ??
-                (loop as ForStatementSyntax)?.Statement;
-
-            if (loopBody == null)
-            {
-                return false;
+                this.explodedGraph = explodedGraph;
+                explodedGraph.ConditionEvaluated += OnConditionEvaluated;
             }
 
-            var breakStatements = loopBody.DescendantNodes()
-                .Where(IsLoopBreakingStatement);
-
-            return breakStatements
-                .Select(GetParentLoop)
-                .Any(parentLoop => loop.Equals(parentLoop));
-        }
-
-        private static SyntaxNode GetParentLoop(SyntaxNode syntaxNode) =>
-            syntaxNode.Ancestors().First(a => a.IsAnyKind(LoopStatements));
-
-        private static bool IsLoopBreakingStatement(SyntaxNode syntaxNode) =>
-            syntaxNode.IsAnyKind(LoopBreakingStatements);
-
-        private static Diagnostic GetDiagnostics(SyntaxNode constantNode, bool constantValue)
-        {
-            var unreachableLocations = GetUnreachableLocations(constantNode, constantValue)
-                .ToList();
-
-            var constantText = constantValue.ToString().ToLowerInvariant();
-
-            return unreachableLocations.Count > 0 ?
-                Diagnostic.Create(s2583, constantNode.GetLocation(), messageArgs: constantText, additionalLocations: unreachableLocations) :
-                Diagnostic.Create(s2589, constantNode.GetLocation(), messageArgs: constantText);
-        }
-
-        private static IEnumerable<Location> GetUnreachableLocations(SyntaxNode constantExpression, bool constantValue)
-        {
-            var unreachableExpressions = GetUnreachableExpressions(constantExpression, constantValue)
-                .ToList();
-
-            if (unreachableExpressions.Count > 0)
+            public void Dispose()
             {
-                yield return Location.Create(
-                    constantExpression.SyntaxTree,
-                    GetSpan(unreachableExpressions.First(), unreachableExpressions.Last()));
+                explodedGraph.ConditionEvaluated -= OnConditionEvaluated;
+                explodedGraph = null;
             }
-            else
+
+            private static bool IsConditionOfLoopWithBreak(ExpressionSyntax constantExpression)
             {
-                // When the constant expression is the only child of a if/while/etc. statement
-                // it is not reported as unreachable, but regardless we want to check if its
-                // parent has an unreachable branch.
-                if (constantExpression is ExpressionSyntax expression)
+                var loop = constantExpression.RemoveParentheses().Parent;
+
+                var loopBody = (loop as WhileStatementSyntax)?.Statement ??
+                    (loop as DoStatementSyntax)?.Statement ??
+                    (loop as ForStatementSyntax)?.Statement;
+
+                if (loopBody == null)
                 {
-                    unreachableExpressions.Add(expression);
+                    return false;
+                }
+
+                var breakStatements = loopBody.DescendantNodes()
+                    .Where(IsLoopBreakingStatement);
+
+                return breakStatements
+                    .Select(GetParentLoop)
+                    .Any(parentLoop => loop.Equals(parentLoop));
+            }
+
+            private static SyntaxNode GetParentLoop(SyntaxNode syntaxNode) =>
+                syntaxNode.Ancestors().First(a => a.IsAnyKind(LoopStatements));
+
+            private static bool IsLoopBreakingStatement(SyntaxNode syntaxNode) =>
+                syntaxNode.IsAnyKind(LoopBreakingStatements);
+
+            private static Diagnostic GetDiagnostics(SyntaxNode constantNode, bool constantValue)
+            {
+                var unreachableLocations = GetUnreachableLocations(constantNode, constantValue)
+                    .ToList();
+
+                var constantText = constantValue.ToString().ToLowerInvariant();
+
+                return unreachableLocations.Count > 0 ?
+                    Diagnostic.Create(s2583, constantNode.GetLocation(), messageArgs: constantText, additionalLocations: unreachableLocations) :
+                    Diagnostic.Create(s2589, constantNode.GetLocation(), messageArgs: constantText);
+            }
+
+            private static IEnumerable<Location> GetUnreachableLocations(SyntaxNode constantExpression, bool constantValue)
+            {
+                var unreachableExpressions = GetUnreachableExpressions(constantExpression, constantValue)
+                    .ToList();
+
+                if (unreachableExpressions.Count > 0)
+                {
+                    yield return Location.Create(
+                        constantExpression.SyntaxTree,
+                        GetSpan(unreachableExpressions.First(), unreachableExpressions.Last()));
+                }
+                else
+                {
+                    // When the constant expression is the only child of a if/while/etc. statement
+                    // it is not reported as unreachable, but regardless we want to check if its
+                    // parent has an unreachable branch.
+                    if (constantExpression is ExpressionSyntax expression)
+                    {
+                        unreachableExpressions.Add(expression);
+                    }
+                }
+
+                var statement = GetUnreachableStatement(unreachableExpressions, constantValue);
+                if (statement != null)
+                {
+                    yield return statement.GetLocation();
                 }
             }
 
-            var statement = GetUnreachableStatement(unreachableExpressions, constantValue);
-            if (statement != null)
+            private static TextSpan GetSpan(SyntaxNode startNode, SyntaxNode endNode)
             {
-                yield return statement.GetLocation();
-            }
-        }
-
-        private static TextSpan GetSpan(SyntaxNode startNode, SyntaxNode endNode)
-        {
-            if (startNode.Equals(endNode))
-            {
-                return startNode.Span;
-            }
-            return TextSpan.FromBounds(startNode.SpanStart, endNode.Span.End);
-        }
-
-        private static SyntaxNode GetUnreachableStatement(IEnumerable<ExpressionSyntax> unreachableExpressions, bool constantValue)
-        {
-            var parent = unreachableExpressions
-                .Select(CSharpSyntaxHelper.GetSelfOrTopParenthesizedExpression) // unreachable expressions
-                .Select(node => node.Parent is BinaryExpressionSyntax
-                    ? node.Parent.Parent
-                    : node.Parent) // Constant node is the only expression in an if statement condition
-                .FirstOrDefault();
-
-            return constantValue
-                ? (SyntaxNode)
-                    (parent as ConditionalExpressionSyntax)?.WhenFalse ??
-                    (parent as IfStatementSyntax)?.Else?.Statement
-                : (SyntaxNode)
-                    (parent as ConditionalExpressionSyntax)?.WhenTrue ??
-                    (parent as IfStatementSyntax)?.Statement ??
-                    (parent as WhileStatementSyntax)?.Statement ??
-                    (parent as DoStatementSyntax)?.Statement;
-        }
-
-        private static IEnumerable<ExpressionSyntax> GetUnreachableExpressions(SyntaxNode constantExpression, bool constantValue)
-        {
-            // This is ugly with LINQ, hence the loop
-            foreach (var current in constantExpression.AncestorsAndSelf())
-            {
-                if (current.Parent is ParenthesizedExpressionSyntax)
+                if (startNode.Equals(endNode))
                 {
-                    continue;
+                    return startNode.Span;
                 }
+                return TextSpan.FromBounds(startNode.SpanStart, endNode.Span.End);
+            }
 
-                var binary = current.Parent as BinaryExpressionSyntax;
-                if (!IsShortcuttingExpression(binary, constantValue))
-                {
-                    break;
-                }
+            private static SyntaxNode GetUnreachableStatement(IEnumerable<ExpressionSyntax> unreachableExpressions, bool constantValue)
+            {
+                var parent = unreachableExpressions
+                    .Select(CSharpSyntaxHelper.GetSelfOrTopParenthesizedExpression) // unreachable expressions
+                    .Select(node => node.Parent is BinaryExpressionSyntax
+                        ? node.Parent.Parent
+                        : node.Parent) // Constant node is the only expression in an if statement condition
+                    .FirstOrDefault();
 
-                if (binary.Left == current)
+                return constantValue
+                    ? (SyntaxNode)
+                        (parent as ConditionalExpressionSyntax)?.WhenFalse ??
+                        (parent as IfStatementSyntax)?.Else?.Statement
+                    : (SyntaxNode)
+                        (parent as ConditionalExpressionSyntax)?.WhenTrue ??
+                        (parent as IfStatementSyntax)?.Statement ??
+                        (parent as WhileStatementSyntax)?.Statement ??
+                        (parent as DoStatementSyntax)?.Statement;
+            }
+
+            private static IEnumerable<ExpressionSyntax> GetUnreachableExpressions(SyntaxNode constantExpression, bool constantValue)
+            {
+                // This is ugly with LINQ, hence the loop
+                foreach (var current in constantExpression.AncestorsAndSelf())
                 {
-                    yield return binary.Right;
+                    if (current.Parent is ParenthesizedExpressionSyntax)
+                    {
+                        continue;
+                    }
+
+                    var binary = current.Parent as BinaryExpressionSyntax;
+                    if (!IsShortcuttingExpression(binary, constantValue))
+                    {
+                        break;
+                    }
+
+                    if (binary.Left == current)
+                    {
+                        yield return binary.Right;
+                    }
                 }
             }
-        }
 
-        private static bool IsShortcuttingExpression(BinaryExpressionSyntax expression, bool constantValueIsTrue)
-        {
-            return expression != null &&
-                (expression.IsKind(SyntaxKind.LogicalAndExpression) && !constantValueIsTrue ||
-                    expression.IsKind(SyntaxKind.LogicalOrExpression) && constantValueIsTrue);
-        }
-
-        private static void CollectConditions(ConditionEvaluatedEventArgs args, HashSet<SyntaxNode> conditionTrue, HashSet<SyntaxNode> conditionFalse, SemanticModel semanticModel)
-        {
-            var condition = (args.Condition as ExpressionSyntax).RemoveParentheses() ?? args.Condition;
-
-            if (condition == null ||
-                OmittedSyntaxKinds.Contains(condition.Kind()) ||
-                IsConstantOrLiteralCondition(condition, semanticModel))
+            private static bool IsShortcuttingExpression(BinaryExpressionSyntax expression, bool constantValueIsTrue)
             {
-                return;
+                return expression != null &&
+                    (expression.IsKind(SyntaxKind.LogicalAndExpression) && !constantValueIsTrue ||
+                        expression.IsKind(SyntaxKind.LogicalOrExpression) && constantValueIsTrue);
             }
 
-            if (args.EvaluationValue)
+            private void OnConditionEvaluated(object sender, ConditionEvaluatedEventArgs args)
             {
-                conditionTrue.Add(condition);
-            }
-            else
-            {
-                conditionFalse.Add(condition);
-            }
-        }
+                var condition = (args.Condition as ExpressionSyntax).RemoveParentheses() ?? args.Condition;
 
-        private static bool IsConstantOrLiteralCondition(SyntaxNode condition, SemanticModel semanticModel)
-        {
-            if (!condition.Parent.IsAnyKind(ConditionalStatements))
-            {
-                return false;
+                if (condition == null ||
+                    OmittedSyntaxKinds.Contains(condition.Kind()) ||
+                    IsConstantOrLiteralCondition(condition, explodedGraph.SemanticModel))
+                {
+                    return;
+                }
+
+                if (args.EvaluationValue)
+                {
+                    conditionTrue.Add(condition);
+                }
+                else
+                {
+                    conditionFalse.Add(condition);
+                }
             }
-            return condition.IsBooleanLiteral()
-                || condition.IsBooleanConstant(semanticModel);
+
+            private static bool IsConstantOrLiteralCondition(SyntaxNode condition, SemanticModel semanticModel)
+            {
+                if (!condition.Parent.IsAnyKind(ConditionalStatements))
+                {
+                    return false;
+                }
+                return condition.IsBooleanLiteral()
+                    || condition.IsBooleanConstant(semanticModel);
+            }
         }
     }
 }

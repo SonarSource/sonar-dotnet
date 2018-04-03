@@ -32,7 +32,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void EmptyCollectionsShouldNotBeEnumerated()
         {
             Verifier.VerifyAnalyzer(@"TestCases\EmptyCollectionsShouldNotBeEnumerated.cs",
-                new EmptyCollectionsShouldNotBeEnumerated());
+                new SymbolicExecutionAnalyzer(new EmptyCollectionsShouldNotBeEnumerated()));
         }
     }
 }

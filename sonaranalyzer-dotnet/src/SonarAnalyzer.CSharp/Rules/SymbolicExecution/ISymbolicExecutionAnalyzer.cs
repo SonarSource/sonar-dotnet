@@ -18,31 +18,14 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using csharp::SonarAnalyzer.Rules.CSharp;
+using System;
+using System.Collections.Generic;
+using Microsoft.CodeAnalysis;
 
-namespace SonarAnalyzer.UnitTest.Rules
+namespace SonarAnalyzer.Rules.CSharp
 {
-    [TestClass]
-    public class NullPointerDereferenceTest
+    public interface ISymbolicExecutionAnalyzer : IDisposable
     {
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void NullPointerDereference()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\NullPointerDereference.cs",
-                new SymbolicExecutionAnalyzer(new NullPointerDereference()));
-        }
-
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void NullPointerDereferenceCSharp6()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\NullPointerDereferenceCSharp6.cs",
-                new SymbolicExecutionAnalyzer(new NullPointerDereference()),
-                new CSharpParseOptions(LanguageVersion.CSharp6));
-        }
+        IEnumerable<Diagnostic> Diagnostics { get; }
     }
 }

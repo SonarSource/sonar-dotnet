@@ -26,16 +26,13 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
-using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.SymbolicExecution;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    [Rule(DiagnosticId)]
-    public sealed class EmptyCollectionsShouldNotBeEnumerated : SonarDiagnosticAnalyzer
+    public sealed class EmptyCollectionsShouldNotBeEnumerated : ISymbolicExecutionAnalyzerFactory
     {
         internal const string DiagnosticId = "S4158";
         private const string MessageFormat = "Remove this call, the collection is known to be empty here.";
@@ -43,83 +40,81 @@ namespace SonarAnalyzer.Rules.CSharp
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+        public ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        private static readonly ISet<KnownType> TrackedCollectionTypes = new HashSet<KnownType>
+            private static readonly ISet<KnownType> TrackedCollectionTypes = new HashSet<KnownType>
+                {
+                    KnownType.System_Collections_Generic_Dictionary_TKey_TValue,
+                    KnownType.System_Collections_Generic_List_T,
+                    KnownType.System_Collections_Generic_Queue_T,
+                    KnownType.System_Collections_Generic_Stack_T,
+                    KnownType.System_Collections_Generic_HashSet_T,
+                    KnownType.System_Collections_ObjectModel_ObservableCollection_T,
+                    KnownType.System_Array,
+                };
+
+            private static readonly HashSet<string> AddMethods = new HashSet<string>
+                {
+                    nameof(List<object>.Add),
+                    nameof(List<object>.AddRange),
+                    nameof(List<object>.Insert),
+                    nameof(List<object>.InsertRange),
+                    nameof(Queue<object>.Enqueue),
+                    nameof(Stack<object>.Push),
+                    nameof(HashSet<object>.Add),
+                    nameof(HashSet<object>.UnionWith),
+                };
+
+            private static readonly HashSet<string> IgnoredMethods = new HashSet<string>
+                {
+                    nameof(List<object>.GetHashCode),
+                    nameof(List<object>.Equals),
+                    nameof(List<object>.GetType),
+                    nameof(List<object>.ToString),
+                    nameof(List<object>.ToArray),
+                    nameof(List<object>.Contains),
+                    nameof(Array.GetLength),
+                    "GetLongLength",
+                    nameof(Array.GetLowerBound),
+                    nameof(Array.GetUpperBound),
+                    nameof(HashSet<object>.Contains),
+                    nameof(Dictionary<object, object>.ContainsKey),
+                    nameof(Dictionary<object, object>.ContainsValue),
+                    "GetObjectData",
+                    "OnDeserialization",
+                    nameof(Dictionary<object, object>.TryGetValue),
+                };
+
+        bool ISymbolicExecutionAnalyzerFactory.IsEnabled(SyntaxNodeAnalysisContext context) => true;
+
+        ISymbolicExecutionAnalyzer ISymbolicExecutionAnalyzerFactory.Create(CSharpExplodedGraph explodedGraph) =>
+            new SymbolicExecutionAnalyzer(explodedGraph);
+
+        private sealed class SymbolicExecutionAnalyzer : ISymbolicExecutionAnalyzer
         {
-            KnownType.System_Collections_Generic_Dictionary_TKey_TValue,
-            KnownType.System_Collections_Generic_List_T,
-            KnownType.System_Collections_Generic_Queue_T,
-            KnownType.System_Collections_Generic_Stack_T,
-            KnownType.System_Collections_Generic_HashSet_T,
-            KnownType.System_Collections_ObjectModel_ObservableCollection_T,
-            KnownType.System_Array,
-        };
+            private readonly HashSet<SyntaxNode> emptyCollections = new HashSet<SyntaxNode>();
+            private readonly HashSet<SyntaxNode> nonEmptyCollections = new HashSet<SyntaxNode>();
+            private readonly EmptyCollectionAccessedCheck check;
 
-        private static readonly HashSet<string> AddMethods = new HashSet<string>
-        {
-            nameof(List<object>.Add),
-            nameof(List<object>.AddRange),
-            nameof(List<object>.Insert),
-            nameof(List<object>.InsertRange),
-            nameof(Queue<object>.Enqueue),
-            nameof(Stack<object>.Push),
-            nameof(HashSet<object>.Add),
-            nameof(HashSet<object>.UnionWith),
-        };
-
-        private static readonly HashSet<string> IgnoredMethods = new HashSet<string>
-        {
-            nameof(List<object>.GetHashCode),
-            nameof(List<object>.Equals),
-            nameof(List<object>.GetType),
-            nameof(List<object>.ToString),
-            nameof(List<object>.ToArray),
-            nameof(List<object>.Contains),
-            nameof(Array.GetLength),
-            "GetLongLength",
-            nameof(Array.GetLowerBound),
-            nameof(Array.GetUpperBound),
-            nameof(HashSet<object>.Contains),
-            nameof(Dictionary<object, object>.ContainsKey),
-            nameof(Dictionary<object, object>.ContainsValue),
-            "GetObjectData",
-            "OnDeserialization",
-            nameof(Dictionary<object, object>.TryGetValue),
-        };
-
-        protected override void Initialize(SonarAnalysisContext context)
-        {
-            context.RegisterExplodedGraphBasedAnalysis(CheckForEmptyCollectionAccess);
-        }
-
-        private void CheckForEmptyCollectionAccess(CSharpExplodedGraph explodedGraph, SyntaxNodeAnalysisContext context)
-        {
-            var check = new EmptyCollectionAccessedCheck(explodedGraph);
-            explodedGraph.AddExplodedGraphCheck(check);
-
-            var emptyCollections = new HashSet<SyntaxNode>();
-            var nonEmptyCollections = new HashSet<SyntaxNode>();
-
-            EventHandler explorationEnded =
-                (sender, args) => emptyCollections.Except(nonEmptyCollections)
-                    .Select(node => Diagnostic.Create(rule, node.GetLocation()))
-                    .ToList()
-                    .ForEach(d => context.ReportDiagnosticWhenActive(d));
-
-            EventHandler<CollectionAccessedEventArgs> collectionAccessedHandler = (sender, args) =>
-                (args.IsEmpty ? emptyCollections : nonEmptyCollections).Add(args.Node);
-
-            explodedGraph.ExplorationEnded += explorationEnded;
-            check.CollectionAccessed += collectionAccessedHandler;
-            try
+            public SymbolicExecutionAnalyzer(CSharpExplodedGraph explodedGraph)
             {
-                explodedGraph.Walk();
+                check = explodedGraph.GetOrAddCheck(() => new EmptyCollectionAccessedCheck(explodedGraph));
+                check.CollectionAccessed += OnCollectionAccessed;
             }
-            finally
+
+            public IEnumerable<Diagnostic> Diagnostics =>
+                emptyCollections
+                    .Except(nonEmptyCollections)
+                    .Select(node => Diagnostic.Create(rule, node.GetLocation()));
+
+            public void Dispose()
             {
-                check.CollectionAccessed -= collectionAccessedHandler;
-                explodedGraph.ExplorationEnded -= explorationEnded;
+                check.CollectionAccessed -= OnCollectionAccessed;
+            }
+
+            private void OnCollectionAccessed(object sender, CollectionAccessedEventArgs args)
+            {
+                (args.IsEmpty ? emptyCollections : nonEmptyCollections).Add(args.Node);
             }
         }
 

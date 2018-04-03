@@ -33,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
     [TestClass]
     public class DiagnosticAnalyzerContextHelperTest
     {
-        private static void VerifyEmpty(string name, string content, DiagnosticAnalyzer diagnosticAnalyzer)
+        private static void VerifyEmpty(string name, string content, SonarDiagnosticAnalyzer diagnosticAnalyzer)
         {
             using (var workspace = new AdhocWorkspace())
             {
@@ -44,7 +44,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
 
                 var compilation = document.Project.GetCompilationAsync().Result;
 
-                var diagnostics = Verifier.GetDiagnostics(compilation, diagnosticAnalyzer);
+                var diagnostics = Verifier.GetDiagnostics(compilation, new[] { diagnosticAnalyzer });
 
                 diagnostics.Should().HaveCount(0);
             }
