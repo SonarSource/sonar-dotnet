@@ -41,16 +41,6 @@ namespace SonarAnalyzer.Helpers
         private readonly IEnumerable<DiagnosticDescriptor> supportedDiagnostics;
 
         /// <summary>
-        /// This delegate is used to decide whether or not the <see cref="SonarDiagnosticAnalyzer"/> should be registered against
-        /// the <see cref="AnalysisContext"/>.
-        /// </summary>
-        /// <remarks>
-        /// Currently this delegate is set by SonarLint (4.0+) Standalone and NewConnected to control the registration based on
-        /// the activation status of the rule.
-        /// </remarks>
-        public static Func<IEnumerable<DiagnosticDescriptor>, bool> ShouldRegisterContextAction { get; set; }
-
-        /// <summary>
         /// This delegate is called on all specific contexts, after the registration to the <see cref="AnalysisContext"/>, to
         /// control whether or not the action should be executed.
         /// </summary>
@@ -126,18 +116,15 @@ namespace SonarAnalyzer.Helpers
              *      logic of the rule.
              */
 
-            if (ShouldRegisterContextAction?.Invoke(this.supportedDiagnostics) != false)
-            {
-                registrationAction(
-                    c =>
+            registrationAction(
+                c =>
+                {
+                    if (AreAnalysisScopeMatching(getCompilation(c), this.supportedDiagnostics) &&
+                        IsRegisteredActionEnabled(this.supportedDiagnostics, getSyntaxTree(c)))
                     {
-                        if (AreAnalysisScopeMatching(getCompilation(c), this.supportedDiagnostics) &&
-                            IsRegisteredActionEnabled(this.supportedDiagnostics, getSyntaxTree(c)))
-                        {
-                            registeredAction(c);
-                        }
-                    });
-            }
+                        registeredAction(c);
+                    }
+                });
         }
 
         internal static bool AreAnalysisScopeMatching(Compilation compilation, IEnumerable<DiagnosticDescriptor> diagnostics)
