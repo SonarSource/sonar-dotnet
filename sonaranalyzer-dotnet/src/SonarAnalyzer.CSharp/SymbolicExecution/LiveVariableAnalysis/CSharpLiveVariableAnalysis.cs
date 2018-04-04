@@ -209,7 +209,7 @@ namespace SonarAnalyzer.SymbolicExecution.LiveVariableAnalysis
                 argument.RefOrOutKeyword.IsKind(SyntaxKind.OutKeyword);
         }
 
-        private bool IsLocalScoped(ISymbol symbol)
+        public override bool IsLocalScoped(ISymbol symbol)
         {
             return IsLocalScoped(symbol, declaration);
         }

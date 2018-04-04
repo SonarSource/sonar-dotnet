@@ -457,6 +457,19 @@
 },
 {
 "id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'requestedPath' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Conventions\StaticContentConventionBuilder.cs",
+"region":  {
+"startLine":  36,
+"startColumn":  18,
+"endLine":  36,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'conventions' before using it.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Conventions\StaticContentsConventionsExtensions.cs",
@@ -1544,6 +1557,19 @@
 "startColumn":  39,
 "endLine":  22,
 "endColumn":  45
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'source' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Extensions\StreamExtensions.cs",
+"region":  {
+"startLine":  70,
+"startColumn":  13,
+"endLine":  70,
+"endColumn":  19
 }
 }
 },
@@ -2823,6 +2849,19 @@
 },
 {
 "id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'capturedParameters' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\Routing\Trie\Nodes\GreedyRegExCaptureNode.cs",
+"region":  {
+"startLine":  59,
+"startColumn":  21,
+"endLine":  59,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'segments' before using it.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Routing\Trie\Nodes\RootNode.cs",
@@ -3135,6 +3174,19 @@
 },
 {
 "id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'implementationTypes' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  1444,
+"startColumn":  34,
+"endLine":  1444,
+"endColumn":  53
+}
+}
+},
+{
+"id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'registrationType' before using it.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
@@ -3156,6 +3208,19 @@
 "startColumn":  145,
 "endLine":  1461,
 "endColumn":  161
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'implementationTypes' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  1467,
+"startColumn":  34,
+"endLine":  1467,
+"endColumn":  53
 }
 }
 },

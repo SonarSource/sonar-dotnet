@@ -284,8 +284,7 @@ namespace SonarAnalyzer.SymbolicExecution
 
         internal bool IsSymbolTracked(ISymbol symbol)
         {
-            if (symbol == null ||
-                lva.CapturedVariables.Contains(symbol)) // Captured variables are not locally scoped, they are compiled to class fields
+            if (symbol == null)
             {
                 return false;
             }
@@ -314,7 +313,8 @@ namespace SonarAnalyzer.SymbolicExecution
         {
             var field = symbol as IFieldSymbol;
 
-            return field != null &&
+            return IsCaptured(symbol) || // Captured variables are not locally scoped, they are compiled to class fields
+                field != null &&
                 (field.IsConst ||
                 declaration.ContainingType
                     .GetSelfAndBaseTypes()
@@ -443,5 +443,11 @@ namespace SonarAnalyzer.SymbolicExecution
                 type.IsValueType &&
                 !type.OriginalDefinition.Is(KnownType.System_Nullable_T);
         }
+
+        protected bool IsLocalScoped(ISymbol symbol) =>
+            lva.IsLocalScoped(symbol);
+
+        protected bool IsCaptured(ISymbol symbol) =>
+            lva.IsCaptured(symbol);
     }
 }

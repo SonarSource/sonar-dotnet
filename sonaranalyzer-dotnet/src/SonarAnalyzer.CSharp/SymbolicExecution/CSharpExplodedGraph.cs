@@ -431,7 +431,12 @@ namespace SonarAnalyzer.SymbolicExecution
                         var invocationVisitor = new InvocationVisitor(invocation, SemanticModel, newProgramState);
                         newProgramState = invocationVisitor.ProcessInvocation();
 
-                        if (invocation.Expression.IsOnThis() && !invocation.IsNameof(SemanticModel))
+                        var invocationSymbol = SemanticModel.GetSymbolInfo(invocation.Expression).Symbol;
+
+                        var isLocal = IsLocalScoped(invocationSymbol);
+
+                        if ((invocation.Expression.IsOnThis() && !invocation.IsNameof(SemanticModel)) || isLocal
+                            )
                         {
                             newProgramState = newProgramState.RemoveSymbols(IsFieldSymbol);
                         }

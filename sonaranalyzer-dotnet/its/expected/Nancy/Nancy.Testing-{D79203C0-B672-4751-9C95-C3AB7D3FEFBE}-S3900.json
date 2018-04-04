@@ -279,6 +279,45 @@
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.Testing\BrowserResponseExtensions.cs",
 "region":  {
+"startLine":  32,
+"startColumn":  129,
+"endLine":  32,
+"endColumn":  137
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'response' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\BrowserResponseExtensions.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  18,
+"endLine":  35,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'response' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\BrowserResponseExtensions.cs",
+"region":  {
+"startLine":  37,
+"startColumn":  114,
+"endLine":  37,
+"endColumn":  122
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'response' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing\BrowserResponseExtensions.cs",
+"region":  {
 "startLine":  45,
 "startColumn":  17,
 "endLine":  45,

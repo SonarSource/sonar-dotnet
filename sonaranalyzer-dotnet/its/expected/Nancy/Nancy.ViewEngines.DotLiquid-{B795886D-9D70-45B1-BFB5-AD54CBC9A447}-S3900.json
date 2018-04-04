@@ -2,6 +2,71 @@
 "issues":  [
 {
 "id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'renderContext' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.DotLiquid\DotLiquidViewEngine.cs",
+"region":  {
+"startLine":  79,
+"startColumn":  26,
+"endLine":  79,
+"endColumn":  39
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'renderContext' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.DotLiquid\DotLiquidViewEngine.cs",
+"region":  {
+"startLine":  90,
+"startColumn":  47,
+"endLine":  90,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'viewLocationResult' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.DotLiquid\DotLiquidViewEngine.cs",
+"region":  {
+"startLine":  104,
+"startColumn":  50,
+"endLine":  104,
+"endColumn":  68
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'viewLocationResult' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.DotLiquid\DotLiquidViewEngine.cs",
+"region":  {
+"startLine":  104,
+"startColumn":  79,
+"endLine":  104,
+"endColumn":  97
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'viewLocationResult' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.DotLiquid\DotLiquidViewEngine.cs",
+"region":  {
+"startLine":  104,
+"startColumn":  104,
+"endLine":  104,
+"endColumn":  122
+}
+}
+},
+{
+"id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'context' before using it.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.ViewEngines.DotLiquid\LiquidNancyFileSystem.cs",
