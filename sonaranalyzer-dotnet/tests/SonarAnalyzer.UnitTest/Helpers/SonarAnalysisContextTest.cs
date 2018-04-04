@@ -68,61 +68,6 @@ namespace SonarAnalyzer.UnitTest.Helpers
         }
 
         [TestMethod]
-        public void SonarAnalysis_WhenShouldRegisterContextActionReturnsFalse_NoIssueReported()
-        {
-            SonarAnalysisContext.ShouldRegisterContextAction = diags => false;
-
-            try
-            {
-                foreach (var testCase in TestCases)
-                {
-                    // TODO: We should find a way to ack the fact the action was not run
-                    Verifier.VerifyNoIssueReported(testCase.Path, testCase.Analyzer);
-                }
-            }
-            finally
-            {
-                SonarAnalysisContext.ShouldRegisterContextAction = null;
-            }
-        }
-
-        [TestMethod]
-        public void SonarAnalysis_WhenShouldRegisterContextActionReturnsTrue_IssuesReported()
-        {
-            SonarAnalysisContext.ShouldRegisterContextAction = diags => true;
-
-            try
-            {
-                foreach (var testCase in TestCases)
-                {
-                    Verifier.VerifyAnalyzer(testCase.Path, testCase.Analyzer);
-                }
-            }
-            finally
-            {
-                SonarAnalysisContext.ShouldRegisterContextAction = null;
-            }
-        }
-
-        [TestMethod]
-        public void SonarAnalysis_WhenShouldRegisterContextActionNotSet_IssuesReported()
-        {
-            SonarAnalysisContext.ShouldRegisterContextAction = null;
-
-            try
-            {
-                foreach (var testCase in TestCases)
-                {
-                    Verifier.VerifyAnalyzer(testCase.Path, testCase.Analyzer);
-                }
-            }
-            finally
-            {
-                SonarAnalysisContext.ShouldRegisterContextAction = null;
-            }
-        }
-
-        [TestMethod]
         public void SonarAnalysis_ByDefault_ExecuteRule()
         {
             foreach (var testCase in TestCases)
@@ -147,32 +92,6 @@ namespace SonarAnalyzer.UnitTest.Helpers
             finally
             {
                 SonarAnalysisContext.ShouldExecuteRegisteredAction = null;
-            }
-        }
-
-        [TestMethod]
-        public void SonarAnalysis_WhenOneRuleDisabled_ReportIssuesOnlyForOtherRules()
-        {
-            try
-            {
-                SonarAnalysisContext.ShouldRegisterContextAction = diagnostics =>
-                    diagnostics.Any(diagnostic => diagnostic.Id != AnonymousDelegateEventUnsubscribe.DiagnosticId);
-
-                foreach (var testCase in TestCases)
-                {
-                    if (testCase.Analyzer.GetType() == typeof(AnonymousDelegateEventUnsubscribe))
-                    {
-                        Verifier.VerifyNoIssueReported(testCase.Path, testCase.Analyzer);
-                    }
-                    else
-                    {
-                        Verifier.VerifyAnalyzer(testCase.Path, testCase.Analyzer);
-                    }
-                }
-            }
-            finally
-            {
-                SonarAnalysisContext.ShouldRegisterContextAction = null;
             }
         }
 
