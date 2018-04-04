@@ -258,9 +258,7 @@ function Get-MavenExpression([string]$exp) {
     $out = Exec { mvn help:evaluate -B -Dexpression="${exp}" }
     Test-ExitCode "ERROR: Evaluation of expression ${exp} FAILED."
 
-    $firstEntry = $out | Select-String -NotMatch -Pattern '^\[|Download\w\+\:' | Select-Object -First 1
-
-    return $firstEntry.Line
+    return $out | Select-String -NotMatch -Pattern '^\[|Download\w\+\:' | Select-Object -First 1 -ExpandProperty Line
 }
 
 function Set-MavenBuildVersion() {
