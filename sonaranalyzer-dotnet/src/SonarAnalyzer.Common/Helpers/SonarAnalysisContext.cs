@@ -103,22 +103,13 @@ namespace SonarAnalyzer.Helpers
         private void RegisterContextAction<TContext>(Action<Action<TContext>> registrationAction, Action<TContext> registeredAction,
             Func<TContext, SyntaxTree> getSyntaxTree, Func<TContext, Compilation> getCompilation)
         {
-            /*
-             * For performance reasons, we don't want to register callbacks for rules that should not be run. However, we don't
-             * necessarily have enough information to make the decision up front, so the check is broken into two parts:
-             *
-             * 1.   Pre-registration: at this point we only know the rules that are being registered. If we can decide from the
-             *      diagnostic descriptors that a rule should not be run then we won't register the callback with the analysis
-             *      context.
-             *
-             * 2.   Post-registration: we are now being called back by the analysis context, so we now have access to the syntax
-             *      tree (and project) that are being analyzed, and can use that information to decide whether to execute the
-             *      logic of the rule.
-             */
-
             registrationAction(
                 c =>
                 {
+                    // For each action registered on context we need to do some pre-processing before actually calling the rule.
+                    // First, we need to ensure the rule does apply to the current scope (main vs test source).
+                    // Second, we call an external delegate (set by SonarLint for VS) to ensure the rule should be run (usually
+                    // the decision is made on based on whether the project contains the analyzer as NuGet).
                     if (AreAnalysisScopeMatching(getCompilation(c), this.supportedDiagnostics) &&
                         IsRegisteredActionEnabled(this.supportedDiagnostics, getSyntaxTree(c)))
                     {
