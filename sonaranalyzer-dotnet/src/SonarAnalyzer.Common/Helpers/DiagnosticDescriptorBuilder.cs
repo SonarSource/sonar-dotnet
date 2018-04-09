@@ -26,9 +26,9 @@ namespace SonarAnalyzer.Helpers
 {
     public static class DiagnosticDescriptorBuilder
     {
-        internal const string SonarWayTag = "SonarWay";
-        internal const string MainSourceScopeTag = "MainSourceScope";
-        internal const string TestSourceScopeTag = "TestSourceScope";
+        public static readonly string SonarWayTag = "SonarWay";
+        public static readonly string MainSourceScopeTag = "MainSourceScope";
+        public static readonly string TestSourceScopeTag = "TestSourceScope";
 
         public static DiagnosticDescriptor GetUtilityDescriptor(string diagnosticId, string title) =>
             new DiagnosticDescriptor(
