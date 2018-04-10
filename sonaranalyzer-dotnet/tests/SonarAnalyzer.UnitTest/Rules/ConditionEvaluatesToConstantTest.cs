@@ -30,6 +30,28 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
+        public void ConditionEvaluatesToConstant_Temp()
+        {
+            Verifier.VerifyCSharpAnalyzer(@"
+using System;
+public class C
+{
+    public void Lambda()
+    {
+        var fail = false;
+        Action a = new Action(() => { fail = true; });
+        a();
+        if (fail) // This is compliant, we don't know anything about 'fail'
+        {
+        }
+    }
+}
+
+", new ConditionEvaluatesToConstant(),
+                new CSharpParseOptions(LanguageVersion.CSharp6));
+        }
+        [TestMethod]
+        [TestCategory("Rule")]
         public void ConditionEvaluatesToConstant()
         {
             Verifier.VerifyAnalyzer(@"TestCases\ConditionEvaluatesToConstant.cs", new ConditionEvaluatesToConstant(),

@@ -288,6 +288,45 @@
 },
 {
 "id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'watchee' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteWatcher.cs",
+"region":  {
+"startLine":  432,
+"startColumn":  70,
+"endLine":  432,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'watchee' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteWatcher.cs",
+"region":  {
+"startLine":  438,
+"startColumn":  63,
+"endLine":  438,
+"endColumn":  70
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'watchee' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteWatcher.cs",
+"region":  {
+"startLine":  442,
+"startColumn":  40,
+"endLine":  442,
+"endColumn":  47
+}
+}
+},
+{
+"id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'routeeProps' before using it.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Remote\Routing\RemoteRouterConfig.cs",

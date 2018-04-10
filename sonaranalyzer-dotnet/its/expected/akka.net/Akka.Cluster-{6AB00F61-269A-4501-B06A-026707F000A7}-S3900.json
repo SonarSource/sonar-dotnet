@@ -2,6 +2,45 @@
 "issues":  [
 {
 "id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'system' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Cluster.cs",
+"region":  {
+"startLine":  61,
+"startColumn":  45,
+"endLine":  61,
+"endColumn":  51
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'system' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Cluster.cs",
+"region":  {
+"startLine":  68,
+"startColumn":  25,
+"endLine":  68,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'system' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Cluster.cs",
+"region":  {
+"startLine":  81,
+"startColumn":  31,
+"endLine":  81,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'settings' before using it.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterActorRefProvider.cs",
@@ -101,6 +140,19 @@
 "startColumn":  29,
 "endLine":  571,
 "endColumn":  33
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'cluster' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterReadView.cs",
+"region":  {
+"startLine":  72,
+"startColumn":  28,
+"endLine":  72,
+"endColumn":  35
 }
 }
 },
@@ -244,6 +296,19 @@
 "startColumn":  66,
 "endLine":  273,
 "endColumn":  70
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'allowed' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Reachability.cs",
+"region":  {
+"startLine":  233,
+"startColumn":  38,
+"endLine":  233,
+"endColumn":  45
 }
 }
 },

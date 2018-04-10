@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'requestedPath' before using it.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Embedded\Conventions\EmbeddedStaticContentConventionBuilder.cs",
+"region":  {
+"startLine":  32,
+"startColumn":  18,
+"endLine":  32,
+"endColumn":  31
+}
+}
+}
+]
+}

@@ -28,6 +28,19 @@
 },
 {
 "id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'messageExtractor' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterSharding.cs",
+"region":  {
+"startLine":  407,
+"startColumn":  64,
+"endLine":  407,
+"endColumn":  80
+}
+}
+},
+{
+"id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'system' before using it.",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ClusterShardingSettings.cs",
@@ -101,6 +114,19 @@
 "startColumn":  90,
 "endLine":  397,
 "endColumn":  97
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'rebalanceInProgress' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardAllocationStrategy.cs",
+"region":  {
+"startLine":  82,
+"startColumn":  17,
+"endLine":  82,
+"endColumn":  36
 }
 }
 },

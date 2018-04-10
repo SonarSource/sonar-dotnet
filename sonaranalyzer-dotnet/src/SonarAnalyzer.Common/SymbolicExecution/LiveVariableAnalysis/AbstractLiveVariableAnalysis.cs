@@ -58,6 +58,11 @@ namespace SonarAnalyzer.SymbolicExecution.LiveVariableAnalysis
 
         public IReadOnlyList<ISymbol> CapturedVariables => capturedVariables.ToImmutableArray();
 
+        public bool IsCaptured(ISymbol symbol) =>
+            capturedVariables.Contains(symbol);
+
+        public abstract bool IsLocalScoped(ISymbol symbol);
+
         protected void PerformAnalysis()
         {
             foreach (var block in reversedBlocks)
