@@ -9993,6 +9993,36 @@
   <data name="S4524_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
   </data>
+  <data name="S4564_Category" xml:space="preserve">
+    <value>Major Vulnerability</value>
+  </data>
+  <data name="S4564_Description" xml:space="preserve">
+    <value>ASP.NET is coming with a feature looking at HTTP requests to prevent potentially dangerous content to perform a cross-site scripting (XSS) attack. There is no reason to disable this mechanism even if it should not be the only one in place to prevent XSS attacks.</value>
+  </data>
+  <data name="S4564_IsActivatedByDefault" xml:space="preserve">
+    <value>False</value>
+  </data>
+  <data name="S4564_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S4564_RemediationCost" xml:space="preserve">
+    <value>5min</value>
+  </data>
+  <data name="S4564_Scope" xml:space="preserve">
+    <value>Main</value>
+  </data>
+  <data name="S4564_Severity" xml:space="preserve">
+    <value>Major</value>
+  </data>
+  <data name="S4564_Tags" xml:space="preserve">
+    <value>cwe,sans-top25-insecure,owasp-a7</value>
+  </data>
+  <data name="S4564_Title" xml:space="preserve">
+    <value>ASP.NET HTTP request validation feature should not be disabled</value>
+  </data>
+  <data name="S4564_Type" xml:space="preserve">
+    <value>VULNERABILITY</value>
+  </data>
   <data name="S818_Category" xml:space="preserve">
     <value>Minor Code Smell</value>
   </data>

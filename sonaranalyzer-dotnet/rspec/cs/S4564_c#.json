@@ -1,0 +1,23 @@
+{
+  "title": "ASP.NET HTTP request validation feature should not be disabled",
+  "type": "VULNERABILITY",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    "cwe",
+    "sans-top25-insecure",
+    "owasp-a7"
+  ],
+  "standards": [
+    "CWE",
+    "OWASP Top Ten",
+    "SANS Top 25"
+  ],
+  "defaultSeverity": "Major",
+  "ruleSpecification": "RSPEC-4564",
+  "sqKey": "S4564",
+  "scope": "Main"
+}

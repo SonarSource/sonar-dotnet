@@ -18,27 +18,22 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+extern alias csharp;
+using csharp::SonarAnalyzer.Rules.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using CS = SonarAnalyzer.Rules.CSharp;
-using VB = SonarAnalyzer.Rules.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
     [TestClass]
-    public class ParameterAssignedToTest
+    public class HttpPostControllerActionShouldValidateInputTest
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void ParameterAssignedTo_CSharp()
+        public void HttpPostControllerActionShouldValidateInput()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\ParameterAssignedTo.cs", new CS.ParameterAssignedTo());
-        }
-
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void ParameterAssignedTo_VisualBasic()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\ParameterAssignedTo.vb", new VB.ParameterAssignedTo());
+            Verifier.VerifyAnalyzer(@"TestCases\HttpPostControllerActionShouldValidateInput.cs",
+                new HttpPostControllerActionShouldValidateInput(),
+                additionalReferences: Verifier.SystemWebMvcAssemblly);
         }
     }
 }
