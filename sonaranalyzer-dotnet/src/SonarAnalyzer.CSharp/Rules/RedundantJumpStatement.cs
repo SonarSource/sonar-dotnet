@@ -129,7 +129,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool IsThrow(JumpBlock jumpBlock)
         {
-            return jumpBlock.JumpNode is ThrowStatementSyntax throwStatement;
+            return jumpBlock.JumpNode is ThrowStatementSyntax;
         }
 
         private static bool IsReturnWithExpression(JumpBlock jumpBlock)

@@ -91,11 +91,10 @@ namespace SonarAnalyzer.Rules.CSharp
             var conditionTrue = new HashSet<SyntaxNode>();
             var conditionFalse = new HashSet<SyntaxNode>();
 
-            EventHandler<ConditionEvaluatedEventArgs> collectConditions =
-                (sender, args) => CollectConditions(args, conditionTrue, conditionFalse, context.SemanticModel);
+            void collectConditions(object sender, ConditionEvaluatedEventArgs args) =>
+                CollectConditions(args, conditionTrue, conditionFalse, context.SemanticModel);
 
-            EventHandler explorationEnded =
-                (sender, args) => Enumerable.Empty<Diagnostic>()
+            void explorationEnded(object sender, EventArgs args) => Enumerable.Empty<Diagnostic>()
                     .Union(conditionTrue
                         .Except(conditionFalse)
                         .Where(c => !IsConditionOfLoopWithBreak((ExpressionSyntax)c))

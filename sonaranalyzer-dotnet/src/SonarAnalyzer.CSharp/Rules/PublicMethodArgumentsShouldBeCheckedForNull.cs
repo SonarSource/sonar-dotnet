@@ -70,8 +70,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             var identifiers = new HashSet<IdentifierNameSyntax>();
 
-            EventHandler<MemberAccessingEventArgs> memberAccessingHandler =
-                (sender, args) => CollectMemberAccesses(args, identifiers, context.SemanticModel);
+            void memberAccessingHandler(object sender, MemberAccessingEventArgs args) => CollectMemberAccesses(args, identifiers, context.SemanticModel);
 
             nullPointerCheck.MemberAccessing += memberAccessingHandler;
 

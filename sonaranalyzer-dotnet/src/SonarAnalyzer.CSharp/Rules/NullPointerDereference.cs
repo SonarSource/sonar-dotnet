@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2018 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -29,8 +29,8 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.SymbolicExecution;
-using SonarAnalyzer.SymbolicExecution.ControlFlowGraph;
 using SonarAnalyzer.SymbolicExecution.Constraints;
+using SonarAnalyzer.SymbolicExecution.ControlFlowGraph;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -58,8 +58,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
             var nullIdentifiers = new HashSet<IdentifierNameSyntax>();
 
-            EventHandler<MemberAccessedEventArgs> memberAccessedHandler =
-                (sender, args) => CollectMemberAccesses(args, nullIdentifiers, context.SemanticModel);
+            void memberAccessedHandler(object sender, MemberAccessedEventArgs args) =>
+                CollectMemberAccesses(args, nullIdentifiers, context.SemanticModel);
 
             nullPointerCheck.MemberAccessed += memberAccessedHandler;
 
