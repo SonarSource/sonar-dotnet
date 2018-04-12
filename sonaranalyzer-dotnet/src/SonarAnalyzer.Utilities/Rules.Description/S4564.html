@@ -1,5 +1,6 @@
 <p>ASP.NET is coming with a feature looking at HTTP requests to prevent potentially dangerous content to perform a cross-site scripting (XSS) attack.
 There is no reason to disable this mechanism even if it should not be the only one in place to prevent XSS attacks.</p>
+<p>This rule raises an issue if <code>System.Web.Mvc.ValidateInputAttribute(false)</code> is set on a method.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
 public class FooBarController : Controller
