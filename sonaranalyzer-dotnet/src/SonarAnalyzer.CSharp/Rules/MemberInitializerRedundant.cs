@@ -119,8 +119,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool IsExplicitlyDefinedConstructor(ISymbol member)
         {
-            var method = member as IMethodSymbol;
-            return method != null &&
+            return member is IMethodSymbol method &&
                 method.MethodKind == MethodKind.Constructor &&
                 !method.IsImplicitlyDeclared;
         }
@@ -324,8 +323,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             private static bool IsOutArgument(ExpressionSyntax parenthesized)
             {
-                var argument = parenthesized.Parent as ArgumentSyntax;
-                return argument != null && argument.RefOrOutKeyword.IsKind(SyntaxKind.OutKeyword);
+                return parenthesized.Parent is ArgumentSyntax argument && argument.RefOrOutKeyword.IsKind(SyntaxKind.OutKeyword);
             }
 
             private static bool IsReadAccess(ExpressionSyntax parenthesized, SemanticModel semanticModel)
@@ -374,9 +372,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
             private static bool IsBeingAssigned(ExpressionSyntax expression)
             {
-                var assignment = expression.Parent as AssignmentExpressionSyntax;
 
-                return assignment != null &&
+                return expression.Parent is AssignmentExpressionSyntax assignment &&
                     assignment.IsKind(SyntaxKind.SimpleAssignmentExpression) &&
                     assignment.Left == expression;
             }

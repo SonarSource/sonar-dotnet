@@ -134,8 +134,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool IsEmptyMethod(MemberDeclarationSyntax node)
         {
-            var methodDeclarationSyntax = node as MethodDeclarationSyntax;
-            return methodDeclarationSyntax != null &&
+            return node is MethodDeclarationSyntax methodDeclarationSyntax &&
                 methodDeclarationSyntax.Body != null &&
                 !methodDeclarationSyntax.Body.Statements.Any();
         }

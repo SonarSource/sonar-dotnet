@@ -83,8 +83,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool IsNullable(ExpressionSyntax expression, SemanticModel semanticModel)
         {
-            var symbolType = semanticModel.GetSymbolInfo(expression).Symbol.GetSymbolType() as INamedTypeSymbol;
-            return symbolType != null && symbolType.ConstructedFrom.Is(KnownType.System_Nullable_T);
+            return semanticModel.GetSymbolInfo(expression).Symbol.GetSymbolType() is INamedTypeSymbol symbolType && symbolType.ConstructedFrom.Is(KnownType.System_Nullable_T);
         }
 
         private static readonly ISet<SyntaxKind> ignoredNullableOperators = new HashSet<SyntaxKind>

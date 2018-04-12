@@ -132,8 +132,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool IsBaseProperty(IPropertySymbol propertySymbol, SemanticModel semanticModel,
             MemberAccessExpressionSyntax memberAccess)
         {
-            var invokedPropertySymbol = semanticModel.GetSymbolInfo(memberAccess).Symbol as IPropertySymbol;
-            return invokedPropertySymbol != null &&
+            return semanticModel.GetSymbolInfo(memberAccess).Symbol is IPropertySymbol invokedPropertySymbol &&
                 invokedPropertySymbol.Equals(propertySymbol.OverriddenProperty);
         }
 

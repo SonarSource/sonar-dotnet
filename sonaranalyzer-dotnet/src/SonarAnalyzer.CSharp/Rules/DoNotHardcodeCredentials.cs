@@ -53,7 +53,7 @@ namespace SonarAnalyzer.Rules.CSharp
             DefaultCredentialWords)]
         public string CredentialWords
         {
-            get { return credentialWords; }
+            get => credentialWords;
             set
             {
                 credentialWords = value;

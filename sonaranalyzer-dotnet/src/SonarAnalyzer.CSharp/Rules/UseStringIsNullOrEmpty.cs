@@ -129,9 +129,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 return false;
             }
 
-            var stringConstValue = constValue.Value as string;
 
-            return stringConstValue != null && stringConstValue == string.Empty;
+            return constValue.Value is string stringConstValue && stringConstValue == string.Empty;
         }
 
         private static bool IsStringEmptyLiteral(ExpressionSyntax expression)

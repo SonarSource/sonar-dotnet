@@ -100,8 +100,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return false;
             }
 
-            var symbol = semanticModel.GetSymbolInfo(lambda).Symbol as IMethodSymbol;
-            return symbol != null && symbol.ReturnsVoid;
+            return semanticModel.GetSymbolInfo(lambda).Symbol is IMethodSymbol symbol && symbol.ReturnsVoid;
         }
 
         private static bool IsExpressionStatement(SyntaxNode node)

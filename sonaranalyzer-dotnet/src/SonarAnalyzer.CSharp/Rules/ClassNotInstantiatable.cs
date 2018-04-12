@@ -100,7 +100,7 @@ namespace SonarAnalyzer.Rules.CSharp
             return typeDeclarations
                 .Select(classDeclaration => new
                 {
-                    SemanticModel = classDeclaration.SemanticModel,
+                    classDeclaration.SemanticModel,
                     DescendantNodes = classDeclaration.SyntaxNode.DescendantNodes().ToList()
                 })
                 .Any(descendants =>

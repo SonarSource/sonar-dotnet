@@ -129,14 +129,12 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool IsThrow(JumpBlock jumpBlock)
         {
-            var throwStatement = jumpBlock.JumpNode as ThrowStatementSyntax;
-            return throwStatement != null;
+            return jumpBlock.JumpNode is ThrowStatementSyntax throwStatement;
         }
 
         private static bool IsReturnWithExpression(JumpBlock jumpBlock)
         {
-            var returnStatement = jumpBlock.JumpNode as ReturnStatementSyntax;
-            return returnStatement != null && returnStatement.Expression != null;
+            return jumpBlock.JumpNode is ReturnStatementSyntax returnStatement && returnStatement.Expression != null;
         }
     }
 }

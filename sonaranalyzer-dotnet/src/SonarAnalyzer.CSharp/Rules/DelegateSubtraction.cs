@@ -99,8 +99,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool IsDelegateSubtraction(SyntaxNode node, SemanticModel semanticModel)
         {
-            var subtractMethod = semanticModel.GetSymbolInfo(node).Symbol as IMethodSymbol;
-            return subtractMethod != null &&
+            return semanticModel.GetSymbolInfo(node).Symbol is IMethodSymbol subtractMethod &&
                 subtractMethod.ReceiverType.Is(TypeKind.Delegate);
         }
 

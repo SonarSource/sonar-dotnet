@@ -47,9 +47,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 c =>
                 {
                     var ctorDeclaration = (ConstructorDeclarationSyntax)c.Node;
-                    var classDeclaration = c.Node.Parent as ClassDeclarationSyntax;
 
-                    var isAbstractClass = classDeclaration != null &&
+                    var isAbstractClass = c.Node.Parent is ClassDeclarationSyntax classDeclaration &&
                         classDeclaration.Modifiers.Any(m => m.IsKind(SyntaxKind.AbstractKeyword));
 
                     var invalidAccessModifier = ctorDeclaration.Modifiers.FirstOrDefault(

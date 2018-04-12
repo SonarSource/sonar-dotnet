@@ -281,15 +281,13 @@ namespace SonarAnalyzer.Rules.CSharp
 
             private static bool IsSuccessorForeachBranch(ProgramPoint programPoint)
             {
-                var successorBlock = programPoint.Block.SuccessorBlocks.First() as BinaryBranchBlock;
-                return successorBlock != null &&
+                return programPoint.Block.SuccessorBlocks.First() is BinaryBranchBlock successorBlock &&
                     successorBlock.BranchingNode.IsKind(SyntaxKind.ForEachStatement);
             }
 
             internal static bool IsExtensionMethod(SyntaxNode expression, SemanticModel semanticModel)
             {
-                var memberSymbol = semanticModel.GetSymbolInfo(expression).Symbol as IMethodSymbol;
-                return memberSymbol != null && memberSymbol.IsExtensionMethod;
+                return semanticModel.GetSymbolInfo(expression).Symbol is IMethodSymbol memberSymbol && memberSymbol.IsExtensionMethod;
             }
 
             private class MemberAccessIdentifierScope

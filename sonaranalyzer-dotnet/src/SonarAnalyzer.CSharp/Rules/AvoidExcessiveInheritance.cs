@@ -64,10 +64,7 @@ namespace SonarAnalyzer.Rules.CSharp
             defaultValue: FilteredClassesDefaultValue)]
         public string FilteredClasses
         {
-            get
-            {
-                return filteredClasses;
-            }
+            get => filteredClasses;
             set
             {
                 filteredClasses = value;

@@ -312,9 +312,8 @@ namespace SonarAnalyzer.SymbolicExecution
 
         protected bool IsFieldSymbol(ISymbol symbol)
         {
-            var field = symbol as IFieldSymbol;
 
-            return field != null &&
+            return symbol is IFieldSymbol field &&
                 (field.IsConst ||
                 declaration.ContainingType
                     .GetSelfAndBaseTypes()

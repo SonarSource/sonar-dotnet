@@ -18,10 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
-using System.Collections.Generic;
 
 namespace SonarAnalyzer.UnitTest.Common
 {
@@ -31,10 +31,12 @@ namespace SonarAnalyzer.UnitTest.Common
         [TestMethod]
         public void MultiValueDictionary_Add()
         {
-            var mvd = new MultiValueDictionary<int, int>();
-            mvd.Add(5, 42);
-            mvd.Add(5, 42);
-            mvd.Add(42, 42);
+            var mvd = new MultiValueDictionary<int, int>
+            {
+                { 5, 42 },
+                { 5, 42 },
+                { 42, 42 }
+            };
 
             mvd.Keys.Should().HaveCount(2);
             mvd[5].Should().HaveCount(2);

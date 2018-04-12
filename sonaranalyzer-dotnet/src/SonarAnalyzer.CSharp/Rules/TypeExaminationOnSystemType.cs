@@ -131,8 +131,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return false;
             }
 
-            var methodSymbol = semanticModel.GetSymbolInfo(invocation).Symbol as IMethodSymbol;
-            return methodSymbol != null && IsGetTypeCall(methodSymbol);
+            return semanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol && IsGetTypeCall(methodSymbol);
         }
     }
 }

@@ -123,8 +123,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool IsInsideConstructorDeclaration(ExpressionSyntax expression, INamedTypeSymbol currentType,
             SemanticModel semanticModel)
         {
-            var constructorSymbol = semanticModel.GetEnclosingSymbol(expression.SpanStart) as IMethodSymbol;
-            return constructorSymbol != null &&
+            return semanticModel.GetEnclosingSymbol(expression.SpanStart) is IMethodSymbol constructorSymbol &&
                 constructorSymbol.MethodKind == MethodKind.Constructor &&
                 constructorSymbol.ContainingType.Equals(currentType);
         }

@@ -72,17 +72,14 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool IsCallInsideOverride(InvocationExpressionSyntax invocation, IMethodSymbol calledMethod,
             SemanticModel semanticModel)
         {
-            var enclosingSymbol = semanticModel.GetEnclosingSymbol(invocation.SpanStart) as IMethodSymbol;
-
-            return enclosingSymbol != null &&
+            return semanticModel.GetEnclosingSymbol(invocation.SpanStart) is IMethodSymbol enclosingSymbol &&
                 enclosingSymbol.IsOverride &&
                 object.Equals(enclosingSymbol.OverriddenMethod, calledMethod);
         }
 
         private static bool IsOnBase(InvocationExpressionSyntax invocation)
         {
-            var memberAccess = invocation.Expression as MemberAccessExpressionSyntax;
-            return memberAccess != null &&
+            return invocation.Expression is MemberAccessExpressionSyntax memberAccess &&
                 memberAccess.Expression.IsKind(SyntaxKind.BaseExpression);
         }
     }

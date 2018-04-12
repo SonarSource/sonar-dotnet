@@ -241,8 +241,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     return false;
                 }
 
-                var assignment = propertyAccess.Parent as AssignmentExpressionSyntax;
-                var isNodeASet = assignment != null && assignment.Left == propertyAccess;
+                var isNodeASet = propertyAccess.Parent is AssignmentExpressionSyntax assignment && assignment.Left == propertyAccess;
                 return isNodeASet == isSet;
             }
         }

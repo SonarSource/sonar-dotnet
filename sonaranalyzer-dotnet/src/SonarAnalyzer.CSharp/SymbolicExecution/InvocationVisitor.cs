@@ -144,10 +144,8 @@ namespace SonarAnalyzer.SymbolicExecution
                 .PopValue(out var arg1)
                 .PopValue(out var expression);
 
-            var memberAccess = expression as MemberAccessSymbolicValue;
 
-            var arg2 = memberAccess != null
-                ? memberAccess.MemberExpression
+            var arg2 = expression is MemberAccessSymbolicValue memberAccess ? memberAccess.MemberExpression
                 : SymbolicValue.This;
 
             var equals = new ValueEqualsSymbolicValue(arg1, arg2);
