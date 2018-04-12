@@ -62,12 +62,11 @@ namespace SonarAnalyzer.Rules.CSharp
             var objectDisposedCheck = new ObjectDisposedPointerCheck(explodedGraph);
             explodedGraph.AddExplodedGraphCheck(objectDisposedCheck);
 
-            EventHandler<ObjectDisposedEventArgs> memberAccessedHandler =
-                (sender, args) =>
-                {
-                    context.ReportDiagnosticWhenActive(
-                        Diagnostic.Create(rule, args.Location, args.Name));
-                };
+            void memberAccessedHandler(object sender, ObjectDisposedEventArgs args)
+            {
+                context.ReportDiagnosticWhenActive(
+                    Diagnostic.Create(rule, args.Location, args.Name));
+            }
 
             objectDisposedCheck.ObjectDisposed += memberAccessedHandler;
 

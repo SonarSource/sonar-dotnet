@@ -101,13 +101,12 @@ namespace SonarAnalyzer.Rules.CSharp
             var emptyCollections = new HashSet<SyntaxNode>();
             var nonEmptyCollections = new HashSet<SyntaxNode>();
 
-            EventHandler explorationEnded =
-                (sender, args) => emptyCollections.Except(nonEmptyCollections)
+            void explorationEnded(object sender, EventArgs args) => emptyCollections.Except(nonEmptyCollections)
                     .Select(node => Diagnostic.Create(rule, node.GetLocation()))
                     .ToList()
                     .ForEach(d => context.ReportDiagnosticWhenActive(d));
 
-            EventHandler<CollectionAccessedEventArgs> collectionAccessedHandler = (sender, args) =>
+            void collectionAccessedHandler(object sender, CollectionAccessedEventArgs args) =>
                 (args.IsEmpty ? emptyCollections : nonEmptyCollections).Add(args.Node);
 
             explodedGraph.ExplorationEnded += explorationEnded;

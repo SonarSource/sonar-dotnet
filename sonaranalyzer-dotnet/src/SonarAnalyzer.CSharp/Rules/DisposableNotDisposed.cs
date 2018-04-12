@@ -310,8 +310,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return false;
             }
 
-            var constructor = semanticModel.GetSymbolInfo(expression).Symbol as IMethodSymbol;
-            return constructor != null && !constructor.Parameters.Any(p => p.Type.Implements(KnownType.System_IDisposable));
+            return semanticModel.GetSymbolInfo(expression).Symbol is IMethodSymbol constructor && !constructor.Parameters.Any(p => p.Type.Implements(KnownType.System_IDisposable));
         }
 
         private static bool IsFactoryMethodInvocation(ExpressionSyntax expression, SemanticModel semanticModel)

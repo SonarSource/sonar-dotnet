@@ -201,8 +201,7 @@ namespace SonarAnalyzer.Rules
 
         internal static bool IsValuePropertyParameter(ISymbol symbol)
         {
-            var parameterSymbol = symbol as IParameterSymbol;
-            return parameterSymbol != null &&
+            return symbol is IParameterSymbol parameterSymbol &&
                 parameterSymbol.IsImplicitlyDeclared &&
                 parameterSymbol.Name == "value";
         }

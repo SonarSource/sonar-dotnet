@@ -117,10 +117,8 @@ namespace SonarAnalyzer.Rules.CSharp
             ExpressionSyntax condition, ExpressionSyntax compared, SemanticModel semanticModel, SyntaxAnnotation annotation,
             bool isNullCoalescing)
         {
-            var return1 = statement1 as ReturnStatementSyntax;
-            var return2 = statement2 as ReturnStatementSyntax;
-
-            if (return1 != null && return2 != null)
+            if (statement1 is ReturnStatementSyntax return1 &&
+                statement2 is ReturnStatementSyntax return2)
             {
                 var retExpr1 = return1.Expression.RemoveParentheses();
                 var retExpr2 = return2.Expression.RemoveParentheses();

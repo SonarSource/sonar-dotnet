@@ -106,8 +106,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool IsMidLevelExpression(BinaryExpressionSyntax binaryExpression)
         {
-            var binaryParent = binaryExpression.Parent as BinaryExpressionSyntax;
-            return binaryParent != null &&
+            return binaryExpression.Parent is BinaryExpressionSyntax binaryParent &&
                    SyntaxFactory.AreEquivalent(binaryExpression.OperatorToken, binaryParent.OperatorToken);
         }
 

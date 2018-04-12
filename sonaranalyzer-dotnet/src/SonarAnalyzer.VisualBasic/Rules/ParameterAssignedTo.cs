@@ -73,8 +73,8 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 return false;
             }
 
-            var catchStatement = declarationName.Parent as CatchStatementSyntax;
-            return catchStatement != null && catchStatement.IdentifierName == declarationName;
+            return declarationName.Parent is CatchStatementSyntax catchStatement
+                && catchStatement.IdentifierName == declarationName;
         }
 
         protected override bool IsAssignmentToParameter(ISymbol symbol)

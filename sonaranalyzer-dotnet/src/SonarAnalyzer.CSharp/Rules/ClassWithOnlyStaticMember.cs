@@ -158,8 +158,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool IsConstructor(ISymbol member)
         {
-            var method = member as IMethodSymbol;
-            return method != null &&
+            return member is IMethodSymbol method &&
                    method.MethodKind == MethodKind.Constructor &&
                    !method.IsImplicitlyDeclared;
         }

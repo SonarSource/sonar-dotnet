@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2018 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -29,8 +29,8 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.SymbolicExecution;
-using SonarAnalyzer.SymbolicExecution.ControlFlowGraph;
 using SonarAnalyzer.SymbolicExecution.Constraints;
+using SonarAnalyzer.SymbolicExecution.ControlFlowGraph;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -58,8 +58,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
             var nullIdentifiers = new HashSet<IdentifierNameSyntax>();
 
-            EventHandler<MemberAccessedEventArgs> memberAccessedHandler =
-                (sender, args) => CollectMemberAccesses(args, nullIdentifiers, context.SemanticModel);
+            void memberAccessedHandler(object sender, MemberAccessedEventArgs args) =>
+                CollectMemberAccesses(args, nullIdentifiers, context.SemanticModel);
 
             nullPointerCheck.MemberAccessed += memberAccessedHandler;
 
@@ -281,15 +281,13 @@ namespace SonarAnalyzer.Rules.CSharp
 
             private static bool IsSuccessorForeachBranch(ProgramPoint programPoint)
             {
-                var successorBlock = programPoint.Block.SuccessorBlocks.First() as BinaryBranchBlock;
-                return successorBlock != null &&
+                return programPoint.Block.SuccessorBlocks.First() is BinaryBranchBlock successorBlock &&
                     successorBlock.BranchingNode.IsKind(SyntaxKind.ForEachStatement);
             }
 
             internal static bool IsExtensionMethod(SyntaxNode expression, SemanticModel semanticModel)
             {
-                var memberSymbol = semanticModel.GetSymbolInfo(expression).Symbol as IMethodSymbol;
-                return memberSymbol != null && memberSymbol.IsExtensionMethod;
+                return semanticModel.GetSymbolInfo(expression).Symbol is IMethodSymbol memberSymbol && memberSymbol.IsExtensionMethod;
             }
 
             private class MemberAccessIdentifierScope

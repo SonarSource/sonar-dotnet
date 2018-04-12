@@ -58,10 +58,9 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool IsEmpty(SyntaxNode node)
         {
-            var switchNode = node as SwitchStatementSyntax;
             var blockNode = node as BlockSyntax;
 
-            return (switchNode != null && IsEmpty(switchNode)) ||
+            return (node is SwitchStatementSyntax switchNode && IsEmpty(switchNode)) ||
                 (blockNode != null && IsNestedAndEmpty(blockNode));
         }
 

@@ -127,9 +127,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool IsInternalVisibleToAttribute(AttributeSyntax attribute, SemanticModel semanticModel)
         {
-            var attributeConstructor = semanticModel.GetSymbolInfo(attribute).Symbol as IMethodSymbol;
 
-            return attributeConstructor != null &&
+            return semanticModel.GetSymbolInfo(attribute).Symbol is IMethodSymbol attributeConstructor &&
                 attributeConstructor.ContainingType.Is(KnownType.System_Runtime_CompilerServices_InternalsVisibleToAttribute);
         }
 
@@ -421,11 +420,11 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             var candidateSymbols = allNodes
-                .Select(n => new { Syntax = n.SyntaxNode, SemanticModel = n.SemanticModel, Symbol = n.SemanticModel.GetSymbolInfo(n.SyntaxNode) })
+                .Select(n => new { Syntax = n.SyntaxNode, n.SemanticModel, Symbol = n.SemanticModel.GetSymbolInfo(n.SyntaxNode) })
                 .Select(n => new
                 {
-                    Syntax = n.Syntax,
-                    SemanticModel = n.SemanticModel,
+                    n.Syntax,
+                    n.SemanticModel,
                     Symbols = GetAllCandidateSymbols(n.Symbol)
                         .Select(s => GetOriginalSymbol(s))
                         .Where(s => s != null)

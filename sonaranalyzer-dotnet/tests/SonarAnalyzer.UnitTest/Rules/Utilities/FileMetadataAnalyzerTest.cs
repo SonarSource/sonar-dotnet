@@ -19,12 +19,11 @@
  */
 
 extern alias csharp;
-using System.IO;
 using System.Linq;
+using csharp::SonarAnalyzer.Rules.CSharp;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Protobuf;
-using csharp::SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -124,14 +123,14 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             public bool IsEnabled
             {
-                get { return IsAnalyzerEnabled; }
-                set { IsAnalyzerEnabled = value; }
+                get => IsAnalyzerEnabled;
+                set => IsAnalyzerEnabled = value;
             }
 
             public string WorkingPath
             {
-                get { return WorkDirectoryBasePath; }
-                set { WorkDirectoryBasePath = value; }
+                get => WorkDirectoryBasePath;
+                set => WorkDirectoryBasePath = value;
             }
         }
     }

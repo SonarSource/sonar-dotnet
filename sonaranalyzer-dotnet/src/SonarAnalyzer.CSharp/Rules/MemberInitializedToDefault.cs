@@ -128,8 +128,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool CheckDefaultExpressionInitializer(EqualsValueClauseSyntax initializer)
         {
-            var defaultValue = initializer.Value as DefaultExpressionSyntax;
-            return defaultValue != null;
+            return initializer.Value is DefaultExpressionSyntax defaultValue;
         }
 
         private static bool CheckReferenceTypeNullInitializer(EqualsValueClauseSyntax initializer, ITypeSymbol type)

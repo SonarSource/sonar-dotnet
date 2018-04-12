@@ -67,9 +67,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool IsInvalidCall(ExpressionSyntax expression, SemanticModel semanticModel)
         {
-            var methodSymbol = semanticModel.GetSymbolInfo(expression).Symbol as IMethodSymbol;
 
-            return methodSymbol != null &&
+            return semanticModel.GetSymbolInfo(expression).Symbol is IMethodSymbol methodSymbol &&
                 !HasAnyStringComparisonParameter(methodSymbol) &&
                 methodSymbol.GetParameters().Any(parameter => parameter.Type.Is(KnownType.System_String)) &&
                 !SpecifyIFormatProviderOrCultureInfo.HasAnyFormatOrCultureParameter(methodSymbol);

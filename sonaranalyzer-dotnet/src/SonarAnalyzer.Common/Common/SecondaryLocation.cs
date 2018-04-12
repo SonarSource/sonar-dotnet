@@ -48,7 +48,7 @@ namespace SonarAnalyzer.Common
         public static ImmutableDictionary<string, string> ToProperties(this IEnumerable<SecondaryLocation> secondaryLocations)
         {
             return secondaryLocations
-                .Select((item, index) => new { Message = item.Message, Index = index.ToString() })
+                .Select((item, index) => new { item.Message, Index = index.ToString() })
                 .ToDictionary(i => i.Index, i => i.Message)
                 .ToImmutableDictionary();
         }

@@ -69,8 +69,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool ExpressionIsModulus(ExpressionSyntax expression)
         {
-            var binary = expression.RemoveParentheses() as BinaryExpressionSyntax;
-            return binary != null && binary.IsKind(SyntaxKind.ModuloExpression);
+            return expression.RemoveParentheses() is BinaryExpressionSyntax binary && binary.IsKind(SyntaxKind.ModuloExpression);
         }
 
         private static bool ExpressionIsNonNegative(ExpressionSyntax expression, SemanticModel semantic)

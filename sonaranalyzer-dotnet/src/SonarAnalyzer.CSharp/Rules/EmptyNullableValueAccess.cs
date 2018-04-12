@@ -60,8 +60,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             var nullIdentifiers = new HashSet<IdentifierNameSyntax>();
 
-            EventHandler<MemberAccessedEventArgs> nullValueAccessedHandler =
-                (sender, args) => nullIdentifiers.Add(args.Identifier);
+            void nullValueAccessedHandler(object sender, MemberAccessedEventArgs args) => nullIdentifiers.Add(args.Identifier);
 
             nullPointerCheck.ValuePropertyAccessed += nullValueAccessedHandler;
 

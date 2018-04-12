@@ -75,9 +75,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 return false;
             }
 
-            var methodSymbol = semanticModel.GetSymbolInfo(invocation).Symbol as IMethodSymbol;
 
-            return methodSymbol != null &&
+            return semanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol &&
                    methodSymbol.Name == "OrderBy" &&
                    methodSymbol.MethodKind == MethodKind.ReducedExtension &&
                    methodSymbol.IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T);
@@ -89,9 +88,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 return false;
             }
 
-            var methodSymbol = semanticModel.GetSymbolInfo(invocation).Symbol as IMethodSymbol;
 
-            return methodSymbol != null &&
+            return semanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol &&
                    methodSymbol.Name == "ThenBy" &&
                    methodSymbol.MethodKind == MethodKind.ReducedExtension &&
                    MethodIsOnIOrderedEnumerable(methodSymbol);
@@ -99,9 +97,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool MethodIsOnIOrderedEnumerable(IMethodSymbol methodSymbol)
         {
-            var receiverType = methodSymbol.ReceiverType as INamedTypeSymbol;
 
-            return receiverType != null &&
+            return methodSymbol.ReceiverType is INamedTypeSymbol receiverType &&
                    receiverType.ConstructedFrom.ContainingNamespace.ToString() == "System.Linq" &&
                    receiverType.ConstructedFrom.MetadataName == "IOrderedEnumerable`1";
         }

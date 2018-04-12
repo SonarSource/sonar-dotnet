@@ -97,9 +97,6 @@ namespace SonarAnalyzer.Rules.CSharp
 
             bool IsNotCopied(SyntaxNodeSymbolSemanticModelTuple<SyntaxNode, ISymbol> tuple) =>
                 !possiblyCopiedSymbols.Contains(tuple.Symbol);
-
-            bool IsUsed(SyntaxNodeSymbolSemanticModelTuple<SyntaxNode, ISymbol> tuple) =>
-                usedSymbols.Contains(tuple.Symbol);
         }
 
         private static ISet<ISymbol> GetReferencedSymbolsWithMatchingNames(RemovableDeclarationCollector removableDeclarationCollector,

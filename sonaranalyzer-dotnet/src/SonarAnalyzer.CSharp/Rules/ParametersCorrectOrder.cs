@@ -51,7 +51,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var methodCall = (InvocationExpressionSyntax)c.Node;
 
                     var memberAccess = methodCall.Expression as MemberAccessExpressionSyntax;
-                    Func<Location> getLocation = () =>
+                    Location getLocation() =>
                         memberAccess == null
                         ? methodCall.Expression.GetLocation()
                         : memberAccess.Name.GetLocation();
@@ -65,7 +65,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var objectCreationCall = (ObjectCreationExpressionSyntax)c.Node;
 
                     var qualifiedAccess = objectCreationCall.Type as QualifiedNameSyntax;
-                    Func<Location> getLocation = () =>
+                    Location getLocation() =>
                         qualifiedAccess == null
                         ? objectCreationCall.Type.GetLocation()
                         : qualifiedAccess.Right.GetLocation();

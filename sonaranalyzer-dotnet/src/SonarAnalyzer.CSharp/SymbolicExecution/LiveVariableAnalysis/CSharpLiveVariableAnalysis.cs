@@ -203,9 +203,8 @@ namespace SonarAnalyzer.SymbolicExecution.LiveVariableAnalysis
 
         internal static bool IsOutArgument(IdentifierNameSyntax identifier)
         {
-            var argument = identifier.GetSelfOrTopParenthesizedExpression().Parent as ArgumentSyntax;
 
-            return argument != null &&
+            return identifier.GetSelfOrTopParenthesizedExpression().Parent is ArgumentSyntax argument &&
                 argument.RefOrOutKeyword.IsKind(SyntaxKind.OutKeyword);
         }
 

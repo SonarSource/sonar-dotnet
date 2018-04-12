@@ -51,9 +51,7 @@ namespace SonarAnalyzer.SymbolicExecution.ControlFlowGraph
 
         private static IEnumerable<SyntaxToken> GetIdentifiers(ExpressionSyntax expression)
         {
-            var identifier = expression.RemoveParentheses() as IdentifierNameSyntax;
-            return identifier != null
-                ? ImmutableArray.Create(identifier.Identifier)
+            return expression.RemoveParentheses() is IdentifierNameSyntax identifier ? ImmutableArray.Create(identifier.Identifier)
                 : expression.DescendantNodesAndSelf()
                     .OfType<AssignmentExpressionSyntax>()
                     .Select(a => a.Left)

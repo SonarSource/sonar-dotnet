@@ -112,10 +112,9 @@ namespace SonarAnalyzer.Rules
 
         private static bool IsValidReadOnlyInitializer(ISymbol symbol, ExpressionSyntax equalsValue)
         {
-            var methodSymbol = symbol as IMethodSymbol;
             var equalsLiteral = equalsValue as LiteralExpressionSyntax;
 
-            return (methodSymbol != null && methodSymbol.ReturnType.DerivesOrImplementsAny(AllowedTypes)) ||
+            return (symbol is IMethodSymbol methodSymbol && methodSymbol.ReturnType.DerivesOrImplementsAny(AllowedTypes)) ||
                    (equalsLiteral != null && equalsValue.IsKind(SyntaxKind.NullLiteralExpression));
         }
 

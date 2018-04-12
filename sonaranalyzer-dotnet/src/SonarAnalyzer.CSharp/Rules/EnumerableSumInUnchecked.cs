@@ -93,15 +93,13 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool IsUncheckedExpression(SyntaxNode node)
         {
-            var uncheckedExpression = node as CheckedExpressionSyntax;
-            return uncheckedExpression != null &&
+            return node is CheckedExpressionSyntax uncheckedExpression &&
                 uncheckedExpression.IsKind(SyntaxKind.UncheckedExpression);
         }
 
         private static bool IsUncheckedStatement(SyntaxNode node)
         {
-            var uncheckedExpression = node as CheckedStatementSyntax;
-            return uncheckedExpression != null &&
+            return node is CheckedStatementSyntax uncheckedExpression &&
                 uncheckedExpression.IsKind(SyntaxKind.UncheckedStatement);
         }
 

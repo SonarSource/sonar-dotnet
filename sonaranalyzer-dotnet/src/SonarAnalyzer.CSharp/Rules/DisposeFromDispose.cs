@@ -89,8 +89,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool IsDisposableField(ExpressionSyntax expression, SemanticModel semanticModel)
         {
-            var fieldSymbol = semanticModel.GetSymbolInfo(expression).Symbol as IFieldSymbol;
-            return fieldSymbol != null &&
+            return semanticModel.GetSymbolInfo(expression).Symbol is IFieldSymbol fieldSymbol &&
                 DisposableMemberInNonDisposableClass.IsNonStaticNonPublicDisposableField(fieldSymbol) &&
                 fieldSymbol.ContainingType.Implements(KnownType.System_IDisposable);
         }

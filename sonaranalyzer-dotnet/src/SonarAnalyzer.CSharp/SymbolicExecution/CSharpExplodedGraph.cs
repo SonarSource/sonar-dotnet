@@ -631,8 +631,7 @@ namespace SonarAnalyzer.SymbolicExecution
 
         private bool IsOperatorOnObject(SyntaxNode instruction)
         {
-            var operatorSymbol = SemanticModel.GetSymbolInfo(instruction).Symbol as IMethodSymbol;
-            return operatorSymbol != null &&
+            return SemanticModel.GetSymbolInfo(instruction).Symbol is IMethodSymbol operatorSymbol &&
                 operatorSymbol.ContainingType.Is(KnownType.System_Object);
         }
 

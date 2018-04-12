@@ -83,14 +83,8 @@ namespace SonarAnalyzer.RuleDescriptorGenerator
         [XmlElement("description")]
         public XmlCDataSection DescriptionCDataSection
         {
-            get
-            {
-                return new XmlDocument().CreateCDataSection(Description);
-            }
-            set
-            {
-                Description = value == null ? "" : value.Value;
-            }
+            get => new XmlDocument().CreateCDataSection(Description);
+            set => Description = value == null ? "" : value.Value;
         }
 
         [XmlElement("tag")]

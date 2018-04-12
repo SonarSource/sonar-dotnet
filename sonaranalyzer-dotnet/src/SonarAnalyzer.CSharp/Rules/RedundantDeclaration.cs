@@ -341,9 +341,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool IsDelegateCreation(ObjectCreationExpressionSyntax objectCreation, SemanticModel semanticModel)
         {
-            var type = semanticModel.GetSymbolInfo(objectCreation.Type).Symbol as INamedTypeSymbol;
 
-            return type != null &&
+            return semanticModel.GetSymbolInfo(objectCreation.Type).Symbol is INamedTypeSymbol type &&
                 type.TypeKind == TypeKind.Delegate;
         }
 
@@ -451,9 +450,8 @@ namespace SonarAnalyzer.Rules.CSharp
                         : a)));
             var newInvocation = invocation.WithArgumentList(newArgumentList);
             newInvocation = ChangeSyntaxElement(invocation, newInvocation, semanticModel, out var newSemanticModel);
-            var newMethodSymbol = newSemanticModel.GetSymbolInfo(newInvocation).Symbol as IMethodSymbol;
 
-            return newMethodSymbol != null &&
+            return newSemanticModel.GetSymbolInfo(newInvocation).Symbol is IMethodSymbol newMethodSymbol &&
                 methodSymbol.ToDisplayString() == newMethodSymbol.ToDisplayString();
         }
 
