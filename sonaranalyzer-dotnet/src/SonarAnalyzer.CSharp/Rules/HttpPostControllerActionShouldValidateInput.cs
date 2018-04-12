@@ -19,6 +19,7 @@
  */
 
 using System.Collections.Immutable;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -33,7 +34,7 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class HttpPostControllerActionShouldValidateInput : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S4564";
-        private const string MessageFormat = "Enable validation on this 'ValidateInput' attribute.";
+        private const string MessageFormat = "Enable input validation for this HttpPost method.";
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
@@ -44,31 +45,48 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
-                    var attributeSyntax = (AttributeSyntax)c.Node;
+                    var methodDeclaration = (MethodDeclarationSyntax)c.Node;
 
-                    if (attributeSyntax.ArgumentList == null ||
-                        attributeSyntax.ArgumentList.Arguments.Count != 1)
+                    if (methodDeclaration.ParameterList == null ||
+                        methodDeclaration.ParameterList.Parameters.Count == 0)
                     {
                         return;
                     }
 
-                    var attributeCtorSymbol = c.SemanticModel.GetSymbolInfo(attributeSyntax.Name).Symbol as IMethodSymbol;
-                    if (attributeCtorSymbol == null ||
-                        !attributeCtorSymbol.ContainingType.Is(KnownType.System_Web_Mvc_ValidateInputAttribute))
+                    var attributes = methodDeclaration.AttributeLists
+                        .SelectMany(list => list.Attributes)
+                        .ToList();
+
+                    var httpPostAttribute = attributes.FirstOrDefault(a => a.Name.ToString().StartsWith("HttpPost"));
+                    if (httpPostAttribute == null)
                     {
                         return;
                     }
 
-                    var constantValue = c.SemanticModel.GetConstantValue(attributeSyntax.ArgumentList.Arguments[0].Expression);
-                    if (!constantValue.HasValue ||
-                        (constantValue.Value as bool?) != false)
+                    var validateInputAttribute = attributes.FirstOrDefault(a => a.Name.ToString().StartsWith("ValidateInput"));
+
+                    if (validateInputAttribute == null)
                     {
+                        // ValidateInputAttribute not set
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, httpPostAttribute.GetLocation()));
                         return;
                     }
 
-                    c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, attributeSyntax.GetLocation()));
+                    if (c.SemanticModel.GetSymbolInfo(validateInputAttribute.Name).Symbol is IMethodSymbol validateInputSymbol)
+                    {
+                        var constantValue = c.SemanticModel.GetConstantValue(validateInputAttribute.ArgumentList.Arguments[0].Expression);
+                        if (!constantValue.HasValue ||
+                            (constantValue.Value as bool?) != false)
+                        {
+                            return;
+                        }
+
+                        // Found ValidateInput(false)
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, httpPostAttribute.GetLocation()));
+                    }
+
                 },
-                SyntaxKind.Attribute);
+                SyntaxKind.MethodDeclaration);
         }
     }
 }

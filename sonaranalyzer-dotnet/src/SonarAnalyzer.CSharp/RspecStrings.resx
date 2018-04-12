@@ -9997,7 +9997,7 @@
     <value>Major Vulnerability</value>
   </data>
   <data name="S4564_Description" xml:space="preserve">
-    <value>ASP.NET is coming with a feature looking at HTTP requests to prevent potentially dangerous content to perform a cross-site scripting (XSS) attack. There is no reason to disable this mechanism even if it should not be the only one in place to prevent XSS attacks.</value>
+    <value>ASP.Net has a feature to validate HTTP requests to prevent potentially dangerous content to perform a cross-site scripting (XSS) attack. There is no reason to disable this mechanism even if other checks to prevent XXS attacks are in place.</value>
   </data>
   <data name="S4564_IsActivatedByDefault" xml:space="preserve">
     <value>False</value>
