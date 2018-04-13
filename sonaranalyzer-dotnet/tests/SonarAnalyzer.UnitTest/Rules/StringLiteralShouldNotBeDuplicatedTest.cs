@@ -19,10 +19,7 @@
  */
 
 extern alias csharp;
-
-using System;
 using csharp::SonarAnalyzer.Rules.CSharp;
-using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace SonarAnalyzer.UnitTest.Rules
@@ -34,11 +31,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void StringLiteralShouldNotBeDuplicated()
         {
-            Action act = () => Verifier.VerifyAnalyzer(@"TestCases\StringLiteralShouldNotBeDuplicated.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\StringLiteralShouldNotBeDuplicated.cs",
                 new StringLiteralShouldNotBeDuplicated());
-
-            act.ShouldThrow<AssertFailedException>()
-                .And.Message.Should().Be("Issue with message 'Define a constant instead of using the literal 'foobar' 8 times.' not expected on line 1");
         }
     }
 }
