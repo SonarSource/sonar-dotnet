@@ -44,6 +44,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static readonly ISet<string> invalidEnumValues =
             new HashSet<string>
             {
+                "CipherMode.CBC",
                 "CipherMode.CFB",
                 "CipherMode.CTS",
                 "CipherMode.ECB",

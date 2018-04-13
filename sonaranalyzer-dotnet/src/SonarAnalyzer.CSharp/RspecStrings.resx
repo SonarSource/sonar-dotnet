@@ -9880,7 +9880,7 @@
     <value>Encryption algorithms can be used with various modes. Some combinations are not secured:</value>
   </data>
   <data name="S4432_IsActivatedByDefault" xml:space="preserve">
-    <value>True</value>
+    <value>False</value>
   </data>
   <data name="S4432_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>

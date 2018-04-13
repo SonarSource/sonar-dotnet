@@ -7,29 +7,7 @@ namespace Tests.Diagnostics
     {
         public void CompliantCases()
         {
-            new AesManaged
-            {
-                Mode = CipherMode.CBC,
-                Padding = PaddingMode.ANSIX923
-            };
-
-            new AesManaged
-            {
-                Mode = CipherMode.CBC,
-                Padding = PaddingMode.ISO10126
-            };
-
-            new AesManaged
-            {
-                Mode = CipherMode.CBC,
-                Padding = PaddingMode.None
-            };
-
-            new AesManaged
-            {
-                Mode = CipherMode.CBC,
-                Padding = PaddingMode.Zeros
-            };
+            // None
         }
 
         public void NonCompliantCases()
@@ -44,8 +22,7 @@ namespace Tests.Diagnostics
 
             new AesManaged
             {
-                Mode = CipherMode.CBC, // Compliant - False Negative
-                Padding = PaddingMode.PKCS7
+                Mode = CipherMode.CBC, // Noncompliant
             };
 
             new AesManaged

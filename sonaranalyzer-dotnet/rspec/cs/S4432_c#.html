@@ -8,10 +8,7 @@
 </ul>
 <p>In both cases, Galois/Counter Mode (GCM) with no padding should be preferred. As the .NET framework doesn't provide this natively, the use of a
 certified third party lib is recommended. </p>
-<p>This rule raises an issue when:</p>
-<p>- CipherMode.ECB is detected</p>
-<p>- CipherMode.CBC + (PaddingMode.PKCS5 or PaddingMode.PKCS7) are detected</p>
-<p>- CipherMode.OFB, CipherMode.CFB, CiphterMode.CTS are detected</p>
+<p>This rule raises an issue when any of the following CipherMode is detected: ECB, CBC, OFB, CFB, CTS.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
 AesManaged aes = new AesManaged
