@@ -60,17 +60,21 @@ namespace SonarAnalyzer.Rules.CSharp
                 return false;
             }
 
-            return localSymbol.DeclaringSyntaxReferences
+            var result = localSymbol.DeclaringSyntaxReferences
                 .Select(declaringSyntaxReference => declaringSyntaxReference.GetSyntax())
                 .Any(syntaxNode =>
                     syntaxNode.Parent is CatchClauseSyntax &&
                     ((CatchClauseSyntax)syntaxNode.Parent).Declaration == syntaxNode);
+
+            return result;
         }
 
         protected override bool IsAssignmentToParameter(ISymbol symbol)
         {
             var parameterSymbol = symbol as IParameterSymbol;
-            return parameterSymbol?.RefKind == RefKind.None;
+            var result = parameterSymbol?.RefKind == RefKind.None;
+
+            return result;
         }
 
         protected override SyntaxNode GetAssignedNode(AssignmentExpressionSyntax assignment) => assignment.Left;

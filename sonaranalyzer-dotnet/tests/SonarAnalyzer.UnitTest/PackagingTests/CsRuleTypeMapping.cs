@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2018 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -4561,7 +4561,7 @@ namespace SonarAnalyzer.UnitTest.PackagingTests
             //["4561"],
             //["4562"],
             //["4563"],
-            //["4564"],
+            ["4564"] = "VULNERABILITY",
             //["4565"],
             //["4566"],
             //["4567"],
