@@ -1216,13 +1216,13 @@
     <value>CODE_SMELL</value>
   </data>
   <data name="S1192_Category" xml:space="preserve">
-    <value>Critical Code Smell</value>
+    <value>Minor Code Smell</value>
   </data>
   <data name="S1192_Description" xml:space="preserve">
     <value>Duplicated string literals make the process of refactoring error-prone, since you must be sure to update all occurrences.</value>
   </data>
   <data name="S1192_IsActivatedByDefault" xml:space="preserve">
-    <value>True</value>
+    <value>False</value>
   </data>
   <data name="S1192_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
@@ -1234,7 +1234,7 @@
     <value>Main</value>
   </data>
   <data name="S1192_Severity" xml:space="preserve">
-    <value>Critical</value>
+    <value>Minor</value>
   </data>
   <data name="S1192_Tags" xml:space="preserve">
     <value>design</value>
