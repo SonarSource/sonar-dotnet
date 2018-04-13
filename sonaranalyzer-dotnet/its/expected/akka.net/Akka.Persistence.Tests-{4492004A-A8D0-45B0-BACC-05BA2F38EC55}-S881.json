@@ -1,0 +1,95 @@
+{
+"issues":  [
+{
+"id":  "S881",
+"message":  "Extract this [increment|decrement] operation into a dedicated statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\PersistentActorSpec.Actors.cs",
+"region":  {
+"startLine":  491,
+"startColumn":  72,
+"endLine":  491,
+"endColumn":  73
+}
+}
+},
+{
+"id":  "S881",
+"message":  "Extract this [increment|decrement] operation into a dedicated statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\PersistentActorSpec.Actors.cs",
+"region":  {
+"startLine":  522,
+"startColumn":  76,
+"endLine":  522,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S881",
+"message":  "Extract this [increment|decrement] operation into a dedicated statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\PersistentActorSpec.Actors.cs",
+"region":  {
+"startLine":  587,
+"startColumn":  94,
+"endLine":  587,
+"endColumn":  95
+}
+}
+},
+{
+"id":  "S881",
+"message":  "Extract this [increment|decrement] operation into a dedicated statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\PersistentActorSpec.Actors.cs",
+"region":  {
+"startLine":  588,
+"startColumn":  100,
+"endLine":  588,
+"endColumn":  101
+}
+}
+},
+{
+"id":  "S881",
+"message":  "Extract this [increment|decrement] operation into a dedicated statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\PersistentActorSpec.Actors.cs",
+"region":  {
+"startLine":  589,
+"startColumn":  94,
+"endLine":  589,
+"endColumn":  95
+}
+}
+},
+{
+"id":  "S881",
+"message":  "Extract this [increment|decrement] operation into a dedicated statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\PersistentActorSpec.Actors.cs",
+"region":  {
+"startLine":  617,
+"startColumn":  94,
+"endLine":  617,
+"endColumn":  95
+}
+}
+},
+{
+"id":  "S881",
+"message":  "Extract this [increment|decrement] operation into a dedicated statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\PersistentActorSpec.Actors.cs",
+"region":  {
+"startLine":  618,
+"startColumn":  100,
+"endLine":  618,
+"endColumn":  101
+}
+}
+}
+]
+}

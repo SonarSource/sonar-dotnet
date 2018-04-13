@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S881",
+"message":  "Extract this [increment|decrement] operation into a dedicated statement.",
+"location":  {
+"uri":  "sources\akka.net\src\contrib\persistence\Akka.Persistence.Sqlite\Journal\SqliteQueryBuilder.cs",
+"region":  {
+"startLine":  82,
+"startColumn":  44,
+"endLine":  82,
+"endColumn":  45
+}
+}
+}
+]
+}
