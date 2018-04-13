@@ -2,9 +2,8 @@
 "issues":  [
 {
 "id":  "S1192",
-"message":  "Define a constant instead of using the literal 'Content-Length' 4 times.",
+"message":  "Define a constant instead of using this literal 'Content-Length' 4 times.",
 "location":  [
-null,
 {
 "uri":  "sources\Nancy\src\Nancy.Hosting.Self\NancyHost.cs",
 "region":  {

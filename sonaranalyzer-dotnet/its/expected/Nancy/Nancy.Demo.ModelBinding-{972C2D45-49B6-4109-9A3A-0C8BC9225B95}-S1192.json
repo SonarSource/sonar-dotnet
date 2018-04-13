@@ -2,9 +2,8 @@
 "issues":  [
 {
 "id":  "S1192",
-"message":  "Define a constant instead of using the literal 'Value ' 15 times.",
+"message":  "Define a constant instead of using this literal 'Value ' 15 times.",
 "location":  [
-null,
 {
 "uri":  "sources\Nancy\src\Nancy.Demo.ConstraintRouting\ConstraintRoutingModule.cs",
 "region":  {

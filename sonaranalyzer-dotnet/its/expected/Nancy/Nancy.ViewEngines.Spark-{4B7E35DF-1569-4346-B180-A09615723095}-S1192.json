@@ -2,9 +2,8 @@
 "issues":  [
 {
 "id":  "S1192",
-"message":  "Define a constant instead of using the literal 'Application.spark' 4 times.",
+"message":  "Define a constant instead of using this literal 'Application.spark' 4 times.",
 "location":  [
-null,
 {
 "uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark\Descriptors\DefaultDescriptorBuilder.cs",
 "region":  {
@@ -45,9 +44,8 @@ null,
 },
 {
 "id":  "S1192",
-"message":  "Define a constant instead of using the literal 'Application.shade' 4 times.",
+"message":  "Define a constant instead of using this literal 'Application.shade' 4 times.",
 "location":  [
-null,
 {
 "uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark\Descriptors\DefaultDescriptorBuilder.cs",
 "region":  {
@@ -88,9 +86,8 @@ null,
 },
 {
 "id":  "S1192",
-"message":  "Define a constant instead of using the literal '.spark' 7 times.",
+"message":  "Define a constant instead of using this literal '.spark' 7 times.",
 "location":  [
-null,
 {
 "uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark\Descriptors\DefaultDescriptorBuilder.cs",
 "region":  {
@@ -158,9 +155,8 @@ null,
 },
 {
 "id":  "S1192",
-"message":  "Define a constant instead of using the literal '.shade' 7 times.",
+"message":  "Define a constant instead of using this literal '.shade' 7 times.",
 "location":  [
-null,
 {
 "uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark\Descriptors\DefaultDescriptorBuilder.cs",
 "region":  {
@@ -228,9 +224,8 @@ null,
 },
 {
 "id":  "S1192",
-"message":  "Define a constant instead of using the literal 'Layouts' 8 times.",
+"message":  "Define a constant instead of using this literal 'Layouts' 8 times.",
 "location":  [
-null,
 {
 "uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark\Descriptors\DefaultDescriptorBuilder.cs",
 "region":  {
@@ -307,9 +302,8 @@ null,
 },
 {
 "id":  "S1192",
-"message":  "Define a constant instead of using the literal 'Shared' 10 times.",
+"message":  "Define a constant instead of using this literal 'Shared' 10 times.",
 "location":  [
-null,
 {
 "uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark\Descriptors\DefaultDescriptorBuilder.cs",
 "region":  {
@@ -404,9 +398,8 @@ null,
 },
 {
 "id":  "S1192",
-"message":  "Define a constant instead of using the literal 'Views' 10 times.",
+"message":  "Define a constant instead of using this literal 'Views' 10 times.",
 "location":  [
-null,
 {
 "uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark\Descriptors\DefaultDescriptorBuilder.cs",
 "region":  {

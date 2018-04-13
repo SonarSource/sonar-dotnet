@@ -2,9 +2,8 @@
 "issues":  [
 {
 "id":  "S1192",
-"message":  "Define a constant instead of using the literal 'Frank' 7 times.",
+"message":  "Define a constant instead of using this literal 'Frank' 7 times.",
 "location":  [
-null,
 {
 "uri":  "sources\Nancy\src\Nancy.Demo.Hosting.Aspnet\MainModule.cs",
 "region":  {
@@ -66,49 +65,6 @@ null,
 "startColumn":  78,
 "endLine":  128,
 "endColumn":  85
-}
-}
-]
-},
-{
-"id":  "S1192",
-"message":  "Define a constant instead of using the literal 'Nancy' 4 times.",
-"location":  [
-null,
-{
-"uri":  "sources\Nancy\src\SharedAssemblyInfo.cs",
-"region":  {
-"startLine":  4,
-"startColumn":  26,
-"endLine":  4,
-"endColumn":  33
-}
-},
-{
-"uri":  "sources\Nancy\src\SharedAssemblyInfo.cs",
-"region":  {
-"startLine":  6,
-"startColumn":  28,
-"endLine":  6,
-"endColumn":  35
-}
-},
-{
-"uri":  "sources\Nancy\src\SharedAssemblyInfo.cs",
-"region":  {
-"startLine":  7,
-"startColumn":  28,
-"endLine":  7,
-"endColumn":  35
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy.Demo.Hosting.Aspnet\MainModule.cs",
-"region":  {
-"startLine":  78,
-"startColumn":  54,
-"endLine":  78,
-"endColumn":  61
 }
 }
 ]
