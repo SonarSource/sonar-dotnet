@@ -54,9 +54,16 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
-                    var stringLiterals = c.Node.DescendantNodes()
-                        .OfType<LiteralExpressionSyntax>()
-                        .Where(les => les.IsKind(SyntaxKind.StringLiteralExpression));
+                    if (c.Node.Ancestors().OfType<ClassDeclarationSyntax>().Any())
+                    {
+                        // Don't report on inner instances
+                        return;
+                    }
+
+                    var stringLiterals = c.Node
+                        .DescendantNodes()
+                        .Where(les => les.IsKind(SyntaxKind.StringLiteralExpression))
+                        .Cast<LiteralExpressionSyntax>();
 
                     // Collect duplications
                     var stringWithLiterals = new Dictionary<string, List<LiteralExpressionSyntax>>();
@@ -83,7 +90,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         if (item.Value.Count > Threshold)
                         {
                             c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, item.Value[0].GetLocation(),
-                                additionalLocations: item.Value.Skip(1).Select(x => x.GetLocation()).OrderBy(x => x.SourceSpan),
+                                additionalLocations: item.Value.Skip(1).Select(x => x.GetLocation()),
                                 messageArgs: new object[] { item.Key, item.Value.Count }));
                         }
                     }

@@ -51,4 +51,25 @@ namespace Tests.Diagnostics
         private string name2 = "foobar"; // Secondary
         private string name3 = "foobar"; // Secondary
     }
+
+    public class OuterClass
+    {
+        private string Name { get; } = "foobar"; // Noncompliant
+
+        private class InnerClass
+        {
+            private string name1 = "foobar"; // Secondary - inner class count with base
+            private string name2 = "foobar"; // Secondary
+            private string name3 = "foobar"; // Secondary
+            private string name4 = "foobar"; // Secondary
+        }
+
+        private struct InnerStruct
+        {
+            private string name1 = "foobar"; // Secondary - inner struct count with base
+            private string name2 = "foobar"; // Secondary
+            private string name3 = "foobar"; // Secondary
+            private string name4 = "foobar"; // Secondary
+        }
+    }
 }
