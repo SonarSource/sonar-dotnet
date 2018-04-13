@@ -5,29 +5,25 @@ namespace Tests.Diagnostics
 {
     public class CompliantController : Controller
     {
-        [HttpPost]
-        [ValidateInput(true)] // Compliant - not false
+        [HttpPost] // Compliant - input is validated
+        [ValidateInput(true)]
         public ActionResult Foo1(string input)
         {
             return Foo(input);
         }
 
-        [HttpPost]
-        [ValidateInput("foo")] // Compliant - unrecognized argument
-        public ActionResult Foo2(string input)
+        [HttpPost] // Compliant - no input to validate
+        public ActionResult Foo2()
         {
-            return Foo(input);
         }
 
-        [HttpPost]
-        [ValidateInput()] // Compliant - no argument
+        [ValidateInput(false)] // Compliant - no HttpPostAttribute
         public ActionResult Foo3(string input)
         {
-            return Foo(input);
         }
 
-        [HttpPost]
-        [ValidateInput(false, "foo")] // Compliant - more than 1 argument
+        [System.Web.Mvc.HttpPost] // Compliant - input is validated
+        [System.Web.Mvc.ValidateInput(true)]
         public ActionResult Foo4(string input)
         {
             return Foo(input);
@@ -46,6 +42,27 @@ namespace Tests.Diagnostics
 
         [HttpPost] // Noncompliant
         public ActionResult Foo2(string input)
+        {
+            return Foo(input);
+        }
+
+        [HttpPost] // Noncompliant
+        [ValidateInput("foo")]
+        public ActionResult Foo3(string input)
+        {
+            return Foo(input);
+        }
+
+        [HttpPost] // Noncompliant
+        [ValidateInput()]
+        public ActionResult Foo4(string input)
+        {
+            return Foo(input);
+        }
+
+        [HttpPost] // Noncompliant
+        [ValidateInput(false, "foo")]
+        public ActionResult Foo5(string input)
         {
             return Foo(input);
         }

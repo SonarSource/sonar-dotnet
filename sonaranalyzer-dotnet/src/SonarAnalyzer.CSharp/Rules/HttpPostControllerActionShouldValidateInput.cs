@@ -50,41 +50,44 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (methodDeclaration.ParameterList == null ||
                         methodDeclaration.ParameterList.Parameters.Count == 0)
                     {
+                        // When HttpPost method doesn't have input there is no need to validate them
                         return;
                     }
 
-                    var attributes = methodDeclaration.AttributeLists
+                    var attributeSymbols = methodDeclaration.AttributeLists
                         .SelectMany(list => list.Attributes)
+                        .Select(a => a.ToSyntaxWithSymbol(c.SemanticModel.GetSymbolInfo(a).Symbol as IMethodSymbol))
+                        .Where(tuple => tuple.Symbol != null)
                         .ToList();
 
-                    var httpPostAttribute = attributes.FirstOrDefault(a => a.Name.ToString().StartsWith("HttpPost"));
+                    var httpPostAttribute = attributeSymbols.FirstOrDefault(tuple =>
+                        tuple.Symbol.ContainingType.Is(KnownType.System_Web_Mvc_HttpPostAttribute));
                     if (httpPostAttribute == null)
                     {
+                        // There is no HttpPost attribute
                         return;
                     }
 
-                    var validateInputAttribute = attributes.FirstOrDefault(a => a.Name.ToString().StartsWith("ValidateInput"));
+                    var validateInputAttribute = attributeSymbols.FirstOrDefault(a =>
+                        a.Symbol.ContainingType.Is(KnownType.System_Web_Mvc_ValidateInputAttribute));
 
-                    if (validateInputAttribute == null)
+                    if (validateInputAttribute == null ||
+                        validateInputAttribute.Syntax.ArgumentList == null ||
+                        validateInputAttribute.Syntax.ArgumentList.Arguments.Count != 1)
                     {
-                        // ValidateInputAttribute not set
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, httpPostAttribute.GetLocation()));
+                        // ValidateInputAttribute not set or has incorrect number of args
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, httpPostAttribute.Syntax.GetLocation()));
                         return;
                     }
 
-                    if (c.SemanticModel.GetSymbolInfo(validateInputAttribute.Name).Symbol is IMethodSymbol validateInputSymbol)
+                    var constantValue = c.SemanticModel.GetConstantValue(
+                        validateInputAttribute.Syntax.ArgumentList.Arguments[0].Expression);
+                    if (!constantValue.HasValue ||
+                        (constantValue.Value as bool?) != true)
                     {
-                        var constantValue = c.SemanticModel.GetConstantValue(validateInputAttribute.ArgumentList.Arguments[0].Expression);
-                        if (!constantValue.HasValue ||
-                            (constantValue.Value as bool?) != false)
-                        {
-                            return;
-                        }
-
-                        // Found ValidateInput(false)
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, httpPostAttribute.GetLocation()));
+                        // ValidateInputAttribute is set but with incorrect value
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, httpPostAttribute.Syntax.GetLocation()));
                     }
-
                 },
                 SyntaxKind.MethodDeclaration);
         }
