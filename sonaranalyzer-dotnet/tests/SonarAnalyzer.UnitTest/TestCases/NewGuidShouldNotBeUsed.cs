@@ -6,7 +6,7 @@ namespace Tests.Diagnostics
     {
         public void Foo()
         {
-            var result = new Guid(); // Noncompliant {{Please review this use of 'new Guid()'.}}
+            var result = new Guid(); // Noncompliant {{Use 'Guid.NewGuid()', 'Guid.Empty' or add arguments to this Guid instantiation.}}
 //                       ^^^^^^^^^^
 
             result = Guid.Empty;
