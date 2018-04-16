@@ -10023,6 +10023,36 @@
   <data name="S4564_Type" xml:space="preserve">
     <value>VULNERABILITY</value>
   </data>
+  <data name="S4581_Category" xml:space="preserve">
+    <value>Major Code Smell</value>
+  </data>
+  <data name="S4581_Description" xml:space="preserve">
+    <value>When the syntax new Guid() (i.e. parameterless instantiation) is used, it must be that one of three things is wanted:</value>
+  </data>
+  <data name="S4581_IsActivatedByDefault" xml:space="preserve">
+    <value>True</value>
+  </data>
+  <data name="S4581_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S4581_RemediationCost" xml:space="preserve">
+    <value>5 min</value>
+  </data>
+  <data name="S4581_Scope" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="S4581_Severity" xml:space="preserve">
+    <value>Major</value>
+  </data>
+  <data name="S4581_Tags" xml:space="preserve">
+    <value />
+  </data>
+  <data name="S4581_Title" xml:space="preserve">
+    <value>"new Guid()" should not be used</value>
+  </data>
+  <data name="S4581_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S818_Category" xml:space="preserve">
     <value>Minor Code Smell</value>
   </data>
