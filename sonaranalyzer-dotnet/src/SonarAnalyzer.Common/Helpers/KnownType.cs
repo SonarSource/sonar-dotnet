@@ -181,6 +181,7 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_Object = new KnownType(SpecialType.System_Object, "object");
         internal static readonly KnownType System_ObsoleteAttribute = new KnownType("System.ObsoleteAttribute");
         internal static readonly KnownType System_OutOfMemoryException = new KnownType("System.OutOfMemoryException");
+        internal static readonly KnownType System_Random = new KnownType("System.Random");
         internal static readonly KnownType System_Reflection_Assembly = new KnownType("System.Reflection.Assembly");
         internal static readonly KnownType System_Reflection_AssemblyVersionAttribute = new KnownType("System.Reflection.AssemblyVersionAttribute");
         internal static readonly KnownType System_Reflection_MemberInfo = new KnownType("System.Reflection.MemberInfo");
