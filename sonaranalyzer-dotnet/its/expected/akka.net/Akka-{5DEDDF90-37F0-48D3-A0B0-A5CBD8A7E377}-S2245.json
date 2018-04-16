@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S2245",
+"message":  "Use a cryptographically strong random number generator (RNG) like 'System.Security.Cryptography.RandomNumberGenerator'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\Internal\ArrayExtensions.cs",
+"region":  {
+"startLine":  47,
+"startColumn":  26,
+"endLine":  47,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2245",
+"message":  "Use a cryptographically strong random number generator (RNG) like 'System.Security.Cryptography.RandomNumberGenerator'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\ThreadLocalRandom.cs",
+"region":  {
+"startLine":  22,
+"startColumn":  81,
+"endLine":  22,
+"endColumn":  125
+}
+}
+}
+]
+}
