@@ -4,7 +4,7 @@ namespace Tests.Diagnostics
 {
     public class Program
     {
-        public const string NameConst = "foobar"; // Secondary
+        public const string NameConst = "foobar"; // Noncompliant {{Define a constant instead of using this literal 'foobar' 8 times.}}
 //                                      ^^^^^^^^
         public static readonly string NameReadonly = "foobar"; // Secondary
 
@@ -39,6 +39,37 @@ namespace Tests.Diagnostics
             }
 
             Do("foobar"); // Compliant - matches one of the parameter name
+        }
+    }
+
+    public struct Foo
+    {
+        public const string NameConst = "foobar"; // Noncompliant {{Define a constant instead of using this literal 'foobar' 4 times.}}
+//                                      ^^^^^^^^
+
+        private string name1 = "foobar"; // Secondary
+        private string name2 = "foobar"; // Secondary
+        private string name3 = "foobar"; // Secondary
+    }
+
+    public class OuterClass
+    {
+        private string Name { get; } = "foobar"; // Noncompliant
+
+        private class InnerClass
+        {
+            private string name1 = "foobar"; // Secondary - inner class count with base
+            private string name2 = "foobar"; // Secondary
+            private string name3 = "foobar"; // Secondary
+            private string name4 = "foobar"; // Secondary
+        }
+
+        private struct InnerStruct
+        {
+            private string name1 = "foobar"; // Secondary - inner struct count with base
+            private string name2 = "foobar"; // Secondary
+            private string name3 = "foobar"; // Secondary
+            private string name4 = "foobar"; // Secondary
         }
     }
 }

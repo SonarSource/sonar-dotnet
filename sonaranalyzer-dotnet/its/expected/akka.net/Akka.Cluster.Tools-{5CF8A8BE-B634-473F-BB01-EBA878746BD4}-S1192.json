@@ -2,9 +2,8 @@
 "issues":  [
 {
 "id":  "S1192",
-"message":  "Define a constant instead of using the literal 'Self removed, stopping ClusterSingletonManager' 7 times.",
+"message":  "Define a constant instead of using this literal 'Self removed, stopping ClusterSingletonManager' 7 times.",
 "location":  [
-null,
 {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\ClusterSingletonManager.cs",
 "region":  {
@@ -72,9 +71,8 @@ null,
 },
 {
 "id":  "S1192",
-"message":  "Define a constant instead of using the literal 'Cannot serialize object of type [{0}] in [{1}]' 4 times.",
+"message":  "Define a constant instead of using this literal 'Cannot serialize object of type [{0}] in [{1}]' 4 times.",
 "location":  [
-null,
 {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\Serialization\ClusterSingletonMessageSerializer.cs",
 "region":  {

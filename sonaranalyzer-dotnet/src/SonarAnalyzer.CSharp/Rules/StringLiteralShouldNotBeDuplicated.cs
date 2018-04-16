@@ -35,7 +35,7 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class StringLiteralShouldNotBeDuplicated : ParameterLoadingDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S1192";
-        private const string MessageFormat = "Define a constant instead of using the literal '{0}' {1} times.";
+        private const string MessageFormat = "Define a constant instead of using this literal '{0}' {1} times.";
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager,
@@ -51,55 +51,55 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(ParameterLoadingAnalysisContext context)
         {
-            context.RegisterCompilationStartAction(
-                csac =>
+            // Ideally we would like to report at assembly/project level for the primary and all string instances for secondary
+            // locations. The problem is that this scenario is not yet supported on SonarQube side.
+            // Hence the decision to do like other languages, at class-level
+            context.RegisterSyntaxNodeActionInNonGenerated(
+                c =>
                 {
-                    if (csac.Compilation.IsTest())
+                    if (c.Node.Ancestors().OfType<ClassDeclarationSyntax>().Any())
                     {
+                        // Don't report on inner instances
                         return;
                     }
 
+                    var stringLiterals = c.Node
+                        .DescendantNodes()
+                        .Where(les => les.IsKind(SyntaxKind.StringLiteralExpression))
+                        .Cast<LiteralExpressionSyntax>();
+
+                    // Collect duplications
                     var stringWithLiterals = new Dictionary<string, List<LiteralExpressionSyntax>>();
+                    foreach (var literal in stringLiterals)
+                    {
+                        var stringValue = literal.Token.ValueText;
 
-                    csac.RegisterSyntaxNodeActionInNonGenerated(
-                        snac => CollectDuplications((LiteralExpressionSyntax)snac.Node, stringWithLiterals),
-                        SyntaxKind.StringLiteralExpression);
+                        if (stringValue != null &&
+                            stringValue.Length >= MinimumStringLength &&
+                            !IsMatchingMethodParameterName(literal))
+                        {
+                            if (!stringWithLiterals.ContainsKey(stringValue))
+                            {
+                                stringWithLiterals[stringValue] = new List<LiteralExpressionSyntax>();
+                            }
 
-                    csac.RegisterCompilationEndAction(cac => ReportDuplicates(cac, stringWithLiterals));
-                });
-        }
+                            stringWithLiterals[stringValue].Add(literal);
+                        }
+                    }
 
-        private void CollectDuplications(LiteralExpressionSyntax stringLiteral,
-            Dictionary<string, List<LiteralExpressionSyntax>> stringWithLiterals)
-        {
-            var stringValue = stringLiteral.Token.ValueText;
-
-            if (stringValue != null &&
-                stringValue.Length >= MinimumStringLength &&
-                !IsMatchingMethodParameterName(stringLiteral))
-            {
-                if (!stringWithLiterals.ContainsKey(stringValue))
-                {
-                    stringWithLiterals[stringValue] = new List<LiteralExpressionSyntax>();
-                }
-
-                stringWithLiterals[stringValue].Add(stringLiteral);
-            }
-        }
-
-        private void ReportDuplicates(CompilationAnalysisContext compilationAnalysisContext,
-            Dictionary<string, List<LiteralExpressionSyntax>> stringWithLiterals)
-        {
-            foreach (var item in stringWithLiterals)
-            {
-                if (item.Value.Count > Threshold)
-                {
-                    // Report issues as project-level
-                    compilationAnalysisContext.ReportDiagnosticWhenActive(Diagnostic.Create(rule, null,
-                        additionalLocations: item.Value.Select(x => x.GetLocation()).OrderBy(x => x.SourceSpan),
-                        messageArgs: new object[] { item.Key, item.Value.Count }));
-                }
-            }
+                    // Report duplications
+                    foreach (var item in stringWithLiterals)
+                    {
+                        if (item.Value.Count > Threshold)
+                        {
+                            c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, item.Value[0].GetLocation(),
+                                additionalLocations: item.Value.Skip(1).Select(x => x.GetLocation()),
+                                messageArgs: new object[] { item.Key, item.Value.Count }));
+                        }
+                    }
+                },
+                SyntaxKind.ClassDeclaration,
+                SyntaxKind.StructDeclaration);
         }
 
         private bool IsMatchingMethodParameterName(LiteralExpressionSyntax literalExpression) =>

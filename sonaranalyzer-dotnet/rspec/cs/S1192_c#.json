@@ -9,7 +9,7 @@
   "tags": [
     "design"
   ],
-  "defaultSeverity": "Critical",
+  "defaultSeverity": "Minor",
   "ruleSpecification": "RSPEC-1192",
   "sqKey": "S1192",
   "scope": "Main"

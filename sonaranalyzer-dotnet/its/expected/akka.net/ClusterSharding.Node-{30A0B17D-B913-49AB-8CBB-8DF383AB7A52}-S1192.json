@@ -2,9 +2,8 @@
 "issues":  [
 {
 "id":  "S1192",
-"message":  "Define a constant instead of using the literal '@addr' 4 times.",
+"message":  "Define a constant instead of using this literal '@addr' 4 times.",
 "location":  [
-null,
 {
 "uri":  "sources\akka.net\src\examples\Cluster\ClusterSharding\ClusterSharding.Node\AutomaticJoin\DBHelper.cs",
 "region":  {

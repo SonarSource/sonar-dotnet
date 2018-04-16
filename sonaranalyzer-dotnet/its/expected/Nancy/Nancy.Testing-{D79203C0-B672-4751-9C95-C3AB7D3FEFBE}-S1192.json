@@ -2,122 +2,8 @@
 "issues":  [
 {
 "id":  "S1192",
-"message":  "Define a constant instead of using the literal 'Cookie' 4 times.",
+"message":  "Define a constant instead of using this literal 'accept' 5 times.",
 "location":  [
-null,
-{
-"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContextExtensions.cs",
-"region":  {
-"startLine":  136,
-"startColumn":  52,
-"endLine":  136,
-"endColumn":  60
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContextExtensions.cs",
-"region":  {
-"startLine":  138,
-"startColumn":  43,
-"endLine":  138,
-"endColumn":  51
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContextExtensions.cs",
-"region":  {
-"startLine":  141,
-"startColumn":  62,
-"endLine":  141,
-"endColumn":  70
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy.Testing\Browser.cs",
-"region":  {
-"startLine":  259,
-"startColumn":  28,
-"endLine":  259,
-"endColumn":  36
-}
-}
-]
-},
-{
-"id":  "S1192",
-"message":  "Define a constant instead of using the literal 'Content-Type' 7 times.",
-"location":  [
-null,
-{
-"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContextExtensions.cs",
-"region":  {
-"startLine":  45,
-"startColumn":  35,
-"endLine":  45,
-"endColumn":  49
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContextExtensions.cs",
-"region":  {
-"startLine":  67,
-"startColumn":  35,
-"endLine":  67,
-"endColumn":  49
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContextExtensions.cs",
-"region":  {
-"startLine":  89,
-"startColumn":  35,
-"endLine":  89,
-"endColumn":  49
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContext.cs",
-"region":  {
-"startLine":  103,
-"startColumn":  25,
-"endLine":  103,
-"endColumn":  39
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy.Testing\BrowserContext.cs",
-"region":  {
-"startLine":  114,
-"startColumn":  25,
-"endLine":  114,
-"endColumn":  39
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy.Testing\Browser.cs",
-"region":  {
-"startLine":  293,
-"startColumn":  69,
-"endLine":  293,
-"endColumn":  83
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy.Testing\Browser.cs",
-"region":  {
-"startLine":  295,
-"startColumn":  39,
-"endLine":  295,
-"endColumn":  53
-}
-}
-]
-},
-{
-"id":  "S1192",
-"message":  "Define a constant instead of using the literal 'accept' 5 times.",
-"location":  [
-null,
 {
 "uri":  "sources\Nancy\src\Nancy.Testing\BrowserContextExtensions.cs",
 "region":  {
@@ -167,9 +53,8 @@ null,
 },
 {
 "id":  "S1192",
-"message":  "Define a constant instead of using the literal 'Use Browser instead.' 17 times.",
+"message":  "Define a constant instead of using this literal 'Use Browser instead.' 17 times.",
 "location":  [
-null,
 {
 "uri":  "sources\Nancy\src\Nancy.Testing\LegacyBrowser.cs",
 "region":  {
@@ -321,58 +206,6 @@ null,
 "startColumn":  19,
 "endLine":  199,
 "endColumn":  41
-}
-}
-]
-},
-{
-"id":  "S1192",
-"message":  "Define a constant instead of using the literal 'Nancy' 5 times.",
-"location":  [
-null,
-{
-"uri":  "sources\Nancy\src\SharedAssemblyInfo.cs",
-"region":  {
-"startLine":  4,
-"startColumn":  26,
-"endLine":  4,
-"endColumn":  33
-}
-},
-{
-"uri":  "sources\Nancy\src\SharedAssemblyInfo.cs",
-"region":  {
-"startLine":  6,
-"startColumn":  28,
-"endLine":  6,
-"endColumn":  35
-}
-},
-{
-"uri":  "sources\Nancy\src\SharedAssemblyInfo.cs",
-"region":  {
-"startLine":  7,
-"startColumn":  28,
-"endLine":  7,
-"endColumn":  35
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
-"region":  {
-"startLine":  330,
-"startColumn":  83,
-"endLine":  330,
-"endColumn":  90
-}
-},
-{
-"uri":  "sources\Nancy\src\Nancy.Testing\ConfigurableBootstrapper.cs",
-"region":  {
-"startLine":  350,
-"startColumn":  83,
-"endLine":  350,
-"endColumn":  90
 }
 }
 ]

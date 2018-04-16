@@ -2,18 +2,8 @@
 "issues":  [
 {
 "id":  "S1192",
-"message":  "Define a constant instead of using the literal 'remote' 7 times.",
+"message":  "Define a constant instead of using this literal 'remote' 6 times.",
 "location":  [
-null,
-{
-"uri":  "sources\akka.net\src\core\Akka.Remote\RemoteDeployer.cs",
-"region":  {
-"startLine":  33,
-"startColumn":  50,
-"endLine":  33,
-"endColumn":  58
-}
-},
 {
 "uri":  "sources\akka.net\src\core\Akka.Remote\RemoteActorRefProvider.cs",
 "region":  {
