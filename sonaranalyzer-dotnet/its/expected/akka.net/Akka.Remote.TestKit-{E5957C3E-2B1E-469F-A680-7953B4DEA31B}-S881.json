@@ -2,14 +2,14 @@
 "issues":  [
 {
 "id":  "S881",
-"message":  "Extract this [increment|decrement] operation into a dedicated statement.",
+"message":  "Extract this increment operation into a dedicated statement.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Remote.TestKit\Controller.cs",
 "region":  {
 "startLine":  268,
-"startColumn":  76,
+"startColumn":  89,
 "endLine":  268,
-"endColumn":  77
+"endColumn":  91
 }
 }
 }

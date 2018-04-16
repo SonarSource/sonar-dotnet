@@ -35,7 +35,7 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class DontMixIncrementOrDecrementWithOtherOperators : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S881";
-        private const string MessageFormat = "Extract this [increment|decrement] operation into a dedicated statement.";
+        private const string MessageFormat = "Extract this {0} operation into a dedicated statement.";
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
@@ -56,10 +56,14 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
-                    if (c.Node.Ancestors().FirstOrDefault(node => node.IsAnyKind(arithmeticOperator))
-                            is BinaryExpressionSyntax arithmeticExpression)
+                    var operatorToken = (c.Node as PrefixUnaryExpressionSyntax)?.OperatorToken
+                            ?? (c.Node as PostfixUnaryExpressionSyntax)?.OperatorToken;
+
+                    if (operatorToken != null &&
+                        c.Node.Ancestors().FirstOrDefault(node => node.IsAnyKind(arithmeticOperator)) is BinaryExpressionSyntax)
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, arithmeticExpression.OperatorToken.GetLocation()));
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, operatorToken.Value.GetLocation(),
+                            operatorToken.Value.IsKind(SyntaxKind.PlusPlusToken) ? "increment" : "decrement"));
                     }
                 },
                 SyntaxKind.PreDecrementExpression,
