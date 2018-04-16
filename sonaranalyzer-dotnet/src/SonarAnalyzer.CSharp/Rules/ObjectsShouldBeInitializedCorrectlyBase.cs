@@ -32,13 +32,19 @@ namespace SonarAnalyzer.Rules
     {
         protected abstract DiagnosticDescriptor Rule { get; }
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
+        public sealed override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
         internal abstract KnownType TrackedType { get; }
 
         protected abstract string TrackedPropertyName { get; }
 
         protected abstract TExpectedValueType ExpectedPropertyValue { get; }
+
+        protected abstract bool ExpectedValueIsDefault { get; }
+
+        protected abstract int CtorArgumentsCount { get; }
+
+        protected abstract int CtorArgumentIndex { get; }
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -48,7 +54,7 @@ namespace SonarAnalyzer.Rules
                     var objectCreation = (ObjectCreationExpressionSyntax)c.Node;
 
                     if (IsTrackedType(objectCreation, c.SemanticModel) &&
-                        !IsInitializedAsExpected(objectCreation, c.SemanticModel) &&
+                        !ObjectCreatedWithExpectedValue(objectCreation, c.SemanticModel) &&
                         !IsLaterAssignedWithExpectedValue(objectCreation, c.SemanticModel))
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, objectCreation.GetLocation()));
@@ -72,10 +78,16 @@ namespace SonarAnalyzer.Rules
                     }
                 },
                 SyntaxKind.SimpleAssignmentExpression);
+
         }
 
+        private bool ObjectCreatedWithExpectedValue(ObjectCreationExpressionSyntax objectCreation, SemanticModel semanticModel) =>
+            IsInitializedAsExpected(objectCreation.Initializer, semanticModel) ||
+                objectCreation.Initializer == null &&
+                CtorHasExpectedArguments(objectCreation.ArgumentList, semanticModel);
+
         protected virtual bool IsExpectedValue(object constantValue) =>
-            ExpectedPropertyValue.Equals(constantValue);
+            Equals(ExpectedPropertyValue, constantValue);
 
         private static ISymbol GetAssignedVariableSymbol(ObjectCreationExpressionSyntax objectCreation, SemanticModel semanticModel)
         {
@@ -100,7 +112,7 @@ namespace SonarAnalyzer.Rules
                 : null;
         }
 
-        private bool IsPropertyOnTrackedType(ExpressionSyntax expression, SemanticModel semanticModel) =>
+        protected virtual bool IsPropertyOnTrackedType(ExpressionSyntax expression, SemanticModel semanticModel) =>
             expression is MemberAccessExpressionSyntax memberAccess &&
             memberAccess.Expression != null &&
             IsTrackedType(memberAccess.Expression, semanticModel);
@@ -128,22 +140,31 @@ namespace SonarAnalyzer.Rules
                 && IsExpectedValue(assignment.Right, semanticModel);
         }
 
-        private bool IsTrackedType(ExpressionSyntax expression, SemanticModel semanticModel) =>
+        protected bool IsTrackedType(ExpressionSyntax expression, SemanticModel semanticModel) =>
             semanticModel.GetTypeInfo(expression).Type
                 .Is(TrackedType);
 
-        protected virtual bool IsInitializedAsExpected(ObjectCreationExpressionSyntax objectCreation, SemanticModel semanticModel) =>
-            objectCreation.Initializer != null &&
-            objectCreation.Initializer.Expressions
+        protected virtual bool CtorHasExpectedArguments(ArgumentListSyntax argumentList, SemanticModel semanticModel) =>
+            ExpectedValueIsDefault &&
+                (argumentList == null ||
+                argumentList.Arguments.Count != CtorArgumentsCount ||
+                IsExpectedValue(argumentList.Arguments[CtorArgumentIndex].Expression, semanticModel));
+
+        protected virtual bool IsInitializedAsExpected(InitializerExpressionSyntax initializer, SemanticModel semanticModel) =>
+            initializer != null &&
+            initializer.Expressions
                 .OfType<AssignmentExpressionSyntax>()
                 .Any(assignment => IsTrackedPropertyName(assignment?.Left) && IsExpectedValue(assignment?.Right, semanticModel));
 
-        private bool IsTrackedPropertyName(ExpressionSyntax expression)
+        protected virtual bool IsTrackedPropertyName(ExpressionSyntax expression)
         {
             var memberAccess = expression as MemberAccessExpressionSyntax;
             var identifier = memberAccess?.Name?.Identifier ?? (expression as IdentifierNameSyntax)?.Identifier;
-            return identifier.HasValue && identifier.Value.ValueText == TrackedPropertyName;
+            return identifier.HasValue && IsTrackedPropertyName(identifier.Value.ValueText);
         }
+
+        protected virtual bool IsTrackedPropertyName(string propertyName) =>
+             Equals(propertyName, TrackedPropertyName);
 
         protected bool IsExpectedValue(ExpressionSyntax expression, SemanticModel semanticModel) =>
             expression != null &&
