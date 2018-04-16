@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S881",
+"message":  "Extract this increment operation into a dedicated statement.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor\RazorViewEngine.cs",
+"region":  {
+"startLine":  280,
+"startColumn":  111,
+"endLine":  280,
+"endColumn":  113
+}
+}
+}
+]
+}

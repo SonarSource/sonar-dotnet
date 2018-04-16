@@ -10053,6 +10053,36 @@
   <data name="S818_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
   </data>
+  <data name="S881_Category" xml:space="preserve">
+    <value>Major Code Smell</value>
+  </data>
+  <data name="S881_Description" xml:space="preserve">
+    <value>The use of increment and decrement operators in method calls or in combination with other arithmetic operators is not recommended, because:</value>
+  </data>
+  <data name="S881_IsActivatedByDefault" xml:space="preserve">
+    <value>False</value>
+  </data>
+  <data name="S881_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S881_RemediationCost" xml:space="preserve">
+    <value>5min</value>
+  </data>
+  <data name="S881_Scope" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="S881_Severity" xml:space="preserve">
+    <value>Major</value>
+  </data>
+  <data name="S881_Tags" xml:space="preserve">
+    <value>misra,cert</value>
+  </data>
+  <data name="S881_Title" xml:space="preserve">
+    <value>Increment (++) and decrement (--) operators should not be used in a method call or mixed with other operators in an expression</value>
+  </data>
+  <data name="S881_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S907_Category" xml:space="preserve">
     <value>Major Code Smell</value>
   </data>

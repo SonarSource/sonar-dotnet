@@ -1,0 +1,95 @@
+{
+"issues":  [
+{
+"id":  "S881",
+"message":  "Extract this increment operation into a dedicated statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\PersistentActorSpec.Actors.cs",
+"region":  {
+"startLine":  491,
+"startColumn":  75,
+"endLine":  491,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S881",
+"message":  "Extract this increment operation into a dedicated statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\PersistentActorSpec.Actors.cs",
+"region":  {
+"startLine":  522,
+"startColumn":  79,
+"endLine":  522,
+"endColumn":  81
+}
+}
+},
+{
+"id":  "S881",
+"message":  "Extract this increment operation into a dedicated statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\PersistentActorSpec.Actors.cs",
+"region":  {
+"startLine":  587,
+"startColumn":  97,
+"endLine":  587,
+"endColumn":  99
+}
+}
+},
+{
+"id":  "S881",
+"message":  "Extract this increment operation into a dedicated statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\PersistentActorSpec.Actors.cs",
+"region":  {
+"startLine":  588,
+"startColumn":  103,
+"endLine":  588,
+"endColumn":  105
+}
+}
+},
+{
+"id":  "S881",
+"message":  "Extract this increment operation into a dedicated statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\PersistentActorSpec.Actors.cs",
+"region":  {
+"startLine":  589,
+"startColumn":  97,
+"endLine":  589,
+"endColumn":  99
+}
+}
+},
+{
+"id":  "S881",
+"message":  "Extract this increment operation into a dedicated statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\PersistentActorSpec.Actors.cs",
+"region":  {
+"startLine":  617,
+"startColumn":  97,
+"endLine":  617,
+"endColumn":  99
+}
+}
+},
+{
+"id":  "S881",
+"message":  "Extract this increment operation into a dedicated statement.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\PersistentActorSpec.Actors.cs",
+"region":  {
+"startLine":  618,
+"startColumn":  103,
+"endLine":  618,
+"endColumn":  105
+}
+}
+}
+]
+}
