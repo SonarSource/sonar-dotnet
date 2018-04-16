@@ -3255,6 +3255,36 @@
   <data name="S2245_Type" xml:space="preserve">
     <value>VULNERABILITY</value>
   </data>
+  <data name="S2255_Category" xml:space="preserve">
+    <value>Minor Vulnerability</value>
+  </data>
+  <data name="S2255_Description" xml:space="preserve">
+    <value>Attackers can use widely-available tools to view cookies and read any sensitive information they may contain. Even if the information is encoded in a way that is not human-readable, certain techniques could determine which encoding is being used, then decode the information.</value>
+  </data>
+  <data name="S2255_IsActivatedByDefault" xml:space="preserve">
+    <value>False</value>
+  </data>
+  <data name="S2255_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S2255_RemediationCost" xml:space="preserve">
+    <value>5min</value>
+  </data>
+  <data name="S2255_Scope" xml:space="preserve">
+    <value>Main</value>
+  </data>
+  <data name="S2255_Severity" xml:space="preserve">
+    <value>Minor</value>
+  </data>
+  <data name="S2255_Tags" xml:space="preserve">
+    <value>cwe,cert,owasp-a3</value>
+  </data>
+  <data name="S2255_Title" xml:space="preserve">
+    <value>Cookies should not be used to store sensitive information</value>
+  </data>
+  <data name="S2255_Type" xml:space="preserve">
+    <value>VULNERABILITY</value>
+  </data>
   <data name="S2259_Category" xml:space="preserve">
     <value>Major Bug</value>
   </data>
