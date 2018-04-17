@@ -149,6 +149,7 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_GC = new KnownType("System.GC");
         internal static readonly KnownType System_Globalization_CompareOptions = new KnownType("System.Globalization.CompareOptions");
         internal static readonly KnownType System_Globalization_CultureInfo = new KnownType("System.Globalization.CultureInfo");
+        internal static readonly KnownType System_Guid = new KnownType("System.Guid");
         internal static readonly KnownType System_IComparable = new KnownType("System.IComparable");
         internal static readonly KnownType System_IComparable_T = new KnownType("System.IComparable<T>");
         internal static readonly KnownType System_IDisposable = new KnownType(SpecialType.System_IDisposable, "System.IDisposable");
