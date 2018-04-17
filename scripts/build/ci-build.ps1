@@ -97,51 +97,6 @@ function Set-DotNetVersion() {
     }
 }
 
-function Get-ScannerMsBuildPath() {
-    $currentDir = (Resolve-Path .\).Path
-    $scannerMsbuild = Join-Path $currentDir "SonarQube.Scanner.MSBuild.exe"
-
-    if (-Not (Test-Path $scannerMsbuild)) {
-        Write-Debug "Scanner for MSBuild not found, downloading it"
-
-        # This links always redirect to the latest released scanner
-        $downloadLink = "https://repox.sonarsource.com/sonarsource-public-releases/org/sonarsource/scanner/msbuild/" +
-            "sonar-scanner-msbuild/%5BRELEASE%5D/sonar-scanner-msbuild-%5BRELEASE%5D.zip"
-        $scannerMsbuildZip = Join-Path $currentDir "\MSBuild.SonarQube.Runner.zip"
-
-        Write-Debug "Downloading scanner from '${downloadLink}' at '${currentDir}'"
-        (New-Object System.Net.WebClient).DownloadFile($downloadLink, $scannerMsbuildZip)
-
-        # perhaps we could use other folder, not the repository root
-        Expand-ZIPFile $scannerMsbuildZip $currentDir
-
-        Write-Debug "Deleting downloaded zip"
-        Remove-Item $scannerMsbuildZip -Force
-    }
-
-    Write-Debug "Scanner for MSBuild found at '$scannerMsbuild'"
-    return $scannerMsbuild
-}
-
-function Invoke-SonarBeginAnalysis([array][parameter(ValueFromRemainingArguments = $true)]$remainingArgs) {
-    Write-Header "Running SonarQube Analysis begin step"
-
-    if (Test-Debug) {
-        $remainingArgs += "/d:sonar.verbose=true"
-    }
-
-    Exec { & (Get-ScannerMsBuildPath) begin /k:sonaranalyzer-csharp-vbnet /n:"SonarAnalyzer for C#" `
-        /d:sonar.host.url=${sonarQubeUrl} /d:sonar.login=$sonarQubeToken $remainingArgs } `
-        -errorMessage "ERROR: SonarQube Analysis begin step FAILED."
-}
-
-function Invoke-SonarEndAnalysis() {
-    Write-Header "Running SonarQube Analysis end step"
-
-    Exec { & (Get-ScannerMsBuildPath) end /d:sonar.login=$sonarQubeToken } `
-        -errorMessage "ERROR: SonarQube Analysis end step FAILED."
-}
-
 function Initialize-NuGetConfig() {
     Write-Header "Setting up nuget.config"
 
@@ -199,35 +154,6 @@ function Initialize-QaStep() {
 function Invoke-DotNetBuild() {
     Set-DotNetVersion
 
-    $skippedAnalysis = $false
-    if ($isPullRequest) {
-        Invoke-SonarBeginAnalysis `
-            /d:sonar.github.pullRequest=$githubPullRequest `
-            /d:sonar.github.repository=$githubRepo `
-            /d:sonar.github.oauth=$githubToken `
-            /d:sonar.analysis.mode="issues" `
-            /d:sonar.scanAllFiles="true" `
-            /d:sonar.analysis.sha1=$githubSha1 `
-            /d:sonar.analysis.prNumber=$githubPullRequest `
-            /d:sonar.branch.name=$githubPRBaseBranch `
-            /d:sonar.branch.target=$githubPRTargetBranch `
-            /v:"latest"
-    }
-    elseif ($isMaster) {
-        $leakPeriodVersion = Get-LeakPeriodVersion
-        Invoke-SonarBeginAnalysis `
-            /d:sonar.analysis.buildNumber=$buildNumber `
-            /d:sonar.analysis.pipeline=$buildNumber `
-            /d:sonar.analysis.sha1=$githubSha1 `
-            /d:sonar.analysis.repository=$githubRepo `
-            /v:$leakPeriodVersion `
-            /d:sonar.cs.vstest.reportsPaths="**\*.trx" `
-            /d:sonar.cs.vscoveragexml.reportsPaths="**\*.coveragexml"
-    }
-    else {
-        $skippedAnalysis = $true
-    }
-
     Restore-Packages "15.0" $solutionName
     Invoke-MSBuild "15.0" $solutionName `
         /consoleloggerparameters:Summary `
@@ -241,10 +167,6 @@ function Invoke-DotNetBuild() {
 
     Invoke-UnitTests $binPath $true
     Invoke-CodeCoverage
-
-    if (-Not $skippedAnalysis) {
-        Invoke-SonarEndAnalysis
-    }
 
     New-Metadata $binPath
     New-NuGetPackages $binPath
