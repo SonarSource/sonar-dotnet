@@ -2089,7 +2089,7 @@ namespace SonarAnalyzer.UnitTest.PackagingTests
             //["2089"],
             //["2090"],
             //["2091"],
-            //["2092"],
+            ["2092"] = "VULNERABILITY",
             //["2093"],
             //["2094"],
             //["2095"],

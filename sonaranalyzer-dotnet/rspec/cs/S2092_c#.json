@@ -1,0 +1,24 @@
+{
+  "title": "Cookies should be \"secure\"",
+  "type": "VULNERABILITY",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    "cwe",
+    "sans-top25-porous",
+    "owasp-a2",
+    "owasp-a3"
+  ],
+  "standards": [
+    "CWE",
+    "OWASP Top Ten",
+    "SANS Top 25"
+  ],
+  "defaultSeverity": "Minor",
+  "ruleSpecification": "RSPEC-2092",
+  "sqKey": "S2092",
+  "scope": "Main"
+}
