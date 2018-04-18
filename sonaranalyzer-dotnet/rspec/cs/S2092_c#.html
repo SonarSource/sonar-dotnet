@@ -1,0 +1,30 @@
+<p>The "secure" attribute prevents cookies from being sent over plaintext connections such as HTTP, where they would be easily eavesdropped upon.
+Instead, cookies with the secure attribute are only sent over encrypted HTTPS connections.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+HttpCookie myCookie = new HttpCookie("UserSettings");
+myCookie.Secure = false; // Noncompliant; explicitly set to false
+...
+Response.Cookies.Add(myCookie);
+</pre>
+<pre>
+HttpCookie myCookie = new HttpCookie("UserSettings"); // Noncompliant; the default value of 'Secure' is used (=false)
+...
+Response.Cookies.Add(myCookie);
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+HttpCookie myCookie = new HttpCookie("UserSettings");
+myCookie.Secure = true; // Compliant
+...
+Response.Cookies.Add(myCookie);
+</pre>
+<h2>See</h2>
+<ul>
+  <li> <a href="http://cwe.mitre.org/data/definitions/311">MITRE, CWE-311</a> - Missing Encryption of Sensitive Data </li>
+  <li> <a href="http://cwe.mitre.org/data/definitions/315">MITRE, CWE-315</a> - Cleartext Storage of Sensitive Information in a Cookie </li>
+  <li> <a href="http://cwe.mitre.org/data/definitions/614">MITRE, CWE-614</a> - Sensitive Cookie in HTTPS Session Without 'Secure' Attribute </li>
+  <li> OWASP Top 10 2017 Category A2 - Broken Authentication </li>
+  <li> OWASP Top 10 2017 Category A3 - Sensitive Data Exposure </li>
+</ul>
+
