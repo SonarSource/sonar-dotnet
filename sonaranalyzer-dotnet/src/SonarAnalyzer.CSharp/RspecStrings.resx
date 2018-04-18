@@ -2715,6 +2715,36 @@
   <data name="S2070_Type" xml:space="preserve">
     <value>VULNERABILITY</value>
   </data>
+  <data name="S2092_Category" xml:space="preserve">
+    <value>Minor Vulnerability</value>
+  </data>
+  <data name="S2092_Description" xml:space="preserve">
+    <value>The "secure" attribute prevents cookies from being sent over plaintext connections such as HTTP, where they would be easily eavesdropped upon. Instead, cookies with the secure attribute are only sent over encrypted HTTPS connections.</value>
+  </data>
+  <data name="S2092_IsActivatedByDefault" xml:space="preserve">
+    <value>False</value>
+  </data>
+  <data name="S2092_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S2092_RemediationCost" xml:space="preserve">
+    <value>5min</value>
+  </data>
+  <data name="S2092_Scope" xml:space="preserve">
+    <value>Main</value>
+  </data>
+  <data name="S2092_Severity" xml:space="preserve">
+    <value>Minor</value>
+  </data>
+  <data name="S2092_Tags" xml:space="preserve">
+    <value>cwe,sans-top25-porous,owasp-a2,owasp-a3</value>
+  </data>
+  <data name="S2092_Title" xml:space="preserve">
+    <value>Cookies should be "secure"</value>
+  </data>
+  <data name="S2092_Type" xml:space="preserve">
+    <value>VULNERABILITY</value>
+  </data>
   <data name="S2114_Category" xml:space="preserve">
     <value>Major Bug</value>
   </data>
