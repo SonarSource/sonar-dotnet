@@ -28,10 +28,10 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class DoNotUseInsecureCookies : InitializeObjectsWithValueBase
+    public sealed class DoNotUseNonHttpCookies : InitializeObjectsWithValueBase
     {
-        internal const string DiagnosticId = "S2092";
-        private const string MessageFormat = "Set the 'Secure' property of this cookie to 'true'.";
+        internal const string DiagnosticId = "S3330";
+        private const string MessageFormat = "Set the 'HttpOnly' property of this cookie to 'true'.";
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
@@ -42,7 +42,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         internal override KnownType TrackedType => KnownType.System_Web_HttpCookie;
 
-        protected override string TrackedPropertyName => "Secure";
+        protected override string TrackedPropertyName => "HttpOnly";
 
         protected override object ExpectedPropertyValue => true;
     }
