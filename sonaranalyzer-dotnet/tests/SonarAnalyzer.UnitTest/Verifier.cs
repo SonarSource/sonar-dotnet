@@ -23,6 +23,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Data;
+using System.DirectoryServices;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -62,6 +63,8 @@ namespace SonarAnalyzer.UnitTest
             MetadataReference.CreateFromFile(typeof(ImmutableArray).Assembly.Location);
         internal static readonly MetadataReference SystemDataAssembly =
             MetadataReference.CreateFromFile(typeof(DataTable).Assembly.Location);
+        internal static readonly MetadataReference SystemDirectoryServicesAssembly =
+            MetadataReference.CreateFromFile(typeof(DirectoryEntry).Assembly.Location);
         internal static readonly MetadataReference SystemXmlAssembly =
             MetadataReference.CreateFromFile(typeof(System.Xml.XmlDocument).Assembly.Location);
         internal static readonly MetadataReference MicrosoftVisualStudioTestToolsUnitTestingAssembly =
