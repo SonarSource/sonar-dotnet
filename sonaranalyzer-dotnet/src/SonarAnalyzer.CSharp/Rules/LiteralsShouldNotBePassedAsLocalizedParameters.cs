@@ -93,8 +93,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var assignmentSyntax = (AssignmentExpressionSyntax)c.Node;
                     var propertySymbol = c.SemanticModel.GetSymbolInfo(assignmentSyntax.Left).Symbol as IPropertySymbol;
 
-                    if (!c.IsTest() &&
-                        IsLocalizable(propertySymbol) &&
+                    if (IsLocalizable(propertySymbol) &&
                         IsStringLiteral(assignmentSyntax.Right, c.SemanticModel))
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, assignmentSyntax.GetLocation()));

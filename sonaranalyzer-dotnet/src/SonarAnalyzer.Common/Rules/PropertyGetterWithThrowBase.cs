@@ -53,11 +53,6 @@ namespace SonarAnalyzer.Rules.Common
                 GeneratedCodeRecognizer,
                 cbc =>
                 {
-                    if (cbc.SemanticModel.Compilation.IsTest())
-                    {
-                        return;
-                    }
-
                     var propertyGetter = cbc.CodeBlock as TAccessorSyntax;
                     if (propertyGetter == null ||
                         !IsGetter(propertyGetter) ||
