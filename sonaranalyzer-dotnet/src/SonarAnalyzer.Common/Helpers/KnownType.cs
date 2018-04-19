@@ -133,6 +133,7 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_Diagnostics_Debug = new KnownType("System.Diagnostics.Debug");
         internal static readonly KnownType System_Diagnostics_Trace = new KnownType("System.Diagnostics.Trace");
         internal static readonly KnownType System_Diagnostics_TraceSource = new KnownType("System.Diagnostics.TraceSource");
+        internal static readonly KnownType System_DirectoryServices_DirectoryEntry = new KnownType("System.DirectoryServices.DirectoryEntry");
         internal static readonly KnownType System_Double = new KnownType(SpecialType.System_Double, "double");
         internal static readonly KnownType System_Drawing_Bitmap = new KnownType("System.Drawing.Bitmap");
         internal static readonly KnownType System_Drawing_Image = new KnownType("System.Drawing.Image");
