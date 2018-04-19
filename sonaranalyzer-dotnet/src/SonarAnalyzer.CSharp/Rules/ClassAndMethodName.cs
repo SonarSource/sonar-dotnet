@@ -53,14 +53,22 @@ namespace SonarAnalyzer.Rules.CSharp
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics
             => ImmutableArray.Create(rule_MethodName, rule_TypeName);
 
-        private static readonly Dictionary<SyntaxKind, string> TypeKindNameMapping = new Dictionary<SyntaxKind, string>
-        {
-            { SyntaxKind.StructDeclaration, "struct" },
-            { SyntaxKind.ClassDeclaration, "class" },
-            { SyntaxKind.InterfaceDeclaration, "interface" },
-            { SyntaxKind.MethodDeclaration, "method" },
-            { SyntaxKind.PropertyDeclaration, "property" }
-        };
+        private static readonly Dictionary<SyntaxKind, string> TypeKindNameMapping = 
+            new Dictionary<SyntaxKind, string>
+            {
+                { SyntaxKind.StructDeclaration, "struct" },
+                { SyntaxKind.ClassDeclaration, "class" },
+                { SyntaxKind.InterfaceDeclaration, "interface" },
+                { SyntaxKind.MethodDeclaration, "method" },
+                { SyntaxKind.PropertyDeclaration, "property" }
+            };
+
+        private static ISet<KnownType> ComRelatedTypes =
+            new HashSet<KnownType>
+            {
+                KnownType.System_Runtime_InteropServices_ComImportAttribute,
+                KnownType.System_Runtime_InteropServices_InterfaceTypeAttribute
+            };
 
         protected sealed override void Initialize(SonarAnalysisContext context)
         {
@@ -93,7 +101,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var identifier = typeDeclaration.Identifier;
             var symbol = context.SemanticModel.GetDeclaredSymbol(typeDeclaration);
 
-            if (IsTypeComRelated(symbol))
+            if (symbol.HasAnyAttribute(ComRelatedTypes))
             {
                 return;
             }
@@ -138,7 +146,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             if (string.IsNullOrWhiteSpace(identifier.ValueText) ||
-                IsTypeComRelated(symbol.ContainingType) ||
+                symbol.ContainingType.HasAnyAttribute(ComRelatedTypes) ||
                 symbol.GetInterfaceMember() != null ||
                 symbol.GetOverriddenMember() != null ||
                 symbol.IsExtern)
@@ -323,15 +331,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 yield return currentWord.ToString();
             }
-        }
-
-        private static bool IsTypeComRelated(INamedTypeSymbol symbol)
-        {
-            return symbol == null ||
-                symbol.GetAttributes().Any(a =>
-                    a.AttributeClass.Is(KnownType.System_Runtime_InteropServices_ComImportAttribute) ||
-                    a.AttributeClass.Is(KnownType.System_Runtime_InteropServices_InterfaceTypeAttribute));
-        }
+        }        
 
         private static string FirstCharToUpper(string input)
         {

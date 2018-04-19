@@ -50,10 +50,10 @@ namespace SonarAnalyzer.Rules.CSharp
                     var methodSymbol = c.SemanticModel.GetDeclaredSymbol(methodDeclaration);
 
                     if (methodSymbol.IsMainMethod() &&
-                        !HasAttribute(methodSymbol, KnownType.System_STAThreadAttribute) &&
+                        !methodSymbol.HasAttribute(KnownType.System_STAThreadAttribute) &&
                         IsAssemblyReferencingWindowsForms(c.SemanticModel.Compilation))
                     {
-                        string message = HasAttribute(methodSymbol, KnownType.System_MTAThreadAttribute)
+                        string message = methodSymbol.HasAttribute(KnownType.System_MTAThreadAttribute)
                             ? ChangeMtaThreadToStaThreadMessage
                             : AddStaThreadMessage;
 
@@ -66,12 +66,6 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool IsAssemblyReferencingWindowsForms(Compilation compilation)
         {
             return compilation.ReferencedAssemblyNames.Any(r => r.IsStrongName && r.Name == "System.Windows.Forms");
-        }
-
-        private static bool HasAttribute(ISymbol symbol, KnownType attribute)
-        {
-            return symbol != null &&
-                symbol.GetAttributes().Any(a => a.AttributeClass.Is(attribute));
-        }
+        }        
     }
 }

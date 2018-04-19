@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2018 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -42,7 +42,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(c =>
+            context.RegisterSyntaxNodeActionInNonGenerated(
+                c =>
                 {
                     var methodDeclaration = (MethodDeclarationSyntax)c.Node;
                     var methodSymbol = c.SemanticModel.GetDeclaredSymbol(methodDeclaration);
@@ -51,16 +52,12 @@ namespace SonarAnalyzer.Rules.CSharp
                         methodSymbol.IsExtern &&
                         methodSymbol.IsStatic &&
                         methodSymbol.IsPubliclyAccessible() &&
-                        IsPInvokeMethod(methodSymbol))
+                        methodSymbol.HasAttribute(KnownType.System_Runtime_InteropServices_DllImportAttribute))
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, methodDeclaration.Identifier.GetLocation()));
                     }
                 },
                 SyntaxKind.MethodDeclaration);
         }
-
-        private static bool IsPInvokeMethod(ISymbol symbol) =>
-            symbol.GetAttributes().Any(attribute =>
-                attribute.AttributeClass.Is(KnownType.System_Runtime_InteropServices_DllImportAttribute));
     }
 }

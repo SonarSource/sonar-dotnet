@@ -80,21 +80,14 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.PropertyDeclaration);
         }
 
-        private static bool IsObservedCollectionType(IPropertySymbol propertySymbol)
-        {
-            var hasDataMemberAttribute = propertySymbol.GetAttributes().Any(attribute =>
-                attribute.AttributeClass.Is(KnownType.System_Runtime_Serialization_DataMemberAttribute));
+        private static bool IsObservedCollectionType(IPropertySymbol propertySymbol) =>
+            !propertySymbol.HasAttribute(KnownType.System_Runtime_Serialization_DataMemberAttribute) &&
+             propertySymbol.Type.OriginalDefinition.DerivesOrImplementsAny(collectionTypes) &&
+            !propertySymbol.Type.OriginalDefinition.DerivesOrImplementsAny(ignoredCollectionTypes);
 
-            return !hasDataMemberAttribute &&
-                propertySymbol.Type.OriginalDefinition.DerivesOrImplementsAny(collectionTypes) &&
-                !propertySymbol.Type.OriginalDefinition.DerivesOrImplementsAny(ignoredCollectionTypes);
-        }
-
-        private static bool HasPublicSetter(IPropertySymbol propertySymbol)
-        {
-            return propertySymbol.SetMethod != null &&
-                !privateOrInternalAccessibility.Contains(propertySymbol.GetEffectiveAccessibility()) &&
-                !privateOrInternalAccessibility.Contains(propertySymbol.SetMethod.DeclaredAccessibility);
-        }
+        private static bool HasPublicSetter(IPropertySymbol propertySymbol) =>
+            propertySymbol.SetMethod != null &&
+            !privateOrInternalAccessibility.Contains(propertySymbol.GetEffectiveAccessibility()) &&
+            !privateOrInternalAccessibility.Contains(propertySymbol.SetMethod.DeclaredAccessibility);
     }
 }

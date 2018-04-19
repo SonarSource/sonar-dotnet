@@ -53,8 +53,8 @@ namespace SonarAnalyzer.Rules.CSharp
                     {
                         var classSymbol = c.SemanticModel.GetDeclaredSymbol(classDeclaration);
                         if (classSymbol == null ||
-                            classSymbol.GetAttributes().Any(IsExportAttribute) ||
-                            classSymbol.GetSelfAndBaseTypes().SelectMany(s => s.GetAttributes()).Any(IsInheritedExportAttribute))
+                            classSymbol.HasAttribute(KnownType.System_ComponentModel_Composition_ExportAttribute) ||
+                            classSymbol.GetSelfAndBaseTypes().Any(s => s.HasAttribute(KnownType.System_ComponentModel_Composition_InheritedExportAttribute)))
                         {
                             return;
                         }
@@ -64,13 +64,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     bool IsPartCreationPolicyAttribute(AttributeSyntax attributeSyntax) =>
                         c.SemanticModel.GetSymbolInfo(attributeSyntax).Symbol is IMethodSymbol attributeSymbol &&
-                        attributeSymbol.ContainingType.Is(KnownType.System_ComponentModel_Composition_PartCreationPolicyAttribute);
-
-                    bool IsExportAttribute(AttributeData attributeData) =>
-                        attributeData.AttributeClass.Is(KnownType.System_ComponentModel_Composition_ExportAttribute);
-
-                    bool IsInheritedExportAttribute(AttributeData attributeData) =>
-                        attributeData.AttributeClass.Is(KnownType.System_ComponentModel_Composition_InheritedExportAttribute);
+                        attributeSymbol.ContainingType.Is(KnownType.System_ComponentModel_Composition_PartCreationPolicyAttribute);                    
                 },
                 SyntaxKind.Attribute);
         }

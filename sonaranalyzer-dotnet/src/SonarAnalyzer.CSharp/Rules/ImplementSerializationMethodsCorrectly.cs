@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2018 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -62,7 +62,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 var methodSymbol = c.SemanticModel.GetDeclaredSymbol(methodDeclaration);
 
                 if (methodDeclaration.Identifier.IsMissing ||
-                    !HasSerializationAttribute(methodSymbol))
+                    !methodSymbol.HasAnyAttribute(serializationAttributes))
                 {
                     return;
                 }
@@ -76,13 +76,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
             },
             SyntaxKind.MethodDeclaration);
-        }
-
-        private static bool HasSerializationAttribute(IMethodSymbol methodSymbol)
-        {
-            return methodSymbol != null &&
-                methodSymbol.GetAttributes().Any(attr => attr.AttributeClass.IsAny(serializationAttributes));
-        }
+        }        
 
         private static IEnumerable<string> FindIssues(IMethodSymbol methodSymbol)
         {

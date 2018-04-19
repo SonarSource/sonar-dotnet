@@ -82,7 +82,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         // Serializable classes are ignored because the serialized fields
                         // cannot be readonly. [Nonserialized] fields could be readonly,
                         // but all fields with attribute are ignored in the ReadonlyFieldCollector.
-                        declaredSymbol.GetAttributes().Any(IsSerializableAttribute))
+                        declaredSymbol.HasAttribute(KnownType.System_SerializableAttribute))
                     {
                         return;
                     }
@@ -114,10 +114,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
                 },
                 SymbolKind.NamedType);
-        }
-
-        private static bool IsSerializableAttribute(AttributeData attribute) =>
-            attribute.AttributeClass.Is(KnownType.System_SerializableAttribute);
+        }        
 
         private class ReadonlyFieldCollector
         {
