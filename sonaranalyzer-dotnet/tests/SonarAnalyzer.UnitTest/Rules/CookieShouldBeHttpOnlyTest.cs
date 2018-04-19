@@ -19,21 +19,20 @@
  */
 
 extern alias csharp;
-using csharp::SonarAnalyzer.Rules.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using csharp::SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
     [TestClass]
-    public class HttpPostControllerActionShouldValidateInputTest
+    public class CookieShouldBeHttpOnlyTest
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void HttpPostControllerActionShouldValidateInput()
+        public void CookiesShouldBeHttpOnly()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\HttpPostControllerActionShouldValidateInput.cs",
-                new HttpPostControllerActionShouldValidateInput(),
-                additionalReferences: Verifier.SystemWebMvcAssembly);
+            Verifier.VerifyAnalyzer(@"TestCases\CookieShouldBeHttpOnly.cs",
+                new CookieShouldBeHttpOnly(), additionalReferences: Verifier.SystemWebAssembly);
         }
     }
 }

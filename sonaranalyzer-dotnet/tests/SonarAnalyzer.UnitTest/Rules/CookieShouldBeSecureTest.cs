@@ -25,14 +25,14 @@ using csharp::SonarAnalyzer.Rules.CSharp;
 namespace SonarAnalyzer.UnitTest.Rules
 {
     [TestClass]
-    public class DoNotUseInsecureCookiesTest
+    public class CookieShouldBeSecureTest
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void DoNotUseInsecureCookies()
+        public void CookiesShouldBeSecure()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\DoNotUseInsecureCookies.cs",
-                new DoNotUseInsecureCookies(), additionalReferences: Verifier.SystemWebAssemblly);
+            Verifier.VerifyAnalyzer(@"TestCases\CookieShouldBeSecure.cs",
+                new CookieShouldBeSecure(), additionalReferences: Verifier.SystemWebAssembly);
         }
     }
 }
