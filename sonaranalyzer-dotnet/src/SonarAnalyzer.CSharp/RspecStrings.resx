@@ -5895,6 +5895,36 @@
   <data name="S3265_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
   </data>
+  <data name="S3330_Category" xml:space="preserve">
+    <value>Critical Vulnerability</value>
+  </data>
+  <data name="S3330_Description" xml:space="preserve">
+    <value>The HttpOnly cookie attribute tells the browser to prevent client-side scripts from reading cookies with the attribute, and its use can go a long way to defending against Cross-Site Scripting (XSS) attacks. Thus, as a precaution, the attribute should be set by default on all cookies set server-side, such as session id cookies.</value>
+  </data>
+  <data name="S3330_IsActivatedByDefault" xml:space="preserve">
+    <value>False</value>
+  </data>
+  <data name="S3330_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S3330_RemediationCost" xml:space="preserve">
+    <value>10min</value>
+  </data>
+  <data name="S3330_Scope" xml:space="preserve">
+    <value>Main</value>
+  </data>
+  <data name="S3330_Severity" xml:space="preserve">
+    <value>Critical</value>
+  </data>
+  <data name="S3330_Tags" xml:space="preserve">
+    <value>cwe,sans-top25-insecure,owasp-a7</value>
+  </data>
+  <data name="S3330_Title" xml:space="preserve">
+    <value>"HttpOnly" should be set on cookies</value>
+  </data>
+  <data name="S3330_Type" xml:space="preserve">
+    <value>VULNERABILITY</value>
+  </data>
   <data name="S3343_Category" xml:space="preserve">
     <value>Major Bug</value>
   </data>

@@ -24,29 +24,21 @@ using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.CodeAnalysis.Diagnostics;
-using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.Rules
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    [Rule(DiagnosticId)]
-    public sealed class DoNotUseInsecureCookies : SonarDiagnosticAnalyzer
+    public abstract class ObjectsShouldBeInitializedCorrectlyBase<TExpectedValueType> : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S2092";
-        private const string MessageFormat = "Set the 'Secure' property of this cookie to 'true'.";
+        protected abstract DiagnosticDescriptor Rule { get; }
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+        internal abstract KnownType TrackedType { get; }
 
-        private KnownType TrackedType => KnownType.System_Web_HttpCookie;
+        protected abstract string TrackedPropertyName { get; }
 
-        private string TrackedPropertyName => "Secure";
-
-        private object ExpectedPropertyValue => true;
+        protected abstract TExpectedValueType ExpectedPropertyValue { get; }
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -55,11 +47,11 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     var objectCreation = (ObjectCreationExpressionSyntax)c.Node;
 
-                    if (IsTrackedType(objectCreation.Type, c.SemanticModel) &&
+                    if (IsTrackedType(objectCreation, c.SemanticModel) &&
                         !IsInitializedAsExpected(objectCreation, c.SemanticModel) &&
                         !IsLaterAssignedWithExpectedValue(objectCreation, c.SemanticModel))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, objectCreation.GetLocation()));
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, objectCreation.GetLocation()));
                     }
                 },
                 SyntaxKind.ObjectCreationExpression);
@@ -71,12 +63,12 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     // Ignore assignments within object initializers, they are
                     // reported in the ObjectCreationExpression handler
-                    if (FirstAncestorOfType<InitializerExpressionSyntax>(assignment) == null &&
+                    if (assignment.FirstAncestorOrSelf<InitializerExpressionSyntax>() == null &&
                         IsTrackedPropertyName(assignment.Left) &&
                         IsPropertyOnTrackedType(assignment.Left, c.SemanticModel) &&
                         !ValueIsExpected(assignment, c.SemanticModel))
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, assignment.GetLocation()));
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, assignment.GetLocation()));
                     }
                 },
                 SyntaxKind.SimpleAssignmentExpression);
@@ -84,13 +76,13 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static ISymbol GetAssignedVariableSymbol(ObjectCreationExpressionSyntax objectCreation, SemanticModel semanticModel)
         {
-            var variable = FirstAncestorOfType<AssignmentExpressionSyntax>(objectCreation)?.Left;
+            var variable = objectCreation.FirstAncestorOrSelf<AssignmentExpressionSyntax>()?.Left;
             if (variable != null)
             {
                 return semanticModel.GetSymbolInfo(variable).Symbol;
             }
 
-            var identifier = FirstAncestorOfType<VariableDeclaratorSyntax>(objectCreation);
+            var identifier = objectCreation.FirstAncestorOrSelf<VariableDeclaratorSyntax>();
             return identifier != null
                 ? semanticModel.GetDeclaredSymbol(identifier)
                 : null;
@@ -112,7 +104,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private bool IsLaterAssignedWithExpectedValue(ObjectCreationExpressionSyntax objectCreation, SemanticModel semanticModel)
         {
-            var statement = FirstAncestorOfType<StatementSyntax>(objectCreation);
+            var statement = objectCreation.FirstAncestorOrSelf<StatementSyntax>();
             if (statement == null)
             {
                 return false;
@@ -134,8 +126,7 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         private bool IsTrackedType(ExpressionSyntax expression, SemanticModel semanticModel) =>
-            semanticModel.GetSymbolInfo(expression).Symbol
-                .GetSymbolType()
+            semanticModel.GetTypeInfo(expression).Type
                 .Is(TrackedType);
 
         private bool IsInitializedAsExpected(ObjectCreationExpressionSyntax objectCreation, SemanticModel semanticModel) =>
@@ -153,11 +144,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private bool ValueIsExpected(AssignmentExpressionSyntax assignment, SemanticModel semanticModel) =>
             assignment?.Right != null &&
-            semanticModel.GetConstantValue(assignment.Right).Value is object constantValue &&
+            semanticModel.GetConstantValue(assignment.Right).Value is TExpectedValueType constantValue &&
             ExpectedPropertyValue.Equals(constantValue);
-
-        private static T FirstAncestorOfType<T>(SyntaxNode node) =>
-            node.Ancestors().OfType<T>().FirstOrDefault();
 
         private static IEnumerable<StatementSyntax> GetNextStatements(StatementSyntax statement) =>
             statement.Parent.ChildNodes().OfType<StatementSyntax>().SkipWhile(x => x != statement).Skip(1);
