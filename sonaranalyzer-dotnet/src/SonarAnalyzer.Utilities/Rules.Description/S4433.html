@@ -1,0 +1,25 @@
+<p>An un-authenticated LDAP connection can lead to transactions without access control. Authentication, and with it, access control, are the last line
+of defense against LDAP injections and should not be disabled.</p>
+<p>This rule raises an issue when an LDAP connection is created with <code>AuthenticationTypes.Anonymous</code> or
+<code>AuthenticationTypes.None</code>.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+DirectoryEntry myDirectoryEntry = new DirectoryEntry(adPath);
+myDirectoryEntry.AuthenticationType = AuthenticationTypes.None; // Noncompliant
+
+DirectoryEntry myDirectoryEntry = new DirectoryEntry(adPath, "u", "p", AuthenticationTypes.None); // Noncompliant
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+DirectoryEntry myDirectoryEntry = new DirectoryEntry(myADSPath); // Compliant; default DirectoryEntry.AuthenticationType property value is "Secure" since .NET Framework 2.0
+
+DirectoryEntry myDirectoryEntry = new DirectoryEntry(myADSPath, "u", "p", AuthenticationTypes.Secure);
+</pre>
+<h2>See</h2>
+<ul>
+  <li> <a href="https://cwe.mitre.org/data/definitions/521.html">CWE-521</a> - Weak Password Requirements </li>
+  <li> OWASP Top 10 2017 Category A2 - Broken Authentication </li>
+  <li> <a href="https://docs.oracle.com/javase/tutorial/jndi/ldap/authentication.html">Modes of Authenticating to LDAP</a> </li>
+  <li> Derived from FindSecBugs rule <a href="https://find-sec-bugs.github.io/bugs.htm#LDAP_ANONYMOUS">LDAP_ANONYMOUS</a> </li>
+</ul>
+

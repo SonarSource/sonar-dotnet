@@ -63,13 +63,16 @@ namespace SonarAnalyzer.Rules
                     if (FirstAncestorOfType<InitializerExpressionSyntax>(assignment) == null &&
                         IsTrackedPropertyName(assignment.Left) &&
                         IsPropertyOnTrackedType(assignment.Left, c.SemanticModel) &&
-                        !ValueIsExpected(assignment, c.SemanticModel))
+                        !IsExpectedValue(assignment.Right, c.SemanticModel))
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, assignment.GetLocation()));
                     }
                 },
                 SyntaxKind.SimpleAssignmentExpression);
         }
+
+        protected virtual bool IsExpectedValue(object constantValue) =>
+            ExpectedPropertyValue.Equals(constantValue);
 
         private static ISymbol GetAssignedVariableSymbol(ObjectCreationExpressionSyntax objectCreation, SemanticModel semanticModel)
         {
@@ -119,7 +122,7 @@ namespace SonarAnalyzer.Rules
             bool TrackedPropertySetWithExpectedValue(AssignmentExpressionSyntax assignment) =>
                 variableSymbol.Equals(GetAssignedVariableSymbol(assignment, semanticModel))
                 && IsTrackedPropertyName(assignment.Left)
-                && ValueIsExpected(assignment, semanticModel);
+                && IsExpectedValue(assignment.Right, semanticModel);
         }
 
         private bool IsTrackedType(ExpressionSyntax expression, SemanticModel semanticModel) =>
@@ -127,11 +130,13 @@ namespace SonarAnalyzer.Rules
                 .GetSymbolType()
                 .Is(TrackedType);
 
-        private bool IsInitializedAsExpected(ObjectCreationExpressionSyntax objectCreation, SemanticModel semanticModel) =>
+        protected virtual bool IsInitializedAsExpected(ObjectCreationExpressionSyntax objectCreation, SemanticModel semanticModel) =>
             objectCreation.Initializer != null &&
             objectCreation.Initializer.Expressions
                 .OfType<AssignmentExpressionSyntax>()
-                .Any(assignment => IsTrackedPropertyName(assignment?.Left) && ValueIsExpected(assignment, semanticModel));
+                .Any(assignment =>
+                        IsTrackedPropertyName(assignment?.Left) &&
+                        IsExpectedValue(assignment?.Right, semanticModel));
 
         private bool IsTrackedPropertyName(ExpressionSyntax expression)
         {
@@ -140,10 +145,10 @@ namespace SonarAnalyzer.Rules
             return identifier.HasValue && identifier.Value.ValueText == TrackedPropertyName;
         }
 
-        private bool ValueIsExpected(AssignmentExpressionSyntax assignment, SemanticModel semanticModel) =>
-            assignment?.Right != null &&
-            semanticModel.GetConstantValue(assignment.Right).Value is object constantValue &&
-            ExpectedPropertyValue.Equals(constantValue);
+        protected bool IsExpectedValue(ExpressionSyntax expression, SemanticModel semanticModel) =>
+            expression != null &&
+            semanticModel.GetConstantValue(expression).Value is object constantValue &&
+            IsExpectedValue(constantValue);
 
         private static T FirstAncestorOfType<T>(SyntaxNode node) =>
             node.Ancestors().OfType<T>().FirstOrDefault();

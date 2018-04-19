@@ -9933,6 +9933,36 @@
   <data name="S4428_Type" xml:space="preserve">
     <value>BUG</value>
   </data>
+  <data name="S4433_Category" xml:space="preserve">
+    <value>Critical Vulnerability</value>
+  </data>
+  <data name="S4433_Description" xml:space="preserve">
+    <value>An un-authenticated LDAP connection can lead to transactions without access control. Authentication, and with it, access control, are the last line of defense against LDAP injections and should not be disabled.</value>
+  </data>
+  <data name="S4433_IsActivatedByDefault" xml:space="preserve">
+    <value>True</value>
+  </data>
+  <data name="S4433_Remediation" xml:space="preserve">
+    <value />
+  </data>
+  <data name="S4433_RemediationCost" xml:space="preserve">
+    <value />
+  </data>
+  <data name="S4433_Scope" xml:space="preserve">
+    <value>Main</value>
+  </data>
+  <data name="S4433_Severity" xml:space="preserve">
+    <value>Critical</value>
+  </data>
+  <data name="S4433_Tags" xml:space="preserve">
+    <value>cwe,owasp-a2</value>
+  </data>
+  <data name="S4433_Title" xml:space="preserve">
+    <value>LDAP connections should be authenticated</value>
+  </data>
+  <data name="S4433_Type" xml:space="preserve">
+    <value>VULNERABILITY</value>
+  </data>
   <data name="S4456_Category" xml:space="preserve">
     <value>Major Code Smell</value>
   </data>
