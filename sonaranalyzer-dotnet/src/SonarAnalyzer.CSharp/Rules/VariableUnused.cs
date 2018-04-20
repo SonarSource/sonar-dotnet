@@ -54,7 +54,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     declaredLocals.UnionWith(
                         ((LocalDeclarationStatementSyntax)c.Node).Declaration.Variables
                             .Select(variable => c.SemanticModel.GetDeclaredSymbol(variable))
-                            .Where(symbol => symbol != null));
+                            .WhereNotNull());
                 },
                 SyntaxKind.LocalDeclarationStatement);
 
@@ -83,7 +83,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 yield return symbolInfo.Symbol;
             }
 
-            foreach (var candidate in symbolInfo.CandidateSymbols.Where(cs => cs != null))
+            foreach (var candidate in symbolInfo.CandidateSymbols.WhereNotNull())
             {
                 yield return candidate;
             }

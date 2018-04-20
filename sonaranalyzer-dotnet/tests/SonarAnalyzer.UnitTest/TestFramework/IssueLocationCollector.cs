@@ -26,6 +26,7 @@ using System.Text.RegularExpressions;
 using FluentAssertions.Execution;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Text;
+using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.UnitTest.TestFramework
 {
@@ -48,12 +49,12 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         {
             var preciseLocations = lines
                 .SelectMany(GetPreciseIssueLocations)
-                .Where(i => i != null)
+                .WhereNotNull()
                 .ToList();
 
             var locations = lines
                 .SelectMany(GetIssueLocations)
-                .Where(i => i != null)
+                .WhereNotNull()
                 .ToList();
 
             return MergeLocations(locations, preciseLocations);

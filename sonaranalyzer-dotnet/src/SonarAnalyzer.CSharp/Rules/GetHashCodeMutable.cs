@@ -70,7 +70,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var fieldsOfClass = baseMembers
                         .Concat(methodSymbol.ContainingType.GetMembers())
                         .Select(symbol => symbol as IFieldSymbol)
-                        .Where(symbol => symbol != null)
+                        .WhereNotNull()
                         .ToHashSet();
 
                     var identifiers = methodSyntax.DescendantNodes().OfType<IdentifierNameSyntax>();
@@ -119,7 +119,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             return syntaxNodes.Values
                 .Select(identifierReferences => identifierReferences.OrderBy(id => id.SpanStart).FirstOrDefault())
-                .Where(identifierSyntax => identifierSyntax != null);
+                .WhereNotNull();
         }
 
         private static bool IsFieldRelevant(IFieldSymbol fieldSymbol, ISet<IFieldSymbol> fieldsOfClass)

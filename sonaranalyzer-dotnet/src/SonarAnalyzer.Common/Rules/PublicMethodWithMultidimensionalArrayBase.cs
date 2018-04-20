@@ -65,7 +65,7 @@ namespace SonarAnalyzer.Rules.Common
         {
             return methodSymbol.Parameters
                 .Select(param => param.Type as IArrayTypeSymbol)
-                .Where(type => type != null)
+                .WhereNotNull()
                 .Any(type => type.Rank > 1 || type.ElementType is IArrayTypeSymbol);
         }
 

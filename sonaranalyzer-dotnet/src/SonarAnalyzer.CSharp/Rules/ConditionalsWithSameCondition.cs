@@ -86,7 +86,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             var checkedSymbols = expression.DescendantNodesAndSelf()
                 .Select(node => semanticModel.GetSymbolInfo(node).Symbol)
-                .Where(symbol => symbol != null)
+                .WhereNotNull()
                 .ToHashSet();
 
             var statementDescendents = statement.DescendantNodesAndSelf().ToList();

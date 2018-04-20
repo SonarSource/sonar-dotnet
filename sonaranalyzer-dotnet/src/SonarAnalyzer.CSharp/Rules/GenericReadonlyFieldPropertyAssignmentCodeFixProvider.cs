@@ -67,7 +67,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             var classDeclarations = classDeclarationTasks
                 .Select(task => task.Result as ClassDeclarationSyntax)
-                .Where(cl => cl != null)
+                .WhereNotNull()
                 .ToList();
 
             if (classDeclarations.Any())

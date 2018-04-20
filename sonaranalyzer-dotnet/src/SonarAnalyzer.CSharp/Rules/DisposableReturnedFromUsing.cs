@@ -54,7 +54,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     {
                         declaredSymbols =
                             declaration.Variables.Select(syntax => c.SemanticModel.GetDeclaredSymbol(syntax))
-                                .Where(symbol => symbol != null)
+                                .WhereNotNull()
                                 .ToHashSet();
                     }
                     else
@@ -104,7 +104,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 .Select(ret => ret.Expression)
                 .OfType<IdentifierNameSyntax>()
                 .Select(identifier => semanticModel.GetSymbolInfo(identifier).Symbol)
-                .Where(symbol => symbol != null)
+                .WhereNotNull()
                 .ToHashSet();
         }
     }

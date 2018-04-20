@@ -128,7 +128,7 @@ namespace SonarAnalyzer.Rules.CSharp
             return descendantNodes
                 .OfType<ObjectCreationExpressionSyntax>()
                 .Select(ctor => semanticModel.GetSymbolInfo(ctor).Symbol as IMethodSymbol)
-                .Where(m => m != null)
+                .WhereNotNull()
                 .Any(ctor => Equals(ctor.ContainingType?.OriginalDefinition, namedType));
         }
 

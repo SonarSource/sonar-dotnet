@@ -56,7 +56,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var identifiersToFix = diagnostic.AdditionalLocations
                 .Select(location => location.SourceSpan)
                 .Select(diagnosticSpan => root.FindNode(diagnosticSpan, getInnermostNodeForTie: true) as IdentifierNameSyntax)
-                .Where(idenfitierName => idenfitierName != null)
+                .WhereNotNull()
                 .ToList();
 
             if (identifiersToFix.Count == 0)
@@ -70,7 +70,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var allFieldDeclarationTasks = identifiersToFix.Select(identifier =>
                 GetFieldDeclarationSyntax(semanticModel, identifier, context.CancellationToken));
             var allFieldDeclarations = await Task.WhenAll(allFieldDeclarationTasks).ConfigureAwait(false);
-            allFieldDeclarations = allFieldDeclarations.Where(fieldDeclaration => fieldDeclaration != null).ToArray();
+            allFieldDeclarations = allFieldDeclarations.WhereNotNull().ToArray();
 
             context.RegisterCodeFix(
                 CodeAction.Create(

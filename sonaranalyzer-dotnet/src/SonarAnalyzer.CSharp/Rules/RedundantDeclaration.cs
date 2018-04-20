@@ -407,7 +407,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 .OfType<IdentifierNameSyntax>()
                 .Where(id => parameterNames.Contains(id.Identifier.ValueText))
                 .Select(id => context.SemanticModel.GetSymbolInfo(id).Symbol as IParameterSymbol)
-                .Where(p => p != null)
+                .WhereNotNull()
                 .ToHashSet();
 
             if (!usedParameters.Intersect(methodSymbol.Parameters).Any())

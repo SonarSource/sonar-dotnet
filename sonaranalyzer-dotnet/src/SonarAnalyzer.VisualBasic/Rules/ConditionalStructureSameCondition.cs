@@ -49,7 +49,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
                     var conditions = new[] { ifBlock.IfStatement?.Condition }
                         .Concat(ifBlock.ElseIfBlocks.Select(elseIf => elseIf.ElseIfStatement?.Condition))
-                        .Where(cond => cond != null)
+                        .WhereNotNull()
                         .Select(cond => cond.RemoveParentheses())
                         .ToList();
 

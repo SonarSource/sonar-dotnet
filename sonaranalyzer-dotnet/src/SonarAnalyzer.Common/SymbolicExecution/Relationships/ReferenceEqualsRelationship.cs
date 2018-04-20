@@ -20,6 +20,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.SymbolicExecution.Relationships
 {
@@ -51,7 +52,7 @@ namespace SonarAnalyzer.SymbolicExecution.Relationships
         {
             return relationships
                 .Select(other => ComputeTransitiveRelationship(other, other))
-                .Where(t => t != null);
+                .WhereNotNull();
         }
 
         internal override BinaryRelationship CreateNew(SymbolicValue leftOperand, SymbolicValue rightOperand)

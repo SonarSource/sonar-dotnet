@@ -40,7 +40,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 c =>
                 {
                     var fieldDeclaration = (FieldDeclarationSyntax)c.Node;
-                    foreach (var name in fieldDeclaration.Declarators.SelectMany(v => v.Names).Where(n => n != null))
+                    foreach (var name in fieldDeclaration.Declarators.SelectMany(v => v.Names).WhereNotNull())
                     {
                         if (c.SemanticModel.GetDeclaredSymbol(name) is IFieldSymbol symbol &&
                             IsCandidateSymbol(symbol) &&
