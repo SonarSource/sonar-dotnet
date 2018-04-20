@@ -103,7 +103,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 ? Enumerable.Empty<ISymbol>()
                 : node.Declaration.Variables
                     .Select(v => semanticModel.GetDeclaredSymbol(v))
-                    .Where(symbol => symbol != null);
+                    .WhereNotNull();
 
             var initializedVariables = node.Initializers
                 .Where(i => i.IsKind(SyntaxKind.SimpleAssignmentExpression))

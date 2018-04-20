@@ -20,6 +20,7 @@
 
 using System.Collections.Immutable;
 using System.Linq;
+using SonarAnalyzer.Helpers;
 using SonarAnalyzer.SymbolicExecution.Relationships;
 
 namespace SonarAnalyzer.SymbolicExecution.Constraints
@@ -62,9 +63,9 @@ namespace SonarAnalyzer.SymbolicExecution.Constraints
         {
             var newConstraintsMap = constraintsMap;
             var equalSymbols = programState.Relationships
-                            .OfType<TRelationship>()
-                            .Select(r => GetOtherOperandFromMatchingRelationship(symbolicValue, r))
-                            .Where(e => e != null);
+                .OfType<TRelationship>()
+                .Select(r => GetOtherOperandFromMatchingRelationship(symbolicValue, r))
+                .WhereNotNull();
 
             foreach (var equalSymbol in equalSymbols.Where(e => !programState.HasConstraint(e, constraint)))
             {

@@ -197,7 +197,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 bodies = new SyntaxNode[] { constructorDeclaration.Body, constructorDeclaration.Initializer };
             }
 
-            foreach (var body in bodies.Where(b => b != null))
+            foreach (var body in bodies.WhereNotNull())
             {
                 usedParameters.UnionWith(GetUsedParameters(methodSymbol.Parameters, body, semanticModel));
             }

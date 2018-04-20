@@ -20,6 +20,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using SonarAnalyzer.Helpers;
 using SonarAnalyzer.SymbolicExecution.SymbolicValues;
 
 namespace SonarAnalyzer.SymbolicExecution.Relationships
@@ -70,7 +71,7 @@ namespace SonarAnalyzer.SymbolicExecution.Relationships
             return relationships
                 .OfType<EqualsRelationship>()
                 .Select(other => ComputeTransitiveRelationship(other, this))
-                .Where(t => t != null);
+                .WhereNotNull();
         }
     }
 }

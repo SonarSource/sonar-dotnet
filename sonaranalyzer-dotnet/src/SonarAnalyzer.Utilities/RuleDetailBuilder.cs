@@ -146,7 +146,7 @@ namespace SonarAnalyzer.Utilities
                 .Select(p => p.GetCustomAttributes<RuleParameterAttribute>().SingleOrDefault());
 
             foreach (var ruleParameter in parameters
-                .Where(attribute => attribute != null))
+                .WhereNotNull())
             {
                 ruleDetail.Parameters.Add(
                     new RuleParameter

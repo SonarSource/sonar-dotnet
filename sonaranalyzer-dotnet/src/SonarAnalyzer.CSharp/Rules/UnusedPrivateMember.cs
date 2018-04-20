@@ -427,7 +427,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     n.SemanticModel,
                     Symbols = GetAllCandidateSymbols(n.Symbol)
                         .Select(s => GetOriginalSymbol(s))
-                        .Where(s => s != null)
+                        .WhereNotNull()
                 });
 
             foreach (var candidateSymbol in candidateSymbols)
@@ -523,7 +523,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             return new[] { symbolInfo.Symbol }
                 .Concat(symbolInfo.CandidateSymbols)
-                .Where(s => s != null);
+                .WhereNotNull();
         }
 
         private static VariableDeclarationSyntax GetVariableDeclaration(SyntaxNode syntax)
