@@ -35,6 +35,8 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         internal const string DiagnosticId = "S3442";
         private const string MessageFormat = "Change the visibility of this constructor to 'protected'.";
+        
+        public string Bar = "Foo";
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
