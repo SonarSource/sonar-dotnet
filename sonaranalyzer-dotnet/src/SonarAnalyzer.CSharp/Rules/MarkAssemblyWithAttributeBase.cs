@@ -34,22 +34,19 @@ namespace SonarAnalyzer.Rules
 
         protected sealed override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterCompilationStartAction(c =>
-            {
-                if (c.Compilation.IsTest())
+            context.RegisterCompilationStartAction(
+                c =>
                 {
-                    return;
-                }
-
-                c.RegisterCompilationEndAction(cc =>
-                {
-                    var requiredAttributeFound = cc.Compilation.Assembly.GetAttributes().Any(a => a.AttributeClass.Is(AttributeToFind));
-                    if (!requiredAttributeFound)
-                    {
-                        cc.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, null));
-                    }
+                    c.RegisterCompilationEndAction(
+                        cc =>
+                        {
+                            var requiredAttributeFound = cc.Compilation.Assembly.GetAttributes().Any(a => a.AttributeClass.Is(AttributeToFind));
+                            if (!requiredAttributeFound)
+                            {
+                                cc.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, null));
+                            }
+                        });
                 });
-            });
         }
     }
 }

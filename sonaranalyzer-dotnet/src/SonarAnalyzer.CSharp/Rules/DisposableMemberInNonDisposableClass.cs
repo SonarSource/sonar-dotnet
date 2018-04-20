@@ -50,81 +50,85 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected sealed override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterCompilationStartAction(analysisContext =>
-            {
-                if (analysisContext.Compilation.IsTest())
+            context.RegisterCompilationStartAction(
+                analysisContext =>
                 {
-                    return;
-                }
 
-                var fieldsByNamedType = MultiValueDictionary<INamedTypeSymbol, IFieldSymbol>.Create<HashSet<IFieldSymbol>>();
-                var fieldsAssigned = new HashSet<IFieldSymbol>();
+                    var fieldsByNamedType = MultiValueDictionary<INamedTypeSymbol, IFieldSymbol>.Create<HashSet<IFieldSymbol>>();
+                    var fieldsAssigned = new HashSet<IFieldSymbol>();
 
-                analysisContext.RegisterSymbolAction(c =>
-                {
-                    var namedTypeSymbol = (INamedTypeSymbol)c.Symbol;
-                    if (!namedTypeSymbol.IsClass() ||
-                        namedTypeSymbol.Implements(KnownType.System_IDisposable))
-                    {
-                        return;
-                    }
-
-                    var disposableFields = namedTypeSymbol.GetMembers()
-                        .OfType<IFieldSymbol>()
-                        .Where(IsNonStaticNonPublicDisposableField)
-                        .ToHashSet();
-
-                    fieldsByNamedType.AddRangeWithKey(namedTypeSymbol, disposableFields);
-                }, SymbolKind.NamedType);
-
-
-                analysisContext.RegisterSyntaxNodeAction(c =>
-                {
-                    var assignment = (AssignmentExpressionSyntax)c.Node;
-                    var expression = assignment.Right;
-                    var fieldSymbol = c.SemanticModel.GetSymbolInfo(assignment.Left).Symbol as IFieldSymbol;
-
-                    AddFieldIfNeeded(fieldSymbol, expression, fieldsAssigned);
-                }, SyntaxKind.SimpleAssignmentExpression);
-
-                analysisContext.RegisterSyntaxNodeAction(c =>
-                {
-                    var field = (FieldDeclarationSyntax)c.Node;
-
-                    foreach (var variableDeclaratorSyntax in field.Declaration.Variables
-                        .Where(declaratorSyntax => declaratorSyntax.Initializer != null))
-                    {
-                        var fieldSymbol = c.SemanticModel.GetDeclaredSymbol(variableDeclaratorSyntax) as IFieldSymbol;
-
-                        AddFieldIfNeeded(fieldSymbol, variableDeclaratorSyntax.Initializer.Value, fieldsAssigned);
-                    }
-
-                }, SyntaxKind.FieldDeclaration);
-
-                analysisContext.RegisterCompilationEndAction(c =>
-                {
-                    foreach (var kv in fieldsByNamedType)
-                    {
-                        foreach (var classSyntax in kv.Key.DeclaringSyntaxReferences
-                            .Select(declaringSyntaxReference => declaringSyntaxReference.GetSyntax())
-                            .OfType<ClassDeclarationSyntax>())
+                    analysisContext.RegisterSymbolAction(
+                        c =>
                         {
-                            var assignedFields = kv.Value.Intersect(fieldsAssigned).ToList();
-
-                            if (!assignedFields.Any())
+                            var namedTypeSymbol = (INamedTypeSymbol)c.Symbol;
+                            if (!namedTypeSymbol.IsClass() ||
+                                namedTypeSymbol.Implements(KnownType.System_IDisposable))
                             {
-                                continue;
+                                return;
                             }
-                            var variableNames = string.Join(", ",
-                                assignedFields.Select(symbol => $"'{symbol.Name}'").OrderBy(s => s));
 
-                            c.ReportDiagnosticIfNonGenerated(
-                                Diagnostic.Create(rule, classSyntax.Identifier.GetLocation(), variableNames),
-                                c.Compilation);
-                        }
-                    }
+                            var disposableFields = namedTypeSymbol.GetMembers()
+                                .OfType<IFieldSymbol>()
+                                .Where(IsNonStaticNonPublicDisposableField)
+                                .ToHashSet();
+
+                            fieldsByNamedType.AddRangeWithKey(namedTypeSymbol, disposableFields);
+                        },
+                        SymbolKind.NamedType);
+
+
+                    analysisContext.RegisterSyntaxNodeAction(
+                        c =>
+                        {
+                            var assignment = (AssignmentExpressionSyntax)c.Node;
+                            var expression = assignment.Right;
+                            var fieldSymbol = c.SemanticModel.GetSymbolInfo(assignment.Left).Symbol as IFieldSymbol;
+
+                            AddFieldIfNeeded(fieldSymbol, expression, fieldsAssigned);
+                        },
+                        SyntaxKind.SimpleAssignmentExpression);
+
+                    analysisContext.RegisterSyntaxNodeAction(
+                        c =>
+                        {
+                            var field = (FieldDeclarationSyntax)c.Node;
+
+                            foreach (var variableDeclaratorSyntax in field.Declaration.Variables
+                                .Where(declaratorSyntax => declaratorSyntax.Initializer != null))
+                            {
+                                var fieldSymbol = c.SemanticModel.GetDeclaredSymbol(variableDeclaratorSyntax) as IFieldSymbol;
+
+                                AddFieldIfNeeded(fieldSymbol, variableDeclaratorSyntax.Initializer.Value, fieldsAssigned);
+                            }
+
+                        },
+                        SyntaxKind.FieldDeclaration);
+
+                    analysisContext.RegisterCompilationEndAction(
+                        c =>
+                        {
+                            foreach (var kv in fieldsByNamedType)
+                            {
+                                foreach (var classSyntax in kv.Key.DeclaringSyntaxReferences
+                                    .Select(declaringSyntaxReference => declaringSyntaxReference.GetSyntax())
+                                    .OfType<ClassDeclarationSyntax>())
+                                {
+                                    var assignedFields = kv.Value.Intersect(fieldsAssigned).ToList();
+
+                                    if (!assignedFields.Any())
+                                    {
+                                        continue;
+                                    }
+                                    var variableNames = string.Join(", ",
+                                        assignedFields.Select(symbol => $"'{symbol.Name}'").OrderBy(s => s));
+
+                                    c.ReportDiagnosticIfNonGenerated(
+                                        Diagnostic.Create(rule, classSyntax.Identifier.GetLocation(), variableNames),
+                                        c.Compilation);
+                                }
+                            }
+                        });
                 });
-            });
         }
 
         private static void AddFieldIfNeeded(IFieldSymbol fieldSymbol, ExpressionSyntax expression,

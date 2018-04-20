@@ -33,12 +33,5 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             Verifier.VerifyAnalyzer(@"TestCases\UseValueParameter.cs", new UseValueParameter());
         }
-
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void UseValueParameter_InTest()
-        {
-            Verifier.VerifyNoIssueReportedInTest(@"TestCases\UseValueParameter.cs", new UseValueParameter());
-        }
     }
 }

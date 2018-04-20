@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S3900",
+"message":  "Refactor this method to add validation of parameter 'discovery' before using it.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.NodeTestRunner\Discovery.cs",
+"region":  {
+"startLine":  32,
+"startColumn":  24,
+"endLine":  32,
+"endColumn":  33
+}
+}
+}
+]
+}

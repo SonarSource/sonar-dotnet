@@ -1,0 +1,69 @@
+{
+"issues":  [
+{
+"id":  "S3237",
+"message":  "Use the 'value' parameter in this indexer set accessor declaration.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\BindingMemberInfoFixture.cs",
+"region":  {
+"startLine":  220,
+"startColumn":  17,
+"endLine":  220,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S3237",
+"message":  "Use the 'value' parameter in this indexer set accessor declaration.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\BindingMemberInfoFixture.cs",
+"region":  {
+"startLine":  226,
+"startColumn":  17,
+"endLine":  226,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S3237",
+"message":  "Use the 'value' parameter in this property set accessor declaration.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\BindingMemberInfoFixture.cs",
+"region":  {
+"startLine":  238,
+"startColumn":  17,
+"endLine":  238,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S3237",
+"message":  "Use the 'value' parameter in this property set accessor declaration.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\BindingMemberInfoFixture.cs",
+"region":  {
+"startLine":  251,
+"startColumn":  17,
+"endLine":  251,
+"endColumn":  20
+}
+}
+},
+{
+"id":  "S3237",
+"message":  "Use the 'value' parameter in this indexer set accessor declaration.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\ModelBinding\DefaultBinderFixture.cs",
+"region":  {
+"startLine":  1621,
+"startColumn":  17,
+"endLine":  1621,
+"endColumn":  20
+}
+}
+}
+]
+}

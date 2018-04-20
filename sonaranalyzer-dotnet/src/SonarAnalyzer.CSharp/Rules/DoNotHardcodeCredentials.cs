@@ -79,11 +79,6 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private void VerifyAssignment(SyntaxNodeAnalysisContext context)
         {
-            if (context.IsTest())
-            {
-                return;
-            }
-
             var assignment = context.Node as AssignmentExpressionSyntax;
             if (!assignment.IsKind(SyntaxKind.SimpleAssignmentExpression) ||
                 !assignment.Left.IsKnownType(KnownType.System_String, context.SemanticModel) ||
@@ -104,11 +99,6 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private void VerifyDeclaration(SyntaxNodeAnalysisContext context)
         {
-            if (context.IsTest())
-            {
-                return;
-            }
-
             var declaration = context.Node as VariableDeclarationSyntax;
 
             var stringTypeDeclarators = declaration.Variables

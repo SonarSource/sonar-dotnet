@@ -46,11 +46,6 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterCompilationStartAction(
                 csac =>
                 {
-                    if (csac.Compilation.IsTest())
-                    {
-                        return;
-                    }
-
                     var nodesWithSecuritySafeCritical = new Dictionary<SyntaxNode, AttributeSyntax>();
                     var nodesWithSecurityCritical = new Dictionary<SyntaxNode, AttributeSyntax>();
 

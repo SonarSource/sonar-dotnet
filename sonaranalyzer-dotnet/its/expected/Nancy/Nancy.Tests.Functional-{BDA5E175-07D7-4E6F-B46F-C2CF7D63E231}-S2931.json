@@ -1,0 +1,134 @@
+{
+"issues":  [
+{
+"id":  "S2931",
+"message":  "Implement 'IDisposable' in this class and use the 'Dispose' method to call 'Dispose' on 'bootstrapper'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests.Functional\Tests\AbsoluteUrlTests.cs",
+"region":  {
+"startLine":  10,
+"startColumn":  18,
+"endLine":  10,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2931",
+"message":  "Implement 'IDisposable' in this class and use the 'Dispose' method to call 'Dispose' on 'bootstrapper'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests.Functional\Tests\JsonpTests.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  18,
+"endLine":  11,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S2931",
+"message":  "Implement 'IDisposable' in this class and use the 'Dispose' method to call 'Dispose' on 'bootstrapper'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests.Functional\Tests\ManualStaticContentTests.cs",
+"region":  {
+"startLine":  10,
+"startColumn":  18,
+"endLine":  10,
+"endColumn":  42
+}
+}
+},
+{
+"id":  "S2931",
+"message":  "Implement 'IDisposable' in this class and use the 'Dispose' method to call 'Dispose' on 'bootstrapper'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests.Functional\Tests\ModelBindingTests.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  18,
+"endLine":  11,
+"endColumn":  37
+}
+}
+},
+{
+"id":  "S2931",
+"message":  "Implement 'IDisposable' in this class and use the 'Dispose' method to call 'Dispose' on 'bootstrapper'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests.Functional\Tests\PartialViewTests.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  18,
+"endLine":  12,
+"endColumn":  34
+}
+}
+},
+{
+"id":  "S2931",
+"message":  "Implement 'IDisposable' in this class and use the 'Dispose' method to call 'Dispose' on 'bootstrapper'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests.Functional\Tests\RouteConstraintTests.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  18,
+"endLine":  11,
+"endColumn":  38
+}
+}
+},
+{
+"id":  "S2931",
+"message":  "Implement 'IDisposable' in this class and use the 'Dispose' method to call 'Dispose' on 'bootstrapper'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests.Functional\Tests\SerializerTests.cs",
+"region":  {
+"startLine":  10,
+"startColumn":  18,
+"endLine":  10,
+"endColumn":  33
+}
+}
+},
+{
+"id":  "S2931",
+"message":  "Implement 'IDisposable' in this class and use the 'Dispose' method to call 'Dispose' on 'bootstrapper'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests.Functional\Tests\SerializeTests.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  18,
+"endLine":  11,
+"endColumn":  32
+}
+}
+},
+{
+"id":  "S2931",
+"message":  "Implement 'IDisposable' in this class and use the 'Dispose' method to call 'Dispose' on 'bootstrapper'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests.Functional\Tests\TracingSmokeTests.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  18,
+"endLine":  11,
+"endColumn":  35
+}
+}
+},
+{
+"id":  "S2931",
+"message":  "Implement 'IDisposable' in this class and use the 'Dispose' method to call 'Dispose' on 'bootstrapper'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests.Functional\Tests\ViewBagTests.cs",
+"region":  {
+"startLine":  11,
+"startColumn":  18,
+"endLine":  11,
+"endColumn":  30
+}
+}
+}
+]
+}

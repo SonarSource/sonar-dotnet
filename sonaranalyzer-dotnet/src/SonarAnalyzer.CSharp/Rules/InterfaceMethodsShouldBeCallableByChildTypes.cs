@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2018 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -66,11 +66,6 @@ namespace SonarAnalyzer.Rules.CSharp
             Func<TMemberSyntax, TMemberSyntax, bool> areMembersEquivalent)
             where TMemberSyntax : MemberDeclarationSyntax
         {
-            if (analysisContext.IsTest())
-            {
-                return;
-            }
-
             var memberDeclaration = (TMemberSyntax)analysisContext.Node;
 
             var explicitInterfaceSpecifier = getExplicitInterfaceSpecifier(memberDeclaration);

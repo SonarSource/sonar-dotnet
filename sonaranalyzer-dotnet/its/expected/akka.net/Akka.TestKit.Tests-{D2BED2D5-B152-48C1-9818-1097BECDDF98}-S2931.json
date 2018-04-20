@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2931",
+"message":  "Implement 'IDisposable' in this class and use the 'Dispose' method to call 'Dispose' on '_cancelable'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit.Tests\TestSchedulerTests.cs",
+"region":  {
+"startLine":  100,
+"startColumn":  15,
+"endLine":  100,
+"endColumn":  31
+}
+}
+}
+]
+}
