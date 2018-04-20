@@ -216,7 +216,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
             var rankSpecifier = array.Type.RankSpecifiers.FirstOrDefault();
             if (rankSpecifier == null ||
-                rankSpecifier.Sizes.Any(s => s.IsKind(SyntaxKind.OmittedArraySizeExpression)))
+                rankSpecifier.Sizes.Any(SyntaxKind.OmittedArraySizeExpression))
             {
                 return;
             }

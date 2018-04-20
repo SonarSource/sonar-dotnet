@@ -46,7 +46,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 c =>
                 {
                     var constructorDeclaration = (ConstructorDeclarationSyntax)c.Node;
-                    if (!constructorDeclaration.Modifiers.Any(m => m.IsKind(SyntaxKind.StaticKeyword)))
+                    if (!constructorDeclaration.Modifiers.Any(SyntaxKind.StaticKeyword))
                     {
                         return;
                     }

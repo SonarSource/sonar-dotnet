@@ -114,7 +114,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool IsInitializedOrFixed(VariableDeclaratorSyntax declarator)
         {
             if (declarator.Parent.Parent is BaseFieldDeclarationSyntax fieldDeclaration &&
-                fieldDeclaration.Modifiers.Any(m => m.IsKind(SyntaxKind.FixedKeyword)))
+                fieldDeclaration.Modifiers.Any(SyntaxKind.FixedKeyword))
             {
                 return true;
             }

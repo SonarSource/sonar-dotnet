@@ -44,7 +44,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         protected override SyntaxToken GetIdentifier(PropertyStatementSyntax prop) => prop.Identifier;
 
-        protected override bool IsWriteOnlyProperty(PropertyStatementSyntax prop) => prop.Modifiers.Any(m => m.IsKind(SyntaxKind.WriteOnlyKeyword));
+        protected override bool IsWriteOnlyProperty(PropertyStatementSyntax prop) => prop.Modifiers.Any(SyntaxKind.WriteOnlyKeyword);
 
         protected override sealed GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.VisualBasic.GeneratedCodeRecognizer.Instance;
     }

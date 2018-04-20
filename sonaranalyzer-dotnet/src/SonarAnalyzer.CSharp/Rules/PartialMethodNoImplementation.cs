@@ -87,7 +87,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var partialDeclarations = methodSymbol.DeclaringSyntaxReferences
                 .Select(r => r.GetSyntax())
                 .OfType<MethodDeclarationSyntax>()
-                .Where(method => method.Body == null && method.Modifiers.Any(m => m.IsKind(SyntaxKind.PartialKeyword)));
+                .Where(method => method.Body == null && method.Modifiers.Any(SyntaxKind.PartialKeyword));
 
             if (methodSymbol.PartialImplementationPart != null ||
                 !partialDeclarations.Any())

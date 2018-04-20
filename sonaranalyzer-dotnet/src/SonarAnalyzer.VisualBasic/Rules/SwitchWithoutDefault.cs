@@ -57,7 +57,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         private static bool HasDefaultLabel(SelectBlockSyntax node)
         {
-            return node.CaseBlocks.Any(section => section.IsKind(SyntaxKind.CaseElseBlock));
+            return node.CaseBlocks.Any(SyntaxKind.CaseElseBlock);
         }
 
         protected override sealed GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.VisualBasic.GeneratedCodeRecognizer.Instance;

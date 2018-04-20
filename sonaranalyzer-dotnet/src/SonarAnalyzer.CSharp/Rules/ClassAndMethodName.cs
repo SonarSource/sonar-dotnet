@@ -124,7 +124,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             var isNameValid = IsTypeNameValid(identifier.ValueText,
                 requireInitialI: typeDeclaration is InterfaceDeclarationSyntax,
-                allowInitialI: typeDeclaration.Modifiers.Any(m => m.IsKind(SyntaxKind.StaticKeyword)),
+                allowInitialI: typeDeclaration.Modifiers.Any(SyntaxKind.StaticKeyword),
                 areUnderscoresAllowed: context.IsTest(),
                 suggestion: out var suggestion);
 

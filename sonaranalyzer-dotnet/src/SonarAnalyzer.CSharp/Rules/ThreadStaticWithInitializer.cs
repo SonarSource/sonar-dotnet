@@ -49,7 +49,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     var fieldDeclaration = (FieldDeclarationSyntax)c.Node;
 
-                    if (!fieldDeclaration.Modifiers.Any(modifier => modifier.IsKind(SyntaxKind.StaticKeyword)) ||
+                    if (!fieldDeclaration.Modifiers.Any(SyntaxKind.StaticKeyword) ||
                         !HasThreadStaticAttribute(fieldDeclaration.AttributeLists, c.SemanticModel))
                     {
                         return;

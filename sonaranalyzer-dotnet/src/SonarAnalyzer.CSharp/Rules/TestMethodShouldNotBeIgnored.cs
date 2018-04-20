@@ -97,7 +97,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool HasTrailingComment(SyntaxNode ignoreAttributeSyntax) =>
             ignoreAttributeSyntax.Parent.GetTrailingTrivia()
-                .Any(trivia => trivia.IsKind(SyntaxKind.SingleLineCommentTrivia));
+                .Any(SyntaxKind.SingleLineCommentTrivia);
 
         private static bool IsWorkItemAttribute(AttributeData a) =>
             a.AttributeClass.Is(KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_WorkItemAttribute);

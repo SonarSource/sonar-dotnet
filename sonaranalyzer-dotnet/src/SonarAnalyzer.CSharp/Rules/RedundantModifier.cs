@@ -167,7 +167,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             return container.DescendantNodes()
                 .OfType<FieldDeclarationSyntax>()
-                .Any(fd => fd.Modifiers.Any(m => m.IsKind(SyntaxKind.FixedKeyword)));
+                .Any(fd => fd.Modifiers.Any(SyntaxKind.FixedKeyword));
         }
 
         private static bool ContainsUnsafeConstruct(SyntaxNode container)
@@ -258,7 +258,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var classSymbol = context.SemanticModel.GetDeclaredSymbol(classDeclaration);
 
             if (classSymbol == null ||
-                !classDeclaration.Modifiers.Any(m => m.IsKind(SyntaxKind.PartialKeyword)) ||
+                !classDeclaration.Modifiers.Any(SyntaxKind.PartialKeyword) ||
                 classSymbol.DeclaringSyntaxReferences.Length > 1)
             {
                 return;
@@ -295,7 +295,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             var modifiers = GetModifiers(memberDeclaration);
-            if (modifiers.Any(m => m.IsKind(SyntaxKind.SealedKeyword)))
+            if (modifiers.Any(SyntaxKind.SealedKeyword))
             {
                 var keyword = modifiers.First(m => m.IsKind(SyntaxKind.SealedKeyword));
                 context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, keyword.GetLocation(), "sealed", "redundant"));

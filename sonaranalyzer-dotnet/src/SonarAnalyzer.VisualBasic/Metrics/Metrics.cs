@@ -57,7 +57,7 @@ namespace SonarAnalyzer.Common.VisualBasic
                 return false;
             }
 
-            if (node is MethodBaseSyntax method && method.Modifiers.Any(m => m.IsKind(SyntaxKind.MustOverrideKeyword)))
+            if (node is MethodBaseSyntax method && method.Modifiers.Any(SyntaxKind.MustOverrideKeyword))
             {
                 return false;
             }

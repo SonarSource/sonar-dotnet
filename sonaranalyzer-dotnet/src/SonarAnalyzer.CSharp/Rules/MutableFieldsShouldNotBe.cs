@@ -79,7 +79,7 @@ namespace SonarAnalyzer.Rules
             var fieldInitializer = fieldFirstVariable.Initializer;
             var fieldInitializerSymbol = GetFieldInitializerSymbol(fieldInitializer?.Value, analysisContext.SemanticModel);
 
-            if (fieldDeclaration.Modifiers.Any(modifier => modifier.IsKind(SyntaxKind.ReadOnlyKeyword)) &&
+            if (fieldDeclaration.Modifiers.Any(SyntaxKind.ReadOnlyKeyword) &&
                 IsValidReadOnlyInitializer(fieldInitializerSymbol, fieldInitializer?.Value))
             {
                 return;

@@ -100,7 +100,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (enclosingMethod != null)
                     {
                         if (memberAccessNameName == "Sleep" &&
-                            !enclosingMethod.Modifiers.Any(m => m.IsKind(SyntaxKind.AsyncKeyword)))
+                            !enclosingMethod.Modifiers.Any(SyntaxKind.AsyncKeyword))
                         {
                             return; // Thread.Sleep should not be used only in async methods
                         }
