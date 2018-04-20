@@ -373,6 +373,8 @@ try {
     $isMaintenanceBranch = $branchName -like 'branch-*'
     $isPullRequest = $githubIsPullRequest -eq "true"
 
+    Write-Host "Ammo:" $githubToken
+
     Write-Debug "Solution to build: ${solutionName}"
     Write-Debug "Build configuration: ${buildConfiguration}"
     Write-Debug "Bin folder to use: ${binPath}"
