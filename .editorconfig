@@ -27,7 +27,7 @@ trim_trailing_whitespace = false
 charset = utf-8-bom
 indent_size = 4
 insert_final_newline = true
-max_line_length = 150
+max_line_length = 130
 trim_trailing_whitespace = true
 
 # Xml project files
@@ -154,7 +154,7 @@ csharp_space_after_semicolon_in_for_statement = true
 csharp_space_before_semicolon_in_for_statement = false
 # Extra space before equals sign DOES MATTER https://github.com/dotnet/roslyn/issues/20355
 csharp_space_around_binary_operators  = before_and_after
-csharp_space_around_declaration_statements = ignore
+csharp_space_around_declaration_statements = do_not_ignore
 csharp_space_before_open_square_brackets = false
 csharp_space_between_empty_square_brackets = false
 csharp_space_between_method_call_empty_parameter_list_parentheses = false
