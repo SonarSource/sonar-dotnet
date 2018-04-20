@@ -49,7 +49,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     var eventField = (EventFieldDeclarationSyntax) c.Node;
 
-                    if (eventField.Modifiers.Any(modifier => modifier.IsKind(SyntaxKind.VirtualKeyword)))
+                    if (eventField.Modifiers.Any(SyntaxKind.VirtualKeyword))
                     {
                         var virt = eventField.Modifiers.First(modifier => modifier.IsKind(SyntaxKind.VirtualKeyword));
                         var names = string.Join(", ", eventField.Declaration.Variables

@@ -144,7 +144,7 @@ namespace SonarAnalyzer.Rules.CSharp
             return symbol.DeclaringSyntaxReferences
                 .Select(r => r.GetSyntax())
                 .OfType<MethodDeclarationSyntax>()
-                .Any(s => s.Modifiers.Any(m => m.IsKind(SyntaxKind.NewKeyword)));
+                .Any(s => s.Modifiers.Any(SyntaxKind.NewKeyword));
         }
 
         private static bool IsNewProperty(ISymbol symbol)
@@ -152,7 +152,7 @@ namespace SonarAnalyzer.Rules.CSharp
             return symbol.DeclaringSyntaxReferences
                 .Select(r => r.GetSyntax())
                 .OfType<PropertyDeclarationSyntax>()
-                .Any(s => s.Modifiers.Any(m => m.IsKind(SyntaxKind.NewKeyword)));
+                .Any(s => s.Modifiers.Any(SyntaxKind.NewKeyword));
         }
 
         private static bool IsAutoProperty(ISymbol symbol)

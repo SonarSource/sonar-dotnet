@@ -48,7 +48,7 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
                 {
                     var localDeclaration = (LocalDeclarationStatementSyntax)c.Node;
-                    if (localDeclaration.Modifiers.Any(t => t.IsKind(SyntaxKind.ConstKeyword)))
+                    if (localDeclaration.Modifiers.Any(SyntaxKind.ConstKeyword))
                     {
                         return;
                     }

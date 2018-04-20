@@ -47,7 +47,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return false;
             }
 
-            if (declaration.Modifiers.Any(m => m.IsKind(SyntaxKind.StaticKeyword)))
+            if (declaration.Modifiers.Any(SyntaxKind.StaticKeyword))
             {
                 return false;
             }

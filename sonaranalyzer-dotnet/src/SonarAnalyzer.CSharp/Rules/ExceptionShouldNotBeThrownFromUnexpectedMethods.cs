@@ -74,7 +74,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c => CheckForIssue<ConstructorDeclarationSyntax>(c,
-                    cds => cds.Modifiers.Any(m => m.IsKind(SyntaxKind.StaticKeyword)), DefaultAllowedExceptions),
+                    cds => cds.Modifiers.Any(SyntaxKind.StaticKeyword), DefaultAllowedExceptions),
                 SyntaxKind.ConstructorDeclaration);
 
             context.RegisterSyntaxNodeActionInNonGenerated(

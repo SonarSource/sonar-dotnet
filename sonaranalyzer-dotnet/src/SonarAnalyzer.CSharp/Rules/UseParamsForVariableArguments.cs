@@ -48,7 +48,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var methodDeclaration = (MethodDeclarationSyntax)c.Node;
 
                     if (methodDeclaration.Identifier.IsMissing ||
-                        methodDeclaration.Modifiers.Any(modifier => modifier.IsKind(SyntaxKind.ExternKeyword)) ||
+                        methodDeclaration.Modifiers.Any(SyntaxKind.ExternKeyword) ||
                         !HasAnyArgListParameter(methodDeclaration))
                     {
                         return;

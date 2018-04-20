@@ -62,7 +62,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool ShouldMethodBeExcluded(MethodDeclarationSyntax methodNode, SemanticModel semanticModel)
         {
-            if (methodNode.Modifiers.Any(modifier => modifier.IsKind(SyntaxKind.VirtualKeyword)))
+            if (methodNode.Modifiers.Any(SyntaxKind.VirtualKeyword))
             {
                 return true;
             }
@@ -76,7 +76,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return true;
             }
 
-            return methodNode.Modifiers.Any(modifier => modifier.IsKind(SyntaxKind.OverrideKeyword)) &&
+            return methodNode.Modifiers.Any(SyntaxKind.OverrideKeyword) &&
                 semanticModel.Compilation.IsTest();
         }
 

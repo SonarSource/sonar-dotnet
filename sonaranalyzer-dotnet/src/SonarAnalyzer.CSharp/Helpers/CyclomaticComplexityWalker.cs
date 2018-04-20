@@ -25,6 +25,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer
 {
@@ -160,7 +161,7 @@ namespace SonarAnalyzer
 
         private static bool HasBody(SyntaxNode node)
         {
-            return node.ChildNodes().Any(n => n.IsKind(SyntaxKind.Block));
+            return node.ChildNodes().Any(SyntaxKind.Block);
         }
     }
 }

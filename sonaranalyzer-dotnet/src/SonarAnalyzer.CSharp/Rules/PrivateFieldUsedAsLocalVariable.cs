@@ -49,7 +49,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 c =>
                 {
                     var classNode = c.Node as TypeDeclarationSyntax;
-                    if (classNode != null && classNode.Modifiers.Any(m => m.IsKind(SyntaxKind.PartialKeyword)))
+                    if (classNode != null && classNode.Modifiers.Any(SyntaxKind.PartialKeyword))
                     {
                         // Not supported
                         return;

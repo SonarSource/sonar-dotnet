@@ -113,7 +113,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 var methodDeclaration = memberDeclaration as MethodDeclarationSyntax;
                 if (methodDeclaration == null ||
-                    methodDeclaration.Modifiers.Any(m => m.IsKind(SyntaxKind.NewKeyword)))
+                    methodDeclaration.Modifiers.Any(SyntaxKind.NewKeyword))
                 {
                     return null;
                 }
@@ -138,7 +138,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 var propertyDeclaration = memberDeclaration as PropertyDeclarationSyntax;
                 if (propertyDeclaration == null ||
-                    propertyDeclaration.Modifiers.Any(m => m.IsKind(SyntaxKind.NewKeyword)))
+                    propertyDeclaration.Modifiers.Any(SyntaxKind.NewKeyword))
                 {
                     return null;
                 }

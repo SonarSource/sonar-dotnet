@@ -61,7 +61,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     var fields = classDeclaration.Members
                         .OfType<FieldDeclarationSyntax>()
-                        .Where(f => f.Modifiers.Any(m => m.IsKind(SyntaxKind.StaticKeyword)));
+                        .Where(f => f.Modifiers.Any(SyntaxKind.StaticKeyword));
 
                     foreach (var field in fields.Where(field => !HasGenericType(field.Declaration.Type, typeParameterNames, c)))
                     {
@@ -73,7 +73,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     var properties = classDeclaration.Members
                         .OfType<PropertyDeclarationSyntax>()
-                        .Where(p => p.Modifiers.Any(m => m.IsKind(SyntaxKind.StaticKeyword)))
+                        .Where(p => p.Modifiers.Any(SyntaxKind.StaticKeyword))
                         .ToList();
 
                     properties.ForEach(property =>

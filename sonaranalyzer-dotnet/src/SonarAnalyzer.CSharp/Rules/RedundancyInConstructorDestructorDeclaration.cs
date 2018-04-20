@@ -93,12 +93,12 @@ namespace SonarAnalyzer.Rules.CSharp
             return IsConstructorParameterless(constructorDeclaration) &&
                 IsBodyEmpty(constructorDeclaration.Body) &&
                 (IsSinglePublicConstructor(constructorDeclaration, semanticModel) ||
-                constructorDeclaration.Modifiers.Any(modifier => modifier.IsKind(SyntaxKind.StaticKeyword)));
+                constructorDeclaration.Modifiers.Any(SyntaxKind.StaticKeyword));
         }
 
         private static bool IsSinglePublicConstructor(ConstructorDeclarationSyntax constructorDeclaration, SemanticModel semanticModel)
         {
-            return constructorDeclaration.Modifiers.Any(modifier => modifier.IsKind(SyntaxKind.PublicKeyword)) &&
+            return constructorDeclaration.Modifiers.Any(SyntaxKind.PublicKeyword) &&
                 IsInitializerEmptyOrRedundant(constructorDeclaration.Initializer) &&
                 TypeHasExactlyOneConstructor(constructorDeclaration, semanticModel);
         }

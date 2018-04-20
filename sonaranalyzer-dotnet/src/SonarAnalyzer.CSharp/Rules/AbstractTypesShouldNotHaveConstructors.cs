@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2018 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -49,7 +49,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var ctorDeclaration = (ConstructorDeclarationSyntax)c.Node;
 
                     var isAbstractClass = c.Node.Parent is ClassDeclarationSyntax classDeclaration &&
-                        classDeclaration.Modifiers.Any(m => m.IsKind(SyntaxKind.AbstractKeyword));
+                        classDeclaration.Modifiers.Any(SyntaxKind.AbstractKeyword);
 
                     var invalidAccessModifier = ctorDeclaration.Modifiers.FirstOrDefault(
                             m => m.IsKind(SyntaxKind.PublicKeyword) ||

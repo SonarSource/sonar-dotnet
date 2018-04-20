@@ -139,7 +139,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 else if (localOrFieldDeclaration.IsKind(SyntaxKind.FieldDeclaration))
                 {
                     var fieldDeclaration = (FieldDeclarationSyntax)localOrFieldDeclaration;
-                    if (fieldDeclaration.Modifiers.Any() && !fieldDeclaration.Modifiers.Any(m => m.IsKind(SyntaxKind.PrivateKeyword)))
+                    if (fieldDeclaration.Modifiers.Any() && !fieldDeclaration.Modifiers.Any(SyntaxKind.PrivateKeyword))
                     {
                         continue;
                     }

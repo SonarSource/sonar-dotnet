@@ -52,7 +52,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             method.ParameterList?.Parameters ?? Enumerable.Empty<ParameterSyntax>();
 
         protected override bool IsOptional(ParameterSyntax parameter) =>
-            parameter.Modifiers.Any(m => m.IsKind(SyntaxKind.OptionalKeyword));
+            parameter.Modifiers.Any(SyntaxKind.OptionalKeyword);
 
         protected override sealed GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.VisualBasic.GeneratedCodeRecognizer.Instance;
     }

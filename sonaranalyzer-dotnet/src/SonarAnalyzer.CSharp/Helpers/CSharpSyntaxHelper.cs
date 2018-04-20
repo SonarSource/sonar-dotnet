@@ -46,6 +46,12 @@ namespace SonarAnalyzer.Helpers
 
         public static readonly string NameOfKeywordText = SyntaxFacts.GetText(SyntaxKind.NameOfKeyword);
 
+        public static bool Any(this IEnumerable<SyntaxNode> nodes, SyntaxKind kind) =>
+            nodes.Any(n => n.RawKind == (int)kind);
+
+        public static bool Any(this IEnumerable<SyntaxToken> tokens, SyntaxKind kind) =>
+            tokens.Any(n => n.RawKind == (int)kind);
+
         public static bool HasExactlyNArguments(this InvocationExpressionSyntax invocation, int count)
         {
             return invocation != null &&
@@ -289,7 +295,7 @@ namespace SonarAnalyzer.Helpers
 
         public static int GetDefaultLabelSectionIndex(this SwitchStatementSyntax node)
         {
-            return node.Sections.IndexOf(section => section.Labels.Any(label => label.IsKind(SyntaxKind.DefaultSwitchLabel)));
+            return node.Sections.IndexOf(section => section.Labels.Any(SyntaxKind.DefaultSwitchLabel));
         }
     }
 }

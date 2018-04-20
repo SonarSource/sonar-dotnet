@@ -48,7 +48,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     var section = (SwitchSectionSyntax)c.Node;
 
-                    if (!section.Labels.Any(labels => labels.IsKind(SyntaxKind.DefaultSwitchLabel)) ||
+                    if (!section.Labels.Any(SyntaxKind.DefaultSwitchLabel) ||
                         section.Statements.Count != 1)
                     {
                         return;

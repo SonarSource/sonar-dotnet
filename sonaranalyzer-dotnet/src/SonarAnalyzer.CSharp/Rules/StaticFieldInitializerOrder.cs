@@ -51,7 +51,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var variables = fieldDeclaration.Declaration.Variables;
                     var classDeclaration = fieldDeclaration.FirstAncestorOrSelf<ClassDeclarationSyntax>();
 
-                    if (!fieldDeclaration.Modifiers.Any(m => m.IsKind(SyntaxKind.StaticKeyword)) ||
+                    if (!fieldDeclaration.Modifiers.Any(SyntaxKind.StaticKeyword) ||
                         !variables.Any())
                     {
                         return;
