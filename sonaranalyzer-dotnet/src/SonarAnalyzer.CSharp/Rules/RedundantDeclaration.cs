@@ -70,15 +70,15 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.ObjectCreationExpression);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
-                c => ReportOnRedundantParameterList(c),
+                ReportOnRedundantParameterList,
                 SyntaxKind.AnonymousMethodExpression);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
-                c => ReportRedundancyInArrayCreation(c),
+                ReportRedundancyInArrayCreation,
                 SyntaxKind.ArrayCreationExpression);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
-                c => ReportRedundantTypeSpecificationInLambda(c),
+                ReportRedundantTypeSpecificationInLambda,
                 SyntaxKind.ParenthesizedLambdaExpression);
         }
 

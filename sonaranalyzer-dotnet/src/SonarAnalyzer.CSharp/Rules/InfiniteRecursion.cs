@@ -51,7 +51,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.MethodDeclaration);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
-                c => CheckForNoExitProperty(c),
+                CheckForNoExitProperty,
                 SyntaxKind.PropertyDeclaration);
         }
 

@@ -46,15 +46,15 @@ namespace SonarAnalyzer.Rules.CSharp
         protected sealed override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
-                c => CheckField(c),
+                CheckField,
                 SyntaxKind.FieldDeclaration);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
-                c => CheckEvent(c),
+                CheckEvent,
                 SyntaxKind.EventFieldDeclaration);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
-                c => CheckAutoProperty(c),
+                CheckAutoProperty,
                 SyntaxKind.PropertyDeclaration);
         }
 

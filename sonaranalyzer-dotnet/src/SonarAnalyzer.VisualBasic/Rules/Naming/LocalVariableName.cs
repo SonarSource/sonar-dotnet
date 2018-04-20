@@ -49,7 +49,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
         protected override void Initialize(ParameterLoadingAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
-                c => ProcessVariableDeclarator(c),
+                ProcessVariableDeclarator,
                 SyntaxKind.VariableDeclarator);
 
             context.RegisterSyntaxNodeActionInNonGenerated(

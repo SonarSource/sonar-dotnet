@@ -58,7 +58,7 @@ namespace SonarAnalyzer.Rules.CSharp
         };
 
         protected override void Initialize(ParameterLoadingAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(c => CheckFunctionNestingDepth(c), FunctionKinds);
+            context.RegisterSyntaxNodeActionInNonGenerated(CheckFunctionNestingDepth, FunctionKinds);
 
         private void CheckFunctionNestingDepth(SyntaxNodeAnalysisContext context)
         {
