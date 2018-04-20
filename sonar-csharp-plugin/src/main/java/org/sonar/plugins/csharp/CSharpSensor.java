@@ -48,6 +48,8 @@ public class CSharpSensor implements Sensor {
   private final ProtobufDataImporter protobufDataImporter;
   private final RoslynDataImporter roslynDataImporter;
   private final ReportPathCollector reportPathCollector;
+  
+  public int amaury;
 
   public CSharpSensor(ReportPathCollector reportPathCollector, ProtobufDataImporter protobufDataImporter, RoslynDataImporter roslynDataImporter) {
     this.reportPathCollector = reportPathCollector;
