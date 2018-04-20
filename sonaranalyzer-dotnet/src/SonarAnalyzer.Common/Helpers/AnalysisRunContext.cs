@@ -26,6 +26,8 @@ namespace SonarAnalyzer.Helpers
 {
     internal class AnalysisRunContext : IAnalysisRunContext
     {
+        public string MyPublicField;
+
         public AnalysisRunContext(SyntaxTree syntaxTree, IEnumerable<DiagnosticDescriptor> supportedDiagnostics)
         {
             SyntaxTree = syntaxTree;
