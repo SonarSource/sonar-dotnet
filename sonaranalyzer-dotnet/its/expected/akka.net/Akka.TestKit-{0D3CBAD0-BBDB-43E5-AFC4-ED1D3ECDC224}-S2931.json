@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S2931",
+"message":  "Implement 'IDisposable' in this class and use the 'Dispose' method to call 'Dispose' on '_collection'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\Internal\BlockingQueue.cs",
+"region":  {
+"startLine":  23,
+"startColumn":  18,
+"endLine":  23,
+"endColumn":  31
+}
+}
+},
+{
+"id":  "S2931",
+"message":  "Implement 'IDisposable' in this class and use the 'Dispose' method to call 'Dispose' on '_barrier'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestBarrier.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  18,
+"endLine":  20,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S2931",
+"message":  "Implement 'IDisposable' in this class and use the 'Dispose' method to call 'Dispose' on '_latch'.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.TestKit\TestLatch.cs",
+"region":  {
+"startLine":  27,
+"startColumn":  18,
+"endLine":  27,
+"endColumn":  27
+}
+}
+}
+]
+}

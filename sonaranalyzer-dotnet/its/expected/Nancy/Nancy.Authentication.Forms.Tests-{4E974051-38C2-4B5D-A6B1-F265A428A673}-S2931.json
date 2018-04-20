@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2931",
+"message":  "Implement 'IDisposable' in this class and use the 'Dispose' method to call 'Dispose' on 'context'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Authentication.Forms.Tests\FormsAuthenticationFixture.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  18,
+"endLine":  15,
+"endColumn":  44
+}
+}
+}
+]
+}

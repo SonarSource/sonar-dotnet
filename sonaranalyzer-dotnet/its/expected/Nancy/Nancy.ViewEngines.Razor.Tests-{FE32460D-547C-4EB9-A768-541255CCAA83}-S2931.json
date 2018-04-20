@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2931",
+"message":  "Implement 'IDisposable' in this class and use the 'Dispose' method to call 'Dispose' on 'engine'.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Razor.Tests\RazorViewEngineFixture.cs",
+"region":  {
+"startLine":  29,
+"startColumn":  18,
+"endLine":  29,
+"endColumn":  40
+}
+}
+}
+]
+}
