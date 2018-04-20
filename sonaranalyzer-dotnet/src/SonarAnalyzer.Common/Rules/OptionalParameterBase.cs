@@ -75,8 +75,7 @@ namespace SonarAnalyzer.Rules.Common
         {
             var parameterSymbol = semanticModel.GetDeclaredSymbol(parameterSyntax) as IParameterSymbol;
 
-            return parameterSymbol == null ||
-                parameterSymbol.GetAttributes().Any(attr => attr.AttributeClass.IsAny(KnownType.CallerInfoAttributes));
+            return parameterSymbol.HasAnyAttribute(KnownType.CallerInfoAttributes);
         }
 
         protected abstract IEnumerable<TParameterSyntax> GetParameters(TMethodSyntax method);

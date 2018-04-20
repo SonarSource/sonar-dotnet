@@ -71,7 +71,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            if (!HasFlagsAttribute(operation.ReturnType))
+            if (!operation.ReturnType.HasAttribute(KnownType.System_FlagsAttribute))
             {
                 var friendlyTypeName = operation.ReturnType.ToMinimalDisplayString(context.SemanticModel, context.Node.SpanStart);
                 var messageFormat = operation.ReturnType.DeclaringSyntaxReferences.Any()
@@ -83,11 +83,6 @@ namespace SonarAnalyzer.Rules.CSharp
                 var op = operatorSelector((T)context.Node);
                 context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, op.GetLocation(), message));
             }
-        }
-
-        private static bool HasFlagsAttribute(ISymbol symbol)
-        {
-            return symbol.GetAttributes().Any(a => a.AttributeClass.Is(KnownType.System_FlagsAttribute));
         }
     }
 }

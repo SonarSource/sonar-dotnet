@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2018 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -50,7 +50,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 if (classSymbol == null ||
                     !classSymbol.DerivesFrom(KnownType.System_Attribute) ||
-                    classSymbol.GetAttributes().Any(IsAttributeUsageAttribute))
+                    classSymbol.HasAttribute(KnownType.System_AttributeUsageAttribute))
                 {
                     return;
                 }
@@ -65,18 +65,10 @@ namespace SonarAnalyzer.Rules.CSharp
             SyntaxKind.ClassDeclaration);
         }
 
-        private static bool InheritsAttributeUsage(INamedTypeSymbol classSymbol)
-        {
-            return classSymbol.GetSelfAndBaseTypes()
+        private static bool InheritsAttributeUsage(INamedTypeSymbol classSymbol) =>
+            classSymbol.GetSelfAndBaseTypes()
                 // System.Attribute already has AttributeUsage, we don't want to report it
                 .TakeWhile(t => !t.Is(KnownType.System_Attribute))
-                .SelectMany(t => t.GetAttributes())
-                .Any(IsAttributeUsageAttribute);
-        }
-
-        private static bool IsAttributeUsageAttribute(AttributeData data)
-        {
-            return data.AttributeClass.Is(KnownType.System_AttributeUsageAttribute);
-        }
+                .Any(t => t.HasAttribute(KnownType.System_AttributeUsageAttribute));
     }
 }

@@ -45,11 +45,16 @@ namespace SonarAnalyzer.Helpers
             }
         }
 
-        public static bool IsObsolete(this ISymbol symbol)
-        {
-            return symbol != null &&
-                symbol.GetAttributes().Any(a => a.AttributeClass.Is(KnownType.System_ObsoleteAttribute));
-        }
+        internal static bool HasAttribute(this ISymbol symbol, KnownType attributeType) =>
+            symbol?.GetAttributes().Any(a => a.AttributeClass.Is(attributeType))
+            ?? false;
+
+        internal static bool HasAnyAttribute(this ISymbol symbol, ISet<KnownType> attributeTypes) =>
+            symbol?.GetAttributes().Any(a => a.AttributeClass.IsAny(attributeTypes))
+            ?? false;
+
+        public static bool IsObsolete(this ISymbol symbol) =>
+            symbol.HasAttribute(KnownType.System_ObsoleteAttribute);
 
         public static IEnumerable<INamedTypeSymbol> GetAllNamedTypes(this INamedTypeSymbol type)
         {
@@ -274,8 +279,5 @@ namespace SonarAnalyzer.Helpers
             var symbolType = semanticModel.GetDeclaredSymbol(syntaxNode)?.GetSymbolType();
             return symbolType.Is(knownType);
         }
-
-        public static bool IsStatic(this ISymbol symbol) =>
-            symbol != null && symbol.IsStatic;
     }
 }

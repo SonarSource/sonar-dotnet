@@ -102,56 +102,51 @@ namespace SonarAnalyzer.Rules.CSharp
                 IsPureMethod(invokedMethodSymbol, constructedFrom);
         }
 
-        private static bool IsPureMethod(IMethodSymbol invokedMethodSymbol, INamedTypeSymbol containingType)
-        {
-            return HasPureAttribute(invokedMethodSymbol) || HasPureAttribute(containingType);
-        }
-
-        private static bool HasPureAttribute(ISymbol symbol)
-        {
-            return symbol.GetAttributes().Any(a => a.AttributeClass.Is(KnownType.System_Diagnostics_Contracts_PureAttribute));
-        }
+        private static bool IsPureMethod(IMethodSymbol invokedMethodSymbol, INamedTypeSymbol containingType) =>
+            invokedMethodSymbol.HasAttribute(KnownType.System_Diagnostics_Contracts_PureAttribute) || 
+            containingType.HasAttribute(KnownType.System_Diagnostics_Contracts_PureAttribute);
 
         private static bool HasOnlySideEffectFreeMethods(INamedTypeSymbol containingType)
         {
             return containingType.IsAny(ImmutableKnownTypes);
         }
 
-        private static readonly ISet<KnownType> ImmutableKnownTypes = new HashSet<KnownType>
-        {
-            KnownType.System_Object,
-            KnownType.System_Int16,
-            KnownType.System_Int32,
-            KnownType.System_Int64,
-            KnownType.System_UInt16,
-            KnownType.System_UInt32,
-            KnownType.System_UInt64,
-            KnownType.System_Char,
-            KnownType.System_Byte,
-            KnownType.System_SByte,
-            KnownType.System_Single,
-            KnownType.System_Double,
-            KnownType.System_Decimal,
-            KnownType.System_Boolean,
-            KnownType.System_String,
+        private static readonly ISet<KnownType> ImmutableKnownTypes 
+            = new HashSet<KnownType>
+            {
+                KnownType.System_Object,
+                KnownType.System_Int16,
+                KnownType.System_Int32,
+                KnownType.System_Int64,
+                KnownType.System_UInt16,
+                KnownType.System_UInt32,
+                KnownType.System_UInt64,
+                KnownType.System_Char,
+                KnownType.System_Byte,
+                KnownType.System_SByte,
+                KnownType.System_Single,
+                KnownType.System_Double,
+                KnownType.System_Decimal,
+                KnownType.System_Boolean,
+                KnownType.System_String,
 
-            KnownType.System_Collections_Immutable_ImmutableArray,
-            KnownType.System_Collections_Immutable_ImmutableArray_T,
-            KnownType.System_Collections_Immutable_ImmutableDictionary,
-            KnownType.System_Collections_Immutable_ImmutableDictionary_TKey_TValue,
-            KnownType.System_Collections_Immutable_ImmutableHashSet,
-            KnownType.System_Collections_Immutable_ImmutableHashSet_T,
-            KnownType.System_Collections_Immutable_ImmutableList,
-            KnownType.System_Collections_Immutable_ImmutableList_T,
-            KnownType.System_Collections_Immutable_ImmutableQueue,
-            KnownType.System_Collections_Immutable_ImmutableQueue_T,
-            KnownType.System_Collections_Immutable_ImmutableSortedDictionary,
-            KnownType.System_Collections_Immutable_ImmutableSortedDictionary_TKey_TValue,
-            KnownType.System_Collections_Immutable_ImmutableSortedSet,
-            KnownType.System_Collections_Immutable_ImmutableSortedSet_T,
-            KnownType.System_Collections_Immutable_ImmutableStack,
-            KnownType.System_Collections_Immutable_ImmutableStack_T
-        };
+                KnownType.System_Collections_Immutable_ImmutableArray,
+                KnownType.System_Collections_Immutable_ImmutableArray_T,
+                KnownType.System_Collections_Immutable_ImmutableDictionary,
+                KnownType.System_Collections_Immutable_ImmutableDictionary_TKey_TValue,
+                KnownType.System_Collections_Immutable_ImmutableHashSet,
+                KnownType.System_Collections_Immutable_ImmutableHashSet_T,
+                KnownType.System_Collections_Immutable_ImmutableList,
+                KnownType.System_Collections_Immutable_ImmutableList_T,
+                KnownType.System_Collections_Immutable_ImmutableQueue,
+                KnownType.System_Collections_Immutable_ImmutableQueue_T,
+                KnownType.System_Collections_Immutable_ImmutableSortedDictionary,
+                KnownType.System_Collections_Immutable_ImmutableSortedDictionary_TKey_TValue,
+                KnownType.System_Collections_Immutable_ImmutableSortedSet,
+                KnownType.System_Collections_Immutable_ImmutableSortedSet_T,
+                KnownType.System_Collections_Immutable_ImmutableStack,
+                KnownType.System_Collections_Immutable_ImmutableStack_T
+            };
 
         private static bool IsLinqMethod(IMethodSymbol methodSymbol)
         {

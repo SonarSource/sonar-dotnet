@@ -53,7 +53,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    var hasServiceContract = HasServiceContract(namedType);
+                    var hasServiceContract = namedType.HasAttribute(KnownType.System_ServiceModel_ServiceContractAttribute);
                     var hasAnyMethodWithOperationContract = HasAnyMethodWithoperationContract(namedType);
 
                     if (!(hasServiceContract ^ hasAnyMethodWithOperationContract))
@@ -94,15 +94,8 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             return namedType.GetMembers()
                 .OfType<IMethodSymbol>()
-                .Any(m => m.GetAttributes()
-                    .Any(a => a.AttributeClass.Is(KnownType.System_ServiceModel_OperationContractAttribute)));
-        }
-
-        private static bool HasServiceContract(INamedTypeSymbol namedType)
-        {
-            return namedType.GetAttributes()
-                .Any(a => a.AttributeClass.Is(KnownType.System_ServiceModel_ServiceContractAttribute));
-        }
+                .Any(m => m.HasAttribute(KnownType.System_ServiceModel_OperationContractAttribute));
+        }        
 
         private static TypeDeclarationSyntax GetTypeDeclaration(INamedTypeSymbol namedType, Compilation compilation)
         {
