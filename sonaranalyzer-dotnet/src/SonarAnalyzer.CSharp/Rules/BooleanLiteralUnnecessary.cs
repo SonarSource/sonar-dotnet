@@ -45,31 +45,31 @@ namespace SonarAnalyzer.Rules.CSharp
         protected sealed override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
-                c => CheckEquals(c),
+                CheckEquals,
                 SyntaxKind.EqualsExpression);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
-                c => CheckLogicalAnd(c),
+                CheckLogicalAnd,
                 SyntaxKind.LogicalAndExpression);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
-                c => CheckNotEquals(c),
+                CheckNotEquals,
                 SyntaxKind.NotEqualsExpression);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
-                c => CheckLogicalOr(c),
+                CheckLogicalOr,
                 SyntaxKind.LogicalOrExpression);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
-                c => CheckLogicalNot(c),
+                CheckLogicalNot,
                 SyntaxKind.LogicalNotExpression);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
-                c => CheckConditional(c),
+                CheckConditional,
                 SyntaxKind.ConditionalExpression);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
-                c => CheckForLoopCondition(c),
+                CheckForLoopCondition,
                 SyntaxKind.ForStatement);
         }
 

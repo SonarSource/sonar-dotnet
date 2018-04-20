@@ -43,11 +43,11 @@ namespace SonarAnalyzer.Rules.CSharp
         protected sealed override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
-                c => CheckObjectCreation(c),
+                CheckObjectCreation,
                 SyntaxKind.ObjectCreationExpression);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
-                c => CheckInvocation(c),
+                CheckInvocation,
                 SyntaxKind.InvocationExpression);
         }
 

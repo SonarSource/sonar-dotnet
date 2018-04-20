@@ -47,11 +47,11 @@ namespace SonarAnalyzer.Rules.CSharp
         protected sealed override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
-                c => CheckConditionalExpression(c),
+                CheckConditionalExpression,
                 SyntaxKind.ConditionalExpression);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
-                c => CheckIfStatement(c),
+                CheckIfStatement,
                 SyntaxKind.IfStatement);
         }
 

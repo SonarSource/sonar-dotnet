@@ -45,12 +45,12 @@ namespace SonarAnalyzer.Rules.Common
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 GeneratedCodeRecognizer,
-                c => CheckCompoundAssignment(c),
+                CheckCompoundAssignment,
                 CompoundAssignmentKinds.ToArray());
 
             context.RegisterSyntaxNodeActionInNonGenerated(
                 GeneratedCodeRecognizer,
-                c => CheckSimpleAssignment(c),
+                CheckSimpleAssignment,
                 SimpleAssignmentKinds.ToArray());
         }
 

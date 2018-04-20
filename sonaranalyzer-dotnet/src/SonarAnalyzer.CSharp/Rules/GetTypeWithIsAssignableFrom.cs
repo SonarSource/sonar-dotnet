@@ -86,7 +86,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.NotEqualsExpression);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
-                c => CheckIfIsExpressionCanBeReplacedByNullCheck(c),
+                CheckIfIsExpressionCanBeReplacedByNullCheck,
                 SyntaxKind.IsExpression);
         }
 

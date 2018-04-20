@@ -46,18 +46,18 @@ namespace SonarAnalyzer.Rules.CSharp
         protected sealed override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
-                c => CheckSealedMemberInSealedClass(c),
+                CheckSealedMemberInSealedClass,
                 SyntaxKind.MethodDeclaration,
                 SyntaxKind.PropertyDeclaration);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
-                c => CheckTypeDeclarationForRedundantPartial(c),
+                CheckTypeDeclarationForRedundantPartial,
                 SyntaxKind.ClassDeclaration,
                 SyntaxKind.InterfaceDeclaration,
                 SyntaxKind.StructDeclaration);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
-                c => CheckForUnnecessaryUnsafeBlocks(c),
+                CheckForUnnecessaryUnsafeBlocks,
                 SyntaxKind.ClassDeclaration,
                 SyntaxKind.StructDeclaration,
                 SyntaxKind.InterfaceDeclaration);

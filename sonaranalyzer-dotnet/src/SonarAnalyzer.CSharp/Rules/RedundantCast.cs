@@ -66,7 +66,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.AsExpression);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
-                c => CheckExtensionMethodInvocation(c),
+                CheckExtensionMethodInvocation,
                 SyntaxKind.InvocationExpression);
         }
 
