@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
@@ -42,5 +43,11 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override string TrackedPropertyName => "HttpOnly";
 
         protected override bool ExpectedPropertyValue => true;
+
+        protected override int CtorArgumentsCount => -1;
+
+        protected override int CtorArgumentIndex => throw new NotSupportedException();
+
+        protected override bool ExpectedValueIsDefault => false;
     }
 }

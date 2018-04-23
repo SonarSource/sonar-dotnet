@@ -45,20 +45,14 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override int ExpectedPropertyValue => AuthenticationTypes_Secure;
 
+        protected override int CtorArgumentsCount => 4;
+
+        protected override int CtorArgumentIndex => 3;
+
+        protected override bool ExpectedValueIsDefault => true;
+
         protected override bool IsExpectedValue(object constantValue) =>
             constantValue is int integerValue &&
             (integerValue & AuthenticationTypes_Secure) > 0; // The expected value is a bit from a Flags enum
-
-        protected override bool IsInitializedAsExpected(ObjectCreationExpressionSyntax objectCreation, SemanticModel semanticModel)
-        {
-            return objectCreation.Initializer == null && CtorHasExpectedArguments(objectCreation.ArgumentList) ||
-                base.IsInitializedAsExpected(objectCreation, semanticModel);
-
-            bool CtorHasExpectedArguments(ArgumentListSyntax argumentList) =>
-                argumentList?.Arguments.Count != 4 || // other than 4 arguments
-                (argumentList != null // 4 arguments and the last argument is with expected value
-                    && objectCreation.ArgumentList.Arguments.Count == 4
-                    && IsExpectedValue(objectCreation.ArgumentList.Arguments[3].Expression, semanticModel));
-        }
     }
 }
