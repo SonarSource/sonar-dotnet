@@ -57,12 +57,12 @@ namespace SonarAnalyzer.Rules.CSharp
             set
             {
                 credentialWords = value;
-                splitCredentialWords = value.ToLowerInvariant()
+                splitCredentialWords = value.ToUpperInvariant()
                     .Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
                     .Select(x => x.Trim())
                     .ToList();
                 passwordValuePattern = new Regex(string.Format(@"\b(?<password>{0})\b[:=]\S",
-                    string.Join("|", splitCredentialWords)), RegexOptions.Compiled);
+                    string.Join("|", splitCredentialWords)), RegexOptions.Compiled | RegexOptions.IgnoreCase);
             }
         }
 
@@ -139,14 +139,16 @@ namespace SonarAnalyzer.Rules.CSharp
                 .Intersect(splitCredentialWords)
                 .ToHashSet();
 
-            var matches = passwordValuePattern.Matches(variableValue.ToLowerInvariant());
+            var matches = passwordValuePattern.Matches(variableValue);
             foreach (Match match in matches)
             {
                 bannedWordsFound.Add(match.Groups["password"].Value);
             }
 
+            // Rule was initially implemented with everything lower (which is wrong) so we have to force lower
+            // before reporting to avoid new issues to appear on SQ/SC.
             return bannedWordsFound.Count > 0
-                ? string.Join(", ", bannedWordsFound)
+                ? string.Join(", ", bannedWordsFound.Select(x => x.ToLowerInvariant()))
                 : null;
         }
     }

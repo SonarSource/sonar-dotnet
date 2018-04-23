@@ -89,7 +89,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var nameParts = method.Name.SplitCamelCaseToWords().ToList();
 
             return nameParts.Count > 1 &&
-                   nameParts[0] == "get";
+                   nameParts[0] == "GET";
         }
 
         private static bool IsInherited(IMethodSymbol symbol) => SymbolHelper.GetInterfaceMember(symbol) != null;

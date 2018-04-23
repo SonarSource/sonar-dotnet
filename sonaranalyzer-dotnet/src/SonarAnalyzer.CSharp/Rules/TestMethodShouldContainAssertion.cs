@@ -64,8 +64,16 @@ namespace SonarAnalyzer.Rules.CSharp
             KnownType.NUnit_Framework_IgnoreAttribute
         };
 
-        private static readonly IEnumerable<string> TrackedAssertionMethodName = new List<string> { "Assert", "Should",
-            "Expect", "Must", "Verify", "Validate" };
+        private static readonly IEnumerable<string> TrackedAssertionMethodName =
+            new List<string>
+            {
+                "ASSERT",
+                "SHOULD",
+                "EXPECT",
+                "MUST",
+                "VERIFY",
+                "VALIDATE"
+            };
 
         protected override void Initialize(SonarAnalysisContext context)
         {

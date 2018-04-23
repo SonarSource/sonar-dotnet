@@ -45,9 +45,9 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static readonly ISet<string> localizableSymbolNames = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
         {
-            "text",
-            "caption",
-            "message"
+            "TEXT",
+            "CAPTION",
+            "MESSAGE"
         };
 
         protected override void Initialize(SonarAnalysisContext context)

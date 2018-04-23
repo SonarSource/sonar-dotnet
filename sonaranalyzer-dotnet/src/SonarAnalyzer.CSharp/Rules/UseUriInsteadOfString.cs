@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2018 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -68,7 +68,7 @@ namespace SonarAnalyzer.Rules.CSharp
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics
             => ImmutableArray.Create(rule_S3994, rule_S3995, rule_S3996, rule_S3997, rule_S4005);
 
-        private static readonly HashSet<string> UrlNameVariants = new HashSet<string> { "uri", "url", "urn" };
+        private static readonly HashSet<string> UrlNameVariants = new HashSet<string> { "URI", "URL", "URN" };
 
         protected sealed override void Initialize(SonarAnalysisContext context)
         {
