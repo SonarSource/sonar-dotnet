@@ -27,7 +27,11 @@
     <AdditionalFiles Include="..\SonarLint.xml" Link="Properties\SonarLint.xml" />
   </ItemGroup>
 
-  <Target Name="GenerateProtobufClasses" BeforeTargets="PrepareForBuild" Outputs="Protobuf\AnalyzerReport.cs" Inputs="Protobuf\AnalyzerReport.proto">
+  <ItemGroup>
+    <None Include="..\..\..\sonar-ucfg\src\main\protobuf\ucfg.proto" Link="Protobuf\ucfg.proto" />
+  </ItemGroup>
+
+  <Target Name="GenerateProtobufClasses" BeforeTargets="PrepareForBuild" Outputs="Protobuf\AnalyzerReport.cs,Protobuf\Ucfg.cs" Inputs="Protobuf\AnalyzerReport.proto,..\..\..\sonar-ucfg\src\main\protobuf\ucfg.proto">
     <Message Importance="high" Text="Generating protobuf class..." />
     <Exec WorkingDirectory="Protobuf" Command="build.bat" />
   </Target>
