@@ -137,7 +137,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var bannedWordsFound = variableName
                 .SplitCamelCaseToWords()
                 .Intersect(splitCredentialWords)
-                .ToHashSet();
+                .ToHashSet(StringComparer.OrdinalIgnoreCase);
 
             var matches = passwordValuePattern.Matches(variableValue);
             foreach (Match match in matches)
