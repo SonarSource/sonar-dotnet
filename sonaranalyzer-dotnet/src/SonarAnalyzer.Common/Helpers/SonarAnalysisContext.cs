@@ -58,7 +58,6 @@ namespace SonarAnalyzer.Helpers
         /// Currently this delegate is set by SonarLint (older than v4.0) to provide a suppression mechanism (i.e. specific
         /// issues turned off on the bound SonarQube).
         /// </remarks>
-        [Obsolete("This delegate is now obsolete, SonarLint should be using 'ReportDiagnosticAction' instead.")]
         public static Func<SyntaxTree, Diagnostic, bool> ShouldDiagnosticBeReported { get; set; }
 
         /// <summary>
