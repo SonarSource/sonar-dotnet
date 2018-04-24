@@ -30,12 +30,12 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [TestMethod]
         public void TestSplitCamelCaseToWords()
         {
-            AssertSplitEquivalent("thisIsAName", "this", "is", "a", "name");
-            AssertSplitEquivalent("ThisIsIt", "this", "is", "it");
-            AssertSplitEquivalent("bin2hex", "bin", "hex");
-            AssertSplitEquivalent("HTML", "h", "t", "m", "l");
-            AssertSplitEquivalent("PEHeader", "p", "e", "header");
-            AssertSplitEquivalent("__url_foo", "url", "foo");
+            AssertSplitEquivalent("thisIsAName", "THIS", "IS", "A", "NAME");
+            AssertSplitEquivalent("ThisIsIt", "THIS", "IS", "IT");
+            AssertSplitEquivalent("bin2hex", "BIN", "HEX");
+            AssertSplitEquivalent("HTML", "H", "T", "M", "L");
+            AssertSplitEquivalent("PEHeader", "P", "E", "HEADER");
+            AssertSplitEquivalent("__url_foo", "URL", "FOO");
             AssertSplitEquivalent("");
             AssertSplitEquivalent(null);
         }

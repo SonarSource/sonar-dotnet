@@ -70,7 +70,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
 
                     var isTaskReturnType = (methodSymbol.ReturnType as INamedTypeSymbol)?.ConstructedFrom.DerivesFromAny(TaskTypes) ?? false;
-                    var hasAsyncSuffix = methodDeclaration.Identifier.ValueText.SplitCamelCaseToWords().LastOrDefault() == "async";
+                    var hasAsyncSuffix = methodDeclaration.Identifier.ValueText.SplitCamelCaseToWords().LastOrDefault() == "ASYNC";
 
                     if (hasAsyncSuffix && !isTaskReturnType)
                     {

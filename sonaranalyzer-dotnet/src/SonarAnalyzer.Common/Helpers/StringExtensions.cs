@@ -65,7 +65,7 @@ namespace SonarAnalyzer.Helpers
                     currentWord.Clear();
                 }
 
-                currentWord.Append(char.ToLowerInvariant(c));
+                currentWord.Append(char.ToUpperInvariant(c));
             }
 
             if (currentWord.Length > 0)

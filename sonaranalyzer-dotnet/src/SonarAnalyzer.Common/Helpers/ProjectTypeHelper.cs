@@ -47,7 +47,7 @@ namespace SonarAnalyzer.Helpers
 
         internal static bool IsTestAssemblyName(string assemblyName)
         {
-            return assemblyName.SplitCamelCaseToWords().Any(word => word == "test" || word == "tests");
+            return assemblyName.SplitCamelCaseToWords().Any(word => word == "TEST" || word == "TESTS");
         }
 
         private static readonly ISet<string> TestAssemblyNames = new HashSet<string>

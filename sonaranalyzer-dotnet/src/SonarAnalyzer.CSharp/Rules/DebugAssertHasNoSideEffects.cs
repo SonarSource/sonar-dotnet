@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2018 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -43,8 +43,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static readonly ISet<string> sideEffectWords = new HashSet<string>
         {
-            "remove", "delete", "put", "set", "add", "pop", "update", "retain",
-            "insert", "push", "append", "clear", "dequeue", "enqueue", "dispose"
+            "REMOVE", "DELETE", "PUT", "SET", "ADD", "POP", "UPDATE", "RETAIN",
+            "INSERT", "PUSH", "APPEND", "CLEAR", "DEQUEUE", "ENQUEUE", "DISPOSE"
         };
 
         protected override void Initialize(SonarAnalysisContext context)
