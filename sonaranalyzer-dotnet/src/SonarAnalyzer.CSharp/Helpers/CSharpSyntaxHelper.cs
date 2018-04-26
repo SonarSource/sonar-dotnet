@@ -59,7 +59,7 @@ namespace SonarAnalyzer.Helpers
                 invocation.ArgumentList.Arguments.Count == count;
         }
 
-        public static ExpressionSyntax RemoveParentheses(this ExpressionSyntax expression)
+        public static SyntaxNode RemoveParentheses(this SyntaxNode expression)
         {
             var currentExpression = expression;
             var parentheses = expression as ParenthesizedExpressionSyntax;
@@ -71,7 +71,10 @@ namespace SonarAnalyzer.Helpers
             return currentExpression;
         }
 
-        public static ExpressionSyntax GetSelfOrTopParenthesizedExpression(this ExpressionSyntax node)
+        public static ExpressionSyntax RemoveParentheses(this ExpressionSyntax expression) =>
+            (ExpressionSyntax)RemoveParentheses((SyntaxNode)expression);
+
+        public static SyntaxNode GetSelfOrTopParenthesizedExpression(this SyntaxNode node)
         {
             var current = node;
             var parent = current.Parent as ParenthesizedExpressionSyntax;
@@ -82,6 +85,9 @@ namespace SonarAnalyzer.Helpers
             }
             return current;
         }
+
+        public static ExpressionSyntax GetSelfOrTopParenthesizedExpression(this ExpressionSyntax node) =>
+             (ExpressionSyntax)GetSelfOrTopParenthesizedExpression((SyntaxNode)node);
 
         public static bool TryGetAttribute(this SyntaxList<AttributeListSyntax> attributeLists,
             KnownType attributeKnownType, SemanticModel semanticModel, out AttributeSyntax searchedAttribute)
@@ -273,16 +279,16 @@ namespace SonarAnalyzer.Helpers
             switch (potentialExpressionNode)
             {
                 case VariableDeclarationSyntax varDecl:
-                    typeIdentifiedNode = varDecl.Type;
-                    break;
+                typeIdentifiedNode = varDecl.Type;
+                break;
                 case PropertyDeclarationSyntax propDecl:
-                    typeIdentifiedNode = propDecl.Type;
-                    break;
+                typeIdentifiedNode = propDecl.Type;
+                break;
                 case AssignmentExpressionSyntax assignExpr:
-                    typeIdentifiedNode = assignExpr.Left;
-                    break;
+                typeIdentifiedNode = assignExpr.Left;
+                break;
                 default:
-                    return false;
+                return false;
             }
 
             return typeIdentifiedNode?.IsKnownType(KnownType.System_Linq_Expressions_Expression_T, semanticModel) ?? false;

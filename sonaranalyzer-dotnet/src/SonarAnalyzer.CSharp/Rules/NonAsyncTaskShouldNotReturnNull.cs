@@ -71,7 +71,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     var nullLiteral = (LiteralExpressionSyntax)c.Node;
 
-                    if (!nullLiteral.Parent.IsAnyKind(TrackedNullLiteralLocations))
+                    if (!nullLiteral.GetSelfOrTopParenthesizedExpression().Parent.IsAnyKind(TrackedNullLiteralLocations))
                     {
                         return;
                     }
@@ -98,8 +98,8 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         private static bool IsTaskReturnType(ISymbol symbol) =>
-            (GetReturnType(symbol) as INamedTypeSymbol)?.ConstructedFrom.DerivesFromAny(TaskTypes)
-            ?? false;
+            GetReturnType(symbol) is INamedTypeSymbol namedTypeSymbol &&
+            namedTypeSymbol.ConstructedFrom.DerivesFromAny(TaskTypes);
 
         private static ITypeSymbol GetReturnType(ISymbol symbol) =>
             symbol is IMethodSymbol methodSymbol
@@ -108,7 +108,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private bool IsSafeTaskReturnType(ISymbol enclosingMemberSymbol) =>
             // IMethodSymbol also handles lambdas
-            (enclosingMemberSymbol as IMethodSymbol)?.IsAsync
-            ?? false;
+            enclosingMemberSymbol is IMethodSymbol methodSymbol &&
+            methodSymbol.IsAsync;
     }
 }

@@ -67,6 +67,16 @@ namespace Tests.Diagnostics
             }
         }
 
+        public Task GetTask6()
+        {
+            return (null); // Noncompliant
+        }
+
+        public Task GetTask7(bool condition)
+        {
+            return condition ? Task.FromResult(5) : null; // Should be non-compliant
+        }
+
         public Task Foo
         {
             get
