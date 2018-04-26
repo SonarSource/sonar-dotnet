@@ -1,0 +1,17 @@
+<p>Returning <code>null</code> from a non-<code>async</code> <code>Task</code>/<code>Task&lt;T&gt;</code> method will cause a
+<code>NullReferenceException</code> at runtime. This problem can be avoided by returning <code>Task.FromResult&lt;T&gt;(null)</code> instead.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+public Task&lt;object&gt; GetFooAsync()
+{
+    return null; // Noncompliant
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+public Task&lt;object&gt; GetFooAsync()
+{
+    return Task.FromResult&lt;object&gt;(null);
+}
+</pre>
+
