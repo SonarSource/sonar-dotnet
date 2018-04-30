@@ -98,14 +98,6 @@ public class UnitTestResultsImportSensor implements Sensor {
         .withValue(executionTime)
         .save();
     }
-
-    if (aggregatedResults.tests() > 0) {
-      context.<Double>newMeasure()
-        .forMetric(CoreMetrics.TEST_SUCCESS_DENSITY)
-        .on(context.module())
-        .withValue(aggregatedResults.passedPercentage())
-        .save();
-    }
   }
 
 }

@@ -86,7 +86,6 @@ public class UnitTestResultsImportSensorTest {
       .extracting("metric.key", "value")
       .containsOnly(
         tuple(CoreMetrics.TESTS_KEY, 42),
-        tuple(CoreMetrics.TEST_SUCCESS_DENSITY_KEY, 84d),
         tuple(CoreMetrics.SKIPPED_TESTS_KEY, 1),
         tuple(CoreMetrics.TEST_FAILURES_KEY, 2),
         tuple(CoreMetrics.TEST_ERRORS_KEY, 3),
