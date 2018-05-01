@@ -27,14 +27,15 @@ import org.sonar.api.resources.Qualifiers;
 
 public abstract class AbstractPropertyDefinitions {
 
-  private static final String CATEGORY = "C#";
   private static final String PROP_PREFIX = "sonar.";
 
   private final String languageKey;
+  private final String languageName;
   private final String fileSuffixDefaultValue;
 
-  public AbstractPropertyDefinitions(String languageKey, String fileSuffixDefaultValue) {
+  public AbstractPropertyDefinitions(String languageKey, String languageName, String fileSuffixDefaultValue) {
     this.languageKey = languageKey;
+    this.languageName = languageName;
     this.fileSuffixDefaultValue = fileSuffixDefaultValue;
   }
 
@@ -51,7 +52,7 @@ public abstract class AbstractPropertyDefinitions {
         .build(),
 
       PropertyDefinition.builder(PROP_PREFIX + languageKey + ".file.suffixes")
-        .category(CATEGORY)
+        .category(languageName)
         .defaultValue(fileSuffixDefaultValue)
         .name("File suffixes")
         .description("Comma-separated list of suffixes of files to analyze.")
@@ -60,7 +61,7 @@ public abstract class AbstractPropertyDefinitions {
         .build(),
 
       PropertyDefinition.builder(PROP_PREFIX + languageKey + ".ignoreHeaderComments")
-        .category(CATEGORY)
+        .category(languageName)
         .defaultValue("true")
         .name("Ignore header comments")
         .description("If set to \"true\", the file headers (that are usually the same on each file: " +
