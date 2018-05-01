@@ -24,6 +24,6 @@ import org.sonarsource.dotnet.shared.plugins.AbstractPropertyDefinitions;
 public class CSharpPropertyDefinitions extends AbstractPropertyDefinitions {
 
   public CSharpPropertyDefinitions() {
-    super(CSharpPlugin.LANGUAGE_KEY, CSharpPlugin.FILE_SUFFIXES_DEFVALUE);
+    super(CSharpPlugin.LANGUAGE_KEY, CSharpPlugin.LANGUAGE_NAME, CSharpPlugin.FILE_SUFFIXES_DEFVALUE);
   }
 }

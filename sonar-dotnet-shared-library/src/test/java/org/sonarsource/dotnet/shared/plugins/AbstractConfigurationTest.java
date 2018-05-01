@@ -47,7 +47,7 @@ public class AbstractConfigurationTest {
   @Before
   public void setUp() {
     workDir = temp.getRoot().toPath();
-    AbstractPropertyDefinitions definitions = new AbstractPropertyDefinitions("cs", "cs") {
+    AbstractPropertyDefinitions definitions = new AbstractPropertyDefinitions("cs", "C#", ".cs") {
     };
     settings = new MapSettings(new PropertyDefinitions(definitions.create()));
   }
