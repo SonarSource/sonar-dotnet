@@ -4,9 +4,8 @@
 
 |Product|Quality Gate|Coverage|
 |:--:|:--:|:--:|
-|Analyzer|[![Quality Gate](https://next.sonarqube.com/sonarqube/api/badges/gate?key=sonaranalyzer-csharp-vbnet)](https://next.sonarqube.com/sonarqube/dashboard?id=sonaranalyzer-csharp-vbnet)|[![Coverage](https://next.sonarqube.com/sonarqube/api/badges/measure?key=sonaranalyzer-csharp-vbnet&metric=coverage)](https://next.sonarqube.com/sonarqube/component_measures/domain/Coverage?id=sonaranalyzer-csharp-vbnet)|
-|Plugin|[![Quality Gate](https://next.sonarqube.com/sonarqube/api/badges/gate?key=org.sonarsource.dotnet%3Asonar-csharp)](https://next.sonarqube.com/sonarqube/dashboard?id=org.sonarsource.dotnet%3Asonar-csharp)|[![Coverage](https://next.sonarqube.com/sonarqube/api/badges/measure?key=org.sonarsource.dotnet%3Asonar-csharp&metric=coverage)](https://next.sonarqube.com/sonarqube/component_measures/domain/Coverage?id=org.sonarsource.dotnet%3Asonar-csharp)|
-
+|Analyzer|[![Quality Gate](https://next.sonarqube.com/sonarqube/api/project_badges/measure?project=sonaranalyzer-csharp-vbnet&metric=alert_status)](https://next.sonarqube.com/sonarqube/dashboard?id=sonaranalyzer-csharp-vbnet)|[![Coverage](https://next.sonarqube.com/sonarqube/api/project_badges/measure?project=sonaranalyzer-csharp-vbnet&metric=coverage)](https://next.sonarqube.com/sonarqube/component_measures/domain/Coverage?id=sonaranalyzer-csharp-vbnet)|
+|Plugin|[![Quality Gate](https://next.sonarqube.com/sonarqube/api/project_badges/measure?project=org.sonarsource.dotnet%3Asonar-csharp&metric=alert_status)](https://next.sonarqube.com/sonarqube/dashboard?id=org.sonarsource.dotnet%3Asonar-csharp)|[![Coverage](https://next.sonarqube.com/sonarqube/api/project_badges/measure?project=org.sonarsource.dotnet%3Asonar-csharp&metric=coverage)](https://next.sonarqube.com/sonarqube/component_measures/domain/Coverage?id=org.sonarsource.dotnet%3Asonar-csharp)|
 
 SonarC# is a [static code analyser](https://en.wikipedia.org/wiki/Static_program_analysis) for C# language used as an
 extension for the [SonarQube](http://www.sonarqube.org/) platform. It will allow you to produce stable and easily
@@ -34,8 +33,8 @@ To provide feedback (request a feature, report a bug etc.), simply
 
 ## Get started
 
- *  [Building, testing and debugging the plugin](./docs/contributing-plugin.md)
- *  [Building, testing and debugging the analyzer](./docs/contributing-analyzer.md)
+*  [Building, testing and debugging the plugin](./docs/contributing-plugin.md)
+*  [Building, testing and debugging the analyzer](./docs/contributing-analyzer.md)
 
 ## How to contribute
 
