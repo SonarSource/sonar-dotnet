@@ -16,7 +16,72 @@ For reference, the possible headings are:
 ## Unreleased
 
 ### Notes
-* [All commits](https://github.com/SonarSource/sonar-csharp/compare/7.0.0.4787...HEAD)
+* [All commits](https://github.com/SonarSource/sonar-csharp/compare/7.1.0.5212 ...HEAD)
+
+
+## [7.1](https://github.com/SonarSource/sonar-csharp/releases/tag/7.1.0.5212)
+
+### New features
+* [#1057](https://github.com/SonarSource/sonar-csharp/issues/1057) - Rule S4211: Members should not have conflicting transparency annotations
+* [#1072](https://github.com/SonarSource/sonar-csharp/issues/1072) - Rule S3400: Methods should not return constants
+* [#1079](https://github.com/SonarSource/sonar-csharp/issues/1079) - Rule S3923: All branches in a conditional structure should not have exactly the same implementation
+* [#1151](https://github.com/SonarSource/sonar-csharp/issues/1151) - Rule S881: Increment (++) and decrement (--) operators should not be used in a method call or mixed with other operators in an expression
+* [#1159](https://github.com/SonarSource/sonar-csharp/issues/1159) - Rule S4462: Calls to 'async' methods should not be blocking
+* [#1164](https://github.com/SonarSource/sonar-csharp/issues/1164) - Rule S4457: Parameter validation in "async"/"await" methods should be wrapped
+* [#1165](https://github.com/SonarSource/sonar-csharp/issues/1165) - Rule S4456: Parameter validation in yielding methods should be wrapped
+* [#1166](https://github.com/SonarSource/sonar-csharp/issues/1166) - Rule S4428: "PartCreationPolicyAttribute" should be used with "ExportAttribute"
+* [#1167](https://github.com/SonarSource/sonar-csharp/issues/1167) - Rule S4426: Cryptographic keys should not be too short
+* [#1171](https://github.com/SonarSource/sonar-csharp/issues/1171) - Rule S1192: String literals should not be duplicated
+* [#1267](https://github.com/SonarSource/sonar-csharp/issues/1267) - Rule S4524: Switch 'default' case should be first or last
+* [#1287](https://github.com/SonarSource/sonar-csharp/issues/1287) - Rule S2255: Cookies should not be used to store sensitive information
+* [#1290](https://github.com/SonarSource/sonar-csharp/issues/1290) - Rule S3330: "HttpOnly" should be set on cookies
+* [#1292](https://github.com/SonarSource/sonar-csharp/issues/1292) - Rule S2092: Cookies should be "secure"
+* [#1294](https://github.com/SonarSource/sonar-csharp/issues/1294) - Rule S2245: Pseudorandom number generators (PRNGs) should not be used in secure contexts
+* [#1303](https://github.com/SonarSource/sonar-csharp/issues/1303) - Rule S4432: AES encryption algorithm should be used with secured mode
+* [#1310](https://github.com/SonarSource/sonar-csharp/issues/1310) - Rule S4433: LDAP connections should be authenticated
+* [#1313](https://github.com/SonarSource/sonar-csharp/issues/1313) - Rule S4564: ASP.NET HTTP request validation feature should not be disabled
+* [#1329](https://github.com/SonarSource/sonar-csharp/issues/1329) - Rule S4581: "new Guid()" should not be used
+* [#1344](https://github.com/SonarSource/sonar-csharp/issues/1344) - Rule S4586: Non-async "Task/Task<T>" method should not return null
+
+### Improvements
+* [#1087](https://github.com/SonarSource/sonar-csharp/issues/1087) - Rules should use analysis scope from RSPEC and not be hardcoded
+* [#1222](https://github.com/SonarSource/sonar-csharp/issues/1222) - Deprecate rule S4142
+* [#1236](https://github.com/SonarSource/sonar-csharp/issues/1236) - Update S4040: Rule should also cover char calls
+* [#1256](https://github.com/SonarSource/sonar-csharp/issues/1256) - Update S1313: Rule should not be run against test sources
+* [#1258](https://github.com/SonarSource/sonar-csharp/issues/1258) - Update S2228: Rule should not be run on test sources
+* [#1260](https://github.com/SonarSource/sonar-csharp/issues/1260) - Update S1104: Rule should not be run on test sources
+* [#1262](https://github.com/SonarSource/sonar-csharp/issues/1262) - Fix S3433: Rule should not report on non-public test methods for xUnit
+* [#1263](https://github.com/SonarSource/sonar-csharp/issues/1263) - Adjust the behavior of S131 to not raise an issue when "default" is not at the correct position
+* [#1282](https://github.com/SonarSource/sonar-csharp/issues/1282) - Update S4061: Rule should be part of SonarWay
+* [#1288](https://github.com/SonarSource/sonar-csharp/issues/1288) - Update S1751: Rule should be a BUG
+* [#1291](https://github.com/SonarSource/sonar-csharp/issues/1291) - Update S2486: Rule should be a VULNERABILITY
+* [#1357](https://github.com/SonarSource/sonar-csharp/issues/1357) - Fix SonarC# category under SonarQube/SonarCloud general settings
+* [#1368](https://github.com/SonarSource/sonar-csharp/issues/1368) - Remove deprecated TEST_SUCCESS_DENSITY
+
+### False Positives
+* [#825](https://github.com/SonarSource/sonar-csharp/issues/825) - Fix S1905: Rule should not report on Cast<T> over multi-dimensional arrays
+* [#1037](https://github.com/SonarSource/sonar-csharp/issues/1037) - Fix S1168: "Return empty collection" should not raise when the method return type is XmlNode
+* [#1083](https://github.com/SonarSource/sonar-csharp/issues/1083) - Fix S4056: False positives when calling Convert.ToInt32(double x)
+* [#1123](https://github.com/SonarSource/sonar-csharp/issues/1123) - Fix S3264: Rule should not raise when 'BeginInvoke' or 'EndInvoke' are called
+* [#1149](https://github.com/SonarSource/sonar-csharp/issues/1149) - Fix S2971: Do not trigger on ToList().AsEnumerable()
+* [#1189](https://github.com/SonarSource/sonar-csharp/issues/1189) - Fix S4015: Incorrectly Identifies Descendent Overload as Member Hiding
+* [#1210](https://github.com/SonarSource/sonar-csharp/issues/1210) - Fix S2933: issue should not be raised for types marked with [Serializable]
+* [#1219](https://github.com/SonarSource/sonar-csharp/issues/1219) - Fix S3264: FP when using add/remove syntax
+* [#1223](https://github.com/SonarSource/sonar-csharp/issues/1223) - Fix S2228: Should not raise any issue when in a console application
+* [#1224](https://github.com/SonarSource/sonar-csharp/issues/1224) - Fix S1694 - message should suggest protected constructor
+* [#1244](https://github.com/SonarSource/sonar-csharp/issues/1244) - Fix S109: Rule should not raise FP when using enums
+* [#1283](https://github.com/SonarSource/sonar-csharp/issues/1283) - Fix S4061: Rule should not report when method is interop
+* [#1284](https://github.com/SonarSource/sonar-csharp/issues/1284) - Fix S4061: Rule should not raise issue when overriding/implenting interface
+* [#1296](https://github.com/SonarSource/sonar-csharp/issues/1296) - Fix S4159: Rule should handle generic interfaces correctly
+
+### Bug fixes
+* [#1274](https://github.com/SonarSource/sonar-csharp/issues/1274) - Parameterized rules should be disabled by default
+
+
+## [7.0.1](https://github.com/SonarSource/sonar-csharp/releases/tag/7.0.1.4822)
+
+### Bug fixes
+* Fix default activation of rules
 
 
 ## [7.0](https://github.com/SonarSource/sonar-csharp/releases/tag/7.0.0.4787)
