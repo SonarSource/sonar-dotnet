@@ -54,7 +54,7 @@ namespace SonarAnalyzer.Rules
                 .FirstOrDefault(f => ParameterLoader.ConfigurationFilePathMatchesExpected(f.Path));
 
             var projectOutputAdditionalFile = options.AdditionalFiles
-                .FirstOrDefault(f => ParameterLoader.ConfigurationFilePathMatchesExpected(f.Path, ConfigurationAdditionalFile));
+                .FirstOrDefault(IsProjectOutput);
 
             if (sonarLintAdditionalFile == null ||
                 projectOutputAdditionalFile == null)
@@ -113,6 +113,9 @@ namespace SonarAnalyzer.Rules
                 EndOffset = lineSpan.EndLinePosition.Character
             };
         }
+
+        internal static bool IsProjectOutput(AdditionalText file) =>
+            ParameterLoader.ConfigurationFilePathMatchesExpected(file.Path, ConfigurationAdditionalFile);
     }
 
     public abstract class UtilityAnalyzerBase<TMessage> : UtilityAnalyzerBase
