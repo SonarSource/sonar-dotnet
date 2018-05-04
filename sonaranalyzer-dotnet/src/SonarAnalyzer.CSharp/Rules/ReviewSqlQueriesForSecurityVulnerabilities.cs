@@ -163,11 +163,10 @@ namespace SonarAnalyzer.Rules.CSharp
             var ucfg = new UCFG
             {
                 MethodId = MethodIdProvider.Create(symbol),
-                Location = SyntaxLocation.Get(declaration),
+                Location = UniversalControlFlowGraphBuilder.GetLocation(declaration),
             };
 
-            // TODO: add blocks and instructions here
-
+            ucfg.BasicBlocks.AddRange(new UniversalControlFlowGraphBuilder(context.SemanticModel, cfg).Build());
             ucfg.Parameters.AddRange(symbol.GetParameters().Select(p => p.Name));
 
             var path = Path.Combine(protobufDirectory, $"ucfg_{configurationName}_{Interlocked.Increment(ref protobufFileIndex)}.pb");

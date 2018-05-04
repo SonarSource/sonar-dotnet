@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Generic;
 
 namespace SonarAnalyzer.Helpers
@@ -38,6 +39,17 @@ namespace SonarAnalyzer.Helpers
             }
 
             return defaultValue;
+        }
+
+        public static TValue GetOrAdd<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key,
+            Func<TKey, TValue> factory)
+        {
+            if (!dictionary.TryGetValue(key, out var value))
+            {
+                value = factory(key);
+                dictionary.Add(key, value);
+            }
+            return value;
         }
     }
 }
