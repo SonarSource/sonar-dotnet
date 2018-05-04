@@ -19,11 +19,18 @@
  */
 
 extern alias csharp;
+using System.Data.SqlServerCe;
+using System.IO;
+using System.Linq;
+using csharp::SonarAnalyzer.Rules.CSharp;
+using FluentAssertions;
+using Google.Protobuf;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Oracle.ManagedDataAccess.Client;
-using csharp::SonarAnalyzer.Rules.CSharp;
-using System.Data.SqlServerCe;
+using SonarAnalyzer.Common;
+using SonarAnalyzer.Protobuf.Ucfg;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -35,6 +42,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         internal static readonly MetadataReference SystemDataSqlServerCeAssembly =
             MetadataReference.CreateFromFile(typeof(SqlCeCommand).Assembly.Location);
 
+        public TestContext TestContext { get; set; }
+
         [TestMethod]
         [TestCategory("Rule")]
         public void ReviewSqlQueriesForSecurityVulnerabilities()
@@ -43,6 +52,91 @@ namespace SonarAnalyzer.UnitTest.Rules
                 new ReviewSqlQueriesForSecurityVulnerabilities(),
                 null,
                 Verifier.SystemDataAssembly, OracleManagedDataAccessClientAssembly, SystemDataSqlServerCeAssembly);
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void ReviewSqlQueriesForSecurityVulnerabilities_GenerateProtobuf()
+        {
+            var workDir = Path.Combine(TestContext.TestRunResultsDirectory, "0");
+            Directory.CreateDirectory(workDir);
+
+            Verifier.VerifyCSharpAnalyzer(@"
+class Program
+{
+    string Property2
+    {
+        set { var x = value; }
+        get { return ""; }
+    }
+    void Method1(string s) { }
+    string Method2() => null;
+    string Property1 => null;
+    public Program(string s) { }
+    ~Program() { } // not generated, cannot accept tainted input
+    public static string operator +(Program left, string right)
+    {
+        return null;
+    }
+    public event System.EventHandler Event
+    {
+        add { } // not generated, cannot accept tainted input
+        remove { } // not generated, cannot accept tainted input
+    }
+}
+",
+                new ReviewSqlQueriesForSecurityVulnerabilities(new TestAnalyzerConfiguration(workDir)));
+
+            var ucfgPath = Path.Combine(TestContext.TestRunResultsDirectory, "ucfg_cs");
+            Directory.Exists(ucfgPath).Should().BeTrue();
+            Directory.GetFiles(ucfgPath).Select(Path.GetFileName).Should().BeEquivalentTo(
+                new[]
+                {
+                    "ucfg_0_1.pb",
+                    "ucfg_0_2.pb",
+                    "ucfg_0_3.pb",
+                    "ucfg_0_4.pb",
+                    "ucfg_0_5.pb",
+                    "ucfg_0_6.pb",
+                    "ucfg_0_7.pb",
+                });
+            Directory.GetFiles(ucfgPath).Select(GetProtobufMethodId).Should().BeEquivalentTo(
+                new[]
+                {
+                    "foo.dll;Program.get_Property1()",
+                    "foo.dll;Program.get_Property2()",
+                    "foo.dll;Program.set_Property2(mscorlib;string)",
+                    "foo.dll;Program..ctor(mscorlib;string)",
+                    "foo.dll;Program.op_Addition(foo.dll;Program,mscorlib;string)",
+                    "foo.dll;Program.Method1(mscorlib;string)",
+                    "foo.dll;Program.Method2()",
+                });
+        }
+
+        private static string GetProtobufMethodId(string protobufPath)
+        {
+            File.Exists(protobufPath).Should().BeTrue($"File {protobufPath} must exist.");
+            using (var stream = File.OpenRead(protobufPath))
+            {
+                var ucfg = new UCFG();
+                ucfg.MergeFrom(stream);
+                return ucfg.MethodId;
+            }
+        }
+
+        private class TestAnalyzerConfiguration : IAnalyzerConfiguration
+        {
+            private readonly string workDir;
+
+            public TestAnalyzerConfiguration(string workDir)
+            {
+                this.workDir = workDir;
+            }
+
+            public string GetProjectOutput(AnalyzerOptions options)
+            {
+                return workDir;
+            }
         }
     }
 }

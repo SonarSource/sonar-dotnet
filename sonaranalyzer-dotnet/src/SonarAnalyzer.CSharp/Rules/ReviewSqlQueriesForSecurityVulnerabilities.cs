@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2018 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -18,15 +18,22 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.IO;
 using System.Linq;
+using System.Threading;
+using Google.Protobuf;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.Protobuf.Ucfg;
+using SonarAnalyzer.Security.Ucfg;
+using SonarAnalyzer.SymbolicExecution.ControlFlowGraph;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -54,6 +61,28 @@ namespace SonarAnalyzer.Rules.CSharp
             KnownType.System_Data_SqlClient_SqlCommand,
             KnownType.System_Data_SqlClient_SqlDataAdapter
         };
+
+        private string protobufDirectory;
+        private int protobufFileIndex = 0;
+
+        /// <summary>
+        /// Contains the build configuration name as set by Scanner for MSBuild. Usually it
+        /// is a number. We include this in the protobuf file names because the Sonar Security
+        /// plugin is unable to read files from subfolders.
+        /// </summary>
+        private string configurationName;
+
+        private IAnalyzerConfiguration configuration;
+
+        public ReviewSqlQueriesForSecurityVulnerabilities()
+            : this(new DefaultAnalyzerConfiguration())
+        {
+        }
+
+        public ReviewSqlQueriesForSecurityVulnerabilities(IAnalyzerConfiguration configuration)
+        {
+            this.configuration = configuration;
+        }
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -85,11 +114,91 @@ namespace SonarAnalyzer.Rules.CSharp
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, assignment.Left.GetLocation()));
                     }
                 }, SyntaxKind.SimpleAssignmentExpression);
+
+            context.RegisterCompilationStartAction(
+                cc =>
+                {
+                    if (!TryReadConfiguration(cc.Options))
+                    {
+                        return;
+                    }
+
+                    protobufFileIndex = 0;
+
+                    cc.RegisterSyntaxNodeActionInNonGenerated(
+                        c => WriteUCFG<BaseMethodDeclarationSyntax>(c, x => x.Body),
+                        SyntaxKind.ConstructorDeclaration,
+                        SyntaxKind.OperatorDeclaration);
+
+                    cc.RegisterSyntaxNodeActionInNonGenerated(
+                        c => WriteUCFG<MethodDeclarationSyntax>(c, x => (CSharpSyntaxNode)x.Body ?? x.ExpressionBody?.Expression),
+                        SyntaxKind.MethodDeclaration);
+
+                    cc.RegisterSyntaxNodeActionInNonGenerated(
+                        c => WriteUCFG<AccessorDeclarationSyntax>(c, node => node.Body),
+                        SyntaxKind.GetAccessorDeclaration,
+                        SyntaxKind.SetAccessorDeclaration);
+
+                    cc.RegisterSyntaxNodeActionInNonGenerated(
+                        c => WriteUCFG<PropertyDeclarationSyntax>(c, node => node.ExpressionBody?.Expression),
+                        SyntaxKind.PropertyDeclaration);
+                });
+        }
+
+        private void WriteUCFG<TDeclarationSyntax>(SyntaxNodeAnalysisContext context, Func<TDeclarationSyntax, CSharpSyntaxNode> getBody)
+            where TDeclarationSyntax : SyntaxNode
+        {
+            var declaration = (TDeclarationSyntax)context.Node;
+
+            var symbol = context.SemanticModel.GetDeclaredSymbol(declaration);
+
+            if (symbol == null ||
+                symbol.IsAbstract ||
+                symbol.IsExtern ||
+                !CSharpControlFlowGraph.TryGet(getBody(declaration), context.SemanticModel, out var cfg))
+            {
+                return;
+            }
+
+            var ucfg = new UCFG
+            {
+                MethodId = MethodIdProvider.Create(symbol),
+                Location = SyntaxLocation.Get(declaration),
+            };
+
+            // TODO: add blocks and instructions here
+
+            ucfg.Parameters.AddRange(symbol.GetParameters().Select(p => p.Name));
+
+            var path = Path.Combine(protobufDirectory, $"ucfg_{configurationName}_{Interlocked.Increment(ref protobufFileIndex)}.pb");
+            using (var stream = File.Create(path))
+            {
+                ucfg.WriteTo(stream);
+            }
         }
 
         private static bool IsSanitizedQuery(ExpressionSyntax expression, SemanticModel model)
         {
             return model.GetConstantValue(expression).HasValue;
+        }
+
+        private bool TryReadConfiguration(AnalyzerOptions options)
+        {
+            var basePath = configuration.GetProjectOutput(options);
+
+            // the current compilation output dir - "<root>/.sonarqube/<index>" where index is 0, 1, 2, etc.
+            if (basePath != null)
+            {
+                // "<root>/.sonarqube/0" -> "0" etc.
+                configurationName = Path.GetFileName(basePath);
+
+                // "<root>/.sonarqube/0" -> "<root>/.sonarqube/ucfg_cs"
+                protobufDirectory = Path.Combine(Path.GetDirectoryName(basePath), $"ucfg_{AnalyzerLanguage.CSharp}");
+
+                Directory.CreateDirectory(protobufDirectory);
+            }
+
+            return basePath != null;
         }
     }
 }
