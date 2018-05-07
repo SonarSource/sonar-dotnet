@@ -31,7 +31,6 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
-using SonarAnalyzer.Protobuf.Ucfg;
 using SonarAnalyzer.Security.Ucfg;
 using SonarAnalyzer.SymbolicExecution.ControlFlowGraph;
 
@@ -66,11 +65,11 @@ namespace SonarAnalyzer.Rules.CSharp
         private int protobufFileIndex = 0;
 
         /// <summary>
-        /// Contains the build configuration name as set by Scanner for MSBuild. Usually it
-        /// is a number. We include this in the protobuf file names because the Sonar Security
-        /// plugin is unable to read files from subfolders.
+        /// Contains the build ID as set by Scanner for MSBuild. Usually it is a number.
+        /// We include this in the protobuf file names because the Sonar Security plugin
+        /// is unable to read files from subfolders.
         /// </summary>
-        private string configurationName;
+        private string projectBuildId;
 
         private IAnalyzerConfiguration configuration;
 
@@ -160,16 +159,10 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            var ucfg = new UCFG
-            {
-                MethodId = MethodIdProvider.Create(symbol),
-                Location = UniversalControlFlowGraphBuilder.GetLocation(declaration),
-            };
+            var ucfg = new UniversalControlFlowGraphBuilder(context.SemanticModel, cfg)
+                .Build(declaration, symbol);
 
-            ucfg.BasicBlocks.AddRange(new UniversalControlFlowGraphBuilder(context.SemanticModel, cfg).Build());
-            ucfg.Parameters.AddRange(symbol.GetParameters().Select(p => p.Name));
-
-            var path = Path.Combine(protobufDirectory, $"ucfg_{configurationName}_{Interlocked.Increment(ref protobufFileIndex)}.pb");
+            var path = Path.Combine(protobufDirectory, $"ucfg_{projectBuildId}_{Interlocked.Increment(ref protobufFileIndex)}.pb");
             using (var stream = File.Create(path))
             {
                 ucfg.WriteTo(stream);
@@ -183,15 +176,15 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private bool TryReadConfiguration(AnalyzerOptions options)
         {
-            var basePath = configuration.GetProjectOutput(options);
+            var basePath = configuration.GetProjectOutputPath(options);
 
-            // the current compilation output dir - "<root>/.sonarqube/<index>" where index is 0, 1, 2, etc.
+            // the current compilation output dir - "<root>/.sonarqube/out/<index>" where index is 0, 1, 2, etc.
             if (basePath != null)
             {
-                // "<root>/.sonarqube/0" -> "0" etc.
-                configurationName = Path.GetFileName(basePath);
+                // "<root>/.sonarqube/out/0" -> "0" etc.
+                projectBuildId = Path.GetFileName(basePath);
 
-                // "<root>/.sonarqube/0" -> "<root>/.sonarqube/ucfg_cs"
+                // "<root>/.sonarqube/out/0" -> "<root>/.sonarqube/out/ucfg_cs"
                 protobufDirectory = Path.Combine(Path.GetDirectoryName(basePath), $"ucfg_{AnalyzerLanguage.CSharp}");
 
                 Directory.CreateDirectory(protobufDirectory);

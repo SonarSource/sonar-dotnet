@@ -32,43 +32,63 @@ namespace SonarAnalyzer.Security.Ucfg
 {
     public class UniversalControlFlowGraphBuilder
     {
-        public static readonly string Const = "\"\""; // Same as Java implementation
+        /// <summary>
+        /// The string constant representation in the Sonar Security engine (Java part). When
+        /// an instruction receives or returns a type that is not string we use this instead
+        /// of a variable.
+        /// </summary>
+        private static readonly Expression ConstantExpression = new Expression
+        {
+            Const = new Constant { Value = "\"\"" }
+        };
+
         private readonly BlockIdMap blockId = new BlockIdMap();
         private readonly SemanticModel semanticModel;
-        private readonly InstructionBuilder instructionBuilder;
         private readonly IControlFlowGraph cfg;
 
         public UniversalControlFlowGraphBuilder(SemanticModel semanticModel, IControlFlowGraph cfg)
         {
             this.semanticModel = semanticModel;
-            instructionBuilder = new InstructionBuilder(semanticModel);
             this.cfg = cfg;
         }
 
-        public IEnumerable<BasicBlock> Build() =>
-            cfg.Blocks.Where(IsSupportedBlock).Select(CreateBasicBlock);
+        public UCFG Build(SyntaxNode syntaxNode, ISymbol symbol)
+        {
+            var ucfg = new UCFG
+            {
+                MethodId = MethodIdProvider.Create(symbol),
+                Location = GetLocation(syntaxNode),
+            };
 
-        public BasicBlock CreateBasicBlock(Block block)
+            ucfg.BasicBlocks.AddRange(cfg.Blocks.Where(IsSupportedBlock).Select(CreateBasicBlock));
+            ucfg.Parameters.AddRange(symbol.GetParameters().Select(p => p.Name));
+            ucfg.Entries.Add(blockId.Get(cfg.EntryBlock));
+            return ucfg;
+        }
+
+        private BasicBlock CreateBasicBlock(Block block)
         {
             var basicBlock = new BasicBlock
             {
                 Id = blockId.Get(block),
             };
 
+            var instructionBuilder = new InstructionBuilder(semanticModel, basicBlock);
+
             foreach (var instruction in block.Instructions)
             {
-                instructionBuilder.BuildInstruction(instruction, basicBlock);
+                instructionBuilder.BuildInstruction(instruction);
             }
 
             if (block is JumpBlock jump)
             {
-                instructionBuilder.BuildInstruction(jump.JumpNode, basicBlock);
+                instructionBuilder.BuildInstruction(jump.JumpNode);
             }
             else
             {
                 if (block.SuccessorBlocks.All(cfg.ExitBlock.Equals))
                 {
-                    basicBlock.Ret = new Return { ReturnedExpression = new Expression { Const = new Constant { Value = Const } } };
+                    basicBlock.Ret = new Return { ReturnedExpression = ConstantExpression };
                 }
                 else
                 {
@@ -83,7 +103,7 @@ namespace SonarAnalyzer.Security.Ucfg
         private static bool IsSupportedBlock(Block block) =>
             !(block is ExitBlock);
 
-        public static UcfgLocation GetLocation(SyntaxNode syntaxNode)
+        private static UcfgLocation GetLocation(SyntaxNode syntaxNode)
         {
             var location = syntaxNode.GetLocation();
             var lineSpan = location.GetLineSpan();
@@ -99,16 +119,19 @@ namespace SonarAnalyzer.Security.Ucfg
 
         private class InstructionBuilder
         {
+            private readonly Dictionary<SyntaxNode, Expression> nodeExpressionMap = new Dictionary<SyntaxNode, Expression>();
             private readonly SemanticModel semanticModel;
-            private int tempVariablesCounter;
-            private Dictionary<SyntaxNode, Expression> nodeExpressionMap = new Dictionary<SyntaxNode, Expression>();
+            private readonly BasicBlock basicBlock;
 
-            public InstructionBuilder(SemanticModel semanticModel)
+            private int tempVariablesCounter;
+
+            public InstructionBuilder(SemanticModel semanticModel, BasicBlock basicBlock)
             {
                 this.semanticModel = semanticModel;
+                this.basicBlock = basicBlock;
             }
 
-            public Expression BuildInstruction(SyntaxNode syntaxNode, BasicBlock block)
+            public Expression BuildInstruction(SyntaxNode syntaxNode)
             {
                 syntaxNode = syntaxNode.RemoveParentheses();
 
@@ -121,34 +144,34 @@ namespace SonarAnalyzer.Security.Ucfg
                 switch (syntaxNode.Kind())
                 {
                     case SyntaxKind.AddExpression:
-                        expression = BuildBinaryExpression((BinaryExpressionSyntax)syntaxNode, block);
+                        expression = BuildBinaryExpression((BinaryExpressionSyntax)syntaxNode);
                         break;
 
                     case SyntaxKind.SimpleAssignmentExpression:
-                        expression = BuildAssignment((AssignmentExpressionSyntax)syntaxNode, block);
+                        expression = BuildAssignment((AssignmentExpressionSyntax)syntaxNode);
                         break;
 
                     case SyntaxKind.InvocationExpression:
-                        expression = BuildInvocation((InvocationExpressionSyntax)syntaxNode, block);
+                        expression = BuildInvocation((InvocationExpressionSyntax)syntaxNode);
                         break;
 
                     case SyntaxKind.IdentifierName:
-                        expression = BuildIdentifier((IdentifierNameSyntax)syntaxNode, block);
+                        expression = BuildIdentifierName((IdentifierNameSyntax)syntaxNode);
                         break;
 
                     case SyntaxKind.VariableDeclarator:
-                        BuildVariableDeclarator((VariableDeclaratorSyntax)syntaxNode, block);
+                        BuildVariableDeclarator((VariableDeclaratorSyntax)syntaxNode);
                         expression = null;
                         break;
 
                     case SyntaxKind.ReturnStatement:
-                        BuildReturn((ReturnStatementSyntax)syntaxNode, block);
+                        BuildReturn((ReturnStatementSyntax)syntaxNode);
                         expression = null;
                         break;
 
                     default:
                         // do nothing
-                        expression = CreateConstant();
+                        expression = ConstantExpression;
                         break;
                 }
 
@@ -156,137 +179,137 @@ namespace SonarAnalyzer.Security.Ucfg
                 return expression;
             }
 
-            private Expression BuildIdentifier(IdentifierNameSyntax identifier, BasicBlock block)
+            private Expression BuildIdentifierName(IdentifierNameSyntax identifier)
             {
                 var identifierSymbol = GetSymbol(identifier);
+
                 if (identifierSymbol is IPropertySymbol property)
                 {
-                    var tempVariable = GetTempVariable();
-                    block.Instructions.Add(new Instruction
-                    {
-                        MethodId = MethodIdProvider.Create(property.GetMethod),
-                        Variable = tempVariable,
-                    });
-                    return CreateVariable(tempVariable);
+                    var instruction = CreateInstruction(
+                        identifier,
+                        methodId: MethodIdProvider.Create(property.GetMethod),
+                        variable: CreateTempVariable());
+                    return CreateVariableExpression(instruction.Variable);
+                }
+                else if (IsLocalVarOrParameterOfTypeString(identifierSymbol))
+                {
+                    return CreateVariableExpression(identifierSymbol.Name);
                 }
                 else
                 {
-                    return CreateExpression(identifier);
+                    return ConstantExpression;
                 }
             }
 
-            private void BuildVariableDeclarator(VariableDeclaratorSyntax variableDeclarator, BasicBlock block)
+            private void BuildVariableDeclarator(VariableDeclaratorSyntax variableDeclarator)
             {
                 if (variableDeclarator.Initializer == null)
                 {
                     return;
                 }
 
-                var left = semanticModel.GetDeclaredSymbol(variableDeclarator);
-                if (IsLocalVarOrParameterOfTypeString(left))
+                var variable = semanticModel.GetDeclaredSymbol(variableDeclarator);
+                if (IsLocalVarOrParameterOfTypeString(variable))
                 {
-                    var instruction = new Instruction
-                    {
-                        Location = GetLocation(variableDeclarator),
-                        Variable = left.Name,
-                        MethodId = KnownMethodId.Assignment,
-                        Args = { BuildInstruction(variableDeclarator.Initializer.Value, block) },
-                    };
-                    block.Instructions.Add(instruction);
+                    CreateInstruction(
+                        variableDeclarator,
+                        methodId: KnownMethodId.Assignment,
+                        variable: variable.Name,
+                        arguments: BuildInstruction(variableDeclarator.Initializer.Value));
                 }
             }
 
-            private Expression BuildBinaryExpression(BinaryExpressionSyntax binaryExpression, BasicBlock block)
+            private Expression BuildBinaryExpression(BinaryExpressionSyntax binaryExpression)
             {
-                var instruction = new Instruction
-                {
-                    Location = GetLocation(binaryExpression),
-                    MethodId = KnownMethodId.Concatenation,
-                    Args = { BuildInstruction(binaryExpression.Right, block), BuildInstruction(binaryExpression.Left, block) },
-                    Variable = GetTempVariable(),
-                };
-                block.Instructions.Add(instruction);
-                return CreateVariable(instruction.Variable);
+                var instruction = CreateInstruction(
+                    binaryExpression,
+                    methodId: KnownMethodId.Concatenation,
+                    variable: CreateTempVariable(),
+                    arguments: new[] { BuildInstruction(binaryExpression.Right), BuildInstruction(binaryExpression.Left) });
+
+                return CreateVariableExpression(instruction.Variable);
             }
 
-            public void BuildReturn(ReturnStatementSyntax returnStatement, BasicBlock block)
+            private void BuildReturn(ReturnStatementSyntax returnStatement)
             {
-                block.Ret = new Return
+                basicBlock.Ret = new Return
                 {
                     Location = GetLocation(returnStatement),
-                    ReturnedExpression = returnStatement.Expression != null ? BuildInstruction(returnStatement.Expression, block) : CreateConstant(),
+                    ReturnedExpression = returnStatement.Expression != null
+                        ? BuildInstruction(returnStatement.Expression)
+                        : ConstantExpression,
                 };
             }
 
-            private Expression BuildInvocation(InvocationExpressionSyntax invocation, BasicBlock block)
+            private Expression BuildInvocation(InvocationExpressionSyntax invocation)
             {
                 var methodSymbol = GetSymbol(invocation) as IMethodSymbol;
                 if (methodSymbol == null)
                 {
-                    return CreateConstant();
+                    return ConstantExpression;
                 }
 
-                var instruction = new Instruction
-                {
-                    Location = GetLocation(invocation),
-                    MethodId = MethodIdProvider.Create(methodSymbol),
-                };
+                var arguments = BuildArguments(invocation, methodSymbol).ToArray();
 
-                if (invocation.ArgumentList != null)
-                {
-                    instruction.Args
-                        .AddRange(invocation.ArgumentList.Arguments.Select(a => BuildInstruction(a.Expression, block)));
-                }
+                var instruction = CreateInstruction(
+                    invocation,
+                    methodId: MethodIdProvider.Create(methodSymbol),
+                    variable: CreateTempVariable(),
+                    arguments: arguments);
 
+                return methodSymbol.ReturnType.Is(KnownType.System_String)
+                    ? CreateVariableExpression(instruction.Variable)
+                    : ConstantExpression;
+            }
+
+            private IEnumerable<Expression> BuildArguments(InvocationExpressionSyntax invocation, IMethodSymbol methodSymbol)
+            {
                 if (IsInstanceMethodOnString(methodSymbol) ||
                     IsExtensionMethodCalledAsExtension(methodSymbol))
                 {
                     if (invocation.Expression is MemberAccessExpressionSyntax memberAccess)
                     {
                         // add the string to the beginning of the arguments list
-                        instruction.Args.Insert(0, BuildInstruction(memberAccess.Expression, block));
+                        yield return BuildInstruction(memberAccess.Expression);
                     }
                 }
 
-                block.Instructions.Add(instruction);
-
-                if (methodSymbol.ReturnType.Is(KnownType.System_String))
+                if (invocation.ArgumentList == null)
                 {
-                    instruction.Variable = GetTempVariable();
-                    return CreateVariable(instruction.Variable);
+                    yield break;
                 }
 
-                return CreateConstant();
+                foreach (var argument in invocation.ArgumentList.Arguments)
+                {
+                    yield return BuildInstruction(argument.Expression);
+                }
             }
 
-            private Expression BuildAssignment(AssignmentExpressionSyntax assignment, BasicBlock block)
+            private Expression BuildAssignment(AssignmentExpressionSyntax assignment)
             {
                 var left = GetSymbol(assignment.Left);
 
                 if (IsLocalVarOrParameterOfTypeString(left))
                 {
-                    block.Instructions.Add(new Instruction
-                    {
-                        Location = GetLocation(assignment),
-                        Variable = left.Name,
-                        MethodId = KnownMethodId.Assignment,
-                        Args = { BuildInstruction(assignment.Right, block) },
-                    });
-                    return CreateVariable(left.Name);
+                    var instruction = CreateInstruction(
+                        assignment,
+                        methodId: KnownMethodId.Assignment,
+                        variable: left.Name,
+                        arguments: BuildInstruction(assignment.Right));
+                    return CreateVariableExpression(instruction.Variable);
                 }
                 else if (left is IPropertySymbol property)
                 {
-                    block.Instructions.Add(new Instruction
-                    {
-                        Location = GetLocation(assignment),
-                        MethodId = MethodIdProvider.Create(property.SetMethod),
-                        Args = { BuildInstruction(assignment.Right, block) },
-                    });
-                    return CreateConstant();
+                    var instruction = CreateInstruction(
+                        assignment,
+                        methodId: MethodIdProvider.Create(property.SetMethod),
+                        variable: CreateTempVariable(),
+                        arguments: BuildInstruction(assignment.Right));
+                    return CreateVariableExpression(instruction.Variable);
                 }
                 else
                 {
-                    return CreateConstant();
+                    return ConstantExpression;
                 }
             }
 
@@ -300,20 +323,24 @@ namespace SonarAnalyzer.Security.Ucfg
                 symbol is ILocalSymbol local && local.Type.Is(KnownType.System_String) ||
                 symbol is IParameterSymbol parameter && parameter.Type.Is(KnownType.System_String);
 
-            private string GetTempVariable() =>
-                $"%{tempVariablesCounter++}";
-
-            private Expression CreateExpression(IdentifierNameSyntax identifierName)
+            private Instruction CreateInstruction(SyntaxNode syntaxNode, string methodId, string variable, params Expression[] arguments)
             {
-                var symbol = GetSymbol(identifierName);
-                return IsLocalVarOrParameterOfTypeString(symbol) ? CreateVariable(symbol.Name) : CreateConstant();
+                var instruction = new Instruction
+                {
+                    Location = GetLocation(syntaxNode),
+                    MethodId = methodId,
+                    Variable = variable ?? ConstantExpression.Const.Value,
+                };
+                instruction.Args.AddRange(arguments);
+                basicBlock.Instructions.Add(instruction);
+                return instruction;
             }
 
-            public static Expression CreateVariable(string name) =>
-                new Expression { Var = new Variable { Name = name } };
+            private string CreateTempVariable() =>
+                $"%{tempVariablesCounter++}";
 
-            public static Expression CreateConstant() =>
-                new Expression { Const = new Constant { Value = Const } };
+            private static Expression CreateVariableExpression(string name) =>
+                new Expression { Var = new Variable { Name = name } };
 
             private ISymbol GetSymbol(SyntaxNode syntaxNode) =>
                 semanticModel.GetSymbolInfo(syntaxNode).Symbol;
@@ -324,8 +351,8 @@ namespace SonarAnalyzer.Security.Ucfg
             private readonly Dictionary<Block, string> map = new Dictionary<Block, string>();
             private int counter;
 
-            public string Get(Block block) =>
-                map.GetOrAdd(block, b => $"{counter++}");
+            public string Get(Block cfgBlock) =>
+                map.GetOrAdd(cfgBlock, b => $"{counter++}");
         }
     }
 }

@@ -22,8 +22,22 @@ namespace SonarAnalyzer.Security.Ucfg
 {
     public static class KnownMethodId
     {
+        /// <summary>
+        /// The method ID that the Security Engine uses for assignments. It accepts one argument
+        /// and returns one value. For example, `a = x` generates `a = __id(x)`.
+        /// </summary>
         public static readonly string Assignment = "__id";
+
+        /// <summary>
+        /// The method ID that the Security Engine uses for concatenations. It accepts two
+        /// arguments and returns one value. For example, `x + y` generates `%0 = __concat(x, y)`
+        /// </summary>
         public static readonly string Concatenation = "__concat";
+
+        /// <summary>
+        /// The method ID used by the UCFG Builder to represent a method that has no symbol.
+        /// The instructions with this method ID are removed from UCFG.
+        /// </summary>
         public static readonly string Unknown = "__unknown";
     }
 }

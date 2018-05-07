@@ -133,7 +133,7 @@ class Program
                 this.workDir = workDir;
             }
 
-            public string GetProjectOutput(AnalyzerOptions options)
+            public string GetProjectOutputPath(AnalyzerOptions options)
             {
                 return workDir;
             }

@@ -27,7 +27,7 @@ namespace SonarAnalyzer.Common
 {
     public class DefaultAnalyzerConfiguration : IAnalyzerConfiguration
     {
-        public string GetProjectOutput(AnalyzerOptions options)
+        public string GetProjectOutputPath(AnalyzerOptions options)
         {
             var projectOutputAdditionalFile = options.AdditionalFiles
                 .FirstOrDefault(UtilityAnalyzerBase.IsProjectOutput);

@@ -23,10 +23,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using csharp::SonarAnalyzer.Security.Ucfg;
+using csharp::SonarAnalyzer.SymbolicExecution.ControlFlowGraph;
 using FluentAssertions;
+using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Protobuf.Ucfg;
-using csharp::SonarAnalyzer.SymbolicExecution.ControlFlowGraph;
 
 namespace SonarAnalyzer.UnitTest.Security.Ucfg
 {
@@ -111,8 +112,8 @@ namespace Namespace
             var ucfg = GetUcfgForMethod(code, "Foo");
             ucfg.BasicBlocks.Should().HaveCount(1);
             AssertCollection(ucfg.BasicBlocks[0].Instructions,
-                i => ValidateInstruction(i, Enumerable_Count_Id, "", new[] { "s", "\"\"" }),
-                i => ValidateInstruction(i, Enumerable_Count_Id, "", new[] { "s", "\"\"" })
+                i => ValidateInstruction(i, Enumerable_Count_Id, "%0", new[] { "s", "\"\"" }),
+                i => ValidateInstruction(i, Enumerable_Count_Id, "%1", new[] { "s", "\"\"" })
                 );
         }
 
@@ -155,19 +156,19 @@ namespace Namespace
         {
             string a;
 
-            Property = s;       // Class1.set_Property(s)
-            a = Property;       // %0 = Class1.get_Property()
-                                // a = __id(%0)
+            Property = s;       // %0 = Class1.set_Property(s)
+            a = Property;       // %1 = Class1.get_Property()
+                                // a = __id(%1)
 
-            Property = Property;// %1 = Class1.get_Property()
-                                // Class1.set_Property(%1)
+            Property = Property;// %2 = Class1.get_Property()
+                                // %3 = Class1.set_Property(%2)
 
-            Foo(Property);      // %2 = Class1.get_Property()
-                                // %3 = Class1.Foo(%2)
+            Foo(Property);      // %4 = Class1.get_Property()
+                                // %5 = Class1.Foo(%4)
 
-            Property = Foo(Property);   // %4 = Class1.get_Property()
-                                        // %5 = Foo(%4)
-                                        // Class1.set_Property(%5)
+            Property = Foo(Property);   // %6 = Class1.get_Property()
+                                        // %7 = Foo(%6)
+                                        // %8 = Class1.set_Property(%7)
 
             return s;
         }
@@ -178,19 +179,19 @@ namespace Namespace
             ucfg.BasicBlocks.Should().HaveCount(1);
 
             AssertCollection(ucfg.BasicBlocks[0].Instructions,
-                i => ValidateInstruction(i, CompiledId("Class1.set_Property", StringId), string.Empty, new[] { "s" }),
-                i => ValidateInstruction(i, CompiledId("Class1.get_Property"), "%0"),
-                i => ValidateInstruction(i, KnownMethodId.Assignment, "a", new[] { "%0" }),
-
+                i => ValidateInstruction(i, CompiledId("Class1.set_Property", StringId), "%0", new[] { "s" }),
                 i => ValidateInstruction(i, CompiledId("Class1.get_Property"), "%1"),
-                i => ValidateInstruction(i, CompiledId("Class1.set_Property", StringId), string.Empty, new[] { "%1" }),
+                i => ValidateInstruction(i, KnownMethodId.Assignment, "a", new[] { "%1" }),
 
                 i => ValidateInstruction(i, CompiledId("Class1.get_Property"), "%2"),
-                i => ValidateInstruction(i, CompiledId("Class1.Foo", StringId), "%3", new[] { "%2" }),
+                i => ValidateInstruction(i, CompiledId("Class1.set_Property", StringId), "%3", new[] { "%2" }),
 
                 i => ValidateInstruction(i, CompiledId("Class1.get_Property"), "%4"),
                 i => ValidateInstruction(i, CompiledId("Class1.Foo", StringId), "%5", new[] { "%4" }),
-                i => ValidateInstruction(i, CompiledId("Class1.set_Property", StringId), string.Empty, new[] { "%5" })
+
+                i => ValidateInstruction(i, CompiledId("Class1.get_Property"), "%6"),
+                i => ValidateInstruction(i, CompiledId("Class1.Foo", StringId), "%7", new[] { "%6" }),
+                i => ValidateInstruction(i, CompiledId("Class1.set_Property", StringId), "%8", new[] { "%7" })
                 );
         }
 
@@ -226,7 +227,7 @@ namespace Namespace
             ucfg.BasicBlocks.Should().HaveCount(1);
             AssertCollection(ucfg.BasicBlocks[0].Instructions,
                 i => ValidateInstruction(i, KnownMethodId.Assignment, "a", new[] { "s" }),
-                i => ValidateInstruction(i, "__concat", "%0", new[] { "s", "s" }),
+                i => ValidateInstruction(i, KnownMethodId.Concatenation, "%0", new[] { "s", "s" }),
                 i => ValidateInstruction(i, KnownMethodId.Assignment, "a", new[] { "%0" }),
                 i => ValidateInstruction(i, KnownMethodId.Concatenation, "%1", new[] { "s", "s" }),
                 i => ValidateInstruction(i, KnownMethodId.Concatenation, "%2", new[] { "s", "%1" }),
@@ -235,33 +236,6 @@ namespace Namespace
                 i => ValidateInstruction(i, KnownMethodId.Concatenation, "%4", new[] { "t", "%3" }),
                 i => ValidateInstruction(i, KnownMethodId.Assignment, "a", new[] { "%4" })
                 );
-        }
-
-        [TestMethod]
-        public void Assignments_temp()
-        {
-            const string code = @"
-using System;
-using System.Linq;
-namespace Namespace
-{
-    public class Class1
-    {
-        private int _count;
-        private Node _tail;
-        private Node _head;
-        internal void Foo()
-        {
-            _count = 0;
-            _tail = _head = new Node();
-        }
-    }
-    public class Node {}
-}";
-            var ucfg = GetUcfgForMethod(code, "Foo");
-
-            ucfg.BasicBlocks.Should().HaveCount(1);
-            AssertCollection(ucfg.BasicBlocks[0].Instructions);
         }
 
         [TestMethod]
@@ -285,10 +259,10 @@ namespace Namespace
                                     // a = __id(%2)
 
             Bar(s.ToLower());       // %3 = string.ToLower(s)
-                                    // Bar(%3)
+                                    // %4 = Bar(%3)
 
-            a = string.IsNullOrEmpty(s);    // const = string.IsNullOrEmpty(s);
-                                            // a = __id(const)
+            a = string.IsNullOrEmpty(s);    // %5 = string.IsNullOrEmpty(s);
+                                            // a = _id(const) // not using %5 because it is not string
         }
 
         public void Bar(string s) { }
@@ -304,8 +278,8 @@ namespace Namespace
                 i => ValidateInstruction(i, String_ToLower_Id, "%2", new[] { "%1" }),
                 i => ValidateInstruction(i, KnownMethodId.Assignment, "a", new[] { "%2" }),
                 i => ValidateInstruction(i, String_ToLower_Id, "%3", new[] { "s" }),
-                i => ValidateInstruction(i, CompiledId("Class1.Bar", StringId), string.Empty, new[] { "%3" }),
-                i => ValidateInstruction(i, String_IsNullOrEmpty_Id, string.Empty, new[] { "s" }),
+                i => ValidateInstruction(i, CompiledId("Class1.Bar", StringId), "%4", new[] { "%3" }),
+                i => ValidateInstruction(i, String_IsNullOrEmpty_Id, "%5", new[] { "s" }),
                 i => ValidateInstruction(i, KnownMethodId.Assignment, "a", new[] { "\"\"" })
                 );
         }
@@ -352,16 +326,41 @@ namespace Namespace
                 );
         }
 
+        [TestMethod]
+        public void ConstantExpressions_Share_The_Same_Instance()
+        {
+            const string code = @"
+public class Class1
+{
+    private string field;
+    public void Foo(string s)
+    {
+        string a = ""a""; // a = __id(const)
+        string b = ""b""; // b = __id(const)
+        string c = ""c""; // c = __id(const)
+    }
+}";
+            var ucfg = GetUcfgForMethod(code, "Foo");
+
+            var a = ucfg.BasicBlocks[0].Instructions[0].Args[0];
+            var b = ucfg.BasicBlocks[0].Instructions[1].Args[0];
+            var c = ucfg.BasicBlocks[0].Instructions[2].Args[0];
+
+            // The constant expressions share the same instance of the Const value
+            // for performance and simplicity. The protobuf serializer will deserialize
+            // the values as a singleton again.
+            a.Should().Be(b);
+            a.Should().Be(c);
+        }
+
         private UCFG GetUcfgForMethod(string code, string methodName)
         {
             (var method, var semanticModel) = TestHelper.Compile(code).GetMethod(methodName);
 
-            var blocks = new UniversalControlFlowGraphBuilder(semanticModel,
-                CSharpControlFlowGraph.Create(method.Body, semanticModel)).Build();
+            var builder = new UniversalControlFlowGraphBuilder(semanticModel,
+                CSharpControlFlowGraph.Create(method.Body, semanticModel));
 
-            var ucfg = new UCFG();
-            ucfg.BasicBlocks.AddRange(blocks);
-            return ucfg;
+            return builder.Build(method, semanticModel.GetDeclaredSymbol(method));
         }
 
         private static void AssertCollection<T>(IList<T> items, params Action<T>[] asserts)
@@ -377,6 +376,7 @@ namespace Namespace
         {
             instruction.MethodId.Should().Be(methodId);
             instruction.Variable.Should().Be(variable);
+            instruction.Location.Should().NotBeNull();
             if (args.Length > 0)
             {
                 instruction.Args.Select(x => x.Var?.Name ?? x.Const?.Value).ShouldBeEquivalentTo(args, o => o.WithStrictOrdering());
