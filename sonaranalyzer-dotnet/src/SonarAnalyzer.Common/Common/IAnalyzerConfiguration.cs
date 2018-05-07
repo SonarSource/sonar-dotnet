@@ -24,6 +24,6 @@ namespace SonarAnalyzer.Common
 {
     public interface IAnalyzerConfiguration
     {
-        string GetProjectOutput(AnalyzerOptions options);
+        string GetProjectOutputPath(AnalyzerOptions options);
    }
 }
