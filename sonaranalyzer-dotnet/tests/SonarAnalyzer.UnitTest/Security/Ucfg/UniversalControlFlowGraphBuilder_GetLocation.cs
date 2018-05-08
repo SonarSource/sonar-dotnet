@@ -23,6 +23,7 @@ using csharp::SonarAnalyzer.Security.Ucfg;
 using csharp::SonarAnalyzer.SymbolicExecution.ControlFlowGraph;
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Protobuf.Ucfg;
 using ULocation = SonarAnalyzer.Protobuf.Ucfg.Location;
