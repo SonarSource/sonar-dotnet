@@ -151,16 +151,20 @@ namespace SonarAnalyzer.Rules.CSharp
 
             var symbol = context.SemanticModel.GetDeclaredSymbol(declaration);
 
-            if (symbol == null ||
-                symbol.IsAbstract ||
-                symbol.IsExtern ||
+            var methodSymbol = (symbol is IPropertySymbol propertySymbol)
+                ? propertySymbol.GetMethod // We are in PropertyDeclarationSyntax
+                : symbol as IMethodSymbol; // all other are methods
+
+            if (methodSymbol == null ||
+                methodSymbol.IsAbstract ||
+                methodSymbol.IsExtern ||
                 !CSharpControlFlowGraph.TryGet(getBody(declaration), context.SemanticModel, out var cfg))
             {
                 return;
             }
 
             var ucfg = new UniversalControlFlowGraphBuilder(context.SemanticModel, cfg)
-                .Build(declaration, symbol);
+                .Build(declaration, methodSymbol);
 
             var path = Path.Combine(protobufDirectory, $"ucfg_{projectBuildId}_{Interlocked.Increment(ref protobufFileIndex)}.pb");
             using (var stream = File.Create(path))
