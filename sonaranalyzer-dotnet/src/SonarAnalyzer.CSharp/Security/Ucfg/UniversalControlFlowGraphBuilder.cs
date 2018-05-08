@@ -52,16 +52,16 @@ namespace SonarAnalyzer.Security.Ucfg
             this.cfg = cfg;
         }
 
-        public UCFG Build(SyntaxNode syntaxNode, ISymbol symbol)
+        public UCFG Build(SyntaxNode syntaxNode, IMethodSymbol methodSymbol)
         {
             var ucfg = new UCFG
             {
-                MethodId = MethodIdProvider.Create(symbol),
+                MethodId = GetMethodId(methodSymbol),
                 Location = GetLocation(syntaxNode),
             };
 
             ucfg.BasicBlocks.AddRange(cfg.Blocks.Where(IsSupportedBlock).Select(CreateBasicBlock));
-            ucfg.Parameters.AddRange(symbol.GetParameters().Select(p => p.Name));
+            ucfg.Parameters.AddRange(methodSymbol.GetParameters().Select(p => p.Name));
             ucfg.Entries.Add(blockId.Get(cfg.EntryBlock));
             return ucfg;
         }
@@ -115,6 +115,13 @@ namespace SonarAnalyzer.Security.Ucfg
                 EndLine = lineSpan.EndLinePosition.Line,
                 EndLineOffset = lineSpan.EndLinePosition.Character,
             };
+        }
+
+        public static string GetMethodId(IMethodSymbol methodSymbol)
+        {
+            // Generic methods and methods declared in a base class
+            var originalSymbol = methodSymbol?.ReducedFrom ?? methodSymbol?.OriginalDefinition;
+            return originalSymbol?.ToDisplayString() ?? KnownMethodId.Unknown;
         }
 
         private class InstructionBuilder
@@ -187,7 +194,7 @@ namespace SonarAnalyzer.Security.Ucfg
                 {
                     var instruction = CreateInstruction(
                         identifier,
-                        methodId: MethodIdProvider.Create(property.GetMethod),
+                        methodId: GetMethodId(property.GetMethod),
                         variable: CreateTempVariable());
                     return CreateVariableExpression(instruction.Variable);
                 }
@@ -253,7 +260,7 @@ namespace SonarAnalyzer.Security.Ucfg
 
                 var instruction = CreateInstruction(
                     invocation,
-                    methodId: MethodIdProvider.Create(methodSymbol),
+                    methodId: GetMethodId(methodSymbol),
                     variable: CreateTempVariable(),
                     arguments: arguments);
 
@@ -302,7 +309,7 @@ namespace SonarAnalyzer.Security.Ucfg
                 {
                     var instruction = CreateInstruction(
                         assignment,
-                        methodId: MethodIdProvider.Create(property.SetMethod),
+                        methodId: GetMethodId(property.SetMethod),
                         variable: CreateTempVariable(),
                         arguments: BuildInstruction(assignment.Right));
                     return CreateVariableExpression(instruction.Variable);

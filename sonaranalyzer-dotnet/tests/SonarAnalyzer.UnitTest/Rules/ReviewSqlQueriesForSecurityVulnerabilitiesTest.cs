@@ -103,13 +103,13 @@ class Program
             Directory.GetFiles(ucfgPath).Select(GetProtobufMethodId).Should().BeEquivalentTo(
                 new[]
                 {
-                    "foo.dll;Program.get_Property1()",
-                    "foo.dll;Program.get_Property2()",
-                    "foo.dll;Program.set_Property2(mscorlib;string)",
-                    "foo.dll;Program..ctor(mscorlib;string)",
-                    "foo.dll;Program.op_Addition(foo.dll;Program,mscorlib;string)",
-                    "foo.dll;Program.Method1(mscorlib;string)",
-                    "foo.dll;Program.Method2()",
+                    "Program.Property1.get",
+                    "Program.Property2.get",
+                    "Program.Property2.set",
+                    "Program.Program(string)",
+                    "Program.operator +(Program, string)",
+                    "Program.Method1(string)",
+                    "Program.Method2()",
                 });
         }
 

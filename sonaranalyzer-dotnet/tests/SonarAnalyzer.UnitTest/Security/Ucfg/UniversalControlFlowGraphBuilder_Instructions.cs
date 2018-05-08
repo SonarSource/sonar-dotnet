@@ -28,6 +28,7 @@ using FluentAssertions;
 using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Protobuf.Ucfg;
+using Microsoft.CodeAnalysis.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Security.Ucfg
 {
@@ -156,19 +157,19 @@ namespace Namespace
         {
             string a;
 
-            Property = s;       // %0 = Class1.set_Property(s)
-            a = Property;       // %1 = Class1.get_Property()
+            Property = s;       // %0 = Class1.Property.set(s)
+            a = Property;       // %1 = Class1.Property.get()
                                 // a = __id(%1)
 
-            Property = Property;// %2 = Class1.get_Property()
-                                // %3 = Class1.set_Property(%2)
+            Property = Property;// %2 = Class1.Property.get()
+                                // %3 = Class1.Property.set(%2)
 
-            Foo(Property);      // %4 = Class1.get_Property()
+            Foo(Property);      // %4 = Class1.Property.get()
                                 // %5 = Class1.Foo(%4)
 
-            Property = Foo(Property);   // %6 = Class1.get_Property()
+            Property = Foo(Property);   // %6 = Class1.Property.get()
                                         // %7 = Foo(%6)
-                                        // %8 = Class1.set_Property(%7)
+                                        // %8 = Class1.Property.set(%7)
 
             return s;
         }
@@ -179,19 +180,19 @@ namespace Namespace
             ucfg.BasicBlocks.Should().HaveCount(1);
 
             AssertCollection(ucfg.BasicBlocks[0].Instructions,
-                i => ValidateInstruction(i, CompiledId("Class1.set_Property", StringId), "%0", new[] { "s" }),
-                i => ValidateInstruction(i, CompiledId("Class1.get_Property"), "%1"),
+                i => ValidateInstruction(i, "Namespace.Class1.Property.set", "%0", new[] { "s" }),
+                i => ValidateInstruction(i, "Namespace.Class1.Property.get", "%1"),
                 i => ValidateInstruction(i, KnownMethodId.Assignment, "a", new[] { "%1" }),
 
-                i => ValidateInstruction(i, CompiledId("Class1.get_Property"), "%2"),
-                i => ValidateInstruction(i, CompiledId("Class1.set_Property", StringId), "%3", new[] { "%2" }),
+                i => ValidateInstruction(i, "Namespace.Class1.Property.get", "%2"),
+                i => ValidateInstruction(i, "Namespace.Class1.Property.set", "%3", new[] { "%2" }),
 
-                i => ValidateInstruction(i, CompiledId("Class1.get_Property"), "%4"),
-                i => ValidateInstruction(i, CompiledId("Class1.Foo", StringId), "%5", new[] { "%4" }),
+                i => ValidateInstruction(i, "Namespace.Class1.Property.get", "%4"),
+                i => ValidateInstruction(i, "Namespace.Class1.Foo(string)", "%5", new[] { "%4" }),
 
-                i => ValidateInstruction(i, CompiledId("Class1.get_Property"), "%6"),
-                i => ValidateInstruction(i, CompiledId("Class1.Foo", StringId), "%7", new[] { "%6" }),
-                i => ValidateInstruction(i, CompiledId("Class1.set_Property", StringId), "%8", new[] { "%7" })
+                i => ValidateInstruction(i, "Namespace.Class1.Property.get", "%6"),
+                i => ValidateInstruction(i, "Namespace.Class1.Foo(string)", "%7", new[] { "%6" }),
+                i => ValidateInstruction(i, "Namespace.Class1.Property.set", "%8", new[] { "%7" })
                 );
         }
 
@@ -278,7 +279,7 @@ namespace Namespace
                 i => ValidateInstruction(i, String_ToLower_Id, "%2", new[] { "%1" }),
                 i => ValidateInstruction(i, KnownMethodId.Assignment, "a", new[] { "%2" }),
                 i => ValidateInstruction(i, String_ToLower_Id, "%3", new[] { "s" }),
-                i => ValidateInstruction(i, CompiledId("Class1.Bar", StringId), "%4", new[] { "%3" }),
+                i => ValidateInstruction(i, "Namespace.Class1.Bar(string)", "%4", new[] { "%3" }),
                 i => ValidateInstruction(i, String_IsNullOrEmpty_Id, "%5", new[] { "s" }),
                 i => ValidateInstruction(i, KnownMethodId.Assignment, "a", new[] { "\"\"" })
                 );
@@ -317,11 +318,11 @@ namespace Namespace
 
             ucfg.BasicBlocks.Should().HaveCount(1);
             AssertCollection(ucfg.BasicBlocks[0].Instructions,
-                i => ValidateInstruction(i, CompiledId("Extensions.Ext", StringId), "%0", new[] { "s" }),
+                i => ValidateInstruction(i, "Namespace.Extensions.Ext(string)", "%0", new[] { "s" }),
                 i => ValidateInstruction(i, KnownMethodId.Assignment, "a", new[] { "%0" }),
-                i => ValidateInstruction(i, CompiledId("Extensions.Ext", StringId), "%1", new[] { "s" }),
+                i => ValidateInstruction(i, "Namespace.Extensions.Ext(string)", "%1", new[] { "s" }),
                 i => ValidateInstruction(i, KnownMethodId.Assignment, "a", new[] { "%1" }),
-                i => ValidateInstruction(i, CompiledId("Extensions.Ext", StringId), "%2", new[] { "\"\"" }),
+                i => ValidateInstruction(i, "Namespace.Extensions.Ext(string)", "%2", new[] { "\"\"" }),
                 i => ValidateInstruction(i, KnownMethodId.Assignment, "a", new[] { "%2" })
                 );
         }
@@ -387,12 +388,10 @@ public class Class1
             }
         }
 
-        private const string StringId = "mscorlib;string";
-        private const string String_ToLower_Id = StringId + ".ToLower()";
-        private const string String_IsNullOrEmpty_Id = StringId + ".IsNullOrEmpty(" + StringId + ")";
-        private const string Enumerable_Select_Id = "System.Core;System.Linq.Enumerable.Select<TSource,TResult>(mscorlib;System.Collections.Generic.IEnumerable<TSource>,mscorlib;System.Func<TSource, TResult>)";
-        private const string Enumerable_Count_Id = "System.Core;System.Linq.Enumerable.Count<TSource>(mscorlib;System.Collections.Generic.IEnumerable<TSource>,mscorlib;System.Func<TSource, bool>)";
-        private static string CompiledId(string classNameAndmethodName, params string[] parameters) =>
-            $"project.dll;Namespace.{classNameAndmethodName}({string.Join(",", parameters)})";
+        private const string StringId = "string";
+        private const string String_ToLower_Id = "string.ToLower()";
+        private const string String_IsNullOrEmpty_Id = "string.IsNullOrEmpty(string)";
+        private const string Enumerable_Select_Id = "System.Linq.Enumerable.Select<TSource, TResult>(System.Collections.Generic.IEnumerable<TSource>, System.Func<TSource, TResult>)";
+        private const string Enumerable_Count_Id = "System.Linq.Enumerable.Count<TSource>(System.Collections.Generic.IEnumerable<TSource>, System.Func<TSource, bool>)";
     }
 }

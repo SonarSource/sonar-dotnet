@@ -28,13 +28,14 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace SonarAnalyzer.UnitTest.Security.Ucfg
 {
     [TestClass]
-    public class MethodIdProvider_Create
+    public class UniversalControlFlowGraphBuilder_GetMethodId
     {
         [TestMethod]
-        public void MethodIdProvider_Create_Methods()
+        public void GetMethodId_Methods()
         {
             const string code = @"
 using System;
+using System.Collections.Generic;
 namespace Namespace
 {
     public class Class1
@@ -43,11 +44,15 @@ namespace Namespace
         public void PrimitiveTypes2(String s) { }
         public void PrimitiveTypes3(System.String s) { }
 
-        public void ArrayTypes(string[] s) { } // TODO: improve array type signature
+        public void ArrayTypes1(string[] s) { }
+        public void ArrayTypes2(string[,] s) { }
+        public void ArrayTypes3(string[][] s) { }
 
         public void UserType(Class1 s) { }
         public void SystemType(Uri uri) { }
         public void GenericMethod1<T1,T2>(T1 x) { }
+
+        public void GenericArgument(IEnumerable<string> strings) { }
 
         public void Overload1(string s) { }
         public void Overload1(string s, string s) { }
@@ -90,29 +95,32 @@ public class Class3
 }";
             var (syntaxTree, semanticModel) = TestHelper.Compile(code);
 
-            MethodId("PrimitiveTypes1").Should().Be("project.dll;Namespace.Class1.PrimitiveTypes1(mscorlib;string)");
-            MethodId("PrimitiveTypes2").Should().Be("project.dll;Namespace.Class1.PrimitiveTypes2(mscorlib;string)");
-            MethodId("PrimitiveTypes3").Should().Be("project.dll;Namespace.Class1.PrimitiveTypes3(mscorlib;string)");
-            MethodId("ArrayTypes").Should().Be("project.dll;Namespace.Class1.ArrayTypes(__unknown)");
-            MethodId("UserType").Should().Be("project.dll;Namespace.Class1.UserType(project.dll;Namespace.Class1)");
-            MethodId("SystemType").Should().Be("project.dll;Namespace.Class1.SystemType(System;System.Uri)");
-            MethodId("GenericMethod1").Should().Be("project.dll;Namespace.Class1.GenericMethod1<T1,T2>(T1)");
-            MethodId("Overload1").Should().Be("project.dll;Namespace.Class1.Overload1(mscorlib;string)");
-            MethodId("Overload1", skip: 1).Should().Be("project.dll;Namespace.Class1.Overload1(mscorlib;string,mscorlib;string)");
-            MethodId("GenericMethod2").Should().Be("project.dll;Namespace.GenericClass<T1>.GenericMethod2(T1)");
-            MethodId("GenericMethod3").Should().Be("project.dll;Namespace.GenericClass<T1>.GenericMethod3<T2>(T1,T2)");
-            MethodId("InnerClass").Should().Be("project.dll;Namespace.Class1.Class2.InnerClass(project.dll;Namespace.Class1.Class2)");
-            MethodId("Method1").Should().Be("project.dll;Namespace.BaseClass<T1>.Method1(T1)");
-            MethodId("Method1", skip: 1).Should().Be("project.dll;Namespace.Descendant.Method1(mscorlib;string)");
-            MethodId("InnerNamespace").Should().Be("project.dll;Namespace.Inner.Class2.InnerNamespace()");
-            MethodId("NoNamespace").Should().Be("project.dll;Class3.NoNamespace(project.dll;Class3)");
+            MethodId("PrimitiveTypes1").Should().Be("Namespace.Class1.PrimitiveTypes1(string)");
+            MethodId("PrimitiveTypes2").Should().Be("Namespace.Class1.PrimitiveTypes2(string)");
+            MethodId("PrimitiveTypes3").Should().Be("Namespace.Class1.PrimitiveTypes3(string)");
+            MethodId("ArrayTypes1").Should().Be("Namespace.Class1.ArrayTypes1(string[])");
+            MethodId("ArrayTypes2").Should().Be("Namespace.Class1.ArrayTypes2(string[*,*])");
+            MethodId("ArrayTypes3").Should().Be("Namespace.Class1.ArrayTypes3(string[][])");
+            MethodId("UserType").Should().Be("Namespace.Class1.UserType(Namespace.Class1)");
+            MethodId("SystemType").Should().Be("Namespace.Class1.SystemType(System.Uri)");
+            MethodId("GenericMethod1").Should().Be("Namespace.Class1.GenericMethod1<T1, T2>(T1)");
+            MethodId("GenericArgument").Should().Be("Namespace.Class1.GenericArgument(System.Collections.Generic.IEnumerable<string>)");
+            MethodId("Overload1").Should().Be("Namespace.Class1.Overload1(string)");
+            MethodId("Overload1", skip: 1).Should().Be("Namespace.Class1.Overload1(string, string)");
+            MethodId("GenericMethod2").Should().Be("Namespace.GenericClass<T1>.GenericMethod2(T1)");
+            MethodId("GenericMethod3").Should().Be("Namespace.GenericClass<T1>.GenericMethod3<T2>(T1, T2)");
+            MethodId("InnerClass").Should().Be("Namespace.Class1.Class2.InnerClass(Namespace.Class1.Class2)");
+            MethodId("Method1").Should().Be("Namespace.BaseClass<T1>.Method1(T1)");
+            MethodId("Method1", skip: 1).Should().Be("Namespace.Descendant.Method1(string)");
+            MethodId("InnerNamespace").Should().Be("Namespace.Inner.Class2.InnerNamespace()");
+            MethodId("NoNamespace").Should().Be("Class3.NoNamespace(Class3)");
 
             string MethodId(string methodName, int skip = 0) =>
-                MethodIdProvider.Create(semanticModel.GetDeclaredSymbol(syntaxTree.GetMethod(methodName, skip)));
+                UniversalControlFlowGraphBuilder.GetMethodId(semanticModel.GetDeclaredSymbol(syntaxTree.GetMethod(methodName, skip)));
         }
 
         [TestMethod]
-        public void MethodIdProvider_Create_Properties()
+        public void GetMethodId_Properties()
         {
             const string code = @"
 using System;
@@ -161,32 +169,32 @@ public class Class3
 }";
             var (syntaxTree, semanticModel) = TestHelper.Compile(code);
 
-            PropertyGetId("Property1").Should().Be("project.dll;Namespace.Class1.get_Property1()");
-            PropertySetId("Property1").Should().Be("project.dll;Namespace.Class1.set_Property1(mscorlib;string)");
+            PropertyGetId("Property1").Should().Be("Namespace.Class1.Property1.get");
+            PropertySetId("Property1").Should().Be("Namespace.Class1.Property1.set");
 
-            PropertyGetId("Property2").Should().Be("project.dll;Namespace.Class1.get_Property2()");
+            PropertyGetId("Property2").Should().Be("Namespace.Class1.Property2.get");
             PropertySetId("Property2").Should().Be(KnownMethodId.Unknown);
 
-            PropertyGetId("Property3").Should().Be("project.dll;Namespace.GenericClass<T1>.get_Property3()");
-            PropertySetId("Property3").Should().Be("project.dll;Namespace.GenericClass<T1>.set_Property3(T1)");
+            PropertyGetId("Property3").Should().Be("Namespace.GenericClass<T1>.Property3.get");
+            PropertySetId("Property3").Should().Be("Namespace.GenericClass<T1>.Property3.set");
 
-            PropertyGetId("Property4").Should().Be("project.dll;Namespace.BaseClass<T1>.get_Property4()");
-            PropertySetId("Property4").Should().Be("project.dll;Namespace.BaseClass<T1>.set_Property4(T1)");
+            PropertyGetId("Property4").Should().Be("Namespace.BaseClass<T1>.Property4.get");
+            PropertySetId("Property4").Should().Be("Namespace.BaseClass<T1>.Property4.set");
 
-            PropertyGetId("Property4", 1).Should().Be("project.dll;Namespace.Descendant.get_Property4()");
-            PropertySetId("Property4", 1).Should().Be("project.dll;Namespace.Descendant.set_Property4(mscorlib;string)");
+            PropertyGetId("Property4", 1).Should().Be("Namespace.Descendant.Property4.get");
+            PropertySetId("Property4", 1).Should().Be("Namespace.Descendant.Property4.set");
 
-            PropertyGetId("Property5").Should().Be("project.dll;Namespace.Inner.Class2.get_Property5()");
-            PropertySetId("Property5").Should().Be("project.dll;Namespace.Inner.Class2.set_Property5(mscorlib;string)");
+            PropertyGetId("Property5").Should().Be("Namespace.Inner.Class2.Property5.get");
+            PropertySetId("Property5").Should().Be("Namespace.Inner.Class2.Property5.set");
 
-            PropertyGetId("Property6").Should().Be("project.dll;Class3.get_Property6()");
-            PropertySetId("Property6").Should().Be("project.dll;Class3.set_Property6(mscorlib;string)");
+            PropertyGetId("Property6").Should().Be("Class3.Property6.get");
+            PropertySetId("Property6").Should().Be("Class3.Property6.set");
 
             string PropertyGetId(string propertyName, int skip = 0) =>
-                MethodIdProvider.Create(semanticModel.GetDeclaredSymbol(syntaxTree.GetProperty(propertyName, skip)).GetMethod);
+                UniversalControlFlowGraphBuilder.GetMethodId(semanticModel.GetDeclaredSymbol(syntaxTree.GetProperty(propertyName, skip)).GetMethod);
 
             string PropertySetId(string propertyName, int skip = 0) =>
-                MethodIdProvider.Create(semanticModel.GetDeclaredSymbol(syntaxTree.GetProperty(propertyName, skip)).SetMethod);
+                UniversalControlFlowGraphBuilder.GetMethodId(semanticModel.GetDeclaredSymbol(syntaxTree.GetProperty(propertyName, skip)).SetMethod);
         }
     }
 }
