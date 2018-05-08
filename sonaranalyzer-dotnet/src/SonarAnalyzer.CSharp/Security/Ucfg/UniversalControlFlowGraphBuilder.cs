@@ -103,6 +103,11 @@ namespace SonarAnalyzer.Security.Ucfg
         private static bool IsSupportedBlock(Block block) =>
             !(block is ExitBlock);
 
+        /// <summary>
+        /// Returns UCFG Location that represents the location of the provided SyntaxNode
+        /// in SonarQube coordinates - 1-based line numbers and 0-based columns (line offsets).
+        /// Roslyn coordinates are 0-based.
+        /// </summary>
         private static UcfgLocation GetLocation(SyntaxNode syntaxNode)
         {
             var location = syntaxNode.GetLocation();
@@ -110,10 +115,10 @@ namespace SonarAnalyzer.Security.Ucfg
             return new UcfgLocation
             {
                 FileId = location.SourceTree.FilePath,
-                StartLine = lineSpan.StartLinePosition.Line,
+                StartLine = lineSpan.StartLinePosition.Line + 1,
                 StartLineOffset = lineSpan.StartLinePosition.Character,
-                EndLine = lineSpan.EndLinePosition.Line,
-                EndLineOffset = lineSpan.EndLinePosition.Character,
+                EndLine = lineSpan.EndLinePosition.Line + 1,
+                EndLineOffset = lineSpan.EndLinePosition.Character - 1,
             };
         }
 
