@@ -332,9 +332,6 @@ public class MetricsTest {
 
   @Test
   public void executableLines() {
-    if (!ORCHESTRATOR.getServer().version().isGreaterThanOrEquals("6.2")) {
-      return;
-    }
 
     String value = getFileMeasure("executable_lines_data").getValue();
 

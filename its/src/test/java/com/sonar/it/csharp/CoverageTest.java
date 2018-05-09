@@ -50,38 +50,20 @@ public class CoverageTest {
   @Test
   public void should_not_import_coverage_without_report() throws Exception {
     BuildResult buildResult = analyzeCoverageTestProject();
-
-    if (orchestrator.getServer().version().isGreaterThanOrEquals("6.5")) {
-      assertThat(buildResult.getLogs()).doesNotContain("C# Tests Coverage Report Import");
-    } else if (orchestrator.getServer().version().isGreaterThanOrEquals("6.2")) {
-      assertThat(buildResult.getLogs()).contains("C# Tests Coverage Report Import");
-    } else {
-      assertThat(buildResult.getLogs()).contains("C# Unit Tests Coverage Report Import");
-    }
+    assertThat(buildResult.getLogs()).doesNotContain("C# Tests Coverage Report Import");
 
     org.sonarqube.ws.WsMeasures.Measure linesToCover = getMeasure("CoverageTest", "lines_to_cover");
     org.sonarqube.ws.WsMeasures.Measure uncoveredLines = getMeasure("CoverageTest", "uncovered_lines");
 
-    if (orchestrator.getServer().version().isGreaterThanOrEquals("6.2")) {
-      // In SQ 6.2+, executable lines are calculated even if there is no coverage report
-
-      assertThat(linesToCover.getValue()).isEqualTo("2");
-      assertThat(uncoveredLines.getValue()).isEqualTo("2");
-    } else {
-      assertThat(linesToCover).isNull();
-      assertThat(uncoveredLines).isNull();
-    }
-  }
+    assertThat(linesToCover.getValue()).isEqualTo("2");
+    assertThat(uncoveredLines.getValue()).isEqualTo("2");
+}
 
   @Test
   public void ncover3() throws Exception {
     BuildResult buildResult = analyzeCoverageTestProject("sonar.cs.ncover3.reportsPaths", "reports/ncover3.nccov");
 
-    if (orchestrator.getServer().version().isGreaterThanOrEquals("6.2")) {
-      assertThat(buildResult.getLogs()).contains("C# Tests Coverage Report Import");
-    } else {
-      assertThat(buildResult.getLogs()).contains("C# Unit Tests Coverage Report Import");
-    }
+    assertThat(buildResult.getLogs()).contains("C# Tests Coverage Report Import");
     assertThat(getMeasureAsInt("CoverageTest", "lines_to_cover")).isEqualTo(2);
     assertThat(getMeasureAsInt("CoverageTest", "uncovered_lines")).isEqualTo(1);
   }
@@ -90,11 +72,7 @@ public class CoverageTest {
   public void open_cover() throws Exception {
     BuildResult buildResult = analyzeCoverageTestProject("sonar.cs.opencover.reportsPaths", "reports/opencover.xml");
 
-    if (orchestrator.getServer().version().isGreaterThanOrEquals("6.2")) {
-      assertThat(buildResult.getLogs()).contains("C# Tests Coverage Report Import");
-    } else {
-      assertThat(buildResult.getLogs()).contains("C# Unit Tests Coverage Report Import");
-    }
+    assertThat(buildResult.getLogs()).contains("C# Tests Coverage Report Import");
     assertThat(getMeasureAsInt("CoverageTest", "lines_to_cover")).isEqualTo(2);
     assertThat(getMeasureAsInt("CoverageTest", "uncovered_lines")).isEqualTo(0);
   }
@@ -103,11 +81,7 @@ public class CoverageTest {
   public void dotcover() throws Exception {
     BuildResult buildResult = analyzeCoverageTestProject("sonar.cs.dotcover.reportsPaths", "reports/dotcover.html");
 
-    if (orchestrator.getServer().version().isGreaterThanOrEquals("6.2")) {
-      assertThat(buildResult.getLogs()).contains("C# Tests Coverage Report Import");
-    } else {
-      assertThat(buildResult.getLogs()).contains("C# Unit Tests Coverage Report Import");
-    }
+    assertThat(buildResult.getLogs()).contains("C# Tests Coverage Report Import");
     assertThat(getMeasureAsInt("CoverageTest", "lines_to_cover")).isEqualTo(2);
     assertThat(getMeasureAsInt("CoverageTest", "uncovered_lines")).isEqualTo(1);
   }
@@ -116,11 +90,7 @@ public class CoverageTest {
   public void visual_studio() throws Exception {
     BuildResult buildResult = analyzeCoverageTestProject("sonar.cs.vscoveragexml.reportsPaths", "reports/visualstudio.coveragexml");
 
-    if (orchestrator.getServer().version().isGreaterThanOrEquals("6.2")) {
-      assertThat(buildResult.getLogs()).contains("C# Tests Coverage Report Import");
-    } else {
-      assertThat(buildResult.getLogs()).contains("C# Unit Tests Coverage Report Import");
-    }
+    assertThat(buildResult.getLogs()).contains("C# Tests Coverage Report Import");
     assertThat(getMeasureAsInt("CoverageTest", "lines_to_cover")).isEqualTo(2);
     assertThat(getMeasureAsInt("CoverageTest", "uncovered_lines")).isEqualTo(1);
   }
