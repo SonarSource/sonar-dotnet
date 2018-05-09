@@ -18,7 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -44,15 +46,19 @@ namespace SonarAnalyzer.Security.Ucfg
 
         private readonly BlockIdMap blockId = new BlockIdMap();
         private readonly SemanticModel semanticModel;
+        private readonly SyntaxNode syntaxNode;
+        private readonly IMethodSymbol methodSymbol;
         private readonly IControlFlowGraph cfg;
 
-        public UniversalControlFlowGraphBuilder(SemanticModel semanticModel, IControlFlowGraph cfg)
+        public UniversalControlFlowGraphBuilder(SemanticModel semanticModel, SyntaxNode syntaxNode, IMethodSymbol methodSymbol, IControlFlowGraph cfg)
         {
             this.semanticModel = semanticModel;
+            this.syntaxNode = syntaxNode;
+            this.methodSymbol = methodSymbol;
             this.cfg = cfg;
         }
 
-        public UCFG Build(SyntaxNode syntaxNode, IMethodSymbol methodSymbol)
+        public UCFG Build()
         {
             var ucfg = new UCFG
             {
@@ -74,6 +80,16 @@ namespace SonarAnalyzer.Security.Ucfg
             };
 
             var instructionBuilder = new InstructionBuilder(semanticModel, basicBlock);
+
+            if (basicBlock.Id == blockId.Get(cfg.EntryBlock))
+            {
+                instructionBuilder.BuildEntryPoint(methodSymbol);
+
+                foreach (var parameter in methodSymbol.Parameters)
+                {
+                    instructionBuilder.BuildAnnotations(parameter);
+                }
+            }
 
             foreach (var instruction in block.Instructions)
             {
@@ -98,6 +114,11 @@ namespace SonarAnalyzer.Security.Ucfg
             }
 
             return basicBlock;
+        }
+
+        private static bool IsTaintedEntryPoint(IMethodSymbol methodSymbol)
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -142,6 +163,26 @@ namespace SonarAnalyzer.Security.Ucfg
 
             public Expression BuildInstruction(SyntaxNode syntaxNode) =>
                 nodeExpressionMap.GetOrAdd(syntaxNode.RemoveParentheses(), BuildInstructionImpl);
+
+            public void BuildAnnotations(IParameterSymbol parameter)
+            {
+                foreach (var attribute in parameter.GetAttributes())
+                {
+                    var attributeVariable = CreateTempVariable();
+                    CreateInstruction(null, GetMethodId(attribute.AttributeConstructor), attributeVariable);
+                    CreateInstruction(null, KnownMethodId.Annotation, parameter.Name,
+                        CreateVariableExpression(attributeVariable));
+                }
+            }
+
+            public void BuildEntryPoint(IMethodSymbol methodSymbol)
+            {
+                if (IsTaintedEntryPoint(methodSymbol))
+                {
+                    CreateInstruction(null, KnownMethodId.EntryPoint, CreateTempVariable(),
+                        methodSymbol.Parameters.Select(p => CreateVariableExpression(p.Name)).ToArray());
+                }
+            }
 
             private Expression BuildInstructionImpl(SyntaxNode syntaxNode)
             {

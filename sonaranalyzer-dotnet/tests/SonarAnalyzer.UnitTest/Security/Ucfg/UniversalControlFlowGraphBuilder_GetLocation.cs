@@ -102,10 +102,11 @@ s.Trim(                             // 7 x = __id(%0)           --> SL = 6, SLO 
         {
             (var method, var semanticModel) = TestHelper.Compile(code).GetMethod(methodName);
 
-            var builder = new UniversalControlFlowGraphBuilder(semanticModel,
+            var builder = new UniversalControlFlowGraphBuilder(semanticModel, method,
+                semanticModel.GetDeclaredSymbol(method),
                 CSharpControlFlowGraph.Create(method.Body, semanticModel));
 
-            return builder.Build(method, semanticModel.GetDeclaredSymbol(method));
+            return builder.Build();
         }
     }
 }
