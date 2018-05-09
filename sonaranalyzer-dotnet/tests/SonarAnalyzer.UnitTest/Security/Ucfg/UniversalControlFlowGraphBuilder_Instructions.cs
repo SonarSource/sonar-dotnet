@@ -60,7 +60,7 @@ namespace Namespace
 }";
             var ucfg = GetUcfgForMethod(code, "Foo");
 
-            ucfg.BasicBlocks.Should().HaveCount(1);
+            ucfg.BasicBlocks.Should().HaveCount(2);
             AssertCollection(ucfg.BasicBlocks[0].Instructions,
                 i => ValidateInstruction(i, KnownMethodId.Assignment, "a", new[] { "s" }),
                 i => ValidateInstruction(i, KnownMethodId.Assignment, "a", new[] { "\"\"" })
@@ -86,7 +86,7 @@ namespace Namespace
     }
 }";
             var ucfg = GetUcfgForMethod(code, "Foo");
-            ucfg.BasicBlocks.Should().HaveCount(1);
+            ucfg.BasicBlocks.Should().HaveCount(2);
             AssertCollection(ucfg.BasicBlocks[0].Instructions,
                 i => ValidateInstruction(i, KnownMethodId.Assignment, "c", new[] { "\"\"" }),
                 i => ValidateInstruction(i, KnownMethodId.Assignment, "b", new[] { "c" }),
@@ -111,7 +111,7 @@ namespace Namespace
     }
 }";
             var ucfg = GetUcfgForMethod(code, "Foo");
-            ucfg.BasicBlocks.Should().HaveCount(1);
+            ucfg.BasicBlocks.Should().HaveCount(2);
             AssertCollection(ucfg.BasicBlocks[0].Instructions,
                 i => ValidateInstruction(i, Enumerable_Count_Id, "%0", new[] { "s", "\"\"" }),
                 i => ValidateInstruction(i, Enumerable_Count_Id, "%1", new[] { "s", "\"\"" })
@@ -137,7 +137,7 @@ namespace Namespace
     }
 }";
             var ucfg = GetUcfgForMethod(code, "Foo");
-            ucfg.BasicBlocks.Should().HaveCount(1);
+            ucfg.BasicBlocks.Should().HaveCount(2);
             AssertCollection(ucfg.BasicBlocks[0].Instructions,
                 i => ValidateInstruction(i, KnownMethodId.Assignment, "x", new[] { "\"\"" })
                 );
@@ -177,7 +177,7 @@ namespace Namespace
 }";
             var ucfg = GetUcfgForMethod(code, "Foo");
 
-            ucfg.BasicBlocks.Should().HaveCount(1);
+            ucfg.BasicBlocks.Should().HaveCount(2);
 
             AssertCollection(ucfg.BasicBlocks[0].Instructions,
                 i => ValidateInstruction(i, "Namespace.Class1.Property.set", "%0", new[] { "s" }),
@@ -225,7 +225,7 @@ namespace Namespace
 }";
             var ucfg = GetUcfgForMethod(code, "Foo");
 
-            ucfg.BasicBlocks.Should().HaveCount(1);
+            ucfg.BasicBlocks.Should().HaveCount(2);
             AssertCollection(ucfg.BasicBlocks[0].Instructions,
                 i => ValidateInstruction(i, KnownMethodId.Assignment, "a", new[] { "s" }),
                 i => ValidateInstruction(i, KnownMethodId.Concatenation, "%0", new[] { "s", "s" }),
@@ -271,7 +271,7 @@ namespace Namespace
 }";
             var ucfg = GetUcfgForMethod(code, "Foo");
 
-            ucfg.BasicBlocks.Should().HaveCount(1);
+            ucfg.BasicBlocks.Should().HaveCount(2);
             AssertCollection(ucfg.BasicBlocks[0].Instructions,
                 i => ValidateInstruction(i, String_ToLower_Id, "%0", new[] { "s" }),
                 i => ValidateInstruction(i, KnownMethodId.Assignment, "a", new[] { "%0" }),
@@ -316,7 +316,7 @@ namespace Namespace
 }";
             var ucfg = GetUcfgForMethod(code, "Foo");
 
-            ucfg.BasicBlocks.Should().HaveCount(1);
+            ucfg.BasicBlocks.Should().HaveCount(2);
             AssertCollection(ucfg.BasicBlocks[0].Instructions,
                 i => ValidateInstruction(i, "Namespace.Extensions.Ext(string)", "%0", new[] { "s" }),
                 i => ValidateInstruction(i, KnownMethodId.Assignment, "a", new[] { "%0" }),
