@@ -140,52 +140,37 @@ namespace SonarAnalyzer.Security.Ucfg
                 this.basicBlock = basicBlock;
             }
 
-            public Expression BuildInstruction(SyntaxNode syntaxNode)
+            public Expression BuildInstruction(SyntaxNode syntaxNode) =>
+                nodeExpressionMap.GetOrAdd(syntaxNode.RemoveParentheses(), BuildInstructionImpl);
+
+            private Expression BuildInstructionImpl(SyntaxNode syntaxNode)
             {
-                syntaxNode = syntaxNode.RemoveParentheses();
-
-                Expression expression;
-                if (nodeExpressionMap.TryGetValue(syntaxNode, out expression))
-                {
-                    return expression;
-                }
-
                 switch (syntaxNode.Kind())
                 {
                     case SyntaxKind.AddExpression:
-                        expression = BuildBinaryExpression((BinaryExpressionSyntax)syntaxNode);
-                        break;
+                        return BuildBinaryExpression((BinaryExpressionSyntax)syntaxNode);
 
                     case SyntaxKind.SimpleAssignmentExpression:
-                        expression = BuildAssignment((AssignmentExpressionSyntax)syntaxNode);
-                        break;
+                        return BuildAssignment((AssignmentExpressionSyntax)syntaxNode);
 
                     case SyntaxKind.InvocationExpression:
-                        expression = BuildInvocation((InvocationExpressionSyntax)syntaxNode);
-                        break;
+                        return BuildInvocation((InvocationExpressionSyntax)syntaxNode);
 
                     case SyntaxKind.IdentifierName:
-                        expression = BuildIdentifierName((IdentifierNameSyntax)syntaxNode);
-                        break;
+                        return BuildIdentifierName((IdentifierNameSyntax)syntaxNode);
 
                     case SyntaxKind.VariableDeclarator:
                         BuildVariableDeclarator((VariableDeclaratorSyntax)syntaxNode);
-                        expression = null;
-                        break;
+                        return null;
 
                     case SyntaxKind.ReturnStatement:
                         BuildReturn((ReturnStatementSyntax)syntaxNode);
-                        expression = null;
-                        break;
+                        return null;
 
                     default:
                         // do nothing
-                        expression = ConstantExpression;
-                        break;
+                        return ConstantExpression;
                 }
-
-                nodeExpressionMap.Add(syntaxNode, expression);
-                return expression;
             }
 
             private Expression BuildIdentifierName(IdentifierNameSyntax identifier)
