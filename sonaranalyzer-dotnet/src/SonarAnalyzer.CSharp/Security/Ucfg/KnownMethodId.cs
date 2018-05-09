@@ -39,5 +39,22 @@ namespace SonarAnalyzer.Security.Ucfg
         /// The instructions with this method ID are removed from UCFG.
         /// </summary>
         public static readonly string Unknown = "__unknown";
+
+        /// <summary>
+        /// The method ID that the security engine uses for attributes/annotations. It accepts
+        /// one argument and returns one value. The argument should be the result of the invocation
+        /// of the attribute constructor. The returned value should be assigned to a variable
+        /// with the same name as the parameter this attribute is applied on.
+        /// </summary>
+        /// <example>
+        /// public void Foo([Bar]string s) { ... }
+        ///
+        /// Instructions:
+        /// %0 = Bar()
+        /// s = __annotation(%0)
+        /// ...
+        /// </example>
+        public static readonly string Annotation = "__annotation";
+        internal static readonly string EntryPoint;
     }
 }

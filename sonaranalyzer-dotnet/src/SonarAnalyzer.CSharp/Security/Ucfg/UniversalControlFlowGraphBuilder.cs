@@ -18,7 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -44,15 +46,19 @@ namespace SonarAnalyzer.Security.Ucfg
 
         private readonly BlockIdMap blockId = new BlockIdMap();
         private readonly SemanticModel semanticModel;
+        private readonly SyntaxNode syntaxNode;
+        private readonly IMethodSymbol methodSymbol;
         private readonly IControlFlowGraph cfg;
 
-        public UniversalControlFlowGraphBuilder(SemanticModel semanticModel, IControlFlowGraph cfg)
+        public UniversalControlFlowGraphBuilder(SemanticModel semanticModel, SyntaxNode syntaxNode, IMethodSymbol methodSymbol, IControlFlowGraph cfg)
         {
             this.semanticModel = semanticModel;
+            this.syntaxNode = syntaxNode;
+            this.methodSymbol = methodSymbol;
             this.cfg = cfg;
         }
 
-        public UCFG Build(SyntaxNode syntaxNode, IMethodSymbol methodSymbol)
+        public UCFG Build()
         {
             var ucfg = new UCFG
             {
@@ -74,6 +80,16 @@ namespace SonarAnalyzer.Security.Ucfg
             };
 
             var instructionBuilder = new InstructionBuilder(semanticModel, basicBlock);
+
+            if (basicBlock.Id == blockId.Get(cfg.EntryBlock))
+            {
+                instructionBuilder.BuildEntryPoint(methodSymbol);
+
+                foreach (var parameter in methodSymbol.Parameters)
+                {
+                    instructionBuilder.BuildAnnotations(parameter);
+                }
+            }
 
             foreach (var instruction in block.Instructions)
             {
@@ -98,6 +114,11 @@ namespace SonarAnalyzer.Security.Ucfg
             }
 
             return basicBlock;
+        }
+
+        private static bool IsTaintedEntryPoint(IMethodSymbol methodSymbol)
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -140,52 +161,57 @@ namespace SonarAnalyzer.Security.Ucfg
                 this.basicBlock = basicBlock;
             }
 
-            public Expression BuildInstruction(SyntaxNode syntaxNode)
+            public Expression BuildInstruction(SyntaxNode syntaxNode) =>
+                nodeExpressionMap.GetOrAdd(syntaxNode.RemoveParentheses(), BuildInstructionImpl);
+
+            public void BuildAnnotations(IParameterSymbol parameter)
             {
-                syntaxNode = syntaxNode.RemoveParentheses();
-
-                Expression expression;
-                if (nodeExpressionMap.TryGetValue(syntaxNode, out expression))
+                foreach (var attribute in parameter.GetAttributes())
                 {
-                    return expression;
+                    var attributeVariable = CreateTempVariable();
+                    CreateInstruction(null, GetMethodId(attribute.AttributeConstructor), attributeVariable);
+                    CreateInstruction(null, KnownMethodId.Annotation, parameter.Name,
+                        CreateVariableExpression(attributeVariable));
                 }
+            }
 
+            public void BuildEntryPoint(IMethodSymbol methodSymbol)
+            {
+                if (IsTaintedEntryPoint(methodSymbol))
+                {
+                    CreateInstruction(null, KnownMethodId.EntryPoint, CreateTempVariable(),
+                        methodSymbol.Parameters.Select(p => CreateVariableExpression(p.Name)).ToArray());
+                }
+            }
+
+            private Expression BuildInstructionImpl(SyntaxNode syntaxNode)
+            {
                 switch (syntaxNode.Kind())
                 {
                     case SyntaxKind.AddExpression:
-                        expression = BuildBinaryExpression((BinaryExpressionSyntax)syntaxNode);
-                        break;
+                        return BuildBinaryExpression((BinaryExpressionSyntax)syntaxNode);
 
                     case SyntaxKind.SimpleAssignmentExpression:
-                        expression = BuildAssignment((AssignmentExpressionSyntax)syntaxNode);
-                        break;
+                        return BuildAssignment((AssignmentExpressionSyntax)syntaxNode);
 
                     case SyntaxKind.InvocationExpression:
-                        expression = BuildInvocation((InvocationExpressionSyntax)syntaxNode);
-                        break;
+                        return BuildInvocation((InvocationExpressionSyntax)syntaxNode);
 
                     case SyntaxKind.IdentifierName:
-                        expression = BuildIdentifierName((IdentifierNameSyntax)syntaxNode);
-                        break;
+                        return BuildIdentifierName((IdentifierNameSyntax)syntaxNode);
 
                     case SyntaxKind.VariableDeclarator:
                         BuildVariableDeclarator((VariableDeclaratorSyntax)syntaxNode);
-                        expression = null;
-                        break;
+                        return null;
 
                     case SyntaxKind.ReturnStatement:
                         BuildReturn((ReturnStatementSyntax)syntaxNode);
-                        expression = null;
-                        break;
+                        return null;
 
                     default:
                         // do nothing
-                        expression = ConstantExpression;
-                        break;
+                        return ConstantExpression;
                 }
-
-                nodeExpressionMap.Add(syntaxNode, expression);
-                return expression;
             }
 
             private Expression BuildIdentifierName(IdentifierNameSyntax identifier)

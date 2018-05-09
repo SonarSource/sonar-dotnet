@@ -328,6 +328,25 @@ namespace Namespace
         }
 
         [TestMethod]
+        public void Attributes()
+        {
+            const string code = @"
+using System.ComponentModel;
+public class Class1
+{
+    private string field;
+    public void Foo([Description]string s) { }
+}";
+            var ucfg = GetUcfgForMethod(code, "Foo");
+
+            ucfg.BasicBlocks.Should().HaveCount(2);
+            AssertCollection(ucfg.BasicBlocks[0].Instructions,
+                i => ValidateInstruction(i, "System.ComponentModel.DescriptionAttribute.DescriptionAttribute()", "%0"),
+                i => ValidateInstruction(i, KnownMethodId.Annotation, "%0", new[] { "s" })
+                );
+        }
+
+        [TestMethod]
         public void ConstantExpressions_Share_The_Same_Instance()
         {
             const string code = @"
@@ -358,10 +377,11 @@ public class Class1
         {
             (var method, var semanticModel) = TestHelper.Compile(code).GetMethod(methodName);
 
-            var builder = new UniversalControlFlowGraphBuilder(semanticModel,
+            var builder = new UniversalControlFlowGraphBuilder(semanticModel, method,
+                semanticModel.GetDeclaredSymbol(method),
                 CSharpControlFlowGraph.Create(method.Body, semanticModel));
 
-            return builder.Build(method, semanticModel.GetDeclaredSymbol(method));
+            return builder.Build();
         }
 
         private static void AssertCollection<T>(IList<T> items, params Action<T>[] asserts)
