@@ -18,8 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using Microsoft.CodeAnalysis;
 
 namespace SonarAnalyzer.Helpers
@@ -35,5 +37,37 @@ namespace SonarAnalyzer.Helpers
         public SyntaxTree SyntaxTree { get; }
 
         public IEnumerable<DiagnosticDescriptor> SupportedDiagnostics { get; }
+
+        // Real bug found in Roslyn - see https://github.com/dotnet/roslyn/pull/21258
+        public static bool TryRedirect(AssemblyName name, byte[] token, int major, int minor, int build, int revision)
+        {
+            var version = new Version(major, minor, revision, build);
+            if (KeysEqual(name.GetPublicKeyToken(), token) && name.Version < version)
+            {
+                name.Version = version;
+                return true;
+            }
+
+            return false;
+        }
+
+        private static bool KeysEqual(byte[] left, byte[] right)
+        {
+            if (left.Length != right.Length)
+            {
+                return false;
+            }
+
+            for (var i = 0; i < left.Length; i++)
+            {
+                if (left[i] != right[i])
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
     }
 }
