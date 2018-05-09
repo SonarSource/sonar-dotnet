@@ -60,7 +60,7 @@ namespace SonarAnalyzer.Security.Ucfg
                 Location = GetLocation(syntaxNode),
             };
 
-            ucfg.BasicBlocks.AddRange(cfg.Blocks.Where(IsSupportedBlock).Select(CreateBasicBlock));
+            ucfg.BasicBlocks.AddRange(cfg.Blocks.Select(CreateBasicBlock));
             ucfg.Parameters.AddRange(methodSymbol.GetParameters().Select(p => p.Name));
             ucfg.Entries.Add(blockId.Get(cfg.EntryBlock));
             return ucfg;
@@ -84,24 +84,21 @@ namespace SonarAnalyzer.Security.Ucfg
             {
                 instructionBuilder.BuildInstruction(jump.JumpNode);
             }
-            else
+
+            if (block is ExitBlock exit)
             {
-                if (block.SuccessorBlocks.All(cfg.ExitBlock.Equals))
-                {
-                    basicBlock.Ret = new Return { ReturnedExpression = ConstantExpression };
-                }
-                else
-                {
-                    basicBlock.Jump = new Jump();
-                    basicBlock.Jump.Destinations.AddRange(block.SuccessorBlocks.Select(blockId.Get));
-                }
+                basicBlock.Ret = new Return { ReturnedExpression = ConstantExpression };
+            }
+
+            if (basicBlock.TerminatorCase == BasicBlock.TerminatorOneofCase.None)
+            {
+                // No return was created from JumpBlock or ExitBlock, wire up the successor blocks
+                basicBlock.Jump = new Jump();
+                basicBlock.Jump.Destinations.AddRange(block.SuccessorBlocks.Select(blockId.Get));
             }
 
             return basicBlock;
         }
-
-        private static bool IsSupportedBlock(Block block) =>
-            !(block is ExitBlock);
 
         /// <summary>
         /// Returns UCFG Location that represents the location of the provided SyntaxNode
