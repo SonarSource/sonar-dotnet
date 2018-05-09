@@ -23,6 +23,8 @@ import com.sonar.orchestrator.Orchestrator;
 import com.sonar.orchestrator.build.Build;
 import com.sonar.orchestrator.build.ScannerForMSBuild;
 import com.sonar.orchestrator.locator.FileLocation;
+import com.sonar.orchestrator.locator.Location;
+import com.sonar.orchestrator.locator.MavenLocation;
 import com.sonar.orchestrator.util.Command;
 import com.sonar.orchestrator.util.CommandExecutor;
 import java.io.File;
@@ -32,8 +34,10 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import javax.annotation.CheckForNull;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang.StringUtils;
 import org.junit.ClassRule;
 import org.junit.rules.TemporaryFolder;
 import org.junit.runner.RunWith;
@@ -69,12 +73,26 @@ public class Tests {
 
   @ClassRule
   public static final Orchestrator ORCHESTRATOR = Orchestrator.builderEnv()
-    .addPlugin(FileLocation.byWildcardMavenFilename(new File("../sonar-csharp-plugin/target"), "sonar-csharp-plugin-*.jar"))
+    .setSonarVersion(Optional.ofNullable(System.getProperty("sonar.runtimeVersion")).filter(v -> !"LTS".equals(v)).orElse("LATEST_RELEASE[6.7]"))
+    .addPlugin(getCsharpLocation())
     .restoreProfileAtStartup(FileLocation.of("profiles/no_rule.xml"))
     .restoreProfileAtStartup(FileLocation.of("profiles/class_name.xml"))
     .restoreProfileAtStartup(FileLocation.of("profiles/template_rule.xml"))
     .build();
 
+
+  private static Location getCsharpLocation () {
+    Location csharpLocation;
+    String csharpVersion = System.getProperty("csharpVersion"); //"7.2.0.5247";
+    if (StringUtils.isEmpty(csharpVersion)) {
+      // use the plugin that was built on local machine
+      csharpLocation = FileLocation.byWildcardMavenFilename(new File("../sonar-csharp-plugin/target"), "sonar-csharp-plugin-*.jar");
+    } else {
+      // QA environment downloads the plugin built by the CI job
+      csharpLocation = MavenLocation.of("org.sonarsource.dotnet", "sonar-csharp-plugin", csharpVersion);
+    }
+    return csharpLocation;
+  }
   public static Path projectDir(TemporaryFolder temp, String projectName) throws IOException {
     Path projectDir = Paths.get("projects").resolve(projectName);
     FileUtils.deleteDirectory(new File(temp.getRoot(), projectName));

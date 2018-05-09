@@ -24,6 +24,7 @@ import com.sonar.orchestrator.OrchestratorBuilder;
 import com.sonar.orchestrator.build.BuildResult;
 import com.sonar.orchestrator.build.ScannerForMSBuild;
 import com.sonar.orchestrator.locator.FileLocation;
+import com.sonar.orchestrator.locator.Location;
 import com.sonar.orchestrator.locator.MavenLocation;
 import com.sonar.orchestrator.util.Command;
 import com.sonar.orchestrator.util.CommandExecutor;
@@ -35,6 +36,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import org.apache.commons.lang.StringUtils;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.sonar.ucfg.UCFG;
@@ -59,8 +61,18 @@ public class UCFGDeserializationTest {
     // The SonarQube alias "LTS" has been dropped. An alternative is "LATEST_RELEASE[6.7]".
     // The term "latest" refers to the highest version number, not the most recently published version.
     OrchestratorBuilder builder = Orchestrator.builderEnv()
-      .setSonarVersion(Optional.ofNullable(System.getProperty("sonar.runtimeVersion")).orElse("LATEST_RELEASE[6.7]"))
-      .addPlugin(MavenLocation.of("org.sonarsource.dotnet", "sonar-csharp-plugin", "7.2.0.5239"));
+      .setSonarVersion(Optional.ofNullable(System.getProperty("sonar.runtimeVersion")).filter(v -> !"LTS".equals(v)).orElse("LATEST_RELEASE[6.7]"));
+
+    String securityVersion = System.getProperty("csharpVersion");
+    Location csharpLocation;
+    if (StringUtils.isEmpty(securityVersion)) {
+      // use the plugin that was built on local machine
+      csharpLocation = FileLocation.byWildcardMavenFilename(new File("../sonar-csharp-plugin/target"), "sonar-csharp-plugin-*.jar");
+    } else {
+      // QA environment downloads the plugin built by the CI job
+      csharpLocation = MavenLocation.of("org.sonarsource.dotnet", "sonar-csharp-plugin", securityVersion);
+    }
+    builder.addPlugin(csharpLocation);
 
     orchestrator = builder.build();
     orchestrator.start();

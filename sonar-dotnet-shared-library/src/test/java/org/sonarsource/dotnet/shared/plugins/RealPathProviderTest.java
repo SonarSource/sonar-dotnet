@@ -19,15 +19,14 @@
  */
 package org.sonarsource.dotnet.shared.plugins;
 
+import java.io.File;
+import java.io.IOException;
+import org.junit.Assume;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
-
 import org.sonar.api.utils.log.LogTester;
 import org.sonar.api.utils.log.LoggerLevel;
-
-import java.io.File;
-import java.io.IOException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -58,6 +57,7 @@ public class RealPathProviderTest {
 
   @Test
   public void when_file_exists_fix_case() throws IOException {
+    Assume.assumeTrue(System.getProperty("os.name").toLowerCase().startsWith("win"));
     File expectedFile = temp.newFile("FILE.CS");
     expectedFile.createNewFile();
     assertThat(new RealPathProvider().getRealPath(new File(temp.getRoot(),"file.cs").getPath())).isEqualTo(expectedFile.getCanonicalPath());
