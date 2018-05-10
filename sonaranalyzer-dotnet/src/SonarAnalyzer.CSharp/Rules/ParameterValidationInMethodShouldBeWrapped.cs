@@ -49,7 +49,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     var registeredExpression = (TRegisterExpressionSyntax)c.Node;
 
-                    var methodDeclaration = registeredExpression.FirstAncestorOrSelf<MethodDeclarationSyntax>();
+                    var methodDeclaration = GetFirstEnclosingMethod(registeredExpression);
                     if (methodDeclaration == null)
                     {
                         return;
@@ -74,6 +74,19 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
                 },
                 RegisterSyntaxKinds);
+        }
+
+        private static MethodDeclarationSyntax GetFirstEnclosingMethod(TRegisterExpressionSyntax registerExpression)
+        {
+            const int localFunctionStatementRawKind = 8830;
+
+            var enclosingMethod = registerExpression.Ancestors()
+                .FirstOrDefault(node => node.RawKind == localFunctionStatementRawKind ||
+                                        node.RawKind == (int)SyntaxKind.MethodDeclaration);
+
+            return enclosingMethod.RawKind != localFunctionStatementRawKind
+                ? (MethodDeclarationSyntax)enclosingMethod
+                : null;
         }
     }
 }
