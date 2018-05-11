@@ -43,16 +43,12 @@ namespace SonarAnalyzer.Security.Ucfg
         };
 
         private readonly BlockIdMap blockId = new BlockIdMap();
-        private readonly SemanticModel semanticModel;
-        private readonly IControlFlowGraph cfg;
 
-        public UniversalControlFlowGraphBuilder(SemanticModel semanticModel, IControlFlowGraph cfg)
+        public UniversalControlFlowGraphBuilder()
         {
-            this.semanticModel = semanticModel;
-            this.cfg = cfg;
         }
 
-        public UCFG Build(SyntaxNode syntaxNode, IMethodSymbol methodSymbol)
+        public UCFG Build(SemanticModel semanticModel, SyntaxNode syntaxNode, IMethodSymbol methodSymbol, IControlFlowGraph cfg)
         {
             var ucfg = new UCFG
             {
@@ -60,13 +56,13 @@ namespace SonarAnalyzer.Security.Ucfg
                 Location = GetLocation(syntaxNode),
             };
 
-            ucfg.BasicBlocks.AddRange(cfg.Blocks.Select(CreateBasicBlock));
+            ucfg.BasicBlocks.AddRange(cfg.Blocks.Select(b => CreateBasicBlock(b, semanticModel)));
             ucfg.Parameters.AddRange(methodSymbol.GetParameters().Select(p => p.Name));
             ucfg.Entries.Add(blockId.Get(cfg.EntryBlock));
             return ucfg;
         }
 
-        private BasicBlock CreateBasicBlock(Block block)
+        private BasicBlock CreateBasicBlock(Block block, SemanticModel semanticModel)
         {
             var basicBlock = new BasicBlock
             {

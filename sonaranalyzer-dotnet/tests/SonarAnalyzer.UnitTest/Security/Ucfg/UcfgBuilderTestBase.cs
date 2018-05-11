@@ -45,10 +45,10 @@ namespace SonarAnalyzer.UnitTest.Security.Ucfg
         {
             (var method, var semanticModel) = TestHelper.Compile(code).GetMethod(methodName);
 
-            var builder = new UniversalControlFlowGraphBuilder(semanticModel,
-                CSharpControlFlowGraph.Create(method.Body, semanticModel));
+            var builder = new UniversalControlFlowGraphBuilder();
 
-            return builder.Build(method, semanticModel.GetDeclaredSymbol(method));
+            return builder.Build(semanticModel, method,
+                semanticModel.GetDeclaredSymbol(method), CSharpControlFlowGraph.Create(method.Body, semanticModel));
         }
     }
 }
