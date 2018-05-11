@@ -19,20 +19,14 @@
  */
 
 extern alias csharp;
-using System;
-using System.Collections.Generic;
-using csharp::SonarAnalyzer.Security.Ucfg;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Protobuf.Ucfg;
-using csharp::SonarAnalyzer.SymbolicExecution.ControlFlowGraph;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Security.Ucfg
 {
     [TestClass]
-    public class UniversalControlFlowGraphBuilder_Blocks
+    public class UcfgBuilder_Blocks : UcfgBuilderTestBase
     {
         private const string ConstValue = "\"\"";
 
@@ -302,15 +296,6 @@ public class Class1
                 );
         }
 
-        private static void AssertCollection<T>(IList<T> items, params Action<T>[] asserts)
-        {
-            items.Should().HaveSameCount(asserts);
-            for (var i = 0; i < items.Count; i++)
-            {
-                asserts[i](items[i]);
-            }
-        }
-
         private void ValidateJmpBlock(BasicBlock block, string expectedId, params string[] expectedJumps)
         {
             block.Id.Should().Be(expectedId);
@@ -337,16 +322,6 @@ public class Class1
             {
                 block.Ret.ReturnedExpression.Var?.Name.Should().Be(expectedReturnExpression);
             }
-        }
-
-        private UCFG GetUcfgForMethod(string code, string methodName)
-        {
-            (var method, var semanticModel) = TestHelper.Compile(code).GetMethod(methodName);
-
-            var builder = new UniversalControlFlowGraphBuilder(semanticModel,
-                CSharpControlFlowGraph.Create(method.Body, semanticModel));
-
-            return builder.Build(method, semanticModel.GetDeclaredSymbol(method));
         }
     }
 }

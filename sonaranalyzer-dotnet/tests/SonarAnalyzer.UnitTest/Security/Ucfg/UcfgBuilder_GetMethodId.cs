@@ -28,7 +28,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace SonarAnalyzer.UnitTest.Security.Ucfg
 {
     [TestClass]
-    public class UniversalControlFlowGraphBuilder_GetMethodId
+    public class UcfgBuilder_GetMethodId
     {
         [TestMethod]
         public void GetMethodId_Methods()

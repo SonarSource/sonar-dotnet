@@ -19,19 +19,14 @@
  */
 
 extern alias csharp;
-using csharp::SonarAnalyzer.Security.Ucfg;
-using csharp::SonarAnalyzer.SymbolicExecution.ControlFlowGraph;
 using FluentAssertions;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SonarAnalyzer.Protobuf.Ucfg;
 using ULocation = SonarAnalyzer.Protobuf.Ucfg.Location;
 
 namespace SonarAnalyzer.UnitTest.Security.Ucfg
 {
     [TestClass]
-    public class UniversalControlFlowGraphBuilder_GetLocation
+    public class UcfgBuilder_GetLocation : UcfgBuilderTestBase
     {
         [TestMethod]
         public void GetLocation_Returns_1Based_Line_0Based_LineOffset()
@@ -96,16 +91,6 @@ s.Trim(                             // 7 x = __id(%0)           --> SL = 6, SLO 
             location.StartLineOffset.Should().Be(startLineOffset);
             location.EndLine.Should().Be(endLine);
             location.EndLineOffset.Should().Be(endLineOffset);
-        }
-
-        private UCFG GetUcfgForMethod(string code, string methodName)
-        {
-            (var method, var semanticModel) = TestHelper.Compile(code).GetMethod(methodName);
-
-            var builder = new UniversalControlFlowGraphBuilder(semanticModel,
-                CSharpControlFlowGraph.Create(method.Body, semanticModel));
-
-            return builder.Build(method, semanticModel.GetDeclaredSymbol(method));
         }
     }
 }
