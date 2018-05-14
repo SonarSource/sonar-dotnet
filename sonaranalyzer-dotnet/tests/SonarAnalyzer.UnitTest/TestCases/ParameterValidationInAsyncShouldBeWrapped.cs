@@ -57,6 +57,16 @@ namespace Tests.Diagnostics
                 }
             }
         }
+
+        public Task DoAsync(object o)
+        {
+            if (o == null)
+            {
+                throw new UnknownException(nameof(o));
+            }
+
+            await UnresolvedAsync();
+        }
     }
 
     public class ValidCases

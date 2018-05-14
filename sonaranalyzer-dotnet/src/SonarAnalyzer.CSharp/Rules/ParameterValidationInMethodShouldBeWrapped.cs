@@ -62,7 +62,8 @@ namespace SonarAnalyzer.Rules.CSharp
                         .Select(identifierSyntax =>
                             c.SemanticModel.GetSymbolInfo(identifierSyntax).Symbol.ToSymbolWithSyntax(identifierSyntax))
                         .Where(tuple =>
-                            (tuple.Symbol.OriginalDefinition as ITypeSymbol).DerivesFrom(KnownType.System_ArgumentException))
+                            tuple.Symbol?.OriginalDefinition is ITypeSymbol typeSymbol &&
+                            typeSymbol.DerivesFrom(KnownType.System_ArgumentException))
                         .Select(tuple => tuple.Syntax.Identifier.GetLocation())
                         .ToList();
 
