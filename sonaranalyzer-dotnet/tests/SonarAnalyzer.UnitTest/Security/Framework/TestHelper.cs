@@ -21,13 +21,14 @@
 extern alias csharp;
 using System.Linq;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace SonarAnalyzer.UnitTest.Security
 {
     public static class TestHelper
     {
-        public static (SyntaxTree, SemanticModel) Compile(string classDeclaration)
+        public static (SyntaxTree, SemanticModel) Compile(string classDeclaration, params MetadataReference[] references)
         {
             using (var workspace = new AdhocWorkspace())
             {
@@ -35,6 +36,7 @@ namespace SonarAnalyzer.UnitTest.Security
                     .AddMetadataReference(MetadataReference.CreateFromFile(typeof(object).Assembly.Location))
                     .AddMetadataReference(MetadataReference.CreateFromFile(typeof(Enumerable).Assembly.Location))
                     .AddMetadataReference(MetadataReference.CreateFromFile(typeof(System.Diagnostics.Debug).Assembly.Location))
+                    .AddMetadataReferences(references)
                     .AddDocument("Class1", classDeclaration);
                 var compilation = document.Project.GetCompilationAsync().Result;
                 var tree = compilation.SyntaxTrees.First();
@@ -57,6 +59,13 @@ namespace SonarAnalyzer.UnitTest.Security
                 .Where(m => m.Identifier.ValueText == name)
                 .Skip(skip)
                 .First();
+
+        public static IMethodSymbol GetMethodSymbol(this (SyntaxTree, SemanticModel) tuple, string name)
+        {
+            var (syntaxTree, semantcModel) = tuple;
+
+            return semantcModel.GetDeclaredSymbol(syntaxTree.GetMethod(name));
+        }
 
         public static (MethodDeclarationSyntax, SemanticModel) GetMethod(this (SyntaxTree, SemanticModel) tuple, string name)
         {

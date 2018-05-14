@@ -19,8 +19,12 @@
  */
 
 extern alias csharp;
+
+using csharp::SonarAnalyzer.Security;
 using FluentAssertions;
+using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 using SonarAnalyzer.Protobuf.Ucfg;
 
 namespace SonarAnalyzer.UnitTest.Security.Ucfg
@@ -293,6 +297,28 @@ public class Class1
             AssertCollection(ucfg.BasicBlocks,
                 b => ValidateJmpBlock(b, expectedId: "0", expectedJumps: new[] { "1" }),
                 b => ValidateRetBlock(b, expectedId: "1", expectedReturnExpression: ConstValue)
+                );
+        }
+
+        [TestMethod]
+        public void EntryPointMethod_Has_Additional_Block()
+        {
+            const string code = @"
+public class Class1
+{
+    public void Foo(string s)
+    {                   //                  | Basic#1(Jump:#0) - contains entrypoint instruction and attributes
+    }                   // Exit             | Basic#0(Ret)
+}";
+            var checker = new Mock<IEntryPointRecognizer>();
+            checker.Setup(x => x.IsEntryPoint(It.IsAny<IMethodSymbol>())).Returns(true);
+
+            var ucfg = GetUcfgForMethod(code, "Foo", checker.Object);
+
+            ucfg.Entries.Should().BeEquivalentTo(new[] { "1" });
+            AssertCollection(ucfg.BasicBlocks,
+                b => ValidateRetBlock(b, expectedId: "0", expectedReturnExpression: ConstValue), // block from cfg
+                b => ValidateJmpBlock(b, expectedId: "1", expectedJumps: new[] { "0" }) // fake entrypoint block
                 );
         }
 

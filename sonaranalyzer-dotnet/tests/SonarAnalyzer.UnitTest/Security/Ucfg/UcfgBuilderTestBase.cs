@@ -21,6 +21,7 @@
 extern alias csharp;
 using System;
 using System.Collections.Generic;
+using csharp::SonarAnalyzer.Security;
 using csharp::SonarAnalyzer.Security.Ucfg;
 using csharp::SonarAnalyzer.SymbolicExecution.ControlFlowGraph;
 using FluentAssertions;
@@ -41,11 +42,16 @@ namespace SonarAnalyzer.UnitTest.Security.Ucfg
             }
         }
 
-        protected UCFG GetUcfgForMethod(string code, string methodName)
+        protected UCFG GetUcfgForMethod(string code, string methodName, IEntryPointRecognizer entryPointRecognizer = null)
         {
+            if (entryPointRecognizer == null)
+            {
+                entryPointRecognizer = new EntryPointRecognizer();
+            }
+
             (var method, var semanticModel) = TestHelper.Compile(code).GetMethod(methodName);
 
-            var builder = new UniversalControlFlowGraphBuilder();
+            var builder = new UniversalControlFlowGraphBuilder(entryPointRecognizer);
 
             return builder.Build(semanticModel, method,
                 semanticModel.GetDeclaredSymbol(method), CSharpControlFlowGraph.Create(method.Body, semanticModel));

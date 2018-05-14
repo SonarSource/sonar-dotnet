@@ -163,7 +163,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            var ucfg = new UniversalControlFlowGraphBuilder()
+            var ucfg = new UniversalControlFlowGraphBuilder(new EntryPointRecognizer())
                 .Build(context.SemanticModel, declaration, methodSymbol, cfg);
 
             var path = Path.Combine(protobufDirectory, $"ucfg_{projectBuildId}_{Interlocked.Increment(ref protobufFileIndex)}.pb");
