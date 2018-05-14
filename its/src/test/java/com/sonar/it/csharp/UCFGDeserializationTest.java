@@ -128,7 +128,7 @@ public class UCFGDeserializationTest {
     orchestrator.executeBuild(getScannerForMSBuild(projectLocation).addArgument("end"));
 
     List<UCFG> ucfgs = readUcfgs(projectLocation);
-    assertThat(ucfgs).hasSize(15);
+    assertThat(ucfgs).hasSize(926);
   }
 
   private static List<UCFG> readUcfgs(File projectLocation) {
