@@ -43,16 +43,12 @@ namespace SonarAnalyzer.Security.Ucfg
         };
 
         private readonly BlockIdMap blockId = new BlockIdMap();
-        private readonly SemanticModel semanticModel;
-        private readonly IControlFlowGraph cfg;
 
-        public UniversalControlFlowGraphBuilder(SemanticModel semanticModel, IControlFlowGraph cfg)
+        public UniversalControlFlowGraphBuilder()
         {
-            this.semanticModel = semanticModel;
-            this.cfg = cfg;
         }
 
-        public UCFG Build(SyntaxNode syntaxNode, IMethodSymbol methodSymbol)
+        public UCFG Build(SemanticModel semanticModel, SyntaxNode syntaxNode, IMethodSymbol methodSymbol, IControlFlowGraph cfg)
         {
             var ucfg = new UCFG
             {
@@ -60,13 +56,13 @@ namespace SonarAnalyzer.Security.Ucfg
                 Location = GetLocation(syntaxNode),
             };
 
-            ucfg.BasicBlocks.AddRange(cfg.Blocks.Select(CreateBasicBlock));
+            ucfg.BasicBlocks.AddRange(cfg.Blocks.Select(b => CreateBasicBlock(b, semanticModel)));
             ucfg.Parameters.AddRange(methodSymbol.GetParameters().Select(p => p.Name));
             ucfg.Entries.Add(blockId.Get(cfg.EntryBlock));
             return ucfg;
         }
 
-        private BasicBlock CreateBasicBlock(Block block)
+        private BasicBlock CreateBasicBlock(Block block, SemanticModel semanticModel)
         {
             var basicBlock = new BasicBlock
             {
@@ -140,52 +136,37 @@ namespace SonarAnalyzer.Security.Ucfg
                 this.basicBlock = basicBlock;
             }
 
-            public Expression BuildInstruction(SyntaxNode syntaxNode)
+            public Expression BuildInstruction(SyntaxNode syntaxNode) =>
+                nodeExpressionMap.GetOrAdd(syntaxNode.RemoveParentheses(), BuildInstructionImpl);
+
+            private Expression BuildInstructionImpl(SyntaxNode syntaxNode)
             {
-                syntaxNode = syntaxNode.RemoveParentheses();
-
-                Expression expression;
-                if (nodeExpressionMap.TryGetValue(syntaxNode, out expression))
-                {
-                    return expression;
-                }
-
                 switch (syntaxNode.Kind())
                 {
                     case SyntaxKind.AddExpression:
-                        expression = BuildBinaryExpression((BinaryExpressionSyntax)syntaxNode);
-                        break;
+                        return BuildBinaryExpression((BinaryExpressionSyntax)syntaxNode);
 
                     case SyntaxKind.SimpleAssignmentExpression:
-                        expression = BuildAssignment((AssignmentExpressionSyntax)syntaxNode);
-                        break;
+                        return BuildAssignment((AssignmentExpressionSyntax)syntaxNode);
 
                     case SyntaxKind.InvocationExpression:
-                        expression = BuildInvocation((InvocationExpressionSyntax)syntaxNode);
-                        break;
+                        return BuildInvocation((InvocationExpressionSyntax)syntaxNode);
 
                     case SyntaxKind.IdentifierName:
-                        expression = BuildIdentifierName((IdentifierNameSyntax)syntaxNode);
-                        break;
+                        return BuildIdentifierName((IdentifierNameSyntax)syntaxNode);
 
                     case SyntaxKind.VariableDeclarator:
                         BuildVariableDeclarator((VariableDeclaratorSyntax)syntaxNode);
-                        expression = null;
-                        break;
+                        return null;
 
                     case SyntaxKind.ReturnStatement:
                         BuildReturn((ReturnStatementSyntax)syntaxNode);
-                        expression = null;
-                        break;
+                        return null;
 
                     default:
                         // do nothing
-                        expression = ConstantExpression;
-                        break;
+                        return ConstantExpression;
                 }
-
-                nodeExpressionMap.Add(syntaxNode, expression);
-                return expression;
             }
 
             private Expression BuildIdentifierName(IdentifierNameSyntax identifier)

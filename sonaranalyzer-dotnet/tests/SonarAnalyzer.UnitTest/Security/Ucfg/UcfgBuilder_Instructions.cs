@@ -33,7 +33,7 @@ using Microsoft.CodeAnalysis.CSharp;
 namespace SonarAnalyzer.UnitTest.Security.Ucfg
 {
     [TestClass]
-    public class UniversalControlFlowGraphBuilder_Instructions
+    public class UcfgBuilder_Instructions : UcfgBuilderTestBase
     {
         [TestMethod]
         public void Assignments_Simple()
@@ -97,6 +97,8 @@ namespace Namespace
         [TestMethod]
         public void Invocations_LambdaArguments_Generate_Const()
         {
+            const string Enumerable_Count_Id = "System.Linq.Enumerable.Count<TSource>(System.Collections.Generic.IEnumerable<TSource>, System.Func<TSource, bool>)";
+
             const string code = @"
 using System.Linq;
 namespace Namespace
@@ -273,14 +275,14 @@ namespace Namespace
 
             ucfg.BasicBlocks.Should().HaveCount(2);
             AssertCollection(ucfg.BasicBlocks[0].Instructions,
-                i => ValidateInstruction(i, String_ToLower_Id, "%0", new[] { "s" }),
+                i => ValidateInstruction(i, "string.ToLower()", "%0", new[] { "s" }),
                 i => ValidateInstruction(i, KnownMethodId.Assignment, "a", new[] { "%0" }),
                 i => ValidateInstruction(i, KnownMethodId.Concatenation, "%1", new[] { "s", "s" }),
-                i => ValidateInstruction(i, String_ToLower_Id, "%2", new[] { "%1" }),
+                i => ValidateInstruction(i, "string.ToLower()", "%2", new[] { "%1" }),
                 i => ValidateInstruction(i, KnownMethodId.Assignment, "a", new[] { "%2" }),
-                i => ValidateInstruction(i, String_ToLower_Id, "%3", new[] { "s" }),
+                i => ValidateInstruction(i, "string.ToLower()", "%3", new[] { "s" }),
                 i => ValidateInstruction(i, "Namespace.Class1.Bar(string)", "%4", new[] { "%3" }),
-                i => ValidateInstruction(i, String_IsNullOrEmpty_Id, "%5", new[] { "s" }),
+                i => ValidateInstruction(i, "string.IsNullOrEmpty(string)", "%5", new[] { "s" }),
                 i => ValidateInstruction(i, KnownMethodId.Assignment, "a", new[] { "\"\"" })
                 );
         }
@@ -354,25 +356,6 @@ public class Class1
             a.Should().Be(c);
         }
 
-        private UCFG GetUcfgForMethod(string code, string methodName)
-        {
-            (var method, var semanticModel) = TestHelper.Compile(code).GetMethod(methodName);
-
-            var builder = new UniversalControlFlowGraphBuilder(semanticModel,
-                CSharpControlFlowGraph.Create(method.Body, semanticModel));
-
-            return builder.Build(method, semanticModel.GetDeclaredSymbol(method));
-        }
-
-        private static void AssertCollection<T>(IList<T> items, params Action<T>[] asserts)
-        {
-            items.Should().HaveSameCount(asserts);
-            for (var i = 0; i < items.Count; i++)
-            {
-                asserts[i](items[i]);
-            }
-        }
-
         private static void ValidateInstruction(Instruction instruction, string methodId, string variable, params string[] args)
         {
             instruction.MethodId.Should().Be(methodId);
@@ -388,10 +371,5 @@ public class Class1
             }
         }
 
-        private const string StringId = "string";
-        private const string String_ToLower_Id = "string.ToLower()";
-        private const string String_IsNullOrEmpty_Id = "string.IsNullOrEmpty(string)";
-        private const string Enumerable_Select_Id = "System.Linq.Enumerable.Select<TSource, TResult>(System.Collections.Generic.IEnumerable<TSource>, System.Func<TSource, TResult>)";
-        private const string Enumerable_Count_Id = "System.Linq.Enumerable.Count<TSource>(System.Collections.Generic.IEnumerable<TSource>, System.Func<TSource, bool>)";
     }
 }
