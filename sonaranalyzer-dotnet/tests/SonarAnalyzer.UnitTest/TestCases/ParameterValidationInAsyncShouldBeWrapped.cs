@@ -6,19 +6,14 @@ namespace Tests.Diagnostics
 {
     public class InvalidCases
     {
-        public static async Task SkipLinesAsync(this TextReader reader, int linesToSkip) // Noncompliant {{Split this method into two, one handling parameters check and the other handling the iterator.}}
-//                               ^^^^^^^^^^^^^^
+        public static async Task<string> FooAsync(string something) // Noncompliant {{Split this method into two, one handling parameters check and the other handling the asynchronous code.}}
+//                                       ^^^^^^^^
         {
-            if (reader == null) { throw new ArgumentNullException(nameof(reader)); }
-//                                          ^^^^^^^^^^^^^^^^^^^^^ Secondary
-            if (linesToSkip < 0) { throw new ArgumentOutOfRangeException(nameof(linesToSkip)); }
-//                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^ Secondary
+            if (something == null) { throw new ArgumentNullException(nameof(something)); }
+//                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Secondary
 
-            for (var i = 0; i < linesToSkip; ++i)
-            {
-                var line = await reader.ReadLineAsync().ConfigureAwait(false);
-                if (line == null) { break; }
-            }
+            await Task.Delay(1);
+            return something + "foo";
         }
 
         public async Task DoSomethingAsync(string value) // Noncompliant - this is an edge case that might be worth handling later on
@@ -40,52 +35,21 @@ namespace Tests.Diagnostics
 
             await Task.Yield();
         }
-
-        public static Task SkipLinesAsync(this TextReader reader, int linesToSkip) // Noncompliant - Not sure what should be the expected result (i.e. do local functions suffer from this behavior?)
-        {
-            if (reader == null) { throw new ArgumentNullException(nameof(reader)); } // Secondary
-            if (linesToSkip < 0) { throw new ArgumentOutOfRangeException(nameof(linesToSkip)); } // Secondary
-
-            return reader.SkipLinesInternalAsync(linesToSkip);
-
-            async Task SkipLinesInternalAsync(this TextReader reader, int linesToSkip)
-            {
-                for (var i = 0; i < linesToSkip; ++i)
-                {
-                    var line = await reader.ReadLineAsync().ConfigureAwait(false);
-                    if (line == null) { break; }
-                }
-            }
-        }
-
-        public Task DoAsync(object o)
-        {
-            if (o == null)
-            {
-                throw new UnknownException(nameof(o));
-            }
-
-            await UnresolvedAsync();
-        }
     }
 
     public class ValidCases
     {
-        public static Task SkipLinesAsync(this TextReader reader, int linesToSkip)
+        public static Task FooAsync(string something)
         {
-            if (reader == null) { throw new ArgumentNullException(nameof(reader)); }
-            if (linesToSkip < 0) { throw new ArgumentOutOfRangeException(nameof(linesToSkip)); }
+            if (something == null) { throw new ArgumentNullException(nameof(something)); }
 
-            return reader.SkipLinesInternalAsync(linesToSkip);
+            return FooInternalAsync(something);
         }
 
-        private static async Task SkipLinesInternalAsync(this TextReader reader, int linesToSkip)
+        private static async Task FooInternalAsync(string something)
         {
-            for (var i = 0; i < linesToSkip; ++i)
-            {
-                var line = await reader.ReadLineAsync().ConfigureAwait(false);
-                if (line == null) { break; }
-            }
+            await Task.Delay(1);
+            return something + "foo";
         }
 
         public async Task DoAsync() // Compliant - no args check
@@ -99,6 +63,51 @@ namespace Tests.Diagnostics
             {
                 throw new Exception("Wrong age");
             }
+
+            await Task.Delay(0);
+        }
+
+
+        public static Task WithLocalFunctionAsync(string something) // Compliant - async part is declared in a sub method
+        {
+            if (something == null)
+            {
+                throw new ArgumentNullException(nameof(something));
+            }
+
+            return FooLocalFunctionAsync(something);
+
+            async Task FooLocalFunctionAsync(string something)
+            {
+                await Task.Delay(1);
+                return something + "foo";
+            }
+        }
+
+        public async Task WithFuncAsync()
+        {
+            Func<int, string> func =
+                age =>
+                {
+                    if (age < 0)
+                    {
+                        throw new ArgumentOutOfRangeException(nameof(age)); // Compliant - we don't know where/how the func is used
+                    }
+                };
+
+            await Task.Delay(0);
+        }
+
+        public Task WithAsyncFunc(string s)
+        {
+            if (s == null)
+            {
+                throw new ArgumentNullException(nameof(s));
+            }
+
+            Func<Task> func = async () => await Task.Delay(0);
+
+            return func();
         }
     }
 }

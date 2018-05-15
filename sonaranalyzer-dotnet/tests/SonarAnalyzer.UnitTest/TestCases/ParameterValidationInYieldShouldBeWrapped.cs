@@ -5,19 +5,13 @@ namespace Tests.Diagnostics
 {
     public static class InvalidCases
     {
-        public static IEnumerable<TSource> TakeWhile<TSource>(this IEnumerable<TSource> source, Func<TSource, bool> predicate) // Noncompliant {{Split this method into two, one handling parameters check and the other handling the iterator.}}
-//                                         ^^^^^^^^^
+        public static IEnumerable<string> Foo(string something) // Noncompliant {{Split this method into two, one handling parameters check and the other handling the iterator.}}
+//                                        ^^^
         {
-            if (source == null) { throw new ArgumentNullException(nameof(source)); }
-//                                          ^^^^^^^^^^^^^^^^^^^^^ Secondary
-            if (predicate == null) { throw new ArgumentNullException(nameof(predicate)); }
-//                                             ^^^^^^^^^^^^^^^^^^^^^ Secondary
+            if (something == null) { throw new ArgumentNullException(nameof(something)); }
+//                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Secondary
 
-            foreach (var element in source)
-            {
-                if (!predicate(element)) { break; }
-                yield return element;
-            }
+            yield return something;
         }
 
         public static IEnumerable<int> GetSomething(string value) // Noncompliant - this is an edge case that might be worth handling later on
@@ -29,60 +23,58 @@ namespace Tests.Diagnostics
                 throw new ArgumentNullException(nameof(value)); // Secondary
             }
         }
+
+        public IEnumerable<int> YieldBreak(int a) // Noncompliant
+        {
+            if (a < 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(a)); // Secondary
+            }
+
+            yield break;
+        }
     }
 
     public static class ValidCases
     {
-        public static IEnumerable<TSource> TakeWhile<TSource>(this IEnumerable<TSource> source, Func<TSource, bool> predicate)
+        public static IEnumerable<string> Foo(string something) // Compliant - split into 2 methods
         {
-            if (source == null) { throw new ArgumentNullException(nameof(source)); }
-            if (predicate == null) { throw new ArgumentNullException(nameof(predicate)); }
-            return TakeWhileIterator<TSource>(source, predicate);
+            if (something == null) { throw new ArgumentNullException(nameof(something)); }
+
+            return FooIterator(something);
         }
 
-        private static IEnumerable<TSource> TakeWhileIterator<TSource>(IEnumerable<TSource> source, Func<TSource, bool> predicate)
+        private static IEnumerable<string> FooIterator(string something)
         {
-            foreach (TSource element in source)
+            yield return something;
+        }
+
+        public static IEnumerable<string> WithLocalFunction(string something) // Compliant - usage of local function
+        {
+            if (something == null) { throw new ArgumentNullException(nameof(something)); }
+
+            return Iterator(something);
+
+            IEnumerable<string> Iterator(string something)
             {
-                if (!predicate(element))
-                    break;
-                yield return element;
+                yield return something;
             }
         }
 
-        public static IEnumerable<int> GetSomething() // Compliant - no args check
+        public static IEnumerable<int> WithFunc(string foo)
         {
-            yield return 42;
-        }
-
-        public static IEnumerable<string> Get(int val)
-        {
-            if (val == 0)
-            {
-                yield break;
-            }
-
-            yield return "test";
-        }
-
-        public static IEnumerable<TSource> TakeWhile2<TSource>(this IEnumerable<TSource> source, Func<TSource, bool> predicate)
-        {
-            if (source == null)
-            { throw new ArgumentNullException(nameof(source)); }
-            if (predicate == null)
-            { throw new ArgumentNullException(nameof(predicate)); }
-
-            return TakeWhileIterator<TSource>(source, predicate);
-
-            IEnumerable<TSource> TakeWhileIterator<TSource>(IEnumerable<TSource> s, Func<TSource, bool> p)
-            {
-                foreach (var element in s)
+            Func<string, string> func =
+                f =>
                 {
-                    if (!p(element))
-                    { break; }
-                    yield return element;
-                }
-            }
+                    if (f == null)
+                    {
+                        throw new ArgumentNullException(nameof(f));
+                    }
+
+                    return f + f;
+                };
+
+            yield return foo.Length;
         }
     }
 }

@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Immutable;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -29,15 +31,51 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class ParameterValidationInYieldShouldBeWrapped : ParameterValidationInMethodShouldBeWrapped<YieldStatementSyntax>
+    public sealed class ParameterValidationInYieldShouldBeWrapped : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S4456";
+        private const string MessageFormat = "Split this method into two, one handling parameters check and the other " +
+           "handling the iterator.";
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        protected override DiagnosticDescriptor Rule { get; } = rule;
+        public sealed override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        protected override SyntaxKind[] RegisterSyntaxKinds { get; } =
-            new[] { SyntaxKind.YieldBreakStatement, SyntaxKind.YieldReturnStatement };
+        protected override void Initialize(SonarAnalysisContext context)
+        {
+            context.RegisterSyntaxNodeActionInNonGenerated(
+                c =>
+                {
+                    var methodDeclaration = (MethodDeclarationSyntax)c.Node;
+
+                    var walker = new ParameterValidationInYieldWalker(c.SemanticModel);
+                    walker.Visit(methodDeclaration);
+
+                    if (walker.HasYieldStatement &&
+                        walker.ArgumentExceptionLocations.Any())
+                    {
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, methodDeclaration.Identifier.GetLocation(),
+                            additionalLocations: walker.ArgumentExceptionLocations));
+                    }
+                },
+                SyntaxKind.MethodDeclaration);
+        }
+
+        private class ParameterValidationInYieldWalker : ParameterValidationInMethodWalker
+        {
+            public bool HasYieldStatement { get; private set; }
+
+            public ParameterValidationInYieldWalker(SemanticModel semanticModel)
+                : base(semanticModel)
+            {
+            }
+
+            public override void VisitYieldStatement(YieldStatementSyntax node)
+            {
+                HasYieldStatement = true;
+
+                base.VisitYieldStatement(node);
+            }
+        }
     }
 }
