@@ -6,4 +6,4 @@
 	url = https://github.com/SonarSource/sonar-ucfg.git
 [submodule "its/projects/SimplCommerce"]
 	path = its/projects/SimplCommerce
-	url = git@github.com:simplcommerce/SimplCommerce.git
+	url = https://github.com/simplcommerce/SimplCommerce.git
