@@ -47,11 +47,10 @@ public class Foo : System.Web.Mvc.Controller
             var internalFoo = compilation.GetMethodSymbol("InternalFoo");
             var privateFoo = compilation.GetMethodSymbol("PrivateFoo");
 
-            var checker = new EntryPointRecognizer();
-            checker.IsEntryPoint(publicFoo).Should().Be(true);
-            checker.IsEntryPoint(protectedFoo).Should().Be(false);
-            checker.IsEntryPoint(internalFoo).Should().Be(false);
-            checker.IsEntryPoint(privateFoo).Should().Be(false);
+            EntryPointRecognizer.IsEntryPoint(publicFoo).Should().Be(true);
+            EntryPointRecognizer.IsEntryPoint(protectedFoo).Should().Be(false);
+            EntryPointRecognizer.IsEntryPoint(internalFoo).Should().Be(false);
+            EntryPointRecognizer.IsEntryPoint(privateFoo).Should().Be(false);
         }
 
         [TestMethod]
@@ -77,10 +76,9 @@ public class MyController : Controller
             var publicBar = compilation.GetMethodSymbol("PublicBar");
             var publicDiz = compilation.GetMethodSymbol("PublicDiz");
 
-            var checker = new EntryPointRecognizer();
-            checker.IsEntryPoint(publicFoo).Should().Be(true);
-            checker.IsEntryPoint(publicBar).Should().Be(false);
-            checker.IsEntryPoint(publicDiz).Should().Be(false);
+            EntryPointRecognizer.IsEntryPoint(publicFoo).Should().Be(true);
+            EntryPointRecognizer.IsEntryPoint(publicBar).Should().Be(false);
+            EntryPointRecognizer.IsEntryPoint(publicDiz).Should().Be(false);
         }
 
         [TestMethod]
@@ -100,8 +98,7 @@ public class Foo
 
             var publicFoo = compilation.GetMethodSymbol("PublicFoo");
 
-            var checker = new EntryPointRecognizer();
-            checker.IsEntryPoint(publicFoo).Should().Be(true);
+            EntryPointRecognizer.IsEntryPoint(publicFoo).Should().Be(true);
         }
 
         [TestMethod]
@@ -121,8 +118,7 @@ public class Foo : Microsoft.AspNetCore.Mvc.ControllerBase
 
             var publicFoo = compilation.GetMethodSymbol("PublicFoo");
 
-            var checker = new EntryPointRecognizer();
-            checker.IsEntryPoint(publicFoo).Should().Be(false);
+            EntryPointRecognizer.IsEntryPoint(publicFoo).Should().Be(false);
         }
     }
 }

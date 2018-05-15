@@ -24,7 +24,7 @@ using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Security.Ucfg
 {
-    public class EntryPointRecognizer : IEntryPointRecognizer
+    public class EntryPointRecognizer
     {
         private static readonly ISet<KnownType> controllerTypes = new HashSet<KnownType>
         {
@@ -42,7 +42,7 @@ namespace SonarAnalyzer.Security.Ucfg
             KnownType.Microsoft_AspNetCore_Mvc_ControllerAttribute,
         };
 
-        public bool IsEntryPoint(IMethodSymbol methodSymbol) =>
+        public static bool IsEntryPoint(IMethodSymbol methodSymbol) =>
             methodSymbol.GetEffectiveAccessibility() == Accessibility.Public &&
             IsControllerType(methodSymbol?.ContainingType);
 

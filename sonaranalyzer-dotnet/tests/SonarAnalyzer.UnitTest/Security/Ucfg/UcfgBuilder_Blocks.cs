@@ -304,16 +304,14 @@ public class Class1
         public void EntryPointMethod_Has_Additional_Block()
         {
             const string code = @"
-public class Class1
+using System.Web.Mvc;
+public class Class1 : Controller
 {
     public void Foo(string s)
     {                   //                  | Basic#1(Jump:#0) - contains entrypoint instruction and attributes
     }                   // Exit             | Basic#0(Ret)
 }";
-            var checker = new Mock<IEntryPointRecognizer>();
-            checker.Setup(x => x.IsEntryPoint(It.IsAny<IMethodSymbol>())).Returns(true);
-
-            var ucfg = GetUcfgForMethod(code, "Foo", checker.Object);
+            var ucfg = GetUcfgForMethod(code, "Foo");
 
             ucfg.Entries.Should().BeEquivalentTo(new[] { "1" });
             AssertCollection(ucfg.BasicBlocks,

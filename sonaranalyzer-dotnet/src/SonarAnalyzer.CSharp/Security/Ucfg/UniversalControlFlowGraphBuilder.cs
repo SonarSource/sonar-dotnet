@@ -43,12 +43,6 @@ namespace SonarAnalyzer.Security.Ucfg
         };
 
         private readonly BlockIdMap blockId = new BlockIdMap();
-        private readonly IEntryPointRecognizer entryPointRecognizer;
-
-        public UniversalControlFlowGraphBuilder(IEntryPointRecognizer entryPointRecognizer)
-        {
-            this.entryPointRecognizer = entryPointRecognizer;
-        }
 
         public UCFG Build(SemanticModel semanticModel, SyntaxNode syntaxNode, IMethodSymbol methodSymbol, IControlFlowGraph cfg)
         {
@@ -61,7 +55,7 @@ namespace SonarAnalyzer.Security.Ucfg
             ucfg.BasicBlocks.AddRange(cfg.Blocks.Select(b => CreateBasicBlock(b, semanticModel)));
             ucfg.Parameters.AddRange(methodSymbol.GetParameters().Select(p => p.Name));
 
-            if (entryPointRecognizer.IsEntryPoint(methodSymbol) &&
+            if (EntryPointRecognizer.IsEntryPoint(methodSymbol) &&
                 syntaxNode is BaseMethodDeclarationSyntax methodDeclaration)
             {
                 var entryPointBlock = CreateEntryPointBlock(semanticModel, methodDeclaration, methodSymbol, blockId.Get(cfg.EntryBlock));

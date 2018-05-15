@@ -328,11 +328,12 @@ namespace Namespace
         }
 
         [TestMethod]
-        public void TaintedMethod_Contains_EntryPoint_And_Attributes()
+        public void ControllerMethod_Contains_EntryPoint_And_Attributes()
         {
             const string code = @"
 using System.ComponentModel;
-public class Class1
+using System.Web.Mvc;
+public class Class1 : Controller
 {
     private string field;
     public void Foo([Description]string s, [Missing]string x)
@@ -341,10 +342,7 @@ public class Class1
                     //      s = __annotation(%1)
                     // the other attribute is unknown and is not included
 }";
-            var checker = new Mock<IEntryPointRecognizer>();
-            checker.Setup(x => x.IsEntryPoint(It.IsAny<IMethodSymbol>())).Returns(true);
-
-            var ucfg = GetUcfgForMethod(code, "Foo", checker.Object);
+            var ucfg = GetUcfgForMethod(code, "Foo");
 
             ucfg.BasicBlocks.Should().HaveCount(2);
             AssertCollection(ucfg.BasicBlocks[1].Instructions,

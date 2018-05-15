@@ -42,16 +42,11 @@ namespace SonarAnalyzer.UnitTest.Security.Ucfg
             }
         }
 
-        protected UCFG GetUcfgForMethod(string code, string methodName, IEntryPointRecognizer entryPointRecognizer = null)
+        protected UCFG GetUcfgForMethod(string code, string methodName)
         {
-            if (entryPointRecognizer == null)
-            {
-                entryPointRecognizer = new EntryPointRecognizer();
-            }
+            (var method, var semanticModel) = TestHelper.Compile(code, Verifier.SystemWebMvcAssembly).GetMethod(methodName);
 
-            (var method, var semanticModel) = TestHelper.Compile(code).GetMethod(methodName);
-
-            var builder = new UniversalControlFlowGraphBuilder(entryPointRecognizer);
+            var builder = new UniversalControlFlowGraphBuilder();
 
             return builder.Build(semanticModel, method,
                 semanticModel.GetDeclaredSymbol(method), CSharpControlFlowGraph.Create(method.Body, semanticModel));
