@@ -55,8 +55,8 @@ namespace SonarAnalyzer.Security.Ucfg
             ucfg.BasicBlocks.AddRange(cfg.Blocks.Select(b => CreateBasicBlock(b, semanticModel)));
             ucfg.Parameters.AddRange(methodSymbol.GetParameters().Select(p => p.Name));
 
-            if (EntryPointRecognizer.IsEntryPoint(methodSymbol) &&
-                syntaxNode is BaseMethodDeclarationSyntax methodDeclaration)
+            if (syntaxNode is BaseMethodDeclarationSyntax methodDeclaration &&
+                EntryPointRecognizer.IsEntryPoint(methodSymbol))
             {
                 var entryPointBlock = CreateEntryPointBlock(semanticModel, methodDeclaration, methodSymbol, blockId.Get(cfg.EntryBlock));
                 ucfg.BasicBlocks.Add(entryPointBlock);
@@ -103,7 +103,8 @@ namespace SonarAnalyzer.Security.Ucfg
             return basicBlock;
         }
 
-        private BasicBlock CreateEntryPointBlock(SemanticModel semanticModel, BaseMethodDeclarationSyntax methodDeclaration, IMethodSymbol methodSymbol, string currentEntryBlockId)
+        private BasicBlock CreateEntryPointBlock(SemanticModel semanticModel, BaseMethodDeclarationSyntax methodDeclaration,
+            IMethodSymbol methodSymbol, string currentEntryBlockId)
         {
             var basicBlock = new BasicBlock
             {

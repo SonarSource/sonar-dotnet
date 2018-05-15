@@ -38,6 +38,10 @@ public class Foo : System.Web.Mvc.Controller
     protected void ProtectedFoo() { }
     internal void InternalFoo() { }
     private void PrivateFoo() { }
+    private class Bar : System.Web.Mvb.Controller
+    {
+        public void InnerFoo() { }
+    }
 }
 ";
             var compilation = TestHelper.Compile(code, Verifier.SystemWebMvcAssembly);
@@ -46,11 +50,13 @@ public class Foo : System.Web.Mvc.Controller
             var protectedFoo = compilation.GetMethodSymbol("ProtectedFoo");
             var internalFoo = compilation.GetMethodSymbol("InternalFoo");
             var privateFoo = compilation.GetMethodSymbol("PrivateFoo");
+            var innerFoo = compilation.GetMethodSymbol("InnerFoo");
 
             EntryPointRecognizer.IsEntryPoint(publicFoo).Should().Be(true);
             EntryPointRecognizer.IsEntryPoint(protectedFoo).Should().Be(false);
             EntryPointRecognizer.IsEntryPoint(internalFoo).Should().Be(false);
             EntryPointRecognizer.IsEntryPoint(privateFoo).Should().Be(false);
+            EntryPointRecognizer.IsEntryPoint(innerFoo).Should().Be(false);
         }
 
         [TestMethod]

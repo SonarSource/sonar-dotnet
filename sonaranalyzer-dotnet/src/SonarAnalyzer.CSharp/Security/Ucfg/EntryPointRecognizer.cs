@@ -24,7 +24,7 @@ using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Security.Ucfg
 {
-    public class EntryPointRecognizer
+    public static class EntryPointRecognizer
     {
         private static readonly ISet<KnownType> controllerTypes = new HashSet<KnownType>
         {
