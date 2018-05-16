@@ -46,7 +46,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void ReviewSqlQueriesForSecurityVulnerabilities()
+        public void ReviewSqlQueriesForSecurityVulnerabilities_Test()
         {
             Verifier.VerifyAnalyzer(@"TestCases\ReviewSqlQueriesForSecurityVulnerabilities.cs",
                 new ReviewSqlQueriesForSecurityVulnerabilities(),
@@ -111,6 +111,100 @@ class Program
                     "Program.Method1(string)",
                     "Program.Method2()",
                 });
+        }
+
+        [TestMethod]
+        public void Ucfg_Block_Without_Terminator_IsInvalid()
+        {
+            var ucfg = new UCFG
+            {
+                Entries = { "0" },
+                BasicBlocks =
+                {
+                    new BasicBlock { Id = "0" }, // no Jump or Ret
+                },
+            };
+
+            ReviewSqlQueriesForSecurityVulnerabilities.IsValid(ucfg).Should().BeFalse();
+        }
+
+        [TestMethod]
+        public void Ucfg_Block_With_Jump_IsValid()
+        {
+            var ucfg = new UCFG
+            {
+                Entries = { "0" },
+                BasicBlocks =
+                {
+                    new BasicBlock
+                    {
+                        Id = "0",
+                        Jump = new Jump { Destinations = { "0" } },
+                    },
+                },
+            };
+
+            ReviewSqlQueriesForSecurityVulnerabilities.IsValid(ucfg).Should().BeTrue();
+        }
+
+        [TestMethod]
+        public void Ucfg_Block_With_Ret_IsValid()
+        {
+            var ucfg = new UCFG
+            {
+                Entries = { "0" },
+                BasicBlocks =
+                {
+                    new BasicBlock
+                    {
+                        Id = "0",
+                        Ret = new Return
+                        {
+                            ReturnedExpression = new Expression { Var = new Variable { Name = "a" } }
+                        },
+                    },
+                },
+            };
+
+            ReviewSqlQueriesForSecurityVulnerabilities.IsValid(ucfg).Should().BeTrue();
+        }
+
+        [TestMethod]
+        public void Ucfg_Missing_Entries_IsInvalid()
+        {
+            var ucfg = new UCFG
+            {
+                Entries = { "1" }, // There is no such block
+                BasicBlocks =
+                {
+                    new BasicBlock
+                    {
+                        Id = "0",
+                        Jump = new Jump { Destinations = { "0" } },
+                    },
+                },
+            };
+
+            ReviewSqlQueriesForSecurityVulnerabilities.IsValid(ucfg).Should().BeFalse();
+        }
+
+        [TestMethod]
+        public void Ucfg_Block_With_Missing_Jump_Destinations_IsInvalid()
+        {
+            var ucfg = new UCFG
+            {
+                Entries = { "0" },
+                BasicBlocks =
+                {
+                    new BasicBlock
+                    {
+                        Id = "0",
+                        Jump = new Jump { Destinations = { "1" } }, // There is no such block
+                    },
+                },
+            };
+
+            ReviewSqlQueriesForSecurityVulnerabilities.IsValid(ucfg).Should().BeFalse();
         }
 
         private static string GetProtobufMethodId(string protobufPath)
