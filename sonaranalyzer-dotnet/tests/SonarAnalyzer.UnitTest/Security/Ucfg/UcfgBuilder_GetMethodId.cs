@@ -92,6 +92,10 @@ namespace Namespace
 public class Class3
 {
     public void NoNamespace(Class3 s) { }
+}
+public static class Extensions
+{
+    public static void Extension(this string s, int x) { }
 }";
             var (syntaxTree, semanticModel) = TestHelper.Compile(code);
 
@@ -114,6 +118,7 @@ public class Class3
             MethodId("Method1", skip: 1).Should().Be("Namespace.Descendant.Method1(string)");
             MethodId("InnerNamespace").Should().Be("Namespace.Inner.Class2.InnerNamespace()");
             MethodId("NoNamespace").Should().Be("Class3.NoNamespace(Class3)");
+            MethodId("Extension").Should().Be("Extensions.Extension(string, int)");
 
             string MethodId(string methodName, int skip = 0) =>
                 UniversalControlFlowGraphBuilder.GetMethodId(semanticModel.GetDeclaredSymbol(syntaxTree.GetMethod(methodName, skip)));
