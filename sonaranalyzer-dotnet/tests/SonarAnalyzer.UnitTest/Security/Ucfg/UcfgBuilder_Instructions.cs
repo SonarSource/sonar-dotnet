@@ -19,16 +19,14 @@
  */
 
 extern alias csharp;
-using System;
-using System.Collections.Generic;
 using System.Linq;
+using csharp::SonarAnalyzer.Security;
 using csharp::SonarAnalyzer.Security.Ucfg;
-using csharp::SonarAnalyzer.SymbolicExecution.ControlFlowGraph;
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 using SonarAnalyzer.Protobuf.Ucfg;
-using Microsoft.CodeAnalysis.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Security.Ucfg
 {
@@ -326,6 +324,31 @@ namespace Namespace
                 i => ValidateInstruction(i, KnownMethodId.Assignment, "a", new[] { "%1" }),
                 i => ValidateInstruction(i, "Namespace.Extensions.Ext(string)", "%2", new[] { "\"\"" }),
                 i => ValidateInstruction(i, KnownMethodId.Assignment, "a", new[] { "%2" })
+                );
+        }
+
+        [TestMethod]
+        public void ControllerMethod_Contains_EntryPoint_And_Attributes()
+        {
+            const string code = @"
+using System.ComponentModel;
+using System.Web.Mvc;
+public class Class1 : Controller
+{
+    private string field;
+    public void Foo([Description]string s, [Missing]string x)
+    {               //      %0 = __entrypoint(s, x)
+    }               //      %1 = Description()
+                    //      s = __annotation(%1)
+                    // the other attribute is unknown and is not included
+}";
+            var ucfg = GetUcfgForMethod(code, "Foo");
+
+            ucfg.BasicBlocks.Should().HaveCount(2);
+            AssertCollection(ucfg.BasicBlocks[1].Instructions,
+                i => ValidateInstruction(i, KnownMethodId.EntryPoint, "%0", new[] { "s", "x" }),
+                i => ValidateInstruction(i, "System.ComponentModel.DescriptionAttribute.DescriptionAttribute()", "%1"),
+                i => ValidateInstruction(i, KnownMethodId.Annotation, "s", new[] { "%1" })
                 );
         }
 

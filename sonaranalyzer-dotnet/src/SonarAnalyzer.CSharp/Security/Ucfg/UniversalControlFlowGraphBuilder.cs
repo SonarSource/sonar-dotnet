@@ -44,10 +44,6 @@ namespace SonarAnalyzer.Security.Ucfg
 
         private readonly BlockIdMap blockId = new BlockIdMap();
 
-        public UniversalControlFlowGraphBuilder()
-        {
-        }
-
         public UCFG Build(SemanticModel semanticModel, SyntaxNode syntaxNode, IMethodSymbol methodSymbol, IControlFlowGraph cfg)
         {
             var ucfg = new UCFG
@@ -58,7 +54,18 @@ namespace SonarAnalyzer.Security.Ucfg
 
             ucfg.BasicBlocks.AddRange(cfg.Blocks.Select(b => CreateBasicBlock(b, semanticModel)));
             ucfg.Parameters.AddRange(methodSymbol.GetParameters().Select(p => p.Name));
-            ucfg.Entries.Add(blockId.Get(cfg.EntryBlock));
+
+            if (syntaxNode is BaseMethodDeclarationSyntax methodDeclaration &&
+                EntryPointRecognizer.IsEntryPoint(methodSymbol))
+            {
+                var entryPointBlock = CreateEntryPointBlock(semanticModel, methodDeclaration, methodSymbol, blockId.Get(cfg.EntryBlock));
+                ucfg.BasicBlocks.Add(entryPointBlock);
+                ucfg.Entries.Add(entryPointBlock.Id);
+            }
+            else
+            {
+                ucfg.Entries.Add(blockId.Get(cfg.EntryBlock));
+            }
             return ucfg;
         }
 
@@ -91,6 +98,30 @@ namespace SonarAnalyzer.Security.Ucfg
                 // No return was created from JumpBlock or ExitBlock, wire up the successor blocks
                 basicBlock.Jump = new Jump();
                 basicBlock.Jump.Destinations.AddRange(block.SuccessorBlocks.Select(blockId.Get));
+            }
+
+            return basicBlock;
+        }
+
+        private BasicBlock CreateEntryPointBlock(SemanticModel semanticModel, BaseMethodDeclarationSyntax methodDeclaration,
+            IMethodSymbol methodSymbol, string currentEntryBlockId)
+        {
+            var basicBlock = new BasicBlock
+            {
+                Id = blockId.Get(new TemporaryBlock()),
+                Jump = new Jump
+                {
+                    Destinations = { currentEntryBlockId },
+                }
+            };
+
+            var instructionBuilder = new InstructionBuilder(semanticModel, basicBlock);
+
+            instructionBuilder.CreateEntryPointInstruction(methodDeclaration);
+
+            foreach (var parameter in methodSymbol.Parameters)
+            {
+                instructionBuilder.CreateAttributeInstructions(parameter);
             }
 
             return basicBlock;
@@ -334,6 +365,40 @@ namespace SonarAnalyzer.Security.Ucfg
 
             private ISymbol GetSymbol(SyntaxNode syntaxNode) =>
                 semanticModel.GetSymbolInfo(syntaxNode).Symbol;
+
+            public void CreateAttributeInstructions(IParameterSymbol parameter)
+            {
+                foreach (var attribute in parameter.GetAttributes().Where(a => a.AttributeConstructor != null))
+                {
+                    var attributeVariable = CreateTempVariable();
+
+                    CreateInstruction(
+                        syntaxNode: attribute.ApplicationSyntaxReference.GetSyntax(),
+                        methodId: GetMethodId(attribute.AttributeConstructor),
+                        variable: attributeVariable);
+
+                    CreateInstruction(
+                        syntaxNode: attribute.ApplicationSyntaxReference.GetSyntax(),
+                        methodId: KnownMethodId.Annotation,
+                        variable: parameter.Name,
+                        arguments: CreateVariableExpression(attributeVariable));
+                }
+            }
+
+            public void CreateEntryPointInstruction(BaseMethodDeclarationSyntax methodDeclaration)
+            {
+                CreateInstruction(
+                    syntaxNode: methodDeclaration,
+                    methodId: KnownMethodId.EntryPoint,
+                    variable: CreateTempVariable(),
+                    arguments: methodDeclaration.ParameterList.Parameters
+                        .Select(GetParameterName)
+                        .Select(CreateVariableExpression)
+                        .ToArray());
+
+                string GetParameterName(ParameterSyntax parameter) =>
+                    parameter.Identifier.ValueText;
+            }
         }
 
         private class BlockIdMap

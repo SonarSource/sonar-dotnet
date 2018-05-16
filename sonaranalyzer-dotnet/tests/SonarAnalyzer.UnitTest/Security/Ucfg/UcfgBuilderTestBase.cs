@@ -21,6 +21,7 @@
 extern alias csharp;
 using System;
 using System.Collections.Generic;
+using csharp::SonarAnalyzer.Security;
 using csharp::SonarAnalyzer.Security.Ucfg;
 using csharp::SonarAnalyzer.SymbolicExecution.ControlFlowGraph;
 using FluentAssertions;
@@ -43,7 +44,7 @@ namespace SonarAnalyzer.UnitTest.Security.Ucfg
 
         protected UCFG GetUcfgForMethod(string code, string methodName)
         {
-            (var method, var semanticModel) = TestHelper.Compile(code).GetMethod(methodName);
+            (var method, var semanticModel) = TestHelper.Compile(code, Verifier.SystemWebMvcAssembly).GetMethod(methodName);
 
             var builder = new UniversalControlFlowGraphBuilder();
 
