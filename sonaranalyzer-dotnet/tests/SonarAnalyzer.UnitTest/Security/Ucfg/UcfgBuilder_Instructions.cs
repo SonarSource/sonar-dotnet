@@ -24,9 +24,12 @@ using csharp::SonarAnalyzer.Security;
 using csharp::SonarAnalyzer.Security.Ucfg;
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using SonarAnalyzer.Protobuf.Ucfg;
+using SonarAnalyzer.SymbolicExecution.ControlFlowGraph;
 
 namespace SonarAnalyzer.UnitTest.Security.Ucfg
 {
@@ -80,6 +83,9 @@ namespace Namespace
             a = b = c = ""foo""     // c = __id("")
                                     // b = __id(c)
                                     // a = __id(b)
+
+            int x, y, x;
+            x = y = z = 5;          // ignored
         }
     }
 }";
@@ -95,26 +101,30 @@ namespace Namespace
         [TestMethod]
         public void Invocations_LambdaArguments_Generate_Const()
         {
-            const string Enumerable_Count_Id = "System.Linq.Enumerable.Count<TSource>(System.Collections.Generic.IEnumerable<TSource>, System.Func<TSource, bool>)";
-
             const string code = @"
-using System.Linq;
+using System;
 namespace Namespace
 {
     public class Class1
     {
         public void Foo(string s)
         {
-            var x = s.Count(c => c == 'a');
-            var y = s.Count((c) => c == 'b');
+            var x = Bar(s, a => a);     // %0 = Bar(s, const)
+                                        // x = __id(%0)
+        }
+
+        public string Bar(string s, Func<string, string> a)
+        {
+            return s;
         }
     }
 }";
             var ucfg = GetUcfgForMethod(code, "Foo");
             ucfg.BasicBlocks.Should().HaveCount(2);
             AssertCollection(ucfg.BasicBlocks[0].Instructions,
-                i => ValidateInstruction(i, Enumerable_Count_Id, "%0", new[] { "s", "\"\"" }),
-                i => ValidateInstruction(i, Enumerable_Count_Id, "%1", new[] { "s", "\"\"" })
+                i => ValidateInstruction(i, "Namespace.Class1.Bar(string, System.Func<string, string>)",
+                    "%0", new[] { "s", "\"\"" }),
+                i => ValidateInstruction(i, KnownMethodId.Assignment, "x", new[] { "%0" })
                 );
         }
 
@@ -129,6 +139,7 @@ namespace Namespace
         public void Foo()
         {
             var x = Bar<string>.Value;  // x = __id("")
+            var y = Bar<int>.Value;     // ignored
         }
     }
     public class Bar<T>
@@ -152,6 +163,7 @@ namespace Namespace
     public class Class1
     {
         private string Property { get; set; }
+        private int IntProperty { get; set; }
 
         public string Foo(string s)
         {
@@ -170,6 +182,8 @@ namespace Namespace
             Property = Foo(Property);   // %6 = Class1.Property.get()
                                         // %7 = Foo(%6)
                                         // %8 = Class1.Property.set(%7)
+
+            var x = IntProperty = 5;    // ignored
 
             return s;
         }
@@ -197,6 +211,31 @@ namespace Namespace
         }
 
         [TestMethod]
+        public void Assignments_AutoProperties()
+        {
+            const string code = @"
+namespace Namespace
+{
+    public class Class1
+    {
+        private string Property { get; }
+
+        public Class1(string s)
+        {
+            Property = s;   // ignored, property has no SetMethod
+                            // This should be ok for now because we don't really care about
+                            // properties without accessors, because they behave as pure fields.
+        }
+    }
+}";
+            var ucfg = CreateUcfgForConstructor(code, "Class1");
+
+            ucfg.BasicBlocks.Should().HaveCount(2);
+
+            AssertCollection(ucfg.BasicBlocks[0].Instructions);
+        }
+
+        [TestMethod]
         public void Assignments_Concatenations()
 
         {
@@ -220,6 +259,9 @@ namespace Namespace
             a = (s + s) + t;        // %3 = __concat(s, s)
                                     // %4 = __concat(%3, t)
                                     // a = __id(%4)
+
+            int x, y, z;
+            x = y = z = 5;          // ignored
         }
     }
 }";
@@ -264,9 +306,23 @@ namespace Namespace
 
             a = string.IsNullOrEmpty(s);    // %5 = string.IsNullOrEmpty(s);
                                             // a = _id(const) // not using %5 because it is not string
+
+            a = A(B(C(s)));         // %6 = C(s)
+                                    // B is ignored
+                                    // %7 = A("")
+                                    // a = __id(%7)
+
+            int x;
+            x = O(s);               // %8 = O(s);
+                                    // no assignment is added because O returns int
         }
 
         public void Bar(string s) { }
+
+        public string A(int x) { return x.ToString(); }
+        public int B(int x) { return x; }
+        public int C(string s) { 5; }
+        public int O(object o) { 5; }
     }
 }";
             var ucfg = GetUcfgForMethod(code, "Foo");
@@ -281,7 +337,11 @@ namespace Namespace
                 i => ValidateInstruction(i, "string.ToLower()", "%3", new[] { "s" }),
                 i => ValidateInstruction(i, "Namespace.Class1.Bar(string)", "%4", new[] { "%3" }),
                 i => ValidateInstruction(i, "string.IsNullOrEmpty(string)", "%5", new[] { "s" }),
-                i => ValidateInstruction(i, KnownMethodId.Assignment, "a", new[] { "\"\"" })
+                i => ValidateInstruction(i, KnownMethodId.Assignment, "a", new[] { "\"\"" }),
+                i => ValidateInstruction(i, "Namespace.Class1.C(string)", "%6", new[] { "s" }),
+                i => ValidateInstruction(i, "Namespace.Class1.A(int)", "%7", new[] { "\"\"" }),
+                i => ValidateInstruction(i, KnownMethodId.Assignment, "a", new[] { "%7" }),
+                i => ValidateInstruction(i, "Namespace.Class1.O(object)", "%8", new[] { "s" })
                 );
         }
 
@@ -299,13 +359,13 @@ namespace Namespace
             string a;
 
             a = s.Ext();            // %0 = Extensions.Ext(s);
-                                    // a = __id(%0)
+                                        // a = __id(%0)
 
             a = Extensions.Ext(s);  // %1 = Extensions.Ext(s);
-                                    // a = __id(%1)
+                                        // a = __id(%1)
 
             a = this.field.Ext();   // %2 = Extensions.Ext(const);
-                                    // a = __id(%2)
+                                        // a = __id(%2)
         }
     }
 
@@ -394,5 +454,21 @@ public class Class1
             }
         }
 
+        private static UCFG CreateUcfgForConstructor(string code, string name)
+        {
+            (var syntaxTree, var semanticModel) = TestHelper.Compile(code, Verifier.SystemWebMvcAssembly);
+
+            var ctor = syntaxTree.GetRoot()
+                .DescendantNodes()
+                .OfType<ConstructorDeclarationSyntax>()
+                .Where(m => m.Identifier.ValueText == name)
+                .First();
+
+            var builder = new UniversalControlFlowGraphBuilder();
+
+            var ucfg = builder.Build(semanticModel, ctor,
+                semanticModel.GetDeclaredSymbol(ctor), CSharpControlFlowGraph.Create(ctor.Body, semanticModel));
+            return ucfg;
+        }
     }
 }
