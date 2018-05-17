@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S4457",
-"message":  "Split this method into two, one handling parameters check and the other handling the iterator.",
+"message":  "Split this method into two, one handling parameters check and the other handling the asynchronous code.",
 "location":  [
 {
 "uri":  "sources\Nancy\src\Nancy\NancyEngine.cs",
@@ -17,9 +17,9 @@
 "uri":  "sources\Nancy\src\Nancy\NancyEngine.cs",
 "region":  {
 "startLine":  110,
-"startColumn":  31,
+"startColumn":  27,
 "endLine":  110,
-"endColumn":  52
+"endColumn":  104
 }
 }
 ]

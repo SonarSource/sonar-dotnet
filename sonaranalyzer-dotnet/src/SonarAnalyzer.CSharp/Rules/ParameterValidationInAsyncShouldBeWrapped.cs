@@ -18,6 +18,8 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Immutable;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -29,14 +31,37 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public sealed class ParameterValidationInAsyncShouldBeWrapped : ParameterValidationInMethodShouldBeWrapped<AwaitExpressionSyntax>
+    public sealed class ParameterValidationInAsyncShouldBeWrapped : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S4457";
+        private const string MessageFormat = "Split this method into two, one handling parameters check and the other " +
+           "handling the asynchronous code.";
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-        protected override DiagnosticDescriptor Rule { get; } =  rule;
+        public sealed override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        protected override SyntaxKind[] RegisterSyntaxKinds { get; } = new[] { SyntaxKind.AwaitExpression };
+        protected override void Initialize(SonarAnalysisContext context)
+        {
+            context.RegisterSyntaxNodeActionInNonGenerated(
+                c =>
+                {
+                    var methodDeclaration = (MethodDeclarationSyntax)c.Node;
+                    if (!methodDeclaration.Modifiers.Any(SyntaxKind.AsyncKeyword))
+                    {
+                        return;
+                    }
+
+                    var walker = new ParameterValidationInMethodWalker(c.SemanticModel);
+                    walker.Visit(methodDeclaration);
+
+                    if (walker.ArgumentExceptionLocations.Any())
+                    {
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, methodDeclaration.Identifier.GetLocation(),
+                            additionalLocations: walker.ArgumentExceptionLocations));
+                    }
+                },
+                SyntaxKind.MethodDeclaration);
+        }
     }
 }
