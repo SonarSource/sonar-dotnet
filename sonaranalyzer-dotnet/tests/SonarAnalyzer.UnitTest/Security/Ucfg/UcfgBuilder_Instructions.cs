@@ -346,6 +346,47 @@ namespace Namespace
         }
 
         [TestMethod]
+        public void Assignments_Ctors()
+        {
+            const string code = @"
+namespace Namespace
+{
+    public class Class1
+    {
+        public string Property { get; set; }
+
+        public Class1() { }
+        public Class1(string s) { }
+        public Class1(Class1 other) { }
+
+        public void Foo(string s)
+        {
+            Class1 c;
+            c = new Class1(s);              // %0 = Class1(s)
+
+            c = new Class1();               // ignored, does not accept or return string
+
+            c = new Class1(new Class1(s));  // %1 = Class1(s)
+
+            c = new Class1(s)               // %2 = Class1(s)
+            {
+                Property = s,               // %3 = Property.set(s)
+            };
+        }
+    }
+}";
+            var ucfg = GetUcfgForMethod(code, "Foo");
+
+            ucfg.BasicBlocks.Should().HaveCount(2);
+            AssertCollection(ucfg.BasicBlocks[0].Instructions,
+                i => ValidateInstruction(i, "Namespace.Class1.Class1(string)", "%0", new[] { "s" }),
+                i => ValidateInstruction(i, "Namespace.Class1.Class1(string)", "%1", new[] { "s" }),
+                i => ValidateInstruction(i, "Namespace.Class1.Class1(string)", "%2", new[] { "s" }),
+                i => ValidateInstruction(i, "Namespace.Class1.Property.set", "%3", new[] { "s" })
+                );
+        }
+
+        [TestMethod]
         public void Invocations_ExtensionMethods()
         {
             const string code = @"
