@@ -456,13 +456,12 @@ public class Class1
 
         private static UCFG CreateUcfgForConstructor(string code, string name)
         {
-            (var syntaxTree, var semanticModel) = TestHelper.Compile(code, Verifier.SystemWebMvcAssembly);
+            var (syntaxTree, semanticModel) = TestHelper.Compile(code, Verifier.SystemWebMvcAssembly);
 
             var ctor = syntaxTree.GetRoot()
                 .DescendantNodes()
                 .OfType<ConstructorDeclarationSyntax>()
-                .Where(m => m.Identifier.ValueText == name)
-                .First();
+                .First(m => m.Identifier.ValueText == name);
 
             var builder = new UniversalControlFlowGraphBuilder();
 

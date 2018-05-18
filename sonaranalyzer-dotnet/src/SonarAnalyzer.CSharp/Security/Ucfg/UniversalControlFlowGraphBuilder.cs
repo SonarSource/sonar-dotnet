@@ -270,11 +270,13 @@ namespace SonarAnalyzer.Security.Ucfg
                     return ConstantExpression;
                 }
 
-                // We need to build the argument expressions regardless of whether
-                // we are going to create the instruction or not
+                // The arguments are built in advance to allow nested instructions
+                // to be added, regardless of whether the current invocation is going
+                // to be added to the UCFG or not. For example: LogStatus(StoreInDb(str1 + str2));
+                // should add 'str1 + str2' and 'StoreInDb(string)', but not 'void LogStatus(int)'
                 var arguments = BuildArguments(invocation, methodSymbol).ToArray();
 
-                // Create instruction only when the method accepts/returns string,
+                // Add instruction to UCFG only when the method accepts/returns string,
                 // or when at least one of its arguments is known to be a string.
                 // Since we generate Const expressions for everything that is not
                 // a string, checking if the arguments are Var expressions should
@@ -326,7 +328,7 @@ namespace SonarAnalyzer.Security.Ucfg
             {
                 var left = GetSymbol(assignment.Left);
 
-                var argument = BuildInstruction(assignment.Right);
+                var right = BuildInstruction(assignment.Right);
 
                 if (IsLocalVarOrParameterOfTypeString(left))
                 {
@@ -334,7 +336,7 @@ namespace SonarAnalyzer.Security.Ucfg
                         assignment,
                         methodId: KnownMethodId.Assignment,
                         variable: left.Name,
-                        arguments: argument);
+                        arguments: right);
                     return CreateVariableExpression(instruction.Variable);
                 }
                 else if (left is IPropertySymbol property &&
@@ -345,7 +347,7 @@ namespace SonarAnalyzer.Security.Ucfg
                         assignment,
                         methodId: GetMethodId(property.SetMethod),
                         variable: CreateTempVariable(),
-                        arguments: argument);
+                        arguments: right);
                     return CreateVariableExpression(instruction.Variable);
                 }
                 else
