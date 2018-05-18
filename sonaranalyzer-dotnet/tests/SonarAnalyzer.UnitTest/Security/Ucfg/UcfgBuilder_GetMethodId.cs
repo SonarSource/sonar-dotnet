@@ -52,6 +52,8 @@ namespace Namespace
         public void SystemType(Uri uri) { }
         public void GenericMethod1<T1,T2>(T1 x) { }
 
+        public void Nullables(int? x, Nullable<int> y) { }
+
         public void GenericArgument(IEnumerable<string> strings) { }
 
         public void Overload1(string s) { }
@@ -108,6 +110,7 @@ public static class Extensions
             MethodId("UserType").Should().Be("Namespace.Class1.UserType(Namespace.Class1)");
             MethodId("SystemType").Should().Be("Namespace.Class1.SystemType(System.Uri)");
             MethodId("GenericMethod1").Should().Be("Namespace.Class1.GenericMethod1<T1, T2>(T1)");
+            MethodId("Nullables").Should().Be("Namespace.Class1.Nullables(int?, int?)");
             MethodId("GenericArgument").Should().Be("Namespace.Class1.GenericArgument(System.Collections.Generic.IEnumerable<string>)");
             MethodId("Overload1").Should().Be("Namespace.Class1.Overload1(string)");
             MethodId("Overload1", skip: 1).Should().Be("Namespace.Class1.Overload1(string, string)");
