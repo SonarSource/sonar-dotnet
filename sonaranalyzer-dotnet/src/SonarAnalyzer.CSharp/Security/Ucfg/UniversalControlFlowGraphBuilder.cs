@@ -270,7 +270,22 @@ namespace SonarAnalyzer.Security.Ucfg
                     return ConstantExpression;
                 }
 
+                // The arguments are built in advance to allow nested instructions
+                // to be added, regardless of whether the current invocation is going
+                // to be added to the UCFG or not. For example: LogStatus(StoreInDb(str1 + str2));
+                // should add 'str1 + str2' and 'StoreInDb(string)', but not 'void LogStatus(int)'
                 var arguments = BuildArguments(invocation, methodSymbol).ToArray();
+
+                // Add instruction to UCFG only when the method accepts/returns string,
+                // or when at least one of its arguments is known to be a string.
+                // Since we generate Const expressions for everything that is not
+                // a string, checking if the arguments are Var expressions should
+                // be enough to ensure they are strings.
+                if (!AcceptsOrReturnsString(methodSymbol) &&
+                    !arguments.Any(IsVariable))
+                {
+                    return ConstantExpression;
+                }
 
                 var instruction = CreateInstruction(
                     invocation,
@@ -281,6 +296,9 @@ namespace SonarAnalyzer.Security.Ucfg
                 return methodSymbol.ReturnType.Is(KnownType.System_String)
                     ? CreateVariableExpression(instruction.Variable)
                     : ConstantExpression;
+
+                bool IsVariable(Expression expression) =>
+                    expression.Var != null;
             }
 
             private IEnumerable<Expression> BuildArguments(InvocationExpressionSyntax invocation, IMethodSymbol methodSymbol)
@@ -310,22 +328,26 @@ namespace SonarAnalyzer.Security.Ucfg
             {
                 var left = GetSymbol(assignment.Left);
 
+                var right = BuildInstruction(assignment.Right);
+
                 if (IsLocalVarOrParameterOfTypeString(left))
                 {
                     var instruction = CreateInstruction(
                         assignment,
                         methodId: KnownMethodId.Assignment,
                         variable: left.Name,
-                        arguments: BuildInstruction(assignment.Right));
+                        arguments: right);
                     return CreateVariableExpression(instruction.Variable);
                 }
-                else if (left is IPropertySymbol property)
+                else if (left is IPropertySymbol property &&
+                    property.SetMethod != null &&
+                    AcceptsOrReturnsString(property.SetMethod))
                 {
                     var instruction = CreateInstruction(
                         assignment,
                         methodId: GetMethodId(property.SetMethod),
                         variable: CreateTempVariable(),
-                        arguments: BuildInstruction(assignment.Right));
+                        arguments: right);
                     return CreateVariableExpression(instruction.Variable);
                 }
                 else
@@ -365,6 +387,10 @@ namespace SonarAnalyzer.Security.Ucfg
 
             private ISymbol GetSymbol(SyntaxNode syntaxNode) =>
                 semanticModel.GetSymbolInfo(syntaxNode).Symbol;
+
+            private static bool AcceptsOrReturnsString(IMethodSymbol methodSymbol) =>
+                methodSymbol.ReturnType.Is(KnownType.System_String) ||
+                methodSymbol.Parameters.Any(p => p.Type.Is(KnownType.System_String));
 
             public void CreateAttributeInstructions(IParameterSymbol parameter)
             {
