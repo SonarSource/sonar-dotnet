@@ -20,24 +20,19 @@
 package org.sonar.plugins.csharp;
 
 import org.junit.Test;
-import org.mockito.Mockito;
-import org.sonar.api.profiles.RulesProfile;
-import org.sonar.api.profiles.XMLProfileParser;
-import org.sonar.api.utils.ValidationMessages;
+import org.sonar.api.server.profile.BuiltInQualityProfilesDefinition;
 
-import java.io.Reader;
-
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class CSharpSonarWayProfileTest {
 
   @Test
   public void test() {
-    XMLProfileParser xmlParser = mock(XMLProfileParser.class);
-    ValidationMessages validation = ValidationMessages.create();
-    RulesProfile profile = new CSharpSonarWayProfile(xmlParser).createProfile(validation);
-    verify(xmlParser).parse(Mockito.any(Reader.class), Mockito.same(validation));
+    CSharpSonarWayProfile profileDef = new CSharpSonarWayProfile();
+    BuiltInQualityProfilesDefinition.Context context = new BuiltInQualityProfilesDefinition.Context();
+    profileDef.define(context);
+    BuiltInQualityProfilesDefinition.BuiltInQualityProfile profile = context.profile("cs", "Sonar way");
+    assertThat(profile.language()).isEqualTo(CSharpPlugin.LANGUAGE_KEY);
   }
 
 }

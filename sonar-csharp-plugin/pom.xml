@@ -86,6 +86,11 @@
       <scope>provided</scope>
     </dependency>
     <dependency>
+      <groupId>org.sonarsource.analyzer-commons</groupId>
+      <artifactId>sonar-analyzer-commons</artifactId>
+      <version>1.7.0.243</version>
+    </dependency>
+    <dependency>
       <groupId>org.sonarsource.sonarqube</groupId>
       <artifactId>sonar-plugin-api</artifactId>
       <version>${sonar.version}</version>
@@ -137,9 +142,9 @@
         <directory>${sonarAnalyzer.workDirectory}</directory>
         <includes>
           <include>org/sonar/plugins/csharp/*.xml</include>
+          <include>org/sonar/plugins/csharp/*.json</include>
           <include>static/version.txt</include>
           <include>static/SonarAnalyzer-${project.version}.zip</include>
-          <include>static/SonarQube.MSBuild.Runner.Implementation.zip</include>
         </includes>
       </resource>
     </resources>
@@ -244,20 +249,15 @@
                     </copy>
                     <zip destfile="${sonarAnalyzer.workDirectory}/static/SonarAnalyzer-${project.version}.zip"
                          basedir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.CSharp"/>
-
-                    <!-- SQALE XML in sslr requires a resource to read from -->
                     <copy todir="${sonarAnalyzer.workDirectory}/org/sonar/plugins/csharp">
                       <fileset dir="${project.build.directory}/../../sonaranalyzer-dotnet/src/SonarAnalyzer.RuleDescriptorGenerator/bin/${analyzer.configuration}/net46/cs">
                         <include name="rules.xml"/>
                         <include name="profile.xml"/>
-                        <include name="sqale.xml"/>
+                      </fileset>
+                      <fileset dir="${project.build.directory}/../../sonaranalyzer-dotnet/rspec/cs">
+                        <include name="Sonar_way_profile.json" />
                       </fileset>
                     </copy>
-
-                    <!-- This zip is required by old versions of the Scanner for MSBuild. Leaving it empty allows to have the
-                         scanner failing with a nice message -->
-                    <zip destfile="${sonarAnalyzer.workDirectory}/static/SonarQube.MSBuild.Runner.Implementation.zip"
-                         basedir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.CSharp" excludes="*.dll" whenempty="create" />
 
                     <echo file="${sonarAnalyzer.workDirectory}/static/version.txt" message="${project.version}" encoding="utf-8" />
                   </tasks>
@@ -326,13 +326,6 @@
                       <type>nupkg</type>
                       <overWrite>true</overWrite>
                     </artifactItem>
-                    <artifactItem>
-                      <groupId>${project.groupId}</groupId>
-                      <artifactId>SonarQube.MSBuild.Runner.Implementation</artifactId>
-                      <version>${analyzer.version}</version>
-                      <type>zip</type>
-                      <overWrite>true</overWrite>
-                    </artifactItem>
                   </artifactItems>
                   <outputDirectory>${sonarAnalyzer.workDirectory}</outputDirectory>
                 </configuration>
@@ -356,7 +349,6 @@
                     <zip destfile="${sonarAnalyzer.workDirectory}/static/SonarAnalyzer-${project.version}.zip"
                          basedir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.CSharp"/>
 
-                    <!-- SQALE XML in sslr requires a resource to read from -->
                     <unzip src="${sonarAnalyzer.workDirectory}/SonarAnalyzer.RuleDocGenerator.CSharp-${analyzer.version}.nupkg"
                            dest="${sonarAnalyzer.workDirectory}/SonarAnalyzer.RuleDocGenerator.CSharp/" />
                     <copy todir="${sonarAnalyzer.workDirectory}/org/sonar/plugins/csharp">
@@ -364,7 +356,11 @@
                         <include name="*.xml"/>
                       </fileset>
                     </copy>
-
+                    <copy todir="${sonarAnalyzer.workDirectory}/org/sonar/plugins/csharp">
+                      <fileset dir="${project.build.directory}/../../sonaranalyzer-dotnet/rspec/cs">
+                        <include name="Sonar_way_profile.json" />
+                      </fileset>
+                    </copy>
                     <echo file="${sonarAnalyzer.workDirectory}/static/version.txt" message="${project.version}" encoding="utf-8" />
                   </tasks>
                 </configuration>

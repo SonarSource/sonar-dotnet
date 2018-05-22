@@ -19,13 +19,15 @@
  */
 package org.sonar.plugins.csharp;
 
-import org.sonar.api.profiles.XMLProfileParser;
-import org.sonarsource.dotnet.shared.plugins.AbstractSonarWayProfile;
+import org.sonar.api.server.profile.BuiltInQualityProfilesDefinition;
+import org.sonarsource.analyzer.commons.BuiltInQualityProfileJsonLoader;
 
-public class CSharpSonarWayProfile extends AbstractSonarWayProfile {
-  private static final String PROFILE_XML_PATH = "/org/sonar/plugins/csharp/profile.xml";
+public class CSharpSonarWayProfile implements BuiltInQualityProfilesDefinition {
 
-  public CSharpSonarWayProfile(XMLProfileParser xmlParser) {
-    super(xmlParser, PROFILE_XML_PATH);
+  @Override
+  public void define(Context context) {
+    NewBuiltInQualityProfile sonarWay = context.createBuiltInQualityProfile("Sonar way", CSharpPlugin.LANGUAGE_KEY);
+    BuiltInQualityProfileJsonLoader.load(sonarWay, CSharpPlugin.REPOSITORY_KEY, "org/sonar/plugins/csharp/Sonar_way_profile.json");
+    sonarWay.done();
   }
 }
