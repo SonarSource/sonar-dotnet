@@ -429,6 +429,41 @@ namespace Namespace
         }
 
         [TestMethod]
+        public void Invocations_ExplicitInterfaces()
+        {
+            const string code = @"
+namespace Namespace
+{
+    public class Class1
+    {
+        public void Foobar(string s, IBar b1, Bar b2)
+        {
+            b1.Foo(s);
+            b2.Foo(s);
+        }
+    }
+
+    public class Bar : IBar
+    {
+        void IBar.Foo(string s) { }
+        public void Foo(string s) { }
+    }
+
+    public interface IBar
+    {
+        void Foo(string s);
+    }
+}";
+            var ucfg = GetUcfgForMethod(code, "Foobar");
+
+            ucfg.BasicBlocks.Should().HaveCount(2);
+            AssertCollection(ucfg.BasicBlocks[0].Instructions,
+                i => ValidateInstruction(i, "Namespace.IBar.Foo(string)", "%0", new[] { "s" }),
+                i => ValidateInstruction(i, "Namespace.Bar.Foo(string)", "%1", new[] { "s" })
+                );
+        }
+
+        [TestMethod]
         public void ControllerMethod_Contains_EntryPoint_And_Attributes()
         {
             const string code = @"

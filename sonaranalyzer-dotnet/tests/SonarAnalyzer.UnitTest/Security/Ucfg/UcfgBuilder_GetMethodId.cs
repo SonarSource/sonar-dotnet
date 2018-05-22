@@ -225,5 +225,34 @@ namespace Namespace
             string CtorId(string className, int skip = 0) =>
                 UniversalControlFlowGraphBuilder.GetMethodId(semanticModel.GetDeclaredSymbol(syntaxTree.GetConstructor(className, skip)));
         }
+
+        [TestMethod]
+        public void GetMethodId_Explicit_Interface_Implementations()
+        {
+            const string code = @"
+using System;
+using System.Collections.Generic;
+namespace Namespace
+{
+    public class Bar : IBar
+    {
+        void IBar.Foo(string s) { }
+        public void Foo(string s) { }
+    }
+
+    public interface IBar
+    {
+        void Foo(string s);
+    }
+}
+";
+            var (syntaxTree, semanticModel) = TestHelper.Compile(code);
+
+            MethodId("Foo").Should().Be("Namespace.IBar.Foo(string)");
+            MethodId("Foo", skip: 1).Should().Be("Namespace.Bar.Foo(string)");
+
+            string MethodId(string methodName, int skip = 0) =>
+                UniversalControlFlowGraphBuilder.GetMethodId(semanticModel.GetDeclaredSymbol(syntaxTree.GetMethod(methodName, skip)));
+        }
     }
 }
