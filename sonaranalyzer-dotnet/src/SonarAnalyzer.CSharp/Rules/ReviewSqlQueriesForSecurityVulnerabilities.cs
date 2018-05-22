@@ -38,29 +38,14 @@ using SonarAnalyzer.SymbolicExecution.ControlFlowGraph;
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    [Rule(DiagnosticId)]
     public sealed class ReviewSqlQueriesForSecurityVulnerabilities : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S3649";
-        private const string MessageFormat = "Make sure to sanitize the parameters of this SQL command.";
+        internal const string DiagnosticId = "S9999-ucfg-generator";
+        private const string Title = "UCFG generator.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
+        private static readonly DiagnosticDescriptor rule = DiagnosticDescriptorBuilder
+            .GetUtilityDescriptor(DiagnosticId, Title);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
-
-        private static readonly ISet<KnownType> checkedTypes = new HashSet<KnownType>
-        {
-            KnownType.System_Data_Odbc_OdbcCommand,
-            KnownType.System_Data_Odbc_OdbcDataAdapter,
-            KnownType.System_Data_OleDb_OleDbCommand,
-            KnownType.System_Data_OleDb_OleDbDataAdapter,
-            KnownType.Oracle_ManagedDataAccess_Client_OracleCommand,
-            KnownType.Oracle_ManagedDataAccess_Client_OracleDataAdapter,
-            KnownType.System_Data_SqlServerCe_SqlCeCommand,
-            KnownType.System_Data_SqlServerCe_SqlCeDataAdapter,
-            KnownType.System_Data_SqlClient_SqlCommand,
-            KnownType.System_Data_SqlClient_SqlDataAdapter
-        };
 
         private string protobufDirectory;
         private int protobufFileIndex = 0;
@@ -86,35 +71,6 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
-                {
-                    var objectCreation = (ObjectCreationExpressionSyntax)c.Node;
-
-                    if (c.SemanticModel.GetSymbolInfo(objectCreation).Symbol is IMethodSymbol methodSymbol &&
-                        methodSymbol.IsConstructor() &&
-                        methodSymbol.ContainingType.IsAny(checkedTypes) &&
-                        methodSymbol.Parameters.FirstOrDefault()?.Type.Is(KnownType.System_String) == true &&
-                        !IsSanitizedQuery(objectCreation.ArgumentList.Arguments[0].Expression, c.SemanticModel))
-                    {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, objectCreation.Type.GetLocation()));
-                    }
-                }, SyntaxKind.ObjectCreationExpression);
-
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
-                {
-                    var assignment = (AssignmentExpressionSyntax)c.Node;
-
-                    if (c.SemanticModel.GetSymbolInfo(assignment.Left).Symbol is IPropertySymbol propertySymbol &&
-                        propertySymbol.Name == "CommandText" &&
-                        propertySymbol.ContainingType.IsAny(checkedTypes) &&
-                        !IsSanitizedQuery(assignment.Right, c.SemanticModel))
-                    {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, assignment.Left.GetLocation()));
-                    }
-                }, SyntaxKind.SimpleAssignmentExpression);
-
             context.RegisterCompilationStartAction(
                 cc =>
                 {
@@ -193,11 +149,6 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 ucfg.WriteTo(stream);
             }
-        }
-
-        private static bool IsSanitizedQuery(ExpressionSyntax expression, SemanticModel model)
-        {
-            return model.GetConstantValue(expression).HasValue;
         }
 
         private bool TryReadConfiguration(AnalyzerOptions options)
