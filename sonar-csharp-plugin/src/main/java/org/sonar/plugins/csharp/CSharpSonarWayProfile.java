@@ -19,15 +19,41 @@
  */
 package org.sonar.plugins.csharp;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.HashSet;
+import java.util.Set;
 import org.sonar.api.server.profile.BuiltInQualityProfilesDefinition;
+import org.sonar.api.utils.log.Logger;
+import org.sonar.api.utils.log.Loggers;
 import org.sonarsource.analyzer.commons.BuiltInQualityProfileJsonLoader;
 
 public class CSharpSonarWayProfile implements BuiltInQualityProfilesDefinition {
+  private static final Logger LOG = Loggers.get(CSharpSonarWayProfile.class);
 
   @Override
   public void define(Context context) {
     NewBuiltInQualityProfile sonarWay = context.createBuiltInQualityProfile("Sonar way", CSharpPlugin.LANGUAGE_KEY);
     BuiltInQualityProfileJsonLoader.load(sonarWay, CSharpPlugin.REPOSITORY_KEY, "org/sonar/plugins/csharp/Sonar_way_profile.json");
+    getSecurityRuleKeys().forEach(key -> sonarWay.activateRule(CSharpPlugin.REPOSITORY_KEY, key));
     sonarWay.done();
+  }
+
+  private static Set<String> getSecurityRuleKeys() {
+    try {
+      Class<?> csRulesClass = Class.forName("com.sonar.plugins.security.api.CsRules");
+      Method getRuleKeysMethod = csRulesClass.getMethod("getRuleKeys");
+      return (Set<String>) getRuleKeysMethod.invoke(null);
+    } catch (ClassNotFoundException e) {
+      LOG.debug("com.sonar.plugins.security.api.CsRules is not found, no security rules added to Sonar way cs profile: " + e.getMessage());
+    } catch (NoSuchMethodException e) {
+      LOG.debug("com.sonar.plugins.security.api.CsRules#getRuleKeys is not found, no security rules added to Sonar way cs profile: " + e.getMessage());
+    } catch (IllegalAccessException e) {
+      LOG.debug("[IllegalAccessException] no security rules added to Sonar way cs profile: " + e.getMessage());
+    } catch (InvocationTargetException e) {
+      LOG.debug("[InvocationTargetException] no security rules added to Sonar way cs profile: " + e.getMessage());
+    }
+
+    return new HashSet<>();
   }
 }

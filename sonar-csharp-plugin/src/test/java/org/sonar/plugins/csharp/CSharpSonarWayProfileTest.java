@@ -19,7 +19,11 @@
  */
 package org.sonar.plugins.csharp;
 
+import com.google.common.collect.Sets;
+import com.sonar.plugins.security.api.CsRules;
+import java.util.HashSet;
 import org.junit.Test;
+import org.sonar.api.rule.RuleKey;
 import org.sonar.api.server.profile.BuiltInQualityProfilesDefinition;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -30,9 +34,14 @@ public class CSharpSonarWayProfileTest {
   public void test() {
     CSharpSonarWayProfile profileDef = new CSharpSonarWayProfile();
     BuiltInQualityProfilesDefinition.Context context = new BuiltInQualityProfilesDefinition.Context();
+    CsRules.ruleKeys = new HashSet<>();
     profileDef.define(context);
     BuiltInQualityProfilesDefinition.BuiltInQualityProfile profile = context.profile("cs", "Sonar way");
     assertThat(profile.language()).isEqualTo(CSharpPlugin.LANGUAGE_KEY);
+    // FIXME : should be null when https://github.com/SonarSource/sonar-csharp/issues/1386 is fixed
+    assertThat(profile.rule(RuleKey.of(CSharpPlugin.REPOSITORY_KEY, "S3649"))).isNotNull();
+    CsRules.ruleKeys = Sets.newHashSet("S3649");
+    assertThat(profile.rule(RuleKey.of(CSharpPlugin.REPOSITORY_KEY, "S3649"))).isNotNull();
   }
 
 }
