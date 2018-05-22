@@ -429,7 +429,7 @@ namespace Namespace
         }
 
         [TestMethod]
-        public void Invocations_ExplicitInterfaces()
+        public void Invocations_Explicit_Interfaces()
         {
             const string code = @"
 namespace Namespace
@@ -460,6 +460,52 @@ namespace Namespace
             AssertCollection(ucfg.BasicBlocks[0].Instructions,
                 i => ValidateInstruction(i, "Namespace.IBar.Foo(string)", "%0", new[] { "s" }),
                 i => ValidateInstruction(i, "Namespace.Bar.Foo(string)", "%1", new[] { "s" })
+                );
+        }
+
+        [TestMethod]
+        public void Invocations_Explicit_Generic_Interfaces()
+        {
+            const string code = @"
+namespace Namespace
+{
+    public class Class1
+    {
+        public void Foobar(string s, IBar b1, Bar b2, IBar<string> b3)
+        {
+            b1.Foo(s);
+            b2.Foo(s);
+            b2.Fooooo(s);
+            b3.Fooooo(s);
+        }
+    }
+
+    public class Bar : IBar, IBar<string>
+    {
+        void IBar.Foo<T>(T s) { }
+        public void Foo<T>(T s) { }
+        public void Fooooo(string s) { }
+        void IBar<string>.Fooooo(string s) { }
+    }
+
+    public interface IBar
+    {
+        void Foo<T>(T s);
+    }
+
+    public interface IBar<T>
+    {
+        void Fooooo(T s);
+    }
+}";
+            var ucfg = GetUcfgForMethod(code, "Foobar");
+
+            ucfg.BasicBlocks.Should().HaveCount(2);
+            AssertCollection(ucfg.BasicBlocks[0].Instructions,
+                i => ValidateInstruction(i, "Namespace.IBar.Foo<T>(T)", "%0", new[] { "s" }),
+                i => ValidateInstruction(i, "Namespace.Bar.Foo<T>(T)", "%1", new[] { "s" }),
+                i => ValidateInstruction(i, "Namespace.Bar.Fooooo(string)", "%2", new[] { "s" }),
+                i => ValidateInstruction(i, "Namespace.IBar<T>.Fooooo(T)", "%3", new[] { "s" })
                 );
         }
 
