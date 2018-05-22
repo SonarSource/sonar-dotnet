@@ -60,6 +60,14 @@ namespace SonarAnalyzer.UnitTest.Security
                 .Skip(skip)
                 .First();
 
+        public static ConstructorDeclarationSyntax GetConstructor(this SyntaxTree syntaxTree, string name, int skip = 0) =>
+            syntaxTree.GetRoot()
+                .DescendantNodes()
+                .OfType<ConstructorDeclarationSyntax>()
+                .Where(m => m.Identifier.ValueText == name)
+                .Skip(skip)
+                .First();
+
         public static IMethodSymbol GetMethodSymbol(this (SyntaxTree, SemanticModel) tuple, string name)
         {
             var (syntaxTree, semantcModel) = tuple;

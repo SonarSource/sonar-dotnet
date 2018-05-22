@@ -201,5 +201,29 @@ public class Class3
             string PropertySetId(string propertyName, int skip = 0) =>
                 UniversalControlFlowGraphBuilder.GetMethodId(semanticModel.GetDeclaredSymbol(syntaxTree.GetProperty(propertyName, skip)).SetMethod);
         }
+
+
+        [TestMethod]
+        public void GetMethodId_Constructors()
+        {
+            const string code = @"
+using System;
+namespace Namespace
+{
+    public class Class1
+    {
+        public Class1() { }
+        public Class1(string s) { }
+    }
+}
+";
+            var (syntaxTree, semanticModel) = TestHelper.Compile(code);
+
+            CtorId("Class1").Should().Be("Namespace.Class1.Class1()");
+            CtorId("Class1", skip: 1).Should().Be("Namespace.Class1.Class1(string)");
+
+            string CtorId(string className, int skip = 0) =>
+                UniversalControlFlowGraphBuilder.GetMethodId(semanticModel.GetDeclaredSymbol(syntaxTree.GetConstructor(className, skip)));
+        }
     }
 }

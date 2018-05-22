@@ -194,10 +194,48 @@ namespace SonarAnalyzer.Security.Ucfg
                         BuildReturn((ReturnStatementSyntax)syntaxNode);
                         return null;
 
+                    case SyntaxKind.ObjectCreationExpression:
+                        return BuildObjectCreation((ObjectCreationExpressionSyntax)syntaxNode);
+
                     default:
                         // do nothing
                         return ConstantExpression;
                 }
+            }
+
+            private Expression BuildObjectCreation(ObjectCreationExpressionSyntax objectCreation)
+            {
+                var ctorSymbol = GetSymbol(objectCreation) as IMethodSymbol;
+                if (ctorSymbol == null)
+                {
+                    return ConstantExpression;
+                }
+
+                var arguments = BuildArguments(objectCreation.ArgumentList).ToArray();
+
+                // Create instruction only when the method accepts/returns string,
+                // or when at least one of its arguments is known to be a string.
+                // Since we generate Const expressions for everything that is not
+                // a string, checking if the arguments are Var expressions should
+                // be enough to ensure they are strings.
+                if (!AcceptsOrReturnsString(ctorSymbol) &&
+                    !arguments.Any(IsVariable))
+                {
+                    return ConstantExpression;
+                }
+
+                var instruction = CreateInstruction(
+                    objectCreation,
+                    methodId: GetMethodId(ctorSymbol),
+                    variable: CreateTempVariable(),
+                    arguments: arguments);
+
+                return ctorSymbol.ReturnType.Is(KnownType.System_String)
+                    ? CreateVariableExpression(instruction.Variable)
+                    : ConstantExpression;
+
+                bool IsVariable(Expression expression) =>
+                    expression.Var != null;
             }
 
             private Expression BuildIdentifierName(IdentifierNameSyntax identifier)
@@ -299,6 +337,19 @@ namespace SonarAnalyzer.Security.Ucfg
 
                 bool IsVariable(Expression expression) =>
                     expression.Var != null;
+            }
+
+            private IEnumerable<Expression> BuildArguments(ArgumentListSyntax argumentList)
+            {
+                if (argumentList == null)
+                {
+                    yield break;
+                }
+
+                foreach (var argument in argumentList.Arguments)
+                {
+                    yield return BuildInstruction(argument.Expression);
+                }
             }
 
             private IEnumerable<Expression> BuildArguments(InvocationExpressionSyntax invocation, IMethodSymbol methodSymbol)
