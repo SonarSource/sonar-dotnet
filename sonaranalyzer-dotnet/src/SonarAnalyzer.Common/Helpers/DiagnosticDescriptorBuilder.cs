@@ -30,7 +30,8 @@ namespace SonarAnalyzer.Helpers
         public static readonly string MainSourceScopeTag = "MainSourceScope";
         public static readonly string TestSourceScopeTag = "TestSourceScope";
 
-        public static DiagnosticDescriptor GetUtilityDescriptor(string diagnosticId, string title) =>
+        public static DiagnosticDescriptor GetUtilityDescriptor(string diagnosticId, string title,
+            string[] customTags = null) =>
             new DiagnosticDescriptor(
                 diagnosticId,
                 title,
@@ -38,7 +39,7 @@ namespace SonarAnalyzer.Helpers
                 string.Empty,
                 DiagnosticSeverity.Warning,
                 isEnabledByDefault: true,
-                customTags: BuildUtilityCustomTags());
+                customTags: customTags ?? BuildUtilityCustomTags());
 
         public static DiagnosticDescriptor GetDescriptor(string diagnosticId, string messageFormat,
             ResourceManager resourceManager, bool? isEnabledByDefault = null) =>

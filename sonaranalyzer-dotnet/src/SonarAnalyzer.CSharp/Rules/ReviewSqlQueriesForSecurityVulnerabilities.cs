@@ -43,8 +43,10 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string DiagnosticId = "S9999-ucfg-generator";
         private const string Title = "UCFG generator.";
 
-        private static readonly DiagnosticDescriptor rule = DiagnosticDescriptorBuilder
-            .GetUtilityDescriptor(DiagnosticId, Title);
+        private static readonly DiagnosticDescriptor rule =
+            DiagnosticDescriptorBuilder.GetUtilityDescriptor(DiagnosticId, Title,
+                new[] { DiagnosticDescriptorBuilder.MainSourceScopeTag });
+
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         private string protobufDirectory;
