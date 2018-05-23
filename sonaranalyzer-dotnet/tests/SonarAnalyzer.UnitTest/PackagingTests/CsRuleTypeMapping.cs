@@ -3646,7 +3646,7 @@ namespace SonarAnalyzer.UnitTest.PackagingTests
             //["3646"],
             //["3647"],
             //["3648"],
-            ["3649"] = "VULNERABILITY",
+            //["3649"],
             //["3650"],
             //["3651"],
             //["3652"],

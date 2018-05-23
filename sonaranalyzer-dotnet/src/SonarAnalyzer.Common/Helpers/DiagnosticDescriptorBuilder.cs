@@ -18,7 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Resources;
 using Microsoft.CodeAnalysis;
 
@@ -30,7 +32,8 @@ namespace SonarAnalyzer.Helpers
         public static readonly string MainSourceScopeTag = "MainSourceScope";
         public static readonly string TestSourceScopeTag = "TestSourceScope";
 
-        public static DiagnosticDescriptor GetUtilityDescriptor(string diagnosticId, string title) =>
+        public static DiagnosticDescriptor GetUtilityDescriptor(string diagnosticId, string title,
+            SourceScope sourceScope = SourceScope.All) =>
             new DiagnosticDescriptor(
                 diagnosticId,
                 title,
@@ -38,7 +41,7 @@ namespace SonarAnalyzer.Helpers
                 string.Empty,
                 DiagnosticSeverity.Warning,
                 isEnabledByDefault: true,
-                customTags: BuildUtilityCustomTags());
+                customTags: BuildUtilityCustomTags(sourceScope));
 
         public static DiagnosticDescriptor GetDescriptor(string diagnosticId, string messageFormat,
             ResourceManager resourceManager, bool? isEnabledByDefault = null) =>
@@ -65,40 +68,38 @@ namespace SonarAnalyzer.Helpers
                 tags.Add(SonarWayTag);
             }
 
-            var scope = resourceManager.GetString($"{diagnosticId}_Scope");
-            if (scope == "Main")
+            if (Enum.TryParse<SourceScope>(resourceManager.GetString($"{diagnosticId}_Scope"), out var sourceScope))
             {
-                tags.Add(MainSourceScopeTag);
-            }
-            else if (scope == "Tests")
-            {
-                tags.Add(TestSourceScopeTag);
-            }
-            else if (scope == "All")
-            {
-                tags.Add(MainSourceScopeTag);
-                tags.Add(TestSourceScopeTag);
-            }
-            else
-            {
-                // Do nothing
+                tags.AddRange(sourceScope.ToCustomTags());
             }
 
             return tags.ToArray();
         }
 
-        private static string[] BuildUtilityCustomTags()
+        private static IEnumerable<string> ToCustomTags(this SourceScope sourceScope)
         {
-            return new[]
+            switch (sourceScope)
             {
+                case SourceScope.Main:
+                    return new[] { MainSourceScopeTag };
+                case SourceScope.Tests:
+                    return new[] { TestSourceScopeTag };
+                case SourceScope.All:
+                    return new[] { MainSourceScopeTag, TestSourceScopeTag };
+                default:
+                    throw new NotSupportedException($"{sourceScope} is not supported 'SourceScope' value.");
+            }
+        }
+
+        private static string[] BuildUtilityCustomTags(SourceScope sourceScope)
+        {
+            return sourceScope.ToCustomTags()
 #if !DEBUG
                 // Allow to configure the analyzers in debug mode only.
                 // This allows to run test selectively (for example to test only one rule)
-                WellKnownDiagnosticTags.NotConfigurable,
+                .Union(new[] { WellKnownDiagnosticTags.NotConfigurable })
 #endif
-                MainSourceScopeTag,
-                TestSourceScopeTag
-            };
+                .ToArray();
         }
     }
 }

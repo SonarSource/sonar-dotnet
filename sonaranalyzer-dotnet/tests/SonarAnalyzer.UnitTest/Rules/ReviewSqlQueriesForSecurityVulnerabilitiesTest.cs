@@ -19,16 +19,13 @@
  */
 
 extern alias csharp;
-using System.Data.SqlServerCe;
 using System.IO;
 using System.Linq;
 using csharp::SonarAnalyzer.Rules.CSharp;
 using FluentAssertions;
 using Google.Protobuf;
-using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Oracle.ManagedDataAccess.Client;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Protobuf.Ucfg;
 
@@ -37,22 +34,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class ReviewSqlQueriesForSecurityVulnerabilitiesTest
     {
-        internal static readonly MetadataReference OracleManagedDataAccessClientAssembly =
-            MetadataReference.CreateFromFile(typeof(OracleCommand).Assembly.Location);
-        internal static readonly MetadataReference SystemDataSqlServerCeAssembly =
-            MetadataReference.CreateFromFile(typeof(SqlCeCommand).Assembly.Location);
-
         public TestContext TestContext { get; set; }
-
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void ReviewSqlQueriesForSecurityVulnerabilities_Test()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\ReviewSqlQueriesForSecurityVulnerabilities.cs",
-                new ReviewSqlQueriesForSecurityVulnerabilities(),
-                null,
-                Verifier.SystemDataAssembly, OracleManagedDataAccessClientAssembly, SystemDataSqlServerCeAssembly);
-        }
 
         [TestMethod]
         [TestCategory("Rule")]
