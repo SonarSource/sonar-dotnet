@@ -44,6 +44,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         public TestContext TestContext { get; set; }
 
+
         [TestMethod]
         [TestCategory("Rule")]
         public void ReviewSqlQueriesForSecurityVulnerabilities_Test()
