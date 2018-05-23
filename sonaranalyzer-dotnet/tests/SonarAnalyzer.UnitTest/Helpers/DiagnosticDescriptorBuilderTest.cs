@@ -20,8 +20,11 @@
 
 extern alias csharp;
 extern alias vbnet;
+
+using System;
 using System.Resources;
 using FluentAssertions;
+using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using SonarAnalyzer.Helpers;
@@ -98,6 +101,39 @@ namespace SonarAnalyzer.UnitTest.Helpers
 
             // Assert
             result.CustomTags.Should().OnlyContain(LanguageValue);
+        }
+
+        [TestMethod]
+        public void GetUtilityDescriptor_Should_Contain_NotConfigurable_CustomTag()
+        {
+            // Arrange
+            // Act
+            var result = DiagnosticDescriptorBuilder.GetUtilityDescriptor("Foo", "");
+
+            // Assert
+#if DEBUG
+            result.CustomTags.Should().NotContain(WellKnownDiagnosticTags.NotConfigurable);
+#else
+            result.CustomTags.Should().Contain(WellKnownDiagnosticTags.NotConfigurable);
+#endif
+        }
+
+        [TestMethod]
+        public void GetUtilityDescriptor_Should_Contain_NotConfigurable_CustomTag_SourceScope_Specified()
+        {
+            foreach (SourceScope sourceScope in Enum.GetValues(typeof(SourceScope)))
+            {
+                // Arrange
+                // Act
+                var result = DiagnosticDescriptorBuilder.GetUtilityDescriptor("Foo", "", sourceScope);
+
+                // Assert
+#if DEBUG
+                result.CustomTags.Should().NotContain(WellKnownDiagnosticTags.NotConfigurable);
+#else
+                result.CustomTags.Should().Contain(WellKnownDiagnosticTags.NotConfigurable);
+#endif
+            }
         }
 
         private ResourceManager CreateMockedResourceManager(string diagnosticId, bool isActivatedByDefault)
