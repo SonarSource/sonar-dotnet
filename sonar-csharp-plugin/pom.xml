@@ -252,7 +252,6 @@
                     <copy todir="${sonarAnalyzer.workDirectory}/org/sonar/plugins/csharp">
                       <fileset dir="${project.build.directory}/../../sonaranalyzer-dotnet/src/SonarAnalyzer.RuleDescriptorGenerator/bin/${analyzer.configuration}/net46/cs">
                         <include name="rules.xml"/>
-                        <include name="profile.xml"/>
                       </fileset>
                       <fileset dir="${project.build.directory}/../../sonaranalyzer-dotnet/rspec/cs">
                         <include name="Sonar_way_profile.json" />
