@@ -148,9 +148,17 @@ namespace SonarAnalyzer.Security.Ucfg
 
         public static string GetMethodId(IMethodSymbol methodSymbol)
         {
-            // Generic methods and methods declared in a base class
-            var originalSymbol = methodSymbol?.ReducedFrom ?? methodSymbol?.OriginalDefinition;
-            return originalSymbol?.ToDisplayString() ?? KnownMethodId.Unknown;
+            switch (methodSymbol?.MethodKind)
+            {
+                case MethodKind.ExplicitInterfaceImplementation:
+                    return GetMethodId(methodSymbol.ExplicitInterfaceImplementations.First());
+
+                case MethodKind.ReducedExtension:
+                    return methodSymbol.ReducedFrom.ToDisplayString();
+
+                default:
+                    return methodSymbol?.OriginalDefinition?.ToDisplayString() ?? KnownMethodId.Unknown;
+            }
         }
 
         private class InstructionBuilder
