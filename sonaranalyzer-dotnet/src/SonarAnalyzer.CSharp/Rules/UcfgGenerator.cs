@@ -38,14 +38,13 @@ using SonarAnalyzer.SymbolicExecution.ControlFlowGraph;
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public sealed class ReviewSqlQueriesForSecurityVulnerabilities : SonarDiagnosticAnalyzer
+    public sealed class UcfgGenerator : SonarDiagnosticAnalyzer
     {
-        internal const string DiagnosticId = "S9999-ucfg-generator";
+        internal const string DiagnosticId = "S9999-ucfg";
         private const string Title = "UCFG generator.";
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetUtilityDescriptor(DiagnosticId, Title, SourceScope.Main);
-
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         private string protobufDirectory;
@@ -58,14 +57,14 @@ namespace SonarAnalyzer.Rules.CSharp
         /// </summary>
         private string projectBuildId;
 
-        private IAnalyzerConfiguration configuration;
+        private readonly IAnalyzerConfiguration configuration;
 
-        public ReviewSqlQueriesForSecurityVulnerabilities()
+        public UcfgGenerator()
             : this(new DefaultAnalyzerConfiguration())
         {
         }
 
-        public ReviewSqlQueriesForSecurityVulnerabilities(IAnalyzerConfiguration configuration)
+        public UcfgGenerator(IAnalyzerConfiguration configuration)
         {
             this.configuration = configuration;
         }

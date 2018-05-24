@@ -32,7 +32,7 @@ using SonarAnalyzer.Protobuf.Ucfg;
 namespace SonarAnalyzer.UnitTest.Rules
 {
     [TestClass]
-    public class ReviewSqlQueriesForSecurityVulnerabilitiesTest
+    public class UcfgGeneratorTest
     {
         public TestContext TestContext { get; set; }
 
@@ -67,7 +67,7 @@ class Program
     }
 }
 ",
-                new ReviewSqlQueriesForSecurityVulnerabilities(new TestAnalyzerConfiguration(workDir)));
+                new UcfgGenerator(new TestAnalyzerConfiguration(workDir)));
 
             var ucfgPath = Path.Combine(TestContext.TestRunResultsDirectory, "ucfg_cs");
             Directory.Exists(ucfgPath).Should().BeTrue();
@@ -107,7 +107,7 @@ class Program
                 },
             };
 
-            ReviewSqlQueriesForSecurityVulnerabilities.IsValid(ucfg).Should().BeFalse();
+            UcfgGenerator.IsValid(ucfg).Should().BeFalse();
         }
 
         [TestMethod]
@@ -126,7 +126,7 @@ class Program
                 },
             };
 
-            ReviewSqlQueriesForSecurityVulnerabilities.IsValid(ucfg).Should().BeTrue();
+            UcfgGenerator.IsValid(ucfg).Should().BeTrue();
         }
 
         [TestMethod]
@@ -148,7 +148,7 @@ class Program
                 },
             };
 
-            ReviewSqlQueriesForSecurityVulnerabilities.IsValid(ucfg).Should().BeTrue();
+            UcfgGenerator.IsValid(ucfg).Should().BeTrue();
         }
 
         [TestMethod]
@@ -167,7 +167,7 @@ class Program
                 },
             };
 
-            ReviewSqlQueriesForSecurityVulnerabilities.IsValid(ucfg).Should().BeFalse();
+            UcfgGenerator.IsValid(ucfg).Should().BeFalse();
         }
 
         [TestMethod]
@@ -186,7 +186,7 @@ class Program
                 },
             };
 
-            ReviewSqlQueriesForSecurityVulnerabilities.IsValid(ucfg).Should().BeFalse();
+            UcfgGenerator.IsValid(ucfg).Should().BeFalse();
         }
 
         private static string GetProtobufMethodId(string protobufPath)
