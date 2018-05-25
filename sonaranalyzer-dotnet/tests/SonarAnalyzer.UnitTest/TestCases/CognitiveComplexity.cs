@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -323,6 +323,18 @@ namespace Tests.Diagnostics
 //           ^^^^^^^^^^^^ {{Refactor this method to reduce its Cognitive Complexity from 2 to the 0 allowed.}}
 //                               ^^ Secondary@-1 {{+1}}
 //                                    ^^ Secondary@-2 {{+1}}
+
+        void MethodWithInnerMethod() // Noncompliant {{Refactor this method to reduce its Cognitive Complexity from 2 to the 0 allowed.}}
+        {
+            void InnerMethod() // Inner method increase the nesting by 1
+            {
+                if (true)
+//              ^^ Secondary {{+2 (incl 1 for nesting)}}
+                {
+
+                }
+            }
+        }
     }
 
     class PropertiesComplexity
