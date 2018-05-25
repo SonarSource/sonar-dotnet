@@ -127,8 +127,9 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool ClassQualifiesForIssue(INamedTypeSymbol @class)
         {
             return !@class.IsStatic &&
-                   !@class.AllInterfaces.Any() &&
-                   @class.BaseType.Is(KnownType.System_Object);
+                !@class.IsAbstract &&
+                !@class.AllInterfaces.Any() &&
+                @class.BaseType.Is(KnownType.System_Object);
         }
 
         private static bool HasOnlyQualifyingMembers(INamedTypeSymbol @class, IList<ISymbol> members)
