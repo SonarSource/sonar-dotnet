@@ -69,6 +69,18 @@ namespace SonarAnalyzer.Helpers
             }
         }
 
+        public override void Visit(SyntaxNode node)
+        {
+            if (node.IsKind(UnsupportedSyntaxHelper.SyntaxKindLocalFunctionStatement))
+            {
+                VisitWithNesting(node, base.Visit);
+            }
+            else
+            {
+                base.Visit(node);
+            }
+        }
+
         public override void VisitMethodDeclaration(MethodDeclarationSyntax node)
         {
             currentMethod = node;
