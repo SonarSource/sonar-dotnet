@@ -2,6 +2,10 @@
 
 [![Waffle.io - Columns and their card count](https://badge.waffle.io/SonarSource/sonar-csharp.svg?columns=all)](https://waffle.io/SonarSource/sonar-csharp?source=SonarSource%2Fsonar-csharp)
 
+|Product|Build|Quality Gate|Coverage|
+|:--:|:--:|:--:|:--:|
+|Analyzer|[![Build Status](https://sonarsource.visualstudio.com/_apis/public/build/definitions/399fb241-ecc7-4802-8697-dcdd01fbb832/8/badge)](https://sonarsource.visualstudio.com/DotNetTeam%20Project/_build/index?definitionId=8)|[![Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=sonaranalyzer-dotnet&metric=alert_status)](https://sonarcloud.io/dashboard?id=sonaranalyzer-dotnet)|[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=sonaranalyzer-dotnet&metric=coverage)](https://sonarcloud.io/component_measures?id=sonaranalyzer-dotnet&metric=coverage)|
+
 |Product|Quality Gate|Coverage|
 |:--:|:--:|:--:|
 |Analyzer|[![Quality Gate](https://next.sonarqube.com/sonarqube/api/project_badges/measure?project=sonaranalyzer-csharp-vbnet&metric=alert_status)](https://next.sonarqube.com/sonarqube/dashboard?id=sonaranalyzer-csharp-vbnet)|[![Coverage](https://next.sonarqube.com/sonarqube/api/project_badges/measure?project=sonaranalyzer-csharp-vbnet&metric=coverage)](https://next.sonarqube.com/sonarqube/component_measures/domain/Coverage?id=sonaranalyzer-csharp-vbnet)|
