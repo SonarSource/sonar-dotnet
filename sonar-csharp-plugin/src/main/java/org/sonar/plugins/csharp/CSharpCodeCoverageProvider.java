@@ -60,6 +60,9 @@ public class CSharpCodeCoverageProvider {
   private CSharpCodeCoverageProvider() {
   }
 
+private String field1;
+public static void unused(){}
+
   public static List extensions() {
     return Arrays.asList(
       CSharpCoverageAggregator.class, CSharpIntegrationCoverageAggregator.class,
