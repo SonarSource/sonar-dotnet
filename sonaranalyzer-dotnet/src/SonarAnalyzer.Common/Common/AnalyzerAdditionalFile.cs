@@ -27,6 +27,10 @@ namespace SonarAnalyzer.Common
 {
     public sealed class AnalyzerAdditionalFile : AdditionalText
     {
+
+public string field1;
+public void Unused(){}
+
         public AnalyzerAdditionalFile(string path)
         {
             Path = path;
