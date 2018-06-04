@@ -27,14 +27,20 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.List;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.sonar.api.batch.fs.internal.DefaultInputFile;
 import org.sonar.api.batch.fs.internal.FileMetadata;
 import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
+import org.sonar.api.utils.log.LogTester;
+import org.sonar.api.utils.log.LoggerLevel;
 import org.sonar.duplications.internal.pmd.TokensLine;
 
 public class CPDTokensImporterTest {
+
+  @Rule
+  public LogTester logs = new LogTester();
 
   // see src/test/resources/ProtobufImporterTest/README.md for explanation
   private static final File TEST_DATA_DIR = new File("src/test/resources/ProtobufImporterTest");
@@ -75,6 +81,8 @@ public class CPDTokensImporterTest {
 
     List<TokensLine> lines = tester.cpdTokens(inputFile.key());
     checkExpectedData(lines);
+
+    assertThat(logs.logs(LoggerLevel.DEBUG)).containsOnly("File 'Program.cs' was already processed. Skip it");
   }
 
   private void checkExpectedData(List<TokensLine> lines) {

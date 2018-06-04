@@ -27,15 +27,21 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Map;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.sonar.api.batch.fs.internal.DefaultInputFile;
 import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
+import org.sonar.api.utils.log.LogTester;
+import org.sonar.api.utils.log.LoggerLevel;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.sonarsource.dotnet.shared.plugins.protobuf.ProtobufImporters.ENCODING_OUTPUT_PROTOBUF_NAME;
 
 public class EncodingImporterTest {
+
+  @Rule
+  public LogTester logs = new LogTester();
 
   // see src/test/resources/ProtobufImporterTest/README.md for explanation
   private static final File TEST_DATA_DIR = new File("src/test/resources/ProtobufImporterTest");
@@ -43,6 +49,7 @@ public class EncodingImporterTest {
 
   private SensorContextTester tester = SensorContextTester.create(TEST_DATA_DIR);
   private File protobuf = new File(TEST_DATA_DIR, ENCODING_OUTPUT_PROTOBUF_NAME);
+  private File invalidProtobuf = new File(TEST_DATA_DIR, "invalid-encoding.pb");
   private EncodingImporter importer = new EncodingImporter();
 
   @Before
@@ -61,5 +68,16 @@ public class EncodingImporterTest {
     Map<Path, Charset> encodingPerPath = importer.getEncodingPerPath();
     assertThat(encodingPerPath.size()).isEqualTo(1);
     assertThat(encodingPerPath.get(Paths.get(TEST_FILE_PATH))).isEqualTo(StandardCharsets.UTF_8);
+  }
+
+  @Test
+  public void test_encoding_warns_for_invalid_encoding() {
+    DefaultInputFile inputFile = new TestInputFileBuilder("dummyKey", TEST_FILE_PATH)
+      .build();
+    tester.fileSystem().add(inputFile);
+
+    importer.accept(invalidProtobuf.toPath());
+
+    assertThat(logs.logs(LoggerLevel.WARN)).containsOnly("Unrecognized encoding utf-7 for file Program.cs");
   }
 }
