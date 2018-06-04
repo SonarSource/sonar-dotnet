@@ -18,26 +18,44 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Xml.Linq;
 using Microsoft.CodeAnalysis.Diagnostics;
+using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Rules;
 
 namespace SonarAnalyzer.Common
 {
     public class DefaultAnalyzerConfiguration : IAnalyzerConfiguration
     {
-        public string GetProjectOutputPath(AnalyzerOptions options)
+        public string ProjectOutputPath { get; private set; }
+
+        public IReadOnlyCollection<string> EnabledRules { get; private set; }
+
+        public void Read(AnalyzerOptions options)
         {
             var projectOutputAdditionalFile = options.AdditionalFiles
                 .FirstOrDefault(UtilityAnalyzerBase.IsProjectOutput);
 
-            if (projectOutputAdditionalFile == null)
+            var sonarLintAdditionalFile = options.AdditionalFiles
+                .FirstOrDefault(f => ParameterLoader.ConfigurationFilePathMatchesExpected(f.Path));
+
+            if (sonarLintAdditionalFile == null ||
+                projectOutputAdditionalFile == null)
             {
-                return null;
+                return;
             }
 
-            return File.ReadAllLines(projectOutputAdditionalFile.Path)
+            var xml = XDocument.Load(sonarLintAdditionalFile.Path);
+
+            EnabledRules = xml.Descendants("Rule")
+                .Select(r => r.Element("Key")?.Value)
+                .WhereNotNull()
+                .ToHashSet();
+
+            ProjectOutputPath = File.ReadAllLines(projectOutputAdditionalFile.Path)
                 .FirstOrDefault(l => !string.IsNullOrEmpty(l));
         }
     }

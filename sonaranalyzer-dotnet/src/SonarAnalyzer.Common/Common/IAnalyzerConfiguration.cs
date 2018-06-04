@@ -18,12 +18,17 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
 using Microsoft.CodeAnalysis.Diagnostics;
 
 namespace SonarAnalyzer.Common
 {
     public interface IAnalyzerConfiguration
     {
-        string GetProjectOutputPath(AnalyzerOptions options);
+        string ProjectOutputPath { get; }
+
+        IReadOnlyCollection<string> EnabledRules { get; }
+
+        void Read(AnalyzerOptions options);
    }
 }
