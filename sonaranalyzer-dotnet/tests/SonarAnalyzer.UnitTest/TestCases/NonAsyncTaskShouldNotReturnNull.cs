@@ -28,6 +28,21 @@ namespace Tests.Diagnostics
         }
 
         public Task Foo { get; set; }
+
+        public Task<object> GetFooAsync()
+        {
+            return Task.Run(() =>
+            {
+                if (false)
+                {
+                    return new object();
+                }
+                else
+                {
+                    return null;
+                }
+            });
+        }
     }
 
     public class NonCompliantUseCases

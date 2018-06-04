@@ -20,7 +20,6 @@
 
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -42,26 +41,33 @@ namespace SonarAnalyzer.Rules.CSharp
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        private static ISet<KnownType> TaskTypes =
+        private static readonly ISet<KnownType> TaskTypes =
             new HashSet<KnownType>
             {
                 KnownType.System_Threading_Tasks_Task,
                 KnownType.System_Threading_Tasks_Task_T
             };
 
-        private static ISet<SyntaxKind> TrackedNullLiteralLocations =
+        private static readonly ISet<SyntaxKind> TrackedNullLiteralLocations =
             new HashSet<SyntaxKind>
             {
                 SyntaxKind.ArrowExpressionClause,
                 SyntaxKind.ReturnStatement,
             };
 
-        private static ISet<SyntaxKind> PossibleEnclosingSyntax =
+        private static readonly ISet<SyntaxKind> PossibleEnclosingSyntax =
             new HashSet<SyntaxKind>
             {
                 SyntaxKind.VariableDeclaration,
                 SyntaxKind.PropertyDeclaration,
                 SyntaxKind.MethodDeclaration
+            };
+
+        private static readonly ISet<SyntaxKind> IgnoredEnclosingSyntax =
+            new HashSet<SyntaxKind>
+            {
+                SyntaxKind.ParenthesizedLambdaExpression,
+                SyntaxKind.SimpleLambdaExpression
             };
 
         protected override void Initialize(SonarAnalysisContext context)
@@ -76,7 +82,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    var enclosingMember = nullLiteral.Ancestors().FirstOrDefault(n => n.IsAnyKind(PossibleEnclosingSyntax));
+                    var enclosingMember = GetEnclosingMember(nullLiteral);
                     if (enclosingMember == null ||
                         enclosingMember.IsKind(SyntaxKind.VariableDeclaration))
                     {
@@ -95,6 +101,27 @@ namespace SonarAnalyzer.Rules.CSharp
                     c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, nullLiteral.GetLocation()));
                 },
                 SyntaxKind.NullLiteralExpression);
+        }
+
+        private static SyntaxNode GetEnclosingMember(LiteralExpressionSyntax literal)
+        {
+            foreach (var ancestor in literal.Ancestors())
+            {
+                if (ancestor.IsAnyKind(IgnoredEnclosingSyntax))
+                {
+                    return null;
+                }
+                else if (ancestor.IsAnyKind(PossibleEnclosingSyntax))
+                {
+                    return ancestor;
+                }
+                else
+                {
+                    // do nothing
+                }
+            }
+
+            return null;
         }
 
         private static bool IsTaskReturnType(ISymbol symbol) =>
