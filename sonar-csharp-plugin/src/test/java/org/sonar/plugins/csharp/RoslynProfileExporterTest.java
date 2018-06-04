@@ -40,8 +40,11 @@ import org.sonar.api.rules.ActiveRuleParam;
 import org.sonar.api.rules.Rule;
 import org.sonar.api.rules.RuleParam;
 import org.sonar.api.server.rule.RulesDefinition;
+import org.sonar.api.utils.log.LogTester;
+import org.sonar.api.utils.log.LoggerLevel;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.fail;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -49,6 +52,9 @@ public class RoslynProfileExporterTest {
 
   @org.junit.Rule
   public ExpectedException thrown = ExpectedException.none();
+
+  @org.junit.Rule
+  public LogTester logs = new LogTester();
 
   @Test
   public void no_rules() throws Exception {
@@ -219,10 +225,13 @@ public class RoslynProfileExporterTest {
 
     RoslynProfileExporter exporter = new RoslynProfileExporter(mock(Configuration.class), new RulesDefinition[0]);
 
-    thrown.expect(IllegalStateException.class);
-    thrown.expectMessage("The mandatory property \"foo.analyzerId\" must be set by the Roslyn plugin.");
-
-    exporter.exportProfile(rulesProfile, new StringWriter());
+    try {
+      exporter.exportProfile(rulesProfile, new StringWriter());
+      fail("was expecting an exception");
+    } catch (IllegalStateException ex) {
+      assertThat(ex.getMessage()).isEqualTo("The mandatory property \"foo.analyzerId\" must be set by the Roslyn plugin.");
+      assertThat(logs.logs()).containsOnly("Error exporting profile 'null' for language 'null'");
+    }
   }
 
   @Test
