@@ -62,7 +62,7 @@ public abstract class ProtobufImporter<T> extends RawProtobufImporter<T> {
 
     // process each protobuf file only once but allow overriding
     if (isProcessed(inputFile)) {
-      LOG.debug("File '{}' was already processed. Skip it");
+      LOG.debug("File '{}' was already processed. Skip it", inputFile);
       return;
     }
 

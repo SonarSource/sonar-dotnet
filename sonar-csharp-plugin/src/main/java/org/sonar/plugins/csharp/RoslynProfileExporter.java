@@ -161,7 +161,7 @@ public class RoslynProfileExporter extends ProfileExporter {
 
       appendLine(writer, "</RoslynExportProfile>");
     } catch (Exception e) {
-      LOG.error("Error exporting profile '{}' for language '{}'", rulesProfile.getName(), rulesProfile.getLanguage(), e);
+      LOG.error(String.format("Error exporting profile '%s' for language '%s'", rulesProfile.getName(), rulesProfile.getLanguage()), e);
       throw e;
     }
   }

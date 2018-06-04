@@ -48,7 +48,7 @@ public class EncodingImporter extends RawProtobufImporter<EncodingInfo> {
       try {
         charset = Charset.forName(roslynEncoding);
       } catch (Exception e) {
-        LOG.warn("Unrecognized encoding {} for file {}", roslynEncoding, message.getFilePath(), e);
+        LOG.warn(String.format("Unrecognized encoding %s for file %s", roslynEncoding, message.getFilePath()), e);
       }
     }
     encodingPerPath.put(message.getFilePath(), charset);
