@@ -21,6 +21,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading;
@@ -38,7 +39,7 @@ using SonarAnalyzer.SymbolicExecution.ControlFlowGraph;
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public sealed class UcfgGenerator : SonarDiagnosticAnalyzer
+    public class UcfgGenerator : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S9999-ucfg";
         private const string Title = "UCFG generator.";
@@ -47,6 +48,9 @@ namespace SonarAnalyzer.Rules.CSharp
             DiagnosticDescriptorBuilder.GetUtilityDescriptor(DiagnosticId, Title, SourceScope.Main);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+
+        private readonly ImmutableHashSet<string> SecurityRules = ImmutableHashSet
+            .Create("S2091", "S3649", "S2631", "S2083", "S2078", "S2076");
 
         private string protobufDirectory;
         private int protobufFileIndex = 0;
@@ -75,10 +79,15 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterCompilationStartAction(
                 cc =>
                 {
-                    if (!TryReadConfiguration(cc.Options))
+                    configuration.Read(cc.Options);
+
+                    if (string.IsNullOrEmpty(configuration.ProjectOutputPath) ||
+                        !configuration.EnabledRules.Any(SecurityRules.Contains))
                     {
                         return;
                     }
+
+                    InitProtobufDirectory();
 
                     protobufFileIndex = 0;
 
@@ -139,36 +148,35 @@ namespace SonarAnalyzer.Rules.CSharp
             var ucfg = new UniversalControlFlowGraphBuilder()
                 .Build(context.SemanticModel, declaration, methodSymbol, cfg);
 
-            if (!IsValid(ucfg))
+            if (IsValid(ucfg))
             {
-                return;
+                WriteProtobuf(ucfg,
+                    Path.Combine(protobufDirectory, $"ucfg_{projectBuildId}_{Interlocked.Increment(ref protobufFileIndex)}.pb"));
             }
+        }
 
-            var path = Path.Combine(protobufDirectory,
-                $"ucfg_{projectBuildId}_{Interlocked.Increment(ref protobufFileIndex)}.pb");
-            using (var stream = File.Create(path))
+        protected /*for testing*/ virtual void WriteProtobuf(UCFG ucfg, string fileName)
+        {
+            using (var stream = File.Create(fileName))
             {
                 ucfg.WriteTo(stream);
             }
         }
 
-        private bool TryReadConfiguration(AnalyzerOptions options)
+        private void InitProtobufDirectory()
         {
-            var basePath = configuration.GetProjectOutputPath(options);
+            // the current compilation output dir is "<root>/.sonarqube/out/<index>" where index is 0, 1, 2, etc.
 
-            // the current compilation output dir - "<root>/.sonarqube/out/<index>" where index is 0, 1, 2, etc.
-            if (basePath != null)
-            {
-                // "<root>/.sonarqube/out/0" -> "0" etc.
-                projectBuildId = Path.GetFileName(basePath);
+            // the configuration.ProjectOutputPath should already be checked for null at this point
+            Debug.Assert(configuration.ProjectOutputPath != null);
 
-                // "<root>/.sonarqube/out/0" -> "<root>/.sonarqube/out/ucfg_cs"
-                protobufDirectory = Path.Combine(Path.GetDirectoryName(basePath), $"ucfg_{AnalyzerLanguage.CSharp}");
+            // "<root>/.sonarqube/out/0" -> "0" etc.
+            projectBuildId = Path.GetFileName(configuration.ProjectOutputPath);
 
-                Directory.CreateDirectory(protobufDirectory);
-            }
+            // "<root>/.sonarqube/out/0" -> "<root>/.sonarqube/out/ucfg_cs"
+            protobufDirectory = Path.Combine(Path.GetDirectoryName(configuration.ProjectOutputPath), $"ucfg_{AnalyzerLanguage.CSharp}");
 
-            return basePath != null;
+            Directory.CreateDirectory(protobufDirectory);
         }
     }
 }

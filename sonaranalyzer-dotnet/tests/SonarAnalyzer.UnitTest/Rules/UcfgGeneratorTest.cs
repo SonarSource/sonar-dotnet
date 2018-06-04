@@ -19,6 +19,8 @@
  */
 
 extern alias csharp;
+
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using csharp::SonarAnalyzer.Rules.CSharp;
@@ -26,6 +28,8 @@ using FluentAssertions;
 using Google.Protobuf;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
+using Moq.Protected;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Protobuf.Ucfg;
 
@@ -38,7 +42,7 @@ namespace SonarAnalyzer.UnitTest.Rules
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void ReviewSqlQueriesForSecurityVulnerabilities_GenerateProtobuf()
+        public void UcfgGenerator_GenerateProtobuf()
         {
             var workDir = Path.Combine(TestContext.TestRunResultsDirectory, "0");
             Directory.CreateDirectory(workDir);
@@ -67,7 +71,7 @@ class Program
     }
 }
 ",
-                new UcfgGenerator(new TestAnalyzerConfiguration(workDir)));
+                new UcfgGenerator(new TestAnalyzerConfiguration(workDir, "S3649")));
 
             var ucfgPath = Path.Combine(TestContext.TestRunResultsDirectory, "ucfg_cs");
             Directory.Exists(ucfgPath).Should().BeTrue();
@@ -93,6 +97,104 @@ class Program
                     "Program.Method1(string)",
                     "Program.Method2()",
                 });
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void UcfgGenerator_Disabled_No_Rules()
+        {
+            var workDir = Path.Combine(TestContext.TestRunResultsDirectory, TestContext.TestName, "0");
+            Directory.CreateDirectory(workDir);
+
+            UcfgGenerator_Disabled(workDir);
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void UcfgGenerator_Enabled_S2091()
+        {
+            UcfgGenerator_Enabled(enabledRules: "S2091");
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void UcfgGenerator_Enabled_S3649()
+        {
+            UcfgGenerator_Enabled(enabledRules: "S3649");
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void UcfgGenerator_Enabled_S2631()
+        {
+            UcfgGenerator_Enabled(enabledRules: "S2631");
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void UcfgGenerator_Enabled_S2083()
+        {
+            UcfgGenerator_Enabled(enabledRules: "S2083");
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void UcfgGenerator_Enabled_S2078()
+        {
+            UcfgGenerator_Enabled(enabledRules: "S2078");
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void UcfgGenerator_Enabled_S2076()
+        {
+            UcfgGenerator_Enabled(enabledRules: "S2076");
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void UcfgGenerator_Disabled_OtherRule()
+        {
+            var workDir = Path.Combine(TestContext.TestRunResultsDirectory, TestContext.TestName, "0");
+            Directory.CreateDirectory(workDir);
+
+            UcfgGenerator_Disabled(workDir, "Sxxxx");
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void UcfgGenerator_Disabled_NoOutputFolder()
+        {
+            UcfgGenerator_Disabled(null, "S3649");
+        }
+
+        private void UcfgGenerator_Disabled(string workDir, params string[] enabledRules)
+        {
+            var ucfgGeneratorMock = new Mock<UcfgGenerator>(new TestAnalyzerConfiguration(workDir, enabledRules))
+            {
+                CallBase = true
+            };
+            ucfgGeneratorMock.Protected()
+                .Setup("WriteProtobuf", ItExpr.IsAny<UCFG>(), ItExpr.IsAny<string>());
+
+            Verifier.VerifyCSharpAnalyzer(@"class Program { void Method1(string s) { } }", ucfgGeneratorMock.Object);
+
+            ucfgGeneratorMock.Protected()
+                .Verify("WriteProtobuf", Times.Never(), ItExpr.IsAny<UCFG>(), ItExpr.IsAny<string>());
+        }
+
+        private void UcfgGenerator_Enabled(params string[] enabledRules)
+        {
+            var workDir = Path.Combine(TestContext.TestRunResultsDirectory, TestContext.TestName, "0");
+            Directory.CreateDirectory(workDir);
+
+            Verifier.VerifyCSharpAnalyzer(@"class Program { void Method1(string s) { } }",
+                new UcfgGenerator(new TestAnalyzerConfiguration(workDir, enabledRules)));
+
+            var ucfgPathExists = Directory.Exists(
+                Path.Combine(TestContext.TestRunResultsDirectory, TestContext.TestName, "ucfg_cs"));
+
+            ucfgPathExists.Should().BeTrue();
         }
 
         [TestMethod]
@@ -202,16 +304,19 @@ class Program
 
         private class TestAnalyzerConfiguration : IAnalyzerConfiguration
         {
-            private readonly string workDir;
-
-            public TestAnalyzerConfiguration(string workDir)
+            public TestAnalyzerConfiguration(string projectOutputPath, params string[] enabledRules)
             {
-                this.workDir = workDir;
+                ProjectOutputPath = projectOutputPath;
+                EnabledRules = enabledRules;
             }
 
-            public string GetProjectOutputPath(AnalyzerOptions options)
+            public IReadOnlyCollection<string> EnabledRules { get; }
+
+            public string ProjectOutputPath { get; }
+
+            public void Read(AnalyzerOptions options)
             {
-                return workDir;
+                // do nothing
             }
         }
     }
