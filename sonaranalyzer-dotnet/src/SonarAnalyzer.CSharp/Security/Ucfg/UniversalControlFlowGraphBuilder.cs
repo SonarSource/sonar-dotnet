@@ -221,29 +221,7 @@ namespace SonarAnalyzer.Security.Ucfg
 
                 var arguments = BuildArguments(objectCreation.ArgumentList).ToArray();
 
-                // Create instruction only when the method accepts/returns string,
-                // or when at least one of its arguments is known to be a string.
-                // Since we generate Const expressions for everything that is not
-                // a string, checking if the arguments are Var expressions should
-                // be enough to ensure they are strings.
-                if (!AcceptsOrReturnsString(ctorSymbol) &&
-                    !arguments.Any(IsVariable))
-                {
-                    return ConstantExpression;
-                }
-
-                var instruction = CreateInstruction(
-                    objectCreation,
-                    methodId: GetMethodId(ctorSymbol),
-                    variable: CreateTempVariable(),
-                    arguments: arguments);
-
-                return ctorSymbol.ReturnType.Is(KnownType.System_String)
-                    ? CreateVariableExpression(instruction.Variable)
-                    : ConstantExpression;
-
-                bool IsVariable(Expression expression) =>
-                    expression.Var != null;
+                return AddMethodCall(objectCreation, ctorSymbol, arguments);
             }
 
             private Expression BuildIdentifierName(IdentifierNameSyntax identifier)
@@ -322,29 +300,7 @@ namespace SonarAnalyzer.Security.Ucfg
                 // should add 'str1 + str2' and 'StoreInDb(string)', but not 'void LogStatus(int)'
                 var arguments = BuildArguments(invocation, methodSymbol).ToArray();
 
-                // Add instruction to UCFG only when the method accepts/returns string,
-                // or when at least one of its arguments is known to be a string.
-                // Since we generate Const expressions for everything that is not
-                // a string, checking if the arguments are Var expressions should
-                // be enough to ensure they are strings.
-                if (!AcceptsOrReturnsString(methodSymbol) &&
-                    !arguments.Any(IsVariable))
-                {
-                    return ConstantExpression;
-                }
-
-                var instruction = CreateInstruction(
-                    invocation,
-                    methodId: GetMethodId(methodSymbol),
-                    variable: CreateTempVariable(),
-                    arguments: arguments);
-
-                return methodSymbol.ReturnType.Is(KnownType.System_String)
-                    ? CreateVariableExpression(instruction.Variable)
-                    : ConstantExpression;
-
-                bool IsVariable(Expression expression) =>
-                    expression.Var != null;
+                return AddMethodCall(invocation, methodSymbol, arguments);
             }
 
             private IEnumerable<Expression> BuildArguments(ArgumentListSyntax argumentList)
@@ -399,15 +355,9 @@ namespace SonarAnalyzer.Security.Ucfg
                     return CreateVariableExpression(instruction.Variable);
                 }
                 else if (left is IPropertySymbol property &&
-                    property.SetMethod != null &&
-                    AcceptsOrReturnsString(property.SetMethod))
+                    property.SetMethod != null)
                 {
-                    var instruction = CreateInstruction(
-                        assignment,
-                        methodId: GetMethodId(property.SetMethod),
-                        variable: CreateTempVariable(),
-                        arguments: right);
-                    return CreateVariableExpression(instruction.Variable);
+                    return AddMethodCall(assignment, property.SetMethod, right);
                 }
                 else
                 {
@@ -424,6 +374,33 @@ namespace SonarAnalyzer.Security.Ucfg
             private static bool IsLocalVarOrParameterOfTypeString(ISymbol symbol) =>
                 symbol is ILocalSymbol local && local.Type.Is(KnownType.System_String) ||
                 symbol is IParameterSymbol parameter && parameter.Type.Is(KnownType.System_String);
+
+            private Expression AddMethodCall(SyntaxNode invocation, IMethodSymbol methodSymbol, params Expression[] arguments)
+            {
+                // Add instruction to UCFG only when the method accepts/returns string,
+                // or when at least one of its arguments is known to be a string.
+                // Since we generate Const expressions for everything that is not
+                // a string, checking if the arguments are Var expressions should
+                // be enough to ensure they are strings.
+                if (!AcceptsOrReturnsString(methodSymbol) &&
+                    !arguments.Any(IsVariable))
+                {
+                    return ConstantExpression;
+                }
+
+                var instruction = CreateInstruction(
+                    invocation,
+                    methodId: GetMethodId(methodSymbol),
+                    variable: CreateTempVariable(),
+                    arguments: arguments);
+
+                return methodSymbol.ReturnType.Is(KnownType.System_String)
+                    ? CreateVariableExpression(instruction.Variable)
+                    : ConstantExpression;
+
+                bool IsVariable(Expression expression) =>
+                    expression.Var != null;
+            }
 
             private Instruction CreateInstruction(SyntaxNode syntaxNode, string methodId, string variable, params Expression[] arguments)
             {
