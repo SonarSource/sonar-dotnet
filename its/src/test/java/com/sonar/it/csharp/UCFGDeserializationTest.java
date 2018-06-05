@@ -46,13 +46,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.fail;
 
 public class UCFGDeserializationTest {
-  private static final String DOT_NET_CORE_SIMPLCOMMERCE = "dotNetCore-SimplCommerce";
-  private static final String SECURITY_PROFILE = "securityProfile";
+  private static final String PROJECT_KEY = "dotNetCore-SimplCommerce";
+  private static final String QUALITY_PROFILE = "CsharpProfile";
 
   private static Orchestrator orchestrator;
 
   @BeforeClass
-  public static void initializeOrchestrator() throws Exception {
+  public static void initializeOrchestrator() {
     // Versions of SonarQube and plugins support aliases:
     // - "DEV" for the latest build of master that passed QA
     // - "DEV[1.0]" for the latest build that passed QA of series 1.0.x
@@ -63,39 +63,41 @@ public class UCFGDeserializationTest {
     OrchestratorBuilder builder = Orchestrator.builderEnv()
       .setSonarVersion(Optional.ofNullable(System.getProperty("sonar.runtimeVersion")).filter(v -> !"LTS".equals(v)).orElse("LATEST_RELEASE[6.7]"));
 
-    String securityVersion = System.getProperty("csharpVersion");
+    String csharpVersion = System.getProperty("csharpVersion");
     Location csharpLocation;
-    if (StringUtils.isEmpty(securityVersion)) {
+    if (StringUtils.isEmpty(csharpVersion)) {
       // use the plugin that was built on local machine
       csharpLocation = FileLocation.byWildcardMavenFilename(new File("../sonar-csharp-plugin/target"), "sonar-csharp-plugin-*.jar");
     } else {
       // QA environment downloads the plugin built by the CI job
-      csharpLocation = MavenLocation.of("org.sonarsource.dotnet", "sonar-csharp-plugin", securityVersion);
+      csharpLocation = MavenLocation.of("org.sonarsource.dotnet", "sonar-csharp-plugin", csharpVersion);
     }
-    builder.addPlugin(csharpLocation);
+    builder
+      .addPlugin(csharpLocation)
+      .addPlugin(MavenLocation.of("com.sonarsource.security", "sonar-security-plugin", "1.0.0.847"))
+      .addPlugin(MavenLocation.of("com.sonarsource.license", "sonar-dev-license-plugin", "3.3.0.1341"));
 
     orchestrator = builder.build();
     orchestrator.start();
-    createQP();
+
+    orchestrator.getServer().provisionProject(PROJECT_KEY, PROJECT_KEY);
   }
 
-  private static void createQP() throws IOException {
-    String cSharpProfile = profile("cs", "csharpsquid", "S3649");
-    loadProfile(cSharpProfile);
-  }
-
-  private static void loadProfile(String javaProfile) throws IOException {
+  private static void createQP(String ... ruleKeys) throws IOException {
+    String cSharpProfile = profile("cs", "csharpsquid", ruleKeys);
     File file = File.createTempFile("profile", ".xml");
-    Files.write(file.toPath(), javaProfile.getBytes());
+    Files.write(file.toPath(), cSharpProfile.getBytes());
+
     orchestrator.getServer().restoreProfile(FileLocation.of(file));
+    orchestrator.getServer().associateProjectToQualityProfile(PROJECT_KEY, "cs", QUALITY_PROFILE);
+
     file.delete();
   }
-
 
   private static String profile(String language, String repositoryKey, String ... ruleKeys) {
     StringBuilder sb = new StringBuilder()
       .append("<profile>")
-      .append("<name>").append(SECURITY_PROFILE).append("</name>")
+      .append("<name>").append(QUALITY_PROFILE).append("</name>")
       .append("<language>").append(language).append("</language>")
       .append("<rules>");
     Arrays.stream(ruleKeys).forEach(ruleKey -> {
@@ -111,16 +113,18 @@ public class UCFGDeserializationTest {
       .toString();
   }
 
-
   @Test
-  public void read_ucfgs() {
+  public void ucfgs_created_when_rules_enabled() throws IOException {
+    // enable a security rule
+    createQP("S3649");
+
     File projectLocation = new File("projects/SimplCommerce");
 
     orchestrator.executeBuild(getScannerForMSBuild(projectLocation)
       .addArgument("begin")
       .setDebugLogs(true)
-      .setProjectKey(DOT_NET_CORE_SIMPLCOMMERCE)
-      .setProjectName(DOT_NET_CORE_SIMPLCOMMERCE)
+      .setProjectKey(PROJECT_KEY)
+      .setProjectName(PROJECT_KEY)
       .setProjectVersion("1.0"));
 
     executeDotNetCore(projectLocation, "build");
@@ -129,6 +133,28 @@ public class UCFGDeserializationTest {
 
     List<UCFG> ucfgs = readUcfgs(projectLocation);
     assertThat(ucfgs).hasSize(926);
+  }
+
+  @Test
+  public void ucfgs_not_created_when_rules_not_enabled() throws IOException {
+    // No security rules in QP
+    createQP("S100");
+
+    File projectLocation = new File("projects/SimplCommerce");
+
+    orchestrator.executeBuild(getScannerForMSBuild(projectLocation)
+      .addArgument("begin")
+      .setDebugLogs(true)
+      .setProjectKey(PROJECT_KEY)
+      .setProjectName(PROJECT_KEY)
+      .setProjectVersion("1.0"));
+
+    executeDotNetCore(projectLocation, "build");
+
+    orchestrator.executeBuild(getScannerForMSBuild(projectLocation).addArgument("end"));
+
+    File csharpDir = new File(projectLocation, ".sonarqube/out/ucfg_cs");
+    assertThat(csharpDir.exists()).isFalse();
   }
 
   private static List<UCFG> readUcfgs(File projectLocation) {
