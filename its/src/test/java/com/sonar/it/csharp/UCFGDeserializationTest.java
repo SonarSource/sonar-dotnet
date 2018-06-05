@@ -120,16 +120,7 @@ public class UCFGDeserializationTest {
 
     File projectLocation = new File("projects/SimplCommerce");
 
-    orchestrator.executeBuild(getScannerForMSBuild(projectLocation)
-      .addArgument("begin")
-      .setDebugLogs(true)
-      .setProjectKey(PROJECT_KEY)
-      .setProjectName(PROJECT_KEY)
-      .setProjectVersion("1.0"));
-
-    executeDotNetCore(projectLocation, "build");
-
-    orchestrator.executeBuild(getScannerForMSBuild(projectLocation).addArgument("end"));
+    runAnalysis(projectLocation);
 
     List<UCFG> ucfgs = readUcfgs(projectLocation);
     assertThat(ucfgs).hasSize(926);
@@ -142,16 +133,7 @@ public class UCFGDeserializationTest {
 
     File projectLocation = new File("projects/SimplCommerce");
 
-    orchestrator.executeBuild(getScannerForMSBuild(projectLocation)
-      .addArgument("begin")
-      .setDebugLogs(true)
-      .setProjectKey(PROJECT_KEY)
-      .setProjectName(PROJECT_KEY)
-      .setProjectVersion("1.0"));
-
-    executeDotNetCore(projectLocation, "build");
-
-    orchestrator.executeBuild(getScannerForMSBuild(projectLocation).addArgument("end"));
+    runAnalysis(projectLocation);
 
     File csharpDir = new File(projectLocation, ".sonarqube/out/ucfg_cs");
     assertThat(csharpDir.exists()).isFalse();
@@ -174,6 +156,19 @@ public class UCFGDeserializationTest {
     return result;
   }
 
+  private void runAnalysis(File projectLocation) {
+    orchestrator.executeBuild(getScannerForMSBuild(projectLocation)
+      .addArgument("begin")
+      .setDebugLogs(true)
+      .setProjectKey(PROJECT_KEY)
+      .setProjectName(PROJECT_KEY)
+      .setProjectVersion("1.0"));
+
+    executeDotNetBuild(projectLocation, "build");
+
+    orchestrator.executeBuild(getScannerForMSBuild(projectLocation).addArgument("end"));
+  }
+
   private static ScannerForMSBuild getScannerForMSBuild(File projectDir) {
     return ScannerForMSBuild.create()
       .setScannerVersion("4.2.0.1214")
@@ -181,7 +176,7 @@ public class UCFGDeserializationTest {
       .setProjectDir(projectDir);
   }
 
-  private void executeDotNetCore(File projectLocation, String... arguments) {
+  private void executeDotNetBuild(File projectLocation, String... arguments) {
     BuildResult result = new BuildResult();
     StreamConsumer.Pipe writer = new StreamConsumer.Pipe(result.getLogsWriter());
     int status = CommandExecutor.create().execute(Command.create("dotnet")
