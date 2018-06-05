@@ -87,7 +87,9 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void CheckConditional(SyntaxNodeAnalysisContext context)
         {
             var conditional = (ConditionalExpressionSyntax)context.Node;
-            if (IsOnNullableBoolean(conditional, context.SemanticModel))
+            var typeLeft = context.SemanticModel.GetTypeInfo(conditional.WhenTrue).Type;
+            var typeRight = context.SemanticModel.GetTypeInfo(conditional.WhenFalse).Type;
+            if (ShouldNotReport(typeLeft, typeRight))
             {
                 return;
             }
@@ -199,43 +201,18 @@ namespace SonarAnalyzer.Rules.CSharp
             CheckForBooleanConstantOnRightReportOnNormalLocation(binaryExpression, CSharpSyntaxHelper.FalseLiteralExpression, context);
         }
 
-        private static bool IsOnNullableBoolean(ConditionalExpressionSyntax conditionalExpression, SemanticModel semanticModel)
-        {
-            var typeLeft = semanticModel.GetTypeInfo(conditionalExpression.WhenTrue).Type;
-            var typeRight = semanticModel.GetTypeInfo(conditionalExpression.WhenFalse).Type;
-            return IsOnNullableBoolean(typeLeft, typeRight);
-        }
-
-        private static bool IsOnNullableBoolean(ITypeSymbol typeLeft, ITypeSymbol typeRight)
-        {
-            if (typeLeft == null || typeRight == null)
-            {
-                return false;
-            }
-
-            return IsNullableBoolean(typeLeft) || IsNullableBoolean(typeRight);
-        }
-
-        private static bool IsNullableBoolean(ITypeSymbol type)
-        {
-            if (!type.OriginalDefinition.Is(KnownType.System_Nullable_T))
-            {
-                return false;
-            }
-
-            var namedType = (INamedTypeSymbol)type;
-
-            return namedType.TypeArguments.Length == 1 &&
-                namedType.TypeArguments[0].Is(KnownType.System_Boolean);
-        }
+        private static bool IsNullableBoolean(ITypeSymbol type) =>
+            type is INamedTypeSymbol namedType &&
+            namedType.OriginalDefinition.Is(KnownType.System_Nullable_T) &&
+            namedType.TypeArguments.Length == 1 &&
+            namedType.TypeArguments[0].Is(KnownType.System_Boolean);
 
         private static bool CheckForNullabilityAndBooleanConstantsReport(BinaryExpressionSyntax binaryExpression,
             SyntaxNodeAnalysisContext context, bool reportOnTrue)
         {
             var typeLeft = context.SemanticModel.GetTypeInfo(binaryExpression.Left).Type;
             var typeRight = context.SemanticModel.GetTypeInfo(binaryExpression.Right).Type;
-            var shouldNotReport = IsOnNullableBoolean(typeLeft, typeRight);
-            if (shouldNotReport)
+            if (ShouldNotReport(typeLeft, typeRight))
             {
                 return true;
             }
@@ -262,6 +239,14 @@ namespace SonarAnalyzer.Rules.CSharp
                 return true;
             }
             return false;
+        }
+
+        private static bool ShouldNotReport(ITypeSymbol typeLeft, ITypeSymbol typeRight)
+        {
+            return typeLeft == null
+                || typeRight == null
+                || IsNullableBoolean(typeLeft)
+                || IsNullableBoolean(typeRight);
         }
 
         private static void CheckForBooleanConstantOnLeftReportOnInvertedLocation(BinaryExpressionSyntax binaryExpression,

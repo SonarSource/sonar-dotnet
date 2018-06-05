@@ -1,4 +1,7 @@
-﻿namespace Tests.Diagnostics
+﻿using System.Collections.Generic;
+using System.Linq;
+
+namespace Tests.Diagnostics
 {
     public class BooleanLiteralUnnecessary
     {
@@ -73,7 +76,7 @@
             return false;
         }
 
-        private bool Foo(bool a      )
+        private bool Foo(bool a)
         {
             return a;
         }
@@ -100,5 +103,17 @@
             {
             }
         }
+    }
+
+    public class SocketContainer
+    {
+        private IEnumerable<Socket> sockets;
+        public bool IsValid =>
+            sockets.All(x => x.IsStateValid == true); // Compliant, this failed when we compile with Roslyn 1.x
+    }
+
+    public class Socket
+    {
+        public bool? IsStateValid { get; set; }
     }
 }
