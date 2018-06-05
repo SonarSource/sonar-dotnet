@@ -164,6 +164,7 @@ namespace Namespace
     {
         private string Property { get; set; }
         private int IntProperty { get; set; }
+        private object ObjectProperty { get; set; }
 
         public string Foo(string s)
         {
@@ -182,6 +183,10 @@ namespace Namespace
             Property = Foo(Property);   // %6 = Class1.Property.get()
                                         // %7 = Foo(%6)
                                         // %8 = Class1.Property.set(%7)
+
+            ObjectProperty = s;         // $9 = Class1.ObjectProperty.set(s)
+
+            ObjectProperty = 5;         // ignored
 
             var x = IntProperty = 5;    // ignored
 
@@ -206,7 +211,9 @@ namespace Namespace
 
                 i => ValidateInstruction(i, "Namespace.Class1.Property.get", "%6"),
                 i => ValidateInstruction(i, "Namespace.Class1.Foo(string)", "%7", new[] { "%6" }),
-                i => ValidateInstruction(i, "Namespace.Class1.Property.set", "%8", new[] { "%7" })
+                i => ValidateInstruction(i, "Namespace.Class1.Property.set", "%8", new[] { "%7" }),
+
+                i => ValidateInstruction(i, "Namespace.Class1.ObjectProperty.set", "%9", new[] { "s" })
                 );
         }
 
