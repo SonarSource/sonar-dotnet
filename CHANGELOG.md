@@ -16,7 +16,23 @@ For reference, the possible headings are:
 ## Unreleased
 
 ### Notes
-* [All commits](https://github.com/SonarSource/sonar-csharp/compare/7.1.0.5212 ...HEAD)
+* [All commits](https://github.com/SonarSource/sonar-csharp/compare/7.2.0.5463 ...HEAD)
+
+
+## [7.2](https://github.com/SonarSource/sonar-csharp/releases/tag/7.2.0.5463)
+
+### Removed Rules
+* [#1386](https://github.com/SonarSource/sonar-csharp/issues/1386) - Drop S3649: to be replaced by SonarQube functionality
+
+### Improvements
+* [#1387](https://github.com/SonarSource/sonar-csharp/issues/1387) - Update S4457: make message clearer
+
+### False Positives
+* [#1380](https://github.com/SonarSource/sonar-csharp/issues/1380) - Fix S4457 - false positive with local functions
+* [#1404](https://github.com/SonarSource/sonar-csharp/issues/1404) - Update S4457: FP when func/action is async/await
+
+### Bug fixes
+* [#1389](https://github.com/SonarSource/sonar-csharp/issues/1389) - AD0001 - NullReferenceException - Object reference not set to an instance of an object
 
 
 ## [7.1](https://github.com/SonarSource/sonar-csharp/releases/tag/7.1.0.5212)
