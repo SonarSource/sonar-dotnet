@@ -43,6 +43,13 @@ namespace Tests.Diagnostics
                 }
             });
         }
+
+        public Task GetBar()
+        {
+            Func<Task> func = () => null;
+
+            return func(); // False negative
+        }
     }
 
     public class NonCompliantUseCases
