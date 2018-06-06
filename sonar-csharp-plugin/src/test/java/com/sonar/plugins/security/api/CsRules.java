@@ -24,8 +24,15 @@ import java.util.Set;
 
 public class CsRules {
   public static Set<String> ruleKeys = new HashSet<>();
+  public static Exception exceptionToThrow;
 
-  public static Set<String> getRuleKeys() {
+  public static Set<String> getRuleKeys() throws Exception {
+    if (exceptionToThrow != null) {
+      Exception exception = exceptionToThrow;
+      // cleanup for the next execution
+      exceptionToThrow = null;
+      throw exception;
+    }
     return ruleKeys;
   }
 }
