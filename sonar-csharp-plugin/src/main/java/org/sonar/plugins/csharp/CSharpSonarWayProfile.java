@@ -43,8 +43,10 @@ public class CSharpSonarWayProfile implements BuiltInQualityProfilesDefinition {
       Class<?> csRulesClass = Class.forName("com.sonar.plugins.security.api.CsRules");
       Method getRuleKeysMethod = csRulesClass.getMethod("getRuleKeys");
       return (Set<String>) getRuleKeysMethod.invoke(null);
-    } catch (Exception e) {
-      LOG.debug("[Exception] no security rules added to Sonar way cs profile: " + e.getMessage());
+    } catch (ClassNotFoundException|NoSuchMethodException e) {
+      LOG.debug("com.sonar.plugins.security.api.CsRules#getRuleKeys is not found, no security rules added to Sonar way cs profile: " + e.getMessage());
+    } catch (IllegalAccessException|InvocationTargetException e) {
+      LOG.debug("[" + e.getClass().getName() + "] No security rules added to Sonar way cs profile: " + e.getMessage());
     }
 
     return new HashSet<>();
