@@ -63,13 +63,6 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.MethodDeclaration
             };
 
-        private static readonly ISet<SyntaxKind> IgnoredEnclosingSyntax =
-            new HashSet<SyntaxKind>
-            {
-                SyntaxKind.ParenthesizedLambdaExpression,
-                SyntaxKind.SimpleLambdaExpression
-            };
-
         protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
@@ -107,7 +100,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             foreach (var ancestor in literal.Ancestors())
             {
-                if (ancestor.IsAnyKind(IgnoredEnclosingSyntax))
+                if (ancestor.IsKind(SyntaxKind.ParenthesizedLambdaExpression))
                 {
                     return null;
                 }
