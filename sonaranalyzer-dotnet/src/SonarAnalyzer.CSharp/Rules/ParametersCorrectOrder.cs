@@ -117,15 +117,14 @@ namespace SonarAnalyzer.Rules.CSharp
                 var parameterName = parameter.Name;
 
                 if (string.IsNullOrEmpty(identifierName) ||
-                    !parameterNames.Contains(identifierName))
+                    !parameterNames.Contains(identifierName) ||
+                    !IdentifierWithSameNameAndTypeExists(parameter))
                 {
                     continue;
                 }
 
                 if (identifierArgument is PositionalIdentifierArgument positional &&
-                    (parameter.IsParams ||
-                     !identifierNames.Contains(parameterName) ||
-                     identifierName == parameterName))
+                    (parameter.IsParams || identifierName == parameterName))
                 {
                     continue;
                 }
@@ -149,6 +148,14 @@ namespace SonarAnalyzer.Rules.CSharp
                     additionalLocations: secondaryLocations,
                     messageArgs: methodSymbol.Name));
             }
+
+            bool IdentifierWithSameNameAndTypeExists(IParameterSymbol parameter) =>
+                identifierArguments.Any(ia =>
+                    ia.IdentifierName == parameter.Name &&
+                    GetTypeSymbol(ia.ArgumentSyntax.Expression).DerivesOrImplements(parameter.Type));
+
+            ITypeSymbol GetTypeSymbol(SyntaxNode syntaxNode) =>
+                analysisContext.SemanticModel.GetTypeInfo(syntaxNode).ConvertedType;
         }
 
         private static List<IdentifierArgument> GetIdentifierArguments(ArgumentListSyntax argumentList)
