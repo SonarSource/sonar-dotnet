@@ -8,7 +8,6 @@ namespace Tests.Diagnostics
     public class Params
     {
         public void method(int i, int k = 5, params int[] rest)
-//                  ^^^^^^ Secondary [0]
         {
         }
 
@@ -21,8 +20,7 @@ namespace Tests.Diagnostics
         {
             int i = 0, j = 5, rest = 6, l = 7;
             var k = new[] { i, l };
-            method(i, k : rest, rest : k); //Noncompliant [0]
-//          ^^^^^^
+            method(i, k : rest, rest : k); // Compliant, code will not compile if suggestion is applied
         }
     }
 
@@ -142,4 +140,24 @@ namespace Tests.Diagnostics
             new System. ()
         }
     }
+
+    class Program
+    {
+        void Struct(DateTime a, string b)
+        {
+            Bar1(a, b); // Compliant
+        }
+
+        void ClassAndInterface(Boo a, string b)
+        {
+            Bar2(a, b); // Compliant
+            Bar3(a, b); // Compliant
+            Bar3(b: a, a: b); // Compliant
+        }
+        void Bar1(DateTime b, string a) { }
+        void Bar2(Boo b, string a) { }
+        void Bar3(IBoo b, string a) { }
+    }
+    interface IBoo { }
+    class Boo : IBoo { }
 }
