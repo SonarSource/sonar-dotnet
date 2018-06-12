@@ -9877,7 +9877,7 @@
     <value>Critical Bug</value>
   </data>
   <data name="S4275_Description" xml:space="preserve">
-    <value>Getters and setters provide a way to enforce encapsulation by providing public, protected or internal methods that give controlled access to private fields. However in classes with multiple fields it is not unusual that cut and paste is used to quickly create the needed getters and setters, which can result in the wrong field being accessed by a getter or setter.</value>
+    <value>Properties provide a way to enforce encapsulation by providing public, protected or internal methods that give controlled access to private fields. However in classes with multiple fields it is not unusual that cut and paste is used to quickly create the needed properties, which can result in the wrong field being accessed by a getter or setter.</value>
   </data>
   <data name="S4275_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
