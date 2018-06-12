@@ -1,0 +1,16 @@
+{
+  "title": "\"try\" statements with identical \"catch\" and\/or \"finally\" blocks should be merged",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "20min"
+  },
+  "tags": [
+    "clumsy"
+  ],
+  "defaultSeverity": "Major",
+  "ruleSpecification": "RSPEC-2327",
+  "sqKey": "S2327",
+  "scope": "Main"
+}

@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2327",
+"message":  "Combine this 'try' with the one starting on line 96.",
+"location":  {
+"uri":  "sources\Ember-MM\Ember.Plugins\PluginManager.cs",
+"region":  {
+"startLine":  103,
+"startColumn":  17,
+"endLine":  109,
+"endColumn":  62
+}
+}
+}
+]
+}
