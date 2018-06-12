@@ -32,10 +32,13 @@ If this is the first time you are running the ITs you will need to run the follo
 
 To run the ITs you will need to follow this pattern:
 
-1. Open the `Developer Command Prompt for VS2015`
-2. Go to `PATH_TO_CLONED_REPOSITORY/sonar-csharp/sonaranalyzer-dotnet/its`
+1. Open the `Developer Command Prompt for VS2017`
+2. Go to `PATH_TO_CLONED_REPOSITORY/sonaranalyzer-dotnet/its`
 3. Run `powershell`
 4. Run `.\regression-test.ps1`
+
+Note: you can run a single rule using the -ruleId parameter
+e.g. .\regression-test.ps1 -ruleId S1234
 
 If the script ends with `SUCCESS: No differences were found!` (or exit code 0), this means the changes you have made
 haven't impacted any rule.
