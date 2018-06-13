@@ -4,21 +4,21 @@ unclear and perhaps not actually what is executed. Additionally, such code is hi
 <h2>Noncompliant Code Example</h2>
 <pre>
 if (condition)  // Noncompliant
-doTheThing();
+DoTheThing();
 
-doTheOtherThing();
-somethingElseEntirely();
+DoTheOtherThing();
+SomethingElseEntirely();
 
-foo();
+Foo();
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
 if (condition)
-  doTheThing();
+  DoTheThing();
 
-doTheOtherThing();
-somethingElseEntirely();
+DoTheOtherThing();
+SomethingElseEntirely();
 
-foo();
+Foo();
 </pre>
 
