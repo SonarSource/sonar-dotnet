@@ -31,7 +31,7 @@ namespace Tests.Diagnostics
             finally { }
         }
 
-        void DifferentCatches()
+        void DifferentCatches1()
         {
             try { }
             catch (Exception)
@@ -58,6 +58,7 @@ namespace Tests.Diagnostics
             catch (Exception)
             {
                 Console.WriteLine();
+                Console.Write();
             }
 
             // has finally
@@ -75,10 +76,25 @@ namespace Tests.Diagnostics
             finally
             {
                 Console.WriteLine();
+                Console.Write();
             }
+
+            // FN - the catch clause has a name for the exception, while the try on #36 does not have a name
+            try { }
+            catch (Exception e)
+            {
+            }
+            finally { }
+
+            // exception filter
+            try { }
+            catch (Exception e) when (string.IsNullOrEmpty(e.Message))
+            {
+            }
+            finally { }
         }
 
-        void DifferentCatches()
+        void DifferentCatches2()
         {
             try { }
             catch (ApplicationException)
@@ -129,13 +145,56 @@ namespace Tests.Diagnostics
                 }
             }
 
-            try { } // Noncompliant {{Combine this 'try' with the one starting on line 102.}}
+            try { } // Noncompliant {{Combine this 'try' with the one starting on line 118.}}
             catch (Exception)
             {
             }
             catch (ApplicationException)
             {
             }
+        }
+
+        string Property
+        {
+            get
+            {
+                try { }
+                finally { }
+
+                try { } // Noncompliant {{Combine this 'try' with the one starting on line 161.}}
+                finally { }
+
+                return 0;
+            }
+            set
+            {
+                try { }
+                finally { }
+
+                try { } // Noncompliant {{Combine this 'try' with the one starting on line 171.}}
+                finally { }
+            }
+        }
+
+        public Program() // ctor
+        {
+            try { }
+            finally { }
+
+            try { } // Noncompliant {{Combine this 'try' with the one starting on line 181.}}
+            finally { }
+        }
+
+        public void Lambdas()
+        {
+            Action a = () =>
+            {
+                try { }
+                finally { }
+
+                try { } // Noncompliant {{Combine this 'try' with the one starting on line 192.}}
+                finally { }
+            };
         }
     }
 }
