@@ -46,8 +46,7 @@ namespace SonarAnalyzer.Rules.CSharp
             // We want to check the fields read and assigned in all properties in this class
             // so this is a symbol-level rule (also means the callback is called only once
             // for partial classes)
-            context.RegisterSymbolAction(c => CheckType(c),
-                SymbolKind.NamedType);
+            context.RegisterSymbolAction(CheckType, SymbolKind.NamedType);
         }
 
         private void CheckType(SymbolAnalysisContext context)
@@ -60,65 +59,50 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             var fields = symbol.GetMembers().Where(m => m.Kind == SymbolKind.Field).OfType<IFieldSymbol>();
-
             if (!fields.Any())
             {
                 return;
             }
 
-            var properties = symbol.GetMembers()
-                .Where(m => m.Kind == SymbolKind.Property)
-                .OfType<IPropertySymbol>()
-                .Where(p => !p.IsImplicitlyDeclared);
+            var properties = GetExplictlyDeclaredProperties(symbol);
             if (!properties.Any())
             {
                 return;
             }
 
-            var fieldToStandardNameMap = new Dictionary<IFieldSymbol, string>();
-            foreach (var field in fields)
-            {
-                fieldToStandardNameMap[field] = GetCanonicalFieldName(field.Name);
-            }
-
+            var propertyToFieldMatcher = new PropertyToFieldMatcher(fields);
             var allPropertyData = CollectPropertyData(properties, context.Compilation);
 
             // Check that if there is a single matching field name it is used by the property
             foreach (var data in allPropertyData)
             {
-                var matchingFields = fieldToStandardNameMap.Keys.Where(k => AreCanonicalNamesEqual(fieldToStandardNameMap[k], data.CanonicalName));
-                if (matchingFields.Count() == 1)
+                var expectedField = propertyToFieldMatcher.GetSingleMatchingFieldOrNull(data.PropertySymbol);
+                if (expectedField != null)
                 {
-                    var field = matchingFields.Single();
-
-                    if (data.FieldReturned.HasValue && data.FieldReturned.Value.Field != field)
-                    {
-                        context.ReportDiagnosticWhenActive(Diagnostic.Create(
-                            rule,
-                            data.FieldReturned.Value.Location,
-                            "getter",
-                            field.Name
-                            ));
-                    }
-
-                    if (data.FieldUpdated.HasValue && data.FieldUpdated.Value.Field != field)
-                    {
-                        context.ReportDiagnosticWhenActive(Diagnostic.Create(
-                            rule,
-                            data.FieldUpdated.Value.Location,
-                            "setter",
-                            field.Name
-                            ));
-                    }
+                    CheckExpectedFieldIsUsed(expectedField, data.FieldUpdated, context);
+                    CheckExpectedFieldIsUsed(expectedField, data.FieldReturned, context);
                 }
             }
         }
 
-        private static string GetCanonicalFieldName(string name)
-            => name.Replace("_", string.Empty);
+        private static IEnumerable<IPropertySymbol> GetExplictlyDeclaredProperties(INamedTypeSymbol symbol) =>
+            symbol.GetMembers()
+                .Where(m => m.Kind == SymbolKind.Property)
+                .OfType<IPropertySymbol>()
+                .Where(p => !p.IsImplicitlyDeclared);
 
-        private static bool AreCanonicalNamesEqual(string name1, string name2)
-            => name1.Equals(name2, System.StringComparison.OrdinalIgnoreCase);
+        private static void CheckExpectedFieldIsUsed(IFieldSymbol expectedField, FieldData? actualField, SymbolAnalysisContext context)
+        {
+            if (actualField.HasValue && actualField.Value.Field != expectedField)
+            {
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(
+                    rule,
+                    actualField.Value.Location,
+                    actualField.Value.AccessorKind == AccessorKind.Getter ? "getter" : "setter",
+                    expectedField.Name
+                    ));
+            }
+        }
 
         private static IList<PropertyData> CollectPropertyData(IEnumerable<IPropertySymbol> properties, Compilation compilation)
         {
@@ -137,14 +121,14 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static FieldData? FindFieldAssignment(IPropertySymbol property, Compilation compilation)
         {
-            if (property.SetMethod?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is AccessorDeclarationSyntax accessor
-                //// We assume that if there are multiple field assignments in a property
-                //// then they are all to the same field
-                && accessor.DescendantNodes().FirstOrDefault(n => n is ExpressionStatementSyntax) is ExpressionStatementSyntax expression
-                && expression.Expression is AssignmentExpressionSyntax assignment
-                && assignment.IsKind(SyntaxKind.SimpleAssignmentExpression))
+            if (property.SetMethod?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is AccessorDeclarationSyntax accessor &&
+                // We assume that if there are multiple field assignments in a property
+                // then they are all to the same field
+                accessor.DescendantNodes().FirstOrDefault(n => n is ExpressionStatementSyntax) is ExpressionStatementSyntax expression &&
+                expression.Expression is AssignmentExpressionSyntax assignment &&
+                assignment.IsKind(SyntaxKind.SimpleAssignmentExpression))
             {
-                return ExtractFieldFromExpression(assignment.Left, compilation);
+                return ExtractFieldFromExpression(AccessorKind.Setter, assignment.Left, compilation);
             }
 
             return null;
@@ -153,16 +137,17 @@ namespace SonarAnalyzer.Rules.CSharp
         private static FieldData? FindReturnedField(IPropertySymbol property, Compilation compilation)
         {
             // We don't handle properties with multiple returns that return different fields
-            if (property.GetMethod?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is AccessorDeclarationSyntax accessor
-                && accessor.DescendantNodes().FirstOrDefault(n => n is ReturnStatementSyntax) is ReturnStatementSyntax returnStatement
-                && returnStatement.Expression != null)
+            if (property.GetMethod?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is AccessorDeclarationSyntax accessor &&
+                accessor.DescendantNodes().FirstOrDefault(n => n is ReturnStatementSyntax) is ReturnStatementSyntax returnStatement &&
+                returnStatement.Expression != null)
             {
-                return ExtractFieldFromExpression(returnStatement.Expression, compilation);
+                return ExtractFieldFromExpression(AccessorKind.Getter, returnStatement.Expression, compilation);
             }
             return null;
         }
 
-        private static FieldData? ExtractFieldFromExpression(ExpressionSyntax expression,
+        private static FieldData? ExtractFieldFromExpression(AccessorKind accessorKind,
+            ExpressionSyntax expression,
             Compilation compilation)
         {
             var semanticModel = compilation.GetSemanticModel(expression.SyntaxTree);
@@ -177,16 +162,16 @@ namespace SonarAnalyzer.Rules.CSharp
             if (strippedExpression is IdentifierNameSyntax &&
                 semanticModel.GetSymbolInfo(strippedExpression).Symbol is IFieldSymbol field)
             {
-                return new FieldData(field, strippedExpression.GetLocation());
+                return new FieldData(accessorKind, field, strippedExpression.GetLocation());
             }
             else
             {
                 // Check for "this.foo"
-                if (strippedExpression is MemberAccessExpressionSyntax member
-                  && member.Expression is ThisExpressionSyntax thisExpression
-                  && semanticModel.GetSymbolInfo(expression).Symbol is IFieldSymbol field2)
+                if (strippedExpression is MemberAccessExpressionSyntax member &&
+                    member.Expression is ThisExpressionSyntax thisExpression &&
+                    semanticModel.GetSymbolInfo(expression).Symbol is IFieldSymbol field2)
                 {
-                    return new FieldData(field2, member.Name.GetLocation());
+                    return new FieldData(accessorKind, field2, member.Name.GetLocation());
                 }
             }
 
@@ -198,31 +183,76 @@ namespace SonarAnalyzer.Rules.CSharp
             public PropertyData(IPropertySymbol propertySymbol, FieldData? returned, FieldData? updated)
             {
                 this.PropertySymbol = propertySymbol;
-                this.CanonicalName = GetCanonicalFieldName(propertySymbol.Name);
                 this.FieldReturned = returned;
                 this.FieldUpdated = updated;
             }
 
             public IPropertySymbol PropertySymbol { get; }
 
-            public string CanonicalName { get; }
-
             public FieldData? FieldReturned { get; }
 
             public FieldData? FieldUpdated { get; }
         }
 
+        private enum AccessorKind
+        {
+            Getter,
+            Setter
+        }
+
         private struct FieldData
         {
-            public FieldData(IFieldSymbol field, Location location)
+            public FieldData(AccessorKind accessor, IFieldSymbol field, Location location)
             {
+                this.AccessorKind = accessor;
                 this.Field = field;
                 this.Location = location;
             }
 
+            public AccessorKind AccessorKind { get; }
+
             public IFieldSymbol Field { get; }
 
             public Location Location { get; }
+        }
+
+        /// <summary>
+        /// The rule decides if a property is returning/settings the expected field.
+        /// We decide what the expected field name should be based on a fuzzy match
+        /// between the field name and the property name.
+        /// This class hides the details of matching logic.
+        /// </summary>
+        private class PropertyToFieldMatcher
+        {
+            private readonly IDictionary<IFieldSymbol, string> fieldToStandardNameMap;
+
+            public PropertyToFieldMatcher(IEnumerable<IFieldSymbol> fields)
+            {
+                // Calcuate and cache the standardised versions of the field names to avoid
+                // calculating them every time
+                this.fieldToStandardNameMap = fields.ToDictionary(f => f, f => GetCanonicalFieldName(f.Name));
+            }
+
+            public IFieldSymbol GetSingleMatchingFieldOrNull(IPropertySymbol propertySymbol)
+            {
+                // We're not caching the property name as only expect to be called once per property
+                var standardisedPropertyName = GetCanonicalFieldName(propertySymbol.Name);
+
+                var matchingFields = fieldToStandardNameMap.Keys
+                    .Where(k => AreCanonicalNamesEqual(fieldToStandardNameMap[k], standardisedPropertyName));
+
+                if (matchingFields.Count() != 1)
+                {
+                    return null;
+                }
+                return matchingFields.Single();
+            }
+
+            private static string GetCanonicalFieldName(string name) =>
+                name.Replace("_", string.Empty);
+
+            private static bool AreCanonicalNamesEqual(string name1, string name2) =>
+                name1.Equals(name2, System.StringComparison.OrdinalIgnoreCase);
         }
     }
 }
