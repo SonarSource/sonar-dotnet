@@ -27,6 +27,7 @@ namespace SonarAnalyzer.Helpers
     {
         #region Known types
 
+        internal static readonly KnownType Void = new KnownType(SpecialType.System_Void, "void");
         internal static readonly KnownType Microsoft_AspNetCore_Mvc_Controller = new KnownType("Microsoft.AspNetCore.Mvc.Controller");
         internal static readonly KnownType Microsoft_AspNetCore_Mvc_ControllerBase = new KnownType("Microsoft.AspNetCore.Mvc.ControllerBase");
         internal static readonly KnownType Microsoft_AspNetCore_Mvc_ControllerAttribute = new KnownType("Microsoft.AspNetCore.Mvc.ControllerAttribute");
@@ -49,7 +50,11 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType NUnit_Framework_TheoryAttribute = new KnownType("NUnit.Framework.TheoryAttribute");
         internal static readonly KnownType Oracle_ManagedDataAccess_Client_OracleCommand = new KnownType("Oracle.ManagedDataAccess.Client.OracleCommand");
         internal static readonly KnownType Oracle_ManagedDataAccess_Client_OracleDataAdapter = new KnownType("Oracle.ManagedDataAccess.Client.OracleDataAdapter");
+        internal static readonly KnownType System_Action = new KnownType("System.Action");
         internal static readonly KnownType System_Action_T = new KnownType("System.Action<T>");
+        internal static readonly KnownType System_Action_T1_T2 = new KnownType("System.Action<T1, T2>");
+        internal static readonly KnownType System_Action_T1_T2_T3 = new KnownType("System.Action<T1, T2, T3>");
+        internal static readonly KnownType System_Action_T1_T2_T3_T4 = new KnownType("System.Action<T1, T2, T3, T4>");
         internal static readonly KnownType System_Activator = new KnownType("System.Activator");
         internal static readonly KnownType System_ApplicationException = new KnownType("System.ApplicationException");
         internal static readonly KnownType System_ArgumentException = new KnownType("System.ArgumentException");
@@ -150,7 +155,11 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_Exception = new KnownType("System.Exception");
         internal static readonly KnownType System_ExecutionEngineException = new KnownType("System.ExecutionEngineException");
         internal static readonly KnownType System_FlagsAttribute = new KnownType("System.FlagsAttribute");
-        internal static readonly KnownType System_Func_T = new KnownType("System.Func<T, TResult>");
+        internal static readonly KnownType System_Func_TResult = new KnownType("System.Func<TResult>");
+        internal static readonly KnownType System_Func_T_TResult = new KnownType("System.Func<T, TResult>");
+        internal static readonly KnownType System_Func_T1_T2_TResult = new KnownType("System.Func<T1, T2, TResult>");
+        internal static readonly KnownType System_Func_T1_T2_T3_TResult = new KnownType("System.Func<T1, T2, T3, TResult>");
+        internal static readonly KnownType System_Func_T1_T2_T3_T4_TResult = new KnownType("System.Func<T1, T2, T3, T4, TResult>");
         internal static readonly KnownType System_GC = new KnownType("System.GC");
         internal static readonly KnownType System_Globalization_CompareOptions = new KnownType("System.Globalization.CompareOptions");
         internal static readonly KnownType System_Globalization_CultureInfo = new KnownType("System.Globalization.CultureInfo");
@@ -171,6 +180,7 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_IO_StreamReader = new KnownType("System.IO.StreamReader");
         internal static readonly KnownType System_IO_StreamWriter = new KnownType("System.IO.StreamWriter");
         internal static readonly KnownType System_IO_TextWriter = new KnownType("System.IO.TextWriter");
+        internal static readonly KnownType System_Lazy = new KnownType("System.Lazy<T>");
         internal static readonly KnownType System_Linq_Enumerable = new KnownType("System.Linq.Enumerable");
         internal static readonly KnownType System_Linq_Expressions_Expression_T = new KnownType("System.Linq.Expressions.Expression<TDelegate>");
         internal static readonly KnownType System_Linq_ImmutableArrayExtensions = new KnownType("System.Linq.ImmutableArrayExtensions");
