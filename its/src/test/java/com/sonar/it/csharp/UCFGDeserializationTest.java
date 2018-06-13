@@ -23,6 +23,7 @@ import com.sonar.orchestrator.Orchestrator;
 import com.sonar.orchestrator.OrchestratorBuilder;
 import com.sonar.orchestrator.build.BuildResult;
 import com.sonar.orchestrator.build.ScannerForMSBuild;
+import com.sonar.orchestrator.container.Edition;
 import com.sonar.orchestrator.locator.FileLocation;
 import com.sonar.orchestrator.locator.Location;
 import com.sonar.orchestrator.locator.MavenLocation;
@@ -73,9 +74,9 @@ public class UCFGDeserializationTest {
       csharpLocation = MavenLocation.of("org.sonarsource.dotnet", "sonar-csharp-plugin", csharpVersion);
     }
     builder
+      .setEdition(Edition.DEVELOPER)
       .addPlugin(csharpLocation)
-      .addPlugin(MavenLocation.of("com.sonarsource.security", "sonar-security-plugin", "1.0.0.847"))
-      .addPlugin(MavenLocation.of("com.sonarsource.license", "sonar-dev-license-plugin", "3.3.0.1341"));
+      .addPlugin(MavenLocation.of("com.sonarsource.security", "sonar-security-plugin", "1.0.0.847"));
 
     orchestrator = builder.build();
     orchestrator.start();
