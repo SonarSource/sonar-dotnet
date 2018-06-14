@@ -105,7 +105,7 @@ namespace Tests.Diagnostics
         {
             if (i > 100)
                 return 1;
-            else
+            else  // Noncompliant
 //          ^^^^
             if (i > 200)
 //          ^^^^^^^^^^^^ Secondary
@@ -121,7 +121,7 @@ namespace Tests.Diagnostics
             int total = 0;
             string data = "abc";
 
-            do                
+            do  // Noncompliant         
 //          ^^
             while (total < 10)                  // comments are included in highlighting for compound statements
 //          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Secondary

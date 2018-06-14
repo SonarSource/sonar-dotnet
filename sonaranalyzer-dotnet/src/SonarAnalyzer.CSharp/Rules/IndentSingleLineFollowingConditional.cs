@@ -71,7 +71,6 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 // Squiggle - "while (condition1 && condition2)"
                 var primaryLocation = GetLocationBetweenTokens(whileStatement.WhileKeyword, whileStatement.CloseParenToken);
-               
                 ReportIssue(context, primaryLocation, whileStatement.Statement, "while");
             }
         }
@@ -93,7 +92,6 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 // Squiggle - "for (...)"
                 var primaryLocation = GetLocationBetweenTokens(forStatement.ForKeyword, forStatement.CloseParenToken);
-
                 ReportIssue(context, primaryLocation, forStatement.Statement, "for");
             }
         }
@@ -105,7 +103,6 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 // Squiggle - "foreach (...)"
                 var primaryLocation = GetLocationBetweenTokens(forEachStatement.ForEachKeyword, forEachStatement.CloseParenToken);
-
                 ReportIssue(context, primaryLocation, forEachStatement.Statement, "foreach");
             }
         }
@@ -138,7 +135,6 @@ namespace SonarAnalyzer.Rules.CSharp
             if (!IsStatementIndentationOk(controlNode, ifStatement.Statement))
             {    
                 var primaryLocation = GetLocationBetweenTokens(startToken, ifStatement.CloseParenToken);
-
                 ReportIssue(context, primaryLocation, ifStatement.Statement, conditionLabelText);
             }
         }
@@ -155,10 +151,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool IsStatementIndentationOk(SyntaxNode controlNode, SyntaxNode conditionallyExecutedNode) =>
             conditionallyExecutedNode is BlockSyntax ||
-            GetFirstCharPosition(conditionallyExecutedNode) > GetFirstCharPosition(controlNode);
-
-        private static int GetFirstCharPosition(SyntaxNode node) =>
-            node.GetLocation().GetLineSpan().Span.Start.Character;
+            VisualIndentComparer.IsSecondIndentLonger(controlNode, conditionallyExecutedNode);
 
         private static void ReportIssue(SyntaxNodeAnalysisContext context, Location primaryLocation,
             SyntaxNode secondaryLocationNode, string conditionLabelText) =>
