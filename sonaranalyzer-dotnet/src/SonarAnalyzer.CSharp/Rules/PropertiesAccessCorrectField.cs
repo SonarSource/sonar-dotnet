@@ -97,7 +97,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 context.ReportDiagnosticWhenActive(Diagnostic.Create(
                     rule,
-                    actualField.Value.Location,
+                    actualField.Value.LocationNode.GetLocation(),
                     actualField.Value.AccessorKind == AccessorKind.Getter ? "getter" : "setter",
                     expectedField.Name
                     ));
@@ -138,7 +138,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             // We don't handle properties with multiple returns that return different fields
             if (property.GetMethod?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is AccessorDeclarationSyntax accessor &&
-                accessor.DescendantNodes().FirstOrDefault(n => n is ReturnStatementSyntax) is ReturnStatementSyntax returnStatement &&
+                accessor.DescendantNodes().FirstOrDefault(n => n.RawKind == (int)SyntaxKind.ReturnStatement) is ReturnStatementSyntax returnStatement &&
                 returnStatement.Expression != null)
             {
                 return ExtractFieldFromExpression(AccessorKind.Getter, returnStatement.Expression, compilation);
@@ -162,7 +162,7 @@ namespace SonarAnalyzer.Rules.CSharp
             if (strippedExpression is IdentifierNameSyntax &&
                 semanticModel.GetSymbolInfo(strippedExpression).Symbol is IFieldSymbol field)
             {
-                return new FieldData(accessorKind, field, strippedExpression.GetLocation());
+                return new FieldData(accessorKind, field, strippedExpression);
             }
             else
             {
@@ -171,7 +171,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     member.Expression is ThisExpressionSyntax thisExpression &&
                     semanticModel.GetSymbolInfo(expression).Symbol is IFieldSymbol field2)
                 {
-                    return new FieldData(accessorKind, field2, member.Name.GetLocation());
+                    return new FieldData(accessorKind, field2, member.Name);
                 }
             }
 
@@ -202,18 +202,18 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private struct FieldData
         {
-            public FieldData(AccessorKind accessor, IFieldSymbol field, Location location)
+            public FieldData(AccessorKind accessor, IFieldSymbol field, SyntaxNode locationNode)
             {
                 this.AccessorKind = accessor;
                 this.Field = field;
-                this.Location = location;
+                this.LocationNode = locationNode;
             }
 
             public AccessorKind AccessorKind { get; }
 
             public IFieldSymbol Field { get; }
 
-            public Location Location { get; }
+            public SyntaxNode LocationNode { get; }
         }
 
         /// <summary>
@@ -239,13 +239,14 @@ namespace SonarAnalyzer.Rules.CSharp
                 var standardisedPropertyName = GetCanonicalFieldName(propertySymbol.Name);
 
                 var matchingFields = fieldToStandardNameMap.Keys
-                    .Where(k => AreCanonicalNamesEqual(fieldToStandardNameMap[k], standardisedPropertyName));
+                    .Where(k => AreCanonicalNamesEqual(fieldToStandardNameMap[k], standardisedPropertyName))
+                    .ToList();
 
-                if (matchingFields.Count() != 1)
+                if (matchingFields.Count != 1)
                 {
                     return null;
                 }
-                return matchingFields.Single();
+                return matchingFields[0];
             }
 
             private static string GetCanonicalFieldName(string name) =>

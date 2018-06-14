@@ -22,7 +22,7 @@ namespace Tests.Diagnostics
         }
     }
 
-    class NonCompliantStruct_FromRspec
+    struct NonCompliantStruct_FromRspec
     {
         private int x;
         private int y;
