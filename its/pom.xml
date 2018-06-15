@@ -30,7 +30,7 @@
     <dependency>
       <groupId>org.sonarsource.orchestrator</groupId>
       <artifactId>sonar-orchestrator</artifactId>
-      <version>3.18.0.1547</version>
+      <version>3.19.0.1641</version>
     </dependency>
     <dependency>
       <groupId>org.sonarsource.scanner.msbuild</groupId>
