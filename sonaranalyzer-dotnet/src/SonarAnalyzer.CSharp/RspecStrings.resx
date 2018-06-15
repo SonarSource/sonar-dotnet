@@ -8259,6 +8259,36 @@
   <data name="S3972_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
   </data>
+  <data name="S3973_Category" xml:space="preserve">
+    <value>Critical Code Smell</value>
+  </data>
+  <data name="S3973_Description" xml:space="preserve">
+    <value>In the absence of enclosing curly braces, the line immediately after a conditional is the one that is conditionally executed. By both convention and good practice, such lines are indented. In the absence of both curly braces and indentation the intent of the original programmer is entirely unclear and perhaps not actually what is executed. Additionally, such code is highly likely to be confusing to maintainers.</value>
+  </data>
+  <data name="S3973_IsActivatedByDefault" xml:space="preserve">
+    <value>True</value>
+  </data>
+  <data name="S3973_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S3973_RemediationCost" xml:space="preserve">
+    <value>10min</value>
+  </data>
+  <data name="S3973_Scope" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="S3973_Severity" xml:space="preserve">
+    <value>Critical</value>
+  </data>
+  <data name="S3973_Tags" xml:space="preserve">
+    <value>confusing,suspicious</value>
+  </data>
+  <data name="S3973_Title" xml:space="preserve">
+    <value>Conditionally executed single line should be denoted by indentation</value>
+  </data>
+  <data name="S3973_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S3981_Category" xml:space="preserve">
     <value>Major Bug</value>
   </data>
