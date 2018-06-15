@@ -52,7 +52,7 @@ public class UCFGDeserializationTest {
 
   private static Orchestrator orchestrator;
 
-  //@BeforeClass
+  @BeforeClass
   public static void initializeOrchestrator() {
     // Versions of SonarQube and plugins support aliases:
     // - "DEV" for the latest build of master that passed QA
@@ -114,13 +114,7 @@ public class UCFGDeserializationTest {
       .toString();
   }
 
-
   @Test
-  public void dummyTest() {
-    // no-op
-  }
-
-  //@Test
   public void ucfgs_created_when_rules_enabled() throws IOException {
     // enable a security rule
     createQP("S3649");
