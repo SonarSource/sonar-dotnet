@@ -79,7 +79,7 @@ namespace Tests.Diagnostics
                 Console.Write();
             }
 
-            // FN - the catch clause has a name for the exception, while the try on #36 does not have a name
+            // False negative - the catch clause has a name for the exception, while the try on #36 does not have a name
             try { }
             catch (Exception e)
             {
@@ -109,6 +109,16 @@ namespace Tests.Diagnostics
             {
             }
             catch (ApplicationException)
+            {
+            }
+
+            try { }
+            catch (Exception e) when (e != null)
+            {
+            }
+
+            try { } // Noncompliant, same exception filter
+            catch (Exception e) when (e != null)
             {
             }
         }
