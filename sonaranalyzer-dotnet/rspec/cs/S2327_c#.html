@@ -1,0 +1,57 @@
+<p>When multiple, adjacent <code>try</code> statements have duplicate <code>catch</code> and/or <code>finally</code> blocks, they should be merged to
+consolidate the <code>catch/finally</code> logic for cleaner, more readable code. Note that this applies even when there is intervening code outside
+any <code>try</code> block.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+try
+{
+  DoTheFirstThing(a, b);
+}
+catch (InvalidOperationException ex)
+{
+  HandleException(ex);
+}
+
+DoSomeOtherStuff();
+
+try  // Noncompliant; catch is identical to previous
+{
+  DoTheSecondThing();
+}
+catch (InvalidOperationException ex)
+{
+  HandleException(ex);
+}
+
+try  // Compliant; catch handles exception differently
+{
+  DoTheThirdThing(a);
+}
+catch (InvalidOperationException ex)
+{
+  LogAndDie(ex);
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+try
+{
+  DoTheFirstThing(a, b);
+  DoSomeOtherStuff();
+  DoTheSecondThing();
+}
+catch (InvalidOperationException ex)
+{
+  HandleException(ex);
+}
+
+try  // Compliant; catch handles exception differently
+{
+  DoTheThirdThing(a);
+}
+catch (InvalidOperationException ex)
+{
+  LogAndDie(ex);
+}
+</pre>
+

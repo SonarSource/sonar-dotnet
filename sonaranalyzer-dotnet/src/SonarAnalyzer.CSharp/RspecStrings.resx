@@ -3585,6 +3585,36 @@
   <data name="S2326_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
   </data>
+  <data name="S2327_Category" xml:space="preserve">
+    <value>Major Code Smell</value>
+  </data>
+  <data name="S2327_Description" xml:space="preserve">
+    <value>When multiple, adjacent try statements have duplicate catch and/or finally blocks, they should be merged to consolidate the catch/finally logic for cleaner, more readable code. Note that this applies even when there is intervening code outside any try block.</value>
+  </data>
+  <data name="S2327_IsActivatedByDefault" xml:space="preserve">
+    <value>True</value>
+  </data>
+  <data name="S2327_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S2327_RemediationCost" xml:space="preserve">
+    <value>20min</value>
+  </data>
+  <data name="S2327_Scope" xml:space="preserve">
+    <value>Main</value>
+  </data>
+  <data name="S2327_Severity" xml:space="preserve">
+    <value>Major</value>
+  </data>
+  <data name="S2327_Tags" xml:space="preserve">
+    <value>clumsy</value>
+  </data>
+  <data name="S2327_Title" xml:space="preserve">
+    <value>"try" statements with identical "catch" and/or "finally" blocks should be merged</value>
+  </data>
+  <data name="S2327_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S2328_Category" xml:space="preserve">
     <value>Minor Bug</value>
   </data>
