@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
@@ -35,21 +36,22 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class AvoidExcessiveClassCoupling : ParameterLoadingDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S1200";
-        private const string MessageFormat = "Split this class into smaller and more specialized ones to reduce its " +
-            "dependencies on other classes from {0} to the maximum authorized {1} or less.";
+        private const string MessageFormat = "Split this {0} into smaller and more specialized ones to reduce its " +
+            "dependencies on other classes from {1} to the maximum authorized {2} or less.";
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager,
                 isEnabledByDefault: false);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        private const int ThresholdDefaultValue = 20;
+        private const int ThresholdDefaultValue = 30;
         [RuleParameter("max", PropertyType.Integer,
             "Maximum number of classes a single class is allowed to depend upon", ThresholdDefaultValue)]
         public int Threshold { get; set; } = ThresholdDefaultValue;
 
-        private static ISet<KnownType> typesExcludedFromCoupling = new HashSet<KnownType>
+        private static ISet<KnownType> ignoredTypes = new HashSet<KnownType>
         {
+            KnownType.Void,
             KnownType.System_Boolean,
             KnownType.System_Byte,
             KnownType.System_SByte,
@@ -65,7 +67,21 @@ namespace SonarAnalyzer.Rules.CSharp
             KnownType.System_Single,
             KnownType.System_Double,
             KnownType.System_String,
-            KnownType.System_Object
+            KnownType.System_Object,
+            KnownType.System_Threading_Tasks_Task,
+            KnownType.System_Threading_Tasks_Task_T,
+            KnownType.System_Threading_Tasks_ValueTask_TResult,
+            KnownType.System_Action,
+            KnownType.System_Action_T,
+            KnownType.System_Action_T1_T2,
+            KnownType.System_Action_T1_T2_T3,
+            KnownType.System_Action_T1_T2_T3_T4,
+            KnownType.System_Func_TResult,
+            KnownType.System_Func_T_TResult,
+            KnownType.System_Func_T1_T2_TResult,
+            KnownType.System_Func_T1_T2_T3_TResult,
+            KnownType.System_Func_T1_T2_T3_T4_TResult,
+            KnownType.System_Lazy,
         };
 
         protected override void Initialize(ParameterLoadingAnalysisContext context)
@@ -73,142 +89,175 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
-                    var classDeclaration = (ClassDeclarationSyntax)c.Node;
+                    var typeDeclaration = (TypeDeclarationSyntax)c.Node;
 
-                    if (classDeclaration.Identifier.IsMissing)
+                    if (typeDeclaration.Identifier.IsMissing)
                     {
                         return;
                     }
 
-                    var allFieldsCoupling = classDeclaration.Members
-                        .OfType<FieldDeclarationSyntax>()
-                        .SelectMany(field => CollectCoupledClasses(field, c.SemanticModel));
+                    var type = c.SemanticModel.GetDeclaredSymbol(typeDeclaration);
 
-                    var allPropertiesCoupling = classDeclaration.Members
-                        .OfType<BasePropertyDeclarationSyntax>()
-                        .SelectMany(property => CollectCoupledClasses(property, c.SemanticModel));
+                    var collector = new TypeDependencyCollector(c.SemanticModel, typeDeclaration);
+                    collector.Visit(typeDeclaration);
 
-                    var allMethodsCoupling = classDeclaration.Members
-                        .OfType<BaseMethodDeclarationSyntax>()
-                        .SelectMany(baseMethod => CollectCoupledClasses(baseMethod, c.SemanticModel));
+                    var dependentTypes = collector.DependentTypes
+                        .SelectMany(ExpandGenericTypes)
+                        .Distinct()
+                        .Where(IsTrackedType)
+                        .Where(t => t != type)
+                        .ToList();
 
-                    var totalClassCoupling = Enumerable.Empty<ITypeSymbol>()
-                        .Union(allFieldsCoupling)
-                        .Union(allPropertiesCoupling)
-                        .Union(allMethodsCoupling);
-                    var classCouplingCount = FilterAndCountCoupling(totalClassCoupling);
-
-                    if (classCouplingCount > Threshold)
+                    if (dependentTypes.Count > Threshold)
                     {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, classDeclaration.Identifier.GetLocation(),
-                            classCouplingCount, Threshold));
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, typeDeclaration.Identifier.GetLocation(),
+                            typeDeclaration.Keyword.ValueText, dependentTypes.Count, Threshold));
                     }
                 },
-                SyntaxKind.ClassDeclaration);
+                SyntaxKind.ClassDeclaration,
+                SyntaxKind.StructDeclaration,
+                SyntaxKind.InterfaceDeclaration);
         }
 
-        private static IEnumerable<ITypeSymbol> CollectCoupledClasses(FieldDeclarationSyntax field,
-            SemanticModel model)
-        {
-            return field.Declaration.Variables
-                .SelectMany(variable => ExtractTypesFromVariableDeclarator(variable, model));
-        }
+        private static bool IsTrackedType(INamedTypeSymbol namedType) =>
+            namedType.TypeKind != TypeKind.Enum &&
+            !namedType.IsAny(ignoredTypes);
 
-        private static IEnumerable<ITypeSymbol> CollectCoupledClasses(BasePropertyDeclarationSyntax property,
-            SemanticModel model)
+        /// <summary>
+        /// Returns all type symbols that are linked to the provided type symbol - generic constraints,
+        /// replaced generic types (bounded types), etc. For example:
+        /// void Foo(Dictionary<string, int>) will return Dictionary<T>, string and int
+        /// void Foo<T>(List<T>) where T : IDisposable will return List<T> and Disposable
+        /// void Foo<T>(Dictionary<string,List<T>>) where T : IEnumerable<int> should return Dictionary, string, List, IEnumerable and int
+        /// </summary>
+        private static IEnumerable<INamedTypeSymbol> ExpandGenericTypes(INamedTypeSymbol namedType)
         {
-            var propertyReturnType = new[] { model.GetSymbolInfo(property.Type).Symbol as ITypeSymbol };
-
-            var indexerProperty = property as IndexerDeclarationSyntax;
-            if (indexerProperty?.ExpressionBody != null)
+            var originalDefinition = new[] { namedType.OriginalDefinition };
+            if (!namedType.IsGenericType)
             {
-                // Arrowed property
-                return propertyReturnType
-                    .Union(indexerProperty.ExpressionBody
-                        .DescendantNodes()
-                        .SelectMany(node => ExtractTypeSymbolsFromSyntaxNode(node, model)));
+                return originalDefinition;
             }
-
-            var basicProperty = property as PropertyDeclarationSyntax;
-            if (basicProperty?.ExpressionBody != null)
-            {
-                // Arrowed property
-                return propertyReturnType
-                    .Union(basicProperty.ExpressionBody
-                        .DescendantNodes()
-                        .SelectMany(node => ExtractTypeSymbolsFromSyntaxNode(node, model)));
-            }
-
-            // Classic property OR event
-            return propertyReturnType
-                .Union(property.AccessorList.Accessors
-                    .SelectMany(accessor => accessor.DescendantNodes()
-                        .SelectMany(node => ExtractTypeSymbolsFromSyntaxNode(node, model))));
+            return namedType.IsUnboundGenericType
+                ? originalDefinition.Union(namedType.TypeParameters.SelectMany(GetConstraintTypes))
+                : originalDefinition.Union(namedType.TypeArguments.OfType<INamedTypeSymbol>().SelectMany(ExpandGenericTypes));
         }
 
-        private static IEnumerable<ITypeSymbol> CollectCoupledClasses(BaseMethodDeclarationSyntax method,
-            SemanticModel model)
-        {
-            return method.DescendantNodes()
-                .SelectMany(node => ExtractTypeSymbolsFromSyntaxNode(node, model));
-        }
+        private static IEnumerable<INamedTypeSymbol> GetConstraintTypes(ITypeParameterSymbol typeParameter) =>
+            typeParameter.ConstraintTypes.OfType<INamedTypeSymbol>().SelectMany(ExpandGenericTypes);
 
-        private static IEnumerable<ITypeSymbol> ExtractTypesFromVariableDeclarator(VariableDeclaratorSyntax variable,
-            SemanticModel model)
+        private class TypeDependencyCollector : CSharpSyntaxWalker
         {
-            if (variable.Initializer != null)
+            private readonly SemanticModel model;
+            private readonly TypeDeclarationSyntax originalTypeDeclaration;
+
+            public ISet<INamedTypeSymbol> DependentTypes { get; } = new HashSet<INamedTypeSymbol>();
+
+            private void AddDependentType(INamedTypeSymbol type)
             {
-                var typeInfo = model.GetTypeInfo(variable.Initializer.Value);
-                yield return typeInfo.Type;
-                yield return typeInfo.ConvertedType;
-            }
-            else
-            {
-                var variableReturnType = variable.FirstAncestorOrSelf<VariableDeclarationSyntax>()?.Type;
-                if (variableReturnType != null)
+                if (type != null)
                 {
-                    yield return model.GetSymbolInfo(variableReturnType).Symbol as ITypeSymbol;
+                    DependentTypes.Add(type);
                 }
             }
-        }
 
-        private static IEnumerable<ITypeSymbol> ExtractTypeSymbolsFromSyntaxNode(SyntaxNode node, SemanticModel model)
-        {
-            var parameter = node as ParameterSyntax;
-            if (parameter?.Type != null)
+            private void AddDependentType(TypeSyntax typeSyntax)
             {
-                yield return model.GetSymbolInfo(parameter.Type).Symbol as ITypeSymbol;
+                if (typeSyntax != null)
+                {
+                    AddDependentType(model.GetSymbolInfo(typeSyntax).Symbol as INamedTypeSymbol);
+                }
             }
 
-            if (node is VariableDeclarationSyntax variableDeclaration)
+            private void AddDependentType(TypeInfo typeInfo)
             {
-                yield return model.GetSymbolInfo(variableDeclaration.Type).Symbol as ITypeSymbol;
+                AddDependentType(typeInfo.Type as INamedTypeSymbol);
+                AddDependentType(typeInfo.ConvertedType as INamedTypeSymbol);
             }
 
-            if (node is ObjectCreationExpressionSyntax objectCreation)
+            public TypeDependencyCollector(SemanticModel model, TypeDeclarationSyntax originalTypeDeclaration)
             {
-                var objectCreationTypeInfo = model.GetTypeInfo(objectCreation);
-                yield return objectCreationTypeInfo.Type;
-                yield return objectCreationTypeInfo.ConvertedType;
+                this.model = model;
+                this.originalTypeDeclaration = originalTypeDeclaration;
             }
 
-            if (node is IdentifierNameSyntax identifierName)
+            public override void VisitClassDeclaration(ClassDeclarationSyntax node)
             {
-                yield return model.GetSymbolInfo(identifierName).Symbol as ITypeSymbol;
+                // don't drill down in child classes, but walk the original
+                if (node == originalTypeDeclaration)
+                {
+                    base.VisitClassDeclaration(node);
+                }
             }
-        }
 
-        private static int FilterAndCountCoupling(IEnumerable<ITypeSymbol> types)
-        {
-            return types.Distinct().Count(IsCountedType);
-        }
+            public override void VisitStructDeclaration(StructDeclarationSyntax node)
+            {
+                // don't drill down in child structs, but walk the original
+                if (node == originalTypeDeclaration)
+                {
+                    base.VisitStructDeclaration(node);
+                }
+            }
 
-        private static bool IsCountedType(ITypeSymbol type)
-        {
-            return type != null &&
-                type.TypeKind != TypeKind.Enum &&
-                type.TypeKind != TypeKind.Pointer &&
-                !type.IsAny(typesExcludedFromCoupling);
+            public override void VisitIndexerDeclaration(IndexerDeclarationSyntax node)
+            {
+                AddDependentType(node.Type);
+                base.VisitIndexerDeclaration(node);
+            }
+
+            public override void VisitVariableDeclarator(VariableDeclaratorSyntax node)
+            {
+                if (node.Initializer != null)
+                {
+                    AddDependentType(model.GetTypeInfo(node.Initializer.Value));
+                }
+                else
+                {
+                    AddDependentType(node.FirstAncestorOrSelf<VariableDeclarationSyntax>()?.Type);
+                }
+                base.VisitVariableDeclarator(node);
+            }
+
+            public override void VisitMethodDeclaration(MethodDeclarationSyntax node)
+            {
+                AddDependentType(node.ReturnType);
+                base.VisitMethodDeclaration(node);
+            }
+
+            public override void VisitTypeConstraint(TypeConstraintSyntax node)
+            {
+                AddDependentType(node.Type);
+                base.VisitTypeConstraint(node);
+            }
+
+            public override void VisitParameter(ParameterSyntax node)
+            {
+                AddDependentType(node.Type);
+                base.VisitParameter(node);
+            }
+
+            public override void VisitEventDeclaration(EventDeclarationSyntax node)
+            {
+                AddDependentType(node.Type);
+                base.VisitEventDeclaration(node);
+            }
+
+            public override void VisitPropertyDeclaration(PropertyDeclarationSyntax node)
+            {
+                AddDependentType(node.Type);
+                base.VisitPropertyDeclaration(node);
+            }
+
+            public override void VisitObjectCreationExpression(ObjectCreationExpressionSyntax node)
+            {
+                AddDependentType(model.GetTypeInfo(node));
+                base.VisitObjectCreationExpression(node);
+            }
+
+            public override void VisitIdentifierName(IdentifierNameSyntax node)
+            {
+                AddDependentType(node);
+                base.VisitIdentifierName(node);
+            }
         }
     }
 }

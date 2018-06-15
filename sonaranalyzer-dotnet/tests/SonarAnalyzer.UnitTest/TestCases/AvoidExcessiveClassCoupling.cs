@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.IO;
 
 namespace Tests.Diagnostics
@@ -8,7 +8,7 @@ namespace Tests.Diagnostics
     class Foo1 : FooBase { }
     public struct MyStruct { }
 
-    public abstract class TestCases // Noncompliant {{Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 11 to the maximum authorized 1 or less.}}
+    public abstract class TestCases // Noncompliant {{Split this class into smaller and more specialized ones to reduce its dependencies on other classes from 8 to the maximum authorized 1 or less.}}
 //                        ^^^^^^^^^
     {
         // ================================================================================
