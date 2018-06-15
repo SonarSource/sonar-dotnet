@@ -113,6 +113,12 @@ public class UCFGDeserializationTest {
       .toString();
   }
 
+
+  @Test
+  public void dummyTest() {
+    // no-op
+  }
+
   //@Test
   public void ucfgs_created_when_rules_enabled() throws IOException {
     // enable a security rule
@@ -126,7 +132,7 @@ public class UCFGDeserializationTest {
     assertThat(ucfgs).hasSize(926);
   }
 
-  //@Test
+    //@Test
   public void ucfgs_not_created_when_rules_not_enabled() throws IOException {
     // No security rules in QP
     createQP("S100");
