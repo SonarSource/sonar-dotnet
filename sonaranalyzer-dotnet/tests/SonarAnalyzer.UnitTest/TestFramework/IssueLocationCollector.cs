@@ -116,7 +116,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             var patternWithoutLineStart = PRECISE_ISSUE_LOCATION_PATTERN.Substring(1);
             if (Regex.IsMatch(lineText, patternWithoutLineStart))
             {
-                Execute.Assertion.FailWith("Line matches expected location pattern, but doesn't start at the beginning of the line.");
+                Execute.Assertion.FailWith($"Line matches expected location pattern, but doesn't start at the beginning of the line. Line: {line.LineNumber}");
             }
 
             return Enumerable.Empty<IssueLocation>();
