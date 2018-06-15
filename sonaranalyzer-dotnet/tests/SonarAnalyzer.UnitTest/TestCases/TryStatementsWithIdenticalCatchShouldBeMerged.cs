@@ -155,7 +155,7 @@ namespace Tests.Diagnostics
                 }
             }
 
-            try { } // Noncompliant {{Combine this 'try' with the one starting on line 118.}}
+            try { } // Noncompliant {{Combine this 'try' with the one starting on line 128.}}
             catch (Exception)
             {
             }
@@ -171,7 +171,7 @@ namespace Tests.Diagnostics
                 try { }
                 finally { }
 
-                try { } // Noncompliant {{Combine this 'try' with the one starting on line 161.}}
+                try { } // Noncompliant {{Combine this 'try' with the one starting on line 171.}}
                 finally { }
 
                 return 0;
@@ -181,7 +181,7 @@ namespace Tests.Diagnostics
                 try { }
                 finally { }
 
-                try { } // Noncompliant {{Combine this 'try' with the one starting on line 171.}}
+                try { } // Noncompliant {{Combine this 'try' with the one starting on line 181.}}
                 finally { }
             }
         }
@@ -191,7 +191,7 @@ namespace Tests.Diagnostics
             try { }
             finally { }
 
-            try { } // Noncompliant {{Combine this 'try' with the one starting on line 181.}}
+            try { } // Noncompliant {{Combine this 'try' with the one starting on line 191.}}
             finally { }
         }
 
@@ -202,7 +202,7 @@ namespace Tests.Diagnostics
                 try { }
                 finally { }
 
-                try { } // Noncompliant {{Combine this 'try' with the one starting on line 192.}}
+                try { } // Noncompliant {{Combine this 'try' with the one starting on line 202.}}
                 finally { }
             };
         }
