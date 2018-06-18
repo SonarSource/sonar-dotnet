@@ -6,6 +6,14 @@ namespace UcfgNoProtobuf
 {
     public class Class1
     {
-        // TODO
+        public void DoStuff()
+        {
+            DoMoreStuff();
+        }
+
+        private void DoMoreStuff()
+        {
+            // TODO
+        }
     }
 }
