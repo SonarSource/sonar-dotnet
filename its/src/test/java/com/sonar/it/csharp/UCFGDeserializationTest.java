@@ -47,7 +47,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.fail;
 
 public class UCFGDeserializationTest {
-  private static final String PROJECT_KEY = "dotNetCore-SimplCommerce";
+  private static final String PROJECT_KEY = "ucfg_tests"; // same key used for different MSBuild projects
   private static final String QUALITY_PROFILE = "CsharpProfile";
 
   private static Orchestrator orchestrator;
@@ -127,12 +127,12 @@ public class UCFGDeserializationTest {
     assertThat(ucfgs).hasSize(926);
   }
 
-    //@Test
+  @Test
   public void ucfgs_not_created_when_rules_not_enabled() throws IOException {
     // No security rules in QP
     createQP("S100");
 
-    File projectLocation = new File("projects/SimplCommerce");
+    File projectLocation = new File("projects/UcfgNoProtobuf");
 
     runAnalysis(projectLocation);
 
