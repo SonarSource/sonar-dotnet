@@ -25,7 +25,7 @@ namespace Tests.Diagnostics
             {
                 o = new object();
             }
-            return o.ToString();
+            return o.ToString(); // Noncompliant, when e.Message is null o will be null
         }
     }
 }

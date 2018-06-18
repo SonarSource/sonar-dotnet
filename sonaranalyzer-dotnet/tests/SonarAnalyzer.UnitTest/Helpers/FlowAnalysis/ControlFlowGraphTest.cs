@@ -1840,6 +1840,56 @@ namespace NS
 
         [TestMethod]
         [TestCategory("CFG")]
+        public void Cfg_TryCatch_Exception_Filter()
+        {
+            var cfg = Build(@"
+            cw0();
+            try
+            {
+                cw1();
+            }
+            catch(Exception e) when (e is InvalidOperationException)
+            {
+                cw2();
+            }
+            cw5();");
+
+            VerifyCfg(cfg, 6);
+
+            var blocks = cfg.Blocks.ToList();
+
+            var tryStartBlock = blocks[0];
+            var tryBodyBlock = blocks[1];
+            var whenBlock = blocks[2];
+            var catchBlock = blocks[3];
+            var afterTryBlock = blocks[4];
+            var exit = blocks.Last();
+
+            tryStartBlock.Should().BeOfType<BranchBlock>();
+            VerifyAllInstructions(tryStartBlock, "cw0", "cw0()");
+            tryStartBlock.SuccessorBlocks.Should().BeEquivalentTo(tryBodyBlock, whenBlock, exit);
+
+            tryBodyBlock.Should().BeOfType<BranchBlock>();
+            VerifyAllInstructions(tryBodyBlock, "cw1", "cw1()");
+            tryBodyBlock.SuccessorBlocks.Should().BeEquivalentTo(whenBlock, afterTryBlock, exit);
+
+            whenBlock.Should().BeOfType<BinaryBranchBlock>();
+            VerifyAllInstructions(whenBlock, "e", "e is InvalidOperationException");
+            whenBlock.SuccessorBlocks.Should().BeEquivalentTo(catchBlock, afterTryBlock);
+
+            catchBlock.Should().BeOfType<SimpleBlock>();
+            VerifyAllInstructions(catchBlock, "cw2", "cw2()");
+            catchBlock.SuccessorBlocks.Should().BeEquivalentTo(afterTryBlock);
+
+            afterTryBlock.Should().BeOfType<SimpleBlock>();
+            VerifyAllInstructions(afterTryBlock, "cw5", "cw5()");
+            afterTryBlock.SuccessorBlocks.Should().BeEquivalentTo(exit);
+
+            exit.Should().BeOfType<ExitBlock>();
+        }
+
+        [TestMethod]
+        [TestCategory("CFG")]
         public void Cfg_TryCatchFinally_Return_Nested()
         {
             var cfg = Build(@"

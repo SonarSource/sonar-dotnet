@@ -143,6 +143,10 @@ namespace SonarAnalyzer.SymbolicExecution
                     VisitBinaryBranch(binaryBranchBlock, node, ((ConditionalExpressionSyntax)binaryBranchBlock.BranchingNode).Condition);
                     return;
 
+                case SyntaxKind.CatchFilterClause:
+                    VisitBinaryBranch(binaryBranchBlock, node, ((CatchFilterClauseSyntax)binaryBranchBlock.BranchingNode).FilterExpression);
+                    return;
+
                 default:
                     System.Diagnostics.Debug.Fail($"Branch kind '{binaryBranchBlock.BranchingNode.Kind()}' not handled");
                     VisitBinaryBranch(binaryBranchBlock, node, null);
