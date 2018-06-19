@@ -64,7 +64,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
 
                     var stringLiterals = c.Node
-                        .DescendantNodes()
+                        .DescendantNodes(n => !n.IsKind(SyntaxKind.AttributeList))
                         .Where(les => les.IsKind(SyntaxKind.StringLiteralExpression))
                         .Cast<LiteralExpressionSyntax>();
 
