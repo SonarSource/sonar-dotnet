@@ -22,6 +22,7 @@ using System.IO;
 using System.Text;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.UnitTest.Helpers;
 
 namespace SonarAnalyzer.Helpers.UnitTest
 {
@@ -36,7 +37,7 @@ namespace SonarAnalyzer.Helpers.UnitTest
 
             writer.WriteGraphStart("test");
 
-            stringBuilder.ToString().Should().Be("digraph \"test\" {\r\n");
+            stringBuilder.ToString().Should().BeIgnoringLineEndings("digraph \"test\" {\r\n");
         }
 
         [TestMethod]
@@ -47,7 +48,7 @@ namespace SonarAnalyzer.Helpers.UnitTest
 
             writer.WriteGraphEnd();
 
-            stringBuilder.ToString().Should().Be("}\r\n");
+            stringBuilder.ToString().Should().BeIgnoringLineEndings("}\r\n");
         }
 
         [TestMethod]
@@ -58,7 +59,7 @@ namespace SonarAnalyzer.Helpers.UnitTest
 
             writer.WriteNode("1", "header", "a", "b", "c");
 
-            stringBuilder.ToString().Should().Be("1 [shape=record label=\"{header|a|b|c}\"]\r\n");
+            stringBuilder.ToString().Should().BeIgnoringLineEndings("1 [shape=record label=\"{header|a|b|c}\"]\r\n");
         }
 
         [TestMethod]
@@ -69,8 +70,7 @@ namespace SonarAnalyzer.Helpers.UnitTest
 
             writer.WriteNode("1", "header", "\r", "\n", "{", "}", "<", ">", "|", "\"");
 
-            stringBuilder.ToString().Should().Be(@"1 [shape=record label=""{header||\n|\{|\}|\<|\>|\||\""}""]
-");
+            stringBuilder.ToString().Should().BeIgnoringLineEndings(@"1 [shape=record label=""{header||\n|\{|\}|\<|\>|\||\""}""]" + "\r\n");
         }
 
         [TestMethod]
@@ -81,7 +81,7 @@ namespace SonarAnalyzer.Helpers.UnitTest
 
             writer.WriteNode("1", "header");
 
-            stringBuilder.ToString().Should().Be("1 [shape=record label=\"{header}\"]\r\n");
+            stringBuilder.ToString().Should().BeIgnoringLineEndings("1 [shape=record label=\"{header}\"]\r\n");
         }
     }
 }

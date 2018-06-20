@@ -20,6 +20,7 @@
 
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.UnitTest.Helpers;
 using SonarAnalyzer.UnitTest.Security.Ucfg;
 
 namespace SonarAnalyzer.Helpers.UnitTest
@@ -50,7 +51,7 @@ class C
 ";
             var dot = UcfgSerializer.Serialize(GetUcfgForMethod(code, "Foo"));
 
-            dot.Should().Be(@"digraph ""C.Foo(string, string)"" {
+            dot.Should().BeIgnoringLineEndings(@"digraph ""C.Foo(string, string)"" {
 ENTRY [shape=record label=""{ENTRY|a|b}""]
 ENTRY -> 0
 0 [shape=record label=""{BLOCK|%0 __concat b,a|x __id %0}""]

@@ -21,6 +21,7 @@
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.SymbolicExecution.ControlFlowGraph;
+using SonarAnalyzer.UnitTest.Helpers;
 using SonarAnalyzer.UnitTest.Security;
 
 namespace SonarAnalyzer.Helpers.UnitTest
@@ -41,7 +42,7 @@ class C
 ";
             var dot = CfgSerializer.Serialize("Foo", GetCfgForMethod(code, "Foo"));
 
-            dot.Should().Be(@"digraph ""Foo"" {
+            dot.Should().BeIgnoringLineEndings(@"digraph ""Foo"" {
 0 [shape=record label=""{EXIT}""]
 }
 ");
@@ -69,7 +70,7 @@ class C
 ";
             var dot = CfgSerializer.Serialize("Foo", GetCfgForMethod(code, "Foo"));
 
-            dot.Should().Be(@"digraph ""Foo"" {
+            dot.Should().BeIgnoringLineEndings(@"digraph ""Foo"" {
 0 [shape=record label=""{BRANCH:SwitchStatement|a}""]
 0 -> 1
 0 -> 2
@@ -101,7 +102,7 @@ class C
 ";
             var dot = CfgSerializer.Serialize("Foo", GetCfgForMethod(code, "Foo"));
 
-            dot.Should().Be(@"digraph ""Foo"" {
+            dot.Should().BeIgnoringLineEndings(@"digraph ""Foo"" {
 0 [shape=record label=""{BINARY:IfStatement|true}""]
 0 -> 1 [label=""True""]
 0 -> 2 [label=""False""]
@@ -129,7 +130,7 @@ class C
 ";
             var dot = CfgSerializer.Serialize("Foo", GetCfgForMethod(code, "Foo"));
 
-            dot.Should().Be(@"digraph ""Foo"" {
+            dot.Should().BeIgnoringLineEndings(@"digraph ""Foo"" {
 0 [shape=record label=""{FOREACH:ForEachStatement|items}""]
 0 -> 1
 1 [shape=record label=""{BINARY:ForEachStatement}""]
@@ -159,7 +160,7 @@ class C
 ";
             var dot = CfgSerializer.Serialize("Foo", GetCfgForMethod(code, "Foo"));
 
-            dot.Should().Be(@"digraph ""Foo"" {
+            dot.Should().BeIgnoringLineEndings(@"digraph ""Foo"" {
 0 [shape=record label=""{FOR:ForStatement|0|i = 0}""]
 0 -> 1
 1 [shape=record label=""{BINARY:ForStatement|i|10|i \< 10}""]
@@ -191,7 +192,7 @@ class C
 ";
             var dot = CfgSerializer.Serialize("Foo", GetCfgForMethod(code, "Foo"));
 
-            dot.Should().Be(@"digraph ""Foo"" {
+            dot.Should().BeIgnoringLineEndings(@"digraph ""Foo"" {
 0 [shape=record label=""{JUMP:UsingStatement|x}""]
 0 -> 1
 1 [shape=record label=""{USING:UsingStatement|Bar|Bar()}""]
@@ -218,7 +219,7 @@ class C
 ";
             var dot = CfgSerializer.Serialize("Foo", GetCfgForMethod(code, "Foo"));
 
-            dot.Should().Be(@"digraph ""Foo"" {
+            dot.Should().BeIgnoringLineEndings(@"digraph ""Foo"" {
 0 [shape=record label=""{LOCK:LockStatement|x}""]
 0 -> 1
 1 [shape=record label=""{SIMPLE|Bar|Bar()}""]
@@ -227,7 +228,6 @@ class C
 }
 ");
         }
-
 
         [TestMethod]
         public void Serialize_Lambda()
@@ -246,7 +246,7 @@ class C
 ";
             var dot = CfgSerializer.Serialize("Foo", GetCfgForMethod(code, "Foo"));
 
-            dot.Should().Be(@"digraph ""Foo"" {
+            dot.Should().BeIgnoringLineEndings(@"digraph ""Foo"" {
 0 [shape=record label=""{SIMPLE|Bar|x =\>\n        \{\n            return 1 + 1;\n        \}|Bar(x =\>\n        \{\n            return 1 + 1;\n        \})}""]
 0 -> 1
 1 [shape=record label=""{EXIT}""]

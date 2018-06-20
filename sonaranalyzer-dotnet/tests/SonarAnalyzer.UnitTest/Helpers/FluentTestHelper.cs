@@ -20,12 +20,16 @@
 
 using FluentAssertions;
 using FluentAssertions.Collections;
+using FluentAssertions.Primitives;
 using System;
 
 namespace SonarAnalyzer.UnitTest.Helpers
 {
     internal static class FluentTestHelper
     {
+        private const string WindowsLineEnding = "\r\n";
+        private const string UnixLineEnding = "\n";
+
         public static void OnlyContain<T, TAssertions>(this SelfReferencingCollectionAssertions<T, TAssertions> self, params T[] expected)
              where TAssertions : SelfReferencingCollectionAssertions<T, TAssertions>
         {
@@ -51,5 +55,14 @@ namespace SonarAnalyzer.UnitTest.Helpers
                 .Should().HaveSameCount(expected)
                 .And.ContainInOrder(expected);
         }
+
+        public static void BeIgnoringLineEndings(this StringAssertions stringAssertions, string expected)
+        {
+            stringAssertions.Subject.ToLinuxLineEndings().Should().Be(expected.ToLinuxLineEndings());
+        }
+
+        // This allows to deal with multiple line endings
+        private static string ToLinuxLineEndings(this string str) =>
+            str.Replace(WindowsLineEnding, UnixLineEnding);
     }
 }
