@@ -44,6 +44,9 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string DiagnosticId = "S9999-ucfg";
         private const string Title = "UCFG generator.";
 
+        private static bool ShouldGenerateDot =>
+            Environment.GetEnvironmentVariable("SONARANALYZER_GENERATE_DOT")?.ToUpper() == "TRUE";
+
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetUtilityDescriptor(DiagnosticId, Title, SourceScope.Main);
 
@@ -150,8 +153,23 @@ namespace SonarAnalyzer.Rules.CSharp
 
             if (IsValid(ucfg))
             {
-                WriteProtobuf(ucfg,
-                    Path.Combine(protobufDirectory, $"ucfg_{projectBuildId}_{Interlocked.Increment(ref protobufFileIndex)}.pb"));
+                var fileName = $"{projectBuildId}_{Interlocked.Increment(ref protobufFileIndex)}";
+
+                WriteProtobuf(ucfg, Path.Combine(protobufDirectory, $"ucfg_{fileName}.pb"));
+
+                if (ShouldGenerateDot)
+                {
+                    WriteDot(Path.Combine(protobufDirectory, $"ucfg_{fileName}.dot"), writer => UcfgSerializer.Serialize(ucfg, writer));
+                    WriteDot(Path.Combine(protobufDirectory, $"cfg_{fileName}.dot"), writer => CfgSerializer.Serialize(ucfg.MethodId, cfg, writer));
+                }
+            }
+        }
+
+        protected /*for testing*/ virtual void WriteDot(string filePath, Action<StreamWriter> write)
+        {
+            using (var writer = File.CreateText(filePath))
+            {
+                write(writer);
             }
         }
 
