@@ -44,7 +44,7 @@ namespace SonarAnalyzer.Helpers
 
         private class UcfgWalker
         {
-            private DotWriter writer;
+            private readonly DotWriter writer;
 
             public UcfgWalker(DotWriter writer)
             {
