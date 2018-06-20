@@ -27,5 +27,30 @@ namespace Tests.Diagnostics
             }
             return o.ToString(); // Noncompliant, when e.Message is null o will be null
         }
+
+        // https://github.com/SonarSource/sonar-csharp/issues/1324
+        public void FlasePositive(object o)
+        {
+            try
+            {
+                var a = o?.ToString();
+            }
+            catch (Exception) when (o != null)
+            {
+                var b = o.ToString(); // Compliant, o is checked for null in this branch
+            }
+        }
+
+        public void TryCatch4(object o)
+        {
+            try
+            {
+                var a = o?.ToString();
+            }
+            catch (Exception e) when (e.Message != null)
+            {
+                var b = o.ToString(); // Noncompliant, o could be null here
+            }
+        }
     }
 }

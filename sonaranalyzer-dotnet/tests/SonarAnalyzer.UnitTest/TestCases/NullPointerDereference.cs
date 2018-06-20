@@ -625,19 +625,4 @@ namespace Tests.Diagnostics
         [AttributeUsage(AttributeTargets.Parameter)]
         public sealed class ValidatedNotNullAttribute : Attribute { }
     }
-
-    public class ExceptionFilters // https://github.com/SonarSource/sonar-csharp/issues/1324
-    {
-        public void Run(object o)
-        {
-            try
-            {
-                Console.WriteLine(o?.ToString());
-            }
-            catch (Exception) when (o != null)
-            {
-                Console.WriteLine(o.ToString());
-            }
-        }
-    }
 }
