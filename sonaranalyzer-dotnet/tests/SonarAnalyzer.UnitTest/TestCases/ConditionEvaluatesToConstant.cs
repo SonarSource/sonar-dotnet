@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace Tests.Diagnostics
 {
@@ -1422,5 +1423,52 @@ namespace Tests.Diagnostics
 
         [AttributeUsage(AttributeTargets.Parameter)]
         public sealed class ValidatedNotNullAttribute : Attribute { }
+    }
+
+    public class CatchFinally
+    {
+        public void ObjectsShouldNotBeDisposedMoreThanOnce()
+        {
+            Stream stream = null;
+            try
+            {
+                stream = File.Open("file");
+                using (var reader = new StreamReader(stream))
+                {
+                    // read the file here
+
+                    // StreamReader will dispose the stream automatically; set stream to null
+                    // to prevent it from disposing twice (the recommended pattern for S3966)
+                    stream = null;
+                }
+            }
+            finally
+            {
+                if (stream != null)
+                {
+                    stream.Dispose();
+                }
+            }
+        }
+
+        public void FalseNegatives()
+        {
+            // We cannot detect the case in ObjectsShouldNotBeDisposedMoreThanOnce method above
+            // and to avoid False Positives we do not report in catch or finally
+            object o = null;
+            try
+            {
+            }
+            catch
+            {
+                if (o != null) { } // False Negative S2583
+                if (o == null) { } // False Negative S2589
+            }
+            finally
+            {
+                if (o != null) { } // False Negative S2583
+                if (o == null) { } // False Negative S2589
+            }
+        }
     }
 }

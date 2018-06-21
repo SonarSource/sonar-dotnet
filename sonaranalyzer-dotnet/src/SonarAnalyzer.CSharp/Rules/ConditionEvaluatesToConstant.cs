@@ -67,6 +67,16 @@ namespace SonarAnalyzer.Rules.CSharp
             SyntaxKind.ConditionalExpression
         };
 
+        // Do not report in finally and catch blocks to avoid False Positives. To correctly solve
+        // this problem we would need to link all CFG blocks for catch clauses to all statements within
+        // the try block. This is unreasonable because it will generate tons of paths, thus making
+        // the debugging a hell and probably slowing down the performance.
+        private static readonly ISet<SyntaxKind> IgnoredBlocks = new HashSet<SyntaxKind>
+        {
+            SyntaxKind.FinallyClause,
+            SyntaxKind.CatchClause,
+        };
+
         private const string S2583DiagnosticId = "S2583"; // Bug
         private const string S2583MessageFormat = "Change this condition so that it does not always evaluate to '{0}'; some subsequent code is never executed.";
 
@@ -98,9 +108,11 @@ namespace SonarAnalyzer.Rules.CSharp
                     .Union(conditionTrue
                         .Except(conditionFalse)
                         .Where(c => !IsConditionOfLoopWithBreak((ExpressionSyntax)c))
+                        .Where(c => !IsInsideCatchOrFinallyBlock(c))
                         .Select(node => GetDiagnostics(node, true)))
                     .Union(conditionFalse
                         .Except(conditionTrue)
+                        .Where(c => !IsInsideCatchOrFinallyBlock(c))
                         .Select(node => GetDiagnostics(node, false)))
                     .ToList()
                     .ForEach(d => context.ReportDiagnosticWhenActive(d));
@@ -118,6 +130,9 @@ namespace SonarAnalyzer.Rules.CSharp
                 explodedGraph.ConditionEvaluated -= collectConditions;
             }
         }
+
+        private static bool IsInsideCatchOrFinallyBlock(SyntaxNode c) =>
+            c.Ancestors().Any(n => n.IsAnyKind(IgnoredBlocks));
 
         private static bool IsConditionOfLoopWithBreak(ExpressionSyntax constantExpression)
         {
