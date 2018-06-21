@@ -115,5 +115,25 @@ namespace Tests.Diagnostics
             else
             { }
         }
+
+        // https://github.com/SonarSource/sonar-csharp/issues/1265
+        void FalsePositive()
+        {
+            try
+            {
+                Console.WriteLine("Try do something");
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("do something on fail before cleanup");
+                return;
+            }
+            finally
+            {
+                Console.WriteLine("Clean up");
+            }
+
+            Console.WriteLine("do something on success after cleanup");
+        }
     }
 }
