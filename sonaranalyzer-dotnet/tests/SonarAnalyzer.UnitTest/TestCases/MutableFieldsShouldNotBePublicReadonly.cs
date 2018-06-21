@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Immutable;
@@ -56,5 +56,21 @@ namespace Tests.Diagnostics
         public readonly ISet<string> isetInitializaedWithHashSet = new HashSet<string> { "a", "b" }; // Noncompliant
         public readonly IList<string> iListInitializaedWithList = new List<string> { "a", "b" }; // Noncompliant
         public readonly IDictionary<string, string> iDictionaryInitializaedWithDictionary = new Dictionary<string, string>(); // Noncompliant
+    }
+
+    class InitialisedInConstructor
+    {
+        public static readonly string[] bar; // Noncompliant - set to mutable value in constructor
+
+        // Issue #1491: https://github.com/SonarSource/sonar-csharp/issues/1491
+        public static readonly string[] foo; // Noncompliant       <-- false-positive reported here. Set to null in constructor
+        public static readonly ISet<string> iSetInitializedWithImmutableSet;    // Noncompliant     <-- false-positive reported here.  Set to immutable type in constructor.
+
+        void InitialisedInStaticConstructor()
+        {
+            bar = new string[] { foo, bar };
+            foo = null;
+            iSetInitializedWithImmutableSet = ImmutableHashSet.Create("a", "b"); // compliant - immutable type
+        }
     }
 }

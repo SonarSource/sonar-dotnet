@@ -25,11 +25,11 @@ using csharp::SonarAnalyzer.Rules.CSharp;
 namespace SonarAnalyzer.UnitTest.Rules
 {
     [TestClass]
-    public class MutableFieldsShoudNotBePublicReadonlyTest
+    public class MutableFieldsShouldNotBePublicReadonlyTest
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void PublicMutableFieldsShoudNotBeReadonly()
+        public void PublicMutableFieldsShouldNotBeReadonly()
         {
             Verifier.VerifyAnalyzer(@"TestCases\MutableFieldsShouldNotBePublicReadonly.cs",
                 new MutableFieldsShouldNotBePublicReadonly(),

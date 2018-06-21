@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Immutable;
@@ -33,10 +33,10 @@ namespace Tests.Diagnostics
 
         public static IImmutableList<string> iImmutableListWithInitialization = ImmutableList.Create("a", "b");
 
-        public static readonly ISet<string> iSetInitializaedWithImmutableSet = ImmutableHashSet.Create("a", "b");
-        public static readonly IList<string> iListInitializaedWithImmutableArray = ImmutableArray.Create("a", "b");
-        public static readonly IList<string> iListInitializaedWithImmutableList = ImmutableList.Create("a", "b");
-        public static readonly IDictionary<string, string> iDictionaryInitializaedWithImmutableDictionary = ImmutableDictionary.Create<string, string>();
+        public static readonly ISet<string> iSetInitializedWithImmutableSet = ImmutableHashSet.Create("a", "b");
+        public static readonly IList<string> iListInitializedWithImmutableArray = ImmutableArray.Create("a", "b");
+        public static readonly IList<string> iListInitializedWithImmutableList = ImmutableList.Create("a", "b");
+        public static readonly IDictionary<string, string> iDictionaryInitializedWithImmutableDictionary = ImmutableDictionary.Create<string, string>();
 
         public static readonly string[] foo = null;
     }
@@ -59,13 +59,30 @@ namespace Tests.Diagnostics
         public static ObservableCollection<string> observableCollectionString; // Noncompliant
         public static Foo foo; // Noncompliant
 
-        public static readonly ISet<string> isetInitializaedWithHashSet = new HashSet<string> { "a", "b" }; // Noncompliant
-        public static readonly IList<string> iListInitializaedWithList = new List<string> { "a", "b" }; // Noncompliant
-        public static readonly IDictionary<string, string> iDictionaryInitializaedWithDictionary = new Dictionary<string, string>(); // Noncompliant
+        public static readonly ISet<string> isetInitializedWithHashSet = new HashSet<string> { "a", "b" }; // Noncompliant
+        public static readonly IList<string> iListInitializedWithList = new List<string> { "a", "b" }; // Noncompliant
+        public static readonly IDictionary<string, string> iDictionaryInitializedWithDictionary = new Dictionary<string, string>(); // Noncompliant
 
-        public static ISet<string> iSetInitializaedWithImmutableSet = ImmutableHashSet.Create("a", "b"); // Noncompliant
-        public static IList<string> iListInitializaedWithImmutableArray = ImmutableArray.Create("a", "b"); // Noncompliant
-        public static IList<string> iListInitializaedWithImmutableList = ImmutableList.Create("a", "b"); // Noncompliant
-        public static IDictionary<string, string> iDictionaryInitializaedWithImmutableDictionary = ImmutableDictionary.Create<string, string>(); // Noncompliant
+        public static ISet<string> iSetInitializedWithImmutableSet = ImmutableHashSet.Create("a", "b"); // Noncompliant
+        public static IList<string> iListInitializedWithImmutableArray = ImmutableArray.Create("a", "b"); // Noncompliant
+        public static IList<string> iListInitializedWithImmutableList = ImmutableList.Create("a", "b"); // Noncompliant
+        public static IDictionary<string, string> iDictionaryInitializedWithImmutableDictionary = ImmutableDictionary.Create<string, string>(); // Noncompliant
     }
+
+    static class InitialisedInStaticConstructor
+    {
+        public static readonly string[] bar; // Noncompliant - initialised to mutable type in static constructor
+
+        // Issue #505: https://github.com/SonarSource/sonar-csharp/issues/505
+        public static readonly string[] foo; // Noncompliant <-- false-positive. Initialised to immutable type in static constructor
+        public static readonly ISet<string> iSetInitializedWithImmutableSet; // Noncompliant <-- false-positive. Initialised to immutable type in static constructor
+        
+        static InitialisedInStaticConstructor()
+        {
+            bar = new string[] { foo, bar };
+            foo = null; // compliant - null
+            iSetInitializedWithImmutableSet = ImmutableHashSet.Create("a", "b"); // compliant - immutable type
+        }
+    }
+
 }
