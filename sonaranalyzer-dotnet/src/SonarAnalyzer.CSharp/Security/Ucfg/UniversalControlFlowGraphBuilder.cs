@@ -462,14 +462,5 @@ namespace SonarAnalyzer.Security.Ucfg
                     parameter.Identifier.ValueText;
             }
         }
-
-        private class BlockIdMap
-        {
-            private readonly Dictionary<Block, string> map = new Dictionary<Block, string>();
-            private int counter;
-
-            public string Get(Block cfgBlock) =>
-                map.GetOrAdd(cfgBlock, b => $"{counter++}");
-        }
     }
 }

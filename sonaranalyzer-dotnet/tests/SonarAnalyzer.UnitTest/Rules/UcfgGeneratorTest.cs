@@ -20,6 +20,7 @@
 
 extern alias csharp;
 
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -44,7 +45,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void UcfgGenerator_GenerateProtobuf()
         {
-            var workDir = Path.Combine(TestContext.TestRunResultsDirectory, "0");
+            var workDir = Path.Combine(TestContext.TestRunResultsDirectory, TestContext.TestName, "0");
             Directory.CreateDirectory(workDir);
 
             Verifier.VerifyCSharpAnalyzer(@"
@@ -73,7 +74,7 @@ class Program
 ",
                 new UcfgGenerator(new TestAnalyzerConfiguration(workDir, "S3649")));
 
-            var ucfgPath = Path.Combine(TestContext.TestRunResultsDirectory, "ucfg_cs");
+            var ucfgPath = Path.Combine(TestContext.TestRunResultsDirectory, TestContext.TestName, "ucfg_cs");
             Directory.Exists(ucfgPath).Should().BeTrue();
             Directory.GetFiles(ucfgPath).Select(Path.GetFileName).Should().BeEquivalentTo(
                 new[]
@@ -181,6 +182,58 @@ class Program
 
             ucfgGeneratorMock.Protected()
                 .Verify("WriteProtobuf", Times.Never(), ItExpr.IsAny<UCFG>(), ItExpr.IsAny<string>());
+        }
+
+        [TestMethod]
+        public void UcfgGenerator_Generate_Dot_Enabled()
+        {
+            var workDir = Path.Combine(TestContext.TestRunResultsDirectory, TestContext.TestName, "0");
+            Directory.CreateDirectory(workDir);
+
+            Environment.SetEnvironmentVariable("SONARANALYZER_GENERATE_DOT", "TRUE");
+
+            Verifier.VerifyCSharpAnalyzer(@"class Program { void Method1(string s) { } }",
+                new UcfgGenerator(new TestAnalyzerConfiguration(workDir, "S3649")));
+
+            Environment.SetEnvironmentVariable("SONARANALYZER_GENERATE_DOT", null);
+
+            var ucfgPath = Path.Combine(TestContext.TestRunResultsDirectory, TestContext.TestName, "ucfg_cs");
+            Directory.Exists(ucfgPath).Should().BeTrue();
+            Directory.GetFiles(ucfgPath).Select(Path.GetFileName).Should().BeEquivalentTo(
+                new[]
+                {
+                    "ucfg_0_1.pb",
+                    "ucfg_0_1.dot",
+                    "cfg_0_1.dot",
+                });
+        }
+
+        [TestMethod]
+        public void UcfgGenerator_Generate_Dot_Disabled()
+        {
+            var workDir = Path.Combine(TestContext.TestRunResultsDirectory, TestContext.TestName, "0");
+            Directory.CreateDirectory(workDir);
+
+            var ucfgGeneratorMock = new Mock<UcfgGenerator>(new TestAnalyzerConfiguration(workDir, "S3649"))
+            {
+                CallBase = true
+            };
+            ucfgGeneratorMock.Protected()
+                .Setup("WriteDot", ItExpr.IsAny<string>(), ItExpr.IsAny<Action<StreamWriter>>());
+
+            // no env var should be declared at this time
+            Environment.GetEnvironmentVariable("SONARANALYZER_GENERATE_DOT").Should().BeNull();
+
+            Verifier.VerifyCSharpAnalyzer(@"class Program { void Method1(string s) { } }", ucfgGeneratorMock.Object);
+
+            Environment.SetEnvironmentVariable("SONARANALYZER_GENERATE_DOT", "FALSE");
+
+            Verifier.VerifyCSharpAnalyzer(@"class Program { void Method1(string s) { } }", ucfgGeneratorMock.Object);
+
+            Environment.SetEnvironmentVariable("SONARANALYZER_GENERATE_DOT", null);
+
+            ucfgGeneratorMock.Protected()
+                .Verify("WriteDot", Times.Never(), ItExpr.IsAny<string>(), ItExpr.IsAny<Action<StreamWriter>>());
         }
 
         private void UcfgGenerator_Enabled(params string[] enabledRules)
