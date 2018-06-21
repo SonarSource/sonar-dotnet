@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.InteropServices;
 
 namespace Tests.Diagnostics
 {
@@ -24,6 +25,11 @@ namespace Tests.Diagnostics
             var v6 = new Action<object, object, object>((p1, p2, p3) => Console.WriteLine());
             var v7 = new Action<object, object, object, object>((p1, p2, p3, p4) => Console.WriteLine()); // Noncompliant
         }
+
+        // see https://github.com/SonarSource/sonar-csharp/issues/1459
+        // We should not raise for imported methods according to external definition.
+        [DllImport()]
+        public static extern Extern(int p1, int p2, int p3, int p4); // Compliant, external definition
     }
 
     public interface If
