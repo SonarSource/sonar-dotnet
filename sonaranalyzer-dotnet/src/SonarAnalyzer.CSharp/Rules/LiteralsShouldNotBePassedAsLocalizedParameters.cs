@@ -63,6 +63,14 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
+                    // Calling to/from debug-only code
+                    if (methodSymbol.IsDiagnosticDebugMethod() ||
+                        DebugOnlyCodeHelper.IsConditionalDebugMethod(methodSymbol) ||
+                        DebugOnlyCodeHelper.IsCallerInConditionalDebug(invocationSyntax, c.SemanticModel))
+                    {
+                        return;
+                    }
+
                     if (methodSymbol.IsConsoleWrite() || methodSymbol.IsConsoleWriteLine())
                     {
                         var firstArgument = invocationSyntax.ArgumentList.Arguments.FirstOrDefault();
@@ -70,20 +78,19 @@ namespace SonarAnalyzer.Rules.CSharp
                         {
                             c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, firstArgument.GetLocation()));
                         }
+                        return;
                     }
-                    else
-                    {
-                        methodSymbol.Parameters
-                            .Merge(invocationSyntax.ArgumentList.Arguments, (parameter, syntax) => new { parameter, syntax })
-                            .Where(x => x.parameter != null && x.syntax != null)
-                            .Where(x => IsLocalizable(x.parameter))
-                            .Where(x => IsStringLiteral(x.syntax.Expression, c.SemanticModel))
-                            .ToList()
-                            .ForEach(x =>
-                            {
-                                c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, x.syntax.GetLocation()));
-                            });
-                    }
+
+                    methodSymbol.Parameters
+                        .Merge(invocationSyntax.ArgumentList.Arguments, (parameter, syntax) => new { parameter, syntax })
+                        .Where(x => x.parameter != null && x.syntax != null)
+                        .Where(x => IsLocalizable(x.parameter))
+                        .Where(x => IsStringLiteral(x.syntax.Expression, c.SemanticModel))
+                        .ToList()
+                        .ForEach(x =>
+                        {
+                            c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, x.syntax.GetLocation()));
+                        });
                 },
                 SyntaxKind.InvocationExpression);
 
@@ -91,15 +98,16 @@ namespace SonarAnalyzer.Rules.CSharp
                 c =>
                 {
                     var assignmentSyntax = (AssignmentExpressionSyntax)c.Node;
-                    var propertySymbol = c.SemanticModel.GetSymbolInfo(assignmentSyntax.Left).Symbol as IPropertySymbol;
-
-                    if (IsLocalizable(propertySymbol) &&
-                        IsStringLiteral(assignmentSyntax.Right, c.SemanticModel))
+                    if (c.SemanticModel.GetSymbolInfo(assignmentSyntax.Left).Symbol is IPropertySymbol propertySymbol &&
+                        IsLocalizable(propertySymbol) &&
+                        IsStringLiteral(assignmentSyntax.Right, c.SemanticModel) &&
+                        !DebugOnlyCodeHelper.IsCallerInConditionalDebug(assignmentSyntax, c.SemanticModel))
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, assignmentSyntax.GetLocation()));
                     }
                 },
-                SyntaxKind.SimpleAssignmentExpression);
+
+            SyntaxKind.SimpleAssignmentExpression);
         }
 
         private static bool IsStringLiteral(ExpressionSyntax expression, SemanticModel semanticModel)

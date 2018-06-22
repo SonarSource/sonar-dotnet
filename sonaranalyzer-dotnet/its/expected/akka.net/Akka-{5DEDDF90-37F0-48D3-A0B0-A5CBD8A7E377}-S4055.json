@@ -17,19 +17,6 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\ActorCell.FaultHandling.cs",
-"region":  {
-"startLine":  151,
-"startColumn":  80,
-"endLine":  151,
-"endColumn":  108
-}
-}
-},
-{
-"id":  "S4055",
-"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
-"location":  {
 "uri":  "sources\akka.net\src\core\Akka\Actor\ActorProducerPipeline.cs",
 "region":  {
 "startLine":  223,
@@ -49,19 +36,6 @@
 "startColumn":  48,
 "endLine":  243,
 "endColumn":  51
-}
-}
-},
-{
-"id":  "S4055",
-"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Deployer.cs",
-"region":  {
-"startLine":  104,
-"startColumn":  46,
-"endLine":  104,
-"endColumn":  66
 }
 }
 },
@@ -108,19 +82,6 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Internal\ActorSystemImpl.cs",
-"region":  {
-"startLine":  272,
-"startColumn":  75,
-"endLine":  272,
-"endColumn":  97
-}
-}
-},
-{
-"id":  "S4055",
-"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
-"location":  {
 "uri":  "sources\akka.net\src\core\Akka\Actor\RepointableActorRef.cs",
 "region":  {
 "startLine":  334,
@@ -140,19 +101,6 @@
 "startColumn":  44,
 "endLine":  369,
 "endColumn":  87
-}
-}
-},
-{
-"id":  "S4055",
-"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka\Configuration\ConfigurationFactory.cs",
-"region":  {
-"startLine":  134,
-"startColumn":  46,
-"endLine":  134,
-"endColumn":  62
 }
 }
 },

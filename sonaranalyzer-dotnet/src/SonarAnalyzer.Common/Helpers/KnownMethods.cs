@@ -157,6 +157,12 @@ namespace SonarAnalyzer.Helpers
                 methodSymbol.ContainingType.Is(KnownType.System_Diagnostics_Debug);
         }
 
+        public static bool IsDiagnosticDebugMethod(this IMethodSymbol methodSymbol)
+        {
+            return methodSymbol != null &&
+                methodSymbol.ContainingType.Is(KnownType.System_Diagnostics_Debug);
+        }
+
         public static bool IsOperatorBinaryPlus(this IMethodSymbol methodSymbol)
         {
             return methodSymbol != null &&

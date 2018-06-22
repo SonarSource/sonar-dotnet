@@ -20,7 +20,6 @@
 
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -60,8 +59,8 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (methodSymbol != null &&
                         methodSymbol.IsInType(KnownType.System_Console) &&
                         BannedConsoleMembers.Contains(methodSymbol.Name) &&
-                        !IsInDebugBlock(c.Node) &&
-                        !IsInDebugConditionalMethodOrClass(methodCall, c.SemanticModel))
+                        !DebugOnlyCodeHelper.IsInDebugBlock(c.Node) &&
+                        !DebugOnlyCodeHelper.IsCallerInConditionalDebug(methodCall, c.SemanticModel))
                         
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, methodCall.Expression.GetLocation()));
@@ -69,69 +68,5 @@ namespace SonarAnalyzer.Rules.CSharp
                 },
                 SyntaxKind.InvocationExpression);
         }
-
-        #region DEBUG directive blocks
-
-        private static bool IsInDebugBlock(SyntaxNode node) =>
-            IfDirectiveHelper.GetActiveConditionalCompilationSections(node)
-            .Any(IsDebugString);
-        
-        #endregion
-
-        #region DEBUG conditional method attributes
-
-        private static bool IsInDebugConditionalMethodOrClass(InvocationExpressionSyntax invocation,
-            SemanticModel semanticModel)
-        {
-            // Conditional attribute can be applied to a method or a class
-            var methodSymbol = FindContainingMethod(invocation, semanticModel);
-            if (methodSymbol == null)
-            {
-                return false;
-            }
-
-            return HasDebugConditionalAttribute(methodSymbol) ||
-                GetAllContainingTypes(methodSymbol).Any(t => HasDebugConditionalAttribute(t));
-        }
-
-        private static IMethodSymbol FindContainingMethod(SyntaxNode node, SemanticModel semanticModel)
-        {
-            var methodDecl = node.FirstAncestorOrSelf<MethodDeclarationSyntax>();
-            if (methodDecl != null)
-            {
-                return semanticModel.GetDeclaredSymbol(methodDecl);
-            }
-            return null;
-        }
-
-        private static IEnumerable<ISymbol> GetAllContainingTypes(ISymbol symbol)
-        {
-            var current = symbol.ContainingType;
-            while (current != null)
-            {
-                yield return current;
-                current = current.ContainingType;
-            }
-        }
-
-        private static bool HasDebugConditionalAttribute(ISymbol symbol)
-        {
-            if (symbol == null)
-            {
-                return false;
-            }
-
-            return symbol.GetAttributes()
-                .Where(attribute => attribute.AttributeClass.Is(KnownType.System_Diagnostics_ConditionalAttribute))
-                .Any(attribute => attribute.ConstructorArguments.Any(
-                    constructorArg => constructorArg.Type.Is(KnownType.System_String)
-                                      && IsDebugString((string)constructorArg.Value)));
-        }
-
-        #endregion
-
-        // Looking for an exact case-sensitive match
-        private static bool IsDebugString(string text) =>
-            "DEBUG".Equals(text, System.StringComparison.Ordinal);
     }
 }

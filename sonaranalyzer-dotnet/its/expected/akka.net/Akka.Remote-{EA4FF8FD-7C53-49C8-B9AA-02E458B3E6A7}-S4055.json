@@ -4,19 +4,6 @@
 "id":  "S4055",
 "message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka.Remote\Configuration\RemoteConfigFactory.cs",
-"region":  {
-"startLine":  41,
-"startColumn":  46,
-"endLine":  41,
-"endColumn":  62
-}
-}
-},
-{
-"id":  "S4055",
-"message":  "Replace this string literal with a string retrieved through an instance of the 'ResourceManager' class.",
-"location":  {
 "uri":  "sources\akka.net\src\core\Akka.Remote\Transport\FailureInjectorTransportAdapter.cs",
 "region":  {
 "startLine":  192,

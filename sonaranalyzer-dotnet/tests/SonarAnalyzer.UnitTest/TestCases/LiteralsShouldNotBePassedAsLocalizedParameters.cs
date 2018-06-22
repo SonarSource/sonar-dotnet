@@ -1,5 +1,6 @@
-using System;
+﻿using System;
 using System.ComponentModel;
+using System.Diagnostics;
 
 namespace Tests.Diagnostics
 {
@@ -72,6 +73,40 @@ namespace Tests.Diagnostics
 
         public void Bar(string text, string message)
         {
+        }
+    }
+
+    class DebugCode
+    {
+        public string Message { get; set; }
+
+        public void LogStuff()
+        {
+            // Regression tests for https://github.com/SonarSource/sonar-csharp/issues/1464
+            // S4055 should not raise issues for string literal used in the 'message' of Debug.XXX
+            Debug.Assert(true, "Assertion message");                    // compliant - method on Debug
+            Debug.WriteLine("Stuff happened");                          // compliant - method on Debug
+            Debug.WriteLineIf(true, "Stuff happened conditionally");    // compliant - method on Debug
+        }
+
+        [Conditional("DEBUG")]
+        public void DebugOnlyMethod(string text)
+        {
+            Console.WriteLine("hello world");   // compliant - in a debug only method
+            Message = "hello world";            // compliant - in a debug only method
+        }
+
+        [Conditional("NONDEBUG")]
+        public void NonDebugOnlyMethod(string text)
+        {
+            Console.WriteLine("hello world");    // Noncompliant - not DEBUG conditional
+            Message = "hello world";             // Noncompliant - not DEBUG conditional
+        }
+
+        public void Caller()
+        {
+            DebugOnlyMethod("a message");    // compliant - calling a debug-only method
+            NonDebugOnlyMethod("a message"); // Noncompliant
         }
     }
 }
