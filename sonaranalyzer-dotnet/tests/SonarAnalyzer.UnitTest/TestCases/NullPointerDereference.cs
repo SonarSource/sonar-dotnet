@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 using X = global::Tests.Diagnostics.NullPointerDereferenceWithFields;
 
@@ -624,5 +625,18 @@ namespace Tests.Diagnostics
 
         [AttributeUsage(AttributeTargets.Parameter)]
         public sealed class ValidatedNotNullAttribute : Attribute { }
+    }
+
+    class AsyncAwait
+    {
+        string x;
+        async Task Foo(Task t)
+        {
+            var s = null;
+            x = s;
+            await t; // awaiting clears the constraints
+            x.ToString(); // Compliant
+            s.ToString(); // Noncompliant
+        }
     }
 }

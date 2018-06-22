@@ -277,8 +277,12 @@ namespace SonarAnalyzer.SymbolicExecution
                 case SyntaxKind.RefValueExpression:
 
                 case SyntaxKind.MemberBindingExpression:
+                    newProgramState = newProgramState.PopValue();
+                    newProgramState = newProgramState.PushValue(new SymbolicValue());
+                    break;
 
                 case SyntaxKind.AwaitExpression:
+                    newProgramState = newProgramState.RemoveSymbols(IsFieldSymbol);
                     newProgramState = newProgramState.PopValue();
                     newProgramState = newProgramState.PushValue(new SymbolicValue());
                     break;

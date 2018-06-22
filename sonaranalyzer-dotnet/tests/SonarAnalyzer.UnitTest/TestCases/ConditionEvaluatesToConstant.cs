@@ -1471,4 +1471,20 @@ namespace Tests.Diagnostics
             }
         }
     }
+
+    class AsyncAwait
+    {
+        object _foo1;
+        async Task Foo(Task t)
+        {
+            object o = null;
+            _foo1 = o;
+            await t; // awaiting clears the constraints
+            if (_foo1 != null) { } // Compliant S2583
+            if (_foo1 == null) { } // Compliant S2589
+            if (o != null) { } // Noncompliant
+            // Secondary@-1
+            if (o == null) { } // Noncompliant
+        }
+    }
 }
