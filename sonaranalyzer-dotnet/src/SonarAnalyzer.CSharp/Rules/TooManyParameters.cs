@@ -53,7 +53,6 @@ namespace SonarAnalyzer.Rules.CSharp
                     var parameterListNode = (ParameterListSyntax)c.Node;
                     var parameters = parameterListNode.Parameters.Count;
 
-
                     if (parameters > Maximum &&
                         parameterListNode.Parent != null &&
                         CanBeChanged(parameterListNode.Parent, c.SemanticModel) &&
@@ -88,6 +87,15 @@ namespace SonarAnalyzer.Rules.CSharp
                 // Base class is already not compliant so let's ignore current constructor.
                 // Another option could be to substract current number of parameters from base count and raise only if greater
                 // than threshold.
+                return false;
+            }
+
+            if (declaredSymbol.IsExtern &&
+                declaredSymbol.IsStatic &&
+                declaredSymbol.HasAttribute(KnownType.System_Runtime_InteropServices_DllImportAttribute))
+            {
+                // P/Invoke method is defined externally.
+                // Do not raise
                 return false;
             }
 
