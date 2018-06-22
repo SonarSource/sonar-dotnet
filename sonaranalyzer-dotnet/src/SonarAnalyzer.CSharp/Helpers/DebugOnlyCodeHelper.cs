@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -43,21 +42,13 @@ namespace SonarAnalyzer.Helpers
 
         #region DEBUG conditional method attributes
 
-        public static bool IsCallerInConditionalDebug(InvocationExpressionSyntax invocation,
+        public static bool IsCallerInConditionalDebug(SyntaxNode node,
             SemanticModel semanticModel)
         {
-            var methodSymbol = FindContainingMethod(invocation, semanticModel);
+            var methodSymbol = FindContainingMethod(node, semanticModel);
             return IsConditionalDebugMethod(methodSymbol);
         }
-
-        public static bool IsCalledMethodInConditionalDebugOnly(InvocationExpressionSyntax invocation,
-            SemanticModel semanticModel)
-        {
-            var calledMethodSymbol = FindCalledMethod(invocation.Expression as IdentifierNameSyntax,
-                semanticModel);
-            return IsConditionalDebugMethod(calledMethodSymbol);
-        }
-
+        
         public static bool IsConditionalDebugMethod(IMethodSymbol methodSymbol)
         {
             if (methodSymbol == null)
@@ -65,9 +56,15 @@ namespace SonarAnalyzer.Helpers
                 return false;
             }
 
-            // Conditional attribute can be applied to a method or a class
-            return HasDebugConditionalAttribute(methodSymbol) ||
-                GetAllContainingTypes(methodSymbol).Any(t => HasDebugConditionalAttribute(t));
+            // Conditional attribute can be applied to a class, but it does nothing unless
+            // the class is an attribute class. So we only need to worry about whether the
+            // conditional attribute is on the method.
+            return methodSymbol.GetAttributes()
+                .Where(attribute => attribute.AttributeClass.Is(KnownType.System_Diagnostics_ConditionalAttribute))
+                .Any(attribute => attribute.ConstructorArguments.Any(
+                    constructorArg => constructorArg.Type.Is(KnownType.System_String)
+                          && IsDebugString((string)constructorArg.Value)));
+
         }
 
         private static IMethodSymbol FindContainingMethod(SyntaxNode node, SemanticModel semanticModel)
@@ -79,40 +76,7 @@ namespace SonarAnalyzer.Helpers
             }
             return null;
         }
-
-        private static IMethodSymbol FindCalledMethod(IdentifierNameSyntax identifierName, SemanticModel semanticModel)
-        {
-            if (identifierName == null)
-            {
-                return null;
-            }
-            return semanticModel.GetSymbolInfo(identifierName).Symbol as IMethodSymbol;
-        }
-
-        private static IEnumerable<ISymbol> GetAllContainingTypes(ISymbol symbol)
-        {
-            var current = symbol.ContainingType;
-            while (current != null)
-            {
-                yield return current;
-                current = current.ContainingType;
-            }
-        }
-
-        private static bool HasDebugConditionalAttribute(ISymbol symbol)
-        {
-            if (symbol == null)
-            {
-                return false;
-            }
-
-            return symbol.GetAttributes()
-                .Where(attribute => attribute.AttributeClass.Is(KnownType.System_Diagnostics_ConditionalAttribute))
-                .Any(attribute => attribute.ConstructorArguments.Any(
-                    constructorArg => constructorArg.Type.Is(KnownType.System_String)
-                                      && IsDebugString((string)constructorArg.Value)));
-        }
-
+        
         #endregion
 
     }

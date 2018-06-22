@@ -63,7 +63,10 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    if (methodSymbol.IsDiagnosticDebugMethod())
+                    // Calling to/from debug-only code
+                    if (methodSymbol.IsDiagnosticDebugMethod() ||
+                        DebugOnlyCodeHelper.IsConditionalDebugMethod(methodSymbol) ||
+                        DebugOnlyCodeHelper.IsCallerInConditionalDebug(invocationSyntax, c.SemanticModel))
                     {
                         return;
                     }
@@ -75,10 +78,10 @@ namespace SonarAnalyzer.Rules.CSharp
                         {
                             c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, firstArgument.GetLocation()));
                         }
+                        return;
                     }
-                    else
-                    {
-                        methodSymbol.Parameters
+
+                    methodSymbol.Parameters
                         .Merge(invocationSyntax.ArgumentList.Arguments, (parameter, syntax) => new { parameter, syntax })
                         .Where(x => x.parameter != null && x.syntax != null)
                         .Where(x => IsLocalizable(x.parameter))
@@ -88,7 +91,6 @@ namespace SonarAnalyzer.Rules.CSharp
                         {
                             c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, x.syntax.GetLocation()));
                         });
-                    }
                 },
                 SyntaxKind.InvocationExpression);
 
@@ -98,7 +100,8 @@ namespace SonarAnalyzer.Rules.CSharp
                     var assignmentSyntax = (AssignmentExpressionSyntax)c.Node;
                     if (c.SemanticModel.GetSymbolInfo(assignmentSyntax.Left).Symbol is IPropertySymbol propertySymbol &&
                         IsLocalizable(propertySymbol) &&
-                        IsStringLiteral(assignmentSyntax.Right, c.SemanticModel))
+                        IsStringLiteral(assignmentSyntax.Right, c.SemanticModel) &&
+                        !DebugOnlyCodeHelper.IsCallerInConditionalDebug(assignmentSyntax, c.SemanticModel))
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, assignmentSyntax.GetLocation()));
                     }
