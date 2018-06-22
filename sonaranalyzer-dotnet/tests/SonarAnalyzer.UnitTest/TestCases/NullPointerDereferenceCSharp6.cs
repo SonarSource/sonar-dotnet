@@ -35,9 +35,13 @@ namespace Tests.Diagnostics
             {
                 var a = o?.ToString();
             }
-            catch (Exception) when (o != null)
+            catch (InvalidOperationException) when (o != null)
             {
                 var b = o.ToString(); // Compliant, o is checked for null in this branch
+            }
+            catch (ApplicationException) when (o == null)
+            {
+                var b = o.ToString(); // Noncompliant
             }
         }
 
