@@ -117,23 +117,22 @@ namespace Tests.Diagnostics
         }
 
         // https://github.com/SonarSource/sonar-csharp/issues/1265
-        void FalsePositive()
+        void RegressionTest_1265()
         {
             try
             {
-                Console.WriteLine("Try do something");
+                Console.WriteLine();
             }
             catch (Exception)
             {
-                Console.WriteLine("do something on fail before cleanup");
+                Console.WriteLine();
                 return;
             }
             finally
             {
-                Console.WriteLine("Clean up");
+                Console.WriteLine();
             }
-
-            Console.WriteLine("do something on success after cleanup");
+            Console.WriteLine();
         }
     }
 }
