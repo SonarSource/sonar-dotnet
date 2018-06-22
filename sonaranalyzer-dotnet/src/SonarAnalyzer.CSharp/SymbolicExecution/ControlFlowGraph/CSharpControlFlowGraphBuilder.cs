@@ -475,7 +475,16 @@ namespace SonarAnalyzer.SymbolicExecution.ControlFlowGraph
 
             var catchBlocks = tryStatement.Catches
                 .Reverse()
-                .Select(catchClause => BuildBlock(catchClause.Block, CreateBlock(catchSuccessor)))
+                .Select(catchClause =>
+                {
+                    Block catchBlock = BuildBlock(catchClause.Block, CreateBlock(catchSuccessor));
+                    if (catchClause.Filter?.FilterExpression != null)
+                    {
+                        catchBlock = BuildExpression(catchClause.Filter.FilterExpression,
+                            CreateBinaryBranchBlock(catchClause.Filter, catchBlock, catchSuccessor));
+                    }
+                    return catchBlock;
+                })
                 .ToList();
 
             // If there is a catch with no Exception filter or equivalent we don't want to
