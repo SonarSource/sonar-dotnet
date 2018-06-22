@@ -115,5 +115,24 @@ namespace Tests.Diagnostics
             else
             { }
         }
+
+        // https://github.com/SonarSource/sonar-csharp/issues/1265
+        void RegressionTest_1265()
+        {
+            try
+            {
+                Console.WriteLine();
+            }
+            catch (Exception)
+            {
+                Console.WriteLine();
+                return;
+            }
+            finally
+            {
+                Console.WriteLine();
+            }
+            Console.WriteLine();
+        }
     }
 }

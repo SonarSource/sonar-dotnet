@@ -62,10 +62,15 @@ namespace SonarAnalyzer.Rules.CSharp
             var objectDisposedCheck = new ObjectDisposedPointerCheck(explodedGraph);
             explodedGraph.AddExplodedGraphCheck(objectDisposedCheck);
 
+            // Store the nodes that should be reported and ignore duplicate reports for the same node.
+            // This is needed because we generate two CFG blocks for the finally statements and even
+            // though the syntax nodes are the same, when there is a return inside a try/catch block
+            // the walked CFG paths could be different and FPs will appear.
+            var nodesToReport = new Dictionary<SyntaxNode, string>();
+
             void memberAccessedHandler(object sender, ObjectDisposedEventArgs args)
             {
-                context.ReportDiagnosticWhenActive(
-                    Diagnostic.Create(rule, args.Location, args.Name));
+                nodesToReport[args.SyntaxNode] = args.SymbolName;
             }
 
             objectDisposedCheck.ObjectDisposed += memberAccessedHandler;
@@ -78,17 +83,22 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 objectDisposedCheck.ObjectDisposed -= memberAccessedHandler;
             }
+
+            foreach (var item in nodesToReport)
+            {
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, item.Key.GetLocation(), item.Value));
+            }
         }
 
         internal class ObjectDisposedEventArgs : EventArgs
         {
-            public string Name { get; }
-            public Location Location { get; }
+            public string SymbolName { get; }
+            public SyntaxNode SyntaxNode { get; }
 
-            public ObjectDisposedEventArgs(string name, Location location)
+            public ObjectDisposedEventArgs(string symbolName, SyntaxNode syntaxNode)
             {
-                Name = name;
-                Location = location;
+                SymbolName = symbolName;
+                SyntaxNode = syntaxNode;
             }
         }
 
@@ -194,8 +204,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 if (disposableSymbol.HasConstraint(DisposableConstraint.Disposed, programState))
                 {
-                    ObjectDisposed?.Invoke(this, new ObjectDisposedEventArgs(disposableSymbol.Name,
-                        disposeInstruction.GetLocation()));
+                    ObjectDisposed?.Invoke(this, new ObjectDisposedEventArgs(disposableSymbol.Name, disposeInstruction));
                     return programState;
                 }
 

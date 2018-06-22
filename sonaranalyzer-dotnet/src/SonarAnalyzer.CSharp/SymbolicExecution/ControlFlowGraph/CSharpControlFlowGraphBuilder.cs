@@ -466,11 +466,11 @@ namespace SonarAnalyzer.SymbolicExecution.ControlFlowGraph
             var hasFinally = tryStatement.Finally?.Block != null;
             if (hasFinally)
             {
-                // Wire exit in case we have a return inside the try/catch block
-                catchSuccessor = BuildBlock(tryStatement.Finally.Block,
-                    CreateBranchBlock(tryStatement.Finally, new[] { catchSuccessor, ExitTarget.Peek() }));
+                // Create a finally block for the happy path where no exceptions are thrown
+                catchSuccessor = BuildBlock(tryStatement.Finally.Block, CreateBlock(catchSuccessor));
 
-                ExitTarget.Push(catchSuccessor);
+                // Wire another finally block to the exit target stack in case we have a return inside the try/catch block
+                ExitTarget.Push(BuildBlock(tryStatement.Finally.Block, CreateBlock(ExitTarget.Peek())));
             }
 
             var catchBlocks = tryStatement.Catches
