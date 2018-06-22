@@ -277,8 +277,12 @@ namespace SonarAnalyzer.SymbolicExecution
                 case SyntaxKind.RefValueExpression:
 
                 case SyntaxKind.MemberBindingExpression:
+                    newProgramState = newProgramState.PopValue();
+                    newProgramState = newProgramState.PushValue(new SymbolicValue());
+                    break;
 
                 case SyntaxKind.AwaitExpression:
+                    newProgramState = newProgramState.RemoveSymbols(IsFieldSymbol);
                     newProgramState = newProgramState.PopValue();
                     newProgramState = newProgramState.PushValue(new SymbolicValue());
                     break;
@@ -437,7 +441,7 @@ namespace SonarAnalyzer.SymbolicExecution
                         var invocationVisitor = new InvocationVisitor(invocation, SemanticModel, newProgramState);
                         newProgramState = invocationVisitor.ProcessInvocation();
 
-                        if (invocation.Expression.IsOnThis() && !invocation.IsNameof(SemanticModel))
+                        if (!invocation.IsNameof(SemanticModel))
                         {
                             newProgramState = newProgramState.RemoveSymbols(IsFieldSymbol);
                         }

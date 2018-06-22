@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 using X = global::Tests.Diagnostics.NullPointerDereferenceWithFields;
 
@@ -528,6 +529,25 @@ namespace Tests.Diagnostics
             _foo1.ToString(); // Compliant
         }
 
+        void CallToStaticMethodsShouldResetFieldConstraints()
+        {
+            object o = null;
+            _foo1 = o;
+            Console.WriteLine(); // This particular method has no side effects
+            _foo1.ToString(); // Compliant, False Negative
+            o.ToString(); // Noncompliant, local variable constraints are not cleared
+        }
+
+        // https://github.com/SonarSource/sonar-csharp/issues/947
+        void CallToMonitorWaitShouldResetFieldConstraints()
+        {
+            object o = null;
+            _foo1 = o;
+            System.Threading.Monitor.Wait(); // This is a multi-threaded application, the fields could change
+            _foo1.ToString(); // Compliant
+            o.ToString(); // Noncompliant, local variable constraints are not cleared
+        }
+
         void CallToNameOfShouldNotResetFieldConstraints()
         {
             object o = null;
@@ -624,5 +644,18 @@ namespace Tests.Diagnostics
 
         [AttributeUsage(AttributeTargets.Parameter)]
         public sealed class ValidatedNotNullAttribute : Attribute { }
+    }
+
+    class AsyncAwait
+    {
+        string x;
+        async Task Foo(Task t)
+        {
+            var s = null;
+            x = s;
+            await t; // awaiting clears the constraints
+            x.ToString(); // Compliant
+            s.ToString(); // Noncompliant
+        }
     }
 }
