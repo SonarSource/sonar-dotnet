@@ -1487,4 +1487,33 @@ namespace Tests.Diagnostics
             if (o == null) { } // Noncompliant
         }
     }
+
+    public class StaticMethods
+    {
+        object _foo1;
+        // https://github.com/SonarSource/sonar-csharp/issues/947
+        void CallToMonitorWaitShouldResetFieldConstraints()
+        {
+            object o = null;
+            _foo1 = o;
+            System.Threading.Monitor.Wait(); // This is a multi-threaded application, the fields could change
+            if (_foo1 != null) { } // Compliant S2583
+            if (_foo1 == null) { } // Compliant S2589
+            if (o != null) { } // Noncompliant
+            // Secondary@-1
+            if (o == null) { } // Noncompliant
+        }
+
+        void CallToStaticMethodsShouldResetFieldConstraints()
+        {
+            object o = null;
+            _foo1 = o;
+            Console.WriteLine(); // This particular method has no side effects
+            if (_foo1 != null) { } // False Negative S2583
+            if (_foo1 == null) { } // False Negative S2589
+            if (o != null) { } // Noncompliant
+            // Secondary@-1
+            if (o == null) { } // Noncompliant
+        }
+    }
 }
