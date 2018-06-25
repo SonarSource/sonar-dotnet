@@ -50,6 +50,18 @@ namespace SonarAnalyzer.Rules.CSharp
             KnownType.System_Threading_Tasks_ValueTask_TResult
         };
 
+        private static readonly ISet<KnownType> TestMethodAttributes = new HashSet<KnownType>
+        {
+            KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_TestMethodAttribute,
+            KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_DataTestMethodAttribute,
+            KnownType.NUnit_Framework_TestAttribute,
+            KnownType.NUnit_Framework_TestCaseAttribute,
+            KnownType.NUnit_Framework_TestCaseSourceAttribute,
+            KnownType.NUnit_Framework_TheoryAttribute,
+            KnownType.Xunit_FactAttribute,
+            KnownType.Xunit_TheoryAttribute,
+        };
+
         protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
@@ -64,7 +76,8 @@ namespace SonarAnalyzer.Rules.CSharp
                     var methodSymbol = c.SemanticModel.GetDeclaredSymbol(methodDeclaration);
                     if (methodSymbol == null ||
                         methodSymbol.GetInterfaceMember() != null ||
-                        methodSymbol.GetOverriddenMember() != null)
+                        methodSymbol.GetOverriddenMember() != null ||
+                        methodSymbol.HasAnyAttribute(TestMethodAttributes))
                     {
                         return;
                     }

@@ -19,8 +19,8 @@
  */
 
 extern alias csharp;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -32,7 +32,12 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void MethodShouldBeNameAccordingToSynchronicity()
         {
             Verifier.VerifyAnalyzer(@"TestCases\MethodShouldBeNameAccordingToSynchronicity.cs",
-                new MethodShouldBeNameAccordingToSynchronicity(), null, Verifier.SystemThreadingTasksExtensionsAssembly);
+                new MethodShouldBeNameAccordingToSynchronicity(),
+                null,
+                Verifier.SystemThreadingTasksExtensionsAssembly,
+                Verifier.MicrosoftVisualStudioTestToolsUnitTestingAssembly,
+                Verifier.XunitCoreAssembly,
+                Verifier.NUnitFrameworkAssembly);
         }
     }
 }
