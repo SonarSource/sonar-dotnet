@@ -1,0 +1,56 @@
+{
+"issues":  [
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Routing\DefaultRequestDispatcherFixture.cs",
+"region":  {
+"startLine":  968,
+"startColumn":  38,
+"endLine":  968,
+"endColumn":  56
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\Routing\DefaultRequestDispatcherFixture.cs",
+"region":  {
+"startLine":  978,
+"startColumn":  38,
+"endLine":  978,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\xUnitExtensions\RecordAsync.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  45,
+"endLine":  9,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\xUnitExtensions\RecordAsync.cs",
+"region":  {
+"startLine":  25,
+"startColumn":  37,
+"endLine":  25,
+"endColumn":  43
+}
+}
+}
+]
+}

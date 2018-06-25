@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Testing.Tests\ConfigurableBootstrapperFixture.cs",
+"region":  {
+"startLine":  225,
+"startColumn":  51,
+"endLine":  225,
+"endColumn":  60
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\xUnitExtensions\RecordAsync.cs",
+"region":  {
+"startLine":  9,
+"startColumn":  45,
+"endLine":  9,
+"endColumn":  54
+}
+}
+},
+{
+"id":  "S4261",
+"message":  "Add the 'Async' suffix to the name of this method.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\xUnitExtensions\RecordAsync.cs",
+"region":  {
+"startLine":  25,
+"startColumn":  37,
+"endLine":  25,
+"endColumn":  43
+}
+}
+}
+]
+}

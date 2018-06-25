@@ -60,6 +60,7 @@ namespace SonarAnalyzer.Rules.CSharp
             KnownType.NUnit_Framework_TheoryAttribute,
             KnownType.Xunit_FactAttribute,
             KnownType.Xunit_TheoryAttribute,
+            KnownType.LegacyXunit_TheoryAttribute,
         };
 
         protected override void Initialize(SonarAnalysisContext context)
