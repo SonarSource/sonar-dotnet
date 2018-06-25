@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 
 namespace MyLibrary
 {
@@ -33,6 +33,10 @@ namespace MyLibrary
         internal interface IInternal { }
     }
 
+    // This is not a marker interface, it aggregates other interfaces and is ok not to have members
+    interface MyInterface5 : ISomeMethodsInterface, MyInterface3 // Compliant
+    {
+    }
 
     public interface
     {

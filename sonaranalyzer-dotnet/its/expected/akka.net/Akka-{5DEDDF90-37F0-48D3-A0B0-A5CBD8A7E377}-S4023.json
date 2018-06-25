@@ -134,32 +134,6 @@
 "id":  "S4023",
 "message":  "Remove this interface or add members to it.",
 "location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Stash\IWithBoundedStash.cs",
-"region":  {
-"startLine":  21,
-"startColumn":  22,
-"endLine":  21,
-"endColumn":  39
-}
-}
-},
-{
-"id":  "S4023",
-"message":  "Remove this interface or add members to it.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka\Actor\Stash\IWithUnboundedStash.cs",
-"region":  {
-"startLine":  19,
-"startColumn":  22,
-"endLine":  19,
-"endColumn":  41
-}
-}
-},
-{
-"id":  "S4023",
-"message":  "Remove this interface or add members to it.",
-"location":  {
 "uri":  "sources\akka.net\src\core\Akka\Dispatch\IRequiresMessageQueue.cs",
 "region":  {
 "startLine":  10,
@@ -205,32 +179,6 @@
 "startColumn":  22,
 "endLine":  30,
 "endColumn":  53
-}
-}
-},
-{
-"id":  "S4023",
-"message":  "Remove this interface or add members to it.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\ISemantics.cs",
-"region":  {
-"startLine":  67,
-"startColumn":  22,
-"endLine":  67,
-"endColumn":  63
-}
-}
-},
-{
-"id":  "S4023",
-"message":  "Remove this interface or add members to it.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka\Dispatch\ISemantics.cs",
-"region":  {
-"startLine":  75,
-"startColumn":  22,
-"endLine":  75,
-"endColumn":  61
 }
 }
 },

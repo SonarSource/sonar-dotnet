@@ -45,17 +45,24 @@ namespace SonarAnalyzer.Rules.CSharp
                 c =>
                 {
                     var interfaceDeclaration = (InterfaceDeclarationSyntax)c.Node;
-                    var interfaceSymbol = c.SemanticModel.GetDeclaredSymbol(interfaceDeclaration);
+                    if (interfaceDeclaration.Identifier.IsMissing ||
+                        interfaceDeclaration.Members.Count > 0)
+                    {
+                        return;
+                    }
 
+                    var interfaceSymbol = c.SemanticModel.GetDeclaredSymbol(interfaceDeclaration);
                     if (interfaceSymbol != null &&
                         interfaceSymbol.DeclaredAccessibility == Accessibility.Public &&
-                        !interfaceDeclaration.Identifier.IsMissing &&
-                        interfaceDeclaration.Members.Count == 0)
+                        !IsAggregatingOtherInterfaces(interfaceSymbol))
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, interfaceDeclaration.Identifier.GetLocation()));
                     }
                 },
                 SyntaxKind.InterfaceDeclaration);
         }
+
+        private static bool IsAggregatingOtherInterfaces(INamedTypeSymbol interfaceSymbol) =>
+            interfaceSymbol.AllInterfaces.Length > 1;
     }
 }
