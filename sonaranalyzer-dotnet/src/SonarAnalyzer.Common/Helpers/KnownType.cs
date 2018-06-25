@@ -326,6 +326,7 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType Xunit_Assert = new KnownType("Xunit.Assert");
         internal static readonly KnownType Xunit_FactAttribute = new KnownType("Xunit.FactAttribute");
         internal static readonly KnownType Xunit_TheoryAttribute = new KnownType("Xunit.TheoryAttribute");
+        internal static readonly KnownType LegacyXunit_TheoryAttribute = new KnownType("Xunit.Extensions.TheoryAttribute");
         internal static readonly ISet<KnownType> CallerInfoAttributes = new HashSet<KnownType>
         {
             System_Runtime_CompilerServices_CallerFilePathAttribute,
