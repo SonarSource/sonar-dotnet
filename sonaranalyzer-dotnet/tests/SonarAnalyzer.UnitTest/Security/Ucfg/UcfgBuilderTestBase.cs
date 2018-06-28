@@ -21,8 +21,7 @@
 extern alias csharp;
 using System;
 using System.Collections.Generic;
-using csharp::SonarAnalyzer.Security.Ucfg;
-using csharp::SonarAnalyzer.SymbolicExecution.ControlFlowGraph;
+using csharp::SonarAnalyzer.ControlFlowGraph.CSharp;
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;

@@ -23,12 +23,13 @@ using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using SonarAnalyzer.ControlFlowGraph;
+using SonarAnalyzer.ControlFlowGraph.CSharp;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Helpers.SymbolicExecution;
+using SonarAnalyzer.LiveVariableAnalysis;
 using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.SymbolicExecution.Constraints;
-using SonarAnalyzer.SymbolicExecution.ControlFlowGraph;
-using SonarAnalyzer.SymbolicExecution.LiveVariableAnalysis;
 using SonarAnalyzer.SymbolicExecution.SymbolicValues;
 
 namespace SonarAnalyzer.SymbolicExecution

@@ -23,10 +23,10 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
+using SonarAnalyzer.ControlFlowGraph;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.LiveVariableAnalysis;
 using SonarAnalyzer.SymbolicExecution.Constraints;
-using SonarAnalyzer.SymbolicExecution.ControlFlowGraph;
-using SonarAnalyzer.SymbolicExecution.LiveVariableAnalysis;
 
 namespace SonarAnalyzer.SymbolicExecution
 {

@@ -19,12 +19,8 @@
  */
 
 extern alias csharp;
-
-using csharp::SonarAnalyzer.Security;
 using FluentAssertions;
-using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
 using SonarAnalyzer.Protobuf.Ucfg;
 
 namespace SonarAnalyzer.UnitTest.Security.Ucfg
