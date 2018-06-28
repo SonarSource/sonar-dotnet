@@ -475,8 +475,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static ExpressionSyntax GetParentMemberAccess(ExpressionSyntax expression)
         {
-            var parent = expression.Parent as MemberAccessExpressionSyntax;
-            if (parent == null)
+            if (!(expression.Parent is MemberAccessExpressionSyntax parent))
             {
                 return expression;
             }

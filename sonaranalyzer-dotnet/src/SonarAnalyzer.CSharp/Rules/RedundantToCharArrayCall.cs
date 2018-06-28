@@ -46,9 +46,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 c =>
                 {
                     var invocation = (InvocationExpressionSyntax)c.Node;
-                    var methodSymbol = c.SemanticModel.GetSymbolInfo(invocation).Symbol as IMethodSymbol;
 
-                    if (methodSymbol == null ||
+                    if (!(c.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol) ||
                         methodSymbol.Name != "ToCharArray" ||
                         !methodSymbol.IsInType(KnownType.System_String) ||
                         methodSymbol.Parameters.Length != 0)
@@ -62,8 +61,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    var memberAccess = invocation.Expression as MemberAccessExpressionSyntax;
-                    if (memberAccess == null)
+                    if (!(invocation.Expression is MemberAccessExpressionSyntax memberAccess))
                     {
                         return;
                     }

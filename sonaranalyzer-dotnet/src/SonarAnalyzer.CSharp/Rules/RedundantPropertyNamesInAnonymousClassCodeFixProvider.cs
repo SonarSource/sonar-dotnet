@@ -44,8 +44,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var diagnostic = context.Diagnostics.First();
             var diagnosticSpan = diagnostic.Location.SourceSpan;
             var nameEquals = root.FindNode(diagnosticSpan) as NameEqualsSyntax;
-            var anonymousObjectCreation = nameEquals?.Parent?.Parent as AnonymousObjectCreationExpressionSyntax;
-            if (anonymousObjectCreation == null)
+            if (!(nameEquals?.Parent?.Parent is AnonymousObjectCreationExpressionSyntax anonymousObjectCreation))
             {
                 return TaskHelper.CompletedTask;
             }

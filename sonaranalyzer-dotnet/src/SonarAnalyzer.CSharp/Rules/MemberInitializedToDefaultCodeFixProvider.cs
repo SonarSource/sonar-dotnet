@@ -47,8 +47,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var diagnostic = context.Diagnostics.First();
             var diagnosticSpan = diagnostic.Location.SourceSpan;
 
-            var initializer = root.FindNode(diagnosticSpan) as EqualsValueClauseSyntax;
-            if (initializer == null)
+            if (!(root.FindNode(diagnosticSpan) is EqualsValueClauseSyntax initializer))
             {
                 return TaskHelper.CompletedTask;
             }
@@ -59,11 +58,10 @@ namespace SonarAnalyzer.Rules.CSharp
                     c =>
                     {
                         var parent = initializer.Parent;
-                        var propDecl = parent as PropertyDeclarationSyntax;
 
                         SyntaxNode newParent;
 
-                        if (propDecl == null)
+                        if (!(parent is PropertyDeclarationSyntax propDecl))
                         {
                             newParent = parent.RemoveNode(initializer, SyntaxRemoveOptions.KeepNoTrivia);
                         }

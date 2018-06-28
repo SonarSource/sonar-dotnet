@@ -213,8 +213,7 @@ namespace SonarAnalyzer.Security.Ucfg
 
             private Expression BuildObjectCreation(ObjectCreationExpressionSyntax objectCreation)
             {
-                var ctorSymbol = GetSymbol(objectCreation) as IMethodSymbol;
-                if (ctorSymbol == null)
+                if (!(GetSymbol(objectCreation) is IMethodSymbol ctorSymbol))
                 {
                     return ConstantExpression;
                 }
@@ -288,8 +287,7 @@ namespace SonarAnalyzer.Security.Ucfg
 
             private Expression BuildInvocation(InvocationExpressionSyntax invocation)
             {
-                var methodSymbol = GetSymbol(invocation) as IMethodSymbol;
-                if (methodSymbol == null)
+                if (!(GetSymbol(invocation) is IMethodSymbol methodSymbol))
                 {
                     return ConstantExpression;
                 }

@@ -35,25 +35,21 @@ namespace SonarAnalyzer.Rules.VisualBasic
     {
         protected override SyntaxNode CalculateNewRoot(SyntaxNode root, SyntaxNode node)
         {
-            var identifier = node as ModifiedIdentifierSyntax;
-            if (identifier == null)
+            if (!(node is ModifiedIdentifierSyntax identifier))
             {
                 return root;
             }
 
-            var declarator = identifier.Parent as VariableDeclaratorSyntax;
-            if (declarator == null)
+            if (!(identifier.Parent is VariableDeclaratorSyntax declarator))
             {
                 return root;
             }
 
             IEnumerable<SyntaxNode> newNodes;
 
-            var fieldDeclaration = declarator.Parent as FieldDeclarationSyntax;
-            if (fieldDeclaration == null)
+            if (!(declarator.Parent is FieldDeclarationSyntax fieldDeclaration))
             {
-                var localDeclaration = declarator.Parent as LocalDeclarationStatementSyntax;
-                if (localDeclaration == null)
+                if (!(declarator.Parent is LocalDeclarationStatementSyntax localDeclaration))
                 {
                     return root;
                 }

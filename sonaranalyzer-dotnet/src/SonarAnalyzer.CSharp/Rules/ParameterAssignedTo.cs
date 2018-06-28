@@ -54,8 +54,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override bool IsAssignmentToCatchVariable(ISymbol symbol, SyntaxNode node)
         {
-            var localSymbol = symbol as ILocalSymbol;
-            if (localSymbol == null)
+            if (!(symbol is ILocalSymbol localSymbol))
             {
                 return false;
             }

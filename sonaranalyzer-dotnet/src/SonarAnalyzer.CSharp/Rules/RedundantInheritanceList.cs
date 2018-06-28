@@ -66,8 +66,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             var baseTypeSyntax = classDeclaration.BaseList.Types.First().Type;
-            var baseTypeSymbol = context.SemanticModel.GetSymbolInfo(baseTypeSyntax).Symbol as ITypeSymbol;
-            if (baseTypeSymbol == null)
+            if (!(context.SemanticModel.GetSymbolInfo(baseTypeSyntax).Symbol is ITypeSymbol baseTypeSymbol))
             {
                 return;
             }
@@ -130,8 +129,7 @@ namespace SonarAnalyzer.Rules.CSharp
             for (var i = 0; i < baseList.Types.Count; i++)
             {
                 var baseType = baseList.Types[i];
-                var interfaceType = context.SemanticModel.GetSymbolInfo(baseType.Type).Symbol as INamedTypeSymbol;
-                if (interfaceType == null ||
+                if (!(context.SemanticModel.GetSymbolInfo(baseType.Type).Symbol is INamedTypeSymbol interfaceType) ||
                     !interfaceType.IsInterface())
                 {
                     continue;

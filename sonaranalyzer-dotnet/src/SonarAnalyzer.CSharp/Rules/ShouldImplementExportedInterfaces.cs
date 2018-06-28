@@ -57,8 +57,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     var attributeSyntax = (AttributeSyntax)c.Node;
 
-                    var attributeCtorSymbol = c.SemanticModel.GetSymbolInfo(attributeSyntax.Name).Symbol as IMethodSymbol;
-                    if (attributeCtorSymbol == null ||
+                    if (!(c.SemanticModel.GetSymbolInfo(attributeSyntax.Name).Symbol is IMethodSymbol attributeCtorSymbol) ||
                         !attributeCtorSymbol.ContainingType.IsAny(ExportAttributes))
                     {
                         return;
@@ -85,8 +84,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private ITypeSymbol GetAttributeTargetSymbol(AttributeSyntax attributeSyntax, SemanticModel semanticModel)
         {
             // Parent is AttributeListSyntax, we handle only class attributes
-            var attributeTarget = attributeSyntax.Parent?.Parent as ClassDeclarationSyntax;
-            if (attributeTarget == null)
+            if (!(attributeSyntax.Parent?.Parent is ClassDeclarationSyntax attributeTarget))
             {
                 return null;
             }

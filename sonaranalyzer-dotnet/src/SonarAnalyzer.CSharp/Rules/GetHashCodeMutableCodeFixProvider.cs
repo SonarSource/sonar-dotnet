@@ -82,9 +82,8 @@ namespace SonarAnalyzer.Rules.CSharp
         private async Task<FieldDeclarationSyntax> GetFieldDeclarationSyntax(SemanticModel semanticModel,
             IdentifierNameSyntax identifierName, CancellationToken cancellationToken)
         {
-            var fieldSymbol = semanticModel.GetSymbolInfo(identifierName).Symbol as IFieldSymbol;
 
-            if (fieldSymbol == null ||
+            if (!(semanticModel.GetSymbolInfo(identifierName).Symbol is IFieldSymbol fieldSymbol) ||
                 !fieldSymbol.DeclaringSyntaxReferences.Any())
             {
                 return null;

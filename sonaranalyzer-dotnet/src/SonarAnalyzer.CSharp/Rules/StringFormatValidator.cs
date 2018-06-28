@@ -98,9 +98,8 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void CheckForFormatStringIssues(SyntaxNodeAnalysisContext analysisContext)
         {
             var invocation = (InvocationExpressionSyntax)analysisContext.Node;
-            var methodSymbol = analysisContext.SemanticModel.GetSymbolInfo(invocation).Symbol as IMethodSymbol;
 
-            if (methodSymbol == null || !methodSymbol.Parameters.Any())
+            if (!(analysisContext.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol) || !methodSymbol.Parameters.Any())
             {
                 return;
             }

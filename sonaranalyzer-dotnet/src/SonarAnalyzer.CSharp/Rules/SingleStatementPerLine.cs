@@ -51,8 +51,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return false;
             }
 
-            var parentBlock = st.Parent as BlockSyntax;
-            if (parentBlock == null ||
+            if (!(st.Parent is BlockSyntax parentBlock) ||
                 parentBlock.Statements.Count > 1)
             {
                 return false;

@@ -62,8 +62,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void CheckExpressionWithOperator<T>(Func<T, SyntaxToken> operatorSelector, SyntaxNodeAnalysisContext context)
             where T : SyntaxNode
         {
-            var operation = context.SemanticModel.GetSymbolInfo(context.Node).Symbol as IMethodSymbol;
-            if (operation == null ||
+            if (!(context.SemanticModel.GetSymbolInfo(context.Node).Symbol is IMethodSymbol operation) ||
                 operation.MethodKind != MethodKind.BuiltinOperator ||
                 operation.ReturnType == null ||
                 operation.ReturnType.TypeKind != TypeKind.Enum)

@@ -94,8 +94,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
 
                 // If this node is not parented by a name, we're done.
-                var name = parent as NameSyntax;
-                if (name == null)
+                if (!(parent is NameSyntax name))
                 {
                     return node;
                 }

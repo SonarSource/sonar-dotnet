@@ -46,8 +46,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             while (true)
             {
-                var conditionalAccess = expression as ConditionalAccessExpressionSyntax;
-                if (conditionalAccess == null)
+                if (!(expression is ConditionalAccessExpressionSyntax conditionalAccess))
                 {
                     break;
                 }

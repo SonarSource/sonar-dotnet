@@ -61,9 +61,8 @@ namespace SonarAnalyzer.Rules.CSharp
                         c =>
                         {
                             var objectCreation = (ObjectCreationExpressionSyntax)c.Node;
-                            var objectType = c.SemanticModel.GetSymbolInfo(objectCreation.Type).Symbol as ITypeSymbol;
 
-                            if (objectType == null ||
+                            if (!(c.SemanticModel.GetSymbolInfo(objectCreation.Type).Symbol is ITypeSymbol objectType) ||
                                 !objectType.IsAny(checkedTypes))
                             {
                                 return;

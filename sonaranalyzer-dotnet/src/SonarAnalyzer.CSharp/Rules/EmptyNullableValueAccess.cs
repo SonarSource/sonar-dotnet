@@ -104,8 +104,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             private ProgramState ProcessMemberAccess(ProgramState programState, MemberAccessExpressionSyntax memberAccess)
             {
-                var identifier = memberAccess.Expression.RemoveParentheses() as IdentifierNameSyntax;
-                if (identifier == null ||
+                if (!(memberAccess.Expression.RemoveParentheses() is IdentifierNameSyntax identifier) ||
                     memberAccess.Name.Identifier.ValueText != ValueLiteral)
                 {
                     return programState;
@@ -163,8 +162,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             public override IEnumerable<ProgramState> TrySetConstraint(SymbolicValueConstraint constraint, ProgramState programState)
             {
-                var boolConstraint = constraint as BoolConstraint;
-                if (boolConstraint == null)
+                if (!(constraint is BoolConstraint boolConstraint))
                 {
                     return new[] { programState };
                 }

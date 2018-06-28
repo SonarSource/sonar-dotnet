@@ -42,8 +42,7 @@ namespace SonarAnalyzer.Rules.Common
         {
             var diagnostic = context.Diagnostics.First();
             var diagnosticSpan = diagnostic.Location.SourceSpan;
-            var expression = root.FindNode(diagnosticSpan, getInnermostNodeForTie: true) as TBinaryExpression;
-            if (expression == null ||
+            if (!(root.FindNode(diagnosticSpan, getInnermostNodeForTie: true) is TBinaryExpression expression) ||
                 !IsCandidateExpression(expression))
             {
                 return TaskHelper.CompletedTask;

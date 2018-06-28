@@ -45,8 +45,7 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterCodeBlockStartActionInNonGenerated<SyntaxKind>(
                 cbc =>
                 {
-                    var accessorDeclaration = cbc.CodeBlock as AccessorDeclarationSyntax;
-                    if (accessorDeclaration == null ||
+                    if (!(cbc.CodeBlock is AccessorDeclarationSyntax accessorDeclaration) ||
                         accessorDeclaration.IsKind(SyntaxKind.GetAccessorDeclaration) ||
                         accessorDeclaration.Body == null)
                     {

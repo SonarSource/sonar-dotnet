@@ -98,10 +98,9 @@ namespace SonarAnalyzer.Rules.CSharp
 
             public Diagnostic FindIssue(MemberDeclarationSyntax memberDeclaration)
             {
-                var methodSymbol = semanticModel.GetDeclaredSymbol(memberDeclaration) as IMethodSymbol;
                 var issueLocation = (memberDeclaration as MethodDeclarationSyntax)?.Identifier.GetLocation();
 
-                if (methodSymbol == null || issueLocation == null)
+                if (!(semanticModel.GetDeclaredSymbol(memberDeclaration) is IMethodSymbol methodSymbol) || issueLocation == null)
                 {
                     return null;
                 }

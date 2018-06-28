@@ -714,8 +714,7 @@ namespace SonarAnalyzer.SymbolicExecution
             var sv = new SymbolicValue();
             newProgramState = newProgramState.PopValues(ctor.ArgumentList?.Arguments.Count ?? 0);
 
-            var ctorSymbol = SemanticModel.GetSymbolInfo(ctor).Symbol as IMethodSymbol;
-            if (ctorSymbol == null)
+            if (!(SemanticModel.GetSymbolInfo(ctor).Symbol is IMethodSymbol ctorSymbol))
             {
                 // Add no constraint
             }
@@ -771,8 +770,7 @@ namespace SonarAnalyzer.SymbolicExecution
             newProgramState = newProgramState.PushValue(sv);
 
             var parenthesized = identifier.GetSelfOrTopParenthesizedExpression();
-            var argument = parenthesized.Parent as ArgumentSyntax;
-            if (argument == null ||
+            if (!(parenthesized.Parent is ArgumentSyntax argument) ||
                 argument.RefOrOutKeyword.IsKind(SyntaxKind.None))
             {
                 return SetNonNullConstraintIfValueType(symbol, sv, newProgramState);

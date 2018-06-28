@@ -98,8 +98,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            var symbol = context.SemanticModel.GetSymbolInfo(lambda).Symbol as IMethodSymbol;
-            if (symbol == null)
+            if (!(context.SemanticModel.GetSymbolInfo(lambda).Symbol is IMethodSymbol symbol))
             {
                 return;
             }
@@ -109,9 +108,8 @@ namespace SonarAnalyzer.Rules.CSharp
             var newLambda = lambda.WithParameterList(newParameterList);
 
             newLambda = ChangeSyntaxElement(lambda, newLambda, context.SemanticModel, out var newSemanticModel);
-            var newSymbol = newSemanticModel.GetSymbolInfo(newLambda).Symbol as IMethodSymbol;
 
-            if (newSymbol == null ||
+            if (!(newSemanticModel.GetSymbolInfo(newLambda).Symbol is IMethodSymbol newSymbol) ||
                 ParameterTypesDoNotMatch(symbol, newSymbol))
             {
                 return;
@@ -245,8 +243,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            var arrayType = context.SemanticModel.GetTypeInfo(array.Type).Type as IArrayTypeSymbol;
-            if (arrayType == null)
+            if (!(context.SemanticModel.GetTypeInfo(array.Type).Type is IArrayTypeSymbol arrayType))
             {
                 return;
             }
@@ -357,8 +354,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return false;
             }
 
-            var enclosing = semanticModel.GetEnclosingSymbol(objectCreation.SpanStart) as IMethodSymbol;
-            if (enclosing == null)
+            if (!(semanticModel.GetEnclosingSymbol(objectCreation.SpanStart) is IMethodSymbol enclosing))
             {
                 return false;
             }
@@ -371,8 +367,7 @@ namespace SonarAnalyzer.Rules.CSharp
             SemanticModel semanticModel)
         {
             var parent = objectCreation.GetSelfOrTopParenthesizedExpression().Parent;
-            var assignment = parent as AssignmentExpressionSyntax;
-            if (assignment == null)
+            if (!(parent is AssignmentExpressionSyntax assignment))
             {
                 return false;
             }
@@ -395,8 +390,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            var methodSymbol = context.SemanticModel.GetSymbolInfo(anonymousMethod).Symbol as IMethodSymbol;
-            if (methodSymbol == null)
+            if (!(context.SemanticModel.GetSymbolInfo(anonymousMethod).Symbol is IMethodSymbol methodSymbol))
             {
                 return;
             }
@@ -426,8 +420,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var parent = objectCreation.GetSelfOrTopParenthesizedExpression().Parent;
             var argument = parent as ArgumentSyntax;
 
-            var invocation = argument?.Parent?.Parent as InvocationExpressionSyntax;
-            if (invocation == null)
+            if (!(argument?.Parent?.Parent is InvocationExpressionSyntax invocation))
             {
                 return false;
             }

@@ -162,8 +162,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 // Remove collection constraint from all arguments passed to an invocation
                 var newProgramState = RemoveCollectionConstraintsFromArguments(invocation.ArgumentList, programState);
 
-                var memberAccess = invocation.Expression as MemberAccessExpressionSyntax;
-                if (memberAccess == null)
+                if (!(invocation.Expression is MemberAccessExpressionSyntax memberAccess))
                 {
                     return newProgramState;
                 }

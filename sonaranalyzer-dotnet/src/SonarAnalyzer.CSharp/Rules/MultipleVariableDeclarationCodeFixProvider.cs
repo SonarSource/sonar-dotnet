@@ -33,14 +33,12 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         protected override SyntaxNode CalculateNewRoot(SyntaxNode root, SyntaxNode node)
         {
-            var declarator = node as VariableDeclaratorSyntax;
-            if (declarator == null)
+            if (!(node is VariableDeclaratorSyntax declarator))
             {
                 return root;
             }
 
-            var declaration = declarator.Parent as VariableDeclarationSyntax;
-            if (declaration == null)
+            if (!(declarator.Parent is VariableDeclarationSyntax declaration))
             {
                 return root;
             }
@@ -52,11 +50,9 @@ namespace SonarAnalyzer.Rules.CSharp
 
             IEnumerable<SyntaxNode> newNodes;
 
-            var fieldDeclaration = declaration.Parent as FieldDeclarationSyntax;
-            if (fieldDeclaration == null)
+            if (!(declaration.Parent is FieldDeclarationSyntax fieldDeclaration))
             {
-                var localDeclaration = declaration.Parent as LocalDeclarationStatementSyntax;
-                if (localDeclaration == null)
+                if (!(declaration.Parent is LocalDeclarationStatementSyntax localDeclaration))
                 {
                     return root;
                 }

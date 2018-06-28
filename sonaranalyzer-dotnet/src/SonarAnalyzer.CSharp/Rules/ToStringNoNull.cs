@@ -45,9 +45,8 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterCodeBlockStartActionInNonGenerated<SyntaxKind>(
                 cbc =>
                 {
-                    var methodDeclaration = cbc.CodeBlock as MethodDeclarationSyntax;
 
-                    if (methodDeclaration == null ||
+                    if (!(cbc.CodeBlock is MethodDeclarationSyntax methodDeclaration) ||
                         methodDeclaration.Identifier.Text != "ToString")
                     {
                         return;

@@ -53,8 +53,7 @@ namespace SonarAnalyzer.Rules.Common
                 GeneratedCodeRecognizer,
                 cbc =>
                 {
-                    var propertyGetter = cbc.CodeBlock as TAccessorSyntax;
-                    if (propertyGetter == null ||
+                    if (!(cbc.CodeBlock is TAccessorSyntax propertyGetter) ||
                         !IsGetter(propertyGetter) ||
                         IsIndexer(propertyGetter))
                     {

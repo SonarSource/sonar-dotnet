@@ -138,9 +138,8 @@ namespace SonarAnalyzer.Helpers
         public static bool IsInNameofCall(this ExpressionSyntax expression, SemanticModel semanticModel)
         {
             var argumentList = (expression.Parent as ArgumentSyntax)?.Parent as ArgumentListSyntax;
-            var nameofCall = argumentList?.Parent as InvocationExpressionSyntax;
 
-            if (nameofCall == null)
+            if (!(argumentList?.Parent is InvocationExpressionSyntax nameofCall))
             {
                 return false;
             }
@@ -163,8 +162,7 @@ namespace SonarAnalyzer.Helpers
 
         public static bool IsStringEmpty(this ExpressionSyntax expression, SemanticModel semanticModel)
         {
-            var memberAccessExpression = expression as MemberAccessExpressionSyntax;
-            if (memberAccessExpression == null)
+            if (!(expression is MemberAccessExpressionSyntax memberAccessExpression))
             {
                 return false;
             }

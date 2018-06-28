@@ -79,9 +79,8 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 var currentExpression = expressionsInChain[i];
 
-                var comparisonToNull = currentExpression as BinaryExpressionSyntax;
 
-                if (comparisonToNull == null || !comparisonToNull.OperatorToken.IsKind(comparisonOperator))
+                if (!(currentExpression is BinaryExpressionSyntax comparisonToNull) || !comparisonToNull.OperatorToken.IsKind(comparisonOperator))
                 {
                     continue;
                 }
@@ -146,8 +145,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 expressionList.Add(currentBinary.Right);
 
-                var leftBinary = currentBinary.Left as BinaryExpressionSyntax;
-                if (leftBinary == null ||
+                if (!(currentBinary.Left is BinaryExpressionSyntax leftBinary) ||
                     !SyntaxFactory.AreEquivalent(leftBinary.OperatorToken, binaryExpression.OperatorToken))
                 {
                     expressionList.Add(currentBinary.Left);

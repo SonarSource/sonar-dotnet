@@ -51,14 +51,12 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     var invocation = (InvocationExpressionSyntax)c.Node;
 
-                    var memberAccess = invocation.Expression as MemberAccessExpressionSyntax;
-                    if(memberAccess == null)
+                    if (!(invocation.Expression is MemberAccessExpressionSyntax memberAccess))
                     {
                         return;
                     }
 
-                    var calledMethod = c.SemanticModel.GetSymbolInfo(invocation).Symbol as IMethodSymbol;
-                    if (calledMethod == null)
+                    if (!(c.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol calledMethod))
                     {
                         return;
                     }

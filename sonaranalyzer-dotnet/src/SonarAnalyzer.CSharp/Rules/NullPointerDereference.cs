@@ -134,8 +134,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             private ProgramState ProcessAwait(ProgramState programState, AwaitExpressionSyntax awaitExpression)
             {
-                var identifier = awaitExpression.Expression as IdentifierNameSyntax;
-                if (identifier == null)
+                if (!(awaitExpression.Expression is IdentifierNameSyntax identifier))
                 {
                     return programState;
                 }
@@ -146,8 +145,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             private ProgramState ProcessElementAccess(ProgramState programState, ElementAccessExpressionSyntax elementAccess)
             {
-                var identifier = elementAccess.Expression as IdentifierNameSyntax;
-                if (identifier == null)
+                if (!(elementAccess.Expression is IdentifierNameSyntax identifier))
                 {
                     return programState;
                 }

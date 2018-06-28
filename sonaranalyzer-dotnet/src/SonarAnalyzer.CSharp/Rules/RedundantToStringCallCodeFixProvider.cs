@@ -41,8 +41,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var diagnostic = context.Diagnostics.First();
             var diagnosticSpan = diagnostic.Location.SourceSpan;
             var invocation = root.FindNode(diagnosticSpan, getInnermostNodeForTie: true) as InvocationExpressionSyntax;
-            var memberAccess = invocation?.Expression as MemberAccessExpressionSyntax;
-            if (memberAccess == null)
+            if (!(invocation?.Expression is MemberAccessExpressionSyntax memberAccess))
             {
                 return TaskHelper.CompletedTask;
             }

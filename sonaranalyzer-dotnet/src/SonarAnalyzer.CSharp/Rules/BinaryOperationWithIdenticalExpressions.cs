@@ -123,8 +123,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static SyntaxNode RemoveParantheses(SyntaxNode node)
         {
-            var expression = node as ExpressionSyntax;
-            return expression == null ? node : expression.RemoveParentheses();
+            return !(node is ExpressionSyntax expression) ? node : expression.RemoveParentheses();
         }
 
         private static void ReportIfOperatorExpressionsMatch(SyntaxNodeAnalysisContext context, ExpressionSyntax left, ExpressionSyntax right,

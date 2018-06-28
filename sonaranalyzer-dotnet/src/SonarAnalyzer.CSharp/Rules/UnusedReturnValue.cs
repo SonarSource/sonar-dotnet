@@ -94,8 +94,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool IsActionLambda(SyntaxNode node, SemanticModel semanticModel)
         {
-            var lambda = node as LambdaExpressionSyntax;
-            if (lambda == null)
+            if (!(node is LambdaExpressionSyntax lambda))
             {
                 return false;
             }

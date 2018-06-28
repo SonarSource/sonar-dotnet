@@ -46,8 +46,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 c =>
                 {
                     var exit = (ExitStatementSyntax)c.Node;
-                    var caseBlock = exit.Parent as CaseBlockSyntax;
-                    if (caseBlock == null)
+                    if (!(exit.Parent is CaseBlockSyntax caseBlock))
                     {
                         return;
                     }

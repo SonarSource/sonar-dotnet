@@ -50,8 +50,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 c =>
                 {
                     var invocation = (InvocationExpressionSyntax)c.Node;
-                    var memberAccess = invocation.Expression as MemberAccessExpressionSyntax;
-                    if (memberAccess == null ||
+                    if (!(invocation.Expression is MemberAccessExpressionSyntax memberAccess) ||
                         !IsDisposableField(memberAccess.Expression, c.SemanticModel) ||
                         !IsDisposeMethodCalled(invocation, c.SemanticModel))
                     {
@@ -64,8 +63,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    var enclosingMethodSymbol = enclosingSymbol as IMethodSymbol;
-                    if (enclosingMethodSymbol == null ||
+                    if (!(enclosingSymbol is IMethodSymbol enclosingMethodSymbol) ||
                         !IsMethodMatchingDisposeMethodName(enclosingMethodSymbol))
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, memberAccess.Name.GetLocation()));
@@ -76,8 +74,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool IsDisposeMethodCalled(InvocationExpressionSyntax invocation, SemanticModel semanticModel)
         {
-            var methodSymbol = semanticModel.GetSymbolInfo(invocation).Symbol as IMethodSymbol;
-            if (methodSymbol == null)
+            if (!(semanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol))
             {
                 return false;
             }

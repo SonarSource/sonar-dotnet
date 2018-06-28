@@ -70,8 +70,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool TryGetRedundantLambdaParameterAction(SyntaxNode syntaxNode, SyntaxNode root,
             Document document, out CodeAction action)
         {
-            var parameterList = syntaxNode.Parent?.Parent as ParameterListSyntax;
-            if (parameterList == null)
+            if (!(syntaxNode.Parent?.Parent is ParameterListSyntax parameterList))
             {
                 action = null;
                 return false;
@@ -91,8 +90,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool TryGetRedundantArraySizeAction(SyntaxNode syntaxNode, SyntaxNode root,
             Document document, out CodeAction action)
         {
-            var arrayRank = syntaxNode.Parent as ArrayRankSpecifierSyntax;
-            if (arrayRank == null)
+            if (!(syntaxNode.Parent is ArrayRankSpecifierSyntax arrayRank))
             {
                 action = null;
                 return false;
@@ -114,8 +112,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             var arrayTypeSyntax = syntaxNode as ArrayTypeSyntax ?? syntaxNode.Parent as ArrayTypeSyntax;
 
-            var arrayCreation = arrayTypeSyntax?.Parent as ArrayCreationExpressionSyntax;
-            if (arrayCreation == null)
+            if (!(arrayTypeSyntax?.Parent is ArrayCreationExpressionSyntax arrayCreation))
             {
                 action = null;
                 return false;
@@ -137,8 +134,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 ? TitleRedundantExplicitDelegate
                 : TitleRedundantExplicitNullable;
 
-            var objectCreation = syntaxNode as ObjectCreationExpressionSyntax;
-            if (objectCreation == null)
+            if (!(syntaxNode is ObjectCreationExpressionSyntax objectCreation))
             {
                 action = null;
                 return false;
@@ -163,8 +159,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool TryGetRedundantObjectInitializerAction(SyntaxNode syntaxNode, SyntaxNode root,
             Document document, out CodeAction action)
         {
-            var objectCreation = syntaxNode.Parent as ObjectCreationExpressionSyntax;
-            if (objectCreation == null)
+            if (!(syntaxNode.Parent is ObjectCreationExpressionSyntax objectCreation))
             {
                 action = null;
                 return false;
@@ -182,8 +177,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool TryGetRedundantParameterTypeAction(SyntaxNode syntaxNode, SyntaxNode root,
             Document document, out CodeAction action)
         {
-            var anonymousMethod = syntaxNode.Parent as AnonymousMethodExpressionSyntax;
-            if (anonymousMethod == null)
+            if (!(syntaxNode.Parent is AnonymousMethodExpressionSyntax anonymousMethod))
             {
                 action = null;
                 return false;

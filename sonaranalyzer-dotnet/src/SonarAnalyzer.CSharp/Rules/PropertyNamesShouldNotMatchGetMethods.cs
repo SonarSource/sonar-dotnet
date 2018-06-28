@@ -48,8 +48,7 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
-                    var classSymbol = c.SemanticModel.GetDeclaredSymbol(c.Node) as INamedTypeSymbol;
-                    if (classSymbol == null)
+                    if (!(c.SemanticModel.GetDeclaredSymbol(c.Node) is INamedTypeSymbol classSymbol))
                     {
                         return;
                     }
@@ -83,12 +82,10 @@ namespace SonarAnalyzer.Rules.CSharp
                     continue;
                 }
 
-                var propertySyntax = property.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax()
-                    as PropertyDeclarationSyntax;
                 var methodSyntax = collidingMethod.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax()
                     as MethodDeclarationSyntax;
 
-                if (propertySyntax == null || methodSyntax == null)
+                if (!(property.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is PropertyDeclarationSyntax propertySyntax) || methodSyntax == null)
                 {
                     continue;
                 }

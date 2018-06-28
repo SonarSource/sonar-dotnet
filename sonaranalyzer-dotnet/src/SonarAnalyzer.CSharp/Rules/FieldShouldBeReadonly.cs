@@ -283,8 +283,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         return isNestedMemberAccess ? noParens : null;
                     }
 
-                    var memberAccess = noParens as MemberAccessExpressionSyntax;
-                    if (memberAccess == null)
+                    if (!(noParens is MemberAccessExpressionSyntax memberAccess))
                     {
                         return null;
                     }
@@ -316,8 +315,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    var constructorSymbol = partialTypeDeclaration.SemanticModel.GetEnclosingSymbol(expression.SpanStart) as IMethodSymbol;
-                    if (constructorSymbol == null)
+                    if (!(partialTypeDeclaration.SemanticModel.GetEnclosingSymbol(expression.SpanStart) is IMethodSymbol constructorSymbol))
                     {
                         readonlyFieldCollector.excludedFields.Add(fieldSymbol);
                         return;

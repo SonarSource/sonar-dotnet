@@ -138,8 +138,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private void VerifyInvocationAndCreation(SyntaxNodeAnalysisContext context)
         {
-            var invokedMethodSymbol = context.SemanticModel.GetSymbolInfo(context.Node).Symbol as IMethodSymbol;
-            if (invokedMethodSymbol == null || invokedMethodSymbol.IsInType(KnownType.System_Uri))
+            if (!(context.SemanticModel.GetSymbolInfo(context.Node).Symbol is IMethodSymbol invokedMethodSymbol) || invokedMethodSymbol.IsInType(KnownType.System_Uri))
             {
                 return;
             }

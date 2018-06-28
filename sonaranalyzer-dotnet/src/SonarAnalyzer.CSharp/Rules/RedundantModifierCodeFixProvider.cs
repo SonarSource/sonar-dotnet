@@ -135,8 +135,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static SyntaxNode RemoveRedundantUnsafe(SyntaxNode root, SyntaxToken token)
         {
-            var unsafeStatement = token.Parent as UnsafeStatementSyntax;
-            if (unsafeStatement == null)
+            if (!(token.Parent is UnsafeStatementSyntax unsafeStatement))
             {
                 return RemoveRedundantToken(root, token);
             }

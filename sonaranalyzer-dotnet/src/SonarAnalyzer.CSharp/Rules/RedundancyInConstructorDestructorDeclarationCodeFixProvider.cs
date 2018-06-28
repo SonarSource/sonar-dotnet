@@ -108,8 +108,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static void RegisterActionForBaseCall(CodeFixContext context, SyntaxNode root, ConstructorInitializerSyntax initializer)
         {
-            var constructor = initializer.Parent as ConstructorDeclarationSyntax;
-            if (constructor == null)
+            if (!(initializer.Parent is ConstructorDeclarationSyntax constructor))
             {
                 return;
             }

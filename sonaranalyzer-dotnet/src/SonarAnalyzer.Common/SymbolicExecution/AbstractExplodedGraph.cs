@@ -295,11 +295,9 @@ namespace SonarAnalyzer.SymbolicExecution
                 return true;
             }
 
-            var local = symbol as ILocalSymbol;
-            if (local == null)
+            if (!(symbol is ILocalSymbol local))
             {
-                var parameter = symbol as IParameterSymbol;
-                if (parameter == null) // No filter for ref/out
+                if (!(symbol is IParameterSymbol parameter)) // No filter for ref/out
                 {
                     return false;
                 }

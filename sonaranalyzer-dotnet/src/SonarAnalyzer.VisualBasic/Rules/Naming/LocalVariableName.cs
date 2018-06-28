@@ -70,8 +70,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 return;
             }
 
-            var symbol = context.SemanticModel.GetSymbolInfo(controlVar).Symbol as ILocalSymbol;
-            if (symbol == null ||
+            if (!(context.SemanticModel.GetSymbolInfo(controlVar).Symbol is ILocalSymbol symbol) ||
                 !isDeclaredInLoop(symbol) ||
                 NamingHelper.IsRegexMatch(symbol.Name, Pattern))
             {
@@ -93,8 +92,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 .Where(n => n != null &&
                     !NamingHelper.IsRegexMatch(n.Identifier.ValueText, Pattern)))
             {
-                var symbol = context.SemanticModel.GetDeclaredSymbol(name) as ILocalSymbol;
-                if (symbol == null ||
+                if (!(context.SemanticModel.GetDeclaredSymbol(name) is ILocalSymbol symbol) ||
                     symbol.IsConst)
                 {
                     continue;

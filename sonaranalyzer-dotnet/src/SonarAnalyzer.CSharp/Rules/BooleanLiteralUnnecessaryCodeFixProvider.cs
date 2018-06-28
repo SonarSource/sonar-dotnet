@@ -52,8 +52,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             var diagnostic = context.Diagnostics.First();
             var diagnosticSpan = diagnostic.Location.SourceSpan;
-            var syntaxNode = root.FindNode(diagnosticSpan, getInnermostNodeForTie: true) as ExpressionSyntax;
-            if (syntaxNode == null)
+            if (!(root.FindNode(diagnosticSpan, getInnermostNodeForTie: true) is ExpressionSyntax syntaxNode))
             {
                 return TaskHelper.CompletedTask;
             }
@@ -73,8 +72,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return TaskHelper.CompletedTask;
             }
 
-            var literal = syntaxNode as LiteralExpressionSyntax;
-            if (literal == null)
+            if (!(syntaxNode is LiteralExpressionSyntax literal))
             {
                 return TaskHelper.CompletedTask;
             }

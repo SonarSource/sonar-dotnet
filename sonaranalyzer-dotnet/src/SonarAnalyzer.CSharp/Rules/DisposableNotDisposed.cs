@@ -213,8 +213,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 else if (incovationOrConditionalAccess.IsKind(SyntaxKind.ConditionalAccessExpression))
                 {
                     var conditionalAccess = (ConditionalAccessExpressionSyntax)incovationOrConditionalAccess;
-                    var invocation = conditionalAccess.WhenNotNull as InvocationExpressionSyntax;
-                    if (invocation == null)
+                    if (!(conditionalAccess.WhenNotNull is InvocationExpressionSyntax invocation))
                     {
                         continue;
                     }
@@ -315,14 +314,12 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool IsFactoryMethodInvocation(ExpressionSyntax expression, SemanticModel semanticModel)
         {
-            var invocation = expression as InvocationExpressionSyntax;
-            if (invocation == null)
+            if (!(expression is InvocationExpressionSyntax invocation))
             {
                 return false;
             }
 
-            var methodSymbol = semanticModel.GetSymbolInfo(invocation).Symbol as IMethodSymbol;
-            if (methodSymbol == null)
+            if (!(semanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol))
             {
                 return false;
             }

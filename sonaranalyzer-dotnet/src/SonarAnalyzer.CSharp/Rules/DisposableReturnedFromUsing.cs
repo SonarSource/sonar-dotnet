@@ -61,8 +61,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     {
                         if (usingStatement.Expression is AssignmentExpressionSyntax assignment)
                         {
-                            var identifierName = assignment.Left as IdentifierNameSyntax;
-                            if (identifierName == null)
+                            if (!(assignment.Left is IdentifierNameSyntax identifierName))
                             {
                                 return;
                             }

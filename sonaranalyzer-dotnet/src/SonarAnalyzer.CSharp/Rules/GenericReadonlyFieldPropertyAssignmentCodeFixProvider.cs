@@ -94,8 +94,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             var expression = memberAccess.Parent as ExpressionSyntax;
-            var statement = expression?.Parent as StatementSyntax;
-            if (statement == null)
+            if (!(expression?.Parent is StatementSyntax statement))
             {
                 return;
             }

@@ -91,14 +91,12 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void ProcessPropertyChange(ExpressionSyntax expression, SemanticModel semanticModel,
             SyntaxNodeAnalysisContext context)
         {
-            var memberAccess = expression as MemberAccessExpressionSyntax;
-            if (memberAccess == null)
+            if (!(expression is MemberAccessExpressionSyntax memberAccess))
             {
                 return;
             }
 
-            var propertySymbol = semanticModel.GetSymbolInfo(expression).Symbol as IPropertySymbol;
-            if (propertySymbol == null)
+            if (!(semanticModel.GetSymbolInfo(expression).Symbol is IPropertySymbol propertySymbol))
             {
                 return;
             }

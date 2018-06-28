@@ -51,9 +51,8 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             var diagnostic = context.Diagnostics.First();
             var diagnosticSpan = diagnostic.Location.SourceSpan;
-            var syntaxNode = root.FindNode(diagnosticSpan) as CaseSwitchLabelSyntax;
 
-            if (syntaxNode == null)
+            if (!(root.FindNode(diagnosticSpan) is CaseSwitchLabelSyntax syntaxNode))
             {
                 return TaskHelper.CompletedTask;
             }

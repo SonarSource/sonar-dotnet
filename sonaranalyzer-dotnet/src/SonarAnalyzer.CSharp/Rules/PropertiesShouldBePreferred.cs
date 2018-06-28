@@ -44,8 +44,7 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
-                    var typeSymbol = c.SemanticModel.GetDeclaredSymbol(c.Node) as INamedTypeSymbol;
-                    if (typeSymbol == null)
+                    if (!(c.SemanticModel.GetDeclaredSymbol(c.Node) is INamedTypeSymbol typeSymbol))
                     {
                         return;
                     }

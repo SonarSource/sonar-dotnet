@@ -66,8 +66,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static IEnumerable<Diagnostic> CheckFields(SemanticModel semanticModel, VariableDeclaratorSyntax variableDeclarator)
         {
-            var fieldSymbol = semanticModel.GetDeclaredSymbol(variableDeclarator) as IFieldSymbol;
-            if (fieldSymbol == null)
+            if (!(semanticModel.GetDeclaredSymbol(variableDeclarator) is IFieldSymbol fieldSymbol))
             {
                 yield break;
             }

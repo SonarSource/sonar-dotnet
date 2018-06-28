@@ -109,14 +109,12 @@ namespace SonarAnalyzer.Rules.CSharp
             countLocation = null;
             typeArgument = null;
             var invocation = expression as InvocationExpressionSyntax;
-            var memberAccess = invocation?.Expression as MemberAccessExpressionSyntax;
-            if (memberAccess == null)
+            if (!(invocation?.Expression is MemberAccessExpressionSyntax memberAccess))
             {
                 return false;
             }
 
-            var methodSymbol = semanticModel.GetSymbolInfo(memberAccess).Symbol as IMethodSymbol;
-            if (methodSymbol == null ||
+            if (!(semanticModel.GetSymbolInfo(memberAccess).Symbol is IMethodSymbol methodSymbol) ||
                 !IsMethodCountExtension(methodSymbol) ||
                 !methodSymbol.IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T))
             {

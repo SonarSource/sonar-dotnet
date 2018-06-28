@@ -63,8 +63,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static void CheckCall(SyntaxNode node, ArgumentListSyntax argumentList, SyntaxNodeAnalysisContext context)
         {
-            var invokedMethodSymbol = context.SemanticModel.GetSymbolInfo(node).Symbol as IMethodSymbol;
-            if (invokedMethodSymbol == null ||
+            if (!(context.SemanticModel.GetSymbolInfo(node).Symbol is IMethodSymbol invokedMethodSymbol) ||
                 !invokedMethodSymbol.Parameters.Any() ||
                 !invokedMethodSymbol.Parameters.Last().IsParams ||
                 argumentList == null)

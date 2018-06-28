@@ -57,9 +57,8 @@ namespace SonarAnalyzer.Rules.CSharp
                     var modifier = parameter.Modifiers.First(IsRefOrOut);
 
                     var parameterSymbol = c.SemanticModel.GetDeclaredSymbol(parameter);
-                    var containingMethod = parameterSymbol?.ContainingSymbol as IMethodSymbol;
 
-                    if (containingMethod == null ||
+                    if (!(parameterSymbol?.ContainingSymbol is IMethodSymbol containingMethod) ||
                         containingMethod.IsOverride ||
                         !containingMethod.IsPubliclyAccessible() ||
                         IsTryPattern(containingMethod, modifier))

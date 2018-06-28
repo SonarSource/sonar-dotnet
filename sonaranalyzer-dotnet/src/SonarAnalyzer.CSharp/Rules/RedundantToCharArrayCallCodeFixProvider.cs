@@ -51,9 +51,8 @@ namespace SonarAnalyzer.Rules.CSharp
             var diagnosticSpan = diagnostic.Location.SourceSpan;
             var simpleNameSyntax = root.FindNode(diagnosticSpan) as SimpleNameSyntax;
             var memberAccessExpressionSyntax = simpleNameSyntax?.Parent as MemberAccessExpressionSyntax;
-            var invocationExpressionSyntax = memberAccessExpressionSyntax?.Parent as InvocationExpressionSyntax;
 
-            if (invocationExpressionSyntax == null)
+            if (!(memberAccessExpressionSyntax?.Parent is InvocationExpressionSyntax invocationExpressionSyntax))
             {
                 return TaskHelper.CompletedTask;
             }

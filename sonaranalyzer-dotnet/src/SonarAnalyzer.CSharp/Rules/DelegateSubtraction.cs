@@ -93,8 +93,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool IsTopLevelSubtraction(BinaryExpressionSyntax subtraction)
         {
-            var parent = subtraction.Parent as BinaryExpressionSyntax;
-            return parent == null || !parent.IsKind(SyntaxKind.SubtractExpression);
+            return !(subtraction.Parent is BinaryExpressionSyntax parent) || !parent.IsKind(SyntaxKind.SubtractExpression);
         }
 
         private static bool IsDelegateSubtraction(SyntaxNode node, SemanticModel semanticModel)

@@ -134,8 +134,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void AddFieldIfNeeded(IFieldSymbol fieldSymbol, ExpressionSyntax expression,
             HashSet<IFieldSymbol> fieldsAssigned)
         {
-            var objectCreation = expression as ObjectCreationExpressionSyntax;
-            if (objectCreation == null ||
+            if (!(expression is ObjectCreationExpressionSyntax objectCreation) ||
                 !IsNonStaticNonPublicDisposableField(fieldSymbol))
             {
                 return;

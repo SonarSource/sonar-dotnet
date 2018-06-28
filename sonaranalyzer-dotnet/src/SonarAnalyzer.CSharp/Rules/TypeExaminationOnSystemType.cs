@@ -51,8 +51,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     var invocation = (InvocationExpressionSyntax)c.Node;
 
-                    var methodSymbol = c.SemanticModel.GetSymbolInfo(invocation).Symbol as IMethodSymbol;
-                    if (methodSymbol == null)
+                    if (!(c.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol))
                     {
                         return;
                     }
@@ -92,9 +91,8 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void CheckGetTypeCallOnType(InvocationExpressionSyntax invocation, IMethodSymbol invokedMethod,
             SyntaxNodeAnalysisContext context)
         {
-            var memberCall = invocation.Expression as MemberAccessExpressionSyntax;
 
-            if (memberCall == null ||
+            if (!(invocation.Expression is MemberAccessExpressionSyntax memberCall) ||
                 !IsGetTypeCall(invokedMethod))
             {
                 return;

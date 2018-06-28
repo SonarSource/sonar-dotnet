@@ -56,8 +56,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private void CheckForIssue(SyntaxNodeAnalysisContext analysisContext)
         {
             var invocation = (InvocationExpressionSyntax)analysisContext.Node;
-            var directMethodCall = invocation.Expression as IdentifierNameSyntax;
-            if (directMethodCall == null)
+            if (!(invocation.Expression is IdentifierNameSyntax directMethodCall))
             {
                 return;
             }
