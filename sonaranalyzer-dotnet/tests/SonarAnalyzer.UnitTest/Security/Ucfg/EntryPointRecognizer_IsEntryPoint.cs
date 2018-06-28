@@ -19,7 +19,8 @@
  */
 
 extern alias csharp;
-using csharp::SonarAnalyzer.Security.Ucfg;
+
+using csharp::SonarAnalyzer.ControlFlowGraph.CSharp;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -52,11 +53,11 @@ public class Foo : System.Web.Mvc.Controller
             var privateFoo = compilation.GetMethodSymbol("PrivateFoo");
             var innerFoo = compilation.GetMethodSymbol("InnerFoo");
 
-            EntryPointRecognizer.IsEntryPoint(publicFoo).Should().Be(true);
-            EntryPointRecognizer.IsEntryPoint(protectedFoo).Should().Be(false);
-            EntryPointRecognizer.IsEntryPoint(internalFoo).Should().Be(false);
-            EntryPointRecognizer.IsEntryPoint(privateFoo).Should().Be(false);
-            EntryPointRecognizer.IsEntryPoint(innerFoo).Should().Be(false);
+            TaintAnalysisEntryPointDetector.IsEntryPoint(publicFoo).Should().Be(true);
+            TaintAnalysisEntryPointDetector.IsEntryPoint(protectedFoo).Should().Be(false);
+            TaintAnalysisEntryPointDetector.IsEntryPoint(internalFoo).Should().Be(false);
+            TaintAnalysisEntryPointDetector.IsEntryPoint(privateFoo).Should().Be(false);
+            TaintAnalysisEntryPointDetector.IsEntryPoint(innerFoo).Should().Be(false);
         }
 
         [TestMethod]
@@ -82,9 +83,9 @@ public class MyController : Controller
             var publicBar = compilation.GetMethodSymbol("PublicBar");
             var publicDiz = compilation.GetMethodSymbol("PublicDiz");
 
-            EntryPointRecognizer.IsEntryPoint(publicFoo).Should().Be(true);
-            EntryPointRecognizer.IsEntryPoint(publicBar).Should().Be(false);
-            EntryPointRecognizer.IsEntryPoint(publicDiz).Should().Be(false);
+            TaintAnalysisEntryPointDetector.IsEntryPoint(publicFoo).Should().Be(true);
+            TaintAnalysisEntryPointDetector.IsEntryPoint(publicBar).Should().Be(false);
+            TaintAnalysisEntryPointDetector.IsEntryPoint(publicDiz).Should().Be(false);
         }
 
         [TestMethod]
@@ -104,7 +105,7 @@ public class Foo
 
             var publicFoo = compilation.GetMethodSymbol("PublicFoo");
 
-            EntryPointRecognizer.IsEntryPoint(publicFoo).Should().Be(true);
+            TaintAnalysisEntryPointDetector.IsEntryPoint(publicFoo).Should().Be(true);
         }
 
         [TestMethod]
@@ -124,7 +125,7 @@ public class Foo : Microsoft.AspNetCore.Mvc.ControllerBase
 
             var publicFoo = compilation.GetMethodSymbol("PublicFoo");
 
-            EntryPointRecognizer.IsEntryPoint(publicFoo).Should().Be(false);
+            TaintAnalysisEntryPointDetector.IsEntryPoint(publicFoo).Should().Be(false);
         }
     }
 }

@@ -19,7 +19,8 @@
  */
 
 extern alias csharp;
-using csharp::SonarAnalyzer.Security.Ucfg;
+
+using csharp::SonarAnalyzer.ControlFlowGraph.CSharp;
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -181,7 +182,7 @@ public class Class3
             PropertySetId("Property1").Should().Be("Namespace.Class1.Property1.set");
 
             PropertyGetId("Property2").Should().Be("Namespace.Class1.Property2.get");
-            PropertySetId("Property2").Should().Be(KnownMethodId.Unknown);
+            PropertySetId("Property2").Should().Be(UcfgBuiltIn.Unknown);
 
             PropertyGetId("Property3").Should().Be("Namespace.GenericClass<T1>.Property3.get");
             PropertySetId("Property3").Should().Be("Namespace.GenericClass<T1>.Property3.set");

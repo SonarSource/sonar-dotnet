@@ -20,16 +20,13 @@
 
 extern alias csharp;
 using System.Linq;
-using csharp::SonarAnalyzer.Security;
-using csharp::SonarAnalyzer.Security.Ucfg;
+using csharp::SonarAnalyzer.ControlFlowGraph.CSharp;
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
 using SonarAnalyzer.Protobuf.Ucfg;
-using SonarAnalyzer.SymbolicExecution.ControlFlowGraph;
 
 namespace SonarAnalyzer.UnitTest.Security.Ucfg
 {
@@ -63,8 +60,8 @@ namespace Namespace
 
             ucfg.BasicBlocks.Should().HaveCount(2);
             AssertCollection(ucfg.BasicBlocks[0].Instructions,
-                i => ValidateInstruction(i, KnownMethodId.Assignment, "a", new[] { "s" }),
-                i => ValidateInstruction(i, KnownMethodId.Assignment, "a", new[] { "\"\"" })
+                i => ValidateInstruction(i, UcfgBuiltIn.Assignment, "a", new[] { "s" }),
+                i => ValidateInstruction(i, UcfgBuiltIn.Assignment, "a", new[] { "\"\"" })
                 );
         }
 
@@ -92,9 +89,9 @@ namespace Namespace
             var ucfg = GetUcfgForMethod(code, "Foo");
             ucfg.BasicBlocks.Should().HaveCount(2);
             AssertCollection(ucfg.BasicBlocks[0].Instructions,
-                i => ValidateInstruction(i, KnownMethodId.Assignment, "c", new[] { "\"\"" }),
-                i => ValidateInstruction(i, KnownMethodId.Assignment, "b", new[] { "c" }),
-                i => ValidateInstruction(i, KnownMethodId.Assignment, "a", new[] { "b" })
+                i => ValidateInstruction(i, UcfgBuiltIn.Assignment, "c", new[] { "\"\"" }),
+                i => ValidateInstruction(i, UcfgBuiltIn.Assignment, "b", new[] { "c" }),
+                i => ValidateInstruction(i, UcfgBuiltIn.Assignment, "a", new[] { "b" })
                 );
         }
 
@@ -124,7 +121,7 @@ namespace Namespace
             AssertCollection(ucfg.BasicBlocks[0].Instructions,
                 i => ValidateInstruction(i, "Namespace.Class1.Bar(string, System.Func<string, string>)",
                     "%0", new[] { "s", "\"\"" }),
-                i => ValidateInstruction(i, KnownMethodId.Assignment, "x", new[] { "%0" })
+                i => ValidateInstruction(i, UcfgBuiltIn.Assignment, "x", new[] { "%0" })
                 );
         }
 
@@ -150,7 +147,7 @@ namespace Namespace
             var ucfg = GetUcfgForMethod(code, "Foo");
             ucfg.BasicBlocks.Should().HaveCount(2);
             AssertCollection(ucfg.BasicBlocks[0].Instructions,
-                i => ValidateInstruction(i, KnownMethodId.Assignment, "x", new[] { "\"\"" })
+                i => ValidateInstruction(i, UcfgBuiltIn.Assignment, "x", new[] { "\"\"" })
                 );
         }
 
@@ -201,7 +198,7 @@ namespace Namespace
             AssertCollection(ucfg.BasicBlocks[0].Instructions,
                 i => ValidateInstruction(i, "Namespace.Class1.Property.set", "%0", new[] { "s" }),
                 i => ValidateInstruction(i, "Namespace.Class1.Property.get", "%1"),
-                i => ValidateInstruction(i, KnownMethodId.Assignment, "a", new[] { "%1" }),
+                i => ValidateInstruction(i, UcfgBuiltIn.Assignment, "a", new[] { "%1" }),
 
                 i => ValidateInstruction(i, "Namespace.Class1.Property.get", "%2"),
                 i => ValidateInstruction(i, "Namespace.Class1.Property.set", "%3", new[] { "%2" }),
@@ -276,15 +273,15 @@ namespace Namespace
 
             ucfg.BasicBlocks.Should().HaveCount(2);
             AssertCollection(ucfg.BasicBlocks[0].Instructions,
-                i => ValidateInstruction(i, KnownMethodId.Assignment, "a", new[] { "s" }),
-                i => ValidateInstruction(i, KnownMethodId.Concatenation, "%0", new[] { "s", "s" }),
-                i => ValidateInstruction(i, KnownMethodId.Assignment, "a", new[] { "%0" }),
-                i => ValidateInstruction(i, KnownMethodId.Concatenation, "%1", new[] { "s", "s" }),
-                i => ValidateInstruction(i, KnownMethodId.Concatenation, "%2", new[] { "s", "%1" }),
-                i => ValidateInstruction(i, KnownMethodId.Assignment, "a", new[] { "%2" }),
-                i => ValidateInstruction(i, KnownMethodId.Concatenation, "%3", new[] { "s", "s" }),
-                i => ValidateInstruction(i, KnownMethodId.Concatenation, "%4", new[] { "t", "%3" }),
-                i => ValidateInstruction(i, KnownMethodId.Assignment, "a", new[] { "%4" })
+                i => ValidateInstruction(i, UcfgBuiltIn.Assignment, "a", new[] { "s" }),
+                i => ValidateInstruction(i, UcfgBuiltIn.Concatenation, "%0", new[] { "s", "s" }),
+                i => ValidateInstruction(i, UcfgBuiltIn.Assignment, "a", new[] { "%0" }),
+                i => ValidateInstruction(i, UcfgBuiltIn.Concatenation, "%1", new[] { "s", "s" }),
+                i => ValidateInstruction(i, UcfgBuiltIn.Concatenation, "%2", new[] { "s", "%1" }),
+                i => ValidateInstruction(i, UcfgBuiltIn.Assignment, "a", new[] { "%2" }),
+                i => ValidateInstruction(i, UcfgBuiltIn.Concatenation, "%3", new[] { "s", "s" }),
+                i => ValidateInstruction(i, UcfgBuiltIn.Concatenation, "%4", new[] { "t", "%3" }),
+                i => ValidateInstruction(i, UcfgBuiltIn.Assignment, "a", new[] { "%4" })
                 );
         }
 
@@ -337,17 +334,17 @@ namespace Namespace
             ucfg.BasicBlocks.Should().HaveCount(2);
             AssertCollection(ucfg.BasicBlocks[0].Instructions,
                 i => ValidateInstruction(i, "string.ToLower()", "%0", new[] { "s" }),
-                i => ValidateInstruction(i, KnownMethodId.Assignment, "a", new[] { "%0" }),
-                i => ValidateInstruction(i, KnownMethodId.Concatenation, "%1", new[] { "s", "s" }),
+                i => ValidateInstruction(i, UcfgBuiltIn.Assignment, "a", new[] { "%0" }),
+                i => ValidateInstruction(i, UcfgBuiltIn.Concatenation, "%1", new[] { "s", "s" }),
                 i => ValidateInstruction(i, "string.ToLower()", "%2", new[] { "%1" }),
-                i => ValidateInstruction(i, KnownMethodId.Assignment, "a", new[] { "%2" }),
+                i => ValidateInstruction(i, UcfgBuiltIn.Assignment, "a", new[] { "%2" }),
                 i => ValidateInstruction(i, "string.ToLower()", "%3", new[] { "s" }),
                 i => ValidateInstruction(i, "Namespace.Class1.Bar(string)", "%4", new[] { "%3" }),
                 i => ValidateInstruction(i, "string.IsNullOrEmpty(string)", "%5", new[] { "s" }),
-                i => ValidateInstruction(i, KnownMethodId.Assignment, "a", new[] { "\"\"" }),
+                i => ValidateInstruction(i, UcfgBuiltIn.Assignment, "a", new[] { "\"\"" }),
                 i => ValidateInstruction(i, "Namespace.Class1.C(string)", "%6", new[] { "s" }),
                 i => ValidateInstruction(i, "Namespace.Class1.A(int)", "%7", new[] { "\"\"" }),
-                i => ValidateInstruction(i, KnownMethodId.Assignment, "a", new[] { "%7" }),
+                i => ValidateInstruction(i, UcfgBuiltIn.Assignment, "a", new[] { "%7" }),
                 i => ValidateInstruction(i, "Namespace.Class1.O(object)", "%8", new[] { "s" })
                 );
         }
@@ -427,11 +424,11 @@ namespace Namespace
             ucfg.BasicBlocks.Should().HaveCount(2);
             AssertCollection(ucfg.BasicBlocks[0].Instructions,
                 i => ValidateInstruction(i, "Namespace.Extensions.Ext(string)", "%0", new[] { "s" }),
-                i => ValidateInstruction(i, KnownMethodId.Assignment, "a", new[] { "%0" }),
+                i => ValidateInstruction(i, UcfgBuiltIn.Assignment, "a", new[] { "%0" }),
                 i => ValidateInstruction(i, "Namespace.Extensions.Ext(string)", "%1", new[] { "s" }),
-                i => ValidateInstruction(i, KnownMethodId.Assignment, "a", new[] { "%1" }),
+                i => ValidateInstruction(i, UcfgBuiltIn.Assignment, "a", new[] { "%1" }),
                 i => ValidateInstruction(i, "Namespace.Extensions.Ext(string)", "%2", new[] { "\"\"" }),
-                i => ValidateInstruction(i, KnownMethodId.Assignment, "a", new[] { "%2" })
+                i => ValidateInstruction(i, UcfgBuiltIn.Assignment, "a", new[] { "%2" })
                 );
         }
 
@@ -535,9 +532,9 @@ public class Class1 : Controller
 
             ucfg.BasicBlocks.Should().HaveCount(2);
             AssertCollection(ucfg.BasicBlocks[1].Instructions,
-                i => ValidateInstruction(i, KnownMethodId.EntryPoint, "%0", new[] { "s", "x" }),
+                i => ValidateInstruction(i, UcfgBuiltIn.EntryPoint, "%0", new[] { "s", "x" }),
                 i => ValidateInstruction(i, "System.ComponentModel.DescriptionAttribute.DescriptionAttribute()", "%1"),
-                i => ValidateInstruction(i, KnownMethodId.Annotation, "s", new[] { "%1" })
+                i => ValidateInstruction(i, UcfgBuiltIn.Annotation, "s", new[] { "%1" })
                 );
         }
 
