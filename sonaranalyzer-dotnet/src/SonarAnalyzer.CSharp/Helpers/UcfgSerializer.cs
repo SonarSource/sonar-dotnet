@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -27,6 +28,9 @@ namespace SonarAnalyzer.Helpers
 {
     public class UcfgSerializer
     {
+        private const string EntryBlockId = "ENTRY";
+        private const string ExitBlockId = "END";
+
         public static string Serialize(UCFG ucfg)
         {
             var stringBuilder = new StringBuilder();
@@ -55,11 +59,11 @@ namespace SonarAnalyzer.Helpers
             {
                 writer.WriteGraphStart(methodName);
 
-                writer.WriteNode("ENTRY", "ENTRY", ucfg.Parameters.ToArray());
+                writer.WriteNode(EntryBlockId, EntryBlockId, ucfg.Parameters.ToArray());
 
                 foreach (var entry in ucfg.Entries)
                 {
-                    writer.WriteEdge("ENTRY", entry, string.Empty);
+                    writer.WriteEdge(EntryBlockId, entry, string.Empty);
                 }
 
                 foreach (var block in ucfg.BasicBlocks)
@@ -67,14 +71,22 @@ namespace SonarAnalyzer.Helpers
                     Visit(block);
                 }
 
-                writer.WriteNode("EXIT", "EXIT");
+                writer.WriteNode(ExitBlockId, ExitBlockId);
 
                 writer.WriteGraphEnd();
             }
 
             private void Visit(BasicBlock block)
             {
-                writer.WriteNode(block.Id, "BLOCK", block.Instructions.Select(SerializeInstruction).ToArray());
+                var instructions = block.Instructions.Select(SerializeInstruction);
+
+                var terminator = block.TerminatorCase == BasicBlock.TerminatorOneofCase.Jump
+                    ? $"JUMP: {string.Join(", ", block.Jump.Destinations)}"
+                    : $"RET: {SerializeExpression(block.Ret.ReturnedExpression)}";
+
+                var jumps = new[] { $"TERMINATOR {terminator}" };
+
+                writer.WriteNode(block.Id, $"BLOCK:{block.Id}", instructions.Union(jumps).ToArray());
                 if (block.TerminatorCase == BasicBlock.TerminatorOneofCase.Jump)
                 {
                     foreach (var destination in block.Jump.Destinations)
@@ -84,7 +96,7 @@ namespace SonarAnalyzer.Helpers
                 }
                 else
                 {
-                    writer.WriteEdge(block.Id, "EXIT", string.Empty);
+                    writer.WriteEdge(block.Id, ExitBlockId, string.Empty);
                 }
             }
 

@@ -21,12 +21,12 @@
 extern alias csharp;
 using System;
 using System.Collections.Generic;
-using csharp::SonarAnalyzer.Security;
 using csharp::SonarAnalyzer.Security.Ucfg;
 using csharp::SonarAnalyzer.SymbolicExecution.ControlFlowGraph;
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
+using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Protobuf.Ucfg;
 
 namespace SonarAnalyzer.UnitTest.Security.Ucfg
@@ -48,8 +48,14 @@ namespace SonarAnalyzer.UnitTest.Security.Ucfg
 
             var builder = new UniversalControlFlowGraphBuilder();
 
-            return builder.Build(semanticModel, method,
-                semanticModel.GetDeclaredSymbol(method), CSharpControlFlowGraph.Create(method.Body, semanticModel));
+            var cfg = CSharpControlFlowGraph.Create(method.Body, semanticModel);
+
+            var ucfg = builder.Build(semanticModel, method, semanticModel.GetDeclaredSymbol(method), cfg);
+
+            var serializedCfg = CfgSerializer.Serialize(methodName, cfg);
+            var serualizedUcfg = UcfgSerializer.Serialize(ucfg);
+
+            return ucfg;
         }
     }
 }
