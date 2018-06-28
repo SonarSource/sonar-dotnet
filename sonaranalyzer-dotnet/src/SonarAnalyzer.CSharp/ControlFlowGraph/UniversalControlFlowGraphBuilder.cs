@@ -140,7 +140,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             switch (methodSymbol?.MethodKind)
             {
                 case MethodKind.ExplicitInterfaceImplementation:
-                    return GetMethodId(methodSymbol.ExplicitInterfaceImplementations.First());
+                    return methodSymbol.ConstructedFrom.ToDisplayString();
 
                 case MethodKind.ReducedExtension:
                     return methodSymbol.ReducedFrom.ToDisplayString();
