@@ -66,8 +66,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             floatingPointType = null;
 
-            var memberAccess = expression as MemberAccessExpressionSyntax;
-            if (memberAccess == null)
+            if (!(expression is MemberAccessExpressionSyntax memberAccess))
             {
                 return false;
             }

@@ -48,14 +48,12 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterCodeBlockStartActionInNonGenerated<SyntaxKind>(
                 cb =>
                 {
-                    var methodDeclaration = cb.CodeBlock as MethodDeclarationSyntax;
-                    if (methodDeclaration == null)
+                    if (!(cb.CodeBlock is MethodDeclarationSyntax methodDeclaration))
                     {
                         return;
                     }
 
-                    var methodSymbol = cb.OwningSymbol as IMethodSymbol;
-                    if (methodSymbol == null ||
+                    if (!(cb.OwningSymbol is IMethodSymbol methodSymbol) ||
                         !GetHashCodeEqualsOverride.MethodIsRelevant(methodSymbol, MethodNames))
                     {
                         return;
@@ -73,8 +71,7 @@ namespace SonarAnalyzer.Rules.CSharp
             IMethodSymbol methodSymbol)
         {
             var invocation = (InvocationExpressionSyntax)context.Node;
-            var invokedMethod = context.SemanticModel.GetSymbolInfo(invocation).Symbol as IMethodSymbol;
-            if (invokedMethod == null ||
+            if (!(context.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol invokedMethod) ||
                 invokedMethod.Name != methodSymbol.Name)
             {
                 return;
@@ -82,8 +79,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             var memberAccess = invocation.Expression as MemberAccessExpressionSyntax;
 
-            var baseCall = memberAccess?.Expression as BaseExpressionSyntax;
-            if (baseCall == null)
+            if (!(memberAccess?.Expression is BaseExpressionSyntax baseCall))
             {
                 return;
             }

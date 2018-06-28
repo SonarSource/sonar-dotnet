@@ -51,8 +51,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             var diagnostic = context.Diagnostics.First();
             var diagnosticSpan = diagnostic.Location.SourceSpan;
-            var literal = root.FindNode(diagnosticSpan, getInnermostNodeForTie: true) as LiteralExpressionSyntax;
-            if (literal == null)
+            if (!(root.FindNode(diagnosticSpan, getInnermostNodeForTie: true) is LiteralExpressionSyntax literal))
             {
                 return TaskHelper.CompletedTask;
             }

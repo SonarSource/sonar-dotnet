@@ -114,8 +114,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
 
                     var stringFormatArgument = invocation?.Parent as ArgumentSyntax;
-                    var stringFormatInvocation = stringFormatArgument?.Parent?.Parent as InvocationExpressionSyntax;
-                    if (stringFormatInvocation == null ||
+                    if (!(stringFormatArgument?.Parent?.Parent is InvocationExpressionSyntax stringFormatInvocation) ||
                         !IsStringFormatCall(c.SemanticModel.GetSymbolInfo(stringFormatInvocation).Symbol as IMethodSymbol))
                     {
                         return;
@@ -221,15 +220,13 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             location = null;
             methodSymbol = null;
-            var invocation = expression as InvocationExpressionSyntax;
-            if (invocation == null ||
+            if (!(expression is InvocationExpressionSyntax invocation) ||
                 invocation.ArgumentList.CloseParenToken.IsMissing)
             {
                 return false;
             }
 
-            var memberAccess = invocation.Expression as MemberAccessExpressionSyntax;
-            if (memberAccess == null ||
+            if (!(invocation.Expression is MemberAccessExpressionSyntax memberAccess) ||
                 memberAccess.Expression is BaseExpressionSyntax)
             {
                 return false;

@@ -41,8 +41,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             var diagnostic = context.Diagnostics.First();
             var diagnosticSpan = diagnostic.Location.SourceSpan;
-            var syntaxNode = root.FindNode(diagnosticSpan) as SwitchSectionSyntax;
-            if (syntaxNode == null)
+            if (!(root.FindNode(diagnosticSpan) is SwitchSectionSyntax syntaxNode))
             {
                 return TaskHelper.CompletedTask;
             }

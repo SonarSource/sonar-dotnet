@@ -56,8 +56,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 c =>
                 {
                     var invocationSyntax = (InvocationExpressionSyntax)c.Node;
-                    var methodSymbol = c.SemanticModel.GetSymbolInfo(invocationSyntax).Symbol as IMethodSymbol;
-                    if (methodSymbol == null ||
+                    if (!(c.SemanticModel.GetSymbolInfo(invocationSyntax).Symbol is IMethodSymbol methodSymbol) ||
                         invocationSyntax.ArgumentList == null)
                     {
                         return;

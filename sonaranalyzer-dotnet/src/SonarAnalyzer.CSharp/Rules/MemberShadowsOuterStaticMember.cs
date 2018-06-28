@@ -176,8 +176,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     return null;
                 }
-                var syntax = reference.GetSyntax() as PropertyDeclarationSyntax;
-                if (syntax == null)
+                if (!(reference.GetSyntax() is PropertyDeclarationSyntax syntax))
                 {
                     return null;
                 }

@@ -77,8 +77,7 @@ namespace SonarAnalyzer.Rules.Common
 
             foreach (var item in members)
             {
-                var symbol = semanticModel.GetDeclaredSymbol(item) as IFieldSymbol;
-                if (symbol == null)
+                if (!(semanticModel.GetDeclaredSymbol(item) is IFieldSymbol symbol))
                 {
                     return null;
                 }

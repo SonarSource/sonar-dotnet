@@ -51,8 +51,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    var memberAccess = outerInvocation.Expression as MemberAccessExpressionSyntax;
-                    if (memberAccess == null)
+                    if (!(outerInvocation.Expression is MemberAccessExpressionSyntax memberAccess))
                     {
                         return;
                     }

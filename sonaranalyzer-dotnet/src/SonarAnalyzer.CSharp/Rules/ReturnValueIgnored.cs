@@ -57,8 +57,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     var lambda = (LambdaExpressionSyntax)c.Node;
 
-                    var symbol = c.SemanticModel.GetSymbolInfo(lambda).Symbol as IMethodSymbol;
-                    if (symbol == null ||
+                    if (!(c.SemanticModel.GetSymbolInfo(lambda).Symbol is IMethodSymbol symbol) ||
                         !symbol.ReturnsVoid)
                     {
                         return;
@@ -73,14 +72,12 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static void CheckExpressionForPureMethod(SyntaxNodeAnalysisContext context, ExpressionSyntax expression)
         {
-            var invocation = expression as InvocationExpressionSyntax;
-            if (invocation == null)
+            if (!(expression is InvocationExpressionSyntax invocation))
             {
                 return;
             }
 
-            var invokedMethodSymbol = context.SemanticModel.GetSymbolInfo(invocation).Symbol as IMethodSymbol;
-            if (invokedMethodSymbol == null ||
+            if (!(context.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol invokedMethodSymbol) ||
                 invokedMethodSymbol.ReturnsVoid)
             {
                 return;

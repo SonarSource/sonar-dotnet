@@ -41,8 +41,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override bool IsValidCodeBlockContext(SyntaxNode node, ISymbol owningSymbol)
         {
-            var declaration = node as ConstructorDeclarationSyntax;
-            if (declaration == null)
+            if (!(node is ConstructorDeclarationSyntax declaration))
             {
                 return false;
             }

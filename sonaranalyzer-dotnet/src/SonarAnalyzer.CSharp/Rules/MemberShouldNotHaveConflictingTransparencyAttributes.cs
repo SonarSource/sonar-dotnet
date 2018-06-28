@@ -64,8 +64,7 @@ namespace SonarAnalyzer.Rules.CSharp
             Dictionary<SyntaxNode, AttributeSyntax> nodesWithSecurityCritical)
         {
             var attribute = (AttributeSyntax)syntaxNodeAnalysisContext.Node;
-            var attributeConstructor = syntaxNodeAnalysisContext.SemanticModel.GetSymbolInfo(attribute).Symbol as IMethodSymbol;
-            if (attributeConstructor == null)
+            if (!(syntaxNodeAnalysisContext.SemanticModel.GetSymbolInfo(attribute).Symbol is IMethodSymbol attributeConstructor))
             {
                 return;
             }

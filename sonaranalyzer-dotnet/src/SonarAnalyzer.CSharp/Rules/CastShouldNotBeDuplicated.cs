@@ -49,21 +49,18 @@ namespace SonarAnalyzer.Rules.CSharp
         private void CheckForIssue(SyntaxNodeAnalysisContext analysisContext)
         {
             var isExpression = (BinaryExpressionSyntax)analysisContext.Node;
-            var castType = isExpression.Right as TypeSyntax;
-            if (castType == null)
+            if (!(isExpression.Right is TypeSyntax castType))
             {
                 return;
             }
 
-            var castTypeSymbol = analysisContext.SemanticModel.GetSymbolInfo(castType).Symbol as INamedTypeSymbol;
-            if (castTypeSymbol == null ||
+            if (!(analysisContext.SemanticModel.GetSymbolInfo(castType).Symbol is INamedTypeSymbol castTypeSymbol) ||
                 castTypeSymbol.TypeKind == TypeKind.Struct)
             {
                 return;
             }
 
-            var parentIfStatement = isExpression.GetSelfOrTopParenthesizedExpression().Parent as IfStatementSyntax;
-            if (parentIfStatement == null)
+            if (!(isExpression.GetSelfOrTopParenthesizedExpression().Parent is IfStatementSyntax parentIfStatement))
             {
                 return;
             }

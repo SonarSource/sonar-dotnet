@@ -80,8 +80,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool TopLevelUnaryInChain(PrefixUnaryExpressionSyntax unary)
         {
-            var parent = unary.Parent as PrefixUnaryExpressionSyntax;
-            return parent == null || !SameOperators(parent, unary);
+            return !(unary.Parent is PrefixUnaryExpressionSyntax parent) || !SameOperators(parent, unary);
         }
 
         private static bool SameOperators(PrefixUnaryExpressionSyntax expression1, PrefixUnaryExpressionSyntax expression2)

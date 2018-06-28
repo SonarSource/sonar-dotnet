@@ -98,8 +98,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             foreach (var identifier in identifiers)
             {
-                var identifierSymbol = context.SemanticModel.GetSymbolInfo(identifier).Symbol as IFieldSymbol;
-                if (identifierSymbol == null)
+                if (!(context.SemanticModel.GetSymbolInfo(identifier).Symbol is IFieldSymbol identifierSymbol))
                 {
                     continue;
                 }

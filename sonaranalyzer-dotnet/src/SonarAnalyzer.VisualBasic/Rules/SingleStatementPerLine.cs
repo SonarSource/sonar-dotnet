@@ -53,8 +53,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 return false;
             }
 
-            var multiline = st.Parent as MultiLineLambdaExpressionSyntax;
-            if (multiline == null)
+            if (!(st.Parent is MultiLineLambdaExpressionSyntax multiline))
             {
                 return false;
             }

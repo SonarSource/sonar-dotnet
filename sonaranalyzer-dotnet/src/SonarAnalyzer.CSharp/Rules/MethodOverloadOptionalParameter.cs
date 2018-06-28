@@ -54,8 +54,7 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSymbolAction(
                 c =>
                 {
-                    var methodSymbol = c.Symbol as IMethodSymbol;
-                    if (methodSymbol == null ||
+                    if (!(c.Symbol is IMethodSymbol methodSymbol) ||
                         methodSymbol.GetInterfaceMember() != null ||
                         methodSymbol.GetOverriddenMember() != null ||
                         !methodSymbol.Parameters.Any(p => p.IsOptional))

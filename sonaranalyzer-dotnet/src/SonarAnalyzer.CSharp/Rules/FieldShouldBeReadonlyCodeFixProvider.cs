@@ -53,16 +53,14 @@ namespace SonarAnalyzer.Rules.CSharp
             var syntaxNode = root.FindNode(diagnosticSpan);
 
             var variableDeclarator = syntaxNode.FirstAncestorOrSelf<VariableDeclaratorSyntax>();
-            var variableDeclaration = variableDeclarator?.Parent as VariableDeclarationSyntax;
-            if (variableDeclaration == null)
+            if (!(variableDeclarator?.Parent is VariableDeclarationSyntax variableDeclaration))
             {
                 return TaskHelper.CompletedTask;
             }
 
             if (variableDeclaration.Variables.Count == 1)
             {
-                var fieldDeclaration = variableDeclaration.Parent as FieldDeclarationSyntax;
-                if (fieldDeclaration == null)
+                if (!(variableDeclaration.Parent is FieldDeclarationSyntax fieldDeclaration))
                 {
                     return TaskHelper.CompletedTask;
                 }

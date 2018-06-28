@@ -54,8 +54,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var diagnosticSpan = diagnostic.Location.SourceSpan;
             var syntaxNode = root.FindNode(diagnosticSpan);
 
-            var tryStatement = syntaxNode.Parent as TryStatementSyntax;
-            if (tryStatement == null)
+            if (!(syntaxNode.Parent is TryStatementSyntax tryStatement))
             {
                 return TaskHelper.CompletedTask;
             }

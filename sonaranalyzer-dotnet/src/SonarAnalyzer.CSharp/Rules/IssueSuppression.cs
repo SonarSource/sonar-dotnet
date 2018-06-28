@@ -48,16 +48,14 @@ namespace SonarAnalyzer.Rules.CSharp
                 c =>
                 {
                     var attribute = (AttributeSyntax)c.Node;
-                    var attributeConstructor = c.SemanticModel.GetSymbolInfo(attribute).Symbol as IMethodSymbol;
 
-                    if (attributeConstructor == null ||
+                    if (!(c.SemanticModel.GetSymbolInfo(attribute).Symbol is IMethodSymbol attributeConstructor) ||
                         !attributeConstructor.ContainingType.Is(KnownType.System_Diagnostics_CodeAnalysis_SuppressMessageAttribute))
                     {
                         return;
                     }
 
-                    var identifier = attribute.Name as IdentifierNameSyntax;
-                    if (identifier == null)
+                    if (!(attribute.Name is IdentifierNameSyntax identifier))
                     {
                         identifier = (attribute.Name as QualifiedNameSyntax)?.Right as IdentifierNameSyntax;
                     }

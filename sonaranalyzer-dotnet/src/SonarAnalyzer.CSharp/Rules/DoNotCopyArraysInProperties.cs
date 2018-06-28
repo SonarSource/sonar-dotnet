@@ -95,8 +95,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             public override void VisitInvocationExpression(InvocationExpressionSyntax node)
             {
-                var invokedSymbol = semanticModel.GetSymbolInfo(node).Symbol as IMethodSymbol;
-                if (invokedSymbol == null)
+                if (!(semanticModel.GetSymbolInfo(node).Symbol is IMethodSymbol invokedSymbol))
                 {
                     return;
                 }

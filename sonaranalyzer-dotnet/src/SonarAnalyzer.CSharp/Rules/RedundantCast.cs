@@ -95,8 +95,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void CheckExtensionMethodInvocation(SyntaxNodeAnalysisContext context)
         {
             var invocation = (InvocationExpressionSyntax)context.Node;
-            var methodSymbol = context.SemanticModel.GetSymbolInfo(invocation).Symbol as IMethodSymbol;
-            if (methodSymbol == null ||
+            if (!(context.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol) ||
                 !methodSymbol.IsExtensionOn(KnownType.System_Collections_IEnumerable) ||
                 !CastIEnumerableMethods.Contains(methodSymbol.Name))
             {
@@ -109,8 +108,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            var returnType = methodSymbol.ReturnType as INamedTypeSymbol;
-            if (returnType == null ||
+            if (!(methodSymbol.ReturnType is INamedTypeSymbol returnType) ||
                 !returnType.TypeArguments.Any())
             {
                 return;
@@ -128,8 +126,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static Location GetReportLocation(InvocationExpressionSyntax invocation, bool methodCalledAsStatic)
         {
-            var memberAccess = invocation.Expression as MemberAccessExpressionSyntax;
-            if (memberAccess == null)
+            if (!(invocation.Expression is MemberAccessExpressionSyntax memberAccess))
             {
                 return invocation.Expression.GetLocation();
             }
@@ -154,8 +151,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
             else
             {
-                var memberAccess = invocation.Expression as MemberAccessExpressionSyntax;
-                if (memberAccess == null)
+                if (!(invocation.Expression is MemberAccessExpressionSyntax memberAccess))
                 {
                     return null;
                 }

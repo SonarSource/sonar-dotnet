@@ -75,8 +75,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void CheckForCandidatePartialInvocation(SyntaxNodeAnalysisContext context)
         {
             var invocation = (InvocationExpressionSyntax)context.Node;
-            var methodSymbol = context.SemanticModel.GetSymbolInfo(invocation).Symbol as IMethodSymbol;
-            if (methodSymbol == null)
+            if (!(context.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol))
             {
                 return;
             }
@@ -95,8 +94,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            var statement = invocation.Parent as StatementSyntax;
-            if (statement == null)
+            if (!(invocation.Parent is StatementSyntax statement))
             {
                 return;
             }

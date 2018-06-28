@@ -216,9 +216,8 @@ namespace SonarAnalyzer.Rules.CSharp
             ExpressionSyntax condition, ExpressionSyntax compared, SemanticModel semanticModel, SyntaxAnnotation annotation,
             bool isNullCoalescing)
         {
-            var methodCall1 = expression1 as InvocationExpressionSyntax;
             var methodCall2 = expression2 as InvocationExpressionSyntax;
-            if (methodCall1 == null ||
+            if (!(expression1 is InvocationExpressionSyntax methodCall1) ||
                 methodCall2 == null)
             {
                 return null;

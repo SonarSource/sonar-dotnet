@@ -75,8 +75,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool IsIndexOfCall(ExpressionSyntax call, SemanticModel semanticModel)
         {
-            var indexOfSymbol = semanticModel.GetSymbolInfo(call).Symbol as IMethodSymbol;
-            if (indexOfSymbol == null ||
+            if (!(semanticModel.GetSymbolInfo(call).Symbol is IMethodSymbol indexOfSymbol) ||
                 indexOfSymbol.Name != "IndexOf")
             {
                 return false;

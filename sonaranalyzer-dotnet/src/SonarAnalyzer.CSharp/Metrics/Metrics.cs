@@ -88,8 +88,7 @@ namespace SonarAnalyzer.Metrics.CSharp
                     return true;
                 }
 
-                var prop = accessor.Parent.Parent as BasePropertyDeclarationSyntax;
-                if (prop == null)
+                if (!(accessor.Parent.Parent is BasePropertyDeclarationSyntax prop))
                 {
                     // Unexpected
                     return false;

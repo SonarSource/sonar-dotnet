@@ -55,9 +55,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public IEnumerable<Diagnostic> FindViolations(SyntaxNodeAnalysisContext context)
         {
-            var methodSymbol = context.SemanticModel.GetDeclaredSymbol(context.Node) as IMethodSymbol;
 
-            if (methodSymbol == null ||
+            if (!(context.SemanticModel.GetDeclaredSymbol(context.Node) is IMethodSymbol methodSymbol) ||
                 methodSymbol.Parameters.Length == 0 ||
                 methodSymbol.IsOverride ||
                 methodSymbol.GetInterfaceMember() != null ||
@@ -121,8 +120,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private SyntaxNode GetNextUnparenthesizedParent(SyntaxNode node)
         {
-            var expression = node as ExpressionSyntax;
-            if (expression == null)
+            if (!(node is ExpressionSyntax expression))
             {
                 return node;
             }
@@ -188,9 +186,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private ITypeSymbol HandlePropertyOrField(IdentifierNameSyntax identifier, ISymbol symbol)
         {
-            var propertySymbol = symbol as IPropertySymbol;
 
-            if (propertySymbol == null)
+            if (!(symbol is IPropertySymbol propertySymbol))
             {
                 return FindOriginatingSymbol(symbol);
             }
@@ -206,8 +203,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private ITypeSymbol HandleInvocation(IdentifierNameSyntax invokedOn, ISymbol invocationSymbol,
             SemanticModel semanticModel)
         {
-            var methodSymbol = invocationSymbol as IMethodSymbol;
-            if (methodSymbol == null)
+            if (!(invocationSymbol is IMethodSymbol methodSymbol))
             {
                 return null;
             }

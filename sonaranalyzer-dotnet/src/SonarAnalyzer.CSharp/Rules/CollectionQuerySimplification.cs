@@ -94,8 +94,7 @@ namespace SonarAnalyzer.Rules.CSharp
             const string CountName = "Count";
 
             var invocation = (InvocationExpressionSyntax)context.Node;
-            var methodSymbol = context.SemanticModel.GetSymbolInfo(invocation).Symbol as IMethodSymbol;
-            if (methodSymbol == null ||
+            if (!(context.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol) ||
                 methodSymbol.Name != CountName ||
                 invocation.ArgumentList == null ||
                 invocation.ArgumentList.Arguments.Any() ||
@@ -104,8 +103,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            var memberAccess = invocation.Expression as MemberAccessExpressionSyntax;
-            if (memberAccess == null)
+            if (!(invocation.Expression is MemberAccessExpressionSyntax memberAccess))
             {
                 return;
             }
@@ -121,8 +119,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void CheckToCollectionCalls(SyntaxNodeAnalysisContext context)
         {
             var outerInvocation = (InvocationExpressionSyntax)context.Node;
-            var outerMethodSymbol = context.SemanticModel.GetSymbolInfo(outerInvocation).Symbol as IMethodSymbol;
-            if (outerMethodSymbol == null ||
+            if (!(context.SemanticModel.GetSymbolInfo(outerInvocation).Symbol is IMethodSymbol outerMethodSymbol) ||
                 !MethodExistsOnIEnumerable(outerMethodSymbol, context.SemanticModel))
             {
                 return;
@@ -194,8 +191,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void CheckExtensionMethodsOnIEnumerable(SyntaxNodeAnalysisContext context)
         {
             var outerInvocation = (InvocationExpressionSyntax)context.Node;
-            var outerMethodSymbol = context.SemanticModel.GetSymbolInfo(outerInvocation).Symbol as IMethodSymbol;
-            if (outerMethodSymbol == null ||
+            if (!(context.SemanticModel.GetSymbolInfo(outerInvocation).Symbol is IMethodSymbol outerMethodSymbol) ||
                 !outerMethodSymbol.IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T))
             {
                 return;
@@ -207,8 +203,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            var innerMethodSymbol = context.SemanticModel.GetSymbolInfo(innerInvocation).Symbol as IMethodSymbol;
-            if (innerMethodSymbol == null ||
+            if (!(context.SemanticModel.GetSymbolInfo(innerInvocation).Symbol is IMethodSymbol innerMethodSymbol) ||
                 !innerMethodSymbol.IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T))
             {
                 return;
@@ -281,8 +276,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static Location GetReportLocation(InvocationExpressionSyntax invocation)
         {
-            var memberAccess = invocation.Expression as MemberAccessExpressionSyntax;
-            return memberAccess == null
+            return !(invocation.Expression is MemberAccessExpressionSyntax memberAccess)
                 ? invocation.Expression.GetLocation()
                 : memberAccess.Name.GetLocation();
         }
@@ -336,8 +330,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static ExpressionSyntax GetExpressionFromLambda(ExpressionSyntax expression)
         {
-            var lambda = expression as SimpleLambdaExpressionSyntax;
-            if (lambda == null)
+            if (!(expression is SimpleLambdaExpressionSyntax lambda))
             {
                 var parenthesizedLambda = expression as ParenthesizedLambdaExpressionSyntax;
                 return parenthesizedLambda?.Body as ExpressionSyntax;
@@ -352,8 +345,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return lambda.Parameter.Identifier.ValueText;
             }
 
-            var parenthesizedLambda = expression as ParenthesizedLambdaExpressionSyntax;
-            if (parenthesizedLambda == null ||
+            if (!(expression is ParenthesizedLambdaExpressionSyntax parenthesizedLambda) ||
                 parenthesizedLambda.ParameterList.Parameters.Count == 0)
             {
                 return null;
@@ -376,9 +368,8 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             var expression = arguments.First().Expression;
-            var lambdaBody = GetExpressionFromLambda(expression).RemoveParentheses() as BinaryExpressionSyntax;
             var lambdaParameter = GetLambdaParameter(expression);
-            if (lambdaBody == null ||
+            if (!(GetExpressionFromLambda(expression).RemoveParentheses() is BinaryExpressionSyntax lambdaBody) ||
                 lambdaParameter == null ||
                 !lambdaBody.IsKind(asOrIs))
             {
@@ -404,9 +395,8 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             var expression = arguments.First().Expression;
-            var castExpression = GetExpressionFromLambda(expression).RemoveParentheses() as CastExpressionSyntax;
             var lambdaParameter = GetLambdaParameter(expression);
-            if (castExpression == null ||
+            if (!(GetExpressionFromLambda(expression).RemoveParentheses() is CastExpressionSyntax castExpression) ||
                 lambdaParameter == null)
             {
                 return false;

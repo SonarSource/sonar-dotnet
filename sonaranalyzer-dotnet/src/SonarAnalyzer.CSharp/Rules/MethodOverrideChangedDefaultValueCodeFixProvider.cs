@@ -56,8 +56,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             var semanticModel = await context.Document.GetSemanticModelAsync(context.CancellationToken).ConfigureAwait(false);
             var parameterSymbol = semanticModel.GetDeclaredSymbol(parameter);
-            var methodSymbol = parameterSymbol?.ContainingSymbol as IMethodSymbol;
-            if (methodSymbol == null)
+            if (!(parameterSymbol?.ContainingSymbol is IMethodSymbol methodSymbol))
             {
                 return;
             }

@@ -47,10 +47,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
             var semanticModel = await context.Document.GetSemanticModelAsync(context.CancellationToken).ConfigureAwait(false);
             var operation = semanticModel.GetSymbolInfo(node).Symbol as IMethodSymbol;
-            var enumDeclaration = operation?.ReturnType?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax(context.CancellationToken)
-                as EnumDeclarationSyntax;
 
-            if (enumDeclaration == null)
+            if (!(operation?.ReturnType?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax(context.CancellationToken) is EnumDeclarationSyntax enumDeclaration))
             {
                 return;
             }

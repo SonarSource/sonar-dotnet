@@ -68,8 +68,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            var classDeclaration = declaration.Parent as ClassDeclarationSyntax;
-            if (classDeclaration == null)
+            if (!(declaration.Parent is ClassDeclarationSyntax classDeclaration))
             {
                 return;
             }

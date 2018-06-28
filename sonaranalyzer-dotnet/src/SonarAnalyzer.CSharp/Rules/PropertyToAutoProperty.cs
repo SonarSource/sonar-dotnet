@@ -107,15 +107,13 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             var statement = setter.Body.Statements[0] as ExpressionStatementSyntax;
-            var assignment = statement?.Expression as AssignmentExpressionSyntax;
-            if (assignment == null ||
+            if (!(statement?.Expression is AssignmentExpressionSyntax assignment) ||
                 !assignment.IsKind(SyntaxKind.SimpleAssignmentExpression))
             {
                 return false;
             }
 
-            var parameter = semanticModel.GetSymbolInfo(assignment.Right).Symbol as IParameterSymbol;
-            if (parameter == null ||
+            if (!(semanticModel.GetSymbolInfo(assignment.Right).Symbol is IParameterSymbol parameter) ||
                 parameter.Name != "value" ||
                 !parameter.IsImplicitlyDeclared)
             {
@@ -135,8 +133,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return field != null;
             }
 
-            var memberAccess = expression as MemberAccessExpressionSyntax;
-            if (memberAccess == null ||
+            if (!(expression is MemberAccessExpressionSyntax memberAccess) ||
                 !memberAccess.IsKind(SyntaxKind.SimpleMemberAccessExpression))
             {
                 field = null;
@@ -149,15 +146,13 @@ namespace SonarAnalyzer.Rules.CSharp
                 return field != null;
             }
 
-            var identifier = memberAccess.Expression as IdentifierNameSyntax;
-            if (identifier == null)
+            if (!(memberAccess.Expression is IdentifierNameSyntax identifier))
             {
                 field = null;
                 return false;
             }
 
-            var type = semanticModel.GetSymbolInfo(identifier).Symbol as INamedTypeSymbol;
-            if (type == null ||
+            if (!(semanticModel.GetSymbolInfo(identifier).Symbol is INamedTypeSymbol type) ||
                 !type.Equals(declaringType))
             {
                 field = null;
@@ -177,8 +172,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return false;
             }
 
-            var statement = getter.Body.Statements[0] as ReturnStatementSyntax;
-            if (statement == null ||
+            if (!(getter.Body.Statements[0] is ReturnStatementSyntax statement) ||
                 statement.Expression == null)
             {
                 return false;

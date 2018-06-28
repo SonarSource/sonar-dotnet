@@ -47,8 +47,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     var division = (BinaryExpressionSyntax) c.Node;
 
-                    var symbol = c.SemanticModel.GetSymbolInfo(division).Symbol as IMethodSymbol;
-                    if (symbol == null ||
+                    if (!(c.SemanticModel.GetSymbolInfo(division).Symbol is IMethodSymbol symbol) ||
                         symbol.ContainingType == null ||
                         !symbol.ContainingType.IsAny(KnownType.IntegralNumbers))
                     {
@@ -85,15 +84,13 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool TryGetTypeFromArgumentMappedToFloatType(BinaryExpressionSyntax division, SemanticModel semanticModel,
             out ITypeSymbol type)
         {
-            var argument = division.Parent as ArgumentSyntax;
-            if (argument == null)
+            if (!(division.Parent is ArgumentSyntax argument))
             {
                 type = null;
                 return false;
             }
 
-            var invocation = argument.Parent.Parent as InvocationExpressionSyntax;
-            if (invocation == null)
+            if (!(argument.Parent.Parent is InvocationExpressionSyntax invocation))
             {
                 type = null;
                 return false;

@@ -55,8 +55,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             var diagnosticSpan = diagnostic.Location.SourceSpan;
             var unary = root.FindNode(diagnosticSpan, getInnermostNodeForTie: true) as UnaryExpressionSyntax;
 
-            var isExpression = unary?.Operand as BinaryExpressionSyntax;
-            if (isExpression == null ||
+            if (!(unary?.Operand is BinaryExpressionSyntax isExpression) ||
                 !isExpression.IsKind(SyntaxKind.IsExpression))
             {
                 return TaskHelper.CompletedTask;

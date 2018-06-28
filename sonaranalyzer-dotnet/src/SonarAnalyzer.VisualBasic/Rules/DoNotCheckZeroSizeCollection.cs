@@ -52,8 +52,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
         {
             while (true)
             {
-                var conditionalAccess = RemoveParentheses(expression) as ConditionalAccessExpressionSyntax;
-                if (conditionalAccess == null)
+                if (!(RemoveParentheses(expression) is ConditionalAccessExpressionSyntax conditionalAccess))
                 {
                     break;
                 }

@@ -89,8 +89,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             foreach (var eventDeclaration in field.Declaration.Variables.Where(v => v.Initializer != null))
             {
-                var eventSymbol = context.SemanticModel.GetDeclaredSymbol(eventDeclaration) as IEventSymbol;
-                if (eventSymbol == null)
+                if (!(context.SemanticModel.GetDeclaredSymbol(eventDeclaration) is IEventSymbol eventSymbol))
                 {
                     continue;
                 }

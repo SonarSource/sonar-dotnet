@@ -45,8 +45,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         protected override IList<EnumMemberDeclarationSyntax> GetMembers(EnumStatementSyntax declaration)
         {
-            var parent = declaration.Parent as EnumBlockSyntax;
-            if (parent == null)
+            if (!(declaration.Parent is EnumBlockSyntax parent))
             {
                 return new List<EnumMemberDeclarationSyntax>();
             }

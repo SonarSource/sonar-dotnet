@@ -53,8 +53,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 c =>
                 {
                     var invocation = (InvocationExpressionSyntax)c.Node;
-                    var memberAccess = invocation.Expression as MemberAccessExpressionSyntax;
-                    if (memberAccess == null ||
+                    if (!(invocation.Expression is MemberAccessExpressionSyntax memberAccess) ||
                         !invocation.HasExactlyNArguments(1))
                     {
                         return;

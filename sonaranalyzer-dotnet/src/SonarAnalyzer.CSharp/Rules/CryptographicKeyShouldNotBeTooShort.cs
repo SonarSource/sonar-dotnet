@@ -49,8 +49,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     var objectCreation = (ObjectCreationExpressionSyntax)c.Node;
 
-                    var objectCreationSymbol = c.SemanticModel.GetSymbolInfo(objectCreation).Symbol as IMethodSymbol;
-                    if (objectCreationSymbol == null ||
+                    if (!(c.SemanticModel.GetSymbolInfo(objectCreation).Symbol is IMethodSymbol objectCreationSymbol) ||
                         !objectCreationSymbol.ContainingType.Is(KnownType.System_Security_Cryptography_RSACryptoServiceProvider))
                     {
                         return;

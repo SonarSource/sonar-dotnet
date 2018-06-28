@@ -44,8 +44,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         protected override bool IsIndexer(AccessorBlockSyntax propertyGetter)
         {
-            var propertyBlock = propertyGetter.Parent as PropertyBlockSyntax;
-            if (propertyBlock == null)
+            if (!(propertyGetter.Parent is PropertyBlockSyntax propertyBlock))
             {
                 return false;
             }

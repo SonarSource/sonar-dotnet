@@ -51,8 +51,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     var invocationExpression = (InvocationExpressionSyntax)c.Node;
 
-                    var memberAccessExpression = invocationExpression.Expression as MemberAccessExpressionSyntax;
-                    if (memberAccessExpression == null)
+                    if (!(invocationExpression.Expression is MemberAccessExpressionSyntax memberAccessExpression))
                     {
                         return;
                     }
@@ -102,9 +101,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool IsStringIdentifier(ExpressionSyntax expression, SemanticModel semanticModel)
         {
-            var identifierNameExpression = expression as IdentifierNameSyntax;
 
-            if (identifierNameExpression == null)
+            if (!(expression is IdentifierNameSyntax identifierNameExpression))
             {
                 return false;
             }

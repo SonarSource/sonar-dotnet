@@ -168,10 +168,9 @@ namespace SonarAnalyzer.Rules.CSharp
                 return true;
             }
 
-            var expressionStatement1 = statement1 as ExpressionStatementSyntax;
             var expressionStatement2 = statement2 as ExpressionStatementSyntax;
 
-            if (expressionStatement1 == null || expressionStatement2 == null)
+            if (!(statement1 is ExpressionStatementSyntax expressionStatement1) || expressionStatement2 == null)
             {
                 return false;
             }
@@ -228,8 +227,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         internal static StatementSyntax ExtractSingleStatement(StatementSyntax statement)
         {
-            var block = statement as BlockSyntax;
-            if (block == null)
+            if (!(statement is BlockSyntax block))
             {
                 return statement;
             }
@@ -256,10 +254,9 @@ namespace SonarAnalyzer.Rules.CSharp
             ExpressionSyntax comparedToNull, SemanticModel semanticModel,
             bool comparedIsNullInTrue)
         {
-            var methodCall1 = expression1 as InvocationExpressionSyntax;
             var methodCall2 = expression2 as InvocationExpressionSyntax;
 
-            if (methodCall1 == null || methodCall2 == null)
+            if (!(expression1 is InvocationExpressionSyntax methodCall1) || methodCall2 == null)
             {
                 return false;
             }
@@ -347,8 +344,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             compared = null;
             comparedIsNullInTrue = false;
-            var binary = expression as BinaryExpressionSyntax;
-            if (binary == null ||
+            if (!(expression is BinaryExpressionSyntax binary) ||
                 !EqualsOrNotEquals.Contains(binary.Kind()))
             {
                 return false;

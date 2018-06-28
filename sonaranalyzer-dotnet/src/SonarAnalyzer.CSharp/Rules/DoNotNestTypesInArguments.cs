@@ -79,8 +79,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 currentOrNestedArgument = arrayTypeSymbol.ElementType;
             }
 
-            var namedTypeSymbol = currentOrNestedArgument as INamedTypeSymbol;
-            if (namedTypeSymbol == null)
+            if (!(currentOrNestedArgument is INamedTypeSymbol namedTypeSymbol))
             {
                 return depth;
             }

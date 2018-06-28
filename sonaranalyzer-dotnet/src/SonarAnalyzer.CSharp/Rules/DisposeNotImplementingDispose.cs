@@ -128,8 +128,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            var invokedMethod = semanticModel.GetSymbolInfo(invocationExpression).Symbol as IMethodSymbol;
-            if (invokedMethod == null ||
+            if (!(semanticModel.GetSymbolInfo(invocationExpression).Symbol is IMethodSymbol invokedMethod) ||
                 invokedMethod.Name != DisposeMethodName)
             {
                 return;

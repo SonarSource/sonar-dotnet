@@ -52,8 +52,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    var calledMethod = c.SemanticModel.GetSymbolInfo(invocation).Symbol as IMethodSymbol;
-                    if (calledMethod == null ||
+                    if (!(c.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol calledMethod) ||
                         !calledMethod.IsVirtual ||
                         invocation.ArgumentList.Arguments.Count == calledMethod.Parameters.Length ||
                         !IsCallInsideOverride(invocation, calledMethod, c.SemanticModel))

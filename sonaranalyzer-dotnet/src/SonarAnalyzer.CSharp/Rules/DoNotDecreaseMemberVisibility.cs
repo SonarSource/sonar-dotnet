@@ -111,8 +111,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             private Diagnostic FindMethodIssue(MemberDeclarationSyntax memberDeclaration, IMethodSymbol methodSymbol)
             {
-                var methodDeclaration = memberDeclaration as MethodDeclarationSyntax;
-                if (methodDeclaration == null ||
+                if (!(memberDeclaration is MethodDeclarationSyntax methodDeclaration) ||
                     methodDeclaration.Modifiers.Any(SyntaxKind.NewKeyword))
                 {
                     return null;
@@ -136,8 +135,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             private Diagnostic FindPropertyIssue(MemberDeclarationSyntax memberDeclaration, IPropertySymbol propertySymbol)
             {
-                var propertyDeclaration = memberDeclaration as PropertyDeclarationSyntax;
-                if (propertyDeclaration == null ||
+                if (!(memberDeclaration is PropertyDeclarationSyntax propertyDeclaration) ||
                     propertyDeclaration.Modifiers.Any(SyntaxKind.NewKeyword))
                 {
                     return null;

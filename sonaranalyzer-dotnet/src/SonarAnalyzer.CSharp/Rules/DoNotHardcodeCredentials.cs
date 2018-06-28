@@ -117,8 +117,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private string FindBannedWords(VariableDeclaratorSyntax variableDeclarator)
         {
             var variableName = variableDeclarator?.Identifier.ValueText;
-            var literalExpression = variableDeclarator?.Initializer?.Value as LiteralExpressionSyntax;
-            if (literalExpression == null ||
+            if (!(variableDeclarator?.Initializer?.Value is LiteralExpressionSyntax literalExpression) ||
                 !literalExpression.IsKind(SyntaxKind.StringLiteralExpression))
             {
                 return null;

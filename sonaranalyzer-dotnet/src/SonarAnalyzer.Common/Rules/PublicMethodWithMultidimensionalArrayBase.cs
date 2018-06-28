@@ -44,9 +44,8 @@ namespace SonarAnalyzer.Rules.Common
                 c =>
                 {
                     var method = (TMethodSyntax)c.Node;
-                    var methodSymbol = c.SemanticModel.GetDeclaredSymbol(method) as IMethodSymbol;
 
-                    if (methodSymbol == null ||
+                    if (!(c.SemanticModel.GetDeclaredSymbol(method) is IMethodSymbol methodSymbol) ||
                         methodSymbol.GetInterfaceMember() != null ||
                         methodSymbol.GetOverriddenMember() != null ||
                         !methodSymbol.IsPubliclyAccessible() ||

@@ -195,8 +195,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 return block.Instructions.Any(i =>
                 {
-                    var invocation = i as InvocationExpressionSyntax;
-                    if (invocation == null)
+                    if (!(i is InvocationExpressionSyntax invocation))
                     {
                         return false;
                     }
@@ -229,8 +228,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             private bool MatchesAccessor(SyntaxNode node)
             {
-                var expr = node as ExpressionSyntax;
-                if (expr == null)
+                if (!(node is ExpressionSyntax expr))
                 {
                     return false;
                 }
@@ -277,8 +275,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             protected bool IsInstructionOnThisAndMatchesDeclaringSymbol(SyntaxNode node)
             {
-                var expression = node as ExpressionSyntax;
-                if (expression == null)
+                if (!(node is ExpressionSyntax expression))
                 {
                     return false;
                 }

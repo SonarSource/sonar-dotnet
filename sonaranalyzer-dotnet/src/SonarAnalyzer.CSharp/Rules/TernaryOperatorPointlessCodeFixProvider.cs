@@ -51,8 +51,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             var diagnostic = context.Diagnostics.First();
             var diagnosticSpan = diagnostic.Location.SourceSpan;
-            var conditional = root.FindNode(diagnosticSpan, getInnermostNodeForTie: true) as ConditionalExpressionSyntax;
-            if (conditional == null)
+            if (!(root.FindNode(diagnosticSpan, getInnermostNodeForTie: true) is ConditionalExpressionSyntax conditional))
             {
                 return TaskHelper.CompletedTask;
             }

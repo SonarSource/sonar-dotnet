@@ -67,8 +67,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 return false;
             }
 
-            var declarationName = node.SyntaxTree.GetRoot().FindNode(location.SourceSpan, getInnermostNodeForTie: true) as IdentifierNameSyntax;
-            if (declarationName == null)
+            if (!(node.SyntaxTree.GetRoot().FindNode(location.SourceSpan, getInnermostNodeForTie: true) is IdentifierNameSyntax declarationName))
             {
                 return false;
             }

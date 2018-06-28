@@ -73,8 +73,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                         return;
                     }
 
-                    var variableSymbol = c.SemanticModel.GetDeclaredSymbol(name) as ILocalSymbol;
-                    if (variableSymbol == null ||
+                    if (!(c.SemanticModel.GetDeclaredSymbol(name) is ILocalSymbol variableSymbol) ||
                         !(variableSymbol.Type is IArrayTypeSymbol))
                     {
                         return;
@@ -99,8 +98,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
         {
             foreach (var statement in statements)
             {
-                var assignment = statement as AssignmentStatementSyntax;
-                if (assignment == null)
+                if (!(statement is AssignmentStatementSyntax assignment))
                 {
                     yield break;
                 }

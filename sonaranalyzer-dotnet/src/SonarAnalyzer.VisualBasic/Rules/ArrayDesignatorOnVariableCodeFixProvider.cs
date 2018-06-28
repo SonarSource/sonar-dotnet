@@ -54,15 +54,13 @@ namespace SonarAnalyzer.Rules.VisualBasic
             var diagnosticSpan = diagnostic.Location.SourceSpan;
             var name = root.FindNode(diagnosticSpan) as ModifiedIdentifierSyntax;
 
-            var variableDeclarator = name?.Parent as VariableDeclaratorSyntax;
-            if (variableDeclarator == null ||
+            if (!(name?.Parent is VariableDeclaratorSyntax variableDeclarator) ||
                 variableDeclarator.Names.Count != 1)
             {
                 return TaskHelper.CompletedTask;
             }
 
-            var simpleAsClause = variableDeclarator.AsClause as SimpleAsClauseSyntax;
-            if (simpleAsClause == null)
+            if (!(variableDeclarator.AsClause is SimpleAsClauseSyntax simpleAsClause))
             {
                 return TaskHelper.CompletedTask;
             }
@@ -73,9 +71,8 @@ namespace SonarAnalyzer.Rules.VisualBasic
                     c =>
                     {
                         var type = simpleAsClause.Type.WithoutTrivia();
-                        var typeAsArrayType = type as ArrayTypeSyntax;
                         var rankSpecifiers = name.ArrayRankSpecifiers.Select(rank => rank.WithoutTrivia());
-                        var newType = typeAsArrayType == null
+                        var newType = !(type is ArrayTypeSyntax typeAsArrayType)
                             ? SyntaxFactory.ArrayType(
                                         type,
                                         SyntaxFactory.List(rankSpecifiers))

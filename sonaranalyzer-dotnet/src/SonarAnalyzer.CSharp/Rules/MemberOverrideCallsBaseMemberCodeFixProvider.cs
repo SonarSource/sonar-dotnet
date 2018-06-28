@@ -51,8 +51,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var diagnostic = context.Diagnostics.First();
             var diagnosticSpan = diagnostic.Location.SourceSpan;
 
-            var member = root.FindNode(diagnosticSpan) as MemberDeclarationSyntax;
-            if (member == null)
+            if (!(root.FindNode(diagnosticSpan) is MemberDeclarationSyntax member))
             {
                 return TaskHelper.CompletedTask;
             }

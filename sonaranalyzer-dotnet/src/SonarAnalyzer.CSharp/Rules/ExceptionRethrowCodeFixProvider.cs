@@ -51,9 +51,8 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             var diagnostic = context.Diagnostics.First();
             var diagnosticSpan = diagnostic.Location.SourceSpan;
-            var throwStatement = root.FindNode(diagnosticSpan) as ThrowStatementSyntax;
 
-            if (throwStatement == null)
+            if (!(root.FindNode(diagnosticSpan) is ThrowStatementSyntax throwStatement))
             {
                 return TaskHelper.CompletedTask;
             }
