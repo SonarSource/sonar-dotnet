@@ -37,10 +37,10 @@ namespace SonarAnalyzer.UnitTest.Security.Framework
         {
             (var method, var semanticModel) = TestHelper.Compile(code, Verifier.SystemWebMvcAssembly).GetMethod(methodName);
 
-            var builder = new UniversalControlFlowGraphBuilder();
+            var builder = new UcfgBuilder(semanticModel);
 
             var cfg = CSharpControlFlowGraph.Create(method.Body, semanticModel);
-            var ucfg = builder.Build(semanticModel, method, semanticModel.GetDeclaredSymbol(method), cfg);
+            var ucfg = builder.Build(method, semanticModel.GetDeclaredSymbol(method), cfg);
 
             //var serializedCfg = CfgSerializer.Serialize(methodName, cfg);
             //var serualizedUcfg = UcfgSerializer.Serialize(ucfg);
@@ -57,10 +57,10 @@ namespace SonarAnalyzer.UnitTest.Security.Framework
                 .OfType<ConstructorDeclarationSyntax>()
                 .First(m => m.Identifier.ValueText == ctorName);
 
-            var builder = new UniversalControlFlowGraphBuilder();
+            var builder = new UcfgBuilder(semanticModel);
 
             var cfg = CSharpControlFlowGraph.Create(ctor.Body, semanticModel);
-            var ucfg = builder.Build(semanticModel, ctor, semanticModel.GetDeclaredSymbol(ctor), cfg);
+            var ucfg = builder.Build(ctor, semanticModel.GetDeclaredSymbol(ctor), cfg);
 
             //var serializedCfg = CfgSerializer.Serialize(methodName, cfg);
             //var serualizedUcfg = UcfgSerializer.Serialize(ucfg);

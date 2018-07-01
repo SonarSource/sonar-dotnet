@@ -18,29 +18,29 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using SonarAnalyzer.Protobuf.Ucfg;
+using Microsoft.CodeAnalysis;
 
 namespace SonarAnalyzer.ControlFlowGraph.CSharp
 {
-    internal static class UcfgBuiltIn
+    public struct UcfgMethod
     {
         /// <summary>
         /// The method ID that the Security Engine uses for assignments. It accepts one argument
         /// and returns one value. For example, `a = x` generates `a = __id(x)`.
         /// </summary>
-        internal static readonly string Assignment = "__id";
+        public static readonly UcfgMethod Assignment = Create("__id");
 
         /// <summary>
         /// The method ID that the Security Engine uses for concatenations. It accepts two
         /// arguments and returns one value. For example, `x + y` generates `%0 = __concat(x, y)`
         /// </summary>
-        internal static readonly string Concatenation = "__concat";
+        public static readonly UcfgMethod Concatenation = Create("__concat");
 
         /// <summary>
         /// The method ID used by the UCFG Builder to represent a method that has no symbol.
         /// The instructions with this method ID are removed from UCFG.
         /// </summary>
-        internal static readonly string Unknown = "__unknown";
+        public static readonly UcfgMethod Unknown = Create("__unknown");
 
         /// <summary>
         /// The method ID that the security engine uses for attributes/annotations. It accepts
@@ -56,7 +56,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
         /// s = __annotation(%0)
         /// ...
         /// </example>
-        internal static readonly string Annotation = "__annotation";
+        public static readonly UcfgMethod Annotation = Create("__annotation");
 
         /// <summary>
         /// The method ID that the security engine uses for known tainted entrypoints. All method
@@ -68,16 +68,38 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
         /// Instructions:
         /// %0 = __entrypoint(s, p)
         /// </example>
-        internal static readonly string EntryPoint = "__entrypoint";
+        public static readonly UcfgMethod EntryPoint = Create("__entrypoint");
 
-        /// <summary>
-        /// The string constant representation in the Sonar Security engine (Java part). When
-        /// an instruction receives or returns a type that is not string we use this instead
-        /// of a variable.
-        /// </summary>
-        internal static readonly Expression ConstantExpression = new Expression
+        private readonly string id;
+
+        private UcfgMethod(string id)
         {
-            Const = new Constant { Value = "\"\"" }
-        };
+            this.id = id;
+        }
+
+        public override string ToString() =>
+            id;
+
+        // TODO: temporary, to reduce merge conflicts in tests
+        public static implicit operator string(UcfgMethod method) =>
+            method.ToString();
+
+        public static UcfgMethod Create(IMethodSymbol methodSymbol)
+        {
+            switch (methodSymbol?.MethodKind)
+            {
+                case MethodKind.ExplicitInterfaceImplementation:
+                    return Create(methodSymbol.ConstructedFrom.ToDisplayString());
+
+                case MethodKind.ReducedExtension:
+                    return Create(methodSymbol.ReducedFrom.ToDisplayString());
+
+                default:
+                    return Create(methodSymbol?.OriginalDefinition?.ToDisplayString());
+            }
+        }
+
+        private static UcfgMethod Create(string id) =>
+            id == null ? Unknown : new UcfgMethod(id);
     }
 }
