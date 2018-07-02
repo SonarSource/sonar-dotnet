@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
@@ -28,6 +29,10 @@ using SonarAnalyzer.Protobuf.Ucfg;
 
 namespace SonarAnalyzer.ControlFlowGraph.CSharp
 {
+    /// <summary>
+    /// High level UCFG Instruction factory that controls UcfgObjectFactory to create objects
+    /// depending on the provided SyntaxNodes.
+    /// </summary>
     public class UcfgInstructionFactory
     {
         private readonly SemanticModel semanticModel;
@@ -68,6 +73,13 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                     return DefaultCreate(syntaxNode);
             }
         }
+
+        public IEnumerable<Instruction> CreateAttributeInstructions(AttributeSyntax attributeSyntax, IMethodSymbol attributeCtor, string parameterName) =>
+            new[]
+            {
+                objectFactory.CreateMethodCall(attributeSyntax, UcfgMethod.Create(attributeCtor)),
+                objectFactory.CreateParameterAnnotation(parameterName, attributeSyntax),
+            };
 
         private Instruction DefaultCreate(SyntaxNode node) =>
             objectFactory.CreateConstant(node);

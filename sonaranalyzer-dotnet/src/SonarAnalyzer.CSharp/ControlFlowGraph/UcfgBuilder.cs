@@ -101,26 +101,16 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
 
             foreach (var parameter in methodSymbol.Parameters)
             {
-                ucfgBlock.Instructions.AddRange(CreateParameterInstructions(parameter));
+                var parameterInstructions = parameter.GetAttributes()
+                    .Where(a => a.AttributeConstructor != null)
+                    .SelectMany(a => instructionFactory.CreateAttributeInstructions(
+                        (AttributeSyntax)a.ApplicationSyntaxReference.GetSyntax(),
+                        a.AttributeConstructor,
+                        parameter.Name));
+                ucfgBlock.Instructions.AddRange(parameterInstructions);
             }
 
             return ucfgBlock;
         }
-
-        private IEnumerable<Instruction> CreateParameterInstructions(IParameterSymbol parameter) =>
-            parameter.GetAttributes()
-                .Where(a => a.AttributeConstructor != null)
-                .SelectMany(a =>
-                    CreateAttributeInstructions(
-                        a.ApplicationSyntaxReference.GetSyntax(),
-                        UcfgMethod.Create(a.AttributeConstructor),
-                        parameter.Name));
-
-        private IEnumerable<Instruction> CreateAttributeInstructions(SyntaxNode attributeSyntax, UcfgMethod method, string parameterName) =>
-            new[]
-            {
-                objectFactory.CreateMethodCall(attributeSyntax, method),
-                objectFactory.CreateParameterAnnotation(parameterName, attributeSyntax),
-            };
     }
 }

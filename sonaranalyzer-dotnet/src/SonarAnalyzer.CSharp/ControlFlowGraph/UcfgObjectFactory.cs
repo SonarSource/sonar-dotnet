@@ -27,6 +27,10 @@ using UcfgLocation = SonarAnalyzer.Protobuf.Ucfg.Location;
 
 namespace SonarAnalyzer.ControlFlowGraph.CSharp
 {
+    /// <summary>
+    /// Low level UCFG object (e.g. protobuf generated classes) factory. The SyntaxNode is passed for location and
+    /// expression mapping purposes. Hides the SyntaxNode/Expression mapping from the rest of the classes.
+    /// </summary>
     public class UcfgObjectFactory
     {
         /// <summary>
