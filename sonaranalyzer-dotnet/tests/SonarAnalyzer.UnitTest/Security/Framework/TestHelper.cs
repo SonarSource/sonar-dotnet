@@ -19,7 +19,11 @@
  */
 
 extern alias csharp;
+
+using System;
+using System.Collections.Generic;
 using System.Linq;
+using FluentAssertions;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -87,6 +91,15 @@ namespace SonarAnalyzer.UnitTest.Security
             var (syntaxTree, semantcModel) = tuple;
 
             return (syntaxTree.GetProperty(name), semantcModel);
+        }
+
+        public static void AssertCollection<T>(IList<T> items, params Action<T>[] asserts)
+        {
+            items.Should().HaveSameCount(asserts);
+            for (var i = 0; i < items.Count; i++)
+            {
+                asserts[i](items[i]);
+            }
         }
     }
 }

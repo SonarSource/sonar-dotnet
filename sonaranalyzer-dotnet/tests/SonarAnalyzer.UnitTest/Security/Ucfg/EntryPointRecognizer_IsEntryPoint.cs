@@ -27,7 +27,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace SonarAnalyzer.UnitTest.Security.Ucfg
 {
     [TestClass]
-    public class EntryPointRecognizer_IsEntryPoint : UcfgBuilderTestBase
+    public class EntryPointRecognizer_IsEntryPoint
     {
         [TestMethod]
         public void Public_Controller_Methods_Are_EntryPoints()

@@ -21,12 +21,13 @@
 extern alias csharp;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.UnitTest.Security.Framework;
 using ULocation = SonarAnalyzer.Protobuf.Ucfg.Location;
 
 namespace SonarAnalyzer.UnitTest.Security.Ucfg
 {
     [TestClass]
-    public class UcfgBuilder_GetLocation : UcfgBuilderTestBase
+    public class UcfgBuilder_GetLocation
     {
         [TestMethod]
         public void GetLocation_Returns_1Based_Line_0Based_LineOffset()
@@ -42,7 +43,7 @@ public class Class1                 // 2
 //23456789012345678901234567890     // SQ column offsets
     }
 }";
-            var ucfg = GetUcfgForMethod(code, "Foo");
+            var ucfg = UcfgVerifier.GetUcfgForMethod(code, "Foo");
 
             var block = ucfg.BasicBlocks[0];
 
@@ -72,7 +73,7 @@ s.Trim(                             // 7 x = __id(%0)           --> SL = 6, SLO 
 //23456789012345678901234567890     // SQ column offsets
     }
 }";
-            var ucfg = GetUcfgForMethod(code, "Foo");
+            var ucfg = UcfgVerifier.GetUcfgForMethod(code, "Foo");
 
             var block = ucfg.BasicBlocks[0];
 
