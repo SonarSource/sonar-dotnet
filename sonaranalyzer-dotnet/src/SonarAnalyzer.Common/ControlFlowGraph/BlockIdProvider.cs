@@ -21,14 +21,14 @@
 using System.Collections.Generic;
 using SonarAnalyzer.Helpers;
 
-namespace SonarAnalyzer.ControlFlowGraph.CSharp
+namespace SonarAnalyzer.ControlFlowGraph
 {
-    public  class UcfgBlockIdProvider
+    public class BlockIdProvider
     {
-        private readonly Dictionary<Block, string> map = new Dictionary<Block, string>();
+        private readonly Dictionary<Block, string> cache = new Dictionary<Block, string>();
         private int counter;
 
-        public string Get(Block cfgBlock) =>
-            map.GetOrAdd(cfgBlock, b => $"{counter++}");
+        public string GetOrAdd(Block cfgBlock) =>
+            cache.GetOrAdd(cfgBlock, b => $"{counter++}");
     }
 }

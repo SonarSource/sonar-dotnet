@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -26,91 +25,42 @@ using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Protobuf.Ucfg;
 
 namespace SonarAnalyzer.ControlFlowGraph.CSharp
-{
+{    
     public class UcfgBuilder
-    {
-        private readonly UcfgObjectFactory objectFactory;
-        private readonly UcfgBlockIdProvider blockIdProvider;
-        private readonly UcfgInstructionFactory instructionFactory;
-
+    {        
+        private readonly BlockIdProvider blockIdProvider = new BlockIdProvider();
+        private readonly UcfgBlockBuilder blockBuilder;
+        
         public UcfgBuilder(SemanticModel semanticModel)
         {
-            objectFactory = new UcfgObjectFactory();
-            blockIdProvider = new UcfgBlockIdProvider();
-            instructionFactory = new UcfgInstructionFactory(semanticModel, objectFactory);
+            this.blockBuilder = new UcfgBlockBuilder(semanticModel, blockIdProvider);
         }
 
         public UCFG Build(SyntaxNode syntaxNode, IMethodSymbol methodSymbol, IControlFlowGraph cfg)
         {
-            var ucfg = objectFactory.CreateUcfg(syntaxNode, UcfgMethod.Create(methodSymbol));
+            var ucfg = new UCFG
+            {
+                Location = syntaxNode.GetUcfgLocation(),
+                MethodId = UcfgMethod.Create(methodSymbol),
+            };
 
-            ucfg.BasicBlocks.AddRange(cfg.Blocks.Select(CreateBasicBlock));
+            ucfg.BasicBlocks.AddRange(cfg.Blocks.Select(blockBuilder.CreateBasicBlock));
 
             ucfg.Parameters.AddRange(methodSymbol.GetParameters().Select(p => p.Name));
 
             if (syntaxNode is BaseMethodDeclarationSyntax methodDeclaration &&
                 TaintAnalysisEntryPointDetector.IsEntryPoint(methodSymbol))
             {
-                var entryPointBlock = CreateEntryPointBlock(methodDeclaration, methodSymbol, blockIdProvider.Get(cfg.EntryBlock));
+                var entryPointBlock = blockBuilder.CreateEntryPointBlock(methodDeclaration, methodSymbol, blockIdProvider.GetOrAdd(cfg.EntryBlock));
                 ucfg.BasicBlocks.Add(entryPointBlock);
                 ucfg.Entries.Add(entryPointBlock.Id);
             }
             else
             {
-                ucfg.Entries.Add(blockIdProvider.Get(cfg.EntryBlock));
+                ucfg.Entries.Add(blockIdProvider.GetOrAdd(cfg.EntryBlock));
             }
 
             return ucfg;
-        }
-
-        private BasicBlock CreateBasicBlock(Block block)
-        {
-            var ucfgBlock = objectFactory.CreateUcfgBlock(blockIdProvider.Get(block));
-
-            ucfgBlock.Instructions.AddRange(
-                block.Instructions.Select(instructionFactory.Create).WhereNotNull());
-
-            if (block is JumpBlock jumpBlock &&
-                jumpBlock.JumpNode is ReturnStatementSyntax returnStatement)
-            {
-                ucfgBlock.Ret = objectFactory.CreateReturnExpression(returnStatement, returnStatement.Expression);
-            }
-
-            if (block is ExitBlock exit)
-            {
-                ucfgBlock.Ret = objectFactory.CreateReturnExpression();
-            }
-
-            if (ucfgBlock.TerminatorCase == BasicBlock.TerminatorOneofCase.None)
-            {
-                // No return was created from JumpBlock or ExitBlock, wire up the successor blocks
-                ucfgBlock.Jump = objectFactory.CreateJump(block.SuccessorBlocks.Select(blockIdProvider.Get).ToArray());
-            }
-
-            return ucfgBlock;
-        }
-
-        private BasicBlock CreateEntryPointBlock(BaseMethodDeclarationSyntax methodDeclaration,
-            IMethodSymbol methodSymbol, string currentEntryBlockId)
-        {
-            var ucfgBlock = objectFactory.CreateUcfgBlock(blockIdProvider.Get(new TemporaryBlock()));
-
-            ucfgBlock.Jump = objectFactory.CreateJump(currentEntryBlockId);
-
-            ucfgBlock.Instructions.Add(instructionFactory.Create(methodDeclaration));
-
-            foreach (var parameter in methodSymbol.Parameters)
-            {
-                var parameterInstructions = parameter.GetAttributes()
-                    .Where(a => a.AttributeConstructor != null)
-                    .SelectMany(a => instructionFactory.CreateAttributeInstructions(
-                        (AttributeSyntax)a.ApplicationSyntaxReference.GetSyntax(),
-                        a.AttributeConstructor,
-                        parameter.Name));
-                ucfgBlock.Instructions.AddRange(parameterInstructions);
-            }
-
-            return ucfgBlock;
-        }
+        }        
     }
 }

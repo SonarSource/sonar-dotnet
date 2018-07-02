@@ -19,7 +19,6 @@
 * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-using csharp::SonarAnalyzer.ControlFlowGraph.CSharp;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.ControlFlowGraph;
@@ -29,12 +28,12 @@ namespace SonarAnalyzer.Helpers.UnitTest
     [TestClass]
     public class BlockIdMapTest
     {
-        private UcfgBlockIdProvider blockId;
+        private BlockIdProvider blockId;
 
         [TestInitialize]
         public void TestInitialize()
         {
-            blockId = new UcfgBlockIdProvider();
+            blockId = new BlockIdProvider();
         }
 
         [TestMethod]
@@ -42,17 +41,17 @@ namespace SonarAnalyzer.Helpers.UnitTest
         {
             var block = new TemporaryBlock();
 
-            blockId.Get(block).Should().Be("0");
-            blockId.Get(block).Should().Be("0");
-            blockId.Get(block).Should().Be("0");
+            blockId.GetOrAdd(block).Should().Be("0");
+            blockId.GetOrAdd(block).Should().Be("0");
+            blockId.GetOrAdd(block).Should().Be("0");
         }
 
         [TestMethod]
         public void Get_Returns_Different_Id_For_Different_Block()
         {
-            var id1 = blockId.Get(new TemporaryBlock());
-            var id2 = blockId.Get(new TemporaryBlock());
-            var id3 = blockId.Get(new TemporaryBlock());
+            var id1 = blockId.GetOrAdd(new TemporaryBlock());
+            var id2 = blockId.GetOrAdd(new TemporaryBlock());
+            var id3 = blockId.GetOrAdd(new TemporaryBlock());
 
             id1.Should().Be("0");
             id2.Should().Be("1");
