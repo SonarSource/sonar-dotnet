@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -100,8 +101,21 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                 }
             }
 
-            private string SerializeInstruction(Instruction instruction) =>
-                $"{instruction.Variable} {instruction.MethodId} {string.Join(",", instruction.Args.Select(SerializeExpression))}";
+            private string SerializeInstruction(Instruction instruction)
+            {
+                switch (instruction.InstrCase)
+                {
+                    case Instruction.InstrOneofCase.Assigncall:
+                        return $"{instruction.Assigncall.Variable} {instruction.Assigncall.MethodId} " +
+                            $"{string.Join(",", instruction.Assigncall.Args.Select(SerializeExpression))}";
+
+                    case Instruction.InstrOneofCase.NewObject:
+                        return $"{instruction.NewObject.Variable} {instruction.NewObject.Type}";
+
+                    default:
+                        throw new ArgumentOutOfRangeException(nameof(instruction));
+                }
+            }
 
             private string SerializeExpression(Expression expression) =>
                 expression.ExprCase == Expression.ExprOneofCase.Const

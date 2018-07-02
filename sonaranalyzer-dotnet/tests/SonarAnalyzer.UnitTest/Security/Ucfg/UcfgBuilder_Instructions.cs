@@ -19,14 +19,8 @@
  */
 
 extern alias csharp;
-using System.Linq;
-using csharp::SonarAnalyzer.ControlFlowGraph.CSharp;
 using FluentAssertions;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SonarAnalyzer.Protobuf.Ucfg;
 using SonarAnalyzer.UnitTest.Security.Framework;
 
 namespace SonarAnalyzer.UnitTest.Security.Ucfg
@@ -440,9 +434,9 @@ public class Class1
 }";
             var ucfg = UcfgVerifier.GetUcfgForMethod(code, "Foo");
 
-            var a = ucfg.BasicBlocks[0].Instructions[0].Args[0];
-            var b = ucfg.BasicBlocks[0].Instructions[1].Args[0];
-            var c = ucfg.BasicBlocks[0].Instructions[2].Args[0];
+            var a = ucfg.BasicBlocks[0].Instructions[0].Assigncall.Args[0];
+            var b = ucfg.BasicBlocks[0].Instructions[1].Assigncall.Args[0];
+            var c = ucfg.BasicBlocks[0].Instructions[2].Assigncall.Args[0];
 
             // The constant expressions share the same instance of the Const value
             // for performance and simplicity. The protobuf serializer will deserialize
@@ -468,38 +462,6 @@ public class Foo
     }
 }";
             UcfgVerifier.GetUcfgForMethod(code, "Bar");
-        }
-
-        private static void ValidateInstruction(Instruction instruction, string methodId, string variable, params string[] args)
-        {
-            instruction.MethodId.Should().Be(methodId);
-            instruction.Variable.Should().Be(variable);
-            instruction.Location.Should().NotBeNull();
-            if (args.Length > 0)
-            {
-                instruction.Args.Select(x => x.Var?.Name ?? x.Const?.Value).ShouldBeEquivalentTo(args, o => o.WithStrictOrdering());
-            }
-            else
-            {
-                instruction.Args.Should().BeEmpty();
-            }
-        }
-
-        private static UCFG CreateUcfgForConstructor(string code, string name)
-        {
-            var (syntaxTree, semanticModel) = TestHelper.Compile(code, Verifier.SystemWebMvcAssembly);
-
-            var ctor = syntaxTree.GetRoot()
-                .DescendantNodes()
-                .OfType<ConstructorDeclarationSyntax>()
-                .First(m => m.Identifier.ValueText == name);
-
-            var builder = new UcfgBuilder(semanticModel);
-
-            var ucfg = builder.Build(ctor,
-                semanticModel.GetDeclaredSymbol(ctor),
-                CSharpControlFlowGraph.Create(ctor.Body, semanticModel));
-            return ucfg;
         }
     }
 }
