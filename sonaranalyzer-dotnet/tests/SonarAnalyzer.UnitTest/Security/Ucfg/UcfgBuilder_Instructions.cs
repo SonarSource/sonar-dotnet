@@ -451,6 +451,25 @@ public class Class1
             a.Should().Be(c);
         }
 
+        [TestMethod]
+        public void Regression_SyntaxNode_Not_In_CFG()
+        {
+            const string code = @"
+using System;
+
+public class Foo
+{
+    public void Bar(bool b)
+    {
+        // The ternary operator is not walked because it is a Jump node of a block
+        // that's why when we create instruction for the variable declarator we
+        // get NRE for the assignment argument.
+        var s = b ? ""s1"" : ""s2"";
+    }
+}";
+            UcfgVerifier.GetUcfgForMethod(code, "Bar");
+        }
+
         private static void ValidateInstruction(Instruction instruction, string methodId, string variable, params string[] args)
         {
             instruction.Assigncall.MethodId.Should().Be(methodId);

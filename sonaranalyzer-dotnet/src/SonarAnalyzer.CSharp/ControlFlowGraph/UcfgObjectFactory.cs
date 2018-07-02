@@ -106,7 +106,12 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             GetMappedExpression(syntaxNode).Var != null;
 
         private Expression GetMappedExpression(SyntaxNode syntaxNode) =>
-            nodeExpressionMap.GetValueOrDefault(syntaxNode.RemoveParentheses());
+            nodeExpressionMap.GetValueOrDefault(syntaxNode.RemoveParentheses())
+            // In some cases the CFG does not contain all syntax nodes that were used in
+            // an expression, for example when ternary operator is passed as an argument.
+            // This could potentially be improved, but for the time being the constant
+            // expression fallback will do what we used to do before.
+            ?? ConstantExpression;
 
         private Instruction CreateInstruction(SyntaxNode syntaxNode, UcfgMethod method, string returnVariable,
             params SyntaxNode[] arguments)
