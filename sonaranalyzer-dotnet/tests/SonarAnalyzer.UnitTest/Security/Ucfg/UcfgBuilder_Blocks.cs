@@ -22,11 +22,12 @@ extern alias csharp;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Protobuf.Ucfg;
+using SonarAnalyzer.UnitTest.Security.Framework;
 
 namespace SonarAnalyzer.UnitTest.Security.Ucfg
 {
     [TestClass]
-    public class UcfgBuilder_Blocks : UcfgBuilderTestBase
+    public class UcfgBuilder_Blocks
     {
         private const string ConstValue = "\"\"";
 
@@ -43,11 +44,11 @@ public class Class1
                                     // Exit                     | Block#1(Ret)
     }
 }";
-            var ucfg = GetUcfgForMethod(code, "Foo");
+            var ucfg = UcfgVerifier.GetUcfgForMethod(code, "Foo");
 
             ucfg.Entries.Should().BeEquivalentTo(new[] { "0" });
 
-            AssertCollection(ucfg.BasicBlocks,
+            TestHelper.AssertCollection(ucfg.BasicBlocks,
                 b => ValidateJmpBlock(b, expectedId: "0", expectedJumps: new[] { "1" }),
                 b => ValidateRetBlock(b, expectedId: "1", expectedReturnExpression: ConstValue)
                 );
@@ -67,11 +68,11 @@ public class Class1
                                     // Exit                     | Block#2(Ret)
     }
 }";
-            var ucfg = GetUcfgForMethod(code, "Foo");
+            var ucfg = UcfgVerifier.GetUcfgForMethod(code, "Foo");
 
             ucfg.Entries.Should().BeEquivalentTo(new[] { "0" });
 
-            AssertCollection(ucfg.BasicBlocks,
+            TestHelper.AssertCollection(ucfg.BasicBlocks,
                 b => ValidateJmpBlock(b, expectedId: "0", expectedJumps: new[] { "1", "2" }),
                 b => ValidateRetBlock(b, expectedId: "1", expectedReturnExpression: ConstValue),
                 b => ValidateRetBlock(b, expectedId: "2", expectedReturnExpression: ConstValue)
@@ -93,11 +94,11 @@ public class Class1
                                     // Exit                     | Block#3(Ret)
     }
 }";
-            var ucfg = GetUcfgForMethod(code, "Foo");
+            var ucfg = UcfgVerifier.GetUcfgForMethod(code, "Foo");
 
             ucfg.Entries.Should().BeEquivalentTo(new[] { "0" });
 
-            AssertCollection(ucfg.BasicBlocks,
+            TestHelper.AssertCollection(ucfg.BasicBlocks,
                 b => ValidateJmpBlock(b, expectedId: "0", expectedJumps: new[] { "1", "2" }),
                 b => ValidateRetBlock(b, expectedId: "1", expectedReturnExpression: ConstValue),
                 b => ValidateJmpBlock(b, expectedId: "2", expectedJumps: "3"),
@@ -121,11 +122,11 @@ public class Class1
                                     // Exit                     | Block#3(Ret:Const) // ignored when deserializing
     }
 }";
-            var ucfg = GetUcfgForMethod(code, "Foo");
+            var ucfg = UcfgVerifier.GetUcfgForMethod(code, "Foo");
 
             ucfg.Entries.Should().BeEquivalentTo(new[] { "0" });
 
-            AssertCollection(ucfg.BasicBlocks,
+            TestHelper.AssertCollection(ucfg.BasicBlocks,
                 b => ValidateJmpBlock(b, expectedId: "0", expectedJumps: new[] { "1", "2" }),
                 b => ValidateRetBlock(b, expectedId: "1", expectedReturnExpression: "s"),
                 b => ValidateRetBlock(b, expectedId: "2", expectedReturnExpression: "s"),
@@ -144,11 +145,11 @@ public class Class1
                         // Exit                     | Block#1(Ret:Const)// ignored when deserializing
     }
 }";
-            var ucfg = GetUcfgForMethod(code, "Foo");
+            var ucfg = UcfgVerifier.GetUcfgForMethod(code, "Foo");
 
             ucfg.Entries.Should().BeEquivalentTo(new[] { "0" });
 
-            AssertCollection(ucfg.BasicBlocks,
+            TestHelper.AssertCollection(ucfg.BasicBlocks,
                 b => ValidateRetBlock(b, expectedId: "0", expectedReturnExpression: "s"),
                 b => ValidateRetBlock(b, expectedId: "1", expectedReturnExpression: ConstValue));
         }
@@ -168,11 +169,11 @@ public class Class1
         return s;                       // Jump(Exit)           |   Basic#2(Ret:s)
     }                                   // Exit                 |   Basic#3(Ret:Const)
 }";
-            var ucfg = GetUcfgForMethod(code, "Foo");
+            var ucfg = UcfgVerifier.GetUcfgForMethod(code, "Foo");
 
             ucfg.Entries.Should().BeEquivalentTo(new[] { "0" });
 
-            AssertCollection(ucfg.BasicBlocks,
+            TestHelper.AssertCollection(ucfg.BasicBlocks,
                 b => ValidateJmpBlock(b, expectedId: "0", expectedJumps: new[] { "1", "2" }),
                 b => ValidateJmpBlock(b, expectedId: "1", expectedJumps: "3"),
                 b => ValidateRetBlock(b, expectedId: "2", expectedReturnExpression: "s"),
@@ -194,9 +195,9 @@ public class Class1
                                     // Exit                     | Basic#2(Ret:Const)
     }
 }";
-            var ucfg = GetUcfgForMethod(code, "Foo");
+            var ucfg = UcfgVerifier.GetUcfgForMethod(code, "Foo");
 
-            AssertCollection(ucfg.BasicBlocks,
+            TestHelper.AssertCollection(ucfg.BasicBlocks,
                 b => ValidateJmpBlock(b, expectedId: "0", expectedJumps: new[] { "1" }),
                 b => ValidateJmpBlock(b, expectedId: "1", expectedJumps: new[] { "2" }),
                 b => ValidateRetBlock(b, expectedId: "2", expectedReturnExpression: ConstValue)
@@ -220,9 +221,9 @@ public class Class1
         }
     }                           // Exit                         |   Basic#3(Ret)
 }";
-            var ucfg = GetUcfgForMethod(code, "Foo");
+            var ucfg = UcfgVerifier.GetUcfgForMethod(code, "Foo");
 
-            AssertCollection(ucfg.BasicBlocks,
+            TestHelper.AssertCollection(ucfg.BasicBlocks,
                 b => ValidateJmpBlock(b, expectedId: "0", expectedJumps: new[] { "1", "2", "3" }),
                 b => ValidateJmpBlock(b, expectedId: "2", expectedJumps: new[] { "3" }),
                 b => ValidateJmpBlock(b, expectedId: "1", expectedJumps: new[] { "2" }),
@@ -244,8 +245,8 @@ public class Class1
         }
     }                                   // Exit                             |   Basic#2(Ret)
 }";
-            var ucfg = GetUcfgForMethod(code, "Foo");
-            AssertCollection(ucfg.BasicBlocks,
+            var ucfg = UcfgVerifier.GetUcfgForMethod(code, "Foo");
+            TestHelper.AssertCollection(ucfg.BasicBlocks,
                 b => ValidateJmpBlock(b, expectedId: "0", expectedJumps: new[] { "1" }),
                 b => ValidateJmpBlock(b, expectedId: "1", expectedJumps: new[] { "1", "2" }),
                 b => ValidateRetBlock(b, expectedId: "2", expectedReturnExpression: ConstValue)
@@ -266,8 +267,8 @@ public class Class1
         }
     }                                               // Exit                             |   Basic#3(Ret)
 }";
-            var ucfg = GetUcfgForMethod(code, "Foo");
-            AssertCollection(ucfg.BasicBlocks,
+            var ucfg = UcfgVerifier.GetUcfgForMethod(code, "Foo");
+            TestHelper.AssertCollection(ucfg.BasicBlocks,
                 b => ValidateJmpBlock(b, expectedId: "0", expectedJumps: new[] { "1", }),
                 b => ValidateJmpBlock(b, expectedId: "1", expectedJumps: new[] { "2", "3" }),
                 b => ValidateJmpBlock(b, expectedId: "2", expectedJumps: new[] { "1" }),
@@ -288,9 +289,9 @@ public class Class1
         }
     }                   // Exit             | Basic#1(Ret)
 }";
-            var ucfg = GetUcfgForMethod(code, "Foo");
+            var ucfg = UcfgVerifier.GetUcfgForMethod(code, "Foo");
 
-            AssertCollection(ucfg.BasicBlocks,
+            TestHelper.AssertCollection(ucfg.BasicBlocks,
                 b => ValidateJmpBlock(b, expectedId: "0", expectedJumps: new[] { "1" }),
                 b => ValidateRetBlock(b, expectedId: "1", expectedReturnExpression: ConstValue)
                 );
@@ -307,10 +308,10 @@ public class Class1 : Controller
     {                   //                  | Basic#1(Jump:#0) - contains entrypoint instruction and attributes
     }                   // Exit             | Basic#0(Ret)
 }";
-            var ucfg = GetUcfgForMethod(code, "Foo");
+            var ucfg = UcfgVerifier.GetUcfgForMethod(code, "Foo");
 
             ucfg.Entries.Should().BeEquivalentTo(new[] { "1" });
-            AssertCollection(ucfg.BasicBlocks,
+            TestHelper.AssertCollection(ucfg.BasicBlocks,
                 b => ValidateRetBlock(b, expectedId: "0", expectedReturnExpression: ConstValue), // block from cfg
                 b => ValidateJmpBlock(b, expectedId: "1", expectedJumps: new[] { "0" }) // fake entrypoint block
                 );
