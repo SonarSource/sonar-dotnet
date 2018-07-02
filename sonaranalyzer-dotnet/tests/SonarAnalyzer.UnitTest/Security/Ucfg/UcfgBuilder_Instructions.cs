@@ -49,10 +49,10 @@ namespace Namespace
             a = s;                  // a := __id [ s ]
             a = ""boo""             // a := __id [ const ]
 
-            var x = new string[5];
+            var x = new string[5];  // x := __id [ const ]
 
             int i;
-            i = 5;                  // ignored
+            i = 5;                  // i := __id [ const ]
             field = s;              // ignored
         }
     }
@@ -76,8 +76,10 @@ namespace Namespace
                                     // b := __id [ c ]
                                     // a := __id [ b ]
 
-            int x, y, x;
-            x = y = z = 5;          // ignored
+            int x, y, z;
+            x = y = z = 5;          // z := __id [ const ]
+                                    // y := __id [ z ]
+                                    // x := __id [ y ]
         }
     }
 }";
@@ -119,7 +121,7 @@ namespace Namespace
         public void Foo()
         {
             var x = Bar<string>.Value;  // x := __id [ const ]
-            var y = Bar<int>.Value;     // ignored
+            var y = Bar<int>.Value;     // y := __id [ const ]
         }
     }
     public class Bar<T>
@@ -154,17 +156,18 @@ namespace Namespace
                                 // %3 := Namespace.Class1.Property.set [ %2 ]
 
             Foo(Property);      // %4 := Namespace.Class1.Property.get [  ]
-                                // %5 := Namespace.Class1.Foo(string) [ %4 ]
+                                // %5 := Namespace.Class1.Foo(string) [ this %4 ]
 
             Property = Foo(Property);   // %6 := Namespace.Class1.Property.get [  ]
-                                        // %7 := Namespace.Class1.Foo(string) [ %6 ]
+                                        // %7 := Namespace.Class1.Foo(string) [ this %6 ]
                                         // %8 := Namespace.Class1.Property.set [ %7 ]
 
             ObjectProperty = s;         // %9 := Namespace.Class1.ObjectProperty.set [ s ]
 
-            ObjectProperty = 5;         // ignored
+            ObjectProperty = 5;         // %10 := Namespace.Class1.ObjectProperty.set [ const ]
 
-            var x = IntProperty = 5;    // ignored
+            var x = IntProperty = 5;    // %11 := Namespace.Class1.IntProperty.set [ const ]
+                                        // x := __id [ %11 ]
 
             return s;
         }
@@ -218,9 +221,6 @@ namespace Namespace
             a = (s + s) + t;        // %3 := __concat [ s s ]
                                     // %4 := __concat [ t %3 ]
                                     // a := __id [ %4 ]
-
-            int x, y, z;
-            x = y = z = 5;          // ignored
         }
     }
 }";
@@ -248,19 +248,19 @@ namespace Namespace
                                     // a := __id [ %2 ]
 
             Bar(s.ToLower());       // %3 := string.ToLower() [ s ]
-                                    // %4 := Namespace.Class1.Bar(string) [ %3 ]
+                                    // %4 := Namespace.Class1.Bar(string) [ this %3 ]
 
-            a = string.IsNullOrEmpty(s);    // %5 := string.IsNullOrEmpty(string) [ s ];
-                                            // a := __id [ const ] // not using %5 because it is not string
+            a = string.IsNullOrEmpty(s);    // %5 := string.IsNullOrEmpty(string) [ string s ];
+                                            // a := __id [ %5 ]
 
-            a = A(B(C(s)));         // %6 := Namespace.Class1.C(string) [ s ]
-                                    // B is ignored
-                                    // %7 := Namespace.Class1.A(int) [ const ]
-                                    // a := __id [ %7 ]
+            a = A(B(C(s)));         // %6 := Namespace.Class1.C(string) [ this s ]
+                                    // %7 := Namespace.Class1.B(int) [ this %6 ]
+                                    // %8 := Namespace.Class1.A(int) [ this %7 ]
+                                    // a := __id [ %8 ]
 
             int x;
-            x = O(s);               // %8 := Namespace.Class1.O(object) [ s ];
-                                    // no assignment is added because O returns int
+            x = O(s);               // %9 := Namespace.Class1.O(object) [ this s ]
+                                    // x := __id [ %9 ]
         }
 
         public void Bar(string s) { }
@@ -291,16 +291,10 @@ namespace Namespace
         public void Foo(string s)
         {
             Class1 c;
-            c = new Class1(s);              // %0 := Namespace.Class1.Class1(string) [ s ]
+            c = new Class1(s);              // %0 := __id [ const ]
+                                            // %1 := Namespace.Class1.Class1(string) [ s ]
+                                            // c := __id [ %0 ]
 
-            c = new Class1();               // ignored, does not accept or return string
-
-            c = new Class1(new Class1(s));  // %1 := Namespace.Class1.Class1(string) [ s ]
-
-            c = new Class1(s)               // %2 := Namespace.Class1.Class1(string) [ s ]
-            {
-                Property = s,               // %3 := Namespace.Class1.Property.set [ s ]
-            };
         }
     }
 }";
@@ -320,13 +314,13 @@ namespace Namespace
         {
             string a;
 
-            a = s.Ext();            // %0 := Namespace.Extensions.Ext(string) [ s ]
+            a = s.Ext();            // %0 := Namespace.Extensions.Ext(string) [ Namespace.Extensions s ]
                                     // a := __id [ %0 ]
 
-            a = Extensions.Ext(s);  // %1 := Namespace.Extensions.Ext(string) [ s ]
+            a = Extensions.Ext(s);  // %1 := Namespace.Extensions.Ext(string) [ Namespace.Extensions s ]
                                     // a := __id [ %1 ]
 
-            a = this.field.Ext();   // %2 := Namespace.Extensions.Ext(string) [ const ]
+            a = this.field.Ext();   // %2 := Namespace.Extensions.Ext(string) [ Namespace.Extensions const ]
                                     // a := __id [ %2 ]
         }
     }
@@ -349,8 +343,8 @@ namespace Namespace
     {
         public void Foobar(string s, IBar b1, Bar b2)
         {
-            b1.Foo(s);          // %0 := Namespace.IBar.Foo(string) [ s ]
-            b2.Foo(s);          // %1 := Namespace.Bar.Foo(string) [ s ]
+            b1.Foo(s);          // %0 := Namespace.IBar.Foo(string) [ b1 s ]
+            b2.Foo(s);          // %1 := Namespace.Bar.Foo(string) [ b2 s ]
         }
     }
 
@@ -378,10 +372,10 @@ namespace Namespace
     {
         public void Foobar(string s, IBar b1, Bar b2, IBar<string> b3)
         {
-            b1.Foo(s);            // %0 := Namespace.IBar.Foo<T>(T) [ s ]
-            b2.Foo(s);            // %1 := Namespace.Bar.Foo<T>(T) [ s ]
-            b2.Fooooo(s);         // %2 := Namespace.Bar.Fooooo(string) [ s ]
-            b3.Fooooo(s);         // %3 := Namespace.IBar<T>.Fooooo(T) [ s ]
+            b1.Foo(s);            // %0 := Namespace.IBar.Foo<T>(T) [ b1 s ]
+            b2.Foo(s);            // %1 := Namespace.Bar.Foo<T>(T) [ b2 s ]
+            b2.Fooooo(s);         // %2 := Namespace.Bar.Fooooo(string) [ b2 s ]
+            b3.Fooooo(s);         // %3 := Namespace.IBar<T>.Fooooo(T) [ b3 s ]
         }
     }
 
