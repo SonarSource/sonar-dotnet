@@ -440,9 +440,9 @@ public class Class1
 }";
             var ucfg = UcfgVerifier.GetUcfgForMethod(code, "Foo");
 
-            var a = ucfg.BasicBlocks[0].Instructions[0].Args[0];
-            var b = ucfg.BasicBlocks[0].Instructions[1].Args[0];
-            var c = ucfg.BasicBlocks[0].Instructions[2].Args[0];
+            var a = ucfg.BasicBlocks[0].Instructions[0].Assigncall.Args[0];
+            var b = ucfg.BasicBlocks[0].Instructions[1].Assigncall.Args[0];
+            var c = ucfg.BasicBlocks[0].Instructions[2].Assigncall.Args[0];
 
             // The constant expressions share the same instance of the Const value
             // for performance and simplicity. The protobuf serializer will deserialize
@@ -453,16 +453,16 @@ public class Class1
 
         private static void ValidateInstruction(Instruction instruction, string methodId, string variable, params string[] args)
         {
-            instruction.MethodId.Should().Be(methodId);
-            instruction.Variable.Should().Be(variable);
-            instruction.Location.Should().NotBeNull();
+            instruction.Assigncall.MethodId.Should().Be(methodId);
+            instruction.Assigncall.Variable.Should().Be(variable);
+            instruction.Assigncall.Location.Should().NotBeNull();
             if (args.Length > 0)
             {
-                instruction.Args.Select(x => x.Var?.Name ?? x.Const?.Value).ShouldBeEquivalentTo(args, o => o.WithStrictOrdering());
+                instruction.Assigncall.Args.Select(x => x.Var?.Name ?? x.Const?.Value).ShouldBeEquivalentTo(args, o => o.WithStrictOrdering());
             }
             else
             {
-                instruction.Args.Should().BeEmpty();
+                instruction.Assigncall.Args.Should().BeEmpty();
             }
         }
 
