@@ -29,7 +29,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace SonarAnalyzer.UnitTest.Security.Ucfg
 {
     [TestClass]
-    public class UcfgBuilder_GetMethodId
+    public class UcfgMethod_Create
     {
         [TestMethod]
         public void GetMethodId_Methods()
@@ -102,30 +102,30 @@ public static class Extensions
 }";
             var (syntaxTree, semanticModel) = TestHelper.Compile(code);
 
-            MethodId("PrimitiveTypes1").Should().Be("Namespace.Class1.PrimitiveTypes1(string)");
-            MethodId("PrimitiveTypes2").Should().Be("Namespace.Class1.PrimitiveTypes2(string)");
-            MethodId("PrimitiveTypes3").Should().Be("Namespace.Class1.PrimitiveTypes3(string)");
-            MethodId("ArrayTypes1").Should().Be("Namespace.Class1.ArrayTypes1(string[])");
-            MethodId("ArrayTypes2").Should().Be("Namespace.Class1.ArrayTypes2(string[*,*])");
-            MethodId("ArrayTypes3").Should().Be("Namespace.Class1.ArrayTypes3(string[][])");
-            MethodId("UserType").Should().Be("Namespace.Class1.UserType(Namespace.Class1)");
-            MethodId("SystemType").Should().Be("Namespace.Class1.SystemType(System.Uri)");
-            MethodId("GenericMethod1").Should().Be("Namespace.Class1.GenericMethod1<T1, T2>(T1)");
-            MethodId("Nullables").Should().Be("Namespace.Class1.Nullables(int?, int?)");
-            MethodId("GenericArgument").Should().Be("Namespace.Class1.GenericArgument(System.Collections.Generic.IEnumerable<string>)");
-            MethodId("Overload1").Should().Be("Namespace.Class1.Overload1(string)");
-            MethodId("Overload1", skip: 1).Should().Be("Namespace.Class1.Overload1(string, string)");
-            MethodId("GenericMethod2").Should().Be("Namespace.GenericClass<T1>.GenericMethod2(T1)");
-            MethodId("GenericMethod3").Should().Be("Namespace.GenericClass<T1>.GenericMethod3<T2>(T1, T2)");
-            MethodId("InnerClass").Should().Be("Namespace.Class1.Class2.InnerClass(Namespace.Class1.Class2)");
-            MethodId("Method1").Should().Be("Namespace.BaseClass<T1>.Method1(T1)");
-            MethodId("Method1", skip: 1).Should().Be("Namespace.Descendant.Method1(string)");
-            MethodId("InnerNamespace").Should().Be("Namespace.Inner.Class2.InnerNamespace()");
-            MethodId("NoNamespace").Should().Be("Class3.NoNamespace(Class3)");
-            MethodId("Extension").Should().Be("Extensions.Extension(string, int)");
+            GetMethodId("PrimitiveTypes1").Should().Be("Namespace.Class1.PrimitiveTypes1(string)");
+            GetMethodId("PrimitiveTypes2").Should().Be("Namespace.Class1.PrimitiveTypes2(string)");
+            GetMethodId("PrimitiveTypes3").Should().Be("Namespace.Class1.PrimitiveTypes3(string)");
+            GetMethodId("ArrayTypes1").Should().Be("Namespace.Class1.ArrayTypes1(string[])");
+            GetMethodId("ArrayTypes2").Should().Be("Namespace.Class1.ArrayTypes2(string[*,*])");
+            GetMethodId("ArrayTypes3").Should().Be("Namespace.Class1.ArrayTypes3(string[][])");
+            GetMethodId("UserType").Should().Be("Namespace.Class1.UserType(Namespace.Class1)");
+            GetMethodId("SystemType").Should().Be("Namespace.Class1.SystemType(System.Uri)");
+            GetMethodId("GenericMethod1").Should().Be("Namespace.Class1.GenericMethod1<T1, T2>(T1)");
+            GetMethodId("Nullables").Should().Be("Namespace.Class1.Nullables(int?, int?)");
+            GetMethodId("GenericArgument").Should().Be("Namespace.Class1.GenericArgument(System.Collections.Generic.IEnumerable<string>)");
+            GetMethodId("Overload1").Should().Be("Namespace.Class1.Overload1(string)");
+            GetMethodId("Overload1", skip: 1).Should().Be("Namespace.Class1.Overload1(string, string)");
+            GetMethodId("GenericMethod2").Should().Be("Namespace.GenericClass<T1>.GenericMethod2(T1)");
+            GetMethodId("GenericMethod3").Should().Be("Namespace.GenericClass<T1>.GenericMethod3<T2>(T1, T2)");
+            GetMethodId("InnerClass").Should().Be("Namespace.Class1.Class2.InnerClass(Namespace.Class1.Class2)");
+            GetMethodId("Method1").Should().Be("Namespace.BaseClass<T1>.Method1(T1)");
+            GetMethodId("Method1", skip: 1).Should().Be("Namespace.Descendant.Method1(string)");
+            GetMethodId("InnerNamespace").Should().Be("Namespace.Inner.Class2.InnerNamespace()");
+            GetMethodId("NoNamespace").Should().Be("Class3.NoNamespace(Class3)");
+            GetMethodId("Extension").Should().Be("Extensions.Extension(string, int)");
 
-            string MethodId(string methodName, int skip = 0) =>
-                UniversalControlFlowGraphBuilder.GetMethodId(semanticModel.GetDeclaredSymbol(syntaxTree.GetMethod(methodName, skip)));
+            string GetMethodId(string methodName, int skip = 0) =>
+                UcfgMethod.Create(semanticModel.GetDeclaredSymbol(syntaxTree.GetMethod(methodName, skip))).ToString();
         }
 
         [TestMethod]
@@ -182,7 +182,7 @@ public class Class3
             PropertySetId("Property1").Should().Be("Namespace.Class1.Property1.set");
 
             PropertyGetId("Property2").Should().Be("Namespace.Class1.Property2.get");
-            PropertySetId("Property2").Should().Be(UcfgBuiltIn.Unknown);
+            PropertySetId("Property2").Should().Be("__unknown");
 
             PropertyGetId("Property3").Should().Be("Namespace.GenericClass<T1>.Property3.get");
             PropertySetId("Property3").Should().Be("Namespace.GenericClass<T1>.Property3.set");
@@ -200,12 +200,11 @@ public class Class3
             PropertySetId("Property6").Should().Be("Class3.Property6.set");
 
             string PropertyGetId(string propertyName, int skip = 0) =>
-                UniversalControlFlowGraphBuilder.GetMethodId(semanticModel.GetDeclaredSymbol(syntaxTree.GetProperty(propertyName, skip)).GetMethod);
+                UcfgMethod.Create(semanticModel.GetDeclaredSymbol(syntaxTree.GetProperty(propertyName, skip)).GetMethod).ToString();
 
             string PropertySetId(string propertyName, int skip = 0) =>
-                UniversalControlFlowGraphBuilder.GetMethodId(semanticModel.GetDeclaredSymbol(syntaxTree.GetProperty(propertyName, skip)).SetMethod);
+                UcfgMethod.Create(semanticModel.GetDeclaredSymbol(syntaxTree.GetProperty(propertyName, skip)).SetMethod).ToString();
         }
-
 
         [TestMethod]
         public void GetMethodId_Constructors()
@@ -227,7 +226,7 @@ namespace Namespace
             CtorId("Class1", skip: 1).Should().Be("Namespace.Class1.Class1(string)");
 
             string CtorId(string className, int skip = 0) =>
-                UniversalControlFlowGraphBuilder.GetMethodId(semanticModel.GetDeclaredSymbol(syntaxTree.GetConstructor(className, skip)));
+                UcfgMethod.Create(semanticModel.GetDeclaredSymbol(syntaxTree.GetConstructor(className, skip))).ToString();
         }
 
         [TestMethod]
@@ -258,11 +257,11 @@ namespace Namespace
 
             var (syntaxTree, semanticModel) = TestHelper.Compile(code);
 
-            MethodId("Foo").Should().Be("Namespace.Bar.Namespace.IBar.Foo(string)");
-            MethodId("Foo", skip: 1).Should().Be("Namespace.Bar.Foo(string)");
+            GetMethodId("Foo").Should().Be("Namespace.Bar.Namespace.IBar.Foo(string)");
+            GetMethodId("Foo", skip: 1).Should().Be("Namespace.Bar.Foo(string)");
 
-            string MethodId(string methodName, int skip = 0) =>
-                UniversalControlFlowGraphBuilder.GetMethodId(semanticModel.GetDeclaredSymbol(syntaxTree.GetMethod(methodName, skip)));
+            string GetMethodId(string methodName, int skip = 0) =>
+                UcfgMethod.Create(semanticModel.GetDeclaredSymbol(syntaxTree.GetMethod(methodName, skip))).ToString();
         }
     }
 }

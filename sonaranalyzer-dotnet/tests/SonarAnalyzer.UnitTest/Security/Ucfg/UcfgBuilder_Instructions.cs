@@ -475,10 +475,11 @@ public class Class1
                 .OfType<ConstructorDeclarationSyntax>()
                 .First(m => m.Identifier.ValueText == name);
 
-            var builder = new UniversalControlFlowGraphBuilder();
+            var builder = new UcfgBuilder(semanticModel);
 
-            var ucfg = builder.Build(semanticModel, ctor,
-                semanticModel.GetDeclaredSymbol(ctor), CSharpControlFlowGraph.Create(ctor.Body, semanticModel));
+            var ucfg = builder.Build(ctor,
+                semanticModel.GetDeclaredSymbol(ctor),
+                CSharpControlFlowGraph.Create(ctor.Body, semanticModel));
             return ucfg;
         }
     }

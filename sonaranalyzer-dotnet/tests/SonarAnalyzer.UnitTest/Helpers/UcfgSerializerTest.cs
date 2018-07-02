@@ -60,9 +60,9 @@ ENTRY -> 0
 0 [shape=record label=""{BLOCK:0|%0 __concat b,a|x __id %0|TERMINATOR JUMP: 1, 2}""]
 0 -> 1
 0 -> 2
-1 [shape=record label=""{BLOCK:1|%0 C.Bar(string, int) a,CONST|TERMINATOR JUMP: 3}""]
+1 [shape=record label=""{BLOCK:1|%1 C.Bar(string, int) a,CONST|TERMINATOR JUMP: 3}""]
 1 -> 3
-2 [shape=record label=""{BLOCK:2|%0 C.Bar(string, int) b,CONST|TERMINATOR JUMP: 3}""]
+2 [shape=record label=""{BLOCK:2|%2 C.Bar(string, int) b,CONST|TERMINATOR JUMP: 3}""]
 2 -> 3
 3 [shape=record label=""{BLOCK:3|TERMINATOR RET: CONST}""]
 3 -> END
