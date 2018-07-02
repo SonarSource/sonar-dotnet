@@ -116,16 +116,16 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
         private Instruction CreateInstruction(SyntaxNode syntaxNode, UcfgMethod method, string returnVariable,
             params SyntaxNode[] arguments)
         {
-            var instruction = new Instruction
+            var methodCall = new AssignCall
             {
                 Location = GetLocation(syntaxNode),
                 MethodId = method.ToString(),
                 Variable = returnVariable,
             };
-            instruction.Args.AddRange(arguments.Select(GetMappedExpression));
-            CreateVariable(syntaxNode, instruction.Variable);
+            methodCall.Args.AddRange(arguments.Select(GetMappedExpression));
+            CreateVariable(syntaxNode, methodCall.Variable);
 
-            return instruction;
+            return new Instruction { Assigncall = methodCall };
         }
 
         private string CreateTempVariable() =>
