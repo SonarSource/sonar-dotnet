@@ -83,7 +83,18 @@ namespace SonarAnalyzer.UnitTest.Security.Framework
 
         private static string ConvertInstructionToInstructionComment(Instruction instruction)
         {
-            return $"{instruction.Variable} := {instruction.MethodId} [ {string.Join(" ", instruction.Args.Select(ConvertExpressionToString))} ]";
+            switch (instruction.InstrCase)
+            {
+                case Instruction.InstrOneofCase.Assigncall:
+                    return $"{instruction.Assigncall.Variable} := {instruction.Assigncall.MethodId} " +
+                        $"[ {string.Join(" ", instruction.Assigncall.Args.Select(ConvertExpressionToString))} ]";
+
+                case Instruction.InstrOneofCase.NewObject:
+                    return $"{instruction.NewObject.Variable} := new {instruction.NewObject.Type}";
+
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(instruction));
+            }
 
             string ConvertExpressionToString(Expression expression)
             {
