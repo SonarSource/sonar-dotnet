@@ -16,7 +16,35 @@ For reference, the possible headings are:
 ## Unreleased
 
 ### Notes
-* [All commits](https://github.com/SonarSource/sonar-csharp/compare/7.2.0.5463 ...HEAD)
+* [All commits](https://github.com/SonarSource/sonar-csharp/compare/7.3.0.5690 ...HEAD)
+
+### Bug Fixes
+* [1438](https://github.com/SonarSource/sonar-csharp/issues/1438) - Fix string formats in the csharp plugin
+### False Positive
+* [1493](https://github.com/SonarSource/sonar-csharp/issues/1493) - Fix S107: Do not raise for P/Invoke methods (#1459)
+* [1464](https://github.com/SonarSource/sonar-csharp/issues/1464) - S4055 should not raise issues for string literal used in the 'message' of Debug.Assert
+* [1436](https://github.com/SonarSource/sonar-csharp/issues/1436) - Fix S4586: False positive when returning null from inside Task.Run
+* [1419](https://github.com/SonarSource/sonar-csharp/issues/1419) - Fix S1192: False positive for [SuppressMessage()] attribute
+* [1417](https://github.com/SonarSource/sonar-csharp/issues/1417) - Fix S2259: False positive on switch statement with conditional access operator
+* [1411](https://github.com/SonarSource/sonar-csharp/issues/1411) - Fix S1118: Rule should not raise issue on abstract classes
+* [1400](https://github.com/SonarSource/sonar-csharp/issues/1400) - Fix S2583: Rule should not report false positives when combined with async methods
+* [1378](https://github.com/SonarSource/sonar-csharp/issues/1378) - Fix S4023: False positive on interfaces that derive from other non-empty interfaces
+* [1366](https://github.com/SonarSource/sonar-csharp/issues/1366) - Update S4261: should not raise on async unit test methods
+* [1325](https://github.com/SonarSource/sonar-csharp/issues/1325) - Fix S1125: FP with nullable and VS2015/MSBuild 14
+* [1324](https://github.com/SonarSource/sonar-csharp/issues/1324) - Rule S2259: False positive on 'try/catch' with exception filter
+* [1279](https://github.com/SonarSource/sonar-csharp/issues/1279) - Fix S2228: Rule should ignore calls within DEBUG preprocessor
+* [1265](https://github.com/SonarSource/sonar-csharp/issues/1265) - Rule S3626: "Jump statements should not be redundant" issues false positive with try/catch/finally clause
+* [1180](https://github.com/SonarSource/sonar-csharp/issues/1180) - Fix S1200: Should not count generic type parameters of extension methods
+* [947](https://github.com/SonarSource/sonar-csharp/issues/947) - S2583: False-positive when Monitor.Wait is used
+* [621](https://github.com/SonarSource/sonar-csharp/issues/621) - CFG does not correctly support try-catch blocks with unconditional return insude
+* [496](https://github.com/SonarSource/sonar-csharp/issues/496) - Fix S2234: Check for parameter types before reporting it as bug
+### False Negative
+* [247](https://github.com/SonarSource/sonar-csharp/issues/247) - Update S3776: Cogntive Complexity should handle C# 7 inner methods
+### New Rules
+* [823](https://github.com/SonarSource/sonar-csharp/issues/823) - Rule S4275: Getters and setters should access the right field
+* [634](https://github.com/SonarSource/sonar-csharp/issues/634) - Rule S4143: Dictionary values should not be replaced unconditionally
+* [257](https://github.com/SonarSource/sonar-csharp/issues/257) - Rule S2327: "try" statements with identical "catch" and/or "finally" blocks should be merged
+* [221](https://github.com/SonarSource/sonar-csharp/issues/221) - Rule S3973: A conditionally executed single line should be denoted by indentation
 
 
 ## [7.2](https://github.com/SonarSource/sonar-csharp/releases/tag/7.2.0.5463)
