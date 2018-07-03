@@ -99,6 +99,11 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             }
         }
 
+        public static UcfgMethod Create(INamedTypeSymbol typeSymbol)
+        {
+            return Create(typeSymbol.ConstructedFrom.ToDisplayString());
+        }
+
         private static UcfgMethod Create(string id) =>
             id == null ? Unknown : new UcfgMethod(id);
     }

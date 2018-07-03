@@ -106,6 +106,14 @@ namespace SonarAnalyzer.UnitTest.Security.Framework
                 {
                     return "const";
                 }
+                else if (expression.This != null)
+                {
+                    return "this";
+                }
+                else if (expression.Classname != null)
+                {
+                    return expression.Classname.Classname;
+                }
                 else
                 {
                     throw new ArgumentOutOfRangeException(nameof(expression));
@@ -115,7 +123,9 @@ namespace SonarAnalyzer.UnitTest.Security.Framework
 
         internal static class UcfgInstructionCollector
         {
-            private const string UCFG_INSTRUCTION = @"// (?<instruction>.*? := .*? \[ .*? \])";
+            private const string UCFG_NEW_OBJECT = @"// (?<instruction>.+? := new .+?)(\r\n|\n)";
+            private const string UCFG_CALL = @"// (?<instruction>.+? := .+? \[ .*? \])";
+            private const string UCFG_INSTRUCTION = UCFG_NEW_OBJECT + "|" + UCFG_CALL;
 
             public static IEnumerable<string> Collect(string codeSnippet)
             {
