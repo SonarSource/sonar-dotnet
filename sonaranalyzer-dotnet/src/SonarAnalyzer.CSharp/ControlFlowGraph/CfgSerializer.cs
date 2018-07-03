@@ -46,7 +46,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
 
         private class CfgWalker
         {
-            private readonly UcfgBlockIdProvider blockId = new UcfgBlockIdProvider();
+            private readonly BlockIdProvider blockId = new BlockIdProvider();
             private readonly DotWriter writer;
 
             public CfgWalker(DotWriter writer)
