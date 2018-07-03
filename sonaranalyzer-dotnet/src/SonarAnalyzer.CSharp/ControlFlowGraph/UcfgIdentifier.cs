@@ -22,25 +22,25 @@ using Microsoft.CodeAnalysis;
 
 namespace SonarAnalyzer.ControlFlowGraph.CSharp
 {
-    public struct UcfgMethod
+    public struct UcfgIdentifier
     {
         /// <summary>
         /// The method ID that the Security Engine uses for assignments. It accepts one argument
         /// and returns one value. For example, `a = x` generates `a = __id(x)`.
         /// </summary>
-        public static readonly UcfgMethod Assignment = Create("__id");
+        public static readonly UcfgIdentifier Assignment = Create("__id");
 
         /// <summary>
         /// The method ID that the Security Engine uses for concatenations. It accepts two
         /// arguments and returns one value. For example, `x + y` generates `%0 = __concat(x, y)`
         /// </summary>
-        public static readonly UcfgMethod Concatenation = Create("__concat");
+        public static readonly UcfgIdentifier Concatenation = Create("__concat");
 
         /// <summary>
         /// The method ID used by the UCFG Builder to represent a method that has no symbol.
         /// The instructions with this method ID are removed from UCFG.
         /// </summary>
-        public static readonly UcfgMethod Unknown = Create("__unknown");
+        public static readonly UcfgIdentifier Unknown = Create("__unknown");
 
         /// <summary>
         /// The method ID that the security engine uses for attributes/annotations. It accepts
@@ -56,7 +56,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
         /// s = __annotation(%0)
         /// ...
         /// </example>
-        public static readonly UcfgMethod Annotation = Create("__annotation");
+        public static readonly UcfgIdentifier Annotation = Create("__annotation");
 
         /// <summary>
         /// The method ID that the security engine uses for known tainted entrypoints. All method
@@ -68,11 +68,11 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
         /// Instructions:
         /// %0 = __entrypoint(s, p)
         /// </example>
-        public static readonly UcfgMethod EntryPoint = Create("__entrypoint");
+        public static readonly UcfgIdentifier EntryPoint = Create("__entrypoint");
 
         private readonly string id;
 
-        private UcfgMethod(string id)
+        private UcfgIdentifier(string id)
         {
             this.id = id;
         }
@@ -80,11 +80,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
         public override string ToString() =>
             id;
 
-        // TODO: temporary, to reduce merge conflicts in tests
-        public static implicit operator string(UcfgMethod method) =>
-            method.ToString();
-
-        public static UcfgMethod Create(IMethodSymbol methodSymbol)
+        public static UcfgIdentifier CreateMethodId(IMethodSymbol methodSymbol)
         {
             switch (methodSymbol?.MethodKind)
             {
@@ -99,12 +95,10 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             }
         }
 
-        public static UcfgMethod Create(INamedTypeSymbol typeSymbol)
-        {
-            return Create(typeSymbol.ConstructedFrom.ToDisplayString());
-        }
+        public static UcfgIdentifier CreateTypeId(INamedTypeSymbol typeSymbol) =>
+            Create(typeSymbol.ConstructedFrom.ToDisplayString());
 
-        private static UcfgMethod Create(string id) =>
-            id == null ? Unknown : new UcfgMethod(id);
+        private static UcfgIdentifier Create(string id) =>
+            id == null ? Unknown : new UcfgIdentifier(id);
     }
 }
