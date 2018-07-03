@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
@@ -33,15 +32,27 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
     /// High level UCFG Instruction factory that controls UcfgObjectFactory to create objects
     /// depending on the provided SyntaxNodes.
     /// </summary>
-    public class UcfgInstructionFactory
+    public class UcfgInstructionBuilder
     {
-        private readonly SemanticModel semanticModel;
-        private readonly UcfgObjectFactory objectFactory;
+        /// <summary>
+        /// The string constant representation in the Sonar Security engine (Java part). When
+        /// an instruction receives or returns a type that is not string we use this instead
+        /// of a variable.
+        /// </summary>
+        private static readonly Expression ConstantExpression = new Expression
+        {
+            Const = new Constant { Value = "\"\"" }
+        };
 
-        public UcfgInstructionFactory(SemanticModel semanticModel, UcfgObjectFactory objectFactory)
+        private readonly SemanticModel semanticModel;
+        private readonly Dictionary<SyntaxNode, Expression> syntaxNodeToUcfgExpressionCache
+            = new Dictionary<SyntaxNode, Expression>();
+
+        private int tempVariablesCounter;
+
+        public UcfgInstructionBuilder(SemanticModel semanticModel)
         {
             this.semanticModel = semanticModel;
-            this.objectFactory = objectFactory;
         }
 
         public Instruction Create(SyntaxNode syntaxNode)
@@ -70,26 +81,26 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                     return CreateEntryPointInstruction(methodDeclaration);
 
                 default:
-                    return DefaultCreate(syntaxNode);
+                    return CreateDefaultInstruction(syntaxNode);
             }
         }
 
         public IEnumerable<Instruction> CreateAttributeInstructions(AttributeSyntax attributeSyntax, IMethodSymbol attributeCtor, string parameterName) =>
             new[]
             {
-                objectFactory.CreateMethodCall(attributeSyntax, UcfgMethod.Create(attributeCtor)),
-                objectFactory.CreateParameterAnnotation(parameterName, attributeSyntax),
+                CreateMethodCall(attributeSyntax, UcfgMethod.Create(attributeCtor)),
+                CreateParameterAnnotation(parameterName, attributeSyntax),
             };
 
-        private Instruction DefaultCreate(SyntaxNode node) =>
-            objectFactory.CreateConstant(node);
+        private Instruction CreateDefaultInstruction(SyntaxNode node) =>
+            CreateConstant(node);
 
         private Instruction CreateFromObjectCreationExpression(ObjectCreationExpressionSyntax objectCreationExpression)
         {
             var ctorSymbol = GetSymbol(objectCreationExpression) as IMethodSymbol;
             if (ctorSymbol == null)
             {
-                return objectFactory.CreateConstant(objectCreationExpression);
+                return CreateConstant(objectCreationExpression);
             }
 
             var arguments = BuildArguments(objectCreationExpression, ctorSymbol).ToArray();
@@ -107,11 +118,11 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             }
             else if (IsLocalVarOrParameterOfTypeString(identifierSymbol))
             {
-                return objectFactory.CreateVariable(identifierName, identifierName.Identifier.Text);
+                return CreateVariable(identifierName, identifierName.Identifier.Text);
             }
             else
             {
-                return objectFactory.CreateConstant(identifierName);
+                return CreateConstant(identifierName);
             }
         }
 
@@ -122,7 +133,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                 var variable = semanticModel.GetDeclaredSymbol(variableDeclarator);
                 if (IsLocalVarOrParameterOfTypeString(variable))
                 {
-                    return objectFactory.CreateAssignment(
+                    return CreateAssignment(
                         variableDeclarator,
                         variable.Name,
                         variableDeclarator.Initializer.Value);
@@ -133,14 +144,14 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
         }
 
         private Instruction CreateFromBinaryExpression(BinaryExpressionSyntax binaryExpression) =>
-            objectFactory.CreateConcatenation(binaryExpression, binaryExpression.Right, binaryExpression.Left);
+            CreateConcatenation(binaryExpression, binaryExpression.Right, binaryExpression.Left);
 
         private Instruction CreateFromInvocationExpression(InvocationExpressionSyntax invocationExpression)
         {
             var methodSymbol = GetSymbol(invocationExpression) as IMethodSymbol;
             if (methodSymbol == null)
             {
-                return objectFactory.CreateConstant(invocationExpression);
+                return CreateConstant(invocationExpression);
             }
 
             var arguments = BuildArguments(invocationExpression, methodSymbol).ToArray();
@@ -154,7 +165,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
 
             if (IsLocalVarOrParameterOfTypeString(left))
             {
-                return objectFactory.CreateAssignment(assignmentExpression, left.Name, assignmentExpression.Right);
+                return CreateAssignment(assignmentExpression, left.Name, assignmentExpression.Right);
             }
             else if (left is IPropertySymbol property &&
                 property.SetMethod != null)
@@ -163,7 +174,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             }
             else
             {
-                return objectFactory.CreateConstant(assignmentExpression);
+                return CreateConstant(assignmentExpression);
             }
         }
 
@@ -171,10 +182,10 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
         {
             foreach (var parameter in methodDeclaration.ParameterList.Parameters)
             {
-                objectFactory.CreateVariable(parameter, parameter.Identifier.ValueText);
+                CreateVariable(parameter, parameter.Identifier.ValueText);
             }
 
-            return objectFactory.CreateEntryPoint(methodDeclaration, methodDeclaration.ParameterList.Parameters.ToArray());
+            return CreateEntryPoint(methodDeclaration, methodDeclaration.ParameterList.Parameters.ToArray());
         }
 
         private IEnumerable<SyntaxNode> BuildArguments(ObjectCreationExpressionSyntax objectCreation, IMethodSymbol methodSymbol) =>
@@ -205,16 +216,6 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             }
         }
 
-        private static bool IsExtensionMethodCalledAsExtension(IMethodSymbol methodSymbol) =>
-            methodSymbol.ReducedFrom != null;
-
-        private static bool IsInstanceMethodOnString(IMethodSymbol methodSymbol) =>
-            methodSymbol.ContainingType.Is(KnownType.System_String) && !methodSymbol.IsStatic;
-
-        private static bool IsLocalVarOrParameterOfTypeString(ISymbol symbol) =>
-            symbol is ILocalSymbol local && local.Type.Is(KnownType.System_String) ||
-            symbol is IParameterSymbol parameter && parameter.Type.Is(KnownType.System_String);
-
         private Instruction AddMethodCall(SyntaxNode invocation, IMethodSymbol methodSymbol, params SyntaxNode[] arguments)
         {
             // Add instruction to UCFG only when the method accepts/returns string,
@@ -223,22 +224,92 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             // a string, checking if the arguments are Var expressions should
             // be enough to ensure they are strings.
             if (!AcceptsOrReturnsString(methodSymbol) &&
-                !arguments.Any(objectFactory.IsVariable))
+                !arguments.Any(IsVariable))
             {
-                return objectFactory.CreateConstant(invocation);
+                return CreateConstant(invocation);
             }
 
-            var instruction = objectFactory.CreateMethodCall(invocation, UcfgMethod.Create(methodSymbol), arguments);
+            var instruction = CreateMethodCall(invocation, UcfgMethod.Create(methodSymbol), arguments);
 
             if (!ReturnsString(methodSymbol))
             {
                 // Overwrite the created varible with a constant, in case the method
                 // is called as nested invocation in another invocation: Foo(Bar())
-                objectFactory.CreateConstant(invocation);
+                CreateConstant(invocation);
             }
 
             return instruction;
         }
+
+        public Instruction CreateMethodCall(SyntaxNode syntaxNode, UcfgMethod method, params SyntaxNode[] arguments) =>
+            CreateInstruction(syntaxNode, method, CreateTempVariable(), arguments);
+
+        public Instruction CreateConcatenation(SyntaxNode syntaxNode, params SyntaxNode[] arguments) =>
+            CreateInstruction(syntaxNode, UcfgMethod.Concatenation, CreateTempVariable(), arguments);
+
+        public Instruction CreateAssignment(SyntaxNode syntaxNode, string variableName, SyntaxNode argument) =>
+            CreateInstruction(syntaxNode, UcfgMethod.Assignment, variableName, argument);
+
+        public Instruction CreateEntryPoint(SyntaxNode syntaxNode, params SyntaxNode[] arguments) =>
+            CreateInstruction(syntaxNode, UcfgMethod.EntryPoint, CreateTempVariable(), arguments);
+
+        public Instruction CreateParameterAnnotation(string parameterName, SyntaxNode attributeSyntax) =>
+            CreateInstruction(attributeSyntax, UcfgMethod.Annotation, parameterName, attributeSyntax);
+
+        public Instruction CreateVariable(SyntaxNode syntaxNode, string variableName)
+        {
+            syntaxNodeToUcfgExpressionCache[syntaxNode] = CreateVariableExpression(variableName);
+            return null;
+        }
+
+        public Instruction CreateConstant(SyntaxNode syntaxNode)
+        {
+            syntaxNodeToUcfgExpressionCache[syntaxNode] = ConstantExpression;
+            return null;
+        }
+
+        public Return CreateReturnExpression(SyntaxNode syntaxNode = null, SyntaxNode returnedValue = null) =>
+            new Return
+            {
+                Location = syntaxNode == null
+                    ? null
+                    : syntaxNode.GetUcfgLocation(),
+                ReturnedExpression = returnedValue == null
+                    ? ConstantExpression
+                    : GetMappedExpression(returnedValue),
+            };
+
+        public bool IsVariable(SyntaxNode syntaxNode) =>
+            GetMappedExpression(syntaxNode).Var != null;
+
+        private Expression GetMappedExpression(SyntaxNode syntaxNode) =>
+            syntaxNodeToUcfgExpressionCache.GetValueOrDefault(syntaxNode.RemoveParentheses())
+            // In some cases the CFG does not contain all syntax nodes that were used in
+            // an expression, for example when ternary operator is passed as an argument.
+            // This could potentially be improved, but for the time being the constant
+            // expression fallback will do what we used to do before.
+            ?? ConstantExpression;
+
+        private Instruction CreateInstruction(SyntaxNode syntaxNode, UcfgMethod method, string returnVariable,
+            params SyntaxNode[] arguments)
+        {
+            var methodCall = new AssignCall
+            {
+                Location = syntaxNode.GetUcfgLocation(),
+                MethodId = method.ToString(),
+                Variable = returnVariable,
+            };
+            methodCall.Args.AddRange(arguments.Select(GetMappedExpression));
+            CreateVariable(syntaxNode, methodCall.Variable);
+
+            return new Instruction { Assigncall = methodCall };
+        }
+
+        private string CreateTempVariable() =>
+            $"%{tempVariablesCounter++}";
+
+        private static Expression CreateVariableExpression(string name) =>
+            new Expression { Var = new Variable { Name = name } };
 
         private ISymbol GetSymbol(SyntaxNode syntaxNode) =>
             semanticModel.GetSymbolInfo(syntaxNode).Symbol;
@@ -249,5 +320,15 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
         private static bool AcceptsOrReturnsString(IMethodSymbol methodSymbol) =>
             ReturnsString(methodSymbol) ||
             methodSymbol.Parameters.Any(p => p.Type.Is(KnownType.System_String));
+
+        private static bool IsExtensionMethodCalledAsExtension(IMethodSymbol methodSymbol) =>
+            methodSymbol.ReducedFrom != null;
+
+        private static bool IsInstanceMethodOnString(IMethodSymbol methodSymbol) =>
+            methodSymbol.ContainingType.Is(KnownType.System_String) && !methodSymbol.IsStatic;
+
+        private static bool IsLocalVarOrParameterOfTypeString(ISymbol symbol) =>
+            symbol is ILocalSymbol local && local.Type.Is(KnownType.System_String) ||
+            symbol is IParameterSymbol parameter && parameter.Type.Is(KnownType.System_String);
     }
 }
