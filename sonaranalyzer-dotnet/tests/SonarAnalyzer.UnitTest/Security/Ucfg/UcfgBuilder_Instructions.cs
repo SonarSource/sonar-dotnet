@@ -87,8 +87,10 @@ namespace Namespace
     {
         public void Foo(string s)
         {
-            var x = Bar(s, a => a);     // %0 := Namespace.Class1.Bar(string, System.Func<string, string>) [ s const ]
+            var x = Bar(s, a => a);     // %0 := Namespace.Class1.Bar(string, System.Func<string, string>) [ this s const ]
                                         // x := __id [ %0 ]
+
+            this.Bar(s, a => a);        // %1 := Namespace.Class1.Bar(string, System.Func<string, string>) [ this s const ]
         }
         public string Bar(string s, Func<string, string> a)
         {
@@ -96,7 +98,7 @@ namespace Namespace
         }
     }
 }";
-            UcfgVerifier.GetUcfgForMethod(code, "Foo");
+            UcfgVerifier.VerifyInstructions(code, "Foo");
         }
 
         [TestMethod]
@@ -129,26 +131,35 @@ namespace Namespace
 {
     public class Class1
     {
-        private string Property { get; set; }
-        private int IntProperty { get; set; }
-        private object ObjectProperty { get; set; }
+        public string Property { get; set; }
+        public int IntProperty { get; set; }
+        public object ObjectProperty { get; set; }
         public string Foo(string s)
         {
             string a;
-            Property = s;       // %0 := Namespace.Class1.Property.set [ s ]
-            a = Property;       // %1 := Namespace.Class1.Property.get [  ]
-                                // a := __id [ %1 ]
-            Property = Property;// %2 := Namespace.Class1.Property.get [  ]
-                                // %3 := Namespace.Class1.Property.set [ %2 ]
-            Foo(Property);      // %4 := Namespace.Class1.Property.get [  ]
-                                // %5 := Namespace.Class1.Foo(string) [ this %4 ]
-            Property = Foo(Property);   // %6 := Namespace.Class1.Property.get [  ]
-                                        // %7 := Namespace.Class1.Foo(string) [ this %6 ]
-                                        // %8 := Namespace.Class1.Property.set [ %7 ]
-            ObjectProperty = s;         // %9 := Namespace.Class1.ObjectProperty.set [ s ]
-            ObjectProperty = 5;         // %10 := Namespace.Class1.ObjectProperty.set [ const ]
-            var x = IntProperty = 5;    // %11 := Namespace.Class1.IntProperty.set [ const ]
-                                        // x := __id [ %11 ]
+            Property = s;                           // %0 := Namespace.Class1.Property.set [ this s ]
+            a = Property;                           // %1 := Namespace.Class1.Property.get [ this ]
+                                                    // a := __id [ %1 ]
+            Property = Property;                    // %2 := Namespace.Class1.Property.get [ this ]
+                                                    // %3 := Namespace.Class1.Property.set [ this %2 ]
+            Foo(Property);                          // %4 := Namespace.Class1.Property.get [ this ]
+                                                    // %5 := Namespace.Class1.Foo(string) [ this %4 ]
+            Property = Foo(Property);               // %6 := Namespace.Class1.Property.get [ this ]
+                                                    // %7 := Namespace.Class1.Foo(string) [ this %6 ]
+                                                    // %8 := Namespace.Class1.Property.set [ this %7 ]
+            ObjectProperty = s;                     // %9 := Namespace.Class1.ObjectProperty.set [ this s ]
+            ObjectProperty = 5;                     // %10 := Namespace.Class1.ObjectProperty.set [ this const ]
+            var x = IntProperty = 5;                // %11 := Namespace.Class1.IntProperty.set [ this const ]
+                                                    // x := __id [ %11 ]
+
+            this.Property = s                       // %12 := Namespace.Class1.Property.set [ this s ]
+
+            var other = new Class1();               // %13 := __id [ const ]
+                                                    // %14 := Namespace.Class1.Class1() [ %13 ]
+                                                    // other := __id [ %13 ]
+            other.Property = s;                     // %15 := Namespace.Class1.Property.set [ other s ]
+            other.ObjectProperty = other.Property;  // %16 := Namespace.Class1.ObjectProperty.set [ other const ]
+
             return s;
         }
     }
@@ -209,28 +220,41 @@ namespace Namespace
             const string code = @"
 namespace Namespace
 {
-    public class Class1
+    public class BaseClass
+    {
+        public void BaseMethod() {}
+    }
+
+    public class Class1 : BaseClass
     {
         private string field;
         public void Foo(string s)
         {
             string a;
-            a = s.ToLower();        // %0 := string.ToLower() [ s ]
-                                    // a := __id [ %0 ]
-            a = (s + s).ToLower();  // %1 := __concat [ s s ]
-                                    // %2 := string.ToLower() [ %1 ]
-                                    // a := __id [ %2 ]
-            Bar(s.ToLower());       // %3 := string.ToLower() [ s ]
-                                    // %4 := Namespace.Class1.Bar(string) [ this %3 ]
+            a = s.ToLower();                // %0 := string.ToLower() [ s ]
+                                            // a := __id [ %0 ]
+            a = (s + s).ToLower();          // %1 := __concat [ s s ]
+                                            // %2 := string.ToLower() [ %1 ]
+                                            // a := __id [ %2 ]
+            Bar(s.ToLower());               // %3 := string.ToLower() [ s ]
+                                            // %4 := Namespace.Class1.Bar(string) [ this %3 ]
             a = string.IsNullOrEmpty(s);    // %5 := string.IsNullOrEmpty(string) [ string s ];
                                             // a := __id [ %5 ]
-            a = A(B(C(s)));         // %6 := Namespace.Class1.C(string) [ this s ]
-                                    // %7 := Namespace.Class1.B(int) [ this %6 ]
-                                    // %8 := Namespace.Class1.A(int) [ this %7 ]
-                                    // a := __id [ %8 ]
+            a = A(B(C(s)));                 // %6 := Namespace.Class1.C(string) [ this s ]
+                                            // %7 := Namespace.Class1.B(int) [ this %6 ]
+                                            // %8 := Namespace.Class1.A(int) [ this %7 ]
+                                            // a := __id [ %8 ]
             int x;
-            x = O(s);               // %9 := Namespace.Class1.O(object) [ this s ]
-                                    // x := __id [ %9 ]
+            x = O(s);                       // %9 := Namespace.Class1.O(object) [ this s ]
+                                            // x := __id [ %9 ]
+
+            this.Bar(s);                    // %10 := Namespace.Class1.Bar(string) [ this s ]
+            base.BaseMethod();              // %11 := Namespace.BaseClass.BaseMethod() [ this ]
+
+            var other = new Class1();       // %12 := __id [ const ]
+                                            // %13 := Namespace.Class1.Class1() [ %12 ]
+                                            // other := __id [ %12 ]
+            other.Bar(s);                   // %14 := Namespace.Class1.Bar(string) [ other s ]
         }
         public void Bar(string s) { }
         public string A(int x) { return x.ToString(); }
@@ -273,7 +297,7 @@ namespace Namespace
 
             c = new Class1(s)               // %8 := __id [ const ]
             {                               // %9 := Namespace.Class1.Class1(string) [ %8 s ]
-                Property = s,               // %10 := Namespace.Class1.Property.set [ s ]
+                Property = s,               // %10 := Namespace.Class1.Property.set [ %8 s ]
             };                              // c := __id [ %8 ]
         }
     }
