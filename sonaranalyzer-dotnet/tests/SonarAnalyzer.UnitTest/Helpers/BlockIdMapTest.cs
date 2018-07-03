@@ -29,12 +29,12 @@ namespace SonarAnalyzer.Helpers.UnitTest
     [TestClass]
     public class BlockIdMapTest
     {
-        private UcfgBlockIdProvider blockId;
+        private BlockIdProvider blockId;
 
         [TestInitialize]
         public void TestInitialize()
         {
-            blockId = new UcfgBlockIdProvider();
+            blockId = new BlockIdProvider();
         }
 
         [TestMethod]
