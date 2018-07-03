@@ -23,12 +23,13 @@ using csharp::SonarAnalyzer.ControlFlowGraph.CSharp;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.UnitTest.Helpers;
+using SonarAnalyzer.UnitTest.Security.Framework;
 using SonarAnalyzer.UnitTest.Security.Ucfg;
 
 namespace SonarAnalyzer.Helpers.UnitTest
 {
     [TestClass]
-    public class UcfgSerializerTest : UcfgBuilderTestBase
+    public class UcfgSerializerTest
     {
         [TestMethod]
         public void Serialize_Some_Method()
@@ -51,7 +52,7 @@ class C
     void Bar(string a, int x) { }
 }
 ";
-            var dot = UcfgSerializer.Serialize(GetUcfgForMethod(code, "Foo"));
+            var dot = UcfgSerializer.Serialize(UcfgVerifier.GetUcfgForMethod(code, "Foo"));
 
             dot.Should().BeIgnoringLineEndings(@"digraph ""C.Foo(string, string)"" {
 ENTRY [shape=record label=""{ENTRY|a|b}""]

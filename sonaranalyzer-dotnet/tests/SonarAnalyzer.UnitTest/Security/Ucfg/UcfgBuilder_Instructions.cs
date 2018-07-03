@@ -27,11 +27,12 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Protobuf.Ucfg;
+using SonarAnalyzer.UnitTest.Security.Framework;
 
 namespace SonarAnalyzer.UnitTest.Security.Ucfg
 {
     [TestClass]
-    public class UcfgBuilder_Instructions : UcfgBuilderTestBase
+    public class UcfgBuilder_Instructions
     {
         [TestMethod]
         public void Assignments_Simple()
@@ -45,8 +46,8 @@ namespace Namespace
         public void Foo(string s)
         {
             string a, b;
-            a = s;                  // a = __id(s)
-            a = ""boo""             // a = __id("")
+            a = s;                  // a := __id [ s ]
+            a = ""boo""             // a := __id [ const ]
 
             var x = new string[5];
 
@@ -56,13 +57,7 @@ namespace Namespace
         }
     }
 }";
-            var ucfg = GetUcfgForMethod(code, "Foo");
-
-            ucfg.BasicBlocks.Should().HaveCount(2);
-            AssertCollection(ucfg.BasicBlocks[0].Instructions,
-                i => ValidateInstruction(i, UcfgBuiltIn.Assignment, "a", new[] { "s" }),
-                i => ValidateInstruction(i, UcfgBuiltIn.Assignment, "a", new[] { "\"\"" })
-                );
+            UcfgVerifier.VerifyInstructions(code, "Foo");
         }
 
         [TestMethod]
@@ -77,22 +72,16 @@ namespace Namespace
         {
             string a, b, c;
 
-            a = b = c = ""foo""     // c = __id("")
-                                    // b = __id(c)
-                                    // a = __id(b)
+            a = b = c = ""foo""     // c := __id [ const ]
+                                    // b := __id [ c ]
+                                    // a := __id [ b ]
 
             int x, y, x;
             x = y = z = 5;          // ignored
         }
     }
 }";
-            var ucfg = GetUcfgForMethod(code, "Foo");
-            ucfg.BasicBlocks.Should().HaveCount(2);
-            AssertCollection(ucfg.BasicBlocks[0].Instructions,
-                i => ValidateInstruction(i, UcfgBuiltIn.Assignment, "c", new[] { "\"\"" }),
-                i => ValidateInstruction(i, UcfgBuiltIn.Assignment, "b", new[] { "c" }),
-                i => ValidateInstruction(i, UcfgBuiltIn.Assignment, "a", new[] { "b" })
-                );
+            UcfgVerifier.VerifyInstructions(code, "Foo");
         }
 
         [TestMethod]
@@ -106,8 +95,8 @@ namespace Namespace
     {
         public void Foo(string s)
         {
-            var x = Bar(s, a => a);     // %0 = Bar(s, const)
-                                        // x = __id(%0)
+            var x = Bar(s, a => a);     // %0 := Namespace.Class1.Bar(string, System.Func<string, string>) [ s const ]
+                                        // x := __id [ %0 ]
         }
 
         public string Bar(string s, Func<string, string> a)
@@ -116,13 +105,7 @@ namespace Namespace
         }
     }
 }";
-            var ucfg = GetUcfgForMethod(code, "Foo");
-            ucfg.BasicBlocks.Should().HaveCount(2);
-            AssertCollection(ucfg.BasicBlocks[0].Instructions,
-                i => ValidateInstruction(i, "Namespace.Class1.Bar(string, System.Func<string, string>)",
-                    "%0", new[] { "s", "\"\"" }),
-                i => ValidateInstruction(i, UcfgBuiltIn.Assignment, "x", new[] { "%0" })
-                );
+            UcfgVerifier.GetUcfgForMethod(code, "Foo");
         }
 
         [TestMethod]
@@ -135,7 +118,7 @@ namespace Namespace
     {
         public void Foo()
         {
-            var x = Bar<string>.Value;  // x = __id("")
+            var x = Bar<string>.Value;  // x := __id [ const ]
             var y = Bar<int>.Value;     // ignored
         }
     }
@@ -144,11 +127,7 @@ namespace Namespace
         public static T Value { get { return default(T); } }
     }
 }";
-            var ucfg = GetUcfgForMethod(code, "Foo");
-            ucfg.BasicBlocks.Should().HaveCount(2);
-            AssertCollection(ucfg.BasicBlocks[0].Instructions,
-                i => ValidateInstruction(i, UcfgBuiltIn.Assignment, "x", new[] { "\"\"" })
-                );
+            UcfgVerifier.VerifyInstructions(code, "Foo");
         }
 
         [TestMethod]
@@ -167,21 +146,21 @@ namespace Namespace
         {
             string a;
 
-            Property = s;       // %0 = Class1.Property.set(s)
-            a = Property;       // %1 = Class1.Property.get()
-                                // a = __id(%1)
+            Property = s;       // %0 := Namespace.Class1.Property.set [ s ]
+            a = Property;       // %1 := Namespace.Class1.Property.get [  ]
+                                // a := __id [ %1 ]
 
-            Property = Property;// %2 = Class1.Property.get()
-                                // %3 = Class1.Property.set(%2)
+            Property = Property;// %2 := Namespace.Class1.Property.get [  ]
+                                // %3 := Namespace.Class1.Property.set [ %2 ]
 
-            Foo(Property);      // %4 = Class1.Property.get()
-                                // %5 = Class1.Foo(%4)
+            Foo(Property);      // %4 := Namespace.Class1.Property.get [  ]
+                                // %5 := Namespace.Class1.Foo(string) [ %4 ]
 
-            Property = Foo(Property);   // %6 = Class1.Property.get()
-                                        // %7 = Foo(%6)
-                                        // %8 = Class1.Property.set(%7)
+            Property = Foo(Property);   // %6 := Namespace.Class1.Property.get [  ]
+                                        // %7 := Namespace.Class1.Foo(string) [ %6 ]
+                                        // %8 := Namespace.Class1.Property.set [ %7 ]
 
-            ObjectProperty = s;         // $9 = Class1.ObjectProperty.set(s)
+            ObjectProperty = s;         // %9 := Namespace.Class1.ObjectProperty.set [ s ]
 
             ObjectProperty = 5;         // ignored
 
@@ -191,27 +170,7 @@ namespace Namespace
         }
     }
 }";
-            var ucfg = GetUcfgForMethod(code, "Foo");
-
-            ucfg.BasicBlocks.Should().HaveCount(2);
-
-            AssertCollection(ucfg.BasicBlocks[0].Instructions,
-                i => ValidateInstruction(i, "Namespace.Class1.Property.set", "%0", new[] { "s" }),
-                i => ValidateInstruction(i, "Namespace.Class1.Property.get", "%1"),
-                i => ValidateInstruction(i, UcfgBuiltIn.Assignment, "a", new[] { "%1" }),
-
-                i => ValidateInstruction(i, "Namespace.Class1.Property.get", "%2"),
-                i => ValidateInstruction(i, "Namespace.Class1.Property.set", "%3", new[] { "%2" }),
-
-                i => ValidateInstruction(i, "Namespace.Class1.Property.get", "%4"),
-                i => ValidateInstruction(i, "Namespace.Class1.Foo(string)", "%5", new[] { "%4" }),
-
-                i => ValidateInstruction(i, "Namespace.Class1.Property.get", "%6"),
-                i => ValidateInstruction(i, "Namespace.Class1.Foo(string)", "%7", new[] { "%6" }),
-                i => ValidateInstruction(i, "Namespace.Class1.Property.set", "%8", new[] { "%7" }),
-
-                i => ValidateInstruction(i, "Namespace.Class1.ObjectProperty.set", "%9", new[] { "s" })
-                );
+            UcfgVerifier.VerifyInstructions(code, "Foo");
         }
 
         [TestMethod]
@@ -232,11 +191,7 @@ namespace Namespace
         }
     }
 }";
-            var ucfg = CreateUcfgForConstructor(code, "Class1");
-
-            ucfg.BasicBlocks.Should().HaveCount(2);
-
-            AssertCollection(ucfg.BasicBlocks[0].Instructions);
+            UcfgVerifier.VerifyInstructions(code, "Class1", isCtor: true);
         }
 
         [TestMethod]
@@ -251,38 +206,25 @@ namespace Namespace
         private string field;
         public void Foo(string s, string t)
         {
-            string a = s;           // a = __id(s)
+            string a = s;           // a := __id [ s ]
 
-            a = s + s;              // %0 = __concat(s, s)
-                                    // a = __id(%0)
+            a = s + s;              // %0 := __concat [ s s ]
+                                    // a := __id [ %0 ]
 
-            a = s + s + s;          // %1 = __concat(s, s)
-                                    // %2 = __concat(s, %1)
-                                    // a = __id(%2)
+            a = s + s + s;          // %1 := __concat [ s s ]
+                                    // %2 := __concat [ s %1 ]
+                                    // a := __id [ %2 ]
 
-            a = (s + s) + t;        // %3 = __concat(s, s)
-                                    // %4 = __concat(%3, t)
-                                    // a = __id(%4)
+            a = (s + s) + t;        // %3 := __concat [ s s ]
+                                    // %4 := __concat [ t %3 ]
+                                    // a := __id [ %4 ]
 
             int x, y, z;
             x = y = z = 5;          // ignored
         }
     }
 }";
-            var ucfg = GetUcfgForMethod(code, "Foo");
-
-            ucfg.BasicBlocks.Should().HaveCount(2);
-            AssertCollection(ucfg.BasicBlocks[0].Instructions,
-                i => ValidateInstruction(i, UcfgBuiltIn.Assignment, "a", new[] { "s" }),
-                i => ValidateInstruction(i, UcfgBuiltIn.Concatenation, "%0", new[] { "s", "s" }),
-                i => ValidateInstruction(i, UcfgBuiltIn.Assignment, "a", new[] { "%0" }),
-                i => ValidateInstruction(i, UcfgBuiltIn.Concatenation, "%1", new[] { "s", "s" }),
-                i => ValidateInstruction(i, UcfgBuiltIn.Concatenation, "%2", new[] { "s", "%1" }),
-                i => ValidateInstruction(i, UcfgBuiltIn.Assignment, "a", new[] { "%2" }),
-                i => ValidateInstruction(i, UcfgBuiltIn.Concatenation, "%3", new[] { "s", "s" }),
-                i => ValidateInstruction(i, UcfgBuiltIn.Concatenation, "%4", new[] { "t", "%3" }),
-                i => ValidateInstruction(i, UcfgBuiltIn.Assignment, "a", new[] { "%4" })
-                );
+            UcfgVerifier.VerifyInstructions(code, "Foo");
         }
 
         [TestMethod]
@@ -298,26 +240,26 @@ namespace Namespace
         {
             string a;
 
-            a = s.ToLower();        // %0 = string.ToLower(s)
-                                    // a = __id(%0)
+            a = s.ToLower();        // %0 := string.ToLower() [ s ]
+                                    // a := __id [ %0 ]
 
-            a = (s + s).ToLower();  // %1 = __concat(s, s)
-                                    // %2 = string.ToLower(%1)
-                                    // a = __id(%2)
+            a = (s + s).ToLower();  // %1 := __concat [ s s ]
+                                    // %2 := string.ToLower() [ %1 ]
+                                    // a := __id [ %2 ]
 
-            Bar(s.ToLower());       // %3 = string.ToLower(s)
-                                    // %4 = Bar(%3)
+            Bar(s.ToLower());       // %3 := string.ToLower() [ s ]
+                                    // %4 := Namespace.Class1.Bar(string) [ %3 ]
 
-            a = string.IsNullOrEmpty(s);    // %5 = string.IsNullOrEmpty(s);
-                                            // a = _id(const) // not using %5 because it is not string
+            a = string.IsNullOrEmpty(s);    // %5 := string.IsNullOrEmpty(string) [ s ];
+                                            // a := __id [ const ] // not using %5 because it is not string
 
-            a = A(B(C(s)));         // %6 = C(s)
+            a = A(B(C(s)));         // %6 := Namespace.Class1.C(string) [ s ]
                                     // B is ignored
-                                    // %7 = A("")
-                                    // a = __id(%7)
+                                    // %7 := Namespace.Class1.A(int) [ const ]
+                                    // a := __id [ %7 ]
 
             int x;
-            x = O(s);               // %8 = O(s);
+            x = O(s);               // %8 := Namespace.Class1.O(object) [ s ];
                                     // no assignment is added because O returns int
         }
 
@@ -329,24 +271,7 @@ namespace Namespace
         public int O(object o) { 5; }
     }
 }";
-            var ucfg = GetUcfgForMethod(code, "Foo");
-
-            ucfg.BasicBlocks.Should().HaveCount(2);
-            AssertCollection(ucfg.BasicBlocks[0].Instructions,
-                i => ValidateInstruction(i, "string.ToLower()", "%0", new[] { "s" }),
-                i => ValidateInstruction(i, UcfgBuiltIn.Assignment, "a", new[] { "%0" }),
-                i => ValidateInstruction(i, UcfgBuiltIn.Concatenation, "%1", new[] { "s", "s" }),
-                i => ValidateInstruction(i, "string.ToLower()", "%2", new[] { "%1" }),
-                i => ValidateInstruction(i, UcfgBuiltIn.Assignment, "a", new[] { "%2" }),
-                i => ValidateInstruction(i, "string.ToLower()", "%3", new[] { "s" }),
-                i => ValidateInstruction(i, "Namespace.Class1.Bar(string)", "%4", new[] { "%3" }),
-                i => ValidateInstruction(i, "string.IsNullOrEmpty(string)", "%5", new[] { "s" }),
-                i => ValidateInstruction(i, UcfgBuiltIn.Assignment, "a", new[] { "\"\"" }),
-                i => ValidateInstruction(i, "Namespace.Class1.C(string)", "%6", new[] { "s" }),
-                i => ValidateInstruction(i, "Namespace.Class1.A(int)", "%7", new[] { "\"\"" }),
-                i => ValidateInstruction(i, UcfgBuiltIn.Assignment, "a", new[] { "%7" }),
-                i => ValidateInstruction(i, "Namespace.Class1.O(object)", "%8", new[] { "s" })
-                );
+            UcfgVerifier.VerifyInstructions(code, "Foo");
         }
 
         [TestMethod]
@@ -366,28 +291,20 @@ namespace Namespace
         public void Foo(string s)
         {
             Class1 c;
-            c = new Class1(s);              // %0 = Class1(s)
+            c = new Class1(s);              // %0 := Namespace.Class1.Class1(string) [ s ]
 
             c = new Class1();               // ignored, does not accept or return string
 
-            c = new Class1(new Class1(s));  // %1 = Class1(s)
+            c = new Class1(new Class1(s));  // %1 := Namespace.Class1.Class1(string) [ s ]
 
-            c = new Class1(s)               // %2 = Class1(s)
+            c = new Class1(s)               // %2 := Namespace.Class1.Class1(string) [ s ]
             {
-                Property = s,               // %3 = Property.set(s)
+                Property = s,               // %3 := Namespace.Class1.Property.set [ s ]
             };
         }
     }
 }";
-            var ucfg = GetUcfgForMethod(code, "Foo");
-
-            ucfg.BasicBlocks.Should().HaveCount(2);
-            AssertCollection(ucfg.BasicBlocks[0].Instructions,
-                i => ValidateInstruction(i, "Namespace.Class1.Class1(string)", "%0", new[] { "s" }),
-                i => ValidateInstruction(i, "Namespace.Class1.Class1(string)", "%1", new[] { "s" }),
-                i => ValidateInstruction(i, "Namespace.Class1.Class1(string)", "%2", new[] { "s" }),
-                i => ValidateInstruction(i, "Namespace.Class1.Property.set", "%3", new[] { "s" })
-                );
+            UcfgVerifier.VerifyInstructions(code, "Foo");
         }
 
         [TestMethod]
@@ -403,14 +320,14 @@ namespace Namespace
         {
             string a;
 
-            a = s.Ext();            // %0 = Extensions.Ext(s);
-                                        // a = __id(%0)
+            a = s.Ext();            // %0 := Namespace.Extensions.Ext(string) [ s ]
+                                    // a := __id [ %0 ]
 
-            a = Extensions.Ext(s);  // %1 = Extensions.Ext(s);
-                                        // a = __id(%1)
+            a = Extensions.Ext(s);  // %1 := Namespace.Extensions.Ext(string) [ s ]
+                                    // a := __id [ %1 ]
 
-            a = this.field.Ext();   // %2 = Extensions.Ext(const);
-                                        // a = __id(%2)
+            a = this.field.Ext();   // %2 := Namespace.Extensions.Ext(string) [ const ]
+                                    // a := __id [ %2 ]
         }
     }
 
@@ -419,17 +336,7 @@ namespace Namespace
         public static string Ext(this string s) { return s; }
     }
 }";
-            var ucfg = GetUcfgForMethod(code, "Foo");
-
-            ucfg.BasicBlocks.Should().HaveCount(2);
-            AssertCollection(ucfg.BasicBlocks[0].Instructions,
-                i => ValidateInstruction(i, "Namespace.Extensions.Ext(string)", "%0", new[] { "s" }),
-                i => ValidateInstruction(i, UcfgBuiltIn.Assignment, "a", new[] { "%0" }),
-                i => ValidateInstruction(i, "Namespace.Extensions.Ext(string)", "%1", new[] { "s" }),
-                i => ValidateInstruction(i, UcfgBuiltIn.Assignment, "a", new[] { "%1" }),
-                i => ValidateInstruction(i, "Namespace.Extensions.Ext(string)", "%2", new[] { "\"\"" }),
-                i => ValidateInstruction(i, UcfgBuiltIn.Assignment, "a", new[] { "%2" })
-                );
+            UcfgVerifier.VerifyInstructions(code, "Foo");
         }
 
         [TestMethod]
@@ -442,8 +349,8 @@ namespace Namespace
     {
         public void Foobar(string s, IBar b1, Bar b2)
         {
-            b1.Foo(s);
-            b2.Foo(s);
+            b1.Foo(s);          // %0 := Namespace.IBar.Foo(string) [ s ]
+            b2.Foo(s);          // %1 := Namespace.Bar.Foo(string) [ s ]
         }
     }
 
@@ -458,13 +365,7 @@ namespace Namespace
         void Foo(string s);
     }
 }";
-            var ucfg = GetUcfgForMethod(code, "Foobar");
-
-            ucfg.BasicBlocks.Should().HaveCount(2);
-            AssertCollection(ucfg.BasicBlocks[0].Instructions,
-                i => ValidateInstruction(i, "Namespace.IBar.Foo(string)", "%0", new[] { "s" }),
-                i => ValidateInstruction(i, "Namespace.Bar.Foo(string)", "%1", new[] { "s" })
-                );
+            UcfgVerifier.VerifyInstructions(code, "Foobar");
         }
 
         [TestMethod]
@@ -477,10 +378,10 @@ namespace Namespace
     {
         public void Foobar(string s, IBar b1, Bar b2, IBar<string> b3)
         {
-            b1.Foo(s);
-            b2.Foo(s);
-            b2.Fooooo(s);
-            b3.Fooooo(s);
+            b1.Foo(s);            // %0 := Namespace.IBar.Foo<T>(T) [ s ]
+            b2.Foo(s);            // %1 := Namespace.Bar.Foo<T>(T) [ s ]
+            b2.Fooooo(s);         // %2 := Namespace.Bar.Fooooo(string) [ s ]
+            b3.Fooooo(s);         // %3 := Namespace.IBar<T>.Fooooo(T) [ s ]
         }
     }
 
@@ -502,15 +403,7 @@ namespace Namespace
         void Fooooo(T s);
     }
 }";
-            var ucfg = GetUcfgForMethod(code, "Foobar");
-
-            ucfg.BasicBlocks.Should().HaveCount(2);
-            AssertCollection(ucfg.BasicBlocks[0].Instructions,
-                i => ValidateInstruction(i, "Namespace.IBar.Foo<T>(T)", "%0", new[] { "s" }),
-                i => ValidateInstruction(i, "Namespace.Bar.Foo<T>(T)", "%1", new[] { "s" }),
-                i => ValidateInstruction(i, "Namespace.Bar.Fooooo(string)", "%2", new[] { "s" }),
-                i => ValidateInstruction(i, "Namespace.IBar<T>.Fooooo(T)", "%3", new[] { "s" })
-                );
+            UcfgVerifier.VerifyInstructions(code, "Foobar");
         }
 
         [TestMethod]
@@ -523,19 +416,12 @@ public class Class1 : Controller
 {
     private string field;
     public void Foo([Description]string s, [Missing]string x)
-    {               //      %0 = __entrypoint(s, x)
-    }               //      %1 = Description()
-                    //      s = __annotation(%1)
+    {               // %0 := __entrypoint [ s x ]
+    }               // %1 := System.ComponentModel.DescriptionAttribute.DescriptionAttribute() [  ]
+                    // s := __annotation [ %1 ]
                     // the other attribute is unknown and is not included
 }";
-            var ucfg = GetUcfgForMethod(code, "Foo");
-
-            ucfg.BasicBlocks.Should().HaveCount(2);
-            AssertCollection(ucfg.BasicBlocks[1].Instructions,
-                i => ValidateInstruction(i, UcfgBuiltIn.EntryPoint, "%0", new[] { "s", "x" }),
-                i => ValidateInstruction(i, "System.ComponentModel.DescriptionAttribute.DescriptionAttribute()", "%1"),
-                i => ValidateInstruction(i, UcfgBuiltIn.Annotation, "s", new[] { "%1" })
-                );
+            UcfgVerifier.VerifyInstructions(code, "Foo");
         }
 
         [TestMethod]
@@ -547,12 +433,12 @@ public class Class1
     private string field;
     public void Foo(string s)
     {
-        string a = ""a""; // a = __id(const)
-        string b = ""b""; // b = __id(const)
-        string c = ""c""; // c = __id(const)
+        string a = ""a""; // a := __id [ const ]
+        string b = ""b""; // b := __id [ const ]
+        string c = ""c""; // c := __id [ const ]
     }
 }";
-            var ucfg = GetUcfgForMethod(code, "Foo");
+            var ucfg = UcfgVerifier.GetUcfgForMethod(code, "Foo");
 
             var a = ucfg.BasicBlocks[0].Instructions[0].Args[0];
             var b = ucfg.BasicBlocks[0].Instructions[1].Args[0];

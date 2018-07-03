@@ -244,15 +244,21 @@ namespace Namespace
         public void Foo(string s) { }
     }
 
+    public class Foo : Bar
+    {
+        void IBar.Foo(string s) { }
+    }
+
     public interface IBar
     {
         void Foo(string s);
     }
 }
 ";
+
             var (syntaxTree, semanticModel) = TestHelper.Compile(code);
 
-            MethodId("Foo").Should().Be("Namespace.IBar.Foo(string)");
+            MethodId("Foo").Should().Be("Namespace.Bar.Namespace.IBar.Foo(string)");
             MethodId("Foo", skip: 1).Should().Be("Namespace.Bar.Foo(string)");
 
             string MethodId(string methodName, int skip = 0) =>
