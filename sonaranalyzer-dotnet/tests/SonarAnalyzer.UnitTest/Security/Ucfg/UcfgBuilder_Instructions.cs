@@ -154,7 +154,7 @@ namespace Namespace
 
             this.Property = s                       // %12 := Namespace.Class1.Property.set [ this s ]
 
-            var other = new Class1();               // %13 := __id [ const ]
+            var other = new Class1();               // %13 := new Namespace.Class1
                                                     // %14 := Namespace.Class1.Class1() [ %13 ]
                                                     // other := __id [ %13 ]
             other.Property = s;                     // %15 := Namespace.Class1.Property.set [ other s ]
@@ -251,7 +251,7 @@ namespace Namespace
             this.Bar(s);                    // %10 := Namespace.Class1.Bar(string) [ this s ]
             base.BaseMethod();              // %11 := Namespace.BaseClass.BaseMethod() [ this ]
 
-            var other = new Class1();       // %12 := __id [ const ]
+            var other = new Class1();       // %12 := new Namespace.Class1
                                             // %13 := Namespace.Class1.Class1() [ %12 ]
                                             // other := __id [ %12 ]
             other.Bar(s);                   // %14 := Namespace.Class1.Bar(string) [ other s ]
@@ -272,6 +272,7 @@ namespace Namespace
             const string code = @"
 namespace Namespace
 {
+    using System.Collections.Generic;
     public class Class1
     {
         public string Property { get; set; }
@@ -281,24 +282,28 @@ namespace Namespace
         public void Foo(string s)
         {
             Class1 c;
-            c = new Class1(s);              // %0 := __id [ const ]
+            c = new Class1(s);              // %0 := new Namespace.Class1
                                             // %1 := Namespace.Class1.Class1(string) [ %0 s ]
                                             // c := __id [ %0 ]
 
-            c = new Class1();               // %2 := __id [ const ]
+            c = new Class1();               // %2 := new Namespace.Class1
                                             // %3 := Namespace.Class1.Class1() [ %2 ]
                                             // c := __id [ %2 ]
 
-            c = new Class1(new Class1(s));  // %4 := __id [ const ]
+            c = new Class1(new Class1(s));  // %4 := new Namespace.Class1
                                             // %5 := Namespace.Class1.Class1(string) [ %4 s ]
-                                            // %6 := __id [ const ]
+                                            // %6 := new Namespace.Class1
                                             // %7 := Namespace.Class1.Class1(Namespace.Class1) [ %6 %4 ]
                                             // c := __id [ %6 ]
 
-            c = new Class1(s)               // %8 := __id [ const ]
+            c = new Class1(s)               // %8 := new Namespace.Class1
             {                               // %9 := Namespace.Class1.Class1(string) [ %8 s ]
                 Property = s,               // %10 := Namespace.Class1.Property.set [ %8 s ]
             };                              // c := __id [ %8 ]
+
+            var x = new List<string>();     // %11 := new System.Collections.Generic.List<T>
+                                            // %12 := System.Collections.Generic.List<T>.List() [ %11 ]
+                                            // x := __id [ %11 ]
         }
     }
 }";
