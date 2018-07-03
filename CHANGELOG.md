@@ -16,7 +16,8 @@ For reference, the possible headings are:
 ## Unreleased
 
 ### Notes
-* [All commits](https://github.com/SonarSource/sonar-csharp/compare/7.3.0.5690 ...HEAD)
+* [All commits](https://github.com/SonarSource/sonar-csharp/compare/7.3.0.5690...HEAD)
+
 
 ### Bug Fixes
 * [1438](https://github.com/SonarSource/sonar-csharp/issues/1438) - Fix string formats in the csharp plugin
