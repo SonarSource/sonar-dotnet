@@ -458,5 +458,50 @@ public class Foo
 }";
             UcfgVerifier.GetUcfgForMethod(code, "Bar");
         }
+
+        [TestMethod]
+        public void BuiltInTypeAreConvertedToConstant()
+        {
+            const string code = @"
+namespace Namespace
+{
+    public class Class1
+    {
+        public void Foo()
+        {
+            bool @bool = true;      // bool := __id [ const ]
+            byte @byte = 1;         // byte := __id [ const ]
+            sbyte @sbyte = 1;       // sbyte := __id [ const ]
+            char @char = 'c';       // char := __id [ const ]
+            decimal @decimal = 1;   // decimal := __id [ const ]
+            double @double = 1;     // double := __id [ const ]
+            float @float = 1;       // float := __id [ const ]
+            int @int = 1;           // int := __id [ const ]
+            uint @uint = 1;         // uint := __id [ const ]
+            long @long = 1;         // long := __id [ const ]
+            ulong @ulong = 1;       // ulong := __id [ const ]
+            short @short = 1;       // short := __id [ const ]
+            ushort @ushort = 1;     // ushort := __id [ const ]
+
+            Bar(true);              // %0 := Namespace.Class1.Bar(object) [ this const ]
+            Bar((byte) 1);          // %1 := Namespace.Class1.Bar(object) [ this const ]
+            Bar((sbyte) 1);         // %2 := Namespace.Class1.Bar(object) [ this const ]
+            Bar('c');               // %3 := Namespace.Class1.Bar(object) [ this const ]
+            Bar((decimal) 1);       // %4 := Namespace.Class1.Bar(object) [ this const ]
+            Bar((double) 1);        // %5 := Namespace.Class1.Bar(object) [ this const ]
+            Bar((float) 1);         // %6 := Namespace.Class1.Bar(object) [ this const ]
+            Bar((int) 1);           // %7 := Namespace.Class1.Bar(object) [ this const ]
+            Bar((uint) 1);          // %8 := Namespace.Class1.Bar(object) [ this const ]
+            Bar((long) 1);          // %9 := Namespace.Class1.Bar(object) [ this const ]
+            Bar((ulong) 1);         // %10 := Namespace.Class1.Bar(object) [ this const ]
+            Bar((short) 1);         // %11 := Namespace.Class1.Bar(object) [ this const ]
+            Bar((ushort) 1);        // %12 := Namespace.Class1.Bar(object) [ this const ]
+        }
+
+        public void Bar(object o) {}
+    }
+}";
+            UcfgVerifier.VerifyInstructions(code, "Foo");
+        }
     }
 }
