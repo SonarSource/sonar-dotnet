@@ -42,7 +42,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             var ucfgBlock = CreateBlockWithId(blockIdProvider.Get(block));
 
             ucfgBlock.Instructions.AddRange(
-                block.Instructions.Select(instructionBuilder.Create).WhereNotNull());
+                block.Instructions.SelectMany(instructionBuilder.Create).WhereNotNull());
 
             if (block is JumpBlock jumpBlock &&
                 jumpBlock.JumpNode is ReturnStatementSyntax returnStatement)
