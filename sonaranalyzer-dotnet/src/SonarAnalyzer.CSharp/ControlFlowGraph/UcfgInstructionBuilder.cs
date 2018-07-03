@@ -118,7 +118,8 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             // To avoid this behavior, we associate the method call to the type of the objectCreationExpression
             return new[]
             {
-                CreateInstruction(objectCreationExpression, UcfgIdentifier.Assignment, CreateTempVariable(), ConstantExpression),
+                CreateInstruction(objectCreationExpression, UcfgIdentifier.CreateTypeId(ctorSymbol.ContainingType),
+                    CreateTempVariable(), ConstantExpression),
                 AddMethodCall(objectCreationExpression.Type, ctorSymbol, BuildArguments())
             };
 
@@ -345,6 +346,23 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
         private Instruction CreateInstruction(SyntaxNode syntaxNode, UcfgIdentifier method, string returnVariable,
             params Expression[] arguments)
         {
+            // Associate node to the UCFG variable
+            CreateVariable(syntaxNode, returnVariable);
+
+            // Create the instruction
+            if (syntaxNode is ObjectCreationExpressionSyntax)
+            {
+                return new Instruction
+                {
+                    NewObject = new NewObject
+                    {
+                        Location = syntaxNode.GetUcfgLocation(),
+                        Type = method.ToString(),
+                        Variable = returnVariable,
+                    }
+                };
+            }
+
             var methodCall = new AssignCall
             {
                 Location = syntaxNode.GetUcfgLocation(),
@@ -352,8 +370,6 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                 Variable = returnVariable,
             };
             methodCall.Args.AddRange(arguments);
-            CreateVariable(syntaxNode, methodCall.Variable);
-
             return new Instruction { Assigncall = methodCall };
         }
 
