@@ -106,6 +106,14 @@ namespace SonarAnalyzer.UnitTest.Security.Framework
                 {
                     return "const";
                 }
+                else if (expression.This != null)
+                {
+                    return "this";
+                }
+                else if (expression.Classname != null)
+                {
+                    return expression.Classname.Classname;
+                }
                 else
                 {
                     throw new ArgumentOutOfRangeException(nameof(expression));

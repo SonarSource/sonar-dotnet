@@ -41,7 +41,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             var ucfg = new UCFG
             {
                 Location = syntaxNode.GetUcfgLocation(),
-                MethodId = UcfgMethod.Create(methodSymbol),
+                MethodId = UcfgIdentifier.CreateMethodId(methodSymbol).ToString(),
             };
 
             ucfg.BasicBlocks.AddRange(cfg.Blocks.Select(blockBuilder.CreateBasicBlock));
