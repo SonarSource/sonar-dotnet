@@ -21,7 +21,6 @@
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Protobuf.Ucfg;
 
 namespace SonarAnalyzer.ControlFlowGraph.CSharp
@@ -41,8 +40,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
         {
             var ucfgBlock = CreateBlockWithId(blockIdProvider.Get(block));
 
-            ucfgBlock.Instructions.AddRange(
-                block.Instructions.Select(instructionBuilder.Create).WhereNotNull());
+            ucfgBlock.Instructions.AddRange(block.Instructions.SelectMany(instructionBuilder.Create));
 
             if (block is JumpBlock jumpBlock &&
                 jumpBlock.JumpNode is ReturnStatementSyntax returnStatement)
