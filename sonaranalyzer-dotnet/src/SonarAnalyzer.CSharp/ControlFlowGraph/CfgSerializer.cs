@@ -23,6 +23,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.ControlFlowGraph.CSharp
@@ -128,7 +129,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                 if (terminator != null)
                 {
                     // shorten the text
-                    var terminatorType = terminator.GetType().Name.Replace("Syntax", string.Empty);
+                    var terminatorType = terminator.Kind().ToString().Replace("Syntax", string.Empty);
 
                     header += ":" + terminatorType;
                 }
