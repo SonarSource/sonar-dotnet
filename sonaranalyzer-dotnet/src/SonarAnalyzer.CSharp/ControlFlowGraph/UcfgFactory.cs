@@ -26,17 +26,17 @@ using SonarAnalyzer.Protobuf.Ucfg;
 
 namespace SonarAnalyzer.ControlFlowGraph.CSharp
 {
-    public class UcfgBuilder
+    internal class UcfgFactory
     {
         private readonly BlockIdProvider blockIdProvider = new BlockIdProvider();
-        private readonly UcfgBlockBuilder blockBuilder;
+        private readonly UcfgBlockFactory blockBuilder;
 
-        public UcfgBuilder(SemanticModel semanticModel)
+        public UcfgFactory(SemanticModel semanticModel)
         {
-            this.blockBuilder = new UcfgBlockBuilder(semanticModel, blockIdProvider);
+            this.blockBuilder = new UcfgBlockFactory(semanticModel, blockIdProvider);
         }
 
-        public UCFG Build(SyntaxNode syntaxNode, IMethodSymbol methodSymbol, IControlFlowGraph cfg)
+        public UCFG Create(SyntaxNode syntaxNode, IMethodSymbol methodSymbol, IControlFlowGraph cfg)
         {
             var ucfg = new UCFG
             {

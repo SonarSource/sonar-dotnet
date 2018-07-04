@@ -24,7 +24,6 @@ using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Protobuf.Ucfg;
 
 namespace SonarAnalyzer.ControlFlowGraph.CSharp
@@ -33,29 +32,17 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
     /// High level UCFG Instruction factory that controls UcfgObjectFactory to create objects
     /// depending on the provided SyntaxNodes.
     /// </summary>
-    public class UcfgInstructionBuilder
+    internal class UcfgInstructionFactory
     {
-        /// <summary>
-        /// The string constant representation in the Sonar Security engine (Java part). When
-        /// an instruction receives or returns a type that is not string we use this instead
-        /// of a variable.
-        /// </summary>
-        private static readonly Expression ConstantExpression = new Expression
-        {
-            Const = new Constant { Value = "\"\"" }
-        };
-
-        private static readonly Expression ThisExpression = new Expression { This = new This() };
-
         private readonly SemanticModel semanticModel;
-        private readonly Dictionary<SyntaxNode, Expression> syntaxNodeToUcfgExpressionCache
-            = new Dictionary<SyntaxNode, Expression>();
+        private readonly UcfgExpressionService expressionService;
 
         private int tempVariablesCounter;
 
-        public UcfgInstructionBuilder(SemanticModel semanticModel)
+        public UcfgInstructionFactory(SemanticModel semanticModel, UcfgExpressionService expressionService)
         {
             this.semanticModel = semanticModel;
+            this.expressionService = expressionService;
         }
 
         public IEnumerable<Instruction> Create(SyntaxNode syntaxNode)
@@ -81,13 +68,13 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                     return CreateFromAssignmentExpression(assignmentExpression);
 
                 case BaseMethodDeclarationSyntax methodDeclaration:
-                    return CreateEntryPointInstruction(methodDeclaration);
+                    return CreateFromBaseMethodDeclaration(methodDeclaration);
 
                 case InstanceExpressionSyntax instanceExpression:
-                    return CreateInstanceInstruction(instanceExpression);
+                    return CreateFromInstanceExpression(instanceExpression);
 
                 default:
-                    return CreateDefaultInstruction(syntaxNode);
+                    return CreateFromUnhandledSyntaxNode(syntaxNode);
             }
         }
 
@@ -95,12 +82,12 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             string parameterName) =>
             new[]
             {
-                AddMethodCall(attributeSyntax, attributeCtor),
+                CreateMethodCallInstruction(attributeSyntax, attributeCtor),
                 CreateMethodCallInstruction(attributeSyntax, UcfgIdentifier.Annotation, parameterName,
-                    GetMappedExpression(attributeSyntax)),
+                    expressionService.Get(attributeSyntax)),
             };
 
-        private IEnumerable<Instruction> CreateDefaultInstruction(SyntaxNode node) =>
+        private IEnumerable<Instruction> CreateFromUnhandledSyntaxNode(SyntaxNode node) =>
             CreateConstant(node);
 
         private IEnumerable<Instruction> CreateFromObjectCreationExpression(ObjectCreationExpressionSyntax objectCreationExpression)
@@ -122,18 +109,18 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             {
                 CreateNewObjectInstruction(objectCreationExpression, UcfgIdentifier.CreateTypeId(ctorSymbol.ContainingType),
                     CreateTempVariable()),
-                AddMethodCall(objectCreationExpression.Type, ctorSymbol, BuildArguments())
+                CreateMethodCallInstruction(objectCreationExpression.Type, ctorSymbol, BuildArguments())
             };
 
             Expression[] BuildArguments()
             {
                 // When building the args of the method call we need to pass the instance creation as first argument.
-                var methodCallArgs = new List<Expression> { GetMappedExpression(objectCreationExpression) };
+                var methodCallArgs = new List<Expression> { expressionService.Get(objectCreationExpression) };
 
                 if (objectCreationExpression.ArgumentList != null)
                 {
                     methodCallArgs.AddRange(
-                        objectCreationExpression.ArgumentList.Arguments.Select(a => a.Expression).Select(GetMappedExpression));
+                        objectCreationExpression.ArgumentList.Arguments.Select(a => a.Expression).Select(expressionService.Get));
                 }
 
                 return methodCallArgs.ToArray();
@@ -146,7 +133,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
 
             if (identifierSymbol is IPropertySymbol property)
             {
-                yield return AddMethodCall(identifierName, property.GetMethod, BuildPropertyGetterArguments().ToArray());
+                yield return CreateMethodCallInstruction(identifierName, property.GetMethod, BuildPropertyGetterArguments().ToArray());
             }
             else if (IsLocalVarOrParameter(identifierSymbol))
             {
@@ -161,11 +148,11 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             {
                 if (property.IsStatic)
                 {
-                    yield return CreateStaticCallExpression(property.ContainingType);
+                    yield return UcfgExpression.FromNamedType(property.ContainingType);
                 }
                 else
                 {
-                    yield return ThisExpression;
+                    yield return UcfgExpression.This;
                 }
             }
         }
@@ -181,7 +168,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             if (IsLocalVarOrParameter(variable))
             {
                 return new[] { CreateAssignment(variableDeclarator, variable.Name,
-                    GetMappedExpression(variableDeclarator.Initializer.Value)) };
+                    expressionService.Get(variableDeclarator.Initializer.Value)) };
             }
 
             return Enumerable.Empty<Instruction>();
@@ -191,7 +178,8 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
              new[]
              {
                  CreateMethodCallInstruction(binaryExpression, UcfgIdentifier.Concatenation, CreateTempVariable(),
-                    GetMappedExpression(binaryExpression.Right), GetMappedExpression((binaryExpression.Left)))
+                    expressionService.Get(binaryExpression.Right),
+                    expressionService.Get(binaryExpression.Left))
              };
 
         private IEnumerable<Instruction> CreateFromInvocationExpression(InvocationExpressionSyntax invocationExpression)
@@ -202,25 +190,25 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                 return CreateConstant(invocationExpression);
             }
 
-            return new[] { AddMethodCall(invocationExpression, methodSymbol, BuildArguments().ToArray()) };
+            return new[] { CreateMethodCallInstruction(invocationExpression, methodSymbol, BuildArguments().ToArray()) };
 
             IEnumerable<Expression> BuildArguments()
             {
                 if (methodSymbol.IsStatic ||
                     methodSymbol.ReducedFrom != null)
                 {
-                    yield return CreateStaticCallExpression(methodSymbol.ContainingType);
+                    yield return UcfgExpression.FromNamedType(methodSymbol.ContainingType);
                 }
 
                 if (!methodSymbol.IsStatic)
                 {
                     if (invocationExpression.Expression is MemberAccessExpressionSyntax memberAccess)
                     {
-                        yield return GetMappedExpression(memberAccess.Expression);
+                        yield return expressionService.Get(memberAccess.Expression);
                     }
                     else
                     {
-                        yield return ThisExpression;
+                        yield return UcfgExpression.This;
                     }
                 }
 
@@ -231,7 +219,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
 
                 foreach (var argument in invocationExpression.ArgumentList.Arguments)
                 {
-                    yield return GetMappedExpression(argument.Expression);
+                    yield return expressionService.Get(argument.Expression);
                 }
             }
         }
@@ -243,11 +231,11 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             if (IsLocalVarOrParameter(left))
             {
                 return new[] { CreateAssignment(assignmentExpression, left.Name,
-                    GetMappedExpression(assignmentExpression.Right)) };
+                    expressionService.Get(assignmentExpression.Right)) };
             }
             else if (left is IPropertySymbol property && property.SetMethod != null)
             {
-                return new[] { AddMethodCall(assignmentExpression, property.SetMethod,
+                return new[] { CreateMethodCallInstruction(assignmentExpression, property.SetMethod,
                     BuildPropertySetterArguments(property).ToArray()) };
             }
             else
@@ -259,27 +247,27 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             {
                 if (property.IsStatic)
                 {
-                    yield return CreateStaticCallExpression(property.ContainingType);
+                    yield return UcfgExpression.FromNamedType(property.ContainingType);
                 }
                 else if (assignmentExpression.Parent is InitializerExpressionSyntax initializerExpression)
                 {
                     // We should return the variable associated to the ObjectCreation
-                    yield return GetMappedExpression(initializerExpression.Parent);
+                    yield return expressionService.Get(initializerExpression.Parent);
                 }
                 else if (assignmentExpression.Left is MemberAccessExpressionSyntax memberAccess)
                 {
-                    yield return GetMappedExpression(memberAccess.Expression);
+                    yield return expressionService.Get(memberAccess.Expression);
                 }
                 else
                 {
-                    yield return ThisExpression;
+                    yield return UcfgExpression.This;
                 }
 
-                yield return GetMappedExpression(assignmentExpression.Right);
+                yield return expressionService.Get(assignmentExpression.Right);
             }
         }
 
-        private IEnumerable<Instruction> CreateEntryPointInstruction(BaseMethodDeclarationSyntax methodDeclaration)
+        private IEnumerable<Instruction> CreateFromBaseMethodDeclaration(BaseMethodDeclarationSyntax methodDeclaration)
         {
             foreach (var parameter in methodDeclaration.ParameterList.Parameters)
             {
@@ -287,36 +275,33 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             }
 
             return new[] { CreateMethodCallInstruction(methodDeclaration, UcfgIdentifier.EntryPoint, CreateTempVariable(),
-                methodDeclaration.ParameterList.Parameters.Select(GetMappedExpression).ToArray()) };
+                methodDeclaration.ParameterList.Parameters.Select(expressionService.Get).ToArray()) };
         }
 
-        private IEnumerable<Instruction> CreateInstanceInstruction(InstanceExpressionSyntax instanceExpression)
+        private IEnumerable<Instruction> CreateFromInstanceExpression(InstanceExpressionSyntax instanceExpression)
         {
-            syntaxNodeToUcfgExpressionCache[instanceExpression] = ThisExpression;
+            expressionService.RegisterAsThis(instanceExpression);
             return Enumerable.Empty<Instruction>();
         }
 
         public IEnumerable<Instruction> CreateVariable(SyntaxNode syntaxNode, string variableName)
         {
-            syntaxNodeToUcfgExpressionCache[syntaxNode] = CreateVariableExpression(variableName);
+            expressionService.RegisterAsVariable(syntaxNode, variableName);
             return Enumerable.Empty<Instruction>();
         }
 
         public IEnumerable<Instruction> CreateConstant(SyntaxNode syntaxNode)
         {
-            syntaxNodeToUcfgExpressionCache[syntaxNode] = ConstantExpression;
+            expressionService.RegisterAsConstant(syntaxNode);
             return Enumerable.Empty<Instruction>();
-        }
-
-        private Instruction AddMethodCall(SyntaxNode invocation, IMethodSymbol methodSymbol, params Expression[] arguments)
-        {
-            var instruction = CreateMethodCallInstruction(invocation, UcfgIdentifier.CreateMethodId(methodSymbol),
-                CreateTempVariable(), arguments);
-            return instruction;
         }
 
         public Instruction CreateAssignment(SyntaxNode syntaxNode, string variableName, Expression argument) =>
             CreateMethodCallInstruction(syntaxNode, UcfgIdentifier.Assignment, variableName, argument);
+
+        private Instruction CreateMethodCallInstruction(SyntaxNode invocation, IMethodSymbol methodSymbol,
+            params Expression[] arguments) =>
+            CreateMethodCallInstruction(invocation, UcfgIdentifier.CreateMethodId(methodSymbol), CreateTempVariable(), arguments);
 
         private Instruction CreateMethodCallInstruction(SyntaxNode syntaxNode, UcfgIdentifier method, string returnVariable,
             params Expression[] arguments)
@@ -357,31 +342,6 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                 }
             };
         }
-
-        public Return CreateReturnExpression(SyntaxNode syntaxNode = null, SyntaxNode returnedValue = null) =>
-            new Return
-            {
-                Location = syntaxNode == null
-                    ? null
-                    : syntaxNode.GetUcfgLocation(),
-                ReturnedExpression = returnedValue == null
-                    ? ConstantExpression
-                    : GetMappedExpression(returnedValue),
-            };
-
-        private static Expression CreateVariableExpression(string name) =>
-            new Expression { Var = new Variable { Name = name } };
-
-        private static Expression CreateStaticCallExpression(INamedTypeSymbol namedType) =>
-            new Expression { Classname = new ClassName { Classname = UcfgIdentifier.CreateTypeId(namedType).ToString() } };
-
-        private Expression GetMappedExpression(SyntaxNode syntaxNode) =>
-            syntaxNodeToUcfgExpressionCache.GetValueOrDefault(syntaxNode.RemoveParentheses())
-            // In some cases the CFG does not contain all syntax nodes that were used in
-            // an expression, for example when ternary operator is passed as an argument.
-            // This could potentially be improved, but for the time being the constant
-            // expression fallback will do what we used to do before.
-            ?? ConstantExpression;
 
         private string CreateTempVariable() =>
             $"%{tempVariablesCounter++}";
