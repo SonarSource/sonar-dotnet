@@ -36,6 +36,8 @@ namespace Namespace
 {
     public class Class1
     {
+        public static string staticField;
+
         private string field;
         public void Foo(string s)
         {
@@ -45,7 +47,9 @@ namespace Namespace
             var x = new string[5];  // x := __id [ const ]
             int i;
             i = 5;                  // i := __id [ const ]
+
             field = s;              // ignored
+            Class1.staticField = s; // ignored
         }
     }
 }";
@@ -131,6 +135,8 @@ namespace Namespace
 {
     public class Class1
     {
+        public static string StaticProperty { get; set; }
+
         public string Property { get; set; }
         public int IntProperty { get; set; }
         public object ObjectProperty { get; set; }
@@ -159,6 +165,13 @@ namespace Namespace
                                                     // other := __id [ %13 ]
             other.Property = s;                     // %15 := Namespace.Class1.Property.set [ other s ]
             other.ObjectProperty = other.Property;  // %16 := Namespace.Class1.ObjectProperty.set [ other const ]
+
+            Class1.StaticProperty = s;              // %17 := Namespace.Class1.StaticProperty.set [ Namespace.Class1 s ]
+            StaticProperty = s;                     // %18 := Namespace.Class1.StaticProperty.set [ Namespace.Class1 s ]
+
+            a = StaticProperty;                     // %19 := Namespace.Class1.StaticProperty.get [ Namespace.Class1 ]
+                                                    // a := __id [ %19 ]
+            a = Class1.StaticProperty;              // a := __id [ const ]
 
             return s;
         }
@@ -258,12 +271,18 @@ namespace Namespace
 
             Bar(field);                     // %15 := Namespace.Class1.Bar(string) [ this const ]
             Bar(other.field);               // %16 := Namespace.Class1.Bar(string) [ this const ]
+
+            StaticMethod(s);                // %17 := Namespace.Class1.StaticMethod(string) [ Namespace.Class1 s ]
+            Class1.StaticMethod(s);         // %18 := Namespace.Class1.StaticMethod(string) [ Namespace.Class1 s ]
+
         }
         public void Bar(string s) { }
         public string A(int x) { return x.ToString(); }
         public int B(int x) { return x; }
         public int C(string s) { 5; }
         public int O(object o) { 5; }
+
+        public static string StaticMethod(string s) { return s; }
     }
 }";
             UcfgVerifier.VerifyInstructions(code, "Foo");
