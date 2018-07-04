@@ -227,7 +227,7 @@ namespace Namespace
 
     public class Class1 : BaseClass
     {
-        private string field;
+        public string field;
         public void Foo(string s)
         {
             string a;
@@ -255,6 +255,9 @@ namespace Namespace
                                             // %13 := Namespace.Class1.Class1() [ %12 ]
                                             // other := __id [ %12 ]
             other.Bar(s);                   // %14 := Namespace.Class1.Bar(string) [ other s ]
+
+            Bar(field);                     // %15 := Namespace.Class1.Bar(string) [ this const ]
+            Bar(other.field);               // %16 := Namespace.Class1.Bar(string) [ this const ]
         }
         public void Bar(string s) { }
         public string A(int x) { return x.ToString(); }
