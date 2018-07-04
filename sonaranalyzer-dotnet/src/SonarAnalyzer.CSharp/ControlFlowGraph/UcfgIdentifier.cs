@@ -22,7 +22,7 @@ using Microsoft.CodeAnalysis;
 
 namespace SonarAnalyzer.ControlFlowGraph.CSharp
 {
-    public struct UcfgIdentifier
+    internal struct UcfgIdentifier
     {
         /// <summary>
         /// The method ID that the Security Engine uses for assignments. It accepts one argument

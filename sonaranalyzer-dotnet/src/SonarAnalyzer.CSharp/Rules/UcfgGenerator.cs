@@ -147,8 +147,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            var ucfg = new UcfgBuilder(context.SemanticModel)
-                .Build(declaration, methodSymbol, cfg);
+            var ucfg = new UcfgFactory(context.SemanticModel)
+                .Create(declaration, methodSymbol, cfg);
 
             if (IsValid(ucfg))
             {
