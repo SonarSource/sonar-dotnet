@@ -123,7 +123,9 @@ namespace SonarAnalyzer.UnitTest.Security.Framework
 
         internal static class UcfgInstructionCollector
         {
-            private const string UCFG_INSTRUCTION = @"// (?<instruction>.*? := .*? \[ .*? \])";
+            private const string UCFG_NEW_OBJECT = @"// (?<instruction>.+? := new .+?)(\r\n|\n)";
+            private const string UCFG_CALL = @"// (?<instruction>.+? := .+? \[ .*? \])";
+            private const string UCFG_INSTRUCTION = UCFG_NEW_OBJECT + "|" + UCFG_CALL;
 
             public static IEnumerable<string> Collect(string codeSnippet)
             {
