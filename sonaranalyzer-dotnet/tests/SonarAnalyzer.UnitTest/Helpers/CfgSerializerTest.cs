@@ -105,7 +105,7 @@ class C
             var dot = CfgSerializer.Serialize("Foo", GetCfgForMethod(code, "Foo"));
 
             dot.Should().BeIgnoringLineEndings(@"digraph ""Foo"" {
-0 [shape=record label=""{BINARY:IfStatement|true}""]
+0 [shape=record label=""{BINARY:TrueLiteralExpression|true}""]
 0 -> 1 [label=""True""]
 0 -> 2 [label=""False""]
 1 [shape=record label=""{SIMPLE|Bar|Bar()}""]
