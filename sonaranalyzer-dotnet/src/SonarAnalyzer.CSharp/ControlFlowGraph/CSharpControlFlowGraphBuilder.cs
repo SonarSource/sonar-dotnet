@@ -749,8 +749,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             //// while (A) { B; }
             var conditionBlockTemp = CreateTemporaryBlock();
 
-            var conditionBlock = BuildExpression(doStatement.Condition,
-                CreateBinaryBranchBlock(doStatement, conditionBlockTemp, currentBlock)); // A
+            var conditionBlock = BuildCondition(doStatement.Condition, conditionBlockTemp, currentBlock); // A
 
             BreakTarget.Push(currentBlock);
             ContinueTargets.Push(conditionBlock);
@@ -826,8 +825,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             BreakTarget.Pop();
             ContinueTargets.Pop();
 
-            var loopCondition = BuildExpression(whileStatement.Condition,
-                CreateBinaryBranchBlock(whileStatement, bodyBlock, currentBlock));
+            var loopCondition = BuildCondition(whileStatement.Condition, bodyBlock, currentBlock);
 
             loopTempBlock.SuccessorBlock = loopCondition;
 
@@ -845,8 +843,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                 : currentBlock;
             var trueBlock = BuildStatement(ifStatement.Statement, CreateBlock(currentBlock));
 
-            var ifConditionBlock = BuildExpression(ifStatement.Condition,
-                AddBlock(new BinaryBranchBlock(ifStatement, trueBlock, elseBlock)));
+            var ifConditionBlock = BuildCondition(ifStatement.Condition, trueBlock, elseBlock);
 
             return ifConditionBlock;
         }
@@ -880,7 +877,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             var falseBlock = BuildExpression(conditional.WhenFalse, CreateBlock(currentBlock));
             var trueBlock = BuildExpression(conditional.WhenTrue, CreateBlock(currentBlock));
 
-            return BuildExpression(conditional.Condition, CreateBinaryBranchBlock(conditional, trueBlock, falseBlock));
+            return BuildCondition(conditional.Condition, trueBlock, falseBlock);
         }
 
         private Block BuildCoalesceExpression(BinaryExpressionSyntax expression, Block currentBlock)
@@ -1070,6 +1067,42 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             AddBlock(new UsingEndBlock(usingStatement, successor));
 
         #endregion Create*
+
+        #region Condition
+
+        /// <summary>
+        /// Builds a conditional expression with two successor blocks. The BuildExpression method
+        /// creates a tree with only one successor.
+        /// </summary>
+        private Block BuildCondition(ExpressionSyntax expression, Block trueSuccessor, Block falseSuccessor)
+        {
+            expression = expression.RemoveParentheses();
+
+            if (expression is BinaryExpressionSyntax binaryExpression)
+            {
+                switch (expression.Kind())
+                {
+                    case SyntaxKind.LogicalOrExpression:
+                        return BuildCondition(
+                            binaryExpression.Left,
+                            trueSuccessor,
+                            BuildCondition(binaryExpression.Right, trueSuccessor, falseSuccessor));
+
+                    case SyntaxKind.LogicalAndExpression:
+                    case SyntaxKind.CoalesceExpression:
+                        return BuildCondition(
+                            binaryExpression.Left,
+                            BuildCondition(binaryExpression.Right, trueSuccessor, falseSuccessor),
+                            falseSuccessor);
+                }
+            }
+
+            // Fallback to generating an additional branch block for the if statement itself.
+            return BuildExpression(expression,
+                    AddBlock(new BinaryBranchBlock(expression, trueSuccessor, falseSuccessor)));
+        }
+
+        #endregion Condition
 
         #endregion Build*
     }

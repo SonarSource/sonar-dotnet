@@ -124,20 +124,8 @@ namespace SonarAnalyzer.SymbolicExecution
                     VisitBinaryBranch(binaryBranchBlock, node, ((BinaryExpressionSyntax)binaryBranchBlock.BranchingNode).Left);
                     return;
 
-                case SyntaxKind.WhileStatement:
-                    VisitBinaryBranch(binaryBranchBlock, node, ((WhileStatementSyntax)binaryBranchBlock.BranchingNode).Condition);
-                    return;
-
-                case SyntaxKind.DoStatement:
-                    VisitBinaryBranch(binaryBranchBlock, node, ((DoStatementSyntax)binaryBranchBlock.BranchingNode).Condition);
-                    return;
-
                 case SyntaxKind.ForStatement:
                     VisitBinaryBranch(binaryBranchBlock, node, ((ForStatementSyntax)binaryBranchBlock.BranchingNode).Condition);
-                    return;
-
-                case SyntaxKind.IfStatement:
-                    VisitBinaryBranch(binaryBranchBlock, node, ((IfStatementSyntax)binaryBranchBlock.BranchingNode).Condition);
                     return;
 
                 case SyntaxKind.ConditionalExpression:
@@ -149,8 +137,7 @@ namespace SonarAnalyzer.SymbolicExecution
                     return;
 
                 default:
-                    System.Diagnostics.Debug.Fail($"Branch kind '{binaryBranchBlock.BranchingNode.Kind()}' not handled");
-                    VisitBinaryBranch(binaryBranchBlock, node, null);
+                    VisitBinaryBranch(binaryBranchBlock, node, binaryBranchBlock.BranchingNode);
                     return;
             }
         }
@@ -503,7 +490,7 @@ namespace SonarAnalyzer.SymbolicExecution
                 EnqueueNewNode(new ProgramPoint(binaryBranchBlock.TrueSuccessorBlock), newProgramState);
             }
 
-            foreach (var newProgramState in sv.TrySetConstraint(ObjectConstraint.NotNull, ps))
+            foreach (var newProgramState in sv.TrySetOppositeConstraint(ObjectConstraint.Null, ps))
             {
                 var nps = newProgramState;
 
@@ -530,7 +517,7 @@ namespace SonarAnalyzer.SymbolicExecution
                 EnqueueNewNode(new ProgramPoint(binaryBranchBlock.TrueSuccessorBlock), nps);
             }
 
-            foreach (var newProgramState in sv.TrySetConstraint(ObjectConstraint.NotNull, ps))
+            foreach (var newProgramState in sv.TrySetOppositeConstraint(ObjectConstraint.Null, ps))
             {
                 EnqueueNewNode(new ProgramPoint(binaryBranchBlock.FalseSuccessorBlock), newProgramState);
             }
@@ -566,7 +553,7 @@ namespace SonarAnalyzer.SymbolicExecution
                 EnqueueNewNode(new ProgramPoint(binaryBranchBlock.TrueSuccessorBlock), CleanStateAfterBlock(nps, node.ProgramPoint.Block));
             }
 
-            foreach (var newProgramState in sv.TrySetConstraint(BoolConstraint.False, ps))
+            foreach (var newProgramState in sv.TrySetOppositeConstraint(BoolConstraint.True, ps))
             {
                 OnConditionEvaluated(instruction, evaluationValue: false);
 
