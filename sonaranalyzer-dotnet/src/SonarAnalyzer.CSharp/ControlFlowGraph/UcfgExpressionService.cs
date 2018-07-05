@@ -19,31 +19,66 @@
  */
 
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Helpers;
-using SonarAnalyzer.Protobuf.Ucfg;
 
 namespace SonarAnalyzer.ControlFlowGraph.CSharp
 {
     internal class UcfgExpressionService
     {
-        private readonly Dictionary<SyntaxNode, Expression> syntaxNodeToUcfgExpressionCache
-            = new Dictionary<SyntaxNode, Expression>();
+        private static readonly ISet<KnownType> PrimitiveTypes = new[] { KnownType.System_Boolean }
+             .Union(KnownType.IntegralNumbers)
+             .Union(KnownType.NonIntegralNumbers)
+             .ToHashSet();
 
-        public void RegisterAsThis(SyntaxNode syntaxNode) =>
-            syntaxNodeToUcfgExpressionCache[syntaxNode] = UcfgExpression.This;
+        private readonly Dictionary<SyntaxNode, UcfgExpression> cache
+            = new Dictionary<SyntaxNode, UcfgExpression>();
 
-        public void RegisterAsVariable(SyntaxNode syntaxNode, string variableName) =>
-            syntaxNodeToUcfgExpressionCache[syntaxNode] = UcfgExpression.FromVariable(variableName);
+        private int numberedVariableCounter;
 
-        public void RegisterAsConstant(SyntaxNode syntaxNode) =>
-            syntaxNodeToUcfgExpressionCache[syntaxNode] = UcfgExpression.Constant;
+        public void Associate(SyntaxNode syntaxNode, UcfgExpression expression) =>
+            cache[syntaxNode.RemoveParentheses()] = expression;
 
-        public Expression Get(SyntaxNode syntaxNode) =>
-            syntaxNodeToUcfgExpressionCache.GetValueOrDefault(syntaxNode.RemoveParentheses())
-            // In some cases the CFG does not contain all syntax nodes that were used in an expression, for example when
-            // ternary operator is passed as an argument. This could potentially be improved, but for the time being the constant
-            // expression fallback will do what we used to do before.
-            ?? UcfgExpression.Constant;
+        public UcfgExpression GetExpression(SyntaxNode syntaxNode) =>
+            cache.GetValueOrDefault(syntaxNode.RemoveParentheses(), UcfgExpression.Unknown);
+
+        public UcfgExpression CreateVariable(ITypeSymbol returnType) =>
+            new UcfgExpression.VariableExpression($"%{numberedVariableCounter++}", returnType);
+
+        public UcfgExpression CreateClassName(INamedTypeSymbol namedTypeSymbol) =>
+            new UcfgExpression.ClassNameExpression(namedTypeSymbol);
+
+        public UcfgExpression Create(ISymbol symbol, UcfgExpression targetExpression)
+        {
+            switch (symbol)
+            {
+                case null:
+                    return UcfgExpression.Unknown;
+
+                case IParameterSymbol parameterSymbol:
+                    return parameterSymbol.Type.IsAny(PrimitiveTypes)
+                        ? (UcfgExpression)new UcfgExpression.ConstantExpression(parameterSymbol)
+                        : new UcfgExpression.VariableExpression(parameterSymbol);
+
+                case ILocalSymbol localSymbol:
+                    return new UcfgExpression.VariableExpression(symbol);
+
+                case IFieldSymbol fieldSymbol:
+                    return new UcfgExpression.FieldAccessExpression(fieldSymbol, targetExpression);
+
+                case IPropertySymbol propertySymbol:
+                    return new UcfgExpression.PropertyAccessExpression(propertySymbol, targetExpression);
+
+                case INamedTypeSymbol namedTypeSymbol:
+                    return CreateClassName(namedTypeSymbol);
+
+                case IMethodSymbol methodSymbol:
+                    return new UcfgExpression.MethodAccessExpression(methodSymbol, targetExpression);
+
+                default:
+                    throw new UcfgBusinessException($"Create UcfgExpression does not expect symbol of type '{symbol.GetType().Name}'.");
+            }
+        }
     }
 }
