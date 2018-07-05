@@ -328,6 +328,25 @@ namespace Namespace
         }
 
         [TestMethod]
+        public void Static_Ctors()
+        {
+            const string code = @"
+namespace Namespace
+{
+    public class Class1
+    {
+        static Class1()
+        {
+            Do();       // %0 := Namespace.Class1.Do() [ Namespace.Class1 ]
+        }
+
+        public static void Do() {}
+    }
+}";
+            UcfgVerifier.VerifyInstructions(code, "Class1", true);
+        }
+
+        [TestMethod]
         public void Invocations_ExtensionMethods()
         {
             const string code = @"
