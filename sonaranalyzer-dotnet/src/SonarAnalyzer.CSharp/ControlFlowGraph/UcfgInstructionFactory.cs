@@ -24,6 +24,7 @@ using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Protobuf.Ucfg;
 
 namespace SonarAnalyzer.ControlFlowGraph.CSharp
@@ -34,6 +35,11 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
     /// </summary>
     internal class UcfgInstructionFactory
     {
+        private static readonly ISet<KnownType> PrimitiveTypes = new[] { KnownType.System_Boolean }
+            .Union(KnownType.IntegralNumbers)
+            .Union(KnownType.NonIntegralNumbers)
+            .ToHashSet();
+
         private readonly SemanticModel semanticModel;
         private readonly UcfgExpressionService expressionService;
 
@@ -132,7 +138,14 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             }
             else if (IsLocalVarOrParameter(identifierSymbol))
             {
-                expressionService.RegisterAsVariable(identifierName, identifierName.Identifier.Text);
+                if (identifierSymbol is IParameterSymbol parameterSymbol && parameterSymbol.Type.IsAny(PrimitiveTypes))
+                {
+                    expressionService.RegisterAsConstant(identifierName);
+                }
+                else
+                {
+                    expressionService.RegisterAsVariable(identifierName, identifierName.Identifier.Text);
+                }
             }
             else
             {

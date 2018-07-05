@@ -508,7 +508,8 @@ namespace Namespace
 {
     public class Class1
     {
-        public void Foo()
+        public void Foo(bool boolArg, byte byteArg, sbyte sbyteArg, char charArg, decimal decimalArg, double doubleArg,
+            float floatArg, int intArg, uint uintArg, long longArg, ulong ulongArg, short shortArg, ushort ushortArg)
         {
             bool @bool = true;      // bool := __id [ const ]
             byte @byte = 1;         // byte := __id [ const ]
@@ -537,6 +538,20 @@ namespace Namespace
             Bar((ulong) 1);         // %10 := Namespace.Class1.Bar(object) [ this const ]
             Bar((short) 1);         // %11 := Namespace.Class1.Bar(object) [ this const ]
             Bar((ushort) 1);        // %12 := Namespace.Class1.Bar(object) [ this const ]
+
+            Bar(boolArg);           // %13 := Namespace.Class1.Bar(object) [ this const ]
+            Bar(byteArg);           // %14 := Namespace.Class1.Bar(object) [ this const ]
+            Bar(sbyteArg);          // %15 := Namespace.Class1.Bar(object) [ this const ]
+            Bar(charArg);           // %16 := Namespace.Class1.Bar(object) [ this const ]
+            Bar(decimalArg);        // %17 := Namespace.Class1.Bar(object) [ this const ]
+            Bar(doubleArg);         // %18 := Namespace.Class1.Bar(object) [ this const ]
+            Bar(floatArg);          // %19 := Namespace.Class1.Bar(object) [ this const ]
+            Bar(intArg);            // %20 := Namespace.Class1.Bar(object) [ this const ]
+            Bar(uintArg);           // %21 := Namespace.Class1.Bar(object) [ this const ]
+            Bar(longArg);           // %22 := Namespace.Class1.Bar(object) [ this const ]
+            Bar(ulongArg);          // %23 := Namespace.Class1.Bar(object) [ this const ]
+            Bar(shortArg);          // %24 := Namespace.Class1.Bar(object) [ this const ]
+            Bar(ushortArg);         // %25 := Namespace.Class1.Bar(object) [ this const ]
         }
 
         public void Bar(object o) {}
