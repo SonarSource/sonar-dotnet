@@ -1070,47 +1070,36 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
 
         #region Condition
 
+        /// <summary>
+        /// Builds a conditional expression with two successor blocks. The BuildExpression method
+        /// creates a tree with only one successor.
+        /// </summary>
         private Block BuildCondition(ExpressionSyntax expression, Block trueSuccessor, Block falseSuccessor)
         {
             expression = expression.RemoveParentheses();
 
-            var binaryExpression = expression as BinaryExpressionSyntax;
-            if (binaryExpression != null)
+            if (expression is BinaryExpressionSyntax binaryExpression)
             {
                 switch (expression.Kind())
                 {
                     case SyntaxKind.LogicalOrExpression:
-                        return BuildLogicalOrCondition(binaryExpression, trueSuccessor, falseSuccessor);
+                        return BuildCondition(
+                            binaryExpression.Left,
+                            trueSuccessor,
+                            BuildCondition(binaryExpression.Right, trueSuccessor, falseSuccessor));
 
                     case SyntaxKind.LogicalAndExpression:
-                        return BuildLogicalAndCondition(binaryExpression, trueSuccessor, falseSuccessor);
-
                     case SyntaxKind.CoalesceExpression:
-                        return BuildCoalesceCondition(binaryExpression, trueSuccessor, falseSuccessor);
+                        return BuildCondition(
+                            binaryExpression.Left,
+                            BuildCondition(binaryExpression.Right, trueSuccessor, falseSuccessor),
+                            falseSuccessor);
                 }
             }
 
             // Fallback to generating an additional branch block for the if statement itself.
             return BuildExpression(expression,
                     AddBlock(new BinaryBranchBlock(expression, trueSuccessor, falseSuccessor)));
-        }
-
-        private Block BuildCoalesceCondition(BinaryExpressionSyntax coalesce, Block trueSuccessor, Block falseSuccessor)
-        {
-            var rightBlock = BuildCondition(coalesce.Right, trueSuccessor, falseSuccessor);
-            return BuildCondition(coalesce.Left, rightBlock, falseSuccessor);
-        }
-
-        private Block BuildLogicalOrCondition(BinaryExpressionSyntax logicalOr, Block trueSuccessor, Block falseSuccessor)
-        {
-            var falseBlock = BuildCondition(logicalOr.Right, trueSuccessor, falseSuccessor);
-            return BuildCondition(logicalOr.Left, trueSuccessor, falseBlock);
-        }
-
-        private Block BuildLogicalAndCondition(BinaryExpressionSyntax logicalAnd, Block trueSuccessor, Block falseSuccessor)
-        {
-            var trueBlock = BuildCondition(logicalAnd.Right, trueSuccessor, falseSuccessor);
-            return BuildCondition(logicalAnd.Left, trueBlock, falseSuccessor);
         }
 
         #endregion Condition
