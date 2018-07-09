@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -79,9 +80,41 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                 case InstanceExpressionSyntax instanceExpression:
                     return CreateFromInstanceExpression(instanceExpression);
 
+                case ConstructorInitializerSyntax constructorInitializer:
+                    return CreateFromConstructorInitializer(constructorInitializer);
+
                 default:
                     expressionService.RegisterAsConstant(syntaxNode);
                     return Enumerable.Empty<Instruction>();
+            }
+        }
+
+        private IEnumerable<Instruction> CreateFromConstructorInitializer(ConstructorInitializerSyntax constructorInitializer)
+        {
+            var chainedCtor = GetSymbol(constructorInitializer) as IMethodSymbol;
+            if (chainedCtor == null)
+            {
+                return Enumerable.Empty<Instruction>();
+            }
+
+            return new[]
+            {
+                CreateMethodCallInstruction(constructorInitializer, chainedCtor, BuildArguments().ToArray())
+            };
+
+            IEnumerable<Expression> BuildArguments()
+            {
+                yield return UcfgExpression.This;
+
+                if (constructorInitializer.ArgumentList == null)
+                {
+                    yield break;
+                }
+
+                foreach (var argument in constructorInitializer.ArgumentList.Arguments)
+                {
+                    yield return expressionService.Get(argument.Expression);
+                }
             }
         }
 
