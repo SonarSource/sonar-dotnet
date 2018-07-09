@@ -90,6 +90,19 @@
 "endColumn":  29
 }
 }
+},
+{
+"id":  "S3900",
+"message":  "Refactor this constructor to avoid using members of parameter 'journalConfig' because it could be null.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\MemoryEventAdapterSpec.cs",
+"region":  {
+"startLine":  297,
+"startColumn":  20,
+"endLine":  297,
+"endColumn":  33
+}
+}
 }
 ]
 }

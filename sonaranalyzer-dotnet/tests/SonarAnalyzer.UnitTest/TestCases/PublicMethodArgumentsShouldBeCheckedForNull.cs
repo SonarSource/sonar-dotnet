@@ -9,7 +9,7 @@ namespace Tests.Diagnostics
 
         public void NotCompliantCases(object o, Exception e)
         {
-            o.ToString(); // Noncompliant
+            o.ToString(); // Noncompliant {{Refactor this method to add validation of parameter 'o' before using it.}}
 
             Bar(o); // Compliant, we care about dereference only
 
@@ -85,6 +85,10 @@ namespace Tests.Diagnostics
                 s2.ToString(); // Compliant
             }
         }
+
+        public Program(int i) { }
+
+        public Program(string s) : this(s.Length) { }   // Noncompliant {{Refactor this constructor to avoid using members of parameter 's' because it could be null.}}
     }
 
     public class GuardedTests
