@@ -76,7 +76,7 @@ public class UCFGDeserializationTest {
     builder
       .setEdition(Edition.DEVELOPER)
       .addPlugin(csharpLocation)
-      .addPlugin(MavenLocation.of("com.sonarsource.security", "sonar-security-plugin", "1.0.0.847"));
+      .addPlugin(MavenLocation.of("com.sonarsource.security", "sonar-security-plugin", "DEV[7.3]"));
 
     orchestrator = builder.build();
     orchestrator.start();
