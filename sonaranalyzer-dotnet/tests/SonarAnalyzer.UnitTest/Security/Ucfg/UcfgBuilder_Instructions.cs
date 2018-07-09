@@ -672,5 +672,26 @@ namespace Namespace
 }";
             UcfgVerifier.VerifyInstructions(code, "Foo");
         }
+
+        [TestMethod]
+        public void Pointers()
+        {
+            const string code = @"
+using System;
+namespace Namespace
+{
+    public class Class1
+    {
+        public void Foo()
+        {
+            int x = 100;                    // x := __id [ const ]
+            int *ptr = &x;                  // ptr := __id [ const ]
+            Console.WriteLine((int)ptr);    // %0 := System.Console.WriteLine(int) [ System.Console const ]
+            Console.WriteLine(*ptr);        // %1 := System.Console.WriteLine(int) [ System.Console const ]
+        }
+    }
+}";
+            UcfgVerifier.VerifyInstructions(code, "Foo");
+        }
     }
 }
