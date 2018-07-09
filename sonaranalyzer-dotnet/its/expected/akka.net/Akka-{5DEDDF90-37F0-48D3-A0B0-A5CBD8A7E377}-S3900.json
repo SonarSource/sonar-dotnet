@@ -327,6 +327,19 @@
 },
 {
 "id":  "S3900",
+"message":  "Refactor this constructor to avoid using members of parameter 'path' because it could be null.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\ActorSelection.cs",
+"region":  {
+"startLine":  65,
+"startColumn":  59,
+"endLine":  65,
+"endColumn":  63
+}
+}
+},
+{
+"id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'other' before using it.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka\Actor\ActorSelection.cs",
@@ -361,6 +374,45 @@
 "startColumn":  31,
 "endLine":  173,
 "endColumn":  41
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this constructor to avoid using members of parameter 'scheduler' because it could be null.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Cancellation\Cancelable.cs",
+"region":  {
+"startLine":  41,
+"startColumn":  20,
+"endLine":  41,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this constructor to avoid using members of parameter 'scheduler' because it could be null.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Cancellation\Cancelable.cs",
+"region":  {
+"startLine":  53,
+"startColumn":  20,
+"endLine":  53,
+"endColumn":  29
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this constructor to avoid using members of parameter 'scheduler' because it could be null.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Cancellation\Cancelable.cs",
+"region":  {
+"startLine":  63,
+"startColumn":  20,
+"endLine":  63,
+"endColumn":  29
 }
 }
 },
@@ -738,6 +790,19 @@
 "startColumn":  20,
 "endLine":  47,
 "endColumn":  30
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this constructor to avoid using members of parameter 'copy' because it could be null.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Actor\Props.cs",
+"region":  {
+"startLine":  177,
+"startColumn":  20,
+"endLine":  177,
+"endColumn":  24
 }
 }
 },
@@ -1484,6 +1549,19 @@
 },
 {
 "id":  "S3900",
+"message":  "Refactor this constructor to avoid using members of parameter 'config' because it could be null.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Dispatch\MessageQueues\BoundedMessageQueue.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  20,
+"endLine":  26,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'bus' before using it.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka\Event\BusLogging.cs",
@@ -1648,6 +1726,19 @@
 "startColumn":  41,
 "endLine":  123,
 "endColumn":  49
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this constructor to avoid using members of parameter 'array' because it could be null.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\IO\ByteBuffer.cs",
+"region":  {
+"startLine":  20,
+"startColumn":  30,
+"endLine":  20,
+"endColumn":  35
 }
 }
 },
@@ -2017,6 +2108,19 @@
 },
 {
 "id":  "S3900",
+"message":  "Refactor this constructor to avoid using members of parameter 'config' because it could be null.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Routing\Broadcast.cs",
+"region":  {
+"startLine":  241,
+"startColumn":  20,
+"endLine":  241,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'hash' before using it.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka\Routing\ConsistentHash.cs",
@@ -2069,27 +2173,40 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'config' before using it.",
+"message":  "Refactor this constructor to avoid using members of parameter 'config' because it could be null.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka\Routing\ConsistentHashRouter.cs",
 "region":  {
-"startLine":  350,
-"startColumn":  34,
-"endLine":  350,
-"endColumn":  40
+"startLine":  348,
+"startColumn":  20,
+"endLine":  348,
+"endColumn":  26
 }
 }
 },
 {
 "id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'config' before using it.",
+"message":  "Refactor this constructor to avoid using members of parameter 'config' because it could be null.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka\Routing\ConsistentHashRouter.cs",
 "region":  {
-"startLine":  512,
-"startColumn":  34,
-"endLine":  512,
-"endColumn":  40
+"startLine":  510,
+"startColumn":  20,
+"endLine":  510,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this constructor to avoid using members of parameter 'config' because it could be null.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Routing\Random.cs",
+"region":  {
+"startLine":  52,
+"startColumn":  20,
+"endLine":  52,
+"endColumn":  26
 }
 }
 },
@@ -2103,6 +2220,19 @@
 "startColumn":  20,
 "endLine":  139,
 "endColumn":  33
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this constructor to avoid using members of parameter 'config' because it could be null.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Routing\RoundRobin.cs",
+"region":  {
+"startLine":  122,
+"startColumn":  20,
+"endLine":  122,
+"endColumn":  26
 }
 }
 },
@@ -2225,14 +2355,14 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'config' before using it.",
+"message":  "Refactor this constructor to avoid using members of parameter 'config' because it could be null.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka\Routing\ScatterGatherFirstCompleted.cs",
 "region":  {
-"startLine":  153,
-"startColumn":  22,
-"endLine":  153,
-"endColumn":  28
+"startLine":  151,
+"startColumn":  20,
+"endLine":  151,
+"endColumn":  26
 }
 }
 },
@@ -2251,6 +2381,19 @@
 },
 {
 "id":  "S3900",
+"message":  "Refactor this constructor to avoid using members of parameter 'config' because it could be null.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Routing\TailChoppingRoutingLogic.cs",
+"region":  {
+"startLine":  240,
+"startColumn":  20,
+"endLine":  240,
+"endColumn":  26
+}
+}
+},
+{
+"id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'system' before using it.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka\Routing\TailChoppingRoutingLogic.cs",
@@ -2264,14 +2407,14 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'config' before using it.",
+"message":  "Refactor this constructor to avoid using members of parameter 'config' because it could be null.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka\Routing\TailChoppingRoutingLogic.cs",
 "region":  {
-"startLine":  392,
-"startColumn":  23,
-"endLine":  392,
-"endColumn":  29
+"startLine":  390,
+"startColumn":  20,
+"endLine":  390,
+"endColumn":  26
 }
 }
 },
@@ -2402,6 +2545,19 @@
 "startColumn":  20,
 "endLine":  91,
 "endColumn":  24
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this constructor to avoid using members of parameter 'array' because it could be null.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka\Util\ByteIterator.cs",
+"region":  {
+"startLine":  481,
+"startColumn":  59,
+"endLine":  481,
+"endColumn":  64
 }
 }
 },

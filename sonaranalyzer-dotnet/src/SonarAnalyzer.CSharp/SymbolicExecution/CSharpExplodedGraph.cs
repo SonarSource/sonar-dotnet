@@ -440,6 +440,16 @@ namespace SonarAnalyzer.SymbolicExecution
                     }
                     break;
 
+                case SyntaxKind.BaseConstructorInitializer:
+                case SyntaxKind.ThisConstructorInitializer:
+                    var constructorInitializer = (ConstructorInitializerSyntax)instruction;
+                    if (constructorInitializer.ArgumentList != null)
+                    {
+                        var ctorInifializerArgumentsCount = constructorInitializer.ArgumentList.Arguments.Count;
+                        newProgramState = newProgramState.PopValues(ctorInifializerArgumentsCount);
+                    }
+                    break;
+
                 default:
                     throw new NotImplementedException($"{instruction.Kind()}");
             }

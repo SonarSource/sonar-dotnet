@@ -288,14 +288,53 @@
 },
 {
 "id":  "S3900",
-"message":  "Refactor this method to add validation of parameter 'local' before using it.",
+"message":  "Refactor this constructor to avoid using members of parameter 'settings' because it could be null.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
 "region":  {
-"startLine":  181,
-"startColumn":  17,
-"endLine":  181,
-"endColumn":  22
+"startLine":  111,
+"startColumn":  20,
+"endLine":  111,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this constructor to avoid using members of parameter 'local' because it could be null.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
+"region":  {
+"startLine":  111,
+"startColumn":  110,
+"endLine":  111,
+"endColumn":  115
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this constructor to avoid using members of parameter 'settings' because it could be null.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
+"region":  {
+"startLine":  175,
+"startColumn":  20,
+"endLine":  175,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this constructor to avoid using members of parameter 'local' because it could be null.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Cluster\Routing\ClusterRoutingConfig.cs",
+"region":  {
+"startLine":  176,
+"startColumn":  13,
+"endLine":  176,
+"endColumn":  18
 }
 }
 },
