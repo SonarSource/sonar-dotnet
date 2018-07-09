@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
@@ -98,25 +97,13 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                 return Enumerable.Empty<Instruction>();
             }
 
-            return new[]
-            {
-                CreateMethodCallInstruction(constructorInitializer, chainedCtor, BuildArguments().ToArray())
-            };
+            var arguments = new[] { UcfgExpression.This }
+                .Concat(constructorInitializer.ArgumentList?.Arguments
+                    .Select(a => a.Expression)
+                    .Select(expressionService.GetExpression)
+                    ?? Enumerable.Empty<UcfgExpression>());
 
-            IEnumerable<Expression> BuildArguments()
-            {
-                yield return UcfgExpression.This;
-
-                if (constructorInitializer.ArgumentList == null)
-                {
-                    yield break;
-                }
-
-                foreach (var argument in constructorInitializer.ArgumentList.Arguments)
-                {
-                    yield return expressionService.Get(argument.Expression);
-                }
-            }
+            return CreateAssignCall(constructorInitializer, chainedCtor, arguments.ToArray());
         }
 
         public IEnumerable<Instruction> CreateAttributeInstructions(AttributeSyntax attributeSyntax, IMethodSymbol attributeCtor,
@@ -284,7 +271,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                 }
                 else
                 {
-                    throw new UcfgBusinessException();
+                    throw new UcfgException();
                 }
             }
             else
@@ -395,7 +382,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
         {
             if (syntaxNode is ObjectCreationExpressionSyntax)
             {
-                throw new UcfgBusinessException("Expecting this method not to be called for nodes of type 'ObjectCreationExpressionSyntax'.");
+                throw new UcfgException("Expecting this method not to be called for nodes of type 'ObjectCreationExpressionSyntax'.");
             }
 
             // TODO: Uncomment this check when the attribute handling is changed. Currently this fails because no args are passed

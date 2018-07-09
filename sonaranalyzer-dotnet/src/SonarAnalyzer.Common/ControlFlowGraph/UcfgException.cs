@@ -24,23 +24,23 @@ using System.Runtime.Serialization;
 namespace SonarAnalyzer.ControlFlowGraph
 {
     [Serializable]
-    public sealed class UcfgBusinessException : Exception
+    public sealed class UcfgException : Exception
     {
-        public UcfgBusinessException()
+        public UcfgException()
         {
         }
 
-        public UcfgBusinessException(string message)
+        public UcfgException(string message)
             : base(message)
         {
         }
 
-        public UcfgBusinessException(string message, Exception inner)
+        public UcfgException(string message, Exception inner)
             : base(message, inner)
         {
         }
 
-        private UcfgBusinessException(SerializationInfo info, StreamingContext context)
+        private UcfgException(SerializationInfo info, StreamingContext context)
             : base(info, context)
         {
         }

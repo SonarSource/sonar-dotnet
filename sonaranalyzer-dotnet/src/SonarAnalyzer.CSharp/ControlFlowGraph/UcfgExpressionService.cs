@@ -27,7 +27,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
 {
     internal class UcfgExpressionService
     {
-        private static readonly ISet<KnownType> PrimitiveTypes = new[] { KnownType.System_Boolean }
+        private static readonly ISet<KnownType> UnsupportedVariableTypes = new[] { KnownType.System_Boolean }
              .Union(KnownType.IntegralNumbers)
              .Union(KnownType.NonIntegralNumbers)
              .ToHashSet();
@@ -57,7 +57,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                     return UcfgExpression.Unknown;
 
                 case IParameterSymbol parameterSymbol:
-                    return parameterSymbol.Type.IsAny(PrimitiveTypes)
+                    return parameterSymbol.Type.IsAny(UnsupportedVariableTypes)
                         ? (UcfgExpression)new UcfgExpression.ConstantExpression(parameterSymbol)
                         : new UcfgExpression.VariableExpression(parameterSymbol);
 
@@ -77,7 +77,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                     return new UcfgExpression.MethodAccessExpression(methodSymbol, targetExpression);
 
                 default:
-                    throw new UcfgBusinessException($"Create UcfgExpression does not expect symbol of type '{symbol.GetType().Name}'.");
+                    throw new UcfgException($"Create UcfgExpression does not expect symbol of type '{symbol.GetType().Name}'.");
             }
         }
     }

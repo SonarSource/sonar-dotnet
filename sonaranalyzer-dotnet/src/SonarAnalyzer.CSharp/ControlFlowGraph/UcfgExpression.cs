@@ -40,9 +40,9 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
         public ITypeSymbol TypeSymbol { get; }
 
         public virtual void ApplyAsTarget(Instruction instruction) =>
-            throw new UcfgBusinessException($"Type {GetType().Name} could not be applied as target of the instruction.");
+            throw new UcfgException($"Type {GetType().Name} could not be applied as target of the instruction.");
 
-        internal class UnknownExpression : ConstantExpression
+        private class UnknownExpression : ConstantExpression
         {
             public UnknownExpression()
                 : base(null)
@@ -84,7 +84,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                 }
                 else
                 {
-                    throw new UcfgBusinessException();
+                    throw new UcfgException();
                 }
             }
         }
@@ -102,7 +102,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             public override Expression Expression { get; }
         }
 
-        internal class ThisExpression : UcfgExpression
+        private class ThisExpression : UcfgExpression
         {
             public ThisExpression()
                 : base(null)
@@ -179,7 +179,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                 }
                 else
                 {
-                    throw new UcfgBusinessException();
+                    throw new UcfgException();
                 }
             }
         }

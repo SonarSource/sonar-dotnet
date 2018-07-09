@@ -70,7 +70,7 @@ class Foo
     // The ctor initializer instructions are executed before the ctor body
 
     public Foo() : this(""a"" + 5.ToString())       // %0 := int.ToString() [ const ]
-                                                    // %1 := __concat [ %0 const ]
+                                                    // %1 := __concat [ const %0 ]
                                                     // %2 := Foo.Foo(string) [ this %1 ]
     {
         var x = s;                                  // x := __id [ const ]
@@ -91,7 +91,7 @@ class Foo : Bar
     // The ctor initializer instructions are executed before the ctor body
 
     public Foo() : base(""a"" + 5.ToString())       // %0 := int.ToString() [ const ]
-                                                    // %1 := __concat [ %0 const ]
+                                                    // %1 := __concat [ const %0 ]
                                                     // %2 := Bar.Bar(string) [ this %1 ]
     {
         var x = 5;                                  // x := __id [ const ]
