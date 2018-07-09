@@ -19,7 +19,6 @@
 */
 
 extern alias csharp;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -75,50 +74,10 @@ namespace SonarAnalyzer.UnitTest.Security.Framework
 
             var actualInstructions = ucfg.BasicBlocks
                 .SelectMany(b => b.Instructions)
-                .Select(ConvertInstructionToInstructionComment)
+                .Select(UcfgTestHelper.ToTestString)
                 .ToList();
 
             actualInstructions.Should().Equal(expectedInstructions);
-        }
-
-        private static string ConvertInstructionToInstructionComment(Instruction instruction)
-        {
-            switch (instruction.InstrCase)
-            {
-                case Instruction.InstrOneofCase.Assigncall:
-                    return $"{instruction.Assigncall.Variable} := {instruction.Assigncall.MethodId} " +
-                        $"[ {string.Join(" ", instruction.Assigncall.Args.Select(ConvertExpressionToString))} ]";
-
-                case Instruction.InstrOneofCase.NewObject:
-                    return $"{instruction.NewObject.Variable} := new {instruction.NewObject.Type}";
-
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(instruction));
-            }
-
-            string ConvertExpressionToString(Expression expression)
-            {
-                if (expression.Var != null)
-                {
-                    return expression.Var.Name;
-                }
-                else if (expression.Const != null)
-                {
-                    return "const";
-                }
-                else if (expression.This != null)
-                {
-                    return "this";
-                }
-                else if (expression.Classname != null)
-                {
-                    return expression.Classname.Classname;
-                }
-                else
-                {
-                    throw new ArgumentOutOfRangeException(nameof(expression));
-                }
-            }
         }
 
         internal static class UcfgInstructionCollector

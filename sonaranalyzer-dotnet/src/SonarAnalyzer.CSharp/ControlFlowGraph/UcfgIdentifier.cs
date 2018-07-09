@@ -95,6 +95,13 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             }
         }
 
+        public static bool IsMethodId(UcfgIdentifier identifier) =>
+            !identifier.Equals(Annotation) &&
+            !identifier.Equals(EntryPoint) &&
+            !identifier.Equals(Unknown) &&
+            !identifier.Equals(Concatenation) &&
+            !identifier.Equals(Assignment);
+
         public static UcfgIdentifier CreateTypeId(INamedTypeSymbol typeSymbol) =>
             Create(typeSymbol.ConstructedFrom.ToDisplayString());
 
