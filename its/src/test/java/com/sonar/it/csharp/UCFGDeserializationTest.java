@@ -33,13 +33,16 @@ import com.sonar.orchestrator.util.StreamConsumer;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import org.apache.commons.lang.StringUtils;
 import org.junit.BeforeClass;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.TemporaryFolder;
 import org.sonar.ucfg.UCFG;
 import org.sonar.ucfg.UCFGtoProtobuf;
 
@@ -51,6 +54,9 @@ public class UCFGDeserializationTest {
   private static final String QUALITY_PROFILE = "CsharpProfile";
 
   private static Orchestrator orchestrator;
+
+  @Rule
+  public TemporaryFolder temp = new TemporaryFolder();
 
   @BeforeClass
   public static void initializeOrchestrator() {
@@ -119,11 +125,10 @@ public class UCFGDeserializationTest {
     // enable a security rule
     createQP("S3649");
 
-    File projectLocation = new File("projects/SimplCommerce");
+    Path projectDir = Tests.projectDir(temp, "SimplCommerce");
+    runAnalysis(projectDir);
 
-    runAnalysis(projectLocation);
-
-    List<UCFG> ucfgs = readUcfgs(projectLocation);
+    List<UCFG> ucfgs = readUcfgs(projectDir);
     assertThat(ucfgs).hasSize(926);
   }
 
@@ -132,16 +137,15 @@ public class UCFGDeserializationTest {
     // No security rules in QP
     createQP("S100");
 
-    File projectLocation = new File("projects/UcfgNoProtobuf");
+    Path projectDir = Tests.projectDir(temp, "UcfgNoProtobuf");
+    runAnalysis(projectDir);
 
-    runAnalysis(projectLocation);
-
-    File csharpDir = new File(projectLocation, ".sonarqube/out/ucfg_cs");
+    File csharpDir = new File(projectDir.toFile(), ".sonarqube/out/ucfg_cs");
     assertThat(csharpDir.exists()).isFalse();
   }
 
-  private static List<UCFG> readUcfgs(File projectLocation) {
-    File csharpDir = new File(projectLocation, ".sonarqube/out/ucfg_cs");
+  private static List<UCFG> readUcfgs(Path projectDir) {
+    File csharpDir = new File(projectDir.toFile(), ".sonarqube/out/ucfg_cs");
     List<UCFG> result = new ArrayList<>();
     if (csharpDir.isDirectory()) {
       try {
@@ -157,32 +161,32 @@ public class UCFGDeserializationTest {
     return result;
   }
 
-  private void runAnalysis(File projectLocation) {
-    orchestrator.executeBuild(getScannerForMSBuild(projectLocation)
+  private void runAnalysis(Path projectDir) {
+    orchestrator.executeBuild(getScannerForMSBuild(projectDir)
       .addArgument("begin")
       .setDebugLogs(true)
       .setProjectKey(PROJECT_KEY)
       .setProjectName(PROJECT_KEY)
       .setProjectVersion("1.0"));
 
-    executeDotNetBuild(projectLocation, "build");
+    executeDotNetBuild(projectDir, "build");
 
-    orchestrator.executeBuild(getScannerForMSBuild(projectLocation).addArgument("end"));
+    orchestrator.executeBuild(getScannerForMSBuild(projectDir).addArgument("end"));
   }
 
-  private static ScannerForMSBuild getScannerForMSBuild(File projectDir) {
+  private static ScannerForMSBuild getScannerForMSBuild(Path projectDir) {
     return ScannerForMSBuild.create()
       .setScannerVersion("4.2.0.1214")
       .setUseDotNetCore(true)
-      .setProjectDir(projectDir);
+      .setProjectDir(projectDir.toFile());
   }
 
-  private void executeDotNetBuild(File projectLocation, String... arguments) {
+  private void executeDotNetBuild(Path projectDir, String... arguments) {
     BuildResult result = new BuildResult();
     StreamConsumer.Pipe writer = new StreamConsumer.Pipe(result.getLogsWriter());
     int status = CommandExecutor.create().execute(Command.create("dotnet")
       .addArguments(arguments)
-      .setDirectory(projectLocation), writer, 10 * 60 * 1000);
+      .setDirectory(projectDir.toFile()), writer, 10 * 60 * 1000);
     result.addStatus(status);
 
     assertThat(result.isSuccess()).isTrue();
