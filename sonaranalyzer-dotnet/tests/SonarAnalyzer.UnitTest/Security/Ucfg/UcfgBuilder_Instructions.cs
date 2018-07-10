@@ -682,12 +682,18 @@ namespace Namespace
 {
     public class Class1
     {
-        public void Foo()
+        IntPtr ptrField;
+        UIntPtr uPtrField;
+
+        public void Foo(IntPtr ptrParam, UIntPtr uPtrParam)
         {
             int x = 100;                    // x := __id [ const ]
             int *ptr = &x;                  // ptr := __id [ const ]
             Console.WriteLine((int)ptr);    // %0 := System.Console.WriteLine(int) [ System.Console const ]
             Console.WriteLine(*ptr);        // %1 := System.Console.WriteLine(int) [ System.Console const ]
+
+            ptrField = ptrParam;            // this.ptrField := __id [ const ]
+            uPtrField = uPtrParam;          // this.uPtrField := __id [ const ]
         }
     }
 }";
