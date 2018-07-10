@@ -91,9 +91,19 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
 
         internal class ConstantExpression : UcfgExpression
         {
-            private const string value = "\"\"";
+            internal const string DefaultValue = "\"\"";
 
             public ConstantExpression(ISymbol symbol = null)
+                : this(DefaultValue, symbol)
+            {
+            }
+
+            public ConstantExpression(IMethodSymbol methodSymbol)
+                : this(UcfgMethodId.CreateMethodId(methodSymbol).ToString(), methodSymbol)
+            {
+            }
+
+            private ConstantExpression(string value, ISymbol symbol)
                 : base(symbol)
             {
                 Expression = new Expression { Const = new Constant { Value = value } };
@@ -118,7 +128,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             public ClassNameExpression(INamedTypeSymbol namedTypeSymbol)
                 : base(namedTypeSymbol)
             {
-                Expression = new Expression { Classname = new ClassName { Classname = UcfgIdentifier.CreateTypeId(namedTypeSymbol).ToString() } };
+                Expression = new Expression { Classname = new ClassName { Classname = UcfgMethodId.CreateTypeId(namedTypeSymbol).ToString() } };
             }
 
             public override Expression Expression { get; }

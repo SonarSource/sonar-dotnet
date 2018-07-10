@@ -22,6 +22,7 @@ extern alias csharp;
 
 using System;
 using System.Linq;
+using csharp::SonarAnalyzer.ControlFlowGraph.CSharp;
 using SonarAnalyzer.Protobuf.Ucfg;
 
 namespace SonarAnalyzer.UnitTest.Security.Framework
@@ -35,7 +36,7 @@ namespace SonarAnalyzer.UnitTest.Security.Framework
             "this";
 
         public static string ToTestString(this Constant constant) =>
-            "const";
+            constant.Value == UcfgExpression.ConstantExpression.DefaultValue ? "const" : constant.Value;
 
         public static string ToTestString(this ClassName className) =>
             className.Classname;
