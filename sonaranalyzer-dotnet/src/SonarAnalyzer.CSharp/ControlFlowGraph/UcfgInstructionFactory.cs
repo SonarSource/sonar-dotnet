@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
@@ -512,7 +511,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                 NewObject = new NewObject
                 {
                     Location = syntaxNode.GetUcfgLocation(),
-                    Type = UcfgIdentifier.CreateArrayTypeId(arrayTypeSymbol).ToString()
+                    Type = UcfgMethodId.CreateArrayTypeId(arrayTypeSymbol).ToString()
                 }
             };
             callTarget.ApplyAsTarget(instruction);
