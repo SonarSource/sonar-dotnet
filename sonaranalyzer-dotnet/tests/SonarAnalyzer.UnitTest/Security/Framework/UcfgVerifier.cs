@@ -19,6 +19,8 @@
 */
 
 extern alias csharp;
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -76,6 +78,10 @@ namespace SonarAnalyzer.UnitTest.Security.Framework
                 .SelectMany(b => b.Instructions)
                 .Select(UcfgTestHelper.ToTestString)
                 .ToList();
+
+            Console.WriteLine("Expected instructions:{0}{1}", Environment.NewLine, string.Join(Environment.NewLine, expectedInstructions));
+            Console.WriteLine();
+            Console.WriteLine("Actual instructions:{0}{1}", Environment.NewLine, string.Join(Environment.NewLine, actualInstructions));
 
             actualInstructions.Should().Equal(expectedInstructions);
         }
