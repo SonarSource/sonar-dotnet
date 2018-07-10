@@ -53,6 +53,9 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                 case ObjectCreationExpressionSyntax objectCreation:
                     return ProcessObjectCreationExpression(objectCreation);
 
+                case ArrayCreationExpressionSyntax arrayCreation:
+                    return ProcessArrayCreationExpression(arrayCreation);
+
                 case IdentifierNameSyntax identifierName:
                     return ProcessIdentifierName(identifierName);
 
@@ -178,6 +181,23 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                     expressionService.CreateVariable(methodSymbol.ReturnType))
                 .Concat(CreateAssignCall(objectCreationExpression.Type, methodSymbol,
                     new[] { expressionService.GetExpression(objectCreationExpression) }.Concat(arguments).ToArray()));
+        }
+
+        private IEnumerable<Instruction> ProcessArrayCreationExpression(ArrayCreationExpressionSyntax arrayCreationExpression)
+        {
+            var arrayTypeSymbol = semanticModel.GetTypeInfo(arrayCreationExpression).Type as IArrayTypeSymbol;
+            if (arrayTypeSymbol == null)
+            {
+                return NoInstructions;
+            }
+
+            // A call that constructs an array should look like:
+            // Code: var x = new string[42];
+            // %0 := new string[]       // <-- created by this method
+            // x = __id [ %0 ]          // <-- created by the method that handles the assignment
+
+            return CreateNewArray(arrayCreationExpression, arrayTypeSymbol,
+                    expressionService.CreateVariable(arrayTypeSymbol));
         }
 
         private IEnumerable<Instruction> ProcessGenericName(GenericNameSyntax genericName)
@@ -475,6 +495,24 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                 {
                     Location = syntaxNode.GetUcfgLocation(),
                     Type = UcfgMethodId.CreateTypeId(ctorSymbol.ContainingType).ToString()
+                }
+            };
+            callTarget.ApplyAsTarget(instruction);
+
+            return new[] { instruction };
+        }
+
+        private IEnumerable<Instruction> CreateNewArray(ArrayCreationExpressionSyntax syntaxNode,
+            IArrayTypeSymbol arrayTypeSymbol, UcfgExpression callTarget)
+        {
+            expressionService.Associate(syntaxNode, callTarget);
+
+            var instruction = new Instruction
+            {
+                NewObject = new NewObject
+                {
+                    Location = syntaxNode.GetUcfgLocation(),
+                    Type = UcfgIdentifier.CreateArrayTypeId(arrayTypeSymbol).ToString()
                 }
             };
             callTarget.ApplyAsTarget(instruction);
