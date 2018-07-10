@@ -699,5 +699,96 @@ namespace Namespace
 }";
             UcfgVerifier.VerifyInstructions(code, "Foo");
         }
+
+        [TestMethod]
+        public void Assignments_Array_Get()
+        {
+            const string code = @"
+namespace Namespace
+{
+    public class Class1
+    {
+        public void Foo(string s, string[] a, string [][] jagged, string[,] multi)
+        {
+            s = a[0];           // %0 := __arrayGet [ a ]
+                                // s := __id [ %0 ]
+
+            s = ((a[0]));       // %1 := __arrayGet [ a ]
+                                // s := __id [ %1 ]
+
+            Bar(a[0]);          // %2 := __arrayGet [ a ]
+                                // %3 := Namespace.Class1.Bar(string) [ this %2 ]
+
+            s = jagged[0][0];   // %4 := __arrayGet [ jagged ]
+                                // %5 := __arrayGet [ %4 ]
+                                // s := __id [ %5 ]
+
+            s = multi[0, 0];    // %6 := __arrayGet [ multi ]
+                                // s := __id [ %6 ]
+        }
+
+        public void Bar(string s) {}
+    }
+}";
+            UcfgVerifier.VerifyInstructions(code, "Foo");
+        }
+
+        [TestMethod]
+        public void Assignments_Array_Set()
+        {
+            const string code = @"
+namespace Namespace
+{
+    public class Class1
+    {
+        public void Foo(string s, string[] a, string[][] jagged, string[,] multi)
+        {
+            a[0] = s;           // %0 := __arraySet [ a s ]
+
+            ((a[0])) = s;       // %1 := __arraySet [ a s ]
+
+            jagged[0][0] = s;   // %2 := __arrayGet [ jagged ]
+                                // %3 := __arraySet [ %2 s ]
+
+            multi[0, 0] = s;    // %4 := __arraySet [ multi s ]
+
+            ((jagged[0]))[0] = s;   // %5 := __arrayGet [ jagged ]
+                                    // %6 := __arraySet [ %5 s ]
+
+            a[0] = a[1];        // %7 := __arrayGet [ a ]
+                                // %8 := __arraySet [ a %7 ]
+
+            // strings behave as arrays, except they are immutable; the following
+            // is ok, since the char c is going to be converted to const when
+            // it is passed as an argument to a method call or another instruction
+            var c = s[0];       // %9 := __arrayGet [ s ]
+                                // c := __id [ %9 ]
+        }
+    }
+}";
+            UcfgVerifier.VerifyInstructions(code, "Foo");
+        }
+
+        [TestMethod]
+        public void Assignments_Complex_Chaining()
+        {
+            const string code = @"
+namespace Namespace
+{
+    public class Class1
+    {
+        public Class1[] arrayField;
+        public string stringField;
+        public void Foo(Class1 other)
+        {
+            other.arrayField[0].stringField[0] = other.stringField[1];  // %0 := __arrayGet [ other.arrayField ]
+                                                                        // %1 := __arrayGet [ other.stringField ]
+                                                                        // %2 := __arraySet [ %0.stringField %1 ]
+
+        }
+    }
+}";
+            UcfgVerifier.VerifyInstructions(code, "Foo");
+        }
     }
 }
