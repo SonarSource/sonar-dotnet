@@ -115,7 +115,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             var targetObject = expressionService.GetExpression(elementAccessExpression.Expression);
 
             var elementAccess = expressionService.CreateArrayAccess(
-                        semanticModel.GetSymbolInfo(elementAccessExpression.Expression).Symbol, targetObject);
+                semanticModel.GetSymbolInfo(elementAccessExpression.Expression).Symbol, targetObject);
 
             // handling for parenthesized left side of an assignment (x[5]) = s
             var topParenthesized = elementAccessExpression.GetSelfOrTopParenthesizedExpression();
@@ -126,18 +126,15 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             if (IsLeftSideOfAssignment(topParenthesized))
             {
                 expressionService.Associate(elementAccessExpression, elementAccess);
-            }
-            else
-            {
-                // for anything else we generate __arrayGet instruction
-                return CreateAssignCall(
-                    elementAccessExpression,
-                    UcfgMethodId.ArrayGet,
-                    expressionService.CreateVariable(elementAccess.TypeSymbol),
-                    targetObject);
+                return NoInstructions;
             }
 
-            return NoInstructions;
+            // for anything else we generate __arrayGet instruction
+            return CreateAssignCall(
+                elementAccessExpression,
+                UcfgMethodId.ArrayGet,
+                expressionService.CreateVariable(elementAccess.TypeSymbol),
+                targetObject);
 
             bool IsLeftSideOfAssignment(SyntaxNode syntaxNode) =>
                 syntaxNode.Parent is AssignmentExpressionSyntax assignmentExpression &&
