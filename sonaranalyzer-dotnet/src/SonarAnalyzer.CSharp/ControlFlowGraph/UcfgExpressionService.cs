@@ -50,6 +50,9 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
         public UcfgExpression CreateClassName(INamedTypeSymbol namedTypeSymbol) =>
             new UcfgExpression.ClassNameExpression(namedTypeSymbol);
 
+        public UcfgExpression CreateConstant(IMethodSymbol methodSymbol) =>
+            new UcfgExpression.ConstantExpression(methodSymbol);
+
         public UcfgExpression Create(ISymbol symbol, UcfgExpression targetExpression)
         {
             switch (symbol)

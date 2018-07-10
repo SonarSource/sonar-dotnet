@@ -502,7 +502,7 @@ public class Class1 : Controller
     private string field;
     public void Foo([Description]string s, [Missing]string x)
     {               // %0 := __entrypoint [ s x ]
-    }               // %1 := System.ComponentModel.DescriptionAttribute.DescriptionAttribute() [  ]
+    }               // %1 := __annotate [ System.ComponentModel.DescriptionAttribute.DescriptionAttribute() s ]
                     // s := __annotation [ %1 ]
                     // the other attribute is unknown and is not included
 }";
@@ -549,7 +549,7 @@ public class Foo
         // The ternary operator is not walked because it is a Jump node of a block
         // that's why when we create instruction for the variable declarator we
         // get NRE for the assignment argument.
-        var s = b ? ""s1"" : ""s2""; // s := __id [ const ]
+        var s = b ? ""s1"" : ""s2""; // s := __id [ __unknown ]
     }
 }";
             UcfgVerifier.VerifyInstructions(code, "Bar");
