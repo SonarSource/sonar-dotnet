@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis;
@@ -83,6 +84,9 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                 case ConstructorInitializerSyntax constructorInitializer:
                     return CreateFromConstructorInitializer(constructorInitializer);
 
+                case ElementAccessExpressionSyntax elementAccessExpression:
+                    return ProcessElementAccessExpression(elementAccessExpression);
+
                 default:
                     expressionService.Associate(syntaxNode, UcfgExpression.Constant);
                     return NoInstructions;
@@ -104,6 +108,40 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                     ?? Enumerable.Empty<UcfgExpression>());
 
             return CreateAssignCall(constructorInitializer, chainedCtor, arguments.ToArray());
+        }
+
+        private IEnumerable<Instruction> ProcessElementAccessExpression(ElementAccessExpressionSyntax elementAccessExpression)
+        {
+            var targetObject = expressionService.GetExpression(elementAccessExpression.Expression);
+
+            var elementAccess = expressionService.CreateArrayAccess(
+                        semanticModel.GetSymbolInfo(elementAccessExpression.Expression).Symbol, targetObject);
+
+            // handling for parenthesized left side of an assignment (x[5]) = s
+            var topParenthesized = elementAccessExpression.GetSelfOrTopParenthesizedExpression();
+
+            // When the array access is on the left side of an assignment expression we will generate the
+            // set instruction in the assignment expression handler, hence we just associate the two
+            // syntax and the ucfg expression.
+            if (IsLeftSideOfAssignment(topParenthesized))
+            {
+                expressionService.Associate(elementAccessExpression, elementAccess);
+            }
+            else
+            {
+                // for anything else we generate __arrayGet instruction
+                return CreateAssignCall(
+                    elementAccessExpression,
+                    UcfgMethodId.ArrayGet,
+                    expressionService.CreateVariable(elementAccess.TypeSymbol),
+                    targetObject);
+            }
+
+            return NoInstructions;
+
+            bool IsLeftSideOfAssignment(SyntaxNode syntaxNode) =>
+                syntaxNode.Parent is AssignmentExpressionSyntax assignmentExpression &&
+                assignmentExpression.Left == syntaxNode;
         }
 
         public IEnumerable<Instruction> CreateAttributeInstructions(AttributeSyntax attributeSyntax, IMethodSymbol attributeCtor,
@@ -323,6 +361,16 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                 case UcfgExpression.VariableExpression variableExpression:
                     instructions.AddRange(CreateAssignCall(assignmentExpression, UcfgMethodId.Assignment,
                         leftExpression, rightExpression));
+                    break;
+
+                case UcfgExpression.ElementAccessExpression elementExpression:
+                    instructions.AddRange(
+                        CreateAssignCall(
+                            assignmentExpression,
+                            UcfgMethodId.ArraySet,
+                            expressionService.CreateVariable(elementExpression.TypeSymbol),
+                            elementExpression.Target,
+                            rightExpression));
                     break;
 
                 default:

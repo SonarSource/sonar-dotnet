@@ -699,5 +699,65 @@ namespace Namespace
 }";
             UcfgVerifier.VerifyInstructions(code, "Foo");
         }
+
+        [TestMethod]
+        public void Assignments_Array_Get()
+        {
+            const string code = @"
+namespace Namespace
+{
+    public class Class1
+    {
+        public void Foo(string s, string[] a, string [][] jagged, string[,] multi)
+        {
+            s = a[0];           // %0 := __arrayGet [ a ]
+                                // s := __id [ %0 ]
+
+            s = ((a[0]));       // %1 := __arrayGet [ a ]
+                                // s := __id [ %1 ]
+
+            Bar(a[0]);          // %2 := __arrayGet [ a ]
+                                // %3 := Namespace.Class1.Bar(string) [ this %2 ]
+
+            s = jagged[0][0];   // %4 := __arrayGet [ jagged ]
+                                // %5 := __arrayGet [ %4 ]
+                                // s := __id [ %5 ]
+
+            s = multi[0, 0];    // %6 := __arrayGet [ multi ]
+                                // s := __id [ %6 ]
+        }
+
+        public void Bar(string s) {}
+    }
+}";
+            UcfgVerifier.VerifyInstructions(code, "Foo");
+        }
+
+        [TestMethod]
+        public void Assignments_Array_Set()
+        {
+            const string code = @"
+namespace Namespace
+{
+    public class Class1
+    {
+        public void Foo(string s, string[] a, string[][] jagged, string[,] multi)
+        {
+            a[0] = s;           // %0 := __arraySet [ a s ]
+
+            ((a[0])) = s;       // %1 := __arraySet [ a s ]
+
+            jagged[0][0] = s;   // %2 := __arrayGet [ jagged ]
+                                // %3 := __arraySet [ %2 s ]
+
+            multi[0, 0] = s;    // %4 := __arraySet [ multi s ]
+
+            ((jagged[0]))[0] = s;   // %5 := __arrayGet [ jagged ]
+                                    // %6 := __arraySet [ %5 s ]
+}
+    }
+}";
+            UcfgVerifier.VerifyInstructions(code, "Foo");
+        }
     }
 }

@@ -77,6 +77,18 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
         /// </example>
         public static readonly UcfgMethodId EntryPoint = Create("__entrypoint");
 
+        /// <summary>
+        /// The method ID that the Security Engine uses for reading array elements. It accepts one
+        /// argument - the array instance, and returns one value. For example, `var a = x[i]` generates `a = __arrayGet(x)`
+        /// </summary>
+        public static readonly UcfgMethodId ArrayGet = Create("__arrayGet");
+
+        /// <summary>
+        /// The method ID that the Security Engine uses for writing array elements. It accepts one
+        /// argument - the array instance, and returns one value. For example, `x[i] = a` generates `%0 = __arraySet(x, a)`
+        /// </summary>
+        public static readonly UcfgMethodId ArraySet = Create("__arraySet");
+
         private readonly string id;
 
         private UcfgMethodId(string id)

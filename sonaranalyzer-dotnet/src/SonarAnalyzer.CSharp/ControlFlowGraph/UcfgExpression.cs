@@ -194,6 +194,14 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             }
         }
 
+        internal class ElementAccessExpression : MemberAccessExpression
+        {
+            public ElementAccessExpression(ISymbol symbol, UcfgExpression target)
+                : base(symbol, target)
+            {
+            }
+        }
+
         internal class PropertyAccessExpression : MemberAccessExpression
         {
             public PropertyAccessExpression(IPropertySymbol propertySymbol, UcfgExpression target)
