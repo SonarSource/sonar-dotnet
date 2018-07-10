@@ -109,7 +109,7 @@ namespace Namespace
         }
 
         [TestMethod]
-        public void Assignments_Static_Poperty_On_Generic_Class()
+        public void Assignments_Static_Property_On_Generic_Class()
         {
             const string code = @"
 namespace Namespace
@@ -788,6 +788,78 @@ namespace Namespace
                                                                     // %1 := __arrayGet [ %0 ]
                                                                     // %2 := __arrayGet [ %1.arrayField ]
                                                                     // %2.stringField := __id [ s ]
+        }
+    }
+}";
+            UcfgVerifier.VerifyInstructions(code, "Foo");
+        }
+        
+        [TestMethod]
+        public void ArrayCreation_WithNew()
+        {
+            const string code = @"
+namespace Namespace
+{
+    public class Class1
+    {
+        public void Foo()
+        {
+            // Primitive type
+            var x0 = new string[42];    // %0 := new string[]
+                                        // x0 := __id [ %0 ]
+
+            // Array of objects
+            var x1 = new Class1[0];     // %1 := new Namespace.Class1[]
+                                        // x1 := __id [ %1 ]
+
+            // Multi-rank arrays
+            var x2 = new int[10,2];     // %2 := new int[*,*]
+                                        // x2 := __id [ %2 ]
+
+            // Array with initializer (initializer is ignored currently - issue #161)
+            var x3 = new string[] { ""aaa"", ""bbb"", ""ccc"" };    // %3 := new string[]
+                                                                    // x3 := __id [ %3 ]
+        }
+    }
+}";
+
+            UcfgVerifier.VerifyInstructions(code, "Foo");
+        }
+
+        [TestMethod]
+        public void ArrayCreation_WithNew_NonExistentType()
+        {
+            const string code = @"
+namespace Namespace
+{
+    public class Class1
+    {
+        public void Foo()
+        {
+            // References a type that does not exist
+            // This doesn't fail as we can still get the array type symbol,
+            // even though the ElementKind is unknown.
+            var x0 = new NonExistentType[42];   // %0 := new NonExistentType[]
+                                                // x0 := __id [ %0 ]
+        }
+    }
+}";
+
+            UcfgVerifier.VerifyInstructions(code, "Foo");
+        }
+
+        [TestMethod] [Ignore] // TODO: this method currently throws a null-ref
+        public void ArrayCreation_WithCreateInstance()
+        {
+            const string code = @"
+namespace Namespace
+{
+    public class Class1
+    {
+        public void Foo()
+        {
+            var a = System.Array.CreateInstance(typeof(string), 10);    // %0 = System.Array.CreateInstance(System.Type, int) [ System.Array.CreateInstance ]
+                                                                        // %1 := __id [ %0 ]
         }
     }
 }";
