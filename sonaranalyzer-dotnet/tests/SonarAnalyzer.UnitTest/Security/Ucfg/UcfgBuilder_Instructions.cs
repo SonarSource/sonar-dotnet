@@ -813,7 +813,7 @@ namespace Namespace
             var x2 = new int[10,2];     // %2 := new int[*,*]
                                         // x2 := __id [ %2 ]
 
-            // Arrau with initializer (initializer is ignored)
+            // Array with initializer (initializer is ignored currently - issue #161)
             var x3 = new string[] { ""aaa"", ""bbb"", ""ccc"" };    // %3 := new string[]
                                                                     // x3 := __id [ %3 ]
         }
