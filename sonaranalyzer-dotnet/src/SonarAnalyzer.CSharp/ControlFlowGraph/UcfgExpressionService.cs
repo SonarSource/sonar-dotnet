@@ -28,9 +28,10 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
     internal class UcfgExpressionService
     {
         private static readonly ISet<KnownType> UnsupportedVariableTypes = new[] { KnownType.System_Boolean }
-             .Union(KnownType.IntegralNumbers)
-             .Union(KnownType.NonIntegralNumbers)
-             .ToHashSet();
+            .Union(KnownType.IntegralNumbers)
+            .Union(KnownType.NonIntegralNumbers)
+            .Union(KnownType.PointerTypes)
+            .ToHashSet();
 
         private readonly Dictionary<SyntaxNode, UcfgExpression> cache
             = new Dictionary<SyntaxNode, UcfgExpression>();
