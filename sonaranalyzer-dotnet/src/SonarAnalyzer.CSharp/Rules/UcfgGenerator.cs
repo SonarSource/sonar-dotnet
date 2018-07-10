@@ -94,7 +94,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     protobufFileIndex = 0;
 
                     cc.RegisterSyntaxNodeActionInNonGenerated(
-                        c => WriteUCFG<BaseMethodDeclarationSyntax>(c, x => x.Body),
+                        c => WriteUCFG<ConstructorDeclarationSyntax>(c, x => x.Body),
                         SyntaxKind.ConstructorDeclaration);
 
                     cc.RegisterSyntaxNodeActionInNonGenerated(
