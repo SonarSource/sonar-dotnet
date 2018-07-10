@@ -820,7 +820,27 @@ namespace Namespace
     }
 }";
 
-            var x3 = new string[] { "aaa", "bbb", "ccc" };
+            UcfgVerifier.VerifyInstructions(code, "Foo");
+        }
+
+        [TestMethod]
+        public void ArrayCreation_WithNew_NonExistentType()
+        {
+            const string code = @"
+namespace Namespace
+{
+    public class Class1
+    {
+        public void Foo()
+        {
+            // References a type that does not exist
+            // This doesn't fail as we can still get the array type symbol,
+            // even though the ElementKind is unknown.
+            var x0 = new NonExistentType[42];   // %0 := new NonExistentType[]
+                                                // x0 := __id [ %0 ]
+        }
+    }
+}";
 
             UcfgVerifier.VerifyInstructions(code, "Foo");
         }

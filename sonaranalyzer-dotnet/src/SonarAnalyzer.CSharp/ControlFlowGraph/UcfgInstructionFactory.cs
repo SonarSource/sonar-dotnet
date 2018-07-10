@@ -187,6 +187,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             var arrayTypeSymbol = semanticModel.GetTypeInfo(arrayCreationExpression).Type as IArrayTypeSymbol;
             if (arrayTypeSymbol == null)
             {
+                expressionService.Associate(arrayCreationExpression, UcfgExpression.Constant);
                 return NoInstructions;
             }
 
