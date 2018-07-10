@@ -112,6 +112,12 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
 
         private IEnumerable<Instruction> ProcessElementAccessExpression(ElementAccessExpressionSyntax elementAccessExpression)
         {
+            if (!IsArray(elementAccessExpression.Expression))
+            {
+                expressionService.Associate(elementAccessExpression, UcfgExpression.Constant);
+                return NoInstructions;
+            }
+
             var targetObject = expressionService.GetExpression(elementAccessExpression.Expression);
 
             var elementAccess = expressionService.CreateArrayAccess(
@@ -139,6 +145,13 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             bool IsLeftSideOfAssignment(SyntaxNode syntaxNode) =>
                 syntaxNode.Parent is AssignmentExpressionSyntax assignmentExpression &&
                 assignmentExpression.Left == syntaxNode;
+
+            bool IsArray(ExpressionSyntax expression)
+            {
+                var elementAccessType = semanticModel.GetTypeInfo(expression).ConvertedType;
+                return elementAccessType != null
+                    && elementAccessType.TypeKind == TypeKind.Array;
+            }
         }
 
         public IEnumerable<Instruction> CreateAttributeInstructions(AttributeSyntax attributeSyntax, IMethodSymbol attributeCtor,

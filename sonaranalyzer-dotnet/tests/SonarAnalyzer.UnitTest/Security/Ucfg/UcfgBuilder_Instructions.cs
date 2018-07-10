@@ -737,11 +737,12 @@ namespace Namespace
         public void Assignments_Array_Set()
         {
             const string code = @"
+using System.Collections.Generic;
 namespace Namespace
 {
     public class Class1
     {
-        public void Foo(string s, string[] a, string[][] jagged, string[,] multi)
+        public void Foo(string s, string[] a, string[][] jagged, string[,] multi, List<string> list)
         {
             a[0] = s;           // %0 := __arraySet [ a s ]
 
@@ -758,11 +759,11 @@ namespace Namespace
             a[0] = a[1];        // %7 := __arrayGet [ a ]
                                 // %8 := __arraySet [ a %7 ]
 
-            // strings behave as arrays, except they are immutable; the following
-            // is ok, since the char c is going to be converted to const when
-            // it is passed as an argument to a method call or another instruction
-            var c = s[0];       // %9 := __arrayGet [ s ]
-                                // c := __id [ %9 ]
+            // Strings and lists have indexers but should not be handled as arrays;
+            // until collection indexers are supported, the string and list element
+            // access is represented as constant
+            var c = s[0];       // c := __id [ const ]
+            var i = list[0];    // i := __id [ const ]
         }
     }
 }";
@@ -777,14 +778,16 @@ namespace Namespace
 {
     public class Class1
     {
+        public Class1[] ArrayProperty { get; set; }
         public Class1[] arrayField;
         public string stringField;
-        public void Foo(Class1 other)
-        {
-            other.arrayField[0].stringField[0] = other.stringField[1];  // %0 := __arrayGet [ other.arrayField ]
-                                                                        // %1 := __arrayGet [ other.stringField ]
-                                                                        // %2 := __arraySet [ %0.stringField %1 ]
 
+        public void Foo(Class1 other, string s)
+        {
+            other.ArrayProperty[0].arrayField[1].stringField = s;   // %0 := Namespace.Class1.ArrayProperty.get [ other ]
+                                                                    // %1 := __arrayGet [ %0 ]
+                                                                    // %2 := __arrayGet [ %1.arrayField ]
+                                                                    // %2.stringField := __id [ s ]
         }
     }
 }";
