@@ -61,9 +61,6 @@ public class UCFGDeserializationTest {
     // - "LATEST_RELEASE[1.0]" for latest release of series 1.0.x
     // The SonarQube alias "LTS" has been dropped. An alternative is "LATEST_RELEASE[6.7]".
     // The term "latest" refers to the highest version number, not the most recently published version.
-    OrchestratorBuilder builder = Orchestrator.builderEnv()
-      .setSonarVersion(Optional.ofNullable(System.getProperty("sonar.runtimeVersion")).filter(v -> !"LTS".equals(v)).orElse("LATEST_RELEASE[6.7]"));
-
     String csharpVersion = System.getProperty("csharpVersion");
     Location csharpLocation;
     if (StringUtils.isEmpty(csharpVersion)) {
@@ -73,10 +70,12 @@ public class UCFGDeserializationTest {
       // QA environment downloads the plugin built by the CI job
       csharpLocation = MavenLocation.of("org.sonarsource.dotnet", "sonar-csharp-plugin", csharpVersion);
     }
-    builder
+    OrchestratorBuilder builder = Orchestrator.builderEnv()
+      .setSonarVersion(Optional.ofNullable(System.getProperty("sonar.runtimeVersion")).filter(v -> !"LTS".equals(v)).orElse("LATEST_RELEASE[6.7]"))
       .setEdition(Edition.DEVELOPER)
       .addPlugin(csharpLocation)
-      .addPlugin(MavenLocation.of("com.sonarsource.security", "sonar-security-plugin", "1.0.0.847"));
+      .addPlugin(MavenLocation.of("com.sonarsource.security", "sonar-security-plugin", "DEV"))
+      .activateLicense();
 
     orchestrator = builder.build();
     orchestrator.start();
