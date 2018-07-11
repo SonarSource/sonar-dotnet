@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -100,13 +101,46 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                 }
             }
 
-            private string SerializeInstruction(Instruction instruction) =>
-                $"{instruction.Variable} {instruction.MethodId} {string.Join(",", instruction.Args.Select(SerializeExpression))}";
+            private string SerializeInstruction(Instruction instruction)
+            {
+                switch (instruction.InstrCase)
+                {
+                    case Instruction.InstrOneofCase.Assigncall:
+                        return $"{instruction.Assigncall.Variable} {instruction.Assigncall.MethodId} " +
+                            $"{string.Join(",", instruction.Assigncall.Args.Select(SerializeExpression))}";
 
-            private string SerializeExpression(Expression expression) =>
-                expression.ExprCase == Expression.ExprOneofCase.Const
-                    ? "CONST"
-                    : expression.Var.Name;
+                    case Instruction.InstrOneofCase.NewObject:
+                        return $"{instruction.NewObject.Variable} {instruction.NewObject.Type}";
+
+                    default:
+                        throw new ArgumentOutOfRangeException(nameof(instruction));
+                }
+            }
+
+            private string SerializeExpression(Expression expression)
+            {
+                // Names are based on Java sonar-ucfg toString methods
+                switch (expression.ExprCase)
+                {
+                    case Expression.ExprOneofCase.Var:
+                        return expression.Var.Name;
+
+                    case Expression.ExprOneofCase.Const:
+                        return $"\"{expression.Const.Value}\"";
+
+                    case Expression.ExprOneofCase.This:
+                        return "_this_";
+
+                    case Expression.ExprOneofCase.Classname:
+                        return $"ClassName:{expression.Classname.Classname}";
+
+                    case Expression.ExprOneofCase.FieldAccess:
+                        return $"FieldAccess {expression.FieldAccess.Object.Name} {expression.FieldAccess.Field}";
+
+                    default:
+                        throw new ArgumentOutOfRangeException(nameof(expression));
+                }
+            }
         }
     }
 }
