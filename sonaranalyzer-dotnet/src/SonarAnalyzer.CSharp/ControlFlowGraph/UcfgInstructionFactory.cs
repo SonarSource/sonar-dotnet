@@ -314,7 +314,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             expressionService.Associate(binaryExpression, UcfgExpression.Constant);
             return NoInstructions;
         }
-
+        
         private IEnumerable<Instruction> ProcessInvocationExpression(InvocationExpressionSyntax invocationExpression)
         {
             var methodSymbol = GetSymbol(invocationExpression) as IMethodSymbol;
@@ -326,20 +326,20 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
 
             var methodExpression = expressionService.GetExpression(invocationExpression.Expression)
                 as UcfgExpression.MethodAccessExpression;
-            if (methodExpression == UcfgExpression.Unknown)
+            if (methodExpression == null)
             {
                 expressionService.Associate(invocationExpression, UcfgExpression.Constant);
                 return NoInstructions;
             }
 
-            var arguments = new List<UcfgExpression>();
+            var ucfgArguments = new List<UcfgExpression>();
 
-            if (methodSymbol.ReducedFrom != null)
+            if (IsCalledAsExtension(methodSymbol))
             {
-                arguments.Add(expressionService.CreateClassName(methodSymbol.ContainingType));
                 if (invocationExpression.Expression is MemberAccessExpressionSyntax memberAccessExpression)
                 {
-                    arguments.Add(expressionService.GetExpression(memberAccessExpression.Expression));
+                    ucfgArguments.Add(expressionService.CreateClassName(methodSymbol.ContainingType));
+                    ucfgArguments.Add(expressionService.GetExpression(memberAccessExpression.Expression));
                 }
                 else
                 {
@@ -348,16 +348,67 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             }
             else
             {
-                arguments.Add(methodExpression.Target);
+                ucfgArguments.Add(methodExpression.Target);
             }
 
+            var argumentInstructions = Enumerable.Empty<Instruction>();
             if (invocationExpression.ArgumentList != null)
             {
-                arguments.AddRange(invocationExpression.ArgumentList.Arguments.Select(a => a.Expression)
+                // Create temporary variables for e.g. field access
+                argumentInstructions = ProcessMethodArguments(invocationExpression.ArgumentList);
+                
+                ucfgArguments.AddRange(invocationExpression.ArgumentList.Arguments.Select(a => a.Expression)
                     .Select(expressionService.GetExpression));
             }
 
-            return CreateAssignCall(invocationExpression, methodSymbol, arguments.ToArray());
+            var methodInstructions = CreateAssignCall(invocationExpression, methodSymbol, ucfgArguments.ToArray());
+            return argumentInstructions.Concat(methodInstructions);
+        }
+
+        private static bool IsCalledAsExtension(IMethodSymbol methodSymbol) =>
+            methodSymbol.ReducedFrom != null;
+
+        private IEnumerable<Instruction> ProcessMethodArguments(ArgumentListSyntax argumentListSyntax)
+        {
+            var newInstructions = new List<Instruction>();
+            var argExpressionNodes = argumentListSyntax.Arguments.Select(a => a.Expression);
+
+            // Arguments to a method can only be __id, this, or class.
+            // Anything else needs to be referenced by a temporary variable
+            var argumentExpressions = new List<Expression>();
+            foreach (var argExpressionNode in argExpressionNodes)
+            {
+                var ucfgExpression = expressionService.GetExpression(argExpressionNode);
+
+                if (IsTemporaryVariableRequired(ucfgExpression))
+                {
+                    // Create a temp variable and change the node->UcfgExpression
+                    // to point to the new UcfgExpression
+                    var tempVariable = expressionService.CreateVariable(ucfgExpression.TypeSymbol);
+                    expressionService.Associate(argExpressionNode, tempVariable);
+
+                    var id = UcfgMethodId.CreateTypeId(ucfgExpression.TypeSymbol as INamedTypeSymbol);
+
+                    var instruction = new Instruction
+                    {
+                        Assigncall = new AssignCall
+                        {
+                            Location = argExpressionNode.GetUcfgLocation(),
+                            MethodId = UcfgMethodId.Assignment.ToString()
+                        }
+                    };
+                    instruction.Assigncall.Args.Add(ucfgExpression.Expression);
+                    tempVariable.ApplyAsTarget(instruction);
+                    newInstructions.Add(instruction);
+                }
+            }
+
+            return newInstructions;
+        }
+
+        private static bool IsTemporaryVariableRequired(UcfgExpression methodArgumentExpression)
+        {
+            return methodArgumentExpression is UcfgExpression.FieldAccessExpression;
         }
 
         private IEnumerable<Instruction> ProcessAssignmentExpression(AssignmentExpressionSyntax assignmentExpression)

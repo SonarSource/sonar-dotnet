@@ -83,6 +83,11 @@ namespace SonarAnalyzer.UnitTest.Security.Framework
             Console.WriteLine();
             Console.WriteLine("Actual instructions:{0}{1}", Environment.NewLine, string.Join(Environment.NewLine, actualInstructions));
 
+            // Fluent assertion bug: just comparing the collections gives an incorrect error message if the expected
+            // list is empty but the actual list isn't ("Expected collection to be equal to {empty}, but found empty collection.")
+            // To avoid this, do an assertion on the number of items first.
+            actualInstructions.Count.Should().Be(expectedInstructions.Count);
+
             actualInstructions.Should().Equal(expectedInstructions);
         }
 
