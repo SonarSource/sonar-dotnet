@@ -299,12 +299,16 @@ namespace Namespace
                                             // other := __id [ %12 ]
             other.Bar(s);                   // %14 := Namespace.Class1.Bar(string) [ other s ]
 
-            Bar(field);                     // %15 := Namespace.Class1.Bar(string) [ this this.field ]
-            Bar(other.field);               // %16 := Namespace.Class1.Bar(string) [ this other.field ]
+            Bar(field);                     // %15 := __id [ this.field ]
+                                            // %16 := Namespace.Class1.Bar(string) [ this %15 ]
 
-            StaticMethod(s);                // %17 := Namespace.Class1.StaticMethod(string) [ Namespace.Class1 s ]
-            Class1.StaticMethod(s);         // %18 := Namespace.Class1.StaticMethod(string) [ Namespace.Class1 s ]
+            Bar(other.field);               // %17 := __id [ other.field ]
+                                            // %18 := Namespace.Class1.Bar(string) [ this %17 ]
 
+            StaticMethod(s);                // %19 := Namespace.Class1.StaticMethod(string) [ Namespace.Class1 s ]
+            Class1.StaticMethod(s);         // %20 := Namespace.Class1.StaticMethod(string) [ Namespace.Class1 s ]
+
+            a = field;                      // a := __id [ this.field ]
         }
         public void Bar(string s) { }
         public string A(int x) { return x.ToString(); }
@@ -489,6 +493,222 @@ namespace Namespace
     }
 }";
             UcfgVerifier.VerifyInstructions(code, "Foobar");
+        }
+
+        [TestMethod]
+        public void Invocations_MethodsWithDefaultParameters()
+        {
+            const string code = @"
+namespace Namespace
+{
+    public class Class1
+    {
+        public void Foo()
+        {
+            SendEmailAsync(""body"");                   // %0 := Namespace.Class1.SendEmailAsync(string, bool) [ this const ]
+            SendEmailAsync(""body"", isHtml: true);     // %1 := Namespace.Class1.SendEmailAsync(string, bool) [ this const const ]
+            SendEmailAsync(""body"", isHtml: false);    // %2 := Namespace.Class1.SendEmailAsync(string, bool) [ this const const ]
+        }
+
+        public System.Threading.Tasks.Task SendEmailAsync(string body, bool isHtml = false)
+        { return null; }
+    }
+}";
+            UcfgVerifier.VerifyInstructions(code, "Foo");
+        }
+
+        [TestMethod]
+        public void Invocations_UsedNamedParameters()
+        {
+            const string code = @"
+namespace Namespace
+{
+    public class Class1
+    {
+        public void Foo()
+        {
+            SendEmailAsync(""data"", false);                  // %0 := Namespace.Class1.SendEmailAsync(string, bool) [ this const const ]
+            SendEmailAsync(body: ""data"", isHtml: false);    // %1 := Namespace.Class1.SendEmailAsync(string, bool) [ this const const ]
+            SendEmailAsync(body: ""data"");                   // %2 := Namespace.Class1.SendEmailAsync(string, bool) [ this const ]
+            SendEmailAsync(isHtml: false, body: ""data"");    // %3 := Namespace.Class1.SendEmailAsync(string, bool) [ this const const ]
+        }
+
+        public System.Threading.Tasks.Task SendEmailAsync(string body, bool isHtml = false)
+        { return null; }
+    }
+}";
+            UcfgVerifier.VerifyInstructions(code, "Foo");
+        }
+
+        [TestMethod]
+        public void Invocations_WIP()
+        {
+            const string code = @"
+namespace Namespace
+{
+    public class Class1
+    {
+        private string Field = ""aaa"";
+
+        public void Foo()
+        {
+            Bar(this.Field);
+                // %0 := __id [ this.Field ]
+                // %1 := Namespace.Class1.Bar(string) [ this %0 ]
+        }
+
+        private void Bar(string arg1) { /* no-op */ }
+    }
+}";
+
+            UcfgVerifier.VerifyInstructions(code, "Foo");
+        }
+
+        [TestMethod]
+        public void Invocations_MethodParametersAreThisClassOrVariables()
+        {
+            const string code = @"
+namespace Namespace
+{
+    public class Class1
+    {
+        private int Field = 1;
+        private static int StaticField = 2;
+        public int Property { get; } = 3;
+        public int StaticProperty { get; } = 4;
+        private int InstanceMethod() => 5;
+        private static int StaticMethod() => 6;
+
+        public void Foo()
+        {
+            Bar(InstanceMethod());
+            // %0 := Namespace.Class1.InstanceMethod() [ this ]
+            // %1 := Namespace.Class1.Bar(int) [ this %0 ]
+
+            Bar(StaticMethod());
+            // %2 := Namespace.Class1.StaticMethod() [ Namespace.Class1 ]
+            // %3 := Namespace.Class1.Bar(int) [ this %2 ]
+
+            Bar(this.Property);
+            // %4 := Namespace.Class1.Property.get [ this ]
+            // %5 := Namespace.Class1.Bar(int) [ this %4 ]
+
+            Bar(StaticProperty);
+            // %6 := Namespace.Class1.StaticProperty.get [ this ]
+            // %7 := Namespace.Class1.Bar(int) [ this %6 ]
+
+            Bar(this.Field);
+            // %8 := __id [ this.Field ]
+            // %9 := Namespace.Class1.Bar(int) [ this %8 ]
+
+            Bar(StaticField);
+            // %10 := __id [ Namespace.Class1.StaticField ]
+            // %11 := Namespace.Class1.Bar(int) [ this %10 ]
+
+            Bar(Field, Property, this.InstanceMethod(), StaticMethod());
+            // %12 := Namespace.Class1.Property.get [ this ]
+            // %13 := Namespace.Class1.InstanceMethod() [ this ]
+            // %14 := Namespace.Class1.StaticMethod() [ Namespace.Class1 ]
+            // %15 := __id [ this.Field ]
+            // %16 := Namespace.Class1.Bar(int, int, int, int) [ this %15 %12 %13 %14 ]
+        }
+
+        private void Bar(int arg1) { /* no-op */ }
+        private void Bar(int arg1, int arg2, int arg3, int arg4) { /* no-op */ }
+    }
+}";
+
+            UcfgVerifier.VerifyInstructions(code, "Foo");
+        }
+
+        [TestMethod]
+        public void TestSimpleAssignment()
+        {
+            const string code = @"
+namespace Namespace
+{
+    public class Class1
+    {
+        public void Foo(string arg)
+        {
+            var variable = arg;
+                // variable := __id [ arg ]
+        }
+    }
+}";
+
+            UcfgVerifier.VerifyInstructions(code, "Foo");
+        }
+
+        [TestMethod]
+        public void TestSimpleFieldAccessAndAssignment()
+        {
+            const string code = @"
+namespace Namespace
+{
+    public class Class1
+    {
+        public string field;
+
+        public void Foo()
+        {
+            var variable = field;
+                // variable := __id [ this.field ]
+        }
+    }
+}";
+
+            UcfgVerifier.VerifyInstructions(code, "Foo");
+        }
+
+        [TestMethod]
+        public void TestSimpleMethodInvocation()
+        {
+            const string code = @"
+namespace Namespace
+{
+    public class Class1
+    {
+
+        public string Bar1() { return null; }
+        public void Bar2() { /* no-op */ }
+
+        public void Foo()
+        {
+            var variable = Bar1();
+                        // %0 := Namespace.Class1.Bar1() [ this ]
+                        // variable := __id [ %0 ]
+            Bar1();
+                        // %1 := Namespace.Class1.Bar1() [ this ]
+
+            Bar2();     // %2 := Namespace.Class1.Bar2() [ this ]
+        }
+    }
+}";
+
+            UcfgVerifier.VerifyInstructions(code, "Foo");
+        }
+
+        [TestMethod]
+        public void Invocations_MethodCallOnFieldAccess()
+        {
+            const string code = @"
+namespace Namespace
+{
+    public class Class1
+    {
+        private string field;
+
+        public void Foo()
+        {
+            var x = field.ToLower();
+                // %0 := string.ToLower() [ this.field ]
+                // x := __id [ %0 ]
+        }
+    }
+}";
+
+            UcfgVerifier.VerifyInstructions(code, "Foo");
         }
 
         [TestMethod]
@@ -867,3 +1087,4 @@ namespace Namespace
         }
     }
 }
+
