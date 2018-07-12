@@ -299,16 +299,17 @@ namespace Namespace
                                             // other := __id [ %12 ]
             other.Bar(s);                   // %14 := Namespace.Class1.Bar(string) [ other s ]
 
-            Bar(field);                     // %15 := __id [ this.field ]
-                                            // %16 := Namespace.Class1.Bar(string) [ this %15 ]
+            Bar(field);                     // %16 := __id [ this.field ]
+                                            // %15 := Namespace.Class1.Bar(string) [ this %16 ]
 
-            Bar(other.field);               // %17 := __id [ other.field ]
-                                            // %18 := Namespace.Class1.Bar(string) [ this %17 ]
+            Bar(other.field);               // %18 := __id [ other.field ]
+                                            // %17 := Namespace.Class1.Bar(string) [ this %18 ]
 
             StaticMethod(s);                // %19 := Namespace.Class1.StaticMethod(string) [ Namespace.Class1 s ]
             Class1.StaticMethod(s);         // %20 := Namespace.Class1.StaticMethod(string) [ Namespace.Class1 s ]
 
-            a = field;                      // a := __id [ this.field ]
+            a = field;                      // %21 := __id [ this.field ]
+                                            // a := __id [ %21 ]
         }
         public void Bar(string s) { }
         public string A(int x) { return x.ToString(); }
@@ -413,7 +414,7 @@ namespace Namespace
 {
     public class Class1
     {
-        private string field;
+        private string Field;
         public void Foo(string s)
         {
             string a;
@@ -421,7 +422,8 @@ namespace Namespace
                                     // a := __id [ %0 ]
             a = Extensions.Ext(s);  // %1 := Namespace.Extensions.Ext(string) [ Namespace.Extensions s ]
                                     // a := __id [ %1 ]
-            a = this.field.Ext();   // %2 := Namespace.Extensions.Ext(string) [ Namespace.Extensions this.field ]
+            a = this.Field.Ext();   // %3 := __id [ this.Field ]
+                                    // %2 := Namespace.Extensions.Ext(string) [ Namespace.Extensions %3 ]
                                     // a := __id [ %2 ]
         }
     }
@@ -553,8 +555,8 @@ namespace Namespace
         public void Foo()
         {
             Bar(this.Field);
-                // %0 := __id [ this.Field ]
-                // %1 := Namespace.Class1.Bar(string) [ this %0 ]
+                // %1 := __id [ this.Field ]
+                // %0 := Namespace.Class1.Bar(string) [ this %1 ]
         }
 
         private void Bar(string arg1) { /* no-op */ }
@@ -598,19 +600,19 @@ namespace Namespace
             // %7 := Namespace.Class1.Bar(int) [ this %6 ]
 
             Bar(this.Field);
-            // %8 := __id [ this.Field ]
-            // %9 := Namespace.Class1.Bar(int) [ this %8 ]
+            // %9 := __id [ this.Field ]
+            // %8 := Namespace.Class1.Bar(int) [ this %9 ]
 
             Bar(StaticField);
-            // %10 := __id [ Namespace.Class1.StaticField ]
-            // %11 := Namespace.Class1.Bar(int) [ this %10 ]
+            // %11 := __id [ Namespace.Class1.StaticField ]
+            // %10 := Namespace.Class1.Bar(int) [ this %11 ]
 
             Bar(Field, Property, this.InstanceMethod(), StaticMethod());
             // %12 := Namespace.Class1.Property.get [ this ]
             // %13 := Namespace.Class1.InstanceMethod() [ this ]
             // %14 := Namespace.Class1.StaticMethod() [ Namespace.Class1 ]
-            // %15 := __id [ this.Field ]
-            // %16 := Namespace.Class1.Bar(int, int, int, int) [ this %15 %12 %13 %14 ]
+            // %16 := __id [ this.Field ]
+            // %15 := Namespace.Class1.Bar(int, int, int, int) [ this %16 %12 %13 %14 ]
         }
 
         private void Bar(int arg1) { /* no-op */ }
@@ -648,12 +650,12 @@ namespace Namespace
 {
     public class Class1
     {
-        public string field;
+        public string Field;
 
         public void Foo()
         {
-            var variable = field;
-                // variable := __id [ this.field ]
+            var variable = Field;   // %0 := __id [ this.Field ]
+                                    // variable := __id [ %0 ]
         }
     }
 }";
@@ -697,12 +699,13 @@ namespace Namespace
 {
     public class Class1
     {
-        private string field;
+        private string Field;
 
         public void Foo()
         {
-            var x = field.ToLower();
-                // %0 := string.ToLower() [ this.field ]
+            var x = Field.ToLower();
+                // %1 := __id [ this.Field ]
+                // %0 := string.ToLower() [ %1 ]
                 // x := __id [ %0 ]
         }
     }
@@ -848,16 +851,19 @@ namespace Namespace
 
         public void Foo()
         {
-            field.field.field = new Class1();           // %0 := __id [ this.field ]
-                                                        // %1 := __id [ %0.field ]
-                                                        // %2 := new Namespace.Class1
-                                                        // %3 := Namespace.Class1.Class1() [ %2 ]
-                                                        // %1.field := __id [ %2 ]
+            field.field.field = new Class1();           // %1 := __id [ this.field ]
+                                                        // %0 := __id [ %1 ]
+                                                        // %3 := __id [ %1.field ]
+                                                        // %2 := __id [ %3 ]
+                                                        // %4 := new Namespace.Class1
+                                                        // %5 := Namespace.Class1.Class1() [ %4 ]
+                                                        // %3.field := __id [ %4 ]
 
-            Class1.staticField.field = new Class1();    // %4 := __id [ Namespace.Class1.staticField ]
-                                                        // %5 := new Namespace.Class1
-                                                        // %6 := Namespace.Class1.Class1() [ %5 ]
-                                                        // %4.field := __id [ %5 ]
+            Class1.staticField.field = new Class1();    // %7 := __id [ Namespace.Class1.staticField ]
+                                                        // %6 := __id [ %7 ]
+                                                        // %8 := new Namespace.Class1
+                                                        // %9 := Namespace.Class1.Class1() [ %8 ]
+                                                        // %7.field := __id [ %8 ]
         }
     }
 }";
@@ -1006,7 +1012,8 @@ namespace Namespace
         {
             other.ArrayProperty[0].arrayField[1].stringField = s;   // %0 := Namespace.Class1.ArrayProperty.get [ other ]
                                                                     // %1 := __arrayGet [ %0 ]
-                                                                    // %2 := __arrayGet [ %1.arrayField ]
+                                                                    // %3 := __id [ %1.arrayField ]
+                                                                    // %2 := __arrayGet [ %3 ]
                                                                     // %2.stringField := __id [ s ]
         }
     }

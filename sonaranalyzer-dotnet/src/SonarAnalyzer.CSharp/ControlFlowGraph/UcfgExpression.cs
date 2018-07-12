@@ -31,10 +31,13 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
         public static UcfgExpression Constant { get; } = new ConstantExpression();
         public static UcfgExpression Unknown { get; } = new UnknownExpression();
 
-        protected UcfgExpression(ISymbol symbol)
+        protected UcfgExpression(ISymbol symbol, SyntaxNode node)
         {
             TypeSymbol = symbol.GetSymbolType();
+            this.Node = node;
         }
+
+        public SyntaxNode Node { get; }
 
         public abstract Expression Expression { get; }
         public ITypeSymbol TypeSymbol { get; }
@@ -52,20 +55,14 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
 
         internal class VariableExpression : UcfgExpression
         {
-            public VariableExpression(string variableName, bool isString)
-                : base(null)
-            {
-                Expression = new Expression { Var = new Variable { Name = variableName } };
-            }
-
             public VariableExpression(string variableName, ITypeSymbol returnType)
-                : base(returnType)
+                : base(returnType, null)
             {
                 Expression = new Expression { Var = new Variable { Name = variableName } };
             }
 
-            public VariableExpression(ISymbol symbol)
-                : base(symbol)
+            public VariableExpression(ISymbol symbol, SyntaxNode node)
+                : base(symbol, node)
             {
                 Expression = new Expression { Var = new Variable { Name = symbol.Name } };
             }
@@ -104,7 +101,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             }
 
             private ConstantExpression(string value, ISymbol symbol)
-                : base(symbol)
+                : base(symbol, null)
             {
                 Expression = new Expression { Const = new Constant { Value = value } };
             }
@@ -115,7 +112,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
         private class ThisExpression : UcfgExpression
         {
             public ThisExpression()
-                : base(null)
+                : base(null, null)
             {
                 Expression = new Expression { This = new This() };
             }
@@ -126,9 +123,9 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
         internal class ClassNameExpression : UcfgExpression
         {
             public ClassNameExpression(INamedTypeSymbol namedTypeSymbol)
-                : base(namedTypeSymbol)
+                : base(namedTypeSymbol, null)
             {
-                Expression = new Expression { Classname = new ClassName { Classname = UcfgMethodId.CreateTypeId(namedTypeSymbol).ToString() } };
+                Expression = new Expression { Classname = new ClassName { Classname = UcfgMethodId.CreateNamedTypeId(namedTypeSymbol).ToString() } };
             }
 
             public override Expression Expression { get; }
@@ -136,8 +133,8 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
 
         internal class MemberAccessExpression : UcfgExpression
         {
-            public MemberAccessExpression(ISymbol symbol, UcfgExpression target)
-                : base(symbol)
+            public MemberAccessExpression(ISymbol symbol, SyntaxNode node, UcfgExpression target)
+                : base(symbol, node)
             {
                 Target = target;
             }
@@ -148,8 +145,8 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
 
         internal class FieldAccessExpression : MemberAccessExpression
         {
-            public FieldAccessExpression(IFieldSymbol fieldSymbol, UcfgExpression target)
-                : base(fieldSymbol, target)
+            public FieldAccessExpression(IFieldSymbol fieldSymbol, SyntaxNode node, UcfgExpression target)
+                : base(fieldSymbol, node, target)
             {
                 var fieldAccess = new FieldAccess { Field = new Variable { Name = fieldSymbol.Name } };
 
@@ -197,15 +194,15 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
         internal class ElementAccessExpression : MemberAccessExpression
         {
             public ElementAccessExpression(ISymbol symbol, UcfgExpression target)
-                : base(symbol, target)
+                : base(symbol, null, target)
             {
             }
         }
 
         internal class PropertyAccessExpression : MemberAccessExpression
         {
-            public PropertyAccessExpression(IPropertySymbol propertySymbol, UcfgExpression target)
-                : base(propertySymbol, target)
+            public PropertyAccessExpression(IPropertySymbol propertySymbol, SyntaxNode node, UcfgExpression target)
+                : base(propertySymbol, node, target)
             {
                 GetMethodSymbol = propertySymbol.GetMethod;
                 SetMethodSymbol = propertySymbol.SetMethod;
@@ -217,8 +214,8 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
 
         internal class MethodAccessExpression : MemberAccessExpression
         {
-            public MethodAccessExpression(IMethodSymbol methodSymbol, UcfgExpression target)
-                : base(methodSymbol, target)
+            public MethodAccessExpression(IMethodSymbol methodSymbol, SyntaxNode node, UcfgExpression target)
+                : base(methodSymbol, node, target)
             {
             }
         }

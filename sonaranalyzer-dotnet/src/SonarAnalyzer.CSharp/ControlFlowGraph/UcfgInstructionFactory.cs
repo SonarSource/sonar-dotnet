@@ -226,7 +226,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                 : UcfgExpression.This;
             }
 
-            var ucfgExpression = expressionService.Create(namedTypeSymbol, target);
+            var ucfgExpression = expressionService.Create(namedTypeSymbol, genericName, target);
             expressionService.Associate(genericName, ucfgExpression);
 
             return NoInstructions;
@@ -267,7 +267,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                 }
             }
 
-            var ucfgExpression = expressionService.Create(symbol, target);
+            var ucfgExpression = expressionService.Create(symbol, identifierName, target);
             expressionService.Associate(identifierName, ucfgExpression);
 
             if (assignmentExpression?.Left != identifierName &&
@@ -286,7 +286,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                 return NoInstructions;
             }
 
-            var leftExpression = expressionService.Create(semanticModel.GetDeclaredSymbol(variableDeclarator), null);
+            var leftExpression = expressionService.Create(semanticModel.GetDeclaredSymbol(variableDeclarator), variableDeclarator, null);
             var rightExpression = expressionService.GetExpression(variableDeclarator.Initializer.Value);
 
             return CreateAssignCall(variableDeclarator, UcfgMethodId.Assignment, leftExpression, rightExpression);
@@ -354,9 +354,6 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             var argumentInstructions = Enumerable.Empty<Instruction>();
             if (invocationExpression.ArgumentList != null)
             {
-                // Create temporary variables for e.g. field access
-                argumentInstructions = ProcessMethodArguments(invocationExpression.ArgumentList);
-                
                 ucfgArguments.AddRange(invocationExpression.ArgumentList.Arguments.Select(a => a.Expression)
                     .Select(expressionService.GetExpression));
             }
@@ -367,49 +364,6 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
 
         private static bool IsCalledAsExtension(IMethodSymbol methodSymbol) =>
             methodSymbol.ReducedFrom != null;
-
-        private IEnumerable<Instruction> ProcessMethodArguments(ArgumentListSyntax argumentListSyntax)
-        {
-            var newInstructions = new List<Instruction>();
-            var argExpressionNodes = argumentListSyntax.Arguments.Select(a => a.Expression);
-
-            // Arguments to a method can only be __id, this, or class.
-            // Anything else needs to be referenced by a temporary variable
-            var argumentExpressions = new List<Expression>();
-            foreach (var argExpressionNode in argExpressionNodes)
-            {
-                var ucfgExpression = expressionService.GetExpression(argExpressionNode);
-
-                if (IsTemporaryVariableRequired(ucfgExpression))
-                {
-                    // Create a temp variable and change the node->UcfgExpression
-                    // to point to the new UcfgExpression
-                    var tempVariable = expressionService.CreateVariable(ucfgExpression.TypeSymbol);
-                    expressionService.Associate(argExpressionNode, tempVariable);
-
-                    var id = UcfgMethodId.CreateTypeId(ucfgExpression.TypeSymbol as INamedTypeSymbol);
-
-                    var instruction = new Instruction
-                    {
-                        Assigncall = new AssignCall
-                        {
-                            Location = argExpressionNode.GetUcfgLocation(),
-                            MethodId = UcfgMethodId.Assignment.ToString()
-                        }
-                    };
-                    instruction.Assigncall.Args.Add(ucfgExpression.Expression);
-                    tempVariable.ApplyAsTarget(instruction);
-                    newInstructions.Add(instruction);
-                }
-            }
-
-            return newInstructions;
-        }
-
-        private static bool IsTemporaryVariableRequired(UcfgExpression methodArgumentExpression)
-        {
-            return methodArgumentExpression is UcfgExpression.FieldAccessExpression;
-        }
 
         private IEnumerable<Instruction> ProcessAssignmentExpression(AssignmentExpressionSyntax assignmentExpression)
         {
@@ -468,7 +422,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             foreach (var parameter in methodSymbol.Parameters)
             {
                 expressionService.Associate(parameter.DeclaringSyntaxReferences.First().GetSyntax(),
-                    expressionService.Create(parameter, null));
+                    expressionService.Create(parameter, methodDeclaration, null));
             }
 
             return CreateAssignCall(methodDeclaration, UcfgMethodId.EntryPoint,
@@ -491,7 +445,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                 leftSideExpression = expressionService.GetExpression(memberAccessExpression.Expression);
             }
 
-            var ucfgExpression = expressionService.Create(memberAccessSymbol, leftSideExpression);
+            var ucfgExpression = expressionService.Create(memberAccessSymbol, memberAccessExpression, leftSideExpression);
             expressionService.Associate(memberAccessExpression, ucfgExpression);
 
             var assignmentExpression = memberAccessExpression.Parent as AssignmentExpressionSyntax;
@@ -518,6 +472,11 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                 throw new UcfgException("Expecting this method not to be called for nodes of type 'ObjectCreationExpressionSyntax'.");
             }
 
+            if (arguments.Length == 0)
+            {
+                throw new UcfgException("A UCFG expression must have at least one argument");
+            }
+
             // TODO: Uncomment this check when the attribute handling is changed. Currently this fails because no args are passed
             //       to the method call
             //if (UcfgIdentifier.IsMethodId(identifier))
@@ -542,10 +501,62 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                     MethodId = identifier.ToString()
                 }
             };
-            instruction.Assigncall.Args.AddRange(arguments.Select(a => a.Expression));
-            callTarget.ApplyAsTarget(instruction);
 
-            return new[] { instruction };
+            IList<Instruction> newInstructions = new List<Instruction>();
+            var processedArgs = ProcessInstructionArguments(arguments, newInstructions);
+            instruction.Assigncall.Args.AddRange(processedArgs);
+
+            callTarget.ApplyAsTarget(instruction);
+            newInstructions.Add(instruction);
+
+            return newInstructions;
+        }
+
+        private IEnumerable<Expression> ProcessInstructionArguments(UcfgExpression[] ucfgArguments, IList<Instruction> additionalInstructions)
+        {
+            var argumentExpressions = new List<Expression>();
+
+            // Arguments to a method can only be __id, this, or class.
+            // Anything else needs to be referenced by a auxiliary variable
+            foreach (var ucfgExpression in ucfgArguments)
+            {
+                if (IsTemporaryVariableRequired(ucfgExpression))
+                {
+                    // Create a temp variable and change the node->UcfgExpression
+                    // to point to the new UcfgExpression
+                    var tempVariable = expressionService.CreateVariable(ucfgExpression.TypeSymbol);
+
+                    var fieldAccessUfg = ucfgExpression as UcfgExpression.FieldAccessExpression;
+
+                    expressionService.Associate(ucfgExpression.Node, tempVariable);
+                    argumentExpressions.Add(tempVariable.Expression);
+
+                    var id = UcfgMethodId.CreateTypeId(ucfgExpression.TypeSymbol);
+
+                    var instruction = new Instruction
+                    {
+                        Assigncall = new AssignCall
+                        {
+                            Location = ucfgExpression.Node.GetUcfgLocation(),
+                            MethodId = UcfgMethodId.Assignment.ToString()
+                        }
+                    };
+                    instruction.Assigncall.Args.Add(ucfgExpression.Expression);
+                    tempVariable.ApplyAsTarget(instruction);
+                    additionalInstructions.Add(instruction);
+                }
+                else
+                {
+                    argumentExpressions.Add(ucfgExpression.Expression);
+                }
+            }
+
+            return argumentExpressions;
+        }
+
+        private static bool IsTemporaryVariableRequired(UcfgExpression methodArgumentExpression)
+        {
+            return methodArgumentExpression is UcfgExpression.FieldAccessExpression;
         }
 
         private IEnumerable<Instruction> CreateNewObject(ObjectCreationExpressionSyntax syntaxNode,
@@ -558,7 +569,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                 NewObject = new NewObject
                 {
                     Location = syntaxNode.GetUcfgLocation(),
-                    Type = UcfgMethodId.CreateTypeId(ctorSymbol.ContainingType).ToString()
+                    Type = UcfgMethodId.CreateNamedTypeId(ctorSymbol.ContainingType).ToString()
                 }
             };
             callTarget.ApplyAsTarget(instruction);

@@ -114,7 +114,19 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             }
         }
 
-        public static UcfgMethodId CreateTypeId(INamedTypeSymbol typeSymbol) =>
+        public static UcfgMethodId CreateTypeId(ITypeSymbol typeSymbol)
+        {
+            switch (typeSymbol)
+            {
+                case INamedTypeSymbol namedTypeSymbol:
+                    return CreateNamedTypeId(namedTypeSymbol);
+                case IArrayTypeSymbol arrayTypeSymbol:
+                    return CreateArrayTypeId(arrayTypeSymbol);
+            }
+            throw new UcfgException($"Unexpected kind of type symbol: {typeSymbol.Kind}");
+        }
+
+        public static UcfgMethodId CreateNamedTypeId(INamedTypeSymbol typeSymbol) =>
             Create(typeSymbol.ConstructedFrom.ToDisplayString());
 
         public static UcfgMethodId CreateArrayTypeId(IArrayTypeSymbol arrayTypeSymbol) =>

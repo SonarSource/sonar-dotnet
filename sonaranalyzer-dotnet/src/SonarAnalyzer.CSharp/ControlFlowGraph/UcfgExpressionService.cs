@@ -56,7 +56,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
         public UcfgExpression CreateArrayAccess(ISymbol symbol, UcfgExpression targetExpression) =>
             new UcfgExpression.ElementAccessExpression(symbol, targetExpression);
 
-        public UcfgExpression Create(ISymbol symbol, UcfgExpression targetExpression)
+        public UcfgExpression Create(ISymbol symbol, SyntaxNode node, UcfgExpression targetExpression)
         {
             switch (symbol)
             {
@@ -66,22 +66,22 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                 case IParameterSymbol parameterSymbol:
                     return parameterSymbol.Type.IsAny(UnsupportedVariableTypes)
                         ? (UcfgExpression)new UcfgExpression.ConstantExpression(parameterSymbol)
-                        : new UcfgExpression.VariableExpression(parameterSymbol);
+                        : new UcfgExpression.VariableExpression(parameterSymbol, node);
 
                 case ILocalSymbol localSymbol:
-                    return new UcfgExpression.VariableExpression(symbol);
+                    return new UcfgExpression.VariableExpression(symbol, node);
 
                 case IFieldSymbol fieldSymbol:
-                    return new UcfgExpression.FieldAccessExpression(fieldSymbol, targetExpression);
+                    return new UcfgExpression.FieldAccessExpression(fieldSymbol, node, targetExpression);
 
                 case IPropertySymbol propertySymbol:
-                    return new UcfgExpression.PropertyAccessExpression(propertySymbol, targetExpression);
+                    return new UcfgExpression.PropertyAccessExpression(propertySymbol, node, targetExpression);
 
                 case INamedTypeSymbol namedTypeSymbol:
                     return CreateClassName(namedTypeSymbol);
 
                 case IMethodSymbol methodSymbol:
-                    return new UcfgExpression.MethodAccessExpression(methodSymbol, targetExpression);
+                    return new UcfgExpression.MethodAccessExpression(methodSymbol, node, targetExpression);
 
                 default:
                     throw new UcfgException($"Create UcfgExpression does not expect symbol of type '{symbol.GetType().Name}'.");
