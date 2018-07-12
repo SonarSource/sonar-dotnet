@@ -281,7 +281,7 @@ namespace Namespace
                                             // a := __id [ %2 ]
             Bar(s.ToLower());               // %3 := string.ToLower() [ s ]
                                             // %4 := Namespace.Class1.Bar(string) [ this %3 ]
-            a = string.IsNullOrEmpty(s);    // %5 := string.IsNullOrEmpty(string) [ const s ];
+            a = string.IsNullOrEmpty(s);    // %5 := string.IsNullOrEmpty(string) [ string s ];
                                             // a := __id [ %5 ]
             a = A(B(C(s)));                 // %6 := Namespace.Class1.C(string) [ this s ]
                                             // %7 := Namespace.Class1.B(int) [ this %6 ]
@@ -299,11 +299,11 @@ namespace Namespace
                                             // other := __id [ %12 ]
             other.Bar(s);                   // %14 := Namespace.Class1.Bar(string) [ other s ]
 
-            Bar(field);                     // %15 := __id [ this.field ]
-                                            // %16 := Namespace.Class1.Bar(string) [ this %15 ]
+            Bar(field);                     // %16 := __id [ this.field ]
+                                            // %15 := Namespace.Class1.Bar(string) [ this %16 ]
 
-            Bar(other.field);               // %17 := __id [ other.field ]
-                                            // %18 := Namespace.Class1.Bar(string) [ this %17 ]
+            Bar(other.field);               // %18 := __id [ other.field ]
+                                            // %17 := Namespace.Class1.Bar(string) [ this %18 ]
 
             StaticMethod(s);                // %19 := Namespace.Class1.StaticMethod(string) [ Namespace.Class1 s ]
             Class1.StaticMethod(s);         // %20 := Namespace.Class1.StaticMethod(string) [ Namespace.Class1 s ]
@@ -413,7 +413,7 @@ namespace Namespace
 {
     public class Class1
     {
-        private string field;
+        private string Field;
         public void Foo(string s)
         {
             string a;
@@ -421,7 +421,8 @@ namespace Namespace
                                     // a := __id [ %0 ]
             a = Extensions.Ext(s);  // %1 := Namespace.Extensions.Ext(string) [ Namespace.Extensions s ]
                                     // a := __id [ %1 ]
-            a = this.field.Ext();   // %2 := Namespace.Extensions.Ext(string) [ Namespace.Extensions this.field ]
+            a = this.Field.Ext();   // %3 := __id [ this.Field ]
+                                    // %2 := Namespace.Extensions.Ext(string) [ Namespace.Extensions %3 ]
                                     // a := __id [ %2 ]
         }
     }
@@ -525,42 +526,18 @@ namespace Namespace
 {
     public class Class1
     {
-        public void Foo()
+        public void Foo(string s)
         {
-            SendEmailAsync(""data"", false);                  // %0 := Namespace.Class1.SendEmailAsync(string, bool) [ this const const ]
-            SendEmailAsync(body: ""data"", isHtml: false);    // %1 := Namespace.Class1.SendEmailAsync(string, bool) [ this const const ]
-            SendEmailAsync(body: ""data"");                   // %2 := Namespace.Class1.SendEmailAsync(string, bool) [ this const ]
-            SendEmailAsync(isHtml: false, body: ""data"");    // %3 := Namespace.Class1.SendEmailAsync(string, bool) [ this const const ]
+            SendEmailAsync(s, false);                  // %0 := Namespace.Class1.SendEmailAsync(string, bool) [ this s const ]
+            SendEmailAsync(body: s, isHtml: false);    // %1 := Namespace.Class1.SendEmailAsync(string, bool) [ this s const ]
+            SendEmailAsync(body: s);                   // %2 := Namespace.Class1.SendEmailAsync(string, bool) [ this s ]
+            SendEmailAsync(isHtml: false, body: s);    // %3 := Namespace.Class1.SendEmailAsync(string, bool) [ this const s ]
         }
 
         public System.Threading.Tasks.Task SendEmailAsync(string body, bool isHtml = false)
         { return null; }
     }
 }";
-            UcfgVerifier.VerifyInstructions(code, "Foo");
-        }
-
-        [TestMethod]
-        public void Invocations_WIP()
-        {
-            const string code = @"
-namespace Namespace
-{
-    public class Class1
-    {
-        private string Field = ""aaa"";
-
-        public void Foo()
-        {
-            Bar(this.Field);
-                // %0 := __id [ this.Field ]
-                // %1 := Namespace.Class1.Bar(string) [ this %0 ]
-        }
-
-        private void Bar(string arg1) { /* no-op */ }
-    }
-}";
-
             UcfgVerifier.VerifyInstructions(code, "Foo");
         }
 
@@ -598,19 +575,19 @@ namespace Namespace
             // %7 := Namespace.Class1.Bar(int) [ this %6 ]
 
             Bar(this.Field);
-            // %8 := __id [ this.Field ]
-            // %9 := Namespace.Class1.Bar(int) [ this %8 ]
+            // %9 := __id [ this.Field ]
+            // %8 := Namespace.Class1.Bar(int) [ this %9 ]
 
             Bar(StaticField);
-            // %10 := __id [ Namespace.Class1.StaticField ]
-            // %11 := Namespace.Class1.Bar(int) [ this %10 ]
+            // %11 := __id [ Namespace.Class1.StaticField ]
+            // %10 := Namespace.Class1.Bar(int) [ this %11 ]
 
             Bar(Field, Property, this.InstanceMethod(), StaticMethod());
             // %12 := Namespace.Class1.Property.get [ this ]
             // %13 := Namespace.Class1.InstanceMethod() [ this ]
             // %14 := Namespace.Class1.StaticMethod() [ Namespace.Class1 ]
-            // %15 := __id [ this.Field ]
-            // %16 := Namespace.Class1.Bar(int, int, int, int) [ this %15 %12 %13 %14 ]
+            // %16 := __id [ this.Field ]
+            // %15 := Namespace.Class1.Bar(int, int, int, int) [ this %16 %12 %13 %14 ]
         }
 
         private void Bar(int arg1) { /* no-op */ }
@@ -648,12 +625,12 @@ namespace Namespace
 {
     public class Class1
     {
-        public string field;
+        public string Field;
 
         public void Foo()
         {
-            var variable = field;
-                // variable := __id [ this.field ]
+            var variable = Field;   // variable := __id [ this.Field ]
+
         }
     }
 }";
@@ -697,12 +674,13 @@ namespace Namespace
 {
     public class Class1
     {
-        private string field;
+        private string Field;
 
         public void Foo()
         {
-            var x = field.ToLower();
-                // %0 := string.ToLower() [ this.field ]
+            var x = Field.ToLower();
+                // %1 := __id [ this.Field ]
+                // %0 := string.ToLower() [ %1 ]
                 // x := __id [ %0 ]
         }
     }
@@ -1006,14 +984,15 @@ namespace Namespace
         {
             other.ArrayProperty[0].arrayField[1].stringField = s;   // %0 := Namespace.Class1.ArrayProperty.get [ other ]
                                                                     // %1 := __arrayGet [ %0 ]
-                                                                    // %2 := __arrayGet [ %1.arrayField ]
+                                                                    // %3 := __id [ %1.arrayField ]
+                                                                    // %2 := __arrayGet [ %3 ]
                                                                     // %2.stringField := __id [ s ]
         }
     }
 }";
             UcfgVerifier.VerifyInstructions(code, "Foo");
         }
-        
+
         [TestMethod]
         public void ArrayCreation_WithNew()
         {
@@ -1068,7 +1047,7 @@ namespace Namespace
             UcfgVerifier.VerifyInstructions(code, "Foo");
         }
 
-        [TestMethod] [Ignore] // TODO: this method currently throws a null-ref
+        [TestMethod]
         public void ArrayCreation_WithCreateInstance()
         {
             const string code = @"
@@ -1078,9 +1057,25 @@ namespace Namespace
     {
         public void Foo()
         {
-            var a = System.Array.CreateInstance(typeof(string), 10);    // %0 = System.Array.CreateInstance(System.Type, int) [ System.Array.CreateInstance ]
-                                                                        // %1 := __id [ %0 ]
+            var a = System.Array.CreateInstance(typeof(string), 10);    // %0 := System.Array.CreateInstance(System.Type, int) [ System.Array const const ]
+                                                                        // a := __id [ %0 ]
         }
+    }
+}";
+            UcfgVerifier.VerifyInstructions(code, "Foo");
+        }
+
+        [TestMethod]
+        public void ControllerMethod_Contains_EntryPointWithNoArguments()
+        {
+            const string code = @"
+using System.ComponentModel;
+using System.Web.Mvc;
+public class Class1 : Controller
+{
+    private string field;
+    public void Foo() // %0 := __entrypoint [  ]
+    {
     }
 }";
             UcfgVerifier.VerifyInstructions(code, "Foo");
