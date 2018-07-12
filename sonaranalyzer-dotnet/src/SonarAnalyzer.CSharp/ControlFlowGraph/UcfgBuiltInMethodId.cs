@@ -18,29 +18,28 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using Microsoft.CodeAnalysis;
 
 namespace SonarAnalyzer.ControlFlowGraph.CSharp
 {
-    internal struct UcfgMethodId
+    internal static class UcfgBuiltInMethodId
     {
         /// <summary>
         /// The method ID that the Security Engine uses for assignments. It accepts one argument
         /// and returns one value. For example, `a = x` generates `a = __id(x)`.
         /// </summary>
-        public static readonly UcfgMethodId Assignment = Create("__id");
+        public static readonly string Identity = "__id";
 
         /// <summary>
         /// The method ID that the Security Engine uses for concatenations. It accepts two
         /// arguments and returns one value. For example, `x + y` generates `%0 = __concat(x, y)`
         /// </summary>
-        public static readonly UcfgMethodId Concatenation = Create("__concat");
+        public static readonly string Concatenation = "__concat";
 
         /// <summary>
         /// The method ID used by the UCFG Builder to represent a method that has no symbol.
         /// The instructions with this method ID are removed from UCFG.
         /// </summary>
-        public static readonly UcfgMethodId Unknown = Create("__unknown");
+        public static readonly string Unknown = "__unknown";
 
         /// <summary>
         /// The method ID that the security engine uses for attributes/annotations. It accepts
@@ -56,14 +55,14 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
         /// s = __annotation(%0)
         /// ...
         /// </example>
-        public static readonly UcfgMethodId Annotation = Create("__annotation");
+        public static readonly string Annotation = "__annotation";
 
         /// <summary>
         /// The method ID that the security engine uses to differentiate a method call from an attribute call.
         /// It accepts only 2 parameters, the first being the method ID of the attribute and the second being the parameter on
         /// which the attribute applies to.
         /// </summary>
-        public static readonly UcfgMethodId Annotate = Create("__annotate");
+        public static readonly string Annotate = "__annotate";
 
         /// <summary>
         /// The method ID that the security engine uses for known tainted entrypoints. All method
@@ -75,52 +74,18 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
         /// Instructions:
         /// %0 = __entrypoint(s, p)
         /// </example>
-        public static readonly UcfgMethodId EntryPoint = Create("__entrypoint");
+        public static readonly string EntryPoint = "__entrypoint";
 
         /// <summary>
         /// The method ID that the Security Engine uses for reading array elements. It accepts one
         /// argument - the array instance, and returns one value. For example, `var a = x[i]` generates `a = __arrayGet(x)`
         /// </summary>
-        public static readonly UcfgMethodId ArrayGet = Create("__arrayGet");
+        public static readonly string ArrayGet = "__arrayGet";
 
         /// <summary>
         /// The method ID that the Security Engine uses for writing array elements. It accepts one
         /// argument - the array instance, and returns one value. For example, `x[i] = a` generates `%0 = __arraySet(x, a)`
         /// </summary>
-        public static readonly UcfgMethodId ArraySet = Create("__arraySet");
-
-        private readonly string id;
-
-        private UcfgMethodId(string id)
-        {
-            this.id = id;
-        }
-
-        public override string ToString() =>
-            id;
-
-        public static UcfgMethodId CreateMethodId(IMethodSymbol methodSymbol)
-        {
-            switch (methodSymbol?.MethodKind)
-            {
-                case MethodKind.ExplicitInterfaceImplementation:
-                    return Create(methodSymbol.ConstructedFrom.ToDisplayString());
-
-                case MethodKind.ReducedExtension:
-                    return Create(methodSymbol.ReducedFrom.ToDisplayString());
-
-                default:
-                    return Create(methodSymbol?.OriginalDefinition?.ToDisplayString());
-            }
-        }
-
-        public static UcfgMethodId CreateTypeId(INamedTypeSymbol typeSymbol) =>
-            Create(typeSymbol.ConstructedFrom.ToDisplayString());
-
-        public static UcfgMethodId CreateArrayTypeId(IArrayTypeSymbol arrayTypeSymbol) =>
-            Create(arrayTypeSymbol.ToDisplayString());
-
-        private static UcfgMethodId Create(string id) =>
-            id == null ? Unknown : new UcfgMethodId(id);
+        public static readonly string ArraySet = "__arraySet";
     }
 }

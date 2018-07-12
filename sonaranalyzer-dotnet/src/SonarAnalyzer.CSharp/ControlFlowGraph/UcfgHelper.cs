@@ -23,7 +23,7 @@ using UcfgLocation = SonarAnalyzer.Protobuf.Ucfg.Location;
 
 namespace SonarAnalyzer.ControlFlowGraph.CSharp
 {
-    internal static class UcfgLocationHelper
+    internal static class UcfgHelper
     {
         /// <summary>
         /// Returns UCFG Location that represents the location of the provided SyntaxNode
@@ -47,6 +47,21 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                 EndLine = lineSpan.EndLinePosition.Line + 1,
                 EndLineOffset = lineSpan.EndLinePosition.Character - 1,
             };
+        }
+
+        public static string ToUcfgMethodId(this IMethodSymbol methodSymbol)
+        {
+            switch (methodSymbol?.MethodKind)
+            {
+                case MethodKind.ExplicitInterfaceImplementation:
+                    return methodSymbol.ConstructedFrom.ToDisplayString();
+
+                case MethodKind.ReducedExtension:
+                    return methodSymbol.ReducedFrom.ToDisplayString();
+
+                default:
+                    return methodSymbol?.OriginalDefinition?.ToDisplayString() ?? "__unknown";
+            }
         }
     }
 }

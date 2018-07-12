@@ -41,11 +41,10 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             var ucfg = new UCFG
             {
                 Location = syntaxNode.GetUcfgLocation(),
-                MethodId = UcfgMethodId.CreateMethodId(methodSymbol).ToString(),
+                MethodId = methodSymbol.ToUcfgMethodId()
             };
 
             ucfg.BasicBlocks.AddRange(cfg.Blocks.Select(blockBuilder.CreateBasicBlock));
-
             ucfg.Parameters.AddRange(methodSymbol.GetParameters().Select(p => p.Name));
 
             if (syntaxNode is BaseMethodDeclarationSyntax methodDeclaration &&
