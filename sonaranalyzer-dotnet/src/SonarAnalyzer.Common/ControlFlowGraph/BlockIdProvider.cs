@@ -21,9 +21,9 @@
 using System.Collections.Generic;
 using SonarAnalyzer.Helpers;
 
-namespace SonarAnalyzer.ControlFlowGraph.CSharp
+namespace SonarAnalyzer.ControlFlowGraph
 {
-    public  class UcfgBlockIdProvider
+    public  class BlockIdProvider
     {
         private readonly Dictionary<Block, string> map = new Dictionary<Block, string>();
         private int counter;
