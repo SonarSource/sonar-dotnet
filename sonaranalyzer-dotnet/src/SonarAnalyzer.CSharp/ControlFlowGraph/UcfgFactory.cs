@@ -38,28 +38,36 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
 
         public UCFG Create(SyntaxNode syntaxNode, IMethodSymbol methodSymbol, IControlFlowGraph cfg)
         {
-            var ucfg = new UCFG
+            try
             {
-                Location = syntaxNode.GetUcfgLocation(),
-                MethodId = methodSymbol.ToUcfgMethodId()
-            };
 
-            ucfg.BasicBlocks.AddRange(cfg.Blocks.Select(blockBuilder.CreateBasicBlock));
-            ucfg.Parameters.AddRange(methodSymbol.GetParameters().Select(p => p.Name));
+                var ucfg = new UCFG
+                {
+                    Location = syntaxNode.GetUcfgLocation(),
+                    MethodId = methodSymbol.ToUcfgMethodId()
+                };
 
-            if (syntaxNode is BaseMethodDeclarationSyntax methodDeclaration &&
-                TaintAnalysisEntryPointDetector.IsEntryPoint(methodSymbol))
-            {
-                var entryPointBlock = blockBuilder.CreateEntryPointBlock(methodDeclaration, methodSymbol, blockIdProvider.Get(cfg.EntryBlock));
-                ucfg.BasicBlocks.Add(entryPointBlock);
-                ucfg.Entries.Add(entryPointBlock.Id);
+                ucfg.BasicBlocks.AddRange(cfg.Blocks.Select(blockBuilder.CreateBasicBlock));
+                ucfg.Parameters.AddRange(methodSymbol.GetParameters().Select(p => p.Name));
+
+                if (syntaxNode is BaseMethodDeclarationSyntax methodDeclaration &&
+                    TaintAnalysisEntryPointDetector.IsEntryPoint(methodSymbol))
+                {
+                    var entryPointBlock = blockBuilder.CreateEntryPointBlock(methodDeclaration, methodSymbol, blockIdProvider.Get(cfg.EntryBlock));
+                    ucfg.BasicBlocks.Add(entryPointBlock);
+                    ucfg.Entries.Add(entryPointBlock.Id);
+                }
+                else
+                {
+                    ucfg.Entries.Add(blockIdProvider.Get(cfg.EntryBlock));
+                }
+
+                return ucfg;
             }
-            else
+            catch (System.Exception e)
             {
-                ucfg.Entries.Add(blockIdProvider.Get(cfg.EntryBlock));
+                throw new UcfgException(e.ToString().Replace("\r\n", " \\ "));
             }
-
-            return ucfg;
         }
     }
 }
