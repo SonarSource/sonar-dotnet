@@ -20,6 +20,7 @@
 
 using System.Linq;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Protobuf.Ucfg;
@@ -40,7 +41,6 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
         {
             try
             {
-
                 var ucfg = new UCFG
                 {
                     Location = syntaxNode.GetUcfgLocation(),
@@ -66,7 +66,14 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             }
             catch (System.Exception e)
             {
-                throw new UcfgException(e.ToString().Replace("\r\n", " \\ "));
+                var message = $"Type {GetType().Name} could not be applied as target of the instruction. " +
+                    $"Method name: {methodSymbol?.Name ?? "{unknown}"}  " +
+                    $"Syntax node kind: {(SyntaxKind)syntaxNode.Kind()} " +
+                    $"File: {syntaxNode.GetLocation()?.GetLineSpan().Path ?? "{unknown}"}  " +
+                    $"Line: {syntaxNode.GetLocation()?.GetLineSpan().StartLinePosition.ToString() ?? "{unknown}"}  ##  " +
+                    e.ToString().Replace("\r\n", " ## ");
+
+                throw new UcfgException(message);
             }
         }
     }
