@@ -59,7 +59,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
         public UcfgExpression CreateArrayAccess(ISymbol symbol, UcfgExpression targetExpression) =>
             new UcfgExpression.ElementAccessExpression(symbol, targetExpression);
 
-        public UcfgExpression Create(ISymbol symbol, SyntaxNode node, UcfgExpression targetExpression)
+        public UcfgExpression Create(SyntaxNode node, ISymbol symbol, UcfgExpression targetExpression)
         {
             switch (symbol)
             {

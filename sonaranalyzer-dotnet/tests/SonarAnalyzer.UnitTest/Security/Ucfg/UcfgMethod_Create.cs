@@ -125,7 +125,7 @@ public static class Extensions
             GetMethodId("Extension").Should().Be("Extensions.Extension(string, int)");
 
             string GetMethodId(string methodName, int skip = 0) =>
-                UcfgMethodId.CreateMethodId(semanticModel.GetDeclaredSymbol(syntaxTree.GetMethod(methodName, skip))).ToString();
+                semanticModel.GetDeclaredSymbol(syntaxTree.GetMethod(methodName, skip)).ToUcfgMethodId();
         }
 
         [TestMethod]
@@ -200,10 +200,10 @@ public class Class3
             PropertySetId("Property6").Should().Be("Class3.Property6.set");
 
             string PropertyGetId(string propertyName, int skip = 0) =>
-                UcfgMethodId.CreateMethodId(semanticModel.GetDeclaredSymbol(syntaxTree.GetProperty(propertyName, skip)).GetMethod).ToString();
+                semanticModel.GetDeclaredSymbol(syntaxTree.GetProperty(propertyName, skip)).GetMethod.ToUcfgMethodId();
 
             string PropertySetId(string propertyName, int skip = 0) =>
-                UcfgMethodId.CreateMethodId(semanticModel.GetDeclaredSymbol(syntaxTree.GetProperty(propertyName, skip)).SetMethod).ToString();
+                semanticModel.GetDeclaredSymbol(syntaxTree.GetProperty(propertyName, skip)).SetMethod.ToUcfgMethodId();
         }
 
         [TestMethod]
@@ -226,7 +226,7 @@ namespace Namespace
             CtorId("Class1", skip: 1).Should().Be("Namespace.Class1.Class1(string)");
 
             string CtorId(string className, int skip = 0) =>
-                UcfgMethodId.CreateMethodId(semanticModel.GetDeclaredSymbol(syntaxTree.GetConstructor(className, skip))).ToString();
+                semanticModel.GetDeclaredSymbol(syntaxTree.GetConstructor(className, skip)).ToUcfgMethodId();
         }
 
         [TestMethod]
@@ -261,7 +261,7 @@ namespace Namespace
             GetMethodId("Foo", skip: 1).Should().Be("Namespace.Bar.Foo(string)");
 
             string GetMethodId(string methodName, int skip = 0) =>
-                UcfgMethodId.CreateMethodId(semanticModel.GetDeclaredSymbol(syntaxTree.GetMethod(methodName, skip))).ToString();
+                semanticModel.GetDeclaredSymbol(syntaxTree.GetMethod(methodName, skip)).ToUcfgMethodId();
         }
     }
 }

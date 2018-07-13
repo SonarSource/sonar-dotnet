@@ -27,7 +27,6 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
     internal abstract class UcfgExpression
     {
         public static UcfgExpression This { get; } = new ThisExpression();
-        public static UcfgExpression Constant { get; } = new ConstantExpression();
         public static UcfgExpression Unknown { get; } = new UnknownExpression();
 
         protected UcfgExpression(ISymbol symbol, SyntaxNode node)
@@ -95,7 +94,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             }
 
             public ConstantExpression(IMethodSymbol methodSymbol)
-                : this(UcfgMethodId.CreateMethodId(methodSymbol).ToString(), methodSymbol)
+                : this(methodSymbol.ToUcfgMethodId(), methodSymbol)
             {
             }
 
@@ -124,7 +123,10 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             public ClassNameExpression(INamedTypeSymbol namedTypeSymbol)
                 : base(namedTypeSymbol, null)
             {
-                Expression = new Expression { Classname = new ClassName { Classname = UcfgMethodId.CreateNamedTypeId(namedTypeSymbol).ToString() } };
+                Expression = new Expression
+                {
+                    Classname = new ClassName { Classname = namedTypeSymbol.ConstructedFrom.ToDisplayString() }
+                };
             }
 
             public override Expression Expression { get; }
