@@ -474,9 +474,9 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
 
             if (arguments.Length == 0)
             {
-                throw new UcfgException($"A UCFG expression must have at least one argument.\r\n" +
-                    $"Identifier: {identifier},\r\n" +
-                    $"File: {syntaxNode.GetLocation()?.GetLineSpan().Path ?? "{unknown}" }\r\n" +
+                throw new UcfgException($"A UCFG expression must have at least one argument.  " +
+                    $"Identifier: {identifier},  " +
+                    $"File: {syntaxNode.GetLocation()?.GetLineSpan().Path ?? "{unknown}" }  " +
                     $"Line: {syntaxNode.GetLocation()?.GetLineSpan().StartLinePosition}");
             }
 
