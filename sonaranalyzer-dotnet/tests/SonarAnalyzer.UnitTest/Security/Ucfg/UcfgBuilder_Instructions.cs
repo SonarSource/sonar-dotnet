@@ -281,7 +281,7 @@ namespace Namespace
                                             // a := __id [ %2 ]
             Bar(s.ToLower());               // %3 := string.ToLower() [ s ]
                                             // %4 := Namespace.Class1.Bar(string) [ this %3 ]
-            a = string.IsNullOrEmpty(s);    // %5 := string.IsNullOrEmpty(string) [ const s ];
+            a = string.IsNullOrEmpty(s);    // %5 := string.IsNullOrEmpty(string) [ string s ];
                                             // a := __id [ %5 ]
             a = A(B(C(s)));                 // %6 := Namespace.Class1.C(string) [ this s ]
                                             // %7 := Namespace.Class1.B(int) [ this %6 ]
@@ -1016,7 +1016,7 @@ namespace Namespace
 }";
             UcfgVerifier.VerifyInstructions(code, "Foo");
         }
-        
+
         [TestMethod]
         public void ArrayCreation_WithNew()
         {
@@ -1071,7 +1071,7 @@ namespace Namespace
             UcfgVerifier.VerifyInstructions(code, "Foo");
         }
 
-        [TestMethod] [Ignore] // TODO: this method currently throws a null-ref
+        [TestMethod]
         public void ArrayCreation_WithCreateInstance()
         {
             const string code = @"
@@ -1081,8 +1081,8 @@ namespace Namespace
     {
         public void Foo()
         {
-            var a = System.Array.CreateInstance(typeof(string), 10);    // %0 = System.Array.CreateInstance(System.Type, int) [ System.Array.CreateInstance ]
-                                                                        // %1 := __id [ %0 ]
+            var a = System.Array.CreateInstance(typeof(string), 10);    // %0 := System.Array.CreateInstance(System.Type, int) [ System.Array const const ]
+                                                                        // a := __id [ %0 ]
         }
     }
 }";

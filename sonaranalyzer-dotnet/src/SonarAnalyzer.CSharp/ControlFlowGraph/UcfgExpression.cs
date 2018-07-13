@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Protobuf.Ucfg;
@@ -165,8 +164,11 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                         break;
 
                     default:
-                        throw new ArgumentOutOfRangeException(nameof(target), $"Expecting target object to be 'This', " +
-                            $"'Variable' or 'ClassName' but got '{Target}'.");
+                        throw new UcfgException("Expecting target object to be 'This', 'Variable' or 'ClassName' but " +
+                            $"got '{Target}'. " +
+                            $"Node: {node}" +
+                            $"File: {node.GetLocation()?.GetLineSpan().Path ?? "{unknown}"}  " +
+                            $"Line: {node.GetLocation()?.GetLineSpan().StartLinePosition}");
                 }
 
                 Expression = new Expression { FieldAccess = fieldAccess };
