@@ -472,9 +472,9 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                 throw new UcfgException("Expecting this method not to be called for nodes of type 'ObjectCreationExpressionSyntax'.");
             }
 
-            if (arguments.Length == 0)
+            if (arguments.Length == 0 && !identifier.Equals(UcfgMethodId.EntryPoint))
             {
-                throw new UcfgException($"A UCFG expression must have at least one argument.  " +
+                throw new UcfgException($"Every UCFG expression except {UcfgMethodId.EntryPoint} must have at least one argument.  " +
                     $"Identifier: {identifier},  " +
                     $"File: {syntaxNode.GetLocation()?.GetLineSpan().Path ?? "{unknown}" }  " +
                     $"Line: {syntaxNode.GetLocation()?.GetLineSpan().StartLinePosition}");

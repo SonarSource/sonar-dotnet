@@ -542,30 +542,6 @@ namespace Namespace
         }
 
         [TestMethod]
-        public void Invocations_WIP()
-        {
-            const string code = @"
-namespace Namespace
-{
-    public class Class1
-    {
-        private string Field = ""aaa"";
-
-        public void Foo()
-        {
-            Bar(this.Field);
-                // %1 := __id [ this.Field ]
-                // %0 := Namespace.Class1.Bar(string) [ this %1 ]
-        }
-
-        private void Bar(string arg1) { /* no-op */ }
-    }
-}";
-
-            UcfgVerifier.VerifyInstructions(code, "Foo");
-        }
-
-        [TestMethod]
         public void Invocations_MethodParametersAreThisClassOrVariables()
         {
             const string code = @"
@@ -621,75 +597,7 @@ namespace Namespace
 
             UcfgVerifier.VerifyInstructions(code, "Foo");
         }
-
-        [TestMethod]
-        public void TestSimpleAssignment()
-        {
-            const string code = @"
-namespace Namespace
-{
-    public class Class1
-    {
-        public void Foo(string arg)
-        {
-            var variable = arg;
-                // variable := __id [ arg ]
-        }
-    }
-}";
-
-            UcfgVerifier.VerifyInstructions(code, "Foo");
-        }
-
-        [TestMethod]
-        public void TestSimpleFieldAccessAndAssignment()
-        {
-            const string code = @"
-namespace Namespace
-{
-    public class Class1
-    {
-        public string Field;
-
-        public void Foo()
-        {
-            var variable = Field;   // variable := __id [ this.Field ]
-
-        }
-    }
-}";
-
-            UcfgVerifier.VerifyInstructions(code, "Foo");
-        }
-
-        [TestMethod]
-        public void TestSimpleMethodInvocation()
-        {
-            const string code = @"
-namespace Namespace
-{
-    public class Class1
-    {
-
-        public string Bar1() { return null; }
-        public void Bar2() { /* no-op */ }
-
-        public void Foo()
-        {
-            var variable = Bar1();
-                        // %0 := Namespace.Class1.Bar1() [ this ]
-                        // variable := __id [ %0 ]
-            Bar1();
-                        // %1 := Namespace.Class1.Bar1() [ this ]
-
-            Bar2();     // %2 := Namespace.Class1.Bar2() [ this ]
-        }
-    }
-}";
-
-            UcfgVerifier.VerifyInstructions(code, "Foo");
-        }
-
+        
         [TestMethod]
         public void Invocations_MethodCallOnFieldAccess()
         {
@@ -731,6 +639,21 @@ public class Class1 : Controller
             UcfgVerifier.VerifyInstructions(code, "Foo");
         }
 
+        [TestMethod]
+        public void ControllerMethod_Contains_EntryPointWithNoArguments()
+        {
+            const string code = @"
+using System.ComponentModel;
+using System.Web.Mvc;
+public class Class1 : Controller
+{
+    private string field;
+    public void Foo() // %0 := __entrypoint [  ]
+    {               
+    }
+}";
+            UcfgVerifier.VerifyInstructions(code, "Foo");
+        }
         [TestMethod]
         public void ConstantExpressions_Share_The_Same_Instance()
         {
