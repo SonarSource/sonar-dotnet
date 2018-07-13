@@ -34,7 +34,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
         protected UcfgExpression(ISymbol symbol, SyntaxNode node)
         {
             TypeSymbol = symbol.GetSymbolType();
-            this.Node = node;
+            Node = node;
         }
 
         public SyntaxNode Node { get; }

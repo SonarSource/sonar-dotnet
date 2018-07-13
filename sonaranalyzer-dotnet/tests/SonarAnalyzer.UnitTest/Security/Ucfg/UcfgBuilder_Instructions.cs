@@ -308,8 +308,7 @@ namespace Namespace
             StaticMethod(s);                // %19 := Namespace.Class1.StaticMethod(string) [ Namespace.Class1 s ]
             Class1.StaticMethod(s);         // %20 := Namespace.Class1.StaticMethod(string) [ Namespace.Class1 s ]
 
-            a = field;                      // %21 := __id [ this.field ]
-                                            // a := __id [ %21 ]
+            a = field;                      // a := __id [ this.field ]
         }
         public void Bar(string s) { }
         public string A(int x) { return x.ToString(); }
@@ -527,12 +526,12 @@ namespace Namespace
 {
     public class Class1
     {
-        public void Foo()
+        public void Foo(string s)
         {
-            SendEmailAsync(""data"", false);                  // %0 := Namespace.Class1.SendEmailAsync(string, bool) [ this const const ]
-            SendEmailAsync(body: ""data"", isHtml: false);    // %1 := Namespace.Class1.SendEmailAsync(string, bool) [ this const const ]
-            SendEmailAsync(body: ""data"");                   // %2 := Namespace.Class1.SendEmailAsync(string, bool) [ this const ]
-            SendEmailAsync(isHtml: false, body: ""data"");    // %3 := Namespace.Class1.SendEmailAsync(string, bool) [ this const const ]
+            SendEmailAsync(s, false);                  // %0 := Namespace.Class1.SendEmailAsync(string, bool) [ this s const ]
+            SendEmailAsync(body: s, isHtml: false);    // %1 := Namespace.Class1.SendEmailAsync(string, bool) [ this s const ]
+            SendEmailAsync(body: s);                   // %2 := Namespace.Class1.SendEmailAsync(string, bool) [ this s ]
+            SendEmailAsync(isHtml: false, body: s);    // %3 := Namespace.Class1.SendEmailAsync(string, bool) [ this const s ]
         }
 
         public System.Threading.Tasks.Task SendEmailAsync(string body, bool isHtml = false)
@@ -654,8 +653,8 @@ namespace Namespace
 
         public void Foo()
         {
-            var variable = Field;   // %0 := __id [ this.Field ]
-                                    // variable := __id [ %0 ]
+            var variable = Field;   // variable := __id [ this.Field ]
+
         }
     }
 }";
@@ -851,19 +850,16 @@ namespace Namespace
 
         public void Foo()
         {
-            field.field.field = new Class1();           // %1 := __id [ this.field ]
-                                                        // %0 := __id [ %1 ]
-                                                        // %3 := __id [ %1.field ]
-                                                        // %2 := __id [ %3 ]
-                                                        // %4 := new Namespace.Class1
-                                                        // %5 := Namespace.Class1.Class1() [ %4 ]
-                                                        // %3.field := __id [ %4 ]
+            field.field.field = new Class1();           // %0 := __id [ this.field ]
+                                                        // %1 := __id [ %0.field ]
+                                                        // %2 := new Namespace.Class1
+                                                        // %3 := Namespace.Class1.Class1() [ %2 ]
+                                                        // %1.field := __id [ %2 ]
 
-            Class1.staticField.field = new Class1();    // %7 := __id [ Namespace.Class1.staticField ]
-                                                        // %6 := __id [ %7 ]
-                                                        // %8 := new Namespace.Class1
-                                                        // %9 := Namespace.Class1.Class1() [ %8 ]
-                                                        // %7.field := __id [ %8 ]
+            Class1.staticField.field = new Class1();    // %4 := __id [ Namespace.Class1.staticField ]
+                                                        // %5 := new Namespace.Class1
+                                                        // %6 := Namespace.Class1.Class1() [ %5 ]
+                                                        // %4.field := __id [ %5 ]
         }
     }
 }";

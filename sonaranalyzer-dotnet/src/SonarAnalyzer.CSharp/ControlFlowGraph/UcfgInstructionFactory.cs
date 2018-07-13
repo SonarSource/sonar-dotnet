@@ -474,7 +474,10 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
 
             if (arguments.Length == 0)
             {
-                throw new UcfgException("A UCFG expression must have at least one argument");
+                throw new UcfgException($"A UCFG expression must have at least one argument.\r\n" +
+                    $"Identifier: {identifier},\r\n" +
+                    $"File: {syntaxNode.GetLocation()?.GetLineSpan().Path ?? "{unknown}" }\r\n" +
+                    $"Line: {syntaxNode.GetLocation()?.GetLineSpan().StartLinePosition}");
             }
 
             // TODO: Uncomment this check when the attribute handling is changed. Currently this fails because no args are passed
@@ -503,8 +506,15 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             };
 
             IList<Instruction> newInstructions = new List<Instruction>();
-            var processedArgs = ProcessInstructionArguments(arguments, newInstructions);
-            instruction.Assigncall.Args.AddRange(processedArgs);
+            if (identifier.Equals(UcfgMethodId.Assignment))
+            {
+                instruction.Assigncall.Args.AddRange(arguments.Select( a => a.Expression));
+            }
+            else
+            {
+                var processedArgs = ProcessInstructionArguments(arguments, newInstructions);
+                instruction.Assigncall.Args.AddRange(processedArgs);
+            }
 
             callTarget.ApplyAsTarget(instruction);
             newInstructions.Add(instruction);
@@ -512,7 +522,8 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             return newInstructions;
         }
 
-        private IEnumerable<Expression> ProcessInstructionArguments(UcfgExpression[] ucfgArguments, IList<Instruction> additionalInstructions)
+        private IEnumerable<Expression> ProcessInstructionArguments(UcfgExpression[] ucfgArguments,
+            IList<Instruction> additionalInstructions)
         {
             var argumentExpressions = new List<Expression>();
 
@@ -526,12 +537,8 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                     // to point to the new UcfgExpression
                     var tempVariable = expressionService.CreateVariable(ucfgExpression.TypeSymbol);
 
-                    var fieldAccessUfg = ucfgExpression as UcfgExpression.FieldAccessExpression;
-
                     expressionService.Associate(ucfgExpression.Node, tempVariable);
                     argumentExpressions.Add(tempVariable.Expression);
-
-                    var id = UcfgMethodId.CreateTypeId(ucfgExpression.TypeSymbol);
 
                     var instruction = new Instruction
                     {
