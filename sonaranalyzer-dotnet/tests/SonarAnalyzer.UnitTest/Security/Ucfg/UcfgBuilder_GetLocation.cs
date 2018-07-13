@@ -50,9 +50,9 @@ public class Class1                 // 2
             // Block locations are not used by the Security engine
             ucfg.BasicBlocks[0].Location.Should().BeNull();
 
-            AssertLocation(ucfg.BasicBlocks[0].Instructions[0].Location,
+            AssertLocation(ucfg.BasicBlocks[0].Instructions[0].Assigncall.Location,
                 startLine: 6, startLineOffset: 16, endLine: 6, endLineOffset: 23);
-            AssertLocation(ucfg.BasicBlocks[0].Instructions[1].Location,
+            AssertLocation(ucfg.BasicBlocks[0].Instructions[1].Assigncall.Location,
                 startLine: 6, startLineOffset: 12, endLine: 6, endLineOffset: 23);
         }
 
@@ -80,9 +80,9 @@ s.Trim(                             // 7 x = __id(%0)           --> SL = 6, SLO 
             // Block locations are not used by the Security engine
             ucfg.BasicBlocks[0].Location.Should().BeNull();
 
-            AssertLocation(ucfg.BasicBlocks[0].Instructions[0].Location,
+            AssertLocation(ucfg.BasicBlocks[0].Instructions[0].Assigncall.Location,
                 startLine: 7, startLineOffset: 0, endLine: 8, endLineOffset: 0);
-            AssertLocation(ucfg.BasicBlocks[0].Instructions[1].Location,
+            AssertLocation(ucfg.BasicBlocks[0].Instructions[1].Assigncall.Location,
                 startLine: 6, startLineOffset: 12, endLine: 8, endLineOffset: 0);
         }
 

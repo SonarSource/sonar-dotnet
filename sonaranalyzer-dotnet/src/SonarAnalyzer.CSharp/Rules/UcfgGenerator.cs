@@ -94,13 +94,16 @@ namespace SonarAnalyzer.Rules.CSharp
                     protobufFileIndex = 0;
 
                     cc.RegisterSyntaxNodeActionInNonGenerated(
-                        c => WriteUCFG<BaseMethodDeclarationSyntax>(c, x => x.Body),
-                        SyntaxKind.ConstructorDeclaration,
-                        SyntaxKind.OperatorDeclaration);
+                        c => WriteUCFG<ConstructorDeclarationSyntax>(c, x => x.Body),
+                        SyntaxKind.ConstructorDeclaration);
 
                     cc.RegisterSyntaxNodeActionInNonGenerated(
                         c => WriteUCFG<MethodDeclarationSyntax>(c, x => (CSharpSyntaxNode)x.Body ?? x.ExpressionBody?.Expression),
                         SyntaxKind.MethodDeclaration);
+
+                    cc.RegisterSyntaxNodeActionInNonGenerated(
+                        c => WriteUCFG<OperatorDeclarationSyntax>(c, x => (CSharpSyntaxNode)x.Body ?? x.ExpressionBody?.Expression),
+                        SyntaxKind.OperatorDeclaration);
 
                     cc.RegisterSyntaxNodeActionInNonGenerated(
                         c => WriteUCFG<AccessorDeclarationSyntax>(c, node => node.Body),
@@ -147,8 +150,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            var ucfg = new UcfgBuilder(context.SemanticModel)
-                .Build(declaration, methodSymbol, cfg);
+            var ucfg = new UcfgFactory(context.SemanticModel)
+                .Create(declaration, methodSymbol, cfg);
 
             if (IsValid(ucfg))
             {

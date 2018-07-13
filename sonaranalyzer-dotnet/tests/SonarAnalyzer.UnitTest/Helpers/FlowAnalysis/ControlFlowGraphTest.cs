@@ -62,6 +62,119 @@ namespace NS
             VerifyMinimalCfg(cfg);
         }
 
+        [TestMethod]
+        [TestCategory("CFG")]
+        public void Cfg_Constructed_for_Ctor_ComplexArguments()
+        {
+            const string input = @"
+namespace NS
+{
+    public class Foo
+    {
+        private static int num = 10;
+
+        public Foo() : this(true ? 5 : num + num)
+        {
+            var x = num;
+        }
+
+        public Foo(int i) {}
+    }
+}";
+            var syntaxTree = Compile(input, out var semanticModel);
+            var ctor = syntaxTree.GetRoot().DescendantNodes().OfType<ConstructorDeclarationSyntax>().First();
+            var cfg = CSharpControlFlowGraph.Create(ctor.Body, semanticModel);
+
+            VerifyCfg(cfg, 5);
+
+            var blocks = cfg.Blocks.ToArray();
+
+            var conditionalBlock = (BinaryBranchBlock)blocks[0];
+            var trueCondition = blocks[1];
+            var falseCondition = blocks[2];
+            var constructorBody = blocks[3];
+            var exit = cfg.ExitBlock;
+
+            conditionalBlock.TrueSuccessorBlock.Should().Be(trueCondition);
+            conditionalBlock.FalseSuccessorBlock.Should().Be(falseCondition);
+            trueCondition.SuccessorBlocks.Should().OnlyContain(constructorBody);
+            falseCondition.SuccessorBlocks.Should().OnlyContain(constructorBody);
+            constructorBody.SuccessorBlocks.Should().OnlyContain(exit);
+            exit.PredecessorBlocks.Should().OnlyContain(constructorBody);
+
+            VerifyAllInstructions(conditionalBlock, "true");
+            VerifyAllInstructions(trueCondition, "5");
+            VerifyAllInstructions(falseCondition, "num", "num", "num + num");
+            VerifyAllInstructions(constructorBody, ": this(true ? 5 : num + num)", "num", "x = num");
+            VerifyAllInstructions(exit);
+        }
+
+        [TestMethod]
+        [TestCategory("CFG")]
+        public void Cfg_Constructed_for_Ctor_This()
+        {
+            const string input = @"
+namespace NS
+{
+    public class Foo
+    {
+        public Foo() : this(5) {}
+
+        public Foo(int i) {}
+    }
+}";
+            var syntaxTree = Compile(input, out var semanticModel);
+            var ctor = syntaxTree.GetRoot().DescendantNodes().OfType<ConstructorDeclarationSyntax>().First();
+            var cfg = CSharpControlFlowGraph.Create(ctor.Body, semanticModel);
+
+            VerifyCfg(cfg, 2);
+
+            var blocks = cfg.Blocks.ToArray();
+
+            var constructorBody = blocks[0];
+            var exit = cfg.ExitBlock;
+
+            constructorBody.SuccessorBlocks.Should().OnlyContain(exit);
+            exit.PredecessorBlocks.Should().OnlyContain(constructorBody);
+
+            VerifyAllInstructions(constructorBody, "5", ": this(5)");
+            VerifyAllInstructions(exit);
+        }
+
+        [TestMethod]
+        [TestCategory("CFG")]
+        public void Cfg_Constructed_for_Ctor_Base()
+        {
+            const string input = @"
+namespace NS
+{
+    public class Foo : Bar
+    {
+        public Foo() : base(5) {}
+    }
+    public class Bar
+    {
+        public Bar(int i) {}
+    }
+}";
+            var syntaxTree = Compile(input, out var semanticModel);
+            var ctor = syntaxTree.GetRoot().DescendantNodes().OfType<ConstructorDeclarationSyntax>().First();
+            var cfg = CSharpControlFlowGraph.Create(ctor.Body, semanticModel);
+
+            VerifyCfg(cfg, 2);
+
+            var blocks = cfg.Blocks.ToArray();
+
+            var constructorBody = blocks[0];
+            var exit = cfg.ExitBlock;
+
+            constructorBody.SuccessorBlocks.Should().OnlyContain(exit);
+            exit.PredecessorBlocks.Should().OnlyContain(constructorBody);
+
+            VerifyAllInstructions(constructorBody, "5", ": base(5)");
+            VerifyAllInstructions(exit);
+        }
+
         #endregion
 
         #region Empty statement

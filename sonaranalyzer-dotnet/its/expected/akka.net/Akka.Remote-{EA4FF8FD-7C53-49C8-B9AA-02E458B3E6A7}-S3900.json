@@ -41,6 +41,19 @@
 },
 {
 "id":  "S3900",
+"message":  "Refactor this constructor to avoid using members of parameter 'config' because it could be null.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\DeadlineFailureDetector.cs",
+"region":  {
+"startLine":  46,
+"startColumn":  78,
+"endLine":  46,
+"endColumn":  84
+}
+}
+},
+{
+"id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'system' before using it.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Remote\FailureDetectorRegistry.cs",
@@ -288,6 +301,19 @@
 },
 {
 "id":  "S3900",
+"message":  "Refactor this constructor to avoid using members of parameter 'local' because it could be null.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Routing\RemoteRouterConfig.cs",
+"region":  {
+"startLine":  58,
+"startColumn":  82,
+"endLine":  58,
+"endColumn":  87
+}
+}
+},
+{
+"id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'routeeProps' before using it.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Remote\Routing\RemoteRouterConfig.cs",
@@ -296,6 +322,19 @@
 "startColumn":  37,
 "endLine":  147,
 "endColumn":  48
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this constructor to avoid using members of parameter 'conf' because it could be null.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote\Transport\TestTransport.cs",
+"region":  {
+"startLine":  48,
+"startColumn":  17,
+"endLine":  48,
+"endColumn":  21
 }
 }
 },
