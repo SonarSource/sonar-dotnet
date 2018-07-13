@@ -67,15 +67,7 @@ public class UCFGDeserializationTest {
     // - "LATEST_RELEASE[1.0]" for latest release of series 1.0.x
     // The SonarQube alias "LTS" has been dropped. An alternative is "LATEST_RELEASE[6.7]".
     // The term "latest" refers to the highest version number, not the most recently published version.
-    String csharpVersion = System.getProperty("csharpVersion");
-    Location csharpLocation;
-    if (StringUtils.isEmpty(csharpVersion)) {
-      // use the plugin that was built on local machine
-      csharpLocation = FileLocation.byWildcardMavenFilename(new File("../sonar-csharp-plugin/target"), "sonar-csharp-plugin-*.jar");
-    } else {
-      // QA environment downloads the plugin built by the CI job
-      csharpLocation = MavenLocation.of("org.sonarsource.dotnet", "sonar-csharp-plugin", csharpVersion);
-    }
+    Location csharpLocation = Tests.getCsharpLocation();
     OrchestratorBuilder builder = Orchestrator.builderEnv()
       .setSonarVersion(Optional.ofNullable(System.getProperty("sonar.runtimeVersion")).filter(v -> !"LTS".equals(v)).orElse("LATEST_RELEASE[6.7]"))
       .setEdition(Edition.DEVELOPER)
@@ -175,7 +167,7 @@ public class UCFGDeserializationTest {
 
   private static ScannerForMSBuild getScannerForMSBuild(Path projectDir) {
     return ScannerForMSBuild.create()
-      .setScannerVersion("4.2.0.1214")
+      .setScannerVersion("4.3.1.1372")
       .setUseDotNetCore(true)
       .setProjectDir(projectDir.toFile());
   }

@@ -82,9 +82,9 @@ public class Tests {
     .build();
 
 
-  private static Location getCsharpLocation () {
+  public static Location getCsharpLocation () {
     Location csharpLocation;
-    String csharpVersion = System.getProperty("csharpVersion"); //"7.2.0.5247";
+    String csharpVersion = System.getProperty("csharpVersion");
     if (StringUtils.isEmpty(csharpVersion)) {
       // use the plugin that was built on local machine
       csharpLocation = FileLocation.byWildcardMavenFilename(new File("../sonar-csharp-plugin/target"), "sonar-csharp-plugin-*.jar");
