@@ -77,16 +77,39 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
 
         protected override Block Build(SyntaxNode node, Block currentBlock)
         {
+            Block block = null;
             if (node is StatementSyntax statement)
             {
-                return BuildStatement(statement, currentBlock);
+                block = BuildStatement(statement, currentBlock);
             }
-            if (node is ExpressionSyntax expression)
+            else if (node is ExpressionSyntax expression)
             {
-                return BuildExpression(expression, currentBlock);
+                block = BuildExpression(expression, currentBlock);
             }
 
-            throw new ArgumentException("Neither a statement, nor an expression", nameof(node));
+            if (block == null)
+            {
+                throw new ArgumentException("Neither a statement, nor an expression", nameof(node));
+            }
+
+            if (node.Parent is ConstructorDeclarationSyntax constructorDeclaration &&
+                constructorDeclaration.Initializer != null)
+            {
+                block = BuildConstructorInitializer(constructorDeclaration.Initializer, block);
+            }
+
+            return block;
+        }
+
+        private Block BuildConstructorInitializer(ConstructorInitializerSyntax initializer, Block currentBlock)
+        {
+            currentBlock.ReversedInstructions.Add(initializer);
+
+            var arguments = initializer.ArgumentList == null
+                ? Enumerable.Empty<ExpressionSyntax>()
+                : initializer.ArgumentList.Arguments.Select(a => a.Expression);
+
+            return BuildExpressions(arguments, currentBlock);
         }
 
         private Block BuildStatement(StatementSyntax statement, Block currentBlock)

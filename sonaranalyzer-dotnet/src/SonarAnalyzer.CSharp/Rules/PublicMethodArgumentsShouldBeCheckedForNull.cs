@@ -38,7 +38,9 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class PublicMethodArgumentsShouldBeCheckedForNull : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S3900";
-        private const string MessageFormat = "Refactor this method to add validation of parameter '{0}' before using it.";
+        private const string MessageFormat = "Refactor this {0}.";
+        private const string Constructor = "constructor to avoid using members of parameter '{0}' because it could be null";
+        private const string Method = "method to add validation of parameter '{0}' before using it";
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
@@ -80,8 +82,15 @@ namespace SonarAnalyzer.Rules.CSharp
 
             foreach (var identifier in identifiers)
             {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, identifier.GetLocation(), identifier.Identifier.ValueText));
+                var message = IsArgumentOfConstructorInitializer(identifier)
+                    ? string.Format(Constructor, identifier.Identifier.ValueText)
+                    : string.Format(Method, identifier.Identifier.ValueText);
+
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, identifier.GetLocation(), message));
             }
+
+            bool IsArgumentOfConstructorInitializer(IdentifierNameSyntax identifier) =>
+                identifier.FirstAncestorOrSelf<ConstructorInitializerSyntax>() != null;
         }
 
         private static void CollectMemberAccesses(MemberAccessingEventArgs args, HashSet<IdentifierNameSyntax> identifiers,

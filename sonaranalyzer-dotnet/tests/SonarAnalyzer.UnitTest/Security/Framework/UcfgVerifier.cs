@@ -19,6 +19,7 @@
 */
 
 extern alias csharp;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,10 +38,10 @@ namespace SonarAnalyzer.UnitTest.Security.Framework
         {
             (var method, var semanticModel) = TestHelper.Compile(code, Verifier.SystemWebMvcAssembly).GetMethod(methodName);
 
-            var builder = new UcfgBuilder(semanticModel);
+            var builder = new UcfgFactory(semanticModel);
 
             var cfg = CSharpControlFlowGraph.Create(method.Body, semanticModel);
-            var ucfg = builder.Build(method, semanticModel.GetDeclaredSymbol(method), cfg);
+            var ucfg = builder.Create(method, semanticModel.GetDeclaredSymbol(method), cfg);
 
             //var serializedCfg = CfgSerializer.Serialize(methodName, cfg);
             //var serualizedUcfg = UcfgSerializer.Serialize(ucfg);
@@ -57,10 +58,10 @@ namespace SonarAnalyzer.UnitTest.Security.Framework
                 .OfType<ConstructorDeclarationSyntax>()
                 .First(m => m.Identifier.ValueText == ctorName);
 
-            var builder = new UcfgBuilder(semanticModel);
+            var builder = new UcfgFactory(semanticModel);
 
             var cfg = CSharpControlFlowGraph.Create(ctor.Body, semanticModel);
-            var ucfg = builder.Build(ctor, semanticModel.GetDeclaredSymbol(ctor), cfg);
+            var ucfg = builder.Create(ctor, semanticModel.GetDeclaredSymbol(ctor), cfg);
 
             //var serializedCfg = CfgSerializer.Serialize(methodName, cfg);
             //var serualizedUcfg = UcfgSerializer.Serialize(ucfg);
@@ -75,36 +76,26 @@ namespace SonarAnalyzer.UnitTest.Security.Framework
 
             var actualInstructions = ucfg.BasicBlocks
                 .SelectMany(b => b.Instructions)
-                .Select(ConvertInstructionToInstructionComment)
+                .Select(UcfgTestHelper.ToTestString)
                 .ToList();
+
+            Console.WriteLine("Expected instructions:{0}{1}", Environment.NewLine, string.Join(Environment.NewLine, expectedInstructions));
+            Console.WriteLine();
+            Console.WriteLine("Actual instructions:{0}{1}", Environment.NewLine, string.Join(Environment.NewLine, actualInstructions));
+
+            // Fluent assertion bug: just comparing the collections gives an incorrect error message if the expected
+            // list is empty but the actual list isn't ("Expected collection to be equal to {empty}, but found empty collection.")
+            // To avoid this, do an assertion on the number of items first.
+            actualInstructions.Count.Should().Be(expectedInstructions.Count);
 
             actualInstructions.Should().Equal(expectedInstructions);
         }
 
-        private static string ConvertInstructionToInstructionComment(Instruction instruction)
-        {
-            return $"{instruction.Variable} := {instruction.MethodId} [ {string.Join(" ", instruction.Args.Select(ConvertExpressionToString))} ]";
-
-            string ConvertExpressionToString(Expression expression)
-            {
-                if (expression.Var != null)
-                {
-                    return expression.Var.Name;
-                }
-                else if (expression.Const != null)
-                {
-                    return "const";
-                }
-                else
-                {
-                    throw new ArgumentOutOfRangeException(nameof(expression));
-                }
-            }
-        }
-
         internal static class UcfgInstructionCollector
         {
-            private const string UCFG_INSTRUCTION = @"// (?<instruction>.*? := .*? \[ .*? \])";
+            private const string UCFG_NEW_OBJECT = @"// (?<instruction>.+? := new .+?)(\r\n|\n)";
+            private const string UCFG_CALL = @"// (?<instruction>.+? := .+? \[ .*? \])";
+            private const string UCFG_INSTRUCTION = UCFG_NEW_OBJECT + "|" + UCFG_CALL;
 
             public static IEnumerable<string> Collect(string codeSnippet)
             {

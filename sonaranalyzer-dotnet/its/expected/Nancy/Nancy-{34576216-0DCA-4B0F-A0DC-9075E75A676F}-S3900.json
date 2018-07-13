@@ -1718,6 +1718,19 @@
 },
 {
 "id":  "S3900",
+"message":  "Refactor this constructor to avoid using members of parameter 'boundary' because it could be null.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\HttpFile.cs",
+"region":  {
+"startLine":  16,
+"startColumn":  20,
+"endLine":  16,
+"endColumn":  28
+}
+}
+},
+{
+"id":  "S3900",
 "message":  "Refactor this method to add validation of parameter 'type' before using it.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Json\Converters\TupleConverter.cs",
@@ -3130,6 +3143,188 @@
 "startColumn":  18,
 "endLine":  293,
 "endColumn":  26
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this constructor to avoid using members of parameter 'type' because it could be null.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  533,
+"startColumn":  46,
+"endLine":  533,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this constructor to avoid using members of parameter 'type' because it could be null.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  538,
+"startColumn":  46,
+"endLine":  538,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this constructor to avoid using members of parameter 'type' because it could be null.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  548,
+"startColumn":  55,
+"endLine":  548,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this constructor to avoid using members of parameter 'type' because it could be null.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  553,
+"startColumn":  55,
+"endLine":  553,
+"endColumn":  59
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this constructor to avoid using members of parameter 'type' because it could be null.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  564,
+"startColumn":  54,
+"endLine":  564,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this constructor to avoid using members of parameter 'type' because it could be null.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  569,
+"startColumn":  54,
+"endLine":  569,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this constructor to avoid using members of parameter 'registerType' because it could be null.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  574,
+"startColumn":  65,
+"endLine":  574,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this constructor to avoid using members of parameter 'implementationType' because it could be null.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  574,
+"startColumn":  88,
+"endLine":  574,
+"endColumn":  106
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this constructor to avoid using members of parameter 'registerType' because it could be null.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  579,
+"startColumn":  65,
+"endLine":  579,
+"endColumn":  77
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this constructor to avoid using members of parameter 'implementationType' because it could be null.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  579,
+"startColumn":  88,
+"endLine":  579,
+"endColumn":  106
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this constructor to avoid using members of parameter 'type' because it could be null.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  589,
+"startColumn":  46,
+"endLine":  589,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this constructor to avoid using members of parameter 'type' because it could be null.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  594,
+"startColumn":  46,
+"endLine":  594,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this constructor to avoid using members of parameter 'type' because it could be null.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  604,
+"startColumn":  46,
+"endLine":  604,
+"endColumn":  50
+}
+}
+},
+{
+"id":  "S3900",
+"message":  "Refactor this constructor to avoid using members of parameter 'type' because it could be null.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy\TinyIoc\TinyIoC.cs",
+"region":  {
+"startLine":  609,
+"startColumn":  46,
+"endLine":  609,
+"endColumn":  50
 }
 }
 },
