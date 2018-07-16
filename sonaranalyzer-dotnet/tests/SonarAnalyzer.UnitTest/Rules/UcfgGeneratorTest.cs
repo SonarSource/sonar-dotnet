@@ -33,6 +33,7 @@ using Moq;
 using Moq.Protected;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Protobuf.Ucfg;
+using SonarAnalyzer.UnitTest.Helpers;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -167,6 +168,38 @@ class Program
         public void UcfgGenerator_Disabled_NoOutputFolder()
         {
             UcfgGenerator_Disabled(null, "S3649");
+        }
+
+
+        [TestMethod]
+        public void UcfgGenerator_Enabled_Generate_NoErrorForUnsupportedLanguageConstructs()
+        {
+            var workDir = Path.Combine(TestContext.TestRunResultsDirectory, TestContext.TestName, "0");
+            Directory.CreateDirectory(workDir);
+
+            using (new AssertIgnoreScope())
+            {
+
+                Verifier.VerifyCSharpAnalyzer(@"
+public class Class1
+{
+    public void Foo()
+    {
+        int j = inner(123);
+
+        // The C# CFG will throw NotImplementedException at the local function
+        int inner(int i)
+        {
+            return i;
+        }
+    }
+}",
+                    new UcfgGenerator(new TestAnalyzerConfiguration(workDir, "S3649")));
+            }
+
+            var ucfgPath = Path.Combine(TestContext.TestRunResultsDirectory, TestContext.TestName, "ucfg_cs");
+            Directory.Exists(ucfgPath).Should().BeTrue();
+            Directory.GetFiles(ucfgPath).Select(Path.GetFileName).Should().BeEmpty();
         }
 
         private void UcfgGenerator_Disabled(string workDir, params string[] enabledRules)
