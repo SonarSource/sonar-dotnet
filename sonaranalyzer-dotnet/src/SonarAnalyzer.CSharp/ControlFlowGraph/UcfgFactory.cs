@@ -66,11 +66,14 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             }
             catch (System.Exception e)
             {
-                var message = $"Type {GetType().Name} could not be applied as target of the instruction. " +
+                var message = "Exception during creation of UCFG: " +
+                    $"Type {GetType().Name} " +
                     $"Method name: {methodSymbol?.Name ?? "{unknown}"}  " +
-                    $"Syntax node kind: {(SyntaxKind)syntaxNode.Kind()} " +
+                    $"Syntax node kind: {syntaxNode.Kind()} " +
                     $"File: {syntaxNode.GetLocation()?.GetLineSpan().Path ?? "{unknown}"}  " +
                     $"Line: {syntaxNode.GetLocation()?.GetLineSpan().StartLinePosition.ToString() ?? "{unknown}"}  ##  " +
+                    // Note: only the first line of the message appears in the Jenkins log so make sure
+                    // there are no line breaks.
                     e.ToString().Replace("\r\n", " ## ");
 
                 throw new UcfgException(message);
