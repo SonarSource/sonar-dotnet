@@ -67,7 +67,6 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             catch (System.Exception e)
             {
                 var message = "Exception during creation of UCFG: " +
-                    $"Type {GetType().Name} " +
                     $"Method name: {methodSymbol?.Name ?? "{unknown}"}  " +
                     $"Syntax node kind: {syntaxNode.Kind()} " +
                     $"File: {syntaxNode.GetLocation()?.GetLineSpan().Path ?? "{unknown}"}  " +

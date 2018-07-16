@@ -26,6 +26,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using csharp::SonarAnalyzer.ControlFlowGraph.CSharp;
 using FluentAssertions;
+using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.Protobuf.Ucfg;
@@ -38,15 +39,7 @@ namespace SonarAnalyzer.UnitTest.Security.Framework
         {
             (var method, var semanticModel) = TestHelper.Compile(code, Verifier.SystemWebMvcAssembly).GetMethod(methodName);
 
-            var builder = new UcfgFactory(semanticModel);
-
-            var cfg = CSharpControlFlowGraph.Create(method.Body, semanticModel);
-            var ucfg = builder.Create(method, semanticModel.GetDeclaredSymbol(method), cfg);
-
-            //var serializedCfg = CfgSerializer.Serialize(methodName, cfg);
-            //var serualizedUcfg = UcfgSerializer.Serialize(ucfg);
-
-            return ucfg;
+            return BuildUcfg(method.Body, method, semanticModel.GetDeclaredSymbol(method), semanticModel);
         }
 
         public static UCFG GetUcfgForConstructor(string code, string ctorName)
@@ -58,13 +51,28 @@ namespace SonarAnalyzer.UnitTest.Security.Framework
                 .OfType<ConstructorDeclarationSyntax>()
                 .First(m => m.Identifier.ValueText == ctorName);
 
-            var builder = new UcfgFactory(semanticModel);
+            return BuildUcfg(ctor.Body, ctor, semanticModel.GetDeclaredSymbol(ctor), semanticModel);
+        }
 
-            var cfg = CSharpControlFlowGraph.Create(ctor.Body, semanticModel);
-            var ucfg = builder.Create(ctor, semanticModel.GetDeclaredSymbol(ctor), cfg);
+        public static UCFG GetUcfgForPropertyGetter(string code, string propertyName)
+        {
+            (var property, var semanticModel) = TestHelper.Compile(code, Verifier.SystemWebMvcAssembly).GetProperty(propertyName);
+
+            var getterSymbol = semanticModel.GetDeclaredSymbol(property).GetMethod;
+            var getterNode = (AccessorDeclarationSyntax)getterSymbol.DeclaringSyntaxReferences.First().GetSyntax();
+
+            return BuildUcfg(getterNode.Body, getterNode, getterSymbol, semanticModel);
+        }
+
+        private static UCFG BuildUcfg(CSharpSyntaxNode cfgStartNode, CSharpSyntaxNode ucfgStartNode,
+            IMethodSymbol methodSymbol, SemanticModel semanticModel)
+        {
+            var builder = new UcfgFactory(semanticModel);
+            var cfg = CSharpControlFlowGraph.Create(cfgStartNode, semanticModel);
+            var ucfg = builder.Create(ucfgStartNode, methodSymbol, cfg);
 
             //var serializedCfg = CfgSerializer.Serialize(methodName, cfg);
-            //var serualizedUcfg = UcfgSerializer.Serialize(ucfg);
+            //var serializedUcfg = UcfgSerializer.Serialize(ucfg);
 
             return ucfg;
         }
@@ -72,6 +80,17 @@ namespace SonarAnalyzer.UnitTest.Security.Framework
         public static void VerifyInstructions(string codeSnippet, string methodName, bool isCtor = false)
         {
             var ucfg = isCtor ? GetUcfgForConstructor(codeSnippet, methodName) : GetUcfgForMethod(codeSnippet, methodName);
+            VerifyInstructions(codeSnippet, ucfg);
+        }
+
+        public static void VerifyInstructionsForPropertyGetter(string codeSnippet, string propertyName)
+        {
+            var ucfg = GetUcfgForPropertyGetter(codeSnippet, propertyName);
+            VerifyInstructions(codeSnippet, ucfg);
+        }
+
+        private static void VerifyInstructions(string codeSnippet, UCFG ucfg)
+        {
             var expectedInstructions = UcfgInstructionCollector.Collect(codeSnippet).ToList();
 
             var actualInstructions = ucfg.BasicBlocks

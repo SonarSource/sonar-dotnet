@@ -1080,6 +1080,111 @@ public class Class1 : Controller
 }";
             UcfgVerifier.VerifyInstructions(code, "Foo");
         }
+
+        [TestMethod]
+        [Ignore]
+        public void Bug169_CreationError_RegressionTest_NullRef()
+        {
+            // SimplCommerce\src\Modules\SimplCommerce.Module.Reviews\Controllers\ReviewApiController.cs :: ChangeStatus
+            // SimplCommerce\src\Modules\SimplCommerce.Module.ShoppingCart\Controllers\CartController.cs :: Remove
+
+            // Exception at: CreateFromAttributSyntax->CreateAnnotationCall->CreateFunctionCall->ApplyAsTarget
+
+            const string code = @"
+namespace Namespace
+{
+    using System.Web.Mvc;
+
+    public class FromBodyAttribute : System.Attribute { }
+
+    public class CartController : Controller
+    {
+        [HttpPost]
+        public object Remove([FromBody] long itemId)
+        {
+            return null;
+        }
+    }
+}
+";
+            UcfgVerifier.VerifyInstructions(code, "Remove");
+        }
+
+        [TestMethod]
+        [Ignore]
+        public void Bug170_CreationError_RegressionTest_SequenceContainedNullElement()
+        {
+            // SimplCommerce.Module.Catalog.Components.CategoryBreadcrumbViewComponent.Invoke(long ?, System.Collections.Generic.IEnumerable<long>)
+            // SimplCommerce\src\Modules\SimplCommerce.Module.Shipping\Models\ShippingProvider.cs :: get_OnlyCountryIds
+            // SimplCommerce\src\Modules\SimplCommerce.Module.Shipping\Models\ShippingProvider.cs :: get_OnlyStateOrProvinceIds
+
+            // Exception at: UcfgInstructionFactory.CreateFunctionCall
+
+            const string code = @"
+namespace SimplCommerce.Module.Shipping.Models
+{
+    using System.Collections.Generic;
+    using System.Linq;
+
+    public class ShippingProvider //: EntityBase
+    {
+        public string OnlyCountryIdsString { get; set; }
+
+        public IList<long> OnlyCountryIds
+        {
+            get
+            {
+                if (string.IsNullOrWhiteSpace(OnlyCountryIdsString))
+                {
+                    return new List<long>();
+                }
+
+                return OnlyCountryIdsString.Split(',').Select(long.Parse).ToList();
+            }
+        }
+    }
+}
+";
+            UcfgVerifier.VerifyInstructionsForPropertyGetter(code, "OnlyCountryIds");
+        }
+        
+        [TestMethod]
+        [Ignore]
+        public void Bug171_CreationError_RegressionTest_UnexpectedMergedNamespaceSymbol()
+        {
+            // SimplCommerce\src\Modules\SimplCommerce.Module.PaymentPaypalExpress\Controllers\PaypalExpressController.cs :: GetAccessToken
+            // SimplCommerce\src\SimplCommerce.WebHost\Program.cs :: BuildWebHost2
+
+            // At: UcfgExpressionService.Create
+
+            // This code gives a similar repro, except with "SourceNamespaceSymbol" instead of
+            // "MergedNamespaceSymbol" (
+            const string code = @"
+
+namespace Ns1
+{
+    namespace Inner
+    {
+        public class Builder
+        {
+            public static Builder CreateDefaultBuilder() => null;
+        }
     }
 }
 
+namespace Ns2
+{
+    public class Class1
+    {
+        public void BuildWebHost2(string[] args)
+        {
+            Ns1.Inner.Builder.CreateDefaultBuilder();
+        }
+    }
+}
+
+";
+            UcfgVerifier.VerifyInstructions(code, "BuildWebHost2");
+        }
+    }
+}
