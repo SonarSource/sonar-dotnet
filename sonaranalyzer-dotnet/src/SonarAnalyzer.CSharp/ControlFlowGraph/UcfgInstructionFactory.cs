@@ -135,7 +135,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             var chainedCtor = GetSymbol(constructorInitializer) as IMethodSymbol;
             if (chainedCtor == null)
             {
-                return Enumerable.Empty<Instruction>();
+                return NoInstructions;
             }
 
             return CreateMethodCall(constructorInitializer, chainedCtor, UcfgExpression.This,
@@ -458,6 +458,14 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
         private IEnumerable<Instruction> ProcessMemberAccessExpression(MemberAccessExpressionSyntax memberAccessExpression)
         {
             var memberAccessSymbol = GetSymbol(memberAccessExpression);
+            if (memberAccessSymbol is INamespaceSymbol)
+            {
+                // Every access of a namespace, type or method inside a namespace is represented
+                // by a MemberAccessExpressionSyntax
+                // e.g. Ns1.Ns2.Class1.Class2.Method1(); // has four MemberAccessExpressionSyntax nodes
+                return NoInstructions;
+            }
+
             var leftSideExpression = expressionService.GetExpression(memberAccessExpression.Expression);
 
             var instructions = new List<Instruction>();

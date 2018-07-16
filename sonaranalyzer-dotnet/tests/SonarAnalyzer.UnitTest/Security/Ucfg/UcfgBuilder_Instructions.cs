@@ -574,6 +574,168 @@ namespace Namespace
         }
 
         [TestMethod]
+        public void Invocations_QualifiedNames_Methods()
+        {
+            const string code = @"
+public static class GlobalClass
+{
+    public static void NoOp() { }
+}
+
+namespace Ns1
+{
+    using static GlobalClass;
+
+    public static class OuterClass
+    {
+        public static void NoOp() { }
+    }
+
+    namespace Inner
+    {
+        public static class InnerClass
+        {
+            public static void NoOp() { }
+
+            public static class NestedClass
+            {
+                public static void NoOp() { }
+            }
+        }
+    }
+
+    public class Class1
+    {
+        public void Foo()
+        {
+            GlobalClass.NoOp();                         // %0 := GlobalClass.NoOp() [ GlobalClass ]
+
+            Ns1.OuterClass.NoOp();                      // %1 := Ns1.OuterClass.NoOp() [ Ns1.OuterClass ]
+
+            Ns1.Inner.InnerClass.NoOp();                // %2 := Ns1.Inner.InnerClass.NoOp() [ Ns1.Inner.InnerClass ]
+
+            Ns1.Inner.InnerClass.NestedClass.NoOp();
+                // %3 := Ns1.Inner.InnerClass.NestedClass.NoOp() [ Ns1.Inner.InnerClass.NestedClass ]
+
+            NoOp();                                     // %4 := GlobalClass.NoOp() [ GlobalClass ]
+        }
+    }
+}";
+            UcfgVerifier.VerifyInstructions(code, "Foo");
+        }
+
+        [TestMethod]
+        public void Invocations_QualifiedNames_PropertyGets()
+        {
+            const string code = @"
+public static class GlobalClass
+{
+    public static int Property { get; } = 42;
+}
+
+namespace Ns1
+{
+    using static GlobalClass;
+
+    public static class OuterClass
+    {
+        public static int Property { get; } = 42;
+    }
+
+    namespace Inner
+    {
+        public static class InnerClass
+        {
+            public static int Property { get; } = 42;
+
+            public static class NestedClass
+            {
+                public static int Property { get; } = 42;
+            }
+        }
+    }
+
+    public class Class1
+    {
+        public void Foo()
+        {
+            int i;
+            i = GlobalClass.Property;                       // %0 := GlobalClass.Property.get [ GlobalClass ]
+                                                        // i := __id [ %0 ]
+
+            i = Ns1.OuterClass.Property;                    // %1 := Ns1.OuterClass.Property.get [ Ns1.OuterClass ]
+                                                        // i := __id [ %1 ]
+
+            i = Ns1.Inner.InnerClass.Property;              // %2 := Ns1.Inner.InnerClass.Property.get [ Ns1.Inner.InnerClass ]
+                                                        // i := __id [ %2 ]
+
+            i = Ns1.Inner.InnerClass.NestedClass.Property;
+                // %3 := Ns1.Inner.InnerClass.NestedClass.Property.get [ Ns1.Inner.InnerClass.NestedClass ]
+                // i := __id [ %3 ]
+
+            i = Property;
+                // %4 := GlobalClass.Property.get [ GlobalClass ]
+                // i := __id [ %4 ]
+        }
+    }
+}";
+            UcfgVerifier.VerifyInstructions(code, "Foo");
+        }
+
+        [TestMethod]
+        public void Invocations_QualifiedNames_PropertySets()
+        {
+            const string code = @"
+
+public static class GlobalClass
+{
+    public static int Property { get; set; }
+}
+
+namespace Ns1
+{
+    using static GlobalClass;
+
+    public static class OuterClass
+    {
+        public static int Property { get; set; }
+    }
+
+    namespace Inner
+    {
+        public static class InnerClass
+        {
+            public static int Property { get; set; }
+            public static class NestedClass
+            {
+                public static int Property { get; set; }
+            }
+        }
+    }
+
+    public class Class1
+    {
+        public void Foo()
+        {
+            GlobalClass.Property = 42;          // %0 := GlobalClass.Property.set [ GlobalClass const ]
+
+            Ns1.OuterClass.Property = 42;       // %1 := Ns1.OuterClass.Property.set [ Ns1.OuterClass const ]
+
+            Ns1.Inner.InnerClass.Property = 42; // %2 := Ns1.Inner.InnerClass.Property.set [ Ns1.Inner.InnerClass const ]
+
+
+            Ns1.Inner.InnerClass.NestedClass.Property = 42;
+                // %3 := Ns1.Inner.InnerClass.NestedClass.Property.set [ Ns1.Inner.InnerClass.NestedClass const ]
+
+            Property = 42;                      // %4 := GlobalClass.Property.set [ GlobalClass const ]
+        }
+    }
+}
+";
+            UcfgVerifier.VerifyInstructions(code, "Foo");
+        }
+
+        [TestMethod]
         public void TestSimpleAssignment()
         {
             const string code = @"
@@ -1291,7 +1453,7 @@ namespace SimplCommerce.Module.Shipping.Models
             UcfgVerifier.VerifyInstructionsForPropertyGetter(code, "OnlyCountryIds");
         }
 
-        // [TestMethod] IGNORED
+        [TestMethod]
         public void Bug171_CreationError_RegressionTest_UnexpectedMergedNamespaceSymbol()
         {
             // SimplCommerce\src\Modules\SimplCommerce.Module.PaymentPaypalExpress\Controllers\PaypalExpressController.cs :: GetAccessToken
@@ -1321,11 +1483,10 @@ namespace Ns2
         public void BuildWebHost2(string[] args)
         {
             Ns1.Inner.Builder.CreateDefaultBuilder();
+                // %0 := Ns1.Inner.Builder.CreateDefaultBuilder() [ Ns1.Inner.Builder ]
         }
     }
-}
-
-";
+}";
             UcfgVerifier.VerifyInstructions(code, "BuildWebHost2");
         }
     }
