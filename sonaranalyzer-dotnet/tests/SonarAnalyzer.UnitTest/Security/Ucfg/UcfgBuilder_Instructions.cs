@@ -660,13 +660,13 @@ namespace Ns1
         public void Foo()
         {
             int i;
-            i = GlobalClass.Property;                       // %0 := GlobalClass.Property.get [ GlobalClass ]
+            i = GlobalClass.Property;                   // %0 := GlobalClass.Property.get [ GlobalClass ]
                                                         // i := __id [ %0 ]
 
-            i = Ns1.OuterClass.Property;                    // %1 := Ns1.OuterClass.Property.get [ Ns1.OuterClass ]
+            i = Ns1.OuterClass.Property;                // %1 := Ns1.OuterClass.Property.get [ Ns1.OuterClass ]
                                                         // i := __id [ %1 ]
 
-            i = Ns1.Inner.InnerClass.Property;              // %2 := Ns1.Inner.InnerClass.Property.get [ Ns1.Inner.InnerClass ]
+            i = Ns1.Inner.InnerClass.Property;          // %2 := Ns1.Inner.InnerClass.Property.get [ Ns1.Inner.InnerClass ]
                                                         // i := __id [ %2 ]
 
             i = Ns1.Inner.InnerClass.NestedClass.Property;
