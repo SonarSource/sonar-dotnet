@@ -612,7 +612,11 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                 }
                 else
                 {
-                    argumentExpressions.Add(ucfgExpression.Expression);
+                    argumentExpressions.Add(ucfgExpression.Expression
+                        // Defensive, in case the expression is null.
+                        // This can happen e.g. if the method argument is a MemberAccessExpression
+                        // that identifies the method being passed as a function (not currently handled)
+                        ?? new UcfgExpression.ConstantExpression().Expression);
                 }
             }
 

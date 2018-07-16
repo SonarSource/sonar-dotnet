@@ -84,31 +84,6 @@ namespace Namespace
         }
 
         [TestMethod]
-        public void Invocations_LambdaArguments_Generate_Const()
-        {
-            const string code = @"
-using System;
-namespace Namespace
-{
-    public class Class1
-    {
-        public void Foo(string s)
-        {
-            var x = Bar(s, a => a);     // %0 := Namespace.Class1.Bar(string, System.Func<string, string>) [ this s const ]
-                                        // x := __id [ %0 ]
-
-            this.Bar(s, a => a);        // %1 := Namespace.Class1.Bar(string, System.Func<string, string>) [ this s const ]
-        }
-        public string Bar(string s, Func<string, string> a)
-        {
-            return s;
-        }
-    }
-}";
-            UcfgVerifier.VerifyInstructions(code, "Foo");
-        }
-
-        [TestMethod]
         public void Assignments_Static_Property_On_Generic_Class()
         {
             const string code = @"
@@ -690,6 +665,84 @@ namespace Namespace
         }
 
         [TestMethod]
+        public void Invocations_LambdaArguments_Generate_Const()
+        {
+            const string code = @"
+using System;
+namespace Namespace
+{
+    public class Class1
+    {
+        public void Foo(string s)
+        {
+            var x = Bar(s, a => a);     // %0 := Namespace.Class1.Bar(string, System.Func<string, string>) [ this s const ]
+                                        // x := __id [ %0 ]
+
+            this.Bar(s, a => a);        // %1 := Namespace.Class1.Bar(string, System.Func<string, string>) [ this s const ]
+        }
+        public string Bar(string s, Func<string, string> a)
+        {
+            return s;
+        }
+    }
+}";
+            UcfgVerifier.VerifyInstructions(code, "Foo");
+        }
+
+        [TestMethod]
+        public void Invocation_MethodNameArguments_Generate_Const()
+        {
+            const string code = @"
+namespace Ns1
+{
+    using System.Linq;
+
+    public class Class1
+    {
+        public void Foo(string[] args)
+        {
+            var result = args.Select(long.Parse);
+                // %0 := System.Linq.Enumerable.Select<TSource, TResult>(System.Collections.Generic.IEnumerable<TSource>, System.Func<TSource, TResult>) [ System.Linq.Enumerable args const ]
+                // result := __id [ %0 ]
+
+            var result = args.Select(LocalParse);
+                // %1 := System.Linq.Enumerable.Select<TSource, TResult>(System.Collections.Generic.IEnumerable<TSource>, System.Func<TSource, TResult>) [ System.Linq.Enumerable args const ]
+                // result := __id [ %1 ]
+
+            var result = args.Select(this.LocalParse);
+                // %2 := System.Linq.Enumerable.Select<TSource, TResult>(System.Collections.Generic.IEnumerable<TSource>, System.Func<TSource, TResult>) [ System.Linq.Enumerable args const ]
+                // result := __id [ %2 ]
+        }
+
+        private long LocalParse(string s) => 1l;
+    }
+}";
+            UcfgVerifier.VerifyInstructions(code, "Foo");
+        }
+
+        [TestMethod]
+        public void Invocation_ArgumentIsMethodResult()
+        {
+            const string code = @"
+namespace Ns1
+{
+    public class Class1
+    {
+        public void Foo()
+        {
+            Add(GetData());
+            // %0 := Ns1.Class1.GetData() [ this ]
+            // %1 := Ns1.Class1.Add(int) [ this %0 ]
+        }
+
+        public int GetData() => 1;
+        public void Add(int value) { }
+    }
+}";
+            UcfgVerifier.VerifyInstructions(code, "Foo");
+        }
+
+        [TestMethod]
         public void ControllerMethod_Contains_EntryPoint_And_Attributes()
         {
             const string code = @"
@@ -1109,7 +1162,7 @@ namespace Namespace
             UcfgVerifier.VerifyInstructions(code, "Remove");
         }
 
-        // [TestMethod] IGNORED
+        [TestMethod]
         public void Bug170_CreationError_RegressionTest_SequenceContainedNullElement()
         {
             // SimplCommerce.Module.Catalog.Components.CategoryBreadcrumbViewComponent.Invoke(long ?, System.Collections.Generic.IEnumerable<long>)
@@ -1133,11 +1186,21 @@ namespace SimplCommerce.Module.Shipping.Models
             get
             {
                 if (string.IsNullOrWhiteSpace(OnlyCountryIdsString))
+                    // %0 := SimplCommerce.Module.Shipping.Models.ShippingProvider.OnlyCountryIdsString.get [ this ]
+                    // %1 := string.IsNullOrWhiteSpace(string) [ string %0 ]
                 {
                     return new List<long>();
+                        // %2 := new System.Collections.Generic.List<T>
                 }
 
-                return OnlyCountryIdsString.Split(',').Select(long.Parse).ToList();
+                return OnlyCountryIdsString.Split(',')
+                        // %3 := System.Collections.Generic.List<T>.List() [ %2 ]
+                        // %4 := SimplCommerce.Module.Shipping.Models.ShippingProvider.OnlyCountryIdsString.get [ this ]
+                        // %5 := string.Split(params char[]) [ %4 const ]
+                    .Select(long.Parse)
+                        // %6 := System.Linq.Enumerable.Select<TSource, TResult>(System.Collections.Generic.IEnumerable<TSource>, System.Func<TSource, TResult>) [ System.Linq.Enumerable %5 const ]
+                    .ToList();
+                        // %7 := System.Linq.Enumerable.ToList<TSource>(System.Collections.Generic.IEnumerable<TSource>) [ System.Linq.Enumerable %6 ]
             }
         }
     }
