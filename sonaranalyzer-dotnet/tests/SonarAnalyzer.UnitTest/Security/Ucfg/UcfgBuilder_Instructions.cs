@@ -1081,8 +1081,7 @@ public class Class1 : Controller
             UcfgVerifier.VerifyInstructions(code, "Foo");
         }
 
-        [TestMethod]
-        [Ignore]
+        // [TestMethod] IGNORED
         public void Bug169_CreationError_RegressionTest_NullRef()
         {
             // SimplCommerce\src\Modules\SimplCommerce.Module.Reviews\Controllers\ReviewApiController.cs :: ChangeStatus
@@ -1110,8 +1109,7 @@ namespace Namespace
             UcfgVerifier.VerifyInstructions(code, "Remove");
         }
 
-        [TestMethod]
-        [Ignore]
+        // [TestMethod] IGNORED
         public void Bug170_CreationError_RegressionTest_SequenceContainedNullElement()
         {
             // SimplCommerce.Module.Catalog.Components.CategoryBreadcrumbViewComponent.Invoke(long ?, System.Collections.Generic.IEnumerable<long>)
@@ -1147,9 +1145,8 @@ namespace SimplCommerce.Module.Shipping.Models
 ";
             UcfgVerifier.VerifyInstructionsForPropertyGetter(code, "OnlyCountryIds");
         }
-        
-        [TestMethod]
-        [Ignore]
+
+        // [TestMethod] IGNORED
         public void Bug171_CreationError_RegressionTest_UnexpectedMergedNamespaceSymbol()
         {
             // SimplCommerce\src\Modules\SimplCommerce.Module.PaymentPaypalExpress\Controllers\PaypalExpressController.cs :: GetAccessToken
