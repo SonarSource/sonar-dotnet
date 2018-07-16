@@ -20,6 +20,7 @@
 
 using System.Linq;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Protobuf.Ucfg;
@@ -38,28 +39,44 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
 
         public UCFG Create(SyntaxNode syntaxNode, IMethodSymbol methodSymbol, IControlFlowGraph cfg)
         {
-            var ucfg = new UCFG
+            try
             {
-                Location = syntaxNode.GetUcfgLocation(),
-                MethodId = methodSymbol.ToUcfgMethodId()
-            };
+                var ucfg = new UCFG
+                {
+                    Location = syntaxNode.GetUcfgLocation(),
+                    MethodId = methodSymbol.ToUcfgMethodId()
+                };
 
-            ucfg.BasicBlocks.AddRange(cfg.Blocks.Select(blockBuilder.CreateBasicBlock));
-            ucfg.Parameters.AddRange(methodSymbol.GetParameters().Select(p => p.Name));
+                ucfg.BasicBlocks.AddRange(cfg.Blocks.Select(blockBuilder.CreateBasicBlock));
+                ucfg.Parameters.AddRange(methodSymbol.GetParameters().Select(p => p.Name));
 
-            if (syntaxNode is BaseMethodDeclarationSyntax methodDeclaration &&
-                TaintAnalysisEntryPointDetector.IsEntryPoint(methodSymbol))
-            {
-                var entryPointBlock = blockBuilder.CreateEntryPointBlock(methodDeclaration, methodSymbol, blockIdProvider.Get(cfg.EntryBlock));
-                ucfg.BasicBlocks.Add(entryPointBlock);
-                ucfg.Entries.Add(entryPointBlock.Id);
+                if (syntaxNode is BaseMethodDeclarationSyntax methodDeclaration &&
+                    TaintAnalysisEntryPointDetector.IsEntryPoint(methodSymbol))
+                {
+                    var entryPointBlock = blockBuilder.CreateEntryPointBlock(methodDeclaration, methodSymbol, blockIdProvider.Get(cfg.EntryBlock));
+                    ucfg.BasicBlocks.Add(entryPointBlock);
+                    ucfg.Entries.Add(entryPointBlock.Id);
+                }
+                else
+                {
+                    ucfg.Entries.Add(blockIdProvider.Get(cfg.EntryBlock));
+                }
+
+                return ucfg;
             }
-            else
+            catch (System.Exception e)
             {
-                ucfg.Entries.Add(blockIdProvider.Get(cfg.EntryBlock));
-            }
+                var message = "Exception during creation of UCFG: " +
+                    $"Method name: {methodSymbol?.Name ?? "{unknown}"}  " +
+                    $"Syntax node kind: {syntaxNode.Kind()} " +
+                    $"File: {syntaxNode.GetLocation()?.GetLineSpan().Path ?? "{unknown}"}  " +
+                    $"Line: {syntaxNode.GetLocation()?.GetLineSpan().StartLinePosition.ToString() ?? "{unknown}"}  ##  " +
+                    // Note: only the first line of the message appears in the Jenkins log so make sure
+                    // there are no line breaks.
+                    e.ToString().Replace("\r\n", " ## ");
 
-            return ucfg;
+                throw new UcfgException(message);
+            }
         }
     }
 }
