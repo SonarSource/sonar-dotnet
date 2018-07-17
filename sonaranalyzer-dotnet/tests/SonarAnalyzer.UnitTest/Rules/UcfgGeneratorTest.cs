@@ -177,9 +177,9 @@ class Program
             var workDir = Path.Combine(TestContext.TestRunResultsDirectory, TestContext.TestName, "0");
             Directory.CreateDirectory(workDir);
 
+            // Expecting CSharpControlFlowGraph.TryGet to catch the NotImplemented exception and convert it into an assertion
             using (new AssertIgnoreScope())
             {
-
                 Verifier.VerifyCSharpAnalyzer(@"
 public class Class1
 {

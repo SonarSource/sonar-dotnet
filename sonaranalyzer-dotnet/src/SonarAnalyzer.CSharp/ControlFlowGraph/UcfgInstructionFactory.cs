@@ -119,7 +119,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                     return NoInstructions;
 
                 case PredefinedTypeSyntax predefinedType:
-                    var namedTypeSymbol = GetSymbol(predefinedType) as INamedTypeSymbol;
+                    var namedTypeSymbol = GetSymbol<INamedTypeSymbol>(predefinedType);
                     expressionService.Associate(predefinedType, expressionService.CreateClassName(namedTypeSymbol));
                     return NoInstructions;
 
@@ -132,7 +132,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
 
         private IEnumerable<Instruction> ProcessConstructorInitializer(ConstructorInitializerSyntax constructorInitializer)
         {
-            var chainedCtor = GetSymbol(constructorInitializer) as IMethodSymbol;
+            var chainedCtor = GetSymbol<IMethodSymbol>(constructorInitializer);
             if (chainedCtor == null)
             {
                 return NoInstructions;
@@ -184,7 +184,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
 
         private IEnumerable<Instruction> ProcessObjectCreationExpression(ObjectCreationExpressionSyntax objectCreationExpression)
         {
-            var methodSymbol = GetSymbol(objectCreationExpression) as IMethodSymbol;
+            var methodSymbol = GetSymbol<IMethodSymbol>(objectCreationExpression);
             if (methodSymbol == null)
             {
                 return NoInstructions;
@@ -226,7 +226,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
 
         private IEnumerable<Instruction> ProcessGenericName(GenericNameSyntax genericName)
         {
-            var namedTypeSymbol = GetSymbol(genericName) as INamedTypeSymbol;
+            var namedTypeSymbol = GetSymbol<INamedTypeSymbol>(genericName);
 
             UcfgExpression target = null;
 
@@ -347,7 +347,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
 
         private IEnumerable<Instruction> ProcessInvocationExpression(InvocationExpressionSyntax invocationSyntax)
         {
-            var methodSymbol = GetSymbol(invocationSyntax) as IMethodSymbol;
+            var methodSymbol = GetSymbol<IMethodSymbol>(invocationSyntax);
             if (methodSymbol == null)
             {
                 expressionService.Associate(invocationSyntax, expressionService.CreateConstant());
@@ -682,6 +682,9 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
 
         private ISymbol GetSymbol(SyntaxNode syntaxNode) =>
             semanticModel.GetSymbolInfo(syntaxNode).Symbol;
+
+        private T GetSymbol<T>(SyntaxNode syntaxNode) where T: class, ISymbol =>
+            semanticModel.GetSymbolInfo(syntaxNode).Symbol as T;
 
         private UcfgExpression[] GetAdditionalArguments(ArgumentListSyntax argumentList)
         {
