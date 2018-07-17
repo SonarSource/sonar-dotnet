@@ -60,7 +60,15 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
         public IEnumerable<Instruction> CreateFromAttributeSyntax(AttributeSyntax attributeSyntax, IMethodSymbol attributeCtor,
             string parameterName)
         {
-            var targetOfAttribute = expressionService.GetExpression(attributeSyntax.Parent.Parent);
+            // Only variable expressions can be annotated.
+            // Constants (e.g. parameters of type int) cannot be annotated.
+            var targetOfAttribute = expressionService.GetExpression(attributeSyntax.Parent.Parent)
+                as UcfgExpression.VariableExpression;
+
+            if (targetOfAttribute == null)
+            {
+                return NoInstructions;
+            }
 
             return CreateAnnotateCall(attributeSyntax, attributeCtor.ReturnType, attributeCtor, targetOfAttribute)
                 .Concat(CreateAnnotationCall(attributeSyntax, targetOfAttribute, expressionService.GetExpression(attributeSyntax)));
@@ -489,13 +497,13 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
         }
 
         public IEnumerable<Instruction> CreateAnnotateCall(SyntaxNode syntaxNode, ITypeSymbol nodeTypeSymbol,
-            IMethodSymbol attributeMethodSymbol, UcfgExpression target)
+            IMethodSymbol attributeMethodSymbol, UcfgExpression.VariableExpression target)
         {
             return CreateFunctionCall(UcfgBuiltInMethodId.Annotate, syntaxNode, expressionService.CreateVariable(nodeTypeSymbol),
                 expressionService.CreateConstant(attributeMethodSymbol), target);
         }
 
-        public IEnumerable<Instruction> CreateAnnotationCall(SyntaxNode syntaxNode, UcfgExpression to, UcfgExpression value)
+        public IEnumerable<Instruction> CreateAnnotationCall(SyntaxNode syntaxNode, UcfgExpression.VariableExpression to, UcfgExpression value)
         {
             return CreateFunctionCall(UcfgBuiltInMethodId.Annotation, syntaxNode, to, value);
         }

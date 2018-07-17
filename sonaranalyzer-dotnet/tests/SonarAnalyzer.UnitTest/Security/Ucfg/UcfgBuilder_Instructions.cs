@@ -750,12 +750,93 @@ using System.ComponentModel;
 using System.Web.Mvc;
 public class Class1 : Controller
 {
+    public class DummyAttribute : System.Attribute { }
+
     private string field;
-    public void Foo([Description]string s, [Missing]string x)
-    {               // %0 := __entrypoint [ s x ]
-    }               // %1 := __annotate [ System.ComponentModel.DescriptionAttribute.DescriptionAttribute() s ]
-                    // s := __annotation [ %1 ]
-                    // the other attribute is unknown and is not included
+    [HttpPost] // should be ignored
+    public void Foo([Description]string s, [Missing]string x,
+                    [Dummy] int i, [DummyAttribute]string s2) {}
+        // %0 := __entrypoint [ s x const s2 ]
+        // %1 := __annotate [ System.ComponentModel.DescriptionAttribute.DescriptionAttribute() s ]
+        // s := __annotation [ %1 ]
+        // i is a const so the attribute is ignored
+        // the Missing attribute is unknown and is not included
+        // %2 := __annotate [ Class1.DummyAttribute.DummyAttribute() s2 ]
+        // s2 := __annotation [ %2 ]
+}";
+            UcfgVerifier.VerifyInstructions(code, "Foo");
+        }
+
+        [TestMethod]
+        public void Annotation_EntryMethod_AttributeOnStringParameterIsHandled()
+        {
+            const string code = @"
+namespace Namespace
+{
+    using System.Web.Mvc;
+
+    public class FromBodyAttribute : System.Attribute { }
+
+    public class CartController : Controller
+    {
+        public object Remove([FromBody] string itemId)
+        {
+            var data = itemId;
+                // data := __id [ itemId ]
+                // %0 := __entrypoint [ itemId ]
+                // %1 := __annotate [ Namespace.FromBodyAttribute.FromBodyAttribute() itemId ]
+                // itemId := __annotation [ %1 ]
+
+            return null;
+        }
+    }
+}";
+            UcfgVerifier.VerifyInstructions(code, "Remove");
+        }
+
+        [TestMethod]
+        public void Annotation_EntryMethod_AttributeOnNonStringParameterIsHandled()
+        {
+            // Bug 169
+            const string code = @"
+namespace Namespace
+{
+    using System.Web.Mvc;
+
+    public class FromBodyAttribute : System.Attribute { }
+
+    public class CartController : Controller
+    {
+        public object Remove([FromBody] long itemId)
+        {
+            var data = itemId;
+                // data := __id [ const ]
+                // %0 := __entrypoint [ const ]
+
+            return null;
+        }
+    }
+}";
+            UcfgVerifier.VerifyInstructions(code, "Remove");
+        }
+
+        [TestMethod]
+        public void Annotation_NotEntryMethod_AttibutesAreIgnored()
+        {
+            const string code = @"
+namespace Namespace
+{
+    public class FromBodyAttribute : System.Attribute { }
+
+    public class NotAController
+    {
+        public object Foo([FromBody] long itemId, [FromBody] string itemId2)
+        {
+            var data = itemId;      // data := __id [ const ]
+            var data = itemId2;     // data := __id [ itemId2 ]
+            return null;
+        }
+    }
 }";
             UcfgVerifier.VerifyInstructions(code, "Foo");
         }
@@ -1134,7 +1215,7 @@ public class Class1 : Controller
             UcfgVerifier.VerifyInstructions(code, "Foo");
         }
 
-        // [TestMethod] IGNORED
+        [TestMethod]
         public void Bug169_CreationError_RegressionTest_NullRef()
         {
             // SimplCommerce\src\Modules\SimplCommerce.Module.Reviews\Controllers\ReviewApiController.cs :: ChangeStatus
@@ -1154,6 +1235,7 @@ namespace Namespace
         [HttpPost]
         public object Remove([FromBody] long itemId)
         {
+            // %0 := __entrypoint [ const ]
             return null;
         }
     }
