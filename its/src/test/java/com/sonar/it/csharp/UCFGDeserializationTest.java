@@ -120,7 +120,7 @@ public class UCFGDeserializationTest {
     runAnalysis(projectDir);
 
     List<UCFG> ucfgs = readUcfgs(projectDir);
-    assertThat(ucfgs).hasSize(924); // TODO: FIX ME: Should be at least 926 (previous number of uCFG)
+    assertThat(ucfgs).hasSize(926);
   }
 
   @Test
