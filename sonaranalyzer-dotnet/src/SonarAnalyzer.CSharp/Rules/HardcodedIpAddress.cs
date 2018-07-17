@@ -59,6 +59,11 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
+                    if (text == "127.0.0.1")
+                    {
+                        return;
+                    }
+
                     if (!IPAddress.TryParse(text, out var address))
                     {
                         return;

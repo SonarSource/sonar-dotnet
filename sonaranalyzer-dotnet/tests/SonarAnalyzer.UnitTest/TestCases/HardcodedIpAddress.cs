@@ -19,10 +19,11 @@ namespace Tests.Diagnostics
         [SomeAttribute("127.0.0.1")] // this is mainly for assembly versions
         public HardcodedIpAddress()
         {
-            string ip = "127.0.0.1"; // Noncompliant {{Make this IP '127.0.0.1' address configurable.}}
-//                      ^^^^^^^^^^^
+            string ip = "192.168.0.1"; // Noncompliant {{Make this IP '192.168.0.1' address configurable.}}
+//                      ^^^^^^^^^^^^^
 
             ip = "300.0.0.0"; // Compliant, not a valid IP
+            ip = "127.0.0.1"; // Compliant, this is an exception in the rule (see: https://github.com/SonarSource/sonar-csharp/issues/1540)
             ip = "    127.0.0.0    "; // Compliant
             ip = @"    ""127.0.0.0""    "; // Compliant
 
