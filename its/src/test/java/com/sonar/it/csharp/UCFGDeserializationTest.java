@@ -180,6 +180,7 @@ public class UCFGDeserializationTest {
       .setDirectory(projectDir.toFile()), writer, 10 * 60 * 1000);
     result.addStatus(status);
 
+    assertThat(result.getLogs()).as("Roslyn analyzer errors").doesNotContain("AD0001");
     assertThat(result.isSuccess()).isTrue();
   }
 }
