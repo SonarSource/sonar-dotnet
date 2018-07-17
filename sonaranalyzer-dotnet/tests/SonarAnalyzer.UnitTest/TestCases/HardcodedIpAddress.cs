@@ -20,7 +20,7 @@ namespace Tests.Diagnostics
         public HardcodedIpAddress()
         {
             string ip = "192.168.0.1"; // Noncompliant {{Make this IP '192.168.0.1' address configurable.}}
-//                      ^^^^^^^^^^^
+//                      ^^^^^^^^^^^^^
 
             ip = "300.0.0.0"; // Compliant, not a valid IP
             ip = "127.0.0.1"; // Compliant, this is an exception in the rule (see: https://github.com/SonarSource/sonar-csharp/issues/1540)
