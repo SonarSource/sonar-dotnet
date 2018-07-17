@@ -325,24 +325,25 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
 
         private IEnumerable<Instruction> ProcessBinaryExpression(BinaryExpressionSyntax binaryExpression)
         {
-            var binaryExpressionTypeSymbol = this.semanticModel.GetTypeInfo(binaryExpression).ConvertedType;
+            var operatorSymbol = GetSymbol<IMethodSymbol>(binaryExpression);
 
-            if (binaryExpression.OperatorToken.IsKind(SyntaxKind.PlusToken))
+            if (operatorSymbol == null)
             {
-                var leftExpression = expressionService.GetExpression(binaryExpression.Left);
-                var rightExpression = expressionService.GetExpression(binaryExpression.Right);
-
-                // TODO: Handle property (for non string) get on left or right
-                // TODO: Handle implicit ToString
-                if (leftExpression.TypeSymbol.Is(KnownType.System_String) ||
-                    rightExpression.TypeSymbol.Is(KnownType.System_String))
-                {
-                    return CreateConcatCall(binaryExpression, binaryExpressionTypeSymbol, leftExpression, rightExpression);
-                }
+                expressionService.Associate(binaryExpression, expressionService.CreateConstant());
+                return NoInstructions;
             }
 
-            expressionService.Associate(binaryExpression, expressionService.CreateConstant(binaryExpressionTypeSymbol));
-            return NoInstructions;
+            var leftExpression = expressionService.GetExpression(binaryExpression.Left);
+            var rightExpression = expressionService.GetExpression(binaryExpression.Right);
+
+            // TODO: Handle property (for non string) get on left or right
+            // TODO: Handle implicit ToString
+            // If the method symbol is on string we should generate a concat instruction, otherwise let's do a method call
+            // instruction.
+            return operatorSymbol.ContainingType.Is(KnownType.System_String)
+                ? CreateConcatCall(binaryExpression, operatorSymbol.ContainingType, leftExpression, rightExpression)
+                : CreateMethodCall(binaryExpression, operatorSymbol,
+                    expressionService.CreateClassName(operatorSymbol.ContainingType), leftExpression, rightExpression);
         }
 
         private IEnumerable<Instruction> ProcessInvocationExpression(InvocationExpressionSyntax invocationSyntax)
@@ -415,6 +416,26 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
 
             var rightExpression = expressionService.GetExpression(assignmentExpression.Right);
 
+            // Handle the special add assignment (+=)
+            // In this block we will only handle the concatenation part, not the assignment (that will be handled right after)
+            if (assignmentExpression.IsKind(SyntaxKind.AddAssignmentExpression))
+            {
+                var addOperatorSymbol = GetSymbol<IMethodSymbol>(assignmentExpression);
+
+                // TODO: Handle implicit ToString
+                // If the method symbol is on string we should generate a concat instruction, otherwise let's do a method call
+                // instruction.
+                instructions.AddRange(
+                    addOperatorSymbol.ContainingType.Is(KnownType.System_String)
+                        ? CreateConcatCall(assignmentExpression, addOperatorSymbol.ContainingType, leftExpression,
+                            rightExpression)
+                        : CreateMethodCall(assignmentExpression, addOperatorSymbol,
+                            expressionService.CreateClassName(addOperatorSymbol.ContainingType), leftExpression, rightExpression));
+
+                // We have just created a new instruction so we need to make sure we will use the new temp variable
+                rightExpression = expressionService.GetExpression(assignmentExpression);
+            }
+
             // handle left part of the assignment
             switch (leftExpression)
             {
@@ -430,9 +451,8 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                     break;
 
                 case UcfgExpression.ElementAccessExpression elementExpression:
-                    instructions.AddRange(
-                        CreateArraySetCall(assignmentExpression, elementExpression.TypeSymbol, elementExpression.Target,
-                            rightExpression));
+                    instructions.AddRange(CreateArraySetCall(assignmentExpression, elementExpression.TypeSymbol,
+                        elementExpression.Target, rightExpression));
                     break;
 
                 default:
@@ -579,7 +599,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                 }
             };
 
-            IList<Instruction> newInstructions = new List<Instruction>();
+            var newInstructions = new List<Instruction>();
             if (methodIdentifier == UcfgBuiltInMethodId.Identity)
             {
                 instruction.Assigncall.Args.AddRange(arguments.Select(a => a.Expression));
@@ -597,7 +617,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
         }
 
         private IEnumerable<Expression> ProcessInstructionArguments(UcfgExpression[] ucfgArguments,
-            IList<Instruction> additionalInstructions)
+            List<Instruction> additionalInstructions)
         {
             var argumentExpressions = new List<Expression>();
 
@@ -605,43 +625,37 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             // Anything else needs to be referenced by a auxiliary variable
             foreach (var ucfgExpression in ucfgArguments)
             {
-                if (IsTemporaryVariableRequired(ucfgExpression))
+                switch (ucfgExpression)
                 {
-                    // Create a temp variable and change the node->UcfgExpression
-                    // to point to the new UcfgExpression
-                    var tempVariable = expressionService.CreateVariable(ucfgExpression.TypeSymbol);
+                    // When a FieldExpression is passed as argument to an instruction, we need to store it in a temp variable,
+                    // which will then be passed to the processed instruction
+                    case UcfgExpression.FieldAccessExpression fieldExpression:
+                        var tempVariable = expressionService.CreateVariable(ucfgExpression.TypeSymbol);
+                        argumentExpressions.Add(tempVariable.Expression);
+                        additionalInstructions.AddRange(CreateIdCall(fieldExpression.Node, tempVariable, fieldExpression));
+                        break;
 
-                    expressionService.Associate(ucfgExpression.Node, tempVariable);
-                    argumentExpressions.Add(tempVariable.Expression);
+                    // When a PropertyExpression is passed as argument to an instruction, we need to create the getter method
+                    // call, and then pass the variable to the processed instruction
+                    case UcfgExpression.PropertyAccessExpression propertyExpression:
+                        additionalInstructions.AddRange(CreateMethodCall(propertyExpression.Node,
+                            propertyExpression.GetMethodSymbol, propertyExpression.Target));
+                        var variableExpression = expressionService.GetExpression(propertyExpression.Node);
+                        argumentExpressions.Add(variableExpression.Expression);
+                        break;
 
-                    var instruction = new Instruction
-                    {
-                        Assigncall = new AssignCall
-                        {
-                            Location = ucfgExpression.Node.GetUcfgLocation(),
-                            MethodId = UcfgBuiltInMethodId.Identity.ToString()
-                        }
-                    };
-                    instruction.Assigncall.Args.Add(ucfgExpression.Expression);
-                    tempVariable.ApplyAsTarget(instruction);
-                    additionalInstructions.Add(instruction);
-                }
-                else
-                {
-                    argumentExpressions.Add(ucfgExpression.Expression
-                        // Defensive, in case the expression is null.
-                        // This can happen e.g. if the method argument is a MemberAccessExpression
-                        // that identifies the method being passed as a function (not currently handled)
-                        ?? new UcfgExpression.ConstantExpression().Expression);
+                    default:
+                        argumentExpressions.Add(
+                            ucfgExpression.Expression
+                            // Defensive, in case the expression is null.
+                            // This can happen e.g. if the method argument is a MemberAccessExpression
+                            // that identifies the method being passed as a function (not currently handled)
+                            ?? expressionService.CreateConstant().Expression);
+                        break;
                 }
             }
 
             return argumentExpressions;
-        }
-
-        private static bool IsTemporaryVariableRequired(UcfgExpression methodArgumentExpression)
-        {
-            return methodArgumentExpression is UcfgExpression.FieldAccessExpression;
         }
 
         private IEnumerable<Instruction> CreateNewObject(ObjectCreationExpressionSyntax syntaxNode,

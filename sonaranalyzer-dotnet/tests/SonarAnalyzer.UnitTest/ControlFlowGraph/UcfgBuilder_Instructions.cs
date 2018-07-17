@@ -1488,5 +1488,54 @@ namespace Ns2
 }";
             UcfgVerifier.VerifyInstructions(code, "BuildWebHost2");
         }
+
+
+        [TestMethod]
+        public void AddAssignment()
+        {
+            const string code = @"
+namespace Namespace
+{
+    public class Class1
+    {
+        public string fieldString;
+        public string PropertyString { get; set; }
+
+        public void Foo(string parameterString)
+        {
+            var localString = ""foo"";              // localString := __id [ const ]
+
+            localString += parameterString;         // %0 := __concat [ localString parameterString ]
+                                                    // localString := __id [ %0 ]
+
+            localString += ""foo"";                 // %1 := __concat [ localString const ]
+                                                    // localString := __id [ %1 ]
+
+            parameterString += parameterString;     // %2 := __concat [ parameterString parameterString ]
+                                                    // parameterString := __id [ %2 ]
+
+            parameterString += ""foo"";             // %3 := __concat [ parameterString const ]
+                                                    // parameterString := __id [ %3 ]
+
+            fieldString += parameterString;         // %5 := __id [ this.fieldString ]
+                                                    // %4 := __concat [ %5 parameterString ]
+                                                    // this.fieldString := __id [ %4 ]
+
+            fieldString += ""foo"";                 // %7 := __id [ this.fieldString ]
+                                                    // %6 := __concat [ %7 const ]
+                                                    // this.fieldString := __id [ %6 ]
+
+            PropertyString += parameterString;      // %9 := Namespace.Class1.PropertyString.get [ this ]
+                                                    // %8 := __concat [ %9 parameterString ]
+                                                    // %10 := Namespace.Class1.PropertyString.set [ this %8 ]
+
+            PropertyString += ""foo"";              // %12 := Namespace.Class1.PropertyString.get [ this ]
+                                                    // %11 := __concat [ %12 const ]
+                                                    // %13 := Namespace.Class1.PropertyString.set [ this %11 ]
+        }
+    }
+}";
+            UcfgVerifier.VerifyInstructions(code, "Foo");
+        }
     }
 }
