@@ -28,7 +28,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-namespace SonarAnalyzer.UnitTest.Security
+namespace SonarAnalyzer.UnitTest.ControlFlowGraph
 {
     public static class TestHelper
     {
