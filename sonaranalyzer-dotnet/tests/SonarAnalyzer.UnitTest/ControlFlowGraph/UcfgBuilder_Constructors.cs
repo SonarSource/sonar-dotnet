@@ -19,9 +19,8 @@
 */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SonarAnalyzer.UnitTest.Security.Framework;
 
-namespace SonarAnalyzer.UnitTest.Security.Ucfg
+namespace SonarAnalyzer.UnitTest.ControlFlowGraph
 {
     [TestClass]
     public class UcfgBuilder_Constructors
