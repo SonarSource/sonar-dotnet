@@ -1622,5 +1622,32 @@ namespace Namespace
 }";
             UcfgVerifier.VerifyInstructions(code, "Foo");
         }
+
+        [TestMethod]
+        public void Dynamic()
+        {
+            const string code = @"
+namespace Namespace
+{
+    public class Class1
+    {
+        public string Foo(Class1 c)
+        {
+            dynamic dyn = c.Bar;
+                // dyn := __id [ __unknown ]
+
+            if (dyn.User != null)
+                // %0 := dynamic.operator !=(dynamic, dynamic) [ __unknown __unknown const ]
+            {
+                return ""bar"";
+            }
+
+            return c.ToString();
+                // %1 := object.ToString() [ c ]
+        }
+    }
+}";
+            UcfgVerifier.VerifyInstructions(code, "Foo");
+        }
     }
 }
