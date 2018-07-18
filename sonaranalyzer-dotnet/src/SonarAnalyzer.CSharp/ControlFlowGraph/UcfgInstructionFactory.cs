@@ -310,32 +310,6 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             return CreateIdCall(variableDeclarator, toExpression, fromExpression);
         }
 
-        private IEnumerable<Instruction> ProcessBinaryExpression(BinaryExpressionSyntax binaryExpression)
-        {
-            var binaryExpressionSymbol = GetSymbol<IMethodSymbol>(binaryExpression);
-            if (binaryExpressionSymbol == null)
-            {
-                expressionService.Associate(binaryExpression, expressionService.CreateConstant());
-                return NoInstructions;
-            }
-
-            var leftExpression = expressionService.GetExpression(binaryExpression.Left);
-            var rightExpression = expressionService.GetExpression(binaryExpression.Right);
-
-            // TODO: Handle implicit ToString
-            var isStringConcat = binaryExpressionSymbol.MethodKind == MethodKind.BuiltinOperator &&
-                binaryExpressionSymbol.Parameters.Length == 2 &&
-                binaryExpressionSymbol.Name == "op_Addition" &&
-                binaryExpressionSymbol.ContainingType.Is(KnownType.System_String);
-
-            // If the method symbol is on string we should generate a concat instruction, otherwise let's do a method call
-            // instruction.
-            return isStringConcat
-                ? CreateConcatCall(binaryExpression, binaryExpressionSymbol.ContainingType, leftExpression, rightExpression)
-                : CreateMethodCall(binaryExpression, binaryExpressionSymbol,
-                    expressionService.CreateClassName(binaryExpressionSymbol.ContainingType), leftExpression, rightExpression);
-        }
-
         private IEnumerable<Instruction> ProcessInvocationExpression(InvocationExpressionSyntax invocationSyntax)
         {
             var methodSymbol = GetSymbol<IMethodSymbol>(invocationSyntax);
@@ -406,26 +380,13 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
 
             var rightExpression = expressionService.GetExpression(assignmentExpression.Right);
 
-            // Handle the special add assignment (+=)
-            // In this block we will only handle the concatenation part, not the assignment (that will be handled right after)
+            // Handle the special add assignment (+=). We decided to treat it as if it was expanded (i.e. we will handle only the
+            // add part) and let the rest of the code handle the assignment part.
             if (assignmentExpression.IsKind(SyntaxKind.AddAssignmentExpression))
             {
-                var addOperatorSymbol = GetSymbol<IMethodSymbol>(assignmentExpression);
-                if (addOperatorSymbol != null)
-                {
-                    // TODO: Handle implicit ToString
-                    // If the method symbol is on string we should generate a concat instruction, otherwise let's do a method call
-                    // instruction.
-                    instructions.AddRange(
-                        addOperatorSymbol.ContainingType.Is(KnownType.System_String)
-                            ? CreateConcatCall(assignmentExpression, addOperatorSymbol.ContainingType, leftExpression,
-                                rightExpression)
-                            : CreateMethodCall(assignmentExpression, addOperatorSymbol,
-                                expressionService.CreateClassName(addOperatorSymbol.ContainingType), leftExpression, rightExpression));
-
-                    // We have just created a new instruction so we need to make sure we will use the new temp variable
-                    rightExpression = expressionService.GetExpression(assignmentExpression);
-                }
+                instructions.AddRange(ProcessOperator(assignmentExpression, leftExpression, rightExpression));
+                // We might have created a new instruction so we need to make sure the rightExpression targets the new expression
+                rightExpression = expressionService.GetExpression(assignmentExpression);
             }
 
             // handle left part of the assignment
@@ -452,6 +413,14 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             }
 
             return instructions;
+        }
+
+        private IEnumerable<Instruction> ProcessBinaryExpression(BinaryExpressionSyntax binaryExpression)
+        {
+            var leftExpression = expressionService.GetExpression(binaryExpression.Left);
+            var rightExpression = expressionService.GetExpression(binaryExpression.Right);
+
+            return ProcessOperator(binaryExpression, leftExpression, rightExpression);
         }
 
         private IEnumerable<Instruction> ProcessBaseMethodDeclaration(BaseMethodDeclarationSyntax methodDeclaration)
@@ -494,6 +463,29 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             expressionService.Associate(memberAccessExpression, ucfgExpression);
 
             return instructions;
+        }
+
+        private IEnumerable<Instruction> ProcessOperator(SyntaxNode syntaxNode, UcfgExpression leftExpression,
+            UcfgExpression rightExpression)
+        {
+            var operatorMethodSymbol = GetSymbol<IMethodSymbol>(syntaxNode);
+            if (operatorMethodSymbol == null)
+            {
+                expressionService.Associate(syntaxNode, expressionService.CreateConstant());
+                return NoInstructions;
+            }
+
+            var isStringConcat = operatorMethodSymbol.MethodKind == MethodKind.BuiltinOperator &&
+                operatorMethodSymbol.Parameters.Length == 2 &&
+                operatorMethodSymbol.Name == "op_Addition" &&
+                operatorMethodSymbol.ContainingType.Is(KnownType.System_String);
+
+            // If the method symbol is on string we should generate a concat instruction, otherwise it should be a method call
+            // instruction.
+            return isStringConcat
+                ? CreateConcatCall(syntaxNode, operatorMethodSymbol.ContainingType, leftExpression, rightExpression)
+                : CreateMethodCall(syntaxNode, operatorMethodSymbol,
+                    expressionService.CreateClassName(operatorMethodSymbol.ContainingType), leftExpression, rightExpression);
         }
 
         public IEnumerable<Instruction> CreateConcatCall(SyntaxNode syntaxNode, ITypeSymbol nodeTypeSymbol, UcfgExpression left,
