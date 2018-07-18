@@ -126,9 +126,10 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             public ClassNameExpression(INamedTypeSymbol namedTypeSymbol)
                 : base(namedTypeSymbol, null)
             {
+                var className = namedTypeSymbol?.ConstructedFrom.ToDisplayString() ?? UcfgBuiltInMethodId.Unknown;
                 Expression = new Expression
                 {
-                    Classname = new ClassName { Classname = namedTypeSymbol.ConstructedFrom.ToDisplayString() }
+                    Classname = new ClassName { Classname = className }
                 };
             }
 

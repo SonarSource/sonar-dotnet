@@ -24,7 +24,7 @@ using csharp::SonarAnalyzer.ControlFlowGraph.CSharp;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace SonarAnalyzer.UnitTest.Security.Ucfg
+namespace SonarAnalyzer.UnitTest.ControlFlowGraph
 {
     [TestClass]
     public class EntryPointRecognizer_IsEntryPoint

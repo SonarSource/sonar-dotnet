@@ -25,7 +25,7 @@ using System.Linq;
 using csharp::SonarAnalyzer.ControlFlowGraph.CSharp;
 using SonarAnalyzer.Protobuf.Ucfg;
 
-namespace SonarAnalyzer.UnitTest.Security.Framework
+namespace SonarAnalyzer.UnitTest.ControlFlowGraph
 {
     internal static class UcfgTestHelper
     {
