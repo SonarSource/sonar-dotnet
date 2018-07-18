@@ -312,8 +312,8 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
 
         private IEnumerable<Instruction> ProcessBinaryExpression(BinaryExpressionSyntax binaryExpression)
         {
-            var operatorSymbol = GetSymbol<IMethodSymbol>(binaryExpression);
-            if (operatorSymbol == null)
+            var binaryExpressionSymbol = GetSymbol<IMethodSymbol>(binaryExpression);
+            if (binaryExpressionSymbol == null)
             {
                 expressionService.Associate(binaryExpression, expressionService.CreateConstant());
                 return NoInstructions;
@@ -323,12 +323,17 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             var rightExpression = expressionService.GetExpression(binaryExpression.Right);
 
             // TODO: Handle implicit ToString
+            var isStringConcat = binaryExpressionSymbol.MethodKind == MethodKind.BuiltinOperator &&
+                binaryExpressionSymbol.Parameters.Length == 2 &&
+                binaryExpressionSymbol.Name == "op_Addition" &&
+                binaryExpressionSymbol.ContainingType.Is(KnownType.System_String);
+
             // If the method symbol is on string we should generate a concat instruction, otherwise let's do a method call
             // instruction.
-            return operatorSymbol.ContainingType.Is(KnownType.System_String)
-                ? CreateConcatCall(binaryExpression, operatorSymbol.ContainingType, leftExpression, rightExpression)
-                : CreateMethodCall(binaryExpression, operatorSymbol,
-                    expressionService.CreateClassName(operatorSymbol.ContainingType), leftExpression, rightExpression);
+            return isStringConcat
+                ? CreateConcatCall(binaryExpression, binaryExpressionSymbol.ContainingType, leftExpression, rightExpression)
+                : CreateMethodCall(binaryExpression, binaryExpressionSymbol,
+                    expressionService.CreateClassName(binaryExpressionSymbol.ContainingType), leftExpression, rightExpression);
         }
 
         private IEnumerable<Instruction> ProcessInvocationExpression(InvocationExpressionSyntax invocationSyntax)
@@ -406,19 +411,21 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             if (assignmentExpression.IsKind(SyntaxKind.AddAssignmentExpression))
             {
                 var addOperatorSymbol = GetSymbol<IMethodSymbol>(assignmentExpression);
+                if (addOperatorSymbol != null)
+                {
+                    // TODO: Handle implicit ToString
+                    // If the method symbol is on string we should generate a concat instruction, otherwise let's do a method call
+                    // instruction.
+                    instructions.AddRange(
+                        addOperatorSymbol.ContainingType.Is(KnownType.System_String)
+                            ? CreateConcatCall(assignmentExpression, addOperatorSymbol.ContainingType, leftExpression,
+                                rightExpression)
+                            : CreateMethodCall(assignmentExpression, addOperatorSymbol,
+                                expressionService.CreateClassName(addOperatorSymbol.ContainingType), leftExpression, rightExpression));
 
-                // TODO: Handle implicit ToString
-                // If the method symbol is on string we should generate a concat instruction, otherwise let's do a method call
-                // instruction.
-                instructions.AddRange(
-                    addOperatorSymbol.ContainingType.Is(KnownType.System_String)
-                        ? CreateConcatCall(assignmentExpression, addOperatorSymbol.ContainingType, leftExpression,
-                            rightExpression)
-                        : CreateMethodCall(assignmentExpression, addOperatorSymbol,
-                            expressionService.CreateClassName(addOperatorSymbol.ContainingType), leftExpression, rightExpression));
-
-                // We have just created a new instruction so we need to make sure we will use the new temp variable
-                rightExpression = expressionService.GetExpression(assignmentExpression);
+                    // We have just created a new instruction so we need to make sure we will use the new temp variable
+                    rightExpression = expressionService.GetExpression(assignmentExpression);
+                }
             }
 
             // handle left part of the assignment

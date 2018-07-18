@@ -1599,5 +1599,28 @@ namespace Namespace
 }";
             UcfgVerifier.VerifyInstructions(code, "Foo");
         }
+
+        [TestMethod]
+        public void OtherBinaryExpressions()
+        {
+            const string code = @"
+namespace Namespace
+{
+    public class Class1
+    {
+        public void Foo(string s)
+        {
+            if (s == null)                  // %0 := string.operator ==(string, string) [ string s const ]
+            {
+                return;
+            }
+
+            var x = s != null ? 1 : 0;      // %1 := string.operator !=(string, string) [ string s const ]
+                                            // x := __id [ __unknown ]
+        }
+    }
+}";
+            UcfgVerifier.VerifyInstructions(code, "Foo");
+        }
     }
 }
