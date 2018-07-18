@@ -24,9 +24,8 @@ using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.ControlFlowGraph;
 using SonarAnalyzer.UnitTest.Helpers;
-using SonarAnalyzer.UnitTest.Security;
 
-namespace SonarAnalyzer.Helpers.UnitTest
+namespace SonarAnalyzer.UnitTest.ControlFlowGraph
 {
     [TestClass]
     public class CfgSerializerTest
