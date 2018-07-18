@@ -60,7 +60,8 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                     return methodSymbol.ReducedFrom.ToDisplayString();
 
                 default:
-                    return methodSymbol?.OriginalDefinition?.ToDisplayString() ?? "__unknown";
+                    return methodSymbol?.OriginalDefinition?.ToDisplayString()
+                        ?? UcfgBuiltInMethodId.Unknown;
             }
         }
     }

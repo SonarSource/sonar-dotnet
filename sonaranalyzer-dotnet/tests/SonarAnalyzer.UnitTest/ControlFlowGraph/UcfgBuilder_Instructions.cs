@@ -123,47 +123,64 @@ namespace Namespace
         public string Foo(string s)
         {
             string a;
-            Property = s;                           // %0 := Namespace.Class1.Property.set [ this s ]
+            Property = s;
+                // %0 := Namespace.Class1.Property.set [ this s ]
 
-            a = Property;                           // %1 := Namespace.Class1.Property.get [ this ]
-                                                    // a := __id [ %1 ]
+            a = Property;
+                // %1 := Namespace.Class1.Property.get [ this ]
+                // a := __id [ %1 ]
 
-            Property = Property;                    // %2 := Namespace.Class1.Property.get [ this ]
-                                                    // %3 := Namespace.Class1.Property.set [ this %2 ]
+            Property = Property;
+                // %3 := Namespace.Class1.Property.get [ this ]
+                // %2 := Namespace.Class1.Property.set [ this %3 ]
 
-            Foo(Property);                          // %4 := Namespace.Class1.Property.get [ this ]
-                                                    // %5 := Namespace.Class1.Foo(string) [ this %4 ]
+            Foo(Property);
+                // %5 := Namespace.Class1.Property.get [ this ]
+                // %4 := Namespace.Class1.Foo(string) [ this %5 ]
 
-            Property = Foo(Property);               // %6 := Namespace.Class1.Property.get [ this ]
-                                                    // %7 := Namespace.Class1.Foo(string) [ this %6 ]
-                                                    // %8 := Namespace.Class1.Property.set [ this %7 ]
+            Property = Foo(Property);
+                // %7 := Namespace.Class1.Property.get [ this ]
+                // %6 := Namespace.Class1.Foo(string) [ this %7 ]
+                // %8 := Namespace.Class1.Property.set [ this %6 ]
 
-            ObjectProperty = s;                     // %9 := Namespace.Class1.ObjectProperty.set [ this s ]
+            ObjectProperty = s;
+                // %9 := Namespace.Class1.ObjectProperty.set [ this s ]
 
-            ObjectProperty = 5;                     // %10 := Namespace.Class1.ObjectProperty.set [ this const ]
+            ObjectProperty = 5;
+                // %10 := Namespace.Class1.ObjectProperty.set [ this const ]
 
-            var x = IntProperty = 5;                // %11 := Namespace.Class1.IntProperty.set [ this const ]
-                                                    // x := __id [ %11 ]
+            var x = IntProperty = 5;
+                // %11 := Namespace.Class1.IntProperty.set [ this const ]
+                // x := __id [ %11 ]
 
-            this.Property = s                       // %12 := Namespace.Class1.Property.set [ this s ]
+            this.Property = s;
+                // %12 := Namespace.Class1.Property.set [ this s ]
 
-            var other = new Class1();               // %13 := new Namespace.Class1
-                                                    // %14 := Namespace.Class1.Class1() [ %13 ]
-                                                    // other := __id [ %13 ]
+            var other = new Class1();
+                // %13 := new Namespace.Class1
+                // %14 := Namespace.Class1.Class1() [ %13 ]
+                // other := __id [ %13 ]
 
-            other.Property = s;                     // %15 := Namespace.Class1.Property.set [ other s ]
+            other.Property = s;
+                // %15 := Namespace.Class1.Property.set [ other s ]
 
-            other.ObjectProperty = other.Property;  // %16 := Namespace.Class1.Property.get [ other ]
-                                                    // %17 := Namespace.Class1.ObjectProperty.set [ other %16 ]
+            other.ObjectProperty = other.Property;
+                // %16 := Namespace.Class1.Property.get [ other ]
+                // %17 := Namespace.Class1.ObjectProperty.set [ other %16 ]
 
-            Class1.StaticProperty = s;              // %18 := Namespace.Class1.StaticProperty.set [ Namespace.Class1 s ]
-            StaticProperty = s;                     // %19 := Namespace.Class1.StaticProperty.set [ Namespace.Class1 s ]
+            Class1.StaticProperty = s;
+                // %18 := Namespace.Class1.StaticProperty.set [ Namespace.Class1 s ]
 
-            a = StaticProperty;                     // %20 := Namespace.Class1.StaticProperty.get [ Namespace.Class1 ]
-                                                    // a := __id [ %20 ]
+            StaticProperty = s;
+                // %19 := Namespace.Class1.StaticProperty.set [ Namespace.Class1 s ]
 
-            a = Class1.StaticProperty;              // %21 := Namespace.Class1.StaticProperty.get [ Namespace.Class1 ]
-                                                    // a := __id [ %21 ]
+            a = StaticProperty;
+                // %20 := Namespace.Class1.StaticProperty.get [ Namespace.Class1 ]
+                // a := __id [ %20 ]
+
+            a = Class1.StaticProperty;
+                // %21 := Namespace.Class1.StaticProperty.get [ Namespace.Class1 ]
+                // a := __id [ %21 ]
 
             return s;
         }
@@ -533,35 +550,35 @@ namespace Namespace
         public void Foo()
         {
             Bar(InstanceMethod());
-            // %0 := Namespace.Class1.InstanceMethod() [ this ]
-            // %1 := Namespace.Class1.Bar(int) [ this %0 ]
+                // %0 := Namespace.Class1.InstanceMethod() [ this ]
+                // %1 := Namespace.Class1.Bar(int) [ this %0 ]
 
             Bar(StaticMethod());
-            // %2 := Namespace.Class1.StaticMethod() [ Namespace.Class1 ]
-            // %3 := Namespace.Class1.Bar(int) [ this %2 ]
+                // %2 := Namespace.Class1.StaticMethod() [ Namespace.Class1 ]
+                // %3 := Namespace.Class1.Bar(int) [ this %2 ]
 
             Bar(this.Property);
-            // %4 := Namespace.Class1.Property.get [ this ]
-            // %5 := Namespace.Class1.Bar(int) [ this %4 ]
+                // %4 := Namespace.Class1.Property.get [ this ]
+                // %5 := Namespace.Class1.Bar(int) [ this %4 ]
 
             Bar(StaticProperty);
-            // %6 := Namespace.Class1.StaticProperty.get [ this ]
-            // %7 := Namespace.Class1.Bar(int) [ this %6 ]
+                // %7 := Namespace.Class1.StaticProperty.get [ this ]
+                // %6 := Namespace.Class1.Bar(int) [ this %7 ]
 
             Bar(this.Field);
-            // %9 := __id [ this.Field ]
-            // %8 := Namespace.Class1.Bar(int) [ this %9 ]
+                // %9 := __id [ this.Field ]
+                // %8 := Namespace.Class1.Bar(int) [ this %9 ]
 
             Bar(StaticField);
-            // %11 := __id [ Namespace.Class1.StaticField ]
-            // %10 := Namespace.Class1.Bar(int) [ this %11 ]
+                // %11 := __id [ Namespace.Class1.StaticField ]
+                // %10 := Namespace.Class1.Bar(int) [ this %11 ]
 
             Bar(Field, Property, this.InstanceMethod(), StaticMethod());
-            // %12 := Namespace.Class1.Property.get [ this ]
-            // %13 := Namespace.Class1.InstanceMethod() [ this ]
-            // %14 := Namespace.Class1.StaticMethod() [ Namespace.Class1 ]
-            // %16 := __id [ this.Field ]
-            // %15 := Namespace.Class1.Bar(int, int, int, int) [ this %16 %12 %13 %14 ]
+                // %12 := Namespace.Class1.InstanceMethod() [ this ]
+                // %13 := Namespace.Class1.StaticMethod() [ Namespace.Class1 ]
+                // %15 := __id [ this.Field ]
+                // %16 := Namespace.Class1.Property.get [ this ]
+                // %14 := Namespace.Class1.Bar(int, int, int, int) [ this %15 %16 %12 %13 ]
         }
 
         private void Bar(int arg1) { /* no-op */ }
@@ -1121,16 +1138,18 @@ namespace Namespace
 
         public void Foo()
         {
-            field.field.field = new Class1();           // %0 := __id [ this.field ]
-                                                        // %1 := __id [ %0.field ]
-                                                        // %2 := new Namespace.Class1
-                                                        // %3 := Namespace.Class1.Class1() [ %2 ]
-                                                        // %1.field := __id [ %2 ]
+            field.field.field = new Class1();
+                // %0 := __id [ this.field ]
+                // %1 := __id [ %0.field ]
+                // %2 := new Namespace.Class1
+                // %3 := Namespace.Class1.Class1() [ %2 ]
+                // %1.field := __id [ %2 ]
 
-            Class1.staticField.field = new Class1();    // %4 := __id [ Namespace.Class1.staticField ]
-                                                        // %5 := new Namespace.Class1
-                                                        // %6 := Namespace.Class1.Class1() [ %5 ]
-                                                        // %4.field := __id [ %5 ]
+            Class1.staticField.field = new Class1();
+                // %4 := __id [ Namespace.Class1.staticField ]
+                // %5 := new Namespace.Class1
+                // %6 := Namespace.Class1.Class1() [ %5 ]
+                // %4.field := __id [ %5 ]
         }
     }
 }";
@@ -1150,16 +1169,18 @@ namespace Namespace
 
         public void Foo()
         {
-            Property.Property.Property = new Class1();      // %0 := Namespace.Class1.Property.get [ this ]
-                                                            // %1 := Namespace.Class1.Property.get [ %0 ]
-                                                            // %2 := new Namespace.Class1
-                                                            // %3 := Namespace.Class1.Class1() [ %2 ]
-                                                            // %4 := Namespace.Class1.Property.set [ %1 %2 ]
+            Property.Property.Property = new Class1();
+                // %1 := Namespace.Class1.Property.get [ this ]
+                // %0 := Namespace.Class1.Property.get [ %1 ]
+                // %2 := new Namespace.Class1
+                // %3 := Namespace.Class1.Class1() [ %2 ]
+                // %4 := Namespace.Class1.Property.set [ %0 %2 ]
 
-            Class1.StaticProperty.Property = new Class1();  // %5 := Namespace.Class1.StaticProperty.get [ Namespace.Class1 ]
-                                                            // %6 := new Namespace.Class1
-                                                            // %7 := Namespace.Class1.Class1() [ %6 ]
-                                                            // %8 := Namespace.Class1.Property.set [ %5 %6 ]
+            Class1.StaticProperty.Property = new Class1();
+                // %5 := Namespace.Class1.StaticProperty.get [ Namespace.Class1 ]
+                // %6 := new Namespace.Class1
+                // %7 := Namespace.Class1.Class1() [ %6 ]
+                // %8 := Namespace.Class1.Property.set [ %5 %6 ]
         }
     }
 }";
@@ -1277,11 +1298,12 @@ namespace Namespace
 
         public void Foo(Class1 other, string s)
         {
-            other.ArrayProperty[0].arrayField[1].stringField = s;   // %0 := Namespace.Class1.ArrayProperty.get [ other ]
-                                                                    // %1 := __arrayGet [ %0 ]
-                                                                    // %3 := __id [ %1.arrayField ]
-                                                                    // %2 := __arrayGet [ %3 ]
-                                                                    // %2.stringField := __id [ s ]
+            other.ArrayProperty[0].arrayField[1].stringField = s;
+                // %0 := Namespace.Class1.ArrayProperty.get [ other ]
+                // %1 := __arrayGet [ %0 ]
+                // %3 := __id [ %1.arrayField ]
+                // %2 := __arrayGet [ %3 ]
+                // %2.stringField := __id [ s ]
         }
     }
 }";
@@ -1429,19 +1451,19 @@ namespace SimplCommerce.Module.Shipping.Models
             get
             {
                 if (string.IsNullOrWhiteSpace(OnlyCountryIdsString))
-                    // %0 := SimplCommerce.Module.Shipping.Models.ShippingProvider.OnlyCountryIdsString.get [ this ]
-                    // %1 := string.IsNullOrWhiteSpace(string) [ string %0 ]
+                    // %1 := SimplCommerce.Module.Shipping.Models.ShippingProvider.OnlyCountryIdsString.get [ this ]
+                    // %0 := string.IsNullOrWhiteSpace(string) [ string %1 ]
                 {
                     return new List<long>();
                         // %2 := new System.Collections.Generic.List<T>
+                        // %3 := System.Collections.Generic.List<T>.List() [ %2 ]
                 }
 
                 return OnlyCountryIdsString.Split(',')
-                        // %3 := System.Collections.Generic.List<T>.List() [ %2 ]
-                        // %4 := SimplCommerce.Module.Shipping.Models.ShippingProvider.OnlyCountryIdsString.get [ this ]
-                        // %5 := string.Split(params char[]) [ %4 const ]
+                        // %5 := SimplCommerce.Module.Shipping.Models.ShippingProvider.OnlyCountryIdsString.get [ this ]
+                        // %4 := string.Split(params char[]) [ %5 const ]
                     .Select(long.Parse)
-                        // %6 := System.Linq.Enumerable.Select<TSource, TResult>(System.Collections.Generic.IEnumerable<TSource>, System.Func<TSource, TResult>) [ System.Linq.Enumerable %5 const ]
+                        // %6 := System.Linq.Enumerable.Select<TSource, TResult>(System.Collections.Generic.IEnumerable<TSource>, System.Func<TSource, TResult>) [ System.Linq.Enumerable %4 const ]
                     .ToList();
                         // %7 := System.Linq.Enumerable.ToList<TSource>(System.Collections.Generic.IEnumerable<TSource>) [ System.Linq.Enumerable %6 ]
             }
@@ -1487,6 +1509,32 @@ namespace Ns2
     }
 }";
             UcfgVerifier.VerifyInstructions(code, "BuildWebHost2");
+        }
+
+        [TestMethod]
+        public void Dynamic()
+        {
+            const string code = @"
+namespace Namespace
+{
+    public class Class1
+    {
+        public string Foo(Class1 c)
+        {
+            dynamic dyn = c.Bar;
+                // dyn := __id [ __unknown ]
+
+            if (dyn.User != null)
+            {
+                return ""bar"";
+            }
+
+            return c.ToString();
+                // %0 := object.ToString() [ c ]
+        }
+    }
+}";
+            UcfgVerifier.VerifyInstructions(code, "Foo");
         }
     }
 }
