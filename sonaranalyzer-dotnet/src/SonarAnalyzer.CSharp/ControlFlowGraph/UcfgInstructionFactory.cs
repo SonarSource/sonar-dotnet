@@ -312,24 +312,10 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
 
         private IEnumerable<Instruction> ProcessBinaryExpression(BinaryExpressionSyntax binaryExpression)
         {
-            var binaryExpressionTypeSymbol = this.semanticModel.GetTypeInfo(binaryExpression).ConvertedType;
+            var leftExpression = expressionService.GetExpression(binaryExpression.Left);
+            var rightExpression = expressionService.GetExpression(binaryExpression.Right);
 
-            if (binaryExpression.OperatorToken.IsKind(SyntaxKind.PlusToken))
-            {
-                var leftExpression = expressionService.GetExpression(binaryExpression.Left);
-                var rightExpression = expressionService.GetExpression(binaryExpression.Right);
-
-                // TODO: Handle property (for non string) get on left or right
-                // TODO: Handle implicit ToString
-                if (leftExpression.TypeSymbol.Is(KnownType.System_String) ||
-                    rightExpression.TypeSymbol.Is(KnownType.System_String))
-                {
-                    return CreateConcatCall(binaryExpression, binaryExpressionTypeSymbol, leftExpression, rightExpression);
-                }
-            }
-
-            expressionService.Associate(binaryExpression, expressionService.CreateConstant(binaryExpressionTypeSymbol));
-            return NoInstructions;
+            return ProcessOperator(binaryExpression, leftExpression, rightExpression);
         }
 
         private IEnumerable<Instruction> ProcessInvocationExpression(InvocationExpressionSyntax invocationSyntax)
@@ -401,6 +387,15 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             }
 
             var rightExpression = expressionService.GetExpression(assignmentExpression.Right);
+
+            // Handle the special add assignment (+=). We decided to treat it as if it was expanded (i.e. we will handle only the
+            // add part) and let the rest of the code handle the assignment part.
+            if (assignmentExpression.IsKind(SyntaxKind.AddAssignmentExpression))
+            {
+                instructions.AddRange(ProcessOperator(assignmentExpression, leftExpression, rightExpression));
+                // We might have created a new instruction so we need to make sure the rightExpression targets the new expression
+                rightExpression = expressionService.GetExpression(assignmentExpression);
+            }
 
             // handle left part of the assignment
             switch (leftExpression)
@@ -476,6 +471,30 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             }
 
             return instructions;
+        }
+
+        private IEnumerable<Instruction> ProcessOperator(SyntaxNode syntaxNode, UcfgExpression leftExpression,
+            UcfgExpression rightExpression)
+        {
+            var operatorMethodSymbol = GetSymbol<IMethodSymbol>(syntaxNode);
+            if (operatorMethodSymbol == null)
+            {
+                expressionService.Associate(syntaxNode, expressionService.CreateConstant());
+                return NoInstructions;
+            }
+
+            var isStringConcat = operatorMethodSymbol.MethodKind == MethodKind.BuiltinOperator &&
+                operatorMethodSymbol.Parameters.Length == 2 &&
+                operatorMethodSymbol.Name == "op_Addition" &&
+                operatorMethodSymbol.ContainingType.Is(KnownType.System_String);
+
+            if (isStringConcat)
+            {
+                return CreateConcatCall(syntaxNode, operatorMethodSymbol.ContainingType, leftExpression, rightExpression);
+            }
+
+            expressionService.Associate(syntaxNode, expressionService.CreateConstant());
+            return NoInstructions;
         }
 
         public IEnumerable<Instruction> CreateConcatCall(SyntaxNode syntaxNode, ITypeSymbol nodeTypeSymbol, UcfgExpression left,

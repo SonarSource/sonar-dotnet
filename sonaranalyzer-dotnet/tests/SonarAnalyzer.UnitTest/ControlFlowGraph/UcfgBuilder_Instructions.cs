@@ -1536,5 +1536,200 @@ namespace Namespace
 }";
             UcfgVerifier.VerifyInstructions(code, "Foo");
         }
+
+        [TestMethod]
+        public void AddAssignment_LocalVariable()
+        {
+            const string code = @"
+namespace Namespace
+{
+    public class Class1
+    {
+        public string fieldString;
+        public string PropertyString { get; set; }
+
+        public void Foo(string parameterString)
+        {
+            var localString = ""foo"";
+                // localString := __id [ const ]
+
+            localString += ""foo"";
+                // %0 := __concat [ localString const ]
+                // localString := __id [ %0 ]
+
+            localString += localString;
+                // %1 := __concat [ localString localString ]
+                // localString := __id [ %1 ]
+
+            localString += parameterString;
+                // %2 := __concat [ localString parameterString ]
+                // localString := __id [ %2 ]
+
+            localString += fieldString;
+                // %4 := __id [ this.fieldString ]
+                // %3 := __concat [ localString %4 ]
+                // localString := __id [ %3 ]
+
+            localString += PropertyString;
+                // %6 := Namespace.Class1.PropertyString.get [ this ]
+                // %5 := __concat [ localString %6 ]
+                // localString := __id [ %5 ]
+
+            Foo(localString += ""abc"");
+                // %7 := __concat [ localString const ]
+                // localString := __id [ %7 ]
+                // %8 := Namespace.Class1.Foo(string) [ this localString ]
+
+            localString += localString += localString += ""123"";
+                // %9 := __concat [ localString const ]
+                // localString := __id [ %9 ]
+                // %10 := __concat [ localString localString ]
+                // localString := __id [ %10 ]
+                // %11 := __concat [ localString localString ]
+                // localString := __id [ %11 ]
+        }
+    }
+}";
+            UcfgVerifier.VerifyInstructions(code, "Foo");
+        }
+
+        [TestMethod]
+        public void AddAssignment_Parameter()
+        {
+            const string code = @"
+namespace Namespace
+{
+    public class Class1
+    {
+        public string fieldString;
+        public string PropertyString { get; set; }
+
+        public void Foo(string parameterString)
+        {
+            var localString = ""foo"";
+                // localString := __id [ const ]
+
+            parameterString += ""foo"";
+                // %0 := __concat [ parameterString const ]
+                // parameterString := __id [ %0 ]
+
+            parameterString += localString;
+                // %1 := __concat [ parameterString localString ]
+                // parameterString := __id [ %1 ]
+
+            parameterString += parameterString;
+                // %2 := __concat [ parameterString parameterString ]
+                // parameterString := __id [ %2 ]
+
+            parameterString += fieldString;
+                // %4 := __id [ this.fieldString ]
+                // %3 := __concat [ parameterString %4 ]
+                // parameterString := __id [ %3 ]
+
+            parameterString += PropertyString;
+                // %6 := Namespace.Class1.PropertyString.get [ this ]
+                // %5 := __concat [ parameterString %6 ]
+                // parameterString := __id [ %5 ]
+        }
+    }
+}";
+            UcfgVerifier.VerifyInstructions(code, "Foo");
+        }
+
+        [TestMethod]
+        public void AddAssignment_Field()
+        {
+            const string code = @"
+namespace Namespace
+{
+    public class Class1
+    {
+        public string fieldString;
+        public string PropertyString { get; set; }
+
+        public void Foo(string parameterString)
+        {
+            var localString = ""foo"";
+                // localString := __id [ const ]
+
+            fieldString += ""foo"";
+                // %1 := __id [ this.fieldString ]
+                // %0 := __concat [ %1 const ]
+                // this.fieldString := __id [ %0 ]
+
+            fieldString += localString;
+                // %3 := __id [ this.fieldString ]
+                // %2 := __concat [ %3 localString ]
+                // this.fieldString := __id [ %2 ]
+
+            fieldString += parameterString;
+                // %5 := __id [ this.fieldString ]
+                // %4 := __concat [ %5 parameterString ]
+                // this.fieldString := __id [ %4 ]
+
+            fieldString += fieldString;
+                // %7 := __id [ this.fieldString ]
+                // %8 := __id [ this.fieldString ]
+                // %6 := __concat [ %7 %8 ]
+                // this.fieldString := __id [ %6 ]
+
+            fieldString += PropertyString;
+                // %10 := __id [ this.fieldString ]
+                // %11 := Namespace.Class1.PropertyString.get [ this ]
+                // %9 := __concat [ %10 %11 ]
+                // this.fieldString := __id [ %9 ]
+        }
+    }
+}";
+            UcfgVerifier.VerifyInstructions(code, "Foo");
+        }
+
+        [TestMethod]
+        public void AddAssignment_Property()
+        {
+            const string code = @"
+namespace Namespace
+{
+    public class Class1
+    {
+        public string fieldString;
+        public string PropertyString { get; set; }
+
+        public void Foo(string parameterString)
+        {
+            var localString = ""foo"";
+                // localString := __id [ const ]
+
+            PropertyString += ""foo"";
+                // %1 := Namespace.Class1.PropertyString.get [ this ]
+                // %0 := __concat [ %1 const ]
+                // %2 := Namespace.Class1.PropertyString.set [ this %0 ]
+
+            PropertyString += localString;
+                // %4 := Namespace.Class1.PropertyString.get [ this ]
+                // %3 := __concat [ %4 localString ]
+                // %5 := Namespace.Class1.PropertyString.set [ this %3 ]
+
+            PropertyString += parameterString;
+                // %7 := Namespace.Class1.PropertyString.get [ this ]
+                // %6 := __concat [ %7 parameterString ]
+                // %8 := Namespace.Class1.PropertyString.set [ this %6 ]
+
+            PropertyString += fieldString;
+                // %10 := Namespace.Class1.PropertyString.get [ this ]
+                // %11 := __id [ this.fieldString ]
+                // %9 := __concat [ %10 %11 ]
+                // %12 := Namespace.Class1.PropertyString.set [ this %9 ]
+
+            PropertyString += PropertyString;
+                // %14 := Namespace.Class1.PropertyString.get [ this ]
+                // %15 := Namespace.Class1.PropertyString.get [ this ]
+                // %13 := __concat [ %14 %15 ]
+                // %16 := Namespace.Class1.PropertyString.set [ this %13 ]
+        }
+    }
+}";
+            UcfgVerifier.VerifyInstructions(code, "Foo");
+        }
     }
 }
