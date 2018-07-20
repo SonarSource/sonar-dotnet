@@ -1266,26 +1266,34 @@ namespace Namespace
     {
         public void Foo(string s, string[] a, string[][] jagged, string[,] multi, List<string> list)
         {
-            a[0] = s;           // %0 := __arraySet [ a s ]
+            a[0] = s;
+                // %0 := __arraySet [ a s ]
 
-            ((a[0])) = s;       // %1 := __arraySet [ a s ]
+            ((a[0])) = s;
+                // %1 := __arraySet [ a s ]
 
-            jagged[0][0] = s;   // %3 := __arrayGet [ jagged ]
-                                // %2 := __arraySet [ %3 s ]
+            jagged[0][0] = s;
+                // %2 := __arrayGet [ jagged ]
+                // %3 := __arraySet [ jagged s ]
 
-            multi[0, 0] = s;    // %4 := __arraySet [ multi s ]
+            multi[0, 0] = s;
+                // %4 := __arraySet [ multi s ]
 
-            ((jagged[0]))[0] = s;   // %6 := __arrayGet [ jagged ]
-                                    // %5 := __arraySet [ %6 s ]
+            ((jagged[0]))[0] = s;
+                // %5 := __arrayGet [ jagged ]
+                // %6 := __arraySet [ jagged s ]
 
-            a[0] = a[1];        // %8 := __arrayGet [ a ]
-                                // %7 := __arraySet [ a %8 ]
+            a[0] = a[1];
+                // %7 := __arrayGet [ a ]
+                // %8 := __arraySet [ a %7 ]
 
             // Strings and lists have indexers but should not be handled as arrays;
             // until collection indexers are supported, the string and list element
-            // access is represented as constant
-            var c = s[0];       // c := __id [ const ]
-            var i = list[0];    // i := __id [ const ]
+            // access is represented as variable
+            var c = s[0];
+                // c := __id [ s ]
+            var i = list[0];
+                // i := __id [ list ]
         }
     }
 }";
@@ -1309,9 +1317,9 @@ namespace Namespace
             other.ArrayProperty[0].arrayField[1].stringField = s;
                 // %0 := Namespace.Class1.ArrayProperty.get [ other ]
                 // %1 := __arrayGet [ %0 ]
-                // %3 := __id [ %1.arrayField ]
-                // %2 := __arrayGet [ %3 ]
-                // %2.stringField := __id [ s ]
+                // %2 := __id [ %1.arrayField ]
+                // %3 := __arrayGet [ %2 ]
+                // %3.stringField := __id [ s ]
         }
     }
 }";
@@ -1574,14 +1582,14 @@ namespace Namespace
                 // localString := __id [ %2 ]
 
             localString += fieldString;
-                // %4 := __id [ this.fieldString ]
-                // %3 := __concat [ localString %4 ]
-                // localString := __id [ %3 ]
+                // %3 := __id [ this.fieldString ]
+                // %4 := __concat [ localString %3 ]
+                // localString := __id [ %4 ]
 
             localString += PropertyString;
-                // %6 := Namespace.Class1.PropertyString.get [ this ]
-                // %5 := __concat [ localString %6 ]
-                // localString := __id [ %5 ]
+                // %5 := Namespace.Class1.PropertyString.get [ this ]
+                // %6 := __concat [ localString %5 ]
+                // localString := __id [ %6 ]
 
             localString += localString += localString += ""123"";
                 // %7 := __concat [ localString const ]
@@ -1592,12 +1600,12 @@ namespace Namespace
                 // localString := __id [ %9 ]
 
             values[0] += Passthrough(localString += ""abc"");
-                // %10 := __concat [ localString const ]
-                // localString := __id [ %10 ]
-                // %11 := Namespace.Class1.Passthrough(string) [ this localString ]
-                // %13 := __arrayGet [ values ]
-                // %12 := __concat [ %13 %11 ]
-                // %14 := __arraySet [ values %12 ]
+                // %10 := __arrayGet [ values ]
+                // %11 := __concat [ localString const ]
+                // localString := __id [ %11 ]
+                // %12 := Namespace.Class1.Passthrough(string) [ this localString ]
+                // %13 := __concat [ %10 %12 ]
+                // %14 := __arraySet [ values %13 ]
         }
 
         public string Passthrough(string s) => s;
@@ -1636,14 +1644,14 @@ namespace Namespace
                 // parameterString := __id [ %2 ]
 
             parameterString += fieldString;
-                // %4 := __id [ this.fieldString ]
-                // %3 := __concat [ parameterString %4 ]
-                // parameterString := __id [ %3 ]
+                // %3 := __id [ this.fieldString ]
+                // %4 := __concat [ parameterString %3 ]
+                // parameterString := __id [ %4 ]
 
             parameterString += PropertyString;
-                // %6 := Namespace.Class1.PropertyString.get [ this ]
-                // %5 := __concat [ parameterString %6 ]
-                // parameterString := __id [ %5 ]
+                // %5 := Namespace.Class1.PropertyString.get [ this ]
+                // %6 := __concat [ parameterString %5 ]
+                // parameterString := __id [ %6 ]
 
             parameterString += parameterString += parameterString += ""123"";
                 // %7 := __concat [ parameterString const ]
@@ -1654,12 +1662,12 @@ namespace Namespace
                 // parameterString := __id [ %9 ]
 
             values[0] += Passthrough(parameterString += ""abc"");
-                // %10 := __concat [ parameterString const ]
-                // parameterString := __id [ %10 ]
-                // %11 := Namespace.Class1.Passthrough(string) [ this parameterString ]
-                // %13 := __arrayGet [ values ]
-                // %12 := __concat [ %13 %11 ]
-                // %14 := __arraySet [ values %12 ]
+                // %10 := __arrayGet [ values ]
+                // %11 := __concat [ parameterString const ]
+                // parameterString := __id [ %11 ]
+                // %12 := Namespace.Class1.Passthrough(string) [ this parameterString ]
+                // %13 := __concat [ %10 %12 ]
+                // %14 := __arraySet [ values %13 ]
         }
 
         public string Passthrough(string s) => s;
@@ -1685,31 +1693,31 @@ namespace Namespace
                 // localString := __id [ const ]
 
             fieldString += (((""foo"")));
-                // %1 := __id [ this.fieldString ]
-                // %0 := __concat [ %1 const ]
-                // this.fieldString := __id [ %0 ]
+                // %0 := __id [ this.fieldString ]
+                // %1 := __concat [ %0 const ]
+                // this.fieldString := __id [ %1 ]
 
             fieldString += localString;
-                // %3 := __id [ this.fieldString ]
-                // %2 := __concat [ %3 localString ]
-                // this.fieldString := __id [ %2 ]
+                // %2 := __id [ this.fieldString ]
+                // %3 := __concat [ %2 localString ]
+                // this.fieldString := __id [ %3 ]
 
             fieldString += parameterString;
-                // %5 := __id [ this.fieldString ]
-                // %4 := __concat [ %5 parameterString ]
-                // this.fieldString := __id [ %4 ]
+                // %4 := __id [ this.fieldString ]
+                // %5 := __concat [ %4 parameterString ]
+                // this.fieldString := __id [ %5 ]
 
             fieldString += fieldString;
+                // %6 := __id [ this.fieldString ]
                 // %7 := __id [ this.fieldString ]
-                // %8 := __id [ this.fieldString ]
-                // %6 := __concat [ %7 %8 ]
-                // this.fieldString := __id [ %6 ]
+                // %8 := __concat [ %6 %7 ]
+                // this.fieldString := __id [ %8 ]
 
             fieldString += PropertyString;
-                // %10 := __id [ this.fieldString ]
-                // %11 := Namespace.Class1.PropertyString.get [ this ]
-                // %9 := __concat [ %10 %11 ]
-                // this.fieldString := __id [ %9 ]
+                // %9 := __id [ this.fieldString ]
+                // %10 := Namespace.Class1.PropertyString.get [ this ]
+                // %11 := __concat [ %9 %10 ]
+                // this.fieldString := __id [ %11 ]
 
             fieldString += fieldString += fieldString += ""123"";
                 // %13 := __id [ this.fieldString ]
@@ -1758,51 +1766,51 @@ namespace Namespace
                 // localString := __id [ const ]
 
             PropertyString += (((""foo"")));
-                // %1 := Namespace.Class1.PropertyString.get [ this ]
-                // %0 := __concat [ %1 const ]
-                // %2 := Namespace.Class1.PropertyString.set [ this %0 ]
+                // %0 := Namespace.Class1.PropertyString.get [ this ]
+                // %1 := __concat [ %0 const ]
+                // %2 := Namespace.Class1.PropertyString.set [ this %1 ]
 
             PropertyString += localString;
-                // %4 := Namespace.Class1.PropertyString.get [ this ]
-                // %3 := __concat [ %4 localString ]
-                // %5 := Namespace.Class1.PropertyString.set [ this %3 ]
+                // %3 := Namespace.Class1.PropertyString.get [ this ]
+                // %4 := __concat [ %3 localString ]
+                // %5 := Namespace.Class1.PropertyString.set [ this %4 ]
 
             PropertyString += parameterString;
-                // %7 := Namespace.Class1.PropertyString.get [ this ]
-                // %6 := __concat [ %7 parameterString ]
-                // %8 := Namespace.Class1.PropertyString.set [ this %6 ]
+                // %6 := Namespace.Class1.PropertyString.get [ this ]
+                // %7 := __concat [ %6 parameterString ]
+                // %8 := Namespace.Class1.PropertyString.set [ this %7 ]
 
             PropertyString += fieldString;
-                // %10 := Namespace.Class1.PropertyString.get [ this ]
-                // %11 := __id [ this.fieldString ]
-                // %9 := __concat [ %10 %11 ]
-                // %12 := Namespace.Class1.PropertyString.set [ this %9 ]
+                // %9 := Namespace.Class1.PropertyString.get [ this ]
+                // %10 := __id [ this.fieldString ]
+                // %11 := __concat [ %9 %10 ]
+                // %12 := Namespace.Class1.PropertyString.set [ this %11 ]
 
             PropertyString += PropertyString;
+                // %13 := Namespace.Class1.PropertyString.get [ this ]
                 // %14 := Namespace.Class1.PropertyString.get [ this ]
-                // %15 := Namespace.Class1.PropertyString.get [ this ]
-                // %13 := __concat [ %14 %15 ]
-                // %16 := Namespace.Class1.PropertyString.set [ this %13 ]
+                // %15 := __concat [ %13 %14 ]
+                // %16 := Namespace.Class1.PropertyString.set [ this %15 ]
 
             PropertyString += PropertyString += PropertyString += ""123"";
+                // %17 := Namespace.Class1.PropertyString.get [ this ]
                 // %18 := Namespace.Class1.PropertyString.get [ this ]
-                // %17 := __concat [ %18 const ]
-                // %19 := Namespace.Class1.PropertyString.set [ this %17 ]
-                // %21 := Namespace.Class1.PropertyString.get [ this ]
-                // %20 := __concat [ %21 %19 ]
-                // %22 := Namespace.Class1.PropertyString.set [ this %20 ]
-                // %24 := Namespace.Class1.PropertyString.get [ this ]
-                // %23 := __concat [ %24 %22 ]
-                // %25 := Namespace.Class1.PropertyString.set [ this %23 ]
+                // %19 := Namespace.Class1.PropertyString.get [ this ]
+                // %20 := __concat [ %19 const ]
+                // %21 := Namespace.Class1.PropertyString.set [ this %20 ]
+                // %22 := __concat [ %18 %21 ]
+                // %23 := Namespace.Class1.PropertyString.set [ this %22 ]
+                // %24 := __concat [ %17 %23 ]
+                // %25 := Namespace.Class1.PropertyString.set [ this %24 ]
 
             values[0] += Passthrough(PropertyString += ""abc"");
+                // %26 := __arrayGet [ values ]
                 // %27 := Namespace.Class1.PropertyString.get [ this ]
-                // %26 := __concat [ %27 const ]
-                // %28 := Namespace.Class1.PropertyString.set [ this %26 ]
-                // %29 := Namespace.Class1.Passthrough(string) [ this %28 ]
-                // %31 := __arrayGet [ values ]
-                // %30 := __concat [ %31 %29 ]
-                // %32 := __arraySet [ values %30 ]
+                // %28 := __concat [ %27 const ]
+                // %29 := Namespace.Class1.PropertyString.set [ this %28 ]
+                // %30 := Namespace.Class1.Passthrough(string) [ this %29 ]
+                // %31 := __concat [ %26 %30 ]
+                // %32 := __arraySet [ values %31 ]
         }
 
         public string Passthrough(string s) => s;

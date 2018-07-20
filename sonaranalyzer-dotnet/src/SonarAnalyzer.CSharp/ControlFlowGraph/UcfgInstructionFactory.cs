@@ -265,9 +265,9 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
 
         private IEnumerable<Instruction> ProcessReadSyntaxNode(SyntaxNode syntaxNode)
         {
-            if (syntaxNode.Parent is AssignmentExpressionSyntax assignmentSyntax &&
+            if (syntaxNode.GetSelfOrTopParenthesizedExpression().Parent is AssignmentExpressionSyntax assignmentSyntax &&
                 assignmentSyntax.IsKind(SyntaxKind.SimpleAssignmentExpression) &&
-                assignmentSyntax.Left == syntaxNode)
+                assignmentSyntax.Left.RemoveParentheses() == syntaxNode)
             {
                 return NoInstructions;
             }
@@ -318,7 +318,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
 
             while (currentNode is ElementAccessExpressionSyntax elementAccess)
             {
-                currentNode = elementAccess.Expression;
+                currentNode = elementAccess.Expression.RemoveParentheses();
             }
 
             return this.semanticModel.GetSymbolInfo(currentNode).Symbol;
@@ -361,10 +361,12 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                 return expressionService.GetOrDefault(elementAccessExpressionSyntax.Expression);
             }
 
-            if (syntaxNode.Parent is AssignmentExpressionSyntax assignmentExpressionSyntax &&
-                assignmentExpressionSyntax.Parent is InitializerExpressionSyntax initializerExpressionSyntax)
+            if (syntaxNode.GetSelfOrTopParenthesizedExpression().Parent
+                    is AssignmentExpressionSyntax assignmentExpressionSyntax &&
+                assignmentExpressionSyntax.GetSelfOrTopParenthesizedExpression().Parent
+                    is InitializerExpressionSyntax initializerExpressionSyntax)
             {
-                return expressionService.GetOrDefault(initializerExpressionSyntax.Parent);
+                return expressionService.GetOrDefault(initializerExpressionSyntax.GetSelfOrTopParenthesizedExpression().Parent);
             }
 
             if (!nodeSymbol.IsStatic)
@@ -394,6 +396,8 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             var leftExpression = expressionService.GetOrDefault(assignmentExpression.Left);
             var rightExpression = expressionService.GetOrDefault(assignmentExpression.Right);
 
+            var shouldCreateLeftSide = leftExpression == UcfgExpressionService.UnknownExpression;
+
             // Because of the current shape of the CFG, if the left part of the assignment is field, local variable or
             // parameter and wasn't used before in the code, it won't have been already processed so we have to force the
             // creation of the right kind of instruction/expression
@@ -412,8 +416,10 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                 // 2. Generate the operator call instruction
                 instructions.AddRange(BuildOperatorCall(assignmentExpression, leftExpression, rightExpression));
                 rightExpression = expressionService.GetOrDefault(assignmentExpression);
+                shouldCreateLeftSide = true;
             }
-            else if (leftExpression == UcfgExpressionService.UnknownExpression)
+
+            if (shouldCreateLeftSide)
             {
                 if (leftPartSymbol is IFieldSymbol fieldSymbol)
                 {
@@ -430,10 +436,6 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                 }
 
                 expressionService.Associate(assignmentExpression.Left, leftExpression);
-            }
-            else
-            {
-                // nothing
             }
 
             // handle left part of the assignment
@@ -503,7 +505,8 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             Expression targetExpression;
             if (IsCalledAsExtension(methodSymbol))
             {
-                if (invocationSyntax.Expression is MemberAccessExpressionSyntax memberAccessExpression)
+                var unparenthesisedExpression = invocationSyntax.Expression.RemoveParentheses();
+                if (unparenthesisedExpression is MemberAccessExpressionSyntax memberAccessExpression)
                 {
                     // First argument is the class name (static method call)
                     targetExpression = expressionService.CreateClassName(methodSymbol.ContainingType);
