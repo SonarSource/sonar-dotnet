@@ -1264,7 +1264,7 @@ namespace Namespace
 {
     public class Class1
     {
-        public void Foo(string s, string[] a, string[][] jagged, string[,] multi, List<string> list)
+        public void Foo(string s, string[] a, string[][] jagged, string[,] multi)
         {
             a[0] = s;
                 // %0 := __arraySet [ a s ]
@@ -1286,14 +1286,6 @@ namespace Namespace
             a[0] = a[1];
                 // %7 := __arrayGet [ a ]
                 // %8 := __arraySet [ a %7 ]
-
-            // Strings and lists have indexers but should not be handled as arrays;
-            // until collection indexers are supported, the string and list element
-            // access is represented as variable
-            var c = s[0];
-                // c := __id [ s ]
-            var i = list[0];
-                // i := __id [ list ]
         }
     }
 }";
