@@ -36,7 +36,7 @@ namespace SonarAnalyzer.UnitTest.ControlFlowGraph
             "this";
 
         public static string ToTestString(this Constant constant) =>
-            constant.Value == UcfgExpression.ConstantExpression.DefaultValue ? "const" : constant.Value;
+            constant.Value == UcfgExpressionService.DefaultConstantValue ? "const" : constant.Value;
 
         public static string ToTestString(this ClassName className) =>
             className.Classname;

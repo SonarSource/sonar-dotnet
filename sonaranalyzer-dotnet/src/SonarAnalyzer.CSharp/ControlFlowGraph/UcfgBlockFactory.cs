@@ -51,8 +51,8 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                 {
                     Location = returnStatement.GetUcfgLocation(),
                     ReturnedExpression = returnStatement.Expression != null
-                        ? expressionService.GetExpression(returnStatement.Expression).Expression
-                        : expressionService.CreateConstant().Expression
+                        ? expressionService.GetOrDefault(returnStatement.Expression)
+                        : expressionService.CreateConstant()
                 };
             }
 
@@ -61,7 +61,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                 ucfgBlock.Ret = new Return
                 {
                     Location = null,
-                    ReturnedExpression = expressionService.CreateConstant().Expression
+                    ReturnedExpression = expressionService.CreateConstant()
                 };
             }
 

@@ -19,76 +19,68 @@
  */
 
 using System.Collections.Generic;
-using System.Linq;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.Protobuf.Ucfg;
 
 namespace SonarAnalyzer.ControlFlowGraph.CSharp
 {
     internal class UcfgExpressionService
     {
-        private static readonly ISet<KnownType> UnsupportedVariableTypes = new[] { KnownType.System_Boolean }
-            .Union(KnownType.IntegralNumbers)
-            .Union(KnownType.NonIntegralNumbers)
-            .Union(KnownType.PointerTypes)
-            .ToHashSet();
+        internal const string DefaultConstantValue = "\"\"";
+        internal static readonly Expression UnknownExpression = new Expression { Const = new Constant { Value = "{unknown}" } };
 
-        private readonly Dictionary<SyntaxNode, UcfgExpression> cache
-            = new Dictionary<SyntaxNode, UcfgExpression>();
+        public readonly Dictionary<SyntaxNode, Expression> cache
+            = new Dictionary<SyntaxNode, Expression>();
 
         private int numberedVariableCounter;
 
-        public void Associate(SyntaxNode syntaxNode, UcfgExpression expression) =>
+        public Expression This { get; } = new Expression { This = new This() };
+
+        public void Associate(SyntaxNode syntaxNode, Expression expression) =>
             cache[syntaxNode.RemoveParentheses()] = expression;
 
-        public UcfgExpression GetExpression(SyntaxNode syntaxNode) =>
-            cache.GetValueOrDefault(syntaxNode.RemoveParentheses(), UcfgExpression.Unknown);
+        public Expression GetOrDefault(SyntaxNode syntaxNode) =>
+            cache.GetValueOrDefault(syntaxNode.RemoveParentheses(), UnknownExpression);
 
-        public UcfgExpression CreateVariable(ITypeSymbol returnType) =>
-            new UcfgExpression.VariableExpression($"%{numberedVariableCounter++}", returnType);
+        public Expression CreateVariable(string variableName = null) =>
+            new Expression { Var = new Variable { Name = variableName ?? $"%{numberedVariableCounter++}" } };
 
-        public UcfgExpression CreateClassName(INamedTypeSymbol namedTypeSymbol) =>
-            new UcfgExpression.ClassNameExpression(namedTypeSymbol);
+        public Expression CreateConstant(string value = DefaultConstantValue) =>
+            new Expression { Const = new Constant { Value = value } };
 
-        public UcfgExpression CreateConstant(IMethodSymbol methodSymbol) =>
-            new UcfgExpression.ConstantExpression(methodSymbol);
-
-        public UcfgExpression CreateConstant(ITypeSymbol typeSymbol = null) =>
-            new UcfgExpression.ConstantExpression(typeSymbol);
-
-        public UcfgExpression CreateArrayAccess(ISymbol symbol, UcfgExpression targetExpression) =>
-            new UcfgExpression.ElementAccessExpression(symbol, targetExpression);
-
-        public UcfgExpression Create(SyntaxNode node, ISymbol symbol, UcfgExpression targetExpression)
-        {
-            switch (symbol)
+        public Expression CreateClassName(INamedTypeSymbol namedTypeSymbol) =>
+            new Expression
             {
-                case null:
-                    return UcfgExpression.Unknown;
+                Classname = new ClassName
+                {
+                    Classname = namedTypeSymbol?.ConstructedFrom.ToDisplayString() ?? UcfgBuiltInMethodId.Unknown
+                }
+            };
 
-                case IParameterSymbol parameterSymbol:
-                    return parameterSymbol.Type.IsAny(UnsupportedVariableTypes)
-                        ? (UcfgExpression)new UcfgExpression.ConstantExpression(parameterSymbol)
-                        : new UcfgExpression.VariableExpression(parameterSymbol, node);
+        public Expression CreateFieldAccess(string fieldName, Expression target)
+        {
+            var expression = new Expression { FieldAccess = new FieldAccess { Field = new Variable { Name = fieldName } } };
 
-                case ILocalSymbol localSymbol:
-                    return new UcfgExpression.VariableExpression(symbol, node);
+            switch (target.ExprCase)
+            {
+                case Expression.ExprOneofCase.Var:
+                    expression.FieldAccess.Object = target.Var;
+                    break;
 
-                case IFieldSymbol fieldSymbol:
-                    return new UcfgExpression.FieldAccessExpression(fieldSymbol, node, targetExpression);
+                case Expression.ExprOneofCase.This:
+                    expression.FieldAccess.This = target.This;
+                    break;
 
-                case IPropertySymbol propertySymbol:
-                    return new UcfgExpression.PropertyAccessExpression(propertySymbol, node, targetExpression);
-
-                case INamedTypeSymbol namedTypeSymbol:
-                    return CreateClassName(namedTypeSymbol);
-
-                case IMethodSymbol methodSymbol:
-                    return new UcfgExpression.MethodAccessExpression(methodSymbol, node, targetExpression);
+                case Expression.ExprOneofCase.Classname:
+                    expression.FieldAccess.Classname = target.Classname;
+                    break;
 
                 default:
-                    throw new UcfgException($"Create UcfgExpression does not expect symbol of type '{symbol.GetType().Name}'.");
+                    throw new UcfgException("Invalid target");
             }
+
+            return expression;
         }
     }
 }
