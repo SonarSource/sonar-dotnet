@@ -1652,12 +1652,13 @@ namespace Namespace
                 // dyn := __id [ const ]
 
             if (dyn.User != null)
+                // %0 := dynamic.operator !=(dynamic, dynamic) [ __unknown const const ]
             {
                 return ""bar"";
             }
 
             return c.ToString();
-                // %0 := object.ToString() [ c ]
+                // %1 := object.ToString() [ c ]
         }
     }
 }";
@@ -1930,20 +1931,15 @@ namespace Namespace
         }
 
         [TestMethod]
-        public void NonConcat_BinaryExpressions_AreIgnored()
+        public void AssignmentOperator_UnsupportedTypes()
         {
             const string code = @"
 namespace Namespace
 {
     public class Class1
     {
-        public void Foo(string parameterString)
+        public void Foo()
         {
-            var result = parameterString == null;
-                // result := __id [ const ]
-            result = parameterString != null;
-                // result := __id [ const ]
-
             var i = 42 + 1;
                 // i := __id [ const ]
             i += 1;
@@ -1961,6 +1957,73 @@ namespace Namespace
         }
 
         [TestMethod]
+        public void Operator_UnsupportedTypes()
+        {
+            const string code = @"
+namespace Namespace
+{
+    public class Class1
+    {
+        public void Foo()
+        {
+            int x;
+            double d;
+
+            x = 1 + 2;
+                // x := __id [ const ]
+            x = 1 - 2;
+                // x := __id [ const ]
+            x = 1 * 2;
+                // x := __id [ const ]
+            x = 1 / 2;
+                // x := __id [ const ]
+
+            d = 1.0 / 2;
+                // d := __id [ const ]
+        }
+    }
+}";
+            UcfgVerifier.VerifyInstructions(code, "Foo");
+        }
+
+        [TestMethod]
+        public void Operator_SupportedTypes()
+        {
+            const string code = @"
+namespace Namespace
+{
+    public class Class1
+    {
+        public void Foo(string parameterString, Class1 some, Class1 other)
+        {
+            var result = parameterString == null;
+                // %0 := string.operator ==(string, string) [ string parameterString const ]
+                // result := __id [ %0 ]
+
+            result = parameterString != null;
+                // %1 := string.operator !=(string, string) [ string parameterString const ]
+                // result := __id [ %1 ]
+
+            Class1 classResult = some + other;
+                // %2 := Namespace.Class1.operator +(Namespace.Class1, Namespace.Class1) [ Namespace.Class1 some other ]
+                // classResult := __id [ %2 ]
+
+            classResult = classResult + some + other;
+                // %3 := Namespace.Class1.operator +(Namespace.Class1, Namespace.Class1) [ Namespace.Class1 classResult some ]
+                // %4 := Namespace.Class1.operator +(Namespace.Class1, Namespace.Class1) [ Namespace.Class1 %3 other ]
+                // classResult := __id [ %4 ]
+        }
+
+        public static Class1 operator+ (Class1 left, Class1 right)
+        {
+            return null;
+        }
+    }
+}";
+            UcfgVerifier.VerifyInstructions(code, "Foo");
+        }
+
+            [TestMethod]
         public void UnaryExpressions_AreIgnored()
         {
             const string code = @"
