@@ -19,6 +19,7 @@
  */
 
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -54,6 +55,15 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
 
         public IEnumerable<Instruction> CreateFrom(SyntaxNode syntaxNode)
         {
+            // We might need to process some nodes in a different order from the block builder
+            // supplies them e.g. an array creation can have an initializer that creates a new
+            // object. In that case, we need to process the new object creation as part of the
+            // array creation, and ignore that syntax node when the block builder supplies it later.
+            if (expressionService.IsAlreadyProcessed(syntaxNode))
+            {
+                return NoInstructions;
+            }
+
             switch (syntaxNode)
             {
                 // ========================================================================
@@ -64,6 +74,9 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
 
                 case ArrayCreationExpressionSyntax arrayCreation:
                     return ProcessArrayCreation(arrayCreation);
+
+                case ImplicitArrayCreationExpressionSyntax implicitArray:
+                    return ProcessImplicitArrayCreation(implicitArray);
 
                 // ========================================================================
                 // Association
@@ -242,6 +255,21 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             return new[] { newObjectInstruction };
         }
 
+        private IEnumerable<Instruction> BuildNewArrayInstance(ExpressionSyntax syntaxNode,
+            IArrayTypeSymbol arrayTypeSymbol,
+            InitializerExpressionSyntax arrayInitializationNode)
+        {
+            var newInstructions = new List<Instruction>();
+            newInstructions.AddRange(BuildNewInstance(syntaxNode, arrayTypeSymbol));
+
+            var callTarget = expressionService.GetOrDefault(syntaxNode);
+
+            var n = ProcessArrayInitializer(arrayInitializationNode, arrayTypeSymbol, callTarget);
+            newInstructions.AddRange(n);
+
+            return newInstructions;
+        }
+
         private IEnumerable<Instruction> BuildOperatorCall(SyntaxNode syntaxNode, Expression leftExpression,
             Expression rightExpression)
         {
@@ -373,10 +401,63 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             return expressionService.CreateClassName(nodeSymbol.ContainingType);
         }
 
-        private IEnumerable<Instruction> ProcessArrayCreation(ArrayCreationExpressionSyntax arrayCreation)
+        private IEnumerable<Instruction> ProcessArrayCreation(ArrayCreationExpressionSyntax arrayCreationExpression)
         {
-            var arrayTypeSymbol = semanticModel.GetTypeInfo(arrayCreation).Type as IArrayTypeSymbol;
-            return BuildNewInstance(arrayCreation, arrayTypeSymbol);
+            var typeInfo = semanticModel.GetTypeInfo(arrayCreationExpression);
+            var arrayTypeSymbol = typeInfo.Type as IArrayTypeSymbol ??
+                typeInfo.ConvertedType as IArrayTypeSymbol;
+
+            if (arrayTypeSymbol == null)
+            {
+                expressionService.Associate(arrayCreationExpression, expressionService.CreateConstant());
+                return NoInstructions;
+            }
+
+            // A call that constructs an array should look like: var x = new string[42]
+            // %0 := new string[]       // <-- created by this method
+            // x = __id [ %0 ]          // <-- created by the method that handles the assignment
+            return BuildNewArrayInstance(arrayCreationExpression, arrayTypeSymbol, arrayCreationExpression.Initializer);
+        }
+
+        private IEnumerable<Instruction> ProcessImplicitArrayCreation(ImplicitArrayCreationExpressionSyntax implicitArrayExpression)
+        {
+            // e.g. string[] a2 = new[] { data, data };
+            // Need to look at the CovertedType in this case
+            var arrayType = this.semanticModel.GetTypeInfo(implicitArrayExpression).ConvertedType as IArrayTypeSymbol;
+            if (arrayType == null)
+            {
+                expressionService.Associate(implicitArrayExpression, expressionService.CreateConstant());
+                return NoInstructions;
+            }
+
+            return BuildNewArrayInstance(implicitArrayExpression, arrayType, implicitArrayExpression.Initializer);
+        }
+
+        private IEnumerable<Instruction> ProcessArrayInitializer(InitializerExpressionSyntax initializerExpression,
+            IArrayTypeSymbol arrayTypeSymbol, Expression target)
+        {
+            if (initializerExpression == null)
+            {
+                return NoInstructions;
+            }
+
+            var newInstructions = new List<Instruction>();
+            foreach (ExpressionSyntax expNode in initializerExpression.Expressions)
+            {
+                // Some of the syntax nodes might already have been processed (e.g. the identifier names)
+                // Process any that have not already been processed.
+                var initializerArg = expressionService.GetOrDefault(expNode);
+                if (initializerArg == UcfgExpressionService.UnknownExpression)
+                {
+                    var argInstructions = CreateFrom(expNode);
+                    newInstructions.AddRange(argInstructions);
+                    initializerArg = expressionService.GetOrDefault(expNode);
+                }
+
+                var arraySetInstructions = BuildArraySetCall(expNode, target, initializerArg);
+                newInstructions.AddRange(arraySetInstructions);
+            }
+            return newInstructions;
         }
 
         private IEnumerable<Instruction> ProcessAssignmentExpression(AssignmentExpressionSyntax assignmentExpression)
@@ -630,8 +711,21 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                 return NoInstructions;
             }
 
-            return BuildIdentityCall(variableDeclarator, expressionService.CreateVariable(variableDeclarator.Identifier.Text),
-                expressionService.GetOrDefault(variableDeclarator.Initializer.Value));
+            // Handle the case "string[] a1 = { data, };"
+            var instructions = NoInstructions;
+            if (variableDeclarator.Initializer.Value.IsKind(SyntaxKind.ArrayInitializerExpression) &&
+                variableDeclarator.Initializer.Value is InitializerExpressionSyntax initializerExpressionSyntax &&
+                // Note: we need to use the ConvertedType here (i.e. after the implicit conversion): the Type
+                // returned is null because it isn't specified.
+                semanticModel.GetTypeInfo(initializerExpressionSyntax).ConvertedType is IArrayTypeSymbol arrayType)
+            {
+                instructions = BuildNewArrayInstance(variableDeclarator.Initializer.Value,
+                    arrayType, initializerExpressionSyntax);
+            }
+
+            return instructions.Concat(
+                BuildIdentityCall(variableDeclarator, expressionService.CreateVariable(variableDeclarator.Identifier.Text),
+                expressionService.GetOrDefault(variableDeclarator.Initializer.Value)));
         }
 
         private Expression SimplifyFunctionExpression(SyntaxNode node, Expression expression, List<Instruction> instructions)

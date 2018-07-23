@@ -167,34 +167,37 @@ namespace Namespace
                 // %2 := new int[*,*]
                 // localMultiDimArray := __id [ %2 ]
 
-            // Array with initializer (initializer is ignored currently - issue #161)
+            // Array with initializer
             var localArrayInit = new string[] { ""aaa"", ""bbb"", ""ccc"" };
                 // %3 := new string[]
+                // %4 := __arraySet [ %3 const ]
+                // %5 := __arraySet [ %3 const ]
+                // %6 := __arraySet [ %3 const ]
                 // localArrayInit := __id [ %3 ]
 
             ArrayProperty = new Class1[1];
-                // %4 := new Namespace.Class1[]
-                // %5 := Namespace.Class1.ArrayProperty.set [ this %4 ]
+                // %7 := new Namespace.Class1[]
+                // %8 := Namespace.Class1.ArrayProperty.set [ this %7 ]
 
             ArrayProperty[1] = new Class1();
-                // %6 := Namespace.Class1.ArrayProperty.get [ this ]
-                // %7 := new Namespace.Class1
-                // %8 := Namespace.Class1.Class1() [ %7 ]
-                // %9 := __arraySet [ %6 %7 ]
+                // %9 := Namespace.Class1.ArrayProperty.get [ this ]
+                // %10 := new Namespace.Class1
+                // %11 := Namespace.Class1.Class1() [ %10 ]
+                // %12 := __arraySet [ %9 %10 ]
 
             arrayField = new Class1[1];
-                // %10 := new Namespace.Class1[]
-                // this.arrayField := __id [ %10 ]
+                // %13 := new Namespace.Class1[]
+                // this.arrayField := __id [ %13 ]
 
             arrayField[0] = new Class1();
-                // %11 := __id [ this.arrayField ]
-                // %12 := new Namespace.Class1
-                // %13 := Namespace.Class1.Class1() [ %12 ]
-                // %14 := __arraySet [ %11 %12 ]
+                // %14 := __id [ this.arrayField ]
+                // %15 := new Namespace.Class1
+                // %16 := Namespace.Class1.Class1() [ %15 ]
+                // %17 := __arraySet [ %14 %15 ]
 
             Bar(new Class1[1]);
-                // %15 := new Namespace.Class1[]
-                // %16 := Namespace.Class1.Bar(Namespace.Class1[]) [ this %15 ]
+                // %18 := new Namespace.Class1[]
+                // %19 := Namespace.Class1.Bar(Namespace.Class1[]) [ this %18 ]
         }
 
         public void Bar(Class1[] array) {}
@@ -274,37 +277,6 @@ namespace Namespace
                 // %6 := new int[]
                 // %7 := __arraySet [ %6 const ]
                 // a4 := __id [ %6 ]
-        }
-    }
-}";
-            UcfgVerifier.VerifyInstructions(code, "Foo");
-        }
-        
-        [TestMethod]
-        public void ArrayCreation_WIP()
-        {
-            const string code = @"
-namespace Namespace
-{
-    public class Class1
-    {
-        public void Foo(int intdata1, int intdata2)
-        {
-            int[,] intMulti2 = new int[,]
-            {
-                { 1, 2 }, { intdata1, intdata2 }
-            };
-// %0 := new int[*,*]
-// %1 := new int[*,*]
-// %2 := __arraySet [ %1 const ] 
-// %3 := __arraySet [ %1 const ] 
-// %4 := __arraySet [ %0 %1 ]
-// %5 := new int[*,*]
-// %6 := __arraySet [ %5 const ] 
-// %7 := __arraySet [ %5 const ] 
-// %8 := __arraySet [ %0 %5 ]
-// %10 := __arraySet [%0 %4]
-// %11 := __arraySet [%0 %8]
         }
     }
 }";
@@ -545,7 +517,7 @@ namespace Namespace
                 // %0 := new int[]
                 // this.IntField := __id [ %0 ]
 
-            StringField = new string[2] { "", data };
+            StringField = new string[2] { ""123"", data };
                 // %1 := new string[]
                 // %2 := __arraySet [ %1 const ]
                 // %3 := __arraySet [ %1 data ]
@@ -593,22 +565,19 @@ namespace Namespace
 
             StringProperty = new string[] { data };
                 // %3 := new string[]
-                // %4 := __arraySet [ %3 const ]
+                // %4 := __arraySet [ %3 data ]
                 // %5 := Namespace.Class1.StringProperty.set [ this %3 ]
 
 
             Class1Property = new Class1[3];
                 // %6 := new Namespace.Class1[]
-                // %5 := Namespace.Class1.Class1Property.set [ %3 __unknown ]
-                // %6 := __arraySet [ %3 %5 ]
-                // %8 := Namespace.Class1.Class1Property.set [ %3 %7 ]
+                // %7 := Namespace.Class1.Class1Property.set [ this %6 ]
 
             Class1Property = new Class1[2] { null, this };
-                // %9 := Namespace.Class1.StringProperty.set [ this %3 ]
-                // %10 := new Namespace.Class1[]
-                // %11 := __arraySet [ %10 const ]
-                // %12 := __arraySet [ %10 this ]
-                // %13 := Namespace.Class1.Class1Property.set [ this %10 ]
+                // %8 := new Namespace.Class1[]
+                // %9 := __arraySet [ %8 const ]
+                // %10 := __arraySet [ %8 this ]
+                // %11 := Namespace.Class1.Class1Property.set [ this %8 ]
         }
 
         private int[] IntProperty { get; set;} 
@@ -654,7 +623,7 @@ namespace Namespace
         }
         
         [TestMethod]
-        public void ArrayCreation_New_Jagged_TODO_duplicates()
+        public void ArrayCreation_New_Jagged()
         {
             const string code = @"
 namespace Namespace
@@ -755,50 +724,40 @@ namespace Namespace
                 { 1, 2 }, { intdata1, intdata2 }
             };
                 // %1 := new int[*,*]
-                // %2 := new int[]
-                // %3 := __arraySet [ %2 const ]
-                // %4 := __arraySet [ %2 const ]
-                // %5 := __arraySet [ %1 %2 ]
-                // %6 := new int[]
-                // %7 := __arraySet [ %6 intdata1 ]
-                // %8 := __arraySet [ %6 intdata2 ]
-                // %9 := __arraySet [ %1 %6 ]
-                // intMulti2 := __id [ %9 ]
-
+                // %2 := __arraySet [ %1 const ]            <-- TODO should handle the nested array initializers
+                // %3 := __arraySet [ %1 const ]
+                // intMulti2 := __id [ %1 ]
 
             string[,] stringMulti1 = new string[1, 2];
-                // %5 := new string[*,*]
-                // stringMulti1 := __id [ %5 ]
+                // %4 := new string[*,*]
+                // stringMulti1 := __id [ %4 ]
 
             string[,] stringMulti2 = new string[,]
             {
                 { stringdata1, stringdata2 }, { null, "" }
             };
-
-                // %6 := new string[*,*]
-                // %7 := __arraySet [ %6 TODO ]
-                // %8 := __arraySet [ %6 TODO ]
-                // stringMulti2 := __id [ %6 ]
+                // %5 := new string[*,*]
+                // %6 := __arraySet [ %5 const ]
+                // %7 := __arraySet [ %5 const ]
+                // stringMulti2 := __id [ %5 ]
 
             Class1[,] class1Multi1 = new Class1[1, 2];
-                // %9 := new Namespace.Class1[*,*]
-                // class1Multi1 := __id [ %9 ]
+                // %8 := new Namespace.Class1[*,*]
+                // class1Multi1 := __id [ %8 ]
 
             Class1[,] class1Multi2 = new Class1[,]
             {
                 { objdata2, objdata1}, { null, new Class1() }
             };
-                // %10 := new Namespace.Class1[*,*]
-                // %11 := __arraySet [ %10 TODO ]
-                // %12 := __arraySet [ %10 TODO ]
-                // %13 := new Namespace.Class1
-                // %14 := Namespace.Class1.Class1() [ %13 ]
-                // class1Multi2 := __id [ %10 ]
-        }
+                // %9 := new Namespace.Class1[*,*]
+                // %10 := __arraySet [ %9 const ]
+                // %11 := __arraySet [ %9 const ]
+                // %12 := new Namespace.Class1
+                // %13 := Namespace.Class1.Class1() [ %12 ]
+                // class1Multi2 := __id [ %9 ]        }
     }
 }";
             UcfgVerifier.VerifyInstructions(code, "Foo");
         }
     }
 }
-
