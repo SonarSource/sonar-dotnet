@@ -264,7 +264,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             var callTarget = expressionService.GetOrDefault(syntaxNode);
 
             return newInstructions.
-                Concat(ProcessArrayInitializer(arrayInitializationNode, arrayTypeSymbol, callTarget));
+                Concat(ProcessArrayInitializer(arrayInitializationNode, callTarget));
         }
 
         private IEnumerable<Instruction> BuildOperatorCall(SyntaxNode syntaxNode, Expression leftExpression,
@@ -430,8 +430,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             return BuildNewArrayInstance(implicitArrayExpression, arrayType, implicitArrayExpression.Initializer);
         }
 
-        private IEnumerable<Instruction> ProcessArrayInitializer(InitializerExpressionSyntax initializerExpression,
-            IArrayTypeSymbol arrayTypeSymbol, Expression target)
+        private IEnumerable<Instruction> ProcessArrayInitializer(InitializerExpressionSyntax initializerExpression, Expression target)
         {
             if (initializerExpression == null)
             {
