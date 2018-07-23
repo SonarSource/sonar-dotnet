@@ -2040,5 +2040,65 @@ namespace Namespace
 }";
             UcfgVerifier.VerifyInstructions(code, "Foo");
         }
+
+        [TestMethod]
+        public void Indexer_GetAccess()
+        {
+            const string code = @"
+namespace Namespace
+{
+    using System.Collections.Generic;
+    public class Class1
+    {
+        public void Foo(string s, List<string> list, Class1 myClass)
+        {
+            var character = s[0];
+                // %0 := string.this[int].get [ s const ]
+                // character := __id [ %0 ]
+
+            var i = list[0];
+                // %1 := System.Collections.Generic.List<T>.this[int].get [ list const ]
+                // i := __id [ %1 ]
+
+            var result = myClass[s, 0, 1.0];
+                // %2 := Namespace.Class1.this[string, int, double].get [ myClass s const const ]
+                // result := __id [ %2 ]
+        }
+
+        public string this[string s, int i, double d]
+        {
+            get { return ""bar""; }
+        }
+    }
+}";
+            UcfgVerifier.VerifyInstructions(code, "Foo");
+        }
+
+        [TestMethod]
+        public void Indexer_SetAccess()
+        {
+            const string code = @"
+namespace Namespace
+{
+    using System.Collections.Generic;
+    public class Class1
+    {
+        public void Foo(string s, List<string> list, Class1 myClass)
+        {
+            list[0] = ""bar"";
+                // %0 := System.Collections.Generic.List<T>.this[int].set [ list const ]
+
+            myClass[s, 0, 1.0] = ""bar"";
+                // %1 := Namespace.Class1.this[string, int, double].set [ myClass s const const ]
+        }
+
+        public string this[string s, int i, double d]
+        {
+            set {}
+        }
+    }
+}";
+            UcfgVerifier.VerifyInstructions(code, "Foo");
+        }
     }
 }
