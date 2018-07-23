@@ -259,15 +259,12 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             IArrayTypeSymbol arrayTypeSymbol,
             InitializerExpressionSyntax arrayInitializationNode)
         {
-            var newInstructions = new List<Instruction>();
-            newInstructions.AddRange(BuildNewInstance(syntaxNode, arrayTypeSymbol));
+            var newInstructions = BuildNewInstance(syntaxNode, arrayTypeSymbol);
 
             var callTarget = expressionService.GetOrDefault(syntaxNode);
 
-            var n = ProcessArrayInitializer(arrayInitializationNode, arrayTypeSymbol, callTarget);
-            newInstructions.AddRange(n);
-
-            return newInstructions;
+            return newInstructions.
+                Concat(ProcessArrayInitializer(arrayInitializationNode, arrayTypeSymbol, callTarget));
         }
 
         private IEnumerable<Instruction> BuildOperatorCall(SyntaxNode syntaxNode, Expression leftExpression,
@@ -422,7 +419,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
         private IEnumerable<Instruction> ProcessImplicitArrayCreation(ImplicitArrayCreationExpressionSyntax implicitArrayExpression)
         {
             // e.g. string[] a2 = new[] { data, data };
-            // Need to look at the CovertedType in this case
+            // Need to look at the ConvertedType in this case
             var arrayType = this.semanticModel.GetTypeInfo(implicitArrayExpression).ConvertedType as IArrayTypeSymbol;
             if (arrayType == null)
             {
