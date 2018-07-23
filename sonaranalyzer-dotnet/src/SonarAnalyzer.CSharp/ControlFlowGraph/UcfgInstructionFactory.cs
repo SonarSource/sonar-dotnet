@@ -262,6 +262,12 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                 return BuildConcatCall(syntaxNode, leftExpression, rightExpression);
             }
 
+            if (!operatorMethodSymbol.ContainingType.IsAny(UnsupportedVariableTypes))
+            {
+                return BuildFunctionCall(syntaxNode, operatorMethodSymbol,
+                    expressionService.CreateClassName(operatorMethodSymbol.ContainingType), leftExpression, rightExpression);
+            }
+
             expressionService.Associate(syntaxNode, expressionService.CreateConstant());
             return NoInstructions;
         }
