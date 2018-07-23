@@ -41,17 +41,26 @@ namespace Namespace
         public void Foo(string s)
         {
             string a, b;
-            a = s;                  // a := __id [ s ]
-            a = ""boo""             // a := __id [ const ]
-            //var x = new string[5];
+
+            a = s;
+                // a := __id [ s ]
+
+            a = ""boo"";
+                // a := __id [ const ]
+
             int i;
-            i = 5;                  // i := __id [ const ]
+            i = 5;
+                // i := __id [ const ]
 
-            field = s;              // this.field := __id [ s ]
-            this.field = s;         // this.field := __id [ s ]
+            field = s;
+                // this.field := __id [ s ]
+            this.field = s;
+                // this.field := __id [ s ]
 
-            staticField = s;        // Namespace.Class1.staticField := __id [ s ]
-            Class1.staticField = s; // Namespace.Class1.staticField := __id [ s ]
+            staticField = s;
+                // Namespace.Class1.staticField := __id [ s ]
+            Class1.staticField = s;
+                // Namespace.Class1.staticField := __id [ s ]
         }
     }
 }";
@@ -69,13 +78,16 @@ namespace Namespace
         public void Foo(string s)
         {
             string a, b, c;
-            a = b = c = ""foo""     // c := __id [ const ]
-                                    // b := __id [ c ]
-                                    // a := __id [ b ]
+            a = b = c = ""foo""
+                // c := __id [ const ]
+                // b := __id [ c ]
+                // a := __id [ b ]
+
             int x, y, z;
-            x = y = z = 5;          // z := __id [ const ]
-                                    // y := __id [ z ]
-                                    // x := __id [ y ]
+            x = y = z = 5;
+                // z := __id [ const ]
+                // y := __id [ z ]
+                // x := __id [ y ]
         }
     }
 }";
@@ -92,11 +104,13 @@ namespace Namespace
     {
         public void Foo()
         {
-            var x = Bar<string>.Value;  // %0 := Namespace.Bar<T>.Value.get [ Namespace.Bar<T> ]
-                                        // x := __id [ %0 ]
+            var x = Bar<string>.Value;
+                // %0 := Namespace.Bar<T>.Value.get [ Namespace.Bar<T> ]
+                // x := __id [ %0 ]
 
-            var y = Bar<int>.Value;     // %1 := Namespace.Bar<T>.Value.get [ Namespace.Bar<T> ]
-                                        // y := __id [ %1 ]
+            var y = Bar<int>.Value;
+                // %1 := Namespace.Bar<T>.Value.get [ Namespace.Bar<T> ]
+                // y := __id [ %1 ]
         }
     }
     public class Bar<T>
@@ -131,17 +145,17 @@ namespace Namespace
                 // a := __id [ %1 ]
 
             Property = Property;
-                // %3 := Namespace.Class1.Property.get [ this ]
-                // %2 := Namespace.Class1.Property.set [ this %3 ]
+                // %2 := Namespace.Class1.Property.get [ this ]
+                // %3 := Namespace.Class1.Property.set [ this %2 ]
 
             Foo(Property);
-                // %5 := Namespace.Class1.Property.get [ this ]
-                // %4 := Namespace.Class1.Foo(string) [ this %5 ]
+                // %4 := Namespace.Class1.Property.get [ this ]
+                // %5 := Namespace.Class1.Foo(string) [ this %4 ]
 
             Property = Foo(Property);
-                // %7 := Namespace.Class1.Property.get [ this ]
-                // %6 := Namespace.Class1.Foo(string) [ this %7 ]
-                // %8 := Namespace.Class1.Property.set [ this %6 ]
+                // %6 := Namespace.Class1.Property.get [ this ]
+                // %7 := Namespace.Class1.Foo(string) [ this %6 ]
+                // %8 := Namespace.Class1.Property.set [ this %7 ]
 
             ObjectProperty = s;
                 // %9 := Namespace.Class1.ObjectProperty.set [ this s ]
@@ -200,9 +214,10 @@ namespace Namespace
         private string Property { get; }
         public Class1(string s)
         {
-            Property = s;   // ignored, property has no SetMethod
-                            // This should be ok for now because we don't really care about
-                            // properties without accessors, because they behave as pure fields.
+            Property = s;
+                // ignored, property has no SetMethod
+                // This should be ok for now because we don't really care about
+                // properties without accessors, because they behave as pure fields.
         }
     }
 }";
@@ -221,27 +236,34 @@ namespace Namespace
         private string field;
         public void Foo(string s, string t, object o)
         {
-            string a = s;           // a := __id [ s ]
+            string a = s;
+                // a := __id [ s ]
 
-            a = s + s;              // %0 := __concat [ s s ]
-                                    // a := __id [ %0 ]
+            a = s + s;
+                // %0 := __concat [ s s ]
+                // a := __id [ %0 ]
 
-            a = s + s + s;          // %1 := __concat [ s s ]
-                                    // %2 := __concat [ %1 s ]
-                                    // a := __id [ %2 ]
+            a = s + s + s;
+                // %1 := __concat [ s s ]
+                // %2 := __concat [ %1 s ]
+                // a := __id [ %2 ]
 
-            a = (s + s) + t;        // %3 := __concat [ s s ]
-                                    // %4 := __concat [ %3 t ]
-                                    // a := __id [ %4 ]
+            a = (s + s) + t;
+                // %3 := __concat [ s s ]
+                // %4 := __concat [ %3 t ]
+                // a := __id [ %4 ]
 
-            a = s + 5;              // %5 := __concat [ s const ]
-                                    // a := __id [ %5 ]
+            a = s + 5;
+                // %5 := __concat [ s const ]
+                // a := __id [ %5 ]
 
-            a = 5 + s;              // %6 := __concat [ const s ]
-                                    // a := __id [ %6 ]
+            a = 5 + s;
+                // %6 := __concat [ const s ]
+                // a := __id [ %6 ]
 
-            a = s + o;              // %7 := __concat [ s o ]
-                                    // a := __id [ %7 ]
+            a = s + o;
+                // %7 := __concat [ s o ]
+                // a := __id [ %7 ]
         }
     }
 }";
@@ -265,41 +287,65 @@ namespace Namespace
         public void Foo(string s)
         {
             string a;
-            a = s.ToLower();                // %0 := string.ToLower() [ s ]
-                                            // a := __id [ %0 ]
-            a = (s + s).ToLower();          // %1 := __concat [ s s ]
-                                            // %2 := string.ToLower() [ %1 ]
-                                            // a := __id [ %2 ]
-            Bar(s.ToLower());               // %3 := string.ToLower() [ s ]
-                                            // %4 := Namespace.Class1.Bar(string) [ this %3 ]
-            a = string.IsNullOrEmpty(s);    // %5 := string.IsNullOrEmpty(string) [ string s ];
-                                            // a := __id [ %5 ]
-            a = A(B(C(s)));                 // %6 := Namespace.Class1.C(string) [ this s ]
-                                            // %7 := Namespace.Class1.B(int) [ this %6 ]
-                                            // %8 := Namespace.Class1.A(int) [ this %7 ]
-                                            // a := __id [ %8 ]
+            a = s.ToLower();
+                // %0 := string.ToLower() [ s ]
+                // a := __id [ %0 ]
+
+            a = (s + s).ToLower();
+                // %1 := __concat [ s s ]
+                // %2 := string.ToLower() [ %1 ]
+                // a := __id [ %2 ]
+
+            Bar(s.ToLower());
+                // %3 := string.ToLower() [ s ]
+                // %4 := Namespace.Class1.Bar(string) [ this %3 ]
+
+            a = string.IsNullOrEmpty(s);
+                // %5 := string.IsNullOrEmpty(string) [ string s ];
+                // a := __id [ %5 ]
+
+            a = A(B(C(s)));
+                // %6 := Namespace.Class1.C(string) [ this s ]
+                // %7 := Namespace.Class1.B(int) [ this %6 ]
+                // %8 := Namespace.Class1.A(int) [ this %7 ]
+                // a := __id [ %8 ]
+
             int x;
-            x = O(s);                       // %9 := Namespace.Class1.O(object) [ this s ]
-                                            // x := __id [ %9 ]
+            x = O(s);
+                // %9 := Namespace.Class1.O(object) [ this s ]
+                // x := __id [ %9 ]
 
-            this.Bar(s);                    // %10 := Namespace.Class1.Bar(string) [ this s ]
-            base.BaseMethod();              // %11 := Namespace.BaseClass.BaseMethod() [ this ]
+            this.Bar(s);
+                // %10 := Namespace.Class1.Bar(string) [ this s ]
 
-            var other = new Class1();       // %12 := new Namespace.Class1
-                                            // %13 := Namespace.Class1.Class1() [ %12 ]
-                                            // other := __id [ %12 ]
-            other.Bar(s);                   // %14 := Namespace.Class1.Bar(string) [ other s ]
+            base.BaseMethod();
+                // %11 := Namespace.BaseClass.BaseMethod() [ this ]
 
-            Bar(field);                     // %16 := __id [ this.field ]
-                                            // %15 := Namespace.Class1.Bar(string) [ this %16 ]
+            var other = new Class1();
+                // %12 := new Namespace.Class1
+                // %13 := Namespace.Class1.Class1() [ %12 ]
+                // other := __id [ %12 ]
 
-            Bar(other.field);               // %18 := __id [ other.field ]
-                                            // %17 := Namespace.Class1.Bar(string) [ this %18 ]
+            other.Bar(s);
+                // %14 := Namespace.Class1.Bar(string) [ other s ]
 
-            StaticMethod(s);                // %19 := Namespace.Class1.StaticMethod(string) [ Namespace.Class1 s ]
-            Class1.StaticMethod(s);         // %20 := Namespace.Class1.StaticMethod(string) [ Namespace.Class1 s ]
+            Bar(field);
+                // %15 := __id [ this.field ]
+                // %16 := Namespace.Class1.Bar(string) [ this %15 ]
 
-            a = field;                      // a := __id [ this.field ]
+            Bar(other.field);
+                // %17 := __id [ other.field ]
+                // %18 := Namespace.Class1.Bar(string) [ this %17 ]
+
+            StaticMethod(s);
+                // %19 := Namespace.Class1.StaticMethod(string) [ Namespace.Class1 s ]
+
+            Class1.StaticMethod(s);
+                // %20 := Namespace.Class1.StaticMethod(string) [ Namespace.Class1 s ]
+
+            a = field;
+                // %21 := __id [ this.field ]
+                // a := __id [ %21 ]
         }
         public void Bar(string s) { }
         public string A(int x) { return x.ToString(); }
@@ -331,46 +377,59 @@ namespace Namespace
         public void Foo(string s)
         {
             Class1 c;
-            c = new Class1(s);                  // %0 := new Namespace.Class1
-                                                // %1 := Namespace.Class1.Class1(string) [ %0 s ]
-                                                // c := __id [ %0 ]
+            c = new Class1(s);
+                // %0 := new Namespace.Class1
+                // %1 := Namespace.Class1.Class1(string) [ %0 s ]
+                // c := __id [ %0 ]
 
-            c = new Class1();                   // %2 := new Namespace.Class1
-                                                // %3 := Namespace.Class1.Class1() [ %2 ]
-                                                // c := __id [ %2 ]
+            c = new Class1();
+                // %2 := new Namespace.Class1
+                // %3 := Namespace.Class1.Class1() [ %2 ]
+                // c := __id [ %2 ]
 
-            c = new Class1(new Class1(s));      // %4 := new Namespace.Class1
-                                                // %5 := Namespace.Class1.Class1(string) [ %4 s ]
-                                                // %6 := new Namespace.Class1
-                                                // %7 := Namespace.Class1.Class1(Namespace.Class1) [ %6 %4 ]
-                                                // c := __id [ %6 ]
+            c = new Class1(new Class1(s));
+                // %4 := new Namespace.Class1
+                // %5 := Namespace.Class1.Class1(string) [ %4 s ]
+                // %6 := new Namespace.Class1
+                // %7 := Namespace.Class1.Class1(Namespace.Class1) [ %6 %4 ]
+                // c := __id [ %6 ]
 
-            c = new Class1(s)                   // %8 := new Namespace.Class1
-            {                                   // %9 := Namespace.Class1.Class1(string) [ %8 s ]
-                Property = s,                   // %10 := Namespace.Class1.Property.set [ %8 s ]
-            };                                  // c := __id [ %8 ]
+            c = new Class1(s)
+                // %8 := new Namespace.Class1
+                // %9 := Namespace.Class1.Class1(string) [ %8 s ]
+            {
+                Property = s,
+                    // %10 := Namespace.Class1.Property.set [ %8 s ]
+            };
+                // c := __id [ %8 ]
 
-            field = new Class1();               // %11 := new Namespace.Class1
-                                                // %12 := Namespace.Class1.Class1() [ %11 ]
-                                                // this.field := __id [ %11 ]
+            field = new Class1();
+                // %11 := new Namespace.Class1
+                // %12 := Namespace.Class1.Class1() [ %11 ]
+                // this.field := __id [ %11 ]
 
-            this.field = new Class1();          // %13 := new Namespace.Class1
-                                                // %14 := Namespace.Class1.Class1() [ %13 ]
-                                                // this.field := __id [ %13 ]
+            this.field = new Class1();
+                // %13 := new Namespace.Class1
+                // %14 := Namespace.Class1.Class1() [ %13 ]
+                // this.field := __id [ %13 ]
 
-            staticField = new Class1();         // %15 := new Namespace.Class1
-                                                // %16 := Namespace.Class1.Class1() [ %15 ]
-                                                // Namespace.Class1.staticField := __id [ %15 ]
+            staticField = new Class1();
+                // %15 := new Namespace.Class1
+                // %16 := Namespace.Class1.Class1() [ %15 ]
+                // Namespace.Class1.staticField := __id [ %15 ]
 
-            Class1.staticField = new Class1();  // %17 := new Namespace.Class1
-                                                // %18 := Namespace.Class1.Class1() [ %17 ]
-                                                // Namespace.Class1.staticField := __id [ %17 ]
+            Class1.staticField = new Class1();
+                // %17 := new Namespace.Class1
+                // %18 := Namespace.Class1.Class1() [ %17 ]
+                // Namespace.Class1.staticField := __id [ %17 ]
 
-            var other = new Class1();           // %19 := new Namespace.Class1
-                                                // %20 := Namespace.Class1.Class1() [ %19 ]
-                                                // other := __id [ %19 ]
+            var other = new Class1();
+                // %19 := new Namespace.Class1
+                // %20 := Namespace.Class1.Class1() [ %19 ]
+                // other := __id [ %19 ]
 
-            other.field = this;                 // other.field := __id [ this ]
+            other.field = this;
+                // other.field := __id [ this ]
         }
     }
 }";
@@ -387,7 +446,8 @@ namespace Namespace
     {
         static Class1()
         {
-            Do();       // %0 := Namespace.Class1.Do() [ Namespace.Class1 ]
+            Do();
+                // %0 := Namespace.Class1.Do() [ Namespace.Class1 ]
         }
 
         public static void Do() {}
@@ -404,17 +464,22 @@ namespace Namespace
 {
     public class Class1
     {
-        private string Field;
+        private string field;
         public void Foo(string s)
         {
             string a;
-            a = s.Ext();            // %0 := Namespace.Extensions.Ext(string) [ Namespace.Extensions s ]
-                                    // a := __id [ %0 ]
-            a = Extensions.Ext(s);  // %1 := Namespace.Extensions.Ext(string) [ Namespace.Extensions s ]
-                                    // a := __id [ %1 ]
-            a = this.Field.Ext();   // %3 := __id [ this.Field ]
-                                    // %2 := Namespace.Extensions.Ext(string) [ Namespace.Extensions %3 ]
-                                    // a := __id [ %2 ]
+            a = s.Ext();
+                // %0 := Namespace.Extensions.Ext(string) [ Namespace.Extensions s ]
+                // a := __id [ %0 ]
+
+            a = Extensions.Ext(s);
+                // %1 := Namespace.Extensions.Ext(string) [ Namespace.Extensions s ]
+                // a := __id [ %1 ]
+
+            a = this.field.Ext();
+                // %2 := __id [ this.field ]
+                // %3 := Namespace.Extensions.Ext(string) [ Namespace.Extensions %2 ]
+                // a := __id [ %3 ]
         }
     }
     public static class Extensions
@@ -435,8 +500,10 @@ namespace Namespace
     {
         public void Foobar(string s, IBar b1, Bar b2)
         {
-            b1.Foo(s);          // %0 := Namespace.IBar.Foo(string) [ b1 s ]
-            b2.Foo(s);          // %1 := Namespace.Bar.Foo(string) [ b2 s ]
+            b1.Foo(s);
+                // %0 := Namespace.IBar.Foo(string) [ b1 s ]
+            b2.Foo(s);
+                // %1 := Namespace.Bar.Foo(string) [ b2 s ]
         }
     }
     public class Bar : IBar
@@ -462,10 +529,14 @@ namespace Namespace
     {
         public void Foobar(string s, IBar b1, Bar b2, IBar<string> b3)
         {
-            b1.Foo(s);            // %0 := Namespace.IBar.Foo<T>(T) [ b1 s ]
-            b2.Foo(s);            // %1 := Namespace.Bar.Foo<T>(T) [ b2 s ]
-            b2.Fooooo(s);         // %2 := Namespace.Bar.Fooooo(string) [ b2 s ]
-            b3.Fooooo(s);         // %3 := Namespace.IBar<T>.Fooooo(T) [ b3 s ]
+            b1.Foo(s);
+                // %0 := Namespace.IBar.Foo<T>(T) [ b1 s ]
+            b2.Foo(s);
+                // %1 := Namespace.Bar.Foo<T>(T) [ b2 s ]
+            b2.Fooooo(s);
+                // %2 := Namespace.Bar.Fooooo(string) [ b2 s ]
+            b3.Fooooo(s);
+                // %3 := Namespace.IBar<T>.Fooooo(T) [ b3 s ]
         }
     }
     public class Bar : IBar, IBar<string>
@@ -497,9 +568,12 @@ namespace Namespace
     {
         public void Foo()
         {
-            SendEmailAsync(""body"");                   // %0 := Namespace.Class1.SendEmailAsync(string, bool) [ this const ]
-            SendEmailAsync(""body"", isHtml: true);     // %1 := Namespace.Class1.SendEmailAsync(string, bool) [ this const const ]
-            SendEmailAsync(""body"", isHtml: false);    // %2 := Namespace.Class1.SendEmailAsync(string, bool) [ this const const ]
+            SendEmailAsync(""body"");
+                // %0 := Namespace.Class1.SendEmailAsync(string, bool) [ this const ]
+            SendEmailAsync(""body"", isHtml: true);
+                // %1 := Namespace.Class1.SendEmailAsync(string, bool) [ this const const ]
+            SendEmailAsync(""body"", isHtml: false);
+                // %2 := Namespace.Class1.SendEmailAsync(string, bool) [ this const const ]
         }
 
         public System.Threading.Tasks.Task SendEmailAsync(string body, bool isHtml = false)
@@ -519,10 +593,14 @@ namespace Namespace
     {
         public void Foo(string s)
         {
-            SendEmailAsync(s, false);                  // %0 := Namespace.Class1.SendEmailAsync(string, bool) [ this s const ]
-            SendEmailAsync(body: s, isHtml: false);    // %1 := Namespace.Class1.SendEmailAsync(string, bool) [ this s const ]
-            SendEmailAsync(body: s);                   // %2 := Namespace.Class1.SendEmailAsync(string, bool) [ this s ]
-            SendEmailAsync(isHtml: false, body: s);    // %3 := Namespace.Class1.SendEmailAsync(string, bool) [ this const s ]
+            SendEmailAsync(s, false);
+                // %0 := Namespace.Class1.SendEmailAsync(string, bool) [ this s const ]
+            SendEmailAsync(body: s, isHtml: false);
+                // %1 := Namespace.Class1.SendEmailAsync(string, bool) [ this s const ]
+            SendEmailAsync(body: s);
+                // %2 := Namespace.Class1.SendEmailAsync(string, bool) [ this s ]
+            SendEmailAsync(isHtml: false, body: s);
+                // %3 := Namespace.Class1.SendEmailAsync(string, bool) [ this const s ]
         }
 
         public System.Threading.Tasks.Task SendEmailAsync(string body, bool isHtml = false)
@@ -562,23 +640,23 @@ namespace Namespace
                 // %5 := Namespace.Class1.Bar(int) [ this %4 ]
 
             Bar(StaticProperty);
-                // %7 := Namespace.Class1.StaticProperty.get [ this ]
-                // %6 := Namespace.Class1.Bar(int) [ this %7 ]
+                // %6 := Namespace.Class1.StaticProperty.get [ this ]
+                // %7 := Namespace.Class1.Bar(int) [ this %6 ]
 
             Bar(this.Field);
-                // %9 := __id [ this.Field ]
-                // %8 := Namespace.Class1.Bar(int) [ this %9 ]
+                // %8 := __id [ this.Field ]
+                // %9 := Namespace.Class1.Bar(int) [ this %8 ]
 
             Bar(StaticField);
-                // %11 := __id [ Namespace.Class1.StaticField ]
-                // %10 := Namespace.Class1.Bar(int) [ this %11 ]
+                // %10 := __id [ Namespace.Class1.StaticField ]
+                // %11 := Namespace.Class1.Bar(int) [ this %10 ]
 
             Bar(Field, Property, this.InstanceMethod(), StaticMethod());
-                // %12 := Namespace.Class1.InstanceMethod() [ this ]
-                // %13 := Namespace.Class1.StaticMethod() [ Namespace.Class1 ]
-                // %15 := __id [ this.Field ]
-                // %16 := Namespace.Class1.Property.get [ this ]
-                // %14 := Namespace.Class1.Bar(int, int, int, int) [ this %15 %16 %12 %13 ]
+                // %12 := __id [ this.Field ]
+                // %13 := Namespace.Class1.Property.get [ this ]
+                // %14 := Namespace.Class1.InstanceMethod() [ this ]
+                // %15 := Namespace.Class1.StaticMethod() [ Namespace.Class1 ]
+                // %16 := Namespace.Class1.Bar(int, int, int, int) [ this %12 %13 %14 %15 ]
         }
 
         private void Bar(int arg1) { /* no-op */ }
@@ -624,16 +702,20 @@ namespace Ns1
     {
         public void Foo()
         {
-            GlobalClass.NoOp();                         // %0 := GlobalClass.NoOp() [ GlobalClass ]
+            GlobalClass.NoOp();
+                // %0 := GlobalClass.NoOp() [ GlobalClass ]
 
-            Ns1.OuterClass.NoOp();                      // %1 := Ns1.OuterClass.NoOp() [ Ns1.OuterClass ]
+            Ns1.OuterClass.NoOp();
+                // %1 := Ns1.OuterClass.NoOp() [ Ns1.OuterClass ]
 
-            Ns1.Inner.InnerClass.NoOp();                // %2 := Ns1.Inner.InnerClass.NoOp() [ Ns1.Inner.InnerClass ]
+            Ns1.Inner.InnerClass.NoOp();
+                // %2 := Ns1.Inner.InnerClass.NoOp() [ Ns1.Inner.InnerClass ]
 
             Ns1.Inner.InnerClass.NestedClass.NoOp();
                 // %3 := Ns1.Inner.InnerClass.NestedClass.NoOp() [ Ns1.Inner.InnerClass.NestedClass ]
 
-            NoOp();                                     // %4 := GlobalClass.NoOp() [ GlobalClass ]
+            NoOp();
+                // %4 := GlobalClass.NoOp() [ GlobalClass ]
         }
     }
 }";
@@ -676,14 +758,17 @@ namespace Ns1
         public void Foo()
         {
             int i;
-            i = GlobalClass.Property;                   // %0 := GlobalClass.Property.get [ GlobalClass ]
-                                                        // i := __id [ %0 ]
+            i = GlobalClass.Property;
+                // %0 := GlobalClass.Property.get [ GlobalClass ]
+                // i := __id [ %0 ]
 
-            i = Ns1.OuterClass.Property;                // %1 := Ns1.OuterClass.Property.get [ Ns1.OuterClass ]
-                                                        // i := __id [ %1 ]
+            i = Ns1.OuterClass.Property;
+                // %1 := Ns1.OuterClass.Property.get [ Ns1.OuterClass ]
+                // i := __id [ %1 ]
 
-            i = Ns1.Inner.InnerClass.Property;          // %2 := Ns1.Inner.InnerClass.Property.get [ Ns1.Inner.InnerClass ]
-                                                        // i := __id [ %2 ]
+            i = Ns1.Inner.InnerClass.Property;
+                // %2 := Ns1.Inner.InnerClass.Property.get [ Ns1.Inner.InnerClass ]
+                // i := __id [ %2 ]
 
             i = Ns1.Inner.InnerClass.NestedClass.Property;
                 // %3 := Ns1.Inner.InnerClass.NestedClass.Property.get [ Ns1.Inner.InnerClass.NestedClass ]
@@ -733,17 +818,21 @@ namespace Ns1
     {
         public void Foo()
         {
-            GlobalClass.Property = 42;          // %0 := GlobalClass.Property.set [ GlobalClass const ]
+            GlobalClass.Property = 42;
+                // %0 := GlobalClass.Property.set [ GlobalClass const ]
 
-            Ns1.OuterClass.Property = 42;       // %1 := Ns1.OuterClass.Property.set [ Ns1.OuterClass const ]
+            Ns1.OuterClass.Property = 42;
+                // %1 := Ns1.OuterClass.Property.set [ Ns1.OuterClass const ]
 
-            Ns1.Inner.InnerClass.Property = 42; // %2 := Ns1.Inner.InnerClass.Property.set [ Ns1.Inner.InnerClass const ]
+            Ns1.Inner.InnerClass.Property = 42;
+                // %2 := Ns1.Inner.InnerClass.Property.set [ Ns1.Inner.InnerClass const ]
 
 
             Ns1.Inner.InnerClass.NestedClass.Property = 42;
                 // %3 := Ns1.Inner.InnerClass.NestedClass.Property.set [ Ns1.Inner.InnerClass.NestedClass const ]
 
-            Property = 42;                      // %4 := GlobalClass.Property.set [ GlobalClass const ]
+            Property = 42;
+                // %4 := GlobalClass.Property.set [ GlobalClass const ]
         }
     }
 }
@@ -782,7 +871,9 @@ namespace Namespace
 
         public void Foo()
         {
-            var variable = Field;   // variable := __id [ this.Field ]
+            var variable = Field;
+                // %0 := __id [ this.Field ]
+                // variable := __id [ %0 ]
 
         }
     }
@@ -806,12 +897,14 @@ namespace Namespace
         public void Foo()
         {
             var variable = Bar1();
-                        // %0 := Namespace.Class1.Bar1() [ this ]
-                        // variable := __id [ %0 ]
-            Bar1();
-                        // %1 := Namespace.Class1.Bar1() [ this ]
+                // %0 := Namespace.Class1.Bar1() [ this ]
+                // variable := __id [ %0 ]
 
-            Bar2();     // %2 := Namespace.Class1.Bar2() [ this ]
+            Bar1();
+                // %1 := Namespace.Class1.Bar1() [ this ]
+
+            Bar2();
+                // %2 := Namespace.Class1.Bar2() [ this ]
         }
     }
 }";
@@ -832,9 +925,9 @@ namespace Namespace
         public void Foo()
         {
             var x = Field.ToLower();
-                // %1 := __id [ this.Field ]
-                // %0 := string.ToLower() [ %1 ]
-                // x := __id [ %0 ]
+                // %0 := __id [ this.Field ]
+                // %1 := string.ToLower() [ %0 ]
+                // x := __id [ %1 ]
         }
     }
 }";
@@ -853,10 +946,12 @@ namespace Namespace
     {
         public void Foo(string s)
         {
-            var x = Bar(s, a => a);     // %0 := Namespace.Class1.Bar(string, System.Func<string, string>) [ this s const ]
-                                        // x := __id [ %0 ]
+            var x = Bar(s, a => a);
+                // %0 := Namespace.Class1.Bar(string, System.Func<string, string>) [ this s const ]
+                // x := __id [ %0 ]
 
-            this.Bar(s, a => a);        // %1 := Namespace.Class1.Bar(string, System.Func<string, string>) [ this s const ]
+            this.Bar(s, a => a);
+                // %1 := Namespace.Class1.Bar(string, System.Func<string, string>) [ this s const ]
         }
         public string Bar(string s, Func<string, string> a)
         {
@@ -909,8 +1004,8 @@ namespace Ns1
         public void Foo()
         {
             Add(GetData());
-            // %0 := Ns1.Class1.GetData() [ this ]
-            // %1 := Ns1.Class1.Add(int) [ this %0 ]
+                // %0 := Ns1.Class1.GetData() [ this ]
+                // %1 := Ns1.Class1.Add(int) [ this %0 ]
         }
 
         public int GetData() => 1;
@@ -1010,8 +1105,10 @@ namespace Namespace
     {
         public object Foo([FromBody] long itemId, [FromBody] string itemId2)
         {
-            var data = itemId;      // data := __id [ const ]
-            var data = itemId2;     // data := __id [ itemId2 ]
+            var data = itemId;
+                // data := __id [ const ]
+            var data = itemId2;
+                // data := __id [ itemId2 ]
             return null;
         }
     }
@@ -1028,9 +1125,12 @@ public class Class1
     private string field;
     public void Foo(string s)
     {
-        string a = ""a""; // a := __id [ const ]
-        string b = ""b""; // b := __id [ const ]
-        string c = ""c""; // c := __id [ const ]
+        string a = ""a"";
+            // a := __id [ const ]
+        string b = ""b"";
+            // b := __id [ const ]
+        string c = ""c"";
+            // c := __id [ const ]
     }
 }";
             var ucfg = UcfgVerifier.GetUcfgForMethod(code, "Foo");
@@ -1047,25 +1147,6 @@ public class Class1
         }
 
         [TestMethod]
-        public void Regression_SyntaxNode_Not_In_CFG()
-        {
-            const string code = @"
-using System;
-
-public class Foo
-{
-    public void Bar(bool b)
-    {
-        // The ternary operator is not walked because it is a Jump node of a block
-        // that's why when we create instruction for the variable declarator we
-        // get NRE for the assignment argument.
-        var s = b ? ""s1"" : ""s2""; // s := __id [ __unknown ]
-    }
-}";
-            UcfgVerifier.VerifyInstructions(code, "Bar");
-        }
-
-        [TestMethod]
         public void BuiltInTypeAreConvertedToConstant()
         {
             const string code = @"
@@ -1076,19 +1157,19 @@ namespace Namespace
         public void Foo(bool boolArg, byte byteArg, sbyte sbyteArg, char charArg, decimal decimalArg, double doubleArg,
             float floatArg, int intArg, uint uintArg, long longArg, ulong ulongArg, short shortArg, ushort ushortArg)
         {
-            bool @bool = true;      // bool := __id [ const ]
-            byte @byte = 1;         // byte := __id [ const ]
-            sbyte @sbyte = 1;       // sbyte := __id [ const ]
-            char @char = 'c';       // char := __id [ const ]
-            decimal @decimal = 1;   // decimal := __id [ const ]
-            double @double = 1;     // double := __id [ const ]
-            float @float = 1;       // float := __id [ const ]
-            int @int = 1;           // int := __id [ const ]
-            uint @uint = 1;         // uint := __id [ const ]
-            long @long = 1;         // long := __id [ const ]
-            ulong @ulong = 1;       // ulong := __id [ const ]
-            short @short = 1;       // short := __id [ const ]
-            ushort @ushort = 1;     // ushort := __id [ const ]
+            bool @bool = true;      // @bool := __id [ const ]
+            byte @byte = 1;         // @byte := __id [ const ]
+            sbyte @sbyte = 1;       // @sbyte := __id [ const ]
+            char @char = 'c';       // @char := __id [ const ]
+            decimal @decimal = 1;   // @decimal := __id [ const ]
+            double @double = 1;     // @double := __id [ const ]
+            float @float = 1;       // @float := __id [ const ]
+            int @int = 1;           // @int := __id [ const ]
+            uint @uint = 1;         // @uint := __id [ const ]
+            long @long = 1;         // @long := __id [ const ]
+            ulong @ulong = 1;       // @ulong := __id [ const ]
+            short @short = 1;       // @short := __id [ const ]
+            ushort @ushort = 1;     // @ushort := __id [ const ]
 
             Bar(true);              // %0 := Namespace.Class1.Bar(object) [ this const ]
             Bar((byte) 1);          // %1 := Namespace.Class1.Bar(object) [ this const ]
@@ -1170,11 +1251,11 @@ namespace Namespace
         public void Foo()
         {
             Property.Property.Property = new Class1();
-                // %1 := Namespace.Class1.Property.get [ this ]
-                // %0 := Namespace.Class1.Property.get [ %1 ]
+                // %0 := Namespace.Class1.Property.get [ this ]
+                // %1 := Namespace.Class1.Property.get [ %0 ]
                 // %2 := new Namespace.Class1
                 // %3 := Namespace.Class1.Class1() [ %2 ]
-                // %4 := Namespace.Class1.Property.set [ %0 %2 ]
+                // %4 := Namespace.Class1.Property.set [ %1 %2 ]
 
             Class1.StaticProperty.Property = new Class1();
                 // %5 := Namespace.Class1.StaticProperty.get [ Namespace.Class1 ]
@@ -1201,13 +1282,22 @@ namespace Namespace
 
         public void Foo(IntPtr ptrParam, UIntPtr uPtrParam)
         {
-            int x = 100;                    // x := __id [ const ]
-            int *ptr = &x;                  // ptr := __id [ const ]
-            Console.WriteLine((int)ptr);    // %0 := System.Console.WriteLine(int) [ System.Console const ]
-            Console.WriteLine(*ptr);        // %1 := System.Console.WriteLine(int) [ System.Console const ]
+            int x = 100;
+                // x := __id [ const ]
 
-            ptrField = ptrParam;            // this.ptrField := __id [ const ]
-            uPtrField = uPtrParam;          // this.uPtrField := __id [ const ]
+            int *ptr = &x;
+                // ptr := __id [ const ]
+
+            Console.WriteLine((int)ptr);
+                // %0 := System.Console.WriteLine(int) [ System.Console const ]
+
+            Console.WriteLine(*ptr);
+                // %1 := System.Console.WriteLine(int) [ System.Console const ]
+
+            ptrField = ptrParam;
+                // this.ptrField := __id [ const ]
+            uPtrField = uPtrParam;
+                // this.uPtrField := __id [ const ]
         }
     }
 }";
@@ -1222,23 +1312,28 @@ namespace Namespace
 {
     public class Class1
     {
-        public void Foo(string s, string[] a, string [][] jagged, string[,] multi)
+        public void Foo(string s, string[] a, string[][] jagged, string[,] multi)
         {
-            s = a[0];           // %0 := __arrayGet [ a ]
-                                // s := __id [ %0 ]
+            s = a[0];
+                // %0 := __arrayGet [ a ]
+                // s := __id [ %0 ]
 
-            s = ((a[0]));       // %1 := __arrayGet [ a ]
-                                // s := __id [ %1 ]
+            s = ((a[0]));
+                // %1 := __arrayGet [ a ]
+                // s := __id [ %1 ]
 
-            Bar(a[0]);          // %2 := __arrayGet [ a ]
-                                // %3 := Namespace.Class1.Bar(string) [ this %2 ]
+            Bar(a[0]);
+                // %2 := __arrayGet [ a ]
+                // %3 := Namespace.Class1.Bar(string) [ this %2 ]
 
-            s = jagged[0][0];   // %4 := __arrayGet [ jagged ]
-                                // %5 := __arrayGet [ %4 ]
-                                // s := __id [ %5 ]
+            s = jagged[0][0];
+                // %4 := __arrayGet [ jagged ]
+                // %5 := __arrayGet [ %4 ]
+                // s := __id [ %5 ]
 
-            s = multi[0, 0];    // %6 := __arrayGet [ multi ]
-                                // s := __id [ %6 ]
+            s = multi[0, 0];
+                // %6 := __arrayGet [ multi ]
+                // s := __id [ %6 ]
         }
 
         public void Bar(string s) {}
@@ -1256,28 +1351,28 @@ namespace Namespace
 {
     public class Class1
     {
-        public void Foo(string s, string[] a, string[][] jagged, string[,] multi, List<string> list)
+        public void Foo(string s, string[] a, string[][] jagged, string[,] multi)
         {
-            a[0] = s;           // %0 := __arraySet [ a s ]
+            a[0] = s;
+                // %0 := __arraySet [ a s ]
 
-            ((a[0])) = s;       // %1 := __arraySet [ a s ]
+            ((a[0])) = s;
+                // %1 := __arraySet [ a s ]
 
-            jagged[0][0] = s;   // %2 := __arrayGet [ jagged ]
-                                // %3 := __arraySet [ %2 s ]
+            jagged[0][0] = s;
+                // %2 := __arrayGet [ jagged ]
+                // %3 := __arraySet [ %2 s ]
 
-            multi[0, 0] = s;    // %4 := __arraySet [ multi s ]
+            multi[0, 0] = s;
+                // %4 := __arraySet [ multi s ]
 
-            ((jagged[0]))[0] = s;   // %5 := __arrayGet [ jagged ]
-                                    // %6 := __arraySet [ %5 s ]
+            ((jagged[0]))[0] = s;
+                // %5 := __arrayGet [ jagged ]
+                // %6 := __arraySet [ %5 s ]
 
-            a[0] = a[1];        // %7 := __arrayGet [ a ]
-                                // %8 := __arraySet [ a %7 ]
-
-            // Strings and lists have indexers but should not be handled as arrays;
-            // until collection indexers are supported, the string and list element
-            // access is represented as constant
-            var c = s[0];       // c := __id [ const ]
-            var i = list[0];    // i := __id [ const ]
+            a[0] = a[1];
+                // %7 := __arrayGet [ a ]
+                // %8 := __arraySet [ a %7 ]
         }
     }
 }";
@@ -1301,9 +1396,9 @@ namespace Namespace
             other.ArrayProperty[0].arrayField[1].stringField = s;
                 // %0 := Namespace.Class1.ArrayProperty.get [ other ]
                 // %1 := __arrayGet [ %0 ]
-                // %3 := __id [ %1.arrayField ]
-                // %2 := __arrayGet [ %3 ]
-                // %2.stringField := __id [ s ]
+                // %2 := __id [ %1.arrayField ]
+                // %3 := __arrayGet [ %2 ]
+                // %3.stringField := __id [ s ]
         }
     }
 }";
@@ -1318,24 +1413,54 @@ namespace Namespace
 {
     public class Class1
     {
+        public Class1[] ArrayProperty { get; set; }
+        public Class1[] arrayField;
+
         public void Foo()
         {
-            // Primitive type
-            var x0 = new string[42];    // %0 := new string[]
-                                        // x0 := __id [ %0 ]
+            var localStringArray = new string[42];
+                // %0 := new string[]
+                // localStringArray := __id [ %0 ]
 
-            // Array of objects
-            var x1 = new Class1[0];     // %1 := new Namespace.Class1[]
-                                        // x1 := __id [ %1 ]
+            var localClassArray = new Class1[0];
+                // %1 := new Namespace.Class1[]
+                // localClassArray := __id [ %1 ]
 
-            // Multi-rank arrays
-            var x2 = new int[10,2];     // %2 := new int[*,*]
-                                        // x2 := __id [ %2 ]
+            var localMultiDimArray = new int[10,2];
+                // %2 := new int[*,*]
+                // localMultiDimArray := __id [ %2 ]
 
             // Array with initializer (initializer is ignored currently - issue #161)
-            var x3 = new string[] { ""aaa"", ""bbb"", ""ccc"" };    // %3 := new string[]
-                                                                    // x3 := __id [ %3 ]
+            var localArrayInit = new string[] { ""aaa"", ""bbb"", ""ccc"" };
+                // %3 := new string[]
+                // localArrayInit := __id [ %3 ]
+
+            ArrayProperty = new Class1[1];
+                // %4 := new Namespace.Class1[]
+                // %5 := Namespace.Class1.ArrayProperty.set [ this %4 ]
+
+            ArrayProperty[1] = new Class1();
+                // %6 := Namespace.Class1.ArrayProperty.get [ this ]
+                // %7 := new Namespace.Class1
+                // %8 := Namespace.Class1.Class1() [ %7 ]
+                // %9 := __arraySet [ %6 %7 ]
+
+            arrayField = new Class1[1];
+                // %10 := new Namespace.Class1[]
+                // this.arrayField := __id [ %10 ]
+
+            arrayField[0] = new Class1();
+                // %11 := __id [ this.arrayField ]
+                // %12 := new Namespace.Class1
+                // %13 := Namespace.Class1.Class1() [ %12 ]
+                // %14 := __arraySet [ %11 %12 ]
+
+            Bar(new Class1[1]);
+                // %15 := new Namespace.Class1[]
+                // %16 := Namespace.Class1.Bar(Namespace.Class1[]) [ this %15 ]
         }
+
+        public void Bar(Class1[] array) {}
     }
 }";
 
@@ -1355,8 +1480,9 @@ namespace Namespace
             // References a type that does not exist
             // This doesn't fail as we can still get the array type symbol,
             // even though the ElementKind is unknown.
-            var x0 = new NonExistentType[42];   // %0 := new NonExistentType[]
-                                                // x0 := __id [ %0 ]
+            var x0 = new NonExistentType[42];
+                // %0 := new NonExistentType[]
+                // x0 := __id [ %0 ]
         }
     }
 }";
@@ -1374,8 +1500,9 @@ namespace Namespace
     {
         public void Foo()
         {
-            var a = System.Array.CreateInstance(typeof(string), 10);    // %0 := System.Array.CreateInstance(System.Type, int) [ System.Array const const ]
-                                                                        // a := __id [ %0 ]
+            var a = System.Array.CreateInstance(typeof(string), 10);
+                // %0 := System.Array.CreateInstance(System.Type, int) [ System.Array const const ]
+                // a := __id [ %0 ]
         }
     }
 }";
@@ -1451,8 +1578,8 @@ namespace SimplCommerce.Module.Shipping.Models
             get
             {
                 if (string.IsNullOrWhiteSpace(OnlyCountryIdsString))
-                    // %1 := SimplCommerce.Module.Shipping.Models.ShippingProvider.OnlyCountryIdsString.get [ this ]
-                    // %0 := string.IsNullOrWhiteSpace(string) [ string %1 ]
+                    // %0 := SimplCommerce.Module.Shipping.Models.ShippingProvider.OnlyCountryIdsString.get [ this ]
+                    // %1 := string.IsNullOrWhiteSpace(string) [ string %0 ]
                 {
                     return new List<long>();
                         // %2 := new System.Collections.Generic.List<T>
@@ -1460,10 +1587,10 @@ namespace SimplCommerce.Module.Shipping.Models
                 }
 
                 return OnlyCountryIdsString.Split(',')
-                        // %5 := SimplCommerce.Module.Shipping.Models.ShippingProvider.OnlyCountryIdsString.get [ this ]
-                        // %4 := string.Split(params char[]) [ %5 const ]
+                        // %4 := SimplCommerce.Module.Shipping.Models.ShippingProvider.OnlyCountryIdsString.get [ this ]
+                        // %5 := string.Split(params char[]) [ %4 const ]
                     .Select(long.Parse)
-                        // %6 := System.Linq.Enumerable.Select<TSource, TResult>(System.Collections.Generic.IEnumerable<TSource>, System.Func<TSource, TResult>) [ System.Linq.Enumerable %4 const ]
+                        // %6 := System.Linq.Enumerable.Select<TSource, TResult>(System.Collections.Generic.IEnumerable<TSource>, System.Func<TSource, TResult>) [ System.Linq.Enumerable %5 const ]
                     .ToList();
                         // %7 := System.Linq.Enumerable.ToList<TSource>(System.Collections.Generic.IEnumerable<TSource>) [ System.Linq.Enumerable %6 ]
             }
@@ -1522,15 +1649,425 @@ namespace Namespace
         public string Foo(Class1 c)
         {
             dynamic dyn = c.Bar;
-                // dyn := __id [ __unknown ]
+                // dyn := __id [ const ]
 
             if (dyn.User != null)
+                // %0 := dynamic.operator !=(dynamic, dynamic) [ __unknown const const ]
             {
                 return ""bar"";
             }
 
             return c.ToString();
-                // %0 := object.ToString() [ c ]
+                // %1 := object.ToString() [ c ]
+        }
+    }
+}";
+            UcfgVerifier.VerifyInstructions(code, "Foo");
+        }
+
+        [TestMethod]
+        public void AddAssignment_LocalVariable()
+        {
+            const string code = @"
+namespace Namespace
+{
+    public class Class1
+    {
+        public string fieldString;
+        public string PropertyString { get; set; }
+
+        public void Foo(string parameterString, string[] values)
+        {
+            var localString = ""foo"";
+                // localString := __id [ const ]
+
+            localString += (((""foo"")));
+                // %0 := __concat [ localString const ]
+                // localString := __id [ %0 ]
+
+            localString += localString;
+                // %1 := __concat [ localString localString ]
+                // localString := __id [ %1 ]
+
+            localString += parameterString;
+                // %2 := __concat [ localString parameterString ]
+                // localString := __id [ %2 ]
+
+            localString += fieldString;
+                // %3 := __id [ this.fieldString ]
+                // %4 := __concat [ localString %3 ]
+                // localString := __id [ %4 ]
+
+            localString += PropertyString;
+                // %5 := Namespace.Class1.PropertyString.get [ this ]
+                // %6 := __concat [ localString %5 ]
+                // localString := __id [ %6 ]
+
+            localString += localString += localString += ""123"";
+                // %7 := __concat [ localString const ]
+                // localString := __id [ %7 ]
+                // %8 := __concat [ localString localString ]
+                // localString := __id [ %8 ]
+                // %9 := __concat [ localString localString ]
+                // localString := __id [ %9 ]
+
+            values[0] += Passthrough(localString += ""abc"");
+                // %10 := __arrayGet [ values ]
+                // %11 := __concat [ localString const ]
+                // localString := __id [ %11 ]
+                // %12 := Namespace.Class1.Passthrough(string) [ this localString ]
+                // %13 := __concat [ %10 %12 ]
+                // %14 := __arraySet [ values %13 ]
+        }
+
+        public string Passthrough(string s) => s;
+    }
+}";
+            UcfgVerifier.VerifyInstructions(code, "Foo");
+        }
+
+
+        [TestMethod]
+        public void AddAssignment_Parameter()
+        {
+            const string code = @"
+namespace Namespace
+{
+    public class Class1
+    {
+        public string fieldString;
+        public string PropertyString { get; set; }
+
+        public void Foo(string parameterString, string[] values)
+        {
+            var localString = ""foo"";
+                // localString := __id [ const ]
+
+            parameterString += (((""foo"")));
+                // %0 := __concat [ parameterString const ]
+                // parameterString := __id [ %0 ]
+
+            parameterString += localString;
+                // %1 := __concat [ parameterString localString ]
+                // parameterString := __id [ %1 ]
+
+            parameterString += parameterString;
+                // %2 := __concat [ parameterString parameterString ]
+                // parameterString := __id [ %2 ]
+
+            parameterString += fieldString;
+                // %3 := __id [ this.fieldString ]
+                // %4 := __concat [ parameterString %3 ]
+                // parameterString := __id [ %4 ]
+
+            parameterString += PropertyString;
+                // %5 := Namespace.Class1.PropertyString.get [ this ]
+                // %6 := __concat [ parameterString %5 ]
+                // parameterString := __id [ %6 ]
+
+            parameterString += parameterString += parameterString += ""123"";
+                // %7 := __concat [ parameterString const ]
+                // parameterString := __id [ %7 ]
+                // %8 := __concat [ parameterString parameterString ]
+                // parameterString := __id [ %8 ]
+                // %9 := __concat [ parameterString parameterString ]
+                // parameterString := __id [ %9 ]
+
+            values[0] += Passthrough(parameterString += ""abc"");
+                // %10 := __arrayGet [ values ]
+                // %11 := __concat [ parameterString const ]
+                // parameterString := __id [ %11 ]
+                // %12 := Namespace.Class1.Passthrough(string) [ this parameterString ]
+                // %13 := __concat [ %10 %12 ]
+                // %14 := __arraySet [ values %13 ]
+        }
+
+        public string Passthrough(string s) => s;
+    }
+}";
+            UcfgVerifier.VerifyInstructions(code, "Foo");
+        }
+
+        [TestMethod]
+        public void AddAssignment_Field()
+        {
+            const string code = @"
+namespace Namespace
+{
+    public class Class1
+    {
+        public string fieldString;
+        public string PropertyString { get; set; }
+
+        public void Foo(string parameterString, string[] values)
+        {
+            var localString = ""foo"";
+                // localString := __id [ const ]
+
+            fieldString += (((""foo"")));
+                // %0 := __id [ this.fieldString ]
+                // %1 := __concat [ %0 const ]
+                // this.fieldString := __id [ %1 ]
+
+            fieldString += localString;
+                // %2 := __id [ this.fieldString ]
+                // %3 := __concat [ %2 localString ]
+                // this.fieldString := __id [ %3 ]
+
+            fieldString += parameterString;
+                // %4 := __id [ this.fieldString ]
+                // %5 := __concat [ %4 parameterString ]
+                // this.fieldString := __id [ %5 ]
+
+            fieldString += fieldString;
+                // %6 := __id [ this.fieldString ]
+                // %7 := __id [ this.fieldString ]
+                // %8 := __concat [ %6 %7 ]
+                // this.fieldString := __id [ %8 ]
+
+            fieldString += PropertyString;
+                // %9 := __id [ this.fieldString ]
+                // %10 := Namespace.Class1.PropertyString.get [ this ]
+                // %11 := __concat [ %9 %10 ]
+                // this.fieldString := __id [ %11 ]
+
+            fieldString += fieldString += fieldString += ""123"";
+                // %12 := __id [ this.fieldString ]
+                // %13 := __id [ this.fieldString ]
+                // %14 := __id [ this.fieldString ]
+                // %15 := __concat [ %14 const ]
+                // this.fieldString := __id [ %15 ]
+                // %16 := __id [ this.fieldString ]
+                // %17 := __concat [ %13 %16 ]
+                // this.fieldString := __id [ %17 ]
+                // %18 := __id [ this.fieldString ]
+                // %19 := __concat [ %12 %18 ]
+                // this.fieldString := __id [ %19 ]
+
+            values[0] += Passthrough(fieldString += ""abc"");
+                // %20 := __arrayGet [ values ]
+                // %21 := __id [ this.fieldString ]
+                // %22 := __concat [ %21 const ]
+                // this.fieldString := __id [ %22 ]
+                // %23 := Namespace.Class1.Passthrough(string) [ this this.fieldString ]
+                // %24 := __concat [ %20 %23 ]
+                // %25 := __arraySet [ values %24 ]
+        }
+
+        public string Passthrough(string s) => s;
+    }
+}";
+            UcfgVerifier.VerifyInstructions(code, "Foo");
+        }
+
+        [TestMethod]
+        public void AddAssignment_Property()
+        {
+            const string code = @"
+namespace Namespace
+{
+    public class Class1
+    {
+        public string fieldString;
+        public string PropertyString { get; set; }
+
+        public void Foo(string parameterString, string[] values)
+        {
+            var localString = ""foo"";
+                // localString := __id [ const ]
+
+            PropertyString += (((""foo"")));
+                // %0 := Namespace.Class1.PropertyString.get [ this ]
+                // %1 := __concat [ %0 const ]
+                // %2 := Namespace.Class1.PropertyString.set [ this %1 ]
+
+            PropertyString += localString;
+                // %3 := Namespace.Class1.PropertyString.get [ this ]
+                // %4 := __concat [ %3 localString ]
+                // %5 := Namespace.Class1.PropertyString.set [ this %4 ]
+
+            PropertyString += parameterString;
+                // %6 := Namespace.Class1.PropertyString.get [ this ]
+                // %7 := __concat [ %6 parameterString ]
+                // %8 := Namespace.Class1.PropertyString.set [ this %7 ]
+
+            PropertyString += fieldString;
+                // %9 := Namespace.Class1.PropertyString.get [ this ]
+                // %10 := __id [ this.fieldString ]
+                // %11 := __concat [ %9 %10 ]
+                // %12 := Namespace.Class1.PropertyString.set [ this %11 ]
+
+            PropertyString += PropertyString;
+                // %13 := Namespace.Class1.PropertyString.get [ this ]
+                // %14 := Namespace.Class1.PropertyString.get [ this ]
+                // %15 := __concat [ %13 %14 ]
+                // %16 := Namespace.Class1.PropertyString.set [ this %15 ]
+
+            PropertyString += PropertyString += PropertyString += ""123"";
+                // %17 := Namespace.Class1.PropertyString.get [ this ]
+                // %18 := Namespace.Class1.PropertyString.get [ this ]
+                // %19 := Namespace.Class1.PropertyString.get [ this ]
+                // %20 := __concat [ %19 const ]
+                // %21 := Namespace.Class1.PropertyString.set [ this %20 ]
+                // %22 := __concat [ %18 %21 ]
+                // %23 := Namespace.Class1.PropertyString.set [ this %22 ]
+                // %24 := __concat [ %17 %23 ]
+                // %25 := Namespace.Class1.PropertyString.set [ this %24 ]
+
+            values[0] += Passthrough(PropertyString += ""abc"");
+                // %26 := __arrayGet [ values ]
+                // %27 := Namespace.Class1.PropertyString.get [ this ]
+                // %28 := __concat [ %27 const ]
+                // %29 := Namespace.Class1.PropertyString.set [ this %28 ]
+                // %30 := Namespace.Class1.Passthrough(string) [ this %29 ]
+                // %31 := __concat [ %26 %30 ]
+                // %32 := __arraySet [ values %31 ]
+        }
+
+        public string Passthrough(string s) => s;
+    }
+}";
+            UcfgVerifier.VerifyInstructions(code, "Foo");
+        }
+
+        [TestMethod]
+        public void AssignmentOperator_UnsupportedTypes()
+        {
+            const string code = @"
+namespace Namespace
+{
+    public class Class1
+    {
+        public void Foo()
+        {
+            var i = 42 + 1;
+                // i := __id [ const ]
+            i += 1;
+                // i := __id [ const ]
+            i -= 1;
+                // i := __id [ const ]
+            i *= 1;
+                // i := __id [ const ]
+            i /= 1;
+                // i := __id [ const ]
+        }
+    }
+}";
+            UcfgVerifier.VerifyInstructions(code, "Foo");
+        }
+
+        [TestMethod]
+        public void Operator_UnsupportedTypes()
+        {
+            const string code = @"
+namespace Namespace
+{
+    public class Class1
+    {
+        public void Foo()
+        {
+            int x;
+            double d;
+
+            x = 1 + 2;
+                // x := __id [ const ]
+            x = 1 - 2;
+                // x := __id [ const ]
+            x = 1 * 2;
+                // x := __id [ const ]
+            x = 1 / 2;
+                // x := __id [ const ]
+
+            d = 1.0 / 2;
+                // d := __id [ const ]
+        }
+    }
+}";
+            UcfgVerifier.VerifyInstructions(code, "Foo");
+        }
+
+        [TestMethod]
+        public void Operator_SupportedTypes()
+        {
+            const string code = @"
+namespace Namespace
+{
+    public class Class1
+    {
+        public void Foo(string parameterString, Class1 some, Class1 other)
+        {
+            var result = parameterString == null;
+                // %0 := string.operator ==(string, string) [ string parameterString const ]
+                // result := __id [ %0 ]
+
+            result = parameterString != null;
+                // %1 := string.operator !=(string, string) [ string parameterString const ]
+                // result := __id [ %1 ]
+
+            Class1 classResult = some + other;
+                // %2 := Namespace.Class1.operator +(Namespace.Class1, Namespace.Class1) [ Namespace.Class1 some other ]
+                // classResult := __id [ %2 ]
+
+            classResult = classResult + some + other;
+                // %3 := Namespace.Class1.operator +(Namespace.Class1, Namespace.Class1) [ Namespace.Class1 classResult some ]
+                // %4 := Namespace.Class1.operator +(Namespace.Class1, Namespace.Class1) [ Namespace.Class1 %3 other ]
+                // classResult := __id [ %4 ]
+        }
+
+        public static Class1 operator+ (Class1 left, Class1 right)
+        {
+            return null;
+        }
+    }
+}";
+            UcfgVerifier.VerifyInstructions(code, "Foo");
+        }
+
+            [TestMethod]
+        public void UnaryExpressions_AreIgnored()
+        {
+            const string code = @"
+namespace Namespace
+{
+    public class Class1
+    {
+        public void Foo()
+        {
+            int negative = -1;
+                // negative := __id [ const ]
+            int positive = 1;
+                // positive := __id [ const ]
+            int result;
+
+            result = +negative;  // result = -1
+                // result := __id [ const ]
+            result = +positive;  // result = 1
+                // result := __id [ const ]
+
+            result = -negative;  // result = 1
+                // result := __id [ const ]
+            result = -positive   // result = -1
+                // result := __id [ const ]
+
+            int count;
+            int index = 0;
+                // index := __id [ const ]
+
+            count = index++;    // count = 0, index = 1
+                // count := __id [ const ]
+            count = ++index;    // count = 2, index = 2
+                // count := __id [ const ]
+
+            count = index--;    // count = 2, index = 1
+                // count := __id [ const ]
+            count = --index;    // count = 0, index = 0
+                // count := __id [ const ]
+
+            bool b = false;
+                // b := __id [ const ]
+
+            b = !b;
+                // b := __id [ const ]
         }
     }
 }";
