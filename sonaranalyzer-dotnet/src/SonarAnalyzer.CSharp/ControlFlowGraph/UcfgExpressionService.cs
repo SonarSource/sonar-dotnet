@@ -30,8 +30,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
         internal const string DefaultConstantValue = "\"\"";
         internal static readonly Expression UnknownExpression = new Expression { Const = new Constant { Value = "{unknown}" } };
 
-        public readonly Dictionary<SyntaxNode, Expression> cache
-            = new Dictionary<SyntaxNode, Expression>();
+        private readonly Dictionary<SyntaxNode, Expression> cache = new Dictionary<SyntaxNode, Expression>();
 
         private int numberedVariableCounter;
 

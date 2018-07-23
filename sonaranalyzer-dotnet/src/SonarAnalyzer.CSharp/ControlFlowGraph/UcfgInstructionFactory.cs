@@ -66,6 +66,13 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                     return ProcessArrayCreation(arrayCreation);
 
                 // ========================================================================
+                // Association
+                // ========================================================================
+                case InstanceExpressionSyntax instanceExpression:
+                    expressionService.Associate(instanceExpression, expressionService.This);
+                    return NoInstructions;
+
+                // ========================================================================
                 // Handles instructions related to function calls
                 // ========================================================================
                 case VariableDeclaratorSyntax variableDeclarator:
@@ -86,12 +93,8 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                 case ConstructorInitializerSyntax constructorInitializer:
                     return ProcessConstructorInitializer(constructorInitializer);
 
-                // ========================================================================
-                // Others
-                // ========================================================================
-                case InstanceExpressionSyntax instanceExpression:
-                    expressionService.Associate(instanceExpression, expressionService.This);
-                    return NoInstructions;
+                case ElementAccessExpressionSyntax elementAccess:
+                    return ProcessElementAccess(elementAccess);
 
                 default:
                     return ProcessReadSyntaxNode(syntaxNode);
@@ -263,67 +266,6 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             return NoInstructions;
         }
 
-        private IEnumerable<Instruction> ProcessReadSyntaxNode(SyntaxNode syntaxNode)
-        {
-            if (syntaxNode.GetSelfOrTopParenthesizedExpression().Parent is AssignmentExpressionSyntax assignmentSyntax &&
-                assignmentSyntax.IsKind(SyntaxKind.SimpleAssignmentExpression) &&
-                assignmentSyntax.Left.RemoveParentheses() == syntaxNode)
-            {
-                return NoInstructions;
-            }
-
-            var instructions = new List<Instruction>();
-
-            var nodeSymbol = GetNodeSymbol(syntaxNode);
-
-            switch (nodeSymbol)
-            {
-                case IFieldSymbol fieldSymbol:
-                    instructions.AddRange(BuildIdentityCall(syntaxNode, expressionService.CreateVariable(),
-                        expressionService.CreateFieldAccess(fieldSymbol.Name, GetTargetExpression(syntaxNode, fieldSymbol))));
-                    break;
-
-                case IPropertySymbol propertySymbol:
-                    instructions.AddRange(BuildFunctionCall(syntaxNode, propertySymbol.GetMethod,
-                        GetTargetExpression(syntaxNode, propertySymbol)));
-                    break;
-
-                case INamedTypeSymbol namedTypeSymbol:
-                    expressionService.Associate(syntaxNode, expressionService.CreateClassName(namedTypeSymbol));
-                    break;
-
-                case ILocalSymbol localSymbol:
-                    expressionService.Associate(syntaxNode, expressionService.CreateVariable(localSymbol.Name));
-                    break;
-
-                default:
-                    expressionService.Associate(syntaxNode, CreateExpressionFromType(nodeSymbol));
-                    break;
-            }
-
-            var nodeTypeSymbol = nodeSymbol?.GetSymbolType();
-            if (syntaxNode is ElementAccessExpressionSyntax &&
-                nodeTypeSymbol?.TypeKind == TypeKind.Array)
-            {
-                instructions.AddRange(BuildArrayGetCall(syntaxNode, nodeTypeSymbol, GetTargetExpression(syntaxNode,
-                    nodeTypeSymbol)));
-            }
-
-            return instructions;
-        }
-
-        private ISymbol GetNodeSymbol(SyntaxNode node)
-        {
-            var currentNode = node.RemoveParentheses();
-
-            while (currentNode is ElementAccessExpressionSyntax elementAccess)
-            {
-                currentNode = elementAccess.Expression.RemoveParentheses();
-            }
-
-            return this.semanticModel.GetSymbolInfo(currentNode).Symbol;
-        }
-
         private Expression CreateExpressionFromType(ISymbol symbol)
         {
             return IsConstant()
@@ -347,6 +289,18 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                 .Select(a => a.Expression)
                 .Select(expressionService.GetOrDefault)
                 .ToArray();
+        }
+
+        private ISymbol GetNodeSymbol(SyntaxNode node)
+        {
+            var currentNode = node.RemoveParentheses();
+
+            while (currentNode is ElementAccessExpressionSyntax elementAccess)
+            {
+                currentNode = elementAccess.Expression.RemoveParentheses();
+            }
+
+            return this.semanticModel.GetSymbolInfo(currentNode).Symbol;
         }
 
         private Expression GetTargetExpression(SyntaxNode syntaxNode, ISymbol nodeSymbol)
@@ -392,9 +346,17 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
         {
             var instructions = new List<Instruction>();
 
+            var leftAsElementAccess = assignmentExpression.Left.RemoveParentheses() as ElementAccessExpressionSyntax;
+
             var leftPartSymbol = GetNodeSymbol(assignmentExpression.Left);
             var leftExpression = expressionService.GetOrDefault(assignmentExpression.Left);
             var rightExpression = expressionService.GetOrDefault(assignmentExpression.Right);
+
+            // If the right expression was previously a left expression it's possible that the expression needs to be simplified.
+            // For example:
+            // field = someString
+            // var x = field
+            rightExpression = SimplifyFunctionExpression(assignmentExpression.Right, rightExpression, instructions);
 
             var shouldCreateLeftSide = leftExpression == UcfgExpressionService.UnknownExpression;
 
@@ -421,7 +383,11 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
 
             if (shouldCreateLeftSide)
             {
-                if (leftPartSymbol is IFieldSymbol fieldSymbol)
+                if (leftAsElementAccess != null)
+                {
+                    leftExpression = expressionService.GetOrDefault(leftAsElementAccess.Expression);
+                }
+                else if (leftPartSymbol is IFieldSymbol fieldSymbol)
                 {
                     leftExpression = expressionService.CreateFieldAccess(fieldSymbol.Name,
                         GetTargetExpression(assignmentExpression.Left, fieldSymbol));
@@ -439,23 +405,24 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             }
 
             // handle left part of the assignment
-            if (leftPartSymbol.GetSymbolType().TypeKind == TypeKind.Array)
+            if (leftAsElementAccess != null &&
+                leftPartSymbol.GetSymbolType().TypeKind == TypeKind.Array)
             {
                 instructions.AddRange(BuildArraySetCall(assignmentExpression, leftExpression, rightExpression));
+                return instructions;
             }
-            else if (leftPartSymbol is IPropertySymbol propertySymbol)
+
+            if (leftPartSymbol is IPropertySymbol propertySymbol)
             {
                 if (propertySymbol.SetMethod != null)
                 {
                     instructions.AddRange(BuildFunctionCall(assignmentExpression, propertySymbol.SetMethod,
                         GetTargetExpression(assignmentExpression.Left, propertySymbol), rightExpression));
                 }
-            }
-            else
-            {
-                instructions.AddRange(BuildIdentityCall(assignmentExpression, leftExpression, rightExpression));
+                return instructions;
             }
 
+            instructions.AddRange(BuildIdentityCall(assignmentExpression, leftExpression, rightExpression));
             return instructions;
         }
 
@@ -490,6 +457,28 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
 
             return BuildFunctionCall(constructorInitializer, thisOrBaseCtorMethodSymbol, expressionService.This,
                 GetAdditionalArguments(constructorInitializer.ArgumentList));
+        }
+
+        private IEnumerable<Instruction> ProcessElementAccess(ElementAccessExpressionSyntax elementAccessSyntax)
+        {
+            if (elementAccessSyntax.GetSelfOrTopParenthesizedExpression().Parent is AssignmentExpressionSyntax assignmentSyntax &&
+                assignmentSyntax.IsKind(SyntaxKind.SimpleAssignmentExpression) &&
+                assignmentSyntax.Left.RemoveParentheses() == elementAccessSyntax)
+            {
+                return NoInstructions;
+            }
+
+            var elementAccessType = GetNodeSymbol(elementAccessSyntax).GetSymbolType();
+
+            if (elementAccessType == null
+                || elementAccessType.TypeKind != TypeKind.Array)
+            {
+                expressionService.Associate(elementAccessSyntax, expressionService.CreateConstant());
+                return NoInstructions;
+            }
+
+            return BuildArrayGetCall(elementAccessSyntax, elementAccessType, GetTargetExpression(elementAccessSyntax,
+                elementAccessType));
         }
 
         private IEnumerable<Instruction> ProcessInvocationExpression(InvocationExpressionSyntax invocationSyntax)
@@ -541,6 +530,43 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                 .Concat(BuildFunctionCall(objectCreation.Type, methodSymbol, expressionService.GetOrDefault(objectCreation),
                     GetAdditionalArguments(objectCreation.ArgumentList)));
         }
+
+        private IEnumerable<Instruction> ProcessReadSyntaxNode(SyntaxNode syntaxNode)
+        {
+            if (syntaxNode.GetSelfOrTopParenthesizedExpression().Parent is AssignmentExpressionSyntax assignmentSyntax &&
+                assignmentSyntax.IsKind(SyntaxKind.SimpleAssignmentExpression) &&
+                assignmentSyntax.Left.RemoveParentheses() == syntaxNode)
+            {
+                return NoInstructions;
+            }
+
+            var nodeSymbol = GetNodeSymbol(syntaxNode);
+
+            switch (nodeSymbol)
+            {
+                case IFieldSymbol fieldSymbol:
+                    return BuildIdentityCall(syntaxNode, expressionService.CreateVariable(),
+                        expressionService.CreateFieldAccess(fieldSymbol.Name, GetTargetExpression(syntaxNode, fieldSymbol)));
+
+                case IPropertySymbol propertySymbol:
+                    return BuildFunctionCall(syntaxNode, propertySymbol.GetMethod, GetTargetExpression(syntaxNode, propertySymbol));
+
+                case INamedTypeSymbol namedTypeSymbol:
+                    expressionService.Associate(syntaxNode, expressionService.CreateClassName(namedTypeSymbol));
+                    break;
+
+                case ILocalSymbol localSymbol:
+                    expressionService.Associate(syntaxNode, expressionService.CreateVariable(localSymbol.Name));
+                    break;
+
+                default:
+                    expressionService.Associate(syntaxNode, CreateExpressionFromType(nodeSymbol));
+                    break;
+            }
+
+            return NoInstructions;
+        }
+
         private IEnumerable<Instruction> ProcessVariableDeclarator(VariableDeclaratorSyntax variableDeclarator)
         {
             if (variableDeclarator.Initializer == null)
@@ -552,6 +578,18 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
 
             return BuildIdentityCall(variableDeclarator, expressionService.CreateVariable(variableDeclarator.Identifier.Text),
                 expressionService.GetOrDefault(variableDeclarator.Initializer.Value));
+        }
+
+        private Expression SimplifyFunctionExpression(SyntaxNode node, Expression expression, List<Instruction> instructions)
+        {
+            if (expression.ExprCase == Expression.ExprOneofCase.FieldAccess)
+            {
+                var newVariable = expressionService.CreateVariable();
+                instructions.AddRange(BuildIdentityCall(node, newVariable, expression));
+                return newVariable;
+            }
+
+            return expression;
         }
     }
 }
