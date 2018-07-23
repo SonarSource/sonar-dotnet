@@ -569,7 +569,7 @@ namespace Namespace
         public void Foo()
         {
             SendEmailAsync(""body"");
-                // %0 := Namespace.Class1.SendEmailAsync(string, bool) [ this const ]
+                // %0 := Namespace.Class1.SendEmailAsync(string, bool) [ this const const ]
             SendEmailAsync(""body"", isHtml: true);
                 // %1 := Namespace.Class1.SendEmailAsync(string, bool) [ this const const ]
             SendEmailAsync(""body"", isHtml: false);
@@ -598,9 +598,9 @@ namespace Namespace
             SendEmailAsync(body: s, isHtml: false);
                 // %1 := Namespace.Class1.SendEmailAsync(string, bool) [ this s const ]
             SendEmailAsync(body: s);
-                // %2 := Namespace.Class1.SendEmailAsync(string, bool) [ this s ]
+                // %2 := Namespace.Class1.SendEmailAsync(string, bool) [ this s const ]
             SendEmailAsync(isHtml: false, body: s);
-                // %3 := Namespace.Class1.SendEmailAsync(string, bool) [ this const s ]
+                // %3 := Namespace.Class1.SendEmailAsync(string, bool) [ this s const ]
         }
 
         public System.Threading.Tasks.Task SendEmailAsync(string body, bool isHtml = false)

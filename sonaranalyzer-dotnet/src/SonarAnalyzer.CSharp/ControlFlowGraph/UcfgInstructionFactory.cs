@@ -284,17 +284,39 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                 symbol.GetSymbolType().IsAny(UnsupportedVariableTypes);
         }
 
-        private Expression[] GetAdditionalArguments(ArgumentListSyntax argumentList)
+        private Expression[] GetInvocationExpressions(IList<IParameterSymbol> parameters, ArgumentListSyntax argumentList)
         {
             if (argumentList == null)
             {
                 return new Expression[0];
             }
 
-            return argumentList.Arguments
-                .Select(a => a.Expression)
-                .Select(expressionService.GetOrDefault)
-                .ToArray();
+            var expressions = new List<Expression>();
+
+            // Handle un-named arguments and without default value first.
+            // This kind of argument always appear first in the list of arguments
+            var classicArgumentIndex = 0;
+            while (classicArgumentIndex < argumentList.Arguments.Count &&
+                argumentList.Arguments[classicArgumentIndex].NameColon == null)
+            {
+                expressions.Add(expressionService.GetOrDefault(argumentList.Arguments[classicArgumentIndex].Expression));
+                classicArgumentIndex++;
+            }
+
+            // Handle named arguments and default values
+            for (var otherArgumentIndex = classicArgumentIndex; otherArgumentIndex < parameters.Count; otherArgumentIndex++)
+            {
+                var matchingArgument = argumentList.Arguments
+                    .FirstOrDefault(x => x.NameColon?.Name.Identifier.ValueText == parameters[otherArgumentIndex].Name);
+
+                expressions.Add(matchingArgument != null
+                    // this is a named argument, let's retrieve its value
+                    ? expressionService.GetOrDefault(matchingArgument.Expression)
+                    // argument not specified, use its default value (always constant)
+                    : expressionService.CreateConstant());
+            }
+
+            return expressions.ToArray();
         }
 
         private ISymbol GetNodeSymbol(SyntaxNode node)
@@ -462,7 +484,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             }
 
             return BuildFunctionCall(constructorInitializer, thisOrBaseCtorMethodSymbol, expressionService.This,
-                GetAdditionalArguments(constructorInitializer.ArgumentList));
+                GetInvocationExpressions(thisOrBaseCtorMethodSymbol.Parameters, constructorInitializer.ArgumentList));
         }
 
         private IEnumerable<Instruction> ProcessElementAccess(ElementAccessExpressionSyntax elementAccessSyntax)
@@ -519,7 +541,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                 targetExpression = GetTargetExpression(invocationSyntax.Expression, methodSymbol);
             }
 
-            additionalArguments.AddRange(GetAdditionalArguments(invocationSyntax.ArgumentList));
+            additionalArguments.AddRange(GetInvocationExpressions(methodSymbol.Parameters, invocationSyntax.ArgumentList));
 
             return BuildFunctionCall(invocationSyntax, methodSymbol, targetExpression, additionalArguments.ToArray());
 
@@ -530,11 +552,15 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
         private IEnumerable<Instruction> ProcessObjectCreation(ObjectCreationExpressionSyntax objectCreation)
         {
             var methodSymbol = this.semanticModel.GetSymbolInfo(objectCreation).Symbol as IMethodSymbol;
+            if (methodSymbol == null)
+            {
+                return NoInstructions;
+            }
 
             return NoInstructions
                 .Concat(BuildNewInstance(objectCreation, methodSymbol?.ContainingType?.ConstructedFrom))
                 .Concat(BuildFunctionCall(objectCreation.Type, methodSymbol, expressionService.GetOrDefault(objectCreation),
-                    GetAdditionalArguments(objectCreation.ArgumentList)));
+                    GetInvocationExpressions(methodSymbol.Parameters, objectCreation.ArgumentList)));
         }
 
         private IEnumerable<Instruction> ProcessReadSyntaxNode(SyntaxNode syntaxNode)
