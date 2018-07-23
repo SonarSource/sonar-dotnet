@@ -27,39 +27,6 @@ namespace SonarAnalyzer.UnitTest.ControlFlowGraph
     public class UcfgBuilder_Instructions_Suspect
     {
         [TestMethod]
-        public void IndexerAccess()
-        {
-            const string code = @"
-namespace Namespace
-{
-    using System.Collections.Generic;
-    public class Class1
-    {
-        public void Foo(string s, List<string> list)
-        {
-            // Strings and lists have indexers but should not be handled as arrays;
-            // until collection indexers are supported, the string and list element
-            // access is represented as variable
-            var c = s[0];
-                // c := __id [ const ]
-                /* Expect to have:
-                 * %0 := string.this[int].get [ s const ]
-                 * c := __id [ %0 ]
-                 */
-
-            var i = list[0];
-                // i := __id [ const ]
-                /* Expect to have:
-                 * %1 := System.Collections.Generic.List<T>.this[int].get [ list const ]
-                 * i := __id [ %1 ]
-                 */
-        }
-    }
-}";
-            UcfgVerifier.VerifyInstructions(code, "Foo");
-        }
-
-        [TestMethod]
         public void TernaryOperator_NotInCFG()
         {
             const string code = @"

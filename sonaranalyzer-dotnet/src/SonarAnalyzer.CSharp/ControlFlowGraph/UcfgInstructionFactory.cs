@@ -284,7 +284,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                 symbol.GetSymbolType().IsAny(UnsupportedVariableTypes);
         }
 
-        private Expression[] GetInvocationExpressions(IList<IParameterSymbol> parameters, ArgumentListSyntax argumentList)
+        private Expression[] GetInvocationExpressions(IList<IParameterSymbol> parameters, BaseArgumentListSyntax argumentList)
         {
             if (argumentList == null)
             {
@@ -323,9 +323,18 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
         {
             var currentNode = node.RemoveParentheses();
 
+            var needsParentCall = false;
             while (currentNode is ElementAccessExpressionSyntax elementAccess)
             {
+                needsParentCall = true;
                 currentNode = elementAccess.Expression.RemoveParentheses();
+            }
+
+            // We need to be on the last level of element access to have the correct kind of symbol (which will tell whether this
+            // is an array access or a property indexer access).
+            if (needsParentCall)
+            {
+                currentNode = currentNode.Parent;
             }
 
             return this.semanticModel.GetSymbolInfo(currentNode).Symbol;
@@ -434,7 +443,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
 
             // handle left part of the assignment
             if (leftAsElementAccess != null &&
-                leftPartSymbol.GetSymbolType().TypeKind == TypeKind.Array)
+                this.semanticModel.GetTypeInfo(leftAsElementAccess.Expression).ConvertedType.TypeKind == TypeKind.Array)
             {
                 instructions.AddRange(BuildArraySetCall(assignmentExpression, leftExpression, rightExpression));
                 return instructions;
@@ -444,8 +453,11 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             {
                 if (propertySymbol.SetMethod != null)
                 {
+                    var propertySetterArguments = leftAsElementAccess != null
+                        ? GetInvocationExpressions(propertySymbol.Parameters, leftAsElementAccess.ArgumentList)
+                        : new[] { rightExpression };
                     instructions.AddRange(BuildFunctionCall(assignmentExpression, propertySymbol.SetMethod,
-                        GetTargetExpression(assignmentExpression.Left, propertySymbol), rightExpression));
+                        GetTargetExpression(assignmentExpression.Left, propertySymbol), propertySetterArguments));
                 }
                 return instructions;
             }
@@ -496,17 +508,27 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                 return NoInstructions;
             }
 
-            var elementAccessType = GetNodeSymbol(elementAccessSyntax).GetSymbolType();
-
-            if (elementAccessType == null
-                || elementAccessType.TypeKind != TypeKind.Array)
+            var elementAccessType = this.semanticModel.GetTypeInfo(elementAccessSyntax.Expression).ConvertedType;
+            if (elementAccessType == null)
             {
-                expressionService.Associate(elementAccessSyntax, expressionService.CreateConstant());
                 return NoInstructions;
             }
 
-            return BuildArrayGetCall(elementAccessSyntax, elementAccessType, GetTargetExpression(elementAccessSyntax,
-                elementAccessType));
+            if (elementAccessType.TypeKind == TypeKind.Array)
+            {
+                return BuildArrayGetCall(elementAccessSyntax, elementAccessType, GetTargetExpression(elementAccessSyntax,
+                    elementAccessType));
+            }
+
+            var indexerPropertySymbol = GetNodeSymbol(elementAccessSyntax) as IPropertySymbol;
+            if (indexerPropertySymbol == null)
+            {
+                return NoInstructions;
+            }
+
+            return BuildFunctionCall(elementAccessSyntax, indexerPropertySymbol.GetMethod,
+                GetTargetExpression(elementAccessSyntax, indexerPropertySymbol),
+                GetInvocationExpressions(indexerPropertySymbol.Parameters, elementAccessSyntax.ArgumentList));
         }
 
         private IEnumerable<Instruction> ProcessInvocationExpression(InvocationExpressionSyntax invocationSyntax)
