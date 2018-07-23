@@ -219,8 +219,8 @@ namespace Namespace
             // References a type that does not exist
             // This doesn't fail as we can still get the array type symbol,
             // even though the ElementKind is unknown.
-            var x0 = new NonExistentType[42];   // %0 := new NonExistentType[]
-                                                // x0 := __id [ %0 ]
+            var xxx = new NonExistentType[42];   // %0 := new NonExistentType[]
+                                                 // xxx := __id [ %0 ]
         }
     }
 }";
@@ -238,8 +238,9 @@ namespace Namespace
     {
         public void Foo()
         {
-            var a = System.Array.CreateInstance(typeof(string), 10);    // %0 := System.Array.CreateInstance(System.Type, int) [ System.Array const const ]
-                                                                        // a := __id [ %0 ]
+            var a = System.Array.CreateInstance(typeof(string), 10);
+                // %0 := System.Array.CreateInstance(System.Type, int) [ System.Array const const ]
+                // a := __id [ %0 ]
         }
     }
 }";
@@ -523,14 +524,12 @@ namespace Namespace
                 // %3 := __arraySet [ %1 data ]
                 // this.StringField := __id [ %1 ]
 
-
             Class1Field = new Class1[] { new Class1() };
                 // %4 := new Namespace.Class1[]
                 // %5 := new Namespace.Class1
                 // %6 := Namespace.Class1.Class1() [ %5 ]
                 // %7 := __arraySet [ %4 %5 ]
                 // this.Class1Field := __id [ %4 ]
-
 
            StringField = new[] { data };
                 // %8 := new string[]
@@ -562,12 +561,10 @@ namespace Namespace
                 // %1 := __arraySet [ %0 const ]
                 // %2 := Namespace.Class1.IntProperty.set [ this %0 ]
 
-
             StringProperty = new string[] { data };
                 // %3 := new string[]
                 // %4 := __arraySet [ %3 data ]
                 // %5 := Namespace.Class1.StringProperty.set [ this %3 ]
-
 
             Class1Property = new Class1[3];
                 // %6 := new Namespace.Class1[]
@@ -640,7 +637,6 @@ namespace Namespace
                 // %0 := new int[][]
                 // intJagged1 := __id [ %0 ]
 
-
             int[][] intJagged2 = new int[][]
             {
                 new int [] { intdata1 },
@@ -655,11 +651,9 @@ namespace Namespace
                 // %7 := __arraySet [ %1 %5 ]
                 // intJagged2 := __id [ %1 ]
 
-
             string[][] stringJagged1 = new string[2][];
                 // %8 := new string[][]
                 // stringJagged1 := __id [ %8 ]
-
 
             string[][] stringJagged2 = new string[][]
             {
@@ -675,18 +669,15 @@ namespace Namespace
                 // %15 := __arraySet [ %9 %13 ]
                 // stringJagged2 := __id [ %9 ]
 
-
             Class1[][] classJagged1 = new Class1[2][];
                 // %16 := new Namespace.Class1[][]
                 // classJagged1 := __id [ %16 ]
-
 
             Class1[][] classJagged2 = new Class1[][]
             {
                 new Class1 [] { objdata1 },
                 new Class1 [] { objdata2 }
             };
-
                 // %17 := new Namespace.Class1[][]
                 // %18 := new Namespace.Class1[]
                 // %19 := __arraySet [ %18 objdata1 ]
@@ -719,12 +710,14 @@ namespace Namespace
                 // %0 := new int[*,*]
                 // intMulti1 := __id [ %0 ]
 
+            // BUG: should handle the nested array initializers
+            // SONARSEC-181: [C#] Handle multi-dimensional array initializers correctly
             int[,] intMulti2 = new int[,]
             {
                 { 1, 2 }, { intdata1, intdata2 }
             };
                 // %1 := new int[*,*]
-                // %2 := __arraySet [ %1 const ]            <-- TODO should handle the nested array initializers
+                // %2 := __arraySet [ %1 const ]
                 // %3 := __arraySet [ %1 const ]
                 // intMulti2 := __id [ %1 ]
 

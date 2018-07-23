@@ -19,7 +19,6 @@
  */
 
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -256,15 +255,12 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
         }
 
         private IEnumerable<Instruction> BuildNewArrayInstance(ExpressionSyntax syntaxNode,
-            IArrayTypeSymbol arrayTypeSymbol,
-            InitializerExpressionSyntax arrayInitializationNode)
+            IArrayTypeSymbol arrayTypeSymbol, InitializerExpressionSyntax arrayInitializationNode)
         {
             var newInstructions = BuildNewInstance(syntaxNode, arrayTypeSymbol);
 
             var callTarget = expressionService.GetOrDefault(syntaxNode);
-
-            return newInstructions.
-                Concat(ProcessArrayInitializer(arrayInitializationNode, callTarget));
+            return newInstructions.Concat(ProcessArrayInitializer(arrayInitializationNode, callTarget));
         }
 
         private IEnumerable<Instruction> BuildOperatorCall(SyntaxNode syntaxNode, Expression leftExpression,
@@ -406,7 +402,6 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
 
             if (arrayTypeSymbol == null)
             {
-                expressionService.Associate(arrayCreationExpression, expressionService.CreateConstant());
                 return NoInstructions;
             }
 
@@ -418,12 +413,11 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
 
         private IEnumerable<Instruction> ProcessImplicitArrayCreation(ImplicitArrayCreationExpressionSyntax implicitArrayExpression)
         {
-            // e.g. string[] a2 = new[] { data, data };
-            // Need to look at the ConvertedType in this case
+            // e.g. string[] a2 = new[] { data, data }
+            // Need to look at the ConvertedType in this case since the implicit array creation type is null
             var arrayType = this.semanticModel.GetTypeInfo(implicitArrayExpression).ConvertedType as IArrayTypeSymbol;
             if (arrayType == null)
             {
-                expressionService.Associate(implicitArrayExpression, expressionService.CreateConstant());
                 return NoInstructions;
             }
 
@@ -441,14 +435,10 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             foreach (ExpressionSyntax expNode in initializerExpression.Expressions)
             {
                 // Some of the syntax nodes might already have been processed (e.g. the identifier names)
-                // Process any that have not already been processed.
+                // Call CreateFrom to process any nodes that have not already been processed.
+                var argInstructions = CreateFrom(expNode);
+                newInstructions.AddRange(argInstructions);
                 var initializerArg = expressionService.GetOrDefault(expNode);
-                if (initializerArg == UcfgExpressionService.UnknownExpression)
-                {
-                    var argInstructions = CreateFrom(expNode);
-                    newInstructions.AddRange(argInstructions);
-                    initializerArg = expressionService.GetOrDefault(expNode);
-                }
 
                 var arraySetInstructions = BuildArraySetCall(expNode, target, initializerArg);
                 newInstructions.AddRange(arraySetInstructions);
@@ -459,8 +449,6 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
         private IEnumerable<Instruction> ProcessAssignmentExpression(AssignmentExpressionSyntax assignmentExpression)
         {
             var instructions = new List<Instruction>();
-
-            var leftAsElementAccess = assignmentExpression.Left.RemoveParentheses() as ElementAccessExpressionSyntax;
 
             var leftPartSymbol = GetNodeSymbol(assignmentExpression.Left);
             var leftExpression = expressionService.GetOrDefault(assignmentExpression.Left);
@@ -495,6 +483,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                 shouldCreateLeftSide = true;
             }
 
+            var leftAsElementAccess = assignmentExpression.Left.RemoveParentheses() as ElementAccessExpressionSyntax;
             if (shouldCreateLeftSide)
             {
                 if (leftAsElementAccess != null)
@@ -707,8 +696,9 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                 return NoInstructions;
             }
 
-            // Handle the case "string[] a1 = { data, };"
+            // Handle the case "string[] a1 = { data }"
             var instructions = NoInstructions;
+
             if (variableDeclarator.Initializer.Value.IsKind(SyntaxKind.ArrayInitializerExpression) &&
                 variableDeclarator.Initializer.Value is InitializerExpressionSyntax initializerExpressionSyntax &&
                 // Note: we need to use the ConvertedType here (i.e. after the implicit conversion): the Type
