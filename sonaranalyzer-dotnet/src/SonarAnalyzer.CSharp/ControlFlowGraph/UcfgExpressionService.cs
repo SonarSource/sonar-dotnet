@@ -81,5 +81,12 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
 
             return expression;
         }
+
+        /// <summary>
+        /// If a node returns something other than "UnknownExpression" then it
+        /// has already been processed succesfully
+        /// </summary>
+        public bool IsAlreadyProcessed(SyntaxNode syntaxNode) =>
+            this.GetOrDefault(syntaxNode) != UcfgExpressionService.UnknownExpression;
     }
 }
