@@ -174,42 +174,67 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
 
         private IEnumerable<Instruction> BuildAnnotateCall(SyntaxNode syntaxNode, IMethodSymbol attributeMethodSymbol,
             Expression target) =>
-            BuildFunctionCall(syntaxNode, UcfgBuiltInMethodId.Annotate, expressionService.CreateVariable(),
+            BuildFunctionCall(new SyntaxNodeOrToken(syntaxNode), UcfgBuiltInMethodId.Annotate, expressionService.CreateVariable(),
                 expressionService.CreateConstant(attributeMethodSymbol.ToUcfgMethodId()), target);
 
         private IEnumerable<Instruction> BuildAnnotationCall(SyntaxNode syntaxNode, Expression destination, Expression value) =>
-            BuildFunctionCall(syntaxNode, UcfgBuiltInMethodId.Annotation, destination, value);
+            BuildFunctionCall(new SyntaxNodeOrToken(syntaxNode), UcfgBuiltInMethodId.Annotation, destination, value);
 
         private IEnumerable<Instruction> BuildArrayGetCall(SyntaxNode syntaxNode, ITypeSymbol nodeTypeSymbol,
             Expression target) =>
-            BuildFunctionCall(syntaxNode, UcfgBuiltInMethodId.ArrayGet, expressionService.CreateVariable(), target);
+            BuildFunctionCall(new SyntaxNodeOrToken(syntaxNode), UcfgBuiltInMethodId.ArrayGet,
+                expressionService.CreateVariable(), target);
 
         private IEnumerable<Instruction> BuildArraySetCall(SyntaxNode syntaxNode, Expression destination, Expression value) =>
-            BuildFunctionCall(syntaxNode, UcfgBuiltInMethodId.ArraySet, expressionService.CreateVariable(), destination, value);
+            BuildFunctionCall(new SyntaxNodeOrToken(syntaxNode), UcfgBuiltInMethodId.ArraySet,
+                expressionService.CreateVariable(), destination, value);
 
         private IEnumerable<Instruction> BuildConcatCall(SyntaxNode syntaxNode, Expression left, Expression right) =>
-            BuildFunctionCall(syntaxNode, UcfgBuiltInMethodId.Concatenation, expressionService.CreateVariable(),
-                left, right);
+            BuildFunctionCall(new SyntaxNodeOrToken(syntaxNode), UcfgBuiltInMethodId.Concatenation,
+                expressionService.CreateVariable(), left, right);
 
-        private IEnumerable<Instruction> BuildEntryPointCall(SyntaxNode syntaxNode, ParameterListSyntax parameterList) =>
-            BuildFunctionCall(syntaxNode, UcfgBuiltInMethodId.EntryPoint, expressionService.CreateVariable(),
-                parameterList.Parameters.Select(expressionService.GetOrDefault).ToArray());
+        private IEnumerable<Instruction> BuildEntryPointCall(BaseMethodDeclarationSyntax baseMethodDeclarationSyntax)
+        {
+            return BuildFunctionCall(GetMethodIdentifier(), UcfgBuiltInMethodId.EntryPoint, expressionService.CreateVariable(),
+                baseMethodDeclarationSyntax.ParameterList.Parameters.Select(expressionService.GetOrDefault).ToArray());
 
-        private IEnumerable<Instruction> BuildFunctionCall(SyntaxNode syntaxNode, string signature, Expression destination,
-            params Expression[] expressionList)
+            SyntaxNodeOrToken GetMethodIdentifier()
+            {
+                switch (baseMethodDeclarationSyntax)
+                {
+                    case ConstructorDeclarationSyntax constructorDeclarationSyntax:
+                        return new SyntaxNodeOrToken(constructorDeclarationSyntax.Identifier);
+
+                    case MethodDeclarationSyntax methodDeclarationSyntax:
+                        return new SyntaxNodeOrToken(methodDeclarationSyntax.Identifier);
+
+                    case OperatorDeclarationSyntax operatorDeclarationSyntax:
+                        return new SyntaxNodeOrToken(operatorDeclarationSyntax.OperatorToken);
+
+                    default:
+                        return new SyntaxNodeOrToken(baseMethodDeclarationSyntax);
+                }
+            }
+        }
+
+        private IEnumerable<Instruction> BuildFunctionCall(SyntaxNodeOrToken syntaxNodeOrToken, string signature,
+            Expression destination, params Expression[] expressionList)
         {
             var functionCallInstruction = new Instruction
             {
                 Assigncall = new AssignCall
                 {
-                    Location = syntaxNode.GetUcfgLocation(),
+                    Location = syntaxNodeOrToken.GetUcfgLocation(),
                     MethodId = signature
                 }
             };
             functionCallInstruction.Assigncall.Args.AddRange(expressionList);
-
-            expressionService.Associate(syntaxNode, destination);
             ApplyAsTarget(destination, functionCallInstruction);
+
+            if (syntaxNodeOrToken.SyntaxNode != null)
+            {
+                expressionService.Associate(syntaxNodeOrToken.SyntaxNode, destination);
+            }
 
             return new[] { functionCallInstruction };
         }
@@ -223,12 +248,12 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                 return NoInstructions;
             }
 
-            return BuildFunctionCall(syntaxNode, methodSymbol.ToUcfgMethodId(),
+            return BuildFunctionCall(new SyntaxNodeOrToken(syntaxNode), methodSymbol.ToUcfgMethodId(),
                 expressionService.CreateVariable(), new[] { target }.Concat(additionalArguments).ToArray());
         }
 
         private IEnumerable<Instruction> BuildIdentityCall(SyntaxNode syntaxNode, Expression destination, Expression value) =>
-            BuildFunctionCall(syntaxNode, UcfgBuiltInMethodId.Identity, destination, value);
+            BuildFunctionCall(new SyntaxNodeOrToken(syntaxNode), UcfgBuiltInMethodId.Identity, destination, value);
 
         private IEnumerable<Instruction> BuildNewInstance(ExpressionSyntax expressionSyntax, ITypeSymbol typeSymbol)
         {
@@ -542,7 +567,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                     CreateExpressionFromType(parameter));
             }
 
-            return BuildEntryPointCall(methodDeclaration, methodDeclaration.ParameterList);
+            return BuildEntryPointCall(methodDeclaration);
         }
 
         private IEnumerable<Instruction> ProcessBinaryExpression(BinaryExpressionSyntax binaryExpression)
@@ -724,6 +749,25 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             }
 
             return expression;
+        }
+
+        private class SyntaxNodeOrToken
+        {
+            private SyntaxToken syntaxToken;
+
+            public SyntaxNodeOrToken(SyntaxNode syntaxNode)
+            {
+                SyntaxNode = syntaxNode;
+            }
+
+            public SyntaxNodeOrToken(SyntaxToken syntaxToken)
+            {
+                this.syntaxToken = syntaxToken;
+            }
+
+            public SyntaxNode SyntaxNode { get; }
+
+            public Protobuf.Ucfg.Location GetUcfgLocation() => SyntaxNode.GetUcfgLocation() ?? syntaxToken.GetUcfgLocation();
         }
     }
 }
