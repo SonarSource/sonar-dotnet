@@ -37,7 +37,21 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                 return null;
             }
 
-            var location = syntaxNode.GetLocation();
+            return GetUcfgLocation(syntaxNode.GetLocation());
+        }
+
+        public static UcfgLocation GetUcfgLocation(this SyntaxToken syntaxToken)
+        {
+            if (syntaxToken == default(SyntaxToken))
+            {
+                return null;
+            }
+
+            return GetUcfgLocation(syntaxToken.GetLocation());
+        }
+
+        private static UcfgLocation GetUcfgLocation(Location location)
+        {
             var lineSpan = location.GetLineSpan();
             return new UcfgLocation
             {

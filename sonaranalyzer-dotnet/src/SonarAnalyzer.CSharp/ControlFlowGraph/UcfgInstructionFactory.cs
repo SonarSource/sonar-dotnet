@@ -182,36 +182,67 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
 
         private IEnumerable<Instruction> BuildArrayGetCall(SyntaxNode syntaxNode, ITypeSymbol nodeTypeSymbol,
             Expression target) =>
-            BuildFunctionCall(syntaxNode, UcfgBuiltInMethodId.ArrayGet, expressionService.CreateVariable(), target);
+            BuildFunctionCall(syntaxNode, UcfgBuiltInMethodId.ArrayGet,
+                expressionService.CreateVariable(), target);
 
         private IEnumerable<Instruction> BuildArraySetCall(SyntaxNode syntaxNode, Expression destination, Expression value) =>
-            BuildFunctionCall(syntaxNode, UcfgBuiltInMethodId.ArraySet, expressionService.CreateVariable(), destination, value);
+            BuildFunctionCall(syntaxNode, UcfgBuiltInMethodId.ArraySet,
+                expressionService.CreateVariable(), destination, value);
 
         private IEnumerable<Instruction> BuildConcatCall(SyntaxNode syntaxNode, Expression left, Expression right) =>
-            BuildFunctionCall(syntaxNode, UcfgBuiltInMethodId.Concatenation, expressionService.CreateVariable(),
-                left, right);
+            BuildFunctionCall(syntaxNode, UcfgBuiltInMethodId.Concatenation,
+                expressionService.CreateVariable(), left, right);
 
-        private IEnumerable<Instruction> BuildEntryPointCall(SyntaxNode syntaxNode, ParameterListSyntax parameterList) =>
-            BuildFunctionCall(syntaxNode, UcfgBuiltInMethodId.EntryPoint, expressionService.CreateVariable(),
-                parameterList.Parameters.Select(expressionService.GetOrDefault).ToArray());
+        private IEnumerable<Instruction> BuildEntryPointCall(BaseMethodDeclarationSyntax baseMethodDeclarationSyntax)
+        {
+            var location = GetMethodIdentifierLocation();
 
-        private IEnumerable<Instruction> BuildFunctionCall(SyntaxNode syntaxNode, string signature, Expression destination,
-            params Expression[] expressionList)
+            return BuildFunctionCall(baseMethodDeclarationSyntax, UcfgBuiltInMethodId.EntryPoint,
+                expressionService.CreateVariable(), location,
+                baseMethodDeclarationSyntax.ParameterList.Parameters.Select(expressionService.GetOrDefault).ToArray());
+
+            Protobuf.Ucfg.Location GetMethodIdentifierLocation()
+            {
+                switch (baseMethodDeclarationSyntax)
+                {
+                    case ConstructorDeclarationSyntax constructorDeclarationSyntax:
+                        return constructorDeclarationSyntax.Identifier.GetUcfgLocation();
+
+                    case MethodDeclarationSyntax methodDeclarationSyntax:
+                        return methodDeclarationSyntax.Identifier.GetUcfgLocation();
+                        
+                    case OperatorDeclarationSyntax operatorDeclarationSyntax:
+                        return operatorDeclarationSyntax.OperatorToken.GetUcfgLocation();
+
+                    default:
+                        return baseMethodDeclarationSyntax.GetUcfgLocation();
+                }
+            }
+        }
+
+        private IEnumerable<Instruction> BuildFunctionCall(SyntaxNode syntaxNode, string signature,
+            Expression destination, Protobuf.Ucfg.Location location, params Expression[] expressionList)
         {
             var functionCallInstruction = new Instruction
             {
                 Assigncall = new AssignCall
                 {
-                    Location = syntaxNode.GetUcfgLocation(),
+                    Location = location,
                     MethodId = signature
                 }
             };
             functionCallInstruction.Assigncall.Args.AddRange(expressionList);
-
-            expressionService.Associate(syntaxNode, destination);
             ApplyAsTarget(destination, functionCallInstruction);
 
+            expressionService.Associate(syntaxNode, destination);
+
             return new[] { functionCallInstruction };
+        }
+
+        private IEnumerable<Instruction> BuildFunctionCall(SyntaxNode syntaxNode, string signature,
+            Expression destination, params Expression[] expressionList)
+        {
+            return BuildFunctionCall(syntaxNode, signature, destination, syntaxNode.GetUcfgLocation(), expressionList);
         }
 
         private IEnumerable<Instruction> BuildFunctionCall(SyntaxNode syntaxNode, IMethodSymbol methodSymbol, Expression target,
@@ -542,7 +573,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                     CreateExpressionFromType(parameter));
             }
 
-            return BuildEntryPointCall(methodDeclaration, methodDeclaration.ParameterList);
+            return BuildEntryPointCall(methodDeclaration);
         }
 
         private IEnumerable<Instruction> ProcessBinaryExpression(BinaryExpressionSyntax binaryExpression)

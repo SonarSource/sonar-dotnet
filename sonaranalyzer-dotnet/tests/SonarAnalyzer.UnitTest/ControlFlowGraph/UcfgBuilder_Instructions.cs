@@ -1037,7 +1037,18 @@ public class Class1 : Controller
         // %2 := __annotate [ Class1.DummyAttribute.DummyAttribute() s2 ]
         // s2 := __annotation [ %2 ]
 }";
-            UcfgVerifier.VerifyInstructions(code, "Foo");
+            var ucfg = UcfgVerifier.VerifyInstructions(code, "Foo");
+
+            var entryPoints = UcfgVerifier.GetEntryPointInstructions(ucfg);
+            entryPoints.Count.Should().Be(1);
+
+            // Entry point location should be the "Foo" token.
+            // Line numbers are 1-based, offsets are 0-based
+            var actualLocation = entryPoints[0].Assigncall.Location;
+            actualLocation.StartLine.Should().Be(10);
+            actualLocation.EndLine.Should().Be(10);
+            actualLocation.StartLineOffset.Should().Be(16);
+            actualLocation.EndLineOffset.Should().Be(18);
         }
 
         [TestMethod]
@@ -1064,7 +1075,18 @@ namespace Namespace
         }
     }
 }";
-            UcfgVerifier.VerifyInstructions(code, "Remove");
+            var ucfg = UcfgVerifier.VerifyInstructions(code, "Remove");
+
+            var entryPoints = UcfgVerifier.GetEntryPointInstructions(ucfg);
+            entryPoints.Count.Should().Be(1);
+
+            // Entry point location should be the "Remove" token.
+            // Line numbers are 1-based, offsets are 0-based
+            var actualLocation = entryPoints[0].Assigncall.Location;
+            actualLocation.StartLine.Should().Be(10);
+            actualLocation.EndLine.Should().Be(10);
+            actualLocation.StartLineOffset.Should().Be(22);
+            actualLocation.EndLineOffset.Should().Be(27);
         }
 
         [TestMethod]
@@ -1113,7 +1135,10 @@ namespace Namespace
         }
     }
 }";
-            UcfgVerifier.VerifyInstructions(code, "Foo");
+            var ucfg = UcfgVerifier.VerifyInstructions(code, "Foo");
+
+            var entryPoints = UcfgVerifier.GetEntryPointInstructions(ucfg);
+            entryPoints.Count.Should().Be(0);
         }
 
         [TestMethod]

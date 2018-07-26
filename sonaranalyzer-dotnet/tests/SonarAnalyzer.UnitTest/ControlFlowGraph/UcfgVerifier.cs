@@ -77,16 +77,24 @@ namespace SonarAnalyzer.UnitTest.ControlFlowGraph
             return ucfg;
         }
 
-        public static void VerifyInstructions(string codeSnippet, string methodName, bool isCtor = false)
+        public static UCFG VerifyInstructions(string codeSnippet, string methodName, bool isCtor = false)
         {
             var ucfg = isCtor ? GetUcfgForConstructor(codeSnippet, methodName) : GetUcfgForMethod(codeSnippet, methodName);
             VerifyInstructions(codeSnippet, ucfg);
+            return ucfg;
         }
 
-        public static void VerifyInstructionsForPropertyGetter(string codeSnippet, string propertyName)
+        public static UCFG VerifyInstructionsForPropertyGetter(string codeSnippet, string propertyName)
         {
             var ucfg = GetUcfgForPropertyGetter(codeSnippet, propertyName);
             VerifyInstructions(codeSnippet, ucfg);
+            return ucfg;
+        }
+
+        public static IList<Instruction> GetEntryPointInstructions(UCFG ucfg)
+        {
+            return ucfg.BasicBlocks.SelectMany(
+                b => b.Instructions.Where(i => i.Assigncall?.MethodId == UcfgBuiltInMethodId.EntryPoint)).ToList();
         }
 
         private static void VerifyInstructions(string codeSnippet, UCFG ucfg)
