@@ -64,12 +64,14 @@ public class XUnitTestResultsFileParser implements UnitTestResultsParser {
     }
 
     private void handleAssemblyTag(XmlParserHelper xmlParserHelper) {
-      if (xmlParserHelper.stream().getAttributeCount() == 0) {
+
+      String totalString = xmlParserHelper.getAttribute("total");
+      if (totalString == null) {
         LOG.warn("One of the assemblies contains no test result, please make sure this is expected.");
         return;
       }
 
-      int total = xmlParserHelper.getRequiredIntAttribute("total");
+      int total = xmlParserHelper.tagToIntValue("total", totalString);
       int passed = xmlParserHelper.getRequiredIntAttribute("passed");
       int failed = xmlParserHelper.getRequiredIntAttribute("failed");
       int skipped = xmlParserHelper.getRequiredIntAttribute("skipped");

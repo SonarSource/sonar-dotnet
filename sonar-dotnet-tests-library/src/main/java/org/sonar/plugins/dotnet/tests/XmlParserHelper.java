@@ -107,7 +107,7 @@ public class XmlParserHelper implements AutoCloseable {
     return value == null ? 0 : tagToIntValue(name, value);
   }
 
-  private int tagToIntValue(String name, String value) {
+  int tagToIntValue(String name, String value) {
     try {
       return Integer.parseInt(value);
     } catch (NumberFormatException e) {

@@ -40,10 +40,16 @@ public class XUnitTestResultsFileParserTest {
 
   @Test
   public void no_counters() {
-    thrown.expect(ParseErrorException.class);
-    thrown.expectMessage("Missing attribute \"total\" in element <assembly> in ");
-    thrown.expectMessage(new File("src/test/resources/xunit/no_counters.xml").getAbsolutePath());
-    new XUnitTestResultsFileParser().accept(new File("src/test/resources/xunit/no_counters.xml"), mock(UnitTestResults.class));
+    UnitTestResults results = new UnitTestResults();
+    new XUnitTestResultsFileParser().accept(new File("src/test/resources/xunit/no_counters.xml"), results);
+
+    assertThat(logTester.logs(LoggerLevel.WARN)).contains("One of the assemblies contains no test result, please make sure this is expected.");
+    assertThat(results.tests()).isEqualTo(0);
+    assertThat(results.passedPercentage()).isEqualTo(0);
+    assertThat(results.skipped()).isEqualTo(0);
+    assertThat(results.failures()).isEqualTo(0);
+    assertThat(results.errors()).isEqualTo(0);
+    assertThat(results.executionTime()).isNull();
   }
 
   @Test
@@ -63,7 +69,7 @@ public class XUnitTestResultsFileParserTest {
   }
 
   @Test
-  public void valid() throws Exception {
+  public void valid() {
     UnitTestResults results = new UnitTestResults();
     new XUnitTestResultsFileParser().accept(new File("src/test/resources/xunit/valid.xml"), results);
 
@@ -76,7 +82,7 @@ public class XUnitTestResultsFileParserTest {
   }
 
   @Test
-  public void valid_xunit_1_9_2() throws Exception {
+  public void valid_xunit_1_9_2() {
     UnitTestResults results = new UnitTestResults();
     new XUnitTestResultsFileParser().accept(new File("src/test/resources/xunit/valid_xunit-1.9.2.xml"), results);
 
@@ -88,7 +94,7 @@ public class XUnitTestResultsFileParserTest {
   }
 
   @Test
-  public void should_not_fail_without_execution_time() throws Exception {
+  public void should_not_fail_without_execution_time() {
     UnitTestResults results = new UnitTestResults();
     new XUnitTestResultsFileParser().accept(new File("src/test/resources/xunit/no_execution_time.xml"), results);
 
@@ -104,6 +110,20 @@ public class XUnitTestResultsFileParserTest {
   public void empty() {
     UnitTestResults results = new UnitTestResults();
     new XUnitTestResultsFileParser().accept(new File("src/test/resources/xunit/empty.xml"), results);
+
+    assertThat(logTester.logs(LoggerLevel.WARN)).contains("One of the assemblies contains no test result, please make sure this is expected.");
+    assertThat(results.tests()).isEqualTo(0);
+    assertThat(results.passedPercentage()).isEqualTo(0);
+    assertThat(results.skipped()).isEqualTo(0);
+    assertThat(results.failures()).isEqualTo(0);
+    assertThat(results.errors()).isEqualTo(0);
+    assertThat(results.executionTime()).isNull();
+  }
+
+  @Test
+  public void valid_no_total() {
+    UnitTestResults results = new UnitTestResults();
+    new XUnitTestResultsFileParser().accept(new File("src/test/resources/xunit/valid_no_total.xml"), results);
 
     assertThat(logTester.logs(LoggerLevel.WARN)).contains("One of the assemblies contains no test result, please make sure this is expected.");
     assertThat(results.tests()).isEqualTo(0);

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<assemblies>
+  <assembly name="C:\XUnitTests\bin\Debug\XUnitTests.DLL" environment="64-bit .NET 4.0.30319.42000 [collection-per-class, parallel (1 threads)]" test-framework="xUnit.net 2.3.1.3858" run-date="2018-07-20" run-time="14:50:31" config-file="C:\XUnitTests\bin\Debug\XUnitTests.DLL.config" >
+  </assembly>
+</assemblies>
