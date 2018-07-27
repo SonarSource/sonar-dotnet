@@ -1048,7 +1048,7 @@ public class Class1 : Controller
             actualLocation.StartLine.Should().Be(10);
             actualLocation.EndLine.Should().Be(10);
             actualLocation.StartLineOffset.Should().Be(16);
-            actualLocation.EndLineOffset.Should().Be(18);
+            actualLocation.EndLineOffset.Should().Be(19);
         }
 
         [TestMethod]
@@ -1086,7 +1086,7 @@ namespace Namespace
             actualLocation.StartLine.Should().Be(10);
             actualLocation.EndLine.Should().Be(10);
             actualLocation.StartLineOffset.Should().Be(22);
-            actualLocation.EndLineOffset.Should().Be(27);
+            actualLocation.EndLineOffset.Should().Be(28);
         }
 
         [TestMethod]

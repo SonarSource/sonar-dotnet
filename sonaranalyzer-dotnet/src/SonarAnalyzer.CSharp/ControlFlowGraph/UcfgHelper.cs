@@ -52,6 +52,9 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
 
         private static UcfgLocation GetUcfgLocation(Location location)
         {
+            // The startLineOffset gives the first character that should be included (zero-based)
+            // The endLineOffset gives the character *after* the last character that should be included (zero-based)
+            // So the startLineOffset/endLineOffset for this method id ("GetUcfgLocation") is 36, 51.
             var lineSpan = location.GetLineSpan();
             return new UcfgLocation
             {
@@ -59,7 +62,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                 StartLine = lineSpan.StartLinePosition.Line + 1,
                 StartLineOffset = lineSpan.StartLinePosition.Character,
                 EndLine = lineSpan.EndLinePosition.Line + 1,
-                EndLineOffset = lineSpan.EndLinePosition.Character - 1,
+                EndLineOffset = lineSpan.EndLinePosition.Character,
             };
         }
 

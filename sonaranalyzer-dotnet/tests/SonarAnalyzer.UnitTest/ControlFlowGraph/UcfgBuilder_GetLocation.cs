@@ -36,8 +36,8 @@ public class Class1                 // 2
 {                                   // 3
     public string Foo(string s)     // 4
     {                               // 5
-        var x = s.Trim();           // 6 %0 = string.Trim(s)    --> SL = 6, SLO = 16, EL = 6, ELO = 23
-                                    // 7 x = __id(%0)           --> SL = 6, SLO = 12, EL = 6, ELO = 23
+        var x = s.Trim();           // 6 %0 = string.Trim(s)    --> SL = 6, SLO = 16, EL = 6, ELO = 24
+                                    // 7 x = __id(%0)           --> SL = 6, SLO = 12, EL = 6, ELO = 24
         return x;                   // 8
 //23456789012345678901234567890     // SQ column offsets
     }
@@ -50,21 +50,21 @@ public class Class1                 // 2
             ucfg.BasicBlocks[0].Location.Should().BeNull();
 
             AssertLocation(ucfg.BasicBlocks[0].Instructions[0].Assigncall.Location,
-                startLine: 6, startLineOffset: 16, endLine: 6, endLineOffset: 23);
+                startLine: 6, startLineOffset: 16, endLine: 6, endLineOffset: 24);
             AssertLocation(ucfg.BasicBlocks[0].Instructions[1].Assigncall.Location,
-                startLine: 6, startLineOffset: 12, endLine: 6, endLineOffset: 23);
+                startLine: 6, startLineOffset: 12, endLine: 6, endLineOffset: 24);
         }
 
         [TestMethod]
-        public void GetLocation_Multiline_Invocation_StartAtZero_EndAtZero()
+        public void GetLocation_Multiline_Invocation_StartAtZero_EndAtOne()
         {
             const string code = @"  // 1 - SQ line numbers
 public class Class1                 // 2
 {                                   // 3
     public string Foo(string s)     // 4
     {                               // 5
-        var x =                     // 6 %0 = string.Trim(s)    --> SL = 7, SLO = 0, EL = 8, ELO = 0
-s.Trim(                             // 7 x = __id(%0)           --> SL = 6, SLO = 12, EL = 8, ELO = 0
+        var x =                     // 6 %0 = string.Trim(s)    --> SL = 7, SLO = 0, EL = 8, ELO = 1
+s.Trim(                             // 7 x = __id(%0)           --> SL = 6, SLO = 12, EL = 8, ELO = 1
 );                                  // 8
                                     // 9
                                     // 10
@@ -80,9 +80,9 @@ s.Trim(                             // 7 x = __id(%0)           --> SL = 6, SLO 
             ucfg.BasicBlocks[0].Location.Should().BeNull();
 
             AssertLocation(ucfg.BasicBlocks[0].Instructions[0].Assigncall.Location,
-                startLine: 7, startLineOffset: 0, endLine: 8, endLineOffset: 0);
+                startLine: 7, startLineOffset: 0, endLine: 8, endLineOffset: 1);
             AssertLocation(ucfg.BasicBlocks[0].Instructions[1].Assigncall.Location,
-                startLine: 6, startLineOffset: 12, endLine: 8, endLineOffset: 0);
+                startLine: 6, startLineOffset: 12, endLine: 8, endLineOffset: 1);
         }
 
         private static void AssertLocation(ULocation location, int startLine, int startLineOffset, int endLine, int endLineOffset)
