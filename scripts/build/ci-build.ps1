@@ -208,8 +208,6 @@ function Invoke-DotNetBuild() {
 
     if ($isPullRequest) {
         Invoke-SonarBeginAnalysis `
-            /d:sonar.analysis.mode="issues" `
-            /d:sonar.scanAllFiles="true" `
             /d:sonar.analysis.prNumber=$githubPullRequest `
             /d:sonar.analysis.sha1=$githubSha1 `
             /d:sonar.pullrequest.key=$githubPullRequest `
@@ -229,18 +227,7 @@ function Invoke-DotNetBuild() {
             /d:sonar.cs.vstest.reportsPaths="**\*.trx" `
             /d:sonar.cs.vscoveragexml.reportsPaths="**\*.coveragexml"
     }
-    elseif ($isMaintenanceBranch) {
-        Invoke-SonarBeginAnalysis `
-            /v:$leakPeriodVersion `
-            /d:sonar.analysis.buildNumber=$buildNumber `
-            /d:sonar.analysis.pipeline=$buildNumber `
-            /d:sonar.analysis.sha1=$githubSha1 `
-            /d:sonar.analysis.repository=$githubRepo `
-            /d:sonar.branch.name=$branchName `
-            /d:sonar.cs.vstest.reportsPaths="**\*.trx" `
-            /d:sonar.cs.vscoveragexml.reportsPaths="**\*.coveragexml"
-    }
-    elseif ($isFeatureBranch) {
+    elseif ($isMaintenanceBranch -or $isFeatureBranch) {
         Invoke-SonarBeginAnalysis `
             /v:$leakPeriodVersion `
             /d:sonar.analysis.buildNumber=$buildNumber `
@@ -338,11 +325,10 @@ function Invoke-JavaBuild() {
         Exec { & mvn org.jacoco:jacoco-maven-plugin:prepare-agent deploy sonar:sonar `
             "-Pdeploy-sonarsource,sonaranalyzer" `
             "-Dmaven.test.redirectTestOutputToFile=false" `
-            "-Dsonar.analysis.mode=issues" `
-            "-Dsonar.host.url=${sonarQubeUrl}" `
-            "-Dsonar.login=${sonarQubeToken}" `
             "-Dsonar.analysis.prNumber=${githubPullRequest}" `
             "-Dsonar.analysis.sha1=${githubSha1}" `
+            "-Dsonar.host.url=${sonarQubeUrl}" `
+            "-Dsonar.login=${sonarQubeToken}" `
             "-Dsonar.pullrequest.key=${githubPullRequest}" `
             "-Dsonar.pullrequest.branch=${githubPRBaseBranch}" `
             "-Dsonar.pullrequest.base=${githubPRTargetBranch}" `
@@ -362,9 +348,9 @@ function Invoke-JavaBuild() {
         Exec { & mvn org.jacoco:jacoco-maven-plugin:prepare-agent deploy sonar:sonar `
             "-Pcoverage-per-test,deploy-sonarsource,release,sonaranalyzer" `
             "-Dmaven.test.redirectTestOutputToFile=false" `
+            "-Dsonar.analysis.sha1=${githubSha1}" `
             "-Dsonar.host.url=${sonarQubeUrl}" `
             "-Dsonar.login=${sonarQubeToken}" `
-            "-Dsonar.analysis.sha1=${githubSha1}" `
             "-Dsonar.projectVersion=${currentVersion}" `
             -B -e -V `
         } -errorMessage "ERROR: Maven build deploy sonar FAILED."
@@ -375,8 +361,17 @@ function Invoke-JavaBuild() {
         Set-MavenBuildVersion
         $env:MAVEN_OPTS = "-Xmx1536m -Xms128m"
 
-        Exec { & mvn deploy `
-            "-Pdeploy-sonarsource,release" `
+        Exec { & mvn org.jacoco:jacoco-maven-plugin:prepare-agent deploy sonar:sonar `
+            "-Pcoverage-per-test,deploy-sonarsource,release,sonaranalyzer" `
+            "-Dmaven.test.redirectTestOutputToFile=false" `
+            "-Dsonar.analysis.buildNumber=${buildNumber}" `
+            "-Dsonar.analysis.pipeline=${buildNumber}" `
+            "-Dsonar.analysis.sha1=${githubSha1}" `
+            "-Dsonar.analysis.repository=${githubRepo}" `
+            "-Dsonar.branch.name=${branchName}" `
+            "-Dsonar.host.url=${sonarQubeUrl}" `
+            "-Dsonar.login=${sonarQubeToken}" `
+            "-Dsonar.projectVersion=${currentVersion}" `
             -B -e -V `
         } -errorMessage "ERROR: Maven deploy sonar FAILED."
     }
@@ -396,15 +391,14 @@ function Invoke-JavaBuild() {
         Exec { & mvn org.jacoco:jacoco-maven-plugin:prepare-agent deploy sonar:sonar `
             "-Pdeploy-sonarsource,sonaranalyzer" `
             "-Dmaven.test.redirectTestOutputToFile=false" `
-            "-Dsonar.analysis.mode=issues" `
-            "-Dsonar.host.url=${sonarQubeUrl}" `
-            "-Dsonar.login=${sonarQubeToken}" `
-            "-Dsonar.branch.name=${branchName}" `
-            "-Dsonar.projectVersion=${currentVersion}" `
             "-Dsonar.analysis.buildNumber=${buildNumber}" `
             "-Dsonar.analysis.pipeline=${buildNumber}" `
             "-Dsonar.analysis.sha1=${githubSha1}" `
-            "-Dsonar.analysis.repository=${githubRepo}"
+            "-Dsonar.analysis.repository=${githubRepo}" `
+            "-Dsonar.branch.name=${branchName}" `
+            "-Dsonar.host.url=${sonarQubeUrl}" `
+            "-Dsonar.login=${sonarQubeToken}" `
+            "-Dsonar.projectVersion=${currentVersion}" `
             -B -e -V `
         } -errorMessage "ERROR: Maven build deploy sonar FAILED."
     }
@@ -415,7 +409,8 @@ function Invoke-JavaBuild() {
 
         # No need for Maven phase "install" as the generated JAR files do not need to be installed
         # in Maven local repository. Phase "verify" is enough.
-        Exec { & mvn verify "-Dmaven.test.redirectTestOutputToFile=false" -B -e -V `
+        Exec { & mvn verify "-Dmaven.test.redirectTestOutputToFile=false" `
+            -B -e -V `
         } -errorMessage "ERROR: Maven verify FAILED."
     }
 }
