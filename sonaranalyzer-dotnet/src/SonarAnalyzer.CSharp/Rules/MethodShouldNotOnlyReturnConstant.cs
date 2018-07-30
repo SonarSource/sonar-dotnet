@@ -47,7 +47,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     var methodDeclaration = (MethodDeclarationSyntax)c.Node;
 
-                    if (methodDeclaration.ParameterList?.Parameters.Count > 0 || IsVirtual(methodDeclaration))
+                    if (methodDeclaration.ParameterList?.Parameters.Count > 0 ||
+                        IsVirtual(methodDeclaration))
                     {
                         return;
                     }
@@ -72,7 +73,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private bool IsVirtual(MethodDeclarationSyntax methodDeclaration)
         {
-            return methodDeclaration.Modifiers.Any(m => m.IsAnyKind(new SyntaxKind[] { SyntaxKind.VirtualKeyword }));
+            return methodDeclaration.Modifiers.Any(m => m.IsKind(SyntaxKind.VirtualKeyword));
         }
 
         private ExpressionSyntax GetSingleExpressionOrDefault(MethodDeclarationSyntax methodDeclaration)
