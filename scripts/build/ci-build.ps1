@@ -212,7 +212,7 @@ function Invoke-DotNetBuild() {
             /d:sonar.scanAllFiles="true" `
             /d:sonar.analysis.prNumber=$githubPullRequest `
             /d:sonar.analysis.sha1=$githubSha1 `
-            /d:sonar.pullrequest.key=$TRAVIS_PULL_REQUEST `
+            /d:sonar.pullrequest.key=$githubPullRequest `
             /d:sonar.pullrequest.branch=$githubPRBaseBranch `
             /d:sonar.pullrequest.base=$githubPRTargetBranch `
             /d:sonar.pullrequest.provider=github `
@@ -343,7 +343,7 @@ function Invoke-JavaBuild() {
             "-Dsonar.login=${sonarQubeToken}" `
             "-Dsonar.analysis.prNumber=${githubPullRequest}" `
             "-Dsonar.analysis.sha1=${githubSha1}" `
-            "-Dsonar.pullrequest.key=$TRAVIS_PULL_REQUEST" `
+            "-Dsonar.pullrequest.key=${githubPullRequest}" `
             "-Dsonar.pullrequest.branch=${githubPRBaseBranch}" `
             "-Dsonar.pullrequest.base=${githubPRTargetBranch}" `
             "-Dsonar.pullrequest.provider=github" `
