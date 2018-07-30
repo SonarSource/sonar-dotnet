@@ -1,4 +1,4 @@
-# SonarC#
+# SonarC\#
 
 [![Waffle.io - Columns and their card count](https://badge.waffle.io/SonarSource/sonar-csharp.svg?columns=all)](https://waffle.io/SonarSource/sonar-csharp?source=SonarSource%2Fsonar-csharp)
 
@@ -8,7 +8,6 @@
 |:--:|:--:|:--:|
 |Analyzer|[![Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=sonaranalyzer-dotnet&metric=alert_status)](https://sonarcloud.io/dashboard?id=sonaranalyzer-dotnet)|[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=sonaranalyzer-dotnet&metric=coverage)](https://sonarcloud.io/component_measures?id=sonaranalyzer-dotnet&metric=coverage)|
 |Plugin|[![Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=org.sonarsource.dotnet%3Asonar-csharp&metric=alert_status)](https://sonarcloud.io/dashboard?id=org.sonarsource.dotnet%3Asonar-csharp)|[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=org.sonarsource.dotnet%3Asonar-csharp&metric=coverage)](https://sonarcloud.io/component_measures?id=org.sonarsource.dotnet%3Asonar-csharp&metric=coverage)|
-
 
 |Product|Quality Gate|Coverage|
 |:--:|:--:|:--:|
@@ -21,10 +20,9 @@ supported code by helping you to find and to correct bugs, vulnerabilities and s
 
 ## Features
 
-* 300+ rules (including 60+ bug detection)
+* 340+ rules (including 60+ bug detection)
 * Metrics (complexity, number of lines etc.)
-* Import of [test coverage reports](https://docs.sonarqube.org/x/CoBh) from Visual Studio Code Coverage, dotCover,
-OpenCover and NCover 3.
+* Import of [test coverage reports](https://docs.sonarqube.org/x/CoBh) from Visual Studio Code Coverage, dotCover, OpenCover and NCover 3.
 * Support for [custom rules](https://github.com/SonarSource/sonarqube-roslyn-sdk)
 
 ## Useful links
@@ -41,8 +39,8 @@ To provide feedback (request a feature, report a bug etc.), simply
 
 ## Get started
 
-*  [Building, testing and debugging the plugin](./docs/contributing-plugin.md)
-*  [Building, testing and debugging the analyzer](./docs/contributing-analyzer.md)
+* [Building, testing and debugging the plugin](./docs/contributing-plugin.md)
+* [Building, testing and debugging the analyzer](./docs/contributing-analyzer.md)
 
 ## How to contribute
 
