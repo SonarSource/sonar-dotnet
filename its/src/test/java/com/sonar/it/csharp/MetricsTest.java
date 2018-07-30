@@ -321,13 +321,6 @@ public class MetricsTest {
     assertThat(value.length()).isEqualTo(128); // No other line
   }
 
-  @Test
-  public void commentsByLine() {
-    assertThat(getFileMeasure("comment_lines_data").getValue()).contains("7=1");
-    assertThat(getFileMeasure("comment_lines_data").getValue()).contains("11=1");
-    assertThat(countMatches(getFileMeasure("comment_lines_data").getValue(), "=1")).isEqualTo(2);
-  }
-
   /* Executable lines */
 
   @Test
