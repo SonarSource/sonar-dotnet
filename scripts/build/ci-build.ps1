@@ -130,16 +130,20 @@ function Invoke-SonarBeginAnalysis([array][parameter(ValueFromRemainingArguments
         $remainingArgs += "/d:sonar.verbose=true"
     }
 
-    Exec { & (Get-ScannerMsBuildPath) begin /k:sonaranalyzer-csharp-vbnet /n:"SonarAnalyzer for C#" `
-        /d:sonar.host.url=${sonarQubeUrl} /d:sonar.login=$sonarQubeToken $remainingArgs } `
-        -errorMessage "ERROR: SonarQube Analysis begin step FAILED."
+    Exec { & (Get-ScannerMsBuildPath) begin `
+        /k:sonaranalyzer-csharp-vbnet `
+        /n:"SonarAnalyzer for C#" `
+        /d:sonar.host.url=${sonarQubeUrl} `
+        /d:sonar.login=$sonarQubeToken $remainingArgs `
+    } -errorMessage "ERROR: SonarQube Analysis begin step FAILED."
 }
 
 function Invoke-SonarEndAnalysis() {
     Write-Header "Running SonarQube Analysis end step"
 
-    Exec { & (Get-ScannerMsBuildPath) end /d:sonar.login=$sonarQubeToken } `
-        -errorMessage "ERROR: SonarQube Analysis end step FAILED."
+    Exec { & (Get-ScannerMsBuildPath) end `
+        /d:sonar.login=$sonarQubeToken `
+    } -errorMessage "ERROR: SonarQube Analysis end step FAILED."
 }
 
 function Initialize-NuGetConfig() {
@@ -200,27 +204,37 @@ function Invoke-DotNetBuild() {
     Set-DotNetVersion
 
     $skippedAnalysis = $false
+    $leakPeriodVersion = Get-LeakPeriodVersion
+
     if ($isPullRequest) {
         Invoke-SonarBeginAnalysis `
-            /d:sonar.github.pullRequest=$githubPullRequest `
-            /d:sonar.github.repository=$githubRepo `
-            /d:sonar.github.oauth=$githubToken `
-            /d:sonar.analysis.mode="issues" `
-            /d:sonar.scanAllFiles="true" `
-            /d:sonar.analysis.sha1=$githubSha1 `
             /d:sonar.analysis.prNumber=$githubPullRequest `
-            /d:sonar.branch.name=$githubPRBaseBranch `
-            /d:sonar.branch.target=$githubPRTargetBranch `
-            /v:"latest"
+            /d:sonar.analysis.sha1=$githubSha1 `
+            /d:sonar.pullrequest.key=$githubPullRequest `
+            /d:sonar.pullrequest.branch=$githubPRBaseBranch `
+            /d:sonar.pullrequest.base=$githubPRTargetBranch `
+            /d:sonar.pullrequest.provider=github `
+            /d:sonar.pullrequest.github.repository=$githubRepo `
+            /v:$leakPeriodVersion `
     }
     elseif ($isMaster) {
-        $leakPeriodVersion = Get-LeakPeriodVersion
         Invoke-SonarBeginAnalysis `
+            /v:$leakPeriodVersion `
             /d:sonar.analysis.buildNumber=$buildNumber `
             /d:sonar.analysis.pipeline=$buildNumber `
             /d:sonar.analysis.sha1=$githubSha1 `
             /d:sonar.analysis.repository=$githubRepo `
+            /d:sonar.cs.vstest.reportsPaths="**\*.trx" `
+            /d:sonar.cs.vscoveragexml.reportsPaths="**\*.coveragexml"
+    }
+    elseif ($isMaintenanceBranch -or $isFeatureBranch) {
+        Invoke-SonarBeginAnalysis `
             /v:$leakPeriodVersion `
+            /d:sonar.analysis.buildNumber=$buildNumber `
+            /d:sonar.analysis.pipeline=$buildNumber `
+            /d:sonar.analysis.sha1=$githubSha1 `
+            /d:sonar.analysis.repository=$githubRepo `
+            /d:sonar.branch.name=$branchName `
             /d:sonar.cs.vstest.reportsPaths="**\*.trx" `
             /d:sonar.cs.vscoveragexml.reportsPaths="**\*.coveragexml"
     }
@@ -240,7 +254,10 @@ function Invoke-DotNetBuild() {
         /p:AssemblyOriginatorKeyFile=$certificatePath
 
     Invoke-UnitTests $binPath $true
-    Invoke-CodeCoverage
+
+    if (-Not $isPullRequest) {
+        Invoke-CodeCoverage
+    }
 
     if (-Not $skippedAnalysis) {
         Invoke-SonarEndAnalysis
@@ -293,36 +310,8 @@ function Invoke-JavaBuild() {
         Remove-Item Env:\CI_PRODUCT
     }
 
-    if ($isMaster -and -not $isPullRequest) {
-        Write-Header "Building, deploying and analyzing SonarC#"
-
-        $currentVersion = Get-MavenExpression "project.version"
-        Set-MavenBuildVersion
-
-        $env:MAVEN_OPTS = "-Xmx1536m -Xms128m"
-
-        Exec { & mvn org.jacoco:jacoco-maven-plugin:prepare-agent deploy sonar:sonar `
-            "-Pcoverage-per-test,deploy-sonarsource,release,sonaranalyzer" `
-            "-Dmaven.test.redirectTestOutputToFile=false" `
-            "-Dsonar.host.url=${sonarQubeUrl}" `
-            "-Dsonar.login=${sonarQubeToken}" `
-            "-Dsonar.projectVersion=${currentVersion}" `
-            -B -e -V `
-        } -errorMessage "ERROR: Maven build deploy sonar FAILED."
-    }
-    elseif ($isMaintenanceBranch -and -not $isPullRequest) {
-        Write-Header "Building and deploying SonarC#"
-
-        Set-MavenBuildVersion
-        $env:MAVEN_OPTS = "-Xmx1536m -Xms128m"
-
-        Exec { & mvn deploy `
-            "-Pdeploy-sonarsource,release" `
-            -B -e -V `
-        } -errorMessage "ERROR: Maven deploy sonar FAILED."
-    }
-    elseif ($isPullRequest -and $githubToken -ne $null) {
-        Write-Header "Building and analyzing SonarC#"
+    if ($isPullRequest) {
+        Write-Header "Building and analyzing SonarC# for PR" $githubPullRequest
 
         # Do not deploy a SNAPSHOT version but the release version related to this build and PR
         Set-MavenBuildVersion
@@ -336,27 +325,92 @@ function Invoke-JavaBuild() {
         Exec { & mvn org.jacoco:jacoco-maven-plugin:prepare-agent deploy sonar:sonar `
             "-Pdeploy-sonarsource,sonaranalyzer" `
             "-Dmaven.test.redirectTestOutputToFile=false" `
-            "-Dsonar.analysis.mode=issues" `
-            "-Dsonar.github.pullRequest=${githubPullRequest}" `
-            "-Dsonar.github.repository=${githubRepo}" `
-            "-Dsonar.github.oauth=${githubToken}" `
+            "-Dsonar.analysis.prNumber=${githubPullRequest}" `
+            "-Dsonar.analysis.sha1=${githubSha1}" `
             "-Dsonar.host.url=${sonarQubeUrl}" `
             "-Dsonar.login=${sonarQubeToken}" `
+            "-Dsonar.pullrequest.key=${githubPullRequest}" `
+            "-Dsonar.pullrequest.branch=${githubPRBaseBranch}" `
+            "-Dsonar.pullrequest.base=${githubPRTargetBranch}" `
+            "-Dsonar.pullrequest.provider=github" `
+            "-Dsonar.pullrequest.github.repository=${githubRepo}" `
+            -B -e -V `
+        } -errorMessage "ERROR: Maven build deploy sonar FAILED."
+    }
+    elseif ($isMaster) {
+        Write-Header "Building, deploying and analyzing SonarC# for master"
+
+        $currentVersion = Get-MavenExpression "project.version"
+        Set-MavenBuildVersion
+
+        $env:MAVEN_OPTS = "-Xmx1536m -Xms128m"
+
+        Exec { & mvn org.jacoco:jacoco-maven-plugin:prepare-agent deploy sonar:sonar `
+            "-Pcoverage-per-test,deploy-sonarsource,release,sonaranalyzer" `
+            "-Dmaven.test.redirectTestOutputToFile=false" `
             "-Dsonar.analysis.sha1=${githubSha1}" `
-            "-Dsonar.analysis.prNumber=${githubPullRequest}" `
-            "-Dsonar.branch.name=${githubPRBaseBranch}" `
-            "-Dsonar.branch.target=${githubPRTargetBranch}" `
+            "-Dsonar.host.url=${sonarQubeUrl}" `
+            "-Dsonar.login=${sonarQubeToken}" `
+            "-Dsonar.projectVersion=${currentVersion}" `
+            -B -e -V `
+        } -errorMessage "ERROR: Maven build deploy sonar FAILED."
+    }
+    elseif ($isMaintenanceBranch) {
+        Write-Header "Building and deploying SonarC# for maintenance branch" $branchName
+
+        Set-MavenBuildVersion
+        $env:MAVEN_OPTS = "-Xmx1536m -Xms128m"
+
+        Exec { & mvn org.jacoco:jacoco-maven-plugin:prepare-agent deploy sonar:sonar `
+            "-Pcoverage-per-test,deploy-sonarsource,release,sonaranalyzer" `
+            "-Dmaven.test.redirectTestOutputToFile=false" `
+            "-Dsonar.analysis.buildNumber=${buildNumber}" `
+            "-Dsonar.analysis.pipeline=${buildNumber}" `
+            "-Dsonar.analysis.sha1=${githubSha1}" `
+            "-Dsonar.analysis.repository=${githubRepo}" `
+            "-Dsonar.branch.name=${branchName}" `
+            "-Dsonar.host.url=${sonarQubeUrl}" `
+            "-Dsonar.login=${sonarQubeToken}" `
+            "-Dsonar.projectVersion=${currentVersion}" `
+            -B -e -V `
+        } -errorMessage "ERROR: Maven deploy sonar FAILED."
+    }
+    elseif ($isFeatureBranch) {
+        Write-Header "Building and analyzing SonarC# for feature branch" $branchName
+
+        # Do not deploy a SNAPSHOT version but the release version related to this build and PR
+        $currentVersion = Get-MavenExpression "project.version"
+        Set-MavenBuildVersion
+
+        $env:MAVEN_OPTS = "-Xmx1G -Xms128m"
+
+        # No need for Maven phase "install" as the generated JAR files do not need to be installed
+        # in Maven local repository. Phase "verify" is enough.
+        Write-Host "SonarC# will be deployed"
+
+        Exec { & mvn org.jacoco:jacoco-maven-plugin:prepare-agent deploy sonar:sonar `
+            "-Pdeploy-sonarsource,sonaranalyzer" `
+            "-Dmaven.test.redirectTestOutputToFile=false" `
+            "-Dsonar.analysis.buildNumber=${buildNumber}" `
+            "-Dsonar.analysis.pipeline=${buildNumber}" `
+            "-Dsonar.analysis.sha1=${githubSha1}" `
+            "-Dsonar.analysis.repository=${githubRepo}" `
+            "-Dsonar.branch.name=${branchName}" `
+            "-Dsonar.host.url=${sonarQubeUrl}" `
+            "-Dsonar.login=${sonarQubeToken}" `
+            "-Dsonar.projectVersion=${currentVersion}" `
             -B -e -V `
         } -errorMessage "ERROR: Maven build deploy sonar FAILED."
     }
     else {
-        Write-Header "Building SonarC#"
+        Write-Header "Building SonarC# for branch" $branchName
 
         Set-MavenBuildVersion
 
         # No need for Maven phase "install" as the generated JAR files do not need to be installed
         # in Maven local repository. Phase "verify" is enough.
-        Exec { & mvn verify "-Dmaven.test.redirectTestOutputToFile=false" -B -e -V `
+        Exec { & mvn verify "-Dmaven.test.redirectTestOutputToFile=false" `
+            -B -e -V `
         } -errorMessage "ERROR: Maven verify FAILED."
     }
 }
@@ -371,6 +425,7 @@ try {
     $isMaster = $branchName -eq "master"
     # See https://xtranet.sonarsource.com/display/DEV/Release+Procedures for info about maintenance branches
     $isMaintenanceBranch = $branchName -like 'branch-*'
+    $isFeatureBranch = $branchName -like 'feature/*'
     $isPullRequest = $githubIsPullRequest -eq "true"
 
     Write-Debug "Solution to build: ${solutionName}"
