@@ -19,6 +19,7 @@
  */
 
 using System.Collections.Immutable;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -46,7 +47,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     var methodDeclaration = (MethodDeclarationSyntax)c.Node;
 
-                    if (methodDeclaration.ParameterList?.Parameters.Count > 0)
+                    if (methodDeclaration.ParameterList?.Parameters.Count > 0 || IsVirtual(methodDeclaration))
                     {
                         return;
                     }
@@ -67,6 +68,11 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
                 },
                 SyntaxKind.MethodDeclaration);
+        }
+
+        private bool IsVirtual(MethodDeclarationSyntax methodDeclaration)
+        {
+            return methodDeclaration.Modifiers.Any(m => m.IsAnyKind(new SyntaxKind[] { SyntaxKind.VirtualKeyword }));
         }
 
         private ExpressionSyntax GetSingleExpressionOrDefault(MethodDeclarationSyntax methodDeclaration)
