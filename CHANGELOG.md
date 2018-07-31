@@ -16,11 +16,23 @@ For reference, the possible headings are:
 ## Unreleased
 
 ### Notes
-* [All commits](https://github.com/SonarSource/sonar-csharp/compare/7.3.0.5690...HEAD)
+* [All commits](https://github.com/SonarSource/sonar-csharp/compare/7.3.1.5982...HEAD)
 
+
+## [7.3.1](https://github.com/SonarSource/sonar-csharp/releases/tag/7.3.1.5982)
+
+### Improvements
+* [1540](https://github.com/SonarSource/sonar-csharp/issues/1540) - Rule S1313: do not report issue for loopback address
+
+### Bug Fixes
+* [1590](https://github.com/SonarSource/sonar-csharp/issues/1590) - SonarC# fails when parsing xUnit test results with no tests for a test assembly
+
+
+## [7.3](https://github.com/SonarSource/sonar-csharp/releases/tag/7.3.0.5690)
 
 ### Bug Fixes
 * [1438](https://github.com/SonarSource/sonar-csharp/issues/1438) - Fix string formats in the csharp plugin
+
 ### False Positive
 * [1493](https://github.com/SonarSource/sonar-csharp/issues/1493) - Fix S107: Do not raise for P/Invoke methods (#1459)
 * [1464](https://github.com/SonarSource/sonar-csharp/issues/1464) - S4055 should not raise issues for string literal used in the 'message' of Debug.Assert
@@ -39,8 +51,10 @@ For reference, the possible headings are:
 * [947](https://github.com/SonarSource/sonar-csharp/issues/947) - S2583: False-positive when Monitor.Wait is used
 * [621](https://github.com/SonarSource/sonar-csharp/issues/621) - CFG does not correctly support try-catch blocks with unconditional return insude
 * [496](https://github.com/SonarSource/sonar-csharp/issues/496) - Fix S2234: Check for parameter types before reporting it as bug
+
 ### False Negative
 * [247](https://github.com/SonarSource/sonar-csharp/issues/247) - Update S3776: Cogntive Complexity should handle C# 7 inner methods
+
 ### New Rules
 * [823](https://github.com/SonarSource/sonar-csharp/issues/823) - Rule S4275: Getters and setters should access the right field
 * [634](https://github.com/SonarSource/sonar-csharp/issues/634) - Rule S4143: Dictionary values should not be replaced unconditionally
