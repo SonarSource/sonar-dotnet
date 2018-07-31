@@ -45,6 +45,11 @@
             return 'a';
         }
 
+        string GetWithNoModifier() // Noncompliant
+        {
+            return "";
+        }
+
         public int GetWithInner()
         {
             return GetInner();
@@ -71,7 +76,7 @@
 
     public abstract class Base
     {
-        protected virtual string GetName() // Noncompliant
+        protected virtual string GetName() // Compliant - can be overriden
         {
             return "";
         }
@@ -88,7 +93,7 @@
 
         public override float GetPrecision() // Compliant - override
         {
-            return 0.1;
+            return 0.1F;
         }
     }
 }
