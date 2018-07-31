@@ -16,8 +16,18 @@ For reference, the possible headings are:
 ## Unreleased
 
 ### Notes
-* [All commits](https://github.com/SonarSource/sonar-csharp/compare/7.3.0.5690...HEAD)
+* [All commits](https://github.com/SonarSource/sonar-csharp/compare/7.3.1.5982...HEAD)
 
+
+## [7.3.1](https://github.com/SonarSource/sonar-csharp/releases/tag/7.3.1.5982)
+
+### Improvements
+* [1540](https://github.com/SonarSource/sonar-csharp/issues/1540) - Rule S1313: do not report issue for loopback address
+### Bug Fixes
+* [1590](https://github.com/SonarSource/sonar-csharp/issues/1590) - SonarC# fails when parsing xUnit test results with no tests for a test assembly
+
+
+## [7.3](https://github.com/SonarSource/sonar-csharp/releases/tag/7.3.0.5690)
 
 ### Bug Fixes
 * [1438](https://github.com/SonarSource/sonar-csharp/issues/1438) - Fix string formats in the csharp plugin
