@@ -19,5 +19,13 @@
   "defaultSeverity": "Minor",
   "ruleSpecification": "RSPEC-2486",
   "sqKey": "S2486",
-  "scope": "Main"
+  "scope": "Main",
+  "securityStandards": {
+    "CWE": [
+      391
+    ],
+    "OWASP": [
+      "A10"
+    ]
+  }
 }

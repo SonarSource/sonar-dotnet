@@ -1,5 +1,5 @@
 {
-  "title": "Conditionally executed single line should be denoted by indentation",
+  "title": "A conditionally executed single line should be denoted by indentation",
   "type": "CODE_SMELL",
   "status": "ready",
   "remediation": {

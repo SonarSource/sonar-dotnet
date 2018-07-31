@@ -16,5 +16,10 @@
   "defaultSeverity": "Blocker",
   "ruleSpecification": "RSPEC-2931",
   "sqKey": "S2931",
-  "scope": "All"
+  "scope": "All",
+  "securityStandards": {
+    "CWE": [
+      459
+    ]
+  }
 }

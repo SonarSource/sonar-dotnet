@@ -1,6 +1,6 @@
 <p>According to the Task-based Asynchronous Pattern (TAP), methods returning either a <code>System.Threading.Tasks.Task</code> or a
-<code>System.Threading.Tasks.Task&lt;TResult&gt;</code> are considered "asynchronous". Such methods should use the "Async" suffix. Conversely methods
-which do not return such <code>Task</code>s should not have an "Async" suffix in their names.</p>
+<code>System.Threading.Tasks.Task&lt;TResult&gt;</code> are considered "asynchronous". Such methods should use the <code>Async</code> suffix.
+Conversely methods which do not return such Tasks should not have an "Async" suffix in their names.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
 using System;
@@ -26,8 +26,7 @@ namespace myLibrary
 
   public class Foo
   {
-    public Task ReadAsync(byte [] buffer, int offset, int count,
-                                          CancellationToken cancellationToken)
+    public Task ReadAsync(byte [] buffer, int offset, int count, CancellationToken cancellationToken)
   }
 }
 </pre>
