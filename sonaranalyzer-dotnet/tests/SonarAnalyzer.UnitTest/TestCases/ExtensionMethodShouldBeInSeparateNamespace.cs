@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 
 class GlobalClass
 {
@@ -30,7 +30,7 @@ namespace SomeNamespace
 
     static class Helpers1
     {
-        static void Foo(this Program p) // Noncompliant {{Either move this extension to another namespace or move the method inside the type itself.}}
+        static void Foo(this Program p) // Noncompliant {{Either move this extension to another namespace or move the method inside the class itself.}}
 //                  ^^^
         { }
     }

@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2018 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -34,7 +34,7 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         internal const string DiagnosticId = "S4226";
         private const string MessageFormat = "Either move this extension to another namespace or move the method " +
-            "inside the type itself.";
+            "inside the class itself.";
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
