@@ -58,9 +58,23 @@ namespace OtherPackageNamespace
 
     public struct FooQux { }
 
+    public class Outer
+    {
+        public interface IBaz { }
+
+        public enum BazBar { }
+
+        public struct BazQux { }
+
+    }
+
     public static class FooHelpers
     {
         public static void FooInterface(this IFoo foo) // Compliant
+        {
+        }
+
+        public static void BazInterface(this Outer.IBaz foo) // Compliant
         {
         }
 
@@ -68,7 +82,15 @@ namespace OtherPackageNamespace
         {
         }
 
+        public static void BazEnum(this Outer.BazBar foo) // Compliant
+        {
+        }
+
         public static void FooStruct(this FooQux foo) // Compliant
+        {
+        }
+
+        public static void BazStruct(this Outer.BazQux foo) // Compliant
         {
         }
 
