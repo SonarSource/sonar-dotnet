@@ -5,6 +5,7 @@ MD4, MD6.</p>
 <p>This rule tracks usage of the <code>System.Security.Cryptography.CryptoConfig.CreateFromName()</code>, and
 <code>System.Security.Cryptography.HashAlgorithm.Create()</code> methods to instantiate MD5 or SHA-1 algorithms, and of derived class instances of
 <code>System.Security.Cryptography.SHA1</code> and <code>System.Security.Cryptography.MD5</code>.</p>
+<p>Consider using safer alternatives, such as SHA-256, or SHA-3.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
 var hashProvider1 = new MD5CryptoServiceProvider(); //Noncompliant
@@ -23,6 +24,7 @@ var hashProvider3 = HashAlgorithm.Create("SHA256Managed");
   <li> <a href="http://cwe.mitre.org/data/definitions/328">MITRE, CWE-328</a> - Reversible One-Way Hash </li>
   <li> <a href="http://cwe.mitre.org/data/definitions/327">MITRE, CWE-327</a> - Use of a Broken or Risky Cryptographic Algorithm </li>
   <li> OWASP Top 10 2017 Category A6 - Security Misconfiguration </li>
-  <li> <a href="http://www.sans.org/top25-software-errors/">SANS Top 25</a> - Porous Defenses </li>
+  <li> <a href="https://www.sans.org/top25-software-errors/#cat3">SANS Top 25</a> - Porous Defenses </li>
+  <li> <a href="http://shattered.io/">SHAttered</a> - The first concrete collision attack against SHA-1. </li>
 </ul>
 

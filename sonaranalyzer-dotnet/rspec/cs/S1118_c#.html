@@ -1,5 +1,4 @@
-<p>Utility classes, which are collections of <code>static</code> members, are not meant to be instantiated. Even <code>abstract</code> utility
-classes, which can be extended, should not have <code>public</code> constructors.</p>
+<p>Utility classes, which are collections of <code>static</code> members, are not meant to be instantiated.</p>
 <p>C# adds an implicit public constructor to every class which does not explicitly define at least one constructor. Hence, at least one
 <code>protected</code> constructor should be defined if you wish to subclass this utility class. Or the <code>static</code> keyword should be added to
 the class declaration to prevent subclassing.</p>

@@ -1,17 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-  <!-- 
-    Microsoft ResX Schema 
-    
+  <!--
+    Microsoft ResX Schema
+
     Version 2.0
-    
-    The primary goals of this format is to allow a simple XML format 
-    that is mostly human readable. The generation and parsing of the 
-    various data types are done through the TypeConverter classes 
+
+    The primary goals of this format is to allow a simple XML format
+    that is mostly human readable. The generation and parsing of the
+    various data types are done through the TypeConverter classes
     associated with the data types.
-    
+
     Example:
-    
+
     ... ado.net/XML headers & schema ...
     <resheader name="resmimetype">text/microsoft-resx</resheader>
     <resheader name="version">2.0</resheader>
@@ -26,36 +26,36 @@
         <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
         <comment>This is a comment</comment>
     </data>
-                
-    There are any number of "resheader" rows that contain simple 
+
+    There are any number of "resheader" rows that contain simple
     name/value pairs.
-    
-    Each data row contains a name, and value. The row also contains a 
-    type or mimetype. Type corresponds to a .NET class that support 
-    text/value conversion through the TypeConverter architecture. 
-    Classes that don't support this are serialized and stored with the 
+
+    Each data row contains a name, and value. The row also contains a
+    type or mimetype. Type corresponds to a .NET class that support
+    text/value conversion through the TypeConverter architecture.
+    Classes that don't support this are serialized and stored with the
     mimetype set.
-    
-    The mimetype is used for serialized objects, and tells the 
-    ResXResourceReader how to depersist the object. This is currently not 
+
+    The mimetype is used for serialized objects, and tells the
+    ResXResourceReader how to depersist the object. This is currently not
     extensible. For a given mimetype the value must be set accordingly:
-    
-    Note - application/x-microsoft.net.object.binary.base64 is the format 
-    that the ResXResourceWriter will generate, however the reader can 
+
+    Note - application/x-microsoft.net.object.binary.base64 is the format
+    that the ResXResourceWriter will generate, however the reader can
     read any of the formats listed below.
-    
+
     mimetype: application/x-microsoft.net.object.binary.base64
-    value   : The object must be serialized with 
+    value   : The object must be serialized with
             : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
             : and then encoded with base64 encoding.
-    
+
     mimetype: application/x-microsoft.net.object.soap.base64
-    value   : The object must be serialized with 
+    value   : The object must be serialized with
             : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
             : and then encoded with base64 encoding.
 
     mimetype: application/x-microsoft.net.object.bytearray.base64
-    value   : The object must be serialized into a byte array 
+    value   : The object must be serialized into a byte array
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
@@ -691,7 +691,7 @@
     <value>Major Code Smell</value>
   </data>
   <data name="S1118_Description" xml:space="preserve">
-    <value>Utility classes, which are collections of static members, are not meant to be instantiated. Even abstract utility classes, which can be extended, should not have public constructors.</value>
+    <value>Utility classes, which are collections of static members, are not meant to be instantiated.</value>
   </data>
   <data name="S1118_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -1540,7 +1540,7 @@
     <value>misra,unused</value>
   </data>
   <data name="S125_Title" xml:space="preserve">
-    <value>Sections of code should not be "commented out"</value>
+    <value>Sections of code should not be commented out</value>
   </data>
   <data name="S125_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
@@ -1750,7 +1750,7 @@
     <value>cert</value>
   </data>
   <data name="S1313_Title" xml:space="preserve">
-    <value>IP addresses should not be hardcoded</value>
+    <value>Using hardcoded IP addresses is security-sensitive</value>
   </data>
   <data name="S1313_Type" xml:space="preserve">
     <value>VULNERABILITY</value>
@@ -2707,10 +2707,10 @@
     <value>Critical</value>
   </data>
   <data name="S2070_Tags" xml:space="preserve">
-    <value>cwe,owasp-a6,sans-top25-porous</value>
+    <value>cwe,spring,owasp-a6,sans-top25-porous</value>
   </data>
   <data name="S2070_Title" xml:space="preserve">
-    <value>SHA-1 and Message-Digest hash algorithms should not be used</value>
+    <value>SHA-1 and Message-Digest hash algorithms should not be used in secure contexts</value>
   </data>
   <data name="S2070_Type" xml:space="preserve">
     <value>VULNERABILITY</value>
@@ -2737,10 +2737,10 @@
     <value>Minor</value>
   </data>
   <data name="S2092_Tags" xml:space="preserve">
-    <value>cwe,sans-top25-porous,owasp-a2,owasp-a3</value>
+    <value>cwe,spring,sans-top25-porous,owasp-a2,owasp-a3</value>
   </data>
   <data name="S2092_Title" xml:space="preserve">
-    <value>Cookies should be "secure"</value>
+    <value>Creating cookies without the "secure" flag is security-sensitive</value>
   </data>
   <data name="S2092_Type" xml:space="preserve">
     <value>VULNERABILITY</value>
@@ -3250,7 +3250,7 @@
     <value>cwe,cert,owasp-a3</value>
   </data>
   <data name="S2245_Title" xml:space="preserve">
-    <value>Pseudorandom number generators (PRNGs) should not be used in secure contexts</value>
+    <value>Using pseudorandom number generators (PRNGs) is security-sensitive</value>
   </data>
   <data name="S2245_Type" xml:space="preserve">
     <value>VULNERABILITY</value>
@@ -3280,7 +3280,7 @@
     <value>cwe,cert,owasp-a3</value>
   </data>
   <data name="S2255_Title" xml:space="preserve">
-    <value>Cookies should not be used to store sensitive information</value>
+    <value>Storing personal data in cookies is security-sensitive</value>
   </data>
   <data name="S2255_Type" xml:space="preserve">
     <value>VULNERABILITY</value>
@@ -7513,7 +7513,7 @@
     <value>Blocker Vulnerability</value>
   </data>
   <data name="S3884_Description" xml:space="preserve">
-    <value>CoSetProxyBlanket and CoInitializeSecurity both work to set the permissions context in which the process invoked immediately after is executed. Calling them from within that process is useless because it's to late at that point; the permissions context has already been set.</value>
+    <value>CoSetProxyBlanket and CoInitializeSecurity both work to set the permissions context in which the process invoked immediately after is executed. Calling them from within that process is useless because it's too late at that point; the permissions context has already been set.</value>
   </data>
   <data name="S3884_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -8284,7 +8284,7 @@
     <value>confusing,suspicious</value>
   </data>
   <data name="S3973_Title" xml:space="preserve">
-    <value>Conditionally executed single line should be denoted by indentation</value>
+    <value>A conditionally executed single line should be denoted by indentation</value>
   </data>
   <data name="S3973_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
@@ -9577,7 +9577,7 @@
     <value>Major Code Smell</value>
   </data>
   <data name="S4144_Description" xml:space="preserve">
-    <value>When two methods have the same implementation, either it was a mistake - something else was intended - or the duplication was intentional, but may be confusing to maintainers. In the latter case, one implementation should invoke the other.</value>
+    <value>When two methods have the same implementation, either it was a mistake - something else was intended - or the duplication was intentional, but may be confusing to maintainers. In the latter case, one implementation should invoke the other. Numerical and string literals are not taken into account. </value>
   </data>
   <data name="S4144_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -9937,7 +9937,7 @@
     <value>Minor Bug</value>
   </data>
   <data name="S4261_Description" xml:space="preserve">
-    <value>According to the Task-based Asynchronous Pattern (TAP), methods returning either a System.Threading.Tasks.Task or a System.Threading.Tasks.Task&lt;TResult&gt; are considered "asynchronous". Such methods should use the "Async" suffix. Conversely methods which do not return such Tasks should not have an "Async" suffix in their names.</value>
+    <value>According to the Task-based Asynchronous Pattern (TAP), methods returning either a System.Threading.Tasks.Task or a System.Threading.Tasks.Task&lt;TResult&gt; are considered "asynchronous". Such methods should use the Async suffix. Conversely methods which do not return such Tasks should not have an "Async" suffix in their names.</value>
   </data>
   <data name="S4261_IsActivatedByDefault" xml:space="preserve">
     <value>False</value>
@@ -10027,7 +10027,7 @@
     <value>Blocker Vulnerability</value>
   </data>
   <data name="S4426_Description" xml:space="preserve">
-    <value>When generating cryptograpic keys (or key pairs), it is important to use a key length that provides enough entropy against brute-force attacks. For the Blowfish algorithm the key should be at least 128 bits long, while for the RSA algorithm it should be at least 2048 bits long.</value>
+    <value>When generating cryptograpic keys (or key pairs), it is important to use a key length that provides enough entropy against brute-force attacks. For the RSA algorithm the key should be at </value>
   </data>
   <data name="S4426_IsActivatedByDefault" xml:space="preserve">
     <value>True</value>
@@ -10237,7 +10237,7 @@
     <value>Critical Code Smell</value>
   </data>
   <data name="S4524_Description" xml:space="preserve">
-    <value>switch can contain a default clause for various reason: to handle unexpected values, to show all the cases where properly considered.</value>
+    <value>switch can contain a default clause for various reasons: to handle unexpected values, to show that all the cases were properly considered.</value>
   </data>
   <data name="S4524_IsActivatedByDefault" xml:space="preserve">
     <value>False</value>

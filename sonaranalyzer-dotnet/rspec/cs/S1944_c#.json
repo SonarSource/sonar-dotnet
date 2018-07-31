@@ -18,5 +18,11 @@
   "defaultSeverity": "Critical",
   "ruleSpecification": "RSPEC-1944",
   "sqKey": "S1944",
-  "scope": "All"
+  "scope": "All",
+  "securityStandards": {
+    "CWE": [
+      588,
+      704
+    ]
+  }
 }

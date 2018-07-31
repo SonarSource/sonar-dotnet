@@ -1,7 +1,7 @@
 <p><code>CoSetProxyBlanket</code> and <code>CoInitializeSecurity</code> both work to set the permissions context in which the process invoked
-immediately after is executed. Calling them from within that process is useless because it's to late at that point; the permissions context has
+immediately after is executed. Calling them from within that process is useless because it's too late at that point; the permissions context has
 already been set.</p>
-<p>Specifically, these methods are meant to be called from a non-managed code such as a C++ wrapper that then invokes the managed, i.e. C# or VB.NET,
+<p>Specifically, these methods are meant to be called from non-managed code such as a C++ wrapper that then invokes the managed, i.e. C# or VB.NET,
 code.</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
@@ -61,4 +61,8 @@ static void Main(string[] args)
 		RpcImpLevel.Impersonate, IntPtr.Zero, EoAuthnCap.None, IntPtr.Zero); // Noncompliant
 }
 </pre>
+<h2>See</h2>
+<ul>
+  <li> OWASP Top 10 2017 Category A6 - Security Misconfiguration </li>
+</ul>
 

@@ -5,15 +5,15 @@ tests, and therefore not executed. Neither are <code>async</code> <code>void</co
 <h2>Noncompliant Code Example</h2>
 <pre>
 [TestMethod]
-void TestNullArg()  // Noncompliant
+void TestNullArg()  // Noncompliant; method is not public
 {  /* ... */  }
 
 [TestMethod]
-public async void MyIgnoredTestMethod()  // Noncompliant
+public async void MyIgnoredTestMethod()  // Noncompliant; this is an 'async void' method
 { /* ... */ }
 
 [TestMethod]
-public void MyIgnoredGenericTestMethod&lt;T&gt;(T foo)  // Noncompliant
+public void MyIgnoredGenericTestMethod&lt;T&gt;(T foo)  // Noncompliant; method has generics in its signature
 { /* ... */ }
 </pre>
 <h2>Compliant Solution</h2>
