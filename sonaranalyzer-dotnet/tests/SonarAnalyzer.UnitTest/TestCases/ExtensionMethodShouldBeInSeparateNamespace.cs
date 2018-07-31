@@ -49,3 +49,33 @@ namespace SomeOtherNamespace
         }
     }
 }
+
+namespace OtherPackageNamespace
+{
+    public interface IFoo { }
+
+    public enum FooBar { }
+
+    public struct FooQux { }
+
+    public static class FooHelpers
+    {
+        public static void FooInterface(this IFoo foo) // Compliant
+        {
+        }
+
+        public static void FooEnum(this FooBar foo) // Compliant
+        {
+        }
+
+        public static void FooStruct(this FooQux foo) // Compliant
+        {
+        }
+
+        public static T FooGeneric<T>(this T foo) // Compliant
+        {
+            return default(T);
+        }
+    }
+
+}

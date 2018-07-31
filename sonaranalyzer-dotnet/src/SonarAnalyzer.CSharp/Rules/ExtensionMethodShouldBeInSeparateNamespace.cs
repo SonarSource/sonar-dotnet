@@ -52,6 +52,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         methodSymbol.IsExtensionMethod &&
                         methodSymbol.Parameters.Length > 0 &&
                         methodSymbol.Parameters[0].Type.Kind != SymbolKind.ErrorType &&
+                        methodSymbol.Parameters[0].Type.IsClass() &&
                         methodSymbol.ContainingNamespace == methodSymbol.Parameters[0].Type.ContainingNamespace)
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, methodDeclaration.Identifier.GetLocation()));
