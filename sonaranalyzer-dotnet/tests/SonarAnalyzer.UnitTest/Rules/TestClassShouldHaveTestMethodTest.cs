@@ -19,8 +19,8 @@
  */
 
 extern alias csharp;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -34,7 +34,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzer(@"TestCases\TestClassShouldHaveTestMethod_NUnit.cs",
                 new TestClassShouldHaveTestMethod(),
                 null,
-                Verifier.NUnitFrameworkAssembly);
+                AssemblyReference.FromNuGet("nunit.framework.dll", "NUnit", "2.6.4"));
         }
 
         [TestMethod]
@@ -44,7 +44,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzer(@"TestCases\TestClassShouldHaveTestMethod_MSTest.cs",
                 new TestClassShouldHaveTestMethod(),
                 null,
-                Verifier.MicrosoftVisualStudioTestToolsUnitTestingAssembly);
+                AssemblyReference.FromNuGet("Microsoft.VisualStudio.TestPlatform.TestFramework.dll", "MSTest.TestFramework", "1.2.0"));
         }
     }
 }

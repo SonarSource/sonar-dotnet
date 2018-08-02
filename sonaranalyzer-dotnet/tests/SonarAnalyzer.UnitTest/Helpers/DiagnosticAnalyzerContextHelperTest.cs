@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Linq;
 using System.Threading.Tasks;
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
@@ -38,8 +37,9 @@ namespace SonarAnalyzer.UnitTest.Helpers
             using (var workspace = new AdhocWorkspace())
             {
                 var document = workspace.CurrentSolution.AddProject("foo", "foo.dll", LanguageNames.CSharp)
-                    .AddMetadataReference(MetadataReference.CreateFromFile(typeof(object).Assembly.Location))
-                    .AddMetadataReference(MetadataReference.CreateFromFile(typeof(Enumerable).Assembly.Location))
+                    .AddMetadataReference(AssemblyReferenceService.GetMetadataReference(AssemblyReference.FromFramework("mscorlib.dll")))
+                    .AddMetadataReference(AssemblyReferenceService.GetMetadataReference(AssemblyReference.FromFramework("System.dll")))
+                    .AddMetadataReference(AssemblyReferenceService.GetMetadataReference(AssemblyReference.FromFramework("System.Core.dll")))
                     .AddDocument(name, content);
 
                 var compilation = document.Project.GetCompilationAsync().Result;
@@ -55,8 +55,9 @@ namespace SonarAnalyzer.UnitTest.Helpers
             using (var workspace = new AdhocWorkspace())
             {
                 var document = workspace.CurrentSolution.AddProject("foo", "foo.dll", LanguageNames.CSharp)
-                    .AddMetadataReference(MetadataReference.CreateFromFile(typeof(object).Assembly.Location))
-                    .AddMetadataReference(MetadataReference.CreateFromFile(typeof(Enumerable).Assembly.Location))
+                    .AddMetadataReference(AssemblyReferenceService.GetMetadataReference(AssemblyReference.FromFramework("mscorlib.dll")))
+                    .AddMetadataReference(AssemblyReferenceService.GetMetadataReference(AssemblyReference.FromFramework("System.dll")))
+                    .AddMetadataReference(AssemblyReferenceService.GetMetadataReference(AssemblyReference.FromFramework("System.Core.dll")))
                     .AddDocument("Foo.cs", content);
 
                 var compilation = document.Project.GetCompilationAsync().Result;

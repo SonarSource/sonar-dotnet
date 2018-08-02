@@ -33,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             Verifier.VerifyAnalyzer(@"TestCases\HttpPostControllerActionShouldValidateInput.cs",
                 new HttpPostControllerActionShouldValidateInput(),
-                additionalReferences: Verifier.SystemWebMvcAssembly);
+                additionalReferences: AssemblyReference.FromNuGet("System.Web.Mvc.dll", "Microsoft.AspNet.Mvc", "3.0.20105.1"));
         }
     }
 }

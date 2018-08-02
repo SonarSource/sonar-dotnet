@@ -19,8 +19,8 @@
  */
 
 extern alias csharp;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -33,8 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             Verifier.VerifyAnalyzer(@"TestCases\MarkWindowsFormsMainWithStaThread.cs",
                 new MarkWindowsFormsMainWithStaThread(),
-                null,
-                Verifier.SystemWindowsFormsAssembly);
+                additionalReferences: AssemblyReference.FromFramework("System.Windows.Forms.dll"));
         }
 
         [TestMethod]
@@ -42,8 +41,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void MarkWindowsFormsMainWithStaThread_NoWindowsForms()
         {
             Verifier.VerifyAnalyzer(@"TestCases\MarkWindowsFormsMainWithStaThread_NoWindowsForms.cs",
-                new MarkWindowsFormsMainWithStaThread(),
-                null);
+                new MarkWindowsFormsMainWithStaThread());
         }
     }
 }

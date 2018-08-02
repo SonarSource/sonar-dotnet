@@ -20,9 +20,9 @@
 
 extern alias csharp;
 using System;
+using csharp::SonarAnalyzer.Rules.CSharp;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using csharp::SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -179,7 +179,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             Action action =
                 () => Verifier.VerifyAnalyzer(@"TestCases\CheckFileLicense_EmptyFile.cs",
                     new CheckFileLicense { HeaderFormat = SingleLineHeader });
-            action.ShouldThrow<AssertFailedException>()
+            action.Should().Throw<AssertFailedException>()
                   .WithMessage("Issue with message 'Add or update the header of this file.' not expected on line 1");
         }
 
@@ -188,15 +188,15 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void CheckFileLicense_WhenProvidingAnInvalidRegex_ShouldThrowException()
         {
             const string expectedErrorMessage =
-                "Expected collection to be empty, but found {error AD0001: Analyzer " +
-                "'SonarAnalyzer.Rules.CSharp.CheckFileLicense' threw an exception of type " +
+                "Expected diagnostics.Where(d => d.Id == AnalyzerFailedDiagnosticId) to be empty, but found {error AD0001: " +
+                "Analyzer 'SonarAnalyzer.Rules.CSharp.CheckFileLicense' threw an exception of type " +
                 "'System.InvalidOperationException' with message 'Invalid regular expression: " +
                 FailingSingleLineRegexHeader + "'.}.";
 
             Action action =
                 () => Verifier.VerifyAnalyzer(@"TestCases\CheckFileLicense_NoLicenseStartWithUsing.cs",
                     new CheckFileLicense { HeaderFormat = FailingSingleLineRegexHeader, IsRegularExpression = true });
-            action.ShouldThrow<AssertFailedException>()
+            action.Should().Throw<AssertFailedException>()
                   .WithMessage(expectedErrorMessage);
         }
 

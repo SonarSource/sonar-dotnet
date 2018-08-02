@@ -48,8 +48,6 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType NUnit_Framework_TestCaseSourceAttribute = new KnownType("NUnit.Framework.TestCaseSourceAttribute");
         internal static readonly KnownType NUnit_Framework_TestFixtureAttribute = new KnownType("NUnit.Framework.TestFixtureAttribute");
         internal static readonly KnownType NUnit_Framework_TheoryAttribute = new KnownType("NUnit.Framework.TheoryAttribute");
-        internal static readonly KnownType Oracle_ManagedDataAccess_Client_OracleCommand = new KnownType("Oracle.ManagedDataAccess.Client.OracleCommand");
-        internal static readonly KnownType Oracle_ManagedDataAccess_Client_OracleDataAdapter = new KnownType("Oracle.ManagedDataAccess.Client.OracleDataAdapter");
         internal static readonly KnownType System_Action = new KnownType("System.Action");
         internal static readonly KnownType System_Action_T = new KnownType("System.Action<T>");
         internal static readonly KnownType System_Action_T1_T2 = new KnownType("System.Action<T1, T2>");
@@ -126,14 +124,6 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_Data_Common_CommandTrees_DbExpression = new KnownType("System.Data.Common.CommandTrees.DbExpression");
         internal static readonly KnownType System_Data_DataSet = new KnownType("System.Data.DataSet");
         internal static readonly KnownType System_Data_DataTable = new KnownType("System.Data.DataTable");
-        internal static readonly KnownType System_Data_Odbc_OdbcCommand = new KnownType("System.Data.Odbc.OdbcCommand");
-        internal static readonly KnownType System_Data_Odbc_OdbcDataAdapter = new KnownType("System.Data.Odbc.OdbcDataAdapter");
-        internal static readonly KnownType System_Data_OleDb_OleDbCommand = new KnownType("System.Data.OleDb.OleDbCommand");
-        internal static readonly KnownType System_Data_OleDb_OleDbDataAdapter = new KnownType("System.Data.OleDb.OleDbDataAdapter");
-        internal static readonly KnownType System_Data_SqlClient_SqlCommand = new KnownType("System.Data.SqlClient.SqlCommand");
-        internal static readonly KnownType System_Data_SqlClient_SqlDataAdapter = new KnownType("System.Data.SqlClient.SqlDataAdapter");
-        internal static readonly KnownType System_Data_SqlServerCe_SqlCeCommand = new KnownType("System.Data.SqlServerCe.SqlCeCommand");
-        internal static readonly KnownType System_Data_SqlServerCe_SqlCeDataAdapter = new KnownType("System.Data.SqlServerCe.SqlCeDataAdapter");
         internal static readonly KnownType System_DateTime = new KnownType(SpecialType.System_DateTime, "DateTime");
         internal static readonly KnownType System_Decimal = new KnownType(SpecialType.System_Decimal, "decimal");
         internal static readonly KnownType System_Delegate = new KnownType("System.Delegate");

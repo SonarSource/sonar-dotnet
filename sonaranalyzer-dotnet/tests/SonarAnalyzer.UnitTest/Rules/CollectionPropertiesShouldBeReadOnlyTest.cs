@@ -19,8 +19,8 @@
  */
 
 extern alias csharp;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -33,8 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             Verifier.VerifyAnalyzer(@"TestCases\CollectionPropertiesShouldBeReadOnly.cs",
                 new CollectionPropertiesShouldBeReadOnly(),
-                null,
-                Verifier.RuntimeSerializationAssembly);
+                additionalReferences: AssemblyReference.FromFramework("System.Runtime.Serialization.dll"));
         }
     }
 }

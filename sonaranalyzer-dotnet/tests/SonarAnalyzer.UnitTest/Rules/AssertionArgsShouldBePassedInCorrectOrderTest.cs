@@ -19,8 +19,8 @@
  */
 
 extern alias csharp;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -34,9 +34,9 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzer(@"TestCases\AssertionArgsShouldBePassedInCorrectOrder.cs",
                 new AssertionArgsShouldBePassedInCorrectOrder(),
                 null,
-                Verifier.MicrosoftVisualStudioTestToolsUnitTestingAssembly,
-                Verifier.NUnitFrameworkAssembly,
-                Verifier.XunitAssertAssembly);
+                AssemblyReference.FromNuGet("Microsoft.VisualStudio.TestPlatform.TestFramework.dll", "MSTest.TestFramework", "1.2.0"),
+                AssemblyReference.FromNuGet("nunit.framework.dll", "NUnit", "2.6.4"),
+                AssemblyReference.FromNuGet("xunit.assert.dll", "xunit.assert", "2.2.0"));
         }
     }
 }

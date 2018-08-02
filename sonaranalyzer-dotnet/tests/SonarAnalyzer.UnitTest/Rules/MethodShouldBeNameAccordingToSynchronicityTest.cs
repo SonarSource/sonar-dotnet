@@ -34,10 +34,10 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzer(@"TestCases\MethodShouldBeNameAccordingToSynchronicity.cs",
                 new MethodShouldBeNameAccordingToSynchronicity(),
                 null,
-                Verifier.SystemThreadingTasksExtensionsAssembly,
-                Verifier.MicrosoftVisualStudioTestToolsUnitTestingAssembly,
-                Verifier.XunitCoreAssembly,
-                Verifier.NUnitFrameworkAssembly);
+                AssemblyReference.FromNuGet("Microsoft.VisualStudio.TestPlatform.TestFramework.dll", "MSTest.TestFramework", "1.2.0"),
+                AssemblyReference.FromNuGet("xunit.core.dll", "xunit.extensibility.core", "2.2.0"),
+                AssemblyReference.FromNuGet("nunit.framework.dll", "NUnit", "2.6.4"),
+                AssemblyReference.FromNuGet("System.Threading.Tasks.Extensions.dll", "System.Threading.Tasks.Extensions", "4.3.0"));
         }
     }
 }

@@ -19,8 +19,8 @@
  */
 
 extern alias csharp;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -34,9 +34,9 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldNotBeIgnored.cs",
                 new TestMethodShouldNotBeIgnored(),
                 null,
-                Verifier.MicrosoftVisualStudioTestToolsUnitTestingAssembly,
-                Verifier.NUnitFrameworkAssembly,
-                Verifier.XunitCoreAssembly);
+                AssemblyReference.FromNuGet("Microsoft.VisualStudio.TestPlatform.TestFramework.dll", "MSTest.TestFramework", "1.2.0"),
+                AssemblyReference.FromNuGet("nunit.framework.dll", "NUnit", "2.6.4"),
+                AssemblyReference.FromNuGet("xunit.core.dll", "xunit.extensibility.core", "2.2.0"));
         }
     }
 }

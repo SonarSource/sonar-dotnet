@@ -18,10 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using FluentAssertions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Linq;
+using FluentAssertions;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using IssueLocation = SonarAnalyzer.UnitTest.TestFramework.IssueLocationCollector.IssueLocation;
 
 namespace SonarAnalyzer.UnitTest.TestFramework.IssueLocationCollectorTests
@@ -84,7 +84,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.IssueLocationCollectorTests
                     new IssueLocation { LineNumber = 3 }
                 });
 
-            action.ShouldThrow<InvalidOperationException>();
+            action.Should().Throw<InvalidOperationException>();
         }
 
         [TestMethod]

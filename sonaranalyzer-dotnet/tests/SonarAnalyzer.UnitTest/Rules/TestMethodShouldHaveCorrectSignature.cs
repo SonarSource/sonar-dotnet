@@ -19,8 +19,8 @@
  */
 
 extern alias csharp;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -33,10 +33,11 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void TestMethodShouldHaveCorrectSignature()
         {
             Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldHaveCorrectSignature.cs",
-                new TestMethodShouldHaveCorrectSignature(), null,
-                Verifier.MicrosoftVisualStudioTestToolsUnitTestingAssembly,
-                Verifier.XunitCoreAssembly,
-                Verifier.NUnitFrameworkAssembly);
+                new TestMethodShouldHaveCorrectSignature(),
+                null,
+                AssemblyReference.FromNuGet("Microsoft.VisualStudio.TestPlatform.TestFramework.dll", "MSTest.TestFramework", "1.2.0"),
+                AssemblyReference.FromNuGet("nunit.framework.dll", "NUnit", "2.6.4"),
+                AssemblyReference.FromNuGet("xunit.core.dll", "xunit.extensibility.core", "2.2.0"));
         }
     }
 }

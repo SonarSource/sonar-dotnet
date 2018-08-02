@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2018 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -18,12 +18,12 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using FluentAssertions;
-using Microsoft.CodeAnalysis.Text;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using FluentAssertions;
+using Microsoft.CodeAnalysis.Text;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace SonarAnalyzer.UnitTest.TestFramework.IssueLocationCollectorTests
 {
@@ -259,7 +259,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework.IssueLocationCollectorTests
     //      ^^^^^^^^^
 }");
             Action action = () => new IssueLocationCollector().GetPreciseIssueLocations(line).ToList();
-            action.ShouldThrow<AssertFailedException>();
+            action.Should().Throw<AssertFailedException>();
         }
     }
 }

@@ -37,14 +37,14 @@ namespace SonarAnalyzer.UnitTest.ControlFlowGraph
     {
         public static UCFG GetUcfgForMethod(string code, string methodName)
         {
-            (var method, var semanticModel) = TestHelper.Compile(code, Verifier.SystemWebMvcAssembly).GetMethod(methodName);
+            (var method, var semanticModel) = TestHelper.Compile(code, AssemblyReference.FromNuGet("System.Web.Mvc.dll", "Microsoft.AspNet.Mvc", "3.0.20105.1")).GetMethod(methodName);
 
             return BuildUcfg(method.Body, method, semanticModel.GetDeclaredSymbol(method), semanticModel);
         }
 
         public static UCFG GetUcfgForConstructor(string code, string ctorName)
         {
-            var (syntaxTree, semanticModel) = TestHelper.Compile(code, Verifier.SystemWebMvcAssembly);
+            var (syntaxTree, semanticModel) = TestHelper.Compile(code, AssemblyReference.FromNuGet("System.Web.Mvc.dll", "Microsoft.AspNet.Mvc", "3.0.20105.1"));
 
             var ctor = syntaxTree.GetRoot()
                 .DescendantNodes()
@@ -56,7 +56,7 @@ namespace SonarAnalyzer.UnitTest.ControlFlowGraph
 
         public static UCFG GetUcfgForPropertyGetter(string code, string propertyName)
         {
-            (var property, var semanticModel) = TestHelper.Compile(code, Verifier.SystemWebMvcAssembly).GetProperty(propertyName);
+            (var property, var semanticModel) = TestHelper.Compile(code, AssemblyReference.FromNuGet("System.Web.Mvc.dll", "Microsoft.AspNet.Mvc", "3.0.20105.1")).GetProperty(propertyName);
 
             var getterSymbol = semanticModel.GetDeclaredSymbol(property).GetMethod;
             var getterNode = (AccessorDeclarationSyntax)getterSymbol.DeclaringSyntaxReferences.First().GetSyntax();

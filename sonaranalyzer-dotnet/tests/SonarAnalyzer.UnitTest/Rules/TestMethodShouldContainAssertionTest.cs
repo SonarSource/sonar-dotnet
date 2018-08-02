@@ -19,8 +19,8 @@
  */
 
 extern alias csharp;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -34,9 +34,9 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldContainAssertion_MSTest.cs",
                 new TestMethodShouldContainAssertion(),
                 null,
-                Verifier.FluentAssertionsAssembly,
-                Verifier.FluentAssertionsCoreAssembly,
-                Verifier.MicrosoftVisualStudioTestToolsUnitTestingAssembly);
+                AssemblyReference.FromNuGet("Microsoft.VisualStudio.TestPlatform.TestFramework.dll", "MSTest.TestFramework", "1.2.0"),
+                AssemblyReference.FromNuGet("FluentAssertions.dll", "FluentAssertions", "4.19.4"),
+                AssemblyReference.FromNuGet("FluentAssertions.Core.dll", "FluentAssertions", "4.19.4"));
         }
 
         [TestMethod]
@@ -46,9 +46,9 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldContainAssertion_NUnit.cs",
                 new TestMethodShouldContainAssertion(),
                 null,
-                Verifier.FluentAssertionsAssembly,
-                Verifier.FluentAssertionsCoreAssembly,
-                Verifier.NUnitFrameworkAssembly);
+                AssemblyReference.FromNuGet("nunit.framework.dll", "NUnit", "2.6.4"),
+                AssemblyReference.FromNuGet("FluentAssertions.dll", "FluentAssertions", "4.19.4"),
+                AssemblyReference.FromNuGet("FluentAssertions.Core.dll", "FluentAssertions", "4.19.4"));
         }
 
         [TestMethod]
@@ -58,10 +58,10 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldContainAssertion_Xunit.cs",
                 new TestMethodShouldContainAssertion(),
                 null,
-                Verifier.FluentAssertionsAssembly,
-                Verifier.FluentAssertionsCoreAssembly,
-                Verifier.XunitCoreAssembly,
-                Verifier.XunitAssertAssembly);
+                AssemblyReference.FromNuGet("xunit.assert.dll", "xunit.assert", "2.2.0"),
+                AssemblyReference.FromNuGet("xunit.core.dll", "xunit.extensibility.core", "2.2.0"),
+                AssemblyReference.FromNuGet("FluentAssertions.dll", "FluentAssertions", "4.19.4"),
+                AssemblyReference.FromNuGet("FluentAssertions.Core.dll", "FluentAssertions", "4.19.4"));
         }
     }
 }
