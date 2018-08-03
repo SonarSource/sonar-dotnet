@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -438,13 +438,21 @@ namespace Test_16
 // Test overridden method
 namespace Test_17
 {
-    public interface A
+    public interface IA
     {
         void Method();
 
         int Property { get; }
+    }
 
-        public virtual void Test_17(B foo) // Noncompliant
+    public class A : IA
+    {
+        public int Property { get { return 0; } }
+
+        public void Method() { }
+
+        // Compliant - method is virtual so there is a contract to respect
+        public virtual void Test_17(B foo)
         {
             foo.Method();
         }
