@@ -20,9 +20,9 @@
 
 extern alias csharp;
 using System;
+using csharp::SonarAnalyzer.Rules.CSharp;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using csharp::SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -44,7 +44,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             Action action = () => Verifier.VerifyAnalyzer(
                 @"TestCases\MarkAssemblyWithAssemblyVersionAttributeNoncompliant.cs",
                 new MarkAssemblyWithAssemblyVersionAttribute());
-            action.ShouldThrow<AssertFailedException>();
+            action.Should().Throw<AssertFailedException>();
         }
     }
 }

@@ -30,17 +30,17 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace SonarAnalyzer.UnitTest.ControlFlowGraph
 {
-    public static class TestHelper
+    internal static class TestHelper
     {
-        public static (SyntaxTree, SemanticModel) Compile(string classDeclaration, params MetadataReference[] references)
+        public static (SyntaxTree, SemanticModel) Compile(string classDeclaration, params AssemblyReference[] references)
         {
             using (var workspace = new AdhocWorkspace())
             {
                 var document = workspace.CurrentSolution.AddProject("project", "project.dll", LanguageNames.CSharp)
-                    .AddMetadataReference(MetadataReference.CreateFromFile(typeof(object).Assembly.Location))
-                    .AddMetadataReference(MetadataReference.CreateFromFile(typeof(Enumerable).Assembly.Location))
-                    .AddMetadataReference(MetadataReference.CreateFromFile(typeof(System.Diagnostics.Debug).Assembly.Location))
-                    .AddMetadataReferences(references)
+                    .AddMetadataReference(AssemblyReferenceService.GetMetadataReference(AssemblyReference.FromFramework("mscorlib.dll")))
+                    .AddMetadataReference(AssemblyReferenceService.GetMetadataReference(AssemblyReference.FromFramework("System.dll")))
+                    .AddMetadataReference(AssemblyReferenceService.GetMetadataReference(AssemblyReference.FromFramework("System.Core.dll")))
+                    .AddMetadataReferences(references.Select(AssemblyReferenceService.GetMetadataReference))
                     .AddDocument("Class1", classDeclaration);
                 var compilation = document.Project.GetCompilationAsync().Result;
                 var tree = compilation.SyntaxTrees.First();

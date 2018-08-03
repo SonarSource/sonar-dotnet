@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 
 namespace Tests.Diagnostics
 {
@@ -162,7 +162,6 @@ namespace Tests.Diagnostics
     }
     #endregion
 
-
     #region S4005 Call the overload that accepts System.Uri
     class S4005
     {
@@ -190,7 +189,6 @@ namespace Tests.Diagnostics
     }
 
     #endregion
-
 
     #region Mix of rules
     class AllRules

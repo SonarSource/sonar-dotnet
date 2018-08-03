@@ -20,9 +20,9 @@
 
 extern alias csharp;
 using System;
+using csharp::SonarAnalyzer.Rules.CSharp;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using csharp::SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -61,7 +61,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                     @"TestCases\MarkAssemblyWithNeutralResourcesLanguageAttributeNonCompliant.cs",
                     @"ResourceTests\SomeResources.Designer.cs"
                 }, new MarkAssemblyWithNeutralResourcesLanguageAttribute());
-            action.ShouldThrow<AssertFailedException>().And
+            action.Should().Throw<AssertFailedException>().And
                   .Message.Should().Be("Issue with message 'Mark this assembly with 'System.Resources.NeutralResourcesLanguageAttribute'.' not expected on line 1");
         }
     }

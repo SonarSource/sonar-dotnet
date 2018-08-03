@@ -19,8 +19,8 @@
  */
 
 extern alias csharp;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -33,8 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             Verifier.VerifyAnalyzer(@"TestCases\DoNotInstantiateSharedClasses.cs",
                 new DoNotInstantiateSharedClasses(),
-                null,
-                Verifier.SystemComponentModelComposition);
+                additionalReferences: AssemblyReference.FromFramework("System.ComponentModel.Composition.dll"));
         }
 
         [TestMethod]
@@ -43,7 +42,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             Verifier.VerifyNoIssueReportedInTest(@"TestCases\DoNotInstantiateSharedClasses.cs",
                 new DoNotInstantiateSharedClasses(),
-                Verifier.SystemComponentModelComposition);
+                additionalReferences: AssemblyReference.FromFramework("System.ComponentModel.Composition.dll"));
         }
     }
 }

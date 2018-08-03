@@ -32,7 +32,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void CookiesShouldBeHttpOnly()
         {
             Verifier.VerifyAnalyzer(@"TestCases\CookieShouldBeHttpOnly.cs",
-                new CookieShouldBeHttpOnly(), additionalReferences: Verifier.SystemWebAssembly);
+                new CookieShouldBeHttpOnly(),
+                additionalReferences: AssemblyReference.FromFramework("System.Web.dll"));
         }
     }
 }

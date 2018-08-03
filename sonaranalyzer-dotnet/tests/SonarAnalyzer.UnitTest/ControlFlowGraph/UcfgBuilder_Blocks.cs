@@ -322,7 +322,7 @@ public class Class1 : Controller
             block.Jump.Should().NotBeNull();
             if (expectedJumps.Length > 0)
             {
-                block.Jump.Destinations.ShouldBeEquivalentTo(expectedJumps, o => o.WithStrictOrdering());
+                block.Jump.Destinations.Should().BeEquivalentTo(expectedJumps, o => o.WithStrictOrdering());
             }
             else
             {

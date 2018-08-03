@@ -19,8 +19,8 @@
  */
 
 extern alias csharp;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -33,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             Verifier.VerifyAnalyzer(@"TestCases\MutableFieldsShouldNotBePublicReadonly.cs",
                 new MutableFieldsShouldNotBePublicReadonly(),
-                additionalReferences: Verifier.SystemImmutableAssembly);
+                additionalReferences: AssemblyReference.FromNuGet("System.Collections.Immutable.dll", "System.Collections.Immutable", "1.3.0"));
         }
     }
 }
