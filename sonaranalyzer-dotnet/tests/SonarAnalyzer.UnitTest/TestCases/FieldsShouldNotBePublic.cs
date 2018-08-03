@@ -1,5 +1,6 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 
 namespace Tests.Diagnostics
 {
@@ -65,4 +66,22 @@ namespace Tests.Diagnostics
     {
         public int myValue = 0; // Noncompliant
     }
+
+    public struct Struct
+    {
+        public ushort value; // Noncompliant
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 16, CharSet = CharSet.Ansi)]
+    public struct InteropStruct
+    {
+        [FieldOffset(0)] public ushort value; // Compliant - for interop code
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    public class InteropClass
+    {
+        public string value; // Compliant - for interop code
+    }
+
 }
