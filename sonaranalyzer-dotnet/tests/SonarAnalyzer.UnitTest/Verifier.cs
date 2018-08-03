@@ -22,11 +22,8 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Data;
-using System.DirectoryServices;
 using System.IO;
 using System.Linq;
-using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -38,7 +35,6 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.Diagnostics;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Rules;
@@ -50,53 +46,6 @@ namespace SonarAnalyzer.UnitTest
 {
     internal static class Verifier
     {
-        #region Well known metadata references
-        private const string PackagesFolderRelativePath = @"..\..\..\..\packages\";
-
-        private static readonly MetadataReference systemAssembly =
-            MetadataReference.CreateFromFile(typeof(object).Assembly.Location);
-        private static readonly MetadataReference systemLinqAssembly =
-            MetadataReference.CreateFromFile(typeof(Enumerable).Assembly.Location);
-        private static readonly MetadataReference systemNetAssembly =
-            MetadataReference.CreateFromFile(typeof(WebClient).Assembly.Location);
-        internal static readonly MetadataReference SystemImmutableAssembly =
-            MetadataReference.CreateFromFile(typeof(ImmutableArray).Assembly.Location);
-        internal static readonly MetadataReference SystemDataAssembly =
-            MetadataReference.CreateFromFile(typeof(DataTable).Assembly.Location);
-        internal static readonly MetadataReference SystemDirectoryServicesAssembly =
-            MetadataReference.CreateFromFile(typeof(DirectoryEntry).Assembly.Location);
-        internal static readonly MetadataReference SystemXmlAssembly =
-            MetadataReference.CreateFromFile(typeof(System.Xml.XmlDocument).Assembly.Location);
-        internal static readonly MetadataReference MicrosoftVisualStudioTestToolsUnitTestingAssembly =
-            MetadataReference.CreateFromFile(typeof(TestMethodAttribute).Assembly.Location);
-        internal static readonly MetadataReference SystemComponentModelComposition =
-            MetadataReference.CreateFromFile(typeof(System.ComponentModel.Composition.PartCreationPolicyAttribute).Assembly.Location);
-        internal static readonly MetadataReference XunitCoreAssembly =
-            MetadataReference.CreateFromFile(PackagesFolderRelativePath + @"xunit.extensibility.core.2.2.0\lib\netstandard1.1\xunit.core.dll");
-        internal static readonly MetadataReference XunitAssertAssembly =
-            MetadataReference.CreateFromFile(PackagesFolderRelativePath + @"xunit.assert.2.2.0\lib\netstandard1.1\xunit.assert.dll");
-        internal static readonly MetadataReference NUnitFrameworkAssembly =
-            MetadataReference.CreateFromFile(PackagesFolderRelativePath + @"NUnit.2.6.4\lib\nunit.framework.dll");
-        internal static readonly MetadataReference SystemThreadingTasksExtensionsAssembly =
-           MetadataReference.CreateFromFile(PackagesFolderRelativePath + @"System.Threading.Tasks.Extensions.4.3.0\lib\netstandard1.0\System.Threading.Tasks.Extensions.dll");
-        internal static readonly MetadataReference FluentAssertionsAssembly =
-            MetadataReference.CreateFromFile(typeof(AssertionExtensions).Assembly.Location);
-        internal static readonly MetadataReference FluentAssertionsCoreAssembly =
-            MetadataReference.CreateFromFile(typeof(AssertionOptions).Assembly.Location);
-        internal static readonly MetadataReference MicrosoftVisualBasicAssembly =
-            MetadataReference.CreateFromFile(typeof(Microsoft.VisualBasic.Interaction).Assembly.Location);
-        internal static readonly MetadataReference SystemXamlAssembly =
-            MetadataReference.CreateFromFile(typeof(System.Windows.Markup.ConstructorArgumentAttribute).Assembly.Location);
-        internal static readonly MetadataReference SystemWindowsFormsAssembly =
-            MetadataReference.CreateFromFile(typeof(System.Windows.Forms.Form).Assembly.Location);
-        internal static readonly MetadataReference RuntimeSerializationAssembly =
-            MetadataReference.CreateFromFile(typeof(System.Runtime.Serialization.DataMemberAttribute).Assembly.Location);
-        internal static readonly MetadataReference SystemWebAssembly =
-            MetadataReference.CreateFromFile(typeof(System.Web.HttpCookie).Assembly.Location);
-        internal static readonly MetadataReference SystemWebMvcAssembly =
-            MetadataReference.CreateFromFile(typeof(System.Web.Mvc.HttpPostAttribute).Assembly.Location);
-        #endregion
-
         private const string FIXED_MESSAGE = "Fixed";
 
         private const string GeneratedAssemblyName = "foo";
@@ -110,13 +59,12 @@ namespace SonarAnalyzer.UnitTest
 
         #region Verify
 
-        public static void VerifyNoExceptionThrown(string path,
-            IEnumerable<DiagnosticAnalyzer> diagnosticAnalyzers)
+        public static void VerifyNoExceptionThrown(string path, IEnumerable<DiagnosticAnalyzer> diagnosticAnalyzers)
         {
             using (var workspace = new AdhocWorkspace())
             {
                 var file = new FileInfo(path);
-                var project = CreateProject(file.Extension, GeneratedAssemblyName, workspace).AddDocument(file);
+                var project = CreateProject(file.Extension, GeneratedAssemblyName, workspace).AddDocument(new DocumentInfo(file));
                 var compilation = project.GetCompilationAsync().Result;
                 var diagnostics = GetAllDiagnostics(compilation, diagnosticAnalyzers);
                 VerifyNoExceptionThrown(diagnostics);
@@ -124,21 +72,21 @@ namespace SonarAnalyzer.UnitTest
         }
 
         public static void VerifyCSharpAnalyzer(string snippet, SonarDiagnosticAnalyzer diagnosticAnalyzer,
-            ParseOptions options = null, params MetadataReference[] additionalReferences)
+            ParseOptions options = null, params AssemblyReference[] additionalReferences)
         {
             VerifyAnalyzer(new[] { new DocumentInfo($"file1{CSharpFileExtension}", snippet) },
                 CSharpFileExtension, diagnosticAnalyzer, options, null, additionalReferences);
         }
 
         public static void VerifyVisualBasicAnalyzer(string snippet, SonarDiagnosticAnalyzer diagnosticAnalyzer,
-            ParseOptions options = null, params MetadataReference[] additionalReferences)
+            ParseOptions options = null, params AssemblyReference[] additionalReferences)
         {
             VerifyAnalyzer(new[] { new DocumentInfo($"file1{VisualBasicFileExtension}", snippet) },
                 VisualBasicFileExtension, diagnosticAnalyzer, options, null, additionalReferences);
         }
 
         public static void VerifyAnalyzer(string path, SonarDiagnosticAnalyzer diagnosticAnalyzer,
-            ParseOptions options = null, params MetadataReference[] additionalReferences)
+            ParseOptions options = null, params AssemblyReference[] additionalReferences)
         {
             VerifyAnalyzer(new[] { path }, diagnosticAnalyzer, null, options, additionalReferences);
         }
@@ -155,7 +103,7 @@ namespace SonarAnalyzer.UnitTest
 
         public static void VerifyAnalyzer(IEnumerable<string> paths, SonarDiagnosticAnalyzer diagnosticAnalyzer,
             Action<DiagnosticAnalyzer, Compilation> additionalVerify = null, ParseOptions options = null,
-            params MetadataReference[] additionalReferences)
+            params AssemblyReference[] additionalReferences)
         {
             if (paths == null || !paths.Any())
             {
@@ -188,8 +136,9 @@ namespace SonarAnalyzer.UnitTest
             }
         }
 
-        private static void VerifyAnalyzer(IEnumerable<DocumentInfo> documents, string fileExtension, DiagnosticAnalyzer diagnosticAnalyzer,
-            ParseOptions options = null, Action<DiagnosticAnalyzer, Compilation> additionalVerify = null, params MetadataReference[] additionalReferences)
+        private static void VerifyAnalyzer(IEnumerable<DocumentInfo> documents, string fileExtension,
+            DiagnosticAnalyzer diagnosticAnalyzer, ParseOptions options = null,
+            Action<DiagnosticAnalyzer, Compilation> additionalVerify = null, params AssemblyReference[] additionalReferences)
         {
             try
             {
@@ -200,7 +149,10 @@ namespace SonarAnalyzer.UnitTest
                 using (var workspace = new AdhocWorkspace())
                 {
                     var project = CreateProject(fileExtension, GeneratedAssemblyName, workspace, additionalReferences);
-                    project = documents.Aggregate(project, (p, doc) => p.AddDocument(doc.Name, doc.Content).Project); // side effect on purpose (project is immutable)
+                    foreach (var document in documents)
+                    {
+                        project = project.AddDocument(document, false);
+                    }
 
                     var issueLocationCollector = new IssueLocationCollector();
 
@@ -296,20 +248,20 @@ namespace SonarAnalyzer.UnitTest
         }
 
         public static void VerifyNoIssueReportedInTest(string path, SonarDiagnosticAnalyzer diagnosticAnalyzer,
-            params MetadataReference[] additionalReferences)
+            params AssemblyReference[] additionalReferences)
         {
             VerifyNoIssueReported(path, TestAssemblyName, diagnosticAnalyzer, additionalReferences);
         }
 
         public static void VerifyNoIssueReported(string path, SonarDiagnosticAnalyzer diagnosticAnalyzer, ParseOptions options = null,
-            params MetadataReference[] additionalReferences)
+            params AssemblyReference[] additionalReferences)
         {
             VerifyNoIssueReported(path, GeneratedAssemblyName, diagnosticAnalyzer, additionalReferences, options);
         }
 
         public static void VerifyCodeFix(string path, string pathToExpected,
             SonarDiagnosticAnalyzer diagnosticAnalyzer, SonarCodeFixProvider codeFixProvider,
-            params MetadataReference[] additionalReferences)
+            params AssemblyReference[] additionalReferences)
         {
             VerifyCodeFix(path, pathToExpected, pathToExpected, diagnosticAnalyzer, codeFixProvider,
                 null, additionalReferences);
@@ -317,7 +269,7 @@ namespace SonarAnalyzer.UnitTest
 
         public static void VerifyCodeFix(string path, string pathToExpected, string pathToBatchExpected,
             SonarDiagnosticAnalyzer diagnosticAnalyzer, SonarCodeFixProvider codeFixProvider,
-            params MetadataReference[] additionalReferences)
+            params AssemblyReference[] additionalReferences)
         {
             VerifyCodeFix(path, pathToExpected, pathToBatchExpected, diagnosticAnalyzer, codeFixProvider,
                 null, additionalReferences);
@@ -325,7 +277,7 @@ namespace SonarAnalyzer.UnitTest
 
         public static void VerifyCodeFix(string path, string pathToExpected,
             SonarDiagnosticAnalyzer diagnosticAnalyzer, SonarCodeFixProvider codeFixProvider, string codeFixTitle,
-            params MetadataReference[] additionalReferences)
+            params AssemblyReference[] additionalReferences)
         {
             VerifyCodeFix(path, pathToExpected, pathToExpected, diagnosticAnalyzer, codeFixProvider,
                 codeFixTitle, additionalReferences);
@@ -333,7 +285,7 @@ namespace SonarAnalyzer.UnitTest
 
         public static void VerifyCodeFix(string path, string pathToExpected, string pathToBatchExpected,
             SonarDiagnosticAnalyzer diagnosticAnalyzer, SonarCodeFixProvider codeFixProvider, string codeFixTitle,
-            params MetadataReference[] additionalReferences)
+            params AssemblyReference[] additionalReferences)
         {
             using (var workspace = new AdhocWorkspace())
             {
@@ -343,7 +295,7 @@ namespace SonarAnalyzer.UnitTest
                 foreach (var parseOption in parseOptions)
                 {
                     var document = CreateProject(file.Extension, GeneratedAssemblyName, workspace, additionalReferences)
-                        .AddDocument(file, true)
+                        .AddDocument(new DocumentInfo(file), true)
                         .Documents
                         .Single(d => d.Name == file.Name);
                     RunCodeFixWhileDocumentChanges(diagnosticAnalyzer, codeFixProvider, codeFixTitle, document, parseOption, pathToExpected);
@@ -358,13 +310,13 @@ namespace SonarAnalyzer.UnitTest
         #region Generic helper
 
         private static void VerifyNoIssueReported(string path, string assemblyName, DiagnosticAnalyzer diagnosticAnalyzer,
-            MetadataReference[] additionalReferences, ParseOptions parseOptions = null)
+            AssemblyReference[] additionalReferences, ParseOptions parseOptions = null)
         {
             using (var workspace = new AdhocWorkspace())
             {
                 var file = new FileInfo(path);
                 var project = CreateProject(file.Extension, assemblyName, workspace, additionalReferences)
-                    .AddDocument(file);
+                    .AddDocument(new DocumentInfo(file));
 
                 project = parseOptions != null
                     ? project.WithParseOptions(parseOptions)
@@ -378,7 +330,7 @@ namespace SonarAnalyzer.UnitTest
         }
 
         private static void VerifyFixAllCodeFix(string path, string pathToExpected, DiagnosticAnalyzer diagnosticAnalyzer,
-            CodeFixProvider codeFixProvider, string codeFixTitle, params MetadataReference[] additionalReferences)
+            CodeFixProvider codeFixProvider, string codeFixTitle, params AssemblyReference[] additionalReferences)
         {
             var fixAllProvider = codeFixProvider.GetFixAllProvider();
             if (fixAllProvider == null)
@@ -394,7 +346,7 @@ namespace SonarAnalyzer.UnitTest
                 foreach (var parseOption in parseOptions)
                 {
                     var document = CreateProject(file.Extension, GeneratedAssemblyName, workspace, additionalReferences)
-                        .AddDocument(file, true)
+                        .AddDocument(new DocumentInfo(file), true)
                         .Documents
                         .Single(d => d.Name == file.Name);
                     RunFixAllProvider(diagnosticAnalyzer, codeFixProvider, codeFixTitle, fixAllProvider, document, parseOption, pathToExpected);
@@ -402,18 +354,18 @@ namespace SonarAnalyzer.UnitTest
             }
         }
 
-        private static Project CreateProject(string fileExtension, string assemblyName,
-            AdhocWorkspace workspace, params MetadataReference[] additionalReferences)
+        private static Project CreateProject(string fileExtension, string assemblyName, AdhocWorkspace workspace,
+            params AssemblyReference[] additionalReferences)
         {
             var language = fileExtension == CSharpFileExtension
                 ? LanguageNames.CSharp
                 : LanguageNames.VisualBasic;
 
             var project = workspace.CurrentSolution.AddProject(assemblyName, $"{assemblyName}.dll", language)
-                .AddMetadataReference(systemAssembly)
-                .AddMetadataReference(systemLinqAssembly)
-                .AddMetadataReference(systemNetAssembly)
-                .AddMetadataReferences(additionalReferences);
+                .AddMetadataReference(AssemblyReferenceService.GetMetadataReference(AssemblyReference.FromFramework("mscorlib.dll")))
+                .AddMetadataReference(AssemblyReferenceService.GetMetadataReference(AssemblyReference.FromFramework("System.dll")))
+                .AddMetadataReference(AssemblyReferenceService.GetMetadataReference(AssemblyReference.FromFramework("System.Core.dll")))
+                .AddMetadataReferences(additionalReferences.Select(AssemblyReferenceService.GetMetadataReference));
 
             // adding an extra file to the project
             // this won't trigger any issues, but it keeps a reference to the original ParseOption, so
@@ -423,28 +375,25 @@ namespace SonarAnalyzer.UnitTest
             return project;
         }
 
-        private static Project AddDocument(this Project project, FileInfo file,
-            bool removeAnalysisComments = false)
+        private static Project AddDocument(this Project project, DocumentInfo document, bool removeAnalysisComments = false)
         {
-            var text = ReadDocument(file.FullName, removeAnalysisComments);
+            return project.AddDocument(document.Name, ReadDocument()).Project;
 
-            return project.AddDocument(file.Name, text).Project;
-        }
-
-        private static string ReadDocument(string filePath, bool removeAnalysisComments)
-        {
-            var lines = File.ReadAllText(filePath, Encoding.UTF8)
-                .Replace(WindowsLineEnding, UnixLineEnding) // This allows to deal with multiple line endings
-                .Split(new[] { UnixLineEnding }, StringSplitOptions.None);
-
-            if (removeAnalysisComments)
+            string ReadDocument()
             {
-                lines = lines.Where(IssueLocationCollector.IsNotIssueLocationLine)
-                    .Select(ReplaceNonCompliantComment)
-                    .ToArray();
-            }
+                var lines = document.Content
+                    .Replace(WindowsLineEnding, UnixLineEnding) // This allows to deal with multiple line endings
+                    .Split(new[] { UnixLineEnding }, StringSplitOptions.None);
 
-            return string.Join(UnixLineEnding, lines);
+                if (removeAnalysisComments)
+                {
+                    lines = lines.Where(IssueLocationCollector.IsNotIssueLocationLine)
+                        .Select(ReplaceNonCompliantComment)
+                        .ToArray();
+                }
+
+                return string.Join(UnixLineEnding, lines);
+            }
         }
 
         private static string ReplaceNonCompliantComment(string line)
@@ -669,7 +618,6 @@ namespace SonarAnalyzer.UnitTest
                 return;
             }
 
-
             SonarAnalysisContext.ShouldDiagnosticBeReported = (s, d) => { IncrementReportCount(d.Id); return true; };
         }
 
@@ -679,7 +627,6 @@ namespace SonarAnalyzer.UnitTest
             {
                 return;
             }
-
 
             SonarAnalysisContext.ShouldDiagnosticBeReported = null;
         }
@@ -704,7 +651,7 @@ namespace SonarAnalyzer.UnitTest
         private class DocumentInfo
         {
             public DocumentInfo(FileInfo file) :
-                this(file.Name, File.ReadAllText(file.FullName))
+                this(file.Name, File.ReadAllText(file.FullName, Encoding.UTF8))
             {
             }
 

@@ -78,7 +78,7 @@ namespace Tests.Diagnostics
 
     public class CompliantCases : BaseClass
     {
-        public Task FooTaskAsync() 
+        public Task FooTaskAsync()
         {
             return Task.Delay(0);
         }
@@ -122,30 +122,6 @@ namespace Tests.Diagnostics
 
     public class TestAttributes
     {
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethod]
-        public async Task MSTest_TestMethod() { }
-
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DataTestMethod]
-        public async Task MSTest_DataTestMethod() { }
-
-        [NUnit.Framework.Test]
-        public async Task NUnit_Test() { }
-
-        [NUnit.Framework.TestCase(1)]
-        public async Task NUnit_TestCase(int i) { }
-
-        [NUnit.Framework.TestCaseSource()]
-        public async Task NUnit_TestCaseSource() { }
-
-        [NUnit.Framework.Theory]
-        public async Task NUnit_Theory() { }
-
-        [Xunit.Fact]
-        public async Task Xunit_Fact() { }
-
-        [Xunit.Theory]
-        public async Task Xunit_Theory() { }
-
         [System.ComponentModel.Browsable(true)]
         public async Task OtherAttributes() { } // Noncompliant
     }

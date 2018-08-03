@@ -27,13 +27,15 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class HttpPostControllerActionShouldValidateInputTest
     {
-        [TestMethod]
+        [DataTestMethod]
+        [DataRow("3.0.20105.1")]
+        [DataRow(AssemblyReference.NuGetInfo.LatestVersion)]
         [TestCategory("Rule")]
-        public void HttpPostControllerActionShouldValidateInput()
+        public void HttpPostControllerActionShouldValidateInput(string aspNetMvcVersion)
         {
             Verifier.VerifyAnalyzer(@"TestCases\HttpPostControllerActionShouldValidateInput.cs",
                 new HttpPostControllerActionShouldValidateInput(),
-                additionalReferences: Verifier.SystemWebMvcAssembly);
+                additionalReferences: AssemblyReference.FromNuGet("System.Web.Mvc.dll", "Microsoft.AspNet.Mvc", aspNetMvcVersion));
         }
     }
 }

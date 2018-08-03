@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2018 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -31,7 +31,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             Verifier.VerifyAnalyzer(@"TestCases\DoNotUseIif.vb",
                 new SonarAnalyzer.Rules.VisualBasic.DoNotUseIif(),
-                additionalReferences: Verifier.MicrosoftVisualBasicAssembly);
+                additionalReferences: AssemblyReference.FromFramework("Microsoft.VisualBasic.dll"));
         }
 
         [TestMethod]
@@ -43,7 +43,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 @"TestCases\DoNotUseIif.Fixed.vb",
                 new SonarAnalyzer.Rules.VisualBasic.DoNotUseIif(),
                 new SonarAnalyzer.Rules.VisualBasic.DoNotUseIifCodeFixProvider(),
-                Verifier.MicrosoftVisualBasicAssembly);
+                additionalReferences: AssemblyReference.FromFramework("Microsoft.VisualBasic.dll"));
         }
     }
 }

@@ -18,12 +18,12 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Linq;
 using FluentAssertions;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Helpers;
-using System.Linq;
 
 namespace SonarAnalyzer.UnitTest.Helpers
 {
@@ -88,7 +88,7 @@ namespace Test
             var preceding = ifStatement2.GetPrecedingIfsInConditionChain();
             preceding.Should().HaveCount(1);
 
-            ifStatement1.ShouldBeEquivalentTo(preceding[0]);
+            ifStatement1.Should().BeEquivalentTo(preceding[0]);
         }
 
         [TestMethod]
@@ -102,7 +102,7 @@ namespace Test
             var preceding = ifStatement2.GetPrecedingStatementsInConditionChain().ToList();
             preceding.Should().HaveCount(1);
 
-            ifStatement1.Statement.ShouldBeEquivalentTo(preceding[0]);
+            ifStatement1.Statement.Should().BeEquivalentTo(preceding[0]);
         }
 
         [TestMethod]
@@ -116,7 +116,7 @@ namespace Test
             var preceding = ifStatement2.GetPrecedingConditionsInConditionChain().ToList();
             preceding.Should().HaveCount(1);
 
-            ifStatement1.Condition.ShouldBeEquivalentTo(preceding[0]);
+            ifStatement1.Condition.Should().BeEquivalentTo(preceding[0]);
         }
 
         [TestMethod]
@@ -126,7 +126,7 @@ namespace Test
 
             sections.Last().GetPrecedingSections().Should().HaveCount(2);
             sections.First().GetPrecedingSections().Should().BeEmpty();
-            sections.Last().GetPrecedingSections().First().ShouldBeEquivalentTo(sections.First());
+            sections.Last().GetPrecedingSections().First().Should().BeEquivalentTo(sections.First());
         }
 
         [TestMethod]
@@ -142,9 +142,8 @@ namespace Test
         {
             var statements = switchMethod.Body.Statements.ToList();
 
-            statements[1].GetPrecedingStatement().ShouldBeEquivalentTo(statements[0]);
-
-            statements[0].GetPrecedingStatement().ShouldBeEquivalentTo(null);
+            statements[1].GetPrecedingStatement().Should().BeEquivalentTo(statements[0]);
+            statements[0].GetPrecedingStatement().Should().Be(null);
         }
     }
 }

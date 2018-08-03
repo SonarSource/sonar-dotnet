@@ -19,10 +19,8 @@
  */
 
 extern alias csharp;
-using Microsoft.CodeAnalysis;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
-using System.IO;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -33,12 +31,10 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void WcfNonVoidOneWay()
         {
-            var assemblyPath = Path.GetDirectoryName(typeof(object).Assembly.Location);
-
             Verifier.VerifyAnalyzer(
                 @"TestCases\WcfNonVoidOneWay.cs",
                 new WcfNonVoidOneWay(),
-                additionalReferences: new[] { MetadataReference.CreateFromFile(Path.Combine(assemblyPath, "System.ServiceModel.dll")) });
+                additionalReferences: AssemblyReference.FromFramework("System.ServiceModel.dll"));
         }
     }
 }

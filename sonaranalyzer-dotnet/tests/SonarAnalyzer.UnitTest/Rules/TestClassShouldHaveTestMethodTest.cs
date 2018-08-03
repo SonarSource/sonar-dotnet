@@ -19,32 +19,36 @@
  */
 
 extern alias csharp;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
     [TestClass]
     public class TestClassShouldHaveTestMethodTest
     {
-        [TestMethod]
+        [DataTestMethod]
+        [DataRow("2.5.7.10213")]
+        [DataRow(AssemblyReference.NuGetInfo.LatestVersion)]
         [TestCategory("Rule")]
-        public void TestClassShouldHaveTestMethod_NUnit()
+        public void TestClassShouldHaveTestMethod_NUnit(string testFwkVersion)
         {
-            Verifier.VerifyAnalyzer(@"TestCases\TestClassShouldHaveTestMethod_NUnit.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\TestClassShouldHaveTestMethod.NUnit.cs",
                 new TestClassShouldHaveTestMethod(),
                 null,
-                Verifier.NUnitFrameworkAssembly);
+                AssemblyReference.FromNuGet("nunit.framework.dll", "NUnit", testFwkVersion));
         }
 
-        [TestMethod]
+        [DataTestMethod]
+        [DataRow("1.1.11")]
+        [DataRow(AssemblyReference.NuGetInfo.LatestVersion)]
         [TestCategory("Rule")]
-        public void TestClassShouldHaveTestMethod_MSTest()
+        public void TestClassShouldHaveTestMethod_MSTest(string testFwkVersion)
         {
-            Verifier.VerifyAnalyzer(@"TestCases\TestClassShouldHaveTestMethod_MSTest.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\TestClassShouldHaveTestMethod.MsTest.cs",
                 new TestClassShouldHaveTestMethod(),
                 null,
-                Verifier.MicrosoftVisualStudioTestToolsUnitTestingAssembly);
+                AssemblyReference.FromNuGet("Microsoft.VisualStudio.TestPlatform.TestFramework.dll", "MSTest.TestFramework", testFwkVersion));
         }
     }
 }

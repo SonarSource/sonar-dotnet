@@ -100,7 +100,7 @@ namespace Test
             // Assert
             activeSections.Should().NotBeNull();
             activeSections.Count().Should().Be(1);
-            activeSections.ShouldBeEquivalentTo(new[] { "BLOCK3" });
+            activeSections.Should().BeEquivalentTo(new[] { "BLOCK3" });
         }
 
         [TestMethod]
@@ -143,7 +143,7 @@ namespace Test
             // Assert
             activeSections.Should().NotBeNull();
             activeSections.Count().Should().Be(3);
-            activeSections.ShouldBeEquivalentTo(new[] { "BLOCK1", "BLOCK2", "BLOCK3" });
+            activeSections.Should().BeEquivalentTo(new[] { "BLOCK1", "BLOCK2", "BLOCK3" });
         }
 
         [TestMethod]
@@ -185,7 +185,7 @@ namespace Test
 
             // Assert
             activeSections.Should().NotBeNull();
-            activeSections.ShouldBeEquivalentTo(new[] { "BLOCK2", "BLOCK3" });
+            activeSections.Should().BeEquivalentTo(new[] { "BLOCK2", "BLOCK3" });
         }
 
         [TestMethod]
@@ -222,7 +222,7 @@ namespace Test
 
             // Assert
             activeSections.Should().NotBeNull();
-            activeSections.ShouldBeEquivalentTo(new[] { "BLOCK2" });
+            activeSections.Should().BeEquivalentTo(new[] { "BLOCK2" });
         }
 
 
@@ -306,7 +306,7 @@ namespace Test
 
             // Assert
             activeSections.Should().NotBeNull();
-            activeSections.ShouldBeEquivalentTo(new[] { "BLOCK1" });
+            activeSections.Should().BeEquivalentTo(new[] { "BLOCK1" });
         }
 
         [TestMethod]
@@ -367,7 +367,7 @@ namespace Test
 
             // Assert
             activeSections.Should().NotBeNull();
-            activeSections.ShouldBeEquivalentTo(new[] { "BLOCK1" });
+            activeSections.Should().BeEquivalentTo(new[] { "BLOCK1" });
         }
 
         [TestMethod]
@@ -398,7 +398,7 @@ namespace Test
 
             // Assert
             activeSections.Should().NotBeNull();
-            activeSections.ShouldBeEquivalentTo(new[] { "BLOCK2" });
+            activeSections.Should().BeEquivalentTo(new[] { "BLOCK2" });
         }
 
         [TestMethod]
@@ -428,7 +428,7 @@ namespace Test
 
             // Assert
             activeSections.Should().NotBeNull();
-            activeSections.ShouldBeEquivalentTo(new[] { "BLOCK1" });
+            activeSections.Should().BeEquivalentTo(new[] { "BLOCK1" });
         }
 
         [TestMethod]
@@ -457,7 +457,7 @@ namespace Test
 
             // Assert
             activeSections.Should().NotBeNull();
-            activeSections.ShouldBeEquivalentTo(new[] { "BLOCK2" });
+            activeSections.Should().BeEquivalentTo(new[] { "BLOCK2" });
         }
 
         [TestMethod]
@@ -502,7 +502,7 @@ namespace Test
 
             // Assert
             activeSections.Should().NotBeNull();
-            activeSections.ShouldBeEquivalentTo(new[] { "BLOCK3", "BLOCK4" });
+            activeSections.Should().BeEquivalentTo(new[] { "BLOCK3", "BLOCK4" });
         }
 
         [TestMethod]
@@ -536,7 +536,7 @@ namespace Test
 
             // Assert
             activeSections.Should().NotBeNull();
-            activeSections.ShouldBeEquivalentTo(new[] { "BLOCK2" });
+            activeSections.Should().BeEquivalentTo(new[] { "BLOCK2" });
         }
 
         private static SyntaxNode GetMethod1Node(string source) =>

@@ -84,8 +84,9 @@ namespace NS
             using (var workspace = new AdhocWorkspace())
             {
                 var document = workspace.CurrentSolution.AddProject("foo", "foo.dll", LanguageNames.CSharp)
-                    .AddMetadataReference(MetadataReference.CreateFromFile(typeof(object).Assembly.Location))
-                    .AddMetadataReference(MetadataReference.CreateFromFile(typeof(Enumerable).Assembly.Location))
+                    .AddMetadataReference(AssemblyReferenceService.GetMetadataReference(AssemblyReference.FromFramework("mscorlib.dll")))
+                    .AddMetadataReference(AssemblyReferenceService.GetMetadataReference(AssemblyReference.FromFramework("System.dll")))
+                    .AddMetadataReference(AssemblyReferenceService.GetMetadataReference(AssemblyReference.FromFramework("System.Core.dll")))
                     .AddDocument("test", TestInput);
                 var compilation = document.Project.GetCompilationAsync().Result;
                 tree = compilation.SyntaxTrees.First();

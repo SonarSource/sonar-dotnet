@@ -19,25 +19,49 @@
  */
 
 extern alias csharp;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
     [TestClass]
     public class DoNotUseLiteralBoolInAssertionsTest
     {
-        [TestMethod]
+        [DataTestMethod]
+        [DataRow("1.1.11")]
+        [DataRow(AssemblyReference.NuGetInfo.LatestVersion)]
         [TestCategory("Rule")]
-        public void DoNotUseLiteralBoolInAssertions()
+        public void DoNotUseLiteralBoolInAssertions_MsTest(string testFwkVersion)
         {
-            Verifier.VerifyAnalyzer(@"TestCases\DoNotUseLiteralBoolInAssertions.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\DoNotUseLiteralBoolInAssertions.MsTest.cs",
                 new DoNotUseLiteralBoolInAssertions(),
                 null,
-                Verifier.MicrosoftVisualStudioTestToolsUnitTestingAssembly,
-                Verifier.NUnitFrameworkAssembly,
-                Verifier.XunitCoreAssembly,
-                Verifier.XunitAssertAssembly);
+                AssemblyReference.FromNuGet("Microsoft.VisualStudio.TestPlatform.TestFramework.dll", "MSTest.TestFramework", testFwkVersion));
+        }
+
+        [DataTestMethod]
+        [DataRow("2.5.7.10213")]
+        [DataRow(AssemblyReference.NuGetInfo.LatestVersion)]
+        [TestCategory("Rule")]
+        public void DoNotUseLiteralBoolInAssertions_NUnit(string testFwkVersion)
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\DoNotUseLiteralBoolInAssertions.NUnit.cs",
+                new DoNotUseLiteralBoolInAssertions(),
+                null,
+                AssemblyReference.FromNuGet("nunit.framework.dll", "NUnit", testFwkVersion));
+        }
+
+        [DataTestMethod]
+        [DataRow("2.0.0")]
+        [DataRow(AssemblyReference.NuGetInfo.LatestVersion)]
+        [TestCategory("Rule")]
+        public void DoNotUseLiteralBoolInAssertions_Xunit(string testFwkVersion)
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\DoNotUseLiteralBoolInAssertions.Xunit.cs",
+                new DoNotUseLiteralBoolInAssertions(),
+                null,
+                AssemblyReference.FromNuGet("xunit.assert.dll", "xunit.assert", testFwkVersion),
+                AssemblyReference.FromNuGet("xunit.core.dll", "xunit.extensibility.core", testFwkVersion));
         }
     }
 }

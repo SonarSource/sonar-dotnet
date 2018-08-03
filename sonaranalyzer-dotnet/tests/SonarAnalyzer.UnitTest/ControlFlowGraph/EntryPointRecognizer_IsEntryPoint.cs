@@ -29,8 +29,10 @@ namespace SonarAnalyzer.UnitTest.ControlFlowGraph
     [TestClass]
     public class EntryPointRecognizer_IsEntryPoint
     {
-        [TestMethod]
-        public void Public_Controller_Methods_Are_EntryPoints()
+        [DataTestMethod]
+        [DataRow("3.0.20105.1")]
+        [DataRow(AssemblyReference.NuGetInfo.LatestVersion)]
+        public void Public_Controller_Methods_Are_EntryPoints(string aspNetMvcVersion)
         {
             const string code = @"
 public class Foo : System.Web.Mvc.Controller
@@ -45,7 +47,7 @@ public class Foo : System.Web.Mvc.Controller
     }
 }
 ";
-            var compilation = TestHelper.Compile(code, Verifier.SystemWebMvcAssembly);
+            var compilation = TestHelper.Compile(code, AssemblyReference.FromNuGet("System.Web.Mvc.dll", "Microsoft.AspNet.Mvc", aspNetMvcVersion));
 
             var publicFoo = compilation.GetMethodSymbol("PublicFoo");
             var protectedFoo = compilation.GetMethodSymbol("ProtectedFoo");
@@ -60,8 +62,10 @@ public class Foo : System.Web.Mvc.Controller
             TaintAnalysisEntryPointDetector.IsEntryPoint(innerFoo).Should().Be(false);
         }
 
-        [TestMethod]
-        public void Controller_Methods_Are_EntryPoints()
+        [DataTestMethod]
+        [DataRow("3.0.20105.1")]
+        [DataRow(AssemblyReference.NuGetInfo.LatestVersion)]
+        public void Controller_Methods_Are_EntryPoints(string aspNetMvcVersion)
         {
             const string code = @"
 public class Foo : System.Web.Mvc.Controller
@@ -77,7 +81,7 @@ public class MyController : Controller
     public void PublicDiz() { }
 }
 ";
-            var compilation = TestHelper.Compile(code, Verifier.SystemWebMvcAssembly);
+            var compilation = TestHelper.Compile(code, AssemblyReference.FromNuGet("System.Web.Mvc.dll", "Microsoft.AspNet.Mvc", aspNetMvcVersion));
 
             var publicFoo = compilation.GetMethodSymbol("PublicFoo");
             var publicBar = compilation.GetMethodSymbol("PublicBar");
@@ -88,8 +92,10 @@ public class MyController : Controller
             TaintAnalysisEntryPointDetector.IsEntryPoint(publicDiz).Should().Be(false);
         }
 
-        [TestMethod]
-        public void Methods_In_Classes_With_ControllerAttribute_Are_EntryPoints()
+        [DataTestMethod]
+        [DataRow("3.0.20105.1")]
+        [DataRow(AssemblyReference.NuGetInfo.LatestVersion)]
+        public void Methods_In_Classes_With_ControllerAttribute_Are_EntryPoints(string aspNetMvcVersion)
         {
             const string code = @"
 // The Attribute suffix is required because we don't have a reference
@@ -101,15 +107,17 @@ public class Foo
     public void PublicFoo() { }
 }
 ";
-            var compilation = TestHelper.Compile(code, Verifier.SystemWebMvcAssembly);
+            var compilation = TestHelper.Compile(code, AssemblyReference.FromNuGet("System.Web.Mvc.dll", "Microsoft.AspNet.Mvc", aspNetMvcVersion));
 
             var publicFoo = compilation.GetMethodSymbol("PublicFoo");
 
             TaintAnalysisEntryPointDetector.IsEntryPoint(publicFoo).Should().Be(true);
         }
 
-        [TestMethod]
-        public void Methods_In_Classes_With_NonControllerAttribute_Are_Not_EntryPoints()
+        [DataTestMethod]
+        [DataRow("3.0.20105.1")]
+        [DataRow(AssemblyReference.NuGetInfo.LatestVersion)]
+        public void Methods_In_Classes_With_NonControllerAttribute_Are_Not_EntryPoints(string aspNetMvcVersion)
         {
             const string code = @"
 // The Attribute suffix is required because we don't have a reference
@@ -121,7 +129,7 @@ public class Foo : Microsoft.AspNetCore.Mvc.ControllerBase
     public void PublicFoo() { }
 }
 ";
-            var compilation = TestHelper.Compile(code, Verifier.SystemWebMvcAssembly);
+            var compilation = TestHelper.Compile(code, AssemblyReference.FromNuGet("System.Web.Mvc.dll", "Microsoft.AspNet.Mvc", aspNetMvcVersion));
 
             var publicFoo = compilation.GetMethodSymbol("PublicFoo");
 

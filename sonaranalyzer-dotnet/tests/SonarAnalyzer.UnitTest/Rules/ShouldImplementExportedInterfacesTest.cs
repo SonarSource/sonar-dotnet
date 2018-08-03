@@ -32,7 +32,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void ShouldImplementExportedInterfaces()
         {
             Verifier.VerifyAnalyzer(@"TestCases\ShouldImplementExportedInterfaces.cs",
-                new ShouldImplementExportedInterfaces(), additionalReferences: Verifier.SystemComponentModelComposition);
+                new ShouldImplementExportedInterfaces(),
+                additionalReferences: AssemblyReference.FromFramework("System.ComponentModel.Composition.dll"));
         }
 
         [TestMethod]
@@ -44,7 +45,8 @@ namespace SonarAnalyzer.UnitTest.Rules
                     @"TestCases\ShouldImplementExportedInterfaces_Part1.cs",
                     @"TestCases\ShouldImplementExportedInterfaces_Part2.cs",
                 },
-                new ShouldImplementExportedInterfaces(), additionalReferences: Verifier.SystemComponentModelComposition);
+                new ShouldImplementExportedInterfaces(),
+                additionalReferences: AssemblyReference.FromFramework("System.ComponentModel.Composition.dll"));
         }
     }
 }
