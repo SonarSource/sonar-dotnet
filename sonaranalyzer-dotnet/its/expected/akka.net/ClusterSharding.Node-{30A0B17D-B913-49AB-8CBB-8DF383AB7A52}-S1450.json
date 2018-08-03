@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S1450",
-"message":  "Remove the '_system' field and declare it as a local variable in the relevant methods.",
+"message":  "Remove the field '_system' and declare it as a local variable in the relevant methods.",
 "location":  {
 "uri":  "sources\akka.net\src\examples\Cluster\ClusterSharding\ClusterSharding.Node\AutomaticJoin\AutomaticCluster.cs",
 "region":  {

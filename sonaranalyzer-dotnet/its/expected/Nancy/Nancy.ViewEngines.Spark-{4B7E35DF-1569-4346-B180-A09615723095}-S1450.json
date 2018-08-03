@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S1450",
-"message":  "Remove the 'settings' field and declare it as a local variable in the relevant methods.",
+"message":  "Remove the field 'settings' and declare it as a local variable in the relevant methods.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark\SparkViewEngine.cs",
 "region":  {

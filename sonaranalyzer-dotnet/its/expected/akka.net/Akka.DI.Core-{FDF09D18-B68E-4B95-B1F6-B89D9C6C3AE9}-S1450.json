@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S1450",
-"message":  "Remove the 'system' field and declare it as a local variable in the relevant methods.",
+"message":  "Remove the field 'system' and declare it as a local variable in the relevant methods.",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\dependencyInjection\Akka.DI.Core\DIActorSystemAdapter.cs",
 "region":  {
