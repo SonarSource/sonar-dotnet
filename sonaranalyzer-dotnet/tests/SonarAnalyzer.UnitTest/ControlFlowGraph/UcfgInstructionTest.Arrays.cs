@@ -23,8 +23,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace SonarAnalyzer.UnitTest.ControlFlowGraph
 {
-    [TestClass]
-    public class UcfgBuilder_Instructions_Arrays
+    public partial class UcfgInstructionTest
     {
         [TestMethod]
         public void Assignments_Array_Get()
@@ -61,7 +60,7 @@ namespace Namespace
         public void Bar(string s) {}
     }
 }";
-            UcfgVerifier.VerifyInstructions(code, "Foo");   
+            UcfgVerifier.VerifyInstructions(code, "Foo");
         }
 
         [TestMethod]
@@ -618,7 +617,7 @@ namespace Namespace
 }";
             UcfgVerifier.VerifyInstructions(code, "Foo");
         }
-        
+
         [TestMethod]
         public void ArrayCreation_New_Jagged()
         {

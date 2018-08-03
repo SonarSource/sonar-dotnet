@@ -28,8 +28,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace SonarAnalyzer.UnitTest.ControlFlowGraph
 {
-    [TestClass]
-    public class UcfgMethod_Create
+    public partial class UcfgTest
     {
         [TestMethod]
         public void GetMethodId_Methods()

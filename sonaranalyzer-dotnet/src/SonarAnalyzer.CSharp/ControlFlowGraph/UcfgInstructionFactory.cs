@@ -84,6 +84,9 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                     expressionService.Associate(instanceExpression, expressionService.This);
                     return NoInstructions;
 
+                case MemberBindingExpressionSyntax memberBinding:
+                    return NoInstructions;
+
                 // ========================================================================
                 // Handles instructions related to function calls
                 // ========================================================================
@@ -210,7 +213,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
 
                     case MethodDeclarationSyntax methodDeclarationSyntax:
                         return methodDeclarationSyntax.Identifier.GetUcfgLocation();
-                        
+
                     case OperatorDeclarationSyntax operatorDeclarationSyntax:
                         return operatorDeclarationSyntax.OperatorToken.GetUcfgLocation();
 
@@ -389,6 +392,26 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                 currentNode = currentNode.Parent;
             }
 
+            if (currentNode is ConditionalAccessExpressionSyntax conditionalAccess)
+            {
+                if (conditionalAccess.Expression.IsKind(SyntaxKind.ThisExpression) ||
+                    conditionalAccess.Expression.IsKind(SyntaxKind.BaseExpression))
+                {
+                    if (conditionalAccess.WhenNotNull is MemberBindingExpressionSyntax bindingExpressionSyntax)
+                    {
+                        currentNode = bindingExpressionSyntax.Name;
+                    }
+                    else
+                    {
+                        currentNode = conditionalAccess.WhenNotNull;
+                    }
+                }
+                else
+                {
+                    currentNode = conditionalAccess.Expression;
+                }
+            }
+
             return this.semanticModel.GetSymbolInfo(currentNode).Symbol;
         }
 
@@ -397,6 +420,11 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             if (syntaxNode is MemberAccessExpressionSyntax memberAccessExpressionSyntax)
             {
                 return expressionService.GetOrDefault(memberAccessExpressionSyntax.Expression);
+            }
+
+            if (syntaxNode is ConditionalAccessExpressionSyntax conditionalAccess)
+            {
+                return expressionService.GetOrDefault(conditionalAccess.Expression);
             }
 
             if (syntaxNode is ElementAccessExpressionSyntax elementAccessExpressionSyntax)
@@ -728,7 +756,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             }
 
             // Handle the case "string[] a1 = { data }"
-            var instructions = NoInstructions;
+            var instructions = new List<Instruction>();
 
             if (variableDeclarator.Initializer.Value.IsKind(SyntaxKind.ArrayInitializerExpression) &&
                 variableDeclarator.Initializer.Value is InitializerExpressionSyntax initializerExpressionSyntax &&
@@ -736,13 +764,21 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                 // returned is null because it isn't specified.
                 semanticModel.GetTypeInfo(initializerExpressionSyntax).ConvertedType is IArrayTypeSymbol arrayType)
             {
-                instructions = BuildNewArrayInstance(variableDeclarator.Initializer.Value,
-                    arrayType, initializerExpressionSyntax);
+                instructions.AddRange(BuildNewArrayInstance(variableDeclarator.Initializer.Value, arrayType,
+                    initializerExpressionSyntax));
             }
 
-            return instructions.Concat(
-                BuildIdentityCall(variableDeclarator, expressionService.CreateVariable(variableDeclarator.Identifier.Text),
-                expressionService.GetOrDefault(variableDeclarator.Initializer.Value)));
+            var initializerExpression = expressionService.GetOrDefault(variableDeclarator.Initializer.Value);
+            if (initializerExpression == UcfgExpressionService.UnknownExpression)
+            {
+                instructions.AddRange(ProcessReadSyntaxNode(variableDeclarator.Initializer.Value));
+                initializerExpression = expressionService.GetOrDefault(variableDeclarator.Initializer.Value);
+            }
+
+            instructions.AddRange(BuildIdentityCall(variableDeclarator,
+                expressionService.CreateVariable(variableDeclarator.Identifier.Text), initializerExpression));
+
+            return instructions;
         }
 
         private Expression SimplifyFunctionExpression(SyntaxNode node, Expression expression, List<Instruction> instructions)

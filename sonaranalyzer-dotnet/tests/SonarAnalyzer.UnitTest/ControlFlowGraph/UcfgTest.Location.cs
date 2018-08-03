@@ -25,8 +25,7 @@ using ULocation = SonarAnalyzer.Protobuf.Ucfg.Location;
 
 namespace SonarAnalyzer.UnitTest.ControlFlowGraph
 {
-    [TestClass]
-    public class UcfgBuilder_GetLocation
+    public partial class UcfgTest
     {
         [TestMethod]
         public void GetLocation_Returns_1Based_Line_0Based_LineOffset()
@@ -43,8 +42,6 @@ public class Class1                 // 2
     }
 }";
             var ucfg = UcfgVerifier.GetUcfgForMethod(code, "Foo");
-
-            var block = ucfg.BasicBlocks[0];
 
             // Block locations are not used by the Security engine
             ucfg.BasicBlocks[0].Location.Should().BeNull();
@@ -73,8 +70,6 @@ s.Trim(                             // 7 x = __id(%0)           --> SL = 6, SLO 
     }
 }";
             var ucfg = UcfgVerifier.GetUcfgForMethod(code, "Foo");
-
-            var block = ucfg.BasicBlocks[0];
 
             // Block locations are not used by the Security engine
             ucfg.BasicBlocks[0].Location.Should().BeNull();
