@@ -27,17 +27,41 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class TestMethodShouldHaveCorrectSignatureTest
     {
-
-        [TestMethod]
+        [DataTestMethod]
+        [DataRow("1.1.11")]
+        [DataRow(AssemblyReference.NuGetInfo.LatestVersion)]
         [TestCategory("Rule")]
-        public void TestMethodShouldHaveCorrectSignature()
+        public void TestMethodShouldHaveCorrectSignature_MsTest(string testFwkVersion)
         {
-            Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldHaveCorrectSignature.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldHaveCorrectSignature.MsTest.cs",
                 new TestMethodShouldHaveCorrectSignature(),
                 null,
-                AssemblyReference.FromNuGet("Microsoft.VisualStudio.TestPlatform.TestFramework.dll", "MSTest.TestFramework", "1.2.0"),
-                AssemblyReference.FromNuGet("nunit.framework.dll", "NUnit", "2.6.4"),
-                AssemblyReference.FromNuGet("xunit.core.dll", "xunit.extensibility.core", "2.2.0"));
+                AssemblyReference.FromNuGet("Microsoft.VisualStudio.TestPlatform.TestFramework.dll", "MSTest.TestFramework", testFwkVersion));
+        }
+
+        [DataTestMethod]
+        [DataRow("2.5.7.10213")]
+        [DataRow(AssemblyReference.NuGetInfo.LatestVersion)]
+        [TestCategory("Rule")]
+        public void TestMethodShouldHaveCorrectSignature_NUnit(string testFwkVersion)
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldHaveCorrectSignature.NUnit.cs",
+                new TestMethodShouldHaveCorrectSignature(),
+                null,
+                AssemblyReference.FromNuGet("nunit.framework.dll", "NUnit", testFwkVersion));
+        }
+
+        [DataTestMethod]
+        [DataRow("2.0.0")]
+        [DataRow(AssemblyReference.NuGetInfo.LatestVersion)]
+        [TestCategory("Rule")]
+        public void TestMethodShouldHaveCorrectSignature_Xunit(string testFwkVersion)
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldHaveCorrectSignature.Xunit.cs",
+                new TestMethodShouldHaveCorrectSignature(),
+                null,
+                AssemblyReference.FromNuGet("xunit.assert.dll", "xunit.assert", testFwkVersion),
+                AssemblyReference.FromNuGet("xunit.core.dll", "xunit.extensibility.core", testFwkVersion));
         }
     }
 }

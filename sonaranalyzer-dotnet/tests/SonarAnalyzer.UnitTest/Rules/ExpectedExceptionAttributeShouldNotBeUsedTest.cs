@@ -27,15 +27,41 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class ExpectedExceptionAttributeShouldNotBeUsedTest
     {
-        [TestMethod]
+        [DataTestMethod]
+        [DataRow("1.1.11")]
+        [DataRow(AssemblyReference.NuGetInfo.LatestVersion)]
         [TestCategory("Rule")]
-        public void ExpectedExceptionAttributeShouldNotBeUsed()
+        public void ExpectedExceptionAttributeShouldNotBeUsed_MsTest(string testFwkVersion)
         {
-            Verifier.VerifyAnalyzer(@"TestCases\ExpectedExceptionAttributeShouldNotBeUsed.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\ExpectedExceptionAttributeShouldNotBeUsed.MsTest.cs",
                 new ExpectedExceptionAttributeShouldNotBeUsed(),
                 null,
-                AssemblyReference.FromNuGet("Microsoft.VisualStudio.TestPlatform.TestFramework.dll", "MSTest.TestFramework", "1.2.0"),
-                AssemblyReference.FromNuGet("nunit.framework.dll", "NUnit", "2.6.4"));
+                AssemblyReference.FromNuGet("Microsoft.VisualStudio.TestPlatform.TestFramework.dll", "MSTest.TestFramework", testFwkVersion));
+        }
+
+        [DataTestMethod]
+        [DataRow("2.5.7.10213")]
+        [DataRow("2.6.7")]
+        [TestCategory("Rule")]
+        public void ExpectedExceptionAttributeShouldNotBeUsed_NUnit(string testFwkVersion)
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\ExpectedExceptionAttributeShouldNotBeUsed.NUnit.cs",
+                new ExpectedExceptionAttributeShouldNotBeUsed(),
+                null,
+                AssemblyReference.FromNuGet("nunit.framework.dll", "NUnit", testFwkVersion));
+        }
+
+        [DataTestMethod]
+        [DataRow("3.0.0")]
+        [DataRow(AssemblyReference.NuGetInfo.LatestVersion)]
+        [TestCategory("Rule")]
+        [Description("Starting with version 3.0.0 the attribute was removed.")]
+        public void ExpectedExceptionAttributeShouldNotBeUsed_NUnit_NoIssue(string testFwkVersion)
+        {
+            Verifier.VerifyNoIssueReported(@"TestCases\ExpectedExceptionAttributeShouldNotBeUsed.NUnit.cs",
+                new ExpectedExceptionAttributeShouldNotBeUsed(),
+                null,
+                AssemblyReference.FromNuGet("nunit.framework.dll", "NUnit", testFwkVersion));
         }
     }
 }

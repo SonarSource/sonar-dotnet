@@ -1,6 +1,4 @@
 ﻿using System;
-using Xunit;
-using NUnit.Framework;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Tests.Diagnostics
@@ -45,65 +43,6 @@ namespace Tests.Diagnostics
 
         [TestMethod]
         public async Task DoSomethingAsync() // Compliant
-        {
-        }
-    }
-
-    class XUnitTest
-    {
-
-        [Xunit.Fact]
-        private void PrivateTestMethod() // Compliant
-        {
-        }
-
-        [Fact]
-        protected void ProtectedTestMethod() // Compliant
-        {
-        }
-
-        [Fact]
-        internal void InternalTestMethod() // Compliant
-        {
-        }
-
-        [Fact]
-        public async void AsyncTestMethod()  // Noncompliant
-        {
-        }
-
-        [Fact]
-        public void GenericTestMethod<T>()  // Noncompliant
-        {
-        }
-    }
-
-    class NUnitTest
-    {
-
-
-        [NUnit.Framework.Test]
-        private void PrivateTestMethod() // Noncompliant
-        {
-        }
-
-        [Test]
-        protected void ProtectedTestMethod() // Noncompliant
-        {
-        }
-
-        [Test]
-        internal void InternalTestMethod() // Noncompliant
-        {
-        }
-
-        [Test]
-        public async void AsyncTestMethod()  // Noncompliant
-        {
-        }
-
-        [Test]
-        public void GenericTestMethod<T>()  // Noncompliant
         {
         }
     }

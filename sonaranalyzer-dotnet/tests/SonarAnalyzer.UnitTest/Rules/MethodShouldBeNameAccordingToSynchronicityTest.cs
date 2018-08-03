@@ -28,16 +28,55 @@ namespace SonarAnalyzer.UnitTest.Rules
     public class MethodShouldBeNameAccordingToSynchronicityTest
     {
         [TestMethod]
+        [DataRow("4.0.0")]
+        [DataRow(AssemblyReference.NuGetInfo.LatestVersion)]
         [TestCategory("Rule")]
-        public void MethodShouldBeNameAccordingToSynchronicity()
+        public void MethodShouldBeNameAccordingToSynchronicity(string tasksVersion)
         {
             Verifier.VerifyAnalyzer(@"TestCases\MethodShouldBeNameAccordingToSynchronicity.cs",
                 new MethodShouldBeNameAccordingToSynchronicity(),
                 null,
-                AssemblyReference.FromNuGet("Microsoft.VisualStudio.TestPlatform.TestFramework.dll", "MSTest.TestFramework", "1.2.0"),
-                AssemblyReference.FromNuGet("xunit.core.dll", "xunit.extensibility.core", "2.2.0"),
-                AssemblyReference.FromNuGet("nunit.framework.dll", "NUnit", "2.6.4"),
-                AssemblyReference.FromNuGet("System.Threading.Tasks.Extensions.dll", "System.Threading.Tasks.Extensions", "4.3.0"));
+                AssemblyReference.FromNuGet("System.Threading.Tasks.Extensions.dll", "System.Threading.Tasks.Extensions", tasksVersion));
+        }
+
+        [DataTestMethod]
+        [DataRow("1.1.11")]
+        [DataRow(AssemblyReference.NuGetInfo.LatestVersion)]
+        [TestCategory("Rule")]
+        public void MethodShouldBeNameAccordingToSynchronicity_MsTest(string testFwkVersion)
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\MethodShouldBeNameAccordingToSynchronicity.MsTest.cs",
+                new MethodShouldBeNameAccordingToSynchronicity(),
+                null,
+                AssemblyReference.FromNuGet("Microsoft.VisualStudio.TestPlatform.TestFramework.dll", "MSTest.TestFramework", testFwkVersion),
+                AssemblyReference.FromNuGet("System.Threading.Tasks.Extensions.dll", "System.Threading.Tasks.Extensions", "4.0.0"));
+        }
+
+        [DataTestMethod]
+        [DataRow("2.5.7.10213")]
+        [DataRow(AssemblyReference.NuGetInfo.LatestVersion)]
+        [TestCategory("Rule")]
+        public void MethodShouldBeNameAccordingToSynchronicity_NUnit(string testFwkVersion)
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\MethodShouldBeNameAccordingToSynchronicity.NUnit.cs",
+                new MethodShouldBeNameAccordingToSynchronicity(),
+                null,
+                AssemblyReference.FromNuGet("nunit.framework.dll", "NUnit", testFwkVersion),
+                AssemblyReference.FromNuGet("System.Threading.Tasks.Extensions.dll", "System.Threading.Tasks.Extensions", "4.0.0"));
+        }
+
+        [DataTestMethod]
+        [DataRow("2.0.0")]
+        [DataRow(AssemblyReference.NuGetInfo.LatestVersion)]
+        [TestCategory("Rule")]
+        public void MethodShouldBeNameAccordingToSynchronicity_Xunit(string testFwkVersion)
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\MethodShouldBeNameAccordingToSynchronicity.Xunit.cs",
+                new MethodShouldBeNameAccordingToSynchronicity(),
+                null,
+                AssemblyReference.FromNuGet("xunit.assert.dll", "xunit.assert", testFwkVersion),
+                AssemblyReference.FromNuGet("xunit.core.dll", "xunit.extensibility.core", testFwkVersion),
+                AssemblyReference.FromNuGet("System.Threading.Tasks.Extensions.dll", "System.Threading.Tasks.Extensions", "4.0.0"));
         }
     }
 }

@@ -27,10 +27,12 @@ namespace SonarAnalyzer.UnitTest
     {
         internal class NuGetInfo : IEquatable<NuGetInfo>
         {
+            internal const string LatestVersion = null;
+
             public string Name { get; }
             public SemanticVersion Version { get; }
 
-            internal NuGetInfo(string id, string version = null)
+            internal NuGetInfo(string id, string version = LatestVersion)
             {
                 Name = id;
                 Version = SemanticVersion.ParseOptionalVersion(version);

@@ -21,6 +21,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using Microsoft.CodeAnalysis;
 using NuGet;
 using SonarAnalyzer.Helpers;
@@ -34,12 +35,22 @@ namespace SonarAnalyzer.UnitTest
         private static readonly string systemAssembliesFolder =
             new FileInfo(typeof(object).Assembly.Location).Directory.FullName;
 
-        private static PackageManager packageManager =
-            new PackageManager(PackageRepositoryFactory.Default.CreateRepository("https://www.nuget.org/api/v2/"),
-                PackagesFolderRelativePath);
+        private static readonly PackageManager packageManager =
+            new PackageManager(CreatePackageRepository(), PackagesFolderRelativePath);
 
         private static readonly Dictionary<AssemblyReference, MetadataReference> cache =
             new Dictionary<AssemblyReference, MetadataReference>();
+
+        private static readonly List<string> allowedNugetLibDirectories =
+            new List<string>
+            {
+                "lib",
+                "portable-net45",
+                "net40",
+                "net45",
+                "netstandard1.0",
+                "netstandard1.1"
+            };
 
         public static MetadataReference GetMetadataReference(AssemblyReference assemblyReference) =>
             cache.GetOrAdd(assemblyReference, ProcessAssemblyReference);
@@ -58,7 +69,7 @@ namespace SonarAnalyzer.UnitTest
             var matchingDlls = Directory.GetFiles(GetNuGetPackageDirectory(assemblyReference.NuGet),
                     assemblyReference.Name, SearchOption.AllDirectories)
                 .Select(x => new FileInfo(x))
-                .Where(x => x.Directory.Name == "lib" || (x.Directory.Name.StartsWith("net") && x.Directory.Name != "netstandard1.3"))
+                .Where(x => allowedNugetLibDirectories.Any(y => x.Directory.Name.StartsWith(y)))
                 .OrderByDescending(x => x.FullName);
 
             return MetadataReference.CreateFromFile(matchingDlls.First().FullName);
@@ -69,8 +80,23 @@ namespace SonarAnalyzer.UnitTest
 
         private static string GetRealVersionFolder(AssemblyReference.NuGetInfo nuGetInfo) =>
             nuGetInfo.Version?.ToString()
-            ?? Directory.GetDirectories(PackagesFolderRelativePath, nuGetInfo.Name, SearchOption.TopDirectoryOnly)
-                .First()
-                .Substring(nuGetInfo.Name.Length + 1);
+            ?? Directory.GetDirectories(PackagesFolderRelativePath, $"{nuGetInfo.Name}*", SearchOption.TopDirectoryOnly)
+                .Last()
+                .Substring(PackagesFolderRelativePath.Length + nuGetInfo.Name.Length + 1);
+
+        private static IPackageRepository CreatePackageRepository()
+        {
+            var currentFolder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            var localSettings = Settings.LoadDefaultSettings(new PhysicalFileSystem(currentFolder), null, null);
+
+            // Get a package source provider that can use the settings
+            var packageSourceProvider = new PackageSourceProvider(localSettings);
+
+            // Create an aggregate repository that uses all of the configured sources
+            var aggregateRepository = packageSourceProvider.CreateAggregateRepository(PackageRepositoryFactory.Default,
+                true /* ignore failing repos. Errors will be logged as warnings. */ );
+
+            return aggregateRepository;
+        }
     }
 }

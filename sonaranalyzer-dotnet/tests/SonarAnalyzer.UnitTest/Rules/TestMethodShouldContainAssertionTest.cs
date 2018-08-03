@@ -27,41 +27,47 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class TestMethodShouldContainAssertionTest
     {
-        [TestMethod]
+        [DataTestMethod]
+        [DataRow("1.1.11", "4.19.4")]
+        [DataRow(AssemblyReference.NuGetInfo.LatestVersion, "4.19.4")]
         [TestCategory("Rule")]
-        public void TestMethodShouldContainAssertion_MSTest()
+        public void TestMethodShouldContainAssertion_MSTest(string testFwkVersion, string fluentVersion)
         {
-            Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldContainAssertion_MSTest.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldContainAssertion.MsTest.cs",
                 new TestMethodShouldContainAssertion(),
                 null,
-                AssemblyReference.FromNuGet("Microsoft.VisualStudio.TestPlatform.TestFramework.dll", "MSTest.TestFramework", "1.2.0"),
-                AssemblyReference.FromNuGet("FluentAssertions.dll", "FluentAssertions", "4.19.4"),
-                AssemblyReference.FromNuGet("FluentAssertions.Core.dll", "FluentAssertions", "4.19.4"));
+                AssemblyReference.FromNuGet("Microsoft.VisualStudio.TestPlatform.TestFramework.dll", "MSTest.TestFramework", testFwkVersion),
+                AssemblyReference.FromNuGet("FluentAssertions.dll", "FluentAssertions", fluentVersion),
+                AssemblyReference.FromNuGet("FluentAssertions.Core.dll", "FluentAssertions", fluentVersion));
         }
 
-        [TestMethod]
+        [DataTestMethod]
+        [DataRow("2.5.7.10213", "4.19.4")]
+        [DataRow(AssemblyReference.NuGetInfo.LatestVersion, "4.19.4")]
         [TestCategory("Rule")]
-        public void TestMethodShouldContainAssertion_NUnit()
+        public void TestMethodShouldContainAssertion_NUnit(string testFwkVersion, string fluentVersion)
         {
-            Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldContainAssertion_NUnit.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldContainAssertion.NUnit.cs",
                 new TestMethodShouldContainAssertion(),
                 null,
-                AssemblyReference.FromNuGet("nunit.framework.dll", "NUnit", "2.6.4"),
-                AssemblyReference.FromNuGet("FluentAssertions.dll", "FluentAssertions", "4.19.4"),
-                AssemblyReference.FromNuGet("FluentAssertions.Core.dll", "FluentAssertions", "4.19.4"));
+                AssemblyReference.FromNuGet("nunit.framework.dll", "NUnit", testFwkVersion),
+                AssemblyReference.FromNuGet("FluentAssertions.dll", "FluentAssertions", fluentVersion),
+                AssemblyReference.FromNuGet("FluentAssertions.Core.dll", "FluentAssertions", fluentVersion));
         }
 
-        [TestMethod]
+        [DataTestMethod]
+        [DataRow("2.0.0", "4.19.4")]
+        [DataRow(AssemblyReference.NuGetInfo.LatestVersion, "4.19.4")]
         [TestCategory("Rule")]
-        public void TestMethodShouldContainAssertion_Xunit()
+        public void TestMethodShouldContainAssertion_Xunit(string testFwkVersion, string fluentVersion)
         {
-            Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldContainAssertion_Xunit.cs",
+            Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldContainAssertion.Xunit.cs",
                 new TestMethodShouldContainAssertion(),
                 null,
-                AssemblyReference.FromNuGet("xunit.assert.dll", "xunit.assert", "2.2.0"),
-                AssemblyReference.FromNuGet("xunit.core.dll", "xunit.extensibility.core", "2.2.0"),
-                AssemblyReference.FromNuGet("FluentAssertions.dll", "FluentAssertions", "4.19.4"),
-                AssemblyReference.FromNuGet("FluentAssertions.Core.dll", "FluentAssertions", "4.19.4"));
+                AssemblyReference.FromNuGet("xunit.assert.dll", "xunit.assert", testFwkVersion),
+                AssemblyReference.FromNuGet("xunit.core.dll", "xunit.extensibility.core", testFwkVersion),
+                AssemblyReference.FromNuGet("FluentAssertions.dll", "FluentAssertions", fluentVersion),
+                AssemblyReference.FromNuGet("FluentAssertions.Core.dll", "FluentAssertions", fluentVersion));
         }
     }
 }
