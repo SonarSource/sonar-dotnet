@@ -23,8 +23,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace SonarAnalyzer.UnitTest.ControlFlowGraph
 {
-    [TestClass]
-    public class UcfgBuilder_Instructions_Suspect
+    public partial class UcfgInstructionTest
     {
         [TestMethod]
         public void TernaryOperator_NotInCFG()
@@ -67,6 +66,63 @@ namespace Namespace
 
             return c.ToString();
                 // %1 := object.ToString() [ c ]
+        }
+    }
+}";
+            UcfgVerifier.VerifyInstructions(code, "Foo");
+        }
+
+        [TestMethod]
+        public void NullCoalescingOperator()
+        {
+            const string code = @"
+namespace Namespace
+{
+    public class Class1
+    {
+        private Class1 field;
+
+        public void Foo(Class1 c)
+        {
+            var result = c ?? field;
+                // %0 := __id [ this.field ]
+                // result := __id [ {unknown} ]
+        }
+    }
+}";
+            UcfgVerifier.VerifyInstructions(code, "Foo");
+        }
+
+        [TestMethod]
+        public void NullConditionalOperator()
+        {
+            const string code = @"
+namespace Namespace
+{
+    public class BaseClass
+    {
+        public BaseClass baseField;
+    }
+
+    public class Class1 : BaseClass
+    {
+        private Class1 field;
+
+        public void Foo()
+        {
+            var result = field?.field;
+                // %0 := __id [ this.field ]
+                // %1 := __id [ this.field ]
+                // %2 := __id [ %0.field ]
+                // result := __id [ %2 ]
+
+            result = this?.field;
+                // %3 := __id [ this.field ]
+                // result := __id [ {unknown} ]
+
+            result = base?.baseField;
+                // %4 := __id [ this.baseField ]
+                // result := __id [ {unknown} ]
         }
     }
 }";

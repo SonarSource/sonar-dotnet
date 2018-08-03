@@ -22,8 +22,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace SonarAnalyzer.UnitTest.ControlFlowGraph
 {
-    [TestClass]
-    public class UcfgBuilder_Constructors
+    public partial class UcfgInstructionTest
     {
         [TestMethod]
         public void Ctor_Calling_Implicit()
