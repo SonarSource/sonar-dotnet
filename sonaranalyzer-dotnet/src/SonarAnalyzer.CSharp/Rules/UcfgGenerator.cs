@@ -31,6 +31,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.ControlFlowGraph;
 using SonarAnalyzer.ControlFlowGraph.CSharp;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Protobuf.Ucfg;
@@ -150,11 +151,16 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            var ucfg = new UcfgFactory(context.SemanticModel)
-                .Create(declaration, methodSymbol, cfg);
-
-            if (IsValid(ucfg))
+            try
             {
+                var ucfg = new UcfgFactory(context.SemanticModel)
+                        .Create(declaration, methodSymbol, cfg);
+
+                if (!IsValid(ucfg))
+                {
+                    return;
+                }
+
                 var fileName = $"{projectBuildId}_{Interlocked.Increment(ref protobufFileIndex)}";
 
                 WriteProtobuf(ucfg, Path.Combine(protobufDirectory, $"ucfg_{fileName}.pb"));
@@ -164,6 +170,10 @@ namespace SonarAnalyzer.Rules.CSharp
                     WriteDot(Path.Combine(protobufDirectory, $"ucfg_{fileName}.dot"), writer => UcfgSerializer.Serialize(ucfg, writer));
                     WriteDot(Path.Combine(protobufDirectory, $"cfg_{fileName}.dot"), writer => CfgSerializer.Serialize(ucfg.MethodId, cfg, writer));
                 }
+            }
+            catch (UcfgException) when (!DebugHelper.IsInternalDebuggingContext())
+            {
+                // Ignore the exception in production
             }
         }
 
