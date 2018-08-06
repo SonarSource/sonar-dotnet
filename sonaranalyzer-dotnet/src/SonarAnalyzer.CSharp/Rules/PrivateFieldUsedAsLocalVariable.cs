@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
@@ -69,28 +68,27 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     privateFields.Keys
                         .Where(collector.IsRemovableField)
+                        .Select(CreateDiagnostic)
                         .ToList()
-                        .ForEach(ReportField);
+                        .ForEach(d => c.ReportDiagnosticWhenActive(d));
 
-                    void ReportField(ISymbol fieldSymbol) =>
-                        c.ReportDiagnosticWhenActive(
-                            Diagnostic.Create(rule, privateFields[fieldSymbol].GetLocation(), fieldSymbol.Name));
+                    Diagnostic CreateDiagnostic(IFieldSymbol fieldSymbol) =>
+                        Diagnostic.Create(rule, privateFields[fieldSymbol].GetLocation(), fieldSymbol.Name);
                 },
                 SyntaxKind.ClassDeclaration,
                 SyntaxKind.StructDeclaration);
         }
 
-        private static IDictionary<ISymbol, VariableDeclaratorSyntax> GetPrivateFields(SemanticModel semanticModel,
+        private static IDictionary<IFieldSymbol, VariableDeclaratorSyntax> GetPrivateFields(SemanticModel semanticModel,
             TypeDeclarationSyntax typeDeclaration)
         {
             return typeDeclaration.Members
-                .Where(m => m.IsKind(SyntaxKind.FieldDeclaration))
-                .Cast<FieldDeclarationSyntax>()
+                .OfType<FieldDeclarationSyntax>()
                 .Where(IsPrivate)
                 .Where(HasNoAttributes)
                 .SelectMany(f => f.Declaration.Variables)
                 .ToDictionary(
-                    variable => semanticModel.GetDeclaredSymbol(variable),
+                    variable => (IFieldSymbol)semanticModel.GetDeclaredSymbol(variable),
                     variable => variable);
 
             bool IsPrivate(FieldDeclarationSyntax fieldDeclaration) =>
@@ -102,23 +100,28 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private class FieldAccessCollector : CSharpSyntaxWalker
         {
-            private readonly SemanticModel semanticModel;
-            private readonly IDictionary<ISymbol, VariableDeclaratorSyntax> privateFields;
-            private readonly HashSet<string> privateFieldNames;
-            private readonly Dictionary<ISymbol, Dictionary<ISymbol, HashSet<StatementSyntax>>> reads;
-            private readonly Dictionary<ISymbol, Dictionary<ISymbol, HashSet<StatementSyntax>>> writes;
+            // The following two dictionaries contain read/write statements correspondingly, first grouped by
+            // field symbol (that is read/written by the statements), then by method symbol (that contains
+            // the statements)
+            private readonly Dictionary<ISymbol, Lookup<ISymbol, StatementSyntax>> reads =
+                new Dictionary<ISymbol, Lookup<ISymbol, StatementSyntax>>();
+            private readonly Dictionary<ISymbol, Lookup<ISymbol, StatementSyntax>> writes =
+                new Dictionary<ISymbol, Lookup<ISymbol, StatementSyntax>>();
+            // The following dictionary contains method and property symbol collections, grouped by
+            // statement that contains them.
+            private readonly Lookup<StatementSyntax, ISymbol> invocations =
+                new Lookup<StatementSyntax, ISymbol>();
 
-            public FieldAccessCollector(SemanticModel semanticModel, IDictionary<ISymbol, VariableDeclaratorSyntax> privateFields)
+            private readonly SemanticModel semanticModel;
+            private readonly IDictionary<IFieldSymbol, VariableDeclaratorSyntax> privateFields;
+
+            public FieldAccessCollector(SemanticModel semanticModel, IDictionary<IFieldSymbol, VariableDeclaratorSyntax> privateFields)
             {
                 this.semanticModel = semanticModel;
                 this.privateFields = privateFields;
-
-                privateFieldNames = privateFields.Keys.Select(s => s.Name).ToHashSet();
-                reads = new Dictionary<ISymbol, Dictionary<ISymbol, HashSet<StatementSyntax>>>();
-                writes = new Dictionary<ISymbol, Dictionary<ISymbol, HashSet<StatementSyntax>>>();
             }
 
-            public bool IsRemovableField(ISymbol fieldSymbol)
+            public bool IsRemovableField(IFieldSymbol fieldSymbol)
             {
                 var writesByMethod = writes.GetValueOrDefault(fieldSymbol);
                 var readsByMethod = reads.GetValueOrDefault(fieldSymbol);
@@ -129,7 +132,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     return false;
                 }
 
-                // A field is removable when no method read it, or all methods that read it, first overwrite it
+                // A field is removable when no method reads it, or all methods that read it, overwrite it before reading
                 return readsByMethod == null
                     || readsByMethod.Keys.All(MethodOverwritesBeforeReading);
 
@@ -144,43 +147,76 @@ namespace SonarAnalyzer.Rules.CSharp
                     return readStatements == null
                         || writeStatements != null && readStatements.All(IsPrecededWithWrite);
 
-                    bool IsPrecededWithWrite(StatementSyntax readStatement) =>
-                        GetPreviousStatements(readStatement)
-                            .Any(writeStatements.Contains);
+                    // Returns true when readStatement is preceded with a statement that overwrites fieldSymbol,
+                    // or false when readStatement is preceded with an invocation of a method or property that
+                    // overwrites fieldSymbol.
+                    bool IsPrecededWithWrite(StatementSyntax readStatement)
+                    {
+                        foreach (var statement in GetPreviousStatements(readStatement))
+                        {
+                            // When the readStatement is preceded with a write statement (that is also not a read statement)
+                            // we want to report this field.
+                            if (writeStatements.Contains(statement) && !readStatements.Contains(statement))
+                            {
+                                return true;
+                            }
+
+                            // When the readStatement is preceded with an invocation that has side effects, e.g. writes the field
+                            // we don't want to report this field because it could be difficult or impossible to change the code.
+                            if (IsInvocationWithSideEffects(statement))
+                            {
+                                return false;
+                            }
+                        }
+
+                        return false;
+                    }
                 }
 
-                // Returns all statements before the specified statement within the containing method
-                IEnumerable<StatementSyntax> GetPreviousStatements(StatementSyntax statement)
-                {
-                    var previousStatements = statement.Parent.ChildNodes()
-                        .OfType<StatementSyntax>()
-                        .TakeWhile(x => x != statement)
-                        .Reverse();
+                bool IsInvocationWithSideEffects(StatementSyntax statement) =>
+                    invocations.TryGetValue(statement, out var invocationsInStatement) &&
+                    invocationsInStatement.Any(writesByMethod.ContainsKey);
+            }
 
-                    return statement.Parent is StatementSyntax parentStatement
-                        ? previousStatements.Union(GetPreviousStatements(parentStatement))
-                        : previousStatements;
-                }
+            // Returns all statements before the specified statement within the containing method
+            private static IEnumerable<StatementSyntax> GetPreviousStatements(StatementSyntax statement)
+            {
+                var previousStatements = statement.Parent.ChildNodes()
+                    .OfType<StatementSyntax>()
+                    .TakeWhile(x => x != statement)
+                    .Reverse();
+
+                return statement.Parent is StatementSyntax parentStatement
+                    ? previousStatements.Union(GetPreviousStatements(parentStatement))
+                    : previousStatements;
             }
 
             public override void VisitIdentifierName(IdentifierNameSyntax node)
             {
-                if (!privateFieldNames.Contains(node.Identifier.ValueText))
+                var memberReference = GetTopmostSyntaxWithTheSameSymbol(node);
+
+                if (memberReference.Symbol == null)
                 {
                     return;
                 }
 
-                var fieldReference = GetTopmostSyntaxWithTheSameSymbol(node);
+                var enclosingSymbol = semanticModel.GetEnclosingSymbol(memberReference.Syntax.SpanStart);
 
-                if (fieldReference.Symbol == null ||
-                    !privateFields.ContainsKey(fieldReference.Symbol))
+                if (memberReference.Symbol is IFieldSymbol fieldSymbol &&
+                    privateFields.ContainsKey(fieldSymbol))
                 {
-                    return;
+                    ClassifyFieldReference(enclosingSymbol, memberReference);
                 }
-
-                var enclosingSymbol = semanticModel.GetEnclosingSymbol(fieldReference.Syntax.SpanStart);
-
-                ClassifyFieldReference(enclosingSymbol, fieldReference);
+                else if (memberReference.Symbol is IMethodSymbol
+                    || memberReference.Symbol is IPropertySymbol)
+                {
+                    var statement = memberReference.Syntax.FirstAncestorOrSelf<StatementSyntax>();
+                    if (statement != null)
+                    {
+                        var invocationsInStatement = invocations.GetOrAdd(statement, x => new HashSet<ISymbol>());
+                        invocationsInStatement.Add(memberReference.Symbol);
+                    }
+                }
             }
 
             /// <summary>
@@ -193,7 +229,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 // being null or not, because the rule will not be able to detect field reads from inline property
                 // or field initializers.
                 var fieldAccessInMethod = (IsWrite(fieldReference) ? writes : reads)
-                    .GetOrAdd(fieldReference.Symbol, x => new Dictionary<ISymbol, HashSet<StatementSyntax>>())
+                    .GetOrAdd(fieldReference.Symbol, x => new Lookup<ISymbol, StatementSyntax>())
                     .GetOrAdd(enclosingSymbol, x => new HashSet<StatementSyntax>());
 
                 var statement = fieldReference.Syntax.FirstAncestorOrSelf<StatementSyntax>();
@@ -231,8 +267,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 if (referencedSymbol != null)
                 {
-                    while (potentialReference.Parent != null &&
-                           referencedSymbol.Equals(semanticModel.GetSymbolInfo(potentialReference.Parent).Symbol))
+                    while (potentialReference.Parent != null
+                        && referencedSymbol.Equals(semanticModel.GetSymbolInfo(potentialReference.Parent).Symbol))
                     {
                         potentialReference = potentialReference.Parent;
                     }
@@ -246,6 +282,10 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 return new SyntaxNodeWithSymbol<SyntaxNode, ISymbol>(potentialReference, referencedSymbol);
             }
+        }
+
+        private class Lookup<TKey, TElement> : Dictionary<TKey, HashSet<TElement>>
+        {
         }
     }
 }
