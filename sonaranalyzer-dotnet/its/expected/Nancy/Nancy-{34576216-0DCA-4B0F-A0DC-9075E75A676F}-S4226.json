@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S4226",
-"message":  "Either move this extension to another namespace or move the method inside the type itself.",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Conventions\StaticContentHelper.cs",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S4226",
-"message":  "Either move this extension to another namespace or move the method inside the type itself.",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Owin\NancyOptionsExtensions.cs",
 "region":  {
@@ -28,7 +28,7 @@
 },
 {
 "id":  "S4226",
-"message":  "Either move this extension to another namespace or move the method inside the type itself.",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\ResponseExtensions.cs",
 "region":  {
@@ -41,7 +41,7 @@
 },
 {
 "id":  "S4226",
-"message":  "Either move this extension to another namespace or move the method inside the type itself.",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\ResponseExtensions.cs",
 "region":  {
@@ -54,7 +54,7 @@
 },
 {
 "id":  "S4226",
-"message":  "Either move this extension to another namespace or move the method inside the type itself.",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\ResponseExtensions.cs",
 "region":  {
@@ -67,7 +67,7 @@
 },
 {
 "id":  "S4226",
-"message":  "Either move this extension to another namespace or move the method inside the type itself.",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\ResponseExtensions.cs",
 "region":  {
@@ -80,7 +80,7 @@
 },
 {
 "id":  "S4226",
-"message":  "Either move this extension to another namespace or move the method inside the type itself.",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\ResponseExtensions.cs",
 "region":  {
@@ -93,7 +93,7 @@
 },
 {
 "id":  "S4226",
-"message":  "Either move this extension to another namespace or move the method inside the type itself.",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\ResponseExtensions.cs",
 "region":  {
@@ -106,7 +106,7 @@
 },
 {
 "id":  "S4226",
-"message":  "Either move this extension to another namespace or move the method inside the type itself.",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\ResponseExtensions.cs",
 "region":  {
@@ -119,7 +119,7 @@
 },
 {
 "id":  "S4226",
-"message":  "Either move this extension to another namespace or move the method inside the type itself.",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\ResponseExtensions.cs",
 "region":  {
@@ -132,7 +132,7 @@
 },
 {
 "id":  "S4226",
-"message":  "Either move this extension to another namespace or move the method inside the type itself.",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\ResponseExtensions.cs",
 "region":  {
@@ -145,7 +145,7 @@
 },
 {
 "id":  "S4226",
-"message":  "Either move this extension to another namespace or move the method inside the type itself.",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\ResponseExtensions.cs",
 "region":  {
@@ -158,7 +158,7 @@
 },
 {
 "id":  "S4226",
-"message":  "Either move this extension to another namespace or move the method inside the type itself.",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\ResponseExtensions.cs",
 "region":  {
@@ -171,7 +171,7 @@
 },
 {
 "id":  "S4226",
-"message":  "Either move this extension to another namespace or move the method inside the type itself.",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Routing\Trie\NodeDataExtensions.cs",
 "region":  {
@@ -184,7 +184,7 @@
 },
 {
 "id":  "S4226",
-"message":  "Either move this extension to another namespace or move the method inside the type itself.",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Security\CsrfTokenExtensions.cs",
 "region":  {
@@ -197,7 +197,7 @@
 },
 {
 "id":  "S4226",
-"message":  "Either move this extension to another namespace or move the method inside the type itself.",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Security\CsrfTokenExtensions.cs",
 "region":  {
@@ -210,7 +210,7 @@
 },
 {
 "id":  "S4226",
-"message":  "Either move this extension to another namespace or move the method inside the type itself.",
+"message":  "Either move this extension to another namespace or move the method inside the class itself.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Security\CsrfTokenExtensions.cs",
 "region":  {
