@@ -28,15 +28,16 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-namespace SonarAnalyzer.UnitTest.ControlFlowGraph
+namespace SonarAnalyzer.UnitTest
 {
     internal static class TestHelper
     {
-        public static (SyntaxTree, SemanticModel) Compile(string classDeclaration, params AssemblyReference[] references)
+        public static (SyntaxTree, SemanticModel) Compile(string classDeclaration, bool isCSharp = true,
+            params AssemblyReference[] references)
         {
             using (var workspace = new AdhocWorkspace())
             {
-                var document = workspace.CurrentSolution.AddProject("project", "project.dll", LanguageNames.CSharp)
+                var document = workspace.CurrentSolution.AddProject("project", "project.dll", isCSharp ? LanguageNames.CSharp : LanguageNames.VisualBasic)
                     .AddMetadataReference(AssemblyReferenceService.GetMetadataReference(AssemblyReference.FromFramework("mscorlib.dll")))
                     .AddMetadataReference(AssemblyReferenceService.GetMetadataReference(AssemblyReference.FromFramework("System.dll")))
                     .AddMetadataReference(AssemblyReferenceService.GetMetadataReference(AssemblyReference.FromFramework("System.Core.dll")))

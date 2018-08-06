@@ -30,7 +30,7 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.CSharp.GeneratedCodeRecognizer.Instance;
 
-        protected override MetricsBase GetMetrics(SyntaxTree syntaxTree)
-            => new SonarAnalyzer.Metrics.CSharp.Metrics(syntaxTree);
+        protected override MetricsBase GetMetrics(SyntaxTree syntaxTree, SemanticModel semanticModel)
+            => new SonarAnalyzer.Metrics.CSharp.Metrics(syntaxTree, semanticModel);
     }
 }

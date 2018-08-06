@@ -20,7 +20,6 @@
 
 using System.Collections.Generic;
 using FluentAssertions;
-using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace SonarAnalyzer.UnitTest.Common
@@ -30,8 +29,9 @@ namespace SonarAnalyzer.UnitTest.Common
     {
         private static void AssertLinesOfCode(string code, params int[] expectedExecutableLines)
         {
-            var walker = new Metrics.CSharp.ExecutableLinesWalker();
-            walker.Visit(CSharpSyntaxTree.ParseText(code).GetRoot());
+            (var syntaxTree, var semanticModel) = TestHelper.Compile(code);
+            var walker = new Metrics.CSharp.ExecutableLinesWalker(semanticModel);
+            walker.Visit(syntaxTree.GetRoot());
             walker.ExecutableLines.Should().BeEquivalentTo(expectedExecutableLines);
         }
 
@@ -335,26 +335,23 @@ namespace SonarAnalyzer.UnitTest.Common
         {
             AssertLinesOfCode(
               @"using System.Diagnostics.CodeAnalysis;
-                namespace project_1
+                public class ComplicatedCode
                 {
-                    public class ComplicatedCode
+                    [ExcludeFromCodeCoverage]
+                    public string ComplexFoo()
                     {
-                        [ExcludeFromCodeCoverage]
-                        public string ComplexFoo()
-                        {
-                            string text = null;
-                            return text.ToLower();
-                        }
+                        string text = null;
+                        return text.ToLower();
+                    }
 
-                        [SomeAttribute]
-                        public string ComplexFoo2()
-                        {
-                            string text = null;
-                            return text.ToLower(); // +1
-                        }
+                    [SomeAttribute]
+                    public string ComplexFoo2()
+                    {
+                        string text = null;
+                        return text.ToLower(); // +1
                     }
                 }",
-                17);
+                15);
         }
 
         [TestMethod]
@@ -370,13 +367,11 @@ namespace SonarAnalyzer.UnitTest.Common
             };
 
             attributeVariants.ForEach(attr => AssertLinesOfCode(GenerateTest(attr)));
-        }
 
-        private static string GenerateTest(string attribute)
-        {
-            return @"using System.Diagnostics.CodeAnalysis;
-                namespace project_1
-                {
+            string GenerateTest(string attribute)
+            {
+                return @"
+                    using System.Diagnostics.CodeAnalysis;
                     public class ComplicatedCode
                     {
                         [" + attribute + @"]
@@ -385,8 +380,8 @@ namespace SonarAnalyzer.UnitTest.Common
                             string text = null;
                             return text.ToLower();
                         }
-                    }
-                }";
+                    }";
+            }
         }
 
         [TestMethod]
@@ -435,6 +430,157 @@ namespace SonarAnalyzer.UnitTest.Common
                         {
                             return 1;
                         }
+                    }
+                }");
+        }
+
+        [TestMethod]
+        public void Test_23_Constructor_ExcludeFromCodeCoverage()
+        {
+            AssertLinesOfCode(
+              @"using System.Diagnostics.CodeAnalysis;
+                class Program
+                {
+                    int count;
+
+                    [ExcludeFromCodeCoverage]
+                    public Program() : this(1)
+                    {
+                        count = 123;            // excluded
+                    }
+
+                    public Program(int initialCount)
+                    {
+                        count = initialCount;   // +1
+                    }
+                }",
+                14);
+        }
+
+        [TestMethod]
+        public void Test_24_Property_ExcludeFromCodeCoverage()
+        {
+            AssertLinesOfCode(
+              @"using System.Diagnostics.CodeAnalysis;
+                class EventClass
+                {
+                    private int _value;
+
+                    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+                    public int Value1
+                    {
+                        get { return _value; }      // Excluded
+                        set { _value = value; }     // Excluded
+                    }
+
+                    public int Value2
+                    {
+                        get { return _value; }      // +1
+                        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+                        set { _value = value; }     // Excluded
+                    }
+
+                    public int Value3
+                    {
+                        get { return _value; }      // +1
+                        set { _value = value; }     // +1
+                    }
+                }",
+                15, 22, 23);
+        }
+
+
+        [TestMethod]
+        public void Test_25_Event_ExcludeFromCodeCoverage()
+        {
+            AssertLinesOfCode(
+              @"using System.Diagnostics.CodeAnalysis;
+                class EventClass
+                {
+                    private System.EventHandler _explicitEvent;
+
+                    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+                    public event System.EventHandler ExplicitEvent1
+                    {
+                        add { _explicitEvent += value; }        // Excluded
+                        remove { _explicitEvent -= value; }     // Excluded
+                    }
+
+                    public event System.EventHandler ExplicitEvent2
+                    {
+                        add { _explicitEvent += value; }        // +1
+                        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+                        remove { _explicitEvent -= value; }     // excluded
+                    }
+
+                    public event System.EventHandler ExplicitEvent3
+                    {
+                        add { _explicitEvent += value; }        // +1
+                        remove { _explicitEvent -= value; }     // +1
+                    }
+                }",
+                15, 22, 23);
+        }
+
+        [TestMethod]
+        public void Test_26_PartialClasses_ExcludeFromCodeCoverage()
+        {
+            //
+            AssertLinesOfCode(
+              @"[ExcludeFromCodeCoverage]
+                partial class Program
+                {
+                    int FooProperty { get { return 1; } }   // excluded
+                }
+
+                partial class Program
+                {
+                    void Method1()
+                    {
+                        System.Console.WriteLine();         // other class partial is excluded -> excluded
+                    }
+                }
+
+                partial class AnotherClass
+                {
+                    void Method2()
+                    {
+                        System.Console.WriteLine();         // +1
+                    }
+                } ",
+                19);
+        }
+
+        [TestMethod]
+        public void Test_27_PartialMethods_ExcludeFromCodeCoverage()
+        {
+            //
+            AssertLinesOfCode(
+              @"partial class Program
+                {
+                    [ExcludeFromCodeCoverage]
+                    partial void Method1();
+                }
+
+                partial class Program
+                {
+                    partial void Method1()
+                    {
+                        System.Console.WriteLine();         // other partial part of method is excluded -> excluded
+                    }
+                }
+
+                partial class AnotherClass
+                {
+                    partial void Method2();
+                }
+
+                partial class AnotherClass
+                {
+                    [ExcludeFromCodeCoverage]
+                    partial void Method2()
+                    {
+                        System.Console.WriteLine();         // excluded
                     }
                 }");
         }
