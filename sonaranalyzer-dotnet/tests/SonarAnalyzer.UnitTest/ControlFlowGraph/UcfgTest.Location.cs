@@ -25,8 +25,7 @@ using ULocation = SonarAnalyzer.Protobuf.Ucfg.Location;
 
 namespace SonarAnalyzer.UnitTest.ControlFlowGraph
 {
-    [TestClass]
-    public class UcfgBuilder_GetLocation
+    public partial class UcfgTest
     {
         [TestMethod]
         public void GetLocation_Returns_1Based_Line_0Based_LineOffset()
