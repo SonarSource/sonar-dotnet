@@ -193,6 +193,12 @@ namespace Tests.Diagnostics
         // https://github.com/SonarSource/sonar-csharp/issues/1448
         private int F36; // Noncompliant, we don't read the value
         public void M15(int i) => F36 = i + 1;
+
+        private string F37; // Compliant
+        protected string SomeString
+        {
+            get { return F37 ?? (F37 = "5"); }
+        }
     }
 
     public partial class SomePartialClass

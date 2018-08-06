@@ -100,22 +100,25 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private class FieldAccessCollector : CSharpSyntaxWalker
         {
-            // The following two dictionaries contain read/write statements correspondingly, first grouped by
-            // field symbol (that is read/written by the statements), then by method symbol (that contains
-            // the statements)
-            private readonly Dictionary<ISymbol, Lookup<ISymbol, StatementSyntax>> reads =
-                new Dictionary<ISymbol, Lookup<ISymbol, StatementSyntax>>();
-            private readonly Dictionary<ISymbol, Lookup<ISymbol, StatementSyntax>> writes =
-                new Dictionary<ISymbol, Lookup<ISymbol, StatementSyntax>>();
-            // The following dictionary contains method and property symbol collections, grouped by
-            // statement that contains them.
+            // Contains statements that READ field values. First grouped by field symbol (that is read),
+            // then by method/property/ctor symbol (that contains the statements)
+            private readonly Dictionary<IFieldSymbol, Lookup<ISymbol, StatementSyntax>> readsByField =
+                new Dictionary<IFieldSymbol, Lookup<ISymbol, StatementSyntax>>();
+
+            // Contains statements that WRITE field values. First grouped by field symbol (that is written),
+            // then by method/property/ctor symbol (that contains the statements)
+            private readonly Dictionary<IFieldSymbol, Lookup<ISymbol, StatementSyntax>> writesByField =
+                new Dictionary<IFieldSymbol, Lookup<ISymbol, StatementSyntax>>();
+
+            // Contains all method/property invocations grouped by the statement that contains them.
             private readonly Lookup<StatementSyntax, ISymbol> invocations =
                 new Lookup<StatementSyntax, ISymbol>();
 
             private readonly SemanticModel semanticModel;
             private readonly IDictionary<IFieldSymbol, VariableDeclaratorSyntax> privateFields;
 
-            public FieldAccessCollector(SemanticModel semanticModel, IDictionary<IFieldSymbol, VariableDeclaratorSyntax> privateFields)
+            public FieldAccessCollector(SemanticModel semanticModel,
+                IDictionary<IFieldSymbol, VariableDeclaratorSyntax> privateFields)
             {
                 this.semanticModel = semanticModel;
                 this.privateFields = privateFields;
@@ -123,23 +126,23 @@ namespace SonarAnalyzer.Rules.CSharp
 
             public bool IsRemovableField(IFieldSymbol fieldSymbol)
             {
-                var writesByMethod = writes.GetValueOrDefault(fieldSymbol);
-                var readsByMethod = reads.GetValueOrDefault(fieldSymbol);
+                var writesByEnclosingSymbol = writesByField.GetValueOrDefault(fieldSymbol);
+                var readsByEnclosingSymbol = readsByField.GetValueOrDefault(fieldSymbol);
 
                 // No methods overwrite the field value
-                if (writesByMethod == null)
+                if (writesByEnclosingSymbol == null)
                 {
                     return false;
                 }
 
                 // A field is removable when no method reads it, or all methods that read it, overwrite it before reading
-                return readsByMethod == null
-                    || readsByMethod.Keys.All(MethodOverwritesBeforeReading);
+                return readsByEnclosingSymbol == null
+                    || readsByEnclosingSymbol.Keys.All(ValueOverwrittenBeforeReading);
 
-                bool MethodOverwritesBeforeReading(ISymbol methodSymbol)
+                bool ValueOverwrittenBeforeReading(ISymbol enclosingSymbol)
                 {
-                    var writeStatements = writesByMethod.GetValueOrDefault(methodSymbol);
-                    var readStatements = readsByMethod.GetValueOrDefault(methodSymbol);
+                    var writeStatements = writesByEnclosingSymbol.GetValueOrDefault(enclosingSymbol);
+                    var readStatements = readsByEnclosingSymbol.GetValueOrDefault(enclosingSymbol);
 
                     // Note that Enumerable.All() will return true if readStatements is empty. The collection
                     // will be empty if the field is read only in property/field initializers or returned from
@@ -156,7 +159,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         {
                             // When the readStatement is preceded with a write statement (that is also not a read statement)
                             // we want to report this field.
-                            if (writeStatements.Contains(statement) && !readStatements.Contains(statement))
+                            if (IsOverwritingValue(statement))
                             {
                                 return true;
                             }
@@ -171,14 +174,21 @@ namespace SonarAnalyzer.Rules.CSharp
 
                         return false;
                     }
-                }
 
-                bool IsInvocationWithSideEffects(StatementSyntax statement) =>
-                    invocations.TryGetValue(statement, out var invocationsInStatement) &&
-                    invocationsInStatement.Any(writesByMethod.ContainsKey);
+                    bool IsOverwritingValue(StatementSyntax statement) =>
+                        writeStatements.Contains(statement) &&
+                        !readStatements.Contains(statement);
+
+                    bool IsInvocationWithSideEffects(StatementSyntax statement) =>
+                        invocations.TryGetValue(statement, out var invocationsInStatement) &&
+                        invocationsInStatement.Any(writesByEnclosingSymbol.ContainsKey);
+                }
             }
 
-            // Returns all statements before the specified statement within the containing method
+            /// <summary>
+            /// Returns all statements before the specified statement within the containing method.
+            /// This method recursively traverses all parent blocks of the provided statement.
+            /// </summary>
             private static IEnumerable<StatementSyntax> GetPreviousStatements(StatementSyntax statement)
             {
                 var previousStatements = statement.Parent.ChildNodes()
@@ -194,7 +204,6 @@ namespace SonarAnalyzer.Rules.CSharp
             public override void VisitIdentifierName(IdentifierNameSyntax node)
             {
                 var memberReference = GetTopmostSyntaxWithTheSameSymbol(node);
-
                 if (memberReference.Symbol == null)
                 {
                     return;
@@ -225,11 +234,11 @@ namespace SonarAnalyzer.Rules.CSharp
             /// </summary>
             private void ClassifyFieldReference(ISymbol enclosingSymbol, SyntaxNodeWithSymbol<SyntaxNode, ISymbol> fieldReference)
             {
-                // It is important to create the field access HashSet regardless of the statement (local var below)
+                // It is important to create the field access HashSet regardless of the statement (see the local var below)
                 // being null or not, because the rule will not be able to detect field reads from inline property
                 // or field initializers.
-                var fieldAccessInMethod = (IsWrite(fieldReference) ? writes : reads)
-                    .GetOrAdd(fieldReference.Symbol, x => new Lookup<ISymbol, StatementSyntax>())
+                var fieldAccessInMethod = (IsWrite(fieldReference) ? writesByField : readsByField)
+                    .GetOrAdd((IFieldSymbol)fieldReference.Symbol, x => new Lookup<ISymbol, StatementSyntax>())
                     .GetOrAdd(enclosingSymbol, x => new HashSet<StatementSyntax>());
 
                 var statement = fieldReference.Syntax.FirstAncestorOrSelf<StatementSyntax>();
@@ -261,26 +270,27 @@ namespace SonarAnalyzer.Rules.CSharp
                     assignmentExpression.Left == syntaxNode;
             }
 
-            private SyntaxNodeWithSymbol<SyntaxNode, ISymbol> GetTopmostSyntaxWithTheSameSymbol(SyntaxNode potentialReference)
+            private SyntaxNodeWithSymbol<SyntaxNode, ISymbol> GetTopmostSyntaxWithTheSameSymbol(SyntaxNode identifier)
             {
-                var referencedSymbol = semanticModel.GetSymbolInfo(potentialReference).Symbol;
-
-                if (referencedSymbol != null)
+                // All of the cases below could be parts of invocation or other expressions
+                switch (identifier.Parent)
                 {
-                    while (potentialReference.Parent != null
-                        && referencedSymbol.Equals(semanticModel.GetSymbolInfo(potentialReference.Parent).Symbol))
-                    {
-                        potentialReference = potentialReference.Parent;
-                    }
-
-                    if (potentialReference.Parent != null &&
-                        potentialReference.Parent.IsKind(SyntaxKind.ConditionalAccessExpression))
-                    {
-                        potentialReference = potentialReference.Parent;
-                    }
+                    case MemberAccessExpressionSyntax memberAccess when memberAccess.Name == identifier:
+                        // this.identifier or a.identifier or ((a)).identifier, but not identifier.other
+                        return new SyntaxNodeWithSymbol<SyntaxNode, ISymbol>(
+                            memberAccess.GetSelfOrTopParenthesizedExpression(),
+                            semanticModel.GetSymbolInfo(memberAccess).Symbol);
+                    case MemberBindingExpressionSyntax memberBinding when memberBinding.Name == identifier:
+                        // this?.identifier or a?.identifier or ((a))?.identifier, but not identifier?.other
+                        return new SyntaxNodeWithSymbol<SyntaxNode, ISymbol>(
+                            memberBinding.Parent.GetSelfOrTopParenthesizedExpression(),
+                            semanticModel.GetSymbolInfo(memberBinding).Symbol);
+                    default:
+                        // identifier or ((identifier))
+                        return new SyntaxNodeWithSymbol<SyntaxNode, ISymbol>(
+                            identifier.GetSelfOrTopParenthesizedExpression(),
+                            semanticModel.GetSymbolInfo(identifier).Symbol);
                 }
-
-                return new SyntaxNodeWithSymbol<SyntaxNode, ISymbol>(potentialReference, referencedSymbol);
             }
         }
 

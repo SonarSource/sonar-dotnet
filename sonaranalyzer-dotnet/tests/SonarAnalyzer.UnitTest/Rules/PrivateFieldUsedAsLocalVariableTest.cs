@@ -29,51 +29,6 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void PrivateFieldUsedAsLocalVariable_temp()
-        {
-            Verifier.VerifyCSharpAnalyzer(@"
-using System;
-class C
-{
-    private bool f; // Compliant
-
-    public void M1()
-    {
-        f = true;
-        M2(); // M2 modifies 'f' and the field cannot be removed
-        Console.Write(f);
-    }
-
-    public void M2()
-    {
-        f = false;
-    }
-}
-", new PrivateFieldUsedAsLocalVariable());
-        }
-
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void PrivateFieldUsedAsLocalVariable_temp2()
-        {
-            Verifier.VerifyCSharpAnalyzer(@"
-using System;
-class C
-{
-    private ILoggingAdapter _log; // Compliant
-
-    protected ILoggingAdapter Log
-    {
-        get { return _log ?? (_log = GetLogger()); }
-    }
-
-    private ILoggingAdapter GetLogger() => null;
-}
-", new PrivateFieldUsedAsLocalVariable());
-        }
-
-        [TestMethod]
-        [TestCategory("Rule")]
         public void PrivateFieldUsedAsLocalVariable()
         {
             Verifier.VerifyAnalyzer(@"TestCases\PrivateFieldUsedAsLocalVariable.cs", new PrivateFieldUsedAsLocalVariable());
