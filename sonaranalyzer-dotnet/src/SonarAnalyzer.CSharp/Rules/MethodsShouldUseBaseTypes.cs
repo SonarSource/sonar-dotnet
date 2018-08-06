@@ -44,21 +44,22 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(c =>
-            {
-                FindViolations(c)
-                    .ToList()
-                    .ForEach(d => c.ReportDiagnosticWhenActive(d));
-            },
-            SyntaxKind.MethodDeclaration);
+            context.RegisterSyntaxNodeActionInNonGenerated(
+                c =>
+                {
+                    FindViolations(c)
+                        .ToList()
+                        .ForEach(d => c.ReportDiagnosticWhenActive(d));
+                },
+                SyntaxKind.MethodDeclaration);
         }
 
         public IEnumerable<Diagnostic> FindViolations(SyntaxNodeAnalysisContext context)
         {
-
             if (!(context.SemanticModel.GetDeclaredSymbol(context.Node) is IMethodSymbol methodSymbol) ||
                 methodSymbol.Parameters.Length == 0 ||
                 methodSymbol.IsOverride ||
+                methodSymbol.IsVirtual ||
                 methodSymbol.GetInterfaceMember() != null ||
                 methodSymbol.IsEventHandler())
             {
