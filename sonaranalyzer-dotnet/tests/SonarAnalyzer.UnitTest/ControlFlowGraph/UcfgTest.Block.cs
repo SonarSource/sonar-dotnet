@@ -26,7 +26,7 @@ using SonarAnalyzer.Protobuf.Ucfg;
 namespace SonarAnalyzer.UnitTest.ControlFlowGraph
 {
     [TestClass]
-    public class UcfgBuilder_Blocks
+    public partial class UcfgTest
     {
         private const string ConstValue = "\"\"";
 
