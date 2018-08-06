@@ -459,16 +459,29 @@ namespace Namespace
             const string code = @"
 namespace Namespace
 {
-    public class Class1
+    public class BaseClass
     {
-        public string Field;
+        public string baseField;
+    }
+
+    public class Class1 : BaseClass
+    {
+        public string field;
 
         public void Foo()
         {
-            var variable = Field;
-                // %0 := __id [ this.Field ]
+            var variable = field;
+                // %0 := __id [ this.field ]
                 // variable := __id [ %0 ]
-
+             variable = this.field;
+                // %1 := __id [ this.field ]
+                // variable := __id [ %1 ]
+             variable = baseField;
+                // %2 := __id [ this.baseField ]
+                // variable := __id [ %2 ]
+             variable = base.baseField;
+                // %3 := __id [ this.baseField ]
+                // variable := __id [ %3 ]
         }
     }
 }";
