@@ -22,8 +22,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace SonarAnalyzer.UnitTest.ControlFlowGraph
 {
-    [TestClass]
-    public class UcfgBuilder_Constructors
+    public partial class UcfgInstructionTest
     {
         [TestMethod]
         public void Ctor_Calling_Implicit()
@@ -100,6 +99,26 @@ class Bar
 }
 ";
             UcfgVerifier.VerifyInstructions(code, "Foo", isCtor: true);
+        }
+
+        [TestMethod]
+        public void Static_Ctors()
+        {
+            const string code = @"
+namespace Namespace
+{
+    public class Class1
+    {
+        static Class1()
+        {
+            Do();
+                // %0 := Namespace.Class1.Do() [ Namespace.Class1 ]
+        }
+
+        public static void Do() {}
+    }
+}";
+            UcfgVerifier.VerifyInstructions(code, "Class1", true);
         }
     }
 }

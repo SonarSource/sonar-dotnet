@@ -23,8 +23,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace SonarAnalyzer.UnitTest.ControlFlowGraph
 {
-    [TestClass]
-    public class UcfgBuilder_Instructions_Suspect
+    public partial class UcfgInstructionTest
     {
         [TestMethod]
         public void TernaryOperator_NotInCFG()
