@@ -85,6 +85,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                     return NoInstructions;
 
                 case MemberBindingExpressionSyntax memberBinding:
+                    expressionService.Associate(memberBinding, expressionService.GetOrDefault(memberBinding.Name));
                     return NoInstructions;
 
                 // ========================================================================
@@ -417,6 +418,11 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                 return expressionService.GetOrDefault(memberAccessExpressionSyntax.Expression);
             }
 
+            if (syntaxNode is MemberBindingExpressionSyntax memberBindingExpression)
+            {
+                syntaxNode = memberBindingExpression.FirstAncestorOrSelf<ConditionalAccessExpressionSyntax>();
+            }
+
             if (syntaxNode is ConditionalAccessExpressionSyntax conditionalAccess)
             {
                 return expressionService.GetOrDefault(conditionalAccess.Expression);
@@ -513,6 +519,12 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             // field = someString
             // var x = field
             rightExpression = SimplifyFunctionExpression(assignmentExpression.Right, rightExpression, instructions);
+
+            if (rightExpression == UcfgExpressionService.UnknownExpression &&
+                assignmentExpression.Right is ConditionalAccessExpressionSyntax conditionalAccessExpression)
+            {
+                rightExpression = expressionService.GetOrDefault(conditionalAccessExpression.WhenNotNull);
+            }
 
             var shouldCreateLeftSide = leftExpression == UcfgExpressionService.UnknownExpression;
 
@@ -671,6 +683,14 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                     targetExpression = expressionService.CreateClassName(methodSymbol.ContainingType);
                     // Second argument is the left side of the invocation
                     additionalArguments.Add(expressionService.GetOrDefault(memberAccessExpression.Expression));
+                }
+                else if (unparenthesisedExpression is MemberBindingExpressionSyntax memberBindingExpression)
+                {
+                    var conditionalAccess = memberBindingExpression.FirstAncestorOrSelf<ConditionalAccessExpressionSyntax>();
+                    // First argument is the class name (static method call)
+                    targetExpression = expressionService.CreateClassName(methodSymbol.ContainingType);
+                    // Second argument is the left side of the invocation
+                    additionalArguments.Add(expressionService.GetOrDefault(conditionalAccess.Expression));
                 }
                 else
                 {
