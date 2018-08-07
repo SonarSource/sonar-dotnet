@@ -91,27 +91,28 @@ namespace SonarAnalyzer.Rules.CSharp
 
                             var declarationCollector = new RemovableDeclarationCollector(namedType, cc.Compilation);
 
-                            var declaredPrivateSymbols1 = new HashSet<ISymbol>();
-                            var fieldLikeSymbols1 = new BidirectionalDictionary<ISymbol, SyntaxNode>();
-
-                            CollectRemovableNamedTypes(declarationCollector, declaredPrivateSymbols1);
-                            CollectRemovableFieldLikeDeclarations(declarationCollector, declaredPrivateSymbols1, fieldLikeSymbols1);
-                            CollectRemovableEventsAndProperties(declarationCollector, declaredPrivateSymbols1);
-                            CollectRemovableMethods(declarationCollector, declaredPrivateSymbols1);
-
                             if (!declaredPrivateSymbols.Any())
                             {
                                 return;
                             }
 
-                            var usedSymbols = new HashSet<ISymbol>();
-                            var emptyConstructors = new HashSet<ISymbol>();
+                            var usageCollector = new UsageCollector(GetSemanticModel, declaredPrivateSymbols.Select(s => s.Name).ToHashSet());
 
-                            var propertyAccessorAccess = new Dictionary<IPropertySymbol, AccessorAccess>();
+                            foreach (var declaration in namedType.DeclaringSyntaxReferences)
+                            {
+                                usageCollector.Visit(declaration.GetSyntax());
+                            }
 
-                            CollectUsedSymbols(declarationCollector, usedSymbols, declaredPrivateSymbols, propertyAccessorAccess);
-                            CollectUsedSymbolsFromCtorInitializerAndCollectEmptyCtors(declarationCollector,
-                                usedSymbols, emptyConstructors);
+                            var usedSymbols = usageCollector.usages;
+                            var emptyConstructors = usageCollector.emptyConstructors;
+                            var propertyAccessorAccess = usageCollector.propertyAccess;
+
+                            ////var usedSymbols = new HashSet<ISymbol>();
+                            ////var emptyConstructors = new HashSet<ISymbol>();
+                            ////var propertyAccessorAccess = new Dictionary<IPropertySymbol, AccessorAccess>();
+                            ////CollectUsedSymbols(declarationCollector, usedSymbols, declaredPrivateSymbols, propertyAccessorAccess);
+                            ////CollectUsedSymbolsFromCtorInitializerAndCollectEmptyCtors(declarationCollector,
+                            ////    usedSymbols, emptyConstructors);
 
                             ReportIssues(cc, usedSymbols, declaredPrivateSymbols, emptyConstructors, fieldLikeSymbols);
                             ReportUnusedPropertyAccessors(cc, usedSymbols, declaredPrivateSymbols, propertyAccessorAccess);
@@ -253,85 +254,6 @@ namespace SonarAnalyzer.Rules.CSharp
                         Diagnostic.Create(rule, location, "private", memberKind, memberName), context.Compilation);
                 }
             }
-        }
-
-        private static void CollectRemovableMethods(RemovableDeclarationCollector declarationCollector,
-            HashSet<ISymbol> declaredPrivateSymbols)
-        {
-            var methodSymbols = declarationCollector.TypeDeclarations
-                .SelectMany(GetMethodsNodesAndModels)
-                .Select(node => node.SemanticModel.GetDeclaredSymbol(node.SyntaxNode) as IMethodSymbol)
-                .Select(symbol => symbol.PartialDefinitionPart ?? symbol)
-                .Where(method => RemovableDeclarationCollector.IsRemovable(method, maxAccessibility));
-
-            declaredPrivateSymbols.UnionWith(methodSymbols);
-        }
-
-        private static IEnumerable<SyntaxNodeSemanticModelTuple<SyntaxNode>> GetMethodsNodesAndModels(
-            SyntaxNodeSemanticModelTuple<BaseTypeDeclarationSyntax> container)
-        {
-            return container.SyntaxNode.DescendantNodes(RemovableDeclarationCollector.IsNodeContainerTypeDeclaration)
-                    .Where(node =>
-                        node.IsKind(SyntaxKind.MethodDeclaration) ||
-                        node.IsKind(SyntaxKind.ConstructorDeclaration))
-                    .Select(node =>
-                        new SyntaxNodeSemanticModelTuple<SyntaxNode>
-                        {
-                            SyntaxNode = node,
-                            SemanticModel = container.SemanticModel.GetSyntaxTreeSemanticModel(node)
-                        });
-        }
-
-        private static void CollectRemovableEventsAndProperties(RemovableDeclarationCollector helper,
-            HashSet<ISymbol> declaredPrivateSymbols)
-        {
-            var declarationKinds = new HashSet<SyntaxKind> { SyntaxKind.EventDeclaration, SyntaxKind.PropertyDeclaration, SyntaxKind.IndexerDeclaration };
-            var declarations = helper.GetRemovableDeclarations(declarationKinds, maxAccessibility);
-            declaredPrivateSymbols.UnionWith(declarations.Select(d => d.Symbol));
-        }
-
-        private static void CollectRemovableFieldLikeDeclarations(RemovableDeclarationCollector declarationCollector,
-            HashSet<ISymbol> declaredPrivateSymbols, BidirectionalDictionary<ISymbol, SyntaxNode> fieldLikeSymbols)
-        {
-            var declarationKinds = new HashSet<SyntaxKind> { SyntaxKind.FieldDeclaration, SyntaxKind.EventFieldDeclaration };
-            var removableFieldsDefinitions = declarationCollector.GetRemovableFieldLikeDeclarations(declarationKinds, maxAccessibility);
-
-            foreach (var fieldsDefinitions in removableFieldsDefinitions)
-            {
-                declaredPrivateSymbols.Add(fieldsDefinitions.Symbol);
-                fieldLikeSymbols.Add(fieldsDefinitions.Symbol, fieldsDefinitions.SyntaxNode);
-            }
-        }
-
-        private static void CollectRemovableNamedTypes(RemovableDeclarationCollector declarationCollector,
-            HashSet<ISymbol> declaredPrivateSymbols)
-        {
-            var symbolsAll = declarationCollector.TypeDeclarations
-                .SelectMany(
-                    container =>
-                    {
-                        var children = container.SyntaxNode
-                        .DescendantNodes(RemovableDeclarationCollector.IsNodeContainerTypeDeclaration)
-                        .Where(node =>
-                            node.IsKind(SyntaxKind.ClassDeclaration) ||
-                            node.IsKind(SyntaxKind.InterfaceDeclaration) ||
-                            node.IsKind(SyntaxKind.StructDeclaration) ||
-                            node.IsKind(SyntaxKind.DelegateDeclaration))
-                        .Select(node =>
-                            new SyntaxNodeSemanticModelTuple<SyntaxNode>
-                            {
-                                SyntaxNode = node,
-                                SemanticModel = container.SemanticModel
-                            }).ToArray();
-                        return children;
-                    })
-                    .Select(node => node.SemanticModel.GetDeclaredSymbol(node.SyntaxNode))
-                    .ToList();
-
-            var symbols = symbolsAll
-                .Where(symbol => RemovableDeclarationCollector.IsRemovable(symbol, Accessibility.Internal));
-
-            declaredPrivateSymbols.UnionWith(symbols);
         }
 
         private static void CollectUsedSymbolsFromCtorInitializerAndCollectEmptyCtors(
@@ -518,7 +440,7 @@ namespace SonarAnalyzer.Rules.CSharp
         };
 
         [Flags]
-        private enum AccessorAccess
+        public enum AccessorAccess
         {
             None = 0,
             Get = 1,
@@ -529,9 +451,9 @@ namespace SonarAnalyzer.Rules.CSharp
         private static ISymbol GetOriginalSymbol(ISymbol candidateSymbol)
         {
             var symbol = candidateSymbol;
-            var methodSymbol = symbol as IMethodSymbol;
 
-            if (methodSymbol?.MethodKind == MethodKind.ReducedExtension)
+            if (symbol is IMethodSymbol methodSymbol &&
+                methodSymbol.MethodKind == MethodKind.ReducedExtension)
             {
                 symbol = methodSymbol.ReducedFrom;
             }

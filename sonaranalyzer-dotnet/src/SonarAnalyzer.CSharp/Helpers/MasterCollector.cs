@@ -32,13 +32,33 @@ using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Helpers
 {
+    /*
+        TODO:
+        - element access
+        - object creations
+        - properties
+    */
     public class UsageCollector : CSharpSyntaxWalker
     {
+        private static readonly ISet<SyntaxKind> IncrementKinds = new HashSet<SyntaxKind>
+        {
+            SyntaxKind.PostIncrementExpression,
+            SyntaxKind.PreIncrementExpression,
+            SyntaxKind.PostDecrementExpression,
+            SyntaxKind.PreDecrementExpression
+        };
+
         private readonly Func<SyntaxNode, SemanticModel> getSemanticModel;
         private readonly HashSet<string> symbolNames;
 
-        private readonly HashSet<SyntaxNodeSemanticModelTuple<ExpressionSyntax>> usages =
-            new HashSet<SyntaxNodeSemanticModelTuple<ExpressionSyntax>>();
+        public readonly HashSet<ISymbol> usages =
+            new HashSet<ISymbol>();
+
+        public readonly HashSet<ISymbol> emptyConstructors =
+            new HashSet<ISymbol>();
+
+        public readonly Dictionary<IPropertySymbol, Rules.CSharp.UnusedPrivateMember.AccessorAccess> propertyAccess =
+            new Dictionary<IPropertySymbol, Rules.CSharp.UnusedPrivateMember.AccessorAccess>();
 
         public UsageCollector(Func<SyntaxNode, SemanticModel> getSemanticModel, HashSet<string> symbolNames)
         {
@@ -46,24 +66,156 @@ namespace SonarAnalyzer.Helpers
             this.symbolNames = symbolNames;
         }
 
+        private IEnumerable<ISymbol> GetSymbols<TSyntaxNode>(TSyntaxNode node, Func<TSyntaxNode, bool> condition)
+            where TSyntaxNode : SyntaxNode
+        {
+            return condition(node)
+                ? GetCandidateSymbols(getSemanticModel(node).GetSymbolInfo(node))
+                : Enumerable.Empty<ISymbol>();
+
+            IEnumerable<ISymbol> GetCandidateSymbols(SymbolInfo symbolInfo)
+            {
+                return new[] { symbolInfo.Symbol }
+                    .Concat(symbolInfo.CandidateSymbols)
+                    .Select(GetOriginalDefinition)
+                    .WhereNotNull();
+
+                ISymbol GetOriginalDefinition(ISymbol candidateSymbol)
+                {
+                    if (candidateSymbol is IMethodSymbol methodSymbol &&
+                        methodSymbol.MethodKind == MethodKind.ReducedExtension)
+                    {
+                        return methodSymbol.ReducedFrom?.OriginalDefinition;
+                    }
+                    return candidateSymbol?.OriginalDefinition;
+                }
+            }
+        }
+
         public override void VisitIdentifierName(IdentifierNameSyntax node)
         {
-            if (symbolNames.Contains(node.Identifier.ValueText))
-            {
-                usages.Add(new SyntaxNodeSemanticModelTuple<ExpressionSyntax>
-                {
-                    SyntaxNode = node,
-                    SemanticModel = getSemanticModel(node)
-                });
-            }
+            var identifierSymbols = GetSymbols(node, IsKnownIdentifier).ToList();
+            usages.UnionWith(identifierSymbols);
+
+            TryStorePropertyAccess(node, identifierSymbols);
 
             base.VisitIdentifierName(node);
         }
+
+        private void TryStorePropertyAccess(IdentifierNameSyntax node, List<ISymbol> identifierSymbols)
+        {
+            var propertySymbols = identifierSymbols.OfType<IPropertySymbol>();
+            if (propertySymbols.Any())
+            {
+                var access = EvaluatePropertyAccesses(node);
+                foreach (var propertySymbol in propertySymbols)
+                {
+                    StorePropertyAccess(access, propertySymbol);
+                }
+            }
+        }
+
+        private void StorePropertyAccess(Rules.CSharp.UnusedPrivateMember.AccessorAccess access, IPropertySymbol propertySymbol)
+        {
+            if (propertyAccess.ContainsKey(propertySymbol))
+            {
+                propertyAccess[propertySymbol] |= access;
+            }
+            else
+            {
+                propertyAccess[propertySymbol] = access;
+            }
+        }
+
+        private Rules.CSharp.UnusedPrivateMember.AccessorAccess EvaluatePropertyAccesses(IdentifierNameSyntax node)
+        {
+            var topmostSyntax = GetTopmostSyntaxWithTheSameSymbol(node);
+
+            if (topmostSyntax.Parent is AssignmentExpressionSyntax assignmentExpression)
+            {
+                if (assignmentExpression.IsKind(SyntaxKind.SimpleAssignmentExpression))
+                {
+                    // Prop = value --> set
+                    // value = Prop --> get
+                    return assignmentExpression.Left == topmostSyntax
+                        ? Rules.CSharp.UnusedPrivateMember.AccessorAccess.Set
+                        : Rules.CSharp.UnusedPrivateMember.AccessorAccess.Get;
+                }
+                else
+                {
+                    // Prop += value --> get/set
+                    return Rules.CSharp.UnusedPrivateMember.AccessorAccess.Both;
+                }
+            }
+            // Prop++ --> get/set
+            // TODO: nameof(Prop) --> get/set
+            return topmostSyntax.Parent.IsAnyKind(IncrementKinds)
+                ? Rules.CSharp.UnusedPrivateMember.AccessorAccess.Both
+                : Rules.CSharp.UnusedPrivateMember.AccessorAccess.Get;
+        }
+
+        private SyntaxNode GetTopmostSyntaxWithTheSameSymbol(SyntaxNode identifier)
+        {
+            // All of the cases below could be parts of invocation or other expressions
+            switch (identifier.Parent)
+            {
+                case MemberAccessExpressionSyntax memberAccess when memberAccess.Name == identifier:
+                    // this.identifier or a.identifier or ((a)).identifier, but not identifier.other
+                    return memberAccess.GetSelfOrTopParenthesizedExpression();
+                case MemberBindingExpressionSyntax memberBinding when memberBinding.Name == identifier:
+                    // this?.identifier or a?.identifier or ((a))?.identifier, but not identifier?.other
+                    return memberBinding.Parent.GetSelfOrTopParenthesizedExpression();
+                default:
+                    // identifier or ((identifier))
+                    return identifier.GetSelfOrTopParenthesizedExpression();
+            }
+        }
+
+        public override void VisitPropertyDeclaration(PropertyDeclarationSyntax node)
+        {
+            if (node.Initializer != null)
+            {
+                var symbol = getSemanticModel(node).GetDeclaredSymbol(node);
+                usages.Add(symbol);
+                StorePropertyAccess(Rules.CSharp.UnusedPrivateMember.AccessorAccess.Set, symbol);
+            }
+            base.VisitPropertyDeclaration(node);
+        }
+
+        public override void VisitGenericName(GenericNameSyntax node)
+        {
+            usages.UnionWith(GetSymbols(node, IsKnownIdentifier));
+            base.VisitGenericName(node);
+        }
+
+        public override void VisitConstructorInitializer(ConstructorInitializerSyntax node)
+        {
+            usages.UnionWith(GetSymbols(node, x => true));
+            base.VisitConstructorInitializer(node);
+        }
+
+        public override void VisitConstructorDeclaration(ConstructorDeclarationSyntax node)
+        {
+            emptyConstructors.UnionWith(GetSymbols(node, IsEmptyConstructor));
+            base.VisitConstructorDeclaration(node);
+        }
+
+        private static bool IsEmptyConstructor(ConstructorDeclarationSyntax constructorDeclaration) =>
+            constructorDeclaration.Body == null || constructorDeclaration.Body.Statements.Count == 0;
+
+        private bool IsKnownIdentifier(SimpleNameSyntax nameSyntax) =>
+            symbolNames.Contains(nameSyntax.Identifier.ValueText);
     }
 
     // TODO: rename
     internal class DeclarationCollector : CSharpSyntaxWalker
     {
+        private static readonly ISet<MethodKind> RemovableMethodKinds = new HashSet<MethodKind>
+        {
+            MethodKind.Ordinary,
+            MethodKind.Constructor
+        };
+
         private Func<SyntaxNode, SemanticModel> getSemanticModel;
 
         public readonly HashSet<ISymbol> removableSymbols =
@@ -169,17 +321,6 @@ namespace SonarAnalyzer.Helpers
             base.VisitConstructorDeclaration(node);
         }
 
-        private bool IsRemovable(ISymbol symbol, Accessibility maxAccessibility) =>
-            symbol != null &&
-            symbol.GetEffectiveAccessibility() <= maxAccessibility &&
-            !symbol.IsImplicitlyDeclared &&
-            !symbol.IsAbstract &&
-            !symbol.IsVirtual &&
-            !symbol.GetAttributes().Any() &&
-            !symbol.ContainingType.IsInterface() &&
-            symbol.GetInterfaceMember() == null &&
-            symbol.GetOverriddenMember() == null;
-
         private bool IsRemovableType(ISymbol typeSymbol) =>
             typeSymbol.ContainingType != null &&
             IsRemovable(typeSymbol, Accessibility.Internal);
@@ -194,10 +335,15 @@ namespace SonarAnalyzer.Helpers
             !methodSymbol.IsEventHandler() &&
             !methodSymbol.IsSerializationConstructor();
 
-        private static readonly ISet<MethodKind> RemovableMethodKinds = new HashSet<MethodKind>
-        {
-            MethodKind.Ordinary,
-            MethodKind.Constructor
-        };
+        private bool IsRemovable(ISymbol symbol, Accessibility maxAccessibility) =>
+            symbol != null &&
+            symbol.GetEffectiveAccessibility() <= maxAccessibility &&
+            !symbol.IsImplicitlyDeclared &&
+            !symbol.IsAbstract &&
+            !symbol.IsVirtual &&
+            !symbol.GetAttributes().Any() &&
+            !symbol.ContainingType.IsInterface() &&
+            symbol.GetInterfaceMember() == null &&
+            symbol.GetOverriddenMember() == null;
     }
 }
