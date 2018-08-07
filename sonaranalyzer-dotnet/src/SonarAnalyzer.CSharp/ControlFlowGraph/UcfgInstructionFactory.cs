@@ -85,6 +85,11 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                     return NoInstructions;
 
                 case MemberBindingExpressionSyntax memberBinding:
+                    expressionService.Associate(memberBinding, expressionService.GetOrDefault(memberBinding.Name));
+                    return NoInstructions;
+
+                case ConditionalAccessExpressionSyntax conditionalAccess:
+                    expressionService.Associate(conditionalAccess, expressionService.GetOrDefault(conditionalAccess.WhenNotNull));
                     return NoInstructions;
 
                 // ========================================================================
@@ -110,6 +115,9 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
 
                 case ElementAccessExpressionSyntax elementAccess:
                     return ProcessElementAccess(elementAccess);
+
+                case ElementBindingExpressionSyntax elementBinding:
+                    return ProcessElementAccess(elementBinding);
 
                 default:
                     return ProcessReadSyntaxNode(syntaxNode);
@@ -339,7 +347,8 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                 symbol.GetSymbolType().IsAny(UnsupportedVariableTypes);
         }
 
-        private Expression[] GetInvocationExpressions(IList<IParameterSymbol> parameters, BaseArgumentListSyntax argumentList)
+        private Expression[] GetInvocationExpressions(IList<IParameterSymbol> parameters, BaseArgumentListSyntax argumentList,
+            List<Instruction> additionalInstructions)
         {
             if (argumentList == null)
             {
@@ -354,7 +363,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             while (classicArgumentIndex < argumentList.Arguments.Count &&
                 argumentList.Arguments[classicArgumentIndex].NameColon == null)
             {
-                expressions.Add(expressionService.GetOrDefault(argumentList.Arguments[classicArgumentIndex].Expression));
+                expressions.Add(GetOrProcessExpression(argumentList.Arguments[classicArgumentIndex].Expression, additionalInstructions));
                 classicArgumentIndex++;
             }
 
@@ -417,14 +426,18 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                 return expressionService.GetOrDefault(memberAccessExpressionSyntax.Expression);
             }
 
-            if (syntaxNode is ConditionalAccessExpressionSyntax conditionalAccess)
-            {
-                return expressionService.GetOrDefault(conditionalAccess.Expression);
-            }
-
             if (syntaxNode is ElementAccessExpressionSyntax elementAccessExpressionSyntax)
             {
                 return expressionService.GetOrDefault(elementAccessExpressionSyntax.Expression);
+            }
+
+            if (syntaxNode is ElementBindingExpressionSyntax ||
+                syntaxNode.Parent is ElementBindingExpressionSyntax ||
+                syntaxNode is MemberBindingExpressionSyntax ||
+                syntaxNode.Parent is MemberBindingExpressionSyntax)
+            {
+                var conditionalAccess = syntaxNode.FirstAncestorOrSelf<ConditionalAccessExpressionSyntax>();
+                return expressionService.GetOrDefault(conditionalAccess.Expression);
             }
 
             if (syntaxNode.GetSelfOrTopParenthesizedExpression().Parent
@@ -505,8 +518,8 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             var instructions = new List<Instruction>();
 
             var leftPartSymbol = GetNodeSymbol(assignmentExpression.Left);
-            var leftExpression = expressionService.GetOrDefault(assignmentExpression.Left);
-            var rightExpression = expressionService.GetOrDefault(assignmentExpression.Right);
+            var leftExpression = GetOrProcessExpression(assignmentExpression.Left, instructions);
+            var rightExpression = GetOrProcessExpression(assignmentExpression.Right, instructions);
 
             // If the right expression was previously a left expression it's possible that the expression needs to be simplified.
             // For example:
@@ -514,7 +527,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             // var x = field
             rightExpression = SimplifyFunctionExpression(assignmentExpression.Right, rightExpression, instructions);
 
-            var shouldCreateLeftSide = leftExpression == UcfgExpressionService.UnknownExpression;
+            var shouldCreateLeftSide = leftExpression.ExprCase == Expression.ExprOneofCase.Const;
 
             // Because of the current shape of the CFG, if the left part of the assignment is field, local variable or
             // parameter and wasn't used before in the code, it won't have been already processed so we have to force the
@@ -523,15 +536,6 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             {
                 // Handle the special add assignment (+=). We decided to treat it as if it was expanded (i.e. we will handle
                 // only the add part) and let the rest of the code handle the assignment part.
-
-                // 1. If the left part wasn't processed, force its processing
-                if (leftExpression == UcfgExpressionService.UnknownExpression)
-                {
-                    ProcessReadSyntaxNode(assignmentExpression.Left);
-                    leftExpression = expressionService.GetOrDefault(assignmentExpression.Left);
-                }
-
-                // 2. Generate the operator call instruction
                 instructions.AddRange(BuildOperatorCall(assignmentExpression, leftExpression, rightExpression));
                 rightExpression = expressionService.GetOrDefault(assignmentExpression);
                 shouldCreateLeftSide = true;
@@ -574,7 +578,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                 if (propertySymbol.SetMethod != null)
                 {
                     var propertySetterArguments = leftAsElementAccess != null
-                        ? GetInvocationExpressions(propertySymbol.Parameters, leftAsElementAccess.ArgumentList)
+                        ? GetInvocationExpressions(propertySymbol.Parameters, leftAsElementAccess.ArgumentList, instructions)
                         : new[] { rightExpression };
                     instructions.AddRange(BuildFunctionCall(assignmentExpression, propertySymbol.SetMethod,
                         GetTargetExpression(assignmentExpression.Left, propertySymbol), propertySetterArguments));
@@ -615,8 +619,14 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                 return NoInstructions;
             }
 
-            return BuildFunctionCall(constructorInitializer, thisOrBaseCtorMethodSymbol, expressionService.This,
-                GetInvocationExpressions(thisOrBaseCtorMethodSymbol.Parameters, constructorInitializer.ArgumentList));
+            var instructions = new List<Instruction>();
+
+            var expressions = GetInvocationExpressions(thisOrBaseCtorMethodSymbol.Parameters, constructorInitializer.ArgumentList,
+                instructions);
+            instructions.AddRange(BuildFunctionCall(constructorInitializer, thisOrBaseCtorMethodSymbol, expressionService.This,
+                expressions));
+
+            return instructions;
         }
 
         private IEnumerable<Instruction> ProcessElementAccess(ElementAccessExpressionSyntax elementAccessSyntax)
@@ -646,9 +656,55 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                 return NoInstructions;
             }
 
-            return BuildFunctionCall(elementAccessSyntax, indexerPropertySymbol.GetMethod,
-                GetTargetExpression(elementAccessSyntax, indexerPropertySymbol),
-                GetInvocationExpressions(indexerPropertySymbol.Parameters, elementAccessSyntax.ArgumentList));
+
+            var instructions = new List<Instruction>();
+            var expressions = GetInvocationExpressions(indexerPropertySymbol.Parameters, elementAccessSyntax.ArgumentList,
+                instructions);
+
+            instructions.AddRange(BuildFunctionCall(elementAccessSyntax, indexerPropertySymbol.GetMethod,
+               GetTargetExpression(elementAccessSyntax, indexerPropertySymbol), expressions));
+
+            return instructions;
+        }
+
+        private IEnumerable<Instruction> ProcessElementAccess(ElementBindingExpressionSyntax elementAccessSyntax)
+        {
+            if (elementAccessSyntax.GetSelfOrTopParenthesizedExpression().Parent is AssignmentExpressionSyntax assignmentSyntax &&
+                assignmentSyntax.IsKind(SyntaxKind.SimpleAssignmentExpression) &&
+                assignmentSyntax.Left.RemoveParentheses() == elementAccessSyntax)
+            {
+                return NoInstructions;
+            }
+
+            var conditionalAccess = elementAccessSyntax.FirstAncestorOrSelf<ConditionalAccessExpressionSyntax>();
+
+            var elementAccessType = this.semanticModel.GetTypeInfo(conditionalAccess.Expression).ConvertedType;
+            if (elementAccessType == null)
+            {
+                return NoInstructions;
+            }
+
+            if (elementAccessType.TypeKind == TypeKind.Array)
+            {
+                return BuildArrayGetCall(elementAccessSyntax, elementAccessType, GetTargetExpression(elementAccessSyntax,
+                    elementAccessType));
+            }
+
+            var indexerPropertySymbol = GetNodeSymbol(elementAccessSyntax) as IPropertySymbol;
+            if (indexerPropertySymbol == null)
+            {
+                return NoInstructions;
+            }
+
+
+            var instructions = new List<Instruction>();
+            var expressions = GetInvocationExpressions(indexerPropertySymbol.Parameters, elementAccessSyntax.ArgumentList,
+                instructions);
+
+            instructions.AddRange(BuildFunctionCall(elementAccessSyntax, indexerPropertySymbol.GetMethod,
+               GetTargetExpression(elementAccessSyntax, indexerPropertySymbol), expressions));
+
+            return instructions;
         }
 
         private IEnumerable<Instruction> ProcessInvocationExpression(InvocationExpressionSyntax invocationSyntax)
@@ -672,6 +728,14 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                     // Second argument is the left side of the invocation
                     additionalArguments.Add(expressionService.GetOrDefault(memberAccessExpression.Expression));
                 }
+                else if (unparenthesisedExpression is MemberBindingExpressionSyntax memberBindingExpression)
+                {
+                    var conditionalAccess = memberBindingExpression.FirstAncestorOrSelf<ConditionalAccessExpressionSyntax>();
+                    // First argument is the class name (static method call)
+                    targetExpression = expressionService.CreateClassName(methodSymbol.ContainingType);
+                    // Second argument is the left side of the invocation
+                    additionalArguments.Add(expressionService.GetOrDefault(conditionalAccess.Expression));
+                }
                 else
                 {
                     throw new UcfgException("Unexpected state, method called as extension of a member but there is no " +
@@ -683,9 +747,14 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                 targetExpression = GetTargetExpression(invocationSyntax.Expression, methodSymbol);
             }
 
-            additionalArguments.AddRange(GetInvocationExpressions(methodSymbol.Parameters, invocationSyntax.ArgumentList));
+            var instructions = new List<Instruction>();
+            additionalArguments.AddRange(GetInvocationExpressions(methodSymbol.Parameters, invocationSyntax.ArgumentList,
+                instructions));
 
-            return BuildFunctionCall(invocationSyntax, methodSymbol, targetExpression, additionalArguments.ToArray());
+            instructions.AddRange(BuildFunctionCall(invocationSyntax, methodSymbol, targetExpression,
+                additionalArguments.ToArray()));
+
+            return instructions;
 
             bool IsCalledAsExtension(IMethodSymbol method) =>
                 method.ReducedFrom != null;
@@ -699,10 +768,15 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                 return NoInstructions;
             }
 
-            return NoInstructions
-                .Concat(BuildNewInstance(objectCreation, methodSymbol?.ContainingType?.ConstructedFrom))
-                .Concat(BuildFunctionCall(objectCreation.Type, methodSymbol, expressionService.GetOrDefault(objectCreation),
-                    GetInvocationExpressions(methodSymbol.Parameters, objectCreation.ArgumentList)));
+            var instructions = new List<Instruction>();
+
+            instructions.AddRange(BuildNewInstance(objectCreation, methodSymbol?.ContainingType?.ConstructedFrom));
+
+            var expressions = GetInvocationExpressions(methodSymbol.Parameters, objectCreation.ArgumentList, instructions);
+            instructions.AddRange(BuildFunctionCall(objectCreation.Type, methodSymbol,
+                expressionService.GetOrDefault(objectCreation), expressions));
+
+            return instructions;
         }
 
         private IEnumerable<Instruction> ProcessReadSyntaxNode(SyntaxNode syntaxNode)
@@ -763,12 +837,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                        initializerExpressionSyntax));
             }
 
-            var initializerExpression = expressionService.GetOrDefault(variableDeclarator.Initializer.Value);
-            if (initializerExpression == UcfgExpressionService.UnknownExpression)
-            {
-                instructions.AddRange(ProcessReadSyntaxNode(variableDeclarator.Initializer.Value));
-                initializerExpression = expressionService.GetOrDefault(variableDeclarator.Initializer.Value);
-            }
+            var initializerExpression = GetOrProcessExpression(variableDeclarator.Initializer.Value, instructions);
 
             instructions.AddRange(BuildIdentityCall(variableDeclarator,
                expressionService.CreateVariable(variableDeclarator.Identifier.Text), initializerExpression));
@@ -786,6 +855,12 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             }
 
             return expression;
+        }
+
+        private Expression GetOrProcessExpression(SyntaxNode syntaxNode, List<Instruction> additionalInstructions)
+        {
+            additionalInstructions.AddRange(CreateFrom(syntaxNode));
+            return expressionService.GetOrDefault(syntaxNode);
         }
     }
 }
