@@ -862,5 +862,37 @@ namespace Namespace
 }";
             UcfgVerifier.VerifyInstructions(code, "Equals");
         }
+
+        [TestMethod]  // Regression test for https://jira.sonarsource.com/browse/SONARSEC-199
+        public void Peach_Exception_UnexpectedTypeOfTargetForTheInstruction_Akka()
+        {
+            // Adpated from akka\src\core\Akka\IO\SocketEventArgsPool.cs
+            const string code = @"
+namespace Akka.IO
+{
+    using System;
+    using System.Net.Sockets;
+     internal class PreallocatedSocketEventAgrsPool
+    {
+        private EventHandler<SocketAsyncEventArgs> _onComplete = null;
+         private SocketAsyncEventArgs CreateSocketAsyncEventArgs()
+        {
+            var e = new SocketAsyncEventArgs { UserToken = null };
+                // %0 := new System.Net.Sockets.SocketAsyncEventArgs
+                // %1 := System.Net.Sockets.SocketAsyncEventArgs.SocketAsyncEventArgs() [ %0 ]
+                // %2 := System.Net.Sockets.SocketAsyncEventArgs.UserToken.set [ %0 const ]
+                // e := __id [ %0 ]
+
+            e.Completed += _onComplete;
+                // %3 := __id [ this._onComplete ]
+                // %4 := System.Net.Sockets.SocketAsyncEventArgs.Completed.add [ System.Net.Sockets.SocketAsyncEventArgs const %3 ]
+
+            return e;
+        }
+    }
+}
+";
+            UcfgVerifier.VerifyInstructions(code, "CreateSocketAsyncEventArgs");
+        }
     }
 }

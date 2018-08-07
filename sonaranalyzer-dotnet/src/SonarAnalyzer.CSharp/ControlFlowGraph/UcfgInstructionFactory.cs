@@ -577,6 +577,11 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                 return instructions;
             }
 
+            if (leftPartSymbol is IEventSymbol)
+            {
+                return instructions;
+            }
+
             if (leftPartSymbol is IPropertySymbol propertySymbol)
             {
                 if (propertySymbol.SetMethod != null)
