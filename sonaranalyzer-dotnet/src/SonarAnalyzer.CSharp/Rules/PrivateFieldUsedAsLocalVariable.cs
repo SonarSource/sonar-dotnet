@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
@@ -36,340 +35,267 @@ namespace SonarAnalyzer.Rules.CSharp
     public class PrivateFieldUsedAsLocalVariable : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S1450";
-        private const string MessageFormat = "Remove the '{0}' field and declare it as a local variable in the relevant methods.";
+        private const string MessageFormat = "Remove the field '{0}' and declare it as a local variable in the relevant methods.";
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
+        private static readonly ISet<SyntaxKind> NonPrivateModifiers = new HashSet<SyntaxKind>
+        {
+            SyntaxKind.PublicKeyword,
+            SyntaxKind.ProtectedKeyword,
+            SyntaxKind.InternalKeyword,
+        };
+
         protected sealed override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
-                    var classNode = c.Node as TypeDeclarationSyntax;
-                    if (classNode != null && classNode.Modifiers.Any(SyntaxKind.PartialKeyword))
-                    {
-                        // Not supported
-                        return;
-                    }
+                    var typeDeclaration = (TypeDeclarationSyntax)c.Node;
 
-                    var privateFields = GetPrivateFields(classNode, c.SemanticModel);
-                    var referencesByEnclosingSymbol = GetReferencesByEnclosingSymbol(classNode, privateFields, c.SemanticModel);
-
-                    var classSymbol = c.SemanticModel.GetDeclaredSymbol(classNode);
-                    if (classSymbol == null)
+                    if (typeDeclaration.Modifiers.Any(SyntaxKind.PartialKeyword))
                     {
                         return;
                     }
 
-                    var classMethods = classSymbol.GetMembers().Where(m => m.Kind == SymbolKind.Method).ToHashSet();
+                    var privateFields = GetPrivateFields(c.SemanticModel, typeDeclaration);
 
-                    ExcludePrivateFieldsBasedOnReferences(privateFields, referencesByEnclosingSymbol, classMethods);
-                    ExcludePrivateFieldsBasedOnCompilerErrors(privateFields, referencesByEnclosingSymbol, classMethods,
-                        classNode, c.SemanticModel.Compilation);
+                    var collector = new FieldAccessCollector(c.SemanticModel, privateFields);
+                    collector.Visit(typeDeclaration);
 
-                    foreach (var privateField in privateFields.Values.Where(f => !f.Excluded))
-                    {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, privateField.Syntax.GetLocation(),
-                            privateField.Symbol.Name));
-                    }
+                    privateFields.Keys
+                        .Where(collector.IsRemovableField)
+                        .Select(CreateDiagnostic)
+                        .ToList()
+                        .ForEach(d => c.ReportDiagnosticWhenActive(d));
+
+                    Diagnostic CreateDiagnostic(IFieldSymbol fieldSymbol) =>
+                        Diagnostic.Create(rule, privateFields[fieldSymbol].GetLocation(), fieldSymbol.Name);
                 },
-                SyntaxKind.ClassDeclaration, SyntaxKind.StructDeclaration);
+                SyntaxKind.ClassDeclaration,
+                SyntaxKind.StructDeclaration);
         }
 
-        private static IImmutableDictionary<ISymbol, PrivateField> GetPrivateFields(TypeDeclarationSyntax classNode,
-            SemanticModel semanticModel)
+        private static IDictionary<IFieldSymbol, VariableDeclaratorSyntax> GetPrivateFields(SemanticModel semanticModel,
+            TypeDeclarationSyntax typeDeclaration)
         {
-            return classNode.Members
-                        .Where(m => m.IsKind(SyntaxKind.FieldDeclaration))
-                        .Cast<FieldDeclarationSyntax>()
-                        .Where(f => !f.AttributeLists.Any())
-                        .SelectMany(f => f.Declaration.Variables.Select(
-                            v => new PrivateField(v, semanticModel.GetDeclaredSymbol(v))))
-                        .Where(f => f.Symbol != null && f.Symbol.DeclaredAccessibility == Accessibility.Private)
-                        .ToImmutableDictionary(
-                            f => f.Symbol,
-                            f => f);
+            return typeDeclaration.Members
+                .OfType<FieldDeclarationSyntax>()
+                .Where(IsPrivate)
+                .Where(HasNoAttributes)
+                .SelectMany(f => f.Declaration.Variables)
+                .ToDictionary(
+                    variable => (IFieldSymbol)semanticModel.GetDeclaredSymbol(variable),
+                    variable => variable);
+
+            bool IsPrivate(FieldDeclarationSyntax fieldDeclaration) =>
+                !fieldDeclaration.Modifiers.Select(m => m.Kind()).Any(NonPrivateModifiers.Contains);
+
+            bool HasNoAttributes(FieldDeclarationSyntax fieldDeclaration) =>
+                fieldDeclaration.AttributeLists.Count == 0;
         }
 
-        private static IDictionary<ISymbol, IDictionary<SyntaxNode, ISymbol>> GetReferencesByEnclosingSymbol(
-            SyntaxNode node,
-            IImmutableDictionary<ISymbol, PrivateField> privateFields,
-            SemanticModel semanticModel)
+        private class FieldAccessCollector : CSharpSyntaxWalker
         {
-            var privateFieldNames = privateFields.Keys.Select(s => s.Name).ToHashSet();
+            // Contains statements that READ field values. First grouped by field symbol (that is read),
+            // then by method/property/ctor symbol (that contains the statements)
+            private readonly Dictionary<IFieldSymbol, Lookup<ISymbol, StatementSyntax>> readsByField =
+                new Dictionary<IFieldSymbol, Lookup<ISymbol, StatementSyntax>>();
 
-            var potentialReferences = node.DescendantNodes()
-                .Where(n => n.IsKind(SyntaxKind.IdentifierName))
-                .Cast<IdentifierNameSyntax>()
-                .Where(id => privateFieldNames.Contains(id.Identifier.ValueText));
+            // Contains statements that WRITE field values. First grouped by field symbol (that is written),
+            // then by method/property/ctor symbol (that contains the statements)
+            private readonly Dictionary<IFieldSymbol, Lookup<ISymbol, StatementSyntax>> writesByField =
+                new Dictionary<IFieldSymbol, Lookup<ISymbol, StatementSyntax>>();
 
-            var builder = new Dictionary<ISymbol, IDictionary<SyntaxNode, ISymbol>>();
-            foreach (var potentialReference in potentialReferences)
+            // Contains all method/property invocations grouped by the statement that contains them.
+            private readonly Lookup<StatementSyntax, ISymbol> invocations =
+                new Lookup<StatementSyntax, ISymbol>();
+
+            private readonly SemanticModel semanticModel;
+            private readonly IDictionary<IFieldSymbol, VariableDeclaratorSyntax> privateFields;
+
+            public FieldAccessCollector(SemanticModel semanticModel,
+                IDictionary<IFieldSymbol, VariableDeclaratorSyntax> privateFields)
             {
-                var referencedSymbol = semanticModel.GetSymbolInfo(potentialReference).Symbol;
-                if (referencedSymbol == null || !privateFields.ContainsKey(referencedSymbol))
-                {
-                    continue;
-                }
-
-                SyntaxNode referenceSyntax = potentialReference;
-                while (referenceSyntax.Parent != null &&
-                       referencedSymbol.Equals(semanticModel.GetSymbolInfo(referenceSyntax.Parent).Symbol))
-                {
-                    referenceSyntax = referenceSyntax.Parent;
-                }
-
-                if (referenceSyntax.Parent != null &&
-                    referenceSyntax.Parent.IsKind(SyntaxKind.ConditionalAccessExpression))
-                {
-                    referenceSyntax = referenceSyntax.Parent;
-                }
-
-
-                var enclosingSymbol = semanticModel.GetEnclosingSymbol(potentialReference.SpanStart);
-                if (!builder.ContainsKey(enclosingSymbol))
-                {
-                    builder.Add(enclosingSymbol, new Dictionary<SyntaxNode, ISymbol>());
-                }
-
-                builder[enclosingSymbol].Add(referenceSyntax, referencedSymbol);
+                this.semanticModel = semanticModel;
+                this.privateFields = privateFields;
             }
 
-            return builder;
-        }
-
-        private static void ExcludePrivateFieldsBasedOnReferences(
-            IImmutableDictionary<ISymbol, PrivateField> privateFields,
-            IDictionary<ISymbol, IDictionary<SyntaxNode, ISymbol>> referencesByEnclosingSymbol,
-            ISet<ISymbol> classMethods)
-        {
-            var referencedAtLeastOnceFromClassMethod = new HashSet<ISymbol>();
-
-            foreach (var references in referencesByEnclosingSymbol)
+            public bool IsRemovableField(IFieldSymbol fieldSymbol)
             {
-                if (!classMethods.Contains(references.Key))
+                var writesByEnclosingSymbol = writesByField.GetValueOrDefault(fieldSymbol);
+                var readsByEnclosingSymbol = readsByField.GetValueOrDefault(fieldSymbol);
+
+                // No methods overwrite the field value
+                if (writesByEnclosingSymbol == null)
                 {
-                    foreach (var reference in references.Value)
+                    return false;
+                }
+
+                // A field is removable when no method reads it, or all methods that read it, overwrite it before reading
+                return readsByEnclosingSymbol == null
+                    || readsByEnclosingSymbol.Keys.All(ValueOverwrittenBeforeReading);
+
+                bool ValueOverwrittenBeforeReading(ISymbol enclosingSymbol)
+                {
+                    var writeStatements = writesByEnclosingSymbol.GetValueOrDefault(enclosingSymbol);
+                    var readStatements = readsByEnclosingSymbol.GetValueOrDefault(enclosingSymbol);
+
+                    // Note that Enumerable.All() will return true if readStatements is empty. The collection
+                    // will be empty if the field is read only in property/field initializers or returned from
+                    // expression-bodied methods.
+                    return readStatements == null
+                        || writeStatements != null && readStatements.All(IsPrecededWithWrite);
+
+                    // Returns true when readStatement is preceded with a statement that overwrites fieldSymbol,
+                    // or false when readStatement is preceded with an invocation of a method or property that
+                    // overwrites fieldSymbol.
+                    bool IsPrecededWithWrite(StatementSyntax readStatement)
                     {
-                        privateFields[reference.Value].Excluded = true;
+                        foreach (var statement in GetPreviousStatements(readStatement))
+                        {
+                            // When the readStatement is preceded with a write statement (that is also not a read statement)
+                            // we want to report this field.
+                            if (IsOverwritingValue(statement))
+                            {
+                                return true;
+                            }
+
+                            // When the readStatement is preceded with an invocation that has side effects, e.g. writes the field
+                            // we don't want to report this field because it could be difficult or impossible to change the code.
+                            if (IsInvocationWithSideEffects(statement))
+                            {
+                                return false;
+                            }
+                        }
+
+                        return false;
                     }
 
-                    continue;
+                    bool IsOverwritingValue(StatementSyntax statement) =>
+                        writeStatements.Contains(statement) &&
+                        !readStatements.Contains(statement);
+
+                    bool IsInvocationWithSideEffects(StatementSyntax statement) =>
+                        invocations.TryGetValue(statement, out var invocationsInStatement) &&
+                        invocationsInStatement.Any(writesByEnclosingSymbol.ContainsKey);
+                }
+            }
+
+            /// <summary>
+            /// Returns all statements before the specified statement within the containing method.
+            /// This method recursively traverses all parent blocks of the provided statement.
+            /// </summary>
+            private static IEnumerable<StatementSyntax> GetPreviousStatements(StatementSyntax statement)
+            {
+                var previousStatements = statement.Parent.ChildNodes()
+                    .OfType<StatementSyntax>()
+                    .TakeWhile(x => x != statement)
+                    .Reverse();
+
+                return statement.Parent is StatementSyntax parentStatement
+                    ? previousStatements.Union(GetPreviousStatements(parentStatement))
+                    : previousStatements;
+            }
+
+            public override void VisitIdentifierName(IdentifierNameSyntax node)
+            {
+                var memberReference = GetTopmostSyntaxWithTheSameSymbol(node);
+                if (memberReference.Symbol == null)
+                {
+                    return;
                 }
 
-                foreach (var reference in references.Value)
-                {
-                    referencedAtLeastOnceFromClassMethod.Add(reference.Value);
+                var enclosingSymbol = semanticModel.GetEnclosingSymbol(memberReference.Syntax.SpanStart);
 
-                    if (!IsReferenceToSingleFieldValue(reference))
+                if (memberReference.Symbol is IFieldSymbol fieldSymbol &&
+                    privateFields.ContainsKey(fieldSymbol))
+                {
+                    ClassifyFieldReference(enclosingSymbol, memberReference);
+                }
+                else if (memberReference.Symbol is IMethodSymbol
+                    || memberReference.Symbol is IPropertySymbol)
+                {
+                    var statement = memberReference.Syntax.FirstAncestorOrSelf<StatementSyntax>();
+                    if (statement != null)
                     {
-                        privateFields[reference.Value].Excluded = true;
+                        var invocationsInStatement = invocations.GetOrAdd(statement, x => new HashSet<ISymbol>());
+                        invocationsInStatement.Add(memberReference.Symbol);
                     }
                 }
             }
 
-            foreach (var privateField in privateFields.Values)
+            /// <summary>
+            /// Stores the statement that contains the provided field reference in one of the "reads" or "writes" collections,
+            /// first grouped by field symbol, then by containing method.
+            /// </summary>
+            private void ClassifyFieldReference(ISymbol enclosingSymbol, SyntaxNodeWithSymbol<SyntaxNode, ISymbol> fieldReference)
             {
-                if (!referencedAtLeastOnceFromClassMethod.Contains(privateField.Symbol))
+                // It is important to create the field access HashSet regardless of the statement (see the local var below)
+                // being null or not, because the rule will not be able to detect field reads from inline property
+                // or field initializers.
+                var fieldAccessInMethod = (IsWrite(fieldReference) ? writesByField : readsByField)
+                    .GetOrAdd((IFieldSymbol)fieldReference.Symbol, x => new Lookup<ISymbol, StatementSyntax>())
+                    .GetOrAdd(enclosingSymbol, x => new HashSet<StatementSyntax>());
+
+                var statement = fieldReference.Syntax.FirstAncestorOrSelf<StatementSyntax>();
+                if (statement != null)
                 {
-                    privateField.Excluded = true;
+                    fieldAccessInMethod.Add(statement);
+                }
+            }
+
+            private static bool IsWrite(SyntaxNodeWithSymbol<SyntaxNode, ISymbol> fieldReference)
+            {
+                // If the field is not static and is not from the current instance we
+                // consider the reference as read.
+                if (!fieldReference.Symbol.IsStatic &&
+                    !(fieldReference.Syntax as ExpressionSyntax).RemoveParentheses().IsOnThis())
+                {
+                    return false;
+                }
+
+                return IsLeftSideOfAssignment(fieldReference.Syntax)
+                    || IsOutArgument(fieldReference.Syntax);
+
+                bool IsOutArgument(SyntaxNode syntaxNode) =>
+                    syntaxNode.Parent is ArgumentSyntax argument &&
+                    argument.RefOrOutKeyword.IsKind(SyntaxKind.OutKeyword);
+
+                bool IsLeftSideOfAssignment(SyntaxNode syntaxNode) =>
+                    syntaxNode.Parent is AssignmentExpressionSyntax assignmentExpression &&
+                    assignmentExpression.Left == syntaxNode;
+            }
+
+            private SyntaxNodeWithSymbol<SyntaxNode, ISymbol> GetTopmostSyntaxWithTheSameSymbol(SyntaxNode identifier)
+            {
+                // All of the cases below could be parts of invocation or other expressions
+                switch (identifier.Parent)
+                {
+                    case MemberAccessExpressionSyntax memberAccess when memberAccess.Name == identifier:
+                        // this.identifier or a.identifier or ((a)).identifier, but not identifier.other
+                        return new SyntaxNodeWithSymbol<SyntaxNode, ISymbol>(
+                            memberAccess.GetSelfOrTopParenthesizedExpression(),
+                            semanticModel.GetSymbolInfo(memberAccess).Symbol);
+                    case MemberBindingExpressionSyntax memberBinding when memberBinding.Name == identifier:
+                        // this?.identifier or a?.identifier or ((a))?.identifier, but not identifier?.other
+                        return new SyntaxNodeWithSymbol<SyntaxNode, ISymbol>(
+                            memberBinding.Parent.GetSelfOrTopParenthesizedExpression(),
+                            semanticModel.GetSymbolInfo(memberBinding).Symbol);
+                    default:
+                        // identifier or ((identifier))
+                        return new SyntaxNodeWithSymbol<SyntaxNode, ISymbol>(
+                            identifier.GetSelfOrTopParenthesizedExpression(),
+                            semanticModel.GetSymbolInfo(identifier).Symbol);
                 }
             }
         }
 
-        private static bool IsReferenceToSingleFieldValue(KeyValuePair<SyntaxNode, ISymbol> reference)
+        private class Lookup<TKey, TElement> : Dictionary<TKey, HashSet<TElement>>
         {
-            if (reference.Key.IsKind(SyntaxKind.IdentifierName) || reference.Value.IsStatic)
-            {
-                return true;
-            }
-
-            if (reference.Key is MemberAccessExpressionSyntax memberAccess && memberAccess.Expression.IsKind(SyntaxKind.ThisExpression))
-            {
-                return true;
-            }
-
-            if (reference.Key is ConditionalAccessExpressionSyntax conditionalAccess && conditionalAccess.Expression.IsKind(SyntaxKind.ThisExpression))
-            {
-                return true;
-            }
-
-            return false;
-        }
-
-        private static void ExcludePrivateFieldsBasedOnCompilerErrors(
-            IImmutableDictionary<ISymbol, PrivateField> privateFields,
-            IDictionary<ISymbol, IDictionary<SyntaxNode, ISymbol>> referencesByEnclosingSymbol,
-            IEnumerable<ISymbol> classMethods,
-            TypeDeclarationSyntax classNode,
-            Compilation compilation)
-        {
-            var replacements = new Dictionary<SyntaxNode, BlockSyntax>();
-            foreach (var classMethod in classMethods.Where(m => referencesByEnclosingSymbol.ContainsKey(m)))
-            {
-                var references = referencesByEnclosingSymbol[classMethod].Where(r => !privateFields[r.Value].Excluded)
-                    .ToImmutableDictionary(kv => kv.Key, kv => kv.Value);
-                if (TryRewriteMethodBody(privateFields, references, classMethod, out var body, out var newBody))
-                {
-                    replacements.Add(body, newBody);
-                }
-            }
-
-            if (!replacements.Any())
-            {
-                return;
-            }
-
-            var newSyntaxRoot = classNode.SyntaxTree.GetRoot().ReplaceSyntax(
-                replacements.Keys,
-                (original, partiallyRewritten) => replacements[original],
-                null,
-                null,
-                null,
-                null);
-            var newSyntaxTree = classNode.SyntaxTree.WithRootAndOptions(newSyntaxRoot,
-                classNode.SyntaxTree.Options);
-            var newCompilation = CSharpCompilation.Create(nameof(PrivateFieldUsedAsLocalVariable),
-                new[] { newSyntaxTree }, compilation.References, compilation.Options as CSharpCompilationOptions);
-
-            var diagnostics = newCompilation.GetDiagnostics();
-            foreach (var privateField in privateFields.Values.Where(f => !f.Excluded))
-            {
-                if (diagnostics.Any(d => d.Id == WellKnownDiagnosticIds.ERR_UseDefViolation
-                                         && d.GetMessage().Contains(privateField.UniqueName)))
-                {
-                    privateField.Excluded = true;
-                }
-            }
-        }
-
-        private static bool TryRewriteMethodBody(
-            IImmutableDictionary<ISymbol, PrivateField> privateFields,
-            IImmutableDictionary<SyntaxNode, ISymbol> references,
-            ISymbol classMethod,
-            out BlockSyntax body,
-            out BlockSyntax newBody)
-        {
-            if (!references.Any())
-            {
-                body = null;
-                newBody = null;
-
-                return false;
-            }
-
-            if (!TryGetMemberBody(classMethod, out body))
-            {
-                // We don't know how the field is being used within this method
-                foreach (var reference in references)
-                {
-                    privateFields[reference.Value].Excluded = true;
-                }
-
-                newBody = null;
-
-                return false;
-            }
-
-            newBody = RewriteBody(privateFields, body, references, out var rewrittenNodes);
-
-            return !ExcludePrivateFieldsBasedOnRewrittenNodes(privateFields, references, rewrittenNodes);
-        }
-
-        private static bool TryGetMemberBody(ISymbol memberSymbol, out BlockSyntax body)
-        {
-            body = null;
-
-            var syntax = memberSymbol.DeclaringSyntaxReferences.SingleOrDefault()?.GetSyntax();
-            if (syntax != null)
-            {
-                if (syntax is BaseMethodDeclarationSyntax methodSyntax)
-                {
-                    body = methodSyntax.Body;
-                }
-
-                if (syntax is AccessorDeclarationSyntax accessorSyntax)
-                {
-                    body = accessorSyntax.Body;
-                }
-            }
-
-            return body != null;
-        }
-
-        private static BlockSyntax RewriteBody(
-            IImmutableDictionary<ISymbol, PrivateField> privateFields,
-            BlockSyntax body,
-            IImmutableDictionary<SyntaxNode, ISymbol> references,
-            out ISet<SyntaxNode> rewrittenNodes)
-        {
-            var symbolsToRewrite = references.Values.ToHashSet();
-
-            var localDeclaration = SyntaxFactory.LocalDeclarationStatement(
-                SyntaxFactory.VariableDeclaration(
-                    SyntaxFactory.PredefinedType(
-                        SyntaxFactory.Token(SyntaxKind.IntKeyword)).WithTrailingTrivia(SyntaxFactory.Space),
-                    SyntaxFactory.SeparatedList(symbolsToRewrite.Select(
-                        s => SyntaxFactory.VariableDeclarator(privateFields[s].UniqueName)))));
-
-            var rewrittenNodesBuilder = new HashSet<SyntaxNode>();
-            var newBody = body.ReplaceSyntax(
-                references.Keys,
-                (original, partiallyRewritten) =>
-                {
-                    rewrittenNodesBuilder.Add(original);
-                    return SyntaxFactory.IdentifierName(privateFields[references[original]].UniqueName);
-                },
-                null,
-                null,
-                null,
-                null);
-
-            var newStatements = newBody.Statements.Insert(0, localDeclaration);
-            newBody = newBody.WithStatements(newStatements);
-
-            rewrittenNodes = rewrittenNodesBuilder;
-
-            return newBody;
-        }
-
-        private static bool ExcludePrivateFieldsBasedOnRewrittenNodes(
-            IImmutableDictionary<ISymbol, PrivateField> privateFields,
-            IImmutableDictionary<SyntaxNode, ISymbol> references,
-            ISet<SyntaxNode> rewrittenNodes)
-        {
-            var partiallyRewrittenSymbols = references
-                .Where(r => !rewrittenNodes.Contains(r.Key))
-                .Select(r => r.Value)
-                .ToHashSet();
-
-            foreach (var partiallyRewrittenSymbol in partiallyRewrittenSymbols)
-            {
-                privateFields[partiallyRewrittenSymbol].Excluded = true;
-            }
-
-            var allSymbolsToRewrite = references.Values.ToHashSet();
-
-            return partiallyRewrittenSymbols.Count == allSymbolsToRewrite.Count;
-        }
-
-        private class PrivateField
-        {
-            public PrivateField(VariableDeclaratorSyntax syntax, ISymbol symbol)
-            {
-                Syntax = syntax;
-                Symbol = symbol;
-                UniqueName = nameof(PrivateFieldUsedAsLocalVariable) + Guid.NewGuid().ToString("N");
-                Excluded = false;
-            }
-
-            public VariableDeclaratorSyntax Syntax { get; private set; }
-            public ISymbol Symbol { get; private set; }
-            public string UniqueName { get; private set; }
-            public bool Excluded { get; set; }
         }
     }
 }

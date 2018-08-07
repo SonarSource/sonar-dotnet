@@ -6,86 +6,36 @@ namespace Tests.Diagnostics
     {
         private int F0 = 0; // Compliant - unused
 
-        private int F1 = 0; // Noncompliant {{Remove the 'F1' field and declare it as a local variable in the relevant methods.}}
+        private int F1 = 0; // Noncompliant {{Remove the field 'F1' and declare it as a local variable in the relevant methods.}}
 //                  ^^^^^^
         public int F2 = 0; // Compliant - Public
-
-        private int F3 = 1; // Compliant - Referenced from another field initializer
-        public int F4 = F3;
-
-        private int F5 = 0; // Noncompliant
-        private int F6; // Noncompliant
-
-        private int F7 = 0; // Compliant - Read before write
-
-        private int F8 = 0; // Noncompliant
-        private int F9 = 0; // Noncompliant
-        private int F10 = 0; // Compliant - not assigned from every path
-
-        private int F11 = 0; // Compliant - first read through 'this.'
-        private int F12 = 0; // Noncompliant
-
-        private int F13 = 0; // Compliant - parameter of same name is assigned, not the field
-        private int F14 = 0; // Noncompliant
-
-        private int F15 = 0; // Compliant - returned in property getter
-        private int F16 = 0; // Noncompliant
-
-        private static int F17 = 0; // Compliant - auto-property
-        private int F18 = 0; // Compliant - arrow method
-
-        private int F19 = 42; // Compliant - accessed through instance
-        private int F20 = 42; // Compliant - accessed through instance
-        private int F21 = 42; // Compliant - accessed through instance
-        private static int F22 = 42; // Noncompliant
-        private int F23 = 42; // Noncompliant - access through this?.
-
-        private int F24 = 42; // Noncompliant - passed as 'out'
-        private int F25 = 42; // Compliant - passed as 'ref'
-
-        private int F26 = 42; // Noncompliant - always assigned from constructor
-        private int F27 = 42; // Compliant - passed to another constructor
-
-        private int F28 = 42; // Noncompliant - always assigned from event
-        private int F29 = 42; // Compliant
-
-        private int F30 = 42; // Noncompliant - always assigned from 2 methods
-        private int F31 = 42; // Compliant
-
-        private string F32 = ""; // Noncompliant
-        private static string F33 = ""; // Noncompliant
-        private string F34 = ""; // Compliant
-
-        [Obsolete]
-        private string F35 = ""; // Compliant - has attribute
-
-        PrivateFieldUsedAsLocalVariable() : this(F27)
-        {
-            F26 = 42;
-        }
-
-        PrivateFieldUsedAsLocalVariable(int a)
-        {
-        }
-
         void M1()
         {
-            F1 = 42;
+            ((F1)) = 42;
             F2 = 42;
         }
 
+        private int F3 = 1; // Compliant - Referenced from another field initializer
+        public int F4 = F3; // Compliant - Public
+
+        private int F5 = 0; // Noncompliant
+        private int F6; // Noncompliant
         void M2()
         {
             F5 = 42;
             F6 = 42;
         }
 
+        private int F7 = 0; // Compliant - Read before write
         void M3()
         {
             Console.WriteLine(F7);
             F7 = 42;
         }
 
+        private int F8 = 0; // Compliant, False Negative, we cannot detect if a field is both updated and read in the same statement
+        private int F9 = 0; // Compliant, False Negative, we cannot detect if statements that set the field in both branches
+        private int F10 = 0; // Compliant - not assigned from every path
         void M4(bool p1)
         {
             for (F8 = 0; F8 < 42; F8++) { }
@@ -103,6 +53,8 @@ namespace Tests.Diagnostics
             Console.WriteLine(F10);
         }
 
+        private int F11 = 0; // Compliant - first read through 'this.'
+        private int F12 = 0; // Noncompliant
         void M5()
         {
             Console.WriteLine(this.F11);
@@ -112,24 +64,34 @@ namespace Tests.Diagnostics
             Console.WriteLine(F12);
         }
 
+        private int F13 = 0; // Compliant - parameter of same name is assigned, not the field
+        private int F14 = 0; // Noncompliant
         void M6(int F13, int F14)
         {
             F13 = 42;
             this.F14 = 42;
         }
 
+        private int F15 = 0; // Compliant - returned in property getter
+        private int F16 = 0; // Noncompliant, property is assigning first
         public int P1 { get { return F15; } }
         public int P2 { get { F16 = 42; return F16; } }
 
+        private static int F17 = 0; // Compliant
+        private int F18 = 0; // Compliant
         public int P3 { get; set; } = F17;
         public int M7() => F18;
-
         void M8()
         {
             F17 = 42;
             F18 = 42;
         }
 
+        private int F19 = 42; // Compliant - accessed through instance
+        private int F20 = 42; // Compliant - accessed through instance
+        private int F21 = 42; // Compliant - accessed through instance
+        private static int F22 = 42; // Noncompliant, overwritten static instance
+        private int F23 = 42; // Noncompliant - access through this?.
         void M9(PrivateFieldUsedAsLocalVariable inst)
         {
             F19 = inst.F19;
@@ -153,6 +115,8 @@ namespace Tests.Diagnostics
             this?.F23 = 42;
         }
 
+        private int F24 = 42; // Noncompliant - passed as 'out'
+        private int F25 = 42; // Compliant - passed as 'ref'
         void M10()
         {
             M11(out F24, ref F25);
@@ -164,6 +128,19 @@ namespace Tests.Diagnostics
             b = 42;
         }
 
+        private int F26 = 42; // Noncompliant - always assigned from constructor
+        private int F27 = 42; // Compliant - passed to another constructor
+        PrivateFieldUsedAsLocalVariable() : this(F27)
+        {
+            F26 = 42;
+        }
+
+        PrivateFieldUsedAsLocalVariable(int a)
+        {
+        }
+
+        private int F28 = 42; // Noncompliant - always assigned from event
+        private int F29 = 42; // Compliant
         event EventHandler E1
         {
             add
@@ -177,23 +154,28 @@ namespace Tests.Diagnostics
             }
         }
 
+        private int F30 = 42; // Noncompliant - always assigned from 2 methods
+        private int F31 = 42; // Compliant
         void M12()
         {
             F30 = 42;
             F31 = 40;
         }
 
+        private string F32 = ""; // Noncompliant
         void M13()
         {
             this.F32 = 42;
             Console.WriteLine(this.F31);
         }
 
+        private static string F33 = ""; // Noncompliant
         ~PrivateFieldUsedAsLocalVariable()
         {
             this.F33 = "foo";
         }
 
+        private string F34 = ""; // Compliant
         public static PrivateFieldUsedAsLocalVariable operator +(PrivateFieldUsedAsLocalVariable c1, PrivateFieldUsedAsLocalVariable c2)
         {
             PrivateFieldUsedAsLocalVariable.F33 = "foo";
@@ -201,9 +183,21 @@ namespace Tests.Diagnostics
             return null;
         }
 
+        [Obsolete]
+        private string F35 = ""; // Compliant, even though it is overwritten, the field has attribute and is not reported
         void M14()
         {
             this.F35 = "foo";
+        }
+
+        // https://github.com/SonarSource/sonar-csharp/issues/1448
+        private int F36; // Noncompliant, we don't read the value
+        public void M15(int i) => F36 = i + 1;
+
+        private string F37; // Compliant
+        protected string SomeString
+        {
+            get { return F37 ?? (F37 = "5"); }
         }
     }
 

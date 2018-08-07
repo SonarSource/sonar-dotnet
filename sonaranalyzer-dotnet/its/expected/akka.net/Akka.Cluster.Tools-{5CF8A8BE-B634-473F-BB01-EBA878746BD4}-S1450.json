@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S1450",
-"message":  "Remove the '_receptionist' field and declare it as a local variable in the relevant methods.",
+"message":  "Remove the field '_receptionist' and declare it as a local variable in the relevant methods.",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Client\ClusterClientReceptionist.cs",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S1450",
-"message":  "Remove the '_pruneInterval' field and declare it as a local variable in the relevant methods.",
+"message":  "Remove the field '_pruneInterval' and declare it as a local variable in the relevant methods.",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\PublishSubscribe\DistributedPubSubMediator.cs",
 "region":  {
@@ -23,19 +23,6 @@
 "startColumn":  35,
 "endLine":  112,
 "endColumn":  49
-}
-}
-},
-{
-"id":  "S1450",
-"message":  "Remove the 'EmptyBytes' field and declare it as a local variable in the relevant methods.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Tools\Singleton\Serialization\ClusterSingletonMessageSerializer.cs",
-"region":  {
-"startLine":  22,
-"startColumn":  40,
-"endLine":  22,
-"endColumn":  64
 }
 }
 }

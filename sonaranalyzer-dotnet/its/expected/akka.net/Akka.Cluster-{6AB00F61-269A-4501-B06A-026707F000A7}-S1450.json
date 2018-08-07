@@ -2,7 +2,7 @@
 "issues":  [
 {
 "id":  "S1450",
-"message":  "Remove the '_cluster' field and declare it as a local variable in the relevant methods.",
+"message":  "Remove the field '_cluster' and declare it as a local variable in the relevant methods.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Cluster\ClusterDaemon.cs",
 "region":  {
@@ -15,7 +15,7 @@
 },
 {
 "id":  "S1450",
-"message":  "Remove the '_gossipTimeToLive' field and declare it as a local variable in the relevant methods.",
+"message":  "Remove the field '_gossipTimeToLive' and declare it as a local variable in the relevant methods.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Cluster\Proto\ClusterMessageSerializer.cs",
 "region":  {
