@@ -49,7 +49,8 @@ namespace SonarAnalyzer.UnitTest
                 "net40",
                 "net45",
                 "netstandard1.0",
-                "netstandard1.1"
+                "netstandard1.1",
+                "netstandard2.0"
             };
 
         public static MetadataReference GetMetadataReference(AssemblyReference assemblyReference) =>

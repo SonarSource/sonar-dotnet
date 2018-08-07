@@ -32,6 +32,8 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType Microsoft_AspNetCore_Mvc_ControllerBase = new KnownType("Microsoft.AspNetCore.Mvc.ControllerBase");
         internal static readonly KnownType Microsoft_AspNetCore_Mvc_ControllerAttribute = new KnownType("Microsoft.AspNetCore.Mvc.ControllerAttribute");
         internal static readonly KnownType Microsoft_AspNetCore_Mvc_NonControllerAttribute = new KnownType("Microsoft.AspNetCore.Mvc.NonControllerAttribute");
+        internal static readonly KnownType Microsoft_AspNetCore_Mvc_VirtualFileResult = new KnownType("Microsoft.AspNetCore.Mvc.VirtualFileResult");
+        internal static readonly KnownType Microsoft_AspNetCore_Routing_VirtualPathData = new KnownType("Microsoft.AspNetCore.Routing.VirtualPathData");
         internal static readonly KnownType Microsoft_VisualBasic_Interaction = new KnownType("Microsoft.VisualBasic.Interaction");
         internal static readonly KnownType Microsoft_VisualStudio_TestTools_UnitTesting_Assert = new KnownType("Microsoft.VisualStudio.TestTools.UnitTesting.Assert");
         internal static readonly KnownType Microsoft_VisualStudio_TestTools_UnitTesting_ExpectedExceptionAttribute = new KnownType("Microsoft.VisualStudio.TestTools.UnitTesting.ExpectedExceptionAttribute");
@@ -264,9 +266,14 @@ namespace SonarAnalyzer.Helpers
         internal static readonly KnownType System_ValueType = new KnownType(SpecialType.System_ValueType, "ValueType");
         internal static readonly KnownType System_Web_HttpCookie = new KnownType("System.Web.HttpCookie");
         internal static readonly KnownType System_Web_Http_ApiController = new KnownType("System.Web.Http.ApiController");
+        internal static readonly KnownType System_Web_HttpRequestBase = new KnownType("System.Web.HttpRequestBase");
+        internal static readonly KnownType System_Web_HttpResponseBase = new KnownType("System.Web.HttpResponseBase");
+        internal static readonly KnownType System_Web_HttpServerUtilityBase = new KnownType("System.Web.HttpServerUtilityBase");
         internal static readonly KnownType System_Web_Mvc_Controller = new KnownType("System.Web.Mvc.Controller");
         internal static readonly KnownType System_Web_Mvc_HttpPostAttribute = new KnownType("System.Web.Mvc.HttpPostAttribute");
+        internal static readonly KnownType System_Web_Mvc_UrlHelper = new KnownType("System.Web.Mvc.UrlHelper");
         internal static readonly KnownType System_Web_Mvc_ValidateInputAttribute = new KnownType("System.Web.Mvc.ValidateInputAttribute");
+        internal static readonly KnownType System_Web_VirtualPathUtility = new KnownType("System.Web.VirtualPathUtility");
         internal static readonly KnownType System_Windows_DependencyObject = new KnownType("System.Windows.DependencyObject");
         internal static readonly KnownType System_Windows_Forms_Application = new KnownType("System.Windows.Forms.Application");
         internal static readonly KnownType System_Windows_Markup_ConstructorArgumentAttribute = new KnownType("System.Windows.Markup.ConstructorArgumentAttribute");

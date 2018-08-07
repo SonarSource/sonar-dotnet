@@ -47,6 +47,8 @@ namespace SonarAnalyzer.Rules
             new Regex($"{UriScheme}|{AbsoluteDiskUri}|{AbsoluteMappedDiskUri}|{AbsoluteUnixUri}",
                 RegexOptions.Compiled);
 
+        protected static readonly Regex VirtualPathRegex = new Regex(AbsoluteUnixUri, RegexOptions.Compiled);
+
         protected static readonly Regex PathDelimiterRegex = new Regex(@"^(\\|/)$", RegexOptions.Compiled);
 
         protected static readonly ISet<string> checkedVariableNames =
@@ -59,6 +61,21 @@ namespace SonarAnalyzer.Rules
                 "URN",
                 "STREAM"
             };
+
+        internal static readonly ISet<KnownType> AspNetTypes = new HashSet<KnownType>
+        {
+            KnownType.System_Web_VirtualPathUtility,
+        };
+
+        internal static readonly ISet<MethodSignature> MethodsWithVirtualPaths = new HashSet<MethodSignature>
+        {
+            new MethodSignature(KnownType.Microsoft_AspNetCore_Mvc_VirtualFileResult, ".ctor"),
+            new MethodSignature(KnownType.Microsoft_AspNetCore_Routing_VirtualPathData, ".ctor"),
+            new MethodSignature(KnownType.System_Web_HttpServerUtilityBase, "MapPath"),
+            new MethodSignature(KnownType.System_Web_HttpRequestBase, "MapPath"),
+            new MethodSignature(KnownType.System_Web_HttpResponseBase, "ApplyAppPathModifier"),
+            new MethodSignature(KnownType.System_Web_Mvc_UrlHelper, "Content"),
+        };
     }
 
     public abstract class UriShouldNotBeHardcodedBase<TExpressionSyntax,
@@ -147,6 +164,7 @@ namespace SonarAnalyzer.Rules
                     : null;
 
                 return methodSymbol != null &&
+                    !IsVirtualPath(expression, methodSymbol) &&
                     argumentIndex.Value < methodSymbol.Parameters.Length &&
                     methodSymbol.Parameters[argumentIndex.Value].Name.SplitCamelCaseToWords()
                          .Any(name => checkedVariableNames.Contains(name));
@@ -163,6 +181,15 @@ namespace SonarAnalyzer.Rules
         {
             var text = GetLiteralText(expression as TLiteralExpressionSyntax);
             return text != null && PathDelimiterRegex.IsMatch(text);
+        }
+
+        private bool IsVirtualPath(TExpressionSyntax expression, IMethodSymbol methodSymbol)
+        {
+            var baseType = methodSymbol.OriginalDefinition?.ReceiverType;
+            return baseType != null &&
+                expression is TLiteralExpressionSyntax &&
+                VirtualPathRegex.IsMatch(GetLiteralText((TLiteralExpressionSyntax)expression)) &&
+                (MethodsWithVirtualPaths.Any(m => m.Is(baseType, methodSymbol.Name)) || baseType.IsAny(AspNetTypes));
         }
     }
 }

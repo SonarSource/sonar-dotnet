@@ -19,6 +19,7 @@
  */
 
 using System.Linq;
+using Microsoft.CodeAnalysis;
 
 namespace SonarAnalyzer.Helpers
 {
@@ -42,6 +43,14 @@ namespace SonarAnalyzer.Helpers
         internal string ToFullName()
         {
             return string.Concat(ContainingType.TypeName, ".", Name);
+        }
+
+        internal bool Is(ITypeSymbol knownType, string methodName)
+        {
+            return knownType != null &&
+                methodName != null &&
+                knownType.Is(ContainingType) &&
+                methodName == Name;
         }
     }
 }
