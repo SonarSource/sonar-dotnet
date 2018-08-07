@@ -763,5 +763,92 @@ namespace Namespace
 }";
             UcfgVerifier.VerifyInstructions(code, "Foo");
         }
+
+        [TestMethod]
+        public void CastWithFieldAccess()
+        {
+            const string code = @"
+namespace Namespace
+{
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+
+    public class Class1
+    {
+        private readonly List<object> _list;
+
+        public override bool Equals(object obj)
+        {
+            return ListsEqual(_list, ((Class1)obj)._list);
+                // %0 := __id [ this._list ]
+                // %1 := __id [ obj ]
+                // %2 := __id [ %1._list ]
+                // %3 := Namespace.Class1.ListsEqual(System.Collections.Generic.List<object>, System.Collections.Generic.List<object>) [ this %0 %2 ]
+        }
+
+         private bool ListsEqual(List<object> x, List<object> y) => false
+    }
+}";
+            UcfgVerifier.VerifyInstructions(code, "Equals");
+        }
+
+        [TestMethod]
+        public void SafeCastWithFieldAccess()
+        {
+            const string code = @"
+namespace Namespace
+{
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+
+    public class Class1
+    {
+        private readonly List<object> _list;
+
+        public override bool Equals(object obj)
+        {
+            return ListsEqual(_list, (obj as Class1)._list);
+                // %0 := __id [ this._list ]
+                // %1 := __id [ obj ]
+                // %2 := __id [ %1._list ]
+                // %3 := Namespace.Class1.ListsEqual(System.Collections.Generic.List<object>, System.Collections.Generic.List<object>) [ this %0 %2 ]
+        }
+
+         private bool ListsEqual(List<object> x, List<object> y) => false
+    }
+}";
+            UcfgVerifier.VerifyInstructions(code, "Equals");
+        }
+
+        [TestMethod]
+        public void SafeCastWithConditionalFieldAccess()
+        {
+            const string code = @"
+namespace Namespace
+{
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+
+    public class Class1
+    {
+        private readonly List<object> _list;
+
+        public override bool Equals(object obj)
+        {
+            return ListsEqual(_list, (obj as Class1)?._list);
+                // %0 := __id [ this._list ]
+                // %1 := __id [ obj ]
+                // %2 := __id [ %1._list ]
+                // %3 := Namespace.Class1.ListsEqual(System.Collections.Generic.List<object>, System.Collections.Generic.List<object>) [ this %0 %2 ]
+        }
+
+         private bool ListsEqual(List<object> x, List<object> y) => false
+    }
+}";
+            UcfgVerifier.VerifyInstructions(code, "Equals");
+        }
     }
 }
