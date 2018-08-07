@@ -91,57 +91,5 @@ namespace Namespace
 }";
             UcfgVerifier.VerifyInstructions(code, "Foo");
         }
-
-        [TestMethod]
-        public void NullConditionalOperator()
-        {
-            const string code = @"
-namespace Namespace
-{
-    public class BaseClass
-    {
-        public BaseClass baseField;
-    }
-
-    public class Class1 : BaseClass
-    {
-        private Class1 field;
-
-        public void Foo()
-        {
-            var result = field?.field;
-                // %0 := __id [ this.field ]
-                // %1 := __id [ this.field ]
-                // %2 := __id [ %0.field ]
-                // result := __id [ %2 ]
-
-             result = this?.field;
-                // %3 := __id [ this.field ]
-                // result := __id [ %3 ]
-
-            result = base?.baseField;
-                // %4 := __id [ this.baseField ]
-                // result := __id [ %4 ]
-
-            field?.ToString();
-                // %5 := __id [ this.field ]
-                // %6 := object.ToString() [ %5 ]
-
-            field?.GetTypeName();
-                // %7 := __id [ this.field ]
-                // %8 := Namespace.Helper.GetTypeName(Namespace.Class1) [ Namespace.Helper %7 ]
-        }
-    }
-
-    public static class Helper
-    {
-        public static string GetTypeName(this Class1 class1)
-        {
-            return class1.GetType().Name;
-        }
-    }
-}";
-            UcfgVerifier.VerifyInstructions(code, "Foo");
-        }
     }
 }

@@ -667,5 +667,101 @@ namespace Namespace
 }";
             UcfgVerifier.VerifyInstructions(code, "Foo");
         }
+
+
+        [TestMethod]
+        public void NullConditionalOperator()
+        {
+            const string code = @"
+namespace Namespace
+{
+    public class BaseClass
+    {
+        public BaseClass baseField;
+    }
+
+    public class Class1 : BaseClass
+    {
+        private Class1 field1;
+        private Class1 field2;
+        private Class1[] fieldArray;
+
+        public void Foo()
+        {
+            Class1 result10;
+            result10 = field1?.field2;
+                // %0 := __id [ this.field1 ]
+                // %1 := __id [ %0.field2 ]
+                // result10 := __id [ %1 ]
+            var result11 = field1?.field2;
+                // %2 := __id [ this.field1 ]
+                // %3 := __id [ %2.field2 ]
+                // result11 := __id [ %3 ]
+
+            Class1 result20;
+            result20 = this?.field1;
+                // %4 := __id [ this.field1 ]
+                // result20 := __id [ %4 ]
+            var result21 = this?.field1;
+                // %5 := __id [ this.field1 ]
+                // result21 := __id [ %5 ]
+
+            Class1 result30;
+            result30 = base?.baseField;
+                // %6 := __id [ this.baseField ]
+                // result30 := __id [ %6 ]
+            var result31 = base?.baseField;
+                // %7 := __id [ this.baseField ]
+                // result31 := __id [ %7 ]
+
+            string result40;
+            result40 = field1?.ToString();
+                // %8 := __id [ this.field1 ]
+                // %9 := object.ToString() [ %8 ]
+                // result40 := __id [ %9 ]
+            var result41 = field1?.ToString();
+                // %10 := __id [ this.field1 ]
+                // %11 := object.ToString() [ %10 ]
+                // result41 := __id [ %11 ]
+
+            string result50;
+            result50 = field1?.GetTypeName();
+                // %12 := __id [ this.field1 ]
+                // %13 := Namespace.Helper.GetTypeName(Namespace.Class1) [ Namespace.Helper %12 ]
+                // result50 := __id [ %13 ]
+            var result51 = field1?.GetTypeName();
+                // %14 := __id [ this.field1 ]
+                // %15 := Namespace.Helper.GetTypeName(Namespace.Class1) [ Namespace.Helper %14 ]
+                // result51 := __id [ %15 ]
+
+            Class1 result60;
+            result60 = fieldArray?[0].field1;
+                // %16 := __id [ this.fieldArray ]
+                // %17 := __arrayGet [ %16 ]
+                // %18 := __id [ %17.field1 ]
+                // result60 := __id [ %18 ]
+            var result61 = fieldArray?[0].field1;
+                // %19 := __id [ this.fieldArray ]
+                // %20 := __arrayGet [ %19 ]
+                // %21 := __id [ %20.field1 ]
+                // result61 := __id [ %21 ]
+
+            System.Console.WriteLine(field1?.field2);
+                // %22 := __id [ this.field1 ]
+                // %23 := __id [ %22.field2 ]
+                // %24 := System.Console.WriteLine(object) [ System.Console %23 ]
+        }
+    }
+
+    public static class Helper
+    {
+        public static string GetTypeName(this Class1 class1)
+        {
+            return class1.GetType().Name;
+        }
+    }
+}";
+            UcfgVerifier.VerifyInstructions(code, "Foo");
+        }
     }
 }
