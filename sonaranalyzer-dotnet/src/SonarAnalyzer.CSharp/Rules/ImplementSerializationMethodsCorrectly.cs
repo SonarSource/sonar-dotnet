@@ -62,7 +62,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 var methodSymbol = c.SemanticModel.GetDeclaredSymbol(methodDeclaration);
 
                 if (methodDeclaration.Identifier.IsMissing ||
-                    !methodSymbol.HasAnyAttribute(serializationAttributes))
+                    !methodSymbol.GetAttributes(serializationAttributes).Any())
                 {
                     return;
                 }
@@ -76,7 +76,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
             },
             SyntaxKind.MethodDeclaration);
-        }        
+        }
 
         private static IEnumerable<string> FindIssues(IMethodSymbol methodSymbol)
         {

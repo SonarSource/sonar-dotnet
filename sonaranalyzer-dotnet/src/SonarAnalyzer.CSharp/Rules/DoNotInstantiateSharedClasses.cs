@@ -49,22 +49,12 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     var createdType = c.SemanticModel.GetTypeInfo(creationSyntax).Type;
                     if (createdType != null &&
-                        createdType.GetAttributes().Any(IsSharedPartCreationPolicyAttribute))
+                        createdType.GetAttributes(KnownType.System_ComponentModel_Composition_PartCreationPolicyAttribute).Any(IsShared))
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, creationSyntax.GetLocation()));
                     }
                 },
                 SyntaxKind.ObjectCreationExpression);
-        }
-
-        private static bool IsSharedPartCreationPolicyAttribute(AttributeData data)
-        {
-            return IsPartCreationPolicyAttribute(data) && IsShared(data);
-        }
-
-        private static bool IsPartCreationPolicyAttribute(AttributeData data)
-        {
-            return data.AttributeClass.Is(KnownType.System_ComponentModel_Composition_PartCreationPolicyAttribute);
         }
 
         private static bool IsShared(AttributeData data)

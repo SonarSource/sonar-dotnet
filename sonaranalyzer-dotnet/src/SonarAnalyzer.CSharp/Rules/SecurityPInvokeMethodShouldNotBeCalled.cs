@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2018 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -77,8 +77,9 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            var dllImportAttribute = methodCallSymbol.Symbol.GetAttributes()
-                .FirstOrDefault(attribute => attribute.AttributeClass.Is(KnownType.System_Runtime_InteropServices_DllImportAttribute));
+            var dllImportAttribute = methodCallSymbol.Symbol
+                .GetAttributes(KnownType.System_Runtime_InteropServices_DllImportAttribute)
+                .FirstOrDefault();
             if (dllImportAttribute == null)
             {
                 return;

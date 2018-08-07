@@ -45,16 +45,13 @@ namespace SonarAnalyzer.Helpers
             }
         }
 
-        internal static bool HasAttribute(this ISymbol symbol, KnownType attributeType) =>
-            symbol?.GetAttributes().Any(a => a.AttributeClass.Is(attributeType))
-            ?? false;
+        internal static IEnumerable<AttributeData> GetAttributes(this ISymbol symbol, KnownType attributeType) =>
+            symbol?.GetAttributes().Where(a => a.AttributeClass.Is(attributeType))
+                ?? Enumerable.Empty<AttributeData>();
 
-        internal static bool HasAnyAttribute(this ISymbol symbol, ISet<KnownType> attributeTypes) =>
-            symbol?.GetAttributes().Any(a => a.AttributeClass.IsAny(attributeTypes))
-            ?? false;
-
-        public static bool IsObsolete(this ISymbol symbol) =>
-            symbol.HasAttribute(KnownType.System_ObsoleteAttribute);
+        internal static IEnumerable<AttributeData> GetAttributes(this ISymbol symbol, ISet<KnownType> attributeTypes) =>
+            symbol?.GetAttributes().Where(a => a.AttributeClass.IsAny(attributeTypes))
+                ?? Enumerable.Empty<AttributeData>();
 
         public static IEnumerable<INamedTypeSymbol> GetAllNamedTypes(this INamedTypeSymbol type)
         {

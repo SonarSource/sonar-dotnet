@@ -78,7 +78,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (methodSymbol == null ||
                         methodSymbol.GetInterfaceMember() != null ||
                         methodSymbol.GetOverriddenMember() != null ||
-                        methodSymbol.HasAnyAttribute(TestMethodAttributes))
+                        methodSymbol.GetAttributes(TestMethodAttributes).Any())
                     {
                         return;
                     }

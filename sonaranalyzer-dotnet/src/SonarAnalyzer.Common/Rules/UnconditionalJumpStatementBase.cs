@@ -119,7 +119,7 @@ namespace SonarAnalyzer.Rules
             }
         }
 
-        protected abstract bool IsAnyKind(SyntaxNode node, ICollection<TLanguageKindEnum> collection);
+        protected abstract bool IsAnyKind(SyntaxNode node, ISet<TLanguageKindEnum> syntaxKinds);
 
         protected abstract bool IsReturnStatement(SyntaxNode node);
 

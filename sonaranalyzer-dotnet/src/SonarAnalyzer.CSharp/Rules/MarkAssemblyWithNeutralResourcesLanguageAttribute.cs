@@ -72,24 +72,17 @@ namespace SonarAnalyzer.Rules.CSharp
                 });
         }
 
-        private static bool IsDesignerFile(SyntaxTree tree)
-        {
-            return tree.FilePath?.IndexOf(".Designer.", StringComparison.OrdinalIgnoreCase) > 0;
-        }
+        private static bool IsDesignerFile(SyntaxTree tree) =>
+            tree.FilePath?.IndexOf(".Designer.", StringComparison.OrdinalIgnoreCase) > 0;
 
-        private static bool HasGeneratedCodeAttributeWithStronglyTypedResourceBuilderValue(
-            SemanticModel semanticModel, ClassDeclarationSyntax classSyntax)
-        {
-            return classSyntax.AttributeLists
-                .SelectMany(list => list.Attributes)
-                .Where(attribute => attribute.ArgumentList.Arguments.Count > 0)
-                .Select(attribute => attribute.ToSyntaxWithSymbol(semanticModel.GetSymbolInfo(attribute).Symbol as IMethodSymbol))
-                .Where(syntaxWithSymbol => syntaxWithSymbol.Symbol != null
-                                           && syntaxWithSymbol.Symbol.ContainingType.Is(KnownType.System_CodeDom_Compiler_GeneratedCodeAttribute))
-                .Select(syntaxWithSymbol => semanticModel.GetConstantValue(syntaxWithSymbol.Syntax.ArgumentList.Arguments[0].Expression))
+        private static bool HasGeneratedCodeAttributeWithStronglyTypedResourceBuilderValue(SemanticModel semanticModel,
+            ClassDeclarationSyntax classSyntax) =>
+            classSyntax.AttributeLists
+                .GetAttributes(KnownType.System_CodeDom_Compiler_GeneratedCodeAttribute, semanticModel)
+                .Where(a => a.ArgumentList.Arguments.Count > 0)
+                .Select(a => semanticModel.GetConstantValue(a.ArgumentList.Arguments[0].Expression))
                 .Select(constantValue => constantValue.Value as string)
                 .Any(stringValue => string.Equals(stringValue, StronglyTypedResourceBuilder, StringComparison.OrdinalIgnoreCase));
-        }
 
         private static bool IsResxGeneratedFile(SemanticModel semanticModel, ClassDeclarationSyntax classSyntax)
         {
@@ -103,8 +96,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool HasNeutralResourcesLanguageAttribute(IAssemblySymbol assemblySymbol)
         {
-            return assemblySymbol.GetAttributes()
-                .Where(attribute => attribute.AttributeClass.Is(KnownType.System_Resources_NeutralResourcesLanguageAttribute))
+            return assemblySymbol.GetAttributes(KnownType.System_Resources_NeutralResourcesLanguageAttribute)
                 .Any(attribute => attribute.ConstructorArguments.Any(
                     constructorArg => constructorArg.Type.Is(KnownType.System_String)
                                       && !string.IsNullOrWhiteSpace((string)constructorArg.Value)));

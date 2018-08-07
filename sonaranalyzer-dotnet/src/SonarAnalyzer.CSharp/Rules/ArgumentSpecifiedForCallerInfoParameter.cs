@@ -85,10 +85,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.InvocationExpression);
         }
 
-        private static AttributeData GetCallerInfoAttribute(IParameterSymbol parameter)
-        {
-            return parameter.GetAttributes()
-                .FirstOrDefault(attr => attr.AttributeClass.IsAny(CallerInfoAttributesToReportOn));
-        }
+        private static AttributeData GetCallerInfoAttribute(IParameterSymbol parameter) =>
+            parameter.GetAttributes(CallerInfoAttributesToReportOn).FirstOrDefault();
     }
 }

@@ -161,7 +161,7 @@ namespace SonarAnalyzer
 
         private static bool HasBody(SyntaxNode node)
         {
-            return node.ChildNodes().Any(SyntaxKind.Block);
+            return node.ChildNodes().AnyOfKind(SyntaxKind.Block);
         }
     }
 }

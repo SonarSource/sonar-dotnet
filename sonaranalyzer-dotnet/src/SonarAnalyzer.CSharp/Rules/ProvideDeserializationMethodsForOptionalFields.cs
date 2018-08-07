@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2018 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -64,8 +64,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
 
                     var watchedAttributes = classSymbol.GetMembers()
-                        .SelectMany(m => m.GetAttributes())
-                        .Where(attribute => attribute.AttributeClass.IsAny(AttributesToFind))
+                        .SelectMany(m => m.GetAttributes(AttributesToFind))
                         .ToList();
 
                     var errorMessage = GetErrorMessage(watchedAttributes);

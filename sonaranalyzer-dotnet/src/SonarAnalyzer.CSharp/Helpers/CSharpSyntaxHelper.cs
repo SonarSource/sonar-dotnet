@@ -29,12 +29,6 @@ namespace SonarAnalyzer.Helpers
 {
     internal static class CSharpSyntaxHelper
     {
-        private static readonly ISet<SyntaxKind> BooleanLiterals = new HashSet<SyntaxKind>
-        {
-            SyntaxKind.TrueLiteralExpression,
-            SyntaxKind.FalseLiteralExpression
-        };
-
         public static readonly ExpressionSyntax NullLiteralExpression =
             SyntaxFactory.LiteralExpression(SyntaxKind.NullLiteralExpression);
 
@@ -44,12 +38,13 @@ namespace SonarAnalyzer.Helpers
         public static readonly ExpressionSyntax TrueLiteralExpression =
             SyntaxFactory.LiteralExpression(SyntaxKind.TrueLiteralExpression);
 
-        public static readonly string NameOfKeywordText = SyntaxFacts.GetText(SyntaxKind.NameOfKeyword);
+        public static readonly string NameOfKeywordText =
+            SyntaxFacts.GetText(SyntaxKind.NameOfKeyword);
 
-        public static bool Any(this IEnumerable<SyntaxNode> nodes, SyntaxKind kind) =>
+        public static bool AnyOfKind(this IEnumerable<SyntaxNode> nodes, SyntaxKind kind) =>
             nodes.Any(n => n.RawKind == (int)kind);
 
-        public static bool Any(this IEnumerable<SyntaxToken> tokens, SyntaxKind kind) =>
+        public static bool AnyOfKind(this IEnumerable<SyntaxToken> tokens, SyntaxKind kind) =>
             tokens.Any(n => n.RawKind == (int)kind);
 
         public static bool HasExactlyNArguments(this InvocationExpressionSyntax invocation, int count)
@@ -92,29 +87,15 @@ namespace SonarAnalyzer.Helpers
         public static SyntaxNode GetFirstNonParenthesizedParent(this SyntaxNode node) =>
             node.GetSelfOrTopParenthesizedExpression().Parent;
 
-        public static bool TryGetAttribute(this SyntaxList<AttributeListSyntax> attributeLists,
-            KnownType attributeKnownType, SemanticModel semanticModel, out AttributeSyntax searchedAttribute)
-        {
-            searchedAttribute = null;
+        public static IEnumerable<AttributeSyntax> GetAttributes(this SyntaxList<AttributeListSyntax> attributeLists,
+            KnownType attributeKnownType, SemanticModel semanticModel) =>
+            GetAttributes(attributeLists, new HashSet<KnownType> { attributeKnownType }, semanticModel);
 
-            if (!attributeLists.Any())
-            {
-                return false;
-            }
-
-            foreach (var attribute in attributeLists.SelectMany(attributeList => attributeList.Attributes))
-            {
-                var attributeType = semanticModel.GetTypeInfo(attribute).Type;
-
-                if (attributeType.Is(attributeKnownType))
-                {
-                    searchedAttribute = attribute;
-                    return true;
-                }
-            }
-
-            return false;
-        }
+        public static IEnumerable<AttributeSyntax> GetAttributes(this SyntaxList<AttributeListSyntax> attributeLists,
+            ISet<KnownType> attributeKnownTypes, SemanticModel semanticModel) =>
+            attributeLists
+                .SelectMany(list => list.Attributes)
+                .Where(a => semanticModel.GetTypeInfo(a).Type.IsAny(attributeKnownTypes));
 
         public static bool IsOnThis(this ExpressionSyntax expression)
         {
@@ -177,15 +158,11 @@ namespace SonarAnalyzer.Helpers
                    name.Symbol.Name == nameof(string.Empty);
         }
 
-        public static bool IsAnyKind(this SyntaxNode syntaxNode, ICollection<SyntaxKind> collection)
-        {
-            return syntaxNode != null && collection.Contains((SyntaxKind)syntaxNode.RawKind);
-        }
+        public static bool IsAnyKind(this SyntaxNode syntaxNode, ISet<SyntaxKind> syntaxKinds) =>
+            syntaxNode != null && syntaxKinds.Contains((SyntaxKind)syntaxNode.RawKind);
 
-        public static bool IsAnyKind(this SyntaxToken syntaxToken, ICollection<SyntaxKind> collection)
-        {
-            return collection.Contains((SyntaxKind)syntaxToken.RawKind);
-        }
+        public static bool IsAnyKind(this SyntaxToken syntaxToken, ISet<SyntaxKind> syntaxKinds) =>
+            syntaxKinds.Contains((SyntaxKind)syntaxToken.RawKind);
 
         public static bool ContainsMethodInvocation(BaseMethodDeclarationSyntax methodDeclarationBase,
             SemanticModel semanticModel,
@@ -243,25 +220,9 @@ namespace SonarAnalyzer.Helpers
                 (exceptionTypeName == "Exception" || exceptionTypeName == "System.Exception");
         }
 
-        public static bool IsBooleanConstant(this SyntaxNode syntaxNode, SemanticModel semanticModel)
-        {
-            if (syntaxNode is MemberAccessExpressionSyntax ||
-                syntaxNode is IdentifierNameSyntax)
-            {
-                var constant = semanticModel.GetConstantValue(syntaxNode);
-                return constant.HasValue && constant.Value is bool;
-            }
-            return false;
-        }
-
-        public static bool IsBooleanLiteral(this SyntaxNode syntaxNode)
-        {
-            return syntaxNode.IsAnyKind(BooleanLiterals);
-        }
-
         /// <summary>
         /// Determines whether the node is being used as part of an expression tree
-        /// i.e. whether it is part of lamba being assigned to System.Linq.Expressions.Expression[TDelegate].
+        /// i.e. whether it is part of lambda being assigned to System.Linq.Expressions.Expression[TDelegate].
         /// This could be a local declaration, an assignment, a field, or a property
         /// </summary>
         public static bool IsInExpressionTree(this SyntaxNode node, SemanticModel semanticModel)
@@ -280,29 +241,25 @@ namespace SonarAnalyzer.Helpers
             switch (potentialExpressionNode)
             {
                 case VariableDeclarationSyntax varDecl:
-                typeIdentifiedNode = varDecl.Type;
-                break;
+                    typeIdentifiedNode = varDecl.Type;
+                    break;
                 case PropertyDeclarationSyntax propDecl:
-                typeIdentifiedNode = propDecl.Type;
-                break;
+                    typeIdentifiedNode = propDecl.Type;
+                    break;
                 case AssignmentExpressionSyntax assignExpr:
-                typeIdentifiedNode = assignExpr.Left;
-                break;
+                    typeIdentifiedNode = assignExpr.Left;
+                    break;
                 default:
-                return false;
+                    return false;
             }
 
             return typeIdentifiedNode?.IsKnownType(KnownType.System_Linq_Expressions_Expression_T, semanticModel) ?? false;
         }
 
-        public static bool HasDefaultLabel(this SwitchStatementSyntax node)
-        {
-            return GetDefaultLabelSectionIndex(node) >= 0;
-        }
+        public static bool HasDefaultLabel(this SwitchStatementSyntax node) =>
+            GetDefaultLabelSectionIndex(node) >= 0;
 
-        public static int GetDefaultLabelSectionIndex(this SwitchStatementSyntax node)
-        {
-            return node.Sections.IndexOf(section => section.Labels.Any(SyntaxKind.DefaultSwitchLabel));
-        }
+        public static int GetDefaultLabelSectionIndex(this SwitchStatementSyntax node) =>
+            node.Sections.IndexOf(section => section.Labels.AnyOfKind(SyntaxKind.DefaultSwitchLabel));
     }
 }

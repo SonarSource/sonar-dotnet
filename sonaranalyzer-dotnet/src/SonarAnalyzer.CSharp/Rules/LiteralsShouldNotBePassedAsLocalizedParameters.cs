@@ -128,13 +128,8 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             return symbol.Name.SplitCamelCaseToWords().Any(localizableSymbolNames.Contains) ||
-                symbol.GetAttributes().Any(IsLocalizableAttribute);
-        }
-
-        private static bool IsLocalizableAttribute(AttributeData attributeData)
-        {
-            return attributeData.AttributeClass.Is(KnownType.System_ComponentModel_LocalizableAttribute) &&
-                attributeData.ConstructorArguments.Any(c => (c.Value as bool?) ?? false);
+                symbol.GetAttributes(KnownType.System_ComponentModel_LocalizableAttribute)
+                    .Any(a => a.ConstructorArguments.Any(c => (c.Value as bool?) ?? false));
         }
     }
 }

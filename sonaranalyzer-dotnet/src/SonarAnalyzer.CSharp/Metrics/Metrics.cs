@@ -75,7 +75,7 @@ namespace SonarAnalyzer.Metrics.CSharp
             }
 
             if (FunctionKinds.Contains(node.Kind()) &&
-                node.ChildNodes().Any(SyntaxKind.Block))
+                node.ChildNodes().AnyOfKind(SyntaxKind.Block))
             {
                 // Non-abstract, non-interface methods
                 return true;
@@ -124,7 +124,7 @@ namespace SonarAnalyzer.Metrics.CSharp
                 {
                     var member = toVisit.Pop();
 
-                    var isPublic = member.ChildTokens().Any(SyntaxKind.PublicKeyword);
+                    var isPublic = member.ChildTokens().AnyOfKind(SyntaxKind.PublicKeyword);
                     if (isPublic)
                     {
                         publicNodes.Add(member);

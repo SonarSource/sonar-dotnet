@@ -19,6 +19,7 @@
  */
 
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Helpers;
 
@@ -49,7 +50,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
         private static bool IsControllerType(INamedTypeSymbol containingType) =>
             containingType != null &&
             (containingType.DerivesFromAny(controllerTypes)
-                || containingType.HasAnyAttribute(controllerAttributeTypes)) &&
-            !containingType.HasAnyAttribute(nonControllerAttributeTypes);
+                || containingType.GetAttributes(controllerAttributeTypes).Any()) &&
+            !containingType.GetAttributes(nonControllerAttributeTypes).Any();
     }
 }

@@ -40,7 +40,7 @@ namespace SonarAnalyzer.Rules
                     c.RegisterCompilationEndAction(
                         cc =>
                         {
-                            var requiredAttributeFound = cc.Compilation.Assembly.GetAttributes().Any(a => a.AttributeClass.Is(AttributeToFind));
+                            var requiredAttributeFound = cc.Compilation.Assembly.GetAttributes(AttributeToFind).Any();
                             if (!requiredAttributeFound)
                             {
                                 cc.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, null));

@@ -77,6 +77,12 @@ namespace SonarAnalyzer.Rules.CSharp
             SyntaxKind.CatchClause,
         };
 
+        private static readonly ISet<SyntaxKind> BooleanLiterals = new HashSet<SyntaxKind>
+        {
+            SyntaxKind.TrueLiteralExpression,
+            SyntaxKind.FalseLiteralExpression
+        };
+
         private const string S2583DiagnosticId = "S2583"; // Bug
         private const string S2583MessageFormat = "Change this condition so that it does not always evaluate to '{0}'; some subsequent code is never executed.";
 
@@ -288,8 +294,25 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 return false;
             }
-            return condition.IsBooleanLiteral()
-                || condition.IsBooleanConstant(semanticModel);
+
+            return IsBooleanLiteral(condition) ||
+                IsBooleanConstant(condition, semanticModel);
+
+            bool IsBooleanConstant(SyntaxNode syntaxNode, SemanticModel model)
+            {
+                if (syntaxNode is MemberAccessExpressionSyntax ||
+                    syntaxNode is IdentifierNameSyntax)
+                {
+                    var constant = semanticModel.GetConstantValue(syntaxNode);
+                    return constant.HasValue && constant.Value is bool;
+                }
+                return false;
+            }
+
+            bool IsBooleanLiteral(SyntaxNode syntaxNode)
+            {
+                return syntaxNode.IsAnyKind(BooleanLiterals);
+            }
         }
     }
 }

@@ -53,7 +53,7 @@ namespace SonarAnalyzer.Rules.CSharp
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics
             => ImmutableArray.Create(rule_MethodName, rule_TypeName);
 
-        private static readonly Dictionary<SyntaxKind, string> TypeKindNameMapping = 
+        private static readonly Dictionary<SyntaxKind, string> TypeKindNameMapping =
             new Dictionary<SyntaxKind, string>
             {
                 { SyntaxKind.StructDeclaration, "struct" },
@@ -101,7 +101,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var identifier = typeDeclaration.Identifier;
             var symbol = context.SemanticModel.GetDeclaredSymbol(typeDeclaration);
 
-            if (symbol.HasAnyAttribute(ComRelatedTypes))
+            if (symbol.GetAttributes(ComRelatedTypes).Any())
             {
                 return;
             }
@@ -146,7 +146,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             if (string.IsNullOrWhiteSpace(identifier.ValueText) ||
-                symbol.ContainingType.HasAnyAttribute(ComRelatedTypes) ||
+                symbol.ContainingType.GetAttributes(ComRelatedTypes).Any() ||
                 symbol.GetInterfaceMember() != null ||
                 symbol.GetOverriddenMember() != null ||
                 symbol.IsExtern)
@@ -331,7 +331,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 yield return currentWord.ToString();
             }
-        }        
+        }
 
         private static string FirstCharToUpper(string input)
         {

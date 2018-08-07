@@ -22,7 +22,6 @@ using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Helpers
 {
@@ -48,7 +47,7 @@ namespace SonarAnalyzer.Helpers
             var methodSymbol = FindContainingMethod(node, semanticModel);
             return IsConditionalDebugMethod(methodSymbol);
         }
-        
+
         public static bool IsConditionalDebugMethod(IMethodSymbol methodSymbol)
         {
             if (methodSymbol == null)
@@ -59,8 +58,7 @@ namespace SonarAnalyzer.Helpers
             // Conditional attribute can be applied to a class, but it does nothing unless
             // the class is an attribute class. So we only need to worry about whether the
             // conditional attribute is on the method.
-            return methodSymbol.GetAttributes()
-                .Where(attribute => attribute.AttributeClass.Is(KnownType.System_Diagnostics_ConditionalAttribute))
+            return methodSymbol.GetAttributes(KnownType.System_Diagnostics_ConditionalAttribute)
                 .Any(attribute => attribute.ConstructorArguments.Any(
                     constructorArg => constructorArg.Type.Is(KnownType.System_String)
                           && IsDebugString((string)constructorArg.Value)));
@@ -76,7 +74,7 @@ namespace SonarAnalyzer.Helpers
             }
             return null;
         }
-        
+
         #endregion
 
     }

@@ -81,13 +81,13 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         private static bool IsTestClass(INamedTypeSymbol classSymbol) =>
-            classSymbol.HasAnyAttribute(HandledTestClassAttributes);
+            classSymbol.GetAttributes(HandledTestClassAttributes).Any();
 
         private static bool HasAnyTestMethod(INamedTypeSymbol classSymbol) =>
-            classSymbol.GetMembers().OfType<IMethodSymbol>().Any(m => m.HasAnyAttribute(HandledTestMethodAttributes));
+            classSymbol.GetMembers().OfType<IMethodSymbol>().Any(m => m.GetAttributes(HandledTestMethodAttributes).Any());
 
         private bool IsViolatingRule(INamedTypeSymbol classSymbol) =>
-            IsTestClass(classSymbol) && 
+            IsTestClass(classSymbol) &&
             !HasAnyTestMethod(classSymbol);
 
         private bool IsExceptionToTheRule(INamedTypeSymbol classSymbol) =>
