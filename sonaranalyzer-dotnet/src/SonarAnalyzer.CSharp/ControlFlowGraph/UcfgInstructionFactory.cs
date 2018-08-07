@@ -119,6 +119,10 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                 case ElementBindingExpressionSyntax elementBinding:
                     return ProcessElementAccess(elementBinding);
 
+                case CastExpressionSyntax castExpression:
+                    return BuildIdentityCall(castExpression, expressionService.CreateVariable(),
+                        expressionService.GetOrDefault(castExpression.Expression));
+
                 default:
                     return ProcessReadSyntaxNode(syntaxNode);
             }
@@ -607,6 +611,11 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
         {
             var leftExpression = expressionService.GetOrDefault(binaryExpression.Left);
             var rightExpression = expressionService.GetOrDefault(binaryExpression.Right);
+
+            if (binaryExpression.OperatorToken.IsKind(SyntaxKind.AsKeyword))
+            {
+                return BuildIdentityCall(binaryExpression, expressionService.CreateVariable(), leftExpression);
+            }
 
             return BuildOperatorCall(binaryExpression, leftExpression, rightExpression);
         }
