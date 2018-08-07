@@ -32,20 +32,51 @@ namespace SonarAnalyzer.Metrics.CSharp
 {
     public class Metrics : MetricsBase
     {
-        public Metrics(SyntaxTree tree) : base(tree)
+        private static readonly ISet<SyntaxKind> TriviaKinds =
+            new HashSet<SyntaxKind>
+            {
+                SyntaxKind.SingleLineCommentTrivia,
+                SyntaxKind.MultiLineCommentTrivia,
+                SyntaxKind.SingleLineDocumentationCommentTrivia,
+                SyntaxKind.MultiLineDocumentationCommentTrivia
+            };
+
+        private static readonly ISet<SyntaxKind> ClassKinds =
+            new HashSet<SyntaxKind>
+            {
+                SyntaxKind.ClassDeclaration,
+                SyntaxKind.StructDeclaration,
+                SyntaxKind.InterfaceDeclaration
+            };
+
+        private static readonly ISet<SyntaxKind> FunctionKinds = new
+            HashSet<SyntaxKind>
+            {
+                SyntaxKind.ConstructorDeclaration,
+                SyntaxKind.DestructorDeclaration,
+                SyntaxKind.MethodDeclaration,
+                SyntaxKind.OperatorDeclaration
+            };
+
+        private readonly SemanticModel semanticModel;
+
+        public Metrics(SyntaxTree tree, SemanticModel semanticModel)
+            : base(tree)
         {
             var root = tree.GetRoot();
             if (root.Language != LanguageNames.CSharp)
             {
                 throw new ArgumentException(InitalizationErrorTextPattern, nameof(tree));
             }
+
+            this.semanticModel = semanticModel;
         }
 
         public override ICollection<int> ExecutableLines
         {
             get
             {
-                var walker = new ExecutableLinesWalker();
+                var walker = new ExecutableLinesWalker(semanticModel);
                 walker.Visit(tree.GetRoot());
                 return walker.ExecutableLines;
             }
@@ -161,28 +192,5 @@ namespace SonarAnalyzer.Metrics.CSharp
             walker.Walk(node);
             return walker.VisitEndedCorrectly ? walker.Complexity : -1;
         }
-
-        private static readonly ISet<SyntaxKind> TriviaKinds = new HashSet<SyntaxKind>
-        {
-            SyntaxKind.SingleLineCommentTrivia,
-            SyntaxKind.MultiLineCommentTrivia,
-            SyntaxKind.SingleLineDocumentationCommentTrivia,
-            SyntaxKind.MultiLineDocumentationCommentTrivia
-        };
-
-        private static readonly ISet<SyntaxKind> ClassKinds = new HashSet<SyntaxKind>
-        {
-            SyntaxKind.ClassDeclaration,
-            SyntaxKind.StructDeclaration,
-            SyntaxKind.InterfaceDeclaration
-        };
-
-        private static readonly ISet<SyntaxKind> FunctionKinds = new HashSet<SyntaxKind>
-        {
-            SyntaxKind.ConstructorDeclaration,
-            SyntaxKind.DestructorDeclaration,
-            SyntaxKind.MethodDeclaration,
-            SyntaxKind.OperatorDeclaration
-        };
     }
 }

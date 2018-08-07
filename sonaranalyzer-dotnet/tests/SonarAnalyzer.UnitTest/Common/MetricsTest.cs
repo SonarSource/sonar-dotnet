@@ -25,6 +25,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Common;
+using SonarAnalyzer.UnitTest.ControlFlowGraph;
 
 namespace SonarAnalyzer.UnitTest.Common
 {
@@ -581,8 +582,10 @@ End Class").Should().BeEquivalentTo(1, 2, 3, 4, 5, 6, 7, 8);
                 throw new ArgumentException("Supplied language is not C# neither VB.Net", nameof(language));
             }
 
+            (var syntaxTree, var semanticModel) = TestHelper.Compile(text);
+
             return language == AnalyzerLanguage.CSharp
-                ? (MetricsBase)new SonarAnalyzer.Metrics.CSharp.Metrics(CSharpSyntaxTree.ParseText(text))
+                ? (MetricsBase)new SonarAnalyzer.Metrics.CSharp.Metrics(syntaxTree, semanticModel)
                 : new SonarAnalyzer.Common.VisualBasic.Metrics(VisualBasicSyntaxTree.ParseText(text));
         }
 
@@ -591,7 +594,8 @@ End Class").Should().BeEquivalentTo(1, 2, 3, 4, 5, 6, 7, 8);
         [ExpectedException(typeof(ArgumentException))]
         public void WrongMetrics_CSharp()
         {
-            new SonarAnalyzer.Metrics.CSharp.Metrics(VisualBasicSyntaxTree.ParseText(""));
+            (var syntaxTree, var semanticModel) = TestHelper.Compile("", isCSharp: false);
+            new SonarAnalyzer.Metrics.CSharp.Metrics(syntaxTree, semanticModel);
         }
 
         [TestMethod]

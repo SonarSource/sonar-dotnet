@@ -39,11 +39,11 @@ namespace SonarAnalyzer.Rules
 
         protected sealed override string FileName => MetricsFileName;
 
-        protected abstract MetricsBase GetMetrics(SyntaxTree syntaxTree);
+        protected abstract MetricsBase GetMetrics(SyntaxTree syntaxTree, SemanticModel semanticModel);
 
         protected sealed override MetricsInfo GetMessage(SyntaxTree syntaxTree, SemanticModel semanticModel)
         {
-            var metrics = GetMetrics(syntaxTree);
+            var metrics = GetMetrics(syntaxTree, semanticModel);
             return CalculateMetrics(metrics, syntaxTree.FilePath,
                 syntaxTree.GetRoot().Language == LanguageNames.CSharp
                 ? IgnoreHeaderComments[IgnoreHeaderCommentsCSharp]

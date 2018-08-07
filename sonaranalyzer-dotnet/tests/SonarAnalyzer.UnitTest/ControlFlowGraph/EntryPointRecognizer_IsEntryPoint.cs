@@ -47,7 +47,8 @@ public class Foo : System.Web.Mvc.Controller
     }
 }
 ";
-            var compilation = TestHelper.Compile(code, AssemblyReference.FromNuGet("System.Web.Mvc.dll", "Microsoft.AspNet.Mvc", aspNetMvcVersion));
+            var compilation = TestHelper.Compile(code,
+                references: AssemblyReference.FromNuGet("System.Web.Mvc.dll", "Microsoft.AspNet.Mvc", aspNetMvcVersion));
 
             var publicFoo = compilation.GetMethodSymbol("PublicFoo");
             var protectedFoo = compilation.GetMethodSymbol("ProtectedFoo");
@@ -81,7 +82,8 @@ public class MyController : Controller
     public void PublicDiz() { }
 }
 ";
-            var compilation = TestHelper.Compile(code, AssemblyReference.FromNuGet("System.Web.Mvc.dll", "Microsoft.AspNet.Mvc", aspNetMvcVersion));
+            var compilation = TestHelper.Compile(code,
+                references: AssemblyReference.FromNuGet("System.Web.Mvc.dll", "Microsoft.AspNet.Mvc", aspNetMvcVersion));
 
             var publicFoo = compilation.GetMethodSymbol("PublicFoo");
             var publicBar = compilation.GetMethodSymbol("PublicBar");
@@ -107,7 +109,8 @@ public class Foo
     public void PublicFoo() { }
 }
 ";
-            var compilation = TestHelper.Compile(code, AssemblyReference.FromNuGet("System.Web.Mvc.dll", "Microsoft.AspNet.Mvc", aspNetMvcVersion));
+            var compilation = TestHelper.Compile(code,
+                references: AssemblyReference.FromNuGet("System.Web.Mvc.dll", "Microsoft.AspNet.Mvc", aspNetMvcVersion));
 
             var publicFoo = compilation.GetMethodSymbol("PublicFoo");
 
@@ -129,7 +132,8 @@ public class Foo : Microsoft.AspNetCore.Mvc.ControllerBase
     public void PublicFoo() { }
 }
 ";
-            var compilation = TestHelper.Compile(code, AssemblyReference.FromNuGet("System.Web.Mvc.dll", "Microsoft.AspNet.Mvc", aspNetMvcVersion));
+            var compilation = TestHelper.Compile(code,
+                references: AssemblyReference.FromNuGet("System.Web.Mvc.dll", "Microsoft.AspNet.Mvc", aspNetMvcVersion));
 
             var publicFoo = compilation.GetMethodSymbol("PublicFoo");
 

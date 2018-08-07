@@ -31,6 +31,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
     {
         protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.VisualBasic.GeneratedCodeRecognizer.Instance;
 
-        protected override MetricsBase GetMetrics(SyntaxTree syntaxTree) => new Metrics(syntaxTree);
+        protected override MetricsBase GetMetrics(SyntaxTree syntaxTree, SemanticModel semanticModel) =>
+            new Metrics(syntaxTree);
     }
 }

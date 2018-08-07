@@ -31,12 +31,12 @@ namespace SonarAnalyzer.Metrics.CSharp
     public class ExecutableLinesWalker : CSharpSyntaxWalker
     {
         private readonly HashSet<int> executableLineNumbers = new HashSet<int>();
+        private readonly SemanticModel semanticModel;
 
-        private static readonly string[] ExcludeFromCoverageAttributes =
-            {
-                "ExcludeFromCodeCoverage",
-                "ExcludeFromCodeCoverageAttribute"
-            };
+        public ExecutableLinesWalker(SemanticModel semanticModel)
+        {
+            this.semanticModel = semanticModel;
+        }
 
         public ICollection<int> ExecutableLines => executableLineNumbers;
 
@@ -50,8 +50,7 @@ namespace SonarAnalyzer.Metrics.CSharp
 
         private bool FindExecutableLines(SyntaxNode node)
         {
-            var kind = node.Kind();
-            switch (kind)
+            switch (node.Kind())
             {
                 case SyntaxKind.CheckedStatement:
                 case SyntaxKind.UncheckedStatement:
@@ -96,43 +95,71 @@ namespace SonarAnalyzer.Metrics.CSharp
 
                 case SyntaxKind.StructDeclaration:
                 case SyntaxKind.ClassDeclaration:
-                    var typeDeclarationSyntax = (BaseTypeDeclarationSyntax)node;
-                    return !HasExcludedCodeAttribute(typeDeclarationSyntax.AttributeLists);
+                    return !HasExcludedCodeAttribute((BaseTypeDeclarationSyntax)node, btdc => btdc.AttributeLists,
+                        canBePartial: true);
 
                 case SyntaxKind.MethodDeclaration:
-                    var methodSyntax = (BaseMethodDeclarationSyntax)node;
-                    return !HasExcludedCodeAttribute(methodSyntax.AttributeLists);
+                case SyntaxKind.ConstructorDeclaration:
+                    return !HasExcludedCodeAttribute((BaseMethodDeclarationSyntax)node, bmds => bmds.AttributeLists,
+                        canBePartial: true);
 
                 case SyntaxKind.PropertyDeclaration:
-                    var propertySyntax = (PropertyDeclarationSyntax)node;
-                    return !HasExcludedCodeAttribute(propertySyntax.AttributeLists);
-
                 case SyntaxKind.EventDeclaration:
-                    var eventSyntax = (EventDeclarationSyntax)node;
-                    return !HasExcludedCodeAttribute(eventSyntax.AttributeLists);
+                    return !HasExcludedCodeAttribute((BasePropertyDeclarationSyntax)node, bpds => bpds.AttributeLists);
+
+                case SyntaxKind.AddAccessorDeclaration:
+                case SyntaxKind.RemoveAccessorDeclaration:
+                case SyntaxKind.SetAccessorDeclaration:
+                case SyntaxKind.GetAccessorDeclaration:
+                    return !HasExcludedCodeAttribute((AccessorDeclarationSyntax)node, ads => ads.AttributeLists);
 
                 default:
                     return true;
             }
         }
 
-        private bool HasExcludedCodeAttribute(SyntaxList<AttributeListSyntax> attributeSyntaxLists)
+        private bool HasExcludedCodeAttribute<T>(T node, Func<T, SyntaxList<AttributeListSyntax>> getAttributeLists,
+            bool canBePartial = false)
+            where T : SyntaxNode
         {
-            return attributeSyntaxLists
+            var hasExcludeFromCodeCoverageAttribute = getAttributeLists(node)
                 .SelectMany(attributeList => attributeList.Attributes)
-                .Select(GetAttributeName)
-                .Any(IsExcludedAttribute);
+                .Any(HasExcludedAttribute);
+
+            if (!canBePartial)
+            {
+                return hasExcludeFromCodeCoverageAttribute;
+            }
+
+            switch (this.semanticModel.GetDeclaredSymbol(node))
+            {
+                case IMethodSymbol methodSymbol:
+                    return hasExcludeFromCodeCoverageAttribute ||
+                        methodSymbol.GetAttributes().Any(HasExcludedAttribute);
+
+                case INamedTypeSymbol namedTypeSymbol:
+                    return hasExcludeFromCodeCoverageAttribute ||
+                        namedTypeSymbol.GetAttributes().Any(HasExcludedAttribute);
+
+                default:
+                    return hasExcludeFromCodeCoverageAttribute;
+            }
         }
 
-        private static string GetAttributeName(AttributeSyntax attribute)
+        private static bool HasExcludedAttribute(AttributeSyntax attribute)
         {
-            return attribute?.Name?.ToString() ?? string.Empty;
+            var attributeName = attribute?.Name?.ToString() ?? string.Empty;
+            return IsExcludedAttribute(attributeName);
         }
 
-        private static bool IsExcludedAttribute(string attributeName)
+        private static bool HasExcludedAttribute(AttributeData attribute)
         {
-            return ExcludeFromCoverageAttributes.Any(attr =>
-                attributeName.EndsWith(attr, StringComparison.Ordinal));
+            var attributeName = attribute?.AttributeClass?.Name ?? string.Empty;
+            return IsExcludedAttribute(attributeName);
         }
+
+        private static bool IsExcludedAttribute(string attributeName) =>
+            attributeName.EndsWith("ExcludeFromCodeCoverage", StringComparison.Ordinal) ||
+            attributeName.EndsWith("ExcludeFromCodeCoverageAttribute", StringComparison.Ordinal);
     }
 }

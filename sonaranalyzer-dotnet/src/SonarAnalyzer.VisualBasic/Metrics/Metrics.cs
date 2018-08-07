@@ -29,7 +29,8 @@ namespace SonarAnalyzer.Common.VisualBasic
 {
     public sealed class Metrics : MetricsBase
     {
-        public Metrics(SyntaxTree tree) : base(tree)
+        public Metrics(SyntaxTree tree)
+            : base(tree)
         {
             var root = tree.GetRoot();
             if (root.Language != LanguageNames.VisualBasic)
