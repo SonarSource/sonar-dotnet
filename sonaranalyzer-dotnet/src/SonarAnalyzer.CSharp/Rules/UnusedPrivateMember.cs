@@ -80,15 +80,24 @@ namespace SonarAnalyzer.Rules.CSharp
                                 return;
                             }
 
+                            var collector = new DeclarationCollector(GetSemanticModel);
+                            var declaredPrivateSymbols = collector.removableSymbols;
+                            var fieldLikeSymbols = collector.fieldLikeSymbols;
+
+                            foreach (var declaration in namedType.DeclaringSyntaxReferences)
+                            {
+                                collector.Visit(declaration.GetSyntax());
+                            }
+
                             var declarationCollector = new RemovableDeclarationCollector(namedType, cc.Compilation);
 
-                            var declaredPrivateSymbols = new HashSet<ISymbol>();
-                            var fieldLikeSymbols = new BidirectionalDictionary<ISymbol, SyntaxNode>();
+                            var declaredPrivateSymbols1 = new HashSet<ISymbol>();
+                            var fieldLikeSymbols1 = new BidirectionalDictionary<ISymbol, SyntaxNode>();
 
-                            CollectRemovableNamedTypes(declarationCollector, declaredPrivateSymbols);
-                            CollectRemovableFieldLikeDeclarations(declarationCollector, declaredPrivateSymbols, fieldLikeSymbols);
-                            CollectRemovableEventsAndProperties(declarationCollector, declaredPrivateSymbols);
-                            CollectRemovableMethods(declarationCollector, declaredPrivateSymbols);
+                            CollectRemovableNamedTypes(declarationCollector, declaredPrivateSymbols1);
+                            CollectRemovableFieldLikeDeclarations(declarationCollector, declaredPrivateSymbols1, fieldLikeSymbols1);
+                            CollectRemovableEventsAndProperties(declarationCollector, declaredPrivateSymbols1);
+                            CollectRemovableMethods(declarationCollector, declaredPrivateSymbols1);
 
                             if (!declaredPrivateSymbols.Any())
                             {
@@ -106,6 +115,9 @@ namespace SonarAnalyzer.Rules.CSharp
 
                             ReportIssues(cc, usedSymbols, declaredPrivateSymbols, emptyConstructors, fieldLikeSymbols);
                             ReportUnusedPropertyAccessors(cc, usedSymbols, declaredPrivateSymbols, propertyAccessorAccess);
+
+                            SemanticModel GetSemanticModel(SyntaxNode node) =>
+                                c.Compilation.GetSemanticModel(node.SyntaxTree);
                         },
                         SymbolKind.NamedType);
 
@@ -294,21 +306,30 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void CollectRemovableNamedTypes(RemovableDeclarationCollector declarationCollector,
             HashSet<ISymbol> declaredPrivateSymbols)
         {
-            var symbols = declarationCollector.TypeDeclarations
-                .SelectMany(container => container.SyntaxNode.DescendantNodes(RemovableDeclarationCollector.IsNodeContainerTypeDeclaration)
-                    .Where(node =>
-                        node.IsKind(SyntaxKind.ClassDeclaration) ||
-                        node.IsKind(SyntaxKind.InterfaceDeclaration) ||
-                        node.IsKind(SyntaxKind.StructDeclaration) ||
-                        node.IsKind(SyntaxKind.DelegateDeclaration))
-                    .Select(node =>
-                        new SyntaxNodeSemanticModelTuple<SyntaxNode>
-                        {
-                            SyntaxNode = node,
-                            SemanticModel = container.SemanticModel
-                        }))
+            var symbolsAll = declarationCollector.TypeDeclarations
+                .SelectMany(
+                    container =>
+                    {
+                        var children = container.SyntaxNode
+                        .DescendantNodes(RemovableDeclarationCollector.IsNodeContainerTypeDeclaration)
+                        .Where(node =>
+                            node.IsKind(SyntaxKind.ClassDeclaration) ||
+                            node.IsKind(SyntaxKind.InterfaceDeclaration) ||
+                            node.IsKind(SyntaxKind.StructDeclaration) ||
+                            node.IsKind(SyntaxKind.DelegateDeclaration))
+                        .Select(node =>
+                            new SyntaxNodeSemanticModelTuple<SyntaxNode>
+                            {
+                                SyntaxNode = node,
+                                SemanticModel = container.SemanticModel
+                            }).ToArray();
+                        return children;
+                    })
                     .Select(node => node.SemanticModel.GetDeclaredSymbol(node.SyntaxNode))
-                    .Where(symbol => RemovableDeclarationCollector.IsRemovable(symbol, Accessibility.Internal));
+                    .ToList();
+
+            var symbols = symbolsAll
+                .Where(symbol => RemovableDeclarationCollector.IsRemovable(symbol, Accessibility.Internal));
 
             declaredPrivateSymbols.UnionWith(symbols);
         }
