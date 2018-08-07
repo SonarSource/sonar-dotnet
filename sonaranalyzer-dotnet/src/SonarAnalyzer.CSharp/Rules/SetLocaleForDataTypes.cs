@@ -124,7 +124,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static SyntaxNode GetAssignmentTargetVariable(ObjectCreationExpressionSyntax objectCreation)
         {
-            var parent = objectCreation.GetSelfOrTopParenthesizedExpression().Parent;
+            var parent = objectCreation.GetFirstNonParenthesizedParent();
 
             if (parent is AssignmentExpressionSyntax assignment)
             {

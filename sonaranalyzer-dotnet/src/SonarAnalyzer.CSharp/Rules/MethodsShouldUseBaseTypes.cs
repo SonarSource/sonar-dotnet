@@ -121,13 +121,12 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private SyntaxNode GetNextUnparenthesizedParent(SyntaxNode node)
         {
-            if (!(node is ExpressionSyntax expression))
+            if (node is ExpressionSyntax expression)
             {
-                return node;
+                return expression.GetFirstNonParenthesizedParent();
             }
 
-            var topmostParent = CSharpSyntaxHelper.GetSelfOrTopParenthesizedExpression(expression);
-            return topmostParent.Parent;
+            return node;
         }
 
         private ITypeSymbol FindParameterUseAsType(IdentifierNameSyntax identifier, SemanticModel semanticModel)

@@ -427,12 +427,12 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                 return expressionService.GetOrDefault(elementAccessExpressionSyntax.Expression);
             }
 
-            if (syntaxNode.GetSelfOrTopParenthesizedExpression().Parent
+            if (syntaxNode.GetFirstNonParenthesizedParent()
                     is AssignmentExpressionSyntax assignmentExpressionSyntax &&
-                assignmentExpressionSyntax.GetSelfOrTopParenthesizedExpression().Parent
+                assignmentExpressionSyntax.GetFirstNonParenthesizedParent()
                     is InitializerExpressionSyntax initializerExpressionSyntax)
             {
-                return expressionService.GetOrDefault(initializerExpressionSyntax.GetSelfOrTopParenthesizedExpression().Parent);
+                return expressionService.GetOrDefault(initializerExpressionSyntax.GetFirstNonParenthesizedParent());
             }
 
             if (!nodeSymbol.IsStatic)
@@ -621,7 +621,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
 
         private IEnumerable<Instruction> ProcessElementAccess(ElementAccessExpressionSyntax elementAccessSyntax)
         {
-            if (elementAccessSyntax.GetSelfOrTopParenthesizedExpression().Parent is AssignmentExpressionSyntax assignmentSyntax &&
+            if (elementAccessSyntax.GetFirstNonParenthesizedParent() is AssignmentExpressionSyntax assignmentSyntax &&
                 assignmentSyntax.IsKind(SyntaxKind.SimpleAssignmentExpression) &&
                 assignmentSyntax.Left.RemoveParentheses() == elementAccessSyntax)
             {
@@ -707,7 +707,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
 
         private IEnumerable<Instruction> ProcessReadSyntaxNode(SyntaxNode syntaxNode)
         {
-            if (syntaxNode.GetSelfOrTopParenthesizedExpression().Parent is AssignmentExpressionSyntax assignmentSyntax &&
+            if (syntaxNode.GetFirstNonParenthesizedParent() is AssignmentExpressionSyntax assignmentSyntax &&
                 assignmentSyntax.IsKind(SyntaxKind.SimpleAssignmentExpression) &&
                 assignmentSyntax.Left.RemoveParentheses() == syntaxNode)
             {

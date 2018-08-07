@@ -89,6 +89,9 @@ namespace SonarAnalyzer.Helpers
         public static ExpressionSyntax GetSelfOrTopParenthesizedExpression(this ExpressionSyntax node) =>
              (ExpressionSyntax)GetSelfOrTopParenthesizedExpression((SyntaxNode)node);
 
+        public static SyntaxNode GetFirstNonParenthesizedParent(this SyntaxNode node) =>
+            node.GetSelfOrTopParenthesizedExpression().Parent;
+
         public static bool TryGetAttribute(this SyntaxList<AttributeListSyntax> attributeLists,
             KnownType attributeKnownType, SemanticModel semanticModel, out AttributeSyntax searchedAttribute)
         {

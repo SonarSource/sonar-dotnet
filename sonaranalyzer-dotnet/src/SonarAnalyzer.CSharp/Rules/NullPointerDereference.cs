@@ -274,7 +274,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             private static bool IsExceptionThrow(IdentifierNameSyntax identifier)
             {
-                return identifier.GetSelfOrTopParenthesizedExpression().Parent.IsKind(SyntaxKind.ThrowStatement);
+                return identifier.GetFirstNonParenthesizedParent().IsKind(SyntaxKind.ThrowStatement);
             }
 
             private static bool IsSuccessorForeachBranch(ProgramPoint programPoint)
