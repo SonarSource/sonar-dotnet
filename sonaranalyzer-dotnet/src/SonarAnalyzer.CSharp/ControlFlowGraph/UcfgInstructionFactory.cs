@@ -123,6 +123,9 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                     return BuildIdentityCall(castExpression, expressionService.CreateVariable(),
                         expressionService.GetOrDefault(castExpression.Expression));
 
+                case InitializerExpressionSyntax initializerExpression:
+                    return ProcessInitializerExpression(initializerExpression);
+
                 default:
                     return ProcessReadSyntaxNode(syntaxNode);
             }
@@ -300,13 +303,11 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             return new[] { newObjectInstruction };
         }
 
-        private IEnumerable<Instruction> BuildNewArrayInstance(ExpressionSyntax syntaxNode,
-            IArrayTypeSymbol arrayTypeSymbol, InitializerExpressionSyntax arrayInitializationNode)
+        private IEnumerable<Instruction> BuildNewArrayInstance(ExpressionSyntax syntaxNode, IArrayTypeSymbol arrayTypeSymbol)
         {
             var newInstructions = BuildNewInstance(syntaxNode, arrayTypeSymbol);
 
-            var callTarget = expressionService.GetOrDefault(syntaxNode);
-            return newInstructions.Concat(ProcessArrayInitializer(arrayInitializationNode, callTarget));
+            return newInstructions;
         }
 
         private IEnumerable<Instruction> BuildOperatorCall(SyntaxNode syntaxNode, Expression leftExpression,
@@ -479,7 +480,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             // A call that constructs an array should look like: var x = new string[42]
             // %0 := new string[]       // <-- created by this method
             // x = __id [ %0 ]          // <-- created by the method that handles the assignment
-            return BuildNewArrayInstance(arrayCreationExpression, arrayTypeSymbol, arrayCreationExpression.Initializer);
+            return BuildNewArrayInstance(arrayCreationExpression, arrayTypeSymbol);
         }
 
         private IEnumerable<Instruction> ProcessImplicitArrayCreation(ImplicitArrayCreationExpressionSyntax implicitArrayExpression)
@@ -492,29 +493,44 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                 return NoInstructions;
             }
 
-            return BuildNewArrayInstance(implicitArrayExpression, arrayType, implicitArrayExpression.Initializer);
+            return BuildNewArrayInstance(implicitArrayExpression, arrayType);
         }
 
-        private IEnumerable<Instruction> ProcessArrayInitializer(InitializerExpressionSyntax initializerExpression, Expression target)
+        private IEnumerable<Instruction> ProcessInitializerExpression(InitializerExpressionSyntax initializerExpression)
         {
-            if (initializerExpression == null)
+            if (!initializerExpression.IsKind(SyntaxKind.ArrayInitializerExpression))
             {
                 return NoInstructions;
             }
 
-            var newInstructions = new List<Instruction>();
-            foreach (ExpressionSyntax expNode in initializerExpression.Expressions)
-            {
-                // Some of the syntax nodes might already have been processed (e.g. the identifier names)
-                // Call CreateFrom to process any nodes that have not already been processed.
-                var argInstructions = CreateFrom(expNode);
-                newInstructions.AddRange(argInstructions);
-                var initializerArg = expressionService.GetOrDefault(expNode);
+            var instructions = new List<Instruction>();
 
-                var arraySetInstructions = BuildArraySetCall(expNode, target, initializerArg);
-                newInstructions.AddRange(arraySetInstructions);
+            // The target of this initialization should be the parent
+            var parent = initializerExpression.Parent;
+
+            // When parent is EqualsValueClause or InitializerExpression we need to go up one more level. See examples:
+            // var x = { 1, 2 }
+            // var y = new object[,] { { 1, 2 }, { 3, 4 } }
+            if (parent is EqualsValueClauseSyntax ||
+                parent is InitializerExpressionSyntax)
+            {
+                parent = parent.Parent;
             }
-            return newInstructions;
+
+            var destination = GetOrProcessExpression(parent, instructions);
+
+            foreach (var expression in initializerExpression.Expressions)
+            {
+                // When the initializer item is another initializer we already processed it so we should skip it now.
+                // var y = new object[,] { { 1, 2 }, { 3, 4 } }
+                if (!(expression is InitializerExpressionSyntax))
+                {
+                    var associatedExpression = GetOrProcessExpression(expression, instructions);
+                    instructions.AddRange(BuildArraySetCall(initializerExpression, destination, associatedExpression));
+                }
+            }
+
+            return instructions;
         }
 
         private IEnumerable<Instruction> ProcessAssignmentExpression(AssignmentExpressionSyntax assignmentExpression)
@@ -847,8 +863,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                 // returned is null because it isn't specified.
                 semanticModel.GetTypeInfo(initializerExpressionSyntax).ConvertedType is IArrayTypeSymbol arrayType)
             {
-                instructions.AddRange(BuildNewArrayInstance(variableDeclarator.Initializer.Value, arrayType,
-                       initializerExpressionSyntax));
+                instructions.AddRange(BuildNewArrayInstance(variableDeclarator.Initializer.Value, arrayType));
             }
 
             var initializerExpression = GetOrProcessExpression(variableDeclarator.Initializer.Value, instructions);
