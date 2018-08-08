@@ -92,7 +92,7 @@ namespace Namespace
             UcfgVerifier.VerifyInstructions(code, "Foo");
         }
 
-        [TestMethod]
+        [TestMethod] // https://jira.sonarsource.com/browse/SONARSEC-200
         public void Peach_Exception_InvalidTarget_Enum()
         {
             const string code = @"
@@ -129,6 +129,55 @@ namespace Microsoft.Msagl.Layout.Incremental
 ";
             UcfgVerifier.VerifyInstructions(code, "Constructor");
         }
+
+        [TestMethod] //https://jira.sonarsource.com/browse/SONARSEC-201
+        public void Peach_Exception_InvalidTarget_ArrayAccess()
+        {
+            const string code = @"
+// Adapted from https://github.com/Microsoft/automatic-graph-layout/blob/5679bd68b0080b80527212e4229e4dea7e290014/GraphLayout/MSAGL/Layout/Incremental/ProcrustesCircleConstraint.cs#L245
+namespace MSAGL
+{
+    public class Point
+    {
+        public Point(int X, int Y)
+        {
+        }
+        public int X;
+        public int Y;
     }
 
+    public class Dummy
+    {
+        private static Point[] Transpose(Point[] X)
+        {
+            return new Point[] { new Point(X[0].X, X[1].X), new Point(X[0].Y, X[1].Y) };
+        }
+    }
+}
+";
+            UcfgVerifier.VerifyInstructions(code, "Transpose");
+        }
+    }
+}
+
+
+namespace MSAGL
+{
+    public class Point
+    {
+        public Point(int X, int Y)
+        {
+        }
+        public int X { get; set; }
+        public int Y { get; set; }
+    }
+
+    public class ProcrustesCircleConstraint
+    {
+        private static Point[] Transpose(Point[] X)
+        {
+            return new Point[] { new Point(X[0].X, X[1].X), new Point(X[0].Y, X[1].Y) };
+        }
+
+    }
 }
