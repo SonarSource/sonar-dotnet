@@ -8116,7 +8116,7 @@
     <value>When a static constructor serves no other purpose that initializing static fields, it comes with an unnecessary performance cost because the compiler generates a check before each static method or instance constructor invocation.</value>
   </data>
   <data name="S3963_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S3963_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
