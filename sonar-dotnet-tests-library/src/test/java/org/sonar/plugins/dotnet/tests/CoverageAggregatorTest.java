@@ -29,6 +29,8 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
 import org.sonar.api.config.Configuration;
 import org.sonar.api.config.internal.MapSettings;
+import org.sonar.api.utils.log.LogTester;
+import org.sonar.api.utils.log.LoggerLevel;
 
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -40,6 +42,9 @@ public class CoverageAggregatorTest {
 
   @Rule
   public ExpectedException thrown = ExpectedException.none();
+
+  @Rule
+  public LogTester logTester = new LogTester();
 
   @Test
   public void hasCoverageProperty() {
@@ -213,4 +218,53 @@ public class CoverageAggregatorTest {
     }
   }
 
+  @Test
+  public void aggregate_ncover_report_does_not_exist() {
+    aggregate_report_does_not_exist("ncover", ".nccov");
+  }
+
+  @Test
+  public void aggregate_opencover_report_does_not_exist() {
+    aggregate_report_does_not_exist("opencover", ".xml");
+  }
+
+  @Test
+  public void aggregate_dotcover_report_does_not_exist() {
+    aggregate_report_does_not_exist("dotcover", ".html");
+  }
+
+  @Test
+  public void aggregate_visualstudio_report_does_not_exist() {
+    aggregate_report_does_not_exist("visualstudio", ".coveragexml");
+  }
+
+  private void aggregate_report_does_not_exist(String propertyName, String reportFileExtension) {
+    // Arrange
+    WildcardPatternFileProvider wildcardPatternFileProvider = mock(WildcardPatternFileProvider.class);
+
+    CoverageConfiguration coverageConf = new CoverageConfiguration("", "ncover", "opencover", "dotcover", "visualstudio");
+    MapSettings settings = new MapSettings();
+
+    String reportFile = "file-that-does-not-exist" + reportFileExtension;
+
+    settings.setProperty(propertyName, reportFile);
+    when(wildcardPatternFileProvider.listFiles(reportFile)).thenReturn(new HashSet<>());
+
+    NCover3ReportParser ncoverParser = mock(NCover3ReportParser.class);
+    OpenCoverReportParser openCoverParser = mock(OpenCoverReportParser.class);
+    DotCoverReportsAggregator dotCoverParser = mock(DotCoverReportsAggregator.class);
+    VisualStudioCoverageXmlReportParser visualStudioCoverageXmlReportParser = mock(VisualStudioCoverageXmlReportParser.class);
+
+    // Act
+    new CoverageAggregator(coverageConf, settings.asConfig(), mock(CoverageCache.class), ncoverParser, openCoverParser, dotCoverParser, visualStudioCoverageXmlReportParser)
+      .aggregate(wildcardPatternFileProvider, mock(Coverage.class));
+
+    // Assert
+    verify(ncoverParser, Mockito.never()).accept(Mockito.any(File.class), Mockito.any(Coverage.class));
+    verify(openCoverParser, Mockito.never()).accept(Mockito.any(File.class), Mockito.any(Coverage.class));
+    verify(dotCoverParser, Mockito.never()).accept(Mockito.any(File.class), Mockito.any(Coverage.class));
+    verify(visualStudioCoverageXmlReportParser, Mockito.never()).accept(Mockito.any(File.class), Mockito.any(Coverage.class));
+
+    assertThat(logTester.logs(LoggerLevel.WARN)).containsOnly("Could not find any coverage report file matching the pattern '" + reportFile + "'.");
+  }
 }

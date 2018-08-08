@@ -20,12 +20,17 @@
 package org.sonar.plugins.dotnet.tests;
 
 import java.io.File;
+import java.util.Set;
 import java.util.function.Predicate;
 import org.sonar.api.batch.ScannerSide;
 import org.sonar.api.config.Configuration;
+import org.sonar.api.utils.log.Logger;
+import org.sonar.api.utils.log.Loggers;
 
 @ScannerSide
 public class CoverageAggregator {
+
+  private static final Logger LOG = Loggers.get(CoverageAggregator.class);
 
   private final CoverageConfiguration coverageConf;
   private final Configuration configuration;
@@ -110,8 +115,13 @@ public class CoverageAggregator {
   private void aggregate(WildcardPatternFileProvider wildcardPatternFileProvider, String[] reportPaths, CoverageParser parser, Coverage aggregatedCoverage) {
     for (String reportPathPattern : reportPaths) {
       if (!reportPathPattern.isEmpty()) {
-        for (File reportFile : wildcardPatternFileProvider.listFiles(reportPathPattern)) {
-          aggregatedCoverage.mergeWith(coverageCache.readCoverageFromCacheOrParse(parser, reportFile));
+        Set<File> filesMatchingPattern = wildcardPatternFileProvider.listFiles(reportPathPattern);
+        if (filesMatchingPattern.isEmpty()) {
+          LOG.warn("Could not find any coverage report file matching the pattern '{}'.", reportPathPattern);
+        } else {
+          for (File reportFile : filesMatchingPattern) {
+            aggregatedCoverage.mergeWith(coverageCache.readCoverageFromCacheOrParse(parser, reportFile));
+          }
         }
       }
     }
