@@ -36,8 +36,12 @@ namespace Tests.Diagnostics
             var concatWithDelimiterUri3 = s1 + "/" + s2; // Noncompliant
 
             var x = new Uri("C:/test.txt"); // Noncompliant
-            new Uri(new Uri(), ("C:/test.txt")); // Noncompliant
+            new Uri(new Uri("../stuff"), ("C:/test.txt")); // Noncompliant
             File.OpenRead(@"\\drive\foo.csv"); // Noncompliant
+
+            var unixChemin = "/my/other/folder"; // FN
+            var webChemin = "http://www.mywebsite.com"; // FN
+            var windowsChemin = "c:\\blah\\blah\\blah.txt"; // FN
         }
 
         void ValidCases(string s)

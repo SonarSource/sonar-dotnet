@@ -29,10 +29,41 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void UriShouldNotBeHardcoded()
+        public void UriShouldNotBeHardcoded_CSharp_General()
         {
             Verifier.VerifyAnalyzer(@"TestCases\UriShouldNotBeHardcoded.cs",
                 new UriShouldNotBeHardcoded());
+        }
+
+        [DataTestMethod]
+        [TestCategory("Rule")]
+        [DataRow("3.0.20105.1")]
+        [DataRow(AssemblyReference.NuGetInfo.LatestVersion)]
+        public void UriShouldNotBeHardcoded_CSharp_VirtualPath_AspNet(string aspNetMvcVersion)
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\UriShouldNotBeHardcoded.AspNet.cs",
+                new UriShouldNotBeHardcoded(),
+                additionalReferences: new[] {
+                    AssemblyReference.FromFramework("System.Web.dll"),
+                    AssemblyReference.FromNuGet("System.Web.Mvc.dll", "Microsoft.AspNet.Mvc", aspNetMvcVersion)});
+        }
+
+        [DataTestMethod]
+        [TestCategory("Rule")]
+        [DataRow("2.0.4", "2.0.3")]
+        [DataRow(AssemblyReference.NuGetInfo.LatestVersion, AssemblyReference.NuGetInfo.LatestVersion)]
+        public void UriShouldNotBeHardcoded_CSharp_VirtualPath_AspNetCore(string aspNetCoreMvcVersion, string aspNetCoreRoutingVersion)
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\UriShouldNotBeHardcoded.AspNetCore.cs",
+                new UriShouldNotBeHardcoded(),
+                additionalReferences: new[] {
+                    // for VirtualFileResult
+                    AssemblyReference.FromNuGet("Microsoft.AspNetCore.Mvc.Core.dll", "Microsoft.AspNetCore.Mvc.Core", aspNetCoreMvcVersion),
+                    // for Controller
+                    AssemblyReference.FromNuGet("Microsoft.AspNetCore.Mvc.ViewFeatures.dll", "Microsoft.AspNetCore.Mvc.ViewFeatures", aspNetCoreMvcVersion),
+                    // for IRouter and VirtualPathData
+                    AssemblyReference.FromNuGet("Microsoft.AspNetCore.Routing.Abstractions.dll", "Microsoft.AspNetCore.Routing.Abstractions", aspNetCoreRoutingVersion),
+                });
         }
 
         [TestMethod]
@@ -44,4 +75,3 @@ namespace SonarAnalyzer.UnitTest.Rules
         }
     }
 }
-
