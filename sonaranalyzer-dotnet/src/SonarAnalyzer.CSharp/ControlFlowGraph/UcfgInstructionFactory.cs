@@ -123,6 +123,9 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                     return BuildIdentityCall(castExpression, expressionService.CreateVariable(),
                         expressionService.GetOrDefault(castExpression.Expression));
 
+                case InitializerExpressionSyntax initializerExpression:
+                    return ProcessInitializerExpression(initializerExpression);
+
                 default:
                     return ProcessReadSyntaxNode(syntaxNode);
             }
@@ -305,8 +308,9 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
         {
             var newInstructions = BuildNewInstance(syntaxNode, arrayTypeSymbol);
 
-            var callTarget = expressionService.GetOrDefault(syntaxNode);
-            return newInstructions.Concat(ProcessArrayInitializer(arrayInitializationNode, callTarget));
+            return newInstructions;
+            //var callTarget = expressionService.GetOrDefault(syntaxNode);
+            //return newInstructions.Concat(ProcessArrayInitializer(arrayInitializationNode, callTarget));
         }
 
         private IEnumerable<Instruction> BuildOperatorCall(SyntaxNode syntaxNode, Expression leftExpression,
@@ -495,26 +499,35 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             return BuildNewArrayInstance(implicitArrayExpression, arrayType, implicitArrayExpression.Initializer);
         }
 
-        private IEnumerable<Instruction> ProcessArrayInitializer(InitializerExpressionSyntax initializerExpression, Expression target)
+        private IEnumerable<Instruction> ProcessInitializerExpression(InitializerExpressionSyntax initializerExpression)
         {
-            if (initializerExpression == null)
+            if (initializerExpression == null ||
+                !initializerExpression.IsKind(SyntaxKind.ArrayInitializerExpression))
             {
                 return NoInstructions;
             }
 
-            var newInstructions = new List<Instruction>();
-            foreach (ExpressionSyntax expNode in initializerExpression.Expressions)
-            {
-                // Some of the syntax nodes might already have been processed (e.g. the identifier names)
-                // Call CreateFrom to process any nodes that have not already been processed.
-                var argInstructions = CreateFrom(expNode);
-                newInstructions.AddRange(argInstructions);
-                var initializerArg = expressionService.GetOrDefault(expNode);
+            var instructions = new List<Instruction>();
 
-                var arraySetInstructions = BuildArraySetCall(expNode, target, initializerArg);
-                newInstructions.AddRange(arraySetInstructions);
+            var parent = initializerExpression.Parent;
+            if (parent is EqualsValueClauseSyntax ||
+                parent is InitializerExpressionSyntax)
+            {
+                parent = parent.Parent;
             }
-            return newInstructions;
+
+            var destination = GetOrProcessExpression(parent, instructions);
+
+            foreach (var expression in initializerExpression.Expressions)
+            {
+                if (!(expression is InitializerExpressionSyntax))
+                {
+                    var associatedExpression = GetOrProcessExpression(expression, instructions);
+                    instructions.AddRange(BuildArraySetCall(initializerExpression, destination, associatedExpression));
+                }
+            }
+
+            return instructions;
         }
 
         private IEnumerable<Instruction> ProcessAssignmentExpression(AssignmentExpressionSyntax assignmentExpression)
