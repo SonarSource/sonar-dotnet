@@ -66,15 +66,15 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             }
             catch (System.Exception e)
             {
-                var message = "Exception during creation of UCFG: " +
-                    $"Method name: {methodSymbol?.Name ?? "{unknown}"}  " +
-                    $"Syntax node kind: {syntaxNode.Kind()} " +
-                    $"File: {syntaxNode.GetLocation()?.GetLineSpan().Path ?? "{unknown}"}  " +
-                    $"Line: {syntaxNode.GetLocation()?.GetLineSpan().StartLinePosition.ToString() ?? "{unknown}"}  ##  " +
-                    // Note: only the first line of the message appears in the Jenkins log so make sure
-                    // there are no line breaks.
-                    e.ToString().Replace("\r\n", " ## ");
+                var sb = new System.Text.StringBuilder();
+                sb.AppendLine($"Error processing method: {methodSymbol?.Name ?? "{unknown}"}");
+                sb.AppendLine($"Method file: {syntaxNode.GetLocation()?.GetLineSpan().Path ?? "{unknown}"}");
+                sb.AppendLine($"Method line: {syntaxNode.GetLocation()?.GetLineSpan().StartLinePosition.ToString() ?? "{unknown}"}");
+                sb.AppendLine($"Inner exception: {e.ToString()}");
 
+                // Note: only the first line of the message appears in the Jenkins log so make sure
+                // there are no line breaks.
+                var message = sb.ToString().Replace("\r\n", " ## ");
                 throw new UcfgException(message);
             }
         }

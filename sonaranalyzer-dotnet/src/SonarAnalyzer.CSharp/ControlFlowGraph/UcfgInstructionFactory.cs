@@ -54,6 +54,28 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
 
         public IEnumerable<Instruction> CreateFrom(SyntaxNode syntaxNode)
         {
+            try
+            {
+                return UnsafeCreateFrom(syntaxNode);
+            }
+            catch (System.Exception e)
+            {
+                var sb = new System.Text.StringBuilder();
+
+                sb.AppendLine("Error processing node in CreateFrom:");
+                sb.AppendLine($"Syntax node kind: {syntaxNode.Kind()}");
+                sb.AppendLine($"Node file: {syntaxNode.GetLocation()?.GetLineSpan().Path ?? "{unknown}"}");
+                sb.AppendLine($"Node start: {syntaxNode.GetLocation()?.GetLineSpan().StartLinePosition.ToString() ?? "{unknown}"}");
+                sb.AppendLine($"Node end: {syntaxNode.GetLocation()?.GetLineSpan().EndLinePosition.ToString() ?? "{unknown}"}");
+                sb.AppendLine($"Value: {syntaxNode.GetText()}");
+                sb.AppendLine($"Inner exception: {e.ToString()}");
+
+                throw new UcfgException(sb.ToString());
+            }
+        }
+
+        internal IEnumerable<Instruction> UnsafeCreateFrom(SyntaxNode syntaxNode)
+        {
             // We might need to process some nodes in a different order from the block builder
             // supplies them e.g. an array creation can have an initializer that creates a new
             // object. In that case, we need to process the new object creation as part of the
