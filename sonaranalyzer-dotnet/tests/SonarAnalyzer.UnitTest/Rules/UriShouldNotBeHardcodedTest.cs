@@ -27,17 +27,36 @@ namespace SonarAnalyzer.UnitTest.Rules
     [TestClass]
     public class UriShouldNotBeHardcodedTest
     {
+        [TestMethod]
         [TestCategory("Rule")]
-        [DataTestMethod]
-        [DataRow("3.0.20105.1", "2.0.4", "2.0.3")]
-        [DataRow(AssemblyReference.NuGetInfo.LatestVersion, AssemblyReference.NuGetInfo.LatestVersion, AssemblyReference.NuGetInfo.LatestVersion)]
-        public void UriShouldNotBeHardcoded(string aspNetMvcVersion, string aspNetCoreMvcVersion, string aspNetCoreRoutingVersion)
+        public void UriShouldNotBeHardcoded_CSharp_General()
         {
             Verifier.VerifyAnalyzer(@"TestCases\UriShouldNotBeHardcoded.cs",
+                new UriShouldNotBeHardcoded());
+        }
+
+        [DataTestMethod]
+        [TestCategory("Rule")]
+        [DataRow("3.0.20105.1")]
+        [DataRow(AssemblyReference.NuGetInfo.LatestVersion)]
+        public void UriShouldNotBeHardcoded_CSharp_VirtualPath_AspNet(string aspNetMvcVersion)
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\UriShouldNotBeHardcoded.AspNet.cs",
                 new UriShouldNotBeHardcoded(),
-                additionalReferences: new AssemblyReference[] {
+                additionalReferences: new[] {
                     AssemblyReference.FromFramework("System.Web.dll"),
-                    AssemblyReference.FromNuGet("System.Web.Mvc.dll", "Microsoft.AspNet.Mvc", aspNetMvcVersion),
+                    AssemblyReference.FromNuGet("System.Web.Mvc.dll", "Microsoft.AspNet.Mvc", aspNetMvcVersion)});
+        }
+
+        [DataTestMethod]
+        [TestCategory("Rule")]
+        [DataRow("2.0.4", "2.0.3")]
+        [DataRow(AssemblyReference.NuGetInfo.LatestVersion, AssemblyReference.NuGetInfo.LatestVersion)]
+        public void UriShouldNotBeHardcoded_CSharp_VirtualPath_AspNetCore(string aspNetCoreMvcVersion, string aspNetCoreRoutingVersion)
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\UriShouldNotBeHardcoded.AspNetCore.cs",
+                new UriShouldNotBeHardcoded(),
+                additionalReferences: new[] {
                     // for VirtualFileResult
                     AssemblyReference.FromNuGet("Microsoft.AspNetCore.Mvc.Core.dll", "Microsoft.AspNetCore.Mvc.Core", aspNetCoreMvcVersion),
                     // for Controller
@@ -56,4 +75,3 @@ namespace SonarAnalyzer.UnitTest.Rules
         }
     }
 }
-
