@@ -91,5 +91,44 @@ namespace Namespace
 }";
             UcfgVerifier.VerifyInstructions(code, "Foo");
         }
+
+        [TestMethod]
+        public void Peach_Exception_InvalidTarget_Enum()
+        {
+            const string code = @"
+// Adapted from https://github.com/Microsoft/automatic-graph-layout/blob/ba8a85105b8a420762b53fb0c8513b7f10fb30d9/GraphLayout/MSAGL/Layout/Incremental/Multipole/KDTree.cs
+namespace Microsoft.Msagl.Layout.Incremental
+{
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Diagnostics;
+ 
+    public class KDTree
+    {
+        Particle[] particles;
+
+        private Particle[] particlesBy(Particle.Dim d)
+        {
+            return null;
+        }
+
+        public void Constructor(Particle[] particles, int bucketSize)
+        {
+            this.particles = particles;
+            Particle[][] ps = new Particle[][] {
+                particlesBy(Particle.Dim.Horizontal),
+                particlesBy(Particle.Dim.Vertical)};
+        }
     }
+
+    public class Particle
+    {
+        internal enum Dim { Horizontal = 0, Vertical = 1 };
+    }
+}
+";
+            UcfgVerifier.VerifyInstructions(code, "Constructor");
+        }
+    }
+
 }
