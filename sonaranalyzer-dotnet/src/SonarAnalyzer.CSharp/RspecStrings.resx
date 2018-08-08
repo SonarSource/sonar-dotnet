@@ -4192,7 +4192,7 @@
     <value>Locking on the current object instance (i.e. this), or on a Type object increases the chance of deadlocks because any other thread could acquire (or attempt to acquire) the same lock for another unrelated purpose. </value>
   </data>
   <data name="S2551_IsActivatedByDefault" xml:space="preserve">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="S2551_Remediation" xml:space="preserve">
     <value>Constant/Issue</value>
