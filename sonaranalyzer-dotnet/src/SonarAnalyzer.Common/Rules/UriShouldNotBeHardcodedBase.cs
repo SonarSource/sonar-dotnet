@@ -62,11 +62,6 @@ namespace SonarAnalyzer.Rules
                 "STREAM"
             };
 
-        internal static readonly ISet<KnownType> AspNetTypes = new HashSet<KnownType>
-        {
-            KnownType.System_Web_VirtualPathUtility,
-        };
-
         internal static readonly ISet<MethodSignature> MethodsWithVirtualPaths = new HashSet<MethodSignature>
         {
             new MethodSignature(KnownType.Microsoft_AspNetCore_Mvc_VirtualFileResult, ".ctor"),
@@ -189,7 +184,7 @@ namespace SonarAnalyzer.Rules
             return baseType != null &&
                 expression is TLiteralExpressionSyntax &&
                 VirtualPathRegex.IsMatch(GetLiteralText((TLiteralExpressionSyntax)expression)) &&
-                (MethodsWithVirtualPaths.Any(m => m.Is(baseType, methodSymbol.Name)) || baseType.IsAny(AspNetTypes));
+                (MethodsWithVirtualPaths.Any(m => m.Is(baseType, methodSymbol.Name)) || baseType.Is(KnownType.System_Web_VirtualPathUtility));
         }
     }
 }
