@@ -34,7 +34,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
 
         private int numberedVariableCounter;
 
-        public Expression This { get; } = new Expression { This = new This() };
+        public static Expression This { get; } = new Expression { This = new This() };
 
         public void Associate(SyntaxNode syntaxNode, Expression expression) =>
             cache[syntaxNode.RemoveParentheses()] = expression;
@@ -76,7 +76,9 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                     break;
 
                 default:
-                    throw new UcfgException("Invalid target");
+                    //throw new UcfgException("Invalid target"); // TODO: These cases should be fixed
+                    expression.FieldAccess.This = This.This;
+                    break;
             }
 
             return expression;

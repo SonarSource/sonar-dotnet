@@ -81,7 +81,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                 // Association
                 // ========================================================================
                 case InstanceExpressionSyntax instanceExpression:
-                    expressionService.Associate(instanceExpression, expressionService.This);
+                    expressionService.Associate(instanceExpression, UcfgExpressionService.This);
                     return NoInstructions;
 
                 case MemberBindingExpressionSyntax memberBinding:
@@ -454,7 +454,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
 
             if (!nodeSymbol.IsStatic)
             {
-                return expressionService.This;
+                return UcfgExpressionService.This;
             }
 
             if (nodeSymbol is INamedTypeSymbol namedTypeSymbol)
@@ -637,7 +637,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
 
             var expressions = GetInvocationExpressions(thisOrBaseCtorMethodSymbol.Parameters, constructorInitializer.ArgumentList,
                 instructions);
-            instructions.AddRange(BuildFunctionCall(constructorInitializer, thisOrBaseCtorMethodSymbol, expressionService.This,
+            instructions.AddRange(BuildFunctionCall(constructorInitializer, thisOrBaseCtorMethodSymbol, UcfgExpressionService.This,
                 expressions));
 
             return instructions;
