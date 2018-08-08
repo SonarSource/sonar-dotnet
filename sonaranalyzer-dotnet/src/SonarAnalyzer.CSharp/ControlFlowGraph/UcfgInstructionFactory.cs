@@ -149,8 +149,10 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                 .Concat(BuildAnnotationCall(attributeSyntax, targetOfAttribute, expressionService.GetOrDefault(attributeSyntax)));
         }
 
-        private void ApplyAsTarget(Expression expression, Instruction instruction)
+        private IEnumerable<Instruction> ApplyAsTarget(Expression expression, Instruction instruction)
         {
+            var instructionsToReturn = new[] { instruction };
+
             switch (instruction.InstrCase)
             {
                 case Instruction.InstrOneofCase.Assigncall:
@@ -158,35 +160,33 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                     {
                         case Expression.ExprOneofCase.Var:
                             instruction.Assigncall.Variable = expression.Var;
-                            break;
+                            return instructionsToReturn;
 
                         case Expression.ExprOneofCase.FieldAccess:
                             instruction.Assigncall.FieldAccess = expression.FieldAccess;
-                            break;
+                            return instructionsToReturn;
 
                         default:
-                            throw new UcfgException("Unexpected type of target for the instruction.");
+                            return NoInstructions;
                     }
-                    break;
 
                 case Instruction.InstrOneofCase.NewObject:
                     switch (expression.ExprCase)
                     {
                         case Expression.ExprOneofCase.Var:
                             instruction.NewObject.Variable = expression.Var;
-                            break;
+                            return instructionsToReturn;
 
                         case Expression.ExprOneofCase.FieldAccess:
                             instruction.NewObject.FieldAccess = expression.FieldAccess;
-                            break;
+                            return instructionsToReturn;
 
                         default:
-                            throw new UcfgException("Unexpected type of target for the instruction.");
+                            return NoInstructions;
                     }
-                    break;
 
                 default:
-                    throw new UcfgException("Unexpected instruction type.");
+                    return NoInstructions;
             }
         }
 
@@ -241,6 +241,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
         private IEnumerable<Instruction> BuildFunctionCall(SyntaxNode syntaxNode, string signature,
             Expression destination, Protobuf.Ucfg.Location location, params Expression[] expressionList)
         {
+            expressionService.Associate(syntaxNode, destination);
             var functionCallInstruction = new Instruction
             {
                 Assigncall = new AssignCall
@@ -250,11 +251,8 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                 }
             };
             functionCallInstruction.Assigncall.Args.AddRange(expressionList);
-            ApplyAsTarget(destination, functionCallInstruction);
 
-            expressionService.Associate(syntaxNode, destination);
-
-            return new[] { functionCallInstruction };
+            return ApplyAsTarget(destination, functionCallInstruction);
         }
 
         private IEnumerable<Instruction> BuildFunctionCall(SyntaxNode syntaxNode, string signature,
@@ -287,6 +285,9 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                 return NoInstructions;
             }
 
+            var callTarget = expressionService.CreateVariable();
+            expressionService.Associate(expressionSyntax, callTarget);
+
             var newObjectInstruction = new Instruction
             {
                 NewObject = new NewObject
@@ -296,11 +297,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                 }
             };
 
-            var callTarget = expressionService.CreateVariable();
-            expressionService.Associate(expressionSyntax, callTarget);
-            ApplyAsTarget(callTarget, newObjectInstruction);
-
-            return new[] { newObjectInstruction };
+            return ApplyAsTarget(callTarget, newObjectInstruction);
         }
 
         private IEnumerable<Instruction> BuildNewArrayInstance(ExpressionSyntax syntaxNode, IArrayTypeSymbol arrayTypeSymbol)
