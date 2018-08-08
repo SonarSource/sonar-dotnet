@@ -46,9 +46,16 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
-                    var fieldDeclaration = (FieldDeclarationSyntax) c.Node;
-                    if (!fieldDeclaration.Modifiers.Any(SyntaxKind.StaticKeyword) &&
-                        fieldDeclaration.AttributeLists.TryGetAttribute(KnownType.System_ThreadStaticAttribute, c.SemanticModel, out var threadStaticAttribute))
+                    var fieldDeclaration = (FieldDeclarationSyntax)c.Node;
+                    if (fieldDeclaration.Modifiers.Any(SyntaxKind.StaticKeyword))
+                    {
+                        return;
+                    }
+
+                    var threadStaticAttribute = fieldDeclaration.AttributeLists
+                        .GetAttributes(KnownType.System_ThreadStaticAttribute, c.SemanticModel)
+                        .FirstOrDefault();
+                    if (threadStaticAttribute != null)
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, threadStaticAttribute.Name.GetLocation()));
                     }

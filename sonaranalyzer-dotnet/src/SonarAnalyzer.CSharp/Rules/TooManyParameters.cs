@@ -20,6 +20,7 @@
 
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -92,7 +93,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             if (declaredSymbol.IsExtern &&
                 declaredSymbol.IsStatic &&
-                declaredSymbol.HasAttribute(KnownType.System_Runtime_InteropServices_DllImportAttribute))
+                declaredSymbol.GetAttributes(KnownType.System_Runtime_InteropServices_DllImportAttribute).Any())
             {
                 // P/Invoke method is defined externally.
                 // Do not raise

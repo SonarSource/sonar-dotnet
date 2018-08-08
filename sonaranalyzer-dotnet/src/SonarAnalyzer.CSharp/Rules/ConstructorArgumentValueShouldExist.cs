@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2018 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -67,11 +67,9 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.PropertyDeclaration);
         }
 
-        private AttributeData GetConstructorArgumentAttributeOrDefault(IPropertySymbol propertySymbol)
+        private static AttributeData GetConstructorArgumentAttributeOrDefault(IPropertySymbol propertySymbol)
         {
-            var attributes = propertySymbol.GetAttributes()
-                .Where(attribute =>
-                    attribute.AttributeClass.Is(KnownType.System_Windows_Markup_ConstructorArgumentAttribute))
+            var attributes = propertySymbol.GetAttributes(KnownType.System_Windows_Markup_ConstructorArgumentAttribute)
                 .ToList();
 
             return attributes.Count == 1

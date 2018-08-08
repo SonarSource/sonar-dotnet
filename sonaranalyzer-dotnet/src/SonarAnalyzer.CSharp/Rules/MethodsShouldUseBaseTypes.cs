@@ -45,16 +45,11 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
-                {
-                    FindViolations(c)
-                        .ToList()
-                        .ForEach(d => c.ReportDiagnosticWhenActive(d));
-                },
+                c => FindViolations(c).ForEach(d => c.ReportDiagnosticWhenActive(d)),
                 SyntaxKind.MethodDeclaration);
         }
 
-        public IEnumerable<Diagnostic> FindViolations(SyntaxNodeAnalysisContext context)
+        private List<Diagnostic> FindViolations(SyntaxNodeAnalysisContext context)
         {
             if (!(context.SemanticModel.GetDeclaredSymbol(context.Node) is IMethodSymbol methodSymbol) ||
                 methodSymbol.Parameters.Length == 0 ||
@@ -63,7 +58,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 methodSymbol.GetInterfaceMember() != null ||
                 methodSymbol.IsEventHandler())
             {
-                return Enumerable.Empty<Diagnostic>();
+                return Enumerable.Empty<Diagnostic>().ToList();
             }
 
             var methodAccessibility = methodSymbol.GetEffectiveAccessibility();
@@ -104,10 +99,10 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
             }
 
-            return parametersToCheck
-                .Values
+            return parametersToCheck.Values
                 .Select(p => p.GetRuleViolation())
-                .WhereNotNull();
+                .WhereNotNull()
+                .ToList();
         }
 
         private static bool IsTrackedParameter(IParameterSymbol parameterSymbol)
@@ -121,13 +116,12 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private SyntaxNode GetNextUnparenthesizedParent(SyntaxNode node)
         {
-            if (!(node is ExpressionSyntax expression))
+            if (node is ExpressionSyntax expression)
             {
-                return node;
+                return expression.GetFirstNonParenthesizedParent();
             }
 
-            var topmostParent = CSharpSyntaxHelper.GetSelfOrTopParenthesizedExpression(expression);
-            return topmostParent.Parent;
+            return node;
         }
 
         private ITypeSymbol FindParameterUseAsType(IdentifierNameSyntax identifier, SemanticModel semanticModel)
@@ -144,29 +138,23 @@ namespace SonarAnalyzer.Rules.CSharp
                         return null;
                     }
 
-                    var accessedMember = semanticModel.GetSymbolInfo(name).Symbol;
-                    return HandlePropertyOrField(identifier, accessedMember);
+                    return HandlePropertyOrField(identifier, semanticModel.GetSymbolInfo(name).Symbol);
                 }
 
-                if (conditionalAccess.WhenNotNull is InvocationExpressionSyntax invocationExpression)
+                if (conditionalAccess.WhenNotNull is InvocationExpressionSyntax invocationExpression &&
+                    invocationExpression.Expression is MemberBindingExpressionSyntax memberBinding)
                 {
-                    if (invocationExpression.Expression is MemberBindingExpressionSyntax memberBinding)
-                    {
-                        var invocationSymbol = semanticModel.GetSymbolInfo(memberBinding).Symbol;
-                        return HandleInvocation(identifier, invocationSymbol, semanticModel);
-                    }
+                    return HandleInvocation(identifier, semanticModel.GetSymbolInfo(memberBinding).Symbol, semanticModel);
                 }
             }
             else if (identifierParent is MemberAccessExpressionSyntax)
             {
                 if (GetNextUnparenthesizedParent(identifierParent) is InvocationExpressionSyntax invocationExpression)
                 {
-                    var invocationSymbol = semanticModel.GetSymbolInfo(invocationExpression).Symbol;
-                    return HandleInvocation(identifier, invocationSymbol, semanticModel);
+                    return HandleInvocation(identifier, semanticModel.GetSymbolInfo(invocationExpression).Symbol, semanticModel);
                 }
 
-                var accessedMember = semanticModel.GetSymbolInfo(identifierParent).Symbol;
-                return HandlePropertyOrField(identifier, accessedMember);
+                return HandlePropertyOrField(identifier, semanticModel.GetSymbolInfo(identifierParent).Symbol);
             }
             else if (identifierParent is ArgumentSyntax)
             {
@@ -174,8 +162,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
             else if (identifierParent is ElementAccessExpressionSyntax)
             {
-                var accessedMember = semanticModel.GetSymbolInfo(identifierParent).Symbol;
-                return HandlePropertyOrField(identifier, accessedMember);
+                return HandlePropertyOrField(identifier, semanticModel.GetSymbolInfo(identifierParent).Symbol);
             }
             else
             {
@@ -187,7 +174,6 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private ITypeSymbol HandlePropertyOrField(IdentifierNameSyntax identifier, ISymbol symbol)
         {
-
             if (!(symbol is IPropertySymbol propertySymbol))
             {
                 return FindOriginatingSymbol(symbol);
@@ -227,10 +213,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 return originatingInterface;
             }
 
-            var overridenSymbol = SymbolHelper.GetOverriddenMember(accessedMember);
-            return overridenSymbol != null
-                ? overridenSymbol.ContainingType
-                : accessedMember.ContainingType;
+            return SymbolHelper.GetOverriddenMember(accessedMember)?.ContainingType
+                ?? accessedMember.ContainingType;
         }
 
         private class ParameterData
@@ -324,43 +308,43 @@ namespace SonarAnalyzer.Rules.CSharp
                 mostGeneralType = FindMostGeneralAccessibleClassOrSelf(mostGeneralType);
                 mostGeneralType = FindMostGeneralAccessibleInterfaceOrSelf(mostGeneralType);
                 return mostGeneralType;
-            }
 
-            private static bool HasMultipleUseOfIEnumerable(KeyValuePair<ITypeSymbol, int> kvp)
-            {
-                return kvp.Value > 1 &&
-                    (kvp.Key.OriginalDefinition.Is(KnownType.System_Collections_Generic_IEnumerable_T) ||
-                     kvp.Key.Is(KnownType.System_Collections_IEnumerable));
-            }
-
-            private ITypeSymbol FindMostGeneralAccessibleClassOrSelf(ITypeSymbol mostGeneralType)
-            {
-                ITypeSymbol currentSymbol = mostGeneralType.BaseType;
-
-                while (currentSymbol != null)
+                bool HasMultipleUseOfIEnumerable(KeyValuePair<ITypeSymbol, int> kvp)
                 {
-                    if (DerivesOrImplementsAll(currentSymbol))
-                    {
-                        mostGeneralType = currentSymbol;
-                    }
-
-                    currentSymbol = currentSymbol?.BaseType;
+                    return kvp.Value > 1 &&
+                        (kvp.Key.OriginalDefinition.Is(KnownType.System_Collections_Generic_IEnumerable_T) ||
+                         kvp.Key.Is(KnownType.System_Collections_IEnumerable));
                 }
 
-                return mostGeneralType;
-            }
-
-            private ITypeSymbol FindMostGeneralAccessibleInterfaceOrSelf(ITypeSymbol mostGeneralType)
-            {
-                foreach (var @interface in mostGeneralType.Interfaces)
+                ITypeSymbol FindMostGeneralAccessibleClassOrSelf(ITypeSymbol typeSymbol)
                 {
-                    if (DerivesOrImplementsAll(@interface))
+                    var currentSymbol = typeSymbol.BaseType;
+
+                    while (currentSymbol != null)
                     {
-                        return FindMostGeneralAccessibleInterfaceOrSelf(@interface);
+                        if (DerivesOrImplementsAll(currentSymbol))
+                        {
+                            typeSymbol = currentSymbol;
+                        }
+
+                        currentSymbol = currentSymbol?.BaseType;
                     }
+
+                    return typeSymbol;
                 }
 
-                return mostGeneralType;
+                ITypeSymbol FindMostGeneralAccessibleInterfaceOrSelf(ITypeSymbol typeSymbol)
+                {
+                    foreach (var @interface in typeSymbol.Interfaces)
+                    {
+                        if (DerivesOrImplementsAll(@interface))
+                        {
+                            return FindMostGeneralAccessibleInterfaceOrSelf(@interface);
+                        }
+                    }
+
+                    return typeSymbol;
+                }
             }
 
             private bool DerivesOrImplementsAll(ITypeSymbol type)
@@ -368,29 +352,29 @@ namespace SonarAnalyzer.Rules.CSharp
                 return type != null &&
                     usedAs.Keys.All(type.DerivesOrImplements) &&
                     IsConsistentAccessibility(type.GetEffectiveAccessibility());
-            }
 
-            private bool IsConsistentAccessibility(Accessibility baseTypeAccessibility)
-            {
-                switch (methodAccessibility)
+                bool IsConsistentAccessibility(Accessibility baseTypeAccessibility)
                 {
-                    case Accessibility.NotApplicable:
-                        return false;
+                    switch (methodAccessibility)
+                    {
+                        case Accessibility.NotApplicable:
+                            return false;
 
-                    case Accessibility.Private:
-                        return true;
+                        case Accessibility.Private:
+                            return true;
 
-                    case Accessibility.Protected:
-                    case Accessibility.Internal:
-                        return baseTypeAccessibility == Accessibility.Public ||
-                            baseTypeAccessibility == methodAccessibility;
+                        case Accessibility.Protected:
+                        case Accessibility.Internal:
+                            return baseTypeAccessibility == Accessibility.Public ||
+                                baseTypeAccessibility == methodAccessibility;
 
-                    case Accessibility.ProtectedAndInternal:
-                    case Accessibility.Public:
-                        return baseTypeAccessibility == Accessibility.Public;
+                        case Accessibility.ProtectedAndInternal:
+                        case Accessibility.Public:
+                            return baseTypeAccessibility == Accessibility.Public;
 
-                    default:
-                        return false;
+                        default:
+                            return false;
+                    }
                 }
             }
         }

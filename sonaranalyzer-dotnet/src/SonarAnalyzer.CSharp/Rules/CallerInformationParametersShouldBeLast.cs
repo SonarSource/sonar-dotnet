@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
@@ -63,13 +62,13 @@ namespace SonarAnalyzer.Rules.CSharp
                     ParameterSyntax noCallerInfoParameter = null;
                     foreach (var parameter in methodDeclaration.ParameterList.Parameters.Reverse())
                     {
-                        if (HasCallerInfoAttribute(parameter, c.SemanticModel))
+                        if (parameter.AttributeLists.GetAttributes(KnownType.CallerInfoAttributes, c.SemanticModel).Any())
                         {
                             if (noCallerInfoParameter != null &&
                                 HasIdentifier(parameter))
                             {
-                                c.ReportDiagnosticWhenActive(
-                                    Diagnostic.Create(rule, parameter.GetLocation(), parameter.Identifier.Text));
+                                c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, parameter.GetLocation(),
+                                    parameter.Identifier.Text));
                             }
                         }
                         else
@@ -84,14 +83,5 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool HasIdentifier(ParameterSyntax parameter) =>
             !string.IsNullOrEmpty(parameter.Identifier.Text);
-
-        private static bool HasCallerInfoAttribute(ParameterSyntax parameter, SemanticModel semanticModel) =>
-            parameter.AttributeLists
-                .SelectMany(l => l.Attributes)
-                .Any(a => IsCallerInfoAttribute(a, semanticModel));
-
-        private static bool IsCallerInfoAttribute(AttributeSyntax attribute, SemanticModel semanticModel) =>
-            semanticModel.GetSymbolInfo(attribute).Symbol is IMethodSymbol attributeCtor &&
-            attributeCtor.ContainingType.IsAny(KnownType.CallerInfoAttributes);
     }
 }

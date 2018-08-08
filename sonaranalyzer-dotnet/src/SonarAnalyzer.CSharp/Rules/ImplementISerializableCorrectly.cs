@@ -232,8 +232,7 @@ namespace SonarAnalyzer.Rules.CSharp
             typeSymbol.AllInterfaces.Any(IsOrImplementsISerializable);
 
         private static bool HasSerializableAttribute(ITypeSymbol typeSymbol) =>
-            typeSymbol.GetAttributes()
-                .Any(a => a.AttributeClass.Is(KnownType.System_SerializableAttribute));
+            typeSymbol.GetAttributes(KnownType.System_SerializableAttribute).Any();
 
         private static bool IsOrImplementsISerializable(ITypeSymbol typeSymbol) =>
             typeSymbol.Is(KnownType.System_Runtime_Serialization_ISerializable) ||

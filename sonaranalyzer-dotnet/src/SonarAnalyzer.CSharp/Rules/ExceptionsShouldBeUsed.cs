@@ -52,7 +52,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     return;
                 }
 
-                var parent = objectCreation.GetSelfOrTopParenthesizedExpression().Parent;
+                var parent = objectCreation.GetFirstNonParenthesizedParent();
                 if (parent.IsKind(SyntaxKind.ExpressionStatement))
                 {
                     c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, objectCreation.GetLocation()));

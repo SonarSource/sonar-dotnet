@@ -134,7 +134,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 }
             }
 
-            protected override bool IsAnyKind(SyntaxNode node, ICollection<SyntaxKind> collection) => node.IsAnyKind(collection);
+            protected override bool IsAnyKind(SyntaxNode node, ISet<SyntaxKind> syntaxKinds) => node.IsAnyKind(syntaxKinds);
 
             protected override bool IsReturnStatement(SyntaxNode node) => node.IsKind(SyntaxKind.ReturnStatement);
 

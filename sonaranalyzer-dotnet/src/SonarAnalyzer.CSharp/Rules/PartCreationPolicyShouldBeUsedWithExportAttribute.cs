@@ -53,8 +53,8 @@ namespace SonarAnalyzer.Rules.CSharp
                     {
                         var classSymbol = c.SemanticModel.GetDeclaredSymbol(classDeclaration);
                         if (classSymbol == null ||
-                            classSymbol.HasAttribute(KnownType.System_ComponentModel_Composition_ExportAttribute) ||
-                            classSymbol.GetSelfAndBaseTypes().Any(s => s.HasAttribute(KnownType.System_ComponentModel_Composition_InheritedExportAttribute)))
+                            classSymbol.GetAttributes(KnownType.System_ComponentModel_Composition_ExportAttribute).Any() ||
+                            classSymbol.GetSelfAndBaseTypes().Any(s => s.GetAttributes(KnownType.System_ComponentModel_Composition_InheritedExportAttribute).Any()))
                         {
                             return;
                         }
@@ -64,7 +64,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     bool IsPartCreationPolicyAttribute(AttributeSyntax attributeSyntax) =>
                         c.SemanticModel.GetSymbolInfo(attributeSyntax).Symbol is IMethodSymbol attributeSymbol &&
-                        attributeSymbol.ContainingType.Is(KnownType.System_ComponentModel_Composition_PartCreationPolicyAttribute);                    
+                        attributeSymbol.ContainingType.Is(KnownType.System_ComponentModel_Composition_PartCreationPolicyAttribute);
                 },
                 SyntaxKind.Attribute);
         }

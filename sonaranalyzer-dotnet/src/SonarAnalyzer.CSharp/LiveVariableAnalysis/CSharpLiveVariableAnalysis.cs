@@ -205,7 +205,7 @@ namespace SonarAnalyzer.LiveVariableAnalysis.CSharp
         internal static bool IsOutArgument(IdentifierNameSyntax identifier)
         {
 
-            return identifier.GetSelfOrTopParenthesizedExpression().Parent is ArgumentSyntax argument &&
+            return identifier.GetFirstNonParenthesizedParent() is ArgumentSyntax argument &&
                 argument.RefOrOutKeyword.IsKind(SyntaxKind.OutKeyword);
         }
 

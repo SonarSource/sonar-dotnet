@@ -70,7 +70,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     var nullLiteral = (LiteralExpressionSyntax)c.Node;
 
-                    if (!nullLiteral.GetSelfOrTopParenthesizedExpression().Parent.IsAnyKind(TrackedNullLiteralLocations))
+                    if (!nullLiteral.GetFirstNonParenthesizedParent().IsAnyKind(TrackedNullLiteralLocations))
                     {
                         return;
                     }

@@ -61,7 +61,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             return semanticModel.GetMemberGroup(expression)
                 .OfType<IMethodSymbol>()
-                .Where(m => !m.IsObsolete())
+                .Where(m => !m.GetAttributes(KnownType.System_ObsoleteAttribute).Any())
                 .Any(HasAnyStringComparisonParameter);
         }
 

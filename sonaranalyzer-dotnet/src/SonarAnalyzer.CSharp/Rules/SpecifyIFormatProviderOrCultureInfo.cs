@@ -95,7 +95,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool HasOverloadWithFormatOrCulture(InvocationExpressionSyntax invocation, SemanticModel semanticModel) =>
             semanticModel.GetMemberGroup(invocation.Expression)
                 .OfType<IMethodSymbol>()
-                .Where(m => !m.IsObsolete())
+                .Where(m => !m.GetAttributes(KnownType.System_ObsoleteAttribute).Any())
                 .Any(HasAnyFormatOrCultureParameter);
 
         private bool ReturnsOrAcceptsFormattableType(IMethodSymbol methodSymbol) =>

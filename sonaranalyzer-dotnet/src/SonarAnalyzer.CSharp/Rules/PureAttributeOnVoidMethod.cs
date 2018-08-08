@@ -46,17 +46,19 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
-                    var methodDeclaration = (MethodDeclarationSyntax) c.Node;
+                    var methodDeclaration = (MethodDeclarationSyntax)c.Node;
                     var methodSymbol = c.SemanticModel.GetDeclaredSymbol(methodDeclaration);
                     if (methodSymbol == null ||
-                        !methodSymbol.ReturnsVoid||
+                        !methodSymbol.ReturnsVoid ||
                         methodSymbol.Parameters.Any(p => p.RefKind != RefKind.None))
                     {
                         return;
                     }
 
-                    if (methodDeclaration.AttributeLists.TryGetAttribute(KnownType.System_Diagnostics_Contracts_PureAttribute,
-                            c.SemanticModel, out var pureAttribute))
+                    var pureAttribute = methodDeclaration.AttributeLists
+                        .GetAttributes(KnownType.System_Diagnostics_Contracts_PureAttribute, c.SemanticModel)
+                        .FirstOrDefault();
+                    if (pureAttribute != null)
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, pureAttribute.GetLocation()));
                     }

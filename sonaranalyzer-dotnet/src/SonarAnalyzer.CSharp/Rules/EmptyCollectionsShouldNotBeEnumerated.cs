@@ -353,7 +353,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             private static bool IsDictionarySetItem(ElementAccessExpressionSyntax elementAccess) =>
-                (elementAccess.GetSelfOrTopParenthesizedExpression().Parent as AssignmentExpressionSyntax)
+                (elementAccess.GetFirstNonParenthesizedParent() as AssignmentExpressionSyntax)
                     ?.Left.RemoveParentheses() == elementAccess;
 
             private static bool IsCollectionConstructor(IMethodSymbol constructorSymbol) =>

@@ -100,15 +100,15 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         private static bool IsPureMethod(IMethodSymbol invokedMethodSymbol, INamedTypeSymbol containingType) =>
-            invokedMethodSymbol.HasAttribute(KnownType.System_Diagnostics_Contracts_PureAttribute) || 
-            containingType.HasAttribute(KnownType.System_Diagnostics_Contracts_PureAttribute);
+            invokedMethodSymbol.GetAttributes(KnownType.System_Diagnostics_Contracts_PureAttribute).Any() ||
+            containingType.GetAttributes(KnownType.System_Diagnostics_Contracts_PureAttribute).Any();
 
         private static bool HasOnlySideEffectFreeMethods(INamedTypeSymbol containingType)
         {
             return containingType.IsAny(ImmutableKnownTypes);
         }
 
-        private static readonly ISet<KnownType> ImmutableKnownTypes 
+        private static readonly ISet<KnownType> ImmutableKnownTypes
             = new HashSet<KnownType>
             {
                 KnownType.System_Object,

@@ -61,8 +61,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     var isOneLineMethod = methodDeclaration.ExpressionBody != null ||
                         methodDeclaration.Body?.Statements.Count <= 1; // do not raise on empty method
-                    var firstExpectedExceptionAttributeOrDefault = methodSymbol.GetAttributes()
-                        .FirstOrDefault(a => a.AttributeClass.IsAny(HandledExpectedExceptionAttributes));
+                    var firstExpectedExceptionAttributeOrDefault = methodSymbol.GetAttributes(HandledExpectedExceptionAttributes)
+                        .FirstOrDefault();
 
                     if (firstExpectedExceptionAttributeOrDefault != null &&
                         !isOneLineMethod)

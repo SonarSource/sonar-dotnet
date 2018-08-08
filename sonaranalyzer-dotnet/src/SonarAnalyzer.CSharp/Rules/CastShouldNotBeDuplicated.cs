@@ -60,7 +60,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            if (!(isExpression.GetSelfOrTopParenthesizedExpression().Parent is IfStatementSyntax parentIfStatement))
+            if (!(isExpression.GetFirstNonParenthesizedParent() is IfStatementSyntax parentIfStatement))
             {
                 return;
             }

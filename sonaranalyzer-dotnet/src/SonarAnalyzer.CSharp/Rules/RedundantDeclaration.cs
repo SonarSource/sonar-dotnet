@@ -179,7 +179,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool IsInAssignmentOrReturnValue(ObjectCreationExpressionSyntax objectCreation)
         {
-            var parent = objectCreation.GetSelfOrTopParenthesizedExpression().Parent;
+            var parent = objectCreation.GetFirstNonParenthesizedParent();
             return parent is AssignmentExpressionSyntax ||
                 parent is ReturnStatementSyntax ||
                 parent is LambdaExpressionSyntax;
@@ -346,7 +346,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool IsReturnValueNotDelegate(ObjectCreationExpressionSyntax objectCreation,
             SemanticModel semanticModel)
         {
-            var parent = objectCreation.GetSelfOrTopParenthesizedExpression().Parent;
+            var parent = objectCreation.GetFirstNonParenthesizedParent();
 
             if (!(parent is ReturnStatementSyntax) &&
                 !(parent is LambdaExpressionSyntax))
@@ -366,7 +366,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool IsAssignmentNotDelegate(ObjectCreationExpressionSyntax objectCreation,
             SemanticModel semanticModel)
         {
-            var parent = objectCreation.GetSelfOrTopParenthesizedExpression().Parent;
+            var parent = objectCreation.GetFirstNonParenthesizedParent();
             if (!(parent is AssignmentExpressionSyntax assignment))
             {
                 return false;
@@ -417,7 +417,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool IsInArgumentAndCanBeChanged(ObjectCreationExpressionSyntax objectCreation, SemanticModel semanticModel,
             Func<InvocationExpressionSyntax, bool> additionalFilter = null)
         {
-            var parent = objectCreation.GetSelfOrTopParenthesizedExpression().Parent;
+            var parent = objectCreation.GetFirstNonParenthesizedParent();
             var argument = parent as ArgumentSyntax;
 
             if (!(argument?.Parent?.Parent is InvocationExpressionSyntax invocation))

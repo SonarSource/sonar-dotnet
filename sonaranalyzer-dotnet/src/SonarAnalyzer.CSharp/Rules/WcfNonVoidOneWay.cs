@@ -54,19 +54,22 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    if (!TryGetOperationContract(methodSymbol, out var attribute))
+                    var operationContractAttribute = methodSymbol
+                        .GetAttributes(KnownType.System_ServiceModel_OperationContractAttribute)
+                        .FirstOrDefault();
+                    if (operationContractAttribute == null)
                     {
                         return;
                     }
 
-                    var asyncPattern = attribute.NamedArguments.FirstOrDefault(na => na.Key == "AsyncPattern").Value.Value as bool?;
+                    var asyncPattern = operationContractAttribute.NamedArguments.FirstOrDefault(na => na.Key == "AsyncPattern").Value.Value as bool?;
                     if (asyncPattern.HasValue &&
                         asyncPattern.Value)
                     {
                         return;
                     }
 
-                    var isOneWay = attribute.NamedArguments.FirstOrDefault(na => na.Key == "IsOneWay").Value.Value as bool?;
+                    var isOneWay = operationContractAttribute.NamedArguments.FirstOrDefault(na => na.Key == "IsOneWay").Value.Value as bool?;
                     if (isOneWay.HasValue &&
                         isOneWay.Value)
                     {
@@ -74,14 +77,6 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
                 },
                 SyntaxKind.MethodDeclaration);
-        }
-
-        private static bool TryGetOperationContract(IMethodSymbol methodSymbol, out AttributeData attribute)
-        {
-            attribute = methodSymbol.GetAttributes()
-                .FirstOrDefault(a => a.AttributeClass.Is(KnownType.System_ServiceModel_OperationContractAttribute));
-
-            return attribute != null;
         }
     }
 }

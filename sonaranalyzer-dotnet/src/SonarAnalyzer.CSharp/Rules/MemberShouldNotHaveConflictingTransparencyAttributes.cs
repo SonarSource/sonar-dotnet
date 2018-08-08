@@ -87,8 +87,9 @@ namespace SonarAnalyzer.Rules.CSharp
             Dictionary<SyntaxNode, AttributeSyntax> nodesWithSecuritySafeCritical,
             Dictionary<SyntaxNode, AttributeSyntax> nodesWithSecurityCritical)
         {
-            var assemblySecurityCriticalAttribute = compilationContext.Compilation.Assembly.GetAttributes()
-                                .FirstOrDefault(a => a.AttributeClass.Is(KnownType.System_Security_SecurityCriticalAttribute));
+            var assemblySecurityCriticalAttribute = compilationContext.Compilation.Assembly
+                .GetAttributes(KnownType.System_Security_SecurityCriticalAttribute)
+                .FirstOrDefault();
 
             if (assemblySecurityCriticalAttribute != null)
             {
