@@ -66,9 +66,6 @@ class MetricsImporter extends ProtobufImporter<MetricsInfo> {
 
     FileLinesContext fileLinesContext = fileLinesContextFactory.createFor(inputFile);
 
-    for (int line : message.getNonBlankCommentList()) {
-      fileLinesContext.setIntValue(CoreMetrics.COMMENT_LINES_DATA_KEY, line, 1);
-    }
     saveMetric(context, inputFile, CoreMetrics.COMMENT_LINES, message.getNonBlankCommentCount());
 
     for (int line : message.getCodeLineList()) {
