@@ -91,7 +91,5 @@ namespace SonarAnalyzer.Rules.CSharp
             return nameParts.Count > 1 &&
                    nameParts[0] == "GET";
         }
-
-        private static bool IsInherited(IMethodSymbol symbol) => symbol.GetInterfaceMember() != null;
     }
 }
