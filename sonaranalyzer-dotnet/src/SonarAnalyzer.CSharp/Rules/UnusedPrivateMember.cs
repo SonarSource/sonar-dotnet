@@ -100,24 +100,31 @@ namespace SonarAnalyzer.Rules.CSharp
                                 .ToList()
                                 .ForEach(usageCollector.Visit);
 
-                            var unusedSymbols = symbolCollector.RemovableSymbols
+                            var unusedSymbolsByAccessibility = symbolCollector.RemovableSymbols
                                 .Except(usageCollector.UsedSymbols)
-                                .ToHashSet();
+                                .ToLookup(symbol => symbol.GetEffectiveAccessibility(), symbol => symbol);
+
+                            var unusedInternalSymbols = unusedSymbolsByAccessibility[Accessibility.Internal].ToHashSet();
+                            var unusedPrivateSymbols = unusedSymbolsByAccessibility[Accessibility.Private].ToHashSet();
 
                             var onlyOneAccessorAccessed = symbolCollector.RemovableSymbols
                                 .Intersect(usageCollector.UsedSymbols)
                                 .OfType<IPropertySymbol>()
                                 .Where(p => usageCollector.PropertyAccess.ContainsKey(p));
 
-                            var diagnostics = Enumerable.Empty<Diagnostic>()
-                                .Concat(GetDiagnostics(cc, unusedSymbols, symbolCollector.FieldLikeSymbols, out var diagnosticsForInternals))
-                                .Concat(GetDiagnosticsForPropertyAccessors(onlyOneAccessorAccessed, usageCollector.PropertyAccess))
-                                .ToList();
+                            // Internals are reported when the compilation ends
+                            GetDiagnostics(unusedInternalSymbols, Accessibility.Internal, symbolCollector.FieldLikeSymbols)
+                                .ToList()
+                                .ForEach(unusedInternalMembers.Add);
 
-                            diagnosticsForInternals.ForEach(unusedInternalMembers.Add);
+                            // TODO: should we report with ReportWhenActive?
+                            GetDiagnostics(unusedPrivateSymbols, Accessibility.Private, symbolCollector.FieldLikeSymbols)
+                                .ToList()
+                                .ForEach(d => cc.ReportDiagnosticIfNonGenerated(d));
 
-                            // TODO: should this be ReportWhenActive?
-                            diagnostics.ForEach(d => cc.ReportDiagnosticIfNonGenerated(d));
+                            GetDiagnosticsForPropertyAccessors(onlyOneAccessorAccessed, usageCollector.PropertyAccess)
+                                .ToList()
+                                .ForEach(d => cc.ReportDiagnosticIfNonGenerated(d));
 
                             SemanticModel GetSemanticModel(SyntaxNode node) =>
                                 c.Compilation.GetSemanticModel(node.SyntaxTree);
@@ -134,7 +141,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                            foreach (var diagnostic in unusedInternalMembers)
                            {
-                               cc.ReportDiagnosticIfNonGenerated(diagnostic, cc.Compilation);
+                               cc.ReportDiagnosticIfNonGenerated(diagnostic);
                            }
                        });
                 });
@@ -147,9 +154,9 @@ namespace SonarAnalyzer.Rules.CSharp
         private static List<Diagnostic> GetDiagnosticsForPropertyAccessors(IEnumerable<IPropertySymbol> onlyOneAccessorAccessed,
             Dictionary<IPropertySymbol, AccessorAccess> propertyAccessorAccess)
         {
-            var diagnostics = new List<Diagnostic>();
+            return onlyOneAccessorAccessed.SelectMany(GetDiagnosticsForProperty).ToList();
 
-            foreach (var property in onlyOneAccessorAccessed)
+            IEnumerable<Diagnostic> GetDiagnosticsForProperty(IPropertySymbol property)
             {
                 var access = propertyAccessorAccess[property];
                 if (access == AccessorAccess.Get && property.SetMethod != null)
@@ -157,8 +164,8 @@ namespace SonarAnalyzer.Rules.CSharp
                     var accessorSyntax = GetAccessorSyntax(property.SetMethod);
                     if (accessorSyntax != null)
                     {
-                        diagnostics.Add(Diagnostic.Create(rule, accessorSyntax.GetLocation(), "private",
-                            "set accessor in property", property.Name));
+                        yield return Diagnostic.Create(rule, accessorSyntax.GetLocation(), "private",
+                            "set accessor in property", property.Name);
                     }
                 }
                 else if (access == AccessorAccess.Set && property.GetMethod != null)
@@ -166,20 +173,18 @@ namespace SonarAnalyzer.Rules.CSharp
                     var accessorSyntax = GetAccessorSyntax(property.GetMethod);
                     if (accessorSyntax != null && accessorSyntax.Body != null)
                     {
-                        diagnostics.Add(Diagnostic.Create(rule, accessorSyntax.GetLocation(), "private",
-                            "get accessor in property", property.Name));
+                        yield return Diagnostic.Create(rule, accessorSyntax.GetLocation(), "private",
+                            "get accessor in property", property.Name);
                     }
                 }
             }
-
-            return diagnostics;
 
             AccessorDeclarationSyntax GetAccessorSyntax(IMethodSymbol methodSymbol) =>
                 methodSymbol?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() as AccessorDeclarationSyntax;
         }
 
-        private List<Diagnostic> GetDiagnostics(SymbolAnalysisContext context, HashSet<ISymbol> unusedSymbols,
-            BidirectionalDictionary<ISymbol, SyntaxNode> fieldLikeSymbols, out List<Diagnostic> diagnosticsForInternals)
+        private List<Diagnostic> GetDiagnostics(HashSet<ISymbol> unusedSymbols, Accessibility accessibility,
+            BidirectionalDictionary<ISymbol, SyntaxNode> fieldLikeSymbols)
         {
             var alreadyReportedFieldLikeSymbols = new HashSet<ISymbol>();
 
@@ -187,7 +192,6 @@ namespace SonarAnalyzer.Rules.CSharp
                 symbol.DeclaringSyntaxReferences.Select(r => r.GetSyntax().ToSyntaxWithSymbol(symbol)));
 
             var diagnostics = new List<Diagnostic>();
-            diagnosticsForInternals = new List<Diagnostic>();
 
             foreach (var unused in unusedSymbolSyntaxPairs)
             {
@@ -211,10 +215,10 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
 
                     var declarations = variableDeclaration.Variables
-                        .Select(v => fieldLikeSymbols.GetByB(v))
+                        .Select(fieldLikeSymbols.GetByB)
                         .ToList();
 
-                    if (declarations.All(d => unusedSymbols.Contains(d)))
+                    if (declarations.All(unusedSymbols.Contains))
                     {
                         location = unused.Syntax.Parent.Parent.GetLocation();
                         alreadyReportedFieldLikeSymbols.UnionWith(declarations);
@@ -223,17 +227,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 var memberKind = GetMemberType(unused.Symbol);
                 var memberName = GetMemberName(unused.Symbol);
-                var effectiveAccessibility = unused.Symbol.GetEffectiveAccessibility();
 
-                if (effectiveAccessibility == Accessibility.Internal)
-                {
-                    // We can't report internal members directly because they might be used through another assembly.
-                    diagnosticsForInternals.Add(Diagnostic.Create(rule, location, "internal", memberKind, memberName));
-                }
-                else
-                {
-                    diagnostics.Add(Diagnostic.Create(rule, location, "private", memberKind, memberName));
-                }
+                diagnostics.Add(Diagnostic.Create(rule, location, accessibility.ToString().ToLowerInvariant(), memberKind, memberName));
             }
 
             return diagnostics;
