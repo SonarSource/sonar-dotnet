@@ -114,16 +114,12 @@ namespace SonarAnalyzer.Rules.CSharp
 
                             // Internals are reported when the compilation ends
                             GetDiagnostics(unusedInternalSymbols, Accessibility.Internal, symbolCollector.FieldLikeSymbols)
-                                .ToList()
                                 .ForEach(unusedInternalMembers.Add);
 
-                            // TODO: should we report with ReportWhenActive?
                             GetDiagnostics(unusedPrivateSymbols, Accessibility.Private, symbolCollector.FieldLikeSymbols)
-                                .ToList()
                                 .ForEach(d => cc.ReportDiagnosticIfNonGenerated(d));
 
                             GetDiagnosticsForPropertyAccessors(onlyOneAccessorAccessed, usageCollector.PropertyAccess)
-                                .ToList()
                                 .ForEach(d => cc.ReportDiagnosticIfNonGenerated(d));
 
                             SemanticModel GetSemanticModel(SyntaxNode node) =>

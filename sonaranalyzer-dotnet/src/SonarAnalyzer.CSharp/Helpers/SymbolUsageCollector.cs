@@ -95,25 +95,36 @@ namespace SonarAnalyzer.Helpers
 
         public override void VisitConstructorDeclaration(ConstructorDeclarationSyntax node)
         {
+            // We are visiting a ctor with no initializer and the compiler will automatically
+            // call the default constructor of the type if declared, or the base type if the
+            // current type does not declare a default constructor.
             if (node.Initializer == null)
             {
-                var constructor = GetDeclaredSymbol(node);
-                if (node.ParameterList?.Parameters.Count > 0)
+                var constructor = (IMethodSymbol)GetDeclaredSymbol(node);
+                var implicitlyCalledConstructor = GetImplicitlyCalledConstructor(constructor);
+                if (implicitlyCalledConstructor != null)
                 {
-                    var defaultConstructor = GetDefaultConstructor(constructor.ContainingType);
-                    if (defaultConstructor != null)
-                    {
-                        UsedSymbols.Add(defaultConstructor);
-                    }
-                }
-                var baseConstructor = GetDefaultConstructor(constructor.ContainingType.BaseType);
-                if (baseConstructor != null)
-                {
-                    UsedSymbols.Add(baseConstructor);
+                    UsedSymbols.Add(implicitlyCalledConstructor);
                 }
             }
 
             base.VisitConstructorDeclaration(node);
+        }
+
+        private IMethodSymbol GetImplicitlyCalledConstructor(IMethodSymbol constructor)
+        {
+            var isDefault = constructor.Parameters.Length == 0;
+            if (isDefault)
+            {
+                // Call default ctor of base type
+                return GetDefaultConstructor(constructor.ContainingType.BaseType);
+            }
+            else
+            {
+                // Call default ctor of current type, or if undefined - default ctor of base type
+                return GetDefaultConstructor(constructor.ContainingType)
+                    ?? GetDefaultConstructor(constructor.ContainingType.BaseType);
+            }
         }
 
         public override void VisitPropertyDeclaration(PropertyDeclarationSyntax node)
@@ -125,11 +136,6 @@ namespace SonarAnalyzer.Helpers
                 StorePropertyAccess((IPropertySymbol)symbol, Rules.CSharp.UnusedPrivateMember.AccessorAccess.Set);
             }
             base.VisitPropertyDeclaration(node);
-        }
-
-        public override void VisitClassDeclaration(ClassDeclarationSyntax node)
-        {
-            base.VisitClassDeclaration(node);
         }
 
         private IMethodSymbol GetDefaultConstructor(INamedTypeSymbol namedType) =>
