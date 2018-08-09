@@ -19,26 +19,16 @@
  */
 
 using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.CodeAnalysis.Diagnostics;
-using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Helpers
 {
-    /*
-        TODO:
-        - element access
-        - object creations
-        - properties
-    */
-    public class UsageCollector : CSharpSyntaxWalker
+    public class SymbolUsageCollector : CSharpSyntaxWalker
     {
         private static readonly ISet<SyntaxKind> IncrementKinds = new HashSet<SyntaxKind>
         {
@@ -49,27 +39,27 @@ namespace SonarAnalyzer.Helpers
         };
 
         private readonly Func<SyntaxNode, SemanticModel> getSemanticModel;
-        private readonly HashSet<string> symbolNames;
+        private readonly HashSet<string> removableSymbolNames;
 
-        public readonly HashSet<ISymbol> usages =
+        public HashSet<ISymbol> Usages { get; } =
             new HashSet<ISymbol>();
 
-        public readonly HashSet<ISymbol> emptyConstructors =
+        public HashSet<ISymbol> EmptyConstructors { get; } =
             new HashSet<ISymbol>();
 
-        public readonly Dictionary<IPropertySymbol, Rules.CSharp.UnusedPrivateMember.AccessorAccess> propertyAccess =
+        public Dictionary<IPropertySymbol, Rules.CSharp.UnusedPrivateMember.AccessorAccess> PropertyAccess { get; } =
             new Dictionary<IPropertySymbol, Rules.CSharp.UnusedPrivateMember.AccessorAccess>();
 
-        public UsageCollector(Func<SyntaxNode, SemanticModel> getSemanticModel, HashSet<string> symbolNames)
+        public SymbolUsageCollector(Func<SyntaxNode, SemanticModel> getSemanticModel, HashSet<string> removableSymbolNames)
         {
             this.getSemanticModel = getSemanticModel;
-            this.symbolNames = symbolNames;
+            this.removableSymbolNames = removableSymbolNames;
         }
 
         public override void VisitIdentifierName(IdentifierNameSyntax node)
         {
             var symbols = GetSymbols(node, IsKnownIdentifier).ToList();
-            usages.UnionWith(symbols);
+            Usages.UnionWith(symbols);
 
             TryStorePropertyAccess(node, symbols);
 
@@ -79,21 +69,21 @@ namespace SonarAnalyzer.Helpers
         public override void VisitObjectCreationExpression(ObjectCreationExpressionSyntax node)
         {
             var symbols = GetSymbols(node, x => true).ToList();
-            usages.UnionWith(symbols);
+            Usages.UnionWith(symbols);
 
             base.VisitObjectCreationExpression(node);
         }
 
         public override void VisitGenericName(GenericNameSyntax node)
         {
-            usages.UnionWith(GetSymbols(node, IsKnownIdentifier));
+            Usages.UnionWith(GetSymbols(node, IsKnownIdentifier));
             base.VisitGenericName(node);
         }
 
         public override void VisitElementAccessExpression(ElementAccessExpressionSyntax node)
         {
             var symbols = GetSymbols(node, x => true).ToList();
-            usages.UnionWith(symbols);
+            Usages.UnionWith(symbols);
 
             TryStorePropertyAccess(node, symbols);
 
@@ -102,7 +92,7 @@ namespace SonarAnalyzer.Helpers
 
         public override void VisitConstructorInitializer(ConstructorInitializerSyntax node)
         {
-            usages.UnionWith(GetSymbols(node, x => true));
+            Usages.UnionWith(GetSymbols(node, x => true));
             base.VisitConstructorInitializer(node);
         }
 
@@ -112,7 +102,7 @@ namespace SonarAnalyzer.Helpers
 
             if (IsEmptyConstructor(node))
             {
-                emptyConstructors.Add(constructor);
+                EmptyConstructors.Add(constructor);
             }
 
             if (node.Initializer == null)
@@ -122,13 +112,13 @@ namespace SonarAnalyzer.Helpers
                     var defaultConstructor = GetDefaultConstructor(constructor.ContainingType);
                     if (defaultConstructor != null)
                     {
-                        usages.Add(defaultConstructor);
+                        Usages.Add(defaultConstructor);
                     }
                 }
                 var baseConstructor = GetDefaultConstructor(constructor.ContainingType.BaseType);
                 if (baseConstructor != null)
                 {
-                    usages.Add(baseConstructor);
+                    Usages.Add(baseConstructor);
                 }
             }
 
@@ -140,7 +130,7 @@ namespace SonarAnalyzer.Helpers
             if (node.Initializer != null)
             {
                 var symbol = GetDeclaredSymbol(node);
-                usages.Add(symbol);
+                Usages.Add(symbol);
                 StorePropertyAccess((IPropertySymbol)symbol, Rules.CSharp.UnusedPrivateMember.AccessorAccess.Set);
             }
             base.VisitPropertyDeclaration(node);
@@ -195,13 +185,13 @@ namespace SonarAnalyzer.Helpers
 
         private void StorePropertyAccess(IPropertySymbol propertySymbol, Rules.CSharp.UnusedPrivateMember.AccessorAccess access)
         {
-            if (propertyAccess.ContainsKey(propertySymbol))
+            if (PropertyAccess.ContainsKey(propertySymbol))
             {
-                propertyAccess[propertySymbol] |= access;
+                PropertyAccess[propertySymbol] |= access;
             }
             else
             {
-                propertyAccess[propertySymbol] = access;
+                PropertyAccess[propertySymbol] = access;
             }
         }
 
@@ -259,149 +249,9 @@ namespace SonarAnalyzer.Helpers
             constructorDeclaration.Body == null || constructorDeclaration.Body.Statements.Count == 0;
 
         private bool IsKnownIdentifier(SimpleNameSyntax nameSyntax) =>
-            symbolNames.Contains(nameSyntax.Identifier.ValueText);
+            removableSymbolNames.Contains(nameSyntax.Identifier.ValueText);
 
         private ISymbol GetDeclaredSymbol(SyntaxNode syntaxNode) =>
             getSemanticModel(syntaxNode).GetDeclaredSymbol(syntaxNode);
-    }
-
-    // TODO: rename
-    internal class DeclarationCollector : CSharpSyntaxWalker
-    {
-        private static readonly ISet<MethodKind> RemovableMethodKinds = new HashSet<MethodKind>
-        {
-            MethodKind.Ordinary,
-            MethodKind.Constructor
-        };
-
-        private Func<SyntaxNode, SemanticModel> getSemanticModel;
-
-        public readonly HashSet<ISymbol> removableSymbols =
-            new HashSet<ISymbol>();
-
-        public readonly BidirectionalDictionary<ISymbol, SyntaxNode> fieldLikeSymbols =
-            new BidirectionalDictionary<ISymbol, SyntaxNode>();
-
-        public DeclarationCollector(Func<SyntaxNode, SemanticModel> getSemanticModel)
-        {
-            this.getSemanticModel = getSemanticModel;
-        }
-
-        private ISymbol GetDeclaredSymbol(SyntaxNode syntaxNode) =>
-            getSemanticModel(syntaxNode).GetDeclaredSymbol(syntaxNode);
-
-        private void ConditionalStore<TSymbol>(TSymbol symbol, Func<TSymbol, bool> condition)
-            where TSymbol : ISymbol
-        {
-            if (condition(symbol))
-            {
-                removableSymbols.Add(symbol);
-            }
-        }
-
-        private void StoreRemovableVariableDeclarations(BaseFieldDeclarationSyntax node)
-        {
-            foreach (var variable in node.Declaration.Variables)
-            {
-                var symbol = GetDeclaredSymbol(variable);
-                if (IsRemovableMember(symbol))
-                {
-                    removableSymbols.Add(symbol);
-                    fieldLikeSymbols.Add(symbol, variable);
-                }
-            }
-        }
-
-        public override void VisitClassDeclaration(ClassDeclarationSyntax node)
-        {
-            ConditionalStore(GetDeclaredSymbol(node), IsRemovableType);
-            base.VisitClassDeclaration(node);
-        }
-
-        public override void VisitStructDeclaration(StructDeclarationSyntax node)
-        {
-            ConditionalStore(GetDeclaredSymbol(node), IsRemovableType);
-            base.VisitStructDeclaration(node);
-        }
-
-        public override void VisitInterfaceDeclaration(InterfaceDeclarationSyntax node)
-        {
-            ConditionalStore(GetDeclaredSymbol(node), IsRemovableType);
-            base.VisitInterfaceDeclaration(node);
-        }
-
-        public override void VisitDelegateDeclaration(DelegateDeclarationSyntax node)
-        {
-            ConditionalStore(GetDeclaredSymbol(node), IsRemovableType);
-            base.VisitDelegateDeclaration(node);
-        }
-
-        public override void VisitFieldDeclaration(FieldDeclarationSyntax node)
-        {
-            StoreRemovableVariableDeclarations(node);
-            base.VisitFieldDeclaration(node);
-        }
-
-        public override void VisitEventFieldDeclaration(EventFieldDeclarationSyntax node)
-        {
-            StoreRemovableVariableDeclarations(node);
-            base.VisitEventFieldDeclaration(node);
-        }
-
-        public override void VisitEventDeclaration(EventDeclarationSyntax node)
-        {
-            ConditionalStore(GetDeclaredSymbol(node), IsRemovableMember);
-            base.VisitEventDeclaration(node);
-        }
-
-        public override void VisitPropertyDeclaration(PropertyDeclarationSyntax node)
-        {
-            ConditionalStore(GetDeclaredSymbol(node), IsRemovableMember);
-            base.VisitPropertyDeclaration(node);
-        }
-
-        public override void VisitIndexerDeclaration(IndexerDeclarationSyntax node)
-        {
-            ConditionalStore(GetDeclaredSymbol(node), IsRemovableMember);
-            base.VisitIndexerDeclaration(node);
-        }
-
-        public override void VisitMethodDeclaration(MethodDeclarationSyntax node)
-        {
-            var symbol = (IMethodSymbol)GetDeclaredSymbol(node);
-            ConditionalStore(symbol.PartialDefinitionPart ?? symbol, IsRemovableMethod);
-            base.VisitMethodDeclaration(node);
-        }
-
-        public override void VisitConstructorDeclaration(ConstructorDeclarationSyntax node)
-        {
-            ConditionalStore((IMethodSymbol)GetDeclaredSymbol(node), IsRemovableMethod);
-            base.VisitConstructorDeclaration(node);
-        }
-
-        private bool IsRemovableType(ISymbol typeSymbol) =>
-            typeSymbol.ContainingType != null &&
-            IsRemovable(typeSymbol, Accessibility.Internal);
-
-        private bool IsRemovableMember(ISymbol typeSymbol) =>
-            IsRemovable(typeSymbol, Accessibility.Private);
-
-        private bool IsRemovableMethod(IMethodSymbol methodSymbol) =>
-            IsRemovableMember(methodSymbol) &&
-            RemovableMethodKinds.Contains(methodSymbol.MethodKind) &&
-            !methodSymbol.IsMainMethod() &&
-            !methodSymbol.IsEventHandler() && // Event handlers could be added in XAML and no method reference will be generated in the .g.cs file.
-            !methodSymbol.IsSerializationConstructor();
-
-        private bool IsRemovable(ISymbol symbol, Accessibility maxAccessibility) =>
-            symbol != null &&
-            symbol.GetEffectiveAccessibility() <= maxAccessibility &&
-            !symbol.IsImplicitlyDeclared &&
-            !symbol.IsAbstract &&
-            !symbol.IsVirtual &&
-            !symbol.GetAttributes().Any() &&
-            !symbol.ContainingType.IsInterface() &&
-            symbol.GetInterfaceMember() == null &&
-            symbol.GetOverriddenMember() == null;
     }
 }
