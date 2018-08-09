@@ -593,5 +593,22 @@ namespace SonarAnalyzer.UnitTest.Common
                 [assembly: InternalsVisibleTo(""FOO"" + Signing.InternalsVisibleToPublicKey)]
                 ");
         }
+
+        [TestMethod]
+        public void OnlyAttributeAreIgnored()
+        {
+            AssertLinesOfCode(
+                @"
+                [AnAttribute]
+                public class Foo
+                {
+                    [AnAttribute]
+                    void MyCode([AnAttribute] string foo)
+                    {
+                        System.Console.WriteLine(); // +1
+                    }
+                }",
+                8);
+        }
     }
 }
