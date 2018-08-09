@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2018 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -192,6 +192,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         "'GC.SuppressFinalize(this)'.");
                 }
 
+                // Because of partial classes we cannot always rely on the current semantic model.
                 // See issue: https://github.com/SonarSource/sonar-csharp/issues/690
                 var disposeMethodSymbol = semanticModel.GetSyntaxTreeSemanticModel(disposeMethod)
                     .GetDeclaredSymbol(disposeMethod);
@@ -280,7 +281,8 @@ namespace SonarAnalyzer.Rules.CSharp
                     .Where(IsDisposeBool)
                     .SelectMany(m => m.DeclaringSyntaxReferences)
                     .Select(r => r.GetSyntax())
-                    .Select(r => semanticModel.GetDeclaredSymbol(r))
+                    // Because of partial classes we cannot always rely on the current semantic model.
+                    .Select(r => semanticModel.GetSyntaxTreeSemanticModel(r).GetDeclaredSymbol(r))
                     .Where(methodSym => methodSym != null)
                     .Any(methodSym => !methodSym.IsAbstract);
             }
