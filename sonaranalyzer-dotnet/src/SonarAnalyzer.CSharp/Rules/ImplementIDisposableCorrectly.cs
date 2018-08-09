@@ -100,7 +100,7 @@ namespace SonarAnalyzer.Rules.CSharp
                                 + " and override the base class 'Dispose' implementation instead.");
                     }
 
-                    if (HasVirtualDisposeBoolImplementationRecursiveSearch(classSymbol.BaseType))
+                    if (HasVirtualDisposeBool(classSymbol.BaseType))
                     {
                         VerifyDisposeOverrideCallsBase(FindMethodDeclarations(classSymbol, IsDisposeBool)
                             .OfType<MethodDeclarationSyntax>()
@@ -273,7 +273,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     .Select(r => r.GetSyntax());
             }
 
-            private bool HasVirtualDisposeBoolImplementationRecursiveSearch(INamedTypeSymbol typeSymbol)
+            private bool HasVirtualDisposeBool(INamedTypeSymbol typeSymbol)
             {
                 return typeSymbol.GetSelfAndBaseTypes()
                     .SelectMany(t => t.GetMembers())
@@ -283,7 +283,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     .Select(r => r.GetSyntax())
                     // Because of partial classes we cannot always rely on the current semantic model.
                     .Select(r => semanticModel.GetSyntaxTreeSemanticModel(r).GetDeclaredSymbol(r))
-                    .Where(methodSym => methodSym != null)
+                    .WhereNotNull()
                     .Any(methodSym => !methodSym.IsAbstract);
             }
         }
