@@ -69,7 +69,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 c =>
                 {
                     var methodDeclaration = (MethodDeclarationSyntax)c.Node;
-                    if (methodDeclaration.Identifier.IsMissing)
+                    if (methodDeclaration.Identifier.IsMissing ||
+                        methodDeclaration.Identifier.ValueText == "Main")
                     {
                         return;
                     }
