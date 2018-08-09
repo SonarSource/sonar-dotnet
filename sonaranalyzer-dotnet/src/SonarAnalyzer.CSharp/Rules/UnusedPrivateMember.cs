@@ -140,7 +140,6 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool IsInternalVisibleToAttribute(AttributeSyntax attribute, SemanticModel semanticModel)
         {
-
             return semanticModel.GetSymbolInfo(attribute).Symbol is IMethodSymbol attributeConstructor &&
                 attributeConstructor.ContainingType.Is(KnownType.System_Runtime_CompilerServices_InternalsVisibleToAttribute);
         }
@@ -187,6 +186,66 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             return methodSymbol?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() as AccessorDeclarationSyntax;
         }
+
+        ////private IEnumerable<Diagnostic> GetDiagnostics(HashSet<ISymbol> usedSymbols, HashSet<ISymbol> declaredPrivateSymbols)
+        ////{
+        ////    var unusedSymbols = declaredPrivateSymbols
+        ////        .Except(usedSymbols)
+        ////        .SelectMany(unused => unused.DeclaringSyntaxReferences.Select(r => unused.ToSymbolWithSyntax(r.GetSyntax())))
+        ////        .Select(unused =>
+        ////            Diagnostic.Create(rule, unused.Syntax.GetLocation(), "private", GetMemberKindString(unused.Symbol), GetMemberName(unused.Symbol)));
+
+        ////    string GetMemberKindString(ISymbol symbol)
+        ////    {
+        ////        switch (symbol)
+        ////        {
+        ////            case IMethodSymbol method:
+        ////                if (method.MethodKind == MethodKind.Constructor)
+        ////                {
+        ////                    return "constructor";
+        ////                }
+        ////                else if (method.MethodKind == MethodKind.PropertyGet)
+        ////                {
+        ////                    return "get accessor in property";
+        ////                }
+        ////                else if (method.MethodKind == MethodKind.PropertySet)
+        ////                {
+        ////                    return "set accessor in property";
+        ////                }
+        ////                else
+        ////                {
+        ////                    return "method";
+        ////                }
+        ////            case IEventSymbol @event:
+        ////            case IFieldSymbol field:
+        ////            case IPropertySymbol property:
+        ////                return symbol.Kind.ToString().ToLowerInvariant();
+        ////            case INamedTypeSymbol namedType:
+        ////                return "type";
+        ////            default:
+        ////                return "member";
+        ////        }
+        ////    }
+
+        ////    string GetMemberName(ISymbol symbol)
+        ////    {
+        ////        if (symbol is IMethodSymbol method)
+        ////        {
+        ////            if (method.MethodKind == MethodKind.Constructor)
+        ////            {
+        ////                return method.ContainingType.Name;
+        ////            }
+        ////            if (method.MethodKind == MethodKind.PropertyGet ||
+        ////                method.MethodKind == MethodKind.PropertySet)
+        ////            {
+        ////                return method.AssociatedSymbol.Name;
+        ////            }
+        ////        }
+        ////        return symbol.Name;
+        ////    }
+
+        ////    return unusedSymbols;
+        ////}
 
         private void ReportIssues(SymbolAnalysisContext context, HashSet<ISymbol> usedSymbols,
             HashSet<ISymbol> declaredPrivateSymbols, HashSet<ISymbol> emptyConstructors,

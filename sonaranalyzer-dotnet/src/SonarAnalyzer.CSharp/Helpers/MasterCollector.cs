@@ -66,6 +66,73 @@ namespace SonarAnalyzer.Helpers
             this.symbolNames = symbolNames;
         }
 
+        public override void VisitIdentifierName(IdentifierNameSyntax node)
+        {
+            var symbols = GetSymbols(node, IsKnownIdentifier).ToList();
+            usages.UnionWith(symbols);
+
+            TryStorePropertyAccess(node, symbols);
+
+            base.VisitIdentifierName(node);
+        }
+
+        public override void VisitGenericName(GenericNameSyntax node)
+        {
+            usages.UnionWith(GetSymbols(node, IsKnownIdentifier));
+            base.VisitGenericName(node);
+        }
+
+        public override void VisitElementAccessExpression(ElementAccessExpressionSyntax node)
+        {
+            var symbols = GetSymbols(node, x => true).ToList();
+            usages.UnionWith(symbols);
+
+            TryStorePropertyAccess(node, symbols);
+
+            base.VisitElementAccessExpression(node);
+        }
+
+        public override void VisitConstructorInitializer(ConstructorInitializerSyntax node)
+        {
+            usages.UnionWith(GetSymbols(node, x => true));
+            base.VisitConstructorInitializer(node);
+        }
+
+        public override void VisitConstructorDeclaration(ConstructorDeclarationSyntax node)
+        {
+            var constructor = GetDeclaredSymbol(node);
+
+            if (IsEmptyConstructor(node))
+            {
+                emptyConstructors.Add(constructor);
+            }
+
+            if (node.Initializer == null && node.ParameterList?.Parameters.Count > 0)
+            {
+                var defaultConstructor = GetDefaultConstructor(constructor.ContainingType);
+                if (defaultConstructor != null)
+                {
+                    usages.Add(defaultConstructor);
+                }
+            }
+
+            base.VisitConstructorDeclaration(node);
+        }
+
+        public override void VisitPropertyDeclaration(PropertyDeclarationSyntax node)
+        {
+            if (node.Initializer != null)
+            {
+                var symbol = GetDeclaredSymbol(node);
+                usages.Add(symbol);
+                StorePropertyAccess((IPropertySymbol)symbol, Rules.CSharp.UnusedPrivateMember.AccessorAccess.Set);
+            }
+            base.VisitPropertyDeclaration(node);
+        }
+
+        private IMethodSymbol GetDefaultConstructor(INamedTypeSymbol namedType) =>
+            namedType.InstanceConstructors.FirstOrDefault(c => !c.Parameters.Any());
+
         private IEnumerable<ISymbol> GetSymbols<TSyntaxNode>(TSyntaxNode node, Func<TSyntaxNode, bool> condition)
             where TSyntaxNode : SyntaxNode
         {
@@ -92,17 +159,7 @@ namespace SonarAnalyzer.Helpers
             }
         }
 
-        public override void VisitIdentifierName(IdentifierNameSyntax node)
-        {
-            var identifierSymbols = GetSymbols(node, IsKnownIdentifier).ToList();
-            usages.UnionWith(identifierSymbols);
-
-            TryStorePropertyAccess(node, identifierSymbols);
-
-            base.VisitIdentifierName(node);
-        }
-
-        private void TryStorePropertyAccess(IdentifierNameSyntax node, List<ISymbol> identifierSymbols)
+        private void TryStorePropertyAccess(ExpressionSyntax node, List<ISymbol> identifierSymbols)
         {
             var propertySymbols = identifierSymbols.OfType<IPropertySymbol>();
             if (propertySymbols.Any())
@@ -110,12 +167,12 @@ namespace SonarAnalyzer.Helpers
                 var access = EvaluatePropertyAccesses(node);
                 foreach (var propertySymbol in propertySymbols)
                 {
-                    StorePropertyAccess(access, propertySymbol);
+                    StorePropertyAccess(propertySymbol, access);
                 }
             }
         }
 
-        private void StorePropertyAccess(Rules.CSharp.UnusedPrivateMember.AccessorAccess access, IPropertySymbol propertySymbol)
+        private void StorePropertyAccess(IPropertySymbol propertySymbol, Rules.CSharp.UnusedPrivateMember.AccessorAccess access)
         {
             if (propertyAccess.ContainsKey(propertySymbol))
             {
@@ -127,7 +184,7 @@ namespace SonarAnalyzer.Helpers
             }
         }
 
-        private Rules.CSharp.UnusedPrivateMember.AccessorAccess EvaluatePropertyAccesses(IdentifierNameSyntax node)
+        private Rules.CSharp.UnusedPrivateMember.AccessorAccess EvaluatePropertyAccesses(ExpressionSyntax node)
         {
             var topmostSyntax = GetTopmostSyntaxWithTheSameSymbol(node);
 
@@ -147,8 +204,14 @@ namespace SonarAnalyzer.Helpers
                     return Rules.CSharp.UnusedPrivateMember.AccessorAccess.Both;
                 }
             }
+
+            // nameof(Prop) --> get/set
+            if (node.IsInNameofCall(getSemanticModel(node)))
+            {
+                return Rules.CSharp.UnusedPrivateMember.AccessorAccess.Both;
+            }
+
             // Prop++ --> get/set
-            // TODO: nameof(Prop) --> get/set
             return topmostSyntax.Parent.IsAnyKind(IncrementKinds)
                 ? Rules.CSharp.UnusedPrivateMember.AccessorAccess.Both
                 : Rules.CSharp.UnusedPrivateMember.AccessorAccess.Get;
@@ -171,40 +234,14 @@ namespace SonarAnalyzer.Helpers
             }
         }
 
-        public override void VisitPropertyDeclaration(PropertyDeclarationSyntax node)
-        {
-            if (node.Initializer != null)
-            {
-                var symbol = getSemanticModel(node).GetDeclaredSymbol(node);
-                usages.Add(symbol);
-                StorePropertyAccess(Rules.CSharp.UnusedPrivateMember.AccessorAccess.Set, symbol);
-            }
-            base.VisitPropertyDeclaration(node);
-        }
-
-        public override void VisitGenericName(GenericNameSyntax node)
-        {
-            usages.UnionWith(GetSymbols(node, IsKnownIdentifier));
-            base.VisitGenericName(node);
-        }
-
-        public override void VisitConstructorInitializer(ConstructorInitializerSyntax node)
-        {
-            usages.UnionWith(GetSymbols(node, x => true));
-            base.VisitConstructorInitializer(node);
-        }
-
-        public override void VisitConstructorDeclaration(ConstructorDeclarationSyntax node)
-        {
-            emptyConstructors.UnionWith(GetSymbols(node, IsEmptyConstructor));
-            base.VisitConstructorDeclaration(node);
-        }
-
         private static bool IsEmptyConstructor(ConstructorDeclarationSyntax constructorDeclaration) =>
             constructorDeclaration.Body == null || constructorDeclaration.Body.Statements.Count == 0;
 
         private bool IsKnownIdentifier(SimpleNameSyntax nameSyntax) =>
             symbolNames.Contains(nameSyntax.Identifier.ValueText);
+
+        private ISymbol GetDeclaredSymbol(SyntaxNode syntaxNode) =>
+            getSemanticModel(syntaxNode).GetDeclaredSymbol(syntaxNode);
     }
 
     // TODO: rename
@@ -332,7 +369,7 @@ namespace SonarAnalyzer.Helpers
             IsRemovableMember(methodSymbol) &&
             RemovableMethodKinds.Contains(methodSymbol.MethodKind) &&
             !methodSymbol.IsMainMethod() &&
-            !methodSymbol.IsEventHandler() &&
+            !methodSymbol.IsEventHandler() && // Event handlers could be added in XAML and no method reference will be generated in the .g.cs file.
             !methodSymbol.IsSerializationConstructor();
 
         private bool IsRemovable(ISymbol symbol, Accessibility maxAccessibility) =>
