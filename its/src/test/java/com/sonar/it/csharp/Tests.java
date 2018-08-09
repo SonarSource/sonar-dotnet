@@ -69,7 +69,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 })
 public class Tests {
 
-  private static final String MSBUILD_PATH = "MSBUILD_PATH ";
+  private static final String MSBUILD_PATH = "MSBUILD_PATH";
   private static final String NUGET_PATH = "NUGET_PATH";
 
   @ClassRule
