@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
 using System.Resources;
+using System.Globalization;
 
 namespace Tests.Diagnostics
 {
@@ -47,6 +48,15 @@ namespace Tests.Diagnostics
             else
                 someFoo = foo2;
         }
+    }
+
+    static class ExpressionBodyCtor
+    {
+        private static readonly bool IsAvailable;
+
+        static ExpressionBodyCtor() => IsAvailable = Initialize();
+
+        static bool Initialize() => true;
     }
 
     class FooBar
