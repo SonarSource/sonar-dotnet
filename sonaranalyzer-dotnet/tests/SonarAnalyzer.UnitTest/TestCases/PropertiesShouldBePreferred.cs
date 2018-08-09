@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -57,5 +57,18 @@ namespace MyLibrary
     public interface IBase
     {
         string GetStuff(); // Noncompliant
+    }
+
+    public interface IFoo
+    {
+        // See https://github.com/SonarSource/sonar-csharp/issues/1593
+        // and https://msdn.microsoft.com/en-us/magazine/mt797654.aspx
+        IMyEnumerator GetEnumerator();
+    }
+
+    public interface IMyEnumerator
+    {
+        int Current { get; }
+        bool MoveNext();
     }
 }
