@@ -51,8 +51,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     var propertyCandidates = typeSymbol
                         .GetMembers()
-                        .Where(SymbolHelper.IsPubliclyAccessible)
                         .OfType<IMethodSymbol>()
+                        .Where(SymbolHelper.IsPubliclyAccessible)
                         .Where(IsPropertyCanditate);
 
                     foreach (var candidate in propertyCandidates)
@@ -72,7 +72,7 @@ namespace SonarAnalyzer.Rules.CSharp
             if (method.IsConstructor() ||
                 method.MethodKind == MethodKind.PropertyGet ||
                 method.IsOverride ||
-                IsInherited(method))
+                method.GetInterfaceMember() != null)
             {
                 return false;
             }
@@ -80,6 +80,7 @@ namespace SonarAnalyzer.Rules.CSharp
             return method.Parameters.Length == 0 &&
                    !method.ReturnsVoid &&
                    !method.ReturnType.Is(TypeKind.Array) &&
+                   method.Name != "GetEnumerator" &&
                    NameStartsWithGet(method);
         }
 
@@ -90,7 +91,5 @@ namespace SonarAnalyzer.Rules.CSharp
             return nameParts.Count > 1 &&
                    nameParts[0] == "GET";
         }
-
-        private static bool IsInherited(IMethodSymbol symbol) => SymbolHelper.GetInterfaceMember(symbol) != null;
     }
 }
