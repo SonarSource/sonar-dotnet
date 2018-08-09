@@ -4,7 +4,7 @@ namespace Tests.Diagnostics
 {
     public class FunctionComplexity
     {
-        public FunctionComplexity() 
+        public FunctionComplexity()
 //             ^^^^^^^^^^^^^^^^^^ Noncompliant [0] {{The Cyclomatic Complexity of this constructor is 4 which is greater than 3 authorized.}}
 //             ^^^^^^^^^^^^^^^^^^ Secondary@-1 [0] {{+1}}
         {
@@ -100,5 +100,20 @@ namespace Tests.Diagnostics
         // Secondary@-2 [9] {{+1}}
         // Secondary@-3 [9] {{+1}}
         // Secondary@-4 [9] {{+1}}
+
+        private void Foo(Class c) // Noncompliant [10]
+                                  // Secondary@-1 [10] {{+1}}
+        {
+            var x = c?.Name?.ToString();
+//                   ^ Secondary [10] {{+1}}
+//                         ^ Secondary@-1 [10] {{+1}}
+
+            if (false) { } // Secondary [10] {{+1}}
+        }
+
+        private class Class
+        {
+            public string Name;
+        }
     }
 }
