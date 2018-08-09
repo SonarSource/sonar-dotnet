@@ -69,14 +69,14 @@ namespace SonarAnalyzer.Rules.CSharp
                 c =>
                 {
                     var methodDeclaration = (MethodDeclarationSyntax)c.Node;
-                    if (methodDeclaration.Identifier.IsMissing ||
-                        methodDeclaration.Identifier.ValueText == "Main")
+                    if (methodDeclaration.Identifier.IsMissing)
                     {
                         return;
                     }
 
                     var methodSymbol = c.SemanticModel.GetDeclaredSymbol(methodDeclaration);
                     if (methodSymbol == null ||
+                        methodSymbol.IsMainMethod() ||
                         methodSymbol.GetInterfaceMember() != null ||
                         methodSymbol.GetOverriddenMember() != null ||
                         methodSymbol.GetAttributes(TestMethodAttributes).Any())
