@@ -567,11 +567,15 @@ public class FieldUsages
         [TestCategory("Rule")]
         public void Methods_EventHandler()
         {
+            // Event handler methods are not reported because in WPF an event handler
+            // could be added through XAML and no warning will be generated if the
+            // method is removed, which could lead to serious problems that are hard
+            // to diagnose.
             Verifier.VerifyCSharpAnalyzer(@"
 using System;
 public class NewClass
 {
-    private void Handler(object sender, EventArgs e) { } // Noncompliant
+    private void Handler(object sender, EventArgs e) { } // intentional False Negative
 }
 ", new UnusedPrivateMember());
         }
@@ -595,4 +599,5 @@ public class NewClass
                 new UnusedPrivateMemberCodeFixProvider());
         }
     }
+
 }
