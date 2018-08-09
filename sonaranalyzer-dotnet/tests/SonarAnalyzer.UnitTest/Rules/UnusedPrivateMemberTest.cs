@@ -405,11 +405,60 @@ public class NonPrivateMembers
         public void Constructor_DirectReferences()
         {
             Verifier.VerifyCSharpAnalyzer(@"
-public class PrivateConstructors
+public abstract class PrivateConstructors
 {
-    private class OtherPrivateClass // Noncompliant
+    public class Constructor1
     {
-        private OtherPrivateClass() { var x = 5; } // Noncompliant
+        public static readonly Constructor1 Instance = new Constructor1();
+        private Constructor1() { var x = 5; }
+    }
+
+    public class Constructor2
+    {
+        public Constructor2(int 5) { }
+        private Constructor2() { var x = 5; }
+    }
+
+    public class Constructor3
+    {
+        public Constructor3(int 5) : Constructor3() { }
+        private Constructor3() { var x = 5; }
+    }
+
+    public class Constructor3
+    {
+        static Constructor3() { var x = 5; }
+    }
+}
+", new UnusedPrivateMember());
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void Constructor_Inheritance()
+        {
+            Verifier.VerifyCSharpAnalyzer(@"
+public class Inheritance
+{
+    private abstract class BaseClass1
+    {
+        protected BaseClass1() { var x = 5; }
+    }
+
+    private class DerivedClass1 : BaseClass1 // Noncompliant {{Remove the unused private type 'DerivedClass1'.}}
+    {
+        public DerivedClass1() : base() { }
+    }
+
+    // https://github.com/SonarSource/sonar-csharp/issues/1398
+    private abstract class BaseClass2
+    {
+        protected BaseClass2() { var x = 5; }
+    }
+
+    private class DerivedClass2 : BaseClass2 // Noncompliant {{Remove the unused private type 'DerivedClass2'.}}
+    {
+        public DerivedClass2() { }
     }
 }
 ", new UnusedPrivateMember());
@@ -600,4 +649,17 @@ public class NewClass
         }
     }
 
+    public class Foo
+    {
+        private abstract class BaseClass
+        {
+            // this cannot be removed!
+            protected BaseClass() { var x = 5; }
+        }
+
+        private class DerivedClass : BaseClass
+        {
+            public DerivedClass() { }
+        }
+    }
 }

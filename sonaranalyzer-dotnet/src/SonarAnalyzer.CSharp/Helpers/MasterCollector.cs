@@ -76,6 +76,14 @@ namespace SonarAnalyzer.Helpers
             base.VisitIdentifierName(node);
         }
 
+        public override void VisitObjectCreationExpression(ObjectCreationExpressionSyntax node)
+        {
+            var symbols = GetSymbols(node, x => true).ToList();
+            usages.UnionWith(symbols);
+
+            base.VisitObjectCreationExpression(node);
+        }
+
         public override void VisitGenericName(GenericNameSyntax node)
         {
             usages.UnionWith(GetSymbols(node, IsKnownIdentifier));
@@ -107,12 +115,20 @@ namespace SonarAnalyzer.Helpers
                 emptyConstructors.Add(constructor);
             }
 
-            if (node.Initializer == null && node.ParameterList?.Parameters.Count > 0)
+            if (node.Initializer == null)
             {
-                var defaultConstructor = GetDefaultConstructor(constructor.ContainingType);
-                if (defaultConstructor != null)
+                if (node.ParameterList?.Parameters.Count > 0)
                 {
-                    usages.Add(defaultConstructor);
+                    var defaultConstructor = GetDefaultConstructor(constructor.ContainingType);
+                    if (defaultConstructor != null)
+                    {
+                        usages.Add(defaultConstructor);
+                    }
+                }
+                var baseConstructor = GetDefaultConstructor(constructor.ContainingType.BaseType);
+                if (baseConstructor != null)
+                {
+                    usages.Add(baseConstructor);
                 }
             }
 
@@ -128,6 +144,11 @@ namespace SonarAnalyzer.Helpers
                 StorePropertyAccess((IPropertySymbol)symbol, Rules.CSharp.UnusedPrivateMember.AccessorAccess.Set);
             }
             base.VisitPropertyDeclaration(node);
+        }
+
+        public override void VisitClassDeclaration(ClassDeclarationSyntax node)
+        {
+            base.VisitClassDeclaration(node);
         }
 
         private IMethodSymbol GetDefaultConstructor(INamedTypeSymbol namedType) =>
