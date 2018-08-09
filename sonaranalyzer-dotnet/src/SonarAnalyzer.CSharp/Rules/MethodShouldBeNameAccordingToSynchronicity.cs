@@ -76,6 +76,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     var methodSymbol = c.SemanticModel.GetDeclaredSymbol(methodDeclaration);
                     if (methodSymbol == null ||
+                        methodSymbol.IsMainMethod() ||
                         methodSymbol.GetInterfaceMember() != null ||
                         methodSymbol.GetOverriddenMember() != null ||
                         methodSymbol.GetAttributes(TestMethodAttributes).Any())

@@ -113,6 +113,26 @@ namespace Tests.Diagnostics
         }
     }
 
+    public class Program1
+    {
+        public static async Task Main() { }
+    }
+
+    public class Program2
+    {
+        public static async Task<int> Main() { }
+    }
+
+    public class Program3
+    {
+        public static async Task Main(string[] args) { return 0; }
+    }
+
+    public class Program4
+    {
+        public static async Task<int> Main(string[] args) { return 0; }
+    }
+
     public class InvalidCode
     {
         public Task ()
