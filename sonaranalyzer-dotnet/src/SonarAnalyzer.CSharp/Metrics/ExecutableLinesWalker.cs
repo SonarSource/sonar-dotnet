@@ -52,6 +52,9 @@ namespace SonarAnalyzer.Metrics.CSharp
         {
             switch (node.Kind())
             {
+                case SyntaxKind.AttributeList:
+                    return false;
+
                 case SyntaxKind.CheckedStatement:
                 case SyntaxKind.UncheckedStatement:
 

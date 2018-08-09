@@ -82,7 +82,7 @@ namespace SonarAnalyzer.UnitTest.Common
                     unsafe { } // +1
                     using ((IDisposable)obj) { } // +1
                 }",
-                4 ,5 ,6, 7);
+                4, 5, 6, 7);
         }
 
         [TestMethod]
@@ -525,7 +525,6 @@ namespace SonarAnalyzer.UnitTest.Common
         [TestMethod]
         public void Test_26_PartialClasses_ExcludeFromCodeCoverage()
         {
-            //
             AssertLinesOfCode(
               @"[ExcludeFromCodeCoverage]
                 partial class Program
@@ -554,7 +553,6 @@ namespace SonarAnalyzer.UnitTest.Common
         [TestMethod]
         public void Test_27_PartialMethods_ExcludeFromCodeCoverage()
         {
-            //
             AssertLinesOfCode(
               @"partial class Program
                 {
@@ -583,6 +581,17 @@ namespace SonarAnalyzer.UnitTest.Common
                         System.Console.WriteLine();         // excluded
                     }
                 }");
+        }
+
+        [TestMethod]
+        public void AttributeAreIgnored()
+        {
+            AssertLinesOfCode(
+                @"
+                using System.Reflection;
+                using System.Runtime.CompilerServices;
+                [assembly: InternalsVisibleTo(""FOO"" + Signing.InternalsVisibleToPublicKey)]
+                ");
         }
     }
 }
