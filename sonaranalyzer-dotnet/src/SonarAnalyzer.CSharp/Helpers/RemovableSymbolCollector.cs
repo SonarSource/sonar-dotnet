@@ -37,7 +37,7 @@ namespace SonarAnalyzer.Helpers
             MethodKind.Constructor
         };
 
-        private Func<SyntaxNode, SemanticModel> getSemanticModel;
+        private readonly Func<SyntaxNode, SemanticModel> getSemanticModel;
 
         public HashSet<ISymbol> RemovableSymbols { get; } =
             new HashSet<ISymbol>();
@@ -138,16 +138,24 @@ namespace SonarAnalyzer.Helpers
 
         public override void VisitConstructorDeclaration(ConstructorDeclarationSyntax node)
         {
-            ConditionalStore((IMethodSymbol)GetDeclaredSymbol(node), IsRemovableMethod);
+            if (!IsEmptyConstructor(node))
+            {
+                ConditionalStore((IMethodSymbol)GetDeclaredSymbol(node), x => IsRemovableMethod(x));
+            }
             base.VisitConstructorDeclaration(node);
         }
 
-        private bool IsRemovableType(ISymbol typeSymbol) =>
-            typeSymbol.ContainingType != null &&
-            IsRemovable(typeSymbol, Accessibility.Internal);
+        private bool IsRemovableType(ISymbol typeSymbol)
+        {
+            var accessibility = typeSymbol.GetEffectiveAccessibility();
+            return typeSymbol.ContainingType != null
+                && (accessibility == Accessibility.Private || accessibility == Accessibility.Internal)
+                && IsRemovable(typeSymbol);
+        }
 
-        private bool IsRemovableMember(ISymbol typeSymbol) =>
-            IsRemovable(typeSymbol, Accessibility.Private);
+        private bool IsRemovableMember(ISymbol symbol) =>
+            symbol.GetEffectiveAccessibility() == Accessibility.Private &&
+            IsRemovable(symbol);
 
         private bool IsRemovableMethod(IMethodSymbol methodSymbol) =>
             IsRemovableMember(methodSymbol) &&
@@ -156,9 +164,8 @@ namespace SonarAnalyzer.Helpers
             !methodSymbol.IsEventHandler() && // Event handlers could be added in XAML and no method reference will be generated in the .g.cs file.
             !methodSymbol.IsSerializationConstructor();
 
-        private bool IsRemovable(ISymbol symbol, Accessibility maxAccessibility) =>
+        private bool IsRemovable(ISymbol symbol) =>
             symbol != null &&
-            symbol.GetEffectiveAccessibility() <= maxAccessibility &&
             !symbol.IsImplicitlyDeclared &&
             !symbol.IsAbstract &&
             !symbol.IsVirtual &&
@@ -166,5 +173,8 @@ namespace SonarAnalyzer.Helpers
             !symbol.ContainingType.IsInterface() &&
             symbol.GetInterfaceMember() == null &&
             symbol.GetOverriddenMember() == null;
+
+        private static bool IsEmptyConstructor(ConstructorDeclarationSyntax constructorDeclaration) =>
+            constructorDeclaration.Body == null || constructorDeclaration.Body.Statements.Count == 0;
     }
 }

@@ -41,10 +41,7 @@ namespace SonarAnalyzer.Helpers
         private readonly Func<SyntaxNode, SemanticModel> getSemanticModel;
         private readonly HashSet<string> removableSymbolNames;
 
-        public HashSet<ISymbol> Usages { get; } =
-            new HashSet<ISymbol>();
-
-        public HashSet<ISymbol> EmptyConstructors { get; } =
+        public HashSet<ISymbol> UsedSymbols { get; } =
             new HashSet<ISymbol>();
 
         public Dictionary<IPropertySymbol, Rules.CSharp.UnusedPrivateMember.AccessorAccess> PropertyAccess { get; } =
@@ -59,7 +56,7 @@ namespace SonarAnalyzer.Helpers
         public override void VisitIdentifierName(IdentifierNameSyntax node)
         {
             var symbols = GetSymbols(node, IsKnownIdentifier).ToList();
-            Usages.UnionWith(symbols);
+            UsedSymbols.UnionWith(symbols);
 
             TryStorePropertyAccess(node, symbols);
 
@@ -69,21 +66,21 @@ namespace SonarAnalyzer.Helpers
         public override void VisitObjectCreationExpression(ObjectCreationExpressionSyntax node)
         {
             var symbols = GetSymbols(node, x => true).ToList();
-            Usages.UnionWith(symbols);
+            UsedSymbols.UnionWith(symbols);
 
             base.VisitObjectCreationExpression(node);
         }
 
         public override void VisitGenericName(GenericNameSyntax node)
         {
-            Usages.UnionWith(GetSymbols(node, IsKnownIdentifier));
+            UsedSymbols.UnionWith(GetSymbols(node, IsKnownIdentifier));
             base.VisitGenericName(node);
         }
 
         public override void VisitElementAccessExpression(ElementAccessExpressionSyntax node)
         {
             var symbols = GetSymbols(node, x => true).ToList();
-            Usages.UnionWith(symbols);
+            UsedSymbols.UnionWith(symbols);
 
             TryStorePropertyAccess(node, symbols);
 
@@ -92,33 +89,27 @@ namespace SonarAnalyzer.Helpers
 
         public override void VisitConstructorInitializer(ConstructorInitializerSyntax node)
         {
-            Usages.UnionWith(GetSymbols(node, x => true));
+            UsedSymbols.UnionWith(GetSymbols(node, x => true));
             base.VisitConstructorInitializer(node);
         }
 
         public override void VisitConstructorDeclaration(ConstructorDeclarationSyntax node)
         {
-            var constructor = GetDeclaredSymbol(node);
-
-            if (IsEmptyConstructor(node))
-            {
-                EmptyConstructors.Add(constructor);
-            }
-
             if (node.Initializer == null)
             {
+                var constructor = GetDeclaredSymbol(node);
                 if (node.ParameterList?.Parameters.Count > 0)
                 {
                     var defaultConstructor = GetDefaultConstructor(constructor.ContainingType);
                     if (defaultConstructor != null)
                     {
-                        Usages.Add(defaultConstructor);
+                        UsedSymbols.Add(defaultConstructor);
                     }
                 }
                 var baseConstructor = GetDefaultConstructor(constructor.ContainingType.BaseType);
                 if (baseConstructor != null)
                 {
-                    Usages.Add(baseConstructor);
+                    UsedSymbols.Add(baseConstructor);
                 }
             }
 
@@ -130,7 +121,7 @@ namespace SonarAnalyzer.Helpers
             if (node.Initializer != null)
             {
                 var symbol = GetDeclaredSymbol(node);
-                Usages.Add(symbol);
+                UsedSymbols.Add(symbol);
                 StorePropertyAccess((IPropertySymbol)symbol, Rules.CSharp.UnusedPrivateMember.AccessorAccess.Set);
             }
             base.VisitPropertyDeclaration(node);
@@ -244,9 +235,6 @@ namespace SonarAnalyzer.Helpers
                     return identifier.GetSelfOrTopParenthesizedExpression();
             }
         }
-
-        private static bool IsEmptyConstructor(ConstructorDeclarationSyntax constructorDeclaration) =>
-            constructorDeclaration.Body == null || constructorDeclaration.Body.Statements.Count == 0;
 
         private bool IsKnownIdentifier(SimpleNameSyntax nameSyntax) =>
             removableSymbolNames.Contains(nameSyntax.Identifier.ValueText);

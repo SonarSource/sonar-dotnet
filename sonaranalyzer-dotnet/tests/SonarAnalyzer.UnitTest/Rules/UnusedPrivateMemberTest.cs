@@ -79,6 +79,18 @@ public class NonPrivateMembers
 
         [TestMethod]
         [TestCategory("Rule")]
+        public void Field_MultipleDeclarations_Reported_Once()
+        {
+            Verifier.VerifyCSharpAnalyzer(@"
+public class PrivateMembers
+{
+    private int x, y, z; // Noncompliant
+}
+", new UnusedPrivateMember());
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
         public void Fields_DirectReferences()
         {
             Verifier.VerifyCSharpAnalyzer(@"
@@ -646,20 +658,6 @@ public class NewClass
                 @"TestCases\UnusedPrivateMember.Fixed.Batch.cs",
                 new UnusedPrivateMember(),
                 new UnusedPrivateMemberCodeFixProvider());
-        }
-    }
-
-    public class Foo
-    {
-        private abstract class BaseClass
-        {
-            // this cannot be removed!
-            protected BaseClass() { var x = 5; }
-        }
-
-        private class DerivedClass : BaseClass
-        {
-            public DerivedClass() { }
         }
     }
 }
