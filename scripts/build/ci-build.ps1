@@ -99,14 +99,14 @@ function Set-DotNetVersion() {
 
 function Get-ScannerMsBuildPath() {
     $currentDir = (Resolve-Path .\).Path
-    $scannerMsbuild = Join-Path $currentDir "SonarQube.Scanner.MSBuild.exe"
+    $scannerMsbuild = Join-Path $currentDir "SonarScanner.MSBuild.exe"
 
     if (-Not (Test-Path $scannerMsbuild)) {
         Write-Debug "Scanner for MSBuild not found, downloading it"
 
         # This links always redirect to the latest released scanner
         $downloadLink = "https://repox.sonarsource.com/sonarsource-public-releases/org/sonarsource/scanner/msbuild/" +
-            "sonar-scanner-msbuild/%5BRELEASE%5D/sonar-scanner-msbuild-%5BRELEASE%5D.zip"
+            "sonar-scanner-msbuild/%5BRELEASE%5D/sonar-scanner-msbuild-%5BRELEASE%5D-net46.zip"
         $scannerMsbuildZip = Join-Path $currentDir "\MSBuild.SonarQube.Runner.zip"
 
         Write-Debug "Downloading scanner from '${downloadLink}' at '${currentDir}'"
