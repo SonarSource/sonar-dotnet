@@ -140,7 +140,6 @@ namespace Tests.Diagnostics
         }
     }
 
-
     public interface IMyDisposable : IDisposable // Compliant, interface
     {
     }
@@ -203,7 +202,7 @@ namespace Rspec_Compliant_Samples
     }
 
     // Base disposable class
-    public class Foo4 : DisposableBase
+    public class Foo4 : Foo2
     {
         protected override void Dispose(bool disposing)
         {
