@@ -378,6 +378,24 @@ public class MethodUsages
 
         [TestMethod]
         [TestCategory("Rule")]
+        public void DebuggerDisplay_Attribute()
+        {
+            Verifier.VerifyCSharpAnalyzer(@"
+[System.Diagnostics.DebuggerDisplay(""{field1}"", Name = ""{Property1}"", Type = ""{Method1()}"")]
+public class MethodUsages
+{
+    private int field1;
+    private int field2; // Noncompliant
+    private int Property1 { get; set; }
+    private int Property2 { get; set; } // Noncompliant
+    private int Method1() { return 0; }
+    private int Method2() { return 0; } // Noncompliant
+}
+", new UnusedPrivateMember());
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
         public void Constructor_Accessibility()
         {
             Verifier.VerifyCSharpAnalyzer(@"

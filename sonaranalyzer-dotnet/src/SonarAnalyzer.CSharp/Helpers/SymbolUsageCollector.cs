@@ -21,6 +21,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -44,6 +45,9 @@ namespace SonarAnalyzer.Helpers
         public HashSet<ISymbol> UsedSymbols { get; } =
             new HashSet<ISymbol>();
 
+        public HashSet<string> DebuggerDisplayValues { get; } =
+            new HashSet<string>();
+
         public Dictionary<IPropertySymbol, Rules.CSharp.UnusedPrivateMember.AccessorAccess> PropertyAccess { get; } =
             new Dictionary<IPropertySymbol, Rules.CSharp.UnusedPrivateMember.AccessorAccess>();
 
@@ -51,6 +55,33 @@ namespace SonarAnalyzer.Helpers
         {
             this.getSemanticModel = getSemanticModel;
             this.removableSymbolNames = removableSymbolNames;
+        }
+
+        public override void VisitAttribute(AttributeSyntax node)
+        {
+            var semanticModel = getSemanticModel(node);
+            var symbol = semanticModel.GetSymbolInfo(node).Symbol;
+            if (symbol != null &&
+                symbol.ContainingType.Is(KnownType.System_Diagnostics_DebuggerDisplayAttribute) &&
+                node.ArgumentList != null)
+            {
+                var arguments = node.ArgumentList.Arguments
+                    .Where(IsValueNameOrType)
+                    .Select(a => semanticModel.GetConstantValue(a.Expression))
+                    .Where(o => o.HasValue)
+                    .Select(o => o.Value)
+                    .OfType<string>();
+
+                DebuggerDisplayValues.UnionWith(arguments);
+            }
+
+            base.VisitAttribute(node);
+
+            bool IsValueNameOrType(AttributeArgumentSyntax a) =>
+                a.NameColon == null || // Value
+                a.NameColon.Name.Identifier.ValueText == "Value" ||
+                a.NameColon.Name.Identifier.ValueText == "Name" ||
+                a.NameColon.Name.Identifier.ValueText == "Type";
         }
 
         public override void VisitIdentifierName(IdentifierNameSyntax node)

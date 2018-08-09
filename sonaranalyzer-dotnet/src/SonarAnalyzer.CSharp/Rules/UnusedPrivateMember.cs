@@ -102,6 +102,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                             var unusedSymbolsByAccessibility = symbolCollector.RemovableSymbols
                                 .Except(usageCollector.UsedSymbols)
+                                .Where(symbol => !MentionedInDebuggerDisplay(symbol))
                                 .ToLookup(symbol => symbol.GetEffectiveAccessibility(), symbol => symbol);
 
                             var unusedInternalSymbols = unusedSymbolsByAccessibility[Accessibility.Internal].ToHashSet();
@@ -121,6 +122,9 @@ namespace SonarAnalyzer.Rules.CSharp
 
                             GetDiagnosticsForPropertyAccessors(onlyOneAccessorAccessed, usageCollector.PropertyAccess)
                                 .ForEach(d => cc.ReportDiagnosticIfNonGenerated(d));
+
+                            bool MentionedInDebuggerDisplay(ISymbol symbol) =>
+                                usageCollector.DebuggerDisplayValues.Any(value => value.Contains(symbol.Name));
 
                             SemanticModel GetSemanticModel(SyntaxNode node) =>
                                 c.Compilation.GetSemanticModel(node.SyntaxTree);
