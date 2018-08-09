@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2018 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -46,7 +46,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 c =>
                 {
                     var constructorDeclaration = (ConstructorDeclarationSyntax)c.Node;
-                    if (!constructorDeclaration.Modifiers.Any(SyntaxKind.StaticKeyword))
+                    if (constructorDeclaration.Body == null ||
+                        !constructorDeclaration.Modifiers.Any(SyntaxKind.StaticKeyword))
                     {
                         return;
                     }
