@@ -141,7 +141,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                            foreach (var diagnostic in unusedInternalMembers)
                            {
-                               cc.ReportDiagnosticIfNonGenerated(diagnostic);
+                               cc.ReportDiagnosticIfNonGenerated(diagnostic, cc.Compilation);
                            }
                        });
                 });
@@ -202,7 +202,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 var fieldOrEvent = unused.Symbol is IFieldSymbol || unused.Symbol is IEventSymbol;
                 if (fieldOrEvent)
                 {
-                    // Report fields and events only once per declaration
+                    // Report the whole field or event declaration when all variables in it are unused
                     if (alreadyReportedFieldLikeSymbols.Contains(unused.Symbol))
                     {
                         continue;

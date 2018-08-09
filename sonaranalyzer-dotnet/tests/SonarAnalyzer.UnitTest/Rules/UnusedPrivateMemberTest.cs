@@ -79,12 +79,19 @@ public class NonPrivateMembers
 
         [TestMethod]
         [TestCategory("Rule")]
-        public void Field_MultipleDeclarations_Reported_Once()
+        public void Field_MultipleDeclarations()
         {
             Verifier.VerifyCSharpAnalyzer(@"
 public class PrivateMembers
 {
-    private int x, y, z; // Noncompliant
+    private int x, y, z; // Noncompliant {{Remove the unused private field 'x'.}}
+//  ^^^^^^^^^^^^^^^^^^^^
+
+    private int a, b, c;
+//              ^ {{Remove the unused private field 'a'.}}
+//                    ^ @-1 {{Remove the unused private field 'c'.}}
+
+    public void Method1() => b;
 }
 ", new UnusedPrivateMember());
         }
