@@ -59,7 +59,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 c =>
                 {
                     var containsInternalsVisibleToAttribute = false;
-                    var unusedInternalMembers = new ConcurrentBag<Diagnostic>();
+                    var unusedInternalMembers = new ConcurrentBag<SyntaxNodeWithSymbol<SyntaxNode, ISymbol>>();
+                    var usedInternalMembers = new ConcurrentBag<ISymbol>();
 
                     c.RegisterSemanticModelAction(
                         cc =>
@@ -117,8 +118,20 @@ namespace SonarAnalyzer.Rules.CSharp
                             GetDiagnostics(unusedInternalSymbols, Accessibility.Internal, symbolCollector.FieldLikeSymbols)
                                 .ForEach(unusedInternalMembers.Add);
 
+                            // Keep the used internal symbols, we will need to filter the unused before we report
+                            usageCollector.UsedSymbols
+                                .Where(symbol => symbol.GetEffectiveAccessibility() == Accessibility.Internal)
+                                .ToList()
+                                .ForEach(usedInternalMembers.Add);
+
                             GetDiagnostics(unusedPrivateSymbols, Accessibility.Private, symbolCollector.FieldLikeSymbols)
-                                .ForEach(d => cc.ReportDiagnosticIfNonGenerated(d));
+                                .ForEach(unused =>
+                                {
+                                    var memberKind = GetMemberType(unused.Symbol);
+                                    var memberName = GetMemberName(unused.Symbol);
+                                    cc.ReportDiagnosticIfNonGenerated(
+                                        Diagnostic.Create(rule, unused.Syntax.GetLocation(), "private", memberKind, memberName));
+                                });
 
                             GetDiagnosticsForPropertyAccessors(onlyOneAccessorAccessed, usageCollector.PropertyAccess)
                                 .ForEach(d => cc.ReportDiagnosticIfNonGenerated(d));
@@ -139,9 +152,12 @@ namespace SonarAnalyzer.Rules.CSharp
                                return;
                            }
 
-                           foreach (var diagnostic in unusedInternalMembers)
+                           foreach (var unused in unusedInternalMembers.Where(x => usedInternalMembers.Contains(x.Symbol)))
                            {
-                               cc.ReportDiagnosticIfNonGenerated(diagnostic, cc.Compilation);
+                               var memberKind = GetMemberType(unused.Symbol);
+                               var memberName = GetMemberName(unused.Symbol);
+                               cc.ReportDiagnosticIfNonGenerated(
+                                   Diagnostic.Create(rule, unused.Syntax.GetLocation(), "internal", memberKind, memberName), cc.Compilation);
                            }
                        });
                 });
@@ -183,7 +199,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 methodSymbol?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() as AccessorDeclarationSyntax;
         }
 
-        private List<Diagnostic> GetDiagnostics(HashSet<ISymbol> unusedSymbols, Accessibility accessibility,
+        private List<SyntaxNodeWithSymbol<SyntaxNode, ISymbol>> GetDiagnostics(HashSet<ISymbol> unusedSymbols, Accessibility accessibility,
             BidirectionalDictionary<ISymbol, SyntaxNode> fieldLikeSymbols)
         {
             var alreadyReportedFieldLikeSymbols = new HashSet<ISymbol>();
@@ -191,13 +207,13 @@ namespace SonarAnalyzer.Rules.CSharp
             var unusedSymbolSyntaxPairs = unusedSymbols.SelectMany(symbol =>
                 symbol.DeclaringSyntaxReferences.Select(r => r.GetSyntax().ToSyntaxWithSymbol(symbol)));
 
-            var diagnostics = new List<Diagnostic>();
+            var diagnostics = new List<SyntaxNodeWithSymbol<SyntaxNode, ISymbol>>();
 
             foreach (var unused in unusedSymbolSyntaxPairs)
             {
                 var unusedSyntax = unused.Symbol.DeclaringSyntaxReferences.Select(r => r.GetSyntax());
 
-                var location = unused.Syntax.GetLocation();
+                var syntaxForLocation = unused.Syntax;
 
                 var fieldOrEvent = unused.Symbol is IFieldSymbol || unused.Symbol is IEventSymbol;
                 if (fieldOrEvent)
@@ -220,7 +236,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     if (declarations.All(unusedSymbols.Contains))
                     {
-                        location = unused.Syntax.Parent.Parent.GetLocation();
+                        syntaxForLocation = unused.Syntax.Parent.Parent;
                         alreadyReportedFieldLikeSymbols.UnionWith(declarations);
                     }
                 }
@@ -228,7 +244,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 var memberKind = GetMemberType(unused.Symbol);
                 var memberName = GetMemberName(unused.Symbol);
 
-                diagnostics.Add(Diagnostic.Create(rule, location, accessibility.ToString().ToLowerInvariant(), memberKind, memberName));
+                diagnostics.Add(unused.Symbol.ToSymbolWithSyntax(syntaxForLocation));
             }
 
             return diagnostics;

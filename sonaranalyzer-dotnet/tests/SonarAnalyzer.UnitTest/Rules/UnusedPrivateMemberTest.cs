@@ -552,6 +552,29 @@ public class PrivateTypes
 
         [TestMethod]
         [TestCategory("Rule")]
+        public void Types_Internals()
+        {
+            Verifier.VerifyCSharpAnalyzer(@"
+using System;
+public class Class1
+{
+    public void Method1()
+    {
+        var x = Sample.Constants.X;
+    }
+}
+
+public class Sample
+{
+    internal class Constants
+    {
+        public const int X = 5;
+    }
+}", new UnusedPrivateMember());
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
         public void Types_DirectReferences()
         {
             Verifier.VerifyCSharpAnalyzer(@"
