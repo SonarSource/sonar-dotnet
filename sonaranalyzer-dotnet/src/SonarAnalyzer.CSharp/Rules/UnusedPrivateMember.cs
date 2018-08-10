@@ -58,24 +58,8 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterCompilationStartAction(
                 c =>
                 {
-                    var containsInternalsVisibleToAttribute = false;
-                    var unusedInternalMembers = new ConcurrentBag<SyntaxNodeWithSymbol<SyntaxNode, ISymbol>>();
-                    var usedInternalMembers = new ConcurrentBag<ISymbol>();
-
-                    c.RegisterSemanticModelAction(
-                        cc =>
-                        {
-                            if (containsInternalsVisibleToAttribute)
-                            {
-                                return;
-                            }
-
-                            containsInternalsVisibleToAttribute = cc.SemanticModel.SyntaxTree.GetRoot()
-                                .DescendantNodes()
-                                .OfType<AttributeListSyntax>()
-                                .SelectMany(list => list.Attributes)
-                                .Any(a => IsInternalVisibleToAttribute(a, cc.SemanticModel));
-                        });
+                    var allNamedTypes = new ConcurrentBag<INamedTypeSymbol>();
+                    var removableInternalMembers = new ConcurrentBag<ISymbol>();
 
                     c.RegisterSymbolAction(
                         cc =>
@@ -87,87 +71,88 @@ namespace SonarAnalyzer.Rules.CSharp
                                 return;
                             }
 
-                            var symbolCollector = new RemovableSymbolCollector(GetSemanticModel);
-                            namedType.DeclaringSyntaxReferences
-                                .Select(r => r.GetSyntax())
-                                .ToList()
-                                .ForEach(symbolCollector.Visit);
+                            // Collect all symbols to try to look for used internal members when the compilation ends
+                            allNamedTypes.Add(namedType);
 
-                            var removableSymbolNames = symbolCollector.RemovableSymbols.Select(s => s.Name).ToHashSet();
+                            // Collect symbols of private members that could potentially be removed
+                            var removableSymbolsCollector = new RemovableSymbolCollector(c.Compilation.GetSemanticModel);
 
-                            var usageCollector = new SymbolUsageCollector(GetSemanticModel, removableSymbolNames);
-                            namedType.DeclaringSyntaxReferences
-                                .Select(r => r.GetSyntax())
-                                .ToList()
-                                .ForEach(usageCollector.Visit);
+                            VisitDeclaringReferences(namedType, removableSymbolsCollector);
 
-                            var unusedSymbolsByAccessibility = symbolCollector.RemovableSymbols
-                                .Except(usageCollector.UsedSymbols)
-                                .Where(symbol => !MentionedInDebuggerDisplay(symbol))
-                                .ToLookup(symbol => symbol.GetEffectiveAccessibility(), symbol => symbol);
+                            // Keep the removable internal symbols for when the compilation ends
+                            foreach (var internalSymbol in removableSymbolsCollector.InternalSymbols)
+                            {
+                                removableInternalMembers.Add(internalSymbol);
+                            }
 
-                            var unusedInternalSymbols = unusedSymbolsByAccessibility[Accessibility.Internal].ToHashSet();
-                            var unusedPrivateSymbols = unusedSymbolsByAccessibility[Accessibility.Private].ToHashSet();
+                            var usageCollector = new SymbolUsageCollector(
+                                c.Compilation.GetSemanticModel,
+                                removableSymbolsCollector.PrivateSymbols.Select(s => s.Name).ToHashSet());
 
-                            var onlyOneAccessorAccessed = symbolCollector.RemovableSymbols
-                                .Intersect(usageCollector.UsedSymbols)
-                                .OfType<IPropertySymbol>()
-                                .Where(p => usageCollector.PropertyAccess.ContainsKey(p));
+                            VisitDeclaringReferences(namedType, usageCollector);
 
-                            // Internals are reported when the compilation ends
-                            GetDiagnostics(unusedInternalSymbols, Accessibility.Internal, symbolCollector.FieldLikeSymbols)
-                                .ForEach(unusedInternalMembers.Add);
-
-                            // Keep the used internal symbols, we will need to filter the unused before we report
-                            usageCollector.UsedSymbols
-                                .Where(symbol => symbol.GetEffectiveAccessibility() == Accessibility.Internal)
-                                .ToList()
-                                .ForEach(usedInternalMembers.Add);
-
-                            GetDiagnostics(unusedPrivateSymbols, Accessibility.Private, symbolCollector.FieldLikeSymbols)
-                                .ForEach(unused =>
-                                {
-                                    var memberKind = GetMemberType(unused.Symbol);
-                                    var memberName = GetMemberName(unused.Symbol);
-                                    cc.ReportDiagnosticIfNonGenerated(
-                                        Diagnostic.Create(rule, unused.Syntax.GetLocation(), "private", memberKind, memberName));
-                                });
-
-                            GetDiagnosticsForPropertyAccessors(onlyOneAccessorAccessed, usageCollector.PropertyAccess)
-                                .ForEach(d => cc.ReportDiagnosticIfNonGenerated(d));
-
-                            bool MentionedInDebuggerDisplay(ISymbol symbol) =>
-                                usageCollector.DebuggerDisplayValues.Any(value => value.Contains(symbol.Name));
-
-                            SemanticModel GetSemanticModel(SyntaxNode node) =>
-                                c.Compilation.GetSemanticModel(node.SyntaxTree);
+                            var diagnostics = GetDiagnostics(usageCollector, removableSymbolsCollector.PrivateSymbols, "private",
+                                removableSymbolsCollector.FieldLikeSymbols);
+                            foreach (var diagnostic in diagnostics)
+                            {
+                                cc.ReportDiagnosticIfNonGenerated(diagnostic, cc.Compilation);
+                            }
                         },
                         SymbolKind.NamedType);
 
                     c.RegisterCompilationEndAction(
-                       cc =>
-                       {
-                           if (containsInternalsVisibleToAttribute)
-                           {
-                               return;
-                           }
+                        cc =>
+                        {
+                            var foundInternalsVisibleTo = cc.Compilation.Assembly
+                                .GetAttributes(KnownType.System_Runtime_CompilerServices_InternalsVisibleToAttribute)
+                                .Any();
 
-                           foreach (var unused in unusedInternalMembers.Where(x => usedInternalMembers.Contains(x.Symbol)))
-                           {
-                               var memberKind = GetMemberType(unused.Symbol);
-                               var memberName = GetMemberName(unused.Symbol);
-                               cc.ReportDiagnosticIfNonGenerated(
-                                   Diagnostic.Create(rule, unused.Syntax.GetLocation(), "internal", memberKind, memberName), cc.Compilation);
-                           }
-                       });
+                            if (foundInternalsVisibleTo)
+                            {
+                                return;
+                            }
+
+                            var usageCollector = new SymbolUsageCollector(
+                                c.Compilation.GetSemanticModel,
+                                removableInternalMembers.Select(s => s.Name).ToHashSet());
+
+                            foreach (var symbol in allNamedTypes)
+                            {
+                                VisitDeclaringReferences(symbol, usageCollector);
+                            }
+
+                            var diagnostics = GetDiagnostics(usageCollector, removableInternalMembers.ToHashSet(), "internal",
+                                new BidirectionalDictionary<ISymbol, SyntaxNode>());
+                            foreach (var diagnostic in diagnostics)
+                            {
+                                cc.ReportDiagnosticIfNonGenerated(diagnostic, cc.Compilation);
+                            }
+                        });
                 });
         }
 
-        private static bool IsInternalVisibleToAttribute(AttributeSyntax attribute, SemanticModel semanticModel) =>
-            semanticModel.GetSymbolInfo(attribute).Symbol is IMethodSymbol attributeConstructor &&
-            attributeConstructor.ContainingType.Is(KnownType.System_Runtime_CompilerServices_InternalsVisibleToAttribute);
+        private static IEnumerable<Diagnostic> GetDiagnostics(SymbolUsageCollector usageCollector, ISet<ISymbol> removableSymbols, string accessibility,
+            BidirectionalDictionary<ISymbol, SyntaxNode> fieldLikeSymbols)
+        {
+            var unusedSymbols = removableSymbols
+                .Except(usageCollector.UsedSymbols)
+                .Where(symbol => !MentionedInDebuggerDisplay(symbol))
+                .ToHashSet();
 
-        private static List<Diagnostic> GetDiagnosticsForPropertyAccessors(IEnumerable<IPropertySymbol> onlyOneAccessorAccessed,
+            var propertiesWithOnlyOneAccessorAccessed = removableSymbols
+                .Intersect(usageCollector.UsedSymbols)
+                .OfType<IPropertySymbol>()
+                .Where(usageCollector.PropertyAccess.ContainsKey);
+
+            // Report private unused symbols
+            return GetDiagnosticsForMembers(unusedSymbols, accessibility, fieldLikeSymbols)
+                .Concat(GetDiagnosticsForPropertyAccessors(propertiesWithOnlyOneAccessorAccessed, usageCollector.PropertyAccess));
+
+            bool MentionedInDebuggerDisplay(ISymbol symbol) =>
+                usageCollector.DebuggerDisplayValues.Any(value => value.Contains(symbol.Name));
+        }
+
+        private static IEnumerable<Diagnostic> GetDiagnosticsForPropertyAccessors(IEnumerable<IPropertySymbol> onlyOneAccessorAccessed,
             Dictionary<IPropertySymbol, AccessorAccess> propertyAccessorAccess)
         {
             return onlyOneAccessorAccessed.SelectMany(GetDiagnosticsForProperty).ToList();
@@ -199,38 +184,30 @@ namespace SonarAnalyzer.Rules.CSharp
                 methodSymbol?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() as AccessorDeclarationSyntax;
         }
 
-        private List<SyntaxNodeWithSymbol<SyntaxNode, ISymbol>> GetDiagnostics(HashSet<ISymbol> unusedSymbols, Accessibility accessibility,
+        private static IEnumerable<Diagnostic> GetDiagnosticsForMembers(HashSet<ISymbol> unusedSymbols, string accessibility,
             BidirectionalDictionary<ISymbol, SyntaxNode> fieldLikeSymbols)
         {
             var alreadyReportedFieldLikeSymbols = new HashSet<ISymbol>();
 
-            var unusedSymbolSyntaxPairs = unusedSymbols.SelectMany(symbol =>
-                symbol.DeclaringSyntaxReferences.Select(r => r.GetSyntax().ToSyntaxWithSymbol(symbol)));
+            var unusedSymbolSyntaxPairs = unusedSymbols
+                .SelectMany(symbol => symbol.DeclaringSyntaxReferences.Select(r => r.GetSyntax().ToSyntaxWithSymbol(symbol)));
 
-            var diagnostics = new List<SyntaxNodeWithSymbol<SyntaxNode, ISymbol>>();
+            var diagnostics = new List<Diagnostic>();
 
             foreach (var unused in unusedSymbolSyntaxPairs)
             {
-                var unusedSyntax = unused.Symbol.DeclaringSyntaxReferences.Select(r => r.GetSyntax());
-
                 var syntaxForLocation = unused.Syntax;
 
+                // Report the whole field or event declaration when all variables in it are unused.
                 var fieldOrEvent = unused.Symbol is IFieldSymbol || unused.Symbol is IEventSymbol;
                 if (fieldOrEvent)
                 {
-                    // Report the whole field or event declaration when all variables in it are unused
                     if (alreadyReportedFieldLikeSymbols.Contains(unused.Symbol))
                     {
                         continue;
                     }
 
-                    var variableDeclaration = GetVariableDeclaration(unused.Syntax);
-                    if (variableDeclaration == null)
-                    {
-                        continue;
-                    }
-
-                    var declarations = variableDeclaration.Variables
+                    var declarations = GetSiblingDeclarators((VariableDeclaratorSyntax)unused.Syntax)
                         .Select(fieldLikeSymbols.GetByB)
                         .ToList();
 
@@ -241,23 +218,32 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
                 }
 
-                var memberKind = GetMemberType(unused.Symbol);
-                var memberName = GetMemberName(unused.Symbol);
-
-                diagnostics.Add(unused.Symbol.ToSymbolWithSyntax(syntaxForLocation));
+                diagnostics.Add(CreateDiagnostic(syntaxForLocation, unused.Symbol));
             }
 
             return diagnostics;
 
-            VariableDeclarationSyntax GetVariableDeclaration(SyntaxNode syntax)
+            Diagnostic CreateDiagnostic(SyntaxNode syntaxNode, ISymbol symbol)
             {
-                if (syntax.Parent.Parent is FieldDeclarationSyntax fieldDeclaration)
-                {
-                    return fieldDeclaration.Declaration;
-                }
+                var memberType = GetMemberType(symbol);
+                var memberName = GetMemberName(symbol);
+                return Diagnostic.Create(rule, syntaxNode.GetLocation(), accessibility, memberType, memberName);
+            };
 
-                var eventFieldDeclaration = syntax.Parent.Parent as EventFieldDeclarationSyntax;
-                return eventFieldDeclaration?.Declaration;
+            IEnumerable<VariableDeclaratorSyntax> GetSiblingDeclarators(VariableDeclaratorSyntax variableDeclarator)
+            {
+                if (variableDeclarator.Parent.Parent is FieldDeclarationSyntax fieldDeclaration)
+                {
+                    return fieldDeclaration.Declaration.Variables;
+                }
+                else if (variableDeclarator.Parent.Parent is EventFieldDeclarationSyntax eventDeclaration)
+                {
+                    return eventDeclaration.Declaration.Variables;
+                }
+                else
+                {
+                    return Enumerable.Empty<VariableDeclaratorSyntax>();
+                }
             }
         }
 
@@ -282,9 +268,17 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private static string GetMemberName(ISymbol symbol)
+        private static string GetMemberName(ISymbol symbol) =>
+            symbol.IsConstructor()
+                ? symbol.ContainingType.Name
+                : symbol.Name;
+
+        private static void VisitDeclaringReferences(INamedTypeSymbol namedType, CSharpSyntaxVisitor visitor)
         {
-            return symbol.IsConstructor() ? symbol.ContainingType.Name : symbol.Name;
+            foreach (var reference in namedType.DeclaringSyntaxReferences)
+            {
+                visitor.Visit(reference.GetSyntax());
+            }
         }
     }
 }

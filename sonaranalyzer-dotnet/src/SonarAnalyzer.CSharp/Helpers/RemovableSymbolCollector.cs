@@ -25,7 +25,6 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.Common;
-using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Helpers
 {
@@ -39,15 +38,18 @@ namespace SonarAnalyzer.Helpers
 
         private readonly Func<SyntaxNode, SemanticModel> getSemanticModel;
 
-        public HashSet<ISymbol> RemovableSymbols { get; } =
+        public HashSet<ISymbol> PrivateSymbols { get; } =
+            new HashSet<ISymbol>();
+
+        public HashSet<ISymbol> InternalSymbols { get; } =
             new HashSet<ISymbol>();
 
         public BidirectionalDictionary<ISymbol, SyntaxNode> FieldLikeSymbols { get; } =
             new BidirectionalDictionary<ISymbol, SyntaxNode>();
 
-        public RemovableSymbolCollector(Func<SyntaxNode, SemanticModel> getSemanticModel)
+        public RemovableSymbolCollector(Func<SyntaxTree, bool, SemanticModel> getSemanticModel)
         {
-            this.getSemanticModel = getSemanticModel;
+            this.getSemanticModel = node => getSemanticModel(node.SyntaxTree, false);
         }
 
         private ISymbol GetDeclaredSymbol(SyntaxNode syntaxNode) =>
@@ -58,7 +60,14 @@ namespace SonarAnalyzer.Helpers
         {
             if (condition(symbol))
             {
-                RemovableSymbols.Add(symbol);
+                if (symbol.GetEffectiveAccessibility() == Accessibility.Private)
+                {
+                    PrivateSymbols.Add(symbol);
+                }
+                else
+                {
+                    InternalSymbols.Add(symbol);
+                }
             }
         }
 
@@ -69,7 +78,7 @@ namespace SonarAnalyzer.Helpers
                 var symbol = GetDeclaredSymbol(variable);
                 if (IsRemovableMember(symbol))
                 {
-                    RemovableSymbols.Add(symbol);
+                    PrivateSymbols.Add(symbol);
                     FieldLikeSymbols.Add(symbol, variable);
                 }
             }

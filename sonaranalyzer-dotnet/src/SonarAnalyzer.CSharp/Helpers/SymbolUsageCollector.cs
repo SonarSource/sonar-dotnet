@@ -51,9 +51,9 @@ namespace SonarAnalyzer.Helpers
         public Dictionary<IPropertySymbol, Rules.CSharp.UnusedPrivateMember.AccessorAccess> PropertyAccess { get; } =
             new Dictionary<IPropertySymbol, Rules.CSharp.UnusedPrivateMember.AccessorAccess>();
 
-        public SymbolUsageCollector(Func<SyntaxNode, SemanticModel> getSemanticModel, HashSet<string> removableSymbolNames)
+        public SymbolUsageCollector(Func<SyntaxTree, bool, SemanticModel> getSemanticModel, HashSet<string> removableSymbolNames)
         {
-            this.getSemanticModel = getSemanticModel;
+            this.getSemanticModel = node => getSemanticModel(node.SyntaxTree, false);
             this.removableSymbolNames = removableSymbolNames;
         }
 
