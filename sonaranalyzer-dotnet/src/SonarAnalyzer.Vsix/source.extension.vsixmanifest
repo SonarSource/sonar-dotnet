@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
   <Metadata>
-    <Identity Id="99d84a73-1512-4999-adcc-29d37452719a" Version="7.4.0.0" Language="en-US" Publisher="SonarSource" />
+    <Identity Id="SonarAnalyzer.99d84a73-1512-4999-adcc-29d37452719a" Version="7.4.0.0" Language="en-US" Publisher="SonarSource SA" />
     <DisplayName>SonarAnalyzer for CSharp and VB.NET</DisplayName>
     <Description xml:space="preserve">This extension provides on-the-fly feedback to developers on new bugs and quality issues injected into C# and VB.Net code.</Description>
     <MoreInfo>http://vs.sonarlint.org</MoreInfo>
@@ -10,12 +10,10 @@
     <Icon>logos\sonarlint_32.png</Icon>
   </Metadata>
   <Installation>
-    <InstallationTarget Version="[14.0,15.0]" Id="Microsoft.VisualStudio.Community" />
-    <InstallationTarget Version="[14.0,15.0]" Id="Microsoft.VisualStudio.Pro" />
-    <InstallationTarget Version="[14.0,15.0]" Id="Microsoft.VisualStudio.Enterprise" />
+    <InstallationTarget Id="Microsoft.VisualStudio.Community" Version="[15.0,)" />
   </Installation>
   <Dependencies>
-    <Dependency Id="Microsoft.Framework.NDP" DisplayName="Microsoft .NET Framework" d:Source="Manual" Version="[4.5.2,)" />
+    <Dependency Id="Microsoft.Framework.NDP" DisplayName="Microsoft .NET Framework" d:Source="Manual" Version="[4.5,)" />
   </Dependencies>
   <Assets>
     <Asset Type="Microsoft.VisualStudio.Analyzer" d:Source="Project" d:ProjectName="SonarAnalyzer.Common" Path="|SonarAnalyzer.Common|" />
@@ -25,9 +23,10 @@
     <Asset Type="Microsoft.VisualStudio.Analyzer" d:Source="Project" d:ProjectName="SonarAnalyzer.VisualBasic" Path="|SonarAnalyzer.VisualBasic|" />
     <Asset Type="Microsoft.VisualStudio.MefComponent" d:Source="Project" d:ProjectName="SonarAnalyzer.VisualBasic" Path="|SonarAnalyzer.VisualBasic|" />
     <Asset Type="Microsoft.VisualStudio.Analyzer" d:Source="File" Path="Google.Protobuf.dll" />
+    <Asset Type="Microsoft.VisualStudio.MefComponent" d:Source="File" Path="Google.Protobuf.dll" />
   </Assets>
   <Prerequisites>
-    <Prerequisite Id="Microsoft.VisualStudio.Component.CodeClone" Version="[14.0,15.0]" DisplayName="Microsoft.VisualStudio.Component.CoreEditor" />
-    <Prerequisite Id="Microsoft.VisualStudio.Component.Roslyn.LanguageServices" Version="[14.0,15.0]" DisplayName="Roslyn Language Services" />
+    <Prerequisite Id="Microsoft.VisualStudio.Component.CoreEditor" Version="[15.0,16.0)" DisplayName="Visual Studio core editor" />
+    <Prerequisite Id="Microsoft.VisualStudio.Component.Roslyn.LanguageServices" Version="[15.0,16.0)" DisplayName="Roslyn Language Services" />
   </Prerequisites>
 </PackageManifest>
