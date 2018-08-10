@@ -9934,7 +9934,7 @@
     <value>BUG</value>
   </data>
   <data name="S4261_Category" xml:space="preserve">
-    <value>Minor Bug</value>
+    <value>Minor Code Smell</value>
   </data>
   <data name="S4261_Description" xml:space="preserve">
     <value>According to the Task-based Asynchronous Pattern (TAP), methods returning either a System.Threading.Tasks.Task or a System.Threading.Tasks.Task&lt;TResult&gt; are considered "asynchronous". Such methods should use the Async suffix. Conversely methods which do not return such Tasks should not have an "Async" suffix in their names.</value>
@@ -9961,7 +9961,7 @@
     <value>Methods should be named according to their synchronicities</value>
   </data>
   <data name="S4261_Type" xml:space="preserve">
-    <value>BUG</value>
+    <value>CODE_SMELL</value>
   </data>
   <data name="S4275_Category" xml:space="preserve">
     <value>Critical Bug</value>
