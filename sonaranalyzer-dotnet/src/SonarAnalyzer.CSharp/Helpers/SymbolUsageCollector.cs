@@ -27,7 +27,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace SonarAnalyzer.Helpers
 {
-    public class SymbolUsageCollector : CSharpSyntaxWalker
+    internal class SymbolUsageCollector : CSharpSyntaxWalker
     {
         private static readonly ISet<SyntaxKind> IncrementKinds = new HashSet<SyntaxKind>
         {

@@ -381,6 +381,7 @@ public class MethodUsages
         public void DebuggerDisplay_Attribute()
         {
             Verifier.VerifyCSharpAnalyzer(@"
+// https://github.com/SonarSource/sonar-csharp/issues/1195
 [System.Diagnostics.DebuggerDisplay(""{field1}"", Name = ""{Property1}"", Type = ""{Method1()}"")]
 public class MethodUsages
 {
@@ -555,6 +556,8 @@ public class PrivateTypes
         public void Types_Internals()
         {
             Verifier.VerifyCSharpAnalyzer(@"
+// https://github.com/SonarSource/sonar-csharp/issues/1225
+// https://github.com/SonarSource/sonar-csharp/issues/904
 using System;
 public class Class1
 {
