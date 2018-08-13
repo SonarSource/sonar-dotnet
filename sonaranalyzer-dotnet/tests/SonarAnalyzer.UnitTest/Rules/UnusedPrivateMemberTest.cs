@@ -382,15 +382,21 @@ public class MethodUsages
         {
             Verifier.VerifyCSharpAnalyzer(@"
 // https://github.com/SonarSource/sonar-csharp/issues/1195
-[System.Diagnostics.DebuggerDisplay(""{field1}"", Name = ""{Property1}"", Type = ""{Method1()}"")]
+[System.Diagnostics.DebuggerDisplay(""{field1}"", Name = ""{Property1} {Property3}"", Type = ""{Method1()}"")]
 public class MethodUsages
 {
     private int field1;
     private int field2; // Noncompliant
     private int Property1 { get; set; }
     private int Property2 { get; set; } // Noncompliant
+    private int Property3 { get; set; }
     private int Method1() { return 0; }
     private int Method2() { return 0; } // Noncompliant
+
+    public void Method()
+    {
+        var x = Property3;
+    }
 }
 ", new UnusedPrivateMember());
         }

@@ -136,46 +136,14 @@ namespace SonarAnalyzer.Rules.CSharp
             var propertiesWithUnusedAccessor = removableSymbols
                 .Intersect(usageCollector.UsedSymbols)
                 .OfType<IPropertySymbol>()
-                .Where(usageCollector.PropertyAccess.ContainsKey);
+                .Where(usageCollector.PropertyAccess.ContainsKey)
+                .Where(symbol => !MentionedInDebuggerDisplay(symbol));
 
-            // Report private unused symbols
             return GetDiagnosticsForMembers(unusedSymbols, accessibility, fieldLikeSymbols)
-                .Concat(GetDiagnosticsForPropertyAccessors(propertiesWithUnusedAccessor, usageCollector.PropertyAccess));
+                .Concat(propertiesWithUnusedAccessor.SelectMany(propertySymbol => GetDiagnosticsForProperty(propertySymbol, usageCollector.PropertyAccess)));
 
             bool MentionedInDebuggerDisplay(ISymbol symbol) =>
                 usageCollector.DebuggerDisplayValues.Any(value => value.Contains(symbol.Name));
-        }
-
-        private static IEnumerable<Diagnostic> GetDiagnosticsForPropertyAccessors(IEnumerable<IPropertySymbol> onlyOneAccessorAccessed,
-            Dictionary<IPropertySymbol, AccessorAccess> propertyAccessorAccess)
-        {
-            return onlyOneAccessorAccessed.SelectMany(GetDiagnosticsForProperty).ToList();
-
-            IEnumerable<Diagnostic> GetDiagnosticsForProperty(IPropertySymbol property)
-            {
-                var access = propertyAccessorAccess[property];
-                if (access == AccessorAccess.Get && property.SetMethod != null)
-                {
-                    var accessorSyntax = GetAccessorSyntax(property.SetMethod);
-                    if (accessorSyntax != null)
-                    {
-                        yield return Diagnostic.Create(rule, accessorSyntax.GetLocation(), "private",
-                            "set accessor in property", property.Name);
-                    }
-                }
-                else if (access == AccessorAccess.Set && property.GetMethod != null)
-                {
-                    var accessorSyntax = GetAccessorSyntax(property.GetMethod);
-                    if (accessorSyntax != null && accessorSyntax.Body != null)
-                    {
-                        yield return Diagnostic.Create(rule, accessorSyntax.GetLocation(), "private",
-                            "get accessor in property", property.Name);
-                    }
-                }
-            }
-
-            AccessorDeclarationSyntax GetAccessorSyntax(IMethodSymbol methodSymbol) =>
-                methodSymbol?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() as AccessorDeclarationSyntax;
         }
 
         private static IEnumerable<Diagnostic> GetDiagnosticsForMembers(HashSet<ISymbol> unusedSymbols, string accessibility,
@@ -212,33 +180,37 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
                 }
 
-                diagnostics.Add(CreateDiagnostic(syntaxForLocation, unused.Symbol));
+                diagnostics.Add(CreateDiagnostic(syntaxForLocation, unused.Symbol, accessibility));
             }
 
             return diagnostics;
+        }
 
-            Diagnostic CreateDiagnostic(SyntaxNode syntaxNode, ISymbol symbol)
+        private static IEnumerable<Diagnostic> GetDiagnosticsForProperty(IPropertySymbol property,
+            Dictionary<IPropertySymbol, AccessorAccess> propertyAccessorAccess)
+        {
+            var access = propertyAccessorAccess[property];
+            if (access == AccessorAccess.Get && property.SetMethod != null)
             {
-                var memberType = GetMemberType(symbol);
-                var memberName = GetMemberName(symbol);
-                return Diagnostic.Create(rule, syntaxNode.GetLocation(), accessibility, memberType, memberName);
-            }
-
-            IEnumerable<VariableDeclaratorSyntax> GetSiblingDeclarators(VariableDeclaratorSyntax variableDeclarator)
-            {
-                if (variableDeclarator.Parent.Parent is FieldDeclarationSyntax fieldDeclaration)
+                var accessorSyntax = GetAccessorSyntax(property.SetMethod);
+                if (accessorSyntax != null)
                 {
-                    return fieldDeclaration.Declaration.Variables;
-                }
-                else if (variableDeclarator.Parent.Parent is EventFieldDeclarationSyntax eventDeclaration)
-                {
-                    return eventDeclaration.Declaration.Variables;
-                }
-                else
-                {
-                    return Enumerable.Empty<VariableDeclaratorSyntax>();
+                    yield return Diagnostic.Create(rule, accessorSyntax.GetLocation(), "private",
+                        "set accessor in property", property.Name);
                 }
             }
+            else if (access == AccessorAccess.Set && property.GetMethod != null)
+            {
+                var accessorSyntax = GetAccessorSyntax(property.GetMethod);
+                if (accessorSyntax != null && accessorSyntax.Body != null)
+                {
+                    yield return Diagnostic.Create(rule, accessorSyntax.GetLocation(), "private",
+                        "get accessor in property", property.Name);
+                }
+            }
+
+            AccessorDeclarationSyntax GetAccessorSyntax(IMethodSymbol methodSymbol) =>
+                methodSymbol?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() as AccessorDeclarationSyntax;
         }
 
         private static string GetMemberType(ISymbol symbol)
@@ -273,6 +245,29 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 visitor.Visit(reference.GetSyntax());
             }
+        }
+
+        private static IEnumerable<VariableDeclaratorSyntax> GetSiblingDeclarators(VariableDeclaratorSyntax variableDeclarator)
+        {
+            if (variableDeclarator.Parent.Parent is FieldDeclarationSyntax fieldDeclaration)
+            {
+                return fieldDeclaration.Declaration.Variables;
+            }
+            else if (variableDeclarator.Parent.Parent is EventFieldDeclarationSyntax eventDeclaration)
+            {
+                return eventDeclaration.Declaration.Variables;
+            }
+            else
+            {
+                return Enumerable.Empty<VariableDeclaratorSyntax>();
+            }
+        }
+
+        private static Diagnostic CreateDiagnostic(SyntaxNode syntaxNode, ISymbol symbol, string accessibility)
+        {
+            var memberType = GetMemberType(symbol);
+            var memberName = GetMemberName(symbol);
+            return Diagnostic.Create(rule, syntaxNode.GetLocation(), accessibility, memberType, memberName);
         }
     }
 }

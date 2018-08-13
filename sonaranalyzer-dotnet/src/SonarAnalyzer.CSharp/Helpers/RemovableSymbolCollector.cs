@@ -28,6 +28,10 @@ using SonarAnalyzer.Common;
 
 namespace SonarAnalyzer.Helpers
 {
+    /// <summary>
+    /// Collects private or internal member symbols that could potentially be removed if they are not used.
+    /// Members that are overriden, overridable, have specific use, etc. are not removable.
+    /// </summary>
     internal class RemovableSymbolCollector : CSharpSyntaxWalker
     {
         private static readonly ISet<MethodKind> RemovableMethodKinds = new HashSet<MethodKind>

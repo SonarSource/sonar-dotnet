@@ -27,6 +27,10 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace SonarAnalyzer.Helpers
 {
+    /// <summary>
+    /// Collects all symbol usages from a class declaration. Ignores symbols whose names are not present
+    /// in the removableSymbolNames collection for performance reasons.
+    /// </summary>
     internal class SymbolUsageCollector : CSharpSyntaxWalker
     {
         private static readonly ISet<SyntaxKind> IncrementKinds = new HashSet<SyntaxKind>
@@ -38,7 +42,7 @@ namespace SonarAnalyzer.Helpers
         };
 
         private readonly Func<SyntaxNode, SemanticModel> getSemanticModel;
-        private readonly HashSet<string> removableSymbolNames;
+        private readonly HashSet<string> knownSymbolNames;
 
         public HashSet<ISymbol> UsedSymbols { get; } =
             new HashSet<ISymbol>();
@@ -49,10 +53,10 @@ namespace SonarAnalyzer.Helpers
         public Dictionary<IPropertySymbol, AccessorAccess> PropertyAccess { get; } =
             new Dictionary<IPropertySymbol, AccessorAccess>();
 
-        public SymbolUsageCollector(Func<SyntaxTree, bool, SemanticModel> getSemanticModel, HashSet<string> removableSymbolNames)
+        public SymbolUsageCollector(Func<SyntaxTree, bool, SemanticModel> getSemanticModel, HashSet<string> knownSymbolNames)
         {
             this.getSemanticModel = node => getSemanticModel(node.SyntaxTree, false);
-            this.removableSymbolNames = removableSymbolNames;
+            this.knownSymbolNames = knownSymbolNames;
         }
 
         public override void VisitAttribute(AttributeSyntax node)
@@ -276,7 +280,7 @@ namespace SonarAnalyzer.Helpers
         }
 
         private bool IsKnownIdentifier(SimpleNameSyntax nameSyntax) =>
-            removableSymbolNames.Contains(nameSyntax.Identifier.ValueText);
+            knownSymbolNames.Contains(nameSyntax.Identifier.ValueText);
 
         private ISymbol GetDeclaredSymbol(SyntaxNode syntaxNode) =>
             getSemanticModel(syntaxNode).GetDeclaredSymbol(syntaxNode);
