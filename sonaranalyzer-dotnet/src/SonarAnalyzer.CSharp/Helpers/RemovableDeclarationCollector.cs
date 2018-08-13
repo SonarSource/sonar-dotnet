@@ -75,32 +75,28 @@ namespace SonarAnalyzer.Helpers
         public IEnumerable<SyntaxNodeSymbolSemanticModelTuple> GetRemovableDeclarations(
             ISet<SyntaxKind> kinds, Accessibility maxAcessibility)
         {
-            var containers = TypeDeclarations;
-
-            return containers
+            return TypeDeclarations
                 .SelectMany(container => SelectMatchingDeclarations(container, kinds)
                     .Select(node => SelectNodeTuple(node, container.SemanticModel)))
-                    .Where(tuple => IsSymbolNotInInterfaceAndRemovable(tuple.Symbol, maxAcessibility));
+                    .Where(tuple => IsRemovable(tuple.Symbol, maxAcessibility));
         }
 
         public IEnumerable<SyntaxNodeSymbolSemanticModelTuple> GetRemovableFieldLikeDeclarations(
             ISet<SyntaxKind> kinds, Accessibility maxAcessibility)
         {
-            var containers = TypeDeclarations;
-
-            var fieldLikeNodes = containers
-                .SelectMany(container => SelectMatchingDeclarations(container, kinds)
+            var fieldLikeNodes = TypeDeclarations
+                .SelectMany(typeDeclaration => SelectMatchingDeclarations(typeDeclaration, kinds)
                     .Select(node =>
                         new SyntaxNodeSemanticModelTuple<BaseFieldDeclarationSyntax>
                         {
                             SyntaxNode = (BaseFieldDeclarationSyntax)node,
-                            SemanticModel = container.SemanticModel
+                            SemanticModel = typeDeclaration.SemanticModel
                         }));
 
             return fieldLikeNodes
                 .SelectMany(fieldLikeNode => fieldLikeNode.SyntaxNode.Declaration.Variables
                     .Select(variable => SelectNodeTuple(variable, fieldLikeNode.SemanticModel))
-                    .Where(tuple => IsSymbolNotInInterfaceAndRemovable(tuple.Symbol, maxAcessibility)));
+                    .Where(tuple => IsRemovable(tuple.Symbol, maxAcessibility)));
         }
 
         private static readonly ISet<MethodKind> RemovableMethodKinds = new HashSet<MethodKind>
@@ -146,14 +142,6 @@ namespace SonarAnalyzer.Helpers
         {
             return container.SyntaxNode.DescendantNodes(IsNodeContainerTypeDeclaration)
                 .Where(node => kinds.Contains(node.Kind()));
-        }
-
-        private static bool IsSymbolNotInInterfaceAndRemovable(ISymbol symbol, Accessibility maxAccessibility)
-        {
-            return IsRemovable(symbol, maxAccessibility) &&
-                !symbol.ContainingType.IsInterface() &&
-                symbol.GetInterfaceMember() == null &&
-                symbol.GetOverriddenMember() == null;
         }
     }
 }

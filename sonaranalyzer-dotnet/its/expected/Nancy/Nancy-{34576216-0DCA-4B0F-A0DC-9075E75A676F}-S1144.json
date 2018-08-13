@@ -15,19 +15,6 @@
 },
 {
 "id":  "S1144",
-"message":  "Remove the unused private property 'DebuggerDisplay'.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\DynamicDictionary.cs",
-"region":  {
-"startLine":  351,
-"startColumn":  9,
-"endLine":  376,
-"endColumn":  10
-}
-}
-},
-{
-"id":  "S1144",
 "message":  "Remove the unused private method 'SerializeGenericDictionary'.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Json\JsonSerializer.cs",
@@ -41,32 +28,6 @@
 },
 {
 "id":  "S1144",
-"message":  "Remove the unused private property 'DebuggerDisplay'.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\Request.cs",
-"region":  {
-"startLine":  323,
-"startColumn":  9,
-"endLine":  326,
-"endColumn":  10
-}
-}
-},
-{
-"id":  "S1144",
-"message":  "Remove the unused private property 'DebuggerDisplay'.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\Response.cs",
-"region":  {
-"startLine":  169,
-"startColumn":  9,
-"endLine":  172,
-"endColumn":  10
-}
-}
-},
-{
-"id":  "S1144",
 "message":  "Remove the unused private method 'GetAllRoutes'.",
 "location":  {
 "uri":  "sources\Nancy\src\Nancy\Routing\DefaultRouteCacheProvider.cs",
@@ -75,19 +36,6 @@
 "startColumn":  13,
 "endLine":  88,
 "endColumn":  14
-}
-}
-},
-{
-"id":  "S1144",
-"message":  "Remove the unused private property 'DebuggerDisplay'.",
-"location":  {
-"uri":  "sources\Nancy\src\Nancy\Routing\RouteDescription.cs",
-"region":  {
-"startLine":  81,
-"startColumn":  9,
-"endLine":  96,
-"endColumn":  10
 }
 }
 },
