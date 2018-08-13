@@ -222,7 +222,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 var memberType = GetMemberType(symbol);
                 var memberName = GetMemberName(symbol);
                 return Diagnostic.Create(rule, syntaxNode.GetLocation(), accessibility, memberType, memberName);
-            };
+            }
 
             IEnumerable<VariableDeclaratorSyntax> GetSiblingDeclarators(VariableDeclaratorSyntax variableDeclarator)
             {

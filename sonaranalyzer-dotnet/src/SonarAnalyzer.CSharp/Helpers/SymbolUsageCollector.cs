@@ -95,7 +95,6 @@ namespace SonarAnalyzer.Helpers
         public override void VisitObjectCreationExpression(ObjectCreationExpressionSyntax node)
         {
             UsedSymbols.UnionWith(GetSymbols(node, x => true));
-
             base.VisitObjectCreationExpression(node);
         }
 
