@@ -100,7 +100,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     var ternaryStatement = (ConditionalExpressionSyntax)c.Node;
 
-                    if (ternaryStatement.WhenTrue.IsEquivalentTo(ternaryStatement.WhenFalse, false))
+                    if (ternaryStatement.WhenTrue.RemoveParentheses().IsEquivalentTo(
+                            ternaryStatement.WhenFalse.RemoveParentheses(), false))
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, ternaryStatement.GetLocation(), TernaryMessage));
                     }
