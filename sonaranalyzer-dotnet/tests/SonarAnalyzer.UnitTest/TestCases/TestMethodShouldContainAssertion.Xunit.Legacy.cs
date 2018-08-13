@@ -1,8 +1,9 @@
-﻿namespace TestXunit
+﻿namespace TestXunitLegacy
 {
     using System;
-    using FluentAssertions;
+    using FluentAssertions;  // v4.9
     using Xunit;
+    using Xunit.Extensions; // v1.9.1
 
     class Program
     {
@@ -91,7 +92,7 @@
             Assert.Equal(d, 10.0);
         }
 
-        [Fact(Skip="reason")]
+        [Fact(Skip = "reason")]
         public void Fact15() // Don't raise on skipped test methods
         {
         }
@@ -183,32 +184,32 @@
 
         public void AssertSomething()
         {
-            Assert.IsTrue(true);
+            Assert.True(true);
         }
 
         public void ShouldSomething()
         {
-            Assert.IsTrue(true);
+            Assert.True(true);
         }
 
         public void ExpectSomething()
         {
-            Assert.IsTrue(true);
+            Assert.True(true);
         }
 
         public void MustSomething()
         {
-            Assert.IsTrue(true);
+            Assert.True(true);
         }
 
         public void VerifySomething()
         {
-            Assert.IsTrue(true);
+            Assert.True(true);
         }
 
         public void ValidateSomething()
         {
-            Assert.IsTrue(true);
+            Assert.True(true);
         }
     }
 }

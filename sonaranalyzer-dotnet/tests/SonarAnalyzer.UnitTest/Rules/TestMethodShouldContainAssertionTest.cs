@@ -68,5 +68,17 @@ namespace SonarAnalyzer.UnitTest.Rules
                     .Concat(MetadataReferenceHelper.FromNuGet("FluentAssertions", fluentVersion))
                     .ToArray());
         }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void TestMethodShouldContainAssertion_Xunit_Legacy()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldContainAssertion.Xunit.Legacy.cs",
+                new TestMethodShouldContainAssertion(),
+                additionalReferences: MetadataReferenceHelper.FromNuGet("xunit", "1.9.1")
+                .Concat(MetadataReferenceHelper.FromNuGet("xunit.extensions", "1.9.1"))
+                .Concat(MetadataReferenceHelper.FromNuGet("FluentAssertions", "4.9.0"))
+                    .ToArray());
+        }
     }
 }

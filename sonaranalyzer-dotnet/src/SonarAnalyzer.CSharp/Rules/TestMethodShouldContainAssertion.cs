@@ -49,7 +49,8 @@ namespace SonarAnalyzer.Rules.CSharp
             KnownType.NUnit_Framework_TestCaseSourceAttribute,
             KnownType.NUnit_Framework_TheoryAttribute,
             KnownType.Xunit_FactAttribute,
-            KnownType.Xunit_TheoryAttribute
+            KnownType.Xunit_TheoryAttribute,
+            KnownType.LegacyXunit_TheoryAttribute
         };
 
         private static readonly ISet<KnownType> ExpectedExceptionAttributes = new HashSet<KnownType>

@@ -48,6 +48,7 @@ namespace SonarAnalyzer.UnitTest
             {
                 "lib",
                 "portable-net45",
+                "net20",
                 "net40",
                 "net45",
                 "netstandard1.0",
