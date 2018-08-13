@@ -33,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             Verifier.VerifyAnalyzer(@"TestCases\ReturnEmptyCollectionInsteadOfNull.cs",
                 new ReturnEmptyCollectionInsteadOfNull(),
-                additionalReferences: AssemblyReference.FromFramework("System.Xml.dll"));
+                additionalReferences: MetadataReferenceHelper.FromFrameworkAssembly("System.Xml.dll"));
         }
     }
 }

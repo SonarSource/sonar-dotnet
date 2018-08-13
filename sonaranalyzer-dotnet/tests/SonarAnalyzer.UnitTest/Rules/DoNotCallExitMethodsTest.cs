@@ -34,7 +34,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzer(@"TestCases\DoNotCallExitMethods.cs",
                 new DoNotCallExitMethods(),
                 null,
-                AssemblyReference.FromFramework("System.Windows.Forms.dll"));
+                MetadataReferenceHelper.FromFrameworkAssembly("System.Windows.Forms.dll"));
         }
     }
 }

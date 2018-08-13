@@ -19,6 +19,8 @@
  */
 
 extern alias csharp;
+
+using System.Linq;
 using csharp::SonarAnalyzer.Rules.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -29,13 +31,13 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [DataTestMethod]
         [DataRow("3.0.20105.1")]
-        [DataRow(AssemblyReference.NuGetInfo.LatestVersion)]
+        [DataRow(MetadataReferenceHelper.NuGetLatestVersion)]
         [TestCategory("Rule")]
         public void HttpPostControllerActionShouldValidateInput(string aspNetMvcVersion)
         {
             Verifier.VerifyAnalyzer(@"TestCases\HttpPostControllerActionShouldValidateInput.cs",
                 new HttpPostControllerActionShouldValidateInput(),
-                additionalReferences: AssemblyReference.FromNuGet("System.Web.Mvc.dll", "Microsoft.AspNet.Mvc", aspNetMvcVersion));
+                additionalReferences: MetadataReferenceHelper.FromNuGet("Microsoft.AspNet.Mvc", aspNetMvcVersion).ToArray());
         }
     }
 }

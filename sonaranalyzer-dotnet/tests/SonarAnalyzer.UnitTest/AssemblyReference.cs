@@ -18,62 +18,93 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using Microsoft.CodeAnalysis;
 using NuGet;
+using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.UnitTest
 {
-    internal class AssemblyReference : IEquatable<AssemblyReference>
+    internal static class MetadataReferenceHelper
     {
-        internal class NuGetInfo : IEquatable<NuGetInfo>
-        {
-            internal const string LatestVersion = null;
+        internal const string NuGetLatestVersion = null;
 
-            public string Name { get; }
-            public SemanticVersion Version { get; }
+        private const string PackagesFolderRelativePath = @"..\..\..\..\packages\";
 
-            internal NuGetInfo(string id, string version = LatestVersion)
+        private static readonly string systemAssembliesFolder =
+            new FileInfo(typeof(object).Assembly.Location).Directory.FullName;
+
+        private static readonly PackageManager packageManager =
+            new PackageManager(CreatePackageRepository(), PackagesFolderRelativePath);
+
+        private static readonly Dictionary<string, MetadataReference[]> metadataReferenceCache =
+            new Dictionary<string, MetadataReference[]>();
+
+        private static readonly List<string> allowedNugetLibDirectories =
+            new List<string>
             {
-                Name = id;
-                Version = SemanticVersion.ParseOptionalVersion(version);
+                "lib",
+                "portable-net45",
+                "net40",
+                "net45",
+                "netstandard1.0",
+                "netstandard1.1",
+                "netstandard2.0"
+            };
+
+        private static IPackageRepository CreatePackageRepository()
+        {
+            var currentFolder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            var localSettings = Settings.LoadDefaultSettings(new PhysicalFileSystem(currentFolder), null, null);
+
+            // Get a package source provider that can use the settings
+            var packageSourceProvider = new PackageSourceProvider(localSettings);
+
+            // Create an aggregate repository that uses all of the configured sources
+            var aggregateRepository = packageSourceProvider.CreateAggregateRepository(PackageRepositoryFactory.Default,
+                true /* ignore failing repos. Errors will be logged as warnings. */ );
+
+            return aggregateRepository;
+        }
+
+        public static MetadataReference FromFrameworkAssembly(string assemblyName)
+        {
+            return metadataReferenceCache.GetOrAdd(assemblyName, ProcessAssembly).Single();
+
+            MetadataReference[] ProcessAssembly(string name) =>
+                new[] { MetadataReference.CreateFromFile(Path.Combine(systemAssembliesFolder, name)) };
+        }
+
+        public static MetadataReference[] FromNuGet(string packageId, string packageVersion = NuGetLatestVersion)
+        {
+            return metadataReferenceCache.GetOrAdd($"{packageId}.{packageVersion}", x => ProcessNuGet());
+
+            MetadataReference[] ProcessNuGet()
+            {
+                packageManager.InstallPackage(packageId, SemanticVersion.ParseOptionalVersion(packageVersion),
+                    ignoreDependencies: true, allowPrereleaseVersions: false);
+
+                var matchingDlls = Directory.GetFiles(GetNuGetPackageDirectory(), "*.dll", SearchOption.AllDirectories)
+                    .Select(path => new FileInfo(path))
+                    .GroupBy(file => file.Directory.Name)
+                    .Where(group => allowedNugetLibDirectories.Any(y => group.Key.StartsWith(y)))
+                    .OrderByDescending(group => group.Key)
+                    .First();
+
+                return matchingDlls.Select(file => MetadataReference.CreateFromFile(file.FullName)).ToArray();
             }
 
-            public override bool Equals(object obj) =>
-                Equals(obj as NuGetInfo);
+            string GetNuGetPackageDirectory() =>
+                $@"{PackagesFolderRelativePath}{packageId}.{GetRealVersionFolder()}\lib";
 
-            public override int GetHashCode() =>
-                $"{Name}|{Version}".GetHashCode();
-
-            public bool Equals(NuGetInfo other) =>
-                other != null &&
-                other.Name == Name &&
-                other.Version == Version;
+            string GetRealVersionFolder() =>
+                packageVersion?.ToString()
+                ?? Directory.GetDirectories(PackagesFolderRelativePath, $"{packageId}*", SearchOption.TopDirectoryOnly)
+                    .Last()
+                    .Substring(PackagesFolderRelativePath.Length + packageId.Length + 1);
         }
-
-        public string Name { get; }
-        public NuGetInfo NuGet { get; }
-
-        private AssemblyReference(string assemblyName, NuGetInfo nuGetInfo = null)
-        {
-            Name = assemblyName;
-            NuGet = nuGetInfo;
-        }
-
-        public static AssemblyReference FromFramework(string assemblyName) =>
-            new AssemblyReference(assemblyName);
-
-        public static AssemblyReference FromNuGet(string assemblyName, string packageId, string version) =>
-            new AssemblyReference(assemblyName, new NuGetInfo(packageId, version));
-
-        public override bool Equals(object obj) =>
-            Equals(obj as AssemblyReference);
-
-        public override int GetHashCode() =>
-            $"{Name}|{NuGet?.GetHashCode()}".GetHashCode();
-
-        public bool Equals(AssemblyReference other) =>
-            other != null &&
-            other.Name == Name &&
-            ((NuGet == null && other.NuGet == null) || (NuGet.Equals(other.NuGet)));
     }
 }

@@ -19,6 +19,8 @@
  */
 
 extern alias csharp;
+
+using System.Linq;
 using csharp::SonarAnalyzer.Rules.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -29,39 +31,37 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [DataTestMethod]
         [DataRow("1.1.11")]
-        [DataRow(AssemblyReference.NuGetInfo.LatestVersion)]
+        [DataRow(MetadataReferenceHelper.NuGetLatestVersion)]
         [TestCategory("Rule")]
         public void AssertionArgsShouldBePassedInCorrectOrder_MsTest(string testFwkVersion)
         {
             Verifier.VerifyAnalyzer(@"TestCases\AssertionArgsShouldBePassedInCorrectOrder.MsTest.cs",
                 new AssertionArgsShouldBePassedInCorrectOrder(),
-                null,
-                AssemblyReference.FromNuGet("Microsoft.VisualStudio.TestPlatform.TestFramework.dll", "MSTest.TestFramework", testFwkVersion));
+                additionalReferences: MetadataReferenceHelper.FromNuGet("MSTest.TestFramework", testFwkVersion));
         }
 
         [DataTestMethod]
         [DataRow("2.5.7.10213")]
-        [DataRow(AssemblyReference.NuGetInfo.LatestVersion)]
+        [DataRow(MetadataReferenceHelper.NuGetLatestVersion)]
         [TestCategory("Rule")]
         public void AssertionArgsShouldBePassedInCorrectOrder_NUnit(string testFwkVersion)
         {
             Verifier.VerifyAnalyzer(@"TestCases\AssertionArgsShouldBePassedInCorrectOrder.NUnit.cs",
                 new AssertionArgsShouldBePassedInCorrectOrder(),
-                null,
-                AssemblyReference.FromNuGet("nunit.framework.dll", "NUnit", testFwkVersion));
+                additionalReferences: MetadataReferenceHelper.FromNuGet("NUnit", testFwkVersion));
         }
 
         [DataTestMethod]
         [DataRow("2.0.0")]
-        [DataRow(AssemblyReference.NuGetInfo.LatestVersion)]
+        [DataRow(MetadataReferenceHelper.NuGetLatestVersion)]
         [TestCategory("Rule")]
         public void AssertionArgsShouldBePassedInCorrectOrder_XUnit(string testFwkVersion)
         {
             Verifier.VerifyAnalyzer(@"TestCases\AssertionArgsShouldBePassedInCorrectOrder.Xunit.cs",
                 new AssertionArgsShouldBePassedInCorrectOrder(),
-                null,
-                AssemblyReference.FromNuGet("xunit.assert.dll", "xunit.assert", testFwkVersion),
-                AssemblyReference.FromNuGet("xunit.core.dll", "xunit.extensibility.core", testFwkVersion));
+                additionalReferences: MetadataReferenceHelper.FromNuGet("xunit.assert", testFwkVersion)
+                    .Concat(MetadataReferenceHelper.FromNuGet("xunit.extensibility.core", testFwkVersion))
+                    .ToArray());
         }
     }
 }

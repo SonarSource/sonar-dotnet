@@ -29,26 +29,26 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [DataTestMethod]
         [DataRow("2.5.7.10213")]
-        [DataRow(AssemblyReference.NuGetInfo.LatestVersion)]
+        [DataRow(MetadataReferenceHelper.NuGetLatestVersion)]
         [TestCategory("Rule")]
         public void TestClassShouldHaveTestMethod_NUnit(string testFwkVersion)
         {
             Verifier.VerifyAnalyzer(@"TestCases\TestClassShouldHaveTestMethod.NUnit.cs",
                 new TestClassShouldHaveTestMethod(),
                 null,
-                AssemblyReference.FromNuGet("nunit.framework.dll", "NUnit", testFwkVersion));
+                MetadataReferenceHelper.FromNuGet("NUnit", testFwkVersion));
         }
 
         [DataTestMethod]
         [DataRow("1.1.11")]
-        [DataRow(AssemblyReference.NuGetInfo.LatestVersion)]
+        [DataRow(MetadataReferenceHelper.NuGetLatestVersion)]
         [TestCategory("Rule")]
         public void TestClassShouldHaveTestMethod_MSTest(string testFwkVersion)
         {
             Verifier.VerifyAnalyzer(@"TestCases\TestClassShouldHaveTestMethod.MsTest.cs",
                 new TestClassShouldHaveTestMethod(),
                 null,
-                AssemblyReference.FromNuGet("Microsoft.VisualStudio.TestPlatform.TestFramework.dll", "MSTest.TestFramework", testFwkVersion));
+                MetadataReferenceHelper.FromNuGet("MSTest.TestFramework", testFwkVersion));
         }
     }
 }

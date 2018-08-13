@@ -33,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             Verifier.VerifyAnalyzer(@"TestCases\MutableFieldsShouldNotBePublicStatic.cs",
                 new MutableFieldsShouldNotBePublicStatic(),
-                additionalReferences: AssemblyReference.FromNuGet("System.Collections.Immutable.dll", "System.Collections.Immutable", "1.3.0"));
+                additionalReferences: MetadataReferenceHelper.FromNuGet("System.Collections.Immutable", "1.3.0"));
         }
     }
 }

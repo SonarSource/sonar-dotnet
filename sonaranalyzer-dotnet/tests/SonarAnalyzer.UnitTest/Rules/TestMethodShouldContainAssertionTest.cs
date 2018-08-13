@@ -19,6 +19,8 @@
  */
 
 extern alias csharp;
+
+using System.Linq;
 using csharp::SonarAnalyzer.Rules.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -29,45 +31,42 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [DataTestMethod]
         [DataRow("1.1.11", "4.19.4")]
-        [DataRow(AssemblyReference.NuGetInfo.LatestVersion, "4.19.4")]
+        [DataRow(MetadataReferenceHelper.NuGetLatestVersion, "4.19.4")]
         [TestCategory("Rule")]
         public void TestMethodShouldContainAssertion_MSTest(string testFwkVersion, string fluentVersion)
         {
             Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldContainAssertion.MsTest.cs",
                 new TestMethodShouldContainAssertion(),
-                null,
-                AssemblyReference.FromNuGet("Microsoft.VisualStudio.TestPlatform.TestFramework.dll", "MSTest.TestFramework", testFwkVersion),
-                AssemblyReference.FromNuGet("FluentAssertions.dll", "FluentAssertions", fluentVersion),
-                AssemblyReference.FromNuGet("FluentAssertions.Core.dll", "FluentAssertions", fluentVersion));
+                additionalReferences: MetadataReferenceHelper.FromNuGet("MSTest.TestFramework", testFwkVersion)
+                    .Concat(MetadataReferenceHelper.FromNuGet("FluentAssertions", fluentVersion))
+                    .ToArray());
         }
 
         [DataTestMethod]
         [DataRow("2.5.7.10213", "4.19.4")]
-        [DataRow(AssemblyReference.NuGetInfo.LatestVersion, "4.19.4")]
+        [DataRow(MetadataReferenceHelper.NuGetLatestVersion, "4.19.4")]
         [TestCategory("Rule")]
         public void TestMethodShouldContainAssertion_NUnit(string testFwkVersion, string fluentVersion)
         {
             Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldContainAssertion.NUnit.cs",
                 new TestMethodShouldContainAssertion(),
-                null,
-                AssemblyReference.FromNuGet("nunit.framework.dll", "NUnit", testFwkVersion),
-                AssemblyReference.FromNuGet("FluentAssertions.dll", "FluentAssertions", fluentVersion),
-                AssemblyReference.FromNuGet("FluentAssertions.Core.dll", "FluentAssertions", fluentVersion));
+                additionalReferences: MetadataReferenceHelper.FromNuGet("NUnit", testFwkVersion)
+                    .Concat(MetadataReferenceHelper.FromNuGet("FluentAssertions", fluentVersion))
+                    .ToArray());
         }
 
         [DataTestMethod]
         [DataRow("2.0.0", "4.19.4")]
-        [DataRow(AssemblyReference.NuGetInfo.LatestVersion, "4.19.4")]
+        [DataRow(MetadataReferenceHelper.NuGetLatestVersion, "4.19.4")]
         [TestCategory("Rule")]
         public void TestMethodShouldContainAssertion_Xunit(string testFwkVersion, string fluentVersion)
         {
             Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldContainAssertion.Xunit.cs",
                 new TestMethodShouldContainAssertion(),
-                null,
-                AssemblyReference.FromNuGet("xunit.assert.dll", "xunit.assert", testFwkVersion),
-                AssemblyReference.FromNuGet("xunit.core.dll", "xunit.extensibility.core", testFwkVersion),
-                AssemblyReference.FromNuGet("FluentAssertions.dll", "FluentAssertions", fluentVersion),
-                AssemblyReference.FromNuGet("FluentAssertions.Core.dll", "FluentAssertions", fluentVersion));
+                additionalReferences: MetadataReferenceHelper.FromNuGet("xunit.assert", testFwkVersion)
+                    .Concat(MetadataReferenceHelper.FromNuGet("xunit.extensibility.core", testFwkVersion))
+                    .Concat(MetadataReferenceHelper.FromNuGet("FluentAssertions", fluentVersion))
+                    .ToArray());
         }
     }
 }

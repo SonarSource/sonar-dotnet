@@ -72,21 +72,21 @@ namespace SonarAnalyzer.UnitTest
         }
 
         public static void VerifyCSharpAnalyzer(string snippet, SonarDiagnosticAnalyzer diagnosticAnalyzer,
-            ParseOptions options = null, params AssemblyReference[] additionalReferences)
+            ParseOptions options = null, params MetadataReference[] additionalReferences)
         {
             VerifyAnalyzer(new[] { new DocumentInfo($"file1{CSharpFileExtension}", snippet) },
                 CSharpFileExtension, diagnosticAnalyzer, options, null, additionalReferences);
         }
 
         public static void VerifyVisualBasicAnalyzer(string snippet, SonarDiagnosticAnalyzer diagnosticAnalyzer,
-            ParseOptions options = null, params AssemblyReference[] additionalReferences)
+            ParseOptions options = null, params MetadataReference[] additionalReferences)
         {
             VerifyAnalyzer(new[] { new DocumentInfo($"file1{VisualBasicFileExtension}", snippet) },
                 VisualBasicFileExtension, diagnosticAnalyzer, options, null, additionalReferences);
         }
 
         public static void VerifyAnalyzer(string path, SonarDiagnosticAnalyzer diagnosticAnalyzer,
-            ParseOptions options = null, params AssemblyReference[] additionalReferences)
+            ParseOptions options = null, params MetadataReference[] additionalReferences)
         {
             VerifyAnalyzer(new[] { path }, diagnosticAnalyzer, null, options, additionalReferences);
         }
@@ -103,7 +103,7 @@ namespace SonarAnalyzer.UnitTest
 
         public static void VerifyAnalyzer(IEnumerable<string> paths, SonarDiagnosticAnalyzer diagnosticAnalyzer,
             Action<DiagnosticAnalyzer, Compilation> additionalVerify = null, ParseOptions options = null,
-            params AssemblyReference[] additionalReferences)
+            params MetadataReference[] additionalReferences)
         {
             if (paths == null || !paths.Any())
             {
@@ -138,7 +138,7 @@ namespace SonarAnalyzer.UnitTest
 
         private static void VerifyAnalyzer(IEnumerable<DocumentInfo> documents, string fileExtension,
             DiagnosticAnalyzer diagnosticAnalyzer, ParseOptions options = null,
-            Action<DiagnosticAnalyzer, Compilation> additionalVerify = null, params AssemblyReference[] additionalReferences)
+            Action<DiagnosticAnalyzer, Compilation> additionalVerify = null, params MetadataReference[] additionalReferences)
         {
             try
             {
@@ -248,20 +248,20 @@ namespace SonarAnalyzer.UnitTest
         }
 
         public static void VerifyNoIssueReportedInTest(string path, SonarDiagnosticAnalyzer diagnosticAnalyzer,
-            params AssemblyReference[] additionalReferences)
+            params MetadataReference[] additionalReferences)
         {
             VerifyNoIssueReported(path, TestAssemblyName, diagnosticAnalyzer, additionalReferences);
         }
 
         public static void VerifyNoIssueReported(string path, SonarDiagnosticAnalyzer diagnosticAnalyzer, ParseOptions options = null,
-            params AssemblyReference[] additionalReferences)
+            params MetadataReference[] additionalReferences)
         {
             VerifyNoIssueReported(path, GeneratedAssemblyName, diagnosticAnalyzer, additionalReferences, options);
         }
 
         public static void VerifyCodeFix(string path, string pathToExpected,
             SonarDiagnosticAnalyzer diagnosticAnalyzer, SonarCodeFixProvider codeFixProvider,
-            params AssemblyReference[] additionalReferences)
+            params MetadataReference[] additionalReferences)
         {
             VerifyCodeFix(path, pathToExpected, pathToExpected, diagnosticAnalyzer, codeFixProvider,
                 null, additionalReferences);
@@ -269,7 +269,7 @@ namespace SonarAnalyzer.UnitTest
 
         public static void VerifyCodeFix(string path, string pathToExpected, string pathToBatchExpected,
             SonarDiagnosticAnalyzer diagnosticAnalyzer, SonarCodeFixProvider codeFixProvider,
-            params AssemblyReference[] additionalReferences)
+            params MetadataReference[] additionalReferences)
         {
             VerifyCodeFix(path, pathToExpected, pathToBatchExpected, diagnosticAnalyzer, codeFixProvider,
                 null, additionalReferences);
@@ -277,7 +277,7 @@ namespace SonarAnalyzer.UnitTest
 
         public static void VerifyCodeFix(string path, string pathToExpected,
             SonarDiagnosticAnalyzer diagnosticAnalyzer, SonarCodeFixProvider codeFixProvider, string codeFixTitle,
-            params AssemblyReference[] additionalReferences)
+            params MetadataReference[] additionalReferences)
         {
             VerifyCodeFix(path, pathToExpected, pathToExpected, diagnosticAnalyzer, codeFixProvider,
                 codeFixTitle, additionalReferences);
@@ -285,7 +285,7 @@ namespace SonarAnalyzer.UnitTest
 
         public static void VerifyCodeFix(string path, string pathToExpected, string pathToBatchExpected,
             SonarDiagnosticAnalyzer diagnosticAnalyzer, SonarCodeFixProvider codeFixProvider, string codeFixTitle,
-            params AssemblyReference[] additionalReferences)
+            params MetadataReference[] additionalReferences)
         {
             using (var workspace = new AdhocWorkspace())
             {
@@ -310,7 +310,7 @@ namespace SonarAnalyzer.UnitTest
         #region Generic helper
 
         private static void VerifyNoIssueReported(string path, string assemblyName, DiagnosticAnalyzer diagnosticAnalyzer,
-            AssemblyReference[] additionalReferences, ParseOptions parseOptions = null)
+            MetadataReference[] additionalReferences, ParseOptions parseOptions = null)
         {
             using (var workspace = new AdhocWorkspace())
             {
@@ -330,7 +330,7 @@ namespace SonarAnalyzer.UnitTest
         }
 
         private static void VerifyFixAllCodeFix(string path, string pathToExpected, DiagnosticAnalyzer diagnosticAnalyzer,
-            CodeFixProvider codeFixProvider, string codeFixTitle, params AssemblyReference[] additionalReferences)
+            CodeFixProvider codeFixProvider, string codeFixTitle, params MetadataReference[] additionalReferences)
         {
             var fixAllProvider = codeFixProvider.GetFixAllProvider();
             if (fixAllProvider == null)
@@ -355,17 +355,17 @@ namespace SonarAnalyzer.UnitTest
         }
 
         private static Project CreateProject(string fileExtension, string assemblyName, AdhocWorkspace workspace,
-            params AssemblyReference[] additionalReferences)
+            params MetadataReference[] additionalReferences)
         {
             var language = fileExtension == CSharpFileExtension
                 ? LanguageNames.CSharp
                 : LanguageNames.VisualBasic;
 
             var project = workspace.CurrentSolution.AddProject(assemblyName, $"{assemblyName}.dll", language)
-                .AddMetadataReference(AssemblyReferenceService.GetMetadataReference(AssemblyReference.FromFramework("mscorlib.dll")))
-                .AddMetadataReference(AssemblyReferenceService.GetMetadataReference(AssemblyReference.FromFramework("System.dll")))
-                .AddMetadataReference(AssemblyReferenceService.GetMetadataReference(AssemblyReference.FromFramework("System.Core.dll")))
-                .AddMetadataReferences(additionalReferences.Select(AssemblyReferenceService.GetMetadataReference));
+                .AddMetadataReference(MetadataReferenceHelper.FromFrameworkAssembly("mscorlib.dll"))
+                .AddMetadataReference(MetadataReferenceHelper.FromFrameworkAssembly("System.dll"))
+                .AddMetadataReference(MetadataReferenceHelper.FromFrameworkAssembly("System.Core.dll"))
+                .AddMetadataReferences(additionalReferences);
 
             // adding an extra file to the project
             // this won't trigger any issues, but it keeps a reference to the original ParseOption, so

@@ -33,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             Verifier.VerifyAnalyzer(@"TestCases\DoNotInstantiateSharedClasses.cs",
                 new DoNotInstantiateSharedClasses(),
-                additionalReferences: AssemblyReference.FromFramework("System.ComponentModel.Composition.dll"));
+                additionalReferences: MetadataReferenceHelper.FromFrameworkAssembly("System.ComponentModel.Composition.dll"));
         }
 
         [TestMethod]
@@ -42,7 +42,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             Verifier.VerifyNoIssueReportedInTest(@"TestCases\DoNotInstantiateSharedClasses.cs",
                 new DoNotInstantiateSharedClasses(),
-                additionalReferences: AssemblyReference.FromFramework("System.ComponentModel.Composition.dll"));
+                additionalReferences: MetadataReferenceHelper.FromFrameworkAssembly("System.ComponentModel.Composition.dll"));
         }
     }
 }

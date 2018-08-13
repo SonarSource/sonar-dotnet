@@ -33,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             Verifier.VerifyAnalyzer(@"TestCases\ConstructorArgumentValueShouldExist.cs",
                 new ConstructorArgumentValueShouldExist(),
-                additionalReferences: AssemblyReference.FromFramework("System.Xaml.dll"));
+                additionalReferences: MetadataReferenceHelper.FromFrameworkAssembly("System.Xaml.dll"));
         }
     }
 }

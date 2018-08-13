@@ -19,8 +19,10 @@
  */
 
 extern alias csharp;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+using System.Linq;
 using csharp::SonarAnalyzer.Rules.CSharp;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -38,32 +40,32 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataTestMethod]
         [TestCategory("Rule")]
         [DataRow("3.0.20105.1")]
-        [DataRow(AssemblyReference.NuGetInfo.LatestVersion)]
+        [DataRow(MetadataReferenceHelper.NuGetLatestVersion)]
         public void UriShouldNotBeHardcoded_CSharp_VirtualPath_AspNet(string aspNetMvcVersion)
         {
             Verifier.VerifyAnalyzer(@"TestCases\UriShouldNotBeHardcoded.AspNet.cs",
                 new UriShouldNotBeHardcoded(),
-                additionalReferences: new[] {
-                    AssemblyReference.FromFramework("System.Web.dll"),
-                    AssemblyReference.FromNuGet("System.Web.Mvc.dll", "Microsoft.AspNet.Mvc", aspNetMvcVersion)});
+                additionalReferences: new[] { MetadataReferenceHelper.FromFrameworkAssembly("System.Web.dll") }
+                    .Concat(MetadataReferenceHelper.FromNuGet("Microsoft.AspNet.Mvc", aspNetMvcVersion))
+                    .ToArray());
         }
 
         [DataTestMethod]
         [TestCategory("Rule")]
         [DataRow("2.0.4", "2.0.3")]
-        [DataRow(AssemblyReference.NuGetInfo.LatestVersion, AssemblyReference.NuGetInfo.LatestVersion)]
+        [DataRow(MetadataReferenceHelper.NuGetLatestVersion, MetadataReferenceHelper.NuGetLatestVersion)]
         public void UriShouldNotBeHardcoded_CSharp_VirtualPath_AspNetCore(string aspNetCoreMvcVersion, string aspNetCoreRoutingVersion)
         {
             Verifier.VerifyAnalyzer(@"TestCases\UriShouldNotBeHardcoded.AspNetCore.cs",
                 new UriShouldNotBeHardcoded(),
-                additionalReferences: new[] {
+                additionalReferences:
                     // for VirtualFileResult
-                    AssemblyReference.FromNuGet("Microsoft.AspNetCore.Mvc.Core.dll", "Microsoft.AspNetCore.Mvc.Core", aspNetCoreMvcVersion),
+                    MetadataReferenceHelper.FromNuGet("Microsoft.AspNetCore.Mvc.Core", aspNetCoreMvcVersion)
                     // for Controller
-                    AssemblyReference.FromNuGet("Microsoft.AspNetCore.Mvc.ViewFeatures.dll", "Microsoft.AspNetCore.Mvc.ViewFeatures", aspNetCoreMvcVersion),
+                    .Concat(MetadataReferenceHelper.FromNuGet("Microsoft.AspNetCore.Mvc.ViewFeatures", aspNetCoreMvcVersion))
                     // for IRouter and VirtualPathData
-                    AssemblyReference.FromNuGet("Microsoft.AspNetCore.Routing.Abstractions.dll", "Microsoft.AspNetCore.Routing.Abstractions", aspNetCoreRoutingVersion),
-                });
+                    .Concat(MetadataReferenceHelper.FromNuGet("Microsoft.AspNetCore.Routing.Abstractions", aspNetCoreRoutingVersion))
+                    .ToArray());
         }
 
         [TestMethod]
