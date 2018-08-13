@@ -673,6 +673,22 @@ public class FieldUsages
 
         [TestMethod]
         [TestCategory("Rule")]
+        public void Assembly_Level_Attributes_FalsePositive()
+        {
+            Verifier.VerifyCSharpAnalyzer(@"
+[assembly: AssemblyCompany(Foo.Constants.AppCompany)]
+public static class Foo
+{
+    internal static class Constants // Noncompliant, False Positive; we cannot detect usages from assembly level attributes.
+    {
+        public const string AppCompany = ""foo"";
+    }
+}
+", new UnusedPrivateMember());
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
         public void UnusedPrivateMemberWithPartialClasses()
         {
             Verifier.VerifyAnalyzer(new[]{

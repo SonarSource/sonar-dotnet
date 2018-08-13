@@ -29,7 +29,7 @@ namespace SonarAnalyzer.Helpers
 {
     /// <summary>
     /// Collects all symbol usages from a class declaration. Ignores symbols whose names are not present
-    /// in the removableSymbolNames collection for performance reasons.
+    /// in the knownSymbolNames collection for performance reasons.
     /// </summary>
     internal class SymbolUsageCollector : CSharpSyntaxWalker
     {

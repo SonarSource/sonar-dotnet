@@ -48,10 +48,10 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterCompilationStartAction(
                 c =>
                 {
-                    // Collect potentially removable internal members from the project to evaluate when
+                    // Collect potentially removable internal types from the project to evaluate when
                     // the compilation is over, depending on whether InternalsVisibleTo attribute is present
                     // or not.
-                    var removableInternalMembers = new ConcurrentBag<ISymbol>();
+                    var removableInternalTypes = new ConcurrentBag<ISymbol>();
                     // Collect here all named types from the project to look for internal member usages.
                     var allNamedTypes = new ConcurrentBag<INamedTypeSymbol>();
 
@@ -73,10 +73,10 @@ namespace SonarAnalyzer.Rules.CSharp
 
                             VisitDeclaringReferences(namedType, removableSymbolsCollector);
 
-                            // Keep the removable internal symbols for when the compilation ends
-                            foreach (var internalSymbol in removableSymbolsCollector.InternalSymbols)
+                            // Keep the removable internal types for when the compilation ends
+                            foreach (var internalSymbol in removableSymbolsCollector.InternalSymbols.OfType<INamedTypeSymbol>())
                             {
-                                removableInternalMembers.Add(internalSymbol);
+                                removableInternalTypes.Add(internalSymbol);
                             }
 
                             var usageCollector = new SymbolUsageCollector(
@@ -101,21 +101,22 @@ namespace SonarAnalyzer.Rules.CSharp
                                 .GetAttributes(KnownType.System_Runtime_CompilerServices_InternalsVisibleToAttribute)
                                 .Any();
 
-                            if (foundInternalsVisibleTo)
+                            if (foundInternalsVisibleTo ||
+                                removableInternalTypes.Count == 0)
                             {
                                 return;
                             }
 
                             var usageCollector = new SymbolUsageCollector(
                                 c.Compilation.GetSemanticModel,
-                                removableInternalMembers.Select(s => s.Name).ToHashSet());
+                                removableInternalTypes.Select(s => s.Name).ToHashSet());
 
                             foreach (var symbol in allNamedTypes)
                             {
                                 VisitDeclaringReferences(symbol, usageCollector);
                             }
 
-                            var diagnostics = GetDiagnostics(usageCollector, removableInternalMembers.ToHashSet(), "internal",
+                            var diagnostics = GetDiagnostics(usageCollector, removableInternalTypes.ToHashSet(), "internal",
                                 new BidirectionalDictionary<ISymbol, SyntaxNode>());
                             foreach (var diagnostic in diagnostics)
                             {
