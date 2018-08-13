@@ -43,6 +43,14 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
+        private static ISet<KnownType> IgnoredTypes = new HashSet<KnownType>
+        {
+            KnownType.UnityEditor_AssetModificationProcessor,
+            KnownType.UnityEditor_AssetPostprocessor,
+            KnownType.UnityEngine_MonoBehaviour,
+            KnownType.UnityEngine_ScriptableObject,
+        };
+
         protected sealed override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterCompilationStartAction(
@@ -60,7 +68,8 @@ namespace SonarAnalyzer.Rules.CSharp
                         {
                             var namedType = (INamedTypeSymbol)cc.Symbol;
                             if (!namedType.IsClassOrStruct() ||
-                                namedType.ContainingType != null)
+                                namedType.ContainingType != null ||
+                                namedType.DerivesFromAny(IgnoredTypes))
                             {
                                 return;
                             }
