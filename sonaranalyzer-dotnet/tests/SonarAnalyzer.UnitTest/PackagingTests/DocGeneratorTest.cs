@@ -41,7 +41,7 @@ namespace SonarAnalyzer.UnitTest.PackagingTests
         {
             // These are the deprecated rules which reference their successors
             var crossReferenceCount = GetNumberOfCrossReferences(AnalyzerLanguage.CSharp);
-            crossReferenceCount.Should().Be(7);
+            crossReferenceCount.Should().Be(8);
             crossReferenceCount = GetNumberOfCrossReferences(AnalyzerLanguage.VisualBasic);
             crossReferenceCount.Should().Be(2);
         }
