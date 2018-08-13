@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.Immutable;
@@ -36,15 +35,6 @@ namespace SonarAnalyzer.Rules.CSharp
     [Rule(DiagnosticId)]
     public class UnusedPrivateMember : SonarDiagnosticAnalyzer
     {
-        [Flags]
-        public enum AccessorAccess
-        {
-            None = 0,
-            Get = 1,
-            Set = 2,
-            Both = Get | Set
-        }
-
         internal const string DiagnosticId = "S1144";
         private const string MessageFormat = "Remove the unused {0} {1} '{2}'.";
 
@@ -58,8 +48,12 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterCompilationStartAction(
                 c =>
                 {
-                    var allNamedTypes = new ConcurrentBag<INamedTypeSymbol>();
+                    // Collect potentially removable internal members from the project to evaluate when
+                    // the compilation is over, depending on whether InternalsVisibleTo attribute is present
+                    // or not.
                     var removableInternalMembers = new ConcurrentBag<ISymbol>();
+                    // Collect here all named types from the project to look for internal member usages.
+                    var allNamedTypes = new ConcurrentBag<INamedTypeSymbol>();
 
                     c.RegisterSymbolAction(
                         cc =>
@@ -131,22 +125,22 @@ namespace SonarAnalyzer.Rules.CSharp
                 });
         }
 
-        private static IEnumerable<Diagnostic> GetDiagnostics(SymbolUsageCollector usageCollector, ISet<ISymbol> removableSymbols, string accessibility,
-            BidirectionalDictionary<ISymbol, SyntaxNode> fieldLikeSymbols)
+        private static IEnumerable<Diagnostic> GetDiagnostics(SymbolUsageCollector usageCollector, ISet<ISymbol> removableSymbols,
+            string accessibility, BidirectionalDictionary<ISymbol, SyntaxNode> fieldLikeSymbols)
         {
             var unusedSymbols = removableSymbols
                 .Except(usageCollector.UsedSymbols)
                 .Where(symbol => !MentionedInDebuggerDisplay(symbol))
                 .ToHashSet();
 
-            var propertiesWithOnlyOneAccessorAccessed = removableSymbols
+            var propertiesWithUnusedAccessor = removableSymbols
                 .Intersect(usageCollector.UsedSymbols)
                 .OfType<IPropertySymbol>()
                 .Where(usageCollector.PropertyAccess.ContainsKey);
 
             // Report private unused symbols
             return GetDiagnosticsForMembers(unusedSymbols, accessibility, fieldLikeSymbols)
-                .Concat(GetDiagnosticsForPropertyAccessors(propertiesWithOnlyOneAccessorAccessed, usageCollector.PropertyAccess));
+                .Concat(GetDiagnosticsForPropertyAccessors(propertiesWithUnusedAccessor, usageCollector.PropertyAccess));
 
             bool MentionedInDebuggerDisplay(ISymbol symbol) =>
                 usageCollector.DebuggerDisplayValues.Any(value => value.Contains(symbol.Name));

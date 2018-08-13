@@ -149,7 +149,7 @@ namespace SonarAnalyzer.Helpers
         {
             if (!IsEmptyConstructor(node))
             {
-                ConditionalStore((IMethodSymbol)GetDeclaredSymbol(node), x => IsRemovableMethod(x));
+                ConditionalStore((IMethodSymbol)GetDeclaredSymbol(node), IsRemovableMethod);
             }
             base.VisitConstructorDeclaration(node);
         }

@@ -21,11 +21,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.Helpers
 {
@@ -48,8 +46,8 @@ namespace SonarAnalyzer.Helpers
         public HashSet<string> DebuggerDisplayValues { get; } =
             new HashSet<string>();
 
-        public Dictionary<IPropertySymbol, Rules.CSharp.UnusedPrivateMember.AccessorAccess> PropertyAccess { get; } =
-            new Dictionary<IPropertySymbol, Rules.CSharp.UnusedPrivateMember.AccessorAccess>();
+        public Dictionary<IPropertySymbol, AccessorAccess> PropertyAccess { get; } =
+            new Dictionary<IPropertySymbol, AccessorAccess>();
 
         public SymbolUsageCollector(Func<SyntaxTree, bool, SemanticModel> getSemanticModel, HashSet<string> removableSymbolNames)
         {
@@ -96,8 +94,7 @@ namespace SonarAnalyzer.Helpers
 
         public override void VisitObjectCreationExpression(ObjectCreationExpressionSyntax node)
         {
-            var symbols = GetSymbols(node, x => true).ToList();
-            UsedSymbols.UnionWith(symbols);
+            UsedSymbols.UnionWith(GetSymbols(node, x => true));
 
             base.VisitObjectCreationExpression(node);
         }
@@ -142,10 +139,24 @@ namespace SonarAnalyzer.Helpers
             base.VisitConstructorDeclaration(node);
         }
 
+        public override void VisitPropertyDeclaration(PropertyDeclarationSyntax node)
+        {
+            if (node.Initializer != null)
+            {
+                var symbol = GetDeclaredSymbol(node);
+                UsedSymbols.Add(symbol);
+                StorePropertyAccess((IPropertySymbol)symbol, AccessorAccess.Set);
+            }
+            base.VisitPropertyDeclaration(node);
+        }
+
         private IMethodSymbol GetImplicitlyCalledConstructor(IMethodSymbol constructor)
         {
-            var isDefault = constructor.Parameters.Length == 0;
-            if (isDefault)
+            // In case there is no other explicitly called constructor in a constructor declaration
+            // the compiler will automatically put a call to the current class' default constructor,
+            // or if the declaration is the default constructor or there is no default constructor,
+            // the compiler will put a call the base class' default constructor.
+            if (IsDefaultConstructor(constructor))
             {
                 // Call default ctor of base type
                 return GetDefaultConstructor(constructor.ContainingType.BaseType);
@@ -158,19 +169,11 @@ namespace SonarAnalyzer.Helpers
             }
         }
 
-        public override void VisitPropertyDeclaration(PropertyDeclarationSyntax node)
-        {
-            if (node.Initializer != null)
-            {
-                var symbol = GetDeclaredSymbol(node);
-                UsedSymbols.Add(symbol);
-                StorePropertyAccess((IPropertySymbol)symbol, Rules.CSharp.UnusedPrivateMember.AccessorAccess.Set);
-            }
-            base.VisitPropertyDeclaration(node);
-        }
+        private static IMethodSymbol GetDefaultConstructor(INamedTypeSymbol namedType) =>
+            namedType.InstanceConstructors.FirstOrDefault(IsDefaultConstructor);
 
-        private IMethodSymbol GetDefaultConstructor(INamedTypeSymbol namedType) =>
-            namedType.InstanceConstructors.FirstOrDefault(c => !c.Parameters.Any());
+        private static bool IsDefaultConstructor(IMethodSymbol constructor) =>
+            constructor.Parameters.Length == 0;
 
         private IEnumerable<ISymbol> GetSymbols<TSyntaxNode>(TSyntaxNode node, Func<TSyntaxNode, bool> condition)
             where TSyntaxNode : SyntaxNode
@@ -211,7 +214,7 @@ namespace SonarAnalyzer.Helpers
             }
         }
 
-        private void StorePropertyAccess(IPropertySymbol propertySymbol, Rules.CSharp.UnusedPrivateMember.AccessorAccess access)
+        private void StorePropertyAccess(IPropertySymbol propertySymbol, AccessorAccess access)
         {
             if (PropertyAccess.ContainsKey(propertySymbol))
             {
@@ -223,7 +226,7 @@ namespace SonarAnalyzer.Helpers
             }
         }
 
-        private Rules.CSharp.UnusedPrivateMember.AccessorAccess EvaluatePropertyAccesses(ExpressionSyntax node)
+        private AccessorAccess EvaluatePropertyAccesses(ExpressionSyntax node)
         {
             var topmostSyntax = GetTopmostSyntaxWithTheSameSymbol(node);
 
@@ -234,26 +237,26 @@ namespace SonarAnalyzer.Helpers
                     // Prop = value --> set
                     // value = Prop --> get
                     return assignmentExpression.Left == topmostSyntax
-                        ? Rules.CSharp.UnusedPrivateMember.AccessorAccess.Set
-                        : Rules.CSharp.UnusedPrivateMember.AccessorAccess.Get;
+                        ? AccessorAccess.Set
+                        : AccessorAccess.Get;
                 }
                 else
                 {
                     // Prop += value --> get/set
-                    return Rules.CSharp.UnusedPrivateMember.AccessorAccess.Both;
+                    return AccessorAccess.Both;
                 }
             }
 
             // nameof(Prop) --> get/set
             if (node.IsInNameofCall(getSemanticModel(node)))
             {
-                return Rules.CSharp.UnusedPrivateMember.AccessorAccess.Both;
+                return AccessorAccess.Both;
             }
 
             // Prop++ --> get/set
             return topmostSyntax.Parent.IsAnyKind(IncrementKinds)
-                ? Rules.CSharp.UnusedPrivateMember.AccessorAccess.Both
-                : Rules.CSharp.UnusedPrivateMember.AccessorAccess.Get;
+                ? AccessorAccess.Both
+                : AccessorAccess.Get;
         }
 
         private SyntaxNode GetTopmostSyntaxWithTheSameSymbol(SyntaxNode identifier)
