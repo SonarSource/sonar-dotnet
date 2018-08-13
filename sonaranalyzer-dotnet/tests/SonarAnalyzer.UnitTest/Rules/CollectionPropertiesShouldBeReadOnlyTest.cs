@@ -33,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             Verifier.VerifyAnalyzer(@"TestCases\CollectionPropertiesShouldBeReadOnly.cs",
                 new CollectionPropertiesShouldBeReadOnly(),
-                additionalReferences: AssemblyReference.FromFramework("System.Runtime.Serialization.dll"));
+                additionalReferences: MetadataReferenceHelper.FromFrameworkAssembly("System.Runtime.Serialization.dll"));
         }
     }
 }

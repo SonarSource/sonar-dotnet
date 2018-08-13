@@ -33,15 +33,15 @@ namespace SonarAnalyzer.UnitTest
     internal static class TestHelper
     {
         public static (SyntaxTree, SemanticModel) Compile(string classDeclaration, bool isCSharp = true,
-            params AssemblyReference[] references)
+            params MetadataReference[] additionalReferences)
         {
             using (var workspace = new AdhocWorkspace())
             {
                 var document = workspace.CurrentSolution.AddProject("project", "project.dll", isCSharp ? LanguageNames.CSharp : LanguageNames.VisualBasic)
-                    .AddMetadataReference(AssemblyReferenceService.GetMetadataReference(AssemblyReference.FromFramework("mscorlib.dll")))
-                    .AddMetadataReference(AssemblyReferenceService.GetMetadataReference(AssemblyReference.FromFramework("System.dll")))
-                    .AddMetadataReference(AssemblyReferenceService.GetMetadataReference(AssemblyReference.FromFramework("System.Core.dll")))
-                    .AddMetadataReferences(references.Select(AssemblyReferenceService.GetMetadataReference))
+                    .AddMetadataReference(MetadataReferenceHelper.FromFrameworkAssembly("mscorlib.dll"))
+                    .AddMetadataReference(MetadataReferenceHelper.FromFrameworkAssembly("System.dll"))
+                    .AddMetadataReference(MetadataReferenceHelper.FromFrameworkAssembly("System.Core.dll"))
+                    .AddMetadataReferences(additionalReferences)
                     .AddDocument("Class1", classDeclaration);
                 var compilation = document.Project.GetCompilationAsync().Result;
                 var tree = compilation.SyntaxTrees.First();

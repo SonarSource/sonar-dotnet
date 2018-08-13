@@ -33,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             Verifier.VerifyAnalyzer(@"TestCases\TypesShouldNotExtendOutdatedBaseTypes.cs",
                 new TypesShouldNotExtendOutdatedBaseTypes(),
-                additionalReferences: AssemblyReference.FromFramework("System.Xml.dll"));
+                additionalReferences: MetadataReferenceHelper.FromFrameworkAssembly("System.Xml.dll"));
         }
     }
 }

@@ -29,14 +29,14 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [DataTestMethod]
         [DataRow("1.1.11")]
-        [DataRow(AssemblyReference.NuGetInfo.LatestVersion)]
+        [DataRow(MetadataReferenceHelper.NuGetLatestVersion)]
         [TestCategory("Rule")]
         public void ExpectedExceptionAttributeShouldNotBeUsed_MsTest(string testFwkVersion)
         {
             Verifier.VerifyAnalyzer(@"TestCases\ExpectedExceptionAttributeShouldNotBeUsed.MsTest.cs",
                 new ExpectedExceptionAttributeShouldNotBeUsed(),
                 null,
-                AssemblyReference.FromNuGet("Microsoft.VisualStudio.TestPlatform.TestFramework.dll", "MSTest.TestFramework", testFwkVersion));
+                MetadataReferenceHelper.FromNuGet("MSTest.TestFramework", testFwkVersion));
         }
 
         [DataTestMethod]
@@ -48,12 +48,12 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzer(@"TestCases\ExpectedExceptionAttributeShouldNotBeUsed.NUnit.cs",
                 new ExpectedExceptionAttributeShouldNotBeUsed(),
                 null,
-                AssemblyReference.FromNuGet("nunit.framework.dll", "NUnit", testFwkVersion));
+                MetadataReferenceHelper.FromNuGet("NUnit", testFwkVersion));
         }
 
         [DataTestMethod]
         [DataRow("3.0.0")]
-        [DataRow(AssemblyReference.NuGetInfo.LatestVersion)]
+        [DataRow(MetadataReferenceHelper.NuGetLatestVersion)]
         [TestCategory("Rule")]
         [Description("Starting with version 3.0.0 the attribute was removed.")]
         public void ExpectedExceptionAttributeShouldNotBeUsed_NUnit_NoIssue(string testFwkVersion)
@@ -61,7 +61,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyNoIssueReported(@"TestCases\ExpectedExceptionAttributeShouldNotBeUsed.NUnit.cs",
                 new ExpectedExceptionAttributeShouldNotBeUsed(),
                 null,
-                AssemblyReference.FromNuGet("nunit.framework.dll", "NUnit", testFwkVersion));
+                MetadataReferenceHelper.FromNuGet("NUnit", testFwkVersion));
         }
     }
 }

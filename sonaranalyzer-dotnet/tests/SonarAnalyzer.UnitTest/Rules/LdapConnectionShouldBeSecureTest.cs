@@ -33,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             Verifier.VerifyAnalyzer(@"TestCases\LdapConnectionShouldBeSecure.cs",
                 new LdapConnectionShouldBeSecure(),
-                additionalReferences: AssemblyReference.FromFramework("System.DirectoryServices.dll"));
+                additionalReferences: MetadataReferenceHelper.FromFrameworkAssembly("System.DirectoryServices.dll"));
         }
     }
 }

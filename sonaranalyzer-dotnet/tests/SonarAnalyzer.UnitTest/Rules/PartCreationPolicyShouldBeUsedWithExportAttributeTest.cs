@@ -33,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             Verifier.VerifyAnalyzer(@"TestCases\PartCreationPolicyShouldBeUsedWithExportAttribute.cs",
                 new PartCreationPolicyShouldBeUsedWithExportAttribute(),
-                additionalReferences: AssemblyReference.FromFramework("System.ComponentModel.Composition.dll"));
+                additionalReferences: MetadataReferenceHelper.FromFrameworkAssembly("System.ComponentModel.Composition.dll"));
         }
     }
 }

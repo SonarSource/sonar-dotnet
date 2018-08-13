@@ -33,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             Verifier.VerifyAnalyzer(@"TestCases\MarkWindowsFormsMainWithStaThread.cs",
                 new MarkWindowsFormsMainWithStaThread(),
-                additionalReferences: AssemblyReference.FromFramework("System.Windows.Forms.dll"));
+                additionalReferences: MetadataReferenceHelper.FromFrameworkAssembly("System.Windows.Forms.dll"));
         }
 
         [TestMethod]

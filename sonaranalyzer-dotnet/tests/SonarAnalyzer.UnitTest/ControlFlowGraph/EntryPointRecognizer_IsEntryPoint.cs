@@ -20,6 +20,7 @@
 
 extern alias csharp;
 
+using System.Linq;
 using csharp::SonarAnalyzer.ControlFlowGraph.CSharp;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -31,7 +32,7 @@ namespace SonarAnalyzer.UnitTest.ControlFlowGraph
     {
         [DataTestMethod]
         [DataRow("3.0.20105.1")]
-        [DataRow(AssemblyReference.NuGetInfo.LatestVersion)]
+        [DataRow(MetadataReferenceHelper.NuGetLatestVersion)]
         public void Public_Controller_Methods_Are_EntryPoints(string aspNetMvcVersion)
         {
             const string code = @"
@@ -48,7 +49,7 @@ public class Foo : System.Web.Mvc.Controller
 }
 ";
             var compilation = TestHelper.Compile(code,
-                references: AssemblyReference.FromNuGet("System.Web.Mvc.dll", "Microsoft.AspNet.Mvc", aspNetMvcVersion));
+                additionalReferences: MetadataReferenceHelper.FromNuGet("Microsoft.AspNet.Mvc", aspNetMvcVersion).ToArray());
 
             var publicFoo = compilation.GetMethodSymbol("PublicFoo");
             var protectedFoo = compilation.GetMethodSymbol("ProtectedFoo");
@@ -65,7 +66,7 @@ public class Foo : System.Web.Mvc.Controller
 
         [DataTestMethod]
         [DataRow("3.0.20105.1")]
-        [DataRow(AssemblyReference.NuGetInfo.LatestVersion)]
+        [DataRow(MetadataReferenceHelper.NuGetLatestVersion)]
         public void Controller_Methods_Are_EntryPoints(string aspNetMvcVersion)
         {
             const string code = @"
@@ -83,7 +84,7 @@ public class MyController : Controller
 }
 ";
             var compilation = TestHelper.Compile(code,
-                references: AssemblyReference.FromNuGet("System.Web.Mvc.dll", "Microsoft.AspNet.Mvc", aspNetMvcVersion));
+                additionalReferences: MetadataReferenceHelper.FromNuGet("Microsoft.AspNet.Mvc", aspNetMvcVersion).ToArray());
 
             var publicFoo = compilation.GetMethodSymbol("PublicFoo");
             var publicBar = compilation.GetMethodSymbol("PublicBar");
@@ -96,7 +97,7 @@ public class MyController : Controller
 
         [DataTestMethod]
         [DataRow("3.0.20105.1")]
-        [DataRow(AssemblyReference.NuGetInfo.LatestVersion)]
+        [DataRow(MetadataReferenceHelper.NuGetLatestVersion)]
         public void Methods_In_Classes_With_ControllerAttribute_Are_EntryPoints(string aspNetMvcVersion)
         {
             const string code = @"
@@ -110,7 +111,7 @@ public class Foo
 }
 ";
             var compilation = TestHelper.Compile(code,
-                references: AssemblyReference.FromNuGet("System.Web.Mvc.dll", "Microsoft.AspNet.Mvc", aspNetMvcVersion));
+                additionalReferences: MetadataReferenceHelper.FromNuGet("Microsoft.AspNet.Mvc", aspNetMvcVersion).ToArray());
 
             var publicFoo = compilation.GetMethodSymbol("PublicFoo");
 
@@ -119,7 +120,7 @@ public class Foo
 
         [DataTestMethod]
         [DataRow("3.0.20105.1")]
-        [DataRow(AssemblyReference.NuGetInfo.LatestVersion)]
+        [DataRow(MetadataReferenceHelper.NuGetLatestVersion)]
         public void Methods_In_Classes_With_NonControllerAttribute_Are_Not_EntryPoints(string aspNetMvcVersion)
         {
             const string code = @"
@@ -133,7 +134,7 @@ public class Foo : Microsoft.AspNetCore.Mvc.ControllerBase
 }
 ";
             var compilation = TestHelper.Compile(code,
-                references: AssemblyReference.FromNuGet("System.Web.Mvc.dll", "Microsoft.AspNet.Mvc", aspNetMvcVersion));
+                additionalReferences: MetadataReferenceHelper.FromNuGet("Microsoft.AspNet.Mvc", aspNetMvcVersion).ToArray());
 
             var publicFoo = compilation.GetMethodSymbol("PublicFoo");
 

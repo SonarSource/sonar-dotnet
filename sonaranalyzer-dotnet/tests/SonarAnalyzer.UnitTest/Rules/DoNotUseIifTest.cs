@@ -31,7 +31,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             Verifier.VerifyAnalyzer(@"TestCases\DoNotUseIif.vb",
                 new SonarAnalyzer.Rules.VisualBasic.DoNotUseIif(),
-                additionalReferences: AssemblyReference.FromFramework("Microsoft.VisualBasic.dll"));
+                additionalReferences: MetadataReferenceHelper.FromFrameworkAssembly("Microsoft.VisualBasic.dll"));
         }
 
         [TestMethod]
@@ -43,7 +43,7 @@ namespace SonarAnalyzer.UnitTest.Rules
                 @"TestCases\DoNotUseIif.Fixed.vb",
                 new SonarAnalyzer.Rules.VisualBasic.DoNotUseIif(),
                 new SonarAnalyzer.Rules.VisualBasic.DoNotUseIifCodeFixProvider(),
-                additionalReferences: AssemblyReference.FromFramework("Microsoft.VisualBasic.dll"));
+                additionalReferences: MetadataReferenceHelper.FromFrameworkAssembly("Microsoft.VisualBasic.dll"));
         }
     }
 }

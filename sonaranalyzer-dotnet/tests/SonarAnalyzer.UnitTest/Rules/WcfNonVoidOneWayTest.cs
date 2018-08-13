@@ -34,7 +34,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzer(
                 @"TestCases\WcfNonVoidOneWay.cs",
                 new WcfNonVoidOneWay(),
-                additionalReferences: AssemblyReference.FromFramework("System.ServiceModel.dll"));
+                additionalReferences: MetadataReferenceHelper.FromFrameworkAssembly("System.ServiceModel.dll"));
         }
     }
 }

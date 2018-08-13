@@ -34,7 +34,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzer(
                 @"TestCases\WcfMissingContractAttribute.cs",
                 new WcfMissingContractAttribute(),
-                additionalReferences: AssemblyReference.FromFramework("System.ServiceModel.dll"));
+                additionalReferences: MetadataReferenceHelper.FromFrameworkAssembly("System.ServiceModel.dll"));
         }
     }
 }

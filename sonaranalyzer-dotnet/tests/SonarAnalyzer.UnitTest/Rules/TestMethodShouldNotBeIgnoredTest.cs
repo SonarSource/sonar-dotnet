@@ -19,6 +19,8 @@
  */
 
 extern alias csharp;
+
+using System.Linq;
 using csharp::SonarAnalyzer.Rules.CSharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -29,41 +31,40 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [DataTestMethod]
         [DataRow("1.1.11")]
-        [DataRow(AssemblyReference.NuGetInfo.LatestVersion)]
+        [DataRow(MetadataReferenceHelper.NuGetLatestVersion)]
         [TestCategory("Rule")]
         public void TestMethodShouldNotBeIgnored_MsTest(string testFwkVersion)
         {
             Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldNotBeIgnored.MsTest.cs",
                 new TestMethodShouldNotBeIgnored(),
-                null,
-                AssemblyReference.FromNuGet("Microsoft.VisualStudio.TestPlatform.TestFramework.dll", "MSTest.TestFramework", testFwkVersion));
+                additionalReferences: MetadataReferenceHelper.FromNuGet("MSTest.TestFramework", testFwkVersion));
         }
 
         [DataTestMethod]
         [DataRow("2.5.7.10213")]
-        [DataRow(AssemblyReference.NuGetInfo.LatestVersion)]
+        [DataRow(MetadataReferenceHelper.NuGetLatestVersion)]
         [TestCategory("Rule")]
         public void TestMethodShouldNotBeIgnored_NUnit(string testFwkVersion)
         {
             Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldNotBeIgnored.NUnit.cs",
                 new TestMethodShouldNotBeIgnored(),
-                null,
-                AssemblyReference.FromNuGet("Microsoft.VisualStudio.TestPlatform.TestFramework.dll", "MSTest.TestFramework", "1.1.11"),
-                AssemblyReference.FromNuGet("nunit.framework.dll", "NUnit", testFwkVersion));
+                additionalReferences: MetadataReferenceHelper.FromNuGet("MSTest.TestFramework", "1.1.11")
+                    .Concat(MetadataReferenceHelper.FromNuGet("NUnit", testFwkVersion))
+                    .ToArray());
         }
 
         [DataTestMethod]
         [DataRow("2.0.0")]
-        [DataRow(AssemblyReference.NuGetInfo.LatestVersion)]
+        [DataRow(MetadataReferenceHelper.NuGetLatestVersion)]
         [TestCategory("Rule")]
         public void TestMethodShouldNotBeIgnored_Xunit(string testFwkVersion)
         {
             Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldNotBeIgnored.Xunit.cs",
                 new TestMethodShouldNotBeIgnored(),
-                null,
-                AssemblyReference.FromNuGet("Microsoft.VisualStudio.TestPlatform.TestFramework.dll", "MSTest.TestFramework", "1.1.11"),
-                AssemblyReference.FromNuGet("xunit.assert.dll", "xunit.assert", testFwkVersion),
-                AssemblyReference.FromNuGet("xunit.core.dll", "xunit.extensibility.core", testFwkVersion));
+                additionalReferences: MetadataReferenceHelper.FromNuGet("MSTest.TestFramework", "1.1.11")
+                    .Concat(MetadataReferenceHelper.FromNuGet("xunit.assert", testFwkVersion))
+                    .Concat(MetadataReferenceHelper.FromNuGet("xunit.extensibility.core", testFwkVersion))
+                    .ToArray());
         }
     }
 }
