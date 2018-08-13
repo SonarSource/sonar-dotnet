@@ -321,6 +321,10 @@ namespace SonarAnalyzer.Helpers
             new KnownType("System.Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult>")
         };
         internal static readonly KnownType Sytem_Resources_ResourceManager = new KnownType("System.Resources.ResourceManager");
+        internal static readonly KnownType UnityEditor_AssetModificationProcessor = new KnownType("UnityEditor.AssetModificationProcessor");
+        internal static readonly KnownType UnityEditor_AssetPostprocessor = new KnownType("UnityEditor.AssetPostprocessor");
+        internal static readonly KnownType UnityEngine_MonoBehaviour = new KnownType("UnityEngine.MonoBehaviour");
+        internal static readonly KnownType UnityEngine_ScriptableObject = new KnownType("UnityEngine.ScriptableObject");
         internal static readonly KnownType Xunit_Assert = new KnownType("Xunit.Assert");
         internal static readonly KnownType Xunit_FactAttribute = new KnownType("Xunit.FactAttribute");
         internal static readonly KnownType Xunit_TheoryAttribute = new KnownType("Xunit.TheoryAttribute");

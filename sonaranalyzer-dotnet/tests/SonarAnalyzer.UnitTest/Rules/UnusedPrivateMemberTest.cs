@@ -716,6 +716,46 @@ public class NewClass
 
         [TestMethod]
         [TestCategory("Rule")]
+        public void Unity3D_Ignored()
+        {
+            Verifier.VerifyCSharpAnalyzer(@"
+// https://github.com/SonarSource/sonar-csharp/issues/159
+public class UnityMessages1 : UnityEngine.MonoBehaviour
+{
+    private void SomeMethod(bool hasFocus) { } // Compliant
+}
+
+public class UnityMessages2 : UnityEngine.ScriptableObject
+{
+    private void SomeMethod(bool hasFocus) { } // Compliant
+}
+
+public class UnityMessages3 : UnityEditor.AssetPostprocessor
+{
+    private void SomeMethod(bool hasFocus) { } // Compliant
+}
+
+public class UnityMessages4 : UnityEditor.AssetModificationProcessor
+{
+    private void SomeMethod(bool hasFocus) { } // Compliant
+}
+
+// Unity3D does not seem to to available as a nuget package and we cannot use the original classes
+namespace UnityEngine
+{
+    public class MonoBehaviour { }
+    public class ScriptableObject { }
+}
+namespace UnityEditor
+{
+    public class AssetPostprocessor { }
+    public class AssetModificationProcessor { }
+}
+", new UnusedPrivateMember());
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
         public void UnusedPrivateMember()
         {
             Verifier.VerifyAnalyzer(@"TestCases\UnusedPrivateMember.cs", new UnusedPrivateMember());
