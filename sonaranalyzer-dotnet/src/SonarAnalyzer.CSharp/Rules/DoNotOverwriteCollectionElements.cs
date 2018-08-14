@@ -150,25 +150,20 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             if (invocation.Expression is MemberAccessExpressionSyntax memberAccessExpression)
             {
-                return ProcessExpression(memberAccessExpression.Expression);
-            }
-
-            return null;
-
-            string ProcessExpression(ExpressionSyntax expression)
-            {
-                switch (expression)
+                switch (memberAccessExpression.Expression)
                 {
                     case IdentifierNameSyntax identifierName:
                         return identifierName.Identifier.ValueText;
 
                     case MemberAccessExpressionSyntax memberAccess:
-                        return ProcessExpression(memberAccess.Expression);
+                        return memberAccess.Name.Identifier.ValueText;
 
                     default:
                         return null;
                 }
             }
+
+            return null;
         }
 
         private static IEnumerable<StatementSyntax> GetPreviousStatements(ExpressionSyntax expression)
