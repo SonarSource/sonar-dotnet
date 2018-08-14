@@ -21,20 +21,24 @@ package org.sonar.plugins.csharp;
 
 import java.util.Set;
 import org.junit.Test;
+import org.sonar.api.rules.RuleType;
 import org.sonar.api.server.debt.DebtRemediationFunction;
+import org.sonar.api.server.rule.RulesDefinition;
 import org.sonar.api.server.rule.RulesDefinition.Context;
 import org.sonar.api.server.rule.RulesDefinition.Rule;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class CSharpSonarRulesDefinitionTest {
+  private static final String SECURITY_HOTSPOT_RULE_KEY = "S2255";
+  private static final String VULNERABILITY_RULE_KEY = "S4564";
 
   @Test
   public void test() {
     Context context = new Context();
     assertThat(context.repositories()).isEmpty();
 
-    CSharpSonarRulesDefinition csharpRulesDefinition = new CSharpSonarRulesDefinition();
+    CSharpSonarRulesDefinition csharpRulesDefinition = new CSharpSonarRulesDefinition(SonarVersion.SQ_67_RUNTIME);
     csharpRulesDefinition.define(context);
 
     assertThat(context.repositories()).hasSize(1);
@@ -48,6 +52,67 @@ public class CSharpSonarRulesDefinitionTest {
     Rule s100 = context.repository("csharpsquid").rule("S100");
     assertThat(s100.debtRemediationFunction().type()).isEqualTo(DebtRemediationFunction.Type.CONSTANT_ISSUE);
     assertThat(s100.debtRemediationFunction().baseEffort()).isEqualTo("5min");
+    assertThat(s100.type()).isEqualTo(RuleType.CODE_SMELL);
   }
 
+  @Test
+  public void test_security_hotspot() {
+    CSharpSonarRulesDefinition definition = new CSharpSonarRulesDefinition(SonarVersion.SQ_73_RUNTIME);
+    RulesDefinition.Context context = new RulesDefinition.Context();
+    definition.define(context);
+    RulesDefinition.Repository repository = context.repository("csharpsquid");
+
+    RulesDefinition.Rule hardcodedCredentialsRule = repository.rule(SECURITY_HOTSPOT_RULE_KEY);
+    assertThat(hardcodedCredentialsRule.type()).isEqualTo(RuleType.SECURITY_HOTSPOT);
+    assertThat(hardcodedCredentialsRule.activatedByDefault()).isFalse();
+  }
+
+  @Test
+  public void test_security_hotspot_lts() {
+    CSharpSonarRulesDefinition definition = new CSharpSonarRulesDefinition(SonarVersion.SQ_67_RUNTIME);
+    RulesDefinition.Context context = new RulesDefinition.Context();
+    definition.define(context);
+    RulesDefinition.Repository repository = context.repository("csharpsquid");
+
+    RulesDefinition.Rule hardcodedCredentialsRule = repository.rule(SECURITY_HOTSPOT_RULE_KEY);
+    assertThat(hardcodedCredentialsRule.type()).isEqualTo(RuleType.VULNERABILITY);
+    assertThat(hardcodedCredentialsRule.activatedByDefault()).isFalse();
+  }
+
+  @Test
+  public void test_security_standards_with_security_hotspot() {
+    CSharpSonarRulesDefinition definition = new CSharpSonarRulesDefinition(SonarVersion.SQ_73_RUNTIME);
+    RulesDefinition.Context context = new RulesDefinition.Context();
+    definition.define(context);
+    RulesDefinition.Repository repository = context.repository("csharpsquid");
+
+    RulesDefinition.Rule rule = repository.rule(SECURITY_HOTSPOT_RULE_KEY);
+    assertThat(rule.type()).isEqualTo(RuleType.SECURITY_HOTSPOT);
+    assertThat(rule.securityStandards()).containsExactlyInAnyOrder("cwe:312", "cwe:315", "owaspTop10:a3");
+  }
+
+  @Test
+  public void test_security_standards_with_vulnerability() {
+    CSharpSonarRulesDefinition definition = new CSharpSonarRulesDefinition(SonarVersion.SQ_73_RUNTIME);
+    RulesDefinition.Context context = new RulesDefinition.Context();
+    definition.define(context);
+    RulesDefinition.Repository repository = context.repository("csharpsquid");
+
+    RulesDefinition.Rule rule = repository.rule(VULNERABILITY_RULE_KEY);
+    assertThat(rule.type()).isEqualTo(RuleType.VULNERABILITY);
+    assertThat(rule.securityStandards()).containsExactlyInAnyOrder("cwe:79", "owaspTop10:a7");
+  }
+
+  @Test
+  public void test_security_standards_not_set_when_unsupported() throws Exception {
+    CSharpSonarRulesDefinition definition = new CSharpSonarRulesDefinition(SonarVersion.SQ_67_RUNTIME);
+    RulesDefinition.Context context = new RulesDefinition.Context();
+    definition.define(context);
+    RulesDefinition.Repository repository = context.repository("csharpsquid");
+
+    RulesDefinition.Rule securityHotspotRule = repository.rule(SECURITY_HOTSPOT_RULE_KEY);
+    RulesDefinition.Rule vulnerabilityRule = repository.rule(VULNERABILITY_RULE_KEY);
+    assertThat(securityHotspotRule.securityStandards()).isEmpty();
+    assertThat(vulnerabilityRule.securityStandards()).isEmpty();
+  }
 }

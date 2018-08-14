@@ -38,32 +38,49 @@
    */
 package org.sonarsource.dotnet.shared.plugins;
 
+import com.google.gson.Gson;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.reflect.Field;
 import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.Set;
+import javax.annotation.Nullable;
+import org.sonar.api.SonarRuntime;
 import org.sonar.api.batch.ScannerSide;
+import org.sonar.api.rules.RuleType;
 import org.sonar.api.server.rule.RulesDefinition;
 import org.sonar.api.server.rule.RulesDefinitionXmlLoader;
+import org.sonar.api.utils.Version;
 
 import static java.util.Objects.requireNonNull;
 
 @ScannerSide
 public abstract class AbstractRulesDefinition implements RulesDefinition {
-  private Set<String> allRuleKeys = null;
 
+  private static final Version SQ_7_3 = Version.create(7, 3);
+  private static final Gson GSON = new Gson();
+
+  private Set<String> allRuleKeys = null;
   private final String repositoryKey;
   private final String repositoryName;
   private final String languageKey;
   private final String rulesXmlFilePath;
+  private final boolean supportsSecurityHotspots;
 
+  // for vb.net
   protected AbstractRulesDefinition(String repositoryKey, String repositoryName, String languageKey, String rulesXmlFilePath) {
+    this(repositoryKey, repositoryName, languageKey, rulesXmlFilePath, null);
+  }
+
+  protected AbstractRulesDefinition(String repositoryKey, String repositoryName, String languageKey, String rulesXmlFilePath, @Nullable SonarRuntime sonarRuntime) {
     this.repositoryKey = repositoryKey;
     this.repositoryName = repositoryName;
     this.languageKey = languageKey;
     this.rulesXmlFilePath = rulesXmlFilePath;
-
+    this.supportsSecurityHotspots = sonarRuntime != null && sonarRuntime.getApiVersion().isGreaterThanOrEqual(SQ_7_3);
   }
 
   @Override
@@ -77,6 +94,7 @@ public abstract class AbstractRulesDefinition implements RulesDefinition {
 
     allRuleKeys = new LinkedHashSet<>();
     for (NewRule rule : repository.rules()) {
+      updateMetadata(rule);
       allRuleKeys.add(rule.key());
     }
 
@@ -87,5 +105,61 @@ public abstract class AbstractRulesDefinition implements RulesDefinition {
   public Set<String> allRuleKeys() {
     requireNonNull(allRuleKeys);
     return allRuleKeys;
+  }
+
+  private void updateMetadata(NewRule rule) {
+    if (supportsSecurityHotspots) {
+      RuleMetadata ruleMetadata = readRuleMetadata(rule.key());
+      for (String s : ruleMetadata.securityStandards.OWASP) {
+        rule.addOwaspTop10(RulesDefinition.OwaspTop10.valueOf(s));
+      }
+      rule.addCwe(ruleMetadata.securityStandards.CWE);
+      if (ruleMetadata.isSecurityHotspot()) {
+        setSecurityHotspotType(rule);
+      }
+    }
+  }
+
+  private static RuleMetadata readRuleMetadata(String ruleKey) {
+    String resourcePath = "/org/sonar/plugins/csharp/" + ruleKey + "_c#.json";
+    try (InputStream stream = AbstractRulesDefinition.class.getResourceAsStream(resourcePath)) {
+      return  stream != null
+        ? GSON.fromJson(new InputStreamReader(stream, StandardCharsets.UTF_8), RuleMetadata.class)
+        : new RuleMetadata();
+      } catch (IOException e) {
+      throw new IllegalStateException("Failed to read: " + resourcePath, e);
+    }
+  }
+
+  /**
+   * The rules.xml file is backwards compatible with SonarQube 6.7,
+   * so we need to explicitly set the type after deserialization
+   */
+  private static void setSecurityHotspotType(NewRule rule) {
+    try {
+      Field type = rule.getClass().getDeclaredField("type");
+      type.setAccessible(true);
+      type.set(rule, RuleType.SECURITY_HOTSPOT);
+    } catch (NoSuchFieldException|IllegalAccessException e) {
+      throw new IllegalStateException("Cannot set type to SECURITY_HOTSPOT", e);
+    }
+  }
+
+  private static class RuleMetadata {
+    private static final String SECURITY_HOTSPOT = "SECURITY_HOTSPOT";
+
+    String type;
+    SecurityStandards securityStandards = new SecurityStandards();
+
+    boolean isSecurityHotspot() {
+      return SECURITY_HOTSPOT.equals(type);
+    }
+  }
+
+  // for deserialization purposes
+  @SuppressWarnings("squid:S00116")
+  private static class SecurityStandards {
+    int[] CWE = {};
+    String[] OWASP = {};
   }
 }
