@@ -31,7 +31,7 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public class SillyBitwiseOperation : SonarDiagnosticAnalyzer
+    public sealed class SillyBitwiseOperation : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S2437";
         private const string MessageFormat = "Remove this silly bit operation.";
@@ -42,7 +42,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        protected sealed override void Initialize(SonarAnalysisContext context)
+        protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c => CheckBinary(c, -1),

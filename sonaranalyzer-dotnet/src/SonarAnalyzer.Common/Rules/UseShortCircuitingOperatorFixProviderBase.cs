@@ -51,7 +51,7 @@ namespace SonarAnalyzer.Rules.Common
             context.RegisterCodeFix(
                 CodeAction.Create(
                     Title,
-                    c => ReplaceExpression(expression, root, context.Document)),
+                    c => ReplaceExpressionAsync(expression, root, context.Document)),
                 context.Diagnostics);
 
             return TaskHelper.CompletedTask;
@@ -59,7 +59,7 @@ namespace SonarAnalyzer.Rules.Common
 
         internal abstract bool IsCandidateExpression(TBinaryExpression expression);
 
-        private Task<Document> ReplaceExpression(TBinaryExpression expression,
+        private Task<Document> ReplaceExpressionAsync(TBinaryExpression expression,
             SyntaxNode root, Document document)
         {
             var replacement = GetShortCircuitingExpressionNode(expression)

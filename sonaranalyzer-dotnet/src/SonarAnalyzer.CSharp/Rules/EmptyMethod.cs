@@ -31,7 +31,7 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public class EmptyMethod : SonarDiagnosticAnalyzer
+    public sealed class EmptyMethod : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S1186";
         private const string MessageFormat = "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.";
@@ -41,7 +41,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        protected sealed override void Initialize(SonarAnalysisContext context)
+        protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 CheckMethodDeclaration,

@@ -33,13 +33,12 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public class RedundantToStringCall : SonarDiagnosticAnalyzer
+    public sealed class RedundantToStringCall : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S1858";
         private const string MessageFormat = "There's no need to call 'ToString()'{0}.";
         internal const string MessageCallOnString = " on a string";
         internal const string MessageCompiler = ", the compiler will do it for you";
-        
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
@@ -48,7 +47,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private const string additionOperatorName = "op_Addition";
 
-        protected sealed override void Initialize(SonarAnalysisContext context)
+        protected override void Initialize(SonarAnalysisContext context)
         {
             CheckToStringInvocationsOnStringAndInStringFormat(context);
             CheckSidesOfAddExpressionsForToStringCall(context);

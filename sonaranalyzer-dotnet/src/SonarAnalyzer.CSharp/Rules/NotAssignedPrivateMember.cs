@@ -34,7 +34,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public class NotAssignedPrivateMember : SonarDiagnosticAnalyzer
+    public sealed class NotAssignedPrivateMember : SonarDiagnosticAnalyzer
     {
         /*
          CS0649 reports the same on internal fields. So that's wider in scope, but that's not a live Roslyn analyzer,
@@ -51,7 +51,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static readonly Accessibility maxAccessibility = Accessibility.Private;
 
-        protected sealed override void Initialize(SonarAnalysisContext context)
+        protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSymbolAction(
                 c =>

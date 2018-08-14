@@ -30,7 +30,7 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public class DelegateSubtraction : SonarDiagnosticAnalyzer
+    public sealed class DelegateSubtraction : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S3172";
         private const string MessageFormat = "Review this subtraction of a chain of delegates: it may not work as you expect.";
@@ -40,7 +40,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        protected sealed override void Initialize(SonarAnalysisContext context)
+        protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>

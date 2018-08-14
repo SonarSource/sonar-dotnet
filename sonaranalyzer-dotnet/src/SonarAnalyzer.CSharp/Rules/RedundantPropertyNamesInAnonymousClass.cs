@@ -32,18 +32,17 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public class RedundantPropertyNamesInAnonymousClass : SonarDiagnosticAnalyzer
+    public sealed class RedundantPropertyNamesInAnonymousClass : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S3441";
         private const string MessageFormat = "Remove the redundant '{0} ='.";
-        
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        protected sealed override void Initialize(SonarAnalysisContext context)
+        protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>

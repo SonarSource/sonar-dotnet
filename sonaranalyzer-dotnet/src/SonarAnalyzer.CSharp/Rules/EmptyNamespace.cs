@@ -31,7 +31,7 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public class EmptyNamespace : SonarDiagnosticAnalyzer
+    public sealed class EmptyNamespace : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S3261";
         private const string MessageFormat = "Remove this empty namespace.";
@@ -41,7 +41,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        protected sealed override void Initialize(SonarAnalysisContext context)
+        protected override void Initialize(SonarAnalysisContext context)
         {
             // in order to let the tests work properly, we do this in a tree action
             // https://github.com/dotnet/roslyn/issues/4745 was fixed in Roslyn 1.1,

@@ -35,7 +35,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public class FieldShouldBeReadonly : SonarDiagnosticAnalyzer
+    public sealed class FieldShouldBeReadonly : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S2933";
         private const string MessageFormat = "Make '{0}' 'readonly'.";
@@ -72,7 +72,7 @@ namespace SonarAnalyzer.Rules.CSharp
             SyntaxKind.PostIncrementExpression
         };
 
-        protected sealed override void Initialize(SonarAnalysisContext context)
+        protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSymbolAction(
                 c =>

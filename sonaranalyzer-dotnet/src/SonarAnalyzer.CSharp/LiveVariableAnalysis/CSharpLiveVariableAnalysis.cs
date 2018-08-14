@@ -81,9 +81,6 @@ namespace SonarAnalyzer.LiveVariableAnalysis.CSharp
                     case SyntaxKind.QueryExpression:
                         CollectAllCapturedLocal(instruction);
                         break;
-
-                    default:
-                        break;
                 }
             }
 

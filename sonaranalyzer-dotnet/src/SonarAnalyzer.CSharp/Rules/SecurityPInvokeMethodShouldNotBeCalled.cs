@@ -32,7 +32,7 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public class SecurityPInvokeMethodShouldNotBeCalled : SonarDiagnosticAnalyzer
+    public sealed class SecurityPInvokeMethodShouldNotBeCalled : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S3884";
         private const string MessageFormat = "Refactor the code to remove this use of '{0}'.";
@@ -49,7 +49,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        protected sealed override void Initialize(SonarAnalysisContext context)
+        protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(CheckForIssue, SyntaxKind.InvocationExpression);
         }

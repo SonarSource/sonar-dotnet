@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2018 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -32,7 +32,7 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public class DisposableTypesNeedFinalizers : SonarDiagnosticAnalyzer
+    public sealed class DisposableTypesNeedFinalizers : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S4002";
         private const string MessageFormat = "Implement a finalizer that calls your 'Dispose' method.";
@@ -47,7 +47,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 KnownType.System_UIntPtr,
                 KnownType.System_Runtime_InteropServices_HandleRef };
 
-        protected sealed override void Initialize(SonarAnalysisContext context)
+        protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
             {

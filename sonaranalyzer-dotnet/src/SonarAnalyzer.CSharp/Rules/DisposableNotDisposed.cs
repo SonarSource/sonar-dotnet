@@ -33,7 +33,7 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public class DisposableNotDisposed : SonarDiagnosticAnalyzer
+    public sealed class DisposableNotDisposed : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S2930";
         private const string MessageFormat = "'Dispose' of '{0}'.";
@@ -74,7 +74,7 @@ namespace SonarAnalyzer.Rules.CSharp
             public ISymbol Symbol { get; set; }
         }
 
-        protected sealed override void Initialize(SonarAnalysisContext context)
+        protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSymbolAction(
                 c =>

@@ -31,7 +31,7 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public class GetTypeWithIsAssignableFrom : SonarDiagnosticAnalyzer
+    public sealed class GetTypeWithIsAssignableFrom : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S2219";
         private const string MessageFormat = "Use {0} instead.";
@@ -47,7 +47,7 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string UseIsOperatorKey = "UseIsOperator";
         internal const string ShouldRemoveGetType = "ShouldRemoveGetType";
 
-        protected sealed override void Initialize(SonarAnalysisContext context)
+        protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>

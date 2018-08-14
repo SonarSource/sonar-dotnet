@@ -31,7 +31,7 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public class MethodOverloadOptionalParameter : SonarDiagnosticAnalyzer
+    public sealed class MethodOverloadOptionalParameter : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S3427";
         private const string MessageFormat =
@@ -49,7 +49,7 @@ namespace SonarAnalyzer.Rules.CSharp
             public IMethodSymbol HiddenMethod { get; set; }
         }
 
-        protected sealed override void Initialize(SonarAnalysisContext context)
+        protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSymbolAction(
                 c =>

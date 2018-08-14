@@ -31,7 +31,7 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public class CastConcreteTypeToInterface : SonarDiagnosticAnalyzer
+    public sealed class CastConcreteTypeToInterface : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S3215";
         private const string MessageFormat = "Remove this cast and edit the interface to add the missing functionality.";
@@ -41,7 +41,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        protected sealed override void Initialize(SonarAnalysisContext context)
+        protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>

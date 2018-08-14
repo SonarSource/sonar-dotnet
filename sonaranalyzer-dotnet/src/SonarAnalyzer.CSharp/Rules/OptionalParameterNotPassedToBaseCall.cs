@@ -30,7 +30,7 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public class OptionalParameterNotPassedToBaseCall : SonarDiagnosticAnalyzer
+    public sealed class OptionalParameterNotPassedToBaseCall : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S3466";
         private const string MessageFormat = "Pass the missing user-supplied parameter value{0} to this 'base' call.";
@@ -40,7 +40,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        protected sealed override void Initialize(SonarAnalysisContext context)
+        protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>

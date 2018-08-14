@@ -33,7 +33,7 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public class EqualityOnFloatingPoint : SonarDiagnosticAnalyzer
+    public sealed class EqualityOnFloatingPoint : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S1244";
         private const string MessageFormat = "Do not check floating point {0} with exact values, use a range instead.";
@@ -45,7 +45,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static readonly ISet<string> EqualityOperators = new HashSet<string> { "op_Equality", "op_Inequality" };
 
-        protected sealed override void Initialize(SonarAnalysisContext context)
+        protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 CheckEquality,

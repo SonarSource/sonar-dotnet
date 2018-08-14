@@ -32,7 +32,7 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public class GenericTypeParameterInOut : SonarDiagnosticAnalyzer
+    public sealed class GenericTypeParameterInOut : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S3246";
         private const string MessageFormat = "Add the '{0}' keyword to parameter '{1}' to make it '{2}'.";
@@ -42,7 +42,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        protected sealed override void Initialize(SonarAnalysisContext context)
+        protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c => CheckInterfaceVariance((InterfaceDeclarationSyntax)c.Node, c),
@@ -171,14 +171,13 @@ namespace SonarAnalyzer.Rules.CSharp
                             return false;
                         }
                         break;
+
                     case SymbolKind.Event:
                         canBeVariant = CheckTypeParameterInEvent(typeParameter, variance, (IEventSymbol)member);
                         if (!canBeVariant)
                         {
                             return false;
                         }
-                        break;
-                    default:
                         break;
                 }
             }

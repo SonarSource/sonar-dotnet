@@ -32,7 +32,7 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public class ReferenceEqualityCheckWhenEqualsExists : SonarDiagnosticAnalyzer
+    public sealed class ReferenceEqualityCheckWhenEqualsExists : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S1698";
         private const string MessageFormat = "Consider using 'Equals' if value comparison was intended.";
@@ -59,7 +59,7 @@ namespace SonarAnalyzer.Rules.CSharp
             KnownType.System_Windows_DependencyObject
         };
 
-        protected sealed override void Initialize(SonarAnalysisContext context)
+        protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterCompilationStartAction(
                 compilationStartContext =>

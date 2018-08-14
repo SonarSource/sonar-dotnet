@@ -30,7 +30,7 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public class WcfMissingContractAttribute : SonarDiagnosticAnalyzer
+    public sealed class WcfMissingContractAttribute : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S3597";
         private const string MessageFormat = "Add the '{0}' attribute to {1}.";
@@ -42,7 +42,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        protected sealed override void Initialize(SonarAnalysisContext context)
+        protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSymbolAction(
                 c =>

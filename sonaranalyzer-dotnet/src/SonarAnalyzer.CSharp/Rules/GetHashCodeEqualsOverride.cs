@@ -33,7 +33,7 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public class GetHashCodeEqualsOverride : SonarDiagnosticAnalyzer
+    public sealed class GetHashCodeEqualsOverride : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S3249";
         private const string MessageFormat = "Remove this 'base' call to 'object.{0}', which is directly based on the object reference.";
@@ -46,7 +46,7 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string EqualsName = "Equals";
         private static readonly ISet<string> MethodNames = new HashSet<string> { "GetHashCode", EqualsName };
 
-        protected sealed override void Initialize(SonarAnalysisContext context)
+        protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterCodeBlockStartActionInNonGenerated<SyntaxKind>(
                 cb =>

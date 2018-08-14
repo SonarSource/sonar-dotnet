@@ -33,7 +33,7 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public class ParametersCorrectOrder : SonarDiagnosticAnalyzer
+    public sealed class ParametersCorrectOrder : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S2234";
         private const string MessageFormat = "Parameters to '{0}' have the same names but not the same order as the method arguments.";
@@ -43,7 +43,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        protected sealed override void Initialize(SonarAnalysisContext context)
+        protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>

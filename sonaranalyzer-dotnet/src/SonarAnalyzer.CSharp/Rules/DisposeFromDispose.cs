@@ -31,7 +31,7 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public class DisposeFromDispose : SonarDiagnosticAnalyzer
+    public sealed class DisposeFromDispose : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S2952";
         private const string MessageFormat = "Move this 'Dispose' call into this class' own 'Dispose' method.";
@@ -44,7 +44,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        protected sealed override void Initialize(SonarAnalysisContext context)
+        protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>

@@ -32,7 +32,7 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public class ConditionalSimplification : SonarDiagnosticAnalyzer
+    public sealed class ConditionalSimplification : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S3240";
         private const string MessageFormat = "Use the '{0}' operator here.";
@@ -44,7 +44,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         internal const string IsNullCoalescingKey = "isNullCoalescing";
 
-        protected sealed override void Initialize(SonarAnalysisContext context)
+        protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 CheckConditionalExpression,

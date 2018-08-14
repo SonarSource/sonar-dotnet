@@ -70,7 +70,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static readonly HashSet<string> UrlNameVariants = new HashSet<string> { "URI", "URL", "URN" };
 
-        protected sealed override void Initialize(SonarAnalysisContext context)
+        protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(VerifyMethodDeclaration,
                 SyntaxKind.MethodDeclaration, SyntaxKind.ConstructorDeclaration);

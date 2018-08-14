@@ -37,7 +37,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public class DeadStores : SonarDiagnosticAnalyzer
+    public sealed class DeadStores : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S1854";
         private const string MessageFormat = "Remove this useless assignment to local variable '{0}'.";
@@ -46,7 +46,7 @@ namespace SonarAnalyzer.Rules.CSharp
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        protected sealed override void Initialize(SonarAnalysisContext context)
+        protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
@@ -187,9 +187,6 @@ namespace SonarAnalyzer.Rules.CSharp
                         case SyntaxKind.PostIncrementExpression:
                         case SyntaxKind.PostDecrementExpression:
                             ProcessPostfixExpression(instruction, liveOut);
-                            break;
-
-                        default:
                             break;
                     }
                 }

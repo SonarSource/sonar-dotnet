@@ -31,7 +31,7 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public class UnaryPrefixOperatorRepeated : SonarDiagnosticAnalyzer
+    public sealed class UnaryPrefixOperatorRepeated : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S2761";
         private const string MessageFormat = "Use the '{0}' operator just once or not at all.";
@@ -41,7 +41,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        protected sealed override void Initialize(SonarAnalysisContext context)
+        protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>

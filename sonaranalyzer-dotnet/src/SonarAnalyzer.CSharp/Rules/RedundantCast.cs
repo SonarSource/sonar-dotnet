@@ -33,7 +33,7 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public class RedundantCast : SonarDiagnosticAnalyzer
+    public sealed class RedundantCast : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S1905";
         private const string MessageFormat = "Remove this unnecessary cast to '{0}'.";
@@ -45,7 +45,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static readonly ISet<string> CastIEnumerableMethods = new HashSet<string> { "Cast", "OfType" };
 
-        protected sealed override void Initialize(SonarAnalysisContext context)
+        protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>

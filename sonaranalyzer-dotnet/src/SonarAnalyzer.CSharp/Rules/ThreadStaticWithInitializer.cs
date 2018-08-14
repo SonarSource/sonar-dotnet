@@ -31,7 +31,7 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public class ThreadStaticWithInitializer : SonarDiagnosticAnalyzer
+    public sealed class ThreadStaticWithInitializer : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S2996";
         private const string MessageFormat = "Remove this initialization of '{0}' or make it lazy.";
@@ -41,7 +41,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        protected sealed override void Initialize(SonarAnalysisContext context)
+        protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>

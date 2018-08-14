@@ -33,7 +33,7 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public class ComparableInterfaceImplementation : SonarDiagnosticAnalyzer
+    public sealed class ComparableInterfaceImplementation : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S1210";
         private const string MessageFormat = "When implementing {0}, you should also override {1}.";
@@ -71,7 +71,7 @@ namespace SonarAnalyzer.Rules.CSharp
             { "op_Inequality" , "!=" },
         };
 
-        protected sealed override void Initialize(SonarAnalysisContext context)
+        protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>

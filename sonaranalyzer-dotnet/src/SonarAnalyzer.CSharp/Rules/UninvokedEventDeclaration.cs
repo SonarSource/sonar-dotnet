@@ -33,7 +33,7 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public class UninvokedEventDeclaration : SonarDiagnosticAnalyzer
+    public sealed class UninvokedEventDeclaration : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S3264";
         private const string MessageFormat = "Remove the unused event '{0}' or invoke it.";
@@ -50,7 +50,7 @@ namespace SonarAnalyzer.Rules.CSharp
             SyntaxKind.EventFieldDeclaration,
         };
 
-        protected sealed override void Initialize(SonarAnalysisContext context)
+        protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSymbolAction(RaiseOnUninvokedEventDeclaration, SymbolKind.NamedType);
         }
@@ -76,7 +76,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             var symbolNames = removableEventFields.Select(t => t.Symbol.Name).ToHashSet();
-            var usedSymbols = GetReferencedSymbolsWithMatchingNames(removableDeclarationCollector, symbolNames);
+            GetReferencedSymbolsWithMatchingNames(removableDeclarationCollector, symbolNames);
             var invokedSymbols = GetInvokedEventSymbols(removableDeclarationCollector);
             var possiblyCopiedSymbols = GetPossiblyCopiedSymbols(removableDeclarationCollector);
 

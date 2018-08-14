@@ -31,7 +31,7 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public class UseStringIsNullOrEmpty : SonarDiagnosticAnalyzer
+    public sealed class UseStringIsNullOrEmpty : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S3256";
         private const string MessageFormat =
@@ -44,7 +44,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static readonly ISet<string> ReservedMethods = new HashSet<string> { nameof(string.Equals) };
 
-        protected sealed override void Initialize(SonarAnalysisContext context)
+        protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>

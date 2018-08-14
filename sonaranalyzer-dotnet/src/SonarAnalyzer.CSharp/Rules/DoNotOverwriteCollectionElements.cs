@@ -95,15 +95,13 @@ namespace SonarAnalyzer.Rules.CSharp
                     key = GetConstantOrSymbol(semanticModel, elementAccess.ArgumentList.Arguments[0].Expression);
                 }
             }
-            else if (assignmentOrInvocation is InvocationExpressionSyntax invocation)
+            else if (assignmentOrInvocation is InvocationExpressionSyntax invocation &&
+                invocation.Expression is MemberAccessExpressionSyntax memberAccess &&
+                invocation.ArgumentList?.Arguments.Count > 0 &&
+                IsDictionaryAdd(semanticModel.GetSymbolInfo(memberAccess).Symbol as IMethodSymbol))
             {
-                if (invocation.Expression is MemberAccessExpressionSyntax memberAccess &&
-                    invocation.ArgumentList?.Arguments.Count > 0 &&
-                    IsDictionaryAdd(semanticModel.GetSymbolInfo(memberAccess).Symbol as IMethodSymbol))
-                {
-                    collection = semanticModel.GetSymbolInfo(memberAccess.Expression).Symbol;
-                    key = GetConstantOrSymbol(semanticModel, invocation.ArgumentList.Arguments[0].Expression);
-                }
+                collection = semanticModel.GetSymbolInfo(memberAccess.Expression).Symbol;
+                key = GetConstantOrSymbol(semanticModel, invocation.ArgumentList.Arguments[0].Expression);
             }
 
             return new CollectionAndIndex(collection != null && key != null, assignmentOrInvocation, collection, key);

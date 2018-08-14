@@ -35,7 +35,7 @@ namespace SonarAnalyzer.Rules.CSharp
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId_TypeName)]
     [Rule(DiagnosticId_MethodName)]
-    public class ClassAndMethodName : SonarDiagnosticAnalyzer
+    public sealed class ClassAndMethodName : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId_MethodName = "S101";
         internal const string DiagnosticId_TypeName = "S100";
@@ -70,7 +70,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 KnownType.System_Runtime_InteropServices_InterfaceTypeAttribute
             };
 
-        protected sealed override void Initialize(SonarAnalysisContext context)
+        protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 CheckTypeName,

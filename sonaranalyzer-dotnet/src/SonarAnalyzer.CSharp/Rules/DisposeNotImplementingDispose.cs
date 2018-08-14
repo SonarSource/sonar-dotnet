@@ -32,7 +32,7 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public class DisposeNotImplementingDispose : SonarDiagnosticAnalyzer
+    public sealed class DisposeNotImplementingDispose : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S2953";
         private const string MessageFormat = "Either implement 'IDisposable.Dispose', or totally rename this method to prevent confusion.";
@@ -44,7 +44,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private const string DisposeMethodName = "Dispose";
 
-        protected sealed override void Initialize(SonarAnalysisContext context)
+        protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSymbolAction(
                 c =>

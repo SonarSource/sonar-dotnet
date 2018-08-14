@@ -32,7 +32,7 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public class FieldsShouldNotBePublic : SonarDiagnosticAnalyzer
+    public sealed class FieldsShouldNotBePublic : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S1104";
         private const string MessageFormat = "Make this field 'private' and encapsulate it in a 'public' property.";
@@ -50,7 +50,7 @@ namespace SonarAnalyzer.Rules.CSharp
             SyntaxKind.ConstKeyword
         };
 
-        protected sealed override void Initialize(SonarAnalysisContext context)
+        protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>

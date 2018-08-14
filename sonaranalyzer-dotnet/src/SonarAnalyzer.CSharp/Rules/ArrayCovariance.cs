@@ -31,7 +31,7 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public class ArrayCovariance : SonarDiagnosticAnalyzer
+    public sealed class ArrayCovariance : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S2330";
         private const string MessageFormat = "Refactor the code to not rely on potentially unsafe array conversions.";
@@ -40,7 +40,7 @@ namespace SonarAnalyzer.Rules.CSharp
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        protected sealed override void Initialize(SonarAnalysisContext context)
+        protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(RaiseOnArrayCovarianceInSimpleAssignmentExpression,
                 SyntaxKind.SimpleAssignmentExpression);

@@ -31,7 +31,7 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public class EnumerableSumInUnchecked : SonarDiagnosticAnalyzer
+    public sealed class EnumerableSumInUnchecked : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S2291";
         private const string MessageFormat = "Refactor this code to handle 'OverflowException'.";
@@ -41,7 +41,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        protected sealed override void Initialize(SonarAnalysisContext context)
+        protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>

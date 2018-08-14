@@ -33,7 +33,7 @@ namespace SonarAnalyzer.Rules
         {
             private readonly int maximumNestingDepth;
             private readonly Action<SyntaxToken> actionMaximumExceeded;
-            private int currentDepth = 0;
+            private int currentDepth;
 
             public NestingDepthCounter(int maximumNestingDepth, Action<SyntaxToken> actionMaximumExceeded)
             {

@@ -32,7 +32,7 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public class MemberOverrideCallsBaseMember : SonarDiagnosticAnalyzer
+    public sealed class MemberOverrideCallsBaseMember : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S1185";
         private const string MessageFormat = "Remove this {1} '{0}' to simply inherit its behavior.";
@@ -44,7 +44,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static readonly ISet<string> IgnoredMethodNames = new HashSet<string> { "Equals", "GetHashCode" };
 
-        protected sealed override void Initialize(SonarAnalysisContext context)
+        protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>

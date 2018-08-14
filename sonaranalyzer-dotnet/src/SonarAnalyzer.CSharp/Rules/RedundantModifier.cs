@@ -33,7 +33,7 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public class RedundantModifier : SonarDiagnosticAnalyzer
+    public sealed class RedundantModifier : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S2333";
         private const string MessageFormat = "'{0}' is {1} in this context.";
@@ -43,7 +43,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        protected sealed override void Initialize(SonarAnalysisContext context)
+        protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 CheckSealedMemberInSealedClass,
@@ -308,7 +308,7 @@ namespace SonarAnalyzer.Rules.CSharp
             private readonly SyntaxNodeAnalysisContext context;
 
             private bool isCurrentContextChecked;
-            private bool currentContextHasIntegralOperation = false;
+            private bool currentContextHasIntegralOperation;
 
             public CheckedWalker(SyntaxNodeAnalysisContext context)
             {

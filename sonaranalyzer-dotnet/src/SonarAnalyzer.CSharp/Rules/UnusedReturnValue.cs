@@ -32,7 +32,7 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public class UnusedReturnValue : SonarDiagnosticAnalyzer
+    public sealed class UnusedReturnValue : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S3241";
         private const string MessageFormat = "Change return type to 'void'; not a single caller uses the returned value.";
@@ -42,7 +42,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        protected sealed override void Initialize(SonarAnalysisContext context)
+        protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSymbolAction(
                 c =>

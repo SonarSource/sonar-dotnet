@@ -100,9 +100,6 @@ namespace SonarAnalyzer.Utilities
                     case LanguageNames.VisualBasic:
                         language = language.AddLanguage(AnalyzerLanguage.VisualBasic);
                         break;
-
-                    default:
-                        break;
                 }
             }
 

@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2018 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -35,7 +35,7 @@ namespace SonarAnalyzer.Rules.CSharp
     [Obsolete("This rule is superseded by S2259.")]
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public class ShortCircuitNullPointerDereference : SonarDiagnosticAnalyzer
+    public sealed class ShortCircuitNullPointerDereference : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S1697";
         private const string MessageFormat =
@@ -46,7 +46,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        protected sealed override void Initialize(SonarAnalysisContext context)
+        protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>

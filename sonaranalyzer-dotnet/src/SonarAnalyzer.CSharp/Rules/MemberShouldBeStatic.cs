@@ -33,7 +33,7 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public class MemberShouldBeStatic : SonarDiagnosticAnalyzer
+    public sealed class MemberShouldBeStatic : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S2325";
         internal const string MessageFormat = "Make '{0}' a static {1}.";
@@ -58,7 +58,7 @@ namespace SonarAnalyzer.Rules.CSharp
             KnownType.Microsoft_AspNetCore_Mvc_Controller
         };
 
-        protected sealed override void Initialize(SonarAnalysisContext context)
+        protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c => CheckIssue<PropertyDeclarationSyntax>(c, GetPropertyDescendants, d => d.Identifier, "property"),

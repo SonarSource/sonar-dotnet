@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2018 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -35,7 +35,7 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public class EmptyNullableValueAccess : SonarDiagnosticAnalyzer
+    public sealed class EmptyNullableValueAccess : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S3655";
         private const string MessageFormat = "'{0}' is null on at least one execution path.";
@@ -48,7 +48,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string ValueLiteral = "Value";
         private const string HasValueLiteral = "HasValue";
 
-        protected sealed override void Initialize(SonarAnalysisContext context)
+        protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterExplodedGraphBasedAnalysis((e, c) => CheckEmptyNullableAccess(e, c));
         }
