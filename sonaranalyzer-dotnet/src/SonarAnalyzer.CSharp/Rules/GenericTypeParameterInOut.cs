@@ -162,23 +162,22 @@ namespace SonarAnalyzer.Rules.CSharp
             foreach (var member in interfaceType.GetMembers())
             {
                 bool canBeVariant;
-                switch (member.Kind)
-                {
-                    case SymbolKind.Method:
-                        canBeVariant = CheckTypeParameterInMethod(typeParameter, variance, (IMethodSymbol)member);
-                        if (!canBeVariant)
-                        {
-                            return false;
-                        }
-                        break;
 
-                    case SymbolKind.Event:
-                        canBeVariant = CheckTypeParameterInEvent(typeParameter, variance, (IEventSymbol)member);
-                        if (!canBeVariant)
-                        {
-                            return false;
-                        }
-                        break;
+                if (member.Kind == SymbolKind.Method)
+                {
+                    canBeVariant = CheckTypeParameterInMethod(typeParameter, variance, (IMethodSymbol)member);
+                    if (!canBeVariant)
+                    {
+                        return false;
+                    }
+                }
+                else if (member.Kind == SymbolKind.Event)
+                {
+                    canBeVariant = CheckTypeParameterInEvent(typeParameter, variance, (IEventSymbol)member);
+                    if (!canBeVariant)
+                    {
+                        return false;
+                    }
                 }
             }
 

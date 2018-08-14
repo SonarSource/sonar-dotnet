@@ -76,7 +76,6 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             var symbolNames = removableEventFields.Select(t => t.Symbol.Name).ToHashSet();
-            GetReferencedSymbolsWithMatchingNames(removableDeclarationCollector, symbolNames);
             var invokedSymbols = GetInvokedEventSymbols(removableDeclarationCollector);
             var possiblyCopiedSymbols = GetPossiblyCopiedSymbols(removableDeclarationCollector);
 
@@ -97,52 +96,6 @@ namespace SonarAnalyzer.Rules.CSharp
 
             bool IsNotCopied(SyntaxNodeSymbolSemanticModelTuple<SyntaxNode, ISymbol> tuple) =>
                 !possiblyCopiedSymbols.Contains(tuple.Symbol);
-        }
-
-        private static ISet<ISymbol> GetReferencedSymbolsWithMatchingNames(RemovableDeclarationCollector removableDeclarationCollector,
-            ISet<string> symbolNames)
-        {
-            var usedSymbols = new HashSet<ISymbol>();
-
-            var identifiers = removableDeclarationCollector.TypeDeclarations
-                .SelectMany(container => container.SyntaxNode.DescendantNodes()
-                    .Where(node =>
-                        node.IsKind(SyntaxKind.IdentifierName))
-                    .Cast<IdentifierNameSyntax>()
-                    .Where(node => symbolNames.Contains(node.Identifier.ValueText))
-                    .Select(node =>
-                        new SyntaxNodeSemanticModelTuple<SyntaxNode>
-                        {
-                            SyntaxNode = node,
-                            SemanticModel = container.SemanticModel
-                        }));
-
-            var generic = removableDeclarationCollector.TypeDeclarations
-                .SelectMany(container => container.SyntaxNode.DescendantNodes()
-                    .Where(node =>
-                        node.IsKind(SyntaxKind.GenericName))
-                    .Cast<GenericNameSyntax>()
-                    .Where(node => symbolNames.Contains(node.Identifier.ValueText))
-                    .Select(node =>
-                        new SyntaxNodeSemanticModelTuple<SyntaxNode>
-                        {
-                            SyntaxNode = node,
-                            SemanticModel = container.SemanticModel
-                        }));
-
-            var allNodes = identifiers.Concat(generic);
-
-            foreach (var node in allNodes)
-            {
-                var symbol = node.SemanticModel.GetSymbolInfo(node.SyntaxNode).Symbol;
-
-                if (symbol != null)
-                {
-                    usedSymbols.Add(symbol.OriginalDefinition);
-                }
-            }
-
-            return usedSymbols;
         }
 
         private static ISet<ISymbol> GetInvokedEventSymbols(RemovableDeclarationCollector removableDeclarationCollector)
