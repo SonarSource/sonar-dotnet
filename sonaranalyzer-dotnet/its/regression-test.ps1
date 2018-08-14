@@ -47,9 +47,9 @@ function Build-Project([string]$ProjectName, [string]$SolutionRelativePath) {
 function Initialize-ActualFolder() {
     $methodTimer = [system.diagnostics.stopwatch]::StartNew()
 
-    Write-Host "Initializing the actual issues folder with the expected  result"
+    Write-Host "Initializing the actual issues folder with the expected result"
     if (Test-Path .\actual) {
-        Write-Debug "Removing folder 'actual'"
+        Write-Host "Removing existing folder 'actual'"
         Remove-Item -Recurse -Force actual
     }
 
@@ -64,7 +64,7 @@ function Initialize-OutputFolder() {
 
     Write-Host "Initializing the output folder"
     if (Test-Path .\output) {
-        Write-Debug "Removing folder 'output'"
+        Write-Host "Removing existing folder 'output'"
         Remove-Item -Recurse -Force output
     }
 
@@ -72,14 +72,14 @@ function Initialize-OutputFolder() {
     New-Item -ItemType directory -Path .\output | out-null
 
     if ($ruleId) {
-        Write-Debug "Running ITs with only rule ${ruleId} turned on"
+        Write-Host "Running ITs with only rule ${ruleId} turned on"
         $template = Get-Content -Path ".\SingleRule.ruleset.template" -Raw
         $rulesetWithOneRule = $template.Replace("<Rule Id=`"$ruleId`" Action=`"None`" />", `
                                                 "<Rule Id=`"$ruleId`" Action=`"Warning`" />")
         Set-Content -Path ".\output\AllSonarAnalyzerRules.ruleset" -Value $rulesetWithOneRule
     }
     else {
-        Write-Debug "Running ITs with all rules turned on"
+        Write-Host "Running ITs with all rules turned on"
         Copy-Item ".\AllSonarAnalyzerRules.ruleset" -Destination ".\output"
     }
 
@@ -147,7 +147,7 @@ function Measure-AnalyzerPerformance()
 
 function Show-DiffResults() {
     if (Test-Path .\diff) {
-        Write-Debug "Removing folder 'diff'"
+        Write-Host "Removing existing folder 'diff'"
         Remove-Item -Recurse -Force .\diff
     }
 
