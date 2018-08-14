@@ -358,6 +358,7 @@ function Invoke-JavaBuild() {
     elseif ($isMaintenanceBranch) {
         Write-Header "Building and deploying SonarC# for maintenance branch" $branchName
 
+        $currentVersion = Get-MavenExpression "project.version"
         Set-MavenBuildVersion
         $env:MAVEN_OPTS = "-Xmx1536m -Xms128m"
 
