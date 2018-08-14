@@ -42,7 +42,6 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         private static readonly ISet<SyntaxKind> eventSyntax = new HashSet<SyntaxKind>
@@ -75,7 +74,6 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            var symbolNames = removableEventFields.Select(t => t.Symbol.Name).ToHashSet();
             var invokedSymbols = GetInvokedEventSymbols(removableDeclarationCollector);
             var possiblyCopiedSymbols = GetPossiblyCopiedSymbols(removableDeclarationCollector);
 
