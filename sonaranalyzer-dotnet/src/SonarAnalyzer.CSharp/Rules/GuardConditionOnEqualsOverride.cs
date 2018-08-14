@@ -31,7 +31,7 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public class GuardConditionOnEqualsOverride : SonarDiagnosticAnalyzer
+    public sealed class GuardConditionOnEqualsOverride : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S3397";
         private const string MessageFormat = "Change this guard condition to call 'object.ReferenceEquals'.";
@@ -43,7 +43,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static readonly ISet<string> MethodNames = new HashSet<string> { GetHashCodeEqualsOverride.EqualsName };
 
-        protected sealed override void Initialize(SonarAnalysisContext context)
+        protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterCodeBlockStartActionInNonGenerated<SyntaxKind>(
                 cb =>

@@ -33,7 +33,7 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public class UnusedPrivateMember : SonarDiagnosticAnalyzer
+    public sealed class UnusedPrivateMember : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S1144";
         private const string MessageFormat = "Remove the unused {0} {1} '{2}'.";
@@ -51,7 +51,7 @@ namespace SonarAnalyzer.Rules.CSharp
             KnownType.UnityEngine_ScriptableObject,
         };
 
-        protected sealed override void Initialize(SonarAnalysisContext context)
+        protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterCompilationStartAction(
                 c =>

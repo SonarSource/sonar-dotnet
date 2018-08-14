@@ -32,7 +32,7 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public class ClassNotInstantiatable : SonarDiagnosticAnalyzer
+    public sealed class ClassNotInstantiatable : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S3453";
         private const string MessageFormat = "This class can't be instantiated; make {0} 'public'.";
@@ -42,7 +42,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        protected sealed override void Initialize(SonarAnalysisContext context)
+        protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSymbolAction(CheckClassWithOnlyUnusedPrivateConstructors, SymbolKind.NamedType);
         }

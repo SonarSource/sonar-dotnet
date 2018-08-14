@@ -33,7 +33,7 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public class UninvokedEventDeclaration : SonarDiagnosticAnalyzer
+    public sealed class UninvokedEventDeclaration : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S3264";
         private const string MessageFormat = "Remove the unused event '{0}' or invoke it.";
@@ -42,7 +42,6 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         private static readonly ISet<SyntaxKind> eventSyntax = new HashSet<SyntaxKind>
@@ -50,7 +49,7 @@ namespace SonarAnalyzer.Rules.CSharp
             SyntaxKind.EventFieldDeclaration,
         };
 
-        protected sealed override void Initialize(SonarAnalysisContext context)
+        protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSymbolAction(RaiseOnUninvokedEventDeclaration, SymbolKind.NamedType);
         }
@@ -75,8 +74,6 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            var symbolNames = removableEventFields.Select(t => t.Symbol.Name).ToHashSet();
-            var usedSymbols = GetReferencedSymbolsWithMatchingNames(removableDeclarationCollector, symbolNames);
             var invokedSymbols = GetInvokedEventSymbols(removableDeclarationCollector);
             var possiblyCopiedSymbols = GetPossiblyCopiedSymbols(removableDeclarationCollector);
 
@@ -97,52 +94,6 @@ namespace SonarAnalyzer.Rules.CSharp
 
             bool IsNotCopied(SyntaxNodeSymbolSemanticModelTuple<SyntaxNode, ISymbol> tuple) =>
                 !possiblyCopiedSymbols.Contains(tuple.Symbol);
-        }
-
-        private static ISet<ISymbol> GetReferencedSymbolsWithMatchingNames(RemovableDeclarationCollector removableDeclarationCollector,
-            ISet<string> symbolNames)
-        {
-            var usedSymbols = new HashSet<ISymbol>();
-
-            var identifiers = removableDeclarationCollector.TypeDeclarations
-                .SelectMany(container => container.SyntaxNode.DescendantNodes()
-                    .Where(node =>
-                        node.IsKind(SyntaxKind.IdentifierName))
-                    .Cast<IdentifierNameSyntax>()
-                    .Where(node => symbolNames.Contains(node.Identifier.ValueText))
-                    .Select(node =>
-                        new SyntaxNodeSemanticModelTuple<SyntaxNode>
-                        {
-                            SyntaxNode = node,
-                            SemanticModel = container.SemanticModel
-                        }));
-
-            var generic = removableDeclarationCollector.TypeDeclarations
-                .SelectMany(container => container.SyntaxNode.DescendantNodes()
-                    .Where(node =>
-                        node.IsKind(SyntaxKind.GenericName))
-                    .Cast<GenericNameSyntax>()
-                    .Where(node => symbolNames.Contains(node.Identifier.ValueText))
-                    .Select(node =>
-                        new SyntaxNodeSemanticModelTuple<SyntaxNode>
-                        {
-                            SyntaxNode = node,
-                            SemanticModel = container.SemanticModel
-                        }));
-
-            var allNodes = identifiers.Concat(generic);
-
-            foreach (var node in allNodes)
-            {
-                var symbol = node.SemanticModel.GetSymbolInfo(node.SyntaxNode).Symbol;
-
-                if (symbol != null)
-                {
-                    usedSymbols.Add(symbol.OriginalDefinition);
-                }
-            }
-
-            return usedSymbols;
         }
 
         private static ISet<ISymbol> GetInvokedEventSymbols(RemovableDeclarationCollector removableDeclarationCollector)

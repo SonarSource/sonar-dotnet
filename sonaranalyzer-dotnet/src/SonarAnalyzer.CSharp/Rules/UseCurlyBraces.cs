@@ -32,7 +32,7 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public class UseCurlyBraces : SonarDiagnosticAnalyzer
+    public sealed class UseCurlyBraces : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S121";
         private const string MessageFormat = "Add curly braces around the nested statement(s) in this '{0}' block.";
@@ -99,7 +99,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 IssueReportLocation = node => ((WhileStatementSyntax)node).WhileKeyword.GetLocation()
             });
 
-        protected sealed override void Initialize(SonarAnalysisContext context)
+        protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>

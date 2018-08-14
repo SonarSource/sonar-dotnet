@@ -32,7 +32,7 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public class IndexOfCheckAgainstZero : SonarDiagnosticAnalyzer
+    public sealed class IndexOfCheckAgainstZero : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S2692";
         private const string MessageFormat = "0 is a valid index, but this check ignores it.";
@@ -42,7 +42,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        protected sealed override void Initialize(SonarAnalysisContext context)
+        protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>

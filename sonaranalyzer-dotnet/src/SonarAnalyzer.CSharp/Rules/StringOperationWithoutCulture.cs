@@ -32,7 +32,7 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public class StringOperationWithoutCulture : SonarDiagnosticAnalyzer
+    public sealed class StringOperationWithoutCulture : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S1449";
         private const string MessageFormat = "{0}";
@@ -44,55 +44,57 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        protected sealed override void Initialize(SonarAnalysisContext context)
+        protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
-                {
-                    var invocation = (InvocationExpressionSyntax)c.Node;
-
-                    if (!(invocation.Expression is MemberAccessExpressionSyntax memberAccess))
-                    {
-                        return;
-                    }
-
-                    if (!(c.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol calledMethod))
-                    {
-                        return;
-                    }
-
-                    if (calledMethod.IsInType(KnownType.System_String) &&
-                        CommonCultureSpecificMethodNames.Contains(calledMethod.Name) &&
-                        !calledMethod.Parameters.Any(param => param.Type.IsAny(StringCultureSpecifierNames)))
-                    {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, memberAccess.Name.GetLocation(), MessageDefineLocale));
-                        return;
-                    }
-
-                    if (calledMethod.IsInType(KnownType.System_String) &&
-                        IndexLookupMethodNames.Contains(calledMethod.Name) &&
-                        calledMethod.Parameters.Any(param => param.Type.SpecialType == SpecialType.System_String) &&
-                        !calledMethod.Parameters.Any(param => param.Type.IsAny(StringCultureSpecifierNames)))
-                    {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, memberAccess.Name.GetLocation(), MessageDefineLocale));
-                        return;
-                    }
-
-                    if (IsMethodOnNonIntegralOrDateTime(calledMethod) &&
-                        calledMethod.Name == ToStringMethodName &&
-                        calledMethod.Parameters.Length == 0)
-                    {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, memberAccess.Name.GetLocation(), MessageDefineLocale));
-                        return;
-                    }
-
-                    if (calledMethod.IsInType(KnownType.System_String) &&
-                        calledMethod.Name == CompareToMethodName)
-                    {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, memberAccess.Name.GetLocation(), MessageChangeCompareTo));
-                    }
-                },
+                ReportOnViolation,
                 SyntaxKind.InvocationExpression);
+        }
+
+        private static void ReportOnViolation(SyntaxNodeAnalysisContext context)
+        {
+            var invocation = (InvocationExpressionSyntax)context.Node;
+
+            if (!(invocation.Expression is MemberAccessExpressionSyntax memberAccess))
+            {
+                return;
+            }
+
+            if (!(context.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol calledMethod))
+            {
+                return;
+            }
+
+            if (calledMethod.IsInType(KnownType.System_String) &&
+                CommonCultureSpecificMethodNames.Contains(calledMethod.Name) &&
+                !calledMethod.Parameters.Any(param => param.Type.IsAny(StringCultureSpecifierNames)))
+            {
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, memberAccess.Name.GetLocation(), MessageDefineLocale));
+                return;
+            }
+
+            if (calledMethod.IsInType(KnownType.System_String) &&
+                IndexLookupMethodNames.Contains(calledMethod.Name) &&
+                calledMethod.Parameters.Any(param => param.Type.SpecialType == SpecialType.System_String) &&
+                !calledMethod.Parameters.Any(param => param.Type.IsAny(StringCultureSpecifierNames)))
+            {
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, memberAccess.Name.GetLocation(), MessageDefineLocale));
+                return;
+            }
+
+            if (IsMethodOnNonIntegralOrDateTime(calledMethod) &&
+                calledMethod.Name == ToStringMethodName &&
+                calledMethod.Parameters.Length == 0)
+            {
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, memberAccess.Name.GetLocation(), MessageDefineLocale));
+                return;
+            }
+
+            if (calledMethod.IsInType(KnownType.System_String) &&
+                calledMethod.Name == CompareToMethodName)
+            {
+                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, memberAccess.Name.GetLocation(), MessageChangeCompareTo));
+            }
         }
 
         private static bool IsMethodOnNonIntegralOrDateTime(IMethodSymbol methodSymbol)

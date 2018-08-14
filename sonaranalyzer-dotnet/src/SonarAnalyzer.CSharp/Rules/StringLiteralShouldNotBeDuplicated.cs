@@ -55,51 +55,53 @@ namespace SonarAnalyzer.Rules.CSharp
             // locations. The problem is that this scenario is not yet supported on SonarQube side.
             // Hence the decision to do like other languages, at class-level
             context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
-                {
-                    if (c.Node.Ancestors().OfType<ClassDeclarationSyntax>().Any())
-                    {
-                        // Don't report on inner instances
-                        return;
-                    }
-
-                    var stringLiterals = c.Node
-                        .DescendantNodes(n => !n.IsKind(SyntaxKind.AttributeList))
-                        .Where(les => les.IsKind(SyntaxKind.StringLiteralExpression))
-                        .Cast<LiteralExpressionSyntax>();
-
-                    // Collect duplications
-                    var stringWithLiterals = new Dictionary<string, List<LiteralExpressionSyntax>>();
-                    foreach (var literal in stringLiterals)
-                    {
-                        var stringValue = literal.Token.ValueText;
-
-                        if (stringValue != null &&
-                            stringValue.Length >= MinimumStringLength &&
-                            !IsMatchingMethodParameterName(literal))
-                        {
-                            if (!stringWithLiterals.ContainsKey(stringValue))
-                            {
-                                stringWithLiterals[stringValue] = new List<LiteralExpressionSyntax>();
-                            }
-
-                            stringWithLiterals[stringValue].Add(literal);
-                        }
-                    }
-
-                    // Report duplications
-                    foreach (var item in stringWithLiterals)
-                    {
-                        if (item.Value.Count > Threshold)
-                        {
-                            c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, item.Value[0].GetLocation(),
-                                additionalLocations: item.Value.Skip(1).Select(x => x.GetLocation()),
-                                messageArgs: new object[] { item.Key, item.Value.Count }));
-                        }
-                    }
-                },
+                ReportOnViolation,
                 SyntaxKind.ClassDeclaration,
                 SyntaxKind.StructDeclaration);
+        }
+
+        private void ReportOnViolation(SyntaxNodeAnalysisContext context)
+        {
+            if (context.Node.Ancestors().OfType<ClassDeclarationSyntax>().Any())
+            {
+                // Don't report on inner instances
+                return;
+            }
+
+            var stringLiterals = context.Node
+                .DescendantNodes(n => !n.IsKind(SyntaxKind.AttributeList))
+                .Where(les => les.IsKind(SyntaxKind.StringLiteralExpression))
+                .Cast<LiteralExpressionSyntax>();
+
+            // Collect duplications
+            var stringWithLiterals = new Dictionary<string, List<LiteralExpressionSyntax>>();
+            foreach (var literal in stringLiterals)
+            {
+                var stringValue = literal.Token.ValueText;
+
+                if (stringValue != null &&
+                    stringValue.Length >= MinimumStringLength &&
+                    !IsMatchingMethodParameterName(literal))
+                {
+                    if (!stringWithLiterals.ContainsKey(stringValue))
+                    {
+                        stringWithLiterals[stringValue] = new List<LiteralExpressionSyntax>();
+                    }
+
+                    stringWithLiterals[stringValue].Add(literal);
+                }
+            }
+
+            // Report duplications
+            foreach (var item in stringWithLiterals)
+            {
+                if (item.Value.Count > Threshold)
+                {
+                    context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, item.Value[0].GetLocation(),
+                        additionalLocations: item.Value.Skip(1).Select(x => x.GetLocation()),
+                        messageArgs: new object[] { item.Key, item.Value.Count }));
+                }
+            }
         }
 
         private bool IsMatchingMethodParameterName(LiteralExpressionSyntax literalExpression) =>

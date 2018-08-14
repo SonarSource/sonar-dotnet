@@ -32,7 +32,7 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public class PrivateFieldUsedAsLocalVariable : SonarDiagnosticAnalyzer
+    public sealed class PrivateFieldUsedAsLocalVariable : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S1450";
         private const string MessageFormat = "Remove the field '{0}' and declare it as a local variable in the relevant methods.";
@@ -49,7 +49,7 @@ namespace SonarAnalyzer.Rules.CSharp
             SyntaxKind.InternalKeyword,
         };
 
-        protected sealed override void Initialize(SonarAnalysisContext context)
+        protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>

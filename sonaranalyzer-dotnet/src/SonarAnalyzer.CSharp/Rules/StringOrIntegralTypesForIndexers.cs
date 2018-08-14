@@ -32,7 +32,7 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public class StringOrIntegralTypesForIndexers : SonarDiagnosticAnalyzer
+    public sealed class StringOrIntegralTypesForIndexers : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S3876";
         private const string MessageFormat = "Use string or an integral type here, or refactor this indexer into a method.";
@@ -53,7 +53,7 @@ namespace SonarAnalyzer.Rules.CSharp
             allowedIndexerTypes.UnionWith(KnownType.IntegralNumbers);
         }
 
-        protected sealed override void Initialize(SonarAnalysisContext context)
+        protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
             {

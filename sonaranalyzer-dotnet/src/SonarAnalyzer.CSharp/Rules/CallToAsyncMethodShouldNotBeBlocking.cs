@@ -74,49 +74,51 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
-                {
-                    var simpleMemberAccess = (MemberAccessExpressionSyntax)c.Node;
-                    var memberAccessNameName = simpleMemberAccess.Name?.Identifier.ValueText;
-
-                    if (memberAccessNameName == null ||
-                        !InvalidMemberAccess.ContainsKey(memberAccessNameName) ||
-                        IsChainedAfterThreadPoolCall(simpleMemberAccess, c.SemanticModel))
-                    {
-                        return;
-                    }
-
-                    var possibleMemberAccesses = InvalidMemberAccess[memberAccessNameName];
-
-                    var memberAccessSymbol = c.SemanticModel.GetSymbolInfo(simpleMemberAccess).Symbol;
-                    if (memberAccessSymbol == null ||
-                        memberAccessSymbol.ContainingType == null ||
-                        !memberAccessSymbol.ContainingType.ConstructedFrom.IsAny(possibleMemberAccesses))
-                    {
-                        return;
-                    }
-
-                    var enclosingMethod = simpleMemberAccess.FirstAncestorOrSelf<BaseMethodDeclarationSyntax>();
-                    if (enclosingMethod != null)
-                    {
-                        if (memberAccessNameName == "Sleep" &&
-                            !enclosingMethod.Modifiers.Any(SyntaxKind.AsyncKeyword))
-                        {
-                            return; // Thread.Sleep should not be used only in async methods
-                        }
-
-                        var methodSymbol = c.SemanticModel.GetDeclaredSymbol(enclosingMethod);
-                        if (methodSymbol != null &&
-                            methodSymbol.IsMainMethod())
-                        {
-                            return; // Main methods are not subject to deadlock issue so no need to report an issue
-                        }
-                    }
-
-                    c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, simpleMemberAccess.GetLocation(),
-                        messageArgs: MemberNameToMessageArguments[memberAccessNameName]));
-                },
+                ReportOnViolation,
                 SyntaxKind.SimpleMemberAccessExpression);
+        }
+
+        private static void ReportOnViolation(SyntaxNodeAnalysisContext context)
+        {
+            var simpleMemberAccess = (MemberAccessExpressionSyntax)context.Node;
+            var memberAccessNameName = simpleMemberAccess.Name?.Identifier.ValueText;
+
+            if (memberAccessNameName == null ||
+                !InvalidMemberAccess.ContainsKey(memberAccessNameName) ||
+                IsChainedAfterThreadPoolCall(simpleMemberAccess, context.SemanticModel))
+            {
+                return;
+            }
+
+            var possibleMemberAccesses = InvalidMemberAccess[memberAccessNameName];
+
+            var memberAccessSymbol = context.SemanticModel.GetSymbolInfo(simpleMemberAccess).Symbol;
+            if (memberAccessSymbol == null ||
+                memberAccessSymbol.ContainingType == null ||
+                !memberAccessSymbol.ContainingType.ConstructedFrom.IsAny(possibleMemberAccesses))
+            {
+                return;
+            }
+
+            var enclosingMethod = simpleMemberAccess.FirstAncestorOrSelf<BaseMethodDeclarationSyntax>();
+            if (enclosingMethod != null)
+            {
+                if (memberAccessNameName == "Sleep" &&
+                    !enclosingMethod.Modifiers.Any(SyntaxKind.AsyncKeyword))
+                {
+                    return; // Thread.Sleep should not be used only in async methods
+                }
+
+                var methodSymbol = context.SemanticModel.GetDeclaredSymbol(enclosingMethod);
+                if (methodSymbol != null &&
+                    methodSymbol.IsMainMethod())
+                {
+                    return; // Main methods are not subject to deadlock issue so no need to report an issue
+                }
+            }
+
+            context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, simpleMemberAccess.GetLocation(),
+                messageArgs: MemberNameToMessageArguments[memberAccessNameName]));
         }
 
         private static bool IsChainedAfterThreadPoolCall(MemberAccessExpressionSyntax memberAccess, SemanticModel semanticModel) =>

@@ -32,7 +32,7 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public class DisposableMemberInNonDisposableClass : SonarDiagnosticAnalyzer
+    public sealed class DisposableMemberInNonDisposableClass : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S2931";
         private const string MessageFormat = "Implement 'IDisposable' in this class and use the 'Dispose' method to call 'Dispose' on {0}.";
@@ -48,7 +48,7 @@ namespace SonarAnalyzer.Rules.CSharp
             Accessibility.Private
         };
 
-        protected sealed override void Initialize(SonarAnalysisContext context)
+        protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterCompilationStartAction(
                 analysisContext =>

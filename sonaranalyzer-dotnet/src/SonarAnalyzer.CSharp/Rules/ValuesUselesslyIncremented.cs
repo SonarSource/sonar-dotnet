@@ -31,7 +31,7 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public class ValuesUselesslyIncremented : SonarDiagnosticAnalyzer
+    public sealed class ValuesUselesslyIncremented : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S2123";
         private const string MessageFormat = "Remove this {0} or correct the code not to waste it.";
@@ -41,7 +41,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        protected sealed override void Initialize(SonarAnalysisContext context)
+        protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>

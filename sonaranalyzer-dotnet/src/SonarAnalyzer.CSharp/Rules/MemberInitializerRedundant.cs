@@ -38,7 +38,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public class MemberInitializerRedundant : SonarDiagnosticAnalyzer
+    public sealed class MemberInitializerRedundant : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S3604";
         private const string MessageFormat = "Remove the member initializer, all constructors set an initial value for the member.";
@@ -48,7 +48,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        protected sealed override void Initialize(SonarAnalysisContext context)
+        protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
@@ -239,8 +239,6 @@ namespace SonarAnalyzer.Rules.CSharp
                                 }
                             }
                             break;
-                        default:
-                            break;
                     }
                 }
 
@@ -287,8 +285,6 @@ namespace SonarAnalyzer.Rules.CSharp
                                     return true;
                                 }
                             }
-                            break;
-                        default:
                             break;
                     }
                 }

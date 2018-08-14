@@ -33,7 +33,7 @@ namespace SonarAnalyzer.Rules.CSharp
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(S2387DiagnosticId)]
     [Rule(S4025DiagnosticId)]
-    public class FieldShadowsParentField : SonarDiagnosticAnalyzer
+    public sealed class FieldShadowsParentField : SonarDiagnosticAnalyzer
     {
         internal const string S2387DiagnosticId = "S2387";
         private const string S2387MessageFormat = "'{0}' is the name of a field in '{1}'.";
@@ -49,7 +49,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(s2387, s4025);
 
-        protected sealed override void Initialize(SonarAnalysisContext context)
+        protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>

@@ -31,7 +31,7 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public class OptionalRefOutParameter : SonarDiagnosticAnalyzer
+    public sealed class OptionalRefOutParameter : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S3447";
         private const string MessageFormat = "Remove the 'Optional' attribute, it cannot be used with '{0}'.";
@@ -41,7 +41,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        protected sealed override void Initialize(SonarAnalysisContext context)
+        protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>

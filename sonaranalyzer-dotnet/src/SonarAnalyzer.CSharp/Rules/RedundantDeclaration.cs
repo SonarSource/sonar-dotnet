@@ -34,7 +34,7 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public class RedundantDeclaration : SonarDiagnosticAnalyzer
+    public sealed class RedundantDeclaration : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S3257";
         private const string MessageFormat = "Remove the {0}; it is redundant.";
@@ -58,7 +58,7 @@ namespace SonarAnalyzer.Rules.CSharp
             DelegateParameterList
         }
 
-        protected sealed override void Initialize(SonarAnalysisContext context)
+        protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>

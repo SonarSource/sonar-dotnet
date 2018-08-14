@@ -32,7 +32,7 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public class ParameterNamesShouldNotDuplicateMethodNames : SonarDiagnosticAnalyzer
+    public sealed class ParameterNamesShouldNotDuplicateMethodNames : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S3872";
         private const string MessageFormat = "Rename the parameter '{0}' so that it does not duplicate the method name.";
@@ -42,7 +42,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        protected sealed override void Initialize(SonarAnalysisContext context)
+        protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(c =>
             {

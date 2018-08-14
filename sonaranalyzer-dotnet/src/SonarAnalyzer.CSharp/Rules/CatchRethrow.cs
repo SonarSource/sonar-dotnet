@@ -34,7 +34,7 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public class CatchRethrow : SonarDiagnosticAnalyzer
+    public sealed class CatchRethrow : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S2737";
         private const string MessageFormat = @"Add logic to this catch clause or eliminate it and rethrow the exception automatically.";
@@ -46,7 +46,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        protected sealed override void Initialize(SonarAnalysisContext context)
+        protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(RaiseOnInvalidCatch, SyntaxKind.TryStatement);
         }

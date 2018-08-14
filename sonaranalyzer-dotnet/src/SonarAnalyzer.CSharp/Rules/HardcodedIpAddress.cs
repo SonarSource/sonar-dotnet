@@ -34,7 +34,7 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public class HardcodedIpAddress : SonarDiagnosticAnalyzer
+    public sealed class HardcodedIpAddress : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S1313";
         private const string MessageFormat = "Make this IP '{0}' address configurable.";
@@ -46,7 +46,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static readonly ISet<string> SkippedWords = new HashSet<string> { "VERSION", "ASSEMBLY" };
 
-        protected sealed override void Initialize(SonarAnalysisContext context)
+        protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>

@@ -34,7 +34,7 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public class MethodParameterUnused : SonarDiagnosticAnalyzer
+    public sealed class MethodParameterUnused : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S1172";
         private const string MessageFormat = "Remove this {0}.";
@@ -48,7 +48,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         internal const string IsRemovableKey = "IsRemovable";
 
-        protected sealed override void Initialize(SonarAnalysisContext context)
+        protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>

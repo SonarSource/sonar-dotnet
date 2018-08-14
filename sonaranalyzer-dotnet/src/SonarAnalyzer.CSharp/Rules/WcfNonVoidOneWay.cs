@@ -31,7 +31,7 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public class WcfNonVoidOneWay : SonarDiagnosticAnalyzer
+    public sealed class WcfNonVoidOneWay : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S3598";
         private const string MessageFormat = "This method can't return any values because it is marked as one-way operation.";
@@ -41,7 +41,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        protected sealed override void Initialize(SonarAnalysisContext context)
+        protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>

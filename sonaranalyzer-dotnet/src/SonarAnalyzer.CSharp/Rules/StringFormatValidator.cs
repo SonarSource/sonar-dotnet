@@ -35,7 +35,7 @@ namespace SonarAnalyzer.Rules.CSharp
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(BugDiagnosticId)]
     [Rule(CodeSmellDiagnosticId)]
-    public class StringFormatValidator : SonarDiagnosticAnalyzer
+    public sealed class StringFormatValidator : SonarDiagnosticAnalyzer
     {
         private const string BugDiagnosticId = "S2275";
         private const string CodeSmellDiagnosticId = "S3457";
@@ -90,7 +90,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static readonly Regex StringFormatItemRegex = // pattern is: index[,alignment][:formatString]
             new Regex(@"^(?<Index>\d+)(\s*,\s*(?<Alignment>-?\d+)\s*)?(:(?<Format>.+))?$", RegexOptions.Compiled);
 
-        protected sealed override void Initialize(SonarAnalysisContext context)
+        protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(CheckForFormatStringIssues, SyntaxKind.InvocationExpression);
         }

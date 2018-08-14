@@ -47,7 +47,7 @@ namespace SonarAnalyzer.Rules.CSharp
             KnownType.System_Runtime_CompilerServices_CallerLineNumberAttribute
         };
 
-        protected sealed override void Initialize(SonarAnalysisContext context)
+        protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>

@@ -32,7 +32,7 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public class BooleanLiteralUnnecessary : SonarDiagnosticAnalyzer
+    public sealed class BooleanLiteralUnnecessary : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S1125";
         private const string MessageFormat = "Remove the unnecessary Boolean literal(s).";
@@ -42,7 +42,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        protected sealed override void Initialize(SonarAnalysisContext context)
+        protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 CheckEquals,

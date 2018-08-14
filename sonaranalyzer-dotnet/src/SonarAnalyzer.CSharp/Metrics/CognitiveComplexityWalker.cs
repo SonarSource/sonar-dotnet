@@ -34,10 +34,10 @@ namespace SonarAnalyzer.Metrics.CSharp
         private readonly List<ExpressionSyntax> logicalOperationsToIgnore = new List<ExpressionSyntax>();
 
         private MethodDeclarationSyntax currentMethod;
-        private int nestingLevel = 0;
-        private bool hasDirectRecursiveCall = false;
+        private int nestingLevel;
+        private bool hasDirectRecursiveCall;
 
-        public int Complexity { get; private set; } = 0;
+        public int Complexity { get; private set; }
 
         public bool VisitEndedCorrectly => nestingLevel == 0;
 

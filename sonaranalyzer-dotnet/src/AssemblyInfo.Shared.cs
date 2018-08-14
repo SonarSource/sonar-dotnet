@@ -18,7 +18,9 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System;
 using System.Reflection;
+using System.Resources;
 using System.Runtime.InteropServices;
 
 [assembly: AssemblyVersion("7.4.0")]
@@ -30,4 +32,6 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCopyright("Copyright © 2015-2018 SonarSource SA")]
 [assembly: AssemblyTrademark("SonarLint, SonarQube, SonarSource")]
 [assembly: AssemblyCulture("")]
+[assembly: CLSCompliant(false)]
 [assembly: ComVisible(false)]
+[assembly: NeutralResourcesLanguageAttribute("en")]

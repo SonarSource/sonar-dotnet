@@ -295,12 +295,10 @@ namespace SonarAnalyzer.SymbolicExecution
                 return true;
             }
 
-            if (!(symbol is ILocalSymbol local))
+            if (!(symbol is ILocalSymbol local) &&
+                !(symbol is IParameterSymbol parameter)) // No filter for ref/out
             {
-                if (!(symbol is IParameterSymbol parameter)) // No filter for ref/out
-                {
-                    return false;
-                }
+                return false;
             }
 
             // Could be either ILocalSymbol or IParameterSymbol so let's use symbol

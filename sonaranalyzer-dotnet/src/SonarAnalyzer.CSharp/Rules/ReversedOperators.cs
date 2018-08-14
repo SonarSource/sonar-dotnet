@@ -30,7 +30,7 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public class ReversedOperators : SonarDiagnosticAnalyzer
+    public sealed class ReversedOperators : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S2757";
         private const string MessageFormat = "Was '{0}' meant instead?";
@@ -40,7 +40,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        protected sealed override void Initialize(SonarAnalysisContext context)
+        protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>

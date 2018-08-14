@@ -30,7 +30,7 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public class ObjectCreatedDropped : SonarDiagnosticAnalyzer
+    public sealed class ObjectCreatedDropped : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S1848";
         private const string MessageFormat = "Either remove this useless object instantiation of class '{0}' or use it.";
@@ -40,7 +40,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        protected sealed override void Initialize(SonarAnalysisContext context)
+        protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>

@@ -1,4 +1,5 @@
-﻿/*
+﻿
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2018 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -43,42 +44,45 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(c =>
-                {
-                    var methodDeclaration = (BaseMethodDeclarationSyntax)c.Node;
-                    if (methodDeclaration.ParameterList == null)
-                    {
-                        return;
-                    }
-
-                    var methodSymbol = c.SemanticModel.GetDeclaredSymbol(methodDeclaration);
-                    if (methodSymbol == null ||
-                        methodSymbol.IsOverride ||
-                        methodSymbol.GetInterfaceMember() != null)
-                    {
-                        return;
-                    }
-
-                    ParameterSyntax noCallerInfoParameter = null;
-                    foreach (var parameter in methodDeclaration.ParameterList.Parameters.Reverse())
-                    {
-                        if (parameter.AttributeLists.GetAttributes(KnownType.CallerInfoAttributes, c.SemanticModel).Any())
-                        {
-                            if (noCallerInfoParameter != null &&
-                                HasIdentifier(parameter))
-                            {
-                                c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, parameter.GetLocation(),
-                                    parameter.Identifier.Text));
-                            }
-                        }
-                        else
-                        {
-                            noCallerInfoParameter = parameter;
-                        }
-                    }
-                },
+            context.RegisterSyntaxNodeActionInNonGenerated(
+                ReportOnViolation,
                 SyntaxKind.MethodDeclaration,
                 SyntaxKind.ConstructorDeclaration);
+        }
+
+        private static void ReportOnViolation(SyntaxNodeAnalysisContext context)
+        {
+            var methodDeclaration = (BaseMethodDeclarationSyntax)context.Node;
+            if (methodDeclaration.ParameterList == null)
+            {
+                return;
+            }
+
+            var methodSymbol = context.SemanticModel.GetDeclaredSymbol(methodDeclaration);
+            if (methodSymbol == null ||
+                methodSymbol.IsOverride ||
+                methodSymbol.GetInterfaceMember() != null)
+            {
+                return;
+            }
+
+            ParameterSyntax noCallerInfoParameter = null;
+            foreach (var parameter in methodDeclaration.ParameterList.Parameters.Reverse())
+            {
+                if (parameter.AttributeLists.GetAttributes(KnownType.CallerInfoAttributes, context.SemanticModel).Any())
+                {
+                    if (noCallerInfoParameter != null &&
+                        HasIdentifier(parameter))
+                    {
+                        context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, parameter.GetLocation(),
+                            parameter.Identifier.Text));
+                    }
+                }
+                else
+                {
+                    noCallerInfoParameter = parameter;
+                }
+            }
         }
 
         private static bool HasIdentifier(ParameterSyntax parameter) =>

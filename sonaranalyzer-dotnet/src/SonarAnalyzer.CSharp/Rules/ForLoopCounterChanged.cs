@@ -33,7 +33,7 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public class ForLoopCounterChanged : SonarDiagnosticAnalyzer
+    public sealed class ForLoopCounterChanged : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S127";
         private const string MessageFormat = "Do not update the loop counter '{0}' within the loop body.";
@@ -77,7 +77,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 AffectedExpression = node => ((AssignmentExpressionSyntax)node).Left
             });
 
-        protected sealed override void Initialize(SonarAnalysisContext context)
+        protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>

@@ -31,7 +31,7 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public class CatchEmpty : SonarDiagnosticAnalyzer
+    public sealed class CatchEmpty : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S2486";
         private const string MessageFormat = "Handle the exception or explain in a comment why it can be ignored.";
@@ -41,7 +41,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        protected sealed override void Initialize(SonarAnalysisContext context)
+        protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>

@@ -31,7 +31,7 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public class AbstractTypesShouldNotHaveConstructors : SonarDiagnosticAnalyzer
+    public sealed class AbstractTypesShouldNotHaveConstructors : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S3442";
         private const string MessageFormat = "Change the visibility of this constructor to 'protected'.";
@@ -41,7 +41,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        protected sealed override void Initialize(SonarAnalysisContext context)
+        protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>

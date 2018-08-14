@@ -38,7 +38,7 @@ namespace SonarAnalyzer.Rules
 
         protected readonly object parameterReadLock = new object();
 
-        protected bool IsAnalyzerEnabled { get; set; } = false;
+        protected bool IsAnalyzerEnabled { get; set; }
 
         protected string WorkDirectoryBasePath { get; set; }
 

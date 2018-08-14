@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2018 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -131,12 +131,10 @@ namespace SonarAnalyzer.Rules.CSharp
                 return assignment.Left;
             }
 
-            if (parent is EqualsValueClauseSyntax equalsClause)
+            if (parent is EqualsValueClauseSyntax equalsClause &&
+                equalsClause.Parent.Parent is VariableDeclarationSyntax variableDeclaration)
             {
-                if (equalsClause.Parent.Parent is VariableDeclarationSyntax variableDeclaration)
-                {
-                    return variableDeclaration.Variables.Last();
-                }
+                return variableDeclaration.Variables.Last();
             }
 
             return null;

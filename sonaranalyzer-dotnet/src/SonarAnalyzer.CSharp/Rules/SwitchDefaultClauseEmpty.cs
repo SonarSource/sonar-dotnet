@@ -31,7 +31,7 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public class SwitchDefaultClauseEmpty : SonarDiagnosticAnalyzer
+    public sealed class SwitchDefaultClauseEmpty : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S3532";
         private const string MessageFormat = "Remove this empty 'default' clause.";
@@ -41,7 +41,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        protected sealed override void Initialize(SonarAnalysisContext context)
+        protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>

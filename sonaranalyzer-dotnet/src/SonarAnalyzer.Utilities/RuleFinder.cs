@@ -91,18 +91,13 @@ namespace SonarAnalyzer.Utilities
             var language = AnalyzerLanguage.None;
             foreach (var lang in attribute.Languages)
             {
-                switch (lang)
+                if (lang == LanguageNames.CSharp)
                 {
-                    case LanguageNames.CSharp:
-                        language = language.AddLanguage(AnalyzerLanguage.CSharp);
-                        break;
-
-                    case LanguageNames.VisualBasic:
-                        language = language.AddLanguage(AnalyzerLanguage.VisualBasic);
-                        break;
-
-                    default:
-                        break;
+                    language = language.AddLanguage(AnalyzerLanguage.CSharp);
+                }
+                else if (lang == LanguageNames.VisualBasic)
+                {
+                    language = language.AddLanguage(AnalyzerLanguage.VisualBasic);
                 }
             }
 

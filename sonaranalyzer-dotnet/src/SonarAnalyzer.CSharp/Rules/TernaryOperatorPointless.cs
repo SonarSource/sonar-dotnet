@@ -33,7 +33,7 @@ namespace SonarAnalyzer.Rules.CSharp
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
     [Obsolete("This rule is deprecated in favor of S3923")]
-    public class TernaryOperatorPointless : SonarDiagnosticAnalyzer
+    public sealed class TernaryOperatorPointless : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S2758";
         private const string MessageFormat =
@@ -44,7 +44,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        protected sealed override void Initialize(SonarAnalysisContext context)
+        protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>

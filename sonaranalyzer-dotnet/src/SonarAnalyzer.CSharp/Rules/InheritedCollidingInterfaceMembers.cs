@@ -32,7 +32,7 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public class InheritedCollidingInterfaceMembers : SonarDiagnosticAnalyzer
+    public sealed class InheritedCollidingInterfaceMembers : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S3444";
         private const string MessageFormat = "Rename or add member{1} {0} to this interface to resolve ambiguities.";
@@ -44,7 +44,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private const int MaxMemberDisplayCount = 2;
 
-        protected sealed override void Initialize(SonarAnalysisContext context)
+        protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>

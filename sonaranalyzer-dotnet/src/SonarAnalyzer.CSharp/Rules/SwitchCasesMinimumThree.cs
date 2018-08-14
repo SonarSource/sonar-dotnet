@@ -31,7 +31,7 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public class SwitchCasesMinimumThree : SonarDiagnosticAnalyzer
+    public sealed class SwitchCasesMinimumThree : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S1301";
         private const string MessageFormat = "Replace this 'switch' statement with 'if' statements to increase readability.";
@@ -41,7 +41,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        protected sealed override void Initialize(SonarAnalysisContext context)
+        protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>

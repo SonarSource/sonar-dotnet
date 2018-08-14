@@ -85,7 +85,7 @@ namespace SonarAnalyzer.SymbolicExecution
 
         protected readonly object identifier;
 
-        private static int SymbolicValueCounter = 0;
+        private static int SymbolicValueCounter;
 
         public SymbolicValue()
             : this(SymbolicValueCounter++)

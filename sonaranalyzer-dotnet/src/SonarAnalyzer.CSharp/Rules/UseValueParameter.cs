@@ -30,7 +30,7 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public class UseValueParameter : SonarDiagnosticAnalyzer
+    public sealed class UseValueParameter : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S3237";
         private const string MessageFormat = "Use the 'value' parameter in this {0} accessor declaration.";
@@ -40,7 +40,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        protected sealed override void Initialize(SonarAnalysisContext context)
+        protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterCodeBlockStartActionInNonGenerated<SyntaxKind>(
                 cbc =>

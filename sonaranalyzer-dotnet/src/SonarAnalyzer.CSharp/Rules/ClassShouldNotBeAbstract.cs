@@ -31,7 +31,7 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public class ClassShouldNotBeAbstract : SonarDiagnosticAnalyzer
+    public sealed class ClassShouldNotBeAbstract : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S1694";
         private const string MessageFormat = "Convert this 'abstract' class to {0}.";
@@ -43,7 +43,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        protected sealed override void Initialize(SonarAnalysisContext context)
+        protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSymbolAction(
                 c =>

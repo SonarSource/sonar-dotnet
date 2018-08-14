@@ -68,18 +68,18 @@ namespace SonarAnalyzer.Rules.CSharp
                 .GetSemanticModelAsync(context.CancellationToken)
                 .ConfigureAwait(false);
             var allFieldDeclarationTasks = identifiersToFix.Select(identifier =>
-                GetFieldDeclarationSyntax(semanticModel, identifier, context.CancellationToken));
+                GetFieldDeclarationSyntaxAsync(semanticModel, identifier, context.CancellationToken));
             var allFieldDeclarations = await Task.WhenAll(allFieldDeclarationTasks).ConfigureAwait(false);
             allFieldDeclarations = allFieldDeclarations.WhereNotNull().ToArray();
 
             context.RegisterCodeFix(
                 CodeAction.Create(
                     Title,
-                    token => AddReadonlyToFieldDeclarations(context.Document, token, allFieldDeclarations)),
+                    token => AddReadonlyToFieldDeclarationsAsync(context.Document, token, allFieldDeclarations)),
                 context.Diagnostics);
         }
 
-        private async Task<FieldDeclarationSyntax> GetFieldDeclarationSyntax(SemanticModel semanticModel,
+        private async Task<FieldDeclarationSyntax> GetFieldDeclarationSyntaxAsync(SemanticModel semanticModel,
             IdentifierNameSyntax identifierName, CancellationToken cancellationToken)
         {
 
@@ -102,7 +102,7 @@ namespace SonarAnalyzer.Rules.CSharp
             return fieldDeclaration;
         }
 
-        private async Task<Document> AddReadonlyToFieldDeclarations(Document document, CancellationToken cancellationToken,
+        private async Task<Document> AddReadonlyToFieldDeclarationsAsync(Document document, CancellationToken cancellationToken,
             IEnumerable<FieldDeclarationSyntax> fieldDeclarations)
         {
             var editor = await DocumentEditor.CreateAsync(document, cancellationToken);

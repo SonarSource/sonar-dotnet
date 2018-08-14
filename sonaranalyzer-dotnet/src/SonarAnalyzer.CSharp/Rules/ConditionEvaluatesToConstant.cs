@@ -37,7 +37,7 @@ namespace SonarAnalyzer.Rules.CSharp
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(S2583DiagnosticId)]
     [Rule(S2589DiagnosticId)]
-    public class ConditionEvaluatesToConstant : SonarDiagnosticAnalyzer
+    public sealed class ConditionEvaluatesToConstant : SonarDiagnosticAnalyzer
     {
         private static readonly ISet<SyntaxKind> OmittedSyntaxKinds = new HashSet<SyntaxKind>
         {
@@ -97,7 +97,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(s2583, s2589);
 
-        protected sealed override void Initialize(SonarAnalysisContext context)
+        protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterExplodedGraphBasedAnalysis((e, c) => CheckForRedundantConditions(e, c));
         }

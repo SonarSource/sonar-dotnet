@@ -31,7 +31,7 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public class ShiftDynamicNotInteger : SonarDiagnosticAnalyzer
+    public sealed class ShiftDynamicNotInteger : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S3449";
         private const string MessageFormat = "Remove this erroneous shift, it will fail because '{0}' can't be implicitly converted to 'int'.";
@@ -41,7 +41,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        protected sealed override void Initialize(SonarAnalysisContext context)
+        protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c => CheckExpressionWithTwoParts<BinaryExpressionSyntax>(c.Node, b => b.Left, b => b.Right, c),

@@ -39,7 +39,7 @@ using SonarAnalyzer.Protobuf.Ucfg;
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public class UcfgGenerator : SonarDiagnosticAnalyzer
+    public /* non-sealed for test mocks */ class UcfgGenerator : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S9999-ucfg";
         private const string Title = "UCFG generator.";
@@ -56,7 +56,7 @@ namespace SonarAnalyzer.Rules.CSharp
             .Create("S2091", "S3649", "S2631", "S2083", "S2078", "S2076");
 
         private string protobufDirectory;
-        private int protobufFileIndex = 0;
+        private int protobufFileIndex;
 
         /// <summary>
         /// Contains the build ID as set by Scanner for MSBuild. Usually it is a number.
@@ -95,24 +95,24 @@ namespace SonarAnalyzer.Rules.CSharp
                     protobufFileIndex = 0;
 
                     cc.RegisterSyntaxNodeActionInNonGenerated(
-                        c => WriteUCFG<ConstructorDeclarationSyntax>(c, x => x.Body),
+                        c => WriteUcfg<ConstructorDeclarationSyntax>(c, x => x.Body),
                         SyntaxKind.ConstructorDeclaration);
 
                     cc.RegisterSyntaxNodeActionInNonGenerated(
-                        c => WriteUCFG<MethodDeclarationSyntax>(c, x => (CSharpSyntaxNode)x.Body ?? x.ExpressionBody?.Expression),
+                        c => WriteUcfg<MethodDeclarationSyntax>(c, x => (CSharpSyntaxNode)x.Body ?? x.ExpressionBody?.Expression),
                         SyntaxKind.MethodDeclaration);
 
                     cc.RegisterSyntaxNodeActionInNonGenerated(
-                        c => WriteUCFG<OperatorDeclarationSyntax>(c, x => (CSharpSyntaxNode)x.Body ?? x.ExpressionBody?.Expression),
+                        c => WriteUcfg<OperatorDeclarationSyntax>(c, x => (CSharpSyntaxNode)x.Body ?? x.ExpressionBody?.Expression),
                         SyntaxKind.OperatorDeclaration);
 
                     cc.RegisterSyntaxNodeActionInNonGenerated(
-                        c => WriteUCFG<AccessorDeclarationSyntax>(c, node => node.Body),
+                        c => WriteUcfg<AccessorDeclarationSyntax>(c, node => node.Body),
                         SyntaxKind.GetAccessorDeclaration,
                         SyntaxKind.SetAccessorDeclaration);
 
                     cc.RegisterSyntaxNodeActionInNonGenerated(
-                        c => WriteUCFG<PropertyDeclarationSyntax>(c, node => node.ExpressionBody?.Expression),
+                        c => WriteUcfg<PropertyDeclarationSyntax>(c, node => node.ExpressionBody?.Expression),
                         SyntaxKind.PropertyDeclaration);
                 });
         }
@@ -132,7 +132,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 block.Jump == null || block.Jump.Destinations.All(existingBlockIds.Contains);
         }
 
-        private void WriteUCFG<TDeclarationSyntax>(SyntaxNodeAnalysisContext context, Func<TDeclarationSyntax, CSharpSyntaxNode> getBody)
+        private void WriteUcfg<TDeclarationSyntax>(SyntaxNodeAnalysisContext context, Func<TDeclarationSyntax, CSharpSyntaxNode> getBody)
             where TDeclarationSyntax : SyntaxNode
         {
             var declaration = (TDeclarationSyntax)context.Node;
@@ -177,7 +177,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        protected /*for testing*/ virtual void WriteDot(string filePath, Action<StreamWriter> write)
+        protected virtual /*for testing*/ void WriteDot(string filePath, Action<StreamWriter> write)
         {
             using (var writer = File.CreateText(filePath))
             {
@@ -185,7 +185,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        protected /*for testing*/ virtual void WriteProtobuf(UCFG ucfg, string fileName)
+        protected virtual /*for testing*/ void WriteProtobuf(UCFG ucfg, string fileName)
         {
             using (var stream = File.Create(fileName))
             {

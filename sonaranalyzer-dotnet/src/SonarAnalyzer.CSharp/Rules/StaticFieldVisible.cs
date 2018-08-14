@@ -31,7 +31,7 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public class StaticFieldVisible : SonarDiagnosticAnalyzer
+    public sealed class StaticFieldVisible : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S2223";
         private const string MessageFormat = "Change the visibility of '{0}' or make it 'const' or 'readonly'.";
@@ -41,7 +41,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        protected sealed override void Initialize(SonarAnalysisContext context)
+        protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>

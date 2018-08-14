@@ -31,7 +31,7 @@ namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     [Rule(DiagnosticId)]
-    public class PureAttributeOnVoidMethod : SonarDiagnosticAnalyzer
+    public sealed class PureAttributeOnVoidMethod : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S3603";
         private const string MessageFormat = "Remove the 'Pure' attribute or change the method to return a value.";
@@ -41,7 +41,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        protected sealed override void Initialize(SonarAnalysisContext context)
+        protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
