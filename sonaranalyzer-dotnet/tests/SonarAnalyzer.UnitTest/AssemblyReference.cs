@@ -32,6 +32,9 @@ namespace SonarAnalyzer.UnitTest
     {
         internal const string NuGetLatestVersion = null;
 
+        /// <summary>
+        /// Relative path to the solution packages folder
+        /// </summary>
         private const string PackagesFolderRelativePath = @"..\..\..\..\packages\";
 
         private static readonly string systemAssembliesFolder =
@@ -48,6 +51,7 @@ namespace SonarAnalyzer.UnitTest
             {
                 "lib",
                 "portable-net45",
+                "net20",
                 "net40",
                 "net45",
                 "netstandard1.0",
@@ -87,24 +91,35 @@ namespace SonarAnalyzer.UnitTest
                 packageManager.InstallPackage(packageId, SemanticVersion.ParseOptionalVersion(packageVersion),
                     ignoreDependencies: true, allowPrereleaseVersions: false);
 
-                var matchingDlls = Directory.GetFiles(GetNuGetPackageDirectory(), "*.dll", SearchOption.AllDirectories)
-                    .Select(path => new FileInfo(path))
-                    .GroupBy(file => file.Directory.Name)
-                    .Where(group => allowedNugetLibDirectories.Any(y => group.Key.StartsWith(y)))
-                    .OrderByDescending(group => group.Key)
-                    .First();
-
-                return matchingDlls.Select(file => MetadataReference.CreateFromFile(file.FullName)).ToArray();
+                return GetFilesFromLatestFrameworkVersion(packageId, packageVersion);
             }
+        }
+
+        private static MetadataReference[] GetFilesFromLatestFrameworkVersion(string packageId, string packageVersion)
+        {
+            // The NuGet package will probably target multiple framework versions, with the
+            // assemblies for each in a separate folder named after the framework. We want to
+            // pick the latest, and we're relying on the fact that the folder names when sorted
+            // order the frameworks from oldest to newest.
+            var matchingDlls = Directory.GetFiles(GetNuGetPackageDirectory(), "*.dll", SearchOption.AllDirectories)
+                .Select(path => new FileInfo(path))
+                .GroupBy(file => file.Directory.Name)
+                .Where(group => allowedNugetLibDirectories.Any(y => group.Key.StartsWith(y)))
+                .OrderByDescending(group => group.Key)
+                .First();
+
+            return matchingDlls.Select(file => MetadataReference.CreateFromFile(file.FullName)).ToArray();
 
             string GetNuGetPackageDirectory() =>
                 $@"{PackagesFolderRelativePath}{packageId}.{GetRealVersionFolder()}\lib";
 
             string GetRealVersionFolder() =>
-                packageVersion?.ToString()
-                ?? Directory.GetDirectories(PackagesFolderRelativePath, $"{packageId}*", SearchOption.TopDirectoryOnly)
-                    .Last()
-                    .Substring(PackagesFolderRelativePath.Length + packageId.Length + 1);
+                packageVersion ?? GetLatestInstalledVersionFolder();
+
+            string GetLatestInstalledVersionFolder() =>
+                Directory.GetDirectories(PackagesFolderRelativePath, $"{packageId}*", SearchOption.TopDirectoryOnly)
+                .Last()
+                .Substring(PackagesFolderRelativePath.Length + packageId.Length + 1);
         }
     }
 }
