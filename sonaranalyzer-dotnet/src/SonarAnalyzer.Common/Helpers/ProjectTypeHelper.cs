@@ -54,6 +54,7 @@ namespace SonarAnalyzer.Helpers
         {
             "MICROSOFT.VISUALSTUDIO.TESTPLATFORM.TESTFRAMEWORK",
             "MICROSOFT.VISUALSTUDIO.QUALITYTOOLS.UNITTESTFRAMEWORK",
+            "XUNIT", // Legacy Xunit (v1.x)
             "XUNIT.CORE",
             "NUNIT.FRAMEWORK"
         };
