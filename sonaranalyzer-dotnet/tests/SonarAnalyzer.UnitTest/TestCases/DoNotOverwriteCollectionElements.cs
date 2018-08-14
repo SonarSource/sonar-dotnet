@@ -76,10 +76,22 @@ namespace Tests.Diagnostics
 //          ^^^^^^^^^^^^^^
         }
 
+        void DictionaryAdd(Dictionary<int, int> dict)
+        {
+            dict.Add(0, 0); // Secondary
+            dict.Add(0, 1); // Noncompliant
+        }
+
         void IDictionaryAddOnMultiMemberAccess(TestCases c)
         {
             c.dictionaryField.Add(0, 0); // Secondary
             c.dictionaryField.Add(0, 1); // Noncompliant
+        }
+
+        void DoNotReportOnNonDictionaryAdd(CustomAdd c)
+        {
+            c.Add(0, 1);
+            c.Add(0, 2); // Compliant this is not on a dictionary
         }
     }
 
@@ -99,5 +111,10 @@ namespace Tests.Diagnostics
             get { return 1; }
             set { }
         }
+    }
+
+    class CustomAdd
+    {
+        public void Add(int a, int b) { }
     }
 }

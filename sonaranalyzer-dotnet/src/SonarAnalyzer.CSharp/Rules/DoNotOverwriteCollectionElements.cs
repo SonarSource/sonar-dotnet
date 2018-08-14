@@ -98,7 +98,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
                    if (methodName == null ||
                        methodName != "Add" ||
-                       invokedOn == null)
+                       invokedOn == null ||
+                       !IsDictionaryAdd(c.SemanticModel.GetSymbolInfo(invocation).Symbol as IMethodSymbol))
                    {
                        return;
                    }
@@ -110,7 +111,8 @@ namespace SonarAnalyzer.Rules.CSharp
                         .Select(ess => ess.Expression)
                         .TakeWhile(e => IsInvocationOnSameItem(e, invokedOn))
                         .Cast<InvocationExpressionSyntax>()
-                        .FirstOrDefault(ies => ies.ArgumentList.Arguments[0].ToString() == keyValue);
+                        .FirstOrDefault(ies => ies.ArgumentList.Arguments[0].ToString() == keyValue &&
+                            IsDictionaryAdd(c.SemanticModel.GetSymbolInfo(ies).Symbol as IMethodSymbol));
 
                    if (previousAddInvocationOnVariable != null)
                    {
@@ -136,26 +138,22 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static string GetMethodName(InvocationExpressionSyntax invocation)
         {
-            switch (invocation.Expression)
+            if (invocation.Expression is MemberAccessExpressionSyntax memberAccess)
             {
-                case MemberAccessExpressionSyntax memberAccess:
-                    return memberAccess.Name.Identifier.ValueText;
-
-                default:
-                    return null;
+                return memberAccess.Name.Identifier.ValueText;
             }
+
+            return null;
         }
 
         private static string GetInvokedOnName(InvocationExpressionSyntax invocation)
         {
-            switch (invocation.Expression)
+            if (invocation.Expression is MemberAccessExpressionSyntax memberAccessExpression)
             {
-                case MemberAccessExpressionSyntax memberAccess:
-                    return ProcessExpression(memberAccess.Expression);
-
-                default:
-                    return null;
+                return ProcessExpression(memberAccessExpression.Expression);
             }
+
+            return null;
 
             string ProcessExpression(ExpressionSyntax expression)
             {
