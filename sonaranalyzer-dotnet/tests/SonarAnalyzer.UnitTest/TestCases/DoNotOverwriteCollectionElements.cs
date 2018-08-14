@@ -5,101 +5,116 @@ namespace Tests.Diagnostics
 {
     class TestCases
     {
-        void Indexers(Dictionary<int, int> items)
+        public static readonly IDictionary<int, int> dictionaryField;
+
+        void SameIndexOnDictionary(Dictionary<int, int> dict)
         {
-            int index;
-
-            items[index] = 1; // Secondary
-//          ^^^^^^^^^^^^^^^^
-            items[index] = 2; // Noncompliant {{Verify this is the key that was intended; a value has already been set for it.}}
-//          ^^^^^^^^^^^^^^^^
-
-            items[0] = 1; // Secondary
-            items[1] = 2;
-            items[0] = 3; // Noncompliant
-
-            items[index++] = 1;
-            items[index++] = 2; // Compliant, non-const or variable indexes are ignored
-
-            items[2] = 1;
-            if (true)
-            {
-                items[2] = 2; // Compliant, it is conditional
-            }
-
-            items[3] = 1; // Secondary
-            items[3] = items[5]; // Noncompliant, not the same item is read
+            dict[0] = 42; // Secondary
+//          ^^^^^^^
+            dict[0] = 42; // Noncompliant {{Verify this is the index/key that was intended; a value has already been set for it.}}
+//          ^^^^^^^
         }
 
-        void Methods(Dictionary<int, int> items)
+        void SameIndexOnArray(int[] array)
         {
-            items.Add(0, 1); // Secondary
-            items.Add(0, 2); // Noncompliant
-//          ^^^^^^^^^^^^^^^
-
-            items[1] = 1; // Secondary
-            items.Add(1, 2); // Noncompliant
-
-            items.Add(2, 2); // Secondary
-            items[2] = 1; // Noncompliant
+            array[0] = 42; // Secondary
+            array[0] = 42; // Noncompliant
         }
 
-        void Exceptions(Dictionary<int, int> items)
+        void SameIndexOnList(List<int> list)
         {
-            int index;
-
-            items[index] = 1;
-            index++; // any statement that does not contain element access or invocation breaks the search
-                     // for elements because currently looked up key is not const and could be modifying it
-            items[index] = 2; // Compliant, not subsequent lines
-
-            items[1] = 1; // Secondary
-            index++; // this does not break the search for elements because currently looked up key is const
-            items[1] = 2; // Noncompliant
-
-            items[2] = 1;
-            // existing item is used
-            items.Add(2, items[2]);
-
-            items[3] = 1;
-            // existing item is read
-            items[3] = items[3];
-            items[3] = items[3] + 1;
-            items[3] = 1 + items[3];
+            list[0] = 42; // Secondary
+            list[0] = 42; // Noncompliant
         }
 
-        void Misc(Dictionary<int, int> items1, Dictionary<int, int> items2)
+        void SameIndexOnArray(CustomIndexerOneArg obj)
         {
-            items1.Add(0, 1);
-            items2.Add(0, 2); // Compliant, different objects
+            obj["foo"] = 42; // Secondary
+            obj["foo"] = 42; // Noncompliant
         }
 
-        void Arrays(int[] items)
+        void SameIndexOnArray(CustomIndexerMultiArg obj)
         {
-            items[0] = 1; // Secondary
-            items[0] = 1; // Noncompliant
+            obj["s", 1, 1.0] = 42; // Secondary
+            obj["s", 1, 1.0] = 42; // Noncompliant
         }
 
-        void Lists(List<int> items)
+        void SameIndexSpacedOut(string[] names)
         {
-            items[0] = 1; // Secondary
-            items[0] = 1; // Noncompliant {{Verify this is the index that was intended; a value has already been set for it.}}
-            items.Add(5); // Compliant, this is not overwriting items
+            names["a"] = "a"; // Secondary
+            names["b"] = "b";
+            names["a"] = "c"; // Noncompliant
         }
 
-        void CustomClass(Custom custom)
+        void NonSequentialAccessOnSameIndex(int[] values)
         {
-            custom["a"] = 1; // Secondary
-            custom["a"] = 1; // Noncompliant
+            int index = 0;
+            values[0] = 1;
+            index++;
+            values[0] = 2; // FN - We only take consecutive element access
+        }
+
+        void NonConstantConsecutiveIndexAccess(int[] values)
+        {
+            int index = 0;
+            values[index] = 1; // Secondary
+            values[index] = 2; // Noncompliant
+        }
+
+        void PlusPlusIndexAccess(int[] values)
+        {
+            int index = 0;
+            values[index++] = 1; // Secondary
+            values[index++] = 2; // Noncompliant - FP - it's not the same index
+        }
+
+        void IDictionaryAdd(IDictionary<int, int> dict)
+        {
+            dict.Add(0, 0); // Secondary
+//          ^^^^^^^^^^^^^^
+            dict.Add(0, 1); // Noncompliant
+//          ^^^^^^^^^^^^^^
+        }
+
+        void DictionaryAdd(Dictionary<int, int> dict)
+        {
+            dict.Add(0, 0); // Secondary
+            dict.Add(0, 1); // Noncompliant
+        }
+
+        void IDictionaryAddOnMultiMemberAccess(TestCases c)
+        {
+            c.dictionaryField.Add(0, 0); // Secondary
+            c.dictionaryField.Add(0, 1); // Noncompliant
+        }
+
+        void DoNotReportOnNonDictionaryAdd(CustomAdd c)
+        {
+            c.Add(0, 1);
+            c.Add(0, 2); // Compliant this is not on a dictionary
         }
     }
 
-    class Custom
+    class CustomIndexerOneArg
     {
         int this[string key]
         {
             get { return 1; }
             set { }
         }
+    }
+
+    class CustomIndexerMultiArg
+    {
+        int this[string s, int i, double d]
+        {
+            get { return 1; }
+            set { }
+        }
+    }
+
+    class CustomAdd
+    {
+        public void Add(int a, int b) { }
     }
 }

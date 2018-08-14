@@ -35,7 +35,7 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class DoNotOverwriteCollectionElements : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S4143";
-        private const string MessageFormat = "Verify this is the {0} that was intended; a value has already been set for it.";
+        private const string MessageFormat = "Verify this is the index/key that was intended; a value has already been set for it.";
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
@@ -44,108 +44,126 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(c =>
-            {
-                var assignmentOrInvocation = (ExpressionSyntax)c.Node;
-
-                var indexSetter = GetIndexSetter(assignmentOrInvocation, c.SemanticModel);
-
-                if (!indexSetter.Found ||
-                    IsItemRead(assignmentOrInvocation, c.SemanticModel, indexSetter.Collection, indexSetter.Key))
+            context.RegisterSyntaxNodeActionInNonGenerated(
+                c =>
                 {
-                    return;
-                }
+                    var assignment = (AssignmentExpressionSyntax)c.Node;
 
-                var previousIndexSetters = GetPreviousStatements(assignmentOrInvocation)
-                    .OfType<ExpressionStatementSyntax>()
-                    .Select(x => GetIndexSetter(x.Expression, c.SemanticModel));
+                    var elementAccess = assignment.Left as ElementAccessExpressionSyntax;
+                    if (elementAccess == null ||
+                        elementAccess.ArgumentList == null ||
+                        elementAccess.ArgumentList.Arguments.Count == 0)
+                    {
+                        return;
+                    }
 
-                // When key is not a constant we break the lookup at the first line that
-                // is not setting a value in the collection. This is to avoid FP when
-                // the index variable is modified during the initialization sequence.
-                previousIndexSetters = indexSetter.Key is ISymbol
-                    ? previousIndexSetters.TakeWhile(x => x.Found)
-                    : previousIndexSetters.Where(x => x.Found);
+                    var accessedOn = (elementAccess.Expression as IdentifierNameSyntax)?.Identifier.ValueText;
+                    if (accessedOn == null)
+                    {
+                        return;
+                    }
 
-                var firstIndexSetter = previousIndexSetters
-                    .LastOrDefault(x => indexSetter.Collection.Equals(x.Collection) && indexSetter.Key.Equals(x.Key));
+                    var arguments = elementAccess.ArgumentList.Arguments.Select(a => a.ToString());
 
-                if (firstIndexSetter.Found)
-                {
-                    var keyOrIndexText = IsDictionary(indexSetter.Collection.GetSymbolType()) ? "key" : "index";
-                    c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, assignmentOrInvocation.GetLocation(), messageArgs: keyOrIndexText,
-                        additionalLocations: new[] { firstIndexSetter.Expression.GetLocation() }));
-                }
-            },
-            SyntaxKind.SimpleAssignmentExpression,
-            SyntaxKind.InvocationExpression);
+                    var previousAssignmentOfVariable = GetPreviousStatements(assignment)
+                        .OfType<ExpressionStatementSyntax>()
+                        .Select(ess => ess.Expression)
+                        .TakeWhile(e => IsElementAccessAssignmentOnSameItem(e, accessedOn))
+                        .Cast<AssignmentExpressionSyntax>()
+                        .Select(aes => aes.Left)
+                        .Cast<ElementAccessExpressionSyntax>()
+                        .FirstOrDefault(eaes => arguments.SequenceEqual(eaes.ArgumentList.Arguments.Select(a => a.ToString())));
+
+                    if (previousAssignmentOfVariable != null)
+                    {
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, elementAccess.GetLocation(),
+                            additionalLocations: new[] { previousAssignmentOfVariable.GetLocation() }));
+                    }
+                },
+                SyntaxKind.SimpleAssignmentExpression);
+
+            context.RegisterSyntaxNodeActionInNonGenerated(
+               c =>
+               {
+                   var invocation = (InvocationExpressionSyntax)c.Node;
+
+                   if (invocation.ArgumentList == null ||
+                       invocation.ArgumentList.Arguments.Count != 2)
+                   {
+                       return;
+                   }
+
+                   var methodName = GetMethodName(invocation);
+                   var invokedOn = GetInvokedOnName(invocation);
+
+                   if (methodName == null ||
+                       methodName != "Add" ||
+                       invokedOn == null ||
+                       !IsDictionaryAdd(c.SemanticModel.GetSymbolInfo(invocation).Symbol as IMethodSymbol))
+                   {
+                       return;
+                   }
+
+                   var keyValue = invocation.ArgumentList.Arguments[0].ToString();
+
+                   var previousAddInvocationOnVariable = GetPreviousStatements(invocation)
+                        .OfType<ExpressionStatementSyntax>()
+                        .Select(ess => ess.Expression)
+                        .TakeWhile(e => IsInvocationOnSameItem(e, invokedOn))
+                        .Cast<InvocationExpressionSyntax>()
+                        .FirstOrDefault(ies => ies.ArgumentList.Arguments[0].ToString() == keyValue &&
+                            IsDictionaryAdd(c.SemanticModel.GetSymbolInfo(ies).Symbol as IMethodSymbol));
+
+                   if (previousAddInvocationOnVariable != null)
+                   {
+                       c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, invocation.GetLocation(),
+                            additionalLocations: new[] { previousAddInvocationOnVariable.GetLocation() }));
+                   }
+               },
+               SyntaxKind.InvocationExpression);
         }
 
-        private static CollectionAndIndex GetIndexSetter(ExpressionSyntax assignmentOrInvocation, SemanticModel semanticModel)
+        private static bool IsElementAccessAssignmentOnSameItem(ExpressionSyntax expression, string accessedOn) =>
+            expression is AssignmentExpressionSyntax aes &&
+            aes.Left is ElementAccessExpressionSyntax currentElementAccess &&
+            currentElementAccess.ArgumentList != null &&
+            currentElementAccess.Expression is IdentifierNameSyntax ins &&
+            ins.Identifier.ValueText == accessedOn;
+
+        private static bool IsInvocationOnSameItem(ExpressionSyntax expression, string invokedOn) =>
+            expression is InvocationExpressionSyntax ies &&
+            ies.ArgumentList?.Arguments.Count == 2 &&
+            GetMethodName(ies) == "Add" &&
+            GetInvokedOnName(ies) == invokedOn;
+
+        private static string GetMethodName(InvocationExpressionSyntax invocation)
         {
-            ISymbol collection = null;
-            object key = null;
-            if (assignmentOrInvocation is AssignmentExpressionSyntax assignment)
+            if (invocation.Expression is MemberAccessExpressionSyntax memberAccess)
             {
-                if (assignment.Left is ElementAccessExpressionSyntax elementAccess &&
-                    elementAccess.Expression != null &&
-                    elementAccess.ArgumentList?.Arguments.Count == 1)
-                {
-                    collection = semanticModel.GetSymbolInfo(elementAccess.Expression).Symbol;
-                    key = GetConstantOrSymbol(semanticModel, elementAccess.ArgumentList.Arguments[0].Expression);
-                }
-            }
-            else if (assignmentOrInvocation is InvocationExpressionSyntax invocation &&
-                invocation.Expression is MemberAccessExpressionSyntax memberAccess &&
-                invocation.ArgumentList?.Arguments.Count > 0 &&
-                IsDictionaryAdd(semanticModel.GetSymbolInfo(memberAccess).Symbol as IMethodSymbol))
-            {
-                collection = semanticModel.GetSymbolInfo(memberAccess.Expression).Symbol;
-                key = GetConstantOrSymbol(semanticModel, invocation.ArgumentList.Arguments[0].Expression);
-            }
-
-            return new CollectionAndIndex(collection != null && key != null, assignmentOrInvocation, collection, key);
-        }
-
-        private static object GetConstantOrSymbol(SemanticModel semanticModel, SyntaxNode indexSyntax)
-        {
-            var constant = semanticModel.GetConstantValue(indexSyntax);
-            if (constant.HasValue)
-            {
-                return constant;
-            }
-
-            var symbol = semanticModel.GetSymbolInfo(indexSyntax).Symbol;
-
-            // Prevent 'dict[i++] = 5' from raising issues
-            if (symbol != null &&
-                symbol.Kind != SymbolKind.Method)
-            {
-                return symbol;
+                return memberAccess.Name.Identifier.ValueText;
             }
 
             return null;
         }
 
-        private static bool IsItemRead(ExpressionSyntax assignmentOrInvocation, SemanticModel semanticModel, ISymbol collection, object key)
+        private static string GetInvokedOnName(InvocationExpressionSyntax invocation)
         {
-            if (assignmentOrInvocation is AssignmentExpressionSyntax assignment &&
-                assignment.Right != null)
+            if (invocation.Expression is MemberAccessExpressionSyntax memberAccessExpression)
             {
-                return assignment.Right.DescendantNodesAndSelf().OfType<ElementAccessExpressionSyntax>().Any(IsSameElement);
-            }
-            else if (assignmentOrInvocation is InvocationExpressionSyntax invocation &&
-                invocation.ArgumentList != null)
-            {
-                return invocation.ArgumentList.DescendantNodesAndSelf().OfType<ElementAccessExpressionSyntax>().Any(IsSameElement);
-            }
-            return false;
+                switch (memberAccessExpression.Expression)
+                {
+                    case IdentifierNameSyntax identifierName:
+                        return identifierName.Identifier.ValueText;
 
-            bool IsSameElement(ElementAccessExpressionSyntax elementAccess) =>
-                elementAccess.Expression != null &&
-                elementAccess.ArgumentList?.Arguments.Count == 1 &&
-                collection.Equals(semanticModel.GetSymbolInfo(elementAccess.Expression).Symbol) &&
-                key.Equals(GetConstantOrSymbol(semanticModel, elementAccess.ArgumentList.Arguments[0].Expression));
+                    case MemberAccessExpressionSyntax memberAccess:
+                        return memberAccess.Name.Identifier.ValueText;
+
+                    default:
+                        return null;
+                }
+            }
+
+            return null;
         }
 
         private static IEnumerable<StatementSyntax> GetPreviousStatements(ExpressionSyntax expression)
@@ -156,34 +174,20 @@ namespace SonarAnalyzer.Rules.CSharp
                 : statement.Parent.ChildNodes().OfType<StatementSyntax>().TakeWhile(x => x != statement).Reverse();
         }
 
-        private static bool IsDictionaryAdd(IMethodSymbol methodSymbol) =>
-            methodSymbol != null &&
-            methodSymbol.Name == nameof(IDictionary<object, object>.Add) &&
-            methodSymbol.MethodKind == MethodKind.Ordinary &&
-            methodSymbol.Parameters.Length == 2 &&
-            IsDictionary(methodSymbol.ContainingType);
-
-        private static bool IsDictionary(ISymbol symbol)
+        private static bool IsDictionaryAdd(IMethodSymbol methodSymbol)
         {
-            var symbolType = symbol.GetSymbolType();
-            return symbolType != null
-                && symbolType.OriginalDefinition.DerivesOrImplements(KnownType.System_Collections_Generic_IDictionary_TKey_TValue);
-        }
+            return methodSymbol != null &&
+                methodSymbol.Name == nameof(IDictionary<object, object>.Add) &&
+                methodSymbol.MethodKind == MethodKind.Ordinary &&
+                methodSymbol.Parameters.Length == 2 &&
+                IsDictionary(methodSymbol.ContainingType);
 
-        private struct CollectionAndIndex
-        {
-            public CollectionAndIndex(bool found, ExpressionSyntax expression, ISymbol collection, object key)
+            bool IsDictionary(ISymbol symbol)
             {
-                Found = found;
-                Expression = expression;
-                Collection = collection;
-                Key = key;
+                var symbolType = symbol.GetSymbolType();
+                return symbolType != null
+                    && symbolType.OriginalDefinition.DerivesOrImplements(KnownType.System_Collections_Generic_IDictionary_TKey_TValue);
             }
-
-            public bool Found { get; }
-            public ExpressionSyntax Expression { get; }
-            public ISymbol Collection { get; }
-            public object Key { get; }
         }
     }
 }
