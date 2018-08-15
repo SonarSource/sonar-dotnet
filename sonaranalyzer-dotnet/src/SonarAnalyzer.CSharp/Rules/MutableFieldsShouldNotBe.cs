@@ -194,8 +194,7 @@ namespace SonarAnalyzer.Rules
 
             if (typeSymbol is INamedTypeSymbol namedTypeSymbol)
             {
-                return !namedTypeSymbol.ConstructedFrom.DerivesOrImplementsAny(MutableBaseTypes) ||
-                    namedTypeSymbol.ConstructedFrom.DerivesOrImplementsAny(ImmutableBaseTypes);
+                typeSymbol = namedTypeSymbol.ConstructedFrom;
             }
 
             return !typeSymbol.DerivesOrImplementsAny(MutableBaseTypes) ||
