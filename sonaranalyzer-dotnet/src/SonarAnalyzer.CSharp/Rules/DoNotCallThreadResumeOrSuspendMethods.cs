@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2018 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -42,6 +42,6 @@ namespace SonarAnalyzer.Rules.CSharp
             new MethodSignature(KnownType.System_Threading_Thread, "Suspend"),
             new MethodSignature(KnownType.System_Threading_Thread, "Resume")
         };
-        internal sealed override IEnumerable<MethodSignature> CheckedMethods => invalidMethods;
+        internal override IEnumerable<MethodSignature> CheckedMethods => invalidMethods;
     }
 }

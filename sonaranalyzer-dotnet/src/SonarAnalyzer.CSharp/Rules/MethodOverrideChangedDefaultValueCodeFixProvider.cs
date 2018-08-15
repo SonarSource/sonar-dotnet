@@ -33,17 +33,17 @@ using SonarAnalyzer.Helpers;
 namespace SonarAnalyzer.Rules.CSharp
 {
     [ExportCodeFixProvider(LanguageNames.CSharp)]
-    public class MethodOverrideChangedDefaultValueCodeFixProvider : SonarCodeFixProvider
+    public sealed class MethodOverrideChangedDefaultValueCodeFixProvider : SonarCodeFixProvider
     {
         private const string TitleGeneral = "Synchronize default parameter value";
         private const string TitleExplicitInterface = "Remove default parameter value from explicit interface implementation";
 
-        public sealed override ImmutableArray<string> FixableDiagnosticIds =>
+        public override ImmutableArray<string> FixableDiagnosticIds =>
             ImmutableArray.Create(MethodOverrideChangedDefaultValue.DiagnosticId);
 
-        public sealed override FixAllProvider GetFixAllProvider() => DocumentBasedFixAllProvider.Instance;
+        public override FixAllProvider GetFixAllProvider() => DocumentBasedFixAllProvider.Instance;
 
-        protected sealed override async Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
+        protected override async Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
         {
             var diagnostic = context.Diagnostics.First();
             var diagnosticSpan = diagnostic.Location.SourceSpan;

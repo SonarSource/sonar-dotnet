@@ -34,14 +34,14 @@ using SonarAnalyzer.Helpers;
 namespace SonarAnalyzer.Rules.CSharp
 {
     [ExportCodeFixProvider(LanguageNames.CSharp)]
-    public class RedundantModifierCodeFixProvider : SonarCodeFixProvider
+    public sealed class RedundantModifierCodeFixProvider : SonarCodeFixProvider
     {
         internal const string TitleUnsafe = "Remove redundant 'unsafe' modifier";
         internal const string TitleChecked = "Remove redundant 'checked' and 'unchecked' modifier";
         internal const string TitlePartial = "Remove redundant 'partial' modifier";
         internal const string TitleSealed = "Remove redundant 'sealed' modifier";
 
-        public sealed override ImmutableArray<string> FixableDiagnosticIds
+        public override ImmutableArray<string> FixableDiagnosticIds
         {
             get
             {
@@ -49,7 +49,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        public sealed override FixAllProvider GetFixAllProvider()
+        public override FixAllProvider GetFixAllProvider()
         {
             return DocumentBasedFixAllProvider.Instance;
         }
@@ -60,7 +60,7 @@ namespace SonarAnalyzer.Rules.CSharp
             SyntaxKind.SealedKeyword
         };
 
-        protected sealed override Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
+        protected override Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
         {
             var diagnostic = context.Diagnostics.First();
             var diagnosticSpan = diagnostic.Location.SourceSpan;

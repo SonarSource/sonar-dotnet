@@ -78,7 +78,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override ImmutableArray<SyntaxKind> CompoundAssignmentKinds => compoundAssignmentKinds;
 
-        protected sealed override Helpers.GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.CSharp.GeneratedCodeRecognizer.Instance;
+        protected override Helpers.GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.CSharp.GeneratedCodeRecognizer.Instance;
 
         protected override bool IsAddExpression(BinaryExpressionSyntax rightExpression) =>
             rightExpression != null &&

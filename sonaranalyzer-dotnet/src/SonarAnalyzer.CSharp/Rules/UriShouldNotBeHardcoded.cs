@@ -38,7 +38,7 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override DiagnosticDescriptor Rule => rule;
         protected override SyntaxKind StringLiteralSyntaxKind { get; } = SyntaxKind.StringLiteralExpression;
         protected override SyntaxKind[] StringConcatenateExpressions { get; } = new[] { SyntaxKind.AddExpression };
-        protected sealed override GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.CSharp.GeneratedCodeRecognizer.Instance;
+        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.CSharp.GeneratedCodeRecognizer.Instance;
         protected override string GetLiteralText(LiteralExpressionSyntax literalExpression) => literalExpression?.Token.ValueText;
         protected override ExpressionSyntax GetLeftNode(BinaryExpressionSyntax binaryExpression) => binaryExpression.Left;
         protected override ExpressionSyntax GetRightNode(BinaryExpressionSyntax binaryExpression) => binaryExpression.Right;

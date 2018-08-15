@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2018 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -43,6 +43,6 @@ namespace SonarAnalyzer.Rules.CSharp
             new MethodSignature(KnownType.System_Reflection_Assembly, "LoadFile"),
             new MethodSignature(KnownType.System_Reflection_Assembly, "LoadWithPartialName")
         };
-        internal sealed override IEnumerable<MethodSignature> CheckedMethods => checkedMethods;
+        internal override IEnumerable<MethodSignature> CheckedMethods => checkedMethods;
     }
 }

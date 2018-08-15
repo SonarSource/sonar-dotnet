@@ -43,7 +43,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             new MethodSignature(KnownType.System_GC, "SuppressFinalize")
         };
-        internal sealed override IEnumerable<MethodSignature> CheckedMethods => checkedMethods;
+        internal override IEnumerable<MethodSignature> CheckedMethods => checkedMethods;
 
         protected override bool ShouldReportOnMethodCall(InvocationExpressionSyntax invocation,
             SemanticModel semanticModel, MethodSignature methodSignature)

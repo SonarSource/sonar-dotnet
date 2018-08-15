@@ -200,7 +200,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                     throw new NotSupportedException($"{statement.Kind()}");
 
                 default:
-                    throw new NotImplementedException($"{statement.Kind()}");
+                    throw new NotSupportedException($"{statement.Kind()}");
             }
         }
 
@@ -439,7 +439,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                     }
 
                 default:
-                    throw new NotImplementedException($"{expression.Kind()}");
+                    throw new NotSupportedException($"{expression.Kind()}");
             }
         }
 
