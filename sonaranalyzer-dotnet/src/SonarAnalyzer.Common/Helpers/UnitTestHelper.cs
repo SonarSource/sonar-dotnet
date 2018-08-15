@@ -92,8 +92,8 @@ namespace SonarAnalyzer.Helpers
 
         public static AttributeData FindXUnitTestAttribute(this IMethodSymbol method) =>
             method.GetAttributes().FirstOrDefault(a =>
-                    a.AttributeClass.Is(KnownType.Xunit_FactAttribute) |
-                    a.AttributeClass.Is(KnownType.Xunit_TheoryAttribute) |
+                    a.AttributeClass.Is(KnownType.Xunit_FactAttribute) ||
+                    a.AttributeClass.Is(KnownType.Xunit_TheoryAttribute) ||
                     a.AttributeClass.Is(KnownType.LegacyXunit_TheoryAttribute));
     }
 }
