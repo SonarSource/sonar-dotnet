@@ -4,7 +4,7 @@
     using FluentAssertions;
     using Xunit;
 
-    class Program
+    public class Program
     {
         [Fact]
         public void Fact1() // Noncompliant {{Add at least one assertion to this test case.}}
@@ -51,37 +51,37 @@
         [Fact]
         public void Fact8()
         {
-            AssertSomething();
+            AssertSomething(42);
         }
 
         [Fact]
         public void Fact9()
         {
-            ShouldSomething();
+            ShouldSomething(42);
         }
 
         [Fact]
         public void Fact10()
         {
-            ExpectSomething();
+            ExpectSomething(42);
         }
 
         [Fact]
         public void Fact11()
         {
-            MustSomething();
+            MustSomething(42);
         }
 
         [Fact]
         public void Fact12()
         {
-            VerifySomething();
+            VerifySomething(42);
         }
 
         [Fact]
         public void Fact13()
         {
-            ValidateSomething();
+            ValidateSomething(42);
         }
 
         [Fact]
@@ -91,124 +91,140 @@
             Assert.Equal(d, 10.0);
         }
 
-        [Fact(Skip="reason")]
+        [Fact(Skip = "reason")]
         public void Fact15() // Don't raise on skipped test methods
         {
         }
 
         [Theory]
-        public void Theory1() // Noncompliant {{Add at least one assertion to this test case.}}
+        [InlineData(1)]
+        public void Theory1(int arg1) // Noncompliant {{Add at least one assertion to this test case.}}
 //                  ^^^^^^^
         {
             var x = 42;
         }
 
         [Theory]
-        public void Theory2()
+        [InlineData(1)]
+        public void Theory2(int arg1)
         {
-            var x = 42;
-            Assert.Equal(x, 42);
+            Assert.Equal(42, arg1);
         }
 
         [Theory]
-        public void Theory3()
+        [InlineData(1)]
+        public void Theory3(int arg1)
         {
-            var x = 42;
-            Xunit.Assert.Equal(x, 42);
+            Xunit.Assert.Equal(42, arg1);
         }
 
         [Theory]
-        public void Theory5()
+        [InlineData(1)]
+        public void Theory5(int arg1)
         {
-            var x = 42;
-            x.Should().Be(42);
+            arg1.Should().Be(42);
         }
 
         [Theory]
-        public void Theory6()
+        [InlineData(1)]
+        public void Theory6(int arg1)
         {
             Action act = () => { throw new Exception(); };
             act.ShouldThrow<Exception>();
         }
 
         [Theory]
-        public void Theory7()
+        [InlineData(1)]
+        public void Theory7(int arg1)
         {
             Action act = () => { throw new Exception(); };
             act.ShouldNotThrow<Exception>();
         }
 
         [Theory]
-        public void Theory8()
+        [InlineData(1)]
+        public void Theory8(int arg1)
         {
-            AssertSomething();
+            AssertSomething(arg1);
         }
 
         [Theory]
-        public void Theory9()
+        [InlineData(1)]
+        public void Theory9(int arg1)
         {
-            ShouldSomething();
+            ShouldSomething(arg1);
         }
 
         [Theory]
-        public void Theory10()
+        [InlineData(1)]
+        public void Theory10(int arg1)
         {
-            ExpectSomething();
+            ExpectSomething(arg1);
         }
 
         [Theory]
-        public void Theory11()
+        [InlineData(1)]
+        public void Theory11(int arg1)
         {
-            MustSomething();
+            MustSomething(arg1);
         }
 
         [Theory]
-        public void Theory12()
+        [InlineData(1)]
+        public void Theory12(int arg1)
         {
-            VerifySomething();
+            VerifySomething(arg1);
         }
 
         [Theory]
-        public void Theory13()
+        [InlineData(1)]
+        public void Theory13(int arg1)
         {
-            ValidateSomething();
+            ValidateSomething(arg1);
         }
 
         [Theory]
-        public void Theory14()
+        [InlineData(1)]
+        public void Theory14(int arg1)
         {
             dynamic d = 10;
             Assert.Equal(d, 10.0);
         }
 
-        public void AssertSomething()
+        [Theory(Skip = "reason")]
+        [InlineData(1)]
+        public void Theory15(int arg1) // Don't raise on skipped test methods
         {
-            Assert.IsTrue(true);
         }
 
-        public void ShouldSomething()
+        public void AssertSomething(int arg1)
         {
-            Assert.IsTrue(true);
+            Assert.True(true);
         }
 
-        public void ExpectSomething()
+        public void ShouldSomething(int arg1)
         {
-            Assert.IsTrue(true);
+            Assert.True(true);
         }
 
-        public void MustSomething()
+        public void ExpectSomething(int arg1)
         {
-            Assert.IsTrue(true);
+            Assert.True(true);
         }
 
-        public void VerifySomething()
+        public void MustSomething(int arg1)
         {
-            Assert.IsTrue(true);
+            Assert.True(true);
         }
 
-        public void ValidateSomething()
+        public void VerifySomething(int arg1)
         {
-            Assert.IsTrue(true);
+            Assert.True(true);
+        }
+
+        public void ValidateSomething(int arg1)
+        {
+            Assert.True(true);
         }
     }
 }

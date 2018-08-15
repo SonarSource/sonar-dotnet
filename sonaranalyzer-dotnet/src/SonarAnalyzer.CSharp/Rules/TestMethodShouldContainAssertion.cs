@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
@@ -41,41 +40,6 @@ namespace SonarAnalyzer.Rules.CSharp
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        private static readonly ISet<KnownType> TrackedTestAttributes = new HashSet<KnownType>
-        {
-            KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_TestMethodAttribute,
-            KnownType.NUnit_Framework_TestAttribute,
-            KnownType.NUnit_Framework_TestCaseAttribute,
-            KnownType.NUnit_Framework_TestCaseSourceAttribute,
-            KnownType.NUnit_Framework_TheoryAttribute,
-            KnownType.Xunit_FactAttribute,
-            KnownType.Xunit_TheoryAttribute,
-            KnownType.LegacyXunit_TheoryAttribute
-        };
-
-        private static readonly ISet<KnownType> ExpectedExceptionAttributes = new HashSet<KnownType>
-        {
-            KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_ExpectedExceptionAttribute,
-            KnownType.NUnit_Framework_ExpectedExceptionAttribute
-        };
-
-        private static readonly ISet<KnownType> TrackedIgnoreAttributes = new HashSet<KnownType>
-        {
-            KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_IgnoreAttribute,
-            KnownType.NUnit_Framework_IgnoreAttribute
-        };
-
-        private static readonly IEnumerable<string> TrackedAssertionMethodName =
-            new List<string>
-            {
-                "ASSERT",
-                "SHOULD",
-                "EXPECT",
-                "MUST",
-                "VERIFY",
-                "VALIDATE"
-            };
-
         protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
@@ -89,11 +53,10 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
 
                     var methodSymbol = c.SemanticModel.GetDeclaredSymbol(methodDeclaration);
-                    var attributes = methodSymbol?.GetAttributes();
                     if (methodSymbol == null ||
-                        !IsTestMethod(attributes) ||
-                        HasExpectedExceptionAttribute(attributes) ||
-                        IsTestIgnored(attributes))
+                        !methodSymbol.IsTestMethod() ||
+                        methodSymbol.HasExpectedExceptionAttribute() ||
+                        IsTestIgnored(methodSymbol))
                     {
                         return;
                     }
@@ -109,20 +72,15 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.MethodDeclaration);
         }
 
-        private static bool IsTestMethod(IEnumerable<AttributeData> attributes) =>
-            attributes.Any(a => a.AttributeClass.IsAny(TrackedTestAttributes));
-
-        private static bool HasExpectedExceptionAttribute(IEnumerable<AttributeData> attributes) =>
-            attributes.Any(a => a.AttributeClass.IsAny(ExpectedExceptionAttributes));
-
-        private static bool IsTestIgnored(IEnumerable<AttributeData> attributes)
+        public static bool IsTestIgnored(IMethodSymbol method)
         {
-            if (attributes.Any(a => a.AttributeClass.IsAny(TrackedIgnoreAttributes)))
+            if (method.IsMsTestOrNUnitTestIgnored())
             {
                 return true;
             }
 
-            var factAttributeSyntax = attributes.FirstOrDefault(a => a.AttributeClass.Is(KnownType.Xunit_FactAttribute))
+            // Checking whether an Xunit test is ignore or not needs to be done at the syntax level i.e. language-specific
+            var factAttributeSyntax = method.FindXUnitTestAttribute()
                 ?.ApplicationSyntaxReference.GetSyntax() as AttributeSyntax;
 
             return factAttributeSyntax?.ArgumentList != null &&
@@ -141,7 +99,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return false;
             }
 
-            return symbol.Name.SplitCamelCaseToWords().Union(TrackedAssertionMethodName).Any();
+            return UnitTestHelper.IsAssertionMethodName(symbol.Name);
         }
     }
 }
