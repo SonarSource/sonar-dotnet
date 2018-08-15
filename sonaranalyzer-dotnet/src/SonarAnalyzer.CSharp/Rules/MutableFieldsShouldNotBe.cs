@@ -31,25 +31,27 @@ namespace SonarAnalyzer.Rules
 {
     public abstract class MutableFieldsShouldNotBe : SonarDiagnosticAnalyzer
     {
-        protected const string MessageFormat = "Use an immutable collection or reduce the accessibility of this field.";
+        protected const string MessageFormat = "Use an immutable collection or reduce the accessibility of the field(s) {0}.";
 
-        private static readonly ISet<KnownType> InvalidMutableTypes = new HashSet<KnownType>
-        {
-            KnownType.System_Collections_Generic_ICollection_T,
-            KnownType.System_Array
-        };
+        private static readonly ISet<KnownType> MutableBaseTypes =
+            new HashSet<KnownType>
+            {
+                KnownType.System_Collections_Generic_ICollection_T,
+                KnownType.System_Array
+            };
 
-        private static readonly ISet<KnownType> AllowedTypes = new HashSet<KnownType>
-        {
-            KnownType.System_Collections_ObjectModel_ReadOnlyCollection_T,
-            KnownType.System_Collections_ObjectModel_ReadOnlyDictionary_TKey_TValue,
-            KnownType.System_Collections_Immutable_IImmutableArray_T,
-            KnownType.System_Collections_Immutable_IImmutableDictionary_TKey_TValue,
-            KnownType.System_Collections_Immutable_IImmutableList_T,
-            KnownType.System_Collections_Immutable_IImmutableSet_T,
-            KnownType.System_Collections_Immutable_IImmutableStack_T,
-            KnownType.System_Collections_Immutable_IImmutableQueue_T
-        };
+        private static readonly ISet<KnownType> ImmutableBaseTypes =
+            new HashSet<KnownType>
+            {
+                KnownType.System_Collections_ObjectModel_ReadOnlyCollection_T,
+                KnownType.System_Collections_ObjectModel_ReadOnlyDictionary_TKey_TValue,
+                KnownType.System_Collections_Immutable_IImmutableArray_T,
+                KnownType.System_Collections_Immutable_IImmutableDictionary_TKey_TValue,
+                KnownType.System_Collections_Immutable_IImmutableList_T,
+                KnownType.System_Collections_Immutable_IImmutableSet_T,
+                KnownType.System_Collections_Immutable_IImmutableStack_T,
+                KnownType.System_Collections_Immutable_IImmutableQueue_T
+            };
 
         protected abstract ISet<SyntaxKind> InvalidModifiers { get; }
         protected abstract DiagnosticDescriptor Rule { get; }
@@ -58,76 +60,145 @@ namespace SonarAnalyzer.Rules
 
         protected sealed override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(CheckForIssue, SyntaxKind.FieldDeclaration);
+            context.RegisterSyntaxNodeActionInNonGenerated(CheckForIssue,
+                SyntaxKind.ClassDeclaration,
+                SyntaxKind.StructDeclaration);
         }
 
         private void CheckForIssue(SyntaxNodeAnalysisContext analysisContext)
         {
-            var fieldDeclaration = (FieldDeclarationSyntax)analysisContext.Node;
-            if (!IsFieldToAnalyze(fieldDeclaration))
+            var typeDeclaration = (TypeDeclarationSyntax)analysisContext.Node;
+            var fieldDeclarations = typeDeclaration.Members.OfType<FieldDeclarationSyntax>();
+
+            var assignmentsImmutability = GetFieldAssignmentImmutability(typeDeclaration, fieldDeclarations,
+                analysisContext.SemanticModel);
+
+            foreach (var fieldDeclaration in fieldDeclarations)
             {
-                return;
+                if (!HasAllInvalidModifiers(fieldDeclaration) ||
+                    fieldDeclaration.Declaration.Variables.Count == 0)
+                {
+                    return;
+                }
+
+                var fieldSymbol = analysisContext.SemanticModel.GetDeclaredSymbol(fieldDeclaration.Declaration.Variables[0])
+                    as IFieldSymbol;
+                if (fieldSymbol == null ||
+                    fieldSymbol.Type == null ||
+                    fieldSymbol.GetEffectiveAccessibility() != Accessibility.Public ||
+                    IsImmutableOrValidMutableType(fieldSymbol.Type))
+                {
+                    return;
+                }
+
+                // The field seems to be violating the rule but we should exclude the cases where the field is read-only
+                // and all initializations to this field are immutable
+                var incorrectFieldVariables = CollectInvalidFieldVariables(fieldDeclaration, assignmentsImmutability,
+                        analysisContext.SemanticModel)
+                    .ToSentence(quoteWords: true);
+
+                if (incorrectFieldVariables != null)
+                {
+                    analysisContext.ReportDiagnosticWhenActive(Diagnostic.Create(Rule,
+                        fieldDeclaration.Declaration.Type.GetLocation(), incorrectFieldVariables));
+                }
             }
-
-            var symbolInfo = analysisContext.SemanticModel.GetSymbolInfo(fieldDeclaration.Declaration.Type);
-            if (IsImmutableOrValidMutableType(symbolInfo.Symbol))
-            {
-                return;
-            }
-
-            var fieldFirstVariable = fieldDeclaration.Declaration.Variables[0];
-            var fieldInitializer = fieldFirstVariable.Initializer;
-            var fieldInitializerSymbol = GetFieldInitializerSymbol(fieldInitializer?.Value, analysisContext.SemanticModel);
-
-            if (fieldDeclaration.Modifiers.Any(SyntaxKind.ReadOnlyKeyword) &&
-                IsValidReadOnlyInitializer(fieldInitializerSymbol, fieldInitializer?.Value))
-            {
-                return;
-            }
-
-            analysisContext.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, fieldFirstVariable.GetLocation()));
         }
 
-        private bool IsFieldToAnalyze(FieldDeclarationSyntax fieldDeclaration)
+        private bool HasAllInvalidModifiers(FieldDeclarationSyntax fieldDeclaration)
         {
             return fieldDeclaration.Modifiers.Count(m => InvalidModifiers.Contains(m.Kind())) == InvalidModifiers.Count;
         }
 
-        private bool IsImmutableOrValidMutableType(ISymbol symbol)
+        private Dictionary<string, bool?> GetFieldAssignmentImmutability(TypeDeclarationSyntax typeDeclaration,
+            IEnumerable<FieldDeclarationSyntax> fieldDeclarations, SemanticModel semanticModel)
         {
-            if (symbol is INamedTypeSymbol namedTypeSymbol)
+            var variableNames = fieldDeclarations.SelectMany(x => x.Declaration.Variables)
+                .Select(x => x.Identifier.ValueText)
+                .ToHashSet();
+
+            var ctorAssignments = typeDeclaration.Members.OfType<ConstructorDeclarationSyntax>()
+                .SelectMany(x => x.DescendantNodes())
+                .OfType<AssignmentExpressionSyntax>();
+
+            var variableToImmutability = variableNames.ToDictionary(x => x, x => (bool?)null);
+
+            foreach (var assignment in ctorAssignments)
             {
-                return !namedTypeSymbol.ConstructedFrom.DerivesOrImplementsAny(InvalidMutableTypes) ||
-                    namedTypeSymbol.ConstructedFrom.DerivesOrImplementsAny(AllowedTypes);
+                if (!(assignment.Left is IdentifierNameSyntax identifierName) ||
+                    !variableNames.Contains(identifierName.Identifier.ValueText) ||
+                    variableToImmutability[identifierName.Identifier.ValueText] == false)
+                {
+                    continue;
+                }
+
+                variableToImmutability[identifierName.Identifier.ValueText] =
+                    IsImmutableOrValidMutableType(semanticModel.GetTypeInfo(assignment.Right).Type, assignment.Right);
             }
 
-            if (symbol is ITypeSymbol typeSymbol)
-            {
-                return !typeSymbol.DerivesOrImplementsAny(InvalidMutableTypes) ||
-                    typeSymbol.DerivesOrImplementsAny(AllowedTypes);
-            }
-
-            return true;
+            return variableToImmutability;
         }
 
-        private static bool IsValidReadOnlyInitializer(ISymbol symbol, ExpressionSyntax equalsValue)
+        private IEnumerable<string> CollectInvalidFieldVariables(FieldDeclarationSyntax fieldDeclaration,
+            Dictionary<string, bool?> assignmentsInCtors, SemanticModel semanticModel)
         {
-            var equalsLiteral = equalsValue as LiteralExpressionSyntax;
-
-            return (symbol is IMethodSymbol methodSymbol && methodSymbol.ReturnType.DerivesOrImplementsAny(AllowedTypes)) ||
-                   (equalsLiteral != null && equalsValue.IsKind(SyntaxKind.NullLiteralExpression));
-        }
-
-        private static ISymbol GetFieldInitializerSymbol(ExpressionSyntax initializer, SemanticModel model)
-        {
-            if (initializer == null)
+            if (!fieldDeclaration.Modifiers.Any(SyntaxKind.ReadOnlyKeyword))
             {
-                return null;
+                return fieldDeclaration.Declaration.Variables.Select(x => x.Identifier.ValueText);
             }
 
-            var symbolInfo = model.GetSymbolInfo(initializer);
+            return CollectReadonlyInvalidFieldVariables(fieldDeclaration, assignmentsInCtors, semanticModel);
+        }
 
-            return symbolInfo.Symbol ?? symbolInfo.CandidateSymbols.FirstOrDefault();
+        private IEnumerable<string> CollectReadonlyInvalidFieldVariables(FieldDeclarationSyntax fieldDeclaration,
+            Dictionary<string, bool?> assignmentsInCtors, SemanticModel semanticModel)
+        {
+            foreach (var variable in fieldDeclaration.Declaration.Variables)
+            {
+                var onlyInitializedWithImmutablesInCtor = assignmentsInCtors[variable.Identifier.ValueText];
+
+                if (onlyInitializedWithImmutablesInCtor == false)
+                {
+                    yield return variable.Identifier.ValueText;
+                }
+
+                if (variable.Initializer == null)
+                {
+                    continue;
+                }
+
+                var methodSymbol = semanticModel.GetSymbolInfo(variable.Initializer.Value).Symbol as IMethodSymbol;
+                if (methodSymbol == null)
+                {
+                    continue;
+                }
+
+                var typeSymbol = methodSymbol.MethodKind == MethodKind.Constructor
+                    ? methodSymbol.ContainingType
+                    : methodSymbol.ReturnType;
+
+                if (!IsImmutableOrValidMutableType(typeSymbol, variable.Initializer.Value))
+                {
+                    yield return variable.Identifier.ValueText;
+                }
+            }
+        }
+
+        private bool IsImmutableOrValidMutableType(ITypeSymbol typeSymbol, ExpressionSyntax value = null)
+        {
+            if (value != null &&
+                value.IsKind(SyntaxKind.NullLiteralExpression))
+            {
+                return true;
+            }
+
+            if (typeSymbol is INamedTypeSymbol namedTypeSymbol)
+            {
+                typeSymbol = namedTypeSymbol.ConstructedFrom;
+            }
+
+            return !typeSymbol.DerivesOrImplementsAny(MutableBaseTypes) ||
+                typeSymbol.DerivesOrImplementsAny(ImmutableBaseTypes);
         }
     }
 }
