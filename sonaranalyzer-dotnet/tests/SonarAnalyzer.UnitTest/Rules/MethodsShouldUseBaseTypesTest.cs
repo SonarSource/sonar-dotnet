@@ -19,14 +19,51 @@
  */
 
 extern alias csharp;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Common;
+using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
     [TestClass]
     public class MethodsShouldUseBaseTypesTest
     {
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void MethodsShouldUseBaseTypes_Internals()
+        {
+            var solution = SolutionBuilder.Create()
+                .AddProject("project1", AnalyzerLanguage.CSharp)
+                .AddSnippet(@"
+internal interface IFoo
+{
+    bool IsFoo { get; }
+}
+
+public class Foo : IFoo
+{
+    public bool IsFoo { get; set; }
+}
+")              .GetSolution()
+                .AddProject("project2", AnalyzerLanguage.CSharp)
+                .AddProjectReference(sln => sln.ProjectIds[0])
+                .AddSnippet(@"
+internal class Bar
+{
+    public void MethodOne(Foo foo)
+    {
+        var x = foo.IsFoo;
+    }
+}
+")              .GetSolution();
+
+            foreach (var compilation in solution.Compile())
+            {
+                NewVerifier.Verify(compilation, new MethodsShouldUseBaseTypes());
+            }
+        }
+
         [TestMethod]
         [TestCategory("Rule")]
         public void MethodsShouldUseBaseTypes()
