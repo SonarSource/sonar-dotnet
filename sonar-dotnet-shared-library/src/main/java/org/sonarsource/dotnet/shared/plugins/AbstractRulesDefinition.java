@@ -126,7 +126,7 @@ public abstract class AbstractRulesDefinition implements RulesDefinition {
       return  stream != null
         ? GSON.fromJson(new InputStreamReader(stream, StandardCharsets.UTF_8), RuleMetadata.class)
         : new RuleMetadata();
-      } catch (IOException e) {
+    } catch (IOException e) {
       throw new IllegalStateException("Failed to read: " + resourcePath, e);
     }
   }
