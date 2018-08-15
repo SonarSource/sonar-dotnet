@@ -31,7 +31,7 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class CookieShouldNotContainSensitiveData : ObjectShouldBeInitializedCorrectlyBase
     {
         internal const string DiagnosticId = "S2255";
-        private const string MessageFormat = "If the data stored in this cookie is sensitive, it should be moved to the user session.";
+        private const string MessageFormat = "Make sure storing this data in this cookie is safe here.";
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);

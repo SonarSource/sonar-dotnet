@@ -18,7 +18,7 @@ namespace Tests.Diagnostics
 
         void CtorSetsNotAllowedValue()
         {
-            new HttpCookie("c", "value"); // Noncompliant {{If the data stored in this cookie is sensitive, it should be moved to the user session.}}
+            new HttpCookie("c", "value"); // Noncompliant {{Make sure storing this data in this cookie is safe here.}}
         }
 
         void InitializerSetsAllowedValue()
