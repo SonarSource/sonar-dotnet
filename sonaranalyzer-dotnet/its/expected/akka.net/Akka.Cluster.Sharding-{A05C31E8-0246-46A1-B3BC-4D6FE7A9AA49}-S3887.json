@@ -2,79 +2,53 @@
 "issues":  [
 {
 "id":  "S3887",
-"message":  "Use an immutable collection or reduce the accessibility of this field.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\Shard.cs",
-"region":  {
-"startLine":  117,
-"startColumn":  38,
-"endLine":  117,
-"endColumn":  47
-}
-}
-},
-{
-"id":  "S3887",
-"message":  "Use an immutable collection or reduce the accessibility of this field.",
+"message":  "Use an immutable collection or reduce the accessibility of the field(s) 'Regions'.",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
 "region":  {
 "startLine":  119,
-"startColumn":  39,
+"startColumn":  29,
 "endLine":  119,
-"endColumn":  46
+"endColumn":  38
 }
 }
 },
 {
 "id":  "S3887",
-"message":  "Use an immutable collection or reduce the accessibility of this field.",
+"message":  "Use an immutable collection or reduce the accessibility of the field(s) 'Regions'.",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
 "region":  {
 "startLine":  152,
-"startColumn":  68,
+"startColumn":  29,
 "endLine":  152,
-"endColumn":  75
+"endColumn":  67
 }
 }
 },
 {
 "id":  "S3887",
-"message":  "Use an immutable collection or reduce the accessibility of this field.",
+"message":  "Use an immutable collection or reduce the accessibility of the field(s) 'Stats'.",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
 "region":  {
 "startLine":  182,
-"startColumn":  55,
+"startColumn":  29,
 "endLine":  182,
-"endColumn":  60
+"endColumn":  54
 }
 }
 },
 {
 "id":  "S3887",
-"message":  "Use an immutable collection or reduce the accessibility of this field.",
+"message":  "Use an immutable collection or reduce the accessibility of the field(s) 'Shards'.",
 "location":  {
 "uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
 "region":  {
 "startLine":  212,
-"startColumn":  46,
+"startColumn":  29,
 "endLine":  212,
-"endColumn":  52
-}
-}
-},
-{
-"id":  "S3887",
-"message":  "Use an immutable collection or reduce the accessibility of this field.",
-"location":  {
-"uri":  "sources\akka.net\src\contrib\cluster\Akka.Cluster.Sharding\ShardRegion.cs",
-"region":  {
-"startLine":  224,
-"startColumn":  38,
-"endLine":  224,
-"endColumn":  47
+"endColumn":  45
 }
 }
 }

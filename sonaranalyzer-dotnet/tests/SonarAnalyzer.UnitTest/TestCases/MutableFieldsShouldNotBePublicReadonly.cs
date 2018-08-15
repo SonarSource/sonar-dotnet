@@ -8,69 +8,101 @@ namespace Tests.Diagnostics
     class Foo : ICollection<string> { }
     class Bar : ReadOnlyCollection<string> { }
 
-    class CompliantCases<T>
+    public class NotPublicAndReadonly
     {
-        protected readonly bool[] bools; // Compliant
-        private readonly int[] ints; // Compliant
-        internal readonly float[] floats; // Compliant
-        public readonly ReadOnlyCollection<string> readonlyCollectionString; // Compliant
-        public readonly ReadOnlyDictionary<string, string> readonlyDictionaryStrings; // Compliant
-        public readonly IReadOnlyList<string> iReadonlyListString; // Compliant
-        public readonly IReadOnlyCollection<string> iReadonlyCollectionString; // Compliant
-        public readonly IReadOnlyDictionary<string, string> iReadonlyDictionaryStrings; // Compliant
-        public string[] notReadonlyStrings; // Compliant
-        public readonly Bar bar; // Compliant
-        public readonly IImmutableDictionary<string, string> iImmutableDictionary; // Compliant
-        public readonly IImmutableList<string> iImmutableList; // Compliant
-        public readonly IImmutableQueue<string> iImmutableQueue; // Compliant
-        public readonly IImmutableSet<string> iImmutableSet; // Compliant
-        public readonly IImmutableStack<string> iImmutableStack; // Compliant
-        public readonly ImmutableArray<string> immutableArray; // Compliant
-        public readonly ImmutableSortedSet<string> immutableSortedSet; // Compliant
-        public static readonly ImmutableSortedSet<string> staticReadonlyImmutableSortedSet; // Compliant
+        public string[] notReadonlyStrings;
+        protected readonly bool[] bools;
+        private readonly int[] ints;
+        internal readonly float[] floats;
 
+        private class NotEffectivelyPublic
+        {
+            public readonly string[] strings;
+        }
+    }
+
+    public class ImmutableUninitialized<T>
+    {
+        public readonly ReadOnlyCollection<string> readonlyCollectionString;
+        public readonly ReadOnlyDictionary<string, string> readonlyDictionaryStrings;
+        public readonly IReadOnlyList<string> iReadonlyListString;
+        public readonly IReadOnlyCollection<string> iReadonlyCollectionString;
+        public readonly IReadOnlyDictionary<string, string> iReadonlyDictionaryStrings;
+        public readonly Bar bar;
+        public readonly IImmutableDictionary<string, string> iImmutableDictionary;
+        public readonly IImmutableList<string> iImmutableList;
+        public readonly IImmutableQueue<string> iImmutableQueue;
+        public readonly IImmutableSet<string> iImmutableSet;
+        public readonly IImmutableStack<string> iImmutableStack;
+        public readonly ImmutableArray<string> immutableArray;
+        public readonly ImmutableSortedSet<string> immutableSortedSet;
+        public static readonly ImmutableSortedSet<string> staticReadonlyImmutableSortedSet;
+        public readonly ImmutableSortedSet<T> genericImmutableSortedSet;
+    }
+
+    public class MutableInitializedWithImmutable
+    {
         public readonly ISet<string> iSetInitializaedWithImmutableSet = ImmutableHashSet.Create("a", "b");
         public readonly IList<string> iListInitializaedWithImmutableArray = ImmutableArray.Create("a", "b");
         public readonly IList<string> iListInitializaedWithImmutableList = ImmutableList.Create("a", "b");
         public readonly IDictionary<string, string> iDictionaryInitializaedWithImmutableDictionary = ImmutableDictionary.Create<string, string>();
+        public readonly IList<string> iList = null;
     }
 
-    class GenericCompliantCases<T>
+    public class MutableInitializedWithMutable
     {
-        public readonly ImmutableSortedSet<T> genericImmutableSortedSet; // Compliant
-    }
-
-    class InvalidCases
-    {
-        public readonly string[] strings; // Noncompliant {{Use an immutable collection or reduce the accessibility of this field.}}
-//                               ^^^^^^^
-        public readonly Array array; // Noncompliant
-        public readonly ICollection<string> iCollectionString; // Noncompliant
-        public readonly IList<string> iListString; // Noncompliant
-        public readonly List<string> listString; // Noncompliant
-        public readonly LinkedList<string> linkedListString; // Noncompliant
-        public readonly SortedList<string, string> sortedListString; // Noncompliant
-        public readonly ObservableCollection<string> observableCollectionString; // Noncompliant
-        public readonly Foo foo; // Noncompliant
-
-        public readonly ISet<string> isetInitializaedWithHashSet = new HashSet<string> { "a", "b" }; // Noncompliant
+        public readonly ISet<string> isetInitializaedWithHashSet = new HashSet<string> { "a", "b" }; // Noncompliant {{Use an immutable collection or reduce the accessibility of the field(s) 'isetInitializaedWithHashSet'.}}
+//                      ^^^^^^^^^^^^
         public readonly IList<string> iListInitializaedWithList = new List<string> { "a", "b" }; // Noncompliant
         public readonly IDictionary<string, string> iDictionaryInitializaedWithDictionary = new Dictionary<string, string>(); // Noncompliant
     }
 
-    class InitialisedInConstructor
+    public class HandleFieldWithMultipleVariables
     {
-        public static readonly string[] bar; // Noncompliant - set to mutable value in constructor
+        public readonly ISet<string> set1 = new HashSet<string>(), set2 = new HashSet<string>(); // Noncompliant {{Use an immutable collection or reduce the accessibility of the field(s) 'set1' and 'set2'.}}
+    }
 
-        // Issue #1491: https://github.com/SonarSource/sonar-csharp/issues/1491
-        public static readonly string[] foo; // Noncompliant       <-- false-positive reported here. Set to null in constructor
-        public static readonly ISet<string> iSetInitializedWithImmutableSet;    // Noncompliant     <-- false-positive reported here.  Set to immutable type in constructor.
+    // When the types are uninitialized, this is equivalent to being initialized to null so we don't report
+    public class MutableUninitialized
+    {
+        public readonly string[] strings;
+        public readonly Array array;
+        public readonly List<string> listString;
+        public readonly LinkedList<string> linkedListString;
+        public readonly SortedList<string, string> sortedListString;
+        public readonly ObservableCollection<string> observableCollectionString;
+        public readonly Foo foo;
 
-        void InitialisedInStaticConstructor()
+        public readonly ICollection<string> iCollectionString;
+        public readonly IList<string> iListString;
+        public readonly ISet<string> set1, set2;
+    }
+
+    // Issue #1491: https://github.com/SonarSource/sonar-csharp/issues/1491
+    public class MutableInitializedWithImmutableInConstructor
+    {
+        public static readonly string[] foo; // Compliant - set to null in ctor
+        public static readonly ISet<string> set; // Compliant - set to immutable in ctor
+
+        MutableInitializedWithImmutableInConstructor()
         {
-            bar = new string[] { foo, bar };
             foo = null;
-            iSetInitializedWithImmutableSet = ImmutableHashSet.Create("a", "b"); // compliant - immutable type
+            set = ImmutableHashSet.Create("a", "b");
+        }
+    }
+
+    public class MutableInitializedInConstructors
+    {
+        public static readonly ISet<string> set; // Noncompliant - one of the ctor sets a mutable type
+
+        MutableInitializedInConstructors()
+        {
+            set = ImmutableHashSet.Create("a", "b");
+        }
+
+        MutableInitializedInConstructors(string s)
+        {
+            set = new HashSet<string>();
         }
     }
 }

@@ -2,27 +2,14 @@
 "issues":  [
 {
 "id":  "S3887",
-"message":  "Use an immutable collection or reduce the accessibility of this field.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence\AtLeastOnceDeliverySemantic.cs",
-"region":  {
-"startLine":  31,
-"startColumn":  47,
-"endLine":  31,
-"endColumn":  68
-}
-}
-},
-{
-"id":  "S3887",
-"message":  "Use an immutable collection or reduce the accessibility of this field.",
+"message":  "Use an immutable collection or reduce the accessibility of the field(s) 'UnconfirmedDeliveries'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Persistence\AtLeastOnceDeliverySemantic.cs",
 "region":  {
 "startLine":  131,
-"startColumn":  47,
+"startColumn":  25,
 "endLine":  131,
-"endColumn":  68
+"endColumn":  46
 }
 }
 }

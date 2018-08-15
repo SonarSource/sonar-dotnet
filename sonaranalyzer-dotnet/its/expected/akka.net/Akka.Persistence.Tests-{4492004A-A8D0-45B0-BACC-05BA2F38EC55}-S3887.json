@@ -2,66 +2,53 @@
 "issues":  [
 {
 "id":  "S3887",
-"message":  "Use an immutable collection or reduce the accessibility of this field.",
+"message":  "Use an immutable collection or reduce the accessibility of the field(s) 'Tags'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\MemoryEventAdapterSpec.cs",
 "region":  {
 "startLine":  80,
-"startColumn":  42,
+"startColumn":  29,
 "endLine":  80,
-"endColumn":  46
+"endColumn":  41
 }
 }
 },
 {
 "id":  "S3887",
-"message":  "Use an immutable collection or reduce the accessibility of this field.",
+"message":  "Use an immutable collection or reduce the accessibility of the field(s) 'Adult'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\MemoryEventAdapterSpec.cs",
 "region":  {
 "startLine":  125,
-"startColumn":  42,
+"startColumn":  29,
 "endLine":  125,
-"endColumn":  81
+"endColumn":  41
 }
 }
 },
 {
 "id":  "S3887",
-"message":  "Use an immutable collection or reduce the accessibility of this field.",
+"message":  "Use an immutable collection or reduce the accessibility of the field(s) 'Minor'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\MemoryEventAdapterSpec.cs",
 "region":  {
 "startLine":  126,
-"startColumn":  42,
+"startColumn":  29,
 "endLine":  126,
-"endColumn":  81
+"endColumn":  41
 }
 }
 },
 {
 "id":  "S3887",
-"message":  "Use an immutable collection or reduce the accessibility of this field.",
+"message":  "Use an immutable collection or reduce the accessibility of the field(s) 'State'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\MemoryEventAdapterSpec.cs",
 "region":  {
 "startLine":  184,
-"startColumn":  48,
+"startColumn":  29,
 "endLine":  184,
-"endColumn":  80
-}
-}
-},
-{
-"id":  "S3887",
-"message":  "Use an immutable collection or reduce the accessibility of this field.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Persistence.Tests\ReceivePersistentActorTests.cs",
-"region":  {
-"startLine":  157,
-"startColumn":  48,
-"endLine":  157,
-"endColumn":  80
+"endColumn":  47
 }
 }
 }
