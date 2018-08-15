@@ -54,40 +54,38 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            var descriptor = FindConstraints(methodSymbol);
-            if (descriptor == null)
-            {
-                return;
-            }
-
-            var message = GetFaults(methodSymbol, descriptor).ToSentence();
+            var validator = GetValidator(methodSymbol);
+            var message = validator(methodSymbol);
             if (message != null)
             {
                 c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, methodSymbol.Locations.First(), message));
             }
         }
 
-        private static Constraints FindConstraints(IMethodSymbol method)
+        private static SignatureValidator GetValidator(IMethodSymbol method)
         {
             // Find the first matching attribute type in the table
             var type = method.FindTestAttribute();
             if (type == null)
             {
-                return null;
+                return NullValidator;
             }
 
-            attributeToConstraintsMap.TryGetValue(type, out Constraints descriptor);
-            return descriptor;
+            attributeToConstraintsMap.TryGetValue(type, out var validator);
+            return validator;
         }
 
-        private static IEnumerable<string> GetFaults(IMethodSymbol methodSymbol, Constraints descriptor)
+        private static string GetFaultMessage(IMethodSymbol methodSymbol, bool publicOnly, bool allowGenerics) =>
+            GetFaultMessageParts(methodSymbol, publicOnly, allowGenerics).ToSentence();
+
+        private static IEnumerable<string> GetFaultMessageParts(IMethodSymbol methodSymbol, bool publicOnly, bool allowGenerics)
         {
-            if (methodSymbol.DeclaredAccessibility != Accessibility.Public && descriptor.PublicOnly)
+            if (methodSymbol.DeclaredAccessibility != Accessibility.Public && publicOnly)
             {
                 yield return MakePublicMessage;
             }
 
-            if (methodSymbol.IsGenericMethod && !descriptor.AllowsGeneric)
+            if (methodSymbol.IsGenericMethod && !allowGenerics)
             {
                 yield return MakeNotGenericMessage;
             }
@@ -99,37 +97,62 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
+        /// <summary>
+        /// Validation method. Checks the supplied method and returns the error message,
+        /// or null if there is no issue.
+        /// </summary>
+        private delegate string SignatureValidator(IMethodSymbol method);
+
+        private static readonly SignatureValidator NullValidator = m => null;
+
         // We currently support three test framework, each of which supports multiple test method attribute markers, and each of which
         // has differing constraints (public/private, generic/non-generic).
         // Rather than writing lots of conditional code, we're using a simple table-driven approach.
-        private static readonly Dictionary<KnownType, Constraints> attributeToConstraintsMap = new Dictionary<KnownType, Constraints>()
+        // Currently we use the same validation method for all method types, but we could have a
+        // different validation method for each type in future if necessary.
+        private static readonly Dictionary<KnownType, SignatureValidator> attributeToConstraintsMap = new Dictionary<KnownType, SignatureValidator>
         {
             // MSTest
-            {KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_TestMethodAttribute, new Constraints(publicOnly: true, allowsGeneric: false) },
-            {KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_DataTestMethodAttribute, new Constraints(publicOnly: true, allowsGeneric: false) },
+            {
+                KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_TestMethodAttribute,
+                m => GetFaultMessage(m, publicOnly: true, allowGenerics: false)
+            },
+            {
+                KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_DataTestMethodAttribute,
+                m => GetFaultMessage(m, publicOnly: true, allowGenerics: false)
+            },
 
             // NUnit
-            {KnownType.NUnit_Framework_TestAttribute, new Constraints(publicOnly: true, allowsGeneric: false) },
-            {KnownType.NUnit_Framework_TestCaseAttribute, new Constraints(publicOnly: true, allowsGeneric: true) },
-            {KnownType.NUnit_Framework_TestCaseSourceAttribute, new Constraints(publicOnly: true, allowsGeneric: true) },
-            {KnownType.NUnit_Framework_TheoryAttribute, new Constraints(publicOnly: true, allowsGeneric: false) },
+            {
+                KnownType.NUnit_Framework_TestAttribute,
+                m => GetFaultMessage(m, publicOnly: true, allowGenerics: false)
+            },
+            {
+                KnownType.NUnit_Framework_TestCaseAttribute,
+                m => GetFaultMessage(m, publicOnly: true, allowGenerics: true)
+            },
+            {
+                KnownType.NUnit_Framework_TestCaseSourceAttribute,
+                m => GetFaultMessage(m, publicOnly: true, allowGenerics: true)
+            },
+            {
+                KnownType.NUnit_Framework_TheoryAttribute,
+                m => GetFaultMessage(m, publicOnly: true, allowGenerics: false)
+            },
 
             // XUnit
-            {KnownType.Xunit_FactAttribute, new Constraints(publicOnly: false, allowsGeneric: false) },
-            {KnownType.Xunit_TheoryAttribute, new Constraints(publicOnly: false, allowsGeneric: true) },
-            {KnownType.LegacyXunit_TheoryAttribute, new Constraints(publicOnly: false, allowsGeneric: true) },
-        };
-
-        private class Constraints
-        {
-            public Constraints(bool publicOnly, bool allowsGeneric)
             {
-                PublicOnly = publicOnly;
-                AllowsGeneric = allowsGeneric;
+                KnownType.Xunit_FactAttribute,
+                m => GetFaultMessage(m, publicOnly: false, allowGenerics: false)
+            },
+            {
+                KnownType.Xunit_TheoryAttribute,
+                m => GetFaultMessage(m, publicOnly: false, allowGenerics: true)
+            },
+            {
+                KnownType.LegacyXunit_TheoryAttribute,
+                m => GetFaultMessage(m, publicOnly: false, allowGenerics: true)
             }
-
-            public bool PublicOnly { get; }
-            public bool AllowsGeneric { get; }
-        }
+        };
     }
 }
