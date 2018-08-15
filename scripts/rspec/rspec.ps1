@@ -59,6 +59,7 @@ $categoriesMap = @{
     "BUG" = "Bug";
     "CODE_SMELL" = "Code Smell";
     "VULNERABILITY" = "Vulnerability";
+    "SECURITY_HOTSPOT" = "Security Hotspot";
 }
 
 $severitiesMap = @{
@@ -189,8 +190,14 @@ function CreateStringResources($lang, $rules) {
 
         $severity = $severitiesMap.Get_Item(${json}.defaultSeverity)
 
+        # Ensure compatibility with SonarQube 6.7 LTS (the $resourcesPath file is used to generate rules.xml, which is deserialized at runtime)
+        $backwardsCompatibleType = ${json}.type;
+        if ($backwardsCompatibleType -eq "SECURITY_HOTSPOT") {
+            $backwardsCompatibleType = "VULNERABILITY";
+        }
+
         [void]$resources.Add("${rule}_Description=${description}")
-        [void]$resources.Add("${rule}_Type=$(${json}.type)")
+        [void]$resources.Add("${rule}_Type=$backwardsCompatibleType")
         [void]$resources.Add("${rule}_Title=$(${json}.title)")
         [void]$resources.Add("${rule}_Category=${severity} $($categoriesMap.Get_Item(${json}.type))")
         [void]$resources.Add("${rule}_IsActivatedByDefault=$(${sonarWayRules}.ruleKeys -Contains ${rule})")

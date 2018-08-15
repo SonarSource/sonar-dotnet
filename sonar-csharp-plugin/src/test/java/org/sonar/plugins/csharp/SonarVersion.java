@@ -19,18 +19,12 @@
  */
 package org.sonar.plugins.csharp;
 
+import org.sonar.api.SonarQubeSide;
 import org.sonar.api.SonarRuntime;
-import org.sonar.api.batch.ScannerSide;
-import org.sonarsource.dotnet.shared.plugins.AbstractRulesDefinition;
+import org.sonar.api.internal.SonarRuntimeImpl;
+import org.sonar.api.utils.Version;
 
-import static org.sonar.plugins.csharp.CSharpPlugin.REPOSITORY_KEY;
-import static org.sonar.plugins.csharp.CSharpPlugin.REPOSITORY_NAME;
-
-@ScannerSide
-public class CSharpSonarRulesDefinition extends AbstractRulesDefinition {
-  private static final String RULES_XML = "/org/sonar/plugins/csharp/rules.xml";
-
-  public CSharpSonarRulesDefinition(SonarRuntime sonarRuntime) {
-    super(REPOSITORY_KEY, REPOSITORY_NAME, CSharpPlugin.LANGUAGE_KEY, RULES_XML, sonarRuntime);
-  }
+public class SonarVersion {
+  static final SonarRuntime SQ_73_RUNTIME = SonarRuntimeImpl.forSonarQube(Version.create(7, 3), SonarQubeSide.SERVER);
+  static final SonarRuntime SQ_67_RUNTIME = SonarRuntimeImpl.forSonarQube(Version.create(6, 7), SonarQubeSide.SERVER);
 }

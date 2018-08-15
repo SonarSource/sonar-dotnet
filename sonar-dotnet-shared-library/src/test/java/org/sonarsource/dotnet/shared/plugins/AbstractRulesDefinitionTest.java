@@ -1,5 +1,5 @@
 /*
- * SonarC#
+ * SonarSource :: .NET :: Shared library
  * Copyright (C) 2014-2018 SonarSource SA
  * mailto:info AT sonarsource DOT com
  *
@@ -17,20 +17,23 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.sonar.plugins.csharp;
+package org.sonarsource.dotnet.shared.plugins;
 
-import org.sonar.api.SonarRuntime;
-import org.sonar.api.batch.ScannerSide;
-import org.sonarsource.dotnet.shared.plugins.AbstractRulesDefinition;
+import org.junit.Test;
 
-import static org.sonar.plugins.csharp.CSharpPlugin.REPOSITORY_KEY;
-import static org.sonar.plugins.csharp.CSharpPlugin.REPOSITORY_NAME;
+import static org.assertj.core.api.Assertions.assertThat;
 
-@ScannerSide
-public class CSharpSonarRulesDefinition extends AbstractRulesDefinition {
-  private static final String RULES_XML = "/org/sonar/plugins/csharp/rules.xml";
+public class AbstractRulesDefinitionTest {
+  @Test
+  public void constructor_with_null() {
+    TestRulesDefinition test = new TestRulesDefinition();
+    assertThat(test).isNotNull();
+  }
 
-  public CSharpSonarRulesDefinition(SonarRuntime sonarRuntime) {
-    super(REPOSITORY_KEY, REPOSITORY_NAME, CSharpPlugin.LANGUAGE_KEY, RULES_XML, sonarRuntime);
+  private static class TestRulesDefinition extends AbstractRulesDefinition {
+    TestRulesDefinition() {
+      super("test", "test", "test", "test");
+    }
   }
 }
+
