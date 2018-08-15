@@ -33,8 +33,7 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class DoNotUseRandom : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S2245";
-        private const string MessageFormat = "Use a cryptographically strong random number generator (RNG) like " +
-            "'System.Security.Cryptography.RandomNumberGenerator'.";
+        private const string MessageFormat = "Make sure that using this pseudorandom number generator is safe here.";
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);

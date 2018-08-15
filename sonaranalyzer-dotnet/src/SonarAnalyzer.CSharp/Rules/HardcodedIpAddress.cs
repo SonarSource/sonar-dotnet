@@ -37,7 +37,7 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class HardcodedIpAddress : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S1313";
-        private const string MessageFormat = "Make this IP '{0}' address configurable.";
+        private const string MessageFormat = "Make sure using this hardcoded IP address '{0}' is safe here.";
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);

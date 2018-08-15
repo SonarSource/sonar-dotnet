@@ -18,7 +18,7 @@ namespace Tests.Diagnostics
 
         void CtorSetsNotAllowedValue()
         {
-            new HttpCookie("c"); // Noncompliant {{Set the 'Secure' property of this cookie to 'true'.}}
+            new HttpCookie("c"); // Noncompliant {{Make sure creating this cookie without setting the 'Secure' property is safe here.}}
         }
 
         void InitializerSetsAllowedValue()

@@ -19,7 +19,7 @@ namespace Tests.Diagnostics
         [SomeAttribute("127.0.0.1")] // this is mainly for assembly versions
         public HardcodedIpAddress()
         {
-            string ip = "192.168.0.1"; // Noncompliant {{Make this IP '192.168.0.1' address configurable.}}
+            string ip = "192.168.0.1"; // Noncompliant {{Make sure using this hardcoded IP address '192.168.0.1' is safe here.}}
 //                      ^^^^^^^^^^^^^
 
             ip = "300.0.0.0"; // Compliant, not a valid IP
