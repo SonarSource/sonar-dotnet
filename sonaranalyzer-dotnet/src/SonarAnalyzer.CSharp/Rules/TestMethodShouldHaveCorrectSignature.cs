@@ -23,7 +23,6 @@ using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
@@ -44,83 +43,93 @@ namespace SonarAnalyzer.Rules.CSharp
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
+        protected override void Initialize(SonarAnalysisContext context) =>
+            context.RegisterSyntaxNodeActionInNonGenerated(AnalyzeMethod, SyntaxKind.MethodDeclaration);
+
+        private void AnalyzeMethod(SyntaxNodeAnalysisContext c)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
-                {
-                    var classDeclaration = (ClassDeclarationSyntax)c.Node;
-                    var classSymbol = c.SemanticModel.GetDeclaredSymbol(classDeclaration);
-                    if (classSymbol == null)
-                    {
-                        return;
-                    }
+            var methodSymbol = c.SemanticModel.GetDeclaredSymbol(c.Node) as IMethodSymbol;
+            if (methodSymbol == null)
+            {
+                return;
+            }
 
-                    var allFaultyMethods = classSymbol.GetMembers()
-                        .OfType<IMethodSymbol>()
-                        .Select(m => new { method = m, testType = ToKnownTestType(m) })
-                        .Where(tuple => tuple.testType != null)
-                        .Select(
-                            tuple =>
-                            new
-                            {
-                                Location = tuple.method.Locations.First(),
-                                Message = GetFaults(tuple.method, tuple.testType).ToSentence()
-                            })
-                        .Where(tuple => tuple.Message != null);
+            var descriptor = FindConstraints(methodSymbol);
+            if (descriptor == null)
+            {
+                return;
+            }
 
-                    foreach (var faultyMethod in allFaultyMethods)
-                    {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, faultyMethod.Location,
-                            faultyMethod.Message));
-                    }
-                },
-                SyntaxKind.ClassDeclaration);
+            var message = GetFaults(methodSymbol, descriptor).ToSentence();
+            if (message != null)
+            {
+                c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, methodSymbol.Locations.First(), message));
+            }
         }
 
-        private static KnownType ToKnownTestType(IMethodSymbol method)
+        private static Constraints FindConstraints(IMethodSymbol method)
         {
-            return method.GetAttributes()
-                .Select(
-                    attribute =>
-                    {
-                        if (attribute.AttributeClass.Is(KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_TestMethodAttribute))
-                        {
-                            return KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_TestMethodAttribute;
-                        }
-                        else if (attribute.AttributeClass.Is(KnownType.NUnit_Framework_TestAttribute))
-                        {
-                            return KnownType.NUnit_Framework_TestAttribute;
-                        }
-                        else if (attribute.AttributeClass.Is(KnownType.Xunit_FactAttribute))
-                        {
-                            return KnownType.Xunit_FactAttribute;
-                        }
-                        else
-                        {
-                            return null;
-                        }
-                    })
-                .FirstOrDefault();
+            // Find the first matching attribute type in the table
+            var type = method.FindTestAttribute();
+            if (type == null)
+            {
+                return null;
+            }
+
+            attributeToConstraintsMap.TryGetValue(type, out Constraints descriptor);
+            return descriptor;
         }
 
-        private static IEnumerable<string> GetFaults(IMethodSymbol methodSymbol, KnownType knownType)
+        private static IEnumerable<string> GetFaults(IMethodSymbol methodSymbol, Constraints descriptor)
         {
-            if (methodSymbol.DeclaredAccessibility != Accessibility.Public &&
-                knownType != KnownType.Xunit_FactAttribute)
+            if (methodSymbol.DeclaredAccessibility != Accessibility.Public && descriptor.PublicOnly)
             {
                 yield return MakePublicMessage;
             }
 
-            if (methodSymbol.IsGenericMethod)
+            if (methodSymbol.IsGenericMethod && !descriptor.AllowsGeneric)
             {
                 yield return MakeNotGenericMessage;
             }
 
+            // Invariant - applies to all test methods
             if (methodSymbol.IsAsync && methodSymbol.ReturnsVoid)
             {
                 yield return MakeNonAsyncOrTaskMessage;
             }
+        }
+
+        // We currently support three test framework, each of which supports multiple test method attribute markers, and each of which
+        // has differing constraints (public/private, generic/non-generic).
+        // Rather than writing lots of conditional code, we're using a simple table-driven approach.
+        private static readonly Dictionary<KnownType, Constraints> attributeToConstraintsMap = new Dictionary<KnownType, Constraints>()
+        {
+            // MSTest
+            {KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_TestMethodAttribute, new Constraints(publicOnly: true, allowsGeneric: false) },
+            {KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_DataTestMethodAttribute, new Constraints(publicOnly: true, allowsGeneric: false) },
+
+            // NUnit
+            {KnownType.NUnit_Framework_TestAttribute, new Constraints(publicOnly: true, allowsGeneric: false) },
+            {KnownType.NUnit_Framework_TestCaseAttribute, new Constraints(publicOnly: true, allowsGeneric: true) },
+            {KnownType.NUnit_Framework_TestCaseSourceAttribute, new Constraints(publicOnly: true, allowsGeneric: true) },
+            {KnownType.NUnit_Framework_TheoryAttribute, new Constraints(publicOnly: true, allowsGeneric: false) },
+
+            // XUnit
+            {KnownType.Xunit_FactAttribute, new Constraints(publicOnly: false, allowsGeneric: false) },
+            {KnownType.Xunit_TheoryAttribute, new Constraints(publicOnly: false, allowsGeneric: true) },
+            {KnownType.LegacyXunit_TheoryAttribute, new Constraints(publicOnly: false, allowsGeneric: true) },
+        };
+
+        private class Constraints
+        {
+            public Constraints(bool publicOnly, bool allowsGeneric)
+            {
+                PublicOnly = publicOnly;
+                AllowsGeneric = allowsGeneric;
+            }
+
+            public bool PublicOnly { get; }
+            public bool AllowsGeneric { get; }
         }
     }
 }

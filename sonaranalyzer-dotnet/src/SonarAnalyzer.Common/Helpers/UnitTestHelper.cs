@@ -95,5 +95,57 @@ namespace SonarAnalyzer.Helpers
                     a.AttributeClass.Is(KnownType.Xunit_FactAttribute) ||
                     a.AttributeClass.Is(KnownType.Xunit_TheoryAttribute) ||
                     a.AttributeClass.Is(KnownType.LegacyXunit_TheoryAttribute));
+
+        public static KnownType FindTestAttribute(this IMethodSymbol method)
+        {
+            return method.GetAttributes()
+                .Select(
+                    attribute =>
+                    {
+                        // MSTest
+                        if (attribute.AttributeClass.Is(KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_TestMethodAttribute))
+                        {
+                            return KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_TestMethodAttribute;
+                        }
+                        if (attribute.AttributeClass.Is(KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_DataTestMethodAttribute))
+                        {
+                            return KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_DataTestMethodAttribute;
+                        }
+
+                        // NUnit
+                        if (attribute.AttributeClass.Is(KnownType.NUnit_Framework_TestAttribute))
+                        {
+                            return KnownType.NUnit_Framework_TestAttribute;
+                        }
+                        if (attribute.AttributeClass.Is(KnownType.NUnit_Framework_TestCaseAttribute))
+                        {
+                            return KnownType.NUnit_Framework_TestCaseAttribute;
+                        }
+                        if (attribute.AttributeClass.Is(KnownType.NUnit_Framework_TestCaseSourceAttribute))
+                        {
+                            return KnownType.NUnit_Framework_TestCaseSourceAttribute;
+                        }
+                        if (attribute.AttributeClass.Is(KnownType.NUnit_Framework_TheoryAttribute))
+                        {
+                            return KnownType.NUnit_Framework_TheoryAttribute;
+                        }
+
+                        // XUnit
+                        if (attribute.AttributeClass.Is(KnownType.Xunit_FactAttribute))
+                        {
+                            return KnownType.Xunit_FactAttribute;
+                        }
+                        if (attribute.AttributeClass.Is(KnownType.Xunit_TheoryAttribute))
+                        {
+                            return KnownType.Xunit_TheoryAttribute;
+                        }
+                        if (attribute.AttributeClass.Is(KnownType.LegacyXunit_TheoryAttribute))
+                        {
+                            return KnownType.LegacyXunit_TheoryAttribute;
+                        }
+
+                        return (KnownType)null;
+                    }).FirstOrDefault();
+        }
     }
 }

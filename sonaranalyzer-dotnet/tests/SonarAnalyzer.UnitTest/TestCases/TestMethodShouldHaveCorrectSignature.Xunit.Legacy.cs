@@ -1,5 +1,6 @@
 ﻿using System;
 using Xunit;
+using Xunit.Extensions;
 
 namespace Tests.Diagnostics
 {
@@ -32,7 +33,7 @@ namespace Tests.Diagnostics
         }
 
 
-        [Xunit.Theory]
+        [Xunit.Extensions.Theory]
         [InlineData(42)]
         private void PrivateTestMethod_Theory(int arg) // Compliant
         {
