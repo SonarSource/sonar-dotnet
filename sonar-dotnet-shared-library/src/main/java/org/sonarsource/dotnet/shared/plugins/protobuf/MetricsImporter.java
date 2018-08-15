@@ -30,7 +30,6 @@ import org.sonar.api.issue.NoSonarFilter;
 import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.measures.FileLinesContext;
 import org.sonar.api.measures.FileLinesContextFactory;
-import org.sonar.api.utils.Version;
 import org.sonarsource.dotnet.protobuf.SonarAnalyzer.MetricsInfo;
 
 class MetricsImporter extends ProtobufImporter<MetricsInfo> {
@@ -38,7 +37,6 @@ class MetricsImporter extends ProtobufImporter<MetricsInfo> {
   private final SensorContext context;
   private final FileLinesContextFactory fileLinesContextFactory;
   private final NoSonarFilter noSonarFilter;
-  private final boolean supportsCognitiveComplexity;
 
   MetricsImporter(SensorContext context, FileLinesContextFactory fileLinesContextFactory, NoSonarFilter noSonarFilter,
     Function<String, String> toRealPath) {
@@ -46,7 +44,6 @@ class MetricsImporter extends ProtobufImporter<MetricsInfo> {
     this.context = context;
     this.fileLinesContextFactory = fileLinesContextFactory;
     this.noSonarFilter = noSonarFilter;
-    this.supportsCognitiveComplexity = isSonarQubeGreaterThanOrEqualTo63();
   }
 
   @Override
@@ -73,26 +70,15 @@ class MetricsImporter extends ProtobufImporter<MetricsInfo> {
     }
     saveMetric(context, inputFile, CoreMetrics.NCLOC, message.getCodeLineCount());
 
-    boolean cognitiveComplexityError = message.getCognitiveComplexity() < 0;
-    if (supportsCognitiveComplexity && !cognitiveComplexityError) {
+    if (message.getCognitiveComplexity() >= 0) {
       saveMetric(context, inputFile, CoreMetrics.COGNITIVE_COMPLEXITY, message.getCognitiveComplexity());
     }
 
-    if (isSonarQubeGreaterThanOrEqualTo62()) {
-      for (Integer executableLineNumber : message.getExecutableLinesList()) {
-        fileLinesContext.setIntValue(CoreMetrics.EXECUTABLE_LINES_DATA_KEY, executableLineNumber, 1);
-      }
+    for (Integer executableLineNumber : message.getExecutableLinesList()) {
+      fileLinesContext.setIntValue(CoreMetrics.EXECUTABLE_LINES_DATA_KEY, executableLineNumber, 1);
     }
 
     fileLinesContext.save();
-  }
-
-  private boolean isSonarQubeGreaterThanOrEqualTo63() {
-    return context.getSonarQubeVersion().isGreaterThanOrEqual(Version.create(6, 3));
-  }
-
-  private boolean isSonarQubeGreaterThanOrEqualTo62() {
-    return context.getSonarQubeVersion().isGreaterThanOrEqual(Version.create(6, 2));
   }
 
   private static <T extends Serializable> void saveMetric(SensorContext context, InputFile inputFile, Metric<T> metric, T value) {
