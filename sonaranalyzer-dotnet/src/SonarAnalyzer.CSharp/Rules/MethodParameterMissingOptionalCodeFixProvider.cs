@@ -33,15 +33,15 @@ using SonarAnalyzer.Helpers;
 namespace SonarAnalyzer.Rules.CSharp
 {
     [ExportCodeFixProvider(LanguageNames.CSharp)]
-    public class MethodParameterMissingOptionalCodeFixProvider : SonarCodeFixProvider
+    public sealed class MethodParameterMissingOptionalCodeFixProvider : SonarCodeFixProvider
     {
         private const string Title = "Add missing 'Optional' attribute";
 
-        public sealed override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(MethodParameterMissingOptional.DiagnosticId);
+        public override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(MethodParameterMissingOptional.DiagnosticId);
 
-        public sealed override FixAllProvider GetFixAllProvider() => DocumentBasedFixAllProvider.Instance;
+        public override FixAllProvider GetFixAllProvider() => DocumentBasedFixAllProvider.Instance;
 
-        protected sealed override async Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
+        protected override async Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
         {
             var diagnostic = context.Diagnostics.First();
             var diagnosticSpan = diagnostic.Location.SourceSpan;

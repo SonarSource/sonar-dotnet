@@ -30,14 +30,14 @@ using SonarAnalyzer.Helpers;
 namespace SonarAnalyzer.Rules.CSharp
 {
     [ExportCodeFixProvider(LanguageNames.CSharp)]
-    public class SwitchDefaultClauseEmptyCodeFixProvider : SonarCodeFixProvider
+    public sealed class SwitchDefaultClauseEmptyCodeFixProvider : SonarCodeFixProvider
     {
         internal const string Title = "Remove empty 'default' clause";
-        public sealed override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(SwitchDefaultClauseEmpty.DiagnosticId);
+        public override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(SwitchDefaultClauseEmpty.DiagnosticId);
 
-        public sealed override FixAllProvider GetFixAllProvider() => WellKnownFixAllProviders.BatchFixer;
+        public override FixAllProvider GetFixAllProvider() => WellKnownFixAllProviders.BatchFixer;
 
-        protected sealed override Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
+        protected override Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
         {
             var diagnostic = context.Diagnostics.First();
             var diagnosticSpan = diagnostic.Location.SourceSpan;

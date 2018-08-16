@@ -30,18 +30,18 @@ using SonarAnalyzer.Helpers;
 namespace SonarAnalyzer.Rules.CSharp
 {
     [ExportCodeFixProvider(LanguageNames.CSharp)]
-    public class RedundantParenthesesCodeFixProvider : SonarCodeFixProvider
+    public sealed class RedundantParenthesesCodeFixProvider : SonarCodeFixProvider
     {
         internal const string Title = "Remove redundant parentheses";
-        public sealed override ImmutableArray<string> FixableDiagnosticIds =>
+        public override ImmutableArray<string> FixableDiagnosticIds =>
             ImmutableArray.Create(RedundantParentheses.DiagnosticId, RedundantParenthesesObjectsCreation.DiagnosticId);
 
-        public sealed override FixAllProvider GetFixAllProvider()
+        public override FixAllProvider GetFixAllProvider()
         {
             return WellKnownFixAllProviders.BatchFixer;
         }
 
-        protected sealed override Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
+        protected override Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
         {
             var diagnostic = context.Diagnostics.First();
             var diagnosticSpan = diagnostic.Location.SourceSpan;

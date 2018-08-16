@@ -33,22 +33,22 @@ using SonarAnalyzer.Helpers.CSharp;
 namespace SonarAnalyzer.Rules.CSharp
 {
     [ExportCodeFixProvider(LanguageNames.CSharp)]
-    public class BooleanLiteralUnnecessaryCodeFixProvider : SonarCodeFixProvider
+    public sealed class BooleanLiteralUnnecessaryCodeFixProvider : SonarCodeFixProvider
     {
         internal const string Title = "Remove the unnecessary Boolean literal(s)";
-        public sealed override ImmutableArray<string> FixableDiagnosticIds
+        public override ImmutableArray<string> FixableDiagnosticIds
         {
             get
             {
                 return ImmutableArray.Create(BooleanLiteralUnnecessary.DiagnosticId);
             }
         }
-        public sealed override FixAllProvider GetFixAllProvider()
+        public override FixAllProvider GetFixAllProvider()
         {
             return WellKnownFixAllProviders.BatchFixer;
         }
 
-        protected sealed override Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
+        protected override Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
         {
             var diagnostic = context.Diagnostics.First();
             var diagnosticSpan = diagnostic.Location.SourceSpan;

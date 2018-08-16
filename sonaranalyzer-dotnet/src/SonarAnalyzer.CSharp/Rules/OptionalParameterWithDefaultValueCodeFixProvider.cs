@@ -32,15 +32,15 @@ using SonarAnalyzer.Helpers;
 namespace SonarAnalyzer.Rules.CSharp
 {
     [ExportCodeFixProvider(LanguageNames.CSharp)]
-    public class OptionalParameterWithDefaultValueCodeFixProvider : SonarCodeFixProvider
+    public sealed class OptionalParameterWithDefaultValueCodeFixProvider : SonarCodeFixProvider
     {
         internal const string Title = "Change to '[DefaultParameterValue]'";
-        public sealed override ImmutableArray<string> FixableDiagnosticIds =>
+        public override ImmutableArray<string> FixableDiagnosticIds =>
             ImmutableArray.Create(OptionalParameterWithDefaultValue.DiagnosticId);
 
-        public sealed override FixAllProvider GetFixAllProvider() => DocumentBasedFixAllProvider.Instance;
+        public override FixAllProvider GetFixAllProvider() => DocumentBasedFixAllProvider.Instance;
 
-        protected sealed override async Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
+        protected override async Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
         {
             var diagnostic = context.Diagnostics.First();
             var diagnosticSpan = diagnostic.Location.SourceSpan;

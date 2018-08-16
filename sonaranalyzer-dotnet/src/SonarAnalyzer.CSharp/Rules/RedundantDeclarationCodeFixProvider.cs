@@ -34,7 +34,7 @@ using SonarAnalyzer.Helpers;
 namespace SonarAnalyzer.Rules.CSharp
 {
     [ExportCodeFixProvider(LanguageNames.CSharp)]
-    public class RedundantDeclarationCodeFixProvider : SonarCodeFixProvider
+    public sealed class RedundantDeclarationCodeFixProvider : SonarCodeFixProvider
     {
         internal const string TitleRedundantArraySize = "Remove redundant array size";
         internal const string TitleRedundantArrayType = "Remove redundant array type";
@@ -44,11 +44,11 @@ namespace SonarAnalyzer.Rules.CSharp
         internal const string TitleRedundantObjectInitializer = "Remove redundant object initializer";
         internal const string TitleRedundantDelegateParameterList = "Remove redundant parameter list";
 
-        public sealed override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(RedundantDeclaration.DiagnosticId);
+        public override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(RedundantDeclaration.DiagnosticId);
 
-        public sealed override FixAllProvider GetFixAllProvider() => DocumentBasedFixAllProvider.Instance;
+        public override FixAllProvider GetFixAllProvider() => DocumentBasedFixAllProvider.Instance;
 
-        protected sealed override Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
+        protected override Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
         {
             var diagnostic = context.Diagnostics.First();
             var diagnosticSpan = diagnostic.Location.SourceSpan;

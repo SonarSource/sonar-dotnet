@@ -33,17 +33,17 @@ using SonarAnalyzer.Helpers.CSharp;
 namespace SonarAnalyzer.Rules.CSharp
 {
     [ExportCodeFixProvider(LanguageNames.CSharp)]
-    public class ConditionalSimplificationCodeFixProvider : SonarCodeFixProvider
+    public sealed class ConditionalSimplificationCodeFixProvider : SonarCodeFixProvider
     {
         internal const string Title = "Simplify condition";
 
-        public sealed override ImmutableArray<string> FixableDiagnosticIds =>
+        public override ImmutableArray<string> FixableDiagnosticIds =>
             ImmutableArray.Create(ConditionalSimplification.DiagnosticId);
 
-        public sealed override FixAllProvider GetFixAllProvider() =>
+        public override FixAllProvider GetFixAllProvider() =>
             WellKnownFixAllProviders.BatchFixer;
 
-        protected sealed override async Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
+        protected override async Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
         {
             var diagnostic = context.Diagnostics.First();
             var diagnosticSpan = diagnostic.Location.SourceSpan;

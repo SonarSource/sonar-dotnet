@@ -34,24 +34,24 @@ using SonarAnalyzer.Helpers;
 namespace SonarAnalyzer.Rules.CSharp
 {
     [ExportCodeFixProvider(LanguageNames.CSharp)]
-    public class RedundantArgumentCodeFixProvider : SonarCodeFixProvider
+    public sealed class RedundantArgumentCodeFixProvider : SonarCodeFixProvider
     {
         internal const string TitleRemove = "Remove redundant arguments";
         internal const string TitleRemoveWithNameAdditions = "Remove redundant arguments with adding named arguments";
 
-        public sealed override ImmutableArray<string> FixableDiagnosticIds
+        public override ImmutableArray<string> FixableDiagnosticIds
         {
             get
             {
                 return ImmutableArray.Create(RedundantArgument.DiagnosticId);
             }
         }
-        public sealed override FixAllProvider GetFixAllProvider()
+        public override FixAllProvider GetFixAllProvider()
         {
             return WellKnownFixAllProviders.BatchFixer;
         }
 
-        protected sealed override async Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
+        protected override async Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
         {
             var diagnostic = context.Diagnostics.First();
             var invocation = GetInvocation(root, diagnostic.Location.SourceSpan);

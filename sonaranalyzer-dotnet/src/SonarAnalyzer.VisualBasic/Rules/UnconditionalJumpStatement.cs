@@ -39,7 +39,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                     DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
 
         protected override DiagnosticDescriptor Rule => rule;
-        protected sealed override Helpers.GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.VisualBasic.GeneratedCodeRecognizer.Instance;
+        protected override Helpers.GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.VisualBasic.GeneratedCodeRecognizer.Instance;
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         protected override ISet<SyntaxKind> LoopStatements { get; } = new HashSet<SyntaxKind>

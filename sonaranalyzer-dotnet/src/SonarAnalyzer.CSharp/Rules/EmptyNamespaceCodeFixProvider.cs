@@ -31,15 +31,15 @@ using SonarAnalyzer.Helpers;
 namespace SonarAnalyzer.Rules.CSharp
 {
     [ExportCodeFixProvider(LanguageNames.CSharp)]
-    public class EmptyNamespaceCodeFixProvider : SonarCodeFixProvider
+    public sealed class EmptyNamespaceCodeFixProvider : SonarCodeFixProvider
     {
         internal const string Title = "Remove empty namespace";
-        public sealed override ImmutableArray<string> FixableDiagnosticIds =>
+        public override ImmutableArray<string> FixableDiagnosticIds =>
             ImmutableArray.Create(EmptyNamespace.DiagnosticId);
 
-        public sealed override FixAllProvider GetFixAllProvider() => DocumentBasedFixAllProvider.Instance;
+        public override FixAllProvider GetFixAllProvider() => DocumentBasedFixAllProvider.Instance;
 
-        protected sealed override Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
+        protected override Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
         {
             var diagnostic = context.Diagnostics.First();
             var diagnosticSpan = diagnostic.Location.SourceSpan;

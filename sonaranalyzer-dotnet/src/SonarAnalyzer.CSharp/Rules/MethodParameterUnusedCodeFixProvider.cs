@@ -31,15 +31,15 @@ using SonarAnalyzer.Helpers;
 namespace SonarAnalyzer.Rules.CSharp
 {
     [ExportCodeFixProvider(LanguageNames.CSharp)]
-    public class MethodParameterUnusedCodeFixProvider : SonarCodeFixProvider
+    public sealed class MethodParameterUnusedCodeFixProvider : SonarCodeFixProvider
     {
         private const string Title = "Remove unused parameter";
 
-        public sealed override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(MethodParameterUnused.DiagnosticId);
+        public override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(MethodParameterUnused.DiagnosticId);
 
-        public sealed override FixAllProvider GetFixAllProvider() => DocumentBasedFixAllProvider.Instance;
+        public override FixAllProvider GetFixAllProvider() => DocumentBasedFixAllProvider.Instance;
 
-        protected sealed override Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
+        protected override Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
         {
             var diagnostic = context.Diagnostics.First();
             var diagnosticSpan = diagnostic.Location.SourceSpan;

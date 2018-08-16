@@ -34,11 +34,11 @@ using SonarAnalyzer.Helpers;
 namespace SonarAnalyzer.Rules.CSharp
 {
     [ExportCodeFixProvider(LanguageNames.CSharp)]
-    public class GenericReadonlyFieldPropertyAssignmentCodeFixProvider : SonarCodeFixProvider
+    public sealed class GenericReadonlyFieldPropertyAssignmentCodeFixProvider : SonarCodeFixProvider
     {
         internal const string TitleRemove = "Remove assignment";
         internal const string TitleAddClassConstraint = "Add reference type constraint";
-        public sealed override ImmutableArray<string> FixableDiagnosticIds
+        public override ImmutableArray<string> FixableDiagnosticIds
         {
             get
             {
@@ -48,7 +48,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static readonly SyntaxAnnotation annotation = new SyntaxAnnotation(nameof(GenericReadonlyFieldPropertyAssignmentCodeFixProvider));
 
-        protected sealed override async Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
+        protected override async Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
         {
             var diagnostic = context.Diagnostics.First();
             var diagnosticSpan = diagnostic.Location.SourceSpan;

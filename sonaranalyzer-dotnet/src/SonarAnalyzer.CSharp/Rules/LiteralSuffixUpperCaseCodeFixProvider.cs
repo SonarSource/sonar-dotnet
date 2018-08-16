@@ -32,22 +32,22 @@ using SonarAnalyzer.Helpers;
 namespace SonarAnalyzer.Rules.CSharp
 {
     [ExportCodeFixProvider(LanguageNames.CSharp)]
-    public class LiteralSuffixUpperCaseCodeFixProvider : SonarCodeFixProvider
+    public sealed class LiteralSuffixUpperCaseCodeFixProvider : SonarCodeFixProvider
     {
         internal const string Title = "Make literal suffix upper case";
-        public sealed override ImmutableArray<string> FixableDiagnosticIds
+        public override ImmutableArray<string> FixableDiagnosticIds
         {
             get
             {
                 return ImmutableArray.Create(LiteralSuffixUpperCase.DiagnosticId, WellKnownDiagnosticIds.WRN_LowercaseEllSuffix);
             }
         }
-        public sealed override FixAllProvider GetFixAllProvider()
+        public override FixAllProvider GetFixAllProvider()
         {
             return WellKnownFixAllProviders.BatchFixer;
         }
 
-        protected sealed override Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
+        protected override Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
         {
             var diagnostic = context.Diagnostics.First();
             var diagnosticSpan = diagnostic.Location.SourceSpan;

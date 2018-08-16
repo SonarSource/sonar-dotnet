@@ -48,6 +48,6 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override IEnumerable<SyntaxToken> GetIdentifiers(LocalDeclarationStatementSyntax node) =>
             node.Declaration.Variables.Select(v => v.Identifier);
 
-        protected sealed override GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.CSharp.GeneratedCodeRecognizer.Instance;
+        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.CSharp.GeneratedCodeRecognizer.Instance;
     }
 }

@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2018 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -41,6 +41,6 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             new MethodSignature(KnownType.System_Runtime_InteropServices_SafeHandle, "DangerousGetHandle")
         };
-        internal sealed override IEnumerable<MethodSignature> CheckedMethods => invalidMethods;
+        internal override IEnumerable<MethodSignature> CheckedMethods => invalidMethods;
     }
 }

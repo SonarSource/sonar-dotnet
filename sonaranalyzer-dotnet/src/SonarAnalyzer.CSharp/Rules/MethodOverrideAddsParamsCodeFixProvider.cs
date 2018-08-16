@@ -30,17 +30,17 @@ using SonarAnalyzer.Helpers;
 namespace SonarAnalyzer.Rules.CSharp
 {
     [ExportCodeFixProvider(LanguageNames.CSharp)]
-    public class MethodOverrideAddsParamsCodeFixProvider : SonarCodeFixProvider
+    public sealed class MethodOverrideAddsParamsCodeFixProvider : SonarCodeFixProvider
     {
         private const string Title = "Remove the 'params' modifier";
 
-        public sealed override ImmutableArray<string> FixableDiagnosticIds =>
+        public override ImmutableArray<string> FixableDiagnosticIds =>
             ImmutableArray.Create(MethodOverrideAddsParams.DiagnosticId);
 
-        public sealed override FixAllProvider GetFixAllProvider() =>
+        public override FixAllProvider GetFixAllProvider() =>
             WellKnownFixAllProviders.BatchFixer;
 
-        protected sealed override Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
+        protected override Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
         {
             var diagnostic = context.Diagnostics.First();
             var diagnosticSpan = diagnostic.Location.SourceSpan;

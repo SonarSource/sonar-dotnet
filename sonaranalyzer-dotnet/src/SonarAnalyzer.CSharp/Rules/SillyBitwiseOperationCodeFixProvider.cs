@@ -32,10 +32,10 @@ using SonarAnalyzer.Helpers;
 namespace SonarAnalyzer.Rules.CSharp
 {
     [ExportCodeFixProvider(LanguageNames.CSharp)]
-    public class SillyBitwiseOperationCodeFixProvider : SonarCodeFixProvider
+    public sealed class SillyBitwiseOperationCodeFixProvider : SonarCodeFixProvider
     {
         internal const string Title = "Remove bitwise operation";
-        public sealed override ImmutableArray<string> FixableDiagnosticIds
+        public override ImmutableArray<string> FixableDiagnosticIds
         {
             get
             {
@@ -43,12 +43,12 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        public sealed override FixAllProvider GetFixAllProvider()
+        public override FixAllProvider GetFixAllProvider()
         {
             return DocumentBasedFixAllProvider.Instance;
         }
 
-        protected sealed override Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
+        protected override Task RegisterCodeFixesAsync(SyntaxNode root, CodeFixContext context)
         {
             var diagnostic = context.Diagnostics.First();
             var diagnosticSpan = diagnostic.Location.SourceSpan;
