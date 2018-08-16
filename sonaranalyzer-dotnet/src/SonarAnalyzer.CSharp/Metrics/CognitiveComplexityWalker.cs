@@ -73,7 +73,7 @@ namespace SonarAnalyzer.Metrics.CSharp
 
         public override void Visit(SyntaxNode node)
         {
-            if (node.IsKind(UnsupportedSyntaxHelper.SyntaxKindLocalFunctionStatement))
+            if (node.IsKind(SyntaxKindEx.LocalFunctionStatement))
             {
                 VisitWithNesting(node, base.Visit);
             }

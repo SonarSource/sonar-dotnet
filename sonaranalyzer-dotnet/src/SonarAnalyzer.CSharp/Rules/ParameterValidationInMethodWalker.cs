@@ -32,9 +32,9 @@ namespace SonarAnalyzer.Rules.CSharp
         private static readonly ISet<SyntaxKind> SubMethodEquivalents =
             new HashSet<SyntaxKind>
             {
-                    UnsupportedSyntaxHelper.SyntaxKindLocalFunctionStatement,   // Local function
-                    SyntaxKind.SimpleLambdaExpression,                          // Action
-                    SyntaxKind.ParenthesizedLambdaExpression                    // Func
+                SyntaxKindEx.LocalFunctionStatement,        // Local function
+                SyntaxKind.SimpleLambdaExpression,          // Action
+                SyntaxKind.ParenthesizedLambdaExpression    // Func
             };
 
         private readonly SemanticModel semanticModel;
