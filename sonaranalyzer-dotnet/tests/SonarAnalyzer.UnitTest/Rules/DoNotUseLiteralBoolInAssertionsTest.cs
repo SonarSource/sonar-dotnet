@@ -31,36 +31,36 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [DataTestMethod]
         [DataRow("1.1.11")]
-        [DataRow(MetadataReferenceHelper.NuGetLatestVersion)]
+        [DataRow(Constants.NuGetLatestVersion)]
         [TestCategory("Rule")]
         public void DoNotUseLiteralBoolInAssertions_MsTest(string testFwkVersion)
         {
             Verifier.VerifyAnalyzer(@"TestCases\DoNotUseLiteralBoolInAssertions.MsTest.cs",
                 new DoNotUseLiteralBoolInAssertions(),
-                additionalReferences: MetadataReferenceHelper.FromNuGet("MSTest.TestFramework", testFwkVersion));
+                additionalReferences: NuGetMetadataReference.MSTestTestFramework[testFwkVersion]);
         }
 
         [DataTestMethod]
         [DataRow("2.5.7.10213")]
-        [DataRow(MetadataReferenceHelper.NuGetLatestVersion)]
+        [DataRow(Constants.NuGetLatestVersion)]
         [TestCategory("Rule")]
         public void DoNotUseLiteralBoolInAssertions_NUnit(string testFwkVersion)
         {
             Verifier.VerifyAnalyzer(@"TestCases\DoNotUseLiteralBoolInAssertions.NUnit.cs",
                 new DoNotUseLiteralBoolInAssertions(),
-                additionalReferences: MetadataReferenceHelper.FromNuGet("NUnit", testFwkVersion));
+                additionalReferences: NuGetMetadataReference.NUnit[testFwkVersion]);
         }
 
         [DataTestMethod]
         [DataRow("2.0.0")]
-        [DataRow(MetadataReferenceHelper.NuGetLatestVersion)]
+        [DataRow(Constants.NuGetLatestVersion)]
         [TestCategory("Rule")]
         public void DoNotUseLiteralBoolInAssertions_Xunit(string testFwkVersion)
         {
             Verifier.VerifyAnalyzer(@"TestCases\DoNotUseLiteralBoolInAssertions.Xunit.cs",
                 new DoNotUseLiteralBoolInAssertions(),
-                additionalReferences: MetadataReferenceHelper.FromNuGet("xunit.assert", testFwkVersion)
-                    .Concat(MetadataReferenceHelper.FromNuGet("xunit.extensibility.core", testFwkVersion))
+                additionalReferences: NuGetMetadataReference.XunitAssert[testFwkVersion]
+                    .Concat(NuGetMetadataReference.XunitExtensibilityCore[testFwkVersion])
                     .ToArray());
         }
     }

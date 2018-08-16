@@ -38,9 +38,9 @@ namespace SonarAnalyzer.UnitTest
             using (var workspace = new AdhocWorkspace())
             {
                 var document = workspace.CurrentSolution.AddProject("project", "project.dll", isCSharp ? LanguageNames.CSharp : LanguageNames.VisualBasic)
-                    .AddMetadataReference(MetadataReferenceHelper.FromFrameworkAssembly("mscorlib.dll"))
-                    .AddMetadataReference(MetadataReferenceHelper.FromFrameworkAssembly("System.dll"))
-                    .AddMetadataReference(MetadataReferenceHelper.FromFrameworkAssembly("System.Core.dll"))
+                    .AddMetadataReference(FrameworkMetadataReference.Mscorlib)
+                    .AddMetadataReference(FrameworkMetadataReference.System)
+                    .AddMetadataReference(FrameworkMetadataReference.SystemCore)
                     .AddMetadataReferences(additionalReferences)
                     .AddDocument("Class1", classDeclaration);
                 var compilation = document.Project.GetCompilationAsync().Result;

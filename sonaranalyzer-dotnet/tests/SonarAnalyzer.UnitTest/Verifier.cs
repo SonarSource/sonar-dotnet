@@ -362,9 +362,9 @@ namespace SonarAnalyzer.UnitTest
                 : LanguageNames.VisualBasic;
 
             var project = workspace.CurrentSolution.AddProject(assemblyName, $"{assemblyName}.dll", language)
-                .AddMetadataReference(MetadataReferenceHelper.FromFrameworkAssembly("mscorlib.dll"))
-                .AddMetadataReference(MetadataReferenceHelper.FromFrameworkAssembly("System.dll"))
-                .AddMetadataReference(MetadataReferenceHelper.FromFrameworkAssembly("System.Core.dll"))
+                .AddMetadataReference(FrameworkMetadataReference.Mscorlib)
+                .AddMetadataReference(FrameworkMetadataReference.System)
+                .AddMetadataReference(FrameworkMetadataReference.SystemCore)
                 .AddMetadataReferences(additionalReferences);
 
             // adding an extra file to the project

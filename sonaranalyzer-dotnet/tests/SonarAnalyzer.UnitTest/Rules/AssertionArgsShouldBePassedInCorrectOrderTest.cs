@@ -31,36 +31,36 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [DataTestMethod]
         [DataRow("1.1.11")]
-        [DataRow(MetadataReferenceHelper.NuGetLatestVersion)]
+        [DataRow(Constants.NuGetLatestVersion)]
         [TestCategory("Rule")]
         public void AssertionArgsShouldBePassedInCorrectOrder_MsTest(string testFwkVersion)
         {
             Verifier.VerifyAnalyzer(@"TestCases\AssertionArgsShouldBePassedInCorrectOrder.MsTest.cs",
                 new AssertionArgsShouldBePassedInCorrectOrder(),
-                additionalReferences: MetadataReferenceHelper.FromNuGet("MSTest.TestFramework", testFwkVersion));
+                additionalReferences: NuGetMetadataReference.MSTestTestFramework[testFwkVersion]);
         }
 
         [DataTestMethod]
         [DataRow("2.5.7.10213")]
-        [DataRow(MetadataReferenceHelper.NuGetLatestVersion)]
+        [DataRow(Constants.NuGetLatestVersion)]
         [TestCategory("Rule")]
         public void AssertionArgsShouldBePassedInCorrectOrder_NUnit(string testFwkVersion)
         {
             Verifier.VerifyAnalyzer(@"TestCases\AssertionArgsShouldBePassedInCorrectOrder.NUnit.cs",
                 new AssertionArgsShouldBePassedInCorrectOrder(),
-                additionalReferences: MetadataReferenceHelper.FromNuGet("NUnit", testFwkVersion));
+                additionalReferences: NuGetMetadataReference.NUnit[testFwkVersion]);
         }
 
         [DataTestMethod]
         [DataRow("2.0.0")]
-        [DataRow(MetadataReferenceHelper.NuGetLatestVersion)]
+        [DataRow(Constants.NuGetLatestVersion)]
         [TestCategory("Rule")]
         public void AssertionArgsShouldBePassedInCorrectOrder_XUnit(string testFwkVersion)
         {
             Verifier.VerifyAnalyzer(@"TestCases\AssertionArgsShouldBePassedInCorrectOrder.Xunit.cs",
                 new AssertionArgsShouldBePassedInCorrectOrder(),
-                additionalReferences: MetadataReferenceHelper.FromNuGet("xunit.assert", testFwkVersion)
-                    .Concat(MetadataReferenceHelper.FromNuGet("xunit.extensibility.core", testFwkVersion))
+                additionalReferences: NuGetMetadataReference.XunitAssert[testFwkVersion]
+                    .Concat(NuGetMetadataReference.XunitExtensibilityCore[testFwkVersion])
                     .ToArray());
         }
     }
