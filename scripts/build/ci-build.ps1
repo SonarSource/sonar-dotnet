@@ -355,29 +355,8 @@ function Invoke-JavaBuild() {
             -B -e -V `
         } -errorMessage "ERROR: Maven build deploy sonar FAILED."
     }
-    elseif ($isMaintenanceBranch) {
-        Write-Header "Building and deploying SonarC# for maintenance branch" $branchName
-
-        $currentVersion = Get-MavenExpression "project.version"
-        Set-MavenBuildVersion
-        $env:MAVEN_OPTS = "-Xmx1536m -Xms128m"
-
-        Exec { & mvn org.jacoco:jacoco-maven-plugin:prepare-agent deploy sonar:sonar `
-            "-Pcoverage-per-test,deploy-sonarsource,release,sonaranalyzer" `
-            "-Dmaven.test.redirectTestOutputToFile=false" `
-            "-Dsonar.analysis.buildNumber=${buildNumber}" `
-            "-Dsonar.analysis.pipeline=${buildNumber}" `
-            "-Dsonar.analysis.sha1=${githubSha1}" `
-            "-Dsonar.analysis.repository=${githubRepo}" `
-            "-Dsonar.branch.name=${branchName}" `
-            "-Dsonar.host.url=${sonarQubeUrl}" `
-            "-Dsonar.login=${sonarQubeToken}" `
-            "-Dsonar.projectVersion=${currentVersion}" `
-            -B -e -V `
-        } -errorMessage "ERROR: Maven deploy sonar FAILED."
-    }
-    elseif ($isFeatureBranch) {
-        Write-Header "Building and analyzing SonarC# for feature branch" $branchName
+    elseif ($isMaintenanceBranch -or $isFeatureBranch) {
+        Write-Header "Building and analyzing SonarC# for maitenance/feature branch" $branchName
 
         # Do not deploy a SNAPSHOT version but the release version related to this build and PR
         $currentVersion = Get-MavenExpression "project.version"
@@ -443,7 +422,10 @@ try {
         Write-Debug "PR target: ${githubPRTargetBranch}"
     }
     elseif ($isMaintenanceBranch) {
-        Write-Debug "Build kind: maintenance"
+        Write-Debug "Build kind: maintenance branch"
+    }
+    elseif ($isFeatureBranch) {
+        Write-Debug "Build kind: feature branch"
     }
     else {
         Write-Debug "Build kind: branch"
