@@ -17,7 +17,6 @@
         }
     }
 
-
     [TestClass]
     public class MultipleFaultsInEachMethod
     {
@@ -42,6 +41,18 @@
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethod]
         private void PrivateGenericTestMethod<T>() // Noncompliant {{Make this test method 'public' and non-generic.}}
 //                   ^^^^^^^^^^^^^^^^^^^^^^^^
+        {
+        }
+    }
+
+    [TestClass]
+    public class NonTestAttributesAreIgnored
+    {
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethod]
+        [System.Diagnostics.DebuggerStepThrough]
+        private void PrivateTestMethod() // Noncompliant {{Make this test method 'public'.}}
+//                   ^^^^^^^^^^^^^^^^^
         {
         }
     }

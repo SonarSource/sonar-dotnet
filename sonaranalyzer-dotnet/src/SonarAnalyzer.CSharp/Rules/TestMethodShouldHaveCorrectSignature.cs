@@ -43,60 +43,6 @@ namespace SonarAnalyzer.Rules.CSharp
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterSyntaxNodeActionInNonGenerated(AnalyzeMethod, SyntaxKind.MethodDeclaration);
-
-        private void AnalyzeMethod(SyntaxNodeAnalysisContext c)
-        {
-            var methodSymbol = c.SemanticModel.GetDeclaredSymbol(c.Node) as IMethodSymbol;
-            if (methodSymbol == null)
-            {
-                return;
-            }
-
-            var validator = GetValidator(methodSymbol);
-            var message = validator(methodSymbol);
-            if (message != null)
-            {
-                c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, methodSymbol.Locations.First(), message));
-            }
-        }
-
-        private static SignatureValidator GetValidator(IMethodSymbol method)
-        {
-            // Find the first matching attribute type in the table
-            var type = method.FindTestAttribute();
-            if (type == null)
-            {
-                return NullValidator;
-            }
-
-            attributeToConstraintsMap.TryGetValue(type, out var validator);
-            return validator;
-        }
-
-        private static string GetFaultMessage(IMethodSymbol methodSymbol, bool publicOnly, bool allowGenerics) =>
-            GetFaultMessageParts(methodSymbol, publicOnly, allowGenerics).ToSentence();
-
-        private static IEnumerable<string> GetFaultMessageParts(IMethodSymbol methodSymbol, bool publicOnly, bool allowGenerics)
-        {
-            if (methodSymbol.DeclaredAccessibility != Accessibility.Public && publicOnly)
-            {
-                yield return MakePublicMessage;
-            }
-
-            if (methodSymbol.IsGenericMethod && !allowGenerics)
-            {
-                yield return MakeNotGenericMessage;
-            }
-
-            // Invariant - applies to all test methods
-            if (methodSymbol.IsAsync && methodSymbol.ReturnsVoid)
-            {
-                yield return MakeNonAsyncOrTaskMessage;
-            }
-        }
-
         /// <summary>
         /// Validation method. Checks the supplied method and returns the error message,
         /// or null if there is no issue.
@@ -154,5 +100,58 @@ namespace SonarAnalyzer.Rules.CSharp
                 m => GetFaultMessage(m, publicOnly: false, allowGenerics: true)
             }
         };
+
+        protected override void Initialize(SonarAnalysisContext context) =>
+            context.RegisterSyntaxNodeActionInNonGenerated(AnalyzeMethod, SyntaxKind.MethodDeclaration);
+
+        private void AnalyzeMethod(SyntaxNodeAnalysisContext c)
+        {
+            var methodSymbol = c.SemanticModel.GetDeclaredSymbol(c.Node) as IMethodSymbol;
+            if (methodSymbol == null)
+            {
+                return;
+            }
+
+            var validator = GetValidator(methodSymbol);
+            var message = validator(methodSymbol);
+            if (message != null)
+            {
+                c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, methodSymbol.Locations.First(), message));
+            }
+        }
+
+        private static SignatureValidator GetValidator(IMethodSymbol method)
+        {
+            // Find the first matching attribute type in the table
+            var attributeKnownType = method.FindFirstTestMethodType();
+            if (attributeKnownType == null)
+            {
+                return NullValidator;
+            }
+
+            return attributeToConstraintsMap.GetValueOrDefault(attributeKnownType);
+        }
+
+        private static string GetFaultMessage(IMethodSymbol methodSymbol, bool publicOnly, bool allowGenerics) =>
+            GetFaultMessageParts(methodSymbol, publicOnly, allowGenerics).ToSentence();
+
+        private static IEnumerable<string> GetFaultMessageParts(IMethodSymbol methodSymbol, bool publicOnly, bool allowGenerics)
+        {
+            if (methodSymbol.DeclaredAccessibility != Accessibility.Public && publicOnly)
+            {
+                yield return MakePublicMessage;
+            }
+
+            if (methodSymbol.IsGenericMethod && !allowGenerics)
+            {
+                yield return MakeNotGenericMessage;
+            }
+
+            // Invariant - applies to all test methods
+            if (methodSymbol.IsAsync && methodSymbol.ReturnsVoid)
+            {
+                yield return MakeNonAsyncOrTaskMessage;
+            }
+        }
     }
 }

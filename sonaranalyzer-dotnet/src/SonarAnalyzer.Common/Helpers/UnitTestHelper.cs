@@ -96,56 +96,15 @@ namespace SonarAnalyzer.Helpers
                     a.AttributeClass.Is(KnownType.Xunit_TheoryAttribute) ||
                     a.AttributeClass.Is(KnownType.LegacyXunit_TheoryAttribute));
 
-        public static KnownType FindTestAttribute(this IMethodSymbol method)
-        {
-            return method.GetAttributes()
-                .Select(
-                    attribute =>
-                    {
-                        // MSTest
-                        if (attribute.AttributeClass.Is(KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_TestMethodAttribute))
-                        {
-                            return KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_TestMethodAttribute;
-                        }
-                        if (attribute.AttributeClass.Is(KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_DataTestMethodAttribute))
-                        {
-                            return KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_DataTestMethodAttribute;
-                        }
-
-                        // NUnit
-                        if (attribute.AttributeClass.Is(KnownType.NUnit_Framework_TestAttribute))
-                        {
-                            return KnownType.NUnit_Framework_TestAttribute;
-                        }
-                        if (attribute.AttributeClass.Is(KnownType.NUnit_Framework_TestCaseAttribute))
-                        {
-                            return KnownType.NUnit_Framework_TestCaseAttribute;
-                        }
-                        if (attribute.AttributeClass.Is(KnownType.NUnit_Framework_TestCaseSourceAttribute))
-                        {
-                            return KnownType.NUnit_Framework_TestCaseSourceAttribute;
-                        }
-                        if (attribute.AttributeClass.Is(KnownType.NUnit_Framework_TheoryAttribute))
-                        {
-                            return KnownType.NUnit_Framework_TheoryAttribute;
-                        }
-
-                        // XUnit
-                        if (attribute.AttributeClass.Is(KnownType.Xunit_FactAttribute))
-                        {
-                            return KnownType.Xunit_FactAttribute;
-                        }
-                        if (attribute.AttributeClass.Is(KnownType.Xunit_TheoryAttribute))
-                        {
-                            return KnownType.Xunit_TheoryAttribute;
-                        }
-                        if (attribute.AttributeClass.Is(KnownType.LegacyXunit_TheoryAttribute))
-                        {
-                            return KnownType.LegacyXunit_TheoryAttribute;
-                        }
-
-                        return (KnownType)null;
-                    }).FirstOrDefault();
-        }
+        /// <summary>
+        /// Returns the <see cref="KnownType"/> that indicates the type of the test method or
+        /// null if the method is not decorated with a known type.
+        /// </summary>
+        /// <remarks>We assume that a test is only marked with a single test attribute e.g.
+        /// not both [Fact] and [Theory]. If there are multiple attributes only one will be
+        /// returned.</remarks>
+        public static KnownType FindFirstTestMethodType(this IMethodSymbol method) =>
+            KnownTestMethodAttributes.FirstOrDefault(known =>
+                    method.GetAttributes().Any(att => att.AttributeClass.Is(known)));
     }
 }
