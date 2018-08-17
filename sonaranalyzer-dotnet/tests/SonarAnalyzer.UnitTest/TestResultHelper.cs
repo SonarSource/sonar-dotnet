@@ -32,7 +32,7 @@ namespace SonarAnalyzer.UnitTest
     public class TestResultHelper
     {
         [TestMethod]
-        public void ParseDate_Tests()
+        public void TestResultHelper_ParseDate_Tests()
         {
             ParseDate("some gibberish").Should().Be(DateTime.MinValue);
             ParseDate("2018-08-17").Should().Be(DateTime.MinValue);
@@ -40,7 +40,7 @@ namespace SonarAnalyzer.UnitTest
         }
 
         [TestMethod]
-        public void GetPreviousRunDate_Tests()
+        public void TestResultHelper_GetPreviousRunDate_Tests()
         {
             var expected = new DateTime(2018, 8, 17);
             GetPreviousRunDate(new[]
@@ -49,6 +49,8 @@ namespace SonarAnalyzer.UnitTest
                 "Deploy_FirstName LastName 2018-08-17 14_52_41",
                 "Deploy_FirstName LastName 2018-08-17 14_52_41"
             }).Should().Be(expected);
+
+            GetPreviousRunDate(Array.Empty<string>()).Should().Be(DateTime.MinValue);
 
             GetPreviousRunDate(new[]
             {
@@ -72,9 +74,17 @@ namespace SonarAnalyzer.UnitTest
             GetPreviousRunDate(
                 Directory.GetDirectories(Path.GetDirectoryName(context.TestRunDirectory)));
 
-        private static DateTime GetPreviousRunDate(IEnumerable<string> directoryNames) =>
+        private static DateTime GetPreviousRunDate(IEnumerable<string> directoryNames)
+        {
             // Directory names are alphabetically comparable, skip the latest result
-            ParseDate(directoryNames.OrderByDescending(name => name).Skip(1).FirstOrDefault());
+            var previousTestRunDir = directoryNames
+                .OrderByDescending(name => name)
+                .Skip(1)
+                .FirstOrDefault();
+
+            // Coalesce to avoid NRE in case there are less than 2 directories
+            return ParseDate(previousTestRunDir ?? string.Empty);
+        }
 
         /// <summary>
         /// Returns parsed DateTime from MSBuild test run directory name. If cannot parse, returns DateTime.MinValue.
