@@ -200,6 +200,17 @@ namespace Tests.Diagnostics
                 x = "";
             }
         }
+
+        public void f14(string x)
+        {
+            (((x))) = ""; // Noncompliant
+        }
+
+        public void f15(string x)
+        {
+            string y = ((x));
+            ((x)) = "";
+        }
     }
 
     public class FalsePositives

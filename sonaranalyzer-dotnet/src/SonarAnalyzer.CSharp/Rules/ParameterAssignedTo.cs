@@ -73,12 +73,11 @@ namespace SonarAnalyzer.Rules.CSharp
                 .Union(new[] { assignment.Right })
                 .SelectMany(s => s.DescendantNodes(n => true))
                 .OfType<IdentifierNameSyntax>()
-                .Select(node =>
+                .Any(node =>
                 {
                     var nodeSymbol = semanticModel.GetSymbolInfo(node).Symbol;
                     return parameterSymbol.Equals(nodeSymbol) && IsReadAccess(node);
-                })
-                .Aggregate(false, (isRead, accumulator) => accumulator || isRead);
+                });
         }
 
         protected override SyntaxNode GetAssignedNode(AssignmentExpressionSyntax assignment) => assignment.Left;
