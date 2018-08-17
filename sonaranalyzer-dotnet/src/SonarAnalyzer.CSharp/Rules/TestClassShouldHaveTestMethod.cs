@@ -43,6 +43,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static readonly ISet<KnownType> HandledTestClassAttributes = new HashSet<KnownType>
         {
+            // xUnit does not have have attributes to identity test classes
             KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_TestClassAttribute,
             KnownType.NUnit_Framework_TestFixtureAttribute
         };
@@ -55,6 +56,15 @@ namespace SonarAnalyzer.Rules.CSharp
             KnownType.NUnit_Framework_TestCaseAttribute,
             KnownType.NUnit_Framework_TestCaseSourceAttribute,
             KnownType.NUnit_Framework_TheoryAttribute
+        };
+
+        private static readonly ISet<KnownType> HandledGlobalSetupAndCleanUpAttributes = new HashSet<KnownType>
+        {
+            // Only applies to MSTest.
+            // NUnit has equivalent attributes, but they can only be applied to classes
+            // marked with [SetupFixture], which cannot contain tests.
+            KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_AssemblyInitializeAttribute,
+            KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_AssemblyCleanupAttribute,
         };
 
         protected override void Initialize(SonarAnalysisContext context)
@@ -92,6 +102,10 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private bool IsExceptionToTheRule(INamedTypeSymbol classSymbol) =>
             classSymbol.IsAbstract ||
-            (classSymbol.BaseType.IsAbstract && HasAnyTestMethod(classSymbol.BaseType));
+            (classSymbol.BaseType.IsAbstract && HasAnyTestMethod(classSymbol.BaseType)) ||
+            HasSetupOrCleanupAttributes(classSymbol);
+
+        private bool HasSetupOrCleanupAttributes(INamedTypeSymbol classSymbol) =>
+            classSymbol.GetMembers().OfType<IMethodSymbol>().Any(m => m.GetAttributes(HandledGlobalSetupAndCleanUpAttributes).Any());
     }
 }
