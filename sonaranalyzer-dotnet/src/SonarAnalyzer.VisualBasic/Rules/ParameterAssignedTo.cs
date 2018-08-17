@@ -85,9 +85,9 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         protected override SyntaxNode GetAssignedNode(AssignmentStatementSyntax assignment) => assignment.Left;
 
-        protected override bool IsReadBefore(SemanticModel semanticModel, ISymbol symbol, AssignmentStatementSyntax assignment)
+        protected override bool IsReadBefore(SemanticModel semanticModel, ISymbol parameterSymbol, AssignmentStatementSyntax assignment)
         {
-            // FIXME implement logic
+            // Implement logic https://jira.sonarsource.com/browse/SONARVB-236
             return false;
         }
 

@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
@@ -68,16 +67,18 @@ namespace SonarAnalyzer.Rules.CSharp
             return result;
         }
 
-        protected override bool IsReadBefore(SemanticModel semanticModel, ISymbol symbol, AssignmentExpressionSyntax assignment)
+        protected override bool IsReadBefore(SemanticModel semanticModel, ISymbol parameterSymbol, AssignmentExpressionSyntax assignment)
         {
-            return GetPreviousStatements(assignment).Union(new[] { assignment.Right })
-                .Select(s =>
+            return GetPreviousStatements(assignment)
+                .Union(new[] { assignment.Right })
+                .SelectMany(s => s.DescendantNodes(n => true))
+                .OfType<IdentifierNameSyntax>()
+                .Select(node =>
                 {
-                    var collector = new ParameterAccessCollector(semanticModel, symbol);
-                    collector.Visit(s);
-                    return collector.IsRead;
+                    var nodeSymbol = semanticModel.GetSymbolInfo(node).Symbol;
+                    return (parameterSymbol.Equals(nodeSymbol) && IsReadAccess(node));
                 })
-                .Aggregate((isRead, accumulator) => accumulator || isRead);
+                .Aggregate(false, (isRead, accumulator) => accumulator || isRead);
         }
 
         protected override SyntaxNode GetAssignedNode(AssignmentExpressionSyntax assignment) => assignment.Left;
@@ -100,32 +101,13 @@ namespace SonarAnalyzer.Rules.CSharp
                 : previousStatements;
         }
 
-        private class ParameterAccessCollector : CSharpSyntaxWalker
+        private bool IsReadAccess(IdentifierNameSyntax node)
         {
-            public bool IsRead { get; private set; }
-            private readonly SemanticModel semanticModel;
-            private readonly ISymbol parameterSymbol;
+            bool isLeftSideOfAssignment =
+                node.Parent is AssignmentExpressionSyntax assignmentExpression &&
+                assignmentExpression.Left == node;
 
-            public ParameterAccessCollector(SemanticModel semanticModel, ISymbol parameterSymbol)
-            {
-                this.semanticModel = semanticModel;
-                this.parameterSymbol = parameterSymbol;
-                IsRead = false;
-            }
-
-            public override void VisitIdentifierName(IdentifierNameSyntax node)
-            {
-                var nodeSymbol = semanticModel.GetSymbolInfo(node).Symbol;
-                IsRead |= (parameterSymbol == nodeSymbol && IsReadAccess(node));
-            }
-
-            private bool IsReadAccess(IdentifierNameSyntax node)
-            {
-                return !IsLeftSideOfAssignment(node);
-                bool IsLeftSideOfAssignment(SyntaxNode syntaxNode) =>
-                    syntaxNode.Parent is AssignmentExpressionSyntax assignmentExpression &&
-                    assignmentExpression.Left == syntaxNode;
-            }
+            return !isLeftSideOfAssignment;
         }
     }
 }

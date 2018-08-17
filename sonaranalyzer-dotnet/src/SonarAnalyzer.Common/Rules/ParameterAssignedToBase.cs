@@ -62,7 +62,7 @@ namespace SonarAnalyzer.Rules
 
         protected abstract bool IsAssignmentToParameter(ISymbol symbol);
 
-        protected abstract bool IsReadBefore(SemanticModel semanticModel, ISymbol symbol, TAssignmentStatementSyntax assignment);
+        protected abstract bool IsReadBefore(SemanticModel semanticModel, ISymbol parameterSymbol, TAssignmentStatementSyntax assignment);
 
         protected abstract SyntaxNode GetAssignedNode(TAssignmentStatementSyntax assignment);
 
