@@ -85,6 +85,12 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         protected override SyntaxNode GetAssignedNode(AssignmentStatementSyntax assignment) => assignment.Left;
 
+        protected override bool IsReadBefore(SemanticModel semanticModel, ISymbol symbol, AssignmentStatementSyntax assignment)
+        {
+            // FIXME implement logic
+            return false;
+        }
+
         protected override sealed GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.VisualBasic.GeneratedCodeRecognizer.Instance;
     }
 }
