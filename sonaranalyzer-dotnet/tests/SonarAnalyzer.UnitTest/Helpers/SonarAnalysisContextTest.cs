@@ -27,6 +27,7 @@ using FluentAssertions;
 using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.Helpers
 {
@@ -106,7 +107,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
                     {
                         // Verifier expects all diagnostics to increase the counter in order to check that all rules call the
                         // extension method and not the direct `ReportDiagnostic`.
-                        Verifier.IncrementReportCount(context.Diagnostic.Id);
+                        DiagnosticVerifier.SuppressionHandler.IncrementReportCount(context.Diagnostic.Id);
                         context.ReportDiagnostic(context.Diagnostic);
                     }
                 };

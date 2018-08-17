@@ -20,104 +20,105 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;
+using System.IO;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Common;
-using CS = Microsoft.CodeAnalysis.CSharp;
-using VB = Microsoft.CodeAnalysis.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.TestFramework
 {
-    public struct SolutionBuilder
+    internal struct SolutionBuilder
     {
-        private readonly Solution solution;
+        private const string GeneratedAssemblyName = "project";
 
-        public IReadOnlyList<ProjectId> ProjectIds => solution.ProjectIds;
+        private Solution Solution { get; }
 
-        public ImmutableArray<ParseOptions> DefaultParseOptions { get; }
+        public IReadOnlyList<ProjectId> ProjectIds => Solution.ProjectIds;
 
         private SolutionBuilder(Solution solution)
         {
-            this.solution = solution;
-
-            DefaultParseOptions = ImmutableArray.Create<ParseOptions>(
-                new CS.CSharpParseOptions(CS.LanguageVersion.CSharp5),
-                new CS.CSharpParseOptions(CS.LanguageVersion.CSharp6),
-                new CS.CSharpParseOptions(CS.LanguageVersion.CSharp7),
-                new VB.VisualBasicParseOptions(VB.LanguageVersion.VisualBasic12),
-                new VB.VisualBasicParseOptions(VB.LanguageVersion.VisualBasic14),
-                new VB.VisualBasicParseOptions(VB.LanguageVersion.VisualBasic15)
-            );
+            Solution = solution;
         }
 
-        public ProjectBuilder AddProject(string projectName, string fileExtension)
+        public ProjectBuilder AddTestProject(AnalyzerLanguage language, bool createExtraEmptyFile = true)
         {
-            var language = fileExtension == GetFileExtension(AnalyzerLanguage.CSharp)
-               ? AnalyzerLanguage.CSharp
-               : AnalyzerLanguage.VisualBasic;
-
-            return AddProject(projectName, language);
+            return AddProject(language, $"{GeneratedAssemblyName}{ProjectIds.Count}.Tests", createExtraEmptyFile);
         }
 
-        public ProjectBuilder AddProject(string projectName, AnalyzerLanguage language)
+        public ProjectBuilder AddProject(AnalyzerLanguage language, bool createExtraEmptyFile = true)
         {
-            var project = solution.AddProject(projectName, projectName, GetLanguageName(language));
+            return AddProject(language, $"{GeneratedAssemblyName}{ProjectIds.Count}", createExtraEmptyFile);
+        }
 
-            return ProjectBuilder.FromProject(project)
-                .AddReference(MetadataReferenceHelper.FromFrameworkAssembly("mscorlib.dll"))
-                .AddReference(MetadataReferenceHelper.FromFrameworkAssembly("System.dll"))
-                .AddReference(MetadataReferenceHelper.FromFrameworkAssembly("System.Core.dll"))
+        private ProjectBuilder AddProject(AnalyzerLanguage language, string projectName, bool createExtraEmptyFile)
+        {
+            var languageName = language == AnalyzerLanguage.CSharp
+                ? LanguageNames.CSharp
+                : LanguageNames.VisualBasic;
 
+            var project = Solution.AddProject(projectName, projectName, languageName);
+
+            var projectBuilder = ProjectBuilder.FromProject(project)
+                .AddReferences(
+                    FrameworkMetadataReference.Mscorlib,
+                    FrameworkMetadataReference.System,
+                    FrameworkMetadataReference.SystemCore);
+
+            if (createExtraEmptyFile)
+            {
                 // adding an extra file to the project
                 // this won't trigger any issues, but it keeps a reference to the original ParseOption, so
                 // if an analyzer/codefix changes the language version, Roslyn throws an ArgumentException
-                .AddSnippet(string.Empty, fileName: "ExtraEmptyFile.g." + language.GetFileExtension());
-        }
+                projectBuilder = projectBuilder
+                    .AddSnippet(string.Empty, fileName: "ExtraEmptyFile.g." + language.GetFileExtension());
+            }
 
-        private static string GetLanguageName(AnalyzerLanguage language) =>
-            language == AnalyzerLanguage.CSharp
-                ? LanguageNames.CSharp
-                : LanguageNames.VisualBasic;
+            return projectBuilder;
+        }
 
         public static SolutionBuilder Create() =>
             FromSolution(new AdhocWorkspace().CurrentSolution);
 
+        public static SolutionBuilder CreateSolutionFromPaths(IEnumerable<string> paths, params MetadataReference[] additionalReferences)
+        {
+            if (paths == null || !paths.Any())
+            {
+                throw new ArgumentException("Please specify at least one file path to analyze.", nameof(paths));
+            }
+
+            var extensions = paths.Select(path => Path.GetExtension(path)).Distinct().ToList();
+            if (extensions.Count != 1)
+            {
+                throw new ArgumentException("Please use a collection of paths with the same extension", nameof(paths));
+            }
+
+            return Create()
+                .AddProject(AnalyzerLanguage.FromPath(paths.First()))
+                .AddDocuments(paths)
+                .AddReferences(additionalReferences)
+                .GetSolution();
+        }
+
         public static SolutionBuilder FromSolution(Solution solution) =>
             new SolutionBuilder(solution);
 
-        public IReadOnlyList<Compilation> Compile(IEnumerable<ParseOptions> parseOptions = null)
+        public IReadOnlyList<Compilation> Compile(params ParseOptions[] parseOptions)
         {
-            parseOptions = parseOptions ?? DefaultParseOptions;
+            var options = ParseOptionsHelper.GetParseOptionsOrDefault(parseOptions);
 
-            return solution
+            return Solution
                 .Projects
-                .SelectMany(project => parseOptions
-                    .Where(GetParseOptionsFilter(project.Language))
-                    .Select(options => GetCompilation(project, options)))
+                .SelectMany(project => options
+                    .Where(ParseOptionsHelper.GetFilterByLanguage(project.Language))
+                    .Select(o => GetCompilation(project, o)))
                 .ToList()
                 .AsReadOnly();
         }
+
         private static Compilation GetCompilation(Project project, ParseOptions options) =>
             project
                 .WithParseOptions(options)
                 .GetCompilationAsync()
                 .Result;
-
-        private static Func<ParseOptions, bool> GetParseOptionsFilter(string language)
-        {
-            if (language == LanguageNames.CSharp)
-            {
-                return parseOptions => parseOptions is CS.CSharpParseOptions;
-            }
-            else if (language == LanguageNames.VisualBasic)
-            {
-                return parseOptions => parseOptions is VB.VisualBasicParseOptions;
-            }
-            throw new NotSupportedException($"Not supported language '{language}'");
-        }
-
-        private static string GetFileExtension(AnalyzerLanguage language) =>
-            "." + language.GetFileExtension();
     }
 }

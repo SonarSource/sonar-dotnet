@@ -28,28 +28,40 @@ using Microsoft.CodeAnalysis;
 
 namespace SonarAnalyzer.UnitTest.TestFramework
 {
-    public struct ProjectBuilder
+    internal struct ProjectBuilder
     {
         private const string FIXED_MESSAGE = "Fixed";
 
         private readonly Lazy<SolutionBuilder> solutionWrapper;
 
-        public Project Project { get; }
+        private Project Project { get; }
 
-        public SolutionBuilder GetSolution() =>
-            solutionWrapper.Value;
+        private string FileExtension { get; }
 
         private ProjectBuilder(Project project)
         {
             Project = project;
+            FileExtension = project.Language == LanguageNames.CSharp ? ".cs" : ".vb";
+
             solutionWrapper = new Lazy<SolutionBuilder>(() => SolutionBuilder.FromSolution(project.Solution));
         }
+
+        public SolutionBuilder GetSolution() =>
+            solutionWrapper.Value;
+
+        public Compilation GetCompilation(ParseOptions parseOptions = null) =>
+            parseOptions != null
+                ? Project.WithParseOptions(parseOptions).GetCompilationAsync().Result
+                : Project.GetCompilationAsync().Result;
+
+        public Document FindDocument(string name) =>
+            Project.Documents.Single(d => d.Name == name);
 
         public ProjectBuilder AddReference(MetadataReference reference) =>
             FromProject(Project.AddMetadataReference(reference));
 
-        public ProjectBuilder AddReferences(IEnumerable<MetadataReference> reference) =>
-            FromProject(Project.AddMetadataReferences(reference));
+        public ProjectBuilder AddReferences(params MetadataReference[] references) =>
+            FromProject(Project.AddMetadataReferences(references));
 
         public ProjectBuilder AddProjectReference(Func<SolutionBuilder, ProjectId> getProjectId) =>
             FromProject(Project.AddProjectReference(new ProjectReference(getProjectId(GetSolution()))));
@@ -57,15 +69,8 @@ namespace SonarAnalyzer.UnitTest.TestFramework
         public ProjectBuilder AddProjectReferences(Func<SolutionBuilder, IEnumerable<ProjectId>> getProjectIds) =>
             FromProject(Project.AddProjectReferences(getProjectIds(GetSolution()).Select(id => new ProjectReference(id))));
 
-        public ProjectBuilder AddDocuments(IEnumerable<string> paths, bool removeAnalysisComments = false)
-        {
-            var projectBuilder = this;
-            foreach (var path in paths)
-            {
-                projectBuilder = projectBuilder.AddDocument(path, removeAnalysisComments);
-            }
-            return projectBuilder;
-        }
+        public ProjectBuilder AddDocuments(IEnumerable<string> paths) =>
+            paths.Aggregate(this, (projectBuilder, path) => projectBuilder.AddDocument(path));
 
         public ProjectBuilder AddDocument(string path, bool removeAnalysisComments = false)
         {
@@ -76,7 +81,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
             var fileInfo = new FileInfo(path);
 
-            if (fileInfo.Extension != GetFileExtension(Project))
+            if (fileInfo.Extension != FileExtension)
             {
                 throw new ArgumentException($"The file extension '{fileInfo.Extension}' does not" +
                     $" match the project language '{Project.Language}'.", nameof(path));
@@ -92,7 +97,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 throw new ArgumentNullException(nameof(code));
             }
 
-            fileName = fileName ?? $"snippet{Project.Documents.Count()}{GetFileExtension(Project)}";
+            fileName = fileName ?? $"snippet{Project.Documents.Count()}{FileExtension}";
 
             return AddDocument(Project, fileName, code, removeAnalysisComments);
         }
@@ -137,9 +142,6 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
             return line.Replace(match.Value, string.Empty).TrimEnd();
         }
-
-        private static string GetFileExtension(Project project) =>
-            project.Language == LanguageNames.CSharp ? ".cs" : ".vb";
 
         public static ProjectBuilder FromProject(Project project) =>
             new ProjectBuilder(project);
