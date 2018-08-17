@@ -76,7 +76,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 .Select(node =>
                 {
                     var nodeSymbol = semanticModel.GetSymbolInfo(node).Symbol;
-                    return (parameterSymbol.Equals(nodeSymbol) && IsReadAccess(node));
+                    return parameterSymbol.Equals(nodeSymbol) && IsReadAccess(node);
                 })
                 .Aggregate(false, (isRead, accumulator) => accumulator || isRead);
         }
