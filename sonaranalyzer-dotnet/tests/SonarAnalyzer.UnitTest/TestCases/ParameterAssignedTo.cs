@@ -191,5 +191,26 @@ namespace Tests.Diagnostics
         {
             param = param + 1;
         }
+
+        public void f13(string x)
+        {
+            var baz = x == null;
+            if (baz)
+            {
+                x = "";
+            }
+        }
+    }
+
+    public class FalsePositives
+    {
+        public string foo(string x)
+        {
+            if (x == null)
+            {
+                x = ""; // Noncompliant FP
+            }
+            return x;
+        }
     }
 }
