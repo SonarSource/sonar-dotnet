@@ -42,7 +42,7 @@ You can visualize the differences using:
 1. `cd actual`
 1. `git diff --cached`
 
-Please review all added/removed/updated issue to confirm they are wanted. When this is done run `.\UpdateExpected.ps1` to update the list of expected issues.
+Please review all added/removed/updated issue to confirm they are wanted. When this is done run `.\update-expected.ps1` to update the list of expected issues.
 
 ### Manual Tests
 
