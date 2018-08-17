@@ -31,13 +31,13 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [DataTestMethod]
         [DataRow("3.0.20105.1")]
-        [DataRow(MetadataReferenceHelper.NuGetLatestVersion)]
+        [DataRow(Constants.NuGetLatestVersion)]
         [TestCategory("Rule")]
         public void HttpPostControllerActionShouldValidateInput(string aspNetMvcVersion)
         {
             Verifier.VerifyAnalyzer(@"TestCases\HttpPostControllerActionShouldValidateInput.cs",
                 new HttpPostControllerActionShouldValidateInput(),
-                additionalReferences: MetadataReferenceHelper.FromNuGet("Microsoft.AspNet.Mvc", aspNetMvcVersion).ToArray());
+                additionalReferences:  NuGetMetadataReference.MicrosoftAspNetMvc[aspNetMvcVersion]);
         }
     }
 }

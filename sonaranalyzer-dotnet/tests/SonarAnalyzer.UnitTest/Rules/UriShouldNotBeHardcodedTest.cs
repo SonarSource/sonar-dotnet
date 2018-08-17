@@ -40,31 +40,31 @@ namespace SonarAnalyzer.UnitTest.Rules
         [DataTestMethod]
         [TestCategory("Rule")]
         [DataRow("3.0.20105.1")]
-        [DataRow(MetadataReferenceHelper.NuGetLatestVersion)]
+        [DataRow(Constants.NuGetLatestVersion)]
         public void UriShouldNotBeHardcoded_CSharp_VirtualPath_AspNet(string aspNetMvcVersion)
         {
             Verifier.VerifyAnalyzer(@"TestCases\UriShouldNotBeHardcoded.AspNet.cs",
                 new UriShouldNotBeHardcoded(),
-                additionalReferences: new[] { MetadataReferenceHelper.FromFrameworkAssembly("System.Web.dll") }
-                    .Concat(MetadataReferenceHelper.FromNuGet("Microsoft.AspNet.Mvc", aspNetMvcVersion))
+                additionalReferences: new[] { FrameworkMetadataReference.SystemWeb }
+                    .Concat(NuGetMetadataReference.MicrosoftAspNetMvc[aspNetMvcVersion])
                     .ToArray());
         }
 
         [DataTestMethod]
         [TestCategory("Rule")]
         [DataRow("2.0.4", "2.0.3")]
-        [DataRow(MetadataReferenceHelper.NuGetLatestVersion, MetadataReferenceHelper.NuGetLatestVersion)]
+        [DataRow(Constants.NuGetLatestVersion, Constants.NuGetLatestVersion)]
         public void UriShouldNotBeHardcoded_CSharp_VirtualPath_AspNetCore(string aspNetCoreMvcVersion, string aspNetCoreRoutingVersion)
         {
             Verifier.VerifyAnalyzer(@"TestCases\UriShouldNotBeHardcoded.AspNetCore.cs",
                 new UriShouldNotBeHardcoded(),
                 additionalReferences:
                     // for VirtualFileResult
-                    MetadataReferenceHelper.FromNuGet("Microsoft.AspNetCore.Mvc.Core", aspNetCoreMvcVersion)
+                    NuGetMetadataReference.MicrosoftAspNetCoreMvcCore[aspNetCoreMvcVersion]
                     // for Controller
-                    .Concat(MetadataReferenceHelper.FromNuGet("Microsoft.AspNetCore.Mvc.ViewFeatures", aspNetCoreMvcVersion))
+                    .Concat(NuGetMetadataReference.MicrosoftAspNetCoreMvcViewFeatures[aspNetCoreMvcVersion])
                     // for IRouter and VirtualPathData
-                    .Concat(MetadataReferenceHelper.FromNuGet("Microsoft.AspNetCore.Routing.Abstractions", aspNetCoreRoutingVersion))
+                    .Concat(NuGetMetadataReference.MicrosoftAspNetCoreRoutingAbstractions[aspNetCoreRoutingVersion])
                     .ToArray());
         }
 

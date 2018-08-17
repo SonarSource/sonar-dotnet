@@ -33,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             Verifier.VerifyAnalyzer(@"TestCases\CookieShouldNotContainSensitiveData.cs",
                 new CookieShouldNotContainSensitiveData(),
-                additionalReferences: MetadataReferenceHelper.FromFrameworkAssembly("System.Web.dll"));
+                additionalReferences: FrameworkMetadataReference.SystemWeb);
         }
     }
 }

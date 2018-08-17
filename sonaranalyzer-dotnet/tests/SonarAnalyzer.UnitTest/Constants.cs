@@ -18,22 +18,10 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-extern alias csharp;
-using csharp::SonarAnalyzer.Rules.CSharp;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-namespace SonarAnalyzer.UnitTest.Rules
+namespace SonarAnalyzer.UnitTest
 {
-    [TestClass]
-    public class ReturnEmptyCollectionInsteadOfNullTest
+    internal static class Constants
     {
-        [TestMethod]
-        [TestCategory("Rule")]
-        public void ReturnEmptyCollectionInsteadOfNull()
-        {
-            Verifier.VerifyAnalyzer(@"TestCases\ReturnEmptyCollectionInsteadOfNull.cs",
-                new ReturnEmptyCollectionInsteadOfNull(),
-                additionalReferences: FrameworkMetadataReference.SystemXml);
-        }
+        internal const string NuGetLatestVersion = "LATEST";
     }
 }

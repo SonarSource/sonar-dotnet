@@ -31,52 +31,52 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [DataRow("4.0.0")]
-        [DataRow(MetadataReferenceHelper.NuGetLatestVersion)]
+        [DataRow(Constants.NuGetLatestVersion)]
         [TestCategory("Rule")]
         public void MethodShouldBeNameAccordingToSynchronicity(string tasksVersion)
         {
             Verifier.VerifyAnalyzer(@"TestCases\MethodShouldBeNameAccordingToSynchronicity.cs",
                 new MethodShouldBeNameAccordingToSynchronicity(),
-                additionalReferences: MetadataReferenceHelper.FromNuGet("System.Threading.Tasks.Extensions", tasksVersion));
+                additionalReferences: NuGetMetadataReference.SystemThreadingTasksExtensions[tasksVersion]);
         }
 
         [DataTestMethod]
         [DataRow("1.1.11")]
-        [DataRow(MetadataReferenceHelper.NuGetLatestVersion)]
+        [DataRow(Constants.NuGetLatestVersion)]
         [TestCategory("Rule")]
         public void MethodShouldBeNameAccordingToSynchronicity_MsTest(string testFwkVersion)
         {
             Verifier.VerifyAnalyzer(@"TestCases\MethodShouldBeNameAccordingToSynchronicity.MsTest.cs",
                 new MethodShouldBeNameAccordingToSynchronicity(),
-                additionalReferences: MetadataReferenceHelper.FromNuGet("MSTest.TestFramework", testFwkVersion)
-                    .Concat(MetadataReferenceHelper.FromNuGet("System.Threading.Tasks.Extensions", "4.0.0"))
+                additionalReferences: NuGetMetadataReference.MSTestTestFramework[testFwkVersion]
+                    .Concat(NuGetMetadataReference.SystemThreadingTasksExtensions["4.0.0"])
                     .ToArray());
         }
 
         [DataTestMethod]
         [DataRow("2.5.7.10213")]
-        [DataRow(MetadataReferenceHelper.NuGetLatestVersion)]
+        [DataRow(Constants.NuGetLatestVersion)]
         [TestCategory("Rule")]
         public void MethodShouldBeNameAccordingToSynchronicity_NUnit(string testFwkVersion)
         {
             Verifier.VerifyAnalyzer(@"TestCases\MethodShouldBeNameAccordingToSynchronicity.NUnit.cs",
                 new MethodShouldBeNameAccordingToSynchronicity(),
-                additionalReferences: MetadataReferenceHelper.FromNuGet("NUnit", testFwkVersion)
-                    .Concat(MetadataReferenceHelper.FromNuGet("System.Threading.Tasks.Extensions", "4.0.0"))
+                additionalReferences: NuGetMetadataReference.NUnit[testFwkVersion]
+                    .Concat(NuGetMetadataReference.SystemThreadingTasksExtensions["4.0.0"])
                     .ToArray());
         }
 
         [DataTestMethod]
         [DataRow("2.0.0")]
-        [DataRow(MetadataReferenceHelper.NuGetLatestVersion)]
+        [DataRow(Constants.NuGetLatestVersion)]
         [TestCategory("Rule")]
         public void MethodShouldBeNameAccordingToSynchronicity_Xunit(string testFwkVersion)
         {
             Verifier.VerifyAnalyzer(@"TestCases\MethodShouldBeNameAccordingToSynchronicity.Xunit.cs",
                 new MethodShouldBeNameAccordingToSynchronicity(),
-                additionalReferences: MetadataReferenceHelper.FromNuGet("xunit.assert", testFwkVersion)
-                    .Concat(MetadataReferenceHelper.FromNuGet("xunit.extensibility.core", testFwkVersion))
-                    .Concat(MetadataReferenceHelper.FromNuGet("System.Threading.Tasks.Extensions", "4.0.0"))
+                additionalReferences: NuGetMetadataReference.XunitAssert[testFwkVersion]
+                    .Concat(NuGetMetadataReference.XunitExtensibilityCore[testFwkVersion])
+                    .Concat(NuGetMetadataReference.SystemThreadingTasksExtensions["4.0.0"])
                     .ToArray());
         }
     }

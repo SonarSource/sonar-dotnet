@@ -33,7 +33,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             Verifier.VerifyAnalyzer(@"TestCases\SetLocaleForDataTypes.cs",
                 new SetLocaleForDataTypes(),
-                additionalReferences: MetadataReferenceHelper.FromFrameworkAssembly("System.Data.dll"));
+                additionalReferences: FrameworkMetadataReference.SystemData);
         }
     }
 }

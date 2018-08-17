@@ -37,9 +37,9 @@ namespace SonarAnalyzer.UnitTest.Helpers
             using (var workspace = new AdhocWorkspace())
             {
                 var document = workspace.CurrentSolution.AddProject("foo", "foo.dll", LanguageNames.CSharp)
-                    .AddMetadataReference(MetadataReferenceHelper.FromFrameworkAssembly("mscorlib.dll"))
-                    .AddMetadataReference(MetadataReferenceHelper.FromFrameworkAssembly("System.dll"))
-                    .AddMetadataReference(MetadataReferenceHelper.FromFrameworkAssembly("System.Core.dll"))
+                    .AddMetadataReference(FrameworkMetadataReference.Mscorlib)
+                    .AddMetadataReference(FrameworkMetadataReference.System)
+                    .AddMetadataReference(FrameworkMetadataReference.SystemCore)
                     .AddDocument(name, content);
 
                 var compilation = document.Project.GetCompilationAsync().Result;
@@ -55,9 +55,9 @@ namespace SonarAnalyzer.UnitTest.Helpers
             using (var workspace = new AdhocWorkspace())
             {
                 var document = workspace.CurrentSolution.AddProject("foo", "foo.dll", LanguageNames.CSharp)
-                    .AddMetadataReference(MetadataReferenceHelper.FromFrameworkAssembly("mscorlib.dll"))
-                    .AddMetadataReference(MetadataReferenceHelper.FromFrameworkAssembly("System.dll"))
-                    .AddMetadataReference(MetadataReferenceHelper.FromFrameworkAssembly("System.Core.dll"))
+                    .AddMetadataReference(FrameworkMetadataReference.Mscorlib)
+                    .AddMetadataReference(FrameworkMetadataReference.System)
+                    .AddMetadataReference(FrameworkMetadataReference.SystemCore)
                     .AddDocument("Foo.cs", content);
 
                 var compilation = document.Project.GetCompilationAsync().Result;
