@@ -24,7 +24,9 @@ using FluentAssertions;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest.Helpers
 {
@@ -63,22 +65,19 @@ namespace NS
         [TestInitialize]
         public void Compile()
         {
-            using (var workspace = new AdhocWorkspace())
-            {
-                var document = workspace.CurrentSolution.AddProject("foo", "foo.dll", LanguageNames.CSharp)
-                    .AddMetadataReference(FrameworkMetadataReference.Mscorlib)
-                    .AddMetadataReference(FrameworkMetadataReference.System)
-                    .AddMetadataReference(FrameworkMetadataReference.SystemCore)
-                    .AddDocument("test", TestInput);
-                var compilation = document.Project.GetCompilationAsync().Result;
-                var tree = compilation.SyntaxTrees.First();
-                semanticModel = compilation.GetSemanticModel(tree);
-                statements = tree.GetRoot().DescendantNodes()
-                    .OfType<MethodDeclarationSyntax>()
-                    .First(m => m.Identifier.ValueText == "TestMethod").Body
-                    .DescendantNodes()
-                    .OfType<StatementSyntax>().ToList();
-            }
+            var compilation = SolutionBuilder
+                .Create()
+                .AddProject(AnalyzerLanguage.CSharp, createExtraEmptyFile: false)
+                .AddSnippet(TestInput)
+                .GetCompilation();
+
+            var tree = compilation.SyntaxTrees.First();
+            semanticModel = compilation.GetSemanticModel(tree);
+            statements = tree.GetRoot().DescendantNodes()
+                .OfType<MethodDeclarationSyntax>()
+                .First(m => m.Identifier.ValueText == "TestMethod").Body
+                .DescendantNodes()
+                .OfType<StatementSyntax>().ToList();
         }
 
         [TestMethod]

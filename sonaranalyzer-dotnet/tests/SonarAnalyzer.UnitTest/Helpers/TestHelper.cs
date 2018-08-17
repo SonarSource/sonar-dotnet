@@ -27,6 +27,8 @@ using FluentAssertions;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using SonarAnalyzer.Common;
+using SonarAnalyzer.UnitTest.TestFramework;
 
 namespace SonarAnalyzer.UnitTest
 {
@@ -35,18 +37,16 @@ namespace SonarAnalyzer.UnitTest
         public static (SyntaxTree, SemanticModel) Compile(string classDeclaration, bool isCSharp = true,
             params MetadataReference[] additionalReferences)
         {
-            using (var workspace = new AdhocWorkspace())
-            {
-                var document = workspace.CurrentSolution.AddProject("project", "project.dll", isCSharp ? LanguageNames.CSharp : LanguageNames.VisualBasic)
-                    .AddMetadataReference(FrameworkMetadataReference.Mscorlib)
-                    .AddMetadataReference(FrameworkMetadataReference.System)
-                    .AddMetadataReference(FrameworkMetadataReference.SystemCore)
-                    .AddMetadataReferences(additionalReferences)
-                    .AddDocument("Class1", classDeclaration);
-                var compilation = document.Project.GetCompilationAsync().Result;
-                var tree = compilation.SyntaxTrees.First();
-                return (tree, compilation.GetSemanticModel(tree));
-            }
+            var language = isCSharp ? AnalyzerLanguage.CSharp : AnalyzerLanguage.VisualBasic;
+
+            var compilation = SolutionBuilder
+                .Create()
+                .AddProject(language, createExtraEmptyFile: false)
+                .AddSnippet(classDeclaration)
+                .AddReferences(additionalReferences)
+                .GetCompilation();
+            var tree = compilation.SyntaxTrees.First();
+            return (tree, compilation.GetSemanticModel(tree));
         }
 
         public static MethodDeclarationSyntax GetMethod(this SyntaxTree syntaxTree, string name, int skip = 0) =>

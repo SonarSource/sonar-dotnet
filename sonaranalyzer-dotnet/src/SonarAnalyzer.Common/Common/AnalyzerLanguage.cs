@@ -147,5 +147,18 @@ namespace SonarAnalyzer.Common
 
             throw new NotSupportedException($"Can't get file extension for '{ToString()}'.");
         }
+
+        public static AnalyzerLanguage FromPath(string path)
+        {
+            switch (System.IO.Path.GetExtension(path).ToUpperInvariant())
+            {
+                case ".CS":
+                    return CSharp;
+                case ".VB":
+                    return VisualBasic;
+                default:
+                    return None;
+            }
+        }
     }
 }

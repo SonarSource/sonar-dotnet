@@ -22,9 +22,7 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.IO;
 using System.Linq;
-using System.Threading;
 using FluentAssertions;
 using FluentAssertions.Execution;
 using Microsoft.CodeAnalysis;
@@ -36,44 +34,11 @@ using VB = Microsoft.CodeAnalysis.VisualBasic;
 
 namespace SonarAnalyzer.UnitTest.TestFramework
 {
-    public static class NewVerifier
+    internal static class DiagnosticVerifier
     {
         private const string AnalyzerFailedDiagnosticId = "AD0001";
 
-        public static void Verify(string path, DiagnosticAnalyzer analyzer, params MetadataReference[] additionalReferences)
-        {
-            var solution = SolutionBuilder
-                .Create()
-                .AddProject("TestProject", Path.GetExtension(path))
-                .AddDocument(path)
-                .AddReferences(additionalReferences)
-                .GetSolution();
-
-            foreach (var compilation in solution.Compile())
-            {
-                Verify(compilation, analyzer);
-            }
-        }
-
-        public static void VerifySnippet(string snippet, AnalyzerLanguage language, DiagnosticAnalyzer analyzer,
-            params MetadataReference[] additionalReferences)
-        {
-            var solution = SolutionBuilder
-               .Create()
-               .AddProject("TestProject", language)
-               .AddSnippet(snippet)
-               .AddReferences(additionalReferences)
-               .GetSolution();
-
-            // TODO: add [CallerLineNumber]int lineNumber = 0
-            // then add ability to shift result reports with this line number
-            foreach (var compilation in solution.Compile())
-            {
-                Verify(compilation, analyzer);
-            }
-        }
-
-        public static void Verify(Compilation compilation, DiagnosticAnalyzer diagnosticAnalyzer, Action<DiagnosticAnalyzer, Compilation> additionalVerify = null)
+        public static void Verify(Compilation compilation, DiagnosticAnalyzer diagnosticAnalyzer)
         {
             try
             {
@@ -87,23 +52,31 @@ namespace SonarAnalyzer.UnitTest.TestFramework
 
                 foreach (var diagnostic in diagnostics)
                 {
-                    VerifyIssue(expectedIssues, issue => issue.IsPrimary, diagnostic.Location, diagnostic.GetMessage(), out var issueId);
+                    VerifyIssue(expectedIssues,
+                        issue => issue.IsPrimary,
+                        diagnostic.Location,
+                        diagnostic.GetMessage(),
+                        out var issueId);
 
-                    diagnostic.AdditionalLocations
+                    var secondaryLocations = diagnostic.AdditionalLocations
                         .Select((location, i) => diagnostic.GetSecondaryLocation(i))
                         .OrderBy(x => x.Location.GetLineNumberToReport())
-                        .ThenBy(x => x.Location.GetLineSpan().StartLinePosition.Character)
-                        .ToList()
-                        .ForEach(secondaryLocation =>
-                        {
-                            VerifyIssue(expectedIssues, issue => issue.IssueId == issueId && !issue.IsPrimary,
-                                secondaryLocation.Location, secondaryLocation.Message, out issueId);
-                        });
+                        .ThenBy(x => x.Location.GetLineSpan().StartLinePosition.Character);
+
+                    foreach (var secondaryLocation in secondaryLocations)
+                    {
+                        VerifyIssue(expectedIssues,
+                            issue => issue.IssueId == issueId && !issue.IsPrimary,
+                            secondaryLocation.Location,
+                            secondaryLocation.Message,
+                            out issueId);
+                    }
                 }
 
                 if (expectedIssues.Count != 0)
                 {
-                    Execute.Assertion.FailWith($"Issue expected but not raised on line(s) {string.Join(",", expectedIssues.Select(i => i.LineNumber))}.");
+                    Execute.Assertion.FailWith($"Issue expected but not raised on line(s) " +
+                        $"{string.Join(",", expectedIssues.Select(i => i.LineNumber))}.");
                 }
 
                 // When there are no diagnostics reported from the test (for example the FileLines analyzer
@@ -114,8 +87,6 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                     SuppressionHandler.ExtensionMethodsCalledForAllDiagnostics(diagnosticAnalyzer).Should()
                         .BeTrue("The ReportDiagnosticWhenActive should be used instead of ReportDiagnostic");
                 }
-
-                additionalVerify?.Invoke(diagnosticAnalyzer, compilation);
             }
             finally
             {
@@ -123,7 +94,55 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             }
         }
 
-        private static void VerifyIssue(IList<IIssueLocation> expectedIssues, Func<IIssueLocation, bool> issueFilter, Location location, string message, out string issueId)
+        public static IEnumerable<Diagnostic> GetDiagnostics(Compilation compilation, DiagnosticAnalyzer diagnosticAnalyzer)
+        {
+            var ids = diagnosticAnalyzer.SupportedDiagnostics
+                .Select(diagnostic => diagnostic.Id)
+                .ToHashSet();
+
+            return GetAllDiagnostics(compilation, new[] { diagnosticAnalyzer })
+                .Where(d => ids.Contains(d.Id));
+        }
+
+        public static void VerifyNoIssueReported(Compilation compilation, DiagnosticAnalyzer diagnosticAnalyzer)
+        {
+            GetDiagnostics(compilation, diagnosticAnalyzer).Should().BeEmpty();
+        }
+
+        public static ImmutableArray<Diagnostic> GetAllDiagnostics(Compilation compilation,
+            IEnumerable<DiagnosticAnalyzer> diagnosticAnalyzers)
+        {
+            var compilationOptions = compilation.Language == LanguageNames.CSharp
+                ? (CompilationOptions)new CS.CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary, allowUnsafe: true)
+                : new VB.VisualBasicCompilationOptions(OutputKind.DynamicallyLinkedLibrary);
+
+            var supportedDiagnostics = diagnosticAnalyzers
+                    .SelectMany(analyzer => analyzer.SupportedDiagnostics)
+                    .Select(diagnostic =>
+                        new KeyValuePair<string, ReportDiagnostic>(diagnostic.Id, ReportDiagnostic.Warn))
+                    .Concat(new[]
+                    {
+                        new KeyValuePair<string, ReportDiagnostic>(AnalyzerFailedDiagnosticId, ReportDiagnostic.Error)
+                    });
+
+            compilationOptions = compilationOptions.WithSpecificDiagnosticOptions(supportedDiagnostics);
+
+            var diagnostics = compilation
+                .WithOptions(compilationOptions)
+                .WithAnalyzers(diagnosticAnalyzers.ToImmutableArray())
+                .GetAllDiagnosticsAsync()
+                .Result;
+
+            VerifyNoExceptionThrown(diagnostics);
+
+            return diagnostics;
+        }
+
+        private static void VerifyNoExceptionThrown(IEnumerable<Diagnostic> diagnostics) =>
+            diagnostics.Where(d => d.Id == AnalyzerFailedDiagnosticId).Should().BeEmpty();
+
+        private static void VerifyIssue(IList<IIssueLocation> expectedIssues, Func<IIssueLocation, bool> issueFilter,
+            Location location, string message, out string issueId)
         {
             var lineNumber = location.GetLineNumberToReport();
 
@@ -160,48 +179,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             issueId = expectedIssue.IssueId;
         }
 
-        internal static IEnumerable<Diagnostic> GetDiagnostics(Compilation compilation, DiagnosticAnalyzer diagnosticAnalyzer)
-        {
-            var ids = new HashSet<string>(diagnosticAnalyzer.SupportedDiagnostics.Select(diagnostic => diagnostic.Id));
-
-            var diagnostics = GetAllDiagnostics(compilation, new[] { diagnosticAnalyzer }).ToList();
-            VerifyNoExceptionThrown(diagnostics);
-
-            return diagnostics.Where(d => ids.Contains(d.Id));
-        }
-
-        private static void VerifyNoExceptionThrown(IEnumerable<Diagnostic> diagnostics)
-        {
-            diagnostics.Where(d => d.Id == AnalyzerFailedDiagnosticId).Should().BeEmpty();
-        }
-
-        private static IEnumerable<Diagnostic> GetAllDiagnostics(Compilation compilation,
-            IEnumerable<DiagnosticAnalyzer> diagnosticAnalyzers)
-        {
-            var compilationOptions = compilation.Language == LanguageNames.CSharp
-                ? (CompilationOptions)new CS.CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary, allowUnsafe: true)
-                : new VB.VisualBasicCompilationOptions(OutputKind.DynamicallyLinkedLibrary);
-            var supportedDiagnostics = diagnosticAnalyzers
-                    .SelectMany(analyzer => analyzer.SupportedDiagnostics)
-                    .ToList();
-            compilationOptions = compilationOptions.WithSpecificDiagnosticOptions(
-                supportedDiagnostics
-                    .Select(diagnostic =>
-                        new KeyValuePair<string, ReportDiagnostic>(diagnostic.Id, ReportDiagnostic.Warn))
-                    .Union(
-                        new[]
-                        {
-                                new KeyValuePair<string, ReportDiagnostic>(AnalyzerFailedDiagnosticId, ReportDiagnostic.Error)
-                        }));
-
-            var compilationWithOptions = compilation.WithOptions(compilationOptions);
-            var compilationWithAnalyzer = compilationWithOptions
-                .WithAnalyzers(diagnosticAnalyzers.ToImmutableArray());
-
-            return compilationWithAnalyzer.GetAllDiagnosticsAsync().Result;
-        }
-
-        private static class SuppressionHandler
+        internal static class SuppressionHandler
         {
             private static bool isHooked = false;
 
@@ -229,7 +207,7 @@ namespace SonarAnalyzer.UnitTest.TestFramework
                 SonarAnalysisContext.ShouldDiagnosticBeReported = null;
             }
 
-            internal static void IncrementReportCount(string ruleId)
+            public static void IncrementReportCount(string ruleId)
             {
                 counters.AddOrUpdate(ruleId, addValueFactory: key => 1, updateValueFactory: (key, count) => count + 1);
             }

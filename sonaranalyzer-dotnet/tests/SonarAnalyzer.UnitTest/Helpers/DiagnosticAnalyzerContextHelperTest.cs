@@ -18,12 +18,14 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Linq;
 using System.Threading.Tasks;
 using FluentAssertions;
-using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.UnitTest.TestFramework;
 using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
 
@@ -34,37 +36,26 @@ namespace SonarAnalyzer.UnitTest.Helpers
     {
         private static void VerifyEmpty(string name, string content, DiagnosticAnalyzer diagnosticAnalyzer)
         {
-            using (var workspace = new AdhocWorkspace())
-            {
-                var document = workspace.CurrentSolution.AddProject("foo", "foo.dll", LanguageNames.CSharp)
-                    .AddMetadataReference(FrameworkMetadataReference.Mscorlib)
-                    .AddMetadataReference(FrameworkMetadataReference.System)
-                    .AddMetadataReference(FrameworkMetadataReference.SystemCore)
-                    .AddDocument(name, content);
+            var compilation = SolutionBuilder
+               .Create()
+               .AddProject(AnalyzerLanguage.CSharp, createExtraEmptyFile: false)
+               .AddSnippet(content, name)
+               .GetCompilation();
 
-                var compilation = document.Project.GetCompilationAsync().Result;
-
-                var diagnostics = Verifier.GetDiagnostics(compilation, diagnosticAnalyzer);
-
-                diagnostics.Should().HaveCount(0);
-            }
+            DiagnosticVerifier.VerifyNoIssueReported(compilation, diagnosticAnalyzer);
         }
 
-        private static async Task<bool> IsGeneratedAsync(string content, GeneratedCodeRecognizer generatedCodeRecognizer)
+        private static bool IsGenerated(string content, GeneratedCodeRecognizer generatedCodeRecognizer)
         {
-            using (var workspace = new AdhocWorkspace())
-            {
-                var document = workspace.CurrentSolution.AddProject("foo", "foo.dll", LanguageNames.CSharp)
-                    .AddMetadataReference(FrameworkMetadataReference.Mscorlib)
-                    .AddMetadataReference(FrameworkMetadataReference.System)
-                    .AddMetadataReference(FrameworkMetadataReference.SystemCore)
-                    .AddDocument("Foo.cs", content);
+            var compilation = SolutionBuilder
+               .Create()
+               .AddProject(AnalyzerLanguage.CSharp, createExtraEmptyFile: false)
+               .AddSnippet(content)
+               .GetCompilation();
 
-                var compilation = document.Project.GetCompilationAsync().Result;
-                var tree = await document.GetSyntaxTreeAsync();
+            var tree = compilation.SyntaxTrees.First();
 
-                return tree.IsGenerated(generatedCodeRecognizer, compilation);
-            }
+            return tree.IsGenerated(generatedCodeRecognizer, compilation);
         }
 
         [TestMethod]
@@ -217,7 +208,7 @@ End Module";
         }
 
         [TestMethod]
-        public async Task IsGenerated_On_GeneratedTree()
+        public void IsGenerated_On_GeneratedTree()
         {
             const string source =
 @"namespace Generated
@@ -232,12 +223,12 @@ End Module";
     }
 }";
 
-            var result = await IsGeneratedAsync(source, SonarAnalyzer.Helpers.CSharp.GeneratedCodeRecognizer.Instance);
+            var result = IsGenerated(source, SonarAnalyzer.Helpers.CSharp.GeneratedCodeRecognizer.Instance);
             result.Should().BeTrue();
         }
 
         [TestMethod]
-        public async Task IsGenerated_On_NonGeneratedTree()
+        public void IsGenerated_On_NonGeneratedTree()
         {
             const string source =
 @"namespace NonGenerated
@@ -247,7 +238,7 @@ End Module";
     }
 }";
 
-            var result = await IsGeneratedAsync(source, SonarAnalyzer.Helpers.CSharp.GeneratedCodeRecognizer.Instance);
+            var result = IsGenerated(source, SonarAnalyzer.Helpers.CSharp.GeneratedCodeRecognizer.Instance);
             result.Should().BeFalse();
         }
     }
