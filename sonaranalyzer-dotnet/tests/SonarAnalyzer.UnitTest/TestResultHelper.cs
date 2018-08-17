@@ -73,8 +73,8 @@ namespace SonarAnalyzer.UnitTest
                 Directory.GetDirectories(Path.GetDirectoryName(context.TestRunDirectory)));
 
         private static DateTime GetPreviousRunDate(IEnumerable<string> directoryNames) =>
-            // Directories are alphabetically comparable, skip the latest result
-            ParseDate(directoryNames.OrderBy(dir => dir).Reverse().Skip(1).Max());
+            // Directory names are alphabetically comparable, skip the latest result
+            ParseDate(directoryNames.OrderByDescending(name => name).Skip(1).FirstOrDefault());
 
         /// <summary>
         /// Returns parsed DateTime from MSBuild test run directory name. If cannot parse, returns DateTime.MinValue.
