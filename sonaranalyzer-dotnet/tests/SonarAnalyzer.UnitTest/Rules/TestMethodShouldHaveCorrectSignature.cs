@@ -63,5 +63,28 @@ namespace SonarAnalyzer.UnitTest.Rules
                     .Concat(NuGetMetadataReference.XunitExtensibilityCore[testFwkVersion])
                     .ToArray());
         }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void TestMethodShouldHaveCorrectSignature_Xunit_Legacy()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldHaveCorrectSignature.Xunit.Legacy.cs",
+                new TestMethodShouldHaveCorrectSignature(),
+                additionalReferences: MetadataReferenceHelper.FromNuGet("xunit", "1.9.1")
+                .Concat(MetadataReferenceHelper.FromNuGet("xunit.extensions", "1.9.1"))
+                .ToArray());
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void TestMethodShouldHaveCorrectSignature_MSTest_Miscellaneous()
+        {
+            // Additional test cases e.g. partial classes, and methods with multiple faults.
+            // We have to specify a test framework for the tests, but it doesn't really matter which
+            // one, so we're using MSTest and only testing a single version.
+            Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldHaveCorrectSignature.Misc.cs",
+                new TestMethodShouldHaveCorrectSignature(),
+                additionalReferences: MetadataReferenceHelper.FromNuGet("MSTest.TestFramework", "1.1.11"));
+        }
     }
 }

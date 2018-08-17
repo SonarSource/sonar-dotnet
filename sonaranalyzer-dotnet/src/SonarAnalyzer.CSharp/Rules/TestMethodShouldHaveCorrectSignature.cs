@@ -23,7 +23,6 @@ using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
@@ -44,79 +43,111 @@ namespace SonarAnalyzer.Rules.CSharp
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
+        /// <summary>
+        /// Validation method. Checks the supplied method and returns the error message,
+        /// or null if there is no issue.
+        /// </summary>
+        private delegate string SignatureValidator(IMethodSymbol method);
+
+        private static readonly SignatureValidator NullValidator = m => null;
+
+        // We currently support three test framework, each of which supports multiple test method attribute markers, and each of which
+        // has differing constraints (public/private, generic/non-generic).
+        // Rather than writing lots of conditional code, we're using a simple table-driven approach.
+        // Currently we use the same validation method for all method types, but we could have a
+        // different validation method for each type in future if necessary.
+        private static readonly Dictionary<KnownType, SignatureValidator> attributeToConstraintsMap = new Dictionary<KnownType, SignatureValidator>
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
-                {
-                    var classDeclaration = (ClassDeclarationSyntax)c.Node;
-                    var classSymbol = c.SemanticModel.GetDeclaredSymbol(classDeclaration);
-                    if (classSymbol == null)
-                    {
-                        return;
-                    }
+            // MSTest
+            {
+                KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_TestMethodAttribute,
+                m => GetFaultMessage(m, publicOnly: true, allowGenerics: false)
+            },
+            {
+                KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_DataTestMethodAttribute,
+                m => GetFaultMessage(m, publicOnly: true, allowGenerics: false)
+            },
 
-                    var allFaultyMethods = classSymbol.GetMembers()
-                        .OfType<IMethodSymbol>()
-                        .Select(m => new { method = m, testType = ToKnownTestType(m) })
-                        .Where(tuple => tuple.testType != null)
-                        .Select(
-                            tuple =>
-                            new
-                            {
-                                Location = tuple.method.Locations.First(),
-                                Message = GetFaults(tuple.method, tuple.testType).ToSentence()
-                            })
-                        .Where(tuple => tuple.Message != null);
+            // NUnit
+            {
+                KnownType.NUnit_Framework_TestAttribute,
+                m => GetFaultMessage(m, publicOnly: true, allowGenerics: false)
+            },
+            {
+                KnownType.NUnit_Framework_TestCaseAttribute,
+                m => GetFaultMessage(m, publicOnly: true, allowGenerics: true)
+            },
+            {
+                KnownType.NUnit_Framework_TestCaseSourceAttribute,
+                m => GetFaultMessage(m, publicOnly: true, allowGenerics: true)
+            },
+            {
+                KnownType.NUnit_Framework_TheoryAttribute,
+                m => GetFaultMessage(m, publicOnly: true, allowGenerics: false)
+            },
 
-                    foreach (var faultyMethod in allFaultyMethods)
-                    {
-                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, faultyMethod.Location,
-                            faultyMethod.Message));
-                    }
-                },
-                SyntaxKind.ClassDeclaration);
+            // XUnit
+            {
+                KnownType.Xunit_FactAttribute,
+                m => GetFaultMessage(m, publicOnly: false, allowGenerics: false)
+            },
+            {
+                KnownType.Xunit_TheoryAttribute,
+                m => GetFaultMessage(m, publicOnly: false, allowGenerics: true)
+            },
+            {
+                KnownType.LegacyXunit_TheoryAttribute,
+                m => GetFaultMessage(m, publicOnly: false, allowGenerics: true)
+            }
+        };
+
+        protected override void Initialize(SonarAnalysisContext context) =>
+            context.RegisterSyntaxNodeActionInNonGenerated(AnalyzeMethod, SyntaxKind.MethodDeclaration);
+
+        private void AnalyzeMethod(SyntaxNodeAnalysisContext c)
+        {
+            var methodSymbol = c.SemanticModel.GetDeclaredSymbol(c.Node) as IMethodSymbol;
+            if (methodSymbol == null)
+            {
+                return;
+            }
+
+            var validator = GetValidator(methodSymbol);
+            var message = validator(methodSymbol);
+            if (message != null)
+            {
+                c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, methodSymbol.Locations.First(), message));
+            }
         }
 
-        private static KnownType ToKnownTestType(IMethodSymbol method)
+        private static SignatureValidator GetValidator(IMethodSymbol method)
         {
-            return method.GetAttributes()
-                .Select(
-                    attribute =>
-                    {
-                        if (attribute.AttributeClass.Is(KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_TestMethodAttribute))
-                        {
-                            return KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_TestMethodAttribute;
-                        }
-                        else if (attribute.AttributeClass.Is(KnownType.NUnit_Framework_TestAttribute))
-                        {
-                            return KnownType.NUnit_Framework_TestAttribute;
-                        }
-                        else if (attribute.AttributeClass.Is(KnownType.Xunit_FactAttribute))
-                        {
-                            return KnownType.Xunit_FactAttribute;
-                        }
-                        else
-                        {
-                            return null;
-                        }
-                    })
-                .FirstOrDefault();
+            // Find the first matching attribute type in the table
+            var attributeKnownType = method.FindFirstTestMethodType();
+            if (attributeKnownType == null)
+            {
+                return NullValidator;
+            }
+
+            return attributeToConstraintsMap.GetValueOrDefault(attributeKnownType);
         }
 
-        private static IEnumerable<string> GetFaults(IMethodSymbol methodSymbol, KnownType knownType)
+        private static string GetFaultMessage(IMethodSymbol methodSymbol, bool publicOnly, bool allowGenerics) =>
+            GetFaultMessageParts(methodSymbol, publicOnly, allowGenerics).ToSentence();
+
+        private static IEnumerable<string> GetFaultMessageParts(IMethodSymbol methodSymbol, bool publicOnly, bool allowGenerics)
         {
-            if (methodSymbol.DeclaredAccessibility != Accessibility.Public &&
-                knownType != KnownType.Xunit_FactAttribute)
+            if (methodSymbol.DeclaredAccessibility != Accessibility.Public && publicOnly)
             {
                 yield return MakePublicMessage;
             }
 
-            if (methodSymbol.IsGenericMethod)
+            if (methodSymbol.IsGenericMethod && !allowGenerics)
             {
                 yield return MakeNotGenericMessage;
             }
 
+            // Invariant - applies to all test methods
             if (methodSymbol.IsAsync && methodSymbol.ReturnsVoid)
             {
                 yield return MakeNonAsyncOrTaskMessage;
