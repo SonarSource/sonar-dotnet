@@ -85,6 +85,12 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         protected override SyntaxNode GetAssignedNode(AssignmentStatementSyntax assignment) => assignment.Left;
 
+        protected override bool IsReadBefore(SemanticModel semanticModel, ISymbol parameterSymbol, AssignmentStatementSyntax assignment)
+        {
+            // Implement logic https://jira.sonarsource.com/browse/SONARVB-236
+            return false;
+        }
+
         protected override sealed GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.VisualBasic.GeneratedCodeRecognizer.Instance;
     }
 }

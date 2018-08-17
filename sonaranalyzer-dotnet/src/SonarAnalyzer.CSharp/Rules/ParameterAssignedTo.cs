@@ -18,6 +18,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
@@ -38,18 +39,9 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override DiagnosticDescriptor Rule => rule;
 
         private static readonly ImmutableArray<SyntaxKind> kindsOfInterest = ImmutableArray.Create(
-            SyntaxKind.SimpleAssignmentExpression,
-            SyntaxKind.AddAssignmentExpression,
-            SyntaxKind.SubtractAssignmentExpression,
-            SyntaxKind.MultiplyAssignmentExpression,
-            SyntaxKind.DivideAssignmentExpression,
-            SyntaxKind.ModuloAssignmentExpression,
-            SyntaxKind.AndAssignmentExpression,
-            SyntaxKind.ExclusiveOrAssignmentExpression,
-            SyntaxKind.OrAssignmentExpression,
-            SyntaxKind.LeftShiftAssignmentExpression,
-            SyntaxKind.RightShiftAssignmentExpression
+            SyntaxKind.SimpleAssignmentExpression
             );
+
         public override ImmutableArray<SyntaxKind> SyntaxKindsOfInterest => kindsOfInterest;
 
         protected override bool IsAssignmentToCatchVariable(ISymbol symbol, SyntaxNode node)
@@ -72,13 +64,50 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             var parameterSymbol = symbol as IParameterSymbol;
             var result = parameterSymbol?.RefKind == RefKind.None;
-
             return result;
+        }
+
+        protected override bool IsReadBefore(SemanticModel semanticModel, ISymbol parameterSymbol, AssignmentExpressionSyntax assignment)
+        {
+            return GetPreviousStatements(assignment)
+                .Union(new[] { assignment.Right })
+                .SelectMany(s => s.DescendantNodes(n => true))
+                .OfType<IdentifierNameSyntax>()
+                .Any(node =>
+                {
+                    var nodeSymbol = semanticModel.GetSymbolInfo(node).Symbol;
+                    return parameterSymbol.Equals(nodeSymbol) && IsReadAccess(node);
+                });
         }
 
         protected override SyntaxNode GetAssignedNode(AssignmentExpressionSyntax assignment) => assignment.Left;
 
         protected sealed override GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.CSharp.GeneratedCodeRecognizer.Instance;
+
+        /// <summary>
+        /// Returns all statements before the specified statement within the containing method.
+        /// This method recursively traverses all parent blocks of the provided statement.
+        /// </summary>
+        private static IEnumerable<SyntaxNode> GetPreviousStatements(SyntaxNode statement)
+        {
+            var previousStatements = statement.Parent.ChildNodes()
+                .OfType<StatementSyntax>()
+                .TakeWhile(x => x != statement)
+                .Reverse();
+
+            return statement.Parent is StatementSyntax parentStatement
+                ? previousStatements.Union(GetPreviousStatements(parentStatement))
+                : previousStatements;
+        }
+
+        private bool IsReadAccess(IdentifierNameSyntax node)
+        {
+            bool isLeftSideOfAssignment =
+                node.Parent is AssignmentExpressionSyntax assignmentExpression &&
+                assignmentExpression.Left == node;
+
+            return !isLeftSideOfAssignment;
+        }
     }
 }
 

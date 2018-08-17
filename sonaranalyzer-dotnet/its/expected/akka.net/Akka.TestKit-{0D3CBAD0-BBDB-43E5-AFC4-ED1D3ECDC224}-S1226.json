@@ -2,32 +2,6 @@
 "issues":  [
 {
 "id":  "S1226",
-"message":  "Introduce a new variable instead of reusing the parameter 'matchedEventHandler'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\EventFilter\Internal\EventFilterApplier.cs",
-"region":  {
-"startLine":  108,
-"startColumn":  13,
-"endLine":  108,
-"endColumn":  32
-}
-}
-},
-{
-"id":  "S1226",
-"message":  "Introduce a new variable instead of reusing the parameter 'sender'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\Internal\InternalTestActorRef.cs",
-"region":  {
-"startLine":  74,
-"startColumn":  13,
-"endLine":  74,
-"endColumn":  19
-}
-}
-},
-{
-"id":  "S1226",
 "message":  "Introduce a new variable instead of reusing the parameter 'name'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.TestKit\Internal\InternalTestActorRef.cs",
@@ -49,19 +23,6 @@
 "startColumn":  17,
 "endLine":  137,
 "endColumn":  27
-}
-}
-},
-{
-"id":  "S1226",
-"message":  "Introduce a new variable instead of reusing the parameter 'props'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\Internal\InternalTestActorRef.cs",
-"region":  {
-"startLine":  143,
-"startColumn":  17,
-"endLine":  143,
-"endColumn":  22
 }
 }
 },
@@ -101,71 +62,6 @@
 "startColumn":  33,
 "endLine":  343,
 "endColumn":  39
-}
-}
-},
-{
-"id":  "S1226",
-"message":  "Introduce a new variable instead of reusing the parameter 'msgAssert'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Expect.cs",
-"region":  {
-"startLine":  172,
-"startColumn":  13,
-"endLine":  172,
-"endColumn":  22
-}
-}
-},
-{
-"id":  "S1226",
-"message":  "Introduce a new variable instead of reusing the parameter 'senderAssert'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Expect.cs",
-"region":  {
-"startLine":  173,
-"startColumn":  13,
-"endLine":  173,
-"endColumn":  25
-}
-}
-},
-{
-"id":  "S1226",
-"message":  "Introduce a new variable instead of reusing the parameter 'areEqual'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Expect.cs",
-"region":  {
-"startLine":  328,
-"startColumn":  13,
-"endLine":  328,
-"endColumn":  21
-}
-}
-},
-{
-"id":  "S1226",
-"message":  "Introduce a new variable instead of reusing the parameter 'max'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestKitBase_Within.cs",
-"region":  {
-"startLine":  65,
-"startColumn":  13,
-"endLine":  65,
-"endColumn":  16
-}
-}
-},
-{
-"id":  "S1226",
-"message":  "Introduce a new variable instead of reusing the parameter 'timeout'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.TestKit\TestLatch.cs",
-"region":  {
-"startLine":  141,
-"startColumn":  17,
-"endLine":  141,
-"endColumn":  24
 }
 }
 }

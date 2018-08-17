@@ -2,19 +2,6 @@
 "issues":  [
 {
 "id":  "S1226",
-"message":  "Introduce a new variable instead of reusing the parameter 'aggregateException'.",
-"location":  {
-"uri":  "sources\akka.net\src\core\Akka.Tests\Actor\Cancellation\CancelableTests.cs",
-"region":  {
-"startLine":  88,
-"startColumn":  17,
-"endLine":  88,
-"endColumn":  35
-}
-}
-},
-{
-"id":  "S1226",
 "message":  "Introduce a new variable instead of reusing the parameter 'actor'.",
 "location":  {
 "uri":  "sources\akka.net\src\core\Akka.Tests\Actor\PropsSpec.cs",

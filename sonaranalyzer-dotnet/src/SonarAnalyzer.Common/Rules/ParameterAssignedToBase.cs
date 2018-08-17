@@ -47,7 +47,9 @@ namespace SonarAnalyzer.Rules
                     var left = GetAssignedNode(assignment);
                     var symbol = c.SemanticModel.GetSymbolInfo(left).Symbol;
 
-                    if (symbol != null && (IsAssignmentToParameter(symbol) || IsAssignmentToCatchVariable(symbol, left)))
+                    if (symbol != null
+                        && (IsAssignmentToParameter(symbol) || IsAssignmentToCatchVariable(symbol, left))
+                        && (!IsReadBefore(c.SemanticModel, symbol, assignment)))
                     {
                         c.ReportDiagnosticWhenActive(Diagnostic.Create(Rule, left.GetLocation(), left.ToString()));
                     }
@@ -55,9 +57,12 @@ namespace SonarAnalyzer.Rules
                 SyntaxKindsOfInterest.ToArray());
         }
 
+
         protected abstract bool IsAssignmentToCatchVariable(ISymbol symbol, SyntaxNode node);
 
         protected abstract bool IsAssignmentToParameter(ISymbol symbol);
+
+        protected abstract bool IsReadBefore(SemanticModel semanticModel, ISymbol parameterSymbol, TAssignmentStatementSyntax assignment);
 
         protected abstract SyntaxNode GetAssignedNode(TAssignmentStatementSyntax assignment);
 

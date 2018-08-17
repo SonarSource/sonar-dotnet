@@ -21,10 +21,55 @@ namespace Tests.Diagnostics
                 throw exc;
             }
         }
+
+        static void f0(this string x)
+        {
+            string y = x;
+            x = "x"; // compliant, but weird
+        }
     }
 
     public class ParameterAssignedTo
     {
+        void f00(string x)
+        {
+            int tmp = x.Length;
+            x = "foo";
+        }
+
+        void f01(int x)
+        {
+            int tmp = x.Length;
+            tmp = 5;
+            x = 1;
+        }
+
+        void f02(int x)
+        {
+            f1(x);
+            x = 1;
+        }
+
+        void f03(int x)
+        {
+            x += x;
+        }
+
+        void f04(int x)
+        {
+            x -= x;
+        }
+
+        void f05(int x)
+        {
+            x *= x;
+        }
+
+        void f06(int x)
+        {
+            x <<= x;
+        }
+
         void f1(int a)
         {
             a = 42; // Noncompliant
@@ -121,9 +166,62 @@ namespace Tests.Diagnostics
 
         public event SomeEventHandler OnSomeEvent;
 
-        public void f8()
+        public void f9()
         {
             OnSomeEvent += delegate { };
+        }
+
+        public void f10(Func<int, int> param)
+        {
+            Func<int, int> tmp = param;
+            param = i => 42;
+        }
+
+        public void f11(int a, int b, int c, int d, int e, int f)
+        {
+            a++;
+            ++b;
+            --c;
+            d--;
+            !e;
+            ~f;
+        }
+
+        public f12(int param)
+        {
+            param = param + 1;
+        }
+
+        public void f13(string x)
+        {
+            var baz = x == null;
+            if (baz)
+            {
+                x = "";
+            }
+        }
+
+        public void f14(string x)
+        {
+            (((x))) = ""; // Noncompliant
+        }
+
+        public void f15(string x)
+        {
+            string y = ((x));
+            ((x)) = "";
+        }
+    }
+
+    public class FalsePositives
+    {
+        public string foo(string x)
+        {
+            if (x == null)
+            {
+                x = ""; // Noncompliant FP
+            }
+            return x;
         }
     }
 }
