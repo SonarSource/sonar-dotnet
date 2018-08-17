@@ -44,13 +44,19 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static readonly ISet<KnownType> TrackedTestMethodAttributes = new HashSet<KnownType>
         {
+            // xUnit has it's own "ignore" mechanism (by providing a (Skip = "reason") string in
+            // the attribute, so there is always an explanation for the test being skipped).
+            // However, it is possible to mix test frameworks i.e. have an xUnit [Fact] that has an 
+            // MSTest [Ignore]. This seems like a weird corner case, but the rule handles it.
             KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_TestMethodAttribute,
+            KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_DataTestMethodAttribute,
             KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_TestClassAttribute,
             KnownType.NUnit_Framework_TestAttribute,
             KnownType.NUnit_Framework_TestCaseAttribute,
             KnownType.NUnit_Framework_TestCaseSourceAttribute,
             KnownType.Xunit_FactAttribute,
-            KnownType.Xunit_TheoryAttribute
+            KnownType.Xunit_TheoryAttribute,
+            KnownType.LegacyXunit_TheoryAttribute
         };
 
         protected override void Initialize(SonarAnalysisContext context)

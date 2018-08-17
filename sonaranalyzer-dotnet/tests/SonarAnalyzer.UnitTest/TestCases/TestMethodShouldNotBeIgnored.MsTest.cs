@@ -1,9 +1,9 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Tests.Diagnostics
+namespace Tests.Diagnostics.TestMethods
 {
-    class MsTestClass
+    [TestClass]
+    public class MsTestClass_TestMethods
     {
         [TestMethod]
         [Ignore]
@@ -30,6 +30,41 @@ namespace Tests.Diagnostics
         }
 
         [TestMethod]
+        [Ignore]
+        [WorkItem(1234)]
+        public void Foo5()
+        {
+        }
+    }
+
+    [TestClass]
+    public class MsTestClass_DataTestMethods
+    {
+        [DataTestMethod]
+        [Ignore]
+//       ^^^^^^ Noncompliant {{Either remove this 'Ignore' attribute or add an explanation about why this test is ignored.}}
+        public void Foo1()
+        {
+        }
+
+        [DataTestMethod]
+        [Ignore] // This test is ignored because 'blah blah'
+        public void Foo2()
+        {
+        }
+
+        [Ignore, DataTestMethod] // This test is ignored because 'blah blah'
+        public void Foo3()
+        {
+        }
+
+        [DataTestMethod]
+        [Ignore("Ignored because reasons")]
+        public void Foo4()
+        {
+        }
+
+        [DataTestMethod]
         [Ignore]
         [WorkItem(1234)]
         public void Foo5()
