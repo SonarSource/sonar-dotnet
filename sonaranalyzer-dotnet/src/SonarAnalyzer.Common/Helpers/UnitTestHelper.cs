@@ -95,5 +95,16 @@ namespace SonarAnalyzer.Helpers
                     a.AttributeClass.Is(KnownType.Xunit_FactAttribute) ||
                     a.AttributeClass.Is(KnownType.Xunit_TheoryAttribute) ||
                     a.AttributeClass.Is(KnownType.LegacyXunit_TheoryAttribute));
+
+        /// <summary>
+        /// Returns the <see cref="KnownType"/> that indicates the type of the test method or
+        /// null if the method is not decorated with a known type.
+        /// </summary>
+        /// <remarks>We assume that a test is only marked with a single test attribute e.g.
+        /// not both [Fact] and [Theory]. If there are multiple attributes only one will be
+        /// returned.</remarks>
+        public static KnownType FindFirstTestMethodType(this IMethodSymbol method) =>
+            KnownTestMethodAttributes.FirstOrDefault(known =>
+                    method.GetAttributes().Any(att => att.AttributeClass.Is(known)));
     }
 }
