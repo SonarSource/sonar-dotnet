@@ -24,6 +24,7 @@ using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using SonarAnalyzer.ShimLayer.CSharp;
 
 namespace SonarAnalyzer.Helpers
 {
@@ -164,30 +165,23 @@ namespace SonarAnalyzer.Helpers
         public static bool IsAnyKind(this SyntaxToken syntaxToken, ISet<SyntaxKind> syntaxKinds) =>
             syntaxKinds.Contains((SyntaxKind)syntaxToken.RawKind);
 
-        public static bool ContainsMethodInvocation(BaseMethodDeclarationSyntax methodDeclarationBase,
+        public static bool ContainsMethodInvocation(this BaseMethodDeclarationSyntax methodDeclarationBase,
             SemanticModel semanticModel,
             Func<InvocationExpressionSyntax, bool> syntaxPredicate, Func<IMethodSymbol, bool> symbolPredicate)
         {
-            var childNodes = methodDeclarationBase?.Body?.DescendantNodes();
+            var childNodes = methodDeclarationBase?.Body?.DescendantNodes()
+                ?? methodDeclarationBase?.ExpressionBody().DescendantNodes();
+
             if (childNodes == null)
             {
-                childNodes = (methodDeclarationBase as MethodDeclarationSyntax)?.ExpressionBody?.DescendantNodes();
+                return false;
             }
 
-            return childNodes != null &&
-                ContainsMethodInvocation(childNodes, semanticModel, syntaxPredicate, symbolPredicate);
-        }
-
-        private static bool ContainsMethodInvocation(IEnumerable<SyntaxNode> syntaxNodes, SemanticModel semanticModel,
-            Func<InvocationExpressionSyntax, bool> syntaxPredicate, Func<IMethodSymbol, bool> symbolPredicate)
-        {
             // See issue: https://github.com/SonarSource/sonar-csharp/issues/416
-            // Where clause excludes nodes that are not defined on the same SyntaxTree as the
-            // SemanticModel (because of partial definition).
-
+            // Where clause excludes nodes that are not defined on the same SyntaxTree as the SemanticModel
+            // (because of partial definition).
             // More details: https://github.com/dotnet/roslyn/issues/18730
-
-            return syntaxNodes
+            return childNodes
                 .OfType<InvocationExpressionSyntax>()
                 .Where(syntaxPredicate)
                 .Select(e => semanticModel.GetSyntaxTreeSemanticModel(e.Expression).GetSymbolInfo(e.Expression).Symbol)

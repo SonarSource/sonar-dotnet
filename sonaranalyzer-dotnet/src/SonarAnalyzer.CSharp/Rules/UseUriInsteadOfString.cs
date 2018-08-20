@@ -73,7 +73,8 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(VerifyMethodDeclaration,
-                SyntaxKind.MethodDeclaration, SyntaxKind.ConstructorDeclaration);
+                SyntaxKind.MethodDeclaration,
+                SyntaxKind.ConstructorDeclaration);
 
             context.RegisterSyntaxNodeActionInNonGenerated(VerifyPropertyDeclaration,
                 SyntaxKind.PropertyDeclaration);
@@ -106,8 +107,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 var methodOverloadSet = new HashSet<IMethodSymbol>(methodOverloads);
                 if (!methodDeclaration.IsKind(SyntaxKind.ConstructorDeclaration) &&
-                    !CSharpSyntaxHelper.ContainsMethodInvocation(methodDeclaration, context.SemanticModel,
-                        mSyntax => true,
+                    !methodDeclaration.ContainsMethodInvocation(context.SemanticModel, mSyntax => true,
                         mSymbol => methodOverloadSet.Contains(mSymbol)))
                 {
                     context.ReportDiagnosticWhenActive(Diagnostic.Create(rule_S3997, methodDeclaration.FindIdentifierLocation()));
@@ -138,7 +138,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private void VerifyInvocationAndCreation(SyntaxNodeAnalysisContext context)
         {
-            if (!(context.SemanticModel.GetSymbolInfo(context.Node).Symbol is IMethodSymbol invokedMethodSymbol) || invokedMethodSymbol.IsInType(KnownType.System_Uri))
+            if (!(context.SemanticModel.GetSymbolInfo(context.Node).Symbol is IMethodSymbol invokedMethodSymbol) ||
+                invokedMethodSymbol.IsInType(KnownType.System_Uri))
             {
                 return;
             }
@@ -164,7 +165,8 @@ namespace SonarAnalyzer.Rules.CSharp
             }
         }
 
-        private IEnumerable<IMethodSymbol> FindOverloadsThatUseUriTypeInPlaceOfString(IMethodSymbol originalMethodSymbol, ISet<int> paramIdx)
+        private IEnumerable<IMethodSymbol> FindOverloadsThatUseUriTypeInPlaceOfString(IMethodSymbol originalMethodSymbol,
+            ISet<int> paramIdx)
         {
             if (paramIdx.Count == 0)
             {
@@ -208,7 +210,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 .Where(m => !Equals(m, methodSymbol));
         }
 
-        private bool UsesUriInPlaceOfStringUri(IParameterSymbol paramSymbol, IParameterSymbol originalParamSymbol, bool isStringUri)
+        private bool UsesUriInPlaceOfStringUri(IParameterSymbol paramSymbol, IParameterSymbol originalParamSymbol,
+            bool isStringUri)
         {
             return isStringUri ? paramSymbol.Type.Is(KnownType.System_Uri) : Equals(paramSymbol, originalParamSymbol);
         }
