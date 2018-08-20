@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2018 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -27,6 +27,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.ShimLayer.CSharp;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -44,34 +45,36 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeActionInNonGenerated(c =>
-            {
-                var property = (PropertyDeclarationSyntax)c.Node;
-
-                var body = GetPropertyBody(property);
-                if (body == null)
+            context.RegisterSyntaxNodeActionInNonGenerated(
+                c =>
                 {
-                    return;
-                }
+                    var property = (PropertyDeclarationSyntax)c.Node;
 
-                var walker = new Walker(c.SemanticModel);
+                    var body = GetPropertyBody(property);
+                    if (body == null)
+                    {
+                        return;
+                    }
 
-                walker.Visit(body);
+                    var walker = new Walker(c.SemanticModel);
 
-                foreach (var location in walker.Locations)
-                {
-                    c.ReportDiagnosticWhenActive(Diagnostic.Create(s2365, location, property.Identifier.Text));
-                }
-            }, SyntaxKind.PropertyDeclaration);
+                    walker.Visit(body);
+
+                    foreach (var location in walker.Locations)
+                    {
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(s2365, location, property.Identifier.Text));
+                    }
+                },
+                SyntaxKind.PropertyDeclaration);
         }
 
         private static SyntaxNode GetPropertyBody(PropertyDeclarationSyntax property)
         {
-            return (SyntaxNode)property.ExpressionBody ??
+            return property.ExpressionBody ??
                 property.AccessorList
                     .Accessors
                     .Where(a => a.IsKind(SyntaxKind.GetAccessorDeclaration))
-                    .Select(a => a.Body)
+                    .Select(a => (SyntaxNode)a.Body ?? a.ExpressionBody())
                     .FirstOrDefault();
         }
 
