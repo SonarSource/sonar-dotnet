@@ -66,5 +66,17 @@ namespace SonarAnalyzer.UnitTest.Rules
                     .Concat(MetadataReferenceHelper.FromNuGet("xunit.extensibility.core", testFwkVersion))
                     .ToArray());
         }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void TestMethodShouldNotBeIgnored_Xunit_v1()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldNotBeIgnored.Xunit.v1.cs",
+                new TestMethodShouldNotBeIgnored(),
+                additionalReferences: MetadataReferenceHelper.FromNuGet("MSTest.TestFramework", "1.1.11")
+                    .Concat(MetadataReferenceHelper.FromNuGet("xunit.extensions", "1.9.1"))
+                    .Concat(MetadataReferenceHelper.FromNuGet("xunit", "1.9.1"))
+                    .ToArray());
+        }
     }
 }
