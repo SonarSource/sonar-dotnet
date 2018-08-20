@@ -8,7 +8,7 @@ namespace Tests.Diagnostics
         public int Count
         {
             get { return count; }
-            set { count = 3; } //Noncompliant
+            set { count = 3; } // Noncompliant {{Use the 'value' parameter in this property set accessor declaration.}}
 //          ^^^
         }
         public int Count2
@@ -19,7 +19,7 @@ namespace Tests.Diagnostics
         public int Count3
         {
             //get { return count; }
-            set //Noncompliant {{Use the 'value' parameter in this property set accessor declaration.}}
+            set // Noncompliant
             {
                 var value = 5;
                 count = value;
@@ -41,7 +41,7 @@ namespace Tests.Diagnostics
             {
                 return 0;
             }
-            set //Noncompliant
+            set // Noncompliant
             {
                 var x = 1;
             }
@@ -51,7 +51,7 @@ namespace Tests.Diagnostics
 
         event EventHandler IDrawingObject.OnDraw
         {
-            add //Noncompliant {{Use the 'value' parameter in this event accessor declaration.}}
+            add // Noncompliant {{Use the 'value' parameter in this event accessor declaration.}}
             {
                 lock (PreDrawEvent)
                 {
@@ -116,15 +116,42 @@ namespace Tests.Diagnostics
         }
     }
 
-    class Program
+    public class NewSyntax
     {
+        public int ReadonlyGetter { get; }
+
+        public int ArrowedProperty => 1;
+
+        private int field;
+        public int ArrowedAccessors
+        {
+            get => field;
+            set => field = value;
+        }
 
         private string id;
 
         public string Id
         {
             get => null;
-            set => id = 10; // Compliant (should not be, see https://github.com/SonarSource/sonar-csharp/issues/1021)
+            set => id = 10; // Noncompliant
+        }
+
+        public int A
+        {
+            set => throw new Exception();
+        }
+
+        public event EventHandler E
+        {
+            add => throw new Exception();
+            remove => throw new Exception();
+        }
+
+        public int Foo
+        {
+            get => field;
+            set => // Noncompliant
         }
     }
 }

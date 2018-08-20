@@ -19,12 +19,14 @@
  */
 
 using System.Collections.Immutable;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.ShimLayer.CSharp;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -37,61 +39,51 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterCodeBlockStartActionInNonGenerated<SyntaxKind>(
-                cbc =>
+            context.RegisterSyntaxNodeActionInNonGenerated(
+                c =>
                 {
-                    if (!(cbc.CodeBlock is AccessorDeclarationSyntax accessorDeclaration) ||
-                        accessorDeclaration.IsKind(SyntaxKind.GetAccessorDeclaration) ||
-                        accessorDeclaration.Body == null)
+                    var accessor = (AccessorDeclarationSyntax)c.Node;
+
+                    if ((accessor.Body == null && accessor.ExpressionBody() == null) ||
+                        OnlyThrows(accessor) ||
+                        accessor.DescendantNodes().OfType<IdentifierNameSyntax>().Any(x => IsAccessorValue(x, c.SemanticModel)))
                     {
                         return;
                     }
 
-                    if (accessorDeclaration.Body.Statements.Count == 1 &&
-                        accessorDeclaration.Body.Statements[0] is ThrowStatementSyntax)
-                    {
-                        return;
-                    }
-
-                    var interfaceMember = cbc.SemanticModel.GetDeclaredSymbol(accessorDeclaration)
-                        .GetInterfaceMember();
+                    var interfaceMember = c.SemanticModel.GetDeclaredSymbol(accessor).GetInterfaceMember();
                     if (interfaceMember != null &&
-                        accessorDeclaration.Body.Statements.Count == 0)
+                        accessor?.Body.Statements.Count == 0) // No need to check ExpressionBody, it can't be empty
                     {
                         return;
                     }
 
-                    var foundValueReference = false;
-                    cbc.RegisterSyntaxNodeAction(
-                        c =>
-                        {
-                            var identifier = (IdentifierNameSyntax)c.Node;
-                            var parameter = c.SemanticModel.GetSymbolInfo(identifier).Symbol as IParameterSymbol;
+                    c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, accessor.Keyword.GetLocation(),
+                        GetAccessorType(accessor)));
+                },
+                SyntaxKind.SetAccessorDeclaration,
+                SyntaxKind.RemoveAccessorDeclaration,
+                SyntaxKind.AddAccessorDeclaration);
+        }
 
-                            if (identifier.Identifier.ValueText == "value" &&
-                                parameter != null &&
-                                parameter.IsImplicitlyDeclared)
-                            {
-                                foundValueReference = true;
-                            }
-                        },
-                        SyntaxKind.IdentifierName);
+        private static bool OnlyThrows(AccessorDeclarationSyntax accessor) =>
+            (accessor.Body?.Statements.Count == 1 &&
+            accessor.Body.Statements[0] is ThrowStatementSyntax) ||
+            ThrowExpressionSyntaxWrapper.IsInstance(accessor.ExpressionBody()?.Expression);
 
-                    cbc.RegisterCodeBlockEndAction(
-                        c =>
-                        {
-                            if (!foundValueReference)
-                            {
-                                var accessorType = GetAccessorType(accessorDeclaration);
-                                c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, accessorDeclaration.Keyword.GetLocation(), accessorType));
-                            }
-                        });
-                });
+        private static bool IsAccessorValue(IdentifierNameSyntax identifier, SemanticModel semanticModel)
+        {
+            if (identifier.Identifier.ValueText != "value")
+            {
+                return false;
+            }
+
+            return semanticModel.GetSymbolInfo(identifier).Symbol is IParameterSymbol parameter &&
+                parameter.IsImplicitlyDeclared;
         }
 
         private static string GetAccessorType(AccessorDeclarationSyntax accessorDeclaration)
