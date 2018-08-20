@@ -46,17 +46,13 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             // xUnit has it's own "ignore" mechanism (by providing a (Skip = "reason") string in
             // the attribute, so there is always an explanation for the test being skipped).
-            // However, it is possible to mix test frameworks i.e. have an xUnit [Fact] that has an 
-            // MSTest [Ignore]. This seems like a weird corner case, but the rule handles it.
             KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_TestMethodAttribute,
             KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_DataTestMethodAttribute,
             KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_TestClassAttribute,
             KnownType.NUnit_Framework_TestAttribute,
             KnownType.NUnit_Framework_TestCaseAttribute,
             KnownType.NUnit_Framework_TestCaseSourceAttribute,
-            KnownType.Xunit_FactAttribute,
-            KnownType.Xunit_TheoryAttribute,
-            KnownType.LegacyXunit_TheoryAttribute
+            KnownType.NUnit_Framework_TheoryAttribute
         };
 
         protected override void Initialize(SonarAnalysisContext context)
@@ -67,7 +63,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var attribute = (AttributeSyntax)c.Node;
                     if (HasReasonPhrase(attribute) ||
                         HasTrailingComment(attribute) ||
-                        !IsMsTestIgnoreAttribute(attribute, c.SemanticModel))
+                        !IsKnownIgnoreAttribute(attribute, c.SemanticModel))
                     {
                         return;
                     }
@@ -108,15 +104,17 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool IsWorkItemAttribute(AttributeData a) =>
             a.AttributeClass.Is(KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_WorkItemAttribute);
 
-        private static bool IsMsTestIgnoreAttribute(AttributeSyntax attributeSyntax, SemanticModel semanticModel)
+        private static bool IsKnownIgnoreAttribute(AttributeSyntax attributeSyntax, SemanticModel semanticModel)
         {
             var symbolInfo = semanticModel.GetSymbolInfo(attributeSyntax);
 
             var attributeConstructor = symbolInfo.Symbol ?? symbolInfo.CandidateSymbols.FirstOrDefault();
 
             return attributeConstructor != null
-                && attributeConstructor.ContainingType
-                        .Is(KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_IgnoreAttribute);
+                && (attributeConstructor.ContainingType
+                        .Is(KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_IgnoreAttribute) ||
+                    attributeConstructor.ContainingType
+                        .Is(KnownType.NUnit_Framework_IgnoreAttribute));
         }
 
         private static bool IsTestOrTestClassAttribute(AttributeData a) =>

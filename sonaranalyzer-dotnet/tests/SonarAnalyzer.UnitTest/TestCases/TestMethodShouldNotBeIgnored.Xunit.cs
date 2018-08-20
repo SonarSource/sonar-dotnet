@@ -1,54 +1,25 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using MSTest = Microsoft.VisualStudio.TestTools.UnitTesting;
 using Xunit;
 
-// Note: we're mixing test frameworks here - xUnit and MSTest.
-// This is deliberate. See the comments in the rule implementation for more info.
+// Regression test for #1705: https://github.com/SonarSource/sonar-csharp/issues/1705
+// The rule should not be applied to xUnit tests. Previously, the rule was raising if
+// an MSTest [Ignore] attribute was applied to a xUnit test.
 
 namespace Tests.Diagnostics
 {
-    class XUnitClass
+    [MSTest.Ignore()]
+    public class XUnitClass
     {
         [Fact]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.Ignore]
-//       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Noncompliant
+        [MSTest.Ignore()]
         public void Foo1()
         {
         }
 
-        [Fact]
-        [Ignore] // This test is ignored because 'blah blah'
-        public void Foo2()
-        {
-        }
-
-        [Fact]
-        [Ignore]
-        [WorkItem(1234)]
-        public void Foo3()
-        {
-        }
-
         [Theory]
         [InlineData("")]
-        [Ignore]
-//       ^^^^^^ Noncompliant
-        public void Foo4(string s)
-        {
-        }
-
-        [Theory]
-        [InlineData("")]
-        [Ignore] // This test is ignored because 'blah blah'
-        public void Foo5(string s)
-        {
-        }
-
-        [Theory]
-        [InlineData("")]
-        [Ignore]
-        [WorkItem(1234)]
-        public void Foo6(string s)
+        [MSTest.Ignore]
+        public void Foo2(string s)
         {
         }
     }

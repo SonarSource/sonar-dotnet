@@ -74,22 +74,26 @@ namespace Tests.Diagnostics.TestMethods
 
     [Ignore, TestClass]
 //   ^^^^^^ Noncompliant
-    class MsTestClass1
+    public class MsTestClass1
     {
+        [TestMethod]
+        public void Test1()
+        {
+        }
     }
 
     [Ignore]
-    class MsTestClass2 // No TestClass attribute
+    public class MsTestClass2 // No TestClass attribute
     {
     }
 
     [Ignore, TestClass] // This test is ignored because 'blah blah'
-    class MsTestClass3
+    public class MsTestClass3
     {
     }
 
     [Ignore("Ignored because reasons"), TestClass]
-    class MsTestClass4
+    public class MsTestClass4
     {
     }
 }
