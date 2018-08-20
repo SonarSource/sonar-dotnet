@@ -23,10 +23,14 @@ namespace Tests.Diagnostics
             y = coll.Select(element => element as object);
             y = coll.ToList().Select(element => element as object); // Noncompliant
             y = coll
-                .ToList()  // Noncompliant {{Drop 'ToList' from the middle of the call chain.}}
+                .ToList()  // Noncompliant {{Drop this useless call to 'ToList' or replace it by 'AsEnumerable' if you are using LINQ to Entities.}}
 //               ^^^^^^
-                .ToArray() // Noncompliant
+                .ToArray() // Noncompliant {{Drop this useless call to 'ToArray' or replace it by 'AsEnumerable' if you are using LINQ to Entities.}}
                 .Select(element => element as object);
+
+            y = coll
+                .AsEnumerable()
+                .Where(e => e == null);
 
             var z = coll
                 .Select(element => element as object)
