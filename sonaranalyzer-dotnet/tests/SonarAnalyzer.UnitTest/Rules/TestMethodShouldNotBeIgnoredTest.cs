@@ -73,9 +73,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldNotBeIgnored.Xunit.v1.cs",
                 new TestMethodShouldNotBeIgnored(),
-                additionalReferences: MetadataReferenceHelper.FromNuGet("MSTest.TestFramework", "1.1.11")
-                    .Concat(MetadataReferenceHelper.FromNuGet("xunit.extensions", "1.9.1"))
-                    .Concat(MetadataReferenceHelper.FromNuGet("xunit", "1.9.1"))
+                additionalReferences: NuGetMetadataReference.MSTestTestFramework["1.1.11"]
+                    .Concat(NuGetMetadataReference.XunitV1Packages)
                     .ToArray());
         }
     }
