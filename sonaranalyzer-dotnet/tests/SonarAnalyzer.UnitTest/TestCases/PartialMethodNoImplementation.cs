@@ -15,6 +15,7 @@ namespace Tests.Diagnostics
             OkMethod();
             OkMethod2();
             M();
+            ArrowMethod("");
         }
 
         partial void OkMethod();
@@ -30,5 +31,8 @@ namespace Tests.Diagnostics
         partial void OkMethod2();
 
         public abstract void M();
+
+        partial void ArrowMethod(string s);
+        partial void ArrowMethod(string s) => Console.WriteLine(s);
     }
 }
