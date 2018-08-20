@@ -18,7 +18,6 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
@@ -41,12 +40,6 @@ namespace SonarAnalyzer.Rules.CSharp
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        private static readonly ISet<KnownType> HandledExpectedExceptionAttributes = new HashSet<KnownType>
-        {
-            KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_ExpectedExceptionAttribute,
-            KnownType.NUnit_Framework_ExpectedExceptionAttribute
-        };
-
         protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
@@ -61,7 +54,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     var isOneLineMethod = methodDeclaration.ExpressionBody != null ||
                         methodDeclaration.Body?.Statements.Count <= 1; // do not raise on empty method
-                    var firstExpectedExceptionAttributeOrDefault = methodSymbol.GetAttributes(HandledExpectedExceptionAttributes)
+                    var firstExpectedExceptionAttributeOrDefault = methodSymbol.GetAttributes(UnitTestHelper.KnownExpectedExceptionAttributes)
                         .FirstOrDefault();
 
                     if (firstExpectedExceptionAttributeOrDefault != null &&

@@ -41,23 +41,6 @@ namespace SonarAnalyzer.Rules.CSharp
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        private static readonly ISet<KnownType> HandledTestClassAttributes = new HashSet<KnownType>
-        {
-            // xUnit does not have have attributes to identity test classes
-            KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_TestClassAttribute,
-            KnownType.NUnit_Framework_TestFixtureAttribute
-        };
-
-        private static readonly ISet<KnownType> HandledTestMethodAttributes = new HashSet<KnownType>
-        {
-            KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_TestMethodAttribute,
-            KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_DataTestMethodAttribute,
-            KnownType.NUnit_Framework_TestAttribute,
-            KnownType.NUnit_Framework_TestCaseAttribute,
-            KnownType.NUnit_Framework_TestCaseSourceAttribute,
-            KnownType.NUnit_Framework_TheoryAttribute
-        };
-
         private static readonly ISet<KnownType> HandledGlobalSetupAndCleanUpAttributes = new HashSet<KnownType>
         {
             // Only applies to MSTest.
@@ -90,14 +73,11 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.ClassDeclaration);
         }
 
-        private static bool IsTestClass(INamedTypeSymbol classSymbol) =>
-            classSymbol.GetAttributes(HandledTestClassAttributes).Any();
-
         private static bool HasAnyTestMethod(INamedTypeSymbol classSymbol) =>
-            classSymbol.GetMembers().OfType<IMethodSymbol>().Any(m => m.GetAttributes(HandledTestMethodAttributes).Any());
+            classSymbol.GetMembers().OfType<IMethodSymbol>().Any(m => m.IsTestMethod());
 
         private bool IsViolatingRule(INamedTypeSymbol classSymbol) =>
-            IsTestClass(classSymbol) &&
+            classSymbol.IsTestClass() &&
             !HasAnyTestMethod(classSymbol);
 
         private bool IsExceptionToTheRule(INamedTypeSymbol classSymbol) =>

@@ -42,18 +42,14 @@ namespace SonarAnalyzer.Rules.CSharp
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        private static readonly ISet<KnownType> TrackedTestMethodAttributes = new HashSet<KnownType>
-        {
+        private static readonly ISet<KnownType> TrackedTestIdentifierAttributes = new HashSet<KnownType>
+        (
             // xUnit has it's own "ignore" mechanism (by providing a (Skip = "reason") string in
             // the attribute, so there is always an explanation for the test being skipped).
-            KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_TestMethodAttribute,
-            KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_DataTestMethodAttribute,
-            KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_TestClassAttribute,
-            KnownType.NUnit_Framework_TestAttribute,
-            KnownType.NUnit_Framework_TestCaseAttribute,
-            KnownType.NUnit_Framework_TestCaseSourceAttribute,
-            KnownType.NUnit_Framework_TheoryAttribute
-        };
+            UnitTestHelper.KnownTestMethodAttributes_MSTest
+            .Concat(new [] {KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_TestClassAttribute})
+            .Concat(UnitTestHelper.KnownTestMethodAttributes_NUnit)
+        );
 
         protected override void Initialize(SonarAnalysisContext context)
         {
@@ -112,12 +108,10 @@ namespace SonarAnalyzer.Rules.CSharp
 
             return attributeConstructor != null
                 && (attributeConstructor.ContainingType
-                        .Is(KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_IgnoreAttribute) ||
-                    attributeConstructor.ContainingType
-                        .Is(KnownType.NUnit_Framework_IgnoreAttribute));
+                        .IsAny(UnitTestHelper.KnownIgnoreAttributes));
         }
 
         private static bool IsTestOrTestClassAttribute(AttributeData a) =>
-            a.AttributeClass.IsAny(TrackedTestMethodAttributes);
+            a.AttributeClass.IsAny(TrackedTestIdentifierAttributes);
     }
 }
