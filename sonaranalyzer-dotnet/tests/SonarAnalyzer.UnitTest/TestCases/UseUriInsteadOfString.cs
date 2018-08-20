@@ -43,6 +43,12 @@ namespace Tests.Diagnostics
 //      ^^^^^^
         string FooUriBar{ get; set; } // Noncompliant {{Change this property type to 'System.Uri'.}}
 
+        string Urn2 // Noncompliant
+        {
+            get => "";
+            set => throw new NotSupportedException();
+        }
+
 
         // Test there are no false positives
         string TurnOff { get; set; } // Compliant
