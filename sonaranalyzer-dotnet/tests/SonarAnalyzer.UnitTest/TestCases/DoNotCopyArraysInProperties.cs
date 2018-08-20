@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -31,6 +31,13 @@ namespace Tests.Diagnostics
 
         public IEnumerable<string> Property5 => stringArray.Where(s => s != null).ToList();
 //                                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Noncompliant {{Refactor 'Property5' into a method, properties should not copy collections.}}
+
+        public string[] Property6 => (string[])stringArray.Clone(); // Noncompliant
+
+        public string[] Property7
+        {
+            get => stringArray.ToArray(); // Noncompliant
+        }
     }
 
     class CompliantCases
