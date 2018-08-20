@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) 2015-2018 SonarSource SA
  * mailto: contact AT sonarsource DOT com
@@ -21,19 +21,21 @@
 using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 
 namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
 {
+    [TestClass]
     public class SymbolicValue_TrySetConstraint
     {
-        ////[Theory]
-        ////[MemberData(nameof(TrueConstraintData))]
-        ////[MemberData(nameof(FalseConstraintData))]
-        ////[MemberData(nameof(NullConstraintData))]
-        ////[MemberData(nameof(NotNullConstraintData))]
-        ////[MemberData(nameof(NoValueConstraintData))]
-        ////[MemberData(nameof(HasValueConstraintData))]
+        [TestMethod]
+        [DynamicData(nameof(TrueConstraintData), DynamicDataSourceType.Property)]
+        [DynamicData(nameof(FalseConstraintData), DynamicDataSourceType.Property)]
+        [DynamicData(nameof(NullConstraintData), DynamicDataSourceType.Property)]
+        [DynamicData(nameof(NotNullConstraintData), DynamicDataSourceType.Property)]
+        [DynamicData(nameof(NoValueConstraintData), DynamicDataSourceType.Property)]
+        [DynamicData(nameof(HasValueConstraintData), DynamicDataSourceType.Property)]
         public void TrySetConstraint(SymbolicValueConstraint constraint,
             IList<SymbolicValueConstraint> existingConstraints,
             IList<IList<SymbolicValueConstraint>> expectedConstraintsPerProgramState)
@@ -61,7 +63,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
             }
         }
 
-        public static IEnumerable<object[]> TrueConstraintData = new[]
+        public static IEnumerable<object[]> TrueConstraintData { get; } = new[]
         {
             new object[]
             {
@@ -95,7 +97,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
             },
         };
 
-        public static IEnumerable<object[]> FalseConstraintData = new[]
+        public static IEnumerable<object[]> FalseConstraintData { get; } = new[]
         {
             new object[]
             {
@@ -129,7 +131,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
             },
         };
 
-        public static IEnumerable<object[]> NullConstraintData = new[]
+        public static IEnumerable<object[]> NullConstraintData { get; } = new[]
         {
             new object[]
             {
@@ -163,7 +165,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
             },
         };
 
-        public static IEnumerable<object[]> NotNullConstraintData = new[]
+        public static IEnumerable<object[]> NotNullConstraintData { get; } = new[]
         {
             new object[]
             {
@@ -197,7 +199,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
             },
         };
 
-        public static IEnumerable<object[]> NoValueConstraintData = new[]
+        public static IEnumerable<object[]> NoValueConstraintData { get; } = new[]
         {
             new object[]
             {
@@ -213,7 +215,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
             },
         };
 
-        public static IEnumerable<object[]> HasValueConstraintData = new[]
+        public static IEnumerable<object[]> HasValueConstraintData { get; } = new[]
         {
             new object[]
             {
