@@ -177,10 +177,14 @@ namespace SonarAnalyzer.UnitTest
         [AssemblyInitialize]
         public static void SetupAssembly(TestContext context)
         {
-            // Install new nugets only once per week to improve the performance when running tests locally
+            // Choosing one day to reduce the waiting time when a new version of the used nugets is
+            // released. If the waiting time when running tests locally is big we can increase.
+            const int VersionCheckDelayInDays = 1;
+
+            // Install new nugets only once per day to improve the performance when running tests locally
             // When adding a new nuget it is recommended to delete the content of
             // sonar -csharp\sonaranalyzer-dotnet\TestResults
-            if (DateTime.Now.Subtract(TestResultHelper.GetPreviousRunDate(context)).TotalDays < 7)
+            if (DateTime.Now.Subtract(TestResultHelper.GetPreviousRunDate(context)).TotalDays < VersionCheckDelayInDays)
             {
                 return;
             }

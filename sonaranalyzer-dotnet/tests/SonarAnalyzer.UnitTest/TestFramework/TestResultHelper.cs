@@ -23,50 +23,12 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
-using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace SonarAnalyzer.UnitTest
 {
-    [TestClass]
     public class TestResultHelper
     {
-        [TestMethod]
-        public void TestResultHelper_ParseDate_Tests()
-        {
-            ParseDate("some gibberish").Should().Be(DateTime.MinValue);
-            ParseDate("2018-08-17").Should().Be(DateTime.MinValue);
-            ParseDate("Deploy_FirstName LastName 2018-08-17 14_52_41").Should().Be(new DateTime(2018, 8, 17));
-        }
-
-        [TestMethod]
-        public void TestResultHelper_GetPreviousRunDate_Tests()
-        {
-            var expected = new DateTime(2018, 8, 17);
-            GetPreviousRunDate(new[]
-            {
-                "Deploy_FirstName LastName 2018-08-17 14_52_41",
-                "Deploy_FirstName LastName 2018-08-17 14_52_41",
-                "Deploy_FirstName LastName 2018-08-17 14_52_41"
-            }).Should().Be(expected);
-
-            GetPreviousRunDate(Array.Empty<string>()).Should().Be(DateTime.MinValue);
-
-            GetPreviousRunDate(new[]
-            {
-                "some gibberish",
-                "other biggerish"
-            }).Should().Be(DateTime.MinValue);
-
-            GetPreviousRunDate(new[]
-            {
-                "Deploy_FirstName LastName 2018-04-17 14_52_41",
-                "Deploy_FirstName LastName 2018-09-17 14_52_41",
-                "Deploy_FirstName LastName 2018-08-17 14_52_41",
-                "Deploy_FirstName LastName 2018-06-17 14_52_41",
-            }).Should().Be(expected);
-        }
-
         /// <summary>
         /// Returns the date of the previous test run. If no other test runs were found returns DateTime.MinValue.
         /// </summary>
@@ -74,7 +36,7 @@ namespace SonarAnalyzer.UnitTest
             GetPreviousRunDate(
                 Directory.GetDirectories(Path.GetDirectoryName(context.TestRunDirectory)));
 
-        private static DateTime GetPreviousRunDate(IEnumerable<string> directoryNames)
+        public static DateTime GetPreviousRunDate(IEnumerable<string> directoryNames)
         {
             // Directory names are alphabetically comparable, skip the latest result
             var previousTestRunDir = directoryNames
@@ -89,7 +51,7 @@ namespace SonarAnalyzer.UnitTest
         /// <summary>
         /// Returns parsed DateTime from MSBuild test run directory name. If cannot parse, returns DateTime.MinValue.
         /// </summary>
-        private static DateTime ParseDate(string testRunDirectory)
+        public static DateTime ParseDate(string testRunDirectory)
         {
             // The format is "Deploy_Valeri Hristov 2018-08-17 14_52_41"
             var match = Regex.Match(testRunDirectory, "(?<year>\\d{4})-(?<month>\\d{2})-(?<day>\\d{2}) \\d{2}_\\d{2}_\\d{2}");
