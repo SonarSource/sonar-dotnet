@@ -45,6 +45,7 @@ namespace SonarAnalyzer.UnitTest
             {
                 "lib",
                 "portable-net45",
+                "net20",
                 "net40",
                 "net45",
                 "netstandard1.0",
@@ -141,6 +142,12 @@ namespace SonarAnalyzer.UnitTest
         private static Lazy<Dictionary<string, MetadataReference[]>> lazyXunitExtensibilityCore =
             CreateLazy("xunit.extensibility.core", "2.0.0", Constants.NuGetLatestVersion);
 
+        private static Lazy<Dictionary<string, MetadataReference[]>> lazyXunitV1 =
+            CreateLazy("xunit", "1.9.1");
+
+        private static Lazy<Dictionary<string, MetadataReference[]>> lazyXunitExtensionsV1 =
+            CreateLazy("xunit.extensions", "1.9.1");
+
         internal static Dictionary<string, MetadataReference[]> FluentAssertions =>
             lazyFluentAssertions.Value;
 
@@ -173,6 +180,11 @@ namespace SonarAnalyzer.UnitTest
 
         internal static Dictionary<string, MetadataReference[]> XunitExtensibilityCore =>
             lazyXunitExtensibilityCore.Value;
+
+        internal static MetadataReference[] XunitV1Packages =>
+            lazyXunitV1.Value.Values.First()
+            .Concat(lazyXunitExtensionsV1.Value.Values.First())
+            .ToArray();
 
         [AssemblyInitialize]
         public static void SetupAssembly(TestContext context)

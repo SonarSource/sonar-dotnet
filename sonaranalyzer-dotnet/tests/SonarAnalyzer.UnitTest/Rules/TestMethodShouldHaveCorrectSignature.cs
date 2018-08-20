@@ -70,9 +70,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldHaveCorrectSignature.Xunit.Legacy.cs",
                 new TestMethodShouldHaveCorrectSignature(),
-                additionalReferences: MetadataReferenceHelper.FromNuGet("xunit", "1.9.1")
-                .Concat(MetadataReferenceHelper.FromNuGet("xunit.extensions", "1.9.1"))
-                .ToArray());
+                additionalReferences: NuGetMetadataReference.XunitV1Packages);
         }
 
         [TestMethod]
@@ -84,7 +82,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             // one, so we're using MSTest and only testing a single version.
             Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldHaveCorrectSignature.Misc.cs",
                 new TestMethodShouldHaveCorrectSignature(),
-                additionalReferences: MetadataReferenceHelper.FromNuGet("MSTest.TestFramework", "1.1.11"));
+                additionalReferences: NuGetMetadataReference.MSTestTestFramework["1.1.11"]);
         }
     }
 }

@@ -75,9 +75,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldContainAssertion.Xunit.Legacy.cs",
                 new TestMethodShouldContainAssertion(),
-                additionalReferences: MetadataReferenceHelper.FromNuGet("xunit", "1.9.1")
-                .Concat(MetadataReferenceHelper.FromNuGet("xunit.extensions", "1.9.1"))
-                .Concat(MetadataReferenceHelper.FromNuGet("FluentAssertions", "4.9.0"))
+                additionalReferences: NuGetMetadataReference.XunitV1Packages
+                    .Concat(NuGetMetadataReference.FluentAssertions["4.19.4"])
                     .ToArray());
         }
     }
