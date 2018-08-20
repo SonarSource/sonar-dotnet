@@ -36,6 +36,26 @@ namespace Tests.Diagnostics
         public static int StaticProperty1 => 0;
         public static int StaticProperty2 => staticMember;
         public virtual int VirtualProperty { get; set; }
+        public int Property20 // Noncompliant
+        {
+            get => 1;
+        }
+
+        public int Property21
+        {
+            get => instanceMember;
+            set => instanceMember = value;
+        }
+
+        public int Property22
+        {
+            get => instanceMember;
+        }
+
+        public int Property23
+        {
+            set => instanceMember = value;
+        }
 
         // indexers are always instance
         public int this[string index] { get { return 0; } } // Compliant!

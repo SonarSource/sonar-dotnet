@@ -28,6 +28,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.ShimLayer.CSharp;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -40,7 +41,6 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         private static readonly ISet<SymbolKind> InstanceSymbolKinds = new HashSet<SymbolKind>
@@ -135,8 +135,8 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool IsEmptyMethod(MemberDeclarationSyntax node)
         {
             return node is MethodDeclarationSyntax methodDeclarationSyntax &&
-                methodDeclarationSyntax.Body != null &&
-                !methodDeclarationSyntax.Body.Statements.Any();
+                methodDeclarationSyntax.Body?.Statements.Count == 0 &&
+                methodDeclarationSyntax.ExpressionBody == null;
         }
 
         private static bool IsNewMethod(ISymbol symbol)
@@ -160,7 +160,7 @@ namespace SonarAnalyzer.Rules.CSharp
             return symbol.DeclaringSyntaxReferences
                 .Select(r => r.GetSyntax())
                 .OfType<PropertyDeclarationSyntax>()
-                .Any(s => s.AccessorList != null && s.AccessorList.Accessors.All(a => a.Body == null));
+                .Any(s => s.AccessorList != null && s.AccessorList.Accessors.All(a => a.Body == null && a.ExpressionBody() == null));
         }
 
         private static bool IsPublicControllerMethod(ISymbol symbol)
