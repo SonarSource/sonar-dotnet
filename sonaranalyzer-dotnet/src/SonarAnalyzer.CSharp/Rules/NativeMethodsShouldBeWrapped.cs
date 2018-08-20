@@ -45,18 +45,17 @@ namespace SonarAnalyzer.Rules.CSharp
 
         protected override void Initialize(SonarAnalysisContext context)
         {
-            context.RegisterSyntaxNodeAction(ReportPublicExternalMethods, SyntaxKind.MethodDeclaration);
+            context.RegisterSymbolAction(ReportPublicExternalMethods, SymbolKind.Method);
             context.RegisterSyntaxNodeAction(ReportTrivialWrappers, SyntaxKind.MethodDeclaration);
         }
 
-        private static void ReportPublicExternalMethods(SyntaxNodeAnalysisContext c)
+        private static void ReportPublicExternalMethods(SymbolAnalysisContext c)
         {
-            var methodDeclaration = (MethodDeclarationSyntax)c.Node;
-            var methodSymbol = c.SemanticModel.GetDeclaredSymbol(methodDeclaration);
+            var methodSymbol = (IMethodSymbol)c.Symbol;
 
-            if (methodSymbol != null &&
-                methodSymbol.IsExtern &&
-                methodSymbol.IsPubliclyAccessible())
+            if (methodSymbol.IsExtern &&
+                methodSymbol.IsPubliclyAccessible() &&
+                methodSymbol.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is MethodDeclarationSyntax methodDeclaration)
             {
                 c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, methodDeclaration.Identifier.GetLocation(),
                     MakeThisMethodPrivateMessage));
@@ -66,12 +65,8 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void ReportTrivialWrappers(SyntaxNodeAnalysisContext c)
         {
             var methodDeclaration = (MethodDeclarationSyntax)c.Node;
-            var methodSymbol = c.SemanticModel.GetDeclaredSymbol(methodDeclaration);
 
-            if (methodSymbol == null ||
-                methodSymbol.IsExtern &&
-                methodDeclaration.ParameterList == null ||
-                methodDeclaration.ParameterList.Parameters.Count == 0)
+            if (methodDeclaration.ParameterList.Parameters.Count == 0)
             {
                 return;
             }
@@ -80,6 +75,13 @@ namespace SonarAnalyzer.Rules.CSharp
 
             if (HasAtLeastTwo(descendants.OfType<StatementSyntax>()) ||
                 HasAtLeastTwo(descendants.OfType<InvocationExpressionSyntax>()))
+            {
+                return;
+            }
+
+            var methodSymbol = c.SemanticModel.GetDeclaredSymbol(methodDeclaration);
+            if (methodSymbol == null ||
+                methodSymbol.IsExtern && methodDeclaration.ParameterList == null)
             {
                 return;
             }
