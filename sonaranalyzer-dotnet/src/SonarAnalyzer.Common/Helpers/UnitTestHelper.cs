@@ -29,33 +29,48 @@ namespace SonarAnalyzer.Helpers
 {
     internal static class UnitTestHelper
     {
-        private static readonly ISet<KnownType> KnownTestMethodAttributes = new HashSet<KnownType>
+        public static readonly IEnumerable<KnownType> KnownTestMethodAttributes_MSTest = new HashSet<KnownType>
         {
             KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_TestMethodAttribute,
             KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_DataTestMethodAttribute,
+        };
+
+        public static readonly IEnumerable<KnownType> KnownTestMethodAttributes_NUnit = new HashSet<KnownType>
+        {
             KnownType.NUnit_Framework_TestAttribute,
             KnownType.NUnit_Framework_TestCaseAttribute,
             KnownType.NUnit_Framework_TestCaseSourceAttribute,
             KnownType.NUnit_Framework_TheoryAttribute,
+        };
+
+        public static readonly IEnumerable<KnownType> KnownTestMethodAttributes_xUnit = new HashSet<KnownType>
+        {
             KnownType.Xunit_FactAttribute,
             KnownType.Xunit_TheoryAttribute,
             KnownType.LegacyXunit_TheoryAttribute
         };
 
-        private static readonly ISet<KnownType> KnownExpectedExceptionAttributes = new HashSet<KnownType>
+        public static readonly IEnumerable<KnownType> KnownExpectedExceptionAttributes = new HashSet<KnownType>
         {
             // Note: XUnit doesn't have a exception attribute
             KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_ExpectedExceptionAttribute,
             KnownType.NUnit_Framework_ExpectedExceptionAttribute
         };
 
-        private static readonly ISet<KnownType> KnownIgnoreAttributes = new HashSet<KnownType>
+        public static readonly IEnumerable<KnownType> KnownIgnoreAttributes = new HashSet<KnownType>
         {
             // Note: XUnit doesn't have a separate "Ignore" attribute. It has a "Skip" parameter
             // on the test attribute
             KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_IgnoreAttribute,
             KnownType.NUnit_Framework_IgnoreAttribute
         };
+
+        private static readonly ISet<KnownType> KnownTestMethodAttributes = new HashSet<KnownType>
+        (
+            KnownTestMethodAttributes_MSTest
+            .Concat(KnownTestMethodAttributes_NUnit)
+            .Concat(KnownTestMethodAttributes_xUnit)
+        );
 
         /// <summary>
         /// List of partial names that are assumed to indicate an assertion method

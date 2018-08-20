@@ -49,14 +49,10 @@ namespace SonarAnalyzer.Rules.CSharp
         };
 
         private static readonly ISet<KnownType> HandledTestMethodAttributes = new HashSet<KnownType>
-        {
-            KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_TestMethodAttribute,
-            KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_DataTestMethodAttribute,
-            KnownType.NUnit_Framework_TestAttribute,
-            KnownType.NUnit_Framework_TestCaseAttribute,
-            KnownType.NUnit_Framework_TestCaseSourceAttribute,
-            KnownType.NUnit_Framework_TheoryAttribute
-        };
+        (
+            UnitTestHelper.KnownTestMethodAttributes_MSTest
+            .Concat(UnitTestHelper.KnownTestMethodAttributes_NUnit)
+        );
 
         private static readonly ISet<KnownType> HandledGlobalSetupAndCleanUpAttributes = new HashSet<KnownType>
         {

@@ -67,7 +67,7 @@ namespace SonarAnalyzer.Helpers
             return typeSymbol != null && IsMatch(typeSymbol, type);
         }
 
-        public static bool IsAny(this ITypeSymbol typeSymbol, ISet<KnownType> types)
+        public static bool IsAny(this ITypeSymbol typeSymbol, IEnumerable<KnownType> types)
         {
             return typeSymbol != null && types.Any(t => IsMatch(typeSymbol, t));
         }
