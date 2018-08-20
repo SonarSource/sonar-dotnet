@@ -147,5 +147,11 @@ namespace Tests.Diagnostics
             add => throw new Exception();
             remove => throw new Exception();
         }
+
+        public int Foo
+        {
+            get => field;
+            set => // Noncompliant
+        }
     }
 }
