@@ -54,14 +54,11 @@ namespace SonarAnalyzer.Rules.CSharp
             var methodSymbol = (IMethodSymbol)c.Symbol;
 
             if (methodSymbol.IsExtern &&
-                methodSymbol.IsPubliclyAccessible())
+                methodSymbol.IsPubliclyAccessible() &&
+                methodSymbol.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is MethodDeclarationSyntax methodDeclaration)
             {
-                if (methodSymbol.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax()
-                    is MethodDeclarationSyntax methodDeclaration)
-                {
-                    c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, methodDeclaration.Identifier.GetLocation(),
-                        MakeThisMethodPrivateMessage));
-                }
+                c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, methodDeclaration.Identifier.GetLocation(),
+                    MakeThisMethodPrivateMessage));
             }
         }
 
