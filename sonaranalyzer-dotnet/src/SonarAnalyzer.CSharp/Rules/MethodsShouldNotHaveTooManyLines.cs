@@ -28,6 +28,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.ShimLayer.CSharp;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -83,19 +84,10 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.DestructorDeclaration);
         }
 
-        private static IEnumerable<SyntaxToken> GetBodyTokens(BaseMethodDeclarationSyntax baseMethodSyntax)
-        {
-            var expressionTokens =
-                (baseMethodSyntax as MethodDeclarationSyntax)?.ExpressionBody?.Expression?.DescendantTokens();
-
-            if (expressionTokens != null && expressionTokens.Any())
-            {
-                return expressionTokens;
-            }
-
-            var bodyStatements = baseMethodSyntax?.Body?.Statements.SelectMany(s => s.DescendantTokens());
-            return bodyStatements ?? Enumerable.Empty<SyntaxToken>();
-        }
+        private static IEnumerable<SyntaxToken> GetBodyTokens(BaseMethodDeclarationSyntax baseMethodSyntax) =>
+            baseMethodSyntax?.ExpressionBody()?.Expression?.DescendantTokens()
+            ?? baseMethodSyntax?.Body?.Statements.SelectMany(s => s.DescendantTokens())
+            ?? Enumerable.Empty<SyntaxToken>();
 
         private static string GetDescription(BaseMethodDeclarationSyntax baseMethodDeclaration)
         {
