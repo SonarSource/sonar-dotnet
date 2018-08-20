@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace Tests.Diagnostics
@@ -25,5 +25,15 @@ namespace Tests.Diagnostics
         {
             Console.WriteLine("foo");
         }
+    }
+
+    class Program3
+    {
+        ~Program3() => Console.WriteLine();
+    }
+
+    class Program4
+    {
+        ~Program4() =>
     }
 }
