@@ -65,7 +65,7 @@ namespace SonarAnalyzer.Helpers
             KnownType.NUnit_Framework_IgnoreAttribute
         };
 
-        private static readonly ISet<KnownType> KnownTestMethodAttributes = new HashSet<KnownType>
+        private static readonly IEnumerable<KnownType> KnownTestMethodAttributes = new HashSet<KnownType>
         (
             KnownTestMethodAttributes_MSTest
             .Concat(KnownTestMethodAttributes_NUnit)
@@ -85,7 +85,21 @@ namespace SonarAnalyzer.Helpers
                 "VERIFY",
                 "VALIDATE"
             };
-        
+
+        private static readonly IEnumerable<KnownType> KnownTestClassAttributes = new HashSet<KnownType>
+        {
+            // xUnit does not have have attributes to identity test classes
+            KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_TestClassAttribute,
+            KnownType.NUnit_Framework_TestFixtureAttribute
+        };
+
+        /// <summary>
+        /// Returns whether the class has an attribute that marks the class
+        /// as an MSTest or NUnit test class (xUnit doesn't have any such attributes)
+        /// </summary>
+        public static bool IsTestClass(this INamedTypeSymbol classSymbol) =>
+            classSymbol.GetAttributes(KnownTestClassAttributes).Any();
+
         public static bool IsTestMethod(this IMethodSymbol method) =>
             method.GetAttributes(KnownTestMethodAttributes).Any();
 
