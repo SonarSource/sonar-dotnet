@@ -39,7 +39,8 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string MessageFormat = "{0}";
         internal const string MessageUseInstead = "Use {0} here instead.";
         internal const string MessageDropAndChange = "Drop '{0}' and move the condition into the '{1}'.";
-        internal const string MessageDropFromMiddle = "Drop '{0}' from the middle of the call chain.";
+        internal const string MessageDropFromMiddle = "Drop this useless call to '{0}' or replace it by 'AsEnumerable' if " +
+            "you are using LINQ to Entities.";
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
