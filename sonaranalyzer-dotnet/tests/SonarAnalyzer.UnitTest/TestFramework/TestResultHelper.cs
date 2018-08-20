@@ -27,7 +27,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace SonarAnalyzer.UnitTest
 {
-    public class TestResultHelper
+    internal class TestResultHelper
     {
         /// <summary>
         /// Returns the date of the previous test run. If no other test runs were found returns DateTime.MinValue.
@@ -36,13 +36,13 @@ namespace SonarAnalyzer.UnitTest
             GetPreviousRunDate(
                 Directory.GetDirectories(Path.GetDirectoryName(context.TestRunDirectory)));
 
-        public static DateTime GetPreviousRunDate(IEnumerable<string> directoryNames)
+        internal /*for test*/ static DateTime GetPreviousRunDate(IEnumerable<string> directoryNames)
         {
-            // Directory names are alphabetically comparable, skip the latest result
+            // Directory names are alphabetically comparable
             var previousTestRunDir = directoryNames
                 .OrderByDescending(name => name)
-                .Skip(1)
-                .FirstOrDefault();
+                .Skip(1) // Skip current run (the newest directory)
+                .FirstOrDefault(); // The previous run
 
             // Coalesce to avoid NRE in case there are less than 2 directories
             return ParseDate(previousTestRunDir ?? string.Empty);
@@ -51,9 +51,9 @@ namespace SonarAnalyzer.UnitTest
         /// <summary>
         /// Returns parsed DateTime from MSBuild test run directory name. If cannot parse, returns DateTime.MinValue.
         /// </summary>
-        public static DateTime ParseDate(string testRunDirectory)
+        internal /*for test*/ static DateTime ParseDate(string testRunDirectory)
         {
-            // The format is "Deploy_Valeri Hristov 2018-08-17 14_52_41"
+            // The format is "Deploy_UserFirstName UserLastName 2018-08-17 14_52_41"
             var match = Regex.Match(testRunDirectory, "(?<year>\\d{4})-(?<month>\\d{2})-(?<day>\\d{2}) \\d{2}_\\d{2}_\\d{2}");
             if (match.Success &&
                 match.Groups.Count == 4 &&
