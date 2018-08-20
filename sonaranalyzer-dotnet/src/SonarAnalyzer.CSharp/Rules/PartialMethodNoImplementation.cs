@@ -57,8 +57,10 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             var declaration = (MethodDeclarationSyntax)context.Node;
             var partialKeyword = declaration.Modifiers.FirstOrDefault(m => m.IsKind(SyntaxKind.PartialKeyword));
-            if (declaration.Body != null ||
-                partialKeyword == default(SyntaxToken))
+
+            if (partialKeyword == default(SyntaxToken)||
+                declaration.Body != null ||
+                declaration.ExpressionBody != null)
             {
                 return;
             }
@@ -74,6 +76,12 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void CheckForCandidatePartialInvocation(SyntaxNodeAnalysisContext context)
         {
             var invocation = (InvocationExpressionSyntax)context.Node;
+
+            if (!(invocation.Parent is StatementSyntax statement))
+            {
+                return;
+            }
+
             if (!(context.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol))
             {
                 return;
@@ -81,11 +89,12 @@ namespace SonarAnalyzer.Rules.CSharp
 
             // from the method symbol it's not possible to tell if it's a partial method or not.
             // https://github.com/dotnet/roslyn/issues/48
-
             var partialDeclarations = methodSymbol.DeclaringSyntaxReferences
                 .Select(r => r.GetSyntax())
                 .OfType<MethodDeclarationSyntax>()
-                .Where(method => method.Body == null && method.Modifiers.Any(SyntaxKind.PartialKeyword));
+                .Where(method => method.Modifiers.Any(SyntaxKind.PartialKeyword) &&
+                    method.Body == null &&
+                    method.ExpressionBody == null);
 
             if (methodSymbol.PartialImplementationPart != null ||
                 !partialDeclarations.Any())
@@ -93,10 +102,6 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            if (!(invocation.Parent is StatementSyntax statement))
-            {
-                return;
-            }
             context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, statement.GetLocation(), "the", MessageAdditional));
         }
     }
