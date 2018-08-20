@@ -87,7 +87,14 @@ namespace SonarAnalyzer.UnitTest
 
         private static MetadataReference[] CreateReferences(string packageId, string packageVersion)
         {
-            var matchingDlls = Directory.GetFiles(GetNuGetPackageDirectory(), "*.dll", SearchOption.AllDirectories)
+            var packageDir = GetNuGetPackageDirectory();
+            if (packageVersion != Constants.NuGetLatestVersion && !Directory.Exists(packageDir))
+            {
+                LogMessage($"Package not found at {packageDir}");
+                InstallPackage(packageId, packageVersion);
+            }
+
+            var matchingDlls = Directory.GetFiles(packageDir, "*.dll", SearchOption.AllDirectories)
                 .Select(path => new FileInfo(path))
                 .GroupBy(file => file.Directory.Name)
                 .Where(group => allowedNugetLibDirectories.Any(y => group.Key.StartsWith(y)))
@@ -196,23 +203,39 @@ namespace SonarAnalyzer.UnitTest
             // Install new nugets only once per day to improve the performance when running tests locally
             // When adding a new nuget it is recommended to delete the content of
             // sonar -csharp\sonaranalyzer-dotnet\TestResults
-            if (DateTime.Now.Subtract(TestResultHelper.GetPreviousRunDate(context)).TotalDays < VersionCheckDelayInDays)
+            var lastCheck = TestResultHelper.GetPreviousRunDate(context);
+            LogMessage($"Last check for latest NuGets: {lastCheck}");
+            if (DateTime.Now.Subtract(lastCheck).TotalDays < VersionCheckDelayInDays)
             {
+                LogMessage("Skipping check for latest NuGets.");
                 return;
             }
 
+            LogMessage("Checking for latest versions of NuGet packages...");
             foreach (var (packageId, packageVersion) in allNuGets)
             {
-                if (packageVersion == Constants.NuGetLatestVersion ||
-                    !Directory.Exists(GetRealVersionFolder(packageId, packageVersion)))
+                if (packageVersion == Constants.NuGetLatestVersion)
                 {
-                    var realVersion = packageVersion != Constants.NuGetLatestVersion
-                        ? packageVersion
-                        : null;
-                    packageManager.InstallPackage(packageId, SemanticVersion.ParseOptionalVersion(realVersion),
-                        ignoreDependencies: true, allowPrereleaseVersions: false);
+                    InstallPackage(packageId, packageVersion);
                 }
             }
+            LogMessage("Check for latest versions completed.");
+        }
+
+        private static void InstallPackage(string packageId, string packageVersion)
+        {
+            var realVersion = packageVersion != Constants.NuGetLatestVersion
+                ? packageVersion
+                : null;
+
+            LogMessage($"Installing NuGet {packageId}.{packageVersion ?? "{latest}"}");
+            packageManager.InstallPackage(packageId, SemanticVersion.ParseOptionalVersion(realVersion),
+                ignoreDependencies: true, allowPrereleaseVersions: false);
+        }
+
+        private static void LogMessage(string message)
+        {
+            Console.WriteLine($"{DateTime.Now} Test setup: {message}");
         }
     }
 }
