@@ -34,11 +34,11 @@ namespace SonarAnalyzer.Rules.CSharp
     public sealed class EmptyMethod : SonarDiagnosticAnalyzer
     {
         internal const string DiagnosticId = "S1186";
-        private const string MessageFormat = "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.";
+        private const string MessageFormat = "Add a nested comment explaining why this method is empty, throw a " +
+            "'NotSupportedException' or complete the implementation.";
 
         private static readonly DiagnosticDescriptor rule =
             DiagnosticDescriptorBuilder.GetDescriptor(DiagnosticId, MessageFormat, RspecStrings.ResourceManager);
-
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         protected override void Initialize(SonarAnalysisContext context)
@@ -52,6 +52,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             var methodNode = (MethodDeclarationSyntax)context.Node;
 
+            // No need to check for ExpressionBody as arrowed methods can't be empty
             if (methodNode.Body != null &&
                 IsEmpty(methodNode.Body) &&
                 !ShouldMethodBeExcluded(methodNode, context.SemanticModel))
