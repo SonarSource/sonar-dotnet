@@ -29,6 +29,7 @@ using SonarAnalyzer.Common;
 using SonarAnalyzer.ControlFlowGraph.CSharp;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.LiveVariableAnalysis.CSharp;
+using SonarAnalyzer.ShimLayer.CSharp;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -55,8 +56,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     var declaration = (BaseMethodDeclarationSyntax)c.Node;
 
-                    if (declaration.Body == null ||
-                        declaration.Body.Statements.Count == 0) // Don't report on empty methods
+                    if ((declaration.Body == null && declaration.ExpressionBody() == null) ||
+                        declaration.Body?.Statements.Count == 0) // Don't report on empty methods
                     {
                         return;
                     }
@@ -65,7 +66,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (symbol == null ||
                         !symbol.ContainingType.IsClassOrStruct() ||
                         symbol.IsMainMethod() ||
-                        IsBodyOnlyThrowNotImplementedException(declaration, c.SemanticModel))
+                        OnlyThrowsNotImplementedException(declaration, c.SemanticModel))
                     {
                         return;
                     }
@@ -76,17 +77,36 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.ConstructorDeclaration);
         }
 
-        private static bool IsBodyOnlyThrowNotImplementedException(BaseMethodDeclarationSyntax declaration,
+        private static bool OnlyThrowsNotImplementedException(BaseMethodDeclarationSyntax declaration,
             SemanticModel semanticModel)
         {
-            return declaration.Body.Statements.Count == 1 &&
-                declaration.Body.Statements
-                           .OfType<ThrowStatementSyntax>()
-                           .Select(tss => tss.Expression)
-                           .OfType<ObjectCreationExpressionSyntax>()
-                           .Select(oces => semanticModel.GetSymbolInfo(oces).Symbol)
-                           .OfType<IMethodSymbol>()
-                           .Any(s => s != null && s.ContainingType.Is(KnownType.System_NotImplementedException));
+            if (declaration.Body != null &&
+                declaration.Body.Statements.Count != 1)
+            {
+                return false;
+            }
+
+            var throwExpressions = Enumerable.Empty<ExpressionSyntax>();
+
+            if (declaration.ExpressionBody() != null)
+            {
+                if (ThrowExpressionSyntaxWrapper.IsInstance(declaration.ExpressionBody().Expression))
+                {
+                    throwExpressions = new[] { ((ThrowExpressionSyntaxWrapper)declaration.ExpressionBody().Expression).Expression };
+                }
+            }
+            else
+            {
+                throwExpressions = declaration.Body.Statements
+                    .OfType<ThrowStatementSyntax>()
+                    .Select(tss => tss.Expression);
+            }
+
+            return throwExpressions
+                .OfType<ObjectCreationExpressionSyntax>()
+                .Select(oces => semanticModel.GetSymbolInfo(oces).Symbol)
+                .OfType<IMethodSymbol>()
+                .Any(s => s != null && s.ContainingType.Is(KnownType.System_NotImplementedException));
         }
 
         private static void ReportUnusedParametersOnMethod(BaseMethodDeclarationSyntax declaration, IMethodSymbol methodSymbol,
@@ -111,8 +131,10 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void ReportOnDeadParametersAtEntry(BaseMethodDeclarationSyntax declaration, IMethodSymbol methodSymbol,
             IImmutableList<IParameterSymbol> noReportOnParameters, SyntaxNodeAnalysisContext context)
         {
+            var bodyNode = (CSharpSyntaxNode)declaration.Body ?? declaration.ExpressionBody();
+
             if (!declaration.IsKind(SyntaxKind.MethodDeclaration) ||
-                declaration.Body == null)
+                bodyNode == null)
             {
                 return;
             }
@@ -131,7 +153,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            if (!CSharpControlFlowGraph.TryGet(declaration.Body, context.SemanticModel, out var cfg))
+            if (!CSharpControlFlowGraph.TryGet(bodyNode, context.SemanticModel, out var cfg))
             {
                 return;
             }
@@ -194,7 +216,7 @@ namespace SonarAnalyzer.Rules.CSharp
             else
             {
                 var constructorDeclaration = (ConstructorDeclarationSyntax)declaration;
-                bodies = new SyntaxNode[] { constructorDeclaration.Body, constructorDeclaration.Initializer };
+                bodies = new SyntaxNode[] { constructorDeclaration.Body, constructorDeclaration.ExpressionBody(), constructorDeclaration.Initializer };
             }
 
             foreach (var body in bodies.WhereNotNull())
