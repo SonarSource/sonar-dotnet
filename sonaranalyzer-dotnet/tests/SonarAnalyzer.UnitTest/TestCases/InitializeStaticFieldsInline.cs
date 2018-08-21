@@ -54,7 +54,7 @@ namespace Tests.Diagnostics
     {
         private static readonly bool IsAvailable;
 
-        static ExpressionBodyCtor() => IsAvailable = Initialize(); // False Negative - we don't support ExpressionBody
+        static ExpressionBodyCtor() => IsAvailable = Initialize(); // Noncompliant
 
         static bool Initialize() => true;
     }
@@ -67,5 +67,10 @@ namespace Tests.Diagnostics
         {
             f = new MissingType();
         }
+    }
+
+    class Hello
+    {
+        static Hello() =>
     }
 }

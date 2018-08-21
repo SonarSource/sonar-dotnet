@@ -26,6 +26,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.ShimLayer.CSharp;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -46,8 +47,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 c =>
                 {
                     var constructorDeclaration = (ConstructorDeclarationSyntax)c.Node;
-                    if (constructorDeclaration.Body == null ||
-                        !constructorDeclaration.Modifiers.Any(SyntaxKind.StaticKeyword))
+                    if (!constructorDeclaration.Modifiers.Any(SyntaxKind.StaticKeyword) ||
+                        (constructorDeclaration.Body == null && constructorDeclaration.ExpressionBody() == null))
                     {
                         return;
                     }
@@ -58,8 +59,11 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    var hasFieldAssignment = constructorDeclaration.Body
-                        .DescendantNodes()
+                    var bodyDescendantNodes = constructorDeclaration.Body?.DescendantNodes()
+                        ?? constructorDeclaration.ExpressionBody()?.DescendantNodes()
+                        ?? Enumerable.Empty<SyntaxNode>();
+
+                    var hasFieldAssignment = bodyDescendantNodes
                         .OfType<AssignmentExpressionSyntax>()
                         .Select(x => c.SemanticModel.GetSymbolInfo(x.Left).Symbol)
                         .OfType<IFieldSymbol>()
