@@ -68,6 +68,10 @@ namespace Tests.Diagnostics
             }
         }
 
+        int Test4() => Test4(); // Noncompliant
+
+        int Test5() => 42;
+
         int Prop
         {
             get // Noncompliant {{Add a way to break out of this property accessor's recursion.}}
@@ -103,6 +107,20 @@ namespace Tests.Diagnostics
             {
                 var x = Prop2;
             }
+        }
+
+        int Prop3 => 42;
+
+        int Prop5 => Prop5; // Noncompliant
+
+        int Prop6
+        {
+            get => 42;
+        }
+
+        int Prop6
+        {
+            get => Prop6; // Compliant - FP
         }
 
         void InternalRecursion(int i)
