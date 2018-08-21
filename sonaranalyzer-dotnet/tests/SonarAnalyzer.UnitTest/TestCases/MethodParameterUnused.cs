@@ -54,6 +54,8 @@ namespace Tests.TestCases
         {
             // Empty on purpose
         }
+
+        void DoSomething(int a, int b) => throw new NotImplementedException();
     }
 
     class MainEntryPoints
