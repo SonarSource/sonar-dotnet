@@ -37,7 +37,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldNotBeIgnored.MsTest.cs",
                 new TestMethodShouldNotBeIgnored(),
-                additionalReferences: NuGetMetadataReference.MSTestTestFramework[testFwkVersion]);
+                additionalReferences: NuGetMetadataReference.MSTestTestFramework(testFwkVersion));
         }
 
         [DataTestMethod]
@@ -48,8 +48,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldNotBeIgnored.NUnit.cs",
                 new TestMethodShouldNotBeIgnored(),
-                additionalReferences: NuGetMetadataReference.MSTestTestFramework["1.1.11"]
-                    .Concat(NuGetMetadataReference.NUnit[testFwkVersion])
+                additionalReferences: NuGetMetadataReference.MSTestTestFrameworkV1
+                    .Concat(NuGetMetadataReference.NUnit(testFwkVersion))
                     .ToArray());
         }
 
@@ -61,9 +61,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldNotBeIgnored.Xunit.cs",
                 new TestMethodShouldNotBeIgnored(),
-                additionalReferences: NuGetMetadataReference.MSTestTestFramework["1.1.11"]
-                    .Concat(NuGetMetadataReference.XunitAssert[testFwkVersion])
-                    .Concat(NuGetMetadataReference.XunitExtensibilityCore[testFwkVersion])
+                additionalReferences: NuGetMetadataReference.MSTestTestFrameworkV1
+                    .Concat(NuGetMetadataReference.XunitFramework(testFwkVersion))
                     .ToArray());
         }
 
@@ -73,8 +72,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldNotBeIgnored.Xunit.v1.cs",
                 new TestMethodShouldNotBeIgnored(),
-                additionalReferences: NuGetMetadataReference.MSTestTestFramework["1.1.11"]
-                    .Concat(NuGetMetadataReference.XunitV1Packages)
+                additionalReferences: NuGetMetadataReference.MSTestTestFrameworkV1
+                    .Concat(NuGetMetadataReference.XunitFrameworkV1)
                     .ToArray());
         }
     }

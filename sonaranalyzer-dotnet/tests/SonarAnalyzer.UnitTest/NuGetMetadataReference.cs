@@ -23,7 +23,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Threading;
 using Microsoft.CodeAnalysis;
 using NuGet;
 
@@ -51,15 +50,6 @@ namespace SonarAnalyzer.UnitTest
         private static readonly PackageManager packageManager =
             new PackageManager(CreatePackageRepository(), PackagesFolderRelativePath);
 
-        private static Lazy<Dictionary<string, MetadataReference[]>> CreateLazy(string packageId, params string[] versions)
-        {
-            return new Lazy<Dictionary<string, MetadataReference[]>>(Create, LazyThreadSafetyMode.PublicationOnly);
-
-            Dictionary<string, MetadataReference[]> Create() =>
-                versions.Select(v => new { version = v, references = CreateReferences(packageId, v) })
-                    .ToDictionary(x => x.version, x => x.references);
-        }
-
         private static IPackageRepository CreatePackageRepository()
         {
             var currentFolder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
@@ -75,7 +65,7 @@ namespace SonarAnalyzer.UnitTest
             return aggregateRepository;
         }
         
-        private static MetadataReference[] CreateReferences(string packageId, string packageVersion)
+        public static MetadataReference[] Create(string packageId, string packageVersion)
         {
             EnsurePackageIsInstalled(packageId, packageVersion);
 
@@ -204,81 +194,44 @@ namespace SonarAnalyzer.UnitTest
 
         #endregion
 
-        private static Lazy<Dictionary<string, MetadataReference[]>> lazyFluentAssertions =
-            CreateLazy("FluentAssertions", "4.19.4", Constants.NuGetLatestVersion);
+        public static MetadataReference[] FluentAssertions(string packageVersion) =>
+            Create("FluentAssertions", packageVersion);
 
-        private static Lazy<Dictionary<string, MetadataReference[]>> lazyMicrosoftAspNetCoreMvcCore =
-            CreateLazy("Microsoft.AspNetCore.Mvc.Core", "2.0.4", Constants.NuGetLatestVersion);
+        public static MetadataReference[] MicrosoftAspNetCoreMvcCore(string packageVersion) =>
+            Create("Microsoft.AspNetCore.Mvc.Core", packageVersion);
 
-        private static Lazy<Dictionary<string, MetadataReference[]>> lazyMicrosoftAspNetCoreMvcViewFeatures =
-            CreateLazy("Microsoft.AspNetCore.Mvc.ViewFeatures", "2.0.4", Constants.NuGetLatestVersion);
+        public static MetadataReference[] MicrosoftAspNetCoreMvcViewFeatures(string packageVersion) =>
+            Create("Microsoft.AspNetCore.Mvc.ViewFeatures", packageVersion);
 
-        private static Lazy<Dictionary<string, MetadataReference[]>> lazyMicrosoftAspNetCoreRoutingAbstractions =
-            CreateLazy("Microsoft.AspNetCore.Routing.Abstractions", "2.0.3", Constants.NuGetLatestVersion);
+        public static MetadataReference[] MicrosoftAspNetCoreRoutingAbstractions(string packageVersion) =>
+            Create("Microsoft.AspNetCore.Routing.Abstractions", packageVersion);
 
-        private static Lazy<Dictionary<string, MetadataReference[]>> lazyMicrosoftAspNetMvc =
-            CreateLazy("Microsoft.AspNet.Mvc", "3.0.20105.1", Constants.NuGetLatestVersion);
+        public static MetadataReference[] MicrosoftAspNetMvc(string packageVersion) =>
+            Create("Microsoft.AspNet.Mvc", packageVersion);
 
-        private static Lazy<Dictionary<string, MetadataReference[]>> lazyMSTestTestFramework =
-            CreateLazy("MSTest.TestFramework", "1.1.11", Constants.NuGetLatestVersion);
+        public static MetadataReference[] MSTestTestFrameworkV1 =>
+            Create("MSTest.TestFramework", "1.1.11");
 
-        private static Lazy<Dictionary<string, MetadataReference[]>> lazyNUnit =
-            CreateLazy("NUnit", "2.5.7.10213", "2.6.7", "3.0.0", Constants.NuGetLatestVersion);
+        public static MetadataReference[] MSTestTestFramework(string packageVersion) =>
+            Create("MSTest.TestFramework", packageVersion);
 
-        private static Lazy<Dictionary<string, MetadataReference[]>> lazySystemCollectionsImmutable =
-            CreateLazy("System.Collections.Immutable", "1.3.0");
+        public static MetadataReference[] NUnit(string packageVersion) =>
+            Create("NUnit", packageVersion);
 
-        private static Lazy<Dictionary<string, MetadataReference[]>> lazySystemThreadingTasksExtensions =
-            CreateLazy("System.Threading.Tasks.Extensions", "4.0.0", Constants.NuGetLatestVersion);
+        public static MetadataReference[] SystemCollectionsImmutable(string packageVersion) =>
+            Create("System.Collections.Immutable", packageVersion);
 
-        private static Lazy<Dictionary<string, MetadataReference[]>> lazyXunitAssert =
-            CreateLazy("xunit.assert", "2.0.0", Constants.NuGetLatestVersion);
+        public static MetadataReference[] SystemThreadingTasksExtensions(string packageVersion) =>
+            Create("System.Threading.Tasks.Extensions", packageVersion);
 
-        private static Lazy<Dictionary<string, MetadataReference[]>> lazyXunitExtensibilityCore =
-            CreateLazy("xunit.extensibility.core", "2.0.0", Constants.NuGetLatestVersion);
+        public static MetadataReference[] XunitFramework(string packageVersion) =>
+            Create("xunit.assert", packageVersion)
+            .Concat(Create("xunit.extensibility.core", packageVersion))
+            .ToArray();
 
-        private static Lazy<Dictionary<string, MetadataReference[]>> lazyXunitV1 =
-            CreateLazy("xunit", "1.9.1");
-
-        private static Lazy<Dictionary<string, MetadataReference[]>> lazyXunitExtensionsV1 =
-            CreateLazy("xunit.extensions", "1.9.1");
-
-        internal static Dictionary<string, MetadataReference[]> FluentAssertions =>
-            lazyFluentAssertions.Value;
-
-        internal static Dictionary<string, MetadataReference[]> MicrosoftAspNetCoreMvcCore =>
-            lazyMicrosoftAspNetCoreMvcCore.Value;
-
-        internal static Dictionary<string, MetadataReference[]> MicrosoftAspNetCoreMvcViewFeatures =>
-            lazyMicrosoftAspNetCoreMvcViewFeatures.Value;
-
-        internal static Dictionary<string, MetadataReference[]> MicrosoftAspNetCoreRoutingAbstractions =>
-            lazyMicrosoftAspNetCoreRoutingAbstractions.Value;
-
-        internal static Dictionary<string, MetadataReference[]> MicrosoftAspNetMvc =>
-            lazyMicrosoftAspNetMvc.Value;
-
-        internal static Dictionary<string, MetadataReference[]> MSTestTestFramework =>
-            lazyMSTestTestFramework.Value;
-
-        internal static Dictionary<string, MetadataReference[]> NUnit =>
-            lazyNUnit.Value;
-
-        internal static Dictionary<string, MetadataReference[]> SystemCollectionsImmutable =>
-            lazySystemCollectionsImmutable.Value;
-
-        internal static Dictionary<string, MetadataReference[]> SystemThreadingTasksExtensions =>
-            lazySystemThreadingTasksExtensions.Value;
-
-        internal static Dictionary<string, MetadataReference[]> XunitAssert =>
-            lazyXunitAssert.Value;
-
-        internal static Dictionary<string, MetadataReference[]> XunitExtensibilityCore =>
-            lazyXunitExtensibilityCore.Value;
-
-        internal static MetadataReference[] XunitV1Packages =>
-            lazyXunitV1.Value.Values.First()
-            .Concat(lazyXunitExtensionsV1.Value.Values.First())
+        public static MetadataReference[] XunitFrameworkV1 =>
+            Create("xunit", "1.9.1")
+            .Concat(Create("xunit.extensions", "1.9.1"))
             .ToArray();
     }
 }

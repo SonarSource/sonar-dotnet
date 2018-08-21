@@ -37,7 +37,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldHaveCorrectSignature.MsTest.cs",
                 new TestMethodShouldHaveCorrectSignature(),
-                additionalReferences: NuGetMetadataReference.MSTestTestFramework[testFwkVersion]);
+                additionalReferences: NuGetMetadataReference.MSTestTestFramework(testFwkVersion));
         }
 
         [DataTestMethod]
@@ -48,7 +48,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldHaveCorrectSignature.NUnit.cs",
                 new TestMethodShouldHaveCorrectSignature(),
-                additionalReferences: NuGetMetadataReference.NUnit[testFwkVersion]);
+                additionalReferences: NuGetMetadataReference.NUnit(testFwkVersion));
         }
 
         [DataTestMethod]
@@ -59,9 +59,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldHaveCorrectSignature.Xunit.cs",
                 new TestMethodShouldHaveCorrectSignature(),
-                additionalReferences: NuGetMetadataReference.XunitAssert[testFwkVersion]
-                    .Concat(NuGetMetadataReference.XunitExtensibilityCore[testFwkVersion])
-                    .ToArray());
+                additionalReferences: NuGetMetadataReference.XunitFramework(testFwkVersion));
         }
 
         [TestMethod]
@@ -70,7 +68,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldHaveCorrectSignature.Xunit.Legacy.cs",
                 new TestMethodShouldHaveCorrectSignature(),
-                additionalReferences: NuGetMetadataReference.XunitV1Packages);
+                additionalReferences: NuGetMetadataReference.XunitFrameworkV1);
         }
 
         [TestMethod]
@@ -82,7 +80,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             // one, so we're using MSTest and only testing a single version.
             Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldHaveCorrectSignature.Misc.cs",
                 new TestMethodShouldHaveCorrectSignature(),
-                additionalReferences: NuGetMetadataReference.MSTestTestFramework["1.1.11"]);
+                additionalReferences: NuGetMetadataReference.MSTestTestFrameworkV1);
         }
     }
 }
