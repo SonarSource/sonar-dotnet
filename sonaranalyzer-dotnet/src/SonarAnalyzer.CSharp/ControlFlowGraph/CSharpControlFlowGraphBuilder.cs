@@ -82,6 +82,10 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             {
                 block = BuildStatement(statement, currentBlock);
             }
+            else if (node is ArrowExpressionClauseSyntax arrowExpression)
+            {
+                block = BuildExpression(arrowExpression.Expression, currentBlock);
+            }
             else if (node is ExpressionSyntax expression)
             {
                 block = BuildExpression(expression, currentBlock);
