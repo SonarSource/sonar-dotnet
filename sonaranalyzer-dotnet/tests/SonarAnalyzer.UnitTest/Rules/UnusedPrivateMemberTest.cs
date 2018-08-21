@@ -21,6 +21,7 @@
 extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
+using Microsoft.CodeAnalysis.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -740,7 +741,7 @@ public class UnityMessages4 : UnityEditor.AssetModificationProcessor
     private void SomeMethod(bool hasFocus) { } // Compliant
 }
 
-// Unity3D does not seem to to available as a nuget package and we cannot use the original classes
+// Unity3D does not seem to be available as a nuget package and we cannot use the original classes
 namespace UnityEngine
 {
     public class MonoBehaviour { }
@@ -759,6 +760,14 @@ namespace UnityEditor
         public void UnusedPrivateMember()
         {
             Verifier.VerifyAnalyzer(@"TestCases\UnusedPrivateMember.cs", new UnusedPrivateMember());
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void UnusedPrivateMember_CSharp7()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\UnusedPrivateMember.CSharp7.cs", new UnusedPrivateMember(),
+                options: new CSharpParseOptions(LanguageVersion.CSharp7));
         }
 
         [TestMethod]

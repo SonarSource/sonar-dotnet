@@ -188,6 +188,7 @@ namespace SonarAnalyzer.Helpers
             symbol.GetOverriddenMember() == null;
 
         private static bool IsEmptyConstructor(ConstructorDeclarationSyntax constructorDeclaration) =>
-            constructorDeclaration.Body == null || constructorDeclaration.Body.Statements.Count == 0;
+            !constructorDeclaration.HasBodyOrExpressionBody() ||
+            (constructorDeclaration.Body != null && constructorDeclaration.Body.Statements.Count == 0);
     }
 }
