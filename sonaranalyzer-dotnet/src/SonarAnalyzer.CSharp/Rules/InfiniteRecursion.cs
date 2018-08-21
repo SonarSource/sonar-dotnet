@@ -30,6 +30,7 @@ using SonarAnalyzer.Common;
 using SonarAnalyzer.ControlFlowGraph;
 using SonarAnalyzer.ControlFlowGraph.CSharp;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.ShimLayer.CSharp;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -48,7 +49,7 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override void Initialize(SonarAnalysisContext context)
         {
             context.RegisterSyntaxNodeActionInNonGenerated(
-                c=> CheckForNoExitMethod(c),
+                CheckForNoExitMethod,
                 SyntaxKind.MethodDeclaration);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
@@ -79,12 +80,13 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            var accessors = property.AccessorList?.Accessors.Where(a => a.Body != null);
+            var accessors = property.AccessorList?.Accessors.Where(a => a.Body != null || a.ExpressionBody() != null);
             if (accessors != null)
             {
                 foreach (var accessor in accessors)
                 {
-                    if (CSharpControlFlowGraph.TryGet(accessor.Body, c.SemanticModel, out cfg))
+                    var bodyNode = (CSharpSyntaxNode)accessor.Body ?? accessor.ExpressionBody();
+                    if (CSharpControlFlowGraph.TryGet(bodyNode, c.SemanticModel, out cfg))
                     {
                         var walker = new CfgWalkerForProperty(
                             new RecursionAnalysisContext(cfg, propertySymbol, accessor.Keyword.GetLocation(), c),
@@ -92,7 +94,7 @@ namespace SonarAnalyzer.Rules.CSharp
                             isSetAccessor: accessor.Keyword.IsKind(SyntaxKind.SetKeyword));
                         walker.CheckPaths();
 
-                        CheckInfiniteJumpLoop(accessor.Body, cfg, "property accessor", c);
+                        CheckInfiniteJumpLoop(bodyNode, cfg, "property accessor", c);
                     }
                 }
             }
@@ -108,18 +110,19 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            if (CSharpControlFlowGraph.TryGet(method.Body, c.SemanticModel, out var cfg) ||
-                CSharpControlFlowGraph.TryGet(method.ExpressionBody?.Expression, c.SemanticModel, out cfg))
+            var bodyNode = (CSharpSyntaxNode)method.Body ?? method.ExpressionBody;
+            if (bodyNode != null &&
+                CSharpControlFlowGraph.TryGet(bodyNode, c.SemanticModel, out var cfg))
             {
                 var walker = new CfgWalkerForMethod(
                     new RecursionAnalysisContext(cfg, methodSymbol, method.Identifier.GetLocation(), c));
                 walker.CheckPaths();
 
-                CheckInfiniteJumpLoop(method.Body, cfg, "method", c);
+                CheckInfiniteJumpLoop(bodyNode, cfg, "method", c);
             }
         }
 
-        private static void CheckInfiniteJumpLoop(BlockSyntax body, IControlFlowGraph cfg, string declarationType,
+        private static void CheckInfiniteJumpLoop(SyntaxNode body, IControlFlowGraph cfg, string declarationType,
             SyntaxNodeAnalysisContext analysisContext)
         {
             if (body == null)

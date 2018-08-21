@@ -19,8 +19,8 @@
  */
 
 extern alias csharp;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -31,7 +31,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void InfiniteRecursion()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\InfiniteRecursion.cs", new InfiniteRecursion());
+            Verifier.VerifyAnalyzer(@"TestCases\InfiniteRecursion.cs",
+                new InfiniteRecursion());
         }
     }
 }
