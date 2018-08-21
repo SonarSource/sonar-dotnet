@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 
 namespace Tests.Diagnostics
 {
@@ -50,6 +50,20 @@ namespace Tests.Diagnostics
         {
             Dispose(false);
         }
+    }
+
+    public class FinalizedDisposableExpression : IDisposable
+    {
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing) { }
+
+        ~FinalizedDisposable() =>
+            Dispose(false);
     }
 
     public class NoVirtualDispose : IDisposable
@@ -210,6 +224,15 @@ namespace Rspec_Compliant_Samples
             // Do not forget to call base
             base.Dispose(disposing);
         }
+    }
+
+    // Base disposable class, expression body
+    public class Foo5 : Foo2
+    {
+        protected override void Dispose(bool disposing) =>
+            // Cleanup
+            // Do not forget to call base
+            base.Dispose(disposing);
     }
 }
 

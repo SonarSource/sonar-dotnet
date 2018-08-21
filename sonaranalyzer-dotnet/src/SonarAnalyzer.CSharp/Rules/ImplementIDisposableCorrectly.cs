@@ -28,6 +28,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.ShimLayer.CSharp;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -142,12 +143,12 @@ namespace SonarAnalyzer.Rules.CSharp
 
             private void VerifyDestructor(DestructorDeclarationSyntax destructorSyntax)
             {
-                if (destructorSyntax?.Body == null)
+                if (!HasBodyOrExpressionBody(destructorSyntax))
                 {
                     return;
                 }
 
-                if (!HasStatementsCount(destructorSyntax.Body, 1) ||
+                if (!HasStatementsCount(destructorSyntax, 1) ||
                     !CallsVirtualDispose(destructorSyntax, argumentValue: "false"))
                 {
                     AddSecondaryLocation(destructorSyntax.Identifier.GetLocation(),
@@ -158,7 +159,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             private void VerifyDisposeOverrideCallsBase(MethodDeclarationSyntax disposeMethod)
             {
-                if (disposeMethod?.Body == null)
+                if (!HasBodyOrExpressionBody(disposeMethod))
                 {
                     return;
                 }
@@ -179,10 +180,10 @@ namespace SonarAnalyzer.Rules.CSharp
                     return;
                 }
 
-                if (disposeMethod.Body != null &&
+                if (HasBodyOrExpressionBody(disposeMethod) &&
                     !isSealedClass &&
                         (
-                            !HasStatementsCount(disposeMethod.Body, 2) ||
+                            !HasStatementsCount(disposeMethod, 2) ||
                             !CallsVirtualDispose(disposeMethod, argumentValue: "true") ||
                             !CallsSuppressFinalize(disposeMethod)
                         ))
@@ -242,10 +243,10 @@ namespace SonarAnalyzer.Rules.CSharp
                             .All(matching => matching);
             }
 
-            private static bool HasStatementsCount(BlockSyntax methodBody, int expectedStatementsCount)
-            {
-                return methodBody.ChildNodes().Count() == expectedStatementsCount;
-            }
+            private static bool HasStatementsCount(BaseMethodDeclarationSyntax methodDeclaration, int expectedStatementsCount) =>
+                methodDeclaration.Body?.Statements.Count == expectedStatementsCount ||
+                (methodDeclaration.ExpressionBody() != null &&
+                    expectedStatementsCount == 1); // Expression body has only one statement
 
             private bool CallsSuppressFinalize(BaseMethodDeclarationSyntax methodDeclaration)
             {
@@ -286,6 +287,10 @@ namespace SonarAnalyzer.Rules.CSharp
                     .WhereNotNull()
                     .Any(methodSym => !methodSym.IsAbstract);
             }
+
+            private static bool HasBodyOrExpressionBody(BaseMethodDeclarationSyntax methodDeclaration) =>
+                methodDeclaration != null &&
+                (methodDeclaration.Body != null || methodDeclaration.ExpressionBody() != null);
         }
     }
 }
