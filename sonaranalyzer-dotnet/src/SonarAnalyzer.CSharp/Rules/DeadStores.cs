@@ -59,6 +59,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
 
                     CheckForDeadStores(declaration.Body, symbol, c);
+                    // No need to check for ExpressionBody as it can't contain variable assignment
                 },
                 SyntaxKind.MethodDeclaration,
                 SyntaxKind.ConstructorDeclaration,
@@ -77,6 +78,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
 
                     CheckForDeadStores(declaration.Body, symbol, c);
+                    // No need to check for ExpressionBody as it can't contain variable assignment
                 },
                 SyntaxKind.GetAccessorDeclaration,
                 SyntaxKind.SetAccessorDeclaration,
