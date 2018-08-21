@@ -104,12 +104,20 @@ namespace SonarAnalyzer.UnitTest
                     InstallPackage(packageId, packageVersion);
                     WriteLastUpdateFile(packageId);
                 }
+                else
+                {
+                    LogMessage($"Skipping check for latest NuGet since checked recently: {packageId}");
+                }
             }
             else
             {
-                // Check to see if the specific package is already on disc
+                // Check to see if the specific package is already installed
                 var packageDir = GetNuGetPackageDirectory(packageId, packageVersion);
-                if (!Directory.Exists(packageDir))
+                if (Directory.Exists(packageDir))
+                {
+                    LogMessage($"Package found at {packageDir}");
+                }
+                else
                 {
                     LogMessage($"Package not found at {packageDir}");
                     InstallPackage(packageId, packageVersion);
