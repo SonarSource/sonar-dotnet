@@ -26,6 +26,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.ControlFlowGraph.CSharp;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.LiveVariableAnalysis.CSharp;
+using SonarAnalyzer.ShimLayer.CSharp;
 
 namespace SonarAnalyzer.SymbolicExecution
 {
@@ -45,25 +46,12 @@ namespace SonarAnalyzer.SymbolicExecution
                     }
 
                     Analyze(declaration.Body, symbol, analyze, c);
+                    Analyze(declaration.ExpressionBody(), symbol, analyze, c);
                 },
                 SyntaxKind.ConstructorDeclaration,
                 SyntaxKind.DestructorDeclaration,
                 SyntaxKind.ConversionOperatorDeclaration,
-                SyntaxKind.OperatorDeclaration);
-
-            context.RegisterSyntaxNodeActionInNonGenerated(
-                c =>
-                {
-                    var declaration = (MethodDeclarationSyntax)c.Node;
-                    var symbol = c.SemanticModel.GetDeclaredSymbol(declaration);
-                    if (symbol == null)
-                    {
-                        return;
-                    }
-
-                    Analyze(declaration.Body, symbol, analyze, c);
-                    Analyze(declaration.ExpressionBody?.Expression, symbol, analyze, c);
-                },
+                SyntaxKind.OperatorDeclaration,
                 SyntaxKind.MethodDeclaration);
 
             context.RegisterSyntaxNodeActionInNonGenerated(
@@ -76,7 +64,7 @@ namespace SonarAnalyzer.SymbolicExecution
                         return;
                     }
 
-                    Analyze(declaration.ExpressionBody?.Expression, symbol, analyze, c);
+                    Analyze(declaration.ExpressionBody, symbol, analyze, c);
                 },
                 SyntaxKind.PropertyDeclaration);
 
@@ -91,6 +79,7 @@ namespace SonarAnalyzer.SymbolicExecution
                     }
 
                     Analyze(declaration.Body, symbol, analyze, c);
+                    Analyze(declaration.ExpressionBody(), symbol, analyze, c);
                 },
                 SyntaxKind.GetAccessorDeclaration,
                 SyntaxKind.SetAccessorDeclaration,
