@@ -27,6 +27,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.ShimLayer.CSharp;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -117,8 +118,11 @@ namespace SonarAnalyzer.Rules.CSharp
                 return true;
             }
 
+            var expression = propertySyntax.ExpressionBody?.Expression
+                ?? getAccessor?.ExpressionBody()?.Expression
+                ?? GetSingleStatementExpression(getAccessor?.Body, isVoid: false);
 
-            if (!(GetExpressionToCheck(getAccessor?.Body, propertySyntax.ExpressionBody, true) is MemberAccessExpressionSyntax memberAccess) ||
+            if (!(expression is MemberAccessExpressionSyntax memberAccess) ||
                 !(memberAccess.Expression is BaseExpressionSyntax))
             {
                 return false;
@@ -143,7 +147,10 @@ namespace SonarAnalyzer.Rules.CSharp
                 return true;
             }
 
-            if (!(GetExpressionToCheck(setAccessor.Body, null, false) is AssignmentExpressionSyntax expressionToCheck) ||
+            var expression = setAccessor?.ExpressionBody()?.Expression
+                ?? GetSingleStatementExpression(setAccessor?.Body, isVoid: true);
+
+            if (!(expression is AssignmentExpressionSyntax expressionToCheck) ||
                 !expressionToCheck.IsKind(SyntaxKind.SimpleAssignmentExpression))
             {
                 return false;
@@ -180,22 +187,23 @@ namespace SonarAnalyzer.Rules.CSharp
                 return false;
             }
 
-            var expressionToCheck = GetExpressionToCheck(methodSyntax.Body, methodSyntax.ExpressionBody, !methodSymbol.ReturnsVoid)
-                as InvocationExpressionSyntax;
+            var expression = methodSyntax.ExpressionBody?.Expression
+                ?? GetSingleStatementExpression(methodSyntax.Body, isVoid: methodSymbol.ReturnsVoid);
+            var invocationExpression = expression as InvocationExpressionSyntax;
 
-            if (!(expressionToCheck?.Expression is MemberAccessExpressionSyntax memberAccess) ||
+            if (!(invocationExpression?.Expression is MemberAccessExpressionSyntax memberAccess) ||
                 !(memberAccess.Expression is BaseExpressionSyntax))
             {
                 return false;
             }
 
-            if (!(semanticModel.GetSymbolInfo(expressionToCheck).Symbol is IMethodSymbol invokedMethod) ||
+            if (!(semanticModel.GetSymbolInfo(invocationExpression).Symbol is IMethodSymbol invokedMethod) ||
                 !invokedMethod.Equals(methodSymbol.OverriddenMethod))
             {
                 return false;
             }
 
-            return AreArgumentsMatchParameters(methodSymbol, semanticModel, expressionToCheck, invokedMethod);
+            return AreArgumentsMatchParameters(methodSymbol, semanticModel, invocationExpression, invokedMethod);
         }
 
         private static bool IsMethodSymbolExcluded(IMethodSymbol methodSymbol)
@@ -255,22 +263,7 @@ namespace SonarAnalyzer.Rules.CSharp
             return true;
         }
 
-        private static ExpressionSyntax GetExpressionToCheck(BlockSyntax blockSyntax, ArrowExpressionClauseSyntax expressionBodySyntax,
-            bool hasReturnValue)
-        {
-            return hasReturnValue
-                ? GetExpressionFromBodyOptions(blockSyntax, expressionBodySyntax)
-                : (GetSingleStatement(blockSyntax) as ExpressionStatementSyntax)?.Expression;
-        }
-
-        private static ExpressionSyntax GetExpressionFromBodyOptions(BlockSyntax blockSyntax, ArrowExpressionClauseSyntax expressionBodySyntax)
-        {
-            return blockSyntax == null
-                ? expressionBodySyntax?.Expression
-                : (GetSingleStatement(blockSyntax) as ReturnStatementSyntax)?.Expression;
-        }
-
-        private static StatementSyntax GetSingleStatement(BlockSyntax block)
+        private static ExpressionSyntax GetSingleStatementExpression(BlockSyntax block, bool isVoid)
         {
             if (block == null ||
                 block.Statements.Count != 1)
@@ -278,7 +271,9 @@ namespace SonarAnalyzer.Rules.CSharp
                 return null;
             }
 
-            return block.Statements.First();
+            return isVoid
+                ? (block.Statements[0] as ExpressionStatementSyntax)?.Expression
+                : (block.Statements[0] as ReturnStatementSyntax)?.Expression;
         }
     }
 }
