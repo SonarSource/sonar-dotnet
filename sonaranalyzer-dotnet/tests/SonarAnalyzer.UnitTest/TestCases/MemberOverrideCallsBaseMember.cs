@@ -9,6 +9,7 @@ namespace Tests.Diagnostics
         public virtual int MyProperty1 { get; set; }
         public virtual int MyProperty2 { get; }
         public virtual int MyProperty3 { get; }
+        public virtual int MyProperty4 { get; set; }
 
         public virtual void Method(int[] numbers)
         {
@@ -53,6 +54,11 @@ namespace Tests.Diagnostics
         public override int MyProperty2 => base.MyProperty2; //Noncompliant {{Remove this property 'MyProperty2' to simply inherit its behavior.}}
 //      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
         public override int MyProperty3 => 42;
+        public override int MyProperty4 // Noncompliant
+        {
+            get => base.MyProperty4;
+            set => base.MyProperty4 = value;
+        }
 
         public Base bbb;
         public override void Method(int[] numbers) // Noncompliant {{Remove this method 'Method' to simply inherit its behavior.}}
