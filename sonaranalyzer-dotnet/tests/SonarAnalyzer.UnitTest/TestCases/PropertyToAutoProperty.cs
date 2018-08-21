@@ -98,5 +98,12 @@ namespace Tests.Diagnostics
         }
 
         public int Readonly => 1;
+
+        // C# 7 should not throw
+        public int Property01 //Noncompliant
+        {
+            get => field;
+            set => field = value;
+        }
     }
 }
