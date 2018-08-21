@@ -9,6 +9,7 @@ namespace Tests.Diagnostics
         public virtual int MyProperty1 { get; set; }
         public virtual int MyProperty2 { get; }
         public virtual int MyProperty3 { get; }
+        public virtual int MyProperty4 { get; set; }
 
         public virtual void Method(int[] numbers)
         {
