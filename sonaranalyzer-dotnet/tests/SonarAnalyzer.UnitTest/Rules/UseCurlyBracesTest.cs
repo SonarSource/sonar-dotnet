@@ -19,8 +19,9 @@
  */
 
 extern alias csharp;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -31,7 +32,17 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void UseCurlyBraces()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\UseCurlyBraces.cs", new UseCurlyBraces());
+            Verifier.VerifyAnalyzer(@"TestCases\UseCurlyBraces.cs",
+                new UseCurlyBraces());
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void UseCurlyBraces_CSharp7()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\UseCurlyBraces.CSharp7.cs",
+                new UseCurlyBraces(),
+                new CSharpParseOptions(LanguageVersion.CSharp7));
         }
     }
 }

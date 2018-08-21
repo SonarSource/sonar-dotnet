@@ -6,7 +6,7 @@ namespace Tests.Diagnostics
 {
     public class UseCurlyBraces
     {
-        public UseCurlyBraces()
+        public UseCurlyBraces(object obj)
         {
             if (false) ; // Noncompliant
 //          ^^
@@ -33,6 +33,11 @@ namespace Tests.Diagnostics
             for (int i = 0; i < 10; i++) { }
             while (false) { }
             do { } while (false);
+
+            if (obj is string str)
+            {
+                Console.WriteLine(str);
+            }
         }
     }
 }
