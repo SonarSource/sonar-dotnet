@@ -30,6 +30,7 @@ using SonarAnalyzer.Common;
 using SonarAnalyzer.ControlFlowGraph;
 using SonarAnalyzer.ControlFlowGraph.CSharp;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.ShimLayer.CSharp;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -134,7 +135,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 return true;
             }
 
-            if (!CSharpControlFlowGraph.TryGet(ctor.SyntaxNode.Body, ctor.SemanticModel, out var cfg))
+            var ctorBody = (CSharpSyntaxNode)ctor.SyntaxNode.Body ?? ctor.SyntaxNode.ExpressionBody();
+            if (!CSharpControlFlowGraph.TryGet(ctorBody, ctor.SemanticModel, out var cfg))
             {
                 return false;
             }
