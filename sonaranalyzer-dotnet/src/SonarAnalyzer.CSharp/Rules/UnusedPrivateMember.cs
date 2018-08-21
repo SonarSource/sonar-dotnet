@@ -212,7 +212,7 @@ namespace SonarAnalyzer.Rules.CSharp
             else if (access == AccessorAccess.Set && property.GetMethod != null)
             {
                 var accessorSyntax = GetAccessorSyntax(property.GetMethod);
-                if (accessorSyntax != null && accessorSyntax.Body != null)
+                if (accessorSyntax != null && accessorSyntax.HasBodyOrExpressionBody())
                 {
                     yield return Diagnostic.Create(rule, accessorSyntax.GetLocation(), "private",
                         "get accessor in property", property.Name);
