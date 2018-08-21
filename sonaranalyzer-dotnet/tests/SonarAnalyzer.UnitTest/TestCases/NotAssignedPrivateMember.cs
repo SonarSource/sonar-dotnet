@@ -104,4 +104,17 @@ namespace Tests.Diagnostics
             public uint number; // Compliant, we don't raise on members of classes with StructLayout attribute
         }
     }
+
+    public class MyTupleClass
+    {
+        private readonly int _foo;
+        private readonly int _bar;
+
+        public MyTupleClass()
+        {
+            (_foo, _bar) = GetFoobar();
+        }
+
+        private static (int f, int b) GetFoobar() => (1, 2);
+    }
 }

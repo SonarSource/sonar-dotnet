@@ -27,6 +27,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.ShimLayer.CSharp;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -216,7 +217,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
 
                 if (parentNode is ArgumentSyntax argument &&
-                    !argument.RefOrOutKeyword.IsKind(SyntaxKind.None))
+                    (!argument.RefOrOutKeyword.IsKind(SyntaxKind.None) || TupleExpressionSyntaxWrapper.IsInstance(argument.Parent)))
                 {
                     assignedMembers.Add(memberSymbol);
                 }
