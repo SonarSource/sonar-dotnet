@@ -28,6 +28,7 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Helpers.CSharp;
+using SonarAnalyzer.ShimLayer.CSharp;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -80,7 +81,8 @@ namespace SonarAnalyzer.Rules.CSharp
         internal static bool IsAutoProperty(PropertyDeclarationSyntax propertyDeclaration)
         {
             return propertyDeclaration.AccessorList != null &&
-                propertyDeclaration.AccessorList.Accessors.All(accessor => accessor.Body == null);
+                propertyDeclaration.AccessorList.Accessors.All(
+                    accessor => accessor.Body == null && accessor.ExpressionBody() == null);
         }
 
         private static void CheckEvent(SyntaxNodeAnalysisContext context)
