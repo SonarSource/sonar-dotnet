@@ -37,7 +37,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             Verifier.VerifyAnalyzer(@"TestCases\DoNotUseLiteralBoolInAssertions.MsTest.cs",
                 new DoNotUseLiteralBoolInAssertions(),
-                additionalReferences: NuGetMetadataReference.MSTestTestFramework[testFwkVersion]);
+                additionalReferences: NuGetMetadataReference.MSTestTestFramework(testFwkVersion));
         }
 
         [DataTestMethod]
@@ -48,7 +48,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             Verifier.VerifyAnalyzer(@"TestCases\DoNotUseLiteralBoolInAssertions.NUnit.cs",
                 new DoNotUseLiteralBoolInAssertions(),
-                additionalReferences: NuGetMetadataReference.NUnit[testFwkVersion]);
+                additionalReferences: NuGetMetadataReference.NUnit(testFwkVersion));
         }
 
         [DataTestMethod]
@@ -59,9 +59,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             Verifier.VerifyAnalyzer(@"TestCases\DoNotUseLiteralBoolInAssertions.Xunit.cs",
                 new DoNotUseLiteralBoolInAssertions(),
-                additionalReferences: NuGetMetadataReference.XunitAssert[testFwkVersion]
-                    .Concat(NuGetMetadataReference.XunitExtensibilityCore[testFwkVersion])
-                    .ToArray());
+                additionalReferences: NuGetMetadataReference.XunitFramework(testFwkVersion));
         }
     }
 }

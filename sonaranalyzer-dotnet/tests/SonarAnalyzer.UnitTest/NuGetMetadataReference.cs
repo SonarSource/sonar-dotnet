@@ -23,22 +23,16 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Threading;
 using Microsoft.CodeAnalysis;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NuGet;
 
 namespace SonarAnalyzer.UnitTest
 {
-    [TestClass]
     internal static class NuGetMetadataReference
     {
         #region Helpers
 
         private const string PackagesFolderRelativePath = @"..\..\..\..\packages\";
-
-        private static readonly ISet<(string packageId, string packageVersion)> allNuGets =
-            new HashSet<(string, string)>();
 
         private static readonly List<string> allowedNugetLibDirectories =
             new List<string>
@@ -56,20 +50,6 @@ namespace SonarAnalyzer.UnitTest
         private static readonly PackageManager packageManager =
             new PackageManager(CreatePackageRepository(), PackagesFolderRelativePath);
 
-        private static Lazy<Dictionary<string, MetadataReference[]>> CreateLazy(string packageId, params string[] versions)
-        {
-            foreach (var packageVersion in versions)
-            {
-                allNuGets.Add((packageId, packageVersion));
-            }
-
-            return new Lazy<Dictionary<string, MetadataReference[]>>(Create, LazyThreadSafetyMode.PublicationOnly);
-
-            Dictionary<string, MetadataReference[]> Create() =>
-                versions.Select(v => new { version = v, references = CreateReferences(packageId, v) })
-                    .ToDictionary(x => x.version, x => x.references);
-        }
-
         private static IPackageRepository CreatePackageRepository()
         {
             var currentFolder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
@@ -84,10 +64,13 @@ namespace SonarAnalyzer.UnitTest
 
             return aggregateRepository;
         }
-
-        private static MetadataReference[] CreateReferences(string packageId, string packageVersion)
+        
+        public static MetadataReference[] Create(string packageId, string packageVersion)
         {
-            var matchingDlls = Directory.GetFiles(GetNuGetPackageDirectory(), "*.dll", SearchOption.AllDirectories)
+            EnsurePackageIsInstalled(packageId, packageVersion);
+
+            var packageDirectory = GetNuGetPackageDirectory(packageId, packageVersion);
+            var matchingDlls = Directory.GetFiles(packageDirectory, "*.dll", SearchOption.AllDirectories)
                 .Select(path => new FileInfo(path))
                 .GroupBy(file => file.Directory.Name)
                 .Where(group => allowedNugetLibDirectories.Any(y => group.Key.StartsWith(y)))
@@ -95,10 +78,10 @@ namespace SonarAnalyzer.UnitTest
                 .First();
 
             return matchingDlls.Select(file => MetadataReference.CreateFromFile(file.FullName)).ToArray();
-
-            string GetNuGetPackageDirectory() =>
-                $@"{PackagesFolderRelativePath}{packageId}.{GetRealVersionFolder(packageId, packageVersion)}\lib";
         }
+
+        private static string GetNuGetPackageDirectory(string packageId, string packageVersion) =>
+            $@"{PackagesFolderRelativePath}{packageId}.{GetRealVersionFolder(packageId, packageVersion)}\lib";
 
         private static string GetRealVersionFolder(string packageId, string packageVersion) =>
             packageVersion != Constants.NuGetLatestVersion
@@ -109,110 +92,154 @@ namespace SonarAnalyzer.UnitTest
 
         #endregion Helpers
 
-        private static Lazy<Dictionary<string, MetadataReference[]>> lazyFluentAssertions =
-            CreateLazy("FluentAssertions", "4.19.4", Constants.NuGetLatestVersion);
+        #region Package installation and update helpers
 
-        private static Lazy<Dictionary<string, MetadataReference[]>> lazyMicrosoftAspNetCoreMvcCore =
-            CreateLazy("Microsoft.AspNetCore.Mvc.Core", "2.0.4", Constants.NuGetLatestVersion);
-
-        private static Lazy<Dictionary<string, MetadataReference[]>> lazyMicrosoftAspNetCoreMvcViewFeatures =
-            CreateLazy("Microsoft.AspNetCore.Mvc.ViewFeatures", "2.0.4", Constants.NuGetLatestVersion);
-
-        private static Lazy<Dictionary<string, MetadataReference[]>> lazyMicrosoftAspNetCoreRoutingAbstractions =
-            CreateLazy("Microsoft.AspNetCore.Routing.Abstractions", "2.0.3", Constants.NuGetLatestVersion);
-
-        private static Lazy<Dictionary<string, MetadataReference[]>> lazyMicrosoftAspNetMvc =
-            CreateLazy("Microsoft.AspNet.Mvc", "3.0.20105.1", Constants.NuGetLatestVersion);
-
-        private static Lazy<Dictionary<string, MetadataReference[]>> lazyMSTestTestFramework =
-            CreateLazy("MSTest.TestFramework", "1.1.11", Constants.NuGetLatestVersion);
-
-        private static Lazy<Dictionary<string, MetadataReference[]>> lazyNUnit =
-            CreateLazy("NUnit", "2.5.7.10213", "2.6.7", "3.0.0", Constants.NuGetLatestVersion);
-
-        private static Lazy<Dictionary<string, MetadataReference[]>> lazySystemCollectionsImmutable =
-            CreateLazy("System.Collections.Immutable", "1.3.0");
-
-        private static Lazy<Dictionary<string, MetadataReference[]>> lazySystemThreadingTasksExtensions =
-            CreateLazy("System.Threading.Tasks.Extensions", "4.0.0", Constants.NuGetLatestVersion);
-
-        private static Lazy<Dictionary<string, MetadataReference[]>> lazyXunitAssert =
-            CreateLazy("xunit.assert", "2.0.0", Constants.NuGetLatestVersion);
-
-        private static Lazy<Dictionary<string, MetadataReference[]>> lazyXunitExtensibilityCore =
-            CreateLazy("xunit.extensibility.core", "2.0.0", Constants.NuGetLatestVersion);
-
-        private static Lazy<Dictionary<string, MetadataReference[]>> lazyXunitV1 =
-            CreateLazy("xunit", "1.9.1");
-
-        private static Lazy<Dictionary<string, MetadataReference[]>> lazyXunitExtensionsV1 =
-            CreateLazy("xunit.extensions", "1.9.1");
-
-        internal static Dictionary<string, MetadataReference[]> FluentAssertions =>
-            lazyFluentAssertions.Value;
-
-        internal static Dictionary<string, MetadataReference[]> MicrosoftAspNetCoreMvcCore =>
-            lazyMicrosoftAspNetCoreMvcCore.Value;
-
-        internal static Dictionary<string, MetadataReference[]> MicrosoftAspNetCoreMvcViewFeatures =>
-            lazyMicrosoftAspNetCoreMvcViewFeatures.Value;
-
-        internal static Dictionary<string, MetadataReference[]> MicrosoftAspNetCoreRoutingAbstractions =>
-            lazyMicrosoftAspNetCoreRoutingAbstractions.Value;
-
-        internal static Dictionary<string, MetadataReference[]> MicrosoftAspNetMvc =>
-            lazyMicrosoftAspNetMvc.Value;
-
-        internal static Dictionary<string, MetadataReference[]> MSTestTestFramework =>
-            lazyMSTestTestFramework.Value;
-
-        internal static Dictionary<string, MetadataReference[]> NUnit =>
-            lazyNUnit.Value;
-
-        internal static Dictionary<string, MetadataReference[]> SystemCollectionsImmutable =>
-            lazySystemCollectionsImmutable.Value;
-
-        internal static Dictionary<string, MetadataReference[]> SystemThreadingTasksExtensions =>
-            lazySystemThreadingTasksExtensions.Value;
-
-        internal static Dictionary<string, MetadataReference[]> XunitAssert =>
-            lazyXunitAssert.Value;
-
-        internal static Dictionary<string, MetadataReference[]> XunitExtensibilityCore =>
-            lazyXunitExtensibilityCore.Value;
-
-        internal static MetadataReference[] XunitV1Packages =>
-            lazyXunitV1.Value.Values.First()
-            .Concat(lazyXunitExtensionsV1.Value.Values.First())
-            .ToArray();
-
-        [AssemblyInitialize]
-        public static void SetupAssembly(TestContext context)
+        private static void EnsurePackageIsInstalled(string packageId, string packageVersion)
         {
-            // Choosing one day to reduce the waiting time when a new version of the used nugets is
-            // released. If the waiting time when running tests locally is big we can increase.
-            const int VersionCheckDelayInDays = 1;
-
-            // Install new nugets only once per day to improve the performance when running tests locally
-            // When adding a new nuget it is recommended to delete the content of
-            // sonar -csharp\sonaranalyzer-dotnet\TestResults
-            if (DateTime.Now.Subtract(TestResultHelper.GetPreviousRunDate(context)).TotalDays < VersionCheckDelayInDays)
+            if (packageVersion == Constants.NuGetLatestVersion)
             {
-                return;
-            }
-
-            foreach (var (packageId, packageVersion) in allNuGets)
-            {
-                if (packageVersion == Constants.NuGetLatestVersion ||
-                    !Directory.Exists(GetRealVersionFolder(packageId, packageVersion)))
+                if (IsCheckForLatestPackageRequired(packageId))
                 {
-                    var realVersion = packageVersion != Constants.NuGetLatestVersion
-                        ? packageVersion
-                        : null;
-                    packageManager.InstallPackage(packageId, SemanticVersion.ParseOptionalVersion(realVersion),
-                        ignoreDependencies: true, allowPrereleaseVersions: false);
+                    LogMessage($"Checking for newer version of package: {packageId}");
+                    InstallPackage(packageId, packageVersion);
+                    WriteLastUpdateFile(packageId);
+                }
+                else
+                {
+                    LogMessage($"Skipping check for latest NuGet since checked recently: {packageId}");
+                }
+            }
+            else
+            {
+                // Check to see if the specific package is already installed
+                var packageDir = GetNuGetPackageDirectory(packageId, packageVersion);
+                if (Directory.Exists(packageDir))
+                {
+                    LogMessage($"Package found at {packageDir}");
+                }
+                else
+                {
+                    LogMessage($"Package not found at {packageDir}");
+                    InstallPackage(packageId, packageVersion);
                 }
             }
         }
+
+        private static bool IsCheckForLatestPackageRequired(string packageId)
+        {
+            // Install new nugets only once per day to improve the performance when running tests locally.
+
+            // We write a file with the timestamp of the last check in the package directory
+            // of the newest version of the package.
+            // If we can't find the package directory, we assume a check is required.
+            // If we can find an installation of the package but not the timestamp file, we assume a
+            // check is required (the package we found might be a specific older version that was installed
+            // by another test).
+
+            // Choosing one day to reduce the waiting time when a new version of the used nugets is
+            // released. If the waiting time when running tests locally is big we can increase.Annecy, France
+            const int VersionCheckDelayInDays = 1;
+
+            var lastCheck = GetLastCheckTime(packageId);
+            LogMessage($"Last check for latest NuGets: {lastCheck}");
+            return (DateTime.Now.Subtract(lastCheck).TotalDays > VersionCheckDelayInDays);
+        }
+
+        private static DateTime GetLastCheckTime(string packageId)
+        {
+            var filePath = GetLastCheckFilePath(packageId);
+            if (filePath == null ||
+                !File.Exists(filePath) ||
+                !DateTime.TryParse(File.ReadAllText(filePath), out var timestamp))
+            {
+                return DateTime.MinValue;
+            }
+            return timestamp;
+        }
+
+        private static void WriteLastUpdateFile(string packageId)
+        {
+            var filePath = GetLastCheckFilePath(packageId);
+            File.WriteAllText(filePath, DateTime.Now.ToString("d")); // short date pattern
+        }
+
+        private static string GetLastCheckFilePath(string packageId)
+        {
+            // The file containing the last-check timestamp is stored in folder of the
+            // latest version of the package.
+            // Package directory names are in the form "{package id}.{package version}".
+            // Sorting the names orders them by version.
+
+            const string LastUpdateFileName = "LastCheckedForUpdate.txt";
+
+            var directory = Directory.GetDirectories(PackagesFolderRelativePath, $"{packageId}.*")
+                .OrderByDescending(name => name)
+                .FirstOrDefault();
+
+            if (directory == null)
+            {
+                return null;
+            }
+
+            return Path.Combine(directory, LastUpdateFileName);
+        }
+
+        private static void InstallPackage(string packageId, string packageVersion)
+        {
+            var realVersion = packageVersion != Constants.NuGetLatestVersion
+                ? packageVersion
+                : null;
+
+            LogMessage($"Installing NuGet {packageId}.{packageVersion}");
+            packageManager.InstallPackage(packageId, SemanticVersion.ParseOptionalVersion(realVersion),
+                ignoreDependencies: true, allowPrereleaseVersions: false);
+        }
+
+        private static void LogMessage(string message)
+        {
+            Console.WriteLine($"[{DateTime.Now}] Test setup: {message}");
+        }
+
+        #endregion
+
+        public static MetadataReference[] FluentAssertions(string packageVersion) =>
+            Create("FluentAssertions", packageVersion);
+
+        public static MetadataReference[] MicrosoftAspNetCoreMvcCore(string packageVersion) =>
+            Create("Microsoft.AspNetCore.Mvc.Core", packageVersion);
+
+        public static MetadataReference[] MicrosoftAspNetCoreMvcViewFeatures(string packageVersion) =>
+            Create("Microsoft.AspNetCore.Mvc.ViewFeatures", packageVersion);
+
+        public static MetadataReference[] MicrosoftAspNetCoreRoutingAbstractions(string packageVersion) =>
+            Create("Microsoft.AspNetCore.Routing.Abstractions", packageVersion);
+
+        public static MetadataReference[] MicrosoftAspNetMvc(string packageVersion) =>
+            Create("Microsoft.AspNet.Mvc", packageVersion);
+
+        public static MetadataReference[] MSTestTestFrameworkV1 =>
+            Create("MSTest.TestFramework", "1.1.11");
+
+        public static MetadataReference[] MSTestTestFramework(string packageVersion) =>
+            Create("MSTest.TestFramework", packageVersion);
+
+        public static MetadataReference[] NUnit(string packageVersion) =>
+            Create("NUnit", packageVersion);
+
+        public static MetadataReference[] SystemCollectionsImmutable(string packageVersion) =>
+            Create("System.Collections.Immutable", packageVersion);
+
+        public static MetadataReference[] SystemThreadingTasksExtensions(string packageVersion) =>
+            Create("System.Threading.Tasks.Extensions", packageVersion);
+
+        public static MetadataReference[] XunitFramework(string packageVersion) =>
+            Create("xunit.assert", packageVersion)
+            .Concat(Create("xunit.extensibility.core", packageVersion))
+            .ToArray();
+
+        public static MetadataReference[] XunitFrameworkV1 =>
+            Create("xunit", "1.9.1")
+            .Concat(Create("xunit.extensions", "1.9.1"))
+            .ToArray();
     }
 }

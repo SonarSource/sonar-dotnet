@@ -47,7 +47,7 @@ public class Foo : System.Web.Mvc.Controller
 }
 ";
             var compilation = TestHelper.Compile(code,
-                additionalReferences: NuGetMetadataReference.MicrosoftAspNetMvc[aspNetMvcVersion]);
+                additionalReferences: NuGetMetadataReference.MicrosoftAspNetMvc(aspNetMvcVersion));
 
             var publicFoo = compilation.GetMethodSymbol("PublicFoo");
             var protectedFoo = compilation.GetMethodSymbol("ProtectedFoo");
@@ -82,7 +82,7 @@ public class MyController : Controller
 }
 ";
             var compilation = TestHelper.Compile(code,
-                additionalReferences:  NuGetMetadataReference.MicrosoftAspNetMvc[aspNetMvcVersion]);
+                additionalReferences:  NuGetMetadataReference.MicrosoftAspNetMvc(aspNetMvcVersion));
 
             var publicFoo = compilation.GetMethodSymbol("PublicFoo");
             var publicBar = compilation.GetMethodSymbol("PublicBar");
@@ -109,7 +109,7 @@ public class Foo
 }
 ";
             var compilation = TestHelper.Compile(code,
-                additionalReferences:  NuGetMetadataReference.MicrosoftAspNetMvc[aspNetMvcVersion]);
+                additionalReferences:  NuGetMetadataReference.MicrosoftAspNetMvc(aspNetMvcVersion));
 
             var publicFoo = compilation.GetMethodSymbol("PublicFoo");
 
@@ -132,7 +132,7 @@ public class Foo : Microsoft.AspNetCore.Mvc.ControllerBase
 }
 ";
             var compilation = TestHelper.Compile(code,
-                additionalReferences:  NuGetMetadataReference.MicrosoftAspNetMvc[aspNetMvcVersion]);
+                additionalReferences:  NuGetMetadataReference.MicrosoftAspNetMvc(aspNetMvcVersion));
 
             var publicFoo = compilation.GetMethodSymbol("PublicFoo");
 

@@ -37,7 +37,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             Verifier.VerifyAnalyzer(@"TestCases\MethodShouldBeNameAccordingToSynchronicity.cs",
                 new MethodShouldBeNameAccordingToSynchronicity(),
-                additionalReferences: NuGetMetadataReference.SystemThreadingTasksExtensions[tasksVersion]);
+                additionalReferences: NuGetMetadataReference.SystemThreadingTasksExtensions(tasksVersion));
         }
 
         [DataTestMethod]
@@ -48,8 +48,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             Verifier.VerifyAnalyzer(@"TestCases\MethodShouldBeNameAccordingToSynchronicity.MsTest.cs",
                 new MethodShouldBeNameAccordingToSynchronicity(),
-                additionalReferences: NuGetMetadataReference.MSTestTestFramework[testFwkVersion]
-                    .Concat(NuGetMetadataReference.SystemThreadingTasksExtensions["4.0.0"])
+                additionalReferences: NuGetMetadataReference.MSTestTestFramework(testFwkVersion)
+                    .Concat(NuGetMetadataReference.SystemThreadingTasksExtensions("4.0.0"))
                     .ToArray());
         }
 
@@ -61,8 +61,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             Verifier.VerifyAnalyzer(@"TestCases\MethodShouldBeNameAccordingToSynchronicity.NUnit.cs",
                 new MethodShouldBeNameAccordingToSynchronicity(),
-                additionalReferences: NuGetMetadataReference.NUnit[testFwkVersion]
-                    .Concat(NuGetMetadataReference.SystemThreadingTasksExtensions["4.0.0"])
+                additionalReferences: NuGetMetadataReference.NUnit(testFwkVersion)
+                    .Concat(NuGetMetadataReference.SystemThreadingTasksExtensions("4.0.0"))
                     .ToArray());
         }
 
@@ -74,9 +74,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             Verifier.VerifyAnalyzer(@"TestCases\MethodShouldBeNameAccordingToSynchronicity.Xunit.cs",
                 new MethodShouldBeNameAccordingToSynchronicity(),
-                additionalReferences: NuGetMetadataReference.XunitAssert[testFwkVersion]
-                    .Concat(NuGetMetadataReference.XunitExtensibilityCore[testFwkVersion])
-                    .Concat(NuGetMetadataReference.SystemThreadingTasksExtensions["4.0.0"])
+                additionalReferences: NuGetMetadataReference.XunitFramework(testFwkVersion)
+                    .Concat(NuGetMetadataReference.SystemThreadingTasksExtensions("4.0.0"))
                     .ToArray());
         }
     }

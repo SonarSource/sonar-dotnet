@@ -35,7 +35,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             Verifier.VerifyAnalyzer(@"TestCases\ExpectedExceptionAttributeShouldNotBeUsed.MsTest.cs",
                 new ExpectedExceptionAttributeShouldNotBeUsed(),
-                additionalReferences: NuGetMetadataReference.MSTestTestFramework[testFwkVersion]);
+                additionalReferences: NuGetMetadataReference.MSTestTestFramework(testFwkVersion));
         }
 
         [DataTestMethod]
@@ -46,7 +46,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             Verifier.VerifyAnalyzer(@"TestCases\ExpectedExceptionAttributeShouldNotBeUsed.NUnit.cs",
                 new ExpectedExceptionAttributeShouldNotBeUsed(),
-                additionalReferences: NuGetMetadataReference.NUnit[testFwkVersion]);
+                additionalReferences: NuGetMetadataReference.NUnit(testFwkVersion));
         }
 
         [DataTestMethod]
@@ -58,7 +58,7 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             Verifier.VerifyNoIssueReported(@"TestCases\ExpectedExceptionAttributeShouldNotBeUsed.NUnit.cs",
                 new ExpectedExceptionAttributeShouldNotBeUsed(),
-                additionalReferences: NuGetMetadataReference.NUnit[testFwkVersion]);
+                additionalReferences: NuGetMetadataReference.NUnit(testFwkVersion));
         }
     }
 }

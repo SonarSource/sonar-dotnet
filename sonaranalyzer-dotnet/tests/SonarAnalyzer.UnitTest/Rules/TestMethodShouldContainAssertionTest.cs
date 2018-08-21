@@ -37,8 +37,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldContainAssertion.MsTest.cs",
                 new TestMethodShouldContainAssertion(),
-                additionalReferences: NuGetMetadataReference.MSTestTestFramework[testFwkVersion]
-                    .Concat(NuGetMetadataReference.FluentAssertions[fluentVersion])
+                additionalReferences: NuGetMetadataReference.MSTestTestFramework(testFwkVersion)
+                    .Concat(NuGetMetadataReference.FluentAssertions(fluentVersion))
                     .ToArray());
         }
 
@@ -50,8 +50,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldContainAssertion.NUnit.cs",
                 new TestMethodShouldContainAssertion(),
-                additionalReferences: NuGetMetadataReference.NUnit[testFwkVersion]
-                    .Concat(NuGetMetadataReference.FluentAssertions[fluentVersion])
+                additionalReferences: NuGetMetadataReference.NUnit(testFwkVersion)
+                    .Concat(NuGetMetadataReference.FluentAssertions(fluentVersion))
                     .ToArray());
         }
 
@@ -63,9 +63,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldContainAssertion.Xunit.cs",
                 new TestMethodShouldContainAssertion(),
-                additionalReferences: NuGetMetadataReference.XunitAssert[testFwkVersion]
-                    .Concat(NuGetMetadataReference.XunitExtensibilityCore[testFwkVersion])
-                    .Concat(NuGetMetadataReference.FluentAssertions[fluentVersion])
+                additionalReferences: NuGetMetadataReference.XunitFramework(testFwkVersion)
+                    .Concat(NuGetMetadataReference.FluentAssertions(fluentVersion))
                     .ToArray());
         }
 
@@ -75,8 +74,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         {
             Verifier.VerifyAnalyzer(@"TestCases\TestMethodShouldContainAssertion.Xunit.Legacy.cs",
                 new TestMethodShouldContainAssertion(),
-                additionalReferences: NuGetMetadataReference.XunitV1Packages
-                    .Concat(NuGetMetadataReference.FluentAssertions["4.19.4"])
+                additionalReferences: NuGetMetadataReference.XunitFrameworkV1
+                    .Concat(NuGetMetadataReference.FluentAssertions("4.19.4"))
                     .ToArray());
         }
     }
