@@ -27,6 +27,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.ShimLayer.CSharp;
 
 namespace SonarAnalyzer.Metrics.CSharp
 {
@@ -100,7 +101,7 @@ namespace SonarAnalyzer.Metrics.CSharp
                 return true;
             }
 
-            if (node is MethodDeclarationSyntax method && method.ExpressionBody != null)
+            if (node is BaseMethodDeclarationSyntax method && method.ExpressionBody() != null)
             {
                 return true;
             }
@@ -114,7 +115,8 @@ namespace SonarAnalyzer.Metrics.CSharp
 
             if (node is AccessorDeclarationSyntax accessor)
             {
-                if (accessor.Body != null)
+                if (accessor.Body != null ||
+                    accessor.ExpressionBody() != null)
                 {
                     return true;
                 }
