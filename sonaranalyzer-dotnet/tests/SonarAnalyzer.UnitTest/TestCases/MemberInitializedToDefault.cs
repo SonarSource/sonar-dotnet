@@ -27,6 +27,12 @@ namespace Tests.Diagnostics
         public static object o = default(object); // Noncompliant {{Remove this initialization to 'o', the compiler will do that for you.}}
         public object MyProperty { get; set; } = null; // Noncompliant
         public object MyProperty2 { get { return null; } set { } } = null;
+        public object Property3 => null;
+        public object Property4
+        {
+            get => null;
+            set => throw new Exception();
+        }
 
         public event EventHandler MyEvent = null;  // Noncompliant
         public event EventHandler MyEvent2 = (s, e) => { };
