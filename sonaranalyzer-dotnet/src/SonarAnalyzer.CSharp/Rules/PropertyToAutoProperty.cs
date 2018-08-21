@@ -27,6 +27,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.ShimLayer.CSharp;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -100,28 +101,32 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool TryGetFieldFromSetter(AccessorDeclarationSyntax setter, SemanticModel semanticModel, out IFieldSymbol setterField)
         {
             setterField = null;
-            if (setter.Body == null ||
-                setter.Body.Statements.Count != 1)
-            {
-                return false;
-            }
 
-            var statement = setter.Body.Statements[0] as ExpressionStatementSyntax;
-            if (!(statement?.Expression is AssignmentExpressionSyntax assignment) ||
-                !assignment.IsKind(SyntaxKind.SimpleAssignmentExpression))
-            {
-                return false;
-            }
+            var assignment = GetAssignmentFromBody(setter.Body)
+                ?? GetAssignmentFromExpressionBody(setter.ExpressionBody());
 
-            if (!(semanticModel.GetSymbolInfo(assignment.Right).Symbol is IParameterSymbol parameter) ||
-                parameter.Name != "value" ||
-                !parameter.IsImplicitlyDeclared)
+            if (assignment != null &&
+                assignment.IsKind(SyntaxKind.SimpleAssignmentExpression) &&
+                assignment.Right != null &&
+                semanticModel.GetSymbolInfo(assignment.Right).Symbol is IParameterSymbol parameter &&
+                parameter.Name == "value" &&
+                parameter.IsImplicitlyDeclared)
             {
-                return false;
+                return TryGetField(assignment.Left, semanticModel.GetDeclaredSymbol(setter).ContainingType,
+                    semanticModel, out setterField);
             }
+            return false;
 
-            return TryGetField(assignment.Left, semanticModel.GetDeclaredSymbol(setter).ContainingType,
-                semanticModel, out setterField);
+            AssignmentExpressionSyntax GetAssignmentFromBody(BlockSyntax body) =>
+                body?.Statements.Count == 1 &&
+                body.Statements[0] is ExpressionStatementSyntax statement
+                ? statement.Expression as AssignmentExpressionSyntax
+                : null;
+
+            AssignmentExpressionSyntax GetAssignmentFromExpressionBody(ArrowExpressionClauseSyntax expressionBody) =>
+                expressionBody?.ChildNodes().Count() == 1
+                ? expressionBody.ChildNodes().ElementAt(0) as AssignmentExpressionSyntax
+                : null;
         }
 
         private static bool TryGetField(ExpressionSyntax expression, INamedTypeSymbol declaringType,
@@ -166,20 +171,26 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool TryGetFieldFromGetter(AccessorDeclarationSyntax getter, SemanticModel semanticModel, out IFieldSymbol getterField)
         {
             getterField = null;
-            if (getter.Body == null ||
-                getter.Body.Statements.Count != 1)
+
+            var returnedExpression = GetReturnExpressionFromBody(getter.Body)
+                ?? GetReturnExpressionFromExpressionBody(getter.ExpressionBody());
+
+            if (returnedExpression == null)
             {
                 return false;
             }
 
-            if (!(getter.Body.Statements[0] is ReturnStatementSyntax statement) ||
-                statement.Expression == null)
-            {
-                return false;
-            }
-
-            return TryGetField(statement.Expression, semanticModel.GetDeclaredSymbol(getter).ContainingType,
+            return TryGetField(returnedExpression, semanticModel.GetDeclaredSymbol(getter).ContainingType,
                 semanticModel, out getterField);
+
+            ExpressionSyntax GetReturnExpressionFromBody(BlockSyntax body) =>
+                body?.Statements.Count == 1 &&
+                body.Statements[0] is ReturnStatementSyntax returnStatement
+                ? returnStatement.Expression
+                : null;
+
+            ExpressionSyntax GetReturnExpressionFromExpressionBody(ArrowExpressionClauseSyntax expressionBody) =>
+                expressionBody?.Expression;
         }
     }
 }

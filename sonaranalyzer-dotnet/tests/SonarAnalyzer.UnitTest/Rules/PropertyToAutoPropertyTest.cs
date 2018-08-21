@@ -21,6 +21,7 @@
 extern alias csharp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
+using Microsoft.CodeAnalysis.CSharp;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -32,6 +33,14 @@ namespace SonarAnalyzer.UnitTest.Rules
         public void PropertyToAutoProperty()
         {
             Verifier.VerifyAnalyzer(@"TestCases\PropertyToAutoProperty.cs", new PropertyToAutoProperty());
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void PropertyToAutoProperty_CSharp7()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\PropertyToAutoProperty.CSharp7.cs", new PropertyToAutoProperty(),
+                new CSharpParseOptions(LanguageVersion.CSharp7));
         }
     }
 }
