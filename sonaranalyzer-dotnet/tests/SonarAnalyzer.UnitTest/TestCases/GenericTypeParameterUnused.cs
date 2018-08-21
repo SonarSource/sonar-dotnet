@@ -40,6 +40,8 @@ namespace Tests.Diagnostics
         {
             return a + b;
         }
+
+        public int Substract<T>(int a, int b) => a - b; // Noncompliant
     }
     public class MoreMath3<T> : MoreMath2<T>
     {
