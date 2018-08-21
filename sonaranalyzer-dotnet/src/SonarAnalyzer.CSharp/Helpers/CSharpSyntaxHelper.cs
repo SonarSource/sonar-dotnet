@@ -170,12 +170,8 @@ namespace SonarAnalyzer.Helpers
             Func<InvocationExpressionSyntax, bool> syntaxPredicate, Func<IMethodSymbol, bool> symbolPredicate)
         {
             var childNodes = methodDeclarationBase?.Body?.DescendantNodes()
-                ?? methodDeclarationBase?.ExpressionBody().DescendantNodes();
-
-            if (childNodes == null)
-            {
-                return false;
-            }
+                ?? methodDeclarationBase?.ExpressionBody()?.DescendantNodes()
+                ?? Enumerable.Empty<SyntaxNode>();
 
             // See issue: https://github.com/SonarSource/sonar-csharp/issues/416
             // Where clause excludes nodes that are not defined on the same SyntaxTree as the SemanticModel
