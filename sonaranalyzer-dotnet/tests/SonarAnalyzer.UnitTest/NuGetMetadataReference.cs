@@ -25,20 +25,15 @@ using System.Linq;
 using System.Reflection;
 using System.Threading;
 using Microsoft.CodeAnalysis;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NuGet;
 
 namespace SonarAnalyzer.UnitTest
 {
-    [TestClass]
     internal static class NuGetMetadataReference
     {
         #region Helpers
 
         private const string PackagesFolderRelativePath = @"..\..\..\..\packages\";
-
-        private static readonly ISet<(string packageId, string packageVersion)> allNuGets =
-            new HashSet<(string, string)>();
 
         private static readonly List<string> allowedNugetLibDirectories =
             new List<string>
@@ -58,11 +53,6 @@ namespace SonarAnalyzer.UnitTest
 
         private static Lazy<Dictionary<string, MetadataReference[]>> CreateLazy(string packageId, params string[] versions)
         {
-            foreach (var packageVersion in versions)
-            {
-                allNuGets.Add((packageId, packageVersion));
-            }
-
             return new Lazy<Dictionary<string, MetadataReference[]>>(Create, LazyThreadSafetyMode.PublicationOnly);
 
             Dictionary<string, MetadataReference[]> Create() =>
@@ -84,17 +74,13 @@ namespace SonarAnalyzer.UnitTest
 
             return aggregateRepository;
         }
-
+        
         private static MetadataReference[] CreateReferences(string packageId, string packageVersion)
         {
-            var packageDir = GetNuGetPackageDirectory();
-            if (packageVersion != Constants.NuGetLatestVersion && !Directory.Exists(packageDir))
-            {
-                LogMessage($"Package not found at {packageDir}");
-                InstallPackage(packageId, packageVersion);
-            }
+            EnsurePackageIsInstalled(packageId, packageVersion);
 
-            var matchingDlls = Directory.GetFiles(packageDir, "*.dll", SearchOption.AllDirectories)
+            var packageDirectory = GetNuGetPackageDirectory(packageId, packageVersion);
+            var matchingDlls = Directory.GetFiles(packageDirectory, "*.dll", SearchOption.AllDirectories)
                 .Select(path => new FileInfo(path))
                 .GroupBy(file => file.Directory.Name)
                 .Where(group => allowedNugetLibDirectories.Any(y => group.Key.StartsWith(y)))
@@ -102,10 +88,10 @@ namespace SonarAnalyzer.UnitTest
                 .First();
 
             return matchingDlls.Select(file => MetadataReference.CreateFromFile(file.FullName)).ToArray();
-
-            string GetNuGetPackageDirectory() =>
-                $@"{PackagesFolderRelativePath}{packageId}.{GetRealVersionFolder(packageId, packageVersion)}\lib";
         }
+
+        private static string GetNuGetPackageDirectory(string packageId, string packageVersion) =>
+            $@"{PackagesFolderRelativePath}{packageId}.{GetRealVersionFolder(packageId, packageVersion)}\lib";
 
         private static string GetRealVersionFolder(string packageId, string packageVersion) =>
             packageVersion != Constants.NuGetLatestVersion
@@ -115,6 +101,108 @@ namespace SonarAnalyzer.UnitTest
                     .Substring(PackagesFolderRelativePath.Length + packageId.Length + 1);
 
         #endregion Helpers
+
+        #region Package installation and update helpers
+
+        private static void EnsurePackageIsInstalled(string packageId, string packageVersion)
+        {
+            if (packageVersion == Constants.NuGetLatestVersion)
+            {
+                if (IsCheckForLatestPackageRequired(packageId))
+                {
+                    LogMessage($"Checking for newer version of package: {packageId}");
+                    InstallPackage(packageId, packageVersion);
+                    WriteLastUpdateFile(packageId);
+                }
+            }
+            else
+            {
+                // Check to see if the specific package is already on disc
+                var packageDir = GetNuGetPackageDirectory(packageId, packageVersion);
+                if (!Directory.Exists(packageDir))
+                {
+                    LogMessage($"Package not found at {packageDir}");
+                    InstallPackage(packageId, packageVersion);
+                }
+            }
+        }
+
+        private static bool IsCheckForLatestPackageRequired(string packageId)
+        {
+            // Install new nugets only once per day to improve the performance when running tests locally.
+
+            // We write a file with the timestamp of the last check in the package directory
+            // of the newest version of the package.
+            // If we can't find the package directory, we assume a check is required.
+            // If we can find an installation of the package but not the timestamp file, we assume a
+            // check is required (the package we found might be a specific older version that was installed
+            // by another test).
+
+            // Choosing one day to reduce the waiting time when a new version of the used nugets is
+            // released. If the waiting time when running tests locally is big we can increase.Annecy, France
+            const int VersionCheckDelayInDays = 1;
+
+            var lastCheck = GetLastCheckTime(packageId);
+            LogMessage($"Last check for latest NuGets: {lastCheck}");
+            return (DateTime.Now.Subtract(lastCheck).TotalDays > VersionCheckDelayInDays);
+        }
+
+        private static DateTime GetLastCheckTime(string packageId)
+        {
+            var filePath = GetLastCheckFilePath(packageId);
+            if (filePath == null ||
+                !File.Exists(filePath) ||
+                !DateTime.TryParse(File.ReadAllText(filePath), out var timestamp))
+            {
+                return DateTime.MinValue;
+            }
+            return timestamp;
+        }
+
+        private static void WriteLastUpdateFile(string packageId)
+        {
+            var filePath = GetLastCheckFilePath(packageId);
+            File.WriteAllText(filePath, DateTime.Now.ToString("d")); // short date pattern
+        }
+
+        private static string GetLastCheckFilePath(string packageId)
+        {
+            // The file containing the last-check timestamp is stored in folder of the
+            // latest version of the package.
+            // Package directory names are in the form "{package id}.{package version}".
+            // Sorting the names orders them by version.
+
+            const string LastUpdateFileName = "LastCheckedForUpdate.txt";
+
+            var directory = Directory.GetDirectories(PackagesFolderRelativePath, $"{packageId}.*")
+                .OrderByDescending(name => name)
+                .FirstOrDefault();
+
+            if (directory == null)
+            {
+                return null;
+            }
+
+            return Path.Combine(directory, LastUpdateFileName);
+        }
+
+        private static void InstallPackage(string packageId, string packageVersion)
+        {
+            var realVersion = packageVersion != Constants.NuGetLatestVersion
+                ? packageVersion
+                : null;
+
+            LogMessage($"Installing NuGet {packageId}.{packageVersion}");
+            packageManager.InstallPackage(packageId, SemanticVersion.ParseOptionalVersion(realVersion),
+                ignoreDependencies: true, allowPrereleaseVersions: false);
+        }
+
+        private static void LogMessage(string message)
+        {
+            Console.WriteLine($"[{DateTime.Now}] Test setup: {message}");
+        }
+
+        #endregion
 
         private static Lazy<Dictionary<string, MetadataReference[]>> lazyFluentAssertions =
             CreateLazy("FluentAssertions", "4.19.4", Constants.NuGetLatestVersion);
@@ -192,50 +280,5 @@ namespace SonarAnalyzer.UnitTest
             lazyXunitV1.Value.Values.First()
             .Concat(lazyXunitExtensionsV1.Value.Values.First())
             .ToArray();
-
-        [AssemblyInitialize]
-        public static void SetupAssembly(TestContext context)
-        {
-            // Choosing one day to reduce the waiting time when a new version of the used nugets is
-            // released. If the waiting time when running tests locally is big we can increase.
-            const int VersionCheckDelayInDays = 1;
-
-            // Install new nugets only once per day to improve the performance when running tests locally
-            // When adding a new nuget it is recommended to delete the content of
-            // sonar -csharp\sonaranalyzer-dotnet\TestResults
-            var lastCheck = TestResultHelper.GetPreviousRunDate(context);
-            LogMessage($"Last check for latest NuGets: {lastCheck}");
-            if (DateTime.Now.Subtract(lastCheck).TotalDays < VersionCheckDelayInDays)
-            {
-                LogMessage("Skipping check for latest NuGets.");
-                return;
-            }
-
-            LogMessage("Checking for latest versions of NuGet packages...");
-            foreach (var (packageId, packageVersion) in allNuGets)
-            {
-                if (packageVersion == Constants.NuGetLatestVersion)
-                {
-                    InstallPackage(packageId, packageVersion);
-                }
-            }
-            LogMessage("Check for latest versions completed.");
-        }
-
-        private static void InstallPackage(string packageId, string packageVersion)
-        {
-            var realVersion = packageVersion != Constants.NuGetLatestVersion
-                ? packageVersion
-                : null;
-
-            LogMessage($"Installing NuGet {packageId}.{packageVersion ?? "{latest}"}");
-            packageManager.InstallPackage(packageId, SemanticVersion.ParseOptionalVersion(realVersion),
-                ignoreDependencies: true, allowPrereleaseVersions: false);
-        }
-
-        private static void LogMessage(string message)
-        {
-            Console.WriteLine($"{DateTime.Now} Test setup: {message}");
-        }
     }
 }
