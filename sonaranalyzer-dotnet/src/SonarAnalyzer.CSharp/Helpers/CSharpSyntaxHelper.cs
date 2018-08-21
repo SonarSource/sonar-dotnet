@@ -255,5 +255,11 @@ namespace SonarAnalyzer.Helpers
 
         public static int GetDefaultLabelSectionIndex(this SwitchStatementSyntax node) =>
             node.Sections.IndexOf(section => section.Labels.AnyOfKind(SyntaxKind.DefaultSwitchLabel));
+
+        public static bool HasBodyOrExpressionBody(this AccessorDeclarationSyntax node) =>
+            node.Body != null || node.ExpressionBody() != null;
+
+        public static bool HasBodyOrExpressionBody(this BaseMethodDeclarationSyntax node) =>
+            node.Body != null || node.ExpressionBody() != null;
     }
 }
