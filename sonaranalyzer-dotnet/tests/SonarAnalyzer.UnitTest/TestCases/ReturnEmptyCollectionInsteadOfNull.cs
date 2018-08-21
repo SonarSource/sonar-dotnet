@@ -88,5 +88,10 @@ namespace Tests.Diagnostics
         {
             return null; // Compliant XmlNode and its descendants are ignored
         }
+
+        public IEnumerable<int> SomeProp
+        {
+            get => null; // Noncompliant
+        }
     }
 }
