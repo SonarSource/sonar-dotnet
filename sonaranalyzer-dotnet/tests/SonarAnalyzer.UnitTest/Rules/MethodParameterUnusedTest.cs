@@ -19,8 +19,9 @@
  */
 
 extern alias csharp;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using csharp::SonarAnalyzer.Rules.CSharp;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace SonarAnalyzer.UnitTest.Rules
 {
@@ -31,7 +32,8 @@ namespace SonarAnalyzer.UnitTest.Rules
         [TestCategory("Rule")]
         public void MethodParameterUnused()
         {
-            Verifier.VerifyAnalyzer(@"TestCases\MethodParameterUnused.cs", new MethodParameterUnused());
+            Verifier.VerifyAnalyzer(@"TestCases\MethodParameterUnused.cs",
+                new MethodParameterUnused());
         }
 
         [TestMethod]
@@ -43,6 +45,16 @@ namespace SonarAnalyzer.UnitTest.Rules
                 @"TestCases\MethodParameterUnused.Fixed.cs",
                 new MethodParameterUnused(),
                 new MethodParameterUnusedCodeFixProvider());
+        }
+
+        [TestMethod]
+        [TestCategory("Rule")]
+        public void MethodParameterUnused_CSharp7()
+        {
+            Verifier.VerifyAnalyzer(@"TestCases\MethodParameterUnused.CSharp7.cs",
+                new MethodParameterUnused(),
+                new CSharpParseOptions(LanguageVersion.CSharp7),
+                NuGetMetadataReference.SystemValueTuple("4.5.0"));
         }
     }
 }
