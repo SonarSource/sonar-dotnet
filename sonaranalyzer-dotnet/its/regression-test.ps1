@@ -5,7 +5,7 @@ param
     [string]
     $msbuildVersion = "15.0",
 
-    [Parameter(HelpMessage = "The key of the rule to test, e.g. S1234. If omitted, all rule will be tested.")]
+    [Parameter(HelpMessage = "The key of the rule to test, e.g. S1234. If omitted, all rules will be tested.")]
     [ValidatePattern("^S[0-9]+")]
     [string]
     $ruleId
