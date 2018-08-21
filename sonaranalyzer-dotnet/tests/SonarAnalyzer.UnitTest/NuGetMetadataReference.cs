@@ -64,7 +64,7 @@ namespace SonarAnalyzer.UnitTest
 
             return aggregateRepository;
         }
-        
+
         public static MetadataReference[] Create(string packageId, string packageVersion)
         {
             EnsurePackageIsInstalled(packageId, packageVersion);
@@ -231,6 +231,9 @@ namespace SonarAnalyzer.UnitTest
 
         public static MetadataReference[] SystemThreadingTasksExtensions(string packageVersion) =>
             Create("System.Threading.Tasks.Extensions", packageVersion);
+
+        public static MetadataReference[] SystemValueTuple(string packageVersion) =>
+            Create("System.ValueTuple", packageVersion);
 
         public static MetadataReference[] XunitFramework(string packageVersion) =>
             Create("xunit.assert", packageVersion)
