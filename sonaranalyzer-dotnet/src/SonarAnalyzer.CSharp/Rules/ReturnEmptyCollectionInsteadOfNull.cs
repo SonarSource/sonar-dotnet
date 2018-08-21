@@ -27,6 +27,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.ShimLayer.CSharp;
 
 namespace SonarAnalyzer.Rules.CSharp
 {
@@ -68,9 +69,13 @@ namespace SonarAnalyzer.Rules.CSharp
             var propertyDeclaration = context.Node as PropertyDeclarationSyntax;
             var methodDeclaration = context.Node as MethodDeclarationSyntax;
 
-            var expressionBody = propertyDeclaration != null
-                ? propertyDeclaration.ExpressionBody
-                : methodDeclaration.ExpressionBody;
+            var propertyGetAccessor = propertyDeclaration?.AccessorList?.Accessors
+                .FirstOrDefault(accessor => accessor.IsKind(SyntaxKind.GetAccessorDeclaration));
+
+            var expressionBody = methodDeclaration?.ExpressionBody
+                ?? propertyDeclaration?.ExpressionBody
+                ?? propertyGetAccessor?.ExpressionBody();
+
             if (expressionBody != null)
             {
                 var arrowedNullLiteral = GetNullLiteralOrDefault(expressionBody);
@@ -82,21 +87,18 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            var methodBody = propertyDeclaration?.AccessorList.Accessors
-                .FirstOrDefault(accessor => accessor.IsKind(SyntaxKind.GetAccessorDeclaration))?.Body
-                ?? methodDeclaration?.Body;
-            if (methodBody == null)
+            var methodBody = methodDeclaration?.Body
+                ?? propertyGetAccessor?.Body;
+            if (methodBody != null)
             {
-                return;
-            }
-
-            var returnNullStatements = GetReturnNullStatements(methodBody)
-                .Select(returnStatement => returnStatement.GetLocation())
-                .ToList();
-            if (returnNullStatements.Count > 0)
-            {
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, returnNullStatements[0],
-                    additionalLocations: returnNullStatements.Skip(1)));
+                var returnNullStatements = GetReturnNullStatements(methodBody)
+                    .Select(returnStatement => returnStatement.GetLocation())
+                    .ToList();
+                if (returnNullStatements.Count > 0)
+                {
+                    context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, returnNullStatements[0],
+                        additionalLocations: returnNullStatements.Skip(1)));
+                }
             }
         }
 
