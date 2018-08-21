@@ -179,4 +179,11 @@ namespace Tests.Diagnostics
 
         void M(out int x) { x = 42; }
     }
+
+    class Person11
+    {
+        int a = 42; // Noncompliant
+
+        public Person11() => a = 42;
+    }
 }
