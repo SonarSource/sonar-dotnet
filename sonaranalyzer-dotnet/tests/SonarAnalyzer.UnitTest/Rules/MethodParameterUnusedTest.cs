@@ -54,7 +54,7 @@ namespace SonarAnalyzer.UnitTest.Rules
             Verifier.VerifyAnalyzer(@"TestCases\MethodParameterUnused.CSharp7.cs",
                 new MethodParameterUnused(),
                 new CSharpParseOptions(LanguageVersion.CSharp7),
-                NuGetMetadataReference.SystemValueTuple["4.4.0"]);
+                NuGetMetadataReference.SystemValueTuple("4.5.0"));
         }
     }
 }
