@@ -25,6 +25,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.Helpers;
+using SonarAnalyzer.ShimLayer.CSharp;
 
 namespace SonarAnalyzer.ControlFlowGraph.CSharp
 {
@@ -441,6 +442,30 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                         return BuildSimpleNestedExpression(parent, currentBlock,
                             parent.ArgumentList?.Arguments.Select(a => a.Expression));
                     }
+
+                case SyntaxKindEx.IsPatternExpression:
+                    var isPatternExpression = (IsPatternExpressionSyntaxWrapper)expression;
+
+                    currentBlock.ReversedInstructions.Add(expression);
+
+                    if (ConstantPatternSyntaxWrapper.IsInstance(isPatternExpression.Pattern))
+                    {
+                        var constantPattern = (ConstantPatternSyntaxWrapper)isPatternExpression.Pattern;
+
+                        currentBlock = BuildExpression(constantPattern.Expression, currentBlock);
+                    }
+                    else if (DeclarationPatternSyntaxWrapper.IsInstance(isPatternExpression.Pattern))
+                    {
+                        // Do nothing, this is just variable assignment and the Pattern itself contains
+                        // only the new variable(s), which are not enough to evaluate the assignment.
+                        // The handling should be done in CSharpExplodedGraph and UcfgInstructionFactory.
+                    }
+                    else
+                    {
+                        throw new NotSupportedException($"{isPatternExpression.Pattern.SyntaxNode.Kind()}");
+                    }
+
+                    return BuildExpression(isPatternExpression.Expression, currentBlock);
 
                 default:
                     throw new NotSupportedException($"{expression.Kind()}");

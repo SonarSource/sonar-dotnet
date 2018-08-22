@@ -1,4 +1,7 @@
 ﻿extern alias csharp;
+
+using System.Collections;
+using System.Collections.Generic;
 /*
 * SonarAnalyzer for .NET
 * Copyright (C) 2015-2018 SonarSource SA
@@ -21,6 +24,7 @@
 
 using System.Linq;
 using csharp::SonarAnalyzer.ControlFlowGraph.CSharp;
+using csharp::SonarAnalyzer.ShimLayer.CSharp;
 using FluentAssertions;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -406,6 +410,92 @@ namespace NS
             branchBlockB.TrueSuccessorBlock.Should().Be(trueBlock);
             branchBlockB.FalseSuccessorBlock.Should().Be(exit);
             trueBlock.SuccessorBlocks.Should().OnlyContain(exit);
+        }
+
+        [TestMethod]
+        [TestCategory("CFG")]
+        public void Cfg_If_Patterns_Constant_Complex_Condition()
+        {
+            var cfg = Build("cw0(); if (x is 10 && o is null) { cw1(); } cw2()");
+
+            VerifyCfg(cfg, 5);
+            var xBranchBlock = (BinaryBranchBlock)cfg.Blocks.ElementAt(0);
+            var oBranchBlock = (BinaryBranchBlock)cfg.Blocks.ElementAt(1);
+            var trueBlock = cfg.Blocks.ElementAt(2);
+            var falseBlock = cfg.Blocks.ElementAt(3);
+            var exitBlock = cfg.ExitBlock;
+
+            xBranchBlock.SuccessorBlocks.Should().OnlyContainInOrder(oBranchBlock, falseBlock);
+            xBranchBlock.BranchingNode.Kind().Should().Be(SyntaxKindEx.IsPatternExpression);
+            VerifyAllInstructions(xBranchBlock, "cw0", "cw0()", "x", "10", "x is 10");
+
+            oBranchBlock.SuccessorBlocks.Should().OnlyContainInOrder(trueBlock, falseBlock);
+            oBranchBlock.BranchingNode.Kind().Should().Be(SyntaxKindEx.IsPatternExpression);
+            VerifyAllInstructions(oBranchBlock, "o", "null", "o is null");
+
+            trueBlock.SuccessorBlocks.Should().OnlyContain(falseBlock);
+            VerifyAllInstructions(trueBlock, "cw1", "cw1()");
+
+            falseBlock.SuccessorBlocks.Should().OnlyContain(exitBlock);
+            VerifyAllInstructions(falseBlock, "cw2", "cw2()");
+
+            exitBlock.PredecessorBlocks.Should().OnlyContain(falseBlock);
+        }
+
+        [TestMethod]
+        [TestCategory("CFG")]
+        public void Cfg_If_Patterns_Single_Var_Complex_Condition()
+        {
+            var cfg = Build("cw0(); if (x is int i && o is string s) { cw1(); } cw2()");
+
+            VerifyCfg(cfg, 5);
+            var xBranchBlock = (BinaryBranchBlock)cfg.Blocks.ElementAt(0);
+            var oBranchBlock = (BinaryBranchBlock)cfg.Blocks.ElementAt(1);
+            var trueBlock = cfg.Blocks.ElementAt(2);
+            var falseBlock = cfg.Blocks.ElementAt(3);
+            var exitBlock = cfg.ExitBlock;
+
+            xBranchBlock.SuccessorBlocks.Should().OnlyContainInOrder(oBranchBlock, falseBlock);
+            xBranchBlock.BranchingNode.Kind().Should().Be(SyntaxKindEx.IsPatternExpression);
+            VerifyAllInstructions(xBranchBlock, "cw0", "cw0()", "x", "x is int i");
+
+            oBranchBlock.SuccessorBlocks.Should().OnlyContainInOrder(trueBlock, falseBlock);
+            oBranchBlock.BranchingNode.Kind().Should().Be(SyntaxKindEx.IsPatternExpression);
+            VerifyAllInstructions(oBranchBlock, "o", "o is string s");
+
+            trueBlock.SuccessorBlocks.Should().OnlyContain(falseBlock);
+            VerifyAllInstructions(trueBlock, "cw1", "cw1()");
+
+            falseBlock.SuccessorBlocks.Should().OnlyContain(exitBlock);
+            VerifyAllInstructions(falseBlock, "cw2", "cw2()");
+
+            exitBlock.PredecessorBlocks.Should().OnlyContain(falseBlock);
+        }
+
+        [TestMethod]
+        [TestCategory("CFG")]
+        public void Cfg_If_Patterns_Not_Null()
+        {
+            var cfg = Build("cw0(); if (!(x is null)) { cw1(); } cw2()");
+
+            VerifyCfg(cfg, 4);
+            var xBranchBlock = (BinaryBranchBlock)cfg.Blocks.ElementAt(0);
+            var trueBlock = cfg.Blocks.ElementAt(1);
+            var falseBlock = cfg.Blocks.ElementAt(2);
+            var exitBlock = cfg.ExitBlock;
+
+            xBranchBlock.TrueSuccessorBlock.Should().Be(trueBlock);
+            xBranchBlock.FalseSuccessorBlock.Should().Be(falseBlock);
+            xBranchBlock.BranchingNode.Kind().Should().Be(SyntaxKind.LogicalNotExpression);
+            VerifyAllInstructions(xBranchBlock, "cw0", "cw0()", "x", "null", "x is null", "!(x is null)");
+
+            trueBlock.SuccessorBlocks.Should().OnlyContain(falseBlock);
+            VerifyAllInstructions(trueBlock, "cw1", "cw1()");
+
+            falseBlock.SuccessorBlocks.Should().OnlyContain(exitBlock);
+            VerifyAllInstructions(falseBlock, "cw2", "cw2()");
+
+            exitBlock.PredecessorBlocks.Should().OnlyContain(falseBlock);
         }
 
         #endregion
@@ -2929,8 +3019,11 @@ namespace NS
   }}
 }}";
 
-        internal static MethodDeclarationSyntax CompileWithMethodBody(string input, string methodName, out SemanticModel semanticModel)
+        internal static MethodDeclarationSyntax CompileWithMethodBody(string input, string methodName,
+            out SemanticModel semanticModel, ParseOptions parseOptions = null)
         {
+            parseOptions = parseOptions ?? new CSharpParseOptions(LanguageVersion.CSharp7);
+
             using (var workspace = new AdhocWorkspace())
             {
                 var document = workspace.CurrentSolution.AddProject("foo", "foo.dll", LanguageNames.CSharp)
@@ -2938,7 +3031,9 @@ namespace NS
                     .AddMetadataReference(FrameworkMetadataReference.System)
                     .AddMetadataReference(FrameworkMetadataReference.SystemCore)
                     .AddDocument("test", input);
-                var compilation = document.Project.GetCompilationAsync().Result;
+                var compilation = document.Project
+                    .WithParseOptions(parseOptions)
+                    .GetCompilationAsync().Result;
                 var tree = compilation.SyntaxTrees.First();
 
                 semanticModel = compilation.GetSemanticModel(tree);

@@ -29,6 +29,7 @@ using SonarAnalyzer.Helpers;
 using SonarAnalyzer.Helpers.SymbolicExecution;
 using SonarAnalyzer.LiveVariableAnalysis;
 using SonarAnalyzer.Rules.CSharp;
+using SonarAnalyzer.ShimLayer.CSharp;
 using SonarAnalyzer.SymbolicExecution.Constraints;
 using SonarAnalyzer.SymbolicExecution.SymbolicValues;
 
@@ -450,6 +451,26 @@ namespace SonarAnalyzer.SymbolicExecution
                     }
                     break;
 
+                case SyntaxKindEx.IsPatternExpression:
+                    var isPatternExpression = (IsPatternExpressionSyntaxWrapper)instruction;
+                    if (ConstantPatternSyntaxWrapper.IsInstance(isPatternExpression.Pattern))
+                    {
+                        // "x is null" is equivalent to "x == null"
+                        newProgramState = VisitValueEquals(newProgramState);
+                    }
+                    else if (DeclarationPatternSyntaxWrapper.IsInstance(isPatternExpression.Pattern))
+                    {
+                        var declarationPattern = (DeclarationPatternSyntaxWrapper)isPatternExpression.Pattern;
+                        // "x is string s" is equivalent to "s = x" and "s" should get NotNull constraint
+                        // "x is (string s, int i)" is equivalent to "s = new string(); i = new int()" and no constraints should be added
+                        newProgramState = VisitVariableDesignation(declarationPattern.Designation, newProgramState, singleVariable: true);
+                    }
+                    else
+                    {
+                        goto default;
+                    }
+                    break;
+
                 default:
                     throw new NotImplementedException($"{instruction.Kind()}");
             }
@@ -457,6 +478,47 @@ namespace SonarAnalyzer.SymbolicExecution
             newProgramState = EnsureStackState(parenthesizedExpression, newProgramState);
             OnInstructionProcessed(instruction, node.ProgramPoint, newProgramState);
             EnqueueNewNode(newProgramPoint, newProgramState);
+        }
+
+        private ProgramState VisitVariableDesignation(VariableDesignationSyntaxWrapper variableDesignation, ProgramState programState, bool singleVariable)
+        {
+            var newProgramState = programState;
+            if (DiscardDesignationSyntaxWrapper.IsInstance(variableDesignation))
+            {
+                // do nothing
+            }
+            else if (SingleVariableDesignationSyntaxWrapper.IsInstance(variableDesignation))
+            {
+                // "x is string s" is equivalent to "s = x"; both symbolic values should remain on stack
+                var singleVariableDesignation = (SingleVariableDesignationSyntaxWrapper)variableDesignation;
+
+                newProgramState = newProgramState.PopValue(out var sv); // pop SV_x
+
+                // associate variable with new SV
+                var variableSymbol = SemanticModel.GetDeclaredSymbol(singleVariableDesignation);
+                var newSymbolicValue = SymbolicValue.Create();
+                newProgramState = SetNewSymbolicValueIfTracked(variableSymbol, newSymbolicValue, newProgramState);
+
+                if (singleVariable)
+                {
+                    // When the pattern is "x is Type t" we know that "t != null", hence (SV != null)
+                    newProgramState = newProgramState.PushValue(new ValueNotEqualsSymbolicValue(newSymbolicValue, SymbolicValue.Null));
+                }
+            }
+            else if (ParenthesizedVariableDesignationSyntaxWrapper.IsInstance(variableDesignation))
+            {
+                var parenthesizedVariableDesignation = (ParenthesizedVariableDesignationSyntaxWrapper)variableDesignation;
+                foreach (var variable in parenthesizedVariableDesignation.Variables)
+                {
+                    // the variables in the deconstruction should not receive "Not Null" constraint
+                    newProgramState = VisitVariableDesignation(variable, newProgramState, singleVariable: false);
+                }
+            }
+            else
+            {
+                throw new NotSupportedException($"{variableDesignation.SyntaxNode.Kind()}");
+            }
+            return newProgramState;
         }
 
         private ProgramState InvokeChecks(ProgramState programState, Func<ProgramState, ExplodedGraphCheck, ProgramState> invoke)
