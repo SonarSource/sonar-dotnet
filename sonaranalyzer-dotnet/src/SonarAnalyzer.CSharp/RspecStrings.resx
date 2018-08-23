@@ -8049,6 +8049,36 @@
   <data name="S3928_Type" xml:space="preserve">
     <value>CODE_SMELL</value>
   </data>
+  <data name="S3937_Category" xml:space="preserve">
+    <value>Critical Code Smell</value>
+  </data>
+  <data name="S3937_Description" xml:space="preserve">
+    <value>The use of punctuation characters to separate subgroups in a number can make the number more readable. For instance consider 1,000,000,000 versus 1000000000. But when the grouping is irregular, such as 1,000,00,000; it indicates an error. </value>
+  </data>
+  <data name="S3937_IsActivatedByDefault" xml:space="preserve">
+    <value>False</value>
+  </data>
+  <data name="S3937_Remediation" xml:space="preserve">
+    <value>Constant/Issue</value>
+  </data>
+  <data name="S3937_RemediationCost" xml:space="preserve">
+    <value>10min</value>
+  </data>
+  <data name="S3937_Scope" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="S3937_Severity" xml:space="preserve">
+    <value>Critical</value>
+  </data>
+  <data name="S3937_Tags" xml:space="preserve">
+    <value>suspicious</value>
+  </data>
+  <data name="S3937_Title" xml:space="preserve">
+    <value>Number patterns should be regular</value>
+  </data>
+  <data name="S3937_Type" xml:space="preserve">
+    <value>CODE_SMELL</value>
+  </data>
   <data name="S3956_Category" xml:space="preserve">
     <value>Major Code Smell</value>
   </data>

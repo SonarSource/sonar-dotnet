@@ -1,0 +1,16 @@
+{
+  "title": "Number patterns should be regular",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "10min"
+  },
+  "tags": [
+    "suspicious"
+  ],
+  "defaultSeverity": "Critical",
+  "ruleSpecification": "RSPEC-3937",
+  "sqKey": "S3937",
+  "scope": "All"
+}
