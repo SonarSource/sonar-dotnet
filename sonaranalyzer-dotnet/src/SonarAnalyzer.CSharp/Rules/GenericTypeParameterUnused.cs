@@ -117,7 +117,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var syntaxValid =
                 !methodDeclaration.Modifiers.Any(modifier => MethodModifiersToSkip.Contains(modifier.Kind())) &&
                 methodDeclaration.ExplicitInterfaceSpecifier == null &&
-                (methodDeclaration.Body != null || methodDeclaration.ExpressionBody != null);
+                methodDeclaration.HasBodyOrExpressionBody();
 
             if (!syntaxValid)
             {

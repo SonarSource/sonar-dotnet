@@ -80,7 +80,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            var accessors = property.AccessorList?.Accessors.Where(a => a.Body != null || a.ExpressionBody() != null);
+            var accessors = property.AccessorList?.Accessors.Where(a => a.HasBodyOrExpressionBody());
             if (accessors != null)
             {
                 foreach (var accessor in accessors)

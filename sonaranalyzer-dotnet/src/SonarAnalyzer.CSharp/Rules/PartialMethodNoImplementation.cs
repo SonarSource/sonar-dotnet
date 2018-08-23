@@ -59,8 +59,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var partialKeyword = declaration.Modifiers.FirstOrDefault(m => m.IsKind(SyntaxKind.PartialKeyword));
 
             if (partialKeyword == default(SyntaxToken)||
-                declaration.Body != null ||
-                declaration.ExpressionBody != null)
+                declaration.HasBodyOrExpressionBody())
             {
                 return;
             }

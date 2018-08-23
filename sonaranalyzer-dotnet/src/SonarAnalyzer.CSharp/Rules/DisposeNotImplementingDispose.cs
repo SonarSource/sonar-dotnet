@@ -99,9 +99,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     .Where(m => m.SyntaxNode != null);
 
                 var methodDeclaration = methodDeclarations
-                    .FirstOrDefault(m =>
-                        m.SyntaxNode.Body != null ||
-                        m.SyntaxNode.ExpressionBody != null);
+                    .FirstOrDefault(m => m.SyntaxNode.HasBodyOrExpressionBody());
 
                 if (methodDeclaration == null)
                 {

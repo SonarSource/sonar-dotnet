@@ -268,6 +268,6 @@ namespace SonarAnalyzer.Helpers
             node.Body != null || node.ExpressionBody() != null;
 
         public static bool HasBodyOrExpressionBody(this BaseMethodDeclarationSyntax node) =>
-            node.Body != null || node.ExpressionBody() != null;
+            node?.Body != null || node?.ExpressionBody() != null;
     }
 }

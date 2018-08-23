@@ -115,8 +115,7 @@ namespace SonarAnalyzer.Metrics.CSharp
 
             if (node is AccessorDeclarationSyntax accessor)
             {
-                if (accessor.Body != null ||
-                    accessor.ExpressionBody() != null)
+                if (accessor.HasBodyOrExpressionBody())
                 {
                     return true;
                 }
