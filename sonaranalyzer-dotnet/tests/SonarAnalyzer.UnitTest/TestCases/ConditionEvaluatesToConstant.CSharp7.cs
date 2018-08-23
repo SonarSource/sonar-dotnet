@@ -81,5 +81,39 @@
                 }
             }
         }
+
+        void Switch_Pattern_Source(object o)
+        {
+            switch (o)
+            {
+                case string s:
+                    // We don't set constraints on the switch expression
+                    if (o == null) // Compliant, we don't know anything about o
+                    {
+                        o.ToString();
+                    }
+                    break;
+
+                default:
+                    break;
+            }
+        }
+
+        void Switch_Pattern(object o)
+        {
+            switch (o)
+            {
+                case string s:
+                    if (s == null) // Noncompliant, always false
+                    { // Secondary, unreachable
+                        s.ToString();
+                    }
+                    break;
+
+                default:
+                    break;
+            }
+        }
+
     }
 }
