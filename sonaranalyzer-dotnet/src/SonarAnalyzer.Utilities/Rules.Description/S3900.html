@@ -40,24 +40,30 @@ public class MyClass
 </pre>
 <h2>Exceptions</h2>
 <p>To create a custom null validation method declare an attribute with name <code>ValidatedNotNullAttribute</code> and mark the parameter that is
-validated for null:</p>
+validated for null in your method declaration with it:</p>
 <pre>
+using System;
+
+public sealed class ValidatedNotNullAttribute : Attribute { }
+
 public static class Guard
 {
-    public static void NotNull&lt;T&gt;(this [ValidatedNotNullAttribute]T value, string name) where T : class
+    public static void NotNull&lt;T&gt;([ValidatedNotNullAttribute] this T value, string name) where T : class
     {
-        if (value == null) throw new ArgumentNullException(name);
+        if (value == null)
+            throw new ArgumentNullException(name);
     }
 }
-
-[AttributeUsage(AttributeTargets.Parameter)]
-public sealed class ValidatedNotNullAttribute : Attribute { }
 
 public static class Utils
 {
     public static string ToUpper(string value)
     {
         Guard.NotNull(value, nameof(value));
+        if (value == null)
+        {
+            return value.ToString();
+        }
         return value.ToUpper(); // Compliant
     }
 }
