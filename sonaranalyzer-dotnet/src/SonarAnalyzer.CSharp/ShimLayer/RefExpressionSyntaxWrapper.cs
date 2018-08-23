@@ -17,6 +17,8 @@ namespace SonarAnalyzer.ShimLayer.CSharp
         private static readonly Func<ExpressionSyntax, SyntaxToken, ExpressionSyntax> WithRefKeywordAccessor;
         private static readonly Func<ExpressionSyntax, ExpressionSyntax, ExpressionSyntax> WithExpressionAccessor;
 
+        private readonly ExpressionSyntax node;
+
         static RefExpressionSyntaxWrapper()
         {
             WrappedType = WrapperHelper.GetWrappedType(typeof(RefExpressionSyntaxWrapper));
@@ -28,16 +30,16 @@ namespace SonarAnalyzer.ShimLayer.CSharp
 
         private RefExpressionSyntaxWrapper(ExpressionSyntax node)
         {
-            SyntaxNode = node;
+            this.node = node;
         }
 
-        public ExpressionSyntax SyntaxNode { get; }
+        public ExpressionSyntax SyntaxNode => this.node;
 
         public SyntaxToken RefKeyword
         {
             get
             {
-                return RefKeywordAccessor(SyntaxNode);
+                return RefKeywordAccessor(this.SyntaxNode);
             }
         }
 
@@ -45,7 +47,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
         {
             get
             {
-                return ExpressionAccessor(SyntaxNode);
+                return ExpressionAccessor(this.SyntaxNode);
             }
         }
 
@@ -66,7 +68,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
 
         public static implicit operator ExpressionSyntax(RefExpressionSyntaxWrapper wrapper)
         {
-            return wrapper.SyntaxNode;
+            return wrapper.node;
         }
 
         public static bool IsInstance(SyntaxNode node)
@@ -76,12 +78,12 @@ namespace SonarAnalyzer.ShimLayer.CSharp
 
         public RefExpressionSyntaxWrapper WithRefKeyword(SyntaxToken refKeyword)
         {
-            return new RefExpressionSyntaxWrapper(WithRefKeywordAccessor(SyntaxNode, refKeyword));
+            return new RefExpressionSyntaxWrapper(WithRefKeywordAccessor(this.SyntaxNode, refKeyword));
         }
 
         public RefExpressionSyntaxWrapper WithExpression(ExpressionSyntax expression)
         {
-            return new RefExpressionSyntaxWrapper(WithExpressionAccessor(SyntaxNode, expression));
+            return new RefExpressionSyntaxWrapper(WithExpressionAccessor(this.SyntaxNode, expression));
         }
     }
 }

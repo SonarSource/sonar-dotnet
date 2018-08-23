@@ -16,6 +16,8 @@ namespace SonarAnalyzer.ShimLayer.CSharp
         private static readonly Func<CSharpSyntaxNode, ExpressionSyntax> ExpressionAccessor;
         private static readonly Func<CSharpSyntaxNode, ExpressionSyntax, CSharpSyntaxNode> WithExpressionAccessor;
 
+        private readonly CSharpSyntaxNode node;
+
         static ConstantPatternSyntaxWrapper()
         {
             WrappedType = WrapperHelper.GetWrappedType(typeof(ConstantPatternSyntaxWrapper));
@@ -25,16 +27,16 @@ namespace SonarAnalyzer.ShimLayer.CSharp
 
         private ConstantPatternSyntaxWrapper(CSharpSyntaxNode node)
         {
-            SyntaxNode = node;
+            this.node = node;
         }
 
-        public CSharpSyntaxNode SyntaxNode { get; }
+        public CSharpSyntaxNode SyntaxNode => this.node;
 
         public ExpressionSyntax Expression
         {
             get
             {
-                return ExpressionAccessor(SyntaxNode);
+                return ExpressionAccessor(this.SyntaxNode);
             }
         }
 
@@ -60,12 +62,12 @@ namespace SonarAnalyzer.ShimLayer.CSharp
 
         public static implicit operator PatternSyntaxWrapper(ConstantPatternSyntaxWrapper wrapper)
         {
-            return PatternSyntaxWrapper.FromUpcast(wrapper.SyntaxNode);
+            return PatternSyntaxWrapper.FromUpcast(wrapper.node);
         }
 
         public static implicit operator CSharpSyntaxNode(ConstantPatternSyntaxWrapper wrapper)
         {
-            return wrapper.SyntaxNode;
+            return wrapper.node;
         }
 
         public static bool IsInstance(SyntaxNode node)
@@ -75,7 +77,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
 
         public ConstantPatternSyntaxWrapper WithExpression(ExpressionSyntax expression)
         {
-            return new ConstantPatternSyntaxWrapper(WithExpressionAccessor(SyntaxNode, expression));
+            return new ConstantPatternSyntaxWrapper(WithExpressionAccessor(this.SyntaxNode, expression));
         }
     }
 }

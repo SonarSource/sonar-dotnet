@@ -12,6 +12,8 @@ namespace SonarAnalyzer.ShimLayer.CSharp
         internal const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.VariableDesignationSyntax";
         private static readonly Type WrappedType;
 
+        private readonly CSharpSyntaxNode node;
+
         static VariableDesignationSyntaxWrapper()
         {
             WrappedType = WrapperHelper.GetWrappedType(typeof(VariableDesignationSyntaxWrapper));
@@ -19,10 +21,10 @@ namespace SonarAnalyzer.ShimLayer.CSharp
 
         private VariableDesignationSyntaxWrapper(CSharpSyntaxNode node)
         {
-            SyntaxNode = node;
+            this.node = node;
         }
 
-        public CSharpSyntaxNode SyntaxNode { get; }
+        public CSharpSyntaxNode SyntaxNode => this.node;
 
         public static explicit operator VariableDesignationSyntaxWrapper(SyntaxNode node)
         {
@@ -41,7 +43,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
 
         public static implicit operator CSharpSyntaxNode(VariableDesignationSyntaxWrapper wrapper)
         {
-            return wrapper.SyntaxNode;
+            return wrapper.node;
         }
 
         public static bool IsInstance(SyntaxNode node)

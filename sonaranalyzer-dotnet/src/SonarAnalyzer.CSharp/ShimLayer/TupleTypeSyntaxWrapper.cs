@@ -19,6 +19,8 @@ namespace SonarAnalyzer.ShimLayer.CSharp
         private static readonly Func<TypeSyntax, SeparatedSyntaxListWrapper<TupleElementSyntaxWrapper>, TypeSyntax> WithElementsAccessor;
         private static readonly Func<TypeSyntax, SyntaxToken, TypeSyntax> WithCloseParenTokenAccessor;
 
+        private readonly TypeSyntax node;
+
         static TupleTypeSyntaxWrapper()
         {
             WrappedType = WrapperHelper.GetWrappedType(typeof(TupleTypeSyntaxWrapper));
@@ -32,16 +34,16 @@ namespace SonarAnalyzer.ShimLayer.CSharp
 
         private TupleTypeSyntaxWrapper(TypeSyntax node)
         {
-            SyntaxNode = node;
+            this.node = node;
         }
 
-        public TypeSyntax SyntaxNode { get; }
+        public TypeSyntax SyntaxNode => this.node;
 
         public SyntaxToken OpenParenToken
         {
             get
             {
-                return OpenParenTokenAccessor(SyntaxNode);
+                return OpenParenTokenAccessor(this.SyntaxNode);
             }
         }
 
@@ -49,7 +51,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
         {
             get
             {
-                return ElementsAccessor(SyntaxNode);
+                return ElementsAccessor(this.SyntaxNode);
             }
         }
 
@@ -57,7 +59,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
         {
             get
             {
-                return CloseParenTokenAccessor(SyntaxNode);
+                return CloseParenTokenAccessor(this.SyntaxNode);
             }
         }
 
@@ -78,7 +80,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
 
         public static implicit operator TypeSyntax(TupleTypeSyntaxWrapper wrapper)
         {
-            return wrapper.SyntaxNode;
+            return wrapper.node;
         }
 
         public static bool IsInstance(SyntaxNode node)
@@ -88,22 +90,22 @@ namespace SonarAnalyzer.ShimLayer.CSharp
 
         public TupleTypeSyntaxWrapper AddElements(params TupleElementSyntaxWrapper[] items)
         {
-            return new TupleTypeSyntaxWrapper(WithElements(Elements.AddRange(items)));
+            return new TupleTypeSyntaxWrapper(this.WithElements(this.Elements.AddRange(items)));
         }
 
         public TupleTypeSyntaxWrapper WithOpenParenToken(SyntaxToken openParenToken)
         {
-            return new TupleTypeSyntaxWrapper(WithOpenParenTokenAccessor(SyntaxNode, openParenToken));
+            return new TupleTypeSyntaxWrapper(WithOpenParenTokenAccessor(this.SyntaxNode, openParenToken));
         }
 
         public TupleTypeSyntaxWrapper WithElements(SeparatedSyntaxListWrapper<TupleElementSyntaxWrapper> elements)
         {
-            return new TupleTypeSyntaxWrapper(WithElementsAccessor(SyntaxNode, elements));
+            return new TupleTypeSyntaxWrapper(WithElementsAccessor(this.SyntaxNode, elements));
         }
 
         public TupleTypeSyntaxWrapper WithCloseParenToken(SyntaxToken closeParenToken)
         {
-            return new TupleTypeSyntaxWrapper(WithCloseParenTokenAccessor(SyntaxNode, closeParenToken));
+            return new TupleTypeSyntaxWrapper(WithCloseParenTokenAccessor(this.SyntaxNode, closeParenToken));
         }
     }
 }

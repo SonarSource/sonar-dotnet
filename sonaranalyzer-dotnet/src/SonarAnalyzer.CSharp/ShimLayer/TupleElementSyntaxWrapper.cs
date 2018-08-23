@@ -18,6 +18,8 @@ namespace SonarAnalyzer.ShimLayer.CSharp
         private static readonly Func<CSharpSyntaxNode, SyntaxToken, CSharpSyntaxNode> WithIdentifierAccessor;
         private static readonly Func<CSharpSyntaxNode, TypeSyntax, CSharpSyntaxNode> WithTypeAccessor;
 
+        private readonly CSharpSyntaxNode node;
+
         static TupleElementSyntaxWrapper()
         {
             WrappedType = WrapperHelper.GetWrappedType(typeof(TupleElementSyntaxWrapper));
@@ -29,16 +31,16 @@ namespace SonarAnalyzer.ShimLayer.CSharp
 
         private TupleElementSyntaxWrapper(CSharpSyntaxNode node)
         {
-            SyntaxNode = node;
+            this.node = node;
         }
 
-        public CSharpSyntaxNode SyntaxNode { get; }
+        public CSharpSyntaxNode SyntaxNode => this.node;
 
         public SyntaxToken Identifier
         {
             get
             {
-                return IdentifierAccessor(SyntaxNode);
+                return IdentifierAccessor(this.SyntaxNode);
             }
         }
 
@@ -46,7 +48,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
         {
             get
             {
-                return TypeAccessor(SyntaxNode);
+                return TypeAccessor(this.SyntaxNode);
             }
         }
 
@@ -67,7 +69,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
 
         public static implicit operator CSharpSyntaxNode(TupleElementSyntaxWrapper wrapper)
         {
-            return wrapper.SyntaxNode;
+            return wrapper.node;
         }
 
         public static bool IsInstance(SyntaxNode node)
@@ -77,12 +79,12 @@ namespace SonarAnalyzer.ShimLayer.CSharp
 
         public TupleElementSyntaxWrapper WithIdentifier(SyntaxToken identifier)
         {
-            return new TupleElementSyntaxWrapper(WithIdentifierAccessor(SyntaxNode, identifier));
+            return new TupleElementSyntaxWrapper(WithIdentifierAccessor(this.SyntaxNode, identifier));
         }
 
         public TupleElementSyntaxWrapper WithType(TypeSyntax type)
         {
-            return new TupleElementSyntaxWrapper(WithTypeAccessor(SyntaxNode, type));
+            return new TupleElementSyntaxWrapper(WithTypeAccessor(this.SyntaxNode, type));
         }
     }
 }

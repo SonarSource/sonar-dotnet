@@ -15,6 +15,8 @@ namespace SonarAnalyzer.ShimLayer.CSharp
         private static readonly Func<CSharpSyntaxNode, SyntaxToken> UnderscoreTokenAccessor;
         private static readonly Func<CSharpSyntaxNode, SyntaxToken, CSharpSyntaxNode> WithUnderscoreTokenAccessor;
 
+        private readonly CSharpSyntaxNode node;
+
         static DiscardDesignationSyntaxWrapper()
         {
             WrappedType = WrapperHelper.GetWrappedType(typeof(DiscardDesignationSyntaxWrapper));
@@ -24,16 +26,16 @@ namespace SonarAnalyzer.ShimLayer.CSharp
 
         private DiscardDesignationSyntaxWrapper(CSharpSyntaxNode node)
         {
-            SyntaxNode = node;
+            this.node = node;
         }
 
-        public CSharpSyntaxNode SyntaxNode { get; }
+        public CSharpSyntaxNode SyntaxNode => this.node;
 
         public SyntaxToken UnderscoreToken
         {
             get
             {
-                return UnderscoreTokenAccessor(SyntaxNode);
+                return UnderscoreTokenAccessor(this.SyntaxNode);
             }
         }
 
@@ -59,12 +61,12 @@ namespace SonarAnalyzer.ShimLayer.CSharp
 
         public static implicit operator VariableDesignationSyntaxWrapper(DiscardDesignationSyntaxWrapper wrapper)
         {
-            return VariableDesignationSyntaxWrapper.FromUpcast(wrapper.SyntaxNode);
+            return VariableDesignationSyntaxWrapper.FromUpcast(wrapper.node);
         }
 
         public static implicit operator CSharpSyntaxNode(DiscardDesignationSyntaxWrapper wrapper)
         {
-            return wrapper.SyntaxNode;
+            return wrapper.node;
         }
 
         public static bool IsInstance(SyntaxNode node)
@@ -74,7 +76,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
 
         public DiscardDesignationSyntaxWrapper WithUnderscoreToken(SyntaxToken identifier)
         {
-            return new DiscardDesignationSyntaxWrapper(WithUnderscoreTokenAccessor(SyntaxNode, identifier));
+            return new DiscardDesignationSyntaxWrapper(WithUnderscoreTokenAccessor(this.SyntaxNode, identifier));
         }
     }
 }

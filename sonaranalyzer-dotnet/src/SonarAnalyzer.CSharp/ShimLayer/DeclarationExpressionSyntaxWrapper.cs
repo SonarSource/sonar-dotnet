@@ -18,6 +18,8 @@ namespace SonarAnalyzer.ShimLayer.CSharp
         private static readonly Func<ExpressionSyntax, TypeSyntax, ExpressionSyntax> WithTypeAccessor;
         private static readonly Func<ExpressionSyntax, CSharpSyntaxNode, ExpressionSyntax> WithDesignationAccessor;
 
+        private readonly ExpressionSyntax node;
+
         static DeclarationExpressionSyntaxWrapper()
         {
             WrappedType = WrapperHelper.GetWrappedType(typeof(DeclarationExpressionSyntaxWrapper));
@@ -29,16 +31,16 @@ namespace SonarAnalyzer.ShimLayer.CSharp
 
         private DeclarationExpressionSyntaxWrapper(ExpressionSyntax node)
         {
-            SyntaxNode = node;
+            this.node = node;
         }
 
-        public ExpressionSyntax SyntaxNode { get; }
+        public ExpressionSyntax SyntaxNode => this.node;
 
         public TypeSyntax Type
         {
             get
             {
-                return TypeAccessor(SyntaxNode);
+                return TypeAccessor(this.SyntaxNode);
             }
         }
 
@@ -46,7 +48,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
         {
             get
             {
-                return (VariableDesignationSyntaxWrapper)DesignationAccessor(SyntaxNode);
+                return (VariableDesignationSyntaxWrapper)DesignationAccessor(this.SyntaxNode);
             }
         }
 
@@ -67,7 +69,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
 
         public static implicit operator ExpressionSyntax(DeclarationExpressionSyntaxWrapper wrapper)
         {
-            return wrapper.SyntaxNode;
+            return wrapper.node;
         }
 
         public static bool IsInstance(SyntaxNode node)
@@ -77,12 +79,12 @@ namespace SonarAnalyzer.ShimLayer.CSharp
 
         public DeclarationExpressionSyntaxWrapper WithType(TypeSyntax type)
         {
-            return new DeclarationExpressionSyntaxWrapper(WithTypeAccessor(SyntaxNode, type));
+            return new DeclarationExpressionSyntaxWrapper(WithTypeAccessor(this.SyntaxNode, type));
         }
 
         public DeclarationExpressionSyntaxWrapper WithDesignation(VariableDesignationSyntaxWrapper designation)
         {
-            return new DeclarationExpressionSyntaxWrapper(WithDesignationAccessor(SyntaxNode, designation.SyntaxNode));
+            return new DeclarationExpressionSyntaxWrapper(WithDesignationAccessor(this.SyntaxNode, designation.SyntaxNode));
         }
     }
 }

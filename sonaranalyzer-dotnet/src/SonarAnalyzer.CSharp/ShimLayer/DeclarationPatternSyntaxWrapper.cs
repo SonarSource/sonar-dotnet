@@ -18,6 +18,8 @@ namespace SonarAnalyzer.ShimLayer.CSharp
         private static readonly Func<CSharpSyntaxNode, TypeSyntax, CSharpSyntaxNode> WithTypeAccessor;
         private static readonly Func<CSharpSyntaxNode, CSharpSyntaxNode, CSharpSyntaxNode> WithDesignationAccessor;
 
+        private readonly CSharpSyntaxNode node;
+
         static DeclarationPatternSyntaxWrapper()
         {
             WrappedType = WrapperHelper.GetWrappedType(typeof(DeclarationPatternSyntaxWrapper));
@@ -29,16 +31,16 @@ namespace SonarAnalyzer.ShimLayer.CSharp
 
         private DeclarationPatternSyntaxWrapper(CSharpSyntaxNode node)
         {
-            SyntaxNode = node;
+            this.node = node;
         }
 
-        public CSharpSyntaxNode SyntaxNode { get; }
+        public CSharpSyntaxNode SyntaxNode => this.node;
 
         public TypeSyntax Type
         {
             get
             {
-                return TypeAccessor(SyntaxNode);
+                return TypeAccessor(this.SyntaxNode);
             }
         }
 
@@ -46,7 +48,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
         {
             get
             {
-                return (VariableDesignationSyntaxWrapper)DesignationAccessor(SyntaxNode);
+                return (VariableDesignationSyntaxWrapper)DesignationAccessor(this.SyntaxNode);
             }
         }
 
@@ -72,12 +74,12 @@ namespace SonarAnalyzer.ShimLayer.CSharp
 
         public static implicit operator PatternSyntaxWrapper(DeclarationPatternSyntaxWrapper wrapper)
         {
-            return PatternSyntaxWrapper.FromUpcast(wrapper.SyntaxNode);
+            return PatternSyntaxWrapper.FromUpcast(wrapper.node);
         }
 
         public static implicit operator CSharpSyntaxNode(DeclarationPatternSyntaxWrapper wrapper)
         {
-            return wrapper.SyntaxNode;
+            return wrapper.node;
         }
 
         public static bool IsInstance(SyntaxNode node)
@@ -87,12 +89,12 @@ namespace SonarAnalyzer.ShimLayer.CSharp
 
         public DeclarationPatternSyntaxWrapper WithType(TypeSyntax type)
         {
-            return new DeclarationPatternSyntaxWrapper(WithTypeAccessor(SyntaxNode, type));
+            return new DeclarationPatternSyntaxWrapper(WithTypeAccessor(this.SyntaxNode, type));
         }
 
         public DeclarationPatternSyntaxWrapper WithDesignation(VariableDesignationSyntaxWrapper designation)
         {
-            return new DeclarationPatternSyntaxWrapper(WithDesignationAccessor(SyntaxNode, designation.SyntaxNode));
+            return new DeclarationPatternSyntaxWrapper(WithDesignationAccessor(this.SyntaxNode, designation.SyntaxNode));
         }
     }
 }

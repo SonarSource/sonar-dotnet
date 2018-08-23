@@ -17,6 +17,8 @@ namespace SonarAnalyzer.ShimLayer.CSharp
         private static readonly Func<TypeSyntax, SyntaxToken, TypeSyntax> WithRefKeywordAccessor;
         private static readonly Func<TypeSyntax, TypeSyntax, TypeSyntax> WithTypeAccessor;
 
+        private readonly TypeSyntax node;
+
         static RefTypeSyntaxWrapper()
         {
             WrappedType = WrapperHelper.GetWrappedType(typeof(RefTypeSyntaxWrapper));
@@ -28,16 +30,16 @@ namespace SonarAnalyzer.ShimLayer.CSharp
 
         private RefTypeSyntaxWrapper(TypeSyntax node)
         {
-            SyntaxNode = node;
+            this.node = node;
         }
 
-        public TypeSyntax SyntaxNode { get; }
+        public TypeSyntax SyntaxNode => this.node;
 
         public SyntaxToken RefKeyword
         {
             get
             {
-                return RefKeywordAccessor(SyntaxNode);
+                return RefKeywordAccessor(this.SyntaxNode);
             }
         }
 
@@ -45,7 +47,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
         {
             get
             {
-                return TypeAccessor(SyntaxNode);
+                return TypeAccessor(this.SyntaxNode);
             }
         }
 
@@ -66,7 +68,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
 
         public static implicit operator TypeSyntax(RefTypeSyntaxWrapper wrapper)
         {
-            return wrapper.SyntaxNode;
+            return wrapper.node;
         }
 
         public static bool IsInstance(SyntaxNode node)
@@ -76,12 +78,12 @@ namespace SonarAnalyzer.ShimLayer.CSharp
 
         public RefTypeSyntaxWrapper WithRefKeyword(SyntaxToken refKeyword)
         {
-            return new RefTypeSyntaxWrapper(WithRefKeywordAccessor(SyntaxNode, refKeyword));
+            return new RefTypeSyntaxWrapper(WithRefKeywordAccessor(this.SyntaxNode, refKeyword));
         }
 
         public RefTypeSyntaxWrapper WithType(TypeSyntax type)
         {
-            return new RefTypeSyntaxWrapper(WithTypeAccessor(SyntaxNode, type));
+            return new RefTypeSyntaxWrapper(WithTypeAccessor(this.SyntaxNode, type));
         }
     }
 }

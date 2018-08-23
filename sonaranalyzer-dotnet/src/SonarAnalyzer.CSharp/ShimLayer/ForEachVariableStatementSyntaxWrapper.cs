@@ -21,6 +21,8 @@ namespace SonarAnalyzer.ShimLayer.CSharp
         private static readonly Func<StatementSyntax, SyntaxToken, StatementSyntax> WithCloseParenTokenAccessor;
         private static readonly Func<StatementSyntax, StatementSyntax, StatementSyntax> WithStatementAccessor;
 
+        private readonly StatementSyntax node;
+
         static ForEachVariableStatementSyntaxWrapper()
         {
             WrappedType = WrapperHelper.GetWrappedType(typeof(ForEachVariableStatementSyntaxWrapper));
@@ -36,10 +38,10 @@ namespace SonarAnalyzer.ShimLayer.CSharp
 
         private ForEachVariableStatementSyntaxWrapper(StatementSyntax node)
         {
-            SyntaxNode = node;
+            this.node = node;
         }
 
-        public StatementSyntax SyntaxNode { get; }
+        public StatementSyntax SyntaxNode => this.node;
 
         public SyntaxToken ForEachKeyword
         {
@@ -61,7 +63,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
         {
             get
             {
-                return VariableAccessor(SyntaxNode);
+                return VariableAccessor(this.SyntaxNode);
             }
         }
 
@@ -119,12 +121,12 @@ namespace SonarAnalyzer.ShimLayer.CSharp
 
         public static implicit operator CommonForEachStatementSyntaxWrapper(ForEachVariableStatementSyntaxWrapper wrapper)
         {
-            return CommonForEachStatementSyntaxWrapper.FromUpcast(wrapper.SyntaxNode);
+            return CommonForEachStatementSyntaxWrapper.FromUpcast(wrapper.node);
         }
 
         public static implicit operator StatementSyntax(ForEachVariableStatementSyntaxWrapper wrapper)
         {
-            return wrapper.SyntaxNode;
+            return wrapper.node;
         }
 
         public static bool IsInstance(SyntaxNode node)
@@ -134,37 +136,37 @@ namespace SonarAnalyzer.ShimLayer.CSharp
 
         public ForEachVariableStatementSyntaxWrapper WithForEachKeyword(SyntaxToken forEachKeyword)
         {
-            return new ForEachVariableStatementSyntaxWrapper(WithForEachKeywordAccessor(SyntaxNode, forEachKeyword));
+            return new ForEachVariableStatementSyntaxWrapper(WithForEachKeywordAccessor(this.SyntaxNode, forEachKeyword));
         }
 
         public ForEachVariableStatementSyntaxWrapper WithOpenParenToken(SyntaxToken openParenToken)
         {
-            return new ForEachVariableStatementSyntaxWrapper(WithOpenParenTokenAccessor(SyntaxNode, openParenToken));
+            return new ForEachVariableStatementSyntaxWrapper(WithOpenParenTokenAccessor(this.SyntaxNode, openParenToken));
         }
 
         public ForEachVariableStatementSyntaxWrapper WithVariable(ExpressionSyntax variable)
         {
-            return new ForEachVariableStatementSyntaxWrapper(WithVariableAccessor(SyntaxNode, variable));
+            return new ForEachVariableStatementSyntaxWrapper(WithVariableAccessor(this.SyntaxNode, variable));
         }
 
         public ForEachVariableStatementSyntaxWrapper WithInKeyword(SyntaxToken inKeyword)
         {
-            return new ForEachVariableStatementSyntaxWrapper(WithInKeywordAccessor(SyntaxNode, inKeyword));
+            return new ForEachVariableStatementSyntaxWrapper(WithInKeywordAccessor(this.SyntaxNode, inKeyword));
         }
 
         public ForEachVariableStatementSyntaxWrapper WithExpression(ExpressionSyntax expression)
         {
-            return new ForEachVariableStatementSyntaxWrapper(WithExpressionAccessor(SyntaxNode, expression));
+            return new ForEachVariableStatementSyntaxWrapper(WithExpressionAccessor(this.SyntaxNode, expression));
         }
 
         public ForEachVariableStatementSyntaxWrapper WithCloseParenToken(SyntaxToken closeParenToken)
         {
-            return new ForEachVariableStatementSyntaxWrapper(WithCloseParenTokenAccessor(SyntaxNode, closeParenToken));
+            return new ForEachVariableStatementSyntaxWrapper(WithCloseParenTokenAccessor(this.SyntaxNode, closeParenToken));
         }
 
         public ForEachVariableStatementSyntaxWrapper WithStatement(StatementSyntax statement)
         {
-            return new ForEachVariableStatementSyntaxWrapper(WithStatementAccessor(SyntaxNode, statement));
+            return new ForEachVariableStatementSyntaxWrapper(WithStatementAccessor(this.SyntaxNode, statement));
         }
     }
 }

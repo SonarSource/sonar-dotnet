@@ -66,7 +66,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
         //   node:
         //     The node to add.
         public SeparatedSyntaxListWrapper<TNode> Add(TNode node)
-            => Insert(Count, node);
+            => this.Insert(this.Count, node);
 
         // Summary:
         //     Creates a new list with the specified nodes added to the end.
@@ -75,7 +75,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
         //   nodes:
         //     The nodes to add.
         public SeparatedSyntaxListWrapper<TNode> AddRange(IEnumerable<TNode> nodes)
-            => InsertRange(Count, nodes);
+            => this.InsertRange(this.Count, nodes);
 
         public abstract bool Any();
 
@@ -102,7 +102,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
 
         IEnumerator<TNode> IEnumerable<TNode>.GetEnumerator()
         {
-            return GetEnumerator();
+            return this.GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
@@ -110,7 +110,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
             return ((IEnumerable<TNode>)this).GetEnumerator();
         }
 
-        public abstract override int GetHashCode();
+        public override abstract int GetHashCode();
 
         public abstract SyntaxToken GetSeparator(int index);
 
@@ -146,23 +146,24 @@ namespace SonarAnalyzer.ShimLayer.CSharp
 
         public abstract string ToFullString();
 
-        public abstract override string ToString();
+        public override abstract string ToString();
 
         public struct Enumerator : IEnumerator<TNode>
         {
             private readonly SeparatedSyntaxListWrapper<TNode> wrapper;
             private int index;
+            private TNode current;
 
             public Enumerator(SeparatedSyntaxListWrapper<TNode> wrapper)
             {
                 this.wrapper = wrapper;
                 this.index = -1;
-                Current = default(TNode);
+                this.current = default(TNode);
             }
 
-            public TNode Current { get; private set; }
+            public TNode Current => this.current;
 
-            object IEnumerator.Current => Current;
+            object IEnumerator.Current => this.Current;
 
             public override bool Equals(object obj)
             {
@@ -205,14 +206,14 @@ namespace SonarAnalyzer.ShimLayer.CSharp
                 }
 
                 this.index++;
-                Current = this.wrapper[this.index];
+                this.current = this.wrapper[this.index];
                 return true;
             }
 
             public void Reset()
             {
                 this.index = -1;
-                Current = default(TNode);
+                this.current = default(TNode);
             }
         }
 

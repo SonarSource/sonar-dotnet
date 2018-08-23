@@ -15,6 +15,8 @@ namespace SonarAnalyzer.ShimLayer.CSharp
         private static readonly Func<CSharpSyntaxNode, SyntaxToken> IdentifierAccessor;
         private static readonly Func<CSharpSyntaxNode, SyntaxToken, CSharpSyntaxNode> WithIdentifierAccessor;
 
+        private readonly CSharpSyntaxNode node;
+
         static SingleVariableDesignationSyntaxWrapper()
         {
             WrappedType = WrapperHelper.GetWrappedType(typeof(SingleVariableDesignationSyntaxWrapper));
@@ -24,16 +26,16 @@ namespace SonarAnalyzer.ShimLayer.CSharp
 
         private SingleVariableDesignationSyntaxWrapper(CSharpSyntaxNode node)
         {
-            SyntaxNode = node;
+            this.node = node;
         }
 
-        public CSharpSyntaxNode SyntaxNode { get; }
+        public CSharpSyntaxNode SyntaxNode => this.node;
 
         public SyntaxToken Identifier
         {
             get
             {
-                return IdentifierAccessor(SyntaxNode);
+                return IdentifierAccessor(this.SyntaxNode);
             }
         }
 
@@ -59,12 +61,12 @@ namespace SonarAnalyzer.ShimLayer.CSharp
 
         public static implicit operator VariableDesignationSyntaxWrapper(SingleVariableDesignationSyntaxWrapper wrapper)
         {
-            return VariableDesignationSyntaxWrapper.FromUpcast(wrapper.SyntaxNode);
+            return VariableDesignationSyntaxWrapper.FromUpcast(wrapper.node);
         }
 
         public static implicit operator CSharpSyntaxNode(SingleVariableDesignationSyntaxWrapper wrapper)
         {
-            return wrapper.SyntaxNode;
+            return wrapper.node;
         }
 
         public static bool IsInstance(SyntaxNode node)
@@ -74,7 +76,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
 
         public SingleVariableDesignationSyntaxWrapper WithIdentifier(SyntaxToken identifier)
         {
-            return new SingleVariableDesignationSyntaxWrapper(WithIdentifierAccessor(SyntaxNode, identifier));
+            return new SingleVariableDesignationSyntaxWrapper(WithIdentifierAccessor(this.SyntaxNode, identifier));
         }
     }
 }
