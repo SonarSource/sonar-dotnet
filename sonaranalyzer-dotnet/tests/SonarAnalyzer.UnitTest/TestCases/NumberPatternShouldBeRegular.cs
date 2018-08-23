@@ -19,6 +19,7 @@ namespace Tests.Diagnostics
 
             // binary notation
             var num2 = 0b1_0000_0000;
+            var num3 = 0b1_00_00_00_00;
 
             balance += 227_652;
 
@@ -33,6 +34,10 @@ namespace Tests.Diagnostics
             var x = 1_234.56_78; // Noncompliant
 
             var y = 1_234_5; // Noncompliant
+
+            var num2 = 0b1_00_00_0000; // Noncompliant
+
+            var num = 0x01_00_000; // Noncompliant
         }
     }
 }

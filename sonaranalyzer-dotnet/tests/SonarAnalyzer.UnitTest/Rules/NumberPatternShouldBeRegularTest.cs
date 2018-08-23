@@ -30,7 +30,7 @@ namespace SonarAnalyzer.UnitTest.Rules
     {
         [TestMethod]
         [TestCategory("Rule")]
-        public void NumberPatternShouldBeRegular_BeforeCSharp7()
+        public void NumberPatternShouldBeRegular_CSharp6()
         {
             Verifier.VerifyNoIssueReported(@"TestCases\NumberPatternShouldBeRegular.cs",
                 new NumberPatternShouldBeRegular(),
