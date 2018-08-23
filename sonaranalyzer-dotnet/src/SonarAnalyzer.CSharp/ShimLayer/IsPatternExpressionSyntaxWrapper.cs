@@ -20,6 +20,8 @@ namespace SonarAnalyzer.ShimLayer.CSharp
         private static readonly Func<ExpressionSyntax, SyntaxToken, ExpressionSyntax> WithIsKeywordAccessor;
         private static readonly Func<ExpressionSyntax, CSharpSyntaxNode, ExpressionSyntax> WithPatternAccessor;
 
+        private readonly ExpressionSyntax node;
+
         static IsPatternExpressionSyntaxWrapper()
         {
             WrappedType = WrapperHelper.GetWrappedType(typeof(IsPatternExpressionSyntaxWrapper));
@@ -33,16 +35,16 @@ namespace SonarAnalyzer.ShimLayer.CSharp
 
         private IsPatternExpressionSyntaxWrapper(ExpressionSyntax node)
         {
-            SyntaxNode = node;
+            this.node = node;
         }
 
-        public ExpressionSyntax SyntaxNode { get; }
+        public ExpressionSyntax SyntaxNode => this.node;
 
         public ExpressionSyntax Expression
         {
             get
             {
-                return ExpressionAccessor(SyntaxNode);
+                return ExpressionAccessor(this.SyntaxNode);
             }
         }
 
@@ -50,7 +52,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
         {
             get
             {
-                return IsKeywordAccessor(SyntaxNode);
+                return IsKeywordAccessor(this.SyntaxNode);
             }
         }
 
@@ -58,7 +60,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
         {
             get
             {
-                return (PatternSyntaxWrapper)PatternAccessor(SyntaxNode);
+                return (PatternSyntaxWrapper)PatternAccessor(this.SyntaxNode);
             }
         }
 
@@ -79,7 +81,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
 
         public static implicit operator ExpressionSyntax(IsPatternExpressionSyntaxWrapper wrapper)
         {
-            return wrapper.SyntaxNode;
+            return wrapper.node;
         }
 
         public static bool IsInstance(SyntaxNode node)
@@ -89,17 +91,17 @@ namespace SonarAnalyzer.ShimLayer.CSharp
 
         public IsPatternExpressionSyntaxWrapper WithExpression(ExpressionSyntax expression)
         {
-            return new IsPatternExpressionSyntaxWrapper(WithExpressionAccessor(SyntaxNode, expression));
+            return new IsPatternExpressionSyntaxWrapper(WithExpressionAccessor(this.SyntaxNode, expression));
         }
 
         public IsPatternExpressionSyntaxWrapper WithIsKeyword(SyntaxToken isKeyword)
         {
-            return new IsPatternExpressionSyntaxWrapper(WithIsKeywordAccessor(SyntaxNode, isKeyword));
+            return new IsPatternExpressionSyntaxWrapper(WithIsKeywordAccessor(this.SyntaxNode, isKeyword));
         }
 
         public IsPatternExpressionSyntaxWrapper WithPattern(PatternSyntaxWrapper pattern)
         {
-            return new IsPatternExpressionSyntaxWrapper(WithPatternAccessor(SyntaxNode, pattern.SyntaxNode));
+            return new IsPatternExpressionSyntaxWrapper(WithPatternAccessor(this.SyntaxNode, pattern.SyntaxNode));
         }
     }
 }

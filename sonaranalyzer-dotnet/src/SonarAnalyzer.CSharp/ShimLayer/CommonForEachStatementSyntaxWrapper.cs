@@ -20,6 +20,8 @@ namespace SonarAnalyzer.ShimLayer.CSharp
         private static readonly Func<StatementSyntax, SyntaxToken> CloseParenTokenAccessor;
         private static readonly Func<StatementSyntax, StatementSyntax> StatementAccessor;
 
+        private readonly StatementSyntax node;
+
         static CommonForEachStatementSyntaxWrapper()
         {
             WrappedType = WrapperHelper.GetWrappedType(typeof(CommonForEachStatementSyntaxWrapper));
@@ -33,16 +35,16 @@ namespace SonarAnalyzer.ShimLayer.CSharp
 
         private CommonForEachStatementSyntaxWrapper(StatementSyntax node)
         {
-            SyntaxNode = node;
+            this.node = node;
         }
 
-        public StatementSyntax SyntaxNode { get; }
+        public StatementSyntax SyntaxNode => this.node;
 
         public SyntaxToken ForEachKeyword
         {
             get
             {
-                return ForEachKeywordAccessor(SyntaxNode);
+                return ForEachKeywordAccessor(this.SyntaxNode);
             }
         }
 
@@ -50,7 +52,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
         {
             get
             {
-                return OpenParenTokenAccessor(SyntaxNode);
+                return OpenParenTokenAccessor(this.SyntaxNode);
             }
         }
 
@@ -58,7 +60,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
         {
             get
             {
-                return InKeywordAccessor(SyntaxNode);
+                return InKeywordAccessor(this.SyntaxNode);
             }
         }
 
@@ -66,7 +68,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
         {
             get
             {
-                return ExpressionAccessor(SyntaxNode);
+                return ExpressionAccessor(this.SyntaxNode);
             }
         }
 
@@ -74,7 +76,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
         {
             get
             {
-                return CloseParenTokenAccessor(SyntaxNode);
+                return CloseParenTokenAccessor(this.SyntaxNode);
             }
         }
 
@@ -82,7 +84,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
         {
             get
             {
-                return StatementAccessor(SyntaxNode);
+                return StatementAccessor(this.SyntaxNode);
             }
         }
 
@@ -108,7 +110,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
 
         public static implicit operator StatementSyntax(CommonForEachStatementSyntaxWrapper wrapper)
         {
-            return wrapper.SyntaxNode;
+            return wrapper.node;
         }
 
         public static bool IsInstance(SyntaxNode node)

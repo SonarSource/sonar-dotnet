@@ -17,6 +17,8 @@ namespace SonarAnalyzer.ShimLayer.CSharp
         private static readonly Func<ExpressionSyntax, SyntaxToken, ExpressionSyntax> WithThrowKeywordAccessor;
         private static readonly Func<ExpressionSyntax, ExpressionSyntax, ExpressionSyntax> WithExpressionAccessor;
 
+        private readonly ExpressionSyntax node;
+
         static ThrowExpressionSyntaxWrapper()
         {
             WrappedType = WrapperHelper.GetWrappedType(typeof(ThrowExpressionSyntaxWrapper));
@@ -28,16 +30,16 @@ namespace SonarAnalyzer.ShimLayer.CSharp
 
         private ThrowExpressionSyntaxWrapper(ExpressionSyntax node)
         {
-            SyntaxNode = node;
+            this.node = node;
         }
 
-        public ExpressionSyntax SyntaxNode { get; }
+        public ExpressionSyntax SyntaxNode => this.node;
 
         public SyntaxToken ThrowKeyword
         {
             get
             {
-                return ThrowKeywordAccessor(SyntaxNode);
+                return ThrowKeywordAccessor(this.SyntaxNode);
             }
         }
 
@@ -45,7 +47,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
         {
             get
             {
-                return ExpressionAccessor(SyntaxNode);
+                return ExpressionAccessor(this.SyntaxNode);
             }
         }
 
@@ -66,7 +68,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
 
         public static implicit operator ExpressionSyntax(ThrowExpressionSyntaxWrapper wrapper)
         {
-            return wrapper.SyntaxNode;
+            return wrapper.node;
         }
 
         public static bool IsInstance(SyntaxNode node)
@@ -76,12 +78,12 @@ namespace SonarAnalyzer.ShimLayer.CSharp
 
         public ThrowExpressionSyntaxWrapper WithThrowKeyword(SyntaxToken throwKeyword)
         {
-            return new ThrowExpressionSyntaxWrapper(WithThrowKeywordAccessor(SyntaxNode, throwKeyword));
+            return new ThrowExpressionSyntaxWrapper(WithThrowKeywordAccessor(this.SyntaxNode, throwKeyword));
         }
 
         public ThrowExpressionSyntaxWrapper WithExpression(ExpressionSyntax expression)
         {
-            return new ThrowExpressionSyntaxWrapper(WithExpressionAccessor(SyntaxNode, expression));
+            return new ThrowExpressionSyntaxWrapper(WithExpressionAccessor(this.SyntaxNode, expression));
         }
     }
 }

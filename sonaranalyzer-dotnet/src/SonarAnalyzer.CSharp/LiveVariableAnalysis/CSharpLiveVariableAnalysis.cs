@@ -213,13 +213,10 @@ namespace SonarAnalyzer.LiveVariableAnalysis.CSharp
 
         internal static bool IsLocalScoped(ISymbol symbol, ISymbol declaration)
         {
-            if (!(symbol is ILocalSymbol local))
+            if (!(symbol is ILocalSymbol local) &&
+                (!(symbol is IParameterSymbol parameter) || parameter.RefKind != RefKind.None))
             {
-                if (!(symbol is IParameterSymbol parameter) ||
-                    parameter.RefKind != RefKind.None)
-                {
-                    return false;
-                }
+                return false;
             }
 
             return symbol.ContainingSymbol != null &&

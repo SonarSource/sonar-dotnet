@@ -18,6 +18,8 @@ namespace SonarAnalyzer.ShimLayer.CSharp
         private static readonly Func<CSharpSyntaxNode, SyntaxToken, CSharpSyntaxNode> WithWhenKeywordAccessor;
         private static readonly Func<CSharpSyntaxNode, ExpressionSyntax, CSharpSyntaxNode> WithConditionAccessor;
 
+        private readonly CSharpSyntaxNode node;
+
         static WhenClauseSyntaxWrapper()
         {
             WrappedType = WrapperHelper.GetWrappedType(typeof(WhenClauseSyntaxWrapper));
@@ -29,16 +31,16 @@ namespace SonarAnalyzer.ShimLayer.CSharp
 
         private WhenClauseSyntaxWrapper(CSharpSyntaxNode node)
         {
-            SyntaxNode = node;
+            this.node = node;
         }
 
-        public CSharpSyntaxNode SyntaxNode { get; }
+        public CSharpSyntaxNode SyntaxNode => this.node;
 
         public SyntaxToken WhenKeyword
         {
             get
             {
-                return WhenKeywordAccessor(SyntaxNode);
+                return WhenKeywordAccessor(this.SyntaxNode);
             }
         }
 
@@ -46,7 +48,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
         {
             get
             {
-                return ConditionAccessor(SyntaxNode);
+                return ConditionAccessor(this.SyntaxNode);
             }
         }
 
@@ -67,7 +69,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
 
         public static implicit operator CSharpSyntaxNode(WhenClauseSyntaxWrapper wrapper)
         {
-            return wrapper.SyntaxNode;
+            return wrapper.node;
         }
 
         public static bool IsInstance(SyntaxNode node)
@@ -77,12 +79,12 @@ namespace SonarAnalyzer.ShimLayer.CSharp
 
         public WhenClauseSyntaxWrapper WithWhenKeyword(SyntaxToken whenKeyword)
         {
-            return new WhenClauseSyntaxWrapper(WithWhenKeywordAccessor(SyntaxNode, whenKeyword));
+            return new WhenClauseSyntaxWrapper(WithWhenKeywordAccessor(this.SyntaxNode, whenKeyword));
         }
 
         public WhenClauseSyntaxWrapper WithCondition(ExpressionSyntax condition)
         {
-            return new WhenClauseSyntaxWrapper(WithConditionAccessor(SyntaxNode, condition));
+            return new WhenClauseSyntaxWrapper(WithConditionAccessor(this.SyntaxNode, condition));
         }
     }
 }
