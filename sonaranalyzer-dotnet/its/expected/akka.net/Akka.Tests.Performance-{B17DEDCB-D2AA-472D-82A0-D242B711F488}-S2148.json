@@ -1,0 +1,43 @@
+{
+"issues":  [
+{
+"id":  "S2148",
+"message":  "Add underscores to this numeric value for readability.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorPathSpec.cs",
+"region":  {
+"startLine":  12,
+"startColumn":  69,
+"endLine":  12,
+"endColumn":  79
+}
+}
+},
+{
+"id":  "S2148",
+"message":  "Add underscores to this numeric value for readability.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\ActorThroughputSpecBase.cs",
+"region":  {
+"startLine":  15,
+"startColumn":  50,
+"endLine":  15,
+"endColumn":  58
+}
+}
+},
+{
+"id":  "S2148",
+"message":  "Add underscores to this numeric value for readability.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Tests.Performance\Actor\AddressSpec.cs",
+"region":  {
+"startLine":  14,
+"startColumn":  69,
+"endLine":  14,
+"endColumn":  79
+}
+}
+}
+]
+}
