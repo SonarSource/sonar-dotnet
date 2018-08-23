@@ -143,7 +143,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             private void VerifyDestructor(DestructorDeclarationSyntax destructorSyntax)
             {
-                if (!HasBodyOrExpressionBody(destructorSyntax))
+                if (!destructorSyntax.HasBodyOrExpressionBody())
                 {
                     return;
                 }
@@ -159,7 +159,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             private void VerifyDisposeOverrideCallsBase(MethodDeclarationSyntax disposeMethod)
             {
-                if (!HasBodyOrExpressionBody(disposeMethod))
+                if (!disposeMethod.HasBodyOrExpressionBody())
                 {
                     return;
                 }
@@ -180,7 +180,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     return;
                 }
 
-                if (HasBodyOrExpressionBody(disposeMethod) &&
+                if (disposeMethod.HasBodyOrExpressionBody() &&
                     !isSealedClass &&
                         (
                             !HasStatementsCount(disposeMethod, 2) ||
@@ -287,10 +287,6 @@ namespace SonarAnalyzer.Rules.CSharp
                     .WhereNotNull()
                     .Any(methodSym => !methodSym.IsAbstract);
             }
-
-            private static bool HasBodyOrExpressionBody(BaseMethodDeclarationSyntax methodDeclaration) =>
-                methodDeclaration != null &&
-                (methodDeclaration.Body != null || methodDeclaration.ExpressionBody() != null);
         }
     }
 }
