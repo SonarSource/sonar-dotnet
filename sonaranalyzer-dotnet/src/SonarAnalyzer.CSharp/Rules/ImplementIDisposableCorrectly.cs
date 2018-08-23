@@ -79,66 +79,66 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 this.classDeclaration = classDeclaration;
                 this.semanticModel = semanticModel;
-                classSymbol = semanticModel.GetDeclaredSymbol(classDeclaration);
+                this.classSymbol = semanticModel.GetDeclaredSymbol(classDeclaration);
             }
 
             public IEnumerable<SecondaryLocation> GetIssueLocations()
             {
-                if (classSymbol == null || classSymbol.IsSealed)
+                if (this.classSymbol == null || this.classSymbol.IsSealed)
                 {
                     return Enumerable.Empty<SecondaryLocation>();
                 }
 
-                if (classSymbol.BaseType.Implements(KnownType.System_IDisposable))
+                if (this.classSymbol.BaseType.Implements(KnownType.System_IDisposable))
                 {
-                    var idisposableInterfaceSyntax = classDeclaration.BaseList?.Types
+                    var idisposableInterfaceSyntax = this.classDeclaration.BaseList?.Types
                         .FirstOrDefault(IsOrImplementsIDisposable);
 
                     if (idisposableInterfaceSyntax != null)
                     {
                         AddSecondaryLocation(idisposableInterfaceSyntax.GetLocation(),
-                            $"Remove 'IDisposable' from the list of interfaces implemented by '{classSymbol.Name}'"
+                            $"Remove 'IDisposable' from the list of interfaces implemented by '{this.classSymbol.Name}'"
                                 + " and override the base class 'Dispose' implementation instead.");
                     }
 
-                    if (HasVirtualDisposeBool(classSymbol.BaseType))
+                    if (HasVirtualDisposeBool(this.classSymbol.BaseType))
                     {
-                        VerifyDisposeOverrideCallsBase(FindMethodDeclarations(classSymbol, IsDisposeBool)
+                        VerifyDisposeOverrideCallsBase(FindMethodDeclarations(this.classSymbol, IsDisposeBool)
                             .OfType<MethodDeclarationSyntax>()
                             .FirstOrDefault());
                     }
 
-                    return secondaryLocations;
+                    return this.secondaryLocations;
                 }
 
-                if (classSymbol.Implements(KnownType.System_IDisposable))
+                if (this.classSymbol.Implements(KnownType.System_IDisposable))
                 {
-                    if (!FindMethodDeclarations(classSymbol, IsDisposeBool).Any())
+                    if (!FindMethodDeclarations(this.classSymbol, IsDisposeBool).Any())
                     {
-                        AddSecondaryLocation(classDeclaration.Identifier.GetLocation(),
+                        AddSecondaryLocation(this.classDeclaration.Identifier.GetLocation(),
                             $"Provide 'protected' overridable implementation of 'Dispose(bool)' on "
-                                + $"'{classSymbol.Name}' or mark the type as 'sealed'.");
+                                + $"'{this.classSymbol.Name}' or mark the type as 'sealed'.");
                     }
 
-                    var destructor = FindMethodDeclarations(classSymbol, SymbolHelper.IsDestructor)
+                    var destructor = FindMethodDeclarations(this.classSymbol, SymbolHelper.IsDestructor)
                         .OfType<DestructorDeclarationSyntax>()
                         .FirstOrDefault();
 
                     VerifyDestructor(destructor);
 
-                    var disposeMethod = FindMethodDeclarations(classSymbol, KnownMethods.IsIDisposableDispose)
+                    var disposeMethod = FindMethodDeclarations(this.classSymbol, KnownMethods.IsIDisposableDispose)
                         .OfType<MethodDeclarationSyntax>()
                         .FirstOrDefault();
 
-                    VerifyDispose(disposeMethod, classSymbol.IsSealed);
+                    VerifyDispose(disposeMethod, this.classSymbol.IsSealed);
                 }
 
-                return secondaryLocations;
+                return this.secondaryLocations;
             }
 
             private void AddSecondaryLocation(Location location, string message)
             {
-                secondaryLocations.Add(new SecondaryLocation(location, message));
+                this.secondaryLocations.Add(new SecondaryLocation(location, message));
             }
 
             private void VerifyDestructor(DestructorDeclarationSyntax destructorSyntax)
@@ -152,7 +152,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     !CallsVirtualDispose(destructorSyntax, argumentValue: "false"))
                 {
                     AddSecondaryLocation(destructorSyntax.Identifier.GetLocation(),
-                        $"Modify '{classSymbol.Name}.~{classSymbol.Name}()' so that it calls 'Dispose(false)' and " +
+                        $"Modify '{this.classSymbol.Name}.~{this.classSymbol.Name}()' so that it calls 'Dispose(false)' and " +
                         "then returns.");
                 }
             }
@@ -189,13 +189,13 @@ namespace SonarAnalyzer.Rules.CSharp
                         ))
                 {
                     AddSecondaryLocation(disposeMethod.Identifier.GetLocation(),
-                        $"'{classSymbol.Name}.Dispose()' should only invoke 'Dispose(true)' and " +
+                        $"'{this.classSymbol.Name}.Dispose()' should only invoke 'Dispose(true)' and " +
                         "'GC.SuppressFinalize(this)'.");
                 }
 
                 // Because of partial classes we cannot always rely on the current semantic model.
                 // See issue: https://github.com/SonarSource/sonar-csharp/issues/690
-                var disposeMethodSymbol = semanticModel.GetSyntaxTreeSemanticModel(disposeMethod)
+                var disposeMethodSymbol = this.semanticModel.GetSyntaxTreeSemanticModel(disposeMethod)
                     .GetDeclaredSymbol(disposeMethod);
                 if (disposeMethodSymbol == null)
                 {
@@ -209,13 +209,13 @@ namespace SonarAnalyzer.Rules.CSharp
                         .FirstOrDefault(m => m.IsAnyKind(notAllowedDisposeModifiers));
 
                     AddSecondaryLocation(modifier.GetLocation(),
-                        $"'{classSymbol.Name}.Dispose()' should not be 'virtual' or 'abstract'.");
+                        $"'{this.classSymbol.Name}.Dispose()' should not be 'virtual' or 'abstract'.");
                 }
 
                 if (disposeMethodSymbol.ExplicitInterfaceImplementations.Any())
                 {
                     AddSecondaryLocation(disposeMethod.Identifier.GetLocation(),
-                        $"'{classSymbol.Name}.Dispose()' should be 'public'.");
+                        $"'{this.classSymbol.Name}.Dispose()' should be 'public'.");
                 }
             }
 
@@ -231,7 +231,7 @@ namespace SonarAnalyzer.Rules.CSharp
             private bool IsOrImplementsIDisposable(BaseTypeSyntax baseType)
             {
                 return baseType?.Type != null &&
-                    (semanticModel.GetSymbolInfo(baseType.Type).Symbol as INamedTypeSymbol)
+                    (this.semanticModel.GetSymbolInfo(baseType.Type).Symbol as INamedTypeSymbol)
                         .Is(KnownType.System_IDisposable);
             }
 
@@ -251,7 +251,7 @@ namespace SonarAnalyzer.Rules.CSharp
             private bool CallsSuppressFinalize(BaseMethodDeclarationSyntax methodDeclaration)
             {
                 return CSharpSyntaxHelper.ContainsMethodInvocation(methodDeclaration,
-                    semanticModel,
+                    this.semanticModel,
                     method => HasArgumentValues(method, "this"),
                     KnownMethods.IsGcSuppressFinalize);
             }
@@ -259,7 +259,7 @@ namespace SonarAnalyzer.Rules.CSharp
             private bool CallsVirtualDispose(BaseMethodDeclarationSyntax methodDeclaration, string argumentValue)
             {
                 return CSharpSyntaxHelper.ContainsMethodInvocation(methodDeclaration,
-                    semanticModel,
+                    this.semanticModel,
                     method => HasArgumentValues(method, argumentValue),
                     IsDisposeBool);
             }
@@ -283,7 +283,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     .SelectMany(m => m.DeclaringSyntaxReferences)
                     .Select(r => r.GetSyntax())
                     // Because of partial classes we cannot always rely on the current semantic model.
-                    .Select(r => semanticModel.GetSyntaxTreeSemanticModel(r).GetDeclaredSymbol(r))
+                    .Select(r => this.semanticModel.GetSyntaxTreeSemanticModel(r).GetDeclaredSymbol(r))
                     .WhereNotNull()
                     .Any(methodSym => !methodSym.IsAbstract);
             }

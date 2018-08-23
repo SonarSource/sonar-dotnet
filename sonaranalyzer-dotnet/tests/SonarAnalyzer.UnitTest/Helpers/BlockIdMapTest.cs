@@ -34,7 +34,7 @@ namespace SonarAnalyzer.Helpers.UnitTest
         [TestInitialize]
         public void TestInitialize()
         {
-            blockId = new BlockIdProvider();
+            this.blockId = new BlockIdProvider();
         }
 
         [TestMethod]
@@ -42,17 +42,17 @@ namespace SonarAnalyzer.Helpers.UnitTest
         {
             var block = new TemporaryBlock();
 
-            blockId.Get(block).Should().Be("0");
-            blockId.Get(block).Should().Be("0");
-            blockId.Get(block).Should().Be("0");
+            this.blockId.Get(block).Should().Be("0");
+            this.blockId.Get(block).Should().Be("0");
+            this.blockId.Get(block).Should().Be("0");
         }
 
         [TestMethod]
         public void Get_Returns_Different_Id_For_Different_Block()
         {
-            var id1 = blockId.Get(new TemporaryBlock());
-            var id2 = blockId.Get(new TemporaryBlock());
-            var id3 = blockId.Get(new TemporaryBlock());
+            var id1 = this.blockId.Get(new TemporaryBlock());
+            var id2 = this.blockId.Get(new TemporaryBlock());
+            var id3 = this.blockId.Get(new TemporaryBlock());
 
             id1.Should().Be("0");
             id2.Should().Be("1");

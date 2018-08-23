@@ -182,9 +182,9 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             public PropertyData(IPropertySymbol propertySymbol, FieldData? returned, FieldData? updated)
             {
-                this.PropertySymbol = propertySymbol;
-                this.FieldReturned = returned;
-                this.FieldUpdated = updated;
+                PropertySymbol = propertySymbol;
+                FieldReturned = returned;
+                FieldUpdated = updated;
             }
 
             public IPropertySymbol PropertySymbol { get; }
@@ -204,9 +204,9 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             public FieldData(AccessorKind accessor, IFieldSymbol field, SyntaxNode locationNode)
             {
-                this.AccessorKind = accessor;
-                this.Field = field;
-                this.LocationNode = locationNode;
+                AccessorKind = accessor;
+                Field = field;
+                LocationNode = locationNode;
             }
 
             public AccessorKind AccessorKind { get; }
@@ -238,8 +238,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 // We're not caching the property name as only expect to be called once per property
                 var standardisedPropertyName = GetCanonicalFieldName(propertySymbol.Name);
 
-                var matchingFields = fieldToStandardNameMap.Keys
-                    .Where(k => AreCanonicalNamesEqual(fieldToStandardNameMap[k], standardisedPropertyName))
+                var matchingFields = this.fieldToStandardNameMap.Keys
+                    .Where(k => AreCanonicalNamesEqual(this.fieldToStandardNameMap[k], standardisedPropertyName))
                     .ToList();
 
                 if (matchingFields.Count != 1)

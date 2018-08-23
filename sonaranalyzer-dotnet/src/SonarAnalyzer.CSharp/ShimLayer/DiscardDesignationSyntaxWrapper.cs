@@ -24,7 +24,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
 
         private DiscardDesignationSyntaxWrapper(CSharpSyntaxNode node)
         {
-            this.SyntaxNode = node;
+            SyntaxNode = node;
         }
 
         public CSharpSyntaxNode SyntaxNode { get; }
@@ -33,7 +33,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
         {
             get
             {
-                return UnderscoreTokenAccessor(this.SyntaxNode);
+                return UnderscoreTokenAccessor(SyntaxNode);
             }
         }
 
@@ -74,7 +74,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
 
         public DiscardDesignationSyntaxWrapper WithUnderscoreToken(SyntaxToken identifier)
         {
-            return new DiscardDesignationSyntaxWrapper(WithUnderscoreTokenAccessor(this.SyntaxNode, identifier));
+            return new DiscardDesignationSyntaxWrapper(WithUnderscoreTokenAccessor(SyntaxNode, identifier));
         }
     }
 }

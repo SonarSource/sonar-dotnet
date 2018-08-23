@@ -38,7 +38,7 @@ namespace SonarAnalyzer.Metrics.CSharp
             this.semanticModel = semanticModel;
         }
 
-        public ICollection<int> ExecutableLines => executableLineNumbers;
+        public ICollection<int> ExecutableLines => this.executableLineNumbers;
 
         public override void DefaultVisit(SyntaxNode node)
         {
@@ -93,7 +93,7 @@ namespace SonarAnalyzer.Metrics.CSharp
                 case SyntaxKind.ParenthesizedLambdaExpression:
 
                 case SyntaxKind.ArrayInitializerExpression:
-                    executableLineNumbers.Add(node.GetLocation().GetLineNumberToReport());
+                    this.executableLineNumbers.Add(node.GetLocation().GetLineNumberToReport());
                     return true;
 
                 case SyntaxKind.StructDeclaration:

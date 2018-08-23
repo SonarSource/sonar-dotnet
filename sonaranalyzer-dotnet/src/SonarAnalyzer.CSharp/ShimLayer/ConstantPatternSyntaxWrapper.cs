@@ -25,7 +25,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
 
         private ConstantPatternSyntaxWrapper(CSharpSyntaxNode node)
         {
-            this.SyntaxNode = node;
+            SyntaxNode = node;
         }
 
         public CSharpSyntaxNode SyntaxNode { get; }
@@ -34,7 +34,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
         {
             get
             {
-                return ExpressionAccessor(this.SyntaxNode);
+                return ExpressionAccessor(SyntaxNode);
             }
         }
 
@@ -75,7 +75,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
 
         public ConstantPatternSyntaxWrapper WithExpression(ExpressionSyntax expression)
         {
-            return new ConstantPatternSyntaxWrapper(WithExpressionAccessor(this.SyntaxNode, expression));
+            return new ConstantPatternSyntaxWrapper(WithExpressionAccessor(SyntaxNode, expression));
         }
     }
 }

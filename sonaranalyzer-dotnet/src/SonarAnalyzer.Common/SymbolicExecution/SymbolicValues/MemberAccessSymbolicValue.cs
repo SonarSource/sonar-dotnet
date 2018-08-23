@@ -34,7 +34,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
 
         public override string ToString()
         {
-            return $"{MemberExpression}.{memberName}";
+            return $"{MemberExpression}.{this.memberName}";
         }
     }
 }

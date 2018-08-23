@@ -80,46 +80,46 @@ namespace SonarAnalyzer.Rules
             {
                 get
                 {
-                    spans.Clear();
+                    this.spans.Clear();
                     ClassifyToken();
 
-                    foreach (var trivia in token.LeadingTrivia)
+                    foreach (var trivia in this.token.LeadingTrivia)
                     {
                         ClassifyTrivia(trivia);
                     }
 
-                    foreach (var trivia in token.TrailingTrivia)
+                    foreach (var trivia in this.token.TrailingTrivia)
                     {
                         ClassifyTrivia(trivia);
                     }
 
-                    return spans;
+                    return this.spans;
                 }
             }
 
             private void ClassifyToken()
             {
-                if (IsKeyword(token))
+                if (IsKeyword(this.token))
                 {
-                    CollectClassified(TokenType.Keyword, token.Span);
+                    CollectClassified(TokenType.Keyword, this.token.Span);
                     return;
                 }
 
-                if (IsStringLiteral(token))
+                if (IsStringLiteral(this.token))
                 {
-                    CollectClassified(TokenType.StringLiteral, token.Span);
+                    CollectClassified(TokenType.StringLiteral, this.token.Span);
                     return;
                 }
 
-                if (IsNumericLiteral(token))
+                if (IsNumericLiteral(this.token))
                 {
-                    CollectClassified(TokenType.NumericLiteral, token.Span);
+                    CollectClassified(TokenType.NumericLiteral, this.token.Span);
                     return;
                 }
 
-                if (IsIdentifier(token))
+                if (IsIdentifier(this.token))
                 {
-                    ClassifyIdentifier(token, semanticModel);
+                    ClassifyIdentifier(this.token, this.semanticModel);
                 }
             }
 
@@ -233,15 +233,15 @@ namespace SonarAnalyzer.Rules
 
             protected void CollectClassified(TokenType tokenType, TextSpan span)
             {
-                if (string.IsNullOrWhiteSpace(token.SyntaxTree.GetText().GetSubText(span).ToString()))
+                if (string.IsNullOrWhiteSpace(this.token.SyntaxTree.GetText().GetSubText(span).ToString()))
                 {
                     return;
                 }
 
-                spans.Add(new TokenTypeInfo.Types.TokenInfo
+                this.spans.Add(new TokenTypeInfo.Types.TokenInfo
                 {
                     TokenType = tokenType,
-                    TextRange = GetTextRange(Location.Create(token.SyntaxTree, span).GetLineSpan())
+                    TextRange = GetTextRange(Location.Create(this.token.SyntaxTree, span).GetLineSpan())
                 });
             }
 

@@ -122,8 +122,8 @@ namespace SonarAnalyzer.Rules.CSharp
                     new
                     {
                         SyntaxNode = i.Parent,
-                        Symbol = semanticModel.GetDeclaredSymbol(i.Parent)
-                            ?? semanticModel.GetSymbolInfo(i.Parent).Symbol
+                        Symbol = this.semanticModel.GetDeclaredSymbol(i.Parent)
+                            ?? this.semanticModel.GetSymbolInfo(i.Parent).Symbol
                     });
 
                 foreach (var disposable in disposables)
@@ -149,7 +149,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 var newProgramState = programState;
 
-                var disposeMethodSymbol = semanticModel.GetSymbolInfo(instruction).Symbol as IMethodSymbol;
+                var disposeMethodSymbol = this.semanticModel.GetSymbolInfo(instruction).Symbol as IMethodSymbol;
                 if (disposeMethodSymbol.IsIDisposableDispose())
                 {
                     var disposedObject =
@@ -159,7 +159,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         ?? (instruction.Expression as MemberAccessExpressionSyntax)?.Expression;
                     if (disposedObject != null)
                     {
-                        var disposableSymbol = semanticModel.GetSymbolInfo(disposedObject).Symbol;
+                        var disposableSymbol = this.semanticModel.GetSymbolInfo(disposedObject).Symbol;
 
                         if (disposableSymbol is IMethodSymbol ||
                             // Special case - if the parameter symbol is "this" then resolve it to the containing type
@@ -186,7 +186,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 foreach (var argument in arguments)
                 {
-                    var streamSymbol = semanticModel.GetSymbolInfo(argument.Expression).Symbol;
+                    var streamSymbol = this.semanticModel.GetSymbolInfo(argument.Expression).Symbol;
                     newProgramState = ProcessDisposableSymbol(newProgramState, argument.Expression, streamSymbol);
                 }
 
@@ -229,7 +229,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 objectCreation.ArgumentList?.Arguments.FirstOrDefault();
 
             private bool IsStreamDisposingType(ObjectCreationExpressionSyntax objectCreation) =>
-                semanticModel.GetSymbolInfo(objectCreation.Type)
+                this.semanticModel.GetSymbolInfo(objectCreation.Type)
                     .Symbol
                     .GetSymbolType()
                     .DerivesOrImplementsAny(typesDisposingUnderlyingStream);

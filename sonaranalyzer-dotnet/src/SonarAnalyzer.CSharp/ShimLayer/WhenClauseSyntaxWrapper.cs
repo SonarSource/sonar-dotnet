@@ -29,7 +29,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
 
         private WhenClauseSyntaxWrapper(CSharpSyntaxNode node)
         {
-            this.SyntaxNode = node;
+            SyntaxNode = node;
         }
 
         public CSharpSyntaxNode SyntaxNode { get; }
@@ -38,7 +38,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
         {
             get
             {
-                return WhenKeywordAccessor(this.SyntaxNode);
+                return WhenKeywordAccessor(SyntaxNode);
             }
         }
 
@@ -46,7 +46,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
         {
             get
             {
-                return ConditionAccessor(this.SyntaxNode);
+                return ConditionAccessor(SyntaxNode);
             }
         }
 
@@ -77,12 +77,12 @@ namespace SonarAnalyzer.ShimLayer.CSharp
 
         public WhenClauseSyntaxWrapper WithWhenKeyword(SyntaxToken whenKeyword)
         {
-            return new WhenClauseSyntaxWrapper(WithWhenKeywordAccessor(this.SyntaxNode, whenKeyword));
+            return new WhenClauseSyntaxWrapper(WithWhenKeywordAccessor(SyntaxNode, whenKeyword));
         }
 
         public WhenClauseSyntaxWrapper WithCondition(ExpressionSyntax condition)
         {
-            return new WhenClauseSyntaxWrapper(WithConditionAccessor(this.SyntaxNode, condition));
+            return new WhenClauseSyntaxWrapper(WithConditionAccessor(SyntaxNode, condition));
         }
     }
 }

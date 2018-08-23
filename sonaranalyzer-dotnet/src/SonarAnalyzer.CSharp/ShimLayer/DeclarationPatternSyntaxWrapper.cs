@@ -29,7 +29,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
 
         private DeclarationPatternSyntaxWrapper(CSharpSyntaxNode node)
         {
-            this.SyntaxNode = node;
+            SyntaxNode = node;
         }
 
         public CSharpSyntaxNode SyntaxNode { get; }
@@ -38,7 +38,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
         {
             get
             {
-                return TypeAccessor(this.SyntaxNode);
+                return TypeAccessor(SyntaxNode);
             }
         }
 
@@ -46,7 +46,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
         {
             get
             {
-                return (VariableDesignationSyntaxWrapper)DesignationAccessor(this.SyntaxNode);
+                return (VariableDesignationSyntaxWrapper)DesignationAccessor(SyntaxNode);
             }
         }
 
@@ -87,12 +87,12 @@ namespace SonarAnalyzer.ShimLayer.CSharp
 
         public DeclarationPatternSyntaxWrapper WithType(TypeSyntax type)
         {
-            return new DeclarationPatternSyntaxWrapper(WithTypeAccessor(this.SyntaxNode, type));
+            return new DeclarationPatternSyntaxWrapper(WithTypeAccessor(SyntaxNode, type));
         }
 
         public DeclarationPatternSyntaxWrapper WithDesignation(VariableDesignationSyntaxWrapper designation)
         {
-            return new DeclarationPatternSyntaxWrapper(WithDesignationAccessor(this.SyntaxNode, designation.SyntaxNode));
+            return new DeclarationPatternSyntaxWrapper(WithDesignationAccessor(SyntaxNode, designation.SyntaxNode));
         }
     }
 }

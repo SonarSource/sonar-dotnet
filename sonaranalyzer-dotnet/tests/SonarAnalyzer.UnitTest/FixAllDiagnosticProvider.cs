@@ -56,24 +56,24 @@ namespace SonarAnalyzer.UnitTest
             Func<Document, ISet<string>, CancellationToken, Task<IEnumerable<Diagnostic>>> getDocumentDiagnosticsAsync,
             Func<Project, bool, ISet<string>, CancellationToken, Task<IEnumerable<Diagnostic>>> getProjectDiagnosticsAsync)
         {
-            _diagnosticIds = diagnosticIds;
-            _getDocumentDiagnosticsAsync = getDocumentDiagnosticsAsync;
-            _getProjectDiagnosticsAsync = getProjectDiagnosticsAsync;
+            this._diagnosticIds = diagnosticIds;
+            this._getDocumentDiagnosticsAsync = getDocumentDiagnosticsAsync;
+            this._getProjectDiagnosticsAsync = getProjectDiagnosticsAsync;
         }
 
         public override Task<IEnumerable<Diagnostic>> GetDocumentDiagnosticsAsync(Document document, CancellationToken cancellationToken)
         {
-            return _getDocumentDiagnosticsAsync(document, _diagnosticIds, cancellationToken);
+            return this._getDocumentDiagnosticsAsync(document, this._diagnosticIds, cancellationToken);
         }
 
         public override Task<IEnumerable<Diagnostic>> GetAllDiagnosticsAsync(Project project, CancellationToken cancellationToken)
         {
-            return _getProjectDiagnosticsAsync(project, true, _diagnosticIds, cancellationToken);
+            return this._getProjectDiagnosticsAsync(project, true, this._diagnosticIds, cancellationToken);
         }
 
         public override Task<IEnumerable<Diagnostic>> GetProjectDiagnosticsAsync(Project project, CancellationToken cancellationToken)
         {
-            return _getProjectDiagnosticsAsync(project, false, _diagnosticIds, cancellationToken);
+            return this._getProjectDiagnosticsAsync(project, false, this._diagnosticIds, cancellationToken);
         }
     }
 }

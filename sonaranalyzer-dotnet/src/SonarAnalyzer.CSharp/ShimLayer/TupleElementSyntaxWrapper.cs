@@ -29,7 +29,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
 
         private TupleElementSyntaxWrapper(CSharpSyntaxNode node)
         {
-            this.SyntaxNode = node;
+            SyntaxNode = node;
         }
 
         public CSharpSyntaxNode SyntaxNode { get; }
@@ -38,7 +38,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
         {
             get
             {
-                return IdentifierAccessor(this.SyntaxNode);
+                return IdentifierAccessor(SyntaxNode);
             }
         }
 
@@ -46,7 +46,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
         {
             get
             {
-                return TypeAccessor(this.SyntaxNode);
+                return TypeAccessor(SyntaxNode);
             }
         }
 
@@ -77,12 +77,12 @@ namespace SonarAnalyzer.ShimLayer.CSharp
 
         public TupleElementSyntaxWrapper WithIdentifier(SyntaxToken identifier)
         {
-            return new TupleElementSyntaxWrapper(WithIdentifierAccessor(this.SyntaxNode, identifier));
+            return new TupleElementSyntaxWrapper(WithIdentifierAccessor(SyntaxNode, identifier));
         }
 
         public TupleElementSyntaxWrapper WithType(TypeSyntax type)
         {
-            return new TupleElementSyntaxWrapper(WithTypeAccessor(this.SyntaxNode, type));
+            return new TupleElementSyntaxWrapper(WithTypeAccessor(SyntaxNode, type));
         }
     }
 }

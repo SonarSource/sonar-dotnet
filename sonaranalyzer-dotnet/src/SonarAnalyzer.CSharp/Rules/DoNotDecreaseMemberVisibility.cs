@@ -82,8 +82,8 @@ namespace SonarAnalyzer.Rules.CSharp
                         .Where(m => IsSymbolVisibleFromNamespace(m, classSymbol.ContainingNamespace))
                         .ToList();
 
-                allBaseClassMethods = allBaseClassMembers.OfType<IMethodSymbol>().ToList();
-                allBaseClassProperties = allBaseClassMembers.OfType<IPropertySymbol>().ToList();
+                this.allBaseClassMethods = allBaseClassMembers.OfType<IMethodSymbol>().ToList();
+                this.allBaseClassProperties = allBaseClassMembers.OfType<IPropertySymbol>().ToList();
             }
 
             private static bool IsSymbolVisibleFromNamespace(ISymbol symbol, INamespaceSymbol ns)
@@ -94,7 +94,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             public Diagnostic FindIssue(MemberDeclarationSyntax memberDeclaration)
             {
-                var memberSymbol = semanticModel.GetDeclaredSymbol(memberDeclaration);
+                var memberSymbol = this.semanticModel.GetDeclaredSymbol(memberDeclaration);
 
                 if (memberSymbol is IMethodSymbol methodSymbol)
                 {
@@ -117,7 +117,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     return null;
                 }
 
-                var hidingMethod = allBaseClassMethods.FirstOrDefault(
+                var hidingMethod = this.allBaseClassMethods.FirstOrDefault(
                 m => IsDecreasingAccess(m.DeclaredAccessibility, methodSymbol.DeclaredAccessibility, false) &&
                      IsMatchingSignature(m, methodSymbol));
 
@@ -141,7 +141,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     return null;
                 }
 
-                var hidingProperty = allBaseClassProperties.FirstOrDefault(
+                var hidingProperty = this.allBaseClassProperties.FirstOrDefault(
                     p => IsDecreasingPropertyAccess(p, propertySymbol, propertySymbol.IsOverride));
                 if (hidingProperty != null)
                 {

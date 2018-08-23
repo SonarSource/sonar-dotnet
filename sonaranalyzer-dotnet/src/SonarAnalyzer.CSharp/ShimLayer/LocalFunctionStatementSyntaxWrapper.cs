@@ -57,7 +57,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
 
         private LocalFunctionStatementSyntaxWrapper(StatementSyntax node)
         {
-            this.SyntaxNode = node;
+            SyntaxNode = node;
         }
 
         public StatementSyntax SyntaxNode { get; }
@@ -66,7 +66,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
         {
             get
             {
-                return ModifiersAccessor(this.SyntaxNode);
+                return ModifiersAccessor(SyntaxNode);
             }
         }
 
@@ -74,7 +74,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
         {
             get
             {
-                return ReturnTypeAccessor(this.SyntaxNode);
+                return ReturnTypeAccessor(SyntaxNode);
             }
         }
 
@@ -82,7 +82,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
         {
             get
             {
-                return IdentifierAccessor(this.SyntaxNode);
+                return IdentifierAccessor(SyntaxNode);
             }
         }
 
@@ -90,7 +90,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
         {
             get
             {
-                return TypeParameterListAccessor(this.SyntaxNode);
+                return TypeParameterListAccessor(SyntaxNode);
             }
         }
 
@@ -98,7 +98,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
         {
             get
             {
-                return ParameterListAccessor(this.SyntaxNode);
+                return ParameterListAccessor(SyntaxNode);
             }
         }
 
@@ -106,7 +106,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
         {
             get
             {
-                return ConstraintClausesAccessor(this.SyntaxNode);
+                return ConstraintClausesAccessor(SyntaxNode);
             }
         }
 
@@ -114,7 +114,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
         {
             get
             {
-                return BodyAccessor(this.SyntaxNode);
+                return BodyAccessor(SyntaxNode);
             }
         }
 
@@ -122,7 +122,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
         {
             get
             {
-                return ExpressionBodyAccessor(this.SyntaxNode);
+                return ExpressionBodyAccessor(SyntaxNode);
             }
         }
 
@@ -130,7 +130,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
         {
             get
             {
-                return SemicolonTokenAccessor(this.SyntaxNode);
+                return SemicolonTokenAccessor(SyntaxNode);
             }
         }
 
@@ -161,74 +161,74 @@ namespace SonarAnalyzer.ShimLayer.CSharp
 
         public LocalFunctionStatementSyntaxWrapper WithModifiers(SyntaxTokenList modifiers)
         {
-            return new LocalFunctionStatementSyntaxWrapper(WithModifiersAccessor(this.SyntaxNode, modifiers));
+            return new LocalFunctionStatementSyntaxWrapper(WithModifiersAccessor(SyntaxNode, modifiers));
         }
 
         public LocalFunctionStatementSyntaxWrapper WithReturnType(TypeSyntax returnType)
         {
-            return new LocalFunctionStatementSyntaxWrapper(WithReturnTypeAccessor(this.SyntaxNode, returnType));
+            return new LocalFunctionStatementSyntaxWrapper(WithReturnTypeAccessor(SyntaxNode, returnType));
         }
 
         public LocalFunctionStatementSyntaxWrapper WithIdentifier(SyntaxToken identifier)
         {
-            return new LocalFunctionStatementSyntaxWrapper(WithIdentifierAccessor(this.SyntaxNode, identifier));
+            return new LocalFunctionStatementSyntaxWrapper(WithIdentifierAccessor(SyntaxNode, identifier));
         }
 
         public LocalFunctionStatementSyntaxWrapper WithTypeParameterList(TypeParameterListSyntax typeParameterList)
         {
-            return new LocalFunctionStatementSyntaxWrapper(WithTypeParameterListAccessor(this.SyntaxNode, typeParameterList));
+            return new LocalFunctionStatementSyntaxWrapper(WithTypeParameterListAccessor(SyntaxNode, typeParameterList));
         }
 
         public LocalFunctionStatementSyntaxWrapper WithParameterList(ParameterListSyntax parameterList)
         {
-            return new LocalFunctionStatementSyntaxWrapper(WithParameterListAccessor(this.SyntaxNode, parameterList));
+            return new LocalFunctionStatementSyntaxWrapper(WithParameterListAccessor(SyntaxNode, parameterList));
         }
 
         public LocalFunctionStatementSyntaxWrapper WithConstraintClauses(SyntaxList<TypeParameterConstraintClauseSyntax> constraintClauses)
         {
-            return new LocalFunctionStatementSyntaxWrapper(WithConstraintClausesAccessor(this.SyntaxNode, constraintClauses));
+            return new LocalFunctionStatementSyntaxWrapper(WithConstraintClausesAccessor(SyntaxNode, constraintClauses));
         }
 
         public LocalFunctionStatementSyntaxWrapper WithBody(BlockSyntax body)
         {
-            return new LocalFunctionStatementSyntaxWrapper(WithBodyAccessor(this.SyntaxNode, body));
+            return new LocalFunctionStatementSyntaxWrapper(WithBodyAccessor(SyntaxNode, body));
         }
 
         public LocalFunctionStatementSyntaxWrapper WithExpressionBody(ArrowExpressionClauseSyntax expressionBody)
         {
-            return new LocalFunctionStatementSyntaxWrapper(WithExpressionBodyAccessor(this.SyntaxNode, expressionBody));
+            return new LocalFunctionStatementSyntaxWrapper(WithExpressionBodyAccessor(SyntaxNode, expressionBody));
         }
 
         public LocalFunctionStatementSyntaxWrapper WithSemicolonToken(SyntaxToken semicolonToken)
         {
-            return new LocalFunctionStatementSyntaxWrapper(WithSemicolonTokenAccessor(this.SyntaxNode, semicolonToken));
+            return new LocalFunctionStatementSyntaxWrapper(WithSemicolonTokenAccessor(SyntaxNode, semicolonToken));
         }
 
         public LocalFunctionStatementSyntaxWrapper AddModifiers(params SyntaxToken[] items)
         {
-            return this.WithModifiers(this.Modifiers.AddRange(items));
+            return WithModifiers(Modifiers.AddRange(items));
         }
 
         public LocalFunctionStatementSyntaxWrapper AddTypeParameterListParameters(params TypeParameterSyntax[] items)
         {
-            var typeParameterList = this.TypeParameterList ?? SyntaxFactory.TypeParameterList();
-            return this.WithTypeParameterList(typeParameterList.WithParameters(typeParameterList.Parameters.AddRange(items)));
+            var typeParameterList = TypeParameterList ?? SyntaxFactory.TypeParameterList();
+            return WithTypeParameterList(typeParameterList.WithParameters(typeParameterList.Parameters.AddRange(items)));
         }
 
         public LocalFunctionStatementSyntaxWrapper AddParameterListParameters(params ParameterSyntax[] items)
         {
-            return this.WithParameterList(this.ParameterList.WithParameters(this.ParameterList.Parameters.AddRange(items)));
+            return WithParameterList(ParameterList.WithParameters(ParameterList.Parameters.AddRange(items)));
         }
 
         public LocalFunctionStatementSyntaxWrapper AddConstraintClauses(params TypeParameterConstraintClauseSyntax[] items)
         {
-            return this.WithConstraintClauses(this.ConstraintClauses.AddRange(items));
+            return WithConstraintClauses(ConstraintClauses.AddRange(items));
         }
 
         public LocalFunctionStatementSyntaxWrapper AddBodyStatements(params StatementSyntax[] items)
         {
-            var body = this.Body ?? SyntaxFactory.Block();
-            return this.WithBody(body.WithStatements(body.Statements.AddRange(items)));
+            var body = Body ?? SyntaxFactory.Block();
+            return WithBody(body.WithStatements(body.Statements.AddRange(items)));
         }
     }
 }

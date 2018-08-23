@@ -32,7 +32,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
 
         private ParenthesizedVariableDesignationSyntaxWrapper(CSharpSyntaxNode node)
         {
-            this.SyntaxNode = node;
+            SyntaxNode = node;
         }
 
         public CSharpSyntaxNode SyntaxNode { get; }
@@ -41,7 +41,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
         {
             get
             {
-                return OpenParenTokenAccessor(this.SyntaxNode);
+                return OpenParenTokenAccessor(SyntaxNode);
             }
         }
 
@@ -49,7 +49,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
         {
             get
             {
-                return VariablesAccessor(this.SyntaxNode);
+                return VariablesAccessor(SyntaxNode);
             }
         }
 
@@ -57,7 +57,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
         {
             get
             {
-                return CloseParenTokenAccessor(this.SyntaxNode);
+                return CloseParenTokenAccessor(SyntaxNode);
             }
         }
 
@@ -98,22 +98,22 @@ namespace SonarAnalyzer.ShimLayer.CSharp
 
         public ParenthesizedVariableDesignationSyntaxWrapper AddVariables(params VariableDesignationSyntaxWrapper[] items)
         {
-            return new ParenthesizedVariableDesignationSyntaxWrapper(this.WithVariables(this.Variables.AddRange(items)));
+            return new ParenthesizedVariableDesignationSyntaxWrapper(WithVariables(Variables.AddRange(items)));
         }
 
         public ParenthesizedVariableDesignationSyntaxWrapper WithOpenParenToken(SyntaxToken identifier)
         {
-            return new ParenthesizedVariableDesignationSyntaxWrapper(WithOpenParenTokenAccessor(this.SyntaxNode, identifier));
+            return new ParenthesizedVariableDesignationSyntaxWrapper(WithOpenParenTokenAccessor(SyntaxNode, identifier));
         }
 
         public ParenthesizedVariableDesignationSyntaxWrapper WithVariables(SeparatedSyntaxListWrapper<VariableDesignationSyntaxWrapper> variables)
         {
-            return new ParenthesizedVariableDesignationSyntaxWrapper(WithVariablesAccessor(this.SyntaxNode, variables));
+            return new ParenthesizedVariableDesignationSyntaxWrapper(WithVariablesAccessor(SyntaxNode, variables));
         }
 
         public ParenthesizedVariableDesignationSyntaxWrapper WithCloseParenToken(SyntaxToken identifier)
         {
-            return new ParenthesizedVariableDesignationSyntaxWrapper(WithCloseParenTokenAccessor(this.SyntaxNode, identifier));
+            return new ParenthesizedVariableDesignationSyntaxWrapper(WithCloseParenTokenAccessor(SyntaxNode, identifier));
         }
     }
 }

@@ -34,7 +34,7 @@ namespace SonarAnalyzer.SymbolicExecution
             ProgramState = programState;
             ProgramPoint = programPoint;
 
-            hash = new Lazy<int>(() =>
+            this.hash = new Lazy<int>(() =>
             {
                 var h = 19;
                 h = h * 31 + ProgramState.GetHashCode();
@@ -64,6 +64,6 @@ namespace SonarAnalyzer.SymbolicExecution
             return ProgramState.Equals(other.ProgramState) && ProgramPoint.Equals(other.ProgramPoint);
         }
 
-        public override int GetHashCode() => hash.Value;
+        public override int GetHashCode() => this.hash.Value;
     }
 }

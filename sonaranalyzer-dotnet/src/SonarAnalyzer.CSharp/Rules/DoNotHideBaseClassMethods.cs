@@ -75,7 +75,7 @@ namespace SonarAnalyzer.Rules.CSharp
             public IssueFinder(INamedTypeSymbol classSymbol, SemanticModel semanticModel)
             {
                 this.semanticModel = semanticModel;
-                allBaseClassMethods = GetAllBaseMethods(classSymbol);
+                this.allBaseClassMethods = GetAllBaseMethods(classSymbol);
             }
 
             private static List<IMethodSymbol> GetAllBaseMethods(INamedTypeSymbol classSymbol)
@@ -100,7 +100,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 var issueLocation = (memberDeclaration as MethodDeclarationSyntax)?.Identifier.GetLocation();
 
-                if (!(semanticModel.GetDeclaredSymbol(memberDeclaration) is IMethodSymbol methodSymbol) || issueLocation == null)
+                if (!(this.semanticModel.GetDeclaredSymbol(memberDeclaration) is IMethodSymbol methodSymbol) || issueLocation == null)
                 {
                     return null;
                 }
@@ -111,7 +111,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             private IMethodSymbol FindBaseMethodHiddenByMethod(IMethodSymbol methodSymbol)
             {
-                var baseMemberCandidates = allBaseClassMethods.Where(m => m.Name == methodSymbol.Name);
+                var baseMemberCandidates = this.allBaseClassMethods.Where(m => m.Name == methodSymbol.Name);
 
                 IMethodSymbol hiddenBaseMethodCandidate = null;
 

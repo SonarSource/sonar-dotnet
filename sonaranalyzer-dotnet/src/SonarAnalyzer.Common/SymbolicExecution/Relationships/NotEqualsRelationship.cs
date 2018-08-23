@@ -29,7 +29,7 @@ namespace SonarAnalyzer.SymbolicExecution.Relationships
         protected NotEqualsRelationship(SymbolicValue leftOperand, SymbolicValue rightOperand)
             : base(leftOperand, rightOperand)
         {
-            hash = new Lazy<int>(() =>
+            this.hash = new Lazy<int>(() =>
             {
                 var left = LeftOperand.GetHashCode();
                 var right = RightOperand.GetHashCode();
@@ -53,6 +53,6 @@ namespace SonarAnalyzer.SymbolicExecution.Relationships
             return other != null && AreOperandsMatching(other);
         }
 
-        public sealed override int GetHashCode() => hash.Value;
+        public sealed override int GetHashCode() => this.hash.Value;
     }
 }

@@ -36,7 +36,7 @@ namespace SonarAnalyzer.SymbolicExecution.Relationships
         {
             ComparisonKind = comparisonKind;
 
-            hash = new Lazy<int>(() =>
+            this.hash = new Lazy<int>(() =>
             {
                 var h = 19;
                 h = h * 31 + ComparisonKind.GetHashCode();
@@ -214,7 +214,7 @@ namespace SonarAnalyzer.SymbolicExecution.Relationships
             return base.Equals(other);
         }
 
-        public override int GetHashCode() => hash.Value;
+        public override int GetHashCode() => this.hash.Value;
 
         internal override BinaryRelationship CreateNew(SymbolicValue leftOperand, SymbolicValue rightOperand)
         {

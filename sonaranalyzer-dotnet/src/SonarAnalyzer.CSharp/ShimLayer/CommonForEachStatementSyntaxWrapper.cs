@@ -33,7 +33,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
 
         private CommonForEachStatementSyntaxWrapper(StatementSyntax node)
         {
-            this.SyntaxNode = node;
+            SyntaxNode = node;
         }
 
         public StatementSyntax SyntaxNode { get; }
@@ -42,7 +42,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
         {
             get
             {
-                return ForEachKeywordAccessor(this.SyntaxNode);
+                return ForEachKeywordAccessor(SyntaxNode);
             }
         }
 
@@ -50,7 +50,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
         {
             get
             {
-                return OpenParenTokenAccessor(this.SyntaxNode);
+                return OpenParenTokenAccessor(SyntaxNode);
             }
         }
 
@@ -58,7 +58,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
         {
             get
             {
-                return InKeywordAccessor(this.SyntaxNode);
+                return InKeywordAccessor(SyntaxNode);
             }
         }
 
@@ -66,7 +66,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
         {
             get
             {
-                return ExpressionAccessor(this.SyntaxNode);
+                return ExpressionAccessor(SyntaxNode);
             }
         }
 
@@ -74,7 +74,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
         {
             get
             {
-                return CloseParenTokenAccessor(this.SyntaxNode);
+                return CloseParenTokenAccessor(SyntaxNode);
             }
         }
 
@@ -82,7 +82,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
         {
             get
             {
-                return StatementAccessor(this.SyntaxNode);
+                return StatementAccessor(SyntaxNode);
             }
         }
 

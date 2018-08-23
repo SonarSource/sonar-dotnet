@@ -82,17 +82,17 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterCompilationStartAction(
                 cc =>
                 {
-                    configuration.Read(cc.Options);
+                    this.configuration.Read(cc.Options);
 
-                    if (string.IsNullOrEmpty(configuration.ProjectOutputPath) ||
-                        !configuration.EnabledRules.Any(SecurityRules.Contains))
+                    if (string.IsNullOrEmpty(this.configuration.ProjectOutputPath) ||
+                        !this.configuration.EnabledRules.Any(this.SecurityRules.Contains))
                     {
                         return;
                     }
 
                     InitProtobufDirectory();
 
-                    protobufFileIndex = 0;
+                    this.protobufFileIndex = 0;
 
                     cc.RegisterSyntaxNodeActionInNonGenerated(
                         c => WriteUcfg<ConstructorDeclarationSyntax>(c, x => x.Body),
@@ -161,14 +161,14 @@ namespace SonarAnalyzer.Rules.CSharp
                     return;
                 }
 
-                var fileName = $"{projectBuildId}_{Interlocked.Increment(ref protobufFileIndex)}";
+                var fileName = $"{this.projectBuildId}_{Interlocked.Increment(ref this.protobufFileIndex)}";
 
-                WriteProtobuf(ucfg, Path.Combine(protobufDirectory, $"ucfg_{fileName}.pb"));
+                WriteProtobuf(ucfg, Path.Combine(this.protobufDirectory, $"ucfg_{fileName}.pb"));
 
                 if (ShouldGenerateDot)
                 {
-                    WriteDot(Path.Combine(protobufDirectory, $"ucfg_{fileName}.dot"), writer => UcfgSerializer.Serialize(ucfg, writer));
-                    WriteDot(Path.Combine(protobufDirectory, $"cfg_{fileName}.dot"), writer => CfgSerializer.Serialize(ucfg.MethodId, cfg, writer));
+                    WriteDot(Path.Combine(this.protobufDirectory, $"ucfg_{fileName}.dot"), writer => UcfgSerializer.Serialize(ucfg, writer));
+                    WriteDot(Path.Combine(this.protobufDirectory, $"cfg_{fileName}.dot"), writer => CfgSerializer.Serialize(ucfg.MethodId, cfg, writer));
                 }
             }
             catch (UcfgException) when (!DebugHelper.IsInternalDebuggingContext())
@@ -198,15 +198,15 @@ namespace SonarAnalyzer.Rules.CSharp
             // the current compilation output dir is "<root>/.sonarqube/out/<index>" where index is 0, 1, 2, etc.
 
             // the configuration.ProjectOutputPath should already be checked for null at this point
-            Debug.Assert(configuration.ProjectOutputPath != null);
+            Debug.Assert(this.configuration.ProjectOutputPath != null);
 
             // "<root>/.sonarqube/out/0" -> "0" etc.
-            projectBuildId = Path.GetFileName(configuration.ProjectOutputPath);
+            this.projectBuildId = Path.GetFileName(this.configuration.ProjectOutputPath);
 
             // "<root>/.sonarqube/out/0" -> "<root>/.sonarqube/out/ucfg_cs"
-            protobufDirectory = Path.Combine(Path.GetDirectoryName(configuration.ProjectOutputPath), $"ucfg_{AnalyzerLanguage.CSharp}");
+            this.protobufDirectory = Path.Combine(Path.GetDirectoryName(this.configuration.ProjectOutputPath), $"ucfg_{AnalyzerLanguage.CSharp}");
 
-            Directory.CreateDirectory(protobufDirectory);
+            Directory.CreateDirectory(this.protobufDirectory);
         }
     }
 }

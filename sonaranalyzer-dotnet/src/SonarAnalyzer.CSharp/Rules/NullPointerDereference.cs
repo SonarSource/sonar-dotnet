@@ -139,7 +139,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     return programState;
                 }
 
-                var symbol = semanticModel.GetSymbolInfo(identifier).Symbol;
+                var symbol = this.semanticModel.GetSymbolInfo(identifier).Symbol;
                 return ProcessIdentifier(programState, identifier, symbol);
             }
 
@@ -150,7 +150,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     return programState;
                 }
 
-                var symbol = semanticModel.GetSymbolInfo(identifier).Symbol;
+                var symbol = this.semanticModel.GetSymbolInfo(identifier).Symbol;
                 if (symbol == null)
                 {
                     return programState;
@@ -191,7 +191,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     return programState;
                 }
 
-                var symbol = semanticModel.GetSymbolInfo(memberAccessIdentifierScope.Identifier).Symbol;
+                var symbol = this.semanticModel.GetSymbolInfo(memberAccessIdentifierScope.Identifier).Symbol;
                 if (symbol == null)
                 {
                     return programState;
@@ -203,7 +203,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
 
                 if ((IsNullableValueType(symbol) && !IsGetTypeCall(memberAccess)) ||
-                    IsExtensionMethod(memberAccess, semanticModel))
+                    IsExtensionMethod(memberAccess, this.semanticModel))
                 {
                     return programState;
                 }
@@ -225,13 +225,13 @@ namespace SonarAnalyzer.Rules.CSharp
                     return programState;
                 }
 
-                var symbol = semanticModel.GetSymbolInfo(identifier).Symbol;
+                var symbol = this.semanticModel.GetSymbolInfo(identifier).Symbol;
                 return ProcessIdentifier(programState, identifier, symbol);
             }
 
             private ProgramState ProcessIdentifier(ProgramState programState, IdentifierNameSyntax identifier, ISymbol symbol)
             {
-                if (explodedGraph.IsSymbolTracked(symbol))
+                if (this.explodedGraph.IsSymbolTracked(symbol))
                 {
                     OnMemberAccessing(identifier, symbol, programState);
 

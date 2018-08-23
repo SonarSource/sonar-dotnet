@@ -28,7 +28,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
 
         private RefExpressionSyntaxWrapper(ExpressionSyntax node)
         {
-            this.SyntaxNode = node;
+            SyntaxNode = node;
         }
 
         public ExpressionSyntax SyntaxNode { get; }
@@ -37,7 +37,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
         {
             get
             {
-                return RefKeywordAccessor(this.SyntaxNode);
+                return RefKeywordAccessor(SyntaxNode);
             }
         }
 
@@ -45,7 +45,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
         {
             get
             {
-                return ExpressionAccessor(this.SyntaxNode);
+                return ExpressionAccessor(SyntaxNode);
             }
         }
 
@@ -76,12 +76,12 @@ namespace SonarAnalyzer.ShimLayer.CSharp
 
         public RefExpressionSyntaxWrapper WithRefKeyword(SyntaxToken refKeyword)
         {
-            return new RefExpressionSyntaxWrapper(WithRefKeywordAccessor(this.SyntaxNode, refKeyword));
+            return new RefExpressionSyntaxWrapper(WithRefKeywordAccessor(SyntaxNode, refKeyword));
         }
 
         public RefExpressionSyntaxWrapper WithExpression(ExpressionSyntax expression)
         {
-            return new RefExpressionSyntaxWrapper(WithExpressionAccessor(this.SyntaxNode, expression));
+            return new RefExpressionSyntaxWrapper(WithExpressionAccessor(SyntaxNode, expression));
         }
     }
 }

@@ -57,7 +57,7 @@ namespace SonarAnalyzer.Helpers
         }
 
         private ISymbol GetDeclaredSymbol(SyntaxNode syntaxNode) =>
-            getSemanticModel(syntaxNode).GetDeclaredSymbol(syntaxNode);
+            this.getSemanticModel(syntaxNode).GetDeclaredSymbol(syntaxNode);
 
         private void ConditionalStore<TSymbol>(TSymbol symbol, Func<TSymbol, bool> condition)
             where TSymbol : ISymbol

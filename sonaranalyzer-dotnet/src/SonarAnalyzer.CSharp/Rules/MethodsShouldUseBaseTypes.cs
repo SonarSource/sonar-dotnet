@@ -250,20 +250,20 @@ namespace SonarAnalyzer.Rules.CSharp
 
             public void AddUsage(ITypeSymbol symbolUsedAs)
             {
-                if (usedAs.ContainsKey(symbolUsedAs))
+                if (this.usedAs.ContainsKey(symbolUsedAs))
                 {
-                    usedAs[symbolUsedAs]++;
+                    this.usedAs[symbolUsedAs]++;
                 }
                 else
                 {
-                    usedAs[symbolUsedAs] = 1;
+                    this.usedAs[symbolUsedAs] = 1;
                 }
             }
 
             public bool MatchesIdentifier(IdentifierNameSyntax id, SemanticModel semanticModel)
             {
                 var symbol = semanticModel.GetSymbolInfo(id).Symbol;
-                return Equals(parameterSymbol, symbol);
+                return Equals(this.parameterSymbol, symbol);
             }
 
             public Diagnostic GetRuleViolation()
@@ -275,12 +275,12 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 var mostGeneralType = FindMostGeneralType();
 
-                if (!Equals(mostGeneralType, parameterSymbol.Type) &&
+                if (!Equals(mostGeneralType, this.parameterSymbol.Type) &&
                     CanSuggestBaseType(mostGeneralType.GetSymbolType()))
                 {
                     return Diagnostic.Create(rule,
-                        parameterSymbol.Locations.First(),
-                        mostGeneralType.ToDisplayString(), parameterSymbol.Type.ToDisplayString());
+                        this.parameterSymbol.Locations.First(),
+                        mostGeneralType.ToDisplayString(), this.parameterSymbol.Type.ToDisplayString());
                 }
 
                 return null;
@@ -309,15 +309,15 @@ namespace SonarAnalyzer.Rules.CSharp
 
             private ISymbol FindMostGeneralType()
             {
-                var mostGeneralType = parameterSymbol.Type;
+                var mostGeneralType = this.parameterSymbol.Type;
 
-                var multipleEnumerableCalls = usedAs.Where(HasMultipleUseOfIEnumerable).ToList();
+                var multipleEnumerableCalls = this.usedAs.Where(HasMultipleUseOfIEnumerable).ToList();
                 foreach (var v in multipleEnumerableCalls)
                 {
-                    usedAs.Remove(v.Key);
+                    this.usedAs.Remove(v.Key);
                 }
 
-                if (usedAs.Count == 0)
+                if (this.usedAs.Count == 0)
                 {
                     return mostGeneralType;
                 }
@@ -367,12 +367,12 @@ namespace SonarAnalyzer.Rules.CSharp
             private bool DerivesOrImplementsAll(ITypeSymbol type)
             {
                 return type != null &&
-                    usedAs.Keys.All(type.DerivesOrImplements) &&
+                    this.usedAs.Keys.All(type.DerivesOrImplements) &&
                     IsConsistentAccessibility(type.GetEffectiveAccessibility());
 
                 bool IsConsistentAccessibility(Accessibility baseTypeAccessibility)
                 {
-                    switch (methodAccessibility)
+                    switch (this.methodAccessibility)
                     {
                         case Accessibility.NotApplicable:
                             return false;
@@ -383,7 +383,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         case Accessibility.Protected:
                         case Accessibility.Internal:
                             return baseTypeAccessibility == Accessibility.Public ||
-                                baseTypeAccessibility == methodAccessibility;
+                                baseTypeAccessibility == this.methodAccessibility;
 
                         case Accessibility.ProtectedAndInternal:
                         case Accessibility.Public:

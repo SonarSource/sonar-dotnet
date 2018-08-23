@@ -287,7 +287,7 @@ namespace SonarAnalyzer.SymbolicExecution
                 case SyntaxKind.SimpleMemberAccessExpression:
                     {
                         var memberAccess = (MemberAccessExpressionSyntax)instruction;
-                        var check = explodedGraphChecks.OfType<EmptyNullableValueAccess.NullValueAccessedCheck>().FirstOrDefault();
+                        var check = this.explodedGraphChecks.OfType<EmptyNullableValueAccess.NullValueAccessedCheck>().FirstOrDefault();
                         if (check == null ||
                             !check.TryProcessInstruction(memberAccess, newProgramState, out newProgramState))
                         {
@@ -462,7 +462,7 @@ namespace SonarAnalyzer.SymbolicExecution
         private ProgramState InvokeChecks(ProgramState programState, Func<ProgramState, ExplodedGraphCheck, ProgramState> invoke)
         {
             // If a check returns null, we will skip the next checks and return null
-            return explodedGraphChecks.Aggregate(programState, (ps, check) => ps == null ? null : invoke(ps, check));
+            return this.explodedGraphChecks.Aggregate(programState, (ps, check) => ps == null ? null : invoke(ps, check));
         }
 
         private ProgramState EnsureStackState(ExpressionSyntax parenthesizedExpression, ProgramState programState)

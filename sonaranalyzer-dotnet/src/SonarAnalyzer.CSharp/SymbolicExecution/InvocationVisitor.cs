@@ -49,10 +49,10 @@ namespace SonarAnalyzer.SymbolicExecution
 
         internal ProgramState ProcessInvocation()
         {
-            var symbol = semanticModel.GetSymbolInfo(invocation).Symbol;
+            var symbol = this.semanticModel.GetSymbolInfo(this.invocation).Symbol;
 
             var methodSymbol = symbol as IMethodSymbol;
-            var invocationArgsCount = invocation.ArgumentList?.Arguments.Count ?? 0;
+            var invocationArgsCount = this.invocation.ArgumentList?.Arguments.Count ?? 0;
 
             if (IsInstanceEqualsCall(methodSymbol))
             {
@@ -80,12 +80,12 @@ namespace SonarAnalyzer.SymbolicExecution
                 return HandleNullValidationMethod(validatedArgumentIndex, invocationArgsCount);
             }
 
-            if (invocation.IsNameof(semanticModel))
+            if (this.invocation.IsNameof(this.semanticModel))
             {
                 return HandleNameofExpression();
             }
 
-            return programState
+            return this.programState
                 .PopValues(invocationArgsCount + 1)
                 .PushValue(new SymbolicValue());
         }
@@ -94,27 +94,27 @@ namespace SonarAnalyzer.SymbolicExecution
         {
             // The nameof arguments are not on the stack, we just push the nameof result
             var nameof = new SymbolicValue();
-            var newProgramState = programState.PushValue(nameof);
+            var newProgramState = this.programState.PushValue(nameof);
             return newProgramState.SetConstraint(nameof, ObjectConstraint.NotNull);
         }
 
         private ProgramState HandleStringNullCheckMethod()
         {
-            var newProgramState = programState
+            var newProgramState = this.programState
                 .PopValue(out var arg1)
                 .PopValue();
 
             // Handle string.IsNullOrEmpty(arg1) as if it was arg1 == null
             return new ReferenceEqualsConstraintHandler(arg1, SymbolicValue.Null,
-                    invocation.ArgumentList.Arguments[0].Expression,
+                    this.invocation.ArgumentList.Arguments[0].Expression,
                     null,
-                    newProgramState, semanticModel)
+                    newProgramState, this.semanticModel)
                 .PushWithConstraint();
         }
 
         private ProgramState HandleStaticEqualsCall()
         {
-            var newProgramState = programState
+            var newProgramState = this.programState
                 .PopValue(out var arg1)
                 .PopValue(out var arg2)
                 .PopValue();
@@ -126,21 +126,21 @@ namespace SonarAnalyzer.SymbolicExecution
 
         private ProgramState HandleReferenceEqualsCall()
         {
-            var newProgramState = programState
+            var newProgramState = this.programState
                 .PopValue(out var arg1)
                 .PopValue(out var arg2)
                 .PopValue();
 
             return new ReferenceEqualsConstraintHandler(arg1, arg2,
-                    invocation.ArgumentList.Arguments[0].Expression,
-                    invocation.ArgumentList.Arguments[1].Expression,
-                    newProgramState, semanticModel)
+                    this.invocation.ArgumentList.Arguments[0].Expression,
+                    this.invocation.ArgumentList.Arguments[1].Expression,
+                    newProgramState, this.semanticModel)
                 .PushWithConstraint();
         }
 
         private ProgramState HandleInstanceEqualsCall()
         {
-            var newProgramState = programState
+            var newProgramState = this.programState
                 .PopValue(out var arg1)
                 .PopValue(out var expression);
 
@@ -154,7 +154,7 @@ namespace SonarAnalyzer.SymbolicExecution
         }
 
         private ProgramState HandleNullValidationMethod(int validatedArgumentIndex, int invocationArgsCount) =>
-            programState
+            this.programState
                 .PopValues(invocationArgsCount - validatedArgumentIndex - 1)
                 .PopValue(out var guardedArgumentValue)
                 .PopValues(validatedArgumentIndex)
@@ -244,8 +244,8 @@ namespace SonarAnalyzer.SymbolicExecution
 
             public ProgramState PushWithConstraint()
             {
-                var refEquals = new ReferenceEqualsSymbolicValue(valueLeft, valueRight);
-                var newProgramState = programState.PushValue(refEquals);
+                var refEquals = new ReferenceEqualsSymbolicValue(this.valueLeft, this.valueRight);
+                var newProgramState = this.programState.PushValue(refEquals);
                 return SetConstraint(refEquals, newProgramState);
             }
 
@@ -262,7 +262,7 @@ namespace SonarAnalyzer.SymbolicExecution
                     return programState.SetConstraint(refEquals, BoolConstraint.False);
                 }
 
-                if (valueLeft == valueRight)
+                if (this.valueLeft == this.valueRight)
                 {
                     return programState.SetConstraint(refEquals, BoolConstraint.True);
                 }
@@ -272,23 +272,23 @@ namespace SonarAnalyzer.SymbolicExecution
 
             private bool ArgumentsHaveDifferentNullability()
             {
-                return (programState.HasConstraint(valueLeft, ObjectConstraint.Null) &&
-                    programState.HasConstraint(valueRight, ObjectConstraint.NotNull))
+                return (this.programState.HasConstraint(this.valueLeft, ObjectConstraint.Null) &&
+                    this.programState.HasConstraint(this.valueRight, ObjectConstraint.NotNull))
                     ||
-                    (programState.HasConstraint(valueLeft, ObjectConstraint.NotNull) &&
-                    programState.HasConstraint(valueRight, ObjectConstraint.Null));
+                    (this.programState.HasConstraint(this.valueLeft, ObjectConstraint.NotNull) &&
+                    this.programState.HasConstraint(this.valueRight, ObjectConstraint.Null));
             }
 
             private bool IsAnyArgumentNonNullValueType()
             {
-                if (expressionRight == null ||
-                    expressionLeft == null)
+                if (this.expressionRight == null ||
+                    this.expressionLeft == null)
                 {
                     return false;
                 }
 
-                var type1 = semanticModel.GetTypeInfo(expressionLeft).Type;
-                var type2 = semanticModel.GetTypeInfo(expressionRight).Type;
+                var type1 = this.semanticModel.GetTypeInfo(this.expressionLeft).Type;
+                var type2 = this.semanticModel.GetTypeInfo(this.expressionRight).Type;
 
                 if (type1 == null ||
                     type2 == null)
@@ -296,8 +296,8 @@ namespace SonarAnalyzer.SymbolicExecution
                     return false;
                 }
 
-                return IsValueNotNull(valueLeft, type1, programState) ||
-                    IsValueNotNull(valueRight, type2, programState);
+                return IsValueNotNull(this.valueLeft, type1, this.programState) ||
+                    IsValueNotNull(this.valueRight, type2, this.programState);
             }
 
             private static bool IsValueNotNull(SymbolicValue arg, ITypeSymbol type, ProgramState programState)
@@ -308,8 +308,8 @@ namespace SonarAnalyzer.SymbolicExecution
 
             private bool AreBothArgumentsNull()
             {
-                return programState.HasConstraint(valueLeft, ObjectConstraint.Null) &&
-                    programState.HasConstraint(valueRight, ObjectConstraint.Null);
+                return this.programState.HasConstraint(this.valueLeft, ObjectConstraint.Null) &&
+                    this.programState.HasConstraint(this.valueRight, ObjectConstraint.Null);
             }
         }
     }

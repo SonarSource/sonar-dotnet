@@ -73,18 +73,18 @@ namespace Test
         {
             var syntaxTree = CSharpSyntaxTree.ParseText(Source);
 
-            ifMethod = syntaxTree.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().First(m => m.Identifier.ValueText == "IfMethod");
-            switchMethod = syntaxTree.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().First(m => m.Identifier.ValueText == "SwitchMethod");
+            this.ifMethod = syntaxTree.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().First(m => m.Identifier.ValueText == "IfMethod");
+            this.switchMethod = syntaxTree.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().First(m => m.Identifier.ValueText == "SwitchMethod");
         }
 
         [TestMethod]
         public void GetPrecedingIfsInConditionChain()
         {
-            var ifStatement1 = ifMethod.DescendantNodes().OfType<IfStatementSyntax>().First();
+            var ifStatement1 = this.ifMethod.DescendantNodes().OfType<IfStatementSyntax>().First();
             ifStatement1.GetPrecedingIfsInConditionChain()
                 .Should().BeEmpty();
 
-            var ifStatement2 = ifMethod.DescendantNodes().OfType<IfStatementSyntax>().Last();
+            var ifStatement2 = this.ifMethod.DescendantNodes().OfType<IfStatementSyntax>().Last();
             var preceding = ifStatement2.GetPrecedingIfsInConditionChain();
             preceding.Should().HaveCount(1);
 
@@ -94,11 +94,11 @@ namespace Test
         [TestMethod]
         public void GetPrecedingStatementsInConditionChain()
         {
-            var ifStatement1 = ifMethod.DescendantNodes().OfType<IfStatementSyntax>().First();
+            var ifStatement1 = this.ifMethod.DescendantNodes().OfType<IfStatementSyntax>().First();
             ifStatement1.GetPrecedingStatementsInConditionChain()
                 .Should().BeEmpty();
 
-            var ifStatement2 = ifMethod.DescendantNodes().OfType<IfStatementSyntax>().Last();
+            var ifStatement2 = this.ifMethod.DescendantNodes().OfType<IfStatementSyntax>().Last();
             var preceding = ifStatement2.GetPrecedingStatementsInConditionChain().ToList();
             preceding.Should().HaveCount(1);
 
@@ -108,11 +108,11 @@ namespace Test
         [TestMethod]
         public void GetPrecedingConditionsInConditionChain()
         {
-            var ifStatement1 = ifMethod.DescendantNodes().OfType<IfStatementSyntax>().First();
+            var ifStatement1 = this.ifMethod.DescendantNodes().OfType<IfStatementSyntax>().First();
             ifStatement1.GetPrecedingConditionsInConditionChain()
                 .Should().BeEmpty();
 
-            var ifStatement2 = ifMethod.DescendantNodes().OfType<IfStatementSyntax>().Last();
+            var ifStatement2 = this.ifMethod.DescendantNodes().OfType<IfStatementSyntax>().Last();
             var preceding = ifStatement2.GetPrecedingConditionsInConditionChain().ToList();
             preceding.Should().HaveCount(1);
 
@@ -122,7 +122,7 @@ namespace Test
         [TestMethod]
         public void GetPrecedingSections()
         {
-            var sections = switchMethod.DescendantNodes().OfType<SwitchSectionSyntax>().ToList();
+            var sections = this.switchMethod.DescendantNodes().OfType<SwitchSectionSyntax>().ToList();
 
             sections.Last().GetPrecedingSections().Should().HaveCount(2);
             sections.First().GetPrecedingSections().Should().BeEmpty();
@@ -132,7 +132,7 @@ namespace Test
         [TestMethod]
         public void GetPrecedingSections_Empty()
         {
-            var sections = ifMethod.DescendantNodes().OfType<SwitchSectionSyntax>().ToList();
+            var sections = this.ifMethod.DescendantNodes().OfType<SwitchSectionSyntax>().ToList();
 
             sections.FirstOrDefault().GetPrecedingSections().Should().BeEmpty();
         }
@@ -140,7 +140,7 @@ namespace Test
         [TestMethod]
         public void GetPrecedingStatement()
         {
-            var statements = switchMethod.Body.Statements.ToList();
+            var statements = this.switchMethod.Body.Statements.ToList();
 
             statements[1].GetPrecedingStatement().Should().BeEquivalentTo(statements[0]);
             statements[0].GetPrecedingStatement().Should().Be(null);

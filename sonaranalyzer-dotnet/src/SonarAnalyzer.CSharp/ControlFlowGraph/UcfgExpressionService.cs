@@ -37,13 +37,13 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
         public static Expression This { get; } = new Expression { This = new This() };
 
         public void Associate(SyntaxNode syntaxNode, Expression expression) =>
-            cache[syntaxNode.RemoveParentheses()] = expression;
+            this.cache[syntaxNode.RemoveParentheses()] = expression;
 
         public Expression GetOrDefault(SyntaxNode syntaxNode) =>
-            cache.GetValueOrDefault(syntaxNode.RemoveParentheses(), UnknownExpression);
+            this.cache.GetValueOrDefault(syntaxNode.RemoveParentheses(), UnknownExpression);
 
         public Expression CreateVariable(string variableName = null) =>
-            new Expression { Var = new Variable { Name = variableName ?? $"%{numberedVariableCounter++}" } };
+            new Expression { Var = new Variable { Name = variableName ?? $"%{this.numberedVariableCounter++}" } };
 
         public Expression CreateConstant(string value = DefaultConstantValue) =>
             new Expression { Const = new Constant { Value = value } };
@@ -89,6 +89,6 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
         /// has already been processed succesfully
         /// </summary>
         public bool IsAlreadyProcessed(SyntaxNode syntaxNode) =>
-            this.GetOrDefault(syntaxNode) != UcfgExpressionService.UnknownExpression;
+            GetOrDefault(syntaxNode) != UnknownExpression;
     }
 }

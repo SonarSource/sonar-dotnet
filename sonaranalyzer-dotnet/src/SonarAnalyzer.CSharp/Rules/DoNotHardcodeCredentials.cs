@@ -53,16 +53,16 @@ namespace SonarAnalyzer.Rules.CSharp
             DefaultCredentialWords)]
         public string CredentialWords
         {
-            get => credentialWords;
+            get => this.credentialWords;
             set
             {
-                credentialWords = value;
-                splitCredentialWords = value.ToUpperInvariant()
+                this.credentialWords = value;
+                this.splitCredentialWords = value.ToUpperInvariant()
                     .Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
                     .Select(x => x.Trim())
                     .ToList();
-                passwordValuePattern = new Regex(string.Format(@"\b(?<password>{0})\b[:=]\S",
-                    string.Join("|", splitCredentialWords)), RegexOptions.Compiled | RegexOptions.IgnoreCase);
+                this.passwordValuePattern = new Regex(string.Format(@"\b(?<password>{0})\b[:=]\S",
+                    string.Join("|", this.splitCredentialWords)), RegexOptions.Compiled | RegexOptions.IgnoreCase);
             }
         }
 
@@ -135,10 +135,10 @@ namespace SonarAnalyzer.Rules.CSharp
 
             var bannedWordsFound = variableName
                 .SplitCamelCaseToWords()
-                .Intersect(splitCredentialWords)
+                .Intersect(this.splitCredentialWords)
                 .ToHashSet(StringComparer.OrdinalIgnoreCase);
 
-            var matches = passwordValuePattern.Matches(variableValue);
+            var matches = this.passwordValuePattern.Matches(variableValue);
             foreach (Match match in matches)
             {
                 bannedWordsFound.Add(match.Groups["password"].Value);

@@ -72,8 +72,8 @@ namespace NS
                 .GetCompilation();
 
             var tree = compilation.SyntaxTrees.First();
-            semanticModel = compilation.GetSemanticModel(tree);
-            statements = tree.GetRoot().DescendantNodes()
+            this.semanticModel = compilation.GetSemanticModel(tree);
+            this.statements = tree.GetRoot().DescendantNodes()
                 .OfType<MethodDeclarationSyntax>()
                 .First(m => m.Identifier.ValueText == "TestMethod").Body
                 .DescendantNodes()
@@ -117,8 +117,8 @@ namespace NS
 
         private IMethodSymbol GetMethodSymbolForIndex(int index)
         {
-            var statement = (ExpressionStatementSyntax)statements[index];
-            var methodSymbol = semanticModel.GetSymbolInfo(statement.Expression).Symbol as IMethodSymbol;
+            var statement = (ExpressionStatementSyntax)this.statements[index];
+            var methodSymbol = this.semanticModel.GetSymbolInfo(statement.Expression).Symbol as IMethodSymbol;
             return methodSymbol;
         }
     }

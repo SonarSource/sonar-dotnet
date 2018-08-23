@@ -33,7 +33,7 @@ namespace SonarAnalyzer.Helpers
             SyntaxTree = context.GetSyntaxTree();
             Compilation = context.Compilation;
             Diagnostic = diagnostic;
-            contextSpecificReport = context.ReportDiagnostic;
+            this.contextSpecificReport = context.ReportDiagnostic;
         }
 
         public ReportingContext(SyntaxTreeAnalysisContext context, Diagnostic diagnostic)
@@ -41,7 +41,7 @@ namespace SonarAnalyzer.Helpers
             SyntaxTree = context.GetSyntaxTree();
             Compilation = null;
             Diagnostic = diagnostic;
-            contextSpecificReport = context.ReportDiagnostic;
+            this.contextSpecificReport = context.ReportDiagnostic;
         }
 
         public ReportingContext(CompilationAnalysisContext context, Diagnostic diagnostic)
@@ -49,7 +49,7 @@ namespace SonarAnalyzer.Helpers
             SyntaxTree = context.GetSyntaxTree();
             Compilation = context.Compilation;
             Diagnostic = diagnostic;
-            contextSpecificReport = context.ReportDiagnostic;
+            this.contextSpecificReport = context.ReportDiagnostic;
         }
 
         public ReportingContext(SymbolAnalysisContext context, Diagnostic diagnostic)
@@ -57,7 +57,7 @@ namespace SonarAnalyzer.Helpers
             SyntaxTree = context.GetSyntaxTree();
             Compilation = context.Compilation;
             Diagnostic = diagnostic;
-            contextSpecificReport = context.ReportDiagnostic;
+            this.contextSpecificReport = context.ReportDiagnostic;
         }
 
         public ReportingContext(CodeBlockAnalysisContext context, Diagnostic diagnostic)
@@ -65,7 +65,7 @@ namespace SonarAnalyzer.Helpers
             SyntaxTree = context.GetSyntaxTree();
             Compilation = context.SemanticModel.Compilation;
             Diagnostic = diagnostic;
-            contextSpecificReport = context.ReportDiagnostic;
+            this.contextSpecificReport = context.ReportDiagnostic;
         }
 
         public SyntaxTree SyntaxTree { get; }
@@ -74,6 +74,6 @@ namespace SonarAnalyzer.Helpers
 
         public Compilation Compilation { get; }
 
-        public void ReportDiagnostic(Diagnostic diagnostic) => contextSpecificReport(diagnostic);
+        public void ReportDiagnostic(Diagnostic diagnostic) => this.contextSpecificReport(diagnostic);
     }
 }

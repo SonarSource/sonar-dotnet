@@ -55,7 +55,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
 
         private BinaryRelationship GetRelationship(BoolConstraint boolConstraint)
         {
-            var relationship = new ComparisonRelationship(comparisonKind, LeftOperand, RightOperand);
+            var relationship = new ComparisonRelationship(this.comparisonKind, LeftOperand, RightOperand);
 
             return boolConstraint == BoolConstraint.True
                 ? relationship
@@ -64,7 +64,7 @@ namespace SonarAnalyzer.SymbolicExecution.SymbolicValues
 
         public override string ToString()
         {
-            var op = comparisonKind == ComparisonKind.Less
+            var op = this.comparisonKind == ComparisonKind.Less
                 ? "<"
                 : "<=";
             return $"{op}({LeftOperand}, {RightOperand})";

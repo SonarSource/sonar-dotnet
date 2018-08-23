@@ -38,21 +38,21 @@ namespace SonarAnalyzer.SymbolicExecution.Constraints
 
         private SymbolicValueConstraints(SymbolicValueConstraint constraint)
         {
-            SetConstraint(constraint, constraints);
-            hashCode = ComputeHashcode();
+            SetConstraint(constraint, this.constraints);
+            this.hashCode = ComputeHashcode();
         }
 
         private SymbolicValueConstraints(Dictionary<Type, SymbolicValueConstraint> constraints)
         {
             this.constraints = constraints;
-            hashCode = ComputeHashcode();
+            this.hashCode = ComputeHashcode();
         }
 
-        internal IEnumerable<SymbolicValueConstraint> GetConstraints() => constraints.Values;
+        internal IEnumerable<SymbolicValueConstraint> GetConstraints() => this.constraints.Values;
 
         internal SymbolicValueConstraints WithConstraint(SymbolicValueConstraint constraint)
         {
-            var constraintsCopy = new Dictionary<Type, SymbolicValueConstraint>(constraints);
+            var constraintsCopy = new Dictionary<Type, SymbolicValueConstraint>(this.constraints);
             SetConstraint(constraint, constraintsCopy);
 
             return new SymbolicValueConstraints(constraintsCopy);
@@ -60,7 +60,7 @@ namespace SonarAnalyzer.SymbolicExecution.Constraints
 
         internal SymbolicValueConstraints WithoutConstraint(SymbolicValueConstraint constraint)
         {
-            var constraintsCopy = new Dictionary<Type, SymbolicValueConstraint>(constraints);
+            var constraintsCopy = new Dictionary<Type, SymbolicValueConstraint>(this.constraints);
             if (constraintsCopy.Remove(constraint.GetType()))
             {
                 return new SymbolicValueConstraints(constraintsCopy);
@@ -87,34 +87,34 @@ namespace SonarAnalyzer.SymbolicExecution.Constraints
         internal T GetConstraintOrDefault<T>()
             where T : SymbolicValueConstraint
         {
-            return constraints.TryGetValue(typeof(T), out var constraint)
+            return this.constraints.TryGetValue(typeof(T), out var constraint)
                 ? (T)constraint
                 : null;
         }
 
         internal SymbolicValueConstraint GetConstraintOrDefault(Type constraintType)
         {
-            return constraints.TryGetValue(constraintType, out var constraint)
+            return this.constraints.TryGetValue(constraintType, out var constraint)
                 ? constraint
                 : null;
         }
 
         internal bool HasConstraint(SymbolicValueConstraint constraint)
         {
-            return constraints.TryGetValue(constraint.GetType(), out var storedConstraint) &&
+            return this.constraints.TryGetValue(constraint.GetType(), out var storedConstraint) &&
                    storedConstraint == constraint;
         }
 
         internal bool HasConstraint<T>()
         {
-            return constraints.TryGetValue(typeof(T), out var storedConstraint);
+            return this.constraints.TryGetValue(typeof(T), out var storedConstraint);
         }
 
         private int ComputeHashcode()
         {
-            var hash = 17 * constraints.Count;
+            var hash = 17 * this.constraints.Count;
 
-            foreach (var item in constraints)
+            foreach (var item in this.constraints)
             {
                 hash = hash * 23 + item.Value.GetHashCode();
             }
@@ -124,19 +124,19 @@ namespace SonarAnalyzer.SymbolicExecution.Constraints
 
         public override int GetHashCode()
         {
-            return hashCode;
+            return this.hashCode;
         }
 
         public override bool Equals(object obj)
         {
             return obj is SymbolicValueConstraints other &&
-                DictionaryHelper.DictionaryEquals(constraints, other.constraints);
+                DictionaryHelper.DictionaryEquals(this.constraints, other.constraints);
         }
 
         // for debugging
         public override string ToString()
         {
-            return string.Join(", ", constraints.Values);
+            return string.Join(", ", this.constraints.Values);
         }
     }
 }

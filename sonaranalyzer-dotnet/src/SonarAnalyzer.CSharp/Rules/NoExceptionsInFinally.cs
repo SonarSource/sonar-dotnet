@@ -62,7 +62,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 base.VisitThrowStatement(node);
 
-                context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, node.GetLocation()));
+                this.context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, node.GetLocation()));
             }
 
             public override void VisitFinallyClause(FinallyClauseSyntax node)

@@ -110,9 +110,9 @@ namespace SonarAnalyzer.SymbolicExecution
 
         public override string ToString()
         {
-            if (identifier != null)
+            if (this.identifier != null)
             {
-                return "SV_" + identifier;
+                return "SV_" + this.identifier;
             }
 
             return base.ToString();

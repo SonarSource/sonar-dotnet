@@ -40,7 +40,7 @@ namespace SonarAnalyzer.Common
 
         public override string ToString()
         {
-            return language;
+            return this.language;
         }
 
         public AnalyzerLanguage AddLanguage(AnalyzerLanguage other)

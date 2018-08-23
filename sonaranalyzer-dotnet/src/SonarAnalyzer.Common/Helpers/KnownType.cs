@@ -379,26 +379,26 @@ namespace SonarAnalyzer.Helpers
         private KnownType(string typeName)
         {
             TypeName = typeName;
-            specialType = SpecialType.None;
-            isSpecialType = false;
+            this.specialType = SpecialType.None;
+            this.isSpecialType = false;
         }
 
         private KnownType(SpecialType specialType, string typeName)
         {
             TypeName = typeName;
             this.specialType = specialType;
-            isSpecialType = true;
+            this.isSpecialType = true;
         }
 
         public string TypeName { get; }
         internal bool Matches(string type)
         {
-            return !isSpecialType && TypeName == type;
+            return !this.isSpecialType && TypeName == type;
         }
 
         internal bool Matches(SpecialType type)
         {
-            return isSpecialType && specialType == type;
+            return this.isSpecialType && this.specialType == type;
         }
     }
 }

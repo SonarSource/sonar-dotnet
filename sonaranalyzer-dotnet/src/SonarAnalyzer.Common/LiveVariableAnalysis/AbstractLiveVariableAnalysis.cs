@@ -43,34 +43,34 @@ namespace SonarAnalyzer.LiveVariableAnalysis
         protected AbstractLiveVariableAnalysis(IControlFlowGraph controlFlowGraph)
         {
             this.controlFlowGraph = controlFlowGraph;
-            reversedBlocks = controlFlowGraph.Blocks.Reverse().ToList();
+            this.reversedBlocks = controlFlowGraph.Blocks.Reverse().ToList();
         }
 
         public IReadOnlyList<ISymbol> GetLiveOut(Block block)
         {
-            return liveOutStates[block].Except(capturedVariables).ToImmutableArray();
+            return this.liveOutStates[block].Except(this.capturedVariables).ToImmutableArray();
         }
 
         public IReadOnlyList<ISymbol> GetLiveIn(Block block)
         {
-            return liveInStates[block].Except(capturedVariables).ToImmutableArray();
+            return this.liveInStates[block].Except(this.capturedVariables).ToImmutableArray();
         }
 
-        public IReadOnlyList<ISymbol> CapturedVariables => capturedVariables.ToImmutableArray();
+        public IReadOnlyList<ISymbol> CapturedVariables => this.capturedVariables.ToImmutableArray();
 
         protected void PerformAnalysis()
         {
-            foreach (var block in reversedBlocks)
+            foreach (var block in this.reversedBlocks)
             {
                 ProcessBlock(block, out var assignedInBlock, out var usedInBlock);
 
-                assigned[block] = assignedInBlock;
-                used[block] = usedInBlock;
+                this.assigned[block] = assignedInBlock;
+                this.used[block] = usedInBlock;
             }
 
             AnalyzeCfg();
 
-            if (liveOutStates[controlFlowGraph.ExitBlock].Any())
+            if (this.liveOutStates[this.controlFlowGraph.ExitBlock].Any())
             {
                 throw new InvalidOperationException("Out of exit block should be empty");
             }
@@ -79,37 +79,37 @@ namespace SonarAnalyzer.LiveVariableAnalysis
         private void AnalyzeCfg()
         {
             var workList = new Queue<Block>();
-            reversedBlocks.ForEach(b => workList.Enqueue(b));
+            this.reversedBlocks.ForEach(b => workList.Enqueue(b));
 
             while (workList.Any())
             {
                 var block = workList.Dequeue();
 
-                if (!liveOutStates.ContainsKey(block))
+                if (!this.liveOutStates.ContainsKey(block))
                 {
-                    liveOutStates.Add(block, new HashSet<ISymbol>());
+                    this.liveOutStates.Add(block, new HashSet<ISymbol>());
                 }
 
-                var liveOut = liveOutStates[block];
+                var liveOut = this.liveOutStates[block];
 
                 foreach (var successor in block.SuccessorBlocks)
                 {
-                    if (liveInStates.ContainsKey(successor))
+                    if (this.liveInStates.ContainsKey(successor))
                     {
-                        liveOut.UnionWith(liveInStates[successor]);
+                        liveOut.UnionWith(this.liveInStates[successor]);
                     }
                 }
 
-                var liveIn = new HashSet<ISymbol>(used[block]);
-                liveIn.UnionWith(liveOut.Except(assigned[block]));
+                var liveIn = new HashSet<ISymbol>(this.used[block]);
+                liveIn.UnionWith(liveOut.Except(this.assigned[block]));
 
-                if (liveInStates.ContainsKey(block) &&
-                    liveIn.SetEquals(liveInStates[block]))
+                if (this.liveInStates.ContainsKey(block) &&
+                    liveIn.SetEquals(this.liveInStates[block]))
                 {
                     continue;
                 }
 
-                liveInStates[block] = liveIn;
+                this.liveInStates[block] = liveIn;
 
                 foreach (var predecessor in block.PredecessorBlocks)
                 {

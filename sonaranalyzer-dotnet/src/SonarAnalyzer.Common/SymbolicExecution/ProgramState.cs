@@ -262,7 +262,7 @@ namespace SonarAnalyzer.SymbolicExecution
             ProgramPointVisitCounts = programPointVisitCounts;
             ExpressionStack = expressionStack;
             Relationships = relationships;
-            hash = new Lazy<int>(ComputeHash);
+            this.hash = new Lazy<int>(ComputeHash);
         }
 
         public ProgramState PushValue(SymbolicValue symbolicValue)
@@ -429,7 +429,7 @@ namespace SonarAnalyzer.SymbolicExecution
                 Relationships.SetEquals(other.Relationships);
         }
 
-        public override int GetHashCode() => hash.Value;
+        public override int GetHashCode() => this.hash.Value;
 
         public ProgramState SetConstraint(SymbolicValue symbolicValue, SymbolicValueConstraint constraint)
         {

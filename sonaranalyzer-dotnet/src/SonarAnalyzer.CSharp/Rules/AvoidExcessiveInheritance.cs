@@ -64,11 +64,11 @@ namespace SonarAnalyzer.Rules.CSharp
             defaultValue: FilteredClassesDefaultValue)]
         public string FilteredClasses
         {
-            get => filteredClasses;
+            get => this.filteredClasses;
             set
             {
-                filteredClasses = value;
-                filteredClassesRegex = filteredClasses.Split(',')
+                this.filteredClasses = value;
+                this.filteredClassesRegex = this.filteredClasses.Split(',')
                     .Select(WilcardPatternToRegularExpression)
                     .ToList();
             }
@@ -92,7 +92,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         .Skip(1) // remove the class itself
                         .TakeWhile(s => GetRootNamespace(s) == thisTypeRootNamespace)
                         .Select(nts => nts.OriginalDefinition.ToDisplayString())
-                        .TakeWhile(className => filteredClassesRegex.All(regex => !regex.IsMatch(className)))
+                        .TakeWhile(className => this.filteredClassesRegex.All(regex => !regex.IsMatch(className)))
                         .Count();
 
                     if (baseTypesCount > MaximumDepth)

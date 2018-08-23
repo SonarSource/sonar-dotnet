@@ -33,7 +33,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
 
         private IsPatternExpressionSyntaxWrapper(ExpressionSyntax node)
         {
-            this.SyntaxNode = node;
+            SyntaxNode = node;
         }
 
         public ExpressionSyntax SyntaxNode { get; }
@@ -42,7 +42,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
         {
             get
             {
-                return ExpressionAccessor(this.SyntaxNode);
+                return ExpressionAccessor(SyntaxNode);
             }
         }
 
@@ -50,7 +50,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
         {
             get
             {
-                return IsKeywordAccessor(this.SyntaxNode);
+                return IsKeywordAccessor(SyntaxNode);
             }
         }
 
@@ -58,7 +58,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
         {
             get
             {
-                return (PatternSyntaxWrapper)PatternAccessor(this.SyntaxNode);
+                return (PatternSyntaxWrapper)PatternAccessor(SyntaxNode);
             }
         }
 
@@ -89,17 +89,17 @@ namespace SonarAnalyzer.ShimLayer.CSharp
 
         public IsPatternExpressionSyntaxWrapper WithExpression(ExpressionSyntax expression)
         {
-            return new IsPatternExpressionSyntaxWrapper(WithExpressionAccessor(this.SyntaxNode, expression));
+            return new IsPatternExpressionSyntaxWrapper(WithExpressionAccessor(SyntaxNode, expression));
         }
 
         public IsPatternExpressionSyntaxWrapper WithIsKeyword(SyntaxToken isKeyword)
         {
-            return new IsPatternExpressionSyntaxWrapper(WithIsKeywordAccessor(this.SyntaxNode, isKeyword));
+            return new IsPatternExpressionSyntaxWrapper(WithIsKeywordAccessor(SyntaxNode, isKeyword));
         }
 
         public IsPatternExpressionSyntaxWrapper WithPattern(PatternSyntaxWrapper pattern)
         {
-            return new IsPatternExpressionSyntaxWrapper(WithPatternAccessor(this.SyntaxNode, pattern.SyntaxNode));
+            return new IsPatternExpressionSyntaxWrapper(WithPatternAccessor(SyntaxNode, pattern.SyntaxNode));
         }
     }
 }

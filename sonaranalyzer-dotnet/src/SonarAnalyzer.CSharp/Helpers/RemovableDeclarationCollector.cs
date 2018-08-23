@@ -55,20 +55,20 @@ namespace SonarAnalyzer.Helpers
         {
             get
             {
-                if (typeDeclarations == null)
+                if (this.typeDeclarations == null)
                 {
-                    typeDeclarations = namedType.DeclaringSyntaxReferences
+                    this.typeDeclarations = this.namedType.DeclaringSyntaxReferences
                         .Select(reference => reference.GetSyntax())
                         .OfType<BaseTypeDeclarationSyntax>()
                         .Select(node =>
                             new TypeWithSemanticModel
                             {
                                 SyntaxNode = node,
-                                SemanticModel = compilation.GetSemanticModel(node.SyntaxTree)
+                                SemanticModel = this.compilation.GetSemanticModel(node.SyntaxTree)
                             })
                         .Where(n => n.SemanticModel != null);
                 }
-                return typeDeclarations;
+                return this.typeDeclarations;
             }
         }
 

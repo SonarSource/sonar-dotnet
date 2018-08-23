@@ -97,7 +97,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             public override void Visit()
             {
                 var vbWalker = new VbLoopwalker(this);
-                vbWalker.Visit(rootExpression);
+                vbWalker.Visit(this.rootExpression);
             }
 
             private class VbLoopwalker : VisualBasicSyntaxWalker
@@ -106,31 +106,31 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
                 public VbLoopwalker(LoopWalker loopWalker)
                 {
-                    walker = loopWalker;
+                    this.walker = loopWalker;
                 }
 
                 public override void VisitContinueStatement(ContinueStatementSyntax node)
                 {
                     base.VisitContinueStatement(node);
-                    walker.StoreVisitData(node, walker.ConditionalContinues, walker.UnconditionalContinues);
+                    this.walker.StoreVisitData(node, this.walker.ConditionalContinues, this.walker.UnconditionalContinues);
                 }
 
                 public override void VisitExitStatement(ExitStatementSyntax node)
                 {
                     base.VisitExitStatement(node);
-                    walker.StoreVisitData(node, walker.ConditionalTerminates, walker.UnconditionalTerminates);
+                    this.walker.StoreVisitData(node, this.walker.ConditionalTerminates, this.walker.UnconditionalTerminates);
                 }
 
                 public override void VisitReturnStatement(ReturnStatementSyntax node)
                 {
                     base.VisitReturnStatement(node);
-                    walker.StoreVisitData(node, walker.ConditionalTerminates, walker.UnconditionalTerminates);
+                    this.walker.StoreVisitData(node, this.walker.ConditionalTerminates, this.walker.UnconditionalTerminates);
                 }
 
                 public override void VisitThrowStatement(ThrowStatementSyntax node)
                 {
                     base.VisitThrowStatement(node);
-                    walker.StoreVisitData(node, walker.ConditionalTerminates, walker.UnconditionalTerminates);
+                    this.walker.StoreVisitData(node, this.walker.ConditionalTerminates, this.walker.UnconditionalTerminates);
                 }
             }
 

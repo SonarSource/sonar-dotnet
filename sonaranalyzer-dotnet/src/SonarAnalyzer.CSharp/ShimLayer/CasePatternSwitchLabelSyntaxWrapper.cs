@@ -33,7 +33,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
 
         private CasePatternSwitchLabelSyntaxWrapper(SwitchLabelSyntax node)
         {
-            this.SyntaxNode = node;
+            SyntaxNode = node;
         }
 
         public SwitchLabelSyntax SyntaxNode { get; }
@@ -42,7 +42,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
         {
             get
             {
-                return (PatternSyntaxWrapper)PatternAccessor(this.SyntaxNode);
+                return (PatternSyntaxWrapper)PatternAccessor(SyntaxNode);
             }
         }
 
@@ -50,7 +50,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
         {
             get
             {
-                return (WhenClauseSyntaxWrapper)WhenClauseAccessor(this.SyntaxNode);
+                return (WhenClauseSyntaxWrapper)WhenClauseAccessor(SyntaxNode);
             }
         }
 
@@ -81,22 +81,22 @@ namespace SonarAnalyzer.ShimLayer.CSharp
 
         public CasePatternSwitchLabelSyntaxWrapper WithKeyword(SyntaxToken keyword)
         {
-            return new CasePatternSwitchLabelSyntaxWrapper(WithKeywordAccessor(this.SyntaxNode, keyword));
+            return new CasePatternSwitchLabelSyntaxWrapper(WithKeywordAccessor(SyntaxNode, keyword));
         }
 
         public CasePatternSwitchLabelSyntaxWrapper WithColonToken(SyntaxToken colonToken)
         {
-            return new CasePatternSwitchLabelSyntaxWrapper(WithColonTokenAccessor(this.SyntaxNode, colonToken));
+            return new CasePatternSwitchLabelSyntaxWrapper(WithColonTokenAccessor(SyntaxNode, colonToken));
         }
 
         public CasePatternSwitchLabelSyntaxWrapper WithPattern(PatternSyntaxWrapper pattern)
         {
-            return new CasePatternSwitchLabelSyntaxWrapper(WithPatternAccessor(this.SyntaxNode, pattern));
+            return new CasePatternSwitchLabelSyntaxWrapper(WithPatternAccessor(SyntaxNode, pattern));
         }
 
         public CasePatternSwitchLabelSyntaxWrapper WithWhenClause(WhenClauseSyntaxWrapper whenClause)
         {
-            return new CasePatternSwitchLabelSyntaxWrapper(WithWhenClauseAccessor(this.SyntaxNode, whenClause));
+            return new CasePatternSwitchLabelSyntaxWrapper(WithWhenClauseAccessor(SyntaxNode, whenClause));
         }
     }
 }

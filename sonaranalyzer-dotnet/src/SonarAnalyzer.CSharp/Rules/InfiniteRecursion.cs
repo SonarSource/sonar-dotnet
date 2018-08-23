@@ -217,7 +217,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 : base(context.ControlFlowGraph, context.AnalyzedSymbol, context.SemanticModel,
                       () => context.AnalysisContext.ReportDiagnosticWhenActive(Diagnostic.Create(rule, context.IssueLocation, reportOn)))
             {
-                isSet = isSetAccessor;
+                this.isSet = isSetAccessor;
             }
 
             private static readonly ISet<Type> TypesForReference = new HashSet<Type> { typeof(IdentifierNameSyntax), typeof(MemberAccessExpressionSyntax) };
@@ -238,13 +238,13 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
 
                 var propertyAccess = expr.GetSelfOrTopParenthesizedExpression();
-                if (propertyAccess.IsInNameofCall(semanticModel))
+                if (propertyAccess.IsInNameofCall(this.semanticModel))
                 {
                     return false;
                 }
 
                 var isNodeASet = propertyAccess.Parent is AssignmentExpressionSyntax assignment && assignment.Left == propertyAccess;
-                return isNodeASet == isSet;
+                return isNodeASet == this.isSet;
             }
         }
 
@@ -266,7 +266,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 if (CheckAllPaths())
                 {
-                    reportIssue();
+                    this.reportIssue();
                 }
             }
 
@@ -303,9 +303,9 @@ namespace SonarAnalyzer.Rules.CSharp
                     return false;
                 }
 
-                var assignedSymbol = semanticModel.GetSymbolInfo(name).Symbol;
+                var assignedSymbol = this.semanticModel.GetSymbolInfo(name).Symbol;
 
-                return declaringSymbol.Equals(assignedSymbol);
+                return this.declaringSymbol.Equals(assignedSymbol);
             }
         }
 

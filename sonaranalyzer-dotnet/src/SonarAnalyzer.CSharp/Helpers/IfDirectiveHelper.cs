@@ -120,7 +120,7 @@ namespace SonarAnalyzer.Helpers
                 :base(SyntaxWalkerDepth.StructuredTrivia)
             {
                 this.terminatingNode = terminatingNode;
-                found = false;
+                this.found = false;
                 CollectedDirectives = new List<DirectiveTriviaSyntax>();
             }
 
@@ -129,15 +129,15 @@ namespace SonarAnalyzer.Helpers
             public override void Visit(SyntaxNode node)
             {
                 // Stop traversing once we've walked down to the terminating node
-                if (found)
+                if (this.found)
                 {
                     return;
                 }
 
-                if (node == terminatingNode)
+                if (node == this.terminatingNode)
                 {
                     VisitTerminatingNodeLeadingTrivia();
-                    found = true;
+                    this.found = true;
                     return;
                 }
 
@@ -150,9 +150,9 @@ namespace SonarAnalyzer.Helpers
                 // could contain directives. However, we won't have processed
                 // these yet, as they are treated as children of the node
                 // even though they appear before it in the text
-                if (terminatingNode.HasLeadingTrivia)
+                if (this.terminatingNode.HasLeadingTrivia)
                 {
-                    this.VisitLeadingTrivia(terminatingNode.GetFirstToken(includeZeroWidth: true));
+                    VisitLeadingTrivia(this.terminatingNode.GetFirstToken(includeZeroWidth: true));
                 }
             }
 
