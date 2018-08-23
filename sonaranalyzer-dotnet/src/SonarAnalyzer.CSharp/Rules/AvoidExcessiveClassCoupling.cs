@@ -49,7 +49,7 @@ namespace SonarAnalyzer.Rules.CSharp
             "Maximum number of classes a single class is allowed to depend upon", ThresholdDefaultValue)]
         public int Threshold { get; set; } = ThresholdDefaultValue;
 
-        private static ISet<KnownType> ignoredTypes = new HashSet<KnownType>
+        private static readonly ISet<KnownType> ignoredTypes = new HashSet<KnownType>
         {
             KnownType.Void,
             KnownType.System_Boolean,

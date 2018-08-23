@@ -63,7 +63,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 { SyntaxKind.PropertyDeclaration, "property" }
             };
 
-        private static ISet<KnownType> ComRelatedTypes =
+        private static readonly ISet<KnownType> ComRelatedTypes =
             new HashSet<KnownType>
             {
                 KnownType.System_Runtime_InteropServices_ComImportAttribute,

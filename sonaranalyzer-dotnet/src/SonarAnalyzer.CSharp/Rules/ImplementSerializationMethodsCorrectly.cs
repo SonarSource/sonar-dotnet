@@ -46,7 +46,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string problemParameterText = "have a single parameter of type 'StreamingContext'";
         private const string problemGenericParameterText = "have no type parameters";
 
-        private static ISet<KnownType> serializationAttributes = new HashSet<KnownType>
+        private static readonly ISet<KnownType> serializationAttributes = new HashSet<KnownType>
         {
             KnownType.System_Runtime_Serialization_OnSerializingAttribute,
             KnownType.System_Runtime_Serialization_OnSerializedAttribute,
