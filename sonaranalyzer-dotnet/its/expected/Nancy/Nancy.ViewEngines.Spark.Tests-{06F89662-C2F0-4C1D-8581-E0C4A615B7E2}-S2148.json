@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2148",
+"message":  "Add underscores to this numeric value for readability.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.ViewEngines.Spark.Tests\SparkViewEngineFixture.cs",
+"region":  {
+"startLine":  160,
+"startColumn":  80,
+"endLine":  160,
+"endColumn":  90
+}
+}
+}
+]
+}

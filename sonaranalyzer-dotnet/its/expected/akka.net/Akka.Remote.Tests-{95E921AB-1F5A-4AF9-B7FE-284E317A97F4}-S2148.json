@@ -1,0 +1,30 @@
+{
+"issues":  [
+{
+"id":  "S2148",
+"message":  "Add underscores to this numeric value for readability.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests\Transport\ThrottleModeSpec.cs",
+"region":  {
+"startLine":  26,
+"startColumn":  37,
+"endLine":  26,
+"endColumn":  44
+}
+}
+},
+{
+"id":  "S2148",
+"message":  "Add underscores to this numeric value for readability.",
+"location":  {
+"uri":  "sources\akka.net\src\core\Akka.Remote.Tests\Transport\ThrottleModeSpec.cs",
+"region":  {
+"startLine":  35,
+"startColumn":  37,
+"endLine":  35,
+"endColumn":  44
+}
+}
+}
+]
+}

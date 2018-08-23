@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2148",
+"message":  "Add underscores to this numeric value for readability.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Tests\Unit\DynamicDictionaryValueFixture.cs",
+"region":  {
+"startLine":  579,
+"startColumn":  35,
+"endLine":  579,
+"endColumn":  55
+}
+}
+}
+]
+}

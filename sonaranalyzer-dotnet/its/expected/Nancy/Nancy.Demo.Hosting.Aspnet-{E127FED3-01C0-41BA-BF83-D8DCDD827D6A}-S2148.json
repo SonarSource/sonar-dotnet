@@ -1,0 +1,17 @@
+{
+"issues":  [
+{
+"id":  "S2148",
+"message":  "Add underscores to this numeric value for readability.",
+"location":  {
+"uri":  "sources\Nancy\src\Nancy.Demo.Hosting.Aspnet\MainModule.cs",
+"region":  {
+"startLine":  78,
+"startColumn":  71,
+"endLine":  78,
+"endColumn":  78
+}
+}
+}
+]
+}
