@@ -53,7 +53,7 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterSyntaxNodeActionInNonGenerated(
                 c =>
                 {
-                    if ((c.Compilation as CSharpCompilation)?.LanguageVersion.CompareTo(LanguageVersion.CSharp6) < 0)
+                    if (!c.Compilation.IsAtLeastLanguageVersion(LanguageVersion.CSharp6))
                     {
                         return;
                     }
