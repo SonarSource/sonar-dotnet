@@ -32,6 +32,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.rules.TemporaryFolder;
+import org.sonarsource.dotnet.shared.plugins.RoslynReport;
 
 public class SarifParserFactoryTest {
   @Rule
@@ -45,21 +46,21 @@ public class SarifParserFactoryTest {
     thrown.expectMessage("Unable to read the Roslyn SARIF report file: ");
     thrown.expectMessage("non_existing.json");
 
-    SarifParserFactory.create(Paths.get("non_existing.json"), String::toString);
+    SarifParserFactory.create(new RoslynReport(null, Paths.get("non_existing.json")), String::toString);
   }
 
   @Test
   public void testUnknownVersion() throws IOException {
     Path f = temp.newFile("unknown.json").toPath();
     Files.write(f, "{\"$schema\": \"http://json.schemastore.org/sarif-1.1.0\",\"version\": \"1.1.0\"}".getBytes(StandardCharsets.UTF_8), StandardOpenOption.CREATE);
-    SarifParser parser = SarifParserFactory.create(f, String::toString);
+    SarifParser parser = SarifParserFactory.create(new RoslynReport(null, f), String::toString);
     assertThat(parser).isInstanceOf(SarifParser10.class);
   }
 
   @Test
   public void testAllJsonFiles() throws IOException {
     Path folder = Paths.get("src/test/resources/SarifParserTest");
-    Files.list(folder).forEach(f -> assertThat(SarifParserFactory.create(f, String::toString)).isNotNull());
+    Files.list(folder).forEach(f -> assertThat(SarifParserFactory.create(new RoslynReport(null, f), String::toString)).isNotNull());
   }
 
   @Test
@@ -68,7 +69,7 @@ public class SarifParserFactoryTest {
 
     Path f = temp.newFile("invalid.json").toPath();
     Files.write(f, "trash".getBytes(StandardCharsets.UTF_8), StandardOpenOption.CREATE);
-    SarifParserFactory.create(f, String::toString);
+    SarifParserFactory.create(new RoslynReport(null, f), String::toString);
   }
 
   @Test
@@ -79,25 +80,25 @@ public class SarifParserFactoryTest {
 
     Path f = temp.newFile("invalid.json").toPath();
     Files.write(f, "{}".getBytes(StandardCharsets.UTF_8), StandardOpenOption.CREATE);
-    SarifParserFactory.create(f, String::toString);
+    SarifParserFactory.create(new RoslynReport(null, f), String::toString);
   }
 
   @Test
   public void testCreate_v10() {
-    SarifParser parser = SarifParserFactory.create(Paths.get("src/test/resources/SarifParserTest/v1_0.json"), String::toString);
+    SarifParser parser = SarifParserFactory.create(new RoslynReport(null, Paths.get("src/test/resources/SarifParserTest/v1_0.json")), String::toString);
     assertThat(parser).isInstanceOf(SarifParser10.class);
   }
 
   @Test
   public void testCreate_v04() {
-    SarifParser parser = SarifParserFactory.create(Paths.get("src/test/resources/SarifParserTest/v0_4.json"), String::toString);
+    SarifParser parser = SarifParserFactory.create(new RoslynReport(null, Paths.get("src/test/resources/SarifParserTest/v0_4.json")), String::toString);
     assertThat(parser).isInstanceOf(SarifParser01And04.class);
 
   }
 
   @Test
   public void testCreate_v01() {
-    SarifParser parser = SarifParserFactory.create(Paths.get("src/test/resources/SarifParserTest/v0_1.json"), String::toString);
+    SarifParser parser = SarifParserFactory.create(new RoslynReport(null, Paths.get("src/test/resources/SarifParserTest/v0_1.json")), String::toString);
     assertThat(parser).isInstanceOf(SarifParser01And04.class);
   }
 }

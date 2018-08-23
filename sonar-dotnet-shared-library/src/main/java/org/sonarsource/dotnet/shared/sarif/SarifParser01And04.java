@@ -28,13 +28,16 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.function.Function;
+import org.sonar.api.batch.fs.InputModule;
 
 class SarifParser01And04 implements SarifParser {
   private static final String FILE_PROTOCOL = "file:///";
+  private final InputModule inputModule;
   private final JsonObject root;
   private final Function<String, String> toRealPath;
 
-  SarifParser01And04(JsonObject root, Function<String, String> toRealPath) {
+  SarifParser01And04(InputModule inputModule, JsonObject root, Function<String, String> toRealPath) {
+    this.inputModule = inputModule;
     this.root = root;
     this.toRealPath = toRealPath;
   }
@@ -73,13 +76,13 @@ class SarifParser01And04 implements SarifParser {
 
     JsonArray locationsArray = issue.getAsJsonArray("locations");
     if (locationsArray.size() == 0) {
-      callback.onProjectIssue(ruleId, message);
+      callback.onProjectIssue(ruleId, inputModule, message);
       return;
     }
 
     JsonObject primaryLocationObject = getAnalysisTargetAt(locationsArray, 0);
     if (primaryLocationObject == null) {
-      callback.onProjectIssue(ruleId, message);
+      callback.onProjectIssue(ruleId, inputModule, message);
       return;
     }
 

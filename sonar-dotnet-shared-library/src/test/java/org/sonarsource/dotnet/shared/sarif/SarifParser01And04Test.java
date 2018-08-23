@@ -26,6 +26,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.mockito.InOrder;
 import org.mockito.Mockito;
+import org.sonar.api.batch.fs.InputModule;
 import org.sonar.api.utils.log.LogTester;
 
 import java.io.IOException;
@@ -54,12 +55,12 @@ public class SarifParser01And04Test {
   @Test
   public void should_not_fail_ony_empty_report() throws IOException {
     SarifParserCallback callback = mock(SarifParserCallback.class);
-    new SarifParser01And04(getRoot("v0_1_empty_issues.json"), String::toString).accept(callback);
-    new SarifParser01And04(getRoot("v0_1_empty_no_issues.json"), String::toString).accept(callback);
-    new SarifParser01And04(getRoot("v0_4_empty_no_results.json"), String::toString).accept(callback);
-    new SarifParser01And04(getRoot("v0_4_empty_no_runLogs.json"), String::toString).accept(callback);
-    new SarifParser01And04(getRoot("v0_4_empty_results.json"), String::toString).accept(callback);
-    new SarifParser01And04(getRoot("v0_4_empty_runLogs.json"), String::toString).accept(callback);
+    new SarifParser01And04(null, getRoot("v0_1_empty_issues.json"), String::toString).accept(callback);
+    new SarifParser01And04(null, getRoot("v0_1_empty_no_issues.json"), String::toString).accept(callback);
+    new SarifParser01And04(null, getRoot("v0_4_empty_no_results.json"), String::toString).accept(callback);
+    new SarifParser01And04(null, getRoot("v0_4_empty_no_runLogs.json"), String::toString).accept(callback);
+    new SarifParser01And04(null, getRoot("v0_4_empty_results.json"), String::toString).accept(callback);
+    new SarifParser01And04(null, getRoot("v0_4_empty_runLogs.json"), String::toString).accept(callback);
     verify(callback, Mockito.never()).onIssue(Mockito.anyString(), Mockito.any(Location.class), Mockito.anyCollectionOf(Location.class));
   }
 
@@ -68,7 +69,7 @@ public class SarifParser01And04Test {
   public void sarif_version_0_1() throws IOException {
     SarifParserCallback callback = mock(SarifParserCallback.class);
 
-    new SarifParser01And04(getRoot("v0_1.json"), String::toString).accept(callback);
+    new SarifParser01And04(null, getRoot("v0_1.json"), String::toString).accept(callback);
 
     InOrder inOrder = inOrder(callback);
 
@@ -79,16 +80,16 @@ public class SarifParser01And04Test {
     inOrder.verify(callback).onIssue("CA1000", location, Collections.emptyList());
     verify(callback, Mockito.times(2)).onIssue(Mockito.anyString(), Mockito.any(Location.class), Mockito.anyCollectionOf(Location.class));
 
-    inOrder.verify(callback).onProjectIssue("AssemblyLevelRule", "This is an assembly level Roslyn issue with no location.");
-    inOrder.verify(callback).onProjectIssue("NoAnalysisTargetsLocation", "No analysis targets, report at assembly level.");
-    verify(callback, Mockito.times(2)).onProjectIssue(Mockito.anyString(), Mockito.anyString());
+    inOrder.verify(callback).onProjectIssue("AssemblyLevelRule", null, "This is an assembly level Roslyn issue with no location.");
+    inOrder.verify(callback).onProjectIssue("NoAnalysisTargetsLocation", null, "No analysis targets, report at assembly level.");
+    verify(callback, Mockito.times(2)).onProjectIssue(Mockito.anyString(), Mockito.any(InputModule.class), Mockito.anyString());
   }
 
   // VS 2015 Update 2
   @Test
   public void sarif_version_0_4() throws IOException {
     SarifParserCallback callback = mock(SarifParserCallback.class);
-    new SarifParser01And04(getRoot("v0_4.json"), String::toString).accept(callback);
+    new SarifParser01And04(null, getRoot("v0_4.json"), String::toString).accept(callback);
 
     InOrder inOrder = inOrder(callback);
 
@@ -96,13 +97,13 @@ public class SarifParser01And04Test {
     inOrder.verify(callback).onIssue("S125", location, Collections.emptyList());
     verify(callback, Mockito.only()).onIssue(Mockito.anyString(), Mockito.any(Location.class), Mockito.anyCollectionOf(Location.class));
 
-    verify(callback, Mockito.never()).onProjectIssue(Mockito.anyString(), Mockito.anyString());
+    verify(callback, Mockito.never()).onProjectIssue(Mockito.anyString(), Mockito.any(InputModule.class), Mockito.anyString());
   }
 
   @Test
   public void sarif_version_0_4_file_level() throws IOException {
     SarifParserCallback callback = mock(SarifParserCallback.class);
-    new SarifParser01And04(getRoot("v0_4_file_level_issue.json"), String::toString).accept(callback);
+    new SarifParser01And04(null, getRoot("v0_4_file_level_issue.json"), String::toString).accept(callback);
 
     InOrder inOrder = inOrder(callback);
     inOrder.verify(callback).onFileIssue(eq("S104"), Mockito.anyString(), eq("Dummy"));
@@ -118,7 +119,7 @@ public class SarifParser01And04Test {
   @Test
   public void sarif_version_0_4_secondary_locations() throws IOException {
     SarifParserCallback callback = mock(SarifParserCallback.class);
-    new SarifParser01And04(getRoot("v0_4_secondary_locations.json"), String::toString).accept(callback);
+    new SarifParser01And04(null, getRoot("v0_4_secondary_locations.json"), String::toString).accept(callback);
 
     InOrder inOrder = inOrder(callback);
     Location primaryLocation = new Location("c:\\primary.cs", "Refactor this method to reduce its Cognitive Complexity from 30 to the 15 allowed",
@@ -133,7 +134,7 @@ public class SarifParser01And04Test {
   @Test
   public void sarif_version_0_4_secondary_locations_no_messages() throws IOException {
     SarifParserCallback callback = mock(SarifParserCallback.class);
-    new SarifParser01And04(getRoot("v0_4_secondary_locations_no_messages.json"), String::toString).accept(callback);
+    new SarifParser01And04(null, getRoot("v0_4_secondary_locations_no_messages.json"), String::toString).accept(callback);
 
     InOrder inOrder = inOrder(callback);
     Location primaryLocation = new Location("c:\\primary.cs", "Refactor this method to reduce its Cognitive Complexity from 30 to the 15 allowed",

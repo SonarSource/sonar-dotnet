@@ -43,6 +43,7 @@ import org.sonarsource.dotnet.shared.plugins.ProtobufDataImporter;
 import org.sonarsource.dotnet.shared.plugins.RealPathProvider;
 import org.sonarsource.dotnet.shared.plugins.ReportPathCollector;
 import org.sonarsource.dotnet.shared.plugins.RoslynDataImporter;
+import org.sonarsource.dotnet.shared.plugins.RoslynReport;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
@@ -97,7 +98,7 @@ public class CSharpSensorTest {
   public void noProtobufFilesShouldNotFail() {
     addFileToFs();
     when(reportPathCollector.protobufDirs()).thenReturn(Collections.emptyList());
-    when(reportPathCollector.roslynDirs()).thenReturn(Collections.singletonList(workDir.getRoot()));
+    when(reportPathCollector.roslynDirs()).thenReturn(Collections.singletonList(new RoslynReport(null, workDir.getRoot())));
     tester.setActiveRules(new ActiveRulesBuilder()
       .create(RuleKey.of(CSharpPlugin.REPOSITORY_KEY, "S1186"))
       .activate()
@@ -115,7 +116,7 @@ public class CSharpSensorTest {
     ImmutableMap<String, List<RuleKey>> expectedMap = ImmutableMap.of(
       "sonaranalyzer-cs", ImmutableList.of(RuleKey.of("csharpsquid", "S1186"), RuleKey.of("csharpsquid", "[parameters_key]")),
       "foo", ImmutableList.of(RuleKey.of("roslyn.foo", "custom-roslyn")));
-    verify(roslynDataImporter).importRoslynReports(eq(Collections.singletonList(workDir.getRoot())), eq(tester), eq(expectedMap), any(RealPathProvider.class));
+    verify(roslynDataImporter).importRoslynReports(eq(Collections.singletonList(new RoslynReport(null, workDir.getRoot()))), eq(tester), eq(expectedMap), any(RealPathProvider.class));
   }
 
   @Test

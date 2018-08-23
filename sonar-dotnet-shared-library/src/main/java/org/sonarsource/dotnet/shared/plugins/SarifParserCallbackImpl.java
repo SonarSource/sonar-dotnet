@@ -26,14 +26,20 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import org.sonar.api.batch.fs.InputFile;
+import org.sonar.api.batch.fs.InputModule;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.issue.NewIssue;
 import org.sonar.api.batch.sensor.issue.NewIssueLocation;
 import org.sonar.api.rule.RuleKey;
+import org.sonar.api.utils.log.Logger;
+import org.sonar.api.utils.log.Loggers;
 import org.sonarsource.dotnet.shared.sarif.Location;
 import org.sonarsource.dotnet.shared.sarif.SarifParserCallback;
 
 public class SarifParserCallbackImpl implements SarifParserCallback {
+
+  private static final Logger LOG = Loggers.get(SarifParserCallbackImpl.class);
+
   private final SensorContext context;
   private final Map<String, String> repositoryKeyByRoslynRuleKey;
   private final Set<Issue> savedIssues = new HashSet<>();
@@ -44,16 +50,21 @@ public class SarifParserCallbackImpl implements SarifParserCallback {
   }
 
   @Override
-  public void onProjectIssue(String ruleId, String message) {
+  public void onProjectIssue(String ruleId, InputModule inputModule, String message) {
     String repositoryKey = repositoryKeyByRoslynRuleKey.get(ruleId);
     if (repositoryKey == null) {
       return;
     }
+
+    if (inputModule != null) {
+      LOG.info("Issue on project, key '" + inputModule.key() + "' value '" + inputModule.toString() + "'");
+    }
+
     NewIssue newIssue = context.newIssue();
     newIssue
       .forRule(RuleKey.of(repositoryKey, ruleId))
       .at(newIssue.newLocation()
-        .on(context.module())
+        .on(inputModule)
         .message(message))
       .save();
   }

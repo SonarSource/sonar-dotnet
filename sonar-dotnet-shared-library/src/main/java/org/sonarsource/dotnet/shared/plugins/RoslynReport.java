@@ -20,31 +20,42 @@
 package org.sonarsource.dotnet.shared.plugins;
 
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import org.sonar.api.batch.InstantiationStrategy;
-import org.sonar.api.batch.ScannerSide;
+import java.util.Objects;
+import org.sonar.api.batch.fs.InputModule;
 
-@ScannerSide
-@InstantiationStrategy(InstantiationStrategy.PER_BATCH)
-public class ReportPathCollector {
-  private final List<Path> protobufDirs = new ArrayList<>();
-  private final List<RoslynReport> roslynDirs = new ArrayList<>();
+public class RoslynReport {
 
-  public void addProtobufDirs(List<Path> paths) {
-    protobufDirs.addAll(paths);
+  private final InputModule module;
+  private final Path reportPath;
+
+  public RoslynReport(InputModule module, Path reportPath) {
+    this.module = module;
+    this.reportPath = reportPath;
   }
 
-  public List<Path> protobufDirs() {
-    return Collections.unmodifiableList(new ArrayList<>(protobufDirs));
+  public InputModule getModule() {
+    return module;
   }
 
-  public void addRoslynDirs(List<RoslynReport> paths) {
-    roslynDirs.addAll(paths);
+  public Path getReportPath() {
+    return reportPath;
   }
 
-  public List<RoslynReport> roslynDirs() {
-    return Collections.unmodifiableList(new ArrayList<>(roslynDirs));
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    RoslynReport that = (RoslynReport) o;
+    return Objects.equals(module, that.module) &&
+      Objects.equals(reportPath, that.reportPath);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(module, reportPath);
   }
 }

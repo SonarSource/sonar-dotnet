@@ -61,7 +61,7 @@ public class SarifParserCallbackImplTest {
 
   @Test
   public void should_add_project_issues() {
-    callback.onProjectIssue("rule1", "msg");
+    callback.onProjectIssue("rule1", ctx.module(), "msg");
     assertThat(ctx.allIssues()).hasSize(1);
     assertThat(ctx.allIssues().iterator().next().primaryLocation().inputComponent().key()).isEqualTo("projectKey");
     assertThat(ctx.allIssues().iterator().next().ruleKey().rule()).isEqualTo("rule1");
@@ -91,7 +91,7 @@ public class SarifParserCallbackImplTest {
 
   @Test
   public void should_ignore_project_issue_with_unknown_rule_key() {
-    callback.onProjectIssue("rule45", "msg");
+    callback.onProjectIssue("rule45", ctx.module(), "msg");
     assertThat(ctx.allIssues()).isEmpty();
   }
 
