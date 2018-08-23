@@ -1,5 +1,6 @@
 ﻿extern alias csharp;
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 /*
@@ -2728,6 +2729,208 @@ namespace NS
             cw1.SuccessorBlocks.Should().OnlyContain(defaultCase);
             cw2.SuccessorBlocks.Should().OnlyContain(cw3);
             cw3.SuccessorBlocks.Should().OnlyContain(exitBlock);
+        }
+
+        [TestMethod]
+        [TestCategory("CFG")]
+        public void Cfg_Switch_Patterns_Default()
+        {
+            var cfg = Build("cw0(); switch(o) { case int i: case string s: cw1(); break; case default: case double d: cw2(); break; } cw3();");
+
+            VerifyCfg(cfg, 8);
+
+            var switchBlock = (BranchBlock)cfg.Blocks.ElementAt(0);
+            var caseIntBlock = (BinaryBranchBlock)cfg.Blocks.ElementAt(1);
+            var caseStringBlock = (BinaryBranchBlock)cfg.Blocks.ElementAt(2);
+            var firstSectionBlock = (JumpBlock)cfg.Blocks.ElementAt(3);
+            var caseDoubleBlock = (BinaryBranchBlock)cfg.Blocks.ElementAt(4);
+            var secondSection_DefaultBlock = (JumpBlock)cfg.Blocks.ElementAt(5);
+            var lastBlock = (SimpleBlock)cfg.Blocks.ElementAt(6);
+            var exitBlock = (ExitBlock)cfg.Blocks.ElementAt(7);
+
+            switchBlock.SuccessorBlocks.Should().OnlyContain(caseIntBlock);
+            VerifyAllInstructions(switchBlock, "cw0", "cw0()", "o");
+
+            caseIntBlock.TrueSuccessorBlock.Should().Be(firstSectionBlock);
+            caseIntBlock.FalseSuccessorBlock.Should().Be(caseStringBlock);
+            VerifyAllInstructions(caseIntBlock, "int i");
+
+            caseStringBlock.TrueSuccessorBlock.Should().Be(firstSectionBlock);
+            caseStringBlock.FalseSuccessorBlock.Should().Be(caseDoubleBlock);
+            VerifyAllInstructions(caseStringBlock, "string s");
+
+            firstSectionBlock.SuccessorBlock.Should().Be(lastBlock);
+            VerifyAllInstructions(firstSectionBlock, "cw1", "cw1()");
+
+            caseDoubleBlock.TrueSuccessorBlock.Should().Be(secondSection_DefaultBlock);
+            caseDoubleBlock.FalseSuccessorBlock.Should().Be(secondSection_DefaultBlock);
+            VerifyAllInstructions(caseDoubleBlock, "double d");
+
+            secondSection_DefaultBlock.SuccessorBlock.Should().Be(lastBlock);
+            VerifyAllInstructions(secondSection_DefaultBlock, "cw2", "cw2()");
+
+            lastBlock.SuccessorBlock.Should().Be(exitBlock);
+            VerifyAllInstructions(lastBlock, "cw3", "cw3()");
+        }
+
+        [TestMethod]
+        [TestCategory("CFG")]
+        public void Cfg_Switch_Patterns_When()
+        {
+            var cfg = Build("cw0(); switch(o) { case int i when i > 0: case string s when s.Length > 0: cw1(); break; } cw2();");
+
+            VerifyCfg(cfg, 8);
+
+            var switchBlock = (BranchBlock)cfg.Blocks.ElementAt(0);
+            var caseIntBlock = (BinaryBranchBlock)cfg.Blocks.ElementAt(1);
+            var caseIntWhenBlock = (BinaryBranchBlock)cfg.Blocks.ElementAt(2);
+            var caseStringBlock = (BinaryBranchBlock)cfg.Blocks.ElementAt(3);
+            var caseStringWhenBlock = (BinaryBranchBlock)cfg.Blocks.ElementAt(4);
+            var firstSectionBlock = (JumpBlock)cfg.Blocks.ElementAt(5);
+            var lastBlock = (SimpleBlock)cfg.Blocks.ElementAt(6);
+            var exitBlock = (ExitBlock)cfg.Blocks.ElementAt(7);
+
+            switchBlock.SuccessorBlocks.Should().OnlyContain(caseIntBlock);
+            VerifyAllInstructions(switchBlock, "cw0", "cw0()", "o");
+
+            caseIntBlock.TrueSuccessorBlock.Should().Be(caseIntWhenBlock);
+            caseIntBlock.FalseSuccessorBlock.Should().Be(caseStringBlock);
+            VerifyAllInstructions(caseIntBlock, "int i");
+
+            caseIntWhenBlock.TrueSuccessorBlock.Should().Be(firstSectionBlock);
+            caseIntWhenBlock.FalseSuccessorBlock.Should().Be(caseStringBlock);
+            VerifyAllInstructions(caseIntWhenBlock, "i", "0", "i > 0");
+
+            caseStringBlock.TrueSuccessorBlock.Should().Be(caseStringWhenBlock);
+            caseStringBlock.FalseSuccessorBlock.Should().Be(lastBlock);
+            VerifyAllInstructions(caseStringBlock, "string s");
+
+            caseStringWhenBlock.TrueSuccessorBlock.Should().Be(firstSectionBlock);
+            caseStringWhenBlock.FalseSuccessorBlock.Should().Be(lastBlock);
+            VerifyAllInstructions(caseStringWhenBlock, "s", "s.Length", "0", "s.Length > 0");
+
+            firstSectionBlock.SuccessorBlock.Should().Be(lastBlock);
+            VerifyAllInstructions(firstSectionBlock, "cw1", "cw1()");
+
+            lastBlock.SuccessorBlock.Should().Be(exitBlock);
+            VerifyAllInstructions(lastBlock, "cw2", "cw2()");
+        }
+
+        [TestMethod]
+        [TestCategory("CFG")]
+        public void Cfg_Switch_Patterns_NoDefault()
+        {
+            var cfg = Build("cw0(); switch(o) { case int i: case string s: cw1(); break; case double d: cw2(); break; } cw3();");
+
+            VerifyCfg(cfg, 8);
+
+            var switchBlock = (BranchBlock)cfg.Blocks.ElementAt(0);
+            var caseIntBlock = (BinaryBranchBlock)cfg.Blocks.ElementAt(1);
+            var caseStringBlock = (BinaryBranchBlock)cfg.Blocks.ElementAt(2);
+            var firstSectionBlock = (JumpBlock)cfg.Blocks.ElementAt(3);
+            var caseDoubleBlock = (BinaryBranchBlock)cfg.Blocks.ElementAt(4);
+            var secondSectionBlock = (JumpBlock)cfg.Blocks.ElementAt(5);
+            var lastBlock = (SimpleBlock)cfg.Blocks.ElementAt(6);
+            var exitBlock = (ExitBlock)cfg.Blocks.ElementAt(7);
+
+            switchBlock.SuccessorBlocks.Should().OnlyContain(caseIntBlock);
+            VerifyAllInstructions(switchBlock, "cw0", "cw0()", "o");
+
+            caseIntBlock.TrueSuccessorBlock.Should().Be(firstSectionBlock);
+            caseIntBlock.FalseSuccessorBlock.Should().Be(caseStringBlock);
+            VerifyAllInstructions(caseIntBlock, "int i");
+
+            caseStringBlock.TrueSuccessorBlock.Should().Be(firstSectionBlock);
+            caseStringBlock.FalseSuccessorBlock.Should().Be(caseDoubleBlock);
+            VerifyAllInstructions(caseStringBlock, "string s");
+
+            firstSectionBlock.SuccessorBlock.Should().Be(lastBlock);
+            VerifyAllInstructions(firstSectionBlock, "cw1", "cw1()");
+
+            caseDoubleBlock.TrueSuccessorBlock.Should().Be(secondSectionBlock);
+            caseDoubleBlock.FalseSuccessorBlock.Should().Be(lastBlock);
+            VerifyAllInstructions(caseDoubleBlock, "double d");
+
+            secondSectionBlock.SuccessorBlock.Should().Be(lastBlock);
+            VerifyAllInstructions(secondSectionBlock, "cw2", "cw2()");
+
+            lastBlock.SuccessorBlock.Should().Be(exitBlock);
+            VerifyAllInstructions(lastBlock, "cw3", "cw3()");
+        }
+
+        [TestMethod]
+        [TestCategory("CFG")]
+        public void Cfg_Switch_Patterns_GotoDefault()
+        {
+            var cfg = Build("cw0(); switch(o) { case int i: case string s: cw1(); goto default; case default: case double d: cw2(); break; } cw3();");
+
+            VerifyCfg(cfg, 8);
+
+            var switchBlock = (BranchBlock)cfg.Blocks.ElementAt(0);
+            var caseIntBlock = (BinaryBranchBlock)cfg.Blocks.ElementAt(1);
+            var caseStringBlock = (BinaryBranchBlock)cfg.Blocks.ElementAt(2);
+            var firstSectionBlock = (JumpBlock)cfg.Blocks.ElementAt(3);
+            var caseDoubleBlock = (BinaryBranchBlock)cfg.Blocks.ElementAt(4);
+            var secondSection_DefaultBlock = (JumpBlock)cfg.Blocks.ElementAt(5);
+            var lastBlock = (SimpleBlock)cfg.Blocks.ElementAt(6);
+            var exitBlock = (ExitBlock)cfg.Blocks.ElementAt(7);
+
+            switchBlock.SuccessorBlocks.Should().OnlyContain(caseIntBlock);
+            VerifyAllInstructions(switchBlock, "cw0", "cw0()", "o");
+
+            caseIntBlock.TrueSuccessorBlock.Should().Be(firstSectionBlock);
+            caseIntBlock.FalseSuccessorBlock.Should().Be(caseStringBlock);
+            VerifyAllInstructions(caseIntBlock, "int i");
+
+            caseStringBlock.TrueSuccessorBlock.Should().Be(firstSectionBlock);
+            caseStringBlock.FalseSuccessorBlock.Should().Be(caseDoubleBlock);
+            VerifyAllInstructions(caseStringBlock, "string s");
+
+            firstSectionBlock.SuccessorBlock.Should().Be(secondSection_DefaultBlock);
+            VerifyAllInstructions(firstSectionBlock, "cw1", "cw1()");
+
+            caseDoubleBlock.TrueSuccessorBlock.Should().Be(secondSection_DefaultBlock);
+            caseDoubleBlock.FalseSuccessorBlock.Should().Be(secondSection_DefaultBlock);
+            VerifyAllInstructions(caseDoubleBlock, "double d");
+
+            secondSection_DefaultBlock.SuccessorBlock.Should().Be(lastBlock);
+            VerifyAllInstructions(secondSection_DefaultBlock, "cw2", "cw2()");
+
+            lastBlock.SuccessorBlock.Should().Be(exitBlock);
+            VerifyAllInstructions(lastBlock, "cw3", "cw3()");
+        }
+
+        [TestMethod]
+        [TestCategory("CFG")]
+        public void Cfg_Switch_Patterns_Null()
+        {
+            var cfg = Build("cw0(); switch(o) { case int i: case null: cw1(); break; } cw2();");
+
+            VerifyCfg(cfg, 6);
+
+            var switchBlock = (BranchBlock)cfg.Blocks.ElementAt(0);
+            var caseIntBlock = (BinaryBranchBlock)cfg.Blocks.ElementAt(1);
+            var caseNullBlock = (BinaryBranchBlock)cfg.Blocks.ElementAt(2);
+            var firstSectionBlock = (JumpBlock)cfg.Blocks.ElementAt(3);
+            var lastBlock = (SimpleBlock)cfg.Blocks.ElementAt(4);
+            var exitBlock = (ExitBlock)cfg.Blocks.ElementAt(5);
+
+            switchBlock.SuccessorBlocks.Should().OnlyContain(caseIntBlock);
+            VerifyAllInstructions(switchBlock, "cw0", "cw0()", "o");
+
+            caseIntBlock.TrueSuccessorBlock.Should().Be(firstSectionBlock);
+            caseIntBlock.FalseSuccessorBlock.Should().Be(caseNullBlock);
+            VerifyAllInstructions(caseIntBlock, "int i");
+
+            caseNullBlock.TrueSuccessorBlock.Should().Be(firstSectionBlock);
+            caseNullBlock.FalseSuccessorBlock.Should().Be(lastBlock);
+            VerifyAllInstructions(caseNullBlock);
+
+            firstSectionBlock.SuccessorBlock.Should().Be(lastBlock);
+            VerifyAllInstructions(firstSectionBlock, "cw1", "cw1()");
+
+            lastBlock.SuccessorBlock.Should().Be(exitBlock);
+            VerifyAllInstructions(lastBlock, "cw2", "cw2()");
         }
 
         #endregion

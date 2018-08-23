@@ -92,5 +92,48 @@ namespace Tests.Diagnostics
                 }
             }
         }
+
+        void Switch_Pattern_Source(object o)
+        {
+            switch (o)
+            {
+                case string s:
+                    // We don't set constraints on the switch expression
+                    if (o == null)
+                    {
+                        o.ToString(); // Noncompliant, False Positive
+                    }
+                    break;
+
+                default:
+                    break;
+            }
+        }
+
+        void Switch_Pattern(object o)
+        {
+            switch (o)
+            {
+                case string s:
+                    if (s == null)
+                    {
+                        // This is unreachable, s has NotNull constraint from the outer if condition
+                        s.ToString(); // Compliant
+                    }
+                    // s still has NotNull constraint from the outer if statement
+                    s.ToString(); // Compliant
+                    break;
+
+                case Foo f when f == null:
+                    if (f == null)
+                    {
+                        f.ToString(); // Compliant, this code is not reachable
+                    }
+                    break;
+
+                default:
+                    break;
+            }
+        }
     }
 }

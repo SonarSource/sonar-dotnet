@@ -452,6 +452,7 @@ namespace SonarAnalyzer.SymbolicExecution
                     break;
 
                 case SyntaxKindEx.IsPatternExpression:
+                    // condition with pattern (if, do, while, for, etc.) "if (x is string s)" or "if (x is null)"
                     var isPatternExpression = (IsPatternExpressionSyntaxWrapper)instruction;
                     if (ConstantPatternSyntaxWrapper.IsInstance(isPatternExpression.Pattern))
                     {
@@ -460,15 +461,21 @@ namespace SonarAnalyzer.SymbolicExecution
                     }
                     else if (DeclarationPatternSyntaxWrapper.IsInstance(isPatternExpression.Pattern))
                     {
-                        var declarationPattern = (DeclarationPatternSyntaxWrapper)isPatternExpression.Pattern;
-                        // "x is string s" is equivalent to "s = x" and "s" should get NotNull constraint
-                        // "x is (string s, int i)" is equivalent to "s = new string(); i = new int()" and no constraints should be added
-                        newProgramState = VisitVariableDesignation(declarationPattern.Designation, newProgramState, singleVariable: true);
+                        // "x is string s"
+                        // VisitDeclarationPattern() expects SV_s on top of the stack, hence we pop SV_x
+                        newProgramState = newProgramState.PopValue();
+
+                        newProgramState = VisitDeclarationPattern((DeclarationPatternSyntaxWrapper)isPatternExpression.Pattern, newProgramState);
                     }
                     else
                     {
-                        goto default;
+                        throw new NotImplementedException($"{instruction.Kind()}");
                     }
+                    break;
+
+                case SyntaxKindEx.DeclarationPattern:
+                    // a pattern from a case section "string s"
+                    newProgramState = VisitDeclarationPattern((DeclarationPatternSyntaxWrapper)instruction, newProgramState);
                     break;
 
                 default:
@@ -479,6 +486,11 @@ namespace SonarAnalyzer.SymbolicExecution
             OnInstructionProcessed(instruction, node.ProgramPoint, newProgramState);
             EnqueueNewNode(newProgramPoint, newProgramState);
         }
+
+        private ProgramState VisitDeclarationPattern(DeclarationPatternSyntaxWrapper declarationPattern, ProgramState newProgramState) =>
+            // "x is string s" is equivalent to "s = x" and "s" should get NotNull constraint
+            // "x is (string s, int i)" is equivalent to "s = new string(); i = new int()" and no constraints should be added
+            VisitVariableDesignation(declarationPattern.Designation, newProgramState, singleVariable: true);
 
         private ProgramState VisitVariableDesignation(VariableDesignationSyntaxWrapper variableDesignation, ProgramState programState, bool singleVariable)
         {
@@ -491,8 +503,6 @@ namespace SonarAnalyzer.SymbolicExecution
             {
                 // "x is string s" is equivalent to "s = x"; both symbolic values should remain on stack
                 var singleVariableDesignation = (SingleVariableDesignationSyntaxWrapper)variableDesignation;
-
-                newProgramState = newProgramState.PopValue(out var sv); // pop SV_x
 
                 // associate variable with new SV
                 var variableSymbol = SemanticModel.GetDeclaredSymbol(singleVariableDesignation);

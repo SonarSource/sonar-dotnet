@@ -41,6 +41,11 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
         private readonly Dictionary<string, JumpBlock> LabeledStatements = new Dictionary<string, JumpBlock>();
         private static readonly object GotoDefaultEntry = new object();
         private static readonly object GotoNullEntry = new object();
+        private static readonly HashSet<SyntaxKind> csharp6SwitchLabelKinds = new HashSet<SyntaxKind>
+            {
+                SyntaxKind.CaseSwitchLabel,
+                SyntaxKind.DefaultSwitchLabel,
+            };
 
         internal CSharpControlFlowGraphBuilder(CSharpSyntaxNode node, SemanticModel semanticModel)
             : base(node, semanticModel)
@@ -637,7 +642,12 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
 
         #region Build switch
 
-        private Block BuildSwitchStatement(SwitchStatementSyntax switchStatement, Block currentBlock)
+        private Block BuildSwitchStatement(SwitchStatementSyntax switchStatement, Block currentBlock) =>
+            switchStatement.Sections.All(s => s.Labels.All(l => l.IsAnyKind(csharp6SwitchLabelKinds)))
+                ? BuildSwitchStatement_Legacy(switchStatement, currentBlock)
+                : BuildSwitchStatement_CSharp7(switchStatement, currentBlock);
+
+        private Block BuildSwitchStatement_Legacy(SwitchStatementSyntax switchStatement, Block currentBlock)
         {
             var caseBlocks = new List<Block>();
             var caseBlocksByValue = new Dictionary<object, Block>();
@@ -682,6 +692,87 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
 
             var switchBlock = CreateBranchBlock(switchStatement, caseBlocks);
             return BuildExpression(switchStatement.Expression, switchBlock);
+        }
+
+        private Block BuildSwitchStatement_CSharp7(SwitchStatementSyntax switchStatement, Block currentBlock)
+        {
+            var caseBlocksByValue = new Dictionary<object, Block>();
+
+            BreakTarget.Push(currentBlock);
+
+            SwitchGotoJumpBlocks.Push(new Dictionary<object, List<JumpBlock>>());
+
+            // Default section is always evaluated last, we are handling it first because
+            // the CFG is built in reverse order
+            var defaultSection = switchStatement.Sections.FirstOrDefault(ContainsDefaultLabel);
+
+            var defaultSectionBlock = currentBlock;
+            if (defaultSection != null)
+            {
+                defaultSectionBlock = BuildStatements(defaultSection.Statements, CreateBlock(currentBlock));
+                caseBlocksByValue[GotoDefaultEntry] = defaultSectionBlock; // All "goto default;" will jump to this block
+            }
+
+            var currentSectionBlock = defaultSectionBlock;
+            foreach (var section in switchStatement.Sections.Reverse())
+            {
+                Block sectionBlock;
+                if (section == defaultSection)
+                {
+                    // Skip the default section if it contains a single default label; we already handled it
+                    if (section.Labels.Count == 1)
+                    {
+                        continue;
+                    }
+                    sectionBlock = defaultSectionBlock;
+                }
+                else
+                {
+                    sectionBlock = BuildStatements(section.Statements, CreateBlock(currentBlock));
+                }
+
+                foreach (var label in section.Labels.Reverse())
+                {
+                    if (CasePatternSwitchLabelSyntaxWrapper.IsInstance(label))
+                    {
+                        var casePatternSwitchLabel = (CasePatternSwitchLabelSyntaxWrapper)label;
+                        currentSectionBlock = BuildCasePattern(casePatternSwitchLabel,
+                            trueSuccessor: sectionBlock, falseSuccessor: currentSectionBlock);
+                    }
+                    else if (label is CaseSwitchLabelSyntax caseSwitchLabel &&
+                        caseSwitchLabel.Value != null &&
+                        caseSwitchLabel.Value.IsKind(SyntaxKind.NullLiteralExpression))
+                    {
+                        currentSectionBlock = CreateBinaryBranchBlock(caseSwitchLabel,
+                            trueSuccessor: sectionBlock, falseSuccessor: currentSectionBlock);
+                    }
+                }
+            }
+
+            BreakTarget.Pop();
+
+            var gotosToFix = SwitchGotoJumpBlocks.Pop();
+            FixJumps(gotosToFix, caseBlocksByValue);
+
+            var switchBlock = CreateBranchBlock(switchStatement, new[] { currentSectionBlock });
+            return BuildExpression(switchStatement.Expression, switchBlock);
+
+            bool ContainsDefaultLabel(SwitchSectionSyntax s) =>
+                s.Labels.OfType<CaseSwitchLabelSyntax>().Any(l => l.Value.IsKind(SyntaxKind.DefaultExpression));
+        }
+
+        private Block BuildCasePattern(CasePatternSwitchLabelSyntaxWrapper casePatternSwitchLabel,
+            Block trueSuccessor, Block falseSuccessor)
+        {
+            var newTrueSuccessor = casePatternSwitchLabel.WhenClause.SyntaxNode != null
+                ? BuildCondition(casePatternSwitchLabel.WhenClause.Condition, trueSuccessor, falseSuccessor)
+                : trueSuccessor;
+
+            var currentBlock = CreateBinaryBranchBlock(casePatternSwitchLabel, newTrueSuccessor, falseSuccessor);
+
+            currentBlock.ReversedInstructions.Add(casePatternSwitchLabel.Pattern);
+
+            return currentBlock;
         }
 
         private object GetCaseIndexer(ExpressionSyntax expression)
