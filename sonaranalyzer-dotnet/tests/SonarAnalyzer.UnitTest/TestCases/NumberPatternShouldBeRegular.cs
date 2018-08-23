@@ -12,7 +12,7 @@ namespace Tests.Diagnostics
 
             // decimal notation
             var balance = 2_435_951.68;
-            var x = 1_234.56_78;
+            var x = 1_234.11111;
 
             // hexadecimal notation
             var num = 0x01_00;
@@ -29,6 +29,10 @@ namespace Tests.Diagnostics
         {
             int million = 1_000_00_000;  // Noncompliant {{Review this number; its irregular pattern indicates an error.}}
 //                        ^^^^^^^^^^^^
+
+            var x = 1_234.56_78; // Noncompliant
+
+            var y = 1_234_5; // Noncompliant
         }
     }
 }

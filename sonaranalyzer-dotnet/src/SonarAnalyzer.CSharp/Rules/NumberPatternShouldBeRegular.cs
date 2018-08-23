@@ -19,6 +19,7 @@
  */
 
 using System.Collections.Immutable;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -52,39 +53,30 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     var literal = (LiteralExpressionSyntax)c.Node;
 
-                    var parts = literal.Token.Text
-                        .Split('.')[0] // Get rid of the decimal part (1_234.567 => 1_234)
-                        .Split('_');
-
-                    var previousPartLength = -1;
-                    for (var i = 1; i < parts.Length; i++)
+                    if (literal.Token.ValueText == literal.Token.Text)
                     {
-                        var currentPartLength = GetCurrentPartLength(parts[i], i == parts.Length - 1);
+                        return; // Literal doesn't contain any separator
+                    }
 
-                        if (currentPartLength != previousPartLength &&
-                            previousPartLength != -1)
-                        {
-                            c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, literal.GetLocation()));
-                            return;
-                        }
+                    var decimalParts = literal.Token.Text.Split('.');
+                    if (decimalParts.Length > 2)
+                    {
+                        return;
+                    }
 
-                        previousPartLength = currentPartLength;
+                    var hasIrregularPattern = decimalParts
+                        .SelectMany(x => x.Split('_'))
+                        .Select(x => x.Length)
+                        .Skip(1) // skip the first part (1_234 => 234)
+                        .Reverse().Skip(decimalParts.Length == 2 ? 1 : 0) // skip the last if there is a decimal (.234_5 => 234)
+                        .Distinct().Skip(1).Any(); // we expect to have only 1 size of pattern
+
+                    if (hasIrregularPattern)
+                    {
+                        c.ReportDiagnosticWhenActive(Diagnostic.Create(rule, literal.GetLocation()));
                     }
                 },
                 SyntaxKind.NumericLiteralExpression);
-        }
-
-        private int GetCurrentPartLength(string s, bool removeDecimalPart)
-        {
-            if (!removeDecimalPart)
-            {
-                return s.Length;
-            }
-
-            var dotIndex = s.IndexOf('.');
-            return dotIndex > 0
-                ? s.Remove(dotIndex).Length
-                : s.Length;
         }
     }
 }
