@@ -19,8 +19,6 @@ namespace SonarAnalyzer.ShimLayer.CSharp
         private static readonly Func<CSharpSyntaxNode, SeparatedSyntaxListWrapper<VariableDesignationSyntaxWrapper>, CSharpSyntaxNode> WithVariablesAccessor;
         private static readonly Func<CSharpSyntaxNode, SyntaxToken, CSharpSyntaxNode> WithCloseParenTokenAccessor;
 
-        private readonly CSharpSyntaxNode node;
-
         static ParenthesizedVariableDesignationSyntaxWrapper()
         {
             WrappedType = WrapperHelper.GetWrappedType(typeof(ParenthesizedVariableDesignationSyntaxWrapper));
@@ -34,10 +32,10 @@ namespace SonarAnalyzer.ShimLayer.CSharp
 
         private ParenthesizedVariableDesignationSyntaxWrapper(CSharpSyntaxNode node)
         {
-            this.node = node;
+            this.SyntaxNode = node;
         }
 
-        public CSharpSyntaxNode SyntaxNode => this.node;
+        public CSharpSyntaxNode SyntaxNode { get; }
 
         public SyntaxToken OpenParenToken
         {
@@ -85,12 +83,12 @@ namespace SonarAnalyzer.ShimLayer.CSharp
 
         public static implicit operator VariableDesignationSyntaxWrapper(ParenthesizedVariableDesignationSyntaxWrapper wrapper)
         {
-            return VariableDesignationSyntaxWrapper.FromUpcast(wrapper.node);
+            return VariableDesignationSyntaxWrapper.FromUpcast(wrapper.SyntaxNode);
         }
 
         public static implicit operator CSharpSyntaxNode(ParenthesizedVariableDesignationSyntaxWrapper wrapper)
         {
-            return wrapper.node;
+            return wrapper.SyntaxNode;
         }
 
         public static bool IsInstance(SyntaxNode node)

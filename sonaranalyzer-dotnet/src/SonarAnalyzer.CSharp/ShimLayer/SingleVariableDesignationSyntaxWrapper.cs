@@ -15,8 +15,6 @@ namespace SonarAnalyzer.ShimLayer.CSharp
         private static readonly Func<CSharpSyntaxNode, SyntaxToken> IdentifierAccessor;
         private static readonly Func<CSharpSyntaxNode, SyntaxToken, CSharpSyntaxNode> WithIdentifierAccessor;
 
-        private readonly CSharpSyntaxNode node;
-
         static SingleVariableDesignationSyntaxWrapper()
         {
             WrappedType = WrapperHelper.GetWrappedType(typeof(SingleVariableDesignationSyntaxWrapper));
@@ -26,10 +24,10 @@ namespace SonarAnalyzer.ShimLayer.CSharp
 
         private SingleVariableDesignationSyntaxWrapper(CSharpSyntaxNode node)
         {
-            this.node = node;
+            this.SyntaxNode = node;
         }
 
-        public CSharpSyntaxNode SyntaxNode => this.node;
+        public CSharpSyntaxNode SyntaxNode { get; }
 
         public SyntaxToken Identifier
         {
@@ -61,12 +59,12 @@ namespace SonarAnalyzer.ShimLayer.CSharp
 
         public static implicit operator VariableDesignationSyntaxWrapper(SingleVariableDesignationSyntaxWrapper wrapper)
         {
-            return VariableDesignationSyntaxWrapper.FromUpcast(wrapper.node);
+            return VariableDesignationSyntaxWrapper.FromUpcast(wrapper.SyntaxNode);
         }
 
         public static implicit operator CSharpSyntaxNode(SingleVariableDesignationSyntaxWrapper wrapper)
         {
-            return wrapper.node;
+            return wrapper.SyntaxNode;
         }
 
         public static bool IsInstance(SyntaxNode node)

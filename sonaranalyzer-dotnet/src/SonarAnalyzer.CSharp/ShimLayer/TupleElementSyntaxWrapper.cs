@@ -18,8 +18,6 @@ namespace SonarAnalyzer.ShimLayer.CSharp
         private static readonly Func<CSharpSyntaxNode, SyntaxToken, CSharpSyntaxNode> WithIdentifierAccessor;
         private static readonly Func<CSharpSyntaxNode, TypeSyntax, CSharpSyntaxNode> WithTypeAccessor;
 
-        private readonly CSharpSyntaxNode node;
-
         static TupleElementSyntaxWrapper()
         {
             WrappedType = WrapperHelper.GetWrappedType(typeof(TupleElementSyntaxWrapper));
@@ -31,10 +29,10 @@ namespace SonarAnalyzer.ShimLayer.CSharp
 
         private TupleElementSyntaxWrapper(CSharpSyntaxNode node)
         {
-            this.node = node;
+            this.SyntaxNode = node;
         }
 
-        public CSharpSyntaxNode SyntaxNode => this.node;
+        public CSharpSyntaxNode SyntaxNode { get; }
 
         public SyntaxToken Identifier
         {
@@ -69,7 +67,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
 
         public static implicit operator CSharpSyntaxNode(TupleElementSyntaxWrapper wrapper)
         {
-            return wrapper.node;
+            return wrapper.SyntaxNode;
         }
 
         public static bool IsInstance(SyntaxNode node)

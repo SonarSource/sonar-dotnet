@@ -18,8 +18,6 @@ namespace SonarAnalyzer.ShimLayer.CSharp
         private static readonly Func<CSharpSyntaxNode, SyntaxToken, CSharpSyntaxNode> WithWhenKeywordAccessor;
         private static readonly Func<CSharpSyntaxNode, ExpressionSyntax, CSharpSyntaxNode> WithConditionAccessor;
 
-        private readonly CSharpSyntaxNode node;
-
         static WhenClauseSyntaxWrapper()
         {
             WrappedType = WrapperHelper.GetWrappedType(typeof(WhenClauseSyntaxWrapper));
@@ -31,10 +29,10 @@ namespace SonarAnalyzer.ShimLayer.CSharp
 
         private WhenClauseSyntaxWrapper(CSharpSyntaxNode node)
         {
-            this.node = node;
+            this.SyntaxNode = node;
         }
 
-        public CSharpSyntaxNode SyntaxNode => this.node;
+        public CSharpSyntaxNode SyntaxNode { get; }
 
         public SyntaxToken WhenKeyword
         {
@@ -69,7 +67,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
 
         public static implicit operator CSharpSyntaxNode(WhenClauseSyntaxWrapper wrapper)
         {
-            return wrapper.node;
+            return wrapper.SyntaxNode;
         }
 
         public static bool IsInstance(SyntaxNode node)

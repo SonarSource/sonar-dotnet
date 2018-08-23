@@ -19,8 +19,6 @@ namespace SonarAnalyzer.ShimLayer.CSharp
         private static readonly Func<TypeSyntax, SeparatedSyntaxListWrapper<TupleElementSyntaxWrapper>, TypeSyntax> WithElementsAccessor;
         private static readonly Func<TypeSyntax, SyntaxToken, TypeSyntax> WithCloseParenTokenAccessor;
 
-        private readonly TypeSyntax node;
-
         static TupleTypeSyntaxWrapper()
         {
             WrappedType = WrapperHelper.GetWrappedType(typeof(TupleTypeSyntaxWrapper));
@@ -34,10 +32,10 @@ namespace SonarAnalyzer.ShimLayer.CSharp
 
         private TupleTypeSyntaxWrapper(TypeSyntax node)
         {
-            this.node = node;
+            this.SyntaxNode = node;
         }
 
-        public TypeSyntax SyntaxNode => this.node;
+        public TypeSyntax SyntaxNode { get; }
 
         public SyntaxToken OpenParenToken
         {
@@ -80,7 +78,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
 
         public static implicit operator TypeSyntax(TupleTypeSyntaxWrapper wrapper)
         {
-            return wrapper.node;
+            return wrapper.SyntaxNode;
         }
 
         public static bool IsInstance(SyntaxNode node)

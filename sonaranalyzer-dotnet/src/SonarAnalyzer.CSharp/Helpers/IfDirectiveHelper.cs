@@ -115,17 +115,16 @@ namespace SonarAnalyzer.Helpers
         {
             private readonly SyntaxNode terminatingNode;
             private bool found;
-            private readonly IList<DirectiveTriviaSyntax> directiveTrivia;
 
             public BranchingDirectiveCollector(SyntaxNode terminatingNode)
                 :base(SyntaxWalkerDepth.StructuredTrivia)
             {
                 this.terminatingNode = terminatingNode;
                 found = false;
-                directiveTrivia = new List<DirectiveTriviaSyntax>();
+                CollectedDirectives = new List<DirectiveTriviaSyntax>();
             }
 
-            public IList<DirectiveTriviaSyntax> CollectedDirectives => directiveTrivia;
+            public IList<DirectiveTriviaSyntax> CollectedDirectives { get; }
 
             public override void Visit(SyntaxNode node)
             {
@@ -185,7 +184,7 @@ namespace SonarAnalyzer.Helpers
             {
                 if (node.IsActive)
                 {
-                    directiveTrivia.Add(node);
+                    CollectedDirectives.Add(node);
                 }
             }
         }        
