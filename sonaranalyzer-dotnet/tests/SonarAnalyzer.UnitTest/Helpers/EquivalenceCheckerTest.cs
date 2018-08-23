@@ -66,20 +66,20 @@ namespace Test
         {
             var syntaxTree = CSharpSyntaxTree.ParseText(Source);
 
-            methods = syntaxTree.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().ToList();
+            this.methods = syntaxTree.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().ToList();
         }
 
         [TestMethod]
         public void AreEquivalent_Node()
         {
             var result = EquivalenceChecker.AreEquivalent(
-                methods.First(m => m.Identifier.ValueText == "Method1").Body,
-                methods.First(m => m.Identifier.ValueText == "Method2").Body);
+                this.methods.First(m => m.Identifier.ValueText == "Method1").Body,
+                this.methods.First(m => m.Identifier.ValueText == "Method2").Body);
             result.Should().BeTrue();
 
             result = EquivalenceChecker.AreEquivalent(
-                methods.First(m => m.Identifier.ValueText == "Method1").Body,
-                methods.First(m => m.Identifier.ValueText == "Method3").Body);
+                this.methods.First(m => m.Identifier.ValueText == "Method1").Body,
+                this.methods.First(m => m.Identifier.ValueText == "Method3").Body);
             result.Should().BeFalse();
         }
 
@@ -87,13 +87,13 @@ namespace Test
         public void AreEquivalent_List()
         {
             var result = EquivalenceChecker.AreEquivalent(
-                methods.First(m => m.Identifier.ValueText == "Method1").Body.Statements,
-                methods.First(m => m.Identifier.ValueText == "Method2").Body.Statements);
+                this.methods.First(m => m.Identifier.ValueText == "Method1").Body.Statements,
+                this.methods.First(m => m.Identifier.ValueText == "Method2").Body.Statements);
             result.Should().BeTrue();
 
             result = EquivalenceChecker.AreEquivalent(
-                methods.First(m => m.Identifier.ValueText == "Method1").Body.Statements,
-                methods.First(m => m.Identifier.ValueText == "Method3").Body.Statements);
+                this.methods.First(m => m.Identifier.ValueText == "Method1").Body.Statements,
+                this.methods.First(m => m.Identifier.ValueText == "Method3").Body.Statements);
             result.Should().BeFalse();
         }
     }

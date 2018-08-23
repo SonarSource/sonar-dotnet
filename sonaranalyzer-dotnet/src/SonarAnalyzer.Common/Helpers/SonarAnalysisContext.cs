@@ -78,13 +78,13 @@ namespace SonarAnalyzer.Helpers
 
         internal void RegisterCodeBlockStartAction<TLanguageKindEnum>(Action<CodeBlockStartAnalysisContext<TLanguageKindEnum>> action)
              where TLanguageKindEnum : struct =>
-            RegisterContextAction(context.RegisterCodeBlockStartAction, action, c => c.GetSyntaxTree(), c => c.SemanticModel.Compilation);
+            RegisterContextAction(this.context.RegisterCodeBlockStartAction, action, c => c.GetSyntaxTree(), c => c.SemanticModel.Compilation);
 
         internal void RegisterCompilationAction(Action<CompilationAnalysisContext> action) =>
-            RegisterContextAction(context.RegisterCompilationAction, action, c => c.GetSyntaxTree(), c => c.Compilation);
+            RegisterContextAction(this.context.RegisterCompilationAction, action, c => c.GetSyntaxTree(), c => c.Compilation);
 
         public void RegisterCompilationStartAction(Action<CompilationStartAnalysisContext> action) =>
-            RegisterContextAction(context.RegisterCompilationStartAction, action, c => c.GetSyntaxTree(), c => c.Compilation);
+            RegisterContextAction(this.context.RegisterCompilationStartAction, action, c => c.GetSyntaxTree(), c => c.Compilation);
 
         internal void RegisterSyntaxNodeAction<TLanguageKindEnum>(Action<SyntaxNodeAnalysisContext> action,
             ImmutableArray<TLanguageKindEnum> syntaxKinds)
@@ -94,10 +94,10 @@ namespace SonarAnalyzer.Helpers
         internal void RegisterSyntaxNodeAction<TLanguageKindEnum>(Action<SyntaxNodeAnalysisContext> action,
             params TLanguageKindEnum[] syntaxKinds)
             where TLanguageKindEnum : struct =>
-            RegisterContextAction(act => context.RegisterSyntaxNodeAction(act, syntaxKinds), action, c => c.GetSyntaxTree(), c => c.Compilation);
+            RegisterContextAction(act => this.context.RegisterSyntaxNodeAction(act, syntaxKinds), action, c => c.GetSyntaxTree(), c => c.Compilation);
 
         public void RegisterSymbolAction(Action<SymbolAnalysisContext> action, params SymbolKind[] symbolKinds) =>
-            RegisterContextAction(act => context.RegisterSymbolAction(act, symbolKinds), action, c => c.GetSyntaxTree(), c => c.Compilation);
+            RegisterContextAction(act => this.context.RegisterSymbolAction(act, symbolKinds), action, c => c.GetSyntaxTree(), c => c.Compilation);
 
         private void RegisterContextAction<TContext>(Action<Action<TContext>> registrationAction, Action<TContext> registeredAction,
             Func<TContext, SyntaxTree> getSyntaxTree, Func<TContext, Compilation> getCompilation)

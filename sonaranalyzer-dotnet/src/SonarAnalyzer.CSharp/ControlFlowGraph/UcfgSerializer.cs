@@ -58,13 +58,13 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
 
             public void Visit(string methodName, UCFG ucfg)
             {
-                writer.WriteGraphStart(methodName);
+                this.writer.WriteGraphStart(methodName);
 
-                writer.WriteNode(EntryBlockId, EntryBlockId, ucfg.Parameters.ToArray());
+                this.writer.WriteNode(EntryBlockId, EntryBlockId, ucfg.Parameters.ToArray());
 
                 foreach (var entry in ucfg.Entries)
                 {
-                    writer.WriteEdge(EntryBlockId, entry, string.Empty);
+                    this.writer.WriteEdge(EntryBlockId, entry, string.Empty);
                 }
 
                 foreach (var block in ucfg.BasicBlocks)
@@ -72,9 +72,9 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                     Visit(block);
                 }
 
-                writer.WriteNode(ExitBlockId, ExitBlockId);
+                this.writer.WriteNode(ExitBlockId, ExitBlockId);
 
-                writer.WriteGraphEnd();
+                this.writer.WriteGraphEnd();
             }
 
             private void Visit(BasicBlock block)
@@ -87,17 +87,17 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
 
                 var jumps = new[] { $"TERMINATOR {terminator}" };
 
-                writer.WriteNode(block.Id, $"BLOCK:{block.Id}", instructions.Union(jumps).ToArray());
+                this.writer.WriteNode(block.Id, $"BLOCK:{block.Id}", instructions.Union(jumps).ToArray());
                 if (block.TerminatorCase == BasicBlock.TerminatorOneofCase.Jump)
                 {
                     foreach (var destination in block.Jump.Destinations)
                     {
-                        writer.WriteEdge(block.Id, destination, string.Empty);
+                        this.writer.WriteEdge(block.Id, destination, string.Empty);
                     }
                 }
                 else
                 {
-                    writer.WriteEdge(block.Id, ExitBlockId, string.Empty);
+                    this.writer.WriteEdge(block.Id, ExitBlockId, string.Empty);
                 }
             }
 

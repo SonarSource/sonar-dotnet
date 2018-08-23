@@ -73,8 +73,8 @@ namespace SonarAnalyzer.SymbolicExecution
 
             SemanticModel = semanticModel;
 
-            declarationParameters = declaration.GetParameters();
-            nonInDeclarationParameters = declarationParameters.Where(p => p.RefKind != RefKind.None);
+            this.declarationParameters = declaration.GetParameters();
+            this.nonInDeclarationParameters = this.declarationParameters.Where(p => p.RefKind != RefKind.None);
         }
 
         public void Walk()
@@ -83,7 +83,7 @@ namespace SonarAnalyzer.SymbolicExecution
 
             EnqueueStartNode();
 
-            while (workList.Any())
+            while (this.workList.Any())
             {
                 if (steps >= MaxStepCount)
                 {
@@ -92,8 +92,8 @@ namespace SonarAnalyzer.SymbolicExecution
                 }
 
                 steps++;
-                var node = workList.Dequeue();
-                nodes.Add(node);
+                var node = this.workList.Dequeue();
+                this.nodes.Add(node);
 
                 var programPoint = node.ProgramPoint;
 
@@ -149,15 +149,15 @@ namespace SonarAnalyzer.SymbolicExecution
         internal void AddExplodedGraphCheck<T>(T check)
             where T : ExplodedGraphCheck
         {
-            var matchingCheck = explodedGraphChecks.OfType<T>().SingleOrDefault();
+            var matchingCheck = this.explodedGraphChecks.OfType<T>().SingleOrDefault();
             if (matchingCheck == null)
             {
-                explodedGraphChecks.Add(check);
+                this.explodedGraphChecks.Add(check);
             }
             else
             {
-                explodedGraphChecks.Remove(matchingCheck);
-                explodedGraphChecks.Add(check);
+                this.explodedGraphChecks.Remove(matchingCheck);
+                this.explodedGraphChecks.Add(check);
             }
         }
 
@@ -274,8 +274,8 @@ namespace SonarAnalyzer.SymbolicExecution
 
         protected ProgramState CleanStateAfterBlock(ProgramState programState, Block block)
         {
-            var liveVariables = lva.GetLiveOut(block)
-                .Union(nonInDeclarationParameters); // LVA excludes out and ref parameters
+            var liveVariables = this.lva.GetLiveOut(block)
+                .Union(this.nonInDeclarationParameters); // LVA excludes out and ref parameters
 
             // TODO: Remove the IFieldSymbol check when SLVS-1136 is fixed
             return programState.RemoveSymbols(
@@ -285,7 +285,7 @@ namespace SonarAnalyzer.SymbolicExecution
         internal bool IsSymbolTracked(ISymbol symbol)
         {
             if (symbol == null ||
-                lva.CapturedVariables.Contains(symbol)) // Captured variables are not locally scoped, they are compiled to class fields
+                this.lva.CapturedVariables.Contains(symbol)) // Captured variables are not locally scoped, they are compiled to class fields
             {
                 return false;
             }
@@ -303,7 +303,7 @@ namespace SonarAnalyzer.SymbolicExecution
 
             // Could be either ILocalSymbol or IParameterSymbol so let's use symbol
             return symbol.ContainingSymbol != null &&
-                symbol.ContainingSymbol.Equals(declaration);
+                symbol.ContainingSymbol.Equals(this.declaration);
         }
 
         protected bool IsFieldSymbol(ISymbol symbol)
@@ -311,7 +311,7 @@ namespace SonarAnalyzer.SymbolicExecution
 
             return symbol is IFieldSymbol field &&
                 (field.IsConst ||
-                declaration.ContainingType
+                this.declaration.ContainingType
                     .GetSelfAndBaseTypes()
                     .Contains(field.ContainingType));
         }
@@ -323,14 +323,14 @@ namespace SonarAnalyzer.SymbolicExecution
         private void EnqueueStartNode()
         {
             var initialProgramState = new ProgramState();
-            foreach (var parameter in declarationParameters)
+            foreach (var parameter in this.declarationParameters)
             {
                 var sv = SymbolicValue.Create(parameter.Type);
                 initialProgramState = initialProgramState.StoreSymbolicValue(parameter, sv);
                 initialProgramState = SetNonNullConstraintIfValueType(parameter, sv, initialProgramState);
             }
 
-            EnqueueNewNode(new ProgramPoint(cfg.EntryBlock), initialProgramState);
+            EnqueueNewNode(new ProgramPoint(this.cfg.EntryBlock), initialProgramState);
         }
 
         protected void EnqueueAllSuccessors(Block block, ProgramState newProgramState)
@@ -349,13 +349,13 @@ namespace SonarAnalyzer.SymbolicExecution
             }
 
             var pos = programPoint;
-            if (programPoints.ContainsKey(programPoint))
+            if (this.programPoints.ContainsKey(programPoint))
             {
-                pos = programPoints[programPoint];
+                pos = this.programPoints[programPoint];
             }
             else
             {
-                programPoints[pos] = pos;
+                this.programPoints[pos] = pos;
             }
 
             if (programState.GetVisitedCount(pos) >= MaxProgramPointExecutionCount)
@@ -365,9 +365,9 @@ namespace SonarAnalyzer.SymbolicExecution
             }
 
             var newNode = new ExplodedGraphNode(pos, programState.AddVisit(pos));
-            if (nodesAlreadyInGraph.Add(newNode))
+            if (this.nodesAlreadyInGraph.Add(newNode))
             {
-                workList.Enqueue(newNode);
+                this.workList.Enqueue(newNode);
             }
         }
 

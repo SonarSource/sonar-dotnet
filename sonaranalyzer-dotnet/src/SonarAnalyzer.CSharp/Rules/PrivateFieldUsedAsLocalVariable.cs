@@ -126,8 +126,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
             public bool IsRemovableField(IFieldSymbol fieldSymbol)
             {
-                var writesByEnclosingSymbol = writesByField.GetValueOrDefault(fieldSymbol);
-                var readsByEnclosingSymbol = readsByField.GetValueOrDefault(fieldSymbol);
+                var writesByEnclosingSymbol = this.writesByField.GetValueOrDefault(fieldSymbol);
+                var readsByEnclosingSymbol = this.readsByField.GetValueOrDefault(fieldSymbol);
 
                 // No methods overwrite the field value
                 if (writesByEnclosingSymbol == null)
@@ -180,7 +180,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         !readStatements.Contains(statement);
 
                     bool IsInvocationWithSideEffects(StatementSyntax statement) =>
-                        invocations.TryGetValue(statement, out var invocationsInStatement) &&
+                        this.invocations.TryGetValue(statement, out var invocationsInStatement) &&
                         invocationsInStatement.Any(writesByEnclosingSymbol.ContainsKey);
                 }
             }
@@ -209,10 +209,10 @@ namespace SonarAnalyzer.Rules.CSharp
                     return;
                 }
 
-                var enclosingSymbol = semanticModel.GetEnclosingSymbol(memberReference.Syntax.SpanStart);
+                var enclosingSymbol = this.semanticModel.GetEnclosingSymbol(memberReference.Syntax.SpanStart);
 
                 if (memberReference.Symbol is IFieldSymbol fieldSymbol &&
-                    privateFields.ContainsKey(fieldSymbol))
+                    this.privateFields.ContainsKey(fieldSymbol))
                 {
                     ClassifyFieldReference(enclosingSymbol, memberReference);
                 }
@@ -222,7 +222,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var statement = memberReference.Syntax.FirstAncestorOrSelf<StatementSyntax>();
                     if (statement != null)
                     {
-                        var invocationsInStatement = invocations.GetOrAdd(statement, x => new HashSet<ISymbol>());
+                        var invocationsInStatement = this.invocations.GetOrAdd(statement, x => new HashSet<ISymbol>());
                         invocationsInStatement.Add(memberReference.Symbol);
                     }
                 }
@@ -237,7 +237,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 // It is important to create the field access HashSet regardless of the statement (see the local var below)
                 // being null or not, because the rule will not be able to detect field reads from inline property
                 // or field initializers.
-                var fieldAccessInMethod = (IsWrite(fieldReference) ? writesByField : readsByField)
+                var fieldAccessInMethod = (IsWrite(fieldReference) ? this.writesByField : this.readsByField)
                     .GetOrAdd((IFieldSymbol)fieldReference.Symbol, x => new Lookup<ISymbol, StatementSyntax>())
                     .GetOrAdd(enclosingSymbol, x => new HashSet<StatementSyntax>());
 
@@ -279,17 +279,17 @@ namespace SonarAnalyzer.Rules.CSharp
                         // this.identifier or a.identifier or ((a)).identifier, but not identifier.other
                         return new SyntaxNodeWithSymbol<SyntaxNode, ISymbol>(
                             memberAccess.GetSelfOrTopParenthesizedExpression(),
-                            semanticModel.GetSymbolInfo(memberAccess).Symbol);
+                            this.semanticModel.GetSymbolInfo(memberAccess).Symbol);
                     case MemberBindingExpressionSyntax memberBinding when memberBinding.Name == identifier:
                         // this?.identifier or a?.identifier or ((a))?.identifier, but not identifier?.other
                         return new SyntaxNodeWithSymbol<SyntaxNode, ISymbol>(
                             memberBinding.Parent.GetSelfOrTopParenthesizedExpression(),
-                            semanticModel.GetSymbolInfo(memberBinding).Symbol);
+                            this.semanticModel.GetSymbolInfo(memberBinding).Symbol);
                     default:
                         // identifier or ((identifier))
                         return new SyntaxNodeWithSymbol<SyntaxNode, ISymbol>(
                             identifier.GetSelfOrTopParenthesizedExpression(),
-                            semanticModel.GetSymbolInfo(identifier).Symbol);
+                            this.semanticModel.GetSymbolInfo(identifier).Symbol);
                 }
             }
         }

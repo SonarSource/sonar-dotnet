@@ -78,8 +78,8 @@ namespace SonarAnalyzer.Rules
 
         protected LoopWalkerBase(SyntaxNodeAnalysisContext context, ISet<TLanguageKindEnum> loopStatements)
         {
-            rootExpression = context.Node;
-            lambdaOrLoopStatements = LambdaSyntaxes.Union(loopStatements).ToHashSet();
+            this.rootExpression = context.Node;
+            this.lambdaOrLoopStatements = LambdaSyntaxes.Union(loopStatements).ToHashSet();
         }
 
         public abstract void Visit();
@@ -100,10 +100,10 @@ namespace SonarAnalyzer.Rules
         {
             var ancestors = node
                 .Ancestors()
-                .TakeWhile(n => !rootExpression.Equals(n))
+                .TakeWhile(n => !this.rootExpression.Equals(n))
                 .ToList();
 
-            if (ancestors.Any(n => IsAnyKind(n, lambdaOrLoopStatements)))
+            if (ancestors.Any(n => IsAnyKind(n, this.lambdaOrLoopStatements)))
             {
                 return;
             }

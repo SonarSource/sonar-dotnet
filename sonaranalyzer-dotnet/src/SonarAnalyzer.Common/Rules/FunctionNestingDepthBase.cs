@@ -43,18 +43,18 @@ namespace SonarAnalyzer.Rules
 
             public void CheckNesting(SyntaxToken keyword, Action visitAction)
             {
-                currentDepth++;
+                this.currentDepth++;
 
-                if (currentDepth <= maximumNestingDepth)
+                if (this.currentDepth <= this.maximumNestingDepth)
                 {
                     visitAction();
                 }
                 else
                 {
-                    actionMaximumExceeded(keyword);
+                    this.actionMaximumExceeded(keyword);
                 }
 
-                currentDepth--;
+                this.currentDepth--;
             }
         }
     }

@@ -29,6 +29,6 @@ namespace SonarAnalyzer.ControlFlowGraph
         private int counter;
 
         public string Get(Block cfgBlock) =>
-            map.GetOrAdd(cfgBlock, b => $"{counter++}");
+            this.map.GetOrAdd(cfgBlock, b => $"{this.counter++}");
     }
 }

@@ -41,15 +41,15 @@ namespace SonarAnalyzer.ControlFlowGraph
         // Protected to allow extending and mocking
         protected Block()
         {
-            instructions = new Lazy<IReadOnlyList<SyntaxNode>>(() => ReversedInstructions.Reverse().ToImmutableArray());
-            predecessorBlocks = new Lazy<IReadOnlyCollection<Block>>(() => EditablePredecessorBlocks.ToImmutableHashSet());
-            allSuccessors = new Lazy<ISet<Block>>(() => GetAll(this, b => b.SuccessorBlocks));
-            allPredecessors = new Lazy<ISet<Block>>(() => GetAll(this, b => b.PredecessorBlocks));
+            this.instructions = new Lazy<IReadOnlyList<SyntaxNode>>(() => ReversedInstructions.Reverse().ToImmutableArray());
+            this.predecessorBlocks = new Lazy<IReadOnlyCollection<Block>>(() => EditablePredecessorBlocks.ToImmutableHashSet());
+            this.allSuccessors = new Lazy<ISet<Block>>(() => GetAll(this, b => b.SuccessorBlocks));
+            this.allPredecessors = new Lazy<ISet<Block>>(() => GetAll(this, b => b.PredecessorBlocks));
         }
 
-        public virtual IReadOnlyList<SyntaxNode> Instructions => instructions.Value;
+        public virtual IReadOnlyList<SyntaxNode> Instructions => this.instructions.Value;
 
-        public virtual IReadOnlyCollection<Block> PredecessorBlocks => predecessorBlocks.Value;
+        public virtual IReadOnlyCollection<Block> PredecessorBlocks => this.predecessorBlocks.Value;
 
         public virtual IReadOnlyList<Block> SuccessorBlocks { get; } = ImmutableArray.Create<Block>();
 
@@ -66,9 +66,9 @@ namespace SonarAnalyzer.ControlFlowGraph
         {
         }
 
-        public ISet<Block> AllSuccessorBlocks => allSuccessors.Value;
+        public ISet<Block> AllSuccessorBlocks => this.allSuccessors.Value;
 
-        public ISet<Block> AllPredecessorBlocks => allPredecessors.Value;
+        public ISet<Block> AllPredecessorBlocks => this.allPredecessors.Value;
 
         private static ISet<Block> GetAll(Block initial, Func<Block, IEnumerable<Block>> getNexts)
         {

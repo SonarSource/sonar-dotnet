@@ -113,20 +113,20 @@ namespace SonarAnalyzer.ControlFlowGraph
 
         protected AbstractControlFlowGraphBuilder(SyntaxNode node, SemanticModel semanticModel)
         {
-            rootNode = node ?? throw new ArgumentNullException(nameof(node));
+            this.rootNode = node ?? throw new ArgumentNullException(nameof(node));
             this.semanticModel = semanticModel ?? throw new ArgumentNullException(nameof(semanticModel));
 
-            ExitTarget.Push(CreateExitBlock());
+            this.ExitTarget.Push(CreateExitBlock());
         }
 
         protected abstract void PostProcessGraph();
 
         internal IControlFlowGraph Build()
         {
-            var entryBlock = Build(rootNode, CreateBlock(ExitTarget.Peek()));
+            var entryBlock = Build(this.rootNode, CreateBlock(this.ExitTarget.Peek()));
             PostProcessGraph();
 
-            return new ControlFlowGraph(reversedBlocks, entryBlock, (ExitBlock)ExitTarget.Pop());
+            return new ControlFlowGraph(this.reversedBlocks, entryBlock, (ExitBlock)this.ExitTarget.Pop());
         }
 
         protected abstract Block Build(SyntaxNode node, Block currentBlock);
@@ -152,7 +152,7 @@ namespace SonarAnalyzer.ControlFlowGraph
         internal T AddBlock<T>(T block)
             where T : Block
         {
-            reversedBlocks.Add(block);
+            this.reversedBlocks.Add(block);
             return block;
         }
 

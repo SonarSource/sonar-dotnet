@@ -32,7 +32,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
 
         private TupleExpressionSyntaxWrapper(ExpressionSyntax node)
         {
-            this.SyntaxNode = node;
+            SyntaxNode = node;
         }
 
         public ExpressionSyntax SyntaxNode { get; }
@@ -41,7 +41,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
         {
             get
             {
-                return OpenParenTokenAccessor(this.SyntaxNode);
+                return OpenParenTokenAccessor(SyntaxNode);
             }
         }
 
@@ -49,7 +49,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
         {
             get
             {
-                return ArgumentsAccessor(this.SyntaxNode);
+                return ArgumentsAccessor(SyntaxNode);
             }
         }
 
@@ -57,7 +57,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
         {
             get
             {
-                return CloseParenTokenAccessor(this.SyntaxNode);
+                return CloseParenTokenAccessor(SyntaxNode);
             }
         }
 
@@ -88,22 +88,22 @@ namespace SonarAnalyzer.ShimLayer.CSharp
 
         public TupleExpressionSyntaxWrapper AddArguments(params ArgumentSyntax[] items)
         {
-            return new TupleExpressionSyntaxWrapper(this.WithArguments(this.Arguments.AddRange(items)));
+            return new TupleExpressionSyntaxWrapper(WithArguments(Arguments.AddRange(items)));
         }
 
         public TupleExpressionSyntaxWrapper WithOpenParenToken(SyntaxToken openParenToken)
         {
-            return new TupleExpressionSyntaxWrapper(WithOpenParenTokenAccessor(this.SyntaxNode, openParenToken));
+            return new TupleExpressionSyntaxWrapper(WithOpenParenTokenAccessor(SyntaxNode, openParenToken));
         }
 
         public TupleExpressionSyntaxWrapper WithArguments(SeparatedSyntaxList<ArgumentSyntax> arguments)
         {
-            return new TupleExpressionSyntaxWrapper(WithArgumentsAccessor(this.SyntaxNode, arguments));
+            return new TupleExpressionSyntaxWrapper(WithArgumentsAccessor(SyntaxNode, arguments));
         }
 
         public TupleExpressionSyntaxWrapper WithCloseParenToken(SyntaxToken closeParenToken)
         {
-            return new TupleExpressionSyntaxWrapper(WithCloseParenTokenAccessor(this.SyntaxNode, closeParenToken));
+            return new TupleExpressionSyntaxWrapper(WithCloseParenTokenAccessor(SyntaxNode, closeParenToken));
         }
     }
 }

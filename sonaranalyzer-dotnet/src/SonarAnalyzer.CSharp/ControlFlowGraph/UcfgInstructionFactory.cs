@@ -80,7 +80,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             // supplies them e.g. an array creation can have an initializer that creates a new
             // object. In that case, we need to process the new object creation as part of the
             // array creation, and ignore that syntax node when the block builder supplies it later.
-            if (expressionService.IsAlreadyProcessed(syntaxNode))
+            if (this.expressionService.IsAlreadyProcessed(syntaxNode))
             {
                 return NoInstructions;
             }
@@ -103,15 +103,15 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                 // Association
                 // ========================================================================
                 case InstanceExpressionSyntax instanceExpression:
-                    expressionService.Associate(instanceExpression, UcfgExpressionService.This);
+                    this.expressionService.Associate(instanceExpression, UcfgExpressionService.This);
                     return NoInstructions;
 
                 case MemberBindingExpressionSyntax memberBinding:
-                    expressionService.Associate(memberBinding, expressionService.GetOrDefault(memberBinding.Name));
+                    this.expressionService.Associate(memberBinding, this.expressionService.GetOrDefault(memberBinding.Name));
                     return NoInstructions;
 
                 case ConditionalAccessExpressionSyntax conditionalAccess:
-                    expressionService.Associate(conditionalAccess, expressionService.GetOrDefault(conditionalAccess.WhenNotNull));
+                    this.expressionService.Associate(conditionalAccess, this.expressionService.GetOrDefault(conditionalAccess.WhenNotNull));
                     return NoInstructions;
 
                 // ========================================================================
@@ -142,8 +142,8 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                     return ProcessElementAccess(elementBinding);
 
                 case CastExpressionSyntax castExpression:
-                    return BuildIdentityCall(castExpression, expressionService.CreateVariable(),
-                        expressionService.GetOrDefault(castExpression.Expression));
+                    return BuildIdentityCall(castExpression, this.expressionService.CreateVariable(),
+                        this.expressionService.GetOrDefault(castExpression.Expression));
 
                 case InitializerExpressionSyntax initializerExpression:
                     return ProcessInitializerExpression(initializerExpression);
@@ -158,7 +158,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
         {
             // Only variable expressions can be annotated.
             // Constants (e.g. parameters of type int) cannot be annotated.
-            var targetOfAttribute = expressionService.GetOrDefault(attributeSyntax.Parent.Parent);
+            var targetOfAttribute = this.expressionService.GetOrDefault(attributeSyntax.Parent.Parent);
 
             if (targetOfAttribute == UcfgExpressionService.UnknownExpression ||
                 targetOfAttribute.ExprCase != Expression.ExprOneofCase.Var)
@@ -168,7 +168,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
 
             return NoInstructions
                 .Concat(BuildAnnotateCall(attributeSyntax, attributeCtor, targetOfAttribute))
-                .Concat(BuildAnnotationCall(attributeSyntax, targetOfAttribute, expressionService.GetOrDefault(attributeSyntax)));
+                .Concat(BuildAnnotationCall(attributeSyntax, targetOfAttribute, this.expressionService.GetOrDefault(attributeSyntax)));
         }
 
         private IEnumerable<Instruction> ApplyAsTarget(Expression expression, Instruction instruction)
@@ -214,8 +214,8 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
 
         private IEnumerable<Instruction> BuildAnnotateCall(SyntaxNode syntaxNode, IMethodSymbol attributeMethodSymbol,
             Expression target) =>
-            BuildFunctionCall(syntaxNode, UcfgBuiltInMethodId.Annotate, expressionService.CreateVariable(),
-                expressionService.CreateConstant(attributeMethodSymbol.ToUcfgMethodId()), target);
+            BuildFunctionCall(syntaxNode, UcfgBuiltInMethodId.Annotate, this.expressionService.CreateVariable(),
+                this.expressionService.CreateConstant(attributeMethodSymbol.ToUcfgMethodId()), target);
 
         private IEnumerable<Instruction> BuildAnnotationCall(SyntaxNode syntaxNode, Expression destination, Expression value) =>
             BuildFunctionCall(syntaxNode, UcfgBuiltInMethodId.Annotation, destination, value);
@@ -223,23 +223,23 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
         private IEnumerable<Instruction> BuildArrayGetCall(SyntaxNode syntaxNode, ITypeSymbol nodeTypeSymbol,
             Expression target) =>
             BuildFunctionCall(syntaxNode, UcfgBuiltInMethodId.ArrayGet,
-                expressionService.CreateVariable(), target);
+                this.expressionService.CreateVariable(), target);
 
         private IEnumerable<Instruction> BuildArraySetCall(SyntaxNode syntaxNode, Expression destination, Expression value) =>
             BuildFunctionCall(syntaxNode, UcfgBuiltInMethodId.ArraySet,
-                expressionService.CreateVariable(), destination, value);
+                this.expressionService.CreateVariable(), destination, value);
 
         private IEnumerable<Instruction> BuildConcatCall(SyntaxNode syntaxNode, Expression left, Expression right) =>
             BuildFunctionCall(syntaxNode, UcfgBuiltInMethodId.Concatenation,
-                expressionService.CreateVariable(), left, right);
+                this.expressionService.CreateVariable(), left, right);
 
         private IEnumerable<Instruction> BuildEntryPointCall(BaseMethodDeclarationSyntax baseMethodDeclarationSyntax)
         {
             var location = GetMethodIdentifierLocation();
 
             return BuildFunctionCall(baseMethodDeclarationSyntax, UcfgBuiltInMethodId.EntryPoint,
-                expressionService.CreateVariable(), location,
-                baseMethodDeclarationSyntax.ParameterList.Parameters.Select(expressionService.GetOrDefault).ToArray());
+                this.expressionService.CreateVariable(), location,
+                baseMethodDeclarationSyntax.ParameterList.Parameters.Select(this.expressionService.GetOrDefault).ToArray());
 
             Protobuf.Ucfg.Location GetMethodIdentifierLocation()
             {
@@ -263,7 +263,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
         private IEnumerable<Instruction> BuildFunctionCall(SyntaxNode syntaxNode, string signature,
             Expression destination, Protobuf.Ucfg.Location location, params Expression[] expressionList)
         {
-            expressionService.Associate(syntaxNode, destination);
+            this.expressionService.Associate(syntaxNode, destination);
             var functionCallInstruction = new Instruction
             {
                 Assigncall = new AssignCall
@@ -288,12 +288,12 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
         {
             if (target.ExprCase == Expression.ExprOneofCase.Const)
             {
-                expressionService.Associate(syntaxNode, target);
+                this.expressionService.Associate(syntaxNode, target);
                 return NoInstructions;
             }
 
             return BuildFunctionCall(syntaxNode, methodSymbol.ToUcfgMethodId(),
-                expressionService.CreateVariable(), new[] { target }.Concat(additionalArguments).ToArray());
+                this.expressionService.CreateVariable(), new[] { target }.Concat(additionalArguments).ToArray());
         }
 
         private IEnumerable<Instruction> BuildIdentityCall(SyntaxNode syntaxNode, Expression destination, Expression value) =>
@@ -303,12 +303,12 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
         {
             if (typeSymbol == null)
             {
-                expressionService.Associate(expressionSyntax, expressionService.CreateConstant());
+                this.expressionService.Associate(expressionSyntax, this.expressionService.CreateConstant());
                 return NoInstructions;
             }
 
-            var callTarget = expressionService.CreateVariable();
-            expressionService.Associate(expressionSyntax, callTarget);
+            var callTarget = this.expressionService.CreateVariable();
+            this.expressionService.Associate(expressionSyntax, callTarget);
 
             var newObjectInstruction = new Instruction
             {
@@ -334,7 +334,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
         {
             if (!(this.semanticModel.GetSymbolInfo(syntaxNode).Symbol is IMethodSymbol operatorMethodSymbol))
             {
-                expressionService.Associate(syntaxNode, expressionService.CreateConstant());
+                this.expressionService.Associate(syntaxNode, this.expressionService.CreateConstant());
                 return NoInstructions;
             }
 
@@ -351,18 +351,18 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             if (!operatorMethodSymbol.ContainingType.IsAny(UnsupportedVariableTypes))
             {
                 return BuildFunctionCall(syntaxNode, operatorMethodSymbol,
-                    expressionService.CreateClassName(operatorMethodSymbol.ContainingType), leftExpression, rightExpression);
+                    this.expressionService.CreateClassName(operatorMethodSymbol.ContainingType), leftExpression, rightExpression);
             }
 
-            expressionService.Associate(syntaxNode, expressionService.CreateConstant());
+            this.expressionService.Associate(syntaxNode, this.expressionService.CreateConstant());
             return NoInstructions;
         }
 
         private Expression CreateExpressionFromType(ISymbol symbol)
         {
             return IsConstant()
-                ? expressionService.CreateConstant()
-                : expressionService.CreateVariable(symbol.Name);
+                ? this.expressionService.CreateConstant()
+                : this.expressionService.CreateVariable(symbol.Name);
 
             bool IsConstant() =>
                 symbol == null ||
@@ -398,9 +398,9 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
 
                 expressions.Add(matchingArgument != null
                     // this is a named argument, let's retrieve its value
-                    ? expressionService.GetOrDefault(matchingArgument.Expression)
+                    ? this.expressionService.GetOrDefault(matchingArgument.Expression)
                     // argument not specified, use its default value (always constant)
-                    : expressionService.CreateConstant());
+                    : this.expressionService.CreateConstant());
             }
 
             return expressions.ToArray();
@@ -446,12 +446,12 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
         {
             if (syntaxNode is MemberAccessExpressionSyntax memberAccessExpressionSyntax)
             {
-                return expressionService.GetOrDefault(memberAccessExpressionSyntax.Expression);
+                return this.expressionService.GetOrDefault(memberAccessExpressionSyntax.Expression);
             }
 
             if (syntaxNode is ElementAccessExpressionSyntax elementAccessExpressionSyntax)
             {
-                return expressionService.GetOrDefault(elementAccessExpressionSyntax.Expression);
+                return this.expressionService.GetOrDefault(elementAccessExpressionSyntax.Expression);
             }
 
             if (syntaxNode is ElementBindingExpressionSyntax ||
@@ -460,7 +460,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                 syntaxNode.Parent is MemberBindingExpressionSyntax)
             {
                 var conditionalAccess = syntaxNode.FirstAncestorOrSelf<ConditionalAccessExpressionSyntax>();
-                return expressionService.GetOrDefault(conditionalAccess.Expression);
+                return this.expressionService.GetOrDefault(conditionalAccess.Expression);
             }
 
             if (syntaxNode.GetFirstNonParenthesizedParent()
@@ -468,7 +468,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                 assignmentExpressionSyntax.GetFirstNonParenthesizedParent()
                     is InitializerExpressionSyntax initializerExpressionSyntax)
             {
-                return expressionService.GetOrDefault(initializerExpressionSyntax.GetFirstNonParenthesizedParent());
+                return this.expressionService.GetOrDefault(initializerExpressionSyntax.GetFirstNonParenthesizedParent());
             }
 
             if (!nodeSymbol.IsStatic)
@@ -478,15 +478,15 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
 
             if (nodeSymbol is INamedTypeSymbol namedTypeSymbol)
             {
-                return expressionService.CreateClassName(namedTypeSymbol);
+                return this.expressionService.CreateClassName(namedTypeSymbol);
             }
 
-            return expressionService.CreateClassName(nodeSymbol.ContainingType);
+            return this.expressionService.CreateClassName(nodeSymbol.ContainingType);
         }
 
         private IEnumerable<Instruction> ProcessArrayCreation(ArrayCreationExpressionSyntax arrayCreationExpression)
         {
-            var typeInfo = semanticModel.GetTypeInfo(arrayCreationExpression);
+            var typeInfo = this.semanticModel.GetTypeInfo(arrayCreationExpression);
             var arrayTypeSymbol = typeInfo.Type as IArrayTypeSymbol ??
                 typeInfo.ConvertedType as IArrayTypeSymbol;
 
@@ -574,7 +574,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                 // Handle the special add assignment (+=). We decided to treat it as if it was expanded (i.e. we will handle
                 // only the add part) and let the rest of the code handle the assignment part.
                 instructions.AddRange(BuildOperatorCall(assignmentExpression, leftExpression, rightExpression));
-                rightExpression = expressionService.GetOrDefault(assignmentExpression);
+                rightExpression = this.expressionService.GetOrDefault(assignmentExpression);
                 shouldCreateLeftSide = true;
             }
 
@@ -583,23 +583,23 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             {
                 if (leftAsElementAccess != null)
                 {
-                    leftExpression = expressionService.GetOrDefault(leftAsElementAccess.Expression);
+                    leftExpression = this.expressionService.GetOrDefault(leftAsElementAccess.Expression);
                 }
                 else if (leftPartSymbol is IFieldSymbol fieldSymbol)
                 {
-                    leftExpression = expressionService.CreateFieldAccess(fieldSymbol.Name,
+                    leftExpression = this.expressionService.CreateFieldAccess(fieldSymbol.Name,
                         GetTargetExpression(assignmentExpression.Left, fieldSymbol));
                 }
                 else if (leftPartSymbol is ILocalSymbol || leftPartSymbol is IParameterSymbol)
                 {
-                    leftExpression = expressionService.CreateVariable(leftPartSymbol.Name);
+                    leftExpression = this.expressionService.CreateVariable(leftPartSymbol.Name);
                 }
                 else
                 {
-                    leftExpression = expressionService.CreateConstant();
+                    leftExpression = this.expressionService.CreateConstant();
                 }
 
-                expressionService.Associate(assignmentExpression.Left, leftExpression);
+                this.expressionService.Associate(assignmentExpression.Left, leftExpression);
             }
 
             // handle left part of the assignment
@@ -638,7 +638,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
 
             foreach (var parameter in methodSymbol.Parameters)
             {
-                expressionService.Associate(parameter.DeclaringSyntaxReferences.First().GetSyntax(),
+                this.expressionService.Associate(parameter.DeclaringSyntaxReferences.First().GetSyntax(),
                     CreateExpressionFromType(parameter));
             }
 
@@ -647,12 +647,12 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
 
         private IEnumerable<Instruction> ProcessBinaryExpression(BinaryExpressionSyntax binaryExpression)
         {
-            var leftExpression = expressionService.GetOrDefault(binaryExpression.Left);
-            var rightExpression = expressionService.GetOrDefault(binaryExpression.Right);
+            var leftExpression = this.expressionService.GetOrDefault(binaryExpression.Left);
+            var rightExpression = this.expressionService.GetOrDefault(binaryExpression.Right);
 
             if (binaryExpression.OperatorToken.IsKind(SyntaxKind.AsKeyword))
             {
-                return BuildIdentityCall(binaryExpression, expressionService.CreateVariable(), leftExpression);
+                return BuildIdentityCall(binaryExpression, this.expressionService.CreateVariable(), leftExpression);
             }
 
             return BuildOperatorCall(binaryExpression, leftExpression, rightExpression);
@@ -755,7 +755,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
         {
             if (!(this.semanticModel.GetSymbolInfo(invocationSyntax).Symbol is IMethodSymbol methodSymbol))
             {
-                expressionService.Associate(invocationSyntax, expressionService.CreateConstant());
+                this.expressionService.Associate(invocationSyntax, this.expressionService.CreateConstant());
                 return NoInstructions;
             }
 
@@ -767,17 +767,17 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                 if (unparenthesisedExpression is MemberAccessExpressionSyntax memberAccessExpression)
                 {
                     // First argument is the class name (static method call)
-                    targetExpression = expressionService.CreateClassName(methodSymbol.ContainingType);
+                    targetExpression = this.expressionService.CreateClassName(methodSymbol.ContainingType);
                     // Second argument is the left side of the invocation
-                    additionalArguments.Add(expressionService.GetOrDefault(memberAccessExpression.Expression));
+                    additionalArguments.Add(this.expressionService.GetOrDefault(memberAccessExpression.Expression));
                 }
                 else if (unparenthesisedExpression is MemberBindingExpressionSyntax memberBindingExpression)
                 {
                     var conditionalAccess = memberBindingExpression.FirstAncestorOrSelf<ConditionalAccessExpressionSyntax>();
                     // First argument is the class name (static method call)
-                    targetExpression = expressionService.CreateClassName(methodSymbol.ContainingType);
+                    targetExpression = this.expressionService.CreateClassName(methodSymbol.ContainingType);
                     // Second argument is the left side of the invocation
-                    additionalArguments.Add(expressionService.GetOrDefault(conditionalAccess.Expression));
+                    additionalArguments.Add(this.expressionService.GetOrDefault(conditionalAccess.Expression));
                 }
                 else
                 {
@@ -816,7 +816,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
 
             var expressions = GetInvocationExpressions(methodSymbol.Parameters, objectCreation.ArgumentList, instructions);
             instructions.AddRange(BuildFunctionCall(objectCreation.Type, methodSymbol,
-                expressionService.GetOrDefault(objectCreation), expressions));
+                this.expressionService.GetOrDefault(objectCreation), expressions));
 
             return instructions;
         }
@@ -835,22 +835,22 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             switch (nodeSymbol)
             {
                 case IFieldSymbol fieldSymbol:
-                    return BuildIdentityCall(syntaxNode, expressionService.CreateVariable(),
-                        expressionService.CreateFieldAccess(fieldSymbol.Name, GetTargetExpression(syntaxNode, fieldSymbol)));
+                    return BuildIdentityCall(syntaxNode, this.expressionService.CreateVariable(),
+                        this.expressionService.CreateFieldAccess(fieldSymbol.Name, GetTargetExpression(syntaxNode, fieldSymbol)));
 
                 case IPropertySymbol propertySymbol:
                     return BuildFunctionCall(syntaxNode, propertySymbol.GetMethod, GetTargetExpression(syntaxNode, propertySymbol));
 
                 case INamedTypeSymbol namedTypeSymbol:
-                    expressionService.Associate(syntaxNode, expressionService.CreateClassName(namedTypeSymbol));
+                    this.expressionService.Associate(syntaxNode, this.expressionService.CreateClassName(namedTypeSymbol));
                     break;
 
                 case ILocalSymbol localSymbol:
-                    expressionService.Associate(syntaxNode, expressionService.CreateVariable(localSymbol.Name));
+                    this.expressionService.Associate(syntaxNode, this.expressionService.CreateVariable(localSymbol.Name));
                     break;
 
                 default:
-                    expressionService.Associate(syntaxNode, CreateExpressionFromType(nodeSymbol));
+                    this.expressionService.Associate(syntaxNode, CreateExpressionFromType(nodeSymbol));
                     break;
             }
 
@@ -873,7 +873,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                 variableDeclarator.Initializer.Value is InitializerExpressionSyntax initializerExpressionSyntax &&
                 // Note: we need to use the ConvertedType here (i.e. after the implicit conversion): the Type
                 // returned is null because it isn't specified.
-                semanticModel.GetTypeInfo(initializerExpressionSyntax).ConvertedType is IArrayTypeSymbol arrayType)
+                this.semanticModel.GetTypeInfo(initializerExpressionSyntax).ConvertedType is IArrayTypeSymbol arrayType)
             {
                 instructions.AddRange(BuildNewArrayInstance(variableDeclarator.Initializer.Value, arrayType));
             }
@@ -881,7 +881,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             var initializerExpression = GetOrProcessExpression(variableDeclarator.Initializer.Value, instructions);
 
             instructions.AddRange(BuildIdentityCall(variableDeclarator,
-               expressionService.CreateVariable(variableDeclarator.Identifier.Text), initializerExpression));
+               this.expressionService.CreateVariable(variableDeclarator.Identifier.Text), initializerExpression));
 
             return instructions;
         }
@@ -890,7 +890,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
         {
             if (expression.ExprCase == Expression.ExprOneofCase.FieldAccess)
             {
-                var newVariable = expressionService.CreateVariable();
+                var newVariable = this.expressionService.CreateVariable();
                 instructions.AddRange(BuildIdentityCall(node, newVariable, expression));
                 return newVariable;
             }
@@ -901,7 +901,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
         private Expression GetOrProcessExpression(SyntaxNode syntaxNode, List<Instruction> additionalInstructions)
         {
             additionalInstructions.AddRange(CreateFrom(syntaxNode));
-            return expressionService.GetOrDefault(syntaxNode);
+            return this.expressionService.GetOrDefault(syntaxNode);
         }
     }
 }

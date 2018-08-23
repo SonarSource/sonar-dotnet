@@ -41,7 +41,7 @@ namespace SonarAnalyzer.Utilities
 
         public RuleFinder()
         {
-            diagnosticAnalyzers = PackagedRuleAssemblies
+            this.diagnosticAnalyzers = PackagedRuleAssemblies
                 .SelectMany(assembly => assembly.GetTypes())
                 .Where(t => t.IsSubclassOf(typeof(DiagnosticAnalyzer)))
                 .Where(t => t.GetCustomAttributes<RuleAttribute>().Any())
@@ -50,7 +50,7 @@ namespace SonarAnalyzer.Utilities
 
         public IEnumerable<Type> GetParameterlessAnalyzerTypes(AnalyzerLanguage language)
         {
-            return diagnosticAnalyzers
+            return this.diagnosticAnalyzers
                 .Where(analyzerType => !IsParameterized(analyzerType))
                 .Where(type => GetTargetLanguages(type).IsAlso(language));
         }
@@ -63,12 +63,12 @@ namespace SonarAnalyzer.Utilities
 
         public IEnumerable<Type> GetAllAnalyzerTypes()
         {
-            return diagnosticAnalyzers;
+            return this.diagnosticAnalyzers;
         }
 
         public IEnumerable<Type> GetAnalyzerTypes(AnalyzerLanguage language)
         {
-            return diagnosticAnalyzers
+            return this.diagnosticAnalyzers
                 .Where(type => GetTargetLanguages(type).IsAlso(language));
         }
 

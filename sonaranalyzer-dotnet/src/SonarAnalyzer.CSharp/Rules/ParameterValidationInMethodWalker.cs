@@ -40,7 +40,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private readonly SemanticModel semanticModel;
         private readonly List<Location> argumentExceptionLocations = new List<Location>();
 
-        public IEnumerable<Location> ArgumentExceptionLocations => argumentExceptionLocations;
+        public IEnumerable<Location> ArgumentExceptionLocations => this.argumentExceptionLocations;
 
         public ParameterValidationInMethodWalker(SemanticModel semanticModel)
         {
@@ -60,10 +60,10 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             // When throw is like `throw new XXX` where XXX derives from ArgumentException, save location
             if (node.Expression is ObjectCreationExpressionSyntax oces &&
-                semanticModel.GetSymbolInfo(oces.Type).Symbol?.OriginalDefinition is ITypeSymbol typeSymbol &&
+                this.semanticModel.GetSymbolInfo(oces.Type).Symbol?.OriginalDefinition is ITypeSymbol typeSymbol &&
                 typeSymbol.DerivesFrom(KnownType.System_ArgumentException))
             {
-                argumentExceptionLocations.Add(oces.GetLocation());
+                this.argumentExceptionLocations.Add(oces.GetLocation());
             }
 
             base.VisitThrowStatement(node);

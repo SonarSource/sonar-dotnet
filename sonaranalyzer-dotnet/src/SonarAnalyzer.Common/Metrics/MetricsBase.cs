@@ -38,7 +38,7 @@ namespace SonarAnalyzer.Common
 
         #region LinesOfCode
 
-        public int LineCount => tree.GetText().Lines.Count;
+        public int LineCount => this.tree.GetText().Lines.Count;
 
         public abstract ICollection<int> ExecutableLines { get; }
 
@@ -46,7 +46,7 @@ namespace SonarAnalyzer.Common
         {
             get
             {
-                return tree.GetRoot()
+                return this.tree.GetRoot()
                     .DescendantTokens()
                     .Where(token => !IsEndOfFile(token))
                     .SelectMany(
@@ -73,7 +73,7 @@ namespace SonarAnalyzer.Common
             var noSonar = new HashSet<int>();
             var nonBlank = new HashSet<int>();
 
-            var trivias = tree.GetRoot().DescendantTrivia();
+            var trivias = this.tree.GetRoot().DescendantTrivia();
 
             foreach (var trivia in trivias)
             {
@@ -83,7 +83,7 @@ namespace SonarAnalyzer.Common
                     continue;
                 }
 
-                var lineNumber = tree
+                var lineNumber = this.tree
                     .GetLineSpan(trivia.FullSpan)
                     .StartLinePosition
                     .Line + 1;
@@ -138,13 +138,13 @@ namespace SonarAnalyzer.Common
 
         public int ClassCount => ClassNodes.Count();
 
-        public IEnumerable<SyntaxNode> ClassNodes => tree.GetRoot().DescendantNodes().Where(IsClass);
+        public IEnumerable<SyntaxNode> ClassNodes => this.tree.GetRoot().DescendantNodes().Where(IsClass);
 
-        public int StatementCount => tree.GetRoot().DescendantNodes().Count(IsStatement);
+        public int StatementCount => this.tree.GetRoot().DescendantNodes().Count(IsStatement);
 
         public int FunctionCount => FunctionNodes.Count();
 
-        public IEnumerable<SyntaxNode> FunctionNodes => tree.GetRoot().DescendantNodes().Where(IsFunction);
+        public IEnumerable<SyntaxNode> FunctionNodes => this.tree.GetRoot().DescendantNodes().Where(IsFunction);
 
         #endregion Classes, Accessors, Functions, Statements
 
@@ -160,9 +160,9 @@ namespace SonarAnalyzer.Common
 
         #region Complexity
 
-        public int Complexity => GetComplexity(tree.GetRoot());
+        public int Complexity => GetComplexity(this.tree.GetRoot());
 
-        public int CognitiveComplexity => GetCognitiveComplexity(tree.GetRoot());
+        public int CognitiveComplexity => GetCognitiveComplexity(this.tree.GetRoot());
 
         public abstract int GetComplexity(SyntaxNode node);
 

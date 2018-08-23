@@ -75,12 +75,12 @@ namespace SonarAnalyzer.Helpers
 
         public bool TryGetParameterSymbol(ArgumentSyntax argument, out IParameterSymbol parameter)
         {
-            return TryGetParameterSymbol(argument, argumentList, MethodSymbol, out parameter);
+            return TryGetParameterSymbol(argument, this.argumentList, MethodSymbol, out parameter);
         }
 
         internal IEnumerable<ArgumentParameterMapping> GetAllArgumentParameterMappings()
         {
-            foreach (var argument in argumentList.Arguments)
+            foreach (var argument in this.argumentList.Arguments)
             {
                 if (TryGetParameterSymbol(argument, out var parameter))
                 {

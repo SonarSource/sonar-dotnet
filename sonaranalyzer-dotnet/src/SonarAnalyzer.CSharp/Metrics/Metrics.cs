@@ -77,8 +77,8 @@ namespace SonarAnalyzer.Metrics.CSharp
         {
             get
             {
-                var walker = new ExecutableLinesWalker(semanticModel);
-                walker.Visit(tree.GetRoot());
+                var walker = new ExecutableLinesWalker(this.semanticModel);
+                walker.Visit(this.tree.GetRoot());
                 return walker.ExecutableLines;
             }
         }
@@ -141,7 +141,7 @@ namespace SonarAnalyzer.Metrics.CSharp
         {
             get
             {
-                var root = tree.GetRoot();
+                var root = this.tree.GetRoot();
                 var publicNodes = ImmutableArray.CreateBuilder<SyntaxNode>();
                 var toVisit = new Stack<SyntaxNode>();
 

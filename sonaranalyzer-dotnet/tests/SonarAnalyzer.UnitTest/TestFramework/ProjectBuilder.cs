@@ -43,11 +43,11 @@ namespace SonarAnalyzer.UnitTest.TestFramework
             Project = project;
             FileExtension = project.Language == LanguageNames.CSharp ? ".cs" : ".vb";
 
-            solutionWrapper = new Lazy<SolutionBuilder>(() => SolutionBuilder.FromSolution(project.Solution));
+            this.solutionWrapper = new Lazy<SolutionBuilder>(() => SolutionBuilder.FromSolution(project.Solution));
         }
 
         public SolutionBuilder GetSolution() =>
-            solutionWrapper.Value;
+            this.solutionWrapper.Value;
 
         public Compilation GetCompilation(ParseOptions parseOptions = null) =>
             parseOptions != null

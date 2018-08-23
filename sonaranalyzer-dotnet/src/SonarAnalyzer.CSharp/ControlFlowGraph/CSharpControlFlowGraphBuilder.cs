@@ -50,7 +50,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
 
         protected override void PostProcessGraph()
         {
-            FixJumps(GotoJumpBlocks, LabeledStatements.ToDictionary(e => e.Key, e => (Block)e.Value));
+            FixJumps(this.GotoJumpBlocks, this.LabeledStatements.ToDictionary(e => e.Key, e => (Block)e.Value));
         }
 
         private void FixJumps<TLabel>(Dictionary<TLabel, List<JumpBlock>> jumpsToFix,
@@ -65,7 +65,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
 
                 foreach (var jumpBlock in jumpToFix.Value)
                 {
-                    reversedBlocks.Remove(jumpBlock.SuccessorBlock);
+                    this.reversedBlocks.Remove(jumpBlock.SuccessorBlock);
                     jumpBlock.SuccessorBlock = collectedJumpTargets[jumpToFix.Key];
                 }
             }
@@ -480,7 +480,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             var statementBlock = BuildStatement(labeledStatement.Statement, currentBlock);
             var jumpBlock = CreateJumpBlock(labeledStatement, statementBlock);
 
-            LabeledStatements[labeledStatement.Identifier.ValueText] = jumpBlock;
+            this.LabeledStatements[labeledStatement.Identifier.ValueText] = jumpBlock;
 
             return CreateBlock(jumpBlock);
         }
@@ -497,7 +497,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                 catchSuccessor = BuildBlock(tryStatement.Finally.Block, CreateBlock(catchSuccessor));
 
                 // Wire another finally block to the exit target stack in case we have a return inside the try/catch block
-                ExitTarget.Push(BuildBlock(tryStatement.Finally.Block, CreateBlock(ExitTarget.Peek())));
+                this.ExitTarget.Push(BuildBlock(tryStatement.Finally.Block, CreateBlock(this.ExitTarget.Peek())));
             }
 
             var catchBlocks = tryStatement.Catches
@@ -524,7 +524,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             tryEndStatementConnections.Add(catchSuccessor); // happy path, no exceptions thrown
             if (!areAllExceptionsCaught) // unexpected exception thrown, go to exit (through finally if present)
             {
-                tryEndStatementConnections.Add(ExitTarget.Peek());
+                tryEndStatementConnections.Add(this.ExitTarget.Peek());
             }
 
             var tryBody = BuildBlock(tryStatement.Block,
@@ -535,14 +535,14 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
 
             if (!areAllExceptionsCaught) // unexpected exception thrown, go to exit (through finally if present)
             {
-                tryStartStatementConnections.Add(ExitTarget.Peek());
+                tryStartStatementConnections.Add(this.ExitTarget.Peek());
             }
 
             var tryStartBlock = CreateBranchBlock(tryStatement, tryStartStatementConnections.Distinct());
 
             if (hasFinally)
             {
-                ExitTarget.Pop();
+                this.ExitTarget.Pop();
             }
 
             return tryStartBlock;
@@ -550,14 +550,14 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
 
         private Block BuildGotoDefaultStatement(GotoStatementSyntax statement, Block currentBlock)
         {
-            if (SwitchGotoJumpBlocks.Count == 0)
+            if (this.SwitchGotoJumpBlocks.Count == 0)
             {
                 throw new InvalidOperationException("goto default; outside a switch");
             }
 
             var jumpBlock = CreateJumpBlock(statement, CreateTemporaryBlock(), currentBlock);
 
-            var currentJumpBlocks = SwitchGotoJumpBlocks.Peek();
+            var currentJumpBlocks = this.SwitchGotoJumpBlocks.Peek();
             if (!currentJumpBlocks.ContainsKey(GotoDefaultEntry))
             {
                 currentJumpBlocks.Add(GotoDefaultEntry, new List<JumpBlock>());
@@ -570,13 +570,13 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
 
         private Block BuildGotoCaseStatement(GotoStatementSyntax statement, Block currentBlock)
         {
-            if (SwitchGotoJumpBlocks.Count == 0)
+            if (this.SwitchGotoJumpBlocks.Count == 0)
             {
                 throw new InvalidOperationException("goto case; outside a switch");
             }
 
             var jumpBlock = CreateJumpBlock(statement, CreateTemporaryBlock(), currentBlock);
-            var currentJumpBlocks = SwitchGotoJumpBlocks.Peek();
+            var currentJumpBlocks = this.SwitchGotoJumpBlocks.Peek();
             var indexer = GetCaseIndexer(statement.Expression);
 
             if (!currentJumpBlocks.ContainsKey(indexer))
@@ -598,12 +598,12 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                 throw new InvalidOperationException("goto with no identifier");
             }
 
-            if (!GotoJumpBlocks.ContainsKey(identifier.Identifier.ValueText))
+            if (!this.GotoJumpBlocks.ContainsKey(identifier.Identifier.ValueText))
             {
-                GotoJumpBlocks.Add(identifier.Identifier.ValueText, new List<JumpBlock>());
+                this.GotoJumpBlocks.Add(identifier.Identifier.ValueText, new List<JumpBlock>());
             }
 
-            GotoJumpBlocks[identifier.Identifier.ValueText].Add(jumpBlock);
+            this.GotoJumpBlocks[identifier.Identifier.ValueText].Add(jumpBlock);
 
             return jumpBlock;
         }
@@ -617,8 +617,8 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             var caseBlocks = new List<Block>();
             var caseBlocksByValue = new Dictionary<object, Block>();
 
-            BreakTarget.Push(currentBlock);
-            SwitchGotoJumpBlocks.Push(new Dictionary<object, List<JumpBlock>>());
+            this.BreakTarget.Push(currentBlock);
+            this.SwitchGotoJumpBlocks.Push(new Dictionary<object, List<JumpBlock>>());
 
             foreach (var section in switchStatement.Sections)
             {
@@ -646,8 +646,8 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                 caseBlocks.AddRange(blocks.Reverse<Block>());
             }
 
-            BreakTarget.Pop();
-            var gotosToFix = SwitchGotoJumpBlocks.Pop();
+            this.BreakTarget.Pop();
+            var gotosToFix = this.SwitchGotoJumpBlocks.Pop();
             FixJumps(gotosToFix, caseBlocksByValue);
 
             if (!caseBlocksByValue.ContainsKey(GotoDefaultEntry))
@@ -661,7 +661,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
 
         private object GetCaseIndexer(ExpressionSyntax expression)
         {
-            var constValue = semanticModel.GetConstantValue(expression);
+            var constValue = this.semanticModel.GetConstantValue(expression);
             if (!constValue.HasValue)
             {
                 throw new InvalidOperationException("Expression has no constant value");
@@ -682,23 +682,23 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
 
         private Block BuildBreakStatement(BreakStatementSyntax breakStatement, Block currentBlock)
         {
-            if (BreakTarget.Count == 0)
+            if (this.BreakTarget.Count == 0)
             {
                 throw new InvalidOperationException("break; outside a loop");
             }
 
-            var target = BreakTarget.Peek();
+            var target = this.BreakTarget.Peek();
             return CreateJumpBlock(breakStatement, target, currentBlock);
         }
 
         private Block BuildContinueStatement(ContinueStatementSyntax continueStatement, Block currentBlock)
         {
-            if (ContinueTargets.Count == 0)
+            if (this.ContinueTargets.Count == 0)
             {
                 throw new InvalidOperationException("continue; outside a loop");
             }
 
-            var target = ContinueTargets.Peek();
+            var target = this.ContinueTargets.Peek();
             return CreateJumpBlock(continueStatement, target, currentBlock);
         }
 
@@ -724,7 +724,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
 
         private Block BuildJumpToExitStatement(StatementSyntax statement, Block currentBlock, ExpressionSyntax expression = null)
         {
-            return BuildExpression(expression, CreateJumpBlock(statement, ExitTarget.Peek(), currentBlock));
+            return BuildExpression(expression, CreateJumpBlock(statement, this.ExitTarget.Peek(), currentBlock));
         }
 
         #endregion Build jumps: break, continue, return, throw, yield break
@@ -777,14 +777,14 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
 
             var conditionBlock = BuildCondition(doStatement.Condition, conditionBlockTemp, currentBlock); // A
 
-            BreakTarget.Push(currentBlock);
-            ContinueTargets.Push(conditionBlock);
+            this.BreakTarget.Push(currentBlock);
+            this.ContinueTargets.Push(conditionBlock);
 
             var loopBody = BuildStatement(doStatement.Statement, CreateBlock(conditionBlock)); // B
             conditionBlockTemp.SuccessorBlock = loopBody;
 
-            BreakTarget.Pop();
-            ContinueTargets.Pop();
+            this.BreakTarget.Pop();
+            this.ContinueTargets.Pop();
 
             return CreateBlock(loopBody);
         }
@@ -797,13 +797,13 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
 
             var incrementorBlock = BuildExpressions(forStatement.Incrementors, CreateBlock(tempLoopBlock)); // C
 
-            BreakTarget.Push(currentBlock);
-            ContinueTargets.Push(incrementorBlock);
+            this.BreakTarget.Push(currentBlock);
+            this.ContinueTargets.Push(incrementorBlock);
 
             var forBlock = BuildStatement(forStatement.Statement, CreateBlock(incrementorBlock)); // D
 
-            BreakTarget.Pop();
-            ContinueTargets.Pop();
+            this.BreakTarget.Pop();
+            this.ContinueTargets.Pop();
 
             var conditionBlock = BuildExpression(forStatement.Condition,
                 CreateBinaryBranchBlock(forStatement, forBlock, currentBlock)); // B
@@ -824,13 +824,13 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
         {
             var temp = CreateTemporaryBlock();
 
-            BreakTarget.Push(currentBlock);
-            ContinueTargets.Push(temp);
+            this.BreakTarget.Push(currentBlock);
+            this.ContinueTargets.Push(temp);
 
             var foreachBlock = BuildStatement(foreachStatement.Statement, CreateBlock(temp));
 
-            BreakTarget.Pop();
-            ContinueTargets.Pop();
+            this.BreakTarget.Pop();
+            this.ContinueTargets.Pop();
 
             // Variable declaration in a foreach statement is not a VariableDeclarator, otherwise it would be added here.
             temp.SuccessorBlock = CreateBinaryBranchBlock(foreachStatement, foreachBlock, currentBlock);
@@ -843,13 +843,13 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
         {
             var loopTempBlock = CreateTemporaryBlock();
 
-            BreakTarget.Push(currentBlock);
-            ContinueTargets.Push(loopTempBlock);
+            this.BreakTarget.Push(currentBlock);
+            this.ContinueTargets.Push(loopTempBlock);
 
             var bodyBlock = BuildStatement(whileStatement.Statement, CreateBlock(loopTempBlock));
 
-            BreakTarget.Pop();
-            ContinueTargets.Pop();
+            this.BreakTarget.Pop();
+            this.ContinueTargets.Pop();
 
             var loopCondition = BuildCondition(whileStatement.Condition, bodyBlock, currentBlock);
 
@@ -1004,7 +1004,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
             // The nameof arguments are not evaluated at runtime and should not be added
             // to the block as instructions
             var isNameof = parent is InvocationExpressionSyntax invocation
-                && invocation.IsNameof(semanticModel);
+                && invocation.IsNameof(this.semanticModel);
 
             return children == null || isNameof
                 ? currentBlock

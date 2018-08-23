@@ -401,8 +401,8 @@ namespace SonarAnalyzer.Rules.CSharp
             public override string ToString()
             {
                 return AdditionalData == null
-                    ? message
-                    : string.Concat(message, AdditionalData.ToSentence(quoteWords: true), ".");
+                    ? this.message
+                    : string.Concat(this.message, AdditionalData.ToSentence(quoteWords: true), ".");
             }
         }
 

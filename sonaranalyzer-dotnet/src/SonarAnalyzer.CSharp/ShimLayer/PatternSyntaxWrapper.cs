@@ -19,7 +19,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
 
         private PatternSyntaxWrapper(CSharpSyntaxNode node)
         {
-            this.SyntaxNode = node;
+            SyntaxNode = node;
         }
 
         public CSharpSyntaxNode SyntaxNode { get; }

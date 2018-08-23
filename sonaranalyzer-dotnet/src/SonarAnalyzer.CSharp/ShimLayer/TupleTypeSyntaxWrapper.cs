@@ -32,7 +32,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
 
         private TupleTypeSyntaxWrapper(TypeSyntax node)
         {
-            this.SyntaxNode = node;
+            SyntaxNode = node;
         }
 
         public TypeSyntax SyntaxNode { get; }
@@ -41,7 +41,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
         {
             get
             {
-                return OpenParenTokenAccessor(this.SyntaxNode);
+                return OpenParenTokenAccessor(SyntaxNode);
             }
         }
 
@@ -49,7 +49,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
         {
             get
             {
-                return ElementsAccessor(this.SyntaxNode);
+                return ElementsAccessor(SyntaxNode);
             }
         }
 
@@ -57,7 +57,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
         {
             get
             {
-                return CloseParenTokenAccessor(this.SyntaxNode);
+                return CloseParenTokenAccessor(SyntaxNode);
             }
         }
 
@@ -88,22 +88,22 @@ namespace SonarAnalyzer.ShimLayer.CSharp
 
         public TupleTypeSyntaxWrapper AddElements(params TupleElementSyntaxWrapper[] items)
         {
-            return new TupleTypeSyntaxWrapper(this.WithElements(this.Elements.AddRange(items)));
+            return new TupleTypeSyntaxWrapper(WithElements(Elements.AddRange(items)));
         }
 
         public TupleTypeSyntaxWrapper WithOpenParenToken(SyntaxToken openParenToken)
         {
-            return new TupleTypeSyntaxWrapper(WithOpenParenTokenAccessor(this.SyntaxNode, openParenToken));
+            return new TupleTypeSyntaxWrapper(WithOpenParenTokenAccessor(SyntaxNode, openParenToken));
         }
 
         public TupleTypeSyntaxWrapper WithElements(SeparatedSyntaxListWrapper<TupleElementSyntaxWrapper> elements)
         {
-            return new TupleTypeSyntaxWrapper(WithElementsAccessor(this.SyntaxNode, elements));
+            return new TupleTypeSyntaxWrapper(WithElementsAccessor(SyntaxNode, elements));
         }
 
         public TupleTypeSyntaxWrapper WithCloseParenToken(SyntaxToken closeParenToken)
         {
-            return new TupleTypeSyntaxWrapper(WithCloseParenTokenAccessor(this.SyntaxNode, closeParenToken));
+            return new TupleTypeSyntaxWrapper(WithCloseParenTokenAccessor(SyntaxNode, closeParenToken));
         }
     }
 }

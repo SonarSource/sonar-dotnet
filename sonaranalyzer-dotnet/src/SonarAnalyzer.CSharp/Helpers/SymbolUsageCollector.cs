@@ -61,7 +61,7 @@ namespace SonarAnalyzer.Helpers
 
         public override void VisitAttribute(AttributeSyntax node)
         {
-            var semanticModel = getSemanticModel(node);
+            var semanticModel = this.getSemanticModel(node);
             var symbol = semanticModel.GetSymbolInfo(node).Symbol;
             if (symbol != null &&
                 symbol.ContainingType.Is(KnownType.System_Diagnostics_DebuggerDisplayAttribute) &&
@@ -182,7 +182,7 @@ namespace SonarAnalyzer.Helpers
             where TSyntaxNode : SyntaxNode
         {
             return condition(node)
-                ? GetCandidateSymbols(getSemanticModel(node).GetSymbolInfo(node))
+                ? GetCandidateSymbols(this.getSemanticModel(node).GetSymbolInfo(node))
                 : Enumerable.Empty<ISymbol>();
 
             IEnumerable<ISymbol> GetCandidateSymbols(SymbolInfo symbolInfo)
@@ -251,7 +251,7 @@ namespace SonarAnalyzer.Helpers
             }
 
             // nameof(Prop) --> get/set
-            if (node.IsInNameofCall(getSemanticModel(node)))
+            if (node.IsInNameofCall(this.getSemanticModel(node)))
             {
                 return AccessorAccess.Both;
             }
@@ -280,9 +280,9 @@ namespace SonarAnalyzer.Helpers
         }
 
         private bool IsKnownIdentifier(SimpleNameSyntax nameSyntax) =>
-            knownSymbolNames.Contains(nameSyntax.Identifier.ValueText);
+            this.knownSymbolNames.Contains(nameSyntax.Identifier.ValueText);
 
         private ISymbol GetDeclaredSymbol(SyntaxNode syntaxNode) =>
-            getSemanticModel(syntaxNode).GetDeclaredSymbol(syntaxNode);
+            this.getSemanticModel(syntaxNode).GetDeclaredSymbol(syntaxNode);
     }
 }

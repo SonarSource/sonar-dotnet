@@ -30,23 +30,23 @@ namespace SonarAnalyzer.Common
 
         public void Add(TA a, TB b)
         {
-            if (aToB.ContainsKey(a) || bToA.ContainsKey(b))
+            if (this.aToB.ContainsKey(a) || this.bToA.ContainsKey(b))
             {
                 throw new ArgumentException("An element with the same key already exists in the BidirectionalDictionary");
             }
 
-            aToB.Add(a, b);
-            bToA.Add(b, a);
+            this.aToB.Add(a, b);
+            this.bToA.Add(b, a);
         }
 
         public TB GetByA(TA a)
         {
-            return aToB[a];
+            return this.aToB[a];
         }
 
         public TA GetByB(TB b)
         {
-            return bToA[b];
+            return this.bToA[b];
         }
     }
 }

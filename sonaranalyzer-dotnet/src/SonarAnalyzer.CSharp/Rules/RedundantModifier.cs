@@ -316,13 +316,13 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 if (context.Node is CheckedStatementSyntax statement)
                 {
-                    isCurrentContextChecked = statement.IsKind(SyntaxKind.CheckedStatement);
+                    this.isCurrentContextChecked = statement.IsKind(SyntaxKind.CheckedStatement);
                     return;
                 }
 
                 if (context.Node is CheckedExpressionSyntax expression)
                 {
-                    isCurrentContextChecked = expression.IsKind(SyntaxKind.CheckedExpression);
+                    this.isCurrentContextChecked = expression.IsKind(SyntaxKind.CheckedExpression);
                     return;
                 }
 
@@ -381,44 +381,44 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 var isThisNodeChecked = node.IsKind(checkedKind);
 
-                var originalIsCurrentContextChecked = isCurrentContextChecked;
-                var originalContextHasIntegralOperation = currentContextHasIntegralOperation;
+                var originalIsCurrentContextChecked = this.isCurrentContextChecked;
+                var originalContextHasIntegralOperation = this.currentContextHasIntegralOperation;
 
-                isCurrentContextChecked = isThisNodeChecked;
-                currentContextHasIntegralOperation = false;
+                this.isCurrentContextChecked = isThisNodeChecked;
+                this.currentContextHasIntegralOperation = false;
 
                 baseCall(node);
 
                 var isSimplyRendundant = IsCurrentNodeEmbeddedInsideSameChecked(node, isThisNodeChecked, originalIsCurrentContextChecked);
 
-                if (isSimplyRendundant || !currentContextHasIntegralOperation)
+                if (isSimplyRendundant || !this.currentContextHasIntegralOperation)
                 {
                     var keywordToReport = isThisNodeChecked ? "checked" : "unchecked";
-                    context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, tokenToReport.GetLocation(), keywordToReport, "redundant"));
+                    this.context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, tokenToReport.GetLocation(), keywordToReport, "redundant"));
                 }
 
-                isCurrentContextChecked = originalIsCurrentContextChecked;
-                currentContextHasIntegralOperation = originalContextHasIntegralOperation ||
-                    currentContextHasIntegralOperation && isSimplyRendundant;
+                this.isCurrentContextChecked = originalIsCurrentContextChecked;
+                this.currentContextHasIntegralOperation = originalContextHasIntegralOperation ||
+                    this.currentContextHasIntegralOperation && isSimplyRendundant;
             }
 
             private bool IsCurrentNodeEmbeddedInsideSameChecked(SyntaxNode node, bool isThisNodeChecked, bool isCurrentContextChecked)
             {
-                return node != context.Node &&
+                return node != this.context.Node &&
                     isThisNodeChecked == isCurrentContextChecked;
             }
 
             private void SetHasIntegralOperation(CastExpressionSyntax node)
             {
-                var expressionType = context.SemanticModel.GetTypeInfo(node.Expression).Type;
-                var castedToType = context.SemanticModel.GetTypeInfo(node.Type).Type;
-                currentContextHasIntegralOperation |= castedToType != null && expressionType != null && castedToType.IsAny(KnownType.IntegralNumbers);
+                var expressionType = this.context.SemanticModel.GetTypeInfo(node.Expression).Type;
+                var castedToType = this.context.SemanticModel.GetTypeInfo(node.Type).Type;
+                this.currentContextHasIntegralOperation |= castedToType != null && expressionType != null && castedToType.IsAny(KnownType.IntegralNumbers);
             }
 
             private void SetHasIntegralOperation(ExpressionSyntax node)
             {
-                var methodSymbol = context.SemanticModel.GetSymbolInfo(node).Symbol as IMethodSymbol;
-                currentContextHasIntegralOperation |= methodSymbol != null && methodSymbol.ReceiverType.IsAny(KnownType.IntegralNumbers);
+                var methodSymbol = this.context.SemanticModel.GetSymbolInfo(node).Symbol as IMethodSymbol;
+                this.currentContextHasIntegralOperation |= methodSymbol != null && methodSymbol.ReceiverType.IsAny(KnownType.IntegralNumbers);
             }
 
             private static readonly ISet<SyntaxKind> BinaryOperationsForChecked = new HashSet<SyntaxKind>

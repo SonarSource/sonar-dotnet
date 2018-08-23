@@ -131,26 +131,26 @@ namespace SonarAnalyzer.Rules.CSharp
 
             private ProgramState ProcessCastAccess(ProgramState programState, CastExpressionSyntax castExpression)
             {
-                var typeExpression = semanticModel.GetTypeInfo(castExpression.Expression).Type;
+                var typeExpression = this.semanticModel.GetTypeInfo(castExpression.Expression).Type;
                 if (typeExpression == null ||
                     !typeExpression.OriginalDefinition.Is(KnownType.System_Nullable_T))
                 {
                     return programState;
                 }
 
-                var type = semanticModel.GetTypeInfo(castExpression.Type).Type;
+                var type = this.semanticModel.GetTypeInfo(castExpression.Type).Type;
 
                 if (type == null ||
                     type.OriginalDefinition.Is(KnownType.System_Nullable_T) ||
-                    !semanticModel.Compilation.ClassifyConversion(typeExpression, type).IsNullable ||
+                    !this.semanticModel.Compilation.ClassifyConversion(typeExpression, type).IsNullable ||
                     !programState.HasConstraint(programState.PeekValue(), ObjectConstraint.Null))
                 {
                     return programState;
                 }
 
-                if (!context.Equals(default(SyntaxNodeAnalysisContext)))
+                if (!this.context.Equals(default(SyntaxNodeAnalysisContext)))
                 {
-                    context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, castExpression.GetLocation(), MessageDefinite));
+                    this.context.ReportDiagnosticWhenActive(Diagnostic.Create(rule, castExpression.GetLocation(), MessageDefinite));
                 }
 
                 return null;

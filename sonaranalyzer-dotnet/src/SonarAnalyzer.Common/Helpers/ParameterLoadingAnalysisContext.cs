@@ -32,7 +32,7 @@ namespace SonarAnalyzer.Helpers
         private readonly ICollection<Action<CompilationStartAnalysisContext>> compilationStartActions =
             new List<Action<CompilationStartAnalysisContext>>();
 
-        internal IEnumerable<Action<CompilationStartAnalysisContext>> CompilationStartActions => compilationStartActions;
+        internal IEnumerable<Action<CompilationStartAnalysisContext>> CompilationStartActions => this.compilationStartActions;
 
         internal ParameterLoadingAnalysisContext(SonarAnalysisContext context)
         {
@@ -41,23 +41,23 @@ namespace SonarAnalyzer.Helpers
 
         internal void RegisterCompilationAction(Action<CompilationAnalysisContext> action)
         {
-            context.RegisterCompilationAction(action);
+            this.context.RegisterCompilationAction(action);
         }
 
         internal void RegisterCompilationStartAction(Action<CompilationStartAnalysisContext> action)
         {
             // only collect compilation start actions and call them later
-            compilationStartActions.Add(action);
+            this.compilationStartActions.Add(action);
         }
 
         internal void RegisterSyntaxNodeAction<TLanguageKindEnum>(Action<SyntaxNodeAnalysisContext> action, ImmutableArray<TLanguageKindEnum> syntaxKinds) where TLanguageKindEnum : struct
         {
-            context.RegisterSyntaxNodeAction(action, syntaxKinds);
+            this.context.RegisterSyntaxNodeAction(action, syntaxKinds);
         }
 
         internal void RegisterCodeBlockStartAction<TLanguageKindEnum>(Action<CodeBlockStartAnalysisContext<TLanguageKindEnum>> action) where TLanguageKindEnum : struct
         {
-            context.RegisterCodeBlockStartAction(action);
+            this.context.RegisterCodeBlockStartAction(action);
         }
     }
 }

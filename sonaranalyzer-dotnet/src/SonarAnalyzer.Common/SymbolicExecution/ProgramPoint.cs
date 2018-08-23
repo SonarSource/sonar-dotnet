@@ -35,7 +35,7 @@ namespace SonarAnalyzer.SymbolicExecution
             Block = block;
             Offset = offset;
 
-            hash = new Lazy<int>(() =>
+            this.hash = new Lazy<int>(() =>
             {
                 var h = 19;
                 h = h * 31 + Block.GetHashCode();
@@ -69,6 +69,6 @@ namespace SonarAnalyzer.SymbolicExecution
             return Block == other.Block && Offset == other.Offset;
         }
 
-        public override int GetHashCode() => hash.Value;
+        public override int GetHashCode() => this.hash.Value;
     }
 }

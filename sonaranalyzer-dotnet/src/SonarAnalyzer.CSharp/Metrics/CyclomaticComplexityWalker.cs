@@ -32,9 +32,9 @@ namespace SonarAnalyzer.Metrics.CSharp
     {
         private readonly IList<SecondaryLocation> incrementLocations = new List<SecondaryLocation>();
 
-        public IEnumerable<SecondaryLocation> IncrementLocations => incrementLocations;
+        public IEnumerable<SecondaryLocation> IncrementLocations => this.incrementLocations;
 
-        public int CyclomaticComplexity => incrementLocations.Count;
+        public int CyclomaticComplexity => this.incrementLocations.Count;
 
         public void Walk(SyntaxNode node)
         {
@@ -155,7 +155,7 @@ namespace SonarAnalyzer.Metrics.CSharp
 
         private void AddLocation(SyntaxToken node)
         {
-            incrementLocations.Add(new SecondaryLocation(node.GetLocation(), "+1"));
+            this.incrementLocations.Add(new SecondaryLocation(node.GetLocation(), "+1"));
         }
 
         private static bool HasBody(SyntaxNode node)

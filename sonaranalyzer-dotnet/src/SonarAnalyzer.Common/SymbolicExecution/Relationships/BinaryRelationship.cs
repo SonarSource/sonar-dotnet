@@ -35,7 +35,7 @@ namespace SonarAnalyzer.SymbolicExecution.Relationships
             LeftOperand = leftOperand;
             RightOperand = rightOperand;
 
-            hash = new Lazy<int>(() =>
+            this.hash = new Lazy<int>(() =>
             {
                 var h = 19;
                 h = h * 31 + GetType().GetHashCode();
@@ -66,7 +66,7 @@ namespace SonarAnalyzer.SymbolicExecution.Relationships
             return LeftOperand.Equals(other.LeftOperand) && RightOperand.Equals(other.RightOperand);
         }
 
-        public override int GetHashCode() => hash.Value;
+        public override int GetHashCode() => this.hash.Value;
 
         internal abstract BinaryRelationship CreateNew(SymbolicValue leftOperand, SymbolicValue rightOperand);
 

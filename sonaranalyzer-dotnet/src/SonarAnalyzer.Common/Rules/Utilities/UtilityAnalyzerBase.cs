@@ -64,7 +64,7 @@ namespace SonarAnalyzer.Rules
                 return;
             }
 
-            lock (parameterReadLock)
+            lock (this.parameterReadLock)
             {
                 var xml = XDocument.Load(sonarLintAdditionalFile.Path);
                 var settings = xml.Descendants("Setting");

@@ -110,7 +110,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     return programState;
                 }
 
-                var symbol = semanticModel.GetSymbolInfo(identifier).Symbol;
+                var symbol = this.semanticModel.GetSymbolInfo(identifier).Symbol;
                 if (!IsNullableLocalScoped(symbol))
                 {
                     return programState;
@@ -130,13 +130,13 @@ namespace SonarAnalyzer.Rules.CSharp
                 var type = symbol.GetSymbolType();
                 return type != null &&
                     type.OriginalDefinition.Is(KnownType.System_Nullable_T) &&
-                    explodedGraph.IsSymbolTracked(symbol);
+                    this.explodedGraph.IsSymbolTracked(symbol);
             }
 
             private bool IsHasValueAccess(MemberAccessExpressionSyntax memberAccess)
             {
                 return memberAccess.Name.Identifier.ValueText == HasValueLiteral &&
-                    (semanticModel.GetTypeInfo(memberAccess.Expression).Type?.OriginalDefinition).Is(KnownType.System_Nullable_T);
+                    (this.semanticModel.GetTypeInfo(memberAccess.Expression).Type?.OriginalDefinition).Is(KnownType.System_Nullable_T);
             }
 
             internal bool TryProcessInstruction(MemberAccessExpressionSyntax instruction, ProgramState programState, out ProgramState newProgramState)

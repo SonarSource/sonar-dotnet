@@ -164,7 +164,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 if (typeSyntax != null)
                 {
-                    AddDependentType(model.GetSymbolInfo(typeSyntax).Symbol as INamedTypeSymbol);
+                    AddDependentType(this.model.GetSymbolInfo(typeSyntax).Symbol as INamedTypeSymbol);
                 }
             }
 
@@ -183,7 +183,7 @@ namespace SonarAnalyzer.Rules.CSharp
             public override void VisitClassDeclaration(ClassDeclarationSyntax node)
             {
                 // don't drill down in child classes, but walk the original
-                if (node == originalTypeDeclaration)
+                if (node == this.originalTypeDeclaration)
                 {
                     base.VisitClassDeclaration(node);
                 }
@@ -192,7 +192,7 @@ namespace SonarAnalyzer.Rules.CSharp
             public override void VisitStructDeclaration(StructDeclarationSyntax node)
             {
                 // don't drill down in child structs, but walk the original
-                if (node == originalTypeDeclaration)
+                if (node == this.originalTypeDeclaration)
                 {
                     base.VisitStructDeclaration(node);
                 }
@@ -208,7 +208,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 if (node.Initializer != null)
                 {
-                    AddDependentType(model.GetTypeInfo(node.Initializer.Value));
+                    AddDependentType(this.model.GetTypeInfo(node.Initializer.Value));
                 }
                 else
                 {
@@ -249,7 +249,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             public override void VisitObjectCreationExpression(ObjectCreationExpressionSyntax node)
             {
-                AddDependentType(model.GetTypeInfo(node));
+                AddDependentType(this.model.GetTypeInfo(node));
                 base.VisitObjectCreationExpression(node);
             }
 

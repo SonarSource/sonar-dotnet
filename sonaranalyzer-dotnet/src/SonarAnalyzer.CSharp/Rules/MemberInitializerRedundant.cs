@@ -311,7 +311,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     return true;
                 }
 
-                if (IsReadAccess(parenthesized, semanticModel))
+                if (IsReadAccess(parenthesized, this.semanticModel))
                 {
                     isRead = true;
                     return true;
@@ -403,9 +403,9 @@ namespace SonarAnalyzer.Rules.CSharp
                     return false;
                 }
 
-                var assignedSymbol = semanticModel.GetSymbolInfo(identifier).Symbol;
+                var assignedSymbol = this.semanticModel.GetSymbolInfo(identifier).Symbol;
 
-                return memberToCheck.Equals(assignedSymbol);
+                return this.memberToCheck.Equals(assignedSymbol);
             }
         }
     }

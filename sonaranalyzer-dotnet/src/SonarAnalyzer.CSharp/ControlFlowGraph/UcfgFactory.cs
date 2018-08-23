@@ -33,7 +33,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
 
         public UcfgFactory(SemanticModel semanticModel)
         {
-            this.blockBuilder = new UcfgBlockFactory(semanticModel, blockIdProvider);
+            this.blockBuilder = new UcfgBlockFactory(semanticModel, this.blockIdProvider);
         }
 
         public UCFG Create(SyntaxNode syntaxNode, IMethodSymbol methodSymbol, IControlFlowGraph cfg)
@@ -46,19 +46,19 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                     MethodId = methodSymbol.ToUcfgMethodId()
                 };
 
-                ucfg.BasicBlocks.AddRange(cfg.Blocks.Select(blockBuilder.CreateBasicBlock));
+                ucfg.BasicBlocks.AddRange(cfg.Blocks.Select(this.blockBuilder.CreateBasicBlock));
                 ucfg.Parameters.AddRange(methodSymbol.GetParameters().Select(p => p.Name));
 
                 if (syntaxNode is BaseMethodDeclarationSyntax methodDeclaration &&
                     TaintAnalysisEntryPointDetector.IsEntryPoint(methodSymbol))
                 {
-                    var entryPointBlock = blockBuilder.CreateEntryPointBlock(methodDeclaration, methodSymbol, blockIdProvider.Get(cfg.EntryBlock));
+                    var entryPointBlock = this.blockBuilder.CreateEntryPointBlock(methodDeclaration, methodSymbol, this.blockIdProvider.Get(cfg.EntryBlock));
                     ucfg.BasicBlocks.Add(entryPointBlock);
                     ucfg.Entries.Add(entryPointBlock.Id);
                 }
                 else
                 {
-                    ucfg.Entries.Add(blockIdProvider.Get(cfg.EntryBlock));
+                    ucfg.Entries.Add(this.blockIdProvider.Get(cfg.EntryBlock));
                 }
 
                 return ucfg;

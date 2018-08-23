@@ -56,7 +56,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
 
             try
             {
-                foreach (var testCase in TestCases)
+                foreach (var testCase in this.TestCases)
                 {
                     // TODO: We should find a way to ack the fact the action was not run
                     Verifier.VerifyNoIssueReported(testCase.Path, testCase.Analyzer);
@@ -71,7 +71,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [TestMethod]
         public void SonarAnalysis_ByDefault_ExecuteRule()
         {
-            foreach (var testCase in TestCases)
+            foreach (var testCase in this.TestCases)
             {
                 // FIX ME: We test that a rule is enabled only by checking the issues are reported
                 Verifier.VerifyAnalyzer(testCase.Path, testCase.Analyzer);
@@ -81,14 +81,14 @@ namespace SonarAnalyzer.UnitTest.Helpers
         [TestMethod]
         public void SonarAnalysis_WhenAnalysisDisabledBaseOnSyntaxTree_ReportIssuesForEnabledRules()
         {
-            TestCases.Count.Should().BeGreaterThan(2);
+            this.TestCases.Count.Should().BeGreaterThan(2);
 
             try
             {
                 SonarAnalysisContext.ShouldExecuteRegisteredAction = (diags, tree) =>
-                    tree.FilePath.EndsWith(new FileInfo(TestCases[0].Path).Name, System.StringComparison.OrdinalIgnoreCase);
-                Verifier.VerifyAnalyzer(TestCases[0].Path, TestCases[0].Analyzer);
-                Verifier.VerifyNoIssueReported(TestCases[1].Path, TestCases[1].Analyzer);
+                    tree.FilePath.EndsWith(new FileInfo(this.TestCases[0].Path).Name, System.StringComparison.OrdinalIgnoreCase);
+                Verifier.VerifyAnalyzer(this.TestCases[0].Path, this.TestCases[0].Analyzer);
+                Verifier.VerifyNoIssueReported(this.TestCases[1].Path, this.TestCases[1].Analyzer);
             }
             finally
             {
@@ -116,7 +116,7 @@ namespace SonarAnalyzer.UnitTest.Helpers
                 // where the Debug.Assert of the AnalysisContextExtensions.ReportDiagnostic() method will raise.
                 using (new AssertIgnoreScope())
                 {
-                    foreach (var testCase in TestCases)
+                    foreach (var testCase in this.TestCases)
                     {
                         if (testCase.Analyzer.GetType() == typeof(AnonymousDelegateEventUnsubscribe))
                         {

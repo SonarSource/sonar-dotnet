@@ -89,7 +89,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKind.ArrowExpressionClause,
             };
 
-            public IEnumerable<Location> Locations => locations;
+            public IEnumerable<Location> Locations => this.locations;
 
             public Walker(SemanticModel semanticModel)
             {
@@ -98,7 +98,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             public override void VisitInvocationExpression(InvocationExpressionSyntax node)
             {
-                if (!(semanticModel.GetSymbolInfo(node).Symbol is IMethodSymbol invokedSymbol))
+                if (!(this.semanticModel.GetSymbolInfo(node).Symbol is IMethodSymbol invokedSymbol))
                 {
                     return;
                 }
@@ -116,7 +116,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 if (IsReturn(returnOrAssignment))
                 {
-                    locations.Add(node.Expression.GetLocation());
+                    this.locations.Add(node.Expression.GetLocation());
                 }
             }
 

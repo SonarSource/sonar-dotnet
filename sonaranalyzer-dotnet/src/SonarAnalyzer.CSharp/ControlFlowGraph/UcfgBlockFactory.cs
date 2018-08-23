@@ -35,14 +35,14 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
         {
             this.blockIdProvider = blockIdProvider;
             this.expressionService = new UcfgExpressionService();
-            this.instructionFactory = new UcfgInstructionFactory(semanticModel, expressionService);
+            this.instructionFactory = new UcfgInstructionFactory(semanticModel, this.expressionService);
         }
 
         public BasicBlock CreateBasicBlock(Block block)
         {
-            var ucfgBlock = CreateBlockWithId(blockIdProvider.Get(block));
+            var ucfgBlock = CreateBlockWithId(this.blockIdProvider.Get(block));
 
-            ucfgBlock.Instructions.AddRange(block.Instructions.SelectMany(instructionFactory.CreateFrom));
+            ucfgBlock.Instructions.AddRange(block.Instructions.SelectMany(this.instructionFactory.CreateFrom));
 
             if (block is JumpBlock jumpBlock &&
                 jumpBlock.JumpNode is ReturnStatementSyntax returnStatement)
@@ -51,8 +51,8 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                 {
                     Location = returnStatement.GetUcfgLocation(),
                     ReturnedExpression = returnStatement.Expression != null
-                        ? expressionService.GetOrDefault(returnStatement.Expression)
-                        : expressionService.CreateConstant()
+                        ? this.expressionService.GetOrDefault(returnStatement.Expression)
+                        : this.expressionService.CreateConstant()
                 };
             }
 
@@ -61,14 +61,14 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                 ucfgBlock.Ret = new Return
                 {
                     Location = null,
-                    ReturnedExpression = expressionService.CreateConstant()
+                    ReturnedExpression = this.expressionService.CreateConstant()
                 };
             }
 
             if (ucfgBlock.TerminatorCase == BasicBlock.TerminatorOneofCase.None)
             {
                 // No return was created from JumpBlock or ExitBlock, wire up the successor blocks
-                ucfgBlock.Jump = CreateJump(block.SuccessorBlocks.Select(blockIdProvider.Get).ToArray());
+                ucfgBlock.Jump = CreateJump(block.SuccessorBlocks.Select(this.blockIdProvider.Get).ToArray());
             }
 
             return ucfgBlock;
@@ -77,17 +77,17 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
         public BasicBlock CreateEntryPointBlock(BaseMethodDeclarationSyntax methodDeclaration,
             IMethodSymbol methodSymbol, string currentEntryBlockId)
         {
-            var ucfgBlock = CreateBlockWithId(blockIdProvider.Get(new TemporaryBlock()));
+            var ucfgBlock = CreateBlockWithId(this.blockIdProvider.Get(new TemporaryBlock()));
 
             ucfgBlock.Jump = CreateJump(currentEntryBlockId);
 
-            ucfgBlock.Instructions.Add(instructionFactory.CreateFrom(methodDeclaration));
+            ucfgBlock.Instructions.Add(this.instructionFactory.CreateFrom(methodDeclaration));
 
             foreach (var parameter in methodSymbol.Parameters)
             {
                 var parameterInstructions = parameter.GetAttributes()
                     .Where(a => a.AttributeConstructor != null)
-                    .SelectMany(a => instructionFactory.CreateFromAttributeSyntax(
+                    .SelectMany(a => this.instructionFactory.CreateFromAttributeSyntax(
                         (AttributeSyntax)a.ApplicationSyntaxReference.GetSyntax(),
                         a.AttributeConstructor,
                         parameter.Name));

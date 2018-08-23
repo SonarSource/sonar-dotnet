@@ -72,29 +72,29 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
             public NestingDepthWalker(int maximumNestingDepth, Action<SyntaxToken> actionMaximumExceeded)
             {
-                counter = new NestingDepthCounter(maximumNestingDepth, actionMaximumExceeded);
+                this.counter = new NestingDepthCounter(maximumNestingDepth, actionMaximumExceeded);
             }
 
             public override void VisitMultiLineIfBlock(MultiLineIfBlockSyntax node) =>
-                counter.CheckNesting(node.IfStatement.IfKeyword, () => base.VisitMultiLineIfBlock(node));
+                this.counter.CheckNesting(node.IfStatement.IfKeyword, () => base.VisitMultiLineIfBlock(node));
 
             public override void VisitForBlock(ForBlockSyntax node) =>
-                counter.CheckNesting(node.ForStatement.ForKeyword, () => base.VisitForBlock(node));
+                this.counter.CheckNesting(node.ForStatement.ForKeyword, () => base.VisitForBlock(node));
 
             public override void VisitForEachBlock(ForEachBlockSyntax node) =>
-                counter.CheckNesting(node.ForEachStatement.ForKeyword, () => base.VisitForEachBlock(node));
+                this.counter.CheckNesting(node.ForEachStatement.ForKeyword, () => base.VisitForEachBlock(node));
 
             public override void VisitWhileBlock(WhileBlockSyntax node) =>
-                counter.CheckNesting(node.WhileStatement.WhileKeyword, () => base.VisitWhileBlock(node));
+                this.counter.CheckNesting(node.WhileStatement.WhileKeyword, () => base.VisitWhileBlock(node));
 
             public override void VisitDoLoopBlock(DoLoopBlockSyntax node) =>
-                counter.CheckNesting(node.DoStatement.DoKeyword, () => base.VisitDoLoopBlock(node));
+                this.counter.CheckNesting(node.DoStatement.DoKeyword, () => base.VisitDoLoopBlock(node));
 
             public override void VisitSelectBlock(SelectBlockSyntax node) =>
-                counter.CheckNesting(node.SelectStatement.SelectKeyword, () => base.VisitSelectBlock(node));
+                this.counter.CheckNesting(node.SelectStatement.SelectKeyword, () => base.VisitSelectBlock(node));
 
             public override void VisitTryBlock(TryBlockSyntax node) =>
-                counter.CheckNesting(node.TryStatement.TryKeyword, () => base.VisitTryBlock(node));
+                this.counter.CheckNesting(node.TryStatement.TryKeyword, () => base.VisitTryBlock(node));
         }
     }
 }

@@ -40,16 +40,16 @@ namespace SonarAnalyzer.Metrics.CSharp
 
         public int Complexity { get; private set; }
 
-        public bool VisitEndedCorrectly => nestingLevel == 0;
+        public bool VisitEndedCorrectly => this.nestingLevel == 0;
 
-        public IEnumerable<SecondaryLocation> IncrementLocations => incrementLocations;
+        public IEnumerable<SecondaryLocation> IncrementLocations => this.incrementLocations;
 
         public void EnsureVisitEndedCorrectly()
         {
             if (!VisitEndedCorrectly)
             {
                 throw new InvalidOperationException("There is a problem with the cognitive complexity walker. " +
-                    $"Expecting ending nesting to be '0' got '{nestingLevel}'");
+                    $"Expecting ending nesting to be '0' got '{this.nestingLevel}'");
             }
         }
 
@@ -67,7 +67,7 @@ namespace SonarAnalyzer.Metrics.CSharp
                 // See ticket #727.
 
                 // Reset nesting level, so the problem with the walker is not reported.
-                nestingLevel = 0;
+                this.nestingLevel = 0;
             }
         }
 
@@ -85,10 +85,10 @@ namespace SonarAnalyzer.Metrics.CSharp
 
         public override void VisitMethodDeclaration(MethodDeclarationSyntax node)
         {
-            currentMethod = node;
+            this.currentMethod = node;
             base.VisitMethodDeclaration(node);
 
-            if (hasDirectRecursiveCall)
+            if (this.hasDirectRecursiveCall)
             {
                 IncreaseComplexity(node.Identifier, 1, "+1 (recursion)");
             }
@@ -158,13 +158,13 @@ namespace SonarAnalyzer.Metrics.CSharp
         public override void VisitInvocationExpression(InvocationExpressionSyntax node)
         {
             var identifierNameSyntax = node.Expression as IdentifierNameSyntax;
-            if (currentMethod != null &&
+            if (this.currentMethod != null &&
                 identifierNameSyntax != null &&
-                node.HasExactlyNArguments(currentMethod.ParameterList.Parameters.Count) &&
+                node.HasExactlyNArguments(this.currentMethod.ParameterList.Parameters.Count) &&
                 string.Equals(identifierNameSyntax.Identifier.ValueText,
-                    currentMethod.Identifier.ValueText, StringComparison.Ordinal))
+                    this.currentMethod.Identifier.ValueText, StringComparison.Ordinal))
             {
-                hasDirectRecursiveCall = true;
+                this.hasDirectRecursiveCall = true;
             }
 
             base.VisitInvocationExpression(node);
@@ -173,7 +173,7 @@ namespace SonarAnalyzer.Metrics.CSharp
         public override void VisitBinaryExpression(BinaryExpressionSyntax node)
         {
             var nodeKind = node.Kind();
-            if (!logicalOperationsToIgnore.Contains(node) &&
+            if (!this.logicalOperationsToIgnore.Contains(node) &&
                 (nodeKind == SyntaxKind.LogicalAndExpression ||
                  nodeKind == SyntaxKind.LogicalOrExpression))
             {
@@ -186,7 +186,7 @@ namespace SonarAnalyzer.Metrics.CSharp
                 var right = node.Right.RemoveParentheses();
                 if (right.IsKind(nodeKind))
                 {
-                    logicalOperationsToIgnore.Add(right);
+                    this.logicalOperationsToIgnore.Add(right);
                 }
             }
 
@@ -211,9 +211,9 @@ namespace SonarAnalyzer.Metrics.CSharp
 
         private void VisitWithNesting<TSyntaxNode>(TSyntaxNode node, Action<TSyntaxNode> visit)
         {
-            nestingLevel++;
+            this.nestingLevel++;
             visit(node);
-            nestingLevel--;
+            this.nestingLevel--;
         }
 
         private void IncreaseComplexityByOne(SyntaxToken token)
@@ -223,7 +223,7 @@ namespace SonarAnalyzer.Metrics.CSharp
 
         private void IncreaseComplexityByNestingPlusOne(SyntaxToken token)
         {
-            var increment = nestingLevel + 1;
+            var increment = this.nestingLevel + 1;
             var message = increment == 1
                 ? "+1"
                 : $"+{increment} (incl {increment - 1} for nesting)";
@@ -233,7 +233,7 @@ namespace SonarAnalyzer.Metrics.CSharp
         private void IncreaseComplexity(SyntaxToken token, int increment, string message)
         {
             Complexity += increment;
-            incrementLocations.Add(new SecondaryLocation(token.GetLocation(), message));
+            this.incrementLocations.Add(new SecondaryLocation(token.GetLocation(), message));
         }
     }
 }

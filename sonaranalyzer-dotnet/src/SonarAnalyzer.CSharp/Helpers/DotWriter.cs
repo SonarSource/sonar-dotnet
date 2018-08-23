@@ -34,12 +34,12 @@ namespace SonarAnalyzer.Helpers
 
         public void WriteGraphStart(string graphName)
         {
-            writer.WriteLine($"digraph \"{Encode(graphName)}\" {{");
+            this.writer.WriteLine($"digraph \"{Encode(graphName)}\" {{");
         }
 
         public void WriteGraphEnd()
         {
-            writer.WriteLine("}");
+            this.writer.WriteLine("}");
         }
 
         public void WriteNode(string id, string header, params string[] items)
@@ -48,25 +48,25 @@ namespace SonarAnalyzer.Helpers
             // Columns/rows are created with pipe
             // New lines are inserted with \n; \r\n does not work well.
             // ID [shape=record label="{<header>|<line1>\n<line2>\n...}"]
-            writer.Write(id);
-            writer.Write(" [shape=record label=\"{" + header);
+            this.writer.Write(id);
+            this.writer.Write(" [shape=record label=\"{" + header);
             if (items.Length > 0)
             {
-                writer.Write("|");
-                writer.Write(string.Join("|", items.Select(Encode)));
+                this.writer.Write("|");
+                this.writer.Write(string.Join("|", items.Select(Encode)));
             }
-            writer.Write("}\"");
-            writer.WriteLine("]");
+            this.writer.Write("}\"");
+            this.writer.WriteLine("]");
         }
 
         internal void WriteEdge(string startId, string endId, string label)
         {
-            writer.Write($"{startId} -> {endId}");
+            this.writer.Write($"{startId} -> {endId}");
             if (!string.IsNullOrEmpty(label))
             {
-                writer.Write($" [label=\"{label}\"]");
+                this.writer.Write($" [label=\"{label}\"]");
             }
-            writer.WriteLine();
+            this.writer.WriteLine();
         }
 
         private static string Encode(string s) =>
