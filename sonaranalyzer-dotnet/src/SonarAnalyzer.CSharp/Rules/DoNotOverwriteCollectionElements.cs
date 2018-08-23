@@ -49,8 +49,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     var assignment = (AssignmentExpressionSyntax)c.Node;
 
-                    var elementAccess = assignment.Left as ElementAccessExpressionSyntax;
-                    if (elementAccess == null ||
+                    if (!(assignment.Left is ElementAccessExpressionSyntax elementAccess) ||
                         elementAccess.ArgumentList == null ||
                         elementAccess.ArgumentList.Arguments.Count == 0)
                     {

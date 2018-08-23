@@ -332,8 +332,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
         private IEnumerable<Instruction> BuildOperatorCall(SyntaxNode syntaxNode, Expression leftExpression,
             Expression rightExpression)
         {
-            var operatorMethodSymbol = this.semanticModel.GetSymbolInfo(syntaxNode).Symbol as IMethodSymbol;
-            if (operatorMethodSymbol == null)
+            if (!(this.semanticModel.GetSymbolInfo(syntaxNode).Symbol is IMethodSymbol operatorMethodSymbol))
             {
                 expressionService.Associate(syntaxNode, expressionService.CreateConstant());
                 return NoInstructions;
@@ -506,8 +505,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
         {
             // e.g. string[] a2 = new[] { data, data }
             // Need to look at the ConvertedType in this case since the implicit array creation type is null
-            var arrayType = this.semanticModel.GetTypeInfo(implicitArrayExpression).ConvertedType as IArrayTypeSymbol;
-            if (arrayType == null)
+            if (!(this.semanticModel.GetTypeInfo(implicitArrayExpression).ConvertedType is IArrayTypeSymbol arrayType))
             {
                 return NoInstructions;
             }
@@ -662,8 +660,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
 
         private IEnumerable<Instruction> ProcessConstructorInitializer(ConstructorInitializerSyntax constructorInitializer)
         {
-            var thisOrBaseCtorMethodSymbol = this.semanticModel.GetSymbolInfo(constructorInitializer).Symbol as IMethodSymbol;
-            if (thisOrBaseCtorMethodSymbol == null)
+            if (!(this.semanticModel.GetSymbolInfo(constructorInitializer).Symbol is IMethodSymbol thisOrBaseCtorMethodSymbol))
             {
                 return NoInstructions;
             }
@@ -699,8 +696,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                     elementAccessType));
             }
 
-            var indexerPropertySymbol = GetNodeSymbol(elementAccessSyntax) as IPropertySymbol;
-            if (indexerPropertySymbol == null)
+            if (!(GetNodeSymbol(elementAccessSyntax) is IPropertySymbol indexerPropertySymbol))
             {
                 return NoInstructions;
             }
@@ -739,8 +735,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
                     elementAccessType));
             }
 
-            var indexerPropertySymbol = GetNodeSymbol(elementAccessSyntax) as IPropertySymbol;
-            if (indexerPropertySymbol == null)
+            if (!(GetNodeSymbol(elementAccessSyntax) is IPropertySymbol indexerPropertySymbol))
             {
                 return NoInstructions;
             }
@@ -758,8 +753,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
 
         private IEnumerable<Instruction> ProcessInvocationExpression(InvocationExpressionSyntax invocationSyntax)
         {
-            var methodSymbol = this.semanticModel.GetSymbolInfo(invocationSyntax).Symbol as IMethodSymbol;
-            if (methodSymbol == null)
+            if (!(this.semanticModel.GetSymbolInfo(invocationSyntax).Symbol is IMethodSymbol methodSymbol))
             {
                 expressionService.Associate(invocationSyntax, expressionService.CreateConstant());
                 return NoInstructions;
@@ -811,8 +805,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
 
         private IEnumerable<Instruction> ProcessObjectCreation(ObjectCreationExpressionSyntax objectCreation)
         {
-            var methodSymbol = this.semanticModel.GetSymbolInfo(objectCreation).Symbol as IMethodSymbol;
-            if (methodSymbol == null)
+            if (!(this.semanticModel.GetSymbolInfo(objectCreation).Symbol is IMethodSymbol methodSymbol))
             {
                 return NoInstructions;
             }
