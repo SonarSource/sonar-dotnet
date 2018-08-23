@@ -23,7 +23,7 @@ using System.Collections.Immutable;
 
 namespace SonarAnalyzer.UnitTest.PackagingTests
 {
-    static internal class VbRuleTypeMapping
+    internal static class VbRuleTypeMapping
     {
         #region RuleTypesVb
 

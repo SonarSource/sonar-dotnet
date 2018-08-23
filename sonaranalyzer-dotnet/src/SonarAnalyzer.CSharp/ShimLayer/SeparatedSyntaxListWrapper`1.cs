@@ -110,7 +110,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
             return ((IEnumerable<TNode>)this).GetEnumerator();
         }
 
-        public override abstract int GetHashCode();
+        public abstract override int GetHashCode();
 
         public abstract SyntaxToken GetSeparator(int index);
 
@@ -146,7 +146,7 @@ namespace SonarAnalyzer.ShimLayer.CSharp
 
         public abstract string ToFullString();
 
-        public override abstract string ToString();
+        public abstract override string ToString();
 
         public struct Enumerator : IEnumerator<TNode>
         {

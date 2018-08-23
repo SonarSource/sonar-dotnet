@@ -60,6 +60,6 @@ namespace SonarAnalyzer.Rules.VisualBasic
             return node.CaseBlocks.Any(SyntaxKind.CaseElseBlock);
         }
 
-        protected override sealed GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.VisualBasic.GeneratedCodeRecognizer.Instance;
+        protected sealed override GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.VisualBasic.GeneratedCodeRecognizer.Instance;
     }
 }

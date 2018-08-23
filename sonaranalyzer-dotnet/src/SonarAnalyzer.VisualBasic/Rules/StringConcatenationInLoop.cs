@@ -79,7 +79,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         protected override ImmutableArray<SyntaxKind> CompoundAssignmentKinds => compoundAssignmentKinds;
 
-        protected override sealed GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.VisualBasic.GeneratedCodeRecognizer.Instance;
+        protected sealed override GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.VisualBasic.GeneratedCodeRecognizer.Instance;
 
         protected override bool IsAddExpression(BinaryExpressionSyntax rightExpression) =>
             rightExpression != null;

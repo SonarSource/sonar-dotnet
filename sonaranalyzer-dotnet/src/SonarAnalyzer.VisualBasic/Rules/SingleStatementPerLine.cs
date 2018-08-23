@@ -80,6 +80,6 @@ namespace SonarAnalyzer.Rules.VisualBasic
             st is MethodBaseSyntax ||
             st is InheritsOrImplementsStatementSyntax;
 
-        protected override sealed GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.VisualBasic.GeneratedCodeRecognizer.Instance;
+        protected sealed override GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.VisualBasic.GeneratedCodeRecognizer.Instance;
     }
 }

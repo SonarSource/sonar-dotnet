@@ -23,7 +23,7 @@ using System.Collections.Immutable;
 
 namespace SonarAnalyzer.UnitTest.PackagingTests
 {
-    static internal class CsRuleTypeMapping
+    internal static class CsRuleTypeMapping
     {
         #region RuleTypesCs
 

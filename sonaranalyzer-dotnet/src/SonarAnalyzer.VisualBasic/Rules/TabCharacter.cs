@@ -37,6 +37,6 @@ namespace SonarAnalyzer.Rules.VisualBasic
 
         protected override DiagnosticDescriptor Rule => rule;
 
-        protected override sealed GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.VisualBasic.GeneratedCodeRecognizer.Instance;
+        protected sealed override GeneratedCodeRecognizer GeneratedCodeRecognizer => Helpers.VisualBasic.GeneratedCodeRecognizer.Instance;
     }
 }

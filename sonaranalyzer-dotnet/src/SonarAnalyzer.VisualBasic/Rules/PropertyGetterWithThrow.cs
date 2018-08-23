@@ -56,7 +56,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
         protected override SyntaxNode GetThrowExpression(SyntaxNode syntaxNode) =>
             ((ThrowStatementSyntax)syntaxNode).Expression;
 
-        protected override sealed GeneratedCodeRecognizer GeneratedCodeRecognizer =>
+        protected sealed override GeneratedCodeRecognizer GeneratedCodeRecognizer =>
             Helpers.VisualBasic.GeneratedCodeRecognizer.Instance;
     }
 }
