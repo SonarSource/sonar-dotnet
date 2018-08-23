@@ -593,8 +593,7 @@ namespace SonarAnalyzer.ControlFlowGraph.CSharp
         {
             var jumpBlock = CreateJumpBlock(statement, CreateTemporaryBlock(), currentBlock);
 
-            var identifier = statement.Expression as IdentifierNameSyntax;
-            if (identifier == null)
+            if (!(statement.Expression is IdentifierNameSyntax identifier))
             {
                 throw new InvalidOperationException("goto with no identifier");
             }

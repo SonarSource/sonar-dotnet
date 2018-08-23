@@ -106,8 +106,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private void AnalyzeMethod(SyntaxNodeAnalysisContext c)
         {
-            var methodSymbol = c.SemanticModel.GetDeclaredSymbol(c.Node) as IMethodSymbol;
-            if (methodSymbol == null)
+            if (!(c.SemanticModel.GetDeclaredSymbol(c.Node) is IMethodSymbol methodSymbol))
             {
                 return;
             }

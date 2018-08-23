@@ -81,9 +81,7 @@ namespace SonarAnalyzer.Rules
                     return;
                 }
 
-                var fieldSymbol = analysisContext.SemanticModel.GetDeclaredSymbol(fieldDeclaration.Declaration.Variables[0])
-                    as IFieldSymbol;
-                if (fieldSymbol == null ||
+                if (!(analysisContext.SemanticModel.GetDeclaredSymbol(fieldDeclaration.Declaration.Variables[0]) is IFieldSymbol fieldSymbol) ||
                     fieldSymbol.Type == null ||
                     fieldSymbol.GetEffectiveAccessibility() != Accessibility.Public ||
                     IsImmutableOrValidMutableType(fieldSymbol.Type))
@@ -167,8 +165,7 @@ namespace SonarAnalyzer.Rules
                     continue;
                 }
 
-                var methodSymbol = semanticModel.GetSymbolInfo(variable.Initializer.Value).Symbol as IMethodSymbol;
-                if (methodSymbol == null)
+                if (!(semanticModel.GetSymbolInfo(variable.Initializer.Value).Symbol is IMethodSymbol methodSymbol))
                 {
                     continue;
                 }
