@@ -98,21 +98,33 @@ namespace SonarAnalyzer.Helpers
                 .SelectMany(list => list.Attributes)
                 .Where(a => semanticModel.GetTypeInfo(a).Type.IsAny(attributeKnownTypes));
 
-        public static bool IsOnThis(this ExpressionSyntax expression)
+        public static bool IsOnThis(this ExpressionSyntax expression) =>
+            IsOn(expression, SyntaxKind.ThisExpression);
+
+        public static bool IsOnBase(this ExpressionSyntax expression) =>
+            IsOn(expression, SyntaxKind.BaseExpression);
+
+        private static bool IsOn(this ExpressionSyntax expression, SyntaxKind onKind)
         {
+            if (expression is InvocationExpressionSyntax invocation)
+            {
+                return IsOn(invocation.Expression, onKind);
+            }
+
             if (expression is NameSyntax)
             {
+                // This is a simplification as we don't check where the method is defined (so this could be this or base)
                 return true;
             }
 
             if (expression is MemberAccessExpressionSyntax memberAccess &&
-                memberAccess.Expression.RemoveParentheses().IsKind(SyntaxKind.ThisExpression))
+                memberAccess.Expression.RemoveParentheses().IsKind(onKind))
             {
                 return true;
             }
 
             if (expression is ConditionalAccessExpressionSyntax conditionalAccess &&
-                conditionalAccess.Expression.RemoveParentheses().IsKind(SyntaxKind.ThisExpression))
+                conditionalAccess.Expression.RemoveParentheses().IsKind(onKind))
             {
                 return true;
             }
